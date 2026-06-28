@@ -4,118 +4,122 @@
   "assets": {
     "eq.quality.level.A": {
       "zh-CN": {
-        "label": "高置信",
-        "body": "本次作答节奏和一致性支持较稳定解释。",
-        "user_guidance": "根据置信度调整阅读力度，不要用它评价自己。",
-        "retest_note": "可在未来复测观察稳定变化。",
-        "why_this_level": "根据作答完整度、节奏、一致性、极端/中立倾向和反应模式综合判断。",
-        "how_to_read": "置信度决定阅读力度：高置信可看模式与行动，低置信先看作答状态和复测建议。",
-        "commercial_display": "建议在结果页用质量 Banner 明示，不隐藏在页脚。"
+        "label": "高置信度",
+        "body": "你的作答节奏和一致性支持正常解读。",
+        "user_guidance": "具体分数仍应作为区间参考。 具体分数仍应作为区间参考。",
+        "retest_note": "按当前建议练习即可，复测可用于观察变化。",
+        "why_this_level": "你的作答节奏和一致性支持正常解读。",
+        "how_to_read": "可以重点阅读核心模式、维度分布和行动处方。",
+        "what_to_trust": "具体分数仍应作为区间参考。",
+        "what_to_hold_lightly": "具体分数仍应作为区间参考。"
       },
       "en": {
         "label": "High confidence",
-        "body": "The response pattern supports a relatively stable interpretation.",
-        "user_guidance": "Adjust how strongly you read the report; do not use it to judge yourself.",
-        "retest_note": "Retest later to observe stable change.",
-        "why_this_level": "Based on completion, response pace, consistency, extreme or neutral tendency, and response pattern.",
-        "how_to_read": "Confidence controls reading strength: high confidence supports pattern and action; low confidence points first to response context and retest guidance.",
-        "commercial_display": "Show this in the result-page quality banner, not only in a footer."
+        "body": "Your pace and consistency support a normal interpretation.",
+        "user_guidance": "Specific numbers should still be treated as approximate. Specific numbers should still be treated as approximate.",
+        "retest_note": "Use the current recommendations and retest later to observe change.",
+        "why_this_level": "Your pace and consistency support a normal interpretation.",
+        "how_to_read": "Focus on the core pattern, dimension profile, and action prescription.",
+        "what_to_trust": "Specific numbers should still be treated as approximate.",
+        "what_to_hold_lightly": "Specific numbers should still be treated as approximate."
       },
       "meta": {
         "id": "eq.quality.level.A",
         "asset_type": "quality_confidence",
-        "purpose": "Explain report confidence",
-        "trigger_logic": {
-          "quality_level": "A"
-        },
-        "claim_sensitivity": "medium"
+        "v23_source_id": "eq.quality.level.A",
+        "claim_risk": "low",
+        "risk_notes": "Confidence guidance only.",
+        "quality_level": "A"
       }
     },
     "eq.quality.level.B": {
       "zh-CN": {
-        "label": "正常置信",
-        "body": "本次结果可用于阅读主要模式，但仍建议结合现实场景理解。",
-        "user_guidance": "根据置信度调整阅读力度，不要用它评价自己。",
-        "retest_note": "可在未来复测观察稳定变化。",
-        "why_this_level": "根据作答完整度、节奏、一致性、极端/中立倾向和反应模式综合判断。",
-        "how_to_read": "置信度决定阅读力度：高置信可看模式与行动，低置信先看作答状态和复测建议。",
-        "commercial_display": "建议在结果页用质量 Banner 明示，不隐藏在页脚。"
+        "label": "正常置信度",
+        "body": "整体可读，但部分回答可能受当时状态影响。",
+        "user_guidance": "不要过度解释一两个维度的小分差。 不要过度解释一两个维度的小分差。",
+        "retest_note": "若结果和体验差距较大，可在状态稳定时复测。",
+        "why_this_level": "整体可读，但部分回答可能受当时状态影响。",
+        "how_to_read": "可以相信主要方向，轻看细小差异。",
+        "what_to_trust": "不要过度解释一两个维度的小分差。",
+        "what_to_hold_lightly": "不要过度解释一两个维度的小分差。"
       },
       "en": {
         "label": "Standard confidence",
-        "body": "The result can be used for the main pattern, while still being read with real-life context.",
-        "user_guidance": "Adjust how strongly you read the report; do not use it to judge yourself.",
-        "retest_note": "Retest later to observe stable change.",
-        "why_this_level": "Based on completion, response pace, consistency, extreme or neutral tendency, and response pattern.",
-        "how_to_read": "Confidence controls reading strength: high confidence supports pattern and action; low confidence points first to response context and retest guidance.",
-        "commercial_display": "Show this in the result-page quality banner, not only in a footer."
+        "body": "The result is readable, though some answers may reflect your state at the time.",
+        "user_guidance": "Do not overinterpret tiny dimension gaps. Do not overinterpret tiny dimension gaps.",
+        "retest_note": "If the result feels far from your experience, retest in a steadier state.",
+        "why_this_level": "The result is readable, though some answers may reflect your state at the time.",
+        "how_to_read": "Trust the broad direction and hold small differences lightly.",
+        "what_to_trust": "Do not overinterpret tiny dimension gaps.",
+        "what_to_hold_lightly": "Do not overinterpret tiny dimension gaps."
       },
       "meta": {
         "id": "eq.quality.level.B",
         "asset_type": "quality_confidence",
-        "purpose": "Explain report confidence",
-        "trigger_logic": {
-          "quality_level": "B"
-        },
-        "claim_sensitivity": "medium"
+        "v23_source_id": "eq.quality.level.B",
+        "claim_risk": "low",
+        "risk_notes": "Confidence guidance only.",
+        "quality_level": "B"
       }
     },
     "eq.quality.level.C": {
       "zh-CN": {
-        "label": "中等置信",
-        "body": "本次结果适合作为初步参考，强结论需要减少。",
-        "user_guidance": "根据置信度调整阅读力度，不要用它评价自己。",
-        "retest_note": "如果你作答很快、很累或分心，建议稍后复测。",
-        "why_this_level": "根据作答完整度、节奏、一致性、极端/中立倾向和反应模式综合判断。",
-        "how_to_read": "置信度决定阅读力度：高置信可看模式与行动，低置信先看作答状态和复测建议。",
-        "commercial_display": "建议在结果页用质量 Banner 明示，不隐藏在页脚。"
+        "label": "谨慎阅读",
+        "body": "作答模式提示解释稳定性下降。",
+        "user_guidance": "不要把本次 formulation 当成强结论。 不要把本次 formulation 当成强结论。",
+        "retest_note": "建议复测或先回顾作答状态。",
+        "why_this_level": "作答模式提示解释稳定性下降。",
+        "how_to_read": "可参考质量提示、复测建议和最基础的行动。",
+        "what_to_trust": "不要把本次 formulation 当成强结论。",
+        "what_to_hold_lightly": "不要把本次 formulation 当成强结论。"
       },
       "en": {
-        "label": "Moderate confidence",
-        "body": "The result is best treated as a preliminary reference; strong conclusions should be reduced.",
-        "user_guidance": "Adjust how strongly you read the report; do not use it to judge yourself.",
-        "retest_note": "If you answered quickly, tiredly, or while distracted, retest later.",
-        "why_this_level": "Based on completion, response pace, consistency, extreme or neutral tendency, and response pattern.",
-        "how_to_read": "Confidence controls reading strength: high confidence supports pattern and action; low confidence points first to response context and retest guidance.",
-        "commercial_display": "Show this in the result-page quality banner, not only in a footer."
+        "label": "Read with caution",
+        "body": "The response pattern suggests lower interpretive stability.",
+        "user_guidance": "Do not treat the formulation as a strong conclusion. Do not treat the formulation as a strong conclusion.",
+        "retest_note": "Consider retesting or reviewing your answering state first.",
+        "why_this_level": "The response pattern suggests lower interpretive stability.",
+        "how_to_read": "Use the quality note, retest guidance, and simple practices.",
+        "what_to_trust": "Do not treat the formulation as a strong conclusion.",
+        "what_to_hold_lightly": "Do not treat the formulation as a strong conclusion."
       },
       "meta": {
         "id": "eq.quality.level.C",
         "asset_type": "quality_confidence",
-        "purpose": "Explain report confidence",
-        "trigger_logic": {
-          "quality_level": "C"
-        },
-        "claim_sensitivity": "high"
+        "v23_source_id": "eq.quality.level.C",
+        "claim_risk": "low",
+        "risk_notes": "Confidence guidance only.",
+        "quality_level": "C"
       }
     },
     "eq.quality.level.D": {
       "zh-CN": {
-        "label": "低置信",
-        "body": "本次结果应轻读，优先看作答状态和复测建议。",
-        "user_guidance": "根据置信度调整阅读力度，不要用它评价自己。",
-        "retest_note": "如果你作答很快、很累或分心，建议稍后复测。",
-        "why_this_level": "根据作答完整度、节奏、一致性、极端/中立倾向和反应模式综合判断。",
-        "how_to_read": "置信度决定阅读力度：高置信可看模式与行动，低置信先看作答状态和复测建议。",
-        "commercial_display": "建议在结果页用质量 Banner 明示，不隐藏在页脚。"
+        "label": "低置信度",
+        "body": "本次结果不适合做强解释。",
+        "user_guidance": "不要使用本次结果作为重大判断依据。 不要使用本次结果作为重大判断依据。",
+        "retest_note": "建议在更稳定、不中断的状态下重新完成。",
+        "why_this_level": "本次结果不适合做强解释。",
+        "how_to_read": "可以查看作答质量说明和复测准备。",
+        "what_to_trust": "不要使用本次结果作为重大判断依据。",
+        "what_to_hold_lightly": "不要使用本次结果作为重大判断依据。"
       },
       "en": {
-        "label": "Lower confidence",
-        "body": "Read this result lightly; focus on response context and retest guidance.",
-        "user_guidance": "Adjust how strongly you read the report; do not use it to judge yourself.",
-        "retest_note": "If you answered quickly, tiredly, or while distracted, retest later.",
-        "why_this_level": "Based on completion, response pace, consistency, extreme or neutral tendency, and response pattern.",
-        "how_to_read": "Confidence controls reading strength: high confidence supports pattern and action; low confidence points first to response context and retest guidance.",
-        "commercial_display": "Show this in the result-page quality banner, not only in a footer."
+        "label": "Low confidence",
+        "body": "This result is not suitable for strong interpretation.",
+        "user_guidance": "Do not use this result as a basis for major decisions. Do not use this result as a basis for major decisions.",
+        "retest_note": "Retake it in a steadier, uninterrupted setting.",
+        "why_this_level": "This result is not suitable for strong interpretation.",
+        "how_to_read": "Use the quality explanation and retest preparation.",
+        "what_to_trust": "Do not use this result as a basis for major decisions.",
+        "what_to_hold_lightly": "Do not use this result as a basis for major decisions."
       },
       "meta": {
         "id": "eq.quality.level.D",
         "asset_type": "quality_confidence",
-        "purpose": "Explain report confidence",
-        "trigger_logic": {
-          "quality_level": "D"
-        },
-        "claim_sensitivity": "high"
+        "v23_source_id": "eq.quality.level.D",
+        "claim_risk": "low",
+        "risk_notes": "Confidence guidance only.",
+        "quality_level": "D"
       }
     }
   }

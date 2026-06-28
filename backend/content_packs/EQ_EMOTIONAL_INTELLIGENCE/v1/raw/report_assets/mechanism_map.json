@@ -5,496 +5,1512 @@
     "high_high",
     "high_low",
     "low_high",
-    "low_low"
+    "low_low",
+    "mixed",
+    "under_pressure_gap"
   ],
   "pairs": {
     "SA_ER": {
       "high_high": {
         "zh-CN": {
-          "title": "自我觉察 × 情绪调节｜双高协同",
-          "mechanism": "这个机制解释知道自己怎么了，与能不能把自己带回来之间的关系。这两项信号可以互相支持，重点是不要把稳定变成默认责任。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你通常既能看见线索，也能采取较可用的行动。",
-          "strength": "协同能力强，容易成为关系中的稳定点。",
-          "cost": "别人可能过度依赖你的稳定。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "自我觉察 × 情绪调节：双强协同",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 情绪调节 同时较强时，用户通常既能知道自己怎么了，也能把自己带回来。关键是把这种优势变成稳定流程。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把顺利当成理所当然，忽略恢复、复盘和边界维护。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Self-awareness × Emotion regulation: both signals support each other",
-          "mechanism": "This mechanism explains how knowing what is happening inside connects with bringing yourself back. The two signals can reinforce each other; the key is not turning stability into default responsibility.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You can usually notice the signal and take a usable action.",
-          "strength": "Strong coordination can make you a stabilizing presence.",
-          "cost": "Others may rely too much on your steadiness.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Self-Awareness × Emotion Regulation: coordinated strengths",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Self-Awareness × Emotion Regulation are both strong, the user can often knowing what is happening inside and bringing yourself back. The key is turning that strength into a repeatable routine.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is assuming the strength will always be available, without recovery, review, or boundary maintenance.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_high_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_high_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER",
+          "state": "high_high"
         }
       },
       "high_low": {
         "zh-CN": {
-          "title": "自我觉察 × 情绪调节｜前者强，后者需要补位",
-          "mechanism": "这个机制解释知道自己怎么了，与能不能把自己带回来之间的关系。强项会让你更早发现问题，但弱项决定你能否把它落地。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你知道很多或感到很多，但后一步不够稳。",
-          "strength": "强项能成为练习入口。",
-          "cost": "强项可能因为后续动作不足而变成消耗。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "自我觉察 × 情绪调节：看见多，承接少",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "知道自己怎么了较强，但把自己带回来较弱时，用户容易“看见很多”，却在下一步卡住。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把洞察变成压力，或者让理解停留在脑内。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Self-awareness × Emotion regulation: the first signal is stronger; the second needs support",
-          "mechanism": "This mechanism explains how knowing what is happening inside connects with bringing yourself back. The strength helps you notice earlier, but the weaker signal determines whether it becomes usable action.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You notice or feel a lot, but the next step is less stable.",
-          "strength": "The stronger signal can become the practice entry point.",
-          "cost": "The strength may become draining when follow-through is weak.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Self-Awareness × Emotion Regulation: noticing more than can be carried",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When knowing what is happening inside is strong but bringing yourself back is weaker, the user may notice a lot but get stuck at the next step.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is that insight becomes pressure, or that understanding stays in the head.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_high_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_high_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER",
+          "state": "high_low"
         }
       },
       "low_high": {
         "zh-CN": {
-          "title": "自我觉察 × 情绪调节｜后者强，前者需要补位",
-          "mechanism": "这个机制解释知道自己怎么了，与能不能把自己带回来之间的关系。行动能力存在，但如果前置信号不清，容易稳定地处理了错误问题。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你能做出反应，但未必说得清真正触发点。",
-          "strength": "执行或稳定性较可用。",
-          "cost": "缺少命名会让同类问题反复出现。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "自我觉察 × 情绪调节：行动较稳，来源较模糊",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "知道自己怎么了较弱，但把自己带回来较强时，用户可能能行动，却不总清楚行动背后的情绪来源。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是解决了事情，却没有真正理解自己或对方。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Self-awareness × Emotion regulation: the second signal is stronger; the first needs support",
-          "mechanism": "This mechanism explains how knowing what is happening inside connects with bringing yourself back. Action is available, but unclear input can make you solve the wrong problem steadily.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You can respond, but may not know what actually triggered the situation.",
-          "strength": "Execution or steadiness is usable.",
-          "cost": "Weak naming lets similar situations repeat.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Self-Awareness × Emotion Regulation: effective action, less clear source",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When knowing what is happening inside is weaker but bringing yourself back is stronger, the user may act effectively without fully understanding the emotional source behind the action.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is solving the situation without fully understanding yourself or the other person.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_low_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_low_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER",
+          "state": "low_high"
         }
       },
       "low_low": {
         "zh-CN": {
-          "title": "自我觉察 × 情绪调节｜两项都需要打底",
-          "mechanism": "这个机制解释知道自己怎么了，与能不能把自己带回来之间的关系。这不是失败信号，而是说明要先建立最小可重复流程。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你可能事后才发现自己已经很累或关系已经卡住。",
-          "strength": "从最小动作开始，反馈会更清楚。",
-          "cost": "复杂场景里容易被动应对。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "自我觉察 × 情绪调节：先搭基础",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 情绪调节 都处在发展中时，用户需要先建立简单可重复的观察和回应步骤。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是直接进入复杂技巧，反而更挫败。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Self-awareness × Emotion regulation: both signals need foundations",
-          "mechanism": "This mechanism explains how knowing what is happening inside connects with bringing yourself back. This is not a failure signal; it points to the need for a smallest repeatable process.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You may notice only afterward that you were drained or that the relationship was stuck.",
-          "strength": "Small actions can make the feedback clearer.",
-          "cost": "Complex scenes may push you into reactive coping.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Self-Awareness × Emotion Regulation: build the basics first",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When both sides of Self-Awareness × Emotion Regulation are still developing, the user needs simple, repeatable steps for noticing and responding.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is jumping into complex techniques and feeling more discouraged.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_low_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_low_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER",
+          "state": "low_low"
+        }
+      },
+      "mixed": {
+        "zh-CN": {
+          "title": "自我觉察 × 情绪调节：场景依赖型",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 情绪调节 呈现混合状态时，结果通常受场景影响很大。低压时可用，高压时可能变形。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是误以为自己“总是可以”或“总是不行”。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Self-Awareness × Emotion Regulation: context-dependent",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Self-Awareness × Emotion Regulation shows a mixed pattern, context matters. It may work in low-pressure moments and distort under pressure.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is overreading the pattern as “always works” or “never works.”",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_mixed",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_mixed",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER",
+          "state": "mixed"
+        }
+      },
+      "under_pressure_gap": {
+        "zh-CN": {
+          "title": "自我觉察 × 情绪调节：压力下的断点",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "在压力升高时，自我觉察 × 情绪调节 的衔接最容易断开：知道、感受、回应不再同速。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险不是没有能力，而是压力让原本可用的步骤暂时失灵。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Self-Awareness × Emotion Regulation: the pressure breakpoint",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When pressure rises, the link inside Self-Awareness × Emotion Regulation can break: noticing, feeling, and responding no longer move at the same speed.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is not absence of capacity; pressure can temporarily disrupt steps that are otherwise available.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_under_pressure_gap",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_under_pressure_gap",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER",
+          "state": "under_pressure_gap"
         }
       }
     },
     "EM_ER": {
       "high_high": {
         "zh-CN": {
-          "title": "共情理解 × 情绪调节｜双高协同",
-          "mechanism": "这个机制解释理解别人之后，能不能保留自己的节奏和恢复空间。这两项信号可以互相支持，重点是不要把稳定变成默认责任。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你通常既能看见线索，也能采取较可用的行动。",
-          "strength": "协同能力强，容易成为关系中的稳定点。",
-          "cost": "别人可能过度依赖你的稳定。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "共情理解 × 情绪调节：双强协同",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "共情理解 × 情绪调节 同时较强时，用户通常既能接住别人，也能恢复自己。关键是把这种优势变成稳定流程。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把顺利当成理所当然，忽略恢复、复盘和边界维护。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Empathy × Emotion regulation: both signals support each other",
-          "mechanism": "This mechanism explains whether understanding others still leaves room for your own rhythm and recovery. The two signals can reinforce each other; the key is not turning stability into default responsibility.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You can usually notice the signal and take a usable action.",
-          "strength": "Strong coordination can make you a stabilizing presence.",
-          "cost": "Others may rely too much on your steadiness.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Empathy × Emotion Regulation: coordinated strengths",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Empathy × Emotion Regulation are both strong, the user can often reading another person and recovering yourself. The key is turning that strength into a repeatable routine.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is assuming the strength will always be available, without recovery, review, or boundary maintenance.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_high_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_high_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER",
+          "state": "high_high"
         }
       },
       "high_low": {
         "zh-CN": {
-          "title": "共情理解 × 情绪调节｜前者强，后者需要补位",
-          "mechanism": "这个机制解释理解别人之后，能不能保留自己的节奏和恢复空间。强项会让你更早发现问题，但弱项决定你能否把它落地。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你知道很多或感到很多，但后一步不够稳。",
-          "strength": "强项能成为练习入口。",
-          "cost": "强项可能因为后续动作不足而变成消耗。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "共情理解 × 情绪调节：看见多，承接少",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "接住别人较强，但恢复自己较弱时，用户容易“看见很多”，却在下一步卡住。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把洞察变成压力，或者让理解停留在脑内。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Empathy × Emotion regulation: the first signal is stronger; the second needs support",
-          "mechanism": "This mechanism explains whether understanding others still leaves room for your own rhythm and recovery. The strength helps you notice earlier, but the weaker signal determines whether it becomes usable action.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You notice or feel a lot, but the next step is less stable.",
-          "strength": "The stronger signal can become the practice entry point.",
-          "cost": "The strength may become draining when follow-through is weak.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Empathy × Emotion Regulation: noticing more than can be carried",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When reading another person is strong but recovering yourself is weaker, the user may notice a lot but get stuck at the next step.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is that insight becomes pressure, or that understanding stays in the head.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_high_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_high_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER",
+          "state": "high_low"
         }
       },
       "low_high": {
         "zh-CN": {
-          "title": "共情理解 × 情绪调节｜后者强，前者需要补位",
-          "mechanism": "这个机制解释理解别人之后，能不能保留自己的节奏和恢复空间。行动能力存在，但如果前置信号不清，容易稳定地处理了错误问题。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你能做出反应，但未必说得清真正触发点。",
-          "strength": "执行或稳定性较可用。",
-          "cost": "缺少命名会让同类问题反复出现。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "共情理解 × 情绪调节：行动较稳，来源较模糊",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "接住别人较弱，但恢复自己较强时，用户可能能行动，却不总清楚行动背后的情绪来源。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是解决了事情，却没有真正理解自己或对方。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Empathy × Emotion regulation: the second signal is stronger; the first needs support",
-          "mechanism": "This mechanism explains whether understanding others still leaves room for your own rhythm and recovery. Action is available, but unclear input can make you solve the wrong problem steadily.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You can respond, but may not know what actually triggered the situation.",
-          "strength": "Execution or steadiness is usable.",
-          "cost": "Weak naming lets similar situations repeat.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Empathy × Emotion Regulation: effective action, less clear source",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When reading another person is weaker but recovering yourself is stronger, the user may act effectively without fully understanding the emotional source behind the action.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is solving the situation without fully understanding yourself or the other person.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_low_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_low_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER",
+          "state": "low_high"
         }
       },
       "low_low": {
         "zh-CN": {
-          "title": "共情理解 × 情绪调节｜两项都需要打底",
-          "mechanism": "这个机制解释理解别人之后，能不能保留自己的节奏和恢复空间。这不是失败信号，而是说明要先建立最小可重复流程。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你可能事后才发现自己已经很累或关系已经卡住。",
-          "strength": "从最小动作开始，反馈会更清楚。",
-          "cost": "复杂场景里容易被动应对。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "共情理解 × 情绪调节：先搭基础",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "共情理解 × 情绪调节 都处在发展中时，用户需要先建立简单可重复的观察和回应步骤。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是直接进入复杂技巧，反而更挫败。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Empathy × Emotion regulation: both signals need foundations",
-          "mechanism": "This mechanism explains whether understanding others still leaves room for your own rhythm and recovery. This is not a failure signal; it points to the need for a smallest repeatable process.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You may notice only afterward that you were drained or that the relationship was stuck.",
-          "strength": "Small actions can make the feedback clearer.",
-          "cost": "Complex scenes may push you into reactive coping.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Empathy × Emotion Regulation: build the basics first",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When both sides of Empathy × Emotion Regulation are still developing, the user needs simple, repeatable steps for noticing and responding.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is jumping into complex techniques and feeling more discouraged.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_low_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_low_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER",
+          "state": "low_low"
+        }
+      },
+      "mixed": {
+        "zh-CN": {
+          "title": "共情理解 × 情绪调节：场景依赖型",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "共情理解 × 情绪调节 呈现混合状态时，结果通常受场景影响很大。低压时可用，高压时可能变形。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是误以为自己“总是可以”或“总是不行”。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Empathy × Emotion Regulation: context-dependent",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Empathy × Emotion Regulation shows a mixed pattern, context matters. It may work in low-pressure moments and distort under pressure.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is overreading the pattern as “always works” or “never works.”",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_mixed",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_mixed",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER",
+          "state": "mixed"
+        }
+      },
+      "under_pressure_gap": {
+        "zh-CN": {
+          "title": "共情理解 × 情绪调节：压力下的断点",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "在压力升高时，共情理解 × 情绪调节 的衔接最容易断开：知道、感受、回应不再同速。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险不是没有能力，而是压力让原本可用的步骤暂时失灵。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Empathy × Emotion Regulation: the pressure breakpoint",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When pressure rises, the link inside Empathy × Emotion Regulation can break: noticing, feeling, and responding no longer move at the same speed.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is not absence of capacity; pressure can temporarily disrupt steps that are otherwise available.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_under_pressure_gap",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_under_pressure_gap",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER",
+          "state": "under_pressure_gap"
         }
       }
     },
     "EM_RM": {
       "high_high": {
         "zh-CN": {
-          "title": "共情理解 × 关系管理｜双高协同",
-          "mechanism": "这个机制解释读懂别人之后，能不能把关系推进到清楚和可修复。这两项信号可以互相支持，重点是不要把稳定变成默认责任。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你通常既能看见线索，也能采取较可用的行动。",
-          "strength": "协同能力强，容易成为关系中的稳定点。",
-          "cost": "别人可能过度依赖你的稳定。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "共情理解 × 关系管理：双强协同",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "共情理解 × 关系管理 同时较强时，用户通常既能理解别人，也能推动关系向前。关键是把这种优势变成稳定流程。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把顺利当成理所当然，忽略恢复、复盘和边界维护。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Empathy × Relationship management: both signals support each other",
-          "mechanism": "This mechanism explains whether reading others can become clear and repairable relational action. The two signals can reinforce each other; the key is not turning stability into default responsibility.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You can usually notice the signal and take a usable action.",
-          "strength": "Strong coordination can make you a stabilizing presence.",
-          "cost": "Others may rely too much on your steadiness.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Empathy × Relationship Management: coordinated strengths",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Empathy × Relationship Management are both strong, the user can often understanding the feeling and moving the relationship forward. The key is turning that strength into a repeatable routine.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is assuming the strength will always be available, without recovery, review, or boundary maintenance.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_RM_high_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_RM_high_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_RM",
+          "state": "high_high"
         }
       },
       "high_low": {
         "zh-CN": {
-          "title": "共情理解 × 关系管理｜前者强，后者需要补位",
-          "mechanism": "这个机制解释读懂别人之后，能不能把关系推进到清楚和可修复。强项会让你更早发现问题，但弱项决定你能否把它落地。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你知道很多或感到很多，但后一步不够稳。",
-          "strength": "强项能成为练习入口。",
-          "cost": "强项可能因为后续动作不足而变成消耗。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "共情理解 × 关系管理：看见多，承接少",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "理解别人较强，但推动关系向前较弱时，用户容易“看见很多”，却在下一步卡住。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把洞察变成压力，或者让理解停留在脑内。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Empathy × Relationship management: the first signal is stronger; the second needs support",
-          "mechanism": "This mechanism explains whether reading others can become clear and repairable relational action. The strength helps you notice earlier, but the weaker signal determines whether it becomes usable action.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You notice or feel a lot, but the next step is less stable.",
-          "strength": "The stronger signal can become the practice entry point.",
-          "cost": "The strength may become draining when follow-through is weak.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Empathy × Relationship Management: noticing more than can be carried",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When understanding the feeling is strong but moving the relationship forward is weaker, the user may notice a lot but get stuck at the next step.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is that insight becomes pressure, or that understanding stays in the head.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_RM_high_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_RM_high_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_RM",
+          "state": "high_low"
         }
       },
       "low_high": {
         "zh-CN": {
-          "title": "共情理解 × 关系管理｜后者强，前者需要补位",
-          "mechanism": "这个机制解释读懂别人之后，能不能把关系推进到清楚和可修复。行动能力存在，但如果前置信号不清，容易稳定地处理了错误问题。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你能做出反应，但未必说得清真正触发点。",
-          "strength": "执行或稳定性较可用。",
-          "cost": "缺少命名会让同类问题反复出现。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "共情理解 × 关系管理：行动较稳，来源较模糊",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "理解别人较弱，但推动关系向前较强时，用户可能能行动，却不总清楚行动背后的情绪来源。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是解决了事情，却没有真正理解自己或对方。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Empathy × Relationship management: the second signal is stronger; the first needs support",
-          "mechanism": "This mechanism explains whether reading others can become clear and repairable relational action. Action is available, but unclear input can make you solve the wrong problem steadily.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You can respond, but may not know what actually triggered the situation.",
-          "strength": "Execution or steadiness is usable.",
-          "cost": "Weak naming lets similar situations repeat.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Empathy × Relationship Management: effective action, less clear source",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When understanding the feeling is weaker but moving the relationship forward is stronger, the user may act effectively without fully understanding the emotional source behind the action.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is solving the situation without fully understanding yourself or the other person.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_RM_low_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_RM_low_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_RM",
+          "state": "low_high"
         }
       },
       "low_low": {
         "zh-CN": {
-          "title": "共情理解 × 关系管理｜两项都需要打底",
-          "mechanism": "这个机制解释读懂别人之后，能不能把关系推进到清楚和可修复。这不是失败信号，而是说明要先建立最小可重复流程。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你可能事后才发现自己已经很累或关系已经卡住。",
-          "strength": "从最小动作开始，反馈会更清楚。",
-          "cost": "复杂场景里容易被动应对。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "共情理解 × 关系管理：先搭基础",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "共情理解 × 关系管理 都处在发展中时，用户需要先建立简单可重复的观察和回应步骤。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是直接进入复杂技巧，反而更挫败。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Empathy × Relationship management: both signals need foundations",
-          "mechanism": "This mechanism explains whether reading others can become clear and repairable relational action. This is not a failure signal; it points to the need for a smallest repeatable process.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You may notice only afterward that you were drained or that the relationship was stuck.",
-          "strength": "Small actions can make the feedback clearer.",
-          "cost": "Complex scenes may push you into reactive coping.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Empathy × Relationship Management: build the basics first",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When both sides of Empathy × Relationship Management are still developing, the user needs simple, repeatable steps for noticing and responding.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is jumping into complex techniques and feeling more discouraged.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_RM_low_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_RM_low_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_RM",
+          "state": "low_low"
+        }
+      },
+      "mixed": {
+        "zh-CN": {
+          "title": "共情理解 × 关系管理：场景依赖型",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "共情理解 × 关系管理 呈现混合状态时，结果通常受场景影响很大。低压时可用，高压时可能变形。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是误以为自己“总是可以”或“总是不行”。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Empathy × Relationship Management: context-dependent",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Empathy × Relationship Management shows a mixed pattern, context matters. It may work in low-pressure moments and distort under pressure.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is overreading the pattern as “always works” or “never works.”",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_RM_mixed",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_RM_mixed",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_RM",
+          "state": "mixed"
+        }
+      },
+      "under_pressure_gap": {
+        "zh-CN": {
+          "title": "共情理解 × 关系管理：压力下的断点",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "在压力升高时，共情理解 × 关系管理 的衔接最容易断开：知道、感受、回应不再同速。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险不是没有能力，而是压力让原本可用的步骤暂时失灵。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Empathy × Relationship Management: the pressure breakpoint",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When pressure rises, the link inside Empathy × Relationship Management can break: noticing, feeling, and responding no longer move at the same speed.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is not absence of capacity; pressure can temporarily disrupt steps that are otherwise available.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_RM_under_pressure_gap",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_RM_under_pressure_gap",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_RM",
+          "state": "under_pressure_gap"
         }
       }
     },
     "SA_RM": {
       "high_high": {
         "zh-CN": {
-          "title": "自我觉察 × 关系管理｜双高协同",
-          "mechanism": "这个机制解释表达真实自己，同时让关系还能继续对话。这两项信号可以互相支持，重点是不要把稳定变成默认责任。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你通常既能看见线索，也能采取较可用的行动。",
-          "strength": "协同能力强，容易成为关系中的稳定点。",
-          "cost": "别人可能过度依赖你的稳定。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "自我觉察 × 关系管理：双强协同",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 关系管理 同时较强时，用户通常既能表达真实感受，也能让关系能接住。关键是把这种优势变成稳定流程。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把顺利当成理所当然，忽略恢复、复盘和边界维护。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Self-awareness × Relationship management: both signals support each other",
-          "mechanism": "This mechanism explains expressing yourself honestly while keeping the relationship open. The two signals can reinforce each other; the key is not turning stability into default responsibility.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You can usually notice the signal and take a usable action.",
-          "strength": "Strong coordination can make you a stabilizing presence.",
-          "cost": "Others may rely too much on your steadiness.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Self-Awareness × Relationship Management: coordinated strengths",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Self-Awareness × Relationship Management are both strong, the user can often expressing your reality and making it receivable. The key is turning that strength into a repeatable routine.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is assuming the strength will always be available, without recovery, review, or boundary maintenance.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_RM_high_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_RM_high_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_RM",
+          "state": "high_high"
         }
       },
       "high_low": {
         "zh-CN": {
-          "title": "自我觉察 × 关系管理｜前者强，后者需要补位",
-          "mechanism": "这个机制解释表达真实自己，同时让关系还能继续对话。强项会让你更早发现问题，但弱项决定你能否把它落地。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你知道很多或感到很多，但后一步不够稳。",
-          "strength": "强项能成为练习入口。",
-          "cost": "强项可能因为后续动作不足而变成消耗。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "自我觉察 × 关系管理：看见多，承接少",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "表达真实感受较强，但让关系能接住较弱时，用户容易“看见很多”，却在下一步卡住。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把洞察变成压力，或者让理解停留在脑内。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Self-awareness × Relationship management: the first signal is stronger; the second needs support",
-          "mechanism": "This mechanism explains expressing yourself honestly while keeping the relationship open. The strength helps you notice earlier, but the weaker signal determines whether it becomes usable action.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You notice or feel a lot, but the next step is less stable.",
-          "strength": "The stronger signal can become the practice entry point.",
-          "cost": "The strength may become draining when follow-through is weak.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Self-Awareness × Relationship Management: noticing more than can be carried",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When expressing your reality is strong but making it receivable is weaker, the user may notice a lot but get stuck at the next step.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is that insight becomes pressure, or that understanding stays in the head.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_RM_high_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_RM_high_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_RM",
+          "state": "high_low"
         }
       },
       "low_high": {
         "zh-CN": {
-          "title": "自我觉察 × 关系管理｜后者强，前者需要补位",
-          "mechanism": "这个机制解释表达真实自己，同时让关系还能继续对话。行动能力存在，但如果前置信号不清，容易稳定地处理了错误问题。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你能做出反应，但未必说得清真正触发点。",
-          "strength": "执行或稳定性较可用。",
-          "cost": "缺少命名会让同类问题反复出现。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "自我觉察 × 关系管理：行动较稳，来源较模糊",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "表达真实感受较弱，但让关系能接住较强时，用户可能能行动，却不总清楚行动背后的情绪来源。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是解决了事情，却没有真正理解自己或对方。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Self-awareness × Relationship management: the second signal is stronger; the first needs support",
-          "mechanism": "This mechanism explains expressing yourself honestly while keeping the relationship open. Action is available, but unclear input can make you solve the wrong problem steadily.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You can respond, but may not know what actually triggered the situation.",
-          "strength": "Execution or steadiness is usable.",
-          "cost": "Weak naming lets similar situations repeat.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Self-Awareness × Relationship Management: effective action, less clear source",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When expressing your reality is weaker but making it receivable is stronger, the user may act effectively without fully understanding the emotional source behind the action.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is solving the situation without fully understanding yourself or the other person.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_RM_low_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_RM_low_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_RM",
+          "state": "low_high"
         }
       },
       "low_low": {
         "zh-CN": {
-          "title": "自我觉察 × 关系管理｜两项都需要打底",
-          "mechanism": "这个机制解释表达真实自己，同时让关系还能继续对话。这不是失败信号，而是说明要先建立最小可重复流程。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你可能事后才发现自己已经很累或关系已经卡住。",
-          "strength": "从最小动作开始，反馈会更清楚。",
-          "cost": "复杂场景里容易被动应对。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "自我觉察 × 关系管理：先搭基础",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 关系管理 都处在发展中时，用户需要先建立简单可重复的观察和回应步骤。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是直接进入复杂技巧，反而更挫败。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Self-awareness × Relationship management: both signals need foundations",
-          "mechanism": "This mechanism explains expressing yourself honestly while keeping the relationship open. This is not a failure signal; it points to the need for a smallest repeatable process.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You may notice only afterward that you were drained or that the relationship was stuck.",
-          "strength": "Small actions can make the feedback clearer.",
-          "cost": "Complex scenes may push you into reactive coping.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Self-Awareness × Relationship Management: build the basics first",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When both sides of Self-Awareness × Relationship Management are still developing, the user needs simple, repeatable steps for noticing and responding.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is jumping into complex techniques and feeling more discouraged.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_RM_low_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_RM_low_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_RM",
+          "state": "low_low"
+        }
+      },
+      "mixed": {
+        "zh-CN": {
+          "title": "自我觉察 × 关系管理：场景依赖型",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 关系管理 呈现混合状态时，结果通常受场景影响很大。低压时可用，高压时可能变形。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是误以为自己“总是可以”或“总是不行”。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Self-Awareness × Relationship Management: context-dependent",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Self-Awareness × Relationship Management shows a mixed pattern, context matters. It may work in low-pressure moments and distort under pressure.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is overreading the pattern as “always works” or “never works.”",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_RM_mixed",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_RM_mixed",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_RM",
+          "state": "mixed"
+        }
+      },
+      "under_pressure_gap": {
+        "zh-CN": {
+          "title": "自我觉察 × 关系管理：压力下的断点",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "在压力升高时，自我觉察 × 关系管理 的衔接最容易断开：知道、感受、回应不再同速。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险不是没有能力，而是压力让原本可用的步骤暂时失灵。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Self-Awareness × Relationship Management: the pressure breakpoint",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When pressure rises, the link inside Self-Awareness × Relationship Management can break: noticing, feeling, and responding no longer move at the same speed.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is not absence of capacity; pressure can temporarily disrupt steps that are otherwise available.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_RM_under_pressure_gap",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_RM_under_pressure_gap",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_RM",
+          "state": "under_pressure_gap"
         }
       }
     },
     "ER_RM": {
       "high_high": {
         "zh-CN": {
-          "title": "情绪调节 × 关系管理｜双高协同",
-          "mechanism": "这个机制解释压力下能不能沟通、降温和修复。这两项信号可以互相支持，重点是不要把稳定变成默认责任。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你通常既能看见线索，也能采取较可用的行动。",
-          "strength": "协同能力强，容易成为关系中的稳定点。",
-          "cost": "别人可能过度依赖你的稳定。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "情绪调节 × 关系管理：双强协同",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "情绪调节 × 关系管理 同时较强时，用户通常既能压力中稳定自己，也能压力中修复关系。关键是把这种优势变成稳定流程。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把顺利当成理所当然，忽略恢复、复盘和边界维护。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Emotion regulation × Relationship management: both signals support each other",
-          "mechanism": "This mechanism explains communicating, cooling down, and repairing under pressure. The two signals can reinforce each other; the key is not turning stability into default responsibility.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You can usually notice the signal and take a usable action.",
-          "strength": "Strong coordination can make you a stabilizing presence.",
-          "cost": "Others may rely too much on your steadiness.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Emotion Regulation × Relationship Management: coordinated strengths",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Emotion Regulation × Relationship Management are both strong, the user can often staying steady under pressure and repairing under pressure. The key is turning that strength into a repeatable routine.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is assuming the strength will always be available, without recovery, review, or boundary maintenance.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "ER_RM_high_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "ER_RM_high_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "ER_RM",
+          "state": "high_high"
         }
       },
       "high_low": {
         "zh-CN": {
-          "title": "情绪调节 × 关系管理｜前者强，后者需要补位",
-          "mechanism": "这个机制解释压力下能不能沟通、降温和修复。强项会让你更早发现问题，但弱项决定你能否把它落地。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你知道很多或感到很多，但后一步不够稳。",
-          "strength": "强项能成为练习入口。",
-          "cost": "强项可能因为后续动作不足而变成消耗。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "情绪调节 × 关系管理：看见多，承接少",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "压力中稳定自己较强，但压力中修复关系较弱时，用户容易“看见很多”，却在下一步卡住。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把洞察变成压力，或者让理解停留在脑内。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Emotion regulation × Relationship management: the first signal is stronger; the second needs support",
-          "mechanism": "This mechanism explains communicating, cooling down, and repairing under pressure. The strength helps you notice earlier, but the weaker signal determines whether it becomes usable action.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You notice or feel a lot, but the next step is less stable.",
-          "strength": "The stronger signal can become the practice entry point.",
-          "cost": "The strength may become draining when follow-through is weak.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Emotion Regulation × Relationship Management: noticing more than can be carried",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When staying steady under pressure is strong but repairing under pressure is weaker, the user may notice a lot but get stuck at the next step.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is that insight becomes pressure, or that understanding stays in the head.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "ER_RM_high_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "ER_RM_high_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "ER_RM",
+          "state": "high_low"
         }
       },
       "low_high": {
         "zh-CN": {
-          "title": "情绪调节 × 关系管理｜后者强，前者需要补位",
-          "mechanism": "这个机制解释压力下能不能沟通、降温和修复。行动能力存在，但如果前置信号不清，容易稳定地处理了错误问题。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你能做出反应，但未必说得清真正触发点。",
-          "strength": "执行或稳定性较可用。",
-          "cost": "缺少命名会让同类问题反复出现。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "情绪调节 × 关系管理：行动较稳，来源较模糊",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "压力中稳定自己较弱，但压力中修复关系较强时，用户可能能行动，却不总清楚行动背后的情绪来源。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是解决了事情，却没有真正理解自己或对方。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Emotion regulation × Relationship management: the second signal is stronger; the first needs support",
-          "mechanism": "This mechanism explains communicating, cooling down, and repairing under pressure. Action is available, but unclear input can make you solve the wrong problem steadily.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You can respond, but may not know what actually triggered the situation.",
-          "strength": "Execution or steadiness is usable.",
-          "cost": "Weak naming lets similar situations repeat.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Emotion Regulation × Relationship Management: effective action, less clear source",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When staying steady under pressure is weaker but repairing under pressure is stronger, the user may act effectively without fully understanding the emotional source behind the action.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is solving the situation without fully understanding yourself or the other person.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "ER_RM_low_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "ER_RM_low_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "ER_RM",
+          "state": "low_high"
         }
       },
       "low_low": {
         "zh-CN": {
-          "title": "情绪调节 × 关系管理｜两项都需要打底",
-          "mechanism": "这个机制解释压力下能不能沟通、降温和修复。这不是失败信号，而是说明要先建立最小可重复流程。",
-          "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。",
-          "what_it_feels_like": "你可能事后才发现自己已经很累或关系已经卡住。",
-          "strength": "从最小动作开始，反馈会更清楚。",
-          "cost": "复杂场景里容易被动应对。",
-          "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-          "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
-          "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。"
+          "title": "情绪调节 × 关系管理：先搭基础",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "情绪调节 × 关系管理 都处在发展中时，用户需要先建立简单可重复的观察和回应步骤。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是直接进入复杂技巧，反而更挫败。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
         },
         "en": {
-          "title": "Emotion regulation × Relationship management: both signals need foundations",
-          "mechanism": "This mechanism explains communicating, cooling down, and repairing under pressure. This is not a failure signal; it points to the need for a smallest repeatable process.",
-          "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships.",
-          "what_it_feels_like": "You may notice only afterward that you were drained or that the relationship was stuck.",
-          "strength": "Small actions can make the feedback clearer.",
-          "cost": "Complex scenes may push you into reactive coping.",
-          "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-          "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
-          "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship."
+          "title": "Emotion Regulation × Relationship Management: build the basics first",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When both sides of Emotion Regulation × Relationship Management are still developing, the user needs simple, repeatable steps for noticing and responding.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is jumping into complex techniques and feeling more discouraged.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "ER_RM_low_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "ER_RM_low_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "ER_RM",
+          "state": "low_low"
+        }
+      },
+      "mixed": {
+        "zh-CN": {
+          "title": "情绪调节 × 关系管理：场景依赖型",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "情绪调节 × 关系管理 呈现混合状态时，结果通常受场景影响很大。低压时可用，高压时可能变形。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是误以为自己“总是可以”或“总是不行”。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Emotion Regulation × Relationship Management: context-dependent",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Emotion Regulation × Relationship Management shows a mixed pattern, context matters. It may work in low-pressure moments and distort under pressure.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is overreading the pattern as “always works” or “never works.”",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "ER_RM_mixed",
+          "asset_type": "mechanism",
+          "v23_source_id": "ER_RM_mixed",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "ER_RM",
+          "state": "mixed"
+        }
+      },
+      "under_pressure_gap": {
+        "zh-CN": {
+          "title": "情绪调节 × 关系管理：压力下的断点",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "在压力升高时，情绪调节 × 关系管理 的衔接最容易断开：知道、感受、回应不再同速。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险不是没有能力，而是压力让原本可用的步骤暂时失灵。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Emotion Regulation × Relationship Management: the pressure breakpoint",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When pressure rises, the link inside Emotion Regulation × Relationship Management can break: noticing, feeling, and responding no longer move at the same speed.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is not absence of capacity; pressure can temporarily disrupt steps that are otherwise available.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "ER_RM_under_pressure_gap",
+          "asset_type": "mechanism",
+          "v23_source_id": "ER_RM_under_pressure_gap",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "ER_RM",
+          "state": "under_pressure_gap"
+        }
+      }
+    },
+    "SA_EM": {
+      "high_high": {
+        "zh-CN": {
+          "title": "自我觉察 × 共情理解：双强协同",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 共情理解 同时较强时，用户通常既能读自己，也能读别人。关键是把这种优势变成稳定流程。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把顺利当成理所当然，忽略恢复、复盘和边界维护。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Self-Awareness × Empathy: coordinated strengths",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Self-Awareness × Empathy are both strong, the user can often reading yourself and reading others. The key is turning that strength into a repeatable routine.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is assuming the strength will always be available, without recovery, review, or boundary maintenance.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_EM_high_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_EM_high_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_EM",
+          "state": "high_high"
+        }
+      },
+      "high_low": {
+        "zh-CN": {
+          "title": "自我觉察 × 共情理解：看见多，承接少",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "读自己较强，但读别人较弱时，用户容易“看见很多”，却在下一步卡住。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把洞察变成压力，或者让理解停留在脑内。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Self-Awareness × Empathy: noticing more than can be carried",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When reading yourself is strong but reading others is weaker, the user may notice a lot but get stuck at the next step.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is that insight becomes pressure, or that understanding stays in the head.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_EM_high_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_EM_high_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_EM",
+          "state": "high_low"
+        }
+      },
+      "low_high": {
+        "zh-CN": {
+          "title": "自我觉察 × 共情理解：行动较稳，来源较模糊",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "读自己较弱，但读别人较强时，用户可能能行动，却不总清楚行动背后的情绪来源。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是解决了事情，却没有真正理解自己或对方。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Self-Awareness × Empathy: effective action, less clear source",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When reading yourself is weaker but reading others is stronger, the user may act effectively without fully understanding the emotional source behind the action.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is solving the situation without fully understanding yourself or the other person.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_EM_low_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_EM_low_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_EM",
+          "state": "low_high"
+        }
+      },
+      "low_low": {
+        "zh-CN": {
+          "title": "自我觉察 × 共情理解：先搭基础",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 共情理解 都处在发展中时，用户需要先建立简单可重复的观察和回应步骤。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是直接进入复杂技巧，反而更挫败。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Self-Awareness × Empathy: build the basics first",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When both sides of Self-Awareness × Empathy are still developing, the user needs simple, repeatable steps for noticing and responding.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is jumping into complex techniques and feeling more discouraged.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_EM_low_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_EM_low_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_EM",
+          "state": "low_low"
+        }
+      },
+      "mixed": {
+        "zh-CN": {
+          "title": "自我觉察 × 共情理解：场景依赖型",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 共情理解 呈现混合状态时，结果通常受场景影响很大。低压时可用，高压时可能变形。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是误以为自己“总是可以”或“总是不行”。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Self-Awareness × Empathy: context-dependent",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Self-Awareness × Empathy shows a mixed pattern, context matters. It may work in low-pressure moments and distort under pressure.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is overreading the pattern as “always works” or “never works.”",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_EM_mixed",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_EM_mixed",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_EM",
+          "state": "mixed"
+        }
+      },
+      "under_pressure_gap": {
+        "zh-CN": {
+          "title": "自我觉察 × 共情理解：压力下的断点",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "在压力升高时，自我觉察 × 共情理解 的衔接最容易断开：知道、感受、回应不再同速。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险不是没有能力，而是压力让原本可用的步骤暂时失灵。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Self-Awareness × Empathy: the pressure breakpoint",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When pressure rises, the link inside Self-Awareness × Empathy can break: noticing, feeling, and responding no longer move at the same speed.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is not absence of capacity; pressure can temporarily disrupt steps that are otherwise available.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_EM_under_pressure_gap",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_EM_under_pressure_gap",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_EM",
+          "state": "under_pressure_gap"
+        }
+      }
+    },
+    "SA_ER_EM": {
+      "high_high": {
+        "zh-CN": {
+          "title": "自我觉察 × 调节 × 共情：双强协同",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 调节 × 共情 同时较强时，用户通常既能看见情绪，也能消化情绪。关键是把这种优势变成稳定流程。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把顺利当成理所当然，忽略恢复、复盘和边界维护。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Awareness × Regulation × Empathy: coordinated strengths",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Awareness × Regulation × Empathy are both strong, the user can often notice emotion and metabolize emotion. The key is turning that strength into a repeatable routine.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is assuming the strength will always be available, without recovery, review, or boundary maintenance.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_EM_high_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_EM_high_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER_EM",
+          "state": "high_high"
+        }
+      },
+      "high_low": {
+        "zh-CN": {
+          "title": "自我觉察 × 调节 × 共情：看见多，承接少",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "看见情绪较强，但消化情绪较弱时，用户容易“看见很多”，却在下一步卡住。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把洞察变成压力，或者让理解停留在脑内。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Awareness × Regulation × Empathy: noticing more than can be carried",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When notice emotion is strong but metabolize emotion is weaker, the user may notice a lot but get stuck at the next step.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is that insight becomes pressure, or that understanding stays in the head.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_EM_high_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_EM_high_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER_EM",
+          "state": "high_low"
+        }
+      },
+      "low_high": {
+        "zh-CN": {
+          "title": "自我觉察 × 调节 × 共情：行动较稳，来源较模糊",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "看见情绪较弱，但消化情绪较强时，用户可能能行动，却不总清楚行动背后的情绪来源。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是解决了事情，却没有真正理解自己或对方。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Awareness × Regulation × Empathy: effective action, less clear source",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When notice emotion is weaker but metabolize emotion is stronger, the user may act effectively without fully understanding the emotional source behind the action.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is solving the situation without fully understanding yourself or the other person.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_EM_low_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_EM_low_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER_EM",
+          "state": "low_high"
+        }
+      },
+      "low_low": {
+        "zh-CN": {
+          "title": "自我觉察 × 调节 × 共情：先搭基础",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 调节 × 共情 都处在发展中时，用户需要先建立简单可重复的观察和回应步骤。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是直接进入复杂技巧，反而更挫败。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Awareness × Regulation × Empathy: build the basics first",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When both sides of Awareness × Regulation × Empathy are still developing, the user needs simple, repeatable steps for noticing and responding.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is jumping into complex techniques and feeling more discouraged.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_EM_low_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_EM_low_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER_EM",
+          "state": "low_low"
+        }
+      },
+      "mixed": {
+        "zh-CN": {
+          "title": "自我觉察 × 调节 × 共情：场景依赖型",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "自我觉察 × 调节 × 共情 呈现混合状态时，结果通常受场景影响很大。低压时可用，高压时可能变形。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是误以为自己“总是可以”或“总是不行”。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Awareness × Regulation × Empathy: context-dependent",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Awareness × Regulation × Empathy shows a mixed pattern, context matters. It may work in low-pressure moments and distort under pressure.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is overreading the pattern as “always works” or “never works.”",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_EM_mixed",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_EM_mixed",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER_EM",
+          "state": "mixed"
+        }
+      },
+      "under_pressure_gap": {
+        "zh-CN": {
+          "title": "自我觉察 × 调节 × 共情：压力下的断点",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "在压力升高时，自我觉察 × 调节 × 共情 的衔接最容易断开：知道、感受、回应不再同速。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险不是没有能力，而是压力让原本可用的步骤暂时失灵。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Awareness × Regulation × Empathy: the pressure breakpoint",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When pressure rises, the link inside Awareness × Regulation × Empathy can break: noticing, feeling, and responding no longer move at the same speed.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is not absence of capacity; pressure can temporarily disrupt steps that are otherwise available.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "SA_ER_EM_under_pressure_gap",
+          "asset_type": "mechanism",
+          "v23_source_id": "SA_ER_EM_under_pressure_gap",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "SA_ER_EM",
+          "state": "under_pressure_gap"
+        }
+      }
+    },
+    "EM_ER_RM": {
+      "high_high": {
+        "zh-CN": {
+          "title": "共情 × 调节 × 关系：双强协同",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "共情 × 调节 × 关系 同时较强时，用户通常既能接收情绪，也能转成行动。关键是把这种优势变成稳定流程。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把顺利当成理所当然，忽略恢复、复盘和边界维护。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Empathy × Regulation × Relationship: coordinated strengths",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Empathy × Regulation × Relationship are both strong, the user can often receive emotion and turn it into action. The key is turning that strength into a repeatable routine.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is assuming the strength will always be available, without recovery, review, or boundary maintenance.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_RM_high_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_RM_high_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER_RM",
+          "state": "high_high"
+        }
+      },
+      "high_low": {
+        "zh-CN": {
+          "title": "共情 × 调节 × 关系：看见多，承接少",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "接收情绪较强，但转成行动较弱时，用户容易“看见很多”，却在下一步卡住。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是把洞察变成压力，或者让理解停留在脑内。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Empathy × Regulation × Relationship: noticing more than can be carried",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When receive emotion is strong but turn it into action is weaker, the user may notice a lot but get stuck at the next step.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is that insight becomes pressure, or that understanding stays in the head.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_RM_high_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_RM_high_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER_RM",
+          "state": "high_low"
+        }
+      },
+      "low_high": {
+        "zh-CN": {
+          "title": "共情 × 调节 × 关系：行动较稳，来源较模糊",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "接收情绪较弱，但转成行动较强时，用户可能能行动，却不总清楚行动背后的情绪来源。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是解决了事情，却没有真正理解自己或对方。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Empathy × Regulation × Relationship: effective action, less clear source",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When receive emotion is weaker but turn it into action is stronger, the user may act effectively without fully understanding the emotional source behind the action.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is solving the situation without fully understanding yourself or the other person.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_RM_low_high",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_RM_low_high",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER_RM",
+          "state": "low_high"
+        }
+      },
+      "low_low": {
+        "zh-CN": {
+          "title": "共情 × 调节 × 关系：先搭基础",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "共情 × 调节 × 关系 都处在发展中时，用户需要先建立简单可重复的观察和回应步骤。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是直接进入复杂技巧，反而更挫败。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Empathy × Regulation × Relationship: build the basics first",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When both sides of Empathy × Regulation × Relationship are still developing, the user needs simple, repeatable steps for noticing and responding.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is jumping into complex techniques and feeling more discouraged.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_RM_low_low",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_RM_low_low",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER_RM",
+          "state": "low_low"
+        }
+      },
+      "mixed": {
+        "zh-CN": {
+          "title": "共情 × 调节 × 关系：场景依赖型",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "共情 × 调节 × 关系 呈现混合状态时，结果通常受场景影响很大。低压时可用，高压时可能变形。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险是误以为自己“总是可以”或“总是不行”。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Empathy × Regulation × Relationship: context-dependent",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When Empathy × Regulation × Relationship shows a mixed pattern, context matters. It may work in low-pressure moments and distort under pressure.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is overreading the pattern as “always works” or “never works.”",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_RM_mixed",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_RM_mixed",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER_RM",
+          "state": "mixed"
+        }
+      },
+      "under_pressure_gap": {
+        "zh-CN": {
+          "title": "共情 × 调节 × 关系：压力下的断点",
+          "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。",
+          "what_it_feels_like": "在压力升高时，共情 × 调节 × 关系 的衔接最容易断开：知道、感受、回应不再同速。",
+          "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+          "cost": "风险不是没有能力，而是压力让原本可用的步骤暂时失灵。",
+          "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+          "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
+          "do_not_overread": "这是互动机制解释，不是固定人格判断。"
+        },
+        "en": {
+          "title": "Empathy × Regulation × Relationship: the pressure breakpoint",
+          "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation.",
+          "what_it_feels_like": "When pressure rises, the link inside Empathy × Regulation × Relationship can break: noticing, feeling, and responding no longer move at the same speed.",
+          "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+          "cost": "The risk is not absence of capacity; pressure can temporarily disrupt steps that are otherwise available.",
+          "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+          "micro_action": "Next time, add just one step: name it first, then respond.",
+          "do_not_overread": "This is an interaction pattern, not a fixed personality label."
+        },
+        "meta": {
+          "id": "EM_ER_RM_under_pressure_gap",
+          "asset_type": "mechanism",
+          "v23_source_id": "EM_ER_RM_under_pressure_gap",
+          "claim_risk": "low",
+          "risk_notes": "Mechanism explanation only.",
+          "pair": "EM_ER_RM",
+          "state": "under_pressure_gap"
         }
       }
     }

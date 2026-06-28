@@ -4,205 +4,302 @@
   "assets": {
     "eq.conversion.save_report": {
       "zh-CN": {
-        "title": "保存报告，方便以后复盘。",
-        "body": "保存这次结果，几周后对照你的真实互动变化。",
+        "title": "保存报告",
+        "body": "把这份结果保存下来，方便你以后对比复测变化。",
         "cta_label": "保存报告",
-        "placement": "结果页底部、首屏次级动作或报告保存区域。",
-        "do_not_overread": "这只是结果使用方式，不改变报告结论。",
-        "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。",
-        "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。"
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
       },
       "en": {
-        "title": "Save this report for later reflection",
-        "body": "Keep a copy of this result so you can compare it after a few weeks.",
+        "title": "Save report",
+        "body": "Keep this result so you can compare it with a later retest.",
         "cta_label": "Save report",
-        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-        "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
-        "trust_note": "This action helps you use the report; it does not change scores or conclusions.",
-        "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page."
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
       },
       "meta": {
         "id": "eq.conversion.save_report",
-        "asset_type": "commercial_conversion",
-        "purpose": "Commercial retention/conversion action",
-        "trigger_logic": "Shown when matching feature is available or planned.",
-        "claim_sensitivity": "low",
-        "v19_source_id": "eq.conversion.free.save_report",
-        "claim_risk": "low"
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.save_report",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "save_report"
       }
     },
     "eq.conversion.email_revisit": {
       "zh-CN": {
-        "title": "把报告链接发给自己。",
-        "body": "如果你想之后再看，不必一直保留页面。",
-        "cta_label": "把报告链接发给自己。",
-        "placement": "结果页底部、首屏次级动作或报告保存区域。",
-        "do_not_overread": "这只是结果使用方式，不改变报告结论。",
-        "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。",
-        "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。"
+        "title": "邮件找回",
+        "body": "把结果发送到你的邮箱，方便之后回来继续阅读。",
+        "cta_label": "邮件找回",
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
       },
       "en": {
-        "title": "Send report link to yourself",
-        "body": "Use this when you want to revisit the result without keeping the page open.",
-        "cta_label": "Send report link to yourself",
-        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-        "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
-        "trust_note": "This action helps you use the report; it does not change scores or conclusions.",
-        "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page."
+        "title": "Send to email",
+        "body": "Send the result to your email so you can return to it later.",
+        "cta_label": "Send to email",
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
       },
       "meta": {
         "id": "eq.conversion.email_revisit",
-        "asset_type": "commercial_conversion",
-        "purpose": "Commercial retention/conversion action",
-        "trigger_logic": "Shown when matching feature is available or planned.",
-        "claim_sensitivity": "low",
-        "v19_source_id": "eq.conversion.free.email_report",
-        "claim_risk": "low"
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.email_revisit",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "email_report"
       }
     },
     "eq.conversion.pdf_export": {
       "zh-CN": {
-        "title": "导出一份干净报告。",
-        "body": "用于个人记录或适合的教练式讨论，不要作为筛选依据。",
-        "cta_label": "导出一份干净报告。",
-        "placement": "结果页底部、首屏次级动作或报告保存区域。",
-        "do_not_overread": "这只是结果使用方式，不改变报告结论。",
-        "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。",
-        "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。"
+        "title": "导出 PDF",
+        "body": "保存一份静态报告，用于个人复盘。",
+        "cta_label": "导出 PDF",
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
       },
       "en": {
-        "title": "Export a clean copy",
-        "body": "Use a plain copy for personal notes or coaching conversations where appropriate.",
-        "cta_label": "Export a clean copy",
-        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-        "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
-        "trust_note": "This action helps you use the report; it does not change scores or conclusions.",
-        "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page."
+        "title": "Export PDF",
+        "body": "Keep a static copy for your own reflection.",
+        "cta_label": "Export PDF",
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
       },
       "meta": {
         "id": "eq.conversion.pdf_export",
-        "asset_type": "commercial_conversion",
-        "purpose": "Commercial retention/conversion action",
-        "trigger_logic": "Shown when matching feature is available or planned.",
-        "claim_sensitivity": "low",
-        "v19_source_id": "eq.conversion.free.pdf_export",
-        "claim_risk": "low"
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.pdf_export",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "pdf_export"
       }
     },
     "eq.conversion.share_card": {
       "zh-CN": {
-        "title": "生成安全分享卡。",
-        "body": "只分享模式句，不分享分数和敏感质量信息。",
-        "cta_label": "生成安全分享卡。",
-        "placement": "结果页底部、首屏次级动作或报告保存区域。",
-        "do_not_overread": "这只是结果使用方式，不改变报告结论。",
-        "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。",
-        "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。"
+        "title": "生成分享卡",
+        "body": "分享你的情绪与关系模式，不展示敏感分数。",
+        "cta_label": "生成分享卡",
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
       },
       "en": {
-        "title": "Create a safe share card",
-        "body": "Share the pattern sentence without score details or sensitive flags.",
-        "cta_label": "Create a safe share card",
-        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-        "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
-        "trust_note": "This action helps you use the report; it does not change scores or conclusions.",
-        "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page."
+        "title": "Create share card",
+        "body": "Share your emotional-relational pattern without showing sensitive scores.",
+        "cta_label": "Create share card",
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
       },
       "meta": {
         "id": "eq.conversion.share_card",
-        "asset_type": "commercial_conversion",
-        "purpose": "Commercial retention/conversion action",
-        "trigger_logic": "Shown when matching feature is available or planned.",
-        "claim_sensitivity": "low",
-        "v19_source_id": "eq.conversion.free.share_card",
-        "claim_risk": "low"
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.share_card",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "share_card"
       }
     },
     "eq.conversion.retest_reminder": {
       "zh-CN": {
-        "title": "设置30天复测提醒。",
-        "body": "适合你正在练一个行动处方时使用。",
-        "cta_label": "设置30天复测提醒。",
-        "placement": "结果页底部、首屏次级动作或报告保存区域。",
-        "do_not_overread": "这只是结果使用方式，不改变报告结论。",
-        "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。",
-        "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。"
+        "title": "设置复测提醒",
+        "body": "在一段时间后重新测试，观察自我感知是否变化。",
+        "cta_label": "设置复测提醒",
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
       },
       "en": {
-        "title": "Set a 30-day retest reminder",
-        "body": "Useful when you are practicing one action prescription.",
-        "cta_label": "Set a 30-day retest reminder",
-        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-        "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
-        "trust_note": "This action helps you use the report; it does not change scores or conclusions.",
-        "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page."
+        "title": "Set retest reminder",
+        "body": "Retest later to see whether your self-perception has shifted.",
+        "cta_label": "Set retest reminder",
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
       },
       "meta": {
         "id": "eq.conversion.retest_reminder",
-        "asset_type": "commercial_conversion",
-        "purpose": "Commercial retention/conversion action",
-        "trigger_logic": "Shown when matching feature is available or planned.",
-        "claim_sensitivity": "low",
-        "v19_source_id": "eq.conversion.free.retest_30",
-        "claim_risk": "low"
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.retest_reminder",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "retest_reminder"
       }
     },
     "eq.conversion.related_tests": {
       "zh-CN": {
-        "title": "继续探索相关测试。",
-        "body": "把这份报告与人格或兴趣信号放在一起看。",
-        "cta_label": "继续探索相关测试。",
-        "placement": "结果页底部、首屏次级动作或报告保存区域。",
-        "do_not_overread": "这只是结果使用方式，不改变报告结论。",
-        "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。",
-        "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。"
+        "title": "继续相关测试",
+        "body": "用其他测评补充工作方式、兴趣和人格背景。",
+        "cta_label": "继续相关测试",
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
       },
       "en": {
-        "title": "Explore related assessments",
-        "body": "Compare this report with broader personality or interest signals.",
-        "cta_label": "Explore related assessments",
-        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-        "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
-        "trust_note": "This action helps you use the report; it does not change scores or conclusions.",
-        "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page."
+        "title": "Explore related tests",
+        "body": "Use related assessments to add workstyle, interest, and personality context.",
+        "cta_label": "Explore related tests",
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
       },
       "meta": {
         "id": "eq.conversion.related_tests",
-        "asset_type": "commercial_conversion",
-        "purpose": "Commercial retention/conversion action",
-        "trigger_logic": "Shown when matching feature is available or planned.",
-        "claim_sensitivity": "low",
-        "v19_source_id": "eq.conversion.free.related_tests",
-        "claim_risk": "low"
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.related_tests",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "related_tests"
       }
     },
     "eq.conversion.agent_entry": {
       "zh-CN": {
-        "title": "询问 EQ Agent。",
-        "body": "让 Agent 基于这份报告解释一个场景或行动，但不改分数、不改结论。",
-        "cta_label": "询问报告 Agent",
-        "placement": "结果页底部、首屏次级动作或报告保存区域。",
-        "do_not_overread": "这只是结果使用方式，不改变报告结论。",
-        "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。",
-        "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。"
+        "title": "询问结果助手",
+        "body": "让助手基于已完成报告解释一个具体问题。",
+        "cta_label": "询问结果助手",
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
       },
       "en": {
-        "title": "Ask the EQ Agent",
-        "body": "Ask the Agent to explain one scene or practice from this report. It cannot change scores or conclusions.",
-        "cta_label": "Ask the report Agent",
-        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-        "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
-        "trust_note": "This action helps you use the report; it does not change scores or conclusions.",
-        "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page."
+        "title": "Ask the result assistant",
+        "body": "Ask the assistant to explain a specific part of your completed report.",
+        "cta_label": "Ask the result assistant",
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
       },
       "meta": {
         "id": "eq.conversion.agent_entry",
-        "asset_type": "commercial_conversion",
-        "purpose": "Commercial retention/conversion action",
-        "trigger_logic": "Shown when matching feature is available or planned.",
-        "claim_sensitivity": "low",
-        "v19_source_id": "eq.conversion.free.ask_agent",
-        "claim_risk": "low"
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.agent_entry",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "agent_entry"
+      }
+    },
+    "eq.conversion.continue_big_five": {
+      "zh-CN": {
+        "title": "查看大五人格",
+        "body": "用大五人格补充情绪稳定性、宜人性和尽责性背景。",
+        "cta_label": "查看大五人格",
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
+      },
+      "en": {
+        "title": "Compare with Big Five",
+        "body": "Use Big Five as context for emotional stability, agreeableness, and conscientiousness.",
+        "cta_label": "Compare with Big Five",
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
+      },
+      "meta": {
+        "id": "eq.conversion.continue_big_five",
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.continue_big_five",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "related_big_five"
+      }
+    },
+    "eq.conversion.continue_mbti": {
+      "zh-CN": {
+        "title": "查看 MBTI",
+        "body": "用 MBTI 辅助理解表达风格和能量使用方式。",
+        "cta_label": "查看 MBTI",
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
+      },
+      "en": {
+        "title": "Compare with MBTI",
+        "body": "Use MBTI as context for expression style and energy use.",
+        "cta_label": "Compare with MBTI",
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
+      },
+      "meta": {
+        "id": "eq.conversion.continue_mbti",
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.continue_mbti",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "related_mbti"
+      }
+    },
+    "eq.conversion.continue_riasec": {
+      "zh-CN": {
+        "title": "查看 RIASEC",
+        "body": "用兴趣信号理解你更想进入什么样的工作环境。",
+        "cta_label": "查看 RIASEC",
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
+      },
+      "en": {
+        "title": "Compare with RIASEC",
+        "body": "Use interest signals to understand what kinds of work environments you may want to explore.",
+        "cta_label": "Compare with RIASEC",
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
+      },
+      "meta": {
+        "id": "eq.conversion.continue_riasec",
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.continue_riasec",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "related_riasec"
+      }
+    },
+    "eq.conversion.continue_enneagram": {
+      "zh-CN": {
+        "title": "查看九型人格",
+        "body": "用动机视角补充你在压力下的反应模式。",
+        "cta_label": "查看九型人格",
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
+      },
+      "en": {
+        "title": "Compare with Enneagram",
+        "body": "Use motivation context to reflect on stress responses.",
+        "cta_label": "Compare with Enneagram",
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
+      },
+      "meta": {
+        "id": "eq.conversion.continue_enneagram",
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.continue_enneagram",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "related_enneagram"
+      }
+    },
+    "eq.conversion.sjt_planned_note": {
+      "zh-CN": {
+        "title": "了解未来情境模块",
+        "body": "未来情境模块会补充你在具体场景中的选择方式；当前尚未开放。",
+        "cta_label": "了解未来情境模块",
+        "do_not_overread": "这是免费留存动作，不改变报告结论。",
+        "microcopy": "这是免费留存动作，不改变报告结论。"
+      },
+      "en": {
+        "title": "Future scenario module note",
+        "body": "A future scenario module may add context about choices in specific situations; it is not available yet.",
+        "cta_label": "Future scenario module note",
+        "do_not_overread": "This is a free retention action and does not change the report result.",
+        "microcopy": "This is a free retention action and does not change the report result."
+      },
+      "meta": {
+        "id": "eq.conversion.sjt_planned_note",
+        "asset_type": "conversion_action",
+        "v23_source_id": "eq.conversion.sjt_planned_note",
+        "claim_risk": "low",
+        "risk_notes": "Free retention action only.",
+        "requires_payment": false,
+        "action_type": "sjt_planned"
       }
     }
   }
