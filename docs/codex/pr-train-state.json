@@ -63638,12 +63638,12 @@
     "branch": "codex/pr-eq-v20-01-direct-mapped-assets",
     "title": "PR-EQ-V20-01 Backend EQ v2.3 direct-mapped assets",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "PR-EQ-V19-06"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "17e1e691aff0a49a511c6341b53636531f88c6e4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2486",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -63694,7 +63694,15 @@
           "cmd": "raw EQ_60/EQ_EMOTIONAL_INTELLIGENCE mirror check for imported assets",
           "status": "passed"
         }
-      ]
+      ],
+      "scope_validation": {
+        "status": "passed",
+        "evidence": "Staged files matched PR-EQ-V20-01 allowed paths before commit."
+      },
+      "diff_check": {
+        "status": "passed",
+        "evidence": "git diff --check and git diff --cached --check passed before commit."
+      }
     },
     "events": [
       {
@@ -63706,6 +63714,11 @@
         "at": "2026-06-28T00:23:02.528144Z",
         "status": "local_checks_passed",
         "notes": "Mapped direct v2.3 assets, normalized action seven-day plans, compiled EQ_60, mirrored compiled alias, and passed content lint/content gate."
+      },
+      {
+        "at": "2026-06-28T00:28:34Z",
+        "status": "pr_open",
+        "notes": "Opened GitHub PR #2486 after local checks, staged scope validation, and push."
       }
     ],
     "notes": "PR-EQ-V20-01 imports direct-mapped v2.3 assets only; career overlays, route matrix activation, dynamic depth modules, canonical fixtures, and frontend consumption remain deferred."
