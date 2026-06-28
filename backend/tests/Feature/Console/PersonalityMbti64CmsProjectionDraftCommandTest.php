@@ -581,6 +581,54 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_next_batch_six_v2_dry_run_accepts_competitor_gap_artifact_and_approved_queue_without_writes(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->nextBatchSixV2Package();
+        $qa = $this->nextBatchSixV2Qa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 6, 0);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--next-batch-6' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame(6, $payload['row_count']);
+        $this->assertSame(6, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(6, $payload['would_create_revision_count']);
+        $this->assertSame('next_batch_6', $payload['subset']['mode']);
+        $this->assertTrue($payload['approval_queue']['ready_for_write']);
+        $this->assertSame(6, $payload['approval_queue']['approved_count']);
+        $this->assertSame(0, $payload['approval_queue']['qa_not_pass_count']);
+
+        $firstPayload = $payload['rows'][0]['snapshot_preview']['mbti64_agent_projection_draft_v1'];
+        $this->assertSame('MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01', $firstPayload['source']['artifact']);
+        $this->assertSame('PASS_READY_FOR_EDITORIAL_REVIEW_AND_APPROVAL_QUEUE_REPAIR', $firstPayload['source']['qa_final_decision']);
+        $this->assertNotSame('', $firstPayload['first_class_draft_fields']['seo']['title']);
+        $this->assertNotSame('', $firstPayload['first_class_draft_fields']['seo']['description']);
+        $this->assertNotSame('', $firstPayload['first_class_draft_fields']['seo']['h1']);
+        $this->assertNotSame('', $firstPayload['first_class_draft_fields']['content']['quick_answer']);
+        $this->assertCount(9, $firstPayload['first_class_draft_fields']['faq']);
+        $this->assertNotEmpty($firstPayload['first_class_draft_fields']['internal_links']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     public function test_next_batch_six_handoff_artifact_is_rejected_without_explicit_subset_flag(): void
     {
         $this->seedAllTargets();
@@ -698,6 +746,50 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
 
         foreach (PersonalityProfileVariantRevision::query()->get() as $revision) {
             $this->assertProjectionSnapshot($revision->snapshot_json, 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-01', 'PASS_READY_FOR_APPROVAL_REVIEW');
+        }
+    }
+
+    public function test_next_batch_six_v2_write_creates_only_approved_variant_draft_revisions(): void
+    {
+        $targets = $this->seedAllTargets();
+        $package = $this->nextBatchSixV2Package();
+        $qa = $this->nextBatchSixV2Qa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 6, 0);
+        $profileBefore = $this->profileLiveState($targets['zh-CN|INTP']);
+        $variantBefore = $this->variantLiveState($targets['zh-CN|INTP-A']);
+        $surfaceCountsBefore = $this->liveSurfaceCounts();
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--next-batch-6'] = true;
+        $options['--operator-approved'] = 'PERSONALITY-AGENT-CMS-DRAFT-NEXT-BATCH-6-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['write']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertSame(6, $payload['row_count']);
+        $this->assertSame(6, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(6, $payload['created_revision_count']);
+        $this->assertSame('next_batch_6', $payload['subset']['mode']);
+        $this->assertTrue($payload['approval_queue']['ready_for_write']);
+        $this->assertSame(6, $payload['approval_queue']['approved_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(6, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame($profileBefore, $this->profileLiveState($targets['zh-CN|INTP']));
+        $this->assertSame($variantBefore, $this->variantLiveState($targets['zh-CN|INTP-A']));
+        $this->assertSame($surfaceCountsBefore, $this->liveSurfaceCounts());
+
+        foreach (PersonalityProfileVariantRevision::query()->get() as $revision) {
+            $this->assertProjectionSnapshot(
+                $revision->snapshot_json,
+                'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01',
+                'PASS_READY_FOR_EDITORIAL_REVIEW_AND_APPROVAL_QUEUE_REPAIR',
+                9
+            );
         }
     }
 
@@ -1423,6 +1515,7 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         array $snapshot,
         string $expectedArtifact = 'MBTI64-PUBLIC-PROFILE-AGENT-EXPANSION-88-01',
         string $expectedQaDecision = 'PASS_READY_FOR_CMS_DRAFT',
+        int $expectedFaqCount = 5,
     ): void {
         $this->assertArrayHasKey('mbti64_agent_projection_draft_v1', $snapshot);
         $payload = $snapshot['mbti64_agent_projection_draft_v1'];
@@ -1432,7 +1525,7 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertNotSame('', $payload['first_class_draft_fields']['seo']['description']);
         $this->assertNotSame('', $payload['first_class_draft_fields']['seo']['h1']);
         $this->assertNotSame('', $payload['first_class_draft_fields']['content']['quick_answer']);
-        $this->assertCount(5, $payload['first_class_draft_fields']['faq']);
+        $this->assertCount($expectedFaqCount, $payload['first_class_draft_fields']['faq']);
         $this->assertNotEmpty($payload['first_class_draft_fields']['internal_links']);
         $this->assertFalse((bool) $payload['safety_holds']['publish_attempted']);
         $this->assertFalse((bool) $payload['safety_holds']['index_attempted']);
@@ -1597,6 +1690,132 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
             'warnings' => [],
             'final_decision' => 'PASS_READY_FOR_APPROVAL_REVIEW',
             'recommended_next_task' => 'PERSONALITY-AGENT-APPROVAL-QUEUE-NEXT-BATCH-6-WRITE-01',
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function nextBatchSixV2Package(): array
+    {
+        $recommendations = [];
+        foreach (self::NEXT_BATCH_6_URLS as $url) {
+            $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
+            $recommendation = $this->recommendation($path);
+            $locale = str_starts_with($path, '/zh/') ? 'zh' : 'en';
+            $typeCode = strtoupper(basename($path));
+            $recommended = $recommendation['recommendations'];
+            $recommendation['recommendation_id'] = 'mbti64-next-batch-6-competitor-gap:'.$path.':v2';
+            $recommendation['locale'] = $locale;
+            $recommendation['type_code'] = $typeCode;
+            $isQueryBacked = str_contains($path, '/zh/personality/intp-a')
+                || str_contains($path, '/zh/personality/esfp-a')
+                || str_contains($path, '/en/personality/enfj-a');
+            $recommendation['evidence_class'] = $isQueryBacked ? 'query_backed' : 'bilingual_paired_counterpart';
+            $recommendation['competitor_gap_basis'] = ['fixture competitor gap'];
+            $recommendation['recommendations'] = [
+                'title' => (string) ($recommended['title']['recommended'] ?? ''),
+                'description' => (string) ($recommended['description']['recommended'] ?? ''),
+                'h1' => (string) ($recommended['h1']['recommended'] ?? ''),
+                'quick_answer' => (string) ($recommended['quick_answer']['recommended'] ?? ''),
+                'sections' => array_map(
+                    static fn (int $index): array => [
+                        'key' => 'section_'.$index,
+                        'title' => 'Fixture section '.$index,
+                        'body' => 'Fixture expanded section body '.$index.'.',
+                    ],
+                    range(1, 8)
+                ),
+                'faq' => array_map(
+                    static fn (int $index): array => [
+                        'question' => 'Fixture expanded question '.$index.'?',
+                        'answer' => 'Fixture expanded answer '.$index.' for safe content expansion.',
+                    ],
+                    range(1, 9)
+                ),
+                'internal_links' => (array) ($recommended['internal_links'] ?? []),
+                'bilingual_parity_notes' => ['paired counterpart fixture'],
+                'claim_boundary_notes' => ['no official MBTI affiliation fixture'],
+            ];
+            $recommendations[] = $recommendation;
+        }
+
+        return [
+            'artifact' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01',
+            'generated_at' => '2026-06-27T00:00:00Z',
+            'status' => 'pass',
+            'target_count' => 6,
+            'recommendations' => $recommendations,
+            'final_decision' => 'PASS_READY_FOR_EDITORIAL_REVIEW_AND_APPROVAL_QUEUE_REPAIR',
+            'safety_boundary' => [
+                'cms_write_attempted' => false,
+                'publish_attempted' => false,
+                'search_release_attempted' => false,
+            ],
+            'recommended_next_task' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-QA-01',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $package
+     * @return array<string,mixed>
+     */
+    private function nextBatchSixV2Qa(?array $package = null): array
+    {
+        $package ??= $this->nextBatchSixV2Package();
+        $pageResults = [];
+        foreach ((array) ($package['recommendations'] ?? []) as $recommendation) {
+            if (! is_array($recommendation)) {
+                continue;
+            }
+            $targetUrl = (string) ($recommendation['target_url'] ?? '');
+            $path = (string) (parse_url($targetUrl, PHP_URL_PATH) ?: '');
+            $pageResults[] = [
+                'target_url' => $targetUrl,
+                'path' => $path,
+                'locale' => str_starts_with($path, '/zh/') ? 'zh' : 'en',
+                'type_code' => strtoupper(basename($path)),
+                'section_count' => 8,
+                'faq_count' => 9,
+                'private_route_hits' => [],
+                'qa_decision' => 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
+                'blocked_reason' => null,
+                'gates' => [
+                    'schema_shape' => 'pass',
+                    'at_difference_table' => 'pass',
+                    'cognitive_function_mechanism' => 'pass',
+                    'work_relationship_communication' => 'pass',
+                    'safe_use_boundary' => 'pass',
+                    'trademark_claim_boundary' => 'pass',
+                    'deterministic_claim_boundary' => 'pass',
+                    'private_route_boundary' => 'pass',
+                    'bilingual_parity' => 'pass',
+                    'duplicate_template_risk' => 'pass_with_monitoring',
+                ],
+            ];
+        }
+
+        return [
+            'artifact' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-QA-01',
+            'generated_at' => '2026-06-27T00:00:00Z',
+            'input_artifact' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01',
+            'summary' => [
+                'target_count' => 6,
+                'pass_count' => 6,
+                'no_go_count' => 0,
+                'section_count_min' => 8,
+                'section_count_max' => 8,
+                'faq_count_min' => 9,
+                'faq_count_max' => 9,
+            ],
+            'page_results' => $pageResults,
+            'final_decision' => 'PASS_READY_FOR_EDITORIAL_REVIEW_AND_APPROVAL_QUEUE_REPAIR',
+            'safety_boundary' => [
+                'cms_write_attempted' => false,
+                'publish_attempted' => false,
+                'search_release_attempted' => false,
+            ],
+            'recommended_next_task' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-APPROVAL-QUEUE-WRITE-01',
         ];
     }
 
@@ -1832,7 +2051,7 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
                 'page_type' => str_contains($path, '-a-vs-') ? 'personality_profile_comparison' : 'personality_profile_variant',
                 'recommendation_id' => (string) ($recommendation['recommendation_id'] ?? ''),
                 'recommendation_sha256' => hash('sha256', $this->jsonString($recommendation)),
-                'qa_decision' => (string) ($qaResult['decision'] ?? 'PASS_READY_FOR_CMS_DRAFT'),
+                'qa_decision' => (string) ($qaResult['decision'] ?? ($qaResult['qa_decision'] ?? 'PASS_READY_FOR_CMS_DRAFT')),
                 'approval_state' => 'approved',
                 'approved_at' => now(),
                 'rejected_at' => null,
