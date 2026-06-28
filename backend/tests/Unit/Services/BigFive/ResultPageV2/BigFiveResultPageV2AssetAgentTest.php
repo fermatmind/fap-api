@@ -1470,6 +1470,101 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_big5_content_asset_benchmark_rubric_is_non_runtime_and_source_bounded(): void
+    {
+        $rubricDir = base_path('content_assets/big5/result_page_v2/qa/content_asset_benchmark_rubric/v0_1');
+
+        foreach ([
+            'README.md',
+            'SHA256SUMS',
+            'big5_content_asset_benchmark_rubric_v0_1.json',
+        ] as $filename) {
+            $this->assertFileExists($rubricDir.'/'.$filename);
+        }
+
+        $rubric = $this->readJson($rubricDir.'/big5_content_asset_benchmark_rubric_v0_1.json');
+
+        $this->assertSame('fap.big5.result_page_v2.content_asset_benchmark_rubric.v0_1', $rubric['schema'] ?? null);
+        $this->assertSame('pass', $rubric['status'] ?? null);
+        $this->assertSame('benchmark_rubric_only', $rubric['mode'] ?? null);
+        $this->assertSame('not_runtime', $rubric['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($rubric['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($rubric['ready_for_pilot'] ?? true));
+        $this->assertFalse((bool) ($rubric['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($rubric['ready_for_production'] ?? true));
+        $this->assertFalse((bool) data_get($rubric, 'scope.candidate_generation_performed', true));
+        $this->assertFalse((bool) data_get($rubric, 'scope.staging_import_performed', true));
+        $this->assertFalse((bool) data_get($rubric, 'scope.final_result_contract_generated', true));
+        $this->assertFalse((bool) data_get($rubric, 'scope.frontend_copy_added', true));
+        $this->assertFalse((bool) data_get($rubric, 'scope.cms_or_search_changed', true));
+        $this->assertFalse((bool) data_get($rubric, 'scope.runtime_or_production_gate_changed', true));
+
+        $sourceLabels = collect((array) ($rubric['reference_sources'] ?? []))->pluck('label', 'source_id');
+        $this->assertSame('structure_reference_only', $sourceLabels->get('source_123test_big_five_test'));
+        $this->assertSame('structure_reference_only', $sourceLabels->get('source_truity_big_five_test'));
+        $this->assertSame('public_domain_source', $sourceLabels->get('source_ipip_open_psychometrics_big_five'));
+        foreach ((array) ($rubric['reference_sources'] ?? []) as $source) {
+            $this->assertNotSame([], (array) ($source['forbidden_use'] ?? []));
+            if (($source['label'] ?? null) === 'structure_reference_only') {
+                $this->assertContains('copy_text', (array) ($source['forbidden_use'] ?? []));
+            }
+        }
+
+        $this->assertContains('plain_language_explanation', (array) data_get($rubric, 'content_asset_rubric.commercial_depth_components', []));
+        $this->assertContains('FAQ_ready_atomic_claims', (array) data_get($rubric, 'content_asset_rubric.seo_geo_components', []));
+        $this->assertContains('non_diagnostic', (array) data_get($rubric, 'content_asset_rubric.safety_requirements', []));
+        $this->assertSame(8, count((array) ($rubric['module_rubric'] ?? [])));
+        $this->assertSame([
+            'BIG5-CONTENT-ASSET-BENCHMARK-RUBRIC-01',
+            'BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01',
+            'BIG5-FACET-CONTENT-THICKENING-01',
+            'BIG5-COUPLING-CONTENT-THICKENING-01',
+            'BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01',
+            'BIG5-SCENARIO-ACTION-CONTENT-THICKENING-01',
+            'BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01',
+            'BIG5-NORM-LOW-QUALITY-EDGE-STATE-CONTENT-01',
+        ], (array) ($rubric['train_sequence'] ?? []));
+
+        foreach ([
+            'candidate_artifacts_required',
+            'human_review_manifest_required',
+            'staging_artifact_required',
+            'qa_summary_required',
+            'repair_log_required',
+            'rendered_hygiene_scan_required',
+            'all_runtime_flags_false',
+            'production_use_allowed_false',
+            'no_external_copy_evidence_required',
+        ] as $acceptanceKey) {
+            $this->assertTrue((bool) data_get($rubric, 'acceptance_for_future_prs.'.$acceptanceKey), $acceptanceKey);
+        }
+
+        $allArtifacts = implode("\n", array_map(
+            static fn (string $path): string => (string) file_get_contents($path),
+            glob($rubricDir.'/*') ?: []
+        ));
+
+        foreach ([
+            'private_url',
+            'attempt_id',
+            'raw_score',
+            'percentile',
+            'fixed_type',
+            'user_confirmed_type',
+            'type_code',
+            'big5:',
+            'band:',
+            'payload',
+            'registry',
+            'PR3B',
+            'AttemptReadController',
+            'Big Five Report Engine',
+            '[object Object]',
+        ] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $allArtifacts, $forbiddenToken);
+        }
+    }
+
     public function test_strict_mode_rejects_public_payload_and_shareable_score_leaks(): void
     {
         $root = $this->tempDir('big5-v2-agent-leak');

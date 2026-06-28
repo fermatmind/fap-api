@@ -29595,3 +29595,304 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+
+  - id: BIG5-CONTENT-ASSET-BENCHMARK-RUBRIC-01
+    repo: fap-api
+    branch: codex/big5-content-asset-benchmark-rubric-01
+    title: "BIG5-CONTENT-ASSET-BENCHMARK-RUBRIC-01: Add Big Five content asset benchmark rubric"
+    train_scope: big5_result_page_content_asset_thickening
+    status: user_authorized
+    scope:
+      - Add a backend-only benchmark rubric for Big Five result-page content asset thickening.
+      - Define structure, depth, safety, SEO/GEO readability, rendered hygiene, and commercial-report quality criteria using 123test and Truity as structure references only.
+      - Keep this PR as standards and QA artifact only; do not import, generate, or stage content candidates.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/qa/content_asset_benchmark_rubric/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Copy 123test, Truity, BFI-2, or other proprietary wording, test items, report text, or layouts verbatim.
+      - Generate final frontend-facing big5_result_page_v2 payloads.
+      - Write CMS, trigger SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, search submission, publish, staging deploy, production import, rollout, or production deploy.
+      - Change runtime gates, production gates, scoring, questions, norms, report access, payment, or PDF delivery behavior.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - find backend/content_assets/big5/result_page_v2/qa/content_asset_benchmark_rubric -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - cd backend/content_assets/big5/result_page_v2/qa/content_asset_benchmark_rubric/v0_1 && shasum -a 256 -c SHA256SUMS
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01
+    repo: fap-api
+    depends_on: [BIG5-CONTENT-ASSET-BENCHMARK-RUBRIC-01]
+    branch: codex/big5-domain-bands-content-thickening-01
+    title: "BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01: Thicken Big Five domain band content assets"
+    train_scope: big5_result_page_content_asset_thickening
+    status: user_authorized
+    scope:
+      - Thicken OCEAN domain band content assets for existing 5-domain band coverage.
+      - Include explanation, strengths, risks, common misreads, action guidance, and boundary language.
+      - Output reviewed backend candidate/staging artifacts only.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/domain_bands_content_thickening/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/domain_bands_content_thickening/**
+      - backend/content_assets/big5/result_page_v2/qa/domain_bands_content_thickening/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, CMS, SEO runtime, scoring, questions, norms, runtime gates, production import, rollout, deploy, or search submission.
+      - Copy external wording or generate final frontend-facing big5_result_page_v2 payloads.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-FACET-CONTENT-THICKENING-01
+    repo: fap-api
+    depends_on: [BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01]
+    branch: codex/big5-facet-content-thickening-01
+    title: "BIG5-FACET-CONTENT-THICKENING-01: Thicken Big Five facet content assets"
+    train_scope: big5_result_page_content_asset_thickening
+    status: user_authorized
+    scope:
+      - Thicken 30 facet content assets across high/low interpretation, facet-domain mismatch, practical examples, misreads, and action guidance.
+      - Keep facet precision bounded and non-deterministic.
+      - Output reviewed backend candidate/staging artifacts only.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/facet_content_thickening/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/facet_content_thickening/**
+      - backend/content_assets/big5/result_page_v2/qa/facet_content_thickening/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, CMS, SEO runtime, scoring, questions, norms, runtime gates, production import, rollout, deploy, or search submission.
+      - Copy external wording or generate final frontend-facing big5_result_page_v2 payloads.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-COUPLING-CONTENT-THICKENING-01
+    repo: fap-api
+    depends_on: [BIG5-FACET-CONTENT-THICKENING-01]
+    branch: codex/big5-coupling-content-thickening-01
+    title: "BIG5-COUPLING-CONTENT-THICKENING-01: Thicken Big Five coupling content assets"
+    train_scope: big5_result_page_content_asset_thickening
+    status: user_authorized
+    scope:
+      - Thicken core and supplemental trait coupling content assets.
+      - Include combination explanation, benefits and costs, conflict resolution, common misread, and scenario bridge.
+      - Output reviewed backend candidate/staging artifacts only.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/coupling_content_thickening/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/coupling_content_thickening/**
+      - backend/content_assets/big5/result_page_v2/qa/coupling_content_thickening/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, CMS, SEO runtime, scoring, questions, norms, runtime gates, production import, rollout, deploy, or search submission.
+      - Copy external wording or generate final frontend-facing big5_result_page_v2 payloads.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01
+    repo: fap-api
+    depends_on: [BIG5-COUPLING-CONTENT-THICKENING-01]
+    branch: codex/big5-canonical-profile-content-thickening-01
+    title: "BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01: Thicken Big Five canonical profile content assets"
+    train_scope: big5_result_page_content_asset_thickening
+    status: user_authorized
+    scope:
+      - Thicken canonical profile assets while keeping labels assistive and non-fixed.
+      - Improve narrative, strengths, risks, application, and reflection prompts.
+      - Output reviewed backend candidate/staging artifacts only.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/canonical_profile_content_thickening/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/canonical_profile_content_thickening/**
+      - backend/content_assets/big5/result_page_v2/qa/canonical_profile_content_thickening/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, CMS, SEO runtime, scoring, questions, norms, runtime gates, production import, rollout, deploy, or search submission.
+      - Copy external wording or generate final frontend-facing big5_result_page_v2 payloads.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-SCENARIO-ACTION-CONTENT-THICKENING-01
+    repo: fap-api
+    depends_on: [BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01]
+    branch: codex/big5-scenario-action-content-thickening-01
+    title: "BIG5-SCENARIO-ACTION-CONTENT-THICKENING-01: Thicken Big Five scenario action content assets"
+    train_scope: big5_result_page_content_asset_thickening
+    status: user_authorized
+    scope:
+      - Thicken scenario/action assets for work, learning, communication, stress, relationship, collaboration, and self-management.
+      - Make guidance practical but non-prescriptive.
+      - Output reviewed backend candidate/staging artifacts only.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/scenario_action_content_thickening/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/scenario_action_content_thickening/**
+      - backend/content_assets/big5/result_page_v2/qa/scenario_action_content_thickening/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, CMS, SEO runtime, scoring, questions, norms, runtime gates, production import, rollout, deploy, or search submission.
+      - Copy external wording or generate final frontend-facing big5_result_page_v2 payloads.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01
+    repo: fap-api
+    depends_on: [BIG5-SCENARIO-ACTION-CONTENT-THICKENING-01]
+    branch: codex/big5-share-pdf-history-compare-safe-content-01
+    title: "BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01: Thicken Big Five safe surface content assets"
+    train_scope: big5_result_page_content_asset_thickening
+    status: user_authorized
+    scope:
+      - Thicken safe content for share, PDF, history, and compare surfaces.
+      - Keep share summary-only and public-safe; keep PDF/history/compare free of private, internal, and score-detail leakage.
+      - Output reviewed backend candidate/staging artifacts only.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/share_pdf_history_compare_safe_content/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/share_pdf_history_compare_safe_content/**
+      - backend/content_assets/big5/result_page_v2/qa/share_pdf_history_compare_safe_content/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, CMS, SEO runtime, scoring, questions, norms, runtime gates, production import, rollout, deploy, or search submission.
+      - Copy external wording or generate final frontend-facing big5_result_page_v2 payloads.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-NORM-LOW-QUALITY-EDGE-STATE-CONTENT-01
+    repo: fap-api
+    depends_on: [BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01]
+    branch: codex/big5-norm-low-quality-edge-state-content-01
+    title: "BIG5-NORM-LOW-QUALITY-EDGE-STATE-CONTENT-01: Thicken Big Five norm and edge-state content assets"
+    train_scope: big5_result_page_content_asset_thickening
+    status: user_authorized
+    scope:
+      - Thicken norm unavailable, low quality, insufficient confidence, and edge-state content assets.
+      - Define show/soften/hide behavior in content terms without pretending certainty.
+      - Output reviewed backend candidate/staging artifacts only.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/norm_low_quality_edge_state_content/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/norm_low_quality_edge_state_content/**
+      - backend/content_assets/big5/result_page_v2/qa/norm_low_quality_edge_state_content/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, CMS, SEO runtime, scoring, questions, norms, runtime gates, production import, rollout, deploy, or search submission.
+      - Copy external wording or generate final frontend-facing big5_result_page_v2 payloads.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
