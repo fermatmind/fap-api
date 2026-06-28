@@ -914,8 +914,33 @@ final class Eq60ContentLintService
 
         $sceneVariantFile = $this->loader->rawPath('report_assets/reality_scene_variants.json', $version);
         $sceneVariants = (array) data_get($docs, 'reality_scene_variants.assets', []);
-        if (count($sceneVariants) < 60) {
-            $errors[] = $this->error($sceneVariantFile, 1, 'reality_scene_variants.assets must contain formulation-aware scene variants.');
+        if (count($sceneVariants) < 180) {
+            $errors[] = $this->error($sceneVariantFile, 1, 'reality_scene_variants.assets must contain the v2.3 formulation-aware scene variant set.');
+        }
+        foreach ($sceneVariants as $assetId => $assetRaw) {
+            $asset = (array) $assetRaw;
+            $assetId = (string) $assetId;
+            if (! str_starts_with($assetId, 'eq.scene.')) {
+                $errors[] = $this->error($sceneVariantFile, 1, $assetId.' must use the eq.scene.* asset id namespace.');
+            }
+            if (! in_array((string) ($asset['claim_risk'] ?? ''), ['low', 'medium', 'high'], true)) {
+                $errors[] = $this->error($sceneVariantFile, 1, $assetId.'.claim_risk must be low, medium, or high.');
+            }
+            $this->lintLocalizedAssetFields($sceneVariantFile, $asset, [
+                'title',
+                'typical_response',
+                'strength',
+                'cost',
+                'better_move',
+                'micro_script',
+                'do_not_overread',
+                'why_this_matters',
+            ], $errors);
+            foreach (['zh-CN', 'en'] as $locale) {
+                if ((array) data_get($asset, $locale.'.evidence_signals', []) === []) {
+                    $errors[] = $this->error($sceneVariantFile, 1, $assetId.'.'.$locale.'.evidence_signals cannot be empty.');
+                }
+            }
         }
         foreach ([
             'eq.scene.feedback.high_empathy_low_recovery.primary',
