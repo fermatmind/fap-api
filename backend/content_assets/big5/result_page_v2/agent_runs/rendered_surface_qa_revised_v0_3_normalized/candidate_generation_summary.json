@@ -1,0 +1,57 @@
+{
+  "candidate_counts": {
+    "content_asset": 24,
+    "selector_asset": 24
+  },
+  "coverage": {
+    "missing_roles": [],
+    "missing_surfaces": [],
+    "role_counts": {
+      "display_expectation": 6,
+      "issue_triage": 6,
+      "privacy_boundary": 6,
+      "summary_scope": 6
+    },
+    "surface_counts": {
+      "compare": 4,
+      "history": 4,
+      "pdf": 4,
+      "print_saved": 4,
+      "result_page": 4,
+      "share": 4
+    }
+  },
+  "leak_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "negative_guarantees": {
+    "cms_write": false,
+    "final_result_payload_generated": false,
+    "frontend_copy_written": false,
+    "production_changed": false,
+    "runtime_changed": false,
+    "seo_or_search_write": false
+  },
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+  "selector_contract_policy": {
+    "content_scope": "rendered_surface_qa",
+    "non_share_surface_registry": "state_scope_registry",
+    "share_surface_registry": "share_safety_registry",
+    "uses_existing_contract_allowlists": true
+  },
+  "source_package_sha256": "5836f9156e05df24791902718f62bdd7644461a59b7c6dc14f01fe44cdd7f2ea",
+  "status": "pass",
+  "task": "rendered_surface_qa_candidate_generation_summary"
+}

@@ -5604,6 +5604,200 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_rendered_surface_qa_revised_v0_3_normalized_candidates_are_reviewed_and_non_runtime(): void
+    {
+        $agentRunDir = base_path('content_assets/big5/result_page_v2/agent_runs/rendered_surface_qa_revised_v0_3_normalized');
+
+        foreach ([
+            'README.md',
+            'SHA256SUMS.txt',
+            'selector_asset_candidates.jsonl',
+            'content_asset_candidates.jsonl',
+            'candidate_generation_summary.json',
+            'normalization_manifest.json',
+            'normalization_validation_summary.json',
+            'review_manifest.json',
+            'repair_log.json',
+            'source_qa_scan.json',
+            'source_review.md',
+        ] as $filename) {
+            $this->assertFileExists($agentRunDir.'/'.$filename);
+        }
+
+        $generation = $this->readJson($agentRunDir.'/candidate_generation_summary.json');
+        $manifest = $this->readJson($agentRunDir.'/normalization_manifest.json');
+        $validation = $this->readJson($agentRunDir.'/normalization_validation_summary.json');
+        $review = $this->readJson($agentRunDir.'/review_manifest.json');
+        $repairLog = $this->readJson($agentRunDir.'/repair_log.json');
+        $sourceQa = $this->readJson($agentRunDir.'/source_qa_scan.json');
+        $selectorRows = $this->readJsonl($agentRunDir.'/selector_asset_candidates.jsonl');
+        $contentRows = $this->readJsonl($agentRunDir.'/content_asset_candidates.jsonl');
+
+        $this->assertSame('pass', $generation['status'] ?? null);
+        $this->assertSame('staging_only', $generation['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($generation['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($generation['ready_for_pilot'] ?? true));
+        $this->assertFalse((bool) ($generation['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($generation['ready_for_production'] ?? true));
+        $this->assertSame(24, data_get($generation, 'candidate_counts.content_asset'));
+        $this->assertSame(24, data_get($generation, 'candidate_counts.selector_asset'));
+        $this->assertSame([
+            'compare' => 4,
+            'history' => 4,
+            'pdf' => 4,
+            'print_saved' => 4,
+            'result_page' => 4,
+            'share' => 4,
+        ], data_get($generation, 'coverage.surface_counts'));
+        $this->assertSame([
+            'display_expectation' => 6,
+            'issue_triage' => 6,
+            'privacy_boundary' => 6,
+            'summary_scope' => 6,
+        ], data_get($generation, 'coverage.role_counts'));
+        $this->assertSame(0, data_get($generation, 'leak_scan.hit_count'));
+        $this->assertSame(0, data_get($generation, 'rendered_hygiene_scan.hit_count'));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.runtime_changed', true));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.production_changed', true));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.frontend_copy_written', true));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.cms_write', true));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.seo_or_search_write', true));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.final_result_payload_generated', true));
+
+        $this->assertSame('content_assets/big5/result_page_v2/agent_runs/rendered_surface_qa_revised_v0_3_normalized', $manifest['candidate_dir'] ?? null);
+        $this->assertSame('staging_only', $manifest['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($manifest['production_use_allowed'] ?? true));
+        $this->assertContains('flatten_text_fields', (array) ($manifest['normalization_steps'] ?? []));
+        $this->assertContains('map_asset_type_to_schema_enum', (array) ($manifest['normalization_steps'] ?? []));
+        $this->assertContains('mapped_selector_contract_fields_to_existing_allowlists', (array) ($manifest['normalization_steps'] ?? []));
+        $this->assertContains('normalized_share_content_reading_mode_to_quick_selector_keeps_share_safe', (array) ($manifest['normalization_steps'] ?? []));
+
+        $this->assertTrue((bool) ($review['human_reviewed'] ?? false));
+        $this->assertSame('codex_rendered_surface_qa_candidate_normalize_01', $review['reviewed_by'] ?? null);
+        $this->assertSame('approved_for_staging', $review['review_status'] ?? null);
+        $this->assertSame(['selector_asset_candidates.jsonl', 'content_asset_candidates.jsonl'], $review['approved_candidate_files'] ?? null);
+        $this->assertFalse((bool) ($review['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($review['ready_for_runtime'] ?? true));
+        $this->assertTrue((bool) ($review['staging_import_deferred'] ?? false));
+
+        $this->assertSame('pass', $validation['status'] ?? null);
+        $this->assertTrue((bool) data_get($validation, 'stage_candidates_dry_run.ok'));
+        $this->assertSame('pass', data_get($validation, 'stage_candidates_dry_run.candidate_validation.status'));
+        $this->assertSame(0, data_get($validation, 'stage_candidates_dry_run.candidate_validation.error_count'));
+        $this->assertSame(0, data_get($validation, 'stage_candidates_dry_run.leak_scan.hit_count'));
+        $this->assertFalse((bool) data_get($validation, 'stage_candidates_dry_run.staging_write_performed', true));
+        $this->assertSame(0, $sourceQa['forbidden_hit_count'] ?? null);
+        $this->assertSame(0, $sourceQa['public_text_forbidden_hit_count'] ?? null);
+        $this->assertSame([], $sourceQa['missing_surfaces'] ?? ['unexpected']);
+        $this->assertFalse((bool) ($repairLog['repair_required'] ?? true));
+
+        $this->assertCount(24, $selectorRows);
+        $this->assertCount(24, $contentRows);
+
+        $contentSurfaceCounts = [];
+        $contentRoleCounts = [];
+        $contentAssetTypes = [];
+        foreach ($contentRows as $row) {
+            $this->assertSame('staging_only', $row['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($row['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_pilot'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_production'] ?? true));
+            $this->assertSame('rendered_surface_qa', $row['scope'] ?? null);
+            $this->assertSame('L10_QA_only', $row['asset_layer'] ?? null);
+            $this->assertSame('safety_reviewed', $row['qa_status'] ?? null);
+            $this->assertSame('codex_rendered_surface_qa_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertGreaterThanOrEqual(180, (int) data_get($row, 'body_quality.body_chars', 0));
+            $this->assertLessThanOrEqual(320, (int) data_get($row, 'body_quality.body_chars', 999));
+            $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
+            $contentSurfaceCounts[$row['surface_key']] = ($contentSurfaceCounts[$row['surface_key']] ?? 0) + 1;
+            $contentRoleCounts[$row['surface_role']] = ($contentRoleCounts[$row['surface_role']] ?? 0) + 1;
+            $contentAssetTypes[$row['surface_key']][] = $row['asset_type'];
+        }
+        ksort($contentSurfaceCounts);
+        ksort($contentRoleCounts);
+        $this->assertSame(['compare' => 4, 'history' => 4, 'pdf' => 4, 'print_saved' => 4, 'result_page' => 4, 'share' => 4], $contentSurfaceCounts);
+        $this->assertSame(['display_expectation' => 6, 'issue_triage' => 6, 'privacy_boundary' => 6, 'summary_scope' => 6], $contentRoleCounts);
+        $this->assertSame(['share_safe'], array_values(array_unique($contentAssetTypes['share'])));
+        $this->assertSame(['history_revisit'], array_values(array_unique($contentAssetTypes['history'])));
+        $this->assertSame(['compare_guidance'], array_values(array_unique($contentAssetTypes['compare'])));
+        $this->assertSame(['pdf_archive'], array_values(array_unique($contentAssetTypes['pdf'])));
+        $this->assertSame(['pdf_archive'], array_values(array_unique($contentAssetTypes['print_saved'])));
+        $this->assertEqualsCanonicalizing(['method_boundary', 'privacy_boundary'], array_values(array_unique($contentAssetTypes['result_page'])));
+
+        foreach ($selectorRows as $row) {
+            $this->assertSame('approved_for_staging', $row['review_status'] ?? null);
+            $this->assertSame('rendered_surface_qa_revised_v0_3_normalized', data_get($row, 'provenance.candidate_stage'));
+            $this->assertFalse((bool) data_get($row, 'replacement_policy.replaces_existing_runtime_asset', true));
+            if (in_array('share', (array) data_get($row, 'trigger.surface_key', []), true)) {
+                $this->assertSame('share_safety_registry', $row['registry_key'] ?? null);
+                $this->assertSame('share_safe_summary_only', $row['scope'] ?? null);
+                $this->assertTrue((bool) ($row['shareable'] ?? false));
+                $this->assertSame('required_for_every_shareable_true_block', $row['shareable_policy'] ?? null);
+                $this->assertSame(['share_safe'], $row['reading_modes'] ?? null);
+            } else {
+                $this->assertSame('state_scope_registry', $row['registry_key'] ?? null);
+                $this->assertSame('standard', $row['scope'] ?? null);
+                $this->assertFalse((bool) ($row['shareable'] ?? true));
+                $this->assertSame('not_shareable', $row['shareable_policy'] ?? null);
+            }
+        }
+
+        $visibleText = implode("\n", array_merge(
+            array_map(
+                static fn (array $row): string => implode("\n", array_filter([
+                    (string) ($row['title_zh'] ?? ''),
+                    (string) ($row['summary_zh'] ?? ''),
+                    (string) ($row['body_zh'] ?? ''),
+                    (string) ($row['short_body_zh'] ?? ''),
+                    (string) ($row['cta_zh'] ?? ''),
+                ])),
+                $contentRows
+            ),
+            array_map(
+                static fn (array $row): string => implode("\n", array_filter([
+                    (string) data_get($row, 'public_payload.title_zh', ''),
+                    (string) data_get($row, 'public_payload.summary_zh', ''),
+                ])),
+                $selectorRows
+            )
+        ));
+
+        foreach ([
+            'private_url',
+            'attempt_id',
+            'raw_score',
+            'raw score',
+            'percentile',
+            'rank',
+            '百分位',
+            '排名',
+            'fixed_type',
+            'user_confirmed_type',
+            'type_code',
+            'big5:',
+            'band:',
+            'payload',
+            'registry',
+            'PR3B',
+            'AttemptReadController',
+            'Big Five Report Engine',
+            '[object Object]',
+            '筛选',
+            '不一定',
+            '失败',
+            '一定',
+            '诊断',
+            '治疗',
+            '招聘筛选',
+            '收入预测',
+            '成功预测',
+            '伴侣匹配',
+        ] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+        }
+    }
+
     public function test_committed_low_quality_revised_v0_3_normalized_candidates_are_reviewed_and_non_runtime(): void
     {
         $artifactRoot = $this->tempDir('big5-low-quality-v0-3-normalized');
