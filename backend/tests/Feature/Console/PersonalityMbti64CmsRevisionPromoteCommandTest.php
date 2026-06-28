@@ -40,6 +40,8 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         'https://fermatmind.com/zh/personality/enfj-a',
     ];
 
+    private const REMAINING_58_EXCLUDED_URLS = self::NEXT_BATCH_6_URLS;
+
     public function test_dry_run_lists_eight_latest_revisions_without_live_writes(): void
     {
         $this->seedTargets();
@@ -410,6 +412,38 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_dry_run_supports_fixed_remaining_fifty_eight_v2_expansion_subset_without_live_writes(): void
+    {
+        $this->seedProjectionTargets();
+        $packagePath = $this->writePackage($this->remainingFiftyEightV2Package());
+        $this->createNextBatchSixDraftRevisions($packagePath);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--remaining-58' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertSame('remaining_58', $payload['contract']['subset']['mode']);
+        $this->assertFalse($payload['contract']['subset']['arbitrary_url_subset_allowed']);
+        $this->assertSame($this->remainingFiftyEightUrls(), $payload['contract']['subset']['allowed_urls']);
+        $this->assertSame(58, $payload['row_count']);
+        $this->assertSame(58, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(58, $payload['would_promote_count']);
+        $this->assertSame($this->remainingFiftyEightUrls(), array_column($payload['rows'], 'url'));
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
     public function test_write_promotes_eighty_eight_agent_projection_revisions_without_index_search_side_effects(): void
     {
         $targets = $this->seedProjectionTargets();
@@ -591,6 +625,43 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             ->first());
     }
 
+    public function test_write_promotes_only_fixed_remaining_fifty_eight_v2_expansion_subset(): void
+    {
+        $targets = $this->seedProjectionTargets();
+        $packagePath = $this->writePackage($this->remainingFiftyEightV2Package());
+        $this->createNextBatchSixDraftRevisions($packagePath);
+        $options = $this->promoteWriteOptions($packagePath);
+        $options['--remaining-58'] = true;
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['write']);
+        $this->assertSame('remaining_58', $payload['contract']['subset']['mode']);
+        $this->assertSame(58, $payload['row_count']);
+        $this->assertSame(58, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(58, $payload['promoted_count']);
+        $this->assertSame(58, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->where('section_key', 'mbti64_comparison_a_vs_t')->count());
+
+        foreach ($this->remainingFiftyEightUrls() as $url) {
+            $key = $this->targetKeyForUrl($url);
+            PersonalityProfileVariantSeoMeta::query()
+                ->where('personality_profile_variant_id', (int) $targets[$key]->id)
+                ->firstOrFail();
+        }
+
+        foreach (self::REMAINING_58_EXCLUDED_URLS as $url) {
+            $key = $this->targetKeyForUrl($url);
+            $this->assertNull(PersonalityProfileVariantSeoMeta::query()
+                ->where('personality_profile_variant_id', (int) $targets[$key]->id)
+                ->first());
+        }
+    }
+
     public function test_visible_query_backed_three_subset_is_idempotent_after_write(): void
     {
         $this->seedProjectionTargets();
@@ -759,6 +830,38 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_remaining_fifty_eight_subset_fails_closed_when_fixed_url_is_missing_or_extra_url_is_present(): void
+    {
+        $this->seedProjectionTargets();
+        $package = $this->remainingFiftyEightV2Package();
+        $package['recommendations'][0]['target_url'] = 'https://fermatmind.com/en/personality/enfj-a';
+        $package['target_count'] = 58;
+
+        $packagePath = $this->writePackage($package);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--remaining-58' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode, Artisan::output());
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('remaining_58_url_set_mismatch', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertContains('remaining_58_subset_incomplete', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
     public function test_agent_projection_subset_modes_are_mutually_exclusive(): void
     {
         $this->seedProjectionTargets();
@@ -771,6 +874,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             '--visible-query-backed-3' => true,
             '--fresh-query-backed-5' => true,
             '--next-batch-6' => true,
+            '--remaining-58' => true,
             '--json' => true,
         ]);
 
@@ -1281,6 +1385,107 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             'warnings' => [],
             'recommended_next_task' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-CMS-DRAFT-WRITE-01',
         ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function remainingFiftyEightV2Package(): array
+    {
+        $recommendations = [];
+        foreach ($this->remainingFiftyEightUrls() as $url) {
+            $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
+            $recommendation = $this->projectionRecommendation($path);
+            $nested = is_array($recommendation['recommendations'] ?? null) ? $recommendation['recommendations'] : [];
+            $recommendation['recommendations'] = [
+                'title' => (string) ($nested['title']['recommended'] ?? ''),
+                'description' => (string) ($nested['description']['recommended'] ?? ''),
+                'h1' => (string) ($nested['h1']['recommended'] ?? ''),
+                'quick_answer' => (string) ($nested['quick_answer']['recommended'] ?? ''),
+                'sections' => array_map(
+                    static fn (int $index): array => [
+                        'h2' => 'Remaining 58 section '.$index.' for '.basename($path),
+                        'body' => 'Expanded remaining-58 evidence-aware copy '.$index.' for '.$path.'.',
+                    ],
+                    range(1, 8)
+                ),
+                'faq' => array_map(
+                    static fn (int $index): array => [
+                        'question' => 'Remaining 58 question '.$index.' for '.basename($path).'?',
+                        'answer' => 'Remaining 58 safe answer '.$index.' for '.$path.'.',
+                    ],
+                    range(1, 9)
+                ),
+                'internal_links' => $nested['internal_links'] ?? [],
+                'differentiation_notes' => ['Remaining-58 competitor-gap differentiation note for '.$path.'.'],
+                'a_t_difference_module' => [
+                    'summary' => 'A/T difference module for '.$path.'.',
+                    'rows' => [
+                        ['dimension' => 'stress response', 'a_side' => 'steadier recovery', 't_side' => 'more self-monitoring'],
+                    ],
+                ],
+                'cognitive_function_mechanism' => 'Mechanism copy for '.$path.'.',
+                'common_misreads' => ['Do not read this profile as a deterministic career or IQ label.'],
+            ];
+            $recommendation['qa_status'] = 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW';
+            $recommendations[] = $recommendation;
+        }
+
+        return [
+            'artifact' => 'MBTI64-REMAINING-58-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01',
+            'generated_at' => '2026-06-28T00:00:00Z',
+            'status' => 'pass',
+            'final_decision' => 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
+            'target_count' => 58,
+            'summary' => [
+                'target_count' => 58,
+                'variant_pages' => 58,
+                'comparison_pages' => 0,
+                'completed_v2_exclusion_count' => 0,
+                'section_count_min' => 8,
+                'section_count_max' => 8,
+                'faq_count_min' => 9,
+                'faq_count_max' => 9,
+            ],
+            'recommendations' => $recommendations,
+            'blockers' => [],
+            'warnings' => [],
+            'recommended_next_task' => 'MBTI64-REMAINING-58-COMPETITOR-GAP-CMS-DRAFT-DRY-RUN-01',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function remainingFiftyEightUrls(): array
+    {
+        $urls = [];
+        foreach (['en', 'zh'] as $prefix) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                foreach (['a', 't'] as $variant) {
+                    $urls[] = 'https://fermatmind.com/'.$prefix.'/personality/'.strtolower($typeCode).'-'.$variant;
+                }
+            }
+        }
+
+        $remaining = array_values(array_filter(
+            $urls,
+            static fn (string $url): bool => ! in_array($url, self::REMAINING_58_EXCLUDED_URLS, true)
+        ));
+        sort($remaining);
+
+        return $remaining;
+    }
+
+    private function targetKeyForUrl(string $url): string
+    {
+        $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
+        $this->assertMatchesRegularExpression('#^/(?<prefix>en|zh)/personality/(?<type>[a-z]{4})-(?<variant>a|t)$#i', $path);
+        preg_match('#^/(?<prefix>en|zh)/personality/(?<type>[a-z]{4})-(?<variant>a|t)$#i', $path, $matches);
+        $locale = $matches['prefix'] === 'zh' ? 'zh-CN' : 'en';
+        $runtimeTypeCode = strtoupper((string) $matches['type']).'-'.strtoupper((string) $matches['variant']);
+
+        return $locale.'|'.$runtimeTypeCode;
     }
 
     /**

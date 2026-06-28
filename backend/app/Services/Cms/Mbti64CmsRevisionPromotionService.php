@@ -30,6 +30,8 @@ final class Mbti64CmsRevisionPromotionService
 
     private const NEXT_BATCH_6_V2_PACKAGE_ARTIFACT = 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01';
 
+    private const REMAINING_58_V2_PACKAGE_ARTIFACT = 'MBTI64-REMAINING-58-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01';
+
     private const VISIBLE_QUERY_BACKED_3_URLS = [
         'https://fermatmind.com/en/personality/enfj-a',
         'https://fermatmind.com/zh/personality/intp-a',
@@ -208,7 +210,11 @@ final class Mbti64CmsRevisionPromotionService
         $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
         $freshQueryBacked5 = (bool) ($options['fresh_query_backed_5'] ?? false);
         $nextBatch6 = (bool) ($options['next_batch_6'] ?? false);
-        $subsetModeCount = ($visibleQueryBacked3 ? 1 : 0) + ($freshQueryBacked5 ? 1 : 0) + ($nextBatch6 ? 1 : 0);
+        $remaining58 = (bool) ($options['remaining_58'] ?? false);
+        $subsetModeCount = ($visibleQueryBacked3 ? 1 : 0)
+            + ($freshQueryBacked5 ? 1 : 0)
+            + ($nextBatch6 ? 1 : 0)
+            + ($remaining58 ? 1 : 0);
         if ($subsetModeCount > 1) {
             $errors[] = [
                 'field' => 'options',
@@ -221,6 +227,7 @@ final class Mbti64CmsRevisionPromotionService
             $visibleQueryBacked3 => self::VISIBLE_QUERY_BACKED_3_URLS,
             $freshQueryBacked5 => self::FRESH_QUERY_BACKED_5_URLS,
             $nextBatch6 => self::NEXT_BATCH_6_URLS,
+            $remaining58 => $this->remaining58Urls(),
             default => [],
         };
         $contractRecommendations = $subsetUrls !== []
@@ -229,6 +236,8 @@ final class Mbti64CmsRevisionPromotionService
 
         if ($nextBatch6) {
             $this->validateNextBatch6ContractPackage($package, $recommendations, $errors);
+        } elseif ($remaining58) {
+            $this->validateRemaining58ContractPackage($package, $recommendations, $errors);
         } else {
             if ((string) ($package['artifact'] ?? '') !== self::AGENT_PROJECTION_ARTIFACT) {
                 $errors[] = ['field' => 'artifact', 'code' => 'unsupported_package_artifact', 'message' => 'Unexpected MBTI64 agent projection artifact.'];
@@ -265,6 +274,13 @@ final class Mbti64CmsRevisionPromotionService
                 'field' => 'recommendations',
                 'code' => 'next_batch_6_subset_incomplete',
                 'message' => 'Expected exactly the 6 approved next-batch MBTI64 recommendations.',
+            ];
+        }
+        if ($remaining58 && count($contractRecommendations) !== 58) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'remaining_58_subset_incomplete',
+                'message' => 'Expected exactly the 58 approved remaining competitor-gap MBTI64 variant recommendations.',
             ];
         }
 
@@ -307,6 +323,7 @@ final class Mbti64CmsRevisionPromotionService
                     $visibleQueryBacked3 => 'visible_query_backed_3',
                     $freshQueryBacked5 => 'fresh_query_backed_5',
                     $nextBatch6 => 'next_batch_6',
+                    $remaining58 => 'remaining_58',
                     default => 'full_agent_projection_88',
                 },
                 'enabled' => $subsetUrls !== [],
@@ -403,6 +420,92 @@ final class Mbti64CmsRevisionPromotionService
                 'message' => 'Next-batch-6 package must contain exactly the fixed approved URL set.',
             ];
         }
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $recommendations
+     * @param  list<array<string,string>>  $errors
+     */
+    private function validateRemaining58ContractPackage(array $package, array $recommendations, array &$errors): void
+    {
+        $summary = is_array($package['summary'] ?? null) ? $package['summary'] : [];
+        $actualUrls = array_map(
+            static fn (array $recommendation): string => (string) ($recommendation['target_url'] ?? ''),
+            $recommendations
+        );
+        $expectedUrls = $this->remaining58Urls();
+        sort($actualUrls);
+        sort($expectedUrls);
+
+        if ((string) ($package['artifact'] ?? '') !== self::REMAINING_58_V2_PACKAGE_ARTIFACT) {
+            $errors[] = [
+                'field' => 'artifact',
+                'code' => 'unsupported_remaining_58_package_artifact',
+                'message' => 'Unexpected MBTI64 remaining-58 competitor-gap artifact.',
+            ];
+        }
+        if ((string) ($package['status'] ?? '') !== 'pass') {
+            $errors[] = [
+                'field' => 'status',
+                'code' => 'remaining_58_package_status_not_pass',
+                'message' => 'Remaining-58 package must have pass status before promotion planning.',
+            ];
+        }
+        if ((string) ($package['final_decision'] ?? '') !== 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW') {
+            $errors[] = [
+                'field' => 'final_decision',
+                'code' => 'remaining_58_package_final_decision_not_ready',
+                'message' => 'Remaining-58 package must be ready for content expansion review before promotion planning.',
+            ];
+        }
+        if (count($recommendations) !== 58 || (int) ($package['target_count'] ?? -1) !== 58) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'unexpected_remaining_58_recommendation_count',
+                'message' => 'Expected exactly 58 remaining MBTI64 recommendations.',
+            ];
+        }
+
+        $variantPages = (int) ($summary['variant_pages'] ?? -1);
+        $comparisonPages = (int) ($summary['comparison_pages'] ?? -1);
+        if ($variantPages !== 58 || $comparisonPages !== 0) {
+            $errors[] = [
+                'field' => 'summary',
+                'code' => 'unexpected_remaining_58_page_type_counts',
+                'message' => 'Expected 58 variant and 0 comparison recommendations for remaining-58.',
+            ];
+        }
+        if ($actualUrls !== $expectedUrls) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'remaining_58_url_set_mismatch',
+                'message' => 'Remaining-58 package must contain exactly the fixed approved URL set.',
+            ];
+        }
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function remaining58Urls(): array
+    {
+        $urls = [];
+        foreach (['en', 'zh'] as $prefix) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                foreach (['a', 't'] as $variant) {
+                    $urls[] = 'https://fermatmind.com/'.$prefix.'/personality/'.strtolower($typeCode).'-'.$variant;
+                }
+            }
+        }
+
+        $excluded = self::NEXT_BATCH_6_URLS;
+        $remaining = array_values(array_filter(
+            $urls,
+            static fn (string $url): bool => ! in_array($url, $excluded, true)
+        ));
+        sort($remaining);
+
+        return $remaining;
     }
 
     /**
