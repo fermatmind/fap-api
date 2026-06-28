@@ -113,6 +113,7 @@ final class Mbti64CmsProjectionDraftWriter
         $warnings = array_values(array_filter((array) ($qa['warnings'] ?? []), static fn (mixed $warning): bool => is_string($warning)));
         $qaResultsByUrl = $this->qaResultsByUrl($qa);
         $recommendations = $this->recommendationsForOptions($package, $options, $write, $errors);
+        $rewriteExistingV2Modules = $this->remaining58V2ModuleRewriteRequested($options);
 
         $preparedRows = [];
         foreach ($recommendations as $position => $recommendation) {
@@ -151,6 +152,8 @@ final class Mbti64CmsProjectionDraftWriter
             $existingRevision = is_int($targetId)
                 ? $this->existingRevision($pageType, $targetField, $targetId, $sourceSha256)
                 : null;
+            $existingRevisionHasV2Modules = $existingRevision !== null
+                && $this->revisionHasFirstClassV2Modules($existingRevision);
             $nextRevisionNo = is_int($targetId)
                 ? $this->nextRevisionNo($pageType, $targetField, $targetId)
                 : null;
@@ -174,6 +177,8 @@ final class Mbti64CmsProjectionDraftWriter
                 'recommendation_sha256' => $recommendationSha256,
                 'existing_revision_id' => $existingRevision?->id !== null ? (int) $existingRevision->id : null,
                 'existing_revision_no' => $existingRevision?->revision_no !== null ? (int) $existingRevision->revision_no : null,
+                'existing_revision_has_v2_modules' => $existingRevisionHasV2Modules,
+                'rewrite_existing_v2_modules' => $rewriteExistingV2Modules,
                 'next_revision_no' => $nextRevisionNo,
                 'write_mode' => $write ? 'write_draft_revision' : 'dry_run',
                 'action' => 'pending',
@@ -233,9 +238,12 @@ final class Mbti64CmsProjectionDraftWriter
 
         $created = 0;
         $skippedExisting = 0;
+        $rewrittenExisting = 0;
+        $wouldRewriteExisting = 0;
         if ($write) {
             foreach ($preparedRows as &$preparedRow) {
-                if (($preparedRow['existing_revision_id'] ?? null) !== null) {
+                $hasExistingRevision = ($preparedRow['existing_revision_id'] ?? null) !== null;
+                if ($hasExistingRevision && (! $rewriteExistingV2Modules || (bool) ($preparedRow['existing_revision_has_v2_modules'] ?? false))) {
                     $preparedRow['action'] = 'skipped_existing';
                     $skippedExisting++;
 
@@ -243,22 +251,29 @@ final class Mbti64CmsProjectionDraftWriter
                 }
 
                 $revision = $this->createRevision($preparedRow);
-                $preparedRow['action'] = 'created';
+                $preparedRow['action'] = $hasExistingRevision ? 'rewritten_existing' : 'created';
                 $preparedRow['created_revision_id'] = (int) $revision->id;
                 $preparedRow['created_revision_no'] = (int) $revision->revision_no;
                 $created++;
+                if ($hasExistingRevision) {
+                    $rewrittenExisting++;
+                }
             }
             unset($preparedRow);
         } else {
             foreach ($preparedRows as &$preparedRow) {
-                if (($preparedRow['existing_revision_id'] ?? null) !== null) {
+                $hasExistingRevision = ($preparedRow['existing_revision_id'] ?? null) !== null;
+                if ($hasExistingRevision && (! $rewriteExistingV2Modules || (bool) ($preparedRow['existing_revision_has_v2_modules'] ?? false))) {
                     $preparedRow['action'] = 'would_skip_existing';
                     $skippedExisting++;
 
                     continue;
                 }
 
-                $preparedRow['action'] = 'would_create';
+                $preparedRow['action'] = $hasExistingRevision ? 'would_rewrite_existing' : 'would_create';
+                if ($hasExistingRevision) {
+                    $wouldRewriteExisting++;
+                }
             }
             unset($preparedRow);
         }
@@ -271,6 +286,8 @@ final class Mbti64CmsProjectionDraftWriter
             'comparison_row_count' => $this->countRows($preparedRows, 'comparison'),
             'created_revision_count' => $created,
             'skipped_existing_count' => $skippedExisting,
+            'rewritten_existing_count' => $rewrittenExisting,
+            'would_rewrite_existing_count' => $write ? 0 : $wouldRewriteExisting,
             'would_create_revision_count' => $write ? 0 : count($preparedRows) - $skippedExisting,
             'writes_committed' => $write && $created > 0,
             'subset' => $this->subsetSummary($options, $preparedRows),
@@ -567,7 +584,18 @@ final class Mbti64CmsProjectionDraftWriter
         $freshQueryBacked5 = (bool) ($options['fresh_query_backed_5'] ?? false);
         $nextBatch6 = $this->nextBatch6Requested($options);
         $remaining58 = $this->remaining58Requested($options);
+        $rewriteExistingV2Modules = $this->remaining58V2ModuleRewriteRequested($options);
         $agentBatchRequested = $this->agentBatchRequested($options);
+
+        if ($rewriteExistingV2Modules && ! $remaining58) {
+            $errors[] = [
+                'field' => 'options.rewrite_existing_v2_modules',
+                'code' => 'rewrite_existing_v2_modules_requires_remaining_58',
+                'message' => '--rewrite-existing-v2-modules is only allowed with --remaining-58.',
+            ];
+
+            return [];
+        }
 
         if (($visibleQueryBacked3 ? 1 : 0)
             + ($freshQueryBacked3 ? 1 : 0)
@@ -667,6 +695,14 @@ final class Mbti64CmsProjectionDraftWriter
     private function remaining58Requested(array $options): bool
     {
         return (bool) ($options['remaining_58'] ?? false);
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     */
+    private function remaining58V2ModuleRewriteRequested(array $options): bool
+    {
+        return (bool) ($options['rewrite_existing_v2_modules'] ?? false);
     }
 
     /**
@@ -873,6 +909,25 @@ final class Mbti64CmsProjectionDraftWriter
         }
 
         return null;
+    }
+
+    private function revisionHasFirstClassV2Modules(
+        PersonalityProfileRevision|PersonalityProfileVariantRevision $revision,
+    ): bool {
+        $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
+        $content = $snapshot[self::SNAPSHOT_KEY]['first_class_draft_fields']['content'] ?? [];
+        if (! is_array($content)) {
+            return false;
+        }
+
+        foreach ($this->expectedFirstClassV2SectionKeys() as $key) {
+            $section = $content[$key] ?? null;
+            if (! is_array($section) || trim((string) ($section['body'] ?? '')) === '') {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function nextRevisionNo(string $pageType, string $targetField, int $targetId): int
@@ -1226,6 +1281,23 @@ final class Mbti64CmsProjectionDraftWriter
     }
 
     /**
+     * @return list<string>
+     */
+    private function expectedFirstClassV2SectionKeys(): array
+    {
+        return [
+            'meaning',
+            'a_t_difference',
+            'core_traits',
+            'careers_work_style',
+            'relationships_communication',
+            'strengths_blind_spots',
+            'common_misreads',
+            'similar_types',
+        ];
+    }
+
+    /**
      * @param  array<string,mixed>  $section
      */
     private function sectionTitle(array $section): ?string
@@ -1332,6 +1404,7 @@ final class Mbti64CmsProjectionDraftWriter
             'sitemap_llms_release_attempted' => false,
             'search_release_attempted' => false,
             'writes_committed' => false,
+            'rewrite_existing_v2_modules' => $this->remaining58V2ModuleRewriteRequested($options),
             'subset' => $this->subsetSummary($options),
         ];
     }
@@ -1411,6 +1484,7 @@ final class Mbti64CmsProjectionDraftWriter
                 'dry_run_only' => false,
                 'write_allowed_with_strict_approval' => true,
                 'approval_queue_required' => true,
+                'rewrite_existing_v2_modules' => $this->remaining58V2ModuleRewriteRequested($options),
                 'allowed_urls' => $this->remaining58Urls(),
                 'selected_urls' => $selectedUrls,
                 'arbitrary_url_subset_allowed' => false,
