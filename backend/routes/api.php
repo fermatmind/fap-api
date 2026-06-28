@@ -298,6 +298,10 @@ Route::prefix('v0.3')->middleware([
                 ->middleware('uuid:id')
                 ->defaults('public_realm', true)
                 ->name('api.v0_3.attempts.report_pdf');
+            Route::get('/attempts/{id}/result-page.pdf', [AttemptReadController::class, 'resultPagePdf'])
+                ->middleware('uuid:id')
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.result_page_pdf');
             Route::get('/attempts/{id}/enneagram/observation', [AttemptReadController::class, 'enneagramObservation'])
                 ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
                 ->defaults('public_realm', true)
