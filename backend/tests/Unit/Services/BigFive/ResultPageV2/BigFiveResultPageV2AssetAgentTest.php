@@ -5183,6 +5183,130 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_low_quality_revised_v0_3_rendered_preview_qa_is_redacted_and_non_runtime(): void
+    {
+        $qaDir = base_path('content_assets/big5/result_page_v2/qa/low_quality_revised_v0_3_rendered_preview/v0_1');
+
+        foreach ([
+            'README.md',
+            'SHA256SUMS',
+            'big5_low_quality_revised_v0_3_rendered_preview_qa_v0_1.json',
+        ] as $filename) {
+            $this->assertFileExists($qaDir.'/'.$filename);
+        }
+
+        $report = $this->readJson($qaDir.'/big5_low_quality_revised_v0_3_rendered_preview_qa_v0_1.json');
+
+        $this->assertSame('fap.big5.result_page_v2.low_quality.revised_v0_3.rendered_preview_qa.v0_1', $report['schema'] ?? null);
+        $this->assertSame('pass', $report['status'] ?? null);
+        $this->assertSame('backend_fixture_rendered_preview_qa', $report['mode'] ?? null);
+        $this->assertSame('not_runtime', $report['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_pilot'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_production'] ?? true));
+        $this->assertSame(
+            'content_assets/big5/result_page_v2/agent_runs/low_quality_revised_v0_3_normalized',
+            data_get($report, 'source.candidate_dir')
+        );
+        $this->assertSame(
+            'content_assets/big5/result_page_v2/staging_candidate_imports/low_quality_revised_v0_3_staging_import',
+            data_get($report, 'source.staging_import_dir')
+        );
+        $this->assertSame('pass', data_get($report, 'source.staging_import_validation_status'));
+        $this->assertTrue((bool) data_get($report, 'source.staging_write_performed'));
+
+        $this->assertSame(14, data_get($report, 'counts.selector_asset_candidates'));
+        $this->assertSame(14, data_get($report, 'counts.content_asset_candidates'));
+        $this->assertSame(14, data_get($report, 'counts.low_quality_state_count'));
+        $this->assertSame(5, data_get($report, 'counts.surface_count'));
+        $this->assertSame(14, data_get($report, 'coverage.expected_low_quality_states'));
+        $this->assertSame(14, data_get($report, 'coverage.covered_low_quality_states'));
+        $this->assertSame([], data_get($report, 'coverage.missing_low_quality_states'));
+        $this->assertCount(14, (array) data_get($report, 'coverage.state_counts'));
+
+        $surfaces = collect((array) ($report['surface_matrix'] ?? []))->keyBy('surface');
+        foreach (['result_page', 'pdf', 'share', 'history', 'compare'] as $surface) {
+            $this->assertTrue($surfaces->has($surface), $surface);
+            $this->assertSame('pass', data_get($surfaces[$surface], 'status'));
+        }
+        $this->assertSame(14, data_get($surfaces['result_page'], 'candidate_count'));
+        $this->assertSame(14, data_get($surfaces['pdf'], 'candidate_count'));
+        $this->assertSame(0, data_get($surfaces['share'], 'candidate_count'));
+        $this->assertSame('not_shareable_suppressed', data_get($surfaces['share'], 'render_strategy'));
+        $this->assertSame(14, data_get($surfaces['history'], 'candidate_count'));
+        $this->assertSame(14, data_get($surfaces['compare'], 'candidate_count'));
+
+        $this->assertSame('pass', data_get($report, 'rendered_hygiene_scan.status'));
+        $this->assertSame(0, data_get($report, 'rendered_hygiene_scan.hit_count'));
+        $this->assertSame([], data_get($report, 'rendered_hygiene_scan.hits'));
+        $this->assertTrue((bool) data_get($report, 'visible_text_quality.copy_length_pass'));
+        $this->assertTrue((bool) data_get($report, 'visible_text_quality.copy_not_thin_pass'));
+        $this->assertTrue((bool) data_get($report, 'visible_text_quality.copy_duplicate_pass'));
+        $this->assertTrue((bool) data_get($report, 'visible_text_quality.sentence_quality_pass'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.duplicate_body_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.thin_copy_count'));
+        $this->assertGreaterThanOrEqual(180, (int) data_get($report, 'visible_text_quality.shortest_body_chars'));
+        $this->assertLessThanOrEqual(320, (int) data_get($report, 'visible_text_quality.longest_body_chars'));
+
+        $scope = $report['rendered_preview_scope'] ?? [];
+        $this->assertSame('backend_fixture_only', $scope['evidence_type'] ?? null);
+        $this->assertFalse((bool) ($scope['final_result_contract_generated'] ?? true));
+        $this->assertFalse((bool) ($scope['frontend_copy_added'] ?? true));
+        $this->assertFalse((bool) ($scope['production_gate_changed'] ?? true));
+        $this->assertFalse((bool) ($scope['cms_or_search_changed'] ?? true));
+        $this->assertFalse((bool) ($scope['live_url_verified'] ?? true));
+        $this->assertFalse((bool) ($scope['pdf_file_stored'] ?? true));
+        $this->assertFalse((bool) ($scope['private_identifier_stored'] ?? true));
+
+        foreach ([
+            'no_runtime_enablement',
+            'no_production_import',
+            'no_rollout_change',
+            'no_frontend_copy',
+            'no_cms_or_search_publication',
+            'live_rendered_page_qa_deferred_until_accessible_fixture_or_pilot_url',
+        ] as $hold) {
+            $this->assertContains($hold, (array) ($report['remaining_holds'] ?? []));
+        }
+
+        $artifactText = implode("\n", [
+            file_get_contents($qaDir.'/README.md') ?: '',
+            file_get_contents($qaDir.'/SHA256SUMS') ?: '',
+            file_get_contents($qaDir.'/big5_low_quality_revised_v0_3_rendered_preview_qa_v0_1.json') ?: '',
+        ]);
+
+        foreach ([
+            'private_url',
+            'attempt_id',
+            'raw_score',
+            'raw score',
+            'percentile',
+            'fixed_type',
+            'user_confirmed_type',
+            'type_code',
+            'big5:',
+            'band:',
+            'payload',
+            'registry',
+            'PR3B',
+            'AttemptReadController',
+            'Big Five Report Engine',
+            '[object Object]',
+            '筛选',
+            '不一定',
+            '失败',
+            '一定',
+            '诊断',
+            '招聘筛选',
+            '收入预测',
+            '成功预测',
+            '伴侣匹配',
+        ] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $artifactText, $forbiddenToken);
+        }
+    }
+
     public function test_committed_low_quality_revised_v0_3_normalized_candidates_are_reviewed_and_non_runtime(): void
     {
         $artifactRoot = $this->tempDir('big5-low-quality-v0-3-normalized');

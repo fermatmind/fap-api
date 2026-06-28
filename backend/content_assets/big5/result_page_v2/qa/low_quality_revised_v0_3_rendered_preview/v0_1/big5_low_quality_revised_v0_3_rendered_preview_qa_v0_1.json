@@ -1,0 +1,414 @@
+{
+  "acceptance": {
+    "compare_surface_safe": true,
+    "copy_duplicate_pass": true,
+    "copy_length_pass": true,
+    "copy_not_thin_pass": true,
+    "history_surface_safe": true,
+    "no_rendered_hygiene_hits": true,
+    "pdf_surface_safe": true,
+    "result_page_position_correct": true,
+    "sentence_quality_pass": true,
+    "share_surface_safe": true
+  },
+  "counts": {
+    "content_asset_candidates": 14,
+    "low_quality_state_count": 14,
+    "module_counts": {
+      "module_02_quick_understanding": 6,
+      "module_08_share_save": 3,
+      "module_10_method_privacy": 5
+    },
+    "selector_asset_candidates": 14,
+    "slot_count": 14,
+    "surface_count": 5
+  },
+  "coverage": {
+    "covered_low_quality_states": 14,
+    "expected_low_quality_states": 14,
+    "missing_low_quality_states": [],
+    "state_counts": {
+      "low_quality_state.compare_boundary_low_quality.v0_3": 1,
+      "low_quality_state.history_boundary_low_quality.v0_3": 1,
+      "low_quality_state.inconsistent_pattern_context.v0_3": 1,
+      "low_quality_state.interrupted_context.v0_3": 1,
+      "low_quality_state.lower_confidence_explanation.v0_3": 1,
+      "low_quality_state.missing_or_sparse_information.v0_3": 1,
+      "low_quality_state.next_step_low_quality.v0_3": 1,
+      "low_quality_state.non_blaming_boundary.v0_3": 1,
+      "low_quality_state.retest_recommended_context.v0_3": 1,
+      "low_quality_state.rushed_answer_context.v0_3": 1,
+      "low_quality_state.safe_to_show_when_low_quality.v0_3": 1,
+      "low_quality_state.share_boundary_low_quality.v0_3": 1,
+      "low_quality_state.should_soften_or_hide_when_low_quality.v0_3": 1,
+      "low_quality_state.unclear_self_observation.v0_3": 1
+    }
+  },
+  "created_at_utc": "2026-06-28T14:02:00Z",
+  "mode": "backend_fixture_rendered_preview_qa",
+  "package_key": "big5_result_page_v2.low_quality_revised_v0_3.rendered_preview_qa.v0_1",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "remaining_holds": [
+    "no_runtime_enablement",
+    "no_production_import",
+    "no_rollout_change",
+    "no_frontend_copy",
+    "no_cms_or_search_publication",
+    "live_rendered_page_qa_deferred_until_accessible_fixture_or_pilot_url"
+  ],
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "rules": [
+      "no_selector_tokens",
+      "no_internal_rendered_terms",
+      "no_broken_template_fragments",
+      "no_sensitive_score_or_rank_text",
+      "no_risk_wording_regression"
+    ],
+    "scan_scope": "staging_candidate_visible_text_fields_only",
+    "status": "pass"
+  },
+  "rendered_preview_scope": {
+    "cms_or_search_changed": false,
+    "evidence_type": "backend_fixture_only",
+    "final_result_contract_generated": false,
+    "frontend_copy_added": false,
+    "live_url_verified": false,
+    "pdf_file_stored": false,
+    "private_identifier_stored": false,
+    "production_gate_changed": false
+  },
+  "runtime_use": "not_runtime",
+  "schema": "fap.big5.result_page_v2.low_quality.revised_v0_3.rendered_preview_qa.v0_1",
+  "source": {
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/low_quality_revised_v0_3_normalized",
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/low_quality_revised_v0_3_staging_import",
+    "staging_import_validation_status": "pass",
+    "staging_write_performed": true
+  },
+  "status": "pass",
+  "surface_matrix": [
+    {
+      "candidate_count": 14,
+      "expected_modules": [
+        "module_02_quick_understanding",
+        "module_08_share_save",
+        "module_10_method_privacy"
+      ],
+      "render_strategy": "private_result_degraded_state_explanation",
+      "safety_notes": [
+        "shows bounded quality guidance only",
+        "does not expose private identifiers or sensitive score detail",
+        "visible text scan has zero internal-token hits"
+      ],
+      "status": "pass",
+      "surface": "result_page"
+    },
+    {
+      "candidate_count": 14,
+      "expected_modules": [
+        "module_02_quick_understanding",
+        "module_08_share_save",
+        "module_10_method_privacy"
+      ],
+      "render_strategy": "private_pdf_degraded_state_explanation",
+      "safety_notes": [
+        "keeps quality caveat with the private report",
+        "does not add private links or sensitive rank detail",
+        "live PDF extraction remains deferred"
+      ],
+      "status": "pass",
+      "surface": "pdf"
+    },
+    {
+      "candidate_count": 0,
+      "expected_modules": [],
+      "render_strategy": "not_shareable_suppressed",
+      "safety_notes": [
+        "low-quality candidates are marked not shareable",
+        "share surface must not publish degraded-state details",
+        "public share cards can fall back to existing share-safe summaries"
+      ],
+      "status": "pass",
+      "surface": "share"
+    },
+    {
+      "candidate_count": 14,
+      "expected_modules": [
+        "module_02_quick_understanding",
+        "module_08_share_save",
+        "module_10_method_privacy"
+      ],
+      "render_strategy": "summary_only_quality_state_notice",
+      "safety_notes": [
+        "history may show a bounded quality notice only",
+        "no sensitive score text or private link is exposed"
+      ],
+      "status": "pass",
+      "surface": "history"
+    },
+    {
+      "candidate_count": 14,
+      "expected_modules": [
+        "module_02_quick_understanding",
+        "module_08_share_save",
+        "module_10_method_privacy"
+      ],
+      "render_strategy": "summary_only_quality_state_notice",
+      "safety_notes": [
+        "compare must not rank or diagnose low-quality states",
+        "state text remains non-blaming and bounded"
+      ],
+      "status": "pass",
+      "surface": "compare"
+    }
+  ],
+  "surface_safety": {
+    "compare": "pass_summary_only_no_rank_or_diagnosis",
+    "history": "pass_summary_only_quality_notice",
+    "pdf": "pass_private_output_without_private_link_or_sensitive_rank_detail",
+    "result_page": "pass_private_context_with_degraded_state_guidance",
+    "share": "pass_suppressed_because_not_shareable"
+  },
+  "visible_text_quality": {
+    "asset_metrics": [
+      {
+        "asset_id": "candidate_content_low_quality_lower_confidence_explanation_v0_3",
+        "body_chars": 183,
+        "cta_chars": 23,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": false,
+        "has_state_layer": true,
+        "max_sentence_chars": 36,
+        "sentence_like_count": 6,
+        "short_body_chars": 21,
+        "state_key": "low_quality_state.lower_confidence_explanation.v0_3",
+        "summary_chars": 24,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_rushed_answer_context_v0_3",
+        "body_chars": 180,
+        "cta_chars": 22,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": false,
+        "has_state_layer": true,
+        "max_sentence_chars": 40,
+        "sentence_like_count": 6,
+        "short_body_chars": 24,
+        "state_key": "low_quality_state.rushed_answer_context.v0_3",
+        "summary_chars": 26,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_interrupted_context_v0_3",
+        "body_chars": 193,
+        "cta_chars": 21,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": true,
+        "has_state_layer": true,
+        "max_sentence_chars": 41,
+        "sentence_like_count": 6,
+        "short_body_chars": 21,
+        "state_key": "low_quality_state.interrupted_context.v0_3",
+        "summary_chars": 29,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_inconsistent_pattern_context_v0_3",
+        "body_chars": 195,
+        "cta_chars": 25,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": false,
+        "has_state_layer": true,
+        "max_sentence_chars": 42,
+        "sentence_like_count": 7,
+        "short_body_chars": 25,
+        "state_key": "low_quality_state.inconsistent_pattern_context.v0_3",
+        "summary_chars": 27,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_missing_or_sparse_information_v0_3",
+        "body_chars": 191,
+        "cta_chars": 22,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": false,
+        "has_state_layer": true,
+        "max_sentence_chars": 43,
+        "sentence_like_count": 6,
+        "short_body_chars": 21,
+        "state_key": "low_quality_state.missing_or_sparse_information.v0_3",
+        "summary_chars": 26,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_unclear_self_observation_v0_3",
+        "body_chars": 197,
+        "cta_chars": 25,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": false,
+        "has_state_layer": true,
+        "max_sentence_chars": 54,
+        "sentence_like_count": 7,
+        "short_body_chars": 20,
+        "state_key": "low_quality_state.unclear_self_observation.v0_3",
+        "summary_chars": 30,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_safe_to_show_when_low_quality_v0_3",
+        "body_chars": 198,
+        "cta_chars": 17,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": true,
+        "has_state_layer": true,
+        "max_sentence_chars": 48,
+        "sentence_like_count": 7,
+        "short_body_chars": 23,
+        "state_key": "low_quality_state.safe_to_show_when_low_quality.v0_3",
+        "summary_chars": 24,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_should_soften_or_hide_when_low_quality_v0_3",
+        "body_chars": 195,
+        "cta_chars": 21,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": false,
+        "has_state_layer": true,
+        "max_sentence_chars": 41,
+        "sentence_like_count": 6,
+        "short_body_chars": 22,
+        "state_key": "low_quality_state.should_soften_or_hide_when_low_quality.v0_3",
+        "summary_chars": 27,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_non_blaming_boundary_v0_3",
+        "body_chars": 193,
+        "cta_chars": 20,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": false,
+        "has_state_layer": true,
+        "max_sentence_chars": 42,
+        "sentence_like_count": 6,
+        "short_body_chars": 24,
+        "state_key": "low_quality_state.non_blaming_boundary.v0_3",
+        "summary_chars": 23,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_retest_recommended_context_v0_3",
+        "body_chars": 187,
+        "cta_chars": 20,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": true,
+        "has_state_layer": true,
+        "max_sentence_chars": 60,
+        "sentence_like_count": 6,
+        "short_body_chars": 24,
+        "state_key": "low_quality_state.retest_recommended_context.v0_3",
+        "summary_chars": 27,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_share_boundary_low_quality_v0_3",
+        "body_chars": 180,
+        "cta_chars": 21,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": false,
+        "has_state_layer": true,
+        "max_sentence_chars": 49,
+        "sentence_like_count": 6,
+        "short_body_chars": 22,
+        "state_key": "low_quality_state.share_boundary_low_quality.v0_3",
+        "summary_chars": 23,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_compare_boundary_low_quality_v0_3",
+        "body_chars": 186,
+        "cta_chars": 21,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": false,
+        "has_state_layer": true,
+        "max_sentence_chars": 42,
+        "sentence_like_count": 6,
+        "short_body_chars": 21,
+        "state_key": "low_quality_state.compare_boundary_low_quality.v0_3",
+        "summary_chars": 27,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_history_boundary_low_quality_v0_3",
+        "body_chars": 181,
+        "cta_chars": 20,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": false,
+        "has_state_layer": true,
+        "max_sentence_chars": 45,
+        "sentence_like_count": 6,
+        "short_body_chars": 23,
+        "state_key": "low_quality_state.history_boundary_low_quality.v0_3",
+        "summary_chars": 26,
+        "template_risk": "low"
+      },
+      {
+        "asset_id": "candidate_content_low_quality_next_step_low_quality_v0_3",
+        "body_chars": 185,
+        "cta_chars": 23,
+        "has_action_layer": true,
+        "has_boundary_layer": true,
+        "has_quality_layer": true,
+        "has_retest_layer": true,
+        "has_state_layer": true,
+        "max_sentence_chars": 38,
+        "sentence_like_count": 7,
+        "short_body_chars": 22,
+        "state_key": "low_quality_state.next_step_low_quality.v0_3",
+        "summary_chars": 23,
+        "template_risk": "low"
+      }
+    ],
+    "copy_duplicate_pass": true,
+    "copy_length_pass": true,
+    "copy_not_thin_pass": true,
+    "duplicate_body_count": 0,
+    "longest_body_chars": 198,
+    "sentence_quality_pass": true,
+    "shortest_body_chars": 180,
+    "thin_copy_count": 0
+  }
+}
