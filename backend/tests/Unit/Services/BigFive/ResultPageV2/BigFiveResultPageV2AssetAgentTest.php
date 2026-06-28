@@ -1320,6 +1320,75 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_method_boundary_v0_5_staging_import_is_reviewed_and_non_runtime(): void
+    {
+        $stagingDir = base_path('content_assets/big5/result_page_v2/staging_candidate_imports/method_boundary_v0_5_staging_import');
+
+        foreach ([
+            'selector_asset_candidates.staging.jsonl',
+            'content_asset_candidates.staging.jsonl',
+            'staging_import_manifest.json',
+            'staging_import_validation_report.json',
+            'repair_log.json',
+        ] as $filename) {
+            $this->assertFileExists($stagingDir.'/'.$filename);
+        }
+
+        $manifest = $this->readJson($stagingDir.'/staging_import_manifest.json');
+        $validation = $this->readJson($stagingDir.'/staging_import_validation_report.json');
+        $repairLog = $this->readJson($stagingDir.'/repair_log.json');
+
+        $this->assertSame('staging_only', $manifest['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($manifest['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($manifest['ready_for_pilot'] ?? true));
+        $this->assertFalse((bool) ($manifest['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($manifest['ready_for_production'] ?? true));
+        $this->assertSame('content_assets/big5/result_page_v2/agent_runs/method_boundary_v0_5_normalized', $manifest['candidate_dir'] ?? null);
+        $this->assertSame(14, $manifest['selector_asset_candidate_count'] ?? null);
+        $this->assertSame(14, $manifest['content_asset_candidate_count'] ?? null);
+
+        $this->assertTrue((bool) ($validation['staging_write_performed'] ?? false));
+        $this->assertSame('pass', data_get($validation, 'candidate_validation.status'));
+        $this->assertSame(0, data_get($validation, 'candidate_validation.error_count'));
+        $this->assertSame('pass', data_get($validation, 'leak_scan.status'));
+        $this->assertSame(0, data_get($validation, 'leak_scan.hit_count'));
+        $this->assertSame([], $repairLog['entries'] ?? ['unexpected']);
+        $this->assertFalse((bool) ($repairLog['repair_required'] ?? true));
+
+        $selectorRows = $this->readJsonl($stagingDir.'/selector_asset_candidates.staging.jsonl');
+        $contentRows = $this->readJsonl($stagingDir.'/content_asset_candidates.staging.jsonl');
+        $this->assertCount(14, $selectorRows);
+        $this->assertCount(14, $contentRows);
+
+        foreach (array_merge($selectorRows, $contentRows) as $row) {
+            $this->assertSame('staging_only', data_get($row, 'runtime_use', data_get($row, 'provenance.runtime_use')));
+            $this->assertFalse((bool) data_get($row, 'production_use_allowed', data_get($row, 'provenance.production_use_allowed', true)));
+        }
+
+        $allArtifacts = implode("\n", array_map(
+            static fn (string $path): string => (string) file_get_contents($path),
+            glob($stagingDir.'/*') ?: []
+        ));
+
+        foreach ([
+            'private_url',
+            'attempt_id',
+            'raw_score',
+            'percentile',
+            'fixed_type',
+            'user_confirmed_type',
+            'type_code',
+            'big5:',
+            'band:',
+            'PR3B',
+            'AttemptReadController',
+            'Big Five Report Engine',
+            '[object Object]',
+        ] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $allArtifacts, $forbiddenToken);
+        }
+    }
+
     public function test_strict_mode_rejects_public_payload_and_shareable_score_leaks(): void
     {
         $root = $this->tempDir('big5-v2-agent-leak');
