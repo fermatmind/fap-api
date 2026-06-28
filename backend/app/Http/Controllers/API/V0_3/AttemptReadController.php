@@ -890,6 +890,7 @@ class AttemptReadController extends Controller
         $orgId = $this->currentOrgContext()->orgId();
         $attempt = $this->resolveAttemptForAccessRead($request, $orgId, $id);
         $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        $hasResultPagePdfTokenAccess = $this->resolveAttemptForResultPagePdfToken($request, $orgId, (string) $attempt->id) instanceof Attempt;
         $submissionPayload = $this->latestReadableSubmission($request, (string) $attempt->id);
         $resultExists = Result::query()
             ->where('org_id', $orgId)
@@ -1012,6 +1013,21 @@ class AttemptReadController extends Controller
                     (string) ($freeFullReportModeGate['access_source'] ?? 'free_full_report_mode')
                 )
             );
+        }
+        if ($hasResultPagePdfTokenAccess && $scaleCode === 'MBTI' && $resultExists) {
+            $accessState = 'ready';
+            $reportState = 'ready';
+            $pdfState = 'ready';
+            $reasonCode = 'result_page_pdf_token';
+            $payloadJson = array_merge($payloadJson, [
+                'access_level' => ReportAccess::REPORT_ACCESS_FULL,
+                'variant' => ReportAccess::VARIANT_FULL,
+                'unlock_stage' => ReportAccess::UNLOCK_STAGE_FULL,
+                'unlock_source' => ReportAccess::UNLOCK_SOURCE_NONE,
+                'access_source' => 'result_page_pdf_export_token',
+                'paywall_suppressed' => true,
+                'result_page_pdf_export' => true,
+            ]);
         }
 
         if ($repairFailed && $resultExists) {

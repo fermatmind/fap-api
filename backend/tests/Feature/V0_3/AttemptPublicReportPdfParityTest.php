@@ -368,11 +368,29 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $result->assertStatus(200);
         $this->assertSame('INTJ-A', $result->json('type_code'));
 
+        $reportAccess = $this->withHeaders([
+            'X-Result-Access-Token' => $token,
+        ])->get("/api/v0.3/attempts/{$attemptId}/report-access?locale=zh-CN");
+
+        $reportAccess->assertStatus(200)
+            ->assertJsonPath('access_state', 'ready')
+            ->assertJsonPath('report_state', 'ready')
+            ->assertJsonPath('pdf_state', 'ready')
+            ->assertJsonPath('reason_code', 'result_page_pdf_token')
+            ->assertJsonPath('access_source', 'result_page_pdf_export_token')
+            ->assertJsonPath('payload.result_page_pdf_export', true);
+
         $wrongAttempt = $this->withHeaders([
             'X-Result-Access-Token' => $token,
         ])->get("/api/v0.3/attempts/{$otherAttemptId}/result?locale=zh-CN");
 
         $wrongAttempt->assertStatus(404);
+
+        $wrongAttemptAccess = $this->withHeaders([
+            'X-Result-Access-Token' => $token,
+        ])->get("/api/v0.3/attempts/{$otherAttemptId}/report-access?locale=zh-CN");
+
+        $wrongAttemptAccess->assertStatus(404);
     }
 
     public function test_public_mbti_result_page_pdf_does_not_fallback_to_mpdf_when_gotenberg_fails(): void
