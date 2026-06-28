@@ -28,6 +28,8 @@ final class Mbti64CmsRevisionPromotionService
 
     private const NEXT_BATCH_6_PACKAGE_ARTIFACT = 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-01';
 
+    private const NEXT_BATCH_6_V2_PACKAGE_ARTIFACT = 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01';
+
     private const VISIBLE_QUERY_BACKED_3_URLS = [
         'https://fermatmind.com/en/personality/enfj-a',
         'https://fermatmind.com/zh/personality/intp-a',
@@ -326,6 +328,8 @@ final class Mbti64CmsRevisionPromotionService
      */
     private function validateNextBatch6ContractPackage(array $package, array $recommendations, array &$errors): void
     {
+        $artifact = (string) ($package['artifact'] ?? '');
+        $isV2Package = $artifact === self::NEXT_BATCH_6_V2_PACKAGE_ARTIFACT;
         $summary = is_array($package['summary'] ?? null) ? $package['summary'] : [];
         $actualUrls = array_map(
             static fn (array $recommendation): string => (string) ($recommendation['target_url'] ?? ''),
@@ -335,28 +339,57 @@ final class Mbti64CmsRevisionPromotionService
         sort($actualUrls);
         sort($expectedUrls);
 
-        if ((string) ($package['artifact'] ?? '') !== self::NEXT_BATCH_6_PACKAGE_ARTIFACT) {
+        if (! in_array($artifact, [self::NEXT_BATCH_6_PACKAGE_ARTIFACT, self::NEXT_BATCH_6_V2_PACKAGE_ARTIFACT], true)) {
             $errors[] = [
                 'field' => 'artifact',
                 'code' => 'unsupported_next_batch_6_package_artifact',
                 'message' => 'Unexpected MBTI64 next-batch-6 handoff artifact.',
             ];
         }
-        if ((string) ($package['status'] ?? '') !== 'pass') {
+        if (! $isV2Package && (string) ($package['status'] ?? '') !== 'pass') {
             $errors[] = [
                 'field' => 'status',
                 'code' => 'next_batch_6_package_status_not_pass',
                 'message' => 'Next-batch-6 package must have pass status before promotion planning.',
             ];
         }
-        if (count($recommendations) !== 6 || (int) ($summary['recommendation_count'] ?? -1) !== 6) {
+        if ($isV2Package && ! in_array((string) ($package['status'] ?? ''), [
+            'pass',
+            'pass_ready_for_editorial_review_and_approval_queue_repair',
+        ], true)) {
+            $errors[] = [
+                'field' => 'status',
+                'code' => 'next_batch_6_v2_package_status_not_ready',
+                'message' => 'Next-batch-6 V2 package must be ready for editorial review before promotion planning.',
+            ];
+        }
+
+        $declaredCount = $isV2Package
+            ? (int) ($package['target_count'] ?? -1)
+            : (int) ($summary['recommendation_count'] ?? -1);
+        if (count($recommendations) !== 6 || $declaredCount !== 6) {
             $errors[] = [
                 'field' => 'recommendations',
                 'code' => 'unexpected_next_batch_6_recommendation_count',
                 'message' => 'Expected exactly 6 next-batch MBTI64 recommendations.',
             ];
         }
-        if ((int) ($summary['variant_pages'] ?? -1) !== 6 || (int) ($summary['comparison_pages'] ?? -1) !== 0) {
+
+        $variantPages = $isV2Package ? 0 : (int) ($summary['variant_pages'] ?? -1);
+        $comparisonPages = $isV2Package ? 0 : (int) ($summary['comparison_pages'] ?? -1);
+        if ($isV2Package) {
+            foreach ($recommendations as $recommendation) {
+                $identity = $this->identityForRecommendation($recommendation);
+                if (($identity['page_type'] ?? null) === 'variant') {
+                    $variantPages++;
+                }
+                if (($identity['page_type'] ?? null) === 'comparison') {
+                    $comparisonPages++;
+                }
+            }
+        }
+
+        if ($variantPages !== 6 || $comparisonPages !== 0) {
             $errors[] = [
                 'field' => 'summary',
                 'code' => 'unexpected_next_batch_6_page_type_counts',
