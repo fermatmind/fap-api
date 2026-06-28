@@ -64756,12 +64756,12 @@
     "branch": "codex/pr-eq-v20-03-scene-variants-v23",
     "title": "PR-EQ-V20-03 Backend EQ v2.3 scene variants",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "PR-EQ-V20-02"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "b8b2a5fa57c0df4681e10ac73a1832c33abc6576",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2522",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -64845,6 +64845,11 @@
         "at": "2026-06-28T13:49:10Z",
         "status": "scope_validation_passed",
         "notes": "Path-limited staged file list matched V20-03 scope."
+      },
+      {
+        "at": "2026-06-28T13:50:12Z",
+        "status": "pr_open",
+        "notes": "Opened GitHub PR #2522 after local checks, scope validation, and push."
       }
     ],
     "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
