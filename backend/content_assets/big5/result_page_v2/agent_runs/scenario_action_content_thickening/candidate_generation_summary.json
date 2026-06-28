@@ -1,0 +1,87 @@
+{
+  "schema_version": "fap.big5.result_page_v2.content_asset_thickening.v0_1",
+  "task": "scenario_action_content_thickening_candidate_generation",
+  "status": "pass",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "candidate_counts": {
+    "selector_asset": 160,
+    "content_asset": 160
+  },
+  "coverage": {
+    "profile_count": 8,
+    "scenario_count": 5,
+    "role_count": 4,
+    "expected_profile_scenario_role_assets": 160,
+    "covered_profile_scenario_role_assets": 160,
+    "coverage_by_profile": {
+      "sensitive_independent_thinker": 20,
+      "vigilant_perfectionist": 20,
+      "complex_explorer_low_structure": 20,
+      "quiet_deep_worker": 20,
+      "connective_coordinator": 20,
+      "sharp_exploratory_driver": 20,
+      "orderly_supporter": 20,
+      "overloaded_internalizer": 20
+    },
+    "coverage_by_scenario": {
+      "work": 32,
+      "relationship": 32,
+      "stress": 32,
+      "growth": 32,
+      "collaboration": 32
+    },
+    "coverage_by_role": {
+      "scenario_core_pattern": 40,
+      "scenario_strength_and_risk": 40,
+      "scenario_action_protocol": 40,
+      "scenario_misread_and_repair": 40
+    },
+    "missing_profile_scenario_roles": []
+  },
+  "editorial_components": [
+    "scenario_context",
+    "strength_and_risk",
+    "low_risk_action",
+    "misread_repair",
+    "reflection_prompt",
+    "boundary_language"
+  ],
+  "source_policy": {
+    "internal_existing_assets_used": true,
+    "external_copy_used": false,
+    "bfi_2_copy_used": false,
+    "external_sources_used_as_structure_reference_only": [
+      "123test",
+      "Truity"
+    ]
+  },
+  "validation": {
+    "status": "pass",
+    "selector_asset_candidate_count": 160,
+    "content_asset_candidate_count": 160,
+    "error_count": 0
+  },
+  "leak_scan": {
+    "status": "pass",
+    "hit_count": 0,
+    "hits": []
+  },
+  "staging_import": {
+    "status": "pass",
+    "staging_write_performed": true,
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/scenario_action_content_thickening",
+    "repair_required": false,
+    "repair_entry_count": 0
+  },
+  "negative_guarantees": {
+    "runtime_changed": false,
+    "production_gate_changed": false,
+    "frontend_copy_added": false,
+    "cms_or_search_changed": false,
+    "final_result_contract_generated": false
+  }
+}

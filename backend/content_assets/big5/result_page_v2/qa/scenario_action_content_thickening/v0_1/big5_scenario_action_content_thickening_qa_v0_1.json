@@ -1,0 +1,72 @@
+{
+  "schema": "fap.big5.result_page_v2.scenario_action_content_thickening_qa.v0_1",
+  "status": "pass",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "counts": {
+    "selector_asset_candidates": 160,
+    "content_asset_candidates": 160,
+    "profile_count": 8,
+    "scenario_count": 5,
+    "role_count": 4,
+    "coverage_by_profile": {
+      "sensitive_independent_thinker": 20,
+      "vigilant_perfectionist": 20,
+      "complex_explorer_low_structure": 20,
+      "quiet_deep_worker": 20,
+      "connective_coordinator": 20,
+      "sharp_exploratory_driver": 20,
+      "orderly_supporter": 20,
+      "overloaded_internalizer": 20
+    },
+    "coverage_by_scenario": {
+      "work": 32,
+      "relationship": 32,
+      "stress": 32,
+      "growth": 32,
+      "collaboration": 32
+    },
+    "coverage_by_role": {
+      "scenario_core_pattern": 40,
+      "scenario_strength_and_risk": 40,
+      "scenario_action_protocol": 40,
+      "scenario_misread_and_repair": 40
+    }
+  },
+  "editorial_qa": {
+    "status": "pass",
+    "non_prescriptive": true,
+    "low_risk_action_guidance": true,
+    "workplace_no_hiring_language": true,
+    "stress_no_clinical_language": true,
+    "external_copy_used": false
+  },
+  "rendered_hygiene_scan": {
+    "status": "pass",
+    "hit_count": 0,
+    "hits": []
+  },
+  "mapping_qa": {
+    "status": "pass",
+    "expected_profile_scenario_role_assets": 160,
+    "covered_profile_scenario_role_assets": 160,
+    "missing_profile_scenario_roles": []
+  },
+  "remaining_holds": [
+    "rendered_preview_deferred_to_later_pr",
+    "runtime_enablement_not_allowed",
+    "production_import_not_allowed"
+  ],
+  "validation": {
+    "status": "pass",
+    "error_count": 0
+  },
+  "staging_import": {
+    "status": "pass",
+    "staging_write_performed": true,
+    "repair_required": false
+  }
+}
