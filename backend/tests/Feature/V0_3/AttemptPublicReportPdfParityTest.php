@@ -9,6 +9,7 @@ use App\Models\Result;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -157,7 +158,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('Content-Type', 'application/pdf');
         $pdf->assertHeader('X-Report-Scale', 'MBTI');
         $pdf->assertHeader('X-Report-Locked', 'true');
-        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.pdf_surface.v3');
+        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.pdf_surface.v4');
 
         $pdfBinary = (string) $pdf->getContent();
         $this->assertStringStartsWith('%PDF-1.4', $pdfBinary);
@@ -168,7 +169,69 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         );
         $this->assertStringEndsWith('.pdf"', (string) $pdf->headers->get('Content-Disposition'));
         Storage::disk('local')->assertExists(
-            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.pdf_surface.v3/report_free.pdf"
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.pdf_surface.v4/report_free.pdf"
+        );
+    }
+
+    public function test_public_mbti_report_pdf_prefers_gotenberg_result_print_route_when_enabled(): void
+    {
+        $this->seedScales();
+        config()->set('fap.features.report_snapshot_strict_v2', false);
+        config()->set('gotenberg.enabled', true);
+        config()->set('gotenberg.base_url', 'http://gotenberg:3000');
+        config()->set('gotenberg.result_print_base_url', 'http://frontend:3000');
+        Storage::fake('local');
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_mbti_pdf_gotenberg';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, 'MBTI', $anonId);
+        $this->createResult($attemptId);
+
+        $gotenbergPdf = implode("\n", [
+            '%PDF-1.4',
+            '<< /Producer (Chromium) >>',
+            'MBTI 完整人格报告',
+            'Personality Traits',
+            'Your Career Path',
+            'Your Personal Growth',
+            'Your Relationships',
+            '%%EOF',
+        ]);
+
+        Http::fake([
+            'gotenberg:3000/forms/chromium/convert/url' => Http::response($gotenbergPdf, 200, [
+                'Content-Type' => 'application/pdf',
+            ]),
+        ]);
+
+        $headers = [
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ];
+
+        $pdf = $this->withHeaders($headers)->get("/api/v0.3/attempts/{$attemptId}/report.pdf");
+
+        $pdf->assertStatus(200);
+        $pdf->assertHeader('Content-Type', 'application/pdf');
+        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.pdf_surface.v4');
+
+        $pdfBinary = (string) $pdf->getContent();
+        $this->assertStringStartsWith('%PDF-1.4', $pdfBinary);
+        $this->assertStringContainsString('/Producer (Chromium)', $pdfBinary);
+        $this->assertStringNotContainsString('mPDF', $pdfBinary);
+        $this->assertStringContainsString('Personality Traits', $pdfBinary);
+        $this->assertStringContainsString('Your Career Path', $pdfBinary);
+        $this->assertStringContainsString('Your Personal Growth', $pdfBinary);
+        $this->assertStringContainsString('Your Relationships', $pdfBinary);
+
+        Http::assertSent(function ($request): bool {
+            return $request->method() === 'POST'
+                && $request->url() === 'http://gotenberg:3000/forms/chromium/convert/url';
+        });
+
+        Storage::disk('local')->assertExists(
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.pdf_surface.v4/report_free.pdf"
         );
     }
 
