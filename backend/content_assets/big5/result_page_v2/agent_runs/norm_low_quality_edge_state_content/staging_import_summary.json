@@ -1,0 +1,90 @@
+{
+  "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+  "task": "staging_import_gate",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "ok": true,
+  "staging_write_performed": true,
+  "staging_artifacts": {
+    "selector_asset_candidates.staging.jsonl": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/norm_low_quality_edge_state_content/selector_asset_candidates.staging.jsonl",
+      "sha256": "7294a6a62153d51be03c1b4cdb4903b5a24d35ee6afd8d8c767439f7607f4fb4",
+      "size": 228924
+    },
+    "content_asset_candidates.staging.jsonl": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/norm_low_quality_edge_state_content/content_asset_candidates.staging.jsonl",
+      "sha256": "6bef1f2700c4e8406097a1b6cd833882bd29aa9f5948c7a6238c2eb863980365",
+      "size": 355470
+    },
+    "staging_import_manifest.json": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/norm_low_quality_edge_state_content/staging_import_manifest.json",
+      "sha256": "eb1153229b5f41fcd2c6356fb29b365305c0bd7249620bd42d1f5961679c8f25",
+      "size": 949
+    },
+    "staging_import_validation_report.json": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/norm_low_quality_edge_state_content/staging_import_validation_report.json",
+      "sha256": "173431622b91873e2eb3cf7a598cb5ea451b07987a5147df3fba90b6e96b1aac",
+      "size": 1425
+    },
+    "repair_log.json": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/norm_low_quality_edge_state_content/repair_log.json",
+      "sha256": "f65ef8a77a51a2b665c33ab11cad32c0adcd0f14dc9e0368381bdf0728b31c4b",
+      "size": 237
+    }
+  },
+  "validation_report": {
+    "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+    "task": "staging_import_validation",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/norm_low_quality_edge_state_content",
+    "staging_output_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/norm_low_quality_edge_state_content",
+    "allow_staging_write": true,
+    "staging_write_performed": true,
+    "review_manifest": {
+      "present": true,
+      "valid": true,
+      "errors": []
+    },
+    "candidate_counts": {
+      "selector_asset": 90,
+      "content_asset": 90
+    },
+    "candidate_validation": {
+      "status": "pass",
+      "selector_asset_candidate_count": 90,
+      "content_asset_candidate_count": 90,
+      "error_count": 0,
+      "errors": []
+    },
+    "leak_scan": {
+      "status": "pass",
+      "hit_count": 0,
+      "hits": []
+    },
+    "negative_guarantees": {
+      "database_write": false,
+      "cms_write": false,
+      "frontend_copy_write": false,
+      "final_result_payload_generation": false,
+      "runtime_flag_change": false,
+      "release_snapshot_change": false,
+      "production_import_gate_change": false,
+      "rollout_gate_change": false
+    }
+  },
+  "repair_log": {
+    "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+    "task": "staging_import_repair_log",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "repair_required": false,
+    "entries": []
+  }
+}

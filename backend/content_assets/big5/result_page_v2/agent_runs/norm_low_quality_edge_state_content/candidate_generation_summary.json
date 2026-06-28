@@ -1,0 +1,72 @@
+{
+  "schema": "fap.big5.result_page_v2.norm_low_quality_edge_state_content.generation_summary.v0_1",
+  "status": "pass",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "candidate_stage": "norm_low_quality_edge_state_content",
+  "candidate_counts": {
+    "selector_asset": 90,
+    "content_asset": 90,
+    "state_count": 5,
+    "context_count": 6,
+    "role_count": 3
+  },
+  "coverage": {
+    "expected_state_context_role_assets": 90,
+    "covered_state_context_role_assets": 90,
+    "states": [
+      "norm_unavailable",
+      "low_quality",
+      "insufficient_confidence",
+      "facet_inconsistent",
+      "retest_recommended"
+    ],
+    "contexts": [
+      "global",
+      "openness",
+      "conscientiousness",
+      "extraversion",
+      "agreeableness",
+      "neuroticism"
+    ],
+    "roles": [
+      "show_boundary",
+      "soften_claim",
+      "hide_sensitive"
+    ],
+    "missing_state_context_roles": []
+  },
+  "validation": {
+    "status": "pass",
+    "error_count": 0
+  },
+  "leak_scan": {
+    "status": "pass",
+    "hit_count": 0,
+    "hits": []
+  },
+  "body_quality": {
+    "min_body_chars": 242,
+    "short_body_repairs": 90
+  },
+  "staging_import": {
+    "status": "pass",
+    "selector_candidate_count": 90,
+    "content_candidate_count": 90,
+    "validation_error_count": 0,
+    "review_error_count": 0,
+    "leak_hit_count": 0,
+    "staging_write_performed": true
+  },
+  "negative_guarantees": {
+    "runtime_change": false,
+    "production_import": false,
+    "rollout_change": false,
+    "cms_write": false,
+    "frontend_copy": false,
+    "seo_or_search_change": false
+  }
+}
