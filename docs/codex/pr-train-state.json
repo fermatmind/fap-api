@@ -10656,7 +10656,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2353",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "FA30-API-10: Add competitor alternatives source-ledger contract",
     "train_scope": "fa30_competitor_alternatives_source_ledger",
     "transitions": [
@@ -65166,8 +65166,8 @@
         "evidence": "Changed files are limited to MBTI visible FAQ authority in ScaleRegistrySeeder, focused V0.3 lookup FAQ coverage, and authorized docs/codex train metadata. No TDK, schema policy/runtime, search, sitemap, llms, CMS production write, deploy, or fap-web files changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "GitHub rejected merge because base branch changed; rebased PR #2525 onto origin/main at 8e427030f and is awaiting fresh checks."
+        "status": "pass",
+        "evidence": "PR #2525 checks succeeded after rebase on head 86e2b196cf2121393ca00be73ce382148e859ebd: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload."
       }
     },
     "commit_sha": "ccf256a8523e713e6ef671eea93e5490d8b30eca",
@@ -65209,6 +65209,11 @@
         "at": "2026-06-28T22:34:20+08:00",
         "status": "pr_open",
         "note": "Merge was blocked because base branch changed. Rebased the PR branch onto origin/main 8e427030f; fresh GitHub checks are pending."
+      },
+      {
+        "at": "2026-06-28T22:40:05+08:00",
+        "status": "ready_to_merge",
+        "note": "Fresh GitHub checks passed after rebase and PR #2525 returned to CLEAN merge state."
       }
     ]
   }
