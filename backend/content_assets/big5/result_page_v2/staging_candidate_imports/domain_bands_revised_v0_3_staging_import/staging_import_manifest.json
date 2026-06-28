@@ -1,0 +1,26 @@
+{
+    "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+    "task": "staging_import_manifest",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/domain_bands_revised_v0_3_normalized",
+    "selector_asset_candidate_count": 25,
+    "content_asset_candidate_count": 25,
+    "review_manifest": {
+        "review_status": "approved_for_staging",
+        "reviewed_at": "2026-06-28T13:30:00+08:00"
+    },
+    "negative_guarantees": {
+        "database_write": false,
+        "cms_write": false,
+        "frontend_copy_write": false,
+        "final_result_payload_generation": false,
+        "runtime_flag_change": false,
+        "release_snapshot_change": false,
+        "production_import_gate_change": false,
+        "rollout_gate_change": false
+    }
+}
