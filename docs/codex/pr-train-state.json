@@ -64756,11 +64756,11 @@
     "branch": "codex/pr-eq-v20-03-scene-variants-v23",
     "title": "PR-EQ-V20-03 Backend EQ v2.3 scene variants",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "depends_on": [
       "PR-EQ-V20-02"
     ],
-    "commit_sha": "b8b2a5fa57c0df4681e10ac73a1832c33abc6576",
+    "commit_sha": "375631cc0ea5c2787a55a8a7512fd8366cc2343a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2522",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -64828,6 +64828,10 @@
       "diff_check": {
         "status": "passed",
         "evidence": "git diff --check and git diff --cached --check passed before commit."
+      },
+      "github": {
+        "status": "passed",
+        "evidence": "All GitHub checks passed on PR #2522; mergeStateStatus=CLEAN."
       }
     },
     "events": [
@@ -64850,6 +64854,11 @@
         "at": "2026-06-28T13:50:12Z",
         "status": "pr_open",
         "notes": "Opened GitHub PR #2522 after local checks, scope validation, and push."
+      },
+      {
+        "at": "2026-06-28T13:57:35Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed; scope and merge state clean before merge."
       }
     ],
     "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
