@@ -1,0 +1,75 @@
+{
+  "entries": [
+    {
+      "asset_id": "candidate_content_domain_bands_content_thickening_o_low_v0_1",
+      "reason": "Remove ambiguous risk wording before schema, leak, and rendered hygiene validation.",
+      "repairs": [
+        {
+          "field": "body_zh",
+          "repair": "risk_wording_softened"
+        }
+      ]
+    },
+    {
+      "asset_id": "candidate_content_domain_bands_content_thickening_o_mid_v0_1",
+      "reason": "Remove ambiguous risk wording before schema, leak, and rendered hygiene validation.",
+      "repairs": [
+        {
+          "field": "body_zh",
+          "repair": "risk_wording_softened"
+        }
+      ]
+    },
+    {
+      "asset_id": "candidate_content_domain_bands_content_thickening_o_very_high_v0_1",
+      "reason": "Remove ambiguous risk wording before schema, leak, and rendered hygiene validation.",
+      "repairs": [
+        {
+          "field": "short_body_zh",
+          "repair": "risk_wording_softened"
+        },
+        {
+          "field": "body_zh",
+          "repair": "risk_wording_softened"
+        }
+      ]
+    },
+    {
+      "asset_id": "candidate_content_domain_bands_content_thickening_c_mid_v0_1",
+      "reason": "Remove ambiguous risk wording before schema, leak, and rendered hygiene validation.",
+      "repairs": [
+        {
+          "field": "body_zh",
+          "repair": "risk_wording_softened"
+        }
+      ]
+    },
+    {
+      "asset_id": "candidate_content_domain_bands_content_thickening_c_high_v0_1",
+      "reason": "Remove ambiguous risk wording before schema, leak, and rendered hygiene validation.",
+      "repairs": [
+        {
+          "field": "cta_zh",
+          "repair": "risk_wording_softened"
+        }
+      ]
+    },
+    {
+      "asset_id": "candidate_content_domain_bands_content_thickening_n_low_v0_1",
+      "reason": "Remove ambiguous risk wording before schema, leak, and rendered hygiene validation.",
+      "repairs": [
+        {
+          "field": "short_body_zh",
+          "repair": "risk_wording_softened"
+        }
+      ]
+    }
+  ],
+  "production_use_allowed": false,
+  "repair_required": false,
+  "risk_wording_hit_count_after": 0,
+  "risk_wording_hit_count_before": 7,
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.domain_bands_candidate_normalize.repair_log.v0_3",
+  "task": "BIG5-DOMAIN-BANDS-CANDIDATE-NORMALIZE-01"
+}
