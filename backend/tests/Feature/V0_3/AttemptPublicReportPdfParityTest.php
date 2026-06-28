@@ -415,9 +415,24 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf = $this->withHeaders([
             'X-Anon-Id' => $anonId,
             'Authorization' => 'Bearer '.$token,
+            'Origin' => 'https://fermatmind.com',
+            'X-Request-Id' => 'pdf-export-request-1',
         ])->get("/api/v0.3/attempts/{$attemptId}/result-page.pdf");
 
         $pdf->assertStatus(503);
+        $pdf->assertHeader('Access-Control-Allow-Origin', 'https://fermatmind.com');
+        $cacheControl = (string) $pdf->headers->get('Cache-Control');
+        $this->assertStringContainsString('private', $cacheControl);
+        $this->assertStringContainsString('no-store', $cacheControl);
+        $pdf->assertHeader('X-Report-Scale', 'MBTI');
+        $pdf->assertHeader('X-Report-Pdf-Engine', 'gotenberg_chromium');
+        $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_export');
+        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_export.v1');
+        $this->assertNotSame('', (string) $pdf->headers->get('X-Gotenberg-Trace'));
+        $pdf->assertJsonPath('ok', false);
+        $pdf->assertJsonPath('error_code', 'RESULT_PAGE_PDF_EXPORT_FAILED');
+        $pdf->assertJsonPath('message', 'Result-page PDF export is temporarily unavailable. Please retry shortly.');
+        $pdf->assertJsonPath('request_id', 'pdf-export-request-1');
         Storage::disk('local')->assertMissing(
             "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v1-gotenberg_chromium-zh-locked-free/report_free.pdf"
         );

@@ -2959,7 +2959,7 @@ class AttemptReadController extends Controller
     /**
      * GET /api/v0.3/attempts/{id}/result-page.pdf
      */
-    public function resultPagePdf(Request $request, string $id): Response
+    public function resultPagePdf(Request $request, string $id): Response|JsonResponse
     {
         $orgId = $this->currentOrgContext()->orgId();
         $userId = $this->resolveUserId($request);
@@ -3035,7 +3035,15 @@ class AttemptReadController extends Controller
                 'message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
             ]);
 
-            abort(503, 'result-page PDF export failed.');
+            $requestId = $this->resolvePublicDiagnosticRequestId($request) ?? $traceId;
+
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'RESULT_PAGE_PDF_EXPORT_FAILED',
+                'message' => 'Result-page PDF export is temporarily unavailable. Please retry shortly.',
+                'request_id' => $requestId,
+                'trace_id' => $traceId,
+            ], 503)->withHeaders($this->resultPagePdfFailureHeaders($request, $traceId));
         }
 
         $pdfBinary = (string) ($generated['binary'] ?? '');
@@ -3057,6 +3065,46 @@ class AttemptReadController extends Controller
             'X-Legacy-Mpdf-Fallback' => 'false',
             'X-Gotenberg-Trace' => (string) ($generated['trace_id'] ?? ''),
         ]);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function resultPagePdfFailureHeaders(Request $request, string $traceId): array
+    {
+        $headers = [
+            'Cache-Control' => 'private, no-store',
+            'X-Report-Scale' => 'MBTI',
+            'X-Report-Pdf-Engine' => ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE,
+            'X-Pdf-Surface' => 'mbti_result_page_export',
+            'X-Pdf-Surface-Version' => ReportPdfDocumentService::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+            'X-Gotenberg-Trace' => $traceId,
+            'Vary' => 'Origin',
+        ];
+
+        $origin = trim((string) $request->headers->get('Origin', ''));
+        if (in_array($origin, ['https://fermatmind.com', 'https://www.fermatmind.com'], true)) {
+            $headers['Access-Control-Allow-Origin'] = $origin;
+        }
+
+        return $headers;
+    }
+
+    private function resolvePublicDiagnosticRequestId(Request $request): ?string
+    {
+        $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        foreach (['X-Request-Id', 'X-Request-ID'] as $header) {
+            $requestId = trim((string) $request->headers->get($header, ''));
+            if ($requestId !== '') {
+                return $requestId;
+            }
+        }
+
+        return null;
     }
 
     /**
