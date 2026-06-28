@@ -86,7 +86,7 @@ final class Eq60ReportPaywallTest extends TestCase
         $this->assertSame('planned', (string) data_get($gate, 'report.next_module.status'));
         $this->assertFalse((bool) data_get($gate, 'report.next_module.available', true));
         $this->assertSame('provisional', (string) data_get($gate, 'report.methodology.norm_status'));
-        $this->assertSame('eq_report_v5_assets_commercial_ready_v1_9', (string) data_get($gate, 'report.methodology.report_version'));
+        $this->assertSame('eq_report_v5_assets_commercial_ready_v2_3', (string) data_get($gate, 'report.methodology.report_version'));
         $this->assertNotSame('', (string) data_get($gate, 'report.asset_refs.core_formulation_id'));
         $this->assertNotSame('', (string) data_get($gate, 'report.asset_refs.action_prescription_id'));
         $this->assertNotSame('', (string) data_get($gate, 'report.asset_refs.result_snapshot_id'));

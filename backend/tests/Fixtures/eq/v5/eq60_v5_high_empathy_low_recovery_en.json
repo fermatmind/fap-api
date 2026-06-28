@@ -26,7 +26,7 @@
                 "eq.backend_contract.agent_readiness"
             ],
             "career_environment_ids": [
-                "emotional_labor_medium",
+                "emotional_labor_high",
                 "autonomy_recovery_medium"
             ],
             "commercial_conversion_ids": [
@@ -45,7 +45,7 @@
                 "EM_ER_high_low",
                 "EM_RM_high_low"
             ],
-            "personalization_route_id": "route.eq.033.mixed_em_er",
+            "personalization_route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
             "psychometric_evidence_ids": [
                 "eq.evidence.norm_status",
                 "eq.evidence.content_validity",
@@ -64,21 +64,21 @@
             ],
             "result_snapshot_id": "eq.snapshot.high_empathy_low_recovery",
             "scene_ids": [
-                "relationship_boundary",
+                "feedback",
                 "conflict",
-                "pressure_recovery"
+                "relationship_boundary"
             ],
             "scene_variant_ids": [
-                "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                "eq.scene.feedback.high_empathy_low_recovery.primary",
                 "eq.scene.conflict.high_empathy_low_recovery.primary",
-                "eq.scene.pressure_recovery.high_empathy_low_recovery.primary"
+                "eq.scene.relationship_boundary.high_empathy_low_recovery.primary"
             ],
             "scientific_contract_id": "eq.scientific_contract.default",
             "score_system_id": "eq.score_system.default",
             "selected_asset_ids": {
                 "action_prescription_id": "empathy_boundary",
                 "career_environment_ids": [
-                    "emotional_labor_medium",
+                    "emotional_labor_high",
                     "autonomy_recovery_medium"
                 ],
                 "core_formulation_id": "high_empathy_low_recovery",
@@ -87,14 +87,14 @@
                     "EM_RM_high_low"
                 ],
                 "scene_ids": [
-                    "relationship_boundary",
+                    "feedback",
                     "conflict",
-                    "pressure_recovery"
+                    "relationship_boundary"
                 ],
                 "scene_variant_ids": [
-                    "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                    "eq.scene.feedback.high_empathy_low_recovery.primary",
                     "eq.scene.conflict.high_empathy_low_recovery.primary",
-                    "eq.scene.pressure_recovery.high_empathy_low_recovery.primary"
+                    "eq.scene.relationship_boundary.high_empathy_low_recovery.primary"
                 ]
             },
             "signal_signature": {
@@ -107,11 +107,11 @@
                     "SA": "middle"
                 },
                 "formulation_id": "high_empathy_low_recovery",
-                "match_pattern": "EM_high_ER_low_RM_mid_SA_mid",
+                "match_pattern": "EM_any_ER_any_RM_any_SA_any",
                 "quality_level": "A",
                 "route_claim_risk": "medium",
-                "route_id": "route.eq.033.mixed_em_er",
-                "route_priority": 40,
+                "route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
+                "route_priority": 101,
                 "schema": "eq60.signal_signature.v1",
                 "strongest_dimension": "EM"
             },
@@ -119,56 +119,44 @@
         },
         "assets": {
             "action_prescription": {
-                "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
-                "agent_prompt_seed": "Help me apply this prescription to a recent real situation.",
-                "do_not_overread": "This is a self-development practice, not a treatment plan.",
-                "do_today": "In one listening moment today, offer one concrete next step without taking over the whole issue.",
+                "common_failure": "The common failure is not lack of knowledge. It is remembering the tool only after the emotion is already high.",
+                "do_today": "Today, use one low-risk version of this sentence: “I can see this is heavy for you. I can help you sort the next step, but I cannot carry the whole weight for you.”",
                 "id": "empathy_boundary",
-                "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
-                "progress_markers": [
-                    "You can name your state sooner.",
-                    "You can state the scope of support more clearly.",
-                    "You spend less time replaying conflict afterward."
-                ],
-                "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
-                "save_prompt": "Save this prescription and practice only this one move for the week.",
-                "script": "“I can see this is hard. I can help sort the next step, but I can’t carry the whole thing for you.”",
+                "repair_move": "If you miss it, do not restart the whole plan. Review one trigger and one first sentence for next time.",
+                "script": "I can see this is heavy for you. I can help you sort the next step, but I cannot carry the whole weight for you.",
                 "seven_day_plan": [
                     {
                         "day": 1,
-                        "practice": "Notice one impulse to jump in and help."
+                        "practice": "List one recent moment when you carried someone else’s load."
                     },
                     {
                         "day": 2,
-                        "practice": "Ask what the person actually needs."
+                        "practice": "Separate companionship, advice, and responsibility."
                     },
                     {
                         "day": 3,
-                        "practice": "Offer one doable action."
+                        "practice": "Practice one boundary sentence."
                     },
                     {
                         "day": 4,
-                        "practice": "State what you cannot take on."
+                        "practice": "Commit to only one specific support action."
                     },
                     {
                         "day": 5,
-                        "practice": "Notice any guilt that appears."
+                        "practice": "Notice your body after stating a boundary."
                     },
                     {
                         "day": 6,
-                        "practice": "Observe whether more help was truly needed."
+                        "practice": "Review whether the boundary actually harmed the relationship."
                     },
                     {
                         "day": 7,
-                        "practice": "Keep the boundary line that felt most natural."
+                        "practice": "Choose one situation next week where you will not automatically take over."
                     }
                 ],
-                "share_prompt": "If you share anything, share the action rather than your score.",
-                "title": "Care Without Carrying",
-                "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
-                "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
-                "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
-                "why_this_matters": "Empathy is not the problem. The problem is turning understanding into ownership. Boundaries make empathy sustainable."
+                "title": "Empathy with a Boundary",
+                "watch_out": "Do not turn the practice into a demand to be perfectly steady. Aim for one extra pause or one clearer sentence.",
+                "why_this_matters": "After understanding someone, clarify what you can support and what you cannot carry for them."
             },
             "agent_dialogue_playbooks": [
                 {
@@ -256,140 +244,115 @@
             ],
             "career_environment": [
                 {
-                    "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-                    "fit_signal": "When emotional labor is medium: This setting gives you enough interaction to use relational strengths while still leaving some independent rhythm. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-                    "id": "emotional_labor_medium",
-                    "interview_question": "What level of emotional labor does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-                    "label": "Emotional labor: medium",
-                    "level": "medium",
-                    "manager_note": "Ask how the team routes complaints, conflict, or other people’s stress instead of letting one responsive person absorb it.",
-                    "meaning": "occasional need to reassure, explain, or handle frustration",
+                    "do_not_overread": "This describes an environment variable, not a role recommendation.",
+                    "fit_signal": "Can work well for people who turn emotional information into communication and decisions, if boundaries are explicit.",
+                    "id": "emotional_labor_high",
+                    "interview_question": "Over time, does the environment allow pause, handoff, and emotional reset?",
+                    "label": "Emotional labor: high",
+                    "level": "high",
+                    "meaning": "how often the role asks you to receive, soothe, or organize other people’s emotion",
+                    "recovery_condition": "Requires predictable space for pause, review, and handoff.",
                     "role_observation_checklist": [
-                        "Notice whether emotional labor is predictable or spikes without warning.",
-                        "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-                        "Notice whether you end the day clearer and steadier, or still replaying conversations."
+                        "Notice whether meetings have a clear purpose and ending point.",
+                        "Notice whether feedback targets behavior rather than personal character.",
+                        "Notice whether people can step out of emotionally loaded conversations when needed."
                     ],
-                    "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-                    "strain_signal": "The strain point at medium emotional labor: The risk is blurred boundaries: some conversations deserve investment, while others only drain attention. If your development lever sits in ER or RM, verify this variable early.",
-                    "team_risk": "If emotional labor is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
+                    "strain_signal": "The strain is sustained emotional load, which can drain judgment and recovery.",
+                    "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
                     "variable": "emotional_labor",
-                    "what_to_verify": "What level of emotional labor does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?"
+                    "what_to_verify": "Over time, does the environment allow pause, handoff, and emotional reset?"
                 },
                 {
-                    "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-                    "fit_signal": "When recovery autonomy is medium: This setting gives you enough interaction to use relational strengths while still leaving some independent rhythm. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
+                    "do_not_overread": "This describes an environment variable, not a role recommendation.",
+                    "fit_signal": "Useful when you can move between interaction and solo work with enough review time.",
                     "id": "autonomy_recovery_medium",
-                    "interview_question": "What level of recovery autonomy does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+                    "interview_question": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
                     "label": "Autonomy and recovery space: medium",
                     "level": "medium",
-                    "manager_note": "Ask whether high-pressure work is followed by quiet review time, pace control, or task switching.",
-                    "meaning": "some control over pacing and recovery",
+                    "meaning": "whether you can create space for solitude, reflection, and emotional reset",
+                    "recovery_condition": "Requires predictable space for pause, review, and handoff.",
                     "role_observation_checklist": [
-                        "Notice whether recovery autonomy is predictable or spikes without warning.",
-                        "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-                        "Notice whether you end the day clearer and steadier, or still replaying conversations."
+                        "Notice whether meetings have a clear purpose and ending point.",
+                        "Notice whether feedback targets behavior rather than personal character.",
+                        "Notice whether people can step out of emotionally loaded conversations when needed."
                     ],
-                    "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-                    "strain_signal": "The strain point at medium recovery autonomy: The risk is blurred boundaries: some conversations deserve investment, while others only drain attention. If your development lever sits in ER or RM, verify this variable early.",
-                    "team_risk": "If recovery autonomy is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
+                    "strain_signal": "The strain is that unclear boundaries can slowly eat into recovery time.",
+                    "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
                     "variable": "autonomy_recovery",
-                    "what_to_verify": "What level of recovery autonomy does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?"
+                    "what_to_verify": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?"
                 }
             ],
             "commercial_conversion_actions": [
                 {
-                    "body": "Keep a copy of this result so you can compare it after a few weeks.",
+                    "body": "Keep this result so you can compare it with a later retest.",
                     "cta_label": "Save report",
-                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
+                    "do_not_overread": "This is a free retention action and does not change the report result.",
                     "id": "eq.conversion.save_report",
-                    "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
-                    "title": "Save this report for later reflection",
-                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
+                    "microcopy": "This is a free retention action and does not change the report result.",
+                    "title": "Save report"
                 },
                 {
-                    "body": "Use this when you want to revisit the result without keeping the page open.",
-                    "cta_label": "Send report link to yourself",
-                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
+                    "body": "Send the result to your email so you can return to it later.",
+                    "cta_label": "Send to email",
+                    "do_not_overread": "This is a free retention action and does not change the report result.",
                     "id": "eq.conversion.email_revisit",
-                    "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
-                    "title": "Send report link to yourself",
-                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
+                    "microcopy": "This is a free retention action and does not change the report result.",
+                    "title": "Send to email"
                 },
                 {
-                    "body": "Use a plain copy for personal notes or coaching conversations where appropriate.",
-                    "cta_label": "Export a clean copy",
-                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
+                    "body": "Keep a static copy for your own reflection.",
+                    "cta_label": "Export PDF",
+                    "do_not_overread": "This is a free retention action and does not change the report result.",
                     "id": "eq.conversion.pdf_export",
-                    "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
-                    "title": "Export a clean copy",
-                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
+                    "microcopy": "This is a free retention action and does not change the report result.",
+                    "title": "Export PDF"
                 },
                 {
-                    "body": "Share the pattern sentence without score details or sensitive flags.",
-                    "cta_label": "Create a safe share card",
-                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
+                    "body": "Share your emotional-relational pattern without showing sensitive scores.",
+                    "cta_label": "Create share card",
+                    "do_not_overread": "This is a free retention action and does not change the report result.",
                     "id": "eq.conversion.share_card",
-                    "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
-                    "title": "Create a safe share card",
-                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
+                    "microcopy": "This is a free retention action and does not change the report result.",
+                    "title": "Create share card"
                 },
                 {
-                    "body": "Useful when you are practicing one action prescription.",
-                    "cta_label": "Set a 30-day retest reminder",
-                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
+                    "body": "Retest later to see whether your self-perception has shifted.",
+                    "cta_label": "Set retest reminder",
+                    "do_not_overread": "This is a free retention action and does not change the report result.",
                     "id": "eq.conversion.retest_reminder",
-                    "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
-                    "title": "Set a 30-day retest reminder",
-                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
+                    "microcopy": "This is a free retention action and does not change the report result.",
+                    "title": "Set retest reminder"
                 },
                 {
-                    "body": "Compare this report with broader personality or interest signals.",
-                    "cta_label": "Explore related assessments",
-                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
+                    "body": "Use related assessments to add workstyle, interest, and personality context.",
+                    "cta_label": "Explore related tests",
+                    "do_not_overread": "This is a free retention action and does not change the report result.",
                     "id": "eq.conversion.related_tests",
-                    "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
-                    "title": "Explore related assessments",
-                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
+                    "microcopy": "This is a free retention action and does not change the report result.",
+                    "title": "Explore related tests"
                 },
                 {
-                    "body": "Ask the Agent to explain one scene or practice from this report. It cannot change scores or conclusions.",
-                    "cta_label": "Ask the report Agent",
-                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
+                    "body": "Ask the assistant to explain a specific part of your completed report.",
+                    "cta_label": "Ask the result assistant",
+                    "do_not_overread": "This is a free retention action and does not change the report result.",
                     "id": "eq.conversion.agent_entry",
-                    "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
-                    "title": "Ask the EQ Agent",
-                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
+                    "microcopy": "This is a free retention action and does not change the report result.",
+                    "title": "Ask the result assistant"
                 }
             ],
             "core_formulation": {
-                "conversion_hook": "Save this report so a future retest can show whether the pattern is stable or changing.",
-                "core_claim": "Your empathy helps you notice pressure, hurt, or need before it is fully spoken. The growth edge is not caring less; it is learning where another person’s emotion ends and your responsibility begins.",
-                "development_lever": "Build boundary language that says, “I understand this matters, and I can support the next step without carrying the whole weight.”",
-                "do_not_overread": "Do not read carrying less as caring less.",
+                "core_claim": "Your empathy is not the problem. The leverage point is what happens after empathy: companionship, responsibility, and recovery need clearer separation.",
+                "development_lever": "Practice boundary language and recovery steps after empathic contact.",
+                "do_not_overread": "This is an interpretive pattern, not a fixed identity label or capability credential.",
                 "evidence_basis": [
-                    "The four-dimension pattern points to High Empathy, Low Recovery: You read other people quickly, but recovery and boundaries need to keep up.",
-                    "This is not a single-score judgment; it comes from the relative pattern across SA / ER / EM / RM.",
-                    "If confidence is lower, use this insight as a working hypothesis rather than a firm conclusion."
+                    "EM high; ER low or medium-low."
                 ],
-                "hero_summary": "Your empathy helps you notice pressure, hurt, or need before it is fully spoken. The growth edge is not caring less; it is learning where another person’s emotion ends and your responsibility begins. The report points to one practice priority: Build boundary language that says, “I understand this matters, and I can support the next step without carrying the whole weight.”",
                 "id": "high_empathy_low_recovery",
-                "likely_cost": "Over time, you may leave difficult conversations carrying more emotional residue than the situation required.",
-                "most_likely_real_life_signal": "You are likely to notice this pattern in feedback, conflict, boundaries, or collaboration moments.",
-                "one_liner": "You can pick up on other people’s feelings quickly, but your own recovery system may lag behind.",
-                "primary_strength": "You can make people feel understood and often notice subtle relational cues.",
-                "share_safe_sentence": "My challenge is not a lack of empathy; it is learning not to carry every emotion I can understand.",
-                "skeptic_note": "If this does not sound like you, check the quality note and dimension gaps before accepting it.",
-                "title": "High Empathy, Low Recovery",
-                "user_memory_sentence": "My challenge is not a lack of empathy; it is learning not to carry every emotion I can understand.",
-                "what_to_try_first": "Pick one recent real situation and practice one script or one pause.",
-                "what_user_should_remember": "You read other people quickly, but recovery and boundaries need to keep up."
+                "likely_cost": "You may slide from “I understand this” into “I have to carry this with you or for you.”",
+                "one_liner": "You often pick up other people’s feelings quickly, but you may not recover from carrying them just as quickly.",
+                "primary_strength": "You can make people feel understood, especially when their emotion is obvious but not clearly stated.",
+                "share_line": "You often pick up other people’s feelings quickly, but you may not recover from carrying them just as quickly.",
+                "title": "High Empathy, Low Recovery"
             },
             "cross_assessment_context": {
                 "boundary": {
@@ -406,53 +369,51 @@
             },
             "mechanisms": [
                 {
-                    "cost": "The strength may become draining when follow-through is weak.",
-                    "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-                    "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship.",
+                    "cost": "The risk is that insight becomes pressure, or that understanding stays in the head.",
+                    "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+                    "do_not_overread": "This is an interaction pattern, not a fixed personality label.",
                     "id": "EM_ER_high_low",
-                    "mechanism": "This mechanism explains whether understanding others still leaves room for your own rhythm and recovery. The strength helps you notice earlier, but the weaker signal determines whether it becomes usable action.",
-                    "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
+                    "micro_action": "Next time, add just one step: name it first, then respond.",
                     "pair": "EM_ER",
                     "state": "high_low",
-                    "strength": "The stronger signal can become the practice entry point.",
-                    "title": "Empathy × Emotion regulation: the first signal is stronger; the second needs support",
-                    "what_it_feels_like": "You notice or feel a lot, but the next step is less stable.",
-                    "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships."
+                    "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+                    "title": "Empathy × Emotion Regulation: noticing more than can be carried",
+                    "what_it_feels_like": "When reading another person is strong but recovering yourself is weaker, the user may notice a lot but get stuck at the next step.",
+                    "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation."
                 },
                 {
-                    "cost": "The strength may become draining when follow-through is weak.",
-                    "development_lever": "Put the mechanism back into one concrete scene and practice one smallest action.",
-                    "do_not_overread": "A mechanism is not a personality label or a fixed judgment about every relationship.",
+                    "cost": "The risk is that insight becomes pressure, or that understanding stays in the head.",
+                    "development_lever": "Pick one recent conversation and identify where the chain broke: awareness, regulation, empathy, or relational action.",
+                    "do_not_overread": "This is an interaction pattern, not a fixed personality label.",
                     "id": "EM_RM_high_low",
-                    "mechanism": "This mechanism explains whether reading others can become clear and repairable relational action. The strength helps you notice earlier, but the weaker signal determines whether it becomes usable action.",
-                    "micro_action": "In the next similar scene, use one prepared cooling or clarifying sentence first.",
+                    "micro_action": "Next time, add just one step: name it first, then respond.",
                     "pair": "EM_RM",
                     "state": "high_low",
-                    "strength": "The stronger signal can become the practice entry point.",
-                    "title": "Empathy × Relationship management: the first signal is stronger; the second needs support",
-                    "what_it_feels_like": "You notice or feel a lot, but the next step is less stable.",
-                    "why_it_matters": "A single dimension shows strength or gap; a mechanism explains how the same score becomes strength, cost, or practice entry in real relationships."
+                    "strength": "It helps you find one small trainable link instead of vaguely trying to “get better.”",
+                    "title": "Empathy × Relationship Management: noticing more than can be carried",
+                    "what_it_feels_like": "When understanding the feeling is strong but moving the relationship forward is weaker, the user may notice a lot but get stuck at the next step.",
+                    "why_it_matters": "This mechanism explains how two emotional systems connect or disconnect in real situations, not what one score means in isolation."
                 }
             ],
             "personalization_route": {
                 "claim_risk": "medium",
                 "commercial_depth": {
-                    "fallback_strategy": "if any selected asset is missing, render formulation + dimension summary + scientific boundary only",
-                    "first_screen_strategy": "show one core claim, one evidence point, one next action",
+                    "fallback_strategy": "if selected assets are missing, render formulation + dimension summary + scientific boundary only",
+                    "first_screen_strategy": "route_headline + evidence label + next best action",
                     "reader_trust_strategy": "explain why this route was selected without exposing scoring internals"
                 },
-                "do_not_overread": "The route controls content selection and reading order only. It is not a permanent personality label and does not replace real-world feedback.",
-                "evidence_snapshot_label": "Route evidence: dimension pattern, gap direction, response quality, and selected content assets.",
+                "do_not_overread": "This is a content route, not a scoring rule or fixed identity label.",
+                "evidence_snapshot_label": "Route evidence: core formulation, dimension pattern, response-quality signals, and selected assets.",
                 "formulation_id": "high_empathy_low_recovery",
-                "id": "route.eq.033.mixed_em_er",
-                "next_best_action": "Read the three scenes first, then practice one prescription for seven days.",
-                "priority": 40,
-                "route_headline": "Your reading path: how High Empathy, Low Recovery shows up in real situations",
+                "id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
+                "next_best_action": "Read the selected scenes first, then practice one prescription for seven days.",
+                "priority": 101,
+                "route_headline": "High Empathy, Low Recovery",
                 "save_reason": "Save this route so you can compare it with real interactions later.",
                 "selected_asset_ids": {
                     "action_prescription_id": "empathy_boundary",
                     "career_environment_ids": [
-                        "emotional_labor_medium",
+                        "emotional_labor_high",
                         "autonomy_recovery_medium"
                     ],
                     "core_formulation_id": "high_empathy_low_recovery",
@@ -461,14 +422,14 @@
                         "EM_RM_high_low"
                     ],
                     "scene_ids": [
-                        "relationship_boundary",
+                        "feedback",
                         "conflict",
-                        "pressure_recovery"
+                        "relationship_boundary"
                     ],
                     "scene_variant_ids": [
-                        "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                        "eq.scene.feedback.high_empathy_low_recovery.primary",
                         "eq.scene.conflict.high_empathy_low_recovery.primary",
-                        "eq.scene.pressure_recovery.high_empathy_low_recovery.primary"
+                        "eq.scene.relationship_boundary.high_empathy_low_recovery.primary"
                     ]
                 },
                 "signal_signature": {
@@ -481,16 +442,16 @@
                         "SA": "middle"
                     },
                     "formulation_id": "high_empathy_low_recovery",
-                    "match_pattern": "EM_high_ER_low_RM_mid_SA_mid",
+                    "match_pattern": "EM_any_ER_any_RM_any_SA_any",
                     "quality_level": "A",
                     "route_claim_risk": "medium",
-                    "route_id": "route.eq.033.mixed_em_er",
-                    "route_priority": 40,
+                    "route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
+                    "route_priority": 101,
                     "schema": "eq60.signal_signature.v1",
                     "strongest_dimension": "EM"
                 },
-                "why_this_feels_specific": "This path is not a label. It turns score gaps into the scenes and smallest actions most worth checking first.",
-                "why_this_route_exists": "This route turns the High Empathy, Low Recovery pattern (EM:high, ER:low, SA:mid, RM:mid) into a focused reading path: the most relevant scenes (relationship_boundary / conflict / pressure_recovery) and the empathy with boundaries prescription. It decides what to read and practice first; it does not rescore the result."
+                "why_this_feels_specific": "This route organizes your strongest signals as High Empathy, Low Recovery and prioritizes the most relevant mechanisms, scenes, and practices.",
+                "why_this_route_exists": "This route organizes your strongest signals as High Empathy, Low Recovery and prioritizes the most relevant mechanisms, scenes, and practices."
             },
             "psychometric_evidence_status": [
                 {
@@ -562,81 +523,85 @@
                 "explanation_asset_id": "eq.quality.level.A"
             },
             "quality_confidence": {
-                "body": "The response pattern supports a relatively stable interpretation.",
-                "commercial_display": "Show this in the result-page quality banner, not only in a footer.",
-                "how_to_read": "Confidence controls reading strength: high confidence supports pattern and action; low confidence points first to response context and retest guidance.",
+                "body": "Your pace and consistency support a normal interpretation.",
+                "how_to_read": "Focus on the core pattern, dimension profile, and action prescription.",
                 "id": "eq.quality.level.A",
                 "label": "High confidence",
-                "retest_note": "Retest later to observe stable change.",
-                "user_guidance": "Adjust how strongly you read the report; do not use it to judge yourself.",
-                "why_this_level": "Based on completion, response pace, consistency, extreme or neutral tendency, and response pattern."
+                "retest_note": "Use the current recommendations and retest later to observe change.",
+                "user_guidance": "Specific numbers should still be treated as approximate. Specific numbers should still be treated as approximate.",
+                "what_to_hold_lightly": "Specific numbers should still be treated as approximate.",
+                "what_to_trust": "Specific numbers should still be treated as approximate.",
+                "why_this_level": "Your pace and consistency support a normal interpretation."
             },
             "reality_scenes": [
                 {
-                    "better_move": "Acknowledge the situation, then state the specific form of support you can offer.",
-                    "cost": "Cost to watch: Over time, you may leave difficult conversations carrying more emotional residue than the situation required.",
-                    "do_not_overread": "This is a likely scene pattern, not a prediction of how you will respond every time.",
+                    "better_move": "Separate the feedback into three layers: facts, emotion, and next step. First confirm one concrete change.",
+                    "cost": "You may slide from “I understand this” into “I have to carry this with you or for you.”",
+                    "do_not_overread": "Use this as a scene lens, not a prediction of behavior.",
                     "evidence_signals": [
-                        "Whose emotion you notice first in this situation.",
-                        "Whether you can separate facts, feelings, and responsibility.",
-                        "Whether you feel clearer afterward or keep replaying the exchange."
+                        "high_empathy_low_recovery",
+                        "feedback",
+                        "EM_ER_high_low"
                     ],
-                    "fallback_scene_id": "relationship_boundary",
-                    "id": "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
-                    "micro_script": "“I understand this matters. What I can do now is A and B; C needs a different plan.”",
-                    "reflection_prompt": "Think of the last similar moment: were you trying to protect the relationship, efficiency, yourself, or the other person first?",
+                    "fallback_scene_id": "feedback",
+                    "id": "eq.scene.feedback.high_empathy_low_recovery.primary",
+                    "micro_script": "“Let me check one thing first: what exactly would you like me to adjust?”",
+                    "reflection_prompt": "In this situation, what were you trying to protect: the facts, the relationship, or your own recovery space?",
+                    "reflection_question": "In this situation, what were you trying to protect: the facts, the relationship, or your own recovery space?",
                     "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
-                    "scene_family": "relationship_boundary",
-                    "strength": "Strength in this scene: You can make people feel understood and often notice subtle relational cues.",
-                    "tiny_experiment": "Next time, change only one move: pause first, reflect first, set a boundary first, or name your need first.",
-                    "title": "When a boundary is being pulled: the High Empathy, Low Recovery move",
-                    "typical_response": "when someone needs support while your time, energy, or responsibility line is being pulled, you may read another person’s pressure quickly; the work here is to keep recovery and boundaries after understanding them.",
+                    "scene_family": "feedback",
+                    "strength": "You can make people feel understood, especially when their emotion is obvious but not clearly stated.",
+                    "tiny_experiment": "Separate the feedback into three layers: facts, emotion, and next step. First confirm one concrete change.",
+                    "title": "High Empathy, Low Recovery in feedback",
+                    "typical_response": "When someone points out an issue, asks for changes, or evaluates your work, your first response may be shaped by this pattern: You often pick up other people’s feelings quickly, but you may not recover from carrying them just as quickly. You may register tone, expectation, or disappointment before the specific information.",
                     "variant": "primary",
-                    "why_this_matters": "This scene helps test whether High Empathy, Low Recovery is only a score interpretation or a pattern that repeats in real interactions."
+                    "why_this_matters": "This scene translates your EQ pattern into a concrete everyday moment."
                 },
                 {
-                    "better_move": "Slow the pace and signal that you are trying to solve the issue, not win the exchange.",
-                    "cost": "Cost to watch: Over time, you may leave difficult conversations carrying more emotional residue than the situation required.",
-                    "do_not_overread": "This is a likely scene pattern, not a prediction of how you will respond every time.",
+                    "better_move": "Name the point of disagreement before the fight becomes about winning. Shift from “How could you?” to “This is where we are stuck.”",
+                    "cost": "You may slide from “I understand this” into “I have to carry this with you or for you.”",
+                    "do_not_overread": "Use this as a scene lens, not a prediction of behavior.",
                     "evidence_signals": [
-                        "Whose emotion you notice first in this situation.",
-                        "Whether you can separate facts, feelings, and responsibility.",
-                        "Whether you feel clearer afterward or keep replaying the exchange."
+                        "high_empathy_low_recovery",
+                        "conflict",
+                        "EM_ER_high_low"
                     ],
                     "fallback_scene_id": "conflict",
                     "id": "eq.scene.conflict.high_empathy_low_recovery.primary",
-                    "micro_script": "“I do not want this to get bigger than it is. Let’s name one point of disagreement first.”",
-                    "reflection_prompt": "Think of the last similar moment: were you trying to protect the relationship, efficiency, yourself, or the other person first?",
+                    "micro_script": "“Let’s not make this bigger yet. What is the exact point we are stuck on?”",
+                    "reflection_prompt": "In this situation, what were you trying to protect: the facts, the relationship, or your own recovery space?",
+                    "reflection_question": "In this situation, what were you trying to protect: the facts, the relationship, or your own recovery space?",
                     "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
                     "scene_family": "conflict",
-                    "strength": "Strength in this scene: You can make people feel understood and often notice subtle relational cues.",
-                    "tiny_experiment": "Next time, change only one move: pause first, reflect first, set a boundary first, or name your need first.",
-                    "title": "When conflict heats up: the High Empathy, Low Recovery move",
-                    "typical_response": "when disagreement starts to carry emotion, speed, or hardened positions, you may read another person’s pressure quickly; the work here is to keep recovery and boundaries after understanding them.",
+                    "strength": "You can make people feel understood, especially when their emotion is obvious but not clearly stated.",
+                    "tiny_experiment": "Name the point of disagreement before the fight becomes about winning. Shift from “How could you?” to “This is where we are stuck.”",
+                    "title": "High Empathy, Low Recovery in conflict",
+                    "typical_response": "When a disagreement gets tense and both sides want to prove their point, you may use your default pattern to protect either the relationship or yourself. Its strength is: You can make people feel understood, especially when their emotion is obvious but not clearly stated. The cost may be: You may slide from “I understand this” into “I have to carry this with you or for you.”",
                     "variant": "primary",
-                    "why_this_matters": "This scene helps test whether High Empathy, Low Recovery is only a score interpretation or a pattern that repeats in real interactions."
+                    "why_this_matters": "This scene translates your EQ pattern into a concrete everyday moment."
                 },
                 {
-                    "better_move": "Recover before interpreting. Do not draw big conclusions while your system is still activated.",
-                    "cost": "Cost to watch: Over time, you may leave difficult conversations carrying more emotional residue than the situation required.",
-                    "do_not_overread": "This is a likely scene pattern, not a prediction of how you will respond every time.",
+                    "better_move": "Acknowledge the feeling first, then name the kind of support you can realistically offer.",
+                    "cost": "You may slide from “I understand this” into “I have to carry this with you or for you.”",
+                    "do_not_overread": "Use this as a scene lens, not a prediction of behavior.",
                     "evidence_signals": [
-                        "Whose emotion you notice first in this situation.",
-                        "Whether you can separate facts, feelings, and responsibility.",
-                        "Whether you feel clearer afterward or keep replaying the exchange."
+                        "high_empathy_low_recovery",
+                        "relationship_boundary",
+                        "EM_ER_high_low"
                     ],
-                    "fallback_scene_id": "pressure_recovery",
-                    "id": "eq.scene.pressure_recovery.high_empathy_low_recovery.primary",
-                    "micro_script": "“I’m going to take ten minutes, then come back to the next step.”",
-                    "reflection_prompt": "Think of the last similar moment: were you trying to protect the relationship, efficiency, yourself, or the other person first?",
+                    "fallback_scene_id": "relationship_boundary",
+                    "id": "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                    "micro_script": "“I can see this is heavy. What I can offer right now is..., but I cannot carry the whole thing for you.”",
+                    "reflection_prompt": "In this situation, what were you trying to protect: the facts, the relationship, or your own recovery space?",
+                    "reflection_question": "In this situation, what were you trying to protect: the facts, the relationship, or your own recovery space?",
                     "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
-                    "scene_family": "pressure_recovery",
-                    "strength": "Strength in this scene: You can make people feel understood and often notice subtle relational cues.",
-                    "tiny_experiment": "Next time, change only one move: pause first, reflect first, set a boundary first, or name your need first.",
-                    "title": "After a pressure spike: the High Empathy, Low Recovery move",
-                    "typical_response": "after a high-pressure exchange, when your body is still tense or your mind keeps replaying it, you may read another person’s pressure quickly; the work here is to keep recovery and boundaries after understanding them.",
+                    "scene_family": "relationship_boundary",
+                    "strength": "You can make people feel understood, especially when their emotion is obvious but not clearly stated.",
+                    "tiny_experiment": "Acknowledge the feeling first, then name the kind of support you can realistically offer.",
+                    "title": "High Empathy, Low Recovery in relationship boundaries",
+                    "typical_response": "When someone comes to you with emotion and wants time, comfort, or a solution, emotional response and responsibility can blur together, especially with a pattern like High Empathy, Low Recovery.",
                     "variant": "primary",
-                    "why_this_matters": "This scene helps test whether High Empathy, Low Recovery is only a score interpretation or a pattern that repeats in real interactions."
+                    "why_this_matters": "This scene translates your EQ pattern into a concrete everyday moment."
                 }
             ],
             "result_page_depth_modules": [
@@ -912,7 +877,7 @@
         "interpretation": {
             "action_prescription_id": "empathy_boundary",
             "career_environment_ids": [
-                "emotional_labor_medium",
+                "emotional_labor_high",
                 "autonomy_recovery_medium"
             ],
             "core_formulation_id": "high_empathy_low_recovery",
@@ -920,36 +885,36 @@
             "personalization_route": {
                 "claim_risk": "medium",
                 "commercial_depth": {
-                    "fallback_strategy": "if any selected asset is missing, render formulation + dimension summary + scientific boundary only",
-                    "first_screen_strategy": "show one core claim, one evidence point, one next action",
+                    "fallback_strategy": "if selected assets are missing, render formulation + dimension summary + scientific boundary only",
+                    "first_screen_strategy": "route_headline + evidence label + next best action",
                     "reader_trust_strategy": "explain why this route was selected without exposing scoring internals"
                 },
                 "do_not_overread": {
-                    "en": "The route controls content selection and reading order only. It is not a permanent personality label and does not replace real-world feedback.",
-                    "zh-CN": "路线只控制内容选择和阅读顺序，不代表长期人格定型，也不能替代真实关系反馈。"
+                    "en": "This is a content route, not a scoring rule or fixed identity label.",
+                    "zh-CN": "这是一条内容路由，不是评分规则，也不是固定人格标签。"
                 },
                 "formulation_id": "high_empathy_low_recovery",
                 "locales": {
                     "en": {
-                        "evidence_snapshot_label": "Route evidence: dimension pattern, gap direction, response quality, and selected content assets.",
-                        "next_best_action": "Read the three scenes first, then practice one prescription for seven days.",
-                        "route_headline": "Your reading path: how High Empathy, Low Recovery shows up in real situations",
+                        "evidence_snapshot_label": "Route evidence: core formulation, dimension pattern, response-quality signals, and selected assets.",
+                        "next_best_action": "Read the selected scenes first, then practice one prescription for seven days.",
+                        "route_headline": "High Empathy, Low Recovery",
                         "save_reason": "Save this route so you can compare it with real interactions later.",
-                        "why_this_feels_specific": "This path is not a label. It turns score gaps into the scenes and smallest actions most worth checking first."
+                        "why_this_feels_specific": "This route organizes your strongest signals as High Empathy, Low Recovery and prioritizes the most relevant mechanisms, scenes, and practices."
                     },
                     "zh-CN": {
-                        "evidence_snapshot_label": "本路线依据：维度组合、差距方向、答题质量和已选内容资产。",
-                        "next_best_action": "先读 3 个场景，再只选择 1 条行动处方练 7 天。",
-                        "route_headline": "你的阅读路径：先看「高共情，低恢复」如何出现在真实场景里",
-                        "save_reason": "保存这条路线，之后可以对照真实互动验证它是否准确。",
-                        "why_this_feels_specific": "这条路径不是把你归类，而是把分数差距转译为最容易复现的场景和最小行动。"
+                        "evidence_snapshot_label": "本路线依据：核心 formulation、维度组合、质量信号和已选内容资产。",
+                        "next_best_action": "先读路线中的场景卡，再选择一个行动处方练 7 天。",
+                        "route_headline": "高共情，低恢复",
+                        "save_reason": "保存这条路线，之后可对照真实互动验证它是否准确。",
+                        "why_this_feels_specific": "这个路线把你的主要信号组织为“高共情，低恢复”，并优先展示最相关的机制、场景和行动。"
                     }
                 },
-                "priority": 40,
-                "route_id": "route.eq.033.mixed_em_er",
+                "priority": 101,
+                "route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
                 "why_this_route_exists": {
-                    "en": "This route turns the High Empathy, Low Recovery pattern (EM:high, ER:low, SA:mid, RM:mid) into a focused reading path: the most relevant scenes (relationship_boundary / conflict / pressure_recovery) and the empathy with boundaries prescription. It decides what to read and practice first; it does not rescore the result.",
-                    "zh-CN": "这条路线用于把「高共情，低恢复」的 EM:high、ER:low、SA:mid、RM:mid 转译成最需要优先阅读的场景（relationship_boundary / conflict / pressure_recovery）和「共情边界」行动处方。它解决的是“先看什么、先练什么”，不是重新判分。"
+                    "en": "This route organizes your strongest signals as High Empathy, Low Recovery and prioritizes the most relevant mechanisms, scenes, and practices.",
+                    "zh-CN": "这个路线把你的主要信号组织为“高共情，低恢复”，并优先展示最相关的机制、场景和行动。"
                 }
             },
             "primary_mechanism_ids": [
@@ -957,20 +922,20 @@
                 "EM_RM_high_low"
             ],
             "primary_scene_ids": [
-                "relationship_boundary",
+                "feedback",
                 "conflict",
-                "pressure_recovery"
+                "relationship_boundary"
             ],
             "primary_scene_variant_ids": [
-                "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                "eq.scene.feedback.high_empathy_low_recovery.primary",
                 "eq.scene.conflict.high_empathy_low_recovery.primary",
-                "eq.scene.pressure_recovery.high_empathy_low_recovery.primary"
+                "eq.scene.relationship_boundary.high_empathy_low_recovery.primary"
             ],
-            "route_id": "route.eq.033.mixed_em_er",
+            "route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
             "selected_asset_ids": {
                 "action_prescription_id": "empathy_boundary",
                 "career_environment_ids": [
-                    "emotional_labor_medium",
+                    "emotional_labor_high",
                     "autonomy_recovery_medium"
                 ],
                 "core_formulation_id": "high_empathy_low_recovery",
@@ -979,14 +944,14 @@
                     "EM_RM_high_low"
                 ],
                 "scene_ids": [
-                    "relationship_boundary",
+                    "feedback",
                     "conflict",
-                    "pressure_recovery"
+                    "relationship_boundary"
                 ],
                 "scene_variant_ids": [
-                    "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                    "eq.scene.feedback.high_empathy_low_recovery.primary",
                     "eq.scene.conflict.high_empathy_low_recovery.primary",
-                    "eq.scene.pressure_recovery.high_empathy_low_recovery.primary"
+                    "eq.scene.relationship_boundary.high_empathy_low_recovery.primary"
                 ]
             },
             "signal_signature": {
@@ -999,11 +964,11 @@
                     "SA": "middle"
                 },
                 "formulation_id": "high_empathy_low_recovery",
-                "match_pattern": "EM_high_ER_low_RM_mid_SA_mid",
+                "match_pattern": "EM_any_ER_any_RM_any_SA_any",
                 "quality_level": "A",
                 "route_claim_risk": "medium",
-                "route_id": "route.eq.033.mixed_em_er",
-                "route_priority": 40,
+                "route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
+                "route_priority": 101,
                 "schema": "eq60.signal_signature.v1",
                 "strongest_dimension": "EM"
             },
@@ -1358,7 +1323,7 @@
         "methodology": {
             "content_version": "EQ_60/v1",
             "norm_status": "provisional",
-            "report_version": "eq_report_v5_assets_commercial_ready_v1_9",
+            "report_version": "eq_report_v5_assets_commercial_ready_v2_3",
             "scoring_version": "v1.0_normed_validity"
         },
         "next_module": {

@@ -22,6 +22,8 @@ final class Eq60V5ReportContractTest extends TestCase
 {
     use RefreshDatabase;
 
+    private const REPORT_VERSION = 'eq_report_v5_assets_commercial_ready_v2_3';
+
     /**
      * @return array<string,array{case_id:string,locale:string,file:string,formulation:string,action:string}>
      */
@@ -49,6 +51,13 @@ final class Eq60V5ReportContractTest extends TestCase
                 'low_confidence_result',
                 'retest_reflection',
             ],
+            'aware_but_unregulated_zh' => [
+                'EQ60_AWARE_BUT_UNREGULATED_SYNTHETIC',
+                'zh-CN',
+                'eq60_v5_aware_but_unregulated_zh.json',
+                'aware_but_unregulated',
+                'pause_recovery',
+            ],
             'balanced_en' => [
                 'EQ60_BALANCED_HIGH_ZH',
                 'en',
@@ -69,6 +78,13 @@ final class Eq60V5ReportContractTest extends TestCase
                 'eq60_v5_low_confidence_en.json',
                 'low_confidence_result',
                 'retest_reflection',
+            ],
+            'aware_but_unregulated_en' => [
+                'EQ60_AWARE_BUT_UNREGULATED_SYNTHETIC',
+                'en',
+                'eq60_v5_aware_but_unregulated_en.json',
+                'aware_but_unregulated',
+                'pause_recovery',
             ],
         ];
     }
@@ -168,20 +184,7 @@ final class Eq60V5ReportContractTest extends TestCase
     {
         $this->prepareEqContent();
 
-        $score = [
-            'quality' => ['level' => 'A', 'flags' => []],
-            'norms' => ['status' => 'PROVISIONAL'],
-            'version_snapshot' => ['engine_version' => 'v1.0_normed_validity'],
-            'scores' => [
-                'global' => ['raw_sum' => 186, 'std_score' => 103, 'percentile' => 60, 'level' => 'competent'],
-                'SA' => ['raw_sum' => 62, 'std_score' => 118, 'percentile' => 82, 'level' => 'exceptional'],
-                'ER' => ['raw_sum' => 38, 'std_score' => 82, 'percentile' => 16, 'level' => 'baseline'],
-                'EM' => ['raw_sum' => 45, 'std_score' => 98, 'percentile' => 50, 'level' => 'competent'],
-                'RM' => ['raw_sum' => 41, 'std_score' => 94, 'percentile' => 42, 'level' => 'competent'],
-            ],
-            'report' => [],
-            'report_tags' => [],
-        ];
+        $score = $this->awareButUnregulatedScore();
 
         $attempt = new Attempt([
             'scale_code' => 'EQ_60',
@@ -279,9 +282,52 @@ final class Eq60V5ReportContractTest extends TestCase
      */
     private function canonicalFixture(string $caseId, string $locale): array
     {
+        if ($caseId === 'EQ60_AWARE_BUT_UNREGULATED_SYNTHETIC') {
+            return $this->canonicalFixtureFromScore($caseId, $locale, $this->awareButUnregulatedScore());
+        }
+
         $case = $this->goldenCase($caseId);
         $anonId = 'anon_eq_v5_'.Str::slug($caseId, '_').'_'.Str::slug($locale, '_');
         $attemptId = $this->createAttemptWithResult($case, $locale, $anonId);
+        $token = $this->issueAnonToken($anonId);
+
+        $access = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access')
+            ->assertOk()
+            ->json();
+
+        /** @var Eq60ReportComposer $composer */
+        $composer = app(Eq60ReportComposer::class);
+        $attempt = Attempt::query()->findOrFail($attemptId);
+        $result = Result::query()->where('attempt_id', $attemptId)->firstOrFail();
+        $composed = $composer->composeVariant(
+            $attempt,
+            $result,
+            ReportAccess::VARIANT_FULL,
+            ['modules_allowed' => ReportAccess::eq60AllRuntimeModules()]
+        );
+
+        $this->assertTrue((bool) ($composed['ok'] ?? false));
+
+        return $this->canonicalize([
+            'fixture_schema' => 'eq60.v5.report_contract_fixture.v1',
+            'case_id' => $caseId,
+            'locale' => $locale,
+            'report_access' => $this->stableReportAccess($access),
+            'report' => $this->stableReport((array) ($composed['report'] ?? [])),
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $score
+     * @return array<string,mixed>
+     */
+    private function canonicalFixtureFromScore(string $caseId, string $locale, array $score): array
+    {
+        $anonId = 'anon_eq_v5_'.Str::slug($caseId, '_').'_'.Str::slug($locale, '_');
+        $attemptId = $this->createAttemptWithScore($score, $locale, $anonId);
         $token = $this->issueAnonToken($anonId);
 
         $access = $this->withHeaders([
@@ -372,7 +418,7 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets'));
         $this->assertFalse((bool) data_get($fixture, 'report.next_module.available', true));
         $this->assertSame('planned', (string) data_get($fixture, 'report.next_module.status'));
-        $this->assertSame('eq_report_v5_assets_commercial_ready_v1_9', (string) data_get($fixture, 'report.methodology.report_version'));
+        $this->assertSame(self::REPORT_VERSION, (string) data_get($fixture, 'report.methodology.report_version'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.asset_refs.result_snapshot_id'));
         $this->assertCount(7, (array) data_get($fixture, 'report.asset_refs.commercial_conversion_ids'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.asset_refs.quality_confidence_id'));
@@ -545,6 +591,86 @@ final class Eq60V5ReportContractTest extends TestCase
         ]);
 
         return $attempt->id;
+    }
+
+    /**
+     * @param  array<string,mixed>  $score
+     */
+    private function createAttemptWithScore(array $score, string $locale, string $anonId): string
+    {
+        $attemptId = (string) Str::uuid();
+        $attempt = Attempt::create([
+            'id' => $attemptId,
+            'org_id' => 0,
+            'anon_id' => $anonId,
+            'scale_code' => 'EQ_60',
+            'scale_version' => 'v0.3',
+            'region' => 'CN_MAINLAND',
+            'locale' => $locale,
+            'question_count' => 60,
+            'client_platform' => 'test',
+            'answers_summary_json' => ['stage' => 'eq_v5_contract_fixture'],
+            'started_at' => now()->subSeconds(420),
+            'submitted_at' => now(),
+            'pack_id' => 'EQ_60',
+            'dir_version' => 'v1',
+            'content_package_version' => 'v1',
+            'scoring_spec_version' => 'eq60_spec_2026_v2',
+        ]);
+
+        Result::create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'scale_code' => 'EQ_60',
+            'scale_version' => 'v0.3',
+            'type_code' => '',
+            'scores_json' => (array) ($score['scores'] ?? []),
+            'scores_pct' => [],
+            'axis_states' => [],
+            'content_package_version' => 'v1',
+            'result_json' => [
+                'scale_code' => 'EQ_60',
+                'quality' => $score['quality'] ?? [],
+                'norms' => $score['norms'] ?? [],
+                'scores' => $score['scores'] ?? [],
+                'report' => $score['report'] ?? [],
+                'report_tags' => $score['report_tags'] ?? [],
+                'version_snapshot' => $score['version_snapshot'] ?? [],
+                'normed_json' => $score,
+                'breakdown_json' => ['score_result' => $score],
+                'axis_scores_json' => ['score_result' => $score],
+            ],
+            'pack_id' => 'EQ_60',
+            'dir_version' => 'v1',
+            'scoring_spec_version' => 'eq60_spec_2026_v2',
+            'report_engine_version' => 'v1.2',
+            'is_valid' => true,
+            'computed_at' => now(),
+        ]);
+
+        return $attempt->id;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function awareButUnregulatedScore(): array
+    {
+        return [
+            'quality' => ['level' => 'A', 'flags' => []],
+            'norms' => ['status' => 'PROVISIONAL'],
+            'version_snapshot' => ['engine_version' => 'v1.0_normed_validity'],
+            'scores' => [
+                'global' => ['raw_sum' => 186, 'std_score' => 103, 'percentile' => 60, 'level' => 'competent'],
+                'SA' => ['raw_sum' => 62, 'std_score' => 118, 'percentile' => 82, 'level' => 'exceptional'],
+                'ER' => ['raw_sum' => 38, 'std_score' => 82, 'percentile' => 16, 'level' => 'baseline'],
+                'EM' => ['raw_sum' => 45, 'std_score' => 98, 'percentile' => 50, 'level' => 'competent'],
+                'RM' => ['raw_sum' => 41, 'std_score' => 94, 'percentile' => 42, 'level' => 'competent'],
+            ],
+            'report' => [],
+            'report_tags' => [],
+        ];
     }
 
     /**
