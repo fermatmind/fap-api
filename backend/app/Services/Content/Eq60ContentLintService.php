@@ -1079,11 +1079,11 @@ final class Eq60ContentLintService
         ], $errors);
 
         $depthAssets = (array) data_get($docs, 'result_page_depth_modules.assets', []);
-        foreach ([
-            'eq.depth.evidence_stack.default',
-            'eq.depth.how_to_read.default',
-            'eq.depth.reality_check.default',
-        ] as $assetId) {
+        if (count($depthAssets) < 30) {
+            $errors[] = $this->error($this->loader->rawPath('report_assets/result_page_depth_modules.json', $version), 1, 'result_page_depth_modules.assets must contain formulation-specific depth assets.');
+        }
+        foreach ($depthAssets as $assetId => $assetRaw) {
+            $assetId = (string) $assetId;
             $asset = (array) ($depthAssets[$assetId] ?? []);
             $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/result_page_depth_modules.json', $version), $asset, [
                 'title',
@@ -1093,6 +1093,17 @@ final class Eq60ContentLintService
             $claimRisk = strtolower(trim((string) data_get($asset, 'meta.claim_risk', '')));
             if (! in_array($claimRisk, ['low', 'medium', 'high'], true)) {
                 $errors[] = $this->error($this->loader->rawPath('report_assets/result_page_depth_modules.json', $version), 1, $assetId.'.meta.claim_risk must be low, medium, or high.');
+            }
+
+            if (! str_starts_with($assetId, 'eq.depth.')) {
+                $errors[] = $this->error($this->loader->rawPath('report_assets/result_page_depth_modules.json', $version), 1, $assetId.' must use the eq.depth.* namespace.');
+            }
+        }
+
+        $depthJson = json_encode($depthAssets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '';
+        foreach (['购买', '解锁', '付费', 'paywall', 'premium', 'upgrade', 'SKU_EQ_60_FULL_299', 'EQ_60_FULL', 'MSCEIT', '招聘筛选', '临床诊断'] as $blockedTerm) {
+            if (str_contains($depthJson, $blockedTerm)) {
+                $errors[] = $this->error($this->loader->rawPath('report_assets/result_page_depth_modules.json', $version), 1, 'result page depth modules must not contain blocked term: '.$blockedTerm);
             }
         }
 

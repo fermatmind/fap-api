@@ -63638,15 +63638,15 @@
     "branch": "codex/pr-eq-v20-01-direct-mapped-assets",
     "title": "PR-EQ-V20-01 Backend EQ v2.3 direct-mapped assets",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "PR-EQ-V19-06"
     ],
-    "commit_sha": "6815cebbc3a427019d8ff15c76835fc7a846f836",
+    "commit_sha": "83119933f6d796a5189fe454e28b8782861150e0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2486",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-28T00:39:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "checks": {
       "authorization": {
@@ -63728,9 +63728,15 @@
         "at": "2026-06-28T00:33:57Z",
         "status": "ready_to_merge",
         "notes": "GitHub checks passed; scope revalidation completed before merge."
+      },
+      {
+        "at": "2026-06-28T13:19:31Z",
+        "status": "merged_reconciled",
+        "notes": "Verified PR #2486 merged and origin/main contains merge commit before starting PR-EQ-V20-02."
       }
     ],
-    "notes": "PR-EQ-V20-01 imports direct-mapped v2.3 assets only; career overlays, route matrix activation, dynamic depth modules, canonical fixtures, and frontend consumption remain deferred."
+    "notes": "PR-EQ-V20-01 imports direct-mapped v2.3 assets only; career overlays, route matrix activation, dynamic depth modules, canonical fixtures, and frontend consumption remain deferred.",
+    "merge_commit_sha": "83119933f6d796a5189fe454e28b8782861150e0"
   },
   "BIG5-CONTENT-ASSET-BENCHMARK-RUBRIC-01": {
     "repo": "fap-api",
@@ -64641,5 +64647,194 @@
         "note": "GitHub checks green, mergeStateStatus CLEAN, PR scope re-reviewed."
       }
     ]
+  },
+  "PR-EQ-V20-02": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-v20-02-depth-modules-v23",
+    "title": "PR-EQ-V20-02 Backend EQ v2.3 result page depth modules",
+    "train_scope": "eq_v20_content_asset_expansion",
+    "status": "ready_to_merge",
+    "depends_on": [
+      "PR-EQ-V20-01"
+    ],
+    "commit_sha": "70da2707849a954fcbcd9cc3b947f2922a7afb91",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2519",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided explicit implementation plan for PR-EQ-V20-02 through PR-EQ-V20-06 and requested implementation."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR-EQ-V20-01 merged as #2486; origin/main contains merge commit 83119933f6d796a5189fe454e28b8782861150e0."
+      },
+      "local": [
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+          "status": "passed"
+        },
+        {
+          "cmd": "rsync -a --delete backend/content_packs/EQ_60/v1/compiled/ backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+          "status": "passed"
+        },
+        {
+          "cmd": "ruby YAML parse for docs/codex/pr-train.yaml",
+          "status": "passed"
+        },
+        {
+          "cmd": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "status": "passed"
+        },
+        {
+          "cmd": "depth module JSON parse, mirror check, blocked term scan",
+          "status": "passed"
+        },
+        {
+          "cmd": "git diff --check",
+          "status": "passed"
+        }
+      ],
+      "scope_validation": {
+        "status": "passed",
+        "evidence": "Staged files matched PR-EQ-V20-02 allowed paths before commit."
+      },
+      "diff_check": {
+        "status": "passed",
+        "evidence": "git diff --check and git diff --cached --check passed before commit."
+      },
+      "github": {
+        "status": "passed",
+        "evidence": "All GitHub checks passed on PR #2519; mergeStateStatus=CLEAN."
+      }
+    },
+    "events": [
+      {
+        "at": "2026-06-28T13:19:31Z",
+        "status": "initialized",
+        "notes": "Initialized from user-provided V20 productization plan."
+      },
+      {
+        "at": "2026-06-28T13:21:45Z",
+        "status": "local_checks_passed",
+        "notes": "Imported 60 v2.3 depth modules plus default compatibility modules and passed V20-02 local validation."
+      },
+      {
+        "at": "2026-06-28T13:23:11Z",
+        "status": "pr_open",
+        "notes": "Opened GitHub PR #2519 after local checks and scoped push."
+      },
+      {
+        "at": "2026-06-28T13:29:37Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed; scope and merge state clean before merge."
+      }
+    ],
+    "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
+  },
+  "PR-EQ-V20-03": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-v20-03-scene-variants-v23",
+    "title": "PR-EQ-V20-03 Backend EQ v2.3 scene variants",
+    "train_scope": "eq_v20_content_asset_expansion",
+    "status": "initialized",
+    "depends_on": [
+      "PR-EQ-V20-02"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided explicit implementation plan for PR-EQ-V20-02 through PR-EQ-V20-06 and requested implementation."
+      }
+    },
+    "events": [
+      {
+        "at": "2026-06-28T13:19:31Z",
+        "status": "initialized",
+        "notes": "Initialized from user-provided V20 productization plan."
+      }
+    ],
+    "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
+  },
+  "PR-EQ-V20-04": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-v20-04-route-matrix-v23",
+    "title": "PR-EQ-V20-04 Backend EQ v2.3 personalization route matrix",
+    "train_scope": "eq_v20_content_asset_expansion",
+    "status": "initialized",
+    "depends_on": [
+      "PR-EQ-V20-03"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided explicit implementation plan for PR-EQ-V20-02 through PR-EQ-V20-06 and requested implementation."
+      }
+    },
+    "events": [
+      {
+        "at": "2026-06-28T13:19:31Z",
+        "status": "initialized",
+        "notes": "Initialized from user-provided V20 productization plan."
+      }
+    ],
+    "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
+  },
+  "PR-EQ-V20-06": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-v20-06-fixtures-smoke-readiness",
+    "title": "PR-EQ-V20-06 EQ v2.3 canonical fixtures and smoke readiness",
+    "train_scope": "eq_v20_content_asset_expansion",
+    "status": "initialized",
+    "depends_on": [
+      "PR-EQ-V20-05"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided explicit implementation plan for PR-EQ-V20-02 through PR-EQ-V20-06 and requested implementation."
+      }
+    },
+    "events": [
+      {
+        "at": "2026-06-28T13:19:31Z",
+        "status": "initialized",
+        "notes": "Initialized from user-provided V20 productization plan."
+      }
+    ],
+    "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
   }
 }
