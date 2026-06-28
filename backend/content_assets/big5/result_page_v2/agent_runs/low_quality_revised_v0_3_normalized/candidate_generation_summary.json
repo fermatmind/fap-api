@@ -1,0 +1,63 @@
+{
+  "body_quality": {
+    "max_body_chars": 198,
+    "min_body_chars": 180,
+    "recalculated_by": "codex_low_quality_candidate_normalize_01"
+  },
+  "candidate_counts": {
+    "content_asset": 14,
+    "selector_asset": 14,
+    "state_count": 14
+  },
+  "candidate_stage": "low_quality_revised_v0_3_normalized",
+  "coverage": {
+    "covered_low_quality_states": 14,
+    "expected_low_quality_states": 14,
+    "missing_low_quality_states": [],
+    "state_counts": {
+      "compare_boundary_low_quality": 1,
+      "history_boundary_low_quality": 1,
+      "inconsistent_pattern_context": 1,
+      "interrupted_context": 1,
+      "lower_confidence_explanation": 1,
+      "missing_or_sparse_information": 1,
+      "next_step_low_quality": 1,
+      "non_blaming_boundary": 1,
+      "retest_recommended_context": 1,
+      "rushed_answer_context": 1,
+      "safe_to_show_when_low_quality": 1,
+      "share_boundary_low_quality": 1,
+      "should_soften_or_hide_when_low_quality": 1,
+      "unclear_self_observation": 1
+    }
+  },
+  "leak_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "negative_guarantees": {
+    "cms_or_search_changed": false,
+    "final_result_contract_generated": false,
+    "frontend_copy_added": false,
+    "production_gate_changed": false,
+    "runtime_changed": false,
+    "staging_import_performed": false
+  },
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "runtime_use": "staging_only",
+  "schema": "fap.big5.result_page_v2.low_quality.revised_v0_3.normalized.generation_summary.v0_1",
+  "status": "pass",
+  "validation": {
+    "error_count": 0,
+    "status": "pass"
+  }
+}
