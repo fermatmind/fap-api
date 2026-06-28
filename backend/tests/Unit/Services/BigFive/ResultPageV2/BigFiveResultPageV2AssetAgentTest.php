@@ -2153,6 +2153,129 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_facets_30_revised_v0_4_staging_import_is_reviewed_and_non_runtime(): void
+    {
+        $stagingDir = base_path('content_assets/big5/result_page_v2/staging_candidate_imports/facets_30_revised_v0_4_staging_import');
+
+        foreach ([
+            'selector_asset_candidates.staging.jsonl',
+            'content_asset_candidates.staging.jsonl',
+            'staging_import_manifest.json',
+            'staging_import_validation_report.json',
+            'repair_log.json',
+        ] as $filename) {
+            $this->assertFileExists($stagingDir.'/'.$filename);
+        }
+
+        $manifest = $this->readJson($stagingDir.'/staging_import_manifest.json');
+        $validation = $this->readJson($stagingDir.'/staging_import_validation_report.json');
+        $repairLog = $this->readJson($stagingDir.'/repair_log.json');
+        $selectorRows = $this->readJsonl($stagingDir.'/selector_asset_candidates.staging.jsonl');
+        $contentRows = $this->readJsonl($stagingDir.'/content_asset_candidates.staging.jsonl');
+
+        $this->assertSame('staging_only', $manifest['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($manifest['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($manifest['ready_for_pilot'] ?? true));
+        $this->assertFalse((bool) ($manifest['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($manifest['ready_for_production'] ?? true));
+        $this->assertSame('content_assets/big5/result_page_v2/agent_runs/facets_30_revised_v0_4_normalized', $manifest['candidate_dir'] ?? null);
+        $this->assertSame(30, $manifest['selector_asset_candidate_count'] ?? null);
+        $this->assertSame(30, $manifest['content_asset_candidate_count'] ?? null);
+        $this->assertFalse((bool) data_get($manifest, 'negative_guarantees.runtime_flag_change', true));
+        $this->assertFalse((bool) data_get($manifest, 'negative_guarantees.production_import_gate_change', true));
+        $this->assertFalse((bool) data_get($manifest, 'negative_guarantees.rollout_gate_change', true));
+        $this->assertFalse((bool) data_get($manifest, 'negative_guarantees.frontend_copy_write', true));
+        $this->assertFalse((bool) data_get($manifest, 'negative_guarantees.cms_write', true));
+
+        $this->assertTrue((bool) ($validation['staging_write_performed'] ?? false));
+        $this->assertSame('pass', data_get($validation, 'candidate_validation.status'));
+        $this->assertSame(0, data_get($validation, 'candidate_validation.error_count'));
+        $this->assertSame('pass', data_get($validation, 'leak_scan.status'));
+        $this->assertSame(0, data_get($validation, 'leak_scan.hit_count'));
+        $this->assertSame([], data_get($validation, 'leak_scan.hits'));
+        $this->assertSame([], data_get($validation, 'review_manifest.errors'));
+        $this->assertSame([], $repairLog['entries'] ?? ['unexpected']);
+        $this->assertFalse((bool) ($repairLog['repair_required'] ?? true));
+
+        $this->assertCount(30, $selectorRows);
+        $this->assertCount(30, $contentRows);
+
+        $facetCodes = [];
+        $traitCounts = [];
+        foreach ($contentRows as $row) {
+            $this->assertSame('staging_only', $row['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($row['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_pilot'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_production'] ?? true));
+            $this->assertSame('facet_reframe', $row['asset_type'] ?? null);
+            $this->assertSame('module_05_facet_reframe', $row['module_key'] ?? null);
+            $this->assertGreaterThanOrEqual(240, (int) data_get($row, 'body_quality.body_chars', 0));
+            $this->assertLessThanOrEqual(420, (int) data_get($row, 'body_quality.body_chars', 999));
+            $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
+            $facetCodes[] = (string) data_get($row, 'applies_to.facet_code');
+            $trait = (string) data_get($row, 'applies_to.trait');
+            $traitCounts[$trait] = ($traitCounts[$trait] ?? 0) + 1;
+        }
+
+        sort($facetCodes);
+        ksort($traitCounts);
+        $this->assertSame(30, count(array_unique($facetCodes)));
+        $this->assertSame(['A' => 6, 'C' => 6, 'E' => 6, 'N' => 6, 'O' => 6], $traitCounts);
+
+        foreach ($selectorRows as $row) {
+            $this->assertSame('approved_for_staging', $row['review_status'] ?? null);
+            $this->assertSame('facets_30_revised_v0_4_normalized', data_get($row, 'provenance.candidate_stage'));
+            $this->assertFalse((bool) data_get($row, 'replacement_policy.replaces_existing_runtime_asset', true));
+        }
+
+        $visibleText = implode("\n", array_merge(
+            array_map(
+                static fn (array $row): string => implode("\n", array_filter([
+                    (string) ($row['title_zh'] ?? ''),
+                    (string) ($row['summary_zh'] ?? ''),
+                    (string) ($row['body_zh'] ?? ''),
+                    (string) ($row['short_body_zh'] ?? ''),
+                    (string) ($row['cta_zh'] ?? ''),
+                ])),
+                $contentRows
+            ),
+            array_map(
+                static fn (array $row): string => implode("\n", array_filter([
+                    (string) data_get($row, 'public_payload.title_zh', ''),
+                    (string) data_get($row, 'public_payload.summary_zh', ''),
+                ])),
+                $selectorRows
+            )
+        ));
+
+        foreach ([
+            'private_url',
+            'attempt_id',
+            'raw_score',
+            'raw score',
+            'percentile',
+            'fixed_type',
+            'user_confirmed_type',
+            'type_code',
+            'big5:',
+            'band:',
+            'payload',
+            'registry',
+            'PR3B',
+            'AttemptReadController',
+            'Big Five Report Engine',
+            '[object Object]',
+            '本 由 生成',
+            '不代表生产 已接入',
+            '筛选',
+            '不一定',
+            '失败',
+        ] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+        }
+    }
+
     public function test_committed_domain_bands_revised_v0_3_staging_import_is_reviewed_and_non_runtime(): void
     {
         $stagingDir = base_path('content_assets/big5/result_page_v2/staging_candidate_imports/domain_bands_revised_v0_3_staging_import');
