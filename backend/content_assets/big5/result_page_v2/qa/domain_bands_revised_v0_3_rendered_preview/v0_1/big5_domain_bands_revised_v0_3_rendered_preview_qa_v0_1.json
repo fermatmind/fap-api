@@ -1,0 +1,502 @@
+{
+  "acceptance": {
+    "compare_surface_safe": true,
+    "copy_duplicate_pass": true,
+    "copy_length_pass": true,
+    "copy_not_thin_pass": true,
+    "history_surface_safe": true,
+    "no_rendered_hygiene_hits": true,
+    "pdf_surface_safe": true,
+    "result_page_position_correct": true,
+    "sentence_quality_pass": true,
+    "share_surface_safe": true
+  },
+  "counts": {
+    "band_count": 5,
+    "content_asset_candidates": 25,
+    "domain_band_combinations": 25,
+    "domain_count": 5,
+    "module_counts": {
+      "module_03_trait_deep_dive": 25
+    },
+    "selector_asset_candidates": 25,
+    "slot_count": 25,
+    "surface_count": 5
+  },
+  "coverage": {
+    "covered_domain_band_combinations": 25,
+    "domain_band_keys": [
+      "A.high",
+      "A.low",
+      "A.mid",
+      "A.very_high",
+      "A.very_low",
+      "C.high",
+      "C.low",
+      "C.mid",
+      "C.very_high",
+      "C.very_low",
+      "E.high",
+      "E.low",
+      "E.mid",
+      "E.very_high",
+      "E.very_low",
+      "N.high",
+      "N.low",
+      "N.mid",
+      "N.very_high",
+      "N.very_low",
+      "O.high",
+      "O.low",
+      "O.mid",
+      "O.very_high",
+      "O.very_low"
+    ],
+    "expected_domain_band_combinations": 25,
+    "missing_domain_band_combinations": []
+  },
+  "created_at_utc": "2026-06-28T06:35:00Z",
+  "mode": "backend_fixture_rendered_preview_qa",
+  "package_key": "big5_result_page_v2.domain_bands_revised_v0_3.rendered_preview_qa.v0_1",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "remaining_holds": [
+    "no_runtime_enablement",
+    "no_production_import",
+    "no_rollout_change",
+    "no_frontend_copy",
+    "no_cms_or_search_publication",
+    "live_rendered_page_qa_deferred_until_accessible_fixture_or_pilot_url"
+  ],
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "rules": [
+      "no_selector_tokens",
+      "no_internal_rendered_terms",
+      "no_broken_template_fragments",
+      "no_risk_wording_regression",
+      "no_sensitive_score_or_rank_text"
+    ],
+    "scan_scope": "staging_candidate_visible_text_fields_only",
+    "status": "pass"
+  },
+  "rendered_preview_scope": {
+    "cms_or_search_changed": false,
+    "evidence_type": "backend_fixture_only",
+    "final_result_contract_generated": false,
+    "frontend_copy_added": false,
+    "live_url_verified": false,
+    "pdf_file_stored": false,
+    "private_identifier_stored": false,
+    "production_gate_changed": false
+  },
+  "runtime_use": "not_runtime",
+  "schema": "fap.big5.result_page_v2.domain_bands.revised_v0_3.rendered_preview_qa.v0_1",
+  "source": {
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/domain_bands_revised_v0_3_normalized",
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/domain_bands_revised_v0_3_staging_import",
+    "staging_import_validation_status": "pass",
+    "staging_write_performed": true
+  },
+  "status": "pass",
+  "surface_matrix": [
+    {
+      "candidate_count": 25,
+      "expected_modules": [
+        "module_03_trait_deep_dive"
+      ],
+      "render_strategy": "private_result_trait_deep_dive_cards",
+      "safety_notes": [
+        "full text is scoped to the private result page context",
+        "visible text scan has zero internal-token hits",
+        "domain-band keys stay structural and are not rendered as visible text"
+      ],
+      "status": "pass",
+      "surface": "result_page"
+    },
+    {
+      "candidate_count": 25,
+      "expected_modules": [
+        "module_03_trait_deep_dive"
+      ],
+      "render_strategy": "private_pdf_trait_deep_dive_cards",
+      "safety_notes": [
+        "no private URL evidence stored",
+        "no sensitive score or rank evidence stored",
+        "body length stays under PDF readability threshold"
+      ],
+      "status": "pass",
+      "surface": "pdf"
+    },
+    {
+      "candidate_count": 0,
+      "expected_modules": [],
+      "render_strategy": "do_not_render_full_domain_band_body_on_share_card",
+      "safety_notes": [
+        "domain band candidates are not shareable",
+        "share must use share safety summary instead of this full private body"
+      ],
+      "status": "pass",
+      "surface": "share"
+    },
+    {
+      "candidate_count": 25,
+      "expected_modules": [
+        "module_03_trait_deep_dive"
+      ],
+      "render_strategy": "summary_only_if_surface_adopts_domain_band_reference",
+      "safety_notes": [
+        "history can reference title or short summary only",
+        "no sensitive score or rank text is present"
+      ],
+      "status": "pass",
+      "surface": "history"
+    },
+    {
+      "candidate_count": 25,
+      "expected_modules": [
+        "module_03_trait_deep_dive"
+      ],
+      "render_strategy": "summary_only_no_ranking_or_type_claim",
+      "safety_notes": [
+        "compare must not convert bands into rank or diagnosis",
+        "no public rank claim is present"
+      ],
+      "status": "pass",
+      "surface": "compare"
+    }
+  ],
+  "surface_safety": {
+    "compare": "pass_summary_only_no_rank_or_diagnosis",
+    "history": "pass_summary_only_no_private_detail",
+    "pdf": "pass_private_full_text_allowed_without_private_link_or_sensitive_scores",
+    "result_page": "pass_private_full_text_allowed",
+    "share": "pass_full_body_not_shareable_use_share_safety_summary"
+  },
+  "visible_text_quality": {
+    "asset_metrics": [
+      {
+        "asset_key": "domain_bands_content_thickening.o.very_low.v0_1",
+        "band": "very_low",
+        "body_chars": 281,
+        "cta_chars": 30,
+        "max_sentence_chars": 63,
+        "sentence_like_count": 8,
+        "short_body_chars": 42,
+        "summary_chars": 30,
+        "title_chars": 14,
+        "trait": "O"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.o.low.v0_1",
+        "band": "low",
+        "body_chars": 267,
+        "cta_chars": 26,
+        "max_sentence_chars": 58,
+        "sentence_like_count": 8,
+        "short_body_chars": 42,
+        "summary_chars": 30,
+        "title_chars": 17,
+        "trait": "O"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.o.mid.v0_1",
+        "band": "mid",
+        "body_chars": 269,
+        "cta_chars": 27,
+        "max_sentence_chars": 61,
+        "sentence_like_count": 8,
+        "short_body_chars": 42,
+        "summary_chars": 25,
+        "title_chars": 18,
+        "trait": "O"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.o.high.v0_1",
+        "band": "high",
+        "body_chars": 266,
+        "cta_chars": 24,
+        "max_sentence_chars": 63,
+        "sentence_like_count": 8,
+        "short_body_chars": 42,
+        "summary_chars": 23,
+        "title_chars": 18,
+        "trait": "O"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.o.very_high.v0_1",
+        "band": "very_high",
+        "body_chars": 268,
+        "cta_chars": 24,
+        "max_sentence_chars": 39,
+        "sentence_like_count": 8,
+        "short_body_chars": 41,
+        "summary_chars": 23,
+        "title_chars": 16,
+        "trait": "O"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.c.very_low.v0_1",
+        "band": "very_low",
+        "body_chars": 280,
+        "cta_chars": 32,
+        "max_sentence_chars": 64,
+        "sentence_like_count": 8,
+        "short_body_chars": 40,
+        "summary_chars": 29,
+        "title_chars": 16,
+        "trait": "C"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.c.low.v0_1",
+        "band": "low",
+        "body_chars": 272,
+        "cta_chars": 29,
+        "max_sentence_chars": 64,
+        "sentence_like_count": 8,
+        "short_body_chars": 41,
+        "summary_chars": 25,
+        "title_chars": 16,
+        "trait": "C"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.c.mid.v0_1",
+        "band": "mid",
+        "body_chars": 280,
+        "cta_chars": 25,
+        "max_sentence_chars": 58,
+        "sentence_like_count": 9,
+        "short_body_chars": 36,
+        "summary_chars": 28,
+        "title_chars": 17,
+        "trait": "C"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.c.high.v0_1",
+        "band": "high",
+        "body_chars": 269,
+        "cta_chars": 24,
+        "max_sentence_chars": 56,
+        "sentence_like_count": 8,
+        "short_body_chars": 38,
+        "summary_chars": 24,
+        "title_chars": 13,
+        "trait": "C"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.c.very_high.v0_1",
+        "band": "very_high",
+        "body_chars": 263,
+        "cta_chars": 23,
+        "max_sentence_chars": 54,
+        "sentence_like_count": 8,
+        "short_body_chars": 37,
+        "summary_chars": 21,
+        "title_chars": 17,
+        "trait": "C"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.e.very_low.v0_1",
+        "band": "very_low",
+        "body_chars": 269,
+        "cta_chars": 20,
+        "max_sentence_chars": 55,
+        "sentence_like_count": 9,
+        "short_body_chars": 42,
+        "summary_chars": 23,
+        "title_chars": 17,
+        "trait": "E"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.e.low.v0_1",
+        "band": "low",
+        "body_chars": 270,
+        "cta_chars": 18,
+        "max_sentence_chars": 49,
+        "sentence_like_count": 9,
+        "short_body_chars": 38,
+        "summary_chars": 25,
+        "title_chars": 11,
+        "trait": "E"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.e.mid.v0_1",
+        "band": "mid",
+        "body_chars": 264,
+        "cta_chars": 21,
+        "max_sentence_chars": 52,
+        "sentence_like_count": 9,
+        "short_body_chars": 40,
+        "summary_chars": 24,
+        "title_chars": 14,
+        "trait": "E"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.e.high.v0_1",
+        "band": "high",
+        "body_chars": 265,
+        "cta_chars": 21,
+        "max_sentence_chars": 57,
+        "sentence_like_count": 8,
+        "short_body_chars": 35,
+        "summary_chars": 21,
+        "title_chars": 14,
+        "trait": "E"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.e.very_high.v0_1",
+        "band": "very_high",
+        "body_chars": 267,
+        "cta_chars": 25,
+        "max_sentence_chars": 47,
+        "sentence_like_count": 8,
+        "short_body_chars": 39,
+        "summary_chars": 25,
+        "title_chars": 18,
+        "trait": "E"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.a.very_low.v0_1",
+        "band": "very_low",
+        "body_chars": 267,
+        "cta_chars": 22,
+        "max_sentence_chars": 47,
+        "sentence_like_count": 8,
+        "short_body_chars": 36,
+        "summary_chars": 30,
+        "title_chars": 14,
+        "trait": "A"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.a.low.v0_1",
+        "band": "low",
+        "body_chars": 261,
+        "cta_chars": 20,
+        "max_sentence_chars": 64,
+        "sentence_like_count": 8,
+        "short_body_chars": 38,
+        "summary_chars": 24,
+        "title_chars": 13,
+        "trait": "A"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.a.mid.v0_1",
+        "band": "mid",
+        "body_chars": 263,
+        "cta_chars": 22,
+        "max_sentence_chars": 52,
+        "sentence_like_count": 9,
+        "short_body_chars": 37,
+        "summary_chars": 21,
+        "title_chars": 18,
+        "trait": "A"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.a.high.v0_1",
+        "band": "high",
+        "body_chars": 267,
+        "cta_chars": 21,
+        "max_sentence_chars": 56,
+        "sentence_like_count": 8,
+        "short_body_chars": 38,
+        "summary_chars": 25,
+        "title_chars": 14,
+        "trait": "A"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.a.very_high.v0_1",
+        "band": "very_high",
+        "body_chars": 262,
+        "cta_chars": 21,
+        "max_sentence_chars": 35,
+        "sentence_like_count": 9,
+        "short_body_chars": 35,
+        "summary_chars": 26,
+        "title_chars": 19,
+        "trait": "A"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.n.very_low.v0_1",
+        "band": "very_low",
+        "body_chars": 271,
+        "cta_chars": 22,
+        "max_sentence_chars": 40,
+        "sentence_like_count": 9,
+        "short_body_chars": 40,
+        "summary_chars": 24,
+        "title_chars": 17,
+        "trait": "N"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.n.low.v0_1",
+        "band": "low",
+        "body_chars": 267,
+        "cta_chars": 19,
+        "max_sentence_chars": 54,
+        "sentence_like_count": 9,
+        "short_body_chars": 32,
+        "summary_chars": 24,
+        "title_chars": 17,
+        "trait": "N"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.n.mid.v0_1",
+        "band": "mid",
+        "body_chars": 282,
+        "cta_chars": 21,
+        "max_sentence_chars": 51,
+        "sentence_like_count": 9,
+        "short_body_chars": 39,
+        "summary_chars": 28,
+        "title_chars": 17,
+        "trait": "N"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.n.high.v0_1",
+        "band": "high",
+        "body_chars": 268,
+        "cta_chars": 21,
+        "max_sentence_chars": 50,
+        "sentence_like_count": 9,
+        "short_body_chars": 31,
+        "summary_chars": 25,
+        "title_chars": 14,
+        "trait": "N"
+      },
+      {
+        "asset_key": "domain_bands_content_thickening.n.very_high.v0_1",
+        "band": "very_high",
+        "body_chars": 261,
+        "cta_chars": 22,
+        "max_sentence_chars": 37,
+        "sentence_like_count": 8,
+        "short_body_chars": 34,
+        "summary_chars": 26,
+        "title_chars": 19,
+        "trait": "N"
+      }
+    ],
+    "awkward_sentence_count": 0,
+    "awkward_sentence_items": [],
+    "duplicate_body_count": 0,
+    "duplicate_title_count": 0,
+    "max_body_chars": 282,
+    "max_cta_chars": 32,
+    "max_sentence_chars": 64,
+    "max_short_body_chars": 42,
+    "max_summary_chars": 30,
+    "max_title_chars": 19,
+    "min_body_chars": 261,
+    "sentence_like_count_max": 9,
+    "sentence_like_count_min": 8,
+    "status": "pass",
+    "too_long_count": 0,
+    "too_long_items": [],
+    "too_short_or_thin_count": 0,
+    "too_short_or_thin_items": []
+  }
+}
