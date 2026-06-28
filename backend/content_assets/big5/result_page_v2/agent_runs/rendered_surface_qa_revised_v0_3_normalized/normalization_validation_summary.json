@@ -1,0 +1,97 @@
+{
+  "candidate_counts": {
+    "content_asset": 24,
+    "selector_asset": 24
+  },
+  "leak_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "production_use_allowed": false,
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+  "source_qa_scan": {
+    "body_length_max": 214,
+    "body_length_min": 181,
+    "body_length_outside_180_320": [],
+    "claims_rendered_content_pass": false,
+    "content_asset_count": 24,
+    "covered_surfaces": [
+      "compare",
+      "history",
+      "pdf",
+      "print_saved",
+      "result_page",
+      "share"
+    ],
+    "duplicate_bodies": [],
+    "duplicate_body_count": 0,
+    "duplicate_title_count": 0,
+    "duplicate_titles": [],
+    "forbidden_hit_count": 0,
+    "forbidden_hits": [],
+    "forbidden_scan_scope": "entire_asset_json",
+    "generates_final_result_payload": false,
+    "missing_surfaces": [],
+    "production_use_allowed_true_count": 0,
+    "public_text_forbidden_hit_count": 0,
+    "public_text_forbidden_hits": [],
+    "public_text_forbidden_scan_scope": "text.title_zh|summary_zh|short_body_zh|body_zh|cta_zh",
+    "ready_for_pilot_true_count": 0,
+    "ready_for_production_true_count": 0,
+    "ready_for_runtime_true_count": 0,
+    "requires_codex_validation": [
+      "schema validation",
+      "selector contract validation",
+      "surface_key / slot_key mapping check",
+      "body_quality metadata recalculation",
+      "forbidden-token scan over rendered public text",
+      "result page / PDF / share / history / compare rendered hygiene scan",
+      "human review manifest",
+      "staging import only"
+    ],
+    "role_counts": {
+      "display_expectation": 6,
+      "issue_triage": 6,
+      "privacy_boundary": 6,
+      "summary_scope": 6
+    },
+    "runtime_use_all_staging_only": true,
+    "schema_version": "fap.big5.rendered_surface_qa_candidates.qa_scan.v0_3",
+    "surface_count": 6,
+    "writes_cms": false,
+    "writes_frontend_copy": false,
+    "writes_production": false,
+    "writes_seo": false
+  },
+  "stage_candidates_dry_run": {
+    "candidate_counts": {
+      "content_asset": 24,
+      "selector_asset": 24
+    },
+    "candidate_validation": {
+      "content_asset_candidate_count": 24,
+      "error_count": 0,
+      "errors": [],
+      "selector_asset_candidate_count": 24,
+      "status": "pass"
+    },
+    "leak_scan": {
+      "hit_count": 0,
+      "hits": [],
+      "status": "pass"
+    },
+    "ok": true,
+    "review_manifest": {
+      "errors": [],
+      "present": true,
+      "valid": true
+    },
+    "staging_write_performed": false,
+    "status": "success"
+  },
+  "staging_write_performed": false,
+  "status": "pass",
+  "task": "normalization_validation_summary"
+}

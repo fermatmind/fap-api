@@ -1,0 +1,14 @@
+{
+  "entries": [
+    {
+      "affected_count": 4,
+      "reason": "content asset schema allows quick/standard/deep; selector keeps share_safe surface behavior",
+      "repair_id": "normalize_share_content_reading_mode_to_quick"
+    }
+  ],
+  "production_use_allowed": false,
+  "repair_required": false,
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+  "task": "normalization_repair_log"
+}

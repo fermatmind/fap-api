@@ -1,0 +1,35 @@
+{
+  "asset_type_mapping": {
+    "compare": "compare_guidance",
+    "history": "history_revisit",
+    "pdf": "pdf_archive",
+    "print_saved": "pdf_archive",
+    "result_page.display_summary_triage": "method_boundary",
+    "result_page.privacy_boundary": "privacy_boundary",
+    "share": "share_safe"
+  },
+  "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/rendered_surface_qa_revised_v0_3_normalized",
+  "normalization_steps": [
+    "flatten_text_fields",
+    "map_asset_type_to_schema_enum",
+    "map_asset_layer_to_L10_QA_only",
+    "set_scope_rendered_surface_qa",
+    "set_qa_status_safety_reviewed",
+    "add_state_scope_selector_candidates",
+    "recalculate_body_quality",
+    "defer_staging_import",
+    "mapped_selector_contract_fields_to_existing_allowlists",
+    "added_review_manifest_human_review_fields",
+    "normalized_share_content_reading_mode_to_quick_selector_keeps_share_safe"
+  ],
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+  "selector_scope_policy": "Selectors use existing contract scopes; content candidates retain scope=rendered_surface_qa for artifact classification.",
+  "source_package": "/Users/rainie/Desktop/大五人格-第八板块.zip",
+  "source_package_sha256": "5836f9156e05df24791902718f62bdd7644461a59b7c6dc14f01fe44cdd7f2ea",
+  "task": "normalization_manifest"
+}

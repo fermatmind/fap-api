@@ -1,0 +1,28 @@
+{
+  "approved_candidate_files": [
+    "selector_asset_candidates.jsonl",
+    "content_asset_candidates.jsonl"
+  ],
+  "candidate_artifacts_only": true,
+  "cms_write": false,
+  "errors": [],
+  "final_result_payload_generation": false,
+  "frontend_copy_write": false,
+  "human_reviewed": true,
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "review_notes": [
+    "Normalized for backend candidate validation only.",
+    "Surface QA assets remain staging-only and non-runtime."
+  ],
+  "review_status": "approved_for_staging",
+  "reviewed_at": "2026-06-29T00:00:00Z",
+  "reviewed_by": "codex_rendered_surface_qa_candidate_normalize_01",
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+  "seo_search_write": false,
+  "staging_import_deferred": true,
+  "task": "candidate_review_manifest"
+}
