@@ -1,0 +1,228 @@
+{
+  "acceptance": {
+    "compare_surface_safe": true,
+    "copy_duplicate_pass": true,
+    "copy_length_pass": true,
+    "copy_not_thin_pass": true,
+    "hide_sensitive_share_surface_suppressed": true,
+    "history_surface_safe": true,
+    "no_rendered_hygiene_hits": true,
+    "norm_unavailable_does_not_output_external_comparison": true,
+    "pdf_surface_safe": true,
+    "result_page_position_correct": true,
+    "sentence_quality_pass": true,
+    "share_surface_safe": true
+  },
+  "counts": {
+    "content_asset_candidates": 18,
+    "context_count": 6,
+    "module_counts": {
+      "module_10_method_privacy": 18
+    },
+    "selector_asset_candidates": 18,
+    "slot_count": 18,
+    "surface_count": 5,
+    "surface_role_count": 3
+  },
+  "coverage": {
+    "context_surface_role_counts": {
+      "agreeableness": {
+        "hide_sensitive": 1,
+        "show_boundary": 1,
+        "soften_claim": 1
+      },
+      "conscientiousness": {
+        "hide_sensitive": 1,
+        "show_boundary": 1,
+        "soften_claim": 1
+      },
+      "extraversion": {
+        "hide_sensitive": 1,
+        "show_boundary": 1,
+        "soften_claim": 1
+      },
+      "global": {
+        "hide_sensitive": 1,
+        "show_boundary": 1,
+        "soften_claim": 1
+      },
+      "neuroticism": {
+        "hide_sensitive": 1,
+        "show_boundary": 1,
+        "soften_claim": 1
+      },
+      "openness": {
+        "hide_sensitive": 1,
+        "show_boundary": 1,
+        "soften_claim": 1
+      }
+    },
+    "covered_contexts": [
+      "agreeableness",
+      "conscientiousness",
+      "extraversion",
+      "global",
+      "neuroticism",
+      "openness"
+    ],
+    "covered_surface_roles": [
+      "hide_sensitive",
+      "show_boundary",
+      "soften_claim"
+    ],
+    "expected_contexts": [
+      "global",
+      "openness",
+      "conscientiousness",
+      "extraversion",
+      "agreeableness",
+      "neuroticism"
+    ],
+    "expected_surface_roles": [
+      "show_boundary",
+      "soften_claim",
+      "hide_sensitive"
+    ],
+    "missing_contexts": [],
+    "missing_surface_roles": [],
+    "surface_role_counts": {
+      "hide_sensitive": 6,
+      "show_boundary": 6,
+      "soften_claim": 6
+    }
+  },
+  "created_at_utc": "2026-06-28T15:15:00Z",
+  "mode": "backend_fixture_rendered_preview_qa",
+  "package_key": "big5_result_page_v2.norm_unavailable_revised_v0_3.rendered_preview_qa.v0_1",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "remaining_holds": [
+    "no_runtime_enablement",
+    "no_production_import",
+    "no_rollout_change",
+    "no_frontend_copy",
+    "no_cms_or_search_publication",
+    "live_rendered_page_qa_deferred_until_accessible_fixture_or_pilot_url"
+  ],
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "rules": [
+      "no_selector_tokens",
+      "no_internal_rendered_terms",
+      "no_broken_template_fragments",
+      "no_sensitive_comparison_detail",
+      "no_norm_unavailable_external_comparison_claims"
+    ],
+    "scan_scope": "staging_candidate_visible_text_fields_only",
+    "status": "pass"
+  },
+  "rendered_preview_scope": {
+    "cms_or_search_changed": false,
+    "evidence_type": "backend_fixture_only",
+    "final_result_contract_generated": false,
+    "frontend_copy_added": false,
+    "live_url_verified": false,
+    "pdf_file_stored": false,
+    "private_identifier_stored": false,
+    "production_gate_changed": false
+  },
+  "runtime_use": "not_runtime",
+  "schema": "fap.big5.result_page_v2.norm_unavailable.revised_v0_3.rendered_preview_qa.v0_1",
+  "source": {
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/norm_unavailable_revised_v0_3_normalized",
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/norm_unavailable_revised_v0_3_staging_import",
+    "staging_import_validation_status": "pass",
+    "staging_write_performed": true
+  },
+  "status": "pass",
+  "surface_matrix": [
+    {
+      "candidate_count": 18,
+      "expected_modules": [
+        "module_10_method_privacy"
+      ],
+      "render_strategy": "private_result_norm_unavailable_boundary_explanation",
+      "safety_notes": [
+        "shows why relative comparison is limited",
+        "does not expose private identifiers or sensitive comparison detail",
+        "visible text scan has zero internal-token hits"
+      ],
+      "status": "pass",
+      "surface": "result_page"
+    },
+    {
+      "candidate_count": 18,
+      "expected_modules": [
+        "module_10_method_privacy"
+      ],
+      "render_strategy": "private_pdf_norm_unavailable_boundary_explanation",
+      "safety_notes": [
+        "keeps norm-unavailable caveat inside private report context",
+        "does not add private links or comparative labels",
+        "live PDF extraction remains deferred"
+      ],
+      "status": "pass",
+      "surface": "pdf"
+    },
+    {
+      "candidate_count": 0,
+      "expected_modules": [],
+      "render_strategy": "not_shareable_suppressed",
+      "safety_notes": [
+        "norm-unavailable candidates are marked not shareable",
+        "hide-sensitive cases stay suppressed or boundary-safe on share surfaces",
+        "public share cards must not expose unavailable-norm comparison or pressure detail"
+      ],
+      "status": "pass",
+      "surface": "share"
+    },
+    {
+      "candidate_count": 18,
+      "expected_modules": [
+        "module_10_method_privacy"
+      ],
+      "render_strategy": "summary_only_norm_boundary_entries",
+      "safety_notes": [
+        "history may show summary-only boundary text",
+        "no private identifier or sensitive comparison detail is exposed"
+      ],
+      "status": "pass",
+      "surface": "history"
+    },
+    {
+      "candidate_count": 18,
+      "expected_modules": [
+        "module_10_method_privacy"
+      ],
+      "render_strategy": "summary_only_compare_norm_boundary_entries",
+      "safety_notes": [
+        "compare does not infer external standing when norms are unavailable",
+        "no deterministic or screening language is introduced"
+      ],
+      "status": "pass",
+      "surface": "compare"
+    }
+  ],
+  "surface_safety": {
+    "compare": "pass_summary_only_no_external_comparison_labels",
+    "history": "pass_summary_only_no_external_comparison_labels",
+    "pdf": "pass_private_boundary_text_only_live_pdf_deferred",
+    "result_page": "pass_private_boundary_text_only",
+    "share": "pass_not_shareable_suppressed_hide_sensitive_boundary_safe"
+  },
+  "visible_text_quality": {
+    "body_length_max": 200,
+    "body_length_min": 180,
+    "body_length_target": "180-320 zh chars",
+    "duplicate_body_count": 0,
+    "duplicate_title_count": 0,
+    "overlong_body_count": 0,
+    "sentence_quality_status": "pass",
+    "status": "pass",
+    "thin_body_count": 0
+  }
+}
