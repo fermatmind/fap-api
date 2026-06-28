@@ -641,7 +641,7 @@ final class ReportPdfDocumentService
             'preferCssPageSize' => true,
             'emulatedMediaType' => 'print',
             'waitForExpression' => 'window.__FERMAT_PDF_READY__ === true',
-            'failOnHttpStatusCodes' => '400,401,403,404,500,502,503',
+            'failOnHttpStatusCodes' => '[400,401,403,404,500,502,503]',
             'extraHttpHeaders' => json_encode([
                 'X-Fermat-Pdf-Trace' => $traceId,
             ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),

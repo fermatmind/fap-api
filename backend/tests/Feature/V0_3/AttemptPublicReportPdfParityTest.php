@@ -330,7 +330,9 @@ final class AttemptPublicReportPdfParityTest extends TestCase
                 && str_contains($body, 'pdf_token=')
                 && str_contains($body, 'waitForExpression')
                 && str_contains($body, 'window.__FERMAT_PDF_READY__ === true')
-                && str_contains($body, 'failOnHttpStatusCodes');
+                && str_contains($body, 'failOnHttpStatusCodes')
+                && str_contains($body, '[400,401,403,404,500,502,503]')
+                && ! str_contains($body, "\r\n400,401,403,404,500,502,503\r\n");
         });
 
         Storage::disk('local')->assertExists(
