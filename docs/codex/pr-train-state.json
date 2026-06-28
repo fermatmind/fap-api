@@ -64408,7 +64408,7 @@
     "branch": "codex/big5-share-pdf-history-compare-safe-content-01",
     "title": "BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01: Thicken Big Five safe surface content assets",
     "train_scope": "big5_result_page_content_asset_thickening",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "depends_on": [
       "BIG5-SCENARIO-ACTION-CONTENT-THICKENING-01"
     ],
@@ -64462,8 +64462,12 @@
         "evidence": "Changed files are limited to share/PDF/history/compare safe content thickening artifacts, staging import artifacts, QA packet, AssetAgent test, and PR train state reconciliation."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2495 opened; GitHub checks pending."
+        "status": "pass",
+        "evidence": "PR #2495 checks succeeded; mergeStateStatus CLEAN; changed files are within share/PDF/history/compare safe content scope."
+      },
+      "pr_re_review": {
+        "status": "pass",
+        "evidence": "PR title/body, changed files, required checks, and mergeStateStatus were re-reviewed before merge."
       }
     },
     "commit_sha": "4282120eeb744d83e86addf479a0956f917deecf",
@@ -64505,6 +64509,11 @@
         "at": "2026-06-28T03:10:00Z",
         "status": "pr_open",
         "note": "Opened PR #2495 for share/PDF/history/compare safe content thickening."
+      },
+      {
+        "at": "2026-06-28T03:15:00Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks green, mergeStateStatus CLEAN, PR scope re-reviewed."
       }
     ]
   },
