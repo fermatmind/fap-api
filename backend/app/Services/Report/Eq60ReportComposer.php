@@ -416,7 +416,7 @@ final class Eq60ReportComposer
             $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? '')));
             $candidates = [];
             foreach ($routes as $route) {
-                if (! is_array($route) || ! $this->matchesV2Route($route, $formulationId, $dimensionScores, $qualityLevel)) {
+                if (! is_array($route) || ! $this->matchesV2Route($route, $formulationId, $dimensionScores, $quality)) {
                     continue;
                 }
                 $candidates[] = $route;
@@ -448,9 +448,14 @@ final class Eq60ReportComposer
      * @param  array<string,mixed>  $route
      * @param  array<string,array<string,mixed>>  $dimensionScores
      */
-    private function matchesV2Route(array $route, string $formulationId, array $dimensionScores, string $qualityLevel): bool
+    private function matchesV2Route(array $route, string $formulationId, array $dimensionScores, array $quality): bool
     {
+        if (trim((string) ($route['formulation_id'] ?? '')) !== $formulationId) {
+            return false;
+        }
+
         $match = is_array($route['match'] ?? null) ? $route['match'] : [];
+        $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? '')));
         $qualityLevels = array_values(array_map(
             static fn ($level): string => strtoupper(trim((string) $level)),
             (array) ($match['quality_levels'] ?? [])
@@ -465,6 +470,17 @@ final class Eq60ReportComposer
         }
         if ($confidence === 'normal' && in_array($qualityLevel, ['C', 'D'], true)) {
             return false;
+        }
+
+        $expectedFlag = strtoupper(trim((string) ($match['quality_flag'] ?? '')));
+        if ($expectedFlag !== '') {
+            $flags = array_values(array_map(
+                static fn ($flag): string => strtoupper(trim((string) $flag)),
+                (array) ($quality['flags'] ?? [])
+            ));
+            if (! in_array($expectedFlag, $flags, true)) {
+                return false;
+            }
         }
 
         $pattern = is_array($match['dimension_pattern'] ?? null) ? $match['dimension_pattern'] : [];
@@ -492,6 +508,7 @@ final class Eq60ReportComposer
         $bucket = $this->dimensionBucket($dimensionScores, $code);
 
         return match (strtolower(trim($expected))) {
+            'any' => true,
             'high' => $bucket === 'high',
             'mid_high' => $bucket === 'mid_high',
             'mid' => in_array($bucket, ['mid_low', 'mid_high'], true),
@@ -660,6 +677,9 @@ final class Eq60ReportComposer
                     return $parts[0].'_'.$parts[1];
                 }
             }
+            if (str_contains($id, '.')) {
+                return explode('.', $id, 2)[0];
+            }
 
             return $id;
         }, $values));
@@ -712,6 +732,26 @@ final class Eq60ReportComposer
             'conflict_deescalation',
             'self_connection',
             'retest_reflection',
+            'ask_before_solving',
+            'body_reset',
+            'boundary_before_advice',
+            'clarify_before_concluding',
+            'delayed_processing_note',
+            'empathy_to_action',
+            'express_need_clearly',
+            'followthrough_bridge',
+            'integrated_maintenance',
+            'make_empathy_visible',
+            'name_the_request',
+            'protect_recovery_time',
+            'repair_the_tone',
+            'repair_without_self_blame',
+            'shared_stability',
+            'slow_the_reply',
+            'small_conflict_step',
+            'turn_stability_into_process',
+            'values_pause',
+            'warm_signal',
         ];
     }
 
@@ -735,10 +775,9 @@ final class Eq60ReportComposer
             $dimensionStates[$code] = $this->dimensionState($dimensionScores, $code);
         }
 
-        $matchPattern = $this->routeMatchPatternLabel(data_get($route, 'match.dimension_pattern', ''));
-        if ($matchPattern === '' && $formulationId === 'low_confidence_result') {
-            $matchPattern = 'quality_low_overrides_dimension_pattern';
-        }
+        $matchPattern = $formulationId === 'low_confidence_result'
+            ? 'quality_low_overrides_dimension_pattern'
+            : $this->routeMatchPatternLabel(data_get($route, 'match.dimension_pattern', ''));
 
         return [
             'schema' => 'eq60.signal_signature.v1',

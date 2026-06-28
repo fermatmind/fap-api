@@ -64756,15 +64756,15 @@
     "branch": "codex/pr-eq-v20-03-scene-variants-v23",
     "title": "PR-EQ-V20-03 Backend EQ v2.3 scene variants",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "PR-EQ-V20-02"
     ],
     "commit_sha": "375631cc0ea5c2787a55a8a7512fd8366cc2343a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2522",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-28T14:03:33Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "checks": {
       "authorization": {
@@ -64859,9 +64859,15 @@
         "at": "2026-06-28T13:57:35Z",
         "status": "ready_to_merge",
         "notes": "GitHub checks passed; scope and merge state clean before merge."
+      },
+      {
+        "at": "2026-06-28T14:17:17Z",
+        "status": "merged_reconciled",
+        "notes": "Verified PR #2522 merged, origin/main contains merge commit 3129b341fbc22a02f092dcaceb0f365e677ae010, main worktree was synced, and local/remote task branches were cleaned before PR-EQ-V20-04."
       }
     ],
-    "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
+    "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized.",
+    "merge_commit_sha": "3129b341fbc22a02f092dcaceb0f365e677ae010"
   },
   "PR-EQ-V20-04": {
     "repo": "fap-api",
@@ -64869,7 +64875,7 @@
     "branch": "codex/pr-eq-v20-04-route-matrix-v23",
     "title": "PR-EQ-V20-04 Backend EQ v2.3 personalization route matrix",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "initialized",
+    "status": "local_checks_passed",
     "depends_on": [
       "PR-EQ-V20-03"
     ],
@@ -64883,6 +64889,64 @@
       "authorization": {
         "status": "pass",
         "evidence": "User provided explicit implementation plan for PR-EQ-V20-02 through PR-EQ-V20-06 and requested implementation."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR-EQ-V20-03 merged as #2522 with merge commit 3129b341fbc22a02f092dcaceb0f365e677ae010 and was reconciled in this PR."
+      },
+      "base_sync": {
+        "status": "pass",
+        "evidence": "Merged origin/main fast-forward into branch; extra upstream commit e248c3744 touched only Big Five QA files outside PR-EQ-V20-04 scope."
+      },
+      "local": [
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+          "status": "passed"
+        },
+        {
+          "cmd": "rsync -a --delete backend/content_packs/EQ_60/v1/compiled/ backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest",
+          "status": "passed"
+        },
+        {
+          "cmd": "JSON/YAML parse for changed content assets and PR train state",
+          "status": "passed"
+        },
+        {
+          "cmd": "EQ_60 / EQ_EMOTIONAL_INTELLIGENCE raw personalization route and compiled mirror hash check",
+          "status": "passed"
+        },
+        {
+          "cmd": "git diff --check",
+          "status": "passed"
+        }
+      ],
+      "scope": {
+        "status": "pass",
+        "evidence": "Changed files are limited to EQ route matrix assets, compiled mirrors, Eq60 composer/lint, EQ contract tests, and PR-train ledger reconciliation for the immediate dependency."
       }
     },
     "events": [
@@ -64890,6 +64954,11 @@
         "at": "2026-06-28T13:19:31Z",
         "status": "initialized",
         "notes": "Initialized from user-provided V20 productization plan."
+      },
+      {
+        "at": "2026-06-28T14:17:17Z",
+        "status": "local_checks_passed",
+        "notes": "Imported v2.3 personalization route matrix, preserved low-confidence cautious contract, and verified targeted backend checks."
       }
     ],
     "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
