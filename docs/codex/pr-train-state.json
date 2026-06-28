@@ -64155,7 +64155,7 @@
     "branch": "codex/big5-canonical-profile-content-thickening-01",
     "title": "BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01: Thicken Big Five canonical profile content assets",
     "train_scope": "big5_result_page_content_asset_thickening",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "BIG5-COUPLING-CONTENT-THICKENING-01"
     ],
@@ -64207,10 +64207,14 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to canonical profile content thickening artifacts, staging import artifacts, QA packet, AssetAgent test, and PR train state reconciliation."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2493 opened; GitHub checks pending."
       }
     },
     "commit_sha": "443855ebff36330e816879b5f4c153bc1047b4c1",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2493",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -64254,6 +64258,12 @@
         "from": "local_checks_passed",
         "to": "commit_created",
         "note": "Created scoped implementation commit 443855ebff36330e816879b5f4c153bc1047b4c1 after local validation passed; follow-up ledger commit records the SHA."
+      },
+      {
+        "at": "2026-06-28T02:34:00Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened PR #2493 after local validation and initial push."
       }
     ]
   },
