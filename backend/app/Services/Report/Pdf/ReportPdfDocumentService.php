@@ -10,14 +10,16 @@ use App\Models\Result;
 use App\Services\Report\Pdf\Mbti\MbtiPdfPayloadBuilder;
 use Mpdf\Mpdf;
 use Mpdf\Output\Destination;
+use Throwable;
 
 final class ReportPdfDocumentService
 {
-    private const MBTI_PDF_SURFACE_VERSION = 'mbti.pdf_surface.v3';
+    private const MBTI_PDF_SURFACE_VERSION = 'mbti.pdf_surface.v4';
 
     public function __construct(
         private readonly ReportPdfArtifactStore $artifactStore,
         private readonly MbtiPdfPayloadBuilder $mbtiPdfPayloadBuilder,
+        private readonly GotenbergChromiumPdfClient $gotenbergChromiumPdfClient,
     ) {}
 
     public function normalizeVariant(string $variant): string
@@ -445,6 +447,11 @@ final class ReportPdfDocumentService
 
     private function buildMbtiDocument(Attempt $attempt, ?Result $result): string
     {
+        $gotenbergPdf = $this->buildMbtiGotenbergDocument($attempt);
+        if (is_string($gotenbergPdf)) {
+            return $gotenbergPdf;
+        }
+
         $locale = strtolower(trim((string) ($attempt->locale ?? '')));
         $isChinese = str_starts_with($locale, 'zh');
         $payload = $this->mbtiPdfPayload($attempt, $result);
@@ -488,6 +495,48 @@ final class ReportPdfDocumentService
             $isChinese ? 'FermatMind · 费马测试' : 'FermatMind',
             $isChinese
         );
+    }
+
+    private function buildMbtiGotenbergDocument(Attempt $attempt): ?string
+    {
+        if (! $this->gotenbergChromiumPdfClient->enabled()) {
+            return null;
+        }
+
+        $printUrl = $this->mbtiResultPrintUrl($attempt);
+        if ($printUrl === null) {
+            return null;
+        }
+
+        try {
+            return $this->gotenbergChromiumPdfClient->convertUrl($printUrl);
+        } catch (Throwable) {
+            return null;
+        }
+    }
+
+    private function mbtiResultPrintUrl(Attempt $attempt): ?string
+    {
+        $baseUrl = rtrim(trim((string) config('gotenberg.result_print_base_url', '')), '/');
+        if ($baseUrl === '') {
+            return null;
+        }
+
+        $locale = trim((string) ($attempt->locale ?? ''));
+        $locale = $locale !== '' ? $locale : 'en';
+        $attemptId = trim((string) $attempt->id);
+        if ($attemptId === '') {
+            return null;
+        }
+
+        $pathTemplate = trim((string) config('gotenberg.result_print_path_template', '/{locale}/attempts/{attempt_id}/report'));
+        $pathTemplate = $pathTemplate !== '' ? $pathTemplate : '/{locale}/attempts/{attempt_id}/report';
+        $path = strtr($pathTemplate, [
+            '{locale}' => rawurlencode($locale),
+            '{attempt_id}' => rawurlencode($attemptId),
+        ]);
+
+        return $baseUrl.'/'.ltrim($path, '/');
     }
 
     /**
