@@ -1,0 +1,569 @@
+{
+  "acceptance": {
+    "compare_surface_safe": true,
+    "copy_duplicate_pass": true,
+    "copy_length_pass": true,
+    "copy_not_thin_pass": true,
+    "history_surface_safe": true,
+    "no_rendered_hygiene_hits": true,
+    "pdf_surface_safe": true,
+    "result_page_position_correct": true,
+    "sentence_quality_pass": true,
+    "share_surface_safe": true
+  },
+  "counts": {
+    "content_asset_candidates": 30,
+    "facet_count": 30,
+    "module_counts": {
+      "module_05_facet_reframe": 30
+    },
+    "selector_asset_candidates": 30,
+    "slot_count": 30,
+    "surface_count": 5,
+    "trait_count": 5
+  },
+  "coverage": {
+    "covered_facets": 30,
+    "expected_facets": 30,
+    "facet_codes": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "A6",
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "E6",
+      "N1",
+      "N2",
+      "N3",
+      "N4",
+      "N5",
+      "N6",
+      "O1",
+      "O2",
+      "O3",
+      "O4",
+      "O5",
+      "O6"
+    ],
+    "missing_facets": [],
+    "trait_counts": {
+      "A": 6,
+      "C": 6,
+      "E": 6,
+      "N": 6,
+      "O": 6
+    }
+  },
+  "created_at_utc": "2026-06-28T07:58:00Z",
+  "mode": "backend_fixture_rendered_preview_qa",
+  "package_key": "big5_result_page_v2.facets_30_revised_v0_4.rendered_preview_qa.v0_1",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "remaining_holds": [
+    "no_runtime_enablement",
+    "no_production_import",
+    "no_rollout_change",
+    "no_frontend_copy",
+    "no_cms_or_search_publication",
+    "live_rendered_page_qa_deferred_until_accessible_fixture_or_pilot_url"
+  ],
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "rules": [
+      "no_selector_tokens",
+      "no_internal_rendered_terms",
+      "no_broken_template_fragments",
+      "no_risk_wording_regression",
+      "no_sensitive_score_or_rank_text"
+    ],
+    "scan_scope": "staging_candidate_visible_text_fields_only",
+    "status": "pass"
+  },
+  "rendered_preview_scope": {
+    "cms_or_search_changed": false,
+    "evidence_type": "backend_fixture_only",
+    "final_result_contract_generated": false,
+    "frontend_copy_added": false,
+    "live_url_verified": false,
+    "pdf_file_stored": false,
+    "private_identifier_stored": false,
+    "production_gate_changed": false
+  },
+  "runtime_use": "not_runtime",
+  "schema": "fap.big5.result_page_v2.facets_30.revised_v0_4.rendered_preview_qa.v0_1",
+  "source": {
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/facets_30_revised_v0_4_normalized",
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/facets_30_revised_v0_4_staging_import",
+    "staging_import_validation_status": "pass",
+    "staging_write_performed": true
+  },
+  "status": "pass",
+  "surface_matrix": [
+    {
+      "candidate_count": 30,
+      "expected_modules": [
+        "module_05_facet_reframe"
+      ],
+      "render_strategy": "private_result_facet_reframe_cards",
+      "safety_notes": [
+        "full text is scoped to the private result page context",
+        "visible text scan has zero internal-token hits",
+        "facet codes stay structural and are not rendered as visible text"
+      ],
+      "status": "pass",
+      "surface": "result_page"
+    },
+    {
+      "candidate_count": 30,
+      "expected_modules": [
+        "module_05_facet_reframe"
+      ],
+      "render_strategy": "private_pdf_facet_reframe_sections",
+      "safety_notes": [
+        "full text may appear in private PDF output",
+        "no private link or sensitive score text is stored in this QA package",
+        "PDF extraction smoke remains a later live check"
+      ],
+      "status": "pass",
+      "surface": "pdf"
+    },
+    {
+      "candidate_count": 0,
+      "expected_modules": [],
+      "render_strategy": "share_safety_summary_only",
+      "safety_notes": [
+        "facet full body is not shareable",
+        "share must use share safety summary assets rather than this full private text"
+      ],
+      "status": "pass",
+      "surface": "share"
+    },
+    {
+      "candidate_count": 30,
+      "expected_modules": [
+        "module_05_facet_reframe"
+      ],
+      "render_strategy": "summary_only_history_cards",
+      "safety_notes": [
+        "history should use title and summary only",
+        "no sensitive score text, rank, or private link is exposed"
+      ],
+      "status": "pass",
+      "surface": "history"
+    },
+    {
+      "candidate_count": 30,
+      "expected_modules": [
+        "module_05_facet_reframe"
+      ],
+      "render_strategy": "summary_only_compare_cards",
+      "safety_notes": [
+        "compare should use title and summary only",
+        "no rank, diagnosis, winner, or deterministic language is introduced"
+      ],
+      "status": "pass",
+      "surface": "compare"
+    }
+  ],
+  "surface_safety": {
+    "compare": "pass_summary_only_no_rank_or_diagnosis",
+    "history": "pass_summary_only_no_private_detail",
+    "pdf": "pass_private_full_text_allowed_without_private_link_or_sensitive_scores",
+    "result_page": "pass_private_full_text_allowed",
+    "share": "pass_full_body_not_shareable_use_share_safety_summary"
+  },
+  "visible_text_quality": {
+    "asset_metrics": [
+      {
+        "asset_id": "candidate_content_facet_content_thickening_o1_v0_1",
+        "body_chars": 252,
+        "cta_chars": 25,
+        "facet_code": "O1",
+        "max_sentence_chars": 49,
+        "sentence_like_count": 8,
+        "short_body_chars": 33,
+        "summary_chars": 46,
+        "title_chars": 16,
+        "trait": "O"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_o2_v0_1",
+        "body_chars": 259,
+        "cta_chars": 25,
+        "facet_code": "O2",
+        "max_sentence_chars": 56,
+        "sentence_like_count": 7,
+        "short_body_chars": 31,
+        "summary_chars": 36,
+        "title_chars": 19,
+        "trait": "O"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_o3_v0_1",
+        "body_chars": 247,
+        "cta_chars": 20,
+        "facet_code": "O3",
+        "max_sentence_chars": 42,
+        "sentence_like_count": 8,
+        "short_body_chars": 31,
+        "summary_chars": 39,
+        "title_chars": 15,
+        "trait": "O"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_o4_v0_1",
+        "body_chars": 267,
+        "cta_chars": 17,
+        "facet_code": "O4",
+        "max_sentence_chars": 56,
+        "sentence_like_count": 10,
+        "short_body_chars": 33,
+        "summary_chars": 30,
+        "title_chars": 17,
+        "trait": "O"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_o5_v0_1",
+        "body_chars": 269,
+        "cta_chars": 20,
+        "facet_code": "O5",
+        "max_sentence_chars": 42,
+        "sentence_like_count": 8,
+        "short_body_chars": 26,
+        "summary_chars": 33,
+        "title_chars": 16,
+        "trait": "O"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_o6_v0_1",
+        "body_chars": 262,
+        "cta_chars": 21,
+        "facet_code": "O6",
+        "max_sentence_chars": 46,
+        "sentence_like_count": 9,
+        "short_body_chars": 29,
+        "summary_chars": 30,
+        "title_chars": 20,
+        "trait": "O"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_c1_v0_1",
+        "body_chars": 267,
+        "cta_chars": 23,
+        "facet_code": "C1",
+        "max_sentence_chars": 37,
+        "sentence_like_count": 10,
+        "short_body_chars": 32,
+        "summary_chars": 27,
+        "title_chars": 15,
+        "trait": "C"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_c2_v0_1",
+        "body_chars": 258,
+        "cta_chars": 19,
+        "facet_code": "C2",
+        "max_sentence_chars": 45,
+        "sentence_like_count": 9,
+        "short_body_chars": 23,
+        "summary_chars": 27,
+        "title_chars": 13,
+        "trait": "C"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_c3_v0_1",
+        "body_chars": 251,
+        "cta_chars": 17,
+        "facet_code": "C3",
+        "max_sentence_chars": 39,
+        "sentence_like_count": 9,
+        "short_body_chars": 29,
+        "summary_chars": 25,
+        "title_chars": 15,
+        "trait": "C"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_c4_v0_1",
+        "body_chars": 266,
+        "cta_chars": 22,
+        "facet_code": "C4",
+        "max_sentence_chars": 38,
+        "sentence_like_count": 9,
+        "short_body_chars": 27,
+        "summary_chars": 24,
+        "title_chars": 16,
+        "trait": "C"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_c5_v0_1",
+        "body_chars": 263,
+        "cta_chars": 21,
+        "facet_code": "C5",
+        "max_sentence_chars": 38,
+        "sentence_like_count": 10,
+        "short_body_chars": 31,
+        "summary_chars": 29,
+        "title_chars": 17,
+        "trait": "C"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_c6_v0_1",
+        "body_chars": 265,
+        "cta_chars": 21,
+        "facet_code": "C6",
+        "max_sentence_chars": 32,
+        "sentence_like_count": 11,
+        "short_body_chars": 23,
+        "summary_chars": 27,
+        "title_chars": 14,
+        "trait": "C"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_e1_v0_1",
+        "body_chars": 268,
+        "cta_chars": 22,
+        "facet_code": "E1",
+        "max_sentence_chars": 38,
+        "sentence_like_count": 11,
+        "short_body_chars": 23,
+        "summary_chars": 29,
+        "title_chars": 13,
+        "trait": "E"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_e2_v0_1",
+        "body_chars": 247,
+        "cta_chars": 26,
+        "facet_code": "E2",
+        "max_sentence_chars": 38,
+        "sentence_like_count": 9,
+        "short_body_chars": 22,
+        "summary_chars": 30,
+        "title_chars": 16,
+        "trait": "E"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_e3_v0_1",
+        "body_chars": 264,
+        "cta_chars": 22,
+        "facet_code": "E3",
+        "max_sentence_chars": 35,
+        "sentence_like_count": 10,
+        "short_body_chars": 24,
+        "summary_chars": 28,
+        "title_chars": 15,
+        "trait": "E"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_e4_v0_1",
+        "body_chars": 246,
+        "cta_chars": 23,
+        "facet_code": "E4",
+        "max_sentence_chars": 36,
+        "sentence_like_count": 9,
+        "short_body_chars": 23,
+        "summary_chars": 29,
+        "title_chars": 14,
+        "trait": "E"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_e5_v0_1",
+        "body_chars": 264,
+        "cta_chars": 17,
+        "facet_code": "E5",
+        "max_sentence_chars": 35,
+        "sentence_like_count": 10,
+        "short_body_chars": 27,
+        "summary_chars": 27,
+        "title_chars": 15,
+        "trait": "E"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_e6_v0_1",
+        "body_chars": 244,
+        "cta_chars": 21,
+        "facet_code": "E6",
+        "max_sentence_chars": 49,
+        "sentence_like_count": 9,
+        "short_body_chars": 24,
+        "summary_chars": 25,
+        "title_chars": 14,
+        "trait": "E"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_a1_v0_1",
+        "body_chars": 261,
+        "cta_chars": 26,
+        "facet_code": "A1",
+        "max_sentence_chars": 33,
+        "sentence_like_count": 10,
+        "short_body_chars": 25,
+        "summary_chars": 25,
+        "title_chars": 13,
+        "trait": "A"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_a2_v0_1",
+        "body_chars": 243,
+        "cta_chars": 20,
+        "facet_code": "A2",
+        "max_sentence_chars": 38,
+        "sentence_like_count": 10,
+        "short_body_chars": 31,
+        "summary_chars": 25,
+        "title_chars": 16,
+        "trait": "A"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_a3_v0_1",
+        "body_chars": 257,
+        "cta_chars": 17,
+        "facet_code": "A3",
+        "max_sentence_chars": 35,
+        "sentence_like_count": 11,
+        "short_body_chars": 27,
+        "summary_chars": 28,
+        "title_chars": 15,
+        "trait": "A"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_a4_v0_1",
+        "body_chars": 249,
+        "cta_chars": 15,
+        "facet_code": "A4",
+        "max_sentence_chars": 38,
+        "sentence_like_count": 9,
+        "short_body_chars": 25,
+        "summary_chars": 29,
+        "title_chars": 17,
+        "trait": "A"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_a5_v0_1",
+        "body_chars": 261,
+        "cta_chars": 22,
+        "facet_code": "A5",
+        "max_sentence_chars": 41,
+        "sentence_like_count": 10,
+        "short_body_chars": 21,
+        "summary_chars": 29,
+        "title_chars": 15,
+        "trait": "A"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_a6_v0_1",
+        "body_chars": 258,
+        "cta_chars": 17,
+        "facet_code": "A6",
+        "max_sentence_chars": 42,
+        "sentence_like_count": 10,
+        "short_body_chars": 22,
+        "summary_chars": 23,
+        "title_chars": 14,
+        "trait": "A"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_n1_v0_1",
+        "body_chars": 266,
+        "cta_chars": 17,
+        "facet_code": "N1",
+        "max_sentence_chars": 32,
+        "sentence_like_count": 12,
+        "short_body_chars": 28,
+        "summary_chars": 25,
+        "title_chars": 17,
+        "trait": "N"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_n2_v0_1",
+        "body_chars": 268,
+        "cta_chars": 17,
+        "facet_code": "N2",
+        "max_sentence_chars": 34,
+        "sentence_like_count": 11,
+        "short_body_chars": 25,
+        "summary_chars": 32,
+        "title_chars": 16,
+        "trait": "N"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_n3_v0_1",
+        "body_chars": 262,
+        "cta_chars": 20,
+        "facet_code": "N3",
+        "max_sentence_chars": 39,
+        "sentence_like_count": 10,
+        "short_body_chars": 26,
+        "summary_chars": 29,
+        "title_chars": 15,
+        "trait": "N"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_n4_v0_1",
+        "body_chars": 251,
+        "cta_chars": 22,
+        "facet_code": "N4",
+        "max_sentence_chars": 36,
+        "sentence_like_count": 10,
+        "short_body_chars": 23,
+        "summary_chars": 35,
+        "title_chars": 14,
+        "trait": "N"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_n5_v0_1",
+        "body_chars": 274,
+        "cta_chars": 12,
+        "facet_code": "N5",
+        "max_sentence_chars": 37,
+        "sentence_like_count": 11,
+        "short_body_chars": 26,
+        "summary_chars": 33,
+        "title_chars": 17,
+        "trait": "N"
+      },
+      {
+        "asset_id": "candidate_content_facet_content_thickening_n6_v0_1",
+        "body_chars": 254,
+        "cta_chars": 19,
+        "facet_code": "N6",
+        "max_sentence_chars": 34,
+        "sentence_like_count": 10,
+        "short_body_chars": 24,
+        "summary_chars": 33,
+        "title_chars": 19,
+        "trait": "N"
+      }
+    ],
+    "awkward_sentence_count": 0,
+    "duplicate_body_count": 0,
+    "duplicate_title_count": 0,
+    "max_body_chars": 274,
+    "max_cta_chars": 26,
+    "max_sentence_chars": 56,
+    "max_short_body_chars": 33,
+    "max_summary_chars": 46,
+    "max_title_chars": 20,
+    "min_body_chars": 243,
+    "sentence_like_count_min": 7,
+    "status": "pass",
+    "too_long_count": 0,
+    "too_short_or_thin_count": 0
+  }
+}

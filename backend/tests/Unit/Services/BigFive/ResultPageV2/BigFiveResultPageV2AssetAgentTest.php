@@ -2540,6 +2540,154 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_facets_30_revised_v0_4_rendered_preview_qa_is_redacted_and_non_runtime(): void
+    {
+        $qaDir = base_path('content_assets/big5/result_page_v2/qa/facets_30_revised_v0_4_rendered_preview/v0_1');
+
+        foreach ([
+            'README.md',
+            'SHA256SUMS',
+            'big5_facets_30_revised_v0_4_rendered_preview_qa_v0_1.json',
+        ] as $filename) {
+            $this->assertFileExists($qaDir.'/'.$filename);
+        }
+
+        $report = $this->readJson($qaDir.'/big5_facets_30_revised_v0_4_rendered_preview_qa_v0_1.json');
+
+        $this->assertSame('fap.big5.result_page_v2.facets_30.revised_v0_4.rendered_preview_qa.v0_1', $report['schema'] ?? null);
+        $this->assertSame('pass', $report['status'] ?? null);
+        $this->assertSame('backend_fixture_rendered_preview_qa', $report['mode'] ?? null);
+        $this->assertSame('not_runtime', $report['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_pilot'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_production'] ?? true));
+        $this->assertSame(
+            'content_assets/big5/result_page_v2/staging_candidate_imports/facets_30_revised_v0_4_staging_import',
+            data_get($report, 'source.staging_import_dir')
+        );
+        $this->assertSame(
+            'content_assets/big5/result_page_v2/agent_runs/facets_30_revised_v0_4_normalized',
+            data_get($report, 'source.candidate_dir')
+        );
+        $this->assertSame('pass', data_get($report, 'source.staging_import_validation_status'));
+        $this->assertTrue((bool) data_get($report, 'source.staging_write_performed'));
+
+        $this->assertSame(30, data_get($report, 'counts.selector_asset_candidates'));
+        $this->assertSame(30, data_get($report, 'counts.content_asset_candidates'));
+        $this->assertSame(5, data_get($report, 'counts.surface_count'));
+        $this->assertSame(5, data_get($report, 'counts.trait_count'));
+        $this->assertSame(30, data_get($report, 'counts.facet_count'));
+        $this->assertSame(30, data_get($report, 'counts.slot_count'));
+        $this->assertSame(30, data_get($report, 'coverage.covered_facets'));
+        $this->assertSame([], data_get($report, 'coverage.missing_facets'));
+        $this->assertSame(['A' => 6, 'C' => 6, 'E' => 6, 'N' => 6, 'O' => 6], data_get($report, 'coverage.trait_counts'));
+        $this->assertSame(30, data_get($report, 'counts.module_counts.module_05_facet_reframe'));
+
+        $scope = $report['rendered_preview_scope'] ?? [];
+        $this->assertSame('backend_fixture_only', $scope['evidence_type'] ?? null);
+        $this->assertFalse((bool) ($scope['final_result_contract_generated'] ?? true));
+        $this->assertFalse((bool) ($scope['frontend_copy_added'] ?? true));
+        $this->assertFalse((bool) ($scope['cms_or_search_changed'] ?? true));
+        $this->assertFalse((bool) ($scope['production_gate_changed'] ?? true));
+        $this->assertFalse((bool) ($scope['live_url_verified'] ?? true));
+        $this->assertFalse((bool) ($scope['pdf_file_stored'] ?? true));
+        $this->assertFalse((bool) ($scope['private_identifier_stored'] ?? true));
+
+        $surfaces = collect((array) ($report['surface_matrix'] ?? []))->pluck('status', 'surface');
+        foreach (['result_page', 'pdf', 'share', 'history', 'compare'] as $surface) {
+            $this->assertSame('pass', $surfaces->get($surface), $surface);
+        }
+        $surfaceCounts = collect((array) ($report['surface_matrix'] ?? []))->pluck('candidate_count', 'surface');
+        $this->assertSame(30, $surfaceCounts->get('result_page'));
+        $this->assertSame(30, $surfaceCounts->get('pdf'));
+        $this->assertSame(0, $surfaceCounts->get('share'));
+        $this->assertSame(30, $surfaceCounts->get('history'));
+        $this->assertSame(30, $surfaceCounts->get('compare'));
+
+        $this->assertSame('pass', data_get($report, 'visible_text_quality.status'));
+        $this->assertLessThanOrEqual(36, (int) data_get($report, 'visible_text_quality.max_title_chars'));
+        $this->assertLessThanOrEqual(90, (int) data_get($report, 'visible_text_quality.max_summary_chars'));
+        $this->assertLessThanOrEqual(90, (int) data_get($report, 'visible_text_quality.max_short_body_chars'));
+        $this->assertLessThanOrEqual(420, (int) data_get($report, 'visible_text_quality.max_body_chars'));
+        $this->assertGreaterThanOrEqual(240, (int) data_get($report, 'visible_text_quality.min_body_chars'));
+        $this->assertLessThanOrEqual(60, (int) data_get($report, 'visible_text_quality.max_cta_chars'));
+        $this->assertGreaterThanOrEqual(4, (int) data_get($report, 'visible_text_quality.sentence_like_count_min'));
+        $this->assertLessThanOrEqual(95, (int) data_get($report, 'visible_text_quality.max_sentence_chars'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.too_long_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.too_short_or_thin_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.awkward_sentence_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.duplicate_title_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.duplicate_body_count'));
+        $this->assertSame(30, count((array) data_get($report, 'visible_text_quality.asset_metrics')));
+
+        $this->assertSame('pass', data_get($report, 'rendered_hygiene_scan.status'));
+        $this->assertSame(0, data_get($report, 'rendered_hygiene_scan.hit_count'));
+        $this->assertSame([], data_get($report, 'rendered_hygiene_scan.hits'));
+        $this->assertSame('pass_private_full_text_allowed', data_get($report, 'surface_safety.result_page'));
+        $this->assertSame('pass_private_full_text_allowed_without_private_link_or_sensitive_scores', data_get($report, 'surface_safety.pdf'));
+        $this->assertSame('pass_full_body_not_shareable_use_share_safety_summary', data_get($report, 'surface_safety.share'));
+        $this->assertSame('pass_summary_only_no_private_detail', data_get($report, 'surface_safety.history'));
+        $this->assertSame('pass_summary_only_no_rank_or_diagnosis', data_get($report, 'surface_safety.compare'));
+
+        foreach ([
+            'result_page_position_correct',
+            'pdf_surface_safe',
+            'share_surface_safe',
+            'history_surface_safe',
+            'compare_surface_safe',
+            'no_rendered_hygiene_hits',
+            'copy_length_pass',
+            'copy_not_thin_pass',
+            'copy_duplicate_pass',
+            'sentence_quality_pass',
+        ] as $acceptanceKey) {
+            $this->assertTrue((bool) data_get($report, 'acceptance.'.$acceptanceKey), $acceptanceKey);
+        }
+
+        foreach ([
+            'no_runtime_enablement',
+            'no_production_import',
+            'no_rollout_change',
+            'no_frontend_copy',
+            'no_cms_or_search_publication',
+            'live_rendered_page_qa_deferred_until_accessible_fixture_or_pilot_url',
+        ] as $hold) {
+            $this->assertContains($hold, (array) ($report['remaining_holds'] ?? []), $hold);
+        }
+
+        $allArtifacts = implode("\n", array_map(
+            static fn (string $path): string => (string) file_get_contents($path),
+            glob($qaDir.'/*') ?: []
+        ));
+
+        foreach ([
+            'private_url',
+            'attempt_id',
+            'raw_score',
+            'raw score',
+            'percentile',
+            'fixed_type',
+            'user_confirmed_type',
+            'type_code',
+            'big5:',
+            'band:',
+            'payload',
+            'registry',
+            'PR3B',
+            'AttemptReadController',
+            'Big Five Report Engine',
+            '[object Object]',
+            '本 由 生成',
+            '不代表生产 已接入',
+            '筛选',
+            '不一定',
+            '失败',
+        ] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $allArtifacts, $forbiddenToken);
+        }
+    }
+
     public function test_committed_facet_content_thickening_candidates_are_reviewed_staged_and_non_runtime(): void
     {
         $agentRunDir = base_path('content_assets/big5/result_page_v2/agent_runs/facet_content_thickening');
