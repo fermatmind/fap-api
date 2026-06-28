@@ -64408,7 +64408,7 @@
     "branch": "codex/big5-share-pdf-history-compare-safe-content-01",
     "title": "BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01: Thicken Big Five safe surface content assets",
     "train_scope": "big5_result_page_content_asset_thickening",
-    "status": "committed",
+    "status": "pr_open",
     "depends_on": [
       "BIG5-SCENARIO-ACTION-CONTENT-THICKENING-01"
     ],
@@ -64460,10 +64460,14 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to share/PDF/history/compare safe content thickening artifacts, staging import artifacts, QA packet, AssetAgent test, and PR train state reconciliation."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2495 opened; GitHub checks pending."
       }
     },
     "commit_sha": "4282120eeb744d83e86addf479a0956f917deecf",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2495",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -64496,6 +64500,11 @@
         "at": "2026-06-28T03:09:00Z",
         "status": "committed",
         "note": "Implementation committed at 4282120eeb744d83e86addf479a0956f917deecf."
+      },
+      {
+        "at": "2026-06-28T03:10:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2495 for share/PDF/history/compare safe content thickening."
       }
     ]
   },
