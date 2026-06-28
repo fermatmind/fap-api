@@ -64875,11 +64875,11 @@
     "branch": "codex/pr-eq-v20-04-route-matrix-v23",
     "title": "PR-EQ-V20-04 Backend EQ v2.3 personalization route matrix",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "depends_on": [
       "PR-EQ-V20-03"
     ],
-    "commit_sha": "da6095982e8f7cc693fc8355cf8d3d675697289ff",
+    "commit_sha": "b090c11b56fc37157d848d536466f97bde642845",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2526",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -64947,6 +64947,10 @@
       "scope": {
         "status": "pass",
         "evidence": "Changed files are limited to EQ route matrix assets, compiled mirrors, Eq60 composer/lint, EQ contract tests, and PR-train ledger reconciliation for the immediate dependency."
+      },
+      "github": {
+        "status": "passed",
+        "evidence": "gh pr checks 2526 --watch reported all checks passed on branch b090c11b56fc37157d848d536466f97bde642845."
       }
     },
     "events": [
@@ -64969,6 +64973,11 @@
         "at": "2026-06-28T14:20:16Z",
         "status": "pr_open",
         "notes": "Opened GitHub PR #2526."
+      },
+      {
+        "at": "2026-06-28T14:26:08Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed and scope was revalidated before merge."
       }
     ],
     "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
