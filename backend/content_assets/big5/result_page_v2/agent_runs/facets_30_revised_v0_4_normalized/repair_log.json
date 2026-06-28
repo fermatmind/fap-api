@@ -1,0 +1,29 @@
+{
+  "entries": [
+    {
+      "asset_id": "candidate_content_facet_content_thickening_e3_v0_1",
+      "reason": "Remove ambiguous risk wording before schema, leak, and rendered hygiene validation.",
+      "repairs": [
+        {
+          "after": "获得清晰位置",
+          "before": "占据一定位置",
+          "field": "body_zh",
+          "repair": "risk_wording_softened"
+        },
+        {
+          "after": "选择表达时机",
+          "before": "筛选表达",
+          "field": "body_zh",
+          "repair": "risk_wording_softened"
+        }
+      ]
+    }
+  ],
+  "production_use_allowed": false,
+  "repair_required": false,
+  "risk_wording_hit_count_after": 0,
+  "risk_wording_hit_count_before": 2,
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.facets_30_candidate_normalize.repair_log.v0_4",
+  "task": "BIG5-FACETS-30-CANDIDATE-NORMALIZE-01"
+}
