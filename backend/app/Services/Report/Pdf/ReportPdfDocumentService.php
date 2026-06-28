@@ -25,6 +25,7 @@ final class ReportPdfDocumentService
         private readonly ReportPdfArtifactStore $artifactStore,
         private readonly MbtiPdfPayloadBuilder $mbtiPdfPayloadBuilder,
         private readonly GotenbergChromiumPdfClient $gotenbergChromiumPdfClient,
+        private readonly ResultPagePdfTokenService $resultPagePdfTokenService,
     ) {}
 
     public function normalizeVariant(string $variant): string
@@ -674,56 +675,17 @@ final class ReportPdfDocumentService
 
         $url = $baseUrl.'/'.ltrim($path, '/');
         if (self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION !== '') {
+            $pdfToken = $this->resultPagePdfTokenService->issueForMbtiResultPageExport($attempt, $gate, $locale);
             $separator = str_contains($url, '?') ? '&' : '?';
             $url .= $separator.http_build_query([
                 'pdf' => '1',
                 'surface' => self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
-                'pdf_token' => $this->resultPageExportToken($attempt, $gate, $locale),
+                'pdf_token' => $pdfToken,
+                'result_access_token' => $pdfToken,
             ], '', '&', PHP_QUERY_RFC3986);
         }
 
         return $url;
-    }
-
-    /**
-     * @param  array<string,mixed>  $gate
-     */
-    private function resultPageExportToken(Attempt $attempt, array $gate, string $locale): string
-    {
-        $expiresAt = now()->addMinutes(10)->getTimestamp();
-        $payload = [
-            'v' => 1,
-            'typ' => 'mbti_result_page_pdf',
-            'attempt_id' => (string) $attempt->id,
-            'user_id' => (string) ($attempt->user_id ?? ''),
-            'owner_id' => (string) (($attempt->user_id ?? null) ?: ($attempt->anon_id ?? '')),
-            'locale' => $locale,
-            'surface' => self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
-            'engine' => self::RESULT_PAGE_EXPORT_ENGINE,
-            'entitlement' => ((bool) ($gate['locked'] ?? true)) ? 'locked' : 'unlocked',
-            'variant' => $this->normalizeVariant((string) ($gate['variant'] ?? 'free')),
-            'exp' => $expiresAt,
-        ];
-
-        $encodedPayload = $this->base64UrlEncode(json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
-        $signature = hash_hmac('sha256', $encodedPayload, $this->resultPageExportTokenSecret());
-
-        return $encodedPayload.'.'.$signature;
-    }
-
-    private function resultPageExportTokenSecret(): string
-    {
-        $secret = trim((string) config('gotenberg.result_print_token_secret', ''));
-        if ($secret !== '') {
-            return $secret;
-        }
-
-        return 'fap-result-page-pdf-local-key';
-    }
-
-    private function base64UrlEncode(string $value): string
-    {
-        return rtrim(strtr(base64_encode($value), '+/', '-_'), '=');
     }
 
     /**

@@ -43,6 +43,7 @@ use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\InviteUnlockSummaryBuilder;
 use App\Services\Report\MbtiPreviewContractBuilder;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
+use App\Services\Report\Pdf\ResultPagePdfTokenService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Results\ResultEmailReadAccessService;
@@ -70,6 +71,7 @@ class AttemptReadController extends Controller
         private AttemptSubmissionService $attemptSubmissionService,
         private ReportGatekeeper $reportGatekeeper,
         private ReportPdfDocumentService $reportPdfDocumentService,
+        private ResultPagePdfTokenService $resultPagePdfTokenService,
         private BigFivePublicProjectionService $bigFivePublicProjectionService,
         private BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
         private EnneagramPublicProjectionService $enneagramPublicProjectionService,
@@ -2460,6 +2462,11 @@ class AttemptReadController extends Controller
 
     private function resolveAttemptForResultAccessToken(Request $request, int $orgId, string $attemptId): ?Attempt
     {
+        $pdfTokenAttempt = $this->resolveAttemptForResultPagePdfToken($request, $orgId, $attemptId);
+        if ($pdfTokenAttempt instanceof Attempt) {
+            return $pdfTokenAttempt;
+        }
+
         if (! $this->resultEmailReadAccess()->activeTokenBindingForRequest($request, $orgId, $attemptId)) {
             return null;
         }
@@ -2478,6 +2485,56 @@ class AttemptReadController extends Controller
         }
 
         return $attempt;
+    }
+
+    private function resolveAttemptForResultPagePdfToken(Request $request, int $orgId, string $attemptId): ?Attempt
+    {
+        $token = $this->resultAccessTokenCandidate($request);
+        if ($token === '') {
+            return null;
+        }
+
+        $grant = $this->resultPagePdfTokenService->verifyMbtiResultPageExport($token, $orgId, $attemptId);
+        if (! is_array($grant)) {
+            return null;
+        }
+
+        $attempt = Attempt::query()
+            ->where('org_id', $orgId)
+            ->where('id', $attemptId)
+            ->first();
+        if (! $attempt instanceof Attempt) {
+            return null;
+        }
+
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        if ($scaleCode !== 'MBTI' || ! $this->isPublicResultScale($scaleCode) || in_array($scaleCode, self::SENSITIVE_RESULT_READ_SCALES, true)) {
+            return null;
+        }
+
+        return $attempt;
+    }
+
+    private function resultAccessTokenCandidate(Request $request): string
+    {
+        $candidates = [
+            $request->header('X-Result-Access-Token'),
+            $request->query('result_access_token'),
+            $request->query('access_token'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (! is_string($candidate) && ! is_numeric($candidate)) {
+                continue;
+            }
+
+            $normalized = trim((string) $candidate);
+            if ($normalized !== '') {
+                return $normalized;
+            }
+        }
+
+        return '';
     }
 
     private function enforceEmailBindingForRead(Request $request, int $orgId, Attempt $attempt, string $scaleCode): void

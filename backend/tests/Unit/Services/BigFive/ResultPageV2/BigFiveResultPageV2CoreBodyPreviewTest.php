@@ -554,6 +554,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_result_page_pdf_token_bridge_files(): void
+    {
+        $changed = [
+            'backend/app/Services/Report/Pdf/ResultPagePdfTokenService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_eq_cross_assessment_context_guard_changes(): void
     {
         $changed = [
@@ -4778,6 +4787,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiResultPagePdfTokenBridgeFile($file)) {
+                continue;
+            }
+
             if ($this->isPublicContentReleaseGuardCommandFile($file)) {
                 continue;
             }
@@ -6248,6 +6261,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PdfGotenbergSpikeCommand.php',
             'backend/app/Services/Report/Pdf/GotenbergChromiumPdfClient.php',
         ], true);
+    }
+
+    private function isMbtiResultPagePdfTokenBridgeFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Report/Pdf/ResultPagePdfTokenService.php';
     }
 
     private function isPublicContentReleaseGuardCommandFile(string $file): bool
