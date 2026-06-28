@@ -1317,9 +1317,21 @@ final class Eq60ContentLintService
 
         $routes = is_array($doc['routes'] ?? null) ? $doc['routes'] : [];
         if ($schema === 'eq60.personalization_routes.route_matrix.v2') {
-            if (! array_is_list($routes) || count($routes) < 30) {
-                $errors[] = $this->error($file, 1, 'v2 routes must be a list with expanded personalization routes.');
+            if (! array_is_list($routes) || count($routes) < 60) {
+                $errors[] = $this->error($file, 1, 'v2 routes must be a list with at least 60 expanded personalization routes.');
             }
+            $selectableFormulations = [
+                'balanced_integrated',
+                'high_empathy_low_recovery',
+                'aware_but_unregulated',
+                'calm_but_distant',
+                'relationship_first_self_later',
+                'self_clear_repair_weak',
+                'steady_collaborator',
+                'sensitive_absorber',
+                'developing_foundation',
+                'low_confidence_result',
+            ];
             $seenFormulations = [];
             foreach ($routes as $idx => $route) {
                 if (! is_array($route)) {
@@ -1352,6 +1364,9 @@ final class Eq60ContentLintService
                 }
                 foreach (['mechanisms', 'scenes', 'career_environment'] as $listKey) {
                     if ($listKey === 'mechanisms' && $formulationId === 'low_confidence_result') {
+                        continue;
+                    }
+                    if ($listKey === 'mechanisms' && ! in_array($formulationId, $selectableFormulations, true)) {
                         continue;
                     }
                     if (! is_array($selected[$listKey] ?? null) || (array) $selected[$listKey] === []) {

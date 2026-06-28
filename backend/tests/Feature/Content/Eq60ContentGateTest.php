@@ -82,7 +82,7 @@ final class Eq60ContentGateTest extends TestCase
         ], array_keys((array) data_get($assets, 'assets', [])));
 
         $routes = (array) data_get($assets, 'assets.personalization_routes.routes', []);
-        $this->assertGreaterThanOrEqual(30, count($routes));
+        $this->assertGreaterThanOrEqual(60, count($routes));
         foreach (['balanced_integrated', 'high_empathy_low_recovery', 'aware_but_unregulated', 'low_confidence_result'] as $formulationId) {
             $matched = array_values(array_filter($routes, static fn ($route): bool => is_array($route) && (string) ($route['formulation_id'] ?? '') === $formulationId));
             $this->assertNotEmpty($matched, 'Missing v2 route for '.$formulationId);

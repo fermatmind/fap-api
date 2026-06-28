@@ -33,7 +33,7 @@ final class Eq60V5ReportContractTest extends TestCase
                 'zh-CN',
                 'eq60_v5_balanced_integrated_zh.json',
                 'balanced_integrated',
-                'relationship_energy_management',
+                'integrated_maintenance',
             ],
             'high_empathy_zh' => [
                 'EQ60_COMPASSION_OVERLOAD_ZH',
@@ -54,7 +54,7 @@ final class Eq60V5ReportContractTest extends TestCase
                 'en',
                 'eq60_v5_balanced_integrated_en.json',
                 'balanced_integrated',
-                'relationship_energy_management',
+                'integrated_maintenance',
             ],
             'high_empathy_en' => [
                 'EQ60_COMPASSION_OVERLOAD_ZH',
