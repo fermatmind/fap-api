@@ -63932,7 +63932,7 @@
     "branch": "codex/big5-facet-content-thickening-01",
     "title": "BIG5-FACET-CONTENT-THICKENING-01: Thicken Big Five facet content assets",
     "train_scope": "big5_result_page_content_asset_thickening",
-    "status": "local_validation_passed",
+    "status": "pr_open",
     "depends_on": [
       "BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01"
     ],
@@ -63966,11 +63966,11 @@
       },
       "github": {
         "status": "pending",
-        "evidence": "Not pushed yet."
+        "evidence": "PR #2491 opened; GitHub checks pending."
       }
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "3f6a6eafe2ec21cd93fc92fac2741019143e5d0a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2491",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -63998,6 +63998,11 @@
         "at": "2026-06-28T02:55:00Z",
         "status": "local_validation_passed",
         "note": "Facet candidates, staging import artifacts, QA packet, and focused validation passed locally."
+      },
+      {
+        "at": "2026-06-28T03:00:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2491 after local validation and initial push."
       }
     ]
   },
