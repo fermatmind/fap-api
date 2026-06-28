@@ -64879,7 +64879,7 @@
     "depends_on": [
       "PR-EQ-V20-03"
     ],
-    "commit_sha": null,
+    "commit_sha": "471c5d7ab0ad9be3026636f3909dc0a73c6a30d8",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -64959,6 +64959,11 @@
         "at": "2026-06-28T14:17:17Z",
         "status": "local_checks_passed",
         "notes": "Imported v2.3 personalization route matrix, preserved low-confidence cautious contract, and verified targeted backend checks."
+      },
+      {
+        "at": "2026-06-28T14:18:49Z",
+        "status": "committed",
+        "notes": "Committed implementation as 471c5d7ab0ad9be3026636f3909dc0a73c6a30d8."
       }
     ],
     "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
