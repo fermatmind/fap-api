@@ -112,7 +112,25 @@ final class ScaleRegistrySeeder extends Seeder
                 enExcerpt: 'Discover the inner drivers that make your personality uniquely yours. Get a full read on your preference patterns and core strengths, plus tailored guidance for career growth and communication.',
                 zhExcerpt: '探索造就你独特个性的内在动力。全面解析你的性格偏好与核心优势，并获取为你量身定制的职业发展与人际沟通指南。',
                 enSeoCopy: 'The MBTI flow is built on Jungian type dimensions and structured preference scoring. It helps users interpret E/I, S/N, T/F, and J/P patterns for communication, planning, and role-fit decisions.',
-                zhSeoCopy: '该 MBTI 测评基于荣格类型维度与结构化偏好评分，帮助你理解 E/I、S/N、T/F、J/P 模式，并用于沟通协作、计划习惯与岗位匹配决策。'
+                zhSeoCopy: '该 MBTI 测评基于荣格类型维度与结构化偏好评分，帮助你理解 E/I、S/N、T/F、J/P 模式，并用于沟通协作、计划习惯与岗位匹配决策。',
+                zhFaq: [
+                    [
+                        'q' => '费马的 MBTI免费测试会收费吗？',
+                        'a' => 'MBTI 主测试可以免费完成，并在提交后查看 16 型人格完整结果、偏好维度和后续探索建议；页面不会把基础结果解读作为付费前置条件。',
+                    ],
+                    [
+                        'q' => '这份 16型人格完整结果/报告包含哪些内容？',
+                        'a' => '结果会展示你的 16 型人格类型，E/I、S/N、T/F、J/P 偏好方向，以及沟通协作、职业探索和自我观察相关的说明。内容用于理解性格倾向，不等同于诊断或职业保证。',
+                    ],
+                    [
+                        'q' => 'MBTI免费测试结果可以作为职业或心理诊断吗？',
+                        'a' => '不可以。MBTI 测试适合做自我了解和讨论起点，不能替代心理诊断、医疗建议或正式职业评估。重要决策应结合更多资料和专业意见。',
+                    ],
+                    [
+                        'q' => '完成测试后还能重新查看或重复测试吗？',
+                        'a' => '可以。你可以在完成后回看自己的结果报告，也可以在状态或作答理解发生变化时重新测试，并把不同结果作为自我观察的参考。',
+                    ],
+                ],
             ),
 
             'is_public' => true,
@@ -735,6 +753,7 @@ final class ScaleRegistrySeeder extends Seeder
         string $zhExcerpt,
         string $enSeoCopy,
         string $zhSeoCopy,
+        ?array $zhFaq = null,
     ): array {
         return [
             'en' => $this->catalogLocaleContent(
@@ -766,6 +785,7 @@ final class ScaleRegistrySeeder extends Seeder
                 rating: $rating,
                 excerpt: $zhExcerpt,
                 seoCopy: $zhSeoCopy,
+                faq: $zhFaq,
             ),
         ];
     }
@@ -787,6 +807,7 @@ final class ScaleRegistrySeeder extends Seeder
         int $rating,
         string $excerpt,
         string $seoCopy,
+        ?array $faq = null,
     ): array {
         $isZh = preg_match('/\p{Han}/u', $title) === 1;
 
@@ -797,7 +818,7 @@ final class ScaleRegistrySeeder extends Seeder
             'when_to_use' => $this->genericWhenToUse($questions, $minutes, $isZh),
             'audience' => $this->genericAudience($questions, $isZh),
             'how_it_works' => $this->genericHowItWorks($questions, $isZh),
-            'faq' => $this->genericFaq($questions, $minutes, $isZh),
+            'faq' => $faq ?? $this->genericFaq($questions, $minutes, $isZh),
             'catalog' => [
                 'cover_image' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
                 'questions_count' => $questions,

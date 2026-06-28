@@ -30114,3 +30114,40 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: MBTI-MAIN-FREE-FAQ-CONTENT-01
+    repo: fap-api
+    depends_on: [MBTI-MAIN-FREE-SERP-TDK-01]
+    branch: codex/mbti-main-free-faq-content-01
+    title: "MBTI-MAIN-FREE-FAQ-CONTENT-01: seo(mbti): strengthen main free-test visible FAQ authority"
+    train_scope: mbti_main_visible_faq_content_authority
+    status: user_authorized
+    scope:
+      - Strengthen the MBTI main zh visible FAQ/content authority to naturally cover MBTI免费测试, 16型人格完整结果/报告, 是否收费, and educational/non-diagnostic boundaries.
+      - Preserve the existing /api/v0.3/scales/lookup response shape; only content_i18n_json.zh.faq content changes.
+      - Add focused lookup coverage for canonical MBTI zh FAQ content.
+    allowed_paths:
+      - backend/database/seeders/ScaleRegistrySeeder.php
+      - backend/tests/Feature/V0_3/ScalesLookupSeoMetadataTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify seo_i18n_json TDK, schema policy/runtime, search submission, sitemap, llms, CMS production data, deployment, or fap-web.
+      - Use keyword stuffing or high-risk SERP copy such as 真全免, 无付费墙, 拒绝强制收费, or 2026专业版.
+      - Add new API fields or frontend fallback content.
+    validation:
+      - cd backend && php artisan route:list
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/ScalesLookupSeoMetadataTest.php --filter mbti_zh_lookup_uses_free_test_visible_faq_authority --no-ansi
+      - curl/readback for /api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types&locale=zh FAQ fields
+      - bash backend/scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
