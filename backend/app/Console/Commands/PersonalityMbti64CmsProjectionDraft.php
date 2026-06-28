@@ -26,6 +26,8 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
 
     private const REMAINING_58_OPERATOR_APPROVAL = 'MBTI64-REMAINING-58-COMPETITOR-GAP-CMS-DRAFT-WRITE-01';
 
+    private const REMAINING_58_V2_MODULE_REWRITE_OPERATOR_APPROVAL = 'MBTI64-REMAINING-58-COMPETITOR-GAP-V2-MODULE-DRAFT-REWRITE-01';
+
     private const WRITE_SAFETY_FLAGS = [
         'draft-only',
         'no-publish',
@@ -45,6 +47,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
         {--fresh-query-backed-5 : Restrict planning/write to the fresh 5 query-backed MBTI64 URLs}
         {--next-batch-6 : Restrict planning/write to the approved 6 next-batch MBTI64 URLs}
         {--remaining-58 : Restrict planning/write to the approved 58 remaining competitor-gap MBTI64 variant URLs}
+        {--rewrite-existing-v2-modules : For --remaining-58 only, create patched draft revisions when same-hash existing drafts lack first-class V2 module fields}
         {--agent-batch-size= : Restrict planning/write to an artifact-order batch; only 5 or 10 are allowed}
         {--agent-batch-offset= : Zero-based artifact-order offset for --agent-batch-size; defaults to 0}
         {--json : Emit the full JSON summary}
@@ -142,6 +145,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
             (bool) $this->option('fresh-query-backed-3') => self::FRESH_QUERY_BACKED_3_OPERATOR_APPROVAL,
             (bool) $this->option('fresh-query-backed-5') => self::FRESH_QUERY_BACKED_5_OPERATOR_APPROVAL,
             (bool) $this->option('next-batch-6') => self::NEXT_BATCH_6_OPERATOR_APPROVAL,
+            (bool) $this->option('remaining-58') && (bool) $this->option('rewrite-existing-v2-modules') => self::REMAINING_58_V2_MODULE_REWRITE_OPERATOR_APPROVAL,
             (bool) $this->option('remaining-58') => self::REMAINING_58_OPERATOR_APPROVAL,
             $this->agentBatchRequested() => self::AGENT_BATCH_OPERATOR_APPROVAL,
             default => self::OPERATOR_APPROVAL,
@@ -178,6 +182,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
             'fresh_query_backed_5' => (bool) $this->option('fresh-query-backed-5'),
             'next_batch_6' => (bool) $this->option('next-batch-6'),
             'remaining_58' => (bool) $this->option('remaining-58'),
+            'rewrite_existing_v2_modules' => (bool) $this->option('rewrite-existing-v2-modules'),
             'agent_batch_size' => trim((string) $this->option('agent-batch-size')),
             'agent_batch_offset' => trim((string) $this->option('agent-batch-offset')),
             'draft_only' => (bool) $this->option('draft-only'),

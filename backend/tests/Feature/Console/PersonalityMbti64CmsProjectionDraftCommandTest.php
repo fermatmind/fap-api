@@ -957,6 +957,146 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         }
     }
 
+    public function test_remaining_fifty_eight_rewrite_flag_requires_remaining_subset(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->remainingFiftyEightV2Package();
+        $qa = $this->remainingFiftyEightV2Qa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--rewrite-existing-v2-modules' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('rewrite_existing_v2_modules_requires_remaining_58', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_remaining_fifty_eight_rewrite_dry_run_plans_same_hash_legacy_draft_rewrites(): void
+    {
+        $targets = $this->seedAllTargets();
+        $package = $this->remainingFiftyEightV2Package();
+        $qa = $this->remainingFiftyEightV2Qa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 58, 0);
+        $this->seedLegacyRemainingFiftyEightDrafts($package, $packagePath, $targets);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--remaining-58' => true,
+            '--rewrite-existing-v2-modules' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['rewrite_existing_v2_modules']);
+        $this->assertTrue($payload['subset']['rewrite_existing_v2_modules']);
+        $this->assertSame(58, $payload['row_count']);
+        $this->assertSame(0, $payload['skipped_existing_count']);
+        $this->assertSame(58, $payload['would_create_revision_count']);
+        $this->assertSame(58, $payload['would_rewrite_existing_count']);
+        $this->assertSame(0, $payload['created_revision_count']);
+        $this->assertSame('would_rewrite_existing', (string) ($payload['rows'][0]['action'] ?? ''));
+        $this->assertFalse((bool) ($payload['rows'][0]['existing_revision_has_v2_modules'] ?? true));
+        $this->assertSame(58, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_remaining_fifty_eight_rewrite_write_requires_rewrite_approval_token(): void
+    {
+        $targets = $this->seedAllTargets();
+        $package = $this->remainingFiftyEightV2Package();
+        $qa = $this->remainingFiftyEightV2Qa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 58, 0);
+        $this->seedLegacyRemainingFiftyEightDrafts($package, $packagePath, $targets);
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--remaining-58'] = true;
+        $options['--rewrite-existing-v2-modules'] = true;
+        $options['--operator-approved'] = 'MBTI64-REMAINING-58-COMPETITOR-GAP-CMS-DRAFT-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertStringContainsString(
+            '--operator-approved=MBTI64-REMAINING-58-COMPETITOR-GAP-V2-MODULE-DRAFT-REWRITE-01 is required',
+            (string) ($payload['errors'][0]['message'] ?? '')
+        );
+        $this->assertSame(58, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_remaining_fifty_eight_rewrite_write_creates_patched_revisions_and_then_is_idempotent(): void
+    {
+        $targets = $this->seedAllTargets();
+        $package = $this->remainingFiftyEightV2Package();
+        $qa = $this->remainingFiftyEightV2Qa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 58, 0);
+        $this->seedLegacyRemainingFiftyEightDrafts($package, $packagePath, $targets);
+        $profileBefore = $this->profileLiveState($targets['en|ENFJ']);
+        $variantBefore = $this->variantLiveState($targets['en|ENFJ-T']);
+        $surfaceCountsBefore = $this->liveSurfaceCounts();
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--remaining-58'] = true;
+        $options['--rewrite-existing-v2-modules'] = true;
+        $options['--operator-approved'] = 'MBTI64-REMAINING-58-COMPETITOR-GAP-V2-MODULE-DRAFT-REWRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertTrue($payload['rewrite_existing_v2_modules']);
+        $this->assertSame(58, $payload['created_revision_count']);
+        $this->assertSame(58, $payload['rewritten_existing_count']);
+        $this->assertSame(0, $payload['skipped_existing_count']);
+        $this->assertSame('rewritten_existing', (string) ($payload['rows'][0]['action'] ?? ''));
+        $this->assertSame(116, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame($profileBefore, $this->profileLiveState($targets['en|ENFJ']));
+        $this->assertSame($variantBefore, $this->variantLiveState($targets['en|ENFJ-T']));
+        $this->assertSame($surfaceCountsBefore, $this->liveSurfaceCounts());
+
+        $patchedRevision = PersonalityProfileVariantRevision::query()
+            ->where('personality_profile_variant_id', (int) $targets['en|ENFJ-T']->id)
+            ->orderByDesc('revision_no')
+            ->firstOrFail();
+        $this->assertSame(2, (int) $patchedRevision->revision_no);
+        $firstContent = $patchedRevision->snapshot_json['mbti64_agent_projection_draft_v1']['first_class_draft_fields']['content'] ?? [];
+        foreach ($this->expectedV2FirstClassSectionKeys() as $sectionKey) {
+            $this->assertArrayHasKey($sectionKey, $firstContent);
+        }
+        $this->assertStringContainsString('| Dimension | Assertive side | Turbulent side |', (string) ($firstContent['a_t_difference']['body'] ?? ''));
+
+        $secondExitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $secondPayload = $this->jsonOutput();
+        $this->assertSame(0, $secondExitCode);
+        $this->assertTrue($secondPayload['ok']);
+        $this->assertFalse($secondPayload['writes_committed']);
+        $this->assertSame(0, $secondPayload['created_revision_count']);
+        $this->assertSame(0, $secondPayload['rewritten_existing_count']);
+        $this->assertSame(58, $secondPayload['skipped_existing_count']);
+        $this->assertTrue((bool) ($secondPayload['rows'][0]['existing_revision_has_v2_modules'] ?? false));
+        $this->assertSame(116, PersonalityProfileVariantRevision::query()->count());
+    }
+
     public function test_remaining_fifty_eight_fails_closed_when_handoff_contains_arbitrary_url(): void
     {
         $this->seedAllTargets();
@@ -2385,6 +2525,62 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
             '--no-search-release' => true,
             '--operator-approved' => 'MBTI64-CMS-PROJECTION-DRAFT-88-01',
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     * @param  array<string,PersonalityProfile|PersonalityProfileVariant>  $targets
+     */
+    private function seedLegacyRemainingFiftyEightDrafts(array $package, string $packagePath, array $targets): void
+    {
+        $sourceSha256 = hash_file('sha256', $packagePath);
+        foreach ((array) ($package['recommendations'] ?? []) as $recommendation) {
+            $this->assertIsArray($recommendation);
+            $targetUrl = (string) ($recommendation['target_url'] ?? '');
+            $path = (string) (parse_url($targetUrl, PHP_URL_PATH) ?: '');
+            $slug = basename($path);
+            $runtimeTypeCode = strtoupper($slug);
+            $locale = str_starts_with($path, '/zh/') ? 'zh-CN' : 'en';
+            $target = $targets[$locale.'|'.$runtimeTypeCode] ?? null;
+            $this->assertInstanceOf(PersonalityProfileVariant::class, $target);
+
+            PersonalityProfileVariantRevision::query()->create([
+                'personality_profile_variant_id' => (int) $target->id,
+                'revision_no' => 1,
+                'snapshot_json' => [
+                    'mbti64_agent_projection_draft_v1' => [
+                        'source' => [
+                            'artifact' => 'MBTI64-REMAINING-58-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01',
+                            'source_sha256' => $sourceSha256,
+                            'qa_final_decision' => 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
+                        ],
+                        'identity' => [
+                            'url' => $targetUrl,
+                            'path' => $path,
+                            'locale' => $locale,
+                            'page_type' => 'variant',
+                            'runtime_type_code' => $runtimeTypeCode,
+                        ],
+                        'first_class_draft_fields' => [
+                            'seo' => [
+                                'title' => 'Legacy '.$runtimeTypeCode.' title',
+                                'description' => 'Legacy description.',
+                                'h1' => 'Legacy '.$runtimeTypeCode,
+                            ],
+                            'content' => [
+                                'quick_answer' => 'Legacy quick answer without first-class V2 modules.',
+                            ],
+                            'faq' => [],
+                            'internal_links' => [],
+                        ],
+                        'raw_recommendation' => $recommendation,
+                    ],
+                ],
+                'note' => 'legacy remaining-58 fixture without first-class V2 modules: '.$path,
+                'created_by_admin_user_id' => null,
+                'created_at' => now()->subDay(),
+            ]);
+        }
     }
 
     /**
