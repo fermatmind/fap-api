@@ -1,0 +1,64 @@
+{
+  "counts": {
+    "content_asset_candidates": 50,
+    "core_unique_couplings": 12,
+    "module_counts": {
+      "module_04_coupling": 50
+    },
+    "selector_asset_candidates": 50,
+    "supplemental_unique_couplings": 38,
+    "unique_coupling_count": 50
+  },
+  "coverage": {
+    "existing_core_rows": 60,
+    "existing_supplemental_rows": 190,
+    "missing": [],
+    "new_candidate_thickening_added": true
+  },
+  "editorial_qa": {
+    "components": [
+      "combination_explanation",
+      "benefits_and_costs",
+      "conflict_resolution",
+      "common_misread",
+      "scenario_bridge",
+      "boundary_language"
+    ],
+    "duplicate_body_count": 0,
+    "duplicate_title_count": 0,
+    "external_copy_used": false,
+    "max_body_chars": 293,
+    "status": "pass"
+  },
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "remaining_holds": [
+    "no_runtime_enablement",
+    "no_production_import",
+    "no_frontend_copy",
+    "no_cms_or_search",
+    "rendered_preview_deferred_to_later_pr"
+  ],
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "runtime_use": "not_runtime",
+  "schema": "fap.big5.result_page_v2.coupling_content_thickening_qa.v0_1",
+  "source": {
+    "agent_run_dir": "content_assets/big5/result_page_v2/agent_runs/coupling_content_thickening",
+    "benchmark_rubric": "content_assets/big5/result_page_v2/qa/content_asset_benchmark_rubric/v0_1/big5_content_asset_benchmark_rubric_v0_1.json",
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/coupling_content_thickening"
+  },
+  "status": "pass",
+  "surface_safety": {
+    "compare": "not_targeted_in_this_pr",
+    "history": "not_targeted_in_this_pr",
+    "pdf": "candidate_only_pending_rendered_preview",
+    "result_page": "candidate_only_pending_rendered_preview",
+    "share": "not_shareable_until_rewritten_by_share_safety"
+  }
+}

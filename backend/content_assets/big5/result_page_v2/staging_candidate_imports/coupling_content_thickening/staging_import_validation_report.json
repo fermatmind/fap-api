@@ -1,0 +1,44 @@
+{
+    "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+    "task": "staging_import_validation",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/coupling_content_thickening",
+    "staging_output_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/coupling_content_thickening",
+    "allow_staging_write": true,
+    "staging_write_performed": true,
+    "review_manifest": {
+        "present": true,
+        "valid": true,
+        "errors": []
+    },
+    "candidate_counts": {
+        "selector_asset": 50,
+        "content_asset": 50
+    },
+    "candidate_validation": {
+        "status": "pass",
+        "selector_asset_candidate_count": 50,
+        "content_asset_candidate_count": 50,
+        "error_count": 0,
+        "errors": []
+    },
+    "leak_scan": {
+        "status": "pass",
+        "hit_count": 0,
+        "hits": []
+    },
+    "negative_guarantees": {
+        "database_write": false,
+        "cms_write": false,
+        "frontend_copy_write": false,
+        "final_result_payload_generation": false,
+        "runtime_flag_change": false,
+        "release_snapshot_change": false,
+        "production_import_gate_change": false,
+        "rollout_gate_change": false
+    }
+}
