@@ -1389,6 +1389,87 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_method_boundary_v0_5_rendered_preview_qa_is_redacted_and_non_runtime(): void
+    {
+        $qaDir = base_path('content_assets/big5/result_page_v2/qa/method_boundary_rendered_preview/v0_1');
+
+        foreach ([
+            'README.md',
+            'SHA256SUMS',
+            'big5_method_boundary_rendered_preview_qa_v0_1.json',
+        ] as $filename) {
+            $this->assertFileExists($qaDir.'/'.$filename);
+        }
+
+        $report = $this->readJson($qaDir.'/big5_method_boundary_rendered_preview_qa_v0_1.json');
+
+        $this->assertSame('fap.big5.result_page_v2.method_boundary.rendered_preview_qa.v0_1', $report['schema'] ?? null);
+        $this->assertSame('pass', $report['status'] ?? null);
+        $this->assertSame('not_runtime', $report['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_pilot'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_production'] ?? true));
+        $this->assertSame(
+            'content_assets/big5/result_page_v2/staging_candidate_imports/method_boundary_v0_5_staging_import',
+            data_get($report, 'source.staging_import_dir')
+        );
+        $this->assertSame(14, data_get($report, 'counts.selector_asset_candidates'));
+        $this->assertSame(14, data_get($report, 'counts.content_asset_candidates'));
+        $this->assertSame(1, data_get($report, 'counts.module_counts.module_00_trust_bar'));
+        $this->assertSame(1, data_get($report, 'counts.module_counts.module_08_share_save'));
+        $this->assertSame(12, data_get($report, 'counts.module_counts.module_10_method_privacy'));
+
+        $surfaces = collect((array) ($report['surface_matrix'] ?? []))->pluck('status', 'surface');
+        foreach (['result_page', 'pdf', 'share', 'history', 'compare'] as $surface) {
+            $this->assertSame('pass', $surfaces->get($surface), $surface);
+        }
+
+        $this->assertSame('pass', data_get($report, 'visible_text_quality.status'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.too_long_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.duplicate_title_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.duplicate_body_count'));
+        $this->assertLessThanOrEqual(360, (int) data_get($report, 'visible_text_quality.max_body_chars'));
+        $this->assertSame('pass', data_get($report, 'rendered_hygiene_scan.status'));
+        $this->assertSame(0, data_get($report, 'rendered_hygiene_scan.hit_count'));
+        $this->assertSame([], data_get($report, 'rendered_hygiene_scan.hits'));
+        $this->assertTrue((bool) data_get($report, 'acceptance.result_page_position_correct'));
+        $this->assertTrue((bool) data_get($report, 'acceptance.share_boundary_present'));
+        $this->assertTrue((bool) data_get($report, 'acceptance.pdf_share_history_compare_safe'));
+        $this->assertTrue((bool) data_get($report, 'acceptance.no_rendered_hygiene_hits'));
+        $this->assertTrue((bool) data_get($report, 'acceptance.copy_quality_pass'));
+        $this->assertContains('no_runtime_enablement', (array) ($report['remaining_holds'] ?? []));
+        $this->assertContains('live_rendered_page_qa_deferred_until_accessible_fixture_or_pilot_url', (array) ($report['remaining_holds'] ?? []));
+
+        $allArtifacts = implode("\n", array_map(
+            static fn (string $path): string => (string) file_get_contents($path),
+            glob($qaDir.'/*') ?: []
+        ));
+
+        foreach ([
+            'private_url',
+            'attempt_id',
+            'raw_score',
+            'raw score',
+            'percentile',
+            'fixed_type',
+            'user_confirmed_type',
+            'type_code',
+            'big5:',
+            'band:',
+            'payload',
+            'registry',
+            'PR3B',
+            'AttemptReadController',
+            'Big Five Report Engine',
+            '[object Object]',
+            '本 由 生成',
+            '不代表生产 已接入',
+        ] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $allArtifacts, $forbiddenToken);
+        }
+    }
+
     public function test_strict_mode_rejects_public_payload_and_shareable_score_leaks(): void
     {
         $root = $this->tempDir('big5-v2-agent-leak');

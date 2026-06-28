@@ -1,0 +1,311 @@
+{
+  "schema": "fap.big5.result_page_v2.method_boundary.rendered_preview_qa.v0_1",
+  "package_key": "big5_result_page_v2.method_boundary_v0_5.rendered_preview_qa.v0_1",
+  "created_at_utc": "2026-06-28T00:00:00Z",
+  "mode": "backend_fixture_rendered_preview_qa",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "source": {
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/method_boundary_v0_5_staging_import",
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/method_boundary_v0_5_normalized",
+    "staging_import_validation_status": "pass",
+    "staging_write_performed": true
+  },
+  "counts": {
+    "selector_asset_candidates": 14,
+    "content_asset_candidates": 14,
+    "surface_count": 5,
+    "module_counts": {
+      "module_00_trust_bar": 1,
+      "module_08_share_save": 1,
+      "module_10_method_privacy": 12
+    },
+    "slot_counts": {
+      "module_00_trust_bar.boundary.non_type_boundary": 1,
+      "module_08_share_save.boundary.share_boundary": 1,
+      "module_10_method_privacy.boundary.low_quality_boundary": 1,
+      "module_10_method_privacy.boundary.non_clinical_prediction_boundary": 1,
+      "module_10_method_privacy.boundary.non_screening_boundary": 1,
+      "module_10_method_privacy.boundary.sensitive_content_boundary": 1,
+      "module_10_method_privacy.method.facet_method": 2,
+      "module_10_method_privacy.method.norm_method": 2,
+      "module_10_method_privacy.method.retest_method": 1,
+      "module_10_method_privacy.method.review_method": 1,
+      "module_10_method_privacy.method.score_band_boundary": 1,
+      "module_10_method_privacy.method.score_method": 1
+    }
+  },
+  "rendered_preview_scope": {
+    "evidence_type": "backend_fixture_only",
+    "final_result_contract_generated": false,
+    "frontend_copy_added": false,
+    "cms_or_search_changed": false,
+    "production_gate_changed": false,
+    "live_url_verified": false
+  },
+  "surface_matrix": [
+    {
+      "surface": "result_page",
+      "status": "pass",
+      "render_strategy": "method_boundary_cards_in_backend_defined_modules",
+      "expected_modules": [
+        "module_00_trust_bar",
+        "module_08_share_save",
+        "module_10_method_privacy"
+      ],
+      "candidate_count": 14,
+      "safety_notes": [
+        "full text allowed only in private result context",
+        "visible text scan has zero internal-token hits"
+      ]
+    },
+    {
+      "surface": "pdf",
+      "status": "pass",
+      "render_strategy": "private_report_boundary_notes_only",
+      "expected_modules": [
+        "module_10_method_privacy"
+      ],
+      "candidate_count": 0,
+      "safety_notes": [
+        "no private URL evidence stored",
+        "no score evidence stored"
+      ]
+    },
+    {
+      "surface": "share",
+      "status": "pass",
+      "render_strategy": "summary_only_share_safe_boundary",
+      "expected_modules": [
+        "module_08_share_save"
+      ],
+      "candidate_count": 1,
+      "safety_notes": [
+        "share card uses summary boundary only",
+        "no score or rank evidence stored"
+      ]
+    },
+    {
+      "surface": "history",
+      "status": "pass",
+      "render_strategy": "summary_only_no_private_detail",
+      "expected_modules": [
+        "module_10_method_privacy"
+      ],
+      "candidate_count": 14,
+      "safety_notes": [
+        "history can reference method boundary as short summary only"
+      ]
+    },
+    {
+      "surface": "compare",
+      "status": "pass",
+      "render_strategy": "summary_only_no_ranking_claim",
+      "expected_modules": [
+        "module_10_method_privacy"
+      ],
+      "candidate_count": 14,
+      "safety_notes": [
+        "compare must not turn method boundary into rank or diagnosis"
+      ]
+    }
+  ],
+  "visible_text_quality": {
+    "status": "pass",
+    "max_title_chars": 17,
+    "max_short_body_chars": 40,
+    "max_body_chars": 188,
+    "max_cta_chars": 47,
+    "too_long_count": 0,
+    "too_long_items": [],
+    "duplicate_title_count": 0,
+    "duplicate_body_count": 0,
+    "paragraph_count_min": 2,
+    "paragraph_count_max": 2,
+    "sentence_like_count_min": 4,
+    "sentence_like_count_max": 5,
+    "asset_metrics": [
+      {
+        "asset_key": "candidate.method_boundary.trust_bar_non_type_short.v0_5",
+        "module_key": "module_00_trust_bar",
+        "slot_key": "module_00_trust_bar.boundary.non_type_boundary",
+        "title_chars": 11,
+        "short_body_chars": 30,
+        "body_chars": 142,
+        "cta_chars": 30,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 5
+      },
+      {
+        "asset_key": "candidate.method_boundary.scoring_layers_explained.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.method.score_method",
+        "title_chars": 8,
+        "short_body_chars": 38,
+        "body_chars": 176,
+        "cta_chars": 41,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 5
+      },
+      {
+        "asset_key": "candidate.method_boundary.band_ranges_not_cutoffs.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.method.score_band_boundary",
+        "title_chars": 10,
+        "short_body_chars": 34,
+        "body_chars": 157,
+        "cta_chars": 37,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 5
+      },
+      {
+        "asset_key": "candidate.method_boundary.thirty_facets_inference.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.method.facet_method",
+        "title_chars": 14,
+        "short_body_chars": 33,
+        "body_chars": 176,
+        "cta_chars": 44,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 5
+      },
+      {
+        "asset_key": "candidate.method_boundary.facet_domain_mismatch_reading.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.method.facet_method",
+        "title_chars": 14,
+        "short_body_chars": 38,
+        "body_chars": 153,
+        "cta_chars": 38,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 5
+      },
+      {
+        "asset_key": "candidate.method_boundary.norm_three_state_reading.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.method.norm_method",
+        "title_chars": 7,
+        "short_body_chars": 36,
+        "body_chars": 165,
+        "cta_chars": 47,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 5
+      },
+      {
+        "asset_key": "candidate.method_boundary.norm_unavailable_still_useful.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.method.norm_method",
+        "title_chars": 14,
+        "short_body_chars": 34,
+        "body_chars": 167,
+        "cta_chars": 40,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 5
+      },
+      {
+        "asset_key": "candidate.method_boundary.low_quality_show_soften_hide.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.boundary.low_quality_boundary",
+        "title_chars": 13,
+        "short_body_chars": 30,
+        "body_chars": 175,
+        "cta_chars": 33,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 4
+      },
+      {
+        "asset_key": "candidate.method_boundary.surface_privacy_matrix.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.boundary.sensitive_content_boundary",
+        "title_chars": 11,
+        "short_body_chars": 40,
+        "body_chars": 182,
+        "cta_chars": 37,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 4
+      },
+      {
+        "asset_key": "candidate.method_boundary.share_safe_boundary.v0_5",
+        "module_key": "module_08_share_save",
+        "slot_key": "module_08_share_save.boundary.share_boundary",
+        "title_chars": 13,
+        "short_body_chars": 31,
+        "body_chars": 166,
+        "cta_chars": 36,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 4
+      },
+      {
+        "asset_key": "candidate.method_boundary.organization_use_boundary.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.boundary.non_screening_boundary",
+        "title_chars": 17,
+        "short_body_chars": 35,
+        "body_chars": 188,
+        "cta_chars": 32,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 5
+      },
+      {
+        "asset_key": "candidate.method_boundary.clinical_and_prediction_limit.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.boundary.non_clinical_prediction_boundary",
+        "title_chars": 13,
+        "short_body_chars": 33,
+        "body_chars": 180,
+        "cta_chars": 36,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 5
+      },
+      {
+        "asset_key": "candidate.method_boundary.retest_frequency_and_trend.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.method.retest_method",
+        "title_chars": 10,
+        "short_body_chars": 32,
+        "body_chars": 167,
+        "cta_chars": 37,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 4
+      },
+      {
+        "asset_key": "candidate.method_boundary.deep_reading_evidence_strength.v0_5",
+        "module_key": "module_10_method_privacy",
+        "slot_key": "module_10_method_privacy.method.review_method",
+        "title_chars": 11,
+        "short_body_chars": 29,
+        "body_chars": 176,
+        "cta_chars": 41,
+        "body_paragraph_count": 2,
+        "sentence_like_count": 5
+      }
+    ]
+  },
+  "rendered_hygiene_scan": {
+    "status": "pass",
+    "scan_scope": "staging_candidate_visible_text_fields_only",
+    "hit_count": 0,
+    "hits": [],
+    "rule_count": 11
+  },
+  "acceptance": {
+    "result_page_position_correct": true,
+    "share_boundary_present": true,
+    "pdf_share_history_compare_safe": true,
+    "no_rendered_hygiene_hits": true,
+    "copy_quality_pass": true
+  },
+  "remaining_holds": [
+    "no_runtime_enablement",
+    "no_production_import",
+    "no_rollout_change",
+    "no_frontend_copy",
+    "no_cms_or_search_publication",
+    "live_rendered_page_qa_deferred_until_accessible_fixture_or_pilot_url"
+  ],
+  "status": "pass"
+}
