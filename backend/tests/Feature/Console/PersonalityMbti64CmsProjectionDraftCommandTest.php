@@ -793,6 +793,183 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         }
     }
 
+    public function test_remaining_fifty_eight_v2_dry_run_accepts_competitor_gap_artifact_and_approved_queue_without_writes(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->remainingFiftyEightV2Package();
+        $qa = $this->remainingFiftyEightV2Qa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 58, 0);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--remaining-58' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame(58, $payload['row_count']);
+        $this->assertSame(58, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(58, $payload['would_create_revision_count']);
+        $this->assertSame('remaining_58', $payload['subset']['mode']);
+        $this->assertTrue($payload['subset']['approval_queue_required']);
+        $this->assertFalse($payload['subset']['arbitrary_url_subset_allowed']);
+        $this->assertTrue($payload['approval_queue']['ready_for_write']);
+        $this->assertSame(58, $payload['approval_queue']['approved_count']);
+
+        $plannedUrls = array_map(
+            static fn (array $row): string => (string) ($row['url'] ?? ''),
+            $payload['rows'] ?? []
+        );
+        sort($plannedUrls);
+        $expectedUrls = $this->remainingFiftyEightUrls();
+        sort($expectedUrls);
+        $this->assertSame($expectedUrls, $plannedUrls);
+        $this->assertSame($expectedUrls, array_values($this->sortedStrings((array) $payload['subset']['allowed_urls'])));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_remaining_fifty_eight_write_requires_remaining_fifty_eight_approval_token(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->remainingFiftyEightV2Package();
+        $qa = $this->remainingFiftyEightV2Qa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 58, 0);
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--remaining-58'] = true;
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertStringContainsString(
+            '--operator-approved=MBTI64-REMAINING-58-COMPETITOR-GAP-CMS-DRAFT-WRITE-01 is required',
+            (string) ($payload['errors'][0]['message'] ?? '')
+        );
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_remaining_fifty_eight_write_without_approved_queue_rows_fails_closed_without_revisions(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->remainingFiftyEightV2Package();
+        $qa = $this->remainingFiftyEightV2Qa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--remaining-58'] = true;
+        $options['--operator-approved'] = 'MBTI64-REMAINING-58-COMPETITOR-GAP-CMS-DRAFT-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(58, $payload['row_count']);
+        $this->assertSame(0, $payload['created_revision_count']);
+        $this->assertSame(0, $payload['approval_queue']['approved_count']);
+        $this->assertSame(58, $payload['approval_queue']['missing_count']);
+        $this->assertContains('agent_batch_approval_required', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_remaining_fifty_eight_write_creates_only_approved_variant_draft_revisions(): void
+    {
+        $targets = $this->seedAllTargets();
+        $package = $this->remainingFiftyEightV2Package();
+        $qa = $this->remainingFiftyEightV2Qa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 58, 0);
+        $profileBefore = $this->profileLiveState($targets['en|ENFJ']);
+        $variantBefore = $this->variantLiveState($targets['en|ENFJ-T']);
+        $surfaceCountsBefore = $this->liveSurfaceCounts();
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--remaining-58'] = true;
+        $options['--operator-approved'] = 'MBTI64-REMAINING-58-COMPETITOR-GAP-CMS-DRAFT-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['write']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertSame(58, $payload['row_count']);
+        $this->assertSame(58, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(58, $payload['created_revision_count']);
+        $this->assertSame('remaining_58', $payload['subset']['mode']);
+        $this->assertTrue($payload['approval_queue']['ready_for_write']);
+        $this->assertSame(58, $payload['approval_queue']['approved_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(58, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame($profileBefore, $this->profileLiveState($targets['en|ENFJ']));
+        $this->assertSame($variantBefore, $this->variantLiveState($targets['en|ENFJ-T']));
+        $this->assertSame($surfaceCountsBefore, $this->liveSurfaceCounts());
+
+        foreach (PersonalityProfileVariantRevision::query()->get() as $revision) {
+            $this->assertProjectionSnapshot(
+                $revision->snapshot_json,
+                'MBTI64-REMAINING-58-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01',
+                'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
+                9
+            );
+        }
+    }
+
+    public function test_remaining_fifty_eight_fails_closed_when_handoff_contains_arbitrary_url(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->remainingFiftyEightV2Package();
+        $package['recommendations'][0] = $this->recommendation('/en/personality/enfj-a');
+        $package['recommendations'][0]['recommendation_id'] = 'mbti64-remaining-58-competitor-gap:/en/personality/enfj-a:v2';
+        $qa = $this->remainingFiftyEightV2Qa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--remaining-58' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('remaining_58_url_set_mismatch', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertContains('remaining_58_subset_required_urls_missing', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     public function test_next_batch_six_write_with_partial_approval_fails_closed_without_revisions(): void
     {
         $this->seedAllTargets();
@@ -1817,6 +1994,150 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
             ],
             'recommended_next_task' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-APPROVAL-QUEUE-WRITE-01',
         ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function remainingFiftyEightV2Package(): array
+    {
+        $recommendations = [];
+        foreach ($this->remainingFiftyEightUrls() as $url) {
+            $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
+            $recommendation = $this->recommendation($path);
+            $locale = str_starts_with($path, '/zh/') ? 'zh' : 'en';
+            $recommended = $recommendation['recommendations'];
+            $recommendation['recommendation_id'] = 'mbti64-remaining-58-competitor-gap:'.$path.':v2';
+            $recommendation['locale'] = $locale;
+            $recommendation['type_code'] = strtoupper(basename($path));
+            $recommendation['evidence_class'] = 'gsc_pending';
+            $recommendation['competitor_gap_basis'] = ['fixture competitor gap'];
+            $recommendation['recommendations'] = [
+                'title' => (string) ($recommended['title']['recommended'] ?? ''),
+                'description' => (string) ($recommended['description']['recommended'] ?? ''),
+                'h1' => (string) ($recommended['h1']['recommended'] ?? ''),
+                'quick_answer' => (string) ($recommended['quick_answer']['recommended'] ?? ''),
+                'sections' => array_map(
+                    static fn (int $index): array => [
+                        'key' => 'section_'.$index,
+                        'title' => 'Fixture remaining section '.$index,
+                        'body' => 'Fixture remaining expanded section body '.$index.'.',
+                    ],
+                    range(1, 8)
+                ),
+                'faq' => array_map(
+                    static fn (int $index): array => [
+                        'question' => 'Fixture remaining question '.$index.'?',
+                        'answer' => 'Fixture remaining answer '.$index.' for safe content expansion.',
+                    ],
+                    range(1, 9)
+                ),
+                'internal_links' => (array) ($recommended['internal_links'] ?? []),
+                'bilingual_parity_notes' => ['paired counterpart fixture'],
+                'claim_boundary_notes' => ['no official MBTI affiliation fixture'],
+            ];
+            $recommendations[] = $recommendation;
+        }
+
+        return [
+            'artifact' => 'MBTI64-REMAINING-58-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01',
+            'generated_at' => '2026-06-28T12:00:00Z',
+            'status' => 'pass',
+            'target_count' => 58,
+            'final_decision' => 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
+            'recommendations' => $recommendations,
+            'safety_boundary' => [
+                'cms_write' => false,
+                'approval_queue_write' => false,
+                'live_promotion' => false,
+                'publish_index_search' => false,
+                'sitemap_llms_mutation' => false,
+            ],
+            'recommended_next_task' => 'MBTI64-REMAINING-58-COMPETITOR-GAP-APPROVAL-QUEUE-DRY-RUN-01',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $package
+     * @return array<string,mixed>
+     */
+    private function remainingFiftyEightV2Qa(?array $package = null): array
+    {
+        $package ??= $this->remainingFiftyEightV2Package();
+        $pageResults = [];
+        foreach ((array) ($package['recommendations'] ?? []) as $recommendation) {
+            if (! is_array($recommendation)) {
+                continue;
+            }
+            $targetUrl = (string) ($recommendation['target_url'] ?? '');
+            $path = (string) (parse_url($targetUrl, PHP_URL_PATH) ?: '');
+            $pageResults[] = [
+                'target_url' => $targetUrl,
+                'path' => $path,
+                'locale' => str_starts_with($path, '/zh/') ? 'zh' : 'en',
+                'page_type' => 'variant',
+                'type_code' => strtoupper(basename($path)),
+                'section_count' => 8,
+                'faq_count' => 9,
+                'private_route_hits' => [],
+                'qa_decision' => 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
+                'blocked_reason' => null,
+                'gates' => [
+                    'target_scope' => 'pass',
+                    'schema_shape' => 'pass',
+                    'at_difference_table' => 'pass',
+                    'cognitive_function_mechanism' => 'pass',
+                    'work_relationship_communication' => 'pass',
+                    'safe_use_boundary' => 'pass',
+                    'trademark_claim_boundary' => 'pass',
+                    'deterministic_claim_boundary' => 'pass',
+                    'private_route_boundary' => 'pass',
+                    'competitor_copy_boundary' => 'pass',
+                    'bilingual_parity' => 'pass',
+                    'duplicate_template_risk' => 'pass_with_monitoring',
+                ],
+            ];
+        }
+
+        return [
+            'artifact' => 'MBTI64-REMAINING-58-COMPETITOR-GAP-CONTENT-EXPANSION-V2-QA-01',
+            'generated_at' => '2026-06-28T12:00:00Z',
+            'input_artifact' => 'docs/seo/personality/mbti64-remaining-58-competitor-gap-content-expansion-v2-2026-06-28.json',
+            'summary' => [
+                'target_count' => 58,
+                'pass_count' => 58,
+                'no_go_count' => 0,
+                'variant_pages' => 58,
+                'comparison_pages' => 0,
+            ],
+            'page_results' => $pageResults,
+            'blockers' => [],
+            'final_decision' => 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
+            'recommended_next_task' => 'MBTI64-REMAINING-58-COMPETITOR-GAP-APPROVAL-QUEUE-WRITE-01',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function remainingFiftyEightUrls(): array
+    {
+        $excluded = array_fill_keys(self::NEXT_BATCH_6_URLS, true);
+        $urls = [];
+        foreach (['en', 'zh'] as $prefix) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                foreach (['a', 't'] as $variantCode) {
+                    $url = 'https://fermatmind.com/'.$prefix.'/personality/'.strtolower($typeCode).'-'.$variantCode;
+                    if (! isset($excluded[$url])) {
+                        $urls[] = $url;
+                    }
+                }
+            }
+        }
+
+        sort($urls);
+
+        return $urls;
     }
 
     /**
