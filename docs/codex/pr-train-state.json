@@ -64533,7 +64533,7 @@
     "branch": "codex/big5-norm-low-quality-edge-state-content-01",
     "title": "BIG5-NORM-LOW-QUALITY-EDGE-STATE-CONTENT-01: Thicken Big Five norm and edge-state content assets",
     "train_scope": "big5_result_page_content_asset_thickening",
-    "status": "committed",
+    "status": "pr_open",
     "depends_on": [
       "BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01"
     ],
@@ -64585,10 +64585,14 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to norm/low-quality edge-state content thickening artifacts, staging import artifacts, QA packet, AssetAgent test, and PR train state reconciliation."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2496 opened; GitHub checks pending."
       }
     },
     "commit_sha": "4d03f73a7c67ad386a28cacfc1f6a45897f3d18e",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2496",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -64621,6 +64625,11 @@
         "at": "2026-06-28T03:29:00Z",
         "status": "committed",
         "note": "Implementation committed at 4d03f73a7c67ad386a28cacfc1f6a45897f3d18e."
+      },
+      {
+        "at": "2026-06-28T03:30:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2496 for norm/low-quality edge-state content thickening."
       }
     ]
   }
