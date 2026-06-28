@@ -63731,5 +63731,320 @@
       }
     ],
     "notes": "PR-EQ-V20-01 imports direct-mapped v2.3 assets only; career overlays, route matrix activation, dynamic depth modules, canonical fixtures, and frontend consumption remain deferred."
+  },
+  "BIG5-CONTENT-ASSET-BENCHMARK-RUBRIC-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-content-asset-benchmark-rubric-01",
+    "title": "BIG5-CONTENT-ASSET-BENCHMARK-RUBRIC-01: Add Big Five content asset benchmark rubric",
+    "train_scope": "big5_result_page_content_asset_thickening",
+    "status": "pr_open",
+    "depends_on": [],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized updating fap-api pr-train manifest/state with 8 Big Five content asset thickening entries and executing the /goal train."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "First PR in this train; branch created from origin/main 43e4a8f937982ebf967d20df80d6bb2217fcebd0."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi",
+          "find backend/content_assets/big5/result_page_v2/qa/content_asset_benchmark_rubric -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\\\;",
+          "cd backend/content_assets/big5/result_page_v2/qa/content_asset_benchmark_rubric/v0_1 && shasum -a 256 -c SHA256SUMS",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "rg -n \"big5:|band:|payload|registry|PR3B|AttemptReadController|Big Five Report Engine|\\\\[object Object\\\\]|private_url|attempt_id|raw_score|percentile|fixed_type|user_confirmed_type|type_code\" backend/content_assets/big5/result_page_v2/qa/content_asset_benchmark_rubric/v0_1 || true",
+          "git diff --check"
+        ],
+        "evidence": "Strict audit, focused PHPUnit, artifact JSON parse, checksum validation, YAML/state parse, forbidden-token scan, diff check, and path scope validation passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to benchmark rubric QA artifacts, BigFiveResultPageV2AssetAgentTest, and authorized docs/codex train metadata."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2489 opened; GitHub checks pending."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2489",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-28 explicit authorization to add 8 Big Five content asset thickening PR train entries.",
+    "events": [
+      {
+        "at": "2026-06-28T00:00:00Z",
+        "status": "pending",
+        "note": "Initialized under user-authorized Big Five result-page content asset thickening train."
+      },
+      {
+        "at": "2026-06-28T01:20:00Z",
+        "status": "local_validation_passed",
+        "note": "Local validation and scope validation passed before commit."
+      },
+      {
+        "at": "2026-06-28T01:22:00Z",
+        "status": "committed",
+        "note": "Committed local changes before push."
+      },
+      {
+        "at": "2026-06-28T01:24:00Z",
+        "status": "committed_pending_push",
+        "note": "Commit SHA will be recorded from GitHub PR head/merge evidence to avoid self-referential stale SHA inside the same commit."
+      },
+      {
+        "at": "2026-06-28T01:28:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2489 for benchmark rubric scope."
+      }
+    ]
+  },
+  "BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-domain-bands-content-thickening-01",
+    "title": "BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01: Thicken Big Five domain band content assets",
+    "train_scope": "big5_result_page_content_asset_thickening",
+    "status": "pending",
+    "depends_on": [
+      "BIG5-CONTENT-ASSET-BENCHMARK-RUBRIC-01"
+    ],
+    "checks": {},
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-28 explicit authorization to add 8 Big Five content asset thickening PR train entries.",
+    "events": [
+      {
+        "at": "2026-06-28T00:00:00Z",
+        "status": "pending",
+        "note": "Initialized under user-authorized Big Five result-page content asset thickening train."
+      }
+    ]
+  },
+  "BIG5-FACET-CONTENT-THICKENING-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-facet-content-thickening-01",
+    "title": "BIG5-FACET-CONTENT-THICKENING-01: Thicken Big Five facet content assets",
+    "train_scope": "big5_result_page_content_asset_thickening",
+    "status": "pending",
+    "depends_on": [
+      "BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01"
+    ],
+    "checks": {},
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-28 explicit authorization to add 8 Big Five content asset thickening PR train entries.",
+    "events": [
+      {
+        "at": "2026-06-28T00:00:00Z",
+        "status": "pending",
+        "note": "Initialized under user-authorized Big Five result-page content asset thickening train."
+      }
+    ]
+  },
+  "BIG5-COUPLING-CONTENT-THICKENING-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-coupling-content-thickening-01",
+    "title": "BIG5-COUPLING-CONTENT-THICKENING-01: Thicken Big Five coupling content assets",
+    "train_scope": "big5_result_page_content_asset_thickening",
+    "status": "pending",
+    "depends_on": [
+      "BIG5-FACET-CONTENT-THICKENING-01"
+    ],
+    "checks": {},
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-28 explicit authorization to add 8 Big Five content asset thickening PR train entries.",
+    "events": [
+      {
+        "at": "2026-06-28T00:00:00Z",
+        "status": "pending",
+        "note": "Initialized under user-authorized Big Five result-page content asset thickening train."
+      }
+    ]
+  },
+  "BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-canonical-profile-content-thickening-01",
+    "title": "BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01: Thicken Big Five canonical profile content assets",
+    "train_scope": "big5_result_page_content_asset_thickening",
+    "status": "pending",
+    "depends_on": [
+      "BIG5-COUPLING-CONTENT-THICKENING-01"
+    ],
+    "checks": {},
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-28 explicit authorization to add 8 Big Five content asset thickening PR train entries.",
+    "events": [
+      {
+        "at": "2026-06-28T00:00:00Z",
+        "status": "pending",
+        "note": "Initialized under user-authorized Big Five result-page content asset thickening train."
+      }
+    ]
+  },
+  "BIG5-SCENARIO-ACTION-CONTENT-THICKENING-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-scenario-action-content-thickening-01",
+    "title": "BIG5-SCENARIO-ACTION-CONTENT-THICKENING-01: Thicken Big Five scenario action content assets",
+    "train_scope": "big5_result_page_content_asset_thickening",
+    "status": "pending",
+    "depends_on": [
+      "BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01"
+    ],
+    "checks": {},
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-28 explicit authorization to add 8 Big Five content asset thickening PR train entries.",
+    "events": [
+      {
+        "at": "2026-06-28T00:00:00Z",
+        "status": "pending",
+        "note": "Initialized under user-authorized Big Five result-page content asset thickening train."
+      }
+    ]
+  },
+  "BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-share-pdf-history-compare-safe-content-01",
+    "title": "BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01: Thicken Big Five safe surface content assets",
+    "train_scope": "big5_result_page_content_asset_thickening",
+    "status": "pending",
+    "depends_on": [
+      "BIG5-SCENARIO-ACTION-CONTENT-THICKENING-01"
+    ],
+    "checks": {},
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-28 explicit authorization to add 8 Big Five content asset thickening PR train entries.",
+    "events": [
+      {
+        "at": "2026-06-28T00:00:00Z",
+        "status": "pending",
+        "note": "Initialized under user-authorized Big Five result-page content asset thickening train."
+      }
+    ]
+  },
+  "BIG5-NORM-LOW-QUALITY-EDGE-STATE-CONTENT-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-norm-low-quality-edge-state-content-01",
+    "title": "BIG5-NORM-LOW-QUALITY-EDGE-STATE-CONTENT-01: Thicken Big Five norm and edge-state content assets",
+    "train_scope": "big5_result_page_content_asset_thickening",
+    "status": "pending",
+    "depends_on": [
+      "BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01"
+    ],
+    "checks": {},
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-28 explicit authorization to add 8 Big Five content asset thickening PR train entries.",
+    "events": [
+      {
+        "at": "2026-06-28T00:00:00Z",
+        "status": "pending",
+        "note": "Initialized under user-authorized Big Five result-page content asset thickening train."
+      }
+    ]
   }
 }

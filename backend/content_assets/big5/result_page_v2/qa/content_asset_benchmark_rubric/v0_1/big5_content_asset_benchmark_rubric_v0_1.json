@@ -1,0 +1,332 @@
+{
+  "schema": "fap.big5.result_page_v2.content_asset_benchmark_rubric.v0_1",
+  "package_key": "big5_result_page_v2.content_asset_benchmark_rubric.v0_1",
+  "created_at_utc": "2026-06-28T00:00:00Z",
+  "status": "pass",
+  "mode": "benchmark_rubric_only",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "scope": {
+    "fap_api_only": true,
+    "candidate_generation_performed": false,
+    "staging_import_performed": false,
+    "final_result_contract_generated": false,
+    "frontend_copy_added": false,
+    "cms_or_search_changed": false,
+    "runtime_or_production_gate_changed": false
+  },
+  "reference_sources": [
+    {
+      "source_id": "source_123test_big_five_test",
+      "label": "structure_reference_only",
+      "url": "https://www.123test.com/personality-test/",
+      "allowed_use": [
+        "module_coverage_reference",
+        "reader_expectation_reference",
+        "commercial_depth_reference"
+      ],
+      "forbidden_use": [
+        "copy_text",
+        "copy_questions",
+        "copy_report_language",
+        "copy_proprietary_layout"
+      ],
+      "notes": "Use as a high-level reference for free report expectations, 30 subscale awareness, instruction clarity, and extended-report information density."
+    },
+    {
+      "source_id": "source_123test_big_five_theory",
+      "label": "structure_reference_only",
+      "url": "https://www.123test.com/big-five-personality-theory/",
+      "allowed_use": [
+        "methodology_structure_reference",
+        "trait_overview_reference",
+        "faq_structure_reference"
+      ],
+      "forbidden_use": [
+        "copy_text",
+        "copy_claims_without_review",
+        "copy_references_without_source_review"
+      ],
+      "notes": "Use as a reference for theory-page structure and plain-language trait explanation patterns."
+    },
+    {
+      "source_id": "source_truity_big_five_test",
+      "label": "structure_reference_only",
+      "url": "https://www.truity.com/test/big-five-personality-test",
+      "allowed_use": [
+        "result_expectation_reference",
+        "faq_structure_reference",
+        "trust_signal_reference",
+        "trait_spectrum_reference"
+      ],
+      "forbidden_use": [
+        "copy_text",
+        "copy_questions",
+        "copy_report_language",
+        "copy_paid_report_positioning"
+      ],
+      "notes": "Use as a reference for spectrum framing, FAQ coverage, and user-facing trust cues while preserving FermatMind free-full-report positioning."
+    },
+    {
+      "source_id": "source_ipip_open_psychometrics_big_five",
+      "label": "public_domain_source",
+      "url": "https://openpsychometrics.org/tests/IPIP-BFFM/",
+      "allowed_use": [
+        "open_measurement_context",
+        "scale_response_structure_reference"
+      ],
+      "forbidden_use": [
+        "unreviewed_item_copy_into_result_page",
+        "replace_fermatmind_scoring_authority"
+      ],
+      "notes": "Use only for open measurement context and source-boundary clarity; FermatMind scoring and result contracts remain backend authority."
+    }
+  ],
+  "content_asset_rubric": {
+    "global_requirements": [
+      "Every candidate must be user-readable without internal implementation terms.",
+      "Every candidate must explain what the result can suggest and what it cannot prove.",
+      "Every candidate must include at least one practical reading or action frame when the slot is not purely policy text.",
+      "Every candidate must preserve continuous-trait language rather than fixed personality type language.",
+      "Every candidate must remain useful when rendered in Chinese first, with later bilingual expansion possible."
+    ],
+    "commercial_depth_components": [
+      "plain_language_explanation",
+      "strength_or_useful_signal",
+      "risk_or_overuse_pattern",
+      "common_misread",
+      "action_guidance",
+      "boundary_statement",
+      "scenario_or_reflection_prompt"
+    ],
+    "seo_geo_components": [
+      "OCEAN_term_alignment",
+      "reader_question_answerability",
+      "definition_before_application",
+      "comparison_safe_language",
+      "method_boundary_visibility",
+      "FAQ_ready_atomic_claims",
+      "AI_search_quote_safe_summary"
+    ],
+    "editorial_quality_thresholds": {
+      "title_zh_max_chars": 36,
+      "short_body_zh_target_chars": "24-80",
+      "body_zh_target_chars": "140-360",
+      "cta_zh_max_chars": 80,
+      "minimum_sentence_like_count": 3,
+      "maximum_repeated_body_hash_count": 1,
+      "avoid_template_density": true,
+      "avoid_strategy_jargon": true
+    },
+    "safety_requirements": [
+      "non_diagnostic",
+      "non_hiring",
+      "non_clinical",
+      "non_deterministic",
+      "non_income_prediction",
+      "non_relationship_destiny",
+      "no_hard_typing",
+      "no_frontend_fallback_copy",
+      "share_safe_when_public"
+    ]
+  },
+  "module_rubric": [
+    {
+      "module": "method_boundary",
+      "next_pr": "already_seeded_by_method_boundary_v0_5",
+      "quality_target": "Keep trust, scoring, norm, privacy, low-quality, and claim-boundary explanations concise, warm, and audit-safe.",
+      "must_cover": [
+        "method",
+        "scoring_chain",
+        "facet_boundary",
+        "norm_state",
+        "low_quality_degrade",
+        "privacy_surface_boundary"
+      ],
+      "must_not": [
+        "template_fragments",
+        "production_gate_language",
+        "internal implementation terms"
+      ]
+    },
+    {
+      "module": "domain_bands",
+      "next_pr": "BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01",
+      "quality_target": "Each OCEAN band should feel like a complete mini-report section rather than a label definition.",
+      "must_cover": [
+        "definition",
+        "high_or_low_expression",
+        "strength",
+        "risk",
+        "misread",
+        "action",
+        "boundary"
+      ],
+      "must_not": [
+        "good_bad_ranking",
+        "ability_or_value_judgment",
+        "fixed_identity"
+      ]
+    },
+    {
+      "module": "facets_30",
+      "next_pr": "BIG5-FACET-CONTENT-THICKENING-01",
+      "quality_target": "Each facet should clarify a specific behavioral signal while keeping precision bounded.",
+      "must_cover": [
+        "facet_meaning",
+        "high_low_reading",
+        "domain_relationship",
+        "example",
+        "misread",
+        "action"
+      ],
+      "must_not": [
+        "overclaim_facet_independence",
+        "clinical_interpretation",
+        "unsupported_population_rank"
+      ]
+    },
+    {
+      "module": "coupling_variants",
+      "next_pr": "BIG5-COUPLING-CONTENT-THICKENING-01",
+      "quality_target": "Trait combinations should explain tension, synergy, and use cases without inventing types.",
+      "must_cover": [
+        "combined_signal",
+        "benefit_cost",
+        "conflict_resolution",
+        "common_misread",
+        "scenario_bridge"
+      ],
+      "must_not": [
+        "type_label_as_identity",
+        "destiny_claim",
+        "career_guarantee"
+      ]
+    },
+    {
+      "module": "canonical_profiles",
+      "next_pr": "BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01",
+      "quality_target": "Profiles should act as entry narratives that organize evidence without replacing the five traits.",
+      "must_cover": [
+        "assistive_label_boundary",
+        "trait_pattern",
+        "strength",
+        "risk",
+        "application",
+        "reflection"
+      ],
+      "must_not": [
+        "MBTI_style_typing",
+        "single_label_identity",
+        "hard_typing_language"
+      ]
+    },
+    {
+      "module": "scenario_action",
+      "next_pr": "BIG5-SCENARIO-ACTION-CONTENT-THICKENING-01",
+      "quality_target": "Scenario guidance should be practical, repeatable, and low-risk.",
+      "must_cover": [
+        "work",
+        "learning",
+        "communication",
+        "stress",
+        "relationship",
+        "collaboration",
+        "self_management"
+      ],
+      "must_not": [
+        "prescriptive_life_advice",
+        "medical_or_therapy_claim",
+        "hiring_screening_language"
+      ]
+    },
+    {
+      "module": "safe_surfaces",
+      "next_pr": "BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01",
+      "quality_target": "Every public or semi-public surface should have a clear safe-summary variant.",
+      "must_cover": [
+        "share_summary_only",
+        "pdf_private_boundary",
+        "history_summary",
+        "compare_no_ranking",
+        "redaction_policy"
+      ],
+      "must_not": [
+        "private_identifier",
+        "score_detail_in_public_share",
+        "internal implementation terms"
+      ]
+    },
+    {
+      "module": "norm_low_quality_edge_state",
+      "next_pr": "BIG5-NORM-LOW-QUALITY-EDGE-STATE-CONTENT-01",
+      "quality_target": "Uncertain states should still help the user read cautiously instead of pretending confidence.",
+      "must_cover": [
+        "norm_unavailable",
+        "low_quality",
+        "insufficient_confidence",
+        "show_soften_hide",
+        "retest_guidance"
+      ],
+      "must_not": [
+        "false_certainty",
+        "unsupported_comparison",
+        "punitive_language"
+      ]
+    }
+  ],
+  "forbidden_visible_text_rules": [
+    {
+      "rule": "selector_code_prefix",
+      "pattern_label": "internal selector code prefix"
+    },
+    {
+      "rule": "band_code_prefix",
+      "pattern_label": "internal band code prefix"
+    },
+    {
+      "rule": "internal_contract_terms",
+      "pattern_label": "internal contract or implementation terms"
+    },
+    {
+      "rule": "broken_template_fragments",
+      "pattern_label": "broken generated-template fragments"
+    },
+    {
+      "rule": "private_or_score_detail",
+      "pattern_label": "private identifiers or score-detail leakage on public-safe surfaces"
+    }
+  ],
+  "acceptance_for_future_prs": {
+    "candidate_artifacts_required": true,
+    "human_review_manifest_required": true,
+    "staging_artifact_required": true,
+    "qa_summary_required": true,
+    "repair_log_required": true,
+    "rendered_hygiene_scan_required": true,
+    "all_runtime_flags_false": true,
+    "production_use_allowed_false": true,
+    "no_external_copy_evidence_required": true
+  },
+  "train_sequence": [
+    "BIG5-CONTENT-ASSET-BENCHMARK-RUBRIC-01",
+    "BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01",
+    "BIG5-FACET-CONTENT-THICKENING-01",
+    "BIG5-COUPLING-CONTENT-THICKENING-01",
+    "BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01",
+    "BIG5-SCENARIO-ACTION-CONTENT-THICKENING-01",
+    "BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01",
+    "BIG5-NORM-LOW-QUALITY-EDGE-STATE-CONTENT-01"
+  ],
+  "remaining_holds": [
+    "no_runtime_enablement",
+    "no_production_import",
+    "no_rollout_change",
+    "no_frontend_copy",
+    "no_cms_or_search_publication",
+    "no_deploy_action"
+  ]
+}
