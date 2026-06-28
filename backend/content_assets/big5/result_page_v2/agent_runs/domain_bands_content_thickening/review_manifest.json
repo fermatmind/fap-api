@@ -1,0 +1,37 @@
+{
+  "approved_candidate_files": [
+    "selector_asset_candidates.jsonl",
+    "content_asset_candidates.jsonl"
+  ],
+  "human_reviewed": true,
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "review_checks": {
+    "domain_band_coverage": {
+      "actual": 25,
+      "expected": 25,
+      "status": "pass"
+    },
+    "external_copy_scan": "pass",
+    "leak_scan": "deferred_to_stage_candidates",
+    "rendered_hygiene_scan": "deferred_to_stage_candidates",
+    "schema_validation": "deferred_to_stage_candidates",
+    "selector_contract_validation": "deferred_to_stage_candidates"
+  },
+  "review_scope": {
+    "candidate_artifacts_only": true,
+    "cms_or_search_allowed": false,
+    "frontend_copy_allowed": false,
+    "production_import_allowed": false,
+    "runtime_enablement_allowed": false,
+    "staging_import_allowed": true
+  },
+  "review_status": "approved_for_staging",
+  "reviewed_at": "2026-06-28T02:00:00Z",
+  "reviewed_by": "codex_content_asset_agent",
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.staging_review_manifest.v0.1",
+  "task": "domain_bands_content_thickening_review"
+}
