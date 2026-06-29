@@ -7120,6 +7120,223 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_scenario_action_revised_v0_7_normalized_candidates_are_reviewed_and_non_runtime(): void
+    {
+        $agentRunDir = base_path('content_assets/big5/result_page_v2/agent_runs/scenario_action_revised_v0_7_normalized');
+
+        foreach ([
+            'README.md',
+            'SHA256SUMS.txt',
+            'selector_asset_candidates.jsonl',
+            'content_asset_candidates.jsonl',
+            'candidate_generation_summary.json',
+            'normalization_manifest.json',
+            'normalization_validation_summary.json',
+            'review_manifest.json',
+            'repair_log.json',
+            'source_qa_scan.json',
+            'source_review.md',
+        ] as $filename) {
+            $this->assertFileExists($agentRunDir.'/'.$filename);
+        }
+
+        $generation = $this->readJson($agentRunDir.'/candidate_generation_summary.json');
+        $manifest = $this->readJson($agentRunDir.'/normalization_manifest.json');
+        $validation = $this->readJson($agentRunDir.'/normalization_validation_summary.json');
+        $review = $this->readJson($agentRunDir.'/review_manifest.json');
+        $repairLog = $this->readJson($agentRunDir.'/repair_log.json');
+        $sourceQa = $this->readJson($agentRunDir.'/source_qa_scan.json');
+        $selectorRows = $this->readJsonl($agentRunDir.'/selector_asset_candidates.jsonl');
+        $contentRows = $this->readJsonl($agentRunDir.'/content_asset_candidates.jsonl');
+
+        $this->assertSame('pass', $generation['status'] ?? null);
+        $this->assertSame('scenario_action_revised_v0_7_normalized', $generation['candidate_stage'] ?? null);
+        $this->assertSame('staging_only', $generation['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($generation['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($generation['ready_for_pilot'] ?? true));
+        $this->assertFalse((bool) ($generation['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($generation['ready_for_production'] ?? true));
+        $this->assertSame(160, data_get($generation, 'candidate_counts.content_asset'));
+        $this->assertSame(160, data_get($generation, 'candidate_counts.selector_asset'));
+        $this->assertSame(8, data_get($generation, 'coverage.profile_count'));
+        $this->assertSame(5, data_get($generation, 'coverage.scenario_count'));
+        $this->assertSame(4, data_get($generation, 'coverage.role_count'));
+        $this->assertSame(160, data_get($generation, 'coverage.covered_matrix_count'));
+        $this->assertSame(0, data_get($generation, 'leak_scan.hit_count'));
+        $this->assertSame(0, data_get($generation, 'rendered_hygiene_scan.hit_count'));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.runtime_changed', true));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.production_changed', true));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.frontend_copy_written', true));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.cms_write', true));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.seo_or_search_write', true));
+        $this->assertFalse((bool) data_get($generation, 'negative_guarantees.final_result_payload_generated', true));
+
+        $this->assertSame('content_assets/big5/result_page_v2/agent_runs/scenario_action_revised_v0_7_normalized', $manifest['candidate_dir'] ?? null);
+        $this->assertSame('staging_only', $manifest['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($manifest['production_use_allowed'] ?? true));
+        $this->assertContains('generated_scenario_action_selector_candidates', (array) ($manifest['normalization_steps'] ?? []));
+        $this->assertContains('mapped_collaboration_to_collaboration_manual', (array) ($manifest['normalization_steps'] ?? []));
+        $this->assertContains('mapped_other_scenarios_to_application_matrix', (array) ($manifest['normalization_steps'] ?? []));
+        $this->assertSame('scenario_registry', data_get($manifest, 'selector_mapping.collaboration.registry_key'));
+        $this->assertSame('module_07_collaboration_manual', data_get($manifest, 'selector_mapping.collaboration.module_key'));
+        $this->assertSame('collaboration_manual', data_get($manifest, 'selector_mapping.collaboration.block_kind'));
+        $this->assertSame('module_06_application_matrix', data_get($manifest, 'selector_mapping.work.module_key'));
+        $this->assertSame('application_matrix', data_get($manifest, 'selector_mapping.stress.block_kind'));
+
+        $this->assertTrue((bool) ($review['human_reviewed'] ?? false));
+        $this->assertSame('codex_scenario_action_candidate_normalize_01', $review['reviewed_by'] ?? null);
+        $this->assertSame('approved_for_staging', $review['review_status'] ?? null);
+        $this->assertSame(['selector_asset_candidates.jsonl', 'content_asset_candidates.jsonl'], $review['approved_candidate_files'] ?? null);
+        $this->assertFalse((bool) ($review['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($review['ready_for_runtime'] ?? true));
+        $this->assertTrue((bool) data_get($review, 'review_scope.staging_import_deferred'));
+
+        $this->assertSame('pass', $validation['status'] ?? null);
+        $this->assertTrue((bool) data_get($validation, 'stage_candidates_dry_run.ok'));
+        $this->assertFalse((bool) data_get($validation, 'stage_candidates_dry_run.staging_write_performed', true));
+        $this->assertSame(0, data_get($validation, 'stage_candidates_dry_run.validation_error_count'));
+        $this->assertSame(0, data_get($validation, 'stage_candidates_dry_run.review_error_count'));
+        $this->assertSame(0, data_get($validation, 'stage_candidates_dry_run.leak_hit_count'));
+        $this->assertSame('pass', data_get($validation, 'stage_candidates_dry_run.candidate_validation.status'));
+        $this->assertSame(0, data_get($validation, 'stage_candidates_dry_run.candidate_validation.error_count'));
+        $this->assertSame(0, $sourceQa['forbidden_hit_count'] ?? null);
+        $this->assertSame(0, $sourceQa['public_text_forbidden_hit_count'] ?? null);
+        $this->assertFalse((bool) ($repairLog['repair_required'] ?? true));
+
+        $this->assertCount(160, $selectorRows);
+        $this->assertCount(160, $contentRows);
+
+        $profileCounts = [];
+        $scenarioCounts = [];
+        $roleCounts = [];
+        $selectorProfileCounts = [];
+        $selectorScenarioCounts = [];
+        $selectorRoleCounts = [];
+
+        foreach ($contentRows as $row) {
+            $this->assertStringStartsWith('candidate_content_scenario_action_revised_v0_7_normalized_', $row['asset_id'] ?? '');
+            $this->assertStringStartsWith('scenario_action_revised_v0_7_normalized.', $row['asset_key'] ?? '');
+            $this->assertSame('scenario_action', $row['scope'] ?? null);
+            $this->assertSame('editorial_reviewed', $row['qa_status'] ?? null);
+            $this->assertSame('staging_only', $row['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($row['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_pilot'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_production'] ?? true));
+            $this->assertSame('scenario_action_revised_v0_7_normalized', data_get($row, 'provenance.candidate_stage'));
+            $this->assertSame('codex_scenario_action_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertGreaterThanOrEqual(260, (int) data_get($row, 'body_quality.body_chars', 0));
+            $this->assertLessThanOrEqual(330, (int) data_get($row, 'body_quality.body_chars', 999));
+            $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
+            $this->assertSame($row['scenario_role'] === 'scenario_misread_and_repair', (bool) data_get($row, 'body_quality.has_repair_layer'));
+            $this->assertNotEmpty(data_get($row, 'source_trace.normalized_from_asset_id'));
+            $this->assertNotEmpty(data_get($row, 'source_trace.normalized_from_asset_key'));
+
+            $profileCounts[$row['profile_key']] = ($profileCounts[$row['profile_key']] ?? 0) + 1;
+            $scenarioCounts[$row['scenario']] = ($scenarioCounts[$row['scenario']] ?? 0) + 1;
+            $roleCounts[$row['scenario_role']] = ($roleCounts[$row['scenario_role']] ?? 0) + 1;
+        }
+
+        foreach ($selectorRows as $row) {
+            $this->assertSame('approved_for_staging', $row['review_status'] ?? null);
+            $this->assertSame('scenario_registry', $row['registry_key'] ?? null);
+            $this->assertSame('scenario_action_revised_v0_7_normalized', data_get($row, 'provenance.candidate_stage'));
+            $this->assertSame('staging_only', data_get($row, 'provenance.runtime_use'));
+            $this->assertFalse((bool) data_get($row, 'provenance.production_use_allowed', true));
+            $this->assertFalse((bool) ($row['shareable'] ?? true));
+            $this->assertSame('not_shareable_unless_rewritten_by_share_safety_registry', $row['shareable_policy'] ?? null);
+            $this->assertSame(['quick', 'standard', 'deep'], $row['reading_modes'] ?? null);
+            $this->assertSame('standard', $row['scope'] ?? null);
+            $this->assertSame('scenario_interpretation', $row['required_evidence_level'] ?? null);
+            $this->assertFalse((bool) data_get($row, 'replacement_policy.replaces_existing_runtime_asset', true));
+
+            $scenario = data_get($row, 'trigger.scenario.0');
+            $role = data_get($row, 'trigger.scenario_role.0');
+            if ($scenario === 'collaboration') {
+                $this->assertSame('module_07_collaboration_manual', $row['module_key'] ?? null);
+                $this->assertSame('collaboration_manual', $row['block_kind'] ?? null);
+            } else {
+                $this->assertSame('module_06_application_matrix', $row['module_key'] ?? null);
+                $this->assertSame('application_matrix', $row['block_kind'] ?? null);
+            }
+            $this->assertSame('BIG5_OCEAN', data_get($row, 'trigger.scale_code.0'));
+            $this->assertTrue((bool) data_get($row, 'trigger.profile_label_assistive_only'));
+            $this->assertSame(data_get($row, 'source_trace.source_content_asset_id'), data_get($row, 'public_payload.candidate_ref'));
+
+            $profile = data_get($row, 'trigger.profile_key.0');
+            $selectorProfileCounts[$profile] = ($selectorProfileCounts[$profile] ?? 0) + 1;
+            $selectorScenarioCounts[$scenario] = ($selectorScenarioCounts[$scenario] ?? 0) + 1;
+            $selectorRoleCounts[$role] = ($selectorRoleCounts[$role] ?? 0) + 1;
+        }
+
+        $this->assertCount(8, $profileCounts);
+        $this->assertCount(5, $scenarioCounts);
+        $this->assertCount(4, $roleCounts);
+        $this->assertSame(array_fill_keys(array_keys($profileCounts), 20), $profileCounts);
+        $this->assertSame(array_fill_keys(array_keys($selectorProfileCounts), 20), $selectorProfileCounts);
+        $this->assertSame(array_fill_keys(array_keys($scenarioCounts), 32), $scenarioCounts);
+        $this->assertSame(array_fill_keys(array_keys($selectorScenarioCounts), 32), $selectorScenarioCounts);
+        $this->assertSame(array_fill_keys(array_keys($roleCounts), 40), $roleCounts);
+        $this->assertSame(array_fill_keys(array_keys($selectorRoleCounts), 40), $selectorRoleCounts);
+
+        $visibleText = implode("\n", array_merge(
+            array_map(
+                static fn (array $row): string => implode("\n", array_filter([
+                    (string) ($row['title_zh'] ?? ''),
+                    (string) ($row['summary_zh'] ?? ''),
+                    (string) ($row['body_zh'] ?? ''),
+                    (string) ($row['short_body_zh'] ?? ''),
+                    (string) ($row['benefit_zh'] ?? ''),
+                    (string) ($row['cost_zh'] ?? ''),
+                    (string) ($row['common_misread_zh'] ?? ''),
+                    (string) ($row['cta_zh'] ?? ''),
+                    (string) ($row['repair_zh'] ?? ''),
+                ])),
+                $contentRows
+            ),
+            array_map(
+                static fn (array $row): string => implode("\n", array_filter([
+                    (string) data_get($row, 'public_payload.title_zh', ''),
+                    (string) data_get($row, 'public_payload.summary_zh', ''),
+                ])),
+                $selectorRows
+            )
+        ));
+
+        foreach ([
+            'private_url',
+            'attempt_id',
+            'raw_score',
+            'raw score',
+            '原始分',
+            'percentile',
+            '百分位',
+            'rank',
+            '排名',
+            'fixed_type',
+            'user_confirmed_type',
+            'type_code',
+            'big5:',
+            'band:',
+            'payload',
+            'registry',
+            'PR3B',
+            'AttemptReadController',
+            'Big Five Report Engine',
+            '[object Object]',
+            '诊断',
+            '治疗',
+            '招聘筛选',
+            '收入预测',
+            '成功预测',
+            '伴侣匹配',
+            '你就是这种人',
+            '固定类型',
+        ] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+        }
+    }
+
     private function readJson(string $path): array
     {
         $decoded = json_decode((string) file_get_contents($path), true);
