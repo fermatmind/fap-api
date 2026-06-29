@@ -4347,6 +4347,50 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ]));
     }
 
+    public function test_runtime_freeze_classifier_ignores_bigfive_scene_fingerprint_display_contract_only(): void
+    {
+        $changed = [
+            'backend/app/Services/BigFive/BigFivePublicProjectionService.php',
+        ];
+        $changedLines = [
+            '+        $sceneFingerprintDisplay = $this->buildSceneFingerprintDisplay($sceneFingerprint, $locale);',
+            '+            \'scene_fingerprint_display\' => $sceneFingerprintDisplay,',
+            '+    private function sceneDimensionLabel(string $key, string $locale): string',
+            '+    {',
+            '+        return match ($key) {',
+            "+            'novelty' => \$locale === 'zh' ? '变化节奏' : 'Novelty rhythm',",
+            "+            'structure' => \$locale === 'zh' ? '结构偏好' : 'Structure preference',",
+            "+            'social_energy' => \$locale === 'zh' ? '社交能量' : 'Social energy',",
+            "+            'cooperation' => \$locale === 'zh' ? '合作方式' : 'Cooperation style',",
+            "+            'stress_posture' => \$locale === 'zh' ? '压力姿态' : 'Stress posture',",
+            "+            default => \$locale === 'zh' ? '场景线索' : 'Scene cue',",
+            '+        };',
+            '+    }',
+            '+',
+            '+    /**',
+            '+     * @param  array<string,string>  $sceneFingerprint',
+            '+     * @return list<array{key:string,label:string,value:string,value_label:string}>',
+            '+     */',
+            '+    private function buildSceneFingerprintDisplay(array $sceneFingerprint, string $locale): array',
+            '+    {',
+            '+        $display = [];',
+            '+        foreach ($sceneFingerprint as $key => $value) {',
+            '+            $display[] = [',
+            "+                'key' => (string) \$key,",
+            "+                'label' => \$this->sceneDimensionLabel((string) \$key, \$locale),",
+            "+                'value' => (string) \$value,",
+            "+                'value_label' => \$this->sceneLabel((string) \$value, \$locale),",
+            '+            ];',
+            '+        }',
+            '+',
+            '+        return $display;',
+            '+    }',
+            '+',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', bigFivePublicProjectionChangedLines: $changedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_bigfive_v2_asset_agent_audit_files(): void
     {
         $changed = [
@@ -4708,6 +4752,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $contentPacksIndexChangedLines = null,
         ?array $bootstrapAppChangedLines = null,
         ?array $assessmentEngineChangedLines = null,
+        ?array $bigFivePublicProjectionChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -5576,7 +5621,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 && $repoRoot !== ''
                 && $baseRef !== ''
                 && $this->bigFivePublicProjectionDiffIsRenderedAssetHygieneOnly(
-                    $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    $bigFivePublicProjectionChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                )
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Services/BigFive/BigFivePublicProjectionService.php'
+                && $this->bigFivePublicProjectionDiffIsSceneFingerprintDisplayOnly(
+                    $bigFivePublicProjectionChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
                 )
             ) {
                 continue;
@@ -8462,6 +8520,53 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             "-            \$variantKeys['band:'.strtolower(\$trait).'.'.\$band] = true;",
             '-        }',
             '-',
+        ];
+
+        sort($changedLines);
+        sort($allowedLines);
+
+        return $changedLines === $allowedLines;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function bigFivePublicProjectionDiffIsSceneFingerprintDisplayOnly(array $changedLines): bool
+    {
+        $allowedLines = [
+            '+        $sceneFingerprintDisplay = $this->buildSceneFingerprintDisplay($sceneFingerprint, $locale);',
+            '+            \'scene_fingerprint_display\' => $sceneFingerprintDisplay,',
+            '+    private function sceneDimensionLabel(string $key, string $locale): string',
+            '+    {',
+            '+        return match ($key) {',
+            "+            'novelty' => \$locale === 'zh' ? '变化节奏' : 'Novelty rhythm',",
+            "+            'structure' => \$locale === 'zh' ? '结构偏好' : 'Structure preference',",
+            "+            'social_energy' => \$locale === 'zh' ? '社交能量' : 'Social energy',",
+            "+            'cooperation' => \$locale === 'zh' ? '合作方式' : 'Cooperation style',",
+            "+            'stress_posture' => \$locale === 'zh' ? '压力姿态' : 'Stress posture',",
+            "+            default => \$locale === 'zh' ? '场景线索' : 'Scene cue',",
+            '+        };',
+            '+    }',
+            '+',
+            '+    /**',
+            '+     * @param  array<string,string>  $sceneFingerprint',
+            '+     * @return list<array{key:string,label:string,value:string,value_label:string}>',
+            '+     */',
+            '+    private function buildSceneFingerprintDisplay(array $sceneFingerprint, string $locale): array',
+            '+    {',
+            '+        $display = [];',
+            '+        foreach ($sceneFingerprint as $key => $value) {',
+            '+            $display[] = [',
+            "+                'key' => (string) \$key,",
+            "+                'label' => \$this->sceneDimensionLabel((string) \$key, \$locale),",
+            "+                'value' => (string) \$value,",
+            "+                'value_label' => \$this->sceneLabel((string) \$value, \$locale),",
+            '+            ];',
+            '+        }',
+            '+',
+            '+        return $display;',
+            '+    }',
+            '+',
         ];
 
         sort($changedLines);
