@@ -57,6 +57,13 @@ final class BigFivePublicProjectionServiceTest extends TestCase
         $this->assertFalse($this->containsStringRecursive($projection, 'big5:'));
         $this->assertFalse($this->containsStringRecursive($projection, 'band:'));
         $this->assertSame('exploratory', data_get($projection, 'scene_fingerprint.novelty'));
+        $sceneFingerprintDisplay = (array) ($projection['scene_fingerprint_display'] ?? []);
+        $this->assertSame('变化节奏', $sceneFingerprintDisplay[0]['label'] ?? null);
+        $this->assertSame('更探索', $sceneFingerprintDisplay[0]['value_label'] ?? null);
+        $this->assertSame('结构偏好', $sceneFingerprintDisplay[1]['label'] ?? null);
+        $this->assertSame('更有序', $sceneFingerprintDisplay[1]['value_label'] ?? null);
+        $this->assertSame('社交能量', $sceneFingerprintDisplay[2]['label'] ?? null);
+        $this->assertSame('相对平衡', $sceneFingerprintDisplay[2]['value_label'] ?? null);
         $this->assertSame('traits.overview', data_get($projection, 'ordered_section_keys.0'));
         $this->assertSame('career.work_style', data_get($projection, 'ordered_section_keys.3'));
         $this->assertSame('growth.next_actions', data_get($projection, 'ordered_section_keys.4'));
@@ -104,6 +111,9 @@ final class BigFivePublicProjectionServiceTest extends TestCase
             static fn (array $trait): string => (string) ($trait['key'] ?? ''),
             (array) ($projection['dominant_traits'] ?? [])
         )));
+        $sceneFingerprintDisplay = (array) ($projection['scene_fingerprint_display'] ?? []);
+        $this->assertSame('Novelty rhythm', $sceneFingerprintDisplay[0]['label'] ?? null);
+        $this->assertSame('more exploratory', $sceneFingerprintDisplay[0]['value_label'] ?? null);
         $this->assertCount(30, (array) ($projection['facet_vector'] ?? []));
         $this->assertSame('E', data_get($projection, 'action_plan_summary.focus_trait'));
     }
