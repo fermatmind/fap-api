@@ -122,6 +122,9 @@ final class SeoContentPackageDraftImporter
         if ($expectedTranslationGroupId === '') {
             $errors[] = $this->issue('translation_group_id', 'missing_expected_translation_group_id', '--translation-group-id is required.');
         }
+        if (mb_strlen($expectedTranslationGroupId) > 64) {
+            $errors[] = $this->issue('translation_group_id', 'translation_group_id_too_long', 'translation_group_id must be 64 characters or fewer.');
+        }
         $manifest = [];
         $packageItems = [];
         $guardScans = [
@@ -134,6 +137,7 @@ final class SeoContentPackageDraftImporter
             $guardScans = $this->validatePackageGuardScopes($packageRoot, $errors);
             $locales = $this->validatedLocales($locales, $manifest, $errors);
             $packageItems = $this->buildPackageItems($packageRoot, $manifest, $locales, $expectedTranslationGroupId, $expectedSlugs, $errors, $warnings);
+            $this->validateBilingualPackageParity($packageItems, $locales, $expectedTranslationGroupId, $errors);
             $this->validateJsonFieldSerialization($packageItems, $errors, $warnings);
         }
 
@@ -263,6 +267,7 @@ final class SeoContentPackageDraftImporter
             'sitemap_eligible' => false,
             'llms_eligible' => false,
             'preview_url_candidate' => '/ops/article-preview/'.(int) $article->id,
+            'media_metadata_parity' => $this->mediaMetadataParity($item, $metadata),
         ];
     }
 
@@ -287,6 +292,7 @@ final class SeoContentPackageDraftImporter
             'sitemap_eligible' => false,
             'llms_eligible' => false,
             'preview_url_candidate' => $existing instanceof Article ? '/ops/article-preview/'.(int) $existing->id : null,
+            'media_metadata_parity' => $this->mediaMetadataParity($item, $this->metadata($item)),
         ];
     }
 
@@ -720,6 +726,54 @@ final class SeoContentPackageDraftImporter
     }
 
     /**
+     * @param  list<array<string,mixed>>  $items
+     * @param  list<string>  $locales
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function validateBilingualPackageParity(
+        array $items,
+        array $locales,
+        string $expectedTranslationGroupId,
+        array &$errors
+    ): void {
+        if ($locales !== ['zh-CN', 'en']) {
+            return;
+        }
+
+        $byLocale = [];
+        foreach ($items as $item) {
+            $locale = (string) ($item['locale'] ?? '');
+            if ($locale !== '') {
+                $byLocale[$locale] = $item;
+            }
+        }
+
+        foreach (['zh-CN', 'en'] as $locale) {
+            if (! isset($byLocale[$locale])) {
+                $errors[] = $this->issue('locales.'.$locale, 'bilingual_locale_missing', 'Bilingual Mode C packages must include both zh-CN and en items.');
+
+                continue;
+            }
+
+            $slug = trim((string) ($byLocale[$locale]['slug'] ?? ''));
+            $canonicalUrl = trim((string) ($byLocale[$locale]['canonical_url'] ?? ''));
+            $expectedCanonicalUrl = ($locale === 'zh-CN' ? '/zh/articles/' : '/en/articles/').$slug;
+            if ($slug === '' || $canonicalUrl !== $expectedCanonicalUrl) {
+                $errors[] = $this->issue($locale.'.canonical_url', 'canonical_slug_mismatch', 'Canonical article route must match the locale slug.');
+            }
+        }
+
+        $translationGroupIds = array_values(array_unique(array_map(
+            static fn (array $item): string => trim((string) ($item['translation_group_id'] ?? '')),
+            $items
+        )));
+
+        if (count($translationGroupIds) !== 1 || $translationGroupIds[0] !== $expectedTranslationGroupId) {
+            $errors[] = $this->issue('translation_group_id', 'bilingual_translation_group_id_mismatch', 'Bilingual package items must share the expected translation_group_id.');
+        }
+    }
+
+    /**
      * @param  list<array<string,mixed>>  $errors
      * @return array<string,mixed>
      */
@@ -929,6 +983,9 @@ final class SeoContentPackageDraftImporter
                 $errors[] = $this->issue($locale.'.'.$field, 'missing_required_field', $field.' is required.');
             }
         }
+        if (mb_strlen((string) ($item['translation_group_id'] ?? '')) > 64) {
+            $errors[] = $this->issue($locale.'.translation_group_id', 'translation_group_id_too_long', 'translation_group_id must be 64 characters or fewer.');
+        }
         $this->validateUtf8ScalarFields($item, $errors);
 
         if (! is_string($item['primary_keyword'] ?? null)) {
@@ -955,6 +1012,12 @@ final class SeoContentPackageDraftImporter
         $this->validateReaderFacingCategory($item, $errors);
         if ((string) $item['cover_media_asset_key'] === '' || (string) $item['cover_image_url'] === '' || (string) $item['og_image_url'] === '') {
             $errors[] = $this->issue($locale.'.social_image_metadata', 'missing_social_image_metadata', 'social image asset, cover URL, and OG URL are required.');
+        }
+        if ((string) $item['cover_media_asset_key'] === '') {
+            $errors[] = $this->issue($locale.'.cover_media_asset_key', 'missing_cover_media_asset_key', 'cover_media_asset_key is required.');
+        }
+        if ((string) $item['body_visual_asset_key'] === '' || (string) $item['body_visual_image_url'] === '') {
+            $errors[] = $this->issue($locale.'.body_visual', 'missing_body_visual_metadata', 'body_visual_asset_key and body_visual_image_url are required.');
         }
         if ((int) $item['cover_image_width'] <= 0 || (int) $item['cover_image_height'] <= 0) {
             $errors[] = $this->issue($locale.'.social_image_metadata', 'missing_social_image_dimensions', 'social image width and height are required.');
@@ -1147,6 +1210,36 @@ final class SeoContentPackageDraftImporter
         ];
 
         return $variants;
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @param  array<string,mixed>  $metadata
+     * @return array<string,mixed>
+     */
+    private function mediaMetadataParity(array $item, array $metadata): array
+    {
+        $editorialPackage = is_array($metadata['editorial_package_v1'] ?? null)
+            ? $metadata['editorial_package_v1']
+            : [];
+
+        $coverMediaAssetKey = (string) ($editorialPackage['cover_media_asset_key'] ?? '');
+        $bodyVisualAssetKey = (string) ($editorialPackage['body_visual_asset_key'] ?? '');
+        $bodyVisualImageUrl = (string) ($editorialPackage['body_visual_image_url'] ?? '');
+        $bodyVisualFallbackAuthorized = (bool) ($editorialPackage['body_visual_fallback_authorized'] ?? false);
+
+        return [
+            'status' => $coverMediaAssetKey === (string) ($item['cover_media_asset_key'] ?? '')
+                && $bodyVisualAssetKey === (string) ($item['body_visual_asset_key'] ?? '')
+                && $bodyVisualImageUrl === (string) ($item['body_visual_image_url'] ?? '')
+                ? 'passed'
+                : 'failed',
+            'metadata_path' => 'cover_image_variants.editorial_package_v1',
+            'cover_media_asset_key' => $coverMediaAssetKey,
+            'body_visual_asset_key' => $bodyVisualAssetKey,
+            'body_visual_image_url' => $bodyVisualImageUrl,
+            'body_visual_fallback_authorized' => $bodyVisualFallbackAuthorized,
+        ];
     }
 
     /**

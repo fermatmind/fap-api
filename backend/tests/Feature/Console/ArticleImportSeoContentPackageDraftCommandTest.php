@@ -41,6 +41,17 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         $this->assertSame('passed', $payload['active_surface_guard_scan']['status']);
         $this->assertSame('passed', $payload['contract_integrity_scan']['status']);
         $this->assertCount(2, $payload['articles']);
+        foreach ($payload['articles'] as $article) {
+            $this->assertSame('passed', $article['media_metadata_parity']['status'] ?? null);
+            $this->assertSame('cover_image_variants.editorial_package_v1', $article['media_metadata_parity']['metadata_path'] ?? null);
+            $this->assertSame('article.riasec.explanation.cover.v1', $article['media_metadata_parity']['cover_media_asset_key'] ?? null);
+            $this->assertSame('article.riasec.explanation.body-visual.v1', $article['media_metadata_parity']['body_visual_asset_key'] ?? null);
+            $this->assertSame(
+                'https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationbodyvisualv1/hero_1600x900.jpg',
+                $article['media_metadata_parity']['body_visual_image_url'] ?? null
+            );
+            $this->assertFalse($article['media_metadata_parity']['body_visual_fallback_authorized'] ?? true);
+        }
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
@@ -350,6 +361,80 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
         $this->assertErrorCode($payload, 'missing_social_image_metadata');
+        $this->assertErrorCode($payload, 'missing_cover_media_asset_key');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_translation_group_id_longer_than_database_limit(): void
+    {
+        $tooLong = str_repeat('a', 65);
+        $package = $this->writeModeCPackage(static function (array &$files) use ($tooLong): void {
+            $files['manifest.json']['translation_group_id'] = $tooLong;
+
+            foreach ([
+                'cms/CMS_FIELDS_zh-CN_career-interest-vs-personality-test-differences.json',
+                'cms/CMS_FIELDS_en_career-interest-test-vs-personality-test.json',
+                'cms/CMS_IMPORT_DRAFT_zh-CN_career-interest-vs-personality-test-differences.json',
+                'cms/CMS_IMPORT_DRAFT_en_career-interest-test-vs-personality-test.json',
+            ] as $path) {
+                $files[$path]['translation_group_id'] = $tooLong;
+            }
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--translation-group-id' => $tooLong,
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'translation_group_id_too_long');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_bilingual_canonical_slug_mismatch(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['cms/CMS_FIELDS_en_career-interest-test-vs-personality-test.json']['canonical_url'] = '/en/articles/wrong-slug';
+            $files['cms/CMS_IMPORT_DRAFT_en_career-interest-test-vs-personality-test.json']['canonical_url'] = '/en/articles/wrong-slug';
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'canonical_slug_mismatch');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_missing_body_visual_metadata(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            foreach ([
+                'cms/CMS_FIELDS_zh-CN_career-interest-vs-personality-test-differences.json',
+                'cms/CMS_FIELDS_en_career-interest-test-vs-personality-test.json',
+                'cms/CMS_IMPORT_DRAFT_zh-CN_career-interest-vs-personality-test-differences.json',
+                'cms/CMS_IMPORT_DRAFT_en_career-interest-test-vs-personality-test.json',
+            ] as $path) {
+                unset(
+                    $files[$path]['body_visual_asset_key'],
+                    $files[$path]['body_visual_image_url']
+                );
+            }
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'missing_body_visual_metadata');
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
     }
 
