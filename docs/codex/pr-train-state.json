@@ -65295,8 +65295,53 @@
     "depends_on": [
       "iq-report-builder-three-dimension-result-schema"
     ],
-    "status": "planned",
-    "checks": {},
+    "status": "local_checks_passed",
+    "checks": {
+      "focused_iq_beta_standard_score": {
+        "status": "passed",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Iq/IqBetaStandardScoreTest.php --no-ansi"
+      },
+      "existing_iq_driver": {
+        "status": "passed",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Assessment/IqTestDriverTest.php --no-ansi"
+      },
+      "existing_iq_report_builder": {
+        "status": "passed",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Report/IqReportBuilderTest.php --no-ansi"
+      },
+      "owner_original_private_scoring": {
+        "status": "passed",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Content/IqOwnerOriginal30PrivateScoringTest.php --no-ansi"
+      },
+      "php_lint": {
+        "status": "passed",
+        "command": "php -l backend/app/Services/Iq/IqBetaStandardScore.php && php -l backend/app/Services/Assessment/Drivers/IqTestDriver.php && php -l backend/app/Services/Report/IqReportBuilder.php && php -l backend/tests/Unit/Services/Iq/IqBetaStandardScoreTest.php"
+      },
+      "scoped_pint": {
+        "status": "passed",
+        "command": "cd backend && ./vendor/bin/pint app/Services/Iq/IqBetaStandardScore.php app/Services/Assessment/Drivers/IqTestDriver.php app/Services/Report/IqReportBuilder.php tests/Unit/Services/Iq/IqBetaStandardScoreTest.php --no-interaction"
+      },
+      "route_invariant": {
+        "status": "passed",
+        "command": "cd backend && php artisan route:list --no-ansi | rg 'api/v0.3/(scales|attempts|orders|webhooks/payment|results/lookup-by-email)'"
+      },
+      "mbti_ci_gate": {
+        "status": "passed",
+        "command": "bash backend/scripts/ci_verify_mbti.sh"
+      },
+      "metadata_parse": {
+        "status": "passed",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      },
+      "diff_check": {
+        "status": "passed",
+        "command": "git diff --check"
+      },
+      "scope_validation": {
+        "status": "passed",
+        "command": "git diff --name-only && git status --short --untracked-files=all"
+      }
+    },
     "commit_sha": null,
     "pr_url": null,
     "failure_reason": null,
@@ -65316,6 +65361,16 @@
         "at": "2026-06-29T00:00:00+08:00",
         "status": "planned",
         "note": "Initialized PR-train state for backend-only IQ beta standard score implementation. Phase 0 only adds train metadata; runtime implementation follows in codex/iq-beta-standard-score after merge."
+      },
+      {
+        "at": "2026-06-29T10:25:43+08:00",
+        "status": "in_progress",
+        "note": "Started codex/iq-beta-standard-score from clean main and added backend beta standard score service, IQ score/report payload wiring, focused tests, and audit notes within declared scope."
+      },
+      {
+        "at": "2026-06-29T10:43:55+08:00",
+        "status": "local_checks_passed",
+        "note": "Focused IQ beta standard score tests, existing IQ driver/report/private-scoring tests, PHP lint, scoped Pint, route invariant, ci_verify_mbti, metadata parse, diff check, and scope validation passed. Generated BIG5 compiled artifacts from ci_verify_mbti were reverted before staging because they were outside this PR scope."
       }
     ]
   }
