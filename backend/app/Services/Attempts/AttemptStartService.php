@@ -1039,23 +1039,30 @@ class AttemptStartService
      */
     private function resolveBigFiveRetakePolicy(string $dirVersion): array
     {
-        $cooldownHours = 24;
-        $maxAttempts = 3;
+        $cooldownHours = 0;
+        $maxAttempts = 0;
+        $enforcePackPolicy = (bool) config('fap.big5_retake.enforce_pack_policy', false);
+        $retake = [];
 
-        $compiled = $this->bigFivePackLoader->readCompiledJson('policy.compiled.json', $dirVersion);
-        $policy = is_array($compiled['policy'] ?? null) ? $compiled['policy'] : [];
-        $retake = is_array($policy['retake'] ?? null) ? $policy['retake'] : [];
+        if ($enforcePackPolicy) {
+            $cooldownHours = 24;
+            $maxAttempts = 3;
 
-        $contentPathMode = strtolower(trim((string) config('scale_identity.content_path_mode', 'legacy')));
-        $preferRawInV2Mode = in_array($contentPathMode, ['dual_prefer_new', 'v2'], true);
-        if ($retake === [] || $preferRawInV2Mode) {
-            $raw = $this->bigFivePackLoader->readJson(
-                $this->bigFivePackLoader->rawPath('policy.json', $dirVersion)
-            );
-            if (is_array($raw)) {
-                $rawRetake = is_array($raw['retake'] ?? null) ? $raw['retake'] : [];
-                if ($rawRetake !== []) {
-                    $retake = $rawRetake;
+            $compiled = $this->bigFivePackLoader->readCompiledJson('policy.compiled.json', $dirVersion);
+            $policy = is_array($compiled['policy'] ?? null) ? $compiled['policy'] : [];
+            $retake = is_array($policy['retake'] ?? null) ? $policy['retake'] : [];
+
+            $contentPathMode = strtolower(trim((string) config('scale_identity.content_path_mode', 'legacy')));
+            $preferRawInV2Mode = in_array($contentPathMode, ['dual_prefer_new', 'v2'], true);
+            if ($retake === [] || $preferRawInV2Mode) {
+                $raw = $this->bigFivePackLoader->readJson(
+                    $this->bigFivePackLoader->rawPath('policy.json', $dirVersion)
+                );
+                if (is_array($raw)) {
+                    $rawRetake = is_array($raw['retake'] ?? null) ? $raw['retake'] : [];
+                    if ($rawRetake !== []) {
+                        $retake = $rawRetake;
+                    }
                 }
             }
         }
@@ -1065,6 +1072,16 @@ class AttemptStartService
         }
         if (is_numeric($retake['max_attempts_per_30_days'] ?? null)) {
             $maxAttempts = max(0, (int) $retake['max_attempts_per_30_days']);
+        }
+
+        $configuredCooldown = config('fap.big5_retake.cooldown_hours');
+        if (is_numeric($configuredCooldown)) {
+            $cooldownHours = max(0, (int) $configuredCooldown);
+        }
+
+        $configuredMaxAttempts = config('fap.big5_retake.max_attempts_per_30_days');
+        if (is_numeric($configuredMaxAttempts)) {
+            $maxAttempts = max(0, (int) $configuredMaxAttempts);
         }
 
         return [

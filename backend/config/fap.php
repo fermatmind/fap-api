@@ -36,6 +36,12 @@ return [
         explode(',', (string) env('FAP_FREE_FULL_REPORT_ASSESSMENTS', 'MBTI,BIG5_OCEAN,RIASEC,IQ_RAVEN,EQ_60,ENNEAGRAM'))
     ))),
 
+    'big5_retake' => [
+        'enforce_pack_policy' => (bool) env('FAP_BIG5_RETAKE_ENFORCE_PACK_POLICY', false),
+        'cooldown_hours' => env('FAP_BIG5_RETAKE_COOLDOWN_HOURS', null),
+        'max_attempts_per_30_days' => env('FAP_BIG5_RETAKE_MAX_ATTEMPTS_PER_30_DAYS', null),
+    ],
+
     'result_email_gate' => [
         'require_binding_for_read' => (bool) env('FAP_RESULT_EMAIL_REQUIRE_BINDING_FOR_READ', false),
         'enabled_scale_codes' => ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60', 'ENNEAGRAM', 'RIASEC'],
