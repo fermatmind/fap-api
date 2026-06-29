@@ -65285,5 +65285,38 @@
         "note": "Fresh GitHub checks passed after rebase and PR #2525 returned to CLEAN merge state."
       }
     ]
+  },
+  "IQ-BETA-STANDARD-SCORE-1": {
+    "id": "IQ-BETA-STANDARD-SCORE-1",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-beta-standard-score",
+    "title": "feat(iq): add random-baseline beta standard score",
+    "depends_on": [
+      "iq-report-builder-three-dimension-result-schema"
+    ],
+    "status": "planned",
+    "checks": {},
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-29 attached /goal IQ-BETA-STANDARD-SCORE-1 requested backend-owned random-baseline beta_standard_score, explicitly not iq_estimate, not production_normed, no population percentile, no frontend changes, no deploy, and no production DB mutation.",
+    "events": [
+      {
+        "at": "2026-06-29T00:00:00+08:00",
+        "status": "planned",
+        "note": "Initialized PR-train state for backend-only IQ beta standard score implementation. Phase 0 only adds train metadata; runtime implementation follows in codex/iq-beta-standard-score after merge."
+      }
+    ]
   }
 }
