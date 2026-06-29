@@ -54,6 +54,20 @@
         .meta, .summary { color: var(--muted); }
         .body { font-size: 18px; }
         .body img { max-width: 100%; border-radius: 18px; }
+        .media-preview {
+            margin: 22px 0;
+        }
+        .media-preview img {
+            display: block;
+            max-width: 100%;
+            border-radius: 18px;
+            border: 1px solid var(--line);
+        }
+        .media-preview figcaption {
+            margin-top: 8px;
+            color: var(--muted);
+            font: 13px/1.45 ui-sans-serif, system-ui, sans-serif;
+        }
         .body code, .field code {
             border-radius: 8px;
             background: #efe7da;
@@ -93,6 +107,13 @@
                     <p><img src="{{ $coverImageUrl }}" alt="{{ $article->cover_image_alt ?: $title }}"></p>
                 @endif
 
+                @if ($bodyVisual)
+                    <figure class="media-preview" data-preview-media="body_visual">
+                        <img src="{{ $bodyVisual['image_url'] }}" alt="Body visual preview for {{ $title }}">
+                        <figcaption>Body visual from public API media metadata.</figcaption>
+                    </figure>
+                @endif
+
                 <section class="body">
                     {!! $bodyHtml !!}
                 </section>
@@ -109,6 +130,9 @@
                     <div class="field"><span>SEO title</span>{{ $seoTitle }}</div>
                     <div class="field"><span>SEO description</span>{{ $seoDescription !== '' ? $seoDescription : 'not set' }}</div>
                     <div class="field"><span>Private URL redactions</span>{{ $redactionCount }}</div>
+                    <div class="field"><span>Body visual asset key</span>{{ $bodyVisual['asset_key'] ?? 'not set' }}</div>
+                    <div class="field"><span>Body visual URL</span>{{ $bodyVisual['image_url'] ?? 'not set' }}</div>
+                    <div class="field"><span>Body visual fallback authorized</span>{{ ($bodyVisual['fallback_authorized'] ?? false) ? 'true' : 'false' }}</div>
                 </div>
 
                 <h2>Hard holds</h2>

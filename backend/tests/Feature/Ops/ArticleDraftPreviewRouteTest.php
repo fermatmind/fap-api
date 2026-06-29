@@ -49,6 +49,14 @@ final class ArticleDraftPreviewRouteTest extends TestCase
             ->assertSee('CMS Article Draft Preview')
             ->assertSee('Working Revision Preview Title')
             ->assertSee('Draft preview only')
+            ->assertSee('https://assets.fermatmind.com/storage/media-library/variants/articlepreviewcoverv1/hero_1600x900.jpg', false)
+            ->assertSee('https://assets.fermatmind.com/storage/media-library/variants/articlepreviewbodyvisualv1/hero_1600x900.jpg', false)
+            ->assertSee('data-preview-media="body_visual"', false)
+            ->assertSee('Body visual from public API media metadata.')
+            ->assertSee('Body visual asset key')
+            ->assertSee('article.preview.body-visual.v1')
+            ->assertSee('Body visual fallback authorized')
+            ->assertSee('false')
             ->assertSee('schema_enabled: false')
             ->assertSee('hreflang_enabled: false')
             ->assertSee('revalidation_allowed: false')
@@ -111,6 +119,20 @@ final class ArticleDraftPreviewRouteTest extends TestCase
             'title' => 'Article Row Draft Title',
             'excerpt' => 'Article row excerpt.',
             'content_md' => 'Article row body.',
+            'cover_image_url' => 'https://assets.fermatmind.com/storage/media-library/variants/articlepreviewcoverv1/hero_1600x900.jpg',
+            'cover_image_alt' => 'Preview cover image',
+            'cover_image_variants' => [
+                'hero' => [
+                    'url' => 'https://assets.fermatmind.com/storage/media-library/variants/articlepreviewcoverv1/hero_1600x900.jpg',
+                    'width' => 1600,
+                    'height' => 900,
+                ],
+                'editorial_package_v1' => [
+                    'body_visual_asset_key' => 'article.preview.body-visual.v1',
+                    'body_visual_image_url' => 'https://assets.fermatmind.com/storage/media-library/variants/articlepreviewbodyvisualv1/hero_1600x900.jpg',
+                    'body_visual_fallback_authorized' => false,
+                ],
+            ],
             'status' => 'draft',
             'is_public' => false,
             'is_indexable' => false,
