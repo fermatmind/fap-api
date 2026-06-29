@@ -1,0 +1,38 @@
+{
+  "approved_candidate_files": [
+    "selector_asset_candidates.jsonl",
+    "content_asset_candidates.jsonl"
+  ],
+  "human_reviewed": true,
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "redaction": {
+    "attempt_id": false,
+    "internal_metadata": false,
+    "private_url": false,
+    "raw_scores": false
+  },
+  "review_checks": {
+    "leak_scan_hit_count": 0,
+    "rendered_hygiene_hit_count": 0,
+    "schema_reviewed": true,
+    "selector_contract_reviewed": true,
+    "staging_import_performed": false
+  },
+  "review_scope": {
+    "candidate_artifacts_only": true,
+    "cms_or_seo_allowed": false,
+    "frontend_copy_allowed": false,
+    "normalization_only": true,
+    "production_import_allowed": false,
+    "runtime_enablement_allowed": false,
+    "staging_import_deferred": true
+  },
+  "review_status": "approved_for_staging",
+  "reviewed_at": "2026-06-29T00:00:00Z",
+  "reviewed_by": "codex_canonical_profiles_candidate_normalize_01",
+  "runtime_use": "staging_only",
+  "schema": "fap.big5.result_page_v2.canonical_profiles.revised_v0_3.review_manifest.v0_1"
+}

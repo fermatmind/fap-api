@@ -1,0 +1,80 @@
+{
+  "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized",
+  "counts": {
+    "content_asset_candidates": 64,
+    "selector_asset_candidates": 64
+  },
+  "negative_guarantees": {
+    "cms_write": false,
+    "final_result_payload_generated": false,
+    "frontend_copy_written": false,
+    "production_changed": false,
+    "runtime_changed": false,
+    "seo_or_search_write": false
+  },
+  "normalization_steps": [
+    "converted_zip_json_to_backend_candidate_jsonl",
+    "rewrote_asset_ids_keys_dedupe_groups_slot_keys",
+    "preserved_original_ids_in_source_trace",
+    "generated_canonical_profile_selector_candidates",
+    "mapped_selector_contract_fields_to_existing_canonical_profile_allowlists",
+    "recalculated_body_quality",
+    "added_human_review_manifest",
+    "deferred_staging_import"
+  ],
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "runtime_use": "staging_only",
+  "schema": "fap.big5.result_page_v2.canonical_profiles.revised_v0_3.normalization_manifest.v0_1",
+  "selector_mapping": {
+    "action_plan": {
+      "block_kind": "application_matrix",
+      "module_key": "module_06_application_matrix",
+      "registry_key": "action_plan_registry"
+    },
+    "core_portrait": {
+      "block_kind": "coupling_cards",
+      "module_key": "module_04_coupling",
+      "registry_key": "coupling_registry"
+    },
+    "domain_deep_dive": {
+      "block_kind": "trait_deep_dive",
+      "module_key": "module_03_trait_deep_dive",
+      "registry_key": "domain_registry"
+    },
+    "domains_overview": {
+      "block_kind": "quick_cards",
+      "module_key": "module_02_quick_understanding",
+      "registry_key": "domain_registry"
+    },
+    "facet_details": {
+      "block_kind": "facet_reframe",
+      "module_key": "module_05_facet_reframe",
+      "registry_key": "facet_pattern_registry"
+    },
+    "hero_summary": {
+      "block_kind": "hero_summary",
+      "module_key": "module_01_hero",
+      "registry_key": "profile_signature_registry"
+    },
+    "methodology_and_access": {
+      "block_kind": "method_boundary",
+      "module_key": "module_10_method_privacy",
+      "registry_key": "method_registry"
+    },
+    "norms_comparison": {
+      "block_kind": "method_boundary",
+      "module_key": "module_10_method_privacy",
+      "registry_key": "method_registry"
+    }
+  },
+  "source_package_sha256": "dc8c7867d9a4961e83e8aa54f57b344eecfc5a47640b4fb7a62077d331f8c12e",
+  "source_qa_scan_summary": {
+    "forbidden_hit_count": 0,
+    "hit_count": 0
+  },
+  "source_zip": "/Users/rainie/Desktop/大五人格-第九版.zip",
+  "status": "pass"
+}
