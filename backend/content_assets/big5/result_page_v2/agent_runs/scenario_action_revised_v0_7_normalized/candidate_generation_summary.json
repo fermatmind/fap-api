@@ -1,0 +1,122 @@
+{
+  "body_quality": {
+    "max_body_chars": 315,
+    "mean_body_chars": 280.27,
+    "min_body_chars": 262,
+    "recalculated_by": "codex_scenario_action_candidate_normalize_01",
+    "repair_layer_expected_true_count": 40,
+    "repair_layer_true_count": 40
+  },
+  "candidate_counts": {
+    "content_asset": 160,
+    "selector_asset": 160
+  },
+  "candidate_stage": "scenario_action_revised_v0_7_normalized",
+  "coverage": {
+    "covered_matrix_count": 160,
+    "expected_matrix_count": 160,
+    "missing_profiles": [],
+    "missing_roles": [],
+    "missing_scenarios": [],
+    "profile_count": 8,
+    "profile_counts": {
+      "complex_explorer_low_structure": 20,
+      "connective_coordinator": 20,
+      "orderly_supporter": 20,
+      "overloaded_internalizer": 20,
+      "quiet_deep_worker": 20,
+      "sensitive_independent_thinker": 20,
+      "sharp_exploratory_driver": 20,
+      "vigilant_perfectionist": 20
+    },
+    "profiles": [
+      "complex_explorer_low_structure",
+      "connective_coordinator",
+      "orderly_supporter",
+      "overloaded_internalizer",
+      "quiet_deep_worker",
+      "sensitive_independent_thinker",
+      "sharp_exploratory_driver",
+      "vigilant_perfectionist"
+    ],
+    "role_count": 4,
+    "role_counts": {
+      "scenario_action_protocol": 40,
+      "scenario_core_pattern": 40,
+      "scenario_misread_and_repair": 40,
+      "scenario_strength_and_risk": 40
+    },
+    "roles": [
+      "scenario_action_protocol",
+      "scenario_core_pattern",
+      "scenario_misread_and_repair",
+      "scenario_strength_and_risk"
+    ],
+    "scenario_count": 5,
+    "scenario_counts": {
+      "collaboration": 32,
+      "growth": 32,
+      "relationship": 32,
+      "stress": 32,
+      "work": 32
+    },
+    "scenario_role_counts": {
+      "collaboration.scenario_action_protocol": 8,
+      "collaboration.scenario_core_pattern": 8,
+      "collaboration.scenario_misread_and_repair": 8,
+      "collaboration.scenario_strength_and_risk": 8,
+      "growth.scenario_action_protocol": 8,
+      "growth.scenario_core_pattern": 8,
+      "growth.scenario_misread_and_repair": 8,
+      "growth.scenario_strength_and_risk": 8,
+      "relationship.scenario_action_protocol": 8,
+      "relationship.scenario_core_pattern": 8,
+      "relationship.scenario_misread_and_repair": 8,
+      "relationship.scenario_strength_and_risk": 8,
+      "stress.scenario_action_protocol": 8,
+      "stress.scenario_core_pattern": 8,
+      "stress.scenario_misread_and_repair": 8,
+      "stress.scenario_strength_and_risk": 8,
+      "work.scenario_action_protocol": 8,
+      "work.scenario_core_pattern": 8,
+      "work.scenario_misread_and_repair": 8,
+      "work.scenario_strength_and_risk": 8
+    },
+    "scenarios": [
+      "collaboration",
+      "growth",
+      "relationship",
+      "stress",
+      "work"
+    ]
+  },
+  "leak_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "negative_guarantees": {
+    "cms_write": false,
+    "final_result_payload_generated": false,
+    "frontend_copy_written": false,
+    "production_changed": false,
+    "runtime_changed": false,
+    "seo_or_search_write": false
+  },
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "runtime_use": "staging_only",
+  "schema": "fap.big5.result_page_v2.scenario_action.revised_v0_7.normalized.generation_summary.v0_1",
+  "status": "pass",
+  "validation": {
+    "error_count": 0,
+    "status": "pass"
+  }
+}

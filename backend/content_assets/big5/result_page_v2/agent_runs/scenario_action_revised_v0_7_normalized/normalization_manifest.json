@@ -1,0 +1,66 @@
+{
+  "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/scenario_action_revised_v0_7_normalized",
+  "counts": {
+    "content_asset_candidates": 160,
+    "selector_asset_candidates": 160
+  },
+  "negative_guarantees": {
+    "cms_write": false,
+    "final_result_payload_generated": false,
+    "frontend_copy_written": false,
+    "production_changed": false,
+    "runtime_changed": false,
+    "seo_or_search_write": false
+  },
+  "normalization_steps": [
+    "converted_zip_json_to_backend_candidate_jsonl",
+    "rewrote_asset_ids_keys_dedupe_groups_slot_keys",
+    "preserved_original_ids_in_source_trace",
+    "normalized_qa_status_to_editorial_reviewed",
+    "generated_scenario_action_selector_candidates",
+    "mapped_collaboration_to_collaboration_manual",
+    "mapped_other_scenarios_to_application_matrix",
+    "recalculated_body_quality",
+    "deferred_staging_import"
+  ],
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "runtime_use": "staging_only",
+  "schema": "fap.big5.result_page_v2.scenario_action.revised_v0_7.normalization_manifest.v0_1",
+  "selector_mapping": {
+    "collaboration": {
+      "block_kind": "collaboration_manual",
+      "module_key": "module_07_collaboration_manual",
+      "registry_key": "scenario_registry"
+    },
+    "growth": {
+      "block_kind": "application_matrix",
+      "module_key": "module_06_application_matrix",
+      "registry_key": "scenario_registry"
+    },
+    "relationship": {
+      "block_kind": "application_matrix",
+      "module_key": "module_06_application_matrix",
+      "registry_key": "scenario_registry"
+    },
+    "stress": {
+      "block_kind": "application_matrix",
+      "module_key": "module_06_application_matrix",
+      "registry_key": "scenario_registry"
+    },
+    "work": {
+      "block_kind": "application_matrix",
+      "module_key": "module_06_application_matrix",
+      "registry_key": "scenario_registry"
+    }
+  },
+  "source_package_sha256": "e007ebd572ccead3d2a09728dfac7a1afba2bdde36a00567783748fe8e5f15ba",
+  "source_qa_scan_summary": {
+    "forbidden_hit_count": 0,
+    "hit_count": 0
+  },
+  "source_zip": "/Users/rainie/Desktop/大五人格-第10版.zip",
+  "status": "pass"
+}

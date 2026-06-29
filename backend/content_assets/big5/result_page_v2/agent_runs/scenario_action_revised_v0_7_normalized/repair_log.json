@@ -1,0 +1,27 @@
+{
+  "asset_identity_rewritten": true,
+  "body_quality_recalculated": true,
+  "entries": [
+    {
+      "affected_files": [
+        "content_asset_candidates.jsonl"
+      ],
+      "reason": "convert source candidate review state to backend contract value",
+      "repair_id": "normalize_editorial_review_status"
+    },
+    {
+      "affected_files": [
+        "selector_asset_candidates.jsonl"
+      ],
+      "reason": "source package includes content candidates only",
+      "repair_id": "generate_selector_candidates"
+    }
+  ],
+  "forbidden_hit_count_after": 0,
+  "production_use_allowed": false,
+  "qa_status_normalized": true,
+  "repair_required": false,
+  "runtime_use": "staging_only",
+  "schema": "fap.big5.result_page_v2.scenario_action.revised_v0_7.repair_log.v0_1",
+  "selector_candidates_generated": true
+}
