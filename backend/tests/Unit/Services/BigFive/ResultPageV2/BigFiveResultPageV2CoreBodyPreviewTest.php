@@ -3025,6 +3025,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_iq_scoring_contract_driver_changes(): void
     {
         $changed = [
+            'backend/app/Services/Assessment/IqBetaStandardScore.php',
             'backend/app/Services/Assessment/Drivers/IqTestDriver.php',
         ];
 
@@ -7264,7 +7265,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isIqScoringContractFoundationFile(string $file): bool
     {
-        return $file === 'backend/app/Services/Assessment/Drivers/IqTestDriver.php';
+        return in_array($file, [
+            'backend/app/Services/Assessment/IqBetaStandardScore.php',
+            'backend/app/Services/Assessment/Drivers/IqTestDriver.php',
+        ], true);
     }
 
     private function isIqNormAuthorityFoundationFile(string $file): bool

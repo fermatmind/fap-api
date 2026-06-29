@@ -2,6 +2,7 @@
 
 namespace App\Services\Assessment\Drivers;
 
+use App\Services\Assessment\IqBetaStandardScore;
 use App\Services\Assessment\ScoreResult;
 use App\Services\Iq\IqNormAuthorityContract;
 use Illuminate\Support\Facades\DB;
@@ -62,12 +63,13 @@ class IqTestDriver implements DriverInterface
             $rawScore,
             $ctx
         );
+        $betaStandardScore = $this->resolveBetaStandardScore($contract['bank_id'], $rawScore);
         $claimPolicy = is_array($norms['claim_policy'] ?? null) ? $norms['claim_policy'] : [];
         $scoreClaimLevel = trim((string) ($norms['score_claim_level'] ?? ($claimPolicy['score_claim_level'] ?? 'raw_score_only')));
         $claimWarnings = is_array($norms['claim_warnings'] ?? null)
             ? array_values(array_map('strval', $norms['claim_warnings']))
             : [];
-        $scorePayload = [
+        $scorePayload = array_merge([
             'scale_code' => $contract['scale_code'],
             'bank_id' => $contract['bank_id'],
             'status' => 'scored',
@@ -97,7 +99,7 @@ class IqTestDriver implements DriverInterface
                 'scoring_spec_version' => (string) ($ctx['scoring_spec_version'] ?? ($spec['version'] ?? '')),
                 'content_manifest_hash' => (string) ($ctx['content_manifest_hash'] ?? ''),
             ],
-        ];
+        ], $betaStandardScore ?? []);
 
         return new ScoreResult(
             rawScore: $rawScore,
@@ -742,6 +744,18 @@ class IqTestDriver implements DriverInterface
         $cdf = $zScore >= 0.0 ? 1.0 - $tail : $tail;
 
         return max(0.0, min(1.0, $cdf));
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function resolveBetaStandardScore(string $bankId, float $rawScore): ?array
+    {
+        if (strtoupper(trim($bankId)) !== self::OWNER_ORIGINAL_BANK_ID) {
+            return null;
+        }
+
+        return app(IqBetaStandardScore::class)->fromRawScore($rawScore);
     }
 
     private function nullableTrimmedString(mixed $value): ?string
