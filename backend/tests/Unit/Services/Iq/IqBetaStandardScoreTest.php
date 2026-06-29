@@ -7,7 +7,7 @@ namespace Tests\Unit\Services\Iq;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessment\Drivers\IqTestDriver;
-use App\Services\Iq\IqBetaStandardScore;
+use App\Services\Assessment\IqBetaStandardScore;
 use App\Services\Iq\IqResultPayloadRedactor;
 use App\Services\Report\IqReportBuilder;
 use App\Services\Report\ReportAccess;

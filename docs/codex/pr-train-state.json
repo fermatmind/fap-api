@@ -65315,11 +65315,11 @@
       },
       "php_lint": {
         "status": "passed",
-        "command": "php -l backend/app/Services/Iq/IqBetaStandardScore.php && php -l backend/app/Services/Assessment/Drivers/IqTestDriver.php && php -l backend/app/Services/Report/IqReportBuilder.php && php -l backend/tests/Unit/Services/Iq/IqBetaStandardScoreTest.php"
+        "command": "php -l backend/app/Services/Assessment/IqBetaStandardScore.php && php -l backend/app/Services/Assessment/Drivers/IqTestDriver.php && php -l backend/app/Services/Report/IqReportBuilder.php && php -l backend/tests/Unit/Services/Iq/IqBetaStandardScoreTest.php"
       },
       "scoped_pint": {
         "status": "passed",
-        "command": "cd backend && ./vendor/bin/pint app/Services/Iq/IqBetaStandardScore.php app/Services/Assessment/Drivers/IqTestDriver.php app/Services/Report/IqReportBuilder.php tests/Unit/Services/Iq/IqBetaStandardScoreTest.php --no-interaction"
+        "command": "cd backend && ./vendor/bin/pint app/Services/Assessment/IqBetaStandardScore.php app/Services/Assessment/Drivers/IqTestDriver.php app/Services/Report/IqReportBuilder.php tests/Unit/Services/Iq/IqBetaStandardScoreTest.php --no-interaction"
       },
       "route_invariant": {
         "status": "passed",

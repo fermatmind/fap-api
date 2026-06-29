@@ -2,8 +2,8 @@
 
 namespace App\Services\Assessment\Drivers;
 
+use App\Services\Assessment\IqBetaStandardScore;
 use App\Services\Assessment\ScoreResult;
-use App\Services\Iq\IqBetaStandardScore;
 use App\Services\Iq\IqNormAuthorityContract;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
