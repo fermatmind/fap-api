@@ -40,10 +40,29 @@ final class NormalizeApiErrorContract
         if ($normalized['error_code'] === 'VALIDATION_FAILED' && is_array($normalized['details'])) {
             $normalized['errors'] = $normalized['details'];
         }
+        if ($this->isResultPagePdfDiagnostic($payload)) {
+            foreach (['code', 'engine', 'surface', 'trace', 'trace_id'] as $key) {
+                if (array_key_exists($key, $payload)) {
+                    $normalized[$key] = $payload[$key];
+                }
+            }
+        }
 
         $response->setData($normalized);
 
         return $response;
+    }
+
+    private function isResultPagePdfDiagnostic(array $payload): bool
+    {
+        $surface = trim((string) ($payload['surface'] ?? ''));
+        if ($surface === 'mbti.result_page_export.v1') {
+            return true;
+        }
+
+        $errorCode = trim((string) ($payload['error_code'] ?? $payload['code'] ?? ''));
+
+        return in_array($errorCode, ['PDF_GENERATION_TIMEOUT', 'RESULT_PAGE_PDF_EXPORT_FAILED'], true);
     }
 
     private function resolveErrorCode(array $payload): string

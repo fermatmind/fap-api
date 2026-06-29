@@ -9,7 +9,7 @@ return [
         '/{locale}/result/{attempt_id}'
     ),
     'result_print_token_secret' => env('GOTENBERG_RESULT_PRINT_TOKEN_SECRET', ''),
-    'timeout_seconds' => (int) env('GOTENBERG_TIMEOUT_SECONDS', 30),
+    'timeout_seconds' => (int) env('GOTENBERG_TIMEOUT_SECONDS', 60),
     'connect_timeout_seconds' => (int) env('GOTENBERG_CONNECT_TIMEOUT_SECONDS', 5),
     'allow_single_label_hosts' => (bool) env('GOTENBERG_ALLOW_SINGLE_LABEL_HOSTS', true),
     'allowed_private_suffixes' => array_values(array_filter(array_map(

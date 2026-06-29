@@ -43,6 +43,7 @@ use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\InviteUnlockSummaryBuilder;
 use App\Services\Report\MbtiPreviewContractBuilder;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
+use App\Services\Report\Pdf\ResultPagePdfExportException;
 use App\Services\Report\Pdf\ResultPagePdfTokenService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
@@ -3022,7 +3023,15 @@ class AttemptReadController extends Controller
         try {
             $generated = $this->reportPdfDocumentService->getOrGenerateMbtiResultPageExport($attempt, $gate, $result);
         } catch (\Throwable $e) {
-            $traceId = (string) \Illuminate\Support\Str::uuid();
+            $traceId = $e instanceof ResultPagePdfExportException
+                ? $e->traceId()
+                : 'mbti-result-page-pdf-error-'.now()->utc()->format('Ymd\THis\Z');
+            $errorCode = $e instanceof ResultPagePdfExportException
+                ? $e->errorCode()
+                : 'RESULT_PAGE_PDF_EXPORT_FAILED';
+            $publicMessage = $errorCode === 'PDF_GENERATION_TIMEOUT'
+                ? 'PDF generation timed out'
+                : 'Result-page PDF export is temporarily unavailable. Please retry shortly.';
             $printBaseHost = parse_url((string) config('gotenberg.result_print_base_url', ''), PHP_URL_HOST);
             Log::error('MBTI_RESULT_PAGE_PDF_EXPORT_FAILED', [
                 'attempt_id' => (string) $attempt->id,
@@ -3031,6 +3040,7 @@ class AttemptReadController extends Controller
                 'engine' => ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE,
                 'gotenberg_url_host' => is_string($printBaseHost) ? $printBaseHost : null,
                 'trace_id' => $traceId,
+                'error_code' => $errorCode,
                 'exception_class' => $e::class,
                 'message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
             ]);
@@ -3039,8 +3049,12 @@ class AttemptReadController extends Controller
 
             return response()->json([
                 'ok' => false,
-                'error_code' => 'RESULT_PAGE_PDF_EXPORT_FAILED',
-                'message' => 'Result-page PDF export is temporarily unavailable. Please retry shortly.',
+                'code' => $errorCode,
+                'error_code' => $errorCode,
+                'engine' => ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE,
+                'surface' => ReportPdfDocumentService::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+                'trace' => $traceId,
+                'message' => $publicMessage,
                 'request_id' => $requestId,
                 'trace_id' => $traceId,
             ], 503)->withHeaders($this->resultPagePdfFailureHeaders($request, $traceId));
@@ -3064,6 +3078,7 @@ class AttemptReadController extends Controller
             'X-Pdf-Artifact-Cache' => ((bool) ($generated['cached'] ?? false)) ? 'HIT' : 'MISS',
             'X-Legacy-Mpdf-Fallback' => 'false',
             'X-Gotenberg-Trace' => (string) ($generated['trace_id'] ?? ''),
+            ...$this->resultPagePdfCorsHeaders($request),
         ]);
     }
 
@@ -3079,7 +3094,33 @@ class AttemptReadController extends Controller
             'X-Pdf-Surface' => 'mbti_result_page_export',
             'X-Pdf-Surface-Version' => ReportPdfDocumentService::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
             'X-Gotenberg-Trace' => $traceId,
+            'X-Legacy-Mpdf-Fallback' => 'false',
+            'X-Pdf-Error-Stage' => 'gotenberg.convert_url',
             'Vary' => 'Origin',
+        ];
+
+        return [
+            ...$headers,
+            ...$this->resultPagePdfCorsHeaders($request),
+        ];
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function resultPagePdfCorsHeaders(Request $request): array
+    {
+        $headers = [
+            'Access-Control-Expose-Headers' => implode(', ', [
+                'Content-Disposition',
+                'X-Report-Pdf-Engine',
+                'X-Pdf-Surface',
+                'X-Pdf-Surface-Version',
+                'X-Legacy-Mpdf-Fallback',
+                'X-Gotenberg-Trace',
+                'X-Pdf-Error-Stage',
+                'X-Request-Id',
+            ]),
         ];
 
         $origin = trim((string) $request->headers->get('Origin', ''));

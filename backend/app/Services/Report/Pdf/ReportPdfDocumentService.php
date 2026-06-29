@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\ReportSnapshot;
 use App\Models\Result;
 use App\Services\Report\Pdf\Mbti\MbtiPdfPayloadBuilder;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Mpdf\Mpdf;
 use Mpdf\Output\Destination;
@@ -381,7 +382,7 @@ final class ReportPdfDocumentService
 
         $variant = $this->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $locked = (bool) ($gate['locked'] ?? true);
-        $traceId = (string) Str::uuid();
+        $traceId = $this->newMbtiResultPageExportTraceId($attempt);
         $manifestHash = $this->resolveResultPageExportManifestHash($attempt, $gate, $result);
         $path = $this->artifactStore->path('MBTI', (string) $attempt->id, $manifestHash, $variant);
 
@@ -637,16 +638,91 @@ final class ReportPdfDocumentService
             throw new \RuntimeException('Gotenberg result-page print URL is not configured.');
         }
 
-        return $this->gotenbergChromiumPdfClient->convertUrl($printUrl, [
+        $options = [
             'printBackground' => true,
             'preferCssPageSize' => true,
             'emulatedMediaType' => 'print',
             'waitForExpression' => 'window.__FERMAT_PDF_READY__ === true',
-            'failOnHttpStatusCodes' => '[400,401,403,404,500,502,503]',
+            'skipNetworkIdleEvent' => true,
+            'skipNetworkAlmostIdleEvent' => true,
+            'failOnHttpStatusCodes' => '[499,599]',
             'extraHttpHeaders' => json_encode([
                 'X-Fermat-Pdf-Trace' => $traceId,
             ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+        ];
+
+        $this->logMbtiResultPageGotenbergRequest($attempt, $printUrl, $options, $traceId);
+
+        try {
+            return $this->gotenbergChromiumPdfClient->convertUrl($printUrl, $options, $traceId);
+        } catch (Throwable $e) {
+            throw new ResultPagePdfExportException(
+                $traceId,
+                $this->classifyResultPagePdfExportFailure($e),
+                'Gotenberg result-page PDF export failed.',
+                $e,
+            );
+        }
+    }
+
+    private function newMbtiResultPageExportTraceId(Attempt $attempt): string
+    {
+        $attemptId = preg_replace('/[^A-Za-z0-9-]+/', '', (string) $attempt->id) ?: 'unknown';
+
+        return sprintf(
+            'mbti-result-page-pdf-%s-%s-%s',
+            $attemptId,
+            now()->utc()->format('Ymd\THis\Z'),
+            Str::lower(Str::random(8)),
+        );
+    }
+
+    /**
+     * @param  array<string,string|int|float|bool|null>  $options
+     */
+    private function logMbtiResultPageGotenbergRequest(Attempt $attempt, string $printUrl, array $options, string $traceId): void
+    {
+        $parts = parse_url($printUrl) ?: [];
+
+        Log::info('MBTI_RESULT_PAGE_PDF_GOTENBERG_REQUEST', [
+            'event' => 'MBTI_RESULT_PAGE_PDF_GOTENBERG_REQUEST',
+            'attempt_id' => (string) $attempt->id,
+            'surface' => self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+            'engine' => self::RESULT_PAGE_EXPORT_ENGINE,
+            'print_url_host' => (string) ($parts['host'] ?? ''),
+            'print_url_path' => (string) ($parts['path'] ?? ''),
+            'wait_for_expression' => (string) ($options['waitForExpression'] ?? ''),
+            'wait_for_selector' => (string) ($options['waitForSelector'] ?? ''),
+            'wait_delay' => (string) ($options['waitDelay'] ?? ''),
+            'skip_network_idle_event' => $options['skipNetworkIdleEvent'] ?? null,
+            'skip_network_almost_idle_event' => $options['skipNetworkAlmostIdleEvent'] ?? null,
+            'fail_on_http_status_codes' => (string) ($options['failOnHttpStatusCodes'] ?? ''),
+            'print_background' => $options['printBackground'] ?? null,
+            'prefer_css_page_size' => $options['preferCssPageSize'] ?? null,
+            'emulated_media_type' => (string) ($options['emulatedMediaType'] ?? ''),
+            'client_timeout_seconds' => (int) config('gotenberg.timeout_seconds', 60),
+            'gotenberg_trace' => $traceId,
         ]);
+    }
+
+    private function classifyResultPagePdfExportFailure(Throwable $e): string
+    {
+        $messages = [];
+        for ($current = $e; $current !== null; $current = $current->getPrevious()) {
+            $messages[] = strtolower($current->getMessage());
+        }
+
+        $message = implode(' ', $messages);
+        if (
+            str_contains($message, 'timeout')
+            || str_contains($message, 'timed out')
+            || str_contains($message, 'time limit')
+            || str_contains($message, 'curl error 28')
+        ) {
+            return 'PDF_GENERATION_TIMEOUT';
+        }
+
+        return 'RESULT_PAGE_PDF_EXPORT_FAILED';
     }
 
     /**

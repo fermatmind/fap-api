@@ -28,6 +28,13 @@ return [
     ],
 
     'exposed_headers' => [
+        'Content-Disposition',
+        'X-Gotenberg-Trace',
+        'X-Legacy-Mpdf-Fallback',
+        'X-Pdf-Error-Stage',
+        'X-Pdf-Surface',
+        'X-Pdf-Surface-Version',
+        'X-Report-Pdf-Engine',
         'X-Request-Id',
     ],
 

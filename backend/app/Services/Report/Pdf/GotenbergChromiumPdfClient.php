@@ -52,17 +52,25 @@ final class GotenbergChromiumPdfClient
      *
      * @throws RequestException
      */
-    public function convertUrl(string $printUrl, array $options = []): string
+    public function convertUrl(string $printUrl, array $options = [], ?string $gotenbergTrace = null): string
     {
         $baseUrl = $this->validatedBaseUrl();
         $this->assertPrivateHttpUrl($printUrl, 'print URL');
         $payloadOptions = $this->normalizeOptions(['url' => $printUrl, ...$options]);
 
-        $response = Http::connectTimeout((int) config('gotenberg.connect_timeout_seconds', 5))
-            ->timeout((int) config('gotenberg.timeout_seconds', 30))
+        $request = Http::connectTimeout((int) config('gotenberg.connect_timeout_seconds', 5))
+            ->timeout((int) config('gotenberg.timeout_seconds', 60))
             ->accept('application/pdf')
-            ->asMultipart()
-            ->post($baseUrl.'/forms/chromium/convert/url', $payloadOptions);
+            ->asMultipart();
+
+        $gotenbergTrace = trim((string) $gotenbergTrace);
+        if ($gotenbergTrace !== '') {
+            $request = $request->withHeaders([
+                'Gotenberg-Trace' => $gotenbergTrace,
+            ]);
+        }
+
+        $response = $request->post($baseUrl.'/forms/chromium/convert/url', $payloadOptions);
 
         $response->throw();
 
