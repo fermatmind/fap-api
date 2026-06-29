@@ -30151,3 +30151,45 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: IQ-BETA-STANDARD-SCORE-1
+    repo: fap-api
+    depends_on:
+      - iq-report-builder-three-dimension-result-schema
+    branch: codex/iq-beta-standard-score
+    title: "feat(iq): add random-baseline beta standard score"
+    train_scope: iq_owner_original_30_launch
+    status: user_authorized
+    scope:
+      - Add a backend-owned beta_standard_score for IQ_OWNER_ORIGINAL_30 using the 500-run random-response baseline as random-noise calibration only.
+      - Keep iq_estimate null unless a real backend norm authority provides it.
+      - Include explicit non-production-norm claim metadata and random baseline fields in IQ result/report payloads.
+      - Add focused tests proving formula mapping, no population percentile, no production_normed claim, no answer leak, and no answer scoring change.
+    allowed_paths:
+      - backend/app/Services/Assessment/**
+      - backend/app/Services/Report/**
+      - backend/tests/**IQ**
+      - backend/tests/**Iq**
+      - docs/audits/iq-result-assets/**
+      - docs/audits/iq/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, frontend files, payment, checkout, orders, webhooks, entitlement grants, item banks, questions, answer keys, SVG assets, backend routes, database migrations, production commands, production DB, CMS, SEO, staging deploy, or production deploy.
+      - Create a production_normed authority, population percentile, general_adult_online norm, official/certified/diagnostic/Mensa claim, or license_verified=true assertion.
+      - Fill iq_estimate from the random simulation mapping.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test <new IQ beta standard score test file>
+      - cd backend && php artisan route:list --no-ansi | rg 'api/v0.3/(scales|attempts|orders|webhooks/payment|results/lookup-by-email)'
+      - bash backend/scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
