@@ -1,0 +1,227 @@
+{
+  "counts": {
+    "canonical_profile_count": 8,
+    "content_asset_candidates": 160,
+    "covered_matrix_count": 160,
+    "expected_matrix_count": 160,
+    "scenario_count": 5,
+    "scenario_role_count": 4,
+    "selector_asset_candidates": 160
+  },
+  "coverage": {
+    "missing_profiles": [],
+    "missing_roles": [],
+    "missing_scenarios": [],
+    "profile_counts": {
+      "complex_explorer_low_structure": 20,
+      "connective_coordinator": 20,
+      "orderly_supporter": 20,
+      "overloaded_internalizer": 20,
+      "quiet_deep_worker": 20,
+      "sensitive_independent_thinker": 20,
+      "sharp_exploratory_driver": 20,
+      "vigilant_perfectionist": 20
+    },
+    "profile_scenario_counts": {
+      "complex_explorer_low_structure.collaboration": 4,
+      "complex_explorer_low_structure.growth": 4,
+      "complex_explorer_low_structure.relationship": 4,
+      "complex_explorer_low_structure.stress": 4,
+      "complex_explorer_low_structure.work": 4,
+      "connective_coordinator.collaboration": 4,
+      "connective_coordinator.growth": 4,
+      "connective_coordinator.relationship": 4,
+      "connective_coordinator.stress": 4,
+      "connective_coordinator.work": 4,
+      "orderly_supporter.collaboration": 4,
+      "orderly_supporter.growth": 4,
+      "orderly_supporter.relationship": 4,
+      "orderly_supporter.stress": 4,
+      "orderly_supporter.work": 4,
+      "overloaded_internalizer.collaboration": 4,
+      "overloaded_internalizer.growth": 4,
+      "overloaded_internalizer.relationship": 4,
+      "overloaded_internalizer.stress": 4,
+      "overloaded_internalizer.work": 4,
+      "quiet_deep_worker.collaboration": 4,
+      "quiet_deep_worker.growth": 4,
+      "quiet_deep_worker.relationship": 4,
+      "quiet_deep_worker.stress": 4,
+      "quiet_deep_worker.work": 4,
+      "sensitive_independent_thinker.collaboration": 4,
+      "sensitive_independent_thinker.growth": 4,
+      "sensitive_independent_thinker.relationship": 4,
+      "sensitive_independent_thinker.stress": 4,
+      "sensitive_independent_thinker.work": 4,
+      "sharp_exploratory_driver.collaboration": 4,
+      "sharp_exploratory_driver.growth": 4,
+      "sharp_exploratory_driver.relationship": 4,
+      "sharp_exploratory_driver.stress": 4,
+      "sharp_exploratory_driver.work": 4,
+      "vigilant_perfectionist.collaboration": 4,
+      "vigilant_perfectionist.growth": 4,
+      "vigilant_perfectionist.relationship": 4,
+      "vigilant_perfectionist.stress": 4,
+      "vigilant_perfectionist.work": 4
+    },
+    "role_counts": {
+      "scenario_action_protocol": 40,
+      "scenario_core_pattern": 40,
+      "scenario_misread_and_repair": 40,
+      "scenario_strength_and_risk": 40
+    },
+    "scenario_counts": {
+      "collaboration": 32,
+      "growth": 32,
+      "relationship": 32,
+      "stress": 32,
+      "work": 32
+    },
+    "scenario_role_counts": {
+      "collaboration.scenario_action_protocol": 8,
+      "collaboration.scenario_core_pattern": 8,
+      "collaboration.scenario_misread_and_repair": 8,
+      "collaboration.scenario_strength_and_risk": 8,
+      "growth.scenario_action_protocol": 8,
+      "growth.scenario_core_pattern": 8,
+      "growth.scenario_misread_and_repair": 8,
+      "growth.scenario_strength_and_risk": 8,
+      "relationship.scenario_action_protocol": 8,
+      "relationship.scenario_core_pattern": 8,
+      "relationship.scenario_misread_and_repair": 8,
+      "relationship.scenario_strength_and_risk": 8,
+      "stress.scenario_action_protocol": 8,
+      "stress.scenario_core_pattern": 8,
+      "stress.scenario_misread_and_repair": 8,
+      "stress.scenario_strength_and_risk": 8,
+      "work.scenario_action_protocol": 8,
+      "work.scenario_core_pattern": 8,
+      "work.scenario_misread_and_repair": 8,
+      "work.scenario_strength_and_risk": 8
+    }
+  },
+  "mode": "backend_fixture_rendered_preview_qa",
+  "negative_guarantees": {
+    "cms_write": false,
+    "final_result_contract_generated": false,
+    "frontend_copy_write": false,
+    "production_import_gate_change": false,
+    "release_snapshot_change": false,
+    "rollout_gate_change": false,
+    "runtime_flag_change": false,
+    "seo_or_search_write": false
+  },
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "redaction": {
+    "status": "pass",
+    "stored_document_file": false,
+    "stored_live_identifier": false,
+    "stored_live_link": false,
+    "stored_score_text": false,
+    "stored_sensitive_comparison_text": false
+  },
+  "remaining_holds": [
+    "runtime_not_enabled",
+    "production_import_not_changed",
+    "rollout_not_changed",
+    "frontend_copy_not_written",
+    "cms_search_not_changed",
+    "live_qa_deferred"
+  ],
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "rule_groups": [
+      "selector_token_exposure",
+      "internal_engine_terms",
+      "private_or_score_text",
+      "deterministic_outcome_claims",
+      "broken_template_fragments"
+    ],
+    "status": "pass"
+  },
+  "runtime_use": "not_runtime",
+  "scenario_safety_boundaries": {
+    "collaboration_role_boundary": {
+      "policy": "not_command_or_trait_label",
+      "status": "pass"
+    },
+    "growth_role_boundary": {
+      "policy": "not_success_prediction",
+      "status": "pass"
+    },
+    "relationship_role_boundary": {
+      "policy": "not_matching_claim",
+      "status": "pass"
+    },
+    "stress_role_boundary": {
+      "policy": "not_clinical_or_treatment_language",
+      "status": "pass"
+    },
+    "work_role_boundary": {
+      "policy": "not_screening_or_selection",
+      "status": "pass"
+    }
+  },
+  "schema": "fap.big5.result_page_v2.scenario_action.revised_v0_7.rendered_preview_qa.v0_1",
+  "source": {
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/scenario_action_revised_v0_7_normalized",
+    "live_pdf_text_extraction_performed": false,
+    "live_result_verified": false,
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/scenario_action_revised_v0_7_staging_import",
+    "staging_import_validation_status": "pass"
+  },
+  "status": "pass",
+  "surface_matrix": {
+    "compare": {
+      "candidate_count": 160,
+      "render_policy": "summary_only",
+      "sensitive_boundary": "pass",
+      "status": "pass",
+      "visible_text_quality": "pass"
+    },
+    "history": {
+      "candidate_count": 160,
+      "render_policy": "summary_only",
+      "sensitive_boundary": "pass",
+      "status": "pass",
+      "visible_text_quality": "pass"
+    },
+    "pdf": {
+      "candidate_count": 160,
+      "render_policy": "archive_safe_no_sensitive_link",
+      "sensitive_boundary": "pass",
+      "status": "pass",
+      "visible_text_quality": "pass"
+    },
+    "result_page": {
+      "candidate_count": 160,
+      "render_policy": "full_backend_fixture",
+      "sensitive_boundary": "pass",
+      "status": "pass",
+      "visible_text_quality": "pass"
+    },
+    "share": {
+      "candidate_count": 0,
+      "render_policy": "suppressed_until_share_safe_rewrite",
+      "sensitive_boundary": "pass",
+      "status": "pass",
+      "visible_text_quality": "pass"
+    }
+  },
+  "visible_text_quality": {
+    "duplicate_body_count": 0,
+    "duplicate_title_count": 0,
+    "hard_identity_phrase_count": 0,
+    "long_copy_count": 0,
+    "max_body_chars": 315,
+    "mean_body_chars": 280.27,
+    "min_body_chars": 262,
+    "scenario_specificity_status": "pass",
+    "status": "pass",
+    "thin_copy_count": 0
+  }
+}
