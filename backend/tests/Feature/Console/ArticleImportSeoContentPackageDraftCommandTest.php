@@ -610,6 +610,40 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         }
     }
 
+    public function test_import_persists_body_visual_metadata_for_public_article_api_rendering(): void
+    {
+        $package = $this->writeModeCPackage();
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--json' => true,
+        ]));
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+
+        $articles = Article::query()
+            ->withoutGlobalScopes()
+            ->orderBy('locale')
+            ->get(['id', 'locale', 'cover_image_variants', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible']);
+
+        $this->assertCount(2, $articles);
+
+        foreach ($articles as $article) {
+            $metadata = $article->cover_image_variants['editorial_package_v1'] ?? null;
+
+            $this->assertIsArray($metadata);
+            $this->assertSame('article.riasec.explanation.body-visual.v1', $metadata['body_visual_asset_key'] ?? null);
+            $this->assertSame(
+                'https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationbodyvisualv1/hero_1600x900.jpg',
+                $metadata['body_visual_image_url'] ?? null
+            );
+            $this->assertFalse($metadata['body_visual_fallback_authorized'] ?? true);
+            $this->assertFalse($article->is_public);
+            $this->assertFalse($article->is_indexable);
+            $this->assertFalse($article->sitemap_eligible);
+            $this->assertFalse($article->llms_eligible);
+        }
+    }
+
     /**
      * @param  array<string,mixed>  $overrides
      * @return array<string,mixed>
@@ -747,6 +781,9 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
             'cover_image_width' => 1672,
             'cover_image_height' => 941,
             'cover_image_variants' => $variants,
+            'body_visual_asset_key' => 'article.riasec.explanation.body-visual.v1',
+            'body_visual_image_url' => 'https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationbodyvisualv1/hero_1600x900.jpg',
+            'body_visual_fallback_authorized' => false,
             'og_image_url' => $social['og_1200x630_variant']['url'],
             'twitter_image_url' => $social['twitter_image_url'],
             'social_image_metadata' => $social,
