@@ -885,6 +885,9 @@ final class SeoContentPackageDraftImporter
             'cover_image_width' => (int) ($import['cover_image_width'] ?? $fields['cover_image_width'] ?? $social['width'] ?? 0),
             'cover_image_height' => (int) ($import['cover_image_height'] ?? $fields['cover_image_height'] ?? $social['height'] ?? 0),
             'cover_image_variants' => is_array($import['cover_image_variants'] ?? null) ? $import['cover_image_variants'] : ($fields['cover_image_variants'] ?? []),
+            'body_visual_asset_key' => $this->firstString($import['body_visual_asset_key'] ?? null, $fields['body_visual_asset_key'] ?? null),
+            'body_visual_image_url' => $this->firstString($import['body_visual_image_url'] ?? null, $fields['body_visual_image_url'] ?? null),
+            'body_visual_fallback_authorized' => (bool) ($import['body_visual_fallback_authorized'] ?? $fields['body_visual_fallback_authorized'] ?? false),
             'og_image_url' => $this->firstString($import['og_image_url'] ?? null, $fields['og_image_url'] ?? null, data_get($social, 'og_1200x630_variant.url'), $social['twitter_image_url'] ?? null),
             'twitter_image_url' => $this->firstString($import['twitter_image_url'] ?? null, $fields['twitter_image_url'] ?? null, $social['twitter_image_url'] ?? null),
             'social_image_metadata' => $social,
@@ -1137,6 +1140,9 @@ final class SeoContentPackageDraftImporter
             'revalidation_allowed' => false,
             'cover_media_asset_key' => (string) $item['cover_media_asset_key'],
             'social_image_metadata' => $item['social_image_metadata'],
+            'body_visual_asset_key' => trim((string) ($item['body_visual_asset_key'] ?? '')),
+            'body_visual_image_url' => trim((string) ($item['body_visual_image_url'] ?? '')),
+            'body_visual_fallback_authorized' => (bool) ($item['body_visual_fallback_authorized'] ?? false),
             'body_hash' => hash('sha256', preg_replace("/\r\n?/", "\n", trim((string) $item['body_markdown'])) ?: trim((string) $item['body_markdown'])),
         ];
 
