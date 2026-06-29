@@ -62,6 +62,7 @@ final class ArticleDraftPreviewController extends Controller
             'canonicalUrl' => $this->safeCanonicalUrl($seoMeta?->canonical_url),
             'publicUrl' => $this->publicUrl($record),
             'coverImageUrl' => PublicMediaUrlGuard::sanitizeNullableUrl($record->cover_image_url),
+            'bodyVisual' => $this->previewBodyVisual($record),
             'redactionCount' => $redacted['count'],
             'previewContext' => [
                 'is_preview' => true,
@@ -165,6 +166,27 @@ final class ArticleDraftPreviewController extends Controller
         }
 
         return filter_var($url, FILTER_VALIDATE_URL) ? $url : null;
+    }
+
+    /**
+     * @return array{asset_key:string,image_url:string,fallback_authorized:bool}|null
+     */
+    private function previewBodyVisual(Article $article): ?array
+    {
+        $variants = is_array($article->cover_image_variants) ? $article->cover_image_variants : [];
+        $metadata = is_array($variants['editorial_package_v1'] ?? null)
+            ? $variants['editorial_package_v1']
+            : [];
+        $imageUrl = PublicMediaUrlGuard::sanitizeNullableUrl($metadata['body_visual_image_url'] ?? null);
+        if ($imageUrl === null) {
+            return null;
+        }
+
+        return [
+            'asset_key' => trim((string) ($metadata['body_visual_asset_key'] ?? '')),
+            'image_url' => $imageUrl,
+            'fallback_authorized' => (bool) ($metadata['body_visual_fallback_authorized'] ?? false),
+        ];
     }
 
     private function publicUrl(Article $article): ?string
