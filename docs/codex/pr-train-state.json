@@ -65295,7 +65295,7 @@
     "depends_on": [
       "iq-report-builder-three-dimension-result-schema"
     ],
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "checks": {
       "focused_iq_beta_standard_score": {
         "status": "passed",
@@ -65342,8 +65342,8 @@
         "command": "git diff --name-only && git status --short --untracked-files=all"
       }
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "c56e04586f855feecc057ed5559bf6a9a888c4b5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2542",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -65371,6 +65371,11 @@
         "at": "2026-06-29T10:43:55+08:00",
         "status": "local_checks_passed",
         "note": "Focused IQ beta standard score tests, existing IQ driver/report/private-scoring tests, PHP lint, scoped Pint, route invariant, ci_verify_mbti, metadata parse, diff check, and scope validation passed. Generated BIG5 compiled artifacts from ci_verify_mbti were reverted before staging because they were outside this PR scope."
+      },
+      {
+        "at": "2026-06-29T10:45:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR https://github.com/fermatmind/fap-api/pull/2542 from codex/iq-beta-standard-score after local checks passed."
       }
     ]
   }
