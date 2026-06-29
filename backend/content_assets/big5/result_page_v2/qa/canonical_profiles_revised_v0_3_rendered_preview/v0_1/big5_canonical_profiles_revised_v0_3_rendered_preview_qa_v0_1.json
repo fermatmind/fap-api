@@ -1,0 +1,125 @@
+{
+  "counts": {
+    "canonical_profile_count": 8,
+    "content_asset_candidates": 64,
+    "section_count": 8,
+    "selector_asset_candidates": 64
+  },
+  "coverage": {
+    "missing_profiles": [],
+    "missing_sections": [],
+    "profile_counts": {
+      "complex_explorer_low_structure": 8,
+      "connective_coordinator": 8,
+      "orderly_supporter": 8,
+      "overloaded_internalizer": 8,
+      "quiet_deep_worker": 8,
+      "sensitive_independent_thinker": 8,
+      "sharp_exploratory_driver": 8,
+      "vigilant_perfectionist": 8
+    },
+    "section_counts": {
+      "action_plan": 8,
+      "core_portrait": 8,
+      "domain_deep_dive": 8,
+      "domains_overview": 8,
+      "facet_details": 8,
+      "hero_summary": 8,
+      "methodology_and_access": 8,
+      "norms_comparison": 8
+    }
+  },
+  "mode": "backend_fixture_rendered_preview_qa",
+  "negative_guarantees": {
+    "cms_write": false,
+    "final_result_contract_generated": false,
+    "frontend_copy_write": false,
+    "production_import_gate_change": false,
+    "release_snapshot_change": false,
+    "rollout_gate_change": false,
+    "runtime_flag_change": false,
+    "seo_or_search_write": false
+  },
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "redaction": {
+    "status": "pass",
+    "stored_document_file": false,
+    "stored_live_identifier": false,
+    "stored_live_link": false,
+    "stored_score_text": false,
+    "stored_sensitive_comparison_text": false
+  },
+  "remaining_holds": [
+    "runtime_not_enabled",
+    "production_import_not_changed",
+    "rollout_not_changed",
+    "frontend_copy_not_written",
+    "cms_search_not_changed",
+    "live_qa_deferred"
+  ],
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "runtime_use": "not_runtime",
+  "schema": "fap.big5.result_page_v2.canonical_profiles.revised_v0_3.rendered_preview_qa.v0_1",
+  "source": {
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized",
+    "live_result_verified": false,
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/canonical_profiles_revised_v0_3_staging_import",
+    "staging_import_validation_status": "pass"
+  },
+  "status": "pass",
+  "surface_matrix": {
+    "compare": {
+      "candidate_count": 64,
+      "render_policy": "summary_only",
+      "sensitive_boundary": "pass",
+      "status": "pass",
+      "visible_text_quality": "pass"
+    },
+    "history": {
+      "candidate_count": 64,
+      "render_policy": "summary_only",
+      "sensitive_boundary": "pass",
+      "status": "pass",
+      "visible_text_quality": "pass"
+    },
+    "pdf": {
+      "candidate_count": 64,
+      "render_policy": "archive_safe_no_sensitive_link",
+      "sensitive_boundary": "pass",
+      "status": "pass",
+      "visible_text_quality": "pass"
+    },
+    "result_page": {
+      "candidate_count": 64,
+      "render_policy": "full_backend_fixture",
+      "sensitive_boundary": "pass",
+      "status": "pass",
+      "visible_text_quality": "pass"
+    },
+    "share": {
+      "candidate_count": 0,
+      "render_policy": "suppressed_until_share_safe_rewrite",
+      "sensitive_boundary": "pass",
+      "status": "pass",
+      "visible_text_quality": "pass"
+    }
+  },
+  "visible_text_quality": {
+    "deterministic_identity_phrase_count": 0,
+    "duplicate_body_count": 0,
+    "duplicate_title_count": 0,
+    "fixed_label_as_identity_count": 0,
+    "long_copy_count": 0,
+    "max_body_chars": 306,
+    "min_body_chars": 240,
+    "status": "pass",
+    "thin_copy_count": 0
+  }
+}
