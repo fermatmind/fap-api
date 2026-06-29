@@ -18,7 +18,7 @@ final class ReportPdfDocumentService
 {
     private const MBTI_PDF_SURFACE_VERSION = 'mbti.pdf_surface.v4';
 
-    public const MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION = 'mbti.result_page_export.v1';
+    public const MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION = 'mbti.result_page_export.v2';
 
     public const RESULT_PAGE_EXPORT_ENGINE = 'gotenberg_chromium';
 

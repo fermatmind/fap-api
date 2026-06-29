@@ -307,7 +307,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('Content-Type', 'application/pdf');
         $pdf->assertHeader('X-Report-Pdf-Engine', 'gotenberg_chromium');
         $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_export');
-        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_export.v1');
+        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_export.v2');
         $pdf->assertHeader('X-Pdf-Artifact-Cache', 'MISS');
         $pdf->assertHeader('X-Legacy-Mpdf-Fallback', 'false');
         $this->assertNotSame('', (string) $pdf->headers->get('X-Gotenberg-Trace'));
@@ -321,37 +321,37 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $this->assertStringContainsString('Your Personal Growth', $pdfBinary);
         $this->assertStringContainsString('Your Relationships', $pdfBinary);
 
-        Http::assertSent(function ($request) use ($attemptId): bool {
-            $body = $request->body();
-            $traceHeader = $request->header('Gotenberg-Trace');
-            $trace = is_array($traceHeader) ? (string) ($traceHeader[0] ?? '') : (string) $traceHeader;
-
-            return $request->method() === 'POST'
+        $recordedGotenbergRequest = Http::recorded(
+            fn ($request): bool => $request->method() === 'POST'
                 && $request->url() === 'http://gotenberg:3000/forms/chromium/convert/url'
-                && is_string($trace)
-                && str_starts_with($trace, "mbti-result-page-pdf-{$attemptId}-")
-                && str_contains($body, "/zh/result/{$attemptId}")
-                && str_contains($body, 'pdf=1')
-                && str_contains($body, 'surface=mbti.result_page_export.v1')
-                && str_contains($body, 'pdf_token=')
-                && str_contains($body, 'result_access_token=')
-                && str_contains($body, 'waitForExpression')
-                && str_contains($body, 'window.__FERMAT_PDF_READY__ === true')
-                && str_contains($body, 'skipNetworkIdleEvent')
-                && str_contains($body, "\r\ntrue\r\n")
-                && str_contains($body, 'skipNetworkAlmostIdleEvent')
-                && str_contains($body, 'printBackground')
-                && str_contains($body, 'preferCssPageSize')
-                && str_contains($body, 'emulatedMediaType')
-                && str_contains($body, 'print')
-                && str_contains($body, 'failOnHttpStatusCodes')
-                && str_contains($body, '[499,599]')
-                && ! str_contains($body, '[400,401,403,404,500,502,503]')
-                && ! str_contains($body, 'failOnConsoleExceptions');
-        });
+        )->first();
+        $this->assertNotNull($recordedGotenbergRequest, 'Expected a Gotenberg URL conversion request.');
+
+        [$request] = $recordedGotenbergRequest;
+        $traceHeader = $request->header('Gotenberg-Trace');
+        $trace = is_array($traceHeader) ? (string) ($traceHeader[0] ?? '') : (string) $traceHeader;
+        $payload = collect($request->data())
+            ->mapWithKeys(fn (array $part): array => [(string) ($part['name'] ?? '') => (string) ($part['contents'] ?? '')])
+            ->all();
+        $printUrl = (string) ($payload['url'] ?? '');
+
+        $this->assertStringStartsWith("mbti-result-page-pdf-{$attemptId}-", $trace);
+        $this->assertStringContainsString("/zh/result/{$attemptId}", $printUrl);
+        $this->assertStringContainsString('pdf=1', $printUrl);
+        $this->assertStringContainsString('surface=mbti.result_page_export.v2', $printUrl);
+        $this->assertStringContainsString('pdf_token=', $printUrl);
+        $this->assertStringContainsString('result_access_token=', $printUrl);
+        $this->assertSame('window.__FERMAT_PDF_READY__ === true', $payload['waitForExpression'] ?? null);
+        $this->assertSame('true', $payload['skipNetworkIdleEvent'] ?? null);
+        $this->assertSame('true', $payload['skipNetworkAlmostIdleEvent'] ?? null);
+        $this->assertSame('true', $payload['printBackground'] ?? null);
+        $this->assertSame('true', $payload['preferCssPageSize'] ?? null);
+        $this->assertSame('print', $payload['emulatedMediaType'] ?? null);
+        $this->assertSame('[499,599]', $payload['failOnHttpStatusCodes'] ?? null);
+        $this->assertArrayNotHasKey('failOnConsoleExceptions', $payload);
 
         Storage::disk('local')->assertExists(
-            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v1-gotenberg_chromium-zh-locked-free/report_free.pdf"
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v2-gotenberg_chromium-zh-locked-free/report_free.pdf"
         );
     }
 
@@ -440,7 +440,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('X-Report-Scale', 'MBTI');
         $pdf->assertHeader('X-Report-Pdf-Engine', 'gotenberg_chromium');
         $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_export');
-        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_export.v1');
+        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_export.v2');
         $pdf->assertHeader('X-Legacy-Mpdf-Fallback', 'false');
         $pdf->assertHeader('X-Pdf-Error-Stage', 'gotenberg.convert_url');
         $this->assertStringContainsString('X-Gotenberg-Trace', (string) $pdf->headers->get('Access-Control-Expose-Headers'));
@@ -449,12 +449,12 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertJsonPath('code', 'PDF_GENERATION_TIMEOUT');
         $pdf->assertJsonPath('error_code', 'PDF_GENERATION_TIMEOUT');
         $pdf->assertJsonPath('engine', 'gotenberg_chromium');
-        $pdf->assertJsonPath('surface', 'mbti.result_page_export.v1');
+        $pdf->assertJsonPath('surface', 'mbti.result_page_export.v2');
         $pdf->assertJsonPath('message', 'PDF generation timed out');
         $pdf->assertJsonPath('request_id', 'pdf-export-request-1');
         $this->assertSame($pdf->headers->get('X-Gotenberg-Trace'), $pdf->json('trace'));
         Storage::disk('local')->assertMissing(
-            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v1-gotenberg_chromium-zh-locked-free/report_free.pdf"
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v2-gotenberg_chromium-zh-locked-free/report_free.pdf"
         );
     }
 
@@ -477,6 +477,10 @@ final class AttemptPublicReportPdfParityTest extends TestCase
             "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.pdf_surface.v4/report_free.pdf",
             '%PDF-1.4 old mPDF artifact'
         );
+        Storage::disk('local')->put(
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v1-gotenberg_chromium-zh-locked-free/report_free.pdf",
+            '%PDF-1.4 old result-page export artifact'
+        );
 
         Http::fake([
             'gotenberg:3000/forms/chromium/convert/url' => Http::response('%PDF-1.4 new chromium export', 200, [
@@ -493,6 +497,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('X-Pdf-Artifact-Cache', 'MISS');
         $this->assertStringContainsString('new chromium export', (string) $pdf->getContent());
         $this->assertStringNotContainsString('old mPDF artifact', (string) $pdf->getContent());
+        $this->assertStringNotContainsString('old result-page export artifact', (string) $pdf->getContent());
     }
 
     public function test_public_mbti_result_page_pdf_cache_hit_preserves_engine_headers(): void
@@ -511,7 +516,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $this->createResult($attemptId);
 
         Storage::disk('local')->put(
-            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v1-gotenberg_chromium-zh-locked-free/report_free.pdf",
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v2-gotenberg_chromium-zh-locked-free/report_free.pdf",
             '%PDF-1.4 cached chromium export'
         );
 
@@ -525,7 +530,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertStatus(200);
         $pdf->assertHeader('X-Report-Pdf-Engine', 'gotenberg_chromium');
         $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_export');
-        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_export.v1');
+        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_export.v2');
         $pdf->assertHeader('X-Pdf-Artifact-Cache', 'HIT');
         $pdf->assertHeader('X-Legacy-Mpdf-Fallback', 'false');
         $this->assertStringContainsString('cached chromium export', (string) $pdf->getContent());
