@@ -6174,6 +6174,153 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_canonical_profiles_revised_v0_3_rendered_preview_qa_is_redacted_and_non_runtime(): void
+    {
+        $qaDir = base_path('content_assets/big5/result_page_v2/qa/canonical_profiles_revised_v0_3_rendered_preview/v0_1');
+
+        foreach ([
+            'README.md',
+            'SHA256SUMS',
+            'big5_canonical_profiles_revised_v0_3_rendered_preview_qa_v0_1.json',
+        ] as $file) {
+            $this->assertFileExists($qaDir.'/'.$file);
+        }
+
+        $reportPath = $qaDir.'/big5_canonical_profiles_revised_v0_3_rendered_preview_qa_v0_1.json';
+        $report = $this->readJson($reportPath);
+        $shaLines = array_filter(explode("\n", trim((string) file_get_contents($qaDir.'/SHA256SUMS'))));
+        $shaMap = [];
+        foreach ($shaLines as $line) {
+            [$hash, $file] = preg_split('/\s+/', $line, 2);
+            $shaMap[$file] = $hash;
+        }
+        $this->assertSame(hash_file('sha256', $qaDir.'/README.md'), $shaMap['README.md'] ?? null);
+        $this->assertSame(hash_file('sha256', $reportPath), $shaMap['big5_canonical_profiles_revised_v0_3_rendered_preview_qa_v0_1.json'] ?? null);
+
+        $this->assertSame('fap.big5.result_page_v2.canonical_profiles.revised_v0_3.rendered_preview_qa.v0_1', $report['schema'] ?? null);
+        $this->assertSame('pass', $report['status'] ?? null);
+        $this->assertSame('backend_fixture_rendered_preview_qa', $report['mode'] ?? null);
+        $this->assertSame('not_runtime', $report['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_pilot'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_production'] ?? true));
+
+        $this->assertSame(
+            'content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized',
+            data_get($report, 'source.candidate_dir')
+        );
+        $this->assertSame(
+            'content_assets/big5/result_page_v2/staging_candidate_imports/canonical_profiles_revised_v0_3_staging_import',
+            data_get($report, 'source.staging_import_dir')
+        );
+        $this->assertSame('pass', data_get($report, 'source.staging_import_validation_status'));
+        $this->assertFalse((bool) data_get($report, 'source.live_result_verified', true));
+
+        $this->assertSame(64, data_get($report, 'counts.selector_asset_candidates'));
+        $this->assertSame(64, data_get($report, 'counts.content_asset_candidates'));
+        $this->assertSame(8, data_get($report, 'counts.canonical_profile_count'));
+        $this->assertSame(8, data_get($report, 'counts.section_count'));
+        $this->assertSame([], data_get($report, 'coverage.missing_profiles'));
+        $this->assertSame([], data_get($report, 'coverage.missing_sections'));
+        foreach ((array) data_get($report, 'coverage.profile_counts') as $count) {
+            $this->assertSame(8, $count);
+        }
+        foreach ((array) data_get($report, 'coverage.section_counts') as $count) {
+            $this->assertSame(8, $count);
+        }
+
+        foreach (['result_page', 'pdf', 'share', 'history', 'compare'] as $surface) {
+            $this->assertSame('pass', data_get($report, "surface_matrix.$surface.status"));
+            $this->assertSame('pass', data_get($report, "surface_matrix.$surface.visible_text_quality"));
+            $this->assertSame('pass', data_get($report, "surface_matrix.$surface.sensitive_boundary"));
+        }
+        $this->assertSame(64, data_get($report, 'surface_matrix.result_page.candidate_count'));
+        $this->assertSame(64, data_get($report, 'surface_matrix.pdf.candidate_count'));
+        $this->assertSame(0, data_get($report, 'surface_matrix.share.candidate_count'));
+        $this->assertSame(64, data_get($report, 'surface_matrix.history.candidate_count'));
+        $this->assertSame(64, data_get($report, 'surface_matrix.compare.candidate_count'));
+        $this->assertSame('suppressed_until_share_safe_rewrite', data_get($report, 'surface_matrix.share.render_policy'));
+        $this->assertSame('summary_only', data_get($report, 'surface_matrix.history.render_policy'));
+        $this->assertSame('summary_only', data_get($report, 'surface_matrix.compare.render_policy'));
+        $this->assertSame('archive_safe_no_sensitive_link', data_get($report, 'surface_matrix.pdf.render_policy'));
+
+        $this->assertSame('pass', data_get($report, 'visible_text_quality.status'));
+        $this->assertGreaterThanOrEqual(220, (int) data_get($report, 'visible_text_quality.min_body_chars', 0));
+        $this->assertLessThanOrEqual(340, (int) data_get($report, 'visible_text_quality.max_body_chars', 999));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.duplicate_title_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.duplicate_body_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.thin_copy_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.long_copy_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.fixed_label_as_identity_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_quality.deterministic_identity_phrase_count'));
+
+        $this->assertSame('pass', data_get($report, 'rendered_hygiene_scan.status'));
+        $this->assertSame(0, data_get($report, 'rendered_hygiene_scan.hit_count'));
+        $this->assertSame([], data_get($report, 'rendered_hygiene_scan.hits'));
+        $this->assertSame('pass', data_get($report, 'redaction.status'));
+        $this->assertFalse((bool) data_get($report, 'redaction.stored_live_identifier', true));
+        $this->assertFalse((bool) data_get($report, 'redaction.stored_live_link', true));
+        $this->assertFalse((bool) data_get($report, 'redaction.stored_document_file', true));
+        $this->assertFalse((bool) data_get($report, 'redaction.stored_score_text', true));
+        $this->assertFalse((bool) data_get($report, 'redaction.stored_sensitive_comparison_text', true));
+
+        foreach ([
+            'runtime_flag_change',
+            'release_snapshot_change',
+            'production_import_gate_change',
+            'rollout_gate_change',
+            'frontend_copy_write',
+            'cms_write',
+            'seo_or_search_write',
+            'final_result_contract_generated',
+        ] as $holdKey) {
+            $this->assertFalse((bool) data_get($report, "negative_guarantees.$holdKey", true), $holdKey);
+        }
+
+        $artifactText = implode("\n", [
+            (string) file_get_contents($qaDir.'/README.md'),
+            (string) file_get_contents($reportPath),
+        ]);
+
+        foreach ([
+            'private_url',
+            'attempt_id',
+            'raw_score',
+            'raw score',
+            '原始分',
+            'percentile',
+            '百分位',
+            'rank',
+            '排名',
+            'fixed_type',
+            'user_confirmed_type',
+            'type_code',
+            'big5:',
+            'band:',
+            'payload',
+            'registry',
+            'PR3B',
+            'AttemptReadController',
+            'Big Five Report Engine',
+            '[object Object]',
+            '筛选',
+            '不一定',
+            '失败',
+            '一定',
+            '你就是这种人',
+            '固定类型',
+            '诊断',
+            '治疗',
+            '招聘筛选',
+            '收入预测',
+            '成功预测',
+            '伴侣匹配',
+        ] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $artifactText, $forbiddenToken);
+        }
+    }
+
     public function test_committed_rendered_surface_qa_revised_v0_3_staging_import_is_reviewed_and_non_runtime(): void
     {
         $stagingDir = base_path('content_assets/big5/result_page_v2/staging_candidate_imports/rendered_surface_qa_revised_v0_3_staging_import');
