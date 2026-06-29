@@ -205,6 +205,7 @@ final class BigFivePublicProjectionService
 
         $variantKeys = $this->buildVariantKeys($tags, $traitBands);
         $sceneFingerprint = $this->buildSceneFingerprint($traitBands);
+        $sceneFingerprintDisplay = $this->buildSceneFingerprintDisplay($sceneFingerprint, $locale);
         $explainabilitySummary = $this->buildExplainabilitySummary($dominantTraits, $topStrengthFacets, $variantKeys, $locale);
         $actionPlanSummary = $this->buildActionPlanSummary($traitVector, $topGrowthFacets, $locale);
         $sections = $this->buildSections(
@@ -225,6 +226,7 @@ final class BigFivePublicProjectionService
             'dominant_traits' => $dominantTraits,
             'variant_keys' => $variantKeys,
             'scene_fingerprint' => $sceneFingerprint,
+            'scene_fingerprint_display' => $sceneFingerprintDisplay,
             'explainability_summary' => $explainabilitySummary,
             'action_plan_summary' => $actionPlanSummary,
             'ordered_section_keys' => array_values(array_map(
@@ -794,6 +796,37 @@ final class BigFivePublicProjectionService
             'responsive' => $locale === 'zh' ? '相对敏感' : 'responsive',
             default => $locale === 'zh' ? '相对平衡' : 'balanced',
         };
+    }
+
+    private function sceneDimensionLabel(string $key, string $locale): string
+    {
+        return match ($key) {
+            'novelty' => $locale === 'zh' ? '变化节奏' : 'Novelty rhythm',
+            'structure' => $locale === 'zh' ? '结构偏好' : 'Structure preference',
+            'social_energy' => $locale === 'zh' ? '社交能量' : 'Social energy',
+            'cooperation' => $locale === 'zh' ? '合作方式' : 'Cooperation style',
+            'stress_posture' => $locale === 'zh' ? '压力姿态' : 'Stress posture',
+            default => $locale === 'zh' ? '场景线索' : 'Scene cue',
+        };
+    }
+
+    /**
+     * @param  array<string,string>  $sceneFingerprint
+     * @return list<array{key:string,label:string,value:string,value_label:string}>
+     */
+    private function buildSceneFingerprintDisplay(array $sceneFingerprint, string $locale): array
+    {
+        $display = [];
+        foreach ($sceneFingerprint as $key => $value) {
+            $display[] = [
+                'key' => (string) $key,
+                'label' => $this->sceneDimensionLabel((string) $key, $locale),
+                'value' => (string) $value,
+                'value_label' => $this->sceneLabel((string) $value, $locale),
+            ];
+        }
+
+        return $display;
     }
 
     /**
