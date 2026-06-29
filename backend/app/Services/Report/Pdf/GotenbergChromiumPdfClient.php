@@ -55,8 +55,7 @@ final class GotenbergChromiumPdfClient
     public function convertUrl(string $printUrl, array $options = [], ?string $gotenbergTrace = null): string
     {
         $baseUrl = $this->validatedBaseUrl();
-        $this->assertPrivateHttpUrl($printUrl, 'print URL');
-        $payloadOptions = $this->normalizeOptions(['url' => $printUrl, ...$options]);
+        $payloadOptions = $this->normalizedUrlFormFieldsForDiagnostics($printUrl, $options);
 
         $request = Http::connectTimeout((int) config('gotenberg.connect_timeout_seconds', 5))
             ->timeout((int) config('gotenberg.timeout_seconds', 60))
@@ -80,6 +79,17 @@ final class GotenbergChromiumPdfClient
         }
 
         return $body;
+    }
+
+    /**
+     * @param  array<string,string|int|float|bool|null>  $options
+     * @return array<string,string>
+     */
+    public function normalizedUrlFormFieldsForDiagnostics(string $printUrl, array $options = []): array
+    {
+        $this->assertPrivateHttpUrl($printUrl, 'print URL');
+
+        return $this->normalizeOptions(['url' => $printUrl, ...$options]);
     }
 
     public function assertPrivateHttpUrl(string $url, string $label = 'URL'): void

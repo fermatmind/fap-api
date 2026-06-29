@@ -651,7 +651,8 @@ final class ReportPdfDocumentService
             ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
         ];
 
-        $this->logMbtiResultPageGotenbergRequest($attempt, $printUrl, $options, $traceId);
+        $wireFormFields = $this->gotenbergChromiumPdfClient->normalizedUrlFormFieldsForDiagnostics($printUrl, $options);
+        $this->logMbtiResultPageGotenbergRequest($attempt, $printUrl, $wireFormFields, $traceId);
 
         try {
             return $this->gotenbergChromiumPdfClient->convertUrl($printUrl, $options, $traceId);
@@ -678,9 +679,9 @@ final class ReportPdfDocumentService
     }
 
     /**
-     * @param  array<string,string|int|float|bool|null>  $options
+     * @param  array<string,string>  $wireFormFields
      */
-    private function logMbtiResultPageGotenbergRequest(Attempt $attempt, string $printUrl, array $options, string $traceId): void
+    private function logMbtiResultPageGotenbergRequest(Attempt $attempt, string $printUrl, array $wireFormFields, string $traceId): void
     {
         $parts = parse_url($printUrl) ?: [];
 
@@ -691,15 +692,15 @@ final class ReportPdfDocumentService
             'engine' => self::RESULT_PAGE_EXPORT_ENGINE,
             'print_url_host' => (string) ($parts['host'] ?? ''),
             'print_url_path' => (string) ($parts['path'] ?? ''),
-            'wait_for_expression' => (string) ($options['waitForExpression'] ?? ''),
-            'wait_for_selector' => (string) ($options['waitForSelector'] ?? ''),
-            'wait_delay' => (string) ($options['waitDelay'] ?? ''),
-            'skip_network_idle_event' => $options['skipNetworkIdleEvent'] ?? null,
-            'skip_network_almost_idle_event' => $options['skipNetworkAlmostIdleEvent'] ?? null,
-            'fail_on_http_status_codes' => (string) ($options['failOnHttpStatusCodes'] ?? ''),
-            'print_background' => $options['printBackground'] ?? null,
-            'prefer_css_page_size' => $options['preferCssPageSize'] ?? null,
-            'emulated_media_type' => (string) ($options['emulatedMediaType'] ?? ''),
+            'wait_for_expression' => (string) ($wireFormFields['waitForExpression'] ?? ''),
+            'wait_for_selector' => (string) ($wireFormFields['waitForSelector'] ?? ''),
+            'wait_delay' => (string) ($wireFormFields['waitDelay'] ?? ''),
+            'skip_network_idle_event' => (string) ($wireFormFields['skipNetworkIdleEvent'] ?? ''),
+            'skip_network_almost_idle_event' => (string) ($wireFormFields['skipNetworkAlmostIdleEvent'] ?? ''),
+            'fail_on_http_status_codes' => (string) ($wireFormFields['failOnHttpStatusCodes'] ?? ''),
+            'print_background' => (string) ($wireFormFields['printBackground'] ?? ''),
+            'prefer_css_page_size' => (string) ($wireFormFields['preferCssPageSize'] ?? ''),
+            'emulated_media_type' => (string) ($wireFormFields['emulatedMediaType'] ?? ''),
             'client_timeout_seconds' => (int) config('gotenberg.timeout_seconds', 60),
             'gotenberg_trace' => $traceId,
         ]);
