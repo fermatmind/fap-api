@@ -199,6 +199,7 @@ use App\Console\Commands\SeoAgentArticleCmsPublishCanaryCommand;
 use App\Console\Commands\SeoAgentArticleDraftClaimRiskQaCommand;
 use App\Console\Commands\SeoAgentArticleDraftPreviewRuntimeQaCommand;
 use App\Console\Commands\SeoAgentArticlePostPublishPropagationDryRunCommand;
+use App\Console\Commands\SeoAgentArticleReleaseCommand;
 use App\Console\Commands\SeoAgentAutoRollbackGuardCommand;
 use App\Console\Commands\SeoAgentCmsDraftPackageDryRunCommand;
 use App\Console\Commands\SeoAgentCmsDraftPayloadRepairCanaryCommand;
@@ -457,6 +458,7 @@ class Kernel extends ConsoleKernel
         SeoAgentArticlePostPublishPropagationDryRunCommand::class,
         SeoAgentArticleDraftClaimRiskQaCommand::class,
         SeoAgentArticleDraftPreviewRuntimeQaCommand::class,
+        SeoAgentArticleReleaseCommand::class,
         SeoAgentCmsTdkGapScanCommand::class,
         SeoAgentCodexReviewRunnerCommand::class,
         SeoAgentCmsDraftPackageDryRunCommand::class,
