@@ -65401,7 +65401,7 @@
     "title": "SECURITY-103-API-01: harden MBTI result/PDF token entitlement gates",
     "train_scope": "security_103_fap_api_audit",
     "depends_on": [],
-    "status": "local_checks_passed",
+    "status": "merged",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -65450,14 +65450,18 @@
         "status": "pass",
         "command": "git diff --name-only",
         "evidence": "PASS after restoring generated BIG5_OCEAN compiled timestamp/hash churn; diff limited to AttemptReadController, ResultPagePdfTokenService, AttemptPublicReportPdfParityTest, pr-train.yaml, and pr-train-state.json."
+      },
+      "github_ci": {
+        "status": "pass",
+        "evidence": "PR #2554 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload."
       }
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "56b0035ef9a880dcf1c98f1b2fe8c57b49bc6079",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2554",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-30T01:09:02Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -65476,6 +65480,11 @@
         "at": "2026-06-30T09:02:13+08:00",
         "status": "local_checks_passed",
         "note": "Route list, isolated sqlite migrate, focused AttemptPublicReportPdfParityTest, Pint, full ci_verify_mbti, diff check, and scope validation passed for SECURITY-103-API-01."
+      },
+      {
+        "at": "2026-06-30T09:10:19+08:00",
+        "status": "merged",
+        "note": "PR #2554 merged into main at 56b0035ef9a880dcf1c98f1b2fe8c57b49bc6079; remote branch was deleted and the local PR01 worktree/branch were cleaned up."
       }
     ]
   },
