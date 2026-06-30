@@ -18695,7 +18695,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2452",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "merged",
     "title": "MBTI-PDF-PRODUCT-03: add MBTI PDF pagination and brand styling",
     "train_scope": "mbti_pdf_product",
     "transitions": [
@@ -65682,8 +65682,8 @@
         "evidence": "PASS after restoring generated BIG5_OCEAN compiled timestamp/hash churn; diff limited to PR03 controllers and focused security test before ledger update."
       },
       "github_pr": {
-        "status": "open",
-        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/2558 for SECURITY-103-API-03 after local checks passed."
+        "status": "merged",
+        "evidence": "PR #2558 merged after local validation and required GitHub checks passed."
       },
       "github_verify_bigfive_initial": {
         "status": "fail",
@@ -65693,14 +65693,18 @@
         "status": "pass",
         "command": "cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_security_103_api_03_share_identifier_cache_boundary --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff --no-ansi",
         "evidence": "PASS; scoped classifier test and the failed runtime freeze test passed locally after a line-level ShareController allowlist for SECURITY-103-API-03."
+      },
+      "github_ci": {
+        "status": "pass",
+        "evidence": "PR #2558 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload after the scoped CI fix."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "b335b45a38847ec8fbdba0ba55542851237b3109",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2558",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-30T02:16:17Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -65729,6 +65733,11 @@
         "at": "2026-06-30T10:09:21+08:00",
         "status": "ci_fix_local_checks_passed",
         "note": "Added a line-level Big Five runtime freeze classifier allowlist for the PR03 ShareController cache/header and diagnostic fingerprint change after initial verify-bigfive failed; focused classifier and runtime-freeze checks plus Pint passed locally."
+      },
+      {
+        "at": "2026-06-30T10:17:27+08:00",
+        "status": "merged",
+        "note": "PR #2558 merged into main at b335b45a38847ec8fbdba0ba55542851237b3109; remote implementation branch was deleted and the local implementation worktree/branch were cleaned up."
       }
     ]
   },
