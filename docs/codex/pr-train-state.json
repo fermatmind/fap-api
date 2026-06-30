@@ -63631,7 +63631,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-30T09:29:21+08:00",
+  "updated_at": "2026-06-30T09:37:12+08:00",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -65496,7 +65496,7 @@
     "title": "SECURITY-103-API-02: harden scoring payload redaction and claim gates",
     "train_scope": "security_103_fap_api_audit",
     "depends_on": ["SECURITY-103-API-01"],
-    "status": "local_checks_passed",
+    "status": "merged",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -65560,14 +65560,18 @@
         "status": "pass",
         "command": "git status --short && git diff --name-only",
         "evidence": "PASS after restoring generated BIG5_OCEAN compiled timestamp/hash churn; diff limited to PR02 IQ redactor, Big Five norm consent gate, focused tests, and pr-train-state.json."
+      },
+      "github_ci": {
+        "status": "pass",
+        "evidence": "PR #2556 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload."
       }
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "1e8df08b36dbf6456b5fbebc450e44a154a61ded",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2556",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-30T01:36:31Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -65586,6 +65590,11 @@
         "at": "2026-06-30T09:29:21+08:00",
         "status": "local_checks_passed",
         "note": "Route list, isolated sqlite migrate, focused SECURITY-103-API-02 tests, existing Big Five norm/IQ contract tests, Pint, full ci_verify_mbti, diff check, and scope validation passed."
+      },
+      {
+        "at": "2026-06-30T09:37:12+08:00",
+        "status": "merged",
+        "note": "PR #2556 merged into main at 1e8df08b36dbf6456b5fbebc450e44a154a61ded; remote branch was deleted and the local PR02 implementation worktree/branch were cleaned up."
       }
     ]
   },
