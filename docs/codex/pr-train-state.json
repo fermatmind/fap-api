@@ -63631,7 +63631,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-26T15:21:54.232288+00:00",
+  "updated_at": "2026-06-30T09:29:21+08:00",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -65496,11 +65496,70 @@
     "title": "SECURITY-103-API-02: harden scoring payload redaction and claim gates",
     "train_scope": "security_103_fap_api_audit",
     "depends_on": ["SECURITY-103-API-01"],
-    "status": "planned",
+    "status": "local_checks_passed",
     "checks": {
       "authorization": {
         "status": "pass",
         "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      },
+      "dependency_security_103_api_01": {
+        "status": "pass",
+        "evidence": "SECURITY-103-API-01 merged into main at 56b0035ef9a880dcf1c98f1b2fe8c57b49bc6079; ledger closeout merged at 73dbc73ab41de127657c9b222980be98ad788599 before PR02 started."
+      },
+      "base_sync": {
+        "status": "pass",
+        "command": "git fetch origin main && git rev-parse HEAD && git rev-parse origin/main",
+        "evidence": "PR02 isolated worktree branch codex/security-103-api-02-scoring-redaction is based on origin/main 73dbc73ab41de127657c9b222980be98ad788599; refreshed origin/main before commit and HEAD still matched."
+      },
+      "focused_scoring_payload_boundary": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api02ScoringPayloadBoundaryTest.php --no-ansi",
+        "evidence": "PASS with existing file_get_contents warnings; 2 tests, 14 assertions."
+      },
+      "big_five_norm_capture_unit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/NormCaptureTest.php --no-ansi",
+        "evidence": "PASS with existing file_get_contents warnings; 5 tests, 58 assertions."
+      },
+      "iq_report_contract": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/IqReportContractTest.php --no-ansi",
+        "evidence": "PASS with existing file_get_contents warnings; 8 tests, 773 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "PASS; route list rendered 231 routes."
+      },
+      "migrate": {
+        "status": "pass",
+        "command": "rm -f /tmp/fap-api-security-103-api-02.sqlite && cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-02.sqlite php artisan migrate --force",
+        "evidence": "PASS; all migrations completed against isolated sqlite database."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Services/Iq/IqResultPayloadRedactor.php app/Services/BigFive/Norms/BigFiveNormObservationCaptureWriter.php tests/Unit/Services/BigFive/ResultPageV2/NormCaptureTest.php tests/Feature/Security/Security103Api02ScoringPayloadBoundaryTest.php",
+        "evidence": "PASS; 4 files unchanged by formatter."
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "evidence": "PASS; content pack, report, events funnel, Big Five gates, MBTI smoke, security gates, dependency gate, and webhook/attempt regression gates completed."
+      },
+      "metadata_parse": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "evidence": "PASS before local ledger update; rerun after ledger update before commit."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "PASS before local ledger update; rerun after ledger update before commit."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "command": "git status --short && git diff --name-only",
+        "evidence": "PASS after restoring generated BIG5_OCEAN compiled timestamp/hash churn; diff limited to PR02 IQ redactor, Big Five norm consent gate, focused tests, and pr-train-state.json."
       }
     },
     "commit_sha": null,
@@ -65522,6 +65581,11 @@
         "at": "2026-06-30T08:55:17+08:00",
         "status": "planned",
         "note": "Registered authorized SECURITY-103-API-02; execution waits for SECURITY-103-API-01 merge."
+      },
+      {
+        "at": "2026-06-30T09:29:21+08:00",
+        "status": "local_checks_passed",
+        "note": "Route list, isolated sqlite migrate, focused SECURITY-103-API-02 tests, existing Big Five norm/IQ contract tests, Pint, full ci_verify_mbti, diff check, and scope validation passed."
       }
     ]
   },
