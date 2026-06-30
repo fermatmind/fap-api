@@ -43,6 +43,118 @@ final class MediaAssetsImportSeoImageBundleCommandTest extends TestCase
         $this->assertFalse(Storage::disk('public')->exists('media-library'));
     }
 
+    public function test_manifest_accepts_localized_alt_text_and_extension_format_allowed(): void
+    {
+        Storage::fake('public');
+        $package = $this->writeImageBundlePackage(static function (array &$manifest): void {
+            $manifest['assets'][0]['alt_text'] = [
+                'zh-CN' => '结构化职业决策地图封面图',
+                'en' => 'SEO cover image showing a structured career decision map',
+            ];
+            $manifest['assets'][0]['format_allowed'] = ['png', 'jpg', 'webp'];
+        });
+
+        $exitCode = Artisan::call('media-assets:import-seo-image-bundle', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('结构化职业决策地图封面图', $payload['resolved_metadata']['cover_image_alt']);
+        $this->assertSame('结构化职业决策地图封面图', $payload['assets'][0]['alt_text']);
+    }
+
+    public function test_seo_release_preflight_fails_when_media_runtime_disabled_without_writes(): void
+    {
+        Storage::fake('public');
+        $package = $this->writeImageBundlePackage();
+
+        $exitCode = Artisan::call('media-assets:seo-release-preflight', $this->commandOptions($package, [
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame('media_runtime_not_ready', $payload['action']);
+        $this->assertFalse($payload['would_write']);
+        $this->assertErrorCode($payload, 'media_runtime_not_ready');
+        $this->assertSame(0, MediaAsset::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, MediaVariant::query()->count());
+        $this->assertArrayNotHasKey('AWS_SECRET_ACCESS_KEY', $payload['runtime']);
+    }
+
+    public function test_seo_release_preflight_passes_with_production_media_runtime(): void
+    {
+        Storage::fake('public');
+        Storage::fake('s3');
+        config([
+            'app.env' => 'production',
+            'fap.media.oss_sync_enabled' => true,
+            'fap.media.oss_disk' => 's3',
+            'fap.media.oss_key_prefix' => 'storage',
+            'fap.media.cdn_verify_enabled' => true,
+        ]);
+        $package = $this->writeImageBundlePackage();
+
+        $exitCode = Artisan::call('media-assets:seo-release-preflight', $this->commandOptions($package, [
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('seo_release_media_ready', $payload['action']);
+        $this->assertFalse($payload['would_write']);
+        $this->assertFalse($payload['resume_required']);
+        $this->assertStringContainsString('media-assets:import-seo-image-bundle', $payload['next_command']);
+    }
+
+    public function test_seo_release_preflight_existing_skipped_asset_requires_resume(): void
+    {
+        Storage::fake('public');
+        Storage::fake('s3');
+        config([
+            'app.env' => 'production',
+            'fap.media.oss_sync_enabled' => true,
+            'fap.media.oss_disk' => 's3',
+            'fap.media.oss_key_prefix' => 'storage',
+            'fap.media.cdn_verify_enabled' => true,
+        ]);
+        MediaAsset::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'asset_key' => 'article.daily.seo.cover.v1',
+            'disk' => 'public',
+            'path' => 'media-library/source/old.png',
+            'url' => 'https://assets.fermatmind.com/storage/media-library/source/old.png',
+            'mime_type' => 'image/png',
+            'width' => 1600,
+            'height' => 900,
+            'bytes' => 100,
+            'alt' => 'Old image',
+            'status' => MediaAsset::STATUS_PUBLISHED,
+            'is_public' => true,
+            'sync_status' => MediaAsset::SYNC_SKIPPED,
+            'cdn_status' => MediaAsset::CDN_SKIPPED,
+        ]);
+        $package = $this->writeImageBundlePackage();
+
+        $exitCode = Artisan::call('media-assets:seo-release-preflight', $this->commandOptions($package, [
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame('existing_asset_not_ready', $payload['action']);
+        $this->assertTrue($payload['resume_required']);
+        $this->assertTrue($payload['needs_allow_update_existing']);
+        $this->assertStringContainsString('--allow-update-existing', $payload['next_command']);
+        $this->assertErrorCode($payload, 'existing_asset_not_ready');
+    }
+
     public function test_missing_manifest_fails_when_image_bundle_required(): void
     {
         $package = $this->writeImageBundlePackage();
@@ -202,7 +314,7 @@ final class MediaAssetsImportSeoImageBundleCommandTest extends TestCase
         $this->assertNull($payload['resolved_metadata']['cover_image_variants']['hero']['url']);
     }
 
-    public function test_write_resolved_package_fails_when_media_asset_is_not_cdn_ready(): void
+    public function test_write_resolved_package_fails_before_writes_when_media_runtime_is_not_ready(): void
     {
         config(['app.url' => 'https://ops.fermatmind.com']);
         Storage::fake('public');
@@ -218,10 +330,11 @@ final class MediaAssetsImportSeoImageBundleCommandTest extends TestCase
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
         $this->assertFalse($payload['ok']);
-        $this->assertSame('media_asset_cdn_not_ready', $payload['action']);
-        $this->assertErrorCode($payload, 'media_asset_cdn_not_ready');
+        $this->assertSame('media_runtime_not_ready', $payload['action']);
+        $this->assertErrorCode($payload, 'media_runtime_not_ready');
         $this->assertDirectoryDoesNotExist($output);
-        $this->assertNull($payload['resolved_metadata']['cover_image_url']);
+        $this->assertSame(0, MediaAsset::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, MediaVariant::query()->count());
     }
 
     public function test_write_resolved_package_requires_and_outputs_canonical_assets_origin_urls(): void
@@ -258,6 +371,165 @@ final class MediaAssetsImportSeoImageBundleCommandTest extends TestCase
         $draft = json_decode((string) file_get_contents($output.'/cms/CMS_IMPORT_DRAFT_en_demo.json'), true);
         $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/variants/', $draft['cover_image_url']);
         $this->assertStringNotContainsString('ops.fermatmind.com', json_encode($draft, JSON_THROW_ON_ERROR));
+    }
+
+    public function test_write_resolved_package_resumes_existing_asset_with_allow_update_existing(): void
+    {
+        Storage::fake('public');
+        Storage::fake('s3');
+        Http::fake([
+            'assets.fermatmind.com/*' => Http::response('', 200, ['Content-Type' => 'image/jpeg']),
+        ]);
+        config([
+            'fap.media.oss_sync_enabled' => true,
+            'fap.media.oss_disk' => 's3',
+            'fap.media.oss_key_prefix' => 'storage',
+            'fap.media.cdn_verify_enabled' => true,
+        ]);
+        MediaAsset::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'asset_key' => 'article.daily.seo.cover.v1',
+            'disk' => 'public',
+            'path' => 'media-library/source/old.png',
+            'url' => 'https://assets.fermatmind.com/storage/media-library/source/old.png',
+            'mime_type' => 'image/png',
+            'width' => 1600,
+            'height' => 900,
+            'bytes' => 100,
+            'alt' => 'Old image',
+            'status' => MediaAsset::STATUS_PUBLISHED,
+            'is_public' => true,
+            'sync_status' => MediaAsset::SYNC_SKIPPED,
+            'cdn_status' => MediaAsset::CDN_SKIPPED,
+        ]);
+        $package = $this->writeImageBundlePackage();
+        $output = sys_get_temp_dir().'/fm-image-bundle-resume-'.Str::random(12);
+
+        $exitCode = Artisan::call('media-assets:import-seo-image-bundle', $this->commandOptions($package, [
+            '--json' => true,
+            '--write-resolved-package' => true,
+            '--resolved-output-dir' => $output,
+            '--allow-update-existing' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(1, MediaAsset::query()->withoutGlobalScopes()->count());
+
+        $asset = MediaAsset::query()->withoutGlobalScopes()->where('asset_key', 'article.daily.seo.cover.v1')->firstOrFail();
+        $this->assertSame('SEO cover image showing a structured career decision map', (string) $asset->alt);
+        $this->assertSame(MediaAsset::SYNC_SYNCED, (string) $asset->sync_status);
+        $this->assertSame(MediaAsset::CDN_VERIFIED, (string) $asset->cdn_status);
+        $this->assertSame(6, $asset->variants()->count());
+        $this->assertFileExists($output.'/cms/CMS_IMPORT_DRAFT_en_demo.json');
+    }
+
+    public function test_seo_release_cleanup_dry_run_reports_half_failed_assets(): void
+    {
+        Http::fake([
+            'assets.fermatmind.com/*' => Http::response('', 404, ['Content-Type' => 'text/html']),
+        ]);
+        Article::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'slug' => 'demo',
+            'locale' => 'en',
+            'translation_group_id' => self::TRANSLATION_GROUP_ID,
+            'title' => 'Demo',
+            'excerpt' => 'Demo',
+            'content_md' => 'Body',
+            'cover_image_url' => 'https://assets.fermatmind.com/storage/media-library/variants/articledailyseocoverv1/hero_1600x900.jpg',
+            'cover_image_alt' => 'Demo',
+            'cover_image_width' => 1600,
+            'cover_image_height' => 900,
+            'cover_image_variants' => [
+                'editorial_package_v1' => [
+                    'cover_media_asset_key' => 'article.daily.seo.cover.v1',
+                ],
+            ],
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => false,
+        ]);
+        MediaAsset::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'asset_key' => 'article.daily.seo.cover.v1',
+            'disk' => 'public',
+            'path' => 'media-library/source/cover.png',
+            'url' => 'https://assets.fermatmind.com/storage/media-library/source/cover.png',
+            'mime_type' => 'image/png',
+            'width' => 1600,
+            'height' => 900,
+            'bytes' => 100,
+            'alt' => 'Demo',
+            'status' => MediaAsset::STATUS_PUBLISHED,
+            'is_public' => true,
+            'sync_status' => MediaAsset::SYNC_SKIPPED,
+            'cdn_status' => MediaAsset::CDN_SKIPPED,
+        ]);
+
+        $exitCode = Artisan::call('media-assets:seo-release-cleanup', [
+            '--asset-prefix' => 'article.daily.seo',
+            '--translation-group-id' => self::TRANSLATION_GROUP_ID,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('cleanup_dry_run', $payload['action']);
+        $this->assertTrue($payload['deletion_held']);
+        $this->assertSame(1, $payload['not_ready_count']);
+        $this->assertFalse($payload['assets'][0]['ready_for_cms']);
+        $this->assertTrue($payload['assets'][0]['cms_reference_status']['referenced']);
+    }
+
+    public function test_seo_release_cleanup_resync_moves_half_failed_assets_to_verified(): void
+    {
+        Storage::fake('public');
+        Storage::fake('s3');
+        Http::fake([
+            'assets.fermatmind.com/*' => Http::response('', 200, ['Content-Type' => 'image/jpeg']),
+        ]);
+        config([
+            'fap.media.oss_sync_enabled' => false,
+            'fap.media.cdn_verify_enabled' => false,
+        ]);
+        $package = $this->writeImageBundlePackage();
+
+        $createExitCode = Artisan::call('media-assets:import-seo-image-bundle', $this->commandOptions($package, [
+            '--json' => true,
+        ]));
+        $this->assertSame(0, $createExitCode);
+        $asset = MediaAsset::query()->withoutGlobalScopes()->where('asset_key', 'article.daily.seo.cover.v1')->firstOrFail();
+        $this->assertSame(MediaAsset::SYNC_SKIPPED, (string) $asset->sync_status);
+
+        config([
+            'fap.media.oss_sync_enabled' => true,
+            'fap.media.oss_disk' => 's3',
+            'fap.media.oss_key_prefix' => 'storage',
+            'fap.media.cdn_verify_enabled' => true,
+        ]);
+
+        $exitCode = Artisan::call('media-assets:seo-release-cleanup', [
+            '--asset-prefix' => 'article.daily.seo',
+            '--translation-group-id' => self::TRANSLATION_GROUP_ID,
+            '--resync' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('resynced_media_assets', $payload['action']);
+        $this->assertFalse($payload['dry_run']);
+        $this->assertSame(0, $payload['not_ready_count']);
+        $this->assertTrue($payload['assets'][0]['ready_for_cms']);
+
+        $fresh = MediaAsset::query()->withoutGlobalScopes()->where('asset_key', 'article.daily.seo.cover.v1')->firstOrFail();
+        $this->assertSame(MediaAsset::SYNC_SYNCED, (string) $fresh->sync_status);
+        $this->assertSame(MediaAsset::CDN_VERIFIED, (string) $fresh->cdn_status);
     }
 
     public function test_dry_run_does_not_write_existing_asset_or_storage(): void
