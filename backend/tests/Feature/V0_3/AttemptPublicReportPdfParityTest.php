@@ -406,6 +406,90 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $wrongAttemptAccess->assertStatus(404);
     }
 
+    public function test_mbti_result_page_pdf_locked_token_does_not_promote_report_access_to_full(): void
+    {
+        $this->seedScales();
+        config()->set('fap.features.report_snapshot_strict_v2', false);
+        config()->set('gotenberg.result_print_token_secret', 'test-result-print-secret');
+
+        $attemptId = (string) Str::uuid();
+        $this->createAttempt($attemptId, 'MBTI', 'anon_pdf_print_locked_token');
+        $this->createResult($attemptId);
+
+        DB::table('unified_access_projections')->insert([
+            'attempt_id' => $attemptId,
+            'access_state' => 'ready',
+            'report_state' => 'ready',
+            'pdf_state' => 'ready',
+            'reason_code' => 'entitlement_granted',
+            'projection_version' => 1,
+            'actions_json' => json_encode(['report' => true, 'pdf' => true], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'payload_json' => json_encode([
+                'access_level' => 'full',
+                'variant' => 'full',
+                'unlock_stage' => 'full',
+                'has_active_grant' => true,
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'produced_at' => now(),
+            'refreshed_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $attempt = Attempt::query()->where('id', $attemptId)->firstOrFail();
+        $token = app(ResultPagePdfTokenService::class)->issueForMbtiResultPageExport($attempt, [
+            'locked' => true,
+            'variant' => 'free',
+        ], 'zh');
+
+        $response = $this->withHeaders([
+            'X-Result-Access-Token' => $token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access?locale=zh-CN");
+
+        $response->assertOk()
+            ->assertJsonPath('access_state', 'locked')
+            ->assertJsonPath('report_state', 'ready')
+            ->assertJsonPath('pdf_state', 'missing')
+            ->assertJsonPath('reason_code', 'result_page_pdf_token_locked')
+            ->assertJsonPath('actions.page_href', "/result/{$attemptId}")
+            ->assertJsonPath('actions.pdf_href', null)
+            ->assertJsonPath('access_source', 'result_page_pdf_export_token')
+            ->assertJsonPath('paywall_suppressed', false)
+            ->assertJsonPath('payload.locked', true)
+            ->assertJsonPath('payload.access_level', 'free')
+            ->assertJsonPath('payload.variant', 'free')
+            ->assertJsonPath('payload.unlock_stage', 'locked')
+            ->assertJsonPath('payload.result_page_pdf_export', true)
+            ->assertJsonPath('payload.result_page_pdf_token_entitlement', 'locked');
+    }
+
+    public function test_mbti_result_page_pdf_token_is_rejected_after_attempt_owner_changes(): void
+    {
+        $this->seedScales();
+        config()->set('gotenberg.result_print_token_secret', 'test-result-print-secret');
+
+        $attemptId = (string) Str::uuid();
+        $this->createAttempt($attemptId, 'MBTI', 'anon_pdf_print_original_owner');
+        $this->createResult($attemptId);
+
+        $attempt = Attempt::query()->where('id', $attemptId)->firstOrFail();
+        $token = app(ResultPagePdfTokenService::class)->issueForMbtiResultPageExport($attempt, [
+            'locked' => false,
+            'variant' => 'full',
+        ], 'zh');
+
+        Attempt::query()
+            ->where('id', $attemptId)
+            ->update(['anon_id' => 'anon_pdf_print_new_owner']);
+
+        $response = $this->withHeaders([
+            'X-Result-Access-Token' => $token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access?locale=zh-CN");
+
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'ATTEMPT_NOT_FOUND');
+    }
+
     public function test_public_mbti_result_page_pdf_does_not_fallback_to_mpdf_when_gotenberg_fails(): void
     {
         $this->seedScales();

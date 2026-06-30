@@ -65392,5 +65392,498 @@
         "note": "Inspected failed GitHub verify-bigfive job, moved IqBetaStandardScore into Assessment scope, updated BigFive runtime freeze classifier for the IQ-only helper, and reran focused IQ tests, focused BigFive freeze tests, PHP lint, scoped Pint, route invariant, ci_verify_mbti, metadata parse, and diff check successfully. Generated BIG5 compiled artifacts from ci_verify_mbti were restored before staging."
       }
     ]
+  },
+  "SECURITY-103-API-01": {
+    "id": "SECURITY-103-API-01",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-01-entitlement-gates",
+    "title": "SECURITY-103-API-01: harden MBTI result/PDF token entitlement gates",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": [],
+    "status": "local_checks_passed",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding/updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for SECURITY-103-API-01 through SECURITY-103-API-12 and executing them sequentially."
+      },
+      "base_sync": {
+        "status": "pass",
+        "evidence": "Started isolated worktree from origin/main 69e28b1db607d2296f1698e5301bbe7e600226a2 and git pull --ff-only origin main reported already up to date."
+      },
+      "focused_mbti_pdf_token_boundary": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php --no-ansi",
+        "evidence": "PASS with existing file_get_contents warnings; 10 tests, 132 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "PASS; route list rendered 231 routes including v0.3 attempt report-access/report.pdf/result-page.pdf routes."
+      },
+      "migrate": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-01.sqlite php artisan migrate --force",
+        "evidence": "PASS; all migrations completed against isolated sqlite database."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptReadController.php app/Services/Report/Pdf/ResultPagePdfTokenService.php tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php",
+        "evidence": "PASS; 3 files unchanged by formatter."
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "evidence": "PASS; content pack, report, events funnel, Big Five gates, security gates, dependency gate, and webhook/attempt regression gates completed."
+      },
+      "metadata_parse": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && echo 'json ok'",
+        "evidence": "PASS after local check ledger update; output yaml ok and json ok."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "PASS after local check ledger update; no whitespace errors."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "command": "git diff --name-only",
+        "evidence": "PASS after restoring generated BIG5_OCEAN compiled timestamp/hash churn; diff limited to AttemptReadController, ResultPagePdfTokenService, AttemptPublicReportPdfParityTest, pr-train.yaml, and pr-train-state.json."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started SECURITY-103-API-01 from latest origin/main in an isolated worktree; scope is limited to MBTI result/PDF token entitlement and locked/full access gates plus authorized train metadata."
+      },
+      {
+        "at": "2026-06-30T09:02:13+08:00",
+        "status": "local_checks_passed",
+        "note": "Route list, isolated sqlite migrate, focused AttemptPublicReportPdfParityTest, Pint, full ci_verify_mbti, diff check, and scope validation passed for SECURITY-103-API-01."
+      }
+    ]
+  },
+  "SECURITY-103-API-02": {
+    "id": "SECURITY-103-API-02",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-02-scoring-redaction",
+    "title": "SECURITY-103-API-02: harden scoring payload redaction and claim gates",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": ["SECURITY-103-API-01"],
+    "status": "planned",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "planned",
+        "note": "Registered authorized SECURITY-103-API-02; execution waits for SECURITY-103-API-01 merge."
+      }
+    ]
+  },
+  "SECURITY-103-API-03": {
+    "id": "SECURITY-103-API-03",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-03-identifiers-cache-redaction",
+    "title": "SECURITY-103-API-03: harden public identifiers and cache headers",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": ["SECURITY-103-API-02"],
+    "status": "planned",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "planned",
+        "note": "Registered authorized SECURITY-103-API-03; execution waits for SECURITY-103-API-02 merge."
+      }
+    ]
+  },
+  "SECURITY-103-API-04": {
+    "id": "SECURITY-103-API-04",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-04-deploy-workflow-hardening",
+    "title": "SECURITY-103-API-04: harden deploy workflow and runner command boundaries",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": ["SECURITY-103-API-03"],
+    "status": "planned",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "planned",
+        "note": "Registered authorized SECURITY-103-API-04; execution waits for SECURITY-103-API-03 merge."
+      }
+    ]
+  },
+  "SECURITY-103-API-05": {
+    "id": "SECURITY-103-API-05",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-05-import-integrity-hardening",
+    "title": "SECURITY-103-API-05: harden production import integrity gates",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": ["SECURITY-103-API-04"],
+    "status": "planned",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "planned",
+        "note": "Registered authorized SECURITY-103-API-05; execution waits for SECURITY-103-API-04 merge."
+      }
+    ]
+  },
+  "SECURITY-103-API-06": {
+    "id": "SECURITY-103-API-06",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-06-cms-publish-gates",
+    "title": "SECURITY-103-API-06: harden CMS publish approval and canary gates",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": ["SECURITY-103-API-05"],
+    "status": "planned",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "planned",
+        "note": "Registered authorized SECURITY-103-API-06; execution waits for SECURITY-103-API-05 merge."
+      }
+    ]
+  },
+  "SECURITY-103-API-07": {
+    "id": "SECURITY-103-API-07",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-07-seo-scanner-export-safety",
+    "title": "SECURITY-103-API-07: harden SEO scanner submission and export safety",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": ["SECURITY-103-API-06"],
+    "status": "planned",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "planned",
+        "note": "Registered authorized SECURITY-103-API-07; execution waits for SECURITY-103-API-06 merge."
+      }
+    ]
+  },
+  "SECURITY-103-API-08": {
+    "id": "SECURITY-103-API-08",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-08-seo-ops-access-controls",
+    "title": "SECURITY-103-API-08: harden SEO ops preview and access controls",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": ["SECURITY-103-API-07"],
+    "status": "planned",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "planned",
+        "note": "Registered authorized SECURITY-103-API-08; execution waits for SECURITY-103-API-07 merge."
+      }
+    ]
+  },
+  "SECURITY-103-API-09": {
+    "id": "SECURITY-103-API-09",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-09-ai-career-salary-assets",
+    "title": "SECURITY-103-API-09: harden AI career salary asset exposure",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": ["SECURITY-103-API-08"],
+    "status": "planned",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "planned",
+        "note": "Registered authorized SECURITY-103-API-09; execution waits for SECURITY-103-API-08 merge."
+      }
+    ]
+  },
+  "SECURITY-103-API-10": {
+    "id": "SECURITY-103-API-10",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-10-dailygiving-order-data",
+    "title": "SECURITY-103-API-10: harden DailyGiving order transaction exposure",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": ["SECURITY-103-API-09"],
+    "status": "planned",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "planned",
+        "note": "Registered authorized SECURITY-103-API-10; execution waits for SECURITY-103-API-09 merge."
+      }
+    ]
+  },
+  "SECURITY-103-API-11": {
+    "id": "SECURITY-103-API-11",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-11-cache-locale-fail-closed",
+    "title": "SECURITY-103-API-11: harden public cache and locale fail-closed behavior",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": ["SECURITY-103-API-10"],
+    "status": "planned",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "planned",
+        "note": "Registered authorized SECURITY-103-API-11; execution waits for SECURITY-103-API-10 merge."
+      }
+    ]
+  },
+  "SECURITY-103-API-12": {
+    "id": "SECURITY-103-API-12",
+    "repo": "fap-api",
+    "base": "origin/main",
+    "branch": "codex/security-103-api-12-docs-secrets-redaction",
+    "title": "SECURITY-103-API-12: redact committed secrets references and track rotation",
+    "train_scope": "security_103_fap_api_audit",
+    "depends_on": ["SECURITY-103-API-11"],
+    "status": "planned",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      }
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-30 attached /goal SECURITY-103 fap-api audit PR train continuous execution request.",
+    "events": [
+      {
+        "at": "2026-06-30T08:55:17+08:00",
+        "status": "planned",
+        "note": "Registered authorized SECURITY-103-API-12; execution waits for SECURITY-103-API-11 merge."
+      }
+    ]
   }
 }

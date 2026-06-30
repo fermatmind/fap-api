@@ -16,6 +16,7 @@ final class ResultPagePdfTokenService
         $payload = [
             'v' => 1,
             'typ' => 'mbti_result_page_pdf',
+            'org_id' => (int) ($attempt->org_id ?? 0),
             'attempt_id' => (string) $attempt->id,
             'user_id' => (string) ($attempt->user_id ?? ''),
             'owner_id' => (string) (($attempt->user_id ?? null) ?: ($attempt->anon_id ?? '')),
@@ -60,6 +61,7 @@ final class ResultPagePdfTokenService
         if (
             (int) ($payload['v'] ?? 0) !== 1
             || (string) ($payload['typ'] ?? '') !== 'mbti_result_page_pdf'
+            || (int) ($payload['org_id'] ?? $orgId) !== max(0, $orgId)
             || (string) ($payload['attempt_id'] ?? '') !== $attemptId
             || (string) ($payload['surface'] ?? '') !== ReportPdfDocumentService::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION
             || (string) ($payload['engine'] ?? '') !== ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE
@@ -76,6 +78,37 @@ final class ResultPagePdfTokenService
         if (! $attempt instanceof Attempt || strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== 'MBTI') {
             return null;
         }
+
+        $payloadUserId = trim((string) ($payload['user_id'] ?? ''));
+        $currentUserId = trim((string) ($attempt->user_id ?? ''));
+        if (! hash_equals($currentUserId, $payloadUserId)) {
+            return null;
+        }
+
+        $payloadOwnerId = trim((string) ($payload['owner_id'] ?? ''));
+        $currentOwnerId = $currentUserId !== ''
+            ? $currentUserId
+            : trim((string) ($attempt->anon_id ?? ''));
+        if ($payloadOwnerId === '' || $currentOwnerId === '' || ! hash_equals($currentOwnerId, $payloadOwnerId)) {
+            return null;
+        }
+
+        $entitlement = strtolower(trim((string) ($payload['entitlement'] ?? '')));
+        $variant = $this->normalizeVariant((string) ($payload['variant'] ?? 'free'));
+        if (! in_array($entitlement, ['locked', 'unlocked'], true)) {
+            return null;
+        }
+
+        if ($entitlement === 'unlocked' && $variant !== 'full') {
+            return null;
+        }
+
+        if ($entitlement === 'locked' && $variant !== 'free') {
+            return null;
+        }
+
+        $payload['entitlement'] = $entitlement;
+        $payload['variant'] = $variant;
 
         return $payload;
     }

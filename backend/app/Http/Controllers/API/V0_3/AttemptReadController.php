@@ -891,7 +891,8 @@ class AttemptReadController extends Controller
         $orgId = $this->currentOrgContext()->orgId();
         $attempt = $this->resolveAttemptForAccessRead($request, $orgId, $id);
         $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
-        $hasResultPagePdfTokenAccess = $this->resolveAttemptForResultPagePdfToken($request, $orgId, (string) $attempt->id) instanceof Attempt;
+        $resultPagePdfTokenGrant = $this->resultPagePdfTokenGrantForRequest($request, $orgId, (string) $attempt->id);
+        $hasResultPagePdfTokenAccess = is_array($resultPagePdfTokenGrant);
         $submissionPayload = $this->latestReadableSubmission($request, (string) $attempt->id);
         $resultExists = Result::query()
             ->where('org_id', $orgId)
@@ -1016,18 +1017,23 @@ class AttemptReadController extends Controller
             );
         }
         if ($hasResultPagePdfTokenAccess && $scaleCode === 'MBTI' && $resultExists) {
-            $accessState = 'ready';
+            $tokenVariant = ReportAccess::normalizeVariant((string) ($resultPagePdfTokenGrant['variant'] ?? ReportAccess::VARIANT_FREE));
+            $tokenEntitlement = strtolower(trim((string) ($resultPagePdfTokenGrant['entitlement'] ?? 'locked')));
+            $tokenGrantsFullAccess = $tokenEntitlement === 'unlocked' && $tokenVariant === ReportAccess::VARIANT_FULL;
+            $accessState = $tokenGrantsFullAccess ? 'ready' : 'locked';
             $reportState = 'ready';
-            $pdfState = 'ready';
-            $reasonCode = 'result_page_pdf_token';
+            $pdfState = $tokenGrantsFullAccess ? 'ready' : 'missing';
+            $reasonCode = $tokenGrantsFullAccess ? 'result_page_pdf_token' : 'result_page_pdf_token_locked';
             $payloadJson = array_merge($payloadJson, [
-                'access_level' => ReportAccess::REPORT_ACCESS_FULL,
-                'variant' => ReportAccess::VARIANT_FULL,
-                'unlock_stage' => ReportAccess::UNLOCK_STAGE_FULL,
+                'locked' => ! $tokenGrantsFullAccess,
+                'access_level' => $tokenGrantsFullAccess ? ReportAccess::REPORT_ACCESS_FULL : ReportAccess::REPORT_ACCESS_FREE,
+                'variant' => $tokenGrantsFullAccess ? ReportAccess::VARIANT_FULL : ReportAccess::VARIANT_FREE,
+                'unlock_stage' => $tokenGrantsFullAccess ? ReportAccess::UNLOCK_STAGE_FULL : ReportAccess::UNLOCK_STAGE_LOCKED,
                 'unlock_source' => ReportAccess::UNLOCK_SOURCE_NONE,
                 'access_source' => 'result_page_pdf_export_token',
-                'paywall_suppressed' => true,
+                'paywall_suppressed' => $tokenGrantsFullAccess,
                 'result_page_pdf_export' => true,
+                'result_page_pdf_token_entitlement' => $tokenGrantsFullAccess ? 'unlocked' : 'locked',
             ]);
         }
 
@@ -2506,12 +2512,7 @@ class AttemptReadController extends Controller
 
     private function resolveAttemptForResultPagePdfToken(Request $request, int $orgId, string $attemptId): ?Attempt
     {
-        $token = $this->resultAccessTokenCandidate($request);
-        if ($token === '') {
-            return null;
-        }
-
-        $grant = $this->resultPagePdfTokenService->verifyMbtiResultPageExport($token, $orgId, $attemptId);
+        $grant = $this->resultPagePdfTokenGrantForRequest($request, $orgId, $attemptId);
         if (! is_array($grant)) {
             return null;
         }
@@ -2530,6 +2531,21 @@ class AttemptReadController extends Controller
         }
 
         return $attempt;
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function resultPagePdfTokenGrantForRequest(Request $request, int $orgId, string $attemptId): ?array
+    {
+        $token = $this->resultAccessTokenCandidate($request);
+        if ($token === '') {
+            return null;
+        }
+
+        $grant = $this->resultPagePdfTokenService->verifyMbtiResultPageExport($token, $orgId, $attemptId);
+
+        return is_array($grant) ? $grant : null;
     }
 
     private function resultAccessTokenCandidate(Request $request): string
