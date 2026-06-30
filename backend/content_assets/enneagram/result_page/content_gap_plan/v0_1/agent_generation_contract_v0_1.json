@@ -1,0 +1,137 @@
+{
+  "schema_version": "fap.enneagram.result_page.agent_generation_contract.v0.1",
+  "status": "contract_only",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "agent_may_generate_bulk_content": false,
+  "agent_may_export_candidate": false,
+  "agent_may_import_candidate": false,
+  "agent_may_activate_runtime": false,
+  "agent_may_write_production": false,
+  "agent_may_write_cms": false,
+  "agent_may_change_frontend": false,
+  "allowed_inputs": {
+    "source_ledger_row": true,
+    "target_module_id": true,
+    "target_type_or_pair": true,
+    "target_scope": true,
+    "rendered_gap_id": true,
+    "forbidden_claim_policy": true,
+    "benchmark_structure_notes": true,
+    "existing_backend_asset_refs": true
+  },
+  "allowed_outputs": {
+    "draft_payload_json": true,
+    "source_mapping_report_json": true,
+    "safety_report_json": true,
+    "diff_report_json": true,
+    "rollback_plan_md": true,
+    "rendered_expectation_notes": true
+  },
+  "draft_payload_contract": {
+    "required_fields": [
+      "schema_version",
+      "module_id",
+      "locale",
+      "type_code_or_pair",
+      "scope",
+      "public_payload",
+      "source_trace",
+      "safety_flags",
+      "rollback_notes"
+    ],
+    "public_payload_required_fields": [
+      "heading",
+      "lead",
+      "body",
+      "reflection_prompt",
+      "boundary_note"
+    ],
+    "source_trace_required_fields": [
+      "source_ledger_row_id",
+      "source_asset_batch",
+      "source_asset_key",
+      "benchmark_refs_used",
+      "copy_policy"
+    ],
+    "safety_flags_required_fields": [
+      "non_diagnostic",
+      "non_hiring",
+      "no_hard_typing",
+      "no_accuracy_superiority",
+      "no_score_vector_leak",
+      "public_safe_only"
+    ]
+  },
+  "public_benchmark_policy": {
+    "allowed_benchmark_refs": [
+      "https://www.123test.com/enneagram-test/",
+      "https://www.truity.com/test/enneagram-personality-test",
+      "https://www.truity.com/blog/how-do-you-read-enneagram-chart"
+    ],
+    "allowed_use": [
+      "section structure benchmark",
+      "reader journey benchmark",
+      "public-safe explanatory pattern benchmark"
+    ],
+    "forbidden_use": [
+      "copying proprietary wording",
+      "copying scoring claims",
+      "copying charts as assets",
+      "claiming external endorsement",
+      "claiming Enneagram is more accurate than other assessments"
+    ]
+  },
+  "forbidden_claim_families": [
+    "final_typing_you_are_this_type_claim",
+    "fixed_type_certainty_claim",
+    "diagnosis_therapy_treatment_claim",
+    "hiring_screen_or_employment_suitability_claim",
+    "success_salary_performance_prediction_claim",
+    "e105_fc144_score_comparison",
+    "fc144_more_accurate_or_replacement_result_claim",
+    "big_five_or_mbti_replacement_claim",
+    "raw_score_vector_public_leak",
+    "attempt_id_public_leak",
+    "private_report_payload_publication",
+    "internal_hash_or_schema_public_leak"
+  ],
+  "public_surface_forbidden_fields": [
+    "attempt_id",
+    "raw_score",
+    "raw_scores",
+    "score",
+    "score_vector",
+    "raw_score_vector",
+    "dominance_gap",
+    "profile_entropy",
+    "selector_trace",
+    "internal_metadata",
+    "source_selection_notes",
+    "candidate_manifest_sha256",
+    "runtime_registry_sha256",
+    "content_release_hash",
+    "private_report_payload",
+    "private_report_url"
+  ],
+  "future_pr_rules": {
+    "one_module_or_small_batch_per_pr": true,
+    "must_include_source_mapping": true,
+    "must_include_safety_report": true,
+    "must_include_diff_report": true,
+    "must_include_rollback_plan": true,
+    "must_not_update_candidate_baseline_silently": true,
+    "must_not_activate_or_import": true
+  },
+  "negative_guarantees": {
+    "generated_official_content": false,
+    "candidate_payloads_written": false,
+    "candidate_export_happened": false,
+    "inactive_import_happened": false,
+    "production_activation_happened": false,
+    "runtime_switch_happened": false,
+    "production_write_happened": false,
+    "cms_write_happened": false,
+    "frontend_change_happened": false
+  }
+}

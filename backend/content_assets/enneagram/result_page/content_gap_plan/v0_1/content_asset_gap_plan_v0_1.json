@@ -1,0 +1,510 @@
+{
+  "schema_version": "fap.enneagram.result_page.content_gap_plan.v0.1",
+  "artifact_id": "enneagram_result_page_content_gap_plan_20260627",
+  "status": "planning_workspace_only",
+  "verdict": "READY_FOR_MODULE_WORKSPACE_REVIEW_NOT_CONTENT_GENERATION",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "activation_happened": false,
+  "candidate_export_happened": false,
+  "inactive_import_happened": false,
+  "bulk_content_generation_happened": false,
+  "source_refs": {
+    "backend_source_ledger": {
+      "repo": "fap-api",
+      "path": "content_assets/enneagram/result_page/source_ledger/source_ledger.json",
+      "schema_version": "fap.enneagram.result_page.source_ledger.v0.1"
+    },
+    "backend_asset_streams": [
+      {
+        "batch": "1R-A",
+        "path": "content_assets/enneagram/result_page/batch_1r_a/v0_1/assets.json",
+        "manifest_asset_count": 315,
+        "primary_modules": [
+          "instant_summary",
+          "all9_profile",
+          "type_deep_dive_summary",
+          "methodology_boundary_card"
+        ]
+      },
+      {
+        "batch": "1R-B",
+        "path": "content_assets/enneagram/result_page/batch_1r_b/v0_1/assets.json",
+        "manifest_asset_count": 423,
+        "primary_modules": [
+          "type_deep_dive_summary",
+          "growth_axis",
+          "relationship_need",
+          "stress_trigger",
+          "work_style_summary",
+          "seven_day_observation",
+          "methodology_boundary_card"
+        ]
+      },
+      {
+        "batch": "1R-C",
+        "path": "content_assets/enneagram/result_page/batch_1r_c/v0_1/assets.json",
+        "manifest_asset_count": 108,
+        "primary_modules": [
+          "methodology_boundary_card"
+        ]
+      },
+      {
+        "batch": "1R-D",
+        "path": "content_assets/enneagram/result_page/batch_1r_d/v0_1/assets.json",
+        "manifest_asset_count": 90,
+        "primary_modules": [
+          "all9_profile",
+          "close_call_card",
+          "growth_axis",
+          "relationship_need",
+          "stress_trigger",
+          "type_deep_dive_summary",
+          "work_style_summary",
+          "methodology_boundary_card"
+        ]
+      },
+      {
+        "batch": "1R-E",
+        "path": "content_assets/enneagram/result_page/batch_1r_e/v0_1/assets.json",
+        "manifest_asset_count": 108,
+        "primary_modules": [
+          "all9_profile",
+          "methodology_boundary_card"
+        ]
+      },
+      {
+        "batch": "1R-F",
+        "path": "content_assets/enneagram/result_page/batch_1r_f/v0_1/assets.json",
+        "manifest_asset_count": 36,
+        "primary_modules": [
+          "close_call_pair_card"
+        ]
+      },
+      {
+        "batch": "1R-G",
+        "path": "content_assets/enneagram/result_page/batch_1r_g/v0_1/assets.json",
+        "manifest_asset_count": 162,
+        "primary_modules": [
+          "scene_localization"
+        ]
+      },
+      {
+        "batch": "1R-H",
+        "path": "content_assets/enneagram/result_page/batch_1r_h/v0_1/assets.json",
+        "manifest_asset_count": 90,
+        "primary_modules": [
+          "form_recommendation"
+        ]
+      }
+    ],
+    "candidate_contract": {
+      "baseline_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+      "runtime_registry_manifest_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+      "expected_candidate_payload_count": 630,
+      "launch_scope": [
+        "1R-A",
+        "1R-B",
+        "1R-C",
+        "1R-D",
+        "1R-E",
+        "1R-F",
+        "1R-G",
+        "1R-H"
+      ],
+      "out_of_launch_scope": [
+        "1R-I",
+        "1R-J"
+      ]
+    },
+    "rendered_inventory": {
+      "repo": "fap-web",
+      "pull_request": 1462,
+      "merge_commit": "41039084935ea7b7fadba93be62771d2a50d10b6",
+      "files": [
+        "docs/audits/enneagram-result-assets/01_rendered_asset_inventory.json",
+        "docs/audits/enneagram-result-assets/01_rendered_asset_inventory.md",
+        "tests/contracts/enneagram-rendered-asset-inventory.contract.test.ts"
+      ]
+    },
+    "benchmark_refs": [
+      {
+        "label": "123test Enneagram test",
+        "url": "https://www.123test.com/enneagram-test/",
+        "allowed_use": "public structure benchmark only",
+        "copy_allowed": false
+      },
+      {
+        "label": "Truity Enneagram Personality Test",
+        "url": "https://www.truity.com/test/enneagram-personality-test",
+        "allowed_use": "public structure benchmark only",
+        "copy_allowed": false
+      },
+      {
+        "label": "Truity Enneagram chart explanation",
+        "url": "https://www.truity.com/blog/how-do-you-read-enneagram-chart",
+        "allowed_use": "chart-reading UX benchmark only",
+        "copy_allowed": false
+      }
+    ]
+  },
+  "observed_rendered_gaps": [
+    {
+      "gap_id": "rendered_close_call_scaffold_copy",
+      "severity": "p1_content_gap",
+      "surface": "result_page",
+      "observed_issue": "Close-call section may render scaffold copy instead of final pair differentiation copy.",
+      "inventory_ref": "fap-web PR #1462",
+      "recommended_fix_lane": "close_call_pair_differentiation"
+    },
+    {
+      "gap_id": "rendered_raw_score_like_numbers",
+      "severity": "p1_public_boundary",
+      "surface": "result_page",
+      "observed_issue": "Rendered page inventory recorded raw-like numeric score displays such as 10000, 9270, 9554, and 9028.",
+      "inventory_ref": "fap-web PR #1462",
+      "recommended_fix_lane": "confidence_dominance_public_copy"
+    },
+    {
+      "gap_id": "rendered_internal_metric_copy",
+      "severity": "p1_public_boundary",
+      "surface": "result_page",
+      "observed_issue": "Dominance gap and profile entropy are useful QA metrics but should not become public result copy.",
+      "inventory_ref": "fap-web PR #1462",
+      "recommended_fix_lane": "confidence_dominance_public_copy"
+    },
+    {
+      "gap_id": "zh_cn_type_label_depth",
+      "severity": "p2_localization_depth",
+      "surface": "result_page",
+      "observed_issue": "English type labels may appear as the primary label in zh-CN user-facing sections.",
+      "inventory_ref": "fap-web PR #1462",
+      "recommended_fix_lane": "primary_type_deep_dive"
+    },
+    {
+      "gap_id": "certainty_copy_boundary",
+      "severity": "p1_claim_boundary",
+      "surface": "result_page",
+      "observed_issue": "Clear-state copy must avoid final typing certainty and keep leans-toward language.",
+      "inventory_ref": "fap-web PR #1462",
+      "recommended_fix_lane": "result_overview_hero"
+    },
+    {
+      "gap_id": "share_entry_gap",
+      "severity": "p2_surface_gap",
+      "surface": "share_pdf_history_compare",
+      "observed_issue": "Public-safe share entry and share/PDF/history/compare consumption need explicit module mapping.",
+      "inventory_ref": "fap-web PR #1462",
+      "recommended_fix_lane": "public_safe_share_pdf_history_compare"
+    },
+    {
+      "gap_id": "growth_module_repeated_copy_risk",
+      "severity": "p2_content_quality",
+      "surface": "result_page",
+      "observed_issue": "Growth and reflection modules may repeat generic phrasing instead of adding new motivation, relationship, and stress-pattern insight.",
+      "inventory_ref": "fap-web PR #1462",
+      "recommended_fix_lane": "growth_spectrum"
+    }
+  ],
+  "module_gap_plan": [
+    {
+      "module_id": "result_overview_hero",
+      "display_surface": "top summary and primary leaning",
+      "existing_backend_sources": [
+        "batch_1r_a.instant_summary",
+        "batch_1r_a.type_deep_dive_summary"
+      ],
+      "rendered_gap_refs": [
+        "certainty_copy_boundary"
+      ],
+      "workspace_status": "needs_boundary_copy_review",
+      "content_goal": "Explain the current leading tendency as a reflection cue, not a final type verdict.",
+      "future_pr_scope": "one small copy-boundary PR or one module asset PR",
+      "agent_allowed_output": [
+        "module payload draft",
+        "source mapping row",
+        "claim safety report",
+        "rendered diff expectation"
+      ]
+    },
+    {
+      "module_id": "top3_candidate_reading",
+      "display_surface": "top three type tendencies",
+      "existing_backend_sources": [
+        "batch_1r_a.all9_profile",
+        "batch_1r_d.all9_profile",
+        "batch_1r_e.all9_profile"
+      ],
+      "rendered_gap_refs": [
+        "rendered_raw_score_like_numbers",
+        "rendered_internal_metric_copy"
+      ],
+      "workspace_status": "needs_public_score_translation",
+      "content_goal": "Turn numeric ordering into public-safe tendency language and short comparison cues.",
+      "future_pr_scope": "top3 public-safe display PR",
+      "agent_allowed_output": [
+        "score-free ranking language",
+        "close-call caution language",
+        "source mapping row",
+        "leakage report"
+      ]
+    },
+    {
+      "module_id": "primary_type_deep_dive",
+      "display_surface": "primary type explanation",
+      "existing_backend_sources": [
+        "batch_1r_a.type_deep_dive_summary",
+        "batch_1r_b.type_deep_dive_summary",
+        "batch_1r_d.type_deep_dive_summary"
+      ],
+      "rendered_gap_refs": [
+        "zh_cn_type_label_depth"
+      ],
+      "workspace_status": "needs_depth_and_localization_review",
+      "content_goal": "Add motivation, defense pattern, stress clue, and growth cue without diagnosing or fixing identity.",
+      "future_pr_scope": "primary type deep-dive asset PR",
+      "agent_allowed_output": [
+        "module payload draft",
+        "localization notes",
+        "forbidden claim report"
+      ]
+    },
+    {
+      "module_id": "all9_profile_score_band",
+      "display_surface": "all nine type profile",
+      "existing_backend_sources": [
+        "batch_1r_a.all9_profile",
+        "batch_1r_d.all9_profile",
+        "batch_1r_e.all9_profile"
+      ],
+      "rendered_gap_refs": [
+        "rendered_raw_score_like_numbers"
+      ],
+      "workspace_status": "needs_score_band_policy",
+      "content_goal": "Describe relative prominence with labels such as stronger, present, mixed, or quieter instead of raw score display.",
+      "future_pr_scope": "all9 profile banding PR",
+      "agent_allowed_output": [
+        "band copy",
+        "display policy",
+        "negative leakage assertions"
+      ]
+    },
+    {
+      "module_id": "confidence_dominance_public_copy",
+      "display_surface": "confidence and result boundary",
+      "existing_backend_sources": [
+        "batch_1r_a.methodology_boundary_card",
+        "batch_1r_b.methodology_boundary_card",
+        "batch_1r_c.methodology_boundary_card",
+        "batch_1r_d.methodology_boundary_card",
+        "batch_1r_e.methodology_boundary_card"
+      ],
+      "rendered_gap_refs": [
+        "rendered_internal_metric_copy",
+        "certainty_copy_boundary"
+      ],
+      "workspace_status": "needs_public_metric_boundary",
+      "content_goal": "Explain confidence as a reading boundary without exposing dominance gap, entropy, raw scores, or vectors.",
+      "future_pr_scope": "confidence boundary PR",
+      "agent_allowed_output": [
+        "public confidence labels",
+        "private metric exclusion list",
+        "metadata leakage report"
+      ]
+    },
+    {
+      "module_id": "close_call_pair_differentiation",
+      "display_surface": "top two close-call comparison",
+      "existing_backend_sources": [
+        "batch_1r_d.close_call_card",
+        "batch_1r_f.close_call_pair_card"
+      ],
+      "rendered_gap_refs": [
+        "rendered_close_call_scaffold_copy"
+      ],
+      "workspace_status": "highest_priority_true_gap",
+      "content_goal": "Replace scaffold text with pair-specific motivation contrast, shared pattern, and reflection prompt.",
+      "future_pr_scope": "close-call pair asset PR",
+      "agent_allowed_output": [
+        "pair-specific public payload",
+        "source mapping report",
+        "scaffold-removal diff"
+      ]
+    },
+    {
+      "module_id": "work_reality",
+      "display_surface": "work style and task environment",
+      "existing_backend_sources": [
+        "batch_1r_b.work_style_summary",
+        "batch_1r_g.scene_localization"
+      ],
+      "rendered_gap_refs": [],
+      "workspace_status": "needs_depth_quality_review",
+      "content_goal": "Describe work-pattern reflection without employment-screening fit, screening, salary, success, or performance predictions.",
+      "future_pr_scope": "work module thickening PR",
+      "agent_allowed_output": [
+        "work reflection copy",
+        "hiring claim safety report"
+      ]
+    },
+    {
+      "module_id": "growth_spectrum",
+      "display_surface": "growth, stress, and seven-day observation",
+      "existing_backend_sources": [
+        "batch_1r_b.growth_axis",
+        "batch_1r_b.stress_trigger",
+        "batch_1r_b.seven_day_observation",
+        "batch_1r_d.growth_axis",
+        "batch_1r_d.stress_trigger"
+      ],
+      "rendered_gap_refs": [
+        "growth_module_repeated_copy_risk"
+      ],
+      "workspace_status": "needs_specificity_and_de_duplication",
+      "content_goal": "Make growth copy concrete, type-specific, and non-therapeutic while avoiding repetitive advice.",
+      "future_pr_scope": "growth module de-dup PR",
+      "agent_allowed_output": [
+        "growth payload draft",
+        "repetition report",
+        "clinical claim safety report"
+      ]
+    },
+    {
+      "module_id": "relationship_conflict",
+      "display_surface": "relationship and conflict reflection",
+      "existing_backend_sources": [
+        "batch_1r_b.relationship_need",
+        "batch_1r_g.scene_localization"
+      ],
+      "rendered_gap_refs": [],
+      "workspace_status": "needs_social_share_depth_review",
+      "content_goal": "Support relationship reflection and social discussion without diagnosing other people or assigning fixed roles.",
+      "future_pr_scope": "relationship module thickening PR",
+      "agent_allowed_output": [
+        "relationship reflection copy",
+        "public-safe share excerpt",
+        "forbidden claim report"
+      ]
+    },
+    {
+      "module_id": "method_observation_next",
+      "display_surface": "methodology, observation, and next test recommendation",
+      "existing_backend_sources": [
+        "batch_1r_a.methodology_boundary_card",
+        "batch_1r_b.methodology_boundary_card",
+        "batch_1r_c.methodology_boundary_card",
+        "batch_1r_h.form_recommendation"
+      ],
+      "rendered_gap_refs": [],
+      "workspace_status": "needs_cross_test_positioning",
+      "content_goal": "Position Enneagram as motivation-pattern reflection that complements Big Five and MBTI without superiority claims.",
+      "future_pr_scope": "method and cross-test CTA PR",
+      "agent_allowed_output": [
+        "method boundary copy",
+        "cross-test CTA copy",
+        "FC144 boundary report"
+      ]
+    },
+    {
+      "module_id": "public_safe_share_pdf_history_compare",
+      "display_surface": "share, PDF, history, compare",
+      "existing_backend_sources": [
+        "batch_1r_h.form_recommendation",
+        "controlled_pilot_observation",
+        "production_manual_gate"
+      ],
+      "rendered_gap_refs": [
+        "share_entry_gap"
+      ],
+      "workspace_status": "surface_contract_gap",
+      "content_goal": "Define public-safe excerpts and surface-specific exclusions for share cards, PDF, history, and compare views.",
+      "future_pr_scope": "share PDF history compare contract PR",
+      "agent_allowed_output": [
+        "surface-specific allowed fields",
+        "negative leakage assertions",
+        "public-safe summary draft"
+      ]
+    }
+  ],
+  "recommended_pr_sequence": [
+    {
+      "sequence": 1,
+      "title": "Enneagram close-call pair content workspace and scaffold removal",
+      "module_ids": [
+        "close_call_pair_differentiation"
+      ],
+      "reason": "This is the clearest true content gap because rendered inventory recorded scaffold copy."
+    },
+    {
+      "sequence": 2,
+      "title": "Enneagram score-free ranking and confidence copy",
+      "module_ids": [
+        "top3_candidate_reading",
+        "all9_profile_score_band",
+        "confidence_dominance_public_copy"
+      ],
+      "reason": "This removes raw-like numbers and private metric language from user-facing result copy."
+    },
+    {
+      "sequence": 3,
+      "title": "Enneagram primary type and zh-CN label depth",
+      "module_ids": [
+        "primary_type_deep_dive",
+        "result_overview_hero"
+      ],
+      "reason": "This improves depth while preserving leans-toward language."
+    },
+    {
+      "sequence": 4,
+      "title": "Enneagram growth and relationship thickening",
+      "module_ids": [
+        "growth_spectrum",
+        "relationship_conflict"
+      ],
+      "reason": "This targets the strategic motivation, stress, and relationship reflection layer."
+    },
+    {
+      "sequence": 5,
+      "title": "Enneagram work, method, and cross-test CTA thickening",
+      "module_ids": [
+        "work_reality",
+        "method_observation_next"
+      ],
+      "reason": "This adds practical reflection and Big Five/MBTI complement positioning without career screening claims."
+    },
+    {
+      "sequence": 6,
+      "title": "Enneagram public-safe share PDF history compare surface contract",
+      "module_ids": [
+        "public_safe_share_pdf_history_compare"
+      ],
+      "reason": "This turns public sharing into a safe growth surface without leaking private result state."
+    }
+  ],
+  "validation_requirements_for_future_content_prs": [
+    "source_mapping_zero_failures",
+    "metadata_leakage_zero",
+    "forbidden_claim_zero",
+    "fc144_boundary_zero",
+    "scaffold_copy_zero",
+    "raw_score_public_display_zero",
+    "fixed_type_certainty_zero",
+    "rendered_inventory_updated",
+    "rollback_plan_updated"
+  ],
+  "negative_guarantees": {
+    "generated_official_content": false,
+    "candidate_payloads_written": false,
+    "candidate_export_happened": false,
+    "inactive_import_happened": false,
+    "production_activation_happened": false,
+    "runtime_switch_happened": false,
+    "production_write_happened": false,
+    "cms_write_happened": false,
+    "frontend_change_happened": false,
+    "benchmark_copying_allowed": false
+  }
+}
