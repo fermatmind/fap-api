@@ -370,6 +370,45 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.hero.profile_identity.code', 'ENTJ-A');
     }
 
+    public function test_imported_en_baseline_public_api_returns_english_desktop_clone_content(): void
+    {
+        $this->seedVariantsForAllMbtiBaseTypes('en');
+
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['en'],
+            '--status' => 'published',
+            '--upsert' => true,
+        ])->assertExitCode(0);
+
+        $response = $this->getJson('/api/v0.5/personality/intj-a/desktop-clone?locale=en')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('locale', 'en')
+            ->assertJsonPath('full_code', 'INTJ-A')
+            ->assertJsonPath('content.hero.profile_identity.name', 'Architect')
+            ->assertJsonPath('content.hero.profile_identity.nickname', 'Rational Visionary')
+            ->assertJsonPath('content.finalOffer.ctaLabel', 'Unlock full report')
+            ->assertJsonPath('content.chapters.career.visibleBlocks.0.title', 'Career strengths')
+            ->assertJsonPath('content.chapters.growth.visibleBlocks.0.title', 'Growth resources')
+            ->assertJsonPath('content.chapters.relationships.visibleBlocks.0.title', 'Reliable strengths')
+            ->assertJsonPath('content.chapters.growth.what_energizes.schema_version', 'insight_list_v1')
+            ->assertJsonPath('content.chapters.growth.what_energizes.items.0.title', 'Reflective discipline')
+            ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.title', 'Warmth left implicit');
+
+        $contentJson = json_encode($response->json('content'), JSON_UNESCAPED_UNICODE) ?: '';
+        $this->assertStringContainsString('Assertive layer', $contentJson);
+        $this->assertStringNotContainsString('解锁', $contentJson);
+        $this->assertDoesNotMatchRegularExpression('/[\x{3400}-\x{9FFF}]/u', $contentJson);
+
+        $this->getJson('/api/v0.5/personality/enfj-t/desktop-clone?locale=en')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('locale', 'en')
+            ->assertJsonPath('full_code', 'ENFJ-T')
+            ->assertJsonPath('content.hero.profile_identity.name', 'Protagonist')
+            ->assertJsonPath('content.hero.profile_identity.nickname', 'Gentle Guide');
+    }
+
     public function test_draft_content_is_hidden_and_endpoint_has_no_base_code_fallback(): void
     {
         $profile = $this->createProfile([
@@ -919,11 +958,16 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
 
     private function seedZhVariantsForAllMbtiBaseTypes(): void
     {
+        $this->seedVariantsForAllMbtiBaseTypes('zh-CN');
+    }
+
+    private function seedVariantsForAllMbtiBaseTypes(string $locale): void
+    {
         foreach ($this->mbtiBaseTypes() as $baseCode) {
             $profile = $this->createProfile([
                 'type_code' => $baseCode,
                 'slug' => strtolower($baseCode),
-                'locale' => 'zh-CN',
+                'locale' => $locale,
                 'status' => 'published',
                 'is_public' => true,
                 'published_at' => now()->subMinute(),

@@ -168,6 +168,50 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $this->assertSame(32, PersonalityProfileVariantCloneContent::query()->count());
     }
 
+    public function test_import_publishes_32_full_code_en_clone_content_with_english_copy(): void
+    {
+        $this->seedVariantsForAllMbtiBaseTypes('en');
+
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['en'],
+            '--status' => 'published',
+            '--upsert' => true,
+            '--source-dir' => '../content_baselines/personality_clone',
+        ])
+            ->expectsOutputToContain('rows_found=32')
+            ->expectsOutputToContain('will_create=32')
+            ->expectsOutputToContain('will_update=0')
+            ->expectsOutputToContain('will_skip=0')
+            ->assertExitCode(0);
+
+        $this->assertSame(32, PersonalityProfileVariantCloneContent::query()->count());
+
+        $intjAContent = $this->cloneContentByRuntimeType('INTJ-A');
+        $enfjTContent = $this->cloneContentByRuntimeType('ENFJ-T');
+
+        $this->assertSame('en', $intjAContent['locale']);
+        $this->assertSame('Architect', data_get($intjAContent, 'content_json.hero.profile_identity.name'));
+        $this->assertSame('Rational Visionary', data_get($intjAContent, 'content_json.hero.profile_identity.nickname'));
+        $this->assertSame('ENFJ-T', data_get($enfjTContent, 'content_json.hero.profile_identity.code'));
+        $this->assertSame('Protagonist', data_get($enfjTContent, 'content_json.hero.profile_identity.name'));
+        $this->assertSame('Gentle Guide', data_get($enfjTContent, 'content_json.hero.profile_identity.nickname'));
+        $this->assertStringNotContainsString('解锁', json_encode($intjAContent['content_json'], JSON_UNESCAPED_UNICODE) ?: '');
+        $this->assertDoesNotMatchRegularExpression('/[\x{3400}-\x{9FFF}]/u', json_encode($enfjTContent['content_json'], JSON_UNESCAPED_UNICODE) ?: '');
+        $this->assertNotEmpty((array) data_get($intjAContent, 'content_json.overview.paragraphs'));
+        $this->assertNotEmpty((array) data_get($intjAContent, 'content_json.chapters.career.visibleBlocks.0.items'));
+        $this->assertNotEmpty((array) data_get($intjAContent, 'content_json.chapters.growth.visibleBlocks.0.items'));
+        $this->assertNotEmpty((array) data_get($intjAContent, 'content_json.chapters.relationships.visibleBlocks.0.items'));
+        $this->assertSame('insight_list_v1', data_get($intjAContent, 'content_json.chapters.growth.what_energizes.schema_version'));
+        $this->assertCount(4, (array) data_get($intjAContent, 'content_json.chapters.growth.what_energizes.items'));
+        $this->assertCount(4, (array) data_get($intjAContent, 'content_json.chapters.relationships.pitfalls.items'));
+        $this->assertNotEmpty((array) data_get($intjAContent, 'content_json.chapters.career.matched_jobs.job_examples'));
+        $this->assertNotSame('', trim((string) data_get($intjAContent, 'content_json.chapters.career.traits_unlock.title')));
+        $this->assertSame(
+            data_get($intjAContent, 'content_json.chapters.career.influentialTraits.0.label'),
+            data_get($intjAContent, 'content_json.chapters.career.traits_unlock.items.0.label'),
+        );
+    }
+
     public function test_import_selected_type_does_not_overwrite_unselected_rows(): void
     {
         $this->seedZhVariantsForAllMbtiBaseTypes();
@@ -362,13 +406,18 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
 
     private function seedZhVariantsForAllMbtiBaseTypes(): void
     {
+        $this->seedVariantsForAllMbtiBaseTypes('zh-CN');
+    }
+
+    private function seedVariantsForAllMbtiBaseTypes(string $locale): void
+    {
         foreach ($this->mbtiBaseTypes() as $baseCode) {
             $profile = PersonalityProfile::query()->create([
                 'org_id' => 0,
                 'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
                 'type_code' => $baseCode,
                 'slug' => strtolower($baseCode),
-                'locale' => 'zh-CN',
+                'locale' => $locale,
                 'title' => $baseCode.' profile',
                 'status' => 'published',
                 'is_public' => true,
