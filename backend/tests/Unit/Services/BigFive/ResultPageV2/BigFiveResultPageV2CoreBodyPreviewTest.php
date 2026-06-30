@@ -2652,12 +2652,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Console/Commands/MediaAssetsImportSeoImageBundle.php',
+            'backend/app/Console/Commands/MediaAssetsSeoReleaseCleanup.php',
+            'backend/app/Console/Commands/MediaAssetsSeoReleasePreflight.php',
             'backend/app/Console/Kernel.php',
             'backend/app/Services/Cms/SeoImageBundle/SeoImageBundleImporter.php',
         ];
         $kernelChangedLines = [
             '+use App\\Console\\Commands\\MediaAssetsImportSeoImageBundle;',
+            '+use App\\Console\\Commands\\MediaAssetsSeoReleaseCleanup;',
+            '+use App\\Console\\Commands\\MediaAssetsSeoReleasePreflight;',
             '+        MediaAssetsImportSeoImageBundle::class,',
+            '+        MediaAssetsSeoReleaseCleanup::class,',
+            '+        MediaAssetsSeoReleasePreflight::class,',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
@@ -6619,7 +6625,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isSeoImageBundleImporterFile(string $file): bool
     {
-        return $file === 'backend/app/Console/Commands/MediaAssetsImportSeoImageBundle.php'
+        return in_array($file, [
+            'backend/app/Console/Commands/MediaAssetsImportSeoImageBundle.php',
+            'backend/app/Console/Commands/MediaAssetsSeoReleaseCleanup.php',
+            'backend/app/Console/Commands/MediaAssetsSeoReleasePreflight.php',
+        ], true)
             || str_starts_with($file, 'backend/app/Services/Cms/SeoImageBundle/');
     }
 
@@ -8974,7 +8984,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/\bMediaAssetsImportSeoImageBundle\b/u', $line) !== 1) {
+            if (preg_match('/\b(MediaAssetsImportSeoImageBundle|MediaAssetsSeoReleaseCleanup|MediaAssetsSeoReleasePreflight)\b/u', $line) !== 1) {
                 return false;
             }
         }

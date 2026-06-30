@@ -22,6 +22,13 @@ final class SeoImageBundleImporter
 
     private const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
+    private const FORMAT_EXTENSION_TO_MIME = [
+        'jpg' => 'image/jpeg',
+        'jpeg' => 'image/jpeg',
+        'png' => 'image/png',
+        'webp' => 'image/webp',
+    ];
+
     private const MAX_BYTES = 10485760;
 
     private const RECOMMENDED_MAX_BYTES = 3145728;
@@ -94,6 +101,13 @@ final class SeoImageBundleImporter
 
         if ($dryRun) {
             return $this->summary(true, true, 'would_import_media_assets', $package, $translationGroupId, $plans, $this->resolvedMetadataFromPlans($plans, $locales, true), [], $warnings);
+        }
+
+        if ($writeResolvedPackage) {
+            $this->validateMediaRuntimeReadyForResolvedPackage($errors);
+            if ($errors !== []) {
+                return $this->summary(false, false, 'media_runtime_not_ready', $package, $translationGroupId, $plans, [], $errors, $warnings);
+            }
         }
 
         $writtenPlans = [];
@@ -175,7 +189,7 @@ final class SeoImageBundleImporter
             $assetKey = strtolower(trim((string) ($row['asset_key'] ?? '')));
             $role = trim((string) ($row['role'] ?? ''));
             $sourceFile = ltrim(trim((string) ($row['source_file'] ?? '')), '/');
-            $altText = trim((string) ($row['alt_text'] ?? ''));
+            $altText = $this->normalizeAltText($row['alt_text'] ?? null);
             $path = $package.'/'.$sourceFile;
 
             if (! preg_match('/^article\.[a-z0-9][a-z0-9.-]*\.v[0-9]+$/', $assetKey)) {
@@ -222,6 +236,7 @@ final class SeoImageBundleImporter
                 'credit' => $this->nullableString($row['credit'] ?? null),
                 'intended_usage' => array_values(array_filter((array) ($row['intended_usage'] ?? []), 'is_string')),
                 'provenance' => is_array($provenance) ? $provenance : [],
+                'alt_text_localized' => is_array($row['alt_text'] ?? null) ? $row['alt_text'] : null,
                 'file' => $fileMeta,
             ];
         }
@@ -307,7 +322,7 @@ final class SeoImageBundleImporter
         }
 
         $allowedFormats = array_values(array_filter(array_map(
-            static fn (mixed $format): string => strtolower(trim((string) $format)),
+            fn (mixed $format): string => $this->normalizeAllowedFormat($format),
             (array) ($row['format_allowed'] ?? [])
         ), static fn (string $format): bool => $format !== ''));
         if ($allowedFormats !== [] && ! in_array((string) ($fileMeta['mime_type'] ?? ''), $allowedFormats, true)) {
@@ -342,6 +357,10 @@ final class SeoImageBundleImporter
         return [
             ...$asset,
             'existing_asset_id' => $existing?->id,
+            'existing_sync_status' => $existing?->sync_status,
+            'existing_cdn_status' => $existing?->cdn_status,
+            'resume_required' => $existing instanceof MediaAsset
+                && ((string) $existing->sync_status !== MediaAsset::SYNC_SYNCED || (string) $existing->cdn_status !== MediaAsset::CDN_VERIFIED),
             'would_create' => ! $existing instanceof MediaAsset,
             'would_update' => $existing instanceof MediaAsset,
             'would_generate_variants' => true,
@@ -408,6 +427,7 @@ final class SeoImageBundleImporter
                     'source_file' => (string) $plan['source_file'],
                     'intended_usage' => $plan['intended_usage'] ?? [],
                     'provenance' => $plan['provenance'] ?? [],
+                    'alt_text_localized' => $plan['alt_text_localized'] ?? null,
                 ],
             ]),
         ]);
@@ -657,6 +677,29 @@ final class SeoImageBundleImporter
     /**
      * @param  list<array<string,mixed>>  $errors
      */
+    private function validateMediaRuntimeReadyForResolvedPackage(array &$errors): void
+    {
+        if (! (bool) config('fap.media.oss_sync_enabled', false)) {
+            $errors[] = $this->issue('fap.media.oss_sync_enabled', 'media_runtime_not_ready', 'FAP_MEDIA_OSS_SYNC_ENABLED must be true before writing a CMS-ready resolved package.');
+        }
+
+        if (! (bool) config('fap.media.cdn_verify_enabled', false)) {
+            $errors[] = $this->issue('fap.media.cdn_verify_enabled', 'media_runtime_not_ready', 'FAP_MEDIA_CDN_VERIFY_ENABLED must be true before writing a CMS-ready resolved package.');
+        }
+
+        $origin = PublicMediaUrlGuard::canonicalAssetOrigin();
+        if ($origin !== PublicMediaUrlGuard::DEFAULT_ASSET_ORIGIN) {
+            $errors[] = $this->issue('fap.media.asset_origin', 'media_runtime_not_ready', 'FAP_MEDIA_ASSET_ORIGIN must be https://assets.fermatmind.com for daily SEO resolved packages.');
+        }
+
+        if (trim((string) config('fap.media.oss_disk', '')) === '') {
+            $errors[] = $this->issue('fap.media.oss_disk', 'media_runtime_not_ready', 'FAP_MEDIA_OSS_DISK must be configured before writing a CMS-ready resolved package.');
+        }
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     */
     private function assertCanonicalAssetUrl(mixed $url, string $field, array &$errors): void
     {
         $candidate = PublicMediaUrlGuard::sanitizeNullableUrl($url);
@@ -769,6 +812,9 @@ final class SeoImageBundleImporter
             'alt_text' => (string) ($plan['alt_text'] ?? ''),
             'file' => $plan['file'] ?? [],
             'existing_asset_id' => $plan['existing_asset_id'] ?? null,
+            'existing_sync_status' => $plan['existing_sync_status'] ?? null,
+            'existing_cdn_status' => $plan['existing_cdn_status'] ?? null,
+            'resume_required' => (bool) ($plan['resume_required'] ?? false),
             'media_asset_id' => $plan['media_asset_id'] ?? null,
             'would_create' => (bool) ($plan['would_create'] ?? false),
             'would_update' => (bool) ($plan['would_update'] ?? false),
@@ -795,6 +841,41 @@ final class SeoImageBundleImporter
         $trimmed = trim((string) $value);
 
         return $trimmed !== '' ? $trimmed : null;
+    }
+
+    private function normalizeAltText(mixed $value): string
+    {
+        if (is_array($value)) {
+            foreach (['zh-CN', 'zh_cn', 'zh', 'en'] as $localeKey) {
+                $candidate = $this->nullableString($value[$localeKey] ?? null);
+                if ($candidate !== null) {
+                    return $candidate;
+                }
+            }
+
+            foreach ($value as $candidate) {
+                $normalized = $this->nullableString($candidate);
+                if ($normalized !== null) {
+                    return $normalized;
+                }
+            }
+
+            return '';
+        }
+
+        return trim((string) $value);
+    }
+
+    private function normalizeAllowedFormat(mixed $format): string
+    {
+        $normalized = strtolower(trim((string) $format));
+        if ($normalized === '') {
+            return '';
+        }
+
+        $normalized = ltrim($normalized, '.');
+
+        return self::FORMAT_EXTENSION_TO_MIME[$normalized] ?? $normalized;
     }
 
     /**

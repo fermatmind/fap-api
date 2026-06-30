@@ -135,6 +135,8 @@ use App\Console\Commands\FapWeeklyReport;
 use App\Console\Commands\MbtiPrewarm;
 use App\Console\Commands\MbtiUpgradeLegacyPartialUnlocks;
 use App\Console\Commands\MediaAssetsImportSeoImageBundle;
+use App\Console\Commands\MediaAssetsSeoReleaseCleanup;
+use App\Console\Commands\MediaAssetsSeoReleasePreflight;
 use App\Console\Commands\MetricsWeeklyValidity;
 use App\Console\Commands\NormsBig5BootstrapBuild;
 use App\Console\Commands\NormsBig5DriftCheck;
@@ -452,6 +454,8 @@ class Kernel extends ConsoleKernel
         ArticleUpdateImageMetadata::class,
         ArticleWeeklySeoObservationExport::class,
         MediaAssetsImportSeoImageBundle::class,
+        MediaAssetsSeoReleaseCleanup::class,
+        MediaAssetsSeoReleasePreflight::class,
         SeoAgentCmsFaqGapScanCommand::class,
         SeoAgentAutoRollbackGuardCommand::class,
         SeoAgentArticleCmsPublishCanaryCommand::class,
