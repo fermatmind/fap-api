@@ -68,6 +68,12 @@ class AttemptReadController extends Controller
 
     private const SENSITIVE_RESULT_READ_SCALES = ['SDS_20', 'CLINICAL_COMBO_68'];
 
+    private const PRIVATE_NO_STORE_HEADERS = [
+        'Cache-Control' => 'private, no-store',
+        'Pragma' => 'no-cache',
+        'Expires' => '0',
+    ];
+
     public function __construct(
         private AttemptSubmissionService $attemptSubmissionService,
         private ReportGatekeeper $reportGatekeeper,
@@ -123,7 +129,7 @@ class AttemptReadController extends Controller
         $status = (int) ($payload['http_status'] ?? 200);
         unset($payload['http_status']);
 
-        return response()->json($payload, $status);
+        return $this->privateNoStoreJson($payload, $status);
     }
 
     /**
@@ -255,7 +261,7 @@ class AttemptReadController extends Controller
                 $responsePayload['mbti_form_v1'] = $mbtiFormSummary;
             }
 
-            return response()->json($responsePayload);
+            return $this->privateNoStoreJson($responsePayload);
         }
 
         $payload = $result->result_json;
@@ -429,7 +435,7 @@ class AttemptReadController extends Controller
             $responsePayload = IqResultPayloadRedactor::redactAnswerKeys($responsePayload);
         }
 
-        return response()->json($responsePayload);
+        return $this->privateNoStoreJson($responsePayload);
     }
 
     /**
@@ -723,7 +729,7 @@ class AttemptReadController extends Controller
             $responsePayload = IqResultPayloadRedactor::redactAnswerKeys($responsePayload);
         }
 
-        return response()->json($responsePayload);
+        return $this->privateNoStoreJson($responsePayload);
     }
 
     /**
@@ -1205,7 +1211,7 @@ class AttemptReadController extends Controller
             'duration_ms' => $durationMs,
         ]);
 
-        return response()->json($responsePayload);
+        return $this->privateNoStoreJson($responsePayload);
     }
 
     /**
@@ -2784,7 +2790,7 @@ class AttemptReadController extends Controller
             $payload['report'] = [];
         }
 
-        return response()->json($payload, 202);
+        return $this->privateNoStoreJson($payload, 202);
     }
 
     private function failedSubmissionResponse(string $attemptId, array $submissionPayload, bool $includeReport): JsonResponse
@@ -2808,7 +2814,7 @@ class AttemptReadController extends Controller
             $payload['report'] = [];
         }
 
-        return response()->json($payload);
+        return $this->privateNoStoreJson($payload);
     }
 
     private function missingResultAfterSubmissionResponse(string $attemptId, array $submissionPayload, bool $includeReport): JsonResponse
@@ -2827,7 +2833,15 @@ class AttemptReadController extends Controller
             $payload['report'] = [];
         }
 
-        return response()->json($payload);
+        return $this->privateNoStoreJson($payload);
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function privateNoStoreJson(array $payload, int $status = 200): JsonResponse
+    {
+        return response()->json($payload, $status)->withHeaders(self::PRIVATE_NO_STORE_HEADERS);
     }
 
     private function resolveAttemptId(Result $result, ?Attempt $attempt, string $fallbackAttemptId): string

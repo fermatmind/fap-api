@@ -17726,7 +17726,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2362",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "ci_fix_local_checks_passed",
     "title": "IQ-OWNER-30-BACKEND-ASSETS-01: Import owner-original IQ 30 image bank",
     "train_scope": "iq_owner_original_30_launch",
     "transitions": [
@@ -65606,15 +65606,97 @@
     "title": "SECURITY-103-API-03: harden public identifiers and cache headers",
     "train_scope": "security_103_fap_api_audit",
     "depends_on": ["SECURITY-103-API-02"],
-    "status": "planned",
+    "status": "pr_open",
     "checks": {
       "authorization": {
         "status": "pass",
         "evidence": "Authorized by the 2026-06-30 SECURITY-103 attached /goal."
+      },
+      "dependency_security_103_api_02": {
+        "status": "pass",
+        "evidence": "SECURITY-103-API-02 merged and ledger closeout merged into origin/main at 00d160adf5e9a753cce94700e4be5c568d66209e."
+      },
+      "base_sync": {
+        "status": "pass",
+        "command": "git fetch origin main && git rev-parse HEAD && git rev-parse origin/main",
+        "evidence": "HEAD and origin/main both equal 00d160adf5e9a753cce94700e4be5c568d66209e before PR03 commit."
+      },
+      "syntax": {
+        "status": "pass",
+        "command": "php -l backend/app/Http/Controllers/API/V0_3/AttemptReadController.php && php -l backend/app/Http/Controllers/API/V0_3/ShareController.php && php -l backend/tests/Feature/Security/Security103Api03IdentifierCacheBoundaryTest.php",
+        "evidence": "All touched PHP files reported no syntax errors."
+      },
+      "focused_security_boundary": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api03IdentifierCacheBoundaryTest.php --no-ansi",
+        "evidence": "PASS with existing file_get_contents warnings; 2 tests, 44 assertions."
+      },
+      "share_flow_alignment": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/ShareFlowCoreAlignmentTest.php --no-ansi",
+        "evidence": "PASS with existing file_get_contents warnings; 2 tests, 66 assertions."
+      },
+      "mbti_report_contract_regression": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php --no-ansi",
+        "evidence": "PASS with existing file_get_contents warnings; 2 tests, 630 assertions."
+      },
+      "enneagram_share_summary_contract": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/EnneagramShareSummaryContractTest.php --no-ansi",
+        "evidence": "PASS with existing file_get_contents warning; 1 test, 49 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "PASS; route list rendered 231 routes."
+      },
+      "migrate": {
+        "status": "pass",
+        "command": "rm -f /tmp/fap-api-security-103-api-03.sqlite && cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-03.sqlite php artisan migrate --force",
+        "evidence": "PASS; all migrations completed against an isolated sqlite database."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptReadController.php app/Http/Controllers/API/V0_3/ShareController.php tests/Feature/Security/Security103Api03IdentifierCacheBoundaryTest.php",
+        "evidence": "PASS; 3 touched PHP files already formatted."
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "evidence": "PASS; content pack, Big Five, Enneagram, MBTI smoke, events funnel, security, dependency, and webhook/attempt regression gates completed."
+      },
+      "metadata_parse": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "evidence": "PASS before local ledger update; rerun after ledger update before commit."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "PASS before local ledger update; rerun after ledger update before commit."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "command": "git status --short && git diff --name-only && git ls-files --others --exclude-standard",
+        "evidence": "PASS after restoring generated BIG5_OCEAN compiled timestamp/hash churn; diff limited to PR03 controllers and focused security test before ledger update."
+      },
+      "github_pr": {
+        "status": "open",
+        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/2558 for SECURITY-103-API-03 after local checks passed."
+      },
+      "github_verify_bigfive_initial": {
+        "status": "fail",
+        "evidence": "Initial PR #2558 verify-bigfive jobs failed in BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because the runtime freeze classifier did not yet recognize the PR03 ShareController cache/header and diagnostic-fingerprint-only change."
+      },
+      "ci_fix_runtime_freeze_classifier": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_security_103_api_03_share_identifier_cache_boundary --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff --no-ansi",
+        "evidence": "PASS; scoped classifier test and the failed runtime freeze test passed locally after a line-level ShareController allowlist for SECURITY-103-API-03."
       }
     },
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2558",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -65632,6 +65714,21 @@
         "at": "2026-06-30T08:55:17+08:00",
         "status": "planned",
         "note": "Registered authorized SECURITY-103-API-03; execution waits for SECURITY-103-API-02 merge."
+      },
+      {
+        "at": "2026-06-30T09:55:34+08:00",
+        "status": "local_checks_passed",
+        "note": "Route list, isolated sqlite migrate, focused SECURITY-103-API-03 tests, share/report contract regressions, Pint, full ci_verify_mbti, diff check, and scope validation passed."
+      },
+      {
+        "at": "2026-06-30T09:57:26+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2558 for SECURITY-103-API-03 after local validation passed."
+      },
+      {
+        "at": "2026-06-30T10:09:21+08:00",
+        "status": "ci_fix_local_checks_passed",
+        "note": "Added a line-level Big Five runtime freeze classifier allowlist for the PR03 ShareController cache/header and diagnostic fingerprint change after initial verify-bigfive failed; focused classifier and runtime-freeze checks plus Pint passed locally."
       }
     ]
   },

@@ -3813,6 +3813,47 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_security_103_api_03_share_identifier_cache_boundary(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/ShareController.php',
+        ];
+        $shareControllerChangedLines = [
+            '+use App\Support\Logging\SensitiveDiagnosticRedactor;',
+            '+    private const PRIVATE_NO_STORE_HEADERS = [',
+            '+        \'Cache-Control\' => \'private, no-store\',',
+            '+        \'Pragma\' => \'no-cache\',',
+            '+        \'Expires\' => \'0\',',
+            '+    ];',
+            '+',
+            "-            return response()->json(array_merge(['ok' => true], \$result), 200);",
+            "+            return \$this->privateNoStoreJson(array_merge(['ok' => true], \$result));",
+            "-            return response()->json(array_merge(['ok' => true], \$result), 200);",
+            "+            return \$this->privateNoStoreJson(array_merge(['ok' => true], \$result));",
+            "-        return response()->json(array_merge(['ok' => true], \$result), 200);",
+            "+        return \$this->privateNoStoreJson(array_merge(['ok' => true], \$result));",
+            '+    }',
+            '+',
+            '+    /**',
+            '+     * @param  array<string,mixed>  $payload',
+            '+     */',
+            '+    private function privateNoStoreJson(array $payload, int $status = 200): JsonResponse',
+            '+    {',
+            '+        return response()->json($payload, $status)->withHeaders(self::PRIVATE_NO_STORE_HEADERS);',
+            "-            'share_id' => \$shareId,",
+            "-            'attempt_id' => \$attemptId,",
+            "+            'share_fingerprint' => \$shareId !== null ? SensitiveDiagnosticRedactor::fingerprint(\$shareId) : null,",
+            "+            'attempt_fingerprint' => \$attemptId !== null ? SensitiveDiagnosticRedactor::fingerprint(\$attemptId) : null,",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            shareControllerChangedLines: $shareControllerChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_surface_builder_changes(): void
     {
         $changed = [
@@ -4753,6 +4794,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $bootstrapAppChangedLines = null,
         ?array $assessmentEngineChangedLines = null,
         ?array $bigFivePublicProjectionChangedLines = null,
+        ?array $shareControllerChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -5361,6 +5403,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCiAuthBypassHardeningFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Http/Controllers/API/V0_3/ShareController.php'
+                && $this->shareControllerDiffIsSecurity103Api03IdentifierCacheBoundaryOnly(
+                    $shareControllerChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
                 continue;
             }
 
@@ -11067,6 +11122,42 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '+    ], 401)->withHeaders([',
             '+        \'WWW-Authenticate\' => \'Bearer realm="Fermat API", error="invalid_token"\',',
             '+    ]);',
+        ];
+
+        return $changedLines !== [] && array_values($changedLines) === $allowedLines;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function shareControllerDiffIsSecurity103Api03IdentifierCacheBoundaryOnly(array $changedLines): bool
+    {
+        $allowedLines = [
+            '+use App\Support\Logging\SensitiveDiagnosticRedactor;',
+            '+    private const PRIVATE_NO_STORE_HEADERS = [',
+            '+        \'Cache-Control\' => \'private, no-store\',',
+            '+        \'Pragma\' => \'no-cache\',',
+            '+        \'Expires\' => \'0\',',
+            '+    ];',
+            '+',
+            "-            return response()->json(array_merge(['ok' => true], \$result), 200);",
+            "+            return \$this->privateNoStoreJson(array_merge(['ok' => true], \$result));",
+            "-            return response()->json(array_merge(['ok' => true], \$result), 200);",
+            "+            return \$this->privateNoStoreJson(array_merge(['ok' => true], \$result));",
+            "-        return response()->json(array_merge(['ok' => true], \$result), 200);",
+            "+        return \$this->privateNoStoreJson(array_merge(['ok' => true], \$result));",
+            '+    }',
+            '+',
+            '+    /**',
+            '+     * @param  array<string,mixed>  $payload',
+            '+     */',
+            '+    private function privateNoStoreJson(array $payload, int $status = 200): JsonResponse',
+            '+    {',
+            '+        return response()->json($payload, $status)->withHeaders(self::PRIVATE_NO_STORE_HEADERS);',
+            "-            'share_id' => \$shareId,",
+            "-            'attempt_id' => \$attemptId,",
+            "+            'share_fingerprint' => \$shareId !== null ? SensitiveDiagnosticRedactor::fingerprint(\$shareId) : null,",
+            "+            'attempt_fingerprint' => \$attemptId !== null ? SensitiveDiagnosticRedactor::fingerprint(\$attemptId) : null,",
         ];
 
         return $changedLines !== [] && array_values($changedLines) === $allowedLines;
