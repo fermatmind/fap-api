@@ -96,6 +96,10 @@ final class BigFiveNormObservationCaptureWriter
             return BigFiveNormCaptureDecision::reject('invalid_eligibility');
         }
 
+        if (! $this->hasExplicitNormingConsent($context)) {
+            return BigFiveNormCaptureDecision::reject('explicit_norming_consent_required');
+        }
+
         $attemptSource = strtolower(trim((string) ($context['attempt_source'] ?? 'real')));
         if (in_array($attemptSource, self::EXCLUDED_ATTEMPT_SOURCES, true)) {
             return BigFiveNormCaptureDecision::reject('source_excluded');
@@ -229,6 +233,20 @@ final class BigFiveNormObservationCaptureWriter
         $value = trim($value);
 
         return $value === '' ? null : $value;
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     */
+    private function hasExplicitNormingConsent(array $context): bool
+    {
+        foreach (['norming_consent_accepted', 'consent_to_norming', 'consent_to_store'] as $key) {
+            if (($context[$key] ?? null) === true) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
