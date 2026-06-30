@@ -65606,7 +65606,7 @@
     "title": "SECURITY-103-API-03: harden public identifiers and cache headers",
     "train_scope": "security_103_fap_api_audit",
     "depends_on": ["SECURITY-103-API-02"],
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -65680,10 +65680,14 @@
         "status": "pass",
         "command": "git status --short && git diff --name-only && git ls-files --others --exclude-standard",
         "evidence": "PASS after restoring generated BIG5_OCEAN compiled timestamp/hash churn; diff limited to PR03 controllers and focused security test before ledger update."
+      },
+      "github_pr": {
+        "status": "open",
+        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/2558 for SECURITY-103-API-03 after local checks passed."
       }
     },
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2558",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -65706,6 +65710,11 @@
         "at": "2026-06-30T09:55:34+08:00",
         "status": "local_checks_passed",
         "note": "Route list, isolated sqlite migrate, focused SECURITY-103-API-03 tests, share/report contract regressions, Pint, full ci_verify_mbti, diff check, and scope validation passed."
+      },
+      {
+        "at": "2026-06-30T09:57:26+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2558 for SECURITY-103-API-03 after local validation passed."
       }
     ]
   },
