@@ -262,6 +262,451 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: SECURITY-103-API-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/security-103-api-01-entitlement-gates
+    title: "SECURITY-103-API-01: harden MBTI result/PDF token entitlement gates"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Harden MBTI PDF/result token authorization, entitlement, variant, locked/full access boundaries.
+      - Ensure result-page PDF tokens cannot promote locked/free exports to full report access.
+      - Bind MBTI result-page PDF tokens to the current org, attempt, and attempt owner.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/app/Services/Report/Pdf/ResultPagePdfTokenService.php
+      - backend/tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, CMS, SEO runtime, sitemap, llms, production imports, DB migrations, deployment, payment provider behavior, or non-MBTI scoring.
+      - Broaden token privileges beyond the entitlement/variant encoded by the signed token.
+      - Expose exploit-ready token details in PR text.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-01.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptReadController.php app/Services/Report/Pdf/ResultPagePdfTokenService.php tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php
+      - bash backend/scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-103-API-02
+    repo: fap-api
+    depends_on: [SECURITY-103-API-01]
+    branch: codex/security-103-api-02-scoring-redaction
+    title: "SECURITY-103-API-02: harden scoring payload redaction and claim gates"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Harden IQ/EQ/Big Five public payload redaction, answer-key/test-bank leakage, claim gating, and no-consent analytics storage.
+      - Keep scoring semantics and item-bank authority unchanged unless redaction requires a public boundary guard.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/app/Services/Assessment/**
+      - backend/app/Services/Iq/**
+      - backend/app/Services/Eq/**
+      - backend/app/Services/BigFive/**
+      - backend/app/Services/Analytics/**
+      - backend/tests/Feature/Security/Security103Api02ScoringPayloadBoundaryTest.php
+      - backend/tests/Unit/Services/Iq/**
+      - backend/tests/Unit/Eq/**
+      - backend/tests/Unit/Services/BigFive/**
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change question content, answer keys, scoring algorithms, production norms, payment/order behavior, CMS, SEO runtime, deploy, or fap-web.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-02.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api02ScoringPayloadBoundaryTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-103-API-03
+    repo: fap-api
+    depends_on: [SECURITY-103-API-02]
+    branch: codex/security-103-api-03-identifiers-cache-redaction
+    title: "SECURITY-103-API-03: harden public identifiers and cache headers"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Harden public cache headers, tenant/attempt identifiers, anonymous production attempt access identifiers, and audit/staging identifier exposure.
+    allowed_paths:
+      - backend/app/Http/Controllers/**
+      - backend/app/Http/Middleware/**
+      - backend/app/Support/Logging/**
+      - backend/app/Services/Attempts/**
+      - backend/app/Services/Report/**
+      - backend/tests/Feature/Security/Security103Api03IdentifierCacheBoundaryTest.php
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change scoring, CMS publish, SEO runtime, production import, deploy workflows, DB migrations, or fap-web.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-03.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api03IdentifierCacheBoundaryTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-103-API-04
+    repo: fap-api
+    depends_on: [SECURITY-103-API-03]
+    branch: codex/security-103-api-04-deploy-workflow-hardening
+    title: "SECURITY-103-API-04: harden deploy workflow and runner command boundaries"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Harden production deploy auto-run, workflow dispatch, command injection, hardcoded production activation phrase, and runner plan-scope trust boundaries.
+    allowed_paths:
+      - .github/workflows/**
+      - backend/scripts/**
+      - scripts/**
+      - deploy.php
+      - backend/tests/Feature/Security/Security103Api04DeployWorkflowBoundaryTest.php
+      - backend/tests/Unit/Security/**
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Run staging deploy, production deploy, server verification, production imports, CMS writes, or frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-04.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api04DeployWorkflowBoundaryTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-103-API-05
+    repo: fap-api
+    depends_on: [SECURITY-103-API-04]
+    branch: codex/security-103-api-05-import-integrity-hardening
+    title: "SECURITY-103-API-05: harden production import integrity gates"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Harden production import downgrade/overwrite risks, ssh-keyscan trust, JSONL after-SHA gates, empty review artifacts, and manifest integrity.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Services/**/Import/**
+      - backend/app/Services/**/Importer/**
+      - backend/scripts/**
+      - scripts/**
+      - backend/tests/Feature/Security/Security103Api05ImportIntegrityBoundaryTest.php
+      - backend/tests/Feature/Console/**
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Run production import, staging overwrite, deploy, CMS publish, SEO runtime mutation, or fap-web changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-05.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api05ImportIntegrityBoundaryTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-103-API-06
+    repo: fap-api
+    depends_on: [SECURITY-103-API-05]
+    branch: codex/security-103-api-06-cms-publish-gates
+    title: "SECURITY-103-API-06: harden CMS publish approval and canary gates"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Harden writer/article locks, family/help/repair publish gates, ContentPage review gates, and canary evidence binding.
+    allowed_paths:
+      - backend/app/Console/Commands/**/*Article*
+      - backend/app/Console/Commands/**/*Cms*
+      - backend/app/Services/Cms/**
+      - backend/app/Services/ContentPage/**
+      - backend/app/Http/Controllers/API/V0_5/Internal/**
+      - backend/tests/Feature/Security/Security103Api06CmsPublishGateBoundaryTest.php
+      - backend/tests/Feature/V0_5/**
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Perform CMS writes, controlled publish, promotion, production import, SEO/search mutation, deploy, DB migrations, or fap-web changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-06.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api06CmsPublishGateBoundaryTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-103-API-07
+    repo: fap-api
+    depends_on: [SECURITY-103-API-06]
+    branch: codex/security-103-api-07-seo-scanner-export-safety
+    title: "SECURITY-103-API-07: harden SEO scanner submission and export safety"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Harden runtime SEO scanner private paths, cross-tenant CMS path export, GSC CSV formula injection, search submit kill switches, and SEO ingest privacy sanitization.
+    allowed_paths:
+      - backend/app/Console/Commands/**/*Seo*
+      - backend/app/Services/Seo/**
+      - backend/app/Services/SeoIntel/**
+      - backend/docs/seo/**
+      - backend/tests/Feature/Security/Security103Api07SeoScannerExportBoundaryTest.php
+      - backend/tests/Feature/SeoIntel/**
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Submit live URLs, mutate sitemap/llms/canonical/noindex/JSON-LD, run production SEO jobs, deploy, or change fap-web.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-07.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api07SeoScannerExportBoundaryTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-103-API-08
+    repo: fap-api
+    depends_on: [SECURITY-103-API-07]
+    branch: codex/security-103-api-08-seo-ops-access-controls
+    title: "SECURITY-103-API-08: harden SEO ops preview and access controls"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Harden SEO ops API/TOTP middleware, public preview route host/IP controls, public SEO ops artifacts, and dashboard access boundaries.
+    allowed_paths:
+      - backend/app/Http/Middleware/**
+      - backend/app/Http/Controllers/**/Seo*
+      - backend/app/Services/Seo/**
+      - backend/app/Services/SeoIntel/**
+      - backend/config/**
+      - backend/tests/Feature/Security/Security103Api08SeoOpsAccessBoundaryTest.php
+      - backend/tests/Feature/SeoIntel/**
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change production DNS/CDN/security groups, run deploy, expose public dashboards, mutate search/sitemap/llms, or change fap-web.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-08.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api08SeoOpsAccessBoundaryTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-103-API-09
+    repo: fap-api
+    depends_on: [SECURITY-103-API-08]
+    branch: codex/security-103-api-09-ai-career-salary-assets
+    title: "SECURITY-103-API-09: harden AI career salary asset exposure"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Harden AI impact assets, career/salary previews, public endpoint exposure, import overwrite, and display asset manifest authorization.
+    allowed_paths:
+      - backend/app/Http/Controllers/**/Career/**
+      - backend/app/Services/Career/**
+      - backend/app/Console/Commands/**/*Career*
+      - backend/tests/Feature/Security/Security103Api09CareerAssetBoundaryTest.php
+      - backend/tests/Feature/Career/**
+      - backend/tests/Unit/Services/Career/**
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Run production imports, overwrite public assets, change sitemap/llms/search submission, deploy, CMS writes, or fap-web.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-09.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api09CareerAssetBoundaryTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-103-API-10
+    repo: fap-api
+    depends_on: [SECURITY-103-API-09]
+    branch: codex/security-103-api-10-dailygiving-order-data
+    title: "SECURITY-103-API-10: harden DailyGiving order transaction exposure"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Harden DailyGiving proof/raw URLs, non-publishable records, private transaction metadata, and production order details.
+    allowed_paths:
+      - backend/app/Http/Controllers/**/DailyGiving/**
+      - backend/app/Services/DailyGiving/**
+      - backend/app/Services/Commerce/**
+      - backend/app/Http/Controllers/API/V0_3/**/*Order*
+      - backend/tests/Feature/Security/Security103Api10DailyGivingOrderBoundaryTest.php
+      - backend/tests/Feature/Commerce/**
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change payment provider contracts, run production writes/imports, publish records, alter public proof approval policy beyond backend gates, deploy, or change fap-web.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-10.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api10DailyGivingOrderBoundaryTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-103-API-11
+    repo: fap-api
+    depends_on: [SECURITY-103-API-10]
+    branch: codex/security-103-api-11-cache-locale-fail-closed
+    title: "SECURITY-103-API-11: harden public cache and locale fail-closed behavior"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Harden warm cache stale public data, public career detail locale poisoning, and LKG/cache republishing of unpublished content.
+    allowed_paths:
+      - backend/app/Services/Career/**
+      - backend/app/Services/**/Cache/**
+      - backend/app/Console/Commands/**/*Warm*
+      - backend/app/Console/Commands/**/*Cache*
+      - backend/tests/Feature/Security/Security103Api11CacheLocaleBoundaryTest.php
+      - backend/tests/Feature/Career/**
+      - backend/tests/Feature/Console/**
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Warm production caches, publish/unpublish content, run production imports, mutate sitemap/llms/search, deploy, or change fap-web.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-11.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api11CacheLocaleBoundaryTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-103-API-12
+    repo: fap-api
+    depends_on: [SECURITY-103-API-11]
+    branch: codex/security-103-api-12-docs-secrets-redaction
+    title: "SECURITY-103-API-12: redact committed secrets references and track rotation"
+    train_scope: security_103_fap_api_audit
+    status: user_authorized
+    scope:
+      - Redact IndexNow/API token/preflight docs leaks, operational infrastructure docs, committed sensitive metadata, and create rotation-tracking follow-up evidence only.
+    allowed_paths:
+      - docs/**
+      - backend/docs/**
+      - 03-env-config/**
+      - generated/pr-train-sidecar-issues/**
+      - backend/tests/Unit/Security/SecurityGuardrailsTest.php
+      - backend/tests/Feature/Security/Security103Api12DocsSecretsRedactionTest.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rotate live secrets, call secret providers, run production deploy/import, mutate CMS/search, or change runtime code outside docs/test guardrails.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-103-api-12.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Security/Security103Api12DocsSecretsRedactionTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Security/SecurityGuardrailsTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-ASSET-02
     repo: fap-api
     depends_on: [PR-EQ-ASSET-01]
