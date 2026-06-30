@@ -7,6 +7,7 @@ use App\Http\Requests\V0_3\GetShareRequest;
 use App\Http\Requests\V0_3\ShareClickRequest;
 use App\Http\Requests\V0_3\ShareViewRequest;
 use App\Services\V0_3\ShareFlowService;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -16,6 +17,12 @@ use Throwable;
 
 class ShareController extends Controller
 {
+    private const PRIVATE_NO_STORE_HEADERS = [
+        'Cache-Control' => 'private, no-store',
+        'Pragma' => 'no-cache',
+        'Expires' => '0',
+    ];
+
     public function __construct(private readonly ShareFlowService $shareFlow) {}
 
     public function click(ShareClickRequest $request, string $shareId): JsonResponse
@@ -30,7 +37,7 @@ class ShareController extends Controller
                 $this->requestMeta($request)
             );
 
-            return response()->json(array_merge(['ok' => true], $result), 200);
+            return $this->privateNoStoreJson(array_merge(['ok' => true], $result));
         } catch (Throwable $e) {
             $this->logShareFlowFailed($request, 'click', $routeShareId, null, $e);
             throw $e;
@@ -43,7 +50,7 @@ class ShareController extends Controller
             $input = array_merge($request->validated(), $this->requestMeta($request));
             $result = $this->shareFlow->getShareLinkForAttempt($id, $input);
 
-            return response()->json(array_merge(['ok' => true], $result), 200);
+            return $this->privateNoStoreJson(array_merge(['ok' => true], $result));
         } catch (Throwable $e) {
             $this->logShareFlowFailed($request, 'get_share', null, $id, $e);
             throw $e;
@@ -55,7 +62,15 @@ class ShareController extends Controller
         $shareId = (string) ($request->validated()['id'] ?? $id);
         $result = $this->shareFlow->getShareView($shareId);
 
-        return response()->json(array_merge(['ok' => true], $result), 200);
+        return $this->privateNoStoreJson(array_merge(['ok' => true], $result));
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function privateNoStoreJson(array $payload, int $status = 200): JsonResponse
+    {
+        return response()->json($payload, $status)->withHeaders(self::PRIVATE_NO_STORE_HEADERS);
     }
 
     /**
@@ -84,8 +99,8 @@ class ShareController extends Controller
     ): void {
         Log::error('share_flow_failed', [
             'action' => $action,
-            'share_id' => $shareId,
-            'attempt_id' => $attemptId,
+            'share_fingerprint' => $shareId !== null ? SensitiveDiagnosticRedactor::fingerprint($shareId) : null,
+            'attempt_fingerprint' => $attemptId !== null ? SensitiveDiagnosticRedactor::fingerprint($attemptId) : null,
             'org_id' => $this->resolveOrgId($request),
             'request_id' => $this->resolveRequestId($request),
             'exception' => $e,
