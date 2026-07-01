@@ -34,13 +34,13 @@ final class Mbti64CmsProjectionDraftWriter
 
     private const V8_5_V5_BILINGUAL_64_PACKAGE_VERSION = 'mbti64_zh32_en32_v8_5_v5_bilingual_v1';
 
-    private const V8_5_V5_BILINGUAL_64_PACKAGE_FILE_SHA256 = 'a0fd058b82ec40940b8c92546c461086d3bfca7a4b0521aeb92e5cc8b0517b67';
+    private const V8_5_V5_BILINGUAL_64_PACKAGE_FILE_SHA256 = '38e1e325c8ed38c2181d8ce01d315b12c161690691dcc699605ecc186d72f286';
 
-    private const V8_5_V5_BILINGUAL_64_EMBEDDED_PACKAGE_SHA256 = '13ec2c55caf2cf7b48650739fabadfb09ec4a02214cb1af99d5e47d8af2499d8';
+    private const V8_5_V5_BILINGUAL_64_EMBEDDED_PACKAGE_SHA256 = '937842c2a152f5943f641470f030cb88d08e318df5cfb40d24d6449d6999d8ad';
 
-    private const V8_5_V5_BILINGUAL_64_QA_FILE_SHA256 = 'a6757d87af71db28815446269eb3a6c5ab9e1fbe0a3176191f1ebc25be2933b4';
+    private const V8_5_V5_BILINGUAL_64_QA_FILE_SHA256 = 'f0afbfcdb795050764951b2d1c08779b65bdc7f96cb2482ffba7fc957db398b7';
 
-    private const V8_5_V5_BILINGUAL_64_EMBEDDED_QA_SHA256 = 'd433814924c172e88ad0a52bda665ddee1ea1d6bbe8c6bb9be46a47367baaf1a';
+    private const V8_5_V5_BILINGUAL_64_EMBEDDED_QA_SHA256 = '9246f6f2644c218b6b5e4d678a2364b558a21bf2ee7d1d2cf96ef43fe21d6011';
 
     private const VISIBLE_QUERY_BACKED_3_URLS = [
         'https://fermatmind.com/en/personality/enfj-a',
