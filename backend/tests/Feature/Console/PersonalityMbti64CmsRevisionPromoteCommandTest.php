@@ -42,6 +42,8 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
 
     private const REMAINING_58_EXCLUDED_URLS = self::NEXT_BATCH_6_URLS;
 
+    private const V8_5_V5_BILINGUAL_64_PACKAGE_PATH = 'docs/seo/personality/mbti64-zh32-en32-v8-5-v5-bilingual-package-2026-07-01.json';
+
     public function test_dry_run_lists_eight_latest_revisions_without_live_writes(): void
     {
         $this->seedTargets();
@@ -477,6 +479,38 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_dry_run_supports_fixed_v8_5_v5_bilingual_sixty_four_subset_without_live_writes(): void
+    {
+        $this->seedProjectionTargets();
+        $packagePath = base_path(self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH);
+        $this->createNextBatchSixDraftRevisions($packagePath);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH,
+            '--dry-run' => true,
+            '--v8-5-v5-bilingual-64' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertSame('v8_5_v5_bilingual_64', $payload['contract']['subset']['mode']);
+        $this->assertFalse($payload['contract']['subset']['arbitrary_url_subset_allowed']);
+        $this->assertSame($this->v85V5Bilingual64Urls(), $payload['contract']['subset']['allowed_urls']);
+        $this->assertSame(64, $payload['row_count']);
+        $this->assertSame(64, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(64, $payload['would_promote_count']);
+        $this->assertSame($this->v85V5Bilingual64Urls(), array_column($payload['rows'], 'url'));
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
     public function test_write_promotes_eighty_eight_agent_projection_revisions_without_index_search_side_effects(): void
     {
         $targets = $this->seedProjectionTargets();
@@ -710,6 +744,56 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         }
     }
 
+    public function test_write_promotes_only_fixed_v8_5_v5_bilingual_sixty_four_subset(): void
+    {
+        $targets = $this->seedProjectionTargets();
+        $packagePath = base_path(self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH);
+        $this->createNextBatchSixDraftRevisions($packagePath);
+        $options = $this->promoteWriteOptions(self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH);
+        $options['--v8-5-v5-bilingual-64'] = true;
+        $profileBefore = $this->profilePublishState($targets['zh-CN|INTJ']);
+        $variantBefore = $this->variantPublishState($targets['zh-CN|INTJ-A']);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['write']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame('v8_5_v5_bilingual_64', $payload['contract']['subset']['mode']);
+        $this->assertSame(64, $payload['row_count']);
+        $this->assertSame(64, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(64, $payload['promoted_count']);
+        $this->assertSame(64, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->where('section_key', 'mbti64_comparison_a_vs_t')->count());
+        $this->assertSame($profileBefore, $this->profilePublishState($targets['zh-CN|INTJ']));
+        $this->assertSame($variantBefore, $this->variantPublishState($targets['zh-CN|INTJ-A']));
+
+        foreach ($this->expectedV85V5FirstClassSectionKeys() as $sectionKey) {
+            $this->assertSame(64, PersonalityProfileVariantSection::query()->where('section_key', $sectionKey)->count(), $sectionKey);
+        }
+
+        $seo = PersonalityProfileVariantSeoMeta::query()
+            ->where('personality_profile_variant_id', (int) $targets['zh-CN|INTJ-A']->id)
+            ->firstOrFail();
+        $this->assertSame('INTJ-A 人格：战略思维、独立判断与长期执行', $seo->seo_title);
+        $this->assertSame('/zh/personality/intj-a', $seo->canonical_url);
+        $this->assertSame('index,follow', $seo->robots);
+
+        $section = PersonalityProfileVariantSection::query()
+            ->where('personality_profile_variant_id', (int) $targets['zh-CN|INTJ-A']->id)
+            ->where('section_key', 'meaning')
+            ->firstOrFail();
+        $this->assertStringContainsString('INTJ-A', (string) $section->body_md);
+        $this->assertSame('mbti64_v8_5_v5_first_class_section', $section->payload_json['source'] ?? null);
+        $this->assertSame('core-reading', $section->payload_json['raw']['raw']['id'] ?? null);
+    }
+
     public function test_visible_query_backed_three_subset_is_idempotent_after_write(): void
     {
         $this->seedProjectionTargets();
@@ -910,6 +994,41 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_v8_5_v5_bilingual_sixty_four_subset_fails_closed_when_fixed_url_is_missing_or_extra_url_is_present(): void
+    {
+        $this->seedProjectionTargets();
+        $package = $this->v85V5Bilingual64Package();
+        $package['recommendations'][0]['target_url'] = 'https://fermatmind.com/en/personality/intj-a-vs-intj-t';
+        $package['target_count'] = 64;
+        $packagePath = $this->writePackage($package);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--v8-5-v5-bilingual-64' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode, Artisan::output());
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('unsupported_v8_5_v5_bilingual_64_package_sha256', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertContains('v8_5_v5_bilingual_64_url_set_mismatch', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertContains('v8_5_v5_bilingual_64_subset_incomplete', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
     public function test_agent_projection_subset_modes_are_mutually_exclusive(): void
     {
         $this->seedProjectionTargets();
@@ -923,6 +1042,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             '--fresh-query-backed-5' => true,
             '--next-batch-6' => true,
             '--remaining-58' => true,
+            '--v8-5-v5-bilingual-64' => true,
             '--json' => true,
         ]);
 
@@ -1491,6 +1611,22 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
     }
 
     /**
+     * @return array<string,mixed>
+     */
+    private function v85V5Bilingual64Package(): array
+    {
+        $package = json_decode(
+            (string) File::get(base_path(self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH)),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+        $this->assertIsArray($package);
+
+        return $package;
+    }
+
+    /**
      * @return list<string>
      */
     private function remainingFiftyEightUrls(): array
@@ -1511,6 +1647,24 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         sort($remaining);
 
         return $remaining;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function v85V5Bilingual64Urls(): array
+    {
+        $urls = [];
+        foreach (['en', 'zh'] as $prefix) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                foreach (['a', 't'] as $variant) {
+                    $urls[] = 'https://fermatmind.com/'.$prefix.'/personality/'.strtolower($typeCode).'-'.$variant;
+                }
+            }
+        }
+        sort($urls);
+
+        return $urls;
     }
 
     private function targetKeyForUrl(string $url): string
@@ -1675,6 +1829,9 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $recommendations = is_array($recommendation['recommendations'] ?? null)
             ? $recommendation['recommendations']
             : [];
+        if ($recommendations === [] && (string) ($recommendation['package_version'] ?? '') === '') {
+            return $this->v85V5FirstClassFieldsForRecommendation($recommendation, $locale);
+        }
 
         return [
             'url' => (string) ($recommendation['target_url'] ?? ''),
@@ -1691,6 +1848,37 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             'faq' => array_values((array) ($recommendations['faq'] ?? [])),
             'internal_links' => array_values((array) ($recommendations['internal_links'] ?? [])),
             'differentiation_notes' => array_values((array) ($recommendations['differentiation_notes'] ?? [])),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $recommendation
+     * @return array<string,mixed>
+     */
+    private function v85V5FirstClassFieldsForRecommendation(array $recommendation, string $locale): array
+    {
+        $seo = is_array($recommendation['seo'] ?? null) ? $recommendation['seo'] : [];
+        $geoSummary = is_array($recommendation['geo_summary'] ?? null) ? $recommendation['geo_summary'] : [];
+        $aiBlock = is_array($geoSummary['ai_search_answer_block'] ?? null) ? $geoSummary['ai_search_answer_block'] : [];
+
+        return [
+            'url' => (string) ($recommendation['target_url'] ?? ''),
+            'locale' => $locale,
+            'page_type' => 'variant',
+            'seo' => [
+                'title' => (string) ($seo['title'] ?? ''),
+                'description' => (string) ($seo['description'] ?? ''),
+                'h1' => (string) ($recommendation['h1'] ?? ''),
+            ],
+            'content' => [
+                'quick_answer' => (string) ($geoSummary['direct_answer'] ?? ($aiBlock['what_is'] ?? '')),
+            ] + $this->v85V5SectionFieldsForRecommendation($recommendation),
+            'faq' => array_values((array) ($recommendation['faq'] ?? [])),
+            'internal_links' => array_values((array) ($recommendation['internal_links'] ?? [])),
+            'differentiation_notes' => array_filter([
+                (string) ($recommendation['core_tension'] ?? ''),
+                (string) ((is_array($recommendation['reader_experience'] ?? null) ? $recommendation['reader_experience'] : [])['structure_model'] ?? ''),
+            ]),
         ];
     }
 
@@ -1741,6 +1929,112 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             'common_misreads',
             'similar_types',
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function expectedV85V5FirstClassSectionKeys(): array
+    {
+        return [
+            'meaning',
+            'a_t_difference',
+            'core_traits',
+            'careers_work_style',
+            'relationships_communication',
+            'strengths_blind_spots',
+            'similar_types',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $recommendation
+     * @return array<string,mixed>
+     */
+    private function v85V5SectionFieldsForRecommendation(array $recommendation): array
+    {
+        $sections = [];
+        foreach (array_values((array) ($recommendation['modules'] ?? [])) as $index => $section) {
+            if (! is_array($section)) {
+                continue;
+            }
+
+            $sectionKey = $this->v85V5FirstClassSectionKey((string) ($section['id'] ?? ($section['key'] ?? '')), $index);
+            if ($sectionKey === '') {
+                continue;
+            }
+
+            $body = $this->v85V5ModuleBody($section);
+            if ($body === '') {
+                continue;
+            }
+
+            $sections[$sectionKey] = [
+                'title' => (string) ($section['title'] ?? ''),
+                'body' => $body,
+                'source_key' => (string) ($section['id'] ?? ($section['key'] ?? '')),
+                'source' => 'mbti64_v8_5_v5_first_class_section',
+                'raw' => $section,
+            ];
+        }
+
+        return $sections;
+    }
+
+    /**
+     * @param  array<string,mixed>  $section
+     */
+    private function v85V5ModuleBody(array $section): string
+    {
+        $parts = [];
+        if (isset($section['insight']) && is_string($section['insight']) && trim($section['insight']) !== '') {
+            $parts[] = trim($section['insight']);
+        }
+
+        $paragraphs = is_array($section['paragraphs'] ?? null) ? array_values((array) $section['paragraphs']) : [];
+        $paragraphLines = [];
+        foreach ($paragraphs as $paragraph) {
+            if (is_string($paragraph) && trim($paragraph) !== '') {
+                $paragraphLines[] = trim($paragraph);
+            }
+        }
+        if ($paragraphLines !== []) {
+            $parts[] = implode("\n\n", $paragraphLines);
+        }
+
+        return trim(implode("\n\n", $parts));
+    }
+
+    private function v85V5FirstClassSectionKey(string $sourceKey, int $position): string
+    {
+        $map = [
+            'core_reading' => 'meaning',
+            'logic_evidence_judgment' => 'core_traits',
+            'independence_decision_control' => 'a_t_difference',
+            'will_standards_long_termism' => 'strengths_blind_spots',
+            'curiosity_revision' => 'core_traits',
+            'emotional_blind_spots_pressure_feedback' => 'strengths_blind_spots',
+            'social_friction_feedback_relationships' => 'relationships_communication',
+            'work_career_scenarios' => 'careers_work_style',
+            'relationships_intimacy' => 'relationships_communication',
+            'faq_usage_boundary' => 'similar_types',
+            'core_reading' => 'meaning',
+            'rational_standard' => 'core_traits',
+            'independence_control' => 'a_t_difference',
+            'willpower_ambition' => 'strengths_blind_spots',
+            'curiosity_revision' => 'core_traits',
+            'emotional_blindspot' => 'strengths_blind_spots',
+            'social_friction' => 'relationships_communication',
+            'career_workflow' => 'careers_work_style',
+            'relationships' => 'relationships_communication',
+            'faq_boundary' => 'similar_types',
+        ];
+        $normalized = strtolower(trim(preg_replace('/[^a-zA-Z0-9_]+/', '_', $sourceKey) ?? '', '_'));
+        if (isset($map[$normalized])) {
+            return $map[$normalized];
+        }
+
+        return $this->expectedV85V5FirstClassSectionKeys()[$position] ?? '';
     }
 
     private function firstClassSectionKey(string $sourceKey, int $position): string

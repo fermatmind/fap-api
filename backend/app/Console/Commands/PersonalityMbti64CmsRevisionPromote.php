@@ -30,6 +30,7 @@ final class PersonalityMbti64CmsRevisionPromote extends Command
         {--fresh-query-backed-5 : Restrict agent projection promotion planning/write to the fresh 5 query-backed MBTI64 URLs}
         {--next-batch-6 : Restrict agent projection promotion planning/write to the approved next-batch 6 MBTI64 URLs}
         {--remaining-58 : Restrict agent projection promotion planning/write to the approved 58 remaining competitor-gap MBTI64 variant URLs}
+        {--v8-5-v5-bilingual-64 : Restrict agent projection promotion planning/write to the fixed 64 MBTI64 V8.5/V5 bilingual variant URLs}
         {--json : Emit the full JSON summary}
         {--output= : Optional path to write the JSON summary}
         {--promote-live-content : Required for --write; confirms live CMS content promotion intent}
@@ -143,6 +144,7 @@ final class PersonalityMbti64CmsRevisionPromote extends Command
             'fresh_query_backed_5' => (bool) $this->option('fresh-query-backed-5'),
             'next_batch_6' => (bool) $this->option('next-batch-6'),
             'remaining_58' => (bool) $this->option('remaining-58'),
+            'v8_5_v5_bilingual_64' => (bool) $this->option('v8-5-v5-bilingual-64'),
         ];
     }
 
