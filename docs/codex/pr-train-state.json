@@ -58582,6 +58582,120 @@
       "repo": "fap-api",
       "status": "planned",
       "title": "chore(iq): freeze legacy SVG assets and add provenance verification"
+    },
+    "MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01": {
+      "id": "MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01",
+      "repo": "fap-api",
+      "branch": "codex/mbti-desktop-clone-locked-blocks-content-01",
+      "base": "main",
+      "title": "MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01: improve MBTI desktop clone locked block content",
+      "status": "local_validation_passed_fixture_gate_resolved",
+      "commit_sha": "ae8e6732ef577344b388fb8f95110e242c95e82b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2575",
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": null,
+      "scope": {
+        "content_baseline_only": true,
+        "zh_cn_desktop_clone_locked_blocks": true,
+        "en_desktop_clone_locked_blocks": true,
+        "en_intro_visible_copy_cleanup": true,
+        "fap_web_modified": false,
+        "frontend_fallback_authority": false,
+        "api_runtime_change": false,
+        "schema_change": false,
+        "db_cms_mutation": false,
+        "deploy": false,
+        "publish": false,
+        "search_channel_action": false,
+        "url_submission": false
+      },
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User explicitly requested PR-train execution for MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01 and authorized manifest/state updates in the implementation plan."
+        },
+        "scope": {
+          "status": "pass",
+          "allowed_files": [
+            "content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json",
+            "content_baselines/personality_clone/mbti_desktop_clone.en.json",
+            "docs/codex/pr-train.yaml",
+            "docs/codex/pr-train-state.json"
+          ],
+          "evidence": "Follow-up only updates PR-train state; existing PR diff remains within declared allowed files."
+        },
+        "content_audit": {
+          "status": "pass",
+          "commands": [
+            "custom Python audit for 32 fullCode coverage, lockedBlocks/visibleBlocks duplicates, A/T same-path reuse, forbidden placeholder/debug/generated/formula/hard-absolute phrases, and manual samples INTJ-A/T, ENFP-A/T, INFJ-T, ESTJ-A, ISFP-T, ISTP-A"
+          ],
+          "evidence": "zh-CN/en: 32 variants each; lockedBlocks body rows 1344 each; visibleBlocks body rows 1152 each; exact duplicate body text 0; A/T same-path body cells 0; placeholder/debug/generated/formula/hard-absolute scan hits 0. No additional content JSON edits required in this follow-up."
+        },
+        "focused_tests": {
+          "status": "pass",
+          "commands": [
+            "php artisan test tests/Feature/PersonalityCms/PersonalityDesktopCloneBaselineImportTest.php tests/Feature/PersonalityCms/PersonalityDesktopCloneSchemaModelTest.php tests/Feature/V0_5/PersonalityDesktopClonePublicApiTest.php"
+          ],
+          "evidence": "24 tests passed, 1394 assertions."
+        },
+        "import_dry_run": {
+          "status": "pass",
+          "commands": [
+            "php artisan personality:import-desktop-clone-baseline --dry-run --locale=zh-CN",
+            "php artisan personality:import-desktop-clone-baseline --dry-run --locale=en"
+          ],
+          "evidence": "zh-CN dry-run passed: rows_found=32, errors_count=0. en dry-run passed after local fixture initialization: rows_found=32, errors_count=0."
+        },
+        "common_validation": {
+          "status": "pass",
+          "commands": [
+            "python3 -m json.tool content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json >/dev/null",
+            "python3 -m json.tool content_baselines/personality_clone/mbti_desktop_clone.en.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\"); puts \"yaml ok\"'",
+            "git diff --check"
+          ],
+          "evidence": "JSON parse passed for zh-CN/en/state; YAML parse passed for pr-train.yaml; git diff --check passed."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR #2575 will be rechecked after pushing the follow-up state commit."
+        },
+        "fixture_gate": {
+          "status": "pass",
+          "commands": [
+            "php artisan personality:import-local-baseline --dry-run --locale=en --source-dir=../content_baselines/personality",
+            "php artisan personality:import-local-baseline --locale=en --status=published --upsert --source-dir=../content_baselines/personality",
+            "php artisan tinker --execute=<count en MBTI profiles/variants>"
+          ],
+          "evidence": "Resolved local ENFJ-A locale=en blocker by initializing local development DB from existing public personality baseline. Verified local en MBTI owner rows: profiles_en=16, variants_en=32. This was local DB setup only; no production import."
+        }
+      },
+      "events": [
+        {
+          "at": "2026-07-01T19:04:34+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered MBTI desktop clone locked blocks content quality PR after explicit user request."
+        },
+        {
+          "at": "2026-07-01T19:21:55+08:00",
+          "status": "draft_pr_ready_local_validation_partial",
+          "summary": "Content audit and scoped tests passed; zh-CN dry-run passed; en dry-run blocked by missing local en personality_profile_variant row."
+        },
+        {
+          "at": "2026-07-01T19:23:15+08:00",
+          "status": "draft_pr_opened_local_en_dry_run_blocked",
+          "summary": "Opened draft PR #2575; branch commit recorded; English dry-run remains blocked by missing local ENFJ-A variant fixture."
+        },
+        {
+          "at": "2026-07-01T19:31:15+08:00",
+          "status": "local_validation_passed_fixture_gate_resolved",
+          "summary": "Re-audited all zh-CN/en desktop clone locked/visible content; initialized local en owner rows via existing public personality baseline importer; zh-CN and en desktop clone dry-runs both pass."
+        }
+      ]
     }
   },
   "prs": {
@@ -65495,7 +65609,9 @@
     "branch": "codex/security-103-api-02-scoring-redaction",
     "title": "SECURITY-103-API-02: harden scoring payload redaction and claim gates",
     "train_scope": "security_103_fap_api_audit",
-    "depends_on": ["SECURITY-103-API-01"],
+    "depends_on": [
+      "SECURITY-103-API-01"
+    ],
     "status": "merged",
     "checks": {
       "authorization": {
@@ -65605,7 +65721,9 @@
     "branch": "codex/security-103-api-03-identifiers-cache-redaction",
     "title": "SECURITY-103-API-03: harden public identifiers and cache headers",
     "train_scope": "security_103_fap_api_audit",
-    "depends_on": ["SECURITY-103-API-02"],
+    "depends_on": [
+      "SECURITY-103-API-02"
+    ],
     "status": "merged",
     "checks": {
       "authorization": {
@@ -65748,7 +65866,9 @@
     "branch": "codex/security-103-api-04-deploy-workflow-hardening",
     "title": "SECURITY-103-API-04: harden deploy workflow and runner command boundaries",
     "train_scope": "security_103_fap_api_audit",
-    "depends_on": ["SECURITY-103-API-03"],
+    "depends_on": [
+      "SECURITY-103-API-03"
+    ],
     "status": "planned",
     "checks": {
       "authorization": {
@@ -65785,7 +65905,9 @@
     "branch": "codex/security-103-api-05-import-integrity-hardening",
     "title": "SECURITY-103-API-05: harden production import integrity gates",
     "train_scope": "security_103_fap_api_audit",
-    "depends_on": ["SECURITY-103-API-04"],
+    "depends_on": [
+      "SECURITY-103-API-04"
+    ],
     "status": "planned",
     "checks": {
       "authorization": {
@@ -65822,7 +65944,9 @@
     "branch": "codex/security-103-api-06-cms-publish-gates",
     "title": "SECURITY-103-API-06: harden CMS publish approval and canary gates",
     "train_scope": "security_103_fap_api_audit",
-    "depends_on": ["SECURITY-103-API-05"],
+    "depends_on": [
+      "SECURITY-103-API-05"
+    ],
     "status": "planned",
     "checks": {
       "authorization": {
@@ -65859,7 +65983,9 @@
     "branch": "codex/security-103-api-07-seo-scanner-export-safety",
     "title": "SECURITY-103-API-07: harden SEO scanner submission and export safety",
     "train_scope": "security_103_fap_api_audit",
-    "depends_on": ["SECURITY-103-API-06"],
+    "depends_on": [
+      "SECURITY-103-API-06"
+    ],
     "status": "planned",
     "checks": {
       "authorization": {
@@ -65896,7 +66022,9 @@
     "branch": "codex/security-103-api-08-seo-ops-access-controls",
     "title": "SECURITY-103-API-08: harden SEO ops preview and access controls",
     "train_scope": "security_103_fap_api_audit",
-    "depends_on": ["SECURITY-103-API-07"],
+    "depends_on": [
+      "SECURITY-103-API-07"
+    ],
     "status": "planned",
     "checks": {
       "authorization": {
@@ -65933,7 +66061,9 @@
     "branch": "codex/security-103-api-09-ai-career-salary-assets",
     "title": "SECURITY-103-API-09: harden AI career salary asset exposure",
     "train_scope": "security_103_fap_api_audit",
-    "depends_on": ["SECURITY-103-API-08"],
+    "depends_on": [
+      "SECURITY-103-API-08"
+    ],
     "status": "planned",
     "checks": {
       "authorization": {
@@ -65970,7 +66100,9 @@
     "branch": "codex/security-103-api-10-dailygiving-order-data",
     "title": "SECURITY-103-API-10: harden DailyGiving order transaction exposure",
     "train_scope": "security_103_fap_api_audit",
-    "depends_on": ["SECURITY-103-API-09"],
+    "depends_on": [
+      "SECURITY-103-API-09"
+    ],
     "status": "planned",
     "checks": {
       "authorization": {
@@ -66007,7 +66139,9 @@
     "branch": "codex/security-103-api-11-cache-locale-fail-closed",
     "title": "SECURITY-103-API-11: harden public cache and locale fail-closed behavior",
     "train_scope": "security_103_fap_api_audit",
-    "depends_on": ["SECURITY-103-API-10"],
+    "depends_on": [
+      "SECURITY-103-API-10"
+    ],
     "status": "planned",
     "checks": {
       "authorization": {
@@ -66044,7 +66178,9 @@
     "branch": "codex/security-103-api-12-docs-secrets-redaction",
     "title": "SECURITY-103-API-12: redact committed secrets references and track rotation",
     "train_scope": "security_103_fap_api_audit",
-    "depends_on": ["SECURITY-103-API-11"],
+    "depends_on": [
+      "SECURITY-103-API-11"
+    ],
     "status": "planned",
     "checks": {
       "authorization": {
@@ -66071,6 +66207,120 @@
         "at": "2026-06-30T08:55:17+08:00",
         "status": "planned",
         "note": "Registered authorized SECURITY-103-API-12; execution waits for SECURITY-103-API-11 merge."
+      }
+    ]
+  },
+  "MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01": {
+    "id": "MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01",
+    "repo": "fap-api",
+    "branch": "codex/mbti-desktop-clone-locked-blocks-content-01",
+    "base": "main",
+    "title": "MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01: improve MBTI desktop clone locked block content",
+    "status": "local_validation_passed_fixture_gate_resolved",
+    "commit_sha": "ae8e6732ef577344b388fb8f95110e242c95e82b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2575",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "next_task": null,
+    "scope": {
+      "content_baseline_only": true,
+      "zh_cn_desktop_clone_locked_blocks": true,
+      "en_desktop_clone_locked_blocks": true,
+      "en_intro_visible_copy_cleanup": true,
+      "fap_web_modified": false,
+      "frontend_fallback_authority": false,
+      "api_runtime_change": false,
+      "schema_change": false,
+      "db_cms_mutation": false,
+      "deploy": false,
+      "publish": false,
+      "search_channel_action": false,
+      "url_submission": false
+    },
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly requested PR-train execution for MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01 and authorized manifest/state updates in the implementation plan."
+      },
+      "scope": {
+        "status": "pass",
+        "allowed_files": [
+          "content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json",
+          "content_baselines/personality_clone/mbti_desktop_clone.en.json",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "evidence": "Follow-up only updates PR-train state; existing PR diff remains within declared allowed files."
+      },
+      "content_audit": {
+        "status": "pass",
+        "commands": [
+          "custom Python audit for 32 fullCode coverage, lockedBlocks/visibleBlocks duplicates, A/T same-path reuse, forbidden placeholder/debug/generated/formula/hard-absolute phrases, and manual samples INTJ-A/T, ENFP-A/T, INFJ-T, ESTJ-A, ISFP-T, ISTP-A"
+        ],
+        "evidence": "zh-CN/en: 32 variants each; lockedBlocks body rows 1344 each; visibleBlocks body rows 1152 each; exact duplicate body text 0; A/T same-path body cells 0; placeholder/debug/generated/formula/hard-absolute scan hits 0. No additional content JSON edits required in this follow-up."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "commands": [
+          "php artisan test tests/Feature/PersonalityCms/PersonalityDesktopCloneBaselineImportTest.php tests/Feature/PersonalityCms/PersonalityDesktopCloneSchemaModelTest.php tests/Feature/V0_5/PersonalityDesktopClonePublicApiTest.php"
+        ],
+        "evidence": "24 tests passed, 1394 assertions."
+      },
+      "import_dry_run": {
+        "status": "pass",
+        "commands": [
+          "php artisan personality:import-desktop-clone-baseline --dry-run --locale=zh-CN",
+          "php artisan personality:import-desktop-clone-baseline --dry-run --locale=en"
+        ],
+        "evidence": "zh-CN dry-run passed: rows_found=32, errors_count=0. en dry-run passed after local fixture initialization: rows_found=32, errors_count=0."
+      },
+      "common_validation": {
+        "status": "pass",
+        "commands": [
+          "python3 -m json.tool content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json >/dev/null",
+          "python3 -m json.tool content_baselines/personality_clone/mbti_desktop_clone.en.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\"); puts \"yaml ok\"'",
+          "git diff --check"
+        ],
+        "evidence": "JSON parse passed for zh-CN/en/state; YAML parse passed for pr-train.yaml; git diff --check passed."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #2575 will be rechecked after pushing the follow-up state commit."
+      },
+      "fixture_gate": {
+        "status": "pass",
+        "commands": [
+          "php artisan personality:import-local-baseline --dry-run --locale=en --source-dir=../content_baselines/personality",
+          "php artisan personality:import-local-baseline --locale=en --status=published --upsert --source-dir=../content_baselines/personality",
+          "php artisan tinker --execute=<count en MBTI profiles/variants>"
+        ],
+        "evidence": "Resolved local ENFJ-A locale=en blocker by initializing local development DB from existing public personality baseline. Verified local en MBTI owner rows: profiles_en=16, variants_en=32. This was local DB setup only; no production import."
+      }
+    },
+    "events": [
+      {
+        "at": "2026-07-01T19:04:34+08:00",
+        "status": "manifest_registered",
+        "summary": "Registered MBTI desktop clone locked blocks content quality PR after explicit user request."
+      },
+      {
+        "at": "2026-07-01T19:21:55+08:00",
+        "status": "draft_pr_ready_local_validation_partial",
+        "summary": "Content audit and scoped tests passed; zh-CN dry-run passed; en dry-run blocked by missing local en personality_profile_variant row."
+      },
+      {
+        "at": "2026-07-01T19:23:15+08:00",
+        "status": "draft_pr_opened_local_en_dry_run_blocked",
+        "summary": "Opened draft PR #2575; branch commit recorded; English dry-run remains blocked by missing local ENFJ-A variant fixture."
+      },
+      {
+        "at": "2026-07-01T19:31:15+08:00",
+        "status": "local_validation_passed_fixture_gate_resolved",
+        "summary": "Re-audited all zh-CN/en desktop clone locked/visible content; initialized local en owner rows via existing public personality baseline importer; zh-CN and en desktop clone dry-runs both pass."
       }
     ]
   }
