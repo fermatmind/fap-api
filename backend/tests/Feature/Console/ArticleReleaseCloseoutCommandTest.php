@@ -108,6 +108,130 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
         $this->assertErrorCodeMissing($payload, 'hreflang_policy_missing');
     }
 
+    public function test_closeout_accepts_reciprocal_hreflang_gate_policy(): void
+    {
+        $article = $this->createReleasedArticle();
+        $article->seoMeta?->forceFill([
+            'schema_json' => [
+                'editorial_package_v1' => [
+                    'article_schema_enabled' => true,
+                    'breadcrumb_schema_enabled' => true,
+                    'faq_schema_enabled' => false,
+                    'hreflang_gate_v1' => [
+                        'enabled' => true,
+                        'policy' => 'reciprocal_counterparts_verified',
+                        'verified_by' => 'articles:seo-gate-rollout',
+                        'verified_at' => '2026-07-01T04:00:00Z',
+                    ],
+                ],
+            ],
+        ])->save();
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('enabled', data_get($payload, 'checks.schema_hreflang.schema_state'));
+        $this->assertSame('enabled', data_get($payload, 'checks.schema_hreflang.hreflang_state'));
+        $this->assertTrue(data_get($payload, 'checks.schema_hreflang.hreflang_reciprocal_policy_recorded'));
+        $this->assertFalse(data_get($payload, 'checks.schema_hreflang.hreflang_no_hreflang_policy_recorded'));
+        $this->assertErrorCodeMissing($payload, 'hreflang_policy_missing');
+    }
+
+    public function test_closeout_accepts_faq_schema_when_generated_jsonld_contains_faqpage(): void
+    {
+        $article = $this->createReleasedArticle();
+        $article->seoMeta?->forceFill([
+            'schema_json' => [
+                'editorial_package_v1' => [
+                    'article_schema_enabled' => true,
+                    'breadcrumb_schema_enabled' => true,
+                    'faq_schema_enabled' => true,
+                    'answer_surface_policy' => 'editor_supplied',
+                    'answer_surface_visibility' => 'visible',
+                    'answer_surface_v1' => [
+                        'faq_items' => [
+                            [
+                                'question' => '霍兰德测试能直接决定专业吗？',
+                                'answer' => '不能。它只能帮助识别兴趣倾向，仍需结合学校政策、课程和个人条件判断。',
+                            ],
+                        ],
+                    ],
+                    'hreflang_gate_v1' => [
+                        'enabled' => false,
+                        'policy' => 'no_hreflang',
+                        'reason' => 'no_direct_english_counterpart_approved',
+                    ],
+                ],
+            ],
+        ])->save();
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('enabled', data_get($payload, 'checks.schema_hreflang.schema_state'));
+        $this->assertSame('enabled', data_get($payload, 'checks.schema_hreflang.faq_schema_state'));
+        $this->assertTrue(data_get($payload, 'checks.schema_hreflang.faq_schema_enabled'));
+        $this->assertTrue(data_get($payload, 'checks.schema_hreflang.faqpage_generated'));
+        $this->assertErrorCodeMissing($payload, 'faq_schema_enabled_without_faqpage');
+        $this->assertErrorCodeMissing($payload, 'faq_schema_not_held');
+    }
+
+    public function test_closeout_blocks_faq_schema_when_generated_jsonld_has_no_faqpage(): void
+    {
+        $article = $this->createReleasedArticle();
+        $article->seoMeta?->forceFill([
+            'schema_json' => [
+                'editorial_package_v1' => [
+                    'article_schema_enabled' => true,
+                    'breadcrumb_schema_enabled' => true,
+                    'faq_schema_enabled' => true,
+                    'hreflang_gate_v1' => [
+                        'enabled' => false,
+                        'policy' => 'no_hreflang',
+                        'reason' => 'no_direct_english_counterpart_approved',
+                    ],
+                ],
+            ],
+        ])->save();
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('BLOCKED_OPERATOR_INPUT', $payload['decision']);
+        $this->assertSame('enabled_without_faqpage', data_get($payload, 'checks.schema_hreflang.faq_schema_state'));
+        $this->assertFalse(data_get($payload, 'checks.schema_hreflang.faqpage_generated'));
+        $this->assertErrorCode($payload, 'faq_schema_enabled_without_faqpage');
+    }
+
     public function test_missing_search_queue_blocks_search_closeout(): void
     {
         $article = $this->createReleasedArticle();
