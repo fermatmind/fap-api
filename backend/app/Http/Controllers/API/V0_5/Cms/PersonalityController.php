@@ -29,13 +29,22 @@ class PersonalityController extends Controller
     private const MBTI64_V85_SECTION_PREFIX = 'v8_5_';
 
     private const MBTI64_V85_DUPLICATE_LEGACY_SECTION_KEYS = [
+        'quick_answer',
         'meaning',
         'a_t_difference',
         'core_traits',
         'careers_work_style',
         'relationships_communication',
         'strengths_blind_spots',
+        'common_misreads',
         'similar_types',
+        'faq',
+    ];
+
+    private const MBTI64_V85_DUPLICATE_LEGACY_SECTION_PREFIXES = [
+        'career.',
+        'growth.',
+        'relationships.',
     ];
 
     use RespondsWithNotFound;
@@ -1636,7 +1645,15 @@ class PersonalityController extends Controller
         }
 
         if ($this->hasV85FirstClassSections($sections->keys()->all())) {
-            foreach (self::MBTI64_V85_DUPLICATE_LEGACY_SECTION_KEYS as $sectionKey) {
+            foreach ($sections->keys()->all() as $sectionKey) {
+                if (! is_string($sectionKey)) {
+                    continue;
+                }
+
+                if (! $this->shouldSuppressV85DuplicateSection($sectionKey)) {
+                    continue;
+                }
+
                 $sections->forget($sectionKey);
             }
         }
@@ -1657,6 +1674,21 @@ class PersonalityController extends Controller
     {
         foreach ($sectionKeys as $sectionKey) {
             if (str_starts_with((string) $sectionKey, self::MBTI64_V85_SECTION_PREFIX)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function shouldSuppressV85DuplicateSection(string $sectionKey): bool
+    {
+        if (in_array($sectionKey, self::MBTI64_V85_DUPLICATE_LEGACY_SECTION_KEYS, true)) {
+            return true;
+        }
+
+        foreach (self::MBTI64_V85_DUPLICATE_LEGACY_SECTION_PREFIXES as $prefix) {
+            if (str_starts_with($sectionKey, $prefix)) {
                 return true;
             }
         }
