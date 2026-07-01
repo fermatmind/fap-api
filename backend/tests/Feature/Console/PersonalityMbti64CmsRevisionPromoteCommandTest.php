@@ -836,6 +836,19 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         foreach ($this->expectedV85V5FirstClassSectionKeys() as $legacySectionKey) {
             $this->assertNotContains($legacySectionKey, $sectionKeys, $legacySectionKey);
         }
+        foreach ($this->expectedV85V5SuppressedPublicSectionKeys() as $legacySectionKey) {
+            $this->assertNotContains($legacySectionKey, $sectionKeys, $legacySectionKey);
+        }
+        foreach ($sectionKeys as $sectionKey) {
+            $this->assertFalse(str_starts_with($sectionKey, 'career.'), $sectionKey);
+            $this->assertFalse(str_starts_with($sectionKey, 'growth.'), $sectionKey);
+            $this->assertFalse(str_starts_with($sectionKey, 'relationships.'), $sectionKey);
+        }
+
+        $this->assertContains('related_content', $sectionKeys);
+        $this->assertContains('mbti64_promotion_metadata', $sectionKeys);
+        $this->assertNoExactDuplicateVisibleApiParagraphs((array) ($detail['sections'] ?? []));
+
         $apiModule = collect((array) ($detail['sections'] ?? []))
             ->firstWhere('section_key', 'v8_5_module_01_core_reading');
         $this->assertIsArray($apiModule);
@@ -2021,6 +2034,48 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             'strengths_blind_spots',
             'similar_types',
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function expectedV85V5SuppressedPublicSectionKeys(): array
+    {
+        return [
+            'quick_answer',
+            'common_misreads',
+            'faq',
+        ];
+    }
+
+    /**
+     * @param  array<int,array<string,mixed>>  $sections
+     */
+    private function assertNoExactDuplicateVisibleApiParagraphs(array $sections): void
+    {
+        $seen = [];
+        foreach ($sections as $section) {
+            $sectionKey = (string) ($section['section_key'] ?? '');
+            $body = (string) ($section['body_md'] ?? '');
+            foreach (preg_split('/\R{2,}/u', $body) ?: [] as $index => $paragraph) {
+                $normalized = trim((string) preg_replace('/\s+/u', ' ', $paragraph));
+                if (mb_strlen($normalized) < 18) {
+                    continue;
+                }
+
+                $this->assertArrayNotHasKey(
+                    $normalized,
+                    $seen,
+                    sprintf(
+                        'Duplicate visible API paragraph in %s[%d]; first seen at %s.',
+                        $sectionKey,
+                        $index,
+                        $seen[$normalized] ?? 'unknown'
+                    )
+                );
+                $seen[$normalized] = sprintf('%s[%d]', $sectionKey, $index);
+            }
+        }
     }
 
     /**
