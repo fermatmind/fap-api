@@ -58589,9 +58589,9 @@
       "branch": "codex/mbti-desktop-clone-locked-blocks-content-01",
       "base": "main",
       "title": "MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01: improve MBTI desktop clone locked block content",
-      "status": "draft_pr_ready_local_validation_partial",
-      "commit_sha": null,
-      "pr_url": null,
+      "status": "draft_pr_opened_local_en_dry_run_blocked",
+      "commit_sha": "2f7ab5a9522bbd02219cbf6f816ccb014bcf25a4",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2575",
       "failure_reason": "English dry-run is blocked by local DB fixture gap: Missing personality_profile_variant for full_code=ENFJ-A locale=en. Per plan, PR must be opened as draft until this prerequisite is available or verified in CI/staging fixture context.",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -58661,8 +58661,8 @@
           "evidence": "JSON parse passed for zh-CN/en/state; YAML parse passed for pr-train.yaml; git diff --check passed."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": "Draft PR not opened yet."
+          "status": "not_applicable_draft",
+          "evidence": "Draft PR opened; required GitHub checks are not merge-gating until blocker is resolved and PR is marked ready."
         }
       },
       "events": [
@@ -58675,6 +58675,11 @@
           "at": "2026-07-01T19:21:55+08:00",
           "status": "draft_pr_ready_local_validation_partial",
           "summary": "Content audit and scoped tests passed; zh-CN dry-run passed; en dry-run blocked by missing local en personality_profile_variant row."
+        },
+        {
+          "at": "2026-07-01T19:23:15+08:00",
+          "status": "draft_pr_opened_local_en_dry_run_blocked",
+          "summary": "Opened draft PR #2575; branch commit recorded; English dry-run remains blocked by missing local ENFJ-A variant fixture."
         }
       ]
     }
@@ -66197,9 +66202,9 @@
     "branch": "codex/mbti-desktop-clone-locked-blocks-content-01",
     "base": "main",
     "title": "MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01: improve MBTI desktop clone locked block content",
-    "status": "draft_pr_ready_local_validation_partial",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "draft_pr_opened_local_en_dry_run_blocked",
+    "commit_sha": "2f7ab5a9522bbd02219cbf6f816ccb014bcf25a4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2575",
     "failure_reason": "English dry-run is blocked by local DB fixture gap: Missing personality_profile_variant for full_code=ENFJ-A locale=en. Per plan, PR must be opened as draft until this prerequisite is available or verified in CI/staging fixture context.",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -66269,8 +66274,8 @@
         "evidence": "JSON parse passed for zh-CN/en/state; YAML parse passed for pr-train.yaml; git diff --check passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "Draft PR not opened yet."
+        "status": "not_applicable_draft",
+        "evidence": "Draft PR opened; required GitHub checks are not merge-gating until blocker is resolved and PR is marked ready."
       }
     },
     "events": [
@@ -66283,6 +66288,11 @@
         "at": "2026-07-01T19:21:55+08:00",
         "status": "draft_pr_ready_local_validation_partial",
         "summary": "Content audit and scoped tests passed; zh-CN dry-run passed; en dry-run blocked by missing local en personality_profile_variant row."
+      },
+      {
+        "at": "2026-07-01T19:23:15+08:00",
+        "status": "draft_pr_opened_local_en_dry_run_blocked",
+        "summary": "Opened draft PR #2575; branch commit recorded; English dry-run remains blocked by missing local ENFJ-A variant fixture."
       }
     ]
   }
