@@ -20,7 +20,7 @@ final class ReportPdfDocumentService
 
     public const MBTI_RESULT_PAGE_SNAPSHOT_SURFACE = 'mbti_result_page_snapshot';
 
-    public const MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION = 'mbti.result_page_snapshot.v3';
+    public const MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION = 'mbti.result_page_snapshot.v4';
 
     public const RESULT_PAGE_EXPORT_ENGINE = 'gotenberg_chromium';
 
