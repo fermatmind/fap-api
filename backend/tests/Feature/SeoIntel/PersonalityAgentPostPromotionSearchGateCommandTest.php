@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Tests\Feature\SeoIntel;
 
 use App\Console\Commands\PersonalityAgentPostPromotionSearchGateCommand;
+use App\Models\PersonalityProfile;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
 use PHPUnit\Framework\Attributes\Test;
@@ -15,6 +17,8 @@ use Tests\TestCase;
 
 final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
 {
+    private const V8_5_V5_BILINGUAL_64_PACKAGE_PATH = 'docs/seo/personality/mbti64-zh32-en32-v8-5-v5-bilingual-package-2026-07-01.json';
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -199,6 +203,75 @@ final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
         Http::assertNothingSent();
     }
 
+    #[Test]
+    public function dry_run_supports_fixed_v8_5_v5_bilingual_sixty_four_package_without_search_mutation(): void
+    {
+        $canonicalUrls = $this->v85V5Bilingual64Urls();
+        foreach ($canonicalUrls as $canonicalUrl) {
+            $this->seedSeoUrl($canonicalUrl, [
+                'locale' => str_contains($canonicalUrl, '/zh/') ? 'zh-CN' : 'en',
+                'entity_id_or_slug' => $this->targetKeyForUrl($canonicalUrl),
+            ]);
+        }
+        $this->fakeHttp($canonicalUrls);
+
+        $countsBefore = $this->rowCounts();
+        $output = $this->runGate([
+            '--dry-run' => true,
+            '--json' => true,
+            '--package' => self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH,
+            '--v8-5-v5-bilingual-64' => true,
+        ]);
+
+        $this->assertSame('GO_FOR_INDEXNOW_DRY_RUN', $output['final_decision'] ?? null);
+        $this->assertTrue((bool) ($output['ok'] ?? false));
+        $this->assertSame(64, $output['target_count'] ?? null);
+        $this->assertSame('v8_5_v5_bilingual_64', data_get($output, 'contract.mode'));
+        $this->assertSame(64, data_get($output, 'contract.target_count'));
+        $this->assertSame(64, data_get($output, 'counts.surface_ok'));
+        $this->assertSame(64, data_get($output, 'counts.sitemap_llms_ok'));
+        $this->assertSame(64, data_get($output, 'counts.url_truth_ready'));
+        $this->assertSame(64, data_get($output, 'counts.planned_or_duplicate_safe'));
+        $this->assertSame([], $output['issues'] ?? []);
+        $this->assertFalse((bool) data_get($output, 'safety_flags.enqueue_attempted', true));
+        $this->assertFalse((bool) data_get($output, 'safety_flags.search_submission_attempted', true));
+        $this->assertFalse((bool) data_get($output, 'safety_flags.url_truth_write_attempted', true));
+        $this->assertSame($countsBefore, $this->rowCounts());
+    }
+
+    #[Test]
+    public function fixed_v8_5_v5_bilingual_package_fails_closed_when_url_set_is_not_exact(): void
+    {
+        Http::fake();
+        $package = json_decode(
+            (string) File::get(base_path(self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH)),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+        $this->assertIsArray($package);
+        array_pop($package['recommendations']);
+        $package['target_count'] = 63;
+        $tempPath = sys_get_temp_dir().'/mbti64-v85-v5-bilingual-63-for-search-gate.json';
+        File::put($tempPath, json_encode($package, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+
+        $exitCode = Artisan::call('personality:agent-post-promotion-search-gate', [
+            '--dry-run' => true,
+            '--json' => true,
+            '--package' => $tempPath,
+            '--v8-5-v5-bilingual-64' => true,
+        ]);
+        $output = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('NO_GO_SAFETY_VIOLATION', $output['final_decision'] ?? null);
+        $this->assertContains('unsupported_v8_5_v5_bilingual_64_package_file_sha256', $output['issues'] ?? []);
+        $this->assertContains('v8_5_v5_bilingual_64_target_count_mismatch', $output['issues'] ?? []);
+        $this->assertContains('v8_5_v5_bilingual_64_url_set_mismatch', $output['issues'] ?? []);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        Http::assertNothingSent();
+    }
+
     /**
      * @param  array<string, mixed>  $arguments
      * @return array<string, mixed>
@@ -362,5 +435,34 @@ final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
             'queue_items' => DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count(),
             'seo_urls' => DB::connection('seo_intel')->table('seo_urls')->count(),
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function v85V5Bilingual64Urls(): array
+    {
+        $urls = [];
+        foreach (['en', 'zh'] as $prefix) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                foreach (['a', 't'] as $variant) {
+                    $urls[] = 'https://fermatmind.com/'.$prefix.'/personality/'.strtolower($typeCode).'-'.$variant;
+                }
+            }
+        }
+        sort($urls);
+
+        return $urls;
+    }
+
+    private function targetKeyForUrl(string $url): string
+    {
+        $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
+        $this->assertMatchesRegularExpression('#^/(?<prefix>en|zh)/personality/(?<type>[a-z]{4})-(?<variant>a|t)$#i', $path);
+        preg_match('#^/(?<prefix>en|zh)/personality/(?<type>[a-z]{4})-(?<variant>a|t)$#i', $path, $matches);
+        $locale = $matches['prefix'] === 'zh' ? 'zh-CN' : 'en';
+        $runtimeTypeCode = strtoupper((string) $matches['type']).'-'.strtoupper((string) $matches['variant']);
+
+        return $locale.'|'.$runtimeTypeCode;
     }
 }
