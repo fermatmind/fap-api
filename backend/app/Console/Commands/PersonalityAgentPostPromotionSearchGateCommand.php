@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Models\PersonalityProfile;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueuePlanner;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
@@ -15,6 +16,14 @@ use Illuminate\Support\Facades\Schema;
 final class PersonalityAgentPostPromotionSearchGateCommand extends Command
 {
     private const SCHEMA_VERSION = 'personality-agent-post-promotion-search-gate.v1';
+
+    private const V8_5_V5_BILINGUAL_64_ARTIFACT = 'MBTI64-ZH32-EN32-V8_5-V5-BILINGUAL-PACKAGE-QA-01';
+
+    private const V8_5_V5_BILINGUAL_64_PACKAGE_VERSION = 'mbti64_zh32_en32_v8_5_v5_bilingual_v1';
+
+    private const V8_5_V5_BILINGUAL_64_PACKAGE_FILE_SHA256 = 'a0fd058b82ec40940b8c92546c461086d3bfca7a4b0521aeb92e5cc8b0517b67';
+
+    private const V8_5_V5_BILINGUAL_64_EMBEDDED_PACKAGE_SHA256 = '13ec2c55caf2cf7b48650739fabadfb09ec4a02214cb1af99d5e47d8af2499d8';
 
     private const SURFACE_PATHS = [
         'sitemap' => '/sitemap.xml',
@@ -48,6 +57,7 @@ final class PersonalityAgentPostPromotionSearchGateCommand extends Command
         {--channel=indexnow : Search Channel to dry-run; v1 supports indexnow}
         {--urls= : Comma-separated canonical URLs/paths or path to JSON list}
         {--package= : Optional agent/promotion package JSON containing target URLs}
+        {--v8-5-v5-bilingual-64 : Require the fixed 64 MBTI64 V8.5/V5 bilingual package and URL set}
         {--base-url= : Public site base URL; defaults to seo_intel.public_canonical_host}
         {--timeout=10 : Public HTTP timeout seconds}';
 
@@ -68,6 +78,11 @@ final class PersonalityAgentPostPromotionSearchGateCommand extends Command
         $targets = $this->targets($baseUrl);
         if ($targets === []) {
             return $this->finish($this->payload('NO_GO_SURFACE_OR_SAFETY', ['target_urls_missing']));
+        }
+
+        $fixedSubsetIssues = $this->fixedV85V5Bilingual64Issues($targets);
+        if ($fixedSubsetIssues !== []) {
+            return $this->finish($this->payload('NO_GO_SAFETY_VIOLATION', $fixedSubsetIssues));
         }
 
         $surfaceTexts = $this->fetchSurfaceTexts($baseUrl);
@@ -111,6 +126,7 @@ final class PersonalityAgentPostPromotionSearchGateCommand extends Command
             'generated_at' => Carbon::now('UTC')->toIso8601String(),
             'channel' => $channel,
             'base_url' => $baseUrl,
+            'contract' => $this->contractSummary($targets),
             'target_count' => count($targets),
             'targets' => $results,
             'counts' => [
@@ -148,7 +164,9 @@ final class PersonalityAgentPostPromotionSearchGateCommand extends Command
             if ($path !== null) {
                 $decoded = json_decode((string) file_get_contents($path), true);
                 if (is_array($decoded)) {
-                    $values = array_merge($values, $this->collectTargetValues($decoded));
+                    $values = array_merge($values, $this->v85V5Bilingual64Requested()
+                        ? $this->collectRecommendationTargetUrls($decoded)
+                        : $this->collectTargetValues($decoded));
                 }
             }
         }
@@ -163,6 +181,136 @@ final class PersonalityAgentPostPromotionSearchGateCommand extends Command
         }
 
         return array_values($targets);
+    }
+
+    private function v85V5Bilingual64Requested(): bool
+    {
+        return (bool) $this->option('v8-5-v5-bilingual-64');
+    }
+
+    /**
+     * @param  array<mixed>  $payload
+     * @return list<string>
+     */
+    private function collectRecommendationTargetUrls(array $payload): array
+    {
+        $recommendations = is_array($payload['recommendations'] ?? null)
+            ? array_values((array) $payload['recommendations'])
+            : [];
+
+        $values = [];
+        foreach ($recommendations as $recommendation) {
+            if (! is_array($recommendation)) {
+                continue;
+            }
+            $targetUrl = (string) ($recommendation['target_url'] ?? '');
+            if ($targetUrl !== '') {
+                $values[] = $targetUrl;
+            }
+        }
+
+        return $values;
+    }
+
+    /**
+     * @param  list<array{canonical_url:string, path:string}>  $targets
+     * @return list<string>
+     */
+    private function fixedV85V5Bilingual64Issues(array $targets): array
+    {
+        if (! $this->v85V5Bilingual64Requested()) {
+            return [];
+        }
+
+        $issues = [];
+        $packagePath = trim((string) $this->option('package'));
+        $path = $this->safePath($packagePath);
+        if ($packagePath === '' || $path === null) {
+            $issues[] = 'v8_5_v5_bilingual_64_package_required';
+
+            return $issues;
+        }
+
+        if (hash_file('sha256', $path) !== self::V8_5_V5_BILINGUAL_64_PACKAGE_FILE_SHA256) {
+            $issues[] = 'unsupported_v8_5_v5_bilingual_64_package_file_sha256';
+        }
+
+        $decoded = json_decode((string) file_get_contents($path), true);
+        if (! is_array($decoded)) {
+            $issues[] = 'v8_5_v5_bilingual_64_package_json_invalid';
+
+            return $issues;
+        }
+
+        if ((string) ($decoded['artifact'] ?? '') !== self::V8_5_V5_BILINGUAL_64_ARTIFACT) {
+            $issues[] = 'unsupported_v8_5_v5_bilingual_64_artifact';
+        }
+        if ((string) ($decoded['package_version'] ?? '') !== self::V8_5_V5_BILINGUAL_64_PACKAGE_VERSION) {
+            $issues[] = 'unsupported_v8_5_v5_bilingual_64_package_version';
+        }
+        if ((string) ($decoded['package_sha256'] ?? '') !== self::V8_5_V5_BILINGUAL_64_EMBEDDED_PACKAGE_SHA256) {
+            $issues[] = 'unsupported_v8_5_v5_bilingual_64_embedded_package_sha256';
+        }
+        if ((int) ($decoded['target_count'] ?? -1) !== 64) {
+            $issues[] = 'v8_5_v5_bilingual_64_target_count_mismatch';
+        }
+
+        $summary = is_array($decoded['summary'] ?? null) ? $decoded['summary'] : [];
+        if ((int) ($summary['target_count'] ?? -1) !== 64
+            || (int) ($summary['variant_pages'] ?? $summary['variant_count'] ?? -1) !== 64
+            || (int) ($summary['comparison_pages'] ?? $summary['comparison_count'] ?? -1) !== 0
+            || (int) ($summary['zh_pages'] ?? $summary['zh_count'] ?? -1) !== 32
+            || (int) ($summary['en_pages'] ?? $summary['en_count'] ?? -1) !== 32
+            || (int) ($summary['qa_blocked_count'] ?? $summary['blocked_count'] ?? -1) !== 0) {
+            $issues[] = 'v8_5_v5_bilingual_64_summary_mismatch';
+        }
+
+        $actualUrls = array_values(array_unique(array_column($targets, 'canonical_url')));
+        sort($actualUrls);
+        if ($actualUrls !== $this->v85V5Bilingual64Urls()) {
+            $issues[] = 'v8_5_v5_bilingual_64_url_set_mismatch';
+        }
+
+        return array_values(array_unique($issues));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function contractSummary(array $targets): array
+    {
+        if (! $this->v85V5Bilingual64Requested()) {
+            return [
+                'mode' => 'ad_hoc_targets',
+            ];
+        }
+
+        return [
+            'mode' => 'v8_5_v5_bilingual_64',
+            'package_file_sha256' => self::V8_5_V5_BILINGUAL_64_PACKAGE_FILE_SHA256,
+            'embedded_package_sha256' => self::V8_5_V5_BILINGUAL_64_EMBEDDED_PACKAGE_SHA256,
+            'artifact' => self::V8_5_V5_BILINGUAL_64_ARTIFACT,
+            'package_version' => self::V8_5_V5_BILINGUAL_64_PACKAGE_VERSION,
+            'target_count' => count($targets),
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function v85V5Bilingual64Urls(): array
+    {
+        $urls = [];
+        foreach (['en', 'zh'] as $prefix) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                foreach (['a', 't'] as $variant) {
+                    $urls[] = 'https://fermatmind.com/'.$prefix.'/personality/'.strtolower($typeCode).'-'.$variant;
+                }
+            }
+        }
+        sort($urls);
+
+        return $urls;
     }
 
     /**
