@@ -54,6 +54,18 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringNotContainsString('mktemp /etc/nginx/sites-enabled', $source);
     }
 
+    #[Test]
+    public function production_auto_deploy_policy_allows_backend_config_changes_but_keeps_hard_risk_paths(): void
+    {
+        $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
+
+        $this->assertStringNotContainsString('/^backend\\/config\\//', $source);
+        $this->assertStringContainsString('/^backend\\/database\\//', $source);
+        $this->assertStringContainsString('/^\\.github\\/workflows\\//', $source);
+        $this->assertStringContainsString('/(^|\\/)\\.env($|\\.|-)/', $source);
+        $this->assertStringContainsString('/(^|\\/).*secret.*$/i', $source);
+    }
+
     private function readRepoFile(string $relativePath): string
     {
         $path = dirname(__DIR__, 3).'/'.$relativePath;
