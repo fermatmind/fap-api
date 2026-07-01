@@ -32,6 +32,14 @@ final class Mbti64CmsRevisionPromotionService
 
     private const REMAINING_58_V2_PACKAGE_ARTIFACT = 'MBTI64-REMAINING-58-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01';
 
+    private const V8_5_V5_BILINGUAL_64_ARTIFACT = 'MBTI64-ZH32-EN32-V8_5-V5-BILINGUAL-PACKAGE-QA-01';
+
+    private const V8_5_V5_BILINGUAL_64_PACKAGE_VERSION = 'mbti64_zh32_en32_v8_5_v5_bilingual_v1';
+
+    private const V8_5_V5_BILINGUAL_64_PACKAGE_FILE_SHA256 = 'a0fd058b82ec40940b8c92546c461086d3bfca7a4b0521aeb92e5cc8b0517b67';
+
+    private const V8_5_V5_BILINGUAL_64_EMBEDDED_PACKAGE_SHA256 = '13ec2c55caf2cf7b48650739fabadfb09ec4a02214cb1af99d5e47d8af2499d8';
+
     private const VISIBLE_QUERY_BACKED_3_URLS = [
         'https://fermatmind.com/en/personality/enfj-a',
         'https://fermatmind.com/zh/personality/intp-a',
@@ -86,7 +94,7 @@ final class Mbti64CmsRevisionPromotionService
      */
     private function buildSummary(array $package, string $sourceSha256, bool $write, array $options): array
     {
-        $contract = $this->promotionContract($package, $options);
+        $contract = $this->promotionContract($package, $sourceSha256, $options);
         if (($contract['ok'] ?? false) !== true) {
             return array_merge($this->baseSummary($package, $sourceSha256, $write), [
                 'ok' => false,
@@ -169,10 +177,10 @@ final class Mbti64CmsRevisionPromotionService
      * @param  array<string,mixed>  $package
      * @return array<string,mixed>
      */
-    private function promotionContract(array $package, array $options): array
+    private function promotionContract(array $package, string $sourceSha256, array $options): array
     {
         if ($this->isAgentProjectionPackage($package)) {
-            return $this->agentProjectionContract($package, $options);
+            return $this->agentProjectionContract($package, $sourceSha256, $options);
         }
 
         return $this->planner->plan($package);
@@ -192,7 +200,7 @@ final class Mbti64CmsRevisionPromotionService
      * @param  array<string,mixed>  $package
      * @return array<string,mixed>
      */
-    private function agentProjectionContract(array $package, array $options): array
+    private function agentProjectionContract(array $package, string $sourceSha256, array $options): array
     {
         $errors = [];
         $warnings = [];
@@ -211,10 +219,12 @@ final class Mbti64CmsRevisionPromotionService
         $freshQueryBacked5 = (bool) ($options['fresh_query_backed_5'] ?? false);
         $nextBatch6 = (bool) ($options['next_batch_6'] ?? false);
         $remaining58 = (bool) ($options['remaining_58'] ?? false);
+        $v85V5Bilingual64 = (bool) ($options['v8_5_v5_bilingual_64'] ?? false);
         $subsetModeCount = ($visibleQueryBacked3 ? 1 : 0)
             + ($freshQueryBacked5 ? 1 : 0)
             + ($nextBatch6 ? 1 : 0)
-            + ($remaining58 ? 1 : 0);
+            + ($remaining58 ? 1 : 0)
+            + ($v85V5Bilingual64 ? 1 : 0);
         if ($subsetModeCount > 1) {
             $errors[] = [
                 'field' => 'options',
@@ -228,6 +238,7 @@ final class Mbti64CmsRevisionPromotionService
             $freshQueryBacked5 => self::FRESH_QUERY_BACKED_5_URLS,
             $nextBatch6 => self::NEXT_BATCH_6_URLS,
             $remaining58 => $this->remaining58Urls(),
+            $v85V5Bilingual64 => $this->v85V5Bilingual64Urls(),
             default => [],
         };
         $contractRecommendations = $subsetUrls !== []
@@ -238,6 +249,8 @@ final class Mbti64CmsRevisionPromotionService
             $this->validateNextBatch6ContractPackage($package, $recommendations, $errors);
         } elseif ($remaining58) {
             $this->validateRemaining58ContractPackage($package, $recommendations, $errors);
+        } elseif ($v85V5Bilingual64) {
+            $this->validateV85V5Bilingual64ContractPackage($package, $sourceSha256, $recommendations, $errors);
         } else {
             if ((string) ($package['artifact'] ?? '') !== self::AGENT_PROJECTION_ARTIFACT) {
                 $errors[] = ['field' => 'artifact', 'code' => 'unsupported_package_artifact', 'message' => 'Unexpected MBTI64 agent projection artifact.'];
@@ -283,6 +296,13 @@ final class Mbti64CmsRevisionPromotionService
                 'message' => 'Expected exactly the 58 approved remaining competitor-gap MBTI64 variant recommendations.',
             ];
         }
+        if ($v85V5Bilingual64 && count($contractRecommendations) !== 64) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'v8_5_v5_bilingual_64_subset_incomplete',
+                'message' => 'Expected exactly the 64 approved MBTI64 V8.5/V5 bilingual variant recommendations.',
+            ];
+        }
 
         $rows = [];
         foreach ($contractRecommendations as $index => $recommendation) {
@@ -324,6 +344,7 @@ final class Mbti64CmsRevisionPromotionService
                     $freshQueryBacked5 => 'fresh_query_backed_5',
                     $nextBatch6 => 'next_batch_6',
                     $remaining58 => 'remaining_58',
+                    $v85V5Bilingual64 => 'v8_5_v5_bilingual_64',
                     default => 'full_agent_projection_88',
                 },
                 'enabled' => $subsetUrls !== [],
@@ -498,6 +519,99 @@ final class Mbti64CmsRevisionPromotionService
     }
 
     /**
+     * @param  list<array<string,mixed>>  $recommendations
+     * @param  list<array<string,string>>  $errors
+     */
+    private function validateV85V5Bilingual64ContractPackage(array $package, string $sourceSha256, array $recommendations, array &$errors): void
+    {
+        $summary = is_array($package['summary'] ?? null) ? $package['summary'] : [];
+        $actualUrls = array_map(
+            static fn (array $recommendation): string => (string) ($recommendation['target_url'] ?? ''),
+            $recommendations
+        );
+        $expectedUrls = $this->v85V5Bilingual64Urls();
+        sort($actualUrls);
+        sort($expectedUrls);
+
+        if ($sourceSha256 !== self::V8_5_V5_BILINGUAL_64_PACKAGE_FILE_SHA256) {
+            $errors[] = [
+                'field' => 'source_sha256',
+                'code' => 'unsupported_v8_5_v5_bilingual_64_package_sha256',
+                'message' => 'Unexpected MBTI64 V8.5/V5 bilingual package file SHA256.',
+            ];
+        }
+        if ((string) ($package['package_sha256'] ?? '') !== self::V8_5_V5_BILINGUAL_64_EMBEDDED_PACKAGE_SHA256) {
+            $errors[] = [
+                'field' => 'package_sha256',
+                'code' => 'unsupported_v8_5_v5_bilingual_64_embedded_sha256',
+                'message' => 'Unexpected MBTI64 V8.5/V5 bilingual embedded package SHA256.',
+            ];
+        }
+        if ((string) ($package['artifact'] ?? '') !== self::V8_5_V5_BILINGUAL_64_ARTIFACT) {
+            $errors[] = [
+                'field' => 'artifact',
+                'code' => 'unsupported_v8_5_v5_bilingual_64_artifact',
+                'message' => 'Unexpected MBTI64 V8.5/V5 bilingual package artifact.',
+            ];
+        }
+        if ((string) ($package['package_version'] ?? '') !== self::V8_5_V5_BILINGUAL_64_PACKAGE_VERSION) {
+            $errors[] = [
+                'field' => 'package_version',
+                'code' => 'unsupported_v8_5_v5_bilingual_64_package_version',
+                'message' => 'Unexpected MBTI64 V8.5/V5 bilingual package version.',
+            ];
+        }
+        if ((string) ($package['status'] ?? '') !== 'pass') {
+            $errors[] = [
+                'field' => 'status',
+                'code' => 'v8_5_v5_bilingual_64_package_status_not_pass',
+                'message' => 'V8.5/V5 bilingual package must have pass status before promotion planning.',
+            ];
+        }
+        if ((string) ($package['framework'] ?? '') !== 'mbti64') {
+            $errors[] = [
+                'field' => 'framework',
+                'code' => 'v8_5_v5_bilingual_64_framework_not_mbti64',
+                'message' => 'V8.5/V5 bilingual package framework must be mbti64.',
+            ];
+        }
+        if ((string) ($package['final_decision'] ?? '') !== 'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC') {
+            $errors[] = [
+                'field' => 'final_decision',
+                'code' => 'v8_5_v5_bilingual_64_final_decision_not_ready',
+                'message' => 'V8.5/V5 bilingual package must be ready for fap-api artifact sync before promotion planning.',
+            ];
+        }
+        if (count($recommendations) !== 64 || (int) ($package['target_count'] ?? -1) !== 64) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'unexpected_v8_5_v5_bilingual_64_recommendation_count',
+                'message' => 'Expected exactly 64 MBTI64 V8.5/V5 bilingual recommendations.',
+            ];
+        }
+        if ((int) ($summary['target_count'] ?? -1) !== 64
+            || (int) ($summary['zh_pages'] ?? -1) !== 32
+            || (int) ($summary['en_pages'] ?? -1) !== 32
+            || (int) ($summary['variant_pages'] ?? -1) !== 64
+            || (int) ($summary['comparison_pages'] ?? -1) !== 0
+            || (int) ($summary['qa_pass_count'] ?? -1) !== 64
+            || (int) ($summary['qa_blocked_count'] ?? -1) !== 0) {
+            $errors[] = [
+                'field' => 'summary',
+                'code' => 'unexpected_v8_5_v5_bilingual_64_summary_counts',
+                'message' => 'Expected 64 pass, 32 zh, 32 en, 64 variant, and 0 comparison recommendations.',
+            ];
+        }
+        if ($actualUrls !== $expectedUrls) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'v8_5_v5_bilingual_64_url_set_mismatch',
+                'message' => 'V8.5/V5 bilingual package must contain exactly the fixed 64 MBTI64 variant URL set.',
+            ];
+        }
+    }
+
+    /**
      * @return list<string>
      */
     private function remaining58Urls(): array
@@ -519,6 +633,24 @@ final class Mbti64CmsRevisionPromotionService
         sort($remaining);
 
         return $remaining;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function v85V5Bilingual64Urls(): array
+    {
+        $urls = [];
+        foreach (['en', 'zh'] as $prefix) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                foreach (['a', 't'] as $variant) {
+                    $urls[] = 'https://fermatmind.com/'.$prefix.'/personality/'.strtolower($typeCode).'-'.$variant;
+                }
+            }
+        }
+        sort($urls);
+
+        return $urls;
     }
 
     /**
