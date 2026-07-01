@@ -813,6 +813,9 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame('mbti64_v8_5_v5_first_class_render_section', $moduleSection->payload_json['source'] ?? null);
         $this->assertSame('core-reading', $moduleSection->payload_json['id'] ?? null);
         $this->assertStringContainsString('INTJ-A', (string) $moduleSection->body_md);
+        $this->assertStringNotContainsString('Evidence boundary:', (string) $moduleSection->body_md);
+        $this->assertArrayHasKey('evidence', $moduleSection->payload_json);
+        $this->assertArrayHasKey('raw', $moduleSection->payload_json);
 
         $workDecisionSection = PersonalityProfileVariantSection::query()
             ->where('personality_profile_variant_id', (int) $targets['zh-CN|INTJ-A']->id)
@@ -821,6 +824,50 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame('cards', $workDecisionSection->render_variant);
         $this->assertSame('mbti64_v8_5_v5_first_class_render_section', $workDecisionSection->payload_json['source'] ?? null);
         $this->assertArrayHasKey('card', $workDecisionSection->payload_json);
+
+        $detail = $this->getJson('/api/v0.5/personality/intj-a?locale=zh-CN')
+            ->assertOk()
+            ->json();
+        $sectionKeys = array_values(array_filter(array_map(
+            static fn (array $section): string => (string) ($section['section_key'] ?? ''),
+            (array) ($detail['sections'] ?? [])
+        )));
+        $this->assertContains('v8_5_module_01_core_reading', $sectionKeys);
+        foreach ($this->expectedV85V5FirstClassSectionKeys() as $legacySectionKey) {
+            $this->assertNotContains($legacySectionKey, $sectionKeys, $legacySectionKey);
+        }
+        $apiModule = collect((array) ($detail['sections'] ?? []))
+            ->firstWhere('section_key', 'v8_5_module_01_core_reading');
+        $this->assertIsArray($apiModule);
+        $this->assertStringNotContainsString('Evidence boundary:', (string) ($apiModule['body_md'] ?? ''));
+        $this->assertStringNotContainsString('Evidence boundary:', (string) data_get($apiModule, 'payload_json.body', ''));
+        $this->assertArrayHasKey('evidence', (array) data_get($apiModule, 'payload_json', []));
+        $this->assertArrayHasKey('raw', (array) data_get($apiModule, 'payload_json', []));
+    }
+
+    public function test_public_detail_keeps_legacy_sections_when_v8_5_sections_are_absent(): void
+    {
+        $targets = $this->seedProjectionTargets();
+        PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $targets['zh-CN|INTJ-A']->id,
+            'section_key' => 'meaning',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Legacy meaning remains visible without V8.5 sections.',
+            'body_html' => null,
+            'payload_json' => ['title' => 'Legacy meaning'],
+            'sort_order' => 100,
+            'is_enabled' => true,
+        ]);
+
+        $detail = $this->getJson('/api/v0.5/personality/intj-a?locale=zh-CN')
+            ->assertOk()
+            ->json();
+        $sectionKeys = array_values(array_filter(array_map(
+            static fn (array $section): string => (string) ($section['section_key'] ?? ''),
+            (array) ($detail['sections'] ?? [])
+        )));
+
+        $this->assertContains('meaning', $sectionKeys);
     }
 
     public function test_visible_query_backed_three_subset_is_idempotent_after_write(): void
