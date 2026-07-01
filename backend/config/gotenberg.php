@@ -6,7 +6,7 @@ return [
     'result_print_base_url' => env('GOTENBERG_RESULT_PRINT_BASE_URL', ''),
     'result_print_path_template' => env(
         'GOTENBERG_RESULT_PRINT_PATH_TEMPLATE',
-        '/{locale}/result/{attempt_id}'
+        '/{locale}/result/{attempt_id}/print'
     ),
     'result_print_token_secret' => env('GOTENBERG_RESULT_PRINT_TOKEN_SECRET', ''),
     'timeout_seconds' => (int) env('GOTENBERG_TIMEOUT_SECONDS', 60),

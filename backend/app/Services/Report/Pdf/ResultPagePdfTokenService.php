@@ -11,8 +11,17 @@ final class ResultPagePdfTokenService
     /**
      * @param  array<string,mixed>  $gate
      */
-    public function issueForMbtiResultPageExport(Attempt $attempt, array $gate, string $locale): string
-    {
+    public function issueForMbtiResultPageExport(
+        Attempt $attempt,
+        array $gate,
+        string $locale,
+        ?string $surfaceVersion = null
+    ): string {
+        $surfaceVersion = trim((string) ($surfaceVersion ?? ''));
+        $surfaceVersion = $surfaceVersion !== ''
+            ? $surfaceVersion
+            : ReportPdfDocumentService::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION;
+
         $payload = [
             'v' => 1,
             'typ' => 'mbti_result_page_pdf',
@@ -21,7 +30,7 @@ final class ResultPagePdfTokenService
             'user_id' => (string) ($attempt->user_id ?? ''),
             'owner_id' => (string) (($attempt->user_id ?? null) ?: ($attempt->anon_id ?? '')),
             'locale' => $locale,
-            'surface' => ReportPdfDocumentService::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+            'surface' => $surfaceVersion,
             'engine' => ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE,
             'entitlement' => ((bool) ($gate['locked'] ?? true)) ? 'locked' : 'unlocked',
             'variant' => $this->normalizeVariant((string) ($gate['variant'] ?? 'free')),
@@ -63,7 +72,7 @@ final class ResultPagePdfTokenService
             || (string) ($payload['typ'] ?? '') !== 'mbti_result_page_pdf'
             || (int) ($payload['org_id'] ?? $orgId) !== max(0, $orgId)
             || (string) ($payload['attempt_id'] ?? '') !== $attemptId
-            || (string) ($payload['surface'] ?? '') !== ReportPdfDocumentService::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION
+            || (string) ($payload['surface'] ?? '') !== ReportPdfDocumentService::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION
             || (string) ($payload['engine'] ?? '') !== ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE
             || (int) ($payload['exp'] ?? 0) <= now()->getTimestamp()
         ) {

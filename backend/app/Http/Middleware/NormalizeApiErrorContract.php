@@ -56,7 +56,7 @@ final class NormalizeApiErrorContract
     private function isResultPagePdfDiagnostic(array $payload): bool
     {
         $surface = trim((string) ($payload['surface'] ?? ''));
-        if (in_array($surface, ['mbti.result_page_export.v1', 'mbti.result_page_export.v2'], true)) {
+        if (in_array($surface, ['mbti.result_page_export.v1', 'mbti.result_page_export.v2', 'mbti.result_page_snapshot.v3'], true)) {
             return true;
         }
 
