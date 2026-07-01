@@ -22,6 +22,8 @@ final class ReportPdfDocumentService
 
     public const MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION = 'mbti.result_page_snapshot.v4';
 
+    public const MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION = 'mbti.snapshot.print_layout.v1';
+
     public const RESULT_PAGE_EXPORT_ENGINE = 'gotenberg_chromium';
 
     private const MBTI_LEGACY_RESULT_PAGE_EXPORT_SURFACE_VERSION = 'mbti.result_page_export.v2';
@@ -402,6 +404,7 @@ final class ReportPdfDocumentService
                 'engine' => self::RESULT_PAGE_EXPORT_ENGINE,
                 'surface' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE,
                 'surface_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
+                'render_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION,
                 'trace_id' => $traceId,
             ];
         }
@@ -419,6 +422,7 @@ final class ReportPdfDocumentService
             'engine' => self::RESULT_PAGE_EXPORT_ENGINE,
             'surface' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE,
             'surface_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
+            'render_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION,
             'trace_id' => $traceId,
         ];
     }
@@ -437,6 +441,7 @@ final class ReportPdfDocumentService
         return implode('-', [
             $baseHash,
             self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
+            self::MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION,
             self::RESULT_PAGE_EXPORT_ENGINE,
             preg_replace('/[^a-z0-9_.-]+/i', '_', $locale) ?: 'locale',
             $entitlement,
