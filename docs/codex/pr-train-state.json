@@ -58589,10 +58589,10 @@
       "branch": "codex/mbti-desktop-clone-locked-blocks-content-01",
       "base": "main",
       "title": "MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01: improve MBTI desktop clone locked block content",
-      "status": "draft_pr_opened_local_en_dry_run_blocked",
-      "commit_sha": "2f7ab5a9522bbd02219cbf6f816ccb014bcf25a4",
+      "status": "local_validation_passed_fixture_gate_resolved",
+      "commit_sha": "1157a26dbca999db75e62adfe96848371b168019",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/2575",
-      "failure_reason": "English dry-run is blocked by local DB fixture gap: Missing personality_profile_variant for full_code=ENFJ-A locale=en. Per plan, PR must be opened as draft until this prerequisite is available or verified in CI/staging fixture context.",
+      "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -58625,14 +58625,14 @@
             "docs/codex/pr-train.yaml",
             "docs/codex/pr-train-state.json"
           ],
-          "evidence": "git diff --name-only contains only the four scoped files."
+          "evidence": "Follow-up only updates PR-train state; existing PR diff remains within declared allowed files."
         },
         "content_audit": {
           "status": "pass",
-          "evidence": "zh-CN/en: 32 variants each; lockedBlocks body rows 1344 each; visibleBlocks body rows 1152 each; exact duplicate body text 0; A/T same-path body cells 0; placeholder/debug/generated/formula/hard-absolute scan hits 0.",
           "commands": [
-            "custom Python content audit for lockedBlocks, visibleBlocks, A/T reuse, forbidden phrases, and sample review"
-          ]
+            "custom Python audit for 32 fullCode coverage, lockedBlocks/visibleBlocks duplicates, A/T same-path reuse, forbidden placeholder/debug/generated/formula/hard-absolute phrases, and manual samples INTJ-A/T, ENFP-A/T, INFJ-T, ESTJ-A, ISFP-T, ISTP-A"
+          ],
+          "evidence": "zh-CN/en: 32 variants each; lockedBlocks body rows 1344 each; visibleBlocks body rows 1152 each; exact duplicate body text 0; A/T same-path body cells 0; placeholder/debug/generated/formula/hard-absolute scan hits 0. No additional content JSON edits required in this follow-up."
         },
         "focused_tests": {
           "status": "pass",
@@ -58642,12 +58642,12 @@
           "evidence": "24 tests passed, 1394 assertions."
         },
         "import_dry_run": {
-          "status": "partial_blocked_local_fixture",
+          "status": "pass",
           "commands": [
             "php artisan personality:import-desktop-clone-baseline --dry-run --locale=zh-CN",
             "php artisan personality:import-desktop-clone-baseline --dry-run --locale=en"
           ],
-          "evidence": "zh-CN dry-run passed: rows_found=32, errors_count=0. en dry-run failed locally: Missing personality_profile_variant for full_code=ENFJ-A locale=en."
+          "evidence": "zh-CN dry-run passed: rows_found=32, errors_count=0. en dry-run passed after local fixture initialization: rows_found=32, errors_count=0."
         },
         "common_validation": {
           "status": "pass",
@@ -58661,8 +58661,17 @@
           "evidence": "JSON parse passed for zh-CN/en/state; YAML parse passed for pr-train.yaml; git diff --check passed."
         },
         "github_required_checks": {
-          "status": "not_applicable_draft",
-          "evidence": "Draft PR opened; required GitHub checks are not merge-gating until blocker is resolved and PR is marked ready."
+          "status": "pending",
+          "evidence": "PR #2575 will be rechecked after pushing the follow-up state commit."
+        },
+        "fixture_gate": {
+          "status": "pass",
+          "commands": [
+            "php artisan personality:import-local-baseline --dry-run --locale=en --source-dir=../content_baselines/personality",
+            "php artisan personality:import-local-baseline --locale=en --status=published --upsert --source-dir=../content_baselines/personality",
+            "php artisan tinker --execute=<count en MBTI profiles/variants>"
+          ],
+          "evidence": "Resolved local ENFJ-A locale=en blocker by initializing local development DB from existing public personality baseline. Verified local en MBTI owner rows: profiles_en=16, variants_en=32. This was local DB setup only; no production import."
         }
       },
       "events": [
@@ -58680,6 +58689,11 @@
           "at": "2026-07-01T19:23:15+08:00",
           "status": "draft_pr_opened_local_en_dry_run_blocked",
           "summary": "Opened draft PR #2575; branch commit recorded; English dry-run remains blocked by missing local ENFJ-A variant fixture."
+        },
+        {
+          "at": "2026-07-01T19:31:15+08:00",
+          "status": "local_validation_passed_fixture_gate_resolved",
+          "summary": "Re-audited all zh-CN/en desktop clone locked/visible content; initialized local en owner rows via existing public personality baseline importer; zh-CN and en desktop clone dry-runs both pass."
         }
       ]
     }
@@ -66202,10 +66216,10 @@
     "branch": "codex/mbti-desktop-clone-locked-blocks-content-01",
     "base": "main",
     "title": "MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01: improve MBTI desktop clone locked block content",
-    "status": "draft_pr_opened_local_en_dry_run_blocked",
-    "commit_sha": "2f7ab5a9522bbd02219cbf6f816ccb014bcf25a4",
+    "status": "local_validation_passed_fixture_gate_resolved",
+    "commit_sha": "1157a26dbca999db75e62adfe96848371b168019",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2575",
-    "failure_reason": "English dry-run is blocked by local DB fixture gap: Missing personality_profile_variant for full_code=ENFJ-A locale=en. Per plan, PR must be opened as draft until this prerequisite is available or verified in CI/staging fixture context.",
+    "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -66238,14 +66252,14 @@
           "docs/codex/pr-train.yaml",
           "docs/codex/pr-train-state.json"
         ],
-        "evidence": "git diff --name-only contains only the four scoped files."
+        "evidence": "Follow-up only updates PR-train state; existing PR diff remains within declared allowed files."
       },
       "content_audit": {
         "status": "pass",
-        "evidence": "zh-CN/en: 32 variants each; lockedBlocks body rows 1344 each; visibleBlocks body rows 1152 each; exact duplicate body text 0; A/T same-path body cells 0; placeholder/debug/generated/formula/hard-absolute scan hits 0.",
         "commands": [
-          "custom Python content audit for lockedBlocks, visibleBlocks, A/T reuse, forbidden phrases, and sample review"
-        ]
+          "custom Python audit for 32 fullCode coverage, lockedBlocks/visibleBlocks duplicates, A/T same-path reuse, forbidden placeholder/debug/generated/formula/hard-absolute phrases, and manual samples INTJ-A/T, ENFP-A/T, INFJ-T, ESTJ-A, ISFP-T, ISTP-A"
+        ],
+        "evidence": "zh-CN/en: 32 variants each; lockedBlocks body rows 1344 each; visibleBlocks body rows 1152 each; exact duplicate body text 0; A/T same-path body cells 0; placeholder/debug/generated/formula/hard-absolute scan hits 0. No additional content JSON edits required in this follow-up."
       },
       "focused_tests": {
         "status": "pass",
@@ -66255,12 +66269,12 @@
         "evidence": "24 tests passed, 1394 assertions."
       },
       "import_dry_run": {
-        "status": "partial_blocked_local_fixture",
+        "status": "pass",
         "commands": [
           "php artisan personality:import-desktop-clone-baseline --dry-run --locale=zh-CN",
           "php artisan personality:import-desktop-clone-baseline --dry-run --locale=en"
         ],
-        "evidence": "zh-CN dry-run passed: rows_found=32, errors_count=0. en dry-run failed locally: Missing personality_profile_variant for full_code=ENFJ-A locale=en."
+        "evidence": "zh-CN dry-run passed: rows_found=32, errors_count=0. en dry-run passed after local fixture initialization: rows_found=32, errors_count=0."
       },
       "common_validation": {
         "status": "pass",
@@ -66274,8 +66288,17 @@
         "evidence": "JSON parse passed for zh-CN/en/state; YAML parse passed for pr-train.yaml; git diff --check passed."
       },
       "github_required_checks": {
-        "status": "not_applicable_draft",
-        "evidence": "Draft PR opened; required GitHub checks are not merge-gating until blocker is resolved and PR is marked ready."
+        "status": "pending",
+        "evidence": "PR #2575 will be rechecked after pushing the follow-up state commit."
+      },
+      "fixture_gate": {
+        "status": "pass",
+        "commands": [
+          "php artisan personality:import-local-baseline --dry-run --locale=en --source-dir=../content_baselines/personality",
+          "php artisan personality:import-local-baseline --locale=en --status=published --upsert --source-dir=../content_baselines/personality",
+          "php artisan tinker --execute=<count en MBTI profiles/variants>"
+        ],
+        "evidence": "Resolved local ENFJ-A locale=en blocker by initializing local development DB from existing public personality baseline. Verified local en MBTI owner rows: profiles_en=16, variants_en=32. This was local DB setup only; no production import."
       }
     },
     "events": [
@@ -66293,6 +66316,11 @@
         "at": "2026-07-01T19:23:15+08:00",
         "status": "draft_pr_opened_local_en_dry_run_blocked",
         "summary": "Opened draft PR #2575; branch commit recorded; English dry-run remains blocked by missing local ENFJ-A variant fixture."
+      },
+      {
+        "at": "2026-07-01T19:31:15+08:00",
+        "status": "local_validation_passed_fixture_gate_resolved",
+        "summary": "Re-audited all zh-CN/en desktop clone locked/visible content; initialized local en owner rows via existing public personality baseline importer; zh-CN and en desktop clone dry-runs both pass."
       }
     ]
   }
