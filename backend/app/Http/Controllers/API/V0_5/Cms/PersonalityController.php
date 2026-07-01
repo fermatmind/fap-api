@@ -26,6 +26,18 @@ use Illuminate\Support\Facades\Validator;
 
 class PersonalityController extends Controller
 {
+    private const MBTI64_V85_SECTION_PREFIX = 'v8_5_';
+
+    private const MBTI64_V85_DUPLICATE_LEGACY_SECTION_KEYS = [
+        'meaning',
+        'a_t_difference',
+        'core_traits',
+        'careers_work_style',
+        'relationships_communication',
+        'strengths_blind_spots',
+        'similar_types',
+    ];
+
     use RespondsWithNotFound;
 
     public function __construct(
@@ -1608,12 +1620,24 @@ class PersonalityController extends Controller
                     'section_key' => $sectionKey,
                     'title' => data_get($payload, 'title') ?? $baseSection['title'] ?? ($definition['title'] ?? null),
                     'render_variant' => (string) ($section->render_variant ?: ($baseSection['render_variant'] ?? 'rich_text')),
-                    'body_md' => $section->body_md ?? $baseSection['body_md'] ?? null,
+                    'body_md' => $this->sanitizeV85PublicBody(
+                        $sectionKey,
+                        $section->body_md ?? $baseSection['body_md'] ?? null
+                    ),
                     'body_html' => $section->body_html ?? $baseSection['body_html'] ?? null,
-                    'payload_json' => $payload,
+                    'payload_json' => $this->sanitizeV85PublicPayload(
+                        $sectionKey,
+                        is_array($payload) ? $payload : null
+                    ),
                     'sort_order' => (int) ($section->sort_order ?? $baseSection['sort_order'] ?? 0),
                     'is_enabled' => true,
                 ]);
+            }
+        }
+
+        if ($this->hasV85FirstClassSections($sections->keys()->all())) {
+            foreach (self::MBTI64_V85_DUPLICATE_LEGACY_SECTION_KEYS as $sectionKey) {
+                $sections->forget($sectionKey);
             }
         }
 
@@ -1624,6 +1648,46 @@ class PersonalityController extends Controller
             ])
             ->values()
             ->all();
+    }
+
+    /**
+     * @param  list<mixed>  $sectionKeys
+     */
+    private function hasV85FirstClassSections(array $sectionKeys): bool
+    {
+        foreach ($sectionKeys as $sectionKey) {
+            if (str_starts_with((string) $sectionKey, self::MBTI64_V85_SECTION_PREFIX)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function sanitizeV85PublicBody(string $sectionKey, mixed $body): mixed
+    {
+        if (! str_starts_with($sectionKey, 'v8_5_module_') || ! is_string($body)) {
+            return $body;
+        }
+
+        return preg_replace('/\n{2,}Evidence boundary:\n(?:[-*] .+(?:\n|$))+$/u', '', $body) ?? $body;
+    }
+
+    /**
+     * @param  array<string, mixed>|null  $payload
+     * @return array<string, mixed>|null
+     */
+    private function sanitizeV85PublicPayload(string $sectionKey, ?array $payload): ?array
+    {
+        if (! str_starts_with($sectionKey, 'v8_5_module_') || $payload === null) {
+            return $payload;
+        }
+
+        if (array_key_exists('body', $payload)) {
+            $payload['body'] = $this->sanitizeV85PublicBody($sectionKey, $payload['body']);
+        }
+
+        return $payload;
     }
 
     /**

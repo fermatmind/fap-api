@@ -1284,11 +1284,6 @@ final class Mbti64CmsRevisionPromotionService
             $parts[] = implode("\n\n", $paragraphs);
         }
 
-        $evidence = $this->stringList($module['evidence'] ?? null);
-        if ($evidence !== []) {
-            $parts[] = "Evidence boundary:\n".$this->markdownList($evidence);
-        }
-
         $body = trim(implode("\n\n", array_filter($parts, static fn (string $part): bool => trim($part) !== '')));
 
         return $body !== '' ? $body : null;
