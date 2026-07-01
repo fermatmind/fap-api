@@ -777,6 +777,9 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         foreach ($this->expectedV85V5FirstClassSectionKeys() as $sectionKey) {
             $this->assertSame(64, PersonalityProfileVariantSection::query()->where('section_key', $sectionKey)->count(), $sectionKey);
         }
+        foreach ($this->expectedV85V5RenderSectionKeys() as $sectionKey) {
+            $this->assertSame(64, PersonalityProfileVariantSection::query()->where('section_key', $sectionKey)->count(), $sectionKey);
+        }
 
         $seo = PersonalityProfileVariantSeoMeta::query()
             ->where('personality_profile_variant_id', (int) $targets['zh-CN|INTJ-A']->id)
@@ -792,6 +795,32 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertStringContainsString('INTJ-A', (string) $section->body_md);
         $this->assertSame('mbti64_v8_5_v5_first_class_section', $section->payload_json['source'] ?? null);
         $this->assertSame('core-reading', $section->payload_json['raw']['raw']['id'] ?? null);
+
+        $overviewSection = PersonalityProfileVariantSection::query()
+            ->where('personality_profile_variant_id', (int) $targets['zh-CN|INTJ-A']->id)
+            ->where('section_key', 'v8_5_thirty_second_overview')
+            ->firstOrFail();
+        $this->assertSame('list', $overviewSection->render_variant);
+        $this->assertSame('mbti64_v8_5_v5_first_class_render_section', $overviewSection->payload_json['source'] ?? null);
+        $this->assertNotEmpty($overviewSection->payload_json['items'] ?? []);
+        $this->assertStringContainsString('INTJ-A', (string) $overviewSection->body_md);
+
+        $moduleSection = PersonalityProfileVariantSection::query()
+            ->where('personality_profile_variant_id', (int) $targets['zh-CN|INTJ-A']->id)
+            ->where('section_key', 'v8_5_module_01_core_reading')
+            ->firstOrFail();
+        $this->assertSame('rich_text', $moduleSection->render_variant);
+        $this->assertSame('mbti64_v8_5_v5_first_class_render_section', $moduleSection->payload_json['source'] ?? null);
+        $this->assertSame('core-reading', $moduleSection->payload_json['id'] ?? null);
+        $this->assertStringContainsString('INTJ-A', (string) $moduleSection->body_md);
+
+        $workDecisionSection = PersonalityProfileVariantSection::query()
+            ->where('personality_profile_variant_id', (int) $targets['zh-CN|INTJ-A']->id)
+            ->where('section_key', 'v8_5_work_decision')
+            ->firstOrFail();
+        $this->assertSame('cards', $workDecisionSection->render_variant);
+        $this->assertSame('mbti64_v8_5_v5_first_class_render_section', $workDecisionSection->payload_json['source'] ?? null);
+        $this->assertArrayHasKey('card', $workDecisionSection->payload_json);
     }
 
     public function test_visible_query_backed_three_subset_is_idempotent_after_write(): void
@@ -1944,6 +1973,33 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             'relationships_communication',
             'strengths_blind_spots',
             'similar_types',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function expectedV85V5RenderSectionKeys(): array
+    {
+        return [
+            'v8_5_thirty_second_overview',
+            'v8_5_ai_search_answer',
+            'v8_5_strengths_watchouts',
+            'v8_5_at_difference_scenarios',
+            'v8_5_module_01_core_reading',
+            'v8_5_module_02_judgment_style',
+            'v8_5_module_03_agency_boundary',
+            'v8_5_module_04_standards_drive',
+            'v8_5_module_05_learning_revision',
+            'v8_5_module_06_stress_blindspot',
+            'v8_5_module_07_social_feedback',
+            'v8_5_module_08_career_workflow',
+            'v8_5_module_09_relationships',
+            'v8_5_module_10_faq_boundary',
+            'v8_5_work_decision',
+            'v8_5_relationship_communication',
+            'v8_5_pressure_growth',
+            'v8_5_search_user_paths',
         ];
     }
 

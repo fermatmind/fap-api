@@ -959,6 +959,8 @@ final class Mbti64CmsRevisionPromotionService
         $node = is_array($snapshot[$snapshotKey] ?? null) ? $snapshot[$snapshotKey] : [];
         $fields = is_array($node['first_class_draft_fields'] ?? null) ? $node['first_class_draft_fields'] : [];
         $metadata = is_array($node['structured_metadata'] ?? null) ? $node['structured_metadata'] : [];
+        $rawRecommendation = is_array($node['raw_recommendation'] ?? null) ? $node['raw_recommendation'] : [];
+        $sourceRow = $rawRecommendation !== [] ? $rawRecommendation : $row;
         $seo = is_array($fields['seo'] ?? null) ? $fields['seo'] : (is_array($row['seo'] ?? null) ? $row['seo'] : []);
         $content = is_array($fields['content'] ?? null) ? $fields['content'] : (is_array($row['content'] ?? null) ? $row['content'] : []);
         $faq = is_array($fields['faq'] ?? null) ? array_values((array) $fields['faq']) : (is_array($row['faq'] ?? null) ? array_values((array) $row['faq']) : []);
@@ -986,8 +988,8 @@ final class Mbti64CmsRevisionPromotionService
                     'url' => $canonical,
                 ],
             ],
-            'sections' => $this->sectionPayloads($content, $faq, $links, $seo, $metadata, $row, $plannedRow, $snapshotKey),
-            'comparison_section' => $this->comparisonSectionPayload($content, $faq, $links, $seo, $metadata, $row, $plannedRow, $snapshotKey),
+            'sections' => $this->sectionPayloads($content, $faq, $links, $seo, $metadata, $sourceRow, $plannedRow, $snapshotKey),
+            'comparison_section' => $this->comparisonSectionPayload($content, $faq, $links, $seo, $metadata, $sourceRow, $plannedRow, $snapshotKey),
         ];
     }
 
@@ -1013,8 +1015,8 @@ final class Mbti64CmsRevisionPromotionService
     ): array {
         $identity = is_array($plannedRow['identity'] ?? null) ? $plannedRow['identity'] : [];
         $canonicalPath = (string) ($identity['path'] ?? ($plannedRow['url'] ?? ''));
-        $sections = [];
-        $sort = 100;
+        $sections = $this->v85V5FirstClassSections($row);
+        $sort = $sections === [] ? 100 : 300;
         foreach ($content as $key => $value) {
             $sectionKey = $this->safeSectionKey((string) $key);
             $payload = is_array($value) ? $value : ['body' => $value];
@@ -1084,6 +1086,346 @@ final class Mbti64CmsRevisionPromotionService
         ];
 
         return $sections;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return list<array<string,mixed>>
+     */
+    private function v85V5FirstClassSections(array $row): array
+    {
+        $modules = is_array($row['modules'] ?? null) ? array_values((array) $row['modules']) : [];
+        $readerExperience = is_array($row['reader_experience'] ?? null) ? $row['reader_experience'] : [];
+        if ($readerExperience === []) {
+            return [];
+        }
+
+        $sections = [];
+        $sort = 20;
+
+        $overview = $this->stringList($readerExperience['thirty_second_overview'] ?? null);
+        if ($overview !== []) {
+            $sections[] = $this->v85V5Section(
+                'v8_5_thirty_second_overview',
+                'list',
+                '30 second overview',
+                $this->markdownList($overview),
+                [
+                    'items' => $overview,
+                    'raw' => $readerExperience['thirty_second_overview'],
+                ],
+                $sort
+            );
+            $sort += 10;
+        }
+
+        $aiSearchAnswer = is_array($readerExperience['ai_search_answer'] ?? null)
+            ? $readerExperience['ai_search_answer']
+            : [];
+        if ($aiSearchAnswer !== []) {
+            $sections[] = $this->v85V5Section(
+                'v8_5_ai_search_answer',
+                'callout',
+                'AI/Search answer',
+                $this->markdownKeyValueList($aiSearchAnswer),
+                [
+                    'answers' => $aiSearchAnswer,
+                    'raw' => $readerExperience['ai_search_answer'],
+                ],
+                $sort
+            );
+            $sort += 10;
+        }
+
+        $strengths = $this->cardList($readerExperience['strengths'] ?? null);
+        $watchOuts = $this->cardList($readerExperience['watch_outs'] ?? null);
+        if ($strengths !== [] || $watchOuts !== []) {
+            $sections[] = $this->v85V5Section(
+                'v8_5_strengths_watchouts',
+                'cards',
+                'Strengths and watch-outs',
+                $this->markdownCards([
+                    'Strengths' => $strengths,
+                    'Watch-outs' => $watchOuts,
+                ]),
+                [
+                    'strengths' => $strengths,
+                    'watch_outs' => $watchOuts,
+                ],
+                $sort
+            );
+            $sort += 10;
+        }
+
+        $atScenarios = is_array($readerExperience['at_difference_scenarios'] ?? null)
+            ? $readerExperience['at_difference_scenarios']
+            : [];
+        if ($atScenarios !== []) {
+            $sections[] = $this->v85V5Section(
+                'v8_5_at_difference_scenarios',
+                'cards',
+                'A/T difference scenarios',
+                $this->markdownKeyValueList($atScenarios),
+                [
+                    'scenarios' => $atScenarios,
+                ],
+                $sort
+            );
+            $sort += 10;
+        }
+
+        foreach ($modules as $index => $module) {
+            if (! is_array($module)) {
+                continue;
+            }
+
+            $sourceKey = (string) ($module['id'] ?? ($module['key'] ?? 'module'));
+            $sectionKey = $this->v85V5ModuleSectionKey($sourceKey, $index);
+            $body = $this->v85V5ModuleBody($module);
+            if ($body === null) {
+                continue;
+            }
+
+            $sections[] = $this->v85V5Section(
+                $sectionKey,
+                'rich_text',
+                $this->nullableString($module['title'] ?? null) ?? sprintf('Module %02d', $index + 1),
+                $body,
+                [
+                    'id' => $sourceKey,
+                    'order' => $module['order'] ?? ($index + 1),
+                    'insight' => $this->nullableString($module['insight'] ?? null),
+                    'paragraphs' => $this->stringList($module['paragraphs'] ?? null),
+                    'evidence' => $this->stringList($module['evidence'] ?? null),
+                    'raw' => $module,
+                ],
+                $sort
+            );
+            $sort += 10;
+        }
+
+        foreach ([
+            'v8_5_work_decision' => ['title' => 'Work decision card', 'raw' => $readerExperience['work_decision_card'] ?? null],
+            'v8_5_relationship_communication' => ['title' => 'Relationship communication card', 'raw' => $readerExperience['relationship_communication_card'] ?? null],
+            'v8_5_pressure_growth' => ['title' => 'Pressure and growth card', 'raw' => $readerExperience['pressure_growth_card'] ?? null],
+        ] as $sectionKey => $definition) {
+            $card = is_array($definition['raw']) ? $definition['raw'] : [];
+            if ($card === []) {
+                continue;
+            }
+
+            $sections[] = $this->v85V5Section(
+                $sectionKey,
+                'cards',
+                $definition['title'],
+                $this->markdownKeyValueList($card),
+                [
+                    'card' => $card,
+                ],
+                $sort
+            );
+            $sort += 10;
+        }
+
+        $searchUserPaths = $this->stringList($readerExperience['search_user_paths'] ?? null);
+        if ($searchUserPaths !== []) {
+            $sections[] = $this->v85V5Section(
+                'v8_5_search_user_paths',
+                'list',
+                'Search user paths',
+                $this->markdownList($searchUserPaths),
+                [
+                    'items' => $searchUserPaths,
+                ],
+                $sort
+            );
+        }
+
+        return $sections;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function v85V5Section(
+        string $sectionKey,
+        string $renderVariant,
+        string $title,
+        ?string $body,
+        array $payload,
+        int $sortOrder,
+    ): array {
+        return [
+            'section_key' => $sectionKey,
+            'render_variant' => $renderVariant,
+            'body_md' => $body,
+            'body_html' => null,
+            'payload_json' => [
+                'title' => $title,
+                'body' => $body,
+                'source' => 'mbti64_v8_5_v5_first_class_render_section',
+            ] + $payload,
+            'sort_order' => $sortOrder,
+            'is_enabled' => true,
+        ];
+    }
+
+    private function v85V5ModuleBody(array $module): ?string
+    {
+        $parts = [];
+        $insight = $this->nullableString($module['insight'] ?? null);
+        if ($insight !== null) {
+            $parts[] = $insight;
+        }
+
+        $paragraphs = $this->stringList($module['paragraphs'] ?? null);
+        if ($paragraphs !== []) {
+            $parts[] = implode("\n\n", $paragraphs);
+        }
+
+        $evidence = $this->stringList($module['evidence'] ?? null);
+        if ($evidence !== []) {
+            $parts[] = "Evidence boundary:\n".$this->markdownList($evidence);
+        }
+
+        $body = trim(implode("\n\n", array_filter($parts, static fn (string $part): bool => trim($part) !== '')));
+
+        return $body !== '' ? $body : null;
+    }
+
+    private function v85V5ModuleSectionKey(string $sourceKey, int $position): string
+    {
+        $normalized = $this->safeSectionKey($sourceKey);
+        $map = [
+            'core_reading' => 'core_reading',
+            'judgment_style' => 'judgment_style',
+            'rational_standard' => 'judgment_style',
+            'agency_boundary' => 'agency_boundary',
+            'independence_control' => 'agency_boundary',
+            'standards_drive' => 'standards_drive',
+            'willpower_ambition' => 'standards_drive',
+            'learning_revision' => 'learning_revision',
+            'curiosity_revision' => 'learning_revision',
+            'stress_blindspot' => 'stress_blindspot',
+            'emotional_blindspot' => 'stress_blindspot',
+            'social_feedback' => 'social_feedback',
+            'social_friction' => 'social_feedback',
+            'career_workflow' => 'career_workflow',
+            'relationships' => 'relationships',
+            'faq_boundary' => 'faq_boundary',
+        ];
+        $canonical = $map[$normalized] ?? $normalized;
+
+        return sprintf('v8_5_module_%02d_%s', $position + 1, $canonical);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function stringList(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $items = [];
+        foreach (array_values($value) as $item) {
+            if (is_string($item) && trim($item) !== '') {
+                $items[] = trim($item);
+            }
+        }
+
+        return $items;
+    }
+
+    /**
+     * @return list<array{title:string,detail:string}>
+     */
+    private function cardList(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $cards = [];
+        foreach (array_values($value) as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $title = $this->nullableString($item['title'] ?? null);
+            $detail = $this->nullableString($item['detail'] ?? null);
+            if ($title === null && $detail === null) {
+                continue;
+            }
+
+            $cards[] = [
+                'title' => $title ?? '',
+                'detail' => $detail ?? '',
+            ];
+        }
+
+        return $cards;
+    }
+
+    /**
+     * @param  list<string>  $items
+     */
+    private function markdownList(array $items): ?string
+    {
+        $lines = [];
+        foreach ($items as $item) {
+            if (trim($item) !== '') {
+                $lines[] = '- '.$item;
+            }
+        }
+
+        return $lines !== [] ? implode("\n", $lines) : null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $items
+     */
+    private function markdownKeyValueList(array $items): ?string
+    {
+        $lines = [];
+        foreach ($items as $key => $value) {
+            if (! is_string($value) || trim($value) === '') {
+                continue;
+            }
+
+            $lines[] = '- '.str_replace('_', ' ', (string) $key).': '.trim($value);
+        }
+
+        return $lines !== [] ? implode("\n", $lines) : null;
+    }
+
+    /**
+     * @param  array<string,list<array{title:string,detail:string}>>  $groups
+     */
+    private function markdownCards(array $groups): ?string
+    {
+        $parts = [];
+        foreach ($groups as $heading => $cards) {
+            if ($cards === []) {
+                continue;
+            }
+
+            $parts[] = '### '.$heading;
+            foreach ($cards as $card) {
+                $line = '- ';
+                if ($card['title'] !== '') {
+                    $line .= '**'.$card['title'].'**';
+                }
+                if ($card['detail'] !== '') {
+                    $line .= ($card['title'] !== '' ? ': ' : '').$card['detail'];
+                }
+                $parts[] = $line;
+            }
+        }
+
+        return $parts !== [] ? implode("\n", $parts) : null;
     }
 
     /**
