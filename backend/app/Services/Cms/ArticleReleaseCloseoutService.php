@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Schema;
 
 final class ArticleReleaseCloseoutService
 {
+    public function __construct(
+        private readonly ArticleSeoService $articleSeoService,
+    ) {}
+
     /**
      * Closeout audits historical Media Library article references that are already
      * public-rendered. Keep this narrower than the general API media sanitizer.
@@ -475,6 +479,10 @@ final class ArticleReleaseCloseoutService
         $hasNoHreflangPolicy = is_array($hreflang)
             && ($hreflang['enabled'] ?? null) === false
             && ($hreflang['policy'] ?? null) === 'no_hreflang';
+        $hasReciprocalHreflangPolicy = is_array($hreflang)
+            && ($hreflang['enabled'] ?? null) === true
+            && ($hreflang['policy'] ?? null) === 'reciprocal_counterparts_verified';
+        $hasGeneratedFaqPage = $faqSchemaEnabled && in_array('FAQPage', $this->generatedJsonLdTypes($article), true);
 
         if (! $schemaHold && ! $articleSchemaEnabled) {
             $issues[] = $this->issue('schema.article_schema_enabled', 'article_schema_not_enabled', 'Article schema gate is not enabled.');
@@ -482,26 +490,76 @@ final class ArticleReleaseCloseoutService
         if (! $schemaHold && ! $breadcrumbSchemaEnabled) {
             $issues[] = $this->issue('schema.breadcrumb_schema_enabled', 'breadcrumb_schema_not_enabled', 'Breadcrumb schema gate is not enabled.');
         }
-        if ($faqSchemaEnabled) {
-            $issues[] = $this->issue('schema.faq_schema_enabled', 'faq_schema_not_held', 'FAQ schema should remain held unless explicitly reviewed.');
+        if ($faqSchemaEnabled && ! $hasGeneratedFaqPage) {
+            $issues[] = $this->issue('schema.faq_schema_enabled', 'faq_schema_enabled_without_faqpage', 'FAQ schema gate is enabled but generated JSON-LD has no FAQPage.');
         }
-        if (! $hreflangHold && ! $hasNoHreflangPolicy) {
+        if (! $hreflangHold && ! $hasNoHreflangPolicy && ! $hasReciprocalHreflangPolicy) {
             $issues[] = $this->issue('hreflang_gate_v1', 'hreflang_policy_missing', 'Hreflang gate must be enabled reciprocally or record no_hreflang policy.');
         }
 
         return [
             'ok' => $issues === [],
-            'schema_state' => $schemaHold ? 'held' : 'enabled_required',
-            'hreflang_state' => $hreflangHold ? 'held' : 'policy_required',
+            'schema_state' => $schemaHold ? 'held' : ($articleSchemaEnabled && $breadcrumbSchemaEnabled ? 'enabled' : 'enabled_required'),
+            'faq_schema_state' => $faqSchemaEnabled ? ($hasGeneratedFaqPage ? 'enabled' : 'enabled_without_faqpage') : 'held',
+            'hreflang_state' => $hreflangHold ? 'held' : ($hasReciprocalHreflangPolicy ? 'enabled' : ($hasNoHreflangPolicy ? 'no_hreflang_policy' : 'policy_required')),
             'schema_hold' => $schemaHold,
             'hreflang_hold' => $hreflangHold,
             'article_schema_enabled' => $articleSchemaEnabled,
             'breadcrumb_schema_enabled' => $breadcrumbSchemaEnabled,
             'faq_schema_enabled' => $faqSchemaEnabled,
+            'faqpage_generated' => $hasGeneratedFaqPage,
             'hreflang_no_hreflang_policy_recorded' => $hasNoHreflangPolicy,
+            'hreflang_reciprocal_policy_recorded' => $hasReciprocalHreflangPolicy,
             'hreflang_gate_v1' => $hreflang,
             'issues' => $issues,
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function generatedJsonLdTypes(Article $article): array
+    {
+        return $this->jsonLdTypes($this->articleSeoService->generateJsonLd(
+            $article,
+            $article->publishedRevision,
+        ));
+    }
+
+    /**
+     * @param  array<string,mixed>  $jsonLd
+     * @return list<string>
+     */
+    private function jsonLdTypes(array $jsonLd): array
+    {
+        $types = [];
+        $stack = [$jsonLd];
+
+        while ($stack !== []) {
+            $node = array_pop($stack);
+            if (! is_array($node)) {
+                continue;
+            }
+
+            $type = $node['@type'] ?? null;
+            if (is_string($type) && $type !== '') {
+                $types[] = $type;
+            } elseif (is_array($type)) {
+                foreach ($type as $value) {
+                    if (is_string($value) && $value !== '') {
+                        $types[] = $value;
+                    }
+                }
+            }
+
+            foreach ($node as $value) {
+                if (is_array($value)) {
+                    $stack[] = $value;
+                }
+            }
+        }
+
+        return array_values(array_unique($types));
     }
 
     /**
