@@ -18,9 +18,13 @@ final class ReportPdfDocumentService
 {
     private const MBTI_PDF_SURFACE_VERSION = 'mbti.pdf_surface.v4';
 
-    public const MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION = 'mbti.result_page_export.v2';
+    public const MBTI_RESULT_PAGE_SNAPSHOT_SURFACE = 'mbti_result_page_snapshot';
+
+    public const MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION = 'mbti.result_page_snapshot.v3';
 
     public const RESULT_PAGE_EXPORT_ENGINE = 'gotenberg_chromium';
+
+    private const MBTI_LEGACY_RESULT_PAGE_EXPORT_SURFACE_VERSION = 'mbti.result_page_export.v2';
 
     public function __construct(
         private readonly ReportPdfArtifactStore $artifactStore,
@@ -396,8 +400,8 @@ final class ReportPdfDocumentService
                 'manifest_hash' => $manifestHash,
                 'cached' => true,
                 'engine' => self::RESULT_PAGE_EXPORT_ENGINE,
-                'surface' => 'mbti_result_page_export',
-                'surface_version' => self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+                'surface' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE,
+                'surface_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
                 'trace_id' => $traceId,
             ];
         }
@@ -413,8 +417,8 @@ final class ReportPdfDocumentService
             'manifest_hash' => $manifestHash,
             'cached' => false,
             'engine' => self::RESULT_PAGE_EXPORT_ENGINE,
-            'surface' => 'mbti_result_page_export',
-            'surface_version' => self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+            'surface' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE,
+            'surface_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
             'trace_id' => $traceId,
         ];
     }
@@ -432,7 +436,7 @@ final class ReportPdfDocumentService
 
         return implode('-', [
             $baseHash,
-            self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+            self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
             self::RESULT_PAGE_EXPORT_ENGINE,
             preg_replace('/[^a-z0-9_.-]+/i', '_', $locale) ?: 'locale',
             $entitlement,
@@ -612,7 +616,7 @@ final class ReportPdfDocumentService
             return null;
         }
 
-        $printUrl = $this->mbtiResultPrintUrl($attempt);
+        $printUrl = $this->mbtiLegacyResultPrintUrl($attempt);
         if ($printUrl === null) {
             return null;
         }
@@ -633,7 +637,7 @@ final class ReportPdfDocumentService
             throw new \RuntimeException('Gotenberg result-page PDF engine is disabled.');
         }
 
-        $printUrl = $this->mbtiResultPrintUrl($attempt, $gate);
+        $printUrl = $this->mbtiSnapshotResultPrintUrl($attempt, $gate);
         if ($printUrl === null) {
             throw new \RuntimeException('Gotenberg result-page print URL is not configured.');
         }
@@ -645,7 +649,7 @@ final class ReportPdfDocumentService
             'waitForExpression' => 'window.__FERMAT_PDF_READY__ === true',
             'skipNetworkIdleEvent' => true,
             'skipNetworkAlmostIdleEvent' => true,
-            'failOnHttpStatusCodes' => '[499,599]',
+            'failOnHttpStatusCodes' => '[400,599]',
             'extraHttpHeaders' => json_encode([
                 'X-Fermat-Pdf-Trace' => $traceId,
             ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
@@ -688,7 +692,7 @@ final class ReportPdfDocumentService
         Log::info('MBTI_RESULT_PAGE_PDF_GOTENBERG_REQUEST', [
             'event' => 'MBTI_RESULT_PAGE_PDF_GOTENBERG_REQUEST',
             'attempt_id' => (string) $attempt->id,
-            'surface' => self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+            'surface' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
             'engine' => self::RESULT_PAGE_EXPORT_ENGINE,
             'print_url_host' => (string) ($parts['host'] ?? ''),
             'print_url_path' => (string) ($parts['path'] ?? ''),
@@ -729,7 +733,7 @@ final class ReportPdfDocumentService
     /**
      * @param  array<string,mixed>  $gate
      */
-    private function mbtiResultPrintUrl(Attempt $attempt, array $gate = []): ?string
+    private function mbtiLegacyResultPrintUrl(Attempt $attempt): ?string
     {
         $baseUrl = rtrim(trim((string) config('gotenberg.result_print_base_url', '')), '/');
         if ($baseUrl === '') {
@@ -751,12 +755,52 @@ final class ReportPdfDocumentService
         ]);
 
         $url = $baseUrl.'/'.ltrim($path, '/');
-        if (self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION !== '') {
+        $pdfToken = $this->resultPagePdfTokenService->issueForMbtiResultPageExport(
+            $attempt,
+            [],
+            $locale,
+            self::MBTI_LEGACY_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+        );
+        $separator = str_contains($url, '?') ? '&' : '?';
+        $url .= $separator.http_build_query([
+            'pdf' => '1',
+            'surface' => self::MBTI_LEGACY_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+            'pdf_token' => $pdfToken,
+            'result_access_token' => $pdfToken,
+        ], '', '&', PHP_QUERY_RFC3986);
+
+        return $url;
+    }
+
+    /**
+     * @param  array<string,mixed>  $gate
+     */
+    private function mbtiSnapshotResultPrintUrl(Attempt $attempt, array $gate): ?string
+    {
+        $baseUrl = rtrim(trim((string) config('gotenberg.result_print_base_url', '')), '/');
+        if ($baseUrl === '') {
+            return null;
+        }
+
+        $rawLocale = strtolower(trim((string) ($attempt->locale ?? '')));
+        $locale = str_starts_with($rawLocale, 'zh') ? 'zh' : 'en';
+        $attemptId = trim((string) $attempt->id);
+        if ($attemptId === '') {
+            return null;
+        }
+
+        $path = strtr('/{locale}/result/{attempt_id}/print', [
+            '{locale}' => rawurlencode($locale),
+            '{attempt_id}' => rawurlencode($attemptId),
+        ]);
+
+        $url = $baseUrl.'/'.ltrim($path, '/');
+        if (self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION !== '') {
             $pdfToken = $this->resultPagePdfTokenService->issueForMbtiResultPageExport($attempt, $gate, $locale);
             $separator = str_contains($url, '?') ? '&' : '?';
             $url .= $separator.http_build_query([
                 'pdf' => '1',
-                'surface' => self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+                'surface' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
                 'pdf_token' => $pdfToken,
                 'result_access_token' => $pdfToken,
             ], '', '&', PHP_QUERY_RFC3986);
