@@ -17283,6 +17283,48 @@ prs:
     paid_content_gate_change: false
     next_task: DEPLOY-READINESS
 
+  - id: MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01
+    repo: fap-api
+    branch: codex/mbti-desktop-clone-locked-blocks-content-01
+    base: main
+    title: "MBTI-DESKTOP-CLONE-LOCKED-BLOCKS-CONTENT-01: improve MBTI desktop clone locked block content"
+    train_scope: mbti_result_desktop_clone_locked_blocks_content
+    risk_level: p1_content_asset_quality
+    allowed_paths:
+      - content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json
+      - content_baselines/personality_clone/mbti_desktop_clone.en.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Rewrite MBTI desktop clone locked block body-like teaser copy for zh-CN and en across all 32 fullCode variants.
+      - Fix English chapter intro generated phrasing and only directly broken English visible block copy without changing schema or importer behavior.
+      - Preserve backend baseline authority, item counts, existing JSON keys, asset slots, public API compatibility, and current result-page runtime contracts.
+      - Do not change fap-web, PDF routes, public personality profiles, legacy report packages, production DB/CMS, cache, deployment, or schema.
+    validation:
+      - python3 -m json.tool content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json >/dev/null
+      - python3 -m json.tool content_baselines/personality_clone/mbti_desktop_clone.en.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - custom content audit for lockedBlocks, chapter_intro, visibleBlocks, traits_unlock, and axis_explainers
+      - cd backend && php artisan test tests/Feature/PersonalityCms/PersonalityDesktopCloneBaselineImportTest.php tests/Feature/PersonalityCms/PersonalityDesktopCloneSchemaModelTest.php tests/Feature/V0_5/PersonalityDesktopClonePublicApiTest.php
+      - cd backend && php artisan personality:import-desktop-clone-baseline --dry-run --locale=zh-CN
+      - cd backend && php artisan personality:import-desktop-clone-baseline --dry-run --locale=en
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    content_pack_mutation: true
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    paid_content_gate_change: false
+    next_task: null
+
   - id: GLOBAL-CAREER-RUNTIME-COHORT-AND-DETAIL-REPAIR-01
     repo: fap-api
     branch: codex/global-career-runtime-cohort-and-detail-repair-01
