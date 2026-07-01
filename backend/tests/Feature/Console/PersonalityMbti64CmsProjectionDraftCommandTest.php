@@ -62,6 +62,10 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         'https://fermatmind.com/zh/personality/enfj-a',
     ];
 
+    private const V8_5_V5_BILINGUAL_64_PACKAGE_PATH = 'docs/seo/personality/mbti64-zh32-en32-v8-5-v5-bilingual-package-2026-07-01.json';
+
+    private const V8_5_V5_BILINGUAL_64_QA_PATH = 'docs/seo/personality/mbti64-zh32-en32-v8-5-v5-bilingual-qa-2026-07-01.json';
+
     public function test_dry_run_plans_eighty_eight_projection_drafts_without_writes(): void
     {
         $this->seedAllTargets();
@@ -1122,6 +1126,187 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
             $payload['errors'] ?? []
         ));
         $this->assertContains('remaining_58_subset_required_urls_missing', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_v8_5_v5_bilingual_sixty_four_dry_run_accepts_locked_artifact_and_approved_queue_without_writes(): void
+    {
+        $this->seedAllTargets();
+        [$package, $qa, $packagePath, $qaPath] = $this->v85V5Bilingual64Artifacts();
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 64, 0);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH,
+            '--qa' => self::V8_5_V5_BILINGUAL_64_QA_PATH,
+            '--dry-run' => true,
+            '--v8-5-v5-bilingual-64' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame(64, $payload['row_count']);
+        $this->assertSame(64, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(64, $payload['would_create_revision_count']);
+        $this->assertSame('v8_5_v5_bilingual_64', $payload['subset']['mode']);
+        $this->assertTrue($payload['subset']['approval_queue_required']);
+        $this->assertFalse($payload['subset']['arbitrary_url_subset_allowed']);
+        $this->assertTrue($payload['approval_queue']['ready_for_write']);
+        $this->assertSame(64, $payload['approval_queue']['approved_count']);
+
+        $plannedUrls = array_map(
+            static fn (array $row): string => (string) ($row['url'] ?? ''),
+            $payload['rows'] ?? []
+        );
+        sort($plannedUrls);
+        $expectedUrls = $this->v85V5Bilingual64Urls();
+        sort($expectedUrls);
+        $this->assertSame($expectedUrls, $plannedUrls);
+        $this->assertSame($expectedUrls, array_values($this->sortedStrings((array) $payload['subset']['allowed_urls'])));
+
+        $firstSnapshot = $payload['rows'][0]['snapshot_preview']['mbti64_agent_projection_draft_v1'] ?? [];
+        $this->assertNotSame('', (string) ($firstSnapshot['first_class_draft_fields']['seo']['title'] ?? ''));
+        $this->assertNotSame('', (string) ($firstSnapshot['first_class_draft_fields']['seo']['description'] ?? ''));
+        $this->assertNotSame('', (string) ($firstSnapshot['first_class_draft_fields']['seo']['h1'] ?? ''));
+        $this->assertNotSame('', (string) ($firstSnapshot['first_class_draft_fields']['content']['quick_answer'] ?? ''));
+        $this->assertNotEmpty($firstSnapshot['structured_metadata']['reader_experience'] ?? []);
+        $this->assertNotEmpty($firstSnapshot['raw_recommendation']['modules'] ?? []);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_v8_5_v5_bilingual_sixty_four_write_requires_dedicated_approval_token(): void
+    {
+        $this->seedAllTargets();
+        [$package, $qa, $packagePath, $qaPath] = $this->v85V5Bilingual64Artifacts();
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 64, 0);
+        $options = $this->writeOptions(self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH, self::V8_5_V5_BILINGUAL_64_QA_PATH);
+        $options['--v8-5-v5-bilingual-64'] = true;
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertStringContainsString(
+            '--operator-approved=MBTI64-ZH32-EN32-V8_5-V5-CMS-DRAFT-WRITE-01 is required',
+            (string) ($payload['errors'][0]['message'] ?? '')
+        );
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_v8_5_v5_bilingual_sixty_four_write_without_approved_queue_rows_fails_closed_without_revisions(): void
+    {
+        $this->seedAllTargets();
+        $options = $this->writeOptions(self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH, self::V8_5_V5_BILINGUAL_64_QA_PATH);
+        $options['--v8-5-v5-bilingual-64'] = true;
+        $options['--operator-approved'] = 'MBTI64-ZH32-EN32-V8_5-V5-CMS-DRAFT-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(64, $payload['row_count']);
+        $this->assertSame(0, $payload['created_revision_count']);
+        $this->assertSame(0, $payload['approval_queue']['approved_count']);
+        $this->assertSame(64, $payload['approval_queue']['missing_count']);
+        $this->assertContains('agent_batch_approval_required', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_v8_5_v5_bilingual_sixty_four_write_creates_only_approved_variant_draft_revisions(): void
+    {
+        $targets = $this->seedAllTargets();
+        [$package, $qa, $packagePath, $qaPath] = $this->v85V5Bilingual64Artifacts();
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 64, 0);
+        $profileBefore = $this->profileLiveState($targets['en|ENFJ']);
+        $variantBefore = $this->variantLiveState($targets['en|ENFJ-A']);
+        $surfaceCountsBefore = $this->liveSurfaceCounts();
+        $options = $this->writeOptions(self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH, self::V8_5_V5_BILINGUAL_64_QA_PATH);
+        $options['--v8-5-v5-bilingual-64'] = true;
+        $options['--operator-approved'] = 'MBTI64-ZH32-EN32-V8_5-V5-CMS-DRAFT-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['write']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertSame(64, $payload['row_count']);
+        $this->assertSame(64, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(64, $payload['created_revision_count']);
+        $this->assertSame('v8_5_v5_bilingual_64', $payload['subset']['mode']);
+        $this->assertTrue($payload['approval_queue']['ready_for_write']);
+        $this->assertSame(64, $payload['approval_queue']['approved_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(64, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame($profileBefore, $this->profileLiveState($targets['en|ENFJ']));
+        $this->assertSame($variantBefore, $this->variantLiveState($targets['en|ENFJ-A']));
+        $this->assertSame($surfaceCountsBefore, $this->liveSurfaceCounts());
+
+        $firstRevision = PersonalityProfileVariantRevision::query()->firstOrFail();
+        $snapshot = $firstRevision->snapshot_json['mbti64_agent_projection_draft_v1'] ?? [];
+        $this->assertSame('MBTI64-ZH32-EN32-V8_5-V5-BILINGUAL-PACKAGE-QA-01', $snapshot['source']['artifact']);
+        $this->assertSame('PASS_READY_FOR_FAP_API_ARTIFACT_SYNC', $snapshot['source']['qa_final_decision']);
+        $this->assertNotSame('', (string) ($snapshot['first_class_draft_fields']['seo']['title'] ?? ''));
+        $this->assertNotSame('', (string) ($snapshot['first_class_draft_fields']['content']['quick_answer'] ?? ''));
+        $this->assertCount(12, $snapshot['first_class_draft_fields']['faq']);
+        $this->assertNotEmpty($snapshot['first_class_draft_fields']['internal_links']);
+        $this->assertNotEmpty($snapshot['structured_metadata']['reader_experience'] ?? []);
+        $this->assertNotEmpty($snapshot['raw_recommendation']['modules'] ?? []);
+        $this->assertFalse((bool) $snapshot['safety_holds']['publish_attempted']);
+        $this->assertFalse((bool) $snapshot['safety_holds']['index_attempted']);
+        $this->assertFalse((bool) $snapshot['safety_holds']['sitemap_llms_release_attempted']);
+        $this->assertFalse((bool) $snapshot['safety_holds']['search_release_attempted']);
+        $this->assertFalse((bool) $snapshot['safety_holds']['runtime_content_updated']);
+    }
+
+    public function test_v8_5_v5_bilingual_sixty_four_fails_closed_when_package_contains_arbitrary_url(): void
+    {
+        $this->seedAllTargets();
+        [$package, $qa] = $this->v85V5Bilingual64Artifacts();
+        $package['recommendations'][0]['target_url'] = 'https://fermatmind.com/en/personality/intj-a-vs-intj-t';
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--v8-5-v5-bilingual-64' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('v8_5_v5_bilingual_64_url_set_mismatch', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertContains('v8_5_v5_bilingual_64_subset_required_urls_missing', array_map(
             static fn (array $error): string => (string) ($error['code'] ?? ''),
             $payload['errors'] ?? []
         ));
@@ -2349,6 +2534,40 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
                     if (! isset($excluded[$url])) {
                         $urls[] = $url;
                     }
+                }
+            }
+        }
+
+        sort($urls);
+
+        return $urls;
+    }
+
+    /**
+     * @return array{0:array<string,mixed>,1:array<string,mixed>,2:string,3:string}
+     */
+    private function v85V5Bilingual64Artifacts(): array
+    {
+        $packagePath = base_path(self::V8_5_V5_BILINGUAL_64_PACKAGE_PATH);
+        $qaPath = base_path(self::V8_5_V5_BILINGUAL_64_QA_PATH);
+        $package = json_decode((string) File::get($packagePath), true, 512, JSON_THROW_ON_ERROR);
+        $qa = json_decode((string) File::get($qaPath), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertIsArray($package);
+        $this->assertIsArray($qa);
+
+        return [$package, $qa, $packagePath, $qaPath];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function v85V5Bilingual64Urls(): array
+    {
+        $urls = [];
+        foreach (['en', 'zh'] as $prefix) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                foreach (['a', 't'] as $variantCode) {
+                    $urls[] = 'https://fermatmind.com/'.$prefix.'/personality/'.strtolower($typeCode).'-'.$variantCode;
                 }
             }
         }

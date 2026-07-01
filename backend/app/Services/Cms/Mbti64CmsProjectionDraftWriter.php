@@ -30,6 +30,18 @@ final class Mbti64CmsProjectionDraftWriter
 
     private const REMAINING_58_V2_QA_ARTIFACT = 'MBTI64-REMAINING-58-COMPETITOR-GAP-CONTENT-EXPANSION-V2-QA-01';
 
+    private const V8_5_V5_BILINGUAL_64_ARTIFACT = 'MBTI64-ZH32-EN32-V8_5-V5-BILINGUAL-PACKAGE-QA-01';
+
+    private const V8_5_V5_BILINGUAL_64_PACKAGE_VERSION = 'mbti64_zh32_en32_v8_5_v5_bilingual_v1';
+
+    private const V8_5_V5_BILINGUAL_64_PACKAGE_FILE_SHA256 = 'a0fd058b82ec40940b8c92546c461086d3bfca7a4b0521aeb92e5cc8b0517b67';
+
+    private const V8_5_V5_BILINGUAL_64_EMBEDDED_PACKAGE_SHA256 = '13ec2c55caf2cf7b48650739fabadfb09ec4a02214cb1af99d5e47d8af2499d8';
+
+    private const V8_5_V5_BILINGUAL_64_QA_FILE_SHA256 = 'a6757d87af71db28815446269eb3a6c5ab9e1fbe0a3176191f1ebc25be2933b4';
+
+    private const V8_5_V5_BILINGUAL_64_EMBEDDED_QA_SHA256 = 'd433814924c172e88ad0a52bda665ddee1ea1d6bbe8c6bb9be46a47367baaf1a';
+
     private const VISIBLE_QUERY_BACKED_3_URLS = [
         'https://fermatmind.com/en/personality/enfj-a',
         'https://fermatmind.com/zh/personality/intp-a',
@@ -109,7 +121,7 @@ final class Mbti64CmsProjectionDraftWriter
         bool $write,
         array $options,
     ): array {
-        $errors = $this->validatePackageAndQa($package, $qa, $options);
+        $errors = $this->validatePackageAndQa($package, $qa, $sourceSha256, $qaSha256, $options);
         $warnings = array_values(array_filter((array) ($qa['warnings'] ?? []), static fn (mixed $warning): bool => is_string($warning)));
         $qaResultsByUrl = $this->qaResultsByUrl($qa);
         $recommendations = $this->recommendationsForOptions($package, $options, $write, $errors);
@@ -303,7 +315,7 @@ final class Mbti64CmsProjectionDraftWriter
      * @param  array<string,mixed>  $qa
      * @return list<array<string,string>>
      */
-    private function validatePackageAndQa(array $package, array $qa, array $options): array
+    private function validatePackageAndQa(array $package, array $qa, string $sourceSha256, string $qaSha256, array $options): array
     {
         if ($this->nextBatch6Requested($options)) {
             return $this->validateNextBatch6PackageAndQa($package, $qa);
@@ -311,6 +323,10 @@ final class Mbti64CmsProjectionDraftWriter
 
         if ($this->remaining58Requested($options)) {
             return $this->validateRemaining58PackageAndQa($package, $qa);
+        }
+
+        if ($this->v85V5Bilingual64Requested($options)) {
+            return $this->validateV85V5Bilingual64PackageAndQa($package, $qa, $sourceSha256, $qaSha256);
         }
 
         $errors = [];
@@ -531,6 +547,113 @@ final class Mbti64CmsProjectionDraftWriter
     }
 
     /**
+     * @param  array<string,mixed>  $package
+     * @param  array<string,mixed>  $qa
+     * @return list<array<string,string>>
+     */
+    private function validateV85V5Bilingual64PackageAndQa(array $package, array $qa, string $sourceSha256, string $qaSha256): array
+    {
+        $errors = [];
+        $summary = is_array($package['summary'] ?? null) ? $package['summary'] : [];
+        $qaSummary = is_array($qa['summary'] ?? null) ? $qa['summary'] : [];
+        $recommendationUrls = array_map(
+            static fn (array $item): string => (string) ($item['target_url'] ?? ''),
+            $this->recommendations($package)
+        );
+        $expectedUrls = $this->v85V5Bilingual64Urls();
+        sort($recommendationUrls);
+        sort($expectedUrls);
+
+        if ($sourceSha256 !== self::V8_5_V5_BILINGUAL_64_PACKAGE_FILE_SHA256) {
+            $errors[] = ['field' => 'source_sha256', 'code' => 'unsupported_package_file_sha256', 'message' => 'Unexpected V8.5/V5 bilingual package file SHA256.'];
+        }
+        if ((string) ($package['package_sha256'] ?? '') !== self::V8_5_V5_BILINGUAL_64_EMBEDDED_PACKAGE_SHA256) {
+            $errors[] = ['field' => 'package.package_sha256', 'code' => 'unsupported_embedded_package_sha256', 'message' => 'Unexpected V8.5/V5 embedded package SHA256.'];
+        }
+        if ($qaSha256 !== self::V8_5_V5_BILINGUAL_64_QA_FILE_SHA256) {
+            $errors[] = ['field' => 'qa_source_sha256', 'code' => 'unsupported_qa_file_sha256', 'message' => 'Unexpected V8.5/V5 bilingual QA file SHA256.'];
+        }
+        if ((string) ($qa['qa_sha256'] ?? '') !== self::V8_5_V5_BILINGUAL_64_EMBEDDED_QA_SHA256) {
+            $errors[] = ['field' => 'qa.qa_sha256', 'code' => 'unsupported_embedded_qa_sha256', 'message' => 'Unexpected V8.5/V5 embedded QA SHA256.'];
+        }
+
+        if ((string) ($package['artifact'] ?? '') !== self::V8_5_V5_BILINGUAL_64_ARTIFACT) {
+            $errors[] = ['field' => 'artifact', 'code' => 'unsupported_package_artifact', 'message' => 'Unexpected V8.5/V5 bilingual package artifact.'];
+        }
+        if ((string) ($package['package_version'] ?? '') !== self::V8_5_V5_BILINGUAL_64_PACKAGE_VERSION) {
+            $errors[] = ['field' => 'package_version', 'code' => 'unsupported_package_version', 'message' => 'Unexpected V8.5/V5 bilingual package version.'];
+        }
+        if ((string) ($package['status'] ?? '') !== 'pass') {
+            $errors[] = ['field' => 'status', 'code' => 'package_status_not_pass', 'message' => 'V8.5/V5 bilingual package must have pass status.'];
+        }
+        if ((string) ($package['framework'] ?? '') !== 'mbti64') {
+            $errors[] = ['field' => 'framework', 'code' => 'unsupported_framework', 'message' => 'V8.5/V5 bilingual package framework must be mbti64.'];
+        }
+        if ((string) ($package['final_decision'] ?? '') !== 'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC') {
+            $errors[] = ['field' => 'final_decision', 'code' => 'package_not_ready_for_artifact_sync', 'message' => 'V8.5/V5 bilingual package must be ready for fap-api artifact sync.'];
+        }
+        if (count($this->recommendations($package)) !== 64 || (int) ($package['target_count'] ?? -1) !== 64) {
+            $errors[] = ['field' => 'recommendations', 'code' => 'unexpected_recommendation_count', 'message' => 'Expected exactly 64 V8.5/V5 recommendations.'];
+        }
+        if ($recommendationUrls !== $expectedUrls) {
+            $errors[] = ['field' => 'recommendations', 'code' => 'v8_5_v5_bilingual_64_url_set_mismatch', 'message' => 'V8.5/V5 bilingual package must contain exactly the fixed 64 MBTI64 variant URLs.'];
+        }
+        if ((int) ($summary['target_count'] ?? -1) !== 64
+            || (int) ($summary['zh_pages'] ?? -1) !== 32
+            || (int) ($summary['en_pages'] ?? -1) !== 32
+            || (int) ($summary['variant_pages'] ?? -1) !== 64
+            || (int) ($summary['comparison_pages'] ?? -1) !== 0
+            || (int) ($summary['qa_pass_count'] ?? -1) !== 64
+            || (int) ($summary['qa_blocked_count'] ?? -1) !== 0) {
+            $errors[] = ['field' => 'summary', 'code' => 'summary_not_all_pass', 'message' => 'V8.5/V5 bilingual summary must show 64 variants, 32 zh, 32 en, and 0 blocked.'];
+        }
+
+        if ((string) ($qa['artifact'] ?? '') !== self::V8_5_V5_BILINGUAL_64_ARTIFACT) {
+            $errors[] = ['field' => 'qa.artifact', 'code' => 'unsupported_qa_artifact', 'message' => 'Unexpected V8.5/V5 bilingual QA artifact.'];
+        }
+        if ((string) ($qa['input_package_sha256'] ?? '') !== self::V8_5_V5_BILINGUAL_64_EMBEDDED_PACKAGE_SHA256) {
+            $errors[] = ['field' => 'qa.input_package_sha256', 'code' => 'qa_input_package_sha_mismatch', 'message' => 'QA must reference the locked V8.5/V5 bilingual embedded package SHA256.'];
+        }
+        if ((string) ($qa['final_decision'] ?? '') !== 'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC') {
+            $errors[] = ['field' => 'qa.final_decision', 'code' => 'qa_not_ready_for_artifact_sync', 'message' => 'V8.5/V5 bilingual QA must be ready for fap-api artifact sync.'];
+        }
+        if ((int) ($qaSummary['target_count'] ?? -1) !== 64
+            || (int) ($qaSummary['pass_count'] ?? -1) !== 64
+            || (int) ($qaSummary['blocked_count'] ?? -1) !== 0
+            || (int) ($qaSummary['zh_pages'] ?? -1) !== 32
+            || (int) ($qaSummary['en_pages'] ?? -1) !== 32
+            || (int) ($qaSummary['variant_pages'] ?? -1) !== 64
+            || (int) ($qaSummary['comparison_pages'] ?? -1) !== 0) {
+            $errors[] = ['field' => 'qa.summary', 'code' => 'qa_summary_not_all_pass', 'message' => 'V8.5/V5 bilingual QA summary must show 64 pass and 0 blocked.'];
+        }
+        if ((array) ($qa['blockers'] ?? []) !== []) {
+            $errors[] = ['field' => 'qa.blockers', 'code' => 'qa_blockers_present', 'message' => 'QA blockers must be empty.'];
+        }
+
+        $qaUrls = array_map(
+            static fn (array $item): string => (string) ($item['target_url'] ?? ''),
+            array_values(array_filter(
+                is_array($qa['page_results'] ?? null) ? $qa['page_results'] : [],
+                static fn (mixed $item): bool => is_array($item)
+            ))
+        );
+        sort($qaUrls);
+        if ($recommendationUrls !== $qaUrls) {
+            $errors[] = ['field' => 'qa.page_results', 'code' => 'qa_url_set_mismatch', 'message' => 'QA page result URLs must match V8.5/V5 recommendation URLs.'];
+        }
+
+        foreach ($this->qaResultsByUrl($qa) as $url => $result) {
+            $pageDecision = (string) ($result['decision'] ?? ($result['qa_decision'] ?? ''));
+            $blockedReason = trim((string) ($result['blocked_reason'] ?? ''));
+            if ($pageDecision !== 'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC' || (array) ($result['blockers'] ?? []) !== [] || $blockedReason !== '') {
+                $errors[] = ['field' => 'qa.page_results.'.$url, 'code' => 'qa_page_not_pass', 'message' => 'Every V8.5/V5 QA page result must pass artifact sync with no blockers.'];
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
      * @param  list<string>  $urls
      */
     private function countUrlsByPageType(array $urls, string $pageType): int
@@ -584,6 +707,7 @@ final class Mbti64CmsProjectionDraftWriter
         $freshQueryBacked5 = (bool) ($options['fresh_query_backed_5'] ?? false);
         $nextBatch6 = $this->nextBatch6Requested($options);
         $remaining58 = $this->remaining58Requested($options);
+        $v85V5Bilingual64 = $this->v85V5Bilingual64Requested($options);
         $rewriteExistingV2Modules = $this->remaining58V2ModuleRewriteRequested($options);
         $agentBatchRequested = $this->agentBatchRequested($options);
 
@@ -602,17 +726,18 @@ final class Mbti64CmsProjectionDraftWriter
             + ($freshQueryBacked5 ? 1 : 0)
             + ($nextBatch6 ? 1 : 0)
             + ($remaining58 ? 1 : 0)
+            + ($v85V5Bilingual64 ? 1 : 0)
             + ($agentBatchRequested ? 1 : 0) > 1) {
             $errors[] = [
                 'field' => 'options',
                 'code' => 'exclusive_subset_modes_required',
-                'message' => 'Only one subset mode can be used: --visible-query-backed-3, --fresh-query-backed-3, --fresh-query-backed-5, --next-batch-6, --remaining-58, or agent batch options.',
+                'message' => 'Only one subset mode can be used: --visible-query-backed-3, --fresh-query-backed-3, --fresh-query-backed-5, --next-batch-6, --remaining-58, --v8-5-v5-bilingual-64, or agent batch options.',
             ];
 
             return [];
         }
 
-        if (! $visibleQueryBacked3 && ! $freshQueryBacked3 && ! $freshQueryBacked5 && ! $nextBatch6 && ! $remaining58 && ! $agentBatchRequested) {
+        if (! $visibleQueryBacked3 && ! $freshQueryBacked3 && ! $freshQueryBacked5 && ! $nextBatch6 && ! $remaining58 && ! $v85V5Bilingual64 && ! $agentBatchRequested) {
             return $recommendations;
         }
 
@@ -630,6 +755,11 @@ final class Mbti64CmsProjectionDraftWriter
                 $this->remaining58Urls(),
                 'remaining_58_subset_required_urls_missing',
                 'remaining 58',
+            ],
+            $v85V5Bilingual64 => [
+                $this->v85V5Bilingual64Urls(),
+                'v8_5_v5_bilingual_64_subset_required_urls_missing',
+                'V8.5/V5 bilingual 64',
             ],
             $nextBatch6 => [
                 self::NEXT_BATCH_6_URLS,
@@ -700,6 +830,14 @@ final class Mbti64CmsProjectionDraftWriter
     /**
      * @param  array<string,mixed>  $options
      */
+    private function v85V5Bilingual64Requested(array $options): bool
+    {
+        return (bool) ($options['v8_5_v5_bilingual_64'] ?? false);
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     */
     private function remaining58V2ModuleRewriteRequested(array $options): bool
     {
         return (bool) ($options['rewrite_existing_v2_modules'] ?? false);
@@ -719,6 +857,25 @@ final class Mbti64CmsProjectionDraftWriter
                     if (! isset($excluded[$url])) {
                         $urls[] = $url;
                     }
+                }
+            }
+        }
+
+        sort($urls);
+
+        return $urls;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function v85V5Bilingual64Urls(): array
+    {
+        $urls = [];
+        foreach (['en', 'zh'] as $prefix) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                foreach (['a', 't'] as $variantCode) {
+                    $urls[] = 'https://fermatmind.com/'.$prefix.'/personality/'.strtolower($typeCode).'-'.$variantCode;
                 }
             }
         }
@@ -946,7 +1103,10 @@ final class Mbti64CmsProjectionDraftWriter
      */
     private function agentBatchApprovalGate(array $preparedRows, string $sourceSha256, string $qaSha256, array $options): array
     {
-        if (! $this->agentBatchRequested($options) && ! $this->nextBatch6Requested($options) && ! $this->remaining58Requested($options)) {
+        if (! $this->agentBatchRequested($options)
+            && ! $this->nextBatch6Requested($options)
+            && ! $this->remaining58Requested($options)
+            && ! $this->v85V5Bilingual64Requested($options)) {
             return [
                 'required_for_write' => false,
                 'ready_for_write' => true,
@@ -1064,6 +1224,7 @@ final class Mbti64CmsProjectionDraftWriter
             'PASS_READY_FOR_CMS_DRAFT',
             'PASS_READY_FOR_APPROVAL_REVIEW',
             'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
+            'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC',
             'READY_QUERY_BACKED_LOW_RISK_DRAFT_REVIEW',
         ], true);
     }
@@ -1131,7 +1292,7 @@ final class Mbti64CmsProjectionDraftWriter
         string $qaSha256,
         array $qaResult,
     ): array {
-        $recommended = is_array($recommendation['recommendations'] ?? null) ? $recommendation['recommendations'] : [];
+        $recommended = $this->draftFieldsForRecommendation($recommendation);
 
         return [
             self::SNAPSHOT_KEY => [
@@ -1168,6 +1329,9 @@ final class Mbti64CmsProjectionDraftWriter
                         ? array_values((array) $recommendation['reference_patterns_used'])
                         : [],
                     'source_inputs' => is_array($recommendation['source_inputs'] ?? null) ? $recommendation['source_inputs'] : [],
+                    'geo_summary' => is_array($recommendation['geo_summary'] ?? null) ? $recommendation['geo_summary'] : [],
+                    'reader_experience' => is_array($recommendation['reader_experience'] ?? null) ? $recommendation['reader_experience'] : [],
+                    'source_ledger' => is_array($recommendation['source_ledger'] ?? null) ? $recommendation['source_ledger'] : [],
                     'qa_result' => $qaResult,
                     'qa_summary' => is_array($qa['summary'] ?? null) ? $qa['summary'] : [],
                 ],
@@ -1181,6 +1345,35 @@ final class Mbti64CmsProjectionDraftWriter
                 ],
                 'raw_recommendation' => $recommendation,
             ],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $recommendation
+     * @return array<string,mixed>
+     */
+    private function draftFieldsForRecommendation(array $recommendation): array
+    {
+        if (is_array($recommendation['recommendations'] ?? null)) {
+            return $recommendation['recommendations'];
+        }
+
+        $seo = is_array($recommendation['seo'] ?? null) ? $recommendation['seo'] : [];
+        $geoSummary = is_array($recommendation['geo_summary'] ?? null) ? $recommendation['geo_summary'] : [];
+
+        return [
+            'title' => (string) ($seo['title'] ?? ''),
+            'description' => (string) ($seo['description'] ?? ''),
+            'h1' => (string) ($recommendation['h1'] ?? ($seo['h1'] ?? '')),
+            'quick_answer' => (string) ($geoSummary['direct_answer']
+                ?? ($geoSummary['ai_search_answer_block']['what_is'] ?? '')),
+            'sections' => is_array($recommendation['modules'] ?? null) ? array_values((array) $recommendation['modules']) : [],
+            'faq' => is_array($recommendation['faq'] ?? null) ? array_values((array) $recommendation['faq']) : [],
+            'internal_links' => is_array($recommendation['internal_links'] ?? null) ? array_values((array) $recommendation['internal_links']) : [],
+            'differentiation_notes' => array_values(array_filter([
+                is_string($recommendation['core_tension'] ?? null) ? (string) $recommendation['core_tension'] : null,
+                is_array($recommendation['reader_experience'] ?? null) ? 'V8.5/V5 reader experience payload present.' : null,
+            ], static fn (?string $value): bool => $value !== null && trim($value) !== '')),
         ];
     }
 
@@ -1226,7 +1419,8 @@ final class Mbti64CmsProjectionDraftWriter
                 continue;
             }
 
-            $sectionKey = $this->firstClassSectionKey((string) ($section['key'] ?? ''), $index);
+            $sourceKey = (string) ($section['key'] ?? ($section['id'] ?? ''));
+            $sectionKey = $this->firstClassSectionKey($sourceKey, $index);
             if ($sectionKey === '' || array_key_exists($sectionKey, $sections)) {
                 continue;
             }
@@ -1239,7 +1433,7 @@ final class Mbti64CmsProjectionDraftWriter
             $sections[$sectionKey] = [
                 'title' => $this->sectionTitle($section),
                 'body' => $body,
-                'source_key' => (string) ($section['key'] ?? ''),
+                'source_key' => $sourceKey,
                 'source' => 'mbti64_competitor_gap_v2_first_class_section',
                 'raw' => $section,
             ];
@@ -1260,6 +1454,16 @@ final class Mbti64CmsProjectionDraftWriter
             'stress_growth' => 'strengths_blind_spots',
             'common_misreads' => 'common_misreads',
             'how_to_use_not_use' => 'similar_types',
+            'core_reading' => 'meaning',
+            'logic_evidence_judgment' => 'core_traits',
+            'independence_decision_control' => 'a_t_difference',
+            'will_standards_long_termism' => 'strengths_blind_spots',
+            'curiosity_revision' => 'core_traits',
+            'emotional_blind_spots_pressure_feedback' => 'strengths_blind_spots',
+            'social_friction_feedback_relationships' => 'relationships_communication',
+            'work_career_scenarios' => 'careers_work_style',
+            'relationships_intimacy' => 'relationships_communication',
+            'faq_usage_boundary' => 'similar_types',
         ];
 
         if (isset($map[$normalized])) {
@@ -1321,6 +1525,23 @@ final class Mbti64CmsProjectionDraftWriter
             if (isset($section[$key]) && is_string($section[$key]) && trim($section[$key]) !== '') {
                 $parts[] = trim($section[$key]);
                 break;
+            }
+        }
+
+        if (isset($section['insight']) && is_string($section['insight']) && trim($section['insight']) !== '') {
+            array_unshift($parts, trim($section['insight']));
+        }
+
+        $paragraphs = is_array($section['paragraphs'] ?? null) ? array_values((array) $section['paragraphs']) : [];
+        if ($paragraphs !== []) {
+            $paragraphLines = [];
+            foreach ($paragraphs as $paragraph) {
+                if (is_string($paragraph) && trim($paragraph) !== '') {
+                    $paragraphLines[] = trim($paragraph);
+                }
+            }
+            if ($paragraphLines !== []) {
+                $parts[] = implode("\n\n", $paragraphLines);
             }
         }
 
@@ -1405,6 +1626,7 @@ final class Mbti64CmsProjectionDraftWriter
             'search_release_attempted' => false,
             'writes_committed' => false,
             'rewrite_existing_v2_modules' => $this->remaining58V2ModuleRewriteRequested($options),
+            'v8_5_v5_bilingual_64' => $this->v85V5Bilingual64Requested($options),
             'subset' => $this->subsetSummary($options),
         ];
     }
@@ -1420,6 +1642,7 @@ final class Mbti64CmsProjectionDraftWriter
         $freshQueryBacked5 = (bool) ($options['fresh_query_backed_5'] ?? false);
         $nextBatch6 = $this->nextBatch6Requested($options);
         $remaining58 = $this->remaining58Requested($options);
+        $v85V5Bilingual64 = $this->v85V5Bilingual64Requested($options);
         $agentBatchRequested = $this->agentBatchRequested($options);
         $selectedUrls = array_values(array_map(
             static fn (array $row): string => (string) ($row['url'] ?? ''),
@@ -1486,6 +1709,19 @@ final class Mbti64CmsProjectionDraftWriter
                 'approval_queue_required' => true,
                 'rewrite_existing_v2_modules' => $this->remaining58V2ModuleRewriteRequested($options),
                 'allowed_urls' => $this->remaining58Urls(),
+                'selected_urls' => $selectedUrls,
+                'arbitrary_url_subset_allowed' => false,
+            ];
+        }
+
+        if ($v85V5Bilingual64) {
+            return [
+                'mode' => 'v8_5_v5_bilingual_64',
+                'enabled' => true,
+                'dry_run_only' => false,
+                'write_allowed_with_strict_approval' => true,
+                'approval_queue_required' => true,
+                'allowed_urls' => $this->v85V5Bilingual64Urls(),
                 'selected_urls' => $selectedUrls,
                 'arbitrary_url_subset_allowed' => false,
             ];
