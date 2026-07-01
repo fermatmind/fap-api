@@ -228,8 +228,8 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $this->assertSame('pass', $payload['status']);
         $this->assertSame('mbti64', $payload['framework']);
         $this->assertSame('PASS_READY_FOR_FAP_API_ARTIFACT_SYNC', $payload['qa_final_decision']);
-        $this->assertSame('a0fd058b82ec40940b8c92546c461086d3bfca7a4b0521aeb92e5cc8b0517b67', $payload['source_package_sha256']);
-        $this->assertSame('a6757d87af71db28815446269eb3a6c5ab9e1fbe0a3176191f1ebc25be2933b4', $payload['qa_sha256']);
+        $this->assertSame('38e1e325c8ed38c2181d8ce01d315b12c161690691dcc699605ecc186d72f286', $payload['source_package_sha256']);
+        $this->assertSame('f0afbfcdb795050764951b2d1c08779b65bdc7f96cb2482ffba7fc957db398b7', $payload['qa_sha256']);
         $this->assertTrue($payload['dry_run']);
         $this->assertFalse($payload['write']);
         $this->assertFalse($payload['writes_attempted']);
