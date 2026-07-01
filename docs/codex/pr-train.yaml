@@ -30680,3 +30680,42 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: MBTI-PDF-SNAPSHOT-SYNC-GUARD-H1
+    repo: fap-api
+    depends_on: []
+    branch: codex/mbti-pdf-snapshot-sync-guard-h1
+    title: "MBTI-PDF-SNAPSHOT-SYNC-GUARD-H1: add PDF snapshot render-source cache guard"
+    train_scope: mbti_pdf_snapshot_sync_guard_h1_companion
+    status: in_progress
+    scope:
+      - Add `X-Pdf-Print-Asset-Hash` observability for MBTI result-page snapshot PDF responses.
+      - Include the print asset hash in the result-page PDF artifact key so print-impact frontend asset changes can miss old artifacts when the hash is updated.
+      - Keep `MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION` as the manual fallback escape hatch.
+      - Add focused cache tests proving changed print asset hash does not hit the old artifact.
+    allowed_paths:
+      - backend/config/gotenberg.php
+      - backend/app/Services/Report/Pdf/ReportPdfDocumentService.php
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web in this repository.
+      - Deploy, reload, restart, clear cache, write DB/CMS/search/indexing/queue, mutate server env, or run production import.
+      - Change Gotenberg route, timeout, PDF rendering chain, content injection, visual layout, content assets, mPDF behavior, sitemap, llms, canonical, noindex, JSON-LD, or SEO runtime.
+    validation:
+      - cd backend && php artisan test --filter=AttemptPublicReportPdfParityTest
+      - cd backend && ./vendor/bin/pint --dirty
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

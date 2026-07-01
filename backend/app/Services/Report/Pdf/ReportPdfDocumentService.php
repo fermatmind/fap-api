@@ -24,6 +24,8 @@ final class ReportPdfDocumentService
 
     public const MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION = 'mbti.snapshot.print_layout.v1';
 
+    public const MBTI_RESULT_PAGE_SNAPSHOT_PRINT_ASSET_HASH = 'sha256:f8b8f8a162f469777924fb60966fac19c29ea4fdad1323b5f9ae1a19286a7614';
+
     public const RESULT_PAGE_EXPORT_ENGINE = 'gotenberg_chromium';
 
     private const MBTI_LEGACY_RESULT_PAGE_EXPORT_SURFACE_VERSION = 'mbti.result_page_export.v2';
@@ -405,6 +407,7 @@ final class ReportPdfDocumentService
                 'surface' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE,
                 'surface_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
                 'render_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION,
+                'print_asset_hash' => self::mbtiResultPageSnapshotPrintAssetHash(),
                 'trace_id' => $traceId,
             ];
         }
@@ -423,6 +426,7 @@ final class ReportPdfDocumentService
             'surface' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE,
             'surface_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
             'render_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION,
+            'print_asset_hash' => self::mbtiResultPageSnapshotPrintAssetHash(),
             'trace_id' => $traceId,
         ];
     }
@@ -442,11 +446,24 @@ final class ReportPdfDocumentService
             $baseHash,
             self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
             self::MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION,
+            $this->sanitizeManifestSegment(self::mbtiResultPageSnapshotPrintAssetHash()),
             self::RESULT_PAGE_EXPORT_ENGINE,
             preg_replace('/[^a-z0-9_.-]+/i', '_', $locale) ?: 'locale',
             $entitlement,
             $variant,
         ]);
+    }
+
+    public static function mbtiResultPageSnapshotPrintAssetHash(): string
+    {
+        $configured = trim((string) config('gotenberg.result_print_asset_hash', ''));
+
+        return $configured !== '' ? $configured : self::MBTI_RESULT_PAGE_SNAPSHOT_PRINT_ASSET_HASH;
+    }
+
+    private function sanitizeManifestSegment(string $value): string
+    {
+        return preg_replace('/[^a-z0-9_.-]+/i', '_', trim($value)) ?: 'unset';
     }
 
     private function baseContentManifestHash(Attempt $attempt, ?Result $result = null): string
