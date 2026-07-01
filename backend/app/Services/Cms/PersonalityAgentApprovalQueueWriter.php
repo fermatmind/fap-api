@@ -10,6 +10,37 @@ final class PersonalityAgentApprovalQueueWriter
 {
     private const ALLOWED_FRAMEWORKS = ['mbti64', 'big_five', 'enneagram'];
 
+    private const MBTI64_V85_V5_ARTIFACT = 'MBTI64-ZH32-EN32-V8_5-V5-BILINGUAL-PACKAGE-QA-01';
+
+    private const MBTI64_V85_V5_PACKAGE_VERSION = 'mbti64_zh32_en32_v8_5_v5_bilingual_v1';
+
+    private const MBTI64_V85_V5_PACKAGE_FILE_SHA256 = 'a0fd058b82ec40940b8c92546c461086d3bfca7a4b0521aeb92e5cc8b0517b67';
+
+    private const MBTI64_V85_V5_QA_FILE_SHA256 = 'a6757d87af71db28815446269eb3a6c5ab9e1fbe0a3176191f1ebc25be2933b4';
+
+    private const MBTI64_V85_V5_PACKAGE_SHA256 = '13ec2c55caf2cf7b48650739fabadfb09ec4a02214cb1af99d5e47d8af2499d8';
+
+    private const MBTI64_V85_V5_QA_SHA256 = 'd433814924c172e88ad0a52bda665ddee1ea1d6bbe8c6bb9be46a47367baaf1a';
+
+    private const MBTI64_TYPES = [
+        'enfj',
+        'enfp',
+        'entj',
+        'entp',
+        'esfj',
+        'esfp',
+        'estj',
+        'estp',
+        'infj',
+        'infp',
+        'intj',
+        'intp',
+        'isfj',
+        'isfp',
+        'istj',
+        'istp',
+    ];
+
     private const FORBIDDEN_ROUTE_PATTERNS = [
         '#/results?(?:/|$)#i',
         '#/orders?(?:/|$)#i',
@@ -81,7 +112,7 @@ final class PersonalityAgentApprovalQueueWriter
         }
 
         $framework = $this->frameworkForBatch($queueItems);
-        $errors = $this->validationErrors($package, $qa, $queueItems);
+        $errors = $this->validationErrors($package, $qa, $sourceSha256, $qaSha256, $queueItems);
 
         if ($errors !== []) {
             return array_merge($this->baseSummary($package, $qa, $sourceSha256, $qaSha256, $write, $metadata), [
@@ -721,6 +752,7 @@ final class PersonalityAgentApprovalQueueWriter
             'PASS_READY_FOR_APPROVAL_HANDOFF',
             'PASS_READY_FOR_EDITORIAL_REVIEW_AND_APPROVAL_QUEUE_REPAIR',
             'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
+            'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC',
             'READY_QUERY_BACKED_LOW_RISK_DRAFT_REVIEW',
         ], true);
     }
@@ -729,7 +761,7 @@ final class PersonalityAgentApprovalQueueWriter
      * @param  list<array<string,mixed>>  $queueItems
      * @return list<array<string,string>>
      */
-    private function validationErrors(array $package, array $qa, array $queueItems): array
+    private function validationErrors(array $package, array $qa, string $sourceSha256, string $qaSha256, array $queueItems): array
     {
         $errors = [];
         if ($this->recommendations($package) === []) {
@@ -754,7 +786,175 @@ final class PersonalityAgentApprovalQueueWriter
             ];
         }
 
+        $isMbti64V85V5ContractCandidate = $this->isMbti64V85V5ContractCandidate($package, $qa);
+        if (! $isMbti64V85V5ContractCandidate && $this->hasFapApiArtifactSyncDecision($qa)) {
+            $errors[] = [
+                'field' => 'qa.final_decision',
+                'code' => 'fap_api_artifact_sync_decision_requires_mbti64_v85_v5_contract',
+                'message' => 'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC is only accepted for the locked MBTI64 V8.5/V5 bilingual package contract.',
+            ];
+        }
+
+        if ($isMbti64V85V5ContractCandidate) {
+            $errors = array_merge(
+                $errors,
+                $this->mbti64V85V5ContractErrors($package, $qa, $sourceSha256, $qaSha256, $queueItems)
+            );
+        }
+
         return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     * @param  array<string,mixed>  $qa
+     */
+    private function isMbti64V85V5ContractCandidate(array $package, array $qa): bool
+    {
+        return (string) ($package['artifact'] ?? '') === self::MBTI64_V85_V5_ARTIFACT
+            || (string) ($package['package_version'] ?? '') === self::MBTI64_V85_V5_PACKAGE_VERSION
+            || (string) ($qa['artifact'] ?? '') === self::MBTI64_V85_V5_ARTIFACT
+            || (string) ($qa['input_package_sha256'] ?? '') === self::MBTI64_V85_V5_PACKAGE_SHA256;
+    }
+
+    /**
+     * @param  array<string,mixed>  $qa
+     */
+    private function hasFapApiArtifactSyncDecision(array $qa): bool
+    {
+        if ((string) ($qa['final_decision'] ?? $qa['decision'] ?? '') === 'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC') {
+            return true;
+        }
+
+        foreach ($this->qaResultsByUrl($qa) as $qaResult) {
+            $decision = (string) ($qaResult['decision'] ?? $qaResult['qa_decision'] ?? $qaResult['status'] ?? $qaResult['qa_status'] ?? '');
+            if ($decision === 'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     * @param  array<string,mixed>  $qa
+     * @param  list<array<string,mixed>>  $queueItems
+     * @return list<array<string,string>>
+     */
+    private function mbti64V85V5ContractErrors(
+        array $package,
+        array $qa,
+        string $sourceSha256,
+        string $qaSha256,
+        array $queueItems
+    ): array {
+        $errors = [];
+        $expectedUrls = $this->mbti64V85V5ExpectedUrls();
+        $recommendations = $this->recommendations($package);
+        $qaResultsByUrl = $this->qaResultsByUrl($qa);
+        $recommendationUrls = $this->sortedUniqueUrls($recommendations);
+        $qaUrls = $this->sortedUniqueUrls(array_values($qaResultsByUrl));
+        $queueUrls = $this->sortedUniqueUrls($queueItems);
+
+        $expectedScalars = [
+            ['field' => 'package.artifact', 'actual' => (string) ($package['artifact'] ?? ''), 'expected' => self::MBTI64_V85_V5_ARTIFACT, 'code' => 'mbti64_v85_v5_package_artifact_mismatch'],
+            ['field' => 'package.package_version', 'actual' => (string) ($package['package_version'] ?? ''), 'expected' => self::MBTI64_V85_V5_PACKAGE_VERSION, 'code' => 'mbti64_v85_v5_package_version_mismatch'],
+            ['field' => 'package.package_sha256', 'actual' => (string) ($package['package_sha256'] ?? ''), 'expected' => self::MBTI64_V85_V5_PACKAGE_SHA256, 'code' => 'mbti64_v85_v5_embedded_package_sha_mismatch'],
+            ['field' => 'qa.artifact', 'actual' => (string) ($qa['artifact'] ?? ''), 'expected' => self::MBTI64_V85_V5_ARTIFACT, 'code' => 'mbti64_v85_v5_qa_artifact_mismatch'],
+            ['field' => 'qa.final_decision', 'actual' => (string) ($qa['final_decision'] ?? ''), 'expected' => 'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC', 'code' => 'mbti64_v85_v5_qa_final_decision_mismatch'],
+            ['field' => 'qa.input_package_sha256', 'actual' => (string) ($qa['input_package_sha256'] ?? ''), 'expected' => self::MBTI64_V85_V5_PACKAGE_SHA256, 'code' => 'mbti64_v85_v5_qa_input_package_sha_mismatch'],
+            ['field' => 'qa.qa_sha256', 'actual' => (string) ($qa['qa_sha256'] ?? ''), 'expected' => self::MBTI64_V85_V5_QA_SHA256, 'code' => 'mbti64_v85_v5_embedded_qa_sha_mismatch'],
+            ['field' => 'source_package_sha256', 'actual' => $sourceSha256, 'expected' => self::MBTI64_V85_V5_PACKAGE_FILE_SHA256, 'code' => 'mbti64_v85_v5_package_file_sha_mismatch'],
+            ['field' => 'qa_sha256', 'actual' => $qaSha256, 'expected' => self::MBTI64_V85_V5_QA_FILE_SHA256, 'code' => 'mbti64_v85_v5_qa_file_sha_mismatch'],
+        ];
+
+        foreach ($expectedScalars as $lock) {
+            if ($lock['actual'] !== $lock['expected']) {
+                $errors[] = [
+                    'field' => $lock['field'],
+                    'code' => $lock['code'],
+                    'message' => 'MBTI64 V8.5/V5 approval queue contract requires the exact synced artifact lock.',
+                ];
+            }
+        }
+
+        if ((int) ($package['target_count'] ?? 0) !== 64 || count($recommendations) !== 64) {
+            $errors[] = [
+                'field' => 'package.recommendations',
+                'code' => 'mbti64_v85_v5_recommendation_count_mismatch',
+                'message' => 'MBTI64 V8.5/V5 approval queue contract requires exactly 64 recommendation rows.',
+            ];
+        }
+
+        if (count($qaResultsByUrl) !== 64) {
+            $errors[] = [
+                'field' => 'qa.page_results',
+                'code' => 'mbti64_v85_v5_qa_count_mismatch',
+                'message' => 'MBTI64 V8.5/V5 approval queue contract requires exactly 64 QA rows.',
+            ];
+        }
+
+        if ($recommendationUrls !== $expectedUrls || $qaUrls !== $expectedUrls || $queueUrls !== $expectedUrls) {
+            $errors[] = [
+                'field' => 'target_url',
+                'code' => 'mbti64_v85_v5_target_set_mismatch',
+                'message' => 'MBTI64 V8.5/V5 approval queue contract only allows the fixed 64 A/T variant URLs.',
+            ];
+        }
+
+        foreach ($recommendations as $recommendation) {
+            $targetUrl = (string) ($recommendation['target_url'] ?? '');
+            $path = (string) (parse_url($targetUrl, PHP_URL_PATH) ?: '');
+            if ((string) ($recommendation['framework'] ?? '') !== 'mbti64'
+                || preg_match('#^/(en|zh)/personality/[a-z]{4}-(?:a|t)$#i', $path) !== 1
+                || str_contains($path, '-a-vs-')
+            ) {
+                $errors[] = [
+                    'field' => 'package.recommendations.target_url',
+                    'code' => 'mbti64_v85_v5_non_variant_target_present',
+                    'message' => 'MBTI64 V8.5/V5 approval queue contract rejects comparison or non-MBTI64 targets.',
+                ];
+
+                break;
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function mbti64V85V5ExpectedUrls(): array
+    {
+        $urls = [];
+        foreach (['en', 'zh'] as $locale) {
+            foreach (self::MBTI64_TYPES as $type) {
+                foreach (['a', 't'] as $variant) {
+                    $urls[] = 'https://fermatmind.com/'.$locale.'/personality/'.$type.'-'.$variant;
+                }
+            }
+        }
+
+        sort($urls);
+
+        return $urls;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $items
+     * @return list<string>
+     */
+    private function sortedUniqueUrls(array $items): array
+    {
+        $urls = array_values(array_unique(array_filter(array_map(
+            static fn (array $item): string => (string) ($item['target_url'] ?? ''),
+            $items
+        ))));
+        sort($urls);
+
+        return $urls;
     }
 
     /**

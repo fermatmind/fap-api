@@ -213,6 +213,188 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
     }
 
+    public function test_mbti64_v85_v5_bilingual_package_can_enter_human_approval_queue_dry_run_only(): void
+    {
+        $exitCode = Artisan::call('personality:agent-approval-queue', [
+            '--package' => $this->mbti64V85V5PackagePath(),
+            '--qa' => $this->mbti64V85V5QaPath(),
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame('mbti64', $payload['framework']);
+        $this->assertSame('PASS_READY_FOR_FAP_API_ARTIFACT_SYNC', $payload['qa_final_decision']);
+        $this->assertSame('a0fd058b82ec40940b8c92546c461086d3bfca7a4b0521aeb92e5cc8b0517b67', $payload['source_package_sha256']);
+        $this->assertSame('a6757d87af71db28815446269eb3a6c5ab9e1fbe0a3176191f1ebc25be2933b4', $payload['qa_sha256']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertFalse($payload['writes_attempted']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['cms_write_attempted']);
+        $this->assertFalse($payload['cms_mutation_attempted']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertFalse($payload['enqueue_attempted']);
+        $this->assertFalse($payload['external_calls_attempted']);
+        $this->assertFalse($payload['live_content_updated']);
+        $this->assertSame(64, $payload['planned_item_count']);
+        $this->assertSame(0, $payload['blocked_item_count']);
+        $this->assertSame(0, $payload['created_item_count']);
+        $this->assertSame([], $payload['errors']);
+        $this->assertCount(64, $payload['items']);
+        $this->assertSame(
+            ['mbti64'],
+            array_values(array_unique(array_map(
+                static fn (array $item): string => (string) $item['framework'],
+                $payload['items']
+            )))
+        );
+        $this->assertSame(
+            ['personality_profile_variant'],
+            array_values(array_unique(array_map(
+                static fn (array $item): string => (string) $item['page_type'],
+                $payload['items']
+            )))
+        );
+        $this->assertSame(
+            ['PASS_READY_FOR_FAP_API_ARTIFACT_SYNC'],
+            array_values(array_unique(array_map(
+                static fn (array $item): string => (string) $item['qa_decision'],
+                $payload['items']
+            )))
+        );
+        $this->assertSame(0, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
+    }
+
+    public function test_mbti64_v85_v5_bilingual_write_creates_pending_items_only(): void
+    {
+        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions(
+            $this->mbti64V85V5PackagePath(),
+            $this->mbti64V85V5QaPath()
+        ));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(64, $payload['planned_item_count']);
+        $this->assertSame(64, $payload['queued_item_count']);
+        $this->assertSame(64, $payload['created_item_count']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertFalse($payload['cms_write_attempted']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame(1, DB::table('personality_agent_approval_batches')->where('framework', 'mbti64')->count());
+        $this->assertSame(64, DB::table('personality_agent_approval_items')->where('framework', 'mbti64')->where('approval_state', 'pending')->count());
+        $this->assertSame(
+            0,
+            DB::table('personality_agent_approval_items')
+                ->where('target_url', 'like', '%-a-vs-%')
+                ->orWhere('target_url', 'like', '%/results/%')
+                ->count()
+        );
+    }
+
+    public function test_mbti64_v85_v5_bilingual_reencoded_artifact_fails_closed_on_hash_lock(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts(
+            $this->mbti64V85V5Package(),
+            $this->mbti64V85V5Qa()
+        );
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame('fail', $payload['status']);
+        $this->assertSame(64, $payload['planned_item_count']);
+        $this->assertSame(0, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
+        $this->assertContains(
+            'mbti64_v85_v5_package_file_sha_mismatch',
+            array_map(static fn (array $error): string => (string) $error['code'], $payload['errors'])
+        );
+        $this->assertContains(
+            'mbti64_v85_v5_qa_file_sha_mismatch',
+            array_map(static fn (array $error): string => (string) $error['code'], $payload['errors'])
+        );
+    }
+
+    public function test_mbti64_v85_v5_bilingual_missing_target_fails_closed(): void
+    {
+        $package = $this->mbti64V85V5Package();
+        $qa = $this->mbti64V85V5Qa();
+        array_pop($package['recommendations']);
+        array_pop($qa['page_results']);
+        $package['target_count'] = 63;
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame('fail', $payload['status']);
+        $this->assertSame(63, $payload['planned_item_count']);
+        $this->assertSame(0, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
+        $this->assertContains(
+            'mbti64_v85_v5_target_set_mismatch',
+            array_map(static fn (array $error): string => (string) $error['code'], $payload['errors'])
+        );
+        $this->assertContains(
+            'mbti64_v85_v5_recommendation_count_mismatch',
+            array_map(static fn (array $error): string => (string) $error['code'], $payload['errors'])
+        );
+    }
+
+    public function test_fap_api_artifact_sync_decision_is_rejected_without_mbti64_v85_v5_contract_lock(): void
+    {
+        $qa = $this->validQa();
+        $qa['final_decision'] = 'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC';
+        foreach ($qa['page_results'] as &$row) {
+            $row['decision'] = 'PASS_READY_FOR_FAP_API_ARTIFACT_SYNC';
+        }
+        unset($row);
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $qa);
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame('fail', $payload['status']);
+        $this->assertSame(2, $payload['planned_item_count']);
+        $this->assertSame(0, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
+        $this->assertContains(
+            'fap_api_artifact_sync_decision_requires_mbti64_v85_v5_contract',
+            array_map(static fn (array $error): string => (string) $error['code'], $payload['errors'])
+        );
+    }
+
     public function test_write_creates_pending_human_approval_queue_items_only(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
@@ -1156,6 +1338,32 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
             'eligible_for_approval_queue' => $status === 'pass' && $failedGates === [],
             'eligible_for_cms_draft_path' => $status === 'pass' && $failedGates === [],
         ];
+    }
+
+    private function mbti64V85V5PackagePath(): string
+    {
+        return base_path('docs/seo/personality/mbti64-zh32-en32-v8-5-v5-bilingual-package-2026-07-01.json');
+    }
+
+    private function mbti64V85V5QaPath(): string
+    {
+        return base_path('docs/seo/personality/mbti64-zh32-en32-v8-5-v5-bilingual-qa-2026-07-01.json');
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function mbti64V85V5Package(): array
+    {
+        return json_decode((string) File::get($this->mbti64V85V5PackagePath()), true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function mbti64V85V5Qa(): array
+    {
+        return json_decode((string) File::get($this->mbti64V85V5QaPath()), true, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
