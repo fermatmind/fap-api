@@ -28,6 +28,8 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
 
     private const REMAINING_58_V2_MODULE_REWRITE_OPERATOR_APPROVAL = 'MBTI64-REMAINING-58-COMPETITOR-GAP-V2-MODULE-DRAFT-REWRITE-01';
 
+    private const V8_5_V5_BILINGUAL_64_OPERATOR_APPROVAL = 'MBTI64-ZH32-EN32-V8_5-V5-CMS-DRAFT-WRITE-01';
+
     private const WRITE_SAFETY_FLAGS = [
         'draft-only',
         'no-publish',
@@ -48,6 +50,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
         {--next-batch-6 : Restrict planning/write to the approved 6 next-batch MBTI64 URLs}
         {--remaining-58 : Restrict planning/write to the approved 58 remaining competitor-gap MBTI64 variant URLs}
         {--rewrite-existing-v2-modules : For --remaining-58 only, create patched draft revisions when same-hash existing drafts lack first-class V2 module fields}
+        {--v8-5-v5-bilingual-64 : Restrict planning/write to the fixed 64 MBTI64 V8.5/V5 bilingual variant URLs}
         {--agent-batch-size= : Restrict planning/write to an artifact-order batch; only 5 or 10 are allowed}
         {--agent-batch-offset= : Zero-based artifact-order offset for --agent-batch-size; defaults to 0}
         {--json : Emit the full JSON summary}
@@ -147,6 +150,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
             (bool) $this->option('next-batch-6') => self::NEXT_BATCH_6_OPERATOR_APPROVAL,
             (bool) $this->option('remaining-58') && (bool) $this->option('rewrite-existing-v2-modules') => self::REMAINING_58_V2_MODULE_REWRITE_OPERATOR_APPROVAL,
             (bool) $this->option('remaining-58') => self::REMAINING_58_OPERATOR_APPROVAL,
+            (bool) $this->option('v8-5-v5-bilingual-64') => self::V8_5_V5_BILINGUAL_64_OPERATOR_APPROVAL,
             $this->agentBatchRequested() => self::AGENT_BATCH_OPERATOR_APPROVAL,
             default => self::OPERATOR_APPROVAL,
         };
@@ -183,6 +187,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
             'next_batch_6' => (bool) $this->option('next-batch-6'),
             'remaining_58' => (bool) $this->option('remaining-58'),
             'rewrite_existing_v2_modules' => (bool) $this->option('rewrite-existing-v2-modules'),
+            'v8_5_v5_bilingual_64' => (bool) $this->option('v8-5-v5-bilingual-64'),
             'agent_batch_size' => trim((string) $this->option('agent-batch-size')),
             'agent_batch_offset' => trim((string) $this->option('agent-batch-offset')),
             'draft_only' => (bool) $this->option('draft-only'),
