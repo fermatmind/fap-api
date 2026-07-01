@@ -1,0 +1,3488 @@
+{
+  "artifact": "MBTI64-ZH32-EN32-V8_5-V5-BILINGUAL-PACKAGE-QA-01",
+  "generated_at": "2026-07-01T12:00:00.000Z",
+  "input_artifact": "docs/seo/personality/mbti64-zh32-en32-v8-5-v5-bilingual-package-2026-07-01.json",
+  "input_package_sha256": "13ec2c55caf2cf7b48650739fabadfb09ec4a02214cb1af99d5e47d8af2499d8",
+  "final_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+  "recommended_next_task": "MBTI64-ZH32-EN32-V8_5-V5-ARTIFACT-SYNC-01",
+  "summary": {
+    "target_count": 64,
+    "pass_count": 64,
+    "blocked_count": 0,
+    "zh_pages": 32,
+    "en_pages": 32,
+    "variant_pages": 64,
+    "comparison_pages": 0,
+    "source_qa_pass": true
+  },
+  "input_artifacts": [
+    {
+      "locale": "zh",
+      "package_path": "/Users/rainie/Desktop/MBTI64_ZH32_V8_5_COMPETITOR_READABILITY_STRUCTURE_UPGRADE_2026-07-01/MBTI64_ZH32_V8_5_COMPETITOR_READABILITY_STRUCTURE_UPGRADE_2026-07-01_COMPLETE.json",
+      "package_sha256": "56e9ccb7849b866b89bfa40fea773fba98e770f1697193d64429a22b118e3ec3",
+      "qa_path": "/Users/rainie/Desktop/MBTI64_ZH32_V8_5_COMPETITOR_READABILITY_STRUCTURE_UPGRADE_2026-07-01/MBTI64_ZH32_V8_5_COMPETITOR_READABILITY_STRUCTURE_UPGRADE_2026-07-01_QA.json",
+      "qa_sha256": "a2f4b6f91560f4fc7109b0053f8c4ccd387080338705c20ff21bfbba50b5f6fc",
+      "final_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "total_pages": 32,
+      "pass_count": 32
+    },
+    {
+      "locale": "en",
+      "package_path": "/Users/rainie/Desktop/MBTI64_EN32_V5_COMPETITOR_READABILITY_STRUCTURE_SYNC_2026-07-01/MBTI64_EN32_V5_COMPETITOR_READABILITY_STRUCTURE_SYNC_2026-07-01_COMPLETE.json",
+      "package_sha256": "f5ec1ba5a772f08c382fb35013ed5f167479e8d0425644e912fbb3d7762153ba",
+      "qa_path": "/Users/rainie/Desktop/MBTI64_EN32_V5_COMPETITOR_READABILITY_STRUCTURE_SYNC_2026-07-01/MBTI64_EN32_V5_COMPETITOR_READABILITY_STRUCTURE_SYNC_2026-07-01_QA.json",
+      "qa_sha256": "c445e67150dfb473ad83f000e1742b0df82406656c90d3b76709213720343f17",
+      "final_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "total_pages": 32,
+      "pass_count": 32
+    }
+  ],
+  "gate_totals": {
+    "inventory_gate": {
+      "passed": 64,
+      "failed": 0
+    },
+    "field_completeness_gate": {
+      "passed": 64,
+      "failed": 0
+    },
+    "module_depth_gate": {
+      "passed": 64,
+      "failed": 0
+    },
+    "bilingual_alignment_gate": {
+      "passed": 64,
+      "failed": 0
+    },
+    "trademark_affiliation_gate": {
+      "passed": 64,
+      "failed": 0
+    },
+    "deterministic_claim_gate": {
+      "passed": 64,
+      "failed": 0
+    },
+    "clinical_recruiting_gate": {
+      "passed": 64,
+      "failed": 0
+    },
+    "duplicate_template_gate": {
+      "passed": 64,
+      "failed": 0
+    },
+    "private_route_gate": {
+      "passed": 64,
+      "failed": 0
+    }
+  },
+  "page_results": [
+    {
+      "target_url": "https://fermatmind.com/en/personality/enfj-a",
+      "path": "/en/personality/enfj-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "enfj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enfj-t",
+      "path": "/en/personality/enfj-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "enfj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enfp-a",
+      "path": "/en/personality/enfp-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "enfp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enfp-t",
+      "path": "/en/personality/enfp-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "enfp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/entj-a",
+      "path": "/en/personality/entj-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "entj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/entj-t",
+      "path": "/en/personality/entj-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "entj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/entp-a",
+      "path": "/en/personality/entp-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "entp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/entp-t",
+      "path": "/en/personality/entp-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "entp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/esfj-a",
+      "path": "/en/personality/esfj-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "esfj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/esfj-t",
+      "path": "/en/personality/esfj-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "esfj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/esfp-a",
+      "path": "/en/personality/esfp-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "esfp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/esfp-t",
+      "path": "/en/personality/esfp-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "esfp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/estj-a",
+      "path": "/en/personality/estj-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "estj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/estj-t",
+      "path": "/en/personality/estj-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "estj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/estp-a",
+      "path": "/en/personality/estp-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "estp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/estp-t",
+      "path": "/en/personality/estp-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "estp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/infj-a",
+      "path": "/en/personality/infj-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "infj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/infj-t",
+      "path": "/en/personality/infj-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "infj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/infp-a",
+      "path": "/en/personality/infp-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "infp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/infp-t",
+      "path": "/en/personality/infp-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "infp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/intj-a",
+      "path": "/en/personality/intj-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "intj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/intj-t",
+      "path": "/en/personality/intj-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "intj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/intp-a",
+      "path": "/en/personality/intp-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "intp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/intp-t",
+      "path": "/en/personality/intp-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "intp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/isfj-a",
+      "path": "/en/personality/isfj-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "isfj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/isfj-t",
+      "path": "/en/personality/isfj-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "isfj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/isfp-a",
+      "path": "/en/personality/isfp-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "isfp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/isfp-t",
+      "path": "/en/personality/isfp-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "isfp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/istj-a",
+      "path": "/en/personality/istj-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "istj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/istj-t",
+      "path": "/en/personality/istj-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "istj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/istp-a",
+      "path": "/en/personality/istp-a",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "istp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/istp-t",
+      "path": "/en/personality/istp-t",
+      "locale": "en",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "istp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enfj-a",
+      "path": "/zh/personality/enfj-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "enfj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enfj-t",
+      "path": "/zh/personality/enfj-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "enfj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enfp-a",
+      "path": "/zh/personality/enfp-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "enfp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enfp-t",
+      "path": "/zh/personality/enfp-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "enfp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/entj-a",
+      "path": "/zh/personality/entj-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "entj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/entj-t",
+      "path": "/zh/personality/entj-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "entj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/entp-a",
+      "path": "/zh/personality/entp-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "entp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/entp-t",
+      "path": "/zh/personality/entp-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "entp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/esfj-a",
+      "path": "/zh/personality/esfj-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "esfj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/esfj-t",
+      "path": "/zh/personality/esfj-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "esfj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/esfp-a",
+      "path": "/zh/personality/esfp-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "esfp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/esfp-t",
+      "path": "/zh/personality/esfp-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "esfp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/estj-a",
+      "path": "/zh/personality/estj-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "estj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/estj-t",
+      "path": "/zh/personality/estj-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "estj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/estp-a",
+      "path": "/zh/personality/estp-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "estp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/estp-t",
+      "path": "/zh/personality/estp-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "estp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/infj-a",
+      "path": "/zh/personality/infj-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "infj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/infj-t",
+      "path": "/zh/personality/infj-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "infj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/infp-a",
+      "path": "/zh/personality/infp-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "infp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/infp-t",
+      "path": "/zh/personality/infp-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "infp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/intj-a",
+      "path": "/zh/personality/intj-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "intj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 4,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/intj-t",
+      "path": "/zh/personality/intj-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "intj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 4,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/intp-a",
+      "path": "/zh/personality/intp-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "intp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 4,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/intp-t",
+      "path": "/zh/personality/intp-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "intp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 4,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/isfj-a",
+      "path": "/zh/personality/isfj-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "isfj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/isfj-t",
+      "path": "/zh/personality/isfj-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "isfj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/isfp-a",
+      "path": "/zh/personality/isfp-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "isfp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/isfp-t",
+      "path": "/zh/personality/isfp-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "isfp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/istj-a",
+      "path": "/zh/personality/istj-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "istj",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/istj-t",
+      "path": "/zh/personality/istj-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "istj",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/istp-a",
+      "path": "/zh/personality/istp-a",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "istp",
+      "variant": "a",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/istp-t",
+      "path": "/zh/personality/istp-t",
+      "locale": "zh",
+      "framework": "mbti64",
+      "page_type": "variant",
+      "type_code": "istp",
+      "variant": "t",
+      "module_count": 10,
+      "faq_count": 12,
+      "internal_link_count": 6,
+      "source_ledger_count": 6,
+      "gates": {
+        "inventory_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "field_completeness_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "module_depth_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "bilingual_alignment_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "trademark_affiliation_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "deterministic_claim_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "clinical_recruiting_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "duplicate_template_gate": {
+          "status": "pass",
+          "failures": []
+        },
+        "private_route_gate": {
+          "status": "pass",
+          "failures": []
+        }
+      },
+      "qa_decision": "PASS_READY_FOR_FAP_API_ARTIFACT_SYNC",
+      "blocked_reason": null
+    }
+  ],
+  "safety_boundary": {
+    "artifact_only": true,
+    "cms_write": false,
+    "approval_queue_write": false,
+    "live_promotion": false,
+    "publish_index_search": false,
+    "sitemap_llms_mutation": false,
+    "search_queue_mutation": false,
+    "indexnow_submit": false,
+    "frontend_runtime_change": false,
+    "url_truth_write": false,
+    "production_deploy": false,
+    "external_api_call": false
+  },
+  "blockers": [],
+  "qa_sha256": "d433814924c172e88ad0a52bda665ddee1ea1d6bbe8c6bb9be46a47367baaf1a"
+}
