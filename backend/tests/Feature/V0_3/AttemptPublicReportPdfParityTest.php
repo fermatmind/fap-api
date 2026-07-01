@@ -310,6 +310,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_snapshot');
         $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_snapshot.v4');
         $pdf->assertHeader('X-Pdf-Render-Version', 'mbti.snapshot.print_layout.v1');
+        $pdf->assertHeader('X-Pdf-Print-Asset-Hash', 'sha256:f8b8f8a162f469777924fb60966fac19c29ea4fdad1323b5f9ae1a19286a7614');
         $pdf->assertHeader('X-Pdf-Artifact-Cache', 'MISS');
         $pdf->assertHeader('X-Legacy-Mpdf-Fallback', 'false');
         $this->assertNotSame('', (string) $pdf->headers->get('X-Gotenberg-Trace'));
@@ -353,7 +354,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $this->assertArrayNotHasKey('failOnConsoleExceptions', $payload);
 
         Storage::disk('local')->assertExists(
-            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_snapshot.v4-mbti.snapshot.print_layout.v1-gotenberg_chromium-zh-locked-free/report_free.pdf"
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_snapshot.v4-mbti.snapshot.print_layout.v1-sha256_f8b8f8a162f469777924fb60966fac19c29ea4fdad1323b5f9ae1a19286a7614-gotenberg_chromium-zh-locked-free/report_free.pdf"
         );
     }
 
@@ -528,6 +529,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_snapshot');
         $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_snapshot.v4');
         $pdf->assertHeader('X-Pdf-Render-Version', 'mbti.snapshot.print_layout.v1');
+        $pdf->assertHeader('X-Pdf-Print-Asset-Hash', 'sha256:f8b8f8a162f469777924fb60966fac19c29ea4fdad1323b5f9ae1a19286a7614');
         $pdf->assertHeader('X-Legacy-Mpdf-Fallback', 'false');
         $pdf->assertHeader('X-Pdf-Error-Stage', 'gotenberg.convert_url');
         $this->assertStringContainsString('X-Gotenberg-Trace', (string) $pdf->headers->get('Access-Control-Expose-Headers'));
@@ -541,7 +543,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertJsonPath('request_id', 'pdf-export-request-1');
         $this->assertSame($pdf->headers->get('X-Gotenberg-Trace'), $pdf->json('trace'));
         Storage::disk('local')->assertMissing(
-            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_snapshot.v4-mbti.snapshot.print_layout.v1-gotenberg_chromium-zh-locked-free/report_free.pdf"
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_snapshot.v4-mbti.snapshot.print_layout.v1-sha256_f8b8f8a162f469777924fb60966fac19c29ea4fdad1323b5f9ae1a19286a7614-gotenberg_chromium-zh-locked-free/report_free.pdf"
         );
     }
 
@@ -618,7 +620,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $this->createResult($attemptId);
 
         Storage::disk('local')->put(
-            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_snapshot.v4-mbti.snapshot.print_layout.v1-gotenberg_chromium-zh-locked-free/report_free.pdf",
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_snapshot.v4-mbti.snapshot.print_layout.v1-sha256_f8b8f8a162f469777924fb60966fac19c29ea4fdad1323b5f9ae1a19286a7614-gotenberg_chromium-zh-locked-free/report_free.pdf",
             '%PDF-1.4 cached chromium export'
         );
 
@@ -634,9 +636,52 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_snapshot');
         $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_snapshot.v4');
         $pdf->assertHeader('X-Pdf-Render-Version', 'mbti.snapshot.print_layout.v1');
+        $pdf->assertHeader('X-Pdf-Print-Asset-Hash', 'sha256:f8b8f8a162f469777924fb60966fac19c29ea4fdad1323b5f9ae1a19286a7614');
         $pdf->assertHeader('X-Pdf-Artifact-Cache', 'HIT');
         $pdf->assertHeader('X-Legacy-Mpdf-Fallback', 'false');
         $this->assertStringContainsString('cached chromium export', (string) $pdf->getContent());
         Http::assertNothingSent();
+    }
+
+    public function test_public_mbti_result_page_pdf_print_asset_hash_change_misses_old_artifact(): void
+    {
+        $this->seedScales();
+        config()->set('fap.features.report_snapshot_strict_v2', false);
+        config()->set('gotenberg.enabled', true);
+        config()->set('gotenberg.base_url', 'http://gotenberg:3000');
+        config()->set('gotenberg.result_print_base_url', 'http://frontend:3000');
+        config()->set('gotenberg.result_print_asset_hash', 'sha256:1111111111111111111111111111111111111111111111111111111111111111');
+        Storage::fake('local');
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_mbti_result_page_pdf_asset_hash';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, 'MBTI', $anonId);
+        $this->createResult($attemptId);
+
+        Storage::disk('local')->put(
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_snapshot.v4-mbti.snapshot.print_layout.v1-sha256_f8b8f8a162f469777924fb60966fac19c29ea4fdad1323b5f9ae1a19286a7614-gotenberg_chromium-zh-locked-free/report_free.pdf",
+            '%PDF-1.4 cached old print asset hash export'
+        );
+
+        Http::fake([
+            'gotenberg:3000/forms/chromium/convert/url' => Http::response('%PDF-1.4 new print asset hash export', 200, [
+                'Content-Type' => 'application/pdf',
+            ]),
+        ]);
+
+        $pdf = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->get("/api/v0.3/attempts/{$attemptId}/result-page.pdf");
+
+        $pdf->assertStatus(200);
+        $pdf->assertHeader('X-Pdf-Print-Asset-Hash', 'sha256:1111111111111111111111111111111111111111111111111111111111111111');
+        $pdf->assertHeader('X-Pdf-Artifact-Cache', 'MISS');
+        $this->assertStringContainsString('new print asset hash export', (string) $pdf->getContent());
+        $this->assertStringNotContainsString('cached old print asset hash export', (string) $pdf->getContent());
+        Storage::disk('local')->assertExists(
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_snapshot.v4-mbti.snapshot.print_layout.v1-sha256_1111111111111111111111111111111111111111111111111111111111111111-gotenberg_chromium-zh-locked-free/report_free.pdf"
+        );
     }
 }

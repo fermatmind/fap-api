@@ -66323,5 +66323,88 @@
         "summary": "Re-audited all zh-CN/en desktop clone locked/visible content; initialized local en owner rows via existing public personality baseline importer; zh-CN and en desktop clone dry-runs both pass."
       }
     ]
+  },
+  "MBTI-PDF-SNAPSHOT-SYNC-GUARD-H1": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/mbti-pdf-snapshot-sync-guard-h1",
+    "title": "MBTI-PDF-SNAPSHOT-SYNC-GUARD-H1: add PDF snapshot render-source cache guard",
+    "train_scope": "mbti_pdf_snapshot_sync_guard_h1_companion",
+    "depends_on": [],
+    "status": "pr_open",
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2579",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided /goal execution request with explicit H1 backend companion scope, validation, merge, and cleanup rules."
+      },
+      "worktree_isolation": {
+        "status": "pass",
+        "evidence": "Created branch codex/mbti-pdf-snapshot-sync-guard-h1 in isolated /private/tmp fap-api worktree from origin/main because the main branch is owned by another local worktree."
+      },
+      "phpunit_result_page_pdf": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=AttemptPublicReportPdfParityTest",
+        "evidence": "11 tests completed with exit code 0; warnings are existing deprecation/file_get_contents notices."
+      },
+      "pint_dirty": {
+        "status": "pass",
+        "command": "cd backend && ./vendor/bin/pint --dirty",
+        "evidence": "4 changed PHP files formatted."
+      },
+      "manifest_parse": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\"",
+        "evidence": "YAML parsed successfully."
+      },
+      "state_parse": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "evidence": "JSON parsed successfully."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "autoload_isolation": {
+        "status": "pass",
+        "evidence": "Temporary backend worktree uses copied vendor plus composer dump-autoload so tests load current branch sources rather than the original checkout."
+      }
+    },
+    "scope_validation": {
+      "allowed_files": [
+        "backend/config/gotenberg.php",
+        "backend/app/Services/Report/Pdf/ReportPdfDocumentService.php",
+        "backend/app/Http/Controllers/API/V0_3/AttemptReadController.php",
+        "backend/tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "generated/pr-train-sidecar-issues/**"
+      ],
+      "outside_scope_files": []
+    },
+    "events": [
+      {
+        "at": "2026-07-01T14:30:04.421Z",
+        "status": "in_progress",
+        "notes": "Initialized H1 backend companion. Scope is print asset hash header/cache-key guard only; no deploy, server mutation, content import, Gotenberg route/timeout, visual layout, CMS/DB, sitemap/llms/SEO runtime changes."
+      },
+      {
+        "at": "2026-07-01T14:41:15.290294Z",
+        "status": "local_checks_passed",
+        "notes": "fap-api companion H1 local checks passed; no deploy, DB/CMS write, or production import performed."
+      },
+      {
+        "at": "2026-07-01T14:44:12.039300Z",
+        "status": "pr_open",
+        "notes": "Opened fap-api companion PR #2579 for H1."
+      }
+    ]
   }
 }
