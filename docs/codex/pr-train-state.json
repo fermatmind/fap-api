@@ -68656,8 +68656,8 @@
     "depends_on": [
       "PR-EQ-ASSET-AUDIT-00"
     ],
-    "status": "pr_open",
-    "commit_sha": "c5478e267a0c9f724a2fef186b77364a2ae1ece5",
+    "status": "merged",
+    "commit_sha": "d855e8c6b440078fc517991fbe2bc7e3a5dcb474",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2611",
     "checks": [
       {
@@ -68707,14 +68707,14 @@
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T17:15:28Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -68733,6 +68733,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "summary": "Opened PR #2611 after scoped local validation passed."
+      },
+      {
+        "at": "2026-07-02T17:19:31.629240Z",
+        "from": "pr_open",
+        "to": "merged",
+        "summary": "Reconciled PR #2611 merge commit 67702f7e00644a2413b91586fe7d757b32609c17; origin/main contains merge commit and task branch was cleaned."
       }
     ]
   },
@@ -68745,17 +68751,63 @@
     "depends_on": [
       "PR-EQ-ASSET-SCI-03"
     ],
-    "status": "user_authorized",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": [],
+    "status": "pr_open",
+    "commit_sha": "295a1c7fee94a6c62f18997d835cdad96e3f19d5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2613",
+    "checks": [
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content lint passed."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content compile passed; scoped compiled report assets retained."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 432 assertions; PHPUnit reported environment file_get_contents warning only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+        "status": "passed_with_warnings",
+        "summary": "12 tests passed, 683 assertions; PHPUnit reported environment file_get_contents warnings only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 208 assertions; PHPUnit reported environment file_get_contents warning only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+        "status": "passed_with_warnings",
+        "summary": "4 tests passed, 130 assertions; PHPUnit reported environment file_get_contents warnings only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 16 assertions; PHPUnit reported environment file_get_contents warning only."
+      },
+      {
+        "command": "score_system mechanical suffix sanity scan",
+        "status": "passed",
+        "summary": "No mechanical standard-score suffixes or known English typo patterns remain in the scoped score_system assets."
+      },
+      {
+        "command": "cmp EQ_60 and EQ_EMOTIONAL_INTELLIGENCE score_system raw assets",
+        "status": "passed",
+        "summary": "Alias raw asset mirror is byte-for-byte identical."
+      }
+    ],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -68764,6 +68816,18 @@
         "at": "2026-07-02T16:12:11.904905Z",
         "status": "user_authorized",
         "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      },
+      {
+        "at": "2026-07-02T17:19:31.629240Z",
+        "from": "user_authorized",
+        "to": "local_checks_passed",
+        "summary": "Reworked score_system labels, dimension definitions, band notes, percentile/standard-score boundaries, and bilingual claim strength without changing scoring or norms; local EQ checks passed."
+      },
+      {
+        "at": "2026-07-02T17:22:59.291891Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "summary": "Opened PR #2613 for scoped score_system science-boundary repair; awaiting GitHub checks."
       }
     ]
   },
