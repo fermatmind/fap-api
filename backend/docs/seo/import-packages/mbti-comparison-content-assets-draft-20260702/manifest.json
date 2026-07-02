@@ -1,0 +1,25 @@
+{
+  "package_id": "mbti-comparison-content-assets-draft-20260702",
+  "artifact": "MBTI64-COMPARISON-ASSETS-DRY-RUN-01",
+  "status": "draft",
+  "authority_target": {
+    "table": "personality_profile_sections",
+    "section_key": "mbti64_comparison_a_vs_t",
+    "public_api": "/api/v0.5/personality/comparisons/{comparison}"
+  },
+  "comparison_assets": [
+    "comparisons/FermatMind_INTP-A_vs_INTP-T_CMS_READY.json"
+  ],
+  "source_context": [
+    "source_context/FermatMind_INTP-A_ZH_V8_4_Content_Asset.json",
+    "source_context/FermatMind_INTP-T_ZH_V8_4_Content_Asset.json"
+  ],
+  "dry_run_only": true,
+  "write_supported_in_this_package": false,
+  "publish_supported_in_this_package": false,
+  "search_release_supported_in_this_package": false,
+  "notes": [
+    "Use this package to validate GPT-generated MBTI A/T comparison assets before any CMS draft writer is authorized.",
+    "The extracted INTJ.zip context was limited to INTP-A and INTP-T because the supplied comparison package is INTP-A vs INTP-T."
+  ]
+}
