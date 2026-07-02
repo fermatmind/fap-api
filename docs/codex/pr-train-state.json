@@ -63745,7 +63745,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-02T16:22:20Z",
+  "updated_at": "2026-07-02T16:35:13Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -67044,8 +67044,8 @@
     "train_scope": "riasec_result_content_science_repair",
     "base": "main",
     "depends_on": [],
-    "status": "pr_opened",
-    "commit_sha": "60d9808ff7ec926321ecb7cb8f8a0f8d981183d5",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "2ff9a76b669b356232cddb54dbada9452caa7071",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2601",
     "checks": {
       "phpunit": {
@@ -67077,24 +67077,33 @@
         "command": "git diff --name-only && git ls-files --others --exclude-standard; compare against SCIENCE-00 allowed paths",
         "status": "passed",
         "summary": "Only 5 SCIENCE-00 allowed paths changed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "summary": "hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-mbti-legacy, verify-mbti-v2, verify-bigfive all passed before squash merge."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T16:28:42Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/docs/riasec/content-science-boundary-lint-v1.json",
         "backend/docs/riasec/content-science-boundary-lint-v1.md",
         "backend/tests/Unit/Services/Riasec/RiasecContentScienceBoundaryLintTest.php",
         "docs/codex/pr-train-state.json",
         "docs/codex/pr-train.yaml"
-      ]
+      ],
+      "origin_main_contains_merge_commit": true,
+      "local_main_synced": true,
+      "local_main_equals_origin_main": true,
+      "task_branch_deleted_local": true,
+      "task_branch_deleted_remote": true
     },
     "transitions": [
       {
@@ -67114,8 +67123,15 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2601 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T16:35:13Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2601 merged; origin/main contains merge commit; local main synced; task branches cleaned. Recorded during HERO-01 ledger reconciliation."
       }
-    ]
+    ],
+    "merge_commit_sha": "b026ae56fe1fd25784277b3f54533c43f1dd4f44"
   },
   "RIASEC-CONTENT-HERO-01": {
     "id": "RIASEC-CONTENT-HERO-01",
@@ -67127,19 +67143,49 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "authorized_pending_start",
+    "status": "local_validation_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "164 tests, 95192 assertions"
+      },
+      "phpunit_top3_matrix": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecTop3ChainSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php tests/Unit/Services/Riasec/RiasecContentScienceBoundaryLintTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "15 tests, 3763 assertions"
+      },
+      "pint": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php tests/Unit/Services/Riasec/RiasecTop3ChainSlotRegistryTest.php",
+        "status": "passed"
+      },
+      "asset_jsonl_preflight": {
+        "command": "parse backend/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl and reject hero forbidden phrases",
+        "status": "passed",
+        "summary": "20 unique unordered top3 rows; no hero forbidden phrases in visible copy"
+      },
+      "manifest_state_parse_and_diff_check": {
+        "command": "ruby YAML parse; python JSON parse; git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl",
+        "backend/tests/Unit/Services/Riasec/RiasecTop3ChainSlotRegistryTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -67147,6 +67193,12 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T16:35:13Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Implemented HERO-01 top3 hero copy repair; local RIASEC unit subset and scope validation passed."
       }
     ]
   },
