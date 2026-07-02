@@ -71174,9 +71174,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "58672bb19544d8a557e06bb0283407a7e28d2d46",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2645",
     "checks": {
       "targeted_quality_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecQualityRuleContractTest.php --no-ansi --display-warnings",
@@ -71231,6 +71231,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "QUALITY-01 repaired low-quality/cautious reading boundaries; targeted tests, full RIASEC unit subset, Pint, JSON parse, and diff check passed before commit."
+      },
+      {
+        "at": "2026-07-02T20:31:39Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2645 for QUALITY-01 after local validation and scope validation passed."
       }
     ]
   },
