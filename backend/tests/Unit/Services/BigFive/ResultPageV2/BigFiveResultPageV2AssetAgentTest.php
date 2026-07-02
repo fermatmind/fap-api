@@ -7820,6 +7820,123 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_scientific_accuracy_repair_v0_2_staging_import_is_reviewed_and_non_runtime(): void
+    {
+        $stagingDir = base_path('content_assets/big5/result_page_v2/staging_candidate_imports/scientific_accuracy_repair_v0_2_staging_import');
+
+        foreach ([
+            'selector_asset_candidates.staging.jsonl',
+            'content_asset_candidates.staging.jsonl',
+            'staging_import_manifest.json',
+            'staging_import_validation_report.json',
+            'repair_log.json',
+        ] as $filename) {
+            $this->assertFileExists($stagingDir.'/'.$filename);
+        }
+
+        $manifest = $this->readJson($stagingDir.'/staging_import_manifest.json');
+        $validation = $this->readJson($stagingDir.'/staging_import_validation_report.json');
+        $repairLog = $this->readJson($stagingDir.'/repair_log.json');
+        $selectorRows = $this->readJsonl($stagingDir.'/selector_asset_candidates.staging.jsonl');
+        $contentRows = $this->readJsonl($stagingDir.'/content_asset_candidates.staging.jsonl');
+
+        $this->assertSame('staging_import_manifest', $manifest['task'] ?? null);
+        $this->assertSame('staging_only', $manifest['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($manifest['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($manifest['ready_for_pilot'] ?? true));
+        $this->assertFalse((bool) ($manifest['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($manifest['ready_for_production'] ?? true));
+        $this->assertSame('content_assets/big5/result_page_v2/agent_runs/scientific_accuracy_repair_v0_2_normalized', $manifest['candidate_dir'] ?? null);
+        $this->assertSame(529, $manifest['selector_asset_candidate_count'] ?? null);
+        $this->assertSame(529, $manifest['content_asset_candidate_count'] ?? null);
+        $this->assertSame('approved_for_staging', data_get($manifest, 'review_manifest.review_status'));
+
+        $this->assertSame('staging_import_validation', $validation['task'] ?? null);
+        $this->assertTrue((bool) ($validation['allow_staging_write'] ?? false));
+        $this->assertTrue((bool) ($validation['staging_write_performed'] ?? false));
+        $this->assertSame(529, data_get($validation, 'candidate_counts.selector_asset'));
+        $this->assertSame(529, data_get($validation, 'candidate_counts.content_asset'));
+        $this->assertSame('pass', data_get($validation, 'candidate_validation.status'));
+        $this->assertSame(0, data_get($validation, 'candidate_validation.error_count'));
+        $this->assertSame(0, data_get($validation, 'leak_scan.hit_count'));
+        $this->assertTrue((bool) data_get($validation, 'review_manifest.valid'));
+        $this->assertFalse((bool) data_get($validation, 'negative_guarantees.runtime_flag_change', true));
+        $this->assertFalse((bool) data_get($validation, 'negative_guarantees.production_import_gate_change', true));
+        $this->assertFalse((bool) data_get($validation, 'negative_guarantees.rollout_gate_change', true));
+        $this->assertFalse((bool) data_get($validation, 'negative_guarantees.frontend_copy_write', true));
+        $this->assertFalse((bool) data_get($validation, 'negative_guarantees.cms_write', true));
+        $this->assertFalse((bool) data_get($validation, 'negative_guarantees.final_result_payload_generation', true));
+
+        $this->assertFalse((bool) ($repairLog['repair_required'] ?? true));
+        $this->assertSame([], $repairLog['entries'] ?? null);
+        $this->assertCount(529, $selectorRows);
+        $this->assertCount(529, $contentRows);
+
+        $contentAssetIds = [];
+        foreach ($contentRows as $row) {
+            $this->assertStringStartsWith('candidate_content_scientific_accuracy_repair_v0_2_', $row['asset_id'] ?? '');
+            $this->assertSame('editorial_reviewed', $row['qa_status'] ?? null);
+            $this->assertSame('staging_only', $row['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($row['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_pilot'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($row['ready_for_production'] ?? true));
+            $this->assertSame(false, data_get($row, 'source_trace.bfi_2_copy_used'));
+            $this->assertSame(false, data_get($row, 'source_trace.external_copy_used'));
+            $this->assertSame('scientific_accuracy_repair_v0_2_normalized', data_get($row, 'source_trace.normalization_stage'));
+            $contentAssetIds[$row['asset_id']] = true;
+        }
+
+        foreach ($selectorRows as $row) {
+            $this->assertStringStartsWith('candidate_selector_scientific_accuracy_repair_v0_2_', $row['asset_key'] ?? '');
+            $this->assertSame('approved_for_staging', $row['review_status'] ?? null);
+            $this->assertSame('scientific_accuracy_repair_v0_2_normalized', data_get($row, 'provenance.candidate_stage'));
+            $this->assertFalse((bool) ($row['shareable'] ?? true));
+            $this->assertArrayHasKey((string) data_get($row, 'public_payload.candidate_ref'), $contentAssetIds);
+            $this->assertFalse((bool) data_get($row, 'replacement_policy.replaces_existing_runtime_asset', true));
+        }
+
+        $visibleText = implode("\n", array_merge(
+            array_map(
+                static fn (array $row): string => implode("\n", array_filter([
+                    (string) ($row['title_zh'] ?? ''),
+                    (string) ($row['summary_zh'] ?? ''),
+                    (string) ($row['body_zh'] ?? ''),
+                    (string) ($row['short_body_zh'] ?? ''),
+                    (string) ($row['cta_zh'] ?? ''),
+                ])),
+                $contentRows
+            ),
+            array_map(
+                static fn (array $row): string => implode("\n", array_filter([
+                    (string) data_get($row, 'public_payload.title_zh', ''),
+                    (string) data_get($row, 'public_payload.summary_zh', ''),
+                ])),
+                $selectorRows
+            )
+        ));
+
+        foreach ([
+            'big5:',
+            'band:',
+            'PR3B',
+            'AttemptReadController',
+            'Big Five Report Engine',
+            '[object Object]',
+            '你就是这种人',
+            '固定类型',
+            '招聘筛选',
+            '收入预测',
+            '成功预测',
+            '伴侣匹配',
+            '约高于',
+            '精确排名',
+            '能力证明',
+        ] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+        }
+    }
+
     private function readJson(string $path): array
     {
         $decoded = json_decode((string) file_get_contents($path), true);
