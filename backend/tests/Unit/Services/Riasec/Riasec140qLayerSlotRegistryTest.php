@@ -30,9 +30,17 @@ final class Riasec140qLayerSlotRegistryTest extends TestCase
             $this->assertSame('authored', $slot['content_status']);
             $this->assertSame('reviewed_content_copy', $slot['source_status']);
             $this->assertFalse($slot['frontend_fallback_allowed']);
+            $this->assertTrue($slot['contextual_detail_only']);
+            $this->assertFalse($slot['result_mutation_allowed']);
+            $this->assertFalse($slot['raw_score_comparison_allowed']);
+            $this->assertFalse($slot['accuracy_upgrade_claim_allowed']);
+            $this->assertStringContainsString('不改写 60Q', $slot['science_boundary']);
 
             foreach ($registry->layer140qRequiredFields() as $field) {
                 $this->assertArrayHasKey($field, $slot);
+                if (is_bool($slot[$field])) {
+                    continue;
+                }
                 $this->assertNotEmpty($slot[$field]);
             }
 

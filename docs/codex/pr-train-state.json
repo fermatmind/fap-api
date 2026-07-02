@@ -71016,8 +71016,8 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "pr_opened",
-    "commit_sha": "fb5a37de7b4efa3892513393305725715efacf12",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "5278d693b174b82bb31a82bc7cc3521bb962a4af",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2643",
     "checks": {
       "phpunit_pair_deep_copy_tests": {
@@ -71041,14 +71041,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T20:09:05Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
-      "post_merge_revalidated": false,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
         "backend/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl",
@@ -71076,6 +71076,12 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2643 after PAIRDEEP-01 local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T20:14:03Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "GitHub PR #2643 merged and post-merge cleanup verified before starting 140LAYER-01."
       }
     ]
   },
@@ -71090,19 +71096,46 @@
       "RIASEC-CONTENT-140CTA-01",
       "RIASEC-CONTENT-140CTX-02"
     ],
-    "status": "authorized_pending_start",
+    "status": "local_validation_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "phpunit_140q_layer_tests": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi --display-warnings",
+        "status": "passed_after_scope_fix",
+        "summary": "18 tests, 8227 assertions"
+      },
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "178 tests, 112799 assertions"
+      },
+      "pint_and_jsonl_parse": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php; php JSONL parse 140q_task_environment_role asset",
+        "status": "passed",
+        "summary": "126 asset rows parsed"
+      },
+      "diff_check": {
+        "command": "git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl",
+        "backend/tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -71110,6 +71143,12 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T20:14:03Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Added machine-verifiable 140Q layer science boundaries across task, environment, role, and commercial state rows; local validation passed."
       }
     ]
   },
