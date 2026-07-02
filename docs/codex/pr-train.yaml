@@ -34436,3 +34436,1455 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: SECURITY-169-API-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/security-169-api-01-restore-production-deploy-policy-guard
+    title: "SECURITY-169-API-01: restore production deploy policy guard"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Reinstate fail-closed production auto-deploy policy guard for risky paths, config, workflow, and stale-skip cases.
+    allowed_paths:
+      - .github/workflows/deploy-production.yml
+      - docs/04-ops/release-operator-workflow.md
+      - docs/ops/release-train.md
+      - backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php
+      - backend/config/admin.php
+      - backend/config/payments.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-01.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-02
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-01"]
+    branch: codex/security-169-api-02-harden-career-import-workflow-staging-trust
+    title: "SECURITY-169-API-02: harden career import workflow staging trust"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Constrain staging file retrieval, SSH trust, immutable JSONL validation, and empty approval artifacts in the career production import path.
+    allowed_paths:
+      - .github/workflows/career-content-production-import.yml
+      - backend/app/Services/Career/PageAssemblyAssets/CareerPageAssemblyImportService.php
+      - backend/app/Services/Career/AiImpactAssets/CareerAiImpactAssetImportService.php
+      - backend/routes/api.php
+      - backend/app/Console/Commands/CareerImportPageAssemblyAssetsPreview.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-02.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-03
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-02"]
+    branch: codex/security-169-api-03-harden-pdf-token-and-locked-mbti-report-access
+    title: "SECURITY-169-API-03: harden PDF token and locked MBTI report access"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Make PDF tokens non-forgeable and prevent locked MBTI PDF/report paths from returning full content; validate Gotenberg URL inputs.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/app/Services/Report/Pdf/ReportPdfDocumentService.php
+      - backend/routes/api.php
+      - backend/config/gotenberg.php
+      - backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php
+      - backend/app/Services/Report/Pdf/ResultPagePdfTokenService.php
+      - backend/app/Services/Commerce/MbtiAccessHubBuilder.php
+      - backend/app/Services/Report/Pdf/GotenbergChromiumPdfClient.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-03.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-04
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-03"]
+    branch: codex/security-169-api-04-purge-versioned-pdf-artifacts-for-dsar
+    title: "SECURITY-169-API-04: purge versioned PDF artifacts for DSAR"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Extend DSAR/artifact purge to versioned MBTI PDF storage keys and catalog locations.
+    allowed_paths:
+      - backend/app/Services/Report/Pdf/ReportPdfDocumentService.php
+      - backend/app/Services/Storage/ArtifactPurgeService.php
+      - backend/app/Services/Attempts/AttemptDataLifecycleService.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-04.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-05
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-04"]
+    branch: codex/security-169-api-05-seal-iq-answer-key-asset-and-claim-boundaries
+    title: "SECURITY-169-API-05: seal IQ answer-key, asset, and claim boundaries"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Remove answer-key oracle fields, protect owner asset delivery, harden forwarded URL use, and enforce IQ claim/norm authority boundaries.
+    allowed_paths:
+      - backend/app/Services/Iq/IqOwnerOriginal30BankService.php
+      - backend/app/Services/Attempts/AttemptSubmitService.php
+      - backend/routes/api.php
+      - backend/app/Services/Assessment/Drivers/IqTestDriver.php
+      - backend/app/Http/Controllers/API/V0_3/AttemptQuestionDeliveryController.php
+      - backend/app/Services/Assessment/AssessmentEngine.php
+      - backend/app/Services/Iq/IqResultPayloadRedactor.php
+      - backend/app/Http/Controllers/API/V0_3/IqOwnerOriginal30AssetController.php
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/app/Services/Report/IqReportBuilder.php
+      - backend/app/Http/Middleware/FmTokenAuth.php
+      - backend/app/Services/Iq/IqNormAuthorityContract.php
+      - backend/docs/iq/iq-production-norm-authority.md
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-05.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-06
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-05"]
+    branch: codex/security-169-api-06-fix-public-question-pack-cache-privacy
+    title: "SECURITY-169-API-06: fix public question pack cache privacy"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Prevent tenant/org question packs and scale registry responses from using public cache headers.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Middleware/ResolveOrgContext.php
+      - backend/app/Services/Scale/ScaleRegistry.php
+      - backend/app/Http/Controllers/API/V0_3/ScalesController.php
+      - backend/config/content_packs.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-06.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-07
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-06"]
+    branch: codex/security-169-api-07-harden-attempt-start-retake-analytics-abuse-cont
+    title: "SECURITY-169-API-07: harden attempt start, retake, analytics abuse controls"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Restore Big Five retake policy enforcement and reserve probe/analytics IDs so public clients cannot suppress metrics or amplify KPI refresh.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Services/Attempts/AttemptStartService.php
+      - backend/config/fap.php
+      - backend/app/Services/Attempts/AttemptRateLimitService.php
+      - backend/config/analytics.php
+      - backend/app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php
+      - backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php
+      - backend/app/Http/Middleware/ResolveAnonId.php
+      - backend/app/Http/Requests/V0_3/StartAttemptRequest.php
+      - backend/app/Http/Controllers/API/V0_3/AttemptWriteController.php
+      - backend/bootstrap/app.php
+      - backend/app/Services/Analytics/TestMetricsDailyBuilder.php
+      - backend/app/Providers/AppServiceProvider.php
+      - backend/database/migrations/2025_12_14_084436_create_attempts_table.php
+      - backend/database/migrations/2025_12_13_231207_create_results_table.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-07.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-08
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-07"]
+    branch: codex/security-169-api-08-harden-eq-agent-runtime-safety-and-cost-controls
+    title: "SECURITY-169-API-08: harden EQ agent runtime safety and cost controls"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Restore forbidden-claim guardrails, meter/throttle LLM calls, and prevent no-consent EQ feedback from entering analytics.
+    allowed_paths:
+      - backend/app/Services/Eq/EqAgentRuntimeResponder.php
+      - backend/routes/api.php
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/app/Services/Eq/EqAgentContextBuilder.php
+      - backend/app/Services/Eq/EqAgentProviderManager.php
+      - backend/app/Services/Eq/OpenAiEqAgentProviderClient.php
+      - backend/config/ai.php
+      - backend/app/Services/Eq/EqJourneyStateService.php
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/app/Services/Analytics/EventRecorder.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-08.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-09
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-08"]
+    branch: codex/security-169-api-09-repair-eq-report-asset-composer-correctness
+    title: "SECURITY-169-API-09: repair EQ report asset/composer correctness"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Align EQ v2 compiled assets, scorer predicates, route matrix, and depth-module metadata handling.
+    allowed_paths:
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/app/Services/Content/ContentPathAliasResolver.php
+      - backend/app/Services/Content/Eq60PackLoader.php
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/scientific_contract.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/manifest.json
+      - backend/content_packs/EQ_60/v1/compiled/manifest.json
+      - backend/app/Services/Assessment/Scorers/Eq60ScorerV1NormedValidity.php
+      - backend/content_packs/EQ_60/v1/raw/personalization_routes/route_matrix.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/result_page_depth_modules.json
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-09.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-10
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-09"]
+    branch: codex/security-169-api-10-seal-personality-public-content-and-cta-exposure
+    title: "SECURITY-169-API-10: seal personality public content and CTA exposure"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Prevent premium/personality drafts and unsafe overlay CTAs from leaking through public personality APIs.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - content_baselines/personality/mbti.en.json
+      - backend/app/PersonalityCms/Baseline/PersonalityBaselineImporter.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - backend/app/Models/PersonalityPublicContentAsset.php
+      - backend/app/Services/Cms/PersonalityPublicContentAssetContract.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-10.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-11
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-10"]
+    branch: codex/security-169-api-11-harden-career-runtime-cache-and-publish-projecti
+    title: "SECURITY-169-API-11: harden career runtime cache and publish projection"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Make career family hub, public cache, and locale-specific career detail reads fail closed.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
+      - backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php
+      - backend/app/Services/Career/Bundles/CareerFamilyHubBundleBuilder.php
+      - deploy.php
+      - backend/app/Console/Commands/ReleaseVerifyPublicContent.php
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php
+      - backend/app/Http/Resources/Career/CareerJobDetailResource.php
+      - backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php
+      - backend/app/Services/Career/Bundles/CareerLocaleIntegrityGate.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-11.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-12
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-11"]
+    branch: codex/security-169-api-12-restore-career-publication-readiness-evidence-ga
+    title: "SECURITY-169-API-12: restore career publication readiness evidence gates"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Require forbidden-surface evidence and align detail-ready publication/readiness manifest gates.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/CareerFullVisiblePublicationGate.php
+      - backend/app/Domain/Career/Audit/Career80TotalLiveAcceptancePlanner.php
+      - backend/app/Domain/Career/Audit/CareerProgressiveCohortCloseoutPlanner.php
+      - backend/app/Console/Commands/CareerValidateDirectory10kScaleReadiness.php
+      - backend/docs/career/audits/51_delta_rollout_manifest.md
+      - backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php
+      - backend/app/Domain/Career/Audit/CareerDeltaRolloutManifestPlanner.php
+      - backend/app/Domain/Career/Audit/CareerRuntimeArtifactRefreshPlanner.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-12.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-13
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-12"]
+    branch: codex/security-169-api-13-harden-career-ai-impact-asset-approval-gates
+    title: "SECURITY-169-API-13: harden career AI-impact asset approval gates"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Bind AI-impact imports/previews to non-empty approval artifacts and configured slug/status authority.
+    allowed_paths:
+      - backend/app/Services/Career/AiImpactAssets/CareerAiImpactAssetImportService.php
+      - backend/app/Services/Career/AiImpactAssets/CareerAiImpactAssetPreviewService.php
+      - backend/app/Console/Commands/CareerImportAiImpactAssetsPreview.php
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerAiImpactAssetPreviewController.php
+      - backend/app/Services/Career/AiImpactAssets/CareerAiImpactAssetImportStateMachine.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-13.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-14
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-13"]
+    branch: codex/security-169-api-14-harden-career-salary-display-asset-gates
+    title: "SECURITY-169-API-14: harden career salary/display asset gates"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Protect salary previews/import hash checks and selected display asset/normalizer publish gates.
+    allowed_paths:
+      - backend/app/Services/Career/SalaryAssets/CareerSalaryAssetImportService.php
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerSalaryAssetPreviewController.php
+      - backend/app/Services/Career/SalaryAssets/CareerSalaryAssetPreviewService.php
+      - backend/app/Console/Commands/CareerImportSalaryAssetsPreview.php
+      - backend/app/Console/Commands/CareerImportSelectedDisplayAssets.php
+      - backend/app/Console/Commands/CareerNormalizeLegacyDisplayAssets.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-14.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-15
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-14"]
+    branch: codex/security-169-api-15-bind-article-quality-writer-to-article-locks
+    title: "SECURITY-169-API-15: bind article-quality writer to article locks"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Stop quality writer evidence from bypassing article locks or unverified article identity.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoOpsZhArticleQualityControlledWriterCommand.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-15.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-16
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-15"]
+    branch: codex/security-169-api-16-bind-seo-cms-canaries-to-reviewed-evidence
+    title: "SECURITY-169-API-16: bind SEO/CMS canaries to reviewed evidence"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Require CMS publish/draft canaries to prove reviewed package, subject, and ContentPage gate provenance.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoAgentCmsPublishCanaryCommand.php
+      - backend/app/Console/Commands/SeoAgentArticleCmsPublishCanaryCommand.php
+      - backend/app/Console/Commands/SeoAgentL5aCmsDraftWriteCanaryCommand.php
+      - backend/app/Console/Commands/SeoAgentCmsDraftWriteCommand.php
+      - backend/app/Console/Commands/SeoAgentCmsPublishAutoCanaryCommand.php
+      - backend/app/Services/SeoAgent/AutoApprovalPolicy.php
+      - backend/app/Models/ContentPage.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-16.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-17
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-16"]
+    branch: codex/security-169-api-17-harden-contentpages-controlled-publish-and-rollb
+    title: "SECURITY-169-API-17: harden ContentPages controlled publish and rollback"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Validate revision payloads, help publish preflight, repair promotion, no-revalidation holds, and rollback field clearing.
+    allowed_paths:
+      - backend/app/Services/ContentPages/ContentPagesControlledPublishService.php
+      - backend/app/Services/Cms/RowBackedRevisionWorkspace.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php
+      - backend/app/Console/Commands/ContentPagesPublishControlledCommand.php
+      - backend/docs/help/generated/help-content-pages-controlled-publish-runtime-01.v1.json
+      - backend/docs/help/generated/help-content-draft-publish-preflight-01.v1.json
+      - backend/app/Services/Cms/AbstractSiblingTranslationAdapter.php
+      - backend/app/Services/Cms/ContentPageTranslationAdapter.php
+      - backend/app/Console/Commands/SeoAgentAutoRollbackGuardCommand.php
+      - backend/app/Console/Commands/SeoAgentCmsPublishCanaryCommand.php
+      - backend/app/Console/Commands/ArticlePromoteExistingWorkingRevisionControlled.php
+      - backend/app/Services/Cms/ArticlePublishService.php
+      - backend/app/Filament/Ops/Support/ContentReleaseAudit.php
+      - backend/app/Filament/Ops/Support/ContentReleaseFollowUp.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-17.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-18
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-17"]
+    branch: codex/security-169-api-18-harden-cms-draft-package-import-validation
+    title: "SECURITY-169-API-18: harden CMS draft package import validation"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Close package path traversal, unsafe body/frontmatter/private URL flags, orphan revisions, and dry-run fail-open cases.
+    allowed_paths:
+      - backend/app/Services/Cms/ScienceContentPageDraftImportService.php
+      - backend/app/Services/Cms/SeoContentPackage/SeoContentPackageDraftImporter.php
+      - backend/app/Services/Cms/ScienceContentPageDraftDryRunService.php
+      - backend/app/Services/ContentPages/ContentPagesControlledPublishService.php
+      - backend/app/Console/Commands/ScienceContentPageImportDraftsCommand.php
+      - backend/app/Console/Commands/SeoAgentCmsDraftWriteCommand.php
+      - backend/app/Services/Cms/RowBackedRevisionWorkspace.php
+      - backend/database/migrations/2026_04_24_100000_create_cms_translation_revisions.php
+      - backend/routes/api.php
+      - backend/app/Services/Cms/ScienceContentPageFrontmatterReader.php
+      - backend/app/Services/Cms/ScienceContentPagePreImportQaService.php
+      - backend/app/Console/Commands/ScienceContentPageDraftDryRunCommand.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-18.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-19
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-18"]
+    branch: codex/security-169-api-19-fix-batch2-dry-run-artifact-path-traversal
+    title: "SECURITY-169-API-19: fix Batch2 dry-run artifact path traversal"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Constrain run IDs and artifact paths for Batch2 result-page dry-run gates.
+    allowed_paths:
+      - backend/app/Console/Commands/Batch2ResultPageDryRunGateCommand.php
+      - backend/app/Services/Content/Batch2ResultPageDryRunGate.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-19.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-20
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-19"]
+    branch: codex/security-169-api-20-harden-cms-article-qa-malformed-artifact-handlin
+    title: "SECURITY-169-API-20: harden CMS/article QA malformed-artifact handling"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Return controlled NO-GO results instead of crashes for malformed closeout, preview, readback, FAQ, target, and publish-canary artifacts.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php
+      - backend/app/Services/Cms/ArticleReleaseCloseoutService.php
+      - backend/app/Http/Controllers/Ops/ArticleDraftPreviewController.php
+      - backend/app/Support/PublicMediaUrlGuard.php
+      - backend/app/Console/Commands/SeoOpsP0CtrArticleCmsUpdateWriterCommand.php
+      - backend/app/Console/Commands/SeoAgentCmsDraftPayloadRepairCanaryCommand.php
+      - backend/app/Console/Commands/SeoAgentArticleDraftPreviewRuntimeQaCommand.php
+      - backend/app/Models/Article.php
+      - backend/app/Console/Commands/SeoAgentArticleDraftClaimRiskQaCommand.php
+      - backend/app/Console/Commands/SeoAgentCmsDraftReadbackQaCommand.php
+      - backend/app/Console/Commands/SeoAgentL5aContentPagePublishCanaryCommand.php
+      - backend/app/Services/Cms/ArticleSeoGateRollout.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-20.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-21
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-20"]
+    branch: codex/security-169-api-21-harden-ops-access-totp-and-dashboard-inputs
+    title: "SECURITY-169-API-21: harden ops access, TOTP, and dashboard inputs"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Restore ops host/IP/TOTP controls and normalize dashboard/funnel query inputs safely.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/routes/web.php
+      - backend/app/Http/Middleware/OpsAccessControl.php
+      - backend/config/ops.php
+      - backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php
+      - backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php
+      - backend/app/Services/SeoIntel/OpsDashboard/SeoConversionFunnelReadService.php
+      - backend/app/Http/Middleware/EnsureSeoIntelReadAuthorized.php
+      - backend/app/Providers/Filament/AdminPanelProvider.php
+      - backend/app/Http/Responses/Auth/OpsLoginResponse.php
+      - backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php
+      - backend/app/Filament/Ops/Pages/FunnelConversionPage.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-21.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-22
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-21"]
+    branch: codex/security-169-api-22-harden-seo-scanners-against-private-cross-tenant
+    title: "SECURITY-169-API-22: harden SEO scanners against private/cross-tenant paths"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Restrict runtime SEO scanners and opportunity queues from probing or exporting private/cross-tenant CMS paths or infra details.
+    allowed_paths:
+      - backend/app/Services/SeoAgent/RuntimeSeoQaReadonlyScanner.php
+      - backend/app/Filament/Ops/Resources/ContentPageResource.php
+      - backend/app/Filament/Ops/Resources/ContentPageResource/Pages/EditContentPage.php
+      - backend/app/Services/SeoAgent/CmsTdkGapReadonlyScanner.php
+      - backend/app/Console/Commands/SeoAgentCmsTdkGapScanCommand.php
+      - backend/app/Models/ContentPage.php
+      - backend/app/Models/Article.php
+      - backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php
+      - backend/app/Services/SeoIntel/OpsDashboard/AbstractSeoDashboardReadService.php
+      - backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityEvaluator.php
+      - backend/docs/seo/generated/ops-api-internal-resolve-proof.v1.json
+      - backend/docs/seo/ops-api-internal-resolve-proof.md
+      - docs/codex/pr-train-state.json
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-22.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-23
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-22"]
+    branch: codex/security-169-api-23-harden-live-search-submission-kill-switches
+    title: "SECURITY-169-API-23: harden live search submission kill switches"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Require live kill switches and safety allowlists for search submission, Baidu/IndexNow delegation, and post-publish queues.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueLiveSubmissionExecutor.php
+      - backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueBoundedLiveExecutor.php
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelBoundedLiveExecutorTest.php
+      - backend/app/Console/Commands/SeoAgentPostPublishSearchSubmitCommand.php
+      - backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueApprovalExecutor.php
+      - backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityEvaluator.php
+      - backend/app/Console/Commands/SeoAgentL5aIndexnowSubmitCanaryCommand.php
+      - backend/app/Console/Commands/SeoAgentPostPublishIndexnowAutoCommand.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-23.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-24
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-23"]
+    branch: codex/security-169-api-24-fix-sitemap-readiness-cleanup-fail-closed-status
+    title: "SECURITY-169-API-24: fix sitemap/readiness/cleanup fail-closed status"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Prevent stale depublished URLs and make scheduler/cleanup preflight statuses report blocked outcomes accurately.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php
+      - backend/routes/api.php
+      - backend/app/Console/Commands/WarmSitemapSourceCacheCommand.php
+      - backend/app/Console/Commands/SeoAgentPriorityQueueSchedulerCommand.php
+      - backend/app/Services/SeoIntel/MbtiUrlTruthCleanupService.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-24.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-25
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-24"]
+    branch: codex/security-169-api-25-harden-gsc-csv-and-shell-sidecar-exports
+    title: "SECURITY-169-API-25: harden GSC CSV and shell sidecar exports"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Escape CSV formula cells and close shell/sidecar runner injection or predictable-cache weaknesses.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/GscReadonlyLiveAdapter.php
+      - backend/app/Console/Commands/PersonalityMbti64GscQueryReadonlyExport.php
+      - backend/scripts/seo/gsc_weekly_readonly_runner.sh
+      - backend/scripts/seo/gsc_sidecar_runner.sh
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-25.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-26
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-25"]
+    branch: codex/security-169-api-26-harden-url-truth-handoff-binding-and-idempotency
+    title: "SECURITY-169-API-26: harden URL Truth handoff binding and idempotency"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Reject encoded sensitive query keys, bind entity IDs, and make GSC idempotency serialization unambiguous.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php
+      - backend/app/Services/SeoIntel/UrlTruthInventoryRecordWriter.php
+      - backend/app/Services/SeoIntel/UrlTruthHandoffArtifact.php
+      - backend/config/seo_intel.php
+      - backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityEvaluator.php
+      - backend/app/Services/SeoIntel/Sources/BackendAuthorityUrlTruthSource.php
+      - backend/app/Services/Analytics/SeoConversionDailyBuilder.php
+      - backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php
+      - backend/app/Services/SeoIntel/GscReadModelControlledImportCanary.php
+      - backend/database/migrations/seo_intel/2026_06_20_130000_add_idempotency_key_to_seo_gsc_daily_table.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-26.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-27
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-26"]
+    branch: codex/security-169-api-27-harden-seo-ingest-and-gsc-artifact-privacy
+    title: "SECURITY-169-API-27: harden SEO ingest and GSC artifact privacy"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Apply SEO privacy sanitization and bind feedback/auto-draft/import-canary artifacts to reviewed sources.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php
+      - backend/app/Console/Commands/SeoAgentGscPostPublishFeedbackCommand.php
+      - backend/app/Console/Commands/SeoAgentGscOpportunityAutoDraftCommand.php
+      - backend/app/Console/Commands/SeoIntelGscReadModelImportCanaryCommand.php
+      - backend/app/Services/SeoIntel/GscReadModelControlledImportCanary.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-27.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-28
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-27"]
+    branch: codex/security-169-api-28-harden-seo-readiness-and-gate-artifacts
+    title: "SECURITY-169-API-28: harden SEO readiness and gate artifacts"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Make readback, dry-run, GSC, soft-deleted article, and smoke/private-URL gates fail closed.
+    allowed_paths:
+      - backend/app/Models/Article.php
+      - backend/app/Console/Commands/PersonalityAgentPostPromotionSearchGateCommand.php
+      - backend/app/Console/Commands/PersonalityTdkRuntimePromotionSearchGateReadinessCommand.php
+      - backend/app/Console/Commands/SeoAgentArticlePostPublishPropagationDryRunCommand.php
+      - backend/app/Console/Commands/SeoAgentGscDraftPublishGateReadinessCommand.php
+      - backend/app/Services/SeoIntel/Sources/BackendAuthorityUrlTruthSource.php
+      - backend/app/Services/SeoIntel/UrlTruthInventoryRecordWriter.php
+      - ops/release-train/release_train.py
+      - ops/release-train/sidecar.py
+      - ops/release-train/smoke.py
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-28.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-29
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-28"]
+    branch: codex/security-169-api-29-harden-seo-approval-artifacts-and-sanitization
+    title: "SECURITY-169-API-29: harden SEO approval artifacts and sanitization"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Constrain approval targets, repair canary token strings, JSON escape bypasses, and forbidden-string sanitization.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityTdkNextBatchApprovalDraftGateCommand.php
+      - backend/app/Services/Cms/PersonalityAgentApprovalQueueWriter.php
+      - backend/app/Console/Commands/SeoAgentCmsDraftPayloadRepairCanaryCommand.php
+      - backend/docs/seo/generated/seo-agent-cms-draft-payload-repair-canary.v1.json
+      - backend/app/Console/Commands/SeoAgentGscCohortHandoffCommand.php
+      - backend/app/Console/Commands/SeoAgentCodexReviewRunnerCommand.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-29.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-30
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-29"]
+    branch: codex/security-169-api-30-harden-big-five-asset-agent-mutation-and-qa-gate
+    title: "SECURITY-169-API-30: harden Big Five asset agent mutation and QA gates"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Recompute GitHub mutation scope, sanitize merge commands, anchor payload integrity, and reject fake/self-attested QA gates.
+    allowed_paths:
+      - backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php
+      - backend/app/Services/BigFive/ResultPageV2/Candidate/BigFiveProductionEquivalentCandidatePayloadExporter.php
+      - backend/app/Services/BigFive/ResultPageV2/Candidate/BigFiveInactiveCandidateReleaseImporter.php
+      - backend/app/Console/Commands/BigFiveImportInactiveCandidateRelease.php
+      - backend/app/Services/Cms/PersonalityAgentApprovalQueueWriter.php
+      - backend/tests/Feature/Console/PersonalityAgentApprovalQueueCommandTest.php
+      - backend/content_assets/big5/result_page_v2/qa/pilot_rendered_qa/v0_1/big5_o59_pilot_rendered_qa_report_v0_1.json
+      - backend/content_assets/big5/result_page_v2/qa/pilot_rendered_qa/v0_1/big5_o59_pilot_rendered_qa_surface_matrix_v0_1.json
+      - backend/content_assets/big5/result_page_v2/qa/rendered_preview/expanded_surfaces/v0_1/big5_o59_expanded_rendered_qa_report_v0_1.json
+      - backend/content_assets/big5/result_page_v2/qa/rendered_preview/expanded_surfaces/v0_1/big5_o59_expanded_rendered_qa_surface_matrix_v0_1.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2RenderedQaTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ExpandedRenderedQaTest.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-30.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-31
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-30"]
+    branch: codex/security-169-api-31-harden-enneagram-activation-approval-gates
+    title: "SECURITY-169-API-31: harden Enneagram activation approval gates"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Replace hardcoded activation phrases and empty hash overrides with bound release/SHA/forbidden-claim gates.
+    allowed_paths:
+      - backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPagePendingProductionGateStore.php
+      - backend/app/Console/Commands/EnneagramActivateInactiveCandidateRelease.php
+      - backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageProductionManualGateRunbook.php
+      - backend/app/Services/Ops/EnneagramRegistryActivationGateService.php
+      - backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageAgentReadiness.php
+      - backend/app/Services/Enneagram/Assets/EnneagramInactiveCandidateReleaseImporter.php
+      - backend/app/Console/Commands/EnneagramResultPageCandidateStagingHarnessCommand.php
+      - backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageCandidateStagingHarness.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-31.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-32
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-31"]
+    branch: codex/security-169-api-32-harden-enneagram-ops-scope-and-artifact-paths
+    title: "SECURITY-169-API-32: harden Enneagram ops scope and artifact paths"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Close scope-omission, run-ID traversal, and readiness user-ID/mapping validation gaps.
+    allowed_paths:
+      - backend/app/Console/Commands/EnneagramResultPageOpsRunnerCommand.php
+      - backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageOpsAgentRunOrchestrator.php
+      - backend/app/Console/Commands/EnneagramResultPageOpsControlPlaneCommand.php
+      - backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageOpsControlPlane.php
+      - backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageAgentReadiness.php
+      - backend/app/Services/Enneagram/Assets/EnneagramProductionEquivalentCandidatePayloadExporter.php
+      - backend/app/Services/Enneagram/Assets/EnneagramInactiveCandidateReleaseImporter.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-32.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-33
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-32"]
+    branch: codex/security-169-api-33-harden-riasec-ops-runner-and-sidecar-modes
+    title: "SECURITY-169-API-33: harden RIASEC ops runner and sidecar modes"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Return NO-GO for malformed selector assets and invalid/inconsistent RIASEC ops modes.
+    allowed_paths:
+      - backend/app/Services/Riasec/Ops/RiasecResultPageOpsAgentRunOrchestrator.php
+      - backend/app/Services/Riasec/AssetAgent/RiasecResultPageAssetAgent.php
+      - backend/app/Console/Commands/RiasecResultPageAssetAgentAuditCommand.php
+      - backend/app/Console/Commands/RiasecResultPageOpsRunnerCommand.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-33.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-34
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-33"]
+    branch: codex/security-169-api-34-harden-riasec-import-and-public-projection
+    title: "SECURITY-169-API-34: harden RIASEC import and public projection"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Bind production import approvals and propagate locale into public RIASEC lifecycle projections.
+    allowed_paths:
+      - backend/app/Console/Commands/RiasecResultPageV2ProductionImportCommand.php
+      - backend/app/Services/Riasec/RiasecResultPageV2ProductionImportExecutor.php
+      - backend/app/Services/Riasec/RiasecLifecycleCopyService.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/app/Services/Report/RiasecReportComposer.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-34.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-35
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-34"]
+    branch: codex/security-169-api-35-harden-dailygiving-public-private-proof-boundari
+    title: "SECURITY-169-API-35: harden DailyGiving public/private proof boundaries"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Expose only approved public proof URLs, hide non-publishable records, and remove private ledger metadata leakage.
+    allowed_paths:
+      - backend/app/Models/DailyGivingRecord.php
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_5/Foundation/DailyGivingRecordController.php
+      - backend/tests/Feature/Foundation/DailyGivingFirstRecordPrivateLedgerTest.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-35.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-36
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-35"]
+    branch: codex/security-169-api-36-redact-committed-sensitive-docs-and-local-paths
+    title: "SECURITY-169-API-36: redact committed sensitive docs and local paths"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Redact private result IDs, anonymous IDs, order/token/credential paths, production metrics, and local developer paths from committed docs/generated artifacts.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/AuthGuestController.php
+      - backend/routes/api.php
+      - backend/app/Repositories/Report/ReportSubjectRepository.php
+      - docs/codex/pr-train-state.json
+      - backend/docs/riasec/riasec-result-section-inventory-audit-2026-06-27.md
+      - docs/audits/eq/eq_agent_runtime_v2_staging_llm_smoke_2026-06-25.md
+      - docs/audits/eq/eq_agent_runtime_normal_confidence_acceptance_2026-06-25.md
+      - backend/app/Http/Middleware/ResolveOrgContext.php
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/docs/commerce/generated/order-grant-projection-readonly-ord-1093b7e6.v1.json
+      - backend/docs/commerce/order-grant-projection-readonly-ord-1093b7e6.md
+      - backend/tests/Feature/Commerce/OrderGrantProjectionReadonlyOrd1093b7e6Test.php
+      - backend/docs/seo/generated/search-channel-live-zh-mbti-01-preflight.v1.json
+      - backend/docs/seo/search-channel-live-zh-mbti-01-preflight.md
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelLiveZhMbti01PreflightTest.php
+      - backend/content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized/README.md
+      - backend/content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized/normalization_manifest.json
+      - backend/content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized/source_qa_scan.json
+      - backend/docs/seo/gsc-hk-sidecar-runner.md
+      - backend/docs/seo/generated/gsc-hk-sidecar-runner.v1.json
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-36.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-37
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-36"]
+    branch: codex/security-169-api-37-repair-ci-runtime-freeze-security-guardrails
+    title: "SECURITY-169-API-37: repair CI/runtime-freeze security guardrails"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Make analytics-only, destructive migration, and lookup-controller changes run the correct security acceptance gates.
+    allowed_paths:
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - .github/workflows/ci.yml
+      - backend/app/Services/Ci/ScaleImpactResolver.php
+      - backend/scripts/ci_verify_mbti.sh
+      - backend/database/migrations/2026_03_26_120000_drop_attempt_quality_table.php
+      - backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-37.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-38
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-37"]
+    branch: codex/security-169-api-38-repair-pr-train-and-generated-metadata-consisten
+    title: "SECURITY-169-API-38: repair PR-train and generated metadata consistency"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Fix wrong next_task, false merged state, fap-web/fap-api PR links, unrelated Pint scopes, and inconsistent generated count metadata.
+    allowed_paths:
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/docs/seo/generated/global-en-zh-content-asset-batch-01.v1.json
+      - backend/docs/seo/global-en-zh-content-asset-batch-01.md
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentAssetBatch01Test.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-38.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-39
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-38"]
+    branch: codex/security-169-api-39-harden-personality-approval-and-revision-writers
+    title: "SECURITY-169-API-39: harden personality approval and revision writers"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Reject deceptive URLs/dry-run-only handoffs and preserve/consume personality CMS revision/draft/editor fields correctly.
+    allowed_paths:
+      - backend/app/Services/Cms/PersonalityAgentApprovalQueueWriter.php
+      - backend/app/Services/Cms/Mbti64CmsRevisionPromotionService.php
+      - backend/app/Console/Commands/PersonalityMbti64CmsRevisionPromote.php
+      - backend/app/Services/Cms/PersonalityProfileSeoService.php
+      - backend/app/Console/Commands/PersonalityAgentApprovalQueueCommand.php
+      - backend/docs/seo/personality/personality-agent-auto-approval-handoff-package-2026-06-27.json
+      - backend/docs/seo/personality/personality-agent-auto-qa-and-approval-handoff-2026-06-27.json
+      - backend/tests/Feature/Console/PersonalityAgentApprovalQueueCommandTest.php
+      - backend/docs/seo/personality/big-five-public-profile-agent-pilot-2026-06-24.json
+      - backend/app/Services/Cms/BigFivePublicProfileAgentDraftWriter.php
+      - backend/docs/seo/personality/enneagram-public-profile-agent-pilot-2026-06-24.json
+      - backend/app/Services/Cms/EnneagramCmsDraftWriter.php
+      - backend/app/Services/Cms/Mbti64CmsProjectionDraftWriter.php
+      - backend/app/Filament/Ops/Resources/ContentPageResource.php
+      - backend/app/Filament/Ops/Resources/ContentPageResource/Pages/EditContentPage.php
+      - backend/app/Services/Cms/ContentPageTranslationAdapter.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-39.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: SECURITY-169-API-40
+    repo: fap-api
+    depends_on: ["SECURITY-169-API-39"]
+    branch: codex/security-169-api-40-harden-media-upload-and-variant-filename-privacy
+    title: "SECURITY-169-API-40: harden media upload and variant filename privacy"
+    train_scope: security_169_fap_api_audit
+    status: user_authorized
+    scope:
+      - Prevent SEO image variant overwrite and original filename exposure in Filament media uploads.
+    allowed_paths:
+      - backend/app/Services/Cms/MediaVariantGenerator.php
+      - backend/app/Services/Cms/SeoImageBundle/SeoImageBundleImporter.php
+      - backend/app/Filament/Ops/Resources/MediaAssetResource/Pages/CreateMediaAsset.php
+      - backend/app/Filament/Ops/Resources/MediaAssetResource/Pages/EditMediaAsset.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php
+      - backend/routes/api.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-40.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

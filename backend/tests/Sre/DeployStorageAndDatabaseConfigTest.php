@@ -55,15 +55,22 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
-    public function production_auto_deploy_policy_allows_backend_config_changes_but_keeps_hard_risk_paths(): void
+    public function production_auto_deploy_policy_requires_manual_readiness_for_risky_paths(): void
     {
         $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
 
-        $this->assertStringNotContainsString('/^backend\\/config\\//', $source);
-        $this->assertStringContainsString('/^backend\\/database\\//', $source);
-        $this->assertStringContainsString('/^\\.github\\/workflows\\//', $source);
-        $this->assertStringContainsString('/(^|\\/)\\.env($|\\.|-)/', $source);
-        $this->assertStringContainsString('/(^|\\/).*secret.*$/i', $source);
+        $this->assertStringContainsString('Production auto-deploy requires exactly one merged PR', $source);
+        $this->assertStringContainsString('Production auto-deploy policy guard blocked', $source);
+        $this->assertStringContainsString('Stale production deploy workflow_run is not a successful production deploy', $source);
+        $this->assertStringContainsString('/repos/${GITHUB_REPOSITORY}/commits/${DEPLOY_SHA}/pulls', $source);
+        $this->assertStringContainsString('/repos/${GITHUB_REPOSITORY}/pulls/${pr_number}/files', $source);
+        $this->assertStringContainsString('^backend/config/', $source);
+        $this->assertStringContainsString('^backend/database/', $source);
+        $this->assertStringContainsString('^\\.github/workflows/', $source);
+        $this->assertStringContainsString('^backend/app/Http/Controllers/.*/Cms/', $source);
+        $this->assertStringContainsString('^backend/app/Services/Seo', $source);
+        $this->assertStringContainsString('(^|/)\\.env($|\\.|-)', $source);
+        $this->assertStringContainsString('(^|/).*secret.*$', $source);
     }
 
     private function readRepoFile(string $relativePath): string
