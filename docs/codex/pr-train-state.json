@@ -315,8 +315,8 @@
       "ENNEA-RP-02"
     ],
     "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "0323841760907c8fbe0d41a1192d6851c73e3f0e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2616",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -359,6 +359,10 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "pr_open": {
+        "status": "pass",
+        "evidence": "Opened PR #2616 for ENNEA-RP-03; GitHub checks pending."
       }
     },
     "scope_validation": {
@@ -386,6 +390,11 @@
         "at": "2026-07-02T17:31:20Z",
         "status": "local_validation_passed",
         "notes": "Repaired type_deep_dive_summary consumed deep_dive fields for all nine types and passed local validation."
+      },
+      {
+        "at": "2026-07-02T17:34:34Z",
+        "status": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/2616 for ENNEA-RP-03; GitHub checks pending."
       }
     ]
   },
