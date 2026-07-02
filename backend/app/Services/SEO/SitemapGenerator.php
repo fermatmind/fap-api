@@ -7,6 +7,7 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\ContentPage;
+use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\TopicProfile;
 use App\Services\Career\CareerDirectoryAuthorityService;
@@ -14,6 +15,7 @@ use App\Services\Career\Dataset\CareerDatasetPublicationMetadataService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerJobSeoService;
+use App\Services\Cms\Mbti64CrossTypeComparisonPublicReadModel;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\PersonalityProfileService;
 use App\Services\Cms\TopicProfileSeoService;
@@ -47,6 +49,7 @@ class SitemapGenerator
         private readonly CareerJobSeoService $careerJobSeoService,
         private readonly PersonalityProfileService $personalityProfileService,
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
+        private readonly Mbti64CrossTypeComparisonPublicReadModel $crossTypeComparisonReadModel,
         private readonly TopicProfileSeoService $topicProfileSeoService,
         private readonly ScaleRegistry $scaleRegistry,
         private readonly CareerDatasetPublicationMetadataService $datasetPublicationMetadataService,
@@ -95,6 +98,7 @@ class SitemapGenerator
             $this->getCareerJobUrls(),
             $this->getCareerGuideUrls(),
             $this->getPersonalityUrls(),
+            $this->getPersonalityComparisonUrls(),
             $this->getTopicUrls(),
             $this->getContentPageUrls(),
             $this->getStaticIndexUrls()
@@ -302,6 +306,105 @@ class SitemapGenerator
                 'slug' => 'personality-list:'.$segment,
                 'updated_at' => $lastmod->toDateTimeString(),
             ];
+        }
+
+        return $urls;
+    }
+
+    private function getPersonalityComparisonUrls(): array
+    {
+        return array_merge(
+            $this->getPersonalityAtComparisonUrls(),
+            $this->getPersonalityCrossTypeComparisonUrls()
+        );
+    }
+
+    private function getPersonalityAtComparisonUrls(): array
+    {
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        if ($baseUrl === '') {
+            return [];
+        }
+
+        $rows = $this->personalityProfileService->getSitemapPublicProfiles();
+        $urls = [];
+
+        foreach ($rows as $row) {
+            $locale = trim((string) $row->locale);
+            $segment = $this->personalityProfileSeoService->mapBackendLocaleToFrontendSegment($locale);
+            $baseTypeCode = strtoupper(trim((string) $row->canonical_type_code ?: (string) $row->type_code));
+            if ($segment === '' || ! in_array($baseTypeCode, PersonalityProfile::BASE_TYPE_CODES, true)) {
+                continue;
+            }
+
+            $variants = [];
+            foreach ($row->variants as $variant) {
+                if (! $variant instanceof PersonalityProfileVariant || ! (bool) $variant->is_published) {
+                    continue;
+                }
+
+                $variantCode = strtoupper(trim((string) $variant->variant_code));
+                if (! in_array($variantCode, ['A', 'T'], true)) {
+                    continue;
+                }
+
+                $variants[$variantCode] = $variant;
+            }
+
+            if (! isset($variants['A'], $variants['T'])) {
+                continue;
+            }
+
+            $slug = strtolower($baseTypeCode).'-a-vs-'.strtolower($baseTypeCode).'-t';
+            $lastmod = $this->latestCarbon([
+                $variants['A']->updated_at,
+                $variants['A']->published_at,
+                $variants['T']->updated_at,
+                $variants['T']->published_at,
+                $row->updated_at,
+                $row->published_at,
+            ]) ?? now();
+
+            $urls[] = [
+                'loc' => $baseUrl.'/'.$segment.'/personality/'.$slug,
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'personality-comparison:at:'.$segment.':'.$slug,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+        }
+
+        return $urls;
+    }
+
+    private function getPersonalityCrossTypeComparisonUrls(): array
+    {
+        $urls = [];
+        $updatedAt = now();
+
+        foreach (PersonalityProfile::SUPPORTED_LOCALES as $locale) {
+            $segment = $this->personalityProfileSeoService->mapBackendLocaleToFrontendSegment((string) $locale);
+            if ($segment === '') {
+                continue;
+            }
+
+            foreach ($this->crossTypeComparisonReadModel->list((string) $locale) as $item) {
+                if (($item['is_public'] ?? false) !== true || ($item['is_indexable'] ?? false) !== true) {
+                    continue;
+                }
+
+                $canonicalUrl = trim((string) ($item['canonical_url'] ?? $item['public_url'] ?? ''));
+                $slug = trim((string) ($item['slug'] ?? ''));
+                if ($canonicalUrl === '' || $slug === '') {
+                    continue;
+                }
+
+                $urls[] = [
+                    'loc' => $canonicalUrl,
+                    'lastmod' => $updatedAt->toAtomString(),
+                    'slug' => 'personality-comparison:cross-type:'.$segment.':'.$slug,
+                    'updated_at' => $updatedAt->toDateTimeString(),
+                ];
+            }
         }
 
         return $urls;
@@ -872,6 +975,23 @@ class SitemapGenerator
         } catch (\Throwable $e) {
             return null;
         }
+    }
+
+    /**
+     * @param  array<int, mixed>  $values
+     */
+    private function latestCarbon(array $values): ?Carbon
+    {
+        $latest = null;
+
+        foreach ($values as $value) {
+            $candidate = $value instanceof Carbon ? $value : $this->parseUpdatedAt($value);
+            if ($candidate instanceof Carbon && ($latest === null || $candidate->gt($latest))) {
+                $latest = $candidate;
+            }
+        }
+
+        return $latest;
     }
 
     private function isIndexablePublic(mixed $viewPolicyJson): bool

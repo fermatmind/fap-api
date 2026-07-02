@@ -11,6 +11,7 @@ use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
+use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -753,6 +754,65 @@ final class PersonalityPublicApiTest extends TestCase
         self::assertStringNotContainsString('/zh/orders', (string) $response->getContent());
         self::assertStringNotContainsString('token=', (string) $response->getContent());
         self::assertStringNotContainsString('order_no=', (string) $response->getContent());
+    }
+
+    public function test_personality_comparison_sitemap_source_uses_indexability_gate(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $intj = $this->createProfile([
+            'type_code' => 'INTJ',
+            'canonical_type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+            'title' => 'INTJ Personality Type',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($intj, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+        ]);
+        $this->createVariant($intj, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+        ]);
+
+        $intp = $this->createProfile([
+            'type_code' => 'INTP',
+            'canonical_type_code' => 'INTP',
+            'slug' => 'intp',
+            'locale' => 'en',
+            'title' => 'INTP Personality Type',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($intp, [
+            'canonical_type_code' => 'INTP',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTP-A',
+        ]);
+        $this->createVariant($intp, [
+            'canonical_type_code' => 'INTP',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTP-T',
+        ]);
+
+        $locs = collect(app(SitemapGenerator::class)->generateUrls())
+            ->pluck('loc')
+            ->all();
+
+        self::assertContains('https://fermatmind.com/en/personality/intj-a-vs-intj-t', $locs);
+        self::assertNotContains('https://fermatmind.com/en/personality/intp-a-vs-intp-t', $locs);
+        self::assertNotContains('https://fermatmind.com/zh/personality/intj-vs-intp', $locs);
     }
 
     public function test_personality_comparison_endpoint_returns_cross_type_detail_from_backend_authority(): void
