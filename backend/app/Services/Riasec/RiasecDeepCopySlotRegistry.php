@@ -905,6 +905,11 @@ final class RiasecDeepCopySlotRegistry
                 ))),
                 'forbidden_claims' => array_values(array_map('strval', (array) $row['forbidden_claims'])),
                 'applicable_dimensions' => array_values(array_map('strval', (array) $row['likely_overlap_dimensions'])),
+                'validation_questions_only' => (bool) ($row['validation_questions_only'] ?? true),
+                'aspiration_override_allowed' => (bool) ($row['aspiration_override_allowed'] ?? false),
+                'aspiration_replaces_measured_result_allowed' => (bool) ($row['aspiration_replaces_measured_result_allowed'] ?? false),
+                'recommended_output' => (string) ($row['recommended_output'] ?? 'validation_questions_and_low_risk_experiment'),
+                'result_binding' => (string) ($row['result_binding'] ?? 'overlay_only_does_not_mutate_measured_result'),
             ]);
 
             if ($this->validateSlot($slot) === []) {
@@ -1076,6 +1081,20 @@ final class RiasecDeepCopySlotRegistry
             }
             if (! in_array((string) ($slot['aspirations_state'] ?? ''), self::ASPIRATIONS_STATES, true)) {
                 $errors[] = 'unsupported_aspirations_state';
+            }
+            if (($slot['validation_questions_only'] ?? false) !== true) {
+                $errors[] = 'aspirations_validation_questions_only_must_be_true';
+            }
+            foreach (['aspiration_override_allowed', 'aspiration_replaces_measured_result_allowed'] as $flag) {
+                if (($slot[$flag] ?? true) !== false) {
+                    $errors[] = 'aspirations_'.$flag.'_must_be_false';
+                }
+            }
+            if ((string) ($slot['recommended_output'] ?? '') !== 'validation_questions_and_low_risk_experiment') {
+                $errors[] = 'unsupported_aspirations_recommended_output';
+            }
+            if ((string) ($slot['result_binding'] ?? '') !== 'overlay_only_does_not_mutate_measured_result') {
+                $errors[] = 'unsupported_aspirations_result_binding';
             }
         }
 
@@ -1284,6 +1303,11 @@ final class RiasecDeepCopySlotRegistry
             'content_version',
             'evidence_level',
             'content_status',
+            'validation_questions_only',
+            'aspiration_override_allowed',
+            'aspiration_replaces_measured_result_allowed',
+            'recommended_output',
+            'result_binding',
         ];
     }
 
@@ -2177,6 +2201,17 @@ final class RiasecDeepCopySlotRegistry
         if (($row['score_mutation_allowed'] ?? true) !== false || ($row['measured_holland_code_mutation_allowed'] ?? true) !== false) {
             return false;
         }
+        if (($row['validation_questions_only'] ?? false) !== true
+            || ($row['aspiration_override_allowed'] ?? true) !== false
+            || ($row['aspiration_replaces_measured_result_allowed'] ?? true) !== false
+        ) {
+            return false;
+        }
+        if (($row['recommended_output'] ?? null) !== 'validation_questions_and_low_risk_experiment'
+            || ($row['result_binding'] ?? null) !== 'overlay_only_does_not_mutate_measured_result'
+        ) {
+            return false;
+        }
         if (($row['not_a_recommendation'] ?? false) !== true || ($row['frontend_fallback_allowed'] ?? true) !== false) {
             return false;
         }
@@ -2450,6 +2485,11 @@ final class RiasecDeepCopySlotRegistry
                 'qualification_judgment',
             ],
             'user_visible_boundary' => '愿望只校准探索问题，不覆盖 measured Holland Code，不改变 RIASEC 分数，也不形成职业结论。',
+            'validation_questions_only' => true,
+            'aspiration_override_allowed' => false,
+            'aspiration_replaces_measured_result_allowed' => false,
+            'recommended_output' => 'validation_questions_and_low_risk_experiment',
+            'result_binding' => 'overlay_only_does_not_mutate_measured_result',
         ], $content);
     }
 

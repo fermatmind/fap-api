@@ -41,6 +41,11 @@ final class RiasecAspirationsDisagreeSlotRegistryTest extends TestCase
             $this->assertFalse($slot['report_snapshot_mutation_allowed']);
             $this->assertFalse($slot['share_pdf_payload_expansion_allowed']);
             $this->assertFalse($slot['raw_feedback_exposure_allowed']);
+            $this->assertTrue($slot['validation_questions_only']);
+            $this->assertFalse($slot['aspiration_override_allowed']);
+            $this->assertFalse($slot['aspiration_replaces_measured_result_allowed']);
+            $this->assertSame('validation_questions_and_low_risk_experiment', $slot['recommended_output']);
+            $this->assertSame('overlay_only_does_not_mutate_measured_result', $slot['result_binding']);
             $this->assertSame([], $registry->validateSlot($slot), $slotName.' should be contract-clean.');
         }
     }
@@ -114,6 +119,11 @@ final class RiasecAspirationsDisagreeSlotRegistryTest extends TestCase
         $this->assertFalse($aspiration['report_snapshot_mutation_allowed']);
         $this->assertFalse($aspiration['share_pdf_payload_expansion_allowed']);
         $this->assertFalse($aspiration['raw_feedback_exposure_allowed']);
+        $this->assertTrue($aspiration['validation_questions_only']);
+        $this->assertFalse($aspiration['aspiration_override_allowed']);
+        $this->assertFalse($aspiration['aspiration_replaces_measured_result_allowed']);
+        $this->assertSame('validation_questions_and_low_risk_experiment', $aspiration['recommended_output']);
+        $this->assertSame('overlay_only_does_not_mutate_measured_result', $aspiration['result_binding']);
         $this->assertFalse($aspiration['frontend_fallback_allowed']);
         $this->assertSame([], $registry->validateSlot($aspiration));
 
@@ -169,6 +179,39 @@ final class RiasecAspirationsDisagreeSlotRegistryTest extends TestCase
         $this->assertContains('forbidden_claim_phrase_non_ascii', $registry->validateSlot($disagree));
     }
 
+    public function test_file_backed_aspiration_assets_are_validation_questions_only(): void
+    {
+        foreach ($this->contentAssetAspirationRows() as $index => $row) {
+            $this->assertTrue($row['validation_questions_only'], 'line '.($index + 1).' must be validation-only.');
+            $this->assertFalse($row['aspiration_override_allowed'], 'line '.($index + 1).' must not override results.');
+            $this->assertFalse($row['aspiration_replaces_measured_result_allowed'], 'line '.($index + 1).' must not replace measured result.');
+            $this->assertSame('validation_questions_and_low_risk_experiment', $row['recommended_output']);
+            $this->assertSame('overlay_only_does_not_mutate_measured_result', $row['result_binding']);
+            $this->assertStringContainsString('探索假设', $row['overlap_reading']);
+            $this->assertStringContainsString('不覆盖当前 measured Holland Code 或分数', $row['overlap_reading']);
+            $this->assertStringContainsString('不把它当成职业推荐或测评修正', $row['next_low_risk_experiment']);
+        }
+    }
+
+    public function test_aspiration_copy_rejects_override_flags(): void
+    {
+        $registry = new RiasecDeepCopySlotRegistry;
+        $aspiration = $registry->aspirationsSlots()['product_ux_想了解'];
+        $aspiration['validation_questions_only'] = false;
+        $aspiration['aspiration_override_allowed'] = true;
+        $aspiration['aspiration_replaces_measured_result_allowed'] = true;
+        $aspiration['recommended_output'] = 'rewrite_result';
+        $aspiration['result_binding'] = 'replace_measured_result';
+
+        $errors = $registry->validateSlot($aspiration);
+
+        $this->assertContains('aspirations_validation_questions_only_must_be_true', $errors);
+        $this->assertContains('aspirations_aspiration_override_allowed_must_be_false', $errors);
+        $this->assertContains('aspirations_aspiration_replaces_measured_result_allowed_must_be_false', $errors);
+        $this->assertContains('unsupported_aspirations_recommended_output', $errors);
+        $this->assertContains('unsupported_aspirations_result_binding', $errors);
+    }
+
     public function test_existing_feedback_overlay_does_not_mutate_snapshot_share_or_pdf_payloads(): void
     {
         $overlay = (new RiasecExplorationFeedbackOverlayService)->build(
@@ -195,5 +238,20 @@ final class RiasecAspirationsDisagreeSlotRegistryTest extends TestCase
         $this->assertFalse((bool) data_get($overlay, 'measured_result_guard.report_snapshot_mutation_allowed'));
         $this->assertFalse((bool) data_get($overlay, 'surface_policy.share_pdf_exposure_allowed'));
         $this->assertFalse((bool) data_get($overlay, 'surface_policy.raw_feedback_public_exposure_allowed'));
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function contentAssetAspirationRows(): array
+    {
+        $path = __DIR__.'/../../../../content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl';
+        $rows = [];
+
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+            $rows[] = json_decode($line, true, flags: JSON_THROW_ON_ERROR);
+        }
+
+        return $rows;
     }
 }
