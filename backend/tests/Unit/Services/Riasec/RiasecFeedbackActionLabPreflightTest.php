@@ -96,8 +96,13 @@ final class RiasecFeedbackActionLabPreflightTest extends TestCase
         'summary',
         'instruction',
         'estimated_time',
+        'node_effect_scope',
+        'exploration_question_required',
         'creates_score_change',
         'creates_career_match',
+        'result_mutation_allowed',
+        'public_surface_mutation_allowed',
+        'recommendation_allowed',
         'review_status',
         'required_boundaries',
         'forbidden_claims',
@@ -206,8 +211,15 @@ final class RiasecFeedbackActionLabPreflightTest extends TestCase
             $this->assertSame('riasec.next_exploration_node.v1', $record['schema_version']);
             $this->assertSame('riasec_next_exploration_nodes_v1.zh-CN', $record['asset_version']);
             $this->assertContains($record['dimension_hint'], self::VALID_DIMENSIONS);
+            $this->assertStringContainsString('小实验或观察问题', $record['summary']);
+            $this->assertStringContainsString('观察问题', $record['instruction']);
+            $this->assertSame('micro_experiment_or_observation_only', $record['node_effect_scope']);
+            $this->assertTrue($record['exploration_question_required']);
             $this->assertFalse($record['creates_score_change']);
             $this->assertFalse($record['creates_career_match']);
+            $this->assertFalse($record['result_mutation_allowed']);
+            $this->assertFalse($record['public_surface_mutation_allowed']);
+            $this->assertFalse($record['recommendation_allowed']);
             $this->assertFalse($record['frontend_fallback_allowed']);
         }
     }

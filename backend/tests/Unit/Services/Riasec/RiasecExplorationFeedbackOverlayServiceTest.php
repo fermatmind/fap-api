@@ -124,8 +124,15 @@ final class RiasecExplorationFeedbackOverlayServiceTest extends TestCase
 
         foreach ($nodes['nodes'] as $node) {
             $this->assertContains($node['dimension_hint'], ['I', 'A', 'S']);
+            $this->assertStringContainsString('小实验或观察问题', $node['summary']);
+            $this->assertStringContainsString('观察问题', $node['instruction']);
+            $this->assertSame('micro_experiment_or_observation_only', $node['node_effect_scope']);
+            $this->assertTrue($node['exploration_question_required']);
             $this->assertFalse($node['creates_score_change']);
             $this->assertFalse($node['creates_career_match']);
+            $this->assertFalse($node['result_mutation_allowed']);
+            $this->assertFalse($node['public_surface_mutation_allowed']);
+            $this->assertFalse($node['recommendation_allowed']);
             $this->assertFalse($node['frontend_fallback_allowed']);
             $this->assertArrayNotHasKey('raw_feedback', $node);
             $this->assertArrayNotHasKey('snapshot_id', $node);
@@ -170,10 +177,15 @@ final class RiasecExplorationFeedbackOverlayServiceTest extends TestCase
             'dimension_hint' => 'I',
             'title' => '快速检查：研究型线索',
             'summary' => '看一个低风险任务是否仍有兴趣。',
-            'instruction' => '记录任务、环境和角色责任。',
+            'instruction' => '记录一个观察问题、任务、环境和角色责任。',
             'estimated_time' => '15 分钟',
+            'node_effect_scope' => 'micro_experiment_or_observation_only',
+            'exploration_question_required' => true,
             'creates_score_change' => false,
             'creates_career_match' => false,
+            'result_mutation_allowed' => false,
+            'public_surface_mutation_allowed' => false,
+            'recommendation_allowed' => false,
             'frontend_fallback_allowed' => false,
         ];
         $unsafeNextNodeRow = array_merge($safeNextNodeRow, [
