@@ -70861,9 +70861,9 @@
     "depends_on": [
       "RIASEC-CONTENT-FEEDBACK-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "c64c63941c8eb951b4efcb389776f8cde621c726",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2640",
     "checks": {
       "phpunit_feedback_next_node_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi --display-warnings",
@@ -70915,6 +70915,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Reframed next exploration nodes as micro experiments and observation questions; service projection and preflight tests enforce non-recommendation and non-mutation boundaries."
+      },
+      {
+        "at": "2026-07-02T19:38:36Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2640 after FEEDBACK-02 local validation and scope validation passed."
       }
     ]
   },
