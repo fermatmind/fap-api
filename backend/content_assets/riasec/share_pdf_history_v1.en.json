@@ -7,17 +7,27 @@
   "surfaces": [
     {
       "surface": "share_safe_card",
-      "copy": "My RIASEC result points to work activities that may be worth exploring first. The share version shows only a safe summary and does not expose raw feedback or private context.",
+      "copy": "This is a public summary of a RIASEC interest snapshot. It only names broad activity clues that stood out in this response and is meant to start a conversation; it does not show scores, raw feedback, detailed Holland-code ordering, or private context.",
       "public_safe": true,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "public_summary_mode": "minimal_anonymous_interest_snapshot",
+      "holland_code_exposure_allowed": false,
+      "private_context_allowed": false,
+      "identity_label_allowed": false,
+      "share_card_default_visible": true
     },
     {
       "surface": "share_detail_boundary",
-      "copy": "The share page is not a full report and does not state a career conclusion. It summarizes the interest pattern and the method boundaries for this result.",
+      "copy": "The share page is not a full report and is not career advice. It keeps only a minimal interest-clue summary and method boundary, and must not be used to judge ability, job fit, or stable identity.",
       "public_safe": true,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "public_summary_mode": "minimal_anonymous_interest_snapshot",
+      "holland_code_exposure_allowed": false,
+      "private_context_allowed": false,
+      "identity_label_allowed": false,
+      "share_card_default_visible": true
     },
     {
       "surface": "pdf_personal",
@@ -49,10 +59,15 @@
     },
     {
       "surface": "low_quality_share",
-      "copy": "A cautious-reading result allows only a safe share summary by default and does not show a strong activity chain or occupation-context examples.",
+      "copy": "A cautious-reading result allows only a minimal public summary: it keeps the cautious-reading boundary and does not show strong interpretation content, occupation examples, scores, or private feedback.",
       "public_safe": true,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "public_summary_mode": "minimal_anonymous_interest_snapshot",
+      "holland_code_exposure_allowed": false,
+      "private_context_allowed": false,
+      "identity_label_allowed": false,
+      "share_card_default_visible": true
     }
   ],
   "required_boundaries": [
