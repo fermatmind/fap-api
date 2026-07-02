@@ -4,6 +4,8 @@
 
 This preflight validates the V7.3 `occupation_examples_boundary_v1.zh-CN` asset before any backend runtime import. It does not wire the asset into `RiasecActivityExplorerService`.
 
+`RIASEC-CONTENT-OCC-01` keeps that runtime boundary unchanged and repairs the content asset itself: each occupation-like name is framed as a work-scene observation entry, not as a recommendation, rank, fit judgment, qualification signal, or career outcome claim.
+
 Input asset:
 
 - `/Users/rainie/Desktop/riasec_full_content_assets_v7_3_final_preflight_candidate.zip`
@@ -17,6 +19,12 @@ Preflight fixture:
 
 - Record count: 360 JSONL records.
 - Required fields: present for the current V7.3 preflight contract.
+- Dimension coverage: R 80, I 80, A 80, S 40, E 40, C 40 records.
+- Occupation/work-scene labels: 360 unique labels.
+- `why_it_may_appear`: 360 unique contextual explanations.
+- `common_tasks`: 360 unique task sets.
+- `task_examples`: 360 unique low-risk observation task sets.
+- `reality_check`: 360 unique next-step checks.
 - `source_status`: `content_example_not_registry_match` for all records.
 - `not_a_recommendation`: true for all records.
 - `fit_score_allowed`: false for all records.
@@ -25,6 +33,14 @@ Preflight fixture:
 - User-facing forbidden claims: 0 in the validated visible fields.
 - User-facing technical key exposure: 0 in the validated visible fields.
 - O*NET / SOC / source URL fields: absent.
+
+## OCC-01 repair notes
+
+- Repeated dimension-level templates were replaced with occupation-specific observation language.
+- Each row now tells the reader to inspect concrete activities, conditions, responsibilities, and boundaries before continuing.
+- The copy blocks direct choice, ability, income, opportunity, long-term outcome, ranking, fit-score, and qualification conclusions.
+- Education, skill, and qualification boundaries remain separate from interest evidence and must be checked outside this asset.
+- The fixture and source asset are intentionally identical so preflight tests validate the committed content rather than a stale sample.
 
 ## Activity/task mapping gap
 
