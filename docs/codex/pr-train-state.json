@@ -65789,7 +65789,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-02T21:13:47Z",
+  "updated_at": "2026-07-02T21:16:51Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -71340,9 +71340,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "5235f29ee1d24d19aa3b1b1957a9ca1fab49f316",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2647",
     "checks": {
       "targeted_aspirations_disagree_and_regression_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec/RiasecAspirationsDisagreeAssetPreflightTest.php tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecTop3ChainSlotRegistryTest.php tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php --no-ansi --display-warnings",
@@ -71404,6 +71404,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "ASPIRATION-01 repaired aspirations copy as validation questions and low-risk experiments only; local checks and scope validation passed before commit."
+      },
+      {
+        "at": "2026-07-02T21:16:51Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2647 for ASPIRATION-01 after local validation and scope validation passed."
       }
     ]
   },
