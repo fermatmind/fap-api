@@ -423,7 +423,7 @@
       "ENNEA-RP-03"
     ],
     "status": "pending_dependency",
-    "commit_sha": null,
+    "commit_sha": "c84cbca201220604e3766ecfcf78f039c89832c4",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -70783,8 +70783,8 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "pr_opened",
-    "commit_sha": "7ea94536e249bf6c4bfb5ee6ff1241e261ba1362",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "4b59c31d592be14c886f548d9f6d70e2e6745804",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2638",
     "checks": {
       "phpunit_feedback_overlay_tests": {
@@ -70807,14 +70807,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T19:26:27Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php",
         "backend/content_assets/riasec/feedback_action_lab_v1.zh-CN.jsonl",
@@ -70842,6 +70842,12 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2638 after FEEDBACK-01 local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T19:34:36Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "GitHub PR #2638 merged and post-merge cleanup verified before starting FEEDBACK-02."
       }
     ]
   },
@@ -70855,19 +70861,47 @@
     "depends_on": [
       "RIASEC-CONTENT-FEEDBACK-01"
     ],
-    "status": "authorized_pending_start",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "pr_opened",
+    "commit_sha": "c64c63941c8eb951b4efcb389776f8cde621c726",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2640",
+    "checks": {
+      "phpunit_feedback_next_node_tests": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "14 tests, 19855 assertions"
+      },
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "178 tests, 109924 assertions"
+      },
+      "pint_and_jsonl_parse": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php; php JSONL parse next_exploration_nodes asset and fixture",
+        "status": "passed",
+        "summary": "270 asset rows and 270 fixture rows parsed"
+      },
+      "diff_check": {
+        "command": "git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php",
+        "backend/content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl",
+        "backend/tests/Fixtures/Riasec/next_exploration_nodes_v1.zh-CN.jsonl",
+        "backend/tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -70875,6 +70909,18 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T19:34:36Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Reframed next exploration nodes as micro experiments and observation questions; service projection and preflight tests enforce non-recommendation and non-mutation boundaries."
+      },
+      {
+        "at": "2026-07-02T19:38:36Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2640 after FEEDBACK-02 local validation and scope validation passed."
       }
     ]
   },

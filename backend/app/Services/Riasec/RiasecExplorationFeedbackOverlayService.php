@@ -214,8 +214,13 @@ final class RiasecExplorationFeedbackOverlayService
                     'summary' => (string) $row['summary'],
                     'instruction' => (string) $row['instruction'],
                     'estimated_time' => (string) $row['estimated_time'],
+                    'node_effect_scope' => (string) $row['node_effect_scope'],
+                    'exploration_question_required' => true,
                     'creates_score_change' => false,
                     'creates_career_match' => false,
+                    'result_mutation_allowed' => false,
+                    'public_surface_mutation_allowed' => false,
+                    'recommendation_allowed' => false,
                     'frontend_fallback_allowed' => false,
                 ];
                 $seenTypes[$dimension.'_'.$nodeType] = true;
@@ -329,7 +334,7 @@ final class RiasecExplorationFeedbackOverlayService
         if (($row['asset_version'] ?? null) !== 'riasec_next_exploration_nodes_v1.zh-CN') {
             return false;
         }
-        foreach (['node_id', 'node_type', 'dimension_hint', 'title', 'summary', 'instruction', 'estimated_time'] as $field) {
+        foreach (['node_id', 'node_type', 'dimension_hint', 'title', 'summary', 'instruction', 'estimated_time', 'node_effect_scope'] as $field) {
             if (! is_string($row[$field] ?? null) || trim((string) $row[$field]) === '') {
                 return false;
             }
@@ -340,6 +345,11 @@ final class RiasecExplorationFeedbackOverlayService
 
         return ($row['creates_score_change'] ?? true) === false
             && ($row['creates_career_match'] ?? true) === false
+            && ($row['node_effect_scope'] ?? null) === 'micro_experiment_or_observation_only'
+            && ($row['exploration_question_required'] ?? false) === true
+            && ($row['result_mutation_allowed'] ?? true) === false
+            && ($row['public_surface_mutation_allowed'] ?? true) === false
+            && ($row['recommendation_allowed'] ?? true) === false
             && ($row['frontend_fallback_allowed'] ?? true) === false;
     }
 }
