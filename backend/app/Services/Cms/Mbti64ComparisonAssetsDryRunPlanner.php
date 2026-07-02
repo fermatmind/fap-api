@@ -269,15 +269,17 @@ final class Mbti64ComparisonAssetsDryRunPlanner
      */
     private function contentOverlay(array $asset): array
     {
+        $baseTypeCode = strtoupper(substr((string) ($asset['slug'] ?? 'MBTI'), 0, 4));
+
         $content = [
             'quick_answer' => $asset['summary'] ?? null,
             'side_by_side_summary' => [
-                'h2' => 'INTP-A 与 INTP-T 速览',
+                'h2' => $baseTypeCode.'-A 与 '.$baseTypeCode.'-T 速览',
                 'rows' => [
                     [
-                        'dimension' => '自我确认与模型校准',
-                        'a_variant' => 'INTP-A 更容易在形成可用模型后推进。',
-                        't_variant' => 'INTP-T 更容易继续检查模型是否完整。',
+                        'dimension' => '自我确认与反馈校准',
+                        'a_variant' => $baseTypeCode.'-A 更容易在形成可用判断后推进。',
+                        't_variant' => $baseTypeCode.'-T 更容易继续检查判断是否完整。',
                     ],
                 ],
             ],
@@ -432,7 +434,7 @@ final class Mbti64ComparisonAssetsDryRunPlanner
                 $lines[] = '### '.$title;
             }
 
-            foreach (['practice', 'reflection', 'body', 'items', 'groups'] as $field) {
+            foreach (['practice', 'reflection', 'body', 'items', 'groups', 'rows', 'table', 'columns'] as $field) {
                 $this->appendBodyValue($lines, $value[$field] ?? null);
             }
 

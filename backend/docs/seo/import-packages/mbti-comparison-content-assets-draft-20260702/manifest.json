@@ -1,25 +1,70 @@
 {
-  "package_id": "mbti-comparison-content-assets-draft-20260702",
-  "artifact": "MBTI64-COMPARISON-ASSETS-DRY-RUN-01",
-  "status": "draft",
-  "authority_target": {
-    "table": "personality_profile_sections",
-    "section_key": "mbti64_comparison_a_vs_t",
-    "public_api": "/api/v0.5/personality/comparisons/{comparison}"
-  },
-  "comparison_assets": [
-    "comparisons/FermatMind_INTP-A_vs_INTP-T_CMS_READY.json"
-  ],
-  "source_context": [
-    "source_context/FermatMind_INTP-A_ZH_V8_4_Content_Asset.json",
-    "source_context/FermatMind_INTP-T_ZH_V8_4_Content_Asset.json"
-  ],
-  "dry_run_only": true,
-  "write_supported_in_this_package": false,
-  "publish_supported_in_this_package": false,
-  "search_release_supported_in_this_package": false,
-  "notes": [
-    "Use this package to validate GPT-generated MBTI A/T comparison assets before any CMS draft writer is authorized.",
-    "The extracted INTJ.zip context was limited to INTP-A and INTP-T because the supplied comparison package is INTP-A vs INTP-T."
-  ]
+    "package_id": "mbti-comparison-content-assets-draft-20260702",
+    "artifact": "MBTI64-COMPARISON-ASSETS-DRY-RUN-01",
+    "status": "draft",
+    "authority_target": {
+        "table": "personality_profile_sections",
+        "section_key": "mbti64_comparison_a_vs_t",
+        "public_api": "/api/v0.5/personality/comparisons/{comparison}"
+    },
+    "comparison_assets": [
+        "comparisons/FermatMind_ENFJ-A_vs_ENFJ-T_CMS_READY.json",
+        "comparisons/FermatMind_ENTJ-A_vs_ENTJ-T_CMS_READY.json",
+        "comparisons/FermatMind_ENTP-A_vs_ENTP-T_CMS_READY.json",
+        "comparisons/FermatMind_ESFJ-A_vs_ESFJ-T_CMS_READY.json",
+        "comparisons/FermatMind_ESFP-A_vs_ESFP-T_CMS_READY.json",
+        "comparisons/FermatMind_ESTJ-A_vs_ESTJ-T_CMS_READY.json",
+        "comparisons/FermatMind_ESTP-A_vs_ESTP-T_CMS_READY.json",
+        "comparisons/FermatMind_INFJ-A_vs_INFJ-T_CMS_READY.json",
+        "comparisons/FermatMind_INFP-A_vs_INFP-T_CMS_READY.json",
+        "comparisons/FermatMind_INTP-A_vs_INTP-T_CMS_READY.json",
+        "comparisons/FermatMind_ISFJ-A_vs_ISFJ-T_CMS_READY.json",
+        "comparisons/FermatMind_ISFP-A_vs_ISFP-T_CMS_READY.json",
+        "comparisons/FermatMind_ISTJ-A_vs_ISTJ-T_CMS_READY.json",
+        "comparisons/FermatMind_ISTP-A_vs_ISTP-T_CMS_READY.json"
+    ],
+    "source_context": [
+        "source_context/FermatMind_ENFJ-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ENFJ-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ENTJ-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ENTJ-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ENTP-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ENTP-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ESFJ-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ESFJ-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ESFP-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ESFP-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ESTJ-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ESTJ-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ESTP-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ESTP-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_INFJ-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_INFJ-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_INFP-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_INFP-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_INTP-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_INTP-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ISFJ-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ISFJ-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ISFP-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ISFP-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ISTJ-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ISTJ-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ISTP-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ISTP-T_ZH_V8_4_Content_Asset.json"
+    ],
+    "dry_run_only": true,
+    "write_supported_in_this_package": false,
+    "publish_supported_in_this_package": false,
+    "search_release_supported_in_this_package": false,
+    "missing_comparison_assets": [
+        "INTJ-A_vs_INTJ-T.zip",
+        "ENFP-A_vs_ENFP-T.zip"
+    ],
+    "notes": [
+        "Use this package to validate GPT-generated MBTI A/T comparison assets before any CMS draft writer is authorized.",
+        "Batch 02 adds 13 normalized A/T comparison assets and keeps the existing INTP-A vs INTP-T asset from batch 01.",
+        "The 16Personalities PDF is reference-only and is not included in this backend package.",
+        "INTJ.zip is used only for per-variant source_context extraction; it is not imported as a comparison asset."
+    ]
 }

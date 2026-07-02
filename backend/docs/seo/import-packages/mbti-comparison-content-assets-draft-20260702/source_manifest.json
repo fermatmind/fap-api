@@ -1,13 +1,186 @@
 {
-  "package": "FermatMind_INTP-A_vs_INTP-T_Content_Asset_Package",
-  "created_at": "2026-07-02",
-  "files": [
-    "FermatMind_INTP-A_vs_INTP-T_Content_Asset.json",
-    "FermatMind_INTP-A_vs_INTP-T_CMS_READY.json",
-    "FermatMind_INTP-A_vs_INTP-T_Content_Asset.md",
-    "FermatMind_INTP-A_vs_INTP-T_VALIDATION.json"
-  ],
-  "status": "draft_for_editorial_and_codex_qa",
-  "no_cms_write": true,
-  "no_publish": true
+    "package_id": "mbti-comparison-content-assets-draft-20260702",
+    "created_at": "2026-07-02",
+    "status": "draft_for_editorial_and_codex_qa",
+    "no_cms_write": true,
+    "no_publish": true,
+    "comparison_count": 14,
+    "source_context_count": 28,
+    "files": [
+        {
+            "base_type": "INTP",
+            "source_zip": "FermatMind_INTP-A_vs_INTP-T_Content_Asset_Package.zip",
+            "source_zip_sha256": "7ad5e347b9563b96ed8c14f1713a8e6521b7cae5b64d36abf2030947b2920193",
+            "status": "existing_from_batch_01"
+        },
+        {
+            "base_type": "ENFJ",
+            "comparison_asset": "comparisons/FermatMind_ENFJ-A_vs_ENFJ-T_CMS_READY.json",
+            "source_zip": "fermatmind-mbti-variant-comparison-assets-20260702.zip",
+            "source_zip_sha256": "5ad471c94702c2439195d56331313ddc693d7e9c9c7f6d863b8b328403f36fb8",
+            "source_asset_file": "enfj-a-vs-enfj-t.json",
+            "source_asset_sha256": "11f631223c2bf66c532cb31b0dbc76ece56c43a7e9093a101cd2060bf63849ef",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_ENFJ-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ENFJ-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "ENTJ",
+            "comparison_asset": "comparisons/FermatMind_ENTJ-A_vs_ENTJ-T_CMS_READY.json",
+            "source_zip": "ENTJ-A_vs_ENTJ-T.zip",
+            "source_zip_sha256": "48457a78e3f471c623abd1ccda100274c9d58f5909337984827e5592934023ef",
+            "source_asset_file": "entj-a-vs-entj-t.json",
+            "source_asset_sha256": "4e6492526a010468c4ded5ececbfc18c22ea6e097d9001634d173c4f8fff7927",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_ENTJ-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ENTJ-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "ENTP",
+            "comparison_asset": "comparisons/FermatMind_ENTP-A_vs_ENTP-T_CMS_READY.json",
+            "source_zip": "ENTP-A_vs_ENTP-T.zip",
+            "source_zip_sha256": "5e9c5405f63a09dcdaeafcdc3e916b81fc732be606c02721a232f7a2ee2d259d",
+            "source_asset_file": "entp-a-vs-entp-t.json",
+            "source_asset_sha256": "5703b14f497746622dbd0fb5c00e51e5a6769289fcd090be7cb334f3cdb53808",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_ENTP-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ENTP-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "ESFJ",
+            "comparison_asset": "comparisons/FermatMind_ESFJ-A_vs_ESFJ-T_CMS_READY.json",
+            "source_zip": "ESFJ-A_vs_ESFJ-T.zip",
+            "source_zip_sha256": "cbb9269a097dff80835a98950aa5d5752632cb9b1d9405fa47399db133a10759",
+            "source_asset_file": "esfj-a-vs-esfj-t.json",
+            "source_asset_sha256": "e82fbe3d881420e2bd4e60be72f8c593edf45bd5f3626135c6f539100c860e98",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_ESFJ-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ESFJ-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "ESFP",
+            "comparison_asset": "comparisons/FermatMind_ESFP-A_vs_ESFP-T_CMS_READY.json",
+            "source_zip": "ESFP-A_vs_ESFP-T.zip",
+            "source_zip_sha256": "02b0e17e7f1be5204095c86ad4bc446439875d108b216287e83ee8c5c16d190c",
+            "source_asset_file": "esfp-a-vs-esfp-t.json",
+            "source_asset_sha256": "029cb4b273947aa04c4e8abaa1235dbbd6ba50084009e930aa8867596dc3503b",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_ESFP-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ESFP-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "ESTJ",
+            "comparison_asset": "comparisons/FermatMind_ESTJ-A_vs_ESTJ-T_CMS_READY.json",
+            "source_zip": "ESTJ-A_vs_ESTJ-T.zip",
+            "source_zip_sha256": "54a03bcb43cdb2dfeac50e098197bcd6cbc62103399ad256513ecf0271146b65",
+            "source_asset_file": "estj-a-vs-estj-t.json",
+            "source_asset_sha256": "e82121e4661fd34645ee4b8534997803aed80c673d29b79de6905521315ee0ed",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_ESTJ-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ESTJ-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "ESTP",
+            "comparison_asset": "comparisons/FermatMind_ESTP-A_vs_ESTP-T_CMS_READY.json",
+            "source_zip": "ESTP-A_vs_ESTP-T.zip",
+            "source_zip_sha256": "563582a3db3868a43bd05011fdea743a2a18ddfda088b6a28ba69b382cfd4fb3",
+            "source_asset_file": "estp-a-vs-estp-t.json",
+            "source_asset_sha256": "0c9ddcaa61d8d07ffd1f42039c95014891e16f53bab6db0de17d527b404768ea",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_ESTP-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ESTP-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "INFJ",
+            "comparison_asset": "comparisons/FermatMind_INFJ-A_vs_INFJ-T_CMS_READY.json",
+            "source_zip": "INFJ-A_vs_INFJ-T.zip",
+            "source_zip_sha256": "212a8a1ed3ce06838140b79999c8985cf59202e9c7ef87864d17118b3a8a49f1",
+            "source_asset_file": "infj-a-vs-infj-t.json",
+            "source_asset_sha256": "f60bd767e27bcae0939ac08619df00420781a2e5ea7b05e54bdc76383227506e",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_INFJ-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_INFJ-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "INFP",
+            "comparison_asset": "comparisons/FermatMind_INFP-A_vs_INFP-T_CMS_READY.json",
+            "source_zip": "INFP-A_vs_INFP-T.zip",
+            "source_zip_sha256": "b98ba5dd83b4192697d25a8b4e43b15e895c1ac2b0ab6236ed7c77253cbf6121",
+            "source_asset_file": "infp-a-vs-infp-t.json",
+            "source_asset_sha256": "f9e94b56926f6f27a9b6489f5ceb03adee00bbfb0613757f581f03bee8c35283",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_INFP-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_INFP-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "ISFJ",
+            "comparison_asset": "comparisons/FermatMind_ISFJ-A_vs_ISFJ-T_CMS_READY.json",
+            "source_zip": "ISFJ-A_vs_ISFJ-T.zip",
+            "source_zip_sha256": "460b6bbff681414eb2bd47e8219174493693551290f5ca1415cce6a504ecac84",
+            "source_asset_file": "isfj-a-vs-isfj-t.json",
+            "source_asset_sha256": "4cf0297452696dd8c99068a05bcb68e60b94a3572d98faceaa6cabca0955d8f6",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_ISFJ-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ISFJ-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "ISFP",
+            "comparison_asset": "comparisons/FermatMind_ISFP-A_vs_ISFP-T_CMS_READY.json",
+            "source_zip": "ISFP-A_vs_ISFP-T.zip",
+            "source_zip_sha256": "1b77e93f04b23529c4e128f529102c18a0e7708b4ec6a4cce7e163bd1a6fd248",
+            "source_asset_file": "isfp-a-vs-isfp-t.json",
+            "source_asset_sha256": "a12ba75a67fbfb5e74e308003571edd2b6993617536568beece1e57524076176",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_ISFP-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ISFP-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "ISTJ",
+            "comparison_asset": "comparisons/FermatMind_ISTJ-A_vs_ISTJ-T_CMS_READY.json",
+            "source_zip": "ISTJ-A_vs_ISTJ-T.zip",
+            "source_zip_sha256": "efc034d9a13b2abc62e12c304247dba9511d3bca6f9380bd416b30a539f643e6",
+            "source_asset_file": "istj-a-vs-istj-t.json",
+            "source_asset_sha256": "7fbcf1b9cd00dc07978f54aaee75de6b756f6f33048accdafe09d92b53b999f0",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_ISTJ-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ISTJ-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "ISTP",
+            "comparison_asset": "comparisons/FermatMind_ISTP-A_vs_ISTP-T_CMS_READY.json",
+            "source_zip": "ISTP-A_vs_ISTP-T.zip",
+            "source_zip_sha256": "1333a9faeec6a9230bb02deccc9b53cbcc312b0bf2486af140fd4474339ae642",
+            "source_asset_file": "istp-a-vs-istp-t.json",
+            "source_asset_sha256": "ba3e99faf7d129ffecad032dea12c8a9168217858213e4bac61591232fed359b",
+            "normalized_for_contract": true,
+            "source_context_files": [
+                "source_context/FermatMind_ISTP-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ISTP-T_ZH_V8_4_Content_Asset.json"
+            ]
+        }
+    ]
 }
