@@ -20885,7 +20885,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2467",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "merged",
     "title": "MBTI-PDF-PRODUCT-05: expand PDF coverage to result-page sections",
     "train_scope": "mbti_pdf_product",
     "transitions": [
@@ -71639,6 +71639,14 @@
       "github_pr": {
         "status": "opened",
         "evidence": "Opened PR #2636 from codex/security-169-api-04-purge-versioned-pdf-artifacts-for-dsar to main."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2636 GitHub checks passed for hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload on head 1de2b7a07fd688f088aa35704cd168098483b6a0."
+      },
+      "post_merge_revalidate": {
+        "status": "pass",
+        "evidence": "PR #2636 merged at 2026-07-02T19:31:02Z as squash commit 4a01679e74adb55fb84a4aa9659364953099ad8e; origin/main contains the merge commit; local main was fast-forwarded to origin/main; local task branch was deleted; remote task branch is absent."
       }
     },
     "scope_validation": {
@@ -71673,9 +71681,9 @@
     "content_authority": "backend",
     "authorized_by_user": "2026-07-03 attached /goal SECURITY-169 fap-api audit PR train continuous execution request.",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T19:31:02Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "events": [
       {
         "at": "2026-07-03T00:00:00+08:00",
@@ -71701,6 +71709,16 @@
         "at": "2026-07-03T03:24:30+08:00",
         "status": "local_checks_passed",
         "note": "After required-check remediation, route list, SQLite migrate, focused BigFive runtime-freeze tests, Pint, JSON/YAML validation, diff check, and full ci_verify_mbti all passed; generated BigFive compiled side effects were restored."
+      },
+      {
+        "at": "2026-07-03T03:31:02+08:00",
+        "status": "merged",
+        "note": "PR #2636 was squash-merged as 4a01679e74adb55fb84a4aa9659364953099ad8e after required GitHub checks passed."
+      },
+      {
+        "at": "2026-07-03T03:32:00+08:00",
+        "status": "post_merge_revalidated",
+        "note": "Verified origin/main contains the merge commit, local main equals origin/main, worktree is clean, and local/remote task branches were cleaned."
       }
     ]
   },
