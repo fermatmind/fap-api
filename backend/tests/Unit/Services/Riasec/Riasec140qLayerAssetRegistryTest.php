@@ -28,9 +28,19 @@ final class Riasec140qLayerAssetRegistryTest extends TestCase
             $this->assertContains($slot['layer_dimension'], RiasecDeepCopySlotRegistry::DIMENSIONS);
             $this->assertContains($slot['layer'], RiasecDeepCopySlotRegistry::LAYER_140Q_DIMENSION_LAYERS);
             $this->assertContains($slot['layer_state'], RiasecDeepCopySlotRegistry::LAYER_140Q_STATES);
+            $this->assertTrue($slot['contextual_detail_only']);
+            $this->assertFalse($slot['result_mutation_allowed']);
+            $this->assertFalse($slot['raw_score_comparison_allowed']);
+            $this->assertFalse($slot['accuracy_upgrade_claim_allowed']);
+            $this->assertStringContainsString('不改写 60Q', $slot['science_boundary']);
+            $this->assertStringContainsString('不比较原始分', $slot['science_boundary']);
+            $this->assertStringEndsWith('？', $slot['observation_question']);
 
             foreach ($registry->layer140qRequiredFields() as $requiredField) {
                 $this->assertArrayHasKey($requiredField, $slot);
+                if (is_bool($slot[$requiredField])) {
+                    continue;
+                }
                 $this->assertNotEmpty($slot[$requiredField]);
             }
 
@@ -97,6 +107,8 @@ final class Riasec140qLayerAssetRegistryTest extends TestCase
             $visibleCopy = implode(' ', [
                 $slot['title'],
                 $slot['summary'],
+                $slot['science_boundary'],
+                $slot['observation_question'],
                 $slot['example_question'],
                 $slot['task_activity_card'],
                 $slot['environment_card'],
