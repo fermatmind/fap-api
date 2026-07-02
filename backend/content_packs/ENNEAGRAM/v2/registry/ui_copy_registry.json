@@ -21,11 +21,11 @@
         },
         "instant_summary.close_call": {
             "title_template": "当前更像 close-call 结果",
-            "body_template": "这次结果更适合把 Top1 与 Top2 放在一起读：系统在提示两种动力都在解释你，而不是在偷偷改判。"
+            "body_template": "这次结果应把 Top1 与 Top2 放在一起读：系统只提示两种解释线索都值得并排观察，不把微小分差写成单一主型定论。"
         },
         "instant_summary.diffuse": {
             "title_template": "当前轮廓较分散",
-            "body_template": "这次结果更适合先阅读 Top3、三中心与观察任务，而不是强行认定单一号码。"
+            "body_template": "这次结果应先阅读 Top3、三中心与观察任务，并降低单一号码语气。"
         },
         "instant_summary.low_quality": {
             "title_template": "当前结果有质量边界",
@@ -33,7 +33,7 @@
         },
         "form_badge.e105": {
             "label": "E105 标准版",
-            "body_template": "第一次了解自己的九型结构时，更适合用它建立全谱与 Top3 阅读。"
+            "body_template": "第一次了解自己的九型结构时，可用它建立全谱与 Top3 阅读。"
         },
         "form_badge.fc144": {
             "label": "FC144 深度版",

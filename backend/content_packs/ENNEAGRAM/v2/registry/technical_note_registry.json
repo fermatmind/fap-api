@@ -37,7 +37,9 @@
             "section_key": "score_space_boundary",
             "title": "Score space 边界",
             "body": "E105 的分数来自 Likert 强度，FC144 的分数来自 pairwise choice 的相对偏好。它们都被投影到同一结果壳中，但不默认进入同一数值比较语义。这就是 same model 不等于 same score space 的原因。",
-            "metric_refs": ["E105_FC144_score_space_boundary"],
+            "metric_refs": [
+                "E105_FC144_score_space_boundary"
+            ],
             "data_status": "available",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
@@ -45,8 +47,10 @@
         {
             "section_key": "dominance_gap",
             "title": "Dominance Gap",
-            "body": "Dominance Gap 描述的是同一 form 内 Top1 与 Top2 的差距，用来帮助系统决定是更适合用 clear 语气，还是更适合进入 close-call 或 diffuse 的保守解释。它是 operational 指标，不是临床置信区间。",
-            "metric_refs": ["top_gap_distribution"],
+            "body": "Dominance Gap 描述的是同一 form 内 Top1 与 Top2 的差距，用来帮助系统选择 clear、close-call 或 diffuse 的保守语气。它是 operational 指标，不是临床置信区间。",
+            "metric_refs": [
+                "top_gap_distribution"
+            ],
             "data_status": "available",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
@@ -55,7 +59,9 @@
             "section_key": "confidence_band",
             "title": "Confidence Band",
             "body": "当前系统会输出 clear、close_call、diffuse、low_quality 等解释范围。它们控制的是结果页语气、模块显隐与推荐动作，而不是宣称某个号码已经被绝对证明。",
-            "metric_refs": ["confidence_band_distribution"],
+            "metric_refs": [
+                "confidence_band_distribution"
+            ],
             "data_status": "available",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
@@ -64,7 +70,10 @@
             "section_key": "close_call",
             "title": "Close-call",
             "body": "当 Top1 与 Top2 接近时，系统不会假装自己比数据更确定，而会进入 pair 辨析与 7 天观察任务。close-call 是模糊性治理位，不是改判机制。",
-            "metric_refs": ["close_call_rate", "misidentification_matrix"],
+            "metric_refs": [
+                "close_call_rate",
+                "misidentification_matrix"
+            ],
             "data_status": "collecting",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
@@ -73,7 +82,9 @@
             "section_key": "diffuse",
             "title": "Diffuse",
             "body": "当结果呈现较分散的 profile shape 时，系统会降低单一号码语气，转而强调 Top3、三中心和观察任务。此时更重要的是结构阅读，而不是强行定型。",
-            "metric_refs": ["profile_entropy_distribution"],
+            "metric_refs": [
+                "profile_entropy_distribution"
+            ],
             "data_status": "available",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
@@ -81,8 +92,11 @@
         {
             "section_key": "low_quality",
             "title": "Low-quality",
-            "body": "只有在真实质量信号触发时，系统才进入 low_quality 边界。P0 里 low_quality 的作用是收窄语气和推荐同 form 重测，而不是给用户贴上不可靠标签。",
-            "metric_refs": ["low_quality_rate", "low_quality_close_call_relation"],
+            "body": "当真实质量信号触发时，系统会进入 low_quality 边界。P0 里 low_quality 的作用是收窄语气和推荐同 form 重测，而不是给用户贴上不可靠标签。",
+            "metric_refs": [
+                "low_quality_rate",
+                "low_quality_close_call_relation"
+            ],
             "data_status": "collecting",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
@@ -91,7 +105,11 @@
             "section_key": "retake_stability",
             "title": "Retake Stability",
             "body": "重测稳定性是后续 Technical Note 会持续跟踪的指标。P0 先公开定义和采集计划，不提前承诺具体稳定率数字。",
-            "metric_refs": ["retake_consistency_index", "top1_stability", "top3_stability"],
+            "metric_refs": [
+                "retake_consistency_index",
+                "top1_stability",
+                "top3_stability"
+            ],
             "data_status": "planned",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
@@ -99,8 +117,11 @@
         {
             "section_key": "e105_fc144_agreement",
             "title": "E105 / FC144 Agreement",
-            "body": "E105 与 FC144 的 agreement 用于评估双题型在 Top1 或 Top3 上的重叠度，而不是用来证明二者可以直接比较分数。P0 先定义指标与采集方向，后续再基于样本决定公开结论。",
-            "metric_refs": ["E105_FC144_agreement", "close_call_conversion"],
+            "body": "E105 与 FC144 的 agreement 用于评估双题型在 Top1 或 Top3 上的重叠度，而不是用来证明二者可以直接比较分数。P0 先定义指标与采集方向，后续再基于样本评估是否公开具体指标。",
+            "metric_refs": [
+                "E105_FC144_agreement",
+                "close_call_conversion"
+            ],
             "data_status": "planned",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
@@ -109,7 +130,10 @@
             "section_key": "resonance_feedback",
             "title": "Resonance Feedback",
             "body": "用户的 Day7 resonance feedback 和 user_confirmed_type 会作为自我观察证据进入历史，用于研究和内容校准，但不会静默覆盖 primary_candidate。用户反馈是观察层，不是系统重判。",
-            "metric_refs": ["resonance_feedback", "observation_completion_rate"],
+            "metric_refs": [
+                "resonance_feedback",
+                "observation_completion_rate"
+            ],
             "data_status": "collecting",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
@@ -117,7 +141,7 @@
         {
             "section_key": "method_boundaries",
             "title": "方法边界",
-            "body": "本测试用于人格模式理解与自我观察，不用于临床诊断、招聘筛选、治疗建议或绝对人格定性。wing、arrow、subtype、health level 在当前版本只作为解释层或未来模块保留位，不做硬判。",
+            "body": "本测试用于人格模式理解与自我观察，不用于临床诊断、招聘筛选、治疗建议或绝对人格定性。wing、arrow、subtype 与发展阶段语言在当前版本只作为解释层或未来模块保留位，不做硬判。",
             "metric_refs": [],
             "data_status": "available",
             "content_maturity": "p0_ready",

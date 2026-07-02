@@ -26,7 +26,13 @@
                 "fields": {
                     "trigger_scene": {
                         "type": "enum",
-                        "options": ["work", "relationship", "pressure", "alone", "other"]
+                        "options": [
+                            "work",
+                            "relationship",
+                            "pressure",
+                            "alone",
+                            "other"
+                        ]
                     },
                     "trigger_description": {
                         "type": "text",
@@ -34,7 +40,16 @@
                     },
                     "automatic_reaction": {
                         "type": "enum",
-                        "options": ["push", "withdraw", "please", "control", "explain", "freeze", "reframe", "other"]
+                        "options": [
+                            "push",
+                            "withdraw",
+                            "please",
+                            "control",
+                            "explain",
+                            "freeze",
+                            "reframe",
+                            "other"
+                        ]
                     }
                 }
             },
@@ -47,15 +62,25 @@
         {
             "day": 2,
             "phase": "core_motivation_observation",
-            "title": "Day 2｜看你真正怕失去什么",
-            "prompt": "回看今天一个明显不舒服的瞬间：你最怕失去的是正确感、认可、关系位置、安全、边界、自由、真实，还是平静？",
+            "title": "Day 2｜观察你担心失去什么",
+            "prompt": "回看今天一个明显不舒服的瞬间：你更容易担心失去正确感、认可、关系位置、安全、边界、自由、真实感，还是平静？",
             "example": "例如：如果一件事做得不漂亮，你不舒服是因为它不对、它不成、它不稳，还是它让你失去空间？",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
                     "core_fear_selection": {
                         "type": "enum",
-                        "options": ["correctness", "recognition", "being_needed", "safety", "boundary", "freedom", "authenticity", "harmony", "other"]
+                        "options": [
+                            "correctness",
+                            "recognition",
+                            "being_needed",
+                            "safety",
+                            "boundary",
+                            "freedom",
+                            "authenticity",
+                            "harmony",
+                            "other"
+                        ]
                     },
                     "evidence_sentence": {
                         "type": "text",
@@ -65,7 +90,7 @@
             },
             "analytics_event_key": "enneagram_observation_day2_pattern_logged",
             "suggested_next_action": "observe_7_days",
-            "boundary_copy": "只记录最像你的动力，不必追求一次就找到最终答案。",
+            "boundary_copy": "只记录当下更像你的动力线索，不必追求一次就找到最终答案。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -73,14 +98,19 @@
             "day": 3,
             "phase": "day3_feedback",
             "title": "Day 3｜动机投票",
-            "prompt": "三天过去，你不需要给出最终答案。只要问自己：过去几天里，哪一种动力更像你真正不能退让的东西？",
-            "example": "如果你是 close-call，更重要的不是看谁更像表面行为，而是看 Top1 和 Top2 谁更像你真正要守的东西。",
+            "prompt": "三天过去，你不需要给出最终答案。只要问自己：过去几天里，哪一种动力更像你在关键时刻反复维护的东西？",
+            "example": "如果你是 close-call，更重要的不是看谁更像表面行为，而是把 Top1 和 Top2 当作候选线索并排记录。",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
                     "more_like": {
                         "type": "enum",
-                        "options": ["top1", "top2", "unclear", "other"]
+                        "options": [
+                            "top1",
+                            "top2",
+                            "unclear",
+                            "other"
+                        ]
                     },
                     "evidence_sentence": {
                         "type": "text",
@@ -93,7 +123,13 @@
                     },
                     "scene_type": {
                         "type": "enum",
-                        "options": ["work", "relationship", "pressure", "alone", "other"]
+                        "options": [
+                            "work",
+                            "relationship",
+                            "pressure",
+                            "alone",
+                            "other"
+                        ]
                     }
                 }
             },
@@ -114,7 +150,17 @@
                 "fields": {
                     "stress_reaction": {
                         "type": "enum",
-                        "options": ["fight", "explain", "withdraw", "please", "distract", "control", "numb", "confirm", "other"]
+                        "options": [
+                            "fight",
+                            "explain",
+                            "withdraw",
+                            "please",
+                            "distract",
+                            "control",
+                            "numb",
+                            "confirm",
+                            "other"
+                        ]
                     },
                     "scene": {
                         "type": "text",
@@ -128,14 +174,14 @@
             },
             "analytics_event_key": "enneagram_observation_day4_cost_logged",
             "suggested_next_action": "observe_7_days",
-            "boundary_copy": "这一层只帮助你看见压力脚本，不把任何反应自动解释成健康层级或临床状态。",
+            "boundary_copy": "这一层只帮助你看见压力脚本，不把任何反应自动解释成发展阶段、医学状态或临床状态。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
         {
             "day": 5,
             "phase": "pressure_reaction_observation",
-            "title": "Day 5｜关系里的防御点",
+            "title": "Day 5｜关系里的保护点",
             "prompt": "今天观察一段关系里的小摩擦：你更想被理解、被认可、被尊重边界、被承诺、被需要，还是只想让局面平下来？",
             "example": "例如：对方一句话让你不舒服时，你最先在保护的是关系位置、尊严、安全感，还是平静感？",
             "user_input_schema": {
@@ -143,7 +189,15 @@
                 "fields": {
                     "relationship_need": {
                         "type": "enum",
-                        "options": ["understood", "recognized", "boundary_respected", "reassured", "needed", "harmony", "other"]
+                        "options": [
+                            "understood",
+                            "recognized",
+                            "boundary_respected",
+                            "reassured",
+                            "needed",
+                            "harmony",
+                            "other"
+                        ]
                     },
                     "what_you_did": {
                         "type": "text",
@@ -157,7 +211,7 @@
             },
             "analytics_event_key": "enneagram_observation_day5_relationship_logged",
             "suggested_next_action": "observe_7_days",
-            "boundary_copy": "观察的是你真正想守住的关系需求，不是给关系里谁对谁错做裁决。",
+            "boundary_copy": "观察的是你在关系里可能更想维护的需要，不是给关系里谁对谁错做裁决。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -172,7 +226,18 @@
                 "fields": {
                     "blind_spot_observed": {
                         "type": "enum",
-                        "options": ["help_seeking", "refusal", "anger_expression", "enjoyment", "need_admission", "rule_setting", "visibility", "feeling_pause", "conflict_ownership", "other"]
+                        "options": [
+                            "help_seeking",
+                            "refusal",
+                            "anger_expression",
+                            "enjoyment",
+                            "need_admission",
+                            "rule_setting",
+                            "visibility",
+                            "feeling_pause",
+                            "conflict_ownership",
+                            "other"
+                        ]
                     },
                     "evidence_sentence": {
                         "type": "text",
@@ -190,18 +255,35 @@
             "day": 7,
             "phase": "day7_resonance",
             "title": "Day 7｜深度共鸣投票",
-            "prompt": "现在不要问哪个号码更好，只问：过去一周，哪一种动力在关键时刻最像你真正不能退让的东西？",
-            "example": "如果你仍然摇摆，这不表示失败。它只说明当前更适合继续观察、阅读 Top3，或在需要时补做 FC144 深度版。",
+            "prompt": "现在不要问哪个号码更好，只问：过去一周，哪一种动力在关键时刻更常被你维护？",
+            "example": "如果你仍然摇摆，这不表示失败。它只说明当前需要继续观察、阅读 Top3，或在需要时补做 FC144 深度版。",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
                     "final_resonance": {
                         "type": "enum",
-                        "options": ["top1", "top2", "top3", "other", "still_uncertain"]
+                        "options": [
+                            "top1",
+                            "top2",
+                            "top3",
+                            "other",
+                            "still_uncertain"
+                        ]
                     },
                     "user_confirmed_type": {
                         "type": "enum",
-                        "options": ["1", "2", "3", "4", "5", "6", "7", "8", "9", null]
+                        "options": [
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            "8",
+                            "9",
+                            null
+                        ]
                     },
                     "wants_fc144": {
                         "type": "boolean"
