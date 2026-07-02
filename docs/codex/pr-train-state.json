@@ -68925,8 +68925,8 @@
       "PR-EQ-ASSET-SCI-03",
       "PR-EQ-ASSET-SCI-04"
     ],
-    "status": "pr_open",
-    "commit_sha": "fe9f7f9d9c7d6d13cec9071fdaa69e51b7817aa5",
+    "status": "merged",
+    "commit_sha": "2a0827240a7a691ab7ae281478db45a5308f2403",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2618",
     "checks": [
       {
@@ -68976,14 +68976,14 @@
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T17:56:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -69008,8 +69008,14 @@
         "from": "pr_open",
         "to": "pr_open",
         "summary": "Rebased PR #2618 onto latest origin/main after external merges and reran local EQ validation successfully."
+      },
+      {
+        "at": "2026-07-02T18:02:35.134049Z",
+        "status": "merged",
+        "summary": "Reconciled after GitHub confirmed PR #2618 merged with merge commit 3c0347744ff38b5b2d11401bf952a6c5c6321022; local temp worktree and branch were cleaned."
       }
-    ]
+    ],
+    "merge_commit_sha": "3c0347744ff38b5b2d11401bf952a6c5c6321022"
   },
   "PR-EQ-ASSET-SCI-06": {
     "id": "PR-EQ-ASSET-SCI-06",
@@ -69020,17 +69026,58 @@
     "depends_on": [
       "PR-EQ-ASSET-SCI-05"
     ],
-    "status": "user_authorized",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": [],
+    "status": "pr_open",
+    "commit_sha": "d4cbecb44abceb58c7d266fca02bafbe1130c6da",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2625",
+    "checks": [
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content lint passed after mechanism_map evidence-chain updates."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content compile passed; only scoped report_assets compiled output retained and alias mirror synchronized."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 432 assertions; PHPUnit reported existing environment file_get_contents warning only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+        "status": "passed_with_warnings",
+        "summary": "12 tests passed, 683 assertions; PHPUnit reported existing environment file_get_contents warnings only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 208 assertions; PHPUnit reported existing environment file_get_contents warning only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+        "status": "passed_with_warnings",
+        "summary": "4 tests passed, 130 assertions; PHPUnit reported existing environment file_get_contents warnings only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 16 assertions; PHPUnit reported existing environment file_get_contents warning only."
+      },
+      {
+        "command": "python/json scans + cmp raw mirror",
+        "status": "passed",
+        "summary": "No forbidden mechanism/paywall/SJT wording found; EQ_60 and EQ_EMOTIONAL_INTELLIGENCE raw mechanism_map files match byte-for-byte."
+      }
+    ],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -69039,6 +69086,21 @@
         "at": "2026-07-02T16:12:11.904905Z",
         "status": "user_authorized",
         "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      },
+      {
+        "at": "2026-07-02T18:02:35.134049Z",
+        "status": "local_checks_passed",
+        "summary": "Mechanism_map raw/compiled mirror updated; lint, compile, and EQ report/content tests passed with only existing file_get_contents warnings."
+      },
+      {
+        "at": "2026-07-02T18:04:21.424309Z",
+        "status": "pr_open",
+        "summary": "Opened PR #2625 for SCI-06 with head commit d086b38351554a2cca14860fdc68751e746190a7."
+      },
+      {
+        "at": "2026-07-02T18:04:39.001373Z",
+        "status": "pr_open",
+        "summary": "Updated PR #2625 ledger to amended head commit d4cbecb44abceb58c7d266fca02bafbe1130c6da."
       }
     ]
   },
