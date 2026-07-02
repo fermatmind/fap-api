@@ -69902,9 +69902,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "af4aecd2187512a160c248e8408b809a8b8c34de",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2621",
     "checks": {
       "phpunit_occupation_preflight": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php --no-ansi --display-warnings",
@@ -69959,6 +69959,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Repaired OCC-01 360-row occupation example content asset; local RIASEC unit subset and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T17:48:24Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2621 after OCC-01 local validation, latest-main rebase, and scope validation passed."
       }
     ]
   },
