@@ -71016,9 +71016,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "fb5a37de7b4efa3892513393305725715efacf12",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2643",
     "checks": {
       "phpunit_pair_deep_copy_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecPairBlendAssetPreflightTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi --display-warnings",
@@ -71070,6 +71070,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Reworked 15 pair blend rows into detemplated pair tension, context costs, and validation questions; local validation passed."
+      },
+      {
+        "at": "2026-07-02T20:05:15Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2643 after PAIRDEEP-01 local validation and scope validation passed."
       }
     ]
   },
