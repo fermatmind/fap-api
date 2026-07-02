@@ -70272,9 +70272,9 @@
     "depends_on": [
       "RIASEC-CONTENT-140CTA-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": "fc58c1d7301d686b6ffe406dab6dc902276ef571",
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "c3ab256463086dc0ad0088ea7cb5bb3385447aec",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2627",
     "checks": {
       "phpunit_140q_asset_slot_and_boundary_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentScienceBoundaryLintTest.php --no-ansi --display-warnings",
@@ -70328,6 +70328,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Repaired 126-row 140Q task/environment/role asset with specific daily-work context; local RIASEC unit subset and scope validation passed after latest-main rebase."
+      },
+      {
+        "at": "2026-07-02T18:15:34Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2627 after 140CTX-01 local validation, latest-main rebase, and scope validation passed."
       }
     ]
   },
