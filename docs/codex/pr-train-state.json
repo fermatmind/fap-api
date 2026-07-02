@@ -70861,8 +70861,8 @@
     "depends_on": [
       "RIASEC-CONTENT-FEEDBACK-01"
     ],
-    "status": "pr_opened",
-    "commit_sha": "c64c63941c8eb951b4efcb389776f8cde621c726",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "73d77c891013aff50fdb9e833cb1bbd75623c39c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2640",
     "checks": {
       "phpunit_feedback_next_node_tests": {
@@ -70886,14 +70886,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T19:43:43Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
-      "post_merge_revalidated": false,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php",
         "backend/content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl",
@@ -70921,6 +70921,12 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2640 after FEEDBACK-02 local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T19:48:19Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "GitHub PR #2640 merged and post-merge cleanup verified before starting DIMDEEP-01."
       }
     ]
   },
@@ -70934,19 +70940,44 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "authorized_pending_start",
+    "status": "local_validation_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "phpunit_dimension_deep_copy_tests": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "9 tests, 1195 assertions"
+      },
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "178 tests, 110057 assertions"
+      },
+      "pint_and_json_parse": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php; jq empty backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json",
+        "status": "passed"
+      },
+      "diff_check": {
+        "command": "git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json",
+        "backend/tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -70954,6 +70985,12 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T19:48:19Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Reworked six dimension deep copy into activity-grounded interest readings with costs, misread guardrails, and validation questions; local validation passed."
       }
     ]
   },
