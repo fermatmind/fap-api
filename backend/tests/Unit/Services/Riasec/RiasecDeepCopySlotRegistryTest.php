@@ -31,6 +31,19 @@ final class RiasecDeepCopySlotRegistryTest extends TestCase
             }
             $this->assertArrayHasKey('medium_score_reading', $slot);
             $this->assertNotEmpty($slot['medium_score_reading']);
+            $this->assertCount(3, $slot['interest_activity_focus']);
+            $this->assertCount(3, $slot['context_costs']);
+            $this->assertCount(3, $slot['misread_guardrails']);
+            $this->assertCount(3, $slot['validation_questions']);
+            $this->assertGreaterThanOrEqual(6, count($slot['work_activity_examples']));
+            $this->assertStringContainsString('活动', $slot['core_drive']);
+            $this->assertStringContainsString('不代表人格身份、能力水平、资格条件或职业答案', $slot['core_drive']);
+            $this->assertStringContainsString('现实', $slot['real_world_cost']);
+            $this->assertStringContainsString('常见误读', $slot['common_misread']);
+            $this->assertStringContainsString('不测能力、人格品质、资质或职业结果', $slot['user_visible_boundary']);
+            foreach ($slot['validation_questions'] as $question) {
+                $this->assertStringEndsWith('？', $question);
+            }
 
             $this->assertSame([], $registry->validateSlot($slot), 'Dimension '.$dimension.' slot should be contract-clean.');
         }
@@ -67,12 +80,13 @@ final class RiasecDeepCopySlotRegistryTest extends TestCase
     {
         $registry = new RiasecDeepCopySlotRegistry;
         $slot = $registry->resolveDimensionSlot('A');
-        unset($slot['core_drive'], $slot['medium_score_reading'], $slot['work_activity_examples']);
+        unset($slot['core_drive'], $slot['medium_score_reading'], $slot['work_activity_examples'], $slot['validation_questions']);
 
         $errors = $registry->validateSlot($slot);
 
         $this->assertContains('missing_core_drive', $errors);
         $this->assertContains('missing_medium_score_reading', $errors);
         $this->assertContains('missing_work_activity_examples', $errors);
+        $this->assertContains('missing_validation_questions', $errors);
     }
 }
