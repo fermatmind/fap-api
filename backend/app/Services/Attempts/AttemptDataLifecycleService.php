@@ -425,19 +425,40 @@ final class AttemptDataLifecycleService
     {
         $attemptId = trim((string) ($attempt->id ?? ''));
         $scaleCode = trim((string) ($attempt->scale_code ?? ''));
-        $reportPath = $this->artifactStore->reportCanonicalPath($scaleCode, $attemptId);
+        $descriptor = $this->artifactPurgeService->describeAttemptArtifacts($attempt, $result);
+        $canonicalPaths = is_array($descriptor['canonical_paths'] ?? null) ? $descriptor['canonical_paths'] : [];
+        $reportPath = trim((string) (
+            $canonicalPaths['report']
+            ?? $this->artifactStore->reportCanonicalPath($scaleCode, $attemptId)
+        ));
         $reportExists = $this->artifactStore->exists($reportPath);
 
-        $manifestHash = $this->resolveManifestHash($attempt, $result);
-        $variantsChecked = ['free', 'full'];
         $pdfPaths = [];
         $pdfExists = false;
-        foreach ($variantsChecked as $variant) {
-            $path = $this->artifactStore->pdfCanonicalPath($scaleCode, $attemptId, $manifestHash, $variant);
-            $pdfPaths[$variant] = $path;
+        foreach ($canonicalPaths as $kind => $path) {
+            $kind = trim((string) $kind);
+            if ($kind === 'report' || (! str_starts_with($kind, 'pdf') && ! str_starts_with($kind, 'result_page_pdf'))) {
+                continue;
+            }
+
+            $path = trim((string) $path);
+            if ($path === '') {
+                continue;
+            }
+
+            $auditKind = match ($kind) {
+                'pdf_free' => 'free',
+                'pdf_full' => 'full',
+                default => $kind,
+            };
+            $pdfPaths[$auditKind] = $path;
             if ($this->artifactStore->exists($path)) {
                 $pdfExists = true;
             }
+        }
+        $manifestHash = trim((string) ($descriptor['manifest_hash'] ?? ''));
+        if ($manifestHash === '') {
+            $manifestHash = $this->resolveManifestHash($attempt, $result);
         }
 
         $state = match (true) {
@@ -461,7 +482,7 @@ final class AttemptDataLifecycleService
                 'manifest_hash' => $manifestHash,
                 'paths' => $pdfPaths,
                 'exists' => $pdfExists,
-                'variants_checked' => $variantsChecked,
+                'variants_checked' => array_values(array_keys($pdfPaths)),
             ],
             'purge_result' => $extra['purge_result'] ?? null,
         ];

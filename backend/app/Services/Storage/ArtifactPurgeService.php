@@ -7,12 +7,15 @@ namespace App\Services\Storage;
 use App\Models\ReportArtifactVersion;
 use App\Models\StorageBlob;
 use App\Models\StorageBlobLocation;
+use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Support\SchemaBaseline;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 final class ArtifactPurgeService
 {
+    private const PDF_VARIANTS = ['free', 'full'];
+
     public function __construct(
         private readonly ArtifactStore $artifactStore,
         private readonly ArtifactLifecycleFrontDoor $frontDoor,
@@ -110,9 +113,7 @@ final class ArtifactPurgeService
 
         $canonicalPaths = [
             'report' => $this->artifactStore->reportCanonicalPath($scaleCode, $attemptId),
-            'pdf_free' => $this->artifactStore->pdfCanonicalPath($scaleCode, $attemptId, $manifestHash, 'free'),
-            'pdf_full' => $this->artifactStore->pdfCanonicalPath($scaleCode, $attemptId, $manifestHash, 'full'),
-        ];
+        ] + $this->pdfCanonicalPathsForPurge($scaleCode, $attemptId, $manifestHash, $attempt);
 
         $blobHashes = [];
         $locationIds = [];
@@ -136,7 +137,7 @@ final class ArtifactPurgeService
 
         if (SchemaBaseline::hasTable('storage_blob_locations')) {
             $locationRows = StorageBlobLocation::query()
-                ->whereIn('storage_path', array_values($canonicalPaths))
+                ->whereIn('storage_path', array_values(array_unique($canonicalPaths)))
                 ->get(['id', 'blob_hash', 'disk', 'storage_path', 'location_kind', 'meta_json']);
 
             foreach ($locationRows as $locationRow) {
@@ -228,7 +229,9 @@ final class ArtifactPurgeService
                 }
 
                 $status = 'not_found';
-                if ($disk !== '' && config('filesystems.disks.'.$disk) !== null) {
+                if ($disk === 'local') {
+                    $status = 'catalog_row_only';
+                } elseif ($disk !== '' && config('filesystems.disks.'.$disk) !== null) {
                     try {
                         $exists = Storage::disk($disk)->exists($storagePath);
                         if ($exists) {
@@ -312,10 +315,9 @@ final class ArtifactPurgeService
         $reportPath = $this->artifactStore->reportCanonicalPath($scaleCode, $attemptId);
         $reportExists = $this->artifactStore->exists($reportPath);
         $manifestHash = $this->resolveManifestHash($attempt, $result);
-        $pdfPaths = [
-            'free' => $this->artifactStore->pdfCanonicalPath($scaleCode, $attemptId, $manifestHash, 'free'),
-            'full' => $this->artifactStore->pdfCanonicalPath($scaleCode, $attemptId, $manifestHash, 'full'),
-        ];
+        $pdfPaths = $this->pdfAuditPaths(
+            $this->pdfCanonicalPathsForPurge($scaleCode, $attemptId, $manifestHash, $attempt)
+        );
         $pdfExists = false;
         foreach ($pdfPaths as $pdfPath) {
             if ($this->artifactStore->exists($pdfPath)) {
@@ -345,10 +347,73 @@ final class ArtifactPurgeService
                 'manifest_hash' => $manifestHash,
                 'paths' => $pdfPaths,
                 'exists' => $pdfExists,
-                'variants_checked' => ['free', 'full'],
+                'variants_checked' => array_values(array_keys($pdfPaths)),
             ],
             'purge_result' => $extra['purge_result'] ?? null,
         ];
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    private function pdfCanonicalPathsForPurge(
+        string $scaleCode,
+        string $attemptId,
+        string $manifestHash,
+        object $attempt
+    ): array {
+        $paths = [];
+        foreach (self::PDF_VARIANTS as $variant) {
+            $paths['pdf_'.$variant] = $this->artifactStore->pdfCanonicalPath($scaleCode, $attemptId, $manifestHash, $variant);
+        }
+
+        if (strtoupper(trim($scaleCode)) !== 'MBTI') {
+            return $paths;
+        }
+
+        $surfaceManifestHash = ReportPdfDocumentService::mbtiReportPdfSurfaceManifestHash($manifestHash);
+        foreach (self::PDF_VARIANTS as $variant) {
+            $paths['pdf_surface_'.$variant] = $this->artifactStore->pdfCanonicalPath('MBTI', $attemptId, $surfaceManifestHash, $variant);
+        }
+
+        $locale = strtolower(trim((string) ($attempt->locale ?? '')));
+        foreach (['locked', 'unlocked'] as $entitlement) {
+            foreach (self::PDF_VARIANTS as $variant) {
+                $resultPageManifestHash = ReportPdfDocumentService::mbtiResultPageExportManifestHash(
+                    $manifestHash,
+                    $locale,
+                    $entitlement,
+                    $variant
+                );
+                $paths['result_page_pdf_'.$entitlement.'_'.$variant] = $this->artifactStore->pdfCanonicalPath(
+                    'MBTI',
+                    $attemptId,
+                    $resultPageManifestHash,
+                    $variant
+                );
+            }
+        }
+
+        return $paths;
+    }
+
+    /**
+     * @param  array<string,string>  $canonicalPaths
+     * @return array<string,string>
+     */
+    private function pdfAuditPaths(array $canonicalPaths): array
+    {
+        $auditPaths = [];
+        foreach ($canonicalPaths as $kind => $path) {
+            $auditKind = match ($kind) {
+                'pdf_free' => 'free',
+                'pdf_full' => 'full',
+                default => $kind,
+            };
+            $auditPaths[$auditKind] = $path;
+        }
+
+        return $auditPaths;
     }
 
     private function resolveManifestHash(object $attempt, ?object $result = null): string
