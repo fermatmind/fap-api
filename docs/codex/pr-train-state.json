@@ -70545,8 +70545,8 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "pr_opened",
-    "commit_sha": "791df9c2dcd1e88a0fef777f277624a5b9fecfa0",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "af132cf868a710ee3f84c7009cb7485f1d9c4cc5",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2634",
     "checks": {
       "phpunit_lifecycle_share_tests": {
@@ -70569,14 +70569,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T18:52:35Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/app/Services/Riasec/RiasecLifecycleCopyService.php",
         "backend/content_assets/riasec/share_pdf_history_v1.en.json",
@@ -70603,8 +70603,15 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2634 after SHARE-01 local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T18:53:12Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2634 merged; origin/main contains merge commit; local main synced; task branch cleaned. Recorded during PDF-01 ledger reconciliation."
       }
-    ]
+    ],
+    "merge_commit_sha": "095730762b006fe09495e35fb1fa3d62db62b7de"
   },
   "RIASEC-CONTENT-PDF-01": {
     "id": "RIASEC-CONTENT-PDF-01",
@@ -70616,19 +70623,47 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "authorized_pending_start",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "pr_opened",
+    "commit_sha": "cb78c8d32d4564d4f147292e665962466ce592dd",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2635",
+    "checks": {
+      "phpunit_lifecycle_pdf_report_tests": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "12 tests, 1201 assertions"
+      },
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "177 tests, 104308 assertions"
+      },
+      "pint_and_json_parse": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecLifecycleCopyService.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php && php JSON parse share_pdf_history zh/en and zh fixture",
+        "status": "passed"
+      },
+      "diff_check": {
+        "command": "git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecLifecycleCopyService.php",
+        "backend/content_assets/riasec/share_pdf_history_v1.en.json",
+        "backend/content_assets/riasec/share_pdf_history_v1.zh-CN.json",
+        "backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php",
+        "backend/tests/Fixtures/Riasec/share_pdf_history_v1.zh-CN.json",
+        "backend/tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -70636,6 +70671,18 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T18:56:32Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Compacted PDF lifecycle copy to one boundary pass, added snapshot-bound PDF policy fields, and validated lifecycle/report parity."
+      },
+      {
+        "at": "2026-07-02T18:58:18Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2635 after PDF-01 local validation and scope validation passed."
       }
     ]
   },

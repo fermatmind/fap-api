@@ -108,6 +108,16 @@ final class RiasecLifecycleCopyPreflightTest extends TestCase
         foreach ($share['surfaces'] as $surface) {
             $this->assertFalse($surface['raw_scores_allowed']);
             $this->assertFalse($surface['raw_feedback_allowed']);
+
+            if (str_starts_with((string) $surface['surface'], 'pdf_')) {
+                $this->assertFalse($surface['public_safe']);
+                $this->assertSame('compact_snapshot_pdf', $surface['pdf_surface_mode']);
+                $this->assertSame('compact_boundary_once', $surface['pdf_density_mode']);
+                $this->assertFalse($surface['boundary_repetition_allowed']);
+                $this->assertTrue($surface['snapshot_bound_required']);
+                $this->assertTrue($surface['pdf_default_visible']);
+                $this->assertLessThanOrEqual(110, mb_strlen((string) $surface['copy']));
+            }
         }
         $this->assertSame('omit_module', $share['fallback_behavior']);
         $this->assertFalse($share['frontend_fallback_allowed']);
@@ -216,6 +226,37 @@ final class RiasecLifecycleCopyPreflightTest extends TestCase
             $this->assertStringNotContainsString('我的 RIASEC 结果', $copy);
             $this->assertDoesNotMatchRegularExpression('/\\b[RIASEC]{3}\\b/', $copy);
             $this->assertDoesNotMatchRegularExpression('/\\b(?:100|75|50|25|0)(?:\\.0+)?\\b/', $copy);
+        }
+    }
+
+    public function test_pdf_surfaces_use_compact_snapshot_boundary_policy(): void
+    {
+        $service = app(\App\Services\Riasec\RiasecLifecycleCopyService::class);
+
+        foreach (['zh-CN', 'en'] as $locale) {
+            $contract = $service->lifecycleCopyContract(true, $locale);
+            $pdfSurfaces = array_values(array_filter(
+                (array) data_get($contract, 'surfaces', []),
+                static fn (array $surface): bool => str_starts_with((string) ($surface['surface'] ?? ''), 'pdf_')
+            ));
+
+            $this->assertSame(['pdf_personal', 'pdf_counselor_discussion'], array_column($pdfSurfaces, 'surface'));
+
+            foreach ($pdfSurfaces as $surface) {
+                $copy = (string) ($surface['copy'] ?? '');
+
+                $this->assertFalse($surface['public_safe']);
+                $this->assertFalse($surface['raw_scores_allowed']);
+                $this->assertFalse($surface['raw_feedback_allowed']);
+                $this->assertSame('compact_snapshot_pdf', $surface['pdf_surface_mode']);
+                $this->assertSame('compact_boundary_once', $surface['pdf_density_mode']);
+                $this->assertFalse($surface['boundary_repetition_allowed']);
+                $this->assertTrue($surface['snapshot_bound_required']);
+                $this->assertTrue($surface['pdf_default_visible']);
+                $this->assertStringNotContainsString('raw score', strtolower($copy));
+                $this->assertDoesNotMatchRegularExpression('/\\b[RIASEC]{3}\\b/', $copy);
+                $this->assertDoesNotMatchRegularExpression('/\\b(?:100|75|50|25|0)(?:\\.0+)?\\b/', $copy);
+            }
         }
     }
 

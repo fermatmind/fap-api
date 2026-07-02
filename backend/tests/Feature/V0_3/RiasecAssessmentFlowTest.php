@@ -195,6 +195,14 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.snapshot_bound', true);
         $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.internal_snapshot_id_public_exposure_allowed', false);
         $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.faq_markdown_reference_available', true);
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.2.surface', 'pdf_personal');
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.2.pdf_surface_mode', 'compact_snapshot_pdf');
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.2.pdf_density_mode', 'compact_boundary_once');
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.2.boundary_repetition_allowed', false);
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.2.snapshot_bound_required', true);
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.2.pdf_default_visible', true);
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.3.surface', 'pdf_counselor_discussion');
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.3.pdf_density_mode', 'compact_boundary_once');
 
         $reportAccess = $this->withHeaders([
             'X-Anon-Id' => $anonId,
