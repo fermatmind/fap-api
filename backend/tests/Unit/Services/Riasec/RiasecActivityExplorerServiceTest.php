@@ -73,14 +73,40 @@ final class RiasecActivityExplorerServiceTest extends TestCase
             ['r_field_observe_1', 'r_proto_1', 'r_debug_1'],
             array_slice((array) data_get($payload, 'code_activity_pack.activity_chain'), 0, 3),
         );
+        $this->assertSame(
+            [
+                'r_field_observe_1',
+                'r_proto_1',
+                'r_debug_1',
+                'c_sort_1',
+                'c_process_1',
+                'c_check_1',
+                'e_pitch_1',
+                'e_resource_1',
+                'e_goal_1',
+            ],
+            data_get($payload, 'code_activity_pack.activity_chain'),
+        );
+        $this->assertSame('holland_code_order_then_asset_order', data_get($payload, 'code_activity_pack.selection_policy.ordering'));
+        $this->assertSame(3, data_get($payload, 'code_activity_pack.selection_policy.per_dimension_limit'));
+        $this->assertSame('content_example_not_registry_match', data_get($payload, 'code_activity_pack.selection_policy.source_status_required'));
+        $this->assertFalse((bool) data_get($payload, 'code_activity_pack.selection_policy.commercial_expansion_rows_publicly_selectable'));
+        $this->assertFalse((bool) data_get($payload, 'code_activity_pack.selection_policy.ranking_allowed'));
+        $this->assertFalse((bool) data_get($payload, 'code_activity_pack.selection_policy.fit_score_allowed'));
         $this->assertSame('content_example_not_registry_match', data_get($payload, 'code_activity_pack.source_status'));
         $this->assertFalse((bool) data_get($payload, 'boundary.registry_source_connected'));
 
         $activities = (array) data_get($payload, 'code_activity_pack.activities', []);
         $this->assertCount(9, $activities);
+        $this->assertCount(9, array_unique(array_column($activities, 'activity_key')));
 
         foreach ($activities as $activity) {
             $this->assertSame('content_example_not_registry_match', data_get($activity, 'source_status'));
+            $this->assertStringNotContainsString('commercial_variant', (string) data_get($activity, 'activity_key'));
+            $this->assertTrue((bool) data_get($activity, 'not_a_recommendation'));
+            $this->assertFalse((bool) data_get($activity, 'ranking_allowed'));
+            $this->assertFalse((bool) data_get($activity, 'fit_score_allowed'));
+            $this->assertSame('activity_example_not_recommendation', data_get($activity, 'selection_boundary'));
             $this->assertNotEmpty(data_get($activity, 'task_examples'));
             $this->assertNotEmpty(data_get($activity, 'occupation_examples'));
         }
@@ -109,6 +135,36 @@ final class RiasecActivityExplorerServiceTest extends TestCase
         $this->assertSame('available', data_get($payload, 'code_activity_pack.status'));
         $this->assertCount(9, (array) data_get($payload, 'code_activity_pack.activities'));
         $this->assertSame([], data_get($payload, 'code_activity_pack.occupation_examples'));
+    }
+
+    public function test_activity_pack_fails_closed_when_asset_is_invalid_or_incomplete(): void
+    {
+        $invalidAsset = tempnam(sys_get_temp_dir(), 'riasec-activity-invalid-');
+        $this->assertIsString($invalidAsset);
+        file_put_contents($invalidAsset, json_encode([
+            'schema_version' => 'riasec.activity_task_example.v1',
+            'asset_version' => 'riasec_activity_task_examples_v1.zh-CN',
+            'activity_key' => 'r_invalid_1',
+            'dimensions' => ['R'],
+            'activity_label' => '坏资产行',
+            'task_examples' => ['只有一条'],
+            'low_risk_validation' => '无效行应 fail closed。',
+            'source_status' => 'content_example_not_registry_match',
+            'not_a_recommendation' => true,
+            'frontend_fallback_allowed' => false,
+            'action_duration_options' => ['15min' => '只提供一个时长'],
+        ], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR).PHP_EOL);
+
+        try {
+            $payload = (new RiasecActivityExplorerService($invalidAsset))->build('RIA', 'zh-CN');
+
+            $this->assertSame('not_available_for_code_v1', data_get($payload, 'code_activity_pack.status'));
+            $this->assertSame('activity_task_examples_not_available', data_get($payload, 'code_activity_pack.reason'));
+            $this->assertSame([], data_get($payload, 'code_activity_pack.activities'));
+            $this->assertSame([], data_get($payload, 'code_activity_pack.occupation_examples'));
+        } finally {
+            @unlink($invalidAsset);
+        }
     }
 
     public function test_activity_explorer_payload_does_not_emit_forbidden_claim_copy(): void
