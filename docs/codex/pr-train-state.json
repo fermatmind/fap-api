@@ -71014,6 +71014,10 @@
       "deployment": {
         "status": "not_run",
         "evidence": "No staging wait, manual server deploy, production import, production deploy, CMS write, search submission, sitemap, llms, canonical, noindex, or JSON-LD action was triggered."
+      },
+      "github_pr": {
+        "status": "opened",
+        "evidence": "Opened PR #2629 from codex/security-169-api-03-harden-pdf-token-and-locked-mbti-report-access to main."
       }
     },
     "scope_validation": {
@@ -71039,8 +71043,8 @@
       "status": "pass",
       "evidence": "Changed files are confined to API-03 allowed PDF token, Gotenberg URL, locked MBTI PDF access, config, and train state paths."
     },
-    "pr_url": null,
-    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2629",
+    "commit_sha": "672afae347e6a71c1a7eddc712fc11933c1ece54",
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -71063,6 +71067,11 @@
         "at": "2026-07-03T02:17:31+08:00",
         "status": "local_checks_passed",
         "note": "Implemented PDF token secret hardening, locked MBTI PDF cache bypass/fallback, and stricter private Gotenberg URL validation; local focused tests, route list, SQLite migrate, full ci_verify_mbti, and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T02:20:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2629 and pushed SECURITY-169-API-03 implementation commit 672afae347e6a71c1a7eddc712fc11933c1ece54."
       }
     ]
   },
