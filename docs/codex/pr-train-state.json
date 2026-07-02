@@ -70069,7 +70069,7 @@
     "title": "SECURITY-169-API-01: restore production deploy policy guard",
     "train_scope": "security_169_fap_api_audit",
     "depends_on": [],
-    "status": "pr_open",
+    "status": "merged",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -70118,6 +70118,14 @@
       "github_pr": {
         "status": "opened",
         "evidence": "Opened PR #2605 from codex/security-169-api-01-restore-production-deploy-policy-guard to main."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2605 GitHub checks passed for hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload on head f7f44d095f34129add8ab85e40620f0fe093060b."
+      },
+      "post_merge_revalidate": {
+        "status": "pass",
+        "evidence": "PR #2605 merged at 2026-07-02T17:06:44Z as squash commit 36dc350079ea2f6fe4ec66bc82e3f2bf32188688; origin/main contains the merge commit; local main was fast-forwarded to origin/main; local task branch was deleted; remote task branch is absent."
       }
     },
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2605",
@@ -70131,9 +70139,9 @@
     "content_authority": "backend",
     "authorized_by_user": "2026-07-03 attached /goal SECURITY-169 fap-api audit PR train continuous execution request.",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T17:06:44Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "events": [
       {
         "at": "2026-07-03T00:00:00+08:00",
@@ -70149,6 +70157,16 @@
         "at": "2026-07-03T00:33:18+08:00",
         "status": "pr_open",
         "note": "Opened PR #2605 and pushed SECURITY-169-API-01 implementation commit cb375f6b832be73dc3d2dbb96fbbede577646cf7."
+      },
+      {
+        "at": "2026-07-03T01:06:44+08:00",
+        "status": "merged",
+        "note": "PR #2605 was squash-merged as 36dc350079ea2f6fe4ec66bc82e3f2bf32188688 after required GitHub checks passed."
+      },
+      {
+        "at": "2026-07-03T01:10:00+08:00",
+        "status": "post_merge_revalidated",
+        "note": "Verified origin/main contains the merge commit, local main equals origin/main, and local/remote task branches were cleaned."
       }
     ]
   },
