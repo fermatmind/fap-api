@@ -24,7 +24,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。"
       },
       "en": {
         "headline": "Balanced Integrator",
@@ -47,7 +47,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance."
       },
       "meta": {
         "id": "eq.snapshot.balanced_integrated",
@@ -56,7 +56,9 @@
         "trigger_logic": {
           "formulation_id": "balanced_integrated"
         },
-        "claim_sensitivity": "medium"
+        "claim_sensitivity": "medium",
+        "claim_risk": "medium",
+        "risk_notes": "Hero snapshot controls first-screen claim strength."
       }
     },
     "eq.snapshot.high_empathy_low_recovery": {
@@ -81,18 +83,18 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。"
       },
       "en": {
         "headline": "High Empathy, Slow Recovery",
-        "core_judgment": "You read the room quickly, but recovery can lag behind empathy.",
+        "core_judgment": "Your answers suggest you often notice the emotional tone of a room, but recovery can lag behind empathy.",
         "evidence_point": "Based on the four dimension scores, score gaps, response quality, and mechanism pattern.",
         "three_sentence_summary": [
-          "You read the room quickly, but recovery can lag behind empathy.",
-          "You can make people feel understood, especially when emotions run high.",
+          "Your answers suggest you often notice the emotional tone of a room, but recovery can lag behind empathy.",
+          "You may tend to communicate understanding, especially when emotions run high.",
           "Next move: Practice understanding without taking over, so empathy is followed by boundary."
         ],
-        "top_strength": "You can make people feel understood, especially when emotions run high.",
+        "top_strength": "You may tend to communicate understanding, especially when emotions run high.",
         "likely_cost": "You may carry other people’s pressure with you long after the moment ends.",
         "minimal_action": "Practice understanding without taking over, so empathy is followed by boundary.",
         "share_safe_sentence": "I can understand someone without carrying the whole emotional load.",
@@ -104,7 +106,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance."
       },
       "meta": {
         "id": "eq.snapshot.high_empathy_low_recovery",
@@ -113,7 +115,9 @@
         "trigger_logic": {
           "formulation_id": "high_empathy_low_recovery"
         },
-        "claim_sensitivity": "medium"
+        "claim_sensitivity": "medium",
+        "claim_risk": "medium",
+        "risk_notes": "Hero snapshot controls first-screen claim strength."
       }
     },
     "eq.snapshot.aware_but_unregulated": {
@@ -138,7 +142,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。"
       },
       "en": {
         "headline": "Aware, Still Reactive",
@@ -161,7 +165,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance."
       },
       "meta": {
         "id": "eq.snapshot.aware_but_unregulated",
@@ -170,7 +174,9 @@
         "trigger_logic": {
           "formulation_id": "aware_but_unregulated"
         },
-        "claim_sensitivity": "medium"
+        "claim_sensitivity": "medium",
+        "claim_risk": "medium",
+        "risk_notes": "Hero snapshot controls first-screen claim strength."
       }
     },
     "eq.snapshot.calm_but_distant": {
@@ -195,7 +201,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。"
       },
       "en": {
         "headline": "Steady, Less Attuned",
@@ -218,7 +224,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance."
       },
       "meta": {
         "id": "eq.snapshot.calm_but_distant",
@@ -227,7 +233,9 @@
         "trigger_logic": {
           "formulation_id": "calm_but_distant"
         },
-        "claim_sensitivity": "medium"
+        "claim_sensitivity": "medium",
+        "claim_risk": "medium",
+        "risk_notes": "Hero snapshot controls first-screen claim strength."
       }
     },
     "eq.snapshot.relationship_first_self_later": {
@@ -252,7 +260,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。"
       },
       "en": {
         "headline": "Relationship First, Self Later",
@@ -275,7 +283,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance."
       },
       "meta": {
         "id": "eq.snapshot.relationship_first_self_later",
@@ -284,7 +292,9 @@
         "trigger_logic": {
           "formulation_id": "relationship_first_self_later"
         },
-        "claim_sensitivity": "medium"
+        "claim_sensitivity": "medium",
+        "claim_risk": "medium",
+        "risk_notes": "Hero snapshot controls first-screen claim strength."
       }
     },
     "eq.snapshot.self_clear_repair_weak": {
@@ -309,7 +319,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。"
       },
       "en": {
         "headline": "Clear Self, Repair Gap",
@@ -332,7 +342,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance."
       },
       "meta": {
         "id": "eq.snapshot.self_clear_repair_weak",
@@ -341,7 +351,9 @@
         "trigger_logic": {
           "formulation_id": "self_clear_repair_weak"
         },
-        "claim_sensitivity": "medium"
+        "claim_sensitivity": "medium",
+        "claim_risk": "medium",
+        "risk_notes": "Hero snapshot controls first-screen claim strength."
       }
     },
     "eq.snapshot.steady_collaborator": {
@@ -366,7 +378,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。"
       },
       "en": {
         "headline": "Steady Collaborator",
@@ -389,7 +401,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance."
       },
       "meta": {
         "id": "eq.snapshot.steady_collaborator",
@@ -398,7 +410,9 @@
         "trigger_logic": {
           "formulation_id": "steady_collaborator"
         },
-        "claim_sensitivity": "medium"
+        "claim_sensitivity": "medium",
+        "claim_risk": "medium",
+        "risk_notes": "Hero snapshot controls first-screen claim strength."
       }
     },
     "eq.snapshot.sensitive_absorber": {
@@ -423,7 +437,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。"
       },
       "en": {
         "headline": "Sensitive Absorber",
@@ -446,7 +460,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance."
       },
       "meta": {
         "id": "eq.snapshot.sensitive_absorber",
@@ -455,7 +469,9 @@
         "trigger_logic": {
           "formulation_id": "sensitive_absorber"
         },
-        "claim_sensitivity": "medium"
+        "claim_sensitivity": "medium",
+        "claim_risk": "medium",
+        "risk_notes": "Hero snapshot controls first-screen claim strength."
       }
     },
     "eq.snapshot.developing_foundation": {
@@ -480,14 +496,14 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。"
       },
       "en": {
         "headline": "Developing Foundation",
-        "core_judgment": "Your emotional and relational pattern is still forming; one reliable practice matters more than a full reset.",
+        "core_judgment": "This self-report pattern appears less settled in this session; one reliable practice matters more than a full reset.",
         "evidence_point": "Based on the four dimension scores, score gaps, response quality, and mechanism pattern.",
         "three_sentence_summary": [
-          "Your emotional and relational pattern is still forming; one reliable practice matters more than a full reset.",
+          "This self-report pattern appears less settled in this session; one reliable practice matters more than a full reset.",
           "You are beginning to treat emotion and relationships as observable and trainable.",
           "Next move: Name one feeling clearly before attempting a larger change."
         ],
@@ -503,7 +519,7 @@
           "talk_to_agent",
           "related_tests"
         ],
-        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance."
       },
       "meta": {
         "id": "eq.snapshot.developing_foundation",
@@ -512,22 +528,24 @@
         "trigger_logic": {
           "formulation_id": "developing_foundation"
         },
-        "claim_sensitivity": "medium"
+        "claim_sensitivity": "medium",
+        "claim_risk": "medium",
+        "risk_notes": "Hero snapshot controls first-screen claim strength."
       }
     },
     "eq.snapshot.low_confidence_result": {
       "zh-CN": {
-        "headline": "本次结果置信度较低",
-        "core_judgment": "这次结果应轻一点读，最有价值的是理解本次作答状态。",
+        "headline": "低置信作答记录",
+        "core_judgment": "请把本次结果作为作答质量证据，而不是画像。",
         "evidence_point": "由于本次作答质量不足，系统不会输出强画像判断。",
         "three_sentence_summary": [
           "这次结果应轻一点读，最有价值的是理解本次作答状态。",
           "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
           "下一步：先记录状态，之后在更稳定的时间复测。"
         ],
-        "top_strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+        "top_strength": "可用信号是复测条件很重要。",
         "likely_cost": "如果强行套用画像，可能比不看结果更误导。",
-        "minimal_action": "先记录状态，之后在更稳定的时间复测。",
+        "minimal_action": "记录作答环境，并在更稳定时复测。",
         "share_safe_sentence": "这次结果不是不能看，而是要轻一点看。",
         "continue_path": "先记录本次作答状态，之后在更稳定的时间复测。",
         "conversion_actions": [
@@ -535,20 +553,20 @@
           "retest_reminder",
           "talk_to_agent"
         ],
-        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。"
       },
       "en": {
-        "headline": "Lower-Confidence Result",
-        "core_judgment": "Read this result lightly; the most useful signal is the response context of this session.",
+        "headline": "Low-Confidence Session",
+        "core_judgment": "Read this session as response-quality evidence, not as a profile.",
         "evidence_point": "Because response confidence is limited, the system avoids a strong profile statement.",
         "three_sentence_summary": [
           "Read this result lightly; the most useful signal is the response context of this session.",
-          "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+          "Without a strong conclusion, this session can only point to response context and retest conditions to review.",
           "Next move: Record the context first, then retest when conditions are steadier."
         ],
-        "top_strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "top_strength": "The usable signal is that retest conditions matter.",
         "likely_cost": "Forcing a profile onto this result could be more misleading than useful.",
-        "minimal_action": "Record the context first, then retest when conditions are steadier.",
+        "minimal_action": "Record the context and retake when conditions are steadier.",
         "share_safe_sentence": "This result is not useless; it simply needs a lighter reading.",
         "continue_path": "Record the response context first, then retest when conditions are steadier.",
         "conversion_actions": [
@@ -556,7 +574,7 @@
           "retest_reminder",
           "talk_to_agent"
         ],
-        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance."
       },
       "meta": {
         "id": "eq.snapshot.low_confidence_result",
@@ -565,7 +583,9 @@
         "trigger_logic": {
           "formulation_id": "low_confidence_result"
         },
-        "claim_sensitivity": "high"
+        "claim_sensitivity": "high",
+        "claim_risk": "high",
+        "risk_notes": "Hero snapshot controls first-screen claim strength."
       }
     }
   }
