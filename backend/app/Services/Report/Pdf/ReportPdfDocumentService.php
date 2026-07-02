@@ -44,6 +44,38 @@ final class ReportPdfDocumentService
         return in_array($variant, ['free', 'full'], true) ? $variant : 'free';
     }
 
+    public static function mbtiReportPdfSurfaceManifestHash(string $baseHash): string
+    {
+        $baseHash = trim($baseHash) !== '' ? trim($baseHash) : 'nohash';
+        $suffix = '-'.self::MBTI_PDF_SURFACE_VERSION;
+
+        return str_ends_with($baseHash, $suffix) ? $baseHash : $baseHash.$suffix;
+    }
+
+    public static function mbtiResultPageExportManifestHash(
+        string $baseHash,
+        string $locale,
+        string $entitlement,
+        string $variant
+    ): string {
+        $baseHash = trim($baseHash) !== '' ? trim($baseHash) : 'nohash';
+        $locale = str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh' : 'en';
+        $entitlement = strtolower(trim($entitlement)) === 'unlocked' ? 'unlocked' : 'locked';
+        $variant = strtolower(trim($variant));
+        $variant = in_array($variant, ['free', 'full'], true) ? $variant : 'free';
+
+        return implode('-', [
+            $baseHash,
+            self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
+            self::MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION,
+            self::sanitizeManifestSegmentValue(self::mbtiResultPageSnapshotPrintAssetHash()),
+            self::RESULT_PAGE_EXPORT_ENGINE,
+            preg_replace('/[^a-z0-9_.-]+/i', '_', $locale) ?: 'locale',
+            $entitlement,
+            $variant,
+        ]);
+    }
+
     public function fileName(string $scaleCode, string $attemptId): string
     {
         $scaleSlug = strtolower((string) preg_replace('/[^a-z0-9]+/i', '_', $scaleCode));
@@ -364,7 +396,7 @@ final class ReportPdfDocumentService
         $hash = $hash !== '' ? $hash : 'nohash';
 
         if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI') {
-            return $hash.'-'.self::MBTI_PDF_SURFACE_VERSION;
+            return self::mbtiReportPdfSurfaceManifestHash($hash);
         }
 
         return $hash;
@@ -446,16 +478,7 @@ final class ReportPdfDocumentService
         $variant = $this->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $entitlement = ((bool) ($gate['locked'] ?? true)) ? 'locked' : 'unlocked';
 
-        return implode('-', [
-            $baseHash,
-            self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
-            self::MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION,
-            $this->sanitizeManifestSegment(self::mbtiResultPageSnapshotPrintAssetHash()),
-            self::RESULT_PAGE_EXPORT_ENGINE,
-            preg_replace('/[^a-z0-9_.-]+/i', '_', $locale) ?: 'locale',
-            $entitlement,
-            $variant,
-        ]);
+        return self::mbtiResultPageExportManifestHash($baseHash, $locale, $entitlement, $variant);
     }
 
     public static function mbtiResultPageSnapshotPrintAssetHash(): string
@@ -466,6 +489,11 @@ final class ReportPdfDocumentService
     }
 
     private function sanitizeManifestSegment(string $value): string
+    {
+        return self::sanitizeManifestSegmentValue($value);
+    }
+
+    private static function sanitizeManifestSegmentValue(string $value): string
     {
         return preg_replace('/[^a-z0-9_.-]+/i', '_', trim($value)) ?: 'unset';
     }

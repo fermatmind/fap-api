@@ -71417,12 +71417,93 @@
     "depends_on": [
       "SECURITY-169-API-03"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "checks": {
       "authorization": {
         "status": "pass",
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SECURITY-169-API-03 implementation PR #2629 was squash-merged as 51dc2a58e21fc15fe7f4b6f0fbdb831e7aa1ebb0 and ledger closeout PR #2632 was merged as 9833903512c77451b4aa7d2744f6424ad033a9dc."
+      },
+      "base_sync": {
+        "status": "pass",
+        "evidence": "API-04 branch was rebased onto latest origin/main 095730762b006fe09495e35fb1fa3d62db62b7de before final local validation."
+      },
+      "php_lint": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php -l app/Services/Report/Pdf/ReportPdfDocumentService.php",
+          "cd backend && php -l app/Services/Storage/ArtifactPurgeService.php",
+          "cd backend && php -l app/Services/Attempts/AttemptDataLifecycleService.php"
+        ],
+        "evidence": "All modified PHP service files reported no syntax errors on latest base."
+      },
+      "focused_dsar_tests": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Compliance/DsarArtifactFullPurgeTest.php tests/Feature/Compliance/DsarArtifactPurgeBlockedByHoldTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Attempts/AttemptDataLifecycleArtifactAuditTest.php tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php --no-ansi"
+        ],
+        "evidence": "DSAR purge tests passed with 3 existing fixture warnings and 30 assertions; lifecycle/PDF parity tests passed with 12 existing fixture warnings and 183 assertions."
+      },
+      "descriptor_coverage": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan tinker --execute='...'",
+        "evidence": "Descriptor check confirmed MBTI pdf_surface_free and result_page_pdf_locked_free canonical purge keys are generated for versioned PDF artifacts."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && ./vendor/bin/pint --test app/Services/Report/Pdf/ReportPdfDocumentService.php app/Services/Storage/ArtifactPurgeService.php app/Services/Attempts/AttemptDataLifecycleService.php",
+        "evidence": "Pint found no formatting changes required for API-04 modified files."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "Route list completed successfully on latest base; API-04 adds no route."
+      },
+      "sqlite_migrate": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-04.sqlite php artisan migrate --force --no-ansi",
+        "evidence": "SQLite migrations completed successfully; API-04 adds no migration."
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "evidence": "Full MBTI CI chain passed from repo root on latest base 095730762b006fe09495e35fb1fa3d62db62b7de; BigFive compiled JSON side effects were restored because they are outside API-04 scope."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors after restoring generated BigFive compiled artifacts."
+      },
+      "json_state": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "evidence": "PR train state JSON parsed successfully after API-04 local state update."
+      },
+      "deployment": {
+        "status": "not_run",
+        "evidence": "No staging wait, manual server deploy, production import, production deploy, CMS write, search submission, sitemap, llms, canonical, noindex, or JSON-LD action was triggered."
       }
+    },
+    "scope_validation": {
+      "allowed_files": [
+        "backend/app/Services/Report/Pdf/ReportPdfDocumentService.php",
+        "backend/app/Services/Storage/ArtifactPurgeService.php",
+        "backend/app/Services/Attempts/AttemptDataLifecycleService.php",
+        "docs/codex/pr-train-state.json"
+      ],
+      "changed_files": [
+        "backend/app/Services/Attempts/AttemptDataLifecycleService.php",
+        "backend/app/Services/Report/Pdf/ReportPdfDocumentService.php",
+        "backend/app/Services/Storage/ArtifactPurgeService.php",
+        "docs/codex/pr-train-state.json"
+      ],
+      "outside_scope_files": [],
+      "status": "pass",
+      "evidence": "Changed files are confined to API-04 allowed PDF artifact descriptor, DSAR purge, lifecycle residual audit, and train state paths."
     },
     "pr_url": null,
     "commit_sha": null,
@@ -71443,6 +71524,11 @@
         "at": "2026-07-03T00:00:00+08:00",
         "status": "planned",
         "note": "Registered authorized SECURITY-169-API-04; execution waits for declared dependency merge."
+      },
+      {
+        "at": "2026-07-03T03:02:32+08:00",
+        "status": "local_checks_passed",
+        "note": "Extended DSAR artifact purge and residual audit to versioned MBTI PDF surface/result-page keys; latest-base php lint, focused tests, descriptor coverage, Pint, route list, SQLite migrate, full ci_verify_mbti, and scope validation passed."
       }
     ]
   },
