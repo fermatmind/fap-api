@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Report\Pdf;
 
 use App\Models\Attempt;
+use RuntimeException;
 
 final class ResultPagePdfTokenService
 {
@@ -53,7 +54,16 @@ final class ResultPagePdfTokenService
         }
 
         [$encodedPayload, $signature] = explode('.', $token, 2);
-        if ($encodedPayload === '' || $signature === '' || ! hash_equals($this->sign($encodedPayload), $signature)) {
+        if ($encodedPayload === '' || $signature === '') {
+            return null;
+        }
+
+        try {
+            $expectedSignature = $this->sign($encodedPayload);
+        } catch (RuntimeException) {
+            return null;
+        }
+        if (! hash_equals($expectedSignature, $signature)) {
             return null;
         }
 
@@ -141,7 +151,19 @@ final class ResultPagePdfTokenService
             return $secret;
         }
 
-        return 'fap-result-page-pdf-local-key';
+        $appKey = trim((string) config('app.key', ''));
+        if (str_starts_with($appKey, 'base64:')) {
+            $decoded = base64_decode(substr($appKey, 7), true);
+            if (is_string($decoded) && strlen($decoded) >= 32) {
+                return $decoded;
+            }
+        }
+
+        if ($appKey !== '') {
+            return $appKey;
+        }
+
+        throw new RuntimeException('MBTI result-page PDF token secret is not configured.');
     }
 
     private function base64UrlEncode(string $value): string

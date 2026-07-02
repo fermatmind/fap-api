@@ -70947,12 +70947,97 @@
     "depends_on": [
       "SECURITY-169-API-02"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "checks": {
       "authorization": {
         "status": "pass",
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SECURITY-169-API-02 implementation PR #2620 was squash-merged as 915a50976c16ea4d1a73db038774610fd1e0dcab and ledger closeout PR #2623 was merged as 28a74b6d2bfac459bd20ebdc8d5e408bd896e233."
+      },
+      "base_sync": {
+        "status": "pass",
+        "evidence": "API-03 branch was rebased onto latest origin/main cf971a59671519fbde549288bb8eb8a1e3cd4d2d before final validation."
+      },
+      "php_lint": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php -l app/Services/Report/Pdf/ResultPagePdfTokenService.php",
+          "cd backend && php -l app/Services/Report/Pdf/GotenbergChromiumPdfClient.php",
+          "cd backend && php -l app/Services/Report/Pdf/ReportPdfDocumentService.php",
+          "cd backend && php -l config/gotenberg.php"
+        ],
+        "evidence": "All modified PHP/config files reported no syntax errors."
+      },
+      "focused_pdf_contract_tests": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Report/PdfGotenbergEngineSpikeTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/AttemptReportAccessReadTest.php --filter='mbti|result_page_pdf|projection' --no-ansi"
+        ],
+        "evidence": "Focused PDF/access contract tests passed locally; remaining warnings were existing fixture file_get_contents warnings."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && ./vendor/bin/pint --test app/Services/Report/Pdf/ResultPagePdfTokenService.php app/Services/Report/Pdf/GotenbergChromiumPdfClient.php app/Services/Report/Pdf/ReportPdfDocumentService.php config/gotenberg.php",
+        "evidence": "Pint found no formatting changes required for API-03 modified files."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "Route list completed successfully after API-03 changes."
+      },
+      "sqlite_migrate": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-03.sqlite php artisan migrate --force --no-ansi",
+        "evidence": "SQLite migrations completed successfully; API-03 adds no migration."
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "evidence": "Full MBTI CI chain passed from repo root on 2026-07-02T18:16:26Z; BigFive compiled JSON side effects were restored because they are outside API-03 scope."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors after restoring generated BigFive compiled artifacts."
+      },
+      "json_state": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "evidence": "PR train state JSON parsed successfully after API-03 state update."
+      },
+      "deployment": {
+        "status": "not_run",
+        "evidence": "No staging wait, manual server deploy, production import, production deploy, CMS write, search submission, sitemap, llms, canonical, noindex, or JSON-LD action was triggered."
       }
+    },
+    "scope_validation": {
+      "allowed_files": [
+        "backend/app/Http/Controllers/API/V0_3/AttemptReadController.php",
+        "backend/app/Services/Report/Pdf/ReportPdfDocumentService.php",
+        "backend/routes/api.php",
+        "backend/config/gotenberg.php",
+        "backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php",
+        "backend/app/Services/Report/Pdf/ResultPagePdfTokenService.php",
+        "backend/app/Services/Commerce/MbtiAccessHubBuilder.php",
+        "backend/app/Services/Report/Pdf/GotenbergChromiumPdfClient.php",
+        "docs/codex/pr-train-state.json"
+      ],
+      "changed_files": [
+        "backend/app/Services/Report/Pdf/GotenbergChromiumPdfClient.php",
+        "backend/app/Services/Report/Pdf/ReportPdfDocumentService.php",
+        "backend/app/Services/Report/Pdf/ResultPagePdfTokenService.php",
+        "backend/config/gotenberg.php",
+        "docs/codex/pr-train-state.json"
+      ],
+      "outside_scope_files": [],
+      "status": "pass",
+      "evidence": "Changed files are confined to API-03 allowed PDF token, Gotenberg URL, locked MBTI PDF access, config, and train state paths."
     },
     "pr_url": null,
     "commit_sha": null,
@@ -70973,6 +71058,11 @@
         "at": "2026-07-03T00:00:00+08:00",
         "status": "planned",
         "note": "Registered authorized SECURITY-169-API-03; execution waits for declared dependency merge."
+      },
+      {
+        "at": "2026-07-03T02:17:31+08:00",
+        "status": "local_checks_passed",
+        "note": "Implemented PDF token secret hardening, locked MBTI PDF cache bypass/fallback, and stricter private Gotenberg URL validation; local focused tests, route list, SQLite migrate, full ci_verify_mbti, and scope validation passed."
       }
     ]
   },

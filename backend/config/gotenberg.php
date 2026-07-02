@@ -16,6 +16,10 @@ return [
     'timeout_seconds' => (int) env('GOTENBERG_TIMEOUT_SECONDS', 60),
     'connect_timeout_seconds' => (int) env('GOTENBERG_CONNECT_TIMEOUT_SECONDS', 5),
     'allow_single_label_hosts' => (bool) env('GOTENBERG_ALLOW_SINGLE_LABEL_HOSTS', true),
+    'allowed_single_label_hosts' => array_values(array_filter(array_map(
+        static fn ($host) => strtolower(trim((string) $host)),
+        explode(',', (string) env('GOTENBERG_ALLOWED_SINGLE_LABEL_HOSTS', 'gotenberg,frontend,localhost'))
+    ))),
     'allowed_private_suffixes' => array_values(array_filter(array_map(
         static fn ($suffix) => strtolower(trim((string) $suffix)),
         explode(',', (string) env('GOTENBERG_ALLOWED_PRIVATE_SUFFIXES', '.internal,.local,.lan,.svc,.cluster.local'))

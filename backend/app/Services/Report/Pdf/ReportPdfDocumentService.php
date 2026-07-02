@@ -281,20 +281,24 @@ final class ReportPdfDocumentService
             $manifestHash,
             $variant
         ));
-        $cached = $this->artifactStore->getFirst($candidates);
-        if (is_string($cached) && $cached !== '') {
-            if (! $this->legacyDrainEnabled() && ! $this->artifactStore->exists($path)) {
-                $this->artifactStore->put($path, $cached);
-            }
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        $bypassCache = $scaleCode === 'MBTI' && $locked;
+        if (! $bypassCache) {
+            $cached = $this->artifactStore->getFirst($candidates);
+            if (is_string($cached) && $cached !== '') {
+                if (! $this->legacyDrainEnabled() && ! $this->artifactStore->exists($path)) {
+                    $this->artifactStore->put($path, $cached);
+                }
 
-            return [
-                'binary' => $cached,
-                'storage_path' => $path,
-                'variant' => $variant,
-                'locked' => $locked,
-                'manifest_hash' => $manifestHash,
-                'cached' => true,
-            ];
+                return [
+                    'binary' => $cached,
+                    'storage_path' => $path,
+                    'variant' => $variant,
+                    'locked' => $locked,
+                    'manifest_hash' => $manifestHash,
+                    'cached' => true,
+                ];
+            }
         }
 
         $report = is_array($gate['report'] ?? null) ? $gate['report'] : [];
@@ -317,8 +321,8 @@ final class ReportPdfDocumentService
             ?? data_get($result?->result_json, 'normed_json.quality.level', '')
         )));
 
-        $pdfBinary = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI'
-            ? $this->buildMbtiDocument($attempt, $result)
+        $pdfBinary = $scaleCode === 'MBTI'
+            ? $this->buildMbtiDocument($attempt, $result, $locked, $variant)
             : $this->buildDocument(
                 (string) $attempt->id,
                 (string) ($attempt->scale_code ?? ''),
@@ -580,8 +584,25 @@ final class ReportPdfDocumentService
         return sprintf('fermatmind-enneagram-%s-%s.pdf', $slug, $date);
     }
 
-    private function buildMbtiDocument(Attempt $attempt, ?Result $result): string
+    private function buildMbtiDocument(Attempt $attempt, ?Result $result, bool $locked, string $variant): string
     {
+        if ($locked) {
+            $gotenbergPdf = $this->buildMbtiGotenbergDocument($attempt);
+            if (is_string($gotenbergPdf)) {
+                return $gotenbergPdf;
+            }
+
+            return $this->buildDocument(
+                (string) $attempt->id,
+                'MBTI',
+                true,
+                $this->normalizeVariant($variant),
+                '',
+                '',
+                []
+            );
+        }
+
         $gotenbergPdf = $this->buildMbtiGotenbergDocument($attempt);
         if (is_string($gotenbergPdf)) {
             return $gotenbergPdf;
