@@ -9,11 +9,44 @@ use App\Services\Riasec\RiasecActivityExplorerService;
 use App\Services\Riasec\RiasecDeepCopySlotRegistry;
 use App\Services\Riasec\RiasecExplorationFeedbackOverlayService;
 use App\Services\Riasec\RiasecLifecycleCopyService;
+use App\Services\Riasec\RiasecPublicProjectionService;
 use App\Services\Riasec\RiasecReportModuleSelector;
 use Tests\TestCase;
 
 final class RiasecFullContentFixtureMatrixTest extends TestCase
 {
+    private const TARGET_ORDERED_MATRIX = [
+        'R_I_A' => ['RIA', 'RAI', 'IRA'],
+        'R_I_S' => ['RIS', 'RSI', 'IRS'],
+        'R_I_E' => ['RIE', 'REI', 'IRE'],
+        'R_I_C' => ['RIC', 'RCI', 'IRC'],
+        'R_A_S' => ['RAS', 'RSA', 'ARS'],
+        'R_A_E' => ['RAE', 'REA', 'ARE'],
+        'R_A_C' => ['RAC', 'RCA', 'ARC'],
+        'R_S_E' => ['RSE', 'RES', 'SRE'],
+        'R_S_C' => ['RSC', 'RCS', 'SRC'],
+        'R_E_C' => ['REC', 'RCE', 'ERC'],
+        'I_A_S' => ['IAS', 'ISA', 'AIS'],
+        'I_A_E' => ['IAE', 'IEA', 'AIE'],
+        'I_A_C' => ['IAC', 'ICA', 'AIC'],
+        'I_S_E' => ['ISE', 'IES', 'SIE'],
+        'I_S_C' => ['ISC', 'ICS', 'SIC'],
+        'I_E_C' => ['IEC', 'ICE', 'EIC'],
+        'A_S_E' => ['ASE', 'AES', 'SAE'],
+        'A_S_C' => ['ASC', 'ACS', 'SAC'],
+        'A_E_C' => ['AEC', 'ACE', 'EAC'],
+        'S_E_C' => ['SEC', 'SCE', 'ESC'],
+    ];
+
+    private const DIMENSION_LABELS = [
+        'R' => '实作型',
+        'I' => '研究型',
+        'A' => '艺术型',
+        'S' => '社会型',
+        'E' => '企业型',
+        'C' => '常规型',
+    ];
+
     private const FORBIDDEN_USER_CLAIMS = [
         'career match',
         'occupation match',
@@ -55,6 +88,39 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         '录取依据',
         '晋升依据',
         '淘汰依据',
+    ];
+
+    private const FORBIDDEN_SCIENCE_BOUNDARY_COPY = [
+        '验证这条链',
+        '有序三字码只改变阅读重心和语气',
+        '实作型入口',
+        '研究型处理',
+        '收口',
+        '活动链',
+        '现场求证者',
+        '有形表达者',
+        '现场支持者',
+        '落地推动者',
+        '流程实作者',
+        '概念表达者',
+        '证据倾听者',
+        '判断推动者',
+        '秩序表达者',
+        '稳定服务者',
+        '流程推动者',
+        '行动动员者',
+        '影响表达者',
+        '常见消耗',
+        '更有能量',
+        '能量还是消耗',
+        '商务拓展',
+        '组织资源',
+        '领导力',
+        '服务能力',
+        '能力证明',
+        '技能证明',
+        '岗位胜任',
+        '天生会推动',
     ];
 
     public function test_backend_full_content_matrix_counts_and_boundaries_are_frozen(): void
@@ -209,6 +275,25 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
 
         $this->assertSame([], $hits, 'Visible backend full-content outputs must keep forbidden claims only in negative boundary contexts.');
 
+        $scienceBoundaryHits = [];
+        foreach ($this->visibleRows($payload) as $source => $texts) {
+            foreach ($texts as $text) {
+                foreach (self::FORBIDDEN_SCIENCE_BOUNDARY_COPY as $phrase) {
+                    if ($this->containsTerm($text, $phrase)) {
+                        $scienceBoundaryHits[] = "{$source}: {$phrase} in {$text}";
+                    }
+                }
+            }
+        }
+
+        $this->assertSame([], $scienceBoundaryHits, 'Visible RIASEC content must not reintroduce chain templates, persona labels, or ability/outcome overclaims.');
+
+        foreach (['R_S', 'I_E', 'A_C'] as $lowConsistencyPair) {
+            $slot = $registry->resolvePairBlendSlot($lowConsistencyPair);
+            $this->assertStringContainsString('距离较远', (string) ($slot['chemistry'] ?? ''));
+            $this->assertStringContainsString('低一致性组合', (string) ($slot['chemistry'] ?? ''));
+        }
+
         $this->assertStringNotContainsString('"frontend_fallback_allowed":true', $serialized);
         $this->assertStringNotContainsString('"raw_feedback"', $serialized);
         $this->assertStringNotContainsString('"snapshot_id"', $serialized);
@@ -217,6 +302,27 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         $this->assertStringNotContainsString('"soc_code"', $serialized);
         $this->assertStringContainsString('content_example_not_registry_match', $serialized);
         $this->assertStringContainsString('riasec.lifecycle_copy.v1', $serialized);
+    }
+
+    public function test_public_projection_exposes_ordered_top3_reading_for_result_page_payload_matrix(): void
+    {
+        $projectionService = app(RiasecPublicProjectionService::class);
+
+        foreach (self::TARGET_ORDERED_MATRIX as $unorderedTop3Key => $orderedCodes) {
+            foreach ($orderedCodes as $orderedCode) {
+                $letters = str_split($orderedCode);
+                $projection = $projectionService->buildV2FromResult($this->resultForOrderedCode($orderedCode), 'zh-CN');
+                $heroSlot = $this->firstSlotForModule($projection, 'hero_activity_chain');
+
+                $this->assertSame('triad_blend_copy:'.$unorderedTop3Key, $heroSlot['slot_id']);
+                $this->assertStringContainsString('第一位 '.self::DIMENSION_LABELS[$letters[0]], (string) data_get($heroSlot, 'content.primary_activity_chain'));
+                $this->assertStringContainsString('第二位 '.self::DIMENSION_LABELS[$letters[1]], (string) data_get($heroSlot, 'content.secondary_support_line'));
+                $this->assertStringContainsString('第三位 '.self::DIMENSION_LABELS[$letters[2]], (string) data_get($heroSlot, 'content.tertiary_stabilizer'));
+                $this->assertStringContainsString($orderedCode.' 是本次测量的有序三字码', (string) data_get($heroSlot, 'content.ordered_code_handling'));
+                $this->assertStringContainsString('不能推断人格身份、能力水平或职业结论', (string) data_get($heroSlot, 'content.core_reading'));
+                $this->assertStringContainsString('不提供岗位答案', (string) data_get($heroSlot, 'content.positive_value'));
+            }
+        }
     }
 
     /**
@@ -246,6 +352,45 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @return array<string,mixed>
+     */
+    private function firstSlotForModule(array $projection, string $moduleKey): array
+    {
+        foreach ((array) data_get($projection, 'deep_content_slots_v1.slots', []) as $slot) {
+            if (($slot['module_key'] ?? null) === $moduleKey) {
+                return $slot;
+            }
+        }
+
+        $this->fail('Missing RIASEC projection slot for module '.$moduleKey);
+    }
+
+    private function resultForOrderedCode(string $orderedCode): Result
+    {
+        $scores = array_fill_keys(['R', 'I', 'A', 'S', 'E', 'C'], 0);
+        foreach (str_split($orderedCode) as $index => $dimension) {
+            $scores[$dimension] = [100, 75, 50][$index];
+        }
+
+        return new Result([
+            'scale_code' => 'RIASEC',
+            'type_code' => $orderedCode,
+            'scores_pct' => $scores,
+            'result_json' => [
+                'top_code' => $orderedCode,
+                'primary_type' => $orderedCode[0],
+                'secondary_type' => $orderedCode[1],
+                'tertiary_type' => $orderedCode[2],
+                'answer_count' => 60,
+                'form_code' => 'riasec_60',
+                'scoring_spec_version' => 'riasec_standard_60_v1',
+                'scores_0_100' => $scores,
+            ],
+        ]);
     }
 
     /**
@@ -300,12 +445,19 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
 
         foreach ((array) ($payload['top3'] ?? []) as $index => $slot) {
             $visible['top3 '.($index + 1)] = array_values(array_filter([
+                (string) ($slot['strategy_label'] ?? ''),
+                (string) ($slot['activity_chain'] ?? ''),
+                (string) ($slot['core_reading'] ?? ''),
+                (string) ($slot['positive_value'] ?? ''),
+                (string) ($slot['real_world_cost'] ?? ''),
                 (string) ($slot['title'] ?? ''),
                 (string) ($slot['primary_activity_chain'] ?? ''),
                 (string) ($slot['secondary_support_line'] ?? ''),
                 (string) ($slot['tertiary_stabilizer'] ?? ''),
                 (string) ($slot['likely_tension'] ?? ''),
                 (string) ($slot['first_experiment'] ?? ''),
+                (string) ($slot['ordered_code_handling'] ?? ''),
+                (string) ($slot['low_risk_validation'] ?? ''),
                 (string) ($slot['free_page_teaser'] ?? ''),
                 (string) ($slot['deep_report_extension'] ?? ''),
                 (string) ($slot['user_visible_boundary'] ?? ''),
