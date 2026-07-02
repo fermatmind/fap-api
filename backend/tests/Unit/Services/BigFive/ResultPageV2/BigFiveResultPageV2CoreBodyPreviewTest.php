@@ -475,6 +475,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_registry_validator_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Enneagram/Registry/RegistryValidator.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_big_five_public_profile_agent_draft_writer_files(): void
     {
         $changed = [
@@ -4900,6 +4909,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEnneagramRegistryValidatorFile($file)) {
+                continue;
+            }
+
             if ($this->isEnneagramResultPageRegistryContentAssetFile($file)) {
                 continue;
             }
@@ -7714,6 +7727,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isEnneagramResultPageRegistryContentAssetFile(string $file): bool
     {
         return preg_match('#^backend/content_packs/ENNEAGRAM/v2/registry/[a-z_]+_registry\\.json$#', $file) === 1;
+    }
+
+    private function isEnneagramRegistryValidatorFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Enneagram/Registry/RegistryValidator.php';
     }
 
     private function isEnneagramPhase8bCandidateAssetReconciliationFile(string $file): bool
