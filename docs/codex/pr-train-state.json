@@ -71455,8 +71455,17 @@
       },
       "pint": {
         "status": "pass",
-        "command": "cd backend && ./vendor/bin/pint --test app/Services/Report/Pdf/ReportPdfDocumentService.php app/Services/Storage/ArtifactPurgeService.php app/Services/Attempts/AttemptDataLifecycleService.php",
-        "evidence": "Pint found no formatting changes required for API-04 modified files."
+        "command": "cd backend && ./vendor/bin/pint --test app/Services/Report/Pdf/ReportPdfDocumentService.php app/Services/Storage/ArtifactPurgeService.php app/Services/Attempts/AttemptDataLifecycleService.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "evidence": "Pint found no formatting changes required for API-04 modified PHP files, including the required-check classifier test."
+      },
+      "bigfive_runtime_freeze_classifier": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php -l tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_freeze_classifier_ignores_storage_path_safety_hardening_files|runtime_paths_have_no_uncommitted_diff' --no-ansi",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Reproduced GitHub verify-bigfive failure locally, then classified API-04 ArtifactPurgeService.php changes as storage path safety hardening and confirmed the runtime freeze focused tests pass with existing fixture warnings."
       },
       "route_list": {
         "status": "pass",
@@ -71471,7 +71480,7 @@
       "ci_verify_mbti": {
         "status": "pass",
         "command": "bash backend/scripts/ci_verify_mbti.sh",
-        "evidence": "Full MBTI CI chain passed from repo root on latest base 095730762b006fe09495e35fb1fa3d62db62b7de; BigFive compiled JSON side effects were restored because they are outside API-04 scope."
+        "evidence": "Full MBTI CI chain passed from repo root after the BigFive runtime-freeze classifier remediation; BigFive compiled JSON side effects were restored because they are outside API-04 scope."
       },
       "diff_check": {
         "status": "pass",
@@ -71497,17 +71506,21 @@
         "backend/app/Services/Report/Pdf/ReportPdfDocumentService.php",
         "backend/app/Services/Storage/ArtifactPurgeService.php",
         "backend/app/Services/Attempts/AttemptDataLifecycleService.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
       "changed_files": [
         "backend/app/Services/Attempts/AttemptDataLifecycleService.php",
         "backend/app/Services/Report/Pdf/ReportPdfDocumentService.php",
         "backend/app/Services/Storage/ArtifactPurgeService.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
       "outside_scope_files": [],
       "status": "pass",
-      "evidence": "Changed files are confined to API-04 allowed PDF artifact descriptor, DSAR purge, lifecycle residual audit, and train state paths."
+      "evidence": "Changed files are confined to API-04 allowed PDF artifact descriptor, DSAR purge, lifecycle residual audit, BigFive runtime-freeze classifier, and train manifest/state paths."
     },
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2636",
     "commit_sha": "1f5dc48574b9e144e4e348fa09984a8685772c5f",
@@ -71538,6 +71551,16 @@
         "at": "2026-07-03T03:04:00+08:00",
         "status": "pr_open",
         "note": "Opened PR #2636 and pushed SECURITY-169-API-04 implementation commit 1f5dc48574b9e144e4e348fa09984a8685772c5f."
+      },
+      {
+        "at": "2026-07-03T03:15:22+08:00",
+        "status": "github_required_check_remediated",
+        "note": "GitHub verify-bigfive failed because ArtifactPurgeService.php was not classified as storage path safety hardening; added the classifier/test coverage and expanded API-04 manifest scope to include that required-check file."
+      },
+      {
+        "at": "2026-07-03T03:24:30+08:00",
+        "status": "local_checks_passed",
+        "note": "After required-check remediation, route list, SQLite migrate, focused BigFive runtime-freeze tests, Pint, JSON/YAML validation, diff check, and full ci_verify_mbti all passed; generated BigFive compiled side effects were restored."
       }
     ]
   },

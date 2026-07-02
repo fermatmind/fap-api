@@ -1038,6 +1038,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/StorageRehydrateExactRelease.php',
             'backend/app/Services/Storage/QuarantinedRootPurgeService.php',
             'backend/app/Services/Storage/ReportArtifactsArchiveService.php',
+            'backend/app/Services/Storage/ArtifactPurgeService.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -6536,6 +6537,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/StorageRehydrateExactRelease.php',
             'backend/app/Services/Storage/QuarantinedRootPurgeService.php',
             'backend/app/Services/Storage/ReportArtifactsArchiveService.php',
+            'backend/app/Services/Storage/ArtifactPurgeService.php',
         ], true);
     }
 
