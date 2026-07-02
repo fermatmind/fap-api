@@ -20,6 +20,9 @@ final class RiasecReportModuleSelectorTest extends TestCase
         $this->assertSame('riasec.module_visibility_policy.v1', $policy['schema_version']);
         $this->assertSame(RiasecReportModuleSelector::POLICY_ID, $policy['policy_id']);
         $this->assertSame('visible', $this->moduleVisibility($policy, 'hero_activity_chain'));
+        $this->assertSame('visible', $this->moduleVisibility($policy, 'pair_blend'));
+        $this->assertSame('clear_or_blended_pair_context_available', $this->moduleReason($policy, 'pair_blend'));
+        $this->assertSame('pair_blend_is_context_not_fit_or_ranking', $this->moduleRiskBoundary($policy, 'pair_blend'));
         $this->assertSame('visible', $this->moduleVisibility($policy, 'activity_explorer'));
         $this->assertSame('collapsed', $this->moduleVisibility($policy, 'occupation_examples'));
         $this->assertSame('visible', $this->moduleVisibility($policy, '140q_cta'));
@@ -55,7 +58,50 @@ final class RiasecReportModuleSelectorTest extends TestCase
         $this->assertSame('collapsed', $this->moduleVisibility($policy, 'hero_activity_chain'));
         $this->assertSame('visible', $this->moduleVisibility($policy, 'pair_blend'));
         $this->assertSame('near_tie_candidate_chains_first', $this->moduleReason($policy, 'hero_activity_chain'));
+        $this->assertSame('near_tie_pair_blend_explains_candidate_pairs_without_identity', $this->moduleReason($policy, 'pair_blend'));
+        $this->assertSame('pair_blend_is_candidate_reading_not_final_order', $this->moduleRiskBoundary($policy, 'pair_blend'));
         $this->assertNoForbiddenClaims($policy);
+    }
+
+    public function test_pair_blend_collapses_when_profile_shape_or_quality_needs_caution(): void
+    {
+        $selector = new RiasecReportModuleSelector;
+
+        $caution = $selector->build($this->projection(
+            qualityState: 'caution',
+            profileShape: 'clear_code',
+            formCode: 'riasec_60',
+        ));
+        $this->assertSame('collapsed', $this->moduleVisibility($caution, 'pair_blend'));
+        $this->assertSame('caution_requires_boundary_first', $this->moduleReason($caution, 'pair_blend'));
+
+        $broad = $selector->build($this->projection(
+            qualityState: 'normal',
+            profileShape: 'broad_profile',
+            formCode: 'riasec_60',
+        ));
+        $this->assertSame('collapsed', $this->moduleVisibility($broad, 'pair_blend'));
+        $this->assertSame('broad_profile_pair_blend_secondary_after_dimension_map', $this->moduleReason($broad, 'pair_blend'));
+
+        $lowClarity = $selector->build($this->projection(
+            qualityState: 'normal',
+            profileShape: 'low_clarity',
+            formCode: 'riasec_60',
+        ));
+        $this->assertSame('collapsed', $this->moduleVisibility($lowClarity, 'pair_blend'));
+        $this->assertSame('low_clarity_pair_blend_secondary_after_dimension_map', $this->moduleReason($lowClarity, 'pair_blend'));
+
+        $lowQuality = $selector->build($this->projection(
+            qualityState: 'low_quality',
+            profileShape: 'low_quality',
+            formCode: 'riasec_60',
+        ));
+        $this->assertSame('hidden', $this->moduleVisibility($lowQuality, 'pair_blend'));
+        $this->assertSame('hide_when_result_quality_cannot_support_pair_reading', $this->moduleRiskBoundary($lowQuality, 'pair_blend'));
+        $this->assertNoForbiddenClaims($caution);
+        $this->assertNoForbiddenClaims($broad);
+        $this->assertNoForbiddenClaims($lowClarity);
+        $this->assertNoForbiddenClaims($lowQuality);
     }
 
     /**
@@ -84,6 +130,14 @@ final class RiasecReportModuleSelectorTest extends TestCase
     private function moduleReason(array $policy, string $key): string
     {
         return (string) ($this->module($policy, $key)['reason'] ?? '');
+    }
+
+    /**
+     * @param  array<string,mixed>  $policy
+     */
+    private function moduleRiskBoundary(array $policy, string $key): string
+    {
+        return (string) ($this->module($policy, $key)['risk_boundary'] ?? '');
     }
 
     /**

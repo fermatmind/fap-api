@@ -213,11 +213,17 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
 
         $broad = $selector->build($this->projectionContext('normal', 'broad_profile', 'riasec_60'));
         $this->assertSame('hidden', $this->moduleVisibility($broad, 'hero_activity_chain'));
+        $this->assertSame('collapsed', $this->moduleVisibility($broad, 'pair_blend'));
         $this->assertSame('hidden', $this->moduleVisibility($broad, 'occupation_examples'));
 
         $nearTie = $selector->build($this->projectionContext('normal', 'near_tie', 'riasec_60'));
         $this->assertSame('collapsed', $this->moduleVisibility($nearTie, 'hero_activity_chain'));
         $this->assertSame('visible', $this->moduleVisibility($nearTie, 'pair_blend'));
+
+        $lowClarity = $selector->build($this->projectionContext('normal', 'low_clarity', 'riasec_60'));
+        $this->assertSame('collapsed', $this->moduleVisibility($lowClarity, 'hero_activity_chain'));
+        $this->assertSame('collapsed', $this->moduleVisibility($lowClarity, 'pair_blend'));
+        $this->assertSame('hidden', $this->moduleVisibility($lowClarity, 'occupation_examples'));
 
         $lowQuality = $selector->build($this->projectionContext('low_quality', 'low_quality', 'riasec_60'));
         $this->assertSame('hidden', $this->moduleVisibility($lowQuality, 'pair_blend'));

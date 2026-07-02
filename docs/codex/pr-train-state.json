@@ -65603,7 +65603,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-02T16:51:28Z",
+  "updated_at": "2026-07-02T17:00:55Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -69166,8 +69166,8 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "pr_opened",
-    "commit_sha": "a7c42ce32cb52fed088fa0732c6dbf918c3232c6",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "88f9005c2b54826255036204ce4be4fda80ab2dd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2607",
     "checks": {
       "phpunit_riasec_unit_subset": {
@@ -69191,23 +69191,32 @@
       "manifest_state_parse_and_diff_check": {
         "command": "ruby YAML parse; python JSON parse; git diff --check",
         "status": "passed"
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "summary": "hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-mbti-legacy, verify-mbti-v2, verify-bigfive all passed before squash merge."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T16:57:12Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/content_assets/riasec/profile_shape_copy_v1.zh-CN.json",
         "backend/content_assets/riasec/top_code_confidence_copy_v1.zh-CN.json",
         "backend/tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php",
         "docs/codex/pr-train-state.json"
-      ]
+      ],
+      "origin_main_contains_merge_commit": true,
+      "local_main_synced": true,
+      "local_main_equals_origin_main": true,
+      "task_branch_deleted_local": true,
+      "task_branch_deleted_remote": true
     },
     "transitions": [
       {
@@ -69227,8 +69236,15 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2607 after DIMMAP-01 local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T17:00:55Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2607 merged; origin/main contains merge commit; local main synced; task branches cleaned. Recorded during PAIRMODULE-01 ledger reconciliation."
       }
-    ]
+    ],
+    "merge_commit_sha": "a06961745d5860df3bb890e08ff56a2a1fb0a60c"
   },
   "RIASEC-CONTENT-PAIRMODULE-01": {
     "id": "RIASEC-CONTENT-PAIRMODULE-01",
@@ -69240,19 +69256,44 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "authorized_pending_start",
+    "status": "local_validation_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "166 tests, 95321 assertions"
+      },
+      "phpunit_pairmodule_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecReportModuleSelectorTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php tests/Unit/Services/Riasec/RiasecContentScienceBoundaryLintTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "12 tests, 1013 assertions"
+      },
+      "pint": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecReportModuleSelector.php tests/Unit/Services/Riasec/RiasecReportModuleSelectorTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php",
+        "status": "passed"
+      },
+      "manifest_state_parse_and_diff_check": {
+        "command": "ruby YAML parse; python JSON parse; git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecReportModuleSelector.php",
+        "backend/tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecReportModuleSelectorTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -69260,6 +69301,12 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T17:00:55Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Implemented PAIRMODULE-01 pair visibility governance; local RIASEC unit subset and scope validation passed."
       }
     ]
   },
