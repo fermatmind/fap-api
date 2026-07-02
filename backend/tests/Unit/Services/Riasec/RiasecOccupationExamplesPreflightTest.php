@@ -151,6 +151,32 @@ final class RiasecOccupationExamplesPreflightTest extends TestCase
         }
     }
 
+    public function test_v7_3_occupation_fixture_is_specific_without_template_repetition(): void
+    {
+        $records = $this->loadOccupationRecords();
+
+        $this->assertCount(self::EXPECTED_RECORD_COUNT, array_unique(array_column($records, 'occupation_example')));
+        $this->assertCount(self::EXPECTED_RECORD_COUNT, array_unique(array_column($records, 'why_it_may_appear')));
+        $this->assertCount(self::EXPECTED_RECORD_COUNT, array_unique(array_map(
+            static fn (array $record): string => implode("\n", (array) $record['common_tasks']),
+            $records,
+        )));
+        $this->assertCount(self::EXPECTED_RECORD_COUNT, array_unique(array_map(
+            static fn (array $record): string => implode("\n", (array) $record['task_examples']),
+            $records,
+        )));
+        $this->assertCount(self::EXPECTED_RECORD_COUNT, array_unique(array_column($records, 'reality_check')));
+
+        foreach ($records as $index => $record) {
+            $occupation = (string) $record['occupation_example'];
+
+            $this->assertStringContainsString($occupation, (string) $record['why_it_may_appear'], 'line '.($index + 1).' must keep the example name contextualized');
+            $this->assertStringContainsString($occupation, (string) $record['user_visible_boundary'], 'line '.($index + 1).' must bind the boundary to the example name');
+            $this->assertStringContainsString('观察入口', (string) $record['user_visible_boundary'], 'line '.($index + 1).' must frame occupations as observation entries');
+            $this->assertStringContainsString('不做选择、能力、收入、机会或长期结果结论', implode("\n", (array) $record['task_examples']), 'line '.($index + 1).' must block recommendation-style conclusions');
+        }
+    }
+
     public function test_preflight_decision_is_conditional_go_with_documented_activity_mapping_gap(): void
     {
         $this->assertCount(self::EXPECTED_RECORD_COUNT, $this->loadOccupationRecords());
