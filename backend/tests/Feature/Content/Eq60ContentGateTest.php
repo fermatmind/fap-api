@@ -204,8 +204,10 @@ final class Eq60ContentGateTest extends TestCase
         $highEmpathySnapshot = is_array($resultSnapshotAssets['eq.snapshot.high_empathy_low_recovery'] ?? null)
             ? (array) $resultSnapshotAssets['eq.snapshot.high_empathy_low_recovery']
             : [];
-        $this->assertStringContainsString('恢复系统', (string) data_get($highEmpathySnapshot, 'zh-CN.core_judgment'));
-        $this->assertStringContainsString('recovery can lag', (string) data_get($highEmpathySnapshot, 'en.core_judgment'));
+        $this->assertStringContainsString('本次作答显示', (string) data_get($highEmpathySnapshot, 'zh-CN.core_judgment'));
+        $this->assertStringContainsString('不是共情能力测验结论', (string) data_get($highEmpathySnapshot, 'zh-CN.core_judgment'));
+        $this->assertStringContainsString('Your responses suggest', (string) data_get($highEmpathySnapshot, 'en.core_judgment'));
+        $this->assertStringContainsString('not a test of empathy ability', (string) data_get($highEmpathySnapshot, 'en.core_judgment'));
         $this->assertNotEmpty((array) data_get($highEmpathySnapshot, 'en.conversion_actions'));
 
         $conversionAssets = (array) data_get($assets, 'assets.commercial_conversion_assets.assets', []);
