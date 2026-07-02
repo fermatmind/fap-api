@@ -119,9 +119,15 @@ final class RiasecTop3ChainSlotRegistryTest extends TestCase
 
                 $activitySequence = $slot['activity_sequence'];
                 $this->assertCount(3, $activitySequence);
-                $this->assertStringStartsWith('主读线索：', $activitySequence[0]);
-                $this->assertStringStartsWith('第二线索：', $activitySequence[1]);
-                $this->assertStringStartsWith('第三线索：', $activitySequence[2]);
+                $this->assertStringStartsWith('优先观察入口：', $activitySequence[0]);
+                $this->assertStringStartsWith('第二观察入口：', $activitySequence[1]);
+                $this->assertStringStartsWith('第三观察入口：', $activitySequence[2]);
+                $this->assertStringContainsString('优先观察入口', $slot['ordered_code_handling']);
+                $this->assertStringContainsString('排序改变先问什么、后验证什么', $slot['ordered_code_handling']);
+                $this->assertStringContainsString('小任务证据', $slot['primary_activity_chain']);
+                $this->assertStringNotContainsString('决定主读重心', $slot['ordered_code_handling']);
+                $this->assertStringNotContainsString('职业推荐', $slot['ordered_code_handling']);
+                $this->assertStringNotContainsString('岗位匹配', $slot['ordered_code_handling']);
 
                 $seenOrderedReadings[] = implode(' | ', [
                     $slot['primary_activity_chain'],
@@ -132,6 +138,42 @@ final class RiasecTop3ChainSlotRegistryTest extends TestCase
             }
 
             $this->assertCount(3, array_unique($seenOrderedReadings), $unorderedTop3Key.' must expose three different ordered readings.');
+        }
+    }
+
+    public function test_top3_hero_copy_frames_order_as_observation_not_identity_or_fit(): void
+    {
+        $registry = new RiasecDeepCopySlotRegistry;
+
+        foreach (self::TARGET_ORDERED_MATRIX as $orderedCodes) {
+            foreach ($orderedCodes as $orderedCode) {
+                $slot = $registry->resolveTop3ChainSlot($orderedCode);
+                $visibleCopy = implode("\n", array_filter([
+                    $slot['strategy_label'] ?? '',
+                    $slot['activity_chain'] ?? '',
+                    $slot['core_reading'] ?? '',
+                    $slot['positive_value'] ?? '',
+                    $slot['real_world_cost'] ?? '',
+                    $slot['first_experiment'] ?? '',
+                    $slot['ordered_code_handling'] ?? '',
+                    $slot['primary_activity_chain'] ?? '',
+                    $slot['secondary_support_line'] ?? '',
+                    $slot['tertiary_stabilizer'] ?? '',
+                    $slot['likely_tension'] ?? '',
+                    $slot['low_risk_validation'] ?? '',
+                    $slot['free_page_teaser'] ?? '',
+                ]));
+
+                $this->assertStringContainsString('观察入口', $visibleCopy);
+                $this->assertStringContainsString('小任务', $visibleCopy);
+                $this->assertStringContainsString('收集证据', $visibleCopy);
+                $this->assertStringContainsString('不能推断人格身份、能力水平或职业结论', $visibleCopy);
+                $this->assertStringNotContainsString('活动链', $visibleCopy);
+                $this->assertStringNotContainsString('决定主读重心', $visibleCopy);
+                $this->assertStringNotContainsString('岗位匹配', $visibleCopy);
+                $this->assertStringNotContainsString('职业匹配', $visibleCopy);
+                $this->assertStringNotContainsString('成功概率', $visibleCopy);
+            }
         }
     }
 
