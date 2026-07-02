@@ -69978,7 +69978,7 @@
     "title": "SECURITY-169-API-01: restore production deploy policy guard",
     "train_scope": "security_169_fap_api_audit",
     "depends_on": [],
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -70023,10 +70023,14 @@
       "deployment": {
         "status": "not_run",
         "evidence": "No staging wait, manual deploy, server deploy, or production deploy executed per train protocol."
+      },
+      "github_pr": {
+        "status": "opened",
+        "evidence": "Opened PR #2605 from codex/security-169-api-01-restore-production-deploy-policy-guard to main."
       }
     },
-    "pr_url": null,
-    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2605",
+    "commit_sha": "cb375f6b832be73dc3d2dbb96fbbede577646cf7",
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -70049,6 +70053,11 @@
         "at": "2026-07-03T00:31:01+08:00",
         "status": "local_checks_passed",
         "note": "PR01 implementation and local validation completed; ready for commit, push, PR, and GitHub checks."
+      },
+      {
+        "at": "2026-07-03T00:33:18+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2605 and pushed SECURITY-169-API-01 implementation commit cb375f6b832be73dc3d2dbb96fbbede577646cf7."
       }
     ]
   },
