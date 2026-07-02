@@ -71417,7 +71417,7 @@
     "depends_on": [
       "SECURITY-169-API-03"
     ],
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -71486,6 +71486,10 @@
       "deployment": {
         "status": "not_run",
         "evidence": "No staging wait, manual server deploy, production import, production deploy, CMS write, search submission, sitemap, llms, canonical, noindex, or JSON-LD action was triggered."
+      },
+      "github_pr": {
+        "status": "opened",
+        "evidence": "Opened PR #2636 from codex/security-169-api-04-purge-versioned-pdf-artifacts-for-dsar to main."
       }
     },
     "scope_validation": {
@@ -71505,8 +71509,8 @@
       "status": "pass",
       "evidence": "Changed files are confined to API-04 allowed PDF artifact descriptor, DSAR purge, lifecycle residual audit, and train state paths."
     },
-    "pr_url": null,
-    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2636",
+    "commit_sha": "1f5dc48574b9e144e4e348fa09984a8685772c5f",
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -71529,6 +71533,11 @@
         "at": "2026-07-03T03:02:32+08:00",
         "status": "local_checks_passed",
         "note": "Extended DSAR artifact purge and residual audit to versioned MBTI PDF surface/result-page keys; latest-base php lint, focused tests, descriptor coverage, Pint, route list, SQLite migrate, full ci_verify_mbti, and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T03:04:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2636 and pushed SECURITY-169-API-04 implementation commit 1f5dc48574b9e144e4e348fa09984a8685772c5f."
       }
     ]
   },
