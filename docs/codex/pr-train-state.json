@@ -70546,7 +70546,7 @@
       "RIASEC-CONTENT-SCIENCE-00"
     ],
     "status": "local_validation_passed",
-    "commit_sha": "PENDING_COMMIT_SHA",
+    "commit_sha": "24f517a928667f599d41b913c7e09ea215776340",
     "pr_url": null,
     "checks": {
       "phpunit_lifecycle_share_tests": {
@@ -70560,7 +70560,7 @@
         "summary": "176 tests, 104246 assertions"
       },
       "pint_and_json_parse": {
-        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecLifecycleCopyService.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php && python JSON parse share_pdf_history zh/en",
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecLifecycleCopyService.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php && php JSON parse share_pdf_history zh/en",
         "status": "passed"
       },
       "manifest_state_parse_and_diff_check": {
