@@ -14,7 +14,7 @@ This package is a backend-only dry-run package for GPT-generated MBTI Assertive/
 
 ## Included comparison assets
 
-Batch 02 contains 14 draft comparison assets: ENFJ, ENTJ, ENTP, ESFJ, ESFP, ESTJ, ESTP, INFJ, INFP, INTP, ISFJ, ISFP, ISTJ, and ISTP.
+Batch 03 contains all 16 MBTI A/T draft comparison assets: ENFJ, ENFP, ENTJ, ENTP, ESFJ, ESFP, ESTJ, ESTP, INFJ, INFP, INTJ, INTP, ISFJ, ISFP, ISTJ, and ISTP.
 
 Each comparison is normalized into `comparisons/FermatMind_{TYPE}-A_vs_{TYPE}-T_CMS_READY.json` with the existing CMS-ready dry-run contract.
 
@@ -25,8 +25,7 @@ Each comparison is normalized into `comparisons/FermatMind_{TYPE}-A_vs_{TYPE}-T_
 ## Explicitly excluded
 
 - `Assertive Architect (INTJ-A) vs. Turbulent Architect (INTJ-T) _ 16Personalities.pdf` is reference-only and is not stored in this package.
-- `INTJ-A/T` and `ENFP-A/T` comparison pages are not included because their comparison zip packages were not supplied in this batch.
-
+- No MBTI A/T comparison asset remains missing in this package.\n
 ## Validation
 
 Run:
@@ -39,9 +38,9 @@ php artisan test --filter=PersonalityMbti64ComparisonAssetsDryRunCommandTest --n
 
 Expected dry-run summary:
 
-- `assets_found=14`
-- `valid_count=14`
-- `rows_would_stage=14`
+- `assets_found=16`
+- `valid_count=16`
+- `rows_would_stage=16`
 - `writes_committed=false`
 - `cms_write_attempted=false`
 - `publish_attempted=false`

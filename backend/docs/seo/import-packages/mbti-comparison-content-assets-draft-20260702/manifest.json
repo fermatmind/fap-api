@@ -9,6 +9,7 @@
     },
     "comparison_assets": [
         "comparisons/FermatMind_ENFJ-A_vs_ENFJ-T_CMS_READY.json",
+        "comparisons/FermatMind_ENFP-A_vs_ENFP-T_CMS_READY.json",
         "comparisons/FermatMind_ENTJ-A_vs_ENTJ-T_CMS_READY.json",
         "comparisons/FermatMind_ENTP-A_vs_ENTP-T_CMS_READY.json",
         "comparisons/FermatMind_ESFJ-A_vs_ESFJ-T_CMS_READY.json",
@@ -17,6 +18,7 @@
         "comparisons/FermatMind_ESTP-A_vs_ESTP-T_CMS_READY.json",
         "comparisons/FermatMind_INFJ-A_vs_INFJ-T_CMS_READY.json",
         "comparisons/FermatMind_INFP-A_vs_INFP-T_CMS_READY.json",
+        "comparisons/FermatMind_INTJ-A_vs_INTJ-T_CMS_READY.json",
         "comparisons/FermatMind_INTP-A_vs_INTP-T_CMS_READY.json",
         "comparisons/FermatMind_ISFJ-A_vs_ISFJ-T_CMS_READY.json",
         "comparisons/FermatMind_ISFP-A_vs_ISFP-T_CMS_READY.json",
@@ -26,6 +28,8 @@
     "source_context": [
         "source_context/FermatMind_ENFJ-A_ZH_V8_4_Content_Asset.json",
         "source_context/FermatMind_ENFJ-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ENFP-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_ENFP-T_ZH_V8_4_Content_Asset.json",
         "source_context/FermatMind_ENTJ-A_ZH_V8_4_Content_Asset.json",
         "source_context/FermatMind_ENTJ-T_ZH_V8_4_Content_Asset.json",
         "source_context/FermatMind_ENTP-A_ZH_V8_4_Content_Asset.json",
@@ -42,6 +46,8 @@
         "source_context/FermatMind_INFJ-T_ZH_V8_4_Content_Asset.json",
         "source_context/FermatMind_INFP-A_ZH_V8_4_Content_Asset.json",
         "source_context/FermatMind_INFP-T_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_INTJ-A_ZH_V8_4_Content_Asset.json",
+        "source_context/FermatMind_INTJ-T_ZH_V8_4_Content_Asset.json",
         "source_context/FermatMind_INTP-A_ZH_V8_4_Content_Asset.json",
         "source_context/FermatMind_INTP-T_ZH_V8_4_Content_Asset.json",
         "source_context/FermatMind_ISFJ-A_ZH_V8_4_Content_Asset.json",
@@ -57,14 +63,12 @@
     "write_supported_in_this_package": false,
     "publish_supported_in_this_package": false,
     "search_release_supported_in_this_package": false,
-    "missing_comparison_assets": [
-        "INTJ-A_vs_INTJ-T.zip",
-        "ENFP-A_vs_ENFP-T.zip"
-    ],
+    "missing_comparison_assets": [],
     "notes": [
         "Use this package to validate GPT-generated MBTI A/T comparison assets before any CMS draft writer is authorized.",
         "Batch 02 adds 13 normalized A/T comparison assets and keeps the existing INTP-A vs INTP-T asset from batch 01.",
         "The 16Personalities PDF is reference-only and is not included in this backend package.",
-        "INTJ.zip is used only for per-variant source_context extraction; it is not imported as a comparison asset."
+        "INTJ.zip is used only for per-variant source_context extraction; it is not imported as a comparison asset.",
+        "Batch 03 adds ENFP-A/T and INTJ-A/T, completing the 16 MBTI A/T comparison draft asset set."
     ]
 }
