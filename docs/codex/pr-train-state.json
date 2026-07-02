@@ -71159,7 +71159,7 @@
     "depends_on": [
       "SECURITY-169-API-02"
     ],
-    "status": "local_checks_passed",
+    "status": "merged",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -71230,6 +71230,14 @@
       "github_pr": {
         "status": "opened",
         "evidence": "Opened PR #2629 from codex/security-169-api-03-harden-pdf-token-and-locked-mbti-report-access to main."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2629 GitHub checks passed for hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload on head d900e16535d49fd4f49c0317631b167c8495d2ea."
+      },
+      "post_merge_revalidate": {
+        "status": "pass",
+        "evidence": "PR #2629 merged at 2026-07-02T18:27:55Z as squash commit 51dc2a58e21fc15fe7f4b6f0fbdb831e7aa1ebb0; origin/main contains the merge commit; local main was fast-forwarded to origin/main; local task branch was deleted; remote task branch is absent."
       }
     },
     "scope_validation": {
@@ -71266,9 +71274,9 @@
     "content_authority": "backend",
     "authorized_by_user": "2026-07-03 attached /goal SECURITY-169 fap-api audit PR train continuous execution request.",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T18:27:55Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "events": [
       {
         "at": "2026-07-03T00:00:00+08:00",
@@ -71284,6 +71292,16 @@
         "at": "2026-07-03T02:20:00+08:00",
         "status": "pr_open",
         "note": "Opened PR #2629 and pushed SECURITY-169-API-03 implementation commit 672afae347e6a71c1a7eddc712fc11933c1ece54."
+      },
+      {
+        "at": "2026-07-03T02:27:55+08:00",
+        "status": "merged",
+        "note": "PR #2629 was squash-merged as 51dc2a58e21fc15fe7f4b6f0fbdb831e7aa1ebb0 after required GitHub checks passed."
+      },
+      {
+        "at": "2026-07-03T02:30:00+08:00",
+        "status": "post_merge_revalidated",
+        "note": "Verified origin/main contains the merge commit, local main equals origin/main, and local/remote task branches were cleaned."
       }
     ]
   },
