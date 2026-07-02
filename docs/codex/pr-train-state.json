@@ -65603,7 +65603,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-02T16:50:24Z",
+  "updated_at": "2026-07-02T16:51:28Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -69166,9 +69166,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "a7c42ce32cb52fed088fa0732c6dbf918c3232c6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2607",
     "checks": {
       "phpunit_riasec_unit_subset": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
@@ -69221,6 +69221,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Implemented DIMMAP-01 six-dimension map copy repair; local RIASEC unit subset and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T16:51:28Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2607 after DIMMAP-01 local validation and scope validation passed."
       }
     ]
   },
