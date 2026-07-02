@@ -27,6 +27,11 @@ final class RiasecActivityExplorerService
         'commercial_expansion_candidate_not_runtime_imported',
     ];
 
+    public function __construct(
+        private readonly ?string $activityTaskAssetPath = null,
+        private readonly ?string $occupationExampleAssetPath = null,
+    ) {}
+
     /**
      * @var array<string,array{dimension:string,label:array{en:string,zh-CN:string},core_drive:array{en:string,zh-CN:string},activity_families:list<string>}>
      */
@@ -227,6 +232,17 @@ final class RiasecActivityExplorerService
                 static fn (array $activity): string => (string) ($activity['activity_key'] ?? ''),
                 $activities,
             )),
+            'selection_policy' => [
+                'ordering' => 'holland_code_order_then_asset_order',
+                'per_dimension_limit' => 3,
+                'source_status_required' => self::SOURCE_STATUS,
+                'commercial_expansion_rows_publicly_selectable' => false,
+                'dedupe_key' => 'activity_key',
+                'fail_closed_on_invalid_or_incomplete_asset' => true,
+                'not_a_recommendation' => true,
+                'ranking_allowed' => false,
+                'fit_score_allowed' => false,
+            ],
             'activities' => $activities,
             'occupation_examples' => [],
         ];
@@ -256,7 +272,11 @@ final class RiasecActivityExplorerService
                     break;
                 }
 
-                if (isset($seen[$row['activity_key']]) || ! in_array($dimension, $row['dimensions'], true)) {
+                if (
+                    isset($seen[$row['activity_key']])
+                    || ($row['source_status'] ?? null) !== self::SOURCE_STATUS
+                    || ! in_array($dimension, $row['dimensions'], true)
+                ) {
                     continue;
                 }
 
@@ -264,24 +284,30 @@ final class RiasecActivityExplorerService
                 $selected[] = $this->normalizeFileBackedActivity($row, $locale);
                 $perDimension++;
             }
+
+            if ($perDimension < 3) {
+                return [];
+            }
         }
 
-        return $selected;
+        return count($selected) === count($dimensions) * 3 ? $selected : [];
     }
 
     /**
-     * @return list<array{activity_key:string,dimensions:list<string>,activity_label:string,task_examples:list<string>,low_risk_validation:string,action_duration_options:array<string,string>}>
+     * @return list<array{activity_key:string,source_status:string,dimensions:list<string>,activity_label:string,task_examples:list<string>,low_risk_validation:string,action_duration_options:array<string,string>}>
      */
     private function loadActivityTaskAssetRows(): array
     {
-        static $cache = null;
-        if (is_array($cache)) {
-            return $cache;
+        static $cache = [];
+
+        $assetPath = $this->activityTaskAssetPath ?? self::ACTIVITY_TASK_ASSET_PATH;
+        if (array_key_exists($assetPath, $cache)) {
+            return $cache[$assetPath];
         }
 
-        $path = base_path(self::ACTIVITY_TASK_ASSET_PATH);
+        $path = $this->resolveAssetPath($assetPath);
         if (! is_file($path) || ! is_readable($path)) {
-            return $cache = [];
+            return $cache[$assetPath] = [];
         }
 
         $rows = [];
@@ -289,15 +315,16 @@ final class RiasecActivityExplorerService
             try {
                 $decoded = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
             } catch (\JsonException) {
-                return $cache = [];
+                return $cache[$assetPath] = [];
             }
 
             if (! is_array($decoded) || ! $this->isValidActivityTaskRow($decoded)) {
-                return $cache = [];
+                return $cache[$assetPath] = [];
             }
 
             $rows[] = [
                 'activity_key' => (string) $decoded['activity_key'],
+                'source_status' => (string) $decoded['source_status'],
                 'dimensions' => array_values(array_map('strval', (array) $decoded['dimensions'])),
                 'activity_label' => (string) $decoded['activity_label'],
                 'task_examples' => array_values(array_map('strval', (array) $decoded['task_examples'])),
@@ -306,7 +333,7 @@ final class RiasecActivityExplorerService
             ];
         }
 
-        return $cache = $rows;
+        return $cache[$assetPath] = $rows;
     }
 
     /**
@@ -343,11 +370,17 @@ final class RiasecActivityExplorerService
         return count((array) $row['task_examples']) >= 3
             && is_string($row['activity_label'] ?? null)
             && is_string($row['low_risk_validation'] ?? null)
-            && is_array($row['action_duration_options'] ?? null);
+            && is_array($row['action_duration_options'] ?? null)
+            && isset(
+                $row['action_duration_options']['15min'],
+                $row['action_duration_options']['30min'],
+                $row['action_duration_options']['2h'],
+                $row['action_duration_options']['1week'],
+            );
     }
 
     /**
-     * @param  array{activity_key:string,dimensions:list<string>,activity_label:string,task_examples:list<string>,low_risk_validation:string,action_duration_options:array<string,string>}  $row
+     * @param  array{activity_key:string,source_status:string,dimensions:list<string>,activity_label:string,task_examples:list<string>,low_risk_validation:string,action_duration_options:array<string,string>}  $row
      * @return array<string,mixed>
      */
     private function normalizeFileBackedActivity(array $row, string $locale): array
@@ -365,8 +398,12 @@ final class RiasecActivityExplorerService
             'activity_user_copy' => $row['low_risk_validation'],
             'content_version' => self::CONTENT_VERSION,
             'evidence_level' => 'backend_authoritative_activity_task_asset',
-            'source_status' => self::SOURCE_STATUS,
+            'source_status' => $row['source_status'],
             'source_name' => self::SOURCE_NAME,
+            'not_a_recommendation' => true,
+            'ranking_allowed' => false,
+            'fit_score_allowed' => false,
+            'selection_boundary' => 'activity_example_not_recommendation',
             'task_examples' => $row['task_examples'],
             'occupation_examples' => $this->occupationExamplesForActivityDimensions($row['dimensions']),
             'next_experiments' => $nextExperiments,
@@ -414,7 +451,7 @@ final class RiasecActivityExplorerService
             return $cache;
         }
 
-        $path = base_path(self::OCCUPATION_EXAMPLE_ASSET_PATH);
+        $path = $this->resolveAssetPath($this->occupationExampleAssetPath ?? self::OCCUPATION_EXAMPLE_ASSET_PATH);
         if (! is_file($path) || ! is_readable($path)) {
             return $cache = [];
         }
@@ -504,6 +541,11 @@ final class RiasecActivityExplorerService
             'not_a_recommendation' => true,
             'fit_score_allowed' => false,
         ];
+    }
+
+    private function resolveAssetPath(string $path): string
+    {
+        return str_starts_with($path, DIRECTORY_SEPARATOR) ? $path : base_path($path);
     }
 
     /**
