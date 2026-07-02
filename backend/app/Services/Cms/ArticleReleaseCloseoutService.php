@@ -45,9 +45,17 @@ final class ArticleReleaseCloseoutService
 
     /**
      * @param  array<string,mixed>|null  $publicSmoke
+     * @param  array<string,mixed>|null  $gscManual
+     * @param  array<string,mixed>|null  $observation
      * @return array<string,mixed>
      */
-    public function inspect(int $articleId, string $expectedSlug, ?array $publicSmoke = null): array
+    public function inspect(
+        int $articleId,
+        string $expectedSlug,
+        ?array $publicSmoke = null,
+        ?array $gscManual = null,
+        ?array $observation = null,
+    ): array
     {
         $errors = [];
 
@@ -70,6 +78,8 @@ final class ArticleReleaseCloseoutService
                 checks: [],
                 errors: $errors,
                 publicSmoke: $publicSmoke,
+                gscManual: $gscManual,
+                observation: $observation,
             );
         }
 
@@ -85,8 +95,8 @@ final class ArticleReleaseCloseoutService
             'search_channel' => $this->searchChannelCheck($canonicalUrl),
             'schema_hreflang' => $this->schemaHreflangCheck($article),
             'public_html_smoke' => $this->publicSmokeCheck($publicSmoke),
-            'gsc_manual' => $this->manualCheck('operator_record_required'),
-            'observation' => $this->manualCheck('d1_d7_d14_queue_record_required'),
+            'gsc_manual' => $this->gscManualCheck($gscManual, $canonicalUrl),
+            'observation' => $this->observationCheck($observation),
         ];
 
         return $this->summary(
@@ -97,6 +107,8 @@ final class ArticleReleaseCloseoutService
             checks: $checks,
             errors: $errors,
             publicSmoke: $publicSmoke,
+            gscManual: $gscManual,
+            observation: $observation,
         );
     }
 
@@ -603,6 +615,85 @@ final class ArticleReleaseCloseoutService
     }
 
     /**
+     * @param  array<string,mixed>|null  $gscManual
+     * @return array<string,mixed>
+     */
+    private function gscManualCheck(?array $gscManual, ?string $canonicalUrl): array
+    {
+        if ($gscManual === null) {
+            return $this->manualCheck('operator_record_required');
+        }
+
+        $issues = [];
+        $status = strtolower((string) ($gscManual['status'] ?? ''));
+        $okFlag = $gscManual['ok'] ?? null;
+        $statusOk = $status === 'success' || $okFlag === true;
+        if (! $statusOk) {
+            $issues[] = $this->issue('gsc_manual.status', 'gsc_manual_status_not_success', 'GSC manual indexing evidence must have status=success.');
+        }
+
+        $matched = false;
+        $matchedHasConfirmation = false;
+        foreach ($this->evidenceUrlRecords($gscManual) as $record) {
+            $url = $this->evidenceRecordUrl($record);
+            if ($url !== $canonicalUrl) {
+                continue;
+            }
+
+            $matched = true;
+            $matchedHasConfirmation = $this->evidenceRecordHasConfirmation($record);
+        }
+
+        if (! $matched) {
+            $issues[] = $this->issue('gsc_manual.urls', 'gsc_manual_url_mismatch', 'GSC manual indexing evidence must include the article canonical URL.', [
+                'canonical_url' => $canonicalUrl,
+            ]);
+        } elseif (! $matchedHasConfirmation) {
+            $issues[] = $this->issue('gsc_manual.urls.confirmation', 'gsc_manual_confirmation_missing', 'GSC manual indexing evidence must include request indexing confirmation for the canonical URL.', [
+                'canonical_url' => $canonicalUrl,
+            ]);
+        }
+
+        return [
+            'ok' => $issues === [],
+            'state' => $issues === [] ? 'requested' : 'failed',
+            'canonical_url' => $canonicalUrl,
+            'status' => $status,
+            'issues' => $issues,
+            'evidence' => $gscManual,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $observation
+     * @return array<string,mixed>
+     */
+    private function observationCheck(?array $observation): array
+    {
+        if ($observation === null) {
+            return $this->manualCheck('d1_d7_d14_queue_record_required');
+        }
+
+        $status = strtolower((string) ($observation['status'] ?? ''));
+        $hasChecklist = is_array($observation['checklist'] ?? null)
+            || is_array($observation['d1_d7_d14_checklist'] ?? null)
+            || is_array($observation['observation_windows'] ?? null)
+            || is_array($observation['queue_record'] ?? null);
+        $acceptedStatus = in_array($status, ['recorded', 'pending_window', 'scheduled', 'success'], true);
+        $ok = $acceptedStatus || $hasChecklist;
+        $issues = $ok ? [] : [
+            $this->issue('observation', 'observation_evidence_invalid', 'Observation evidence must record a D1/D7/D14 checklist, queue record, or pending observation window.'),
+        ];
+
+        return [
+            'ok' => $ok,
+            'state' => $ok ? ($acceptedStatus ? $status : 'pending_window') : 'failed',
+            'issues' => $issues,
+            'evidence' => $observation,
+        ];
+    }
+
+    /**
      * @param  array<string,mixed>|null  $publicSmoke
      * @param  list<array<string,mixed>>  $errors
      * @param  array<string,mixed>  $checks
@@ -616,6 +707,8 @@ final class ArticleReleaseCloseoutService
         array $checks,
         array $errors,
         ?array $publicSmoke,
+        ?array $gscManual,
+        ?array $observation,
     ): array {
         $issues = $errors;
         foreach ($checks as $check) {
@@ -645,8 +738,8 @@ final class ArticleReleaseCloseoutService
             'issues' => $issues,
             'remaining_operator_inputs' => [
                 'public_html_smoke' => $publicSmoke === null ? 'not_provided_use_fap_web_smoke_verifier' : 'provided',
-                'gsc_manual_request_indexing' => 'operator_record_required',
-                'd1_d7_d14_observation' => 'schedule_or_record_after_release',
+                'gsc_manual_request_indexing' => (($checks['gsc_manual']['ok'] ?? null) === true ? 'provided' : ($gscManual === null ? 'operator_record_required' : 'provided_but_invalid')),
+                'd1_d7_d14_observation' => (($checks['observation']['ok'] ?? null) === true ? 'recorded_or_pending_window' : ($observation === null ? 'schedule_or_record_after_release' : 'provided_but_invalid')),
             ],
             'allowed_decisions' => [
                 self::COMPLETE_SEARCH_OBSERVATION_PENDING,
@@ -656,6 +749,56 @@ final class ArticleReleaseCloseoutService
                 self::BLOCKED_OPERATOR_INPUT,
             ],
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $evidence
+     * @return list<mixed>
+     */
+    private function evidenceUrlRecords(array $evidence): array
+    {
+        foreach (['urls', 'target_urls', 'url_results', 'requested_urls'] as $key) {
+            if (is_array($evidence[$key] ?? null)) {
+                return array_values($evidence[$key]);
+            }
+        }
+
+        return [];
+    }
+
+    private function evidenceRecordUrl(mixed $record): string
+    {
+        if (is_string($record)) {
+            return $record;
+        }
+
+        if (! is_array($record)) {
+            return '';
+        }
+
+        foreach (['canonical_url', 'url', 'target_url'] as $key) {
+            $value = $record[$key] ?? null;
+            if (is_string($value) && $value !== '') {
+                return $value;
+            }
+        }
+
+        return '';
+    }
+
+    private function evidenceRecordHasConfirmation(mixed $record): bool
+    {
+        if (! is_array($record)) {
+            return false;
+        }
+
+        foreach (['request_indexing_confirmation', 'request_indexing_result', 'confirmation', 'confirmed_at'] as $key) {
+            if (trim((string) ($record[$key] ?? '')) !== '') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
