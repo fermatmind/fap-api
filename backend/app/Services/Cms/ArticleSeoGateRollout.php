@@ -325,9 +325,11 @@ final class ArticleSeoGateRollout
 
         if ((bool) ($options['enable_article_schema'] ?? false)) {
             $package['article_schema_enabled'] = true;
+            unset($package['schema_hold']);
         }
         if ((bool) ($options['enable_breadcrumb_schema'] ?? false)) {
             $package['breadcrumb_schema_enabled'] = true;
+            unset($package['schema_hold']);
         }
         if ((bool) ($options['enable_faq_schema'] ?? false)) {
             $package['faq_schema_enabled'] = true;
@@ -336,6 +338,7 @@ final class ArticleSeoGateRollout
         }
 
         if ((bool) ($options['enable_hreflang'] ?? false)) {
+            unset($package['hreflang_hold']);
             $package['hreflang_gate_v1'] = [
                 'enabled' => true,
                 'policy' => 'reciprocal_counterparts_verified',
@@ -343,6 +346,7 @@ final class ArticleSeoGateRollout
                 'verified_at' => now()->toIso8601String(),
             ];
         } elseif ((bool) ($options['no_hreflang_policy'] ?? false)) {
+            unset($package['hreflang_hold']);
             $package['hreflang_gate_v1'] = [
                 'enabled' => false,
                 'policy' => 'no_hreflang',
@@ -386,6 +390,8 @@ final class ArticleSeoGateRollout
             'robots' => $seoMeta instanceof ArticleSeoMeta ? (string) $seoMeta->robots : null,
             'schema_json_sha256' => $seoMeta instanceof ArticleSeoMeta ? hash('sha256', (string) json_encode($seoMeta->schema_json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE)) : null,
             'schema_gates' => [
+                'schema_hold' => $package['schema_hold'] ?? null,
+                'hreflang_hold' => $package['hreflang_hold'] ?? null,
                 'article_schema_enabled' => $package['article_schema_enabled'] ?? null,
                 'breadcrumb_schema_enabled' => $package['breadcrumb_schema_enabled'] ?? null,
                 'faq_schema_enabled' => $package['faq_schema_enabled'] ?? null,
@@ -411,9 +417,11 @@ final class ArticleSeoGateRollout
 
         if ((bool) ($options['enable_article_schema'] ?? false)) {
             $snapshot['schema_gates']['article_schema_enabled'] = true;
+            $snapshot['schema_gates']['schema_hold'] = null;
         }
         if ((bool) ($options['enable_breadcrumb_schema'] ?? false)) {
             $snapshot['schema_gates']['breadcrumb_schema_enabled'] = true;
+            $snapshot['schema_gates']['schema_hold'] = null;
         }
         if ((bool) ($options['enable_faq_schema'] ?? false)) {
             $snapshot['schema_gates']['faq_schema_enabled'] = true;
@@ -429,11 +437,13 @@ final class ArticleSeoGateRollout
             ));
         }
         if ((bool) ($options['enable_hreflang'] ?? false)) {
+            $snapshot['schema_gates']['hreflang_hold'] = null;
             $snapshot['schema_gates']['hreflang_gate_v1'] = [
                 'enabled' => true,
                 'policy' => 'reciprocal_counterparts_verified',
             ];
         } elseif ((bool) ($options['no_hreflang_policy'] ?? false)) {
+            $snapshot['schema_gates']['hreflang_hold'] = null;
             $snapshot['schema_gates']['hreflang_gate_v1'] = [
                 'enabled' => false,
                 'policy' => 'no_hreflang',
