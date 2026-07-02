@@ -79,6 +79,13 @@ final class RiasecActivityTaskExamplesPreflightTest extends TestCase
         '淘汰依据',
     ];
 
+    private const FORBIDDEN_TEMPLATE_TRACES = [
+        '观察版本',
+        '探索变体',
+        '找一个与“',
+        '接近的小场景',
+    ];
+
     public function test_v7_3_activity_task_fixture_is_complete_and_schema_compatible_for_preflight(): void
     {
         $records = $this->loadRecords();
@@ -140,11 +147,33 @@ final class RiasecActivityTaskExamplesPreflightTest extends TestCase
                 $this->assertStringNotContainsString($claim, $visibleText, 'line '.($index + 1)." contains forbidden user claim {$claim}");
             }
 
+            foreach (self::FORBIDDEN_TEMPLATE_TRACES as $trace) {
+                $this->assertStringNotContainsString($trace, $visibleText, 'line '.($index + 1)." contains template trace {$trace}");
+            }
+
             $this->assertDoesNotMatchRegularExpression(
                 '/\b[a-z]+(?:_[a-z0-9]+)+\b/',
                 $visibleText,
                 'line '.($index + 1).' exposes a technical key in user-facing copy',
             );
+        }
+    }
+
+    public function test_v7_3_activity_task_fixture_is_specific_without_template_repetition(): void
+    {
+        $records = $this->loadRecords();
+
+        $this->assertCount(self::EXPECTED_RECORD_COUNT, array_unique(array_column($records, 'activity_label')));
+        $this->assertGreaterThanOrEqual(180, count(array_unique(array_map(
+            static fn (array $record): string => implode("\n", (array) $record['task_examples']),
+            $records,
+        ))));
+        $this->assertGreaterThanOrEqual(180, count(array_unique(array_column($records, 'low_risk_validation'))));
+
+        foreach ($records as $index => $record) {
+            $this->assertStringContainsString('15 分钟', (string) $record['low_risk_validation'], 'line '.($index + 1).' must stay low-risk and time-boxed');
+            $this->assertStringContainsString('兴趣线索', (string) $record['low_risk_validation'], 'line '.($index + 1).' must frame the observation as interest evidence');
+            $this->assertStringContainsString('不代表能力、身份或职业结论', (string) $record['low_risk_validation'], 'line '.($index + 1).' must retain the scientific boundary');
         }
     }
 
