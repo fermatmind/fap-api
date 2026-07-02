@@ -1,0 +1,3 @@
+/goal Authorize and execute Big Five content asset scientific repair PR train across 14 scoped PRs.
+
+Use the scan artifacts in `/private/tmp/fap-api-big5-scientific-editorial-repair-v0-2-candidate-normalize-01/backend/generated/big5_content_asset_scientific_audit/20260702T160451Z`. First update `docs/codex/pr-train.yaml` and `docs/codex/pr-train-state.json` with the candidate entries from `04_manifest_state_candidate_entries.md`, then execute from `BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01` in order. One PR = one scope. Do not touch fap-web copy, CMS, SEO, runtime, production import, rollout, or final `big5_result_page_v2` payload unless separately authorized. Stop on failed local checks, scope drift, merge policy block, or required review block.

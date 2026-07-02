@@ -35888,3 +35888,559 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+  - id: BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01
+    repo: fap-api
+    branch: codex/big5-content-asset-scientific-audit-mapping-01
+    title: "BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01: Big Five content asset scientific audit mapping"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Commit scan/audit mapping artifacts only; no content repair.
+      - Keep this PR scoped to `all` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/generated/big5_content_asset_scientific_audit/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01
+    repo: fap-api
+    depends_on:
+      - BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01
+    branch: codex/big5-selector-public-payload-hygiene-01
+    title: "BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01: Big Five selector public payload hygiene"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Remove runtime/readiness/internal operation fields from selector public_payload.
+      - Keep this PR scoped to `selector_public_payload` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/**/selector_asset_candidates.jsonl
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01
+    branch: codex/big5-method-boundary-scientific-repair-01
+    title: "BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01: Big Five method boundary scientific repair"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Repair Method / Boundary scientific boundary and usage limits.
+      - Keep this PR scoped to `method_boundary` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/method_boundary_v0_5_normalized/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01
+    branch: codex/big5-domain-bands-scientific-repair-01
+    title: "BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01: Big Five domain bands scientific repair"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Repair LOW/MID/HIGH band interpretation boundaries.
+      - Keep this PR scoped to `domain_bands` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/domain_bands_revised_v0_3_normalized/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-FACETS-30-SCIENTIFIC-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01
+    branch: codex/big5-facets-30-scientific-repair-01
+    title: "BIG5-FACETS-30-SCIENTIFIC-REPAIR-01: Big Five 30 facets scientific repair"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Repair 30 facets scientific and localization boundaries.
+      - Keep this PR scoped to `facets_30` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/facets_30_revised_v0_4_normalized/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - BIG5-FACETS-30-SCIENTIFIC-REPAIR-01
+    branch: codex/big5-coupling-variants-scientific-repair-01
+    title: "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01: Big Five coupling variants scientific repair"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Repair coupling variants as current score-structure clues.
+      - Keep this PR scoped to `coupling_variants` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/coupling_variants_revised_v0_2_normalized/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01
+    branch: codex/big5-share-safety-scientific-repair-01
+    title: "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01: Big Five share safety scientific repair"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Repair share-safe content and public boundary constraints.
+      - Keep this PR scoped to `share_safety` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/share_safety_revised_v0_2_normalized/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01
+    branch: codex/big5-low-quality-scientific-repair-01
+    title: "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01: Big Five low quality scientific repair"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Repair low-quality and quality-D downgrade boundaries.
+      - Keep this PR scoped to `low_quality` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/low_quality_revised_v0_3_normalized/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01
+    branch: codex/big5-norm-unavailable-scientific-repair-01
+    title: "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01: Big Five norm unavailable scientific repair"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Repair norm-unavailable comparison and ranking boundaries.
+      - Keep this PR scoped to `norm_unavailable` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/norm_unavailable_revised_v0_3_normalized/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01
+    branch: codex/big5-rendered-surface-qa-content-repair-01
+    title: "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01: Big Five rendered surface QA content repair"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Repair content-controlled rendered surface guidance.
+      - Keep this PR scoped to `rendered_surface_qa` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/rendered_surface_qa_revised_v0_3_normalized/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01
+    branch: codex/big5-canonical-profiles-scientific-repair-01
+    title: "BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01: Big Five canonical profiles scientific repair"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Repair canonical profiles as reading entrances/current structure clues.
+      - Keep this PR scoped to `canonical_profiles` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01
+    branch: codex/big5-scenario-action-scientific-repair-01
+    title: "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01: Big Five scenario action scientific repair"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Repair scenario/action advice as low-risk optional guidance.
+      - Keep this PR scoped to `scenario_action` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/scenario_action_revised_v0_7_normalized/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-CONTENT-ASSET-SCIENTIFIC-REPAIR-FULL-QA-01
+    repo: fap-api
+    depends_on:
+      - BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01
+    branch: codex/big5-content-asset-scientific-repair-full-qa-01
+    title: "BIG5-CONTENT-ASSET-SCIENTIFIC-REPAIR-FULL-QA-01: Big Five content asset scientific repair full QA"
+    train_scope: big5_result_page_scientific_content_repair
+    status: user_authorized
+    scope:
+      - Commit full cross-block QA evidence after repairs.
+      - Keep this PR scoped to `all` and do not implement adjacent Big Five content repair scopes.
+      - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/**BigFiveResultPageV2**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+      - backend/generated/big5_content_asset_scientific_audit/**
+    do_not:
+      - Modify fap-web.
+      - Enable runtime, rollout, release snapshot activation, production import, or production deploy.
+      - Write CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, secrets, permissions, database migrations, or final big5_result_page_v2 payloads.
+      - Combine this scope with another Big Five scientific content repair PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
