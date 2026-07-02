@@ -70783,9 +70783,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": "f6f6a9312a6fc3d41d1f090cceb4d1ca9e47653f",
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "7ea94536e249bf6c4bfb5ee6ff1241e261ba1362",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2638",
     "checks": {
       "phpunit_feedback_overlay_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi --display-warnings",
@@ -70836,6 +70836,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Reframed feedback action lab as exploration-path-only preference records; fixed current-scope test and content-boundary failures, then reran validations."
+      },
+      {
+        "at": "2026-07-02T19:20:34Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2638 after FEEDBACK-01 local validation and scope validation passed."
       }
     ]
   },
