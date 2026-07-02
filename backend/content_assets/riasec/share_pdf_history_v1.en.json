@@ -31,17 +31,27 @@
     },
     {
       "surface": "pdf_personal",
-      "copy": "A personal PDF can preserve the full result, generation time, and method boundaries. Once a PDF is forwarded, the platform cannot remotely recall it.",
+      "copy": "A personal PDF is only a saved copy of this result: it keeps the assessment snapshot, generation time, and necessary method boundary once, without adding new career judgments. Once forwarded, the platform cannot remotely recall it.",
       "public_safe": false,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "pdf_surface_mode": "compact_snapshot_pdf",
+      "pdf_density_mode": "compact_boundary_once",
+      "boundary_repetition_allowed": false,
+      "snapshot_bound_required": true,
+      "pdf_default_visible": true
     },
     {
       "surface": "pdf_counselor_discussion",
-      "copy": "A counselor discussion version may show more exploration summary with user permission. It must not be used for screening, admission, promotion, elimination, or qualification decisions.",
+      "copy": "A counselor discussion PDF is for shared reading with user permission: it keeps a small exploration summary and the necessary limits, then turns them into next observation questions. It must not be used for screening, admission, promotion, elimination, or qualification decisions.",
       "public_safe": false,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "pdf_surface_mode": "compact_snapshot_pdf",
+      "pdf_density_mode": "compact_boundary_once",
+      "boundary_repetition_allowed": false,
+      "snapshot_bound_required": true,
+      "pdf_default_visible": true
     },
     {
       "surface": "history_same_form",

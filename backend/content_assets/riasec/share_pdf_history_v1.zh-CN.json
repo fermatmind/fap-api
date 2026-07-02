@@ -31,17 +31,27 @@
     },
     {
       "surface": "pdf_personal",
-      "copy": "个人留存版可保留完整结果、生成时间和方法边界。请注意 PDF 一旦转发，平台无法远程撤回。",
+      "copy": "个人 PDF 只作为本次结果的留存版：保留测评快照、生成时间和必要方法边界；边界只出现一次，不重复展开，不加入新的职业判断。转发后平台无法远程撤回。",
       "public_safe": false,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "pdf_surface_mode": "compact_snapshot_pdf",
+      "pdf_density_mode": "compact_boundary_once",
+      "boundary_repetition_allowed": false,
+      "snapshot_bound_required": true,
+      "pdf_default_visible": true
     },
     {
       "surface": "pdf_counselor_discussion",
-      "copy": "咨询讨论版可以在用户授权下展示更多探索摘要，但不得用于筛选、录取、晋升、淘汰或资格判断。",
+      "copy": "咨询讨论版只用于用户授权下的共同阅读：保留少量探索摘要和必要限制，帮助提出下一步观察问题；不得用于筛选、录取、晋升、淘汰或资格判断。",
       "public_safe": false,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "pdf_surface_mode": "compact_snapshot_pdf",
+      "pdf_density_mode": "compact_boundary_once",
+      "boundary_repetition_allowed": false,
+      "snapshot_bound_required": true,
+      "pdf_default_visible": true
     },
     {
       "surface": "history_same_form",
