@@ -22,6 +22,9 @@ final class RiasecQualityRuleContractTest extends TestCase
         $this->assertSame('normal_reading', $state['reading_strength']);
         $this->assertSame('show_standard_result_page', $state['result_page_behavior']);
         $this->assertTrue($state['module_policy']['allow_140q_cta']);
+        $this->assertFalse($state['user_blame_allowed']);
+        $this->assertFalse($state['result_mutation_allowed']);
+        $this->assertTrue($state['strong_interpretation_allowed']);
         $this->assertStringContainsString('minimal', $state['quality_boundary_note']);
         $this->assertFalse($state['score_mutation_allowed']);
         $this->assertFalse($state['measured_holland_code_mutation_allowed']);
@@ -41,6 +44,9 @@ final class RiasecQualityRuleContractTest extends TestCase
         $this->assertSame('show_cautious_result_page', $state['result_page_behavior']);
         $this->assertTrue($state['module_policy']['allow_140q_cta']);
         $this->assertSame('soft_or_hidden', $state['module_policy']['cta_strength']);
+        $this->assertFalse($state['module_policy']['user_blame_allowed']);
+        $this->assertFalse($state['module_policy']['strong_interpretation_allowed']);
+        $this->assertSame('cautious_reading_or_low_risk_observation', $state['recommended_action_type']);
         $this->assertNoForbiddenClaims($state);
     }
 
@@ -56,6 +62,13 @@ final class RiasecQualityRuleContractTest extends TestCase
         $this->assertSame('show_retake_recommended_page', $state['result_page_behavior']);
         $this->assertFalse($state['module_policy']['allow_140q_cta']);
         $this->assertSame('hidden', $state['module_policy']['cta_strength']);
+        $this->assertFalse($state['module_policy']['user_blame_allowed']);
+        $this->assertFalse($state['module_policy']['upsell_140q_allowed']);
+        $this->assertFalse($state['module_policy']['strong_interpretation_allowed']);
+        $this->assertFalse($state['user_blame_allowed']);
+        $this->assertFalse($state['upsell_140q_allowed']);
+        $this->assertFalse($state['strong_interpretation_allowed']);
+        $this->assertSame('cautious_reading_or_retake_only', $state['recommended_action_type']);
         $this->assertStringContainsString('incomplete', $state['quality_boundary_note']);
         $this->assertNoForbiddenClaims($state);
     }
