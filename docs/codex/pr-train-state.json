@@ -69973,8 +69973,8 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "pr_opened",
-    "commit_sha": "af4aecd2187512a160c248e8408b809a8b8c34de",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "dd0f52428a49679297b828461d07c5d3b77e0192",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2621",
     "checks": {
       "phpunit_occupation_preflight": {
@@ -70002,14 +70002,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T17:55:02Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl",
         "backend/docs/riasec/occupation-examples-pack-06-preflight.md",
@@ -70036,8 +70036,15 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2621 after OCC-01 local validation, latest-main rebase, and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T18:00:39Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2621 merged; origin/main contains merge commit; local main synced; task branch cleaned. Recorded during OCC-02 ledger reconciliation."
       }
-    ]
+    ],
+    "merge_commit_sha": "87f021660b31e46d2efb5c1f2c05dee0738e690a"
   },
   "RIASEC-CONTENT-OCC-02": {
     "id": "RIASEC-CONTENT-OCC-02",
@@ -70049,19 +70056,44 @@
     "depends_on": [
       "RIASEC-CONTENT-OCC-01"
     ],
-    "status": "authorized_pending_start",
-    "commit_sha": null,
+    "status": "local_validation_passed",
+    "commit_sha": "7edceffc52fa3fa83f44441765a9c84b67db0072",
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "phpunit_activity_explorer_and_occupation_projection": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "12 tests, 39442 assertions"
+      },
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "170 tests, 103041 assertions"
+      },
+      "pint": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecActivityExplorerService.php tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php",
+        "status": "passed",
+        "summary": "3 files passed"
+      },
+      "manifest_state_parse_and_diff_check": {
+        "command": "ruby YAML parse; python JSON parse; git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecActivityExplorerService.php",
+        "backend/tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -70069,6 +70101,12 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T18:00:39Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Hardened occupation example projection boundaries and public surface flags; local RIASEC unit subset and scope validation passed."
       }
     ]
   },

@@ -152,6 +152,9 @@ final class RiasecActivityExplorerService
                 'fit_score_allowed' => false,
                 'success_prediction_allowed' => false,
                 'qualification_judgment_allowed' => false,
+                'occupation_examples_share_card_allowed' => false,
+                'occupation_examples_pdf_default_visible' => false,
+                'occupation_examples_history_default_visible' => false,
                 'registry_source_connected' => false,
             ],
             'dimension_activity_families' => $this->dimensionFamilies($dimensions, $normalizedLocale),
@@ -539,7 +542,17 @@ final class RiasecActivityExplorerService
             'user_visible_boundary' => (string) $row['user_visible_boundary'],
             'reality_check' => (string) $row['reality_check'],
             'not_a_recommendation' => true,
+            'examples_only' => true,
+            'ranking_allowed' => false,
             'fit_score_allowed' => false,
+            'success_prediction_allowed' => false,
+            'qualification_judgment_allowed' => false,
+            'public_surfaces' => [
+                'result_page_allowed' => true,
+                'share_card_allowed' => false,
+                'pdf_default_visible' => false,
+                'history_default_visible' => false,
+            ],
         ];
     }
 
