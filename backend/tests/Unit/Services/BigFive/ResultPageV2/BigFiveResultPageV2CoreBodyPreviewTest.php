@@ -268,7 +268,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/routes/api.php',
         ];
         $routeChangedLines = [
+            "+    Route::get('/personality/comparisons', [PersonalityController::class, 'comparisonIndex']);",
             "+    Route::get('/personality/comparisons/{comparison}', [PersonalityController::class, 'comparison']);",
+            "-    Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show']);",
+            "+    Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show'])",
+            "+        ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');",
+            "-    Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo']);",
+            "+    Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo'])",
+            "+        ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');",
+            "-    Route::get('/personality/{type}', [PersonalityController::class, 'show']);",
+            "+    Route::get('/personality/{type}', [PersonalityController::class, 'show'])",
+            "+        ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');",
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
@@ -10926,7 +10936,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         $allowedLines = [
+            "+    Route::get('/personality/comparisons', [PersonalityController::class, 'comparisonIndex']);",
             "+    Route::get('/personality/comparisons/{comparison}', [PersonalityController::class, 'comparison']);",
+            "-    Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show']);",
+            "+    Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show'])",
+            "+        ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');",
+            "-    Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo']);",
+            "+    Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo'])",
+            "-    Route::get('/personality/{type}', [PersonalityController::class, 'show']);",
+            "+    Route::get('/personality/{type}', [PersonalityController::class, 'show'])",
         ];
 
         foreach ($changedLines as $line) {

@@ -204,6 +204,84 @@ class PersonalityController extends Controller
         ]);
     }
 
+    public function comparisonIndex(Request $request): JsonResponse
+    {
+        $validated = $this->validateReadQuery($request);
+        if ($validated instanceof JsonResponse) {
+            return $validated;
+        }
+
+        $paginator = $this->personalityProfileService->listPublicProfileVariants(
+            $validated['org_id'],
+            $validated['scale_code'],
+            $validated['locale'],
+            1,
+            100,
+        );
+        $variantsByBase = [];
+
+        foreach ($paginator->items() as $variant) {
+            if (! $variant instanceof PersonalityProfileVariant) {
+                continue;
+            }
+
+            $profile = $variant->profile;
+            if (! $profile instanceof PersonalityProfile || ! $this->isMbtiProfile($profile)) {
+                continue;
+            }
+
+            $baseTypeCode = strtoupper((string) ($variant->canonical_type_code ?: $profile->type_code));
+            $variantCode = strtoupper((string) $variant->variant_code);
+            if (! in_array($baseTypeCode, PersonalityProfile::BASE_TYPE_CODES, true) || ! in_array($variantCode, ['A', 'T'], true)) {
+                continue;
+            }
+
+            $variantsByBase[$baseTypeCode] ??= [
+                'profile' => $profile,
+                'variants' => [],
+            ];
+            $variantsByBase[$baseTypeCode]['variants'][strtolower($variantCode)] = $variant;
+        }
+
+        $items = [];
+        foreach (PersonalityProfile::BASE_TYPE_CODES as $baseTypeCode) {
+            $entry = $variantsByBase[$baseTypeCode] ?? null;
+            $profile = $entry['profile'] ?? null;
+            $variants = is_array($entry['variants'] ?? null) ? $entry['variants'] : [];
+            if (! $profile instanceof PersonalityProfile
+                || ! ($variants['a'] ?? null) instanceof PersonalityProfileVariant
+                || ! ($variants['t'] ?? null) instanceof PersonalityProfileVariant
+            ) {
+                continue;
+            }
+
+            $items[] = $this->comparisonListItemPayload($baseTypeCode, $validated['locale'], $profile);
+        }
+
+        $projection = [
+            'comparison_list_contract_version' => 'mbti.comparison_list.v1',
+            'locale' => $validated['locale'],
+            'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
+            'groups' => [
+                [
+                    'key' => 'at_comparisons',
+                    'comparison_type' => 'mbti_at_comparison',
+                    'title' => $validated['locale'] === 'zh-CN' ? 'A/T 人格差异' : 'A/T personality differences',
+                    'description' => $validated['locale'] === 'zh-CN'
+                        ? '同一 16 型人格核心下，比较 A 与 T 在压力反馈、自我确认和行动节奏上的差异。'
+                        : 'Compare A and T variants within the same 16-type personality core across stress feedback, self-confirmation, and action rhythm.',
+                    'items' => $items,
+                ],
+            ],
+        ];
+
+        return response()->json([
+            'ok' => true,
+            'comparison_list_public_projection_v1' => $projection,
+            'at_comparisons' => $items,
+        ]);
+    }
+
     public function comparison(Request $request, string $comparison): JsonResponse
     {
         $validated = $this->validateReadQuery($request);
@@ -333,6 +411,32 @@ class PersonalityController extends Controller
             .'/'.$this->frontendLocaleSegment($locale)
             .'/personality/'
             .$this->comparisonSlug($baseTypeCode);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function comparisonListItemPayload(string $baseTypeCode, string $locale, PersonalityProfile $profile): array
+    {
+        $comparisonOverlay = $this->mbti64PromotedComparisonOverlay($profile);
+        $meta = $this->comparisonMeta($baseTypeCode, $locale, $comparisonOverlay);
+        $slug = $this->comparisonSlug($baseTypeCode);
+
+        return [
+            'slug' => $slug,
+            'comparison_type' => 'mbti_at_comparison',
+            'base_type_code' => $baseTypeCode,
+            'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
+            'locale' => $locale,
+            'public_route_type' => 'at-comparison',
+            'title' => (string) ($meta['title'] ?? ($baseTypeCode.'-A vs '.$baseTypeCode.'-T')),
+            'description' => (string) ($meta['description'] ?? ''),
+            'public_url' => $meta['canonical'] ?? $this->comparisonCanonicalUrl($baseTypeCode, $locale),
+            'canonical_url' => $meta['canonical'] ?? $this->comparisonCanonicalUrl($baseTypeCode, $locale),
+            'is_public' => (bool) $profile->is_public,
+            'is_indexable' => (bool) $profile->is_indexable,
+            'status' => (string) $profile->status,
+        ];
     }
 
     /**
