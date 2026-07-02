@@ -166,6 +166,12 @@ final class EnneagramScoringV11Test extends TestCase
             ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
             collect((array) data_get($projection, 'scores.all9_profile'))->pluck('type')->sort()->values()->all()
         );
+        $t6Profile = collect((array) data_get($projection, 'scores.all9_profile'))
+            ->firstWhere('type', '6');
+        $this->assertSame('high', data_get($t6Profile, 'score_band'));
+        $this->assertSame('本次答题轮廓中较突出', data_get($t6Profile, 'score_band_label'));
+        $this->assertSame('答题轮廓内的相对线索', data_get($t6Profile, 'score_interpretation_label'));
+        $this->assertSame('这不是常模分数、诊断标签、能力评价或固定人格定论。', data_get($t6Profile, 'score_boundary_note'));
         $this->assertSame('enneagram_likert_105', data_get($projection, 'form.form_code'));
         $this->assertSame('e105_likert_space.v1', data_get($projection, 'form.score_space_version'));
     }
