@@ -9,6 +9,31 @@ use RuntimeException;
 
 final class Mbti64CrossTypeComparisonAssetsDryRunPlanner
 {
+    private const ARTIFACT_ID = 'MBTI64-CROSS-TYPE-COMPARISON-ASSETS-DRY-RUN-01';
+
+    private const AUTHORITY_CONTRACT_VERSION = 'mbti.cross_type_comparison.authority.v1';
+
+    private const READMODEL_CONTRACT_VERSION = 'mbti.cross_type_comparison.readmodel.v1';
+
+    private const STORAGE_CONTRACT = 'backend_authority.mbti64_cross_type_comparison';
+
+    private const COMPARISON_TYPE = 'mbti_cross_type';
+
+    private const LOCALE = 'zh-CN';
+
+    private const EXPECTED_AVAILABLE_SLUGS = [
+        'enfp-vs-entp',
+        'entj-vs-intj',
+        'estj-vs-entj',
+        'infj-vs-infp',
+        'intj-vs-intp',
+        'isfp-vs-infp',
+    ];
+
+    private const PENDING_MISSING_SLUGS = [
+        'istj-vs-isfj' => 'ISTJ_vs_ISFJ_Content_Asset_Package.zip',
+    ];
+
     private const FORBIDDEN_PUBLIC_ROUTE_PATTERN =
         '~/(?:[a-z]{2}(?:-[A-Z]{2})?/)?(?:result|results|orders|order|share|pay|payment|history|private|account)(?:/|[?#\s)"\']|$)~i';
 
@@ -48,8 +73,14 @@ final class Mbti64CrossTypeComparisonAssetsDryRunPlanner
             $errors = array_merge($errors, $assetErrors);
         }
 
+        $availableSlugs = array_map(
+            static fn (array $row): string => (string) $row['slug'],
+            $rows
+        );
+        sort($availableSlugs);
+
         return [
-            'artifact' => 'MBTI64-CROSS-TYPE-COMPARISON-ASSETS-DRY-RUN-01',
+            'artifact' => self::ARTIFACT_ID,
             'status' => $errors === [] ? 'pass' : 'fail',
             'ok' => $errors === [],
             'dry_run' => true,
@@ -69,6 +100,11 @@ final class Mbti64CrossTypeComparisonAssetsDryRunPlanner
             'comparison_count' => count($rows),
             'rows_would_stage' => count($rows),
             'target_contract' => $this->targetContract(),
+            'authority_contract' => $this->authorityContract($availableSlugs),
+            'readmodel_contract' => $this->readmodelContract(),
+            'available_slugs' => $availableSlugs,
+            'expected_available_slugs' => self::EXPECTED_AVAILABLE_SLUGS,
+            'pending_missing_slugs' => $this->pendingMissingSlugs(),
             'rows' => $rows,
             'errors' => $errors,
             'warnings' => [],
@@ -120,11 +156,11 @@ final class Mbti64CrossTypeComparisonAssetsDryRunPlanner
             $errors[] = $this->issue($path.'.left_type', 'type_fields_must_match_slug', 'left_type and right_type must match the slug.');
         }
 
-        if ($this->stringValue($asset['comparison_type'] ?? null) !== 'mbti_cross_type') {
+        if ($this->stringValue($asset['comparison_type'] ?? null) !== self::COMPARISON_TYPE) {
             $errors[] = $this->issue($path.'.comparison_type', 'comparison_type_must_be_mbti_cross_type', 'comparison_type must be mbti_cross_type.');
         }
 
-        if ($this->stringValue($asset['locale'] ?? null) !== 'zh-CN') {
+        if ($this->stringValue($asset['locale'] ?? null) !== self::LOCALE) {
             $errors[] = $this->issue($path.'.locale', 'locale_must_be_zh_cn', 'Locale must be zh-CN.');
         }
 
@@ -204,14 +240,17 @@ final class Mbti64CrossTypeComparisonAssetsDryRunPlanner
             'slug' => (string) $asset['slug'],
             'left_type' => strtoupper((string) $asset['left_type']),
             'right_type' => strtoupper((string) $asset['right_type']),
-            'locale' => 'zh-CN',
+            'locale' => self::LOCALE,
             'source_file' => $this->relativePath($file),
             'source_sha256' => hash('sha256', $raw),
             'target' => [
-                'storage' => 'future_backend_authority.mbti64_cross_type_comparison',
+                'storage' => self::STORAGE_CONTRACT,
                 'write_mode' => 'draft_package_plan_only',
                 'public_api_enabled' => false,
             ],
+            'authority_contract_version' => self::AUTHORITY_CONTRACT_VERSION,
+            'readmodel_contract_version' => self::READMODEL_CONTRACT_VERSION,
+            'projection' => $this->readmodelProjection($asset, $raw),
             'draft_state_after_import' => [
                 'review_status' => 'draft',
                 'publish_status' => 'draft',
@@ -230,7 +269,7 @@ final class Mbti64CrossTypeComparisonAssetsDryRunPlanner
     private function targetContract(): array
     {
         return [
-            'storage' => 'future_backend_authority.mbti64_cross_type_comparison',
+            'storage' => self::STORAGE_CONTRACT,
             'overlay_contract' => [
                 'slug',
                 'comparison_type',
@@ -245,6 +284,134 @@ final class Mbti64CrossTypeComparisonAssetsDryRunPlanner
             ],
             'public_runtime_enabled' => false,
         ];
+    }
+
+    /**
+     * @param  list<string>  $availableSlugs
+     * @return array<string,mixed>
+     */
+    private function authorityContract(array $availableSlugs): array
+    {
+        return [
+            'contract_version' => self::AUTHORITY_CONTRACT_VERSION,
+            'artifact' => self::ARTIFACT_ID,
+            'storage' => self::STORAGE_CONTRACT,
+            'comparison_type' => self::COMPARISON_TYPE,
+            'locale' => self::LOCALE,
+            'source_package_id' => 'mbti-cross-type-comparison-content-assets-draft-20260702',
+            'source_mode' => 'operator_reviewed_draft_package',
+            'write_mode' => 'draft_package_plan_only',
+            'public_api_enabled' => false,
+            'available_slugs' => $availableSlugs,
+            'pending_missing_slugs' => $this->pendingMissingSlugs(),
+            'governance' => [
+                'cms_write_supported' => false,
+                'publish_supported' => false,
+                'indexability_supported' => false,
+                'search_release_supported' => false,
+                'sitemap_llms_release_supported' => false,
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function readmodelContract(): array
+    {
+        return [
+            'contract_version' => self::READMODEL_CONTRACT_VERSION,
+            'storage' => self::STORAGE_CONTRACT,
+            'public_api_enabled' => false,
+            'fields' => [
+                'slug',
+                'comparison_type',
+                'locale',
+                'left_type',
+                'right_type',
+                'title',
+                'seo_title',
+                'seo_description',
+                'summary',
+                'section_count',
+                'faq_count',
+                'internal_link_count',
+                'claim_boundary_present',
+                'source_notes_count',
+                'review_status',
+                'publish_status',
+                'indexability_status',
+                'source_sha256',
+                'public_api_enabled',
+                'is_public',
+                'is_indexable',
+            ],
+            'forbidden_runtime_side_effects' => [
+                'cms_write',
+                'publish',
+                'queue_enqueue',
+                'search_submit',
+                'sitemap_release',
+                'llms_release',
+                'canonical_hreflang_jsonld_release',
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $asset
+     * @return array<string,mixed>
+     */
+    private function readmodelProjection(array $asset, string $raw): array
+    {
+        $sections = is_array($asset['sections'] ?? null) ? $asset['sections'] : [];
+        $faq = is_array($asset['faq'] ?? null) ? $asset['faq'] : [];
+        $internalLinks = is_array($asset['internal_links'] ?? null) ? $asset['internal_links'] : [];
+        $sourceNotes = is_array($asset['source_notes'] ?? null) ? $asset['source_notes'] : [];
+
+        return [
+            'contract_version' => self::READMODEL_CONTRACT_VERSION,
+            'slug' => (string) $asset['slug'],
+            'comparison_type' => self::COMPARISON_TYPE,
+            'locale' => self::LOCALE,
+            'left_type' => strtoupper((string) $asset['left_type']),
+            'right_type' => strtoupper((string) $asset['right_type']),
+            'title' => (string) $asset['title'],
+            'seo_title' => (string) $asset['seo_title'],
+            'seo_description' => (string) $asset['seo_description'],
+            'summary' => (string) $asset['summary'],
+            'section_count' => count($sections),
+            'faq_count' => count($faq),
+            'internal_link_count' => count($internalLinks),
+            'claim_boundary_present' => $this->stringValue($asset['claim_boundary'] ?? null) !== null,
+            'source_notes_count' => count($sourceNotes),
+            'review_status' => 'draft',
+            'publish_status' => 'draft',
+            'indexability_status' => (string) ($asset['indexability_status'] ?? 'pending_review'),
+            'source_sha256' => hash('sha256', $raw),
+            'public_api_enabled' => false,
+            'is_public' => false,
+            'is_indexable' => false,
+        ];
+    }
+
+    /**
+     * @return list<array<string,string>>
+     */
+    private function pendingMissingSlugs(): array
+    {
+        $pending = [];
+
+        foreach (self::PENDING_MISSING_SLUGS as $slug => $expectedAsset) {
+            $pending[] = [
+                'slug' => $slug,
+                'status' => 'pending_asset',
+                'expected_asset' => $expectedAsset,
+                'reason' => 'requested_cross_type_asset_not_available',
+            ];
+        }
+
+        return $pending;
     }
 
     private function stringValue(mixed $value): ?string

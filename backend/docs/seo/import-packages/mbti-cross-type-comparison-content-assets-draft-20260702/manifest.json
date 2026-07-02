@@ -3,7 +3,9 @@
     "artifact": "MBTI64-CROSS-TYPE-COMPARISON-ASSETS-DRY-RUN-01",
     "status": "draft",
     "authority_target": {
-        "storage": "future_backend_authority.mbti64_cross_type_comparison",
+        "storage": "backend_authority.mbti64_cross_type_comparison",
+        "authority_contract_version": "mbti.cross_type_comparison.authority.v1",
+        "readmodel_contract_version": "mbti.cross_type_comparison.readmodel.v1",
         "public_api": "not_enabled_in_this_package",
         "write_mode": "draft_package_plan_only"
     },
@@ -17,6 +19,37 @@
     ],
     "missing_requested_assets": [
         "ISTJ_vs_ISFJ_Content_Asset_Package.zip"
+    ],
+    "pending_missing_slugs": [
+        {
+            "slug": "istj-vs-isfj",
+            "status": "pending_asset",
+            "expected_asset": "ISTJ_vs_ISFJ_Content_Asset_Package.zip",
+            "reason": "requested_cross_type_asset_not_available"
+        }
+    ],
+    "readmodel_projection_fields": [
+        "slug",
+        "comparison_type",
+        "locale",
+        "left_type",
+        "right_type",
+        "title",
+        "seo_title",
+        "seo_description",
+        "summary",
+        "section_count",
+        "faq_count",
+        "internal_link_count",
+        "claim_boundary_present",
+        "source_notes_count",
+        "review_status",
+        "publish_status",
+        "indexability_status",
+        "source_sha256",
+        "public_api_enabled",
+        "is_public",
+        "is_indexable"
     ],
     "dry_run_only": true,
     "write_supported_in_this_package": false,
