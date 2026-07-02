@@ -68828,8 +68828,8 @@
     "depends_on": [
       "PR-EQ-ASSET-SCI-03"
     ],
-    "status": "pr_open",
-    "commit_sha": "295a1c7fee94a6c62f18997d835cdad96e3f19d5",
+    "status": "merged",
+    "commit_sha": "03e828762c05b30435d456792ff9f0fca4670e49",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2613",
     "checks": [
       {
@@ -68879,14 +68879,14 @@
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T17:29:46Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -68905,8 +68905,15 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "summary": "Opened PR #2613 for scoped score_system science-boundary repair; awaiting GitHub checks."
+      },
+      {
+        "at": "2026-07-02T17:38:02.409315Z",
+        "from": "pr_open",
+        "to": "merged",
+        "summary": "Reconciled PR #2613 as merged; merge commit 6751f425d5ca556267b76b1a8a4bf212a36db713 is in origin/main and local/remote task branches were cleaned."
       }
-    ]
+    ],
+    "merge_commit_sha": "6751f425d5ca556267b76b1a8a4bf212a36db713"
   },
   "PR-EQ-ASSET-SCI-05": {
     "id": "PR-EQ-ASSET-SCI-05",
@@ -68918,17 +68925,63 @@
       "PR-EQ-ASSET-SCI-03",
       "PR-EQ-ASSET-SCI-04"
     ],
-    "status": "user_authorized",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": [],
+    "status": "pr_open",
+    "commit_sha": "fe9f7f9d9c7d6d13cec9071fdaa69e51b7817aa5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2618",
+    "checks": [
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content lint passed after core formulation updates."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content compile passed; only scoped report_assets compiled output retained and alias mirror synchronized."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 432 assertions; PHPUnit reported existing environment file_get_contents warning only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+        "status": "passed_with_warnings",
+        "summary": "12 tests passed, 683 assertions; PHPUnit reported existing environment file_get_contents warnings only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 208 assertions; PHPUnit reported existing environment file_get_contents warning only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+        "status": "passed_with_warnings",
+        "summary": "4 tests passed, 130 assertions; PHPUnit reported existing environment file_get_contents warnings only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 16 assertions; PHPUnit reported existing environment file_get_contents warning only."
+      },
+      {
+        "command": "core_formulations forbidden claim and repeated suffix scan",
+        "status": "passed",
+        "summary": "Scoped user-visible formulation fields have no old repeated suffixes and no commerce/ability/MSCEIT/clinical/hiring exact forbidden phrases."
+      },
+      {
+        "command": "cmp EQ_60 and EQ_EMOTIONAL_INTELLIGENCE core_formulations raw and compiled assets",
+        "status": "passed",
+        "summary": "Raw core_formulations and compiled report_assets mirrors are byte-for-byte synchronized."
+      }
+    ],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -68937,6 +68990,24 @@
         "at": "2026-07-02T16:12:11.904905Z",
         "status": "user_authorized",
         "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      },
+      {
+        "at": "2026-07-02T17:38:02.409315Z",
+        "from": "user_authorized",
+        "to": "local_checks_passed",
+        "summary": "Reduced claim strength and increased specificity across all 30 EQ core formulations while preserving self-report boundaries and existing scoring/composer behavior."
+      },
+      {
+        "at": "2026-07-02T17:40:33.870507Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "summary": "Opened PR #2618 for scoped core_formulations science-boundary repair; awaiting GitHub checks."
+      },
+      {
+        "at": "2026-07-02T17:49:25.769269Z",
+        "from": "pr_open",
+        "to": "pr_open",
+        "summary": "Rebased PR #2618 onto latest origin/main after external merges and reran local EQ validation successfully."
       }
     ]
   },
