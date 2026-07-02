@@ -3475,6 +3475,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_result_page_registry_content_assets(): void
+    {
+        $changed = [
+            'backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/observation_registry.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/pair_registry.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/sample_report_registry.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/scenario_registry.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/state_registry.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/technical_note_registry.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/theory_hint_registry.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_enneagram_phase8b_candidate_asset_reconciliation_changes(): void
     {
         $changed = [
@@ -4878,6 +4897,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isEnneagramCmsPromotionFile($file)) {
+                continue;
+            }
+
+            if ($this->isEnneagramResultPageRegistryContentAssetFile($file)) {
                 continue;
             }
 
@@ -7686,6 +7709,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isEnneagramForcedChoiceQuestionPackTranslationFile(string $file): bool
     {
         return preg_match('#^backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/(?:questions\\.compiled|manifest)\\.json$#', $file) === 1;
+    }
+
+    private function isEnneagramResultPageRegistryContentAssetFile(string $file): bool
+    {
+        return preg_match('#^backend/content_packs/ENNEAGRAM/v2/registry/[a-z_]+_registry\\.json$#', $file) === 1;
     }
 
     private function isEnneagramPhase8bCandidateAssetReconciliationFile(string $file): bool
