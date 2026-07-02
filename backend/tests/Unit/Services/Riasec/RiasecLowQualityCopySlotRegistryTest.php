@@ -32,10 +32,19 @@ final class RiasecLowQualityCopySlotRegistryTest extends TestCase
             $this->assertSame('quality_copy', $slot['slot_group']);
             $this->assertSame('authored', $slot['content_status']);
             $this->assertFalse($slot['frontend_fallback_allowed']);
+            $this->assertFalse($slot['user_blame_allowed']);
+            $this->assertFalse($slot['upsell_140q_allowed']);
+            $this->assertFalse($slot['strong_interpretation_allowed']);
+            $this->assertFalse($slot['result_mutation_allowed']);
+            $this->assertNotSame('standard_interest_exploration', $slot['recommended_action_type']);
 
             foreach ($registry->qualityCopyRequiredFields() as $field) {
                 $this->assertArrayHasKey($field, $slot);
-                $this->assertNotEmpty($slot[$field]);
+                if (str_ends_with($field, '_allowed')) {
+                    $this->assertIsBool($slot[$field]);
+                } else {
+                    $this->assertNotEmpty($slot[$field]);
+                }
             }
 
             $this->assertSame([], $registry->validateSlot($slot), $slotName.' should be contract-clean.');
@@ -173,10 +182,39 @@ final class RiasecLowQualityCopySlotRegistryTest extends TestCase
         $registry = new RiasecDeepCopySlotRegistry;
         $slot = $registry->lowQualitySlots()['top_notice'];
         $slot['summary'] = '你答得不好，不认真。请购买 140Q 得到更准结果。';
+        $slot['user_blame_allowed'] = true;
+        $slot['upsell_140q_allowed'] = true;
+        $slot['strong_interpretation_allowed'] = true;
+        $slot['result_mutation_allowed'] = true;
 
         $errors = $registry->validateSlot($slot);
 
         $this->assertContains('forbidden_claim_phrase_non_ascii', $errors);
+        $this->assertContains('quality_copy_user_blame_allowed_must_be_false', $errors);
+        $this->assertContains('quality_copy_upsell_140q_allowed_must_be_false', $errors);
+        $this->assertContains('quality_copy_strong_interpretation_allowed_must_be_false', $errors);
+        $this->assertContains('quality_copy_result_mutation_allowed_must_be_false', $errors);
+    }
+
+    public function test_low_quality_asset_global_policy_is_non_blaming_and_non_mutating(): void
+    {
+        $asset = json_decode((string) file_get_contents(__DIR__.'/../../../../content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json'), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertFalse($asset['user_blame_allowed']);
+        $this->assertFalse($asset['upsell_140q_allowed']);
+        $this->assertFalse($asset['strong_interpretation_allowed']);
+        $this->assertFalse($asset['result_mutation_allowed']);
+        $this->assertFalse($asset['score_mutation_allowed']);
+        $this->assertFalse($asset['measured_holland_code_mutation_allowed']);
+        $this->assertSame('cautious_reading_or_retake_only', $asset['recommended_action_type']);
+
+        foreach ($asset['states'] as $state) {
+            if (($state['quality_state'] ?? '') === 'normal') {
+                continue;
+            }
+            $this->assertFalse($state['strong_interpretation_allowed']);
+            $this->assertNotSame('standard_interest_exploration', $state['recommended_action_type']);
+        }
     }
 
     /**

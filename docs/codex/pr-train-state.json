@@ -21090,7 +21090,7 @@
     "base": "main",
     "branch": "codex/ops-ci-codescan-api-01",
     "checks": {
-      "github": {},
+      "github": [],
       "local": {
         "git_diff_check": "passed",
         "json_validation": "passed",
@@ -21542,7 +21542,7 @@
     "base": "main",
     "branch": "codex/ops-release-workflow-01",
     "checks": {
-      "github": {},
+      "github": [],
       "local": {
         "git_diff_check": "passed",
         "json_parse": "passed",
@@ -32794,7 +32794,7 @@
   },
   "SEO-CMS-CANARY-PREVIEW-01": {
     "branch": "codex/seo-cms-canary-preview-01",
-    "checks": {},
+    "checks": [],
     "commit_sha": "11e82c0c7000bc90f2ec550b83d80a9b941465dc",
     "depends_on": [
       "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
@@ -33191,7 +33191,7 @@
   },
   "SEO-CONTENT-P1-09": {
     "branch": "codex/seo-content-p1-09",
-    "checks": {},
+    "checks": [],
     "commit_sha": "6547f4e08aebd665da98916dd5787a4a23adfed9",
     "depends_on": [
       "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
@@ -40074,7 +40074,7 @@
     "CLINICAL-LAUNCH-02": {
       "base": "main",
       "branch": "codex/clinical-launch-02",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-01"
@@ -40101,7 +40101,7 @@
     "CLINICAL-LAUNCH-03": {
       "base": "main",
       "branch": "codex/clinical-launch-03",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-02"
@@ -40128,7 +40128,7 @@
     "CLINICAL-LAUNCH-04": {
       "base": "main",
       "branch": "codex/clinical-launch-04",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-03"
@@ -40155,7 +40155,7 @@
     "CLINICAL-LAUNCH-05": {
       "base": "main",
       "branch": "codex/clinical-launch-05",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-04"
@@ -40182,7 +40182,7 @@
     "CLINICAL-LAUNCH-06": {
       "base": "main",
       "branch": "codex/clinical-launch-06",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-05"
@@ -40209,7 +40209,7 @@
     "CLINICAL-LAUNCH-07": {
       "base": "main",
       "branch": "codex/clinical-launch-07",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-06"
@@ -40236,7 +40236,7 @@
     "CLINICAL-LAUNCH-08": {
       "base": "main",
       "branch": "codex/clinical-launch-08",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-07"
@@ -40263,7 +40263,7 @@
     "CLINICAL-LAUNCH-09": {
       "base": "main",
       "branch": "codex/clinical-launch-09",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-08"
@@ -40290,7 +40290,7 @@
     "CLINICAL-LAUNCH-10": {
       "base": "main",
       "branch": "codex/clinical-launch-10",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-09"
@@ -40317,7 +40317,7 @@
     "CLINICAL-LAUNCH-11": {
       "base": "main",
       "branch": "codex/clinical-launch-11",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-10"
@@ -40344,7 +40344,7 @@
     "CLINICAL-LAUNCH-12": {
       "base": "main",
       "branch": "codex/clinical-launch-12",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-11"
@@ -40371,7 +40371,7 @@
     "CLINICAL-LAUNCH-13": {
       "base": "main",
       "branch": "codex/clinical-launch-13",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-12"
@@ -40398,7 +40398,7 @@
     "CLINICAL-LAUNCH-14": {
       "base": "main",
       "branch": "codex/clinical-launch-14",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-13"
@@ -40425,7 +40425,7 @@
     "CLINICAL-LAUNCH-15": {
       "base": "main",
       "branch": "codex/clinical-launch-15",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-14"
@@ -40452,7 +40452,7 @@
     "CLINICAL-LAUNCH-16": {
       "base": "main",
       "branch": "codex/clinical-launch-16",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-15"
@@ -40479,7 +40479,7 @@
     "CLINICAL-LAUNCH-17": {
       "base": "main",
       "branch": "codex/clinical-launch-17",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-16"
@@ -40506,7 +40506,7 @@
     "CLINICAL-LAUNCH-18": {
       "base": "main",
       "branch": "codex/clinical-launch-18",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-17"
@@ -40533,7 +40533,7 @@
     "CLINICAL-LAUNCH-19": {
       "base": "main",
       "branch": "codex/clinical-launch-19",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-18"
@@ -40560,7 +40560,7 @@
     "CLINICAL-LAUNCH-20": {
       "base": "main",
       "branch": "codex/clinical-launch-20",
-      "checks": {},
+      "checks": [],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-19"
@@ -44977,7 +44977,7 @@
     "IQ-CMS-MEDIA-02": {
       "base": "main",
       "branch": "codex/iq-cms-media-02-rendering-guard",
-      "checks": {},
+      "checks": [],
       "depends_on": [
         "IQ-CMS-MEDIA-01"
       ],
@@ -45568,7 +45568,7 @@
     "IQ-PAID-REPORT-01": {
       "base": "main",
       "branch": "codex/iq-paid-report-01-entitlement-contract",
-      "checks": {},
+      "checks": [],
       "commit_sha": "60eabe326f7e24e71a1bef555493dc9a1d6e6f13",
       "depends_on": [
         "IQ-NORM-03"
@@ -45606,7 +45606,7 @@
     "IQ-PAID-REPORT-02": {
       "base": "main",
       "branch": "codex/iq-paid-report-02-render-entitlement-states",
-      "checks": {},
+      "checks": [],
       "depends_on": [
         "IQ-PAID-REPORT-01"
       ],
@@ -45636,7 +45636,7 @@
     "IQ-RELEASE-01": {
       "base": "main",
       "branch": "codex/iq-release-01-launch-readiness-ledger",
-      "checks": {},
+      "checks": [],
       "depends_on": [
         "IQ-OBS-01"
       ],
@@ -45758,7 +45758,7 @@
     "IQ-SEO-RAMP-02": {
       "base": "main",
       "branch": "codex/iq-seo-ramp-02-indexation-gate",
-      "checks": {},
+      "checks": [],
       "depends_on": [
         "IQ-SEO-RAMP-01"
       ],
@@ -54393,7 +54393,7 @@
         "docs/codex/pr-train-state.json"
       ],
       "branch": "codex/riasec-personalization-06-frontend-fail-closed",
-      "checks": {},
+      "checks": [],
       "commit_sha": "bb01c378674b28857b98ddbdf3d657144ef3b83e",
       "depends_on": [
         "RIASEC-PERSONALIZATION-03",
@@ -54417,7 +54417,7 @@
         "docs/codex/pr-train-state.json"
       ],
       "branch": "codex/riasec-personalization-07-fixture-matrix",
-      "checks": {},
+      "checks": [],
       "commit_sha": "7740b1b09ce6dddb693ac5dbcf8a1d027b0db08b",
       "depends_on": [
         "RIASEC-PERSONALIZATION-01",
@@ -54441,7 +54441,7 @@
     "SEARCH-CHANNEL-LIVE-MBTI-01": {
       "branch": "codex/search-channel-live-mbti-01-preflight",
       "checks": {
-        "github": {},
+        "github": [],
         "local": {
           "focused_live_preflight_test": "passed: php artisan test --filter=SeoIntelSearchChannelLiveMbti01Preflight --no-ansi (1 test, 25 assertions)",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -54499,7 +54499,7 @@
     "SEARCH-CHANNEL-LIVE-MBTI-02": {
       "branch": "codex/search-channel-live-mbti-02",
       "checks": {
-        "github": {},
+        "github": [],
         "local": {
           "focused_live_submission_test": "passed: php artisan test --filter=SeoIntelSearchChannelLiveMbti02 --no-ansi (1 test, 14 assertions)",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -54569,7 +54569,7 @@
     "SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW": {
       "branch": "codex/search-channel-live-mbti-02-24h-review",
       "checks": {
-        "github": {},
+        "github": [],
         "local": {
           "focused_twenty_four_hour_review_test": "passed_with_warnings: php artisan test --filter=SeoIntelSearchChannelLiveMbti02TwentyFourHourReview --no-ansi exited 0 with 1 warning and 14 assertions",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -57921,7 +57921,7 @@
     "SEO-GROWTH-MBTI-ACTION-01B": {
       "branch": "codex/seo-growth-mbti-action-01b-enqueue",
       "checks": {
-        "github": {},
+        "github": [],
         "local": {
           "focused_enqueue_report_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bSearchChannelEnqueue --no-ansi (5 tests, 31 assertions)",
           "git_diff_check": "passed: git diff --check",
@@ -57977,7 +57977,7 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-01": {
       "branch": "codex/seo-growth-mbti-action-01b-fix-01",
       "checks": {
-        "github": {},
+        "github": [],
         "local": {
           "command_help": "passed: php artisan seo-intel:search-channel-queue --help exposes --canonical-url and --enqueue",
           "focused_single_url_command_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommand --no-ansi (9 tests, 64 assertions)",
@@ -58030,7 +58030,7 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02": {
       "branch": "codex/seo-growth-mbti-action-01b-fix-02",
       "checks": {
-        "github": {},
+        "github": [],
         "local": {
           "focused_url_truth_alignment_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02UrlTruthAlignment --no-ansi (1 test, 34 assertions)",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -58155,7 +58155,7 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-PREFLIGHT": {
       "branch": "codex/seo-growth-mbti-action-01b-fix-02-prod-preflight",
       "checks": {
-        "github": {},
+        "github": [],
         "local": {
           "focused_prod_preflight_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02ProdPreflight --no-ansi (5 tests, 29 assertions)",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -58465,7 +58465,7 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-PLAN": {
       "branch": "codex/seo-growth-mbti-action-01b-fix-02-www-cleanup-plan",
       "checks": {
-        "github": {},
+        "github": [],
         "local": {
           "focused_www_cleanup_plan_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02WwwCanonicalCleanupPlan --no-ansi (4 tests, 30 assertions)",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -58716,7 +58716,7 @@
     "SEO-GROWTH-MBTI-ACTION-01B-R2": {
       "branch": "codex/seo-growth-mbti-action-01b-r2-enqueue",
       "checks": {
-        "github": {},
+        "github": [],
         "local": {
           "focused_enqueue_report_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bR2SearchChannelEnqueue --no-ansi (1 test, 17 assertions)",
           "git_diff_check": "passed: git diff --check",
@@ -60539,7 +60539,7 @@
     },
     "iq-commerce-unlock-199-500": {
       "branch": "codex/iq-commerce-unlock-199-500",
-      "checks": {},
+      "checks": [],
       "depends_on": [
         "iq-report-builder-three-dimension-result-schema"
       ],
@@ -71096,8 +71096,8 @@
       "RIASEC-CONTENT-140CTA-01",
       "RIASEC-CONTENT-140CTX-02"
     ],
-    "status": "pr_opened",
-    "commit_sha": "20d37478bfb78b3f70abd232b3e0b29ed82cf881",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "181f6ea612071f275b7a3e778aa8bbd5c0d29b01",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2644",
     "checks": {
       "phpunit_140q_layer_tests": {
@@ -71121,14 +71121,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T20:22:26Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
-      "post_merge_revalidated": false,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
         "backend/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl",
@@ -71155,6 +71155,12 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2644 after 140LAYER-01 local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T20:29:24Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2644 merge commit verified on origin/main; local main synced in occupied main worktree; task branch cleanup verified before RIASEC-CONTENT-QUALITY-01."
       }
     ]
   },
@@ -71168,19 +71174,50 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "authorized_pending_start",
+    "status": "local_validation_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "targeted_quality_tests": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecQualityRuleContractTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "17 tests, 681 assertions"
+      },
+      "full_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "179 tests, 112966 assertions"
+      },
+      "pint": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecQualityRuleContract.php tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecQualityRuleContractTest.php",
+        "status": "passed"
+      },
+      "json_parse": {
+        "command": "jq empty backend/content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json",
+        "status": "passed"
+      },
+      "diff_check": {
+        "command": "git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json",
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/app/Services/Riasec/RiasecQualityRuleContract.php",
+        "backend/tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecQualityRuleContractTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -71188,6 +71225,12 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T20:29:24Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "QUALITY-01 repaired low-quality/cautious reading boundaries; targeted tests, full RIASEC unit subset, Pint, JSON parse, and diff check passed before commit."
       }
     ]
   },
@@ -71204,7 +71247,7 @@
     "status": "authorized_pending_start",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -71237,7 +71280,7 @@
     "status": "authorized_pending_start",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -71270,7 +71313,7 @@
     "status": "authorized_pending_start",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -71318,7 +71361,7 @@
     "status": "authorized_pending_start",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73380,7 +73423,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73412,7 +73455,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73444,7 +73487,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73476,7 +73519,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73508,7 +73551,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73540,7 +73583,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73572,7 +73615,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73604,7 +73647,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73636,7 +73679,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73668,7 +73711,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73700,7 +73743,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73732,7 +73775,7 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": [],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,

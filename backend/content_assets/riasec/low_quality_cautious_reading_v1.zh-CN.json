@@ -5,7 +5,7 @@
   "scale_code": "RIASEC",
   "review_status": "content_review_v7_3_final_preflight_candidate",
   "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
-  "global_message": "这次结果请谨慎阅读。它可以作为六维兴趣草图，帮助你先观察哪些活动让你愿意靠近、哪些活动明显负担；暂时不适合展开强组合解释、职业场景例子或深度承接。",
+  "global_message": "这次结果请谨慎阅读。它只适合作为本次作答条件下的六维兴趣草图，帮助你先观察哪些活动让你愿意靠近、哪些活动明显负担；暂时不适合展开强组合解释、职业场景例子或深度承接。",
   "states": [
     {
       "quality_state": "normal",
@@ -16,7 +16,10 @@
         "activity_explorer",
         "140q_cta"
       ],
-      "copy": "本次结果可以作为职业兴趣探索入口。"
+      "copy": "本次结果可以作为职业兴趣探索入口，但仍然只说明兴趣线索，不代表能力、身份或职业结论。",
+      "reading_strength": "normal_reading",
+      "strong_interpretation_allowed": true,
+      "recommended_action_type": "standard_interest_exploration"
     },
     {
       "quality_state": "caution",
@@ -26,7 +29,10 @@
         "pair_blend_collapsed",
         "activity_explorer_limited"
       ],
-      "copy": "本次结果可读，但建议把强结论降级为“待观察线索”。"
+      "copy": "本次结果可读，但建议把强结论降级为“待观察线索”；先用小实验确认活动吸引力，不急着做职业判断。",
+      "reading_strength": "cautious_reading",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_low_risk_observation"
     },
     {
       "quality_state": "low_quality",
@@ -34,7 +40,10 @@
         "dimension_map_only",
         "retake_guidance"
       ],
-      "copy": "先暂缓强调三字母 Code，只看六维初步线索，并建议稍后重测。"
+      "copy": "先暂缓强调三字母 Code，只看六维初步线索；如果当时赶时间、分心或题目想象困难，建议稍后在状态稳定时重测。",
+      "reading_strength": "retake_recommended",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
     },
     {
       "quality_state": "minimal_60q",
@@ -42,7 +51,10 @@
         "dimension_map",
         "method_boundary"
       ],
-      "copy": "60Q 当前只在明确缺题或完成度不足时强降级；其他情况只做谨慎提示。"
+      "copy": "60Q 当前只在明确缺题或完成度不足时强降级；其他较弱信号只做谨慎提示，不把 60Q 写成低质量人格判断。",
+      "reading_strength": "cautious_reading",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "minimal_boundary_cautious_reading"
     },
     {
       "quality_state": "retake_recommended",
@@ -50,29 +62,45 @@
         "retake_card",
         "safe_boundary"
       ],
-      "copy": "重测建议是为了获得更稳定的兴趣线索，不是为了追求某个“好看结果”。"
+      "copy": "重测建议是为了获得更稳定的兴趣线索，不是为了追求某个“好看结果”，也不是要求进入更长版本。",
+      "reading_strength": "retake_recommended",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "retake_when_ready"
     }
   ],
   "copy_slots": [
     {
       "slot": "top_notice",
-      "text": "本次结果需要谨慎阅读。你可以先保留它作为初步兴趣线索。"
+      "text": "本次结果需要谨慎阅读。你可以先保留它作为初步兴趣线索，不用把三字母 Code 当成固定身份或职业判断。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
     },
     {
       "slot": "retake_guidance",
-      "text": "如果你当时注意力分散、赶时间或对题目想象不清，可以稍后在状态稳定时重测。"
+      "text": "如果你当时注意力分散、赶时间或对题目想象不清，可以稍后在状态稳定时重测；这只是改善作答条件，不是责备你，也不是要求购买更长版本。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "retake_when_ready"
     },
     {
       "slot": "module_downgrade",
-      "text": "页面会减少强解释和职业场景展示，避免把不稳定结果读成方向判断。"
+      "text": "页面会减少强解释、职业场景展示和深度组合承接，避免把本次不稳定线索读成方向判断。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "hide_strong_interpretation"
     },
     {
       "slot": "share_pdf_note",
-      "text": "谨慎阅读结果在分享和 PDF 中应默认展示边界提示，不展示强活动线索组合。"
+      "text": "谨慎阅读结果在分享和 PDF 中应默认展示边界提示，不展示强活动线索组合、职业例子或公开 Holland Code 摘要。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "safe_private_record_only"
     }
   ],
   "upsell_140q_allowed": false,
   "user_blame_allowed": false,
+  "strong_interpretation_allowed": false,
+  "result_mutation_allowed": false,
+  "score_mutation_allowed": false,
+  "measured_holland_code_mutation_allowed": false,
+  "recommended_action_type": "cautious_reading_or_retake_only",
   "required_boundaries": [
     "interest_evidence_only",
     "not_personality_identity",

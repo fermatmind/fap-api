@@ -1027,6 +1027,21 @@ final class RiasecDeepCopySlotRegistry
             if (! in_array((string) ($slot['quality_state'] ?? ''), self::QUALITY_COPY_STATES, true)) {
                 $errors[] = 'unsupported_quality_copy_state';
             }
+            foreach (['user_blame_allowed', 'upsell_140q_allowed', 'strong_interpretation_allowed', 'result_mutation_allowed'] as $flag) {
+                if (($slot[$flag] ?? true) !== false) {
+                    $errors[] = 'quality_copy_'.$flag.'_must_be_false';
+                }
+            }
+            if (! in_array((string) ($slot['recommended_action_type'] ?? ''), [
+                'cautious_reading_or_retake_only',
+                'cautious_reading_or_low_risk_observation',
+                'minimal_boundary_cautious_reading',
+                'retake_when_ready',
+                'hide_strong_interpretation',
+                'safe_private_record_only',
+            ], true)) {
+                $errors[] = 'unsupported_quality_copy_recommended_action_type';
+            }
         }
 
         if (($slot['slot_group'] ?? null) === 'structural_difference_copy') {
@@ -1204,6 +1219,11 @@ final class RiasecDeepCopySlotRegistry
             'content_version',
             'evidence_level',
             'content_status',
+            'user_blame_allowed',
+            'upsell_140q_allowed',
+            'strong_interpretation_allowed',
+            'result_mutation_allowed',
+            'recommended_action_type',
         ];
     }
 
@@ -1943,11 +1963,22 @@ final class RiasecDeepCopySlotRegistry
             if ($slotName === null) {
                 continue;
             }
+            $recommendedActionType = (string) ($row['recommended_action_type'] ?? match ($slotName) {
+                'retake_guidance' => 'retake_when_ready',
+                'hidden_modules_explanation' => 'hide_strong_interpretation',
+                'share_pdf_boundary' => 'safe_private_record_only',
+                default => 'cautious_reading_or_retake_only',
+            });
             $copyBySlot[$slotName] = [
                 'title' => (string) ($this->lowQualitySlotTitle($slotName)),
                 'summary' => (string) ($row['text'] ?? ''),
                 'content_version' => (string) ($asset['asset_id'] ?? 'low_quality_cautious_reading_v1.zh-CN'),
                 'user_visible_boundary' => '质量状态只限制本次结果的阅读强度，不评价用户，也不改变分数或 Holland Code。',
+                'user_blame_allowed' => false,
+                'upsell_140q_allowed' => false,
+                'strong_interpretation_allowed' => false,
+                'result_mutation_allowed' => false,
+                'recommended_action_type' => $recommendedActionType,
             ];
         }
 
@@ -1964,6 +1995,11 @@ final class RiasecDeepCopySlotRegistry
                 'quality_state' => 'caution',
                 'content_version' => (string) ($asset['asset_id'] ?? 'low_quality_cautious_reading_v1.zh-CN'),
                 'user_visible_boundary' => '谨慎阅读只说明本次线索需要观察，不是结果无效，也不是能力判断。',
+                'user_blame_allowed' => false,
+                'upsell_140q_allowed' => false,
+                'strong_interpretation_allowed' => false,
+                'result_mutation_allowed' => false,
+                'recommended_action_type' => 'cautious_reading_or_low_risk_observation',
             ];
         }
         if (($states['minimal_60q'] ?? '') !== '') {
@@ -1973,6 +2009,11 @@ final class RiasecDeepCopySlotRegistry
                 'quality_state' => 'minimal_quality_boundary_60q',
                 'content_version' => (string) ($asset['asset_id'] ?? 'low_quality_cautious_reading_v1.zh-CN'),
                 'user_visible_boundary' => '60Q 的质量边界只限制阅读方式，不比较 60Q 和 140Q 的正确性。',
+                'user_blame_allowed' => false,
+                'upsell_140q_allowed' => false,
+                'strong_interpretation_allowed' => false,
+                'result_mutation_allowed' => false,
+                'recommended_action_type' => 'minimal_boundary_cautious_reading',
             ];
         }
 
@@ -2287,6 +2328,11 @@ final class RiasecDeepCopySlotRegistry
             'fallback_behavior' => 'omit_module',
             'content_status' => 'authored',
             'frontend_fallback_allowed' => false,
+            'user_blame_allowed' => false,
+            'upsell_140q_allowed' => false,
+            'strong_interpretation_allowed' => false,
+            'result_mutation_allowed' => false,
+            'recommended_action_type' => 'cautious_reading_or_retake_only',
         ], $content);
     }
 

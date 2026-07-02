@@ -55,6 +55,9 @@ final class RiasecQualityRuleContract
                 'show_activity_chain' => $qualityState !== 'low_quality',
                 'show_occupation_examples' => $qualityState === 'normal',
                 'allow_140q_cta' => $qualityState !== 'low_quality',
+                'user_blame_allowed' => false,
+                'upsell_140q_allowed' => $qualityState !== 'low_quality',
+                'strong_interpretation_allowed' => $qualityState === 'normal',
                 'cta_strength' => match ($qualityState) {
                     'normal' => 'standard',
                     'caution' => 'soft_or_hidden',
@@ -63,6 +66,15 @@ final class RiasecQualityRuleContract
             ],
             'score_mutation_allowed' => false,
             'measured_holland_code_mutation_allowed' => false,
+            'result_mutation_allowed' => false,
+            'user_blame_allowed' => false,
+            'upsell_140q_allowed' => false,
+            'strong_interpretation_allowed' => $qualityState === 'normal',
+            'recommended_action_type' => match ($qualityState) {
+                'low_quality' => 'cautious_reading_or_retake_only',
+                'caution' => 'cautious_reading_or_low_risk_observation',
+                default => 'standard_interest_exploration',
+            },
             'field_authority' => [
                 'quality_state' => 'backend_owned',
                 'response_quality' => 'backend_owned',
