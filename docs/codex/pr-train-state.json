@@ -314,8 +314,8 @@
     "depends_on": [
       "ENNEA-RP-02"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": "0323841760907c8fbe0d41a1192d6851c73e3f0e",
+    "status": "ready_to_merge",
+    "commit_sha": "4ac309bdcb37c753f1ce3c75f98402f3b47d9aa5",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2616",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -363,6 +363,15 @@
       "pr_open": {
         "status": "pass",
         "evidence": "Opened PR #2616 for ENNEA-RP-03; GitHub checks pending."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "GitHub required checks passed on PR #2616 head b031f31aac0168ca78724d6e1dd5336f8be3b85e before rebasing onto latest origin/main; this ledger update records ready-to-merge state and will be revalidated on the pushed head before merge."
+      },
+      "rebase_latest_main": {
+        "status": "pass",
+        "command": "git fetch origin --prune && git rebase origin/main",
+        "evidence": "Rebased ENNEA-RP-03 branch onto origin/main 99d46cbfbc2bda3f24a30a11c6fee4d4c288517f with no conflicts before ready-to-merge ledger update."
       }
     },
     "scope_validation": {
@@ -378,7 +387,7 @@
         "docs/codex/pr-train-state.json"
       ],
       "status": "pass",
-      "evidence": "Changed files are confined to ENNEA-RP-03 type_registry deep_dive summary fields and PR train state reconciliation."
+      "evidence": "Changed files remain confined to ENNEA-RP-03 type_registry deep_dive summary fields and PR train state metadata after rebase."
     },
     "events": [
       {
@@ -395,6 +404,11 @@
         "at": "2026-07-02T17:34:34Z",
         "status": "pr_open",
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/2616 for ENNEA-RP-03; GitHub checks pending."
+      },
+      {
+        "at": "2026-07-02T17:38:07Z",
+        "status": "ready_to_merge",
+        "notes": "Rebased onto latest origin/main and recorded ready-to-merge state; current pushed head will be revalidated by GitHub checks before merge."
       }
     ]
   },
