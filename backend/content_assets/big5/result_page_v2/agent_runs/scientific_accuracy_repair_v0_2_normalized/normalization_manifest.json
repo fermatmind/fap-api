@@ -1,0 +1,49 @@
+{
+  "schema_version": "fap.big5.result_page_v2.asset_agent.normalization_manifest.v0.1",
+  "task": "scientific_editorial_repair_v0_2_candidate_normalize",
+  "run_id": "scientific_accuracy_repair_v0_2_normalized",
+  "created_at": "2026-07-02T14:50:00+08:00",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "source_package": {
+    "desktop_dir_name": "大五人格结果页专业科学性修复-v0_2-20260702-142336",
+    "source_files": [
+      "all_revised_assets_v0_2.json",
+      "all_revised_assets_v0_2.jsonl",
+      "manual_review_summary_v0_2.md",
+      "remaining_renderer_followups.md"
+    ],
+    "all_revised_assets_sha256": "804de0e75e2aabde6f4d73e6be1b4ec1be019987234a2e23ca845bbbbdff2129"
+  },
+  "counts": {
+    "selector_asset_candidates": 529,
+    "content_asset_candidates": 529
+  },
+  "normalization_rules": [
+    "content candidates remain staging-only and production disabled",
+    "content qa_status is normalized to editorial_reviewed",
+    "selector slot keys are normalized only when needed to satisfy module prefix contract",
+    "selector public payload contains only title/summary/ref plus staging flags",
+    "no staging write is performed in this PR"
+  ],
+  "deferred": [
+    "staging import",
+    "rendered preview QA",
+    "runtime enablement",
+    "production import",
+    "fap-web copy",
+    "CMS/SEO/search"
+  ],
+  "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/scientific_accuracy_repair_v0_2_normalized",
+  "normalization_steps": [
+    "loaded_local_scientific_editorial_repair_v0_2_package",
+    "normalized_content_qa_status_to_editorial_reviewed",
+    "generated_selector_asset_candidates",
+    "mapped_selector_contract_fields_to_existing_allowlists",
+    "ensured_source_trace_bfi2_copy_false",
+    "deferred_staging_import"
+  ]
+}

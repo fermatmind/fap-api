@@ -1,0 +1,108 @@
+{
+  "schema_version": "fap.big5.result_page_v2.asset_agent.source_qa_scan.v0.1",
+  "task": "source_qa_scan",
+  "run_id": "scientific_accuracy_repair_v0_2_normalized",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "source_package": "大五人格结果页专业科学性修复-v0_2-20260702-142336",
+  "source_qa": {
+    "schema": "fap.big5.scientific_accuracy_repair.qa_summary.v0_2",
+    "blocks": [
+      {
+        "block": "01_method_boundary",
+        "status": "pass",
+        "count": 119,
+        "hit_count": 0,
+        "repeated_sentence_count": 0,
+        "thin_body_count": 0
+      },
+      {
+        "block": "02_norm_percentile",
+        "status": "pass",
+        "count": 301,
+        "hit_count": 0,
+        "repeated_sentence_count": 0,
+        "thin_body_count": 0
+      },
+      {
+        "block": "03_profile_framing",
+        "status": "pass",
+        "count": 24,
+        "hit_count": 0,
+        "repeated_sentence_count": 0,
+        "thin_body_count": 0
+      },
+      {
+        "block": "04_quality_low_quality",
+        "status": "pass",
+        "count": 411,
+        "hit_count": 0,
+        "repeated_sentence_count": 0,
+        "thin_body_count": 0
+      },
+      {
+        "block": "05_facets_30",
+        "status": "pass",
+        "count": 38,
+        "hit_count": 0,
+        "repeated_sentence_count": 0,
+        "thin_body_count": 0
+      },
+      {
+        "block": "06_domain_bands",
+        "status": "pass",
+        "count": 33,
+        "hit_count": 0,
+        "repeated_sentence_count": 0,
+        "thin_body_count": 0
+      },
+      {
+        "block": "07_coupling_canonical_profiles",
+        "status": "pass",
+        "count": 82,
+        "hit_count": 0,
+        "repeated_sentence_count": 0,
+        "thin_body_count": 0
+      },
+      {
+        "block": "08_scenario_action",
+        "status": "pass",
+        "count": 168,
+        "hit_count": 0,
+        "repeated_sentence_count": 0,
+        "thin_body_count": 0
+      },
+      {
+        "block": "09_rendered_surface",
+        "status": "pass",
+        "count": 98,
+        "hit_count": 0,
+        "repeated_sentence_count": 0,
+        "thin_body_count": 0
+      }
+    ],
+    "all": {
+      "schema": "fap.big5.scientific_accuracy_repair.qa_scan.v0_2",
+      "block": "all",
+      "status": "pass",
+      "hit_count": 0,
+      "hits": [],
+      "repeat_threshold": 3,
+      "repeated_sentence_count": 0,
+      "repeated_sentences": [],
+      "thin_body_threshold": 160,
+      "thin_body_count": 0,
+      "thin_bodies": [],
+      "ready_for_backend_candidate_normalize": true
+    },
+    "ready_for_backend_candidate_normalize": true
+  },
+  "normalized_candidate_counts": {
+    "selector_asset": 529,
+    "content_asset": 529
+  },
+  "status": "pass",
+  "forbidden_hit_count": 0,
+  "public_text_forbidden_hit_count": 0,
+  "rendered_hygiene_hit_count": 0
+}

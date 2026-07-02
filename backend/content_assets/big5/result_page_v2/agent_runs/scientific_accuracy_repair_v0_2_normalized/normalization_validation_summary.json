@@ -1,0 +1,40 @@
+{
+  "schema_version": "fap.big5.result_page_v2.asset_agent.normalization_validation_summary.v0.1",
+  "task": "normalization_validation_summary",
+  "run_id": "scientific_accuracy_repair_v0_2_normalized",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "json_parse_status": "pass",
+  "content_candidate_count": 529,
+  "selector_candidate_count": 529,
+  "content_flags": {
+    "runtime_use_all_staging_only": true,
+    "production_use_allowed_true_count": 0,
+    "ready_for_runtime_true_count": 0,
+    "ready_for_production_true_count": 0
+  },
+  "selector_flags": {
+    "shareable_true_count": 0,
+    "review_status_all_approved_for_staging": true
+  },
+  "dry_run_stage_candidates": {
+    "required": true,
+    "staging_write_performed": false,
+    "status": "pending_local_validation"
+  },
+  "status": "pass",
+  "stage_candidates_dry_run": {
+    "ok": true,
+    "candidate_validation": {
+      "status": "pass",
+      "error_count": 0
+    },
+    "validation_error_count": 0,
+    "review_error_count": 0,
+    "leak_hit_count": 0,
+    "staging_write_performed": false
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "fap.big5.result_page_v2.asset_agent.v0.1",
+  "task": "candidate_generation_summary",
+  "run_id": "scientific_accuracy_repair_v0_2_normalized",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "candidate_counts": {
+    "selector_asset": 529,
+    "content_asset": 529
+  },
+  "source_package": {
+    "path_redacted": "大五人格结果页专业科学性修复-v0_2-20260702-142336",
+    "asset_count": 529,
+    "source_sha256": "804de0e75e2aabde6f4d73e6be1b4ec1be019987234a2e23ca845bbbbdff2129"
+  },
+  "scope_counts": {
+    "standard": 428,
+    "norm_unavailable": 28,
+    "low_quality": 37,
+    "facet_inconsistent": 18,
+    "retest_recommended": 18
+  },
+  "module_counts": {
+    "module_00_trust_bar": 1,
+    "module_10_method_privacy": 118,
+    "module_08_share_save": 97,
+    "module_03_trait_deep_dive": 33,
+    "module_05_facet_reframe": 38,
+    "module_04_coupling": 58,
+    "module_01_hero": 8,
+    "module_02_quick_understanding": 8,
+    "module_06_application_matrix": 136,
+    "module_07_collaboration_manual": 32
+  },
+  "asset_type_counts": {
+    "trust_bar": 1,
+    "method_boundary": 34,
+    "norms_explanation": 28,
+    "result_state": 55,
+    "privacy_boundary": 1,
+    "share_safe": 25,
+    "domain_band": 25,
+    "facet_reframe": 38,
+    "coupling": 58,
+    "hero_summary": 8,
+    "quick_understanding": 8,
+    "domain_core": 8,
+    "action_plan": 40,
+    "scenario_work": 32,
+    "scenario_relationship": 32,
+    "scenario_stress": 32,
+    "scenario_growth": 32,
+    "pdf_archive": 24,
+    "history_revisit": 24,
+    "compare_guidance": 24
+  },
+  "normalization_notes": [
+    "qa_status normalized to editorial_reviewed for backend schema compatibility",
+    "source_trace.bfi_2_copy_used=false and external_copy_used=false added to every content candidate",
+    "selector assets generated as non-shareable staging-only candidates",
+    "dry-run stage-candidates is required before any staging import PR"
+  ],
+  "status": "pass",
+  "candidate_stage": "scientific_accuracy_repair_v0_2_normalized",
+  "leak_scan": {
+    "hit_count": 0,
+    "status": "pass"
+  },
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "status": "pass"
+  },
+  "negative_guarantees": {
+    "runtime_changed": false,
+    "production_changed": false,
+    "frontend_copy_written": false,
+    "cms_write": false,
+    "seo_or_search_write": false,
+    "final_result_payload_generated": false,
+    "staging_import_written": false
+  }
+}
