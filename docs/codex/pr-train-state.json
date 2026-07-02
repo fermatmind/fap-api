@@ -7,12 +7,12 @@
     "title": "ENNEA-RP-01: fix(enneagram): repair instant summary content asset",
     "train_scope": "enneagram_result_page_content_asset_repair",
     "depends_on": [],
-    "status": "pr_open_rebased_local_validation_passed",
-    "commit_sha": "da6f8b075b228fdf69d6b16343d8e261bd085ca7",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "b20330097483c7283509633656a333d1b6d2007a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2600",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T16:42:37Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "checks": {
       "authorization": {
@@ -98,6 +98,10 @@
           "cd backend && php artisan test --filter=Enneagram"
         ],
         "evidence": "All post-rebase local validation passed again; Enneagram filter completed with 257 existing file_get_contents warnings, 2 passed tests, and 83375 assertions."
+      },
+      "post_merge_cleanup": {
+        "status": "pass",
+        "evidence": "PR #2600 merged as b20330097483c7283509633656a333d1b6d2007a; merge commit confirmed in origin/main; local main fast-forwarded to origin/main; local task branch deleted; remote task branch absent. A separate main-holder worktree retained unrelated untracked Big Five generated artifacts untouched."
       }
     },
     "scope_validation": {
@@ -143,6 +147,11 @@
         "at": "2026-07-02T16:32:18Z",
         "status": "pr_open_rebased_local_validation_passed",
         "notes": "Rebased PR #2600 onto origin/main b026ae56f after mergeStateStatus DIRTY from concurrent main update; post-rebase local validation passed."
+      },
+      {
+        "at": "2026-07-02T16:51:47Z",
+        "status": "merged_post_merge_revalidated",
+        "notes": "Reconciled ENNEA-RP-01 merged state while starting ENNEA-RP-02 from latest origin/main."
       }
     ]
   },
@@ -156,7 +165,7 @@
     "depends_on": [
       "ENNEA-RP-01"
     ],
-    "status": "pending_dependency",
+    "status": "local_validation_passed",
     "commit_sha": null,
     "pr_url": null,
     "merged_at": null,
@@ -167,6 +176,40 @@
       "authorization": {
         "status": "pass",
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-01 merged as PR #2600 and merge commit b20330097483c7283509633656a333d1b6d2007a is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "2 tests completed with 14509 assertions; warnings are existing file_get_contents notices."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "3 tests completed with 26 assertions; warnings are existing file_get_contents notices."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "11 tests completed with 102 assertions; warnings are existing file_get_contents notices."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "259 Enneagram-filtered tests completed with 83375 assertions; warnings are existing file_get_contents notices."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
       }
     },
     "scope_validation": {
@@ -176,13 +219,24 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [],
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "status": "pass",
+      "evidence": "Changed files are confined to ENNEA-RP-02 type_registry Top3 card fields and PR train state reconciliation."
     },
     "events": [
       {
         "at": "2026-07-02T16:10:24Z",
         "status": "pending_dependency",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge."
+      },
+      {
+        "at": "2026-07-02T16:51:47Z",
+        "status": "local_validation_passed",
+        "notes": "Repaired Top3 card consumed type registry fields for all nine types with candidate/hypothesis/observation language and passed local validation."
       }
     ]
   },
