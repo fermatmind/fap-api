@@ -49,7 +49,15 @@ final class RiasecActivityExplorerServiceTest extends TestCase
                 $this->assertSame('活动场景例子，不是结果答案', data_get($example, 'display_label'));
                 $this->assertSame('occupation_examples_boundary_v1.zh-CN', data_get($example, 'content_version'));
                 $this->assertTrue((bool) data_get($example, 'not_a_recommendation'));
+                $this->assertTrue((bool) data_get($example, 'examples_only'));
+                $this->assertFalse((bool) data_get($example, 'ranking_allowed'));
                 $this->assertFalse((bool) data_get($example, 'fit_score_allowed'));
+                $this->assertFalse((bool) data_get($example, 'success_prediction_allowed'));
+                $this->assertFalse((bool) data_get($example, 'qualification_judgment_allowed'));
+                $this->assertTrue((bool) data_get($example, 'public_surfaces.result_page_allowed'));
+                $this->assertFalse((bool) data_get($example, 'public_surfaces.share_card_allowed'));
+                $this->assertFalse((bool) data_get($example, 'public_surfaces.pdf_default_visible'));
+                $this->assertFalse((bool) data_get($example, 'public_surfaces.history_default_visible'));
                 $this->assertNotEmpty(data_get($example, 'education_boundary'));
                 $this->assertNotEmpty(data_get($example, 'skill_boundary'));
                 $this->assertNotEmpty(data_get($example, 'qualification_boundary'));
@@ -135,6 +143,47 @@ final class RiasecActivityExplorerServiceTest extends TestCase
         $this->assertSame('available', data_get($payload, 'code_activity_pack.status'));
         $this->assertCount(9, (array) data_get($payload, 'code_activity_pack.activities'));
         $this->assertSame([], data_get($payload, 'code_activity_pack.occupation_examples'));
+    }
+
+    public function test_occupation_examples_are_public_safe_examples_not_ranked_recommendations(): void
+    {
+        $service = new RiasecActivityExplorerService;
+
+        foreach (['IAS', 'RCE', 'EAS', 'CRI', 'SIC', 'ERC', 'AIR', 'CSE', 'RES'] as $code) {
+            $payload = $service->build($code, 'zh-CN');
+
+            $this->assertFalse((bool) data_get($payload, 'boundary.ranking_allowed'));
+            $this->assertFalse((bool) data_get($payload, 'boundary.fit_score_allowed'));
+            $this->assertFalse((bool) data_get($payload, 'boundary.success_prediction_allowed'));
+            $this->assertFalse((bool) data_get($payload, 'boundary.qualification_judgment_allowed'));
+            $this->assertFalse((bool) data_get($payload, 'boundary.occupation_examples_share_card_allowed'));
+            $this->assertFalse((bool) data_get($payload, 'boundary.occupation_examples_pdf_default_visible'));
+            $this->assertFalse((bool) data_get($payload, 'boundary.occupation_examples_history_default_visible'));
+            $this->assertSame([], data_get($payload, 'code_activity_pack.occupation_examples'));
+
+            foreach ((array) data_get($payload, 'code_activity_pack.activities', []) as $activity) {
+                foreach ((array) data_get($activity, 'occupation_examples', []) as $example) {
+                    $this->assertSame('活动场景例子，不是结果答案', data_get($example, 'display_label'));
+                    $this->assertTrue((bool) data_get($example, 'not_a_recommendation'));
+                    $this->assertTrue((bool) data_get($example, 'examples_only'));
+                    $this->assertFalse((bool) data_get($example, 'ranking_allowed'));
+                    $this->assertFalse((bool) data_get($example, 'fit_score_allowed'));
+                    $this->assertFalse((bool) data_get($example, 'success_prediction_allowed'));
+                    $this->assertFalse((bool) data_get($example, 'qualification_judgment_allowed'));
+                    $this->assertTrue((bool) data_get($example, 'public_surfaces.result_page_allowed'));
+                    $this->assertFalse((bool) data_get($example, 'public_surfaces.share_card_allowed'));
+                    $this->assertFalse((bool) data_get($example, 'public_surfaces.pdf_default_visible'));
+                    $this->assertFalse((bool) data_get($example, 'public_surfaces.history_default_visible'));
+
+                    $this->assertArrayNotHasKey('source_url', (array) $example);
+                    $this->assertArrayNotHasKey('onet_code', (array) $example);
+                    $this->assertArrayNotHasKey('soc_code', (array) $example);
+                    $this->assertArrayNotHasKey('fit_score', (array) $example);
+                    $this->assertArrayNotHasKey('rank', (array) $example);
+                    $this->assertArrayNotHasKey('success_prediction', (array) $example);
+                }
+            }
+        }
     }
 
     public function test_activity_pack_fails_closed_when_asset_is_invalid_or_incomplete(): void
