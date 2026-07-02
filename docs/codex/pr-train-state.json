@@ -70056,9 +70056,9 @@
     "depends_on": [
       "RIASEC-CONTENT-OCC-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": "7edceffc52fa3fa83f44441765a9c84b67db0072",
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "527269ead2939ccdf5c109a31d83ce63fb0f7420",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2624",
     "checks": {
       "phpunit_activity_explorer_and_occupation_projection": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php --no-ansi --display-warnings",
@@ -70107,6 +70107,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Hardened occupation example projection boundaries and public surface flags; local RIASEC unit subset and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T18:02:40Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2624 after OCC-02 local validation, latest-main ancestry check, and scope validation passed."
       }
     ]
   },
