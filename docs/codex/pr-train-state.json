@@ -69817,8 +69817,8 @@
     "depends_on": [
       "RIASEC-CONTENT-ACTIVITY-01"
     ],
-    "status": "pr_opened",
-    "commit_sha": "336e40fdc6b4b0ead7a7df3374c093363da9c809",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "25d1a710c1a0d1972a847735b565690ed55bcc60",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2617",
     "checks": {
       "phpunit_activity_explorer_service": {
@@ -69838,22 +69838,31 @@
       "manifest_state_parse_and_diff_check": {
         "command": "ruby YAML parse; python JSON parse; git diff --check",
         "status": "passed"
+      },
+      "github_required_checks": {
+        "command": "gh pr view 2617 --json statusCheckRollup,mergeStateStatus",
+        "status": "passed",
+        "summary": "All reported GitHub CI and Code Scanning checks succeeded; mergeStateStatus CLEAN before squash merge."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T17:41:51Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/app/Services/Riasec/RiasecActivityExplorerService.php",
         "backend/tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php",
         "docs/codex/pr-train-state.json"
-      ]
+      ],
+      "origin_main_contains_merge_commit": true,
+      "local_main_synced": true,
+      "local_main_equals_origin_main": true,
+      "clean_worktree_after_cleanup": true
     },
     "transitions": [
       {
@@ -69873,8 +69882,15 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2617 after ACTIVITY-02 local validation, latest-main rebase, and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T17:47:03Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2617 merged; origin/main contains merge commit; local main synced; task branches cleaned. Recorded during OCC-01 ledger reconciliation."
       }
-    ]
+    ],
+    "merge_commit_sha": "c6aacd6380ce4508e88eee44d576cc20f4a0aa99"
   },
   "RIASEC-CONTENT-OCC-01": {
     "id": "RIASEC-CONTENT-OCC-01",
@@ -69886,19 +69902,50 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "authorized_pending_start",
+    "status": "local_validation_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "phpunit_occupation_preflight": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "4 tests, 36017 assertions"
+      },
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "169 tests, 100071 assertions"
+      },
+      "pint": {
+        "command": "cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php",
+        "status": "passed"
+      },
+      "asset_jsonl_preflight": {
+        "command": "python3 JSONL decode and forbidden-claim/template repetition scan for source asset and fixture",
+        "status": "passed",
+        "summary": "360 records in each file; 360 unique occupation labels, why copy, task sets, and reality checks; 0 forbidden hits"
+      },
+      "manifest_state_parse_and_diff_check": {
+        "command": "ruby YAML parse; python JSON parse; git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl",
+        "backend/docs/riasec/occupation-examples-pack-06-preflight.md",
+        "backend/tests/Fixtures/Riasec/occupation_examples_boundary_v1.zh-CN.jsonl",
+        "backend/tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -69906,6 +69953,12 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T17:47:03Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Repaired OCC-01 360-row occupation example content asset; local RIASEC unit subset and scope validation passed."
       }
     ]
   },
