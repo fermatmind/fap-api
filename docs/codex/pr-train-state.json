@@ -71736,5 +71736,451 @@
         "note": "Registered authorized SECURITY-169-API-40; execution waits for declared dependency merge."
       }
     ]
+  },
+  "BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01": {
+    "id": "BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-content-asset-scientific-audit-mapping-01",
+    "base": "main",
+    "title": "BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01: Big Five content asset scientific audit mapping",
+    "status": "pr_open",
+    "depends_on": [],
+    "commit_sha": "f1928cea8cdac9d417c8e635d2ebdbb90e43668a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2602",
+    "checks": {
+      "local": {
+        "php_artisan_big5_result_page_v2_agent_audit_strict": "passed",
+        "BigFiveResultPageV2AssetAgentTest": "passed_with_phpunit_warnings_exit_0",
+        "BigFiveResultPageV2SelectorAssetValidatorTest": "passed_with_phpunit_warnings_exit_0",
+        "BigFiveResultPageV2ContentAssetLookupTest": "passed_with_phpunit_warnings_exit_0",
+        "json_parse": "passed",
+        "yaml_parse": "passed",
+        "git_diff_check": "passed",
+        "scope_validation": "passed"
+      },
+      "github": null
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "allowed_paths": [
+        "backend/generated/big5_content_asset_scientific_audit/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "notes": "Only PR1 audit mapping artifacts and authorized train metadata are changed. backend/vendor is ignored and not staged."
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      },
+      {
+        "at": "2026-07-02T16:13:00Z",
+        "from": "authorized",
+        "to": "in_progress",
+        "note": "Started PR1 from latest origin/main in clean worktree; scope limited to audit mapping artifacts and authorized train metadata."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-07-02T16:23:38Z",
+        "note": "Local audit, focused PHPUnit checks, JSON/YAML parse, git diff check, and scope validation passed."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-07-02T16:25:30Z",
+        "note": "Opened PR #2602 after local validation and scope validation passed."
+      }
+    ],
+    "updated_at": "2026-07-02T16:25:30Z"
+  },
+  "BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01": {
+    "id": "BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-selector-public-payload-hygiene-01",
+    "base": "main",
+    "title": "BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01: Big Five selector public payload hygiene",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
+  },
+  "BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01": {
+    "id": "BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-method-boundary-scientific-repair-01",
+    "base": "main",
+    "title": "BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01: Big Five method boundary scientific repair",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
+  },
+  "BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01": {
+    "id": "BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-domain-bands-scientific-repair-01",
+    "base": "main",
+    "title": "BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01: Big Five domain bands scientific repair",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
+  },
+  "BIG5-FACETS-30-SCIENTIFIC-REPAIR-01": {
+    "id": "BIG5-FACETS-30-SCIENTIFIC-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-facets-30-scientific-repair-01",
+    "base": "main",
+    "title": "BIG5-FACETS-30-SCIENTIFIC-REPAIR-01: Big Five 30 facets scientific repair",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
+  },
+  "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01": {
+    "id": "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-coupling-variants-scientific-repair-01",
+    "base": "main",
+    "title": "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01: Big Five coupling variants scientific repair",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-FACETS-30-SCIENTIFIC-REPAIR-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
+  },
+  "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01": {
+    "id": "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-share-safety-scientific-repair-01",
+    "base": "main",
+    "title": "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01: Big Five share safety scientific repair",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
+  },
+  "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01": {
+    "id": "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-low-quality-scientific-repair-01",
+    "base": "main",
+    "title": "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01: Big Five low quality scientific repair",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
+  },
+  "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01": {
+    "id": "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-norm-unavailable-scientific-repair-01",
+    "base": "main",
+    "title": "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01: Big Five norm unavailable scientific repair",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
+  },
+  "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01": {
+    "id": "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-rendered-surface-qa-content-repair-01",
+    "base": "main",
+    "title": "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01: Big Five rendered surface QA content repair",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
+  },
+  "BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01": {
+    "id": "BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-canonical-profiles-scientific-repair-01",
+    "base": "main",
+    "title": "BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01: Big Five canonical profiles scientific repair",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
+  },
+  "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01": {
+    "id": "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-scenario-action-scientific-repair-01",
+    "base": "main",
+    "title": "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01: Big Five scenario action scientific repair",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
+  },
+  "BIG5-CONTENT-ASSET-SCIENTIFIC-REPAIR-FULL-QA-01": {
+    "id": "BIG5-CONTENT-ASSET-SCIENTIFIC-REPAIR-FULL-QA-01",
+    "repo": "fap-api",
+    "branch": "codex/big5-content-asset-scientific-repair-full-qa-01",
+    "base": "main",
+    "title": "BIG5-CONTENT-ASSET-SCIENTIFIC-REPAIR-FULL-QA-01: Big Five content asset scientific repair full QA",
+    "status": "authorized",
+    "depends_on": [
+      "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:11:40Z",
+        "from": null,
+        "to": "authorized",
+        "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      }
+    ]
   }
 }
