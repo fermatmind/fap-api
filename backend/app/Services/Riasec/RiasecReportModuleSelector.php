@@ -59,7 +59,7 @@ final class RiasecReportModuleSelector
         return [
             'hero_activity_chain' => $this->module('hero_activity_chain', 'visible', 'standard_reading_available'),
             'six_dimension_map' => $this->module('six_dimension_map', 'visible', 'dimension_overview_available'),
-            'pair_blend' => $this->module('pair_blend', 'visible', 'combination_reading_available'),
+            'pair_blend' => $this->module('pair_blend', 'visible', 'clear_or_blended_pair_context_available', 'pair_blend_is_context_not_fit_or_ranking'),
             'activity_explorer' => $this->module('activity_explorer', 'visible', 'examples_only_activity_explorer_available'),
             'occupation_examples' => $this->module('occupation_examples', 'collapsed', 'examples_only_not_registry_match'),
             '140q_cta' => $this->module('140q_cta', $formCode === 'riasec_140' ? 'hidden' : 'visible', 'contextual_form_optional_not_more_accurate'),
@@ -78,7 +78,7 @@ final class RiasecReportModuleSelector
     private function applyLowQuality(array $modules): array
     {
         foreach (['hero_activity_chain', 'pair_blend', 'activity_explorer', 'occupation_examples', '140q_cta', '140q_context_cards'] as $key) {
-            $modules[$key] = $this->module($key, 'hidden', 'low_quality_hides_strong_modules');
+            $modules[$key] = $this->module($key, 'hidden', 'low_quality_hides_strong_modules', 'hide_when_result_quality_cannot_support_pair_reading');
         }
         $modules['six_dimension_map'] = $this->module('six_dimension_map', 'visible', 'low_quality_overview_only');
         $modules['share_card'] = $this->module('share_card', 'collapsed', 'low_quality_no_strong_public_share');
@@ -94,7 +94,7 @@ final class RiasecReportModuleSelector
     private function applyCaution(array $modules): array
     {
         foreach (['pair_blend', 'occupation_examples', '140q_cta'] as $key) {
-            $modules[$key] = $this->module($key, 'collapsed', 'caution_softens_interpretation');
+            $modules[$key] = $this->module($key, 'collapsed', 'caution_requires_boundary_first', 'collapsed_pair_copy_must_read_as_activity_context');
         }
 
         return $modules;
@@ -107,6 +107,7 @@ final class RiasecReportModuleSelector
     private function applyBroadProfile(array $modules): array
     {
         $modules['hero_activity_chain'] = $this->module('hero_activity_chain', 'hidden', 'broad_profile_activity_filter_first');
+        $modules['pair_blend'] = $this->module('pair_blend', 'collapsed', 'broad_profile_pair_blend_secondary_after_dimension_map', 'broad_profile_needs_dimension_map_before_pair_reading');
         $modules['occupation_examples'] = $this->module('occupation_examples', 'hidden', 'broad_profile_no_single_chain_examples');
 
         return $modules;
@@ -119,7 +120,7 @@ final class RiasecReportModuleSelector
     private function applyNearTie(array $modules): array
     {
         $modules['hero_activity_chain'] = $this->module('hero_activity_chain', 'collapsed', 'near_tie_candidate_chains_first');
-        $modules['pair_blend'] = $this->module('pair_blend', 'visible', 'near_tie_pair_blend_required');
+        $modules['pair_blend'] = $this->module('pair_blend', 'visible', 'near_tie_pair_blend_explains_candidate_pairs_without_identity', 'pair_blend_is_candidate_reading_not_final_order');
 
         return $modules;
     }
@@ -131,20 +132,22 @@ final class RiasecReportModuleSelector
     private function applyLowClarity(array $modules): array
     {
         $modules['hero_activity_chain'] = $this->module('hero_activity_chain', 'collapsed', 'low_clarity_cautious_overview');
+        $modules['pair_blend'] = $this->module('pair_blend', 'collapsed', 'low_clarity_pair_blend_secondary_after_dimension_map', 'collapsed_pair_copy_must_read_as_activity_context');
         $modules['occupation_examples'] = $this->module('occupation_examples', 'hidden', 'low_clarity_hides_strong_examples');
 
         return $modules;
     }
 
     /**
-     * @return array{key:string,visibility:string,reason:string}
+     * @return array{key:string,visibility:string,reason:string,risk_boundary:string}
      */
-    private function module(string $key, string $visibility, string $reason): array
+    private function module(string $key, string $visibility, string $reason, string $riskBoundary = 'module_visibility_backend_owned_no_frontend_inference'): array
     {
         return [
             'key' => $key,
             'visibility' => $visibility,
             'reason' => $reason,
+            'risk_boundary' => $riskBoundary,
         ];
     }
 }
