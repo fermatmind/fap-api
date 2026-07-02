@@ -40,6 +40,27 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $this->assertSame([], $errors);
     }
 
+    public function test_registry_validator_rejects_unsupported_scientific_boundary_claims(): void
+    {
+        $loader = app(EnneagramPackLoader::class);
+        $pack = $loader->loadRegistryPack();
+
+        data_set($pack, 'registries.enneagram_method_registry.entries.0.copy', '本测试可用于临床诊断，并可作为心理治疗建议。');
+        data_set($pack, 'registries.enneagram_pair_registry.entries.0.short_compare_copy', '本结果可以用于招聘筛选候选人，并支持录用决定。');
+        data_set($pack, 'registries.enneagram_state_registry.entries.0.disclaimer', '系统可以判定高健康层级，并锁定发展阶段。');
+        data_set($pack, 'registries.enneagram_technical_note_registry.entries.0.body', '本测试准确率达到 95%，已经通过外部效度验证。');
+        data_set($pack, 'registries.enneagram_ui_copy_registry.entries.instant_summary.clear.body', '该结果证明你就是这个核心类型。');
+
+        $errors = app(RegistryValidator::class)->validate($pack);
+        $joined = implode("\n", $errors);
+
+        $this->assertStringContainsString('diagnostic_use', $joined);
+        $this->assertStringContainsString('hiring_use', $joined);
+        $this->assertStringContainsString('health_level_hard_judgement', $joined);
+        $this->assertStringContainsString('pseudo_validity', $joined);
+        $this->assertStringContainsString('high_certainty', $joined);
+    }
+
     public function test_registry_release_hash_is_stable(): void
     {
         $loader = app(EnneagramPackLoader::class);

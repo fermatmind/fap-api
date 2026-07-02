@@ -78,6 +78,60 @@ final class RegistryValidator
     ];
 
     /**
+     * @var list<array{category:string,pattern:string}>
+     */
+    private const UNSUPPORTED_TEXT_BOUNDARY_PATTERNS = [
+        [
+            'category' => 'pseudo_validity',
+            'pattern' => '/(?:准确率|命中率)(?:达到|高达|为|超过|不低于)\\s*\\d/u',
+        ],
+        [
+            'category' => 'pseudo_validity',
+            'pattern' => '/(?:通过|具备|拥有|达到).{0,12}(?:外部效度验证|效度验证|临床验证|科学验证)/u',
+        ],
+        [
+            'category' => 'pseudo_validity',
+            'pattern' => '/(?:科学|研究|数据|模型).{0,8}(?:证明|证实).{0,18}(?:你是|用户是|此人是|人格|类型)/u',
+        ],
+        [
+            'category' => 'diagnostic_use',
+            'pattern' => '/(?:可用于|可以用于|能够用于|用于|用来|作为|适合).{0,16}(?:临床诊断|临床判断|心理治疗建议|医学判断|医学状态|诊断结论)/u',
+        ],
+        [
+            'category' => 'hiring_use',
+            'pattern' => '/(?:可用于|可以用于|能够用于|用于|用来|作为|适合|支持).{0,18}(?:招聘筛选|招聘|候选人筛选|录用|淘汰|筛掉)/u',
+        ],
+        [
+            'category' => 'hiring_use',
+            'pattern' => '/(?:录用|淘汰|筛掉).{0,16}(?:候选人|应聘者|员工)/u',
+        ],
+        [
+            'category' => 'health_level_hard_judgement',
+            'pattern' => '/(?:判定|判断|确定|证明|说明|锁定).{0,16}(?:健康层级|高健康层级|低健康层级|发展阶段)/u',
+        ],
+        [
+            'category' => 'health_level_hard_judgement',
+            'pattern' => '/(?:处于|属于|就是).{0,10}(?:高健康层级|低健康层级|低发展阶段|高发展阶段)/u',
+        ],
+        [
+            'category' => 'high_certainty',
+            'pattern' => '/(?:一定|必然|总是|永远).{0,16}(?:会|是|导致|代表|意味着|说明)/u',
+        ],
+        [
+            'category' => 'high_certainty',
+            'pattern' => '/(?:你|用户|此人|该结果).{0,10}(?:就是|必然是|一定是|确定是|证明是).{0,12}(?:[1-9]号|这种人格|这个类型|核心类型)/u',
+        ],
+        [
+            'category' => 'high_certainty',
+            'pattern' => '/(?:证明|证实|确定).{0,8}(?:你|用户|此人).{0,8}(?:就是|必然是|一定是|属于).{0,12}(?:[1-9]号|这种人格|这个类型|核心类型)/u',
+        ],
+        [
+            'category' => 'wing_subtype_arrow_hard_judgement',
+            'pattern' => '/(?:翼型|子类型|箭头|本能).{0,14}(?:判定|确定|锁定|硬判)/u',
+        ],
+    ];
+
+    /**
      * @var array<string,string>
      */
     private const REQUIRED_REGISTRIES = [
@@ -203,6 +257,7 @@ final class RegistryValidator
             $errors = array_merge($errors, $this->validateUiCopyRegistry((array) ($registries['enneagram_ui_copy_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateSampleReportRegistry((array) ($registries['enneagram_sample_report_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateTechnicalNoteRegistry((array) ($registries['enneagram_technical_note_registry'] ?? [])));
+            $errors = array_merge($errors, $this->validateRegistryTextBoundaries($registries));
         }
 
         return $errors;
@@ -834,5 +889,78 @@ final class RegistryValidator
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $registries
+     * @return list<string>
+     */
+    private function validateRegistryTextBoundaries(array $registries): array
+    {
+        $errors = [];
+        foreach ($registries as $registryKey => $payload) {
+            $this->scanTextValue($errors, (string) $registryKey, $payload);
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  list<string>  $errors
+     */
+    private function scanTextValue(array &$errors, string $path, mixed $value): void
+    {
+        if (is_string($value)) {
+            $this->validateTextBoundaryValue($errors, $path, $value);
+
+            return;
+        }
+
+        if (! is_array($value)) {
+            return;
+        }
+
+        foreach ($value as $key => $child) {
+            $childPath = $path.'.'.(is_int($key) ? (string) $key : (string) $key);
+            $this->scanTextValue($errors, $childPath, $child);
+        }
+    }
+
+    /**
+     * @param  list<string>  $errors
+     */
+    private function validateTextBoundaryValue(array &$errors, string $path, string $value): void
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return;
+        }
+
+        foreach (self::UNSUPPORTED_TEXT_BOUNDARY_PATTERNS as $rule) {
+            if (preg_match($rule['pattern'], $value, $matches, PREG_OFFSET_CAPTURE) !== 1) {
+                continue;
+            }
+
+            $matched = (string) ($matches[0][0] ?? '');
+            $offset = (int) ($matches[0][1] ?? 0);
+            if ($matched === '' || $this->isNegatedBoundaryContext($value, $offset, $matched)) {
+                continue;
+            }
+
+            $errors[] = sprintf(
+                'Registry text boundary violation at %s: %s claim "%s"',
+                $path,
+                $rule['category'],
+                $matched
+            );
+        }
+    }
+
+    private function isNegatedBoundaryContext(string $value, int $offset, string $matched): bool
+    {
+        $prefix = substr($value, max(0, $offset - 18), min(18, $offset));
+        $context = $prefix.$matched;
+
+        return preg_match('/(?:不(?:用于|用来|能|可|应|是|会|把|一定)|不能(?:推出|说明|证明|判定|解释)|不得|不可|非|无法|避免|禁止)/u', $context) === 1;
     }
 }

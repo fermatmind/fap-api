@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Services\Content;
 
 use App\Services\Content\EnneagramPackLoader;
+use App\Services\Enneagram\Registry\RegistryValidator;
 use Tests\TestCase;
 
 final class EnneagramTypeRegistryCoverageTest extends TestCase
@@ -96,6 +97,20 @@ final class EnneagramTypeRegistryCoverageTest extends TestCase
                 $this->assertNotSame('', trim((string) data_get($entry, 'growth_pack.state_spectrum_copy.'.$stateKey, '')), sprintf('type %s missing growth_pack.state_spectrum_copy.%s', (string) ($entry['type_id'] ?? ''), $stateKey));
             }
         }
+    }
+
+    public function test_type_registry_boundary_scan_rejects_high_certainty_type_claims(): void
+    {
+        $loader = app(EnneagramPackLoader::class);
+        $pack = $loader->loadRegistryPack();
+
+        data_set($pack, 'registries.enneagram_type_registry.entries.0.hero_summary', '数据证明你就是 1 号核心类型，测试准确率达到 99%。');
+
+        $errors = app(RegistryValidator::class)->validate($pack);
+        $joined = implode("\n", $errors);
+
+        $this->assertStringContainsString('high_certainty', $joined);
+        $this->assertStringContainsString('pseudo_validity', $joined);
     }
 
     /**
