@@ -1118,9 +1118,12 @@ final class RiasecDeepCopySlotRegistry
         return [
             'chemistry',
             'positive_value',
+            'pair_tension',
             'real_world_cost',
+            'context_costs',
             'common_misread',
             'activities_to_validate',
+            'validation_questions',
         ];
     }
 
@@ -1447,9 +1450,12 @@ final class RiasecDeepCopySlotRegistry
             'short_label' => (string) ($row['short_label'] ?? ''),
             'chemistry' => (string) ($row['chemistry'] ?? ''),
             'positive_value' => (string) ($row['positive_value'] ?? ''),
+            'pair_tension' => (string) ($row['pair_tension'] ?? ''),
             'real_world_cost' => (string) ($row['real_world_cost'] ?? ''),
+            'context_costs' => $row['context_costs'] ?? [],
             'common_misread' => (string) ($row['common_misread'] ?? ''),
             'activities_to_validate' => $row['activities_to_validate'] ?? [],
+            'validation_questions' => $row['validation_questions'] ?? [],
             'micro_experiment' => (string) ($row['micro_experiment'] ?? ''),
             'result_page_teaser' => (string) ($row['result_page_teaser'] ?? ''),
             'deep_report_extension_hint' => (string) ($row['deep_report_extension_hint'] ?? ''),

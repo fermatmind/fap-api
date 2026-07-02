@@ -507,7 +507,7 @@
       "ENNEA-RP-05"
     ],
     "status": "pending_dependency",
-    "commit_sha": null,
+    "commit_sha": "882d05e090af473825a1e7173f7f6e9ca14a7e82",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -70940,8 +70940,8 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "pr_opened",
-    "commit_sha": "ab6d30c0e74b52e87c0920639e26efea18b4001f",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "5ceeb03d6fdb984ea43aba2dcf2c4126ff4a2519",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2642",
     "checks": {
       "phpunit_dimension_deep_copy_tests": {
@@ -70964,14 +70964,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T19:57:32Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
-      "post_merge_revalidated": false,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
         "backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json",
@@ -70997,6 +70997,12 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2642 after DIMDEEP-01 local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T20:01:29Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "GitHub PR #2642 merged and post-merge cleanup verified before starting PAIRDEEP-01."
       }
     ]
   },
@@ -71010,19 +71016,47 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "authorized_pending_start",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "pr_opened",
+    "commit_sha": "fb5a37de7b4efa3892513393305725715efacf12",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2643",
+    "checks": {
+      "phpunit_pair_deep_copy_tests": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecPairBlendAssetPreflightTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi --display-warnings",
+        "status": "passed_after_scope_fix",
+        "summary": "15 tests, 3158 assertions"
+      },
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "178 tests, 110537 assertions"
+      },
+      "pint_and_jsonl_parse": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php tests/Unit/Services/Riasec/RiasecPairBlendAssetPreflightTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php; php JSONL parse pair blend asset and fixture",
+        "status": "passed",
+        "summary": "15 asset rows and 15 fixture rows parsed"
+      },
+      "diff_check": {
+        "command": "git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl",
+        "backend/tests/Fixtures/Riasec/pair_blend_15_pairs_v7_3_preflight.jsonl",
+        "backend/tests/Unit/Services/Riasec/RiasecPairBlendAssetPreflightTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -71030,6 +71064,18 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T20:01:29Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Reworked 15 pair blend rows into detemplated pair tension, context costs, and validation questions; local validation passed."
+      },
+      {
+        "at": "2026-07-02T20:05:15Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2643 after PAIRDEEP-01 local validation and scope validation passed."
       }
     ]
   },

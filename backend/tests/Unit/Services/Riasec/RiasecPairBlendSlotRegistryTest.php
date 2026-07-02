@@ -47,6 +47,11 @@ final class RiasecPairBlendSlotRegistryTest extends TestCase
                 $this->assertArrayHasKey($requiredField, $slot);
                 $this->assertNotEmpty($slot[$requiredField]);
             }
+            $this->assertCount(3, $slot['context_costs']);
+            $this->assertCount(3, $slot['validation_questions']);
+            $this->assertStringContainsString('组合张力', $slot['pair_tension']);
+            $this->assertStringContainsString('不是组合身份', $slot['chemistry']);
+            $this->assertStringContainsString('不输出职业答案', $slot['common_misread']);
 
             $this->assertSame([], $registry->validateSlot($slot));
         }

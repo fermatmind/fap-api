@@ -31,9 +31,12 @@ final class RiasecPairBlendAssetPreflightTest extends TestCase
         'short_label',
         'chemistry',
         'positive_value',
+        'pair_tension',
         'real_world_cost',
+        'context_costs',
         'common_misread',
         'activities_to_validate',
+        'validation_questions',
         'micro_experiment',
         'user_visible_boundary',
         'applicable_form_codes',
@@ -100,9 +103,12 @@ final class RiasecPairBlendAssetPreflightTest extends TestCase
         'short_label',
         'chemistry',
         'positive_value',
+        'pair_tension',
         'real_world_cost',
+        'context_costs',
         'common_misread',
         'activities_to_validate',
+        'validation_questions',
         'micro_experiment',
         'result_page_teaser',
         'deep_report_extension_hint',
@@ -143,6 +149,15 @@ final class RiasecPairBlendAssetPreflightTest extends TestCase
             $this->assertSame('zh-CN', $row['locale']);
             $this->assertSame('omit_module', $row['fallback_behavior']);
             $this->assertFalse($row['frontend_fallback_allowed']);
+            $this->assertCount(3, $row['context_costs']);
+            $this->assertCount(4, $row['activities_to_validate']);
+            $this->assertCount(3, $row['validation_questions']);
+            $this->assertStringContainsString('组合张力', $row['pair_tension']);
+            $this->assertStringContainsString('现实条件', $row['real_world_cost']);
+            $this->assertStringContainsString('常见误读', $row['common_misread']);
+            foreach ($row['validation_questions'] as $question) {
+                $this->assertStringEndsWith('？', $question);
+            }
         }
     }
 
@@ -249,9 +264,12 @@ final class RiasecPairBlendAssetPreflightTest extends TestCase
             'short_label' => (string) $row['short_label'],
             'chemistry' => (string) $row['chemistry'],
             'positive_value' => (string) $row['positive_value'],
+            'pair_tension' => (string) $row['pair_tension'],
             'real_world_cost' => (string) $row['real_world_cost'],
+            'context_costs' => $row['context_costs'],
             'common_misread' => (string) $row['common_misread'],
             'activities_to_validate' => $row['activities_to_validate'],
+            'validation_questions' => $row['validation_questions'],
             'micro_experiment' => (string) $row['micro_experiment'],
             'result_page_teaser' => (string) $row['result_page_teaser'],
             'deep_report_extension_hint' => (string) $row['deep_report_extension_hint'],
