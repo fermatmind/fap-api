@@ -65789,7 +65789,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-02T17:01:59Z",
+  "updated_at": "2026-07-02T21:16:51Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -71256,8 +71256,8 @@
     "depends_on": [
       "RIASEC-CONTENT-140LAYER-01"
     ],
-    "status": "pr_opened",
-    "commit_sha": "992bf6f650f2d285b1113db64344d949a243985a",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "56f48646867af8638ed2e70c95d55d1fc427751c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2646",
     "checks": {
       "targeted_structural_tests": {
@@ -71288,14 +71288,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T20:52:11Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
         "backend/app/Services/Riasec/RiasecPublicProjectionService.php",
@@ -71321,6 +71321,12 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2646 for STRUCT-01 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T21:13:47Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2646 merged; origin/main contains merge commit; local main synced; local and remote task branches cleaned."
       }
     ]
   },
@@ -71334,19 +71340,57 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "authorized_pending_start",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": [],
+    "status": "pr_opened",
+    "commit_sha": "5235f29ee1d24d19aa3b1b1957a9ca1fab49f316",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2647",
+    "checks": {
+      "targeted_aspirations_disagree_and_regression_tests": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec/RiasecAspirationsDisagreeAssetPreflightTest.php tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecTop3ChainSlotRegistryTest.php tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "36 tests, 9277 assertions"
+      },
+      "full_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "182 tests, 113759 assertions"
+      },
+      "pint": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php",
+        "status": "passed"
+      },
+      "jsonl_aspirations_asset": {
+        "command": "php json_decode backend/content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl",
+        "status": "passed",
+        "summary": "jsonl ok 70"
+      },
+      "yaml_manifest": {
+        "command": "ruby -e require-yaml-load-pr-train-yaml",
+        "status": "passed"
+      },
+      "json_state": {
+        "command": "jq empty docs/codex/pr-train-state.json",
+        "status": "passed"
+      },
+      "diff_check": {
+        "command": "git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl",
+        "backend/tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -71354,6 +71398,18 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T21:13:47Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "ASPIRATION-01 repaired aspirations copy as validation questions and low-risk experiments only; local checks and scope validation passed before commit."
+      },
+      {
+        "at": "2026-07-02T21:16:51Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2647 for ASPIRATION-01 after local validation and scope validation passed."
       }
     ]
   },
