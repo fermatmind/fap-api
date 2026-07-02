@@ -70703,9 +70703,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": "177e733455d62b8030b6b03c4f71e14aff6961a8",
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "6b95df4625e6d754765b912c5bda36663715c56e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2637",
     "checks": {
       "phpunit_lifecycle_history_report_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi --display-warnings",
@@ -70757,6 +70757,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Reframed history surfaces as snapshot/exploration records, blocked stable identity and raw-delta claims, and validated lifecycle/history responses."
+      },
+      {
+        "at": "2026-07-02T19:08:18Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2637 after HISTORY-01 local validation and scope validation passed."
       }
     ]
   },
