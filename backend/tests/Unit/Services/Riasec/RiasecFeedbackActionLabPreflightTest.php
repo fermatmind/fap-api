@@ -74,6 +74,11 @@ final class RiasecFeedbackActionLabPreflightTest extends TestCase
         'measured_holland_code_mutation_allowed',
         'snapshot_mutation_allowed',
         'share_pdf_exposure_allowed',
+        'feedback_effect_scope',
+        'exploration_path_only',
+        'feedback_result_mutation_allowed',
+        'measured_result_override_allowed',
+        'share_pdf_history_mutation_allowed',
         'review_status',
         'required_boundaries',
         'forbidden_claims',
@@ -174,6 +179,11 @@ final class RiasecFeedbackActionLabPreflightTest extends TestCase
             $this->assertFalse($record['measured_holland_code_mutation_allowed']);
             $this->assertFalse($record['snapshot_mutation_allowed']);
             $this->assertFalse($record['share_pdf_exposure_allowed']);
+            $this->assertSame('exploration_path_only', $record['feedback_effect_scope']);
+            $this->assertTrue($record['exploration_path_only']);
+            $this->assertFalse($record['feedback_result_mutation_allowed']);
+            $this->assertFalse($record['measured_result_override_allowed']);
+            $this->assertFalse($record['share_pdf_history_mutation_allowed']);
             $this->assertFalse($record['frontend_fallback_allowed']);
         }
     }
@@ -262,6 +272,16 @@ final class RiasecFeedbackActionLabPreflightTest extends TestCase
         $this->assertFalse((bool) data_get($overlay, 'read_model.raw_feedback_included'));
         $this->assertFalse((bool) data_get($overlay, 'claim_boundary.feedback_is_career_match'));
         $this->assertFalse((bool) data_get($overlay, 'claim_boundary.feedback_is_success_prediction'));
+
+        foreach ((array) data_get($overlay, 'action_lab_v1.starter_actions', []) as $action) {
+            $this->assertSame('exploration_path_only', $action['feedback_effect_scope']);
+            $this->assertTrue($action['exploration_path_only']);
+            $this->assertFalse($action['feedback_result_mutation_allowed']);
+            $this->assertFalse($action['measured_result_override_allowed']);
+            $this->assertFalse($action['share_pdf_history_mutation_allowed']);
+            $this->assertStringContainsString('不会改动本次分数', (string) $action['user_copy']);
+            $this->assertStringContainsString('不重算分数', (string) $action['system_response']);
+        }
     }
 
     public function test_preflight_decision_is_conditional_go_and_stops_before_import(): void

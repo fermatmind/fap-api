@@ -149,6 +149,11 @@ final class RiasecExplorationFeedbackOverlayService
                 'snapshot_mutation_allowed' => false,
                 'share_pdf_exposure_allowed' => false,
                 'frontend_fallback_allowed' => false,
+                'feedback_effect_scope' => (string) ($row['feedback_effect_scope'] ?? 'exploration_path_only'),
+                'exploration_path_only' => (bool) ($row['exploration_path_only'] ?? false),
+                'feedback_result_mutation_allowed' => (bool) ($row['feedback_result_mutation_allowed'] ?? false),
+                'measured_result_override_allowed' => (bool) ($row['measured_result_override_allowed'] ?? false),
+                'share_pdf_history_mutation_allowed' => (bool) ($row['share_pdf_history_mutation_allowed'] ?? false),
             ];
         }
 
@@ -305,6 +310,11 @@ final class RiasecExplorationFeedbackOverlayService
             && ($row['measured_holland_code_mutation_allowed'] ?? true) === false
             && ($row['snapshot_mutation_allowed'] ?? true) === false
             && ($row['share_pdf_exposure_allowed'] ?? true) === false
+            && ($row['feedback_effect_scope'] ?? null) === 'exploration_path_only'
+            && ($row['exploration_path_only'] ?? false) === true
+            && ($row['feedback_result_mutation_allowed'] ?? true) === false
+            && ($row['measured_result_override_allowed'] ?? true) === false
+            && ($row['share_pdf_history_mutation_allowed'] ?? true) === false
             && ($row['frontend_fallback_allowed'] ?? true) === false;
     }
 

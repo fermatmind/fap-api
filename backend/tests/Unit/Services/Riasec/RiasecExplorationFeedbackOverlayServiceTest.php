@@ -97,6 +97,12 @@ final class RiasecExplorationFeedbackOverlayServiceTest extends TestCase
             $this->assertFalse($action['snapshot_mutation_allowed']);
             $this->assertFalse($action['share_pdf_exposure_allowed']);
             $this->assertFalse($action['frontend_fallback_allowed']);
+            $this->assertSame('exploration_path_only', $action['feedback_effect_scope']);
+            $this->assertTrue($action['exploration_path_only']);
+            $this->assertFalse($action['feedback_result_mutation_allowed']);
+            $this->assertFalse($action['measured_result_override_allowed']);
+            $this->assertFalse($action['share_pdf_history_mutation_allowed']);
+            $this->assertStringContainsString('不会改动本次分数', $action['user_copy']);
             $this->assertArrayNotHasKey('raw_feedback', $action);
             $this->assertArrayNotHasKey('user_feedback', $action);
             $this->assertArrayNotHasKey('snapshot_id', $action);
@@ -145,6 +151,11 @@ final class RiasecExplorationFeedbackOverlayServiceTest extends TestCase
             'measured_holland_code_mutation_allowed' => false,
             'snapshot_mutation_allowed' => false,
             'share_pdf_exposure_allowed' => false,
+            'feedback_effect_scope' => 'exploration_path_only',
+            'exploration_path_only' => true,
+            'feedback_result_mutation_allowed' => false,
+            'measured_result_override_allowed' => false,
+            'share_pdf_history_mutation_allowed' => false,
             'frontend_fallback_allowed' => false,
         ];
         $unsafeFeedbackRow = array_merge($safeFeedbackRow, [
