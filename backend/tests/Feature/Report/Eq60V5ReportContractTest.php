@@ -22,7 +22,7 @@ final class Eq60V5ReportContractTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const REPORT_VERSION = 'eq_report_v5_assets_science_boundary_repair_v1';
+    private const REPORT_VERSION = 'eq_report_v5_assets_professional_review_v1';
 
     /**
      * @return array<string,array{case_id:string,locale:string,file:string,formulation:string,action:string}>
