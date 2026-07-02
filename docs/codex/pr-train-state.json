@@ -70623,9 +70623,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": "055329859cad0ff74d67b0899dd9f0623dc85fe6",
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "cb78c8d32d4564d4f147292e665962466ce592dd",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2635",
     "checks": {
       "phpunit_lifecycle_pdf_report_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi --display-warnings",
@@ -70677,6 +70677,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Compacted PDF lifecycle copy to one boundary pass, added snapshot-bound PDF policy fields, and validated lifecycle/report parity."
+      },
+      {
+        "at": "2026-07-02T18:58:18Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2635 after PDF-01 local validation and scope validation passed."
       }
     ]
   },
