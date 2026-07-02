@@ -365,13 +365,20 @@ final class RiasecDeepCopySlotRegistry
             ]),
             'layer_unavailable' => $this->layer140qSlot('140q_layer_unavailable_copy', 'layer_unavailable', [
                 'title' => '工作日常三张卡暂不可用',
-                'summary' => '当前结果可以看基础兴趣方向。任务、环境和角色责任三张卡需要完成 140Q 后才会显示；它们只会让工作日常线索更具体。',
+                'summary' => '当前 60Q 结果已经可以阅读基础兴趣结构。任务、环境和角色责任三张卡需要完成 140Q 后才会显示；它们只补充工作日常观察角度，不修正或覆盖 60Q。',
+                'applicable_form_codes' => ['riasec_60'],
+                'contextual_detail_only' => true,
+                'overrides_60q_result' => false,
                 'layer_state' => 'not_applicable_60q_only',
             ]),
             '140q_cta' => $this->layer140qSlot('140q_cta_copy', '140q_cta', [
                 'title' => '你喜欢的是任务本身，还是这份工作的真实日常？',
-                'summary' => '60Q 看兴趣方向；140Q 看工作日常。140Q 提供更具体的情境线索，不代表正确性更高，也不会覆盖 60Q。',
-                'button_label' => '查看 140Q 工作日常三张卡',
+                'summary' => '60Q 已经给出本次兴趣结构。140Q 只是把观察拆到任务、环境和角色责任三层，让你多看工作日常线索；它不是用来修正本次结果的版本，也不会修复、推翻或覆盖 60Q。',
+                'button_label' => '查看 140Q 情境线索',
+                'applicable_form_codes' => ['riasec_60'],
+                'contextual_detail_only' => true,
+                'accuracy_upgrade_claim_allowed' => false,
+                'overrides_60q_result' => false,
                 'layer_state' => 'unavailable',
             ]),
             '140q_not_recommended' => $this->layer140qSlot('140q_not_recommended_copy', '140q_not_recommended', [

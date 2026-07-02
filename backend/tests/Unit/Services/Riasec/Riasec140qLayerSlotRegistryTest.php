@@ -50,6 +50,36 @@ final class Riasec140qLayerSlotRegistryTest extends TestCase
         $this->assertSame('insufficient_quality', $registry->resolve140qLayerSlot('140q_not_recommended')['layer_state']);
     }
 
+    public function test_140q_cta_is_contextual_detail_not_accuracy_upgrade_or_60q_repair(): void
+    {
+        $registry = new RiasecDeepCopySlotRegistry;
+        $slot = $registry->resolve140qLayerSlot('140q_cta');
+        $serialized = json_encode($slot, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+
+        $this->assertSame(['riasec_60'], $slot['applicable_form_codes']);
+        $this->assertTrue($slot['contextual_detail_only']);
+        $this->assertFalse($slot['accuracy_upgrade_claim_allowed']);
+        $this->assertFalse($slot['overrides_60q_result']);
+        $this->assertStringContainsString('任务、环境和角色责任三层', $slot['summary']);
+        $this->assertStringContainsString('不会修复、推翻或覆盖 60Q', $slot['summary']);
+        $this->assertStringContainsString('情境线索', $slot['button_label']);
+
+        foreach (['更准', '更准确', '最终答案', '岗位胜任', 'raw delta', '分数差异'] as $phrase) {
+            $this->assertStringNotContainsString($phrase, $serialized);
+        }
+    }
+
+    public function test_60q_unavailable_layer_does_not_downgrade_the_60q_result(): void
+    {
+        $slot = (new RiasecDeepCopySlotRegistry)->resolve140qLayerSlot('layer_unavailable');
+
+        $this->assertSame(['riasec_60'], $slot['applicable_form_codes']);
+        $this->assertTrue($slot['contextual_detail_only']);
+        $this->assertFalse($slot['overrides_60q_result']);
+        $this->assertStringContainsString('60Q 结果已经可以阅读基础兴趣结构', $slot['summary']);
+        $this->assertStringContainsString('不修正或覆盖 60Q', $slot['summary']);
+    }
+
     public function test_140q_copy_rejects_accuracy_override_job_and_raw_delta_claims(): void
     {
         $registry = new RiasecDeepCopySlotRegistry;
