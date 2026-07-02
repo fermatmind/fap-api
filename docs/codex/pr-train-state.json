@@ -71096,9 +71096,9 @@
       "RIASEC-CONTENT-140CTA-01",
       "RIASEC-CONTENT-140CTX-02"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "20d37478bfb78b3f70abd232b3e0b29ed82cf881",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2644",
     "checks": {
       "phpunit_140q_layer_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi --display-warnings",
@@ -71149,6 +71149,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Added machine-verifiable 140Q layer science boundaries across task, environment, role, and commercial state rows; local validation passed."
+      },
+      {
+        "at": "2026-07-02T20:18:38Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2644 after 140LAYER-01 local validation and scope validation passed."
       }
     ]
   },
