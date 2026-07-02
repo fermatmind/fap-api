@@ -69119,8 +69119,8 @@
     "depends_on": [
       "PR-EQ-ASSET-SCI-06"
     ],
-    "status": "pr_open",
-    "commit_sha": "1a99b62bed7e4eea58f4bf3ab4c2a76b3d76fcf9",
+    "status": "merged",
+    "commit_sha": "93ab2227954d846bae4973b3e5b0551e28bb39eb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2628",
     "checks": [
       {
@@ -69165,14 +69165,14 @@
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T18:25:36Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -69189,8 +69189,14 @@
         "at": "2026-07-02T18:19:11.803617Z",
         "status": "pr_open",
         "summary": "Opened PR #2628 for SCI-07 with head commit 1a99b62bed7e4eea58f4bf3ab4c2a76b3d76fcf9."
+      },
+      {
+        "at": "2026-07-02T18:29:43.669049Z",
+        "status": "merged",
+        "summary": "Reconciled after GitHub confirmed PR #2628 merged with merge commit 99f54e2573dccc6ab37207bd8d14c05a73afc407; remote and local task branches were cleaned."
       }
-    ]
+    ],
+    "merge_commit_sha": "99f54e2573dccc6ab37207bd8d14c05a73afc407"
   },
   "PR-EQ-ASSET-SCI-08": {
     "id": "PR-EQ-ASSET-SCI-08",
@@ -69201,17 +69207,58 @@
     "depends_on": [
       "PR-EQ-ASSET-SCI-05"
     ],
-    "status": "user_authorized",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": [],
+    "status": "pr_open",
+    "commit_sha": "1b9c06425c3e64a39957f9cd08ae2d5dcd31e45b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2633",
+    "checks": [
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content lint passed after career_environment decision-boundary updates."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content compile passed; scoped report_assets compiled output retained and alias mirror synchronized."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 432 assertions; PHPUnit reported existing environment file_get_contents warning only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+        "status": "passed_with_warnings",
+        "summary": "12 tests passed, 683 assertions; PHPUnit reported existing environment file_get_contents warnings only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 208 assertions; PHPUnit reported existing environment file_get_contents warning only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+        "status": "passed_with_warnings",
+        "summary": "4 tests passed, 130 assertions; PHPUnit reported existing environment file_get_contents warnings only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 16 assertions; PHPUnit reported existing environment file_get_contents warning only."
+      },
+      {
+        "command": "python/json scans + cmp raw mirror",
+        "status": "passed",
+        "summary": "No job-fit, occupation recommendation, hiring, screening, paywall, or SKU wording found; raw career_environment mirror matched byte-for-byte."
+      }
+    ],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -69220,6 +69267,16 @@
         "at": "2026-07-02T16:12:11.904905Z",
         "status": "user_authorized",
         "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      },
+      {
+        "at": "2026-07-02T18:29:43.669049Z",
+        "status": "local_checks_passed",
+        "summary": "Career environment assets repaired as environment-variable decision support without job-fit, selection, or performance claims; local checks passed."
+      },
+      {
+        "at": "2026-07-02T18:30:59.802033Z",
+        "status": "pr_open",
+        "summary": "Opened PR #2633 for SCI-08 with head commit 1b9c06425c3e64a39957f9cd08ae2d5dcd31e45b."
       }
     ]
   },
