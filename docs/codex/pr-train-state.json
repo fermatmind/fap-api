@@ -69584,9 +69584,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "07c497bec2d1e0c9cb066c685fe6befdf0d9bf25",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2614",
     "checks": {
       "phpunit_activity_preflight": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecActivityTaskExamplesPreflightTest.php --no-ansi --display-warnings",
@@ -69641,6 +69641,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Repaired ACTIVITY-01 360-row activity/task content asset; local RIASEC unit subset, asset preflight, and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T17:21:41Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2614 after ACTIVITY-01 local validation, latest-main rebase, and scope validation passed."
       }
     ]
   },
