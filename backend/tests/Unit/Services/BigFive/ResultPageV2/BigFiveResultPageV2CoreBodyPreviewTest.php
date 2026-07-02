@@ -289,6 +289,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_cross_type_comparison_public_read_model(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php',
+            'backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_result_page_pdf_export_route_changes(): void
     {
         $changed = [
@@ -4879,6 +4889,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiCrossTypeComparisonPublicReadModelFile($file)) {
+                continue;
+            }
+
             if ($this->isPersonalityPublicAssetContractFile($file)) {
                 continue;
             }
@@ -6320,6 +6334,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php',
             'backend/app/Services/Cms/PersonalityProfileService.php',
         ], true);
+    }
+
+    private function isMbtiCrossTypeComparisonPublicReadModelFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php';
     }
 
     private function isPersonalityPublicAssetContractFile(string $file): bool

@@ -12,6 +12,7 @@ use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
+use App\Services\Cms\Mbti64CrossTypeComparisonPublicReadModel;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\PersonalityProfileService;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
@@ -52,6 +53,7 @@ class PersonalityController extends Controller
     public function __construct(
         private readonly PersonalityProfileService $personalityProfileService,
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
+        private readonly Mbti64CrossTypeComparisonPublicReadModel $crossTypeComparisonReadModel,
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
@@ -258,6 +260,7 @@ class PersonalityController extends Controller
             $items[] = $this->comparisonListItemPayload($baseTypeCode, $validated['locale'], $profile);
         }
 
+        $crossTypeItems = $this->crossTypeComparisonReadModel->list($validated['locale']);
         $projection = [
             'comparison_list_contract_version' => 'mbti.comparison_list.v1',
             'locale' => $validated['locale'],
@@ -272,6 +275,15 @@ class PersonalityController extends Controller
                         : 'Compare A and T variants within the same 16-type personality core across stress feedback, self-confirmation, and action rhythm.',
                     'items' => $items,
                 ],
+                [
+                    'key' => 'cross_type_comparisons',
+                    'comparison_type' => 'mbti_cross_type',
+                    'title' => $validated['locale'] === 'zh-CN' ? '易混淆人格对比' : 'Commonly confused personality types',
+                    'description' => $validated['locale'] === 'zh-CN'
+                        ? '比较容易混淆的 16 型人格组合，帮助用户从思维入口、行动节奏和协作方式上做区分。'
+                        : 'Compare commonly confused 16-type personality pairs through thinking patterns, action rhythm, and collaboration style.',
+                    'items' => $crossTypeItems,
+                ],
             ],
         ];
 
@@ -279,6 +291,7 @@ class PersonalityController extends Controller
             'ok' => true,
             'comparison_list_public_projection_v1' => $projection,
             'at_comparisons' => $items,
+            'cross_type_comparisons' => $crossTypeItems,
         ]);
     }
 
@@ -287,6 +300,15 @@ class PersonalityController extends Controller
         $validated = $this->validateReadQuery($request);
         if ($validated instanceof JsonResponse) {
             return $validated;
+        }
+
+        $crossTypeComparison = $this->crossTypeComparisonReadModel->find($comparison, $validated['locale']);
+        if ($crossTypeComparison !== null) {
+            return response()->json([
+                'ok' => true,
+                'comparison' => $crossTypeComparison,
+                'comparison_public_projection_v1' => $crossTypeComparison,
+            ]);
         }
 
         $baseTypeCode = $this->comparisonBaseTypeCode($comparison);
