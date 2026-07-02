@@ -1,45 +1,45 @@
 {
   "asset_id": "profile_shape_copy_v1.zh-CN",
-  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "asset_status": "content_review_science_boundary_repair_v1",
   "locale": "zh-CN",
   "scale_code": "RIASEC",
-  "review_status": "content_review_v7_3_final_preflight_candidate",
+  "review_status": "content_review_science_boundary_repair_v1",
   "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
   "profile_shapes": [
     {
       "shape": "clear_code",
-      "title": "主线索清楚",
-      "summary": "你可以先从三字母活动线索组合进入结果，但不要把它读成固定身份。第二、第三维决定了这条活动线索组合如何落地。",
+      "title": "主线索相对清楚",
+      "summary": "六维分布显示一个相对更靠前的兴趣入口。可以先从三字母顺序进入结果，但仍要把第二、第三维当作补充观察线索；这不是固定身份、能力结论或职业结论。",
       "module_policy": "show_standard_chain_and_pair_blends"
     },
     {
       "shape": "blended_code",
-      "title": "混合型结果",
-      "summary": "前两到三条兴趣线索都在参与结果。建议重点看 pair blend 和 Top3 chain，而不是只看第一个字母。",
+      "title": "多条线索共同参与",
+      "summary": "前两到三条兴趣线索都值得阅读。建议先看 Top2 与 Top3 的活动差异，再用小任务观察哪类活动更想继续；不要只用第一个字母概括整个结果。",
       "module_policy": "show_pair_blend_first"
     },
     {
       "shape": "broad_profile",
-      "title": "广谱兴趣",
-      "summary": "多个维度接近时，系统不应强行给出单一路径。先用活动和小实验收窄：哪些任务让你更想继续，哪些只是看起来有吸引力。",
+      "title": "兴趣分布较宽",
+      "summary": "多个维度接近时，结果更像一张待验证的兴趣地图，而不是单一路径。先用活动和小实验收窄：哪些任务让你更想继续，哪些只是看起来有吸引力。",
       "module_policy": "hide_strong_code_claims"
     },
     {
       "shape": "near_tie",
-      "title": "近似并列",
-      "summary": "字母顺序只是本次排序，不是身份高低。请同时阅读 alternate code 的组合解释，并用 1–2 个真实任务观察。",
+      "title": "前几项接近",
+      "summary": "字母顺序只是本次分数的阅读顺序，不是身份等级、能力排序或最终答案。请同时阅读 alternate code 的组合解释，并用 1-2 个真实任务观察。",
       "module_policy": "show_alternate_code_boundary"
     },
     {
       "shape": "low_quality",
       "title": "谨慎阅读",
-      "summary": "这次结果不适合输出强结论。页面应先保护用户：弱化三字码、隐藏职业例子、建议重测或仅看六维。",
+      "summary": "这次结果不适合输出强解释。页面应先保护用户：弱化三字码、隐藏职业例子、建议重测或仅看六维相对分布。",
       "module_policy": "show_minimal_dimension_only"
     },
     {
       "shape": "low_clarity",
-      "title": "低清晰度",
-      "summary": "结果并非无效，但主线不够清楚。更适合看候选活动，而不是马上形成方向判断。",
+      "title": "主线不够集中",
+      "summary": "结果并非无效，但六维差距不足以支持强阅读。更适合先看候选活动和观察问题，而不是马上形成方向判断。",
       "module_policy": "show_candidate_activities"
     }
   ],
@@ -75,5 +75,5 @@
   ],
   "frontend_fallback_allowed": false,
   "fallback_behavior": "omit_module",
-  "v5_editorial_note": "Profile-shape copy reviewed for clear, blended, broad, near-tie, and low-quality reading without identity framing."
+  "v5_editorial_note": "Profile-shape copy repaired for relative distribution, flat/near-tie boundaries, and no identity, ability, or career-outcome framing."
 }

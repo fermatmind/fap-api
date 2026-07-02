@@ -84,6 +84,38 @@ final class RiasecLowQualityCopySlotRegistryTest extends TestCase
         $this->assertStringNotContainsString('你其实是另一个 Code', $nearTie['summary']);
     }
 
+    public function test_profile_shape_and_confidence_copy_frame_dimension_map_as_relative_reading(): void
+    {
+        $registry = new RiasecDeepCopySlotRegistry;
+        $slots = $registry->interpretationStateCopySlots();
+
+        foreach (['clear_code', 'blended_code', 'broad_profile', 'near_tie', 'low_quality', 'low_clarity'] as $shape) {
+            $slot = $slots['profile_shape_copy:'.$shape] ?? null;
+            $this->assertIsArray($slot, $shape.' profile shape copy should exist.');
+            $copy = (string) ($slot['summary'] ?? '');
+
+            $this->assertMatchesRegularExpression('/相对|接近|分布|差距|阅读顺序|观察/u', $copy);
+            $this->assertStringNotContainsString('决定了', $copy);
+            $this->assertStringNotContainsString('能力强弱', $copy);
+            $this->assertStringNotContainsString('职业方向结论', $copy);
+            $this->assertStringNotContainsString('最终排序', $copy);
+        }
+
+        foreach (['high_confidence', 'moderate_confidence', 'near_tie', 'broad_profile', 'low_clarity'] as $state) {
+            $slot = $slots['top_code_confidence_copy:'.$state] ?? null;
+            $this->assertIsArray($slot, $state.' confidence copy should exist.');
+            $copy = (string) ($slot['summary'] ?? '');
+
+            $this->assertMatchesRegularExpression('/阅读力度|相对|接近|分散|初步线索|观察/u', $copy);
+            $this->assertStringNotContainsString('成功概率', $copy);
+            $this->assertStringNotContainsString('更准确', $copy);
+            $this->assertStringNotContainsString('职业匹配', $copy);
+            $this->assertStringNotContainsString('岗位匹配', $copy);
+            $this->assertStringNotContainsString('能力证明', $copy);
+            $this->assertStringNotContainsString('身份标签', $copy);
+        }
+    }
+
     public function test_low_quality_downgrade_policy_hides_strong_modules(): void
     {
         $policy = (new RiasecDeepCopySlotRegistry)->lowQualityModuleDowngradePolicy();
