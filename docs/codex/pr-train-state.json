@@ -66406,5 +66406,634 @@
         "notes": "Opened fap-api companion PR #2579 for H1."
       }
     ]
+  },
+  "PR-EQ-ASSET-AUDIT-00": {
+    "id": "PR-EQ-ASSET-AUDIT-00",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-audit-00-18-groups",
+    "title": "PR-EQ-ASSET-AUDIT-00: EQ 18 asset groups science audit and PR train design",
+    "depends_on": [],
+    "status": "pr_open",
+    "commit_sha": "7b0dcd7583b1bbbd0ddea097b4b4a9b3ee02483a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2599",
+    "checks": [
+      {
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+        "status": "passed",
+        "summary": "PR train manifest YAML parses."
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed",
+        "summary": "PR train state JSON parses."
+      },
+      {
+        "command": "test -s docs/audits/eq/eq_18_asset_groups_science_content_audit_2026-07-02.md",
+        "status": "passed",
+        "summary": "EQ 18 asset groups audit report exists and is non-empty."
+      },
+      {
+        "command": "git diff --check",
+        "status": "passed",
+        "summary": "No whitespace errors in unstaged diff."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      },
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "from": "user_authorized",
+        "to": "local_checks_passed",
+        "summary": "Docs-only audit baseline, manifest/state registration, YAML/JSON parsing, report sanity, and diff whitespace checks passed."
+      },
+      {
+        "at": "2026-07-02T16:13:11.093980Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "summary": "Opened PR #2599 after local docs-only validation passed."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-01": {
+    "id": "PR-EQ-ASSET-SCI-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-01-result-snapshot",
+    "title": "PR-EQ-ASSET-SCI-01: refine EQ result_snapshot science boundary and hero hooks",
+    "depends_on": [
+      "PR-EQ-ASSET-AUDIT-00"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-02": {
+    "id": "PR-EQ-ASSET-SCI-02",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-02-conversion-actions",
+    "title": "PR-EQ-ASSET-SCI-02: clean all-free EQ commercial_conversion_actions wording",
+    "depends_on": [
+      "PR-EQ-ASSET-AUDIT-00"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-03": {
+    "id": "PR-EQ-ASSET-SCI-03",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-03-scientific-contract",
+    "title": "PR-EQ-ASSET-SCI-03: rewrite EQ scientific_contract boundaries",
+    "depends_on": [
+      "PR-EQ-ASSET-AUDIT-00"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-04": {
+    "id": "PR-EQ-ASSET-SCI-04",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-04-score-system",
+    "title": "PR-EQ-ASSET-SCI-04: repair EQ score_system percentile band and norm boundaries",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-03"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-05": {
+    "id": "PR-EQ-ASSET-SCI-05",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-05-core-formulation",
+    "title": "PR-EQ-ASSET-SCI-05: reduce EQ core_formulation claim strength and increase depth",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-03",
+      "PR-EQ-ASSET-SCI-04"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-06": {
+    "id": "PR-EQ-ASSET-SCI-06",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-06-mechanisms",
+    "title": "PR-EQ-ASSET-SCI-06: tighten EQ mechanism_map evidence chain",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-05"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-07": {
+    "id": "PR-EQ-ASSET-SCI-07",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-07-reality-scenes",
+    "title": "PR-EQ-ASSET-SCI-07: repair EQ reality scenes and variants boundaries",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-06"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-08": {
+    "id": "PR-EQ-ASSET-SCI-08",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-08-career-environment",
+    "title": "PR-EQ-ASSET-SCI-08: repair EQ career_environment decision boundaries",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-05"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-09": {
+    "id": "PR-EQ-ASSET-SCI-09",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-09-action-prescription",
+    "title": "PR-EQ-ASSET-SCI-09: reduce EQ action_prescription intervention claims",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-05",
+      "PR-EQ-ASSET-SCI-13"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-10": {
+    "id": "PR-EQ-ASSET-SCI-10",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-10-sjt-bridge",
+    "title": "PR-EQ-ASSET-SCI-10: keep EQ sjt_bridge planned unavailable",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-03"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-11": {
+    "id": "PR-EQ-ASSET-SCI-11",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-11-cross-assessment",
+    "title": "PR-EQ-ASSET-SCI-11: repair EQ cross_assessment_context boundaries",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-05"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-12": {
+    "id": "PR-EQ-ASSET-SCI-12",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-12-quality-runtime",
+    "title": "PR-EQ-ASSET-SCI-12: harden EQ quality runtime gating",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-03"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-13": {
+    "id": "PR-EQ-ASSET-SCI-13",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-13-quality-confidence",
+    "title": "PR-EQ-ASSET-SCI-13: clean EQ quality_confidence low-confidence copy",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-12"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-14": {
+    "id": "PR-EQ-ASSET-SCI-14",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-14-evidence-status",
+    "title": "PR-EQ-ASSET-SCI-14: repair EQ psychometric_evidence_status language",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-03",
+      "PR-EQ-ASSET-SCI-04"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-15": {
+    "id": "PR-EQ-ASSET-SCI-15",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-15-depth-modules",
+    "title": "PR-EQ-ASSET-SCI-15: enrich EQ result_page_depth_modules with safer depth",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-05",
+      "PR-EQ-ASSET-SCI-07"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-16": {
+    "id": "PR-EQ-ASSET-SCI-16",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-16-agent-playbooks",
+    "title": "PR-EQ-ASSET-SCI-16: repair EQ agent_dialogue_playbooks boundaries",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-03",
+      "PR-EQ-ASSET-SCI-12"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-17": {
+    "id": "PR-EQ-ASSET-SCI-17",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-17-backend-contract",
+    "title": "PR-EQ-ASSET-SCI-17: clean EQ backend_integration_contract authority boundary",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-16"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-SCI-18": {
+    "id": "PR-EQ-ASSET-SCI-18",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-asset-sci-18-route-matrix",
+    "title": "PR-EQ-ASSET-SCI-18: improve EQ personalization_route matrix differentiation",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-05",
+      "PR-EQ-ASSET-SCI-06",
+      "PR-EQ-ASSET-SCI-07",
+      "PR-EQ-ASSET-SCI-08",
+      "PR-EQ-ASSET-SCI-09"
+    ],
+    "status": "user_authorized",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:12:11.904905Z",
+        "status": "user_authorized",
+        "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
   }
 }

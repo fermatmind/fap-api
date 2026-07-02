@@ -30719,3 +30719,905 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+
+  # EQ 18 asset groups science repair train (authorized 2026-07-03)
+
+  - id: PR-EQ-ASSET-AUDIT-00
+    repo: fap-api
+    branch: codex/pr-eq-asset-audit-00-18-groups
+    title: "PR-EQ-ASSET-AUDIT-00: EQ 18 asset groups science audit and PR train design"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Add the EQ 18 asset groups science/content audit report as the PR train baseline.
+      - Register PR-EQ-ASSET-AUDIT-00 through PR-EQ-ASSET-SCI-18 in the PR train manifest and state ledger.
+      - Do not modify EQ content assets, composer logic, scoring, questions, norms, frontend, SJT, CMS, or deployment behavior.
+    allowed_paths:
+      - docs/audits/eq/eq_18_asset_groups_science_content_audit_2026-07-02.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - test -s docs/audits/eq/eq_18_asset_groups_science_content_audit_2026-07-02.md
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-01
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-AUDIT-00
+    branch: codex/pr-eq-asset-sci-01-result-snapshot
+    title: "PR-EQ-ASSET-SCI-01: refine EQ result_snapshot science boundary and hero hooks"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair result_snapshot.json copy for self-report framing, stronger first-screen hooks, and lower claim strength.
+      - Keep zh-CN and en aligned and mirror EQ_60 to EQ_EMOTIONAL_INTELLIGENCE.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/result_snapshot.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/result_snapshot.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/tests/Fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-02
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-AUDIT-00
+    branch: codex/pr-eq-asset-sci-02-conversion-actions
+    title: "PR-EQ-ASSET-SCI-02: clean all-free EQ commercial_conversion_actions wording"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair commercial_conversion_assets.json so retention actions stay all-free and avoid unlock, purchase, premium, SKU, or paywall wording.
+      - Mirror EQ_60 to EQ_EMOTIONAL_INTELLIGENCE.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/commercial_conversion_assets.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/commercial_conversion_assets.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-03
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-AUDIT-00
+    branch: codex/pr-eq-asset-sci-03-scientific-contract
+    title: "PR-EQ-ASSET-SCI-03: rewrite EQ scientific_contract boundaries"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Rewrite scientific_contract.json around self-report, non-ability, non-MSCEIT, non-clinical, non-hiring, non-certified, and non-job-performance boundaries.
+      - Align zh-CN and en claim strength and mirror both EQ packs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/scientific_contract.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/scientific_contract.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-04
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-03
+    branch: codex/pr-eq-asset-sci-04-score-system
+    title: "PR-EQ-ASSET-SCI-04: repair EQ score_system percentile band and norm boundaries"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair score_system.json for standard score, percentile, band, provisional norm, and SA/ER/EM/RM dimension definitions.
+      - Prevent ability-ranking or global-formal-norm claims and mirror both EQ packs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/score_system.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/score_system.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/tests/Fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-05
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-03
+      - PR-EQ-ASSET-SCI-04
+    branch: codex/pr-eq-asset-sci-05-core-formulation
+    title: "PR-EQ-ASSET-SCI-05: reduce EQ core_formulation claim strength and increase depth"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair all core_formulations.json entries with self-report framing, less type-like language, and more differentiated useful copy.
+      - Keep low_confidence_result cautious and mirror both EQ packs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/core_formulations.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/core_formulations.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/tests/Fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-06
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-05
+    branch: codex/pr-eq-asset-sci-06-mechanisms
+    title: "PR-EQ-ASSET-SCI-06: tighten EQ mechanism_map evidence chain"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair all mechanism_map.json states so pairwise interpretations stay self-report based and avoid causal behavior prediction.
+      - Reduce template feel and mirror both EQ packs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/mechanism_map.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/mechanism_map.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/tests/**Eq60**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-07
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-06
+    branch: codex/pr-eq-asset-sci-07-reality-scenes
+    title: "PR-EQ-ASSET-SCI-07: repair EQ reality scenes and variants boundaries"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair reality_translation.json and reality_scene_variants.json for cultural, power, trauma, high-conflict, and unsafe-relationship boundaries.
+      - Keep formulation-aware specificity without behavior prediction and mirror both EQ packs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/reality_translation.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/reality_scene_variants.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/reality_translation.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/reality_scene_variants.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/tests/**Eq60**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-08
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-05
+    branch: codex/pr-eq-asset-sci-08-career-environment
+    title: "PR-EQ-ASSET-SCI-08: repair EQ career_environment decision boundaries"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair career_environment.json as environment-variable decision support without job-fit, occupational prediction, or hiring claims.
+      - Add role, organization, culture, management, power-structure, and emotional-labor boundaries where schema supports it and mirror both EQ packs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/career_environment.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/career_environment.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/tests/Fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-09
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-05
+      - PR-EQ-ASSET-SCI-13
+    branch: codex/pr-eq-asset-sci-09-action-prescription
+    title: "PR-EQ-ASSET-SCI-09: reduce EQ action_prescription intervention claims"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair all action_prescriptions.json entries as low-risk reflection practices rather than therapy, guaranteed training, or high-risk relationship advice.
+      - Add trauma, power-difference, ongoing distress, and unsafe-relationship boundaries and mirror both EQ packs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/action_prescriptions.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/action_prescriptions.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/tests/Fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-10
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-03
+    branch: codex/pr-eq-asset-sci-10-sjt-bridge
+    title: "PR-EQ-ASSET-SCI-10: keep EQ sjt_bridge planned unavailable"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair sjt_bridge.json so EQ-SJT remains planned and unavailable, not ability, not MSCEIT, not certified, and not clickable/take-ready.
+      - Mirror both EQ packs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/sjt_bridge.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/sjt_bridge.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/tests/Fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-11
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-05
+    branch: codex/pr-eq-asset-sci-11-cross-assessment
+    title: "PR-EQ-ASSET-SCI-11: repair EQ cross_assessment_context boundaries"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair cross_assessment_context.json so MBTI, Big Five, Enneagram, RIASEC, and related-test context remain reflective signals, not deterministic cross-test conclusions.
+      - Mirror both EQ packs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/cross_assessment_context.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/cross_assessment_context.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-12
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-03
+    branch: codex/pr-eq-asset-sci-12-quality-runtime
+    title: "PR-EQ-ASSET-SCI-12: harden EQ quality runtime gating"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Inspect and minimally repair Eq60ReportComposer quality runtime behavior so low-confidence D/SPEEDING routes to low_confidence_result and retest_reflection.
+      - Prevent low-confidence reports from selecting strong formulation, career, or action outputs and update tests/fixtures as needed.
+    allowed_paths:
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/content_packs/EQ_60/v1/raw/report_assets/quality_confidence.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/quality_confidence.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/tests/**Eq60**
+      - backend/tests/Fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-13
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-12
+    branch: codex/pr-eq-asset-sci-13-quality-confidence
+    title: "PR-EQ-ASSET-SCI-13: clean EQ quality_confidence low-confidence copy"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair quality_confidence.json for clearer A/B/C/D language, no duplicate text, and cautious D/SPEEDING guidance.
+      - Mirror both EQ packs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/quality_confidence.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/quality_confidence.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/tests/Fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-14
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-03
+      - PR-EQ-ASSET-SCI-04
+    branch: codex/pr-eq-asset-sci-14-evidence-status
+    title: "PR-EQ-ASSET-SCI-14: repair EQ psychometric_evidence_status language"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair psychometric_evidence_status.json so provisional evidence, sample status, confidence, and future validation are clear without formal validation or ability claims.
+      - Mirror both EQ packs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/psychometric_evidence_status.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/psychometric_evidence_status.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-15
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-05
+      - PR-EQ-ASSET-SCI-07
+    branch: codex/pr-eq-asset-sci-15-depth-modules
+    title: "PR-EQ-ASSET-SCI-15: enrich EQ result_page_depth_modules with safer depth"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair result_page_depth_modules.json for more useful, less templated deep-read content while keeping scientific boundaries.
+      - Mirror both EQ packs and adjust composer only if route-aware selection requires it.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/result_page_depth_modules.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/result_page_depth_modules.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/tests/**Eq60**
+      - backend/tests/Fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-16
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-03
+      - PR-EQ-ASSET-SCI-12
+    branch: codex/pr-eq-asset-sci-16-agent-playbooks
+    title: "PR-EQ-ASSET-SCI-16: repair EQ agent_dialogue_playbooks boundaries"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair agent_dialogue_playbooks.json and, only if needed, agent_knowledge_base_schema.json for retrieval tags, intents, follow-up prompts, refusal examples, forbidden claims, and escalation boundaries.
+      - Mirror both EQ packs and do not change live LLM/runtime behavior.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/agent_dialogue_playbooks.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/agent_knowledge_base_schema.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/agent_dialogue_playbooks.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/agent_knowledge_base_schema.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/tests/**EqAgent**
+      - backend/tests/**Eq60**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-17
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-16
+    branch: codex/pr-eq-asset-sci-17-backend-contract
+    title: "PR-EQ-ASSET-SCI-17: clean EQ backend_integration_contract authority boundary"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair backend_integration_contract.json to clarify backend content/composer authority, deterministic frontend rendering, Agent read-only limits, and internal versus user-visible fields.
+      - Mirror both EQ packs and adjust tests/composer only if visibility contract changes.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/backend_integration_contract.json
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/backend_integration_contract.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/tests/**Eq60**
+      - backend/tests/**EqAgent**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-SCI-18
+    repo: fap-api
+    depends_on:
+      - PR-EQ-ASSET-SCI-05
+      - PR-EQ-ASSET-SCI-06
+      - PR-EQ-ASSET-SCI-07
+      - PR-EQ-ASSET-SCI-08
+      - PR-EQ-ASSET-SCI-09
+    branch: codex/pr-eq-asset-sci-18-route-matrix
+    title: "PR-EQ-ASSET-SCI-18: improve EQ personalization_route matrix differentiation"
+    train_scope: eq_18_asset_groups_science_repair
+    status: user_authorized
+    scope:
+      - Repair all personalization route_matrix.json entries for differentiated, self-report bounded route headlines, evidence labels, and next actions.
+      - Preserve low-confidence retest routing, mirror both EQ packs, and minimally adjust composer/tests if deterministic selection needs repair.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/personalization_routes/route_matrix.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/personalization_routes/route_matrix.json
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/tests/**Eq60**
+      - backend/tests/Fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web or make frontend content authoritative.
+      - Enable EQ-SJT, add an SJT route, add an SJT scorer, or make SJT clickable/take-ready.
+      - Add paid, locked, blur, SKU, purchase, unlock, premium, or access-wall semantics.
+      - Write CMS, run production import, run production smoke, trigger staging deploy, or trigger production deploy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
