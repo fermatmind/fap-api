@@ -8,23 +8,27 @@
         "typical_response": "收到反馈时，这次结果应轻一点读，最有价值的是理解本次作答状态。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
         "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
         "cost": "如果强行套用画像，可能比不看结果更误导。",
-        "better_move": "先问清反馈指向，再决定解释或调整。",
+        "better_move": "先问清反馈指向，再决定解释或调整。 需要结合文化、权力差、安全性和关系历史。",
         "context": "别人指出问题、要求修改或评价你的表现时。",
         "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
         "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
-        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。 具体情境、文化背景、岗位期待、权力差、安全性和关系历史都会影响这个模式如何出现。",
+        "reflection_question": "这是否是安全、低风险的反思场景？"
       },
       "en": {
         "title": "Feedback",
         "typical_response": "In feedback, Read this result lightly; the most useful signal is the response context of this session. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
-        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "strength": "Without a strong conclusion, this session can only point to response context and retest conditions to review.",
         "cost": "Forcing a profile onto this result could be more misleading than useful.",
-        "better_move": "Clarify the target of the feedback before explaining or changing.",
+        "better_move": "Clarify the target of the feedback before explaining or changing. Adjust for culture, power differences, safety, and relationship history.",
         "context": "When someone points out a problem, requests changes, or evaluates your work.",
         "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
         "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
-        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
-      }
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance. Context, culture, role expectations, power differences, safety, and relationship history can change how this pattern shows up.",
+        "reflection_question": "Is this a safe, low-risk situation for reflection?"
+      },
+      "claim_risk": "medium",
+      "risk_notes": "Scene translation only; not behavior prediction, diagnosis, or advice for unsafe/high-conflict situations."
     },
     "conflict": {
       "zh-CN": {
@@ -32,47 +36,55 @@
         "typical_response": "冲突中，这次结果应轻一点读，最有价值的是理解本次作答状态。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
         "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
         "cost": "如果强行套用画像，可能比不看结果更误导。",
-        "better_move": "先把冲突缩小成一个可处理的问题。",
+        "better_move": "先把冲突缩小成一个可处理的问题。 需要结合文化、权力差、安全性和关系历史。",
         "context": "意见分歧、语气升高或彼此防御时。",
         "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
         "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
-        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。 具体情境、文化背景、岗位期待、权力差、安全性和关系历史都会影响这个模式如何出现。",
+        "reflection_question": "这是否是安全、低风险的反思场景？"
       },
       "en": {
         "title": "Conflict",
         "typical_response": "In conflict, Read this result lightly; the most useful signal is the response context of this session. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
-        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "strength": "Without a strong conclusion, this session can only point to response context and retest conditions to review.",
         "cost": "Forcing a profile onto this result could be more misleading than useful.",
-        "better_move": "Narrow the conflict to one workable issue first.",
+        "better_move": "Narrow the conflict to one workable issue first. Adjust for culture, power differences, safety, and relationship history.",
         "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
         "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
         "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
-        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
-      }
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance. Context, culture, role expectations, power differences, safety, and relationship history can change how this pattern shows up.",
+        "reflection_question": "Is this a safe, low-risk situation for reflection?"
+      },
+      "claim_risk": "medium",
+      "risk_notes": "Scene translation only; not behavior prediction, diagnosis, or advice for unsafe/high-conflict situations."
     },
     "relationship_boundary": {
       "zh-CN": {
         "title": "关系边界",
-        "typical_response": "边界场景里，如果强行套用画像，可能比不看结果更误导。 你需要把理解和可承接范围分开。",
+        "typical_response": "边界场景里，如果强行套用画像，可能比不看结果更误导。 本次结果提示可以先把理解和可承接范围分开。",
         "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
         "cost": "如果强行套用画像，可能比不看结果更误导。",
-        "better_move": "先承认对方感受，再说明自己的可承接范围。",
+        "better_move": "先承认对方感受，再说明自己的可承接范围。 需要结合文化、权力差、安全性和关系历史。",
         "context": "别人期待你理解、帮忙、让步或继续承接时。",
         "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
         "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
-        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。 具体情境、文化背景、岗位期待、权力差、安全性和关系历史都会影响这个模式如何出现。",
+        "reflection_question": "这是否是安全、低风险的反思场景？"
       },
       "en": {
         "title": "Relationship boundary",
         "typical_response": "In boundary moments, Forcing a profile onto this result could be more misleading than useful. The skill is separating understanding from what you can realistically take on.",
-        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "strength": "Without a strong conclusion, this session can only point to response context and retest conditions to review.",
         "cost": "Forcing a profile onto this result could be more misleading than useful.",
-        "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+        "better_move": "Acknowledge the feeling, then state what you can realistically take on. Adjust for culture, power differences, safety, and relationship history.",
         "context": "When someone expects understanding, help, concession, or continued emotional availability.",
         "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
         "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
-        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
-      }
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance. Context, culture, role expectations, power differences, safety, and relationship history can change how this pattern shows up.",
+        "reflection_question": "Is this a safe, low-risk situation for reflection?"
+      },
+      "claim_risk": "medium",
+      "risk_notes": "Scene translation only; not behavior prediction, diagnosis, or advice for unsafe/high-conflict situations."
     },
     "team_collaboration": {
       "zh-CN": {
@@ -80,23 +92,27 @@
         "typical_response": "协作中，即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。 但如果规则不清，如果强行套用画像，可能比不看结果更误导。",
         "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
         "cost": "如果强行套用画像，可能比不看结果更误导。",
-        "better_move": "把气氛问题转成角色、节奏和下一步。",
+        "better_move": "把气氛问题转成角色、节奏和下一步。 需要结合文化、权力差、安全性和关系历史。",
         "context": "多人协作、目标不清或责任交叉时。",
         "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
         "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
-        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。 具体情境、文化背景、岗位期待、权力差、安全性和关系历史都会影响这个模式如何出现。",
+        "reflection_question": "这是否是安全、低风险的反思场景？"
       },
       "en": {
         "title": "Team collaboration",
-        "typical_response": "In collaboration, Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe. But when rules are unclear, forcing a profile onto this result could be more misleading than useful.",
-        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "typical_response": "In collaboration, Without a strong conclusion, this session can only point to response context and retest conditions to review. But when rules are unclear, forcing a profile onto this result could be more misleading than useful.",
+        "strength": "Without a strong conclusion, this session can only point to response context and retest conditions to review.",
         "cost": "Forcing a profile onto this result could be more misleading than useful.",
-        "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+        "better_move": "Turn emotional friction into roles, rhythm, and next steps. Adjust for culture, power differences, safety, and relationship history.",
         "context": "When several people collaborate with unclear goals or overlapping responsibility.",
         "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
         "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
-        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
-      }
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance. Context, culture, role expectations, power differences, safety, and relationship history can change how this pattern shows up.",
+        "reflection_question": "Is this a safe, low-risk situation for reflection?"
+      },
+      "claim_risk": "medium",
+      "risk_notes": "Scene translation only; not behavior prediction, diagnosis, or advice for unsafe/high-conflict situations."
     },
     "pressure_recovery": {
       "zh-CN": {
@@ -104,23 +120,27 @@
         "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，先记录状态，之后在更稳定的时间复测。",
         "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
         "cost": "如果强行套用画像，可能比不看结果更误导。",
-        "better_move": "离开场景后安排一个低输入恢复动作。",
-        "context": "一段高压互动结束后，你需要重新回到自己。",
+        "better_move": "离开场景后安排一个低输入恢复动作。 需要结合文化、权力差、安全性和关系历史。",
+        "context": "一段高压互动结束后，本次结果提示可以先重新回到自己。",
         "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
         "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
-        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。 具体情境、文化背景、岗位期待、权力差、安全性和关系历史都会影响这个模式如何出现。",
+        "reflection_question": "这是否是安全、低风险的反思场景？"
       },
       "en": {
         "title": "Pressure recovery",
         "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, record the context first, then retest when conditions are steadier.",
-        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "strength": "Without a strong conclusion, this session can only point to response context and retest conditions to review.",
         "cost": "Forcing a profile onto this result could be more misleading than useful.",
-        "better_move": "After the scene, schedule one low-input recovery move.",
+        "better_move": "After the scene, schedule one low-input recovery move. Adjust for culture, power differences, safety, and relationship history.",
         "context": "After a high-pressure interaction, when you need to return to yourself.",
         "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
         "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
-        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
-      }
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance. Context, culture, role expectations, power differences, safety, and relationship history can change how this pattern shows up.",
+        "reflection_question": "Is this a safe, low-risk situation for reflection?"
+      },
+      "claim_risk": "medium",
+      "risk_notes": "Scene translation only; not behavior prediction, diagnosis, or advice for unsafe/high-conflict situations."
     },
     "career_environment": {
       "zh-CN": {
@@ -128,23 +148,27 @@
         "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
         "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
         "cost": "如果强行套用画像，可能比不看结果更误导。",
-        "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+        "better_move": "验证环境变量，不用 EQ 直接推导职业。 需要结合文化、权力差、安全性和关系历史。",
         "context": "你判断一个工作环境会滋养你还是消耗你时。",
         "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
         "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
-        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。 这是基于本次 60 题自我报告形成的模式解释，不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。 具体情境、文化背景、岗位期待、权力差、安全性和关系历史都会影响这个模式如何出现。",
+        "reflection_question": "这是否是安全、低风险的反思场景？"
       },
       "en": {
         "title": "Career environment",
         "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
-        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "strength": "Without a strong conclusion, this session can only point to response context and retest conditions to review.",
         "cost": "Forcing a profile onto this result could be more misleading than useful.",
-        "better_move": "Verify environment variables instead of deriving a job from EQ.",
+        "better_move": "Verify environment variables instead of deriving a job from EQ. Adjust for culture, power differences, safety, and relationship history.",
         "context": "When you judge whether a work setting will support or drain your emotional pattern.",
         "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
         "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
-        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
-      }
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction. This is a self-report pattern from this 60-item session, not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance. Context, culture, role expectations, power differences, safety, and relationship history can change how this pattern shows up.",
+        "reflection_question": "Is this a safe, low-risk situation for reflection?"
+      },
+      "claim_risk": "medium",
+      "risk_notes": "Scene translation only; not behavior prediction, diagnosis, or advice for unsafe/high-conflict situations."
     }
   },
   "formulation_scenes": {

@@ -6,18 +6,18 @@
       "zh-CN": {
         "status": "preliminary",
         "body": "题项和报告维度已有内容映射，但需要持续专家复核和用户反馈。",
-        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
         "user_facing_status_label": "证据持续建设中",
-        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
-        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
+        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
       },
       "en": {
         "status": "preliminary",
         "body": "Items and report dimensions have content mapping, with ongoing need for expert review and user feedback.",
-        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
         "user_facing_status_label": "Evidence is still being built",
-        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
-        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
+        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
       },
       "meta": {
         "id": "eq.evidence.content_validity",
@@ -26,25 +26,27 @@
         "trigger_logic": {
           "evidence_area": "content_validity"
         },
-        "claim_sensitivity": "high"
+        "claim_sensitivity": "high",
+        "claim_risk": "medium",
+        "risk_notes": "Evidence status asset; keep validity boundary explicit."
       }
     },
     "eq.evidence.internal_consistency": {
       "zh-CN": {
         "status": "planned",
         "body": "后续应按语言、地区和维度计算内部一致性，并记录版本。",
-        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
         "user_facing_status_label": "证据持续建设中",
-        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
-        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
+        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
       },
       "en": {
         "status": "planned",
         "body": "Future work should estimate internal consistency by language, region, and dimension with version tracking.",
-        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
         "user_facing_status_label": "Evidence is still being built",
-        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
-        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
+        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
       },
       "meta": {
         "id": "eq.evidence.internal_consistency",
@@ -53,25 +55,27 @@
         "trigger_logic": {
           "evidence_area": "internal_consistency"
         },
-        "claim_sensitivity": "high"
+        "claim_sensitivity": "high",
+        "claim_risk": "medium",
+        "risk_notes": "Evidence status asset; keep validity boundary explicit."
       }
     },
     "eq.evidence.test_retest": {
       "zh-CN": {
         "status": "planned",
         "body": "建议在 30–90 天窗口评估稳定性和可变性。",
-        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
         "user_facing_status_label": "证据持续建设中",
-        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
-        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
+        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
       },
       "en": {
         "status": "planned",
         "body": "A 30–90 day window should be used to evaluate stability and change.",
-        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
         "user_facing_status_label": "Evidence is still being built",
-        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
-        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
+        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
       },
       "meta": {
         "id": "eq.evidence.test_retest",
@@ -80,25 +84,27 @@
         "trigger_logic": {
           "evidence_area": "test_retest"
         },
-        "claim_sensitivity": "high"
+        "claim_sensitivity": "high",
+        "claim_risk": "medium",
+        "risk_notes": "Evidence status asset; keep validity boundary explicit."
       }
     },
     "eq.evidence.factor_structure": {
       "zh-CN": {
         "status": "planned",
         "body": "需要用 EFA/CFA 或其他合适方法验证四维结构。",
-        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
         "user_facing_status_label": "证据持续建设中",
-        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
-        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
+        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
       },
       "en": {
         "status": "planned",
         "body": "The four-dimension structure should be evaluated with EFA/CFA or suitable methods.",
-        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
         "user_facing_status_label": "Evidence is still being built",
-        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
-        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
+        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
       },
       "meta": {
         "id": "eq.evidence.factor_structure",
@@ -107,25 +113,27 @@
         "trigger_logic": {
           "evidence_area": "factor_structure"
         },
-        "claim_sensitivity": "high"
+        "claim_sensitivity": "high",
+        "claim_risk": "medium",
+        "risk_notes": "Evidence status asset; keep validity boundary explicit."
       }
     },
     "eq.evidence.criterion_validity": {
       "zh-CN": {
         "status": "planned",
         "body": "可探索与工作满意、关系满意、压力恢复等低风险外部指标的关联。",
-        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
         "user_facing_status_label": "证据持续建设中",
-        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
-        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
+        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
       },
       "en": {
         "status": "planned",
         "body": "Associations with low-risk external indicators such as work satisfaction, relationship satisfaction, and recovery may be explored.",
-        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
         "user_facing_status_label": "Evidence is still being built",
-        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
-        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
+        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
       },
       "meta": {
         "id": "eq.evidence.criterion_validity",
@@ -134,25 +142,27 @@
         "trigger_logic": {
           "evidence_area": "criterion_validity"
         },
-        "claim_sensitivity": "high"
+        "claim_sensitivity": "high",
+        "claim_risk": "medium",
+        "risk_notes": "Evidence status asset; keep validity boundary explicit."
       }
     },
     "eq.evidence.measurement_invariance": {
       "zh-CN": {
         "status": "planned",
         "body": "中英文和主要人群组之间需要做等值或 DIF 检查。",
-        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
         "user_facing_status_label": "证据持续建设中",
-        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
-        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
+        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
       },
       "en": {
         "status": "planned",
         "body": "Chinese/English and major user groups require invariance or DIF checks.",
-        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
         "user_facing_status_label": "Evidence is still being built",
-        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
-        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
+        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
       },
       "meta": {
         "id": "eq.evidence.measurement_invariance",
@@ -161,25 +171,27 @@
         "trigger_logic": {
           "evidence_area": "measurement_invariance"
         },
-        "claim_sensitivity": "high"
+        "claim_sensitivity": "high",
+        "claim_risk": "medium",
+        "risk_notes": "Evidence status asset; keep validity boundary explicit."
       }
     },
     "eq.evidence.norm_status": {
       "zh-CN": {
         "status": "provisional",
         "body": "当前常模解释为阶段性版本，不应被理解为最终全球常模。",
-        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
         "user_facing_status_label": "证据持续建设中",
-        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
-        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
+        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
       },
       "en": {
         "status": "provisional",
         "body": "Current norms are provisional and should not be read as final global norms.",
-        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
         "user_facing_status_label": "Evidence is still being built",
-        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
-        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
+        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
       },
       "meta": {
         "id": "eq.evidence.norm_status",
@@ -188,7 +200,9 @@
         "trigger_logic": {
           "evidence_area": "norm_status"
         },
-        "claim_sensitivity": "high"
+        "claim_sensitivity": "high",
+        "claim_risk": "medium",
+        "risk_notes": "Evidence status asset; keep validity boundary explicit."
       }
     }
   }
