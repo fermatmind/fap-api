@@ -70940,9 +70940,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "ab6d30c0e74b52e87c0920639e26efea18b4001f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2642",
     "checks": {
       "phpunit_dimension_deep_copy_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi --display-warnings",
@@ -70991,6 +70991,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Reworked six dimension deep copy into activity-grounded interest readings with costs, misread guardrails, and validation questions; local validation passed."
+      },
+      {
+        "at": "2026-07-02T19:54:41Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2642 after DIMDEEP-01 local validation and scope validation passed."
       }
     ]
   },
