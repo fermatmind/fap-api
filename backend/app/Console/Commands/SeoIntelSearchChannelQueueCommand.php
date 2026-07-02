@@ -44,6 +44,8 @@ final class SeoIntelSearchChannelQueueCommand extends Command
         $enqueueCommitted = false;
         $writeResult = [
             'batch_ids' => [],
+            'queue_item_ids' => [],
+            'queue_items' => [],
             'written_items' => 0,
         ];
         $status = 'success';
@@ -162,6 +164,8 @@ final class SeoIntelSearchChannelQueueCommand extends Command
             'config_write_gate_bypassed' => $configWriteGateBypassed,
             'required_bounded_enqueue_override_confirmation' => $requiredBoundedEnqueueOverrideConfirmation,
             'batch_ids' => $writeResult['batch_ids'],
+            'queue_item_ids' => $writeResult['queue_item_ids'],
+            'queue_items' => $writeResult['queue_items'],
             'written_items' => $writeResult['written_items'],
             'issues' => $issues,
             'safety_flags' => [

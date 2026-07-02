@@ -19,6 +19,8 @@ final class SearchChannelQueueWriteService
         $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
         $now = now();
         $batchIds = [];
+        $queueItemIds = [];
+        $queueItems = [];
         $writtenItems = 0;
 
         foreach ($this->groupByChannel($plannedItems) as $channel => $items) {
@@ -79,8 +81,21 @@ final class SearchChannelQueueWriteService
                 $queueItemId = $connection->table('seo_search_channel_queue_items')
                     ->where('idempotency_key', $item['idempotency_key'])
                     ->value('id');
+                $normalizedQueueItemId = is_numeric($queueItemId) ? (int) $queueItemId : null;
 
-                $this->events->log($connection, is_numeric($queueItemId) ? (int) $queueItemId : null, (int) $batchId, 'queue_item_planned', [
+                if ($normalizedQueueItemId !== null) {
+                    $queueItemIds[] = $normalizedQueueItemId;
+                    $queueItems[] = [
+                        'id' => $normalizedQueueItemId,
+                        'batch_id' => (int) $batchId,
+                        'channel' => (string) $item['channel'],
+                        'canonical_url' => (string) $item['canonical_url'],
+                        'approval_state' => (string) $item['approval_state'],
+                        'execution_state' => (string) $item['execution_state'],
+                    ];
+                }
+
+                $this->events->log($connection, $normalizedQueueItemId, (int) $batchId, 'queue_item_planned', [
                     'channel' => $channel,
                     'url_hash' => $item['url_hash'],
                     'eligibility_state' => $item['eligibility_state'],
@@ -94,6 +109,8 @@ final class SearchChannelQueueWriteService
 
         return [
             'batch_ids' => $batchIds,
+            'queue_item_ids' => array_values(array_unique($queueItemIds)),
+            'queue_items' => $queueItems,
             'written_items' => $writtenItems,
         ];
     }

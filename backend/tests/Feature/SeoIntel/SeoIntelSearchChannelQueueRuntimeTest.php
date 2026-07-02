@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueWriteService;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -473,6 +474,23 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
         ], $output['target_tables'] ?? null);
         $this->assertSame(8, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
         $this->assertSame(8, DB::connection('seo_intel')->table('seo_search_channel_queue_batches')->count());
+        $queueItemIds = DB::connection('seo_intel')
+            ->table('seo_search_channel_queue_items')
+            ->orderBy('id')
+            ->pluck('id')
+            ->map(fn ($id): int => (int) $id)
+            ->all();
+
+        $this->assertSame($queueItemIds, $output['queue_item_ids'] ?? null);
+        $this->assertCount(8, $output['queue_items'] ?? []);
+        $this->assertSame([
+            'id' => 1,
+            'batch_id' => 1,
+            'channel' => 'baidu_push',
+            'canonical_url' => 'https://www.fermatmind.com/en/research/safe-research-report',
+            'approval_state' => 'pending',
+            'execution_state' => 'dry_run_ready',
+        ], $output['queue_items'][0] ?? null);
     }
 
     #[Test]
@@ -510,9 +528,31 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
         $this->seedSeoUrl();
 
         $this->runQueueCommand(['--json' => true]);
-        $this->runQueueCommand(['--json' => true]);
+        $secondOutput = $this->runQueueCommand(['--json' => true]);
 
         $this->assertSame(8, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        $this->assertSame('success', $secondOutput['status'] ?? null);
+        $this->assertSame([], $secondOutput['queue_item_ids'] ?? null);
+        $this->assertFalse((bool) ($secondOutput['writes_committed'] ?? true));
+    }
+
+    #[Test]
+    public function writer_returns_existing_queue_item_id_when_update_or_insert_matches_existing_idempotency_key(): void
+    {
+        $plannedItem = $this->plannedQueueItem([
+            'canonical_url' => 'https://fermatmind.com/zh/articles/requeue-existing',
+            'idempotency_key' => hash('sha256', 'same-url-channel'),
+        ]);
+        $writer = app(SearchChannelQueueWriteService::class);
+
+        $firstWrite = $writer->write([$plannedItem]);
+        $secondWrite = $writer->write([$plannedItem]);
+
+        $this->assertSame([1], $firstWrite['queue_item_ids'] ?? null);
+        $this->assertSame([1], $secondWrite['queue_item_ids'] ?? null);
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        $this->assertSame(2, $secondWrite['queue_items'][0]['batch_id'] ?? null);
+        $this->assertSame('indexnow', $secondWrite['queue_items'][0]['channel'] ?? null);
     }
 
     #[Test]
@@ -901,6 +941,37 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     * @return array<string, mixed>
+     */
+    private function plannedQueueItem(array $overrides = []): array
+    {
+        $canonicalUrl = (string) ($overrides['canonical_url'] ?? 'https://fermatmind.com/en/research/planned');
+
+        return [
+            'idempotency_key' => $overrides['idempotency_key'] ?? hash('sha256', strtolower($canonicalUrl).'|indexnow'),
+            'canonical_url' => $canonicalUrl,
+            'locale' => $overrides['locale'] ?? 'en',
+            'page_entity_type' => $overrides['page_entity_type'] ?? 'article',
+            'entity_type' => $overrides['entity_type'] ?? 'article',
+            'entity_id' => $overrides['entity_id'] ?? '1',
+            'source_authority' => $overrides['source_authority'] ?? 'backend_cms',
+            'source_table' => $overrides['source_table'] ?? 'articles',
+            'channel' => $overrides['channel'] ?? 'indexnow',
+            'eligibility_state' => $overrides['eligibility_state'] ?? 'eligible',
+            'approval_state' => $overrides['approval_state'] ?? 'pending',
+            'execution_state' => $overrides['execution_state'] ?? 'dry_run_ready',
+            'indexability_state' => $overrides['indexability_state'] ?? 'indexable',
+            'claim_boundary_state' => $overrides['claim_boundary_state'] ?? 'claim_safe',
+            'private_flow' => (bool) ($overrides['private_flow'] ?? false),
+            'reason_codes' => $overrides['reason_codes'] ?? [],
+            'lastmod' => $overrides['lastmod'] ?? now()->subHour(),
+            'content_hash' => $overrides['content_hash'] ?? null,
+            'url_hash' => $overrides['url_hash'] ?? hash('sha256', $canonicalUrl),
+        ];
     }
 
     private function createSeoIntelTables(): void
