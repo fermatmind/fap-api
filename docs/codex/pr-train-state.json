@@ -63745,7 +63745,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-02T16:35:13Z",
+  "updated_at": "2026-07-02T16:36:25Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -67143,9 +67143,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "7e5a2042dac39c1b02bb5031b626e7320099582b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2606",
     "checks": {
       "phpunit_riasec_unit_subset": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
@@ -67199,6 +67199,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Implemented HERO-01 top3 hero copy repair; local RIASEC unit subset and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T16:36:25Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2606 after HERO-01 local validation and scope validation passed."
       }
     ]
   },
