@@ -331,6 +331,33 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         }
     }
 
+    public function test_140q_projection_selects_layer_emphasis_without_cross_form_score_comparison(): void
+    {
+        $projection = app(RiasecPublicProjectionService::class)->buildV2FromResult($this->resultFor140qLayerTension(), 'zh-CN');
+
+        $this->assertFalse((bool) data_get($projection, 'form.raw_score_delta_allowed'));
+        $this->assertSame('emphasis_difference_only', data_get($projection, 'form.cross_form_interpretation'));
+        $this->assertSame('task_environment_role_emphasis_only', data_get($projection, 'structural_difference.basis'));
+        $this->assertSame('explicit_layer_state_or_default_agreement_without_score_delta', data_get($projection, 'structural_difference.selection_rule'));
+        $this->assertFalse((bool) data_get($projection, 'structural_difference.raw_score_delta_allowed'));
+        $this->assertFalse((bool) data_get($projection, 'structural_difference.raw_scores_used_for_selection'));
+        $this->assertSame('tension', data_get($projection, 'structural_difference.layer_states.environment'));
+        $this->assertArrayNotHasKey('raw_scores_delta', $projection);
+        $this->assertArrayNotHasKey('domains_delta', $projection);
+
+        $environmentSlot = $this->firstSlotForModuleAndState($projection, '140q_context_cards', [
+            'layer' => 'environment',
+            'layer_state' => 'tension',
+        ]);
+        $this->assertStringContainsString('环境层-张力', (string) data_get($environmentSlot, 'content.environment_card'));
+
+        $aggregateSlot = $this->firstSlotForModuleAndState($projection, '140q_context_cards', [
+            'slot_name' => 'layer_tension',
+            'layer_state' => 'tension',
+        ]);
+        $this->assertStringContainsString('张力', (string) data_get($aggregateSlot, 'content.title'));
+    }
+
     /**
      * @return array<string,mixed>
      */
@@ -375,6 +402,30 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         $this->fail('Missing RIASEC projection slot for module '.$moduleKey);
     }
 
+    /**
+     * @param  array<string,mixed>  $projection
+     * @param  array<string,string>  $state
+     * @return array<string,mixed>
+     */
+    private function firstSlotForModuleAndState(array $projection, string $moduleKey, array $state): array
+    {
+        foreach ((array) data_get($projection, 'deep_content_slots_v1.slots', []) as $slot) {
+            if (($slot['module_key'] ?? null) !== $moduleKey) {
+                continue;
+            }
+
+            foreach ($state as $key => $value) {
+                if (data_get($slot, 'state.'.$key) !== $value) {
+                    continue 2;
+                }
+            }
+
+            return $slot;
+        }
+
+        $this->fail('Missing RIASEC projection slot for module '.$moduleKey.' and state '.json_encode($state, JSON_THROW_ON_ERROR));
+    }
+
     private function resultForOrderedCode(string $orderedCode): Result
     {
         $scores = array_fill_keys(['R', 'I', 'A', 'S', 'E', 'C'], 0);
@@ -395,6 +446,33 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
                 'form_code' => 'riasec_60',
                 'scoring_spec_version' => 'riasec_standard_60_v1',
                 'scores_0_100' => $scores,
+            ],
+        ]);
+    }
+
+    private function resultFor140qLayerTension(): Result
+    {
+        $scores = ['R' => 100, 'I' => 75, 'A' => 50, 'S' => 0, 'E' => 0, 'C' => 0];
+
+        return new Result([
+            'scale_code' => 'RIASEC',
+            'type_code' => 'RIA',
+            'scores_pct' => $scores,
+            'result_json' => [
+                'top_code' => 'RIA',
+                'primary_type' => 'R',
+                'secondary_type' => 'I',
+                'tertiary_type' => 'A',
+                'answer_count' => 140,
+                'form_code' => 'riasec_140',
+                'scoring_spec_version' => 'riasec_enhanced_140_v1',
+                'scores_0_100' => $scores,
+                'structural_difference_state' => 'layer_tension',
+                'riasec_140q_layer_states' => [
+                    'task' => 'agreement',
+                    'environment' => 'tension',
+                    'role' => 'agreement',
+                ],
             ],
         ]);
     }

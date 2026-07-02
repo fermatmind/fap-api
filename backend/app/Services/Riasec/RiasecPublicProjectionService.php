@@ -71,6 +71,7 @@ final class RiasecPublicProjectionService
                 'compare_compatibility_group' => (string) ($comparePolicy['compare_compatibility_group'] ?? ''),
                 'cross_form_comparable' => false,
                 'raw_score_delta_allowed' => false,
+                'cross_form_interpretation' => 'emphasis_difference_only',
             ],
             'measurement_contract_v1' => $measurementContract,
             'compare_policy_v1' => $comparePolicy,
@@ -127,7 +128,9 @@ final class RiasecPublicProjectionService
                 'compare_compatibility_group' => (string) ($comparePolicy['compare_compatibility_group'] ?? ''),
                 'cross_form_comparable' => false,
                 'raw_score_delta_allowed' => false,
+                'cross_form_interpretation' => 'emphasis_difference_only',
             ],
+            'structural_difference' => $this->structuralDifferencePolicy($formCode, $qualityRule['quality_state'] ?? 'normal', $payload, $comparePolicy),
             'measurement_evidence' => [
                 'measurement_contract_version' => (string) ($measurementContract['schema_version'] ?? RiasecMeasurementContract::SCHEMA_VERSION),
                 'scoring_spec_version' => $this->firstString([
@@ -229,7 +232,9 @@ final class RiasecPublicProjectionService
             );
         }
 
-        foreach ($this->selected140qDimensionLayerSlots($topCode, $formCode, $qualityState) as $slot) {
+        $structuralDifferencePolicy = (array) ($projection['structural_difference'] ?? []);
+
+        foreach ($this->selected140qDimensionLayerSlots($topCode, $formCode, $qualityState, $structuralDifferencePolicy) as $slot) {
             $this->appendRenderableSlot(
                 $slots,
                 $slot,
@@ -239,7 +244,7 @@ final class RiasecPublicProjectionService
             );
         }
 
-        foreach ($this->selected140qSlots($formCode, $qualityState) as $slotName) {
+        foreach ($this->selected140qSlots($formCode, $qualityState, $structuralDifferencePolicy) as $slotName) {
             $moduleKey = str_starts_with($slotName, '140q_') ? '140q_cta' : '140q_context_cards';
             $this->appendRenderableSlot(
                 $slots,
@@ -379,7 +384,7 @@ final class RiasecPublicProjectionService
     /**
      * @return list<array<string,mixed>>
      */
-    private function selected140qDimensionLayerSlots(string $topCode, string $formCode, string $qualityState): array
+    private function selected140qDimensionLayerSlots(string $topCode, string $formCode, string $qualityState, array $structuralDifferencePolicy): array
     {
         if ($formCode !== 'riasec_140' || in_array($qualityState, ['low_quality', 'retake_recommended'], true)) {
             return [];
@@ -391,10 +396,14 @@ final class RiasecPublicProjectionService
             return [];
         }
 
+        $layerStates = is_array($structuralDifferencePolicy['layer_states'] ?? null)
+            ? $structuralDifferencePolicy['layer_states']
+            : [];
+
         return [
-            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'task', 'agreement'),
-            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'environment', 'agreement'),
-            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'role', 'agreement'),
+            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'task', $this->normalize140qSelectionLayerState((string) ($layerStates['task'] ?? 'agreement'))),
+            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'environment', $this->normalize140qSelectionLayerState((string) ($layerStates['environment'] ?? 'agreement'))),
+            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'role', $this->normalize140qSelectionLayerState((string) ($layerStates['role'] ?? 'agreement'))),
         ];
     }
 
@@ -415,16 +424,72 @@ final class RiasecPublicProjectionService
     /**
      * @return list<string>
      */
-    private function selected140qSlots(string $formCode, string $qualityState): array
+    private function selected140qSlots(string $formCode, string $qualityState, array $structuralDifferencePolicy): array
     {
         if (in_array($qualityState, ['low_quality', 'retake_recommended'], true)) {
             return [];
         }
         if ($formCode === 'riasec_140') {
-            return ['task_activity_card', 'environment_card', 'role_responsibility_card', 'layer_agreement'];
+            $layerStates = is_array($structuralDifferencePolicy['layer_states'] ?? null)
+                ? $structuralDifferencePolicy['layer_states']
+                : [];
+            $aggregateLayerState = in_array('tension', array_values($layerStates), true) ? 'layer_tension' : 'layer_agreement';
+
+            return ['task_activity_card', 'environment_card', 'role_responsibility_card', $aggregateLayerState];
         }
 
         return ['layer_unavailable', '140q_cta'];
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $comparePolicy
+     * @return array<string,mixed>
+     */
+    private function structuralDifferencePolicy(string $formCode, string $qualityState, array $payload, array $comparePolicy): array
+    {
+        $enabled = $formCode === 'riasec_140' && ! in_array($qualityState, ['low_quality', 'retake_recommended'], true);
+        $layerStates = is_array(data_get($payload, 'riasec_140q_layer_states'))
+            ? (array) data_get($payload, 'riasec_140q_layer_states')
+            : (array) data_get($payload, 'enhanced_breakdown.layer_states', []);
+
+        return [
+            'schema_version' => 'riasec.structural_difference_policy.v1',
+            'enabled' => $enabled,
+            'state' => $enabled
+                ? $this->normalizeStructuralDifferenceState((string) data_get($payload, 'structural_difference_state', data_get($comparePolicy, 'structural_difference_state', 'different_emphasis')))
+                : 'cross_form_not_comparable',
+            'basis' => 'task_environment_role_emphasis_only',
+            'selection_rule' => 'explicit_layer_state_or_default_agreement_without_score_delta',
+            'score_comparison_allowed' => false,
+            'raw_score_delta_allowed' => false,
+            'raw_scores_used_for_selection' => false,
+            'different_form_scores_comparable' => false,
+            'layer_states' => [
+                'task' => $this->normalize140qSelectionLayerState((string) ($layerStates['task'] ?? data_get($payload, 'task_layer_state', 'agreement'))),
+                'environment' => $this->normalize140qSelectionLayerState((string) ($layerStates['environment'] ?? data_get($payload, 'environment_layer_state', 'agreement'))),
+                'role' => $this->normalize140qSelectionLayerState((string) ($layerStates['role'] ?? data_get($payload, 'role_layer_state', 'agreement'))),
+            ],
+            'public_copy_boundary' => '60Q 与 140Q 只能读作线索强调不同，不比较 raw score，不输出优劣或覆盖判断。',
+        ];
+    }
+
+    private function normalize140qSelectionLayerState(string $layerState): string
+    {
+        $normalized = strtolower(trim($layerState));
+
+        return in_array($normalized, ['agreement', 'tension', 'unavailable', 'insufficient_quality', 'not_applicable_60q_only'], true)
+            ? $normalized
+            : 'agreement';
+    }
+
+    private function normalizeStructuralDifferenceState(string $state): string
+    {
+        $normalized = strtolower(trim($state));
+
+        return in_array($normalized, RiasecDeepCopySlotRegistry::STRUCTURAL_DIFFERENCE_STATES, true)
+            ? $normalized
+            : 'different_emphasis';
     }
 
     /**

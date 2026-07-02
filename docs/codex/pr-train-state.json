@@ -70329,8 +70329,8 @@
     "depends_on": [
       "RIASEC-CONTENT-140CTA-01"
     ],
-    "status": "pr_opened",
-    "commit_sha": "c3ab256463086dc0ad0088ea7cb5bb3385447aec",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "9a5694163e7c601783dff1361f32e31cdf3373e9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2627",
     "checks": {
       "phpunit_140q_asset_slot_and_boundary_tests": {
@@ -70359,14 +70359,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T18:20:58Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl",
         "backend/tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php",
@@ -70391,8 +70391,15 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2627 after 140CTX-01 local validation, latest-main rebase, and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T18:25:42Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2627 merged; origin/main contains merge commit; local main synced; task branch cleaned. Recorded during 140CTX-02 ledger reconciliation."
       }
-    ]
+    ],
+    "merge_commit_sha": "20dc6320ab214f07aa6d06eace6f4c4bea072280"
   },
   "RIASEC-CONTENT-140CTX-02": {
     "id": "RIASEC-CONTENT-140CTX-02",
@@ -70404,19 +70411,44 @@
     "depends_on": [
       "RIASEC-CONTENT-140CTX-01"
     ],
-    "status": "authorized_pending_start",
-    "commit_sha": null,
+    "status": "local_validation_passed",
+    "commit_sha": "PENDING_COMMIT_SHA",
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "phpunit_projection_structural_tests": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecCompareGuardContractTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "14 tests, 997 assertions"
+      },
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "175 tests, 104218 assertions"
+      },
+      "pint_and_php_lint": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecPublicProjectionService.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php && php -l app/Services/Riasec/RiasecPublicProjectionService.php",
+        "status": "passed",
+        "summary": "2 files passed; no syntax errors"
+      },
+      "manifest_state_parse_and_diff_check": {
+        "command": "ruby YAML parse; python JSON parse; git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecPublicProjectionService.php",
+        "backend/tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -70424,6 +70456,12 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T18:25:42Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Added explicit structural-difference projection policy and layer-state selection without raw-score delta; local RIASEC unit subset and scope validation passed."
       }
     ]
   },
