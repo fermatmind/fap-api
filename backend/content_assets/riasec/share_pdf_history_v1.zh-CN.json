@@ -7,17 +7,27 @@
   "surfaces": [
     {
       "surface": "share_safe_card",
-      "copy": "我的 RIASEC 结果显示：我更容易被若干工作活动线索吸引。分享版只展示安全摘要，不展示原始反馈或隐私上下文。",
+      "copy": "这是一张 RIASEC 兴趣快照的公开摘要：只说明本次作答中较靠前的活动线索，适合用来开启讨论；不展示分数、原始反馈、三字码细节或个人情境。",
       "public_safe": true,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "public_summary_mode": "minimal_anonymous_interest_snapshot",
+      "holland_code_exposure_allowed": false,
+      "private_context_allowed": false,
+      "identity_label_allowed": false,
+      "share_card_default_visible": true
     },
     {
       "surface": "share_detail_boundary",
-      "copy": "分享页不是完整报告，也不展示职业结论。它只说明本次结果的兴趣结构和方法边界。",
+      "copy": "分享页不是完整报告，也不是职业建议。它只保留最小化的兴趣线索摘要和方法边界，不能用于判断能力、岗位适配或长期身份。",
       "public_safe": true,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "public_summary_mode": "minimal_anonymous_interest_snapshot",
+      "holland_code_exposure_allowed": false,
+      "private_context_allowed": false,
+      "identity_label_allowed": false,
+      "share_card_default_visible": true
     },
     {
       "surface": "pdf_personal",
@@ -49,10 +59,15 @@
     },
     {
       "surface": "low_quality_share",
-      "copy": "谨慎阅读结果只允许安全分享摘要，默认不展示强活动线索组合或职业场景例子。",
+      "copy": "谨慎阅读结果只允许最小公开摘要：保留“需要谨慎阅读”的边界，不展示强解释内容、职业例子、分数或私人反馈。",
       "public_safe": true,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "public_summary_mode": "minimal_anonymous_interest_snapshot",
+      "holland_code_exposure_allowed": false,
+      "private_context_allowed": false,
+      "identity_label_allowed": false,
+      "share_card_default_visible": true
     }
   ],
   "required_boundaries": [

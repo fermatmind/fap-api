@@ -209,6 +209,11 @@ final class RiasecLifecycleCopyService
                 'public_safe' => (bool) ($row['public_safe'] ?? false),
                 'raw_scores_allowed' => false,
                 'raw_feedback_allowed' => false,
+                'public_summary_mode' => (string) ($row['public_summary_mode'] ?? 'surface_specific_boundary'),
+                'holland_code_exposure_allowed' => (bool) ($row['holland_code_exposure_allowed'] ?? false),
+                'private_context_allowed' => (bool) ($row['private_context_allowed'] ?? false),
+                'identity_label_allowed' => (bool) ($row['identity_label_allowed'] ?? false),
+                'share_card_default_visible' => (bool) ($row['share_card_default_visible'] ?? false),
             ];
         }
 

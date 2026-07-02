@@ -194,6 +194,31 @@ final class RiasecLifecycleCopyPreflightTest extends TestCase
         $this->assertSame([], $hits);
     }
 
+    public function test_public_share_surfaces_are_minimal_anonymous_summaries(): void
+    {
+        $contract = app(\App\Services\Riasec\RiasecLifecycleCopyService::class)->lifecycleCopyContract(true);
+        $publicSurfaces = array_values(array_filter(
+            (array) data_get($contract, 'surfaces', []),
+            static fn (array $surface): bool => (bool) ($surface['public_safe'] ?? false)
+        ));
+
+        $this->assertSame(['share_safe_card', 'share_detail_boundary', 'low_quality_share'], array_column($publicSurfaces, 'surface'));
+
+        foreach ($publicSurfaces as $surface) {
+            $copy = (string) ($surface['copy'] ?? '');
+
+            $this->assertSame('minimal_anonymous_interest_snapshot', $surface['public_summary_mode']);
+            $this->assertFalse($surface['raw_scores_allowed']);
+            $this->assertFalse($surface['raw_feedback_allowed']);
+            $this->assertFalse($surface['holland_code_exposure_allowed']);
+            $this->assertFalse($surface['private_context_allowed']);
+            $this->assertFalse($surface['identity_label_allowed']);
+            $this->assertStringNotContainsString('我的 RIASEC 结果', $copy);
+            $this->assertDoesNotMatchRegularExpression('/\\b[RIASEC]{3}\\b/', $copy);
+            $this->assertDoesNotMatchRegularExpression('/\\b(?:100|75|50|25|0)(?:\\.0+)?\\b/', $copy);
+        }
+    }
+
     public function test_current_runtime_contracts_remain_snapshot_bound_and_public_safe(): void
     {
         $contract = app(RiasecTechnicalNoteService::class)->contract();
