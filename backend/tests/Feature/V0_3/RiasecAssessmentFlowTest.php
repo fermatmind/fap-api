@@ -249,6 +249,13 @@ final class RiasecAssessmentFlowTest extends TestCase
         $history->assertJsonPath('items.0.compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $history->assertJsonPath('items.0.compare_policy_v1.raw_score_delta_allowed', false);
         $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.measured_payload_mutation_allowed', false);
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.4.surface', 'history_same_form');
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.4.history_surface_mode', 'snapshot_exploration_record');
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.4.history_summary_mode', 'same_form_snapshot_overlap');
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.4.stable_identity_claim_allowed', false);
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.4.history_raw_delta_allowed', false);
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.5.surface', 'history_cross_form');
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.5.history_summary_mode', 'cross_form_emphasis_difference');
         $history->assertJsonPath('history_compare.current_compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
     }
 
@@ -353,6 +360,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $history->assertJsonPath('items.0.riasec_public_projection_v2.exploration_feedback_overlay_v0_1.measured_result_guard.scores_mutation_allowed', false);
         $history->assertJsonPath('items.0.riasec_public_projection_v2.exploration_feedback_overlay_v0_1.claim_boundary.feedback_is_career_match', false);
         $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.internal_snapshot_id_public_exposure_allowed', false);
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.4.longitudinal_trait_claim_allowed', false);
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.5.history_raw_delta_allowed', false);
         $history->assertJsonPath('history_compare.current_top_code', 'RIA');
 
         $pdf = $this->withHeaders([

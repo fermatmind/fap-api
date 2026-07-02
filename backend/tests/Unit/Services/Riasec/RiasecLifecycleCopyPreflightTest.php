@@ -118,6 +118,16 @@ final class RiasecLifecycleCopyPreflightTest extends TestCase
                 $this->assertTrue($surface['pdf_default_visible']);
                 $this->assertLessThanOrEqual(110, mb_strlen((string) $surface['copy']));
             }
+
+            if (str_starts_with((string) $surface['surface'], 'history_')) {
+                $this->assertFalse($surface['public_safe']);
+                $this->assertSame('snapshot_exploration_record', $surface['history_surface_mode']);
+                $this->assertFalse($surface['stable_identity_claim_allowed']);
+                $this->assertFalse($surface['longitudinal_trait_claim_allowed']);
+                $this->assertFalse($surface['history_raw_delta_allowed']);
+                $this->assertTrue($surface['history_default_visible']);
+                $this->assertLessThanOrEqual(105, mb_strlen((string) $surface['copy']));
+            }
         }
         $this->assertSame('omit_module', $share['fallback_behavior']);
         $this->assertFalse($share['frontend_fallback_allowed']);
@@ -254,6 +264,40 @@ final class RiasecLifecycleCopyPreflightTest extends TestCase
                 $this->assertTrue($surface['snapshot_bound_required']);
                 $this->assertTrue($surface['pdf_default_visible']);
                 $this->assertStringNotContainsString('raw score', strtolower($copy));
+                $this->assertDoesNotMatchRegularExpression('/\\b[RIASEC]{3}\\b/', $copy);
+                $this->assertDoesNotMatchRegularExpression('/\\b(?:100|75|50|25|0)(?:\\.0+)?\\b/', $copy);
+            }
+        }
+    }
+
+    public function test_history_surfaces_are_snapshot_and_exploration_records(): void
+    {
+        $service = app(\App\Services\Riasec\RiasecLifecycleCopyService::class);
+
+        foreach (['zh-CN', 'en'] as $locale) {
+            $contract = $service->lifecycleCopyContract(true, $locale);
+            $historySurfaces = array_values(array_filter(
+                (array) data_get($contract, 'surfaces', []),
+                static fn (array $surface): bool => str_starts_with((string) ($surface['surface'] ?? ''), 'history_')
+            ));
+
+            $this->assertSame(['history_same_form', 'history_cross_form'], array_column($historySurfaces, 'surface'));
+            $this->assertSame(
+                ['same_form_snapshot_overlap', 'cross_form_emphasis_difference'],
+                array_column($historySurfaces, 'history_summary_mode')
+            );
+
+            foreach ($historySurfaces as $surface) {
+                $copy = (string) ($surface['copy'] ?? '');
+
+                $this->assertFalse($surface['public_safe']);
+                $this->assertFalse($surface['raw_scores_allowed']);
+                $this->assertFalse($surface['raw_feedback_allowed']);
+                $this->assertSame('snapshot_exploration_record', $surface['history_surface_mode']);
+                $this->assertFalse($surface['stable_identity_claim_allowed']);
+                $this->assertFalse($surface['longitudinal_trait_claim_allowed']);
+                $this->assertFalse($surface['history_raw_delta_allowed']);
+                $this->assertTrue($surface['history_default_visible']);
                 $this->assertDoesNotMatchRegularExpression('/\\b[RIASEC]{3}\\b/', $copy);
                 $this->assertDoesNotMatchRegularExpression('/\\b(?:100|75|50|25|0)(?:\\.0+)?\\b/', $copy);
             }

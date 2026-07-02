@@ -55,17 +55,29 @@
     },
     {
       "surface": "history_same_form",
-      "copy": "History for the same form should emphasize Top 3 overlap, near ties, and reading strength. It should not draw cross-form raw score movement.",
+      "copy": "History records same-form result snapshots: Top 3 overlap, near ties, and reading strength for that response. It is an exploration log, not evidence of stable personality or ability change.",
       "public_safe": false,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "history_surface_mode": "snapshot_exploration_record",
+      "history_summary_mode": "same_form_snapshot_overlap",
+      "stable_identity_claim_allowed": false,
+      "longitudinal_trait_claim_allowed": false,
+      "history_raw_delta_allowed": false,
+      "history_default_visible": true
     },
     {
       "surface": "history_cross_form",
-      "copy": "60Q and 140Q use different score spaces. History can explain which interest clues were emphasized in each result, but it must not chart raw score gains or drops across forms.",
+      "copy": "60Q and 140Q use different score spaces. History may note which clues each snapshot emphasized, but it must not compare raw-score gains or drops or say the interest profile improved or declined.",
       "public_safe": false,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "history_surface_mode": "snapshot_exploration_record",
+      "history_summary_mode": "cross_form_emphasis_difference",
+      "stable_identity_claim_allowed": false,
+      "longitudinal_trait_claim_allowed": false,
+      "history_raw_delta_allowed": false,
+      "history_default_visible": true
     },
     {
       "surface": "low_quality_share",
