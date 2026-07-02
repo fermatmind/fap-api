@@ -10,7 +10,7 @@
 
     ],
     "status": "pr_open_rebased_local_validation_passed",
-    "commit_sha": "80545e269c41451c29e325882cb0301867c500fc",
+    "commit_sha": "da6f8b075b228fdf69d6b16343d8e261bd085ca7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2600",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -82,6 +82,24 @@
           "cd backend && php artisan test --filter=Enneagram"
         ],
         "evidence": "All post-rebase local validation passed; Enneagram filter completed with 257 existing file_get_contents warnings, 2 passed tests, and 83375 assertions."
+      },
+      "rebase_origin_main_b026ae56f": {
+        "status": "pass",
+        "evidence": "Rebased onto origin/main b026ae56f after another concurrent main merge; kept main RIASEC/EQ train entries and ENNEA-RP-01 through ENNEA-RP-43 manifest entries."
+      },
+      "post_rebase_b026ae56f_local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --check",
+          "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+          "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+          "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+          "cd backend && php artisan test --filter=Enneagram"
+        ],
+        "evidence": "All post-rebase local validation passed again; Enneagram filter completed with 257 existing file_get_contents warnings, 2 passed tests, and 83375 assertions."
       }
     },
     "scope_validation": {
@@ -124,6 +142,11 @@
         "at": "2026-07-02T16:23:45Z",
         "status": "pr_open_rebased_local_validation_passed",
         "notes": "Rebased PR #2600 onto origin/main 54c0ccbe9 after mergeStateStatus DIRTY; resolved manifest conflict by keeping main EQ train entries and ENNEA train entries; post-rebase local validation passed."
+      },
+      {
+        "at": "2026-07-02T16:32:18Z",
+        "status": "pr_open_rebased_local_validation_passed",
+        "notes": "Rebased PR #2600 onto origin/main b026ae56f after mergeStateStatus DIRTY from concurrent main update; post-rebase local validation passed."
       }
     ]
   },
@@ -33786,7 +33809,7 @@
     "failure_reason": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1443",
     "status": "github_checks_passed",
-    "updated_at": "2026-07-02T16:23:45Z"
+    "updated_at": "2026-07-02T16:32:18Z"
   },
   "SEO-DASH-API-01": {
     "base": "main",
