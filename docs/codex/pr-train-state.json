@@ -70545,9 +70545,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": "24f517a928667f599d41b913c7e09ea215776340",
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "791df9c2dcd1e88a0fef777f277624a5b9fecfa0",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2634",
     "checks": {
       "phpunit_lifecycle_share_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi --display-warnings",
@@ -70597,6 +70597,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Repaired public share-card copy as minimal anonymous summary and added public-surface guard fields; local RIASEC unit subset and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T18:46:36Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2634 after SHARE-01 local validation and scope validation passed."
       }
     ]
   },
