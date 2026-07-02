@@ -51,6 +51,7 @@ jobs:
           coverage: none
 
       - name: Confirm approved revision is still latest main
+        id: latest_main_guard
         shell: bash
         env:
           DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
@@ -60,9 +61,25 @@ jobs:
           LATEST_MAIN_SHA="$(git rev-parse origin/main)"
           echo "deploy_sha=$DEPLOY_SHA"
           echo "latest_main_sha=$LATEST_MAIN_SHA"
-          test "$DEPLOY_SHA" = "$LATEST_MAIN_SHA"
+          if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
+            echo "skip_deploy=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipping production deploy because this workflow_run SHA is no longer latest main."
+            exit 0
+          fi
+          echo "skip_deploy=false" >> "$GITHUB_OUTPUT"
+
+      - name: Report stale production deploy skip
+        if: steps.latest_main_guard.outputs.skip_deploy == 'true'
+        shell: bash
+        env:
+          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          echo "Production deploy skipped because a newer main SHA exists."
+          echo "stale_deploy_sha=$DEPLOY_SHA"
 
       - name: Refuse retired production target
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -72,6 +89,7 @@ jobs:
           fi
 
       - name: Install Deployer (pinned)
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -80,17 +98,20 @@ jobs:
           php /tmp/dep.phar --version
 
       - name: Set up SSH
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         uses: webfactory/ssh-agent@v0.10.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Debug SSH agent (fingerprints only)
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
           ssh-add -l
 
       - name: Install pinned SSH known_hosts
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
@@ -102,6 +123,7 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
 
       - name: SSH preflight
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -125,6 +147,7 @@ jobs:
           ssh_retry "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
 
       - name: Remote deploy lock guard
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -171,6 +194,7 @@ jobs:
           REMOTE
 
       - name: Deploy production with Deployer
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         env:
           DEPLOYER_NO_INTERACTION: "1"
@@ -202,6 +226,7 @@ jobs:
             -vvv --no-interaction
 
       - name: Restart queue workers through Laravel queue restart
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -224,6 +249,7 @@ jobs:
           ssh_retry "cd '$DEPLOY_PATH/current/backend' && php artisan queue:restart"
 
       - name: Verify deployed revision
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         env:
           DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
@@ -250,6 +276,7 @@ jobs:
           test "$DEPLOYED_SHA" = "$DEPLOY_SHA"
 
       - name: Healthcheck and contract smoke
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -284,6 +311,7 @@ jobs:
           ssh_retry "curl -fsS --resolve '$AUTH_HOST:443:127.0.0.1' -H 'Content-Type: application/json' -X POST 'https://$AUTH_HOST/api/v0.3/auth/guest' --data '{\"anon_id\":\"deploy_contract_probe\"}' | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'" >/dev/null
 
       - name: Ops entry and asset smoke
+        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
