@@ -1,0 +1,30 @@
+{
+    "package_id": "mbti-cross-type-comparison-content-assets-draft-20260702",
+    "artifact": "MBTI64-CROSS-TYPE-COMPARISON-ASSETS-DRY-RUN-01",
+    "status": "draft",
+    "authority_target": {
+        "storage": "future_backend_authority.mbti64_cross_type_comparison",
+        "public_api": "not_enabled_in_this_package",
+        "write_mode": "draft_package_plan_only"
+    },
+    "comparison_assets": [
+        "comparisons/FermatMind_ENFP_vs_ENTP_CMS_READY.json",
+        "comparisons/FermatMind_ENTJ_vs_INTJ_CMS_READY.json",
+        "comparisons/FermatMind_ESTJ_vs_ENTJ_CMS_READY.json",
+        "comparisons/FermatMind_INFJ_vs_INFP_CMS_READY.json",
+        "comparisons/FermatMind_INTJ_vs_INTP_CMS_READY.json",
+        "comparisons/FermatMind_ISFP_vs_INFP_CMS_READY.json"
+    ],
+    "missing_requested_assets": [
+        "ISTJ_vs_ISFJ_Content_Asset_Package.zip"
+    ],
+    "dry_run_only": true,
+    "write_supported_in_this_package": false,
+    "publish_supported_in_this_package": false,
+    "search_release_supported_in_this_package": false,
+    "notes": [
+        "Use this package to validate GPT-generated MBTI cross-type comparison assets before any CMS draft writer or public route is authorized.",
+        "This package intentionally does not reuse the A/T section key mbti64_comparison_a_vs_t.",
+        "ISTJ vs ISFJ was requested but no matching desktop asset package was found."
+    ]
+}

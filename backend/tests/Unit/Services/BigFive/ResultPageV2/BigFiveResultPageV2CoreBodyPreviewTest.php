@@ -339,6 +339,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Console/Commands/PersonalityMbti64ComparisonAssetsDryRun.php',
             'backend/app/Services/Cms/Mbti64ComparisonAssetsDryRunPlanner.php',
+            'backend/app/Console/Commands/PersonalityMbti64CrossTypeComparisonAssetsDryRun.php',
+            'backend/app/Services/Cms/Mbti64CrossTypeComparisonAssetsDryRunPlanner.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -6352,6 +6354,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbti64ComparisonAssetsDryRun.php',
             'backend/app/Services/Cms/Mbti64ComparisonAssetsDryRunPlanner.php',
+            'backend/app/Console/Commands/PersonalityMbti64CrossTypeComparisonAssetsDryRun.php',
+            'backend/app/Services/Cms/Mbti64CrossTypeComparisonAssetsDryRunPlanner.php',
         ], true);
     }
 

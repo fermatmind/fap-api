@@ -4,8 +4,8 @@
     "status": "draft_for_editorial_and_codex_qa",
     "no_cms_write": true,
     "no_publish": true,
-    "comparison_count": 14,
-    "source_context_count": 28,
+    "comparison_count": 16,
+    "source_context_count": 32,
     "files": [
         {
             "base_type": "INTP",
@@ -180,6 +180,34 @@
             "source_context_files": [
                 "source_context/FermatMind_ISTP-A_ZH_V8_4_Content_Asset.json",
                 "source_context/FermatMind_ISTP-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "ENFP",
+            "comparison_asset": "comparisons/FermatMind_ENFP-A_vs_ENFP-T_CMS_READY.json",
+            "source_zip": "11.zip",
+            "source_zip_sha256": "2587180aa2fd9d3d922a0e502447442b33f4201818884d48605f4e0ebf5ba600",
+            "source_asset_file": "enfp-a-vs-enfp-t.json",
+            "source_asset_sha256": "0313ea12b310bff72f70e90e2cc88906b16f926574a359fd48fc766dd3e53d72",
+            "normalized_for_contract": true,
+            "source_context_origin": "INTJ.zip split_pages",
+            "source_context_files": [
+                "source_context/FermatMind_ENFP-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_ENFP-T_ZH_V8_4_Content_Asset.json"
+            ]
+        },
+        {
+            "base_type": "INTJ",
+            "comparison_asset": "comparisons/FermatMind_INTJ-A_vs_INTJ-T_CMS_READY.json",
+            "source_zip": "INTJ-A_vs_INTJ-T.zip",
+            "source_zip_sha256": "213e4c690999090f96cf3f331e9875ebf364276d1b7332f511c74fcad7542fff",
+            "source_asset_file": "intj-a-vs-intj-t.json",
+            "source_asset_sha256": "0ee1194bcf03f88ddf4f9524cf0fcf6af5ee85b6f9cd2e2d0a128319954fda68",
+            "normalized_for_contract": true,
+            "source_context_origin": "SEO文章/MBTI/mbti_profiles/INTJ-{A,T}_v1.json",
+            "source_context_files": [
+                "source_context/FermatMind_INTJ-A_ZH_V8_4_Content_Asset.json",
+                "source_context/FermatMind_INTJ-T_ZH_V8_4_Content_Asset.json"
             ]
         }
     ]
