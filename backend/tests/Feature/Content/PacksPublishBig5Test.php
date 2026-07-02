@@ -15,6 +15,13 @@ final class PacksPublishBig5Test extends TestCase
 
     private const DIR_ALIAS = 'BIG5-OCEAN-CI-TEST';
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config()->set('content_packs.root', base_path('../content_packages'));
+    }
+
     protected function tearDown(): void
     {
         $target = base_path('../content_packages/default/CN_MAINLAND/zh-CN/'.self::DIR_ALIAS);
