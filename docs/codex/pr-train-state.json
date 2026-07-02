@@ -70735,7 +70735,7 @@
     "depends_on": [
       "SECURITY-169-API-01"
     ],
-    "status": "local_checks_passed",
+    "status": "merged",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -70788,10 +70788,22 @@
       "deployment": {
         "status": "not_run",
         "evidence": "No staging wait, manual deploy, server deploy, production import, production deploy, CMS mutation, search submission, sitemap, llms, canonical, noindex, JSON-LD, or SEO runtime action executed."
+      },
+      "github_pr": {
+        "status": "opened",
+        "evidence": "Opened PR #2620 from codex/security-169-api-02-harden-career-import-workflow-staging-trust to main."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2620 GitHub checks passed for hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload on head 17323150ef4bc5897e2225d9b0aaa983e3a9a606."
+      },
+      "post_merge_revalidate": {
+        "status": "pass",
+        "evidence": "PR #2620 merged at 2026-07-02T17:52:28Z as squash commit 915a50976c16ea4d1a73db038774610fd1e0dcab; origin/main contains the merge commit; local main was fast-forwarded to origin/main; local task branch was deleted; remote task branch is absent."
       }
     },
-    "pr_url": null,
-    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2620",
+    "commit_sha": "17323150ef4bc5897e2225d9b0aaa983e3a9a606",
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -70801,9 +70813,9 @@
     "content_authority": "backend",
     "authorized_by_user": "2026-07-03 attached /goal SECURITY-169 fap-api audit PR train continuous execution request.",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T17:52:28Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "events": [
       {
         "at": "2026-07-03T00:00:00+08:00",
@@ -70819,6 +70831,21 @@
         "at": "2026-07-03T01:41:05+08:00",
         "status": "scope_validation_passed",
         "note": "Final changed-file validation passed for API-02 allowed paths; ready to stage path-limited files."
+      },
+      {
+        "at": "2026-07-03T01:43:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2620 and pushed SECURITY-169-API-02 implementation commit 17323150ef4bc5897e2225d9b0aaa983e3a9a606."
+      },
+      {
+        "at": "2026-07-03T01:52:28+08:00",
+        "status": "merged",
+        "note": "PR #2620 was squash-merged as 915a50976c16ea4d1a73db038774610fd1e0dcab after required GitHub checks passed."
+      },
+      {
+        "at": "2026-07-03T01:54:00+08:00",
+        "status": "post_merge_revalidated",
+        "note": "Verified origin/main contains the merge commit, local main equals origin/main, and local/remote task branches were cleaned."
       }
     ]
   },
