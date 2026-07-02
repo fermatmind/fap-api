@@ -1,0 +1,25 @@
+{
+  "schema_version": "fap.big5.result_page_v2.asset_agent.repair_log.v0.1",
+  "task": "normalization_repair_log",
+  "run_id": "scientific_accuracy_repair_v0_2_normalized",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "repair_required": false,
+  "entries": [],
+  "normalization_entries": [
+    {
+      "kind": "qa_status_normalized",
+      "from": "scientific_reviewed",
+      "to": "editorial_reviewed",
+      "count": 529
+    },
+    {
+      "kind": "selector_candidates_generated",
+      "count": 529
+    },
+    {
+      "kind": "source_trace_safety_flags_added",
+      "count": 529
+    }
+  ]
+}
