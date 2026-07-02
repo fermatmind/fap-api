@@ -61,6 +61,46 @@ final class RiasecDeepCopySlotRegistry
     /** @var list<string> */
     public const DIMENSIONS = ['R', 'I', 'A', 'S', 'E', 'C'];
 
+    /** @var array<string,array{label:string,short:string,focus:string,action:string}> */
+    private const DIMENSION_READING_LINES = [
+        'R' => [
+            'label' => '实作型',
+            'short' => '实作',
+            'focus' => '真实对象、工具、现场、材料和可见成果',
+            'action' => '接触真实对象、工具或现场条件',
+        ],
+        'I' => [
+            'label' => '研究型',
+            'short' => '研究',
+            'focus' => '问题、证据、机制、变量和解释路径',
+            'action' => '分析问题、证据、变量或解释路径',
+        ],
+        'A' => [
+            'label' => '艺术型',
+            'short' => '表达',
+            'focus' => '表达、风格、叙事、形式和体验',
+            'action' => '尝试表达、风格、叙事或形式处理',
+        ],
+        'S' => [
+            'label' => '社会型',
+            'short' => '支持',
+            'focus' => '真实的人、理解、支持、沟通和协作',
+            'action' => '观察真实人的理解、支持、沟通或协作需求',
+        ],
+        'E' => [
+            'label' => '企业型',
+            'short' => '推进',
+            'focus' => '目标、资源、机会、影响和推进',
+            'action' => '观察目标、资源、机会、影响或推进动作',
+        ],
+        'C' => [
+            'label' => '常规型',
+            'short' => '流程',
+            'focus' => '规则、数据、流程、秩序和可复查记录',
+            'action' => '整理规则、数据、流程、秩序或可复查记录',
+        ],
+    ];
+
     /** @var list<string> */
     public const PAIRS = [
         'R_I', 'R_A', 'R_S', 'R_E', 'R_C',
@@ -283,7 +323,7 @@ final class RiasecDeepCopySlotRegistry
             ];
         }
 
-        return $slot;
+        return $this->withOrderedTop3Emphasis($slot, $this->orderedTop3Dimensions($top3));
     }
 
     /**
@@ -1741,6 +1781,80 @@ final class RiasecDeepCopySlotRegistry
     }
 
     /**
+     * @param  list<string>  $orderedDimensions
+     * @return array<string,mixed>
+     */
+    private function withOrderedTop3Emphasis(array $slot, array $orderedDimensions): array
+    {
+        if (count($orderedDimensions) !== 3) {
+            return $slot;
+        }
+
+        $canonical = (array) ($slot['applicable_dimensions'] ?? explode('_', (string) ($slot['top3_key'] ?? '')));
+        sort($canonical);
+        $orderedCanonical = $orderedDimensions;
+        sort($orderedCanonical);
+        if ($canonical !== $orderedCanonical) {
+            return $slot;
+        }
+
+        $first = self::DIMENSION_READING_LINES[$orderedDimensions[0]] ?? null;
+        $second = self::DIMENSION_READING_LINES[$orderedDimensions[1]] ?? null;
+        $third = self::DIMENSION_READING_LINES[$orderedDimensions[2]] ?? null;
+        if ($first === null || $second === null || $third === null) {
+            return $slot;
+        }
+
+        $labels = [$first['label'], $second['label'], $third['label']];
+        $shorts = [$first['short'], $second['short'], $third['short']];
+        $orderedCode = implode('', $orderedDimensions);
+        $orderedKey = implode('_', $orderedDimensions);
+
+        return array_merge($slot, [
+            'ordered_code' => $orderedCode,
+            'ordered_top3_key' => $orderedKey,
+            'ordered_top3_dimensions' => $orderedDimensions,
+            'canonical_unordered_top3_key' => (string) ($slot['top3_key'] ?? ''),
+            'strategy_label' => implode('-', $shorts).'兴趣组合',
+            'activity_chain' => '并列观察：'.$first['action'].'；'.$second['action'].'；'.$third['action'].'。',
+            'core_reading' => '这组 top3 表示 '.implode('、', $labels).' 三类活动线索在本次结果中靠前。'.$orderedCode.' 的顺序把 '.$first['label'].' 作为主读线索，'.$second['label'].' 和 '.$third['label'].' 作为补充线索；它不能推断人格身份、能力水平或职业结论。',
+            'positive_value' => '这组内容的价值，是把 '.$first['label'].'关注'.$first['focus'].'；'.$second['label'].'关注'.$second['focus'].'；'.$third['label'].'关注'.$third['focus'].' 拆成可观察的小任务。第一位作为主读线索，第二、三位作为补充线索；它们提供探索问题，不提供岗位答案。',
+            'first_experiment' => '用 30 分钟做一次低风险观察：分别加入'.$first['short'].'、'.$second['short'].'、'.$third['short'].'三个小动作，只记录哪个部分更想继续。',
+            'ordered_code_handling' => $orderedCode.' 是本次测量的有序三字码：第一位 '.$first['label'].' 决定主读重心，第二位 '.$second['label'].' 和第三位 '.$third['label'].' 决定补充观察顺序；排序改变阅读重点，不等于固定身份、能力或职业答案。',
+            'low_risk_validation' => '低风险观察：选择一个包含'.$first['short'].'、'.$second['short'].'、'.$third['short'].'线索的小任务，只记录活动偏好和想继续的部分。',
+            'primary_activity_chain' => '先看第一位 '.$first['label'].'：把它读成本次结果中最靠前的兴趣线索，优先寻找与“'.$first['focus'].'”相关的小任务。',
+            'secondary_support_line' => '再看第二位 '.$second['label'].'：它提示可补充观察“'.$second['focus'].'”是否让任务更吸引你。',
+            'tertiary_stabilizer' => '第三位 '.$third['label'].' 是补充线索：观察“'.$third['focus'].'”是否帮助你区分更具体的任务条件。',
+            'activity_sequence' => [
+                '主读线索：'.$first['action'],
+                '第二线索：'.$second['action'],
+                '第三线索：'.$third['action'],
+            ],
+            'free_page_teaser' => implode('、', $labels).' 三类兴趣线索需要按 '.$orderedCode.' 的顺序阅读重心，再用小任务观察，不急着得出职业答案。',
+        ]);
+    }
+
+    /**
+     * @param  list<string>|string  $top3
+     * @return list<string>
+     */
+    private function orderedTop3Dimensions(array|string $top3): array
+    {
+        $raw = is_array($top3) ? implode('', $top3) : $top3;
+        $letters = [];
+        foreach (str_split(strtoupper((string) preg_replace('/[^RIASEC]/i', '', (string) $raw))) as $letter) {
+            if (in_array($letter, self::DIMENSIONS, true) && ! in_array($letter, $letters, true)) {
+                $letters[] = $letter;
+            }
+            if (count($letters) === 3) {
+                break;
+            }
+        }
+
+        return $letters;
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function pairSlotBase(string $pairKey): array
@@ -2286,6 +2400,12 @@ final class RiasecDeepCopySlotRegistry
             fn (mixed $part): string => strtoupper(trim((string) $part)),
             (array) $parts
         )));
+        if (is_string($pair) && count($parts) === 1) {
+            $letters = $this->orderedDimensions($pair, 2);
+            if (count($letters) === 2) {
+                $parts = $letters;
+            }
+        }
 
         if (count($parts) !== 2) {
             return strtoupper(trim(is_string($pair) ? $pair : implode('_', $parts)));
@@ -2307,6 +2427,12 @@ final class RiasecDeepCopySlotRegistry
             fn (mixed $part): string => strtoupper(trim((string) $part)),
             (array) $parts
         ))));
+        if (is_string($top3) && count($parts) === 1) {
+            $letters = $this->orderedDimensions($top3, 3);
+            if (count($letters) === 3) {
+                $parts = $letters;
+            }
+        }
 
         if (count($parts) !== 3) {
             return strtoupper(trim(is_string($top3) ? $top3 : implode('_', $parts)));
@@ -2316,6 +2442,24 @@ final class RiasecDeepCopySlotRegistry
         usort($parts, fn (string $a, string $b): int => ($order[$a] ?? 99) <=> ($order[$b] ?? 99));
 
         return implode('_', $parts);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function orderedDimensions(string $value, int $limit): array
+    {
+        $letters = [];
+        foreach (str_split(strtoupper((string) preg_replace('/[^RIASEC]/i', '', $value))) as $letter) {
+            if (in_array($letter, self::DIMENSIONS, true) && ! in_array($letter, $letters, true)) {
+                $letters[] = $letter;
+            }
+            if (count($letters) === $limit) {
+                break;
+            }
+        }
+
+        return $letters;
     }
 
     private function layer140qAssetSlotName(string $dimensionCode, string $layer, string $layerState): string

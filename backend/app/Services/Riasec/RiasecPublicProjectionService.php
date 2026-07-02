@@ -212,7 +212,7 @@ final class RiasecPublicProjectionService
         if ($top3Key !== null) {
             $this->appendRenderableSlot(
                 $slots,
-                $this->deepCopySlots->resolveTop3ChainSlot($top3Key),
+                $this->deepCopySlots->resolveTop3ChainSlot($topCode),
                 'hero_activity_chain',
                 $modulePolicy,
                 $locale
