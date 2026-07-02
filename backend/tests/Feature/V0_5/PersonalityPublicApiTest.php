@@ -612,6 +612,116 @@ final class PersonalityPublicApiTest extends TestCase
         );
     }
 
+    public function test_personality_comparison_index_returns_backend_authoritative_at_list_only(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $intj = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+            'title' => 'INTJ Personality Type',
+            'type_name' => 'Architect',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($intj, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'type_name' => 'Architect Assertive',
+        ]);
+        $this->createVariant($intj, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+            'type_name' => 'Architect Turbulent',
+        ]);
+        PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $intj->id,
+            'section_key' => 'mbti64_comparison_a_vs_t',
+            'title' => 'INTJ-A vs INTJ-T',
+            'render_variant' => 'rich_text',
+            'body_md' => 'INTJ A/T comparison draft.',
+            'payload_json' => [
+                'seo' => [
+                    'seo_title' => 'INTJ-A vs INTJ-T: Key Differences',
+                    'h1' => 'INTJ-A vs INTJ-T: Key Differences',
+                    'quick_answer_summary' => 'Compare INTJ-A and INTJ-T by confidence, stress feedback, and self-correction.',
+                ],
+                'content' => [
+                    'quick_answer' => 'Compare INTJ-A and INTJ-T by confidence, stress feedback, and self-correction.',
+                ],
+            ],
+            'sort_order' => 920,
+            'is_enabled' => true,
+        ]);
+
+        $intp = $this->createProfile([
+            'type_code' => 'INTP',
+            'slug' => 'intp',
+            'locale' => 'en',
+            'title' => 'INTP Personality Type',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($intp, [
+            'canonical_type_code' => 'INTP',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTP-A',
+        ]);
+
+        $entp = $this->createProfile([
+            'type_code' => 'ENTP',
+            'slug' => 'entp',
+            'locale' => 'en',
+            'title' => 'ENTP Personality Type',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+            'published_at' => null,
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($entp, [
+            'canonical_type_code' => 'ENTP',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'ENTP-A',
+        ]);
+        $this->createVariant($entp, [
+            'canonical_type_code' => 'ENTP',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'ENTP-T',
+        ]);
+
+        $response = $this->getJson('/api/v0.5/personality/comparisons?locale=en');
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('comparison_list_public_projection_v1.comparison_list_contract_version', 'mbti.comparison_list.v1')
+            ->assertJsonPath('comparison_list_public_projection_v1.groups.0.key', 'at_comparisons')
+            ->assertJsonPath('comparison_list_public_projection_v1.groups.0.comparison_type', 'mbti_at_comparison')
+            ->assertJsonPath('comparison_list_public_projection_v1.groups.0.items.0.slug', 'intj-a-vs-intj-t')
+            ->assertJsonPath('comparison_list_public_projection_v1.groups.0.items.0.title', 'INTJ-A vs INTJ-T: Key Differences')
+            ->assertJsonPath('comparison_list_public_projection_v1.groups.0.items.0.base_type_code', 'INTJ')
+            ->assertJsonPath('comparison_list_public_projection_v1.groups.0.items.0.public_url', 'https://fermatmind.com/en/personality/intj-a-vs-intj-t')
+            ->assertJsonPath('comparison_list_public_projection_v1.groups.0.items.0.is_public', true)
+            ->assertJsonPath('comparison_list_public_projection_v1.groups.0.items.0.is_indexable', true)
+            ->assertJsonPath('at_comparisons.0.slug', 'intj-a-vs-intj-t');
+
+        self::assertCount(1, (array) data_get($response->json(), 'comparison_list_public_projection_v1.groups.0.items'));
+        self::assertStringNotContainsString('intp-a-vs-intp-t', (string) $response->getContent());
+        self::assertStringNotContainsString('entp-a-vs-entp-t', (string) $response->getContent());
+        self::assertStringNotContainsString('intj-vs-intp', (string) $response->getContent());
+        self::assertStringNotContainsString('/result', (string) $response->getContent());
+        self::assertStringNotContainsString('token', (string) $response->getContent());
+    }
+
     public function test_personality_comparison_endpoint_returns_backend_authoritative_at_pair(): void
     {
         config(['app.frontend_url' => 'https://www.fermatmind.com']);

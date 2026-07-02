@@ -646,10 +646,14 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);
     Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);
     Route::get('/personality', [PersonalityController::class, 'index']);
+    Route::get('/personality/comparisons', [PersonalityController::class, 'comparisonIndex']);
     Route::get('/personality/comparisons/{comparison}', [PersonalityController::class, 'comparison']);
-    Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show']);
-    Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo']);
-    Route::get('/personality/{type}', [PersonalityController::class, 'show']);
+    Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show'])
+        ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');
+    Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo'])
+        ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');
+    Route::get('/personality/{type}', [PersonalityController::class, 'show'])
+        ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');
     Route::get('/topics', [TopicController::class, 'index']);
     Route::get('/topics/{slug}/seo', [TopicController::class, 'seo']);
     Route::get('/topics/{slug}', [TopicController::class, 'show']);
