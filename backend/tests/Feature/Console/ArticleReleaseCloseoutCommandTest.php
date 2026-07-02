@@ -274,6 +274,152 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
         $this->assertErrorCode($payload, 'category_not_reader_facing_zh');
     }
 
+    public function test_closeout_accepts_valid_gsc_manual_request_indexing_evidence(): void
+    {
+        $article = $this->createReleasedArticle();
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+        $gscPath = $this->writeEvidenceJson([
+            'runtime' => 'gsc_manual_request_indexing',
+            'status' => 'success',
+            'urls' => [
+                [
+                    'canonical_url' => $canonicalUrl,
+                    'request_indexing_confirmation' => 'URL was added to the priority crawl queue.',
+                ],
+            ],
+        ]);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--gsc-manual-json' => $gscPath,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertTrue(data_get($payload, 'checks.gsc_manual.ok'));
+        $this->assertSame('requested', data_get($payload, 'checks.gsc_manual.state'));
+        $this->assertSame('provided', data_get($payload, 'remaining_operator_inputs.gsc_manual_request_indexing'));
+        $this->assertErrorCodeMissing($payload, 'gsc_manual_url_mismatch');
+    }
+
+    public function test_closeout_blocks_gsc_manual_evidence_url_mismatch(): void
+    {
+        $article = $this->createReleasedArticle();
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+        $gscPath = $this->writeEvidenceJson([
+            'runtime' => 'gsc_manual_request_indexing',
+            'status' => 'success',
+            'urls' => [
+                [
+                    'canonical_url' => 'https://fermatmind.com/zh/articles/wrong-url',
+                    'request_indexing_confirmation' => 'URL was added to the priority crawl queue.',
+                ],
+            ],
+        ]);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--gsc-manual-json' => $gscPath,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('BLOCKED_OPERATOR_INPUT', $payload['decision']);
+        $this->assertFalse(data_get($payload, 'checks.gsc_manual.ok'));
+        $this->assertSame('provided_but_invalid', data_get($payload, 'remaining_operator_inputs.gsc_manual_request_indexing'));
+        $this->assertErrorCode($payload, 'gsc_manual_url_mismatch');
+    }
+
+    public function test_closeout_records_observation_evidence_as_pending_window(): void
+    {
+        $article = $this->createReleasedArticle();
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+        $observationPath = $this->writeEvidenceJson([
+            'status' => 'pending_window',
+            'd1_d7_d14_checklist' => [
+                'd1' => ['indexing', 'impressions', 'clicks'],
+                'd7' => ['queries', 'ctr', 'average_position'],
+                'd14' => ['cta_click', 'start_test', 'title_or_faq_followup'],
+            ],
+        ]);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--observation-json' => $observationPath,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertTrue(data_get($payload, 'checks.observation.ok'));
+        $this->assertSame('pending_window', data_get($payload, 'checks.observation.state'));
+        $this->assertSame('recorded_or_pending_window', data_get($payload, 'remaining_operator_inputs.d1_d7_d14_observation'));
+    }
+
+    public function test_closeout_merges_public_smoke_gsc_and_observation_evidence(): void
+    {
+        $article = $this->createReleasedArticle();
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+        $publicSmokePath = $this->writeEvidenceJson([
+            'ok' => true,
+            'decision' => 'PUBLIC_ARTICLE_RELEASE_SMOKE_PASSED',
+            'url' => $canonicalUrl,
+        ]);
+        $gscPath = $this->writeEvidenceJson([
+            'status' => 'success',
+            'urls' => [
+                [
+                    'url' => $canonicalUrl,
+                    'confirmation' => 'Request indexing clicked and accepted.',
+                ],
+            ],
+        ]);
+        $observationPath = $this->writeEvidenceJson([
+            'status' => 'recorded',
+            'checklist' => [
+                'd1' => 'scheduled',
+                'd7' => 'scheduled',
+                'd14' => 'scheduled',
+            ],
+        ]);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--public-smoke-json' => $publicSmokePath,
+            '--gsc-manual-json' => $gscPath,
+            '--observation-json' => $observationPath,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('ARTICLE_RELEASE_COMPLETE_SEARCH_OBSERVATION_PENDING', $payload['decision']);
+        $this->assertSame('passed', data_get($payload, 'checks.public_html_smoke.state'));
+        $this->assertSame('requested', data_get($payload, 'checks.gsc_manual.state'));
+        $this->assertSame('recorded', data_get($payload, 'checks.observation.state'));
+        $this->assertSame('provided', data_get($payload, 'remaining_operator_inputs.public_html_smoke'));
+        $this->assertSame('provided', data_get($payload, 'remaining_operator_inputs.gsc_manual_request_indexing'));
+        $this->assertSame('recorded_or_pending_window', data_get($payload, 'remaining_operator_inputs.d1_d7_d14_observation'));
+    }
+
     public function test_slug_lock_mismatch_blocks_discoverability(): void
     {
         $this->createReleasedArticle();
@@ -508,6 +654,21 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function writeEvidenceJson(array $payload): string
+    {
+        $path = tempnam(sys_get_temp_dir(), 'article-closeout-evidence-');
+        $this->assertIsString($path);
+        file_put_contents($path, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->beforeApplicationDestroyed(static function () use ($path): void {
+            @unlink($path);
+        });
+
+        return $path;
     }
 
     /**
