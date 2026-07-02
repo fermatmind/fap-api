@@ -70623,8 +70623,8 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "pr_opened",
-    "commit_sha": "cb78c8d32d4564d4f147292e665962466ce592dd",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "5f037f33c34e958fee154eaaaaa093041b4009d8",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2635",
     "checks": {
       "phpunit_lifecycle_pdf_report_tests": {
@@ -70636,6 +70636,86 @@
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
         "status": "passed",
         "summary": "177 tests, 104308 assertions"
+      },
+      "pint_and_json_parse": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecLifecycleCopyService.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php && php JSON parse share_pdf_history zh/en and zh fixture",
+        "status": "passed"
+      },
+      "diff_check": {
+        "command": "git diff --check",
+        "status": "passed"
+      }
+    },
+    "failure_reason": null,
+    "merged_at": "2026-07-02T19:04:10Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecLifecycleCopyService.php",
+        "backend/content_assets/riasec/share_pdf_history_v1.en.json",
+        "backend/content_assets/riasec/share_pdf_history_v1.zh-CN.json",
+        "backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php",
+        "backend/tests/Fixtures/Riasec/share_pdf_history_v1.zh-CN.json",
+        "backend/tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T18:56:32Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Compacted PDF lifecycle copy to one boundary pass, added snapshot-bound PDF policy fields, and validated lifecycle/report parity."
+      },
+      {
+        "at": "2026-07-02T18:58:18Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2635 after PDF-01 local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T19:04:33Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2635 merged; origin/main contains merge commit; local main synced; task branch cleaned. Recorded during HISTORY-01 ledger reconciliation."
+      }
+    ],
+    "merge_commit_sha": "2bf370be17dc88a48e35c65fcfe429a16c7e4b5e"
+  },
+  "RIASEC-CONTENT-HISTORY-01": {
+    "id": "RIASEC-CONTENT-HISTORY-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-history-01",
+    "title": "RIASEC-CONTENT-HISTORY-01 repair RIASEC history summary boundaries",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": "177e733455d62b8030b6b03c4f71e14aff6961a8",
+    "pr_url": null,
+    "checks": {
+      "phpunit_lifecycle_history_report_tests": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "13 tests, 1270 assertions"
+      },
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "178 tests, 104368 assertions"
       },
       "pint_and_json_parse": {
         "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecLifecycleCopyService.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php && php JSON parse share_pdf_history zh/en and zh fixture",
@@ -70673,49 +70753,10 @@
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
       },
       {
-        "at": "2026-07-02T18:56:32Z",
+        "at": "2026-07-02T19:07:21Z",
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
-        "note": "Compacted PDF lifecycle copy to one boundary pass, added snapshot-bound PDF policy fields, and validated lifecycle/report parity."
-      },
-      {
-        "at": "2026-07-02T18:58:18Z",
-        "from": "local_validation_passed",
-        "to": "pr_opened",
-        "note": "Opened PR #2635 after PDF-01 local validation and scope validation passed."
-      }
-    ]
-  },
-  "RIASEC-CONTENT-HISTORY-01": {
-    "id": "RIASEC-CONTENT-HISTORY-01",
-    "repo": "fap-api",
-    "branch": "codex/riasec-content-history-01",
-    "title": "RIASEC-CONTENT-HISTORY-01 repair RIASEC history summary boundaries",
-    "train_scope": "riasec_result_content_science_repair",
-    "base": "main",
-    "depends_on": [
-      "RIASEC-CONTENT-SCIENCE-00"
-    ],
-    "status": "authorized_pending_start",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
-    "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
-    "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
-    },
-    "transitions": [
-      {
-        "at": "2026-07-02T16:08:07.295Z",
-        "from": null,
-        "to": "authorized_pending_start",
-        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+        "note": "Reframed history surfaces as snapshot/exploration records, blocked stable identity and raw-delta claims, and validated lifecycle/history responses."
       }
     ]
   },
