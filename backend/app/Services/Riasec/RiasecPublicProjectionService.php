@@ -465,6 +465,11 @@ final class RiasecPublicProjectionService
             'raw_score_delta_allowed' => false,
             'raw_scores_used_for_selection' => false,
             'different_form_scores_comparable' => false,
+            'emphasis_difference_only' => true,
+            'correctness_ranking_allowed' => false,
+            'raw_score_comparison_allowed' => false,
+            'result_override_allowed' => false,
+            'code_conversion_allowed' => false,
             'layer_states' => [
                 'task' => $this->normalize140qSelectionLayerState((string) ($layerStates['task'] ?? data_get($payload, 'task_layer_state', 'agreement'))),
                 'environment' => $this->normalize140qSelectionLayerState((string) ($layerStates['environment'] ?? data_get($payload, 'environment_layer_state', 'agreement'))),
@@ -612,6 +617,7 @@ final class RiasecPublicProjectionService
             'question',
             'what_user_sees',
             'button_label',
+            'selection_basis',
         ];
         $content = [];
         foreach ($contentKeys as $key) {
@@ -663,6 +669,11 @@ final class RiasecPublicProjectionService
                 'user_visible_boundary' => (string) ($slot['user_visible_boundary'] ?? ''),
                 'required_boundaries' => array_values((array) ($slot['required_boundaries'] ?? [])),
                 'forbidden_claims' => array_values((array) ($slot['forbidden_claims'] ?? [])),
+                'emphasis_difference_only' => (bool) ($slot['emphasis_difference_only'] ?? false),
+                'correctness_ranking_allowed' => (bool) ($slot['correctness_ranking_allowed'] ?? false),
+                'raw_score_comparison_allowed' => (bool) ($slot['raw_score_comparison_allowed'] ?? false),
+                'result_override_allowed' => (bool) ($slot['result_override_allowed'] ?? false),
+                'code_conversion_allowed' => (bool) ($slot['code_conversion_allowed'] ?? false),
             ],
         ];
     }

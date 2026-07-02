@@ -6,10 +6,17 @@ namespace Tests\Unit\Services\Riasec;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Riasec\RiasecActivityExplorerService;
 use App\Services\Riasec\RiasecCompareGuardService;
 use App\Services\Riasec\RiasecDeepCopySlotRegistry;
+use App\Services\Riasec\RiasecExplorationFeedbackOverlayService;
+use App\Services\Riasec\RiasecInterpretationRuleContract;
+use App\Services\Riasec\RiasecLifecycleCopyService;
 use App\Services\Riasec\RiasecMeasurementContract;
-use PHPUnit\Framework\TestCase;
+use App\Services\Riasec\RiasecPublicProjectionService;
+use App\Services\Riasec\RiasecQualityRuleContract;
+use App\Services\Riasec\RiasecReportModuleSelector;
+use Tests\TestCase;
 
 final class RiasecStructuralDifferenceSlotRegistryTest extends TestCase
 {
@@ -32,10 +39,20 @@ final class RiasecStructuralDifferenceSlotRegistryTest extends TestCase
             $this->assertSame('structural_difference_copy', $slot['slot_group']);
             $this->assertSame('authored', $slot['content_status']);
             $this->assertFalse($slot['frontend_fallback_allowed']);
+            $this->assertTrue($slot['emphasis_difference_only']);
+            $this->assertFalse($slot['correctness_ranking_allowed']);
+            $this->assertFalse($slot['raw_score_comparison_allowed']);
+            $this->assertFalse($slot['result_override_allowed']);
+            $this->assertFalse($slot['code_conversion_allowed']);
+            $this->assertSame('task_environment_role_emphasis_only', $slot['selection_basis']);
 
             foreach ($registry->structuralDifferenceRequiredFields() as $field) {
                 $this->assertArrayHasKey($field, $slot);
-                $this->assertNotEmpty($slot[$field]);
+                if (str_ends_with($field, '_allowed')) {
+                    $this->assertIsBool($slot[$field]);
+                } else {
+                    $this->assertNotEmpty($slot[$field]);
+                }
             }
 
             $this->assertSame([], $registry->validateSlot($slot), $slotName.' should be contract-clean.');
@@ -70,11 +87,21 @@ final class RiasecStructuralDifferenceSlotRegistryTest extends TestCase
         $registry = new RiasecDeepCopySlotRegistry;
         $slot = $registry->structuralDifferenceSlots()['summary'];
         $slot['summary'] = '60Q 错了，140Q 更准并推翻 60Q；你从 IAS 变成 SEC，分数上升，raw score delta 可比较。';
+        $slot['emphasis_difference_only'] = false;
+        $slot['correctness_ranking_allowed'] = true;
+        $slot['raw_score_comparison_allowed'] = true;
+        $slot['result_override_allowed'] = true;
+        $slot['code_conversion_allowed'] = true;
 
         $errors = $registry->validateSlot($slot);
 
         $this->assertContains('forbidden_claim_phrase_non_ascii', $errors);
         $this->assertContains('forbidden_claim_phrase_raw_score_delta', $errors);
+        $this->assertContains('structural_difference_emphasis_difference_only_must_be_true', $errors);
+        $this->assertContains('structural_difference_correctness_ranking_allowed_must_be_false', $errors);
+        $this->assertContains('structural_difference_raw_score_comparison_allowed_must_be_false', $errors);
+        $this->assertContains('structural_difference_result_override_allowed_must_be_false', $errors);
+        $this->assertContains('structural_difference_code_conversion_allowed_must_be_false', $errors);
     }
 
     public function test_compare_guard_still_blocks_cross_form_raw_score_comparison(): void
@@ -91,6 +118,43 @@ final class RiasecStructuralDifferenceSlotRegistryTest extends TestCase
         $this->assertSame('cross_form_score_space_mismatch', $guard['reason']);
         $this->assertArrayNotHasKey('raw_scores_delta', $guard);
         $this->assertArrayNotHasKey('domains_delta', $guard);
+    }
+
+    public function test_public_projection_exposes_structural_difference_as_emphasis_only(): void
+    {
+        $result = new Result;
+        $result->scale_code = 'RIASEC';
+        $result->type_code = 'IAS';
+        $result->scores_pct = ['I' => 92, 'A' => 78, 'S' => 64, 'R' => 30, 'E' => 22, 'C' => 18];
+        $result->result_json = [
+            'top_code' => 'IAS',
+            'form_code' => 'riasec_140',
+            'answer_count' => 140,
+            'structural_difference_state' => 'different_emphasis',
+            'riasec_140q_layer_states' => [
+                'task' => 'agreement',
+                'environment' => 'tension',
+                'role' => 'agreement',
+            ],
+        ];
+
+        $projection = $this->projectionService()->buildV2FromResult($result);
+        $policy = $projection['structural_difference'];
+
+        $this->assertTrue($policy['emphasis_difference_only']);
+        $this->assertFalse($policy['correctness_ranking_allowed']);
+        $this->assertFalse($policy['raw_score_comparison_allowed']);
+        $this->assertFalse($policy['result_override_allowed']);
+        $this->assertFalse($policy['code_conversion_allowed']);
+        $this->assertSame('task_environment_role_emphasis_only', $policy['basis']);
+
+        $summarySlot = (new RiasecDeepCopySlotRegistry)->structuralDifferenceSlots()['summary'];
+        $this->assertTrue($summarySlot['emphasis_difference_only']);
+        $this->assertFalse($summarySlot['correctness_ranking_allowed']);
+        $this->assertFalse($summarySlot['raw_score_comparison_allowed']);
+        $this->assertFalse($summarySlot['result_override_allowed']);
+        $this->assertFalse($summarySlot['code_conversion_allowed']);
+        $this->assertSame('task_environment_role_emphasis_only', $summarySlot['selection_basis']);
     }
 
     private function attempt(string $id, string $formCode, int $questionCount): Attempt
@@ -120,5 +184,19 @@ final class RiasecStructuralDifferenceSlotRegistryTest extends TestCase
         ];
 
         return $result;
+    }
+
+    private function projectionService(): RiasecPublicProjectionService
+    {
+        return new RiasecPublicProjectionService(
+            new RiasecMeasurementContract,
+            new RiasecActivityExplorerService,
+            new RiasecExplorationFeedbackOverlayService,
+            new RiasecLifecycleCopyService,
+            new RiasecInterpretationRuleContract,
+            new RiasecQualityRuleContract,
+            new RiasecReportModuleSelector,
+            new RiasecDeepCopySlotRegistry,
+        );
     }
 }
