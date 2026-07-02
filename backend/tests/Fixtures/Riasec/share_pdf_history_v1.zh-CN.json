@@ -45,17 +45,29 @@
     },
     {
       "surface": "history_same_form",
-      "copy": "历史记录优先展示同表单的 Top3 重叠、near-tie 和阅读力度，不画跨表原始分变化。",
+      "copy": "历史页只记录同表单结果快照：展示 Top3 重叠、near-tie 和当次阅读力度，用来回看探索轨迹；不把多次结果写成稳定人格或能力变化。",
       "public_safe": false,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "history_surface_mode": "snapshot_exploration_record",
+      "history_summary_mode": "same_form_snapshot_overlap",
+      "stable_identity_claim_allowed": false,
+      "longitudinal_trait_claim_allowed": false,
+      "history_raw_delta_allowed": false,
+      "history_default_visible": true
     },
     {
       "surface": "history_cross_form",
-      "copy": "60Q 与 140Q 是不同分数空间。历史页只能解释两次结果强调的线索不同，不能画 raw score 涨跌。",
+      "copy": "60Q 与 140Q 属于不同分数空间。历史页只说明两次快照强调的线索不同，不比较 raw score 涨跌，也不判断兴趣是否变好或变差。",
       "public_safe": false,
       "raw_scores_allowed": false,
-      "raw_feedback_allowed": false
+      "raw_feedback_allowed": false,
+      "history_surface_mode": "snapshot_exploration_record",
+      "history_summary_mode": "cross_form_emphasis_difference",
+      "stable_identity_claim_allowed": false,
+      "longitudinal_trait_claim_allowed": false,
+      "history_raw_delta_allowed": false,
+      "history_default_visible": true
     },
     {
       "surface": "low_quality_share",

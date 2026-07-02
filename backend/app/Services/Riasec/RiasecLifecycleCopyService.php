@@ -219,6 +219,12 @@ final class RiasecLifecycleCopyService
                 'boundary_repetition_allowed' => (bool) ($row['boundary_repetition_allowed'] ?? false),
                 'snapshot_bound_required' => (bool) ($row['snapshot_bound_required'] ?? false),
                 'pdf_default_visible' => (bool) ($row['pdf_default_visible'] ?? false),
+                'history_surface_mode' => (string) ($row['history_surface_mode'] ?? 'not_history_surface'),
+                'history_summary_mode' => (string) ($row['history_summary_mode'] ?? 'not_history_surface'),
+                'stable_identity_claim_allowed' => (bool) ($row['stable_identity_claim_allowed'] ?? false),
+                'longitudinal_trait_claim_allowed' => (bool) ($row['longitudinal_trait_claim_allowed'] ?? false),
+                'history_raw_delta_allowed' => (bool) ($row['history_raw_delta_allowed'] ?? false),
+                'history_default_visible' => (bool) ($row['history_default_visible'] ?? false),
             ];
         }
 
