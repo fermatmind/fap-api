@@ -166,7 +166,7 @@
       "ENNEA-RP-01"
     ],
     "status": "local_validation_passed",
-    "commit_sha": "f379ab99d30d585830cbc476d8aea09de096f8f8",
+    "commit_sha": "e3e1a80e27b3feff9b1123298f635e94f7f48251",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2609",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -214,6 +214,22 @@
       "pr_open": {
         "status": "pass",
         "evidence": "Opened PR #2609 for ENNEA-RP-02; GitHub checks pending."
+      },
+      "rebase_origin_main_f31fc4e93": {
+        "status": "pass",
+        "evidence": "Rebased onto origin/main f31fc4e9328dd471e9fe11e8f7fdd53c5e8a60d0 after concurrent main update; resolved PR train state conflict by preserving latest main and ENNEA-RP-01/02 state facts."
+      },
+      "post_rebase_f31fc4e93_local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+          "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+          "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+          "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+          "cd backend && php artisan test --filter=Enneagram",
+          "git diff --check"
+        ],
+        "evidence": "All post-rebase local validation passed; Enneagram filter completed with 257 existing file_get_contents warnings, 2 passed tests, and 83375 assertions."
       }
     },
     "scope_validation": {
@@ -246,6 +262,11 @@
         "at": "2026-07-02T16:58:41Z",
         "status": "pr_open",
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/2609 for ENNEA-RP-02; GitHub checks pending."
+      },
+      {
+        "at": "2026-07-02T17:07:08Z",
+        "status": "pr_open_rebased_local_validation_passed",
+        "notes": "Rebased PR #2609 onto origin/main f31fc4e9 after concurrent main update; post-rebase local validation passed."
       }
     ]
   },
