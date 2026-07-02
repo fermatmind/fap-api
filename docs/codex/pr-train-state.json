@@ -70411,9 +70411,9 @@
     "depends_on": [
       "RIASEC-CONTENT-140CTX-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": "c8ba068c4347ecb5649b78f17777bc19277c9004",
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "2cb334c4fae3473c417060bb51122dbc190ba6d8",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2631",
     "checks": {
       "phpunit_projection_structural_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecCompareGuardContractTest.php --no-ansi --display-warnings",
@@ -70462,6 +70462,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Added explicit structural-difference projection policy and layer-state selection without raw-score delta; local RIASEC unit subset and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T18:31:16Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2631 after 140CTX-02 local validation, repeated latest-main rebases, and scope validation passed."
       }
     ]
   },
