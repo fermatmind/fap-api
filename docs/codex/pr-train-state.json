@@ -71174,8 +71174,8 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "pr_opened",
-    "commit_sha": "58672bb19544d8a557e06bb0283407a7e28d2d46",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "92d3fa7d4853fbb57c9903ffaab0617faad050b6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2645",
     "checks": {
       "targeted_quality_tests": {
@@ -71202,14 +71202,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T20:37:19Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json",
         "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
@@ -71237,6 +71237,12 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2645 for QUALITY-01 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T20:44:16Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2645 merged with squash commit 92d3fa7d4853fbb57c9903ffaab0617faad050b6; origin/main contains merge commit; local main synced; local and remote task branches cleaned."
       }
     ]
   },
@@ -71250,19 +71256,52 @@
     "depends_on": [
       "RIASEC-CONTENT-140LAYER-01"
     ],
-    "status": "authorized_pending_start",
+    "status": "local_validation_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": [],
+    "checks": {
+      "targeted_structural_tests": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecCompareGuardContractTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "10 tests, 344 assertions"
+      },
+      "full_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "180 tests, 113109 assertions"
+      },
+      "pint": {
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecPublicProjectionService.php tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php",
+        "status": "passed"
+      },
+      "yaml_manifest": {
+        "command": "ruby -e require-yaml-load-pr-train-yaml",
+        "status": "passed"
+      },
+      "json_state": {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed"
+      },
+      "diff_check": {
+        "command": "git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/app/Services/Riasec/RiasecPublicProjectionService.php",
+        "backend/tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -71270,6 +71309,12 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T20:44:16Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "STRUCT-01 repaired structural difference contract and projection policy as emphasis-only; local checks and scope validation passed before commit."
       }
     ]
   },

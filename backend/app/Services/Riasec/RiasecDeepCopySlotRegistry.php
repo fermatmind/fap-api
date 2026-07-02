@@ -1053,6 +1053,19 @@ final class RiasecDeepCopySlotRegistry
             if (! in_array((string) ($slot['structural_difference_state'] ?? ''), self::STRUCTURAL_DIFFERENCE_STATES, true)) {
                 $errors[] = 'unsupported_structural_difference_state';
             }
+            if (($slot['emphasis_difference_only'] ?? false) !== true) {
+                $errors[] = 'structural_difference_emphasis_difference_only_must_be_true';
+            }
+            foreach ([
+                'correctness_ranking_allowed',
+                'raw_score_comparison_allowed',
+                'result_override_allowed',
+                'code_conversion_allowed',
+            ] as $flag) {
+                if (($slot[$flag] ?? true) !== false) {
+                    $errors[] = 'structural_difference_'.$flag.'_must_be_false';
+                }
+            }
         }
 
         if (($slot['slot_key'] ?? null) === 'aspirations_calibration_copy') {
@@ -1242,6 +1255,12 @@ final class RiasecDeepCopySlotRegistry
             'content_version',
             'evidence_level',
             'content_status',
+            'emphasis_difference_only',
+            'correctness_ranking_allowed',
+            'raw_score_comparison_allowed',
+            'result_override_allowed',
+            'code_conversion_allowed',
+            'selection_basis',
         ];
     }
 
@@ -2401,6 +2420,12 @@ final class RiasecDeepCopySlotRegistry
             ],
             'required_boundaries' => $this->requiredBoundaries(),
             'user_visible_boundary' => '跨表单摘要只说明兴趣线索强调不同；不比较分数，不改写结果，也不形成职业结论。',
+            'emphasis_difference_only' => true,
+            'correctness_ranking_allowed' => false,
+            'raw_score_comparison_allowed' => false,
+            'result_override_allowed' => false,
+            'code_conversion_allowed' => false,
+            'selection_basis' => 'task_environment_role_emphasis_only',
             'evidence_level' => 'expert_reviewed',
             'source_status' => 'reviewed_content_copy',
             'review_status' => 'approved_for_staging',
