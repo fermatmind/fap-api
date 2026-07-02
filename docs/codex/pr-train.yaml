@@ -32581,3 +32581,1858 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: ENNEA-RP-01
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-01-instant-summary
+    title: 'ENNEA-RP-01: fix(enneagram): repair instant summary content asset'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: in_progress
+    depends_on: []
+    scope:
+    - Repair clear/close-call/diffuse/low-quality instant summary tone layering and
+      reduce high-certainty or state-misread language.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json
+    - backend/tests/Unit/Services/Report/EnneagramReportComposerV2Test.php
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-02
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-02-top3-cards
+    title: 'ENNEA-RP-02: fix(enneagram): repair top3 cards content'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-01
+    scope:
+    - Strengthen candidate, hypothesis, and observation language for Top3 cards so Top3
+      is not read as fixed typing.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-03
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-03-type-deep-dive-summary
+    title: 'ENNEA-RP-03: fix(enneagram): repair type deep dive content'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-02
+    scope:
+    - Deepen motivation explanation without clinical framing; reduce diagnostic core
+      desire/fear language.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-04
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-04-all9-profile
+    title: 'ENNEA-RP-04: fix(enneagram): repair all9 profile labels'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-03
+    scope:
+    - Clarify all9 profile is not a norm, diagnosis, or personality verdict.
+    allowed_paths:
+    - backend/app/Services/Report/EnneagramReportComposer.php
+    - backend/app/Services/Enneagram/**
+    - backend/tests/**/Enneagram*
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-05
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-05-confidence-band-card
+    title: 'ENNEA-RP-05: fix(enneagram): repair confidence band content'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-04
+    scope:
+    - Frame confidence as interpretation range and stability, not accuracy.
+    allowed_paths:
+    - backend/app/Services/Report/EnneagramReportComposer.php
+    - backend/app/Services/Enneagram/**
+    - backend/tests/**/Enneagram*
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-06
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-06-dominance-gap-card
+    title: 'ENNEA-RP-06: fix(enneagram): repair dominance gap boundary'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-05
+    scope:
+    - Add score-space and error-boundary language to avoid pseudo-validity from numeric
+      gaps.
+    allowed_paths:
+    - backend/app/Services/Report/EnneagramReportComposer.php
+    - backend/content_packs/ENNEAGRAM/v2/registry/technical_note_registry.json
+    - backend/tests/**/Enneagram*
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-07
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-07-close-call-card
+    title: 'ENNEA-RP-07: fix(enneagram): repair close-call card content'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-06
+    scope:
+    - Add pair differentiation, counterexamples, and observation prompts without forcing
+      one type.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/pair_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-08
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-08-blind-spot-card
+    title: 'ENNEA-RP-08: fix(enneagram): repair blind spot content'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-07
+    scope:
+    - Turn blind-spot copy into observable hypotheses and avoid shaming language.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-09
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-09-center-summary
+    title: 'ENNEA-RP-09: fix(enneagram): repair center summary boundary'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-08
+    scope:
+    - Mark center summaries as theoretical/unavailable where applicable and avoid hard
+      center classification.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json
+    - backend/app/Services/Report/EnneagramReportComposer.php
+    - backend/tests/**/Enneagram*
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-10
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-10-stance-summary
+    title: 'ENNEA-RP-10: fix(enneagram): repair stance summary content'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-09
+    scope:
+    - Lower certainty and add contextual limits for stance interpretation.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-11
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-11-harmonic-summary
+    title: 'ENNEA-RP-11: fix(enneagram): repair harmonic summary content'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-10
+    scope:
+    - Frame harmonic as stress-response clues rather than ability traits.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-12
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-12-wing-hint-visual
+    title: 'ENNEA-RP-12: fix(enneagram): repair wing hint visual boundary'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-11
+    scope:
+    - Keep wing as expression-color hint only, not a hard wing judgment.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/theory_hint_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-13
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-13-methodology-boundary-card
+    title: 'ENNEA-RP-13: fix(enneagram): repair methodology boundary card'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-12
+    scope:
+    - Thicken E105/FC144 and non-diagnostic methodology boundaries.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-14
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-14-diffuse-boundary
+    title: 'ENNEA-RP-14: fix(enneagram): repair diffuse boundary content'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-13
+    scope:
+    - Explain diffuse as distributed structure, not failure.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/technical_note_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-15
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-15-low-quality-boundary
+    title: 'ENNEA-RP-15: fix(enneagram): repair low-quality boundary content'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-14
+    scope:
+    - Frame low quality as response-signal limitation without blaming the user.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json
+    - backend/app/Services/Report/EnneagramReportComposer.php
+    - backend/tests/**/Enneagram*
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-16
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-16-work-style-summary
+    title: 'ENNEA-RP-16: fix(enneagram): repair work style summary'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-15
+    scope:
+    - Keep work style separate from ability, hiring, and role-fit conclusions.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/scenario_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-17
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-17-collaboration-strengths
+    title: 'ENNEA-RP-17: fix(enneagram): repair collaboration strengths'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-16
+    scope:
+    - Add concrete collaboration situations and limits; remove generic strengths and
+      AI-like phrasing.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-18
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-18-collaboration-friction
+    title: 'ENNEA-RP-18: fix(enneagram): repair collaboration friction'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-17
+    scope:
+    - Reframe friction as negotiable interaction points, not negative labels.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-19
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-19-leadership-pattern
+    title: 'ENNEA-RP-19: fix(enneagram): repair leadership pattern'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-18
+    scope:
+    - Describe influence-style clues without claiming leadership ability.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-20
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-20-managed-by-others
+    title: 'ENNEA-RP-20: fix(enneagram): repair managed-by-others content'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-19
+    scope:
+    - Describe collaboration preferences without over-determined management advice.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-21
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-21-workplace-trigger-points
+    title: 'ENNEA-RP-21: fix(enneagram): repair workplace triggers'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-20
+    scope:
+    - Separate environment, task, and relationship triggers; avoid diagnostic stress
+      language.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-22
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-22-context-mode-placeholder
+    title: 'ENNEA-RP-22: fix(enneagram): repair context mode placeholder'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-21
+    scope:
+    - Explain unavailable context mode and boundaries without empty placeholder language.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/theory_hint_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-23
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-23-growth-axis
+    title: 'ENNEA-RP-23: fix(enneagram): repair growth axis'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-22
+    scope:
+    - Convert growth axis into concrete behavior experiments without therapy or inspirational
+      overreach.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-24
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-24-strength-expression
+    title: 'ENNEA-RP-24: fix(enneagram): repair strength expression'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-23
+    scope:
+    - Make strengths conditional and context-bound rather than absolute.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-25
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-25-cost-expression
+    title: 'ENNEA-RP-25: fix(enneagram): repair cost expression'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-24
+    scope:
+    - Describe overuse costs without shaming.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-26
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-26-stress-trigger
+    title: 'ENNEA-RP-26: fix(enneagram): repair stress trigger'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-25
+    scope:
+    - Use observable signals only; avoid medical or mental-health judgments.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-27
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-27-recovery-action
+    title: 'ENNEA-RP-27: fix(enneagram): repair recovery action'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-26
+    scope:
+    - Frame recovery actions as small self-observation moves, not counseling or treatment.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/state_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-28
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-28-state-spectrum
+    title: 'ENNEA-RP-28: fix(enneagram): repair state spectrum'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-27
+    scope:
+    - Keep state spectrum separate from fixed development stages and health-level judgments.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/state_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-29
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-29-arrow-growth-reference-placeholder
+    title: 'ENNEA-RP-29: fix(enneagram): repair arrow placeholder'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-28
+    scope:
+    - Keep arrow references as future-module placeholders without hard arrow interpretation.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/theory_hint_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-30
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-30-relationship-need
+    title: 'ENNEA-RP-30: fix(enneagram): repair relationship need'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-29
+    scope:
+    - Add interaction scenarios and counterexamples; avoid relationship-need stereotyping.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/scenario_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-31
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-31-relationship-strengths
+    title: 'ENNEA-RP-31: fix(enneagram): repair relationship strengths'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-30
+    scope:
+    - Frame relationship strengths as interaction tendencies, not partner or relationship
+      guarantees.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-32
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-32-misread-by-others
+    title: 'ENNEA-RP-32: fix(enneagram): repair misread by others'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-31
+    scope:
+    - Reframe others views as common misread hypotheses rather than claims about other
+      people.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-33
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-33-conflict-script
+    title: 'ENNEA-RP-33: fix(enneagram): repair conflict script'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-32
+    scope:
+    - Add concrete triggers and repair language; remove templated conflict-script feel.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/scenario_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-34
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-34-communication-manual
+    title: 'ENNEA-RP-34: fix(enneagram): repair communication manual'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-33
+    scope:
+    - Make communication guidance card-like and avoid mechanical manual overreach.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/scenario_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-35
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-35-blind-spot-in-relationship
+    title: 'ENNEA-RP-35: fix(enneagram): repair relationship blind spot'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-34
+    scope:
+    - Add interaction reciprocity and boundaries; avoid over-attributing relationship
+      problems to type.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-36
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-36-method-boundary
+    title: 'ENNEA-RP-36: fix(enneagram): repair method boundary'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-35
+    scope:
+    - Consolidate non-diagnostic, non-hiring, and score-space boundaries.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-37
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-37-seven-day-observation
+    title: 'ENNEA-RP-37: fix(enneagram): repair seven-day observation'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-36
+    scope:
+    - Keep seven-day observation lightweight and non-interventionist.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/observation_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-38
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-38-resonance-feedback-placeholder
+    title: 'ENNEA-RP-38: fix(enneagram): repair resonance feedback placeholder'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-37
+    scope:
+    - Clarify feedback records self-observation evidence only and does not rewrite results.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/observation_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-39
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-39-history-share-retake-placeholder
+    title: 'ENNEA-RP-39: fix(enneagram): repair history share retake placeholder'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-38
+    scope:
+    - Add history, share, and retake boundaries; avoid overstating retake stability.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-40
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-40-form-recommendation
+    title: 'ENNEA-RP-40: fix(enneagram): repair form recommendation'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-39
+    scope:
+    - Explain when follow-up form is useful; FC144 is not a truth upgrade or always
+      more accurate version.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json
+    - backend/app/Services/Report/EnneagramReportComposer.php
+    - backend/tests/**/Enneagram*
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-41
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-41-sample-report-link
+    title: 'ENNEA-RP-41: fix(enneagram): repair sample report link'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-40
+    scope:
+    - Make sample report a reading example, not a norm or answer key.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/sample_report_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-42
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-42-technical-note-link
+    title: 'ENNEA-RP-42: fix(enneagram): repair technical note link'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-41
+    scope:
+    - Add evidence hierarchy, limitations, and privacy boundaries to the technical note
+      link copy.
+    allowed_paths:
+    - backend/content_packs/ENNEAGRAM/v2/registry/technical_note_registry.json
+    - backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: ENNEA-RP-43
+    repo: fap-api
+    base: main
+    branch: codex/ennea-rp-43-validator-test
+    title: 'ENNEA-RP-43: test(enneagram): enforce registry scientific and style guards'
+    train_scope: enneagram_result_page_content_asset_repair
+    status: user_authorized
+    depends_on:
+    - ENNEA-RP-42
+    scope:
+    - Enforce registry guards for pseudo-validity, diagnosis, hiring, health-level hard
+      judgments, high certainty, hard wing/subtype/arrow claims, AI-like phrasing, and
+      generic advice density.
+    allowed_paths:
+    - backend/app/Services/Enneagram/Registry/RegistryValidator.php
+    - backend/tests/Unit/Services/Content/EnneagramRegistryPackLoadTest.php
+    - backend/tests/Unit/Services/Content/EnneagramTypeRegistryCoverageTest.php
+    - docs/codex/pr-train.yaml
+    - docs/codex/pr-train-state.json
+    - generated/pr-train-sidecar-issues/**
+    do_not:
+    - Modify fap-web; it is read-only reference for this train.
+    - Deploy, activate registry release, run production import, write CMS, mutate DB,
+      or trigger manual/production deploy.
+    - Change SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, permissions, secrets,
+      routes, migrations, or frontend fallback content.
+    - Implement adjacent or future ENNEA-RP scopes in the current PR.
+    - Modify ENNEAGRAM registry content JSON in validator/test PR; stop and report any
+      remaining content violation to the owning module PR.
+    validation:
+    - cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json
+    - cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest
+    - cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest
+    - cd backend && php artisan test --filter=EnneagramReportComposerV2Test
+    - cd backend && php artisan test --filter=Enneagram
+    - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

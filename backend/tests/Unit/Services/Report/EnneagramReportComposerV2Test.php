@@ -54,6 +54,9 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame($formCode, data_get($payload, 'report._meta.enneagram_report_v2.form.form_code'));
         $this->assertSame($expectedMethodologyVariant, data_get($payload, 'report._meta.enneagram_report_v2.form.methodology_variant'));
         $this->assertSame($expectedFormVariant, data_get($this->module($payload, 'methodology_boundary_card'), 'form_variant'));
+        $this->assertSame('clear', data_get($this->module($payload, 'instant_summary'), 'content.interpretation_scope'));
+        $this->assertStringContainsString('解释假设', (string) data_get($this->module($payload, 'instant_summary'), 'content.body'));
+        $this->assertStringContainsString('不是对人格的绝对标签或诊断结论', (string) data_get($this->module($payload, 'instant_summary'), 'content.body'));
         $this->assertStringStartsWith('sha256:', (string) data_get($payload, 'report._meta.enneagram_report_v2.registry.registry_release_hash'));
         $this->assertNotSame('', (string) data_get($payload, 'report._meta.enneagram_report_v2.provenance.interpretation_context_id'));
         $this->assertSame('enneagram_report_engine.v2', data_get($payload, 'report._meta.enneagram_report_v2.provenance.report_engine_version'));
@@ -145,11 +148,15 @@ final class EnneagramReportComposerV2Test extends TestCase
         );
 
         $module = $this->module($payload, 'close_call_card');
+        $summary = $this->module($payload, 'instant_summary');
 
         $this->assertSame('close_call', data_get($module, 'state'));
         $this->assertSame('visible', data_get($module, 'visibility'));
         $this->assertSame('1_6', data_get($module, 'content.pair.pair_key'));
         $this->assertContains('enneagram_pair_registry:1_6', (array) data_get($module, 'registry_refs'));
+        $this->assertSame('close_call', data_get($summary, 'content.interpretation_scope'));
+        $this->assertStringContainsString('并排阅读', (string) data_get($summary, 'content.body'));
+        $this->assertStringContainsString('系统不会把微小分差写成单一主型定论', (string) data_get($summary, 'content.body'));
     }
 
     public function test_diffuse_scope_includes_diffuse_boundary_module(): void
@@ -169,10 +176,14 @@ final class EnneagramReportComposerV2Test extends TestCase
         );
 
         $module = $this->module($payload, 'diffuse_boundary');
+        $summary = $this->module($payload, 'instant_summary');
 
         $this->assertSame('diffuse', data_get($module, 'state'));
         $this->assertSame('visible', data_get($module, 'visibility'));
         $this->assertSame('结果分散说明', data_get($module, 'content.title'));
+        $this->assertSame('diffuse', data_get($summary, 'content.interpretation_scope'));
+        $this->assertStringContainsString('不适合只围绕一个号码下结论', (string) data_get($summary, 'content.body'));
+        $this->assertStringContainsString('不是失败或无效结果', (string) data_get($summary, 'content.body'));
     }
 
     public function test_low_quality_scope_includes_low_quality_boundary_module(): void
@@ -195,11 +206,15 @@ final class EnneagramReportComposerV2Test extends TestCase
         );
 
         $module = $this->module($payload, 'low_quality_boundary');
+        $summary = $this->module($payload, 'instant_summary');
 
         $this->assertSame('low_quality', data_get($module, 'state'));
         $this->assertSame('visible', data_get($module, 'visibility'));
         $this->assertSame('triggered_operational_signal', data_get($module, 'content.low_quality_status'));
         $this->assertSame(['speed_too_fast'], data_get($module, 'content.qc_flags'));
+        $this->assertSame('low_quality', data_get($summary, 'content.interpretation_scope'));
+        $this->assertStringContainsString('作答信号显示解释边界需要放宽', (string) data_get($summary, 'content.body'));
+        $this->assertStringContainsString('不适合用来确认主型', (string) data_get($summary, 'content.body'));
     }
 
     public function test_v2_modules_expose_p0_ready_registry_provenance(): void
