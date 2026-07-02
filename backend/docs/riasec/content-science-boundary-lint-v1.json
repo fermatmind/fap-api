@@ -1,0 +1,223 @@
+{
+  "schema_version": "riasec.content_science_boundary_lint.v1",
+  "scale_code": "RIASEC",
+  "content_authority": "backend_content_assets",
+  "review_mode": "codex_science_editorial_self_review",
+  "runtime_behavior": {
+    "frontend_fallback_allowed": false,
+    "cms_write_allowed": false,
+    "production_import_allowed": false,
+    "production_deploy_allowed": false
+  },
+  "reference_basis": [
+    {
+      "source_id": "holland_riasec_theory",
+      "use": "Treat Holland/RIASEC as vocational interest and person-environment exploration language, not diagnosis, ability proof, hiring suitability, or deterministic career matching."
+    },
+    {
+      "source_id": "onet_interest_profiler",
+      "use": "Keep results framed around work activities users may like and occupations they may explore; do not present occupations as matches, rankings, or recommendations."
+    },
+    {
+      "source_id": "onet_vocational_interests_update",
+      "use": "Ground thickening in illustrative work activities and occupational task language rather than personality labels or outcome promises."
+    },
+    {
+      "source_id": "vocational_interest_fit_research",
+      "use": "Interest fit may support exploration and hypothesis generation, but it must not be written as success, performance, admission, hiring, salary, or qualification prediction."
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "examples_not_matches",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "positive_claims_forbidden": [
+    "best_career",
+    "career_match",
+    "occupation_ranking",
+    "job_fit",
+    "fit_score",
+    "success_prediction",
+    "salary_prediction",
+    "admission_or_hiring_suitability",
+    "qualification_judgment",
+    "ability_or_skill_inference",
+    "personality_identity",
+    "diagnostic_claim",
+    "140q_more_accurate",
+    "60q_wrong_or_overridden",
+    "raw_score_delta",
+    "feedback_changes_scores",
+    "cms_or_frontend_runtime_authority"
+  ],
+  "copy_quality_rules": [
+    "Prefer concrete work activities, tradeoffs, validation questions, and small experiments over labels.",
+    "Use zh-CN that sounds like professional career counseling, not machine-generated motivational prose.",
+    "Do not thicken by repeating the same boundary paragraph in every section.",
+    "When a section is already dense, improve structure and specificity before adding length.",
+    "Keep occupation names as examples that illuminate activity signals; never turn them into recommendations."
+  ],
+  "sections": [
+    {
+      "section_key": "hero_activity_chain",
+      "primary_assets": ["content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php", "app/Services/Riasec/RiasecPublicProjectionService.php"],
+      "risk": "top3 ordering can read like an identity label",
+      "repair_goal": "frame the top3 as an activity chain and exploration order, not ability or career conclusion"
+    },
+    {
+      "section_key": "six_dimension_map",
+      "primary_assets": ["content_assets/riasec/profile_shape_copy_v1.zh-CN.json", "content_assets/riasec/top_code_confidence_copy_v1.zh-CN.json"],
+      "service_files": ["app/Services/Riasec/RiasecReportModuleSelector.php", "app/Services/Riasec/RiasecPublicProjectionService.php"],
+      "risk": "high or flat bars can be overread as absolute strength or ability",
+      "repair_goal": "explain relative shape, flatness, near ties, and reading strength"
+    },
+    {
+      "section_key": "pair_blend",
+      "primary_assets": ["content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecReportModuleSelector.php", "app/Services/Riasec/RiasecPublicProjectionService.php"],
+      "risk": "module visibility can expose strong combination copy when a cautious view is safer",
+      "repair_goal": "align visible/collapsed behavior with quality and profile-shape risk"
+    },
+    {
+      "section_key": "activity_explorer",
+      "primary_assets": ["content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecActivityExplorerService.php"],
+      "risk": "activity examples can become repetitive, generic, or recommendation-like",
+      "repair_goal": "make activities concrete, observable, low-risk, and non-deterministic"
+    },
+    {
+      "section_key": "occupation_examples",
+      "primary_assets": ["content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecActivityExplorerService.php"],
+      "risk": "occupation examples are the highest-risk surface for career recommendation and job-fit claims",
+      "repair_goal": "keep occupations as examples-only bridges from activity signals"
+    },
+    {
+      "section_key": "140q_cta",
+      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php"],
+      "risk": "140Q can be misread as more accurate or as a repair for 60Q",
+      "repair_goal": "describe 140Q as a contextual detail layer that does not override 60Q"
+    },
+    {
+      "section_key": "140q_context_cards",
+      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php", "app/Services/Riasec/RiasecPublicProjectionService.php"],
+      "risk": "task, environment, and role cards can be over-generalized",
+      "repair_goal": "make work-daily context specific without comparing raw scores or concluding occupations"
+    },
+    {
+      "section_key": "share_card",
+      "primary_assets": ["content_assets/riasec/share_pdf_history_v1.zh-CN.json", "content_assets/riasec/share_pdf_history_v1.en.json"],
+      "service_files": ["app/Services/Riasec/RiasecLifecycleCopyService.php"],
+      "risk": "public share copy can leak private context or overstate the result",
+      "repair_goal": "keep share copy minimal, public-safe, and free of score or identity claims"
+    },
+    {
+      "section_key": "pdf",
+      "primary_assets": ["content_assets/riasec/share_pdf_history_v1.zh-CN.json", "content_assets/riasec/share_pdf_history_v1.en.json"],
+      "service_files": ["app/Services/Report/RiasecReportComposer.php", "app/Services/Riasec/RiasecLifecycleCopyService.php"],
+      "risk": "PDF can become too dense or repeat boundaries without adding decision value",
+      "repair_goal": "compress repeated boundary copy while preserving scientific limits"
+    },
+    {
+      "section_key": "history",
+      "primary_assets": ["content_assets/riasec/share_pdf_history_v1.zh-CN.json", "content_assets/riasec/share_pdf_history_v1.en.json"],
+      "service_files": ["app/Services/Riasec/RiasecLifecycleCopyService.php"],
+      "risk": "history can imply stable personality identity instead of a snapshot",
+      "repair_goal": "show snapshot and exploration history without stable identity claims"
+    },
+    {
+      "section_key": "feedback_overlay",
+      "primary_assets": ["content_assets/riasec/feedback_action_lab_v1.zh-CN.jsonl", "content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php"],
+      "risk": "feedback can be mistaken as changing scores or Holland code",
+      "repair_goal": "make feedback affect only exploration actions and never measured results"
+    },
+    {
+      "section_key": "dimension_deep_copy",
+      "primary_assets": ["content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json"],
+      "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php"],
+      "risk": "single dimensions can sound like personality or ability profiles",
+      "repair_goal": "anchor every dimension in interest activities, costs, misreads, and validation"
+    },
+    {
+      "section_key": "pair_blend_copy",
+      "primary_assets": ["content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php"],
+      "risk": "pair labels can create identity labels",
+      "repair_goal": "de-label pair copy and thicken tension, cost, and validation"
+    },
+    {
+      "section_key": "140q_layer_copy",
+      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php"],
+      "risk": "layer copy can drift between task, environment, role, and CTA meanings",
+      "repair_goal": "make the three 140Q layers consistent and boundary-safe"
+    },
+    {
+      "section_key": "quality_copy",
+      "primary_assets": ["content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json"],
+      "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php", "app/Services/Riasec/RiasecQualityRuleContract.php"],
+      "risk": "low-quality copy can blame the user or upsell 140Q",
+      "repair_goal": "explain cautious reading, retake guidance, and hidden strong modules"
+    },
+    {
+      "section_key": "structural_difference_copy",
+      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php", "app/Services/Riasec/RiasecPublicProjectionService.php"],
+      "risk": "60Q and 140Q differences can be read as better or worse results",
+      "repair_goal": "describe emphasis differences without raw-score comparison or override"
+    },
+    {
+      "section_key": "aspirations_copy",
+      "primary_assets": ["content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php"],
+      "risk": "aspiration copy can override measured interest signals",
+      "repair_goal": "turn aspirations into reality-check questions and small experiments"
+    },
+    {
+      "section_key": "feedback_response_copy",
+      "primary_assets": ["content_assets/riasec/disagree_path_v1.zh-CN.jsonl"],
+      "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php"],
+      "risk": "disagree copy can imply report correction or score mutation",
+      "repair_goal": "give next steps while preserving snapshot, share, PDF, and measured code"
+    }
+  ],
+  "asset_inventory": [
+    "content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl",
+    "content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl",
+    "content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl",
+    "content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json",
+    "content_assets/riasec/disagree_path_v1.zh-CN.jsonl",
+    "content_assets/riasec/faq_v1.en.json",
+    "content_assets/riasec/faq_v1.zh-CN.json",
+    "content_assets/riasec/feedback_action_lab_v1.zh-CN.jsonl",
+    "content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json",
+    "content_assets/riasec/near_tie_alternate_code_copy_v1.zh-CN.json",
+    "content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl",
+    "content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl",
+    "content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl",
+    "content_assets/riasec/professional_method_boundary_v1.en.json",
+    "content_assets/riasec/professional_method_boundary_v1.zh-CN.json",
+    "content_assets/riasec/profile_shape_copy_v1.zh-CN.json",
+    "content_assets/riasec/share_pdf_history_v1.en.json",
+    "content_assets/riasec/share_pdf_history_v1.zh-CN.json",
+    "content_assets/riasec/technical_note_user_summary_v1.en.json",
+    "content_assets/riasec/technical_note_user_summary_v1.zh-CN.json",
+    "content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl",
+    "content_assets/riasec/top_code_confidence_copy_v1.zh-CN.json"
+  ]
+}

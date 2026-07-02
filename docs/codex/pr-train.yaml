@@ -31621,3 +31621,963 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: RIASEC-CONTENT-SCIENCE-00
+    repo: fap-api
+    depends_on: []
+    branch: codex/riasec-content-science-00
+    title: "RIASEC-CONTENT-SCIENCE-00 establish RIASEC content science boundary lint"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Register the RIASEC content science repair PR train.
+      - Add a backend-owned science boundary registry for the 18 RIASEC result content sections.
+      - Add a focused lint test proving section coverage, asset mapping, and high-risk positive-claim blocking.
+    allowed_paths:
+      - backend/docs/riasec/content-science-boundary-lint-v1.*
+      - backend/tests/Unit/Services/Riasec/RiasecContentScienceBoundaryLintTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecContentScienceBoundaryLintTest.php --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -m json.tool backend/docs/riasec/content-science-boundary-lint-v1.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-HERO-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-hero-01
+    title: "RIASEC-CONTENT-HERO-01 optimize RIASEC hero activity chain content"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair hero_activity_chain content so top3 is an activity chain and exploration order, not identity or ability conclusion.
+    allowed_paths:
+      - backend/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/tests/Unit/Services/Riasec/**
+      - backend/tests/Feature/V0_3/Riasec*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-DIMMAP-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-dimmap-01
+    title: "RIASEC-CONTENT-DIMMAP-01 optimize RIASEC six-dimension map interpretation"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair six_dimension_map interpretation for high scores, flat profiles, near ties, and ability-boundary risks.
+    allowed_paths:
+      - backend/content_assets/riasec/profile_shape_copy_v1.zh-CN.json
+      - backend/content_assets/riasec/top_code_confidence_copy_v1.zh-CN.json
+      - backend/app/Services/Riasec/RiasecReportModuleSelector.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/tests/Unit/Services/Riasec/**
+      - backend/tests/Feature/V0_3/Riasec*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-PAIRMODULE-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-pairmodule-01
+    title: "RIASEC-CONTENT-PAIRMODULE-01 govern RIASEC pair blend module visibility"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Align pair_blend module visibility with quality/profile risk and content-safety boundaries.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecReportModuleSelector.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/tests/Unit/Services/Riasec/RiasecReportModuleSelectorTest.php
+      - backend/tests/Unit/Services/Riasec/**Pair**
+      - backend/tests/Feature/V0_3/Riasec*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-ACTIVITY-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-activity-01
+    title: "RIASEC-CONTENT-ACTIVITY-01 repair RIASEC activity explorer content assets"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair 360 activity/task examples for scientific correctness, specificity, low-risk validation, and non-recommendation language.
+    allowed_paths:
+      - backend/content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl
+      - backend/tests/Unit/Services/Riasec/RiasecActivityTaskExamplesPreflightTest.php
+      - backend/tests/Fixtures/Riasec/activity_task_examples_v1.zh-CN.jsonl
+      - backend/docs/riasec/activity-task-examples-pack-05-preflight.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-ACTIVITY-02
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-ACTIVITY-01
+    branch: codex/riasec-content-activity-02
+    title: "RIASEC-CONTENT-ACTIVITY-02 harden RIASEC activity explorer selection"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair activity explorer selection, dedupe, ordering, and fail-closed behavior so examples are not recommendations.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecActivityExplorerService.php
+      - backend/tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecActivityTaskExamplesPreflightTest.php
+      - backend/tests/Feature/V0_3/Riasec*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-OCC-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-occ-01
+    title: "RIASEC-CONTENT-OCC-01 repair RIASEC occupation example boundaries"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair 360 occupation examples so occupations remain examples-only activity bridges without fit, rank, or recommendation claims.
+    allowed_paths:
+      - backend/content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl
+      - backend/tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php
+      - backend/tests/Fixtures/Riasec/occupation_examples_boundary_v1.zh-CN.jsonl
+      - backend/docs/riasec/occupation-examples-pack-06-preflight.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-OCC-02
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-OCC-01
+    branch: codex/riasec-content-occ-02
+    title: "RIASEC-CONTENT-OCC-02 harden RIASEC occupation example projection"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Harden occupation example projection and public surfaces against ranking, fit score, success, qualification, and share/PDF leakage.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecActivityExplorerService.php
+      - backend/tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php
+      - backend/tests/Feature/V0_3/Riasec*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-140CTA-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-140cta-01
+    title: "RIASEC-CONTENT-140CTA-01 repair RIASEC 60Q and 140Q CTA boundaries"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair 140q_cta copy so 140Q is contextual detail, not more accurate or a 60Q repair.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php
+      - backend/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-140CTX-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-140CTA-01
+    branch: codex/riasec-content-140ctx-01
+    title: "RIASEC-CONTENT-140CTX-01 repair RIASEC 140Q context card assets"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair 140Q task, environment, and role assets for realistic work-daily context without occupational conclusions.
+    allowed_paths:
+      - backend/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl
+      - backend/tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php
+      - backend/tests/Fixtures/Riasec/**140q**
+      - backend/docs/riasec/**140q**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-140CTX-02
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-140CTX-01
+    branch: codex/riasec-content-140ctx-02
+    title: "RIASEC-CONTENT-140CTX-02 harden RIASEC 140Q structural selection"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Harden 140Q context card projection and cross-form structural difference selection so raw scores are never compared.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php
+      - backend/tests/Feature/V0_3/Riasec*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-SHARE-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-share-01
+    title: "RIASEC-CONTENT-SHARE-01 repair RIASEC public share card copy"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair share_card copy to be minimal, public-safe, and free of score, identity, private context, or outcome claims.
+    allowed_paths:
+      - backend/content_assets/riasec/share_pdf_history_v1.*.json
+      - backend/app/Services/Riasec/RiasecLifecycleCopyService.php
+      - backend/tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php
+      - backend/tests/Feature/V0_3/*Share*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-PDF-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-pdf-01
+    title: "RIASEC-CONTENT-PDF-01 repair RIASEC PDF density and boundaries"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair PDF lifecycle copy density and boundary wording without changing PDF runtime or deployment.
+    allowed_paths:
+      - backend/content_assets/riasec/share_pdf_history_v1.*.json
+      - backend/app/Services/Riasec/RiasecLifecycleCopyService.php
+      - backend/app/Services/Report/RiasecReportComposer.php
+      - backend/tests/Feature/V0_3/*Pdf*
+      - backend/tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-HISTORY-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-history-01
+    title: "RIASEC-CONTENT-HISTORY-01 repair RIASEC history summary boundaries"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair history copy so it reads as a snapshot and exploration record, not a stable personality identity.
+    allowed_paths:
+      - backend/content_assets/riasec/share_pdf_history_v1.*.json
+      - backend/app/Services/Riasec/RiasecLifecycleCopyService.php
+      - backend/tests/Feature/V0_3/*History*
+      - backend/tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-FEEDBACK-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-feedback-01
+    title: "RIASEC-CONTENT-FEEDBACK-01 repair RIASEC feedback overlay copy"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair feedback action lab content so feedback only guides exploration and never mutates score or code.
+    allowed_paths:
+      - backend/content_assets/riasec/feedback_action_lab_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php
+      - backend/tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-FEEDBACK-02
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-FEEDBACK-01
+    branch: codex/riasec-content-feedback-02
+    title: "RIASEC-CONTENT-FEEDBACK-02 repair RIASEC next exploration nodes"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair next exploration nodes as small experiments and observation questions, not recommendations.
+    allowed_paths:
+      - backend/content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php
+      - backend/tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-DIMDEEP-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-dimdeep-01
+    title: "RIASEC-CONTENT-DIMDEEP-01 repair RIASEC dimension deep copy"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair dimension_deep_copy so each dimension stays grounded in interest activities, costs, misreads, and validation.
+    allowed_paths:
+      - backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-PAIRDEEP-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-pairdeep-01
+    title: "RIASEC-CONTENT-PAIRDEEP-01 repair RIASEC pair blend deep copy"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair 15 pair_blend_copy rows to reduce identity labels and thicken tension, cost, and validation.
+    allowed_paths:
+      - backend/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/tests/Unit/Services/Riasec/RiasecPairBlendAssetPreflightTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php
+      - backend/tests/Fixtures/Riasec/pair_blend_15_pairs_v7_3_preflight.jsonl
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-140LAYER-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-140CTA-01
+      - RIASEC-CONTENT-140CTX-02
+    branch: codex/riasec-content-140layer-01
+    title: "RIASEC-CONTENT-140LAYER-01 repair RIASEC 140Q layer copy"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair 140q_layer_copy consistency across task, environment, role, agreement, tension, unavailable, CTA, and low-quality states.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl
+      - backend/tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-QUALITY-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-quality-01
+    title: "RIASEC-CONTENT-QUALITY-01 repair RIASEC quality boundary copy"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair quality_copy so low-quality and cautious states never blame users, upsell 140Q, or make strong conclusions.
+    allowed_paths:
+      - backend/content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecQualityRuleContract.php
+      - backend/tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecQualityRuleContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-STRUCT-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-140LAYER-01
+    branch: codex/riasec-content-struct-01
+    title: "RIASEC-CONTENT-STRUCT-01 repair RIASEC structural difference copy"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair structural_difference_copy so 60Q/140Q differences are emphasis differences, not correctness or raw-score comparisons.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-ASPIRATION-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-aspiration-01
+    title: "RIASEC-CONTENT-ASPIRATION-01 repair RIASEC aspirations copy"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair aspirations_copy so aspirations generate validation questions and never override measured results.
+    allowed_paths:
+      - backend/content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/tests/Unit/Services/Riasec/RiasecAspirationsDisagreeAssetPreflightTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-DISAGREE-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-SCIENCE-00
+    branch: codex/riasec-content-disagree-01
+    title: "RIASEC-CONTENT-DISAGREE-01 repair RIASEC disagree path copy"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Repair feedback_response_copy so disagreement gives next steps but never changes score, code, snapshot, share, or PDF.
+    allowed_paths:
+      - backend/content_assets/riasec/disagree_path_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/tests/Unit/Services/Riasec/RiasecAspirationsDisagreeAssetPreflightTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+
+  - id: RIASEC-CONTENT-FINALQA-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-CONTENT-HERO-01
+      - RIASEC-CONTENT-DIMMAP-01
+      - RIASEC-CONTENT-PAIRMODULE-01
+      - RIASEC-CONTENT-ACTIVITY-02
+      - RIASEC-CONTENT-OCC-02
+      - RIASEC-CONTENT-140LAYER-01
+      - RIASEC-CONTENT-QUALITY-01
+      - RIASEC-CONTENT-STRUCT-01
+      - RIASEC-CONTENT-ASPIRATION-01
+      - RIASEC-CONTENT-DISAGREE-01
+      - RIASEC-CONTENT-PDF-01
+      - RIASEC-CONTENT-SHARE-01
+      - RIASEC-CONTENT-HISTORY-01
+      - RIASEC-CONTENT-FEEDBACK-02
+      - RIASEC-CONTENT-DIMDEEP-01
+      - RIASEC-CONTENT-PAIRDEEP-01
+    branch: codex/riasec-content-finalqa-01
+    title: "RIASEC-CONTENT-FINALQA-01 revalidate all RIASEC content sections"
+    train_scope: riasec_result_content_science_repair
+    status: user_authorized
+    stop_if_changed_files_outside_scope: true
+    scope:
+      - Run full RIASEC content lint, dedupe, rendered evidence, PDF/share/history review, and final sidecar closeout for all 18 sections.
+    allowed_paths:
+      - backend/content_assets/riasec/**
+      - backend/app/Services/Riasec/**
+      - backend/app/Services/Report/RiasecReportComposer.php
+      - backend/tests/Unit/Services/Riasec/**
+      - backend/tests/Feature/V0_3/Riasec*
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web public editorial content or add frontend fallback copy.
+      - Run CMS writes, production import, database migration, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, permission or secret changes.
+      - Wait for staging deploy, trigger manual deploy, verify server deployment, or run production deploy.
+      - Combine adjacent RIASEC-CONTENT scopes or repair future PR scopes early.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

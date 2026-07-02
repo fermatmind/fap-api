@@ -63745,7 +63745,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-30T09:37:12+08:00",
+  "updated_at": "2026-07-02T16:21:59Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -67033,6 +67033,862 @@
         "at": "2026-07-02T16:12:11.904905Z",
         "status": "user_authorized",
         "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-SCIENCE-00": {
+    "id": "RIASEC-CONTENT-SCIENCE-00",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-science-00",
+    "title": "RIASEC-CONTENT-SCIENCE-00 establish RIASEC content science boundary lint",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [],
+    "status": "pr_opened",
+    "commit_sha": "60d9808ff7ec926321ecb7cb8f8a0f8d981183d5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2601",
+    "checks": {
+      "phpunit": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecContentScienceBoundaryLintTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "4 tests, 133 assertions"
+      },
+      "pint": {
+        "command": "cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecContentScienceBoundaryLintTest.php",
+        "status": "passed"
+      },
+      "manifest_yaml_parse": {
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+        "status": "passed"
+      },
+      "state_json_parse": {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed"
+      },
+      "boundary_registry_json_parse": {
+        "command": "python3 -m json.tool backend/docs/riasec/content-science-boundary-lint-v1.json >/dev/null",
+        "status": "passed"
+      },
+      "diff_check": {
+        "command": "git diff --check",
+        "status": "passed"
+      },
+      "scope_validation": {
+        "command": "git diff --name-only && git ls-files --others --exclude-standard; compare against SCIENCE-00 allowed paths",
+        "status": "passed",
+        "summary": "Only 5 SCIENCE-00 allowed paths changed."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/docs/riasec/content-science-boundary-lint-v1.json",
+        "backend/docs/riasec/content-science-boundary-lint-v1.md",
+        "backend/tests/Unit/Services/Riasec/RiasecContentScienceBoundaryLintTest.php",
+        "docs/codex/pr-train-state.json",
+        "docs/codex/pr-train.yaml"
+      ]
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "in_progress",
+        "note": "User authorized full RIASEC content science repair train; started first scoped PR from latest origin/main in isolated worktree."
+      },
+      {
+        "at": "2026-07-02T16:14:09Z",
+        "from": "in_progress",
+        "to": "local_validation_passed",
+        "note": "SCIENCE-00 local checks passed and changed files stayed within allowed scope."
+      },
+      {
+        "at": "2026-07-02T16:15:43Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2601 after local validation and scope validation passed."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-HERO-01": {
+    "id": "RIASEC-CONTENT-HERO-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-hero-01",
+    "title": "RIASEC-CONTENT-HERO-01 optimize RIASEC hero activity chain content",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-DIMMAP-01": {
+    "id": "RIASEC-CONTENT-DIMMAP-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-dimmap-01",
+    "title": "RIASEC-CONTENT-DIMMAP-01 optimize RIASEC six-dimension map interpretation",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-PAIRMODULE-01": {
+    "id": "RIASEC-CONTENT-PAIRMODULE-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-pairmodule-01",
+    "title": "RIASEC-CONTENT-PAIRMODULE-01 govern RIASEC pair blend module visibility",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-ACTIVITY-01": {
+    "id": "RIASEC-CONTENT-ACTIVITY-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-activity-01",
+    "title": "RIASEC-CONTENT-ACTIVITY-01 repair RIASEC activity explorer content assets",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-ACTIVITY-02": {
+    "id": "RIASEC-CONTENT-ACTIVITY-02",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-activity-02",
+    "title": "RIASEC-CONTENT-ACTIVITY-02 harden RIASEC activity explorer selection",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-ACTIVITY-01"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-OCC-01": {
+    "id": "RIASEC-CONTENT-OCC-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-occ-01",
+    "title": "RIASEC-CONTENT-OCC-01 repair RIASEC occupation example boundaries",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-OCC-02": {
+    "id": "RIASEC-CONTENT-OCC-02",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-occ-02",
+    "title": "RIASEC-CONTENT-OCC-02 harden RIASEC occupation example projection",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-OCC-01"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-140CTA-01": {
+    "id": "RIASEC-CONTENT-140CTA-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-140cta-01",
+    "title": "RIASEC-CONTENT-140CTA-01 repair RIASEC 60Q and 140Q CTA boundaries",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-140CTX-01": {
+    "id": "RIASEC-CONTENT-140CTX-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-140ctx-01",
+    "title": "RIASEC-CONTENT-140CTX-01 repair RIASEC 140Q context card assets",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-140CTA-01"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-140CTX-02": {
+    "id": "RIASEC-CONTENT-140CTX-02",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-140ctx-02",
+    "title": "RIASEC-CONTENT-140CTX-02 harden RIASEC 140Q structural selection",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-140CTX-01"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-SHARE-01": {
+    "id": "RIASEC-CONTENT-SHARE-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-share-01",
+    "title": "RIASEC-CONTENT-SHARE-01 repair RIASEC public share card copy",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-PDF-01": {
+    "id": "RIASEC-CONTENT-PDF-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-pdf-01",
+    "title": "RIASEC-CONTENT-PDF-01 repair RIASEC PDF density and boundaries",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-HISTORY-01": {
+    "id": "RIASEC-CONTENT-HISTORY-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-history-01",
+    "title": "RIASEC-CONTENT-HISTORY-01 repair RIASEC history summary boundaries",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-FEEDBACK-01": {
+    "id": "RIASEC-CONTENT-FEEDBACK-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-feedback-01",
+    "title": "RIASEC-CONTENT-FEEDBACK-01 repair RIASEC feedback overlay copy",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-FEEDBACK-02": {
+    "id": "RIASEC-CONTENT-FEEDBACK-02",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-feedback-02",
+    "title": "RIASEC-CONTENT-FEEDBACK-02 repair RIASEC next exploration nodes",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-FEEDBACK-01"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-DIMDEEP-01": {
+    "id": "RIASEC-CONTENT-DIMDEEP-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-dimdeep-01",
+    "title": "RIASEC-CONTENT-DIMDEEP-01 repair RIASEC dimension deep copy",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-PAIRDEEP-01": {
+    "id": "RIASEC-CONTENT-PAIRDEEP-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-pairdeep-01",
+    "title": "RIASEC-CONTENT-PAIRDEEP-01 repair RIASEC pair blend deep copy",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-140LAYER-01": {
+    "id": "RIASEC-CONTENT-140LAYER-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-140layer-01",
+    "title": "RIASEC-CONTENT-140LAYER-01 repair RIASEC 140Q layer copy",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-140CTA-01",
+      "RIASEC-CONTENT-140CTX-02"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-QUALITY-01": {
+    "id": "RIASEC-CONTENT-QUALITY-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-quality-01",
+    "title": "RIASEC-CONTENT-QUALITY-01 repair RIASEC quality boundary copy",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-STRUCT-01": {
+    "id": "RIASEC-CONTENT-STRUCT-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-struct-01",
+    "title": "RIASEC-CONTENT-STRUCT-01 repair RIASEC structural difference copy",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-140LAYER-01"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-ASPIRATION-01": {
+    "id": "RIASEC-CONTENT-ASPIRATION-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-aspiration-01",
+    "title": "RIASEC-CONTENT-ASPIRATION-01 repair RIASEC aspirations copy",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-DISAGREE-01": {
+    "id": "RIASEC-CONTENT-DISAGREE-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-disagree-01",
+    "title": "RIASEC-CONTENT-DISAGREE-01 repair RIASEC disagree path copy",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-SCIENCE-00"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      }
+    ]
+  },
+  "RIASEC-CONTENT-FINALQA-01": {
+    "id": "RIASEC-CONTENT-FINALQA-01",
+    "repo": "fap-api",
+    "branch": "codex/riasec-content-finalqa-01",
+    "title": "RIASEC-CONTENT-FINALQA-01 revalidate all RIASEC content sections",
+    "train_scope": "riasec_result_content_science_repair",
+    "base": "main",
+    "depends_on": [
+      "RIASEC-CONTENT-HERO-01",
+      "RIASEC-CONTENT-DIMMAP-01",
+      "RIASEC-CONTENT-PAIRMODULE-01",
+      "RIASEC-CONTENT-ACTIVITY-02",
+      "RIASEC-CONTENT-OCC-02",
+      "RIASEC-CONTENT-140LAYER-01",
+      "RIASEC-CONTENT-QUALITY-01",
+      "RIASEC-CONTENT-STRUCT-01",
+      "RIASEC-CONTENT-ASPIRATION-01",
+      "RIASEC-CONTENT-DISAGREE-01",
+      "RIASEC-CONTENT-PDF-01",
+      "RIASEC-CONTENT-SHARE-01",
+      "RIASEC-CONTENT-HISTORY-01",
+      "RIASEC-CONTENT-FEEDBACK-02",
+      "RIASEC-CONTENT-DIMDEEP-01",
+      "RIASEC-CONTENT-PAIRDEEP-01"
+    ],
+    "status": "authorized_pending_start",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-02T16:08:07.295Z",
+        "from": null,
+        "to": "authorized_pending_start",
+        "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
       }
     ]
   }
