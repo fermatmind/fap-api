@@ -67,6 +67,48 @@ final class Riasec140qLayerAssetRegistryTest extends TestCase
         $this->assertStringNotContainsString('推翻', $slot['summary']);
     }
 
+    public function test_140q_asset_is_specific_across_dimension_layer_and_state(): void
+    {
+        $registry = new RiasecDeepCopySlotRegistry;
+        $slots = $registry->layer140qAssetSlots();
+
+        $this->assertGreaterThanOrEqual(100, count(array_unique(array_column($slots, 'summary'))));
+        $this->assertGreaterThanOrEqual(100, count(array_unique(array_column($slots, 'task_activity_card'))));
+        $this->assertGreaterThanOrEqual(100, count(array_unique(array_column($slots, 'environment_card'))));
+        $this->assertGreaterThanOrEqual(100, count(array_unique(array_column($slots, 'role_responsibility_card'))));
+
+        $rTask = $registry->resolve140qDimensionLayerSlot('R', 'task', 'agreement');
+        $this->assertStringContainsString('拆装样件、调试设备', $rTask['task_activity_card']);
+        $this->assertStringContainsString('材料和工具看得见摸得到', $rTask['environment_card']);
+        $this->assertStringContainsString('操作步骤', $rTask['role_responsibility_card']);
+
+        $eRole = $registry->resolve140qDimensionLayerSlot('E', 'role', 'tension');
+        $this->assertStringContainsString('推动决策、协调资源', $eRole['task_activity_card']);
+        $this->assertStringContainsString('承担推进压力', $eRole['environment_card']);
+        $this->assertStringContainsString('处理阻力和优先级冲突', $eRole['role_responsibility_card']);
+    }
+
+    public function test_140q_asset_visible_copy_avoids_result_override_and_job_conclusion_language(): void
+    {
+        $slots = (new RiasecDeepCopySlotRegistry)->layer140qAssetSlots();
+        $forbidden = ['更准', '更准确', '最终答案', '适合从事', '岗位胜任', '职业推荐', '匹配职业', 'fit score', 'raw delta'];
+
+        foreach ($slots as $slotName => $slot) {
+            $visibleCopy = implode(' ', [
+                $slot['title'],
+                $slot['summary'],
+                $slot['example_question'],
+                $slot['task_activity_card'],
+                $slot['environment_card'],
+                $slot['role_responsibility_card'],
+            ]);
+
+            foreach ($forbidden as $phrase) {
+                $this->assertStringNotContainsString($phrase, $visibleCopy, $slotName.' should not expose '.$phrase);
+            }
+        }
+    }
+
     public function test_140q_unknown_dimension_layer_slot_fails_closed(): void
     {
         $slot = (new RiasecDeepCopySlotRegistry)->resolve140qDimensionLayerSlot('Z', 'task', 'agreement');

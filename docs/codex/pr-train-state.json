@@ -70195,8 +70195,8 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "pr_opened",
-    "commit_sha": "1bac0bfc6a0597005f31df62832acfdaaf804b81",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "15afe4def26039ae86320ee22f6eaffb65f569af",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2626",
     "checks": {
       "phpunit_140q_slot_and_selector_tests": {
@@ -70220,14 +70220,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T18:07:43Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
         "backend/tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php",
@@ -70252,8 +70252,15 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2626 after 140CTA-01 local validation, latest-main ancestry check, and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T18:13:27Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2626 merged; origin/main contains merge commit; local main synced; task branch cleaned. Recorded during 140CTX-01 ledger reconciliation."
       }
-    ]
+    ],
+    "merge_commit_sha": "cf971a59671519fbde549288bb8eb8a1e3cd4d2d"
   },
   "RIASEC-CONTENT-140CTX-01": {
     "id": "RIASEC-CONTENT-140CTX-01",
@@ -70265,19 +70272,49 @@
     "depends_on": [
       "RIASEC-CONTENT-140CTA-01"
     ],
-    "status": "authorized_pending_start",
-    "commit_sha": null,
+    "status": "local_validation_passed",
+    "commit_sha": "fc58c1d7301d686b6ffe406dab6dc902276ef571",
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "phpunit_140q_asset_slot_and_boundary_tests": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentScienceBoundaryLintTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "17 tests, 5302 assertions"
+      },
+      "phpunit_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "174 tests, 104207 assertions"
+      },
+      "pint": {
+        "command": "cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php",
+        "status": "passed",
+        "summary": "1 file passed after rerun; initial rerun emitted PASS with exit 139 and was not counted"
+      },
+      "asset_jsonl_preflight": {
+        "command": "python3 JSONL decode and uniqueness scan for 140q_task_environment_role_v1.zh-CN.jsonl",
+        "status": "passed",
+        "summary": "126 records; 126 unique summaries, task cards, environment cards, and role cards"
+      },
+      "manifest_state_parse_and_diff_check": {
+        "command": "ruby YAML parse; python JSON parse; git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl",
+        "backend/tests/Unit/Services/Riasec/Riasec140qLayerAssetRegistryTest.php",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -70285,6 +70322,12 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-02T18:13:27Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "Repaired 126-row 140Q task/environment/role asset with specific daily-work context; local RIASEC unit subset and scope validation passed after latest-main rebase."
       }
     ]
   },
