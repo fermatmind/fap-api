@@ -35,6 +35,8 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
         $this->createSeoMeta($article, [
             'schema_json' => [
                 'editorial_package_v1' => [
+                    'schema_hold' => true,
+                    'hreflang_hold' => true,
                     'article_schema_enabled' => false,
                     'breadcrumb_schema_enabled' => false,
                     'faq_schema_enabled' => false,
@@ -60,6 +62,10 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['dry_run']);
         $this->assertTrue($payload['would_write']);
+        $this->assertTrue((bool) data_get($payload, 'before.0.schema_gates.schema_hold'));
+        $this->assertTrue((bool) data_get($payload, 'before.0.schema_gates.hreflang_hold'));
+        $this->assertNull(data_get($payload, 'after.0.schema_gates.schema_hold'));
+        $this->assertNull(data_get($payload, 'after.0.schema_gates.hreflang_hold'));
         $this->assertFalse((bool) data_get($payload, 'before.0.schema_gates.article_schema_enabled'));
         $this->assertTrue((bool) data_get($payload, 'after.0.schema_gates.article_schema_enabled'));
         $this->assertTrue((bool) data_get($payload, 'after.0.schema_gates.breadcrumb_schema_enabled'));
@@ -67,6 +73,8 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
         $this->assertSame('no_hreflang', data_get($payload, 'after.0.schema_gates.hreflang_gate_v1.policy'));
 
         $fresh = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', (int) $article->id)->firstOrFail();
+        $this->assertTrue((bool) data_get($fresh->schema_json, 'editorial_package_v1.schema_hold'));
+        $this->assertTrue((bool) data_get($fresh->schema_json, 'editorial_package_v1.hreflang_hold'));
         $this->assertFalse((bool) data_get($fresh->schema_json, 'editorial_package_v1.article_schema_enabled'));
         $this->assertSame(0, AuditLog::query()->withoutGlobalScopes()->where('action', 'articles_seo_gate_rollout')->count());
     }
@@ -84,7 +92,11 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
         $this->createSeoMeta($article, [
             'schema_json' => [
                 'editorial_package_v1' => [
+                    'schema_hold' => true,
+                    'hreflang_hold' => true,
                     'article_schema_enabled' => false,
+                    'breadcrumb_schema_enabled' => false,
+                    'faq_schema_enabled' => false,
                 ],
             ],
         ]);
@@ -96,6 +108,9 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
             '--translation-group-id' => 'unknown_until_cms_import',
             '--expected-slugs' => 'iq-test-score-and-limits-explained',
             '--set-translation-group-id' => 'tg_article_iq_test_score_and_limits_explained_2026v1',
+            '--enable-article-schema' => true,
+            '--enable-breadcrumb-schema' => true,
+            '--hold-faq-schema' => true,
             '--no-hreflang-policy' => true,
             '--execute' => true,
             '--json' => true,
@@ -116,6 +131,11 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
         $this->assertSame('tg_article_iq_test_score_and_limits_explained_2026v1', (string) $fresh->translation_group_id);
         $this->assertSame($contentMd, (string) $fresh->content_md);
         $this->assertSame($revisionCount, ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', (int) $article->id)->count());
+        $this->assertNull(data_get($fresh->seoMeta?->schema_json, 'editorial_package_v1.schema_hold'));
+        $this->assertNull(data_get($fresh->seoMeta?->schema_json, 'editorial_package_v1.hreflang_hold'));
+        $this->assertTrue((bool) data_get($fresh->seoMeta?->schema_json, 'editorial_package_v1.article_schema_enabled'));
+        $this->assertTrue((bool) data_get($fresh->seoMeta?->schema_json, 'editorial_package_v1.breadcrumb_schema_enabled'));
+        $this->assertFalse((bool) data_get($fresh->seoMeta?->schema_json, 'editorial_package_v1.faq_schema_enabled'));
         $this->assertSame('no_hreflang', data_get($fresh->seoMeta?->schema_json, 'editorial_package_v1.hreflang_gate_v1.policy'));
 
         $audit = AuditLog::query()->withoutGlobalScopes()->where('action', 'articles_seo_gate_rollout')->first();
