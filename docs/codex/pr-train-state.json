@@ -165,8 +165,8 @@
     "depends_on": [
       "ENNEA-RP-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": "e3e1a80e27b3feff9b1123298f635e94f7f48251",
+    "status": "ready_to_merge",
+    "commit_sha": "6297f9053f44c81451528a18c936a28ba7b6c8ca",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2609",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -230,6 +230,26 @@
           "git diff --check"
         ],
         "evidence": "All post-rebase local validation passed; Enneagram filter completed with 257 existing file_get_contents warnings, 2 passed tests, and 83375 assertions."
+      },
+      "rebase_origin_main_dac96356": {
+        "status": "pass",
+        "evidence": "Rebased onto origin/main dac963561b7a79ee052c387f3ebe9f4622d9d0c6 after another concurrent main update; no conflicts."
+      },
+      "post_rebase_dac96356_local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+          "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+          "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+          "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+          "cd backend && php artisan test --filter=Enneagram",
+          "git diff --check"
+        ],
+        "evidence": "All post-rebase local validation passed; Enneagram filter completed with 257 existing file_get_contents warnings, 2 passed tests, and 83375 assertions."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2609 GitHub checks passed for head ccb14d5373def36069d003a6a5730b1f60615740 before origin/main advanced again: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, and Semgrep checks."
       }
     },
     "scope_validation": {
@@ -267,6 +287,11 @@
         "at": "2026-07-02T17:07:08Z",
         "status": "pr_open_rebased_local_validation_passed",
         "notes": "Rebased PR #2609 onto origin/main f31fc4e9 after concurrent main update; post-rebase local validation passed."
+      },
+      {
+        "at": "2026-07-02T17:14:36Z",
+        "status": "ready_to_merge",
+        "notes": "Rebased PR #2609 onto origin/main dac96356 after another concurrent main update; post-rebase local validation passed and prior GitHub checks were green before the rebase."
       }
     ]
   },
