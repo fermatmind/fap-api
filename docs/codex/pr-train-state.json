@@ -69740,9 +69740,9 @@
     "depends_on": [
       "RIASEC-CONTENT-ACTIVITY-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "336e40fdc6b4b0ead7a7df3374c093363da9c809",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2617",
     "checks": {
       "phpunit_activity_explorer_service": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php --no-ansi --display-warnings",
@@ -69790,6 +69790,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "Hardened ACTIVITY-02 activity explorer selection, source filtering, dedupe, and fail-closed behavior; local RIASEC unit subset and scope validation passed."
+      },
+      {
+        "at": "2026-07-02T17:35:11Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2617 after ACTIVITY-02 local validation, latest-main rebase, and scope validation passed."
       }
     ]
   },
