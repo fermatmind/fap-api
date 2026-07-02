@@ -616,7 +616,7 @@ final class RiasecActivityExplorerService
                 'task_examples' => [
                     '访谈或观察真实用户。',
                     '拆解评论、反馈或投诉。',
-                    '写出需求假设和验证问题。',
+                    '写出需求假设和探索问题。',
                 ],
                 'occupation_examples' => [
                     ['name' => '用户研究助理', 'common_tasks' => ['拆解用户反馈', '整理需求假设', '写出洞察报告']],
@@ -646,7 +646,7 @@ final class RiasecActivityExplorerService
                 'occupation_examples' => [
                     ['name' => '教学设计 / 学习体验', 'common_tasks' => ['设计学习路径', '拆解步骤', '迭代材料']],
                     ['name' => '培训内容支持', 'common_tasks' => ['整理课程资料', '制作说明卡', '收集反馈']],
-                    ['name' => '产品说明 / 用户教育', 'common_tasks' => ['编写教程', '设计引导材料', '验证理解效果']],
+                    ['name' => '产品说明 / 用户教育', 'common_tasks' => ['编写教程', '设计引导材料', '观察理解效果']],
                     ['name' => '知识库内容设计', 'common_tasks' => ['组织条目', '维护说明', '优化检索结构']],
                 ],
                 'next_experiments' => [
@@ -666,10 +666,10 @@ final class RiasecActivityExplorerService
                 'task_examples' => [
                     '把选择项整理成判断表。',
                     '用问题帮助别人澄清取舍。',
-                    '设计一个低风险验证步骤。',
+                    '设计一个低风险观察步骤。',
                 ],
                 'occupation_examples' => [
-                    ['name' => '学习规划支持', 'common_tasks' => ['整理选择项', '设计学习路径', '提醒验证边界']],
+                    ['name' => '学习规划支持', 'common_tasks' => ['整理选择项', '设计学习路径', '提醒探索边界']],
                     ['name' => '产品顾问 / 方案支持', 'common_tasks' => ['理解需求', '解释方案', '整理取舍']],
                     ['name' => '研究咨询助理', 'common_tasks' => ['准备资料', '搭建框架', '形成说明材料']],
                     ['name' => '公益项目支持', 'common_tasks' => ['理解对象需求', '整理资源', '支持行动计划']],
@@ -677,7 +677,7 @@ final class RiasecActivityExplorerService
                 'next_experiments' => [
                     '为一个选择做利弊表。',
                     '设计 3 个澄清问题。',
-                    '把一个大决定拆成一个可验证的小步骤。',
+                    '把一个大决定拆成一个可观察的小步骤。',
                 ],
             ],
         ];
@@ -873,7 +873,7 @@ final class RiasecActivityExplorerService
                 'task_examples' => [
                     '访谈对象并记录关键事实。',
                     '把需求、情绪和限制条件分开。',
-                    '整理可验证的支持方案。',
+                    '整理可观察的支持方案。',
                 ],
                 'occupation_examples' => [
                     ['name' => '用户研究助理', 'common_tasks' => ['访谈用户', '整理证据', '输出洞察']],
@@ -883,7 +883,7 @@ final class RiasecActivityExplorerService
                 'next_experiments' => [
                     '写 5 个澄清需求的问题。',
                     '把一次反馈分成事实、感受和限制。',
-                    '设计一个低风险验证步骤。',
+                    '设计一个低风险观察步骤。',
                 ],
             ],
             [
@@ -1003,10 +1003,10 @@ final class RiasecActivityExplorerService
             [
                 'activity_key' => 'test_creative_materials',
                 'riasec_dimensions' => ['A', 'I'],
-                'activity_label' => ['en' => 'Test creative materials', 'zh-CN' => '验证创作材料'],
+                'activity_label' => ['en' => 'Test creative materials', 'zh-CN' => '观察创作材料'],
                 'activity_user_copy' => [
                     'en' => 'You may enjoy checking whether a creative output really communicates what it should.',
-                    'zh-CN' => '你可能喜欢验证一个创作输出是否真的传达了该传达的内容。',
+                    'zh-CN' => '你可能喜欢观察一个创作输出是否真的传达了该传达的内容。',
                 ],
                 'task_examples' => [
                     '收集读者或用户理解反馈。',
@@ -1113,7 +1113,7 @@ final class RiasecActivityExplorerService
                 'common_tasks' => array_values(array_map('strval', (array) ($example['common_tasks'] ?? []))),
                 'skills_to_check' => $this->skillsToCheck((string) ($activity['activity_key'] ?? '')),
                 'education_boundary' => '可能需要相关课程、训练、项目经验或领域知识；具体要求会因地区、行业和组织不同而变化。',
-                'skill_boundary' => '兴趣不等于能力，需要通过学习、作品、练习或真实项目验证相关技能。',
+                'skill_boundary' => '兴趣不等于能力，需要通过学习、作品、练习或真实项目确认相关技能。',
                 'qualification_boundary' => '涉及专业资质、执业资格或监管领域时，必须遵守资格、证书、教育背景和当地法规。',
                 'localization_note' => '职业名称、教育路径和资格要求会因国家、地区、行业和组织不同而变化。',
                 'not_a_recommendation' => true,
@@ -1147,7 +1147,7 @@ final class RiasecActivityExplorerService
             'understand_real_needs' => ['访谈', '提问', '倾听', '分析反馈'],
             'design_learning_explanatory_materials' => ['教学设计', '内容结构', '反馈迭代'],
             'support_decision_making' => ['提问', '框架搭建', '边界意识'],
-            default => ['学习验证', '真实任务练习', '反馈迭代'],
+            default => ['学习观察', '真实任务练习', '反馈迭代'],
         };
     }
 }

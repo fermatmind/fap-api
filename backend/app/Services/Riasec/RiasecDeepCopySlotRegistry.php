@@ -296,7 +296,7 @@ final class RiasecDeepCopySlotRegistry
                 'title' => '任务活动卡',
                 'question' => '你真正喜欢做的，是哪类工作活动？',
                 'summary' => '这张卡把兴趣拆成更具体的任务活动，帮助区分你喜欢的是问题本身，还是某个职业名带来的想象。',
-                'what_user_sees' => ['更容易激活你的任务活动', '可能消耗你的任务活动', '值得先验证的一个小任务'],
+                'what_user_sees' => ['更容易吸引你的任务活动', '可能降低兴趣的任务活动', '值得先观察的一个小任务'],
                 'layer_state' => 'agreement',
             ]),
             'environment_card' => $this->layer140qSlot('140q_environment_card_copy', 'environment_card', [
@@ -315,12 +315,12 @@ final class RiasecDeepCopySlotRegistry
             ]),
             'layer_agreement' => $this->layer140qSlot('140q_layer_agreement_copy', 'layer_agreement', [
                 'title' => '任务、环境和角色线索大体一致',
-                'summary' => '你的任务活动、工作环境和角色责任线索大体一致。下一步可以选择一个低风险任务进行验证，而不是急着锁定职业名称。',
+                'summary' => '你的任务活动、工作环境和角色责任线索大体一致。下一步可以选择一个低风险任务进行观察，而不是急着锁定职业名称。',
                 'layer_state' => 'agreement',
             ]),
             'layer_tension' => $this->layer140qSlot('140q_tension_copy', 'layer_tension', [
                 'title' => '任务兴趣和工作日常线索有张力',
-                'summary' => '你的任务兴趣和工作日常线索强调了不同层面。更稳妥的读法是：喜欢的任务、能长期投入的环境、愿意承担的角色责任，需要分开验证。',
+                'summary' => '你的任务兴趣和工作日常线索强调了不同层面。更稳妥的读法是：喜欢的任务、可持续的环境、愿意承担的角色责任，需要分开观察。',
                 'layer_state' => 'tension',
             ]),
             'layer_unavailable' => $this->layer140qSlot('140q_layer_unavailable_copy', 'layer_unavailable', [
@@ -435,7 +435,7 @@ final class RiasecDeepCopySlotRegistry
             ]),
             'hidden_modules_explanation' => $this->qualitySlot('low_quality_copy', 'hidden_modules_explanation', [
                 'title' => '哪些模块会暂时隐藏',
-                'summary' => '本次暂不展示单一活动链、维度组合深解、职业例子、140Q CTA 和强分享卡，只保留六维概览、方法边界和重测建议。',
+                'summary' => '本次暂不展示单一活动线索组合、维度组合深解、职业例子、140Q CTA 和强分享卡，只保留六维概览、方法边界和重测建议。',
                 'quality_state' => 'low_quality',
             ]),
             'retake_guidance' => $this->qualitySlot('low_quality_copy', 'retake_guidance', [
@@ -445,7 +445,7 @@ final class RiasecDeepCopySlotRegistry
             ]),
             'share_pdf_boundary' => $this->qualitySlot('low_quality_copy', 'share_pdf_boundary', [
                 'title' => '分享和 PDF 边界',
-                'summary' => '这次结果不适合生成强结论分享卡。个人 PDF 可以保存谨慎阅读版，但公开分享默认不展示 Holland Code、活动链或职业例子。',
+                'summary' => '这次结果不适合生成强结论分享卡。个人 PDF 可以保存谨慎阅读版，但公开分享默认不展示 Holland Code、活动线索组合或职业例子。',
                 'quality_state' => 'low_quality',
             ]),
             'next_step' => $this->qualitySlot('low_quality_copy', 'next_step', [
@@ -455,7 +455,7 @@ final class RiasecDeepCopySlotRegistry
             ]),
             'cautious_reading_notice' => $this->qualitySlot('cautious_reading_copy', 'cautious_reading_notice', [
                 'title' => '轻量参考',
-                'summary' => '本次结果适合放轻阅读。建议先看六维概览，再用一个小实验验证兴趣线索。',
+                'summary' => '本次结果适合放轻阅读。建议先看六维概览，再用一个小实验观察兴趣线索。',
                 'quality_state' => 'caution',
             ]),
             'minimal_quality_boundary_60q' => $this->qualitySlot('cautious_reading_copy', 'minimal_quality_boundary_60q', [
@@ -635,7 +635,7 @@ final class RiasecDeepCopySlotRegistry
         return [
             'summary' => $this->structuralDifferenceSlot('summary', [
                 'title' => '两次结果强调的兴趣线索不同',
-                'summary' => '60Q 看基础兴趣结构；140Q 看任务、环境和角色责任。两次结果强调不同线索时，更适合把差异读成需要验证的线索，而不是最终结论。',
+                'summary' => '60Q 看基础兴趣结构；140Q 看任务、环境和角色责任。两次结果强调不同线索时，更适合把差异读成需要观察的线索，而不是最终结论。',
                 'structural_difference_state' => 'different_emphasis',
             ]),
             'task_layer_explanation' => $this->structuralDifferenceSlot('task_layer_explanation', [
@@ -655,7 +655,7 @@ final class RiasecDeepCopySlotRegistry
             ]),
             'correct_reading' => $this->structuralDifferenceSlot('correct_reading', [
                 'title' => '正确读法',
-                'summary' => '先看两次结果中仍然重叠的活动线索，再看任务、环境和角色责任各自需要验证的部分。排序接近时，也要把 near-tie 当作阅读边界。',
+                'summary' => '先看两次结果中仍然重叠的活动线索，再看任务、环境和角色责任各自需要观察的部分。排序接近时，也要把 near-tie 当作阅读边界。',
                 'structural_difference_state' => 'near_tie_shift',
             ]),
             'forbidden_reading' => $this->structuralDifferenceSlot('forbidden_reading', [
@@ -664,8 +664,8 @@ final class RiasecDeepCopySlotRegistry
                 'structural_difference_state' => 'cross_form_not_comparable',
             ]),
             'next_validation_step' => $this->structuralDifferenceSlot('next_validation_step', [
-                'title' => '下一步验证',
-                'summary' => '选择一个低风险任务、一个真实环境和一个角色责任进行小实验。记录它们分别带来能量还是消耗，再决定是否需要重测。',
+                'title' => '下一步观察',
+                'summary' => '选择一个低风险任务、一个真实环境和一个角色责任进行小实验。记录它们分别更吸引你还是需要调整，再决定是否需要重测。',
                 'structural_difference_state' => 'insufficient_basis',
             ]),
         ];
@@ -702,37 +702,37 @@ final class RiasecDeepCopySlotRegistry
         return array_merge([
             'intro' => $this->aspirationSlot('intro', [
                 'title' => '把你原本想探索的方向放到旁边看',
-                'summary' => '你可以记录职业、专业、课程、项目或工作场景。它们只用于生成验证问题，不进入测评分数。',
+                'summary' => '你可以记录职业、专业、课程、项目或工作场景。它们只用于生成探索问题，不进入测评分数。',
                 'aspirations_state' => 'not_provided',
             ]),
             'input_boundary' => $this->aspirationSlot('input_boundary', [
                 'title' => '输入边界',
-                'summary' => '愿望是探索材料，不是测评答案。系统只会帮助你看这些方向里有哪些活动与当前兴趣线索重叠，哪些现实部分需要验证。',
+                'summary' => '愿望是探索材料，不是测评答案。系统只会帮助你看这些方向里有哪些活动与当前兴趣线索重叠，哪些现实部分需要观察。',
                 'aspirations_state' => 'not_provided',
             ]),
             'overlap_reading' => $this->aspirationSlot('overlap_reading', [
                 'title' => '有活动重叠',
-                'summary' => '这个方向与你当前兴趣结构有活动重叠。下一步是验证这些活动进入真实任务、环境和角色责任后是否仍然有能量。',
+                'summary' => '这个方向与你当前兴趣结构有活动重叠。下一步是观察这些活动进入真实任务、环境和角色责任后是否仍然吸引你。',
                 'aspirations_state' => 'overlap',
             ]),
             'tension_reading' => $this->aspirationSlot('tension_reading', [
                 'title' => '有张力，需要拆开看',
-                'summary' => '这个方向与你当前兴趣结构存在张力。张力不是排除结论，只说明其中的日常任务、环境或角色责任需要先验证。',
+                'summary' => '这个方向与你当前兴趣结构存在张力。张力不是排除结论，只说明其中的日常任务、环境或角色责任需要先观察。',
                 'aspirations_state' => 'tension',
             ]),
             'reality_questions' => $this->aspirationSlot('reality_questions', [
-                'title' => '现实验证问题',
+                'title' => '现实观察问题',
                 'summary' => '先问三个问题：你喜欢的是任务本身还是职业想象；你能接受这个方向的环境约束吗；你愿意承担它的角色责任吗。',
                 'aspirations_state' => 'needs_reality_check',
             ]),
             'education_skill_qualification_boundary' => $this->aspirationSlot('education_skill_qualification_boundary', [
                 'title' => '教育、技能、资格和伦理边界',
-                'summary' => '涉及教育要求、专业技能、资格证书、行业法规或伦理责任的方向，必须另行验证训练、作品、证书、监督和现实机会。',
+                'summary' => '涉及教育要求、专业技能、资格证书、行业法规或伦理责任的方向，必须另行确认训练、作品、证书、监督和现实机会。',
                 'aspirations_state' => 'high_risk_boundary',
             ]),
             'next_experiment_prompt' => $this->aspirationSlot('next_experiment_prompt', [
                 'title' => '下一步小实验',
-                'summary' => '选择一个低风险任务，用 15 到 30 分钟验证它让你更有能量还是更消耗。先验证活动，不急着形成职业结论。',
+                'summary' => '选择一个低风险任务，用 15 到 30 分钟观察它是否仍然吸引你。先观察活动，不急着形成职业结论。',
                 'aspirations_state' => 'needs_reality_check',
             ]),
             'no_score_mutation_boundary' => $this->aspirationSlot('no_score_mutation_boundary', [
@@ -774,7 +774,7 @@ final class RiasecDeepCopySlotRegistry
         return array_merge([
             'user_not_wrong_message' => $this->disagreePathSlot('user_not_wrong_message', [
                 'title' => '你可以不认同这个结果',
-                'summary' => '不认同结果本身是有效反馈。它会进入探索路径，帮助你检查作答状态、近似并列和活动验证方向。',
+                'summary' => '不认同结果本身是有效反馈。它会进入探索路径，帮助你检查作答状态、近似并列和活动探索方向。',
                 'disagree_state' => 'disagrees_quality_normal',
             ]),
             'possible_reasons' => $this->disagreePathSlot('possible_reasons', [
@@ -804,7 +804,7 @@ final class RiasecDeepCopySlotRegistry
             ]),
             'next_step' => $this->disagreePathSlot('next_step', [
                 'title' => '下一步',
-                'summary' => '先检查作答质量和 near-tie，再选择重测、保存偏好方向，或做一个小实验验证具体活动。',
+                'summary' => '先检查作答质量和 near-tie，再选择重测、保存偏好方向，或做一个小实验观察具体活动。',
                 'disagree_state' => 'save_feedback_only',
             ]),
         ], $this->disagreePathAssetSlots());
@@ -1406,7 +1406,7 @@ final class RiasecDeepCopySlotRegistry
                 'job_fit',
             ],
             'required_boundaries' => $row['required_boundaries'] ?? $this->requiredBoundaries(),
-            'user_visible_boundary' => (string) ($row['user_visible_boundary'] ?? '这是兴趣组合解释，不是人格标签、能力证明或职业结论。'),
+            'user_visible_boundary' => (string) ($row['user_visible_boundary'] ?? '这是兴趣组合解释，不是人格标签、能力结论或职业结论。'),
             'fallback_behavior' => 'omit_module',
             'frontend_fallback_allowed' => false,
         ];
@@ -1494,7 +1494,7 @@ final class RiasecDeepCopySlotRegistry
                 'job_fit',
             ],
             'required_boundaries' => $row['required_boundaries'] ?? $this->requiredBoundaries(),
-            'user_visible_boundary' => (string) ($row['user_visible_boundary'] ?? '这是前三兴趣活动链解释，不是人格类型、职业结论或成功预测。'),
+            'user_visible_boundary' => (string) ($row['user_visible_boundary'] ?? '这是前三兴趣活动线索组合解释，不是人格类型、职业结论或成功预测。'),
             'fallback_behavior' => 'omit_module',
             'frontend_fallback_allowed' => false,
         ];
@@ -1734,7 +1734,7 @@ final class RiasecDeepCopySlotRegistry
                 'job_fit',
             ],
             'required_boundaries' => $this->requiredBoundaries(),
-            'user_visible_boundary' => '这是前三兴趣活动链解释，不是人格类型、职业结论或成功预测。',
+            'user_visible_boundary' => '这是前三兴趣活动线索组合解释，不是人格类型、职业结论或成功预测。',
             'fallback_behavior' => 'omit_module',
             'frontend_fallback_allowed' => false,
         ];
@@ -1767,7 +1767,7 @@ final class RiasecDeepCopySlotRegistry
                 'job_fit',
             ],
             'required_boundaries' => $this->requiredBoundaries(),
-            'user_visible_boundary' => '这是兴趣组合解释，不是人格标签、能力证明或职业结论。',
+            'user_visible_boundary' => '这是兴趣组合解释，不是人格标签、能力结论或职业结论。',
             'fallback_behavior' => 'omit_module',
             'frontend_fallback_allowed' => false,
         ];
@@ -1814,7 +1814,7 @@ final class RiasecDeepCopySlotRegistry
                 'summary' => $states['caution'],
                 'quality_state' => 'caution',
                 'content_version' => (string) ($asset['asset_id'] ?? 'low_quality_cautious_reading_v1.zh-CN'),
-                'user_visible_boundary' => '谨慎阅读只说明本次线索需要验证，不是结果无效，也不是能力判断。',
+                'user_visible_boundary' => '谨慎阅读只说明本次线索需要观察，不是结果无效，也不是能力判断。',
             ];
         }
         if (($states['minimal_60q'] ?? '') !== '') {

@@ -57,6 +57,39 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         '淘汰依据',
     ];
 
+    private const FORBIDDEN_SCIENCE_BOUNDARY_COPY = [
+        '验证这条链',
+        '有序三字码只改变阅读重心和语气',
+        '实作型入口',
+        '研究型处理',
+        '收口',
+        '活动链',
+        '现场求证者',
+        '有形表达者',
+        '现场支持者',
+        '落地推动者',
+        '流程实作者',
+        '概念表达者',
+        '证据倾听者',
+        '判断推动者',
+        '秩序表达者',
+        '稳定服务者',
+        '流程推动者',
+        '行动动员者',
+        '影响表达者',
+        '常见消耗',
+        '更有能量',
+        '能量还是消耗',
+        '商务拓展',
+        '组织资源',
+        '领导力',
+        '服务能力',
+        '能力证明',
+        '技能证明',
+        '岗位胜任',
+        '天生会推动',
+    ];
+
     public function test_backend_full_content_matrix_counts_and_boundaries_are_frozen(): void
     {
         $registry = new RiasecDeepCopySlotRegistry;
@@ -209,6 +242,25 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
 
         $this->assertSame([], $hits, 'Visible backend full-content outputs must keep forbidden claims only in negative boundary contexts.');
 
+        $scienceBoundaryHits = [];
+        foreach ($this->visibleRows($payload) as $source => $texts) {
+            foreach ($texts as $text) {
+                foreach (self::FORBIDDEN_SCIENCE_BOUNDARY_COPY as $phrase) {
+                    if ($this->containsTerm($text, $phrase)) {
+                        $scienceBoundaryHits[] = "{$source}: {$phrase} in {$text}";
+                    }
+                }
+            }
+        }
+
+        $this->assertSame([], $scienceBoundaryHits, 'Visible RIASEC content must not reintroduce chain templates, persona labels, or ability/outcome overclaims.');
+
+        foreach (['R_S', 'I_E', 'A_C'] as $lowConsistencyPair) {
+            $slot = $registry->resolvePairBlendSlot($lowConsistencyPair);
+            $this->assertStringContainsString('距离较远', (string) ($slot['chemistry'] ?? ''));
+            $this->assertStringContainsString('低一致性组合', (string) ($slot['chemistry'] ?? ''));
+        }
+
         $this->assertStringNotContainsString('"frontend_fallback_allowed":true', $serialized);
         $this->assertStringNotContainsString('"raw_feedback"', $serialized);
         $this->assertStringNotContainsString('"snapshot_id"', $serialized);
@@ -300,12 +352,19 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
 
         foreach ((array) ($payload['top3'] ?? []) as $index => $slot) {
             $visible['top3 '.($index + 1)] = array_values(array_filter([
+                (string) ($slot['strategy_label'] ?? ''),
+                (string) ($slot['activity_chain'] ?? ''),
+                (string) ($slot['core_reading'] ?? ''),
+                (string) ($slot['positive_value'] ?? ''),
+                (string) ($slot['real_world_cost'] ?? ''),
                 (string) ($slot['title'] ?? ''),
                 (string) ($slot['primary_activity_chain'] ?? ''),
                 (string) ($slot['secondary_support_line'] ?? ''),
                 (string) ($slot['tertiary_stabilizer'] ?? ''),
                 (string) ($slot['likely_tension'] ?? ''),
                 (string) ($slot['first_experiment'] ?? ''),
+                (string) ($slot['ordered_code_handling'] ?? ''),
+                (string) ($slot['low_risk_validation'] ?? ''),
                 (string) ($slot['free_page_teaser'] ?? ''),
                 (string) ($slot['deep_report_extension'] ?? ''),
                 (string) ($slot['user_visible_boundary'] ?? ''),
