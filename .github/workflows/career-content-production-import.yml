@@ -106,6 +106,12 @@ jobs:
       AI_IMPACT_APPROVAL_MANIFEST_SHA256: ${{ github.event.inputs.ai_impact_approval_manifest_sha256 }}
       AI_IMPACT_STAGING_EDITORIAL_REVIEW_REPORT: ${{ github.event.inputs.ai_impact_staging_editorial_review_report }}
       AI_IMPACT_EDITORIAL_REVIEW_SHA256: ${{ github.event.inputs.ai_impact_editorial_review_sha256 }}
+      APPROVED_PAGE_ASSEMBLY_STAGING_ASSET_FILE: "/tmp/career-content-approved-transition/career_page_assembly_1046_v1.matching_staging_rows.jsonl"
+      APPROVED_PAGE_ASSEMBLY_STAGING_APPROVAL_MANIFEST: "/tmp/career-content-approved-transition/page_assembly_approval_manifest.matching_staging_rows.json"
+      APPROVED_PAGE_ASSEMBLY_STAGING_EDITORIAL_REVIEW_REPORT: "/tmp/career-content-approved-transition/page_assembly_editorial_review.matching_staging_rows.json"
+      APPROVED_AI_IMPACT_STAGING_ASSET_FILE: "/tmp/career-ai-impact-v5-approved-transition/career_risk_future_ai_impact_1046_v5_final_repaired_assets.jsonl"
+      APPROVED_AI_IMPACT_STAGING_APPROVAL_MANIFEST: "/tmp/career-ai-impact-v5-approved-transition/approval_manifest.json"
+      APPROVED_AI_IMPACT_STAGING_EDITORIAL_REVIEW_REPORT: "/tmp/career-ai-impact-v5-approved-transition/editorial_review.json"
 
     steps:
       - name: Checkout code
@@ -138,18 +144,30 @@ jobs:
             fi
           }
 
+          validate_approved_remote_path() {
+            local name="$1"
+            local value="$2"
+            local approved="$3"
+            validate_remote_path "$name" "$value"
+            if [ "$value" != "$approved" ]; then
+              echo "$name must match the approved staging artifact path for this production import."
+              echo "Expected: $approved"
+              exit 2
+            fi
+          }
+
           validate_sha PAGE_ASSEMBLY_EXPECTED_SHA256 "$PAGE_ASSEMBLY_EXPECTED_SHA256"
           validate_sha PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256 "$PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256"
           validate_sha PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256 "$PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256"
           validate_sha AI_IMPACT_EXPECTED_SHA256 "$AI_IMPACT_EXPECTED_SHA256"
           validate_sha AI_IMPACT_APPROVAL_MANIFEST_SHA256 "$AI_IMPACT_APPROVAL_MANIFEST_SHA256"
           validate_sha AI_IMPACT_EDITORIAL_REVIEW_SHA256 "$AI_IMPACT_EDITORIAL_REVIEW_SHA256"
-          validate_remote_path PAGE_ASSEMBLY_STAGING_ASSET_FILE "$PAGE_ASSEMBLY_STAGING_ASSET_FILE"
-          validate_remote_path PAGE_ASSEMBLY_STAGING_APPROVAL_MANIFEST "$PAGE_ASSEMBLY_STAGING_APPROVAL_MANIFEST"
-          validate_remote_path PAGE_ASSEMBLY_STAGING_EDITORIAL_REVIEW_REPORT "$PAGE_ASSEMBLY_STAGING_EDITORIAL_REVIEW_REPORT"
-          validate_remote_path AI_IMPACT_STAGING_ASSET_FILE "$AI_IMPACT_STAGING_ASSET_FILE"
-          validate_remote_path AI_IMPACT_STAGING_APPROVAL_MANIFEST "$AI_IMPACT_STAGING_APPROVAL_MANIFEST"
-          validate_remote_path AI_IMPACT_STAGING_EDITORIAL_REVIEW_REPORT "$AI_IMPACT_STAGING_EDITORIAL_REVIEW_REPORT"
+          validate_approved_remote_path PAGE_ASSEMBLY_STAGING_ASSET_FILE "$PAGE_ASSEMBLY_STAGING_ASSET_FILE" "$APPROVED_PAGE_ASSEMBLY_STAGING_ASSET_FILE"
+          validate_approved_remote_path PAGE_ASSEMBLY_STAGING_APPROVAL_MANIFEST "$PAGE_ASSEMBLY_STAGING_APPROVAL_MANIFEST" "$APPROVED_PAGE_ASSEMBLY_STAGING_APPROVAL_MANIFEST"
+          validate_approved_remote_path PAGE_ASSEMBLY_STAGING_EDITORIAL_REVIEW_REPORT "$PAGE_ASSEMBLY_STAGING_EDITORIAL_REVIEW_REPORT" "$APPROVED_PAGE_ASSEMBLY_STAGING_EDITORIAL_REVIEW_REPORT"
+          validate_approved_remote_path AI_IMPACT_STAGING_ASSET_FILE "$AI_IMPACT_STAGING_ASSET_FILE" "$APPROVED_AI_IMPACT_STAGING_ASSET_FILE"
+          validate_approved_remote_path AI_IMPACT_STAGING_APPROVAL_MANIFEST "$AI_IMPACT_STAGING_APPROVAL_MANIFEST" "$APPROVED_AI_IMPACT_STAGING_APPROVAL_MANIFEST"
+          validate_approved_remote_path AI_IMPACT_STAGING_EDITORIAL_REVIEW_REPORT "$AI_IMPACT_STAGING_EDITORIAL_REVIEW_REPORT" "$APPROVED_AI_IMPACT_STAGING_EDITORIAL_REVIEW_REPORT"
 
           expected_phrase="批准 career content 1046 production import, using page assembly SHA ${PAGE_ASSEMBLY_EXPECTED_SHA256} and AI Impact SHA ${AI_IMPACT_EXPECTED_SHA256}"
           if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected_phrase" ]; then
@@ -174,12 +192,19 @@ jobs:
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
-      - name: Add staging host key for approved artifact transfer
-        shell: bash
-        run: |
-          set -euo pipefail
-          ssh-keyscan -p "$STAGING_PORT" -H "$STAGING_HOST" >> ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
+          require_known_host() {
+            local host="$1"
+            local port="$2"
+            if [ "$port" = "22" ]; then
+              ssh-keygen -F "$host" -f ~/.ssh/known_hosts >/dev/null \
+                || ssh-keygen -F "[$host]:$port" -f ~/.ssh/known_hosts >/dev/null
+            else
+              ssh-keygen -F "[$host]:$port" -f ~/.ssh/known_hosts >/dev/null
+            fi
+          }
+
+          require_known_host "$STAGING_HOST" "$STAGING_PORT"
+          require_known_host "$PRODUCTION_HOST" "$PRODUCTION_PORT"
 
       - name: Copy approved artifacts from staging to production
         shell: bash

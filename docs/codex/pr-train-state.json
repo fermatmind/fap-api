@@ -70605,11 +70605,59 @@
     "depends_on": [
       "SECURITY-169-API-01"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "checks": {
       "authorization": {
         "status": "pass",
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal."
+      },
+      "dependency_SECURITY_169_API_01": {
+        "status": "pass",
+        "evidence": "SECURITY-169-API-01 merged via PR #2605 and ledger closeout PR #2612; origin/main includes the prior deploy policy guard restore."
+      },
+      "base_sync": {
+        "status": "pass",
+        "evidence": "Started from latest origin/main at de7d31836999a2f35513fae326ba49b4e34da629 in isolated worktree /private/tmp/fap-api-security-169-api-02."
+      },
+      "workflow_yaml_and_bash_syntax": {
+        "status": "pass",
+        "evidence": "ruby parsed .github/workflows/career-content-production-import.yml and extracted run scripts passed bash -n."
+      },
+      "php_lint": {
+        "status": "pass",
+        "evidence": "php -l passed for CareerPageAssemblyImportService.php and CareerAiImpactAssetImportService.php."
+      },
+      "pint": {
+        "status": "pass",
+        "evidence": "cd backend && ./vendor/bin/pint --test app/Services/Career/PageAssemblyAssets/CareerPageAssemblyImportService.php app/Services/Career/AiImpactAssets/CareerAiImpactAssetImportService.php passed after scoped formatting."
+      },
+      "focused_career_import_tests": {
+        "status": "pass",
+        "evidence": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Career/CareerPageAssemblyAssetPreviewImportTest.php tests/Feature/Career/CareerAiImpactAssetPreviewImportTest.php --no-ansi passed (38 warnings, 558 assertions)."
+      },
+      "route_list": {
+        "status": "pass",
+        "evidence": "cd backend && php artisan route:list --no-ansi passed."
+      },
+      "sqlite_migrate": {
+        "status": "pass",
+        "evidence": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-02.sqlite php artisan migrate --force --no-ansi passed."
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh passed in the isolated API-02 worktree; generated BIG5_OCEAN compiled artifacts were restored because they were test side effects outside scope."
+      },
+      "json_yaml_diff": {
+        "status": "pass",
+        "evidence": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); YAML.load_file('.github/workflows/career-content-production-import.yml')\" && git diff --check passed after API-02 implementation and ledger updates."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "git diff --name-only contains only .github/workflows/career-content-production-import.yml, the two scoped career import services, and docs/codex/pr-train-state.json."
+      },
+      "deployment": {
+        "status": "not_run",
+        "evidence": "No staging wait, manual deploy, server deploy, production import, production deploy, CMS mutation, search submission, sitemap, llms, canonical, noindex, JSON-LD, or SEO runtime action executed."
       }
     },
     "pr_url": null,
@@ -70631,6 +70679,16 @@
         "at": "2026-07-03T00:00:00+08:00",
         "status": "planned",
         "note": "Registered authorized SECURITY-169-API-02; execution waits for declared dependency merge."
+      },
+      {
+        "at": "2026-07-03T01:40:40+08:00",
+        "status": "local_checks_passed",
+        "note": "API-02 scoped implementation completed and local validation passed; final scope validation, commit, push, PR, GitHub checks, merge, and post-merge revalidation remain."
+      },
+      {
+        "at": "2026-07-03T01:41:05+08:00",
+        "status": "scope_validation_passed",
+        "note": "Final changed-file validation passed for API-02 allowed paths; ready to stage path-limited files."
       }
     ]
   },

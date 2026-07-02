@@ -228,37 +228,38 @@ final class CareerAiImpactAssetImportService
         $updatedCount = 0;
         $writtenRows = [];
 
-        $handle = fopen($file, 'rb');
-        if ($handle === false) {
+        $targetRowErrors = [];
+        $targetRows = $this->targetRowsFromFile($file, array_keys($targetKeys), $sourceFileSha256, $targetRowErrors);
+        $existingProductionRows = CareerJobAiImpactAsset::query()
+            ->where('asset_version', CareerJobAiImpactAsset::ASSET_VERSION_V5)
+            ->whereIn('career_job_slug', $targetSlugs)
+            ->whereIn('locale', ['zh-CN', 'en'])
+            ->where('status', CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED)
+            ->get(['career_job_slug', 'locale']);
+        foreach ($existingProductionRows as $existingProductionRow) {
+            $targetRowErrors[] = "{$existingProductionRow->career_job_slug}/{$existingProductionRow->locale}: staging preview import must not overwrite production_imported rows.";
+        }
+
+        $expectedWriteCount = (int) ($validation['expected_preview_rows'] ?? 0);
+        if (count($targetRows) !== $expectedWriteCount) {
+            $targetRowErrors[] = 'Verified source JSONL target row count '.count($targetRows)." did not match expected row count {$expectedWriteCount}.";
+        }
+        if ($targetRowErrors !== []) {
             return array_merge($validation, [
                 'mode' => 'write',
                 'status' => $status,
                 'decision' => 'fail',
                 'staging_write_performed' => false,
-                'errors' => ['Source JSONL file could not be opened for staging write.'],
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'written_count' => 0,
+                'errors' => array_values(array_unique($targetRowErrors)),
             ]);
         }
 
-        while (($line = fgets($handle)) !== false) {
-            if (trim($line) === '') {
-                continue;
-            }
-
-            try {
-                $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
-            } catch (Throwable) {
-                continue;
-            }
-
-            if (! is_array($row)) {
-                continue;
-            }
-
+        foreach ($targetRows as $row) {
             $slug = $this->previewService->normalizeSlug((string) ($row['slug'] ?? ''));
             $locale = $this->previewService->normalizeLocale((string) ($row['locale'] ?? ''));
-            if (! isset($targetKeys[$slug.'|'.$locale])) {
-                continue;
-            }
 
             $occupation = Occupation::query()->where('canonical_slug', $slug)->first();
             if (! $occupation instanceof Occupation) {
@@ -312,9 +313,6 @@ final class CareerAiImpactAssetImportService
             ];
         }
 
-        fclose($handle);
-
-        $expectedWriteCount = (int) ($validation['expected_preview_rows'] ?? 0);
         if ($writtenCount !== $expectedWriteCount) {
             return array_merge($validation, [
                 'mode' => 'write',
@@ -706,7 +704,31 @@ final class CareerAiImpactAssetImportService
             ]);
         }
 
-        $targetRows = $this->targetRowsFromFile($file, array_keys($targetKeys));
+        $targetRowErrors = [];
+        $targetRows = $this->targetRowsFromFile($file, array_keys($targetKeys), $sourceFileSha256, $targetRowErrors);
+        if (count($targetRows) !== $expectedRows) {
+            $targetRowErrors[] = 'Verified source JSONL target row count does not match expected production rows.';
+        }
+        if ($targetRowErrors !== []) {
+            return array_merge($validation, [
+                'mode' => $write ? 'production_import' : 'production_import_dry_run',
+                'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+                'decision' => 'fail',
+                'approved_transition_performed' => false,
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'approval_manifest_sha256' => $approvalArtifact['sha256'] ?? null,
+                'editorial_review_sha256' => $editorialArtifact['sha256'] ?? null,
+                'production_rows_touched' => 0,
+                'rollback_report' => [
+                    'available' => true,
+                    'target_key' => ['career_job_slug', 'locale', 'asset_version'],
+                    'previous_status_counts' => $previousStatusCounts,
+                    'rows' => $rollbackRows,
+                ],
+                'errors' => array_values(array_unique($targetRowErrors)),
+            ]);
+        }
         $importRunId = (string) Str::uuid();
         $writtenCount = 0;
         $createdCount = 0;
@@ -1074,8 +1096,15 @@ final class CareerAiImpactAssetImportService
             $errors[] = ucfirst($label).' SHA-256 does not match expected artifact SHA.';
         }
 
+        $contents = (string) file_get_contents($file);
+        if (! str_starts_with(ltrim($contents), '{')) {
+            $errors[] = ucfirst($label).' JSON must be an object.';
+
+            return ['payload' => null, 'sha256' => $sha256];
+        }
+
         try {
-            $payload = json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);
+            $payload = json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
         } catch (Throwable) {
             $errors[] = ucfirst($label).' file must be valid JSON.';
 
@@ -1098,6 +1127,8 @@ final class CareerAiImpactAssetImportService
     private function validateApprovalManifest(array $manifest, ?string $assetSha256, int $expectedRows, int $expectedSlugs, array &$errors): void
     {
         if ($manifest === []) {
+            $errors[] = 'Approval manifest must be a non-empty JSON object.';
+
             return;
         }
 
@@ -1152,6 +1183,8 @@ final class CareerAiImpactAssetImportService
     private function validateEditorialReviewReport(array $report, ?string $assetSha256, int $expectedRows, int $expectedSlugs, array &$errors): void
     {
         if ($report === []) {
+            $errors[] = 'Editorial review report must be a non-empty JSON object.';
+
             return;
         }
 
@@ -1246,16 +1279,38 @@ final class CareerAiImpactAssetImportService
      * @param  list<string>  $targetKeys
      * @return array<string, array<string, mixed>>
      */
-    private function targetRowsFromFile(string $file, array $targetKeys): array
+    private function targetRowsFromFile(string $file, array $targetKeys, ?string $expectedSha256, array &$errors): array
     {
-        $targetKeyMap = array_fill_keys($targetKeys, true);
-        $rows = [];
-        $handle = fopen($file, 'rb');
-        if ($handle === false) {
-            return $rows;
+        $contents = file_get_contents($file);
+        if (! is_string($contents)) {
+            $errors[] = 'Source JSONL file could not be read for verified import.';
+
+            return [];
         }
 
+        $actualSha256 = hash('sha256', $contents);
+        $expectedSha256 = $this->normalizeSha256($expectedSha256);
+        if ($expectedSha256 !== null && $actualSha256 !== $expectedSha256) {
+            $errors[] = 'Source JSONL changed after validation; verified import requires immutable SHA-matched bytes.';
+
+            return [];
+        }
+
+        $targetKeyMap = array_fill_keys($targetKeys, true);
+        $rows = [];
+
+        $handle = fopen('php://temp', 'rb+');
+        if ($handle === false) {
+            $errors[] = 'Source JSONL could not be buffered for verified import.';
+
+            return [];
+        }
+        fwrite($handle, $contents);
+        rewind($handle);
+
+        $lineNumber = 0;
         while (($line = fgets($handle)) !== false) {
+            $lineNumber++;
             if (trim($line) === '') {
                 continue;
             }
@@ -1263,21 +1318,36 @@ final class CareerAiImpactAssetImportService
             try {
                 $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
             } catch (Throwable) {
+                $errors[] = "Source JSONL changed after validation; line {$lineNumber} is invalid JSON.";
+
                 continue;
             }
 
             if (! is_array($row)) {
+                $errors[] = "Source JSONL changed after validation; line {$lineNumber} is not an object.";
+
                 continue;
             }
 
             $slug = $this->previewService->normalizeSlug((string) ($row['slug'] ?? ''));
             $locale = $this->previewService->normalizeLocale((string) ($row['locale'] ?? ''));
+            if ($slug === '' || ! in_array($locale, ['zh-CN', 'en'], true)) {
+                $errors[] = "Source JSONL changed after validation; line {$lineNumber} is missing slug or locale.";
+
+                continue;
+            }
+
             $key = $slug.'|'.$locale;
             if (isset($targetKeyMap[$key])) {
+                if (isset($rows[$key])) {
+                    $errors[] = "Source JSONL changed after validation; duplicate slug/locale row {$key}.";
+
+                    continue;
+                }
+
                 $rows[$key] = $row;
             }
         }
-
         fclose($handle);
 
         return $rows;
