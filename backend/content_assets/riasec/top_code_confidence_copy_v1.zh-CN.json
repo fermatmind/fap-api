@@ -1,38 +1,38 @@
 {
   "asset_id": "top_code_confidence_copy_v1.zh-CN",
-  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "asset_status": "content_review_science_boundary_repair_v1",
   "locale": "zh-CN",
   "scale_code": "RIASEC",
-  "review_status": "content_review_v7_3_final_preflight_candidate",
+  "review_status": "content_review_science_boundary_repair_v1",
   "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
   "states": [
     {
       "state": "high_confidence",
-      "label": "主线索清楚",
-      "copy": "第一维与后续维度差距较明显，可以把三字码作为本次兴趣探索入口；仍需同时阅读第二、第三维，因为它们决定活动线索组合如何展开。"
+      "label": "阅读力度较高",
+      "copy": "第一维与后续维度差距较明显，说明本次结果的阅读力度较高，并有一个较清楚的阅读入口。可以先按三字码阅读，但仍要用第二、第三维补充任务条件；这不是准确率、能力判断或职业前景判断。"
     },
     {
       "state": "moderate_confidence",
       "label": "可正常阅读",
-      "copy": "主线索可读，但不是单一结论。建议先看 Top2 组合，再看 Top3 活动线索组合。"
+      "copy": "主线索可读，但不应被写成单一结论。建议先看 Top2 组合，再看 Top3 活动线索，把差距当作阅读力度而不是能力高低。"
     },
     {
       "state": "near_tie",
       "label": "近似并列",
-      "copy": "前两维或前三维接近时，不要急着固定一个字母顺序。把它读成几条活动线索的接近竞争，并用小实验观察。"
+      "copy": "前两维或前三维接近时，不要急着固定一个字母顺序。把它读成几条兴趣线索都值得观察，并用小实验比较具体活动，而不是比较谁更强。"
     },
     {
       "state": "broad_profile",
       "label": "兴趣较广",
-      "copy": "多个维度都较接近时，页面应少强调单一 Code，更多展示可观察活动与低风险选择。"
+      "copy": "多个维度都较接近时，应少强调单一 Code，更多展示可观察活动与低风险选择。平坦分布只说明线索分散，不说明结果无效或用户能力不足。"
     },
     {
       "state": "low_clarity",
       "label": "谨慎阅读",
-      "copy": "本次结果更适合当作初步线索。建议先看六维分布，不输出强活动线索组合。"
+      "copy": "本次结果更适合当作初步线索。建议先看六维相对分布，不输出强活动线索组合，也不把低清晰度解释成作答者的问题。"
     }
   ],
-  "user_visible_boundary": "结果阅读力度只说明本次兴趣线索是否集中、接近或需要谨慎阅读；它不是准确率、职业前景或能力判断。",
+  "user_visible_boundary": "结果阅读力度只说明本次兴趣线索相对集中、接近或需要谨慎阅读；它不是准确率、职业前景、能力判断或稳定人格结论。",
   "required_boundaries": [
     "interest_evidence_only",
     "not_personality_identity",
