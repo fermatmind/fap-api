@@ -102,6 +102,14 @@ final class GotenbergChromiumPdfClient
             throw new InvalidArgumentException($label.' must use http on a private network.');
         }
 
+        if (isset($parts['user']) || isset($parts['pass'])) {
+            throw new InvalidArgumentException($label.' must not include URL credentials.');
+        }
+
+        if (isset($parts['fragment'])) {
+            throw new InvalidArgumentException($label.' must not include a URL fragment.');
+        }
+
         if ($host === '' || ! $this->isPrivateHost($host)) {
             throw new InvalidArgumentException($label.' must resolve to a private/internal host.');
         }
@@ -131,7 +139,7 @@ final class GotenbergChromiumPdfClient
         }
 
         if ((bool) config('gotenberg.allow_single_label_hosts', true) && ! str_contains($host, '.')) {
-            return true;
+            return in_array($host, (array) config('gotenberg.allowed_single_label_hosts', []), true);
         }
 
         foreach ((array) config('gotenberg.allowed_private_suffixes', []) as $suffix) {
