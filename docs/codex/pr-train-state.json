@@ -790,12 +790,12 @@
     "depends_on": [
       "ENNEA-RP-06"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "925a2f7b422434ab026809629d675d6a4d9926d2",
+    "status": "merged",
+    "commit_sha": "3f0305df4e07753948d3ce5caf8a40dd213eec76",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2659",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-03T03:58:28Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "checks": {
       "authorization": {
@@ -845,6 +845,10 @@
         "status": "pass",
         "command": "gh pr checks 2659 --repo fermatmind/fap-api --watch --interval 15",
         "evidence": "All required GitHub checks passed on PR #2659 head 925a2f7b422434ab026809629d675d6a4d9926d2."
+      },
+      "post_merge_revalidate": {
+        "status": "pass",
+        "evidence": "PR #2659 is MERGED; origin/main contains merge commit 3f0305df4e07753948d3ce5caf8a40dd213eec76; local main fast-forwarded to origin/main; worktree clean; local branch deleted; remote branch absent."
       }
     },
     "scope_validation": {
@@ -884,6 +888,11 @@
         "at": "2026-07-03T06:12:00Z",
         "status": "ready_to_merge",
         "notes": "GitHub required checks passed for PR #2659; scope remains confined to close-call registry content and train ledger."
+      },
+      {
+        "at": "2026-07-03T06:30:00Z",
+        "status": "merged",
+        "notes": "PR #2659 squash-merged; merge commit present in origin/main; local main synced and task branch cleaned up."
       }
     ]
   },
@@ -897,7 +906,7 @@
     "depends_on": [
       "ENNEA-RP-07"
     ],
-    "status": "pending_dependency",
+    "status": "local_validation_passed",
     "commit_sha": null,
     "pr_url": null,
     "merged_at": null,
@@ -908,6 +917,40 @@
       "authorization": {
         "status": "pass",
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-07 merged as PR #2659 and merge commit 3f0305df4e07753948d3ce5caf8a40dd213eec76 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 14 warnings, 121 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 261 warnings, 2 passed, 83402 assertions, duration 144.25s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
       }
     },
     "scope_validation": {
@@ -917,13 +960,29 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "outside_scope_files": [],
+      "status": "pass",
+      "evidence": "Changed files are confined to type_registry blind_spot_copy content and train ledger reconciliation."
     },
     "events": [
       {
         "at": "2026-07-02T16:10:24Z",
         "status": "pending_dependency",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge."
+      },
+      {
+        "at": "2026-07-03T06:31:00Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-08-blind-spot-card; scope is type_registry blind_spot_copy repair plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T06:40:00Z",
+        "status": "local_validation_passed",
+        "notes": "Repaired blind_spot_copy for all nine types as low-activation observation hypotheses; required local validation passed."
       }
     ]
   },
