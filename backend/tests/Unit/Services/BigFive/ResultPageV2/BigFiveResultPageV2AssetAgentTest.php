@@ -2357,11 +2357,14 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_action_layer'));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_boundary_layer'));
                 $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
-                $this->assertSame('codex_coupling_variants_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame('codex_coupling_variants_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame('BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
+                $this->assertSame('coupling_variants_scientific_repair_v0_3', data_get($row, 'source_trace.scientific_repair_stage'));
 
                 if (($row['asset_id'] ?? null) === 'candidate_content_coupling_content_thickening_a_high_x_n_low_v0_1') {
                     $this->assertStringNotContainsString('关系一定顺利', (string) ($row['body_zh'] ?? ''));
-                    $this->assertStringContainsString('关系会自然顺利', (string) ($row['body_zh'] ?? ''));
+                    $this->assertStringContainsString('关系自然顺利', (string) ($row['body_zh'] ?? ''));
+                    $this->assertStringContainsString('当前作答结构', (string) ($row['body_zh'] ?? ''));
                 }
             }
 
@@ -2385,6 +2388,7 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertSame('staging_only', data_get($row, 'provenance.runtime_use'));
                 $this->assertFalse((bool) data_get($row, 'provenance.production_use_allowed', true));
                 $this->assertFalse((bool) data_get($row, 'replacement_policy.replaces_existing_runtime_asset', true));
+                $this->assertSame('BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
             }
 
             $summary = app(BigFiveResultPageV2AssetAgent::class)->stageCandidates([
@@ -2446,8 +2450,29 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 '不一定',
                 '失败',
                 '一定',
+                '能力',
+                '固定身份',
+                '固定类型',
+                '画像',
+                '适合',
+                '关系质量',
+                '人生结果',
+                '你就是这种人',
+                '招聘',
+                '收入预测',
+                '成功预测',
+                '伴侣匹配',
             ] as $forbiddenToken) {
                 $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+            }
+
+            foreach ([
+                '组合线索',
+                '当前作答结构',
+                '不能替代完整报告',
+                '不能单独判断人格',
+            ] as $requiredPhrase) {
+                $this->assertStringContainsString($requiredPhrase, $visibleText, $requiredPhrase);
             }
         } finally {
             $this->deleteDirectory($artifactRoot);
@@ -2657,6 +2682,8 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertGreaterThanOrEqual(240, (int) data_get($row, 'body_quality.body_chars', 0));
             $this->assertLessThanOrEqual(420, (int) data_get($row, 'body_quality.body_chars', 999));
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
+            $this->assertSame('codex_coupling_variants_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
 
             $pair = [(string) data_get($row, 'applies_to.left_trait'), (string) data_get($row, 'applies_to.right_trait')];
             sort($pair);
@@ -2727,8 +2754,29 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             '不一定',
             '失败',
             '一定',
+            '能力',
+            '固定身份',
+            '固定类型',
+            '画像',
+            '适合',
+            '关系质量',
+            '人生结果',
+            '你就是这种人',
+            '招聘',
+            '收入预测',
+            '成功预测',
+            '伴侣匹配',
         ] as $forbiddenToken) {
             $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+        }
+
+        foreach ([
+            '组合线索',
+            '当前作答结构',
+            '不能替代完整报告',
+            '不能单独判断人格',
+        ] as $requiredPhrase) {
+            $this->assertStringContainsString($requiredPhrase, $visibleText, $requiredPhrase);
         }
     }
 

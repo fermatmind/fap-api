@@ -4513,8 +4513,21 @@
   "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01": {
     "base": "main",
     "branch": "codex/big5-coupling-variants-scientific-repair-01",
-    "checks": [],
-    "commit_sha": null,
+    "checks": {
+      "commands": [
+        "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi",
+        "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+        "git diff --check"
+      ],
+      "github": "pending",
+      "local": "passed",
+      "scope_validation": "passed"
+    },
+    "commit_sha": "1fae782eab819d2f44234b319998ebd4685523f9",
     "depends_on": [
       "BIG5-FACETS-30-SCIENTIFIC-REPAIR-01"
     ],
@@ -4526,12 +4539,12 @@
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
-      "allowed_paths_only": null,
+      "allowed_paths_only": true,
       "github_checks_green": null,
-      "local_validation_passed": null,
+      "local_validation_passed": true,
       "post_merge_revalidated": null
     },
-    "status": "authorized",
+    "status": "committed",
     "title": "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01: Big Five coupling variants scientific repair",
     "transitions": [
       {
@@ -4539,8 +4552,21 @@
         "from": null,
         "note": "User authorized Big Five result-page scientific content repair PR train entry.",
         "to": "authorized"
+      },
+      {
+        "at": "2026-07-03T04:33:19Z",
+        "from": "authorized",
+        "note": "Local audit, PHPUnit filters, JSON/YAML parse, diff check, and scope validation passed.",
+        "to": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-03T04:34:00Z",
+        "from": "local_checks_passed",
+        "note": "Committed scoped coupling variants scientific repair after local validation.",
+        "to": "committed"
       }
-    ]
+    ],
+    "updated_at": "2026-07-03T04:34:00Z"
   },
   "BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01": {
     "api_runtime_change": false,
@@ -4835,28 +4861,29 @@
         "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
         "git diff --check"
       ],
-      "github": "passed_before_rebase_pending_rerun",
+      "github": "passed",
       "local": "passed",
+      "post_merge_revalidation": "passed",
       "scope_validation": "passed"
     },
-    "commit_sha": "7ea447454dcea3e71b418565cbbfe831f50bd19c",
+    "commit_sha": "02bc7ab7e2a8805fd6a5ce26f756216c73d7ca3c",
     "depends_on": [
       "BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01"
     ],
     "failure_reason": null,
     "id": "BIG5-FACETS-30-SCIENTIFIC-REPAIR-01",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T04:26:27Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2662",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
-      "allowed_paths_only": null,
-      "github_checks_green": null,
-      "local_validation_passed": null,
-      "post_merge_revalidated": null
+      "allowed_paths_only": true,
+      "github_checks_green": true,
+      "local_validation_passed": true,
+      "post_merge_revalidated": true
     },
-    "status": "pr_open",
+    "status": "merged",
     "title": "BIG5-FACETS-30-SCIENTIFIC-REPAIR-01: Big Five 30 facets scientific repair",
     "transitions": [
       {
@@ -4864,9 +4891,15 @@
         "from": null,
         "note": "User authorized Big Five result-page scientific content repair PR train entry.",
         "to": "authorized"
+      },
+      {
+        "at": "2026-07-03T04:33:19Z",
+        "from": "pr_open",
+        "note": "Reconciled after GitHub reported PR #2662 merged and local main cleanup completed before PR6.",
+        "to": "merged"
       }
     ],
-    "updated_at": "2026-07-03T04:20:00Z"
+    "updated_at": "2026-07-03T04:33:19Z"
   },
   "BIG5-FREE-FULL-REPORT-RUNTIME-QA-READINESS-01": {
     "base": "main",
@@ -75040,5 +75073,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T05:57:00Z"
+  "updated_at": "2026-07-03T04:34:00Z"
 }
