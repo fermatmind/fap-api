@@ -65789,7 +65789,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T02:38:05Z",
+  "updated_at": "2026-07-03T02:38:56Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -71429,9 +71429,9 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "b6488aebb778ebfea84d187d9e298dc8aa15725b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2648",
     "checks": {
       "targeted_disagree_and_matrix_tests": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec/RiasecAspirationsDisagreeAssetPreflightTest.php tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi --display-warnings",
@@ -71498,6 +71498,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "DISAGREE-01 repaired disagree path copy as next-step guidance only; local checks and scope validation passed before commit."
+      },
+      {
+        "at": "2026-07-03T02:38:56Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2648 for DISAGREE-01 after local validation and scope validation passed."
       }
     ]
   },
