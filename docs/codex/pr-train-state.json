@@ -13335,9 +13335,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2676 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All required GitHub checks passed on PR #2676 head af2efe72d943efe320aa91c603bb6c2e3fa29278."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "af2efe72d943efe320aa91c603bb6c2e3fa29278",
     "depends_on": [
       "ENNEA-RP-13"
     ],
@@ -13361,6 +13366,11 @@
         "at": "2026-07-03T06:11:31Z",
         "status": "pr_opened",
         "notes": "Opened PR #2676 for diffuse boundary content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T06:17:17Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed for PR #2676 and mergeStateStatus was CLEAN; scope remains confined to diffuse boundary registry content and train ledger."
       }
     ],
     "failure_reason": null,
@@ -13391,7 +13401,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to diffuse boundary method/technical note/ui registry content and train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-14: fix(enneagram): repair diffuse boundary content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
