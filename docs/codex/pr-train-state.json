@@ -16346,6 +16346,11 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are confined to history/share/retake placeholder UI/method copy and train ledger reconciliation/state."
+      },
+      "pr_created": {
+        "status": "pass",
+        "command": "gh pr create --repo fermatmind/fap-api --base main --head codex/ennea-rp-39-history-share-retake-placeholder",
+        "evidence": "Opened PR #2706 for ENNEA-RP-39."
       }
     },
     "commit_sha": "6c2d31106d7ce9b1674189f85c577f7c0a8a52e3",
@@ -16373,13 +16378,19 @@
         "status": "committed",
         "commit_sha": "6c2d31106d7ce9b1674189f85c577f7c0a8a52e3",
         "notes": "Committed ENNEA-RP-39 history/share/retake placeholder copy repair and local validation ledger."
+      },
+      {
+        "at": "2026-07-03T13:48:13.922Z",
+        "status": "pr_open",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2706",
+        "notes": "Opened PR #2706 for ENNEA-RP-39."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-39",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2706",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -16398,7 +16409,7 @@
       ],
       "evidence": "Changed files are confined to history/share/retake placeholder UI/method copy and train ledger reconciliation/state."
     },
-    "status": "committed",
+    "status": "pr_open",
     "title": "ENNEA-RP-39: fix(enneagram): repair history share retake placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
