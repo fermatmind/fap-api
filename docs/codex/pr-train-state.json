@@ -14783,7 +14783,7 @@
         "evidence": "All GitHub PR checks passed on PR #2693: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": "1745b3f66bbc29e047e719efa2562afd2ee3aca5",
+    "commit_sha": "b0ea4de7b2e516409a7e3e680457f0e4da45f1b6",
     "depends_on": [
       "ENNEA-RP-25"
     ],
@@ -14817,14 +14817,19 @@
         "at": "2026-07-03T10:00:04.234Z",
         "status": "ready_to_merge",
         "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2693 is clean and ready for squash merge."
+      },
+      {
+        "at": "2026-07-03T10:08:59.723Z",
+        "status": "merged",
+        "notes": "Reconciled after PR #2693 squash merge; origin/main contains merge commit b0ea4de7b2e516409a7e3e680457f0e4da45f1b6, local main was synced, and local/remote task branches were cleaned before ENNEA-RP-27 execution."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-26",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T10:06:18Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2693",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -14841,7 +14846,7 @@
       ],
       "evidence": "Changed files are confined to stress trigger/early warning content in type registry plus train ledger reconciliation."
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ENNEA-RP-26: fix(enneagram): repair stress trigger",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -14852,9 +14857,48 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-26 merged as PR #2693 and merge commit b0ea4de7b2e516409a7e3e680457f0e4da45f1b6 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14734 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 132 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 262 warnings, 2 passed, 83641 assertions, duration 30.02s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2694 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on PR #2694: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "905922655bc13858e9ba63a48046336b92a6db4a",
     "depends_on": [
       "ENNEA-RP-26"
     ],
@@ -14863,13 +14907,38 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T10:08:59.723Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-27-recovery-action after ENNEA-RP-26 merge and cleanup; scope is recovery action content in state/type registries plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T10:10:43.139Z",
+        "status": "local_validation_passed",
+        "notes": "Reframed recovery actions as small self-observation moves rather than counseling, treatment, or health-state advice; required local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T10:10:57.689Z",
+        "status": "committed",
+        "notes": "Created local implementation commit 905922655bc13858e9ba63a48046336b92a6db4a for ENNEA-RP-27 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T10:11:31.865Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2694 for ENNEA-RP-27 recovery action content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T10:17:04.684Z",
+        "status": "ready_to_merge",
+        "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2694 is clean and ready for squash merge."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-27",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2694",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -14880,9 +14949,16 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [],
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/state_registry.json",
+        "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "evidence": "Changed files are confined to recovery action content in state/type registries plus train ledger reconciliation."
     },
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-27: fix(enneagram): repair recovery action",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
