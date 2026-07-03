@@ -671,8 +671,8 @@
     "depends_on": [
       "ENNEA-RP-05"
     ],
-    "status": "pr_opened",
-    "commit_sha": "2c2d606bbdb6d63d3e5d5c357a4f6e3fff1708be",
+    "status": "ready_to_merge",
+    "commit_sha": "c163f63c3a4c82f0395c0647fa539c4d20306b0f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2656",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -721,6 +721,11 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2656 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All reported checks for PR #2656 passed on head c163f63c3a4c82f0395c0647fa539c4d20306b0f, including hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, and Semgrep checks."
       }
     },
     "scope_validation": {
@@ -758,6 +763,11 @@
         "at": "2026-07-03T05:27:00Z",
         "status": "pr_opened",
         "notes": "Opened PR #2656 for dominance gap boundary repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T05:36:00Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed; recording ready-to-merge before squash merge per train policy."
       }
     ]
   },
@@ -66012,7 +66022,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T05:27:00Z",
+  "updated_at": "2026-07-03T05:36:00Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
