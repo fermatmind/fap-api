@@ -81,7 +81,7 @@
         {
             "section_key": "diffuse",
             "title": "Diffuse",
-            "body": "当结果呈现较分散的 profile shape 时，系统会降低单一号码语气，转而强调 Top3、三中心和观察任务。此时更重要的是结构阅读，而不是强行定型。",
+            "body": "Diffuse 指 profile shape 中多个类型线索同时抬头，Top1 与相邻候选还不足以支持强主型叙述。它是解释范围的降确定性状态，不是失败、无效、人格混乱或低质量作答。系统会把阅读重心从单一号码转向 Top3 的共同主题、三中心分布、与近期生活相反的证据，以及可复查的观察任务；只有这些线索在真实情境中持续出现，才适合继续收窄解释。",
             "metric_refs": [
                 "profile_entropy_distribution"
             ],
