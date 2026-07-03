@@ -790,8 +790,8 @@
     "depends_on": [
       "ENNEA-RP-06"
     ],
-    "status": "pr_opened",
-    "commit_sha": "f07d9318233e1d92d001babd9a07b7d37ae8d77a",
+    "status": "ready_to_merge",
+    "commit_sha": "925a2f7b422434ab026809629d675d6a4d9926d2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2659",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -840,6 +840,11 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2659 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All required GitHub checks passed on PR #2659 head 925a2f7b422434ab026809629d675d6a4d9926d2."
       }
     },
     "scope_validation": {
@@ -874,6 +879,11 @@
         "at": "2026-07-03T05:57:00Z",
         "status": "pr_opened",
         "notes": "Opened PR #2659 for close-call card content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T06:12:00Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed for PR #2659; scope remains confined to close-call registry content and train ledger."
       }
     ]
   },
