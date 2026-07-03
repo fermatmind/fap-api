@@ -12748,9 +12748,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2666 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All required GitHub checks passed on PR #2666 head 1a631bdd75392a5a976b9f3682c043f27c439234."
       }
     },
-    "commit_sha": "05a91171b06ce0fb683c439a2e2091d410462eb6",
+    "commit_sha": "1a631bdd75392a5a976b9f3682c043f27c439234",
     "depends_on": [
       "ENNEA-RP-09"
     ],
@@ -12774,6 +12779,11 @@
         "at": "2026-07-03T08:12:00Z",
         "status": "pr_opened",
         "notes": "Opened PR #2666 for stance summary content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T08:22:00Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed for PR #2666; scope remains confined to stance group registry content and train ledger."
       }
     ],
     "failure_reason": null,
@@ -12798,7 +12808,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to stance summary group registry content and train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-10: fix(enneagram): repair stance summary content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
