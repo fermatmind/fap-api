@@ -15034,13 +15034,18 @@
         "at": "2026-07-03T10:27:29.974Z",
         "status": "committed",
         "notes": "Created local implementation commit 8014580b1fafd535fe2b34fd1b22e1a5c50de8ce for ENNEA-RP-28 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T10:28:02.694Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2695 for ENNEA-RP-28 state spectrum content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-28",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2695",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -15060,7 +15065,7 @@
       ],
       "evidence": "Changed files are confined to state spectrum content in state/type registries plus train ledger reconciliation."
     },
-    "status": "committed",
+    "status": "pr_opened_github_checks_pending",
     "title": "ENNEA-RP-28: fix(enneagram): repair state spectrum",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
