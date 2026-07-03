@@ -5421,7 +5421,7 @@
       }
     ]
   },
-  "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01":     {
+  "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01":       {
       "base": "main",
       "branch": "codex/big5-rendered-surface-qa-content-repair-01",
       "checks": {
@@ -5444,10 +5444,10 @@
           },
           "github": {
               "status": "pending",
-              "evidence": "PR not opened yet."
+              "evidence": "PR opened: https://github.com/fermatmind/fap-api/pull/2681. GitHub checks pending."
           }
       },
-      "commit_sha": "40a12e632e49b7bcb21ded0c9b72267401b7aa69",
+      "commit_sha": "9e31503a741b92b18e6d807d7585b951672a7c1f",
       "depends_on": [
           "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01"
       ],
@@ -5455,7 +5455,7 @@
       "id": "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01",
       "local_cleanup_executed": false,
       "merged_at": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2681",
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_validation": {
@@ -5464,7 +5464,7 @@
           "local_validation_passed": true,
           "post_merge_revalidated": null
       },
-      "status": "committed",
+      "status": "pr_open",
       "title": "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01: Big Five rendered surface QA content repair",
       "transitions": [
           {
@@ -5484,6 +5484,12 @@
               "from": "local_validated",
               "to": "committed",
               "note": "Committed scoped rendered surface QA content repair on codex/big5-rendered-surface-qa-content-repair-01."
+          },
+          {
+              "at": "2026-07-03T07:06:00Z",
+              "from": "committed",
+              "to": "pr_open",
+              "note": "Opened PR https://github.com/fermatmind/fap-api/pull/2681 for scoped rendered surface QA content repair."
           }
       ]
   },
