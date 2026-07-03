@@ -15130,7 +15130,7 @@
         "evidence": "All reported GitHub checks passed for PR #2696 before ready_to_merge ledger update."
       }
     },
-    "commit_sha": "54aba963de2fe7c2fecf5ddd39e279966d89b402",
+    "commit_sha": "cf6e7b18f72e1ce28685387e14cf3a8f336ac287",
     "depends_on": [
       "ENNEA-RP-28"
     ],
@@ -15166,14 +15166,20 @@
         "at": "2026-07-03T10:51:29.988Z",
         "status": "ready_to_merge",
         "notes": "GitHub checks passed; PR is ready to merge after final head-check confirmation."
+      },
+      {
+        "at": "2026-07-03T10:59:42.424Z",
+        "status": "merged",
+        "commit_sha": "cf6e7b18f72e1ce28685387e14cf3a8f336ac287",
+        "notes": "Reconciled after PR #2696 squash merge; origin/main contains merge commit, local main was synced, and local/remote task branches were cleaned before ENNEA-RP-30 execution."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-29",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T10:57:05Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2696",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -15190,7 +15196,7 @@
       ],
       "evidence": "Changed files are confined to arrow placeholder copy in theory_hint_registry plus train ledger reconciliation/status for ENNEA-RP-28/29."
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ENNEA-RP-29: fix(enneagram): repair arrow placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -15201,6 +15207,38 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-29 merged as PR #2696 and merge commit cf6e7b18f72e1ce28685387e14cf3a8f336ac287 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json"
+      },
+      "enneagram_type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "notes": "Passed with existing PHPUnit warnings."
+      },
+      "enneagram_registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "notes": "Passed with existing PHPUnit warnings."
+      },
+      "enneagram_report_composer_v2": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "notes": "Passed with existing PHPUnit warnings."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "notes": "Passed with existing PHPUnit warnings; 83641 assertions."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
       }
     },
     "commit_sha": null,
@@ -15212,6 +15250,16 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T10:59:42.424Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-30-relationship-need; scope is relationship_need scenario and partner-facing notes plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T11:00:57.812Z",
+        "status": "local_validation_passed",
+        "notes": "Required local checks passed and changed files remained within ENNEA-RP-30 scope."
       }
     ],
     "failure_reason": null,
@@ -15229,9 +15277,16 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [],
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/scenario_registry.json",
+        "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "evidence": "Changed files are confined to relationship_need scenario copy, relationship_pack.partner_facing_notes used by the relationship_need module, and train ledger reconciliation/status."
     },
-    "status": "pending_dependency",
+    "status": "local_validation_passed",
     "title": "ENNEA-RP-30: fix(enneagram): repair relationship need",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
