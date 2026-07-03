@@ -79,6 +79,13 @@ final class RiasecAspirationsDisagreeSlotRegistryTest extends TestCase
             $this->assertFalse($slot['report_snapshot_mutation_allowed']);
             $this->assertFalse($slot['share_pdf_payload_expansion_allowed']);
             $this->assertFalse($slot['raw_feedback_exposure_allowed']);
+            $this->assertTrue($slot['next_steps_only']);
+            $this->assertFalse($slot['feedback_replaces_measured_result_allowed']);
+            $this->assertFalse($slot['result_override_allowed']);
+            $this->assertFalse($slot['snapshot_share_pdf_mutation_allowed']);
+            $this->assertFalse($slot['raw_feedback_public_exposure_allowed']);
+            $this->assertSame('next_steps_and_optional_retake_only', $slot['recommended_output']);
+            $this->assertSame('overlay_only_does_not_mutate_snapshot_share_pdf', $slot['result_binding']);
             $this->assertSame([], $registry->validateSlot($slot), $slotName.' should be contract-clean.');
         }
     }
@@ -137,6 +144,13 @@ final class RiasecAspirationsDisagreeSlotRegistryTest extends TestCase
         $this->assertFalse($disagree['report_snapshot_mutation_allowed']);
         $this->assertFalse($disagree['share_pdf_payload_expansion_allowed']);
         $this->assertFalse($disagree['raw_feedback_exposure_allowed']);
+        $this->assertTrue($disagree['next_steps_only']);
+        $this->assertFalse($disagree['feedback_replaces_measured_result_allowed']);
+        $this->assertFalse($disagree['result_override_allowed']);
+        $this->assertFalse($disagree['snapshot_share_pdf_mutation_allowed']);
+        $this->assertFalse($disagree['raw_feedback_public_exposure_allowed']);
+        $this->assertSame('next_steps_and_optional_retake_only', $disagree['recommended_output']);
+        $this->assertSame('overlay_only_does_not_mutate_snapshot_share_pdf', $disagree['result_binding']);
         $this->assertFalse($disagree['frontend_fallback_allowed']);
         $this->assertSame([], $registry->validateSlot($disagree));
     }
@@ -212,6 +226,44 @@ final class RiasecAspirationsDisagreeSlotRegistryTest extends TestCase
         $this->assertContains('unsupported_aspirations_result_binding', $errors);
     }
 
+    public function test_file_backed_disagree_assets_are_next_steps_only(): void
+    {
+        foreach ($this->contentAssetDisagreeRows() as $index => $row) {
+            $this->assertTrue($row['next_steps_only'], 'line '.($index + 1).' must be next-step only.');
+            $this->assertFalse($row['feedback_replaces_measured_result_allowed'], 'line '.($index + 1).' must not replace measured result.');
+            $this->assertFalse($row['result_override_allowed'], 'line '.($index + 1).' must not override results.');
+            $this->assertFalse($row['snapshot_share_pdf_mutation_allowed'], 'line '.($index + 1).' must not mutate snapshot/share/PDF.');
+            $this->assertFalse($row['raw_feedback_public_exposure_allowed'], 'line '.($index + 1).' must not expose raw feedback publicly.');
+            $this->assertSame('next_steps_and_optional_retake_only', $row['recommended_output']);
+            $this->assertSame('overlay_only_does_not_mutate_snapshot_share_pdf', $row['result_binding']);
+            $this->assertMatchesRegularExpression('/不会|不能|不应|不比较|不把/u', $row['summary']);
+            $this->assertMatchesRegularExpression('/不改|不修改|不覆盖|不互相覆盖/u', $row['recommended_next_action']);
+        }
+    }
+
+    public function test_disagree_copy_rejects_result_and_public_surface_override_flags(): void
+    {
+        $registry = new RiasecDeepCopySlotRegistry;
+        $disagree = $registry->disagreePathSlots()['normal_disagree_学生'];
+        $disagree['next_steps_only'] = false;
+        $disagree['feedback_replaces_measured_result_allowed'] = true;
+        $disagree['result_override_allowed'] = true;
+        $disagree['snapshot_share_pdf_mutation_allowed'] = true;
+        $disagree['raw_feedback_public_exposure_allowed'] = true;
+        $disagree['recommended_output'] = 'rewrite_result';
+        $disagree['result_binding'] = 'replace_snapshot_share_pdf';
+
+        $errors = $registry->validateSlot($disagree);
+
+        $this->assertContains('disagree_next_steps_only_must_be_true', $errors);
+        $this->assertContains('disagree_feedback_replaces_measured_result_allowed_must_be_false', $errors);
+        $this->assertContains('disagree_result_override_allowed_must_be_false', $errors);
+        $this->assertContains('disagree_snapshot_share_pdf_mutation_allowed_must_be_false', $errors);
+        $this->assertContains('disagree_raw_feedback_public_exposure_allowed_must_be_false', $errors);
+        $this->assertContains('unsupported_disagree_recommended_output', $errors);
+        $this->assertContains('unsupported_disagree_result_binding', $errors);
+    }
+
     public function test_existing_feedback_overlay_does_not_mutate_snapshot_share_or_pdf_payloads(): void
     {
         $overlay = (new RiasecExplorationFeedbackOverlayService)->build(
@@ -246,6 +298,21 @@ final class RiasecAspirationsDisagreeSlotRegistryTest extends TestCase
     private function contentAssetAspirationRows(): array
     {
         $path = __DIR__.'/../../../../content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl';
+        $rows = [];
+
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+            $rows[] = json_decode($line, true, flags: JSON_THROW_ON_ERROR);
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function contentAssetDisagreeRows(): array
+    {
+        $path = __DIR__.'/../../../../content_assets/riasec/disagree_path_v1.zh-CN.jsonl';
         $rows = [];
 
         foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
