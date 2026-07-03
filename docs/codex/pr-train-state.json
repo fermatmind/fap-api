@@ -13569,9 +13569,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2679 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All required GitHub checks passed on PR #2679 head 31d77748169d66bfbed9548e58115984740f0ea0."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "31d77748169d66bfbed9548e58115984740f0ea0",
     "depends_on": [
       "ENNEA-RP-15"
     ],
@@ -13595,6 +13600,11 @@
         "at": "2026-07-03T06:45:34Z",
         "status": "pr_opened",
         "notes": "Opened PR #2679 for work-style summary content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T06:51:16Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed for PR #2679 and mergeStateStatus was CLEAN; scope remains confined to work-style scenario/type registry content and train ledger."
       }
     ],
     "failure_reason": null,
@@ -13623,7 +13633,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to work-style scenario/type registry content and train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-16: fix(enneagram): repair work style summary",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
