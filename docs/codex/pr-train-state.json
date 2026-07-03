@@ -13807,14 +13807,19 @@
         "at": "2026-07-03T07:09:01Z",
         "status": "ready_to_merge",
         "notes": "GitHub required checks passed on PR #2680; PR is clean and ready for squash merge under repo policy."
+      },
+      {
+        "at": "2026-07-03T07:17:53Z",
+        "status": "merged_cleanup_complete",
+        "notes": "PR #2680 was squash-merged as 1e39b2de27844a4c7f2ac406612cdd684378aff5; origin/main contains the merge commit, local main was fast-forwarded, and the local/remote task branches were cleaned before ENNEA-RP-18 started."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-17",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T07:14:54Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2680",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -13833,7 +13838,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to collaboration strengths content in type registry and train ledger reconciliation."
     },
-    "status": "ready_to_merge",
+    "status": "merged_cleanup_complete",
     "title": "ENNEA-RP-17: fix(enneagram): repair collaboration strengths",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -13844,6 +13849,40 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-17 merged as PR #2680 and merge commit 1e39b2de27844a4c7f2ac406612cdd684378aff5 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 132 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 262 warnings, 2 passed, 83416 assertions, duration 28.47s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
       }
     },
     "commit_sha": null,
@@ -13855,6 +13894,16 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T07:17:53Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-18-collaboration-friction after ENNEA-RP-17 merge and cleanup; scope is collaboration friction content in type registry plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T07:19:24Z",
+        "status": "local_validation_passed",
+        "notes": "Reframed collaboration friction points as negotiable interaction points for all nine types; required local validation passed."
       }
     ],
     "failure_reason": null,
@@ -13871,11 +13920,17 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
       "outside_scope_files": [
 
-      ]
+      ],
+      "status": "pass",
+      "evidence": "Changed files are confined to collaboration friction content in type registry plus train ledger reconciliation."
     },
-    "status": "pending_dependency",
+    "status": "local_validation_passed",
     "title": "ENNEA-RP-18: fix(enneagram): repair collaboration friction",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
