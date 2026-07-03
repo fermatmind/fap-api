@@ -1,11 +1,13 @@
 {
   "body_quality": {
-    "max_body_chars": 315,
-    "mean_body_chars": 280.27,
-    "min_body_chars": 262,
-    "recalculated_by": "codex_scenario_action_candidate_normalize_01",
+    "max_body_chars": 286,
+    "mean_body_chars": 272.4,
+    "min_body_chars": 260,
+    "recalculated_by": "codex_scenario_action_scientific_repair_01",
     "repair_layer_expected_true_count": 40,
-    "repair_layer_true_count": 40
+    "repair_layer_true_count": 40,
+    "prescription_risk": "reduced",
+    "scenario_boundary": "low_risk_optional_guidance"
   },
   "candidate_counts": {
     "content_asset": 160,
@@ -118,5 +120,16 @@
   "validation": {
     "error_count": 0,
     "status": "pass"
+  },
+  "scientific_repair": {
+    "repair_pr": "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01",
+    "stage": "scenario_action_scientific_repair_v0_8",
+    "status": "pass",
+    "scope": "scenario_action_only",
+    "changes": [
+      "reframed scenario advice as optional low-risk experiments",
+      "removed identity-like profile labels from visible fields",
+      "kept work relationship stress growth collaboration boundaries explicit without prescriptive claims"
+    ]
   }
 }

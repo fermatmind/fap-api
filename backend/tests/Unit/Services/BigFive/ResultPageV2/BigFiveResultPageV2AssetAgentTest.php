@@ -6511,7 +6511,9 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertFalse((bool) ($row['ready_for_runtime'] ?? true));
             $this->assertFalse((bool) ($row['ready_for_production'] ?? true));
             $this->assertSame('scenario_action_revised_v0_7_normalized', data_get($row, 'provenance.candidate_stage'));
-            $this->assertSame('codex_scenario_action_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('codex_scenario_action_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('reduced', data_get($row, 'body_quality.prescription_risk'));
+            $this->assertSame('low_risk_optional_guidance', data_get($row, 'body_quality.scenario_boundary'));
             $this->assertGreaterThanOrEqual(260, (int) data_get($row, 'body_quality.body_chars', 0));
             $this->assertLessThanOrEqual(330, (int) data_get($row, 'body_quality.body_chars', 999));
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
@@ -7832,7 +7834,7 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         $this->assertSame('application_matrix', data_get($manifest, 'selector_mapping.stress.block_kind'));
 
         $this->assertTrue((bool) ($review['human_reviewed'] ?? false));
-        $this->assertSame('codex_scenario_action_candidate_normalize_01', $review['reviewed_by'] ?? null);
+        $this->assertSame('codex_scenario_action_scientific_repair_01', $review['reviewed_by'] ?? null);
         $this->assertSame('approved_for_staging', $review['review_status'] ?? null);
         $this->assertSame(['selector_asset_candidates.jsonl', 'content_asset_candidates.jsonl'], $review['approved_candidate_files'] ?? null);
         $this->assertFalse((bool) ($review['production_use_allowed'] ?? true));
@@ -7872,7 +7874,9 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertFalse((bool) ($row['ready_for_runtime'] ?? true));
             $this->assertFalse((bool) ($row['ready_for_production'] ?? true));
             $this->assertSame('scenario_action_revised_v0_7_normalized', data_get($row, 'provenance.candidate_stage'));
-            $this->assertSame('codex_scenario_action_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('codex_scenario_action_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('reduced', data_get($row, 'body_quality.prescription_risk'));
+            $this->assertSame('low_risk_optional_guidance', data_get($row, 'body_quality.scenario_boundary'));
             $this->assertGreaterThanOrEqual(260, (int) data_get($row, 'body_quality.body_chars', 0));
             $this->assertLessThanOrEqual(330, (int) data_get($row, 'body_quality.body_chars', 999));
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));

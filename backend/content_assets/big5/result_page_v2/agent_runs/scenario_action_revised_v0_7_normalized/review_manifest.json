@@ -19,7 +19,8 @@
     "rendered_hygiene_hit_count": 0,
     "schema_reviewed": true,
     "selector_contract_reviewed": true,
-    "staging_import_performed": false
+    "staging_import_performed": false,
+    "scientific_editorial_repair_reviewed": true
   },
   "review_scope": {
     "candidate_artifacts_only": true,
@@ -31,8 +32,13 @@
     "staging_import_deferred": true
   },
   "review_status": "approved_for_staging",
-  "reviewed_at": "2026-06-29T00:00:00Z",
-  "reviewed_by": "codex_scenario_action_candidate_normalize_01",
+  "reviewed_at": "2026-07-03T00:00:00Z",
+  "reviewed_by": "codex_scenario_action_scientific_repair_01",
   "runtime_use": "staging_only",
-  "schema": "fap.big5.result_page_v2.scenario_action.revised_v0_7.review_manifest.v0_1"
+  "schema": "fap.big5.result_page_v2.scenario_action.revised_v0_7.review_manifest.v0_1",
+  "scientific_repair": {
+    "repair_pr": "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01",
+    "status": "approved_for_staging",
+    "prescription_risk": "reduced"
+  }
 }
