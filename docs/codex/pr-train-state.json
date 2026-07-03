@@ -15473,6 +15473,11 @@
       "git_diff_check": {
         "status": "pass",
         "command": "git diff --check"
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2699 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All reported GitHub checks passed for PR #2699 before ready_to_merge ledger update."
       }
     },
     "commit_sha": "ad64407b4c152360fa538cdfda87e8bcb93f5406",
@@ -15506,6 +15511,11 @@
         "status": "pr_opened_github_checks_pending",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/2699",
         "notes": "PR opened; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-07-03T11:37:23.262Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed; PR is ready to merge after final head-check confirmation."
       }
     ],
     "failure_reason": null,
@@ -15530,7 +15540,7 @@
       ],
       "evidence": "Changed files are confined to deep_dive.misread_by_others and train ledger reconciliation/status."
     },
-    "status": "pr_opened_github_checks_pending",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-32: fix(enneagram): repair misread by others",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
