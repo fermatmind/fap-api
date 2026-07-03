@@ -3928,7 +3928,7 @@
     "base": "main",
     "branch": "codex/big5-canonical-profiles-scientific-repair-01",
     "checks": [],
-    "commit_sha": null,
+    "commit_sha": "1b338c59df6c6cce7ca7fad29ad2e2b105461540",
     "depends_on": [
       "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01"
     ],
@@ -12879,13 +12879,18 @@
         "at": "2026-07-03T13:27:00Z",
         "status": "local_validation_passed",
         "notes": "Repaired harmonic summary wording for positive_outlook, competency, and reactive groups with stress-response framing and non-diagnostic boundaries; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T13:31:00Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2669 for harmonic summary content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-11",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2669",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -12903,7 +12908,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to harmonic summary group registry content and train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-11: fix(enneagram): repair harmonic summary content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
