@@ -16583,7 +16583,7 @@
         "notes": "Initial validator failure on high-certainty phrase \"一定会\" was fixed within sample_report_registry scope; full validation passed with existing warnings only."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "627acf7afda5beea041b46b99c459789ccdcb512",
     "depends_on": [
       "ENNEA-RP-40"
     ],
@@ -16602,6 +16602,11 @@
         "at": "2026-07-03T14:20:45Z",
         "status": "local_checks_passed",
         "notes": "Required local validation passed; changed files are within ENNEA-RP-41 scope."
+      },
+      {
+        "at": "2026-07-03T14:20:53Z",
+        "status": "committed",
+        "notes": "Created local commit 627acf7afda5beea041b46b99c459789ccdcb512 for ENNEA-RP-41."
       }
     ],
     "failure_reason": null,
