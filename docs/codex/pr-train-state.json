@@ -69383,9 +69383,9 @@
     "depends_on": [
       "PR-EQ-ASSET-SCI-03"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "2b0b5c4b0e96c5f7a5c5c31c5a11a3c9b898b7e0",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2649",
     "checks": [
       {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
@@ -69428,7 +69428,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
+      "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
@@ -69443,6 +69443,11 @@
         "at": "2026-07-03T02:45:42.120095Z",
         "status": "local_checks_passed",
         "summary": "SCI-12 runtime guard implemented; local manifest validation passed with existing PHPUnit environment warnings only."
+      },
+      {
+        "at": "2026-07-03T02:47:53.311389Z",
+        "status": "pr_open",
+        "summary": "Opened PR #2649 for SCI-12 after local validation and scope checks."
       }
     ]
   },
