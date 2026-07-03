@@ -69583,9 +69583,9 @@
     "depends_on": [
       "PR-EQ-ASSET-SCI-03"
     ],
-    "status": "in_progress",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open_checks_pending",
+    "commit_sha": "f9c01dcfe",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2658",
     "checks": [
       {
         "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan content:lint --pack=EQ_60 --pack-version=v1",
@@ -69660,6 +69660,11 @@
         "status": "local_checks_passed",
         "timestamp": "2026-07-03T11:56:00+08:00",
         "notes": "All required local checks and SJT bridge guard scan passed; ready to commit and open PR."
+      },
+      {
+        "status": "pr_open_checks_pending",
+        "timestamp": "2026-07-03T12:00:00+08:00",
+        "notes": "Opened PR #2658 for PR-EQ-ASSET-SCI-10; GitHub checks pending."
       }
     ]
   },
