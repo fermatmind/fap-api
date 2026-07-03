@@ -15500,13 +15500,19 @@
         "status": "committed",
         "commit_sha": "ad64407b4c152360fa538cdfda87e8bcb93f5406",
         "notes": "Implementation commit created after local validation."
+      },
+      {
+        "at": "2026-07-03T11:31:36.052Z",
+        "status": "pr_opened_github_checks_pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2699",
+        "notes": "PR opened; waiting for required GitHub checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-32",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2699",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -15524,7 +15530,7 @@
       ],
       "evidence": "Changed files are confined to deep_dive.misread_by_others and train ledger reconciliation/status."
     },
-    "status": "committed",
+    "status": "pr_opened_github_checks_pending",
     "title": "ENNEA-RP-32: fix(enneagram): repair misread by others",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
