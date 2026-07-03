@@ -134,3 +134,9 @@ Codex should perform:
 ## Codex normalization note
 
 Converted to backend candidate JSONL, added selector candidates and review manifest, recalculated body_quality, and kept staging-only/non-production flags.
+
+## Scientific repair v0.4 review
+
+- Converted generic warning language into conditional report-reading guidance.
+- Added explicit policy that low-quality messages are not normal-result body copy.
+- Preserved non-diagnostic, non-employment, non-prediction boundaries without repeating a disclaimer on every line.

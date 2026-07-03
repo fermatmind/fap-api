@@ -406,9 +406,21 @@
     "copy_length_pass": true,
     "copy_not_thin_pass": true,
     "duplicate_body_count": 0,
-    "longest_body_chars": 198,
+    "longest_body_chars": 197,
     "sentence_quality_pass": true,
-    "shortest_body_chars": 180,
-    "thin_copy_count": 0
+    "shortest_body_chars": 182,
+    "thin_copy_count": 0,
+    "template_warning_spread_to_normal_results": false,
+    "conditional_copy_pass": true
+  },
+  "scientific_repair_pr": "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01",
+  "scientific_repair_stage": "low_quality_scientific_repair_v0_4",
+  "low_quality_conditioning": {
+    "status": "pass",
+    "scope": "low_quality_only",
+    "normal_result_copy_policy": "do_not_append_low_quality_warning_outside_low_quality_scope",
+    "non_blaming_boundary": true,
+    "diagnostic_or_high_stakes_claims": 0,
+    "template_warning_spread_to_normal_results": false
   }
 }

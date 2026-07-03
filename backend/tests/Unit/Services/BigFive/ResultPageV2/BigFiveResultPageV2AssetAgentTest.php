@@ -5187,7 +5187,16 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertSame('result_state', $row['asset_type'] ?? null);
             $this->assertSame('L7_result_state', $row['asset_layer'] ?? null);
             $this->assertSame('low_quality', $row['scope'] ?? null);
-            $this->assertSame('codex_low_quality_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('codex_low_quality_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertTrue((bool) data_get($row, 'body_quality.conditional_low_quality_only'));
+            $this->assertTrue((bool) data_get($row, 'body_quality.normal_result_suppression_required'));
+            $this->assertSame('BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
+            $this->assertSame('low_quality_scientific_repair_v0_4', data_get($row, 'source_trace.scientific_repair_stage'));
+            $this->assertSame('conditional_low_quality_scope_only', data_get($row, 'source_trace.quality_boundary'));
+            $this->assertSame(
+                'do_not_append_low_quality_warning_outside_low_quality_scope',
+                data_get($row, 'scientific_editorial_notes.normal_result_copy_policy')
+            );
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
             $this->assertContains('degraded_state', (array) ($row['safety_tags'] ?? []));
             $this->assertContains('non_blaming', (array) ($row['safety_tags'] ?? []));
@@ -5203,6 +5212,8 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertFalse((bool) ($row['shareable'] ?? true));
             $this->assertSame('not_shareable', $row['shareable_policy'] ?? null);
             $this->assertSame('low_quality_revised_v0_3_normalized', data_get($row, 'provenance.candidate_stage'));
+            $this->assertSame('BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
+            $this->assertSame('conditional_low_quality_scope_only', data_get($row, 'source_trace.quality_boundary'));
             $this->assertSame('staging_only', data_get($row, 'provenance.runtime_use'));
             $this->assertFalse((bool) data_get($row, 'provenance.production_use_allowed', true));
             $this->assertFalse((bool) data_get($row, 'replacement_policy.replaces_existing_runtime_asset', true));
@@ -5227,6 +5238,18 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $selectorRows
             )
         ));
+
+        foreach ([
+            '材料偏薄',
+            '观察入口',
+            '低置信',
+            '不评价',
+            '不是个人评价',
+            '不当作长期画像',
+            '不应作为公开介绍自己的材料',
+        ] as $requiredToken) {
+            $this->assertStringContainsString($requiredToken, $visibleText, $requiredToken);
+        }
 
         foreach ([
             'private_url',
@@ -5599,8 +5622,19 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         $this->assertTrue((bool) data_get($report, 'visible_text_quality.sentence_quality_pass'));
         $this->assertSame(0, data_get($report, 'visible_text_quality.duplicate_body_count'));
         $this->assertSame(0, data_get($report, 'visible_text_quality.thin_copy_count'));
+        $this->assertTrue((bool) data_get($report, 'visible_text_quality.conditional_copy_pass'));
+        $this->assertFalse((bool) data_get($report, 'visible_text_quality.template_warning_spread_to_normal_results', true));
         $this->assertGreaterThanOrEqual(180, (int) data_get($report, 'visible_text_quality.shortest_body_chars'));
         $this->assertLessThanOrEqual(320, (int) data_get($report, 'visible_text_quality.longest_body_chars'));
+        $this->assertSame('pass', data_get($report, 'low_quality_conditioning.status'));
+        $this->assertSame('low_quality_only', data_get($report, 'low_quality_conditioning.scope'));
+        $this->assertSame(
+            'do_not_append_low_quality_warning_outside_low_quality_scope',
+            data_get($report, 'low_quality_conditioning.normal_result_copy_policy')
+        );
+        $this->assertTrue((bool) data_get($report, 'low_quality_conditioning.non_blaming_boundary'));
+        $this->assertSame(0, data_get($report, 'low_quality_conditioning.diagnostic_or_high_stakes_claims'));
+        $this->assertFalse((bool) data_get($report, 'low_quality_conditioning.template_warning_spread_to_normal_results', true));
 
         $scope = $report['rendered_preview_scope'] ?? [];
         $this->assertSame('backend_fixture_only', $scope['evidence_type'] ?? null);
@@ -7277,14 +7311,23 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertSame('result_state', $row['asset_type'] ?? null);
                 $this->assertSame('L7_result_state', $row['asset_layer'] ?? null);
                 $this->assertSame('low_quality', $row['scope'] ?? null);
-                $this->assertSame('codex_low_quality_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame('codex_low_quality_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
                 $this->assertGreaterThanOrEqual(180, (int) data_get($row, 'body_quality.body_chars', 0));
                 $this->assertLessThanOrEqual(320, (int) data_get($row, 'body_quality.body_chars', 999));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_state_layer'));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_quality_layer'));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_boundary_layer'));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_action_layer'));
+                $this->assertTrue((bool) data_get($row, 'body_quality.conditional_low_quality_only'));
+                $this->assertTrue((bool) data_get($row, 'body_quality.normal_result_suppression_required'));
                 $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
+                $this->assertSame('BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
+                $this->assertSame('low_quality_scientific_repair_v0_4', data_get($row, 'source_trace.scientific_repair_stage'));
+                $this->assertSame('conditional_low_quality_scope_only', data_get($row, 'source_trace.quality_boundary'));
+                $this->assertSame(
+                    'do_not_append_low_quality_warning_outside_low_quality_scope',
+                    data_get($row, 'scientific_editorial_notes.normal_result_copy_policy')
+                );
                 $this->assertContains('degraded_state', (array) ($row['safety_tags'] ?? []));
                 $this->assertContains('non_blaming', (array) ($row['safety_tags'] ?? []));
                 $stateKeys[] = (string) data_get($row, 'asset_key');
@@ -7299,6 +7342,8 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertFalse((bool) ($row['shareable'] ?? true));
                 $this->assertSame('not_shareable', $row['shareable_policy'] ?? null);
                 $this->assertSame('low_quality_revised_v0_3_normalized', data_get($row, 'provenance.candidate_stage'));
+                $this->assertSame('BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
+                $this->assertSame('conditional_low_quality_scope_only', data_get($row, 'source_trace.quality_boundary'));
                 $this->assertSame('staging_only', data_get($row, 'provenance.runtime_use'));
                 $this->assertFalse((bool) data_get($row, 'provenance.production_use_allowed', true));
                 $this->assertFalse((bool) data_get($row, 'replacement_policy.replaces_existing_runtime_asset', true));
@@ -7339,6 +7384,18 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                     $selectorRows
                 )
             ));
+
+            foreach ([
+                '材料偏薄',
+                '观察入口',
+                '低置信',
+                '不评价',
+                '不是个人评价',
+                '不当作长期画像',
+                '不应作为公开介绍自己的材料',
+            ] as $requiredToken) {
+                $this->assertStringContainsString($requiredToken, $visibleText, $requiredToken);
+            }
 
             foreach ([
                 'private_url',
