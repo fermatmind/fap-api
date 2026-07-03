@@ -19,8 +19,20 @@
             "theory_key": "wing_hint",
             "visibility_scope": "p0_visible",
             "hard_judgement_allowed": false,
-            "boundary_copy": "邻位牵引只作为表达色彩提示，不等于正式 wing 判定。",
-            "user_facing_boundary": "如果你看到主候选左右两侧都有牵引力，这说明表达上可能带有邻位色彩，而不是系统已经把你判成某个 wing。",
+            "boundary_copy": "邻位牵引只作为同一主型附近的表达色彩提示，不等于正式 wing 判定，也不能替代主型或 Top3 解释。",
+            "user_facing_boundary": "如果你看到主候选左右两侧都有牵引力，可以把它理解为表达方式里可能出现相邻类型的语气、节奏或关注点；这不是系统已经把你判成某个 wing，也不是说明你稳定拥有某个副型。",
+            "interpretation_boundary": "wing hint 只适合帮助阅读“同一主型在表达上可能更靠近哪一侧”，不适合用于诊断、能力评价、健康层级判断、职业筛选或关系风险判断。",
+            "use_for": [
+                "expression_color_hint",
+                "adjacent_type_language",
+                "self_observation_prompt"
+            ],
+            "not_for": [
+                "hard_wing_classification",
+                "subtype_or_instinct_claim",
+                "personality_verdict",
+                "clinical_or_hiring_decision"
+            ],
             "content_maturity": "experimental",
             "evidence_level": "theory_based"
         },
