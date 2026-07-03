@@ -16479,6 +16479,11 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are confined to form recommendation method copy, composer output, Enneagram test coverage, and train ledger reconciliation/state."
+      },
+      "pr_created": {
+        "status": "pass",
+        "command": "gh pr create --repo fermatmind/fap-api --base main --head codex/ennea-rp-40-form-recommendation",
+        "evidence": "Opened PR #2707 for ENNEA-RP-40."
       }
     },
     "commit_sha": "f01b3abd944e5c171824469176633280138f1bff",
@@ -16506,13 +16511,19 @@
         "status": "committed",
         "commit_sha": "f01b3abd944e5c171824469176633280138f1bff",
         "notes": "Committed ENNEA-RP-40 form recommendation repair and local validation ledger."
+      },
+      {
+        "at": "2026-07-03T14:05:26.934Z",
+        "status": "pr_open",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2707",
+        "notes": "Opened PR #2707 for ENNEA-RP-40."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-40",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2707",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -16533,7 +16544,7 @@
       ],
       "evidence": "Changed files are confined to form recommendation method copy, composer output, Enneagram test coverage, and train ledger reconciliation/state."
     },
-    "status": "committed",
+    "status": "pr_open",
     "title": "ENNEA-RP-40: fix(enneagram): repair form recommendation",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
