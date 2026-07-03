@@ -3928,7 +3928,7 @@
     "base": "main",
     "branch": "codex/big5-canonical-profiles-scientific-repair-01",
     "checks": [],
-    "commit_sha": null,
+    "commit_sha": "1b338c59df6c6cce7ca7fad29ad2e2b105461540",
     "depends_on": [
       "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01"
     ],
@@ -12784,14 +12784,19 @@
         "at": "2026-07-03T08:22:00Z",
         "status": "ready_to_merge",
         "notes": "GitHub required checks passed for PR #2666; scope remains confined to stance group registry content and train ledger."
+      },
+      {
+        "at": "2026-07-03T05:02:18Z",
+        "status": "merged",
+        "notes": "PR #2666 squash-merged as c3d5f352a102e4bbccfa987d26509ae585616758; merge commit present in origin/main; local main synced and task branch cleaned up before ENNEA-RP-11."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-10",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T05:02:18Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2666",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -12808,7 +12813,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to stance summary group registry content and train ledger reconciliation."
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ENNEA-RP-10: fix(enneagram): repair stance summary content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -12819,9 +12824,48 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-10 merged as PR #2666 and merge commit c3d5f352a102e4bbccfa987d26509ae585616758 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 128 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 262 warnings, 2 passed, 83412 assertions, duration 32.40s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2669 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All required GitHub checks passed on PR #2669 head e07f3b7ac860976634a3fc7bac7ba71ea869e924."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "e07f3b7ac860976634a3fc7bac7ba71ea869e924",
     "depends_on": [
       "ENNEA-RP-10"
     ],
@@ -12830,13 +12874,33 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T13:18:00Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-11-harmonic-summary; scope is harmonic group registry content plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T13:27:00Z",
+        "status": "local_validation_passed",
+        "notes": "Repaired harmonic summary wording for positive_outlook, competency, and reactive groups with stress-response framing and non-diagnostic boundaries; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T13:31:00Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2669 for harmonic summary content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T13:38:00Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed for PR #2669 and mergeStateStatus was CLEAN; scope remains confined to harmonic group registry content and train ledger."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-11",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2669",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -12846,9 +12910,15 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "outside_scope_files": [],
+      "status": "pass",
+      "evidence": "Changed files are confined to harmonic summary group registry content and train ledger reconciliation."
     },
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-11: fix(enneagram): repair harmonic summary content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
