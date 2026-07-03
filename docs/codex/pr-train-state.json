@@ -422,8 +422,8 @@
     "depends_on": [
       "ENNEA-RP-03"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": "55d4e66f12328a785cdfe9a5a2b0d92e82f68589",
+    "status": "ready_to_merge",
+    "commit_sha": "d5e4e23df3ff2c04c1cfc221b037cdd767d68a1a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2622",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -486,6 +486,11 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors after rebase and validation."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2622 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All reported checks for PR #2622 passed before the latest ledger-only rebase, including hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, and Semgrep checks. Rebase touched train ledger only; final head will be rechecked before merge."
       }
     },
     "scope_validation": {
@@ -526,6 +531,11 @@
         "at": "2026-07-03T04:18:00Z",
         "status": "local_validation_passed",
         "notes": "Replayed PR-04 validation state while rebasing over latest main; implementation scope unchanged."
+      },
+      {
+        "at": "2026-07-03T04:19:00Z",
+        "status": "ready_to_merge",
+        "notes": "Replayed ready-to-merge state while rebasing over latest main; final head will be rechecked before merge."
       }
     ]
   },
@@ -65864,7 +65874,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T04:18:00Z",
+  "updated_at": "2026-07-03T04:19:00Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
