@@ -4527,7 +4527,7 @@
       "local": "passed",
       "scope_validation": "passed"
     },
-    "commit_sha": "1fae782eab819d2f44234b319998ebd4685523f9",
+    "commit_sha": "5575a8d3ed64f643a03e4319c5382983f4c76ffb",
     "depends_on": [
       "BIG5-FACETS-30-SCIENTIFIC-REPAIR-01"
     ],
@@ -4535,7 +4535,7 @@
     "id": "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2665",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -4544,7 +4544,7 @@
       "local_validation_passed": true,
       "post_merge_revalidated": null
     },
-    "status": "committed",
+    "status": "pr_open",
     "title": "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01: Big Five coupling variants scientific repair",
     "transitions": [
       {
@@ -4564,9 +4564,15 @@
         "from": "local_checks_passed",
         "note": "Committed scoped coupling variants scientific repair after local validation.",
         "to": "committed"
+      },
+      {
+        "at": "2026-07-03T04:35:06Z",
+        "from": "committed",
+        "note": "Opened GitHub PR #2665 for scoped coupling variants scientific repair.",
+        "to": "pr_open"
       }
     ],
-    "updated_at": "2026-07-03T04:34:00Z"
+    "updated_at": "2026-07-03T04:35:06Z"
   },
   "BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01": {
     "api_runtime_change": false,
@@ -75073,5 +75079,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T04:34:00Z"
+  "updated_at": "2026-07-03T04:35:06Z"
 }
