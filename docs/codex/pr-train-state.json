@@ -73468,9 +73468,9 @@
     "branch": "codex/big5-content-asset-scientific-audit-mapping-01",
     "base": "main",
     "title": "BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01: Big Five content asset scientific audit mapping",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [],
-    "commit_sha": "f1928cea8cdac9d417c8e635d2ebdbb90e43668a",
+    "commit_sha": "aad0bbd600a8519d2d55d54ba001467edc587c36",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2602",
     "checks": {
       "local": {
@@ -73483,12 +73483,16 @@
         "git_diff_check": "passed",
         "scope_validation": "passed"
       },
-      "github": null
+      "github": {
+        "state": "MERGED",
+        "required_checks": "passed",
+        "merge_commit_sha": "aad0bbd600a8519d2d55d54ba001467edc587c36"
+      }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-02T17:15:49Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "allowed_paths": [
@@ -73496,7 +73500,8 @@
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
-      "notes": "Only PR1 audit mapping artifacts and authorized train metadata are changed. backend/vendor is ignored and not staged."
+      "notes": "Only PR1 audit mapping artifacts and authorized train metadata are changed. backend/vendor is ignored and not staged.",
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -73520,9 +73525,15 @@
         "status": "pr_open",
         "at": "2026-07-02T16:25:30Z",
         "note": "Opened PR #2602 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T02:40:59Z",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "Reconciled after GitHub reported PR #2602 merged; origin/main contains merge commit; local and remote branches were cleaned before PR2 started."
       }
     ],
-    "updated_at": "2026-07-02T16:25:30Z"
+    "updated_at": "2026-07-03T02:40:59Z"
   },
   "BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01": {
     "id": "BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01",
@@ -73530,22 +73541,48 @@
     "branch": "codex/big5-selector-public-payload-hygiene-01",
     "base": "main",
     "title": "BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01: Big Five selector public payload hygiene",
-    "status": "authorized",
+    "status": "local_checks_passed",
     "depends_on": [
       "BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01"
     ],
-    "commit_sha": null,
+    "commit_sha": "862a6be9c2c6d08820cf175a797f927f7f02e70e",
     "pr_url": null,
-    "checks": [],
+    "checks": {
+      "local": {
+        "php_artisan_big5_result_page_v2_agent_audit_strict": "passed",
+        "BigFiveResultPageV2AssetAgentTest": "passed_with_phpunit_warnings_exit_0",
+        "BigFiveResultPageV2SelectorAssetValidatorTest": "passed_with_phpunit_warnings_exit_0",
+        "BigFiveResultPageV2ContentAssetLookupTest": "passed_with_phpunit_warnings_exit_0",
+        "selector_public_payload_runtime_flag_scan": "passed",
+        "selector_jsonl_parse": "passed",
+        "json_parse": "passed",
+        "yaml_parse": "passed",
+        "git_diff_check": "passed",
+        "scope_validation": "passed"
+      },
+      "github": null
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "allowed_paths": [
+        "backend/content_assets/big5/result_page_v2/agent_runs/**/selector_asset_candidates.jsonl",
+        "backend/content_assets/big5/result_page_v2/agent_runs/**/SHA256SUMS*",
+        "backend/content_assets/big5/result_page_v2/staging_candidate_imports/**",
+        "backend/content_assets/big5/result_page_v2/qa/**",
+        "backend/tests/**BigFiveResultPageV2**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "generated/pr-train-sidecar-issues/**",
+        "backend/generated/big5_content_asset_scientific_audit/**"
+      ],
+      "notes": "Changed files are limited to Big Five selector candidate JSONL, matching SHA256SUMS files, BigFiveResultPageV2 tests, and PR train metadata. backend/vendor and generated Filament assets remain ignored and unstaged."
     },
     "transitions": [
       {
@@ -73553,8 +73590,33 @@
         "from": null,
         "to": "authorized",
         "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      },
+      {
+        "at": "2026-07-03T02:40:59Z",
+        "from": "authorized",
+        "to": "in_progress",
+        "note": "Started PR2 from latest origin/main after PR1 merge cleanup; scope limited to selector public payload hygiene, tests, and train ledger reconciliation."
+      },
+      {
+        "at": "2026-07-03T02:47:00Z",
+        "from": "in_progress",
+        "to": "in_progress",
+        "note": "Expanded PR2 allowed paths to include agent run SHA256SUMS files because selector artifact JSONL hygiene rewrites require checksum refresh for immutable artifact validation."
+      },
+      {
+        "at": "2026-07-03T02:49:20Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Audit strict, focused PHPUnit, JSON/YAML parse, selector public payload runtime flag scan, git diff check, and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T02:50:05Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed scoped selector public payload hygiene changes after local validation passed."
       }
-    ]
+    ],
+    "updated_at": "2026-07-03T02:50:05Z"
   },
   "BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01": {
     "id": "BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01",
