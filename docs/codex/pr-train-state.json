@@ -14544,7 +14544,7 @@
         "evidence": "All GitHub PR checks passed on PR #2691: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": "38ca4058f19b63562608631675015f7a26da8e9d",
+    "commit_sha": "2a7fd3bc153a4ffee8976c70083f99dc66a70ac3",
     "depends_on": [
       "ENNEA-RP-23"
     ],
@@ -14583,14 +14583,19 @@
         "at": "2026-07-03T09:23:55.862Z",
         "status": "ready_to_merge",
         "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2691 is clean and ready for squash merge."
+      },
+      {
+        "at": "2026-07-03T09:33:36.430Z",
+        "status": "merged",
+        "notes": "Reconciled after PR #2691 squash merge; origin/main contains merge commit 2a7fd3bc153a4ffee8976c70083f99dc66a70ac3, local main was synced, and local/remote task branches were cleaned before ENNEA-RP-25 execution."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-24",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T09:30:36Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2691",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -14609,7 +14614,7 @@
       ],
       "evidence": "Changed files are confined to strength expression content in group/type registries plus train ledger reconciliation."
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ENNEA-RP-24: fix(enneagram): repair strength expression",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -14620,9 +14625,48 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-24 merged as PR #2691 and merge commit 2a7fd3bc153a4ffee8976c70083f99dc66a70ac3 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully after fixing a current-scope missing comma in group_registry.json."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14734 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 132 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 262 warnings, 2 passed, 83641 assertions, duration 29.04s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2692 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on PR #2692: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "fddfe992e8486e822e0d77ffd32d51d4254db3ce",
     "depends_on": [
       "ENNEA-RP-24"
     ],
@@ -14631,13 +14675,38 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T09:33:36.430Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-25-cost-expression after ENNEA-RP-24 merge and cleanup; scope is cost expression content in group/type registries plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T09:35:30.579Z",
+        "status": "local_validation_passed",
+        "notes": "Reframed overuse cost copy across T1-T9 growth costs and group cost_expression fields without shaming or fixed-defect language; required local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T09:35:51.629Z",
+        "status": "committed",
+        "notes": "Created local implementation commit fddfe992e8486e822e0d77ffd32d51d4254db3ce for ENNEA-RP-25 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T09:36:39.655Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2692 for ENNEA-RP-25 cost expression content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T09:43:20.592Z",
+        "status": "ready_to_merge",
+        "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2692 is clean and ready for squash merge."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-25",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2692",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -14648,9 +14717,16 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [],
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json",
+        "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "evidence": "Changed files are confined to cost expression content in group/type registries plus train ledger reconciliation."
     },
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-25: fix(enneagram): repair cost expression",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
