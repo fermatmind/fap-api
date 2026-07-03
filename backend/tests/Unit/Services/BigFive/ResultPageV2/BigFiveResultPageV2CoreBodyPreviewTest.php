@@ -3536,6 +3536,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_result_page_runtime_contract_files(): void
+    {
+        $changed = [
+            'backend/app/Services/Enneagram/EnneagramPublicProjectionService.php',
+            'backend/app/Services/Report/EnneagramReportComposer.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_enneagram_phase8b_candidate_asset_reconciliation_changes(): void
     {
         $changed = [
@@ -4955,6 +4965,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isEnneagramResultPageRegistryContentAssetFile($file)) {
+                continue;
+            }
+
+            if ($this->isEnneagramResultPageRuntimeContractFile($file)) {
                 continue;
             }
 
@@ -7784,6 +7798,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isEnneagramResultPageRegistryContentAssetFile(string $file): bool
     {
         return preg_match('#^backend/content_packs/ENNEAGRAM/v2/registry/[a-z_]+_registry\\.json$#', $file) === 1;
+    }
+
+    private function isEnneagramResultPageRuntimeContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Enneagram/EnneagramPublicProjectionService.php',
+            'backend/app/Services/Report/EnneagramReportComposer.php',
+        ], true);
     }
 
     private function isEnneagramRegistryValidatorFile(string $file): bool

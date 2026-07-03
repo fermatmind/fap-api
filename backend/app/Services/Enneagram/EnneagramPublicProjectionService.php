@@ -686,6 +686,33 @@ final class EnneagramPublicProjectionService
         return 'mid';
     }
 
+    private function scoreBandLabel(?float $score, string $language): string
+    {
+        if ($score === null) {
+            return $language === 'en' ? 'not enough score data' : '分数资料不足';
+        }
+
+        return match ($this->bandForScore($score)) {
+            'high' => $language === 'en' ? 'more salient in this answer profile' : '本次答题轮廓中较突出',
+            'low' => $language === 'en' ? 'less salient in this answer profile' : '本次答题轮廓中较不突出',
+            default => $language === 'en' ? 'moderate in this answer profile' : '本次答题轮廓中居中',
+        };
+    }
+
+    private function all9ScoreInterpretationLabel(string $language): string
+    {
+        return $language === 'en'
+            ? 'relative within-profile signal'
+            : '答题轮廓内的相对线索';
+    }
+
+    private function all9ScoreBoundaryNote(string $language): string
+    {
+        return $language === 'en'
+            ? 'This is not a norm score, diagnostic label, ability rating, or fixed personality verdict.'
+            : '这不是常模分数、诊断标签、能力评价或固定人格定论。';
+    }
+
     private function normalizeLanguage(string $locale): string
     {
         return str_starts_with(strtolower(trim($locale)), 'en') ? 'en' : 'zh';
@@ -811,6 +838,10 @@ final class EnneagramPublicProjectionService
                 'rank' => isset($rankRow['rank']) ? (int) $rankRow['rank'] : null,
                 'score_norm' => $scoreNorm,
                 'score_display' => $this->formatDisplayScore($scoreNorm),
+                'score_band' => $this->bandForScore($scoreNorm ?? 0.0),
+                'score_band_label' => $this->scoreBandLabel($scoreNorm, $language),
+                'score_interpretation_label' => $this->all9ScoreInterpretationLabel($language),
+                'score_boundary_note' => $this->all9ScoreBoundaryNote($language),
                 'label' => $this->typeLabel($typeCode, $language),
                 'center' => $this->typeTrait($typeCode, 'center'),
                 'stance' => $this->typeTrait($typeCode, 'stance'),

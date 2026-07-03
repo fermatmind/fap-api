@@ -102,6 +102,32 @@ final class EnneagramReportComposerV2Test extends TestCase
         );
     }
 
+    public function test_all9_profile_module_labels_scores_as_relative_profile_signals(): void
+    {
+        $payload = $this->composeReportV2($this->syntheticProjectionInput('enneagram_likert_105', [
+            'T3' => 89.0,
+            'T8' => 62.0,
+            'T1' => 55.0,
+            'T6' => 37.0,
+            'T2' => 28.0,
+            'T7' => 24.0,
+            'T4' => 21.0,
+            'T5' => 16.0,
+            'T9' => 13.0,
+        ]));
+
+        $module = $this->module($payload, 'all9_profile');
+        $items = (array) data_get($module, 'content.items');
+        $first = (array) ($items[0] ?? []);
+
+        $this->assertSame('答题轮廓内的相对线索', data_get($module, 'content.score_axis_label'));
+        $this->assertStringContainsString('不是常模排名、诊断标签、能力评价或固定人格定论', (string) data_get($module, 'content.boundary_note'));
+        $this->assertSame(['norm_comparison', 'diagnosis', 'ability_rating', 'personality_verdict'], data_get($module, 'content.not_for'));
+        $this->assertCount(9, $items);
+        $this->assertSame('答题轮廓内的相对线索', $first['score_interpretation_label'] ?? null);
+        $this->assertSame('这不是常模分数、诊断标签、能力评价或固定人格定论。', $first['score_boundary_note'] ?? null);
+    }
+
     public function test_unavailable_v2_report_uses_public_error_code_without_registry_exception_details(): void
     {
         $composer = app(EnneagramReportComposer::class);
