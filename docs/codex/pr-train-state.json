@@ -16674,11 +16674,12 @@
         "notes": "Initial local validation failed because technical_note.link_label.label is contract-locked; fixed within ui_copy_registry scope by restoring the label and moving expanded copy to body_template. Full validation passed with existing warnings only."
       },
       "github": {
-        "status": "pending",
-        "pr": 2709
+        "status": "pass",
+        "pr": 2709,
+        "head_sha": "18a0acb71f9177f260b5dccc36cab12dc96cb8c3"
       }
     },
-    "commit_sha": "bc0c9c0c3da2a847d1ecb613ecf2e9dd6e0d3c27",
+    "commit_sha": "18a0acb71f9177f260b5dccc36cab12dc96cb8c3",
     "depends_on": [
       "ENNEA-RP-41"
     ],
@@ -16707,6 +16708,11 @@
         "at": "2026-07-03T14:36:33Z",
         "status": "github_checks_pending",
         "notes": "Opened PR #2709 and pushed branch for required GitHub checks."
+      },
+      {
+        "at": "2026-07-03T14:42:25Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed and final scope validation remained within ENNEA-RP-42 allowed paths."
       }
     ],
     "failure_reason": null,
@@ -16732,7 +16738,7 @@
       ],
       "outside_scope_files": []
     },
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-42: fix(enneagram): repair technical note link",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
