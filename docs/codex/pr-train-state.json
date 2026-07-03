@@ -15581,7 +15581,6 @@
         "command": "git diff --check"
       }
     },
-    "commit_sha": null,
     "depends_on": [
       "ENNEA-RP-32"
     ],
@@ -15595,6 +15594,12 @@
         "at": "2026-07-03T11:54:59.864Z",
         "status": "local_validation_passed",
         "notes": "Required local checks passed and changed files remained within ENNEA-RP-33 scope."
+      },
+      {
+        "at": "2026-07-03T11:56:19.490Z",
+        "status": "committed",
+        "notes": "Implementation commit created after local validation.",
+        "commit_sha": "21ad8ce9c7c01ddb6228246874994e39caf6243f"
       }
     ],
     "failure_reason": null,
@@ -15620,9 +15625,10 @@
       ],
       "evidence": "Changed files are confined to conflict_script scenario copy, relationship_pack.conflict_trigger_points, relationship_pack.repair_language, and train ledger reconciliation/state."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-33: fix(enneagram): repair conflict script",
-    "train_scope": "enneagram_result_page_content_asset_repair"
+    "train_scope": "enneagram_result_page_content_asset_repair",
+    "commit_sha": "21ad8ce9c7c01ddb6228246874994e39caf6243f"
   },
   "ENNEA-RP-34": {
     "base": "main",
