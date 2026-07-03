@@ -16351,6 +16351,11 @@
         "status": "pass",
         "command": "gh pr create --repo fermatmind/fap-api --base main --head codex/ennea-rp-39-history-share-retake-placeholder",
         "evidence": "Opened PR #2706 for ENNEA-RP-39."
+      },
+      "github_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2706 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All reported GitHub checks passed for PR #2706 before ready_to_merge ledger update."
       }
     },
     "commit_sha": "6c2d31106d7ce9b1674189f85c577f7c0a8a52e3",
@@ -16384,6 +16389,11 @@
         "status": "pr_open",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/2706",
         "notes": "Opened PR #2706 for ENNEA-RP-39."
+      },
+      {
+        "at": "2026-07-03T13:53:49.259Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed; PR is ready to merge after final head-check confirmation."
       }
     ],
     "failure_reason": null,
@@ -16409,7 +16419,7 @@
       ],
       "evidence": "Changed files are confined to history/share/retake placeholder UI/method copy and train ledger reconciliation/state."
     },
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-39: fix(enneagram): repair history share retake placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
