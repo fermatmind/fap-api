@@ -6575,8 +6575,21 @@
   "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01": {
     "base": "main",
     "branch": "codex/big5-share-safety-scientific-repair-01",
-    "checks": [],
-    "commit_sha": null,
+    "checks": {
+      "commands": [
+        "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi",
+        "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+        "git diff --check"
+      ],
+      "local": "passed_after_second_rebase",
+      "github": "pending_after_second_rebase",
+      "scope_validation": "passed"
+    },
+    "commit_sha": "e20ec3440",
     "depends_on": [
       "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01"
     ],
@@ -6584,7 +6597,7 @@
     "id": "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2667",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -6593,7 +6606,7 @@
       "local_validation_passed": null,
       "post_merge_revalidated": null
     },
-    "status": "authorized",
+    "status": "ready_to_merge",
     "title": "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01: Big Five share safety scientific repair",
     "transitions": [
       {
@@ -6602,7 +6615,11 @@
         "note": "User authorized Big Five result-page scientific content repair PR train entry.",
         "to": "authorized"
       }
-    ]
+    ],
+    "post_merge": {
+      "post_merge_revalidated": null
+    },
+    "updated_at": "2026-07-03T05:20:40Z"
   },
   "CAREER-1046-OPS-SCOPE-RECONCILIATION-01": {
     "base": "main",
