@@ -5,96 +5,103 @@
     "eq.cross_context.boundary.default": {
       "zh-CN": {
         "title": "跨测评上下文边界",
-        "summary": "这一模块只说明你还完成过哪些相关测评，以及这些测评可以如何辅助阅读 EQ 结果。",
-        "how_to_use": "把 MBTI、大五人格或九型人格看作不同问题的证据来源：它们不能改写 EQ 分数，也不能替代情绪与关系自我报告。",
-        "claim_boundary": "不用于职业预测、招聘筛选、临床诊断、固定人格标签或情商能力宣称。"
+        "summary": "这一模块只说明相关测评可以怎样辅助阅读 EQ-60 结果。它不是把多个测试合成一个更“真实”的结论。",
+        "how_to_use": "把 MBTI、大五、九型、RIASEC 等结果当作不同问题框架下的反思线索：它们可以帮助提出问题，但不能改写 EQ 分数、替代 EQ-60 自我报告，或证明现实行为。",
+        "claim_boundary": "不用于情商能力排名、职业预测、招聘筛选、临床诊断、关系结局判断、固定人格标签或高风险决策。"
       },
       "en": {
-        "title": "Cross-assessment context boundary",
-        "summary": "This module only explains which related assessments are available and how they can support reading the EQ result.",
-        "how_to_use": "Treat MBTI, Big Five, and Enneagram as evidence from different questions. They do not rewrite EQ scores or replace the emotional and relational self-report result.",
-        "claim_boundary": "Not for career prediction, hiring, clinical diagnosis, fixed identity labels, or emotional ability claims."
+        "title": "Cross-Assessment Context Boundary",
+        "summary": "This module only explains how related assessments can support reading the EQ-60 result. It does not combine multiple tests into a more “true” conclusion.",
+        "how_to_use": "Treat MBTI, Big Five, Enneagram, RIASEC, and related results as reflection signals from different question frameworks. They can help form better questions, but they do not rewrite EQ scores, replace EQ-60 self-report, or prove real-world behavior.",
+        "claim_boundary": "Not for emotional-ability ranking, career prediction, hiring, clinical diagnosis, relationship-outcome judgment, fixed identity labels, or high-stakes decisions."
+      },
+      "meta": {
+        "claim_risk": "high",
+        "risk_notes": "Cross-assessment context is reflective only. It must not become deterministic profile fusion, job/hiring prediction, clinical interpretation, ability ranking, or relationship-outcome judgment."
       }
     },
     "eq.cross_context.mbti.available": {
       "zh-CN": {
         "title": "EQ 和 MBTI 怎么一起看",
-        "summary": "MBTI 更像偏好和信息处理风格；EQ 报告更关注你在情绪、反馈、冲突和关系修复中的自我感知。两者可以互相补充，但不要混成一个总分。",
-        "how_to_use": "MBTI 更像偏好和信息处理风格；EQ 报告更关注你在情绪、反馈、冲突和关系修复中的自我感知。两者可以互相补充，但不要混成一个总分。",
-        "claim_boundary": "不根据 MBTI 类型推断情商高低、工作表现、职业适配或关系成败。"
+        "summary": "MBTI 可以提供偏好、精力使用和信息处理风格，EQ-60 则呈现本次作答中的情绪与关系自我感知。两者适合并列阅读，不适合合成一个总分或标签。",
+        "how_to_use": "先看 EQ-60 的四维信号，再用 MBTI 提出更具体的反思问题：哪些场景会放大这个信号，哪些只是表达风格差异。",
+        "claim_boundary": "不要用跨测评组合推断情商高低、真实能力、岗位匹配、招聘结论、临床状态、关系成败或稳定人格优劣。"
       },
       "en": {
-        "title": "How EQ and MBTI work together",
-        "summary": "MBTI is closer to preference and information-processing style. This EQ report focuses on self-perceived patterns in emotion, feedback, conflict, and repair. They can complement each other, but should not be merged into one score.",
-        "how_to_use": "MBTI is closer to preference and information-processing style. This EQ report focuses on self-perceived patterns in emotion, feedback, conflict, and repair. They can complement each other, but should not be merged into one score.",
-        "claim_boundary": "Do not infer EQ level, job performance, career fit, or relationship outcomes from MBTI type."
+        "title": "How EQ and MBTI Work Together",
+        "summary": "MBTI can add preferences, energy use, and information-processing style; EQ-60 presents emotional-relational self-perception in this response set. They are useful side by side, not as one fused score or label.",
+        "how_to_use": "Start with the EQ-60 dimension signals, then use MBTI to ask more precise reflection questions: which contexts may amplify the signal, and which parts may be style differences.",
+        "claim_boundary": "Do not use cross-assessment combinations to infer EQ level, true ability, job fit, hiring conclusions, clinical status, relationship outcomes, or fixed personality quality."
       },
       "meta": {
         "v19_source_id": "eq.compare.mbti",
-        "claim_risk": "medium"
+        "claim_risk": "medium",
+        "risk_notes": "Related-assessment context only; no deterministic fusion or high-stakes inference."
       }
     },
     "eq.cross_context.big_five.available": {
       "zh-CN": {
         "title": "EQ 和大五人格怎么一起看",
-        "summary": "大五更稳定地描述人格倾向；EQ 报告更关注情绪与关系场景中的可练习策略。大五解释“倾向”，EQ 提供“下一步怎么做”。",
-        "how_to_use": "大五更稳定地描述人格倾向；EQ 报告更关注情绪与关系场景中的可练习策略。大五解释“倾向”，EQ 提供“下一步怎么做”。",
-        "claim_boundary": "不把大五特质转写为临床结论、招聘结论或固定人格优劣判断。"
+        "summary": "大五人格 可以提供较宽的人格倾向和行为风格背景，EQ-60 则呈现本次作答中的情绪与关系自我感知。两者适合并列阅读，不适合合成一个总分或标签。",
+        "how_to_use": "先看 EQ-60 的四维信号，再用 大五人格 提出更具体的反思问题：哪些场景会放大这个信号，哪些只是表达风格差异。",
+        "claim_boundary": "不要用跨测评组合推断情商高低、真实能力、岗位匹配、招聘结论、临床状态、关系成败或稳定人格优劣。"
       },
       "en": {
-        "title": "How EQ and Big Five work together",
-        "summary": "Big Five describes broader personality tendencies. This EQ report focuses on trainable strategies in emotional and relational situations. Big Five explains tendencies; EQ helps choose the next practice.",
-        "how_to_use": "Big Five describes broader personality tendencies. This EQ report focuses on trainable strategies in emotional and relational situations. Big Five explains tendencies; EQ helps choose the next practice.",
-        "claim_boundary": "Do not turn Big Five traits into clinical conclusions, hiring decisions, or fixed judgments of personality quality."
+        "title": "How EQ and Big Five Work Together",
+        "summary": "Big Five can add broad personality-tendency and behavioral-style context; EQ-60 presents emotional-relational self-perception in this response set. They are useful side by side, not as one fused score or label.",
+        "how_to_use": "Start with the EQ-60 dimension signals, then use Big Five to ask more precise reflection questions: which contexts may amplify the signal, and which parts may be style differences.",
+        "claim_boundary": "Do not use cross-assessment combinations to infer EQ level, true ability, job fit, hiring conclusions, clinical status, relationship outcomes, or fixed personality quality."
       },
       "meta": {
         "v19_source_id": "eq.compare.big_five",
-        "claim_risk": "medium"
+        "claim_risk": "medium",
+        "risk_notes": "Related-assessment context only; no deterministic fusion or high-stakes inference."
       }
     },
     "eq.cross_context.enneagram.available": {
       "zh-CN": {
         "title": "EQ 和九型人格怎么一起看",
-        "summary": "九型更关注动机和防御模式；EQ 报告更关注你如何识别、调节、回应和修复情绪关系。一个解释内在驱动，一个帮助处理具体场景。",
-        "how_to_use": "九型更关注动机和防御模式；EQ 报告更关注你如何识别、调节、回应和修复情绪关系。一个解释内在驱动，一个帮助处理具体场景。",
-        "claim_boundary": "不根据九型类型推断治疗需要、招聘适配、职业成功或关系结局。"
+        "summary": "九型人格 可以提供动机、防御和压力下叙事方式，EQ-60 则呈现本次作答中的情绪与关系自我感知。两者适合并列阅读，不适合合成一个总分或标签。",
+        "how_to_use": "先看 EQ-60 的四维信号，再用 九型人格 提出更具体的反思问题：哪些场景会放大这个信号，哪些只是表达风格差异。",
+        "claim_boundary": "不要用跨测评组合推断情商高低、真实能力、岗位匹配、招聘结论、临床状态、关系成败或稳定人格优劣。"
       },
       "en": {
-        "title": "How EQ and Enneagram work together",
-        "summary": "Enneagram focuses more on motivation and defensive patterns. This EQ report focuses on how you identify, regulate, respond, and repair in emotional-relational situations. One explains inner drivers; the other helps with specific moments.",
-        "how_to_use": "Enneagram focuses more on motivation and defensive patterns. This EQ report focuses on how you identify, regulate, respond, and repair in emotional-relational situations. One explains inner drivers; the other helps with specific moments.",
-        "claim_boundary": "Do not infer treatment needs, hiring fit, career success, or relationship outcomes from Enneagram type."
+        "title": "How EQ and Enneagram Work Together",
+        "summary": "Enneagram can add motivation, defenses, and stress narratives; EQ-60 presents emotional-relational self-perception in this response set. They are useful side by side, not as one fused score or label.",
+        "how_to_use": "Start with the EQ-60 dimension signals, then use Enneagram to ask more precise reflection questions: which contexts may amplify the signal, and which parts may be style differences.",
+        "claim_boundary": "Do not use cross-assessment combinations to infer EQ level, true ability, job fit, hiring conclusions, clinical status, relationship outcomes, or fixed personality quality."
       },
       "meta": {
         "v19_source_id": "eq.compare.enneagram",
-        "claim_risk": "medium"
+        "claim_risk": "medium",
+        "risk_notes": "Related-assessment context only; no deterministic fusion or high-stakes inference."
       }
     },
     "eq.cross.mbti.sa.low": {
       "zh-CN": {
-        "title": "MBTI 与 自我觉察：low",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 自我觉察：较低自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为较低自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and self-awareness: low",
-        "summary": "MBTI can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × self-awareness: lower self-report",
+        "summary": "This signal only means that when self-awareness is in the lower self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.sa.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.sa.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "SA",
@@ -104,29 +111,29 @@
     },
     "eq.cross.mbti.sa.medium": {
       "zh-CN": {
-        "title": "MBTI 与 自我觉察：medium",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 自我觉察：中等自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为中等自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and self-awareness: medium",
-        "summary": "MBTI can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × self-awareness: mid-range self-report",
+        "summary": "This signal only means that when self-awareness is in the mid-range self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.sa.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.sa.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "SA",
@@ -136,29 +143,29 @@
     },
     "eq.cross.mbti.sa.high": {
       "zh-CN": {
-        "title": "MBTI 与 自我觉察：high",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 自我觉察：较高自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为较高自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and self-awareness: high",
-        "summary": "MBTI can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × self-awareness: higher self-report",
+        "summary": "This signal only means that when self-awareness is in the higher self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.sa.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.sa.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "SA",
@@ -168,29 +175,29 @@
     },
     "eq.cross.mbti.er.low": {
       "zh-CN": {
-        "title": "MBTI 与 情绪调节：low",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 情绪调节：较低自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为较低自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and emotion regulation: low",
-        "summary": "MBTI can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × emotion regulation: lower self-report",
+        "summary": "This signal only means that when emotion regulation is in the lower self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.er.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.er.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "ER",
@@ -200,29 +207,29 @@
     },
     "eq.cross.mbti.er.medium": {
       "zh-CN": {
-        "title": "MBTI 与 情绪调节：medium",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 情绪调节：中等自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为中等自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and emotion regulation: medium",
-        "summary": "MBTI can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × emotion regulation: mid-range self-report",
+        "summary": "This signal only means that when emotion regulation is in the mid-range self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.er.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.er.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "ER",
@@ -232,29 +239,29 @@
     },
     "eq.cross.mbti.er.high": {
       "zh-CN": {
-        "title": "MBTI 与 情绪调节：high",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 情绪调节：较高自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为较高自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and emotion regulation: high",
-        "summary": "MBTI can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × emotion regulation: higher self-report",
+        "summary": "This signal only means that when emotion regulation is in the higher self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.er.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.er.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "ER",
@@ -264,29 +271,29 @@
     },
     "eq.cross.mbti.em.low": {
       "zh-CN": {
-        "title": "MBTI 与 共情理解：low",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 共情理解：较低自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为较低自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and empathy: low",
-        "summary": "MBTI can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × empathic understanding: lower self-report",
+        "summary": "This signal only means that when empathic understanding is in the lower self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.em.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.em.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "EM",
@@ -296,29 +303,29 @@
     },
     "eq.cross.mbti.em.medium": {
       "zh-CN": {
-        "title": "MBTI 与 共情理解：medium",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 共情理解：中等自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为中等自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and empathy: medium",
-        "summary": "MBTI can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × empathic understanding: mid-range self-report",
+        "summary": "This signal only means that when empathic understanding is in the mid-range self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.em.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.em.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "EM",
@@ -328,29 +335,29 @@
     },
     "eq.cross.mbti.em.high": {
       "zh-CN": {
-        "title": "MBTI 与 共情理解：high",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 共情理解：较高自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为较高自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and empathy: high",
-        "summary": "MBTI can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × empathic understanding: higher self-report",
+        "summary": "This signal only means that when empathic understanding is in the higher self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.em.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.em.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "EM",
@@ -360,29 +367,29 @@
     },
     "eq.cross.mbti.rm.low": {
       "zh-CN": {
-        "title": "MBTI 与 关系管理：low",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 关系管理：较低自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为较低自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and relationship management: low",
-        "summary": "MBTI can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × relationship management: lower self-report",
+        "summary": "This signal only means that when relationship management is in the lower self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.rm.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.rm.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "RM",
@@ -392,29 +399,29 @@
     },
     "eq.cross.mbti.rm.medium": {
       "zh-CN": {
-        "title": "MBTI 与 关系管理：medium",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 关系管理：中等自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为中等自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and relationship management: medium",
-        "summary": "MBTI can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × relationship management: mid-range self-report",
+        "summary": "This signal only means that when relationship management is in the mid-range self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.rm.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.rm.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "RM",
@@ -424,29 +431,29 @@
     },
     "eq.cross.mbti.rm.high": {
       "zh-CN": {
-        "title": "MBTI 与 关系管理：high",
-        "summary": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "MBTI 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "MBTI × 关系管理：较高自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为较高自我报告时，可以用 MBTI 的偏好、精力使用和信息处理风格来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：MBTI 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "MBTI 可以帮你提出“我通常用什么风格处理情绪信息”的问题，但不能说明你的情绪能力高低。",
+        "difference": "MBTI 是偏好语言；EQ-60 是本次自我报告中的情绪与关系信号。两者不能互相校正分数。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "MBTI and relationship management: high",
-        "summary": "MBTI can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "MBTI can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "MBTI × relationship management: higher self-report",
+        "summary": "This signal only means that when relationship management is in the higher self-report range, MBTI may provide preferences, energy use, and information-processing style for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether MBTI style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "MBTI can help ask how you tend to process emotional information, but it does not determine emotional ability.",
+        "difference": "MBTI is preference language; EQ-60 is an emotional-relational signal from this self-report. The two should not be used to correct each other’s scores.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.mbti.rm.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.mbti.rm.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "mbti",
         "condition": {
           "eq_dimension": "RM",
@@ -456,29 +463,29 @@
     },
     "eq.cross.big_five.sa.low": {
       "zh-CN": {
-        "title": "Big Five 与 自我觉察：low",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 自我觉察：较低自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为较低自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and self-awareness: low",
-        "summary": "Big Five can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × self-awareness: lower self-report",
+        "summary": "This signal only means that when self-awareness is in the lower self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.sa.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.sa.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "SA",
@@ -488,29 +495,29 @@
     },
     "eq.cross.big_five.sa.medium": {
       "zh-CN": {
-        "title": "Big Five 与 自我觉察：medium",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 自我觉察：中等自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为中等自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and self-awareness: medium",
-        "summary": "Big Five can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × self-awareness: mid-range self-report",
+        "summary": "This signal only means that when self-awareness is in the mid-range self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.sa.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.sa.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "SA",
@@ -520,29 +527,29 @@
     },
     "eq.cross.big_five.sa.high": {
       "zh-CN": {
-        "title": "Big Five 与 自我觉察：high",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 自我觉察：较高自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为较高自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and self-awareness: high",
-        "summary": "Big Five can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × self-awareness: higher self-report",
+        "summary": "This signal only means that when self-awareness is in the higher self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.sa.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.sa.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "SA",
@@ -552,29 +559,29 @@
     },
     "eq.cross.big_five.er.low": {
       "zh-CN": {
-        "title": "Big Five 与 情绪调节：low",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 情绪调节：较低自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为较低自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and emotion regulation: low",
-        "summary": "Big Five can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × emotion regulation: lower self-report",
+        "summary": "This signal only means that when emotion regulation is in the lower self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.er.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.er.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "ER",
@@ -584,29 +591,29 @@
     },
     "eq.cross.big_five.er.medium": {
       "zh-CN": {
-        "title": "Big Five 与 情绪调节：medium",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 情绪调节：中等自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为中等自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and emotion regulation: medium",
-        "summary": "Big Five can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × emotion regulation: mid-range self-report",
+        "summary": "This signal only means that when emotion regulation is in the mid-range self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.er.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.er.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "ER",
@@ -616,29 +623,29 @@
     },
     "eq.cross.big_five.er.high": {
       "zh-CN": {
-        "title": "Big Five 与 情绪调节：high",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 情绪调节：较高自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为较高自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and emotion regulation: high",
-        "summary": "Big Five can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × emotion regulation: higher self-report",
+        "summary": "This signal only means that when emotion regulation is in the higher self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.er.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.er.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "ER",
@@ -648,29 +655,29 @@
     },
     "eq.cross.big_five.em.low": {
       "zh-CN": {
-        "title": "Big Five 与 共情理解：low",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 共情理解：较低自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为较低自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and empathy: low",
-        "summary": "Big Five can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × empathic understanding: lower self-report",
+        "summary": "This signal only means that when empathic understanding is in the lower self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.em.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.em.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "EM",
@@ -680,29 +687,29 @@
     },
     "eq.cross.big_five.em.medium": {
       "zh-CN": {
-        "title": "Big Five 与 共情理解：medium",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 共情理解：中等自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为中等自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and empathy: medium",
-        "summary": "Big Five can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × empathic understanding: mid-range self-report",
+        "summary": "This signal only means that when empathic understanding is in the mid-range self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.em.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.em.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "EM",
@@ -712,29 +719,29 @@
     },
     "eq.cross.big_five.em.high": {
       "zh-CN": {
-        "title": "Big Five 与 共情理解：high",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 共情理解：较高自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为较高自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and empathy: high",
-        "summary": "Big Five can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × empathic understanding: higher self-report",
+        "summary": "This signal only means that when empathic understanding is in the higher self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.em.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.em.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "EM",
@@ -744,29 +751,29 @@
     },
     "eq.cross.big_five.rm.low": {
       "zh-CN": {
-        "title": "Big Five 与 关系管理：low",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 关系管理：较低自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为较低自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and relationship management: low",
-        "summary": "Big Five can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × relationship management: lower self-report",
+        "summary": "This signal only means that when relationship management is in the lower self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.rm.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.rm.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "RM",
@@ -776,29 +783,29 @@
     },
     "eq.cross.big_five.rm.medium": {
       "zh-CN": {
-        "title": "Big Five 与 关系管理：medium",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 关系管理：中等自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为中等自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and relationship management: medium",
-        "summary": "Big Five can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × relationship management: mid-range self-report",
+        "summary": "This signal only means that when relationship management is in the mid-range self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.rm.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.rm.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "RM",
@@ -808,29 +815,29 @@
     },
     "eq.cross.big_five.rm.high": {
       "zh-CN": {
-        "title": "Big Five 与 关系管理：high",
-        "summary": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "Big Five 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "大五人格 × 关系管理：较高自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为较高自我报告时，可以用 大五人格 的较宽的人格倾向和行为风格背景来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：大五人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "大五可以帮助理解情绪反应背后的长期倾向背景，但不能替代 EQ-60 的情绪与关系自我报告。",
+        "difference": "大五描述倾向范围；EQ-60 描述这次作答呈现的情绪觉察、调节、共情和关系信号。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Big Five and relationship management: high",
-        "summary": "Big Five can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Big Five can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Big Five × relationship management: higher self-report",
+        "summary": "This signal only means that when relationship management is in the higher self-report range, Big Five may provide broad personality-tendency and behavioral-style context for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Big Five style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Big Five can give background for longer-term tendencies behind emotional responses, but it does not replace the EQ-60 emotional-relational self-report.",
+        "difference": "Big Five describes broad tendencies; EQ-60 describes the signals in this response set around awareness, regulation, empathy, and relationship handling.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.big_five.rm.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.big_five.rm.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "big_five",
         "condition": {
           "eq_dimension": "RM",
@@ -840,29 +847,29 @@
     },
     "eq.cross.enneagram.sa.low": {
       "zh-CN": {
-        "title": "九型人格 与 自我觉察：low",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 自我觉察：较低自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为较低自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and self-awareness: low",
-        "summary": "Enneagram can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × self-awareness: lower self-report",
+        "summary": "This signal only means that when self-awareness is in the lower self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.sa.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.sa.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "SA",
@@ -872,29 +879,29 @@
     },
     "eq.cross.enneagram.sa.medium": {
       "zh-CN": {
-        "title": "九型人格 与 自我觉察：medium",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 自我觉察：中等自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为中等自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and self-awareness: medium",
-        "summary": "Enneagram can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × self-awareness: mid-range self-report",
+        "summary": "This signal only means that when self-awareness is in the mid-range self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.sa.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.sa.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "SA",
@@ -904,29 +911,29 @@
     },
     "eq.cross.enneagram.sa.high": {
       "zh-CN": {
-        "title": "九型人格 与 自我觉察：high",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 自我觉察：较高自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为较高自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and self-awareness: high",
-        "summary": "Enneagram can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × self-awareness: higher self-report",
+        "summary": "This signal only means that when self-awareness is in the higher self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.sa.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.sa.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "SA",
@@ -936,29 +943,29 @@
     },
     "eq.cross.enneagram.er.low": {
       "zh-CN": {
-        "title": "九型人格 与 情绪调节：low",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 情绪调节：较低自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为较低自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and emotion regulation: low",
-        "summary": "Enneagram can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × emotion regulation: lower self-report",
+        "summary": "This signal only means that when emotion regulation is in the lower self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.er.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.er.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "ER",
@@ -968,29 +975,29 @@
     },
     "eq.cross.enneagram.er.medium": {
       "zh-CN": {
-        "title": "九型人格 与 情绪调节：medium",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 情绪调节：中等自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为中等自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and emotion regulation: medium",
-        "summary": "Enneagram can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × emotion regulation: mid-range self-report",
+        "summary": "This signal only means that when emotion regulation is in the mid-range self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.er.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.er.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "ER",
@@ -1000,29 +1007,29 @@
     },
     "eq.cross.enneagram.er.high": {
       "zh-CN": {
-        "title": "九型人格 与 情绪调节：high",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 情绪调节：较高自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为较高自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and emotion regulation: high",
-        "summary": "Enneagram can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × emotion regulation: higher self-report",
+        "summary": "This signal only means that when emotion regulation is in the higher self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.er.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.er.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "ER",
@@ -1032,29 +1039,29 @@
     },
     "eq.cross.enneagram.em.low": {
       "zh-CN": {
-        "title": "九型人格 与 共情理解：low",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 共情理解：较低自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为较低自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and empathy: low",
-        "summary": "Enneagram can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × empathic understanding: lower self-report",
+        "summary": "This signal only means that when empathic understanding is in the lower self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.em.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.em.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "EM",
@@ -1064,29 +1071,29 @@
     },
     "eq.cross.enneagram.em.medium": {
       "zh-CN": {
-        "title": "九型人格 与 共情理解：medium",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 共情理解：中等自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为中等自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and empathy: medium",
-        "summary": "Enneagram can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × empathic understanding: mid-range self-report",
+        "summary": "This signal only means that when empathic understanding is in the mid-range self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.em.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.em.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "EM",
@@ -1096,29 +1103,29 @@
     },
     "eq.cross.enneagram.em.high": {
       "zh-CN": {
-        "title": "九型人格 与 共情理解：high",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 共情理解：较高自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为较高自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and empathy: high",
-        "summary": "Enneagram can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × empathic understanding: higher self-report",
+        "summary": "This signal only means that when empathic understanding is in the higher self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.em.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.em.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "EM",
@@ -1128,29 +1135,29 @@
     },
     "eq.cross.enneagram.rm.low": {
       "zh-CN": {
-        "title": "九型人格 与 关系管理：low",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 关系管理：较低自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为较低自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and relationship management: low",
-        "summary": "Enneagram can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × relationship management: lower self-report",
+        "summary": "This signal only means that when relationship management is in the lower self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.rm.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.rm.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "RM",
@@ -1160,29 +1167,29 @@
     },
     "eq.cross.enneagram.rm.medium": {
       "zh-CN": {
-        "title": "九型人格 与 关系管理：medium",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 关系管理：中等自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为中等自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and relationship management: medium",
-        "summary": "Enneagram can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × relationship management: mid-range self-report",
+        "summary": "This signal only means that when relationship management is in the mid-range self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.rm.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.rm.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "RM",
@@ -1192,29 +1199,29 @@
     },
     "eq.cross.enneagram.rm.high": {
       "zh-CN": {
-        "title": "九型人格 与 关系管理：high",
-        "summary": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "九型人格 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "九型人格 × 关系管理：较高自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为较高自我报告时，可以用 九型人格 的动机、防御和压力下叙事方式来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：九型人格 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "九型可以作为理解动机语言的辅助线索，但不能推断治疗需要、关系结局或真实能力。",
+        "difference": "九型更像动机叙事；EQ-60 更关注情绪与关系功能的自我感知。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "Enneagram and relationship management: high",
-        "summary": "Enneagram can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "Enneagram can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "Enneagram × relationship management: higher self-report",
+        "summary": "This signal only means that when relationship management is in the higher self-report range, Enneagram may provide motivation, defenses, and stress narratives for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether Enneagram style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "Enneagram can be a supplementary lens for motivational language, but it should not infer treatment needs, relationship outcomes, or actual ability.",
+        "difference": "Enneagram is closer to motivational narrative; EQ-60 focuses on self-perceived emotional and relational functioning.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.enneagram.rm.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.enneagram.rm.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "enneagram",
         "condition": {
           "eq_dimension": "RM",
@@ -1224,29 +1231,29 @@
     },
     "eq.cross.riasec.sa.low": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 自我觉察：low",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 自我觉察：较低自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为较低自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and self-awareness: low",
-        "summary": "RIASEC can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × self-awareness: lower self-report",
+        "summary": "This signal only means that when self-awareness is in the lower self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.sa.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.sa.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "SA",
@@ -1256,29 +1263,29 @@
     },
     "eq.cross.riasec.sa.medium": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 自我觉察：medium",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 自我觉察：中等自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为中等自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and self-awareness: medium",
-        "summary": "RIASEC can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × self-awareness: mid-range self-report",
+        "summary": "This signal only means that when self-awareness is in the mid-range self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.sa.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.sa.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "SA",
@@ -1288,29 +1295,29 @@
     },
     "eq.cross.riasec.sa.high": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 自我觉察：high",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 自我觉察 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 自我觉察：较高自我报告",
+        "summary": "这条线索只说明：在 自我觉察 得分为较高自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and self-awareness: high",
-        "summary": "RIASEC can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ self-awareness explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × self-awareness: higher self-report",
+        "summary": "This signal only means that when self-awareness is in the higher self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.sa.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.sa.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "SA",
@@ -1320,29 +1327,29 @@
     },
     "eq.cross.riasec.er.low": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 情绪调节：low",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 情绪调节：较低自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为较低自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and emotion regulation: low",
-        "summary": "RIASEC can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × emotion regulation: lower self-report",
+        "summary": "This signal only means that when emotion regulation is in the lower self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.er.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.er.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "ER",
@@ -1352,29 +1359,29 @@
     },
     "eq.cross.riasec.er.medium": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 情绪调节：medium",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 情绪调节：中等自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为中等自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and emotion regulation: medium",
-        "summary": "RIASEC can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × emotion regulation: mid-range self-report",
+        "summary": "This signal only means that when emotion regulation is in the mid-range self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.er.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.er.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "ER",
@@ -1384,29 +1391,29 @@
     },
     "eq.cross.riasec.er.high": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 情绪调节：high",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 情绪调节 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 情绪调节：较高自我报告",
+        "summary": "这条线索只说明：在 情绪调节 得分为较高自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and emotion regulation: high",
-        "summary": "RIASEC can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ emotion regulation explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × emotion regulation: higher self-report",
+        "summary": "This signal only means that when emotion regulation is in the higher self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.er.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.er.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "ER",
@@ -1416,29 +1423,29 @@
     },
     "eq.cross.riasec.em.low": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 共情理解：low",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 共情理解：较低自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为较低自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and empathy: low",
-        "summary": "RIASEC can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × empathic understanding: lower self-report",
+        "summary": "This signal only means that when empathic understanding is in the lower self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.em.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.em.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "EM",
@@ -1448,29 +1455,29 @@
     },
     "eq.cross.riasec.em.medium": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 共情理解：medium",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 共情理解：中等自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为中等自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and empathy: medium",
-        "summary": "RIASEC can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × empathic understanding: mid-range self-report",
+        "summary": "This signal only means that when empathic understanding is in the mid-range self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.em.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.em.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "EM",
@@ -1480,29 +1487,29 @@
     },
     "eq.cross.riasec.em.high": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 共情理解：high",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 共情理解 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 共情理解：较高自我报告",
+        "summary": "这条线索只说明：在 共情理解 得分为较高自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and empathy: high",
-        "summary": "RIASEC can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ empathy explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × empathic understanding: higher self-report",
+        "summary": "This signal only means that when empathic understanding is in the higher self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.em.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.em.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "EM",
@@ -1512,29 +1519,29 @@
     },
     "eq.cross.riasec.rm.low": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 关系管理：low",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 关系管理：较低自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为较低自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个需要继续观察的低分信号，而不是能力不足或人格缺陷。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and relationship management: low",
-        "summary": "RIASEC can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × relationship management: lower self-report",
+        "summary": "This signal only means that when relationship management is in the lower self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a signal for further observation, not as evidence of low ability or a personality flaw.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a signal for further observation, not as evidence of low ability or a personality flaw. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.rm.low",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.rm.low",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "RM",
@@ -1544,29 +1551,29 @@
     },
     "eq.cross.riasec.rm.medium": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 关系管理：medium",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 关系管理：中等自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为中等自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个情境依赖较强的中间信号，而不是稳定结论。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个情境依赖较强的中间信号，而不是稳定结论。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and relationship management: medium",
-        "summary": "RIASEC can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × relationship management: mid-range self-report",
+        "summary": "This signal only means that when relationship management is in the mid-range self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a context-sensitive mid-range signal, not as a settled conclusion.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a context-sensitive mid-range signal, not as a settled conclusion. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.rm.medium",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.rm.medium",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "RM",
@@ -1576,29 +1583,29 @@
     },
     "eq.cross.riasec.rm.high": {
       "zh-CN": {
-        "title": "RIASEC / 霍兰德 与 关系管理：high",
-        "summary": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "how_to_use": "把它们放在一起看时，只用于提出更好的自我观察问题。",
-        "claim_boundary": "不要用跨测评组合判断职业、健康或关系结局。",
-        "connection": "RIASEC / 霍兰德 可以帮助你理解表达风格或兴趣背景，EQ 的 关系管理 则解释情绪与关系信号。",
-        "difference": "两者不能互相替代，也不能合成一个确定性结论。",
-        "do_not_overread": "不要用跨测评组合判断职业、健康或关系结局。"
+        "title": "RIASEC × 关系管理：较高自我报告",
+        "summary": "这条线索只说明：在 关系管理 得分为较高自我报告时，可以用 RIASEC 的兴趣环境和工作活动偏好背景来提出更细的自我观察问题。先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。",
+        "how_to_use": "先回到 EQ-60 的具体证据，再问：RIASEC 中的风格、动机或兴趣背景，是否解释了我在某些场景里的表达方式？如果解释不了，就保留为待观察问题。",
+        "claim_boundary": "不能用这个组合判断职业、招聘、健康、关系结局、真实情绪能力或人格优劣；也不能把两个测试合成一个确定标签。",
+        "connection": "RIASEC 可以帮助提出“哪些工作环境会让情绪与关系要求更明显”的问题，但不能给出岗位匹配或录用判断。",
+        "difference": "RIASEC 描述兴趣方向；EQ-60 描述本次作答中的情绪与关系自我感知，两者不应合成职业推荐。",
+        "do_not_overread": "先把它当作一个自我感知较强的信号，而不是外部行为已经被证明。 跨测评只能帮助组织反思问题，不能替代事实反馈、长期行为观察或专业判断。"
       },
       "en": {
-        "title": "RIASEC and relationship management: high",
-        "summary": "RIASEC can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "how_to_use": "Use the combination to ask better reflection questions, not to force a single answer.",
-        "claim_boundary": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes.",
-        "connection": "RIASEC can help describe style or interest context; EQ relationship management explains emotional and relational signals.",
-        "difference": "They are not interchangeable and should not be fused into a deterministic conclusion.",
-        "do_not_overread": "Do not use cross-assessment combinations to decide roles, health, or relationship outcomes."
+        "title": "RIASEC × relationship management: higher self-report",
+        "summary": "This signal only means that when relationship management is in the higher self-report range, RIASEC may provide interest-environment and work-activity preference context for more precise reflection questions. Treat it as a stronger self-perception signal, not as proof of observed behavior.",
+        "how_to_use": "Start with the concrete EQ-60 evidence, then ask whether RIASEC style, motive, or interest context helps explain expression in specific situations. If it does not, keep it as a question for observation.",
+        "claim_boundary": "Do not use this combination to decide careers, hiring, health, relationship outcomes, true emotional ability, or personality quality; do not fuse two tests into a fixed label.",
+        "connection": "RIASEC can help ask which work environments make emotional and relational demands more visible, but it does not provide career-fit or hiring judgments.",
+        "difference": "RIASEC describes interest direction; EQ-60 describes emotional-relational self-perception in this response set. They should not be fused into job or high-stakes recommendations.",
+        "do_not_overread": "Treat it as a stronger self-perception signal, not as proof of observed behavior. Cross-assessment context can organize reflection questions, but it does not replace factual feedback, longer-term behavioral observation, or professional judgment."
       },
       "meta": {
         "id": "eq.cross.riasec.rm.high",
         "asset_type": "cross_assessment_context",
         "v23_source_id": "eq.cross.riasec.rm.high",
         "claim_risk": "medium",
-        "risk_notes": "Cross-assessment reflection only.",
+        "risk_notes": "Cross-assessment reflection only. Do not infer EQ level, ability, hiring/job fit, clinical status, relationship outcomes, or deterministic identity from combined assessments.",
         "related_system": "riasec",
         "condition": {
           "eq_dimension": "RM",
