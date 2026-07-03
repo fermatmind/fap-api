@@ -16077,6 +16077,11 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are confined to observation_registry seven-day observation copy and train ledger reconciliation/state."
+      },
+      "pr_created": {
+        "status": "pass",
+        "command": "gh pr create --repo fermatmind/fap-api --base main --head codex/ennea-rp-37-seven-day-observation",
+        "evidence": "Opened PR #2704 for ENNEA-RP-37."
       }
     },
     "commit_sha": "876c4e77ec3d43a02041f908af1cb89e549488a5",
@@ -16104,13 +16109,19 @@
         "status": "committed",
         "commit_sha": "876c4e77ec3d43a02041f908af1cb89e549488a5",
         "notes": "Committed ENNEA-RP-37 seven-day observation content repair and local validation ledger."
+      },
+      {
+        "at": "2026-07-03T13:16:15.111Z",
+        "status": "pr_open",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2704",
+        "notes": "Opened PR #2704 for ENNEA-RP-37."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-37",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2704",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -16127,7 +16138,7 @@
       ],
       "evidence": "Changed files are confined to observation_registry seven-day observation copy and train ledger reconciliation/state."
     },
-    "status": "committed",
+    "status": "pr_open",
     "title": "ENNEA-RP-37: fix(enneagram): repair seven-day observation",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
