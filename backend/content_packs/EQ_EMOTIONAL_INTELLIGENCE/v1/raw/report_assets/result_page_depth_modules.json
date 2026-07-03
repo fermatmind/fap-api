@@ -4,41 +4,44 @@
   "assets": {
     "eq.depth.evidence_stack.default": {
       "zh-CN": {
-        "title": "为什么这个结果可信",
-        "body": "这份报告同时看四个维度、维度之间的差距、答题质量和内容路线。它不是只用一个总分判断你。",
+        "title": "如何理解这份证据",
+        "body": "这份报告把四维自我报告分数、维度差距、答题质量和内容路线放在一起阅读。它提高的是解释结构，不是把你简化成一个能力分。",
         "bullets": [
-          "四维信号：SA / ER / EM / RM",
-          "差距信号：最强维度与发展杠杆",
-          "质量信号：本次结果的解释置信度",
-          "路线信号：最相关场景和行动处方"
-        ]
+          "四维信号：SA / ER / EM / RM 的自我报告位置",
+          "差距信号：最强维度与当前发展杠杆",
+          "质量信号：本次作答能支持多强的解释",
+          "路线信号：哪些场景和行动最值得先观察"
+        ],
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。"
       },
       "en": {
-        "title": "Why this result is interpretable",
-        "body": "This report looks at the four dimensions, the gaps between them, response quality, and the selected content route. It does not reduce you to one score.",
+        "title": "How to read the evidence",
+        "body": "This report reads four self-report dimensions, dimension gaps, response quality, and the selected content route together. It gives structure to interpretation; it does not reduce you to an ability score.",
         "bullets": [
-          "Dimension signals: SA / ER / EM / RM",
-          "Gap signals: strongest dimension and development lever",
-          "Quality signal: interpretation confidence",
-          "Route signal: relevant scenes and action prescription"
-        ]
+          "Dimension signals: self-reported SA / ER / EM / RM positions",
+          "Gap signal: strongest dimension and current development lever",
+          "Quality signal: how much interpretation this response pattern can support",
+          "Route signal: which scenes and actions are worth observing first"
+        ],
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.default",
         "asset_type": "result_page_depth_module",
         "placement": "Evidence Snapshot",
         "claim_risk": "low",
-        "source_version": "v1.9_commercial_depth"
+        "source_version": "v1.9_commercial_depth",
+        "risk_notes": "Self-report evidence structure only; not ability, diagnosis, hiring, or prediction evidence."
       }
     },
     "eq.depth.how_to_read.default": {
       "zh-CN": {
         "title": "30 秒读法",
-        "body": "先记住一句核心模式，再看一个证据点，最后只选一个行动。不要一口气把整份报告当成性格判决。"
+        "body": "先记住一句“本次作答显示的核心模式”，再看一个证据点，最后只选一个低风险行动。不要把整份报告当成性格判决、能力排名或关系诊断。"
       },
       "en": {
         "title": "How to read this in 30 seconds",
-        "body": "Remember one core pattern, check one evidence point, then choose one action. Do not treat the whole report as a verdict on your personality."
+        "body": "Start with one “this response pattern suggests” statement, check one evidence point, then choose one low-risk action. Do not treat the report as a personality verdict, ability ranking, or relationship diagnosis."
       },
       "meta": {
         "id": "eq.depth.how_to_read.default",
@@ -51,11 +54,11 @@
     "eq.depth.reality_check.default": {
       "zh-CN": {
         "title": "现实验证法",
-        "body": "未来一周观察三件事：你最先读到谁的情绪、你是否能说清边界、你事后恢复需要多久。"
+        "body": "未来一周只观察三件低风险线索：你最先注意到谁的情绪、你是否能说清一个边界、你事后大概需要多久恢复。遇到高冲突、创伤、不安全关系或明显权力差时，不要用这份报告替代专业支持。"
       },
       "en": {
         "title": "Reality check",
-        "body": "For the next week, observe three things: whose emotion you notice first, whether you can state a boundary, and how long recovery takes afterward."
+        "body": "For the next week, observe three low-risk signals: whose emotion you notice first, whether you can state one boundary, and roughly how long recovery takes afterward. In high-conflict, trauma-related, unsafe, or high-power-difference situations, do not use this report as a substitute for professional support."
       },
       "meta": {
         "id": "eq.depth.reality_check.default",
@@ -67,26 +70,26 @@
     },
     "eq.depth.evidence_stack.balanced_integrated": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“均衡整合型”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“均衡整合”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Four dimensions high or upper-stable; no severe gap.",
-          "复杂对话里，你更容易同时顾及事实、情绪和关系目标。",
-          "优势太均衡时，你可能低估持续恢复和边界维护的必要性。"
+          "分数线索：四个维度都处在相对稳定区间，维度差距不明显。",
+          "在本次作答中，你倾向于同时留意情绪、事实和关系目标。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Integrated Balance from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “balanced integration” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Four dimensions high or upper-stable; no severe gap.",
-          "In complex conversations, you are more likely to hold the facts, the emotions, and the relationship goal at the same time.",
-          "When things are going well, you may underestimate how much recovery and boundary maintenance still matter."
+          "Score signal: all four dimensions sit in a relatively stable range with no sharp gap.",
+          "your responses suggest you tend to track emotion, facts, and relationship goals together.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.balanced_integrated",
@@ -97,32 +100,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.balanced_integrated": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“均衡整合型”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“均衡整合”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Four dimensions high or upper-stable; no severe gap.",
-          "复杂对话里，你更容易同时顾及事实、情绪和关系目标。",
-          "优势太均衡时，你可能低估持续恢复和边界维护的必要性。"
+          "继续观察在长期压力、权力差或亲密关系中，恢复和边界是否仍然稳定。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Integrated Balance from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “balanced integration” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Four dimensions high or upper-stable; no severe gap.",
-          "In complex conversations, you are more likely to hold the facts, the emotions, and the relationship goal at the same time.",
-          "When things are going well, you may underestimate how much recovery and boundary maintenance still matter."
+          "observe whether recovery and boundaries stay stable under sustained pressure, power differences, or close relationships.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.balanced_integrated",
@@ -133,32 +136,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.high_empathy_low_recovery": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“高共情，低恢复”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“高共情、恢复较弱”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "EM high; ER low or medium-low.",
-          "你能让别人感到被理解，尤其在对方情绪明显但没有说清楚时。",
-          "你可能把“我理解你”滑向“我必须替你扛住”。"
+          "分数线索：EM 较高，ER 相对较低或恢复线索较弱。",
+          "你可能较容易捕捉他人情绪，但事后恢复和边界需要更明确。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns High Empathy, Low Recovery from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “high empathy with lower recovery” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "EM high; ER low or medium-low.",
-          "You can make people feel understood, especially when their emotion is obvious but not clearly stated.",
-          "You may slide from “I understand this” into “I have to carry this with you or for you.”"
+          "Score signal: EM is higher while ER or recovery signals are lower.",
+          "you may notice others emotions readily while recovery and boundaries need clearer structure.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.high_empathy_low_recovery",
@@ -169,32 +172,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.high_empathy_low_recovery": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“高共情，低恢复”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“高共情、恢复较弱”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "EM high; ER low or medium-low.",
-          "你能让别人感到被理解，尤其在对方情绪明显但没有说清楚时。",
-          "你可能把“我理解你”滑向“我必须替你扛住”。"
+          "练习把“理解对方”与“替对方承担”分开。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns High Empathy, Low Recovery from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “high empathy with lower recovery” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "EM high; ER low or medium-low.",
-          "You can make people feel understood, especially when their emotion is obvious but not clearly stated.",
-          "You may slide from “I understand this” into “I have to carry this with you or for you.”"
+          "practice separating understanding someone from carrying the situation for them.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.high_empathy_low_recovery",
@@ -205,32 +208,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.aware_but_unregulated": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“有觉察，调节不足”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“觉察较清楚、调节仍需结构”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "SA high; ER low or medium-low.",
-          "你能比很多人更快识别自己的情绪线索。",
-          "觉察越清楚，若缺少调节步骤，越可能变成反复分析或内耗。"
+          "分数线索：SA 较高，ER 相对较低。",
+          "你可能能较快知道自己被触发，但不一定能马上稳定节奏。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Aware, Not Yet Settled from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “aware but still building regulation structure” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "SA high; ER low or medium-low.",
-          "You can often identify your emotional cues faster than many people.",
-          "Clear awareness without regulation steps can turn into replaying, overanalyzing, or emotional fatigue."
+          "Score signal: SA is higher while ER is comparatively lower.",
+          "you may notice being triggered before you can reliably settle your pace.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.aware_but_unregulated",
@@ -241,32 +244,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.aware_but_unregulated": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“有觉察，调节不足”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“觉察较清楚、调节仍需结构”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "SA high; ER low or medium-low.",
-          "你能比很多人更快识别自己的情绪线索。",
-          "觉察越清楚，若缺少调节步骤，越可能变成反复分析或内耗。"
+          "先练习暂停、命名感受，再决定是否回应。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Aware, Not Yet Settled from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “aware but still building regulation structure” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "SA high; ER low or medium-low.",
-          "You can often identify your emotional cues faster than many people.",
-          "Clear awareness without regulation steps can turn into replaying, overanalyzing, or emotional fatigue."
+          "practice pausing and naming the feeling before choosing a response.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.aware_but_unregulated",
@@ -277,32 +280,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.calm_but_distant": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“冷静稳定，但情绪回应偏弱”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“稳定但回应偏保留”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "ER high; EM low or medium-low.",
-          "压力高时，你更容易保持思路和节奏。",
-          "别人可能听到了你的解决方案，却没有感到被理解。"
+          "分数线索：ER 较高，EM 或关系回应线索较弱。",
+          "你可能更容易保持冷静，但别人未必感到被情绪上接住。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Calm, but Hard to Read Warmly from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “steady but emotionally reserved” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "ER high; EM low or medium-low.",
-          "Under pressure, you are more likely to keep your thinking and pacing intact.",
-          "People may hear your solution without feeling that you understood the emotional weight of the moment."
+          "Score signal: ER is higher while EM or relational response signals are lower.",
+          "you may stay composed while others may not always feel emotionally met.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.calm_but_distant",
@@ -313,32 +316,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.calm_but_distant": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“冷静稳定，但情绪回应偏弱”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“稳定但回应偏保留”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "ER high; EM low or medium-low.",
-          "压力高时，你更容易保持思路和节奏。",
-          "别人可能听到了你的解决方案，却没有感到被理解。"
+          "练习在保持边界的同时补一句情绪确认。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Calm, but Hard to Read Warmly from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “steady but emotionally reserved” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "ER high; EM low or medium-low.",
-          "Under pressure, you are more likely to keep your thinking and pacing intact.",
-          "People may hear your solution without feeling that you understood the emotional weight of the moment."
+          "practice adding emotional acknowledgment while keeping boundaries.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.calm_but_distant",
@@ -349,32 +352,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.relationship_first_self_later": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“关系优先，自我后置”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“关系优先、自我后置”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "RM high; SA low or medium-low.",
-          "你常能让对话继续进行，不轻易让场面崩掉。",
-          "你可能很晚才发现自己其实已经不舒服。"
+          "分数线索：RM 较高，SA 相对较低。",
+          "你可能习惯先维护关系秩序，较晚才回到自己的感受。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Relationship First, Self Later from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “relationship first, self later” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "RM high; SA low or medium-low.",
-          "You often keep conversations going without letting the room collapse emotionally.",
-          "You may realize late that you were uncomfortable much earlier."
+          "Score signal: RM is higher while SA is comparatively lower.",
+          "you may protect relational harmony before checking your own state.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.relationship_first_self_later",
@@ -385,32 +388,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.relationship_first_self_later": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“关系优先，自我后置”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“关系优先、自我后置”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "RM high; SA low or medium-low.",
-          "你常能让对话继续进行，不轻易让场面崩掉。",
-          "你可能很晚才发现自己其实已经不舒服。"
+          "练习在回应别人前先确认自己的需求和限制。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Relationship First, Self Later from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “relationship first, self later” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "RM high; SA low or medium-low.",
-          "You often keep conversations going without letting the room collapse emotionally.",
-          "You may realize late that you were uncomfortable much earlier."
+          "check your own needs and limits before responding to others.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.relationship_first_self_later",
@@ -421,32 +424,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.self_clear_repair_weak": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“自我清楚，修复不足”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“自我清楚、修复线索较弱”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "SA high; RM low or medium-low.",
-          "你不容易完全失去自己的立场。",
-          "如果缺少修复，清楚可能被听成强硬。"
+          "分数线索：SA 较高，RM 相对较低。",
+          "你可能知道自己真实感受，但关系修复或表达顺序还需要设计。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Clear About Self, Less Practiced at Repair from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “self-clear with weaker repair signals” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "SA high; RM low or medium-low.",
-          "You are less likely to lose track of your own position.",
-          "Without repair, clarity can be heard as sharpness."
+          "Score signal: SA is higher while RM is comparatively lower.",
+          "you may know your own state while repair or sequencing still needs design.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.self_clear_repair_weak",
@@ -457,32 +460,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.self_clear_repair_weak": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“自我清楚，修复不足”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“自我清楚、修复线索较弱”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "SA high; RM low or medium-low.",
-          "你不容易完全失去自己的立场。",
-          "如果缺少修复，清楚可能被听成强硬。"
+          "练习把真实表达拆成事实、感受、请求三步。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Clear About Self, Less Practiced at Repair from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “self-clear with weaker repair signals” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "SA high; RM low or medium-low.",
-          "You are less likely to lose track of your own position.",
-          "Without repair, clarity can be heard as sharpness."
+          "practice splitting expression into facts, feelings, and requests.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.self_clear_repair_weak",
@@ -493,32 +496,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.steady_collaborator": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“稳定协作者”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“稳定协作”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "ER high; RM high.",
-          "你适合做对话里的降温者和整理者。",
-          "你可能低估别人还需要被情绪回应，而不只是被推进。"
+          "分数线索：ER 和 RM 较高。",
+          "你可能在压力下仍能维持沟通秩序和合作节奏。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Steady Collaborator from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “steady collaboration” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "ER high; RM high.",
-          "You can be the person who cools the room down and organizes the next step.",
-          "You may underestimate that others sometimes need emotional acknowledgment, not only forward motion."
+          "Score signal: ER and RM are both higher.",
+          "you may keep communication orderly and collaborative under pressure.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.steady_collaborator",
@@ -529,32 +532,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.steady_collaborator": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“稳定协作者”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“稳定协作”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "ER high; RM high.",
-          "你适合做对话里的降温者和整理者。",
-          "你可能低估别人还需要被情绪回应，而不只是被推进。"
+          "留意长期承担稳定角色是否消耗恢复空间。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Steady Collaborator from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “steady collaboration” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "ER high; RM high.",
-          "You can be the person who cools the room down and organizes the next step.",
-          "You may underestimate that others sometimes need emotional acknowledgment, not only forward motion."
+          "watch whether being the stabilizing person reduces your recovery space.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.steady_collaborator",
@@ -565,32 +568,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.sensitive_absorber": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“高敏感，易吸收”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“敏感觉察、容易吸收”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "SA high; EM high; ER medium-low.",
-          "你能注意到别人没说出口的变化。",
-          "你可能在事情结束后还长时间停留在对方的情绪里。"
+          "分数线索：SA 和 EM 较高，ER 中低或波动。",
+          "你可能同时觉察自己和他人的情绪，因此更容易被气氛带走。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Sensitive and Absorbing from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “sensitive noticing with absorption risk” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "SA high; EM high; ER medium-low.",
-          "You can notice shifts that other people have not put into words.",
-          "After the moment is over, you may still be living inside someone else’s emotional weather."
+          "Score signal: SA and EM are higher while ER is mid-low or variable.",
+          "you may notice both your own and others emotions, making atmosphere easier to absorb.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.sensitive_absorber",
@@ -601,32 +604,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.sensitive_absorber": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“高敏感，易吸收”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“敏感觉察、容易吸收”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "SA high; EM high; ER medium-low.",
-          "你能注意到别人没说出口的变化。",
-          "你可能在事情结束后还长时间停留在对方的情绪里。"
+          "练习识别“这是我的感受”还是“我接收到的气氛”。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Sensitive and Absorbing from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “sensitive noticing with absorption risk” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "SA high; EM high; ER medium-low.",
-          "You can notice shifts that other people have not put into words.",
-          "After the moment is over, you may still be living inside someone else’s emotional weather."
+          "practice distinguishing your own feeling from the atmosphere you are picking up.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.sensitive_absorber",
@@ -637,32 +640,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.developing_foundation": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“基础发展中”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“基础发展中”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Multiple dimensions low or low-medium.",
-          "你有机会从很小的练习中看到明显变化。",
-          "如果直接进入复杂关系策略，容易觉得抽象或挫败。"
+          "分数线索：多个维度处在较低或不稳定区间。",
+          "本次作答更适合提示哪些情绪与关系线索值得先观察。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Building the Foundation from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “developing foundation” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Multiple dimensions low or low-medium.",
-          "Small practices may create noticeable change because the foundation is still forming.",
-          "If you jump straight into complex relationship strategies, the work may feel abstract or discouraging."
+          "Score signal: several dimensions sit in a lower or less stable range.",
+          "this response pattern is best used to identify which emotional and relational signals to observe first.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.developing_foundation",
@@ -673,32 +676,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.developing_foundation": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“基础发展中”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“基础发展中”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Multiple dimensions low or low-medium.",
-          "你有机会从很小的练习中看到明显变化。",
-          "如果直接进入复杂关系策略，容易觉得抽象或挫败。"
+          "先选择一个低风险场景练习，不要一次改变所有互动方式。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Building the Foundation from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “developing foundation” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Multiple dimensions low or low-medium.",
-          "Small practices may create noticeable change because the foundation is still forming.",
-          "If you jump straight into complex relationship strategies, the work may feel abstract or discouraging."
+          "choose one low-risk situation to practice rather than changing every interaction at once.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.developing_foundation",
@@ -709,32 +712,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.low_confidence_result": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“本次结果需要谨慎阅读”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个深读模块不会把低置信结果包装成稳定个人模式；它只帮助你判断本次作答为什么需要谨慎阅读。",
         "bullets": [
-          "Quality C/D or severe response-quality flags.",
-          "即使置信度不高，也能用来发现哪些题型或场景让你犹豫。",
-          "如果把它当成完整画像，容易误读自己。"
+          "本次质量信号不足以支持强 formulation。",
+          "先检查作答环境、速度、注意力和是否有中断。",
+          "复测前只保留轻量观察，不做职业、关系或能力判断。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "在更稳定的环境中复测，再阅读完整结果页。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Read This Result Lightly from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This deep-read module does not turn a low-confidence result into a stable personal pattern; it helps explain why this attempt should be read cautiously.",
         "bullets": [
-          "Quality C/D or severe response-quality flags.",
-          "Even with lower confidence, the result can show where you hesitated or answered in a concentrated way.",
-          "If you treat it as a full profile, you may overread the result."
+          "The quality signal is not strong enough for a firm formulation.",
+          "Check setting, speed, attention, and possible interruptions.",
+          "Before retesting, keep only light observations; do not make career, relationship, or ability judgments."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Retest in a steadier setting before using the full result page."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.low_confidence_result",
@@ -745,32 +748,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.low_confidence_result": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“本次结果需要谨慎阅读”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个深读模块不会把低置信结果包装成稳定个人模式；它只帮助你判断本次作答为什么需要谨慎阅读。",
         "bullets": [
-          "Quality C/D or severe response-quality flags.",
-          "即使置信度不高，也能用来发现哪些题型或场景让你犹豫。",
-          "如果把它当成完整画像，容易误读自己。"
+          "本次质量信号不足以支持强 formulation。",
+          "先检查作答环境、速度、注意力和是否有中断。",
+          "复测前只保留轻量观察，不做职业、关系或能力判断。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Read This Result Lightly from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This deep-read module does not turn a low-confidence result into a stable personal pattern; it helps explain why this attempt should be read cautiously.",
         "bullets": [
-          "Quality C/D or severe response-quality flags.",
-          "Even with lower confidence, the result can show where you hesitated or answered in a concentrated way.",
-          "If you treat it as a full profile, you may overread the result."
+          "The quality signal is not strong enough for a firm formulation.",
+          "Check setting, speed, attention, and possible interruptions.",
+          "Before retesting, keep only light observations; do not make career, relationship, or ability judgments."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.low_confidence_result",
@@ -781,32 +784,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.underconfident_repairer": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“低估自己的修复者”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“低估自己的修复能力”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：RM 或修复相关线索不低，但自我评价偏谨慎。",
+          "你可能比自己以为的更会做关系修补，但不一定会把它看作能力。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Underconfident Repairer from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “underconfident repairer” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: repair-related signals are not low, while self-evaluation appears cautious.",
+          "you may repair more than you recognize, without labeling it as a strength.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.underconfident_repairer",
@@ -817,32 +820,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.underconfident_repairer": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“低估自己的修复者”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“低估自己的修复能力”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "记录一次实际完成的小修复，避免只凭内在不确定感判断。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Underconfident Repairer from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “underconfident repairer” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "record one real repair you completed instead of judging only from inner doubt.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.underconfident_repairer",
@@ -853,32 +856,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.over_responsible_helper": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“过度负责的帮助者”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“过度负责的帮助者”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：EM 或 RM 较高，ER/SA 边界线索较弱。",
+          "你可能很快进入支持角色，但不总能确认自己是否还有余量。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Over-Responsible Helper from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “over-responsible helper” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: EM or RM is higher while ER/SA boundary signals are weaker.",
+          "you may enter a helping role quickly without checking your own capacity.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.over_responsible_helper",
@@ -889,32 +892,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.over_responsible_helper": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“过度负责的帮助者”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“过度负责的帮助者”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "在帮助前先问：这是谁的责任，我能承担到哪里。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Over-Responsible Helper from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “over-responsible helper” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "before helping, ask whose responsibility this is and where your capacity ends.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.over_responsible_helper",
@@ -925,32 +928,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.fast_reactor": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“反应快，暂停短”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“反应较快”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：SA 或压力线索较强，ER 稳定性不足。",
+          "你可能很快感到被触发，也很快想回应。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Fast Reactor from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “fast reactor” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: activation signals are higher while ER stability is weaker.",
+          "you may feel triggered quickly and want to respond quickly.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.fast_reactor",
@@ -961,32 +964,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.fast_reactor": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“反应快，暂停短”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“反应较快”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "把第一反应延后十分钟，再决定是否需要表达。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Fast Reactor from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “fast reactor” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "delay the first response by ten minutes before deciding what to express.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.fast_reactor",
@@ -997,32 +1000,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.analytical_under_feeling": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“先分析，后感受”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“分析优先、感受后置”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：ER 或认知整理较强，SA/EM 情绪命名较弱。",
+          "你可能先解释事情，再回头理解感受。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Analytical Before Feeling from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “analytical first, feelings later” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: regulation or cognitive organization is stronger while emotional labeling is weaker.",
+          "you may explain the situation before understanding the feeling.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.analytical_under_feeling",
@@ -1033,32 +1036,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.analytical_under_feeling": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“先分析，后感受”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“分析优先、感受后置”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "练习先说一个感受词，再进入原因分析。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Analytical Before Feeling from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “analytical first, feelings later” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "practice naming one feeling before moving into analysis.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.analytical_under_feeling",
@@ -1069,32 +1072,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.quiet_empathy": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“安静共情型”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“安静共情”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：EM 不低，但 RM 或表达线索较保留。",
+          "你可能能理解别人，但不一定把理解表达出来。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Quiet Empathy from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “quiet empathy” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: EM is not low, while RM or expression signals are more reserved.",
+          "you may understand others without always making that understanding visible.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.quiet_empathy",
@@ -1105,32 +1108,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.quiet_empathy": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“安静共情型”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“安静共情”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "练习用一句短确认表达你听见了什么。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Quiet Empathy from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “quiet empathy” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "practice one short acknowledgment of what you heard.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.quiet_empathy",
@@ -1141,32 +1144,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.direct_without_softening": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“直接表达，柔化不足”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“直接表达、缓冲较少”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：SA 较高，RM/EM 缓冲线索较弱。",
+          "你可能较清楚自己要说什么，但接收方需要更多过渡。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Direct Without Softening from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “direct expression with less softening” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: SA is higher while RM/EM softening signals are weaker.",
+          "you may be clear about what to say while the listener may need more transition.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.direct_without_softening",
@@ -1177,32 +1180,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.direct_without_softening": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“直接表达，柔化不足”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“直接表达、缓冲较少”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "在重点前加一句关系和意图说明。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Direct Without Softening from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “direct expression with less softening” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "add one sentence about relationship and intent before the main point.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.direct_without_softening",
@@ -1213,32 +1216,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.relationship_masking": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“用关系稳定掩盖真实感受”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“关系面具”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：RM 较高，SA 边界或真实感受线索较弱。",
+          "你可能为了关系顺畅而压低自己的真实反应。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Relationship Masking from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “relationship masking” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: RM is higher while SA boundary or authentic-state signals are weaker.",
+          "you may lower your own reaction to keep interaction smooth.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.relationship_masking",
@@ -1249,32 +1252,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.relationship_masking": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“用关系稳定掩盖真实感受”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“关系面具”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "练习用低风险方式表达一个小需求。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Relationship Masking from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “relationship masking” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "practice expressing one small need in a low-risk way.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.relationship_masking",
@@ -1285,32 +1288,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.feedback_absorber": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“容易吸收反馈情绪”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“反馈吸收过多”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：反馈相关场景与 ER/SA 差距较明显。",
+          "你可能很认真接收反馈，但也容易把信息和自我评价混在一起。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Feedback Absorber from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “feedback absorber” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: feedback scenes show a noticeable ER/SA gap.",
+          "you may take feedback seriously while mixing information with self-evaluation.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.feedback_absorber",
@@ -1321,32 +1324,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.feedback_absorber": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“容易吸收反馈情绪”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“反馈吸收过多”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "把反馈拆成事实、建议和情绪反应三栏。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Feedback Absorber from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “feedback absorber” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "split feedback into facts, suggestions, and emotional reactions.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.feedback_absorber",
@@ -1357,32 +1360,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.balanced_moderate": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“均衡但仍在打磨”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“中等均衡”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：四维接近中间区间，没有突出的极端差距。",
+          "你可能在常规互动中可用，但复杂情境下需要更明确策略。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Balanced, Still Sharpening from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “balanced moderate” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: all four dimensions sit near the middle range without sharp gaps.",
+          "your pattern may work in ordinary interactions while complex situations need clearer strategy.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.balanced_moderate",
@@ -1393,32 +1396,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.balanced_moderate": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“均衡但仍在打磨”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“中等均衡”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "选择一个最常见压力场景做微练习。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Balanced, Still Sharpening from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “balanced moderate” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "choose one common pressure situation for micro-practice.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.balanced_moderate",
@@ -1429,32 +1432,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.regulated_but_private": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“能稳住，但不易表达”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“调节较稳、表达较私密”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：ER 较稳，SA/RM 表达线索较保留。",
+          "你可能能自己消化情绪，但别人未必知道你的真实状态。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Regulated but Private from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “regulated but private” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: ER is steadier while SA/RM expression signals are reserved.",
+          "you may process emotions privately while others may not know your state.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.regulated_but_private",
@@ -1465,32 +1468,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.regulated_but_private": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“能稳住，但不易表达”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“调节较稳、表达较私密”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "练习在安全关系中透露一点过程，而不必一次说完。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Regulated but Private from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “regulated but private” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "share a small part of the process in a safe relationship without telling everything.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.regulated_but_private",
@@ -1501,32 +1504,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.warm_but_avoidant": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“温和但回避张力”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“温和但回避张力”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：EM/RM 温和线索较高，冲突回应较弱。",
+          "你可能愿意照顾感受，但会推迟困难对话。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Warm but Avoidant from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “warm but tension-avoidant” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: warm EM/RM signals are higher while conflict response is weaker.",
+          "you may care about feelings while delaying difficult conversations.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.warm_but_avoidant",
@@ -1537,32 +1540,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.warm_but_avoidant": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“温和但回避张力”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“温和但回避张力”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "练习把困难话题缩小到一个具体请求。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Warm but Avoidant from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “warm but tension-avoidant” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "narrow a difficult topic into one concrete request.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.warm_but_avoidant",
@@ -1573,32 +1576,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.strategic_listener": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“策略型倾听者”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“策略性倾听”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：EM/RM 倾听线索较好，SA/真实表达需观察。",
+          "你可能很会组织对话，但需要确认自己是否也被听见。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Strategic Listener from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “strategic listener” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: listening signals in EM/RM are stronger while SA/authentic expression needs observation.",
+          "you may organize conversations well while needing to check whether you are also heard.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.strategic_listener",
@@ -1609,32 +1612,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.strategic_listener": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“策略型倾听者”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“策略性倾听”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "在倾听后补一句自己的位置。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Strategic Listener from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “strategic listener” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "after listening, add one sentence about your own position.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.strategic_listener",
@@ -1645,32 +1648,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.delayed_processor": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“延迟处理型”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“延迟处理”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：SA/ER 处理节奏偏慢或事后更清楚。",
+          "你可能当下不容易说清，事后反而更准确。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Delayed Processor from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “delayed processor” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: SA/ER processing may be slower or clearer afterward.",
+          "you may be less clear in the moment and more accurate afterward.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.delayed_processor",
@@ -1681,32 +1684,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.delayed_processor": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“延迟处理型”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“延迟处理”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "为重要对话预留复盘和二次回应。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Delayed Processor from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “delayed processor” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "reserve time for follow-up after important conversations.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.delayed_processor",
@@ -1717,32 +1720,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.pressure_contained": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“压力内收型”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“压力下收住自己”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：ER 抑制线索较强，SA/表达需观察。",
+          "你可能能压住反应，但不代表压力已经被处理。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Contained Under Pressure from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “pressure-contained” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: ER containment signals are stronger while SA/expression needs observation.",
+          "you may contain your reaction without having processed the stress.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.pressure_contained",
@@ -1753,32 +1756,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.pressure_contained": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“压力内收型”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“压力下收住自己”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "把“没有爆发”之后的恢复也纳入计划。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Contained Under Pressure from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “pressure-contained” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "include recovery after not reacting outwardly.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.pressure_contained",
@@ -1789,32 +1792,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.empathy_to_action_gap": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“懂别人，但行动转化慢”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“共情到行动之间有落差”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：EM 较高，RM 行动线索相对不足。",
+          "你可能理解对方，却不知道下一步怎么推进关系。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Empathy-to-Action Gap from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “empathy-to-action gap” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: EM is higher while RM action signals are weaker.",
+          "you may understand the other person without knowing how to move the interaction forward.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.empathy_to_action_gap",
@@ -1825,32 +1828,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.empathy_to_action_gap": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“懂别人，但行动转化慢”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“共情到行动之间有落差”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "把理解转成一个具体确认或请求。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Empathy-to-Action Gap from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “empathy-to-action gap” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "turn understanding into one concrete check-in or request.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.empathy_to_action_gap",
@@ -1861,32 +1864,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.self_protective_distance": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“保护性距离”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“自我保护距离”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：ER/边界线索较强，EM/RM 接近度较低。",
+          "你可能用距离保护自己，尤其在高压或不确定关系中。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Protective Distance from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “self-protective distance” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: ER/boundary signals are stronger while EM/RM closeness signals are lower.",
+          "you may use distance to protect yourself, especially under pressure or uncertainty.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.self_protective_distance",
@@ -1897,32 +1900,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.self_protective_distance": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“保护性距离”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“自我保护距离”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "区分必要边界和自动退开。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Protective Distance from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “self-protective distance” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "separate necessary boundaries from automatic withdrawal.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.self_protective_distance",
@@ -1933,32 +1936,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.values_sensitive": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“价值敏感型”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“价值敏感”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：SA/EM 对价值或公平线索较敏感。",
+          "你可能在价值被触碰时反应更强。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Values-Sensitive Responder from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “values-sensitive” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: SA/EM signals suggest sensitivity to values or fairness.",
+          "you may react more strongly when values feel touched.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.values_sensitive",
@@ -1969,32 +1972,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.values_sensitive": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“价值敏感型”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“价值敏感”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "先识别被触碰的价值，再选择表达强度。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Values-Sensitive Responder from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “values-sensitive” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "identify the value that was touched before choosing intensity.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.values_sensitive",
@@ -2005,32 +2008,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.team_stabilizer": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“团队稳定器”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“团队稳定器”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：ER/RM 团队协作线索较强。",
+          "你可能在团队里自然承担整理节奏和降温的角色。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Team Stabilizer from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “team stabilizer” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: ER/RM teamwork signals are stronger.",
+          "you may often help organize pace and lower tension in groups.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.team_stabilizer",
@@ -2041,32 +2044,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.team_stabilizer": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“团队稳定器”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“团队稳定器”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "确认这是不是你自愿承担，而不是默认被分配。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Team Stabilizer from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “team stabilizer” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "check whether this role is chosen by you rather than assigned by default.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.team_stabilizer",
@@ -2077,32 +2080,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.listening_without_followthrough": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“会听，但后续弱”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“倾听多、后续少”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：EM 倾听线索较高，RM 后续行动较弱。",
+          "你可能让人感觉被听见，但后续动作不够明确。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Listening Without Follow-Through from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “listening without follow-through” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: EM listening signals are higher while RM follow-through is weaker.",
+          "you may make people feel heard while next steps remain unclear.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.listening_without_followthrough",
@@ -2113,32 +2116,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.listening_without_followthrough": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“会听，但后续弱”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“倾听多、后续少”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "每次倾听后只承诺一个可完成的小动作。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Listening Without Follow-Through from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “listening without follow-through” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "after listening, commit to one small doable follow-up.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.listening_without_followthrough",
@@ -2149,32 +2152,32 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.evidence_stack.conflict_avoider": {
       "zh-CN": {
-        "title": "证据如何支持这个结果",
-        "body": "这个模块把“冲突回避者”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "证据如何支持这个读法",
+        "body": "这个模块把“冲突回避”作为本次自我报告的解释路线，而不是稳定类型或能力结论。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "分数线索：EM/RM 和谐线索较强，冲突表达线索较弱。",
+          "你可能为了避免升级而推迟必要分歧。",
+          "这些线索需要结合现实反馈、关系安全度、文化语境和当时压力一起理解。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "How the evidence supports this result",
-        "body": "This module turns Conflict Avoider from a label into observable evidence and practiceable moves.",
+        "title": "How the evidence supports this reading",
+        "body": "This module treats “conflict avoider” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "Score signal: harmony signals in EM/RM are stronger while conflict expression is weaker.",
+          "you may delay necessary disagreement to avoid escalation.",
+          "These signals should be read alongside real-world feedback, relationship safety, cultural context, and current stress."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.evidence_stack.conflict_avoider",
@@ -2185,32 +2188,32 @@
         ],
         "placement": "Evidence Snapshot",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     },
     "eq.depth.development_path.conflict_avoider": {
       "zh-CN": {
-        "title": "下一步发展路径",
-        "body": "这个模块把“冲突回避者”从一句描述拆成可观察的证据和可练习的动作。",
+        "title": "下一步观察路径",
+        "body": "这个模块把“冲突回避”转成一个可观察、低风险、可复盘的发展假设。",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "这一路径的优势在于你已经有一个可观察的情绪或关系资源。",
-          "如果没有明确练习，这个资源可能在压力下变形。"
+          "用低强度句式先提出一个具体分歧。",
+          "选择一个普通、低风险场景练习，不用于高冲突或不安全关系。",
+          "一周后用实际反馈修正这个假设，而不是只凭分数定性自己。"
         ],
-        "what_this_does_not_mean": "它不说明你在所有场景都会这样，也不适合替代现实反馈。",
-        "next_read": "继续查看现实场景和行动处方。"
+        "what_this_does_not_mean": "这是基于本次自我报告的深读解释，不代表所有情境、外部评价、能力测验、医疗或心理健康判断、招聘判断或职业预测。",
+        "next_read": "接着看现实场景、职业环境变量和一个低风险行动；把它当作观察假设，而不是定论。"
       },
       "en": {
-        "title": "Next development path",
-        "body": "This module turns Conflict Avoider from a label into observable evidence and practiceable moves.",
+        "title": "Next observation path",
+        "body": "This module turns “conflict avoider” into an observable, low-risk development hypothesis.",
         "bullets": [
-          "Specific score pattern or route-level pattern match.",
-          "The strength in this pattern is that there is already an observable emotional or relational resource.",
-          "Without a clear practice, that resource can shift under pressure."
+          "use a low-intensity sentence to name one specific disagreement.",
+          "Practice in an ordinary, low-risk situation; do not apply it to high-conflict or unsafe relationships.",
+          "After a week, revise the hypothesis using real feedback instead of defining yourself by the score."
         ],
-        "what_this_does_not_mean": "It does not mean you act this way in every situation, and it should not replace real-world feedback.",
-        "next_read": "Continue to the reality scenes and action prescription."
+        "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction.",
+        "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions."
       },
       "meta": {
         "id": "eq.depth.development_path.conflict_avoider",
@@ -2221,8 +2224,8 @@
         ],
         "placement": "Action Prescription",
         "claim_risk": "medium",
-        "risk_notes": "Deep-read module only.",
-        "source_version": "v2.3_proposal"
+        "risk_notes": "Self-report deep-read module; do not use as ability, diagnosis, hiring, relationship-quality, or career-prediction evidence.",
+        "source_version": "science_boundary_repair_v1"
       }
     }
   }
