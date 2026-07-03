@@ -13089,9 +13089,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2670 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All required GitHub checks passed on PR #2670 head 4ec4b461bfa42ffed23e7d039b4ba1410eea52f6 after rebase onto origin/main."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "4ec4b461bfa42ffed23e7d039b4ba1410eea52f6",
     "depends_on": [
       "ENNEA-RP-11"
     ],
@@ -13120,6 +13125,11 @@
         "at": "2026-07-03T14:17:00Z",
         "status": "rebased_local_validation_passed",
         "notes": "Rebased onto latest origin/main 5ec8b3c6a4bf5cdb5d986c05ca26fd4466875122 after main advanced; required local validation re-ran and passed."
+      },
+      {
+        "at": "2026-07-03T14:31:00Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed for PR #2670 after rebase and mergeStateStatus was CLEAN; scope remains confined to wing hint theory registry content and train ledger."
       }
     ],
     "failure_reason": null,
@@ -13144,7 +13154,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to wing hint theory registry content and train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-12: fix(enneagram): repair wing hint visual boundary",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
