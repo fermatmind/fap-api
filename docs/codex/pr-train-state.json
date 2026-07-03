@@ -5019,40 +5019,52 @@
       }
     ]
   },
-  "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01": {
-    "base": "main",
-    "branch": "codex/big5-low-quality-scientific-repair-01",
-    "checks": [
-
-    ],
-    "commit_sha": null,
-    "depends_on": [
-      "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01"
-    ],
-    "failure_reason": null,
-    "id": "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
-    "remote_branch_deleted": false,
-    "repo": "fap-api",
-    "scope_validation": {
-      "allowed_paths_only": null,
-      "github_checks_green": null,
-      "local_validation_passed": null,
-      "post_merge_revalidated": null
+    "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01": {
+      "base": "main",
+      "branch": "codex/big5-low-quality-scientific-repair-01",
+      "checks": {
+        "commands": [
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "local": "passed_after_rebase",
+        "github": "pending_after_rebase",
+        "scope_validation": "passed_after_rebase"
+      },
+      "commit_sha": "a47a8dac0132323a7567a0f56f8951020499f6de",
+      "depends_on": [
+        "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01"
+      ],
+      "failure_reason": null,
+      "id": "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01",
+      "local_cleanup_executed": false,
+      "merged_at": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2672",
+      "remote_branch_deleted": false,
+      "repo": "fap-api",
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "github_checks_green": null,
+        "local_validation_passed": true,
+        "post_merge_revalidated": null
+      },
+      "status": "pr_open_rebased",
+      "title": "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01: Big Five low quality scientific repair",
+      "transitions": [
+        {
+          "at": "2026-07-02T16:11:40Z",
+          "from": null,
+          "note": "User authorized Big Five result-page scientific content repair PR train entry.",
+          "to": "authorized"
+        }
+      ],
+      "updated_at": "2026-07-03T05:50:45Z"
     },
-    "status": "authorized",
-    "title": "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01: Big Five low quality scientific repair",
-    "transitions": [
-      {
-        "at": "2026-07-02T16:11:40Z",
-        "from": null,
-        "note": "User authorized Big Five result-page scientific content repair PR train entry.",
-        "to": "authorized"
-      }
-    ]
-  },
   "BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01": {
     "base": "main",
     "branch": "codex/big5-method-boundary-scientific-repair-01",
@@ -6612,55 +6624,57 @@
     "title": "BIG5-SHARE-PDF-HISTORY-COMPARE-SAFE-CONTENT-01: Thicken Big Five safe surface content assets",
     "train_scope": "big5_result_page_content_asset_thickening"
   },
-  "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01": {
-    "base": "main",
-    "branch": "codex/big5-share-safety-scientific-repair-01",
-    "checks": {
-      "commands": [
-        "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
-        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
-        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
-        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi",
-        "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
-        "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
-        "git diff --check"
+    "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01": {
+      "base": "main",
+      "branch": "codex/big5-share-safety-scientific-repair-01",
+      "checks": {
+        "commands": [
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "local": "passed_after_second_rebase",
+        "github": "passed",
+        "scope_validation": "passed",
+        "post_merge_cleanup": "passed"
+      },
+      "commit_sha": "5ec8b3c6a4bf5cdb5d986c05ca26fd4466875122",
+      "depends_on": [
+        "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01"
       ],
-      "local": "passed_after_second_rebase",
-      "github": "pending_after_second_rebase",
-      "scope_validation": "passed"
+      "failure_reason": null,
+      "id": "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01",
+      "local_cleanup_executed": true,
+      "merged_at": "2026-07-03T05:26:10Z",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2667",
+      "remote_branch_deleted": true,
+      "repo": "fap-api",
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "github_checks_green": null,
+        "local_validation_passed": null,
+        "post_merge_revalidated": null
+      },
+      "status": "merged",
+      "title": "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01: Big Five share safety scientific repair",
+      "transitions": [
+        {
+          "at": "2026-07-02T16:11:40Z",
+          "from": null,
+          "note": "User authorized Big Five result-page scientific content repair PR train entry.",
+          "to": "authorized"
+        }
+      ],
+      "post_merge": {
+        "post_merge_revalidated": true
+      },
+      "updated_at": "2026-07-03T05:44:20Z",
+      "merge_commit": "5ec8b3c6a4bf5cdb5d986c05ca26fd4466875122"
     },
-    "commit_sha": "e20ec3440",
-    "depends_on": [
-      "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01"
-    ],
-    "failure_reason": null,
-    "id": "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/2667",
-    "remote_branch_deleted": false,
-    "repo": "fap-api",
-    "scope_validation": {
-      "allowed_paths_only": null,
-      "github_checks_green": null,
-      "local_validation_passed": null,
-      "post_merge_revalidated": null
-    },
-    "status": "ready_to_merge",
-    "title": "BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01: Big Five share safety scientific repair",
-    "transitions": [
-      {
-        "at": "2026-07-02T16:11:40Z",
-        "from": null,
-        "note": "User authorized Big Five result-page scientific content repair PR train entry.",
-        "to": "authorized"
-      }
-    ],
-    "post_merge": {
-      "post_merge_revalidated": null
-    },
-    "updated_at": "2026-07-03T05:20:40Z"
-  },
   "CAREER-1046-OPS-SCOPE-RECONCILIATION-01": {
     "base": "main",
     "branch": "codex/career-1046-ops-scope-reconciliation-01",

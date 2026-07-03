@@ -59,5 +59,9 @@
   "scan_scope": "public_visible_fields_only",
   "schema": "fap.big5.result_page_v2.low_quality.revised_v0_3.normalized.source_qa_scan.v0_1",
   "schema_version": "big5_low_quality_revised.qa_scan.v0_3",
-  "selector_candidate_count": 14
+  "selector_candidate_count": 14,
+  "scientific_repair_pr": "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01",
+  "scientific_repair_stage": "low_quality_scientific_repair_v0_4",
+  "normal_result_copy_policy": "low_quality_copy_is_conditional_and_must_not_be_appended_to_normal_results",
+  "updated_by": "codex_low_quality_scientific_repair_01"
 }
