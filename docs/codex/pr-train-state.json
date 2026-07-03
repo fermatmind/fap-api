@@ -14778,7 +14778,7 @@
         "evidence": "No whitespace errors."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "1745b3f66bbc29e047e719efa2562afd2ee3aca5",
     "depends_on": [
       "ENNEA-RP-25"
     ],
@@ -14797,6 +14797,11 @@
         "at": "2026-07-03T09:53:35.980Z",
         "status": "local_validation_passed",
         "notes": "Reframed T1-T9 early warning signs as observable stress-trigger signals and removed medical or mental-health judgment wording; required local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T09:53:45.254Z",
+        "status": "committed",
+        "notes": "Created local implementation commit 1745b3f66bbc29e047e719efa2562afd2ee3aca5 for ENNEA-RP-26 after local validation and scope validation passed."
       }
     ],
     "failure_reason": null,
@@ -14821,7 +14826,7 @@
       ],
       "evidence": "Changed files are confined to stress trigger/early warning content in type registry plus train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-26: fix(enneagram): repair stress trigger",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
