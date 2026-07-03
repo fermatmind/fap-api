@@ -12533,8 +12533,8 @@
     "depends_on": [
       "ENNEA-RP-08"
     ],
-    "status": "pr_opened",
-    "commit_sha": "b2f6ae1ff3314f6d3d0628bc85186bdee6f62e07",
+    "status": "ready_to_merge",
+    "commit_sha": "48df5c772da52838431b5a83173f15d83cbc6998",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2663",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -12583,6 +12583,11 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2663 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All required GitHub checks passed on PR #2663 head 48df5c772da52838431b5a83173f15d83cbc6998."
       }
     },
     "scope_validation": {
@@ -12625,6 +12630,11 @@
         "at": "2026-07-03T07:15:00Z",
         "status": "pr_opened",
         "notes": "Opened PR #2663 for center summary boundary repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T07:25:00Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed for PR #2663; scope remains confined to center summary boundary content, runtime projection, tests, and train ledger."
       }
     ]
   },
