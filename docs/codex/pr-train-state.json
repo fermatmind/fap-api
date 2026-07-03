@@ -16583,11 +16583,12 @@
         "notes": "Initial validator failure on high-certainty phrase \"一定会\" was fixed within sample_report_registry scope; full validation passed with existing warnings only."
       },
       "github": {
-        "status": "pending",
-        "pr": 2708
+        "status": "pass",
+        "pr": 2708,
+        "head_sha": "601be82367190d6431c39112231bd4a739851c86"
       }
     },
-    "commit_sha": "960b6e760560a3f43e0f245e17abd087c7d7d843",
+    "commit_sha": "601be82367190d6431c39112231bd4a739851c86",
     "depends_on": [
       "ENNEA-RP-40"
     ],
@@ -16616,6 +16617,11 @@
         "at": "2026-07-03T14:21:31Z",
         "status": "github_checks_pending",
         "notes": "Opened PR #2708 and pushed branch for required GitHub checks."
+      },
+      {
+        "at": "2026-07-03T14:27:12Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed and final scope validation remained within ENNEA-RP-41 allowed paths."
       }
     ],
     "failure_reason": null,
@@ -16639,7 +16645,7 @@
       ],
       "outside_scope_files": []
     },
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-41: fix(enneagram): repair sample report link",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
