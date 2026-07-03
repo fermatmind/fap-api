@@ -15125,7 +15125,7 @@
         "command": "git diff --check"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "54aba963de2fe7c2fecf5ddd39e279966d89b402",
     "depends_on": [
       "ENNEA-RP-28"
     ],
@@ -15144,6 +15144,12 @@
         "at": "2026-07-03T10:44:48.676Z",
         "status": "local_validation_passed",
         "notes": "Required local checks passed and changed files remained within ENNEA-RP-29 scope."
+      },
+      {
+        "at": "2026-07-03T10:45:11.657Z",
+        "status": "committed",
+        "commit_sha": "54aba963de2fe7c2fecf5ddd39e279966d89b402",
+        "notes": "Implementation commit created after local validation."
       }
     ],
     "failure_reason": null,
@@ -15168,7 +15174,7 @@
       ],
       "evidence": "Changed files are confined to arrow placeholder copy in theory_hint_registry plus train ledger reconciliation/status for ENNEA-RP-28/29."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-29: fix(enneagram): repair arrow placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
