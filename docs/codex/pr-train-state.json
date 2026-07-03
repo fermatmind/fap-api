@@ -790,9 +790,9 @@
     "depends_on": [
       "ENNEA-RP-06"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "f07d9318233e1d92d001babd9a07b7d37ae8d77a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2659",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -869,6 +869,11 @@
         "at": "2026-07-03T05:54:00Z",
         "status": "local_validation_passed",
         "notes": "Implemented close-call card content thickening through existing fixed registry keys; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T05:57:00Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2659 for close-call card content repair; awaiting GitHub required checks."
       }
     ]
   },
@@ -66082,7 +66087,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T05:54:00Z",
+  "updated_at": "2026-07-03T05:57:00Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
