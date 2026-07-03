@@ -16208,6 +16208,11 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are confined to resonance feedback UI/observation copy and train ledger reconciliation/state."
+      },
+      "pr_created": {
+        "status": "pass",
+        "command": "gh pr create --repo fermatmind/fap-api --base main --head codex/ennea-rp-38-resonance-feedback-placeholder",
+        "evidence": "Opened PR #2705 for ENNEA-RP-38."
       }
     },
     "commit_sha": "8cfc53635e49567d15a061575834ac95b9897dd4",
@@ -16235,13 +16240,19 @@
         "status": "committed",
         "commit_sha": "8cfc53635e49567d15a061575834ac95b9897dd4",
         "notes": "Committed ENNEA-RP-38 resonance feedback placeholder copy repair and local validation ledger."
+      },
+      {
+        "at": "2026-07-03T13:31:43.540Z",
+        "status": "pr_open",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2705",
+        "notes": "Opened PR #2705 for ENNEA-RP-38."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-38",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2705",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -16260,7 +16271,7 @@
       ],
       "evidence": "Changed files are confined to resonance feedback UI/observation copy and train ledger reconciliation/state."
     },
-    "status": "committed",
+    "status": "pr_open",
     "title": "ENNEA-RP-38: fix(enneagram): repair resonance feedback placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
