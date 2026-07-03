@@ -7937,6 +7937,77 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_selector_public_payloads_do_not_expose_runtime_flags(): void
+    {
+        $selectorFiles = [];
+        foreach ([
+            base_path('content_assets/big5/result_page_v2/agent_runs'),
+            base_path('content_assets/big5/result_page_v2/staging_candidate_imports'),
+        ] as $root) {
+            $iterator = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($root, \RecursiveDirectoryIterator::SKIP_DOTS)
+            );
+
+            foreach ($iterator as $file) {
+                if (! $file->isFile()) {
+                    continue;
+                }
+
+                if (in_array($file->getFilename(), [
+                    'selector_asset_candidates.jsonl',
+                    'selector_asset_candidates.staging.jsonl',
+                ], true)) {
+                    $selectorFiles[] = $file->getPathname();
+                }
+            }
+        }
+
+        sort($selectorFiles);
+
+        $this->assertNotSame([], $selectorFiles);
+
+        $forbiddenPublicPayloadKeys = [
+            'runtime_use',
+            'production_use_allowed',
+            'ready_for_pilot',
+            'ready_for_runtime',
+            'ready_for_production',
+        ];
+        $checkedRows = 0;
+        $rowsWithNonPublicRuntimeMetadata = 0;
+        $rowsWithHygieneTrace = 0;
+
+        foreach ($selectorFiles as $path) {
+            foreach ($this->readJsonl($path) as $lineNumber => $row) {
+                $context = str_replace(base_path().'/', '', $path).':'.($lineNumber + 1);
+                $publicPayload = $row['public_payload'] ?? [];
+
+                $this->assertIsArray($publicPayload, $context);
+
+                foreach ($forbiddenPublicPayloadKeys as $key) {
+                    $this->assertArrayNotHasKey($key, $publicPayload, $context.' exposes '.$key);
+                }
+
+                if (
+                    data_get($row, 'provenance.runtime_use') !== null
+                    || data_get($row, 'replacement_policy.runtime_use') !== null
+                ) {
+                    $rowsWithNonPublicRuntimeMetadata++;
+                }
+
+                if (data_get($row, 'source_trace.public_payload_hygiene.pr') === 'BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01') {
+                    $rowsWithHygieneTrace++;
+                }
+
+                $checkedRows++;
+            }
+        }
+
+        $this->assertGreaterThan(0, $checkedRows);
+        $this->assertSame($checkedRows, $rowsWithNonPublicRuntimeMetadata);
+        $this->assertGreaterThan(0, $rowsWithHygieneTrace);
+    }
+
     private function readJson(string $path): array
     {
         $decoded = json_decode((string) file_get_contents($path), true);

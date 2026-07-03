@@ -35947,6 +35947,7 @@ prs:
       - Keep all candidate/staging/QA artifacts staging-only or not-runtime with production_use_allowed=false and ready flags false.
     allowed_paths:
       - backend/content_assets/big5/result_page_v2/agent_runs/**/selector_asset_candidates.jsonl
+      - backend/content_assets/big5/result_page_v2/agent_runs/**/SHA256SUMS*
       - backend/content_assets/big5/result_page_v2/staging_candidate_imports/**
       - backend/content_assets/big5/result_page_v2/qa/**
       - backend/tests/**BigFiveResultPageV2**
