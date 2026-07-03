@@ -14067,7 +14067,7 @@
         "evidence": "No whitespace errors."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "4080d0d1bd94e5346471d73a37b3d24bd1078bbf",
     "depends_on": [
       "ENNEA-RP-19"
     ],
@@ -14086,13 +14086,18 @@
         "at": "2026-07-03T07:52:27Z",
         "status": "local_validation_passed",
         "notes": "Reframed managed-by-others copy as collaboration preferences and alignment methods without over-determined management advice; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T07:53:25Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2685 for managed-by-others content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-20",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2685",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -14112,7 +14117,7 @@
       ],
       "status": "pass"
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-20: fix(enneagram): repair managed-by-others content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
