@@ -13885,7 +13885,7 @@
         "evidence": "No whitespace errors."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "ca8db37916fcbb38b9eb5c30c5dedfbbdce25b02",
     "depends_on": [
       "ENNEA-RP-17"
     ],
@@ -13904,13 +13904,18 @@
         "at": "2026-07-03T07:19:24Z",
         "status": "local_validation_passed",
         "notes": "Reframed collaboration friction points as negotiable interaction points for all nine types; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T07:20:57Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2682 for collaboration friction content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-18",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2682",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -13930,7 +13935,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to collaboration friction content in type registry plus train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-18: fix(enneagram): repair collaboration friction",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
