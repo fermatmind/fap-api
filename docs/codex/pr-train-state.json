@@ -4523,11 +4523,12 @@
         "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
         "git diff --check"
       ],
-      "github": "pending",
+      "github": "passed",
       "local": "passed",
+      "merge_state": "CLEAN",
       "scope_validation": "passed"
     },
-    "commit_sha": "5575a8d3ed64f643a03e4319c5382983f4c76ffb",
+    "commit_sha": "b95919379f4db18b35fce5e735a457ee0499c28f",
     "depends_on": [
       "BIG5-FACETS-30-SCIENTIFIC-REPAIR-01"
     ],
@@ -4540,11 +4541,11 @@
     "repo": "fap-api",
     "scope_validation": {
       "allowed_paths_only": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "local_validation_passed": true,
       "post_merge_revalidated": null
     },
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "BIG5-COUPLING-VARIANTS-SCIENTIFIC-REPAIR-01: Big Five coupling variants scientific repair",
     "transitions": [
       {
@@ -4570,9 +4571,15 @@
         "from": "committed",
         "note": "Opened GitHub PR #2665 for scoped coupling variants scientific repair.",
         "to": "pr_open"
+      },
+      {
+        "at": "2026-07-03T04:40:59Z",
+        "from": "pr_open",
+        "note": "GitHub checks passed and PR mergeStateStatus was CLEAN.",
+        "to": "ready_to_merge"
       }
     ],
-    "updated_at": "2026-07-03T04:35:06Z"
+    "updated_at": "2026-07-03T04:40:59Z"
   },
   "BIG5-DOMAIN-BANDS-CONTENT-THICKENING-01": {
     "api_runtime_change": false,
@@ -75079,5 +75086,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T04:35:06Z"
+  "updated_at": "2026-07-03T04:40:59Z"
 }
