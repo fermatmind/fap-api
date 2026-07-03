@@ -15947,7 +15947,7 @@
         "command": "git diff --check"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "1ac27175ac50d6ea3865f3e834fad86e057f26ec",
     "depends_on": [
       "ENNEA-RP-35"
     ],
@@ -15966,6 +15966,12 @@
         "at": "2026-07-03T12:56:29.932Z",
         "status": "local_validation_passed",
         "notes": "Required local checks passed after fixing current-scope method boundary phrase regression; changed files remained within ENNEA-RP-36 scope."
+      },
+      {
+        "at": "2026-07-03T12:56:45.595Z",
+        "status": "committed",
+        "commit_sha": "1ac27175ac50d6ea3865f3e834fad86e057f26ec",
+        "notes": "Implementation commit created after local validation."
       }
     ],
     "failure_reason": null,
@@ -15990,7 +15996,7 @@
       ],
       "evidence": "Changed files are confined to method_registry boundary copy and train ledger reconciliation/state."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-36: fix(enneagram): repair method boundary",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
