@@ -947,6 +947,13 @@ final class RiasecDeepCopySlotRegistry
                 'report_snapshot_mutation_allowed' => false,
                 'share_pdf_payload_expansion_allowed' => false,
                 'raw_feedback_exposure_allowed' => false,
+                'next_steps_only' => (bool) ($row['next_steps_only'] ?? true),
+                'feedback_replaces_measured_result_allowed' => (bool) ($row['feedback_replaces_measured_result_allowed'] ?? false),
+                'result_override_allowed' => (bool) ($row['result_override_allowed'] ?? false),
+                'snapshot_share_pdf_mutation_allowed' => (bool) ($row['snapshot_share_pdf_mutation_allowed'] ?? false),
+                'raw_feedback_public_exposure_allowed' => (bool) ($row['raw_feedback_public_exposure_allowed'] ?? false),
+                'recommended_output' => (string) ($row['recommended_output'] ?? 'next_steps_and_optional_retake_only'),
+                'result_binding' => (string) ($row['result_binding'] ?? 'overlay_only_does_not_mutate_snapshot_share_pdf'),
             ]);
 
             if ($this->validateSlot($slot) === []) {
@@ -1106,6 +1113,25 @@ final class RiasecDeepCopySlotRegistry
             }
             if (! in_array((string) ($slot['disagree_state'] ?? ''), self::DISAGREE_STATES, true)) {
                 $errors[] = 'unsupported_disagree_state';
+            }
+            if (($slot['next_steps_only'] ?? false) !== true) {
+                $errors[] = 'disagree_next_steps_only_must_be_true';
+            }
+            foreach ([
+                'feedback_replaces_measured_result_allowed',
+                'result_override_allowed',
+                'snapshot_share_pdf_mutation_allowed',
+                'raw_feedback_public_exposure_allowed',
+            ] as $flag) {
+                if (($slot[$flag] ?? true) !== false) {
+                    $errors[] = 'disagree_'.$flag.'_must_be_false';
+                }
+            }
+            if ((string) ($slot['recommended_output'] ?? '') !== 'next_steps_and_optional_retake_only') {
+                $errors[] = 'unsupported_disagree_recommended_output';
+            }
+            if ((string) ($slot['result_binding'] ?? '') !== 'overlay_only_does_not_mutate_snapshot_share_pdf') {
+                $errors[] = 'unsupported_disagree_result_binding';
             }
         }
 
@@ -1331,6 +1357,13 @@ final class RiasecDeepCopySlotRegistry
             'content_version',
             'evidence_level',
             'content_status',
+            'next_steps_only',
+            'feedback_replaces_measured_result_allowed',
+            'result_override_allowed',
+            'snapshot_share_pdf_mutation_allowed',
+            'raw_feedback_public_exposure_allowed',
+            'recommended_output',
+            'result_binding',
         ];
     }
 
@@ -2249,6 +2282,19 @@ final class RiasecDeepCopySlotRegistry
         if (($row['snapshot_mutation_allowed'] ?? true) !== false || ($row['share_pdf_exposure_allowed'] ?? true) !== false) {
             return false;
         }
+        if (($row['next_steps_only'] ?? false) !== true
+            || ($row['feedback_replaces_measured_result_allowed'] ?? true) !== false
+            || ($row['result_override_allowed'] ?? true) !== false
+            || ($row['snapshot_share_pdf_mutation_allowed'] ?? true) !== false
+            || ($row['raw_feedback_public_exposure_allowed'] ?? true) !== false
+        ) {
+            return false;
+        }
+        if (($row['recommended_output'] ?? null) !== 'next_steps_and_optional_retake_only'
+            || ($row['result_binding'] ?? null) !== 'overlay_only_does_not_mutate_snapshot_share_pdf'
+        ) {
+            return false;
+        }
         if (($row['frontend_fallback_allowed'] ?? true) !== false) {
             return false;
         }
@@ -2508,6 +2554,13 @@ final class RiasecDeepCopySlotRegistry
                 'raw_feedback_public_exposure',
             ],
             'user_visible_boundary' => '不认同结果只影响探索路径，不修改 measured Holland Code、RIASEC 分数、报告快照、分享或 PDF。',
+            'next_steps_only' => true,
+            'feedback_replaces_measured_result_allowed' => false,
+            'result_override_allowed' => false,
+            'snapshot_share_pdf_mutation_allowed' => false,
+            'raw_feedback_public_exposure_allowed' => false,
+            'recommended_output' => 'next_steps_and_optional_retake_only',
+            'result_binding' => 'overlay_only_does_not_mutate_snapshot_share_pdf',
         ], $content);
     }
 
