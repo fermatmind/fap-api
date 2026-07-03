@@ -34,5 +34,15 @@ final class EnneagramGroupRegistryCoverageTest extends TestCase
         ], $keys);
         $this->assertFalse($entries->contains(fn ($entry): bool => trim((string) ($entry['stress_signal'] ?? '')) === ''));
         $this->assertFalse($entries->contains(fn ($entry): bool => ($entry['content_maturity'] ?? null) !== 'p0_ready'));
+
+        $centerEntries = $entries->filter(fn ($entry): bool => ($entry['group_type'] ?? null) === 'center');
+        $this->assertFalse($centerEntries->contains(fn ($entry): bool => trim((string) ($entry['boundary_note'] ?? '')) === ''));
+        $this->assertFalse($centerEntries->contains(fn ($entry): bool => trim((string) ($entry['availability_note'] ?? '')) === ''));
+        $this->assertFalse($centerEntries->contains(fn ($entry): bool => ($entry['not_for'] ?? []) !== [
+            'center_classification',
+            'diagnosis',
+            'health_level_judgement',
+            'ability_rating',
+        ]));
     }
 }
