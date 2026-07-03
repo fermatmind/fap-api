@@ -13209,9 +13209,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2674 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All required GitHub checks passed on PR #2674 head 7d696f4640068df89b0623e6820dbc3a5a3d21f0."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "7d696f4640068df89b0623e6820dbc3a5a3d21f0",
     "depends_on": [
       "ENNEA-RP-12"
     ],
@@ -13235,6 +13240,11 @@
         "at": "2026-07-03T15:10:00Z",
         "status": "pr_opened",
         "notes": "Opened PR #2674 for methodology boundary card repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T15:20:00Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed for PR #2674 and mergeStateStatus was CLEAN; scope remains confined to methodology boundary method/ui registry content and train ledger."
       }
     ],
     "failure_reason": null,
@@ -13261,7 +13271,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to methodology boundary method/ui registry content and train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-13: fix(enneagram): repair methodology boundary card",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
