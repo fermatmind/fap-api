@@ -1423,6 +1423,15 @@ final class EnneagramReportComposer
             $scope === 'diffuse' => 'observe_before_retake',
             default => 'stay_with_current_form',
         };
+        $methodKey = match ($recommendation) {
+            'retake_same_form_after_quality_check' => 'low_quality_boundary',
+            'consider_fc144_followup' => 'fc144_forced_choice_methodology',
+            'observe_before_retake' => 'diffuse_boundary',
+            default => 'same_model_not_same_score_space',
+        };
+        $recommendationMethod = is_array($indexes['method_entries'][$methodKey] ?? null)
+            ? $indexes['method_entries'][$methodKey]
+            : [];
 
         return $this->module(
             'form_recommendation',
@@ -1435,11 +1444,14 @@ final class EnneagramReportComposer
                 'form_code' => data_get($projectionV2, 'form.form_code'),
                 'methodology_variant' => data_get($projectionV2, 'form.methodology_variant'),
                 'recommended_first_action' => data_get($projectionV2, 'render_hints.recommended_first_action'),
+                'recommendation_copy' => $recommendationMethod['copy'] ?? null,
+                'boundary_kind' => 'form_specific_observation_not_cross_form_verdict',
+                'not_for' => ['cross_form_score_comparison', 'accuracy_ranking', 'replacement_result', 'personality_change_claim'],
             ],
             ['classification.interpretation_scope', 'form.form_code', 'form.methodology_variant'],
-            ['enneagram_method_registry'],
+            ['enneagram_method_registry:'.$methodKey],
             [],
-            $this->registryMeta($indexes, 'enneagram_method_registry')
+            $recommendationMethod !== [] ? $this->entryMeta($recommendationMethod, $this->registryMeta($indexes, 'enneagram_method_registry')) : $this->registryMeta($indexes, 'enneagram_method_registry')
         );
     }
 

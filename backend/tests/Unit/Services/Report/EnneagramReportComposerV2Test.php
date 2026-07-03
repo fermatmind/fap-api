@@ -329,6 +329,35 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertStringContainsString('不是在责备作答者', (string) data_get($summary, 'content.body'));
     }
 
+    public function test_form_recommendation_uses_safe_registry_boundary_copy(): void
+    {
+        $payload = $this->composeReportV2(
+            $this->syntheticProjectionInput('enneagram_forced_choice_144', [
+                'T5' => 84.0,
+                'T6' => 68.0,
+                'T4' => 52.0,
+                'T1' => 35.0,
+                'T2' => 28.0,
+                'T3' => 21.0,
+                'T7' => 18.0,
+                'T8' => 16.0,
+                'T9' => 12.0,
+            ], [], [
+                'level' => 'P2',
+                'flags' => ['speed_too_fast'],
+            ])
+        );
+
+        $module = $this->module($payload, 'form_recommendation');
+
+        $this->assertSame('retake_same_form_after_quality_check', data_get($module, 'content.recommendation_key'));
+        $this->assertSame('form_specific_observation_not_cross_form_verdict', data_get($module, 'content.boundary_kind'));
+        $this->assertStringContainsString('重测同一题型', (string) data_get($module, 'content.recommendation_copy'));
+        $this->assertStringContainsString('不能被当成规避质量边界', (string) data_get($module, 'content.recommendation_copy'));
+        $this->assertContains('accuracy_ranking', (array) data_get($module, 'content.not_for'));
+        $this->assertContains('enneagram_method_registry:low_quality_boundary', (array) data_get($module, 'registry_refs'));
+    }
+
     public function test_v2_modules_expose_p0_ready_registry_provenance(): void
     {
         $payload = $this->composeReportV2(
