@@ -12534,7 +12534,7 @@
       "ENNEA-RP-08"
     ],
     "status": "ready_to_merge",
-    "commit_sha": "48df5c772da52838431b5a83173f15d83cbc6998",
+    "commit_sha": "70e92a6a20c4c8ced8d75791f46802e5b60c0623",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2663",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -12585,9 +12585,13 @@
         "evidence": "No whitespace errors."
       },
       "github_required_checks": {
-        "status": "pass",
+        "status": "pending",
         "command": "gh pr checks 2663 --repo fermatmind/fap-api --watch --interval 15",
-        "evidence": "All required GitHub checks passed on PR #2663 head 48df5c772da52838431b5a83173f15d83cbc6998."
+        "evidence": "Rebased head 70e92a6a20c4c8ced8d75791f46802e5b60c0623 requires a fresh GitHub required-check run after force-with-lease push."
+      },
+      "post_rebase_local_validation": {
+        "status": "pass",
+        "evidence": "After rebasing onto latest origin/main, reran jq registry validation, EnneagramReportComposerV2Test, EnneagramTypeRegistryCoverageTest, EnneagramRegistryPackLoadTest, php artisan test --filter=Enneagram, git diff --check, and scope validation successfully."
       }
     },
     "scope_validation": {
@@ -12608,7 +12612,7 @@
       ],
       "outside_scope_files": [],
       "status": "pass",
-      "evidence": "Changed files are confined to center summary group registry content, center runtime projection, Enneagram tests, and train ledger reconciliation."
+      "evidence": "After rebase, changed files remain confined to center summary group registry content, center runtime projection, Enneagram tests, and train ledger reconciliation."
     },
     "events": [
       {
@@ -12635,6 +12639,11 @@
         "at": "2026-07-03T07:25:00Z",
         "status": "ready_to_merge",
         "notes": "GitHub required checks passed for PR #2663; scope remains confined to center summary boundary content, runtime projection, tests, and train ledger."
+      },
+      {
+        "at": "2026-07-03T07:42:00Z",
+        "status": "rebased_local_validation_passed",
+        "notes": "Rebased PR #2663 onto latest origin/main at head 70e92a6a20c4c8ced8d75791f46802e5b60c0623; required local validation and scope validation passed again."
       }
     ]
   },
