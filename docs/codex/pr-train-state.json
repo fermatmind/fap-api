@@ -15551,6 +15551,34 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json"
+      },
+      "enneagram_type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "notes": "Passed with existing PHPUnit warnings."
+      },
+      "enneagram_registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "notes": "Passed with existing PHPUnit warnings."
+      },
+      "enneagram_report_composer_v2": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "notes": "Passed with existing PHPUnit warnings."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "notes": "Passed with existing PHPUnit warnings; 83641 assertions."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
       }
     },
     "commit_sha": null,
@@ -15562,6 +15590,11 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T11:54:59.864Z",
+        "status": "local_validation_passed",
+        "notes": "Required local checks passed and changed files remained within ENNEA-RP-33 scope."
       }
     ],
     "failure_reason": null,
@@ -15579,9 +15612,15 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [],
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/scenario_registry.json",
+        "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json"
+      ],
+      "evidence": "Changed files are confined to conflict_script scenario copy, relationship_pack.conflict_trigger_points, relationship_pack.repair_language, and train ledger reconciliation/state."
     },
-    "status": "pending_dependency",
+    "status": "local_validation_passed",
     "title": "ENNEA-RP-33: fix(enneagram): repair conflict script",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
