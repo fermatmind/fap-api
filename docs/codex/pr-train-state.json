@@ -16082,6 +16082,11 @@
         "status": "pass",
         "command": "gh pr create --repo fermatmind/fap-api --base main --head codex/ennea-rp-37-seven-day-observation",
         "evidence": "Opened PR #2704 for ENNEA-RP-37."
+      },
+      "github_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2704 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All reported GitHub checks passed for PR #2704 before ready_to_merge ledger update."
       }
     },
     "commit_sha": "876c4e77ec3d43a02041f908af1cb89e549488a5",
@@ -16115,6 +16120,11 @@
         "status": "pr_open",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/2704",
         "notes": "Opened PR #2704 for ENNEA-RP-37."
+      },
+      {
+        "at": "2026-07-03T13:21:43.595Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed; PR is ready to merge after final head-check confirmation."
       }
     ],
     "failure_reason": null,
@@ -16138,7 +16148,7 @@
       ],
       "evidence": "Changed files are confined to observation_registry seven-day observation copy and train ledger reconciliation/state."
     },
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-37: fix(enneagram): repair seven-day observation",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
