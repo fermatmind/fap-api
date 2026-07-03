@@ -14177,7 +14177,7 @@
         "evidence": "No whitespace errors."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "ea412270b0629556e72076f42eda21f2b4aee2bb",
     "depends_on": [
       "ENNEA-RP-20"
     ],
@@ -14196,13 +14196,18 @@
         "at": "2026-07-03T08:19:10Z",
         "status": "local_validation_passed",
         "notes": "Reframed workplace trigger points into environment, task, and relationship triggers for T1-T9 without diagnostic stress language; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T08:20:26Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2687 for workplace trigger points content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-21",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2687",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -14220,7 +14225,7 @@
       ],
       "evidence": "Changed files are confined to workplace-trigger-points content in type registry plus train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-21: fix(enneagram): repair workplace triggers",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -76588,5 +76593,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T08:19:10Z"
+  "updated_at": "2026-07-03T08:20:26Z"
 }
