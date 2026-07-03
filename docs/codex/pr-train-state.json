@@ -13997,7 +13997,7 @@
         "evidence": "No whitespace errors."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "dea9fdf57c5bdb00271bc7a667c90e3a9834dcd9",
     "depends_on": [
       "ENNEA-RP-18"
     ],
@@ -14016,13 +14016,18 @@
         "at": "2026-07-03T07:36:23Z",
         "status": "local_validation_passed",
         "notes": "Reframed leadership pattern copy as influence-style clues without leadership ability claims; a validator wording violation was fixed within scope and required local validation passed."
+      },
+      {
+        "at": "2026-07-03T07:37:14Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2684 for leadership pattern content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-19",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2684",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -14042,7 +14047,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to leadership pattern content in type registry plus train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-19: fix(enneagram): repair leadership pattern",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
