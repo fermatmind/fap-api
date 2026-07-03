@@ -5383,7 +5383,7 @@
     "checks": [
 
     ],
-    "commit_sha": null,
+    "commit_sha": "e33d1a51162a60bbc431d32a885a79463a096ee0",
     "depends_on": [
       "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01"
     ],
@@ -13471,16 +13471,21 @@
         "notes": "Started from latest origin/main on branch codex/ennea-rp-15-low-quality-boundary after ENNEA-RP-14 merge and cleanup; scope is low-quality boundary UI copy, composer output, Enneagram tests, and train ledger only."
       },
       {
-        "at": "2026-07-03T06:29:30Z",
+        "at": "2026-07-03T06:27:20Z",
         "status": "local_validation_passed",
         "notes": "Repaired low-quality boundary so it frames response-signal limitation without blame, exposes same-form retest action and non-use boundaries in the composer output, and passes required local validation."
+      },
+      {
+        "at": "2026-07-03T06:27:47Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2677 for low-quality boundary content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-15",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2677",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -13504,7 +13509,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to low-quality boundary UI copy, composer output, Enneagram composer test, and train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-15: fix(enneagram): repair low-quality boundary content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
