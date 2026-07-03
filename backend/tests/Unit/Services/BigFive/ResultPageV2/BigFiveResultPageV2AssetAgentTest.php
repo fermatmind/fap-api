@@ -2125,7 +2125,9 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_action_layer'));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_boundary_layer'));
                 $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
-                $this->assertSame('codex_facets_30_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame('codex_facets_30_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame('BIG5-FACETS-30-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
+                $this->assertSame('facets_30_scientific_repair_v0_5', data_get($row, 'source_trace.scientific_repair_stage'));
 
                 if (($row['asset_id'] ?? null) === 'candidate_content_facet_content_thickening_e3_v0_1') {
                     $this->assertStringNotContainsString('占据一定位置', (string) ($row['body_zh'] ?? ''));
@@ -2146,6 +2148,7 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertSame('staging_only', data_get($row, 'provenance.runtime_use'));
                 $this->assertFalse((bool) data_get($row, 'provenance.production_use_allowed', true));
                 $this->assertFalse((bool) data_get($row, 'replacement_policy.replaces_existing_runtime_asset', true));
+                $this->assertSame('BIG5-FACETS-30-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
             }
 
             $summary = app(BigFiveResultPageV2AssetAgent::class)->stageCandidates([
@@ -2206,8 +2209,27 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 '筛选',
                 '不一定',
                 '失败',
+                'facet',
+                '能力',
+                '客观水平依据',
+                '成功预测',
+                '精确排名',
+                '约高于',
+                '你就是这种人',
+                '固定类型',
             ] as $forbiddenToken) {
                 $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+            }
+
+            foreach ([
+                '细分维度',
+                '细分面向',
+                '线索',
+                '不是诊断',
+                '极端分数',
+                '误差',
+            ] as $requiredPhrase) {
+                $this->assertStringContainsString($requiredPhrase, $visibleText, $requiredPhrase);
             }
         } finally {
             $this->deleteDirectory($artifactRoot);
@@ -2492,6 +2514,8 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertGreaterThanOrEqual(240, (int) data_get($row, 'body_quality.body_chars', 0));
             $this->assertLessThanOrEqual(420, (int) data_get($row, 'body_quality.body_chars', 999));
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
+            $this->assertSame('codex_facets_30_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('BIG5-FACETS-30-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
             $facetCodes[] = (string) data_get($row, 'applies_to.facet_code');
             $trait = (string) data_get($row, 'applies_to.trait');
             $traitCounts[$trait] = ($traitCounts[$trait] ?? 0) + 1;
@@ -2550,8 +2574,27 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             '筛选',
             '不一定',
             '失败',
+            'facet',
+            '能力',
+            '客观水平依据',
+            '成功预测',
+            '精确排名',
+            '约高于',
+            '你就是这种人',
+            '固定类型',
         ] as $forbiddenToken) {
             $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+        }
+
+        foreach ([
+            '细分维度',
+            '细分面向',
+            '线索',
+            '不是诊断',
+            '极端分数',
+            '误差',
+        ] as $requiredPhrase) {
+            $this->assertStringContainsString($requiredPhrase, $visibleText, $requiredPhrase);
         }
     }
 
