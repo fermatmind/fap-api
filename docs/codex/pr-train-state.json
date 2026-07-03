@@ -29409,17 +29409,17 @@
         "summary": "Manifest/state parsed, raw and compiled mirrors match, changed files are within SCI-16 scope, agent playbooks contain required bilingual guard fields and no blocked high-risk/commerce/SJT wording, and no whitespace errors were found."
       }
     ],
-    "commit_sha": "e1b3bcb542d2104fb1ebedde1e6672ad848d0f38",
+    "commit_sha": "7947269458239d81a98056b1988f177897683d73",
     "depends_on": [
       "PR-EQ-ASSET-SCI-03",
       "PR-EQ-ASSET-SCI-12"
     ],
     "failure_reason": null,
     "id": "PR-EQ-ASSET-SCI-16",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T05:39:10Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2671",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "status": "pass",
@@ -29434,7 +29434,7 @@
       ],
       "evidence": "Scope validation passed against PR-EQ-ASSET-SCI-16 allowed_paths."
     },
-    "status": "ready_to_merge",
+    "status": "merged_post_merge_revalidated",
     "title": "PR-EQ-ASSET-SCI-16: repair EQ agent_dialogue_playbooks boundaries",
     "transitions": [
       {
@@ -29458,6 +29458,11 @@
         "status": "ready_to_merge",
         "timestamp": "2026-07-03T13:33:52+08:00",
         "notes": "GitHub checks passed and PR #2671 is clean; ready to squash merge."
+      },
+      {
+        "status": "merged_post_merge_revalidated",
+        "timestamp": "2026-07-03T13:45:04+08:00",
+        "notes": "Verified PR #2671 merged, origin/main contains merge commit 7947269458239d81a98056b1988f177897683d73, local temp worktree/branch cleaned."
       }
     ],
     "github_checks": {
@@ -29469,9 +29474,48 @@
     "base": "main",
     "branch": "codex/pr-eq-asset-sci-17-backend-contract",
     "checks": [
-
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan content:lint --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content lint passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan content:compile --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content compile passed; scoped report_assets compiled output retained and mirrored."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60ContentGateTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warning; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60V5ReportContractTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warnings; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60GoldenCasesTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warning; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60ReportPaywallTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warnings; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60SubmitQualityContractTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warning; assertions passed."
+      },
+      {
+        "command": "YAML/JSON parse, EQ backend contract mirror cmp, scope validation, forbidden wording guard, git diff --check, git diff --cached --check",
+        "status": "passed",
+        "summary": "Manifest/state parsed, raw and compiled mirrors match, changed files are within SCI-17 scope, backend integration contract has required bilingual fields/user_visible=false/risk_notes and no blocked commerce/SJT/ability-like wording, and no whitespace errors were found."
+      }
     ],
-    "commit_sha": null,
+    "commit_sha": "6e5c796e5ecfd0d147cff919bbf3d74c02ccda15",
     "depends_on": [
       "PR-EQ-ASSET-SCI-16"
     ],
@@ -29479,16 +29523,20 @@
     "id": "PR-EQ-ASSET-SCI-17",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2673",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
-      "allowed_paths_only": null,
-      "github_checks_green": null,
-      "local_validation_passed": null,
-      "post_merge_revalidated": null
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json",
+        "backend/content_packs/EQ_60/v1/raw/report_assets/backend_integration_contract.json",
+        "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json",
+        "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/backend_integration_contract.json"
+      ],
+      "evidence": "Scope validation passed against PR-EQ-ASSET-SCI-17 allowed_paths."
     },
-    "status": "user_authorized",
+    "status": "ready_to_merge",
     "title": "PR-EQ-ASSET-SCI-17: clean EQ backend_integration_contract authority boundary",
     "transitions": [
       {
@@ -29496,7 +29544,28 @@
         "status": "user_authorized",
         "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
       }
-    ]
+    ],
+    "history": [
+      {
+        "status": "local_checks_passed",
+        "timestamp": "2026-07-03T13:45:04+08:00",
+        "notes": "All required local checks and backend contract guard scan passed; ready to commit and open PR."
+      },
+      {
+        "status": "pr_open_checks_pending",
+        "timestamp": "2026-07-03T13:45:53+08:00",
+        "notes": "Opened PR #2673 for PR-EQ-ASSET-SCI-17; GitHub checks pending."
+      },
+      {
+        "status": "ready_to_merge",
+        "timestamp": "2026-07-03T13:52:13+08:00",
+        "notes": "GitHub checks passed and PR #2673 is clean; ready to squash merge."
+      }
+    ],
+    "github_checks": {
+      "status": "passed",
+      "summary": "GitHub checks passed for PR #2673; mergeStateStatus CLEAN."
+    }
   },
   "PR-EQ-ASSET-SCI-18": {
     "base": "main",
