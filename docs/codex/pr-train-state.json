@@ -13991,14 +13991,19 @@
         "at": "2026-07-03T07:42:57Z",
         "notes": "GitHub required checks passed on PR #2684; PR is clean and ready for squash merge under repo policy.",
         "status": "ready_to_merge"
+      },
+      {
+        "at": "2026-07-03T07:51:04Z",
+        "notes": "PR #2684 was squash-merged as a5e5ea412124b00693a4aa94d6e5aa7c2ec4e3cb; origin/main contains the merge commit, local main was fast-forwarded, and the local/remote task branches were cleaned before ENNEA-RP-20 started.",
+        "status": "merged_cleanup_complete"
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-19",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T07:49:01Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2684",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -14015,7 +14020,7 @@
       "outside_scope_files": [],
       "status": "pass"
     },
-    "status": "ready_to_merge",
+    "status": "merged_cleanup_complete",
     "title": "ENNEA-RP-19: fix(enneagram): repair leadership pattern",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -14026,9 +14031,48 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-19 merged as PR #2684 and merge commit a5e5ea412124b00693a4aa94d6e5aa7c2ec4e3cb is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 132 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 262 warnings, 2 passed, 83416 assertions, duration 29.22s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2685 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on rebased head b2d9818eda0f58c2fa544eff1e7bf48839b22c35: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "b2d9818eda0f58c2fa544eff1e7bf48839b22c35",
     "depends_on": [
       "ENNEA-RP-19"
     ],
@@ -14037,13 +14081,33 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T07:51:04Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-20-managed-by-others after ENNEA-RP-19 merge and cleanup; scope is managed-by-others content in type registry plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T07:52:27Z",
+        "status": "local_validation_passed",
+        "notes": "Reframed managed-by-others copy as collaboration preferences and alignment methods without over-determined management advice; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T07:53:25Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2685 for managed-by-others content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T08:08:25Z",
+        "status": "ready_to_merge",
+        "notes": "After rebasing onto origin/main, required local checks and GitHub PR checks passed; scope validation remains limited to type registry managed-by-others content plus train ledger."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-20",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2685",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -14053,9 +14117,15 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "evidence": "Changed files are confined to managed-by-others content in type registry plus train ledger reconciliation.",
+      "outside_scope_files": [],
+      "status": "pass"
     },
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-20: fix(enneagram): repair managed-by-others content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -76463,5 +76533,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T07:50:57Z"
+  "updated_at": "2026-07-03T08:08:25Z"
 }
