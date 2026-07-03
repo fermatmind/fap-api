@@ -13130,14 +13130,19 @@
         "at": "2026-07-03T14:31:00Z",
         "status": "ready_to_merge",
         "notes": "GitHub required checks passed for PR #2670 after rebase and mergeStateStatus was CLEAN; scope remains confined to wing hint theory registry content and train ledger."
+      },
+      {
+        "at": "2026-07-03T05:48:52Z",
+        "status": "merged",
+        "notes": "PR #2670 squash-merged as 3cfe7d4170b254b46cdc7c14e808ecd573ea1818; merge commit present in origin/main; local main synced and task branch cleaned up before ENNEA-RP-13."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-12",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T05:48:52Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2670",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -13154,7 +13159,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to wing hint theory registry content and train ledger reconciliation."
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ENNEA-RP-12: fix(enneagram): repair wing hint visual boundary",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -13165,6 +13170,45 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-12 merged as PR #2670 and merge commit 3cfe7d4170b254b46cdc7c14e808ecd573ea1818 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 128 assertions."
+      },
+      "method_registry_boundary": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramMethodRegistryBoundaryTest",
+        "evidence": "Passed: 1 warning, 4 assertions after preserving required same-model anchor phrase."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 262 warnings, 2 passed, 83412 assertions, duration 29.07s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
       }
     },
     "commit_sha": null,
@@ -13176,6 +13220,16 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T14:55:00Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-13-methodology-boundary-card; scope is methodology boundary method/ui registry content plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T15:06:00Z",
+        "status": "local_validation_passed",
+        "notes": "Repaired methodology boundary copy for E105, FC144, score-space, non-diagnostic, and form badge fields; fixed current-scope method registry test anchor and required local validation passed."
       }
     ],
     "failure_reason": null,
@@ -13193,11 +13247,16 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [
-
-      ]
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json",
+        "backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "outside_scope_files": [],
+      "status": "pass",
+      "evidence": "Changed files are confined to methodology boundary method/ui registry content and train ledger reconciliation."
     },
-    "status": "pending_dependency",
+    "status": "local_validation_passed",
     "title": "ENNEA-RP-13: fix(enneagram): repair methodology boundary card",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
