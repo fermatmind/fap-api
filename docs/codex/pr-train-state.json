@@ -6360,7 +6360,7 @@
     "checks": [
 
     ],
-    "commit_sha": null,
+    "commit_sha": "d3b7d901c2a2c1cec0434731d389e3da31b44d0a",
     "depends_on": [
       "BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01"
     ],
@@ -13587,16 +13587,21 @@
         "notes": "Started from latest origin/main on branch codex/ennea-rp-16-work-style-summary after ENNEA-RP-15 merge and cleanup; scope is work-style scenario/type registry content plus train ledger only."
       },
       {
-        "at": "2026-07-03T06:47:00Z",
+        "at": "2026-07-03T06:45:10Z",
         "status": "local_validation_passed",
         "notes": "Repaired work-style summary content so it separates work attention patterns from ability, performance, role-fit, and personnel-decision conclusions; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T06:45:34Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2679 for work-style summary content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-16",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2679",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -13618,7 +13623,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to work-style scenario/type registry content and train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-16: fix(enneagram): repair work style summary",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
