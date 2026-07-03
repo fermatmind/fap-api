@@ -13995,9 +13995,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "head_sha": "28938a851e6067f5d3518479980c67c7da04627b",
+        "evidence": "PR #2684 GitHub checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
-    "commit_sha": "dea9fdf57c5bdb00271bc7a667c90e3a9834dcd9",
+    "commit_sha": "28938a851e6067f5d3518479980c67c7da04627b",
     "depends_on": [
       "ENNEA-RP-18"
     ],
@@ -14021,6 +14026,11 @@
         "at": "2026-07-03T07:37:14Z",
         "status": "pr_opened",
         "notes": "Opened PR #2684 for leadership pattern content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T07:42:57Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed on PR #2684; PR is clean and ready for squash merge under repo policy."
       }
     ],
     "failure_reason": null,
@@ -14047,7 +14057,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to leadership pattern content in type registry plus train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-19: fix(enneagram): repair leadership pattern",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
