@@ -15846,13 +15846,19 @@
         "status": "committed",
         "commit_sha": "62269bf70354fd71147a10d4f283738a3c0d98cc",
         "notes": "Implementation commit created after local validation."
+      },
+      {
+        "at": "2026-07-03T12:39:46.291Z",
+        "status": "pr_opened_github_checks_pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2702",
+        "notes": "PR opened; waiting for required GitHub checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-35",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2702",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -15870,7 +15876,7 @@
       ],
       "evidence": "Changed files are confined to relationship_pack.relationship_traps and train ledger reconciliation/state."
     },
-    "status": "committed",
+    "status": "pr_opened_github_checks_pending",
     "title": "ENNEA-RP-35: fix(enneagram): repair relationship blind spot",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
