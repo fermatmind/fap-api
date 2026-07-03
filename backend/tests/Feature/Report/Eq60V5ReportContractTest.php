@@ -180,6 +180,41 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertSame('eq.quality.level.C', (string) data_get($fixture, 'report.assets.quality_confidence.id'));
     }
 
+    public function test_quality_runtime_speeding_flag_forces_low_confidence_even_when_level_is_not_cd(): void
+    {
+        $this->prepareEqContent();
+
+        $score = $this->strongDimensionScoreWithQuality('B', ['speeding']);
+        $fixture = $this->canonicalFixtureFromScore('EQ60_SPEEDING_RUNTIME_GUARD_SYNTHETIC', 'en', $score);
+
+        $this->assertSame('B', (string) data_get($fixture, 'report.quality.level'));
+        $this->assertSame('low', (string) data_get($fixture, 'report.quality.confidence_label'));
+        $this->assertSame('eq.quality.level.D', (string) data_get($fixture, 'report.quality.explanation_asset_id'));
+        $this->assertSame('low_confidence_result', (string) data_get($fixture, 'report.interpretation.core_formulation_id'));
+        $this->assertSame('retest_reflection', (string) data_get($fixture, 'report.interpretation.action_prescription_id'));
+        $this->assertSame([], (array) data_get($fixture, 'report.interpretation.primary_mechanism_ids'));
+        $this->assertSame('quality_low_overrides_dimension_pattern', (string) data_get($fixture, 'report.interpretation.signal_signature.match_pattern'));
+        $this->assertSame('retest_reflection', (string) data_get($fixture, 'report.assets.action_prescription.id'));
+        $this->assertNotContains('empathy_boundary', (array) data_get($fixture, 'report.interpretation.selected_asset_ids'));
+    }
+
+    public function test_quality_runtime_level_d_without_flags_forces_low_confidence_and_no_strong_assets(): void
+    {
+        $this->prepareEqContent();
+
+        $score = $this->strongDimensionScoreWithQuality('D', []);
+        $fixture = $this->canonicalFixtureFromScore('EQ60_D_LEVEL_RUNTIME_GUARD_SYNTHETIC', 'zh-CN', $score);
+
+        $this->assertSame('D', (string) data_get($fixture, 'report.quality.level'));
+        $this->assertSame('low', (string) data_get($fixture, 'report.quality.confidence_label'));
+        $this->assertSame('eq.quality.level.D', (string) data_get($fixture, 'report.quality.explanation_asset_id'));
+        $this->assertSame('low_confidence_result', (string) data_get($fixture, 'report.interpretation.core_formulation_id'));
+        $this->assertSame('retest_reflection', (string) data_get($fixture, 'report.interpretation.action_prescription_id'));
+        $this->assertSame([], (array) data_get($fixture, 'report.interpretation.primary_mechanism_ids'));
+        $this->assertNotSame('balanced_integrated', (string) data_get($fixture, 'report.assets.core_formulation.id'));
+        $this->assertNotSame('empathy_boundary', (string) data_get($fixture, 'report.assets.action_prescription.id'));
+    }
+
     public function test_aware_but_unregulated_route_matrix_selects_deterministic_asset_ids(): void
     {
         $this->prepareEqContent();
@@ -667,6 +702,28 @@ final class Eq60V5ReportContractTest extends TestCase
                 'ER' => ['raw_sum' => 38, 'std_score' => 82, 'percentile' => 16, 'level' => 'baseline'],
                 'EM' => ['raw_sum' => 45, 'std_score' => 98, 'percentile' => 50, 'level' => 'competent'],
                 'RM' => ['raw_sum' => 41, 'std_score' => 94, 'percentile' => 42, 'level' => 'competent'],
+            ],
+            'report' => [],
+            'report_tags' => [],
+        ];
+    }
+
+    /**
+     * @param  list<string>  $flags
+     * @return array<string,mixed>
+     */
+    private function strongDimensionScoreWithQuality(string $level, array $flags): array
+    {
+        return [
+            'quality' => ['level' => $level, 'flags' => $flags],
+            'norms' => ['status' => 'PROVISIONAL'],
+            'version_snapshot' => ['engine_version' => 'v1.0_normed_validity'],
+            'scores' => [
+                'global' => ['raw_sum' => 210, 'std_score' => 118, 'percentile' => 86, 'level' => 'exceptional'],
+                'SA' => ['raw_sum' => 61, 'std_score' => 116, 'percentile' => 79, 'level' => 'exceptional'],
+                'ER' => ['raw_sum' => 58, 'std_score' => 111, 'percentile' => 73, 'level' => 'proficient'],
+                'EM' => ['raw_sum' => 62, 'std_score' => 119, 'percentile' => 84, 'level' => 'exceptional'],
+                'RM' => ['raw_sum' => 57, 'std_score' => 110, 'percentile' => 71, 'level' => 'proficient'],
             ],
             'report' => [],
             'report_tags' => [],
