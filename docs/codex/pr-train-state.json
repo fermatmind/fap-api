@@ -65789,7 +65789,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T02:38:56Z",
+  "updated_at": "2026-07-03T02:49:03Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -71429,8 +71429,8 @@
     "depends_on": [
       "RIASEC-CONTENT-SCIENCE-00"
     ],
-    "status": "pr_opened",
-    "commit_sha": "b6488aebb778ebfea84d187d9e298dc8aa15725b",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "e1b4efaeb4e233d3a0509bd62b45eeeff87bdc1c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2648",
     "checks": {
       "targeted_disagree_and_matrix_tests": {
@@ -71471,14 +71471,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-03T02:44:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "changed_files": [
         "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
         "backend/content_assets/riasec/disagree_path_v1.zh-CN.jsonl",
@@ -71504,6 +71504,12 @@
         "from": "local_validation_passed",
         "to": "pr_opened",
         "note": "Opened PR #2648 for DISAGREE-01 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T02:47:55Z",
+        "from": "pr_opened",
+        "to": "merged_post_merge_revalidated",
+        "note": "PR #2648 merged; origin/main contains merge commit; local main synced; local and remote task branches cleaned."
       }
     ]
   },
@@ -71532,19 +71538,56 @@
       "RIASEC-CONTENT-DIMDEEP-01",
       "RIASEC-CONTENT-PAIRDEEP-01"
     ],
-    "status": "authorized_pending_start",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": [],
+    "status": "pr_opened",
+    "commit_sha": "812ec65a14800f5e1936133b9a9057d8246c30f9",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2650",
+    "checks": {
+      "riasec_content_asset_parse": {
+        "command": "php parse all backend/content_assets/riasec JSON and JSONL files",
+        "status": "passed",
+        "summary": "72 JSON files, 17 JSONL files"
+      },
+      "full_riasec_unit_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "184 tests, 114276 assertions"
+      },
+      "riasec_feature_share_pdf_history_contract_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Feature/V0_3/RiasecAssessmentFlowTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecQuestionLocaleTranslationTest.php tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php tests/Feature/V0_3/ShareSummaryContractTest.php tests/Feature/V0_3/ShareFlowCoreAlignmentTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "25 tests, 2530 assertions"
+      },
+      "riasec_content_finalqa_subset": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec/RiasecContentScienceBoundaryLintTest.php tests/Unit/Services/Riasec/RiasecResultContentScienceAuditTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecResultPageAllSurfacePilotQaTest.php tests/Unit/Services/Riasec/RiasecResultPageSelectorCoverageBatchTest.php --no-ansi --display-warnings",
+        "status": "passed",
+        "summary": "24 tests, 1805 assertions"
+      },
+      "yaml_manifest": {
+        "command": "ruby -e require-yaml-load-pr-train-yaml",
+        "status": "passed"
+      },
+      "json_state": {
+        "command": "jq empty docs/codex/pr-train-state.json",
+        "status": "passed"
+      },
+      "diff_check": {
+        "command": "git diff --check",
+        "status": "passed"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": null,
+      "changed_files": [
+        "backend/docs/riasec/riasec-content-finalqa-2026-07-03.md",
+        "docs/codex/pr-train-state.json"
+      ]
     },
     "transitions": [
       {
@@ -71552,6 +71595,18 @@
         "from": null,
         "to": "authorized_pending_start",
         "note": "User authorized full RIASEC content science repair train; registered pending execution entry."
+      },
+      {
+        "at": "2026-07-03T02:47:55Z",
+        "from": "authorized_pending_start",
+        "to": "local_validation_passed",
+        "note": "FINALQA-01 completed full RIASEC content parse, lint, unit, feature, share/PDF/history, and all-surface QA locally; no deploy or production mutation performed."
+      },
+      {
+        "at": "2026-07-03T02:49:03Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2650 for FINALQA-01 after final local validation and scope validation passed."
       }
     ]
   },
