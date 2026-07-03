@@ -113,6 +113,20 @@ final class EnneagramTypeRegistryCoverageTest extends TestCase
         $this->assertStringContainsString('pseudo_validity', $joined);
     }
 
+    public function test_type_registry_boundary_scan_rejects_ai_like_generic_advice_copy(): void
+    {
+        $loader = app(EnneagramPackLoader::class);
+        $pack = $loader->loadRegistryPack();
+
+        data_set($pack, 'registries.enneagram_type_registry.entries.0.work_pack.work_strengths.0.body', '总而言之，你只要保持开放，积极沟通，学会倾听，勇敢表达，就能成为更好的自己。');
+
+        $errors = app(RegistryValidator::class)->validate($pack);
+        $joined = implode("\n", $errors);
+
+        $this->assertStringContainsString('ai_like_phrasing', $joined);
+        $this->assertStringContainsString('generic_advice_density', $joined);
+    }
+
     /**
      * @param  array<string,mixed>  $entry
      * @param  array<string,int>  $requiredCounts
