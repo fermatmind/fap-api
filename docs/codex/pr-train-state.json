@@ -5277,39 +5277,77 @@
     "title": "BIG5-NORM-LOW-QUALITY-EDGE-STATE-CONTENT-01: Thicken Big Five norm and edge-state content assets",
     "train_scope": "big5_result_page_content_asset_thickening"
   },
-  "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01": {
-    "base": "main",
-    "branch": "codex/big5-norm-unavailable-scientific-repair-01",
-    "checks": [
-
-    ],
-    "commit_sha": "add9c3a600f1bb0b9d5c6a5c0dc8b99655077ded",
-    "depends_on": [
-      "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01"
-    ],
-    "failure_reason": null,
-    "id": "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
-    "remote_branch_deleted": false,
-    "repo": "fap-api",
-    "scope_validation": {
-      "allowed_paths_only": null,
-      "github_checks_green": null,
-      "local_validation_passed": null,
-      "post_merge_revalidated": null
-    },
-    "status": "authorized",
-    "title": "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01: Big Five norm unavailable scientific repair",
-    "transitions": [
-      {
-        "at": "2026-07-02T16:11:40Z",
-        "from": null,
-        "note": "User authorized Big Five result-page scientific content repair PR train entry.",
-        "to": "authorized"
-      }
-    ]
+  "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01":   {
+      "base": "main",
+      "branch": "codex/big5-norm-unavailable-scientific-repair-01",
+      "checks": {
+          "local": {
+              "status": "pass",
+              "commands": [
+                  "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+                  "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+                  "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+                  "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi",
+                  "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+                  "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+                  "git diff --check"
+              ],
+              "evidence": "Strict audit passed with validation_error_count=0 and leak_hit_count=0. AssetAgentTest, SelectorAssetValidatorTest, and ContentAssetLookupTest passed with existing warnings only. JSON/YAML parse and git diff --check passed."
+          },
+          "scope_validation": {
+              "status": "pass",
+              "evidence": "Changed files are confined to norm_unavailable normalized/staging/QA artifacts, BigFiveResultPageV2AssetAgentTest, and docs/codex PR-train state. No fap-web, CMS, SEO, runtime, rollout, production import, DB migration, or final result contract changes."
+          },
+          "github": {
+              "status": "pending",
+              "evidence": "PR opened: https://github.com/fermatmind/fap-api/pull/2678. GitHub checks pending."
+          }
+      },
+      "commit_sha": "23b4ccc309c33af52c729512172fba9c4b57cb88",
+      "depends_on": [
+          "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01"
+      ],
+      "failure_reason": null,
+      "id": "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01",
+      "local_cleanup_executed": false,
+      "merged_at": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2678",
+      "remote_branch_deleted": false,
+      "repo": "fap-api",
+      "scope_validation": {
+          "allowed_paths_only": true,
+          "github_checks_green": null,
+          "local_validation_passed": true,
+          "post_merge_revalidated": null
+      },
+      "status": "pr_open",
+      "title": "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01: Big Five norm unavailable scientific repair",
+      "transitions": [
+          {
+              "at": "2026-07-02T16:11:40Z",
+              "from": null,
+              "note": "User authorized Big Five result-page scientific content repair PR train entry.",
+              "to": "authorized"
+          },
+          {
+              "at": "2026-07-03T06:18:00Z",
+              "from": "authorized",
+              "note": "Repaired norm unavailable candidate/staging/QA artifacts for scientific boundary, template repetition, and external-positioning language. Local validation and scope validation passed.",
+              "to": "local_validated"
+          },
+          {
+              "at": "2026-07-03T06:24:00Z",
+              "from": "local_validated",
+              "note": "Committed scoped norm unavailable scientific repair on codex/big5-norm-unavailable-scientific-repair-01.",
+              "to": "committed"
+          },
+          {
+              "at": "2026-07-03T06:35:00Z",
+              "from": "committed",
+              "note": "Opened PR https://github.com/fermatmind/fap-api/pull/2678 for scoped norm unavailable scientific repair.",
+              "to": "pr_open"
+          }
+      ]
   },
   "BIG5-PILOT-ALLOWLIST-SCOPE-APPROVAL-01": {
     "base": "main",

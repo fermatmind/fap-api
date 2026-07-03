@@ -17,7 +17,10 @@
     "added_state_scope_selector_candidates",
     "added_top_level_norm_unavailable_scope",
     "recalculated_body_quality",
-    "deferred_staging_import"
+    "deferred_staging_import",
+    "scientific_repair_removed_repeated_norm_caveats",
+    "scientific_repair_removed_external_positioning_language",
+    "scientific_repair_aligned_share_history_compare_suppression"
   ],
   "production_use_allowed": false,
   "ready_for_pilot": false,
@@ -25,6 +28,10 @@
   "ready_for_runtime": false,
   "runtime_use": "staging_only",
   "schema": "fap.big5.result_page_v2.norm_unavailable.revised_v0_3.normalization_manifest.v0_1",
+  "scientific_editorial_repair": {
+    "pr": "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01",
+    "status": "pass"
+  },
   "source_qa_scan_summary": {
     "forbidden_hit_count": 0,
     "hit_count": 0

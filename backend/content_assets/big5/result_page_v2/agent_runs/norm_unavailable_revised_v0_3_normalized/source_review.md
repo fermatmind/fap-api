@@ -1,8 +1,8 @@
-# Big Five Norm Unavailable Revised Content Assets v0.3
+# Big Five Norm Unavailable Revised Content Assets v0.3 Scientific Repair
 
 ## Editorial summary
 
-This package revises the 18 norm-unavailable candidate content assets. The main correction from v0.2 is not length, but lower template repetition and clearer domain-specific logic. The user-facing copy no longer reads like backend rules; each domain explains what remains useful when stable external references are unavailable.
+This package revises the 18 norm-unavailable candidate content assets after scientific editorial review. The repair keeps the psychometric boundary intact while making the copy less like a repeated disclaimer. Each domain now explains what remains useful when stable norms are unavailable: structure, context, observable behavior, and safe surface use.
 
 ## Coverage
 
@@ -13,21 +13,13 @@ This package revises the 18 norm-unavailable candidate content assets. The main 
 - agreeableness: show / soften / hide
 - neuroticism: show / soften / hide
 
-## Scope and boundaries
+## Scientific repair changes
 
-- Candidate content only.
-- No final result-page output.
-- No frontend copy.
-- No CMS / SEO / production / runtime change.
-- All candidates remain `runtime_use=staging_only`, `production_use_allowed=false`, `ready_for_pilot=false`, `ready_for_runtime=false`, `ready_for_production=false`.
-
-## What changed from v0.2
-
-1. Removed backend-rule wording.
-2. Removed repeated "can read / should wait / observe again" phrasing.
-3. Rewrote each domain around its own psychometric meaning.
-4. Separated show / soften / hide more clearly.
-5. Kept public language free of unsupported external positioning and high-risk claims.
+1. Reduced repeated caveat sentences across all 18 assets.
+2. Removed user-facing external positioning language when norms are unavailable.
+3. Rewrote each domain around its own interpretation boundary.
+4. Kept share, history, and compare surfaces summary-only or suppressed.
+5. Preserved `runtime_use=staging_only`, `production_use_allowed=false`, and all ready flags false.
 
 ## QA summary
 
@@ -40,25 +32,12 @@ This package revises the 18 norm-unavailable candidate content assets. The main 
   "ready_for_pilot_true_count": 0,
   "ready_for_runtime_true_count": 0,
   "ready_for_production_true_count": 0,
-  "body_length_min": 180,
-  "body_length_max": 200,
-  "body_length_outside_180_320": [],
-  "duplicate_title_count": 0,
-  "duplicate_body_count": 0
+  "body_length_min": 204,
+  "body_length_max": 248,
+  "template_repetition_reduced": true,
+  "external_positioning_removed": true
 }
 ```
-
-## Codex follow-up checks
-
-- schema validation
-- selector contract validation
-- candidate_replaces existence check if used later
-- state_scope / slot_key mapping check
-- body_quality metadata recalculation if importer requires exact metadata
-- forbidden-token scan over rendered public text
-- result page / PDF / share / history / compare rendered hygiene scan
-- human review manifest
-- staging import only
 
 ## Import verdict
 

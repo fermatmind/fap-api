@@ -1,8 +1,26 @@
 {
-    "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
-    "task": "staging_import_repair_log",
-    "runtime_use": "staging_only",
+    "body_quality_recalculated": true,
+    "entries": [
+        {
+            "changes": [
+                "reduced repeated norm caveats",
+                "removed external positioning phrasing from user-visible copy",
+                "rewrote dimension-specific reading guidance",
+                "kept share/history/compare summary-only or suppressed"
+            ],
+            "id": "norm_unavailable_scientific_repair_v0_3_01",
+            "pr": "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01",
+            "production_use_allowed": false,
+            "runtime_use": "staging_only",
+            "scope": "all_18_norm_unavailable_candidates",
+            "status": "applied"
+        }
+    ],
+    "forbidden_hit_count_after": 0,
     "production_use_allowed": false,
     "repair_required": false,
-    "entries": []
+    "runtime_use": "staging_only",
+    "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+    "scientific_editorial_repair_status": "pass",
+    "task": "staging_import_repair_log"
 }

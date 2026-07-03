@@ -5331,8 +5331,16 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         $this->assertSame(0, data_get($validation, 'leak_scan.hit_count'));
         $this->assertSame([], data_get($validation, 'leak_scan.hits'));
         $this->assertSame([], data_get($validation, 'review_manifest.errors'));
-        $this->assertSame([], $repairLog['entries'] ?? ['unexpected']);
         $this->assertFalse((bool) ($repairLog['repair_required'] ?? true));
+        $this->assertSame('pass', $repairLog['scientific_editorial_repair_status'] ?? null);
+        $this->assertSame(
+            'norm_unavailable_scientific_repair_v0_3_01',
+            data_get($repairLog, 'entries.0.id')
+        );
+        $this->assertSame(
+            'BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01',
+            data_get($repairLog, 'entries.0.pr')
+        );
 
         $this->assertCount(18, $selectorRows);
         $this->assertCount(18, $contentRows);
@@ -5350,8 +5358,21 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertSame('L7_result_state', $row['asset_layer'] ?? null);
             $this->assertSame('norm_unavailable', $row['scope'] ?? null);
             $this->assertSame('state_scope_registry', $row['target_registry_key'] ?? null);
-            $this->assertSame('codex_norm_unavailable_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('codex_norm_unavailable_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
+            $this->assertSame(
+                'norm_unavailable_no_external_positioning',
+                data_get($row, 'body_quality.scientific_boundary')
+            );
+            $this->assertSame('reduced', data_get($row, 'body_quality.repetition_risk'));
+            $this->assertSame(
+                'BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01',
+                data_get($row, 'source_trace.scientific_editorial_repair.pr')
+            );
+            $this->assertSame(
+                'do_not_emit_external_standing_or_group_position',
+                data_get($row, 'scientific_editorial_notes.comparison_policy')
+            );
             $this->assertContains('norm_unavailable', (array) ($row['safety_tags'] ?? []));
             $this->assertContains('no_percentile', (array) ($row['safety_tags'] ?? []));
             $this->assertContains('no_ranking', (array) ($row['safety_tags'] ?? []));
@@ -5773,7 +5794,16 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         $this->assertGreaterThanOrEqual(180, (int) data_get($report, 'visible_text_quality.body_length_min'));
         $this->assertLessThanOrEqual(320, (int) data_get($report, 'visible_text_quality.body_length_max'));
         $this->assertTrue((bool) data_get($report, 'acceptance.norm_unavailable_does_not_output_external_comparison'));
+        $this->assertTrue((bool) data_get($report, 'acceptance.template_repetition_reduced'));
+        $this->assertTrue((bool) data_get($report, 'acceptance.strong_sorting_language_removed'));
         $this->assertTrue((bool) data_get($report, 'acceptance.hide_sensitive_share_surface_suppressed'));
+        $this->assertSame('pass', data_get($report, 'scientific_editorial_repair.status'));
+        $this->assertSame(
+            'BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01',
+            data_get($report, 'scientific_editorial_repair.pr')
+        );
+        $this->assertTrue((bool) data_get($report, 'scientific_editorial_repair.checks.external_positioning_removed'));
+        $this->assertTrue((bool) data_get($report, 'scientific_editorial_repair.checks.template_caveat_repetition_reduced'));
 
         $scope = $report['rendered_preview_scope'] ?? [];
         $this->assertSame('backend_fixture_only', $scope['evidence_type'] ?? null);
@@ -7550,7 +7580,15 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertFalse((bool) data_get($validation, 'stage_candidates_dry_run.staging_write_performed', true));
 
             $this->assertFalse((bool) ($repairLog['repair_required'] ?? true));
-            $this->assertSame([], $repairLog['entries'] ?? ['unexpected']);
+            $this->assertSame('pass', $repairLog['scientific_editorial_repair_status'] ?? null);
+            $this->assertSame(
+                'norm_unavailable_scientific_repair_v0_3_01',
+                data_get($repairLog, 'entries.0.id')
+            );
+            $this->assertSame(
+                'BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01',
+                data_get($repairLog, 'entries.0.pr')
+            );
             $this->assertSame(0, $sourceQa['forbidden_hit_count_after_normalization'] ?? null);
             $this->assertSame([
                 'agreeableness',
@@ -7578,7 +7616,20 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertSame('L7_result_state', $row['asset_layer'] ?? null);
                 $this->assertSame('norm_unavailable', $row['scope'] ?? null);
                 $this->assertSame('state_scope_registry', $row['target_registry_key'] ?? null);
-                $this->assertSame('codex_norm_unavailable_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame('codex_norm_unavailable_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame(
+                    'norm_unavailable_no_external_positioning',
+                    data_get($row, 'body_quality.scientific_boundary')
+                );
+                $this->assertSame('reduced', data_get($row, 'body_quality.repetition_risk'));
+                $this->assertSame(
+                    'BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01',
+                    data_get($row, 'source_trace.scientific_editorial_repair.pr')
+                );
+                $this->assertSame(
+                    'do_not_emit_external_standing_or_group_position',
+                    data_get($row, 'scientific_editorial_notes.comparison_policy')
+                );
                 $this->assertGreaterThanOrEqual(180, (int) data_get($row, 'body_quality.body_chars', 0));
                 $this->assertLessThanOrEqual(320, (int) data_get($row, 'body_quality.body_chars', 999));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_state_layer'));
