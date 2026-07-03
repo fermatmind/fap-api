@@ -14175,9 +14175,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2687 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on head 7fd88210e42fc2fc8076b09e2e468618ba1e8834: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": "ea412270b0629556e72076f42eda21f2b4aee2bb",
+    "commit_sha": "7fd88210e42fc2fc8076b09e2e468618ba1e8834",
     "depends_on": [
       "ENNEA-RP-20"
     ],
@@ -14201,6 +14206,11 @@
         "at": "2026-07-03T08:20:26Z",
         "status": "pr_opened",
         "notes": "Opened PR #2687 for workplace trigger points content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T08:27:03Z",
+        "status": "ready_to_merge",
+        "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2687 is clean and ready for squash merge."
       }
     ],
     "failure_reason": null,
@@ -14225,7 +14235,7 @@
       ],
       "evidence": "Changed files are confined to workplace-trigger-points content in type registry plus train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-21: fix(enneagram): repair workplace triggers",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -76593,5 +76603,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T08:20:26Z"
+  "updated_at": "2026-07-03T08:27:03Z"
 }
