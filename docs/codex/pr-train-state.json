@@ -12533,9 +12533,9 @@
     "depends_on": [
       "ENNEA-RP-08"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "b2f6ae1ff3314f6d3d0628bc85186bdee6f62e07",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2663",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -12620,6 +12620,11 @@
         "at": "2026-07-03T07:12:00Z",
         "status": "local_validation_passed",
         "notes": "Implemented center_summary as unavailable theory-boundary content with center group observation fields; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T07:15:00Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2663 for center summary boundary repair; awaiting GitHub required checks."
       }
     ]
   },
