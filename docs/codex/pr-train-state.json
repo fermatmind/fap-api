@@ -14659,6 +14659,11 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2692 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on PR #2692: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
     "commit_sha": "fddfe992e8486e822e0d77ffd32d51d4254db3ce",
@@ -14690,6 +14695,11 @@
         "at": "2026-07-03T09:36:39.655Z",
         "status": "pr_opened",
         "notes": "Opened PR #2692 for ENNEA-RP-25 cost expression content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T09:43:20.592Z",
+        "status": "ready_to_merge",
+        "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2692 is clean and ready for squash merge."
       }
     ],
     "failure_reason": null,
@@ -14716,7 +14726,7 @@
       ],
       "evidence": "Changed files are confined to cost expression content in group/type registries plus train ledger reconciliation."
     },
-    "status": "pr_opened_github_checks_pending",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-25: fix(enneagram): repair cost expression",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
