@@ -13727,9 +13727,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "head_sha": "f1d19fc29efa249f1872fb3cae1a8fe7d0d23992",
+        "evidence": "PR #2680 GitHub checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
-    "commit_sha": "cf41d7085023eb676ecb40f4f848bc38cb24df04",
+    "commit_sha": "f1d19fc29efa249f1872fb3cae1a8fe7d0d23992",
     "depends_on": [
       "ENNEA-RP-16"
     ],
@@ -13753,6 +13758,11 @@
         "at": "2026-07-03T07:02:23Z",
         "status": "pr_opened",
         "notes": "Opened PR #2680 for collaboration strengths content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T07:09:01Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed on PR #2680; PR is clean and ready for squash merge under repo policy."
       }
     ],
     "failure_reason": null,
@@ -13779,7 +13789,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to collaboration strengths content in type registry and train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-17: fix(enneagram): repair collaboration strengths",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
