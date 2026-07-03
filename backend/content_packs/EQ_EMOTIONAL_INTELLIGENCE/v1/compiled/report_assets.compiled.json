@@ -2,7 +2,7 @@
     "schema": "eq_60.report_assets.compiled.v1",
     "pack_id": "EQ_60",
     "pack_version": "v1",
-    "generated_at": "2026-07-03T05:21:22.661194Z",
+    "generated_at": "2026-07-03T05:43:29.642419Z",
     "assets": {
         "scientific_contract": {
             "schema": "eq60.report_assets.scientific_contract.v1",
@@ -30424,119 +30424,229 @@
             "schema": "eq60.report_assets.backend_integration_contract.v1",
             "pack_id": "EQ_60",
             "assets": {
+                "eq.backend_contract.authority_layer": {
+                    "zh-CN": {
+                        "title": "后端权威层",
+                        "requirement": "EQ 报告的分数、formulation、机制、场景、职业环境、行动处方和科学边界必须来自后端 content pack 与 Eq60ReportComposer。前端和 Agent 只能消费已经解析的报告资产。",
+                        "acceptance": "report payload、canonical fixtures 和 contract tests 能证明前端无需硬编码正式报告解释，也不能覆盖后端选择结果。",
+                        "do_not_overread": "这是内容与报告权威边界，不是新的评分规则、诊断结论或能力认证。"
+                    },
+                    "en": {
+                        "title": "Backend authority layer",
+                        "requirement": "EQ scores, formulation, mechanisms, scenes, career-environment variables, action guidance, and scientific boundaries must come from the backend content pack and Eq60ReportComposer. The frontend and Agent may only consume resolved report assets.",
+                        "acceptance": "Report payloads, canonical fixtures, and contract tests demonstrate that the frontend does not hardcode official report interpretation and cannot override backend-selected outcomes.",
+                        "do_not_overread": "This is an authority boundary for content and report delivery, not a new scoring rule, diagnostic claim, or credential."
+                    },
+                    "meta": {
+                        "id": "eq.backend_contract.authority_layer",
+                        "asset_type": "backend_integration_contract",
+                        "purpose": "Backend authority, delivery, and safety contract for EQ report assets",
+                        "trigger_logic": {
+                            "contract_gate": "authority_layer"
+                        },
+                        "claim_sensitivity": "high",
+                        "user_visible": false,
+                        "risk_notes": "Internal contract asset. Do not treat as scoring, diagnostic, personnel-screening, medical, credentialing, SJT availability, commerce, or frontend-authoritative content."
+                    }
+                },
                 "eq.backend_contract.schema_mapping": {
                     "zh-CN": {
                         "title": "Schema 映射",
-                        "requirement": "将每个资产文件映射到后端 content-pack compiler 可识别的字段。",
-                        "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
-                        "do_not_overread": "这是导入契约，不是运行时代码。"
+                        "requirement": "每个 EQ 资产文件必须映射到 content-pack compiler 可识别的结构，并保留稳定 asset ID、locale 字段、风险边界和触发逻辑。",
+                        "acceptance": "content:lint、content:compile、mirror drift check、canonical fixtures 和 report contract tests 通过后，资产才能进入报告 payload。",
+                        "do_not_overread": "Schema 通过只说明资产结构可读，不代表内容可用于医疗、人事、能力认证或绩效判断。"
                     },
                     "en": {
-                        "title": "Map every asset file into backend content-pack compiler fields before production",
-                        "requirement": "Map every asset file into backend content-pack compiler fields before production.",
-                        "acceptance": "Backend schema, compiler, fixtures, and contract tests must pass before production use.",
-                        "do_not_overread": "This is an import contract, not runtime code."
+                        "title": "Schema mapping",
+                        "requirement": "Each EQ asset file must map into compiler-readable content-pack structure while preserving stable asset IDs, locale fields, risk boundaries, and trigger logic.",
+                        "acceptance": "Assets may enter the report payload only after content lint, content compile, mirror drift checks, canonical fixtures, and report contract tests pass.",
+                        "do_not_overread": "A passing schema means the asset is structurally readable; it does not make the content suitable for medical, personnel, credentialing, or performance decisions."
                     },
                     "meta": {
                         "id": "eq.backend_contract.schema_mapping",
                         "asset_type": "backend_integration_contract",
-                        "purpose": "Production import and contract requirement",
+                        "purpose": "Backend authority, delivery, and safety contract for EQ report assets",
                         "trigger_logic": {
                             "contract_gate": "schema_mapping"
                         },
-                        "claim_sensitivity": "high"
+                        "claim_sensitivity": "high",
+                        "user_visible": false,
+                        "risk_notes": "Internal contract asset. Do not treat as scoring, diagnostic, personnel-screening, medical, credentialing, SJT availability, commerce, or frontend-authoritative content."
+                    }
+                },
+                "eq.backend_contract.resolved_assets": {
+                    "zh-CN": {
+                        "title": "Resolved assets 合同",
+                        "requirement": "用户可见解释应优先使用 assets 中已解析的本地化内容；asset_refs 只作为可追踪引用，不应直接显示给用户。",
+                        "acceptance": "zh-CN 与 en fixtures 都能返回对应 locale 的 resolved assets，且页面不展示 raw asset ID、route ID、technical tag 或内部调试字段。",
+                        "do_not_overread": "asset_refs 不是正式文案；缺失 resolved asset 时应降级为空态或保守提示，而不是让前端编造解释。"
+                    },
+                    "en": {
+                        "title": "Resolved assets contract",
+                        "requirement": "User-visible interpretation should prefer localized content already resolved under assets; asset_refs are traceable references and should not be rendered directly to users.",
+                        "acceptance": "Both zh-CN and en fixtures return matching localized resolved assets, and result pages do not show raw asset IDs, route IDs, technical tags, or internal debug fields.",
+                        "do_not_overread": "asset_refs are not official copy. If resolved assets are missing, the surface should fail closed or show a conservative unavailable state rather than inventing interpretation in the frontend."
+                    },
+                    "meta": {
+                        "id": "eq.backend_contract.resolved_assets",
+                        "asset_type": "backend_integration_contract",
+                        "purpose": "Backend authority, delivery, and safety contract for EQ report assets",
+                        "trigger_logic": {
+                            "contract_gate": "resolved_assets"
+                        },
+                        "claim_sensitivity": "high",
+                        "user_visible": false,
+                        "risk_notes": "Internal contract asset. Do not treat as scoring, diagnostic, personnel-screening, medical, credentialing, SJT availability, commerce, or frontend-authoritative content."
                     }
                 },
                 "eq.backend_contract.canonical_fixtures": {
                     "zh-CN": {
                         "title": "Canonical fixtures",
-                        "requirement": "为 balanced、high_empathy_low_recovery、low_confidence 三条路径生成 zh-CN / en canonical fixtures。",
-                        "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
-                        "do_not_overread": "这是导入契约，不是运行时代码。"
+                        "requirement": "至少维护 balanced、high_empathy_low_recovery、low_confidence 与代表性 route 路径的 zh-CN / en payload 样本。",
+                        "acceptance": "fixtures 覆盖 all-free、低置信、route selection、resolved assets、SJT planned/unavailable、无权限门槛和无 raw tag 泄漏。",
+                        "do_not_overread": "fixture 是合同样本，不是常模样本，也不是用户分布或科学验证证据。"
                     },
                     "en": {
-                        "title": "Generate zh-CN/en fixtures for balanced, high empathy low recovery, and low confidence paths",
-                        "requirement": "Generate zh-CN/en fixtures for balanced, high empathy low recovery, and low confidence paths.",
-                        "acceptance": "Backend schema, compiler, fixtures, and contract tests must pass before production use.",
-                        "do_not_overread": "This is an import contract, not runtime code."
+                        "title": "Canonical fixtures",
+                        "requirement": "Maintain zh-CN and en payload samples for at least balanced, high_empathy_low_recovery, low_confidence, and one representative route-selection path.",
+                        "acceptance": "Fixtures cover all-free access, low-confidence handling, route selection, resolved assets, SJT planned/unavailable, no access wall, and no raw-tag leakage.",
+                        "do_not_overread": "A fixture is a contract sample, not a norm sample, user distribution, or validation study."
                     },
                     "meta": {
                         "id": "eq.backend_contract.canonical_fixtures",
                         "asset_type": "backend_integration_contract",
-                        "purpose": "Production import and contract requirement",
+                        "purpose": "Backend authority, delivery, and safety contract for EQ report assets",
                         "trigger_logic": {
                             "contract_gate": "canonical_fixtures"
                         },
-                        "claim_sensitivity": "high"
+                        "claim_sensitivity": "high",
+                        "user_visible": false,
+                        "risk_notes": "Internal contract asset. Do not treat as scoring, diagnostic, personnel-screening, medical, credentialing, SJT availability, commerce, or frontend-authoritative content."
                     }
                 },
                 "eq.backend_contract.contract_tests": {
                     "zh-CN": {
                         "title": "契约测试",
-                        "requirement": "断言 report payload 包含 v1.6 assets、免费转化动作、无权限门槛，且 SJT 保持 unavailable。",
-                        "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
-                        "do_not_overread": "这是导入契约，不是运行时代码。"
+                        "requirement": "contract tests 必须断言 EQ report payload 包含当前版本资产、分数/维度摘要、质量解释、解释选择、科学边界、免费访问状态与 SJT unavailable 状态。",
+                        "acceptance": "测试失败时不得通过前端 fallback、Agent fallback 或静态文案绕过后端资产合同。",
+                        "do_not_overread": "契约测试保护交付形状和边界，不证明测验具备临床、招聘或能力评估效度。"
                     },
                     "en": {
-                        "title": "Assert report payload contains v1",
-                        "requirement": "Assert report payload contains v1.6 assets, conversion actions, no access wall, and SJT unavailable.",
-                        "acceptance": "Backend schema, compiler, fixtures, and contract tests must pass before production use.",
-                        "do_not_overread": "This is an import contract, not runtime code."
+                        "title": "Contract tests",
+                        "requirement": "Contract tests must assert that the EQ report payload includes current-version assets, score and dimension summaries, quality explanation, interpretation selection, scientific boundaries, all-free access state, and SJT unavailable state.",
+                        "acceptance": "When these tests fail, the issue must not be bypassed with frontend fallback, Agent fallback, or static local report copy.",
+                        "do_not_overread": "Contract tests protect delivery shape and boundaries; they do not establish clinical, personnel-screening, or objective-capacity-assessment validity."
                     },
                     "meta": {
                         "id": "eq.backend_contract.contract_tests",
                         "asset_type": "backend_integration_contract",
-                        "purpose": "Production import and contract requirement",
+                        "purpose": "Backend authority, delivery, and safety contract for EQ report assets",
                         "trigger_logic": {
                             "contract_gate": "contract_tests"
                         },
-                        "claim_sensitivity": "high"
+                        "claim_sensitivity": "high",
+                        "user_visible": false,
+                        "risk_notes": "Internal contract asset. Do not treat as scoring, diagnostic, personnel-screening, medical, credentialing, SJT availability, commerce, or frontend-authoritative content."
                     }
                 },
                 "eq.backend_contract.frontend_consumption": {
                     "zh-CN": {
                         "title": "前端消费契约",
-                        "requirement": "前端必须渲染后端 resolved assets，不得硬编码正式报告解释文案。",
-                        "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
-                        "do_not_overread": "这是导入契约，不是运行时代码。"
+                        "requirement": "前端只能渲染后端 resolved assets 与 UI chrome。正式报告解释、科学边界、行动建议和职业环境变量不得在前端硬编码。",
+                        "acceptance": "缺少资产、locale mismatch、guardrail 异常或 access 异常时，前端应 fail closed，不显示访问门槛入口、不显示技术 tag、不改写 formulation。",
+                        "do_not_overread": "前端可以负责交互与布局，但不是报告内容、分数、职业判断或 Agent 回答的权威来源。"
                     },
                     "en": {
-                        "title": "Frontend must render resolved assets and must not hardcode official report explanation",
-                        "requirement": "Frontend must render resolved assets and must not hardcode official report explanation.",
-                        "acceptance": "Backend schema, compiler, fixtures, and contract tests must pass before production use.",
-                        "do_not_overread": "This is an import contract, not runtime code."
+                        "title": "Frontend consumption contract",
+                        "requirement": "The frontend may render backend resolved assets and UI chrome only. Official report interpretation, scientific boundaries, action guidance, and career-environment variables must not be hardcoded in frontend code.",
+                        "acceptance": "If assets are missing, locale mismatched, guardrails unsafe, or access state anomalous, the frontend fails closed without showing commerce entry points, technical tags, or rewritten formulations.",
+                        "do_not_overread": "The frontend owns interaction and layout; it is not the authority for report content, scores, career judgments, or Agent answers."
                     },
                     "meta": {
                         "id": "eq.backend_contract.frontend_consumption",
                         "asset_type": "backend_integration_contract",
-                        "purpose": "Production import and contract requirement",
+                        "purpose": "Backend authority, delivery, and safety contract for EQ report assets",
                         "trigger_logic": {
                             "contract_gate": "frontend_consumption"
                         },
-                        "claim_sensitivity": "high"
+                        "claim_sensitivity": "high",
+                        "user_visible": false,
+                        "risk_notes": "Internal contract asset. Do not treat as scoring, diagnostic, personnel-screening, medical, credentialing, SJT availability, commerce, or frontend-authoritative content."
                     }
                 },
                 "eq.backend_contract.agent_readiness": {
                     "zh-CN": {
-                        "title": "Agent 就绪契约",
-                        "requirement": "Agent 在检索、拒答和边界评测通过前，只能解释已解析报告资产。",
-                        "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
-                        "do_not_overread": "这是导入契约，不是运行时代码。"
+                        "title": "Agent 只读契约",
+                        "requirement": "Agent 只能基于 report_context、resolved_assets、retrieval tags、intent map 与 forbidden-claim metadata 做解释。它不能改分数、改 formulation、改 section、开启 SJT、生成权限门槛，或替代后端报告权威。",
+                        "acceptance": "Agent context 与 runtime response 都返回 read_only=true，并明确 can_mutate_report=false、can_mutate_scores=false、can_override_formulation=false、can_enable_sjt=false、can_expose_raw_technical_tags=false。",
+                        "do_not_overread": "Agent 是反思与解释辅助，不是治疗师、招聘评估者、能力测验评分员或第三方评价工具。"
                     },
                     "en": {
-                        "title": "Agent can only explain resolved assets until retrieval and refusal evals pass",
-                        "requirement": "Agent can only explain resolved assets until retrieval and refusal evals pass.",
-                        "acceptance": "Backend schema, compiler, fixtures, and contract tests must pass before production use.",
-                        "do_not_overread": "This is an import contract, not runtime code."
+                        "title": "Read-only Agent contract",
+                        "requirement": "The Agent may explain only from report_context, resolved_assets, retrieval tags, intent maps, and forbidden-claim metadata. It cannot change scores, change formulations, change sections, enable SJT, create access gates, or replace backend report authority.",
+                        "acceptance": "Agent context and runtime responses return read_only=true and explicitly keep can_mutate_report=false, can_mutate_scores=false, can_override_formulation=false, can_enable_sjt=false, and can_expose_raw_technical_tags=false.",
+                        "do_not_overread": "The Agent is a reflection and explanation aid, not a therapist, personnel evaluator, objective-capacity scorer, or third-party assessment tool."
                     },
                     "meta": {
                         "id": "eq.backend_contract.agent_readiness",
                         "asset_type": "backend_integration_contract",
-                        "purpose": "Production import and contract requirement",
+                        "purpose": "Backend authority, delivery, and safety contract for EQ report assets",
                         "trigger_logic": {
                             "contract_gate": "agent_readiness"
                         },
-                        "claim_sensitivity": "high"
+                        "claim_sensitivity": "high",
+                        "user_visible": false,
+                        "risk_notes": "Internal contract asset. Do not treat as scoring, diagnostic, personnel-screening, medical, credentialing, SJT availability, commerce, or frontend-authoritative content."
+                    }
+                },
+                "eq.backend_contract.internal_field_boundary": {
+                    "zh-CN": {
+                        "title": "内部字段边界",
+                        "requirement": "report_tags、quality_level、bucket、focus、route_id、asset_ref、scoring internals 与 debug 字段只能用于选择、审计或测试，不得作为用户可见解释文本。",
+                        "acceptance": "用户可见 payload 和页面必须通过 resolved assets 展示自然语言；raw IDs 只允许出现在内部追踪、fixture 或调试上下文中。",
+                        "do_not_overread": "内部字段不是用户标签，也不是人格类型、能力等级、职业适配结论或关系质量判断。"
+                    },
+                    "en": {
+                        "title": "Internal field boundary",
+                        "requirement": "report_tags, quality_level, bucket, focus, route_id, asset_ref, scoring internals, and debug fields may be used for selection, audit, or tests only; they must not become user-visible interpretation copy.",
+                        "acceptance": "User-visible payloads and result pages present natural language through resolved assets. Raw IDs are limited to internal tracing, fixtures, or debugging contexts.",
+                        "do_not_overread": "Internal fields are not user labels, personality types, ability levels, job-fit conclusions, or relationship-quality judgments."
+                    },
+                    "meta": {
+                        "id": "eq.backend_contract.internal_field_boundary",
+                        "asset_type": "backend_integration_contract",
+                        "purpose": "Backend authority, delivery, and safety contract for EQ report assets",
+                        "trigger_logic": {
+                            "contract_gate": "internal_field_boundary"
+                        },
+                        "claim_sensitivity": "high",
+                        "user_visible": false,
+                        "risk_notes": "Internal contract asset. Do not treat as scoring, diagnostic, personnel-screening, medical, credentialing, SJT availability, commerce, or frontend-authoritative content."
+                    }
+                },
+                "eq.backend_contract.sjt_and_commerce_boundary": {
+                    "zh-CN": {
+                        "title": "SJT 与访问边界",
+                        "requirement": "EQ-SJT 在实现前必须保持 planned/unavailable；EQ-60 报告当前保持 all-free，不得用交易、等级访问或权限门槛解释报告深度。",
+                        "acceptance": "next_module.available=false，SJT 不提供 take entry；report-access 与 report payload 保持 unlocked、full、all-free，offers 为空。",
+                        "do_not_overread": "SJT planned 只表示未来可能补充情境判断模块，不表示当前报告已经测量真实情绪能力或认证能力。"
+                    },
+                    "en": {
+                        "title": "SJT and access boundary",
+                        "requirement": "EQ-SJT remains planned/unavailable until implemented. The EQ-60 report remains all-free, and report depth must not be framed as purchase-based or tier-based access.",
+                        "acceptance": "next_module.available=false, no SJT take entry is exposed, and report-access/report payloads remain unlocked, full, all-free, with empty offers.",
+                        "do_not_overread": "SJT planned means a future scenario-judgment module may complement self-report; it does not mean the current report measures objective emotional capacity or certified capacity."
+                    },
+                    "meta": {
+                        "id": "eq.backend_contract.sjt_and_commerce_boundary",
+                        "asset_type": "backend_integration_contract",
+                        "purpose": "Backend authority, delivery, and safety contract for EQ report assets",
+                        "trigger_logic": {
+                            "contract_gate": "sjt_and_commerce_boundary"
+                        },
+                        "claim_sensitivity": "high",
+                        "user_visible": false,
+                        "risk_notes": "Internal contract asset. Do not treat as scoring, diagnostic, personnel-screening, medical, credentialing, SJT availability, commerce, or frontend-authoritative content."
                     }
                 }
             }
