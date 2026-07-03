@@ -15824,9 +15824,13 @@
         "status": "pass",
         "command": "gh pr checks 2702 --repo fermatmind/fap-api --watch --interval 15",
         "evidence": "All reported GitHub checks passed for PR #2702 before ready_to_merge ledger update."
+      },
+      "post_merge_cleanup": {
+        "status": "pass",
+        "evidence": "PR #2702 merged as 3171b7f60093288fc2ed979fe1634bb6df6c60ef; origin/main contained the merge commit, local main was synced to origin/main, worktree was clean, and local/remote task branches were removed before ENNEA-RP-36."
       }
     },
-    "commit_sha": "62269bf70354fd71147a10d4f283738a3c0d98cc",
+    "commit_sha": "3171b7f60093288fc2ed979fe1634bb6df6c60ef",
     "depends_on": [
       "ENNEA-RP-34"
     ],
@@ -15862,14 +15866,21 @@
         "at": "2026-07-03T12:46:02.328Z",
         "status": "ready_to_merge",
         "notes": "GitHub checks passed; PR is ready to merge after final head-check confirmation."
+      },
+      {
+        "at": "2026-07-03T12:53:11.142Z",
+        "status": "merged",
+        "commit_sha": "3171b7f60093288fc2ed979fe1634bb6df6c60ef",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2702",
+        "notes": "Reconciled post-merge facts: GitHub reports merged, origin/main contains merge commit, local main synced, worktree clean, and task branch cleanup completed."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-35",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T12:51:25Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2702",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -15886,7 +15897,7 @@
       ],
       "evidence": "Changed files are confined to relationship_pack.relationship_traps and train ledger reconciliation/state."
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ENNEA-RP-35: fix(enneagram): repair relationship blind spot",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -15897,9 +15908,51 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-35 merged as PR #2702 and merge commit 3171b7f60093288fc2ed979fe1634bb6df6c60ef is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json"
+      },
+      "enneagram_type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "notes": "Passed with existing PHPUnit warnings."
+      },
+      "enneagram_registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "notes": "Passed with existing PHPUnit warnings."
+      },
+      "enneagram_report_composer_v2": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "notes": "Passed with existing PHPUnit warnings."
+      },
+      "enneagram_method_registry_boundary": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramMethodRegistryBoundaryTest",
+        "notes": "Current-scope failure was inspected and fixed by preserving required boundary phrases."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "notes": "Passed with existing PHPUnit warnings; 83641 assertions."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2703 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All reported GitHub checks passed for PR #2703 before ready_to_merge ledger update."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "1ac27175ac50d6ea3865f3e834fad86e057f26ec",
     "depends_on": [
       "ENNEA-RP-35"
     ],
@@ -15908,13 +15961,40 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T12:53:11.142Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-36-method-boundary; scope is method_registry boundary copy plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T12:56:29.932Z",
+        "status": "local_validation_passed",
+        "notes": "Required local checks passed after fixing current-scope method boundary phrase regression; changed files remained within ENNEA-RP-36 scope."
+      },
+      {
+        "at": "2026-07-03T12:56:45.595Z",
+        "status": "committed",
+        "commit_sha": "1ac27175ac50d6ea3865f3e834fad86e057f26ec",
+        "notes": "Implementation commit created after local validation."
+      },
+      {
+        "at": "2026-07-03T12:57:28.830Z",
+        "status": "pr_opened_github_checks_pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2703",
+        "notes": "PR opened; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-07-03T13:03:22.352Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed; PR is ready to merge after final head-check confirmation."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-36",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2703",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -15924,9 +16004,15 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [],
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "evidence": "Changed files are confined to method_registry boundary copy and train ledger reconciliation/state."
     },
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-36: fix(enneagram): repair method boundary",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
