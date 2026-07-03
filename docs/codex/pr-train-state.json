@@ -15010,7 +15010,7 @@
         "evidence": "No whitespace errors."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "8014580b1fafd535fe2b34fd1b22e1a5c50de8ce",
     "depends_on": [
       "ENNEA-RP-27"
     ],
@@ -15029,6 +15029,11 @@
         "at": "2026-07-03T10:27:21.295Z",
         "status": "local_validation_passed",
         "notes": "Reframed state spectrum copy as situational expression variation and removed fixed development-stage or health-level judgment wording; required local validation and scope validation passed after current-scope boundary wording fix."
+      },
+      {
+        "at": "2026-07-03T10:27:29.974Z",
+        "status": "committed",
+        "notes": "Created local implementation commit 8014580b1fafd535fe2b34fd1b22e1a5c50de8ce for ENNEA-RP-28 after local validation and scope validation passed."
       }
     ],
     "failure_reason": null,
@@ -15055,7 +15060,7 @@
       ],
       "evidence": "Changed files are confined to state spectrum content in state/type registries plus train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-28: fix(enneagram): repair state spectrum",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
