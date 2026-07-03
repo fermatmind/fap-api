@@ -4284,8 +4284,23 @@
   "BIG5-CONTENT-ASSET-SCIENTIFIC-REPAIR-FULL-QA-01": {
     "base": "main",
     "branch": "codex/big5-content-asset-scientific-repair-full-qa-01",
-    "checks": [],
-    "commit_sha": "897093474e737e2954a5f9e42b66af693ca4535b",
+    "checks": {
+      "local": {
+        "audit_strict": "passed",
+        "BigFiveResultPageV2AssetAgentTest": "passed_with_existing_warnings",
+        "BigFiveResultPageV2SelectorAssetValidatorTest": "passed_with_existing_warnings",
+        "BigFiveResultPageV2ContentAssetLookupTest": "passed_with_existing_warnings",
+        "json_parse": "passed",
+        "yaml_parse": "passed",
+        "git_diff_check": "passed",
+        "scope_validation": "passed"
+      },
+      "github": {
+        "status": "passed",
+        "mergeStateStatus": "CLEAN"
+      }
+    },
+    "commit_sha": "6a836da5a220019267b2abc73fde7a2235b07cd4",
     "depends_on": [
       "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01"
     ],
@@ -4293,7 +4308,7 @@
     "id": "BIG5-CONTENT-ASSET-SCIENTIFIC-REPAIR-FULL-QA-01",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2688",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -4302,7 +4317,7 @@
       "local_validation_passed": null,
       "post_merge_revalidated": null
     },
-    "status": "authorized",
+    "status": "ready_to_merge",
     "title": "BIG5-CONTENT-ASSET-SCIENTIFIC-REPAIR-FULL-QA-01: Big Five content asset scientific repair full QA",
     "transitions": [
       {

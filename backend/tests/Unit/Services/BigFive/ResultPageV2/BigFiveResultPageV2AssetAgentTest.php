@@ -8264,6 +8264,122 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_scientific_repair_full_qa_is_redacted_and_non_runtime(): void
+    {
+        $qaDir = base_path('content_assets/big5/result_page_v2/qa/scientific_repair_full_qa/v0_1');
+
+        foreach ([
+            'README.md',
+            'SHA256SUMS',
+            'big5_scientific_repair_full_qa_v0_1.json',
+            'big5_scientific_repair_full_qa_summary_v0_1.json',
+        ] as $file) {
+            $this->assertFileExists($qaDir.'/'.$file);
+        }
+
+        $reportPath = $qaDir.'/big5_scientific_repair_full_qa_v0_1.json';
+        $summaryPath = $qaDir.'/big5_scientific_repair_full_qa_summary_v0_1.json';
+        $report = $this->readJson($reportPath);
+        $summary = $this->readJson($summaryPath);
+
+        $shaLines = array_filter(explode("\n", trim((string) file_get_contents($qaDir.'/SHA256SUMS'))));
+        $shaMap = [];
+        foreach ($shaLines as $line) {
+            [$hash, $file] = preg_split('/\s+/', $line, 2);
+            $shaMap[$file] = $hash;
+        }
+        $this->assertSame(hash_file('sha256', $qaDir.'/README.md'), $shaMap['README.md'] ?? null);
+        $this->assertSame(hash_file('sha256', $reportPath), $shaMap['big5_scientific_repair_full_qa_v0_1.json'] ?? null);
+        $this->assertSame(hash_file('sha256', $summaryPath), $shaMap['big5_scientific_repair_full_qa_summary_v0_1.json'] ?? null);
+
+        $this->assertSame('fap.big5.result_page_v2.scientific_repair.full_qa.v0_1', $report['schema'] ?? null);
+        $this->assertSame('pass', $report['status'] ?? null);
+        $this->assertSame('backend_artifact_full_qa', $report['mode'] ?? null);
+        $this->assertSame('not_runtime', $report['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_pilot'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_production'] ?? true));
+        $this->assertSame(10, $report['block_count'] ?? null);
+        $this->assertCount(10, $report['blocks'] ?? []);
+        $this->assertSame(435, data_get($report, 'candidate_totals.content'));
+        $this->assertSame(435, data_get($report, 'candidate_totals.selector'));
+        $this->assertSame(529, data_get($report, 'aggregate_scientific_repair_pack.content_count'));
+        $this->assertSame(529, data_get($report, 'aggregate_scientific_repair_pack.selector_count'));
+        $this->assertSame(0, data_get($report, 'aggregate_scientific_repair_pack.validation_error_count'));
+        $this->assertSame(0, data_get($report, 'aggregate_scientific_repair_pack.leak_hit_count'));
+        $this->assertSame(0, data_get($report, 'visible_text_scan.hit_count'));
+        $this->assertSame('pass', data_get($report, 'visible_text_scan.status'));
+        $this->assertSame('pass', data_get($report, 'surface_matrix.result_page'));
+        $this->assertSame('pass', data_get($report, 'surface_matrix.pdf'));
+        $this->assertSame('pass', data_get($report, 'surface_matrix.share'));
+        $this->assertSame('pass', data_get($report, 'surface_matrix.history'));
+        $this->assertSame('pass', data_get($report, 'surface_matrix.compare'));
+        $this->assertFalse((bool) data_get($report, 'negative_guarantees.runtime_changed', true));
+        $this->assertFalse((bool) data_get($report, 'negative_guarantees.production_import_changed', true));
+        $this->assertFalse((bool) data_get($report, 'negative_guarantees.rollout_changed', true));
+        $this->assertFalse((bool) data_get($report, 'negative_guarantees.frontend_copy_written', true));
+        $this->assertFalse((bool) data_get($report, 'negative_guarantees.cms_or_seo_written', true));
+        $this->assertFalse((bool) data_get($report, 'negative_guarantees.final_contract_output_generated', true));
+
+        foreach ($report['blocks'] as $block) {
+            $this->assertSame('pass', $block['status'] ?? null);
+            $this->assertGreaterThan(0, data_get($block, 'counts.content'));
+            $this->assertSame(data_get($block, 'counts.content'), data_get($block, 'counts.selector'));
+            $this->assertSame(data_get($block, 'counts.staged_content'), data_get($block, 'counts.staged_selector'));
+            $this->assertSame(0, data_get($block, 'staging_validation.validation_error_count'));
+            $this->assertSame(0, data_get($block, 'staging_validation.leak_hit_count'));
+            $this->assertSame(0, data_get($block, 'visible_text_scan.hit_count'));
+            $this->assertSame('pass', data_get($block, 'visible_text_scan.status'));
+            $this->assertSame('pass', data_get($block, 'rendered_preview.surface_matrix_status'));
+            $this->assertGreaterThan(0, data_get($block, 'rendered_preview.artifact_count'));
+        }
+
+        $this->assertSame('pass', $summary['status'] ?? null);
+        $this->assertSame(10, $summary['block_count'] ?? null);
+        $this->assertSame(0, $summary['visible_text_hit_count'] ?? null);
+        $this->assertSame('not_runtime', $summary['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($summary['production_use_allowed'] ?? true));
+
+        $artifactText = file_get_contents($qaDir.'/README.md')
+            ."\n".file_get_contents($reportPath)
+            ."\n".file_get_contents($summaryPath);
+
+        foreach ([
+            'private_url',
+            'attempt_id',
+            'raw_score',
+            'raw score',
+            '原始分',
+            'percentile',
+            '百分位',
+            'rank',
+            '排名',
+            'fixed_type',
+            'user_confirmed_type',
+            'type_code',
+            'big5:',
+            'band:',
+            'payload',
+            'registry',
+            'PR3B',
+            'AttemptReadController',
+            'Big Five Report Engine',
+            '[object Object]',
+            '你就是这种人',
+            '固定类型',
+            '招聘筛选',
+            '收入预测',
+            '成功预测',
+            '伴侣匹配',
+            '约高于',
+            '精确排名',
+            '能力证明',
+        ] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $artifactText, $forbiddenToken);
+        }
+    }
+
     public function test_committed_selector_public_payloads_do_not_expose_runtime_flags(): void
     {
         $selectorFiles = [];
