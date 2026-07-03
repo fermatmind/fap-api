@@ -14537,6 +14537,11 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2691 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on PR #2691: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
     "commit_sha": "38ca4058f19b63562608631675015f7a26da8e9d",
@@ -14573,6 +14578,11 @@
         "at": "2026-07-03T09:17:47.786Z",
         "status": "pr_opened",
         "notes": "Opened PR #2691 for ENNEA-RP-24 strength expression content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T09:23:55.862Z",
+        "status": "ready_to_merge",
+        "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2691 is clean and ready for squash merge."
       }
     ],
     "failure_reason": null,
@@ -14599,7 +14609,7 @@
       ],
       "evidence": "Changed files are confined to strength expression content in group/type registries plus train ledger reconciliation."
     },
-    "status": "pr_opened_github_checks_pending",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-24: fix(enneagram): repair strength expression",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
