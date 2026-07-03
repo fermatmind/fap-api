@@ -15008,6 +15008,11 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2695 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on PR #2695: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
     "commit_sha": "8014580b1fafd535fe2b34fd1b22e1a5c50de8ce",
@@ -15039,6 +15044,11 @@
         "at": "2026-07-03T10:28:02.694Z",
         "status": "pr_opened",
         "notes": "Opened PR #2695 for ENNEA-RP-28 state spectrum content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T10:33:36.311Z",
+        "status": "ready_to_merge",
+        "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2695 is clean and ready for squash merge."
       }
     ],
     "failure_reason": null,
@@ -15065,7 +15075,7 @@
       ],
       "evidence": "Changed files are confined to state spectrum content in state/type registries plus train ledger reconciliation."
     },
-    "status": "pr_opened_github_checks_pending",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-28: fix(enneagram): repair state spectrum",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
