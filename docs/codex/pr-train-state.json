@@ -14429,7 +14429,7 @@
         "evidence": "No whitespace errors."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "3e9faa1cbb2fbc5cb31412bcd829d56a2bbf2b4a",
     "depends_on": [
       "ENNEA-RP-22"
     ],
@@ -14448,13 +14448,18 @@
         "at": "2026-07-03T08:56:14Z",
         "status": "local_validation_passed",
         "notes": "Converted growth axis copy for T1-T9 into concrete behavior experiments while avoiding therapy or inspirational overreach; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T08:57:01Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2690 for growth axis content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-23",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2690",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -14472,7 +14477,7 @@
       ],
       "evidence": "Changed files are confined to growth axis summary/principle content in type registry plus train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-23: fix(enneagram): repair growth axis",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -76758,5 +76763,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T08:56:14Z"
+  "updated_at": "2026-07-03T08:57:01Z"
 }
