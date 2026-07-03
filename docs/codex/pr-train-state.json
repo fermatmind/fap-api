@@ -906,9 +906,9 @@
     "depends_on": [
       "ENNEA-RP-07"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "f3ca495f5f758cb4680a3f2fb856a3908c2119a2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2660",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -983,6 +983,11 @@
         "at": "2026-07-03T06:40:00Z",
         "status": "local_validation_passed",
         "notes": "Repaired blind_spot_copy for all nine types as low-activation observation hypotheses; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T06:43:00Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2660 for blind spot content repair; awaiting GitHub required checks."
       }
     ]
   },
