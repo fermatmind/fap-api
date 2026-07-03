@@ -14898,7 +14898,7 @@
         "evidence": "All GitHub PR checks passed on PR #2694: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": "905922655bc13858e9ba63a48046336b92a6db4a",
+    "commit_sha": "e405f65078fd4826da26ed80874fe614bc4ddaca",
     "depends_on": [
       "ENNEA-RP-26"
     ],
@@ -14932,14 +14932,19 @@
         "at": "2026-07-03T10:17:04.684Z",
         "status": "ready_to_merge",
         "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2694 is clean and ready for squash merge."
+      },
+      {
+        "at": "2026-07-03T10:25:25.799Z",
+        "status": "merged",
+        "notes": "Reconciled after PR #2694 squash merge; origin/main contains merge commit e405f65078fd4826da26ed80874fe614bc4ddaca, local main was synced, and local/remote task branches were cleaned before ENNEA-RP-28 execution."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-27",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T10:23:21Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2694",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -14958,7 +14963,7 @@
       ],
       "evidence": "Changed files are confined to recovery action content in state/type registries plus train ledger reconciliation."
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ENNEA-RP-27: fix(enneagram): repair recovery action",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -14969,6 +14974,40 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-27 merged as PR #2694 and merge commit e405f65078fd4826da26ed80874fe614bc4ddaca is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14734 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass_after_current_scope_fix",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Initially failed because current-scope wording used validator-triggering development/health-level boundary terms; wording was fixed within scope and rerun passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 132 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 262 warnings, 2 passed, 83641 assertions, duration 27.49s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
       }
     },
     "commit_sha": null,
@@ -14980,6 +15019,16 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T10:25:25.799Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-28-state-spectrum after ENNEA-RP-27 merge and cleanup; scope is state spectrum content in state/type registries plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T10:27:21.295Z",
+        "status": "local_validation_passed",
+        "notes": "Reframed state spectrum copy as situational expression variation and removed fixed development-stage or health-level judgment wording; required local validation and scope validation passed after current-scope boundary wording fix."
       }
     ],
     "failure_reason": null,
@@ -14997,9 +15046,16 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [],
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/state_registry.json",
+        "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "evidence": "Changed files are confined to state spectrum content in state/type registries plus train ledger reconciliation."
     },
-    "status": "pending_dependency",
+    "status": "local_validation_passed",
     "title": "ENNEA-RP-28: fix(enneagram): repair state spectrum",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
