@@ -671,12 +671,12 @@
     "depends_on": [
       "ENNEA-RP-05"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "c163f63c3a4c82f0395c0647fa539c4d20306b0f",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "826ca4846c32c1b8bb832b91f60afb5d927906a6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2656",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-03T03:41:40Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "checks": {
       "authorization": {
@@ -726,6 +726,10 @@
         "status": "pass",
         "command": "gh pr checks 2656 --repo fermatmind/fap-api --watch --interval 15",
         "evidence": "All reported checks for PR #2656 passed on head c163f63c3a4c82f0395c0647fa539c4d20306b0f, including hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, and Semgrep checks."
+      },
+      "post_merge_cleanup": {
+        "status": "pass",
+        "evidence": "PR #2656 is MERGED; merge commit 826ca4846c32c1b8bb832b91f60afb5d927906a6 is contained in origin/main; local main fast-forwarded to origin/main; local branch codex/ennea-rp-06-dominance-gap-card deleted; remote branch absent."
       }
     },
     "scope_validation": {
@@ -768,6 +772,11 @@
         "at": "2026-07-03T05:36:00Z",
         "status": "ready_to_merge",
         "notes": "GitHub required checks passed; recording ready-to-merge before squash merge per train policy."
+      },
+      {
+        "at": "2026-07-03T03:44:00Z",
+        "status": "merged_post_merge_revalidated",
+        "notes": "Post-merge cleanup completed; no staging deploy wait or production deploy performed."
       }
     ]
   },
@@ -781,8 +790,8 @@
     "depends_on": [
       "ENNEA-RP-06"
     ],
-    "status": "pending_dependency",
-    "commit_sha": "e4ab1d10d426f9e84e7c5fed0363d88361c8a1d6",
+    "status": "local_validation_passed",
+    "commit_sha": null,
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -792,6 +801,45 @@
       "authorization": {
         "status": "pass",
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-06 merged as PR #2656 and merge commit 826ca4846c32c1b8bb832b91f60afb5d927906a6 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "pair_registry_scaffold": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramPairRegistryScaffoldTest",
+        "evidence": "Passed: 1 warning, 6 assertions."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 14 warnings, 121 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 261 warnings, 2 passed, 83402 assertions, duration 30.09s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
       }
     },
     "scope_validation": {
@@ -802,13 +850,25 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/pair_registry.json",
+        "backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "outside_scope_files": [],
+      "status": "pass",
+      "evidence": "Changed files are confined to close-call UI copy, pair fallback close-call guidance, and train ledger reconciliation."
     },
     "events": [
       {
         "at": "2026-07-02T16:10:24Z",
         "status": "pending_dependency",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge."
+      },
+      {
+        "at": "2026-07-03T05:54:00Z",
+        "status": "local_validation_passed",
+        "notes": "Implemented close-call card content thickening through existing fixed registry keys; required local validation passed."
       }
     ]
   },
@@ -66022,7 +66082,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T05:36:00Z",
+  "updated_at": "2026-07-03T05:54:00Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
