@@ -1,8 +1,8 @@
 {
-  "body_length_max": 200,
-  "body_length_max_after_normalization": 200,
-  "body_length_min": 180,
-  "body_length_min_after_normalization": 180,
+  "body_length_max": 248,
+  "body_length_max_after_normalization": 248,
+  "body_length_min": 204,
+  "body_length_min_after_normalization": 204,
   "body_length_outside_180_320": [],
   "candidate_stage": "norm_unavailable_revised_v0_3_normalized",
   "content_asset_count": 18,
@@ -30,7 +30,7 @@
     "This is a candidate artifact only.",
     "No final big5_result_page_v2 payload generated.",
     "No frontend copy, CMS, SEO, runtime, rollout, or production change.",
-    "Codex recalculated body_quality and generated selector candidates; staging import remains deferred."
+    "Scientific repair reduced repeated caveats and keeps norm-unavailable copy focused on structure, context, and safe surface use."
   ],
   "production_use_allowed_true_count": 0,
   "public_payload_fields_checked": [
@@ -49,5 +49,11 @@
   "scan_scope": "public_visible_fields_only",
   "schema": "fap.big5.result_page_v2.norm_unavailable.revised_v0_3.normalized.source_qa_scan.v0_1",
   "schema_version": "big5.norm_unavailable.revised.qa.v0_3",
+  "scientific_editorial_repair": {
+    "external_positioning_removed": true,
+    "forbidden_hit_count": 0,
+    "status": "pass",
+    "template_repetition_reduced": true
+  },
   "selector_candidate_count": 18
 }
