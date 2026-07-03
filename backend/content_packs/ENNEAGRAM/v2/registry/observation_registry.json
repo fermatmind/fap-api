@@ -18,9 +18,9 @@
         {
             "day": 1,
             "phase": "core_motivation_observation",
-            "title": "Day 1｜先抓触发点",
-            "prompt": "今天只记录一个让你明显收缩、推进、解释、讨好、控制或退开的场景。不要急着分析类型，先看自动反应是怎样启动的。",
-            "example": "例如：会议里有人否定方案，你是先想纠正、先想证明、先想确认风险，还是先想把场面压平？",
+            "title": "Day 1｜只记一个触发点",
+            "prompt": "今天只选一个让你明显紧起来、想推进、想解释、想靠近、想控制或想退开的场景。先写发生了什么和你做了什么，不急着分析号码。",
+            "example": "例如：会议里有人否定方案，你先想补充事实、证明自己、确认风险，还是先想让场面别变僵？只记一个真实片段。",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
@@ -55,16 +55,16 @@
             },
             "analytics_event_key": "enneagram_observation_day1_started",
             "suggested_next_action": "observe_7_days",
-            "boundary_copy": "这一步只记录现实证据，不急着把自己定成某个号码。",
+            "boundary_copy": "这一步只收集现实片段，不把单次反应当成类型证明。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
         {
             "day": 2,
             "phase": "core_motivation_observation",
-            "title": "Day 2｜观察你担心失去什么",
-            "prompt": "回看今天一个明显不舒服的瞬间：你更容易担心失去正确感、认可、关系位置、安全、边界、自由、真实感，还是平静？",
-            "example": "例如：如果一件事做得不漂亮，你不舒服是因为它不对、它不成、它不稳，还是它让你失去空间？",
+            "title": "Day 2｜看你在维护什么",
+            "prompt": "回看今天一个不舒服的瞬间：你当时更在意正确、认可、被需要、安全、边界、自由、真实表达，还是平静？只选最贴近的一项，并写一句证据。",
+            "example": "例如：一件事没有按预期完成时，你不舒服更像担心它不对、自己不被看见、关系变冷，还是空间被压缩？",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
@@ -90,16 +90,16 @@
             },
             "analytics_event_key": "enneagram_observation_day2_pattern_logged",
             "suggested_next_action": "observe_7_days",
-            "boundary_copy": "只记录当下更像你的动力线索，不必追求一次就找到最终答案。",
+            "boundary_copy": "这只是当天动力线索，不要求一次找到最终答案。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
         {
             "day": 3,
             "phase": "day3_feedback",
-            "title": "Day 3｜动机投票",
-            "prompt": "三天过去，你不需要给出最终答案。只要问自己：过去几天里，哪一种动力更像你在关键时刻反复维护的东西？",
-            "example": "如果你是 close-call，更重要的不是看谁更像表面行为，而是把 Top1 和 Top2 当作候选线索并排记录。",
+            "title": "Day 3｜轻量回看前三天",
+            "prompt": "不用给自己定型。只回看前三天：哪一类动机在线索里出现得稍多一点？如果不清楚，就选不清楚，并写下最有代表性的一个场景。",
+            "example": "如果你是 close-call，把 Top1 和 Top2 当作两个候选假设并排观察，不用强行二选一。",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
@@ -135,16 +135,16 @@
             },
             "analytics_event_key": "enneagram_day3_feedback_submitted",
             "suggested_next_action": "read_top3",
-            "boundary_copy": "Day3 反馈会进入自我观察记录，但不会静默改写本次测量结果。",
+            "boundary_copy": "Day3 反馈只进入自我观察记录，不会静默改写本次测量结果。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
         {
             "day": 4,
             "phase": "pressure_reaction_observation",
-            "title": "Day 4｜看压力下的第一反应",
-            "prompt": "今天观察压力上来时，你更想迎战、解释、撤退、讨好、转移、控制、麻木，还是先找人确认？",
-            "example": "例如：当事情开始失控时，你是更想把边界拉直，还是更想把局面先稳住？",
+            "title": "Day 4｜看压力下的第一步",
+            "prompt": "今天观察压力上来后的第一步：迎战、解释、撤退、讨好、转移、控制、麻木、找人确认，还是别的？只记录第一步和后来怎么恢复。",
+            "example": "例如：事情开始失控时，你先想把边界拉直、先查更多信息，还是先把局面稳住？",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
@@ -174,16 +174,16 @@
             },
             "analytics_event_key": "enneagram_observation_day4_cost_logged",
             "suggested_next_action": "observe_7_days",
-            "boundary_copy": "这一层只帮助你看见压力脚本，不把任何反应自动解释成发展阶段、医学状态或临床状态。",
+            "boundary_copy": "这只是压力脚本观察，不对应发展阶段、医学状态或临床判断。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
         {
             "day": 5,
             "phase": "pressure_reaction_observation",
-            "title": "Day 5｜关系里的保护点",
-            "prompt": "今天观察一段关系里的小摩擦：你更想被理解、被认可、被尊重边界、被承诺、被需要，还是只想让局面平下来？",
-            "example": "例如：对方一句话让你不舒服时，你最先在保护的是关系位置、尊严、安全感，还是平静感？",
+            "title": "Day 5｜关系摩擦里的需要",
+            "prompt": "选一段轻微关系摩擦，记录你当时更想被理解、被认可、边界被尊重、得到承诺、被需要，还是让局面平下来。只写自己的需要和行为。",
+            "example": "例如：对方一句话让你不舒服时，你最先想保护的是关系位置、尊严、安全感、边界，还是平静感？",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
@@ -211,16 +211,16 @@
             },
             "analytics_event_key": "enneagram_observation_day5_relationship_logged",
             "suggested_next_action": "observe_7_days",
-            "boundary_copy": "观察的是你在关系里可能更想维护的需要，不是给关系里谁对谁错做裁决。",
+            "boundary_copy": "观察的是你的互动需要，不判断关系里谁对谁错。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
         {
             "day": 6,
             "phase": "pressure_reaction_observation",
-            "title": "Day 6｜看你的低动用资源",
-            "prompt": "今天观察一个你不太自然使用的能力：求助、直接拒绝、表达愤怒、放松享受、承认需要、建立规则、主动展示、停下来感受，还是承担冲突。",
-            "example": "不是问你‘会不会’，而是看这类资源在真实生活里是不是总要晚一步才出现。",
+            "title": "Day 6｜看一个低动用资源",
+            "prompt": "今天只观察一个不太自然出现的资源：求助、拒绝、表达愤怒、放松享受、承认需要、建立规则、主动展示、停下来感受，或承担冲突。",
+            "example": "不是问你会不会，而是看它在真实场景里是不是总要晚一步才出现。写一个证据句就够。",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
@@ -247,7 +247,7 @@
             },
             "analytics_event_key": "enneagram_observation_day6_work_logged",
             "suggested_next_action": "read_top3",
-            "boundary_copy": "blind spot 只是低动用资源，不代表你没有这一部分，也不代表系统在做硬判。",
+            "boundary_copy": "blind spot 只表示低动用资源，不代表缺陷，也不是系统硬判。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -255,8 +255,8 @@
             "day": 7,
             "phase": "day7_resonance",
             "title": "Day 7｜深度共鸣投票",
-            "prompt": "现在不要问哪个号码更好，只问：过去一周，哪一种动力在关键时刻更常被你维护？",
-            "example": "如果你仍然摇摆，这不表示失败。它只说明当前需要继续观察、阅读 Top3，或在需要时补做 FC144 深度版。",
+            "prompt": "回看这一周，不问哪个号码更好，只问哪些解释更贴近日常动机。可以选择 Top1、Top2、Top3、其他或仍不确定，并写一句证据。",
+            "example": "如果仍然摇摆，这不是失败。你可以继续阅读 Top3、保留不确定，或在需要时选择同题型重测或 FC144 补充观察。",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
@@ -299,7 +299,7 @@
             },
             "analytics_event_key": "enneagram_day7_feedback_submitted",
             "suggested_next_action": "observe_7_days",
-            "boundary_copy": "你的自我观察确认会被记录进历史，但不会把本次测量结果静默改写成‘系统改判’。",
+            "boundary_copy": "自我观察确认会被记录进历史，但不会把本次测量结果静默改写成系统改判。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         }
