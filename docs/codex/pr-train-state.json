@@ -13883,9 +13883,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "head_sha": "03234da3f6097d9b1c6ec7e1b0695603799f1593",
+        "evidence": "PR #2682 GitHub checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
-    "commit_sha": "ca8db37916fcbb38b9eb5c30c5dedfbbdce25b02",
+    "commit_sha": "03234da3f6097d9b1c6ec7e1b0695603799f1593",
     "depends_on": [
       "ENNEA-RP-17"
     ],
@@ -13909,6 +13914,11 @@
         "at": "2026-07-03T07:20:57Z",
         "status": "pr_opened",
         "notes": "Opened PR #2682 for collaboration friction content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T07:26:44Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed on PR #2682; PR is clean and ready for squash merge under repo policy."
       }
     ],
     "failure_reason": null,
@@ -13935,7 +13945,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to collaboration friction content in type registry plus train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-18: fix(enneagram): repair collaboration friction",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
