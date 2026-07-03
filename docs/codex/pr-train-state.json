@@ -16581,9 +16581,13 @@
           "git diff --check"
         ],
         "notes": "Initial validator failure on high-certainty phrase \"一定会\" was fixed within sample_report_registry scope; full validation passed with existing warnings only."
+      },
+      "github": {
+        "status": "pending",
+        "pr": 2708
       }
     },
-    "commit_sha": "627acf7afda5beea041b46b99c459789ccdcb512",
+    "commit_sha": "960b6e760560a3f43e0f245e17abd087c7d7d843",
     "depends_on": [
       "ENNEA-RP-40"
     ],
@@ -16607,13 +16611,18 @@
         "at": "2026-07-03T14:20:53Z",
         "status": "committed",
         "notes": "Created local commit 627acf7afda5beea041b46b99c459789ccdcb512 for ENNEA-RP-41."
+      },
+      {
+        "at": "2026-07-03T14:21:31Z",
+        "status": "github_checks_pending",
+        "notes": "Opened PR #2708 and pushed branch for required GitHub checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-41",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2708",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -16630,7 +16639,7 @@
       ],
       "outside_scope_files": []
     },
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "title": "ENNEA-RP-41: fix(enneagram): repair sample report link",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
