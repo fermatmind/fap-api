@@ -15266,13 +15266,19 @@
         "status": "committed",
         "commit_sha": "16ab62fa5e83c9b0495202533f8e9ec2c7c39646",
         "notes": "Implementation commit created after local validation."
+      },
+      {
+        "at": "2026-07-03T11:01:54.910Z",
+        "status": "pr_opened_github_checks_pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2697",
+        "notes": "PR opened; waiting for required GitHub checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-30",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2697",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -15292,7 +15298,7 @@
       ],
       "evidence": "Changed files are confined to relationship_need scenario copy, relationship_pack.partner_facing_notes used by the relationship_need module, and train ledger reconciliation/status."
     },
-    "status": "committed",
+    "status": "pr_opened_github_checks_pending",
     "title": "ENNEA-RP-30: fix(enneagram): repair relationship need",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
