@@ -14302,7 +14302,7 @@
         "evidence": "No whitespace errors."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "7d586f80292d0c7bd27b180abf6f44b999c87267",
     "depends_on": [
       "ENNEA-RP-21"
     ],
@@ -14321,13 +14321,18 @@
         "at": "2026-07-03T08:38:59Z",
         "status": "local_validation_passed",
         "notes": "Expanded method boundary copy so unavailable work/team context modules are explained as product boundaries, not hidden scores or workplace/team fit conclusions. A temporary theory-hint entry caused a local test failure and was removed within scope before final validation passed."
+      },
+      {
+        "at": "2026-07-03T08:40:00Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2689 for context mode placeholder boundary copy repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-22",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2689",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -14347,7 +14352,7 @@
       ],
       "evidence": "Changed files are confined to context-mode placeholder boundary copy in method registry plus train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-22: fix(enneagram): repair context mode placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -76673,5 +76678,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T08:38:59Z"
+  "updated_at": "2026-07-03T08:40:00Z"
 }
