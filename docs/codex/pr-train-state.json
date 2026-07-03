@@ -69375,9 +69375,9 @@
       "PR-EQ-ASSET-SCI-05",
       "PR-EQ-ASSET-SCI-13"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "dd39f528ee6e66c1fbb55d74bedb1f348673fec5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2655",
     "checks": [
       {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
@@ -69478,6 +69478,11 @@
         "at": "2026-07-03T03:25:11Z",
         "status": "local_validation_passed",
         "notes": "Reduced action_prescription intervention claims, removed duplicated boundary text from primary action fields, retained high-risk boundaries in watch_out/do_not_overread, and passed local validation."
+      },
+      {
+        "at": "2026-07-03T03:25:55Z",
+        "status": "pr_open",
+        "notes": "Opened PR #2655 for PR-EQ-ASSET-SCI-09; GitHub checks pending."
       }
     ]
   },
