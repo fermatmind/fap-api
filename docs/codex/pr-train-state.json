@@ -16079,7 +16079,7 @@
         "evidence": "Changed files are confined to observation_registry seven-day observation copy and train ledger reconciliation/state."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "876c4e77ec3d43a02041f908af1cb89e549488a5",
     "depends_on": [
       "ENNEA-RP-36"
     ],
@@ -16098,6 +16098,12 @@
         "at": "2026-07-03T13:15:13.296Z",
         "status": "local_validation_passed",
         "notes": "Required local validation and scope validation passed for seven-day observation content repair."
+      },
+      {
+        "at": "2026-07-03T13:15:33.061Z",
+        "status": "committed",
+        "commit_sha": "876c4e77ec3d43a02041f908af1cb89e549488a5",
+        "notes": "Committed ENNEA-RP-37 seven-day observation content repair and local validation ledger."
       }
     ],
     "failure_reason": null,
@@ -16121,7 +16127,7 @@
       ],
       "evidence": "Changed files are confined to observation_registry seven-day observation copy and train ledger reconciliation/state."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-37: fix(enneagram): repair seven-day observation",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
