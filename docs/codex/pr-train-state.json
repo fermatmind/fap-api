@@ -16348,7 +16348,7 @@
         "evidence": "Changed files are confined to history/share/retake placeholder UI/method copy and train ledger reconciliation/state."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "6c2d31106d7ce9b1674189f85c577f7c0a8a52e3",
     "depends_on": [
       "ENNEA-RP-38"
     ],
@@ -16367,6 +16367,12 @@
         "at": "2026-07-03T13:47:17.395Z",
         "status": "local_validation_passed",
         "notes": "Required local validation and scope validation passed for history/share/retake placeholder boundary repair."
+      },
+      {
+        "at": "2026-07-03T13:47:37.454Z",
+        "status": "committed",
+        "commit_sha": "6c2d31106d7ce9b1674189f85c577f7c0a8a52e3",
+        "notes": "Committed ENNEA-RP-39 history/share/retake placeholder copy repair and local validation ledger."
       }
     ],
     "failure_reason": null,
@@ -16392,7 +16398,7 @@
       ],
       "evidence": "Changed files are confined to history/share/retake placeholder UI/method copy and train ledger reconciliation/state."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-39: fix(enneagram): repair history share retake placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
