@@ -1190,12 +1190,12 @@ final class EnneagramPublicProjectionService
     private function confidenceLabel(string $confidenceLevel, string $language): string
     {
         return match ($confidenceLevel) {
-            'high_confidence' => $language === 'zh' ? '高置信结果' : 'High-confidence result',
-            'medium_confidence' => $language === 'zh' ? '中等置信结果' : 'Medium-confidence result',
-            'close_call' => $language === 'zh' ? '近距离辨析结果' : 'Close-call result',
-            'diffuse' => $language === 'zh' ? '分散型结果' : 'Diffuse result',
-            'low_quality' => $language === 'zh' ? '低质量边界结果' : 'Low-quality boundary result',
-            default => $language === 'zh' ? '结果待解释' : 'Result requires interpretation',
+            'high_confidence' => $language === 'zh' ? '较稳定的解释线索' : 'Relatively stable interpretation signal',
+            'medium_confidence' => $language === 'zh' ? '中等稳定的解释线索' : 'Moderately stable interpretation signal',
+            'close_call' => $language === 'zh' ? '需要近距离辨析' : 'Close-call interpretation range',
+            'diffuse' => $language === 'zh' ? '分散型解释范围' : 'Diffuse interpretation range',
+            'low_quality' => $language === 'zh' ? '作答质量边界' : 'Response-quality boundary',
+            default => $language === 'zh' ? '需要结合情境解释' : 'Requires contextual interpretation',
         };
     }
 

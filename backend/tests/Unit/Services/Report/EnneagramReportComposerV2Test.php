@@ -128,6 +128,34 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame('这不是常模分数、诊断标签、能力评价或固定人格定论。', $first['score_boundary_note'] ?? null);
     }
 
+    public function test_confidence_band_card_frames_confidence_as_interpretation_stability_not_accuracy(): void
+    {
+        $payload = $this->composeReportV2($this->syntheticProjectionInput('enneagram_likert_105', [
+            'T3' => 89.0,
+            'T8' => 62.0,
+            'T1' => 55.0,
+            'T6' => 37.0,
+            'T2' => 28.0,
+            'T7' => 24.0,
+            'T4' => 21.0,
+            'T5' => 16.0,
+            'T9' => 13.0,
+        ]));
+
+        $module = $this->module($payload, 'confidence_band_card');
+        $content = (array) data_get($module, 'content');
+        $encoded = json_encode($content, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+
+        $this->assertSame('解释稳定性', $content['title'] ?? null);
+        $this->assertSame('较稳定的解释线索', $content['confidence_label'] ?? null);
+        $this->assertStringContainsString('本次答题轮廓的清晰度', (string) ($content['reader_guidance'] ?? ''));
+        $this->assertStringContainsString('它不是测试准确率、临床效度、人格定论或未来行为预测', (string) ($content['reader_guidance'] ?? ''));
+        $this->assertStringContainsString('较稳定的解释假设', (string) data_get($content, 'level_guide.high_confidence'));
+        $this->assertSame(['accuracy_claim', 'external_validity_claim', 'diagnosis', 'personality_verdict', 'prediction'], $content['not_for'] ?? null);
+        $this->assertStringNotContainsString('高置信结果', $encoded);
+        $this->assertStringNotContainsString('中等置信结果', $encoded);
+    }
+
     public function test_unavailable_v2_report_uses_public_error_code_without_registry_exception_details(): void
     {
         $composer = app(EnneagramReportComposer::class);
