@@ -87,6 +87,14 @@ final class RegistryValidator
         ],
         [
             'category' => 'pseudo_validity',
+            'pattern' => '/(?:权威|专业|科学|临床).{0,10}(?:背书|认证|认证过|认可).{0,16}(?:九型|测试|量表|结果)/u',
+        ],
+        [
+            'category' => 'pseudo_validity',
+            'pattern' => '/(?:比|较).{0,8}(?:MBTI|Big Five|大五|临床量表).{0,12}(?:更准确|更科学|更可靠)/ui',
+        ],
+        [
+            'category' => 'pseudo_validity',
             'pattern' => '/(?:通过|具备|拥有|达到).{0,12}(?:外部效度验证|效度验证|临床验证|科学验证)/u',
         ],
         [
@@ -98,12 +106,20 @@ final class RegistryValidator
             'pattern' => '/(?:可用于|可以用于|能够用于|用于|用来|作为|适合).{0,16}(?:临床诊断|临床判断|心理治疗建议|医学判断|医学状态|诊断结论)/u',
         ],
         [
+            'category' => 'diagnostic_use',
+            'pattern' => '/(?:诊断出|诊断为|判断为|识别出).{0,16}(?:心理疾病|人格障碍|病理状态|医学状态|临床问题)/u',
+        ],
+        [
             'category' => 'hiring_use',
             'pattern' => '/(?:可用于|可以用于|能够用于|用于|用来|作为|适合|支持).{0,18}(?:招聘筛选|招聘|候选人筛选|录用|淘汰|筛掉)/u',
         ],
         [
             'category' => 'hiring_use',
             'pattern' => '/(?:录用|淘汰|筛掉).{0,16}(?:候选人|应聘者|员工)/u',
+        ],
+        [
+            'category' => 'hiring_use',
+            'pattern' => '/(?:决定|辅助决定|建议).{0,12}(?:录用|不录用|晋升|淘汰|转岗)/u',
         ],
         [
             'category' => 'health_level_hard_judgement',
@@ -129,6 +145,39 @@ final class RegistryValidator
             'category' => 'wing_subtype_arrow_hard_judgement',
             'pattern' => '/(?:翼型|子类型|箭头|本能).{0,14}(?:判定|确定|锁定|硬判)/u',
         ],
+        [
+            'category' => 'wing_subtype_arrow_hard_judgement',
+            'pattern' => '/(?:你的|用户的|此人的).{0,8}(?:翼型|子类型|箭头|本能).{0,8}(?:是|就是|必然是|一定是)/u',
+        ],
+    ];
+
+    /**
+     * @var list<string>
+     */
+    private const AI_LIKE_PHRASE_SNIPPETS = [
+        '总而言之',
+        '综上所述',
+        '请记住，你是独一无二的',
+        '成为更好的自己',
+        '拥抱真实的自己',
+        '开启自我成长之旅',
+        '深度洞察',
+        '赋能',
+    ];
+
+    /**
+     * @var list<string>
+     */
+    private const GENERIC_ADVICE_SNIPPETS = [
+        '保持开放',
+        '积极沟通',
+        '学会倾听',
+        '勇敢表达',
+        '相信自己',
+        '走出舒适区',
+        '提升自我',
+        '成为更好的自己',
+        '拥抱变化',
     ];
 
     /**
@@ -952,6 +1001,30 @@ final class RegistryValidator
                 $path,
                 $rule['category'],
                 $matched
+            );
+        }
+
+        foreach (self::AI_LIKE_PHRASE_SNIPPETS as $snippet) {
+            if (str_contains($value, $snippet)) {
+                $errors[] = sprintf(
+                    'Registry text boundary violation at %s: ai_like_phrasing claim "%s"',
+                    $path,
+                    $snippet
+                );
+            }
+        }
+
+        $genericAdviceHits = [];
+        foreach (self::GENERIC_ADVICE_SNIPPETS as $snippet) {
+            if (str_contains($value, $snippet)) {
+                $genericAdviceHits[] = $snippet;
+            }
+        }
+        if (count($genericAdviceHits) >= 4) {
+            $errors[] = sprintf(
+                'Registry text boundary violation at %s: generic_advice_density claim "%s"',
+                $path,
+                implode(' / ', $genericAdviceHits)
             );
         }
     }

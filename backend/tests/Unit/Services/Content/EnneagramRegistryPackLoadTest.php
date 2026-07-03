@@ -61,6 +61,29 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $this->assertStringContainsString('high_certainty', $joined);
     }
 
+    public function test_registry_validator_rejects_style_and_hard_inference_regressions(): void
+    {
+        $loader = app(EnneagramPackLoader::class);
+        $pack = $loader->loadRegistryPack();
+
+        data_set($pack, 'registries.enneagram_method_registry.entries.0.copy', '本测试比 Big Five 更科学，也已经获得权威背书。');
+        data_set($pack, 'registries.enneagram_pair_registry.entries.0.short_compare_copy', '系统可以决定录用或不录用，并建议淘汰不合适的候选人。');
+        data_set($pack, 'registries.enneagram_state_registry.entries.0.disclaimer', '该结果可以诊断出人格障碍，并判断为临床问题。');
+        data_set($pack, 'registries.enneagram_theory_hint_registry.entries.0.boundary_copy', '你的翼型就是 3w4，本能一定是社交本能。');
+        data_set($pack, 'registries.enneagram_ui_copy_registry.entries.instant_summary.clear.body_template', '总而言之，希望你能拥抱真实的自己，开启自我成长之旅。');
+        data_set($pack, 'registries.enneagram_technical_note_registry.entries.0.body', '保持开放，积极沟通，学会倾听，勇敢表达，相信自己。');
+
+        $errors = app(RegistryValidator::class)->validate($pack);
+        $joined = implode("\n", $errors);
+
+        $this->assertStringContainsString('pseudo_validity', $joined);
+        $this->assertStringContainsString('hiring_use', $joined);
+        $this->assertStringContainsString('diagnostic_use', $joined);
+        $this->assertStringContainsString('wing_subtype_arrow_hard_judgement', $joined);
+        $this->assertStringContainsString('ai_like_phrasing', $joined);
+        $this->assertStringContainsString('generic_advice_density', $joined);
+    }
+
     public function test_registry_release_hash_is_stable(): void
     {
         $loader = app(EnneagramPackLoader::class);
