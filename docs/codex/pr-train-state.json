@@ -15600,13 +15600,19 @@
         "status": "committed",
         "notes": "Implementation commit created after local validation.",
         "commit_sha": "21ad8ce9c7c01ddb6228246874994e39caf6243f"
+      },
+      {
+        "at": "2026-07-03T11:58:59.628Z",
+        "status": "pr_opened_github_checks_pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2700",
+        "notes": "PR opened; waiting for required GitHub checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-33",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2700",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -15625,7 +15631,7 @@
       ],
       "evidence": "Changed files are confined to conflict_script scenario copy, relationship_pack.conflict_trigger_points, relationship_pack.repair_language, and train ledger reconciliation/state."
     },
-    "status": "committed",
+    "status": "pr_opened_github_checks_pending",
     "title": "ENNEA-RP-33: fix(enneagram): repair conflict script",
     "train_scope": "enneagram_result_page_content_asset_repair",
     "commit_sha": "21ad8ce9c7c01ddb6228246874994e39caf6243f"
