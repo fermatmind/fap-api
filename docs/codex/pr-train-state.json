@@ -13729,7 +13729,7 @@
         "evidence": "No whitespace errors."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "cf41d7085023eb676ecb40f4f848bc38cb24df04",
     "depends_on": [
       "ENNEA-RP-16"
     ],
@@ -13745,16 +13745,21 @@
         "notes": "Started from latest origin/main on branch codex/ennea-rp-17-collaboration-strengths after ENNEA-RP-16 merge and cleanup; scope is collaboration strengths content in type registry plus train ledger only."
       },
       {
-        "at": "2026-07-03T07:04:30Z",
+        "at": "2026-07-03T07:02:05Z",
         "status": "local_validation_passed",
         "notes": "Repaired collaboration strengths with concrete collaboration situations and explicit limits against ability or outcome conclusions; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T07:02:23Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2680 for collaboration strengths content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-17",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2680",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -13774,7 +13779,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to collaboration strengths content in type registry and train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-17: fix(enneagram): repair collaboration strengths",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
