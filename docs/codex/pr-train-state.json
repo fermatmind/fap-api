@@ -558,8 +558,8 @@
     "depends_on": [
       "ENNEA-RP-04"
     ],
-    "status": "pr_opened",
-    "commit_sha": "4415fc15da7151b3c9b0789a1d5f9d3556ce9244",
+    "status": "ready_to_merge",
+    "commit_sha": "6cfcccf59d0925968c8a76c76295d2ed071153b1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2653",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -603,6 +603,11 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2653 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All reported checks for PR #2653 passed on head 6cfcccf59d0925968c8a76c76295d2ed071153b1, including hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, and Semgrep checks."
       }
     },
     "scope_validation": {
@@ -639,6 +644,11 @@
         "at": "2026-07-03T05:04:00Z",
         "status": "pr_opened",
         "notes": "Opened PR #2653 for confidence band content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T05:12:00Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed; recording ready-to-merge before squash merge per train policy."
       }
     ]
   },
@@ -65935,7 +65945,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T05:04:00Z",
+  "updated_at": "2026-07-03T05:12:00Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
