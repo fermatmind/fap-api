@@ -14300,9 +14300,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2689 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on head b2c3a4d12872ef93cdcbc7592b7f58f8829f08a1: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": "7d586f80292d0c7bd27b180abf6f44b999c87267",
+    "commit_sha": "b2c3a4d12872ef93cdcbc7592b7f58f8829f08a1",
     "depends_on": [
       "ENNEA-RP-21"
     ],
@@ -14326,6 +14331,11 @@
         "at": "2026-07-03T08:40:00Z",
         "status": "pr_opened",
         "notes": "Opened PR #2689 for context mode placeholder boundary copy repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T08:46:33Z",
+        "status": "ready_to_merge",
+        "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2689 is clean and ready for squash merge."
       }
     ],
     "failure_reason": null,
@@ -14352,7 +14362,7 @@
       ],
       "evidence": "Changed files are confined to context-mode placeholder boundary copy in method registry plus train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-22: fix(enneagram): repair context mode placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -76678,5 +76688,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T08:40:00Z"
+  "updated_at": "2026-07-03T08:46:33Z"
 }
