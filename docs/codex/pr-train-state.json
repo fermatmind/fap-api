@@ -422,9 +422,9 @@
     "depends_on": [
       "ENNEA-RP-03"
     ],
-    "status": "pending_dependency",
-    "commit_sha": "c84cbca201220604e3766ecfcf78f039c89832c4",
-    "pr_url": null,
+    "status": "ci_fix_local_validation_pending",
+    "commit_sha": "21d98fdfab029fc02bde0e21006c59f209f55672",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2622",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -433,6 +433,19 @@
       "authorization": {
         "status": "pass",
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-03 merged as PR #2616 and merge commit 2ed7e626826a31d44f03125cf62a43d5779e4d05 is present in origin/main."
+      },
+      "github_verify_bigfive": {
+        "status": "fail_inspected",
+        "command": "gh run view 28610512272 --repo fermatmind/fap-api --job 84842039595 --log-failed",
+        "evidence": "verify-bigfive failed at BigFiveResultPageV2CoreBodyPreviewTest.php:184 because the BigFive runtime-freeze guard did not exempt the Enneagram result-page runtime contract files changed by ENNEA-RP-04."
+      },
+      "ci_guard_fix": {
+        "status": "local_targeted_passed",
+        "evidence": "Added a narrow classifier exemption and unit test for EnneagramPublicProjectionService.php and EnneagramReportComposer.php; targeted BigFive runtime-freeze tests passed before rebase."
       }
     },
     "scope_validation": {
@@ -440,17 +453,34 @@
         "backend/app/Services/Report/EnneagramReportComposer.php",
         "backend/app/Services/Enneagram/**",
         "backend/tests/**/Enneagram*",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [],
+      "changed_files": [
+        "backend/app/Services/Enneagram/EnneagramPublicProjectionService.php",
+        "backend/app/Services/Report/EnneagramReportComposer.php",
+        "backend/tests/Feature/Content/EnneagramScoringV11Test.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "backend/tests/Unit/Services/Report/EnneagramReportComposerV2Test.php",
+        "docs/codex/pr-train-state.json",
+        "docs/codex/pr-train.yaml"
+      ],
+      "status": "pass",
+      "evidence": "Changed files are confined to ENNEA-RP-04 all9 profile runtime labels, related Enneagram tests, PR train metadata, and the required BigFive runtime-freeze guard exemption for the two Enneagram result-page runtime contract files."
     },
     "events": [
       {
         "at": "2026-07-02T16:10:24Z",
         "status": "pending_dependency",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge."
+      },
+      {
+        "at": "2026-07-03T02:40:06Z",
+        "status": "ci_fix_local_validation_pending",
+        "notes": "Rebased over latest main and retained narrow BigFive runtime-freeze guard fix; full local validation pending after rebase completes."
       }
     ]
   },
