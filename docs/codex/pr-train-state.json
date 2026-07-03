@@ -422,8 +422,8 @@
     "depends_on": [
       "ENNEA-RP-03"
     ],
-    "status": "ci_fix_local_validation_pending",
-    "commit_sha": "21d98fdfab029fc02bde0e21006c59f209f55672",
+    "status": "local_validation_passed",
+    "commit_sha": "55d4e66f12328a785cdfe9a5a2b0d92e82f68589",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2622",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -446,6 +446,46 @@
       "ci_guard_fix": {
         "status": "local_targeted_passed",
         "evidence": "Added a narrow classifier exemption and unit test for EnneagramPublicProjectionService.php and EnneagramReportComposer.php; targeted BigFive runtime-freeze tests passed before rebase."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully after rebase."
+      },
+      "bigfive_runtime_freeze_guard": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_enneagram_result_page_runtime_contract_files",
+        "evidence": "Both targeted BigFive runtime-freeze guard tests passed after adding the narrow Enneagram runtime-contract exemption."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed after rebase: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed after rebase: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed after rebase: 12 warnings, 108 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed after rebase: 259 warnings, 2 passed, 83386 assertions, duration 26.59s."
+      },
+      "bigfive_verify_gate_local": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-ci-bigfive.sqlite ... bash scripts/ci/verify_big5_norms.sh && artisan content:lint --pack=BIG5_OCEAN --pack-version=v1 && artisan content:compile --pack=BIG5_OCEAN --pack-version=v1 && artisan test --filter=(BigFive|Big5|NonMbtiReportContractRegressionTest)",
+        "evidence": "CI-like BigFive gate passed locally with sqlite/env configuration: 1129 warnings, 3 passed, 126107 assertions, duration 241.47s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors after rebase and validation."
       }
     },
     "scope_validation": {
@@ -481,6 +521,11 @@
         "at": "2026-07-03T02:40:06Z",
         "status": "ci_fix_local_validation_pending",
         "notes": "Rebased over latest main and retained narrow BigFive runtime-freeze guard fix; full local validation pending after rebase completes."
+      },
+      {
+        "at": "2026-07-03T04:18:00Z",
+        "status": "local_validation_passed",
+        "notes": "Replayed PR-04 validation state while rebasing over latest main; implementation scope unchanged."
       }
     ]
   },
@@ -65819,7 +65864,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T02:49:03Z",
+  "updated_at": "2026-07-03T04:18:00Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
