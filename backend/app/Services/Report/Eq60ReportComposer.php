@@ -11,6 +11,14 @@ use App\Services\Eq\EqCrossAssessmentContextGuard;
 
 final class Eq60ReportComposer
 {
+    private const LOW_CONFIDENCE_FLAGS = [
+        'SPEEDING',
+        'VERY_SHORT_DURATION',
+        'LOW_ATTENTION',
+        'LONGSTRING',
+        'INCONSISTENCY',
+    ];
+
     public function __construct(
         private readonly Eq60PackLoader $packLoader,
         private readonly EqCrossAssessmentContextGuard $crossAssessmentContextGuard,
@@ -352,14 +360,33 @@ final class Eq60ReportComposer
             static fn ($flag): string => strtoupper(trim((string) $flag)),
             (array) ($quality['flags'] ?? [])
         )));
-        $quality['confidence_label'] = match ($level) {
+        $runtimeLowConfidence = $this->isLowConfidenceQuality($quality);
+        $quality['confidence_label'] = $runtimeLowConfidence ? 'low' : match ($level) {
             'A' => 'high',
             'B' => 'medium',
             default => 'low',
         };
-        $quality['explanation_asset_id'] = 'eq.quality.level.'.$level;
+        $quality['explanation_asset_id'] = 'eq.quality.level.'.($runtimeLowConfidence && ! in_array($level, ['C', 'D'], true) ? 'D' : $level);
 
         return $quality;
+    }
+
+    /**
+     * @param  array<string,mixed>  $quality
+     */
+    private function isLowConfidenceQuality(array $quality): bool
+    {
+        $level = strtoupper(trim((string) ($quality['level'] ?? '')));
+        if (in_array($level, ['C', 'D'], true)) {
+            return true;
+        }
+
+        $flags = array_values(array_map(
+            static fn ($flag): string => strtoupper(trim((string) $flag)),
+            (array) ($quality['flags'] ?? [])
+        ));
+
+        return array_values(array_intersect($flags, self::LOW_CONFIDENCE_FLAGS)) !== [];
     }
 
     /**
@@ -373,7 +400,7 @@ final class Eq60ReportComposer
         $strongest = $this->rankDimension($dimensionScores, true);
         $developmentLever = $this->rankDimension($dimensionScores, false);
         $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? '')));
-        $formulationId = $this->selectCoreFormulation($dimensionScores, $qualityLevel);
+        $formulationId = $this->selectCoreFormulation($dimensionScores, $qualityLevel, $this->isLowConfidenceQuality($quality));
         $route = $this->selectPersonalizationRoute($routeMatrix, $formulationId, $dimensionScores, $quality);
         $selectedAssetIds = $this->selectedAssetIds($route, $formulationId, $dimensionScores, $developmentLever);
         if ((array) ($selectedAssetIds['scene_variant_ids'] ?? []) === []) {
@@ -460,15 +487,20 @@ final class Eq60ReportComposer
             static fn ($level): string => strtoupper(trim((string) $level)),
             (array) ($match['quality_levels'] ?? [])
         ));
-        if ($qualityLevels !== [] && ! in_array($qualityLevel, $qualityLevels, true)) {
+        $runtimeLowConfidence = $this->isLowConfidenceQuality($quality);
+        if (
+            $qualityLevels !== []
+            && ! in_array($qualityLevel, $qualityLevels, true)
+            && ! ($runtimeLowConfidence && array_values(array_intersect($qualityLevels, ['C', 'D'])) !== [])
+        ) {
             return false;
         }
 
         $confidence = strtolower(trim((string) ($match['confidence'] ?? '')));
-        if ($confidence === 'low' && ! in_array($qualityLevel, ['C', 'D'], true)) {
+        if ($confidence === 'low' && ! $runtimeLowConfidence) {
             return false;
         }
-        if ($confidence === 'normal' && in_array($qualityLevel, ['C', 'D'], true)) {
+        if ($confidence === 'normal' && $runtimeLowConfidence) {
             return false;
         }
 
@@ -590,6 +622,14 @@ final class Eq60ReportComposer
         $selectedScenes = $selected['scene_ids'] ?? $selected['scenes'] ?? null;
         $selectedCareer = $selected['career_environment_ids'] ?? $selected['career_environment'] ?? null;
         $selectedAction = trim((string) ($selected['action_prescription_id'] ?? $this->stripAssetPrefix((string) ($selected['action_prescription'] ?? ''), 'eq.action.')));
+
+        if ($formulationId === 'low_confidence_result') {
+            $selectedCore = 'low_confidence_result';
+            $selectedMechanisms = [];
+            $selectedScenes = ['pressure_recovery', 'feedback'];
+            $selectedCareer = ['autonomy_recovery_high'];
+            $selectedAction = 'retest_reflection';
+        }
 
         if (! in_array($selectedCore, $this->coreFormulationIds(), true)) {
             $selectedCore = $formulationId;
@@ -812,9 +852,9 @@ final class Eq60ReportComposer
     /**
      * @param  array<string,array<string,mixed>>  $dimensionScores
      */
-    private function selectCoreFormulation(array $dimensionScores, string $qualityLevel): string
+    private function selectCoreFormulation(array $dimensionScores, string $qualityLevel, bool $runtimeLowConfidence = false): string
     {
-        if (in_array($qualityLevel, ['C', 'D'], true)) {
+        if ($runtimeLowConfidence || in_array($qualityLevel, ['C', 'D'], true)) {
             return 'low_confidence_result';
         }
 
