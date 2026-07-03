@@ -744,10 +744,22 @@ final class EnneagramReportComposer
             'visible',
             'all',
             [
+                'title' => '解释稳定性',
+                'subtitle' => '这张卡说明本次结果适合用多确定的语气阅读。',
                 'confidence_level' => data_get($projectionV2, 'classification.confidence_level'),
                 'confidence_label' => data_get($projectionV2, 'classification.confidence_label'),
                 'interpretation_scope' => data_get($projectionV2, 'classification.interpretation_scope'),
                 'interpretation_reason' => data_get($projectionV2, 'classification.interpretation_reason'),
+                'reader_guidance' => '这里的稳定性来自本次答题轮廓的清晰度、第一与第二候选类型的距离、作答质量信号和解释范围规则。它不是测试准确率、临床效度、人格定论或未来行为预测。',
+                'boundary_note' => '高稳定只表示当前答题中主型线索更集中；中等稳定表示可以先阅读主型，但需要用实际情境核对；close_call、diffuse 与 low_quality 表示页面会降低确定语气，并引导辨析、观察或重测。',
+                'not_for' => ['accuracy_claim', 'external_validity_claim', 'diagnosis', 'personality_verdict', 'prediction'],
+                'level_guide' => [
+                    'high_confidence' => '主型线索相对集中，可以把结果作为较稳定的解释假设阅读，但仍需结合真实情境验证。',
+                    'medium_confidence' => '主型线索可读，但相邻候选或情境差异仍可能影响解释，应把结果当作需要核对的工作假设。',
+                    'close_call' => '两个或多个类型线索接近，重点应放在差异辨析，而不是急着固定一个号码。',
+                    'diffuse' => '多种类型线索分散，结果更适合作为观察清单，不适合强行给出单一身份结论。',
+                    'low_quality' => '作答质量信号不足时，页面只保留边界解释和重测建议，不应解读为人格判断。',
+                ],
                 'quality_level' => data_get($projectionV2, 'classification.quality_level'),
                 'low_quality_status' => data_get($projectionV2, 'classification.low_quality_status'),
                 'policy_versions' => [
