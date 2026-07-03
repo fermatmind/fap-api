@@ -128,6 +128,34 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame('这不是常模分数、诊断标签、能力评价或固定人格定论。', $first['score_boundary_note'] ?? null);
     }
 
+    public function test_center_summary_is_theory_boundary_not_center_classification(): void
+    {
+        $payload = $this->composeReportV2($this->syntheticProjectionInput('enneagram_likert_105', [
+            'T8' => 88.0,
+            'T1' => 61.0,
+            'T9' => 53.0,
+            'T6' => 39.0,
+            'T3' => 34.0,
+            'T2' => 29.0,
+            'T5' => 23.0,
+            'T7' => 18.0,
+            'T4' => 14.0,
+        ]));
+
+        $module = $this->module($payload, 'center_summary');
+
+        $this->assertSame('unavailable', data_get($module, 'state'));
+        $this->assertSame('unavailable', data_get($module, 'content.status'));
+        $this->assertStringContainsString('不把作答轮廓换算为中心分数或中心判定', (string) data_get($module, 'content.availability_note'));
+        $this->assertStringContainsString('不能作为诊断、健康层级、能力评价或固定人格分类', (string) data_get($module, 'content.boundary_note'));
+        $this->assertSame(
+            ['center_classification', 'diagnosis', 'health_level_judgement', 'ability_rating'],
+            data_get($module, 'content.not_for')
+        );
+        $this->assertCount(3, (array) data_get($module, 'content.groups'));
+        $this->assertStringContainsString('不把当前作答直接换算成中心分数或中心判定', (string) data_get($module, 'content.groups.0.availability_note'));
+    }
+
     public function test_confidence_band_card_frames_confidence_as_interpretation_stability_not_accuracy(): void
     {
         $payload = $this->composeReportV2($this->syntheticProjectionInput('enneagram_likert_105', [

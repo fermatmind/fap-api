@@ -473,7 +473,7 @@ final class EnneagramReportComposer
             'dominance_gap_card' => $this->buildDominanceGapModule($projectionV2, $indexes),
             'close_call_card' => $this->buildCloseCallModule($projectionV2, $indexes),
             'blind_spot_card' => $this->buildBlindSpotModule($projectionV2, $indexes, 'blind_spot_card'),
-            'center_summary' => $this->buildUnavailableShapeModule($projectionV2, $indexes, 'center_summary', 'summary_card', 'dynamics.center_scores'),
+            'center_summary' => $this->buildCenterSummaryModule($projectionV2, $indexes),
             'stance_summary' => $this->buildUnavailableShapeModule($projectionV2, $indexes, 'stance_summary', 'summary_card', 'dynamics.stance_scores'),
             'harmonic_summary' => $this->buildUnavailableShapeModule($projectionV2, $indexes, 'harmonic_summary', 'summary_card', 'dynamics.harmonic_scores'),
             'wing_hint_visual' => $this->buildWingHintModule($projectionV2, $indexes),
@@ -914,6 +914,58 @@ final class EnneagramReportComposer
             ['enneagram_group_registry'],
             [],
             $this->registryMeta($indexes, 'enneagram_group_registry')
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>  $projectionV2
+     * @param  array<string,mixed>  $indexes
+     * @return array<string,mixed>
+     */
+    private function buildCenterSummaryModule(array $projectionV2, array $indexes): array
+    {
+        $centerEntries = array_values(array_filter(
+            (array) ($indexes['group_entries'] ?? []),
+            static fn (mixed $entry): bool => is_array($entry) && ($entry['group_type'] ?? null) === 'center'
+        ));
+
+        $groups = array_map(static fn (array $entry): array => [
+            'group_key' => $entry['group_key'] ?? null,
+            'type_ids' => $entry['type_ids'] ?? [],
+            'description' => $entry['description'] ?? null,
+            'strength_expression' => $entry['strength_expression'] ?? null,
+            'cost_expression' => $entry['cost_expression'] ?? null,
+            'stress_signal' => $entry['stress_signal'] ?? null,
+            'observation_question' => $entry['observation_question'] ?? null,
+            'boundary_note' => $entry['boundary_note'] ?? null,
+            'availability_note' => $entry['availability_note'] ?? null,
+            'not_for' => $entry['not_for'] ?? [],
+        ], $centerEntries);
+
+        return $this->module(
+            'center_summary',
+            'summary_card',
+            'unavailable',
+            'all',
+            [
+                'status' => 'unavailable',
+                'interpretation_scope' => 'unavailable',
+                'reason' => data_get($projectionV2, '_meta.unavailable.dynamics.center_scores.reason'),
+                'availability_note' => '当前公开结果页不把作答轮廓换算为中心分数或中心判定；以下内容只保留理论边界和观察问题。',
+                'boundary_note' => '中心组来自九型理论语言，可用于整理注意力线索，但不能作为诊断、健康层级、能力评价或固定人格分类。',
+                'not_for' => ['center_classification', 'diagnosis', 'health_level_judgement', 'ability_rating'],
+                'groups' => $groups,
+            ],
+            ['dynamics.center_scores'],
+            array_values(array_filter(array_merge(
+                ['enneagram_group_registry'],
+                array_map(
+                    static fn (array $entry): string => 'enneagram_group_registry:center:'.(string) ($entry['group_key'] ?? ''),
+                    $centerEntries
+                )
+            ))),
+            [],
+            $this->mergeEntryMeta($centerEntries, $this->registryMeta($indexes, 'enneagram_group_registry'))
         );
     }
 
@@ -1628,13 +1680,13 @@ final class EnneagramReportComposer
 
     private function normalizeModuleState(string $state, array $content): string
     {
-        if (in_array($state, ['clear', 'close_call', 'diffuse', 'low_quality'], true)) {
+        if (in_array($state, ['clear', 'close_call', 'diffuse', 'low_quality', 'unavailable'], true)) {
             return $state;
         }
 
         $derived = trim((string) ($content['interpretation_scope'] ?? ''));
 
-        return in_array($derived, ['clear', 'close_call', 'diffuse', 'low_quality'], true) ? $derived : 'clear';
+        return in_array($derived, ['clear', 'close_call', 'diffuse', 'low_quality', 'unavailable'], true) ? $derived : 'clear';
     }
 
     /**

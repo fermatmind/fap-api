@@ -12410,91 +12410,71 @@
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
   "ENNEA-RP-08": {
+    "id": "ENNEA-RP-08",
+    "repo": "fap-api",
     "base": "main",
     "branch": "codex/ennea-rp-08-blind-spot-card",
-    "checks": {
-      "authorization": {
-        "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
-        "status": "pass"
-      },
-      "composer_v2_test": {
-        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
-        "evidence": "Passed: 14 warnings, 121 assertions.",
-        "status": "pass"
-      },
-      "dependency": {
-        "evidence": "ENNEA-RP-07 merged as PR #2659 and merge commit 3f0305df4e07753948d3ce5caf8a40dd213eec76 is present in origin/main.",
-        "status": "pass"
-      },
-      "diff_check": {
-        "command": "git diff --check",
-        "evidence": "No whitespace errors.",
-        "status": "pass"
-      },
-      "enneagram_filter": {
-        "command": "cd backend && php artisan test --filter=Enneagram",
-        "evidence": "Passed: 261 warnings, 2 passed, 83402 assertions, duration 144.25s.",
-        "status": "pass"
-      },
-      "github_required_checks": {
-        "command": "gh pr checks 2660 --repo fermatmind/fap-api --watch --interval 15",
-        "evidence": "All required GitHub checks passed on PR #2660 head a48725a02fc1f40218e24125a8272aa4bf4c4050.",
-        "status": "pass"
-      },
-      "jq_registry_json": {
-        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
-        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully.",
-        "status": "pass"
-      },
-      "registry_pack_load": {
-        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
-        "evidence": "Passed: 3 warnings, 26 assertions.",
-        "status": "pass"
-      },
-      "type_registry_coverage": {
-        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
-        "evidence": "Passed: 2 warnings, 14509 assertions.",
-        "status": "pass"
-      }
-    },
-    "commit_sha": "a48725a02fc1f40218e24125a8272aa4bf4c4050",
+    "title": "ENNEA-RP-08: fix(enneagram): repair blind spot content",
+    "train_scope": "enneagram_result_page_content_asset_repair",
     "depends_on": [
       "ENNEA-RP-07"
     ],
-    "events": [
-      {
-        "at": "2026-07-02T16:10:24Z",
-        "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
-        "status": "pending_dependency"
-      },
-      {
-        "at": "2026-07-03T06:31:00Z",
-        "notes": "Started from latest origin/main on branch codex/ennea-rp-08-blind-spot-card; scope is type_registry blind_spot_copy repair plus train ledger only.",
-        "status": "in_progress"
-      },
-      {
-        "at": "2026-07-03T06:40:00Z",
-        "notes": "Repaired blind_spot_copy for all nine types as low-activation observation hypotheses; required local validation passed.",
-        "status": "local_validation_passed"
-      },
-      {
-        "at": "2026-07-03T06:43:00Z",
-        "notes": "Opened PR #2660 for blind spot content repair; awaiting GitHub required checks.",
-        "status": "pr_opened"
-      },
-      {
-        "at": "2026-07-03T06:50:00Z",
-        "notes": "GitHub required checks passed for PR #2660; scope remains confined to blind-spot type registry content and train ledger.",
-        "status": "ready_to_merge"
-      }
-    ],
-    "failure_reason": null,
-    "id": "ENNEA-RP-08",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "status": "merged",
+    "commit_sha": "c523627329e72cb7a07949962016fa4d37b1bfa7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2660",
-    "remote_branch_deleted": false,
-    "repo": "fap-api",
+    "merged_at": "2026-07-03T04:15:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "failure_reason": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-07 merged as PR #2659 and merge commit 3f0305df4e07753948d3ce5caf8a40dd213eec76 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 14 warnings, 121 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 261 warnings, 2 passed, 83402 assertions, duration 144.25s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2660 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All required GitHub checks passed on PR #2660 head a48725a02fc1f40218e24125a8272aa4bf4c4050."
+      },
+      "post_merge_revalidate": {
+        "status": "pass",
+        "evidence": "PR #2660 is MERGED; origin/main contains merge commit c523627329e72cb7a07949962016fa4d37b1bfa7; local main fast-forwarded to origin/main; worktree clean; local branch deleted; remote branch absent."
+      }
+    },
     "scope_validation": {
       "allowed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
@@ -12506,41 +12486,105 @@
         "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
         "docs/codex/pr-train-state.json"
       ],
-      "evidence": "Changed files are confined to type_registry blind_spot_copy content and train ledger reconciliation.",
       "outside_scope_files": [],
-      "status": "pass"
+      "status": "pass",
+      "evidence": "Changed files are confined to type_registry blind_spot_copy content and train ledger reconciliation."
     },
-    "status": "ready_to_merge",
-    "title": "ENNEA-RP-08: fix(enneagram): repair blind spot content",
-    "train_scope": "enneagram_result_page_content_asset_repair"
-  },
-  "ENNEA-RP-09": {
-    "base": "main",
-    "branch": "codex/ennea-rp-09-center-summary",
-    "checks": {
-      "authorization": {
-        "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
-        "status": "pass"
-      }
-    },
-    "commit_sha": null,
-    "depends_on": [
-      "ENNEA-RP-08"
-    ],
     "events": [
       {
         "at": "2026-07-02T16:10:24Z",
-        "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
-        "status": "pending_dependency"
+        "status": "pending_dependency",
+        "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge."
+      },
+      {
+        "at": "2026-07-03T06:31:00Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-08-blind-spot-card; scope is type_registry blind_spot_copy repair plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T06:40:00Z",
+        "status": "local_validation_passed",
+        "notes": "Repaired blind_spot_copy for all nine types as low-activation observation hypotheses; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T06:43:00Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2660 for blind spot content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T06:50:00Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed for PR #2660; scope remains confined to blind-spot type registry content and train ledger."
+      },
+      {
+        "at": "2026-07-03T07:05:00Z",
+        "status": "merged",
+        "notes": "PR #2660 squash-merged; merge commit present in origin/main; local main synced and task branch cleaned up."
       }
-    ],
-    "failure_reason": null,
+    ]
+  },
+  "ENNEA-RP-09": {
     "id": "ENNEA-RP-09",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
-    "remote_branch_deleted": false,
     "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/ennea-rp-09-center-summary",
+    "title": "ENNEA-RP-09: fix(enneagram): repair center summary boundary",
+    "train_scope": "enneagram_result_page_content_asset_repair",
+    "depends_on": [
+      "ENNEA-RP-08"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-08 merged as PR #2660 and merge commit c523627329e72cb7a07949962016fa4d37b1bfa7 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "group_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramGroupRegistryCoverageTest",
+        "evidence": "Passed: 1 warning, 6 assertions."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 128 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 262 warnings, 2 passed, 83412 assertions, duration 39.01s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      }
+    },
     "scope_validation": {
       "allowed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json",
@@ -12550,11 +12594,34 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "changed_files": [
+        "backend/app/Services/Report/EnneagramReportComposer.php",
+        "backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json",
+        "backend/tests/Unit/Services/Content/EnneagramGroupRegistryCoverageTest.php",
+        "backend/tests/Unit/Services/Report/EnneagramReportComposerV2Test.php",
+        "docs/codex/pr-train-state.json"
+      ],
+      "outside_scope_files": [],
+      "status": "pass",
+      "evidence": "Changed files are confined to center summary group registry content, center runtime projection, Enneagram tests, and train ledger reconciliation."
     },
-    "status": "pending_dependency",
-    "title": "ENNEA-RP-09: fix(enneagram): repair center summary boundary",
-    "train_scope": "enneagram_result_page_content_asset_repair"
+    "events": [
+      {
+        "at": "2026-07-02T16:10:24Z",
+        "status": "pending_dependency",
+        "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge."
+      },
+      {
+        "at": "2026-07-03T07:06:00Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-09-center-summary; scope is center summary registry/runtime boundary plus Enneagram tests and train ledger only."
+      },
+      {
+        "at": "2026-07-03T07:12:00Z",
+        "status": "local_validation_passed",
+        "notes": "Implemented center_summary as unavailable theory-boundary content with center group observation fields; required local validation passed."
+      }
+    ]
   },
   "ENNEA-RP-10": {
     "base": "main",
