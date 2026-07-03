@@ -67,6 +67,14 @@
   },
   "runtime_use": "not_runtime",
   "schema": "fap.big5.result_page_v2.canonical_profiles.revised_v0_3.rendered_preview_qa.v0_1",
+  "scientific_editorial_repair": {
+    "current_structure_framing": true,
+    "deterministic_identity_phrase_count": 0,
+    "fixed_label_as_identity_count": 0,
+    "pr": "BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01",
+    "profile_type_framing": "reduced",
+    "status": "pass"
+  },
   "source": {
     "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized",
     "live_result_verified": false,
@@ -112,13 +120,15 @@
     }
   },
   "visible_text_quality": {
+    "current_structure_framing": true,
     "deterministic_identity_phrase_count": 0,
     "duplicate_body_count": 0,
     "duplicate_title_count": 0,
     "fixed_label_as_identity_count": 0,
     "long_copy_count": 0,
-    "max_body_chars": 306,
-    "min_body_chars": 240,
+    "max_body_chars": 260,
+    "min_body_chars": 220,
+    "profile_type_framing": "reduced",
     "status": "pass",
     "thin_copy_count": 0
   }

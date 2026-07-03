@@ -1,4 +1,9 @@
 {
+  "body_quality": {
+    "max_body_chars": 260,
+    "min_body_chars": 220,
+    "recalculated_by": "codex_canonical_profiles_scientific_repair_01"
+  },
   "candidate_validation": {
     "content_asset_candidate_count": 64,
     "error_count": 0,
@@ -23,6 +28,15 @@
   },
   "runtime_use": "staging_only",
   "schema": "fap.big5.result_page_v2.canonical_profiles.revised_v0_3.normalization_validation_summary.v0_1",
+  "scientific_editorial_repair": {
+    "current_structure_framing": true,
+    "fixed_type_language_present": false,
+    "identity_label_risk": "reduced",
+    "pr": "BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01",
+    "profile_type_framing": "reduced",
+    "status": "pass",
+    "visible_profile_names_rewritten": true
+  },
   "stage_candidates_dry_run": {
     "candidate_validation": {
       "content_asset_candidate_count": 64,

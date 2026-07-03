@@ -16,5 +16,17 @@
   "repair_required": false,
   "runtime_use": "staging_only",
   "schema": "fap.big5.result_page_v2.canonical_profiles.revised_v0_3.repair_log.v0_1",
+  "scientific_editorial_repairs": [
+    {
+      "action": "rewrote visible profile framing as current response structure clues",
+      "count": 64,
+      "scope": "canonical_profiles"
+    },
+    {
+      "action": "removed visible 画像 wording and type-like titles",
+      "count": 64,
+      "scope": "canonical_profiles"
+    }
+  ],
   "selector_candidates_generated": true
 }
