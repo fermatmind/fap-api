@@ -4854,7 +4854,9 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertSame('editorial_reviewed', $row['qa_status'] ?? null);
                 $this->assertSame('share_safe', $row['asset_type'] ?? null);
                 $this->assertSame('L9_share_feedback', $row['asset_layer'] ?? null);
-                $this->assertSame('codex_share_safety_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame('codex_share_safety_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame('BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
+                $this->assertSame('share_safety_scientific_repair_v0_3', data_get($row, 'source_trace.scientific_repair_stage'));
                 $this->assertGreaterThanOrEqual(80, (int) data_get($row, 'body_quality.body_chars', 0));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_public_summary_layer'));
                 $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
@@ -4884,6 +4886,7 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertSame('staging_only', data_get($row, 'provenance.runtime_use'));
                 $this->assertFalse((bool) data_get($row, 'provenance.production_use_allowed', true));
                 $this->assertFalse((bool) data_get($row, 'replacement_policy.replaces_existing_runtime_asset', true));
+                $this->assertSame('BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
             }
 
             $summary = app(BigFiveResultPageV2AssetAgent::class)->stageCandidates([
@@ -4948,8 +4951,22 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 '。，',
                 '可用于低风险沟通',
                 '也便于对方理解下一步',
+                '安全说明',
+                '低风险',
+                '完整报告',
+                '贴标签',
+                '适合',
             ] as $forbiddenToken) {
                 $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+            }
+
+            foreach ([
+                '当前作答结构',
+                '公开分享',
+                '可观察',
+                '不公开分数细节',
+            ] as $requiredToken) {
+                $this->assertStringContainsString($requiredToken, $visibleText, $requiredToken);
             }
         } finally {
             $this->deleteDirectory($artifactRoot);
@@ -5012,6 +5029,8 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertFalse((bool) ($row['ready_for_production'] ?? true));
             $this->assertSame('share_safe', $row['asset_type'] ?? null);
             $this->assertSame('L9_share_feedback', $row['asset_layer'] ?? null);
+            $this->assertSame('codex_share_safety_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
             $this->assertContains('surface_safe', (array) ($row['safety_tags'] ?? []));
             $this->assertContains('share_safety_registry_owned', (array) ($row['safety_tags'] ?? []));
@@ -5039,6 +5058,7 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertSame('staging_only', data_get($row, 'provenance.runtime_use'));
             $this->assertFalse((bool) data_get($row, 'provenance.production_use_allowed', true));
             $this->assertFalse((bool) data_get($row, 'replacement_policy.replaces_existing_runtime_asset', true));
+            $this->assertSame('BIG5-SHARE-SAFETY-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
         }
 
         $visibleText = implode("\n", array_merge(
@@ -5087,8 +5107,22 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             '。，',
             '可用于低风险沟通',
             '也便于对方理解下一步',
+            '安全说明',
+            '低风险',
+            '完整报告',
+            '贴标签',
+            '适合',
         ] as $forbiddenToken) {
             $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+        }
+
+        foreach ([
+            '当前作答结构',
+            '公开分享',
+            '可观察',
+            '不公开分数细节',
+        ] as $requiredToken) {
+            $this->assertStringContainsString($requiredToken, $visibleText, $requiredToken);
         }
     }
 
