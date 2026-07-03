@@ -69446,25 +69446,119 @@
       "PR-EQ-ASSET-SCI-05",
       "PR-EQ-ASSET-SCI-13"
     ],
-    "status": "user_authorized",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": [],
+    "status": "ready_to_merge",
+    "commit_sha": "2b10f70a40f7d66eb6a59637a868aecb7721fe45",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2655",
+    "checks": [
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content lint passed."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content compile passed; scoped report assets compiled output retained and mirrored."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 432 assertions; PHPUnit reported environment file_get_contents warning only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+        "status": "passed_with_warnings",
+        "summary": "14 tests passed, 706 assertions; PHPUnit reported environment file_get_contents warnings only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 208 assertions; PHPUnit reported environment file_get_contents warning only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+        "status": "passed_with_warnings",
+        "summary": "4 tests passed, 130 assertions; PHPUnit reported environment file_get_contents warnings only."
+      },
+      {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest",
+        "status": "passed_with_warnings",
+        "summary": "1 test passed, 16 assertions; PHPUnit reported environment file_get_contents warning only."
+      },
+      {
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\"",
+        "status": "passed",
+        "summary": "PR train manifest YAML parsed successfully."
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed",
+        "summary": "PR train state JSON parsed successfully."
+      },
+      {
+        "command": "cmp EQ_60 and EQ_EMOTIONAL_INTELLIGENCE action_prescriptions raw and compiled report assets",
+        "status": "passed",
+        "summary": "Raw action_prescriptions and compiled report_assets are mirrored between EQ_60 and EQ_EMOTIONAL_INTELLIGENCE."
+      },
+      {
+        "command": "action boundary placement scan",
+        "status": "passed",
+        "summary": "No duplicated low-risk boundary clauses remain in why_this_matters, do_today, or script; scripts do not contain therapy/crisis/guarantee boundary terms."
+      },
+      {
+        "command": "scope validation against PR-EQ-ASSET-SCI-09 allowed_paths",
+        "status": "passed",
+        "summary": "Changed files are confined to action_prescriptions raw assets, compiled report_assets, and PR train state."
+      },
+      {
+        "command": "git diff --check && git diff --cached --check",
+        "status": "passed",
+        "summary": "No whitespace errors in unstaged or staged diff."
+      }
+    ],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json",
+        "backend/content_packs/EQ_60/v1/raw/report_assets/action_prescriptions.json",
+        "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json",
+        "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/action_prescriptions.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "outside_scope_files": [],
+      "evidence": "Scope validation passed against PR-EQ-ASSET-SCI-09 allowed_paths."
     },
     "transitions": [
       {
         "at": "2026-07-02T16:12:11.904905Z",
         "status": "user_authorized",
         "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ],
+    "events": [
+      {
+        "at": "2026-07-03T03:21:17Z",
+        "status": "in_progress",
+        "notes": "Started PR-EQ-ASSET-SCI-09 from origin/main after PR-EQ-ASSET-SCI-13 merged; scope limited to action_prescriptions assets, compiled report assets, and train state."
+      },
+      {
+        "at": "2026-07-03T03:25:11Z",
+        "status": "local_validation_passed",
+        "notes": "Reduced action_prescription intervention claims, removed duplicated boundary text from primary action fields, retained high-risk boundaries in watch_out/do_not_overread, and passed local validation."
+      },
+      {
+        "at": "2026-07-03T03:25:55Z",
+        "status": "pr_open",
+        "notes": "Opened PR #2655 for PR-EQ-ASSET-SCI-09; GitHub checks pending."
+      },
+      {
+        "at": "2026-07-03T03:32:01Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed, mergeStateStatus CLEAN, and scope revalidation passed for PR #2655."
       }
     ]
   },
@@ -69626,8 +69720,8 @@
     "depends_on": [
       "PR-EQ-ASSET-SCI-12"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "75deb547d2165a77d9e2bb0e2a1b05667363f95c",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "79361b155e57c869305d42b4524db19cd79bc932",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2652",
     "checks": [
       {
@@ -69689,12 +69783,17 @@
         "command": "git diff --check && git diff --cached --check",
         "status": "passed",
         "summary": "No whitespace errors in unstaged or staged diff."
+      },
+      {
+        "command": "gh pr view 2652 --json state,mergeCommit && git merge-base --is-ancestor 79361b155e57c869305d42b4524db19cd79bc932 origin/main",
+        "status": "passed",
+        "summary": "Reconciled PR-EQ-ASSET-SCI-13 as merged; merge commit 79361b155e57c869305d42b4524db19cd79bc932 is present in origin/main, remote branch was deleted, and the temporary worktree/local branch were cleaned."
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-03T03:18:19Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "status": "pass",
       "changed_files": [
