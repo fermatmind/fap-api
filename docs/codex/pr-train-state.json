@@ -12579,12 +12579,12 @@
     "depends_on": [
       "ENNEA-RP-08"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "e52577d9a9daf469cc23233a2c096a3a71b530b3",
+    "status": "merged",
+    "commit_sha": "2169710cee7ec4ef889e27737a75bd4a6bfddb95",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2663",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-03T04:46:50Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "checks": {
       "authorization": {
@@ -12638,6 +12638,10 @@
       "post_rebase_local_validation": {
         "status": "pass",
         "evidence": "After rebasing onto latest origin/main, reran jq registry validation, EnneagramReportComposerV2Test, EnneagramTypeRegistryCoverageTest, EnneagramRegistryPackLoadTest, php artisan test --filter=Enneagram, git diff --check, and scope validation successfully."
+      },
+      "post_merge_revalidate": {
+        "status": "pass",
+        "evidence": "PR #2663 is MERGED; origin/main contains merge commit 2169710cee7ec4ef889e27737a75bd4a6bfddb95; local main fast-forwarded to origin/main; worktree clean; local branch deleted; remote branch absent."
       }
     },
     "scope_validation": {
@@ -12695,6 +12699,11 @@
         "at": "2026-07-03T07:50:00Z",
         "status": "ready_to_merge",
         "notes": "GitHub required checks passed after rebase for PR #2663 head e52577d9a9daf469cc23233a2c096a3a71b530b3; ready for merge subject to final branch protection checks."
+      },
+      {
+        "at": "2026-07-03T08:00:00Z",
+        "status": "merged",
+        "notes": "PR #2663 squash-merged; merge commit present in origin/main; local main synced and task branch cleaned up."
       }
     ]
   },
@@ -12705,6 +12714,40 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-09 merged as PR #2663 and merge commit 2169710cee7ec4ef889e27737a75bd4a6bfddb95 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 128 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 262 warnings, 2 passed, 83412 assertions, duration 36.19s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
       }
     },
     "commit_sha": null,
@@ -12716,6 +12759,16 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T08:01:00Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-10-stance-summary; scope is stance group registry content plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T08:08:00Z",
+        "status": "local_validation_passed",
+        "notes": "Repaired stance summary wording for assertive, compliant, and withdrawn groups with lower-certainty contextual boundaries; required local validation passed."
       }
     ],
     "failure_reason": null,
@@ -12732,9 +12785,15 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "outside_scope_files": [],
+      "status": "pass",
+      "evidence": "Changed files are confined to stance summary group registry content and train ledger reconciliation."
     },
-    "status": "pending_dependency",
+    "status": "local_validation_passed",
     "title": "ENNEA-RP-10: fix(enneagram): repair stance summary content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
