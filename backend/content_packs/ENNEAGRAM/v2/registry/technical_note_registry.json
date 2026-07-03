@@ -47,7 +47,7 @@
         {
             "section_key": "dominance_gap",
             "title": "Dominance Gap",
-            "body": "Dominance Gap 描述的是同一 form 内 Top1 与 Top2 的差距，用来帮助系统选择 clear、close-call 或 diffuse 的保守语气。它是 operational 指标，不是临床置信区间。",
+            "body": "Dominance Gap 描述的是同一 form、同一 score space 内 Top1 与 Top2 的相对差距，用来帮助系统选择 clear、close-call 或 diffuse 的保守语气。E105 与 FC144 的题型和计分单位不同，gap 不能被当成跨表单、跨人群或跨时间的统一尺子；它也不是测量误差范围、统计置信区间、常模排名、外部效度证明或人格确定性。",
             "metric_refs": [
                 "top_gap_distribution"
             ],

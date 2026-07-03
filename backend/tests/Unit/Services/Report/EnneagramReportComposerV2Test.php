@@ -156,6 +156,32 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertStringNotContainsString('中等置信结果', $encoded);
     }
 
+    public function test_dominance_gap_card_marks_gap_as_same_form_score_space_signal(): void
+    {
+        $payload = $this->composeReportV2($this->syntheticProjectionInput('enneagram_likert_105', [
+            'T3' => 89.0,
+            'T8' => 62.0,
+            'T1' => 55.0,
+            'T6' => 37.0,
+            'T2' => 28.0,
+            'T7' => 24.0,
+            'T4' => 21.0,
+            'T5' => 16.0,
+            'T9' => 13.0,
+        ]));
+
+        $content = (array) data_get($this->module($payload, 'dominance_gap_card'), 'content');
+
+        $this->assertSame('主次线索差距', $content['title'] ?? null);
+        $this->assertStringContainsString('当前 form、当前计分空间内有意义', (string) ($content['score_space_note'] ?? ''));
+        $this->assertStringContainsString('不是测量误差范围、统计置信区间、常模排名、外部效度证明或人格确定性', (string) ($content['boundary_note'] ?? ''));
+        $this->assertStringContainsString('不是准确率', (string) data_get($content, 'metric_guide.dominance_gap_pct'));
+        $this->assertSame(
+            ['cross_form_comparison', 'norm_ranking', 'measurement_error_interval', 'validity_proof', 'personality_verdict'],
+            $content['not_for'] ?? null
+        );
+    }
+
     public function test_unavailable_v2_report_uses_public_error_code_without_registry_exception_details(): void
     {
         $composer = app(EnneagramReportComposer::class);

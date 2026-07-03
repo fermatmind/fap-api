@@ -798,10 +798,21 @@ final class EnneagramReportComposer
             'visible',
             'all',
             [
+                'title' => '主次线索差距',
+                'subtitle' => '只比较本次同一表单内 Top1 与 Top2 的相对距离。',
                 'dominance_gap_abs' => data_get($projectionV2, 'classification.dominance_gap_abs'),
                 'dominance_gap_pct' => data_get($projectionV2, 'classification.dominance_gap_pct'),
                 'normalized_gap' => data_get($projectionV2, 'classification.dominance.normalized_gap'),
                 'profile_entropy' => data_get($projectionV2, 'classification.dominance.profile_entropy'),
+                'score_space_note' => '这个差距只在当前 form、当前计分空间内有意义。E105 与 FC144 的题型、计分单位和候选生成方式不同，不能把 gap 当成跨表单、跨人群或跨时间的统一尺子。',
+                'boundary_note' => 'gap 较大时，页面可以用更集中的主型解释；gap 较小时，页面会转向 close-call、diffuse 或观察建议。它不是测量误差范围、统计置信区间、常模排名、外部效度证明或人格确定性。',
+                'metric_guide' => [
+                    'dominance_gap_abs' => 'Top1 与 Top2 在当前 score space 中的原始差距，用来判断主次线索是否拉开。',
+                    'dominance_gap_pct' => '把主次差距换算成百分比读法，便于页面选择解释语气；不是准确率。',
+                    'normalized_gap' => '相对分布形状的标准化差距，只用于内部解释规则。',
+                    'profile_entropy' => '九个类型线索的分散程度；越分散越需要降低单一主型结论的确定语气。',
+                ],
+                'not_for' => ['cross_form_comparison', 'norm_ranking', 'measurement_error_interval', 'validity_proof', 'personality_verdict'],
                 'unavailable' => data_get($projectionV2, '_meta.unavailable.classification', []),
             ],
             [
