@@ -5969,7 +5969,13 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertSame('rendered_surface_qa', $row['scope'] ?? null);
             $this->assertSame('L10_QA_only', $row['asset_layer'] ?? null);
             $this->assertSame('safety_reviewed', $row['qa_status'] ?? null);
-            $this->assertSame('codex_rendered_surface_qa_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('codex_rendered_surface_qa_content_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('reduced', data_get($row, 'body_quality.template_risk'));
+            $this->assertSame('repaired', data_get($row, 'body_quality.content_controlled_surface_copy'));
+            $this->assertSame(
+                'BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01',
+                data_get($row, 'source_trace.scientific_editorial_repair.pr')
+            );
             $this->assertGreaterThanOrEqual(180, (int) data_get($row, 'body_quality.body_chars', 0));
             $this->assertLessThanOrEqual(320, (int) data_get($row, 'body_quality.body_chars', 999));
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
@@ -6810,7 +6816,9 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertSame('L10_QA_only', $row['asset_layer'] ?? null);
             $this->assertSame('rendered_surface_qa', $row['scope'] ?? null);
             $this->assertSame('state_scope_registry', $row['target_registry_key'] ?? null);
-            $this->assertSame('codex_rendered_surface_qa_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('codex_rendered_surface_qa_content_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('reduced', data_get($row, 'body_quality.template_risk'));
+            $this->assertSame('repaired', data_get($row, 'body_quality.content_controlled_surface_copy'));
             $this->assertGreaterThanOrEqual(180, (int) data_get($row, 'body_quality.body_chars', 0));
             $this->assertLessThanOrEqual(320, (int) data_get($row, 'body_quality.body_chars', 999));
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
