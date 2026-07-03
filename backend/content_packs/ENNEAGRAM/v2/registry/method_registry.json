@@ -27,7 +27,7 @@
             "method_key": "fc144_forced_choice_methodology",
             "form_variant": "fc144",
             "display_context": "result_page",
-            "copy": "FC144 使用 forced-choice 配对选择，用来观察你在两难取舍中反复偏向的动机线索，尤其适合作为 close-call 后的补充观察。它不是比 E105 更准确的版本，也不与 E105 共享同一分数来源；结果应按 FC144 自身题型边界阅读，不能把跨 form 差异解释为人格变化或测评优劣。",
+            "copy": "FC144 使用 forced-choice 配对选择，用来观察你在两难取舍中反复偏向的动机线索，尤其适合作为 close-call 后的补充观察。它不是比 E105 更准确的版本，也不会替代 E105 的 primary_candidate、Top3 或原始计分事实；结果应按 FC144 自身题型边界阅读，不能把跨 form 差异解释为人格变化或测评优劣。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -67,7 +67,7 @@
             "method_key": "low_quality_boundary",
             "form_variant": "all",
             "display_context": "result_page",
-            "copy": "当低质量信号触发时，结果仍可阅读，但解释边界会明显收窄。页面只保留轻量观察建议，避免把单次低稳定度作答扩展成确定性类型判断；优先建议在状态更稳定、时间更充足时重测同一题型。切换 form 可以作为另一次观察，但不能用来寻找“更好答案”，也不能把两次 form 差异做成分数升降、人格变化或可靠性证明。",
+            "copy": "当低质量信号触发时，结果仍可阅读，但解释边界会明显收窄。页面只保留轻量观察建议，避免把单次低稳定度作答扩展成确定性类型判断；优先建议在状态更稳定、时间更充足时重测同一题型。切换 form 可以作为另一次观察，但不能被当成规避质量边界、寻找更好答案、证明人格变化或比较分数升降的方法。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -75,7 +75,7 @@
             "method_key": "diffuse_boundary",
             "form_variant": "all",
             "display_context": "result_page",
-            "copy": "diffuse 表示九个类型线索较分散，或 Top3 尚未形成足够清晰的主次关系。它不是作答失败，也不是系统无效，更不是人格混乱或心理健康信号。页面会降低单一号码的确定语气，优先引导并排阅读 Top3、三中心分布、近期反例和 7 天观察任务，再判断哪些解释在日常动机中更贴近。",
+            "copy": "diffuse 表示九个类型线索较分散，或 Top3 尚未形成足够清晰的主次关系。它不是作答失败，也不是系统无效，更不是人格混乱或心理健康信号。页面会降低单一号码的确定语气，优先引导并排阅读 Top3、三中心分布、近期反例和 7 天观察任务；重测只能提供另一份作答样本，不能自动修正成更稳定或更真实的类型。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
