@@ -90,3 +90,9 @@ Codex should still run:
 - This package does not produce a final result-page payload.
 - This package does not modify frontend rendering behavior.
 - This package does not enable runtime, pilot, or production.
+
+
+## Scientific Editorial Repair v0.4
+- PR: BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01
+- Reduced repeated QA-template wording across result_page, PDF, share, history, compare, and print_saved surfaces.
+- Kept this package staging-only and content-controlled; renderer-only labels remain separate follow-ups.

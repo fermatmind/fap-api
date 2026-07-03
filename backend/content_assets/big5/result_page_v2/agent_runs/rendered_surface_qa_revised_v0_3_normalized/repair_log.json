@@ -8,7 +8,21 @@
   ],
   "production_use_allowed": false,
   "repair_required": false,
+  "repairs": [
+    {
+      "changes": [
+        "reduced repeated QA template phrasing",
+        "rewrote content-controlled surface guidance in natural zh-CN",
+        "kept share/history/compare/pdf/print boundaries summary-safe",
+        "kept runtime and production flags disabled"
+      ],
+      "id": "rendered_surface_qa_content_repair_v0_4_01",
+      "pr": "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01",
+      "status": "applied"
+    }
+  ],
   "runtime_use": "staging_only",
   "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+  "scientific_editorial_repair_status": "pass",
   "task": "normalization_repair_log"
 }
