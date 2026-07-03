@@ -6483,8 +6483,23 @@
   "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01": {
     "base": "main",
     "branch": "codex/big5-scenario-action-scientific-repair-01",
-    "checks": [],
-    "commit_sha": "d3b7d901c2a2c1cec0434731d389e3da31b44d0a",
+    "checks": {
+      "local": {
+        "audit_strict": "passed",
+        "BigFiveResultPageV2AssetAgentTest": "passed_with_existing_warnings",
+        "BigFiveResultPageV2SelectorAssetValidatorTest": "passed_with_existing_warnings",
+        "BigFiveResultPageV2ContentAssetLookupTest": "passed_with_existing_warnings",
+        "json_parse": "passed",
+        "yaml_parse": "passed",
+        "git_diff_check": "passed",
+        "scope_validation": "passed"
+      },
+      "github": {
+        "status": "passed",
+        "mergeStateStatus": "CLEAN"
+      }
+    },
+    "commit_sha": "dd731c1d3d9c392a6e9b4dc4c7512df1b23c0dc8",
     "depends_on": [
       "BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01"
     ],
@@ -6492,7 +6507,7 @@
     "id": "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2686",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -6501,7 +6516,7 @@
       "local_validation_passed": null,
       "post_merge_revalidated": null
     },
-    "status": "authorized",
+    "status": "ready_to_merge",
     "title": "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01: Big Five scenario action scientific repair",
     "transitions": [
       {

@@ -21,7 +21,10 @@
     "mapped_collaboration_to_collaboration_manual",
     "mapped_other_scenarios_to_application_matrix",
     "recalculated_body_quality",
-    "deferred_staging_import"
+    "deferred_staging_import",
+    "applied_scientific_editorial_repair_v0_8",
+    "reframed_scenario_action_as_low_risk_optional_guidance",
+    "updated_selector_public_payload_summaries"
   ],
   "production_use_allowed": false,
   "ready_for_pilot": false,
@@ -62,5 +65,12 @@
     "hit_count": 0
   },
   "source_zip": "/Users/rainie/Desktop/大五人格-第10版.zip",
-  "status": "pass"
+  "status": "pass",
+  "scientific_repair": {
+    "repair_pr": "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01",
+    "stage": "scenario_action_scientific_repair_v0_8",
+    "status": "pass",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false
+  }
 }

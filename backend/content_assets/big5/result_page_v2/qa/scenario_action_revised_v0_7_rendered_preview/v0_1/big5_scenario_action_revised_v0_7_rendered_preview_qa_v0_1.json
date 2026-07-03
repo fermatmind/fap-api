@@ -222,6 +222,23 @@
     "min_body_chars": 262,
     "scenario_specificity_status": "pass",
     "status": "pass",
-    "thin_copy_count": 0
+    "thin_copy_count": 0,
+    "scenario_action_scientific_repair_status": "pass",
+    "identity_label_risk": "reduced",
+    "prescriptive_advice_risk": "reduced",
+    "low_risk_optional_guidance": true
+  },
+  "scientific_repair": {
+    "repair_pr": "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01",
+    "status": "pass",
+    "scope": "scenario_action_only",
+    "prescription_risk": "reduced",
+    "scenario_boundaries": {
+      "work": "not hiring, performance, or promotion judgment",
+      "relationship": "not relationship quality or match judgment",
+      "stress": "daily pressure reflection only; not professional support replacement",
+      "growth": "optional practice only; no outcome promise",
+      "collaboration": "collaboration conditions only; no team role labeling"
+    }
   }
 }
