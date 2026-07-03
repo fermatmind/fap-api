@@ -4245,7 +4245,7 @@
     "checks": [
 
     ],
-    "commit_sha": null,
+    "commit_sha": "897093474e737e2954a5f9e42b66af693ca4535b",
     "depends_on": [
       "BIG5-SCENARIO-ACTION-SCIENTIFIC-REPAIR-01"
     ],
@@ -13230,13 +13230,18 @@
         "at": "2026-07-03T15:06:00Z",
         "status": "local_validation_passed",
         "notes": "Repaired methodology boundary copy for E105, FC144, score-space, non-diagnostic, and form badge fields; fixed current-scope method registry test anchor and required local validation passed."
+      },
+      {
+        "at": "2026-07-03T15:10:00Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2674 for methodology boundary card repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-13",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2674",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -13256,7 +13261,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to methodology boundary method/ui registry content and train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-13: fix(enneagram): repair methodology boundary card",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
