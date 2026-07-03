@@ -16481,7 +16481,7 @@
         "evidence": "Changed files are confined to form recommendation method copy, composer output, Enneagram test coverage, and train ledger reconciliation/state."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "f01b3abd944e5c171824469176633280138f1bff",
     "depends_on": [
       "ENNEA-RP-39"
     ],
@@ -16500,6 +16500,12 @@
         "at": "2026-07-03T14:04:32.156Z",
         "status": "local_validation_passed",
         "notes": "Required local validation and scope validation passed for form recommendation repair."
+      },
+      {
+        "at": "2026-07-03T14:04:47.358Z",
+        "status": "committed",
+        "commit_sha": "f01b3abd944e5c171824469176633280138f1bff",
+        "notes": "Committed ENNEA-RP-40 form recommendation repair and local validation ledger."
       }
     ],
     "failure_reason": null,
@@ -16527,7 +16533,7 @@
       ],
       "evidence": "Changed files are confined to form recommendation method copy, composer output, Enneagram test coverage, and train ledger reconciliation/state."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-40: fix(enneagram): repair form recommendation",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
