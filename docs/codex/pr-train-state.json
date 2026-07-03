@@ -14065,9 +14065,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2685 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on rebased head b2d9818eda0f58c2fa544eff1e7bf48839b22c35: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": "4080d0d1bd94e5346471d73a37b3d24bd1078bbf",
+    "commit_sha": "b2d9818eda0f58c2fa544eff1e7bf48839b22c35",
     "depends_on": [
       "ENNEA-RP-19"
     ],
@@ -14091,6 +14096,11 @@
         "at": "2026-07-03T07:53:25Z",
         "status": "pr_opened",
         "notes": "Opened PR #2685 for managed-by-others content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T08:08:25Z",
+        "status": "ready_to_merge",
+        "notes": "After rebasing onto origin/main, required local checks and GitHub PR checks passed; scope validation remains limited to type registry managed-by-others content plus train ledger."
       }
     ],
     "failure_reason": null,
@@ -14112,12 +14122,10 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to managed-by-others content in type registry plus train ledger reconciliation.",
-      "outside_scope_files": [
-
-      ],
+      "outside_scope_files": [],
       "status": "pass"
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-20: fix(enneagram): repair managed-by-others content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -76525,5 +76533,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T07:50:57Z"
+  "updated_at": "2026-07-03T08:08:25Z"
 }
