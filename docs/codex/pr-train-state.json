@@ -14087,7 +14087,7 @@
         "evidence": "All GitHub PR checks passed on rebased head b2d9818eda0f58c2fa544eff1e7bf48839b22c35: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": "b2d9818eda0f58c2fa544eff1e7bf48839b22c35",
+    "commit_sha": "6411f235eb94cdc4c199017133fbbc5d349e23ed",
     "depends_on": [
       "ENNEA-RP-19"
     ],
@@ -14116,14 +14116,19 @@
         "at": "2026-07-03T08:08:25Z",
         "status": "ready_to_merge",
         "notes": "After rebasing onto origin/main, required local checks and GitHub PR checks passed; scope validation remains limited to type registry managed-by-others content plus train ledger."
+      },
+      {
+        "at": "2026-07-03T08:17:29Z",
+        "status": "merged",
+        "notes": "PR #2685 was squash-merged as 6411f235eb94cdc4c199017133fbbc5d349e23ed; origin/main contains the merge commit, local main was fast-forwarded, and the local/remote task branches were cleaned before ENNEA-RP-21 started."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-20",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T08:14:43Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2685",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -14140,7 +14145,7 @@
       "outside_scope_files": [],
       "status": "pass"
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ENNEA-RP-20: fix(enneagram): repair managed-by-others content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -14151,9 +14156,48 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-20 merged as PR #2685 and merge commit 6411f235eb94cdc4c199017133fbbc5d349e23ed is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14734 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 132 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 262 warnings, 2 passed, 83641 assertions, duration 27.71s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2687 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on head 7fd88210e42fc2fc8076b09e2e468618ba1e8834: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "7fd88210e42fc2fc8076b09e2e468618ba1e8834",
     "depends_on": [
       "ENNEA-RP-20"
     ],
@@ -14162,13 +14206,33 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T08:17:29Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-21-workplace-trigger-points after ENNEA-RP-20 merge and cleanup; scope is workplace-trigger-points content in type registry plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T08:19:10Z",
+        "status": "local_validation_passed",
+        "notes": "Reframed workplace trigger points into environment, task, and relationship triggers for T1-T9 without diagnostic stress language; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T08:20:26Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2687 for workplace trigger points content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T08:27:03Z",
+        "status": "ready_to_merge",
+        "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2687 is clean and ready for squash merge."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-21",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2687",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -14178,9 +14242,15 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [],
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "evidence": "Changed files are confined to workplace-trigger-points content in type registry plus train ledger reconciliation."
     },
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-21: fix(enneagram): repair workplace triggers",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -76548,5 +76618,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T08:08:25Z"
+  "updated_at": "2026-07-03T08:27:03Z"
 }
