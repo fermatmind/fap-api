@@ -14212,7 +14212,7 @@
         "evidence": "All GitHub PR checks passed on head 7fd88210e42fc2fc8076b09e2e468618ba1e8834: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": "7fd88210e42fc2fc8076b09e2e468618ba1e8834",
+    "commit_sha": "53ea9917223772ed7d33bfa10063ff16428f433d",
     "depends_on": [
       "ENNEA-RP-20"
     ],
@@ -14241,14 +14241,19 @@
         "at": "2026-07-03T08:27:03Z",
         "status": "ready_to_merge",
         "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2687 is clean and ready for squash merge."
+      },
+      {
+        "at": "2026-07-03T08:36:46Z",
+        "status": "merged",
+        "notes": "PR #2687 was squash-merged as 53ea9917223772ed7d33bfa10063ff16428f433d; origin/main contains the merge commit, local main was fast-forwarded, and the local/remote task branches were cleaned before ENNEA-RP-22 started."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-21",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T08:33:44Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2687",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -14265,7 +14270,7 @@
       ],
       "evidence": "Changed files are confined to workplace-trigger-points content in type registry plus train ledger reconciliation."
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ENNEA-RP-21: fix(enneagram): repair workplace triggers",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -14276,9 +14281,48 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-21 merged as PR #2687 and merge commit 53ea9917223772ed7d33bfa10063ff16428f433d is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14734 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 132 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Initial run exposed current-scope theory hint count failure after a temporary added entry; fixed by removing that entry. Final rerun passed: 262 warnings, 2 passed, 83641 assertions, duration 27.37s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2689 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on head b2c3a4d12872ef93cdcbc7592b7f58f8829f08a1: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "b2c3a4d12872ef93cdcbc7592b7f58f8829f08a1",
     "depends_on": [
       "ENNEA-RP-21"
     ],
@@ -14287,13 +14331,33 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T08:36:46Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-22-context-mode-placeholder after ENNEA-RP-21 merge and cleanup; scope is context-mode placeholder boundary copy in allowed registries plus train ledger only."
+      },
+      {
+        "at": "2026-07-03T08:38:59Z",
+        "status": "local_validation_passed",
+        "notes": "Expanded method boundary copy so unavailable work/team context modules are explained as product boundaries, not hidden scores or workplace/team fit conclusions. A temporary theory-hint entry caused a local test failure and was removed within scope before final validation passed."
+      },
+      {
+        "at": "2026-07-03T08:40:00Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2689 for context mode placeholder boundary copy repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T08:46:33Z",
+        "status": "ready_to_merge",
+        "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2689 is clean and ready for squash merge."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-22",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2689",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -14305,9 +14369,15 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [],
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "evidence": "Changed files are confined to context-mode placeholder boundary copy in method registry plus train ledger reconciliation."
     },
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-22: fix(enneagram): repair context mode placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -76633,5 +76703,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T08:27:03Z"
+  "updated_at": "2026-07-03T08:46:33Z"
 }
