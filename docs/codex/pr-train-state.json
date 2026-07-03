@@ -5277,7 +5277,7 @@
     "title": "BIG5-NORM-LOW-QUALITY-EDGE-STATE-CONTENT-01: Thicken Big Five norm and edge-state content assets",
     "train_scope": "big5_result_page_content_asset_thickening"
   },
-  "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01":   {
+  "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01":     {
       "base": "main",
       "branch": "codex/big5-norm-unavailable-scientific-repair-01",
       "checks": {
@@ -5299,11 +5299,11 @@
               "evidence": "Changed files are confined to norm_unavailable normalized/staging/QA artifacts, BigFiveResultPageV2AssetAgentTest, and docs/codex PR-train state. No fap-web, CMS, SEO, runtime, rollout, production import, DB migration, or final result contract changes."
           },
           "github": {
-              "status": "pending",
-              "evidence": "PR opened: https://github.com/fermatmind/fap-api/pull/2678. GitHub checks pending."
+              "status": "pass",
+              "evidence": "PR #2678 checks completed successfully and mergeStateStatus=CLEAN on head 1d6af8fc209ebc5795af123fe2e27468ad8d6c1e."
           }
       },
-      "commit_sha": "23b4ccc309c33af52c729512172fba9c4b57cb88",
+      "commit_sha": "1d6af8fc209ebc5795af123fe2e27468ad8d6c1e",
       "depends_on": [
           "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01"
       ],
@@ -5316,11 +5316,11 @@
       "repo": "fap-api",
       "scope_validation": {
           "allowed_paths_only": true,
-          "github_checks_green": null,
+          "github_checks_green": true,
           "local_validation_passed": true,
           "post_merge_revalidated": null
       },
-      "status": "pr_open",
+      "status": "ready_to_merge",
       "title": "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01: Big Five norm unavailable scientific repair",
       "transitions": [
           {
@@ -5346,6 +5346,12 @@
               "from": "committed",
               "note": "Opened PR https://github.com/fermatmind/fap-api/pull/2678 for scoped norm unavailable scientific repair.",
               "to": "pr_open"
+          },
+          {
+              "at": "2026-07-03T06:45:00Z",
+              "from": "pr_open",
+              "to": "ready_to_merge",
+              "note": "GitHub checks passed and PR merge state was CLEAN for #2678."
           }
       ]
   },
