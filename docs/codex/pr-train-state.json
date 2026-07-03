@@ -13110,13 +13110,18 @@
         "at": "2026-07-03T14:01:00Z",
         "status": "local_validation_passed",
         "notes": "Repaired wing hint boundary wording with adjacent-expression framing, explicit non-classification limits, and not_for guardrails; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T14:05:00Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2670 for wing hint visual boundary repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-12",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2670",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -13134,7 +13139,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to wing hint theory registry content and train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-12: fix(enneagram): repair wing hint visual boundary",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
