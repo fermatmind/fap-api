@@ -69849,8 +69849,8 @@
     "depends_on": [
       "PR-EQ-ASSET-SCI-05"
     ],
-    "status": "pr_open_checks_pending",
-    "commit_sha": "69ff0e9bd",
+    "status": "ready_to_merge",
+    "commit_sha": "552ea19055ead7709d10bb91be0313e9ba0398fa",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2661",
     "checks": [
       {
@@ -69892,6 +69892,11 @@
         "command": "YAML/JSON parse, EQ pack mirror cmp, scope validation, cross-assessment guard scan, git diff --check, git diff --cached --check",
         "status": "passed",
         "summary": "Manifest/state parsed, raw and compiled mirrors match, changed files are within SCI-11 scope, cross-assessment assets remain reflective/non-deterministic, and no whitespace errors were found."
+      },
+      {
+        "command": "GitHub PR checks and merge-state review",
+        "status": "passed",
+        "summary": "All GitHub checks passed; mergeStateStatus CLEAN; scope revalidation passed."
       }
     ],
     "failure_reason": null,
@@ -69931,6 +69936,11 @@
         "status": "pr_open_checks_pending",
         "timestamp": "2026-07-03T12:30:00+08:00",
         "notes": "Opened PR #2661 for PR-EQ-ASSET-SCI-11; GitHub checks pending."
+      },
+      {
+        "status": "ready_to_merge",
+        "timestamp": "2026-07-03T12:38:00+08:00",
+        "notes": "GitHub checks passed, mergeStateStatus CLEAN, and scope revalidation passed for PR #2661."
       }
     ]
   },
