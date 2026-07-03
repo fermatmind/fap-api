@@ -1315,6 +1315,31 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             ] as $forbiddenToken) {
                 $this->assertStringNotContainsString($forbiddenToken, $allArtifacts, $forbiddenToken);
             }
+
+            $contentRows = $this->readJsonl($agentRunDir.'/content_asset_candidates.jsonl');
+            $visibleText = implode("\n", array_map(
+                static fn (array $row): string => implode("\n", array_filter([
+                    $row['title_zh'] ?? '',
+                    $row['summary_zh'] ?? '',
+                    $row['body_zh'] ?? '',
+                    $row['short_body_zh'] ?? '',
+                    $row['cta_zh'] ?? '',
+                ])),
+                $contentRows
+            ));
+
+            foreach (['90 题', '120 题', '反向校正', '常模', '误差', '作答质量', '低一致性', '医疗', '心理健康', '录用', '淘汰'] as $requiredPhrase) {
+                $this->assertStringContainsString($requiredPhrase, $visibleText, $requiredPhrase);
+            }
+
+            foreach (['facet', '边界：', '精确排名', '约高于', '能力证明', '固定类型', '你就是这种人'] as $forbiddenVisiblePhrase) {
+                $this->assertStringNotContainsString($forbiddenVisiblePhrase, $visibleText, $forbiddenVisiblePhrase);
+            }
+
+            foreach ($contentRows as $row) {
+                $this->assertSame('codex_method_boundary_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame('BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
+            }
         } finally {
             $this->deleteDirectory($artifactRoot);
         }
@@ -1386,6 +1411,30 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             '[object Object]',
         ] as $forbiddenToken) {
             $this->assertStringNotContainsString($forbiddenToken, $allArtifacts, $forbiddenToken);
+        }
+
+        $visibleText = implode("\n", array_map(
+            static fn (array $row): string => implode("\n", array_filter([
+                $row['title_zh'] ?? '',
+                $row['summary_zh'] ?? '',
+                $row['body_zh'] ?? '',
+                $row['short_body_zh'] ?? '',
+                $row['cta_zh'] ?? '',
+            ])),
+            $contentRows
+        ));
+
+        foreach (['90 题', '120 题', '反向校正', '常模', '误差', '作答质量', '低一致性', '医疗', '心理健康', '录用', '淘汰'] as $requiredPhrase) {
+            $this->assertStringContainsString($requiredPhrase, $visibleText, $requiredPhrase);
+        }
+
+        foreach (['facet', '边界：', '精确排名', '约高于', '能力证明', '固定类型', '你就是这种人'] as $forbiddenVisiblePhrase) {
+            $this->assertStringNotContainsString($forbiddenVisiblePhrase, $visibleText, $forbiddenVisiblePhrase);
+        }
+
+        foreach ($contentRows as $row) {
+            $this->assertSame('codex_method_boundary_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
         }
     }
 

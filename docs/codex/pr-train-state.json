@@ -73708,11 +73708,11 @@
     "branch": "codex/big5-selector-public-payload-hygiene-01",
     "base": "main",
     "title": "BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01: Big Five selector public payload hygiene",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01"
     ],
-    "commit_sha": "868816b5480256bbcbe0c9c643c01e16dceb89d1",
+    "commit_sha": "30c42896ba75d3204885c6f19e11dc2a67d53868",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2651",
     "checks": {
       "local": {
@@ -73731,18 +73731,19 @@
         "state": "green",
         "merge_state_status": "CLEAN",
         "required_checks": "passed",
-        "checked_at": "2026-07-03T02:56:44Z"
+        "checked_at": "2026-07-03T02:56:44Z",
+        "merged": true
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-03T03:03:52Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null,
+      "post_merge_revalidated": true,
       "allowed_paths": [
         "backend/content_assets/big5/result_page_v2/agent_runs/**/selector_asset_candidates.jsonl",
         "backend/content_assets/big5/result_page_v2/agent_runs/**/SHA256SUMS*",
@@ -73754,7 +73755,10 @@
         "generated/pr-train-sidecar-issues/**",
         "backend/generated/big5_content_asset_scientific_audit/**"
       ],
-      "notes": "Changed files are limited to Big Five selector candidate JSONL, matching SHA256SUMS files, BigFiveResultPageV2 tests, and PR train metadata. backend/vendor and generated Filament assets remain ignored and unstaged."
+      "notes": "Changed files are limited to Big Five selector candidate JSONL, matching SHA256SUMS files, BigFiveResultPageV2 tests, and PR train metadata. backend/vendor and generated Filament assets remain ignored and unstaged.",
+      "main_synced": true,
+      "local_main_equals_origin_main": true,
+      "worktree_clean_after_cleanup": true
     },
     "transitions": [
       {
@@ -73798,9 +73802,16 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "GitHub checks completed successfully and PR merge state was CLEAN."
+      },
+      {
+        "at": "2026-07-03T03:07:30Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled after squash merge: PR #2651 merged, origin/main contains merge commit 30c42896ba75d3204885c6f19e11dc2a67d53868, local main synced, task branch/worktree cleaned."
       }
     ],
-    "updated_at": "2026-07-03T02:57:20Z"
+    "updated_at": "2026-07-03T03:07:30Z",
+    "merge_commit_sha": "30c42896ba75d3204885c6f19e11dc2a67d53868"
   },
   "BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01": {
     "id": "BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01",
@@ -73808,22 +73819,51 @@
     "branch": "codex/big5-method-boundary-scientific-repair-01",
     "base": "main",
     "title": "BIG5-METHOD-BOUNDARY-SCIENTIFIC-REPAIR-01: Big Five method boundary scientific repair",
-    "status": "authorized",
+    "status": "ready_to_merge",
     "depends_on": [
       "BIG5-SELECTOR-PUBLIC-PAYLOAD-HYGIENE-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": [],
+    "commit_sha": "e9b6f4418b36277726c97f2ec8ad0c008e600c81",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2654",
+    "checks": {
+      "local": {
+        "php_artisan_big5_result_page_v2_agent_audit_strict": "passed",
+        "BigFiveResultPageV2AssetAgentTest": "passed_with_phpunit_warnings_exit_0",
+        "BigFiveResultPageV2SelectorAssetValidatorTest": "passed_with_phpunit_warnings_exit_0",
+        "BigFiveResultPageV2ContentAssetLookupTest": "passed_with_phpunit_warnings_exit_0",
+        "method_boundary_visible_text_scientific_repair_scan": "passed",
+        "json_parse": "passed",
+        "yaml_parse": "passed",
+        "git_diff_check": "passed",
+        "scope_validation": "passed"
+      },
+      "github": {
+        "state": "green",
+        "merge_state_status": "CLEAN",
+        "required_checks": "passed",
+        "checked_at": "2026-07-03T03:23:36Z"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": null,
+      "allowed_paths": [
+        "backend/content_assets/big5/result_page_v2/agent_runs/method_boundary_v0_5_normalized/**",
+        "backend/content_assets/big5/result_page_v2/staging_candidate_imports/**",
+        "backend/content_assets/big5/result_page_v2/qa/**",
+        "backend/tests/**BigFiveResultPageV2**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "generated/pr-train-sidecar-issues/**",
+        "backend/generated/big5_content_asset_scientific_audit/**"
+      ],
+      "notes": "Changed files are limited to Method/Boundary normalized and staging candidate artifacts, BigFiveResultPageV2 tests, and PR train state reconciliation. backend/vendor and generated Filament assets remain ignored and unstaged."
     },
     "transitions": [
       {
@@ -73831,8 +73871,33 @@
         "from": null,
         "to": "authorized",
         "note": "User authorized Big Five result-page scientific content repair PR train entry."
+      },
+      {
+        "at": "2026-07-03T03:18:30Z",
+        "from": "authorized",
+        "to": "local_checks_passed",
+        "note": "Repaired Method/Boundary candidate copy for scientific accuracy and natural zh-CN expression; refreshed checksum; focused local validation passed."
+      },
+      {
+        "at": "2026-07-03T03:24:30Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed scoped Method/Boundary scientific repair changes after local validation passed."
+      },
+      {
+        "at": "2026-07-03T03:26:40Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened GitHub PR #2654 after pushing scoped Method/Boundary scientific repair branch."
+      },
+      {
+        "at": "2026-07-03T03:24:10Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "GitHub checks completed successfully and PR merge state was CLEAN."
       }
-    ]
+    ],
+    "updated_at": "2026-07-03T03:24:10Z"
   },
   "BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01": {
     "id": "BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01",
