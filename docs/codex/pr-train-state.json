@@ -558,12 +558,12 @@
     "depends_on": [
       "ENNEA-RP-04"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "6cfcccf59d0925968c8a76c76295d2ed071153b1",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "b14f98b5766265d93aacc967390838e7c66d4bb0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2653",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-03T03:26:05Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "checks": {
       "authorization": {
@@ -608,6 +608,10 @@
         "status": "pass",
         "command": "gh pr checks 2653 --repo fermatmind/fap-api --watch --interval 15",
         "evidence": "All reported checks for PR #2653 passed on head 6cfcccf59d0925968c8a76c76295d2ed071153b1, including hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, and Semgrep checks."
+      },
+      "post_merge_cleanup": {
+        "status": "pass",
+        "evidence": "PR #2653 is MERGED; merge commit b14f98b5766265d93aacc967390838e7c66d4bb0 is contained in origin/main; local main fast-forwarded to origin/main; local branch codex/ennea-rp-05-confidence-band-card deleted; remote branch absent."
       }
     },
     "scope_validation": {
@@ -649,6 +653,11 @@
         "at": "2026-07-03T05:12:00Z",
         "status": "ready_to_merge",
         "notes": "GitHub required checks passed; recording ready-to-merge before squash merge per train policy."
+      },
+      {
+        "at": "2026-07-03T03:31:00Z",
+        "status": "merged_post_merge_revalidated",
+        "notes": "Post-merge cleanup completed; no staging deploy wait or production deploy performed."
       }
     ]
   },
@@ -662,9 +671,9 @@
     "depends_on": [
       "ENNEA-RP-05"
     ],
-    "status": "pending_dependency",
-    "commit_sha": "882d05e090af473825a1e7173f7f6e9ca14a7e82",
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "c163f63c3a4c82f0395c0647fa539c4d20306b0f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2656",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -673,6 +682,50 @@
       "authorization": {
         "status": "pass",
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-05 merged as PR #2653 and merge commit b14f98b5766265d93aacc967390838e7c66d4bb0 is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Passed: 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 14 warnings, 121 assertions."
+      },
+      "technical_note_content_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTechnicalNoteRegistryContentTest",
+        "evidence": "Passed: 1 warning, 9 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 261 warnings, 2 passed, 83402 assertions, duration 33.21s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2656 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All reported checks for PR #2656 passed on head c163f63c3a4c82f0395c0647fa539c4d20306b0f, including hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, and Semgrep checks."
       }
     },
     "scope_validation": {
@@ -684,13 +737,37 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "changed_files": [
+        "backend/app/Services/Report/EnneagramReportComposer.php",
+        "backend/content_packs/ENNEAGRAM/v2/registry/technical_note_registry.json",
+        "backend/tests/Unit/Services/Content/EnneagramTechnicalNoteRegistryContentTest.php",
+        "backend/tests/Unit/Services/Report/EnneagramReportComposerV2Test.php",
+        "docs/codex/pr-train-state.json"
+      ],
+      "outside_scope_files": [],
+      "status": "pass",
+      "evidence": "Changed files are confined to dominance_gap_card composer content, dominance_gap technical note registry copy, related Enneagram tests, and train ledger reconciliation."
     },
     "events": [
       {
         "at": "2026-07-02T16:10:24Z",
         "status": "pending_dependency",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge."
+      },
+      {
+        "at": "2026-07-03T05:24:00Z",
+        "status": "local_validation_passed",
+        "notes": "Implemented dominance gap score-space and error-boundary language; required local validation passed."
+      },
+      {
+        "at": "2026-07-03T05:27:00Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2656 for dominance gap boundary repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T05:36:00Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed; recording ready-to-merge before squash merge per train policy."
       }
     ]
   },
@@ -65945,7 +66022,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T05:12:00Z",
+  "updated_at": "2026-07-03T05:36:00Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
