@@ -2,7 +2,7 @@
     "schema": "eq_60.report_assets.compiled.v1",
     "pack_id": "EQ_60",
     "pack_version": "v1",
-    "generated_at": "2026-07-03T02:44:58.241909Z",
+    "generated_at": "2026-07-03T03:04:45.949377Z",
     "assets": {
         "scientific_contract": {
             "schema": "eq60.report_assets.scientific_contract.v1",
@@ -26886,121 +26886,121 @@
             "assets": {
                 "eq.quality.level.A": {
                     "zh-CN": {
-                        "label": "高置信度",
-                        "body": "你的作答节奏和一致性支持正常解读。",
-                        "user_guidance": "具体分数仍应作为区间参考，不是能力排名或正式常模排名。",
-                        "retest_note": "按当前建议练习即可，复测可用于观察变化。",
-                        "why_this_level": "你的作答节奏和一致性支持正常解读。 低置信结果只适合复测准备和轻量反思，不支持强画像、职业或行动结论。",
-                        "how_to_read": "可以重点阅读核心模式、维度分布和行动处方。",
-                        "what_to_trust": "可以阅读核心模式和维度分布，但仍应结合质量、场景和证据状态。",
-                        "what_to_hold_lightly": "具体分数、百分位和等级都不应被当作精确排名。"
+                        "label": "高解释置信度",
+                        "body": "本次作答节奏和一致性支持正常阅读报告。",
+                        "user_guidance": "可以阅读核心模式、维度摘要和行动建议，但仍应把它们理解为本次自我报告的解释，不是能力排名或外部评价。",
+                        "retest_note": "如果你想观察变化，可在经历新情境或完成一段练习后再复测；不需要立即重复作答。",
+                        "why_this_level": "作答速度、连续相同选择、极端/中立选择和一致性线索未显示明显质量风险。",
+                        "how_to_read": "先看核心洞察和证据快照，再结合现实场景判断哪些描述与近期经验相符。",
+                        "what_to_trust": "可以较稳定地参考维度间的相对强弱、主要 formulation 和已选场景。",
+                        "what_to_hold_lightly": "具体分数、百分位和等级仍是阶段性样本下的估计，不应当作精确能力排名、诊断或职业判断。"
                     },
                     "en": {
-                        "label": "High confidence",
-                        "body": "Your pace and consistency support a normal interpretation.",
-                        "user_guidance": "Specific numbers should be treated as approximate ranges, not ability rankings or final norm rankings.",
-                        "retest_note": "Use the current recommendations and retest later to observe change.",
-                        "why_this_level": "Your pace and consistency support a normal interpretation. Low-confidence results should be used for retest preparation and light reflection only, not strong profile, career, or action conclusions.",
-                        "how_to_read": "Focus on the core pattern, dimension profile, and action prescription.",
-                        "what_to_trust": "You can read the core pattern and dimension profile while still considering confidence, context, and evidence status.",
-                        "what_to_hold_lightly": "Specific scores, percentiles, and bands should not be treated as exact rankings."
+                        "label": "High interpretation confidence",
+                        "body": "Your response pace and consistency support normal report reading.",
+                        "user_guidance": "You can read the core pattern, dimension summary, and action suggestions while keeping them as self-report interpretation, not ability ranking or external evaluation.",
+                        "retest_note": "If you want to observe change, retake after new experiences or a period of practice; there is no need to retake immediately.",
+                        "why_this_level": "Speed, repeated choices, extreme/neutral responding, and consistency signals did not show a clear response-quality risk.",
+                        "how_to_read": "Start with the core insight and evidence snapshot, then compare the selected scenes with your recent experience.",
+                        "what_to_trust": "The relative dimension pattern, selected formulation, and selected scenes can be read with normal confidence.",
+                        "what_to_hold_lightly": "Specific scores, percentiles, and bands are still estimates within a provisional sample; they are not precise ability rankings, diagnoses, or career judgments."
                     },
                     "meta": {
                         "id": "eq.quality.level.A",
                         "asset_type": "quality_confidence",
                         "v23_source_id": "eq.quality.level.A",
                         "claim_risk": "medium",
-                        "risk_notes": "Quality confidence controls interpretation strength. Keep this as self-report interpretation with explicit non-clinical, non-hiring, and non-ability boundaries.",
+                        "risk_notes": "Quality confidence controls interpretation strength. Keep A/B as self-report interpretation, and keep C/D as retest-first guidance without strong profile, career, relationship, or action conclusions.",
                         "quality_level": "A"
                     }
                 },
                 "eq.quality.level.B": {
                     "zh-CN": {
-                        "label": "正常置信度",
-                        "body": "整体可读，但部分回答可能受当时状态影响。",
-                        "user_guidance": "具体分数仍应作为区间参考，不是能力排名或正式常模排名。",
-                        "retest_note": "若结果和体验差距较大，可在状态稳定时复测。",
-                        "why_this_level": "整体可读，但部分回答可能受当时状态影响。 低置信结果只适合复测准备和轻量反思，不支持强画像、职业或行动结论。",
-                        "how_to_read": "可以相信主要方向，轻看细小差异。",
-                        "what_to_trust": "可以阅读核心模式和维度分布，但仍应结合质量、场景和证据状态。",
-                        "what_to_hold_lightly": "具体分数、百分位和等级都不应被当作精确排名。"
+                        "label": "正常解释置信度",
+                        "body": "本次结果整体可读，但部分回答可能受当时状态或理解方式影响。",
+                        "user_guidance": "适合参考主要方向和较明显的维度差异；不要过度解释细小分数差。",
+                        "retest_note": "如果结果与你的实际体验差距较大，可在状态更稳定、时间更充足时复测。",
+                        "why_this_level": "质量线索总体可接受，但仍提示报告应按区间和趋势阅读，而不是按精确分数阅读。",
+                        "how_to_read": "优先看重复出现的主题：哪个维度更突出、哪个场景更贴近、哪条行动建议最容易低风险尝试。",
+                        "what_to_trust": "可以参考核心模式、四维摘要和场景提示的主要方向。",
+                        "what_to_hold_lightly": "百分位、band、轻微维度差异和职业环境提示都应保留弹性解释。"
                     },
                     "en": {
-                        "label": "Standard confidence",
-                        "body": "The result is readable, though some answers may reflect your state at the time.",
-                        "user_guidance": "Specific numbers should be treated as approximate ranges, not ability rankings or final norm rankings.",
-                        "retest_note": "If the result feels far from your experience, retest in a steadier state.",
-                        "why_this_level": "The result is readable, though some answers may reflect your state at the time. Low-confidence results should be used for retest preparation and light reflection only, not strong profile, career, or action conclusions.",
-                        "how_to_read": "Trust the broad direction and hold small differences lightly.",
-                        "what_to_trust": "You can read the core pattern and dimension profile while still considering confidence, context, and evidence status.",
-                        "what_to_hold_lightly": "Specific scores, percentiles, and bands should not be treated as exact rankings."
+                        "label": "Standard interpretation confidence",
+                        "body": "The result is readable overall, though some answers may reflect your state or interpretation at the time.",
+                        "user_guidance": "Use the broad direction and clearer dimension gaps; avoid over-reading small score differences.",
+                        "retest_note": "If the result feels far from your lived experience, retake in a steadier state with enough time.",
+                        "why_this_level": "Quality signals are generally acceptable, but the report should still be read as ranges and tendencies rather than precise scores.",
+                        "how_to_read": "Look for repeated themes: which dimension stands out, which scene feels closest, and which suggestion is low-risk to try.",
+                        "what_to_trust": "You can use the main direction of the core pattern, four-dimension summary, and scene translation.",
+                        "what_to_hold_lightly": "Percentiles, bands, small dimension gaps, and career-environment cues should remain flexible interpretations."
                     },
                     "meta": {
                         "id": "eq.quality.level.B",
                         "asset_type": "quality_confidence",
                         "v23_source_id": "eq.quality.level.B",
                         "claim_risk": "medium",
-                        "risk_notes": "Quality confidence controls interpretation strength. Keep this as self-report interpretation with explicit non-clinical, non-hiring, and non-ability boundaries.",
+                        "risk_notes": "Quality confidence controls interpretation strength. Keep A/B as self-report interpretation, and keep C/D as retest-first guidance without strong profile, career, relationship, or action conclusions.",
                         "quality_level": "B"
                     }
                 },
                 "eq.quality.level.C": {
                     "zh-CN": {
-                        "label": "有限置信度",
-                        "body": "本次作答质量只支持谨慎解释。",
-                        "user_guidance": "请把本次结果当作初步线索，不要得出强人格、职业或行动结论。",
-                        "retest_note": "建议在更稳定、不被打断的状态下复测。",
-                        "why_this_level": "作答模式提示解释稳定性下降。 低置信结果只适合复测准备和轻量反思，不支持强画像、职业或行动结论。",
-                        "how_to_read": "优先阅读质量说明和复测准备；其他模块只作轻量参考。",
-                        "what_to_trust": "最可靠的信息是本次作答过程需要复盘。",
-                        "what_to_hold_lightly": "分数、画像、职业环境和行动处方都应轻读。"
+                        "label": "有限解释置信度",
+                        "body": "本次作答质量只支持谨慎阅读。",
+                        "user_guidance": "请把结果当作初步线索，优先阅读质量说明和复测建议；不要据此形成强人格、职业或行动结论。",
+                        "retest_note": "建议在更稳定、不被打断、时间更充足的状态下复测，再阅读完整解释。",
+                        "why_this_level": "作答速度、选择模式或一致性线索提示解释稳定性下降。",
+                        "how_to_read": "先确认本次作答是否过快、过于集中或受情绪/环境影响；其他内容只作轻量参考。",
+                        "what_to_trust": "最可靠的信息是：本次作答过程需要复盘，结果不适合直接用作强解释。",
+                        "what_to_hold_lightly": "核心 formulation、场景、职业环境和行动处方都应轻读，不应用来做重大决定。"
                     },
                     "en": {
-                        "label": "Limited confidence",
-                        "body": "This response quality supports only cautious interpretation.",
-                        "user_guidance": "Treat this result as a first signal, not a strong personality, career, or action conclusion.",
-                        "retest_note": "Retake it in a steadier, uninterrupted setting.",
-                        "why_this_level": "The response pattern suggests lower interpretive stability. Low-confidence results should be used for retest preparation and light reflection only, not strong profile, career, or action conclusions.",
-                        "how_to_read": "Read the quality explanation and retest preparation first; treat other modules as light reference only.",
-                        "what_to_trust": "The most reliable information is that the response process needs review.",
-                        "what_to_hold_lightly": "Scores, profile language, career environment, and action prescription should all be held lightly."
+                        "label": "Limited interpretation confidence",
+                        "body": "This response quality supports cautious reading only.",
+                        "user_guidance": "Treat the result as an initial signal. Read the quality note and retest guidance first; do not turn this session into a strong personality, career, or action conclusion.",
+                        "retest_note": "Retake in a steadier, uninterrupted setting with enough time before reading the full interpretation.",
+                        "why_this_level": "Speed, response pattern, or consistency signals suggest lower interpretive stability.",
+                        "how_to_read": "First ask whether the session was rushed, overly patterned, or affected by mood or environment; use other content only as light reference.",
+                        "what_to_trust": "The most reliable message is that the response process needs review and the result should not be used for strong interpretation.",
+                        "what_to_hold_lightly": "Core formulation, scenes, career-environment cues, and action prescription should all be held lightly and not used for major decisions."
                     },
                     "meta": {
                         "id": "eq.quality.level.C",
                         "asset_type": "quality_confidence",
                         "v23_source_id": "eq.quality.level.C",
                         "claim_risk": "high",
-                        "risk_notes": "Quality confidence controls interpretation strength. Keep this as self-report interpretation with explicit non-clinical, non-hiring, and non-ability boundaries.",
+                        "risk_notes": "Quality confidence controls interpretation strength. Keep A/B as self-report interpretation, and keep C/D as retest-first guidance without strong profile, career, relationship, or action conclusions.",
                         "quality_level": "C"
                     }
                 },
                 "eq.quality.level.D": {
                     "zh-CN": {
-                        "label": "低置信度",
+                        "label": "低解释置信度",
                         "body": "本次作答质量不支持强解释。",
-                        "user_guidance": "由于本次作答质量较低，不应用这次结果得出人格结论、职业结论或行动处方。请把它作为复测准备提示。",
-                        "retest_note": "建议在更稳定、不被打断的状态下复测。",
-                        "why_this_level": "本次结果不适合做强解释。 低置信结果只适合复测准备和轻量反思，不支持强画像、职业或行动结论。",
-                        "how_to_read": "优先阅读质量说明和复测准备；其他模块只作轻量参考。",
-                        "what_to_trust": "最可靠的信息是本次作答过程需要复盘。",
-                        "what_to_hold_lightly": "分数、画像、职业环境和行动处方都应轻读。"
+                        "user_guidance": "不要用这次结果得出人格结论、职业结论、关系判断或行动处方；它更适合作为复测准备提示。",
+                        "retest_note": "建议暂时停止阅读深层报告，在状态稳定、时间充足、没有干扰时重新作答。",
+                        "why_this_level": "质量线索显示本次结果可能明显受速度、重复模式、极端/中立选择或一致性问题影响。",
+                        "how_to_read": "只阅读质量说明、科学边界和复测准备；其他模块不应作为当前结论。",
+                        "what_to_trust": "可以相信的是“本次结果置信度不足”这一提示，而不是具体画像或建议。",
+                        "what_to_hold_lightly": "分数、百分位、formulation、场景、职业环境和行动建议都不适合在本次作答基础上使用。"
                     },
                     "en": {
-                        "label": "Low confidence",
+                        "label": "Low interpretation confidence",
                         "body": "This response quality does not support strong interpretation.",
-                        "user_guidance": "Because response quality is low, do not use this session to draw a personality conclusion, career conclusion, or action prescription. Treat it as a prompt to retake in a steadier setting.",
-                        "retest_note": "Retake it in a steadier, uninterrupted setting.",
-                        "why_this_level": "This result is not suitable for strong interpretation. Low-confidence results should be used for retest preparation and light reflection only, not strong profile, career, or action conclusions.",
-                        "how_to_read": "Read the quality explanation and retest preparation first; treat other modules as light reference only.",
-                        "what_to_trust": "The most reliable information is that the response process needs review.",
-                        "what_to_hold_lightly": "Scores, profile language, career environment, and action prescription should all be held lightly."
+                        "user_guidance": "Do not use this session to draw a personality conclusion, career conclusion, relationship judgment, or action prescription. Treat it mainly as preparation for retaking.",
+                        "retest_note": "Pause deeper reading and retake when you have enough time, fewer interruptions, and a steadier state.",
+                        "why_this_level": "Quality signals suggest the result may have been strongly affected by speed, repeated patterns, extreme/neutral responding, or consistency issues.",
+                        "how_to_read": "Read only the quality note, scientific boundary, and retest preparation; other modules should not be treated as current conclusions.",
+                        "what_to_trust": "The trustworthy message is that interpretation confidence is too low, not the specific profile or recommendation.",
+                        "what_to_hold_lightly": "Scores, percentiles, formulation, scenes, career-environment cues, and action suggestions should not be used from this session."
                     },
                     "meta": {
                         "id": "eq.quality.level.D",
                         "asset_type": "quality_confidence",
                         "v23_source_id": "eq.quality.level.D",
                         "claim_risk": "high",
-                        "risk_notes": "Quality confidence controls interpretation strength. Keep this as self-report interpretation with explicit non-clinical, non-hiring, and non-ability boundaries.",
+                        "risk_notes": "Quality confidence controls interpretation strength. Keep A/B as self-report interpretation, and keep C/D as retest-first guidance without strong profile, career, relationship, or action conclusions.",
                         "quality_level": "D"
                     }
                 }
