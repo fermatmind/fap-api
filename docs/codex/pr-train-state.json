@@ -14685,13 +14685,18 @@
         "at": "2026-07-03T09:35:51.629Z",
         "status": "committed",
         "notes": "Created local implementation commit fddfe992e8486e822e0d77ffd32d51d4254db3ce for ENNEA-RP-25 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T09:36:39.655Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2692 for ENNEA-RP-25 cost expression content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-25",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2692",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -14711,7 +14716,7 @@
       ],
       "evidence": "Changed files are confined to cost expression content in group/type registries plus train ledger reconciliation."
     },
-    "status": "committed",
+    "status": "pr_opened_github_checks_pending",
     "title": "ENNEA-RP-25: fix(enneagram): repair cost expression",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
