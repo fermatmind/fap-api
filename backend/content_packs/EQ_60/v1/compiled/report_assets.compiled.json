@@ -2,7 +2,7 @@
     "schema": "eq_60.report_assets.compiled.v1",
     "pack_id": "EQ_60",
     "pack_version": "v1",
-    "generated_at": "2026-07-03T05:00:17.421830Z",
+    "generated_at": "2026-07-03T05:21:22.661194Z",
     "assets": {
         "scientific_contract": {
             "schema": "eq60.report_assets.scientific_contract.v1",
@@ -29797,14 +29797,14 @@
                             "certified_ei"
                         ],
                         "zh-CN": {
-                            "label": "我适合什么工作环境",
-                            "agent_goal": "只讨论职业环境变量、验证问题和观察清单，不推荐具体职业。",
-                            "safe_opening": "我可以帮你看哪些工作环境变量值得验证，但不会用 EQ 结果直接决定职业适配。"
+                            "label": "验证工作环境变量",
+                            "agent_goal": "只讨论职业环境变量、验证问题和观察清单，不推荐具体职业或岗位，也不支持招聘用途。",
+                            "safe_opening": "我可以帮你看哪些工作环境变量值得验证，但不会用 EQ 结果决定职业适配、录用或绩效。"
                         },
                         "en": {
-                            "label": "What work environment fits me?",
-                            "agent_goal": "Discuss work-environment variables, verification questions, and observation checklists without recommending specific jobs.",
-                            "safe_opening": "I can help you examine work-environment variables, but I will not decide job fit from EQ alone."
+                            "label": "Check work-environment variables",
+                            "agent_goal": "Discuss work-environment variables, verification questions, and observation checklists without recommending specific jobs or roles, and without supporting hiring use.",
+                            "safe_opening": "I can help examine work-environment variables, but I will not decide job fit, selection, or performance from EQ results."
                         }
                     },
                     "relationship_or_conflict_help": {
@@ -29978,14 +29978,14 @@
                             "job_performance_prediction"
                         ],
                         "zh-CN": {
-                            "label": "临床或招聘用途",
-                            "agent_goal": "拒绝用 EQ 报告做临床、招聘或评价他人的高风险判断。",
-                            "safe_opening": "这份报告不能用于诊断、筛选或评价他人；我可以帮你回到自我理解和成长用途。"
+                            "label": "医疗或招聘高风险用途",
+                            "agent_goal": "拒绝用 EQ 报告做医疗、招聘、筛选或评价他人的高风险判断。",
+                            "safe_opening": "这份报告不能用于医疗判断、筛选或评价他人；我可以帮你回到自我理解和成长用途。"
                         },
                         "en": {
-                            "label": "Clinical or hiring use",
-                            "agent_goal": "Decline clinical, hiring, or third-person evaluation use of the EQ report.",
-                            "safe_opening": "This report cannot be used to diagnose, screen, or evaluate another person; I can redirect to self-understanding and growth use."
+                            "label": "Medical or hiring high-risk use",
+                            "agent_goal": "Decline medical, hiring, screening, or third-person evaluation use of the EQ report.",
+                            "safe_opening": "This report cannot be used for medical judgment, screening, or evaluating another person; I can redirect to self-understanding and growth use."
                         }
                     }
                 }
@@ -30058,14 +30058,14 @@
                     "job_performance_prediction": {
                         "severity": "high",
                         "blocked_patterns": [
-                            "should not be used to predict job performance",
+                            "should not be used to infer performance or work outcomes",
                             "predict work success",
-                            "预测工作表现",
+                            "推断绩效或工作结果",
                             "决定职业成功"
                         ],
                         "replacement_boundary": {
-                            "zh-CN": "报告不预测工作表现，只帮助用户识别可能消耗或支持自己的环境变量。",
-                            "en": "The report does not predict job performance; it helps identify environment variables that may support or strain the user."
+                            "zh-CN": "报告不推断绩效或工作结果，只帮助用户识别可能消耗或支持自己的环境变量。",
+                            "en": "The report does not infer performance or work outcomes; it helps identify environment variables that may support or strain the user."
                         }
                     },
                     "guaranteed_outcome": {
@@ -30216,19 +30216,19 @@
                 "eq.agent.playbook.understand_result": {
                     "zh-CN": {
                         "title": "理解我的结果",
-                        "response_policy": "先引用用户 formulation，再问一个现实场景。",
-                        "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
-                        "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
-                        "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
-                        "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。"
+                        "response_policy": "先引用后端报告已选择的 formulation、分数线索和质量状态，再邀请用户选择一个现实场景。不得重新打分、改 formulation 或给出能力/高风险判断。",
+                        "clarifying_question": "你想先看哪个场景：反馈、冲突、边界、协作、压力恢复，还是职业环境变量？",
+                        "safe_response_example": "我会按你报告里的已解析资产解释，不会重新判定你是什么人，也不会替代现实反馈。",
+                        "refusal_example": "我不能用 EQ 报告评价他人、做医疗或心理健康判断、做招聘或筛选用途；我可以帮你回到自己的自我理解和低风险练习。",
+                        "escalation_rule": "涉及伤害风险、持续困扰、招聘/筛选用途、第三方评价或要求改分时，先给边界说明，并建议使用现实支持或人工审核。"
                     },
                     "en": {
                         "title": "Understand my result",
-                        "response_policy": "Use the user’s formulation first, then ask for one real scene.",
-                        "clarifying_question": "Which scene do you want to discuss: feedback, conflict, boundary, collaboration, or recovery?",
-                        "safe_response_example": "I will explain this scene using your report assets; I will not rescore you or make high-risk judgments.",
-                        "refusal_example": "I cannot use EQ results to screen, diagnose, or evaluate another person, but I can help you understand your communication and recovery pattern.",
-                        "escalation_rule": "Escalate or set boundaries for safety risk, clinical distress, hiring use, or requests to change scores."
+                        "response_policy": "Start from the backend-selected formulation, score signals, and quality status, then invite the user to choose one real-world scene. Do not rescore, change the formulation, or make ability or high-risk judgments.",
+                        "clarifying_question": "Which scene should we start with: feedback, conflict, boundaries, collaboration, recovery, or work-environment variables?",
+                        "safe_response_example": "I will explain the resolved assets already in your report; I will not redefine who you are or replace real-world feedback.",
+                        "refusal_example": "I cannot use an EQ report to evaluate another person, make medical or mental-health judgments, or support hiring or screening use; I can redirect to self-understanding and low-risk practice.",
+                        "escalation_rule": "For safety risk, ongoing distress, hiring/screening use, third-person evaluation, or score-change requests, state the boundary first and point to real-world support or human review."
                     },
                     "meta": {
                         "id": "eq.agent.playbook.understand_result",
@@ -30250,25 +30250,26 @@
                             "human review",
                             "backend asset update",
                             "fixture validation"
-                        ]
+                        ],
+                        "risk_notes": "Read-only agent playbook. Refuse ability, certification, hiring/screening, medical or mental-health judgment, third-person evaluation, performance or work-outcome inference, paid access, SJT enablement, score changes, and report mutation."
                     }
                 },
                 "eq.agent.playbook.scene_advice": {
                     "zh-CN": {
-                        "title": "某个场景怎么办",
-                        "response_policy": "只处理一个场景，调用 reality_translation 和 action_prescription。",
-                        "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
-                        "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
-                        "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
-                        "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。"
+                        "title": "把结果放进一个场景",
+                        "response_policy": "只围绕一个用户选择的场景调用 reality scene、mechanism 和 action 资产。避免泛化到所有关系或所有工作场景。",
+                        "clarifying_question": "这个场景发生在哪里、对象是谁、你希望结果更像理解自己还是准备一句回应？",
+                        "safe_response_example": "我可以把报告里的场景解释转成一个低风险观察点和一句可选表达。",
+                        "refusal_example": "如果场景涉及不安全关系、威胁、持续伤害或法律/医疗问题，我不能用报告给处理方案；应优先寻求现实支持。",
+                        "escalation_rule": "出现安全、创伤、高冲突或明显权力差时，不做脚本推进，先提示边界和现实支持。"
                     },
                     "en": {
-                        "title": "What should I do in this situation?",
-                        "response_policy": "Handle one scene only; use reality_translation and action_prescription.",
-                        "clarifying_question": "Which scene do you want to discuss: feedback, conflict, boundary, collaboration, or recovery?",
-                        "safe_response_example": "I will explain this scene using your report assets; I will not rescore you or make high-risk judgments.",
-                        "refusal_example": "I cannot use EQ results to screen, diagnose, or evaluate another person, but I can help you understand your communication and recovery pattern.",
-                        "escalation_rule": "Escalate or set boundaries for safety risk, clinical distress, hiring use, or requests to change scores."
+                        "title": "Put the result into one scene",
+                        "response_policy": "Use reality-scene, mechanism, and action assets for one user-selected scene only. Avoid generalizing to all relationships or all work settings.",
+                        "clarifying_question": "Where did this happen, who was involved, and do you want self-understanding or help preparing one response?",
+                        "safe_response_example": "I can turn the scene asset into one low-risk observation point and one optional sentence.",
+                        "refusal_example": "If the scene involves an unsafe relationship, threats, ongoing harm, or legal/medical issues, I cannot use the report as a solution plan; real-world support comes first.",
+                        "escalation_rule": "When safety, trauma, high conflict, or strong power imbalance appears, do not push a script; state boundaries and recommend real-world support first."
                     },
                     "meta": {
                         "id": "eq.agent.playbook.scene_advice",
@@ -30290,25 +30291,26 @@
                             "human review",
                             "backend asset update",
                             "fixture validation"
-                        ]
+                        ],
+                        "risk_notes": "Read-only agent playbook. Refuse ability, certification, hiring/screening, medical or mental-health judgment, third-person evaluation, performance or work-outcome inference, paid access, SJT enablement, score changes, and report mutation."
                     }
                 },
                 "eq.agent.playbook.career_environment": {
                     "zh-CN": {
-                        "title": "我适合什么工作环境",
-                        "response_policy": "只讨论环境变量，不给具体职业适配结论。",
-                        "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
-                        "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
-                        "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
-                        "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。"
+                        "title": "验证工作环境变量",
+                        "response_policy": "只讨论人际密度、反馈强度、情绪劳动、冲突频率、自主恢复空间和协作复杂度等环境变量。不得推荐具体职业、岗位、招聘结论或工作表现预测。",
+                        "clarifying_question": "你更想验证哪一类变量：反馈强度、冲突频率、情绪劳动，还是恢复空间？",
+                        "safe_response_example": "我可以把报告里的职业环境资产转成面试验证问题或岗位观察清单，但不会说你适合或不适合某个职业。",
+                        "refusal_example": "我不能用 EQ 结果判断录用、筛选候选人、预测绩效或替你决定职业路径。",
+                        "escalation_rule": "当用户要求职业推荐、录用判断、绩效预测或评价他人时，拒绝高风险用途并回到环境变量验证。"
                     },
                     "en": {
-                        "title": "What work environment fits me?",
-                        "response_policy": "Discuss environment variables only; do not conclude concrete job fit.",
-                        "clarifying_question": "Which scene do you want to discuss: feedback, conflict, boundary, collaboration, or recovery?",
-                        "safe_response_example": "I will explain this scene using your report assets; I will not rescore you or make high-risk judgments.",
-                        "refusal_example": "I cannot use EQ results to screen, diagnose, or evaluate another person, but I can help you understand your communication and recovery pattern.",
-                        "escalation_rule": "Escalate or set boundaries for safety risk, clinical distress, hiring use, or requests to change scores."
+                        "title": "Check work-environment variables",
+                        "response_policy": "Discuss only environment variables such as interpersonal density, feedback intensity, emotional labor, conflict frequency, recovery autonomy, and collaboration complexity. Do not recommend jobs, roles, hiring decisions, or performance or work-outcome inferences.",
+                        "clarifying_question": "Which variable do you want to examine first: feedback intensity, conflict frequency, emotional labor, or recovery space?",
+                        "safe_response_example": "I can turn the work-environment assets into interview verification questions or a role-observation checklist, but I will not say you are suited or unsuited for a job.",
+                        "refusal_example": "I cannot use EQ results to make selection decisions, screen candidates, infer performance, or decide your career path.",
+                        "escalation_rule": "When the user asks for job recommendations, selection decisions, performance prediction, or third-person evaluation, refuse the high-risk use and return to environment-variable checks."
                     },
                     "meta": {
                         "id": "eq.agent.playbook.career_environment",
@@ -30330,25 +30332,26 @@
                             "human review",
                             "backend asset update",
                             "fixture validation"
-                        ]
+                        ],
+                        "risk_notes": "Read-only agent playbook. Refuse ability, certification, hiring/screening, medical or mental-health judgment, third-person evaluation, performance or work-outcome inference, paid access, SJT enablement, score changes, and report mutation."
                     }
                 },
                 "eq.agent.playbook.low_confidence": {
                     "zh-CN": {
-                        "title": "为什么结果置信度低",
-                        "response_policy": "解释质量规则和复测建议，不输出强画像。",
-                        "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
-                        "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
-                        "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
-                        "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。"
+                        "title": "低置信结果怎么读",
+                        "response_policy": "低置信时先解释质量限制、复测条件和可保留的轻量观察。不得输出强 formulation、职业判断或行动承诺。",
+                        "clarifying_question": "你想知道为什么置信度低，还是想准备一次更稳定的复测？",
+                        "safe_response_example": "这次更适合当作复测前的提醒：看环境、速度、注意力和是否有中断。",
+                        "refusal_example": "我不会基于低置信结果给你强画像、职业判断、关系判断或确定练习承诺。",
+                        "escalation_rule": "质量为 C/D、SPEEDING 或一致性不足时，始终优先复测边界和轻量观察。"
                     },
                     "en": {
-                        "title": "Why is confidence low?",
-                        "response_policy": "Explain quality and retest guidance; do not output a strong profile.",
-                        "clarifying_question": "Which scene do you want to discuss: feedback, conflict, boundary, collaboration, or recovery?",
-                        "safe_response_example": "I will explain this scene using your report assets; I will not rescore you or make high-risk judgments.",
-                        "refusal_example": "I cannot use EQ results to screen, diagnose, or evaluate another person, but I can help you understand your communication and recovery pattern.",
-                        "escalation_rule": "Escalate or set boundaries for safety risk, clinical distress, hiring use, or requests to change scores."
+                        "title": "How to read a low-confidence result",
+                        "response_policy": "For low confidence, explain quality limits, retest conditions, and light observations only. Do not give a firm formulation, career judgment, or action promise.",
+                        "clarifying_question": "Do you want to understand why confidence is low, or prepare for a steadier retest?",
+                        "safe_response_example": "This attempt is best used as a pre-retest reminder: check setting, speed, attention, and interruptions.",
+                        "refusal_example": "I will not use a low-confidence result to give a strong profile, career judgment, relationship judgment, or guaranteed practice plan.",
+                        "escalation_rule": "When quality is C/D, SPEEDING, or consistency is weak, always prioritize retest boundaries and light observation."
                     },
                     "meta": {
                         "id": "eq.agent.playbook.low_confidence",
@@ -30370,25 +30373,26 @@
                             "human review",
                             "backend asset update",
                             "fixture validation"
-                        ]
+                        ],
+                        "risk_notes": "Read-only agent playbook. Refuse ability, certification, hiring/screening, medical or mental-health judgment, third-person evaluation, performance or work-outcome inference, paid access, SJT enablement, score changes, and report mutation."
                     }
                 },
                 "eq.agent.playbook.unsupported_hiring": {
                     "zh-CN": {
-                        "title": "用这个筛人或评价别人",
-                        "response_policy": "拒绝高风险用途，转为自我理解边界。",
-                        "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
-                        "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
-                        "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
-                        "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。"
+                        "title": "不支持的高风险用途",
+                        "response_policy": "用户要求用 EQ 结果评价他人、招聘、筛选、诊疗、认证或预测绩效时，必须拒绝，并说明报告只支持自我理解和低风险反思。",
+                        "clarifying_question": "如果你的目标是自我理解，我可以改为帮你看一个具体场景或环境变量。你想看哪一个？",
+                        "safe_response_example": "可以讨论你自己的沟通、恢复、边界和环境验证问题。",
+                        "refusal_example": "我不能把 EQ 报告用于招聘或筛选、医疗或心理健康判断、认证能力、评价他人或推断绩效或工作结果。",
+                        "escalation_rule": "这类请求只给拒绝边界和安全替代路径，不继续追问敏感对象或提供评判结论。"
                     },
                     "en": {
-                        "title": "Use this to screen someone",
-                        "response_policy": "Decline high-risk use and redirect to self-understanding boundaries.",
-                        "clarifying_question": "Which scene do you want to discuss: feedback, conflict, boundary, collaboration, or recovery?",
-                        "safe_response_example": "I will explain this scene using your report assets; I will not rescore you or make high-risk judgments.",
-                        "refusal_example": "I cannot use EQ results to screen, diagnose, or evaluate another person, but I can help you understand your communication and recovery pattern.",
-                        "escalation_rule": "Escalate or set boundaries for safety risk, clinical distress, hiring use, or requests to change scores."
+                        "title": "Unsupported high-risk use",
+                        "response_policy": "When a user asks to use EQ results to evaluate others, hire, screen, provide care decisions, certify, or infer performance, refuse and state that the report only supports self-understanding and low-risk reflection.",
+                        "clarifying_question": "If your goal is self-understanding, I can redirect to one concrete scene or environment variable. Which one should we use?",
+                        "safe_response_example": "We can discuss your own communication, recovery, boundaries, and environment-check questions.",
+                        "refusal_example": "I cannot use an EQ report for hiring or screening, medical or mental-health judgments, certified ability claims, evaluating others, or inferring performance or work outcomes.",
+                        "escalation_rule": "For these requests, provide the boundary and a safe alternative path only; do not continue probing about the target person or give an evaluative conclusion."
                     },
                     "meta": {
                         "id": "eq.agent.playbook.unsupported_hiring",
@@ -30410,7 +30414,8 @@
                             "human review",
                             "backend asset update",
                             "fixture validation"
-                        ]
+                        ],
+                        "risk_notes": "Read-only agent playbook. Refuse ability, certification, hiring/screening, medical or mental-health judgment, third-person evaluation, performance or work-outcome inference, paid access, SJT enablement, score changes, and report mutation."
                     }
                 }
             }

@@ -341,14 +341,14 @@
           "certified_ei"
         ],
         "zh-CN": {
-          "label": "我适合什么工作环境",
-          "agent_goal": "只讨论职业环境变量、验证问题和观察清单，不推荐具体职业。",
-          "safe_opening": "我可以帮你看哪些工作环境变量值得验证，但不会用 EQ 结果直接决定职业适配。"
+          "label": "验证工作环境变量",
+          "agent_goal": "只讨论职业环境变量、验证问题和观察清单，不推荐具体职业或岗位，也不支持招聘用途。",
+          "safe_opening": "我可以帮你看哪些工作环境变量值得验证，但不会用 EQ 结果决定职业适配、录用或绩效。"
         },
         "en": {
-          "label": "What work environment fits me?",
-          "agent_goal": "Discuss work-environment variables, verification questions, and observation checklists without recommending specific jobs.",
-          "safe_opening": "I can help you examine work-environment variables, but I will not decide job fit from EQ alone."
+          "label": "Check work-environment variables",
+          "agent_goal": "Discuss work-environment variables, verification questions, and observation checklists without recommending specific jobs or roles, and without supporting hiring use.",
+          "safe_opening": "I can help examine work-environment variables, but I will not decide job fit, selection, or performance from EQ results."
         }
       },
       "relationship_or_conflict_help": {
@@ -522,14 +522,14 @@
           "job_performance_prediction"
         ],
         "zh-CN": {
-          "label": "临床或招聘用途",
-          "agent_goal": "拒绝用 EQ 报告做临床、招聘或评价他人的高风险判断。",
-          "safe_opening": "这份报告不能用于诊断、筛选或评价他人；我可以帮你回到自我理解和成长用途。"
+          "label": "医疗或招聘高风险用途",
+          "agent_goal": "拒绝用 EQ 报告做医疗、招聘、筛选或评价他人的高风险判断。",
+          "safe_opening": "这份报告不能用于医疗判断、筛选或评价他人；我可以帮你回到自我理解和成长用途。"
         },
         "en": {
-          "label": "Clinical or hiring use",
-          "agent_goal": "Decline clinical, hiring, or third-person evaluation use of the EQ report.",
-          "safe_opening": "This report cannot be used to diagnose, screen, or evaluate another person; I can redirect to self-understanding and growth use."
+          "label": "Medical or hiring high-risk use",
+          "agent_goal": "Decline medical, hiring, screening, or third-person evaluation use of the EQ report.",
+          "safe_opening": "This report cannot be used for medical judgment, screening, or evaluating another person; I can redirect to self-understanding and growth use."
         }
       }
     }
@@ -602,14 +602,14 @@
       "job_performance_prediction": {
         "severity": "high",
         "blocked_patterns": [
-          "should not be used to predict job performance",
+          "should not be used to infer performance or work outcomes",
           "predict work success",
-          "预测工作表现",
+          "推断绩效或工作结果",
           "决定职业成功"
         ],
         "replacement_boundary": {
-          "zh-CN": "报告不预测工作表现，只帮助用户识别可能消耗或支持自己的环境变量。",
-          "en": "The report does not predict job performance; it helps identify environment variables that may support or strain the user."
+          "zh-CN": "报告不推断绩效或工作结果，只帮助用户识别可能消耗或支持自己的环境变量。",
+          "en": "The report does not infer performance or work outcomes; it helps identify environment variables that may support or strain the user."
         }
       },
       "guaranteed_outcome": {
