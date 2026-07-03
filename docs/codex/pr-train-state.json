@@ -5421,7 +5421,7 @@
       }
     ]
   },
-  "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01":       {
+  "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01":         {
       "base": "main",
       "branch": "codex/big5-rendered-surface-qa-content-repair-01",
       "checks": {
@@ -5443,11 +5443,11 @@
               "evidence": "Changed files are confined to rendered_surface_qa normalized/staging/QA artifacts, BigFiveResultPageV2AssetAgentTest, and docs/codex PR-train state. No fap-web, CMS, SEO, runtime, rollout, production import, DB migration, or final result contract changes."
           },
           "github": {
-              "status": "pending",
-              "evidence": "PR opened: https://github.com/fermatmind/fap-api/pull/2681. GitHub checks pending."
+              "status": "pass",
+              "evidence": "PR #2681 checks completed successfully and mergeStateStatus=CLEAN on head 9705ae08c35100403600d36f09fa8bfc40b55e4b."
           }
       },
-      "commit_sha": "9e31503a741b92b18e6d807d7585b951672a7c1f",
+      "commit_sha": "9705ae08c35100403600d36f09fa8bfc40b55e4b",
       "depends_on": [
           "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01"
       ],
@@ -5460,11 +5460,11 @@
       "repo": "fap-api",
       "scope_validation": {
           "allowed_paths_only": true,
-          "github_checks_green": null,
+          "github_checks_green": true,
           "local_validation_passed": true,
           "post_merge_revalidated": null
       },
-      "status": "pr_open",
+      "status": "ready_to_merge",
       "title": "BIG5-RENDERED-SURFACE-QA-CONTENT-REPAIR-01: Big Five rendered surface QA content repair",
       "transitions": [
           {
@@ -5490,6 +5490,12 @@
               "from": "committed",
               "to": "pr_open",
               "note": "Opened PR https://github.com/fermatmind/fap-api/pull/2681 for scoped rendered surface QA content repair."
+          },
+          {
+              "at": "2026-07-03T07:10:00Z",
+              "from": "pr_open",
+              "to": "ready_to_merge",
+              "note": "GitHub checks passed and PR merge state was CLEAN for #2681."
           }
       ]
   },
