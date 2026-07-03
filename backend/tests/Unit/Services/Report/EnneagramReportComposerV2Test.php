@@ -320,9 +320,13 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame('visible', data_get($module, 'visibility'));
         $this->assertSame('triggered_operational_signal', data_get($module, 'content.low_quality_status'));
         $this->assertSame(['speed_too_fast'], data_get($module, 'content.qc_flags'));
+        $this->assertStringContainsString('不是在责备作答者', (string) data_get($module, 'content.body'));
+        $this->assertSame('retest_same_form_when_stable', data_get($module, 'content.recommended_action'));
+        $this->assertContains('hiring_screening', data_get($module, 'content.not_for'));
         $this->assertSame('low_quality', data_get($summary, 'content.interpretation_scope'));
         $this->assertStringContainsString('作答信号显示解释边界需要放宽', (string) data_get($summary, 'content.body'));
         $this->assertStringContainsString('不适合用来确认主型', (string) data_get($summary, 'content.body'));
+        $this->assertStringContainsString('不是在责备作答者', (string) data_get($summary, 'content.body'));
     }
 
     public function test_v2_modules_expose_p0_ready_registry_provenance(): void

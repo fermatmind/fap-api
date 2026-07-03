@@ -1089,6 +1089,7 @@ final class EnneagramReportComposer
     {
         $visible = $this->state($projectionV2) === 'low_quality';
         $ui = is_array($indexes['ui_entries']['low_quality_boundary.title'] ?? null) ? $indexes['ui_entries']['low_quality_boundary.title'] : [];
+        $summary = is_array($indexes['ui_entries']['instant_summary.low_quality'] ?? null) ? $indexes['ui_entries']['instant_summary.low_quality'] : [];
 
         return $this->module(
             'low_quality_boundary',
@@ -1102,6 +1103,9 @@ final class EnneagramReportComposer
                 'low_quality_status' => data_get($projectionV2, 'classification.low_quality_status'),
                 'qc_flags' => data_get($projectionV2, 'classification.qc_flags', []),
                 'signal_limitation' => data_get($projectionV2, '_meta.policy.signal_limitations.low_quality'),
+                'body' => (string) ($summary['body_template'] ?? ''),
+                'recommended_action' => 'retest_same_form_when_stable',
+                'not_for' => ['personality_verdict', 'diagnosis', 'ability_evaluation', 'hiring_screening', 'mental_health_judgement'],
                 'show_low_quality_boundary' => data_get($projectionV2, 'render_hints.show_low_quality_boundary'),
             ],
             [
@@ -1110,9 +1114,12 @@ final class EnneagramReportComposer
                 'classification.low_quality_status',
                 'classification.qc_flags',
             ],
-            ['enneagram_ui_copy_registry:low_quality_boundary.title'],
+            [
+                'enneagram_ui_copy_registry:low_quality_boundary.title',
+                'enneagram_ui_copy_registry:instant_summary.low_quality',
+            ],
             ['algorithmic_meta.quality_policy_version'],
-            $this->entryMeta($ui, $this->registryMeta($indexes, 'enneagram_ui_copy_registry'))
+            $this->mergeEntryMeta([$ui, $summary], $this->registryMeta($indexes, 'enneagram_ui_copy_registry'))
         );
     }
 

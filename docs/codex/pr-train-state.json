@@ -5383,7 +5383,7 @@
     "checks": [
 
     ],
-    "commit_sha": null,
+    "commit_sha": "e33d1a51162a60bbc431d32a885a79463a096ee0",
     "depends_on": [
       "BIG5-NORM-UNAVAILABLE-SCIENTIFIC-REPAIR-01"
     ],
@@ -13373,14 +13373,19 @@
         "at": "2026-07-03T06:17:17Z",
         "status": "ready_to_merge",
         "notes": "GitHub required checks passed for PR #2676 and mergeStateStatus was CLEAN; scope remains confined to diffuse boundary registry content and train ledger."
+      },
+      {
+        "at": "2026-07-03T06:23:20Z",
+        "status": "merged",
+        "notes": "PR #2676 was squash-merged as 4d7fe1ef7dbd17a102d9e3ca2d5af72b92ab005e; origin/main contains the merge commit, local main was fast-forwarded, and the local/remote task branches were cleaned before ENNEA-RP-15 started."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-14",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-03T06:23:20Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2676",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_files": [
@@ -13403,7 +13408,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to diffuse boundary method/technical note/ui registry content and train ledger reconciliation."
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ENNEA-RP-14: fix(enneagram): repair diffuse boundary content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -13414,9 +13419,48 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEA-RP-14 merged as PR #2676 and merge commit 4d7fe1ef7dbd17a102d9e3ca2d5af72b92ab005e is present in origin/main."
+      },
+      "jq_registry_json": {
+        "status": "pass",
+        "command": "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+        "evidence": "All ENNEAGRAM v2 registry JSON files parsed successfully."
+      },
+      "type_registry_coverage": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+        "evidence": "Passed: 2 warnings, 14509 assertions."
+      },
+      "registry_pack_load": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+        "evidence": "Initial run failed because newly added UI keys violated the current scaffold and one phrase tripped the hiring-use boundary scan; fixed within PR-15 scope by reusing the existing low-quality UI key and rerun passed with 3 warnings, 26 assertions."
+      },
+      "composer_v2_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+        "evidence": "Passed: 15 warnings, 132 assertions."
+      },
+      "enneagram_filter": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=Enneagram",
+        "evidence": "Passed: 262 warnings, 2 passed, 83416 assertions, duration 27.68s."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2677 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All required GitHub checks passed on PR #2677 head b48f2d3a25a0750c084365f5b54158bf9083a213."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "b48f2d3a25a0750c084365f5b54158bf9083a213",
     "depends_on": [
       "ENNEA-RP-14"
     ],
@@ -13425,13 +13469,33 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T06:24:42Z",
+        "status": "in_progress",
+        "notes": "Started from latest origin/main on branch codex/ennea-rp-15-low-quality-boundary after ENNEA-RP-14 merge and cleanup; scope is low-quality boundary UI copy, composer output, Enneagram tests, and train ledger only."
+      },
+      {
+        "at": "2026-07-03T06:27:20Z",
+        "status": "local_validation_passed",
+        "notes": "Repaired low-quality boundary so it frames response-signal limitation without blame, exposes same-form retest action and non-use boundaries in the composer output, and passes required local validation."
+      },
+      {
+        "at": "2026-07-03T06:27:47Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2677 for low-quality boundary content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T06:33:22Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed for PR #2677 and mergeStateStatus was CLEAN; scope remains confined to low-quality boundary UI copy, composer output, Enneagram tests, and train ledger."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-15",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2677",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -13443,11 +13507,19 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
+      "changed_files": [
+        "backend/app/Services/Report/EnneagramReportComposer.php",
+        "backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json",
+        "backend/tests/Unit/Services/Report/EnneagramReportComposerV2Test.php",
+        "docs/codex/pr-train-state.json"
+      ],
       "outside_scope_files": [
 
-      ]
+      ],
+      "status": "pass",
+      "evidence": "Changed files are confined to low-quality boundary UI copy, composer output, Enneagram composer test, and train ledger reconciliation."
     },
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-15: fix(enneagram): repair low-quality boundary content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
