@@ -35,7 +35,7 @@
             "method_key": "same_model_not_same_score_space",
             "form_variant": "all",
             "display_context": "technical_note",
-            "copy": "E105 与 FC144 属于同一 ENNEAGRAM 模型和解释框架，但题型、作答任务、计分来源和误差结构不同，不处在同一 score space。系统可以复用结果页结构、模块顺序和安全边界，但不会默认直接比较两套数值高低，也不会把跨 form 的 Top3 差异解读成个体状态变化、人格发展或谁更真实。",
+            "copy": "E105 与 FC144 属于同一 ENNEAGRAM 模型和解释框架，但题型、作答任务、计分来源和误差结构不同，不处在同一 score space。系统可以复用结果页结构、模块顺序和安全边界；历史、分享、PDF 与重测入口也必须保留各自 form 的来源标识。页面不会默认直接比较两套数值高低，也不会把跨 form 的 Top3 差异解读成个体状态变化、人格发展或谁更真实。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -43,7 +43,7 @@
             "method_key": "cross_form_compare_blocked",
             "form_variant": "all",
             "display_context": "history",
-            "copy": "跨 form 对比默认关闭。除非未来存在经过验证的等值映射，系统不会把 E105 与 FC144 放入同一分数比较语义，也不会生成“提升/下降”“更健康/更不健康”这类跨题型结论。",
+            "copy": "跨 form 对比默认关闭。除非未来存在经过验证的等值映射，系统不会把 E105 与 FC144 放入同一分数比较语义；历史页、分享卡和结果回看都不应生成“提升/下降”“更健康/更不健康”“这次更准确”这类跨题型结论。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -59,7 +59,7 @@
             "method_key": "user_confirmed_type_boundary",
             "form_variant": "all",
             "display_context": "observation",
-            "copy": "user_confirmed_type 是用户在观察后记录的自我共鸣证据，不是系统改判，也不是更高权威的类型确认。它会进入历史记录，帮助后续阅读时标注用户视角，但不会覆盖 primary_candidate、Top3、scorer 输出或原始 attempt 的计分事实。",
+            "copy": "user_confirmed_type 是用户在观察后记录的自我共鸣证据，不是系统改判，也不是更高权威的类型确认。它可以进入历史记录，帮助后续阅读时标注用户视角；分享或回看时也只能作为自我观察备注呈现，不会覆盖 primary_candidate、Top3、scorer 输出或原始 attempt 的计分事实。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -67,7 +67,7 @@
             "method_key": "low_quality_boundary",
             "form_variant": "all",
             "display_context": "result_page",
-            "copy": "当低质量信号触发时，结果仍可阅读，但解释边界会明显收窄。页面只保留轻量观察建议，避免把单次低稳定度作答扩展成确定性类型判断；优先建议在状态更稳定、时间更充足时重测同一题型，而不是立刻切换 form 来寻找“更好答案”。",
+            "copy": "当低质量信号触发时，结果仍可阅读，但解释边界会明显收窄。页面只保留轻量观察建议，避免把单次低稳定度作答扩展成确定性类型判断；优先建议在状态更稳定、时间更充足时重测同一题型。切换 form 可以作为另一次观察，但不能用来寻找“更好答案”，也不能把两次 form 差异做成分数升降、人格变化或可靠性证明。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
