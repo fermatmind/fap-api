@@ -15475,7 +15475,7 @@
         "command": "git diff --check"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "ad64407b4c152360fa538cdfda87e8bcb93f5406",
     "depends_on": [
       "ENNEA-RP-31"
     ],
@@ -15494,6 +15494,12 @@
         "at": "2026-07-03T11:30:41.603Z",
         "status": "local_validation_passed",
         "notes": "Required local checks passed and changed files remained within ENNEA-RP-32 scope."
+      },
+      {
+        "at": "2026-07-03T11:31:00.938Z",
+        "status": "committed",
+        "commit_sha": "ad64407b4c152360fa538cdfda87e8bcb93f5406",
+        "notes": "Implementation commit created after local validation."
       }
     ],
     "failure_reason": null,
@@ -15518,7 +15524,7 @@
       ],
       "evidence": "Changed files are confined to deep_dive.misread_by_others and train ledger reconciliation/status."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-32: fix(enneagram): repair misread by others",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
