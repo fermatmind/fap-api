@@ -16656,9 +16656,30 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "implementation": {
+        "status": "pass",
+        "notes": "Expanded technical note link and sections with evidence hierarchy, scope limitations, form boundaries, and privacy/aggregation boundaries."
+      },
+      "local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+          "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+          "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+          "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+          "cd backend && php artisan test --filter=Enneagram",
+          "git diff --check"
+        ],
+        "notes": "Initial local validation failed because technical_note.link_label.label is contract-locked; fixed within ui_copy_registry scope by restoring the label and moving expanded copy to body_template. Full validation passed with existing warnings only."
+      },
+      "github": {
+        "status": "pass",
+        "pr": 2709,
+        "head_sha": "18a0acb71f9177f260b5dccc36cab12dc96cb8c3"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "18a0acb71f9177f260b5dccc36cab12dc96cb8c3",
     "depends_on": [
       "ENNEA-RP-41"
     ],
@@ -16667,16 +16688,42 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T14:34:22Z",
+        "status": "in_progress",
+        "notes": "Started from latest main after ENNEA-RP-41 merge; repaired technical note link copy within technical_note/ui_copy registry scope."
+      },
+      {
+        "at": "2026-07-03T14:35:52Z",
+        "status": "local_checks_passed",
+        "notes": "Required local validation passed; changed files are within ENNEA-RP-42 scope."
+      },
+      {
+        "at": "2026-07-03T14:36:00Z",
+        "status": "committed",
+        "notes": "Created local commit 166fc192c98e8762b473b69baed2718949e8ca3c for ENNEA-RP-42."
+      },
+      {
+        "at": "2026-07-03T14:36:33Z",
+        "status": "github_checks_pending",
+        "notes": "Opened PR #2709 and pushed branch for required GitHub checks."
+      },
+      {
+        "at": "2026-07-03T14:42:25Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed and final scope validation remained within ENNEA-RP-42 allowed paths."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-42",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2709",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
+      "status": "pass",
       "allowed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/technical_note_registry.json",
         "backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json",
@@ -16684,9 +16731,14 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/technical_note_registry.json",
+        "backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
       "outside_scope_files": []
     },
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-42: fix(enneagram): repair technical note link",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
