@@ -16210,7 +16210,7 @@
         "evidence": "Changed files are confined to resonance feedback UI/observation copy and train ledger reconciliation/state."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "8cfc53635e49567d15a061575834ac95b9897dd4",
     "depends_on": [
       "ENNEA-RP-37"
     ],
@@ -16229,6 +16229,12 @@
         "at": "2026-07-03T13:30:42.396Z",
         "status": "local_validation_passed",
         "notes": "Required local validation and scope validation passed for resonance feedback placeholder boundary repair."
+      },
+      {
+        "at": "2026-07-03T13:30:57.925Z",
+        "status": "committed",
+        "commit_sha": "8cfc53635e49567d15a061575834ac95b9897dd4",
+        "notes": "Committed ENNEA-RP-38 resonance feedback placeholder copy repair and local validation ledger."
       }
     ],
     "failure_reason": null,
@@ -16254,7 +16260,7 @@
       ],
       "evidence": "Changed files are confined to resonance feedback UI/observation copy and train ledger reconciliation/state."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-38: fix(enneagram): repair resonance feedback placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
