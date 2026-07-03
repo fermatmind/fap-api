@@ -15357,6 +15357,11 @@
       "git_diff_check": {
         "status": "pass",
         "command": "git diff --check"
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2698 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All reported GitHub checks passed for PR #2698 before ready_to_merge ledger update."
       }
     },
     "commit_sha": "03bb11a6c8542ff38f2eb457a9ab27fa960c6f20",
@@ -15390,6 +15395,11 @@
         "status": "pr_opened_github_checks_pending",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/2698",
         "notes": "PR opened; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-07-03T11:22:25.907Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed; PR is ready to merge after final head-check confirmation."
       }
     ],
     "failure_reason": null,
@@ -15414,7 +15424,7 @@
       ],
       "evidence": "Changed files are confined to relationship_pack.relationship_strengths and train ledger reconciliation/status."
     },
-    "status": "pr_opened_github_checks_pending",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-31: fix(enneagram): repair relationship strengths",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
