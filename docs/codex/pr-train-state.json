@@ -5283,7 +5283,7 @@
     "checks": [
 
     ],
-    "commit_sha": null,
+    "commit_sha": "add9c3a600f1bb0b9d5c6a5c0dc8b99655077ded",
     "depends_on": [
       "BIG5-LOW-QUALITY-SCIENTIFIC-REPAIR-01"
     ],
@@ -13353,16 +13353,21 @@
         "notes": "Started from latest origin/main on branch codex/ennea-rp-14-diffuse-boundary after ENNEA-RP-13 merge and cleanup; scope is diffuse boundary content in ui/method/technical note registries plus train ledger only."
       },
       {
-        "at": "2026-07-03T06:14:00Z",
+        "at": "2026-07-03T06:10:30Z",
         "status": "local_validation_passed",
         "notes": "Repaired diffuse boundary copy to frame diffuse as distributed profile structure rather than failure or invalidity; preserved existing composer contract anchors and passed required local validation."
+      },
+      {
+        "at": "2026-07-03T06:11:31Z",
+        "status": "pr_opened",
+        "notes": "Opened PR #2676 for diffuse boundary content repair; awaiting GitHub required checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-14",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2676",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -13386,7 +13391,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to diffuse boundary method/technical note/ui registry content and train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "title": "ENNEA-RP-14: fix(enneagram): repair diffuse boundary content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
