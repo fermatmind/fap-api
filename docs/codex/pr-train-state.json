@@ -16565,9 +16565,30 @@
       "authorization": {
         "evidence": "User-provided /goal explicitly authorized ENNEA-RP-01 through ENNEA-RP-43 manifest/state registration and sequential execution.",
         "status": "pass"
+      },
+      "implementation": {
+        "status": "pass",
+        "notes": "Clarified sample report entries as reading examples rather than norms, answer keys, scoring references, replacement reports, or user-specific conclusions."
+      },
+      "local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && jq empty content_packs/ENNEAGRAM/v2/registry/*.json",
+          "cd backend && php artisan test --filter=EnneagramTypeRegistryCoverageTest",
+          "cd backend && php artisan test --filter=EnneagramRegistryPackLoadTest",
+          "cd backend && php artisan test --filter=EnneagramReportComposerV2Test",
+          "cd backend && php artisan test --filter=Enneagram",
+          "git diff --check"
+        ],
+        "notes": "Initial validator failure on high-certainty phrase \"一定会\" was fixed within sample_report_registry scope; full validation passed with existing warnings only."
+      },
+      "github": {
+        "status": "pass",
+        "pr": 2708,
+        "head_sha": "601be82367190d6431c39112231bd4a739851c86"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "601be82367190d6431c39112231bd4a739851c86",
     "depends_on": [
       "ENNEA-RP-40"
     ],
@@ -16576,25 +16597,55 @@
         "at": "2026-07-02T16:10:24Z",
         "notes": "Registered as user-authorized sequential Enneagram result-page content asset PR; execution waits for dependency merge.",
         "status": "pending_dependency"
+      },
+      {
+        "at": "2026-07-03T14:19:26Z",
+        "status": "in_progress",
+        "notes": "Started from latest main after ENNEA-RP-40 merge; repaired sample report link copy within sample_report_registry scope."
+      },
+      {
+        "at": "2026-07-03T14:20:45Z",
+        "status": "local_checks_passed",
+        "notes": "Required local validation passed; changed files are within ENNEA-RP-41 scope."
+      },
+      {
+        "at": "2026-07-03T14:20:53Z",
+        "status": "committed",
+        "notes": "Created local commit 627acf7afda5beea041b46b99c459789ccdcb512 for ENNEA-RP-41."
+      },
+      {
+        "at": "2026-07-03T14:21:31Z",
+        "status": "github_checks_pending",
+        "notes": "Opened PR #2708 and pushed branch for required GitHub checks."
+      },
+      {
+        "at": "2026-07-03T14:27:12Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed and final scope validation remained within ENNEA-RP-41 allowed paths."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-41",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2708",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
+      "status": "pass",
       "allowed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/sample_report_registry.json",
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
+      "changed_files": [
+        "backend/content_packs/ENNEAGRAM/v2/registry/sample_report_registry.json",
+        "docs/codex/pr-train-state.json"
+      ],
       "outside_scope_files": []
     },
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-41: fix(enneagram): repair sample report link",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
