@@ -15123,6 +15123,11 @@
       "git_diff_check": {
         "status": "pass",
         "command": "git diff --check"
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2696 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All reported GitHub checks passed for PR #2696 before ready_to_merge ledger update."
       }
     },
     "commit_sha": "54aba963de2fe7c2fecf5ddd39e279966d89b402",
@@ -15156,6 +15161,11 @@
         "status": "pr_opened_github_checks_pending",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/2696",
         "notes": "PR opened; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-07-03T10:51:29.988Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed; PR is ready to merge after final head-check confirmation."
       }
     ],
     "failure_reason": null,
@@ -15180,7 +15190,7 @@
       ],
       "evidence": "Changed files are confined to arrow placeholder copy in theory_hint_registry plus train ledger reconciliation/status for ENNEA-RP-28/29."
     },
-    "status": "pr_opened_github_checks_pending",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-29: fix(enneagram): repair arrow placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
