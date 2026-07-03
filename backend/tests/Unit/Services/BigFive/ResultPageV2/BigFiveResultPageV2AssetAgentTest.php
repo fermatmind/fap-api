@@ -1899,14 +1899,15 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertSame('domain_band', $row['asset_type'] ?? null);
                 $this->assertSame('module_03_trait_deep_dive', $row['module_key'] ?? null);
                 $domainBandKeys[] = data_get($row, 'applies_to.trait').'.'.data_get($row, 'applies_to.internal_band');
-                $this->assertGreaterThanOrEqual(260, (int) data_get($row, 'body_quality.body_chars', 0));
-                $this->assertLessThanOrEqual(420, (int) data_get($row, 'body_quality.body_chars', 999));
+                $this->assertGreaterThanOrEqual(160, (int) data_get($row, 'body_quality.body_chars', 0));
+                $this->assertLessThanOrEqual(260, (int) data_get($row, 'body_quality.body_chars', 999));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_strength_layer'));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_cost_layer'));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_action_layer'));
                 $this->assertTrue((bool) data_get($row, 'body_quality.has_boundary_layer'));
                 $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
-                $this->assertSame('codex_domain_bands_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame('codex_domain_bands_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+                $this->assertSame('BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
             }
 
             $this->assertSame(25, count(array_unique($domainBandKeys)));
@@ -1983,8 +1984,19 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 '筛选',
                 '不一定',
                 '失败',
+                '能力',
+                '适合',
+                '一定',
+                '固定性格',
+                '职业适配',
+                '关系质量',
+                '诊断',
             ] as $forbiddenToken) {
                 $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+            }
+
+            foreach (['线索', '优势', '代价', '不是'] as $requiredPhrase) {
+                $this->assertStringContainsString($requiredPhrase, $visibleText, $requiredPhrase);
             }
         } finally {
             $this->deleteDirectory($artifactRoot);
@@ -2891,9 +2903,11 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertFalse((bool) ($row['ready_for_production'] ?? true));
             $this->assertSame('domain_band', $row['asset_type'] ?? null);
             $this->assertSame('module_03_trait_deep_dive', $row['module_key'] ?? null);
-            $this->assertGreaterThanOrEqual(260, (int) data_get($row, 'body_quality.body_chars', 0));
-            $this->assertLessThanOrEqual(420, (int) data_get($row, 'body_quality.body_chars', 999));
+            $this->assertGreaterThanOrEqual(160, (int) data_get($row, 'body_quality.body_chars', 0));
+            $this->assertLessThanOrEqual(260, (int) data_get($row, 'body_quality.body_chars', 999));
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
+            $this->assertSame('codex_domain_bands_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('BIG5-DOMAIN-BANDS-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
             $domainBandKeys[] = data_get($row, 'applies_to.trait').'.'.data_get($row, 'applies_to.internal_band');
         }
 
@@ -2947,8 +2961,19 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             '筛选',
             '不一定',
             '失败',
+            '能力',
+            '适合',
+            '一定',
+            '固定性格',
+            '职业适配',
+            '关系质量',
+            '诊断',
         ] as $forbiddenToken) {
             $this->assertStringNotContainsString($forbiddenToken, $visibleText, $forbiddenToken);
+        }
+
+        foreach (['线索', '优势', '代价', '不是'] as $requiredPhrase) {
+            $this->assertStringContainsString($requiredPhrase, $visibleText, $requiredPhrase);
         }
     }
 
