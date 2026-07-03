@@ -14427,9 +14427,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2690 --repo fermatmind/fap-api",
+        "evidence": "All GitHub PR checks passed on head 843c4ee48532106b319ab4ff02d81c995a5378a6: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-v2, and verify-mbti-legacy."
       }
     },
-    "commit_sha": "3e9faa1cbb2fbc5cb31412bcd829d56a2bbf2b4a",
+    "commit_sha": "843c4ee48532106b319ab4ff02d81c995a5378a6",
     "depends_on": [
       "ENNEA-RP-22"
     ],
@@ -14453,6 +14458,11 @@
         "at": "2026-07-03T08:57:01Z",
         "status": "pr_opened",
         "notes": "Opened PR #2690 for growth axis content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T09:03:53Z",
+        "status": "ready_to_merge",
+        "notes": "Required local checks, scope validation, and GitHub PR checks passed; PR #2690 is clean and ready for squash merge."
       }
     ],
     "failure_reason": null,
@@ -14477,7 +14487,7 @@
       ],
       "evidence": "Changed files are confined to growth axis summary/principle content in type registry plus train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-23: fix(enneagram): repair growth axis",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
@@ -76763,5 +76773,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T08:57:01Z"
+  "updated_at": "2026-07-03T09:03:53Z"
 }
