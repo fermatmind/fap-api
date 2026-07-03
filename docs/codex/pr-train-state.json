@@ -13453,9 +13453,14 @@
         "status": "pass",
         "command": "git diff --check",
         "evidence": "No whitespace errors."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "command": "gh pr checks 2677 --repo fermatmind/fap-api --watch --interval 15",
+        "evidence": "All required GitHub checks passed on PR #2677 head b48f2d3a25a0750c084365f5b54158bf9083a213."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "b48f2d3a25a0750c084365f5b54158bf9083a213",
     "depends_on": [
       "ENNEA-RP-14"
     ],
@@ -13479,6 +13484,11 @@
         "at": "2026-07-03T06:27:47Z",
         "status": "pr_opened",
         "notes": "Opened PR #2677 for low-quality boundary content repair; awaiting GitHub required checks."
+      },
+      {
+        "at": "2026-07-03T06:33:22Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub required checks passed for PR #2677 and mergeStateStatus was CLEAN; scope remains confined to low-quality boundary UI copy, composer output, Enneagram tests, and train ledger."
       }
     ],
     "failure_reason": null,
@@ -13509,7 +13519,7 @@
       "status": "pass",
       "evidence": "Changed files are confined to low-quality boundary UI copy, composer output, Enneagram composer test, and train ledger reconciliation."
     },
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "title": "ENNEA-RP-15: fix(enneagram): repair low-quality boundary content",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
