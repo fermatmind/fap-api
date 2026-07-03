@@ -98,8 +98,8 @@
             "day": 3,
             "phase": "day3_feedback",
             "title": "Day 3｜轻量回看前三天",
-            "prompt": "不用给自己定型。只回看前三天：哪一类动机在线索里出现得稍多一点？如果不清楚，就选不清楚，并写下最有代表性的一个场景。",
-            "example": "如果你是 close-call，把 Top1 和 Top2 当作两个候选假设并排观察，不用强行二选一。",
+            "prompt": "不用给自己定型。只回看前三天：哪一类动机在线索里出现得稍多一点？如果不清楚，就选不清楚，并写下一个可回看的真实场景。",
+            "example": "如果你是 close-call，把 Top1 和 Top2 当作两个候选假设并排观察；这次反馈只记录证据，不要求强行二选一。",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
@@ -135,7 +135,7 @@
             },
             "analytics_event_key": "enneagram_day3_feedback_submitted",
             "suggested_next_action": "read_top3",
-            "boundary_copy": "Day3 反馈只进入自我观察记录，不会静默改写本次测量结果。",
+            "boundary_copy": "Day3 反馈只进入自我观察记录，不会改写本次测量分数、主型候选或结果页解释。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -255,8 +255,8 @@
             "day": 7,
             "phase": "day7_resonance",
             "title": "Day 7｜深度共鸣投票",
-            "prompt": "回看这一周，不问哪个号码更好，只问哪些解释更贴近日常动机。可以选择 Top1、Top2、Top3、其他或仍不确定，并写一句证据。",
-            "example": "如果仍然摇摆，这不是失败。你可以继续阅读 Top3、保留不确定，或在需要时选择同题型重测或 FC144 补充观察。",
+            "prompt": "回看这一周，不问哪个号码更好，只问哪些解释更贴近日常动机。可以选择 Top1、Top2、Top3、其他或仍不确定，并写一句可回看的证据。",
+            "example": "如果仍然摇摆，这不是失败。你可以保留不确定、继续阅读 Top3，或在需要时选择同题型重测或 FC144 补充观察。",
             "user_input_schema": {
                 "type": "object",
                 "fields": {
@@ -299,7 +299,7 @@
             },
             "analytics_event_key": "enneagram_day7_feedback_submitted",
             "suggested_next_action": "observe_7_days",
-            "boundary_copy": "自我观察确认会被记录进历史，但不会把本次测量结果静默改写成系统改判。",
+            "boundary_copy": "Day7 共鸣反馈只记录你的自我观察证据，不触发系统重判，也不会把本次结果静默改写成新主型。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         }
