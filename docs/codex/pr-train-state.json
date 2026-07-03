@@ -65789,7 +65789,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T02:48:11Z",
+  "updated_at": "2026-07-03T02:49:03Z",
   "PR-EQ-V20-01": {
     "repo": "fap-api",
     "base": "main",
@@ -71538,9 +71538,9 @@
       "RIASEC-CONTENT-DIMDEEP-01",
       "RIASEC-CONTENT-PAIRDEEP-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_opened",
+    "commit_sha": "812ec65a14800f5e1936133b9a9057d8246c30f9",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2650",
     "checks": {
       "riasec_content_asset_parse": {
         "command": "php parse all backend/content_assets/riasec JSON and JSONL files",
@@ -71601,6 +71601,12 @@
         "from": "authorized_pending_start",
         "to": "local_validation_passed",
         "note": "FINALQA-01 completed full RIASEC content parse, lint, unit, feature, share/PDF/history, and all-surface QA locally; no deploy or production mutation performed."
+      },
+      {
+        "at": "2026-07-03T02:49:03Z",
+        "from": "local_validation_passed",
+        "to": "pr_opened",
+        "note": "Opened PR #2650 for FINALQA-01 after final local validation and scope validation passed."
       }
     ]
   },
