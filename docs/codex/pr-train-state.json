@@ -14893,7 +14893,7 @@
         "evidence": "No whitespace errors."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "905922655bc13858e9ba63a48046336b92a6db4a",
     "depends_on": [
       "ENNEA-RP-26"
     ],
@@ -14912,6 +14912,11 @@
         "at": "2026-07-03T10:10:43.139Z",
         "status": "local_validation_passed",
         "notes": "Reframed recovery actions as small self-observation moves rather than counseling, treatment, or health-state advice; required local validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-03T10:10:57.689Z",
+        "status": "committed",
+        "notes": "Created local implementation commit 905922655bc13858e9ba63a48046336b92a6db4a for ENNEA-RP-27 after local validation and scope validation passed."
       }
     ],
     "failure_reason": null,
@@ -14938,7 +14943,7 @@
       ],
       "evidence": "Changed files are confined to recovery action content in state/type registries plus train ledger reconciliation."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-27: fix(enneagram): repair recovery action",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
