@@ -18,7 +18,7 @@
         {
             "section_key": "test_goal",
             "title": "测试目标",
-            "body": "FermatMind 九型人格测试的目标不是把用户压缩成一个不可改变的号码，而是提供一套可阅读、可观察、可反馈的动力结构说明。系统优先交付主候选、Top3、全谱、close-call 与方法边界，再把用户带回现实观察。",
+            "body": "FermatMind 九型人格测试的目标不是把用户压缩成一个不可改变的号码，也不是宣称已经完成临床级人格测量；它提供一套可阅读、可观察、可反馈的动力结构说明。系统优先交付主候选、Top3、全谱、close-call 与方法边界，再把用户带回现实观察。Technical Note 用来说明这些页面模块怎样从作答信号、解释规则和运营指标中生成，以及哪些结论仍只能作为理论解释或产品假设。",
             "metric_refs": [],
             "data_status": "available",
             "content_maturity": "p0_ready",
@@ -27,7 +27,7 @@
         {
             "section_key": "e105_fc144_forms",
             "title": "E105 与 FC144 两个 form",
-            "body": "E105 是标准版入口，用 Likert 强度建立全谱与 Top3；FC144 是 close-call 后的深度辨析 form，用 forced-choice 帮助用户在相近候选之间做更谨慎的观察。两者属于同一模型，但题型和分数来源不同。",
+            "body": "E105 是标准版入口，用 Likert 强度建立全谱与 Top3；FC144 是 close-call 后的深度辨析 form，用 forced-choice 帮助用户在相近候选之间观察取舍。两者属于同一 ENNEAGRAM 模型，但题型、分数来源和适用问题不同。Technical Note 会把它们放在同一证据层级里说明：FC144 不是更高权威版本，也不用于覆盖 E105 的 primary candidate。",
             "metric_refs": [],
             "data_status": "available",
             "content_maturity": "p0_ready",
@@ -58,7 +58,7 @@
         {
             "section_key": "confidence_band",
             "title": "Confidence Band",
-            "body": "当前系统会输出 clear、close_call、diffuse、low_quality 等解释范围。它们控制的是结果页语气、模块显隐与推荐动作，而不是宣称某个号码已经被绝对证明。",
+            "body": "当前系统会输出 clear、close_call、diffuse、low_quality 等解释范围。它们控制的是结果页语气、模块显隐与推荐动作，而不是宣称某个号码已经被绝对证明。clear 表示本次同一 form 的解释较集中；close_call 表示需要并排阅读；diffuse 表示需要降低单一号码语气；low_quality 表示作答信号不足以支撑强解释。",
             "metric_refs": [
                 "confidence_band_distribution"
             ],
@@ -104,7 +104,7 @@
         {
             "section_key": "retake_stability",
             "title": "Retake Stability",
-            "body": "重测稳定性是后续 Technical Note 会持续跟踪的指标。P0 先公开定义和采集计划，不提前承诺具体稳定率数字。",
+            "body": "重测稳定性是后续 Technical Note 会持续跟踪的指标。P0 先公开定义和采集计划，不提前承诺具体稳定率数字。稳定性证据需要区分同一 form 重测、跨 form agreement、短期状态波动和用户反馈；在样本、时间间隔与作答质量不足时，页面不会把一次重测差异解释成人格改变。",
             "metric_refs": [
                 "retake_consistency_index",
                 "top1_stability",
@@ -117,7 +117,7 @@
         {
             "section_key": "e105_fc144_agreement",
             "title": "E105 / FC144 Agreement",
-            "body": "E105 与 FC144 的 agreement 用于评估双题型在 Top1 或 Top3 上的重叠度，而不是用来证明二者可以直接比较分数。P0 先定义指标与采集方向，后续再基于样本评估是否公开具体指标。",
+            "body": "E105 与 FC144 的 agreement 用于评估双题型在 Top1 或 Top3 上的重叠度，而不是用来证明二者可以直接比较分数。P0 先定义指标与采集方向，后续再基于样本评估是否公开具体指标。agreement 只能说明两个题型在候选排序上的一致程度，不能单独证明九型人格模型的外部效度、临床效度或职业预测能力。",
             "metric_refs": [
                 "E105_FC144_agreement",
                 "close_call_conversion"
@@ -129,7 +129,7 @@
         {
             "section_key": "resonance_feedback",
             "title": "Resonance Feedback",
-            "body": "用户的 Day7 resonance feedback 和 user_confirmed_type 会作为自我观察证据进入历史，用于研究和内容校准，但不会静默覆盖 primary_candidate。用户反馈是观察层，不是系统重判。",
+            "body": "用户的 Day7 resonance feedback 和 user_confirmed_type 会作为自我观察证据进入历史，用于研究和内容校准，但不会静默覆盖 primary_candidate。用户反馈是观察层，不是系统重判；它可以提示哪些叙述需要降权、补充反例或改写表达，但不能把共鸣感直接等同于测量正确性。",
             "metric_refs": [
                 "resonance_feedback",
                 "observation_completion_rate"
@@ -141,7 +141,7 @@
         {
             "section_key": "method_boundaries",
             "title": "方法边界",
-            "body": "本测试用于人格模式理解与自我观察，不用于临床诊断、招聘筛选、治疗建议或绝对人格定性。wing、arrow、subtype 与发展阶段语言在当前版本只作为解释层或未来模块保留位，不做硬判。",
+            "body": "本测试用于人格模式理解与自我观察，不用于临床诊断、招聘筛选、治疗建议、健康层级硬判或绝对人格定性。wing、arrow、subtype 与发展阶段语言在当前版本只作为解释层或未来模块保留位，不做硬判。Technical Note 的证据层级默认分为：已上线的产品规则、正在采集的运营指标、计划中的稳定性指标、以及仅作理论背景的解释框架；这些层级不能混写成同一种确定性。",
             "metric_refs": [],
             "data_status": "available",
             "content_maturity": "p0_ready",
@@ -150,7 +150,7 @@
         {
             "section_key": "privacy",
             "title": "隐私与数据",
-            "body": "公开说明只使用聚合后的方法指标。share 页面不默认展示 observation 私密内容，user_confirmed_type 也不会被当作系统最终类型。用户反馈和样例内容都应遵守最小必要与可回溯原则。",
+            "body": "公开说明只使用聚合后的方法指标，不公开个人 answer payload、私密 observation 文本或可识别单个用户的反馈记录。share 页面不默认展示 observation 私密内容，user_confirmed_type 也不会被当作系统最终类型。用户反馈、样例内容和 Technical Note 指标都应遵守最小必要、聚合展示和可回溯原则；若某项指标仍处于 planned 或 collecting 状态，页面只说明定义与采集方向，不展示伪造数字。",
             "metric_refs": [],
             "data_status": "available",
             "content_maturity": "p0_ready",
