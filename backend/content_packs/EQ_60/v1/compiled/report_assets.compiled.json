@@ -2,7 +2,7 @@
     "schema": "eq_60.report_assets.compiled.v1",
     "pack_id": "EQ_60",
     "pack_version": "v1",
-    "generated_at": "2026-07-03T04:03:50.514174Z",
+    "generated_at": "2026-07-03T04:30:23.158378Z",
     "assets": {
         "scientific_contract": {
             "schema": "eq60.report_assets.scientific_contract.v1",
@@ -27020,19 +27020,19 @@
                 "eq.evidence.content_validity": {
                     "zh-CN": {
                         "status": "preliminary",
-                        "body": "题项和报告维度已有内容映射，但需要持续专家复核和用户反馈。 标准分、百分位和等级只表示阶段性样本中的自我报告相对位置，不是能力排名。",
-                        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
-                        "user_facing_status_label": "证据持续建设中",
-                        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
-                        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
+                        "body": "EQ-60 的题项、四维结构和结果页解释已经按“自我报告的情绪与关系功能”做了内容映射。当前证据重点支持内容覆盖和解释边界，不等同于正式效标验证或能力测量。",
+                        "do_not_overread": "不要把当前证据状态读成正式能力测验、认证结论、临床判断、招聘依据、职业预测或高风险决策证据。",
+                        "user_facing_status_label": "内容证据：初步建立",
+                        "what_this_means_for_user": "你可以把报告当作结构化自我反思工具，帮助整理情绪觉察、调节、共情和关系管理的自我感知线索。",
+                        "next_validation_step": "继续由心理测量、临床边界和本地化审阅人员复核题项覆盖、维度归属、文化语境和误读风险。"
                     },
                     "en": {
                         "status": "preliminary",
-                        "body": "Items and report dimensions have content mapping, with ongoing need for expert review and user feedback. Standard scores, percentiles, and bands describe provisional relative position within a self-report sample, not an ability ranking.",
-                        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
-                        "user_facing_status_label": "Evidence is still being built",
-                        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
-                        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
+                        "body": "EQ-60 items, the four-dimension structure, and result-page interpretations have been mapped to self-reported emotional and relational functioning. The current evidence mainly supports content coverage and interpretation boundaries, not formal criterion validation or ability measurement.",
+                        "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                        "user_facing_status_label": "Content evidence: preliminary",
+                        "what_this_means_for_user": "Use the report as a structured self-reflection tool for organizing self-perceived signals in awareness, regulation, empathy, and relationship management.",
+                        "next_validation_step": "Continue review by psychometric, boundary, and localization reviewers for item coverage, dimension assignment, cultural context, and misinterpretation risk."
                     },
                     "meta": {
                         "id": "eq.evidence.content_validity",
@@ -27042,26 +27042,26 @@
                             "evidence_area": "content_validity"
                         },
                         "claim_sensitivity": "high",
-                        "claim_risk": "medium",
-                        "risk_notes": "Evidence status asset; keep validity boundary explicit. Keep this as self-report interpretation with explicit non-clinical, non-hiring, and non-ability boundaries."
+                        "claim_risk": "high",
+                        "risk_notes": "Evidence status asset; keep self-report, provisional norm, non-ability, non-clinical, non-hiring, non-career-prediction, and non-high-stakes boundaries explicit."
                     }
                 },
                 "eq.evidence.internal_consistency": {
                     "zh-CN": {
                         "status": "planned",
-                        "body": "后续应按语言、地区和维度计算内部一致性，并记录版本。 标准分、百分位和等级只表示阶段性样本中的自我报告相对位置，不是能力排名。",
-                        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
-                        "user_facing_status_label": "证据持续建设中",
-                        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
-                        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
+                        "body": "内部一致性需要在足够样本量下按语言、地区和维度分别估计，并随题库和报告版本记录。当前页面不应展示为已完成的信度结论。",
+                        "do_not_overread": "不要把当前证据状态读成正式能力测验、认证结论、临床判断、招聘依据、职业预测或高风险决策证据。",
+                        "user_facing_status_label": "内部一致性：计划验证",
+                        "what_this_means_for_user": "当前维度分可以帮助阅读本次作答模式，但不应被当作已经完成充分信度验证的稳定测量结果。",
+                        "next_validation_step": "积累样本后报告各维度的 alpha/omega 或更合适的信度指标，并检查低质量作答对信度估计的影响。"
                     },
                     "en": {
                         "status": "planned",
-                        "body": "Future work should estimate internal consistency by language, region, and dimension with version tracking. Standard scores, percentiles, and bands describe provisional relative position within a self-report sample, not an ability ranking.",
-                        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
-                        "user_facing_status_label": "Evidence is still being built",
-                        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
-                        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
+                        "body": "Internal consistency should be estimated by language, region, and dimension after sufficient sample accumulation, with version tracking for item and report changes. The current page should not imply completed reliability evidence.",
+                        "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                        "user_facing_status_label": "Internal consistency: planned",
+                        "what_this_means_for_user": "Dimension scores can help read this response pattern, but should not be treated as fully reliability-validated stable measures.",
+                        "next_validation_step": "After sample growth, report alpha/omega or more suitable reliability indices by dimension and inspect the effect of low-quality responses on estimates."
                     },
                     "meta": {
                         "id": "eq.evidence.internal_consistency",
@@ -27071,26 +27071,26 @@
                             "evidence_area": "internal_consistency"
                         },
                         "claim_sensitivity": "high",
-                        "claim_risk": "medium",
-                        "risk_notes": "Evidence status asset; keep validity boundary explicit. Keep this as self-report interpretation with explicit non-clinical, non-hiring, and non-ability boundaries."
+                        "claim_risk": "high",
+                        "risk_notes": "Evidence status asset; keep self-report, provisional norm, non-ability, non-clinical, non-hiring, non-career-prediction, and non-high-stakes boundaries explicit."
                     }
                 },
                 "eq.evidence.test_retest": {
                     "zh-CN": {
                         "status": "planned",
-                        "body": "建议在 30–90 天窗口评估稳定性和可变性。 标准分、百分位和等级只表示阶段性样本中的自我报告相对位置，不是能力排名。",
-                        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
-                        "user_facing_status_label": "证据持续建设中",
-                        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
-                        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
+                        "body": "重测稳定性尚需在合适时间窗内观察。EQ-60 涉及自我感知，短期生活压力、关系事件和作答状态都可能影响结果。",
+                        "do_not_overread": "不要把当前证据状态读成正式能力测验、认证结论、临床判断、招聘依据、职业预测或高风险决策证据。",
+                        "user_facing_status_label": "重测稳定性：计划验证",
+                        "what_this_means_for_user": "如果你的近期状态变化很大，请把本次结果视为当前阶段的自我报告快照，而不是永久标签。",
+                        "next_validation_step": "在 30–90 天等合理窗口内比较复测结果，区分稳定自我感知、情境波动和低质量作答影响。"
                     },
                     "en": {
                         "status": "planned",
-                        "body": "A 30–90 day window should be used to evaluate stability and change. Standard scores, percentiles, and bands describe provisional relative position within a self-report sample, not an ability ranking.",
-                        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
-                        "user_facing_status_label": "Evidence is still being built",
-                        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
-                        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
+                        "body": "Test-retest stability still needs observation over appropriate time windows. EQ-60 is self-report, so recent stress, relationship events, and response state may influence results.",
+                        "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                        "user_facing_status_label": "Test-retest stability: planned",
+                        "what_this_means_for_user": "If your recent circumstances have shifted substantially, read this result as a current self-report snapshot rather than a permanent label.",
+                        "next_validation_step": "Compare retests over reasonable windows such as 30–90 days to separate stable self-perception, situational fluctuation, and low-quality response effects."
                     },
                     "meta": {
                         "id": "eq.evidence.test_retest",
@@ -27100,26 +27100,26 @@
                             "evidence_area": "test_retest"
                         },
                         "claim_sensitivity": "high",
-                        "claim_risk": "medium",
-                        "risk_notes": "Evidence status asset; keep validity boundary explicit. Keep this as self-report interpretation with explicit non-clinical, non-hiring, and non-ability boundaries."
+                        "claim_risk": "high",
+                        "risk_notes": "Evidence status asset; keep self-report, provisional norm, non-ability, non-clinical, non-hiring, non-career-prediction, and non-high-stakes boundaries explicit."
                     }
                 },
                 "eq.evidence.factor_structure": {
                     "zh-CN": {
                         "status": "planned",
-                        "body": "需要用 EFA/CFA 或其他合适方法验证四维结构。 标准分、百分位和等级只表示阶段性样本中的自我报告相对位置，不是能力排名。",
-                        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
-                        "user_facing_status_label": "证据持续建设中",
-                        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
-                        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
+                        "body": "四维模型目前是报告解释框架，仍需用适合的探索性/验证性方法检验题项是否稳定支持 SA、ER、EM、RM 四个维度。",
+                        "do_not_overread": "不要把当前证据状态读成正式能力测验、认证结论、临床判断、招聘依据、职业预测或高风险决策证据。",
+                        "user_facing_status_label": "结构证据：计划验证",
+                        "what_this_means_for_user": "四维矩阵适合帮助你组织阅读，但不应被理解为已经完成充分跨样本验证的最终因子模型。",
+                        "next_validation_step": "在更大样本中进行 EFA/CFA、项目载荷、维度相关和模型拟合检查，并按语言版本分别复核。"
                     },
                     "en": {
                         "status": "planned",
-                        "body": "The four-dimension structure should be evaluated with EFA/CFA or suitable methods. Standard scores, percentiles, and bands describe provisional relative position within a self-report sample, not an ability ranking.",
-                        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
-                        "user_facing_status_label": "Evidence is still being built",
-                        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
-                        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
+                        "body": "The four-dimension model currently serves as the report interpretation framework. Suitable exploratory/confirmatory analyses are still needed to test whether items consistently support SA, ER, EM, and RM.",
+                        "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                        "user_facing_status_label": "Structure evidence: planned",
+                        "what_this_means_for_user": "The four-quadrant matrix is useful for organizing the report, but should not be read as a fully cross-sample-validated final factor model.",
+                        "next_validation_step": "Use larger samples to examine EFA/CFA results, item loadings, dimension correlations, and model fit, with separate checks by language version."
                     },
                     "meta": {
                         "id": "eq.evidence.factor_structure",
@@ -27129,26 +27129,26 @@
                             "evidence_area": "factor_structure"
                         },
                         "claim_sensitivity": "high",
-                        "claim_risk": "medium",
-                        "risk_notes": "Evidence status asset; keep validity boundary explicit. Keep this as self-report interpretation with explicit non-clinical, non-hiring, and non-ability boundaries."
+                        "claim_risk": "high",
+                        "risk_notes": "Evidence status asset; keep self-report, provisional norm, non-ability, non-clinical, non-hiring, non-career-prediction, and non-high-stakes boundaries explicit."
                     }
                 },
                 "eq.evidence.criterion_validity": {
                     "zh-CN": {
                         "status": "planned",
-                        "body": "可探索与工作满意、关系满意、压力恢复等低风险外部指标的关联。 标准分、百分位和等级只表示阶段性样本中的自我报告相对位置，不是能力排名。",
-                        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
-                        "user_facing_status_label": "证据持续建设中",
-                        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
-                        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
+                        "body": "外部关联证据尚未用于支持高风险判断。未来只能探索与低风险指标的关联，例如自我报告的压力恢复、沟通满意度或成长目标完成度。",
+                        "do_not_overread": "不要把当前证据状态读成正式能力测验、认证结论、临床判断、招聘依据、职业预测或高风险决策证据。",
+                        "user_facing_status_label": "外部关联证据：计划探索",
+                        "what_this_means_for_user": "当前结果不能证明工作表现、关系结局、心理健康状态或职业成功，只能作为自我理解和低风险行动规划的参考。",
+                        "next_validation_step": "设计低风险、非招聘、非临床的外部指标研究，并明确相关不等于预测或因果。"
                     },
                     "en": {
                         "status": "planned",
-                        "body": "Associations with low-risk external indicators such as work satisfaction, relationship satisfaction, and recovery may be explored. Standard scores, percentiles, and bands describe provisional relative position within a self-report sample, not an ability ranking.",
-                        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
-                        "user_facing_status_label": "Evidence is still being built",
-                        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
-                        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
+                        "body": "External-association evidence is not being used to support high-stakes decisions. Future work may only explore links with low-risk indicators such as self-reported recovery, communication satisfaction, or growth-goal completion.",
+                        "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                        "user_facing_status_label": "External association evidence: planned",
+                        "what_this_means_for_user": "The result does not prove job performance, relationship outcomes, mental-health status, or career success. It is a reference for self-understanding and low-risk action planning.",
+                        "next_validation_step": "Design low-risk, non-hiring, non-clinical external-indicator studies and state clearly that association is not prediction or causation."
                     },
                     "meta": {
                         "id": "eq.evidence.criterion_validity",
@@ -27158,26 +27158,26 @@
                             "evidence_area": "criterion_validity"
                         },
                         "claim_sensitivity": "high",
-                        "claim_risk": "medium",
-                        "risk_notes": "Evidence status asset; keep validity boundary explicit. Keep this as self-report interpretation with explicit non-clinical, non-hiring, and non-ability boundaries."
+                        "claim_risk": "high",
+                        "risk_notes": "Evidence status asset; keep self-report, provisional norm, non-ability, non-clinical, non-hiring, non-career-prediction, and non-high-stakes boundaries explicit."
                     }
                 },
                 "eq.evidence.measurement_invariance": {
                     "zh-CN": {
                         "status": "planned",
-                        "body": "中英文和主要人群组之间需要做等值或 DIF 检查。 标准分、百分位和等级只表示阶段性样本中的自我报告相对位置，不是能力排名。",
-                        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
-                        "user_facing_status_label": "证据持续建设中",
-                        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
-                        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
+                        "body": "中英文版本、不同地区和不同用户群之间的等值性仍需检验。没有等值性证据时，不应直接比较不同语言或群体的分数含义。",
+                        "do_not_overread": "不要把当前证据状态读成正式能力测验、认证结论、临床判断、招聘依据、职业预测或高风险决策证据。",
+                        "user_facing_status_label": "跨语言/群体等值性：计划验证",
+                        "what_this_means_for_user": "中文和英文报告都可以用于本地化自我反思，但不要把不同语言、文化或群体之间的百分位差异读成能力差异。",
+                        "next_validation_step": "按语言和主要用户群检查 DIF、项目理解差异、维度结构和分数分布，必要时调整解释而不是强行统一。"
                     },
                     "en": {
                         "status": "planned",
-                        "body": "Chinese/English and major user groups require invariance or DIF checks. Standard scores, percentiles, and bands describe provisional relative position within a self-report sample, not an ability ranking.",
-                        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
-                        "user_facing_status_label": "Evidence is still being built",
-                        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
-                        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
+                        "body": "Measurement invariance across Chinese/English versions, regions, and user groups still needs testing. Without invariance evidence, score meanings should not be directly compared across languages or groups.",
+                        "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                        "user_facing_status_label": "Language/group invariance: planned",
+                        "what_this_means_for_user": "Both Chinese and English reports can support localized self-reflection, but percentile differences across languages, cultures, or groups should not be read as ability differences.",
+                        "next_validation_step": "Check DIF, item interpretation differences, dimension structure, and score distributions by language and major user group; adjust interpretation where needed rather than forcing equivalence."
                     },
                     "meta": {
                         "id": "eq.evidence.measurement_invariance",
@@ -27187,26 +27187,26 @@
                             "evidence_area": "measurement_invariance"
                         },
                         "claim_sensitivity": "high",
-                        "claim_risk": "medium",
-                        "risk_notes": "Evidence status asset; keep validity boundary explicit. Keep this as self-report interpretation with explicit non-clinical, non-hiring, and non-ability boundaries."
+                        "claim_risk": "high",
+                        "risk_notes": "Evidence status asset; keep self-report, provisional norm, non-ability, non-clinical, non-hiring, non-career-prediction, and non-high-stakes boundaries explicit."
                     }
                 },
                 "eq.evidence.norm_status": {
                     "zh-CN": {
                         "status": "provisional",
-                        "body": "当前常模解释为阶段性版本，不应被理解为最终全球常模。 标准分、百分位和等级只表示阶段性样本中的自我报告相对位置，不是能力排名。",
-                        "do_not_overread": "当前证据状态不支持把分数读成正式常模排名、能力排名或高风险决策依据。",
-                        "user_facing_status_label": "证据持续建设中",
-                        "what_this_means_for_user": "请把结果用于自我理解、沟通反思和低风险成长规划；不要用于诊断、招聘、职业预测或能力证明。",
-                        "next_validation_step": "后续仍需要更大样本、重测稳定性、语言/群体等值性、专家审阅和低风险外部指标验证。"
+                        "body": "当前标准分、百分位和等级采用阶段性常模口径。它们表示在当前样本和版本中的相对自我报告位置，不是全球正式常模、能力排名或现实表现排名。",
+                        "do_not_overread": "不要把当前证据状态读成正式能力测验、认证结论、临床判断、招聘依据、职业预测或高风险决策证据。",
+                        "user_facing_status_label": "常模状态：阶段性",
+                        "what_this_means_for_user": "分数适合帮助你定位本次作答的大致相对位置，但不适合用于比较个人价值、能力高低、职业前景或关系质量。",
+                        "next_validation_step": "继续扩大样本、分层检查语言/地区/年龄等变量，定期发布常模版本说明和解释限制。"
                     },
                     "en": {
                         "status": "provisional",
-                        "body": "Current norms are provisional and should not be read as final global norms. Standard scores, percentiles, and bands describe provisional relative position within a self-report sample, not an ability ranking.",
-                        "do_not_overread": "The current evidence status does not support reading scores as final norm rankings, ability rankings, or high-stakes decision evidence.",
-                        "user_facing_status_label": "Evidence is still being built",
-                        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and low-risk growth planning; not for diagnosis, hiring, career prediction, or ability proof.",
-                        "next_validation_step": "Future validation still needs larger samples, retest stability, language/group invariance, expert review, and low-risk external indicators."
+                        "body": "Current standard scores, percentiles, and bands use a provisional norming approach. They describe relative self-report position in the current sample and version, not final global norms, ability ranking, or real-world performance ranking.",
+                        "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                        "user_facing_status_label": "Norm status: provisional",
+                        "what_this_means_for_user": "Scores can help locate this response pattern roughly within the current sample, but should not be used to compare personal worth, ability level, career prospects, or relationship quality.",
+                        "next_validation_step": "Continue expanding samples, stratify by language/region/age and related variables, and publish norm-version notes with interpretation limits."
                     },
                     "meta": {
                         "id": "eq.evidence.norm_status",
@@ -27216,8 +27216,8 @@
                             "evidence_area": "norm_status"
                         },
                         "claim_sensitivity": "high",
-                        "claim_risk": "medium",
-                        "risk_notes": "Evidence status asset; keep validity boundary explicit. Keep this as self-report interpretation with explicit non-clinical, non-hiring, and non-ability boundaries."
+                        "claim_risk": "high",
+                        "risk_notes": "Evidence status asset; keep self-report, provisional norm, non-ability, non-clinical, non-hiring, non-career-prediction, and non-high-stakes boundaries explicit."
                     }
                 }
             }

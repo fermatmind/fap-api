@@ -28229,8 +28229,17 @@
     ]
   },
   "PR-EQ-ASSET-SCI-11": {
+    "id": "PR-EQ-ASSET-SCI-11",
+    "repo": "fap-api",
     "base": "main",
     "branch": "codex/pr-eq-asset-sci-11-cross-assessment",
+    "title": "PR-EQ-ASSET-SCI-11: repair EQ cross_assessment_context boundaries",
+    "depends_on": [
+      "PR-EQ-ASSET-SCI-05"
+    ],
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "0d92a535b764d8fd69c07804ee72e8d1df015791",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2661",
     "checks": [
       {
         "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan content:lint --pack=EQ_60 --pack-version=v1",
@@ -28278,40 +28287,12 @@
         "summary": "All GitHub checks passed; mergeStateStatus CLEAN; scope revalidation passed."
       }
     ],
-    "commit_sha": "552ea19055ead7709d10bb91be0313e9ba0398fa",
-    "depends_on": [
-      "PR-EQ-ASSET-SCI-05"
-    ],
     "failure_reason": null,
-    "history": [
-      {
-        "notes": "Started PR-EQ-ASSET-SCI-11 from origin/main after PR-EQ-ASSET-SCI-10 merged; scope limited to cross_assessment_context assets, compiled report assets, and train state.",
-        "status": "in_progress",
-        "timestamp": "2026-07-03T12:16:00+08:00"
-      },
-      {
-        "notes": "All required local checks and cross-assessment guard scan passed; ready to commit and open PR.",
-        "status": "local_checks_passed",
-        "timestamp": "2026-07-03T12:26:00+08:00"
-      },
-      {
-        "notes": "Opened PR #2661 for PR-EQ-ASSET-SCI-11; GitHub checks pending.",
-        "status": "pr_open_checks_pending",
-        "timestamp": "2026-07-03T12:30:00+08:00"
-      },
-      {
-        "notes": "GitHub checks passed, mergeStateStatus CLEAN, and scope revalidation passed for PR #2661.",
-        "status": "ready_to_merge",
-        "timestamp": "2026-07-03T12:38:00+08:00"
-      }
-    ],
-    "id": "PR-EQ-ASSET-SCI-11",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/2661",
-    "remote_branch_deleted": false,
-    "repo": "fap-api",
+    "merged_at": "2026-07-03T04:16:28Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
+      "status": "pass",
       "changed_files": [
         "backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json",
         "backend/content_packs/EQ_60/v1/raw/report_assets/cross_assessment_context.json",
@@ -28319,16 +28300,40 @@
         "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/cross_assessment_context.json",
         "docs/codex/pr-train-state.json"
       ],
-      "evidence": "Scope validation passed against PR-EQ-ASSET-SCI-11 allowed_paths.",
-      "status": "pass"
+      "evidence": "Scope validation passed against PR-EQ-ASSET-SCI-11 allowed_paths."
     },
-    "status": "ready_to_merge",
-    "title": "PR-EQ-ASSET-SCI-11: repair EQ cross_assessment_context boundaries",
     "transitions": [
       {
         "at": "2026-07-02T16:12:11.904905Z",
         "status": "user_authorized",
         "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ],
+    "history": [
+      {
+        "status": "in_progress",
+        "timestamp": "2026-07-03T12:16:00+08:00",
+        "notes": "Started PR-EQ-ASSET-SCI-11 from origin/main after PR-EQ-ASSET-SCI-10 merged; scope limited to cross_assessment_context assets, compiled report assets, and train state."
+      },
+      {
+        "status": "local_checks_passed",
+        "timestamp": "2026-07-03T12:26:00+08:00",
+        "notes": "All required local checks and cross-assessment guard scan passed; ready to commit and open PR."
+      },
+      {
+        "status": "pr_open_checks_pending",
+        "timestamp": "2026-07-03T12:30:00+08:00",
+        "notes": "Opened PR #2661 for PR-EQ-ASSET-SCI-11; GitHub checks pending."
+      },
+      {
+        "status": "ready_to_merge",
+        "timestamp": "2026-07-03T12:38:00+08:00",
+        "notes": "GitHub checks passed, mergeStateStatus CLEAN, and scope revalidation passed for PR #2661."
+      },
+      {
+        "status": "merged_post_merge_revalidated",
+        "timestamp": "2026-07-03T12:44:00+08:00",
+        "notes": "PR #2661 merged; origin/main contains merge commit 0d92a535b764d8fd69c07804ee72e8d1df015791; local worktree and branch cleanup completed before starting SCI-14."
       }
     ]
   },
@@ -28545,34 +28550,107 @@
     ]
   },
   "PR-EQ-ASSET-SCI-14": {
+    "id": "PR-EQ-ASSET-SCI-14",
+    "repo": "fap-api",
     "base": "main",
     "branch": "codex/pr-eq-asset-sci-14-evidence-status",
-    "checks": [],
-    "commit_sha": null,
+    "title": "PR-EQ-ASSET-SCI-14: repair EQ psychometric_evidence_status language",
     "depends_on": [
       "PR-EQ-ASSET-SCI-03",
       "PR-EQ-ASSET-SCI-04"
     ],
+    "status": "ready_to_merge",
+    "commit_sha": "131d0f125e495490d07869ecda8315a0ddb9c4bc",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2664",
+    "checks": [
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan content:lint --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content lint passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan content:compile --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content compile passed; scoped report_assets compiled output retained and mirrored."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60ContentGateTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warning; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60V5ReportContractTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warnings; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60GoldenCasesTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warning; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60ReportPaywallTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warnings; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60SubmitQualityContractTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warning; assertions passed."
+      },
+      {
+        "command": "YAML/JSON parse, EQ pack mirror cmp, scope validation, psychometric evidence guard scan, git diff --check, git diff --cached --check",
+        "status": "passed",
+        "summary": "Manifest/state parsed, raw and compiled mirrors match, changed files are within SCI-14 scope, evidence status assets have required bilingual boundary fields and no commerce/positive forbidden claims, and no whitespace errors were found."
+      },
+      {
+        "command": "GitHub PR checks and merge-state review",
+        "status": "passed",
+        "summary": "All GitHub checks passed; mergeStateStatus CLEAN; scope revalidation passed."
+      }
+    ],
     "failure_reason": null,
-    "id": "PR-EQ-ASSET-SCI-14",
-    "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
     "remote_branch_deleted": false,
-    "repo": "fap-api",
+    "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "github_checks_green": null,
-      "local_validation_passed": null,
-      "post_merge_revalidated": null
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json",
+        "backend/content_packs/EQ_60/v1/raw/report_assets/psychometric_evidence_status.json",
+        "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json",
+        "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/psychometric_evidence_status.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "evidence": "Scope validation passed against PR-EQ-ASSET-SCI-14 allowed_paths."
     },
-    "status": "user_authorized",
-    "title": "PR-EQ-ASSET-SCI-14: repair EQ psychometric_evidence_status language",
     "transitions": [
       {
         "at": "2026-07-02T16:12:11.904905Z",
         "status": "user_authorized",
         "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ],
+    "history": [
+      {
+        "status": "in_progress",
+        "timestamp": "2026-07-03T12:48:00+08:00",
+        "notes": "Started PR-EQ-ASSET-SCI-14 from origin/main after SCI-11 reconciliation; scope limited to psychometric_evidence_status assets, compiled report assets, and train state."
+      },
+      {
+        "status": "local_checks_passed",
+        "timestamp": "2026-07-03T13:07:00+08:00",
+        "notes": "All required local checks and psychometric evidence guard scan passed; ready to commit and open PR."
+      },
+      {
+        "status": "pr_open_checks_pending",
+        "timestamp": "2026-07-03T13:12:00+08:00",
+        "notes": "Opened PR #2664 for PR-EQ-ASSET-SCI-14; GitHub checks pending."
+      },
+      {
+        "status": "ready_to_merge",
+        "timestamp": "2026-07-03T13:38:00+08:00",
+        "notes": "GitHub checks passed, mergeStateStatus CLEAN, and scope revalidation passed for PR #2664."
       }
     ]
   },
