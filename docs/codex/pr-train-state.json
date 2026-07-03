@@ -15241,7 +15241,7 @@
         "command": "git diff --check"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "16ab62fa5e83c9b0495202533f8e9ec2c7c39646",
     "depends_on": [
       "ENNEA-RP-29"
     ],
@@ -15260,6 +15260,12 @@
         "at": "2026-07-03T11:00:57.812Z",
         "status": "local_validation_passed",
         "notes": "Required local checks passed and changed files remained within ENNEA-RP-30 scope."
+      },
+      {
+        "at": "2026-07-03T11:01:17.327Z",
+        "status": "committed",
+        "commit_sha": "16ab62fa5e83c9b0495202533f8e9ec2c7c39646",
+        "notes": "Implementation commit created after local validation."
       }
     ],
     "failure_reason": null,
@@ -15286,7 +15292,7 @@
       ],
       "evidence": "Changed files are confined to relationship_need scenario copy, relationship_pack.partner_facing_notes used by the relationship_need module, and train ledger reconciliation/status."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-30: fix(enneagram): repair relationship need",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
