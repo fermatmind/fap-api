@@ -69446,8 +69446,8 @@
       "PR-EQ-ASSET-SCI-05",
       "PR-EQ-ASSET-SCI-13"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "2b10f70a40f7d66eb6a59637a868aecb7721fe45",
+    "status": "merged_post_merge_revalidated",
+    "commit_sha": "acf77a56a7a371a635d9642701fa32a9da070fef",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2655",
     "checks": [
       {
@@ -69514,12 +69514,17 @@
         "command": "git diff --check && git diff --cached --check",
         "status": "passed",
         "summary": "No whitespace errors in unstaged or staged diff."
+      },
+      {
+        "command": "post-merge cleanup verification",
+        "status": "passed",
+        "notes": "Verified PR #2655 merged at acf77a56a7a371a635d9642701fa32a9da070fef; origin/main contains merge commit; task branch and temp worktree cleaned before starting PR-EQ-ASSET-SCI-10."
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-03T03:37:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "status": "pass",
       "changed_files": [
@@ -69560,6 +69565,13 @@
         "status": "ready_to_merge",
         "notes": "GitHub checks passed, mergeStateStatus CLEAN, and scope revalidation passed for PR #2655."
       }
+    ],
+    "history": [
+      {
+        "status": "merged_post_merge_revalidated",
+        "timestamp": "2026-07-03T11:45:00+08:00",
+        "notes": "Ledger reconciled inside PR-EQ-ASSET-SCI-10 after GitHub merge and cleanup of PR-EQ-ASSET-SCI-09."
+      }
     ]
   },
   "PR-EQ-ASSET-SCI-10": {
@@ -69571,25 +69583,83 @@
     "depends_on": [
       "PR-EQ-ASSET-SCI-03"
     ],
-    "status": "user_authorized",
+    "status": "in_progress",
     "commit_sha": null,
     "pr_url": null,
-    "checks": [],
+    "checks": [
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan content:lint --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content lint passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan content:compile --pack=EQ_60 --pack-version=v1",
+        "status": "passed",
+        "summary": "EQ_60 content compile passed; scoped report_assets compiled output retained and mirrored."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60ContentGateTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warning; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60V5ReportContractTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warnings; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60GoldenCasesTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warning; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60ReportPaywallTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warnings; assertions passed."
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60SubmitQualityContractTest",
+        "status": "passed",
+        "summary": "Passed with existing fixture path warning; assertions passed."
+      },
+      {
+        "command": "YAML/JSON parse, EQ pack mirror cmp, scope validation, sjt bridge guard scan, git diff --check, git diff --cached --check",
+        "status": "passed",
+        "summary": "Manifest/state parsed, raw and compiled mirrors match, changed files are within SCI-10 scope, SJT bridge remains unavailable, and no whitespace errors were found."
+      }
+    ],
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "status": "pass",
+      "changed_files": [
+        "backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json",
+        "backend/content_packs/EQ_60/v1/raw/report_assets/sjt_bridge.json",
+        "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json",
+        "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/sjt_bridge.json",
+        "docs/codex/pr-train-state.json"
+      ],
+      "evidence": "Scope validation passed against PR-EQ-ASSET-SCI-10 allowed_paths."
     },
     "transitions": [
       {
         "at": "2026-07-02T16:12:11.904905Z",
         "status": "user_authorized",
         "summary": "User explicitly authorized adding this EQ asset science repair PR train item and executing it in sequence."
+      }
+    ],
+    "history": [
+      {
+        "status": "in_progress",
+        "timestamp": "2026-07-03T11:45:00+08:00",
+        "notes": "Started PR-EQ-ASSET-SCI-10 from origin/main after PR-EQ-ASSET-SCI-09 merged; scope limited to sjt_bridge assets, compiled report assets, and train state."
+      },
+      {
+        "status": "local_checks_passed",
+        "timestamp": "2026-07-03T11:56:00+08:00",
+        "notes": "All required local checks and SJT bridge guard scan passed; ready to commit and open PR."
       }
     ]
   },
