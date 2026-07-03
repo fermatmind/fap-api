@@ -15698,7 +15698,7 @@
         "command": "git diff --check"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "b66380adb9f0dd8817ebdaa970213a4bec776237",
     "depends_on": [
       "ENNEA-RP-33"
     ],
@@ -15717,6 +15717,12 @@
         "at": "2026-07-03T12:22:24.816Z",
         "status": "local_validation_passed",
         "notes": "Required local checks passed and changed files remained within ENNEA-RP-34 scope."
+      },
+      {
+        "at": "2026-07-03T12:22:40.338Z",
+        "status": "committed",
+        "commit_sha": "b66380adb9f0dd8817ebdaa970213a4bec776237",
+        "notes": "Implementation commit created after local validation."
       }
     ],
     "failure_reason": null,
@@ -15743,7 +15749,7 @@
       ],
       "evidence": "Changed files are confined to communication_manual scenario copy, relationship_pack.communication_manual, and train ledger reconciliation/state."
     },
-    "status": "local_validation_passed",
+    "status": "committed",
     "title": "ENNEA-RP-34: fix(enneagram): repair communication manual",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
