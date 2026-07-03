@@ -6131,7 +6131,7 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         $this->assertSame('method_registry', data_get($manifest, 'selector_mapping.methodology_and_access.registry_key'));
 
         $this->assertTrue((bool) ($review['human_reviewed'] ?? false));
-        $this->assertSame('codex_canonical_profiles_candidate_normalize_01', $review['reviewed_by'] ?? null);
+        $this->assertSame('codex_canonical_profiles_scientific_repair_01', $review['reviewed_by'] ?? null);
         $this->assertSame('approved_for_staging', $review['review_status'] ?? null);
         $this->assertSame(['selector_asset_candidates.jsonl', 'content_asset_candidates.jsonl'], $review['approved_candidate_files'] ?? null);
         $this->assertFalse((bool) ($review['production_use_allowed'] ?? true));
@@ -6179,7 +6179,11 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertFalse((bool) ($row['ready_for_runtime'] ?? true));
             $this->assertFalse((bool) ($row['ready_for_production'] ?? true));
             $this->assertSame('canonical_profiles_revised_v0_3_normalized', data_get($row, 'provenance.candidate_stage'));
-            $this->assertSame('codex_canonical_profiles_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('codex_canonical_profiles_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('reduced', data_get($row, 'body_quality.profile_type_framing'));
+            $this->assertTrue((bool) data_get($row, 'body_quality.current_structure_framing'));
+            $this->assertSame('reduced', data_get($row, 'body_quality.identity_label_risk'));
+            $this->assertSame('BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
             $this->assertGreaterThanOrEqual(220, (int) data_get($row, 'body_quality.body_chars', 0));
             $this->assertLessThanOrEqual(340, (int) data_get($row, 'body_quality.body_chars', 999));
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));
@@ -6347,7 +6351,11 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertFalse((bool) ($row['ready_for_runtime'] ?? true));
             $this->assertFalse((bool) ($row['ready_for_production'] ?? true));
             $this->assertSame('canonical_profiles_revised_v0_3_normalized', data_get($row, 'provenance.candidate_stage'));
-            $this->assertSame('codex_canonical_profiles_candidate_normalize_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('codex_canonical_profiles_scientific_repair_01', data_get($row, 'body_quality.recalculated_by'));
+            $this->assertSame('reduced', data_get($row, 'body_quality.profile_type_framing'));
+            $this->assertTrue((bool) data_get($row, 'body_quality.current_structure_framing'));
+            $this->assertSame('reduced', data_get($row, 'body_quality.identity_label_risk'));
+            $this->assertSame('BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01', data_get($row, 'source_trace.scientific_repair_pr'));
             $this->assertGreaterThanOrEqual(220, (int) data_get($row, 'body_quality.body_chars', 0));
             $this->assertLessThanOrEqual(340, (int) data_get($row, 'body_quality.body_chars', 999));
             $this->assertFalse((bool) data_get($row, 'body_quality.has_editorial_leakage', true));

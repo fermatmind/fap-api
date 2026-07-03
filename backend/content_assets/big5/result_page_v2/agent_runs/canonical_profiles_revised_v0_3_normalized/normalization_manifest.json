@@ -20,7 +20,9 @@
     "mapped_selector_contract_fields_to_existing_canonical_profile_allowlists",
     "recalculated_body_quality",
     "added_human_review_manifest",
-    "deferred_staging_import"
+    "deferred_staging_import",
+    "rewrote_canonical_profile_visible_copy_as_current_structure_clues",
+    "removed_profile_identity_framing_from_titles_and_bodies"
   ],
   "production_use_allowed": false,
   "ready_for_pilot": false,
@@ -28,6 +30,11 @@
   "ready_for_runtime": false,
   "runtime_use": "staging_only",
   "schema": "fap.big5.result_page_v2.canonical_profiles.revised_v0_3.normalization_manifest.v0_1",
+  "scientific_editorial_repair": {
+    "pr": "BIG5-CANONICAL-PROFILES-SCIENTIFIC-REPAIR-01",
+    "scope": "canonical_profiles_only",
+    "status": "pass"
+  },
   "selector_mapping": {
     "action_plan": {
       "block_kind": "application_matrix",
