@@ -15150,13 +15150,19 @@
         "status": "committed",
         "commit_sha": "54aba963de2fe7c2fecf5ddd39e279966d89b402",
         "notes": "Implementation commit created after local validation."
+      },
+      {
+        "at": "2026-07-03T10:45:49.837Z",
+        "status": "pr_opened_github_checks_pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2696",
+        "notes": "PR opened; waiting for required GitHub checks."
       }
     ],
     "failure_reason": null,
     "id": "ENNEA-RP-29",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2696",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -15174,7 +15180,7 @@
       ],
       "evidence": "Changed files are confined to arrow placeholder copy in theory_hint_registry plus train ledger reconciliation/status for ENNEA-RP-28/29."
     },
-    "status": "committed",
+    "status": "pr_opened_github_checks_pending",
     "title": "ENNEA-RP-29: fix(enneagram): repair arrow placeholder",
     "train_scope": "enneagram_result_page_content_asset_repair"
   },
