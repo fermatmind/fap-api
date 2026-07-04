@@ -1,4 +1,97 @@
 {
+  "MBTI-CMS-13": {
+    "id": "MBTI-CMS-13",
+    "repo": "fap-api",
+    "title": "MBTI-CMS-13: add MBTI comparison CMS import dry-run",
+    "base": "main",
+    "branch": "codex/mbti-cms-13-comparison-import-dry-run",
+    "depends_on": [
+      "MBTI-CMS-12"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "2caacc1ac",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2720",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized continuing the MBTI asset PR train; MBTI-CMS-13 is added as the comparison CMS import dry-run line after merged MBTI-CMS-12."
+      },
+      "dependency_reconciliation": {
+        "status": "pass",
+        "evidence": "MBTI-CMS-12 PR #2719 is merged, and origin/main contains merge commit 5c27c98adb8755dfa252443531583d731408e2cc."
+      },
+      "focused_comparison_dry_run_contract": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityMbtiComparisonCmsImportDryRunCommandTest --no-ansi",
+        "evidence": "PASS: 5 tests, 54 assertions. Covers A/T and cross-type dry-run mapping, no-write flags, profile row rejection, localized private route/sensitive query fail-closed behavior, required --dry-run, and refused --write."
+      },
+      "focused_bigfive_runtime_freeze_classifier": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_comparison_cms_import_dry_run_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+        "evidence": "PASS: 2 tests, 4 assertions. The current PR dry-run command/planner files are explicitly classified as non-runtime-only, and the runtime path diff check passes locally."
+      },
+      "pint_targeted": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiComparisonCmsImportDryRun.php app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php tests/Feature/Console/PersonalityMbtiComparisonCmsImportDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "evidence": "PASS: 4 files."
+      },
+      "manifest_state_diff_validation": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "evidence": "PASS: train YAML parses, state JSON parses, and git diff whitespace check passes."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the MBTI-CMS-13 allowed paths: backend/app/Console/Commands/PersonalityMbtiComparisonCmsImportDryRun.php, backend/app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php, backend/tests/Feature/Console/PersonalityMbtiComparisonCmsImportDryRunCommandTest.php, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2720 head 2caacc1ac: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-04T22:12:00Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started backend-only MBTI comparison CMS import dry-run PR from latest main. Scope excludes profile import behavior, CMS writes, production imports, sitemap/llms/search release, and deploys."
+      },
+      {
+        "at": "2026-07-04T22:24:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Implemented comparison dry-run command/planner/test and BigFive classifier exemption. Focused PHPUnit, targeted Pint, train YAML parse, state JSON parse, diff check, and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-07-04T22:28:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed MBTI-CMS-13 comparison import dry-run scope at f51259f81."
+      },
+      {
+        "at": "2026-07-04T22:31:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2720 for MBTI-CMS-13 and pushed branch codex/mbti-cms-13-comparison-import-dry-run."
+      },
+      {
+        "at": "2026-07-04T22:39:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "PR #2720 remote checks passed on head 2caacc1ac. Marked ready to merge under squash merge policy."
+      }
+    ]
+  },
   "MBTI-CMS-12": {
     "base": "main",
     "branch": "codex/mbti-cms-12-profile-import-dry-run",
@@ -43,26 +136,30 @@
       "scope_validation": {
         "evidence": "Changed files are limited to the MBTI-CMS-12 allowed paths: backend/app/Console/Commands/PersonalityMbtiProfileCmsImportDryRun.php, backend/app/Services/Cms/MbtiProfileCmsImportDryRunPlanner.php, backend/tests/Feature/Console/PersonalityMbtiProfileCmsImportDryRunCommandTest.php, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json.",
         "status": "pass"
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #2719 is MERGED; origin/main contains merge commit 5c27c98adb8755dfa252443531583d731408e2cc; local main was synced to origin/main; task branch codex/mbti-cms-12-profile-import-dry-run was deleted locally and remotely; worktree was clean before MBTI-CMS-13 started."
       }
     },
-    "commit_sha": "9b0902d36e96675f6eb2b420a597a3695bdb9afb",
+    "commit_sha": "5c27c98adb8755dfa252443531583d731408e2cc",
     "depends_on": [
       "MBTI-GSC-11"
     ],
     "failure_reason": null,
     "id": "MBTI-CMS-12",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-04T22:08:32Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2719",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "allowed_paths_only": true,
       "github_checks_green": true,
       "local_validation_passed": true,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": true
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "MBTI-CMS-12: add MBTI profile CMS import dry-run",
     "transitions": [
       {
@@ -106,6 +203,12 @@
         "from": "ci_fix_local_checks_passed",
         "note": "PR #2719 remote checks passed on head 9b0902d36e96675f6eb2b420a597a3695bdb9afb after the classifier fix. Marked ready to merge under squash merge policy.",
         "to": "ready_to_merge"
+      },
+      {
+        "at": "2026-07-04T22:08:32Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in MBTI-CMS-13: GitHub reports PR #2719 merged with squash commit 5c27c98adb8755dfa252443531583d731408e2cc, origin/main contains the merge commit, local main was synced, and task branches were cleaned."
       }
     ]
   },
