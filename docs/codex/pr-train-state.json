@@ -8,9 +8,9 @@
     "depends_on": [
       "MBTI-CMS-12"
     ],
-    "status": "committed",
-    "commit_sha": "f51259f81",
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "a0105445e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2720",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -73,6 +73,12 @@
         "from": "local_checks_passed",
         "to": "committed",
         "note": "Committed MBTI-CMS-13 comparison import dry-run scope at f51259f81."
+      },
+      {
+        "at": "2026-07-04T22:31:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2720 for MBTI-CMS-13 and pushed branch codex/mbti-cms-13-comparison-import-dry-run."
       }
     ]
   },
