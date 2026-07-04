@@ -48837,7 +48837,7 @@
     "depends_on": [
       "IQ-BETA-STANDARD-SCORE-1"
     ],
-    "status": "committed",
+    "status": "pr_open",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
     "checks": {
       "iq_report_builder_unit": {
@@ -48883,8 +48883,8 @@
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
-    "commit_sha": "2c86ec4fa",
-    "pr_url": null,
+    "commit_sha": "40f3a6f18e8949a5f6df2f13cee440d1a2777668",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2714",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -48913,6 +48913,11 @@
         "at": "2026-07-04T13:31:21Z",
         "status": "committed",
         "summary": "Committed scoped IQ V1 safe scoring/report artifact claim fix at 2c86ec4fa."
+      },
+      {
+        "at": "2026-07-04T13:32:25Z",
+        "status": "pr_open",
+        "summary": "Opened PR #2714 after local validation passed and pushed branch codex/iq-v1-result-page-safe-scoring-qa-fix-01."
       }
     ]
   },
@@ -73525,7 +73530,7 @@
       "depends_on": [
         "IQ-BETA-STANDARD-SCORE-1"
       ],
-      "status": "committed",
+      "status": "pr_open",
       "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
       "checks": {
         "iq_report_builder_unit": {
@@ -73571,8 +73576,8 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "commit_sha": "2c86ec4fa",
-      "pr_url": null,
+      "commit_sha": "40f3a6f18e8949a5f6df2f13cee440d1a2777668",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2714",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -73601,6 +73606,11 @@
           "at": "2026-07-04T13:31:21Z",
           "status": "committed",
           "summary": "Committed scoped IQ V1 safe scoring/report artifact claim fix at 2c86ec4fa."
+        },
+        {
+          "at": "2026-07-04T13:32:25Z",
+          "status": "pr_open",
+          "summary": "Opened PR #2714 after local validation passed and pushed branch codex/iq-v1-result-page-safe-scoring-qa-fix-01."
         }
       ]
     },
@@ -78816,5 +78826,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-04T13:31:21Z"
+  "updated_at": "2026-07-04T13:32:25Z"
 }
