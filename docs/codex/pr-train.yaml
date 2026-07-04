@@ -28,6 +28,7 @@ prs:
       - backend/app/Console/Commands/PersonalityMbtiProfileCmsImportDryRun.php
       - backend/app/Services/Cms/MbtiProfileCmsImportDryRunPlanner.php
       - backend/tests/Feature/Console/PersonalityMbtiProfileCmsImportDryRunCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
@@ -38,7 +39,8 @@ prs:
       - Change public API routes, runtime personality rendering, content authority, canonical/noindex behavior, JSON-LD runtime, or production scheduler behavior.
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityMbtiProfileCmsImportDryRunCommandTest --no-ansi
-      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiProfileCmsImportDryRun.php app/Services/Cms/MbtiProfileCmsImportDryRunPlanner.php tests/Feature/Console/PersonalityMbtiProfileCmsImportDryRunCommandTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_profile_cms_import_dry_run_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiProfileCmsImportDryRun.php app/Services/Cms/MbtiProfileCmsImportDryRunPlanner.php tests/Feature/Console/PersonalityMbtiProfileCmsImportDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
