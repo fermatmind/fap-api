@@ -35,7 +35,7 @@
     "id": "MBTI-CMS-12",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2719",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_validation": {
@@ -44,7 +44,7 @@
       "local_validation_passed": true,
       "post_merge_revalidated": null
     },
-    "status": "committed",
+    "status": "pr_open",
     "title": "MBTI-CMS-12: add MBTI profile CMS import dry-run",
     "transitions": [
       {
@@ -64,6 +64,12 @@
         "from": "local_checks_passed",
         "note": "Committed MBTI-CMS-12 profile import dry-run scope at 5d56e561a7f2c7c2c6566438d9272543d4f8773b.",
         "to": "committed"
+      },
+      {
+        "at": "2026-07-04T21:30:00Z",
+        "from": "committed",
+        "note": "Opened PR #2719 for MBTI-CMS-12 and pushed branch codex/mbti-cms-12-profile-import-dry-run.",
+        "to": "pr_open"
       }
     ]
   },
