@@ -48935,7 +48935,7 @@
     "depends_on": [
       "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01"
     ],
-    "status": "local_validation_passed",
+    "status": "pr_open",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
     "checks": {
       "focused_positioning_lock": {
@@ -48976,8 +48976,8 @@
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "711404a81",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2715",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -49006,6 +49006,11 @@
         "at": "2026-07-04T13:42:16Z",
         "status": "local_validation_passed",
         "summary": "Added backend-owned IQ V1 positioning lock policy artifact and SeoIntel test coverage. Focused test, IQ filter suite, route list, JSON/YAML/diff, scoped Pint, and PHP lint passed. No runtime copy, CMS write, production deploy, payment, item bank, SEO runtime, sitemap, llms, canonical, noindex, or JSON-LD changes."
+      },
+      {
+        "at": "2026-07-04T13:43:07Z",
+        "status": "pr_open",
+        "summary": "Opened PR #2715 after local validation passed and pushed branch codex/iq-v1-positioning-lock-01."
       }
     ]
   },
@@ -73675,7 +73680,7 @@
       "depends_on": [
         "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01"
       ],
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
       "checks": {
         "focused_positioning_lock": {
@@ -73716,8 +73721,8 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "711404a81",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2715",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -73746,6 +73751,11 @@
           "at": "2026-07-04T13:42:16Z",
           "status": "local_validation_passed",
           "summary": "Added backend-owned IQ V1 positioning lock policy artifact and SeoIntel test coverage. Focused test, IQ filter suite, route list, JSON/YAML/diff, scoped Pint, and PHP lint passed. No runtime copy, CMS write, production deploy, payment, item bank, SEO runtime, sitemap, llms, canonical, noindex, or JSON-LD changes."
+        },
+        {
+          "at": "2026-07-04T13:43:07Z",
+          "status": "pr_open",
+          "summary": "Opened PR #2715 after local validation passed and pushed branch codex/iq-v1-positioning-lock-01."
         }
       ]
     },
@@ -78920,5 +78930,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-04T13:42:16Z"
+  "updated_at": "2026-07-04T13:43:07Z"
 }
