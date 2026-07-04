@@ -77,6 +77,10 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         ]);
         $this->assertCount(1, $response->json('questions.items'));
         $this->assertSame('IQOWNER30-Q01', $response->json('questions.items.0.question_id'));
+        $this->assertSame(
+            ['matrix_reasoning', 'pattern_recognition', 'visual_reasoning'],
+            $response->json('questions.items.0.safe_dimension_aliases')
+        );
         $this->assertOwnerOriginalQ1AssetsArePubliclyResolvable($response->json('questions.items.0'));
         $this->assertPayloadHasNoPrivateIqFields($response->json());
     }
@@ -109,6 +113,10 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         $this->assertOwnerOriginalQ1AssetsArePubliclyResolvable(
             $payload['questions']['items'][0],
             'https://api.fermatmind.com'
+        );
+        $this->assertSame(
+            ['matrix_reasoning', 'pattern_recognition', 'visual_reasoning'],
+            data_get($payload, 'questions.items.0.safe_dimension_aliases')
         );
         $this->assertPayloadHasNoPrivateIqFields($payload);
     }
@@ -448,6 +456,8 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
             'solutionRule',
             'source_capture_urls',
             'sourceCaptureUrls',
+            'asset_hashes',
+            'assetHashes',
             'generator_metadata',
             'generatorMetadata',
             'provenance',

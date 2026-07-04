@@ -31,6 +31,16 @@ final class IqOwnerOriginal30BankService
     private const PUBLIC_ASSET_ROUTE_PREFIX = 'iq_owner_original_30/';
 
     /**
+     * @var list<string>
+     */
+    private const SAFE_DIMENSION_ALIASES = [
+        'matrix_reasoning',
+        'visual_reasoning',
+        'pattern_recognition',
+        'spatial_reasoning',
+    ];
+
+    /**
      * @return array<string,mixed>
      */
     public function startMetadata(string $packId, string $dirVersion): array
@@ -382,6 +392,7 @@ final class IqOwnerOriginal30BankService
             'item_id' => (string) ($item['item_id'] ?? ''),
             'sequence' => (int) ($item['sequence'] ?? 0),
             'order' => (int) ($item['sequence'] ?? 0),
+            'safe_dimension_aliases' => $this->safeDimensionAliases($item),
             'title' => (string) ($item['title'] ?? ''),
             'stem' => $this->onlyPublicMediaFields(
                 is_array($item['stem'] ?? null) ? $item['stem'] : [],
@@ -389,6 +400,27 @@ final class IqOwnerOriginal30BankService
             ),
             'options' => $options,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @return list<string>
+     */
+    private function safeDimensionAliases(array $item): array
+    {
+        $aliases = is_array($item['safe_dimension_aliases'] ?? null)
+            ? $item['safe_dimension_aliases']
+            : [];
+
+        $safe = [];
+        foreach ($aliases as $alias) {
+            $alias = strtolower(trim((string) $alias));
+            if (in_array($alias, self::SAFE_DIMENSION_ALIASES, true)) {
+                $safe[] = $alias;
+            }
+        }
+
+        return array_values(array_unique($safe));
     }
 
     /**

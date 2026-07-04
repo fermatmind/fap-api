@@ -91,6 +91,38 @@ final class IqOwnerOriginal30PrivateScoringTest extends TestCase
     }
 
     #[Test]
+    public function public_items_include_only_v1_safe_dimension_aliases(): void
+    {
+        $items = $this->readJson('items.json')['items'] ?? [];
+        $this->assertCount(30, $items);
+
+        $allowed = [
+            'matrix_reasoning',
+            'visual_reasoning',
+            'pattern_recognition',
+            'spatial_reasoning',
+        ];
+        $forbidden = [
+            implode('_', ['working', 'memory']),
+            implode('_', ['processing', 'speed']),
+            implode('_', ['quantitative', 'reasoning']),
+            implode('_', ['verbal', 'comprehension']),
+        ];
+
+        foreach ($items as $index => $item) {
+            $aliases = $item['safe_dimension_aliases'] ?? null;
+            $this->assertIsArray($aliases, 'missing safe aliases for item '.($index + 1));
+            $this->assertNotEmpty($aliases, 'empty safe aliases for item '.($index + 1));
+            $this->assertSame(array_values(array_unique($aliases)), $aliases);
+
+            foreach ($aliases as $alias) {
+                $this->assertContains($alias, $allowed);
+                $this->assertNotContains($alias, $forbidden);
+            }
+        }
+    }
+
+    #[Test]
     public function redacted_public_payload_contains_no_answer_key_or_solution_fields(): void
     {
         $items = $this->readJson('items.json')['items'] ?? [];
