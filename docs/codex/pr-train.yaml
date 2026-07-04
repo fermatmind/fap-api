@@ -36450,3 +36450,199 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01
+    repo: fap-api
+    depends_on:
+      - IQ-BETA-STANDARD-SCORE-1
+    branch: codex/iq-v1-result-page-safe-scoring-qa-fix-01
+    title: "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01: remove unsafe IQ V1 result artifact claims"
+    train_scope: iq_v1_public_launch_readiness
+    status: user_authorized
+    scope:
+      - Remove IQ V1 public report payload placeholders that imply PDF, certificate, or true IQ estimate artifacts.
+      - Keep beta_standard_score, raw-score-only claim policy, answer-key redaction, and existing report access behavior intact.
+      - Add focused backend contract tests proving public IQ report payloads do not expose PDF/certificate artifact fields or copy.
+      - Reconcile stale IQ-BETA-STANDARD-SCORE-1 ledger facts only as dependency bookkeeping.
+    allowed_paths:
+      - backend/app/Services/Report/IqReportBuilder.php
+      - backend/tests/Unit/Services/Report/IqReportBuilderTest.php
+      - backend/tests/Feature/V0_3/IqReportContractTest.php
+      - backend/tests/Feature/SeoIntel/ResultEnParity03IqLocaleSafeLabelsTest.php
+      - backend/docs/seo/generated/result-en-parity-03-iq-locale-safe-labels.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, frontend fallback content, payment, checkout, orders, webhooks, entitlement grants, item banks, questions, answer keys, scoring formula, database migrations, production commands, production DB, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, staging deploy, or production deploy.
+      - Add official/certified/diagnostic/Mensa IQ claims, production IQ estimates, population percentiles, PDF/certificate claims, or paid-report public SEO claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Report/IqReportBuilderTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/IqReportContractTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/ResultEnParity03IqLocaleSafeLabelsTest.php --no-ansi
+      - cd backend && php artisan route:list --path=api/v0.3 --no-ansi >/tmp/fap-api-route-list-v03.txt
+      - python3 -m json.tool backend/docs/seo/generated/result-en-parity-03-iq-locale-safe-labels.v1.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: IQ-V1-POSITIONING-LOCK-01
+    repo: fap-api
+    depends_on:
+      - IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01
+    branch: codex/iq-v1-positioning-lock-01
+    title: "IQ-V1-POSITIONING-LOCK-01: lock IQ V1 public positioning boundaries"
+    train_scope: iq_v1_public_launch_readiness
+    status: user_authorized
+    scope:
+      - Add backend-owned policy/test coverage that locks IQ V1 public positioning away from official IQ, certification, diagnostic, admission, hiring, salary, and fixed intelligence claims.
+      - Keep runtime content authority in backend/CMS; do not add frontend editorial fallback copy.
+      - Record any existing non-current-scope copy concerns as sidecar issues when they do not block this PR's scope validation or required checks.
+    allowed_paths:
+      - backend/app/**
+      - backend/tests/**Iq**
+      - backend/tests/**IQ**
+      - backend/tests/Feature/SeoIntel/**Iq**
+      - backend/docs/seo/iq-v1/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, frontend fallback content, payment, checkout, item banks, scoring formula, database migrations, production commands, production DB, CMS writes, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, staging deploy, or production deploy.
+      - Add public paid-report, official IQ, certification, diagnostic, Mensa, admission, hiring, salary, or career guarantee claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Iq --no-ansi
+      - cd backend && php artisan route:list --path=api/v0.3 --no-ansi >/tmp/fap-api-route-list-v03.txt
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01
+    repo: fap-api
+    depends_on:
+      - IQ-V1-POSITIONING-LOCK-01
+    branch: codex/iq-v1-free-full-result-controlled-smoke-01
+    title: "IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01: add controlled IQ free full result smoke"
+    train_scope: iq_v1_public_launch_readiness
+    status: user_authorized
+    scope:
+      - Add non-production controlled smoke coverage for IQ V1 free complete-result behavior.
+      - Verify raw score, beta_standard_score, no production IQ estimate, no population percentile, no paywall offer leakage, and no answer-key leakage in the controlled path.
+      - Keep the smoke local/test-only and do not execute production attempts or production DB mutations.
+    allowed_paths:
+      - backend/tests/**Iq**
+      - backend/tests/**IQ**
+      - backend/app/**
+      - backend/docs/seo/iq-v1/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, frontend fallback content, payment, checkout, orders, webhooks, item banks, scoring formula, production commands, production DB, CMS writes, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, staging deploy, or production deploy.
+      - Run live production smoke, production imports, or manual deploys.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Iq --no-ansi
+      - cd backend && php artisan route:list --path=api/v0.3 --no-ansi >/tmp/fap-api-route-list-v03.txt
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: IQ-V1-LANDING-COPY-CMS-DRY-RUN-01
+    repo: fap-api
+    depends_on:
+      - IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01
+    branch: codex/iq-v1-landing-copy-cms-dry-run-01
+    title: "IQ-V1-LANDING-COPY-CMS-DRY-RUN-01: prepare IQ landing copy CMS dry run"
+    train_scope: iq_v1_public_launch_readiness
+    status: user_authorized
+    scope:
+      - Prepare dry-run-only backend CMS import/validation artifacts for IQ V1 landing copy.
+      - Validate claim-safe copy boundaries without writing CMS, publishing, revalidating, submitting search, or changing frontend fallback content.
+      - Keep output ready for owner review, not production activation.
+    allowed_paths:
+      - backend/docs/seo/iq-v1/**
+      - backend/scripts/**iq**
+      - backend/tests/**Iq**
+      - backend/tests/**IQ**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, frontend fallback content, payment, checkout, item banks, scoring formula, database migrations, production commands, production DB, CMS writes/publish, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, search submission, staging deploy, or production deploy.
+      - Add public paid-report, official IQ, certification, diagnostic, Mensa, admission, hiring, salary, or career guarantee claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Iq --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01
+    repo: fap-api
+    depends_on:
+      - IQ-V1-LANDING-COPY-CMS-DRY-RUN-01
+    branch: codex/iq-v1-item-dimension-tagging-implementation-01
+    title: "IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01: implement IQ V1 item dimension tagging"
+    train_scope: iq_v1_public_launch_readiness
+    status: user_authorized
+    scope:
+      - Implement backend-authoritative IQ_OWNER_ORIGINAL_30 item dimension tagging without changing answer keys, item text, images, scoring correctness, or production data.
+      - Add focused validation proving dimension tags are present and report dimension aggregation remains answer-key safe.
+      - Keep item-bank mutations scoped to metadata tagging only.
+    allowed_paths:
+      - backend/content_packages/**IQ_OWNER_ORIGINAL_30/**
+      - content_packages/**IQ_OWNER_ORIGINAL_30/**
+      - backend/app/Services/Assessment/**
+      - backend/app/Services/Report/**
+      - backend/tests/**Iq**
+      - backend/tests/**IQ**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, frontend fallback content, payment, checkout, orders, webhooks, answer keys, correct answers, scoring formula, production commands, production DB, CMS writes, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, staging deploy, or production deploy.
+      - Add public paid-report, official IQ, certification, diagnostic, Mensa, admission, hiring, salary, or career guarantee claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Iq --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

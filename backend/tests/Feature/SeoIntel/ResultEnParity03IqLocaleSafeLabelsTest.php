@@ -33,8 +33,7 @@ final class ResultEnParity03IqLocaleSafeLabelsTest extends TestCase
         $this->assertSame('Visual-spatial insight', data_get($report, 'dimensions.visual_spatial_insight.dimension_name'));
         $this->assertSame('Visual-spatial pattern reasoning', data_get($report, 'dimensions.visual_spatial_pattern_reasoning.dimension_name'));
         $this->assertSame('Numeric pattern reasoning', data_get($report, 'dimensions.numerical_pattern_reasoning.dimension_name'));
-        $this->assertSame('IQ report PDF', data_get($report, 'iq_pro.pdf_payload.label'));
-        $this->assertSame('IQ result certificate', data_get($report, 'iq_pro.certificate_payload.label'));
+        $this->assertNull(data_get($report, 'iq_pro'));
 
         $serialized = json_encode($report, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $this->assertDoesNotMatchRegularExpression('/[\x{4e00}-\x{9fff}]/u', $serialized);
@@ -60,7 +59,7 @@ final class ResultEnParity03IqLocaleSafeLabelsTest extends TestCase
         $this->assertSame('数字规律推理', data_get($report, 'dimensions.numerical_pattern_reasoning.dimension_name'));
     }
 
-    public function test_iq_label_catalog_keeps_online_estimate_claim_boundary(): void
+    public function test_iq_label_catalog_keeps_artifact_claim_boundary(): void
     {
         $payload = app(IqReportBuilder::class)->composeVariant(
             $this->attempt('en-US'),
@@ -72,10 +71,7 @@ final class ResultEnParity03IqLocaleSafeLabelsTest extends TestCase
             ]
         );
 
-        $visibleEnglish = implode(' ', [
-            data_get($payload, 'report.iq_pro.pdf_payload.description'),
-            data_get($payload, 'report.iq_pro.certificate_payload.description'),
-        ]);
+        $visibleEnglish = json_encode(data_get($payload, 'report'), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
 
         foreach ([
             'clinical diagnosis',
@@ -83,11 +79,15 @@ final class ResultEnParity03IqLocaleSafeLabelsTest extends TestCase
             'certified IQ',
             'globally most accurate',
             'treatment',
+            'IQ report PDF',
+            'IQ result certificate',
+            'Online IQ estimate report PDF',
+            'Online IQ estimate result certificate',
+            'pdf_payload',
+            'certificate_payload',
         ] as $claim) {
             $this->assertStringNotContainsString(strtolower($claim), strtolower($visibleEnglish), $claim);
         }
-
-        $this->assertStringContainsString('Online IQ estimate', $visibleEnglish);
     }
 
     public function test_generated_iq_inventory_json_parses(): void
@@ -100,7 +100,8 @@ final class ResultEnParity03IqLocaleSafeLabelsTest extends TestCase
         $this->assertSame('RESULT-EN-PARITY-03', $decoded['pr_id'] ?? null);
         $this->assertSame('iq', $decoded['family'] ?? null);
         $this->assertContains('iq.dimensions.visual_spatial_insight.en', $decoded['fixed_keys'] ?? []);
-        $this->assertContains('iq_pro.pdf_payload.en', $decoded['fixed_keys'] ?? []);
+        $this->assertNotContains('iq_pro.pdf_payload.en', $decoded['fixed_keys'] ?? []);
+        $this->assertNotContains('iq_pro.certificate_payload.en', $decoded['fixed_keys'] ?? []);
         $this->assertSame('fail_closed_no_zh_label_fallback', $decoded['english_runtime_policy'] ?? null);
     }
 

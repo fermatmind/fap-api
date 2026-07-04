@@ -23,9 +23,7 @@
     "iq.dimensions.visual_spatial_insight.en",
     "iq.dimensions.visual_spatial_pattern_reasoning.en",
     "iq.dimensions.numeric_pattern_reasoning.en",
-    "iq.dimensions.numerical_pattern_reasoning.en",
-    "iq_pro.pdf_payload.en",
-    "iq_pro.certificate_payload.en"
+    "iq.dimensions.numerical_pattern_reasoning.en"
   ],
   "asset_matrix": [
     {
@@ -52,29 +50,12 @@
       "has_en": true,
       "missing_en": false,
       "fallback_to_zh_allowed": false
-    },
-    {
-      "asset_key": "iq_pro.pdf_payload",
-      "has_zh": true,
-      "has_en": true,
-      "missing_en": false,
-      "fallback_to_zh_allowed": false,
-      "status": "contract_defined_not_implemented"
-    },
-    {
-      "asset_key": "iq_pro.certificate_payload",
-      "has_zh": true,
-      "has_en": true,
-      "missing_en": false,
-      "fallback_to_zh_allowed": false,
-      "status": "contract_defined_not_implemented"
     }
   ],
   "claim_boundary": {
     "allowed": [
-      "online IQ estimate",
-      "confidence-bound result",
-      "contract-defined PDF/certificate payload",
+      "raw IQ-style reasoning score",
+      "beta standard score when backend authority provides it",
       "not a clinical diagnosis"
     ],
     "forbidden": [
