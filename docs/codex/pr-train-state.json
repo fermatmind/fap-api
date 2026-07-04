@@ -24646,7 +24646,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": "da237bbc468774611075f3ad7543ac67691982d2",
+    "commit_sha": "cce6c9f0a21260647e57f41e98bbef744efc1deb",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -24683,14 +24683,21 @@
     "failure_reason": null,
     "id": "IQ-BETA-STANDARD-SCORE-1",
     "local_cleanup_executed": false,
-    "merged_at": null,
+    "merged_at": "2026-06-29T03:29:16Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2542",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "ci_fix_local_checks_passed",
-    "title": "feat(iq): add random-baseline beta standard score"
+    "status": "merged",
+    "title": "feat(iq): add random-baseline beta standard score",
+    "transitions": [
+      {
+        "at": "2026-07-04T13:29:35Z",
+        "status": "merged",
+        "note": "Reconciled while starting IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01: GitHub shows PR #2542 MERGED at 2026-06-29T03:29:16Z with squash commit cce6c9f0a21260647e57f41e98bbef744efc1deb; origin/main contains the merge commit."
+      }
+    ]
   },
   "IQ-OWNER-30-BACKEND-ASSETS-01": {
     "base": "main",
@@ -48820,6 +48827,258 @@
     },
     "status": "merged",
     "title": "TAKE-EN-QUESTION-LOCALE-SCAN-00 take flow EN/ZH question locale scan"
+  },
+  "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01": {
+    "id": "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-v1-result-page-safe-scoring-qa-fix-01",
+    "title": "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01: remove unsafe IQ V1 result artifact claims",
+    "depends_on": [
+      "IQ-BETA-STANDARD-SCORE-1"
+    ],
+    "status": "committed",
+    "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
+    "checks": {
+      "iq_report_builder_unit": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Report/IqReportBuilderTest.php --no-ansi",
+        "status": "passed",
+        "evidence": "PASS: 3 tests, 51 assertions."
+      },
+      "iq_report_contract_feature": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/IqReportContractTest.php --no-ansi",
+        "status": "passed",
+        "evidence": "PASS: 8 tests, 778 assertions."
+      },
+      "iq_locale_safe_labels": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/ResultEnParity03IqLocaleSafeLabelsTest.php --no-ansi",
+        "status": "passed",
+        "evidence": "PASS: 4 tests, 32 assertions."
+      },
+      "route_list_api_v03": {
+        "command": "cd backend && php artisan route:list --path=api/v0.3 --no-ansi >/tmp/fap-api-route-list-v03.txt",
+        "status": "passed"
+      },
+      "json_yaml_diff": {
+        "command": "python3 -m json.tool backend/docs/seo/generated/result-en-parity-03-iq-locale-safe-labels.v1.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "status": "passed"
+      },
+      "scoped_pint": {
+        "command": "cd backend && ./vendor/bin/pint --test app/Services/Report/IqReportBuilder.php tests/Unit/Services/Report/IqReportBuilderTest.php tests/Feature/V0_3/IqReportContractTest.php tests/Feature/SeoIntel/ResultEnParity03IqLocaleSafeLabelsTest.php --no-interaction",
+        "status": "passed"
+      },
+      "php_lint": {
+        "command": "php -l backend/app/Services/Report/IqReportBuilder.php && php -l backend/tests/Unit/Services/Report/IqReportBuilderTest.php && php -l backend/tests/Feature/V0_3/IqReportContractTest.php && php -l backend/tests/Feature/SeoIntel/ResultEnParity03IqLocaleSafeLabelsTest.php",
+        "status": "passed"
+      },
+      "scope_validation": {
+        "command": "git diff --name-status && git status --short --untracked-files=all",
+        "status": "passed",
+        "evidence": "Changed files are limited to IqReportBuilder, focused IQ report/SeoIntel tests, one generated SeoIntel JSON artifact, and authorized docs/codex PR-train metadata. No fap-web, payment, CMS, DB migration, item bank answer key, search, deploy, or production command changes."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": "2c86ec4fa",
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "backend",
+    "transitions": [
+      {
+        "at": "2026-07-04T13:29:35Z",
+        "status": "in_progress",
+        "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+      },
+      {
+        "at": "2026-07-04T13:30:41Z",
+        "status": "local_validation_passed",
+        "summary": "Removed IQ V1 report artifact placeholders, updated focused contract/parity tests and generated audit JSON, reconciled beta score dependency ledger, and passed local manifest validation. No production deploy, production DB mutation, CMS write, fap-web change, payment change, or item bank answer-key change performed."
+      },
+      {
+        "at": "2026-07-04T13:31:21Z",
+        "status": "committed",
+        "summary": "Committed scoped IQ V1 safe scoring/report artifact claim fix at 2c86ec4fa."
+      }
+    ]
+  },
+  "IQ-V1-POSITIONING-LOCK-01": {
+    "id": "IQ-V1-POSITIONING-LOCK-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-v1-positioning-lock-01",
+    "title": "IQ-V1-POSITIONING-LOCK-01: lock IQ V1 public positioning boundaries",
+    "depends_on": [
+      "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01"
+    ],
+    "status": "pending",
+    "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
+    "checks": {},
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "backend",
+    "transitions": [
+      {
+        "at": "2026-07-04T13:29:35Z",
+        "status": "pending",
+        "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+      }
+    ]
+  },
+  "IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01": {
+    "id": "IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-v1-free-full-result-controlled-smoke-01",
+    "title": "IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01: add controlled IQ free full result smoke",
+    "depends_on": [
+      "IQ-V1-POSITIONING-LOCK-01"
+    ],
+    "status": "pending",
+    "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
+    "checks": {},
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "backend",
+    "transitions": [
+      {
+        "at": "2026-07-04T13:29:35Z",
+        "status": "pending",
+        "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+      }
+    ]
+  },
+  "IQ-V1-LANDING-COPY-CMS-DRY-RUN-01": {
+    "id": "IQ-V1-LANDING-COPY-CMS-DRY-RUN-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-v1-landing-copy-cms-dry-run-01",
+    "title": "IQ-V1-LANDING-COPY-CMS-DRY-RUN-01: prepare IQ landing copy CMS dry run",
+    "depends_on": [
+      "IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01"
+    ],
+    "status": "pending",
+    "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
+    "checks": {},
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "backend",
+    "transitions": [
+      {
+        "at": "2026-07-04T13:29:35Z",
+        "status": "pending",
+        "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+      }
+    ]
+  },
+  "IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01": {
+    "id": "IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-v1-item-dimension-tagging-implementation-01",
+    "title": "IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01: implement IQ V1 item dimension tagging",
+    "depends_on": [
+      "IQ-V1-LANDING-COPY-CMS-DRY-RUN-01"
+    ],
+    "status": "pending",
+    "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
+    "checks": {},
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "backend",
+    "transitions": [
+      {
+        "at": "2026-07-04T13:29:35Z",
+        "status": "pending",
+        "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+      }
+    ]
   },
   "items": {
     "2786-CN-PROXY-PUBLIC-OWNER-PR-TRAIN-1": {
@@ -73256,6 +73515,258 @@
       "repo": "fap-api",
       "status": "planned",
       "title": "chore(iq): freeze legacy SVG assets and add provenance verification"
+    },
+    "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01": {
+      "id": "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01",
+      "repo": "fap-api",
+      "base": "main",
+      "branch": "codex/iq-v1-result-page-safe-scoring-qa-fix-01",
+      "title": "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01: remove unsafe IQ V1 result artifact claims",
+      "depends_on": [
+        "IQ-BETA-STANDARD-SCORE-1"
+      ],
+      "status": "committed",
+      "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
+      "checks": {
+        "iq_report_builder_unit": {
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Report/IqReportBuilderTest.php --no-ansi",
+          "status": "passed",
+          "evidence": "PASS: 3 tests, 51 assertions."
+        },
+        "iq_report_contract_feature": {
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/IqReportContractTest.php --no-ansi",
+          "status": "passed",
+          "evidence": "PASS: 8 tests, 778 assertions."
+        },
+        "iq_locale_safe_labels": {
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/ResultEnParity03IqLocaleSafeLabelsTest.php --no-ansi",
+          "status": "passed",
+          "evidence": "PASS: 4 tests, 32 assertions."
+        },
+        "route_list_api_v03": {
+          "command": "cd backend && php artisan route:list --path=api/v0.3 --no-ansi >/tmp/fap-api-route-list-v03.txt",
+          "status": "passed"
+        },
+        "json_yaml_diff": {
+          "command": "python3 -m json.tool backend/docs/seo/generated/result-en-parity-03-iq-locale-safe-labels.v1.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+          "status": "passed"
+        },
+        "scoped_pint": {
+          "command": "cd backend && ./vendor/bin/pint --test app/Services/Report/IqReportBuilder.php tests/Unit/Services/Report/IqReportBuilderTest.php tests/Feature/V0_3/IqReportContractTest.php tests/Feature/SeoIntel/ResultEnParity03IqLocaleSafeLabelsTest.php --no-interaction",
+          "status": "passed"
+        },
+        "php_lint": {
+          "command": "php -l backend/app/Services/Report/IqReportBuilder.php && php -l backend/tests/Unit/Services/Report/IqReportBuilderTest.php && php -l backend/tests/Feature/V0_3/IqReportContractTest.php && php -l backend/tests/Feature/SeoIntel/ResultEnParity03IqLocaleSafeLabelsTest.php",
+          "status": "passed"
+        },
+        "scope_validation": {
+          "command": "git diff --name-status && git status --short --untracked-files=all",
+          "status": "passed",
+          "evidence": "Changed files are limited to IqReportBuilder, focused IQ report/SeoIntel tests, one generated SeoIntel JSON artifact, and authorized docs/codex PR-train metadata. No fap-web, payment, CMS, DB migration, item bank answer key, search, deploy, or production command changes."
+        }
+      },
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "commit_sha": "2c86ec4fa",
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_migration_execution_allowed": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "api_runtime_change": true,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "scheduler_activation": false,
+      "content_authority": "backend",
+      "transitions": [
+        {
+          "at": "2026-07-04T13:29:35Z",
+          "status": "in_progress",
+          "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+        },
+        {
+          "at": "2026-07-04T13:30:41Z",
+          "status": "local_validation_passed",
+          "summary": "Removed IQ V1 report artifact placeholders, updated focused contract/parity tests and generated audit JSON, reconciled beta score dependency ledger, and passed local manifest validation. No production deploy, production DB mutation, CMS write, fap-web change, payment change, or item bank answer-key change performed."
+        },
+        {
+          "at": "2026-07-04T13:31:21Z",
+          "status": "committed",
+          "summary": "Committed scoped IQ V1 safe scoring/report artifact claim fix at 2c86ec4fa."
+        }
+      ]
+    },
+    "IQ-V1-POSITIONING-LOCK-01": {
+      "id": "IQ-V1-POSITIONING-LOCK-01",
+      "repo": "fap-api",
+      "base": "main",
+      "branch": "codex/iq-v1-positioning-lock-01",
+      "title": "IQ-V1-POSITIONING-LOCK-01: lock IQ V1 public positioning boundaries",
+      "depends_on": [
+        "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01"
+      ],
+      "status": "pending",
+      "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
+      "checks": {},
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_migration_execution_allowed": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "api_runtime_change": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "scheduler_activation": false,
+      "content_authority": "backend",
+      "transitions": [
+        {
+          "at": "2026-07-04T13:29:35Z",
+          "status": "pending",
+          "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+        }
+      ]
+    },
+    "IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01": {
+      "id": "IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01",
+      "repo": "fap-api",
+      "base": "main",
+      "branch": "codex/iq-v1-free-full-result-controlled-smoke-01",
+      "title": "IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01: add controlled IQ free full result smoke",
+      "depends_on": [
+        "IQ-V1-POSITIONING-LOCK-01"
+      ],
+      "status": "pending",
+      "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
+      "checks": {},
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_migration_execution_allowed": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "api_runtime_change": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "scheduler_activation": false,
+      "content_authority": "backend",
+      "transitions": [
+        {
+          "at": "2026-07-04T13:29:35Z",
+          "status": "pending",
+          "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+        }
+      ]
+    },
+    "IQ-V1-LANDING-COPY-CMS-DRY-RUN-01": {
+      "id": "IQ-V1-LANDING-COPY-CMS-DRY-RUN-01",
+      "repo": "fap-api",
+      "base": "main",
+      "branch": "codex/iq-v1-landing-copy-cms-dry-run-01",
+      "title": "IQ-V1-LANDING-COPY-CMS-DRY-RUN-01: prepare IQ landing copy CMS dry run",
+      "depends_on": [
+        "IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01"
+      ],
+      "status": "pending",
+      "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
+      "checks": {},
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_migration_execution_allowed": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "api_runtime_change": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "scheduler_activation": false,
+      "content_authority": "backend",
+      "transitions": [
+        {
+          "at": "2026-07-04T13:29:35Z",
+          "status": "pending",
+          "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+        }
+      ]
+    },
+    "IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01": {
+      "id": "IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01",
+      "repo": "fap-api",
+      "base": "main",
+      "branch": "codex/iq-v1-item-dimension-tagging-implementation-01",
+      "title": "IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01: implement IQ V1 item dimension tagging",
+      "depends_on": [
+        "IQ-V1-LANDING-COPY-CMS-DRY-RUN-01"
+      ],
+      "status": "pending",
+      "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
+      "checks": {},
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_migration_execution_allowed": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "api_runtime_change": true,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "scheduler_activation": false,
+      "content_authority": "backend",
+      "transitions": [
+        {
+          "at": "2026-07-04T13:29:35Z",
+          "status": "pending",
+          "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+        }
+      ]
     }
   },
   "prs": {
@@ -78305,5 +78816,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-03T09:03:53Z"
+  "updated_at": "2026-07-04T13:31:21Z"
 }

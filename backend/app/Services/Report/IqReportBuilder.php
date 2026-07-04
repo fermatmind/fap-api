@@ -60,28 +60,6 @@ final class IqReportBuilder
                 ],
             ],
         ],
-        'iq_pro' => [
-            'pdf_payload' => [
-                'labels' => [
-                    'zh-CN' => 'IQ 报告 PDF',
-                    'en' => 'IQ report PDF',
-                ],
-                'description' => [
-                    'zh-CN' => '在线 IQ 估测报告 PDF；当前仅定义合同，尚未生成正式文件。',
-                    'en' => 'Online IQ estimate report PDF; contract-defined only until formal file generation is implemented.',
-                ],
-            ],
-            'certificate_payload' => [
-                'labels' => [
-                    'zh-CN' => 'IQ 结果凭证',
-                    'en' => 'IQ result certificate',
-                ],
-                'description' => [
-                    'zh-CN' => '在线 IQ 估测结果凭证；当前仅定义合同，尚未生成正式文件。',
-                    'en' => 'Online IQ estimate result certificate; contract-defined only until formal file generation is implemented.',
-                ],
-            ],
-        ],
     ];
 
     /**
@@ -165,22 +143,6 @@ final class IqReportBuilder
             'access' => [
                 'report_access_level' => $reportAccessLevel,
                 'variant' => $normalizedVariant,
-            ],
-            'iq_pro' => [
-                'pdf_payload' => [
-                    'status' => 'contract_defined_not_implemented',
-                    'label' => $this->iqProLabel('pdf_payload', $locale),
-                    'description' => $this->iqProDescription('pdf_payload', $locale),
-                    'scale_code' => self::CANONICAL_SCALE_CODE,
-                    'attempt_id' => (string) ($attempt->id ?? ''),
-                ],
-                'certificate_payload' => [
-                    'status' => 'contract_defined_not_implemented',
-                    'label' => $this->iqProLabel('certificate_payload', $locale),
-                    'description' => $this->iqProDescription('certificate_payload', $locale),
-                    'scale_code' => self::CANONICAL_SCALE_CODE,
-                    'attempt_id' => (string) ($attempt->id ?? ''),
-                ],
             ],
             'sections' => [
                 'dimensions' => $dimensions,
@@ -415,16 +377,6 @@ final class IqReportBuilder
     private function dimensionLabel(string $dimensionKey, string $locale): ?string
     {
         return $this->localizedLabel("dimensions.{$dimensionKey}.labels", $locale);
-    }
-
-    private function iqProLabel(string $payloadKey, string $locale): ?string
-    {
-        return $this->localizedLabel("iq_pro.{$payloadKey}.labels", $locale);
-    }
-
-    private function iqProDescription(string $payloadKey, string $locale): ?string
-    {
-        return $this->localizedLabel("iq_pro.{$payloadKey}.description", $locale);
     }
 
     private function localizedLabel(string $basePath, string $locale): ?string

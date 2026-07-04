@@ -252,13 +252,12 @@ final class IqReportContractTest extends TestCase
         $this->assertIsArray(data_get($payload, 'report.dimensions'));
         $this->assertIsArray(data_get($payload, 'report.quality'));
         $this->assertIsArray(data_get($payload, 'report.scoring'));
-        $this->assertIsArray(data_get($payload, 'report.iq_pro'));
+        $this->assertNull(data_get($payload, 'report.iq_pro'));
         $this->assertNull(data_get($payload, 'report.scoring.answer_key_version'));
         $this->assertEquals(21.0, data_get($payload, 'report.summary.raw_score'));
         $this->assertSame('A', data_get($payload, 'report.quality.level'));
-        $this->assertSame('contract_defined_not_implemented', data_get($payload, 'report.iq_pro.pdf_payload.status'));
-        $this->assertSame('contract_defined_not_implemented', data_get($payload, 'report.iq_pro.certificate_payload.status'));
         $this->assertPayloadHasNoAnswerKeyFields($payload);
+        $this->assertPayloadHasNoIqV1ForbiddenArtifactClaims($payload);
     }
 
     public function test_iq_result_endpoint_redacts_legacy_answer_keys_from_public_payload(): void
@@ -376,6 +375,29 @@ final class IqReportContractTest extends TestCase
         }
     }
 
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function assertPayloadHasNoIqV1ForbiddenArtifactClaims(array $payload): void
+    {
+        $serialized = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+
+        foreach ([
+            'pdf_payload',
+            'certificate_payload',
+            'IQ report PDF',
+            'IQ result certificate',
+            'Online IQ estimate report PDF',
+            'Online IQ estimate result certificate',
+            'IQ 报告 PDF',
+            'IQ 结果凭证',
+            '在线 IQ 估测报告 PDF',
+            '在线 IQ 估测结果凭证',
+        ] as $forbiddenClaim) {
+            $this->assertStringNotContainsString($forbiddenClaim, $serialized, $forbiddenClaim);
+        }
+    }
+
     public function test_iq_paid_report_entitlement_unlocks_full_payload_for_matching_anon(): void
     {
         $this->seedScales();
@@ -402,7 +424,7 @@ final class IqReportContractTest extends TestCase
         $this->assertSame('iq.report.v1', data_get($payload, 'report.schema_version'));
         $this->assertIsArray(data_get($payload, 'report.dimensions'));
         $this->assertIsArray(data_get($payload, 'report.scoring'));
-        $this->assertIsArray(data_get($payload, 'report.iq_pro'));
+        $this->assertNull(data_get($payload, 'report.iq_pro'));
         $this->assertArrayHasKey('raw_score', data_get($payload, 'report.summary', []));
         $this->assertNull(data_get($payload, 'report.summary.iq_estimate'));
         $this->assertNull(data_get($payload, 'report.summary.percentile'));
@@ -414,6 +436,7 @@ final class IqReportContractTest extends TestCase
         $this->assertFalse((bool) data_get($payload, 'report.summary.claim_policy.claim_eligible'));
         $this->assertNull(data_get($payload, 'report.answer_key'));
         $this->assertNull(data_get($payload, 'report.correct_answers'));
+        $this->assertPayloadHasNoIqV1ForbiddenArtifactClaims($payload);
     }
 
     public function test_iq_paid_report_entitlement_does_not_unlock_for_wrong_anon(): void

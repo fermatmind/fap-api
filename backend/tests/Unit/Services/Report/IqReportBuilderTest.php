@@ -95,8 +95,9 @@ final class IqReportBuilderTest extends TestCase
         $this->assertSame(75.0, data_get($payload, 'report.dimensions.visual_spatial_insight.percent_correct'));
         $this->assertSame(4.0, data_get($payload, 'report.dimensions.visual_spatial_pattern_reasoning.raw_score'));
         $this->assertSame(2.0, data_get($payload, 'report.dimensions.numerical_pattern_reasoning.raw_score'));
-        $this->assertSame('contract_defined_not_implemented', data_get($payload, 'report.iq_pro.pdf_payload.status'));
+        $this->assertNull(data_get($payload, 'report.iq_pro'));
         $this->assertSame('full', data_get($payload, 'report.access.report_access_level'));
+        $this->assertNoIqV1ForbiddenArtifactClaims($payload);
     }
 
     public function test_builder_emits_iq_claim_fields_only_when_norm_claim_policy_is_eligible(): void
@@ -224,5 +225,28 @@ final class IqReportBuilderTest extends TestCase
                 'NPR' => ['raw_score' => 0.0, 'percent_correct' => 0.0, 'item_count' => 6, 'answered_count' => 6, 'correct_count' => 0],
             ],
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function assertNoIqV1ForbiddenArtifactClaims(array $payload): void
+    {
+        $serialized = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+
+        foreach ([
+            'pdf_payload',
+            'certificate_payload',
+            'IQ report PDF',
+            'IQ result certificate',
+            'Online IQ estimate report PDF',
+            'Online IQ estimate result certificate',
+            'IQ 报告 PDF',
+            'IQ 结果凭证',
+            '在线 IQ 估测报告 PDF',
+            '在线 IQ 估测结果凭证',
+        ] as $forbiddenClaim) {
+            $this->assertStringNotContainsString($forbiddenClaim, $serialized, $forbiddenClaim);
+        }
     }
 }
