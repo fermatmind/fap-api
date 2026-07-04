@@ -1,4 +1,114 @@
 {
+  "MBTI-CMS-12": {
+    "base": "main",
+    "branch": "codex/mbti-cms-12-profile-import-dry-run",
+    "checks": {
+      "manifest_registration": {
+        "evidence": "User explicitly authorized adding MBTI-CMS-12 to fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json as the profile CMS import dry-run line.",
+        "status": "pass"
+      },
+      "focused_profile_dry_run_contract": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityMbtiProfileCmsImportDryRunCommandTest --no-ansi",
+        "evidence": "PASS: 4 tests, 40 assertions. Covers profile dry-run mapping, no-write flags, comparison row rejection, required --dry-run, and refused --write.",
+        "status": "pass"
+      },
+      "pint_targeted": {
+        "command": "cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiProfileCmsImportDryRun.php app/Services/Cms/MbtiProfileCmsImportDryRunPlanner.php tests/Feature/Console/PersonalityMbtiProfileCmsImportDryRunCommandTest.php",
+        "evidence": "PASS: 3 files.",
+        "status": "pass"
+      },
+      "manifest_state_diff_validation": {
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "evidence": "PASS: train YAML parses, state JSON parses, and git diff whitespace check passes.",
+        "status": "pass"
+      },
+      "github_verify_bigfive_initial": {
+        "evidence": "FAIL on PR #2719 verify-bigfive: BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff flagged backend/app/Console/Commands/PersonalityMbtiProfileCmsImportDryRun.php and backend/app/Services/Cms/MbtiProfileCmsImportDryRunPlanner.php as runtime paths. This is current PR scope and is being fixed by an explicit runtime-freeze classifier exemption plus regression test.",
+        "status": "fail"
+      },
+      "focused_bigfive_runtime_freeze_classifier": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_profile_cms_import_dry_run_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+        "evidence": "PASS: 2 tests, 4 assertions. The current PR dry-run command/planner files are explicitly classified as non-runtime-only, and the CI-failing runtime path diff check passes locally.",
+        "status": "pass"
+      },
+      "pint_targeted_after_ci_fix": {
+        "command": "cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiProfileCmsImportDryRun.php app/Services/Cms/MbtiProfileCmsImportDryRunPlanner.php tests/Feature/Console/PersonalityMbtiProfileCmsImportDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "evidence": "PASS: 4 files.",
+        "status": "pass"
+      },
+      "github_checks_after_ci_fix": {
+        "evidence": "PASS on PR #2719 head 9b0902d36e96675f6eb2b420a597a3695bdb9afb: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "Changed files are limited to the MBTI-CMS-12 allowed paths: backend/app/Console/Commands/PersonalityMbtiProfileCmsImportDryRun.php, backend/app/Services/Cms/MbtiProfileCmsImportDryRunPlanner.php, backend/tests/Feature/Console/PersonalityMbtiProfileCmsImportDryRunCommandTest.php, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json.",
+        "status": "pass"
+      }
+    },
+    "commit_sha": "9b0902d36e96675f6eb2b420a597a3695bdb9afb",
+    "depends_on": [
+      "MBTI-GSC-11"
+    ],
+    "failure_reason": null,
+    "id": "MBTI-CMS-12",
+    "local_cleanup_executed": false,
+    "merged_at": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2719",
+    "remote_branch_deleted": false,
+    "repo": "fap-api",
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "github_checks_green": true,
+      "local_validation_passed": true,
+      "post_merge_revalidated": null
+    },
+    "status": "ready_to_merge",
+    "title": "MBTI-CMS-12: add MBTI profile CMS import dry-run",
+    "transitions": [
+      {
+        "at": "2026-07-04T21:16:24Z",
+        "from": "user_authorized",
+        "note": "Started backend-only MBTI profile CMS import dry-run PR from latest main. Scope excludes comparison import, CMS writes, production imports, sitemap/llms/search release, and deploys.",
+        "to": "in_progress"
+      },
+      {
+        "at": "2026-07-04T21:22:00Z",
+        "from": "in_progress",
+        "note": "Implemented dry-run command/planner/test. Focused PHPUnit, targeted Pint, YAML/JSON parse, diff check, and allowed-path scope validation passed.",
+        "to": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-04T21:25:00Z",
+        "from": "local_checks_passed",
+        "note": "Committed MBTI-CMS-12 profile import dry-run scope at 5d56e561a7f2c7c2c6566438d9272543d4f8773b.",
+        "to": "committed"
+      },
+      {
+        "at": "2026-07-04T21:30:00Z",
+        "from": "committed",
+        "note": "Opened PR #2719 for MBTI-CMS-12 and pushed branch codex/mbti-cms-12-profile-import-dry-run.",
+        "to": "pr_open"
+      },
+      {
+        "at": "2026-07-04T21:44:43Z",
+        "from": "pr_open",
+        "note": "GitHub verify-bigfive failed because MBTI-CMS-12 dry-run command/planner files were not classified as non-runtime-only. This is current PR scope; started focused classifier fix.",
+        "to": "ci_fix_in_progress"
+      },
+      {
+        "at": "2026-07-04T21:50:38Z",
+        "from": "ci_fix_in_progress",
+        "note": "Added the focused BigFive runtime-freeze exemption and regression test for MBTI-CMS-12 dry-run command/planner files. Focused profile dry-run PHPUnit, focused BigFive classifier PHPUnit, targeted Pint, train YAML parse, state JSON parse, and diff check pass locally.",
+        "to": "ci_fix_local_checks_passed"
+      },
+      {
+        "at": "2026-07-04T21:59:55Z",
+        "from": "ci_fix_local_checks_passed",
+        "note": "PR #2719 remote checks passed on head 9b0902d36e96675f6eb2b420a597a3695bdb9afb after the classifier fix. Marked ready to merge under squash merge policy.",
+        "to": "ready_to_merge"
+      }
+    ]
+  },
   "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01": {
     "base": "main",
     "branch": "codex/analytics-funnel-controlled-refresh-write-guard-01",
