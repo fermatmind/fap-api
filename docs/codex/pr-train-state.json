@@ -8,8 +8,8 @@
     "depends_on": [
       "MBTI-CMS-12"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "f51259f81",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -67,6 +67,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Implemented comparison dry-run command/planner/test and BigFive classifier exemption. Focused PHPUnit, targeted Pint, train YAML parse, state JSON parse, diff check, and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-07-04T22:28:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed MBTI-CMS-13 comparison import dry-run scope at f51259f81."
       }
     ]
   },
