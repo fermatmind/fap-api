@@ -36,12 +36,16 @@
         "evidence": "PASS: 4 files.",
         "status": "pass"
       },
+      "github_checks_after_ci_fix": {
+        "evidence": "PASS on PR #2719 head 9b0902d36e96675f6eb2b420a597a3695bdb9afb: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed.",
+        "status": "pass"
+      },
       "scope_validation": {
         "evidence": "Changed files are limited to the MBTI-CMS-12 allowed paths: backend/app/Console/Commands/PersonalityMbtiProfileCmsImportDryRun.php, backend/app/Services/Cms/MbtiProfileCmsImportDryRunPlanner.php, backend/tests/Feature/Console/PersonalityMbtiProfileCmsImportDryRunCommandTest.php, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json.",
         "status": "pass"
       }
     },
-    "commit_sha": "5d56e561a7f2c7c2c6566438d9272543d4f8773b",
+    "commit_sha": "9b0902d36e96675f6eb2b420a597a3695bdb9afb",
     "depends_on": [
       "MBTI-GSC-11"
     ],
@@ -54,11 +58,11 @@
     "repo": "fap-api",
     "scope_validation": {
       "allowed_paths_only": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "local_validation_passed": true,
       "post_merge_revalidated": null
     },
-    "status": "ci_fix_local_checks_passed",
+    "status": "ready_to_merge",
     "title": "MBTI-CMS-12: add MBTI profile CMS import dry-run",
     "transitions": [
       {
@@ -96,6 +100,12 @@
         "from": "ci_fix_in_progress",
         "note": "Added the focused BigFive runtime-freeze exemption and regression test for MBTI-CMS-12 dry-run command/planner files. Focused profile dry-run PHPUnit, focused BigFive classifier PHPUnit, targeted Pint, train YAML parse, state JSON parse, and diff check pass locally.",
         "to": "ci_fix_local_checks_passed"
+      },
+      {
+        "at": "2026-07-04T21:59:55Z",
+        "from": "ci_fix_local_checks_passed",
+        "note": "PR #2719 remote checks passed on head 9b0902d36e96675f6eb2b420a597a3695bdb9afb after the classifier fix. Marked ready to merge under squash merge policy.",
+        "to": "ready_to_merge"
       }
     ]
   },
