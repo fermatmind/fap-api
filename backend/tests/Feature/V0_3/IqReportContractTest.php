@@ -6,6 +6,7 @@ namespace Tests\Feature\V0_3;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Assessment\IqBetaStandardScore;
 use App\Services\Attempts\AttemptSubmitService;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -64,13 +65,13 @@ final class IqReportContractTest extends TestCase
         ]);
     }
 
-    private function createScoredResult(string $attemptId): Result
+    private function createScoredResult(string $attemptId, bool $withOwnerBetaStandardScore = false): Result
     {
         $score = [
             'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
             'status' => 'scored',
             'scoring_mode' => 'scored',
-            'bank_id' => 'IQ_SHOWCASE_12_BETA',
+            'bank_id' => $withOwnerBetaStandardScore ? 'IQ_OWNER_ORIGINAL_30' : 'IQ_SHOWCASE_12_BETA',
             'answer_key_version' => 'showcase12.v1',
             'norm_table_version' => 'unavailable',
             'scoring_engine_version' => 'iq_scoring_v2',
@@ -142,6 +143,9 @@ final class IqReportContractTest extends TestCase
                 ],
             ],
         ];
+        if ($withOwnerBetaStandardScore) {
+            $score = array_merge($score, app(IqBetaStandardScore::class)->fromRawScore((int) $score['raw_score']));
+        }
 
         return Result::create([
             'id' => (string) Str::uuid(),
@@ -227,7 +231,7 @@ final class IqReportContractTest extends TestCase
         $anonId = 'anon_iq_report_free_full_mode';
         $token = $this->issueAnonToken($anonId);
         $this->createAttempt($attemptId, $anonId);
-        $this->createScoredResult($attemptId);
+        $this->createScoredResult($attemptId, withOwnerBetaStandardScore: true);
 
         $response = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -255,9 +259,21 @@ final class IqReportContractTest extends TestCase
         $this->assertNull(data_get($payload, 'report.iq_pro'));
         $this->assertNull(data_get($payload, 'report.scoring.answer_key_version'));
         $this->assertEquals(21.0, data_get($payload, 'report.summary.raw_score'));
+        $this->assertSame(145, data_get($payload, 'report.summary.beta_standard_score'));
+        $this->assertSame(145, data_get($payload, 'report.scoring.beta_standard_score'));
+        $this->assertSame(IqBetaStandardScore::STATUS_SIMULATION_CALIBRATED_BETA, data_get($payload, 'report.summary.beta_standard_score_status'));
+        $this->assertSame(IqBetaStandardScore::SOURCE, data_get($payload, 'report.summary.beta_standard_score_source'));
+        $this->assertFalse((bool) data_get($payload, 'report.summary.production_normed'));
+        $this->assertFalse((bool) data_get($payload, 'report.summary.claim_eligible'));
+        $this->assertFalse((bool) data_get($payload, 'report.summary.population_percentile_eligible'));
+        $this->assertNull(data_get($payload, 'report.summary.iq_estimate'));
+        $this->assertNull(data_get($payload, 'report.summary.percentile'));
+        $this->assertNull(data_get($payload, 'report.summary.confidence_interval'));
+        $this->assertSame('raw_score_only', data_get($payload, 'report.summary.score_claim_level'));
         $this->assertSame('A', data_get($payload, 'report.quality.level'));
         $this->assertPayloadHasNoAnswerKeyFields($payload);
         $this->assertPayloadHasNoIqV1ForbiddenArtifactClaims($payload);
+        $this->assertPayloadHasNoIqV1ForbiddenPositioningClaims($payload);
     }
 
     public function test_iq_result_endpoint_redacts_legacy_answer_keys_from_public_payload(): void
@@ -393,6 +409,36 @@ final class IqReportContractTest extends TestCase
             'IQ 结果凭证',
             '在线 IQ 估测报告 PDF',
             '在线 IQ 估测结果凭证',
+        ] as $forbiddenClaim) {
+            $this->assertStringNotContainsString($forbiddenClaim, $serialized, $forbiddenClaim);
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function assertPayloadHasNoIqV1ForbiddenPositioningClaims(array $payload): void
+    {
+        $serialized = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+
+        foreach ([
+            '¥1.99',
+            '¥5',
+            'official IQ',
+            'certified IQ',
+            'diagnostic IQ',
+            'Mensa',
+            'admission proof',
+            'hiring fit',
+            'salary prediction',
+            'career guarantee',
+            '官方智商',
+            '智商认证',
+            '临床诊断',
+            '门萨',
+            '录取证明',
+            '招聘筛选',
+            '薪资预测',
         ] as $forbiddenClaim) {
             $this->assertStringNotContainsString($forbiddenClaim, $serialized, $forbiddenClaim);
         }

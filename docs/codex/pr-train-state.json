@@ -48935,7 +48935,7 @@
     "depends_on": [
       "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01"
     ],
-    "status": "pr_open",
+    "status": "merged",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
     "checks": {
       "focused_positioning_lock": {
@@ -48973,14 +48973,14 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
-    "commit_sha": "711404a81",
+    "commit_sha": "59d467cb43946770a5a729ca2a3ea800bf8b67b1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2715",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-07-04T13:48:54Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "production_write_execution": false,
     "production_migration_execution_allowed": false,
@@ -49011,6 +49011,11 @@
         "at": "2026-07-04T13:43:07Z",
         "status": "pr_open",
         "summary": "Opened PR #2715 after local validation passed and pushed branch codex/iq-v1-positioning-lock-01."
+      },
+      {
+        "at": "2026-07-04T13:50:30Z",
+        "status": "merged",
+        "summary": "Reconciled by IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01 preflight: PR #2715 is MERGED with squash commit 59d467cb43946770a5a729ca2a3ea800bf8b67b1, origin/main contains the merge, remote branch is deleted, local main is synced, and worktree was clean."
       }
     ]
   },
@@ -49023,12 +49028,44 @@
     "depends_on": [
       "IQ-V1-POSITIONING-LOCK-01"
     ],
-    "status": "pending",
+    "status": "local_validation_passed",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
-    "checks": {},
+    "checks": {
+      "iq_report_contract_feature": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/IqReportContractTest.php --no-ansi",
+        "status": "passed",
+        "evidence": "PASS: 8 tests, 806 assertions."
+      },
+      "iq_filter_suite": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Iq --no-ansi",
+        "status": "passed",
+        "evidence": "PASS: 116 tests, 10849 assertions."
+      },
+      "route_list_api_v03": {
+        "command": "cd backend && php artisan route:list --path=api/v0.3 --no-ansi >/tmp/fap-api-route-list-v03.txt",
+        "status": "passed"
+      },
+      "json_yaml_diff": {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && git diff --check",
+        "status": "passed"
+      },
+      "scoped_pint": {
+        "command": "cd backend && ./vendor/bin/pint --test tests/Feature/V0_3/IqReportContractTest.php --no-interaction",
+        "status": "passed"
+      },
+      "php_lint": {
+        "command": "php -l backend/tests/Feature/V0_3/IqReportContractTest.php",
+        "status": "passed"
+      },
+      "scope_validation": {
+        "command": "git diff --name-status && git status --short --untracked-files=all",
+        "status": "passed",
+        "evidence": "Changed files are limited to IqReportContractTest and authorized docs/codex state reconciliation. No live production smoke, fap-web, payment, CMS, item bank, production DB, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, or deploy changes."
+      }
+    },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -49052,6 +49089,16 @@
         "at": "2026-07-04T13:29:35Z",
         "status": "pending",
         "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+      },
+      {
+        "at": "2026-07-04T13:50:30Z",
+        "status": "in_progress",
+        "summary": "Started controlled IQ V1 free full result smoke coverage from latest main. Scope is focused backend test/state only; no live production smoke, production DB, fap-web, payment, CMS, item bank, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, or deploy changes."
+      },
+      {
+        "at": "2026-07-04T13:51:24Z",
+        "status": "local_validation_passed",
+        "summary": "Extended controlled free full IQ report smoke to use Owner Original 30 beta_standard_score and assert raw score, beta score, no IQ estimate, no percentile, no production norm claim, no paywall/offers, no answer key leak, and no forbidden positioning claims. Local validation passed."
       }
     ]
   },
@@ -73680,7 +73727,7 @@
       "depends_on": [
         "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01"
       ],
-      "status": "pr_open",
+      "status": "merged",
       "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
       "checks": {
         "focused_positioning_lock": {
@@ -73718,14 +73765,14 @@
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": null,
-        "post_merge_revalidated": null
+        "github_checks_green": true,
+        "post_merge_revalidated": true
       },
-      "commit_sha": "711404a81",
+      "commit_sha": "59d467cb43946770a5a729ca2a3ea800bf8b67b1",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/2715",
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-07-04T13:48:54Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_write_execution": false,
       "production_migration_execution_allowed": false,
@@ -73756,6 +73803,11 @@
           "at": "2026-07-04T13:43:07Z",
           "status": "pr_open",
           "summary": "Opened PR #2715 after local validation passed and pushed branch codex/iq-v1-positioning-lock-01."
+        },
+        {
+          "at": "2026-07-04T13:50:30Z",
+          "status": "merged",
+          "summary": "Reconciled by IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01 preflight: PR #2715 is MERGED with squash commit 59d467cb43946770a5a729ca2a3ea800bf8b67b1, origin/main contains the merge, remote branch is deleted, local main is synced, and worktree was clean."
         }
       ]
     },
@@ -73768,12 +73820,44 @@
       "depends_on": [
         "IQ-V1-POSITIONING-LOCK-01"
       ],
-      "status": "pending",
+      "status": "local_validation_passed",
       "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
-      "checks": {},
+      "checks": {
+        "iq_report_contract_feature": {
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/IqReportContractTest.php --no-ansi",
+          "status": "passed",
+          "evidence": "PASS: 8 tests, 806 assertions."
+        },
+        "iq_filter_suite": {
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Iq --no-ansi",
+          "status": "passed",
+          "evidence": "PASS: 116 tests, 10849 assertions."
+        },
+        "route_list_api_v03": {
+          "command": "cd backend && php artisan route:list --path=api/v0.3 --no-ansi >/tmp/fap-api-route-list-v03.txt",
+          "status": "passed"
+        },
+        "json_yaml_diff": {
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && git diff --check",
+          "status": "passed"
+        },
+        "scoped_pint": {
+          "command": "cd backend && ./vendor/bin/pint --test tests/Feature/V0_3/IqReportContractTest.php --no-interaction",
+          "status": "passed"
+        },
+        "php_lint": {
+          "command": "php -l backend/tests/Feature/V0_3/IqReportContractTest.php",
+          "status": "passed"
+        },
+        "scope_validation": {
+          "command": "git diff --name-status && git status --short --untracked-files=all",
+          "status": "passed",
+          "evidence": "Changed files are limited to IqReportContractTest and authorized docs/codex state reconciliation. No live production smoke, fap-web, payment, CMS, item bank, production DB, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, or deploy changes."
+        }
+      },
       "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
@@ -73797,6 +73881,16 @@
           "at": "2026-07-04T13:29:35Z",
           "status": "pending",
           "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+        },
+        {
+          "at": "2026-07-04T13:50:30Z",
+          "status": "in_progress",
+          "summary": "Started controlled IQ V1 free full result smoke coverage from latest main. Scope is focused backend test/state only; no live production smoke, production DB, fap-web, payment, CMS, item bank, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, or deploy changes."
+        },
+        {
+          "at": "2026-07-04T13:51:24Z",
+          "status": "local_validation_passed",
+          "summary": "Extended controlled free full IQ report smoke to use Owner Original 30 beta_standard_score and assert raw score, beta score, no IQ estimate, no percentile, no production norm claim, no paywall/offers, no answer key leak, and no forbidden positioning claims. Local validation passed."
         }
       ]
     },
@@ -78930,5 +79024,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-04T13:43:07Z"
+  "updated_at": "2026-07-04T13:51:24Z"
 }
