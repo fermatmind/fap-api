@@ -1,0 +1,120 @@
+{
+  "schema": "iq.v1.positioning_lock.v1",
+  "pr_id": "IQ-V1-POSITIONING-LOCK-01",
+  "surface": "iq_v1_public_positioning",
+  "authority": {
+    "owner": "backend_policy_artifact",
+    "runtime_copy_authority": "backend_cms_or_public_api",
+    "frontend_fallback_copy_authority": false,
+    "cms_write_allowed_in_this_pr": false,
+    "production_deploy_allowed_in_this_pr": false
+  },
+  "result_authority": {
+    "backend_report_required": true,
+    "beta_standard_score_source": "backend_owned_random_baseline",
+    "iq_estimate_public_copy_enabled": false,
+    "percentile_public_copy_enabled": false,
+    "production_norm_required_for_iq_estimate": true
+  },
+  "media_authority": {
+    "source": "backend_cms_media_library",
+    "frontend_fallback_media_authority": false
+  },
+  "allowed_positioning": [
+    "IQ-style reasoning practice",
+    "matrix reasoning and pattern-recognition practice",
+    "raw score and completion-detail interpretation",
+    "backend-owned beta standard score when present",
+    "educational self-understanding context"
+  ],
+  "allowed_public_copy_examples": [
+    "Explore IQ-style reasoning questions and review your raw score details.",
+    "FermatMind V1 shows a backend-owned beta standard score for this reasoning test when available.",
+    "Use the result as a practice-oriented reasoning reference, not as an official credential."
+  ],
+  "required_public_boundaries": [
+    "not official IQ certification",
+    "not clinical or diagnostic assessment",
+    "not admission, hiring, salary, or career-outcome evidence",
+    "not a fixed conclusion about intelligence"
+  ],
+  "forbidden_claim_classes": [
+    {
+      "id": "official_iq_certification",
+      "blocked": true
+    },
+    {
+      "id": "clinical_or_diagnostic_iq",
+      "blocked": true
+    },
+    {
+      "id": "mensa_or_official_affiliation",
+      "blocked": true
+    },
+    {
+      "id": "admission_hiring_salary_or_career_guarantee",
+      "blocked": true
+    },
+    {
+      "id": "fixed_intelligence_conclusion",
+      "blocked": true
+    },
+    {
+      "id": "public_iq_estimate_without_norm_authority",
+      "blocked": true
+    },
+    {
+      "id": "population_percentile_without_norm_authority",
+      "blocked": true
+    },
+    {
+      "id": "pdf_or_certificate_public_claim",
+      "blocked": true
+    },
+    {
+      "id": "paid_report_public_seo_claim",
+      "blocked": true
+    }
+  ],
+  "public_copy_switches": {
+    "official_iq_claims_enabled": false,
+    "certification_claims_enabled": false,
+    "diagnostic_claims_enabled": false,
+    "mensa_claims_enabled": false,
+    "admission_claims_enabled": false,
+    "hiring_claims_enabled": false,
+    "salary_claims_enabled": false,
+    "career_guarantee_claims_enabled": false,
+    "fixed_intelligence_claims_enabled": false,
+    "paid_report_seo_claims_enabled": false,
+    "pdf_or_certificate_claims_enabled": false
+  },
+  "forbidden_public_copy_terms": [
+    "official IQ",
+    "certified IQ",
+    "diagnostic IQ",
+    "clinical IQ",
+    "Mensa",
+    "admission proof",
+    "hiring fit",
+    "salary prediction",
+    "career guarantee",
+    "fixed intelligence",
+    "IQ certificate",
+    "IQ report PDF",
+    "official certification",
+    "官方智商",
+    "智商认证",
+    "临床诊断",
+    "门萨",
+    "录取证明",
+    "招聘筛选",
+    "薪资预测",
+    "职业保证"
+  ],
+  "review": {
+    "status": "locked_for_v1_public_launch",
+    "requires_owner_approval_to_relax": true,
+    "last_reviewed": "2026-07-04"
+  }
+}
