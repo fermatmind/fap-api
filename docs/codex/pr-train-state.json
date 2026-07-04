@@ -48837,7 +48837,7 @@
     "depends_on": [
       "IQ-BETA-STANDARD-SCORE-1"
     ],
-    "status": "pr_open",
+    "status": "merged",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
     "checks": {
       "iq_report_builder_unit": {
@@ -48880,14 +48880,14 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
-    "commit_sha": "40f3a6f18e8949a5f6df2f13cee440d1a2777668",
+    "commit_sha": "847088d0f5ac250812abcb39f27949ad5f6c6533",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2714",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-07-04T13:38:36Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "production_write_execution": false,
     "production_migration_execution_allowed": false,
@@ -48918,6 +48918,11 @@
         "at": "2026-07-04T13:32:25Z",
         "status": "pr_open",
         "summary": "Opened PR #2714 after local validation passed and pushed branch codex/iq-v1-result-page-safe-scoring-qa-fix-01."
+      },
+      {
+        "at": "2026-07-04T13:41:11Z",
+        "status": "merged",
+        "summary": "Reconciled by IQ-V1-POSITIONING-LOCK-01 preflight: PR #2714 is MERGED with squash commit 847088d0f5ac250812abcb39f27949ad5f6c6533, origin/main contains the merge, the remote task branch is deleted, local main is synced, and worktree was clean. scripts/post_merge_cleanup.sh was unavailable, so script-based local cleanup was not executed."
       }
     ]
   },
@@ -48930,17 +48935,49 @@
     "depends_on": [
       "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01"
     ],
-    "status": "pending",
+    "status": "pr_open",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
-    "checks": {},
+    "checks": {
+      "focused_positioning_lock": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/IqV1PositioningLockTest.php --no-ansi",
+        "status": "passed",
+        "evidence": "PASS: 2 tests, 57 assertions."
+      },
+      "iq_filter_suite": {
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Iq --no-ansi",
+        "status": "passed",
+        "evidence": "PASS: 116 tests, 10821 assertions."
+      },
+      "route_list_api_v03": {
+        "command": "cd backend && php artisan route:list --path=api/v0.3 --no-ansi >/tmp/fap-api-route-list-v03.txt",
+        "status": "passed"
+      },
+      "json_yaml_diff": {
+        "command": "python3 -m json.tool backend/docs/seo/iq-v1/iq-v1-positioning-lock.v1.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "status": "passed"
+      },
+      "scoped_pint": {
+        "command": "cd backend && ./vendor/bin/pint --test tests/Feature/SeoIntel/IqV1PositioningLockTest.php --no-interaction",
+        "status": "passed"
+      },
+      "php_lint": {
+        "command": "php -l backend/tests/Feature/SeoIntel/IqV1PositioningLockTest.php",
+        "status": "passed"
+      },
+      "scope_validation": {
+        "command": "git diff --name-status && git status --short --untracked-files=all",
+        "status": "passed",
+        "evidence": "Changed files are limited to IQ V1 positioning lock policy/test artifacts and authorized docs/codex state reconciliation. No fap-web, CMS write, production deploy, payment, item bank, SEO runtime, sitemap, llms, canonical, noindex, or JSON-LD changes."
+      }
+    },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "711404a81",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2715",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -48959,6 +48996,21 @@
         "at": "2026-07-04T13:29:35Z",
         "status": "pending",
         "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+      },
+      {
+        "at": "2026-07-04T13:41:11Z",
+        "status": "in_progress",
+        "summary": "Started scoped IQ V1 positioning lock implementation from latest main. Scope is backend docs/SeoIntel policy/test coverage only; no fap-web, CMS write, production deploy, payment, item bank, SEO runtime, sitemap, llms, canonical, noindex, or JSON-LD changes."
+      },
+      {
+        "at": "2026-07-04T13:42:16Z",
+        "status": "local_validation_passed",
+        "summary": "Added backend-owned IQ V1 positioning lock policy artifact and SeoIntel test coverage. Focused test, IQ filter suite, route list, JSON/YAML/diff, scoped Pint, and PHP lint passed. No runtime copy, CMS write, production deploy, payment, item bank, SEO runtime, sitemap, llms, canonical, noindex, or JSON-LD changes."
+      },
+      {
+        "at": "2026-07-04T13:43:07Z",
+        "status": "pr_open",
+        "summary": "Opened PR #2715 after local validation passed and pushed branch codex/iq-v1-positioning-lock-01."
       }
     ]
   },
@@ -73530,7 +73582,7 @@
       "depends_on": [
         "IQ-BETA-STANDARD-SCORE-1"
       ],
-      "status": "pr_open",
+      "status": "merged",
       "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
       "checks": {
         "iq_report_builder_unit": {
@@ -73573,14 +73625,14 @@
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": null,
-        "post_merge_revalidated": null
+        "github_checks_green": true,
+        "post_merge_revalidated": true
       },
-      "commit_sha": "40f3a6f18e8949a5f6df2f13cee440d1a2777668",
+      "commit_sha": "847088d0f5ac250812abcb39f27949ad5f6c6533",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/2714",
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-07-04T13:38:36Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_write_execution": false,
       "production_migration_execution_allowed": false,
@@ -73611,6 +73663,11 @@
           "at": "2026-07-04T13:32:25Z",
           "status": "pr_open",
           "summary": "Opened PR #2714 after local validation passed and pushed branch codex/iq-v1-result-page-safe-scoring-qa-fix-01."
+        },
+        {
+          "at": "2026-07-04T13:41:11Z",
+          "status": "merged",
+          "summary": "Reconciled by IQ-V1-POSITIONING-LOCK-01 preflight: PR #2714 is MERGED with squash commit 847088d0f5ac250812abcb39f27949ad5f6c6533, origin/main contains the merge, the remote task branch is deleted, local main is synced, and worktree was clean. scripts/post_merge_cleanup.sh was unavailable, so script-based local cleanup was not executed."
         }
       ]
     },
@@ -73623,17 +73680,49 @@
       "depends_on": [
         "IQ-V1-RESULT-PAGE-SAFE-SCORING-QA-FIX-01"
       ],
-      "status": "pending",
+      "status": "pr_open",
       "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
-      "checks": {},
+      "checks": {
+        "focused_positioning_lock": {
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/IqV1PositioningLockTest.php --no-ansi",
+          "status": "passed",
+          "evidence": "PASS: 2 tests, 57 assertions."
+        },
+        "iq_filter_suite": {
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Iq --no-ansi",
+          "status": "passed",
+          "evidence": "PASS: 116 tests, 10821 assertions."
+        },
+        "route_list_api_v03": {
+          "command": "cd backend && php artisan route:list --path=api/v0.3 --no-ansi >/tmp/fap-api-route-list-v03.txt",
+          "status": "passed"
+        },
+        "json_yaml_diff": {
+          "command": "python3 -m json.tool backend/docs/seo/iq-v1/iq-v1-positioning-lock.v1.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+          "status": "passed"
+        },
+        "scoped_pint": {
+          "command": "cd backend && ./vendor/bin/pint --test tests/Feature/SeoIntel/IqV1PositioningLockTest.php --no-interaction",
+          "status": "passed"
+        },
+        "php_lint": {
+          "command": "php -l backend/tests/Feature/SeoIntel/IqV1PositioningLockTest.php",
+          "status": "passed"
+        },
+        "scope_validation": {
+          "command": "git diff --name-status && git status --short --untracked-files=all",
+          "status": "passed",
+          "evidence": "Changed files are limited to IQ V1 positioning lock policy/test artifacts and authorized docs/codex state reconciliation. No fap-web, CMS write, production deploy, payment, item bank, SEO runtime, sitemap, llms, canonical, noindex, or JSON-LD changes."
+        }
+      },
       "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "711404a81",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2715",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -73652,6 +73741,21 @@
           "at": "2026-07-04T13:29:35Z",
           "status": "pending",
           "summary": "Registered from the operator-provided IQ V1 five-PR train execution goal. No production deploy, production DB mutation, CMS write, search submission, fap-web fallback content, payment change, or item-bank answer-key change is authorized."
+        },
+        {
+          "at": "2026-07-04T13:41:11Z",
+          "status": "in_progress",
+          "summary": "Started scoped IQ V1 positioning lock implementation from latest main. Scope is backend docs/SeoIntel policy/test coverage only; no fap-web, CMS write, production deploy, payment, item bank, SEO runtime, sitemap, llms, canonical, noindex, or JSON-LD changes."
+        },
+        {
+          "at": "2026-07-04T13:42:16Z",
+          "status": "local_validation_passed",
+          "summary": "Added backend-owned IQ V1 positioning lock policy artifact and SeoIntel test coverage. Focused test, IQ filter suite, route list, JSON/YAML/diff, scoped Pint, and PHP lint passed. No runtime copy, CMS write, production deploy, payment, item bank, SEO runtime, sitemap, llms, canonical, noindex, or JSON-LD changes."
+        },
+        {
+          "at": "2026-07-04T13:43:07Z",
+          "status": "pr_open",
+          "summary": "Opened PR #2715 after local validation passed and pushed branch codex/iq-v1-positioning-lock-01."
         }
       ]
     },
@@ -78826,5 +78930,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-04T13:32:25Z"
+  "updated_at": "2026-07-04T13:43:07Z"
 }
