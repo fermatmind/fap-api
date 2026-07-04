@@ -83,6 +83,7 @@ The backend repository already contains many useful SEO/GEO assets, but they are
 - `backend/docs/seo/semantic-internal-link-graph-contract.md` defines semantic internal-link graph contracts.
 - `backend/docs/seo/competitor-alternatives-source-ledger.md` defines competitor-source and alternative-page boundaries.
 - `backend/docs/seo/content-publish-rehearsal-contract.md`, `backend/docs/seo/content-publish-rehearsal-dry-run.md`, and controlled CMS publish docs define publish gates.
+- `backend/docs/seo/skills/fermat-seo-research-content-planning.md` defines article topic selection, bilingual content opportunity discovery, competitor content analysis, SERP interpretation, topic clustering, opportunity ranking, and content asset planning.
 - `backend/docs/seo/personality/*` records MBTI/personality profile content packages, claim gates, QA, and import evidence.
 - `backend/docs/seo/research-seo-geo-search-channel-contract.md` and `backend/docs/seo/research-url-truth-observation.md` define research, GEO, and URL-truth observation contracts.
 
@@ -933,6 +934,7 @@ Use this document as the strategy layer. Use the existing backend documents as s
 | `backend/docs/seo/content-publish-rehearsal-contract.md` | Controlled content publish rehearsal contract. |
 | `backend/docs/seo/content-publish-rehearsal-dry-run.md` | Content publish dry-run workflow. |
 | `backend/docs/seo/competitor-alternatives-source-ledger.md` | Competitor and alternative-page source ledger. |
+| `backend/docs/seo/skills/fermat-seo-research-content-planning.md` | Article topic selection, bilingual content opportunity discovery, competitor content analysis, SERP interpretation, topic clustering, opportunity ranking, and SEO content asset planning. |
 | `backend/docs/seo/research-seo-geo-search-channel-contract.md` | Research, SEO, GEO, and search-channel contract. |
 | `backend/docs/seo/research-url-truth-observation.md` | URL Truth observation contract. |
 | `backend/docs/seo/chinese-claim-boundary-linter.md` | Chinese claim boundary linting. |
