@@ -8,8 +8,8 @@
     "depends_on": [
       "MBTI-CMS-12"
     ],
-    "status": "pr_open",
-    "commit_sha": "a0105445e",
+    "status": "ready_to_merge",
+    "commit_sha": "2caacc1ac",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2720",
     "failure_reason": null,
     "merged_at": null,
@@ -47,12 +47,16 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to the MBTI-CMS-13 allowed paths: backend/app/Console/Commands/PersonalityMbtiComparisonCmsImportDryRun.php, backend/app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php, backend/tests/Feature/Console/PersonalityMbtiComparisonCmsImportDryRunCommandTest.php, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2720 head 2caacc1ac: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -79,6 +83,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR #2720 for MBTI-CMS-13 and pushed branch codex/mbti-cms-13-comparison-import-dry-run."
+      },
+      {
+        "at": "2026-07-04T22:39:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "PR #2720 remote checks passed on head 2caacc1ac. Marked ready to merge under squash merge policy."
       }
     ]
   },
