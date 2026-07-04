@@ -56,6 +56,20 @@ php artisan media-assets:import-seo-image-bundle \
 
 4. Continue only after the resolved package contains canonical `https://assets.fermatmind.com/...` image URLs. Then proceed to CMS draft import, preview QA, controlled publish, URL Truth, Search Channel, GSC Request Indexing, and D1/D7/D14 observation.
 
+## Discoverability Boundary
+
+The Media Library runner is responsible only for source image validation, CDN
+availability, variant generation, and CMS image metadata readiness.
+
+`/llms-full.txt` complete/degraded state is a fap-web public runtime
+artifact/cache concern, not a Media Library or backend importer concern. After
+article publish, `llms-full` parity and stabilization must be handled by the
+fap-web public verifier plus the content-release revalidation / llms-full warm
+gate when needed.
+
+Do not try to repair `/llms-full.txt` degraded mode through the Media Library
+importer, CMS image backfill, or the SEO content package draft importer.
+
 ## Half-Failed Asset Recovery
 
 When an earlier run created MediaAsset rows but CDN/object truth was not ready, audit first:
