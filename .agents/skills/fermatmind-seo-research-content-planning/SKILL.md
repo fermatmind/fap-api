@@ -10,6 +10,18 @@ This is the Codex-loadable successor to `backend/docs/seo/skills/fermat-seo-rese
 
 The strategic posture is the site-wide backend strategy in `backend/docs/seo/fermatmind-free-assessment-global-seo-geo-strategy-2026-07-04.md`: free professional assessments with free complete result pages, claim-safe public interpretation, and backend/CMS authority for public SEO assets.
 
+## Status
+- Codex-loadable Agent Skill.
+- fap-api repository only.
+- Research and planning only.
+- Docs/artifact output only.
+- No runtime, CMS, search, deployment, or fap-web authority.
+
+## Repository Boundary
+This skill belongs in `.agents/skills/fermatmind-seo-research-content-planning/SKILL.md`.
+
+It is intended for the fap-api repository. It must not create, edit, or rely on fap-web source files as editorial authority. fap-web may be observed as a renderer/discoverability consumer only when a separate read-only runtime QA task explicitly requires it.
+
 ## When to use
 - Use for article topic selection.
 - Use for Chinese and English content opportunity discovery.
@@ -30,7 +42,9 @@ The strategic posture is the site-wide backend strategy in `backend/docs/seo/fer
 - Do not use for pSEO mass generation.
 - Do not use to scrape competitors or reproduce competitor copy, pricing, ratings, reviews, screenshots, rankings, testimonials, or proprietary report structures.
 - Do not use screenshots, browser UI observations, manually copied GSC numbers, or LLM guesses as source-of-truth metrics.
-- Do not call live APIs unless a separate approved task explicitly authorizes that API access.
+- This skill itself must never call live APIs.
+- Separate approved workflows may produce gated artifacts for this skill to consume.
+- Live API access remains outside this skill's authority, even when separately approved.
 
 ## Source Authority Hierarchy
 Use the highest available authority source. Lower layers can classify or contextualize, but they cannot override higher authority.
@@ -76,6 +90,7 @@ Forbidden inputs:
 - No sitemap, llms, llms-full, schema, FAQPage, canonical, robots, hreflang, route, queue, scheduler, or deployment mutation.
 - No frontend fallback content, static editorial files, local MDX/JSON content, or fap-web runtime changes.
 - No final article body, final FAQ copy, final title/meta, final CTA copy, or final public copy unless a separate CMS content package task explicitly authorizes draft generation.
+- This skill may propose non-final, review-only title/meta/CTA/answer-block hypotheses for planning artifacts, but must label them as `draft_review_only` and must not treat them as publishable CMS copy.
 - No competitor scraping, competitor reproduction, superiority claims, or policy-gated competitor alternatives publication.
 - No private result data exposure or private URL indexing.
 
@@ -110,6 +125,7 @@ Forbidden inputs:
    - Analyze competitors structurally: page family, query family, intent coverage, information blocks, internal-link patterns, product/access model, and missing FermatMind asset.
    - Identify FermatMind original value: free test with free complete results, local Chinese scenarios, bilingual parity, clearer boundaries, better result interpretation, stronger internal next steps, or method/privacy support.
    - Do not copy or paraphrase competitor copy, examples, FAQ, report sections, reviews, prices, ratings, screenshots, testimonials, rankings, or proprietary structures.
+   - Do not infer competitor paywall, pricing, free/full-report model, or access restrictions unless the source ledger explicitly supports it.
    - Do not make superiority claims such as "better than 16Personalities/Truity/123test".
 
 6. SERP intent map
@@ -144,13 +160,16 @@ Forbidden inputs:
 ## Required Output Artifacts
 Every formal run should create or update the following sanitized planning artifacts. If an artifact cannot be completed, create it with a clear blocked/unknown section instead of inventing data.
 
+For narrow-scope runs, produce only the relevant subset plus `FERMAT_SEO_RESEARCH_CONTROL_PACKET.md` and `BLOCKED_OR_UNVERIFIED_ASSUMPTIONS.md`.
+
 | Artifact | Purpose | Required fields or sections | Allowed inputs | Forbidden data | Downstream consumer | No-write boundary |
 | --- | --- | --- | --- | --- | --- | --- |
 | `FERMAT_SEO_RESEARCH_CONTROL_PACKET.md` | Run control, source inventory, scope, gates, and final verdict. | Scope, source list, gate status, locale, page families, assessment families, forbidden actions, verdict, blockers. | All approved artifacts and human notes. | Credentials, raw payloads, private URLs, copied competitor content. | Codex reviewer, SEO operator. | Planning only; no CMS/search/deploy action. |
 | `TOP_50_QUERY_OWNER_MATRIX.csv` | Map highest-value query families to owner pages. | `rank`, `query_family_alias`, `locale`, `intent_layer`, `owner_page_ref`, `owner_page_family`, `support_pages`, `source_refs`, `claim_state`, `action`. | Gated GSC, CMS inventory, URL Truth, approved research. | Raw queries if contract forbids them, private URLs, invented metrics. | Content planner, CMS dry-run reviewer. | No page creation or publication. |
 | `TOP_20_PAGE_CTR_REPAIR_MATRIX.csv` | Identify CTR repair opportunities. | `rank`, `page_ref`, `query_family_alias`, `impressions`, `clicks`, `ctr`, `average_position`, `current_title_state`, `current_meta_state`, `repair_hypothesis`, `source_refs`, `gate_state`. | Gated GSC read model, TDK scanner, runtime QA. | Manual GSC screenshots as authority, raw payloads, private URLs. | SEO editor, TDK dry-run planner. | No title/meta write. |
+| `PHASE1_DAILY_EXPOSURE_ROC.md` | Track daily exposure rate-of-change for the first-stage SEO control loop. | 7d/28d/90d impressions, clicks, CTR, average position, page-family movement, query-family movement, noise-filter notes, D1/D7/D14/D28 observation notes. | Gated GSC read model, sanitized analytics summaries, control packets. | Raw GSC payloads, private URLs, manual screenshots as authority, invented deltas. | SEO operator, growth reviewer. | Observation only; no CMS/search/deploy action. |
 | `COMPETITOR_KEYWORD_GAP_MATRIX.csv` | Structural competitor gap map. | `gap_id`, `locale`, `query_family`, `competitor_page_family`, `observed_intent`, `fermatmind_missing_asset`, `original_value_path`, `claim_risk`, `source_ledger_ref`, `status`. | Competitor source ledger, SERP notes, CMS inventory. | Copied copy, screenshots, rankings, prices, reviews, testimonials, superiority claims. | Claim reviewer, content planner. | No alternatives page or public claim. |
-| `SERP_INTENT_MAP.csv` | SERP shape and intent classification. | `query_family_alias`, `locale`, `country`, `device`, `date`, `dominant_intent`, `dominant_page_family`, `serp_modules`, `freshness_need`, `safe_claim_path`, `reviewer`, `source_refs`. | Approved SERP notes and research artifacts. | Live API output without approval, private account/session data. | Topic cluster planner. | No search provider action. |
+| `SERP_INTENT_MAP.csv` | SERP shape and intent classification. | `query_family_alias`, `locale`, `country`, `device`, `date`, `dominant_intent`, `dominant_page_family`, `serp_modules`, `freshness_need`, `safe_claim_path`, `reviewer`, `source_refs`. | Approved SERP notes and research artifacts. | Direct provider payloads, ungated live API output, private account/session data. | Topic cluster planner. | No search provider action. |
 | `TOPIC_CLUSTER_PAGE_OWNER_MAP.md` | Cluster map for page ownership and internal links. | Clusters, owner page, support assets, internal links, canonical expectation, locale expectation, claim gate, publication gate. | Query owner matrix, CMS inventory, URL Truth, internal-link graph. | Private URLs, fallback-only pages, duplicate owner conflicts. | Content architecture reviewer. | No route/sitemap/llms mutation. |
 | `PAGE_OPPORTUNITY_RANKING.csv` | Ranked opportunity queue for planning. | `rank`, `opportunity_id`, `page_ref`, `query_family`, scoring fields, `priority_score`, `confidence`, `recommended_action`, `blocked_reason`, `source_refs`. | All sanitized research artifacts. | Fabricated metrics, raw identifiers, private URLs. | SEO prioritization owner. | No execution queue mutation. |
 | `NEXT_7_30_90_DAY_CONTENT_PLAN.md` | Time-boxed content and repair plan. | 7-day, 30-day, 90-day buckets; asset type; owner; dependency; claim/legal/CMS gates; acceptance checks. | Page ranking, clusters, business truth, human notes. | Publishable body copy, invented commitments. | Content ops, product/SEO review. | No CMS publish/import. |
@@ -200,6 +219,41 @@ Suggested component interpretation:
 - `claim_risk`: clinical, IQ, hiring, admission, salary, official affiliation, competitor, accuracy, or guarantee risk.
 - `cannibalization_risk`: duplicate owner or unclear page split.
 - `authority_gap`: missing CMS/backend owner, missing URL Truth, missing publication gate, or fallback-only state.
+
+## Default Priority Lanes
+Unless a task provides a narrower scope, prioritize:
+
+1. Six flagship assessment hubs:
+   - MBTI / 16 types.
+   - Big Five / OCEAN.
+   - Enneagram.
+   - RIASEC / Holland.
+   - IQ / Raven-style.
+   - EQ.
+2. CTR repair:
+   - high impressions;
+   - average position 5-15;
+   - low CTR;
+   - indexable;
+   - backend/CMS authoritative;
+   - claim-safe.
+3. Chinese RIASEC / gaokao / major / career cluster, including `高考`, `专业`, `职业`, `霍兰德`, and `RIASEC` query families.
+4. Result interpretation pages:
+   - MBTI result guide.
+   - RIASEC result guide.
+   - Big Five result guide.
+   - Enneagram result guide.
+   - IQ/EQ boundary-safe result guides.
+5. Method/trust pages:
+   - method boundaries;
+   - reliability/validity where evidence exists;
+   - data privacy;
+   - common misconceptions;
+   - assessment science.
+6. Competitor/category alternatives:
+   - dry-run only by default;
+   - source-ledger required;
+   - claim/legal review required.
 
 ## Claim Guardrails
 Hard-block or mark `needs_review` if copy, metadata, topic framing, or planned answer blocks imply:
@@ -278,6 +332,12 @@ Interpretation rules:
    - `backend/docs/seo/competitor-alternatives-source-ledger.md`
    - `backend/docs/seo/skills/fermat-seo-ops.md`
    - `backend/docs/seo/skills/fermat-ai-seo-geo.md`
+   - `backend/docs/seo/gsc-data-quality-gate.md`
+   - `backend/docs/seo/gsc-live-readmodel-consumption-contract.md`
+   - `backend/docs/seo/semantic-internal-link-graph-contract.md`
+   - `backend/docs/seo/content-publish-rehearsal-contract.md`
+   - `backend/docs/seo/research-url-truth-observation.md`
+   - `backend/docs/seo/global-en-zh-topic-test-landing-batch-03.md` when bilingual landing/topic authority is relevant.
 3. Lock scope and source gates before analysis.
 4. Build sanitized artifacts only.
 5. Write blocked assumptions instead of inventing evidence.
@@ -320,7 +380,7 @@ Stop and output or update `BLOCKED_OR_UNVERIFIED_ASSUMPTIONS.md` when any of the
 - Raw query leakage violates the existing read-model contract.
 - Backend/CMS authority is missing.
 - Private result/take/order/share/pay/checkout/account/auth/token/invite/recovery/report URL is involved.
-- Page is noindex, draft, private, hard-404, fallback-only, or has stale URL Truth.
+- If a page is noindex, draft, private, hard-404, fallback-only, or has stale URL Truth, block it as an owner/execution candidate. The skill may still include it in read-only diagnostic artifacts when the requested task is explicitly about eligibility, indexability, or URL Truth cleanup.
 - Competitor facts are not source-ledger approved.
 - Claim risk cannot be resolved.
 - Requested action would write CMS, publish, import content, submit search, mutate discoverability surfaces, call live APIs, change runtime code, change fap-web, or deploy.
