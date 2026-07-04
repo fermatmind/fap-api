@@ -1,0 +1,274 @@
+{
+  "schema": "iq.v1.landing_copy_cms_dry_run.v1",
+  "pr_id": "IQ-V1-LANDING-COPY-CMS-DRY-RUN-01",
+  "status": "draft_review_only",
+  "cms_write_allowed": false,
+  "cms_draft_creation_allowed": false,
+  "cms_publish_allowed": false,
+  "production_import_allowed": false,
+  "revalidation_allowed": false,
+  "search_submission_allowed": false,
+  "runtime_authority": "backend_cms_or_public_api_after_separate_owner_approval",
+  "source_positioning_lock": "backend/docs/seo/iq-v1/iq-v1-positioning-lock.v1.json",
+  "dependency_notes": [
+    "Result-page safety is expected to remain backend-owned.",
+    "Method-page links are dependency candidates only and are not imported by this dry run."
+  ],
+  "claim_policy": {
+    "result_scope": "raw_score_correct_rate_completion_time_dimension_performance",
+    "free_complete_result": true,
+    "item_count": 30,
+    "duration_copy": "about_20_minutes",
+    "public_norm_claims_enabled": false,
+    "formal_credential_claims_enabled": false,
+    "clinical_claims_enabled": false,
+    "admission_hiring_salary_or_career_decision_claims_enabled": false,
+    "external_affiliation_claims_enabled": false,
+    "paid_report_claims_enabled": false
+  },
+  "forbidden_claim_scan": {
+    "status": "pass_draft_review_only",
+    "blocked_claim_families": [
+      "formal intelligence credential",
+      "population ranking",
+      "clinical or diagnostic interpretation",
+      "external high-IQ society affiliation",
+      "admission, hiring, salary, or career decision",
+      "paid report or downloadable credential promise"
+    ]
+  },
+  "locales": {
+    "zh-CN": {
+      "status": "draft_review_only",
+      "surface_key": "tests",
+      "locale": "zh-CN",
+      "test_slug": "iq-test-intelligence-quotient-assessment",
+      "canonical_path": "/zh/tests/iq-test-intelligence-quotient-assessment",
+      "title": {
+        "status": "draft_review_only",
+        "value": "IQ 推理练习"
+      },
+      "seo_title": {
+        "status": "draft_review_only",
+        "value": "IQ 推理练习：30 题图形与模式识别测试"
+      },
+      "meta_description": {
+        "status": "draft_review_only",
+        "value": "完成 30 题图形、矩阵和模式识别练习，查看原始得分、正确率、用时和维度表现。结果免费展示，适合作为推理练习参考。"
+      },
+      "h1": {
+        "status": "draft_review_only",
+        "value": "IQ 推理练习"
+      },
+      "hero_title": {
+        "status": "draft_review_only",
+        "value": "用 30 题图形推理了解本次表现"
+      },
+      "hero_subhead": {
+        "status": "draft_review_only",
+        "value": "约 20 分钟完成矩阵、空间和模式识别题，结果页展示原始分、正确率、完成时间和维度表现。"
+      },
+      "primary_cta": {
+        "status": "draft_review_only",
+        "label": "开始免费练习",
+        "href": "/zh/tests/iq-test-intelligence-quotient-assessment/take",
+        "form_code": "IQ_OWNER_ORIGINAL_30"
+      },
+      "secondary_cta": {
+        "status": "draft_review_only",
+        "label": "了解结果边界",
+        "href": "/zh/tests/iq-test-intelligence-quotient-assessment#result-boundary"
+      },
+      "questions_label": {
+        "status": "draft_review_only",
+        "value": "30 题"
+      },
+      "duration_label": {
+        "status": "draft_review_only",
+        "value": "约 20 分钟"
+      },
+      "result_scope": {
+        "status": "draft_review_only",
+        "items": [
+          "原始得分",
+          "正确率",
+          "完成时间",
+          "视觉推理相关维度表现",
+          "Beta 阶段标准分说明"
+        ]
+      },
+      "free_complete_result_copy": {
+        "status": "draft_review_only",
+        "value": "完成后可免费查看完整 V1 结果，包括本次原始分、正确率、用时和维度表现说明。"
+      },
+      "boundary_copy": {
+        "status": "draft_review_only",
+        "value": "FermatMind V1 是推理练习和自我理解参考，不提供正式智力凭证、人群排名、临床判断，也不用于升学、招聘、薪酬或职业结论。"
+      },
+      "faq": [
+        {
+          "status": "draft_review_only",
+          "question": "这个测试适合用来了解什么？",
+          "answer": "它适合用来观察本次图形推理、空间推理和模式识别表现，并帮助你理解原始分、正确率和完成时间。"
+        },
+        {
+          "status": "draft_review_only",
+          "question": "结果是免费的吗？",
+          "answer": "是。完成 30 题后，V1 结果页免费展示本次原始分、正确率、完成时间和维度表现。"
+        },
+        {
+          "status": "draft_review_only",
+          "question": "结果可以当作正式能力凭证吗？",
+          "answer": "不可以。当前版本用于练习和自我理解，不作为正式凭证、临床判断或任何录用、升学、薪酬和职业决策依据。"
+        }
+      ],
+      "internal_links": [
+        {
+          "status": "draft_review_only",
+          "label": "测试中心",
+          "href": "/zh/tests"
+        },
+        {
+          "status": "draft_review_only",
+          "label": "人格测试",
+          "href": "/zh/tests/mbti-personality-test-16-personality-types"
+        },
+        {
+          "status": "draft_review_only",
+          "label": "职业兴趣测试",
+          "href": "/zh/tests/holland-career-interest-test-riasec"
+        }
+      ],
+      "method_page_links_draft_review_only": [
+        {
+          "status": "draft_review_only",
+          "task_id": "IQ-METHOD-WHAT-IS-IQ-STYLE-TEST-01",
+          "label": "什么是 IQ 风格推理测试",
+          "href": "/zh/iq-method/what-is-iq-style-test"
+        },
+        {
+          "status": "draft_review_only",
+          "task_id": "IQ-METHOD-SCORE-MEANING-BOUNDARY-01",
+          "label": "如何理解原始分、正确率和用时",
+          "href": "/zh/iq-method/score-meaning-boundary"
+        }
+      ]
+    },
+    "en": {
+      "status": "draft_review_only",
+      "surface_key": "tests",
+      "locale": "en",
+      "test_slug": "iq-test-intelligence-quotient-assessment",
+      "canonical_path": "/en/tests/iq-test-intelligence-quotient-assessment",
+      "title": {
+        "status": "draft_review_only",
+        "value": "IQ Reasoning Practice"
+      },
+      "seo_title": {
+        "status": "draft_review_only",
+        "value": "IQ Reasoning Practice: 30 Matrix and Pattern Questions"
+      },
+      "meta_description": {
+        "status": "draft_review_only",
+        "value": "Complete 30 visual, matrix, and pattern-recognition questions, then review raw score, accuracy, time, and dimension performance. The V1 result is free and practice-oriented."
+      },
+      "h1": {
+        "status": "draft_review_only",
+        "value": "IQ Reasoning Practice"
+      },
+      "hero_title": {
+        "status": "draft_review_only",
+        "value": "Review your 30-question reasoning performance"
+      },
+      "hero_subhead": {
+        "status": "draft_review_only",
+        "value": "Spend about 20 minutes on matrix, spatial, and pattern-recognition questions, then review raw score, accuracy, completion time, and dimension performance."
+      },
+      "primary_cta": {
+        "status": "draft_review_only",
+        "label": "Start free practice",
+        "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+        "form_code": "IQ_OWNER_ORIGINAL_30"
+      },
+      "secondary_cta": {
+        "status": "draft_review_only",
+        "label": "Review result boundaries",
+        "href": "/en/tests/iq-test-intelligence-quotient-assessment#result-boundary"
+      },
+      "questions_label": {
+        "status": "draft_review_only",
+        "value": "30 questions"
+      },
+      "duration_label": {
+        "status": "draft_review_only",
+        "value": "About 20 minutes"
+      },
+      "result_scope": {
+        "status": "draft_review_only",
+        "items": [
+          "Raw score",
+          "Accuracy",
+          "Completion time",
+          "Visual reasoning dimension performance",
+          "Beta-stage standard-score note"
+        ]
+      },
+      "free_complete_result_copy": {
+        "status": "draft_review_only",
+        "value": "After finishing all 30 questions, the V1 result page shows the complete free result: raw score, accuracy, time, and dimension performance notes."
+      },
+      "boundary_copy": {
+        "status": "draft_review_only",
+        "value": "FermatMind V1 is for reasoning practice and self-understanding. It does not provide a formal intelligence credential, population ranking, clinical judgment, or evidence for school, hiring, salary, or career decisions."
+      },
+      "faq": [
+        {
+          "status": "draft_review_only",
+          "question": "What is this test useful for?",
+          "answer": "It helps you review this attempt's visual reasoning, spatial reasoning, and pattern-recognition performance, including raw score, accuracy, and completion time."
+        },
+        {
+          "status": "draft_review_only",
+          "question": "Is the result free?",
+          "answer": "Yes. After 30 questions, the V1 result page shows raw score, accuracy, completion time, and dimension performance for free."
+        },
+        {
+          "status": "draft_review_only",
+          "question": "Can I use the result as a formal credential?",
+          "answer": "No. This version is for practice and self-understanding only, not for clinical judgment or school, hiring, salary, or career decisions."
+        }
+      ],
+      "internal_links": [
+        {
+          "status": "draft_review_only",
+          "label": "Tests",
+          "href": "/en/tests"
+        },
+        {
+          "status": "draft_review_only",
+          "label": "Personality test",
+          "href": "/en/tests/mbti-personality-test-16-personality-types"
+        },
+        {
+          "status": "draft_review_only",
+          "label": "Career interest test",
+          "href": "/en/tests/holland-career-interest-test-riasec"
+        }
+      ],
+      "method_page_links_draft_review_only": [
+        {
+          "status": "draft_review_only",
+          "task_id": "IQ-METHOD-WHAT-IS-IQ-STYLE-TEST-01",
+          "label": "What is an IQ-style reasoning test?",
+          "href": "/en/iq-method/what-is-iq-style-test"
+        },
+        {
+          "status": "draft_review_only",
+          "task_id": "IQ-METHOD-SCORE-MEANING-BOUNDARY-01",
+          "label": "How to understand raw score, accuracy, and time",
+          "href": "/en/iq-method/score-meaning-boundary"
+        }
+      ]
+    }
+  }
+}
