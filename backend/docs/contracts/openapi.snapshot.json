@@ -1904,6 +1904,27 @@
                 ]
             }
         },
+        "/api/v0.3/public-gateways/test-metrics-summary": {
+            "get": {
+                "operationId": "get_api_v0_3_public_gateways_test_metrics_summary",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\PublicTestMetricsSummaryController",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
         "/api/v0.3/public-gateways/tests": {
             "get": {
                 "operationId": "get_api_v0_3_public_gateways_tests",

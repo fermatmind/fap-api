@@ -4329,6 +4329,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_public_test_metrics_summary_endpoint(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/PublicTestMetricsSummaryController.php',
+            'backend/app/Services/Analytics/PublicTestMetricsSummaryService.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\Http\Controllers\API\V0_3\PublicTestMetricsSummaryController;',
+            "+        Route::get('/public-gateways/test-metrics-summary', PublicTestMetricsSummaryController::class);",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', routeChangedLines: $routeChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_payment_unlock_attribution_diagnostics(): void
     {
         $changed = [
@@ -5724,6 +5739,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsPublicTestMetricsSummaryOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
             if ($this->isBigFiveV2PilotSupportFile($file)) {
                 continue;
             }
@@ -5845,6 +5867,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isTestMetricsOpsSummaryWidgetFile($file)) {
+                continue;
+            }
+
+            if ($this->isPublicTestMetricsSummaryEndpointFile($file)) {
                 continue;
             }
 
@@ -8864,6 +8890,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isPublicTestMetricsSummaryEndpointFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/PublicTestMetricsSummaryController.php',
+            'backend/app/Services/Analytics/PublicTestMetricsSummaryService.php',
+        ], true);
+    }
+
     private function isPaymentUnlockAttributionDiagnosticsFile(string $file): bool
     {
         return $file === 'backend/app/Services/Analytics/PaymentUnlockAttributionDiagnostics.php';
@@ -8968,6 +9002,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             "+            'throttle:api_track',",
             '+        ])',
             "+        ->name('api.v0_5.seo.attribution_events.store');",
+        ];
+
+        return $changedLines !== [] && array_values($changedLines) === $allowed;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsPublicTestMetricsSummaryOnly(array $changedLines): bool
+    {
+        $allowed = [
+            '+use App\Http\Controllers\API\V0_3\PublicTestMetricsSummaryController;',
+            "+        Route::get('/public-gateways/test-metrics-summary', PublicTestMetricsSummaryController::class);",
         ];
 
         return $changedLines !== [] && array_values($changedLines) === $allowed;
