@@ -54,6 +54,49 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: MBTI-CMS-13
+    repo: fap-api
+    depends_on:
+      - MBTI-CMS-12
+    branch: codex/mbti-cms-13-comparison-import-dry-run
+    title: "MBTI-CMS-13: add MBTI comparison CMS import dry-run"
+    train_scope: mbti_personality_asset_cms_import_readiness
+    status: user_authorized
+    scope:
+      - Add a backend-only MBTI comparison CMS import dry-run planner and Artisan command.
+      - Validate A/T comparison and cross-type comparison asset packages, schema shape, field mapping, target tables, and draft-only safety flags without database writes.
+      - Keep profile/variant rows out of this PR and fail them closed for MBTI-CMS-12.
+      - Keep the command dry-run only; no CMS writes, publishing, indexability, sitemap, llms, search release, staging deploy, or production deploy.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityMbtiComparisonCmsImportDryRun.php
+      - backend/app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php
+      - backend/tests/Feature/Console/PersonalityMbtiComparisonCmsImportDryRunCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Implement profile import/dry-run behavior; MBTI-CMS-12 owns profile assets.
+      - Write CMS, run production imports, run database migrations, publish, enable indexability, release sitemap/llms, submit search, trigger staging deploy, trigger production deploy, or add frontend fallback content.
+      - Change public API routes, runtime personality rendering, content authority, canonical/noindex behavior, JSON-LD runtime, or production scheduler behavior.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityMbtiComparisonCmsImportDryRunCommandTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_comparison_cms_import_dry_run_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiComparisonCmsImportDryRun.php app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php tests/Feature/Console/PersonalityMbtiComparisonCmsImportDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-ASSET-01
     repo: fap-api
     branch: codex/pr-eq-asset-01-content-pack-v16
