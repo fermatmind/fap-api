@@ -49028,7 +49028,7 @@
     "depends_on": [
       "IQ-V1-POSITIONING-LOCK-01"
     ],
-    "status": "local_validation_passed",
+    "status": "pr_open",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
     "checks": {
       "iq_report_contract_feature": {
@@ -49069,8 +49069,8 @@
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "65204d554",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2716",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -49099,6 +49099,11 @@
         "at": "2026-07-04T13:51:24Z",
         "status": "local_validation_passed",
         "summary": "Extended controlled free full IQ report smoke to use Owner Original 30 beta_standard_score and assert raw score, beta score, no IQ estimate, no percentile, no production norm claim, no paywall/offers, no answer key leak, and no forbidden positioning claims. Local validation passed."
+      },
+      {
+        "at": "2026-07-04T13:52:09Z",
+        "status": "pr_open",
+        "summary": "Opened PR #2716 after local validation passed and pushed branch codex/iq-v1-free-full-result-controlled-smoke-01."
       }
     ]
   },
@@ -73820,7 +73825,7 @@
       "depends_on": [
         "IQ-V1-POSITIONING-LOCK-01"
       ],
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
       "checks": {
         "iq_report_contract_feature": {
@@ -73861,8 +73866,8 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "65204d554",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2716",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -73891,6 +73896,11 @@
           "at": "2026-07-04T13:51:24Z",
           "status": "local_validation_passed",
           "summary": "Extended controlled free full IQ report smoke to use Owner Original 30 beta_standard_score and assert raw score, beta score, no IQ estimate, no percentile, no production norm claim, no paywall/offers, no answer key leak, and no forbidden positioning claims. Local validation passed."
+        },
+        {
+          "at": "2026-07-04T13:52:09Z",
+          "status": "pr_open",
+          "summary": "Opened PR #2716 after local validation passed and pushed branch codex/iq-v1-free-full-result-controlled-smoke-01."
         }
       ]
     },
@@ -79024,5 +79034,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-04T13:51:24Z"
+  "updated_at": "2026-07-04T13:52:09Z"
 }
