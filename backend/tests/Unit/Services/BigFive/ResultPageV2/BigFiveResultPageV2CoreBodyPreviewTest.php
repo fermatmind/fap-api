@@ -3163,6 +3163,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_method_pages_cms_draft_importer_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Models/TopicProfileEntry.php',
+            'backend/app/Services/Cms/IqMethodPages/IqMethodPagesDraftImporter.php',
+            'backend/bootstrap/app.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\ArticleImportIqMethodPagesDraft;',
+            '+        ArticleImportIqMethodPagesDraft::class,',
+        ];
+        $bootstrapAppChangedLines = [
+            '+        \\App\\Console\\Commands\\ArticleImportIqMethodPagesDraft::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            changed: $changed,
+            repoRoot: '',
+            baseRef: '',
+            kernelChangedLines: $kernelChangedLines,
+            bootstrapAppChangedLines: $bootstrapAppChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_iq_production_observability_guard_changes(): void
     {
         $changed = [
@@ -6019,6 +6045,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isIqMethodPagesCmsDraftImporterFile($file)) {
+                continue;
+            }
+
             if ($this->isIqProductionObservabilityGuardFile($file)) {
                 continue;
             }
@@ -6260,6 +6290,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsArticleCoverPropagationSmokeOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsAlipayPendingCompensationSchedulerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsIqNormImportDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsIqMethodPagesCmsDraftImporterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64BackendImportContractOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsRevisionDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsInternalLinkDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6340,6 +6371,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsTestMetricsSchedulerOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
+                    || $this->kernelDiffIsIqMethodPagesCmsDraftImporterOnly(
+                        $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    )
                     || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
@@ -6354,6 +6388,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 && $baseRef === ''
                 && (
                     $this->kernelDiffIsTestMetricsSchedulerOnly($bootstrapAppChangedLines ?? [])
+                    || $this->kernelDiffIsIqMethodPagesCmsDraftImporterOnly($bootstrapAppChangedLines ?? [])
                     || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly($bootstrapAppChangedLines ?? [])
                 )
             ) {
@@ -7658,6 +7693,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isIqNormImportDryRunCommandFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/NormsIqImport.php';
+    }
+
+    private function isIqMethodPagesCmsDraftImporterFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php',
+            'backend/app/Models/TopicProfileEntry.php',
+        ], true)
+            || str_starts_with($file, 'backend/app/Services/Cms/IqMethodPages/');
     }
 
     private function isIqProductionObservabilityGuardFile(string $file): bool
@@ -10561,6 +10605,29 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bNormsIqImport\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsIqMethodPagesCmsDraftImporterOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $normalized) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bArticleImportIqMethodPagesDraft\b/u', $normalized) !== 1) {
                 return false;
             }
         }

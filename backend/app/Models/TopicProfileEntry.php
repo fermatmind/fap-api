@@ -22,6 +22,8 @@ class TopicProfileEntry extends Model
     public const GROUP_KEYS = [
         'featured',
         'articles',
+        'iq_articles',
+        'eq_articles',
         'personalities',
         'tests',
         'related',
