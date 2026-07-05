@@ -81095,8 +81095,8 @@
     "depends_on": [
       "BIG5-CMS-INDEXABILITY-GATE-03"
     ],
-    "status": "pr_open",
-    "commit_sha": "ba5c55f7546e1659d7409ccd831ff903a2bd8d6e",
+    "status": "ready_to_merge",
+    "commit_sha": "c632eac7bb73e4e8b6899b5599d982e61407cc53",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2728",
     "failure_reason": null,
     "merged_at": null,
@@ -81139,12 +81139,16 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to BIG5-CMS-DISCOVERABILITY-SURFACE-04 allowed paths: backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php and docs/codex/pr-train-state.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2728 head c632eac7bb73e4e8b6899b5599d982e61407cc53: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -81177,6 +81181,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR #2728 for BIG5-CMS-DISCOVERABILITY-SURFACE-04 and pushed branch codex/big5-cms-discoverability-surface-04."
+      },
+      {
+        "at": "2026-07-05T06:28:41Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "PR #2728 remote checks passed. Marked ready to merge under squash merge policy."
       }
     ]
   },
