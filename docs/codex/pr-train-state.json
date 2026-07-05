@@ -454,7 +454,7 @@
       "local_validation_passed": true,
       "post_merge_revalidated": null
     },
-    "status": "ci_fix_local_checks_passed",
+    "status": "ready_to_merge",
     "title": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01 add controlled analytics funnel refresh write guard",
     "transitions": [
       {
@@ -49446,7 +49446,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "commit_sha": "65204d554",
@@ -49641,6 +49641,11 @@
         "at": "2026-07-05T13:12:00+08:00",
         "status": "ci_fix_local_checks_passed",
         "summary": "Focused BigFive runtime-freeze regression, IQ importer PHPUnit, targeted Pint, command discovery, route list, real fap-web package dry-run, YAML/JSON parsing, and diff check pass locally after the CI fix."
+      },
+      {
+        "at": "2026-07-05T13:22:00+08:00",
+        "status": "ready_to_merge",
+        "summary": "GitHub checks passed on PR #2721 head 91eace541b3b9944346db7f3e9e572d847f20508: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     ]
   },
