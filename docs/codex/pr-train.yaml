@@ -37691,3 +37691,39 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
     next_task: null
+
+  - id: MBTI-MAIN-FAQ-PRODUCTION-RUNTIME-READBACK-01
+    repo: fap-api
+    depends_on:
+      - MBTI-MAIN-FREE-FAQ-CONTENT-01-CLOSEOUT
+    branch: codex/mbti-main-faq-production-runtime-readback-01
+    title: "MBTI-MAIN-FAQ-PRODUCTION-RUNTIME-READBACK-01: read back MBTI FAQ production runtime"
+    train_scope: mbti_main_faq_runtime_readback
+    status: user_authorized
+    scope:
+      - Add a read-only generated evidence report for the MBTI main FAQ production runtime state.
+      - Verify production API FAQ count, public page visible FAQ count, FAQPage JSON-LD count, question parity, and private URL boundary.
+      - Decide whether schema parity repair is needed, without mutating CMS, runtime code, deploy state, sitemap, llms, Search Channel, or production data.
+    allowed_paths:
+      - generated/seo-ops-mbti-main-faq-runtime-readback-20260705/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, runtime code, API adapters, schema renderers, CMS content, sitemap, llms, canonical, noindex, Search Channel, deployment configuration, or production data.
+      - Trigger staging deploy, production deploy, manual deploy, URL submission, CMS write, production import, or database migration.
+    validation:
+      - python3 -m json.tool generated/seo-ops-mbti-main-faq-runtime-readback-20260705/scan_manifest.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: MBTI-MAIN-FAQ-SCHEMA-PARITY-REPAIR-01

@@ -1,0 +1,62 @@
+{
+  "id": "MBTI-MAIN-FAQ-PRODUCTION-RUNTIME-READBACK-01",
+  "generated_at": "2026-07-05T08:59:39Z",
+  "repo": "fap-api",
+  "scope": "read-only production runtime evidence",
+  "urls": {
+    "api": "https://api.fermatmind.com/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types&locale=zh",
+    "public_page_requested": "https://www.fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "public_page_final": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types"
+  },
+  "observations": {
+    "api_status": 200,
+    "api_faq_path": "content_i18n_json.zh.faq",
+    "api_faq_count": 8,
+    "public_page_redirect": "HTTP 308 from www to apex",
+    "public_page_status": 200,
+    "visible_faq_count": 4,
+    "faqpage_json_ld_count": 4,
+    "visible_questions_equal_json_ld_questions": true,
+    "private_url_hits": []
+  },
+  "api_questions": [
+    "MBTI 测试免费吗？",
+    "MBTI 完整结果能看到什么？",
+    "MBTI 测试一般多久？",
+    "MBTI 能决定职业吗？",
+    "MBTI 是心理诊断吗？",
+    "16 型人格结果会变吗？",
+    "MBTI 和大五人格有什么区别？",
+    "做完 MBTI 后下一步看什么？"
+  ],
+  "visible_questions": [
+    "费马的 MBTI免费测试会收费吗？",
+    "这份 16型人格完整结果/报告包含哪些内容？",
+    "MBTI免费测试结果可以作为职业或心理诊断吗？",
+    "完成测试后还能重新查看或重复测试吗？"
+  ],
+  "json_ld_questions": [
+    "费马的 MBTI免费测试会收费吗？",
+    "这份 16型人格完整结果/报告包含哪些内容？",
+    "MBTI免费测试结果可以作为职业或心理诊断吗？",
+    "完成测试后还能重新查看或重复测试吗？"
+  ],
+  "decision": "BLOCKED_FAQ_NOT_PROPAGATED",
+  "schema_repair_pr": {
+    "id": "MBTI-MAIN-FAQ-SCHEMA-PARITY-REPAIR-01",
+    "eligible": false,
+    "reason": "visible FAQ and FAQPage JSON-LD are both 4 and question-parity passes; the blocker is API 8 vs public page/schema 4 propagation."
+  },
+  "actions_not_taken": [
+    "CMS write",
+    "production import",
+    "database migration",
+    "runtime code change",
+    "fap-web change",
+    "sitemap or llms change",
+    "Search Channel action",
+    "staging deploy wait",
+    "manual deploy",
+    "production deploy"
+  ]
+}
