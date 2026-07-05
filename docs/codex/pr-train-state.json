@@ -80950,7 +80950,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-01"
     ],
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -80964,6 +80964,10 @@
       "local_validation": {
         "status": "pass",
         "evidence": "php -l command/test, artisan list articles, targeted Pint, focused ArticleIqMethodPagesPostPublishReadbackCommandTest, focused BigFive freeze classifier tests, YAML/JSON parse, and git diff --check passed locally."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR #2742 opened for branch codex/iq-method-pages-post-publish-readback-01; waiting for required GitHub checks."
       }
     },
     "scope_validation": {
@@ -80972,8 +80976,8 @@
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "025d1039e10e49143faa310e3faaeb0bc3671fd3",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2742",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -80999,6 +81003,11 @@
         "at": "2026-07-05T17:25:00+08:00",
         "status": "local_validation_passed",
         "summary": "Implemented read-only post-publish IQ method article readback command and tests. Local validation passed; no indexability, sitemap, llms, search action, deploy, production execution, or CMS mutation was performed."
+      },
+      {
+        "at": "2026-07-05T17:33:00+08:00",
+        "status": "github_checks_pending",
+        "summary": "Opened PR #2742 for the scoped post-publish readback workflow and pushed the local-validation-passed implementation. Waiting for required GitHub checks."
       }
     ]
   },
