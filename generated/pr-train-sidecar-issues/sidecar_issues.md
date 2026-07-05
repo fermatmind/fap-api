@@ -45,3 +45,32 @@
 - recommended follow-up:
   - Track and fix the failing Content/Career/Architecture tests under their owning PR scopes.
   - Do not mix those repairs into the IQ method pages CMS import PR.
+
+## IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01
+
+- repo: `fap-api`
+- branch: `codex/iq-method-pages-cms-readback-01`
+- blocker type: `external_full_suite_failure_timeout`
+- evidence:
+  - `cd backend && composer test` exceeded the Composer process timeout of 300 seconds and exited with code 1.
+  - Failures observed before timeout included:
+    - `Tests\Unit\Domain\Career\Audit\CareerFullVisiblePublicationGateTest`
+    - `Tests\Unit\Services\Content\CulturalCalibrationLayerServiceTest`
+    - `Tests\Unit\Services\Mbti\MbtiResultPersonalizationServiceTest`
+    - `Tests\Unit\Services\Report\Pdf\Mbti\MbtiPdfPayloadBuilderTest`
+    - `Tests\Feature\Architecture\ServiceLayerBoundaryTest`
+    - `Tests\Feature\Career\CareerCnProxyPublicOwnerApiTest`
+    - `Tests\Feature\Career\CareerJobDetailApiTest`
+    - `Tests\Feature\CareerCms\ArticleBaselineImportTest`
+    - `Tests\Feature\ClinicalCombo68\ClinicalComboQuestionsMetaComplianceTest`
+    - `Tests\Feature\Commerce\PostPaidAttemptMismatchRepairOpsTenantVisibilityAcceptanceTest`
+  - Focused READBACK validation passed: command discovery, targeted Pint, `ArticleIqMethodPagesReadbackCommandTest`, BigFive runtime freeze readback exemption, route:list, real fap-web package import+readback on temp sqlite, YAML/JSON parse, and git diff check.
+- why not current PR scope:
+  - Current PR scope only adds the read-only IQ method pages CMS readback command/test, command registration, Big Five runtime-freeze classifier exemption for that command, and PR-train metadata.
+  - The observed full-suite failures are in Career, Content, MBTI personalization/PDF, Architecture, ClinicalCombo, and Commerce surfaces outside the changed READBACK files.
+- whether required checks are affected:
+  - Unknown until GitHub checks run; local focused validation for current scope passed.
+  - If a required GitHub check fails, inspect the failing job before merge.
+- recommended follow-up:
+  - Track and fix the failing Career/Content/MBTI/PDF/Architecture/ClinicalCombo/Commerce tests under their owning PR scopes.
+  - Do not mix those repairs into the IQ method pages CMS readback PR.

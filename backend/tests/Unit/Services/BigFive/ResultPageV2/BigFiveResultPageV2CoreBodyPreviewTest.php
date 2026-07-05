@@ -401,6 +401,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_method_pages_cms_readback_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleIqMethodPagesReadback.php',
+            'backend/bootstrap/app.php',
+        ];
+        $bootstrapChangedLines = [
+            '+        \\App\\Console\\Commands\\ArticleIqMethodPagesReadback::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            changed: $changed,
+            repoRoot: '',
+            baseRef: '',
+            bootstrapAppChangedLines: $bootstrapChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti64_cms_revision_draft_files(): void
     {
         $changed = [
@@ -7699,6 +7717,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php',
+            'backend/app/Console/Commands/ArticleIqMethodPagesReadback.php',
             'backend/app/Models/TopicProfileEntry.php',
         ], true)
             || str_starts_with($file, 'backend/app/Services/Cms/IqMethodPages/');
@@ -10627,7 +10646,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/\bArticleImportIqMethodPagesDraft\b/u', $normalized) !== 1) {
+            if (preg_match('/\b(?:ArticleImportIqMethodPagesDraft|ArticleIqMethodPagesReadback)\b/u', $normalized) !== 1) {
                 return false;
             }
         }
