@@ -1,0 +1,43 @@
+{
+  "id": "DAILY-MODE-C-TOPIC-SELECTION-20260706",
+  "date": "2026-07-06",
+  "repo": "fap-api",
+  "scope": "generated-only/read-only daily Mode C topic selection",
+  "decision": "GO_FOR_MODE_C_PACKAGE_PROMPT",
+  "selected_topic": {
+    "topic_id": "gaokao-major-adjustment-unacceptable-major-checklist",
+    "locale": "zh-CN",
+    "operation_type": "new_article_package_prompt_only",
+    "primary_owner_url": "/zh/tests/holland-career-interest-test-riasec"
+  },
+  "evidence_inputs": [
+    "backend/docs/seo/daily-runs/2026-07-06/six-test-hub-completeness-readonly-audit-01/",
+    "backend/docs/seo/daily-runs/2026-07-06/money-intent-owner-page-map-readonly-01/",
+    "backend/docs/seo/daily-runs/2026-07-06/gsc-seo-intel-quality-refresh-readonly-01/",
+    "backend/docs/seo/daily-runs/2026-07-06/result-interpretation-page-inventory-readonly-01/",
+    "backend/docs/seo/daily-runs/2026-07-06/zh-riasec-gaokao-major-career-cluster-plan-01/"
+  ],
+  "files": [
+    "EXECUTIVE_DECISION.md",
+    "TOPIC_SELECTION.md",
+    "CANDIDATE_RANKING.md",
+    "scan_manifest.json"
+  ],
+  "forbidden_actions_not_performed": [
+    "cms_write",
+    "article_body_generation",
+    "runtime_change",
+    "frontend_change",
+    "schema_change",
+    "hreflang_change",
+    "canonical_change",
+    "noindex_change",
+    "sitemap_change",
+    "llms_change",
+    "search_submission",
+    "manual_deploy",
+    "production_deploy",
+    "staging_deploy_wait"
+  ],
+  "next_train_item": "DAILY-DISTRIBUTION-ASSET-PACKAGE-20260706"
+}
