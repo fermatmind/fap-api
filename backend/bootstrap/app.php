@@ -34,6 +34,7 @@ return Application::configure(basePath: dirname(__DIR__))
         \App\Console\Commands\ArticleIqMethodPagesPublishGate::class,
         \App\Console\Commands\ArticleIqMethodPagesPublish::class,
         \App\Console\Commands\ArticleIqMethodPagesPostPublishReadback::class,
+        \App\Console\Commands\ArticleIqMethodPagesSeoGeoActivate::class,
         \App\Console\Commands\ArticleIqMethodPagesSeoGeoActivationGate::class,
         \App\Console\Commands\ArticleIqMethodPagesReadback::class,
         \App\Console\Commands\ArticleIqMethodPagesReviewApproval::class,

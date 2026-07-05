@@ -544,7 +544,7 @@
       "local_validation_passed": true,
       "post_merge_revalidated": null
     },
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01 add controlled analytics funnel refresh write guard",
     "transitions": [
       {
@@ -81060,14 +81060,14 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": true
     },
-    "commit_sha": "20fb71cd1d05ea17f6390335023c7d749936ac95",
+    "commit_sha": "de2b1ac0a675b17dd2ffbb64b36f3369ce859a07",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2745",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T09:31:42Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_migration_execution_allowed": false,
     "database_mutation": false,
@@ -81104,6 +81104,11 @@
         "at": "2026-07-05T17:31:00Z",
         "status": "ready_to_merge",
         "summary": "All reported GitHub checks passed for PR #2745 at head 20fb71cd1d05ea17f6390335023c7d749936ac95. Recording ready_to_merge before squash merge per PR-train ledger policy."
+      },
+      {
+        "at": "2026-07-05T17:36:00Z",
+        "status": "merged",
+        "summary": "Reconciled post-merge state for PR #2745: GitHub reports MERGED at 2026-07-05T09:31:42Z, origin/main contains merge commit de2b1ac0a675b17dd2ffbb64b36f3369ce859a07, local main is synced, and the task branch is deleted locally/remotely."
       }
     ]
   },
@@ -81117,7 +81122,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01"
     ],
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -81125,18 +81130,26 @@
         "evidence": "User authorized adding this missing PR-train item after the scan split publish/activation into gated tasks."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Wait for IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01 to merge before starting controlled SEO/GEO activation implementation."
+        "status": "pass",
+        "evidence": "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01 PR #2745 is merged; origin/main contains merge commit de2b1ac0a675b17dd2ffbb64b36f3369ce859a07."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "php -l command/test, artisan list articles, targeted Pint, focused ArticleIqMethodPagesSeoGeoActivateCommandTest plus ArticleDiscoverabilityReleaseCommandTest, focused BigFive freeze classifier tests, YAML/JSON parse, and git diff --check passed locally."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All reported GitHub checks passed for PR #2746 at head e1e8980295cfd8c8dbb8e1c872cc49ae48de2305: Semgrep OSS, Semgrep blocking secrets, content-pack-build-validate, hygiene, semgrep sarif non-blocking upload, supply-chain, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "e1e8980295cfd8c8dbb8e1c872cc49ae48de2305",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2746",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -81157,6 +81170,26 @@
         "at": "2026-07-05T13:55:29+08:00",
         "status": "pending_dependency",
         "summary": "Registered controlled SEO/GEO activation workflow. Execution waits for activation gate merge and excludes production activation writes without exact deployed SHA and command authorization."
+      },
+      {
+        "at": "2026-07-05T17:37:00Z",
+        "status": "implementation_in_progress",
+        "summary": "Dependency PR #2745 merged and local main synced. Started controlled IQ method SEO/GEO activation workflow implementation; production activation execution remains blocked without exact deployed SHA and command authorization."
+      },
+      {
+        "at": "2026-07-05T17:47:00Z",
+        "status": "local_validation_passed",
+        "summary": "Implemented controlled IQ method SEO/GEO activation command and tests. Local validation passed; no production activation, search submission, staging deploy wait, manual deploy, or production deploy was executed."
+      },
+      {
+        "at": "2026-07-05T17:49:00Z",
+        "status": "pr_open_github_checks_pending",
+        "summary": "Opened PR #2746 for the scoped controlled IQ method SEO/GEO activation workflow and pushed local-validation-passed implementation. Waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-07-05T17:57:00Z",
+        "status": "ready_to_merge",
+        "summary": "All reported GitHub checks passed for PR #2746 at head e1e8980295cfd8c8dbb8e1c872cc49ae48de2305. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   },

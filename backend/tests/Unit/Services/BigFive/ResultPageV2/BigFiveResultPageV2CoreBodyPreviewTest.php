@@ -405,6 +405,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Console/Commands/ArticleIqMethodPagesPostPublishReadback.php',
+            'backend/app/Console/Commands/ArticleIqMethodPagesSeoGeoActivate.php',
             'backend/app/Console/Commands/ArticleIqMethodPagesSeoGeoActivationGate.php',
             'backend/app/Console/Commands/ArticleIqMethodPagesPublish.php',
             'backend/app/Console/Commands/ArticleIqMethodPagesReviewApproval.php',
@@ -414,6 +415,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ];
         $bootstrapChangedLines = [
             '+        \\App\\Console\\Commands\\ArticleIqMethodPagesPostPublishReadback::class,',
+            '+        \\App\\Console\\Commands\\ArticleIqMethodPagesSeoGeoActivate::class,',
             '+        \\App\\Console\\Commands\\ArticleIqMethodPagesSeoGeoActivationGate::class,',
             '+        \\App\\Console\\Commands\\ArticleIqMethodPagesPublish::class,',
             '+        \\App\\Console\\Commands\\ArticleIqMethodPagesReviewApproval::class,',
@@ -7728,6 +7730,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php',
             'backend/app/Console/Commands/ArticleIqMethodPagesPostPublishReadback.php',
+            'backend/app/Console/Commands/ArticleIqMethodPagesSeoGeoActivate.php',
             'backend/app/Console/Commands/ArticleIqMethodPagesSeoGeoActivationGate.php',
             'backend/app/Console/Commands/ArticleIqMethodPagesPublish.php',
             'backend/app/Console/Commands/ArticleIqMethodPagesReviewApproval.php',
@@ -10661,7 +10664,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/\b(?:ArticleImportIqMethodPagesDraft|ArticleIqMethodPagesPostPublishReadback|ArticleIqMethodPagesSeoGeoActivationGate|ArticleIqMethodPagesPublish|ArticleIqMethodPagesReviewApproval|ArticleIqMethodPagesPublishGate|ArticleIqMethodPagesReadback)\b/u', $normalized) !== 1) {
+            if (preg_match('/\b(?:ArticleImportIqMethodPagesDraft|ArticleIqMethodPagesPostPublishReadback|ArticleIqMethodPagesSeoGeoActivate|ArticleIqMethodPagesSeoGeoActivationGate|ArticleIqMethodPagesPublish|ArticleIqMethodPagesReviewApproval|ArticleIqMethodPagesPublishGate|ArticleIqMethodPagesReadback)\b/u', $normalized) !== 1) {
                 return false;
             }
         }
