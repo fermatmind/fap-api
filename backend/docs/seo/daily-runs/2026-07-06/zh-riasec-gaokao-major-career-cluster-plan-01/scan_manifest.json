@@ -1,0 +1,68 @@
+{
+  "task_id": "ZH-RIASEC-GAOKAO-MAJOR-CAREER-CLUSTER-PLAN-01",
+  "repo": "fap-api",
+  "generated_at": "2026-07-06",
+  "scope": "generated-only read-only plan for Chinese RIASEC, gaokao, major, and career scenario cluster",
+  "runtime_impact": "none",
+  "cms_impact": "none",
+  "search_submission_impact": "none",
+  "deploy_impact": "none",
+  "fap_web_impact": "none",
+  "decision": "zh_riasec_gaokao_major_career_cluster_plan_completed_ready_for_topic_selection",
+  "money_owner": "/zh/tests/holland-career-interest-test-riasec",
+  "cluster_layers": [
+    "money_owner",
+    "model_explainer",
+    "boundary_explainer",
+    "comparison_pages",
+    "gaokao_major_scenario_pages",
+    "career_direction_support"
+  ],
+  "priority_candidates": [
+    "/zh/articles/gaokao-major-adjustment-unacceptable-major-checklist",
+    "/zh/articles/gaokao-score-major-shortlist-riasec-checklist",
+    "/zh/articles/hot-major-fit-riasec-course-career-checklist",
+    "/zh/articles/math-not-good-computer-ai-major-course-riasec-checklist",
+    "/zh/articles/unwanted-major-adjustment-riasec-transfer-plan"
+  ],
+  "claim_boundary": {
+    "allowed": [
+      "career-interest exploration",
+      "course and major evidence checklist",
+      "directional decision support",
+      "compare activities, environments, and interests"
+    ],
+    "forbidden": [
+      "admission prediction",
+      "guaranteed best major",
+      "hiring prediction",
+      "salary or career success prediction",
+      "medical or psychological diagnosis",
+      "official certification claim without evidence"
+    ]
+  },
+  "evidence_sources": [
+    "https://fermatmind.com/sitemap.xml",
+    "backend/docs/seo/daily-runs/2026-07-05/riasec-zh-test-landing-p0-diagnostic-01/",
+    "backend/docs/seo/daily-runs/2026-07-06/money-intent-owner-page-map-readonly-01/",
+    "backend/docs/seo/daily-runs/2026-07-06/result-interpretation-page-inventory-readonly-01/"
+  ],
+  "next_requested_train_item": "DAILY-MODE-C-TOPIC-SELECTION-20260706",
+  "deferred_items": [
+    "no CMS write",
+    "no article draft creation",
+    "no publish or unpublish",
+    "no sitemap or llms edits",
+    "no schema/canonical/noindex changes",
+    "no search submission",
+    "no GSC/GA purchase truth",
+    "no staging deploy wait",
+    "no manual deploy",
+    "no production deploy"
+  ],
+  "validation": {
+    "json_tool": "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-06/zh-riasec-gaokao-major-career-cluster-plan-01/scan_manifest.json >/dev/null",
+    "diff_check": "git diff --check",
+    "cached_diff_check": "git diff --cached --check"
+  }
+}
