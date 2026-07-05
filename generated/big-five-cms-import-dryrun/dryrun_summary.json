@@ -1,0 +1,30 @@
+{
+  "source": "generated/big-five-content-polish/cms-import-draft.polished.json",
+  "report": "generated/big-five-cms-import-dryrun/dryrun_report.json",
+  "checks": {
+    "ok": true,
+    "dry_run_only": true,
+    "writes_committed_false": true,
+    "cms_write_attempted_false": true,
+    "publish_attempted_false": true,
+    "index_attempted_false": true,
+    "sitemap_llms_release_attempted_false": true,
+    "row_count_42": true,
+    "expected_row_count_42": true,
+    "row_count_matches_expected": true,
+    "old_short_big_five_route_residue_count_0": true,
+    "faq_field_structured_source": true,
+    "faq_body_section_rows_42": true,
+    "errors_empty": true
+  },
+  "row_checks": {
+    "all_rows_noindex": true,
+    "all_rows_not_public": true,
+    "all_rows_not_index_eligible": true,
+    "all_rows_not_sitemap_eligible": true,
+    "all_rows_not_llms_eligible": true,
+    "all_rows_render_preview_excludes_faq_section": true,
+    "all_rows_faq_count_at_least_5": true
+  },
+  "status": "pass"
+}

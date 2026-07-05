@@ -1,0 +1,3581 @@
+{
+    "artifact": "BIG5-CMS-IMPORT-DRYRUN-01",
+    "status": "pass",
+    "ok": true,
+    "dry_run_only": true,
+    "write_supported_in_this_pr": false,
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "publish_attempted": false,
+    "index_attempted": false,
+    "search_release_attempted": false,
+    "sitemap_llms_release_attempted": false,
+    "source_sha256": "15d6b6df08cf3ce7c9cd8a859b566c5bfd5fc4f6c6b279c493d48bc9e447ebc6",
+    "row_count": 42,
+    "expected_row_count": 42,
+    "row_count_matches_expected": true,
+    "content_type_counts": {
+        "combination_page": 6,
+        "cross_reading_page": 5,
+        "hub_page": 2,
+        "result_review_page": 4,
+        "trait_page": 10,
+        "trait_range_page": 15
+    },
+    "locale_counts": {
+        "en-US": 6,
+        "zh-CN": 36
+    },
+    "old_short_big_five_route_residue_count": 0,
+    "faq_structured_source": "faq",
+    "faq_body_section_count": 42,
+    "faq_body_section_rows_count": 42,
+    "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+    "field_mapping_contract": {
+        "target_model": "App\\Models\\PersonalityPublicContentAsset",
+        "target_tables": [
+            "personality_public_content_assets"
+        ],
+        "source_fields": [
+            "slug",
+            "locale",
+            "content_type",
+            "title",
+            "status",
+            "canonical_path",
+            "seo",
+            "body_sections",
+            "faq",
+            "internal_links",
+            "claim_boundaries",
+            "schema_recommendation",
+            "indexability_gate"
+        ],
+        "destination_fields": [
+            "framework",
+            "entity_type",
+            "entity_key",
+            "slug",
+            "locale",
+            "title",
+            "summary",
+            "content_sections_json",
+            "seo_json",
+            "canonical_json",
+            "faq_json",
+            "schema_json",
+            "method_boundary_json",
+            "internal_links_json",
+            "review_state"
+        ]
+    },
+    "dry_run_write_guard_contract": {
+        "writes_committed": false,
+        "cms_write_attempted": false,
+        "publish_attempted": false,
+        "index_attempted": false,
+        "search_release_attempted": false,
+        "sitemap_llms_release_attempted": false,
+        "production_import_attempted": false
+    },
+    "rows": [
+        {
+            "position": 1,
+            "slug": "high-agreeableness-high-neuroticism",
+            "locale": "zh-CN",
+            "content_type": "combination_page",
+            "title": "高宜人 + 高神经质：大五人格组合解释",
+            "canonical_path": "/zh/personality/big-five/combinations/high-agreeableness-high-neuroticism",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "high-agreeableness-high-neuroticism",
+                "slug": "big-five/high-agreeableness-high-neuroticism",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "人工审稿关注点",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "人工审稿关注点",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 2,
+            "slug": "high-openness-high-extraversion",
+            "locale": "zh-CN",
+            "content_type": "combination_page",
+            "title": "高开放 + 高外向：大五人格组合解释",
+            "canonical_path": "/zh/personality/big-five/combinations/high-openness-high-extraversion",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "high-openness-high-extraversion",
+                "slug": "big-five/high-openness-high-extraversion",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "人工审稿关注点",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "人工审稿关注点",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 3,
+            "slug": "high-openness-low-conscientiousness",
+            "locale": "zh-CN",
+            "content_type": "combination_page",
+            "title": "高开放 + 低尽责：大五人格组合解释",
+            "canonical_path": "/zh/personality/big-five/combinations/high-openness-low-conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "high-openness-low-conscientiousness",
+                "slug": "big-five/high-openness-low-conscientiousness",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 9,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                9
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 8,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 4,
+            "slug": "low-agreeableness-high-conscientiousness",
+            "locale": "zh-CN",
+            "content_type": "combination_page",
+            "title": "低宜人 + 高尽责：大五人格组合解释",
+            "canonical_path": "/zh/personality/big-five/combinations/low-agreeableness-high-conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "low-agreeableness-high-conscientiousness",
+                "slug": "big-five/low-agreeableness-high-conscientiousness",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "人工审稿关注点",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "人工审稿关注点",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 5,
+            "slug": "low-extraversion-high-conscientiousness",
+            "locale": "zh-CN",
+            "content_type": "combination_page",
+            "title": "低外向 + 高尽责：大五人格组合解释",
+            "canonical_path": "/zh/personality/big-five/combinations/low-extraversion-high-conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "low-extraversion-high-conscientiousness",
+                "slug": "big-five/low-extraversion-high-conscientiousness",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "人工审稿关注点",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "人工审稿关注点",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 6,
+            "slug": "low-neuroticism-high-conscientiousness",
+            "locale": "zh-CN",
+            "content_type": "combination_page",
+            "title": "低神经质 + 高尽责：大五人格组合解释",
+            "canonical_path": "/zh/personality/big-five/combinations/low-neuroticism-high-conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "low-neuroticism-high-conscientiousness",
+                "slug": "big-five/low-neuroticism-high-conscientiousness",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "人工审稿关注点",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "组合解释",
+                "具体优势",
+                "具体风险",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "复盘建议",
+                "人工审稿关注点",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 7,
+            "slug": "big-five-learning-style",
+            "locale": "zh-CN",
+            "content_type": "cross_reading_page",
+            "title": "Big Five + 学习方式",
+            "canonical_path": "/zh/personality/big-five/big-five-learning-style",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-learning-style",
+                "slug": "big-five/big-five-learning-style",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 9,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "五个维度怎么看学习",
+                "设计学习实验",
+                "学习复盘四问",
+                "和 MBTI / RIASEC 的关系",
+                "方法边界",
+                "FAQ",
+                "内容资产建议",
+                "复盘示例"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                7
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 8,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "五个维度怎么看学习",
+                "设计学习实验",
+                "学习复盘四问",
+                "和 MBTI / RIASEC 的关系",
+                "方法边界",
+                "内容资产建议",
+                "复盘示例"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 8,
+            "slug": "big-five-relationship-communication",
+            "locale": "zh-CN",
+            "content_type": "cross_reading_page",
+            "title": "Big Five + 关系沟通",
+            "canonical_path": "/zh/personality/big-five/big-five-relationship-communication",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-relationship-communication",
+                "slug": "big-five/big-five-relationship-communication",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 9,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "五个维度如何影响沟通",
+                "从标签改成请求",
+                "关系中的优势与代价",
+                "不适合的用法",
+                "行动建议",
+                "FAQ",
+                "内容资产建议",
+                "复盘示例"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                7
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 8,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "五个维度如何影响沟通",
+                "从标签改成请求",
+                "关系中的优势与代价",
+                "不适合的用法",
+                "行动建议",
+                "内容资产建议",
+                "复盘示例"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 9,
+            "slug": "big-five-riasec-career",
+            "locale": "zh-CN",
+            "content_type": "cross_reading_page",
+            "title": "Big Five + RIASEC 职业探索",
+            "canonical_path": "/zh/personality/big-five/big-five-riasec-career",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-riasec-career",
+                "slug": "big-five/big-five-riasec-career",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 9,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "分工方式",
+                "一个例子",
+                "如何避免误用",
+                "费马测试页面建议",
+                "方法边界",
+                "FAQ",
+                "内容资产建议",
+                "复盘示例"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                7
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 8,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "分工方式",
+                "一个例子",
+                "如何避免误用",
+                "费马测试页面建议",
+                "方法边界",
+                "内容资产建议",
+                "复盘示例"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 10,
+            "slug": "big-five-stress-management",
+            "locale": "zh-CN",
+            "content_type": "cross_reading_page",
+            "title": "Big Five + 压力管理",
+            "canonical_path": "/zh/personality/big-five/big-five-stress-management",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-stress-management",
+                "slug": "big-five/big-five-stress-management",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 9,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "五个维度与压力线索",
+                "复盘方法",
+                "场景化使用",
+                "何时不应只靠自我复盘",
+                "行动建议",
+                "FAQ",
+                "内容资产建议",
+                "复盘示例"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                7
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 8,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "五个维度与压力线索",
+                "复盘方法",
+                "场景化使用",
+                "何时不应只靠自我复盘",
+                "行动建议",
+                "内容资产建议",
+                "复盘示例"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 11,
+            "slug": "big-five-vs-mbti",
+            "locale": "zh-CN",
+            "content_type": "cross_reading_page",
+            "title": "大五人格 vs MBTI",
+            "canonical_path": "/zh/personality/big-five/big-five-vs-mbti",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-vs-mbti",
+                "slug": "big-five/big-five-vs-mbti",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 8,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "两种模型的阅读方式",
+                "为什么不能互相替代",
+                "在费马测试里怎么一起使用",
+                "常见误区",
+                "行动建议",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                8
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 7,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "两种模型的阅读方式",
+                "为什么不能互相替代",
+                "在费马测试里怎么一起使用",
+                "常见误区",
+                "行动建议",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 12,
+            "slug": "big-five",
+            "locale": "en-US",
+            "content_type": "hub_page",
+            "title": "Big Five Personality Model: OCEAN Trait Guide",
+            "canonical_path": "/en/personality/big-five",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "hub",
+                "entity_key": "big-five",
+                "slug": "big-five/big-five",
+                "locale": "en"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 7,
+            "faq_count": 5,
+            "internal_link_count": 5,
+            "body_section_headings": [
+                "What the Big Five is useful for",
+                "How to read a result",
+                "Practical review workflow",
+                "Career, learning, and relationships",
+                "What it should not be used for",
+                "Draft and indexability boundary",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                7
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 6,
+            "render_preview_body_section_headings": [
+                "What the Big Five is useful for",
+                "How to read a result",
+                "Practical review workflow",
+                "Career, learning, and relationships",
+                "What it should not be used for",
+                "Draft and indexability boundary"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 13,
+            "slug": "big-five",
+            "locale": "zh-CN",
+            "content_type": "hub_page",
+            "title": "大五人格模型：OCEAN 五维度自我认知指南",
+            "canonical_path": "/zh/personality/big-five",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "hub",
+                "entity_key": "big-five",
+                "slug": "big-five/big-five",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 8,
+            "faq_count": 5,
+            "internal_link_count": 5,
+            "body_section_headings": [
+                "五个维度",
+                "高/中/低分不是好坏判断",
+                "适合做什么",
+                "不适合做什么",
+                "推荐阅读路径",
+                "页面资产地图",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                8
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 7,
+            "render_preview_body_section_headings": [
+                "五个维度",
+                "高/中/低分不是好坏判断",
+                "适合做什么",
+                "不适合做什么",
+                "推荐阅读路径",
+                "页面资产地图",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 14,
+            "slug": "agreeableness-high",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "宜人性高分：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/agreeableness-high",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "agreeableness-high",
+                "slug": "big-five/agreeableness-high",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 15,
+            "slug": "agreeableness-low",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "宜人性低分：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/agreeableness-low",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "agreeableness-low",
+                "slug": "big-five/agreeableness-low",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 16,
+            "slug": "agreeableness-mid",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "宜人性中间区间：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/agreeableness-mid",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "agreeableness-mid",
+                "slug": "big-five/agreeableness-mid",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 17,
+            "slug": "conscientiousness-high",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "尽责性高分：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/conscientiousness-high",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "conscientiousness-high",
+                "slug": "big-five/conscientiousness-high",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 18,
+            "slug": "conscientiousness-low",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "尽责性低分：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/conscientiousness-low",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "conscientiousness-low",
+                "slug": "big-five/conscientiousness-low",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 19,
+            "slug": "conscientiousness-mid",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "尽责性中间区间：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/conscientiousness-mid",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "conscientiousness-mid",
+                "slug": "big-five/conscientiousness-mid",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 20,
+            "slug": "extraversion-high",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "外向性高分：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/extraversion-high",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "extraversion-high",
+                "slug": "big-five/extraversion-high",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 21,
+            "slug": "extraversion-low",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "外向性低分：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/extraversion-low",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "extraversion-low",
+                "slug": "big-five/extraversion-low",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 22,
+            "slug": "extraversion-mid",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "外向性中间区间：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/extraversion-mid",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "extraversion-mid",
+                "slug": "big-five/extraversion-mid",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 23,
+            "slug": "neuroticism-high",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "神经质 / 情绪敏感性高分：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/neuroticism-high",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "neuroticism-high",
+                "slug": "big-five/neuroticism-high",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 24,
+            "slug": "neuroticism-low",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "神经质 / 情绪敏感性低分：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/neuroticism-low",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "neuroticism-low",
+                "slug": "big-five/neuroticism-low",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 25,
+            "slug": "neuroticism-mid",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "神经质 / 情绪敏感性中间区间：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/neuroticism-mid",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "neuroticism-mid",
+                "slug": "big-five/neuroticism-mid",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 26,
+            "slug": "openness-high",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "开放性高分：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/openness-high",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "openness-high",
+                "slug": "big-five/openness-high",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 27,
+            "slug": "openness-low",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "开放性低分：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/openness-low",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "openness-low",
+                "slug": "big-five/openness-low",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 28,
+            "slug": "openness-mid",
+            "locale": "zh-CN",
+            "content_type": "trait_range_page",
+            "title": "开放性中间区间：大五人格区间解释",
+            "canonical_path": "/zh/personality/big-five/openness-mid",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "openness-mid",
+                "slug": "big-five/openness-mid",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                10
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "这个区间常见表现",
+                "可能的优势",
+                "可能的代价",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力信号",
+                "复盘动作",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 29,
+            "slug": "big-five-30-day-review",
+            "locale": "zh-CN",
+            "content_type": "result_review_page",
+            "title": "如何用大五做 30 天自我观察",
+            "canonical_path": "/zh/personality/big-five/big-five-30-day-review",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-30-day-review",
+                "slug": "big-five/big-five-30-day-review",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "第 1 周：建立观察语言",
+                "第 2 周：寻找重复模式",
+                "第 3 周：设计小动作",
+                "第 4 周：复盘成本与收益",
+                "记录模板",
+                "方法边界",
+                "FAQ",
+                "内容资产建议",
+                "审核重点"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                8
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "第 1 周：建立观察语言",
+                "第 2 周：寻找重复模式",
+                "第 3 周：设计小动作",
+                "第 4 周：复盘成本与收益",
+                "记录模板",
+                "方法边界",
+                "内容资产建议",
+                "审核重点"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 30,
+            "slug": "big-five-score-ranges",
+            "locale": "zh-CN",
+            "content_type": "result_review_page",
+            "title": "大五人格高/中/低分不是好坏判断",
+            "canonical_path": "/zh/personality/big-five/big-five-score-ranges",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-score-ranges",
+                "slug": "big-five/big-five-score-ranges",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "高分怎么理解",
+                "低分怎么理解",
+                "中间区间怎么理解",
+                "为什么不能价值化",
+                "页面设计建议",
+                "方法边界",
+                "FAQ",
+                "内容资产建议",
+                "审核重点"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                8
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "高分怎么理解",
+                "低分怎么理解",
+                "中间区间怎么理解",
+                "为什么不能价值化",
+                "页面设计建议",
+                "方法边界",
+                "内容资产建议",
+                "审核重点"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 31,
+            "slug": "discuss-results-with-others",
+            "locale": "zh-CN",
+            "content_type": "result_review_page",
+            "title": "如何和朋友、伴侣、同事讨论大五结果",
+            "canonical_path": "/zh/personality/big-five/discuss-results-with-others",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "discuss-results-with-others",
+                "slug": "big-five/discuss-results-with-others",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 10,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "讨论前先做自我整理",
+                "朋友关系中的用法",
+                "伴侣关系中的用法",
+                "同事协作中的用法",
+                "防止误用的句式",
+                "方法边界",
+                "FAQ",
+                "内容资产建议",
+                "审核重点"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                8
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 9,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "讨论前先做自我整理",
+                "朋友关系中的用法",
+                "伴侣关系中的用法",
+                "同事协作中的用法",
+                "防止误用的句式",
+                "方法边界",
+                "内容资产建议",
+                "审核重点"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 32,
+            "slug": "how-to-read-big-five-results",
+            "locale": "zh-CN",
+            "content_type": "result_review_page",
+            "title": "如何读懂大五人格结果",
+            "canonical_path": "/zh/personality/big-five/how-to-read-big-five-results",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "how-to-read-big-five-results",
+                "slug": "big-five/how-to-read-big-five-results",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 11,
+            "faq_count": 5,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "快速回答",
+                "第一步：先看维度，不急着下结论",
+                "第二步：看高/中/低区间",
+                "第三步：放回真实场景",
+                "建议的阅读顺序",
+                "常见误读",
+                "行动建议",
+                "方法边界",
+                "FAQ",
+                "内容资产建议",
+                "审核重点"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                9
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 10,
+            "render_preview_body_section_headings": [
+                "快速回答",
+                "第一步：先看维度，不急着下结论",
+                "第二步：看高/中/低区间",
+                "第三步：放回真实场景",
+                "建议的阅读顺序",
+                "常见误读",
+                "行动建议",
+                "方法边界",
+                "内容资产建议",
+                "审核重点"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 33,
+            "slug": "agreeableness",
+            "locale": "en-US",
+            "content_type": "trait_page",
+            "title": "Agreeableness: Big Five Trait Guide",
+            "canonical_path": "/en/personality/big-five/agreeableness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "agreeableness",
+                "slug": "big-five/agreeableness",
+                "locale": "en"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 9,
+            "faq_count": 5,
+            "internal_link_count": 2,
+            "body_section_headings": [
+                "What this trait describes",
+                "High, mid, and low ranges",
+                "Work and learning use cases",
+                "Communication and relationship use cases",
+                "Common misunderstanding",
+                "Review prompts",
+                "Method boundary",
+                "Draft and indexability boundary",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                9
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 8,
+            "render_preview_body_section_headings": [
+                "What this trait describes",
+                "High, mid, and low ranges",
+                "Work and learning use cases",
+                "Communication and relationship use cases",
+                "Common misunderstanding",
+                "Review prompts",
+                "Method boundary",
+                "Draft and indexability boundary"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 34,
+            "slug": "agreeableness",
+            "locale": "zh-CN",
+            "content_type": "trait_page",
+            "title": "宜人性：大五人格维度解释",
+            "canonical_path": "/zh/personality/big-five/agreeableness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "agreeableness",
+                "slug": "big-five/agreeableness",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 14,
+            "faq_count": 6,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "这个维度在描述什么",
+                "高分倾向",
+                "中间区间",
+                "低分倾向",
+                "优势与代价并存",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力 / 复盘场景",
+                "如何使用这个维度做复盘",
+                "不要这样理解",
+                "SEO / GEO 摘要",
+                "内部链接建议",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                14
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 13,
+            "render_preview_body_section_headings": [
+                "这个维度在描述什么",
+                "高分倾向",
+                "中间区间",
+                "低分倾向",
+                "优势与代价并存",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力 / 复盘场景",
+                "如何使用这个维度做复盘",
+                "不要这样理解",
+                "SEO / GEO 摘要",
+                "内部链接建议",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 35,
+            "slug": "conscientiousness",
+            "locale": "en-US",
+            "content_type": "trait_page",
+            "title": "Conscientiousness: Big Five Trait Guide",
+            "canonical_path": "/en/personality/big-five/conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "conscientiousness",
+                "slug": "big-five/conscientiousness",
+                "locale": "en"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 9,
+            "faq_count": 5,
+            "internal_link_count": 2,
+            "body_section_headings": [
+                "What this trait describes",
+                "High, mid, and low ranges",
+                "Work and learning use cases",
+                "Communication and relationship use cases",
+                "Common misunderstanding",
+                "Review prompts",
+                "Method boundary",
+                "Draft and indexability boundary",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                9
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 8,
+            "render_preview_body_section_headings": [
+                "What this trait describes",
+                "High, mid, and low ranges",
+                "Work and learning use cases",
+                "Communication and relationship use cases",
+                "Common misunderstanding",
+                "Review prompts",
+                "Method boundary",
+                "Draft and indexability boundary"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 36,
+            "slug": "conscientiousness",
+            "locale": "zh-CN",
+            "content_type": "trait_page",
+            "title": "尽责性：大五人格维度解释",
+            "canonical_path": "/zh/personality/big-five/conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "conscientiousness",
+                "slug": "big-five/conscientiousness",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 14,
+            "faq_count": 6,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "这个维度在描述什么",
+                "高分倾向",
+                "中间区间",
+                "低分倾向",
+                "优势与代价并存",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力 / 复盘场景",
+                "如何使用这个维度做复盘",
+                "不要这样理解",
+                "SEO / GEO 摘要",
+                "内部链接建议",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                14
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 13,
+            "render_preview_body_section_headings": [
+                "这个维度在描述什么",
+                "高分倾向",
+                "中间区间",
+                "低分倾向",
+                "优势与代价并存",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力 / 复盘场景",
+                "如何使用这个维度做复盘",
+                "不要这样理解",
+                "SEO / GEO 摘要",
+                "内部链接建议",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 37,
+            "slug": "extraversion",
+            "locale": "en-US",
+            "content_type": "trait_page",
+            "title": "Extraversion: Big Five Trait Guide",
+            "canonical_path": "/en/personality/big-five/extraversion",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "extraversion",
+                "slug": "big-five/extraversion",
+                "locale": "en"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 9,
+            "faq_count": 5,
+            "internal_link_count": 2,
+            "body_section_headings": [
+                "What this trait describes",
+                "High, mid, and low ranges",
+                "Work and learning use cases",
+                "Communication and relationship use cases",
+                "Common misunderstanding",
+                "Review prompts",
+                "Method boundary",
+                "Draft and indexability boundary",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                9
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 8,
+            "render_preview_body_section_headings": [
+                "What this trait describes",
+                "High, mid, and low ranges",
+                "Work and learning use cases",
+                "Communication and relationship use cases",
+                "Common misunderstanding",
+                "Review prompts",
+                "Method boundary",
+                "Draft and indexability boundary"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 38,
+            "slug": "extraversion",
+            "locale": "zh-CN",
+            "content_type": "trait_page",
+            "title": "外向性：大五人格维度解释",
+            "canonical_path": "/zh/personality/big-five/extraversion",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "extraversion",
+                "slug": "big-five/extraversion",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 14,
+            "faq_count": 6,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "这个维度在描述什么",
+                "高分倾向",
+                "中间区间",
+                "低分倾向",
+                "优势与代价并存",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力 / 复盘场景",
+                "如何使用这个维度做复盘",
+                "不要这样理解",
+                "SEO / GEO 摘要",
+                "内部链接建议",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                14
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 13,
+            "render_preview_body_section_headings": [
+                "这个维度在描述什么",
+                "高分倾向",
+                "中间区间",
+                "低分倾向",
+                "优势与代价并存",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力 / 复盘场景",
+                "如何使用这个维度做复盘",
+                "不要这样理解",
+                "SEO / GEO 摘要",
+                "内部链接建议",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 39,
+            "slug": "neuroticism",
+            "locale": "en-US",
+            "content_type": "trait_page",
+            "title": "Neuroticism: Big Five Trait Guide",
+            "canonical_path": "/en/personality/big-five/neuroticism",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "neuroticism",
+                "slug": "big-five/neuroticism",
+                "locale": "en"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 9,
+            "faq_count": 5,
+            "internal_link_count": 2,
+            "body_section_headings": [
+                "What this trait describes",
+                "High, mid, and low ranges",
+                "Work and learning use cases",
+                "Communication and relationship use cases",
+                "Common misunderstanding",
+                "Review prompts",
+                "Method boundary",
+                "Draft and indexability boundary",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                9
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 8,
+            "render_preview_body_section_headings": [
+                "What this trait describes",
+                "High, mid, and low ranges",
+                "Work and learning use cases",
+                "Communication and relationship use cases",
+                "Common misunderstanding",
+                "Review prompts",
+                "Method boundary",
+                "Draft and indexability boundary"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 40,
+            "slug": "neuroticism",
+            "locale": "zh-CN",
+            "content_type": "trait_page",
+            "title": "神经质 / 情绪敏感性：大五人格维度解释",
+            "canonical_path": "/zh/personality/big-five/neuroticism",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "neuroticism",
+                "slug": "big-five/neuroticism",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 14,
+            "faq_count": 6,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "这个维度在描述什么",
+                "高分倾向",
+                "中间区间",
+                "低分倾向",
+                "优势与代价并存",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力 / 复盘场景",
+                "如何使用这个维度做复盘",
+                "不要这样理解",
+                "SEO / GEO 摘要",
+                "内部链接建议",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                14
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 13,
+            "render_preview_body_section_headings": [
+                "这个维度在描述什么",
+                "高分倾向",
+                "中间区间",
+                "低分倾向",
+                "优势与代价并存",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力 / 复盘场景",
+                "如何使用这个维度做复盘",
+                "不要这样理解",
+                "SEO / GEO 摘要",
+                "内部链接建议",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 41,
+            "slug": "openness",
+            "locale": "en-US",
+            "content_type": "trait_page",
+            "title": "Openness: Big Five Trait Guide",
+            "canonical_path": "/en/personality/big-five/openness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "openness",
+                "slug": "big-five/openness",
+                "locale": "en"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 9,
+            "faq_count": 5,
+            "internal_link_count": 2,
+            "body_section_headings": [
+                "What this trait describes",
+                "High, mid, and low ranges",
+                "Work and learning use cases",
+                "Communication and relationship use cases",
+                "Common misunderstanding",
+                "Review prompts",
+                "Method boundary",
+                "Draft and indexability boundary",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                9
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 8,
+            "render_preview_body_section_headings": [
+                "What this trait describes",
+                "High, mid, and low ranges",
+                "Work and learning use cases",
+                "Communication and relationship use cases",
+                "Common misunderstanding",
+                "Review prompts",
+                "Method boundary",
+                "Draft and indexability boundary"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 42,
+            "slug": "openness",
+            "locale": "zh-CN",
+            "content_type": "trait_page",
+            "title": "开放性：大五人格维度解释",
+            "canonical_path": "/zh/personality/big-five/openness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "openness",
+                "slug": "big-five/openness",
+                "locale": "zh-CN"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityPublicContentAsset",
+                "target_table": "personality_public_content_assets",
+                "json_columns": [
+                    "content_sections_json",
+                    "seo_json",
+                    "canonical_json",
+                    "faq_json",
+                    "method_boundary_json",
+                    "internal_links_json"
+                ]
+            },
+            "field_mapping": {
+                "body_sections": "content_sections_json",
+                "seo": "seo_json",
+                "canonical_path": "canonical_json.path",
+                "faq": "faq_json",
+                "claim_boundaries": "method_boundary_json.claim_boundaries",
+                "internal_links": "internal_links_json",
+                "schema_recommendation": "schema_json.recommendation",
+                "indexability_gate": "review_state/index_eligible/sitemap_eligible/llms_eligible gates"
+            },
+            "section_count": 14,
+            "faq_count": 6,
+            "internal_link_count": 3,
+            "body_section_headings": [
+                "这个维度在描述什么",
+                "高分倾向",
+                "中间区间",
+                "低分倾向",
+                "优势与代价并存",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力 / 复盘场景",
+                "如何使用这个维度做复盘",
+                "不要这样理解",
+                "SEO / GEO 摘要",
+                "内部链接建议",
+                "方法边界",
+                "FAQ"
+            ],
+            "faq_structured_source": "faq",
+            "faq_body_section_present": true,
+            "faq_body_section_count": 1,
+            "faq_body_section_indexes": [
+                14
+            ],
+            "faq_deduplication_policy": "faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.",
+            "render_preview_section_count": 13,
+            "render_preview_body_section_headings": [
+                "这个维度在描述什么",
+                "高分倾向",
+                "中间区间",
+                "低分倾向",
+                "优势与代价并存",
+                "工作 / 学习场景",
+                "关系 / 沟通场景",
+                "压力 / 复盘场景",
+                "如何使用这个维度做复盘",
+                "不要这样理解",
+                "SEO / GEO 摘要",
+                "内部链接建议",
+                "方法边界"
+            ],
+            "draft_state_after_import": {
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "robots": "noindex,follow",
+                "launch_state": "review",
+                "review_state": "cms_import_draft_pending_review",
+                "published_at": null
+            },
+            "action": "would_validate_personality_public_content_asset_draft",
+            "write_mode_in_this_pr": "not_supported"
+        }
+    ],
+    "errors": [],
+    "warnings": [],
+    "package_path": "/Users/rainie/Desktop/GitHub/fap-api-big5-cms-train/backend/../generated/big-five-content-polish/cms-import-draft.polished.json",
+    "command": "personality:big-five-cms-import-draft-dry-run"
+}
