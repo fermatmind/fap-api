@@ -8,6 +8,7 @@ use App\Console\Commands\ArticleCoverPropagationSmoke;
 use App\Console\Commands\ArticleDiscoverabilityRelease;
 use App\Console\Commands\ArticleEnsureSeoMetaBaseline;
 use App\Console\Commands\ArticleImportEditorialPackage;
+use App\Console\Commands\ArticleImportIqMethodPagesDraft;
 use App\Console\Commands\ArticleImportSeoContentPackageDraft;
 use App\Console\Commands\ArticlePublishControlled;
 use App\Console\Commands\ArticleReleaseCloseout;
@@ -182,16 +183,16 @@ use App\Console\Commands\PersonalityAgentPostPromotionSearchGateCommand;
 use App\Console\Commands\PersonalityBigFiveCmsImportDraftDryRun;
 use App\Console\Commands\PersonalityBigFivePublicProfileAgentDraft;
 use App\Console\Commands\PersonalityEnneagramCmsDraft;
+use App\Console\Commands\PersonalityEnneagramCmsPromote;
 use App\Console\Commands\PersonalityImportDesktopCloneBaseline;
-use App\Console\Commands\PersonalityMbti64GscQueryReadonlyExport;
 use App\Console\Commands\PersonalityMbti64BackendImportContract;
 use App\Console\Commands\PersonalityMbti64CmsInternalLinkDraft;
 use App\Console\Commands\PersonalityMbti64CmsProjectionDraft;
 use App\Console\Commands\PersonalityMbti64CmsRevisionDraft;
 use App\Console\Commands\PersonalityMbti64CmsRevisionPromote;
+use App\Console\Commands\PersonalityMbti64GscQueryReadonlyExport;
 use App\Console\Commands\PersonalityTdkNextBatchApprovalDraftGateCommand;
 use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessCommand;
-use App\Console\Commands\PersonalityEnneagramCmsPromote;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
 use App\Console\Commands\RiasecResultPageAssetAgentAuditCommand;
@@ -229,16 +230,16 @@ use App\Console\Commands\SeoAgentRunCommand;
 use App\Console\Commands\SeoAgentRuntimeSeoQaScanCommand;
 use App\Console\Commands\SeoAgentWeeklyDraftWriteAutoCommand;
 use App\Console\Commands\SeoAgentWeeklyReadonlyRunnerCommand;
-use App\Console\Commands\SeoOpsP0CtrArticleCmsUpdateWriterCommand;
+use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
+use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
 use App\Console\Commands\SeoOpsGaokaoV5CmsDraftGateCommand;
 use App\Console\Commands\SeoOpsGaokaoV5PropagationGateReadinessCommand;
 use App\Console\Commands\SeoOpsGaokaoV5PublishGateRepairCommand;
 use App\Console\Commands\SeoOpsGaokaoV5UrlTruthEligibilityGateCommand;
+use App\Console\Commands\SeoOpsP0CtrArticleCmsUpdateWriterCommand;
 use App\Console\Commands\SeoOpsZhArticleQualityControlledWriterCommand;
-use App\Console\Commands\SeoOpsZhArticleQualityRepairDryRunCommand;
 use App\Console\Commands\SeoOpsZhArticleQualityReadbackCommand;
-use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
-use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
+use App\Console\Commands\SeoOpsZhArticleQualityRepairDryRunCommand;
 use App\Console\Commands\StorageControlPlaneSnapshot;
 use App\Console\Commands\StorageInventory;
 use App\Console\Commands\StorageMigrateLegacyArtifacts;
@@ -442,6 +443,7 @@ class Kernel extends ConsoleKernel
         EvidencePack::class,
         ExperimentGuardrailsEvaluate::class,
         ArticleImportEditorialPackage::class,
+        ArticleImportIqMethodPagesDraft::class,
         ArticleImportSeoContentPackageDraft::class,
         ArticleEnsureSeoMetaBaseline::class,
         ArticleUpdateExistingSeoContentPackage::class,

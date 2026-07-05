@@ -9,3 +9,29 @@
 - why not current PR scope: `git diff --name-only origin/main...HEAD` in the isolated PR worktree contains only the Big Five CMS import dry-run command, planner, tests, Kernel registration, and PR train metadata. It does not contain the IQ method files.
 - whether required checks are affected: local full-check reproduction was affected; GitHub required checks run in a clean checkout and the current PR fix targets the actual GitHub failure, which was the hardcoded desktop package path in the test.
 - recommended follow-up: keep IQ method page work isolated in its own branch/PR and avoid sharing dirty local worktree state with PR-train verification worktrees.
+
+## IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01
+
+- repo: `fap-api`
+- branch: `codex/iq-method-pages-cms-import-01`
+- blocker type: `external_full_suite_failure_timeout`
+- evidence:
+  - `cd backend && composer test` exited with code 1 after Composer process timeout at 300 seconds.
+  - Before timeout, unrelated failures were observed in:
+    - `Tests\Unit\Services\Content\CulturalCalibrationLayerServiceTest`
+    - `Tests\Feature\Architecture\ServiceLayerBoundaryTest`
+    - `Tests\Feature\Career\CareerCnProxyPublicOwnerApiTest`
+    - `Tests\Feature\Career\CareerJobDetailApiTest`
+    - `Tests\Feature\CareerCms\ArticleBaselineImportTest`
+  - Focused rerun of `ServiceLayerBoundaryTest` reported existing HTTP helper violations in:
+    - `backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogFixtureParser.php`
+    - `backend/app/Services/Iq/IqOwnerOriginal30BankService.php`
+- why not current PR scope:
+  - Current PR scope only adds the IQ method pages CMS draft importer command/service/test, registers the command, extends the topic group whitelist, and updates PR-train metadata.
+  - The observed full-suite failures are in Content, Architecture, Career, and CareerCms surfaces outside the changed IQ method importer files.
+- whether required checks are affected:
+  - Local focused validation for this PR passed.
+  - GitHub required checks must still be inspected after PR creation; if a required check fails, inspect the failing job before merge.
+- recommended follow-up:
+  - Track and fix the failing Content/Career/Architecture tests under their owning PR scopes.
+  - Do not mix those repairs into the IQ method pages CMS import PR.

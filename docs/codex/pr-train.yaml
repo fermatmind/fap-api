@@ -36790,6 +36790,53 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01
+    repo: fap-api
+    depends_on:
+      - IQ-METHOD-PAGES-ZH-CN-CMS-DRY-RUN-01
+    branch: codex/iq-method-pages-cms-import-01
+    title: "IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01: import IQ method pages as CMS drafts"
+    train_scope: iq_method_pages_zh_cn_cms_import
+    status: in_progress
+    scope:
+      - Add a backend-authoritative importer for the fap-web IQ method pages CMS dry-run package.
+      - Support dry-run validation and draft-only import of 7 zh-CN CMS Article records, IQ topic draft entries, and a draft landing page block.
+      - Preserve draft_review_only/noindex state and keep publish, sitemap, llms, production deploy, and frontend fallback out of scope.
+    allowed_paths:
+      - backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php
+      - backend/app/Services/Cms/IqMethodPages/**
+      - backend/app/Models/TopicProfileEntry.php
+      - backend/app/Console/Kernel.php
+      - backend/bootstrap/app.php
+      - backend/tests/Feature/Console/ArticleImportIqMethodPagesDraftCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Publish articles, flip indexability, activate sitemap/llms, submit search URLs, run production deploy, rewrite content, change IQ scoring, expose answer keys, or add frontend fallback content.
+      - Mutate production CMS or production DB from this PR without separate exact environment authorization.
+    validation:
+      - php -l backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php
+      - php -l backend/app/Services/Cms/IqMethodPages/IqMethodPagesDraftImporter.php
+      - php -l backend/tests/Feature/Console/ArticleImportIqMethodPagesDraftCommandTest.php
+      - cd backend && php artisan list articles --no-ansi | rg 'iq-method'
+      - cd backend && vendor/bin/pint --test app/Console/Commands/ArticleImportIqMethodPagesDraft.php app/Services/Cms/IqMethodPages/IqMethodPagesDraftImporter.php tests/Feature/Console/ArticleImportIqMethodPagesDraftCommandTest.php app/Models/TopicProfileEntry.php app/Console/Kernel.php bootstrap/app.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ArticleImportIqMethodPagesDraftCommandTest --no-ansi
+      - cd backend && php artisan route:list --path=api --except-vendor --no-ansi >/tmp/fap-api-route-list-api.txt
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: true
+    cms_mutation: true
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01
+
   - id: IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01
     repo: fap-api
     depends_on:

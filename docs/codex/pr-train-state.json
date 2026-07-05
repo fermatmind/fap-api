@@ -49528,6 +49528,106 @@
       }
     ]
   },
+  "IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01": {
+    "id": "IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-method-pages-cms-import-01",
+    "title": "IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01: import IQ method pages as CMS drafts",
+    "train_scope": "iq_method_pages_zh_cn_cms_import",
+    "depends_on": [
+      "IQ-METHOD-PAGES-ZH-CN-CMS-DRY-RUN-01"
+    ],
+    "status": "committed",
+    "authorized_by_user": "2026-07-05 user explicitly provided IQ 7 pages CMS上线执行计划 with this PR id, repo, scope, and dry-run/import/readback/publish/SEO-GEO split.",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "fap-web PR #1606 for IQ-METHOD-PAGES-ZH-CN-CMS-DRY-RUN-01 is merged; origin/main in fap-web contains merge commit 297bd9c7809edc257555a57be5ae406d43e8c05f."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Services/Cms/IqMethodPages/IqMethodPagesDraftImporter.php",
+          "php -l backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php",
+          "php -l backend/tests/Feature/Console/ArticleImportIqMethodPagesDraftCommandTest.php",
+          "cd backend && php artisan list articles --no-ansi | rg 'iq-method'",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/ArticleImportIqMethodPagesDraft.php app/Services/Cms/IqMethodPages/IqMethodPagesDraftImporter.php tests/Feature/Console/ArticleImportIqMethodPagesDraftCommandTest.php app/Models/TopicProfileEntry.php app/Console/Kernel.php bootstrap/app.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ArticleImportIqMethodPagesDraftCommandTest --no-ansi",
+          "cd backend && php artisan route:list --path=api --except-vendor --no-ansi >/tmp/fap-api-route-list-api.txt",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --check",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/iq-method-pages.<temp>.sqlite php artisan migrate --force --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/iq-method-pages.<temp>.sqlite php artisan articles:import-iq-method-pages-draft --package=/Users/rainie/Desktop/GitHub/fap-web --dry-run --json"
+        ],
+        "notes": "Syntax, command discovery, targeted Pint, focused PHPUnit, route:list, YAML/JSON parse, diff check, and real fap-web IQ method dry-run package validation passed. Real package dry-run returned ok=true, action=would_create_draft, article_count=7, errors_count=0."
+      },
+      "composer_test_full_suite": {
+        "status": "failed_external_sidecar",
+        "command": "cd backend && composer test",
+        "evidence": "Exited with code 1 after Composer process timeout at 300 seconds. Before timeout, failures were observed in Content, Architecture, Career, and CareerCms tests outside current IQ method importer scope. Sidecar recorded at generated/pr-train-sidecar-issues/sidecar_issues.md and generated/pr-train-sidecar-issues/sidecar_issues.json."
+      },
+      "focused_architecture_rerun": {
+        "status": "failed_external_sidecar",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ServiceLayerBoundaryTest --no-ansi",
+        "evidence": "Failure points to pre-existing HTTP helper calls in backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogFixtureParser.php and backend/app/Services/Iq/IqOwnerOriginal30BankService.php, not the newly added backend/app/Services/Cms/IqMethodPages importer."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": "ab66a60a978c04721b4d45b1db2ea04d6b305403",
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": true,
+    "cms_mutation": true,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "transitions": [
+      {
+        "at": "2026-07-05T12:00:00+08:00",
+        "status": "in_progress",
+        "summary": "Started backend IQ method pages CMS import tooling from explicit user plan. Scope is importer command/service/test plus PR-train metadata. Production CMS/DB mutation, publish, sitemap/llms activation, frontend fallback, scoring changes, and deploy remain forbidden without separate exact authorization."
+      },
+      {
+        "at": "2026-07-05T12:00:00+08:00",
+        "status": "focused_local_validation_passed",
+        "summary": "Added articles:import-iq-method-pages-draft with dry-run and draft-only import support. Focused PHPUnit confirms dry-run has no DB writes; import creates seven draft_review_only/noindex Article records, IQ topic entries, and draft landing block in test DB; forbidden answer_key token is blocked."
+      },
+      {
+        "at": "2026-07-05T12:00:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "PHP syntax, focused PHPUnit, route:list, YAML/JSON parse, git diff check, and real fap-web package dry-run on migrated temp SQLite passed. Production CMS/DB mutation was not executed."
+      },
+      {
+        "at": "2026-07-05T12:25:00+08:00",
+        "status": "local_validation_passed_with_external_sidecar",
+        "summary": "Full composer test timed out at 300 seconds after unrelated Content/Career/Architecture failures. Recorded external failures in generated/pr-train-sidecar-issues and continued under the user-provided sidecar protocol because focused IQ importer validation and scope validation passed."
+      },
+      {
+        "at": "2026-07-05T12:35:00+08:00",
+        "status": "command_registration_fixed",
+        "summary": "Added explicit Laravel 12 withCommands registration in backend/bootstrap/app.php, refreshed autoload locally, and verified articles:import-iq-method-pages-draft appears in artisan list. Targeted Pint and focused PHPUnit pass after the fix."
+      },
+      {
+        "at": "2026-07-05T12:45:00+08:00",
+        "status": "committed",
+        "summary": "Committed IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01 scoped backend importer changes at ab66a60a978c04721b4d45b1db2ea04d6b305403."
+      }
+    ]
+  },
   "IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01": {
     "id": "IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01",
     "repo": "fap-api",
@@ -79414,5 +79514,5 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-04T13:52:09Z"
+  "updated_at": "2026-07-05T12:00:00+08:00"
 }
