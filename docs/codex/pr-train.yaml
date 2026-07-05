@@ -11,6 +11,102 @@ continuation_protocol:
     do_not_stop_train_when_external_and_required_checks_green: true
 prs:
 
+  - id: BIG5-CMS-IMPORT-DRYRUN-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/big5-cms-import-dryrun-01
+    title: "BIG5-CMS-IMPORT-DRYRUN-01: add Big Five cms-import-draft dry-run validator"
+    train_scope: big_five_cms_import_readiness
+    status: user_authorized
+    scope:
+      - Add a backend-only no-write dry-run command and planner for Big Five cms-import-draft packages.
+      - Validate the 42-page desktop cms-import-draft.json structure and required fields.
+      - Validate body_sections, faq, seo, claim_boundaries, and indexability_gate shape.
+      - Validate no /zh/big-five or /en/big-five short-route residue.
+      - Plan the target mapping to personality_public_content_assets without database writes.
+      - Keep the command dry-run only; no CMS writes, publishing, indexability, sitemap, llms, search release, staging deploy, or production deploy.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityBigFiveCmsImportDraftDryRun.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php
+      - backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Add frontend content fallback.
+      - Write CMS, run production imports, run database migrations, publish, enable indexability, release sitemap/llms, submit search, trigger staging deploy, trigger production deploy, or add public runtime content.
+      - Change public API routes, runtime personality rendering, content authority, canonical/noindex behavior, JSON-LD runtime, scheduler behavior, permissions, or secrets.
+    validation:
+      - php -l backend/app/Console/Commands/PersonalityBigFiveCmsImportDraftDryRun.php
+      - php -l backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php
+      - php -l backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_big_five_cms_import_draft_dry_run_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveCmsImportDraftDryRun.php app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-CMS-FAQ-DEDUPE-02
+    repo: fap-api
+    depends_on:
+      - BIG5-CMS-IMPORT-DRYRUN-01
+    branch: codex/big5-cms-faq-dedupe-02
+    title: "BIG5-CMS-FAQ-DEDUPE-02: guard Big Five CMS FAQ duplicate rendering"
+    train_scope: big_five_cms_import_readiness
+    status: user_authorized
+    scope:
+      - Guard against duplicate FAQ rendering for Big Five cms-import-draft packages.
+      - Treat the faq field as the only structured FAQ source.
+      - Detect body_sections FAQ sections when faq is also present and report the dry-run dedupe policy.
+      - Ensure CMS import preview/public payload planning does not render FAQ twice.
+      - Keep the command dry-run only; no CMS writes, publishing, indexability, sitemap, llms, search release, staging deploy, or production deploy.
+    allowed_paths:
+      - backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php
+      - backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Add frontend content fallback.
+      - Write CMS, run production imports, run database migrations, publish, enable indexability, release sitemap/llms, submit search, trigger staging deploy, trigger production deploy, or add public runtime content.
+      - Change public API routes, runtime personality rendering, content authority, canonical/noindex behavior, JSON-LD runtime, scheduler behavior, permissions, or secrets.
+    validation:
+      - php -l backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php
+      - php -l backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json
+      - cd backend && vendor/bin/pint --test app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: MBTI-CMS-12
     repo: fap-api
     depends_on:
