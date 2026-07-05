@@ -80651,9 +80651,9 @@
     "depends_on": [
       "BIG5-CMS-FAQ-DEDUPE-02"
     ],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "b7c242a86",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2725",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -80726,6 +80726,12 @@
         "from": "local_checks_passed",
         "to": "committed",
         "note": "Committed BIG5-CMS-INDEXABILITY-GATE-03 schema runtime gate scope at b7c242a86."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2725 for BIG5-CMS-INDEXABILITY-GATE-03 and pushed branch codex/big5-cms-indexability-gate-03."
       }
     ]
   },
