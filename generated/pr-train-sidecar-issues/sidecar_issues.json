@@ -11,6 +11,16 @@
   },
   {
     "repo": "fap-api",
+    "pr_id": "BIG5-CMS-FAQ-DEDUPE-02",
+    "branch": "codex/big5-cms-faq-dedupe-02",
+    "blocker_type": "local_worktree_branch_diff_interference",
+    "evidence": "PR2 focused syntax, PHPUnit, desktop package dry-run, Pint, YAML/JSON parse, and diff checks passed, but local full scripts/ci_verify_mbti.sh failed in BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff with IQ method files: backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php, backend/app/Models/TopicProfileEntry.php, backend/app/Services/Cms/IqMethodPages/IqMethodPagesDraftImporter.php.",
+    "why_not_current_pr_scope": "PR2 only changes BigFiveCmsImportDraftDryRunPlanner.php, PersonalityBigFiveCmsImportDraftDryRunCommandTest.php, PR train metadata, and this sidecar record. It does not add or modify the IQ method files.",
+    "required_checks_affected": "Local full-check reproduction was affected. GitHub required checks run in a clean checkout and should validate the actual PR2 scope without the local IQ branch-diff interference.",
+    "recommended_follow_up": "Isolate or merge/close the IQ method branch separately; do not use that local branch state as a blocker for Big Five CMS import readiness PRs."
+  },
+  {
+    "repo": "fap-api",
     "pr_id": "IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01",
     "branch": "codex/iq-method-pages-cms-import-01",
     "blocker_type": "external_full_suite_failure_timeout",

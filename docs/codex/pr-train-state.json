@@ -5,14 +5,16 @@
     "title": "BIG5-CMS-IMPORT-DRYRUN-01: add Big Five cms-import-draft dry-run validator",
     "base": "main",
     "branch": "codex/big5-cms-import-dryrun-01",
-    "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "79170c68c15d2b5a9dabf5d1ed03a8edcbb4b338",
+    "depends_on": [
+
+    ],
+    "status": "merged",
+    "commit_sha": "6c6495625ebec0ff6d042613ca12e8031b0f8f45",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2722",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T04:58:45Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -78,13 +80,17 @@
       "github_checks": {
         "status": "pass",
         "evidence": "PASS on PR #2722 head 79170c68c15d2b5a9dabf5d1ed03a8edcbb4b338: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #2722 is MERGED; origin/main contains merge commit 6c6495625ebec0ff6d042613ca12e8031b0f8f45; local main was synced to origin/main; task branch codex/big5-cms-import-dryrun-01 was deleted locally and remotely; worktree was clean before BIG5-CMS-FAQ-DEDUPE-02 started."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -122,6 +128,12 @@
         "from": "ci_fix_in_progress",
         "to": "ready_to_merge",
         "note": "PR #2722 remote checks passed after the portable fixture fix. Marked ready to merge under squash merge policy."
+      },
+      {
+        "at": "2026-07-05T04:58:45Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Squash merged PR #2722. Verified origin/main contains merge commit 6c6495625ebec0ff6d042613ca12e8031b0f8f45, local main is synced, worktree is clean, and task branch cleanup is complete."
       }
     ]
   },
@@ -134,9 +146,9 @@
     "depends_on": [
       "BIG5-CMS-IMPORT-DRYRUN-01"
     ],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "e4c48e414cc8ae1735396b52aac4795c605b9b1d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2723",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -147,14 +159,52 @@
         "evidence": "User explicitly authorized adding BIG5-CMS-FAQ-DEDUPE-02 to the fap-api PR train from the attached /goal execution request."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "BIG5-CMS-FAQ-DEDUPE-02 depends on BIG5-CMS-IMPORT-DRYRUN-01 being merged into main."
+        "status": "pass",
+        "evidence": "BIG5-CMS-IMPORT-DRYRUN-01 PR #2722 is merged, and origin/main contains merge commit 6c6495625ebec0ff6d042613ca12e8031b0f8f45."
+      },
+      "syntax": {
+        "status": "pass",
+        "command": "php -l backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php && php -l backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php",
+        "evidence": "PASS: planner and focused command test file report no syntax errors."
+      },
+      "focused_command_contract": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi",
+        "evidence": "PASS: 4 tests, 54 assertions. Covers 42-row draft package planning and FAQ dedupe guard fields while preserving no-write behavior."
+      },
+      "desktop_v2_package_faq_dedupe_dry_run": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json",
+        "evidence": "PASS: real desktop v2 package reports ok=true, row_count=42, faq_body_section_count=42, and faq_body_section_rows_count=42; render preview planning excludes FAQ body sections while keeping faq as the structured source."
+      },
+      "pint_targeted": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "evidence": "PASS: 3 files."
+      },
+      "manifest_state_diff_validation": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "evidence": "PASS: train YAML parses, state JSON parses, and git diff whitespace check passes."
+      },
+      "local_full_verify": {
+        "status": "external_blocker_recorded",
+        "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+        "evidence": "Focused current-scope checks passed, but local full verification was affected by the same IQ method branch-diff interference outside PR2 scope. Recorded sidecar details in generated/pr-train-sidecar-issues/sidecar_issues.md and sidecar_issues.json."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to BIG5-CMS-FAQ-DEDUPE-02 allowed paths: backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php, backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php, docs/codex/pr-train-state.json, and generated/pr-train-sidecar-issues/**."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2723 head e4c48e414cc8ae1735396b52aac4795c605b9b1d: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -163,6 +213,36 @@
         "from": "user_authorized",
         "to": "pending_dependency",
         "note": "Registered dependent FAQ deduplication PR; execution waits for BIG5-CMS-IMPORT-DRYRUN-01 merge."
+      },
+      {
+        "at": "2026-07-05T04:58:45Z",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "note": "Started FAQ deduplication guard after BIG5-CMS-IMPORT-DRYRUN-01 merged into main."
+      },
+      {
+        "at": "2026-07-05T04:58:45Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Implemented dry-run FAQ dedupe planning. Focused syntax, PHPUnit, real desktop v2 package dry-run, targeted Pint, YAML/JSON parse, diff check, and allowed-path scope validation passed. Local full ci_verify_mbti had external IQ branch-diff interference recorded as sidecar."
+      },
+      {
+        "at": "2026-07-05T04:58:45Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed BIG5-CMS-FAQ-DEDUPE-02 FAQ dedupe guard scope at 4a88b5bbc594bf3554712803a206e56c7f3ad912."
+      },
+      {
+        "at": "2026-07-05T04:58:45Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2723 for BIG5-CMS-FAQ-DEDUPE-02 and pushed branch codex/big5-cms-faq-dedupe-02."
+      },
+      {
+        "at": "2026-07-05T04:58:45Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "PR #2723 remote checks passed. Marked ready to merge under squash merge policy."
       }
     ]
   },
@@ -565,7 +645,9 @@
       }
     ],
     "commit_sha": "265e1dcc58edd5a122627ff0e61594c5e3dbeeab",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "id": "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01",
     "local_cleanup_executed": false,
@@ -677,7 +759,9 @@
       "local_validation_passed": true,
       "post_merge_revalidated": null
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged_cleanup_complete",
     "title": "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01 freeze GA4 Baidu funnel mapping",
     "transitions": [
@@ -1051,7 +1135,9 @@
       "git_diff_cached_check": "passed",
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "ci_fix_local_checks_passed",
     "title": "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01 connect Ops 7-day funnel to unified taxonomy read model",
     "transitions": [
@@ -1144,7 +1230,9 @@
       "local_validation_passed": true,
       "post_merge_revalidated": null
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "ANALYTICS-FUNNEL-PURCHASE-REPORT-TRUTH-BRIDGE-03 freeze purchase report truth bridge",
     "transitions": [
@@ -1383,7 +1471,9 @@
       "git_diff_cached_check": null,
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged_deployed_reconciled",
     "title": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02 fix share_click SQL compatibility",
     "transitions": [
@@ -2091,7 +2181,9 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2015",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "ready_to_merge",
     "title": "ARTICLE-H1-04: fix(ops): constrain article editor heading controls",
     "train_scope": "article_h1_single_dom",
@@ -2840,7 +2932,9 @@
       "local_validation_passed": true,
       "post_merge_revalidated": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged_and_cleaned",
     "title": "AUDIT-SEC-RESULT-IDENTITY-01 harden result recovery identity boundary",
     "transitions": [
@@ -2918,7 +3012,9 @@
       "local_validation_passed": true,
       "post_merge_revalidated": null
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -3851,7 +3947,9 @@
       }
     },
     "commit_sha": "d62cbe6317f08d4307bd9488e5cf9059c3bcbf1d",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
@@ -4075,7 +4173,9 @@
       }
     },
     "commit_sha": "79b7931eb59d29b9c778b0333bbcb9ccbcc45cd0",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
@@ -4446,7 +4546,9 @@
       }
     },
     "commit_sha": "595811fa6f8aa2047b5f057aa4d8a96176871e609",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
@@ -4536,7 +4638,9 @@
     "commit_sha": "dcab310011707b7c6174ee3171ccf82a54f5750d",
     "content_authority": "backend",
     "database_mutation": false,
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "deploy_allowed": false,
     "events": [
       {
@@ -4609,7 +4713,9 @@
       }
     },
     "commit_sha": "aad0bbd600a8519d2d55d54ba001467edc587c36",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "id": "BIG5-CONTENT-ASSET-SCIENTIFIC-AUDIT-MAPPING-01",
     "local_cleanup_executed": true,
@@ -6288,7 +6394,9 @@
       }
     },
     "commit_sha": "ca9af5079add9914ed8d52fb18fb948585c138bf",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-22T16:34:43Z",
@@ -7270,7 +7378,9 @@
       }
     ],
     "commit_sha": "e30f96f4e068c2a7b62e1fe67950ffab6b061c72",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "id": "CAREER-1046-OPS-SCOPE-RECONCILIATION-01",
     "local_cleanup_executed": true,
@@ -7284,7 +7394,9 @@
       "git_diff_cached_check": "passed",
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "completed",
     "title": "CAREER-1046-OPS-SCOPE-RECONCILIATION-01 reconcile public 1046 career runtime with CMS/Ops 378 scope",
     "transitions": [
@@ -7632,7 +7744,9 @@
       }
     },
     "commit_sha": "68f2b2dfc0b3b587a53ad85dc52a4b0f4b2eabcf",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": "Sidecar only: full Pint reports out-of-scope EQ test formatting issues; scoped current PR files and current-scope CI fixes passed locally.",
     "history": [
       {
@@ -8746,7 +8860,9 @@
       }
     },
     "commit_sha": "24288ec8713900f6709cd472b51f2d097ef263af",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": "Sidecar only: full Pint reports pre-existing out-of-scope EQ test formatting issues; current PR focused test, route:list, scoped Pint, composer validate/audit, JSON/YAML, and diff checks pass.",
     "id": "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01",
     "local_cleanup_executed": true,
@@ -9099,14 +9215,18 @@
       }
     },
     "commit_sha": "af382b46070d1455f6b7e2d9fe9af18ba7cb0e55",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-09T15:28:28Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2020",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "CAREER-ZH-DISPLAY-PARITY-01: feat(career): audit zh display parity",
     "train_scope": "career_zh_display_parity",
@@ -9572,14 +9692,18 @@
       }
     },
     "commit_sha": "12fab79a192c5f0537f2f61fbdc6614653fea9a9",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-11T02:45:32Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2025",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "CAREER-ZH-PARITY-FIX-01: fix(career): compact zh parity workbook readiness",
     "train_scope": "career_zh_parity_fix",
@@ -10426,7 +10550,9 @@
       "git_diff_cached_check": true,
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -11488,7 +11614,9 @@
       }
     ],
     "commit_sha": "6716bf50c3cd22691d4609434f8a2b12442b2c8a",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "id": "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01",
     "local_cleanup_executed": false,
@@ -11502,7 +11630,9 @@
       "git_diff_cached_check": "passed",
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01 clean 1046 delta authority manifest",
     "transitions": [
@@ -11589,7 +11719,9 @@
       }
     ],
     "commit_sha": "67e95aac7a4344a407c5c1b563c4131a27d2d7aa",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": "blocked_backend_deploy_required: production backend REVISION 16c01f81b60bb9a5452a867c6c57a78aa77e57bc does not include required PR #1747 merge commit 6716bf50c3cd22691d4609434f8a2b12442b2c8a",
     "id": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01",
     "local_cleanup_executed": false,
@@ -11603,7 +11735,9 @@
       "git_diff_cached_check": "passed",
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 production preflight for clean 1046 rollout apply",
     "transitions": [
@@ -11675,7 +11809,9 @@
       }
     ],
     "commit_sha": "09ec7f599b05d7d555ad186af81633010f5c47f3",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "id": "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01",
     "local_cleanup_executed": false,
@@ -11689,7 +11825,9 @@
       "git_diff_cached_check": "passed",
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01 no-write career rollout dry-run",
     "transitions": [
@@ -11761,7 +11899,9 @@
       }
     ],
     "commit_sha": "e5cbc6816d70383ad33c9da985bd76d6c00c3b73",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "id": "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01",
     "local_cleanup_executed": false,
@@ -11775,7 +11915,9 @@
       "git_diff_cached_check": "passed",
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01 clean 1047 delta authority manifest",
     "transitions": [
@@ -11847,7 +11989,9 @@
       }
     ],
     "commit_sha": "05f7dda0b1350e523c02ea38daccbbedd91ce7e4",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "id": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_INDEX_STATE_CONFLICT-01",
     "local_cleanup_executed": false,
@@ -11861,7 +12005,9 @@
       "git_diff_cached_check": "passed",
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_INDEX_STATE_CONFLICT-01 replacement index-state runtime projection conflict report",
     "transitions": [
@@ -12054,7 +12200,9 @@
       "git_diff_cached_check": "passed",
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01 replacement authority source repair",
     "transitions": [
@@ -12257,7 +12405,9 @@
       }
     },
     "commit_sha": "b20330097483c7283509633656a333d1b6d2007a",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "events": [
       {
         "at": "2026-07-02T16:10:24Z",
@@ -12312,7 +12462,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to ENNEA-RP-01 instant_summary registry copy, focused composer test, and user-authorized PR train metadata.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged_post_merge_revalidated",
@@ -12461,7 +12613,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to ENNEA-RP-02 type_registry Top3 card fields and PR train state reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged_post_merge_revalidated",
@@ -12569,7 +12723,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files remain confined to ENNEA-RP-03 type_registry deep_dive summary fields and PR train state metadata after rebase.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "ready_to_merge",
@@ -12705,7 +12861,9 @@
         "docs/codex/pr-train.yaml"
       ],
       "evidence": "Changed files are confined to ENNEA-RP-04 all9 profile runtime labels, related Enneagram tests, PR train metadata, and the required BigFive runtime-freeze guard exemption for the two Enneagram result-page runtime contract files.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged_post_merge_revalidated",
@@ -12818,7 +12976,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to confidence-band projection labels, confidence_band_card composer content, related Enneagram composer test, and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged_post_merge_revalidated",
@@ -12937,7 +13097,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to dominance_gap_card composer content, dominance_gap technical note registry copy, related Enneagram tests, and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged_post_merge_revalidated",
@@ -13053,7 +13215,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to close-call UI copy, pair fallback close-call guidance, and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -13167,7 +13331,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to type_registry blind_spot_copy content and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -13305,7 +13471,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "After rebase, changed files remain confined to center summary group registry content, center runtime projection, Enneagram tests, and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -13415,7 +13583,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to stance summary group registry content and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -13525,7 +13695,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to harmonic summary group registry content and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -13640,7 +13812,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to wing hint theory registry content and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -13757,7 +13931,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to methodology boundary method/ui registry content and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -13871,7 +14047,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to diffuse boundary method/technical note/ui registry content and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -13985,7 +14163,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to low-quality boundary UI copy, composer output, Enneagram composer test, and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -14097,7 +14277,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to work-style scenario/type registry content and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -14207,7 +14389,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to collaboration strengths content in type registry and train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged_cleanup_complete",
@@ -14317,7 +14501,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to collaboration friction content in type registry plus train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged_cleanup_complete",
@@ -14427,7 +14613,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to leadership pattern content in type registry plus train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged_cleanup_complete",
@@ -14537,7 +14725,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to managed-by-others content in type registry plus train ledger reconciliation.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -14642,7 +14832,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
@@ -14754,7 +14946,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json",
@@ -14864,7 +15058,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
@@ -14985,7 +15181,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json",
@@ -15102,7 +15300,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/group_registry.json",
@@ -15218,7 +15418,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
@@ -15334,7 +15536,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/state_registry.json",
@@ -15451,7 +15655,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/state_registry.json",
@@ -15568,7 +15774,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/theory_hint_registry.json",
@@ -15685,7 +15893,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/scenario_registry.json",
@@ -15802,7 +16012,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
@@ -15912,7 +16124,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
@@ -16024,7 +16238,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/scenario_registry.json",
@@ -16147,7 +16363,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/scenario_registry.json",
@@ -16269,7 +16487,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json",
@@ -16395,7 +16615,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass",
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json",
@@ -16532,7 +16754,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/observation_registry.json",
         "docs/codex/pr-train-state.json"
@@ -16664,7 +16888,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/observation_registry.json",
         "backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json",
@@ -16802,7 +17028,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "changed_files": [
         "backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json",
         "backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json",
@@ -16925,7 +17153,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "changed_files": [
         "backend/app/Services/Report/EnneagramReportComposer.php",
         "backend/content_packs/ENNEAGRAM/v2/registry/method_registry.json",
@@ -17023,7 +17253,9 @@
         "backend/content_packs/ENNEAGRAM/v2/registry/sample_report_registry.json",
         "docs/codex/pr-train-state.json"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [
+
+      ]
     },
     "status": "ready_to_merge",
     "title": "ENNEA-RP-41: fix(enneagram): repair sample report link",
@@ -17116,7 +17348,9 @@
         "backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json",
         "docs/codex/pr-train-state.json"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [
+
+      ]
     },
     "status": "ready_to_merge",
     "title": "ENNEA-RP-42: fix(enneagram): repair technical note link",
@@ -17211,7 +17445,9 @@
         "backend/tests/Unit/Services/Content/EnneagramTypeRegistryCoverageTest.php",
         "docs/codex/pr-train-state.json"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [
+
+      ]
     },
     "status": "ready_to_merge",
     "title": "ENNEA-RP-43: test(enneagram): enforce registry scientific and style guards",
@@ -17286,7 +17522,9 @@
           "docs/codex/pr-train.yaml"
         ],
         "evidence": "Changed files are confined to Enneagram forced-choice compiled question pack/manifest, focused Enneagram locale test, Big Five freeze classifier test-only allowance for the Enneagram pack files, and authorized PR-train metadata.",
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "status": "pass"
       }
     },
@@ -17392,7 +17630,9 @@
       }
     },
     "commit_sha": "186ee67162d8ad287c2c6279f51950aca1d73ee2",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-22T11:44:35Z",
@@ -18117,7 +18357,9 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1684",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged"
   },
   "FOUNDATION-CLAIM-BOUNDARY-CONTRACT-01": {
@@ -25117,7 +25359,9 @@
       }
     },
     "commit_sha": "9eeb91f57477072fe472b8269ac30ba83004691b",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-23T08:17:44Z",
@@ -25719,7 +25963,9 @@
       }
     },
     "commit_sha": "2d08bb46555389226adf6dbce80dcc9111e2b82a",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "events": [
       {
         "at": "2026-05-25T12:00:00Z",
@@ -25936,7 +26182,9 @@
           "docs/codex/pr-train.yaml"
         ],
         "evidence": "Final branch diff is confined to MBTI controller projection, MBTI English sidecar pack data, focused test, and PR train metadata; shared QuestionsService is no longer in the branch diff.",
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "status": "pass"
       }
     },
@@ -26173,7 +26421,9 @@
     "commit_sha": "44f569449afa97e5a2e39c6dbf21ebdb87ba2c78",
     "content_authority": "backend",
     "database_mutation": false,
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "deploy_allowed": false,
     "events": [
       {
@@ -26246,7 +26496,9 @@
       }
     },
     "commit_sha": "614af7ed2aa38dfa2201cb723f48e0f49de471a8",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-26T13:18:57Z",
@@ -26621,7 +26873,9 @@
       }
     },
     "commit_sha": null,
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "events": [
       {
         "at": "2026-07-01T14:30:04.421Z",
@@ -26655,7 +26909,9 @@
         "docs/codex/pr-train-state.json",
         "generated/pr-train-sidecar-issues/**"
       ],
-      "outside_scope_files": []
+      "outside_scope_files": [
+
+      ]
     },
     "status": "pr_open",
     "title": "MBTI-PDF-SNAPSHOT-SYNC-GUARD-H1: add PDF snapshot render-source cache guard",
@@ -26722,7 +26978,9 @@
       }
     ],
     "commit_sha": "93556a55fbcf71aa998566eb4f276218cda48788",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "id": "OPS-API-INTERNAL-RESOLVE-PROOF",
     "local_cleanup_executed": false,
@@ -26845,7 +27103,9 @@
     "base": "main",
     "branch": "codex/ops-ci-codescan-api-01",
     "checks": {
-      "github": [],
+      "github": [
+
+      ],
       "local": {
         "git_diff_check": "passed",
         "json_validation": "passed",
@@ -26854,7 +27114,9 @@
       }
     },
     "commit_sha": "962be45f81044d1eec60088ef34235f8e020032e",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "history": [
       {
@@ -26921,7 +27183,9 @@
       }
     },
     "commit_sha": "a194a0bb1d0cf83e130cce205cb9410cb48d725b",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "history": [
       {
@@ -26947,7 +27211,9 @@
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "github_checks_passed",
     "title": "fix(ci): eliminate CiScaleImpact Semgrep findings"
   },
@@ -27052,7 +27318,9 @@
       "git_diff_cached_check": null,
       "git_diff_check": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -27273,7 +27541,9 @@
         "backend/tests/Feature/Commerce/AlipayPendingCompensationSchedulerTest.php"
       ]
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -27297,7 +27567,9 @@
     "base": "main",
     "branch": "codex/ops-release-workflow-01",
     "checks": {
-      "github": [],
+      "github": [
+
+      ],
       "local": {
         "git_diff_check": "passed",
         "json_parse": "passed",
@@ -27340,7 +27612,9 @@
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "docs(ops): codify release operator workflow and deploy incident governance"
   },
@@ -27403,7 +27677,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "docs(ops): codify canonical healthz and release-only deploy policy"
   },
@@ -27640,7 +27916,9 @@
       "git_diff_cached_check": "passed",
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "github_checks_passed",
     "title": "PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03 classify Alipay owner mismatch paid orders",
     "transitions": [
@@ -27778,7 +28056,9 @@
       "git_diff_cached_check": "passed",
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "github_checks_failed_fix_prepared",
     "title": "PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01 schedule Alipay pending payment compensation",
     "transitions": [
@@ -28026,7 +28306,9 @@
       "git_diff_cached_check": "passed",
       "git_diff_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02 register Alipay compensation in runtime scheduler",
     "transitions": [
@@ -28687,7 +28969,9 @@
       }
     },
     "commit_sha": "ec0ee01f84204e64f9891f33d6126a7de344a97d",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-25T22:19:24+08:00",
@@ -29580,7 +29864,9 @@
         "docs/audits/eq/eq_agent_runtime_acceptance_2026-06-25.md",
         "docs/codex/pr-train-state.json"
       ],
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "passed"
     },
     "status": "pr_open_p0_blocked_report",
@@ -30459,7 +30745,9 @@
       }
     ],
     "commit_sha": "5d47789f391d0c7cf2c68c63ad3edc22bbd10ea4",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "id": "PR-EQ-ASSET-AUDIT-00",
     "local_cleanup_executed": true,
@@ -31387,7 +31675,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Scope validation passed against PR-EQ-ASSET-SCI-09 allowed_paths.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged_post_merge_revalidated",
@@ -31822,7 +32112,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Scope validation passed against PR-EQ-ASSET-SCI-13 allowed_paths.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged_post_merge_revalidated",
@@ -32403,7 +32695,9 @@
       ]
     },
     "commit_sha": "2523eb2b4abb0c7c9aa6a26ab359fbfb6e659a4b",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "events": [
       {
         "at": "2026-06-26T15:21:54.232288+00:00",
@@ -33388,7 +33682,9 @@
       }
     },
     "commit_sha": "322bf0d8f0884c48730fc23c2713710315d19863",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": "Sidecar only: direct macOS curl to api.fermatmind.com still reports LibreSSL SSL_ERROR_SYSCALL; Node HTTPS and apex same-origin public API reads are healthy.",
     "history": [
       {
@@ -34092,7 +34388,9 @@
           "backend/tests/Unit/Domain/Career/Audit/CareerRuntimeCandidatePrepPlannerTest.php",
           "docs/codex/pr-train-state.json"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "status": "passed"
       }
     },
@@ -34209,7 +34507,9 @@
           "git diff --check",
           "git diff --cached --check"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "status": "passed"
       }
     },
@@ -34292,7 +34592,9 @@
           "git diff --check",
           "git diff --cached --check"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "status": "passed"
       }
     },
@@ -34381,7 +34683,9 @@
           "git diff --check",
           "git diff --cached --check"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "status": "passed"
       }
     },
@@ -34468,7 +34772,9 @@
           "docs/codex/pr-train.yaml",
           "docs/codex/pr-train-state.json"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "status": "passed"
       }
     },
@@ -34630,7 +34936,9 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1673",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged"
   },
   "RESULT-EN-PARITY-06": {
@@ -34703,7 +35011,9 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1675",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged"
   },
   "RIASEC-CONTENT-140CTA-01": {
@@ -36499,7 +36809,9 @@
       }
     },
     "commit_sha": "2ff9a76b669b356232cddb54dbada9452caa7071",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "id": "RIASEC-CONTENT-SCIENCE-00",
     "local_cleanup_executed": true,
@@ -36793,7 +37105,9 @@
           "docs/codex/pr-train.yaml"
         ],
         "evidence": "Changed files are confined to RIASEC compiled question packs/manifests, focused RIASEC locale test, Big Five freeze classifier test-only allowance for the RIASEC pack files, and authorized PR-train metadata.",
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "status": "pass"
       }
     },
@@ -36994,7 +37308,9 @@
     "next_pr": "RIASEC-FULL-CONTENT-PACK-04",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1484",
     "remote_branch_deleted": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged"
   },
   "RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT": {
@@ -37068,7 +37384,9 @@
     "next_pr": "RIASEC-FULL-CONTENT-PACK-03",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1483",
     "remote_branch_deleted": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged"
   },
   "RIASEC-FULL-CONTENT-PACK-04": {
@@ -37149,7 +37467,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-04: Top3 code chain strategy asset import"
   },
@@ -37238,7 +37558,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-05: Import backend-authoritative RIASEC activity/task examples asset"
   },
@@ -37332,7 +37654,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-05-PREFLIGHT: Activity/task examples asset preflight"
   },
@@ -37416,7 +37740,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-06: Import backend-authoritative RIASEC occupation examples boundary asset"
   },
@@ -37504,7 +37830,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-06-PREFLIGHT: Occupation examples asset preflight"
   },
@@ -37598,7 +37926,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-07: 140Q task/environment/role narrative asset import"
   },
@@ -37690,7 +38020,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-08: Low quality / confidence / near-tie copy asset import"
   },
@@ -37769,7 +38101,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-09: Import backend-authoritative aspirations and disagree path assets"
   },
@@ -37859,7 +38193,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-09-PREFLIGHT: Aspirations and disagree path asset preflight"
   },
@@ -38132,7 +38468,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-11-BE: Backend lifecycle copy import for Share/PDF/History/FAQ/Technical Note"
   },
@@ -38225,7 +38563,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-11-BE-PREFLIGHT: Share/PDF/History/FAQ/Technical Note lifecycle copy backend preflight"
   },
@@ -38316,7 +38656,9 @@
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "pr_opened_github_checks_pending",
     "title": "RIASEC-FULL-CONTENT-PACK-13-BE: Backend full content fixture matrix and forbidden claim freeze"
   },
@@ -38553,7 +38895,9 @@
       "yaml_parse_pr_train_manifest": "passed"
     },
     "commit_sha": "03ecc9ad1f037e05206d319c0051629a98053664",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merge_commit": "fa0333b68ff4cb261e01be6658c73b4f9a82c7d0",
@@ -38783,7 +39127,9 @@
       }
     },
     "commit_sha": "436c62975f66236c5fca8f42994efde7e78453dd",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-21T14:20:02Z",
@@ -40261,7 +40607,9 @@
     "commit_sha": "56b0035ef9a880dcf1c98f1b2fe8c57b49bc6079",
     "content_authority": "backend",
     "database_mutation": false,
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "deploy_allowed": false,
     "events": [
       {
@@ -40968,7 +41316,9 @@
     "commit_sha": "cb375f6b832be73dc3d2dbb96fbbede577646cf7",
     "content_authority": "backend",
     "database_mutation": false,
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "deploy_allowed": false,
     "events": [
       {
@@ -41283,7 +41633,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to API-03 allowed PDF token, Gotenberg URL, locked MBTI PDF access, config, and train state paths.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -41458,7 +41810,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "evidence": "Changed files are confined to API-04 allowed PDF artifact descriptor, DSAR purge, lifecycle residual audit, BigFive runtime-freeze classifier, and train manifest/state paths.",
-      "outside_scope_files": [],
+      "outside_scope_files": [
+
+      ],
       "status": "pass"
     },
     "status": "merged",
@@ -44381,7 +44735,9 @@
       }
     },
     "commit_sha": "89ba8ee1a64d5a7269c55402ceccee4e83198af6",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-05T03:12:58Z",
@@ -44477,7 +44833,9 @@
     "remote_branch_deleted": true,
     "repo": "fap-api",
     "result": {
-      "blockers": [],
+      "blockers": [
+
+      ],
       "cms_draft_created": false,
       "content_blocked": false,
       "content_safe": true,
@@ -44782,7 +45140,9 @@
       }
     },
     "commit_sha": "933d82e204cf01930424b1635258926c9803777a",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-05T00:46:15Z",
@@ -44951,7 +45311,9 @@
       "local_validation_passed": true,
       "post_merge_revalidated": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -45033,7 +45395,9 @@
       "local_validation_passed": true,
       "post_merge_revalidated": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -45291,7 +45655,9 @@
       "local_validation_passed": true,
       "post_merge_revalidated": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -45374,7 +45740,9 @@
       "local_validation_passed": true,
       "post_merge_revalidated": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -45441,7 +45809,9 @@
       "local_validation_passed": true,
       "post_merge_revalidated": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -45627,7 +45997,9 @@
       "local_validation_passed": true,
       "post_merge_revalidated": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -45684,7 +46056,9 @@
       "local_validation_passed": null,
       "post_merge_revalidated": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged_external_dependency",
     "transitions": [
       {
@@ -45697,7 +46071,9 @@
   },
   "SEO-CMS-CANARY-PREVIEW-01": {
     "branch": "codex/seo-cms-canary-preview-01",
-    "checks": [],
+    "checks": [
+
+    ],
     "commit_sha": "11e82c0c7000bc90f2ec550b83d80a9b941465dc",
     "depends_on": [
       "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
@@ -45789,7 +46165,9 @@
       "origin_main_contains_merge_commit": true,
       "post_merge_revalidated": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -45875,7 +46253,9 @@
       "local_validation_passed": true,
       "post_merge_revalidated": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "transitions": [
       {
@@ -46094,7 +46474,9 @@
   },
   "SEO-CONTENT-P1-09": {
     "branch": "codex/seo-content-p1-09",
-    "checks": [],
+    "checks": [
+
+    ],
     "commit_sha": "6547f4e08aebd665da98916dd5787a4a23adfed9",
     "depends_on": [
       "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
@@ -46350,7 +46732,9 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2011",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "SEO-CONV-DAILY-04: feat(analytics): aggregate SEO conversion funnel daily",
     "train_scope": "seo_conversion_tracking",
@@ -46475,7 +46859,9 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2010",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "merged",
     "title": "SEO-CONV-INGEST-02: feat(analytics): accept canonical SEO conversion funnel ingest",
     "train_scope": "seo_conversion_tracking",
@@ -46603,7 +46989,9 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2012",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "status": "github_checks_passed_ready_to_merge",
     "title": "SEO-CONV-OPS-05: feat(ops): expose SEO conversion funnel readouts",
     "train_scope": "seo_conversion_tracking",
@@ -46721,7 +47109,9 @@
       "runtime_code_edit_performed": false,
       "search_submission_performed": false
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "docs(seo): reconcile seo_intel schema and read-only API contract",
     "train_scope": "search_intelligence_schema_api_contract",
@@ -46881,7 +47271,9 @@
       "read_only_api": true,
       "search_submission_performed": false
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "feat(seo): add seo_intel read-only dashboard API contract",
     "train_scope": "seo_intel_read_only_dashboard_api",
@@ -46997,7 +47389,9 @@
       "scheduler_enabled": false,
       "search_submission_performed": false
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "docs(seo): define post-migration collector dry-run readiness",
     "train_scope": "seo_intel_collector_dry_run_readiness",
@@ -47105,7 +47499,9 @@
       "scheduler_enabled": false,
       "search_submission_performed": false
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged_cleanup_complete",
     "title": "docs(seo): record collector dry-run smoke evidence",
     "train_scope": "seo_intel_collector_dry_run_smoke_evidence",
@@ -47212,7 +47608,9 @@
       "scheduler_enabled": false,
       "search_submission_performed": false
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "docs(seo): define controlled collector write gate",
     "train_scope": "seo_intel_controlled_collector_write_gate",
@@ -47310,7 +47708,9 @@
       "runtime_route_changed": false,
       "search_submission_performed": false
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "status": "merged",
     "title": "docs(seo): define seo_intel migration readiness gate",
     "train_scope": "seo_intel_migration_readiness_gate",
@@ -47436,7 +47836,9 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1466",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "state": "merged",
     "status": "merged"
   },
@@ -47705,7 +48107,9 @@
       }
     },
     "commit_sha": "42ef31190f68ebda879a9362bad511052d50a7a9",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-25T21:12:00+08:00",
@@ -48781,7 +49185,9 @@
       }
     },
     "commit_sha": "70bce0cbc971fe52f85d49d338bf79b284806862",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": true,
     "merged_at": "2026-06-08T17:03:46Z",
@@ -48990,7 +49396,9 @@
       }
     },
     "commit_sha": "302e4171f9eb5ace6d913f2fdb310b3379e6cbd2",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
@@ -49059,7 +49467,9 @@
           "docs/codex/pr-train.yaml",
           "docs/codex/pr-train-state.json"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "status": "passed"
       }
     },
@@ -49152,12 +49562,16 @@
           "docs/codex/pr-train.yaml"
         ],
         "evidence": "Changed files are confined to read-only scan artifacts, focused test, and PR train metadata.",
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "status": "pass"
       }
     },
     "commit_sha": "75b26a54aa2e66cb892d58e88b526f7848d6ac4c",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "failure_reason": null,
     "history": [
       {
@@ -49498,7 +49912,8 @@
     ],
     "status": "pending",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
-    "checks": {},
+    "checks": {
+    },
     "scope_validation": {
       "allowed_paths_only": null,
       "local_validation_passed": null,
@@ -49660,7 +50075,8 @@
     ],
     "status": "pending",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
-    "checks": {},
+    "checks": {
+    },
     "scope_validation": {
       "allowed_paths_only": null,
       "local_validation_passed": null,
@@ -49765,8 +50181,12 @@
       "scope_type": "cn_proxy_public_owner_reviewed_manifest_gate_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at File::isDirectory($target.'/compiled').",
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled').",
@@ -49956,7 +50376,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1627",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "updated_at": "2026-05-24T02:08:03+08:00"
     },
@@ -49992,7 +50414,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "schema_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "open",
       "title": "feat(api): add career canonical eligibility audit schema"
     },
@@ -50085,7 +50509,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "80_cohort_readiness_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "draft_pr_open",
       "title": "feat(api): add career 80 cohort readiness plan"
     },
@@ -50172,7 +50598,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "manifest_train_generator_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "ci_fix_local_checks_passed_pending_github_rerun",
       "title": "feat(api): add career canonical expansion manifest train generator"
     },
@@ -50259,7 +50687,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "batch_live_acceptance_v2_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "open",
       "title": "feat(api): add career batch live acceptance v2"
     },
@@ -50342,7 +50772,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "full_audit_artifact_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(api): add career 2786 full audit artifact report"
     },
@@ -50383,7 +50815,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "source_resolver_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(api): add career public resolution plan resolver"
     },
@@ -50475,7 +50909,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "entity_inventory_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(api): add career occupation entity inventory audit"
     },
@@ -50569,8 +51005,12 @@
       "scope_type": "baseline_metadata_inventory_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed after AUDIT-4 allowlist fix in unrelated BigFive norm/content tests with SQLSTATE[HY000]: General error: 5 database is locked against /tmp/fap-ci.sqlite.",
             "Scoped AUDIT-4 tests, AUDIT-1/2/3 regressions, pint, git diff --check, and BigFive runtime freeze path gate passed."
@@ -50675,7 +51115,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "index_state_authority_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(api): add career index-state authority audit"
     },
@@ -50766,7 +51208,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "runtime_projection_truth_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(api): add career runtime projection truth eligibility audit"
     },
@@ -50861,7 +51305,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "seo_geo_readiness_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(api): add career seo geo readiness audit"
     },
@@ -50951,7 +51397,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "surface_readiness_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(api): add career surface readiness audit"
     },
@@ -51047,7 +51495,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "canonical_eligibility_command_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(api): add career canonical eligibility audit command"
     },
@@ -51768,7 +52218,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "risk_level": "high",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "ci_fix_committed",
       "title": "fix(security): redact IQ answer keys and locked report payloads",
       "train_scope": "security_audit_remediation"
@@ -51863,7 +52315,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "risk_level": "medium",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open_github_checks_pending",
       "title": "fix(security): scope ops release failure audits by org",
       "train_scope": "security_audit_remediation"
@@ -52042,7 +52496,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1633",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "CAREER-1046-FRONTEND-DISCOVERY-UX-01": {
@@ -52073,7 +52529,9 @@
         "local_validation_passed": true,
         "post_merge_revalidated": true
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "merged",
       "title": "CAREER-1046-FRONTEND-DISCOVERY-UX-01 career discovery UX",
       "transitions": [
@@ -52148,7 +52606,9 @@
         "local_validation_passed": true,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "merged",
       "title": "CAREER-1046-INTERNAL-LINKING-AUTHORITY-01 career internal linking authority",
       "transitions": [
@@ -52252,7 +52712,9 @@
         "local_validation_passed": true,
         "post_merge_revalidated": true
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "merged",
       "title": "CAREER-1046-OBSERVABILITY-SLO-01 career runtime observability SLO",
       "transitions": [
@@ -52359,7 +52821,9 @@
         }
       },
       "commit_sha": "b2713e384d5a6d0b650df56222eac19831df21b8",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "failure_reason": null,
       "id": "CAREER-1046-OPS-READ-MODEL-REPAIR-01",
       "local_cleanup_executed": true,
@@ -52375,7 +52839,9 @@
         "local_validation_passed": true,
         "post_merge_revalidated": true
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "merged",
       "title": "CAREER-1046-OPS-READ-MODEL-REPAIR-01 career runtime read model repair",
       "transitions": [
@@ -53135,7 +53601,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "risk_level": "medium_disabled_search_channel_schema",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(seo-intel): add 360 Sogou Shenma adapter contracts",
       "train_scope": "china_search_domestic_adapter_contracts"
@@ -53242,7 +53710,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "risk_level": "medium_disabled_crawler_log_schema",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(seo-intel): add Chinese crawler log collector foundation",
       "train_scope": "chinese_crawler_log_collector_foundation"
@@ -53359,7 +53829,9 @@
       "research_publish": false,
       "scheduler_activation": false,
       "sidecar_allowed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "state": "merged",
       "status": "merged",
       "stop_on_safety_violation": true,
@@ -53411,7 +53883,9 @@
         }
       },
       "commit_sha": null,
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "failure_reason": "Initial GitHub verify-bigfive failed because the first pushed history added a backend/app runtime file. The branch is being rewritten to test-support-only scope and revalidated.",
       "id": "CLINICAL-LAUNCH-01",
       "local_cleanup_executed": false,
@@ -53459,7 +53933,9 @@
     "CLINICAL-LAUNCH-02": {
       "base": "main",
       "branch": "codex/clinical-launch-02",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-01"
@@ -53478,15 +53954,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-02 claim boundary naming and disclaimer gate",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-03": {
       "base": "main",
       "branch": "codex/clinical-launch-03",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-02"
@@ -53505,15 +53987,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-03 SDS source and suitability audit",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-04": {
       "base": "main",
       "branch": "codex/clinical-launch-04",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-03"
@@ -53532,15 +54020,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-04 crisis sentinel gate",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-05": {
       "base": "main",
       "branch": "codex/clinical-launch-05",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-04"
@@ -53559,15 +54053,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-05 locale-aware crisis resources",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-06": {
       "base": "main",
       "branch": "codex/clinical-launch-06",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-05"
@@ -53586,15 +54086,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-06 sensitive health data consent and retention gate",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-07": {
       "base": "main",
       "branch": "codex/clinical-launch-07",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-06"
@@ -53613,15 +54119,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-07 free safety and paid report boundary",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-08": {
       "base": "main",
       "branch": "codex/clinical-launch-08",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-07"
@@ -53640,15 +54152,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-08 clinical related article authority plan",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-09": {
       "base": "main",
       "branch": "codex/clinical-launch-09",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-08"
@@ -53667,15 +54185,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-09 robots contract and launch-state SEO gate",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-10": {
       "base": "main",
       "branch": "codex/clinical-launch-10",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-09"
@@ -53694,15 +54218,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-10 SDS canary and Clinical staged noindex enforcement",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-11": {
       "base": "main",
       "branch": "codex/clinical-launch-11",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-10"
@@ -53721,15 +54251,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-11 SDS commercial launch content authority",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-12": {
       "base": "main",
       "branch": "codex/clinical-launch-12",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-11"
@@ -53748,15 +54284,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-12 SDS report personalization authority",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-13": {
       "base": "main",
       "branch": "codex/clinical-launch-13",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-12"
@@ -53775,15 +54317,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-13 Clinical Combo staged content authority",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-14": {
       "base": "main",
       "branch": "codex/clinical-launch-14",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-13"
@@ -53802,15 +54350,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-14 Clinical Combo report personalization authority",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-15": {
       "base": "main",
       "branch": "codex/clinical-launch-15",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-14"
@@ -53829,15 +54383,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-15 clinical media and article import package",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-16": {
       "base": "main",
       "branch": "codex/clinical-launch-16",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-15"
@@ -53856,15 +54416,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-16 Ops clinical launch governance surfaces",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-17": {
       "base": "main",
       "branch": "codex/clinical-launch-17",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-16"
@@ -53883,15 +54449,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-17 frontend clinical UX polish handoff",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-18": {
       "base": "main",
       "branch": "codex/clinical-launch-18",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-17"
@@ -53910,15 +54482,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-18 clinical commerce and recovery validation",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-19": {
       "base": "main",
       "branch": "codex/clinical-launch-19",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-18"
@@ -53937,15 +54515,21 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-19 SDS Search Channel production preflight",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CLINICAL-LAUNCH-20": {
       "base": "main",
       "branch": "codex/clinical-launch-20",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": null,
       "depends_on": [
         "CLINICAL-LAUNCH-19"
@@ -53964,10 +54548,14 @@
         "local_validation_passed": null,
         "post_merge_revalidated": null
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "pending",
       "title": "CLINICAL-LAUNCH-20 SDS canary submission and review",
-      "transitions": []
+      "transitions": [
+
+      ]
     },
     "CMD-FIX-1": {
       "branch": "fix/career-audit-command-layer-orchestration",
@@ -53993,7 +54581,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "audit_command_orchestration_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): wire career eligibility audit command to layer services"
     },
@@ -54174,7 +54764,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1628",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "updated_at": "2026-05-24T02:40:27+08:00"
     },
@@ -54296,7 +54888,9 @@
       "research_publish": false,
       "scheduler_activation": false,
       "sidecar_allowed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "state": "merged",
       "status": "merged",
       "stop_on_safety_violation": true,
@@ -54445,7 +55039,9 @@
       "research_publish": false,
       "scheduler_activation": false,
       "sidecar_allowed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "state": "merged",
       "status": "merged",
       "stop_on_safety_violation": true,
@@ -55647,7 +56243,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "audit_context_consumer_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open_github_checks_passed",
       "title": "fix(api): add career audit entity index context inputs"
     },
@@ -55701,7 +56299,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "audit_context_producer_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged_reconciled",
       "title": "feat(api): add career audit db context exporters"
     },
@@ -55757,7 +56357,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "surface_context_producer_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): add career surface context export producer"
     },
@@ -55792,7 +56394,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1629",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT-01": {
@@ -55862,7 +56466,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1741",
       "remote_branch_deleted": false,
       "repo": "fap-api",
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "local_validation_passed",
       "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT-01 controlled replacement authority import path",
       "transitions": [
@@ -56188,7 +56794,9 @@
         }
       },
       "commit_sha": "32fb9a3a",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "failure_reason": null,
       "history": [
         {
@@ -56218,7 +56826,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "risk_level": "low",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "chore(security): add docs shell safety guard",
       "train_scope": "storage_runtime_hygiene"
@@ -56263,7 +56873,9 @@
         }
       },
       "commit_sha": "a95de5c9ff047851336ee1f7c35b2255ac8ba683",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T04:07:01.632393+00:00",
@@ -56480,7 +57092,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1667",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "EN-PARITY-03": {
@@ -56569,7 +57183,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1672",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "EN-PARITY-04": {
@@ -56644,7 +57260,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1674",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "local_validation_passed"
     },
     "EN-PARITY-05": {
@@ -56723,7 +57341,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1676",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "EN-PARITY-06": {
@@ -57240,7 +57860,9 @@
         "search_channel_action": false,
         "url_submission": false
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02 article English counterpart draft package"
     },
@@ -57359,7 +57981,9 @@
         "search_channel_action": false,
         "url_submission": false
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05 career content English draft package"
     },
@@ -57521,7 +58145,9 @@
         "search_channel_action": false,
         "url_submission": false
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "GLOBAL-EN-ZH-CONTENT-PAGES-TRANSLATION-BATCH-01 human-reviewed content/help/policy English translation batch"
     },
@@ -57583,7 +58209,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1690",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "GLOBAL-EN-ZH-GLOBAL-UI-I18N-BATCH-08": {
@@ -57634,7 +58262,9 @@
         "search_channel_action": false,
         "url_submission": false
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "manifest_registered",
       "title": "GLOBAL-EN-ZH-GLOBAL-UI-I18N-BATCH-08 global UI i18n parity review and frontend consumer follow-up"
     },
@@ -57789,7 +58419,9 @@
         "search_channel_action": false,
         "url_submission": false
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "ci_fix_local_validation_passed",
       "title": "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07 media alt and visual review package"
     },
@@ -57865,7 +58497,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1681",
       "remote_branch_deleted": false,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open_github_checks_pending"
     },
     "GLOBAL-EN-ZH-PARITY-SCAN-00": {
@@ -57906,7 +58540,9 @@
         }
       },
       "commit_sha": "87345d16c4b7b22a23ead480925bb1f4c58d2721",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T11:36:50.288480+00:00",
@@ -58067,7 +58703,9 @@
         "search_channel_action": false,
         "url_submission": false
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04 research English translation and claim review package"
     },
@@ -58174,7 +58812,9 @@
         "search_channel_action": false,
         "url_submission": false
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06 result report English asset draft package"
     },
@@ -58289,7 +58929,9 @@
         "search_channel_action": false,
         "url_submission": false
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03 topic test landing English parity draft package"
     },
@@ -58362,7 +59004,9 @@
     "IQ-CMS-MEDIA-02": {
       "base": "main",
       "branch": "codex/iq-cms-media-02-rendering-guard",
-      "checks": [],
+      "checks": [
+
+      ],
       "depends_on": [
         "IQ-CMS-MEDIA-01"
       ],
@@ -58476,7 +59120,9 @@
         }
       },
       "commit_sha": "f305f93a",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "failure_reason": null,
       "id": "IQ-NORM-01",
       "local_cleanup_executed": true,
@@ -58953,7 +59599,9 @@
     "IQ-PAID-REPORT-01": {
       "base": "main",
       "branch": "codex/iq-paid-report-01-entitlement-contract",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": "60eabe326f7e24e71a1bef555493dc9a1d6e6f13",
       "depends_on": [
         "IQ-NORM-03"
@@ -58991,7 +59639,9 @@
     "IQ-PAID-REPORT-02": {
       "base": "main",
       "branch": "codex/iq-paid-report-02-render-entitlement-states",
-      "checks": [],
+      "checks": [
+
+      ],
       "depends_on": [
         "IQ-PAID-REPORT-01"
       ],
@@ -59021,7 +59671,9 @@
     "IQ-RELEASE-01": {
       "base": "main",
       "branch": "codex/iq-release-01-launch-readiness-ledger",
-      "checks": [],
+      "checks": [
+
+      ],
       "depends_on": [
         "IQ-OBS-01"
       ],
@@ -59143,7 +59795,9 @@
     "IQ-SEO-RAMP-02": {
       "base": "main",
       "branch": "codex/iq-seo-ramp-02-indexation-gate",
-      "checks": [],
+      "checks": [
+
+      ],
       "depends_on": [
         "IQ-SEO-RAMP-01"
       ],
@@ -59452,7 +60106,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "docs(seo-intel): add Metabase ops access runbook"
     },
@@ -59581,7 +60237,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "docs(seo-intel): add Ops Portal SEO auth audit contract"
     },
@@ -59638,7 +60296,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(ops): add SEO dashboard access shell"
     },
@@ -59695,7 +60355,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "docs(seo-intel): add private Metabase access bridge contract"
     },
@@ -59759,7 +60421,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "docs(seo-intel): add Ops Portal SEO access verification contract"
     },
@@ -59801,7 +60465,9 @@
       "remote_branch_deleted": null,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "verified",
       "title": "/ops/seo production access verification"
     },
@@ -59911,7 +60577,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1626",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "OPS-SECURITY-STORAGE-PATH-SAFETY-01": {
@@ -59973,7 +60641,9 @@
         }
       },
       "commit_sha": "c5d45863c786b8825e1514db97a7db28fa2a9808",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "events": [
         {
           "at": "2026-05-24T01:05:00+08:00",
@@ -59998,7 +60668,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1625",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "PERSONALITY-ENNEAGRAM-COMPAT-01": {
@@ -60094,7 +60766,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1640",
       "remote_branch_deleted": false,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "local_validated"
     },
     "PR-2": {
@@ -60571,7 +61245,9 @@
       "branch": "codex/pr-audit-be-01-ci-supply-chain",
       "checks": {
         "github_required_checks": {
-          "failed": [],
+          "failed": [
+
+          ],
           "passed": [
             "hygiene",
             "supply-chain",
@@ -60584,7 +61260,9 @@
           "status": "passed"
         },
         "local": {
-          "failed": [],
+          "failed": [
+
+          ],
           "passed": [
             "cd backend && composer validate --strict",
             "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
@@ -60600,7 +61278,9 @@
         }
       },
       "commit_sha": "c87d9bc11f4e1cf90e60c06660b472e8afeb10a0",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "events": [
         {
           "at": "2026-05-24T07:16:21.665+00:00",
@@ -60639,7 +61319,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1644",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "updated_at": "2026-05-24T07:40:49.781Z"
     },
@@ -60648,7 +61330,9 @@
       "checks": {
         "github_required_checks": {
           "evidence": "PR #1645 passed required GitHub checks and was squash-merged as 0338122739bbe4fd9645943d4f08372a3881f560.",
-          "failed": [],
+          "failed": [
+
+          ],
           "head_sha": "1051d5a87f12f518eb0a6cff7270ebb7be5dbcc2",
           "passed": [
             "hygiene",
@@ -60780,7 +61464,9 @@
         },
         "github": {
           "evidence": "GitHub required checks passed on PR #1648 after adding the scoped runtime-freeze classifier evidence for the attempt_quality retirement migration.",
-          "failed": [],
+          "failed": [
+
+          ],
           "head_sha": "4aa43fd17a91dfca4f4b4035e3c77f9862f211dc",
           "passed": [
             "hygiene",
@@ -60796,7 +61482,9 @@
         },
         "github_required_checks": {
           "evidence": "GitHub PR #1648 is MERGED and origin/main contains merge commit d18c0cc36a84ce50b823c995e4226b188551b0d0.",
-          "failed": [],
+          "failed": [
+
+          ],
           "head_sha": "ac79f977b060252b0f4c0bde711643b2069c7380",
           "passed": [
             "hygiene",
@@ -60870,7 +61558,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1648",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "updated_at": "2026-05-24T10:46:53.618Z"
     },
@@ -61144,7 +61834,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "controlled_codex_assisted_cms_publish_sop",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "PR-CMS-04｜Controlled Codex-Assisted CMS Publish SOP"
     },
@@ -61232,7 +61924,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "semantic_content_gate_architecture",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "PR-CMS-FIX-MASTER｜Scalable Semantic Content Gate Architecture"
     },
@@ -61777,7 +62471,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "article_multi_test_graph_edges",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "ci_fix_local_checks_passed",
       "title": "PR-GRAPH-01｜Article Multi-Test Graph Edges"
     },
@@ -61849,7 +62545,9 @@
         "local_validation_passed": true,
         "post_merge_revalidated": true
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "merged",
       "title": "PR-HIRING-01 hiring content authority package",
       "transitions": [
@@ -61957,7 +62655,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1418",
       "remote_branch_deleted": false,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "PR-MEDIA-01｜CMS Media Library OSS/CDN Upload Automation"
     },
@@ -62073,7 +62773,9 @@
       "research_publish": false,
       "scheduler_activation": false,
       "sidecar_allowed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "state": "merged",
       "status": "merged",
       "stop_on_safety_violation": true,
@@ -62178,7 +62880,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(cms): add Research Asset backend MVP"
     },
@@ -62252,7 +62956,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "docs(research): add SEO GEO search channel contract"
     },
@@ -62375,7 +63081,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "article_authority_import_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(api): import six SEO articles with SVG covers"
     },
@@ -62456,7 +63164,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "article_graph_authority_closure_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(api): close six-article graph recommendation authority"
     },
@@ -62537,7 +63247,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "article_baseline_republish_projection_convergence_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "open",
       "title": "fix(api): republish article baseline and complete public projection"
     },
@@ -62629,7 +63341,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "risk_level": "medium",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "chore(cms): add article publish smoke for cover image propagation",
       "train_scope": "publishing_reliability"
@@ -62685,7 +63399,9 @@
         }
       },
       "commit_sha": "5a609e81aaeaaecf0577f7b68fec99f28588f0f8",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "failure_reason": null,
       "history": [
         {
@@ -62715,7 +63431,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "risk_level": "medium",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(cms-media): enforce public article media origin and variant readiness",
       "train_scope": "publishing_reliability"
@@ -62912,8 +63630,12 @@
       "scope_type": "final_2786_public_resolution_partition_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at File::isDirectory($target.'/compiled').",
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled').",
@@ -63014,8 +63736,12 @@
       "scope_type": "final_2786_public_owner_partition_authority_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at File::isDirectory($target.'/compiled').",
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled').",
@@ -63115,7 +63841,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "final_2786_software_manual_hold_authority_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): account software manual hold in 2786 readiness"
     },
@@ -63168,7 +63896,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "delta_rollout_manifest_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): add career 51-delta rollout manifest"
     },
@@ -63221,7 +63951,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "audit_80_candidate_selector_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): add career 80 candidate readiness selector"
     },
@@ -63275,7 +64007,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "80_runtime_candidate_pool_planner_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "committed",
       "title": "feat(api): add career 80 runtime candidate pool planner"
     },
@@ -63333,7 +64067,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "career_80_live_surface_authority_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): align career 80 live surface with runtime authority"
     },
@@ -63386,7 +64122,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "80_manifest_train_command_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "feat(api): add career 80 manifest train command"
     },
@@ -63439,7 +64177,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "80_readiness_command_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(api): add career 80 cohort readiness command"
     },
@@ -63492,7 +64232,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "80_readiness_selection_gate_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): tighten career 80 readiness candidate selection"
     },
@@ -63546,7 +64288,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "80_target_delta_decomposition_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): add career 80 target delta decomposition"
     },
@@ -63600,7 +64344,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "career_80_total_live_acceptance_report_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): add career 80 total live acceptance report"
     },
@@ -63701,7 +64447,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "audit_baseline_metadata_mapping_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): map career workbook baseline metadata for audit"
     },
@@ -63752,7 +64500,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "candidate_aware_audit_policy_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "github_checks_passed_human_review_pending",
       "title": "fix(api): accept candidate-aware runtime states for delta planning"
     },
@@ -63823,7 +64573,9 @@
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1431",
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): add guarded CN proxy noindex public-owner surface"
     },
@@ -63911,7 +64663,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "risk_level": "medium_publication_authority",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "committed",
       "title": "fix(api): add CN proxy visible detail policy authority",
       "train_scope": "cn_proxy_visible_detail_policy_authority"
@@ -63992,7 +64746,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "delta_rollout_apply_batch_authority_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): repair career delta rollout apply batch authority"
     },
@@ -64045,7 +64801,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "delta_rollout_gate_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): add career delta rollout gate semantics"
     },
@@ -64126,7 +64884,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "risk_level": "medium",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): promote display-backed directory draft jobs in list authority",
       "train_scope": "career_directory_detail_pending_authority"
@@ -64218,7 +64978,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "risk_level": "medium",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): align directory list with runtime detail authority",
       "train_scope": "career_directory_list_detail_api_authority"
@@ -64272,7 +65034,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "audit_occupation_entity_remediation_planning_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "committed",
       "title": "fix(api): add career occupation entity remediation planning"
     },
@@ -64348,8 +65112,12 @@
       "scope_type": "explicit_rollout_batch_ledger_authority_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed BigFiveResultPageV2CoreBodyPreviewTest::runtime_paths_have_no_uncommitted_diff while reporting CMS test-edge files from the parent worktree, not the current PR files.",
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at compiled directory assertions.",
@@ -64464,7 +65232,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "audit_index_state_remediation_planning_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "ci_fix_local_checks_passed",
       "title": "fix(api): add career index-state remediation planning"
     },
@@ -64521,7 +65291,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "readiness_policy_classification_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): classify career readiness policy blockers"
     },
@@ -64577,7 +65349,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "index_state_remediation_gate_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): add guarded career index state remediation command"
     },
@@ -64636,7 +65410,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "post_rollout_runtime_projection_authority_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): include verified rollout batches in career runtime projection"
     },
@@ -64673,7 +65449,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "risk_level": "medium",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): align career 2786 product claim authority",
       "train_scope": "career_product_claim_authority"
@@ -64736,8 +65514,12 @@
       "scope_type": "progressive_closeout_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career progressive closeout command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -64753,8 +65535,12 @@
           "title": "ci_verify_mbti content pack publish/rollback target compiled directory failure"
         },
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Unit\\Services\\BigFive\\ResultPageV2\\BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff with backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
             "Current PR does not modify backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
@@ -64827,8 +65613,12 @@
       "scope_type": "progressive_cohort_target_delta_planning_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed only Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career progressive audit/command/test/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -64904,8 +65694,12 @@
       "scope_type": "progressive_live_acceptance_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career progressive live acceptance command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -64921,8 +65715,12 @@
           "title": "ci_verify_mbti content pack publish/rollback target compiled directory failure"
         },
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Unit\\Services\\BigFive\\ResultPageV2\\BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff with backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
             "Current PR does not modify backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
@@ -64998,8 +65796,12 @@
       "scope_type": "progressive_live_verification_scaling_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at tests/Feature/Content/PacksPublishBig5Test.php:94 asserting File::isDirectory($target.'/compiled').",
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at tests/Feature/Content/PacksRollbackBig5Test.php:97 asserting File::isDirectory($target.'/compiled').",
@@ -65087,7 +65889,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "progressive_readiness_cn_proxy_exclusion_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): exclude CN proxy rows from progressive readiness"
     },
@@ -65145,7 +65949,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "progressive_readiness_occupation_aware_selection_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): make progressive readiness selection occupation-aware"
     },
@@ -65201,7 +66007,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "progressive_readiness_selection_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "committed",
       "title": "fix(api): add progressive career readiness selection"
     },
@@ -65278,8 +66086,12 @@
       "scope_type": "progressive_readiness_software_manual_hold_exclusion_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksPublishBig5Test at the target compiled directory assertion.",
             "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksRollbackBig5Test at the target compiled directory assertion.",
@@ -65354,8 +66166,12 @@
       "scope_type": "progressive_rollout_manifest_gate_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career progressive rollout manifest/gate command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -65431,8 +66247,12 @@
       "scope_type": "progressive_runtime_artifact_refresh_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career runtime artifact refresh command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -65504,7 +66324,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "progressive_runtime_candidate_pool_selection_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): consume progressive delta slugs in runtime candidate pool"
     },
@@ -65565,8 +66387,12 @@
       "scope_type": "progressive_runtime_candidate_preparation_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career runtime candidate prep command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -65653,7 +66479,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "rollout_command_candidate_aware_artifact_normalization_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(api): normalize candidate-aware rollout projection artifacts"
     },
@@ -65685,7 +66513,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "audit_run_context_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): make career audit run context explicit"
     },
@@ -65790,7 +66620,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "audit_runtime_authority_classification_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): classify career runtime authority gaps for audit"
     },
@@ -65843,7 +66675,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "runtime_artifact_refresh_plan_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): add career runtime artifact refresh plan"
     },
@@ -65901,7 +66735,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "candidate_aware_runtime_artifact_refresh_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "github_checks_failed_scoped_fix_local_passed",
       "title": "fix(api): add candidate-aware runtime artifact refresh"
     },
@@ -65954,7 +66790,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "runtime_candidate_prep_planner_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): add career runtime candidate preparation planner"
     },
@@ -66009,7 +66847,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "runtime_candidate_prep_apply_gate_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): add guarded runtime candidate preparation command"
     },
@@ -66077,8 +66917,12 @@
       "scope_type": "runtime_projection_lookup_latest_selection_only",
       "sidecar_issues": [
         {
-          "affected_locales": [],
-          "affected_slugs": [],
+          "affected_locales": [
+
+          ],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksPublishBig5Test at compiled directory assertion.",
             "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksRollbackBig5Test at compiled directory assertion.",
@@ -66197,7 +67041,9 @@
             "en",
             "zh"
           ],
-          "affected_slugs": [],
+          "affected_slugs": [
+
+          ],
           "evidence": [
             "SCAN-3 counts_by_reason_layer maps required_display_field_missing to baseline, not seo_geo.",
             "REPAIR-BASELINE-1 is the next train item and explicitly owns baseline/display metadata mapping."
@@ -66266,7 +67112,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "audit_surface_context_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): add career surface context artifact support"
     },
@@ -66372,7 +67220,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "audit_title_source_mapping_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "fix(api): use workbook english titles in career audit"
     },
@@ -66431,7 +67281,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(seo-intel): add Research report URL Truth observation"
     },
@@ -66484,7 +67336,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "github_checks_passed_pending_merge",
       "title": "docs(research): add first Research publish readiness checklist"
     },
@@ -66642,7 +67496,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1668",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open_github_checks_pending"
     },
     "RESULT-EN-PARITY-02": {
@@ -66717,7 +67573,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1669",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "RESULT-EN-PARITY-03": {
@@ -66797,7 +67655,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1670",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "RESULT-EN-PARITY-04": {
@@ -66892,7 +67752,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1671",
       "remote_branch_deleted": false,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open_rebased_github_checks_pending"
     },
     "RIASEC-AH-04": {
@@ -67062,7 +67924,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1632",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "RIASEC-DEEP-COPY-01": {
@@ -67128,7 +67992,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "backend_deep_copy_slot_schema_contract_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(riasec): harden deep copy slot schema contract"
     },
@@ -67192,7 +68058,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "backend_dimension_deep_copy_slots_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(riasec): add dimension deep copy runtime slots"
     },
@@ -67633,7 +68501,9 @@
         }
       },
       "commit_sha": "7207f737cd469883370ccae25c6d175ff75c951d",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "failure_reason": null,
       "local_cleanup_executed": true,
       "merged_at": "2026-05-13T07:06:00Z",
@@ -67641,7 +68511,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "train_registration_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "docs(codex): register RIASEC personalization train"
     },
@@ -67694,7 +68566,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "backend_interpretation_contract_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(riasec): add interpretation rule spec v2 contract"
     },
@@ -67743,7 +68617,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "backend_quality_contract_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(riasec): add quality rule spec v2 contract"
     },
@@ -67788,7 +68664,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "backend_projection_extension_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(riasec): extend projection v2 with interpretation state"
     },
@@ -67835,7 +68713,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_type": "backend_module_selector_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(riasec): add report module selector contract"
     },
@@ -67880,7 +68760,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_type": "backend_content_registry_readiness_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(riasec): add content registry readiness contract"
     },
@@ -67892,7 +68774,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "branch": "codex/riasec-personalization-06-frontend-fail-closed",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": "bb01c378674b28857b98ddbdf3d657144ef3b83e",
       "depends_on": [
         "RIASEC-PERSONALIZATION-03",
@@ -67905,7 +68789,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-web",
       "scope_type": "frontend_fail_closed_consumer_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(riasec): consume backend personalization state fail-closed"
     },
@@ -67916,7 +68802,9 @@
         "docs/codex/pr-train-state.json"
       ],
       "branch": "codex/riasec-personalization-07-fixture-matrix",
-      "checks": [],
+      "checks": [
+
+      ],
       "commit_sha": "7740b1b09ce6dddb693ac5dbcf8a1d027b0db08b",
       "depends_on": [
         "RIASEC-PERSONALIZATION-01",
@@ -67933,14 +68821,18 @@
       "remote_branch_deleted": false,
       "repo": "fap-web",
       "scope_type": "fixture_matrix_contracts_only",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pending",
       "title": "test(riasec): add personalization fixture matrix contracts"
     },
     "SEARCH-CHANNEL-LIVE-MBTI-01": {
       "branch": "codex/search-channel-live-mbti-01-preflight",
       "checks": {
-        "github": [],
+        "github": [
+
+        ],
         "local": {
           "focused_live_preflight_test": "passed: php artisan test --filter=SeoIntelSearchChannelLiveMbti01Preflight --no-ansi (1 test, 25 assertions)",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -67998,7 +68890,9 @@
     "SEARCH-CHANNEL-LIVE-MBTI-02": {
       "branch": "codex/search-channel-live-mbti-02",
       "checks": {
-        "github": [],
+        "github": [
+
+        ],
         "local": {
           "focused_live_submission_test": "passed: php artisan test --filter=SeoIntelSearchChannelLiveMbti02 --no-ansi (1 test, 14 assertions)",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -68068,7 +68962,9 @@
     "SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW": {
       "branch": "codex/search-channel-live-mbti-02-24h-review",
       "checks": {
-        "github": [],
+        "github": [
+
+        ],
         "local": {
           "focused_twenty_four_hour_review_test": "passed_with_warnings: php artisan test --filter=SeoIntelSearchChannelLiveMbti02TwentyFourHourReview --no-ansi exited 0 with 1 warning and 14 assertions",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -68489,7 +69385,9 @@
       "research_publish": false,
       "scheduler_activation": false,
       "sidecar_allowed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "state": "merged",
       "status": "merged",
       "stop_on_safety_violation": true,
@@ -68552,7 +69450,9 @@
         }
       },
       "commit_sha": "dc96157c0c226ed39c2036a27670c092bc54013f",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "failure_reason": null,
       "local_cleanup_executed": true,
       "merged_at": "2026-06-02T11:46:03Z",
@@ -68566,7 +69466,9 @@
         "local_validation_passed": true,
         "post_merge_revalidated": true
       },
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "merged",
       "transitions": [
         {
@@ -69182,7 +70084,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "risk_level": "medium_disabled_collector",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open_github_checks_passed",
       "title": "feat(seo-intel): add drift collector and crawler log foundation",
       "train_scope": "search_intelligence_drift_collector_crawler_log_foundation"
@@ -69308,7 +70212,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "risk_level": "medium_disabled_aggregate_schema",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(seo-intel): add attribution and revenue builders",
       "train_scope": "search_intelligence_backend_attribution_revenue_builders"
@@ -69432,7 +70338,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "risk_level": "medium_disabled_search_channel_schema",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(seo-intel): add disabled GSC collector",
       "train_scope": "search_intelligence_gsc_disabled_collector"
@@ -69532,7 +70440,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "risk_level": "medium_disabled_search_channel_schema",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(seo-intel): add Baidu and IndexNow collector foundations",
       "train_scope": "search_intelligence_baidu_indexnow_disabled_collectors"
@@ -69642,7 +70552,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "risk_level": "low_docs_contract_no_deploy",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "docs(seo-intel): add Metabase MVP dashboard spec",
       "train_scope": "metabase_mvp_dashboard_policy_sanitized_views"
@@ -69765,7 +70677,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "risk_level": "medium_disabled_issue_queue_schema",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "github_checks_passed",
       "title": "feat(seo-intel): add CMS issue queue summary",
       "train_scope": "cms_issue_queue_summary_foundation"
@@ -69817,7 +70731,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "docs(seo-intel): finalize SEO Dash MVP online closeout"
     },
@@ -70114,7 +71030,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "risk_level": "medium_migration_scope_no_production_execution",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "fix(seo-intel): isolate seo_intel migrations",
       "train_scope": "seo_intel_migration_isolation"
@@ -70238,7 +71156,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "risk_level": "low_docs_contract_no_execution",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "state": "merged",
       "status": "merged",
       "title": "docs(seo-intel): add controlled write enablement plan",
@@ -70366,7 +71286,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "risk_level": "medium_runtime_guard_no_production_execution",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "state": "merged",
       "status": "merged",
       "title": "feat(seo-intel): add bounded URL truth inventory canary",
@@ -70590,7 +71512,9 @@
       "research_publish": false,
       "scheduler_activation": false,
       "sidecar_allowed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "state": "merged",
       "status": "merged",
       "stop_on_safety_violation": true,
@@ -70708,7 +71632,9 @@
       "research_publish": false,
       "scheduler_activation": false,
       "sidecar_allowed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "state": "merged",
       "status": "merged",
       "stop_on_safety_violation": true,
@@ -71420,7 +72346,9 @@
     "SEO-GROWTH-MBTI-ACTION-01B": {
       "branch": "codex/seo-growth-mbti-action-01b-enqueue",
       "checks": {
-        "github": [],
+        "github": [
+
+        ],
         "local": {
           "focused_enqueue_report_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bSearchChannelEnqueue --no-ansi (5 tests, 31 assertions)",
           "git_diff_check": "passed: git diff --check",
@@ -71476,7 +72404,9 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-01": {
       "branch": "codex/seo-growth-mbti-action-01b-fix-01",
       "checks": {
-        "github": [],
+        "github": [
+
+        ],
         "local": {
           "command_help": "passed: php artisan seo-intel:search-channel-queue --help exposes --canonical-url and --enqueue",
           "focused_single_url_command_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommand --no-ansi (9 tests, 64 assertions)",
@@ -71529,7 +72459,9 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02": {
       "branch": "codex/seo-growth-mbti-action-01b-fix-02",
       "checks": {
-        "github": [],
+        "github": [
+
+        ],
         "local": {
           "focused_url_truth_alignment_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02UrlTruthAlignment --no-ansi (1 test, 34 assertions)",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -71654,7 +72586,9 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-PREFLIGHT": {
       "branch": "codex/seo-growth-mbti-action-01b-fix-02-prod-preflight",
       "checks": {
-        "github": [],
+        "github": [
+
+        ],
         "local": {
           "focused_prod_preflight_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02ProdPreflight --no-ansi (5 tests, 29 assertions)",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -71964,7 +72898,9 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-PLAN": {
       "branch": "codex/seo-growth-mbti-action-01b-fix-02-www-cleanup-plan",
       "checks": {
-        "github": [],
+        "github": [
+
+        ],
         "local": {
           "focused_www_cleanup_plan_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02WwwCanonicalCleanupPlan --no-ansi (4 tests, 30 assertions)",
           "git_diff_cached_check": "passed: git diff --cached --check",
@@ -72215,7 +73151,9 @@
     "SEO-GROWTH-MBTI-ACTION-01B-R2": {
       "branch": "codex/seo-growth-mbti-action-01b-r2-enqueue",
       "checks": {
-        "github": [],
+        "github": [
+
+        ],
         "local": {
           "focused_enqueue_report_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bR2SearchChannelEnqueue --no-ansi (1 test, 17 assertions)",
           "git_diff_check": "passed: git diff --check",
@@ -72437,7 +73375,9 @@
         }
       },
       "commit_sha": "8208e69422a7487d272df57107a5b5e1cacf6b68",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T02:53:27.627612+00:00",
@@ -72810,7 +73750,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1631",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged"
     },
     "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00": {
@@ -72902,7 +73844,9 @@
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "merged",
       "title": "feat(seo-intel): add two-stage URL Truth handoff"
     },
@@ -72941,7 +73885,9 @@
       },
       "commit_sha": "9d0b26e4ca234354963d9747f0f27438588856bc",
       "crawler_log_read": false,
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "deploy": false,
       "env_edit": false,
       "external_api_live_activation": false,
@@ -73504,7 +74450,9 @@
         }
       },
       "commit_sha": "59b2bf59703a02efa3d640593355b6d9c288475f",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "failure_reason": null,
       "history": [
         {
@@ -73534,7 +74482,9 @@
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "risk_level": "low",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pr_open",
       "title": "chore(storage): add read-only release roots audit",
       "train_scope": "storage_runtime_hygiene"
@@ -73835,7 +74785,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1284",
       "remote_branch_deleted": false,
       "repo": "fap-api",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "ready_to_merge"
     },
     "career-runtime-publish-projection": {
@@ -74007,7 +74959,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1356",
       "remote_branch_deleted": false,
       "repo": "fap-web",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pending_dependency"
     },
     "frontend-result-email-gate": {
@@ -74033,12 +74987,16 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1451",
       "remote_branch_deleted": false,
       "repo": "fap-web",
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "status": "pending_dependency"
     },
     "iq-commerce-unlock-199-500": {
       "branch": "codex/iq-commerce-unlock-199-500",
-      "checks": [],
+      "checks": [
+
+      ],
       "depends_on": [
         "iq-report-builder-three-dimension-result-schema"
       ],
@@ -74416,7 +75374,8 @@
       ],
       "status": "pending",
       "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
-      "checks": {},
+      "checks": {
+      },
       "scope_validation": {
         "allowed_paths_only": null,
         "local_validation_passed": null,
@@ -74457,7 +75416,8 @@
       ],
       "status": "pending",
       "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
-      "checks": {},
+      "checks": {
+      },
       "scope_validation": {
         "allowed_paths_only": null,
         "local_validation_passed": null,
@@ -75247,7 +76207,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1742",
       "remote_branch_deleted": false,
       "repo": "fap-api",
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "local_validation_passed",
       "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_RESELECT-01 replacement authority candidate reselect",
       "transitions": [
@@ -75372,7 +76334,9 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1750",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "status": "merged",
       "title": "EMAIL-DIRECTMAIL-SMTP-READINESS-01 DirectMail SMTP readiness docs env and outbox test",
       "transitions": [
@@ -75813,7 +76777,9 @@
         }
       },
       "commit_sha": "e934e8a5617ec669f6f326e1177e0c6044f9cb22",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "failure_reason": null,
       "history": [
         {
@@ -77387,7 +78353,9 @@
         }
       },
       "commit_sha": null,
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "external_api_credentials_required": false,
       "failure_reason": null,
       "history": [
