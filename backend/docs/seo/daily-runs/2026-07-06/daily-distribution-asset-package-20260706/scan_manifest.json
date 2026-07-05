@@ -1,0 +1,59 @@
+{
+  "id": "DAILY-DISTRIBUTION-ASSET-PACKAGE-20260706",
+  "date": "2026-07-06",
+  "repo": "fap-api",
+  "scope": "generated-only/unpublished distribution asset package",
+  "decision": "distribution_asset_package_ready_for_operator_review_unpublished",
+  "selected_topic": {
+    "topic_id": "gaokao-major-adjustment-unacceptable-major-checklist",
+    "working_title": "被调剂到不想去的专业怎么办：兴趣、课程和转专业检查清单",
+    "primary_owner_url": "/zh/tests/holland-career-interest-test-riasec"
+  },
+  "assets": [
+    "short_summary",
+    "wechat_outline",
+    "social_caption_drafts",
+    "cta_snippets",
+    "internal_link_suggestions",
+    "answer_surface_snippets",
+    "claim_guard",
+    "channel_holds"
+  ],
+  "files": [
+    "EXECUTIVE_DECISION.md",
+    "DISTRIBUTION_ASSETS.md",
+    "CLAIM_GUARD_AND_CHANNEL_HOLDS.md",
+    "scan_manifest.json"
+  ],
+  "forbidden_actions_not_performed": [
+    "cms_write",
+    "cms_import",
+    "article_body_generation",
+    "public_posting",
+    "runtime_change",
+    "frontend_change",
+    "schema_change",
+    "hreflang_change",
+    "canonical_change",
+    "noindex_change",
+    "sitemap_change",
+    "llms_change",
+    "search_submission",
+    "manual_deploy",
+    "production_deploy",
+    "staging_deploy_wait"
+  ],
+  "date_gated_followups": [
+    {
+      "id": "MBTI-MAIN-FAQ-D7-OBSERVATION-01",
+      "not_before": "2026-07-12"
+    },
+    {
+      "id": "MBTI-MAIN-FAQ-D28-OBSERVATION-01",
+      "not_before": "2026-08-02"
+    }
+  ],
+  "explicitly_not_executed": [
+    "RIASEC-ZH-TEST-LANDING-FAQ-PARITY-READBACK-01"
+  ]
+}
