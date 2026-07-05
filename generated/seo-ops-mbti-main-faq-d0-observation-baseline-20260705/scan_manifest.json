@@ -1,0 +1,69 @@
+{
+  "id": "MBTI-MAIN-FAQ-D0-OBSERVATION-BASELINE-01",
+  "repo": "fap-api",
+  "generated_at": "2026-07-05T11:04:12Z",
+  "scope": "read-only D0 observation baseline after MBTI FAQ runtime parity passed",
+  "runtime_change": false,
+  "cms_write": false,
+  "database_mutation": false,
+  "search_submission": false,
+  "sitemap_change": false,
+  "llms_change": false,
+  "deployment_triggered": false,
+  "production_deploy_triggered": false,
+  "pr_train_manifest_changed": false,
+  "sources": {
+    "gsc": {
+      "property": "sc-domain:fermatmind.com",
+      "search_type": "Web",
+      "window": "last 24 hours",
+      "last_updated": "2.5 hours ago",
+      "domain": {
+        "clicks": 6,
+        "impressions": 1022,
+        "ctr": "0.6%",
+        "avg_position": 8.7
+      },
+      "page_filter": {
+        "url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+        "clicks": 1,
+        "impressions": 139,
+        "ctr": "0.7%",
+        "avg_position": 7.7
+      },
+      "query_page_rows": [
+        {"query": "mbti测试结果", "clicks": 1, "impressions": 1, "ctr": "100%", "avg_position": 7.0},
+        {"query": "mbti测试", "clicks": 0, "impressions": 56, "ctr": "0%", "avg_position": 8.7},
+        {"query": "16人格测试", "clicks": 0, "impressions": 10, "ctr": "0%", "avg_position": 6.6},
+        {"query": "mbti免费测试", "clicks": 0, "impressions": 8, "ctr": "0%", "avg_position": 4.6},
+        {"query": "16型人格测试", "clicks": 0, "impressions": 6, "ctr": "0%", "avg_position": 8.0},
+        {"query": "mbti 测试 免費", "clicks": 0, "impressions": 4, "ctr": "0%", "avg_position": 4.0},
+        {"query": "mbti16人格测试", "clicks": 0, "impressions": 2, "ctr": "0%", "avg_position": 8.0},
+        {"query": "16种人格测试", "clicks": 0, "impressions": 2, "ctr": "0%", "avg_position": 8.5},
+        {"query": "imbt测试", "clicks": 0, "impressions": 2, "ctr": "0%", "avg_position": 9.0},
+        {"query": "费马测试", "clicks": 0, "impressions": 1, "ctr": "0%", "avg_position": 1.0}
+      ]
+    },
+    "ga": {
+      "property": "费马心理",
+      "report": "Traffic acquisition: Session default channel group",
+      "date": "2026-07-05",
+      "organic_search_sessions": 4,
+      "total_sessions": 15,
+      "organic_search_engaged_sessions": 2,
+      "organic_search_events": 26,
+      "purchase_truth": false,
+      "article_to_test": "not_available_from_current_read_source",
+      "start_test": "not_available_from_current_read_source"
+    },
+    "runtime_guardrail": {
+      "api_faq_count": 8,
+      "visible_faq_expected_question_hits": 8,
+      "jsonld_faq_count": 8,
+      "canonical_x_proxy_cache": "HIT",
+      "visible_questions_equal_jsonld_questions": true
+    }
+  },
+  "decision": "D0_BASELINE_CAPTURED_READ_ONLY",
+  "next_recommended_checkpoint": "D7 before deciding follow-up content/runtime optimization"
+}
