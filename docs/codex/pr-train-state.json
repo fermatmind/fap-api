@@ -81122,7 +81122,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01"
     ],
-    "status": "local_validation_passed",
+    "status": "pr_open_github_checks_pending",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -81136,6 +81136,10 @@
       "local_validation": {
         "status": "pass",
         "evidence": "php -l command/test, artisan list articles, targeted Pint, focused ArticleIqMethodPagesSeoGeoActivateCommandTest plus ArticleDiscoverabilityReleaseCommandTest, focused BigFive freeze classifier tests, YAML/JSON parse, and git diff --check passed locally."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR #2746 opened for branch codex/iq-method-pages-seo-geo-activate-01; waiting for required GitHub checks."
       }
     },
     "scope_validation": {
@@ -81144,8 +81148,8 @@
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "ff1fdad6457d52a6906924cec8d37830316e521e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2746",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -81176,6 +81180,11 @@
         "at": "2026-07-05T17:47:00Z",
         "status": "local_validation_passed",
         "summary": "Implemented controlled IQ method SEO/GEO activation command and tests. Local validation passed; no production activation, search submission, staging deploy wait, manual deploy, or production deploy was executed."
+      },
+      {
+        "at": "2026-07-05T17:49:00Z",
+        "status": "pr_open_github_checks_pending",
+        "summary": "Opened PR #2746 for the scoped controlled IQ method SEO/GEO activation workflow and pushed local-validation-passed implementation. Waiting for required GitHub checks."
       }
     ]
   },
