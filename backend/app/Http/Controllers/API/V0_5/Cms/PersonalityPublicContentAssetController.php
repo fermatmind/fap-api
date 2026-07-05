@@ -165,6 +165,7 @@ final class PersonalityPublicContentAssetController extends Controller
     {
         $contentSections = is_array($asset->content_sections_json) ? $asset->content_sections_json : [];
         $canonical = is_array($asset->canonical_json) ? $asset->canonical_json : [];
+        $schemaRuntimeEligible = $this->isSchemaRuntimeEligible($asset);
 
         return [
             'id' => (int) $asset->id,
@@ -187,7 +188,8 @@ final class PersonalityPublicContentAssetController extends Controller
             'hreflang' => is_array($asset->hreflang_json) ? $asset->hreflang_json : [],
             'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
             'media' => is_array($asset->media_json) ? $asset->media_json : [],
-            'schema' => is_array($asset->schema_json) ? $asset->schema_json : [],
+            'schema' => $schemaRuntimeEligible && is_array($asset->schema_json) ? $asset->schema_json : [],
+            'schema_runtime_eligible' => $schemaRuntimeEligible,
             'method_boundary' => is_array($asset->method_boundary_json) ? $asset->method_boundary_json : [],
             'evidence_notes' => is_array($asset->evidence_notes_json) ? $asset->evidence_notes_json : [],
             'internal_links' => is_array($asset->internal_links_json) ? $asset->internal_links_json : [],
@@ -203,6 +205,13 @@ final class PersonalityPublicContentAssetController extends Controller
             'last_reviewed_at' => $asset->last_reviewed_at?->toAtomString(),
             'updated_at' => $asset->updated_at?->toAtomString(),
         ];
+    }
+
+    private function isSchemaRuntimeEligible(PersonalityPublicContentAsset $asset): bool
+    {
+        return (string) $asset->launch_state === PersonalityPublicContentAsset::LAUNCH_PUBLISHED
+            && (bool) $asset->index_eligible
+            && PersonalityPublicContentAsset::normalizeRobots((string) $asset->robots) === PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW;
     }
 
     private function notFoundResponse(): JsonResponse

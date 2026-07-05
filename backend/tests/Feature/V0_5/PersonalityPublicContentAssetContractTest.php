@@ -446,6 +446,87 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->assertStringNotContainsString('/personality/big-five', $sitemapLocs);
     }
 
+    public function test_noindex_content_ready_big_five_asset_suppresses_runtime_schema(): void
+    {
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            'index_eligible' => false,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'schema_json' => [
+                '@type' => 'WebPage',
+                'name' => 'Draft Big Five page',
+            ],
+        ]));
+
+        $asset = PersonalityPublicContentAsset::query()->firstOrFail();
+        $this->assertFalse((bool) $asset->sitemap_eligible);
+        $this->assertFalse((bool) $asset->llms_eligible);
+
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/big-five?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.launch_state', PersonalityPublicContentAsset::LAUNCH_CONTENT_READY)
+            ->assertJsonPath('personality_public_content_asset_v1.robots', PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW)
+            ->assertJsonPath('personality_public_content_asset_v1.index_eligible', false)
+            ->assertJsonPath('personality_public_content_asset_v1.sitemap_eligible', false)
+            ->assertJsonPath('personality_public_content_asset_v1.llms_eligible', false)
+            ->assertJsonPath('personality_public_content_asset_v1.schema_runtime_eligible', false)
+            ->assertJsonPath('personality_public_content_asset_v1.schema', []);
+    }
+
+    public function test_published_non_indexable_big_five_asset_suppresses_runtime_schema(): void
+    {
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'index_eligible' => false,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'published_at' => now()->subMinute(),
+            'schema_json' => [
+                '@type' => 'WebPage',
+                'name' => 'Published but noindex Big Five page',
+            ],
+        ]));
+
+        $asset = PersonalityPublicContentAsset::query()->firstOrFail();
+        $this->assertFalse((bool) $asset->sitemap_eligible);
+        $this->assertFalse((bool) $asset->llms_eligible);
+
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/big-five?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.launch_state', PersonalityPublicContentAsset::LAUNCH_PUBLISHED)
+            ->assertJsonPath('personality_public_content_asset_v1.robots', PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW)
+            ->assertJsonPath('personality_public_content_asset_v1.index_eligible', false)
+            ->assertJsonPath('personality_public_content_asset_v1.sitemap_eligible', false)
+            ->assertJsonPath('personality_public_content_asset_v1.llms_eligible', false)
+            ->assertJsonPath('personality_public_content_asset_v1.schema_runtime_eligible', false)
+            ->assertJsonPath('personality_public_content_asset_v1.schema', []);
+    }
+
+    public function test_published_indexable_big_five_asset_can_emit_runtime_schema(): void
+    {
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'index_eligible' => true,
+            'published_at' => now()->subMinute(),
+            'schema_json' => [
+                '@type' => 'WebPage',
+                'name' => 'Published indexable Big Five page',
+            ],
+        ]));
+
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/big-five?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.launch_state', PersonalityPublicContentAsset::LAUNCH_PUBLISHED)
+            ->assertJsonPath('personality_public_content_asset_v1.robots', PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW)
+            ->assertJsonPath('personality_public_content_asset_v1.index_eligible', true)
+            ->assertJsonPath('personality_public_content_asset_v1.schema_runtime_eligible', true)
+            ->assertJsonPath('personality_public_content_asset_v1.schema.@type', 'WebPage')
+            ->assertJsonPath('personality_public_content_asset_v1.schema.name', 'Published indexable Big Five page');
+    }
+
     public function test_contract_rejects_disallowed_page_families_and_private_result_modules(): void
     {
         $contract = app(PersonalityPublicContentAssetContract::class);

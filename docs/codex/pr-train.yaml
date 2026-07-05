@@ -107,6 +107,132 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: BIG5-CMS-INDEXABILITY-GATE-03
+    repo: fap-api
+    depends_on:
+      - BIG5-CMS-FAQ-DEDUPE-02
+    branch: codex/big5-cms-indexability-gate-03
+    title: "BIG5-CMS-INDEXABILITY-GATE-03: enforce Big Five public asset noindex and schema runtime gates"
+    train_scope: big_five_cms_indexability_readiness
+    status: user_authorized
+    scope:
+      - Enforce Big Five public asset schema runtime gating in the CMS/public API payload.
+      - Ensure noindex, non-index-eligible, or non-published personality public assets do not emit JSON-LD runtime schema.
+      - Preserve fail-closed sitemap_eligible and llms_eligible behavior for Big Five draft/review content.
+      - Add regression coverage for content_ready/noindex, published/non-indexable, and published/indexable asset states.
+      - Keep the change backend-only; no CMS writes, publishing, sitemap/llms release, search release, staging deploy, or production deploy.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Add frontend content fallback.
+      - Write CMS, run production imports, run database migrations, publish, enable indexability, release sitemap/llms, submit search, trigger staging deploy, trigger production deploy, or add public runtime content.
+      - Change public route paths, permissions, scheduler behavior, secrets, canonical path generation, sitemap runtime inclusion, llms runtime inclusion, or production JSON-LD publishing policy beyond suppressing ineligible schema payloads.
+    validation:
+      - php -l backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - php -l backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityPublicContentAssetContractTest::test_noindex_content_ready_big_five_asset_suppresses_runtime_schema|PersonalityPublicContentAssetContractTest::test_published_non_indexable_big_five_asset_suppresses_runtime_schema|PersonalityPublicContentAssetContractTest::test_published_indexable_big_five_asset_can_emit_runtime_schema|PersonalityPublicContentAssetContractTest::test_published_indexable_asset_can_be_read_without_sitemap_or_llms_flags' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-CMS-DISCOVERABILITY-SURFACE-04
+    repo: fap-api
+    depends_on:
+      - BIG5-CMS-INDEXABILITY-GATE-03
+    branch: codex/big5-cms-discoverability-surface-04
+    title: "BIG5-CMS-DISCOVERABILITY-SURFACE-04: block Big Five draft assets from sitemap llms and JSON-LD enumeration"
+    train_scope: big_five_cms_indexability_readiness
+    status: user_authorized
+    scope:
+      - Audit and regression-test backend SEO/GEO discoverability surfaces for Big Five personality public content assets.
+      - Ensure draft or ineligible Big Five assets do not enter sitemap, llms, or JSON-LD enumeration.
+      - Require sitemap_eligible=true for sitemap surfaces and llms_eligible=true for llms surfaces.
+      - Keep draft JSON-LD and FAQ schema as planning-only unless visible CMS content and indexability gates are approved.
+      - If no runtime enumeration exists for this asset type, add fail-closed contract coverage without adding a release surface.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/**
+      - backend/app/Services/SEO/**
+      - backend/tests/Feature/SEO/**
+      - backend/tests/Feature/SeoIntel/**
+      - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Write CMS, run production imports, run database migrations, publish, enable indexability, release sitemap/llms, submit search, trigger staging deploy, trigger production deploy, or add public runtime content.
+      - Add Big Five assets to sitemap, llms, JSON-LD runtime, canonical release, search submission, or production revalidation.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityPublicContentAssetContractTest|SitemapSourceApiTest|SitemapGeneratorTest' --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/SitemapGeneratorTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-CONTENT-QUALITY-REVIEW-05
+    repo: fap-api
+    depends_on:
+      - BIG5-CMS-DISCOVERABILITY-SURFACE-04
+    branch: codex/big5-content-quality-review-05
+    title: "BIG5-CONTENT-QUALITY-REVIEW-05: classify Big Five combination and English assets for CMS review"
+    train_scope: big_five_cms_indexability_readiness
+    status: user_authorized
+    scope:
+      - Generate or update a backend-side Big Five v2 content quality review report for the desktop CMS import draft package.
+      - Classify Chinese combination pages as CMS review candidates with manual polish recommended.
+      - Classify English pages as draft-only and blocked from English SEO expansion.
+      - Verify cms-import-draft.json locale, content_type, status, indexability_gate, FAQ, content length, and canonical path posture.
+      - Keep the output review-only; no content publish, frontend fallback, CMS write, indexability release, sitemap/llms release, search release, or deploy.
+    allowed_paths:
+      - generated/big-five-content-quality-review/**
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Modify frontend runtime, public API runtime, production CMS content, sitemap/llms runtime, JSON-LD runtime, canonical/noindex behavior, permissions, scheduler behavior, secrets, staging deploy, or production deploy.
+      - Mark English Big Five pages indexable or bypass manual review for combination pages.
+    validation:
+      - python3 -m json.tool /Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: MBTI-CMS-12
     repo: fap-api
     depends_on:
