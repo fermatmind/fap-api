@@ -81095,13 +81095,13 @@
     "depends_on": [
       "BIG5-CMS-INDEXABILITY-GATE-03"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "c632eac7bb73e4e8b6899b5599d982e61407cc53",
+    "status": "merged",
+    "commit_sha": "65b4e1b1cbeacaa131a6d7b1de075526ec89095e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2728",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T06:36:29Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -81143,13 +81143,17 @@
       "github_checks": {
         "status": "pass",
         "evidence": "PASS on PR #2728 head c632eac7bb73e4e8b6899b5599d982e61407cc53: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #2728 merged at 2026-07-05T06:36:29Z with merge commit 65b4e1b1cbeacaa131a6d7b1de075526ec89095e. origin/main contains the merge commit, local main was synced to origin/main in the main worktree, worktrees were clean, local branch codex/big5-cms-discoverability-surface-04 was deleted, and the remote branch was absent."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -81187,6 +81191,12 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "PR #2728 remote checks passed. Marked ready to merge under squash merge policy."
+      },
+      {
+        "at": "2026-07-05T06:36:29Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #2728 merge before continuing BIG5-CONTENT-QUALITY-REVIEW-05. GitHub reports merged, origin/main contains merge commit 65b4e1b1cbeacaa131a6d7b1de075526ec89095e, local main was synced, and the task branch is deleted locally and remotely."
       }
     ]
   },
@@ -81199,9 +81209,9 @@
     "depends_on": [
       "BIG5-CMS-DISCOVERABILITY-SURFACE-04"
     ],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "92dccd6a02d6f6440b1febbe976018acbef3a924",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2730",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -81212,14 +81222,41 @@
         "evidence": "User explicitly authorized registering BIG5-CONTENT-QUALITY-REVIEW-05 in the attached /goal execution request."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for BIG5-CMS-DISCOVERABILITY-SURFACE-04 to merge."
+        "status": "pass",
+        "evidence": "BIG5-CMS-DISCOVERABILITY-SURFACE-04 PR #2728 is merged and origin/main contains merge commit 65b4e1b1cbeacaa131a6d7b1de075526ec89095e."
+      },
+      "content_quality_scan": {
+        "status": "pass",
+        "evidence": "Generated generated/big-five-content-quality-review/content_quality_review.md and generated/big-five-content-quality-review/content_quality_review.json. The report classifies 6 zh-CN combination pages as CMS review candidates with manual polish recommended and 6 en-US pages as draft-only with English SEO expansion blocked."
+      },
+      "cms_import_draft_json": {
+        "status": "pass",
+        "command": "python3 -m json.tool /Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json >/dev/null",
+        "evidence": "PASS: cms-import-draft.json parses as JSON."
+      },
+      "report_json": {
+        "status": "pass",
+        "command": "python3 -m json.tool generated/big-five-content-quality-review/content_quality_review.json >/dev/null",
+        "evidence": "PASS: generated review report JSON parses."
+      },
+      "manifest_state_diff_validation": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "evidence": "PASS: train YAML parses, state JSON parses, and diff whitespace check passes."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to BIG5-CONTENT-QUALITY-REVIEW-05 allowed paths: generated/big-five-content-quality-review/** and docs/codex/pr-train-state.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2730 head 92dccd6a02d6f6440b1febbe976018acbef3a924: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -81228,6 +81265,36 @@
         "from": "user_authorized",
         "to": "pending_dependency",
         "note": "Registered dependent PR train item; execution waits for BIG5-CMS-DISCOVERABILITY-SURFACE-04 merge."
+      },
+      {
+        "at": "2026-07-05T06:36:29Z",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "note": "Started content quality review PR after BIG5-CMS-DISCOVERABILITY-SURFACE-04 merge was verified."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Generated backend-side Big Five content quality review artifacts. Output is review-only and does not publish, write CMS, or enable SEO/GEO runtime surfaces."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed BIG5-CONTENT-QUALITY-REVIEW-05 review artifacts at c713e9aed."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2730 for BIG5-CONTENT-QUALITY-REVIEW-05 and pushed branch codex/big5-content-quality-review-05."
+      },
+      {
+        "at": "2026-07-05T06:48:13Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "PR #2730 remote checks passed. Marked ready to merge under squash merge policy."
       }
     ]
   }
