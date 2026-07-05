@@ -81209,8 +81209,8 @@
     "depends_on": [
       "BIG5-CMS-DISCOVERABILITY-SURFACE-04"
     ],
-    "status": "pr_open",
-    "commit_sha": "c713e9aed91d25d72bbe9beaaa31d77afc09d7db",
+    "status": "ready_to_merge",
+    "commit_sha": "92dccd6a02d6f6440b1febbe976018acbef3a924",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2730",
     "failure_reason": null,
     "merged_at": null,
@@ -81247,12 +81247,16 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to BIG5-CONTENT-QUALITY-REVIEW-05 allowed paths: generated/big-five-content-quality-review/** and docs/codex/pr-train-state.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2730 head 92dccd6a02d6f6440b1febbe976018acbef3a924: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -81285,6 +81289,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR #2730 for BIG5-CONTENT-QUALITY-REVIEW-05 and pushed branch codex/big5-content-quality-review-05."
+      },
+      {
+        "at": "2026-07-05T06:48:13Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "PR #2730 remote checks passed. Marked ready to merge under squash merge policy."
       }
     ]
   }
