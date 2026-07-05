@@ -49944,7 +49944,7 @@
     "depends_on": [
       "IQ-V1-FREE-FULL-RESULT-CONTROLLED-SMOKE-01"
     ],
-    "status": "pending",
+    "status": "local_checks_passed",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
     "checks": {
     },
@@ -82151,11 +82151,28 @@
       "dependency": {
         "status": "pass",
         "evidence": "BIG5-CMS-STAGING-WRITE-IMPORT-10 PR #2751 is merged and its staging/dev write/readback evidence is recorded in generated/big-five-cms-staging-write-import/."
+      },
+      "implementation": {
+        "status": "pass",
+        "evidence": "Added read-only personality:big-five-cms-preview-render-qa command and BigFiveCmsPreviewRenderQaValidator. The command rejects production, validates the 42-row staging/dev draft readback payload, confirms public API draft visibility is 0, prevents FAQ duplicate rendering, and keeps sitemap/llms/JSON-LD runtime blocked."
+      },
+      "staging_readback_qa": {
+        "status": "pass",
+        "evidence": "Read-only staging QA evidence generated at generated/big-five-cms-preview-render-qa/readback_qa_report.json and .md: row_count=42, public_api_readback_visible_count=0, faq_duplicate_render_risk_count=0, runtime_jsonld_enabled_count=0."
+      },
+      "local_validation": {
+        "status": "pass",
+        "command": "php -l backend/app/Services/Cms/BigFiveCmsPreviewRenderQaValidator.php && php -l backend/app/Console/Commands/PersonalityBigFiveCmsPreviewRenderQa.php && php -l backend/tests/Feature/Console/PersonalityBigFiveCmsPreviewRenderQaCommandTest.php; cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsPreviewRenderQaCommandTest --no-ansi; cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|big_five_cms_preview_render_qa' --no-ansi; cd backend && ./vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveCmsPreviewRenderQa.php app/Services/Cms/BigFiveCmsPreviewRenderQaValidator.php tests/Feature/Console/PersonalityBigFiveCmsPreviewRenderQaCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php; cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan list --no-ansi | grep 'personality:big-five-cms-preview-render-qa'; python3 -m json.tool generated/big-five-cms-preview-render-qa/readback_qa_report.json >/dev/null; python3 -m json.tool docs/codex/pr-train-state.json >/dev/null; ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"; git diff --check",
+        "evidence": "PASS: syntax checks, focused preview/readback QA command tests, Big Five runtime freeze allowlist tests, scoped Pint, command discovery, staging QA report JSON parse, state JSON parse, YAML parse, and diff whitespace check passed. PHPUnit emitted existing missing backend/.env warnings; assertions passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to PR11 allowed paths: backend/app/Console/Commands/**, backend/app/Services/Cms/**, backend/tests/Feature/**, backend/tests/Unit/**, docs/codex/pr-train-state.json, and generated/big-five-cms-preview-render-qa/**."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -82186,6 +82203,11 @@
         "at": "2026-07-05T14:10:00Z",
         "status": "pending",
         "summary": "Dependency BIG5-CMS-STAGING-WRITE-IMPORT-10 is merged and staging write evidence is recorded; PR11 may start preview/readback QA."
+      },
+      {
+        "at": "2026-07-05T14:35:00Z",
+        "status": "local_checks_passed",
+        "summary": "Implemented read-only Big Five CMS preview/render QA command and generated staging readback QA evidence. Local scoped checks passed. No CMS write, production import, publish, indexability release, sitemap/llms release, JSON-LD runtime release, search submission, manual deploy, staging deploy wait, or production deploy was performed."
       }
     ]
   },
