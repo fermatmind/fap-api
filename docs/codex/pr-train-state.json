@@ -80775,7 +80775,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01"
     ],
-    "status": "ready_to_merge",
+    "status": "merged",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -80793,20 +80793,24 @@
       "github_checks": {
         "status": "pass",
         "evidence": "PR #2738 GitHub checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "merge_reconciliation": {
+        "status": "pass",
+        "evidence": "PR #2738 is MERGED at merge commit 1d26b5e496946a66561b50aaadc43b3fc9210f23; origin/main contains the merge commit; local main was synced; task branch codex/iq-method-pages-review-approval-01 was deleted locally and remotely."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": true
     },
-    "commit_sha": "f4da8facec47bf0afd63431fea6ea4e4183055c5",
+    "commit_sha": "1d26b5e496946a66561b50aaadc43b3fc9210f23",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2738",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T08:27:48Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_migration_execution_allowed": false,
     "database_mutation": true,
@@ -80843,6 +80847,11 @@
         "at": "2026-07-05T16:42:00+08:00",
         "status": "ready_to_merge",
         "summary": "GitHub checks passed for PR #2738. Ready for squash merge under the PR train merge policy; no publish, indexability, sitemap, llms, search action, deploy, or production execution was performed."
+      },
+      {
+        "at": "2026-07-05T16:55:00+08:00",
+        "status": "merged",
+        "summary": "Reconciled post-merge state for PR #2738: GitHub reports MERGED, origin/main contains merge commit 1d26b5e496946a66561b50aaadc43b3fc9210f23, local main is synced, and the task branch is deleted locally/remotely."
       }
     ]
   },
@@ -80856,7 +80865,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01"
     ],
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -80864,18 +80873,26 @@
         "evidence": "User authorized adding this missing PR-train item after the scan split publish/activation into gated tasks."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Wait for IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01 to merge before starting controlled publish workflow implementation."
+        "status": "pass",
+        "evidence": "IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01 PR #2738 is merged; origin/main contains merge commit 1d26b5e496946a66561b50aaadc43b3fc9210f23."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "php -l command/test, artisan list articles, targeted Pint, focused ArticleIqMethodPagesPublishCommandTest plus ArticlePublishControlledCommandTest, focused BigFive freeze classifier tests, YAML/JSON parse, and git diff --check passed locally."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2739 GitHub checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "11b8e3ee1839c6edbc93316bf0cf0fc490f246a6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2739",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -80896,6 +80913,21 @@
         "at": "2026-07-05T13:55:29+08:00",
         "status": "pending_dependency",
         "summary": "Registered controlled publish workflow. Execution waits for review approval merge and excludes production publish execution without exact deployed SHA and command authorization."
+      },
+      {
+        "at": "2026-07-05T16:55:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "Implemented controlled IQ method article publish command and tests. Local validation passed; command publishes only locked approved articles and keeps indexability, sitemap, llms, search action, deploy, and production execution disabled."
+      },
+      {
+        "at": "2026-07-05T17:02:00+08:00",
+        "status": "github_checks_pending",
+        "summary": "Opened PR #2739 for the scoped IQ method publish workflow and pushed the local-validation-passed implementation. Waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-07-05T17:10:00+08:00",
+        "status": "ready_to_merge",
+        "summary": "GitHub checks passed for PR #2739. Ready for squash merge under the PR train merge policy; no indexability, sitemap, llms, search action, deploy, or production execution was performed."
       }
     ]
   },

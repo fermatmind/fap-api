@@ -32,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
         __DIR__.'/../app/Console/Commands',
         \App\Console\Commands\ArticleImportIqMethodPagesDraft::class,
         \App\Console\Commands\ArticleIqMethodPagesPublishGate::class,
+        \App\Console\Commands\ArticleIqMethodPagesPublish::class,
         \App\Console\Commands\ArticleIqMethodPagesReadback::class,
         \App\Console\Commands\ArticleIqMethodPagesReviewApproval::class,
         \App\Console\Commands\PersonalityEnneagramCmsPromote::class,
