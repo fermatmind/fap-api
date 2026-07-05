@@ -80684,7 +80684,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01"
     ],
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -80707,7 +80707,7 @@
       "post_merge_revalidated": null
     },
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2736",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -80738,6 +80738,11 @@
         "at": "2026-07-05T15:49:00+08:00",
         "status": "local_validation_passed",
         "summary": "Implemented read-only publish gate command and focused tests. Local manifest validation passed; no approval, publish, indexability, sitemap, llms, deploy, or production execution was performed."
+      },
+      {
+        "at": "2026-07-05T16:02:00+08:00",
+        "status": "github_checks_pending",
+        "summary": "Opened PR #2736 and pushed the scoped publish gate implementation. Waiting for required GitHub checks."
       }
     ]
   },
