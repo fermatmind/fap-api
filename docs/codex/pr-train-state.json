@@ -265,7 +265,7 @@
     "depends_on": [
       "MBTI-CMS-12"
     ],
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "2caacc1ac",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2720",
     "failure_reason": null,
@@ -80979,14 +80979,14 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": true
     },
-    "commit_sha": "7dfd5f494f8e6decc53322195ab9372c349e6efa",
+    "commit_sha": "45868838e364135e24333beb3ca33df010dab81c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2742",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T09:09:39Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_migration_execution_allowed": false,
     "database_mutation": false,
@@ -81018,6 +81018,11 @@
         "at": "2026-07-05T17:52:00+08:00",
         "status": "ready_to_merge",
         "summary": "All reported GitHub checks passed for PR #2742 at head 7dfd5f494f8e6decc53322195ab9372c349e6efa. Recording ready_to_merge before squash merge per PR-train ledger policy."
+      },
+      {
+        "at": "2026-07-05T17:13:00Z",
+        "status": "merged",
+        "summary": "Reconciled post-merge state for PR #2742: GitHub reports MERGED at 2026-07-05T09:09:39Z, origin/main contains merge commit 45868838e364135e24333beb3ca33df010dab81c, local main is synced, and the task branch is deleted locally/remotely."
       }
     ]
   },
@@ -81031,7 +81036,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-POST-PUBLISH-READBACK-01"
     ],
-    "status": "pending_dependency",
+    "status": "local_validation_passed",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -81039,13 +81044,17 @@
         "evidence": "User authorized adding this missing PR-train item after the scan split publish/activation into gated tasks."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Wait for IQ-METHOD-PAGES-ZH-CN-CMS-POST-PUBLISH-READBACK-01 to merge before starting SEO/GEO activation gate implementation."
+        "status": "pass",
+        "evidence": "IQ-METHOD-PAGES-ZH-CN-CMS-POST-PUBLISH-READBACK-01 PR #2742 is merged; origin/main contains merge commit 45868838e364135e24333beb3ca33df010dab81c."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "php -l command/test, artisan list articles, targeted Pint, focused ArticleIqMethodPagesSeoGeoActivationGateCommandTest, focused BigFive freeze classifier tests, YAML/JSON parse, and git diff --check passed locally."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -81071,6 +81080,16 @@
         "at": "2026-07-05T13:55:29+08:00",
         "status": "pending_dependency",
         "summary": "Registered read-only SEO/GEO activation gate. Execution waits for post-publish readback merge and excludes sitemap/llms/indexability writes."
+      },
+      {
+        "at": "2026-07-05T17:14:00Z",
+        "status": "implementation_in_progress",
+        "summary": "Dependency PR #2742 merged and local main synced. Started read-only SEO/GEO activation gate implementation; no CMS writes, indexability flips, sitemap activation, llms activation, search submission, or deploy execution."
+      },
+      {
+        "at": "2026-07-05T17:23:00Z",
+        "status": "local_validation_passed",
+        "summary": "Implemented read-only SEO/GEO activation gate command and tests. Local validation passed; no CMS writes, indexability flips, sitemap activation, llms activation, search submission, deploy, or production execution was performed."
       }
     ]
   },
