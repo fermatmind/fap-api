@@ -79,6 +79,14 @@ final class BigFiveCmsImportDraftDryRunPlanner
 
         $contentTypeCounts = $this->contentTypeCounts($rowPlans);
         $localeCounts = $this->localeCounts($rowPlans);
+        $faqBodySectionCount = array_sum(array_map(
+            static fn (array $row): int => (int) ($row['faq_body_section_count'] ?? 0),
+            $rowPlans
+        ));
+        $faqBodySectionRowsCount = count(array_filter(
+            $rowPlans,
+            static fn (array $row): bool => (bool) ($row['faq_body_section_present'] ?? false)
+        ));
 
         return [
             'artifact' => 'BIG5-CMS-IMPORT-DRYRUN-01',
@@ -99,6 +107,10 @@ final class BigFiveCmsImportDraftDryRunPlanner
             'content_type_counts' => $contentTypeCounts,
             'locale_counts' => $localeCounts,
             'old_short_big_five_route_residue_count' => $this->oldShortRouteResidueCount($package),
+            'faq_structured_source' => 'faq',
+            'faq_body_section_count' => $faqBodySectionCount,
+            'faq_body_section_rows_count' => $faqBodySectionRowsCount,
+            'faq_deduplication_policy' => 'faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.',
             'field_mapping_contract' => $this->fieldMappingContract(),
             'dry_run_write_guard_contract' => $this->dryRunWriteGuardContract(),
             'rows' => $rowPlans,
@@ -170,6 +182,12 @@ final class BigFiveCmsImportDraftDryRunPlanner
         $faq = is_array($row['faq'] ?? null) ? array_values((array) $row['faq']) : [];
         $seo = is_array($row['seo'] ?? null) ? (array) $row['seo'] : [];
         $identity = $this->identityFor($canonicalPath, $locale, $contentType, (string) ($row['slug'] ?? ''), $errors, $index);
+        $faqBodySectionIndexes = $this->faqBodySectionIndexes($bodySections);
+        $renderPreviewSections = array_values(array_filter(
+            $bodySections,
+            fn (mixed $section, int $sectionIndex): bool => ! in_array($sectionIndex, $faqBodySectionIndexes, true),
+            ARRAY_FILTER_USE_BOTH
+        ));
 
         $this->validateRequiredFields($row, $errors, $fieldPrefix);
         $this->validateSeo($seo, $errors, $fieldPrefix);
@@ -215,6 +233,19 @@ final class BigFiveCmsImportDraftDryRunPlanner
                 static fn (mixed $section): string => is_array($section) ? trim((string) ($section['heading'] ?? $section['title'] ?? '')) : '',
                 $bodySections
             ))),
+            'faq_structured_source' => 'faq',
+            'faq_body_section_present' => $faqBodySectionIndexes !== [],
+            'faq_body_section_count' => count($faqBodySectionIndexes),
+            'faq_body_section_indexes' => array_map(
+                static fn (int $sectionIndex): int => $sectionIndex + 1,
+                $faqBodySectionIndexes
+            ),
+            'faq_deduplication_policy' => 'faq_field_is_the_only_structured_faq_source; faq-like body_sections are excluded from render_preview_sections to prevent duplicate FAQ rendering.',
+            'render_preview_section_count' => count($renderPreviewSections),
+            'render_preview_body_section_headings' => array_values(array_filter(array_map(
+                static fn (mixed $section): string => is_array($section) ? trim((string) ($section['heading'] ?? $section['title'] ?? '')) : '',
+                $renderPreviewSections
+            ))),
             'draft_state_after_import' => [
                 'is_public' => false,
                 'index_eligible' => false,
@@ -228,6 +259,36 @@ final class BigFiveCmsImportDraftDryRunPlanner
             'action' => 'would_validate_personality_public_content_asset_draft',
             'write_mode_in_this_pr' => 'not_supported',
         ];
+    }
+
+    /**
+     * @param  list<mixed>  $bodySections
+     * @return list<int>
+     */
+    private function faqBodySectionIndexes(array $bodySections): array
+    {
+        $indexes = [];
+        foreach ($bodySections as $index => $section) {
+            if (! is_array($section)) {
+                continue;
+            }
+
+            if ($this->isFaqBodySection($section)) {
+                $indexes[] = $index;
+            }
+        }
+
+        return $indexes;
+    }
+
+    /**
+     * @param  array<mixed>  $section
+     */
+    private function isFaqBodySection(array $section): bool
+    {
+        $heading = trim((string) ($section['heading'] ?? $section['title'] ?? ''));
+
+        return preg_match('/^(faq|常见问题|问答|问题)$/iu', $heading) === 1;
     }
 
     /**

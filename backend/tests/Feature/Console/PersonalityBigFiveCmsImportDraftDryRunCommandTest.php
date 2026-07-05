@@ -45,6 +45,10 @@ final class PersonalityBigFiveCmsImportDraftDryRunCommandTest extends TestCase
         $this->assertSame(42, $payload['row_count']);
         $this->assertTrue($payload['row_count_matches_expected']);
         $this->assertSame(0, $payload['old_short_big_five_route_residue_count']);
+        $this->assertSame('faq', $payload['faq_structured_source']);
+        $this->assertSame(42, $payload['faq_body_section_count']);
+        $this->assertSame(42, $payload['faq_body_section_rows_count']);
+        $this->assertStringContainsString('faq_field_is_the_only_structured_faq_source', $payload['faq_deduplication_policy']);
         $this->assertSame('App\\Models\\PersonalityPublicContentAsset', $payload['field_mapping_contract']['target_model']);
         $this->assertContains('personality_public_content_assets', $payload['field_mapping_contract']['target_tables']);
         $this->assertSame(15, $payload['content_type_counts']['trait_range_page'] ?? null);
@@ -53,6 +57,16 @@ final class PersonalityBigFiveCmsImportDraftDryRunCommandTest extends TestCase
         $this->assertSame(5, $payload['content_type_counts']['cross_reading_page'] ?? null);
         $this->assertSame(4, $payload['content_type_counts']['result_review_page'] ?? null);
         $this->assertSame(2, $payload['content_type_counts']['hub_page'] ?? null);
+
+        $firstRow = $payload['rows'][0] ?? [];
+        $this->assertSame('faq', $firstRow['faq_structured_source'] ?? null);
+        $this->assertTrue($firstRow['faq_body_section_present'] ?? false);
+        $this->assertSame(1, $firstRow['faq_body_section_count'] ?? null);
+        $this->assertSame([3], $firstRow['faq_body_section_indexes'] ?? null);
+        $this->assertSame(3, $firstRow['section_count'] ?? null);
+        $this->assertSame(2, $firstRow['render_preview_section_count'] ?? null);
+        $this->assertSame(5, $firstRow['faq_count'] ?? null);
+        $this->assertNotContains('FAQ', $firstRow['render_preview_body_section_headings'] ?? []);
     }
 
     public function test_command_requires_explicit_dry_run(): void
@@ -232,6 +246,7 @@ final class PersonalityBigFiveCmsImportDraftDryRunCommandTest extends TestCase
             'body_sections' => [
                 ['heading' => '快速回答', 'body' => '开放性是大五人格的连续维度之一。'],
                 ['heading' => '方法边界', 'body' => '本页不用于诊断或招聘筛选。'],
+                ['heading' => 'FAQ', 'body' => 'FAQ 正文只用于源包兼容；结构化 FAQ 以 faq 字段为准。'],
             ],
             'faq' => [
                 ['question' => '开放性是什么？', 'answer' => '它描述对新经验和抽象概念的偏好。'],
