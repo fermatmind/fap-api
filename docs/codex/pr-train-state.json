@@ -80775,7 +80775,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01"
     ],
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -80789,6 +80789,10 @@
       "local_validation": {
         "status": "pass",
         "evidence": "php -l command/test, artisan list articles, targeted Pint, focused ArticleIqMethodPagesReviewApprovalCommandTest, focused BigFive freeze classifier tests, YAML/JSON parse, and git diff --check passed locally."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR #2738 opened for branch codex/iq-method-pages-review-approval-01; waiting for required GitHub checks."
       }
     },
     "scope_validation": {
@@ -80797,8 +80801,8 @@
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "edceae391cf4ccd5fd69f8f7f1a19ce2e96f345f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2738",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -80829,6 +80833,11 @@
         "at": "2026-07-05T16:28:00+08:00",
         "status": "local_validation_passed",
         "summary": "Implemented controlled review approval command and tests. Local validation passed; no production review approval write, publish, indexability, sitemap, llms, search action, deploy, or frontend fallback was performed."
+      },
+      {
+        "at": "2026-07-05T16:34:00+08:00",
+        "status": "github_checks_pending",
+        "summary": "Opened PR #2738 for the scoped review approval workflow and pushed the local-validation-passed implementation. Waiting for required GitHub checks."
       }
     ]
   },

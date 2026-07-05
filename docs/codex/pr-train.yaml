@@ -37231,7 +37231,7 @@ prs:
     branch: codex/iq-method-pages-review-approval-01
     title: "IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01: add IQ method review approval workflow"
     train_scope: iq_method_pages_zh_cn_review_approval
-    status: local_validation_passed
+    status: github_checks_pending
     scope:
       - Add a controlled backend workflow that records method review and claim review approval for the 7 zh-CN IQ method CMS Article working revisions.
       - Require an explicit review packet, exact confirmation phrase, dry-run mode, and article/revision locks before any CMS draft approval write.
