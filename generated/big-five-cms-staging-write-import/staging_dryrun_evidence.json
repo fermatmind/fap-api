@@ -1,0 +1,632 @@
+{
+    "artifact": "BIG5-CMS-STAGING-WRITE-IMPORT-10",
+    "status": "pass",
+    "ok": true,
+    "target_environment": "staging",
+    "package_path": "/var/www/fap-api-staging/releases/28741701561-1/backend/../generated/big-five-content-polish/cms-import-draft.polished.json",
+    "source_sha256": "15d6b6df08cf3ce7c9cd8a859b566c5bfd5fc4f6c6b279c493d48bc9e447ebc6",
+    "row_count": 42,
+    "expected_row_count": 42,
+    "row_count_matches_expected": true,
+    "dry_run": true,
+    "write": false,
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "publish_attempted": false,
+    "index_attempted": false,
+    "search_release_attempted": false,
+    "sitemap_llms_release_attempted": false,
+    "jsonld_runtime_release_attempted": false,
+    "created_asset_count": 0,
+    "updated_asset_count": 0,
+    "skipped_existing_count": 0,
+    "rollback_handle": {
+        "import_batch_id": "big5-cms-staging-15d6b6df08cf-20260705140616",
+        "source_package": "big-five-cms-import-draft-polished.v2",
+        "source_hash": "15d6b6df08cf3ce7c9cd8a859b566c5bfd5fc4f6c6b279c493d48bc9e447ebc6",
+        "deterministic_delete_criteria": {
+            "framework": "big_five",
+            "source_package": "big-five-cms-import-draft-polished.v2",
+            "source_hash": "15d6b6df08cf3ce7c9cd8a859b566c5bfd5fc4f6c6b279c493d48bc9e447ebc6",
+            "is_public": false,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false
+        },
+        "pre_import_snapshot": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "restore_note": "Restore pre_import_snapshot rows or delete rows matching deterministic_delete_criteria in staging/dev only. Do not touch production."
+    },
+    "rows": [
+        {
+            "position": 1,
+            "canonical_path": "/zh/personality/big-five/combinations/high-agreeableness-high-neuroticism",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "high-agreeableness-high-neuroticism",
+                "slug": "big-five/high-agreeableness-high-neuroticism",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 2,
+            "canonical_path": "/zh/personality/big-five/combinations/high-openness-high-extraversion",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "high-openness-high-extraversion",
+                "slug": "big-five/high-openness-high-extraversion",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 3,
+            "canonical_path": "/zh/personality/big-five/combinations/high-openness-low-conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "high-openness-low-conscientiousness",
+                "slug": "big-five/high-openness-low-conscientiousness",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 4,
+            "canonical_path": "/zh/personality/big-five/combinations/low-agreeableness-high-conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "low-agreeableness-high-conscientiousness",
+                "slug": "big-five/low-agreeableness-high-conscientiousness",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 5,
+            "canonical_path": "/zh/personality/big-five/combinations/low-extraversion-high-conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "low-extraversion-high-conscientiousness",
+                "slug": "big-five/low-extraversion-high-conscientiousness",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 6,
+            "canonical_path": "/zh/personality/big-five/combinations/low-neuroticism-high-conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "low-neuroticism-high-conscientiousness",
+                "slug": "big-five/low-neuroticism-high-conscientiousness",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 7,
+            "canonical_path": "/zh/personality/big-five/big-five-learning-style",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-learning-style",
+                "slug": "big-five/big-five-learning-style",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 8,
+            "canonical_path": "/zh/personality/big-five/big-five-relationship-communication",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-relationship-communication",
+                "slug": "big-five/big-five-relationship-communication",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 9,
+            "canonical_path": "/zh/personality/big-five/big-five-riasec-career",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-riasec-career",
+                "slug": "big-five/big-five-riasec-career",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 10,
+            "canonical_path": "/zh/personality/big-five/big-five-stress-management",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-stress-management",
+                "slug": "big-five/big-five-stress-management",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 11,
+            "canonical_path": "/zh/personality/big-five/big-five-vs-mbti",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-vs-mbti",
+                "slug": "big-five/big-five-vs-mbti",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 12,
+            "canonical_path": "/en/personality/big-five",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "hub",
+                "entity_key": "big-five",
+                "slug": "big-five/big-five",
+                "locale": "en"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 13,
+            "canonical_path": "/zh/personality/big-five",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "hub",
+                "entity_key": "big-five",
+                "slug": "big-five/big-five",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 14,
+            "canonical_path": "/zh/personality/big-five/agreeableness-high",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "agreeableness-high",
+                "slug": "big-five/agreeableness-high",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 15,
+            "canonical_path": "/zh/personality/big-five/agreeableness-low",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "agreeableness-low",
+                "slug": "big-five/agreeableness-low",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 16,
+            "canonical_path": "/zh/personality/big-five/agreeableness-mid",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "agreeableness-mid",
+                "slug": "big-five/agreeableness-mid",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 17,
+            "canonical_path": "/zh/personality/big-five/conscientiousness-high",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "conscientiousness-high",
+                "slug": "big-five/conscientiousness-high",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 18,
+            "canonical_path": "/zh/personality/big-five/conscientiousness-low",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "conscientiousness-low",
+                "slug": "big-five/conscientiousness-low",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 19,
+            "canonical_path": "/zh/personality/big-five/conscientiousness-mid",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "conscientiousness-mid",
+                "slug": "big-five/conscientiousness-mid",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 20,
+            "canonical_path": "/zh/personality/big-five/extraversion-high",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "extraversion-high",
+                "slug": "big-five/extraversion-high",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 21,
+            "canonical_path": "/zh/personality/big-five/extraversion-low",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "extraversion-low",
+                "slug": "big-five/extraversion-low",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 22,
+            "canonical_path": "/zh/personality/big-five/extraversion-mid",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "extraversion-mid",
+                "slug": "big-five/extraversion-mid",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 23,
+            "canonical_path": "/zh/personality/big-five/neuroticism-high",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "neuroticism-high",
+                "slug": "big-five/neuroticism-high",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 24,
+            "canonical_path": "/zh/personality/big-five/neuroticism-low",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "neuroticism-low",
+                "slug": "big-five/neuroticism-low",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 25,
+            "canonical_path": "/zh/personality/big-five/neuroticism-mid",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "neuroticism-mid",
+                "slug": "big-five/neuroticism-mid",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 26,
+            "canonical_path": "/zh/personality/big-five/openness-high",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "openness-high",
+                "slug": "big-five/openness-high",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 27,
+            "canonical_path": "/zh/personality/big-five/openness-low",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "openness-low",
+                "slug": "big-five/openness-low",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 28,
+            "canonical_path": "/zh/personality/big-five/openness-mid",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "openness-mid",
+                "slug": "big-five/openness-mid",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 29,
+            "canonical_path": "/zh/personality/big-five/big-five-30-day-review",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-30-day-review",
+                "slug": "big-five/big-five-30-day-review",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 30,
+            "canonical_path": "/zh/personality/big-five/big-five-score-ranges",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "big-five-score-ranges",
+                "slug": "big-five/big-five-score-ranges",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 31,
+            "canonical_path": "/zh/personality/big-five/discuss-results-with-others",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "discuss-results-with-others",
+                "slug": "big-five/discuss-results-with-others",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 32,
+            "canonical_path": "/zh/personality/big-five/how-to-read-big-five-results",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "polarity",
+                "entity_key": "how-to-read-big-five-results",
+                "slug": "big-five/how-to-read-big-five-results",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 33,
+            "canonical_path": "/en/personality/big-five/agreeableness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "agreeableness",
+                "slug": "big-five/agreeableness",
+                "locale": "en"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 34,
+            "canonical_path": "/zh/personality/big-five/agreeableness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "agreeableness",
+                "slug": "big-five/agreeableness",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 35,
+            "canonical_path": "/en/personality/big-five/conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "conscientiousness",
+                "slug": "big-five/conscientiousness",
+                "locale": "en"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 36,
+            "canonical_path": "/zh/personality/big-five/conscientiousness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "conscientiousness",
+                "slug": "big-five/conscientiousness",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 37,
+            "canonical_path": "/en/personality/big-five/extraversion",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "extraversion",
+                "slug": "big-five/extraversion",
+                "locale": "en"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 38,
+            "canonical_path": "/zh/personality/big-five/extraversion",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "extraversion",
+                "slug": "big-five/extraversion",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 39,
+            "canonical_path": "/en/personality/big-five/neuroticism",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "neuroticism",
+                "slug": "big-five/neuroticism",
+                "locale": "en"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 40,
+            "canonical_path": "/zh/personality/big-five/neuroticism",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "neuroticism",
+                "slug": "big-five/neuroticism",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 41,
+            "canonical_path": "/en/personality/big-five/openness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "openness",
+                "slug": "big-five/openness",
+                "locale": "en"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        },
+        {
+            "position": 42,
+            "canonical_path": "/zh/personality/big-five/openness",
+            "identity": {
+                "framework": "big_five",
+                "entity_type": "domain",
+                "entity_key": "openness",
+                "slug": "big-five/openness",
+                "locale": "zh-CN"
+            },
+            "existing_asset_id": null,
+            "action": "create_draft_asset"
+        }
+    ],
+    "errors": [],
+    "warnings": []
+}
