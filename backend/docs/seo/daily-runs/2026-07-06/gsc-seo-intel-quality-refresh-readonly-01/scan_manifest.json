@@ -1,0 +1,69 @@
+{
+  "task_id": "GSC-SEO-INTEL-QUALITY-REFRESH-READONLY-01",
+  "repo": "fap-api",
+  "generated_at": "2026-07-06",
+  "scope": "generated-only read-only GSC and seo_intel quality refresh",
+  "runtime_impact": "none",
+  "cms_impact": "none",
+  "search_submission_impact": "none",
+  "deploy_impact": "none",
+  "fap_web_impact": "none",
+  "live_gsc_api_call": false,
+  "credential_operation": false,
+  "seo_gsc_daily_import": false,
+  "database_write": false,
+  "scheduler_activation": false,
+  "queue_worker_activation": false,
+  "search_channel_enqueue": false,
+  "search_provider_submission": false,
+  "cms_write": false,
+  "decision": "gsc_seo_intel_quality_refresh_completed_gate_blocked",
+  "current_quality_status": {
+    "gsc_data_quality_gate": "blocked",
+    "opportunity_queue_eligible": false,
+    "allowed_data_origin": "live_gsc_api",
+    "forbidden_data_origins": [
+      "fixture",
+      "mock",
+      "static_artifact",
+      "unknown"
+    ],
+    "required_fields": [
+      "canonical_url_hash",
+      "query_hash",
+      "clicks",
+      "impressions"
+    ],
+    "lag_days_required": 3,
+    "max_report_age_days": 10
+  },
+  "evidence_sources": [
+    "backend/docs/seo/gsc-data-quality-gate.md",
+    "backend/docs/seo/gsc-live-readmodel-consumption-contract.md",
+    "backend/docs/seo/gsc-live-readonly-adapter.md",
+    "backend/docs/seo/generated/gsc-data-quality-gate.v1.json",
+    "backend/docs/seo/generated/gsc-live-readmodel-consumption-contract.v1.json",
+    "backend/app/Services/SeoIntel/GscDataQualityGate.php",
+    "backend/database/migrations/seo_intel/2026_05_17_000900_create_seo_gsc_daily_table.php",
+    "backend/database/migrations/seo_intel/2026_06_20_130000_add_idempotency_key_to_seo_gsc_daily_table.php",
+    "backend/.env.example"
+  ],
+  "next_requested_train_item": "RESULT-INTERPRETATION-PAGE-INVENTORY-READONLY-01",
+  "deferred_items": [
+    "no GSC live API call",
+    "no credential read/print/store",
+    "no seo_gsc_daily import or backfill",
+    "no GSC-derived CTR repair",
+    "no CMS write",
+    "no Search Channel enqueue",
+    "no search provider submission",
+    "no staging deploy wait",
+    "no manual deploy",
+    "no production deploy"
+  ],
+  "validation": {
+    "json_tool": "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-06/gsc-seo-intel-quality-refresh-readonly-01/scan_manifest.json >/dev/null",
+    "diff_check": "git diff --check",
+    "cached_diff_check": "git diff --cached --check"
+  }
+}
