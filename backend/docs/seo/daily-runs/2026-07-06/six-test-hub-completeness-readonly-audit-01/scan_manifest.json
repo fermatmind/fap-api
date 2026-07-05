@@ -1,0 +1,109 @@
+{
+  "task_id": "SIX-TEST-HUB-COMPLETENESS-READONLY-AUDIT-01",
+  "repo": "fap-api",
+  "generated_at": "2026-07-06",
+  "scope": "generated-only read-only audit of six core public test hubs",
+  "runtime_impact": "none",
+  "cms_impact": "none",
+  "search_submission_impact": "none",
+  "deploy_impact": "none",
+  "fap_web_impact": "none",
+  "public_pages_scanned": [
+    {
+      "code": "MBTI",
+      "url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "http_status": 200,
+      "robots": "index, follow",
+      "canonical": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "faq_jsonld_count": 8,
+      "sitemap": true,
+      "llms": true,
+      "llms_full": true,
+      "private_url_leak_detected": false
+    },
+    {
+      "code": "BIG5_OCEAN",
+      "url": "https://fermatmind.com/zh/tests/big-five-personality-test-ocean-model",
+      "http_status": 200,
+      "robots": "index, follow",
+      "canonical": "https://fermatmind.com/zh/tests/big-five-personality-test-ocean-model",
+      "faq_jsonld_count": 4,
+      "sitemap": true,
+      "llms": true,
+      "llms_full": true,
+      "private_url_leak_detected": false
+    },
+    {
+      "code": "ENNEAGRAM",
+      "url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+      "http_status": 200,
+      "robots": "index, follow",
+      "canonical": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+      "faq_jsonld_count": 4,
+      "sitemap": true,
+      "llms": true,
+      "llms_full": true,
+      "private_url_leak_detected": false
+    },
+    {
+      "code": "RIASEC",
+      "url": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+      "http_status": 200,
+      "robots": "index, follow",
+      "canonical": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+      "faq_jsonld_count": 4,
+      "sitemap": true,
+      "llms": true,
+      "llms_full": true,
+      "private_url_leak_detected": false
+    },
+    {
+      "code": "IQ_RAVEN",
+      "url": "https://fermatmind.com/zh/tests/iq-test-intelligence-quotient-assessment",
+      "http_status": 200,
+      "robots": "index, follow",
+      "canonical": "https://fermatmind.com/zh/tests/iq-test-intelligence-quotient-assessment",
+      "faq_jsonld_count": 4,
+      "sitemap": true,
+      "llms": true,
+      "llms_full": false,
+      "private_url_leak_detected": false
+    },
+    {
+      "code": "EQ_60",
+      "url": "https://fermatmind.com/zh/tests/eq-test-emotional-intelligence-assessment",
+      "http_status": 200,
+      "robots": "index, follow",
+      "canonical": "https://fermatmind.com/zh/tests/eq-test-emotional-intelligence-assessment",
+      "faq_jsonld_count": 4,
+      "sitemap": true,
+      "llms": true,
+      "llms_full": true,
+      "private_url_leak_detected": false
+    }
+  ],
+  "repository_sources": [
+    "backend/database/seeders/ScaleRegistrySeeder.php",
+    "backend/docs/seo/fermatmind-free-assessment-global-seo-geo-strategy-2026-07-04.md",
+    "backend/docs/seo/result-en-parity-00-assessment-result-content-inventory.md"
+  ],
+  "decision": "six_test_hub_completeness_audit_completed_follow_up_required",
+  "next_requested_train_item": "MONEY-INTENT-OWNER-PAGE-MAP-READONLY-01",
+  "held_items": [
+    "RIASEC-ZH-TEST-LANDING-FAQ-PARITY-READBACK-01",
+    "MBTI-MAIN-FAQ-D7-OBSERVATION-01 until 2026-07-12 Asia/Shanghai",
+    "MBTI-MAIN-FAQ-D28-OBSERVATION-01 until 2026-08-02 Asia/Shanghai"
+  ],
+  "deferred_repair_candidates": [
+    "BIG5-FREE-COMPLETE-RESULT-AUTHORITY-AUDIT-01",
+    "NON-MBTI-TEST-HUB-FAQ-AUTHORITY-PLAN-01",
+    "IQ-TEST-HUB-CLAIM-AND-LLMSFULL-READINESS-01",
+    "ENNEAGRAM-TEST-HUB-FREE-RESULT-FAQ-READBACK-01",
+    "EQ-TEST-HUB-FREE-RESULT-FAQ-READBACK-01"
+  ],
+  "validation": {
+    "json_tool": "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-06/six-test-hub-completeness-readonly-audit-01/scan_manifest.json >/dev/null",
+    "diff_check": "git diff --check",
+    "cached_diff_check": "git diff --cached --check"
+  }
+}
