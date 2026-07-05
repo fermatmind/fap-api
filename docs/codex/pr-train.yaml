@@ -37321,7 +37321,7 @@ prs:
     branch: codex/iq-method-pages-post-publish-readback-01
     title: "IQ-METHOD-PAGES-ZH-CN-CMS-POST-PUBLISH-READBACK-01: verify published IQ method articles before indexing"
     train_scope: iq_method_pages_zh_cn_post_publish_readback
-    status: github_checks_pending
+    status: ready_to_merge
     scope:
       - Add a read-only post-publish readback command for the 7 zh-CN IQ method CMS Articles.
       - Verify public article payloads, approved/published revision consistency, canonical, robots=noindex,follow, topic IQ grouping, landing links, and private-route/scoring-token guards.
