@@ -1,0 +1,84 @@
+{
+  "task_id": "MONEY-INTENT-OWNER-PAGE-MAP-READONLY-01",
+  "repo": "fap-api",
+  "generated_at": "2026-07-06",
+  "scope": "generated-only read-only owner-page mapping for core money-intent query families",
+  "runtime_impact": "none",
+  "cms_impact": "none",
+  "search_submission_impact": "none",
+  "deploy_impact": "none",
+  "fap_web_impact": "none",
+  "owner_pages": [
+    {
+      "query_family": "MBTI / 16 types direct test intent",
+      "zh_owner": "/zh/tests/mbti-personality-test-16-personality-types",
+      "en_owner": "/en/tests/mbti-personality-test-16-personality-types",
+      "status": "keep_owner"
+    },
+    {
+      "query_family": "Big Five / OCEAN direct test intent",
+      "zh_owner": "/zh/tests/big-five-personality-test-ocean-model",
+      "en_owner": "/en/tests/big-five-personality-test-ocean-model",
+      "status": "keep_owner_with_authority_caution"
+    },
+    {
+      "query_family": "Enneagram / nine types direct test intent",
+      "zh_owner": "/zh/tests/enneagram-personality-test-nine-types",
+      "en_owner": "/en/tests/enneagram-personality-test-nine-types",
+      "status": "keep_owner"
+    },
+    {
+      "query_family": "RIASEC / Holland / career interest direct test intent",
+      "zh_owner": "/zh/tests/holland-career-interest-test-riasec",
+      "en_owner": "/en/tests/holland-career-interest-test-riasec",
+      "status": "keep_owner"
+    },
+    {
+      "query_family": "IQ direct test intent",
+      "zh_owner": "/zh/tests/iq-test-intelligence-quotient-assessment",
+      "en_owner": "/en/tests/iq-test-intelligence-quotient-assessment",
+      "status": "keep_owner_with_claim_boundary"
+    },
+    {
+      "query_family": "EQ direct test intent",
+      "zh_owner": "/zh/tests/eq-test-emotional-intelligence-assessment",
+      "en_owner": "/en/tests/eq-test-emotional-intelligence-assessment",
+      "status": "keep_owner_with_exact_matching_required"
+    }
+  ],
+  "non_owner_route_patterns": [
+    "/result/*",
+    "/attempts/*",
+    "/report/*",
+    "/orders/*",
+    "/payment/*",
+    "/checkout/*",
+    "/lookup/*",
+    "/share/*",
+    "/history/*",
+    "tokenized/private URLs"
+  ],
+  "evidence_sources": [
+    "backend/docs/seo/fermatmind-free-assessment-global-seo-geo-strategy-2026-07-04.md",
+    "backend/docs/seo/daily-runs/2026-07-06/six-test-hub-completeness-readonly-audit-01/",
+    "backend/database/seeders/ScaleRegistrySeeder.php",
+    "https://fermatmind.com/sitemap.xml"
+  ],
+  "decision": "money_intent_owner_page_map_completed_ready_for_data_quality_scan",
+  "next_requested_train_item": "GSC-SEO-INTEL-QUALITY-REFRESH-READONLY-01",
+  "deferred_items": [
+    "no CMS writes",
+    "no runtime changes",
+    "no title/meta/H1/FAQ rewrites",
+    "no sitemap or llms edits",
+    "no Search Console submission",
+    "no staging deploy wait",
+    "no manual deploy",
+    "no production deploy"
+  ],
+  "validation": {
+    "json_tool": "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-06/money-intent-owner-page-map-readonly-01/scan_manifest.json >/dev/null",
+    "diff_check": "git diff --check",
+    "cached_diff_check": "git diff --cached --check"
+  }
+}
