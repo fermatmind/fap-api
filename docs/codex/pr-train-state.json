@@ -26901,7 +26901,7 @@
         "status": "pass"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "pending_remote_pr_head",
     "depends_on": [
 
     ],
@@ -80743,6 +80743,11 @@
         "at": "2026-07-05T16:02:00+08:00",
         "status": "github_checks_pending",
         "summary": "Opened PR #2736 and pushed the scoped publish gate implementation. Waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-07-05T16:14:00+08:00",
+        "status": "github_checks_failed_current_scope_fixed",
+        "summary": "GitHub verify-bigfive failed because the Big Five runtime-freeze classifier flagged backend/app/Console/Commands/ArticleIqMethodPagesPublishGate.php. Updated the manifest-allowed BigFiveResultPageV2CoreBodyPreviewTest classifier to treat this IQ method read-only gate like the existing IQ method import/readback commands, then reran focused tests and local validation."
       }
     ]
   },
