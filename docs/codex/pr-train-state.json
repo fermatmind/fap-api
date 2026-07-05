@@ -81987,7 +81987,7 @@
     "depends_on": [
       "BIG5-CMS-STAGING-AUTH-PACKET-10A"
     ],
-    "status": "committed",
+    "status": "pr_open",
     "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
     "checks": {
       "manifest_registration": {
@@ -82022,6 +82022,10 @@
       "commit": {
         "status": "pass",
         "evidence": "Local commit a001248497c4a4a72a872016547bb2ca8cee7bf3 created for PR10 implementation."
+      },
+      "pr_created": {
+        "status": "pass",
+        "evidence": "Opened PR #2751: https://github.com/fermatmind/fap-api/pull/2751"
       }
     },
     "scope_validation": {
@@ -82030,8 +82034,8 @@
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
-    "commit_sha": "a001248497c4a4a72a872016547bb2ca8cee7bf3",
-    "pr_url": null,
+    "commit_sha": "e743e0fa2e677de2d3f270846cf54122a6fdf2d7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2751",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -82077,6 +82081,11 @@
         "at": "2026-07-05T12:48:14Z",
         "status": "committed",
         "summary": "Committed PR10 implementation as a001248497c4a4a72a872016547bb2ca8cee7bf3."
+      },
+      {
+        "at": "2026-07-05T12:49:12Z",
+        "status": "pr_open",
+        "summary": "Opened PR #2751 for PR10 implementation."
       }
     ]
   },
