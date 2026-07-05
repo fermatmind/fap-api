@@ -80865,7 +80865,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -80881,17 +80881,17 @@
         "evidence": "php -l command/test, artisan list articles, targeted Pint, focused ArticleIqMethodPagesPublishCommandTest plus ArticlePublishControlledCommandTest, focused BigFive freeze classifier tests, YAML/JSON parse, and git diff --check passed locally."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "PR #2739 opened for branch codex/iq-method-pages-cms-publish-01; waiting for required GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2739 GitHub checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
-    "commit_sha": "c3b810284ba16379e2ae5fff42ada317ac0d1068",
+    "commit_sha": "11b8e3ee1839c6edbc93316bf0cf0fc490f246a6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2739",
     "failure_reason": null,
     "merged_at": null,
@@ -80923,6 +80923,11 @@
         "at": "2026-07-05T17:02:00+08:00",
         "status": "github_checks_pending",
         "summary": "Opened PR #2739 for the scoped IQ method publish workflow and pushed the local-validation-passed implementation. Waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-07-05T17:10:00+08:00",
+        "status": "ready_to_merge",
+        "summary": "GitHub checks passed for PR #2739. Ready for squash merge under the PR train merge policy; no indexability, sitemap, llms, search action, deploy, or production execution was performed."
       }
     ]
   },
