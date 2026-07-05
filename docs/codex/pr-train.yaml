@@ -233,6 +233,172 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+
+  - id: BIG5-TRAIN-LEDGER-CLOSEOUT-06
+    repo: fap-api
+    depends_on:
+      - BIG5-CONTENT-QUALITY-REVIEW-05
+    branch: codex/big5-train-ledger-closeout-06
+    title: "BIG5-TRAIN-LEDGER-CLOSEOUT-06: reconcile Big Five content quality review train ledger"
+    train_scope: big_five_cms_asset_readiness
+    status: user_authorized
+    scope:
+      - Reconcile the Big Five content quality review train ledger after PR #2730 merge.
+      - Verify BIG5-CONTENT-QUALITY-REVIEW-05 is merged and origin/main contains its merge commit.
+      - Record merged, branch cleanup, and post-merge revalidation facts in docs/codex/pr-train-state.json.
+      - Register the user-authorized follow-up Big Five CMS asset readiness train items without implementing their scopes.
+      - Keep this metadata-only; no runtime, importer, content asset, CMS, sitemap, llms, JSON-LD, deploy, or publish changes.
+    allowed_paths:
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Modify backend runtime, importer logic, public API runtime, content assets, production CMS content, sitemap/llms runtime, JSON-LD runtime, canonical/noindex behavior, permissions, scheduler behavior, secrets, staging deploy, or production deploy.
+      - Implement BIG5-CONTENT-POLISH-06, BIG5-CMS-IMPORT-DRYRUN-07, or BIG5-CMS-PREVIEW-READBACK-QA-08 scope in this PR.
+    validation:
+      - git status --short --branch
+      - gh pr view 2730 --json number,state,mergedAt,mergeCommit,url,headRefName,baseRefName,isDraft
+      - git merge-base --is-ancestor 075c90211d0ed71b98a9bc903f951f3d3731ca99 origin/main
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - rg -n "BIG5-CONTENT-QUALITY-REVIEW-05|BIG5-TRAIN-LEDGER-CLOSEOUT-06|BIG5-CONTENT-POLISH-06|BIG5-CMS-IMPORT-DRYRUN-07|BIG5-CMS-PREVIEW-READBACK-QA-08" docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-CONTENT-POLISH-06
+    repo: fap-api
+    depends_on:
+      - BIG5-TRAIN-LEDGER-CLOSEOUT-06
+    branch: codex/big5-content-polish-06
+    title: "BIG5-CONTENT-POLISH-06: polish Big Five CMS draft assets before importer dry-run"
+    train_scope: big_five_cms_asset_readiness
+    status: user_authorized
+    scope:
+      - Polish Chinese Big Five combination draft pages to reduce repeated template language.
+      - Deepen English Big Five hub and trait draft pages.
+      - Expand English FAQs to at least five question/answer entries per page.
+      - Keep every asset draft_review_required, manual_review_required, and CMS/backend authoritative.
+      - Generate or update backend-side review/import-ready assets or reports only; do not write CMS or change runtime SEO surfaces.
+    allowed_paths:
+      - generated/big-five-content-polish/**
+      - generated/big-five-content-quality-review/**
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Modify frontend runtime, public API runtime, importer runtime, production CMS content, sitemap/llms runtime, JSON-LD runtime, canonical/noindex behavior, permissions, scheduler behavior, secrets, staging deploy, or production deploy.
+      - Write CMS, publish, index, add sitemap/llms/JSON-LD runtime enumeration, or mark English Big Five pages SEO-ready.
+    validation:
+      - python3 -m json.tool generated/big-five-content-polish/cms-import-draft.polished.json >/dev/null
+      - python3 -m json.tool generated/big-five-content-polish/content_polish_report.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-CMS-IMPORT-DRYRUN-07
+    repo: fap-api
+    depends_on:
+      - BIG5-CONTENT-POLISH-06
+    branch: codex/big5-cms-import-dryrun-07
+    title: "BIG5-CMS-IMPORT-DRYRUN-07: run no-write Big Five CMS import dry-run on polished assets"
+    train_scope: big_five_cms_asset_readiness
+    status: user_authorized
+    scope:
+      - Run the backend Big Five CMS import no-write dry-run against the polished draft package.
+      - Validate cms-import-draft.json readability and required field mapping for body_sections, faq, seo, claim_boundaries, and indexability_gate.
+      - Validate FAQ dedupe, claim boundary, indexability gate, canonical path, and short-route residue posture.
+      - Generate a dry-run report only.
+      - Keep this dry-run only; no DB writes, CMS writes, publishing, sitemap/llms/JSON-LD runtime changes, staging deploy, or production deploy.
+    allowed_paths:
+      - generated/big-five-cms-import-dryrun/**
+      - generated/pr-train-sidecar-issues/**
+      - backend/app/Console/Commands/PersonalityBigFiveCmsImportDraftDryRun.php
+      - backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php
+      - backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Write CMS, run production imports, run database migrations, publish, enable indexability, release sitemap/llms, submit search, trigger staging deploy, trigger production deploy, or add public runtime content.
+      - Change public API routes, content authority, canonical/noindex behavior, JSON-LD runtime, permissions, scheduler behavior, or secrets.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=../generated/big-five-content-polish/cms-import-draft.polished.json --dry-run --json
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi
+      - python3 -m json.tool generated/big-five-cms-import-dryrun/dryrun_report.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-CMS-PREVIEW-READBACK-QA-08
+    repo: fap-api
+    depends_on:
+      - BIG5-CMS-IMPORT-DRYRUN-07
+    branch: codex/big5-cms-preview-readback-qa-08
+    title: "BIG5-CMS-PREVIEW-READBACK-QA-08: validate Big Five CMS preview and public API readback payload"
+    train_scope: big_five_cms_asset_readiness
+    status: user_authorized
+    scope:
+      - Validate planned CMS preview and public API readback payload structure after the no-write dry-run passes.
+      - Confirm body_sections do not render FAQ twice and faq remains the only structured FAQ source.
+      - Confirm draft/manual review assets remain excluded from public SEO discoverability surfaces.
+      - Confirm preview/readback payloads preserve noindex, manual_review_required, and draft_review_required posture.
+      - Generate a QA report only; no CMS writes, publishing, sitemap/llms/JSON-LD runtime release, staging deploy, or production deploy.
+    allowed_paths:
+      - generated/big-five-cms-preview-readback-qa/**
+      - generated/pr-train-sidecar-issues/**
+      - backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php
+      - backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Write CMS, run production imports, run database migrations, publish, enable indexability, release sitemap/llms, submit search, trigger staging deploy, trigger production deploy, or add public runtime content.
+      - Change public route paths, permissions, scheduler behavior, secrets, canonical path generation, sitemap runtime inclusion, llms runtime inclusion, or production JSON-LD publishing policy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityBigFiveCmsImportDraftDryRunCommandTest|PersonalityPublicContentAssetContractTest' --no-ansi
+      - python3 -m json.tool generated/big-five-cms-preview-readback-qa/readback_qa_report.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: MBTI-CMS-12
     repo: fap-api
     depends_on:
