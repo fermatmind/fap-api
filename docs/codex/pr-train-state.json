@@ -81987,7 +81987,7 @@
     "depends_on": [
       "BIG5-CMS-STAGING-AUTH-PACKET-10A"
     ],
-    "status": "pr_open",
+    "status": "ci_fix_applied",
     "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
     "checks": {
       "manifest_registration": {
@@ -82026,6 +82026,15 @@
       "pr_created": {
         "status": "pass",
         "evidence": "Opened PR #2751: https://github.com/fermatmind/fap-api/pull/2751"
+      },
+      "github_checks": {
+        "status": "failed_then_fixed_locally",
+        "evidence": "PR #2751 verify-bigfive failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier flagged the new PR10 import-only command/service and Kernel registration as runtime changes. Logs inspected for jobs 85224630726 and 85224633459. Added explicit classifier allowlist and test for PersonalityBigFiveCmsStagingWriteImport/BigFiveCmsImportDraftStagingWriter; focused freeze test now passes locally."
+      },
+      "ci_fix_validation": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|big_five_cms_staging_write_import' --no-ansi; cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsStagingWriteImportCommandTest --no-ansi; cd backend && ./vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php; ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"; python3 -m json.tool docs/codex/pr-train-state.json >/dev/null; git diff --check",
+        "evidence": "PASS: focused failing freeze tests, staging write command tests, scoped Pint, YAML/JSON validation, and diff check passed. PHPUnit emitted existing missing backend/.env warnings; assertions passed."
       }
     },
     "scope_validation": {
@@ -82086,6 +82095,11 @@
         "at": "2026-07-05T12:49:12Z",
         "status": "pr_open",
         "summary": "Opened PR #2751 for PR10 implementation."
+      },
+      {
+        "at": "2026-07-05T12:57:31Z",
+        "status": "ci_fix_applied",
+        "summary": "Inspected failed verify-bigfive job and fixed the PR10-caused runtime freeze classifier allowlist gap within backend/tests/Unit scope. No CMS write, publish, indexability, sitemap/llms/JSON-LD runtime, search, deploy, or production action was performed."
       }
     ]
   },
