@@ -6,8 +6,8 @@
     "base": "main",
     "branch": "codex/big5-cms-import-dryrun-01",
     "depends_on": [],
-    "status": "pr_open",
-    "commit_sha": "3b6ad7c9df92a1fdf5e811a42e6f212c5c9c3130",
+    "status": "ready_to_merge",
+    "commit_sha": "79170c68c15d2b5a9dabf5d1ed03a8edcbb4b338",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2722",
     "failure_reason": null,
     "merged_at": null,
@@ -74,12 +74,16 @@
         "status": "external_blocker_recorded",
         "command": "cd backend && bash scripts/ci_verify_mbti.sh",
         "evidence": "Focused current-scope checks passed, but full local verification was affected by local worktree/branch-diff interference from IQ method files outside this PR scope. Recorded sidecar details in generated/pr-train-sidecar-issues/sidecar_issues.md and sidecar_issues.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2722 head 79170c68c15d2b5a9dabf5d1ed03a8edcbb4b338: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -112,6 +116,12 @@
         "from": "pr_open",
         "to": "ci_fix_in_progress",
         "note": "Inspected failing verify-bigfive job. Failure was current PR scope: the focused command test depended on the operator desktop package path. Replaced the CI test input with an equivalent generated 42-row fixture and kept the real desktop package dry-run as a local validation command."
+      },
+      {
+        "at": "2026-07-05T04:31:06Z",
+        "from": "ci_fix_in_progress",
+        "to": "ready_to_merge",
+        "note": "PR #2722 remote checks passed after the portable fixture fix. Marked ready to merge under squash merge policy."
       }
     ]
   },
