@@ -146,13 +146,13 @@
     "depends_on": [
       "BIG5-CMS-IMPORT-DRYRUN-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "e4c48e414cc8ae1735396b52aac4795c605b9b1d",
+    "status": "merged",
+    "commit_sha": "d69ec0af6c60045de3201de1191aa109a5aa9e5e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2723",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T05:25:17Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -199,13 +199,17 @@
       "github_checks": {
         "status": "pass",
         "evidence": "PASS on PR #2723 head e4c48e414cc8ae1735396b52aac4795c605b9b1d: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #2723 is MERGED; origin/main contains merge commit d69ec0af6c60045de3201de1191aa109a5aa9e5e; task branch codex/big5-cms-faq-dedupe-02 is absent locally and remotely."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -243,6 +247,12 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "PR #2723 remote checks passed. Marked ready to merge under squash merge policy."
+      },
+      {
+        "at": "2026-07-05T05:25:17Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #2723 merge before starting BIG5-CMS-INDEXABILITY-GATE-03. GitHub reports merged, origin/main contains the merge commit, and the task branch is already deleted locally and remotely."
       }
     ]
   },
@@ -80960,6 +80970,191 @@
         "at": "2026-07-05T13:55:29+08:00",
         "status": "pending_dependency",
         "summary": "Registered controlled SEO/GEO activation workflow. Execution waits for activation gate merge and excludes production activation writes without exact deployed SHA and command authorization."
+      }
+    ]
+  },
+  "BIG5-CMS-INDEXABILITY-GATE-03": {
+    "id": "BIG5-CMS-INDEXABILITY-GATE-03",
+    "repo": "fap-api",
+    "title": "BIG5-CMS-INDEXABILITY-GATE-03: enforce Big Five public asset noindex and schema runtime gates",
+    "base": "main",
+    "branch": "codex/big5-cms-indexability-gate-03",
+    "depends_on": [
+      "BIG5-CMS-FAQ-DEDUPE-02"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "57ca03963bd0c9cf3383b73a714c43fa78f6ab0e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2725",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized registering BIG5-CMS-INDEXABILITY-GATE-03 in the attached /goal execution request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-CMS-FAQ-DEDUPE-02 PR #2723 is merged and origin/main contains merge commit d69ec0af6c60045de3201de1191aa109a5aa9e5e."
+      },
+      "syntax": {
+        "status": "pass",
+        "command": "php -l backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php && php -l backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php",
+        "evidence": "PASS: controller and focused contract test file report no syntax errors."
+      },
+      "focused_schema_runtime_gate": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityPublicContentAssetContractTest::test_noindex_content_ready_big_five_asset_suppresses_runtime_schema|PersonalityPublicContentAssetContractTest::test_published_non_indexable_big_five_asset_suppresses_runtime_schema|PersonalityPublicContentAssetContractTest::test_published_indexable_big_five_asset_can_emit_runtime_schema|PersonalityPublicContentAssetContractTest::test_published_indexable_asset_can_be_read_without_sitemap_or_llms_flags' --no-ansi",
+        "evidence": "PASS: 4 tests, 39 assertions. Covers content_ready/noindex schema suppression, published/non-indexable schema suppression, published/indexable schema emission, and sitemap/llms remain false when flags are false."
+      },
+      "pint_targeted": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php",
+        "evidence": "PASS: 2 files."
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+        "evidence": "PASS: full backend verification chain completed successfully, including Big Five gates, MBTI verify flow, migration/security gates, OpenAPI diff gate, and dependency security gate. Generated compiled Big Five artifacts were restored because they were verification byproducts outside current PR scope."
+      },
+      "manifest_state_diff_validation": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check && git diff --cached --check",
+        "evidence": "PASS: train YAML parses, state JSON parses, and diff whitespace checks pass."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to BIG5-CMS-INDEXABILITY-GATE-03 allowed paths: backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php, backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --path=api --except-vendor --no-ansi >/tmp/fap-api-route-list-api-big5-03.txt",
+        "evidence": "PASS: route list generated 222 lines at /tmp/fap-api-route-list-api-big5-03.txt; no route path changes were introduced."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2725 head 57ca03963bd0c9cf3383b73a714c43fa78f6ab0e: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started backend-only indexability/schema runtime gate PR from origin/main after BIG5-CMS-FAQ-DEDUPE-02 merge was verified."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Implemented public API schema runtime gate and focused Big Five indexability regressions. Syntax, focused PHPUnit, targeted Pint, full ci_verify_mbti, YAML/JSON parse, diff checks, and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed BIG5-CMS-INDEXABILITY-GATE-03 schema runtime gate scope at b7c242a86."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2725 for BIG5-CMS-INDEXABILITY-GATE-03 and pushed branch codex/big5-cms-indexability-gate-03."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "PR #2725 remote checks passed. Marked ready to merge under squash merge policy."
+      }
+    ]
+  },
+  "BIG5-CMS-DISCOVERABILITY-SURFACE-04": {
+    "id": "BIG5-CMS-DISCOVERABILITY-SURFACE-04",
+    "repo": "fap-api",
+    "title": "BIG5-CMS-DISCOVERABILITY-SURFACE-04: block Big Five draft assets from sitemap llms and JSON-LD enumeration",
+    "base": "main",
+    "branch": "codex/big5-cms-discoverability-surface-04",
+    "depends_on": [
+      "BIG5-CMS-INDEXABILITY-GATE-03"
+    ],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized registering BIG5-CMS-DISCOVERABILITY-SURFACE-04 in the attached /goal execution request."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for BIG5-CMS-INDEXABILITY-GATE-03 to merge."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "user_authorized",
+        "to": "pending_dependency",
+        "note": "Registered dependent PR train item; execution waits for BIG5-CMS-INDEXABILITY-GATE-03 merge."
+      }
+    ]
+  },
+  "BIG5-CONTENT-QUALITY-REVIEW-05": {
+    "id": "BIG5-CONTENT-QUALITY-REVIEW-05",
+    "repo": "fap-api",
+    "title": "BIG5-CONTENT-QUALITY-REVIEW-05: classify Big Five combination and English assets for CMS review",
+    "base": "main",
+    "branch": "codex/big5-content-quality-review-05",
+    "depends_on": [
+      "BIG5-CMS-DISCOVERABILITY-SURFACE-04"
+    ],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized registering BIG5-CONTENT-QUALITY-REVIEW-05 in the attached /goal execution request."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for BIG5-CMS-DISCOVERABILITY-SURFACE-04 to merge."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "user_authorized",
+        "to": "pending_dependency",
+        "note": "Registered dependent PR train item; execution waits for BIG5-CMS-DISCOVERABILITY-SURFACE-04 merge."
       }
     ]
   }
