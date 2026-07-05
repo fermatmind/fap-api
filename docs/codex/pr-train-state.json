@@ -81469,13 +81469,13 @@
     "depends_on": [
       "BIG5-CONTENT-POLISH-06"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "merged",
+    "commit_sha": "98520e1cb1c1aca1041f191c3cd5de1480ad76fe",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2734",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T07:35:36Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -81498,13 +81498,21 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to BIG5-CMS-IMPORT-DRYRUN-07 allowed paths: generated/big-five-cms-import-dryrun/** and docs/codex/pr-train-state.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2734: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #2734 is MERGED; origin/main contains merge commit 98520e1cb1c1aca1041f191c3cd5de1480ad76fe; main worktree was synced; task branch codex/big5-cms-import-dryrun-07 was deleted locally and remotely."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -81536,7 +81544,7 @@
     "depends_on": [
       "BIG5-CMS-IMPORT-DRYRUN-07"
     ],
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
     "failure_reason": null,
@@ -81547,11 +81555,28 @@
       "manifest_registration": {
         "status": "pass",
         "evidence": "User explicitly authorized registering this Big Five CMS asset readiness PR train item in the attached /goal execution request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-CMS-IMPORT-DRYRUN-07 PR #2734 is merged, and origin/main contains merge commit 98520e1cb1c1aca1041f191c3cd5de1480ad76fe."
+      },
+      "preview_readback_qa": {
+        "status": "pass",
+        "evidence": "Generated generated/big-five-cms-preview-readback-qa/readback_qa_report.json and .md. Report validates 42 planned preview/readback payloads, FAQ field as only structured source, FAQ body sections excluded from preview body sections, all rows noindex/not public/not index eligible/not sitemap eligible/not llms eligible, and JSON-LD/sitemap/llms runtime blocked."
+      },
+      "focused_contract_tests": {
+        "status": "pass_with_warnings",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityBigFiveCmsImportDraftDryRunCommandTest|PersonalityPublicContentAssetContractTest' --no-ansi",
+        "evidence": "PASS exit code 0: 18 warnings, 459 assertions. Warnings are existing test output noise; no failures or errors."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to BIG5-CMS-PREVIEW-READBACK-QA-08 allowed paths: generated/big-five-cms-preview-readback-qa/** and docs/codex/pr-train-state.json."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -81561,6 +81586,18 @@
         "from": "user_authorized",
         "to": "pending_dependency",
         "note": "Registered dependent preview/readback QA PR; execution waits for BIG5-CMS-IMPORT-DRYRUN-07 merge."
+      },
+      {
+        "at": "2026-07-05T07:38:28Z",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "note": "Started no-write preview/readback QA after BIG5-CMS-IMPORT-DRYRUN-07 merge was verified."
+      },
+      {
+        "at": "2026-07-05T07:38:28Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Generated preview/readback QA report and completed focused contract, JSON/YAML, discoverability gate, and diff checks. No CMS write, publish, indexability release, sitemap/llms/JSON-LD runtime, or deploy was performed."
       }
     ]
   }
