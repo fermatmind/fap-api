@@ -26828,7 +26828,7 @@
         "status": "pass"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "pending_remote_pr_head",
     "depends_on": [
       "MBTI-PDF-PRODUCT-04"
     ],
@@ -80684,7 +80684,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01"
     ],
-    "status": "user_authorized",
+    "status": "local_validation_passed",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -80694,11 +80694,15 @@
       "dependency": {
         "status": "pass",
         "evidence": "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01 PR #2724 is merged; origin/main contains merge commit d73366e9467fab5ad3dcf2fb16e3d50520ed38ca."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "php -l command/test, artisan list articles, focused PHPUnit, targeted Pint, route:list api, YAML/JSON parse, and git diff --check passed locally."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -80724,6 +80728,16 @@
         "at": "2026-07-05T13:55:29+08:00",
         "status": "user_authorized",
         "summary": "Registered read-only publish readiness gate. Scope excludes review approval writes, publish, indexability, sitemap/llms activation, search submission, frontend fallback, production deploy, and production execution without exact SHA authorization."
+      },
+      {
+        "at": "2026-07-05T14:38:00+08:00",
+        "status": "in_progress",
+        "summary": "Started implementation on branch codex/iq-method-pages-publish-gate-01 from origin/main. Scope remains read-only publish gate only."
+      },
+      {
+        "at": "2026-07-05T15:49:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "Implemented read-only publish gate command and focused tests. Local manifest validation passed; no approval, publish, indexability, sitemap, llms, deploy, or production execution was performed."
       }
     ]
   },
