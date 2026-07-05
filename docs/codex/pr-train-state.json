@@ -81209,8 +81209,8 @@
     "depends_on": [
       "BIG5-CMS-DISCOVERABILITY-SURFACE-04"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "c713e9aed91d25d72bbe9beaaa31d77afc09d7db",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -81273,6 +81273,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Generated backend-side Big Five content quality review artifacts. Output is review-only and does not publish, write CMS, or enable SEO/GEO runtime surfaces."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed BIG5-CONTENT-QUALITY-REVIEW-05 review artifacts at c713e9aed."
       }
     ]
   }
