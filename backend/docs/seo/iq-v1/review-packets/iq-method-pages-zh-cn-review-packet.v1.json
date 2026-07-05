@@ -1,0 +1,274 @@
+{
+  "schema_version": "fermatmind.iq_method_pages.review_packet.v1",
+  "packet_id": "IQ-METHOD-PAGES-ZH-CN-REVIEW-PACKET-2026-07-05",
+  "created_at": "2026-07-05T14:09:30+08:00",
+  "locale": "zh-CN",
+  "review_scope": "7 zh-CN IQ method, boundary, privacy, and trust-layer CMS Article drafts",
+  "reviewer": {
+    "name": "Codex GPT-5",
+    "role": "FermatMind operator-authorized internal method and claim boundary reviewer",
+    "review_type": "codex_assisted_internal_pre_publish_review",
+    "limitations": [
+      "This packet is not a clinical, psychometric, legal, accreditation, certification, or external expert endorsement.",
+      "This packet does not approve production writes, production deploy, article publish, sitemap activation, llms activation, search submission, or any official IQ claim.",
+      "Human/operator approval and exact deployed SHA authorization remain required before production review approval writes or publication."
+    ]
+  },
+  "source_package": {
+    "repo": "fap-web",
+    "package_dir": "generated/iq-method-pages-zh-cn-v0.2",
+    "dry_run_manifest": "generated/iq-method-pages-zh-cn-v0.2/cms-dry-run/cms_import_manifest.json",
+    "claim_audit_summary": "generated/iq-method-pages-zh-cn-v0.2/cms-dry-run/claim_audit_summary.json",
+    "seo_geo_gate": "generated/iq-method-pages-zh-cn-v0.2/cms-dry-run/seo_geo_gate.json",
+    "global_claim_policy": "generated/iq-method-pages-zh-cn-v0.2/GLOBAL_CLAIM_POLICY.md",
+    "global_seo_geo_standard": "generated/iq-method-pages-zh-cn-v0.2/GLOBAL_SEO_GEO_STANDARD.md"
+  },
+  "backend_evidence": {
+    "dry_run_package_pr": {
+      "repo": "fap-web",
+      "pr_id": "IQ-METHOD-PAGES-ZH-CN-CMS-DRY-RUN-01",
+      "github_pr": "https://github.com/fermatmind/fap-web/pull/1606",
+      "merge_commit": "297bd9c7809edc257555a57be5ae406d43e8c05f"
+    },
+    "cms_import_pr": {
+      "repo": "fap-api",
+      "pr_id": "IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01",
+      "github_pr": "https://github.com/fermatmind/fap-api/pull/2721",
+      "merge_commit": "83eb4781082f17e574a575b09b92d23acc75021d"
+    },
+    "cms_readback_pr": {
+      "repo": "fap-api",
+      "pr_id": "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01",
+      "github_pr": "https://github.com/fermatmind/fap-api/pull/2724",
+      "merge_commit": "d73366e9467fab5ad3dcf2fb16e3d50520ed38ca",
+      "readback_result": "temp sqlite real-package readback passed: 7 articles, mismatch_count=0"
+    }
+  },
+  "global_review_decision": {
+    "method_review": "pass",
+    "claim_review": "pass",
+    "forbidden_claim_scan": "pass_with_contextual_boundary_mentions",
+    "publication_readiness": "ready_for_backend_publish_gate_only",
+    "public_indexing_readiness": "not_ready_until_separate_seo_geo_activation_gate",
+    "conclusion": "The 7 zh-CN IQ method pages may proceed to the backend publish readiness gate as draft/noindex CMS Article candidates. This packet does not authorize production mutation, article publish, indexability, sitemap, llms, or search submission."
+  },
+  "required_public_boundaries": [
+    "FermatMind IQ V1 is a non-official, non-clinical, non-certified online IQ-style reasoning test.",
+    "The public pages may describe the original 30-question, approximately 20-minute task format only as product context.",
+    "Results must be framed as raw score, accuracy, completion time, and dimension-performance signals for this task only.",
+    "Public pages must not promise IQ score, percentile, certified IQ, official IQ proof, Mensa eligibility, diagnosis, admission, hiring, salary, or career outcome decisions.",
+    "Public pages must not expose answer_key, correct_answer, item rules, answer explanations, scoring formulas, private report fields, private result links, payment/order/recovery links, or admin/preview URLs."
+  ],
+  "forbidden_claim_terms_checked": [
+    "官方 IQ",
+    "认证 IQ",
+    "真实智商",
+    "智商证书",
+    "PDF certificate",
+    "certificate",
+    "Mensa",
+    "临床诊断",
+    "诊断级",
+    "录取",
+    "招聘",
+    "薪资预测",
+    "职业判断",
+    "固定智力",
+    "percentile",
+    "population percentile",
+    "百分位",
+    "IQ estimate",
+    "answer_key",
+    "correct_answer"
+  ],
+  "contextual_boundary_mentions_policy": {
+    "decision": "allowed_when_negative_or_guard_context_only",
+    "examples": [
+      "不用于升学、用人、收入或岗位决策",
+      "不公开题目答案和评分规则",
+      "不出现证书、排行榜、医生医院、学校录取或数字炫耀",
+      "forbidden structured-data type list contains Certificate"
+    ],
+    "not_allowed": [
+      "Any statement offering a certificate, certified IQ proof, official IQ score, IQ percentile, Mensa qualification, clinical diagnosis, admission decision, hiring decision, salary prediction, or career judgment.",
+      "Any runtime/public payload exposing answer keys, correct answers, item rules, scoring formulas, private result links, order links, payment links, recovery links, or admin routes."
+    ]
+  },
+  "pages": [
+    {
+      "order": 1,
+      "slug": "what-is-iq-style-reasoning-test",
+      "title": "什么是 IQ 风格推理测试？",
+      "canonical_url": "https://fermatmind.com/zh/articles/what-is-iq-style-reasoning-test",
+      "method_review": {
+        "status": "pass",
+        "decision": "Defines IQ-style reasoning as graphic, matrix, pattern-completion, and spatial-relation task formats; frames FermatMind IQ V1 as original 30-question, approximately 20-minute task feedback; does not claim formal IQ measurement."
+      },
+      "claim_review": {
+        "status": "pass",
+        "forbidden_claims_found": [],
+        "contextual_boundary_mentions": [
+          "录取",
+          "招聘",
+          "评分规则",
+          "Certificate"
+        ],
+        "contextual_boundary_decision": "mentions are negative boundary or forbidden schema/media contexts, not public promises"
+      },
+      "approved_for_next_gate": true
+    },
+    {
+      "order": 2,
+      "slug": "online-iq-test-vs-professional-assessment",
+      "title": "在线 IQ 风格测试和专业智力测评有什么区别？",
+      "canonical_url": "https://fermatmind.com/zh/articles/online-iq-test-vs-professional-assessment",
+      "method_review": {
+        "status": "pass",
+        "decision": "Explains online self-guided IQ-style testing versus professional assessment using norms, standardized administration, supervised setting, error interpretation, professional interpretation, and use-boundary differences."
+      },
+      "claim_review": {
+        "status": "pass",
+        "forbidden_claims_found": [],
+        "contextual_boundary_mentions": [
+          "录取",
+          "招聘",
+          "Certificate"
+        ],
+        "contextual_boundary_decision": "mentions are negative boundary or forbidden schema/media contexts, not public promises"
+      },
+      "approved_for_next_gate": true
+    },
+    {
+      "order": 3,
+      "slug": "iq-test-score-meaning-boundary",
+      "title": "IQ 风格测试里的原始分、正确率和完成时间说明什么？",
+      "canonical_url": "https://fermatmind.com/zh/articles/iq-test-score-meaning-boundary",
+      "method_review": {
+        "status": "pass",
+        "decision": "Limits result explanation to raw score, accuracy, completion time, dimension performance, and stability signals for the current 30-question task."
+      },
+      "claim_review": {
+        "status": "pass",
+        "forbidden_claims_found": [],
+        "contextual_boundary_mentions": [
+          "录取",
+          "招聘",
+          "Certificate"
+        ],
+        "contextual_boundary_decision": "mentions are negative boundary or forbidden schema/media contexts, not public promises"
+      },
+      "approved_for_next_gate": true
+    },
+    {
+      "order": 4,
+      "slug": "matrix-reasoning-pattern-recognition-guide",
+      "title": "矩阵推理和模式识别题在测什么？",
+      "canonical_url": "https://fermatmind.com/zh/articles/matrix-reasoning-pattern-recognition-guide",
+      "method_review": {
+        "status": "pass",
+        "decision": "Explains matrix reasoning and pattern recognition at a high level without generating items, answers, solving steps, answer explanations, or scoring rules; states that FermatMind uses original tasks and does not claim external scale use."
+      },
+      "claim_review": {
+        "status": "pass",
+        "forbidden_claims_found": [],
+        "contextual_boundary_mentions": [
+          "录取",
+          "招聘",
+          "评分规则",
+          "Certificate"
+        ],
+        "contextual_boundary_decision": "mentions are negative boundary or forbidden schema/media contexts, not public promises"
+      },
+      "approved_for_next_gate": true
+    },
+    {
+      "order": 5,
+      "slug": "why-fermatmind-iq-v1-not-certification",
+      "title": "为什么 FermatMind IQ V1 是非认证测试？",
+      "canonical_url": "https://fermatmind.com/zh/articles/why-fermatmind-iq-v1-not-certification",
+      "method_review": {
+        "status": "pass",
+        "decision": "Explains why V1 does not provide certification or official proof and lists missing formal-assessment conditions such as identity verification, proctoring, standardized procedure, norm data, error explanation, professional interpretation, and governance."
+      },
+      "claim_review": {
+        "status": "pass",
+        "forbidden_claims_found": [],
+        "contextual_boundary_mentions": [
+          "录取",
+          "招聘",
+          "Certificate"
+        ],
+        "contextual_boundary_decision": "mentions are negative boundary or forbidden schema/media contexts, not public promises"
+      },
+      "approved_for_next_gate": true
+    },
+    {
+      "order": 6,
+      "slug": "iq-test-privacy-data-boundary",
+      "title": "IQ 风格测试的数据和隐私边界是什么？",
+      "canonical_url": "https://fermatmind.com/zh/articles/iq-test-privacy-data-boundary",
+      "method_review": {
+        "status": "pass",
+        "decision": "Separates public article content from the private test flow, private result page, and backend scoring layer; explicitly keeps answers, scoring logic, private report fields, private result links, order/payment/recovery links, and internal payloads out of public content."
+      },
+      "claim_review": {
+        "status": "pass",
+        "forbidden_claims_found": [],
+        "contextual_boundary_mentions": [
+          "录取",
+          "招聘",
+          "评分规则",
+          "私人结果链接",
+          "恢复链接",
+          "Certificate"
+        ],
+        "contextual_boundary_decision": "mentions are negative privacy/security boundary contexts, not public promises or exposed links"
+      },
+      "approved_for_next_gate": true
+    },
+    {
+      "order": 7,
+      "slug": "iq-expert-review-disclosure",
+      "title": "FermatMind 如何审查 IQ 风格测试内容？",
+      "canonical_url": "https://fermatmind.com/zh/articles/iq-expert-review-disclosure",
+      "method_review": {
+        "status": "pass",
+        "decision": "Frames advisor or doctoral-team involvement as review of item direction, method boundary, explanation copy, risk statements, fairness, and bias wording; does not equate participation with clinical certification, official recognition, or completed professional assessment."
+      },
+      "claim_review": {
+        "status": "pass",
+        "forbidden_claims_found": [],
+        "contextual_boundary_mentions": [
+          "录取",
+          "招聘",
+          "Certificate"
+        ],
+        "contextual_boundary_decision": "mentions are negative boundary or forbidden schema/media contexts, not public promises"
+      },
+      "approved_for_next_gate": true
+    }
+  ],
+  "approval_use": {
+    "may_be_used_by": [
+      "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01",
+      "IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01"
+    ],
+    "must_not_be_used_for": [
+      "clinical certification",
+      "official IQ certification",
+      "external endorsement",
+      "automatic production write",
+      "automatic publish",
+      "automatic indexability",
+      "automatic sitemap or llms activation"
+    ],
+    "next_required_gates": [
+      "backend publish readiness gate",
+      "operator approval of exact review packet and revision ids",
+      "exact deployed SHA authorization before production review approval write",
+      "controlled publish workflow",
+      "post-publish readback while still noindex",
+      "separate SEO/GEO activation gate before sitemap or llms eligibility"
+    ]
+  }
+}
