@@ -49552,8 +49552,9 @@
           "php -l backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php",
           "php -l backend/tests/Feature/Console/ArticleImportIqMethodPagesDraftCommandTest.php",
           "cd backend && php artisan list articles --no-ansi | rg 'iq-method'",
-          "cd backend && vendor/bin/pint --test app/Console/Commands/ArticleImportIqMethodPagesDraft.php app/Services/Cms/IqMethodPages/IqMethodPagesDraftImporter.php tests/Feature/Console/ArticleImportIqMethodPagesDraftCommandTest.php app/Models/TopicProfileEntry.php app/Console/Kernel.php bootstrap/app.php",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/ArticleImportIqMethodPagesDraft.php app/Services/Cms/IqMethodPages/IqMethodPagesDraftImporter.php tests/Feature/Console/ArticleImportIqMethodPagesDraftCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php app/Models/TopicProfileEntry.php bootstrap/app.php",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ArticleImportIqMethodPagesDraftCommandTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_iq_method_pages_cms_draft_importer_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
           "cd backend && php artisan route:list --path=api --except-vendor --no-ansi >/tmp/fap-api-route-list-api.txt",
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
@@ -49630,6 +49631,11 @@
         "at": "2026-07-05T12:52:00+08:00",
         "status": "pr_open",
         "summary": "Opened PR #2721 at https://github.com/fermatmind/fap-api/pull/2721 for IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01."
+      },
+      {
+        "at": "2026-07-05T13:05:00+08:00",
+        "status": "ci_fix_in_progress",
+        "summary": "GitHub verify-bigfive failed because BigFiveResultPageV2CoreBodyPreviewTest treated IQ CMS draft importer files as runtime-impacting. Added a scoped runtime-freeze classifier exemption and regression test for the IQ method pages draft importer; removed the unnecessary Console Kernel runtime diff in favor of Laravel 12 bootstrap command registration."
       }
     ]
   },
