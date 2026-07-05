@@ -1,0 +1,231 @@
+{
+  "generated_at": "2026-07-05T06:40:00Z",
+  "source": "/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json",
+  "total_rows": 42,
+  "locale_counts": {
+    "zh-CN": 36,
+    "en-US": 6
+  },
+  "content_type_counts": {
+    "combination_page": 6,
+    "cross_reading_page": 5,
+    "hub_page": 2,
+    "trait_range_page": 15,
+    "result_review_page": 4,
+    "trait_page": 10
+  },
+  "status_counts": {
+    "draft_review_required": 42
+  },
+  "indexability_gate_counts": {
+    "manual_review_required": 42
+  },
+  "route_residue": {
+    "short_zh_big_five": 0,
+    "short_en_big_five": 0,
+    "bad_canonical_paths": []
+  },
+  "field_shape": {
+    "missing_required": [],
+    "faq_not_qa": [
+      {
+        "id": "en-US:hub_page:big-five",
+        "faq_count": 3
+      },
+      {
+        "id": "en-US:trait_page:agreeableness",
+        "faq_count": 3
+      },
+      {
+        "id": "en-US:trait_page:conscientiousness",
+        "faq_count": 3
+      },
+      {
+        "id": "en-US:trait_page:extraversion",
+        "faq_count": 3
+      },
+      {
+        "id": "en-US:trait_page:neuroticism",
+        "faq_count": 3
+      },
+      {
+        "id": "en-US:trait_page:openness",
+        "faq_count": 3
+      }
+    ],
+    "empty_body_sections": [],
+    "faq_section_duplicates": [
+      "zh-CN:combination_page:high-agreeableness-high-neuroticism",
+      "zh-CN:combination_page:high-openness-high-extraversion",
+      "zh-CN:combination_page:high-openness-low-conscientiousness",
+      "zh-CN:combination_page:low-agreeableness-high-conscientiousness",
+      "zh-CN:combination_page:low-extraversion-high-conscientiousness",
+      "zh-CN:combination_page:low-neuroticism-high-conscientiousness",
+      "zh-CN:cross_reading_page:big-five-learning-style",
+      "zh-CN:cross_reading_page:big-five-relationship-communication",
+      "zh-CN:cross_reading_page:big-five-riasec-career",
+      "zh-CN:cross_reading_page:big-five-stress-management",
+      "zh-CN:cross_reading_page:big-five-vs-mbti",
+      "en-US:hub_page:big-five",
+      "zh-CN:hub_page:big-five",
+      "zh-CN:trait_range_page:agreeableness-high",
+      "zh-CN:trait_range_page:agreeableness-low",
+      "zh-CN:trait_range_page:agreeableness-mid",
+      "zh-CN:trait_range_page:conscientiousness-high",
+      "zh-CN:trait_range_page:conscientiousness-low",
+      "zh-CN:trait_range_page:conscientiousness-mid",
+      "zh-CN:trait_range_page:extraversion-high",
+      "zh-CN:trait_range_page:extraversion-low",
+      "zh-CN:trait_range_page:extraversion-mid",
+      "zh-CN:trait_range_page:neuroticism-high",
+      "zh-CN:trait_range_page:neuroticism-low",
+      "zh-CN:trait_range_page:neuroticism-mid",
+      "zh-CN:trait_range_page:openness-high",
+      "zh-CN:trait_range_page:openness-low",
+      "zh-CN:trait_range_page:openness-mid",
+      "zh-CN:result_review_page:big-five-30-day-review",
+      "zh-CN:result_review_page:big-five-score-ranges",
+      "zh-CN:result_review_page:discuss-results-with-others",
+      "zh-CN:result_review_page:how-to-read-big-five-results",
+      "en-US:trait_page:agreeableness",
+      "zh-CN:trait_page:agreeableness",
+      "en-US:trait_page:conscientiousness",
+      "zh-CN:trait_page:conscientiousness",
+      "en-US:trait_page:extraversion",
+      "zh-CN:trait_page:extraversion",
+      "en-US:trait_page:neuroticism",
+      "zh-CN:trait_page:neuroticism",
+      "en-US:trait_page:openness",
+      "zh-CN:trait_page:openness"
+    ]
+  },
+  "quality": {
+    "combination_pages": [
+      {
+        "id": "zh-CN:combination_page:high-agreeableness-high-neuroticism",
+        "cms_review_classification": "cms_review_candidate_manual_polish_recommended",
+        "publish_now": false,
+        "reason": "Specific opening exists, but repeated generic advantage/risk/scenario blocks still need editor polish.",
+        "repeated_generic_block_count": 3,
+        "cjk_chars": 1018,
+        "faq_count": 5
+      },
+      {
+        "id": "zh-CN:combination_page:high-openness-high-extraversion",
+        "cms_review_classification": "cms_review_candidate_manual_polish_recommended",
+        "publish_now": false,
+        "reason": "Specific opening exists, but repeated generic advantage/risk/scenario blocks still need editor polish.",
+        "repeated_generic_block_count": 3,
+        "cjk_chars": 1019,
+        "faq_count": 5
+      },
+      {
+        "id": "zh-CN:combination_page:high-openness-low-conscientiousness",
+        "cms_review_classification": "cms_review_candidate_manual_polish_recommended",
+        "publish_now": false,
+        "reason": "Specific opening exists, but repeated generic advantage/risk/scenario blocks still need editor polish.",
+        "repeated_generic_block_count": 3,
+        "cjk_chars": 1020,
+        "faq_count": 5
+      },
+      {
+        "id": "zh-CN:combination_page:low-agreeableness-high-conscientiousness",
+        "cms_review_classification": "cms_review_candidate_manual_polish_recommended",
+        "publish_now": false,
+        "reason": "Specific opening exists, but repeated generic advantage/risk/scenario blocks still need editor polish.",
+        "repeated_generic_block_count": 3,
+        "cjk_chars": 1017,
+        "faq_count": 5
+      },
+      {
+        "id": "zh-CN:combination_page:low-extraversion-high-conscientiousness",
+        "cms_review_classification": "cms_review_candidate_manual_polish_recommended",
+        "publish_now": false,
+        "reason": "Specific opening exists, but repeated generic advantage/risk/scenario blocks still need editor polish.",
+        "repeated_generic_block_count": 3,
+        "cjk_chars": 1030,
+        "faq_count": 5
+      },
+      {
+        "id": "zh-CN:combination_page:low-neuroticism-high-conscientiousness",
+        "cms_review_classification": "cms_review_candidate_manual_polish_recommended",
+        "publish_now": false,
+        "reason": "Specific opening exists, but repeated generic advantage/risk/scenario blocks still need editor polish.",
+        "repeated_generic_block_count": 3,
+        "cjk_chars": 1025,
+        "faq_count": 5
+      }
+    ],
+    "english_pages": [
+      {
+        "id": "en-US:hub_page:big-five",
+        "cms_review_classification": "draft_only_block_english_seo_expansion",
+        "publish_now": false,
+        "reason": "English assets should remain draft-only until English editorial depth, parity, and SEO/GEO review are separately approved.",
+        "english_words": 187,
+        "faq_count": 3
+      },
+      {
+        "id": "en-US:trait_page:agreeableness",
+        "cms_review_classification": "draft_only_block_english_seo_expansion",
+        "publish_now": false,
+        "reason": "English assets should remain draft-only until English editorial depth, parity, and SEO/GEO review are separately approved.",
+        "english_words": 311,
+        "faq_count": 3
+      },
+      {
+        "id": "en-US:trait_page:conscientiousness",
+        "cms_review_classification": "draft_only_block_english_seo_expansion",
+        "publish_now": false,
+        "reason": "English assets should remain draft-only until English editorial depth, parity, and SEO/GEO review are separately approved.",
+        "english_words": 311,
+        "faq_count": 3
+      },
+      {
+        "id": "en-US:trait_page:extraversion",
+        "cms_review_classification": "draft_only_block_english_seo_expansion",
+        "publish_now": false,
+        "reason": "English assets should remain draft-only until English editorial depth, parity, and SEO/GEO review are separately approved.",
+        "english_words": 311,
+        "faq_count": 3
+      },
+      {
+        "id": "en-US:trait_page:neuroticism",
+        "cms_review_classification": "draft_only_block_english_seo_expansion",
+        "publish_now": false,
+        "reason": "English assets should remain draft-only until English editorial depth, parity, and SEO/GEO review are separately approved.",
+        "english_words": 311,
+        "faq_count": 3
+      },
+      {
+        "id": "en-US:trait_page:openness",
+        "cms_review_classification": "draft_only_block_english_seo_expansion",
+        "publish_now": false,
+        "reason": "English assets should remain draft-only until English editorial depth, parity, and SEO/GEO review are separately approved.",
+        "english_words": 311,
+        "faq_count": 3
+      }
+    ],
+    "short_pages": [],
+    "publish_blockers": []
+  },
+  "verdict": "pass_to_cms_review_not_publish",
+  "publish_allowed": false,
+  "seo_expansion_allowed": false,
+  "cms_dry_run_posture": {
+    "can_enter_cms_manual_review": true,
+    "can_enter_backend_importer_dry_run": true,
+    "can_publish": false,
+    "can_enable_sitemap_llms_jsonld": false,
+    "assumptions": [
+      "Importer treats faq as the only structured FAQ source or dedupes FAQ body_sections.",
+      "Backend preserves draft_review_required and manual_review_required gates.",
+      "English locale rows are not selected for SEO expansion or public indexation."
+    ]
+  },
+  "required_followups": [
+    "Editor manually polishes Chinese combination pages before publish approval.",
+    "English pages remain draft-only until separate English editorial parity review.",
+    "Schema/FAQ/llms/sitemap remain planning-only until visible CMS content and claim boundaries are approved."
+  ]
+}
