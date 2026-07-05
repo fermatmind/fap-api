@@ -1,0 +1,122 @@
+{
+  "schema_version": "fermatmind.iq_method_pages.production_authorization_request.v1",
+  "packet_id": "IQ-METHOD-PAGES-PRODUCTION-AUTHORIZATION-REQUEST-2026-07-05",
+  "created_at": "2026-07-05T14:20:55+08:00",
+  "status": "blocked_until_exact_deployed_sha_and_operator_approval",
+  "repo": "fermatmind/fap-api",
+  "environment": "production",
+  "deployment_observation": {
+    "source": "GitHub deployments and workflow runs queried via gh on 2026-07-05T14:20:55+08:00",
+    "latest_origin_main_sha": "594b5894deb3f58c1ae8f2eac2d5566f3b5488e1",
+    "latest_production_deployment_sha_observed": "d73366e9467fab5ad3dcf2fb16e3d50520ed38ca",
+    "latest_production_deployment_created_at": "2026-07-05T05:52:00Z",
+    "latest_production_deployment_updated_at": "2026-07-05T05:57:30Z",
+    "latest_main_deploy_application_status_observed": "in_progress",
+    "latest_main_deploy_application_sha_observed": "594b5894deb3f58c1ae8f2eac2d5566f3b5488e1",
+    "deployed_sha_matches_latest_main": false,
+    "write_authorization_decision": "blocked"
+  },
+  "reason_blocked": [
+    "Production deployment currently observed at d73366e9467fab5ad3dcf2fb16e3d50520ed38ca, while latest origin/main is 594b5894deb3f58c1ae8f2eac2d5566f3b5488e1.",
+    "The review packet from PR #2727 is present on latest main but was not observed as deployed to production at packet creation time.",
+    "IQ-specific publish-gate, review-approval, publish, post-publish readback, and SEO/GEO activation commands are registered in the PR train but are not yet implemented and merged.",
+    "Codex cannot grant production write authorization on behalf of the operator."
+  ],
+  "current_deployed_sha_safe_scope": {
+    "exact_deployed_sha": "d73366e9467fab5ad3dcf2fb16e3d50520ed38ca",
+    "allowed_without_additional_operator_write_approval": [
+      {
+        "phase": "read_only_version_and_command_discovery",
+        "commands": [
+          "git -C /var/www/fap-api/current rev-parse HEAD",
+          "cd /var/www/fap-api/current/backend && php artisan list articles --no-ansi | rg 'import-iq-method-pages-draft|iq-method-pages-readback|publish-controlled|discoverability-release'"
+        ],
+        "write_side_effects": false
+      },
+      {
+        "phase": "cms_import_dry_run_only",
+        "commands": [
+          "cd /var/www/fap-api/current/backend && php artisan articles:import-iq-method-pages-draft --package=/path/to/approved/iq-method-pages-zh-cn-v0.2 --dry-run --json"
+        ],
+        "write_side_effects": false
+      },
+      {
+        "phase": "cms_readback_only_after_existing_drafts",
+        "commands": [
+          "cd /var/www/fap-api/current/backend && php artisan articles:iq-method-pages-readback --package=/path/to/approved/iq-method-pages-zh-cn-v0.2 --artifact-dir=/path/to/artifacts --json"
+        ],
+        "write_side_effects": false
+      }
+    ],
+    "not_authorized": [
+      "production import execute without explicit operator approval phrase",
+      "review approval writes",
+      "article publish",
+      "indexability flip",
+      "sitemap eligibility release",
+      "llms eligibility release",
+      "search submission",
+      "staging deploy wait",
+      "production deploy"
+    ]
+  },
+  "future_operator_authorization_templates": {
+    "production_import_execute": {
+      "status": "requires_operator_exact_phrase",
+      "allowed_only_after": [
+        "production deployed SHA is explicitly observed and matches the SHA named by the operator",
+        "operator confirms the source package path and hash",
+        "articles:import-iq-method-pages-draft --dry-run --json passes on production",
+        "operator accepts draft-only write scope"
+      ],
+      "exact_phrase_template": "I explicitly authorize IQ method pages production draft import execute on fap-api production SHA <DEPLOYED_SHA> using package <PACKAGE_PATH_OR_HASH>; scope is draft-only CMS Article/topic/landing block writes, no publish, no indexability, no sitemap, no llms, no search, no deploy.",
+      "allowed_command_shape": "cd /var/www/fap-api/current/backend && php artisan articles:import-iq-method-pages-draft --package=<APPROVED_PACKAGE_PATH> --json",
+      "blocked_until": "operator supplies exact phrase with deployed SHA"
+    },
+    "review_approval_execute": {
+      "status": "blocked_command_not_implemented",
+      "depends_on_pr_train_item": "IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01",
+      "exact_phrase_template": "I explicitly authorize IQ method pages review approval execute on fap-api production SHA <DEPLOYED_SHA> for locked article ids <IDS> and revision ids <REVISION_IDS> using review packet <PACKET_ID>; no publish, no indexability, no sitemap, no llms, no search, no deploy.",
+      "blocked_until": "review approval workflow is implemented, merged, deployed, dry-run passes, and operator supplies exact phrase"
+    },
+    "publish_execute": {
+      "status": "blocked_command_not_iq_batch_ready",
+      "depends_on_pr_train_item": "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-01",
+      "allowed_command_shape_if_existing_generic_command_is_used": "cd /var/www/fap-api/current/backend && php artisan articles:publish-controlled --article=<ID> [--article=<ID> ...] --confirm='<EXACT_CONFIRMATION>' --json",
+      "required_hold": "do not pass --make-indexable during IQ method page publish; sitemap_eligible and llms_eligible must remain false until the activation train",
+      "blocked_until": "publish workflow is implemented or generic command compatibility is proven, deployed, dry-run passes, and operator supplies exact phrase"
+    },
+    "seo_geo_activation_execute": {
+      "status": "blocked_until_post_publish_readback_and_activation_gate",
+      "depends_on_pr_train_items": [
+        "IQ-METHOD-PAGES-ZH-CN-CMS-POST-PUBLISH-READBACK-01",
+        "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01",
+        "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-01"
+      ],
+      "allowed_command_shape_if_existing_generic_command_is_used": "cd /var/www/fap-api/current/backend && php artisan articles:discoverability-release --article-id=<ID> --expected-slug=<SLUG> --execute --no-content-change --no-publish --no-search --no-schema-hreflang --no-revalidation --confirm='<EXACT_CONFIRMATION>' --json",
+      "blocked_until": "articles are published, post-publish readback passes, activation gate passes, exact deployed SHA is observed, and operator supplies exact phrase"
+    }
+  },
+  "global_forbidden_scope": [
+    "Do not run any production write against a SHA that does not exactly match the operator-approved deployed SHA.",
+    "Do not run production import execute before dry-run passes on the same deployed SHA.",
+    "Do not approve revisions before the review approval workflow exists and locks article/revision IDs.",
+    "Do not publish before review approval has been written and read back.",
+    "Do not make articles indexable during publish.",
+    "Do not activate sitemap or llms until a separate post-publish readback and SEO/GEO activation gate pass.",
+    "Do not run search submission in the same operation.",
+    "Do not trigger production deploy from this authorization request."
+  ],
+  "operator_action_required": {
+    "required": true,
+    "next_step": "After the intended runtime PRs are merged and deployed, rerun production SHA verification and provide the exact authorization phrase for only the next phase.",
+    "minimum_authorization_fields": [
+      "environment=production",
+      "exact_deployed_sha",
+      "phase",
+      "allowed command",
+      "source package path/hash or article/revision locks",
+      "explicit no-publish/no-index/no-sitemap/no-llms/no-search/no-deploy holds where applicable"
+    ]
+  }
+}
