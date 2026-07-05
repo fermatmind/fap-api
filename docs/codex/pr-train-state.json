@@ -81991,5 +81991,79 @@
         "summary": "Registered Big Five CMS staging-to-release readiness PR train item from the active /goal objective. Authorization-gated items must stop until their explicit gates are satisfied."
       }
     ]
+  },
+  "MBTI-MAIN-FAQ-PRODUCTION-RUNTIME-READBACK-01": {
+    "id": "MBTI-MAIN-FAQ-PRODUCTION-RUNTIME-READBACK-01",
+    "repo": "fap-api",
+    "title": "MBTI-MAIN-FAQ-PRODUCTION-RUNTIME-READBACK-01: read back MBTI FAQ production runtime",
+    "base": "main",
+    "branch": "codex/mbti-main-faq-production-runtime-readback-01",
+    "depends_on": [
+      "MBTI-MAIN-FREE-FAQ-CONTENT-01-CLOSEOUT"
+    ],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding this PR-train item in the attached /goal execution request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "MBTI-MAIN-FREE-FAQ-CONTENT-01-CLOSEOUT PR #2740 is merged, and origin/main contains merge commit 5b716cbb06da6ab32d14927ab7384b34f9aa0911."
+      },
+      "production_api_readback": {
+        "status": "pass",
+        "command": "curl -sS 'https://api.fermatmind.com/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types&locale=zh'",
+        "evidence": "Production API returned HTTP 200 and content_i18n_json.zh.faq count = 8 at 2026-07-05T08:59:39Z."
+      },
+      "public_page_readback": {
+        "status": "blocked_faq_not_propagated",
+        "command": "curl -sSL 'https://www.fermatmind.com/zh/tests/mbti-personality-test-16-personality-types'",
+        "evidence": "Public page redirected from www to apex and returned HTTP 200, but rendered visible FAQ count = 4 and FAQPage JSON-LD mainEntity count = 4."
+      },
+      "schema_parity_decision": {
+        "status": "skip_schema_repair",
+        "evidence": "Visible FAQ count equals JSON-LD count and questions at 4, so MBTI-MAIN-FAQ-SCHEMA-PARITY-REPAIR-01 is not eligible. The observed blocker is API 8 vs public page/schema 4 propagation, not visible 8 vs schema mismatch."
+      },
+      "private_url_boundary": {
+        "status": "pass",
+        "evidence": "No private attempt/order/payment/report/result/token hrefs were found in the public page readback."
+      },
+      "local_validation": {
+        "status": "pass",
+        "command": "python3 -m json.tool generated/seo-ops-mbti-main-faq-runtime-readback-20260705/scan_manifest.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "evidence": "PASS: generated scan manifest parses, train YAML parses, state JSON parses, and git diff whitespace check passes."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to allowed paths: generated/seo-ops-mbti-main-faq-runtime-readback-20260705/**, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-05T08:59:39Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started read-only production runtime FAQ readback from latest main after MBTI closeout merge was verified. Scope is generated evidence plus authorized train metadata only; no runtime, CMS, sitemap, llms, Search Channel, or deploy action."
+      },
+      {
+        "at": "2026-07-05T08:59:39Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Production API readback found 8 FAQ entries, but public page visible FAQ and FAQPage JSON-LD remain 4. Generated read-only evidence report; JSON/YAML/diff checks and allowed-path scope validation passed."
+      }
+    ]
   }
 }
