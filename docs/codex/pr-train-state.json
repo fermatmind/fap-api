@@ -81544,13 +81544,13 @@
     "depends_on": [
       "BIG5-CMS-IMPORT-DRYRUN-07"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "merged",
+    "commit_sha": "60414b8683e4c6d74500d2dbd8517fbee2bab430",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2735",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T07:44:30Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -81572,13 +81572,21 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to BIG5-CMS-PREVIEW-READBACK-QA-08 allowed paths: generated/big-five-cms-preview-readback-qa/** and docs/codex/pr-train-state.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2735: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #2735 is MERGED; origin/main contains merge commit 60414b8683e4c6d74500d2dbd8517fbee2bab430; local main was synced; task branch codex/big5-cms-preview-readback-qa-08 was deleted locally and remotely."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -81598,6 +81606,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Generated preview/readback QA report and completed focused contract, JSON/YAML, discoverability gate, and diff checks. No CMS write, publish, indexability release, sitemap/llms/JSON-LD runtime, or deploy was performed."
+      },
+      {
+        "at": "2026-07-05T07:46:34Z",
+        "from": "local_checks_passed",
+        "to": "merged",
+        "note": "Reconciled PR #2735 merge after final Big Five CMS asset readiness PR. GitHub reports merged, origin/main contains merge commit 60414b8683e4c6d74500d2dbd8517fbee2bab430, and branch cleanup is complete."
       }
     ]
   }
