@@ -1,0 +1,83 @@
+{
+  "id": "MBTI-MAIN-FAQ-PRODUCTION-RUNTIME-READBACK-02",
+  "repo": "fap-api",
+  "generated_at": "2026-07-05T10:07:27Z",
+  "scope": "read-only production runtime evidence",
+  "urls": {
+    "api": "https://api.fermatmind.com/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types&locale=zh",
+    "public_page_requested": "https://www.fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "public_page_final": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types"
+  },
+  "observations": {
+    "api_status": 200,
+    "api_cache_header": "x-fastcgi-cache: BYPASS",
+    "api_faq_path": "content_i18n_json.zh.faq",
+    "api_faq_count": 8,
+    "public_page_redirect": "HTTP 308 from www to apex",
+    "public_page_status": 200,
+    "public_page_cache_header": "x-proxy-cache: HIT",
+    "visible_faq_count": 8,
+    "faqpage_json_ld_count": 8,
+    "visible_questions_equal_json_ld_questions": true,
+    "private_url_hits": [],
+    "contains_new_api_question": true,
+    "contains_old_four_entry_question": false
+  },
+  "api_questions": [
+    "MBTI 测试免费吗？",
+    "MBTI 完整结果能看到什么？",
+    "MBTI 测试一般多久？",
+    "MBTI 能决定职业吗？",
+    "MBTI 是心理诊断吗？",
+    "16 型人格结果会变吗？",
+    "MBTI 和大五人格有什么区别？",
+    "做完 MBTI 后下一步看什么？"
+  ],
+  "visible_questions": [
+    "MBTI 测试免费吗？",
+    "MBTI 完整结果能看到什么？",
+    "MBTI 测试一般多久？",
+    "MBTI 能决定职业吗？",
+    "MBTI 是心理诊断吗？",
+    "16 型人格结果会变吗？",
+    "MBTI 和大五人格有什么区别？",
+    "做完 MBTI 后下一步看什么？"
+  ],
+  "json_ld_questions": [
+    "MBTI 测试免费吗？",
+    "MBTI 完整结果能看到什么？",
+    "MBTI 测试一般多久？",
+    "MBTI 能决定职业吗？",
+    "MBTI 是心理诊断吗？",
+    "16 型人格结果会变吗？",
+    "MBTI 和大五人格有什么区别？",
+    "做完 MBTI 后下一步看什么？"
+  ],
+  "decision": "RUNTIME_FAQ_PARITY_PASS",
+  "next_eligible_task": "MBTI-MAIN-FAQ-D0-OBSERVATION-BASELINE-01",
+  "skipped_repairs": [
+    {
+      "id": "MBTI-MAIN-FAQ-CACHE-REVALIDATION-REPAIR-01",
+      "reason": "canonical URL now serves 8 visible FAQ entries and 8 FAQPage JSON-LD entries without cache-bust"
+    },
+    {
+      "id": "MBTI-MAIN-FAQ-WEB-ADAPTER-PROPAGATION-REPAIR-01",
+      "reason": "runtime already consumes content_i18n_json.zh.faq"
+    },
+    {
+      "id": "MBTI-MAIN-FAQ-RUNTIME-DATA-SOURCE-REPAIR-01",
+      "reason": "runtime data source now renders API FAQ 8/8 on canonical URL"
+    }
+  ],
+  "actions_not_taken": [
+    "runtime code change",
+    "CMS write",
+    "production import",
+    "database migration",
+    "sitemap or llms change",
+    "Search Channel action",
+    "staging deploy wait",
+    "manual deploy",
+    "production deploy"
+  ]
+}
