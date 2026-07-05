@@ -781,7 +781,7 @@
         "summary": "Full vendor/bin/pint --test reported class_attributes_separation in backend/tests/Feature/V0_3/IqReportContractTest.php. User authorized including the Pint-only formatting fix in the current PR; full Pint now passes."
       }
     ],
-    "status": "pr_open",
+    "status": "ci_fix_local_checks_passed",
     "title": "ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01 allow global org0 funnel scope entry",
     "transitions": [
       {
@@ -49636,6 +49636,11 @@
         "at": "2026-07-05T13:05:00+08:00",
         "status": "ci_fix_in_progress",
         "summary": "GitHub verify-bigfive failed because BigFiveResultPageV2CoreBodyPreviewTest treated IQ CMS draft importer files as runtime-impacting. Added a scoped runtime-freeze classifier exemption and regression test for the IQ method pages draft importer; removed the unnecessary Console Kernel runtime diff in favor of Laravel 12 bootstrap command registration."
+      },
+      {
+        "at": "2026-07-05T13:12:00+08:00",
+        "status": "ci_fix_local_checks_passed",
+        "summary": "Focused BigFive runtime-freeze regression, IQ importer PHPUnit, targeted Pint, command discovery, route list, real fap-web package dry-run, YAML/JSON parsing, and diff check pass locally after the CI fix."
       }
     ]
   },
