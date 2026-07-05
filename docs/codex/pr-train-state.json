@@ -146,8 +146,8 @@
     "depends_on": [
       "BIG5-CMS-IMPORT-DRYRUN-01"
     ],
-    "status": "pr_open",
-    "commit_sha": "4a88b5bbc594bf3554712803a206e56c7f3ad912",
+    "status": "ready_to_merge",
+    "commit_sha": "e4c48e414cc8ae1735396b52aac4795c605b9b1d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2723",
     "failure_reason": null,
     "merged_at": null,
@@ -195,12 +195,16 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to BIG5-CMS-FAQ-DEDUPE-02 allowed paths: backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php, backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php, docs/codex/pr-train-state.json, and generated/pr-train-sidecar-issues/**."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2723 head e4c48e414cc8ae1735396b52aac4795c605b9b1d: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -233,6 +237,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR #2723 for BIG5-CMS-FAQ-DEDUPE-02 and pushed branch codex/big5-cms-faq-dedupe-02."
+      },
+      {
+        "at": "2026-07-05T04:58:45Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "PR #2723 remote checks passed. Marked ready to merge under squash merge policy."
       }
     ]
   },
