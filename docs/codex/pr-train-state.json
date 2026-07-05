@@ -81727,7 +81727,7 @@
     "depends_on": [
       "BIG5-CMS-PREVIEW-READBACK-QA-08"
     ],
-    "status": "local_checks_passed",
+    "status": "merged",
     "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
     "checks": {
       "manifest_registration": {
@@ -81746,20 +81746,28 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to BIG5-CMS-STAGING-IMPORT-RUNBOOK-09 allowed paths: docs/runbooks/big-five-cms-staging-import.md, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2741: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #2741 is MERGED; origin/main contains merge commit 1b9e4e8fbb169ae16c141bee9aa5f726381717f5; local main is synced to origin/main; worktree is clean; task branch codex/big5-cms-staging-import-runbook-09 is absent locally and remotely."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "1b9e4e8fbb169ae16c141bee9aa5f726381717f5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2741",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T08:58:50Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_migration_execution_allowed": false,
     "database_mutation": false,
@@ -81781,6 +81789,11 @@
         "at": "2026-07-05T08:51:00Z",
         "status": "local_checks_passed",
         "summary": "Runbook, manifest/state registration, generated artifact JSON parse, id registration, and diff checks passed. Scope is docs/runbook plus PR train metadata only."
+      },
+      {
+        "at": "2026-07-05T08:58:50Z",
+        "status": "merged",
+        "summary": "Reconciled PR #2741 merge. GitHub reports merged, origin/main contains merge commit 1b9e4e8fbb169ae16c141bee9aa5f726381717f5, and branch cleanup is complete."
       }
     ]
   },
@@ -81799,6 +81812,10 @@
       "manifest_registration": {
         "status": "pass",
         "evidence": "User provided explicit id/title/scope/branch/dependency details in the /goal objective and allowed missing manifest/state entries to be added before implementation."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-CMS-STAGING-IMPORT-RUNBOOK-09 PR #2741 is merged and origin/main contains merge commit 1b9e4e8fbb169ae16c141bee9aa5f726381717f5."
       },
       "authorization_gate": {
         "status": "blocked",
