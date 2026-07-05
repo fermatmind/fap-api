@@ -82001,9 +82001,9 @@
     "depends_on": [
       "MBTI-MAIN-FREE-FAQ-CONTENT-01-CLOSEOUT"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "0f67e3a04ff3829ede6ee492fa883483b055d387",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2744",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -82063,6 +82063,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Production API readback found 8 FAQ entries, but public page visible FAQ and FAQPage JSON-LD remain 4. Generated read-only evidence report; JSON/YAML/diff checks and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-07-05T08:59:39Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened PR #2744 for read-only production runtime FAQ readback evidence."
       }
     ]
   }
