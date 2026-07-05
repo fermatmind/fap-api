@@ -74,3 +74,13 @@
 - recommended follow-up:
   - Track and fix the failing Career/Content/MBTI/PDF/Architecture/ClinicalCombo/Commerce tests under their owning PR scopes.
   - Do not mix those repairs into the IQ method pages CMS readback PR.
+
+## PR-C verify_mbti local server unavailable
+
+- repo: `fermatmind/fap-api`
+- PR id / branch: PR-C / `codex/big5-production-content-audit-c`
+- blocker type: `local_environment_unavailable`
+- evidence: `bash scripts/verify_mbti.sh` failed at `[1/8] health: http://127.0.0.1:1827` with `curl: (7) Failed to connect to 127.0.0.1 port 1827`.
+- why not current PR scope: PR-C only adds a read-only Big Five production content audit command, focused tests, and generated evidence. It does not start, stop, configure, or route the local API server.
+- whether required checks are affected: Local `verify_mbti.sh` could not run without the expected local server. Targeted PHPUnit, syntax, Pint, command discovery, route list, and scope validation passed.
+- recommended follow-up: Run `bash scripts/verify_mbti.sh` in an environment where the Laravel API is listening on `127.0.0.1:1827`, or use the repository's standard local stack bootstrap before this check.

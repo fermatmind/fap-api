@@ -431,6 +431,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_big_five_production_content_audit_command(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityBigFiveProductionContentAudit.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_iq_method_pages_cms_readback_files(): void
     {
         $changed = [
@@ -5080,6 +5089,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveProductionContentAuditFile($file)) {
+                continue;
+            }
+
             if ($this->isMbti64CmsRevisionDraftFile($file)) {
                 continue;
             }
@@ -6620,6 +6633,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PersonalityBigFiveCmsPreviewRenderQa.php',
             'backend/app/Services/Cms/BigFiveCmsPreviewRenderQaValidator.php',
         ], true);
+    }
+
+    private function isBigFiveProductionContentAuditFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/PersonalityBigFiveProductionContentAudit.php';
     }
 
     private function isMbti64CmsRevisionDraftFile(string $file): bool
