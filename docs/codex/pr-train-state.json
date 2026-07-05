@@ -81400,13 +81400,13 @@
     "depends_on": [
       "BIG5-TRAIN-LEDGER-CLOSEOUT-06"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "merged",
+    "commit_sha": "ac5638b1c4d4c93036d8998679d7a33d494726ae",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2733",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T07:26:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -81423,13 +81423,21 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to BIG5-CONTENT-POLISH-06 allowed paths: generated/big-five-content-polish/** and docs/codex/pr-train-state.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2733: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #2733 is MERGED; origin/main contains merge commit ac5638b1c4d4c93036d8998679d7a33d494726ae; main worktree was synced; task branch codex/big5-content-polish-06 was deleted locally and remotely."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -81461,7 +81469,7 @@
     "depends_on": [
       "BIG5-CONTENT-POLISH-06"
     ],
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
     "failure_reason": null,
@@ -81472,11 +81480,29 @@
       "manifest_registration": {
         "status": "pass",
         "evidence": "User explicitly authorized registering this Big Five CMS asset readiness PR train item in the attached /goal execution request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-CONTENT-POLISH-06 PR #2733 is merged, and origin/main contains merge commit ac5638b1c4d4c93036d8998679d7a33d494726ae."
+      },
+      "dry_run_report": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=../generated/big-five-content-polish/cms-import-draft.polished.json --dry-run --json",
+        "evidence": "PASS: generated generated/big-five-cms-import-dryrun/dryrun_report.json and dryrun_summary. ok=true, dry_run_only=true, row_count=42, expected_row_count=42, old short route residue=0, errors=[], writes=false, publish/index/sitemap/llms release=false, FAQ dedupe policy active, and all rows remain noindex/not public/not index eligible/not sitemap eligible/not llms eligible."
+      },
+      "focused_command_contract": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi",
+        "evidence": "PASS: 4 tests, 54 assertions."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to BIG5-CMS-IMPORT-DRYRUN-07 allowed paths: generated/big-five-cms-import-dryrun/** and docs/codex/pr-train-state.json."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -81486,6 +81512,18 @@
         "from": "user_authorized",
         "to": "pending_dependency",
         "note": "Registered dependent import dry-run PR; execution waits for BIG5-CONTENT-POLISH-06 merge."
+      },
+      {
+        "at": "2026-07-05T07:29:09Z",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "note": "Started no-write importer dry-run against the polished Big Five CMS draft package after BIG5-CONTENT-POLISH-06 merge was verified."
+      },
+      {
+        "at": "2026-07-05T07:29:09Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "No-write dry-run report, focused command test, JSON/YAML parse, and diff checks passed. No CMS write, publish, indexability release, sitemap/llms/JSON-LD runtime, or deploy was performed."
       }
     ]
   },
