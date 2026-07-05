@@ -146,9 +146,9 @@
     "depends_on": [
       "BIG5-CMS-IMPORT-DRYRUN-01"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "4a88b5bbc594bf3554712803a206e56c7f3ad912",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2723",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -221,6 +221,18 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Implemented dry-run FAQ dedupe planning. Focused syntax, PHPUnit, real desktop v2 package dry-run, targeted Pint, YAML/JSON parse, diff check, and allowed-path scope validation passed. Local full ci_verify_mbti had external IQ branch-diff interference recorded as sidecar."
+      },
+      {
+        "at": "2026-07-05T04:58:45Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed BIG5-CMS-FAQ-DEDUPE-02 FAQ dedupe guard scope at 4a88b5bbc594bf3554712803a206e56c7f3ad912."
+      },
+      {
+        "at": "2026-07-05T04:58:45Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2723 for BIG5-CMS-FAQ-DEDUPE-02 and pushed branch codex/big5-cms-faq-dedupe-02."
       }
     ]
   },
