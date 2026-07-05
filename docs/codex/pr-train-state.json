@@ -49538,7 +49538,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-DRY-RUN-01"
     ],
-    "status": "pr_open",
+    "status": "merged",
     "authorized_by_user": "2026-07-05 user explicitly provided IQ 7 pages CMS上线执行计划 with this PR id, repo, scope, and dry-run/import/readback/publish/SEO-GEO split.",
     "checks": {
       "dependency": {
@@ -49572,20 +49572,28 @@
         "status": "failed_external_sidecar",
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ServiceLayerBoundaryTest --no-ansi",
         "evidence": "Failure points to pre-existing HTTP helper calls in backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogFixtureParser.php and backend/app/Services/Iq/IqOwnerOriginal30BankService.php, not the newly added backend/app/Services/Cms/IqMethodPages importer."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2721 before merge: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #2721 is MERGED; origin/main contains merge commit 83eb4781082f17e574a575b09b92d23acc75021d; local main was synced to origin/main; task branch codex/iq-method-pages-cms-import-01 was removed locally and remotely; worktree was clean after removing generated Big Five compiled test side effects."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
-    "commit_sha": "e840911382fac0376fc0f9145cea32062a87e88d",
+    "commit_sha": "83eb4781082f17e574a575b09b92d23acc75021d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2721",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T05:09:24Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_migration_execution_allowed": false,
     "database_mutation": true,
@@ -49646,6 +49654,11 @@
         "at": "2026-07-05T13:22:00+08:00",
         "status": "ready_to_merge",
         "summary": "GitHub checks passed on PR #2721 head 91eace541b3b9944346db7f3e9e572d847f20508: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      {
+        "at": "2026-07-05T13:09:24+08:00",
+        "status": "merged",
+        "summary": "Reconciled after merge: PR #2721 merged at 2026-07-05T05:09:24Z with merge commit 83eb4781082f17e574a575b09b92d23acc75021d; main synced and local/remote task branches cleaned. Reconciliation is bookkeeping included in the next same-repository PR."
       }
     ]
   },
@@ -79535,5 +79548,115 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-05T12:00:00+08:00"
+  "updated_at": "2026-07-05T12:00:00+08:00",
+  "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01": {
+    "id": "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-method-pages-cms-readback-01",
+    "title": "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01: add IQ method CMS readback QA",
+    "train_scope": "iq_method_pages_zh_cn_cms_readback",
+    "depends_on": [
+      "IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01"
+    ],
+    "status": "committed",
+    "authorized_by_user": "2026-07-05 user explicitly provided IQ 7 pages CMS上线执行计划 with readback as PR train step 3, after backend CMS import and before publish.",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01 PR #2721 is merged; origin/main contains merge commit 83eb4781082f17e574a575b09b92d23acc75021d."
+      },
+      "syntax": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Console/Commands/ArticleIqMethodPagesReadback.php",
+          "php -l backend/tests/Feature/Console/ArticleIqMethodPagesReadbackCommandTest.php"
+        ],
+        "evidence": "PASS: readback command and focused command test file report no syntax errors."
+      },
+      "command_discovery": {
+        "status": "pass",
+        "command": "cd backend && composer dump-autoload --no-ansi && php artisan list articles --no-ansi | rg 'iq-method-pages-readback|iq-method-pages|import-iq-method'",
+        "evidence": "PASS: articles:iq-method-pages-readback and articles:import-iq-method-pages-draft are discoverable after autoload refresh."
+      },
+      "pint_targeted": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Console/Commands/ArticleIqMethodPagesReadback.php tests/Feature/Console/ArticleIqMethodPagesReadbackCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php bootstrap/app.php",
+        "evidence": "PASS: 4 files."
+      },
+      "focused_readback_contract": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ArticleIqMethodPagesReadbackCommandTest --no-ansi",
+        "evidence": "PASS: 3 tests, 41 assertions. Covers import+readback success, missing CMS draft fail-closed behavior, and early public/indexable state blocking."
+      },
+      "focused_bigfive_runtime_freeze_classifier": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_iq_method_pages_cms_readback_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+        "evidence": "PASS: 2 tests, 4 assertions. The readback command registration is explicitly classified as non-runtime-only, and runtime path diff check passes locally."
+      },
+      "real_package_temp_sqlite_readback": {
+        "status": "pass",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/iq-method-readback-<temp>.sqlite php artisan migrate --force --no-ansi && php artisan articles:import-iq-method-pages-draft --package=/Users/rainie/Desktop/GitHub/fap-web --json && php artisan articles:iq-method-pages-readback --package=/Users/rainie/Desktop/GitHub/fap-web --json",
+        "evidence": "PASS: real fap-web IQ method dry-run package imported 7 draft articles into temp sqlite and readback returned ok=true, status=pass, article_readbacks=7, mismatch_count=0."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --path=api --except-vendor --no-ansi >/tmp/fap-api-route-list-api.txt",
+        "evidence": "PASS: route list generated 222 lines at /tmp/fap-api-route-list-api.txt."
+      },
+      "manifest_state_diff_validation": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "evidence": "PASS: train YAML parses, state JSON parses, and git diff whitespace check passes."
+      },
+      "composer_test_full_suite": {
+        "status": "failed_external_sidecar",
+        "command": "cd backend && composer test",
+        "evidence": "Composer test exceeded 300s and exited 1 after external Career/Content/MBTI/PDF/Architecture/ClinicalCombo/Commerce failures outside current READBACK scope. Recorded sidecar details in generated/pr-train-sidecar-issues/sidecar_issues.md and sidecar_issues.json."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the READBACK allowed paths: backend/app/Console/Commands/ArticleIqMethodPagesReadback.php, backend/bootstrap/app.php, backend/tests/Feature/Console/ArticleIqMethodPagesReadbackCommandTest.php, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, and generated/pr-train-sidecar-issues/**."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": "49c3008b77969b0b147fc223aa8c4c9e8792da18",
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "transitions": [
+      {
+        "at": "2026-07-05T13:20:00+08:00",
+        "status": "in_progress",
+        "summary": "Started backend read-only CMS readback QA command for seven zh-CN IQ method pages. Scope excludes CMS writes, production import, publishing, indexability, sitemap/llms activation, frontend fallback, scoring changes, and deploys."
+      },
+      {
+        "at": "2026-07-05T13:45:00+08:00",
+        "status": "local_validation_passed_with_external_sidecar",
+        "summary": "Implemented read-only IQ method pages CMS readback command/test and command registration. Focused local validation and real fap-web package import+readback on temp sqlite passed. Full composer test timed out after external failures outside current scope; sidecar recorded and train may continue subject to GitHub required checks."
+      },
+      {
+        "at": "2026-07-05T13:55:00+08:00",
+        "status": "committed",
+        "summary": "Committed IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01 scoped backend readback QA changes at 49c3008b77969b0b147fc223aa8c4c9e8792da18."
+      }
+    ]
+  }
 }

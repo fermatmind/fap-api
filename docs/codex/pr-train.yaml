@@ -36839,6 +36839,52 @@ prs:
     content_authority: CMS/backend
     next_task: IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01
 
+  - id: IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01
+    repo: fap-api
+    depends_on:
+      - IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01
+    branch: codex/iq-method-pages-cms-readback-01
+    title: "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01: add IQ method CMS readback QA"
+    train_scope: iq_method_pages_zh_cn_cms_readback
+    status: in_progress
+    scope:
+      - Add a backend read-only CMS readback command for the 7 zh-CN IQ method pages imported as drafts.
+      - Verify Article rows, working revisions, SEO meta, canonical, robots, topic IQ grouping, landing page block links, and private-route/scoring-token guards against the dry-run manifest.
+      - Fail closed when draft CMS rows are missing, public/indexable state appears early, or topic/landing mappings drift.
+      - Reconcile stale IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01 ledger facts only as same-repository PR-train bookkeeping.
+    allowed_paths:
+      - backend/app/Console/Commands/ArticleIqMethodPagesReadback.php
+      - backend/bootstrap/app.php
+      - backend/tests/Feature/Console/ArticleIqMethodPagesReadbackCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Publish articles, flip indexability, activate sitemap/llms, submit search URLs, run production deploy, rewrite content, change IQ scoring, expose answer keys, or add frontend fallback content.
+      - Mutate production CMS or production DB from this PR without separate exact environment authorization.
+    validation:
+      - php -l backend/app/Console/Commands/ArticleIqMethodPagesReadback.php
+      - php -l backend/tests/Feature/Console/ArticleIqMethodPagesReadbackCommandTest.php
+      - cd backend && php artisan list articles --no-ansi | rg 'iq-method-pages-readback|iq-method-pages'
+      - cd backend && vendor/bin/pint --test app/Console/Commands/ArticleIqMethodPagesReadback.php tests/Feature/Console/ArticleIqMethodPagesReadbackCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php bootstrap/app.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ArticleIqMethodPagesReadbackCommandTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_iq_method_pages_cms_readback_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && php artisan route:list --path=api --except-vendor --no-ansi >/tmp/fap-api-route-list-api.txt
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-01
+
   - id: IQ-V1-ITEM-DIMENSION-TAGGING-IMPLEMENTATION-01
     repo: fap-api
     depends_on:
