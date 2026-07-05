@@ -81122,7 +81122,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01"
     ],
-    "status": "pr_open_github_checks_pending",
+    "status": "ready_to_merge",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -81138,17 +81138,17 @@
         "evidence": "php -l command/test, artisan list articles, targeted Pint, focused ArticleIqMethodPagesSeoGeoActivateCommandTest plus ArticleDiscoverabilityReleaseCommandTest, focused BigFive freeze classifier tests, YAML/JSON parse, and git diff --check passed locally."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "PR #2746 opened for branch codex/iq-method-pages-seo-geo-activate-01; waiting for required GitHub checks."
+        "status": "pass",
+        "evidence": "All reported GitHub checks passed for PR #2746 at head e1e8980295cfd8c8dbb8e1c872cc49ae48de2305: Semgrep OSS, Semgrep blocking secrets, content-pack-build-validate, hygiene, semgrep sarif non-blocking upload, supply-chain, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
-    "commit_sha": "ff1fdad6457d52a6906924cec8d37830316e521e",
+    "commit_sha": "e1e8980295cfd8c8dbb8e1c872cc49ae48de2305",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2746",
     "failure_reason": null,
     "merged_at": null,
@@ -81185,6 +81185,11 @@
         "at": "2026-07-05T17:49:00Z",
         "status": "pr_open_github_checks_pending",
         "summary": "Opened PR #2746 for the scoped controlled IQ method SEO/GEO activation workflow and pushed local-validation-passed implementation. Waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-07-05T17:57:00Z",
+        "status": "ready_to_merge",
+        "summary": "All reported GitHub checks passed for PR #2746 at head e1e8980295cfd8c8dbb8e1c872cc49ae48de2305. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   },
