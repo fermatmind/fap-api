@@ -37486,3 +37486,208 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: BIG5-CMS-STAGING-IMPORT-RUNBOOK-09
+    repo: fap-api
+    depends_on:
+      - BIG5-CMS-PREVIEW-READBACK-QA-08
+    branch: codex/big5-cms-staging-import-runbook-09
+    title: "BIG5-CMS-STAGING-IMPORT-RUNBOOK-09: document Big Five staging CMS import runbook"
+    train_scope: big_five_cms_staging_to_release_readiness
+    status: user_authorized
+    scope:
+      - Document the staging/dev CMS import protocol for Big Five public personality content assets.
+      - Document forbidden actions, rollback handle requirements, required authorization fields, preflight evidence, and post-write QA.
+      - Keep this docs-only; do not execute CMS writes, production import, publishing, indexability release, sitemap/llms release, JSON-LD runtime release, deploy, or search release.
+      - Register the user-authorized follow-up staging/write/readback/publish/discoverability train items without implementing their scopes.
+    allowed_paths:
+      - docs/runbooks/big-five-cms-staging-import.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Modify backend runtime, importer logic, public API runtime, content assets, production CMS content, sitemap/llms runtime, JSON-LD runtime, canonical/noindex behavior, permissions, scheduler behavior, secrets, staging deploy, or production deploy.
+      - Execute BIG5-CMS-STAGING-WRITE-IMPORT-10 or any CMS write scope in this PR.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -m json.tool generated/big-five-content-polish/cms-import-draft.polished.json >/dev/null
+      - python3 -m json.tool generated/big-five-cms-import-dryrun/dryrun_report.json >/dev/null
+      - python3 -m json.tool generated/big-five-cms-preview-readback-qa/readback_qa_report.json >/dev/null
+      - rg -n "BIG5-CMS-STAGING-IMPORT-RUNBOOK-09|BIG5-CMS-STAGING-WRITE-IMPORT-10|BIG5-CMS-PREVIEW-RENDER-QA-11|BIG5-CMS-PUBLISH-GATE-12|BIG5-SEO-DISCOVERABILITY-RELEASE-13" docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: BIG5-CMS-STAGING-WRITE-IMPORT-10
+
+  - id: BIG5-CMS-STAGING-WRITE-IMPORT-10
+    repo: fap-api
+    depends_on:
+      - BIG5-CMS-STAGING-IMPORT-RUNBOOK-09
+    branch: codex/big5-cms-staging-write-import-10
+    title: "BIG5-CMS-STAGING-WRITE-IMPORT-10: execute authorized Big Five staging CMS write import"
+    train_scope: big_five_cms_staging_write_import
+    status: blocked_pending_staging_dev_write_authorization
+    scope:
+      - Execute the Big Five CMS staging/dev draft import only after explicit operator authorization.
+      - Record exact package path, package SHA, target environment, command, rollback handle, and resulting evidence.
+      - Keep imported rows draft/review, noindex, not public, not sitemap eligible, not llms eligible, and without runtime JSON-LD release.
+      - Do not touch production, publish content, release SEO/GEO discoverability, trigger deploy, or submit search.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Services/Cms/**
+      - backend/tests/Feature/**
+      - backend/tests/Unit/**
+      - docs/runbooks/big-five-cms-staging-import.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/big-five-cms-staging-write-import/**
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Execute any CMS write unless the thread contains the exact staging/dev authorization packet and confirmation phrase from the runbook.
+      - Run production import, publish, indexability release, sitemap/llms release, JSON-LD runtime release, search submission, manual deploy, staging deploy wait, or production deploy.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: true
+    cms_mutation: true
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: BIG5-CMS-PREVIEW-RENDER-QA-11
+
+  - id: BIG5-CMS-PREVIEW-RENDER-QA-11
+    repo: fap-api
+    depends_on:
+      - BIG5-CMS-STAGING-WRITE-IMPORT-10
+    branch: codex/big5-cms-preview-render-qa-11
+    title: "BIG5-CMS-PREVIEW-RENDER-QA-11: validate Big Five CMS preview render and public API payload"
+    train_scope: big_five_cms_preview_render_qa
+    status: pending_dependency
+    scope:
+      - Validate staging/dev CMS write readback, preview payloads, public API draft/readback payloads, FAQ dedupe, noindex gate, sitemap/llms blocking, and JSON-LD runtime blocking.
+      - Keep this verification-only; no frontend fallback, production import, publishing, indexability release, sitemap/llms release, JSON-LD runtime release, deploy, or search release.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Services/Cms/**
+      - backend/tests/Feature/**
+      - backend/tests/Unit/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/big-five-cms-preview-render-qa/**
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Add frontend content fallback.
+      - Run production import, publish, indexability release, sitemap/llms release, JSON-LD runtime release, search submission, manual deploy, staging deploy wait, or production deploy.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: BIG5-CMS-PUBLISH-GATE-12
+
+  - id: BIG5-CMS-PUBLISH-GATE-12
+    repo: fap-api
+    depends_on:
+      - BIG5-CMS-PREVIEW-RENDER-QA-11
+    branch: codex/big5-cms-publish-gate-12
+    title: "BIG5-CMS-PUBLISH-GATE-12: prepare reviewed Big Five Chinese assets for controlled publish gate"
+    train_scope: big_five_cms_publish_gate
+    status: blocked_pending_cms_manual_review_approval
+    scope:
+      - Prepare specified reviewed zh-CN Big Five pages for controlled publish-ready state after CMS manual review approval.
+      - Keep English Big Five pages draft unless explicitly approved.
+      - Preserve SEO discoverability gate control; do not release sitemap, llms, JSON-LD runtime, or canonical indexability in this PR.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Services/Cms/**
+      - backend/tests/Feature/**
+      - backend/tests/Unit/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/big-five-cms-publish-gate/**
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Execute publish-ready state changes unless CMS manual review approval and exact page list are present.
+      - Release sitemap, llms, JSON-LD runtime, canonical indexability, search submission, manual deploy, staging deploy wait, or production deploy.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: true
+    cms_mutation: true
+    api_runtime_change: true
+    publish_allowed: true
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: BIG5-SEO-DISCOVERABILITY-RELEASE-13
+
+  - id: BIG5-SEO-DISCOVERABILITY-RELEASE-13
+    repo: fap-api
+    depends_on:
+      - BIG5-CMS-PUBLISH-GATE-12
+    branch: codex/big5-seo-discoverability-release-13
+    title: "BIG5-SEO-DISCOVERABILITY-RELEASE-13: release reviewed Big Five assets to sitemap llms JSON-LD and indexability surfaces"
+    train_scope: big_five_seo_discoverability_release
+    status: blocked_pending_release_authorization
+    scope:
+      - Release only reviewed and approved Big Five CMS assets to sitemap, llms, JSON-LD runtime, and canonical indexability surfaces.
+      - Keep unreviewed English pages blocked.
+      - Preserve backend/CMS authority for metadata, canonical, sitemap, llms, and structured data enumeration.
+      - Do not run production deploy or production import without separate exact SHA authorization.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Services/Cms/**
+      - backend/app/Services/SEO/**
+      - backend/tests/Feature/**
+      - backend/tests/Unit/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/big-five-seo-discoverability-release/**
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Release unreviewed pages.
+      - Trigger manual deploy, staging deploy wait, production deploy, Search Channel submission, or production import without separate exact SHA authorization.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: true
+    cms_mutation: true
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: null

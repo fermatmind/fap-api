@@ -49944,8 +49944,8 @@
     "checks": {
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -81678,6 +81678,280 @@
         "from": "local_checks_passed",
         "to": "merged",
         "note": "Reconciled PR #2735 merge after final Big Five CMS asset readiness PR. GitHub reports merged, origin/main contains merge commit 60414b8683e4c6d74500d2dbd8517fbee2bab430, and branch cleanup is complete."
+      }
+    ]
+  },
+  "BIG5-CMS-STAGING-IMPORT-RUNBOOK-09": {
+    "id": "BIG5-CMS-STAGING-IMPORT-RUNBOOK-09",
+    "repo": "fap-api",
+    "title": "BIG5-CMS-STAGING-IMPORT-RUNBOOK-09: document Big Five staging CMS import runbook",
+    "base": "main",
+    "branch": "codex/big5-cms-staging-import-runbook-09",
+    "depends_on": [
+      "BIG5-CMS-PREVIEW-READBACK-QA-08"
+    ],
+    "status": "local_checks_passed",
+    "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User provided explicit id/title/scope/branch/dependency details in the /goal objective and allowed missing manifest/state entries to be added before implementation."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-CMS-PREVIEW-READBACK-QA-08 is merged and origin/main contains merge commit 60414b8683e4c6d74500d2dbd8517fbee2bab430."
+      },
+      "local_validation": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -m json.tool generated/big-five-content-polish/cms-import-draft.polished.json >/dev/null && python3 -m json.tool generated/big-five-cms-import-dryrun/dryrun_report.json >/dev/null && python3 -m json.tool generated/big-five-cms-preview-readback-qa/readback_qa_report.json >/dev/null && rg -n \"BIG5-CMS-STAGING-IMPORT-RUNBOOK-09|BIG5-CMS-STAGING-WRITE-IMPORT-10|BIG5-CMS-PREVIEW-RENDER-QA-11|BIG5-CMS-PUBLISH-GATE-12|BIG5-SEO-DISCOVERABILITY-RELEASE-13\" docs/codex/pr-train.yaml docs/codex/pr-train-state.json && git diff --check",
+        "evidence": "PASS: train YAML parses, state JSON parses, Big Five polished package/dry-run/readback QA JSON artifacts parse, all five requested PR ids are registered, and diff whitespace check passes."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to BIG5-CMS-STAGING-IMPORT-RUNBOOK-09 allowed paths: docs/runbooks/big-five-cms-staging-import.md, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": "BIG5-CMS-STAGING-WRITE-IMPORT-10",
+    "transitions": [
+      {
+        "at": "2026-07-05T08:50:40Z",
+        "status": "in_progress",
+        "summary": "Registered Big Five CMS staging-to-release readiness PR train item from the active /goal objective. Authorization-gated items must stop until their explicit gates are satisfied."
+      },
+      {
+        "at": "2026-07-05T08:51:00Z",
+        "status": "local_checks_passed",
+        "summary": "Runbook, manifest/state registration, generated artifact JSON parse, id registration, and diff checks passed. Scope is docs/runbook plus PR train metadata only."
+      }
+    ]
+  },
+  "BIG5-CMS-STAGING-WRITE-IMPORT-10": {
+    "id": "BIG5-CMS-STAGING-WRITE-IMPORT-10",
+    "repo": "fap-api",
+    "title": "BIG5-CMS-STAGING-WRITE-IMPORT-10: execute authorized Big Five staging CMS write import",
+    "base": "main",
+    "branch": "codex/big5-cms-staging-write-import-10",
+    "depends_on": [
+      "BIG5-CMS-STAGING-IMPORT-RUNBOOK-09"
+    ],
+    "status": "blocked_pending_staging_dev_write_authorization",
+    "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User provided explicit id/title/scope/branch/dependency details in the /goal objective and allowed missing manifest/state entries to be added before implementation."
+      },
+      "authorization_gate": {
+        "status": "blocked",
+        "evidence": "No exact staging/dev CMS write authorization packet is present yet. Execution must stop before any CMS write."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": true,
+    "cms_mutation": true,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": "BIG5-CMS-PREVIEW-RENDER-QA-11",
+    "transitions": [
+      {
+        "at": "2026-07-05T08:50:40Z",
+        "status": "blocked_pending_staging_dev_write_authorization",
+        "summary": "Registered Big Five CMS staging-to-release readiness PR train item from the active /goal objective. Authorization-gated items must stop until their explicit gates are satisfied."
+      }
+    ]
+  },
+  "BIG5-CMS-PREVIEW-RENDER-QA-11": {
+    "id": "BIG5-CMS-PREVIEW-RENDER-QA-11",
+    "repo": "fap-api",
+    "title": "BIG5-CMS-PREVIEW-RENDER-QA-11: validate Big Five CMS preview render and public API payload",
+    "base": "main",
+    "branch": "codex/big5-cms-preview-render-qa-11",
+    "depends_on": [
+      "BIG5-CMS-STAGING-WRITE-IMPORT-10"
+    ],
+    "status": "pending_dependency",
+    "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User provided explicit id/title/scope/branch/dependency details in the /goal objective and allowed missing manifest/state entries to be added before implementation."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Execution waits for BIG5-CMS-STAGING-WRITE-IMPORT-10 to merge."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": "BIG5-CMS-PUBLISH-GATE-12",
+    "transitions": [
+      {
+        "at": "2026-07-05T08:50:40Z",
+        "status": "pending_dependency",
+        "summary": "Registered Big Five CMS staging-to-release readiness PR train item from the active /goal objective. Authorization-gated items must stop until their explicit gates are satisfied."
+      }
+    ]
+  },
+  "BIG5-CMS-PUBLISH-GATE-12": {
+    "id": "BIG5-CMS-PUBLISH-GATE-12",
+    "repo": "fap-api",
+    "title": "BIG5-CMS-PUBLISH-GATE-12: prepare reviewed Big Five Chinese assets for controlled publish gate",
+    "base": "main",
+    "branch": "codex/big5-cms-publish-gate-12",
+    "depends_on": [
+      "BIG5-CMS-PREVIEW-RENDER-QA-11"
+    ],
+    "status": "blocked_pending_cms_manual_review_approval",
+    "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User provided explicit id/title/scope/branch/dependency details in the /goal objective and allowed missing manifest/state entries to be added before implementation."
+      },
+      "manual_review_gate": {
+        "status": "blocked",
+        "evidence": "No CMS manual review approval and exact zh-CN page list are present yet."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": true,
+    "cms_mutation": true,
+    "api_runtime_change": true,
+    "publish_allowed": true,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": "BIG5-SEO-DISCOVERABILITY-RELEASE-13",
+    "transitions": [
+      {
+        "at": "2026-07-05T08:50:40Z",
+        "status": "blocked_pending_cms_manual_review_approval",
+        "summary": "Registered Big Five CMS staging-to-release readiness PR train item from the active /goal objective. Authorization-gated items must stop until their explicit gates are satisfied."
+      }
+    ]
+  },
+  "BIG5-SEO-DISCOVERABILITY-RELEASE-13": {
+    "id": "BIG5-SEO-DISCOVERABILITY-RELEASE-13",
+    "repo": "fap-api",
+    "title": "BIG5-SEO-DISCOVERABILITY-RELEASE-13: release reviewed Big Five assets to sitemap llms JSON-LD and indexability surfaces",
+    "base": "main",
+    "branch": "codex/big5-seo-discoverability-release-13",
+    "depends_on": [
+      "BIG5-CMS-PUBLISH-GATE-12"
+    ],
+    "status": "blocked_pending_release_authorization",
+    "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User provided explicit id/title/scope/branch/dependency details in the /goal objective and allowed missing manifest/state entries to be added before implementation."
+      },
+      "release_authorization_gate": {
+        "status": "blocked",
+        "evidence": "No explicit SEO discoverability release authorization is present yet."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": true,
+    "cms_mutation": true,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": null,
+    "transitions": [
+      {
+        "at": "2026-07-05T08:50:40Z",
+        "status": "blocked_pending_release_authorization",
+        "summary": "Registered Big Five CMS staging-to-release readiness PR train item from the active /goal objective. Authorization-gated items must stop until their explicit gates are satisfied."
       }
     ]
   }
