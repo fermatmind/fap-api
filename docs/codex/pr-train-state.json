@@ -81876,7 +81876,7 @@
     "deploy_allowed": false,
     "scheduler_activation": false,
     "content_authority": "CMS/backend",
-    "next_task": "BIG5-CMS-STAGING-WRITE-IMPORT-10",
+    "next_task": "BIG5-CMS-STAGING-AUTH-PACKET-10A",
     "transitions": [
       {
         "at": "2026-07-05T08:50:40Z",
@@ -81895,6 +81895,76 @@
       }
     ]
   },
+  "BIG5-CMS-STAGING-AUTH-PACKET-10A": {
+    "id": "BIG5-CMS-STAGING-AUTH-PACKET-10A",
+    "repo": "fap-api",
+    "title": "BIG5-CMS-STAGING-AUTH-PACKET-10A: generate Big Five staging CMS write authorization packet",
+    "base": "main",
+    "branch": "codex/big5-cms-staging-auth-packet-10a",
+    "depends_on": [
+      "BIG5-CMS-STAGING-IMPORT-RUNBOOK-09"
+    ],
+    "status": "local_checks_passed",
+    "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging write readiness PR train in the /goal objective file.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User provided explicit id/title/scope/branch/dependency details in the active /goal objective and allowed missing manifest/state entries to be added before implementation."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-CMS-STAGING-IMPORT-RUNBOOK-09 PR #2741 is merged and origin/main contains merge commit 1b9e4e8fbb169ae16c141bee9aa5f726381717f5."
+      },
+      "authorization_packet": {
+        "status": "pass",
+        "evidence": "Generated generated/big-five-cms-staging-write-import/authorization_packet.json and .md. Packet contains no secrets, records staging target alias, package path, SHA-256, expected row count 42, rollback strategy, and confirmation phrase; it does not execute CMS writes or add a write command."
+      },
+      "local_validation": {
+        "status": "pass",
+        "command": "python3 -m json.tool generated/big-five-cms-staging-write-import/authorization_packet.json >/dev/null && python3 -m json.tool generated/big-five-content-polish/cms-import-draft.polished.json >/dev/null && python3 -m json.tool generated/big-five-cms-import-dryrun/dryrun_report.json >/dev/null && python3 -m json.tool generated/big-five-cms-preview-readback-qa/readback_qa_report.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && rg -n \"BIG5-CMS-STAGING-AUTH-PACKET-10A|BIG5-CMS-STAGING-WRITE-IMPORT-10|BIG5-CMS-PREVIEW-RENDER-QA-11\" docs/codex/pr-train.yaml docs/codex/pr-train-state.json && git diff --check",
+        "evidence": "PASS: authorization packet JSON parses, Big Five source/dry-run/readback JSON artifacts parse, packet SHA and row count match the source package, train YAML/state JSON parse, requested ids are registered, and diff whitespace check passes."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to BIG5-CMS-STAGING-AUTH-PACKET-10A allowed paths: generated/big-five-cms-staging-write-import/authorization_packet.json, generated/big-five-cms-staging-write-import/authorization_packet.md, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": "BIG5-CMS-STAGING-WRITE-IMPORT-10",
+    "transitions": [
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "status": "in_progress",
+        "summary": "Started non-secret authorization packet generation after BIG5-CMS-STAGING-IMPORT-RUNBOOK-09 merge was verified. Scope excludes CMS writes, write command implementation, publishing, indexability, sitemap/llms/JSON-LD runtime, search, and deploy."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "status": "local_checks_passed",
+        "summary": "Generated non-secret authorization packet and completed local validation. No CMS write, write command, publish, indexability, sitemap/llms/JSON-LD runtime, search, or deploy action was performed."
+      }
+    ]
+  },
   "BIG5-CMS-STAGING-WRITE-IMPORT-10": {
     "id": "BIG5-CMS-STAGING-WRITE-IMPORT-10",
     "repo": "fap-api",
@@ -81902,9 +81972,9 @@
     "base": "main",
     "branch": "codex/big5-cms-staging-write-import-10",
     "depends_on": [
-      "BIG5-CMS-STAGING-IMPORT-RUNBOOK-09"
+      "BIG5-CMS-STAGING-AUTH-PACKET-10A"
     ],
-    "status": "blocked_pending_staging_dev_write_authorization",
+    "status": "pending_dependency",
     "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
     "checks": {
       "manifest_registration": {
@@ -81912,12 +81982,12 @@
         "evidence": "User provided explicit id/title/scope/branch/dependency details in the /goal objective and allowed missing manifest/state entries to be added before implementation."
       },
       "dependency": {
-        "status": "pass",
-        "evidence": "BIG5-CMS-STAGING-IMPORT-RUNBOOK-09 PR #2741 is merged and origin/main contains merge commit 1b9e4e8fbb169ae16c141bee9aa5f726381717f5."
+        "status": "pending",
+        "evidence": "Execution waits for BIG5-CMS-STAGING-AUTH-PACKET-10A to merge before evaluating staging/dev connection availability and write execution."
       },
       "authorization_gate": {
-        "status": "blocked",
-        "evidence": "No exact staging/dev CMS write authorization packet is present yet. Execution must stop before any CMS write."
+        "status": "pending_dependency",
+        "evidence": "Authorization packet generation moved to BIG5-CMS-STAGING-AUTH-PACKET-10A; PR 10 must still stop if no runtime staging/dev CMS connection is available after 10A merges."
       }
     },
     "scope_validation": {
@@ -81948,6 +82018,11 @@
         "at": "2026-07-05T08:50:40Z",
         "status": "blocked_pending_staging_dev_write_authorization",
         "summary": "Registered Big Five CMS staging-to-release readiness PR train item from the active /goal objective. Authorization-gated items must stop until their explicit gates are satisfied."
+      },
+      {
+        "at": "2026-07-05T11:27:58Z",
+        "status": "pending_dependency",
+        "summary": "Updated dependency to BIG5-CMS-STAGING-AUTH-PACKET-10A so the non-secret authorization packet is generated before any staging/dev write evaluation."
       }
     ]
   },

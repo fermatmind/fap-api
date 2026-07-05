@@ -1,0 +1,100 @@
+{
+  "packet_id": "BIG5-CMS-STAGING-AUTH-PACKET-10A",
+  "status": "authorization_packet_generated",
+  "generated_at_utc": "2026-07-05T00:00:00Z",
+  "repo": "fap-api",
+  "target_pr": "BIG5-CMS-STAGING-WRITE-IMPORT-10",
+  "authorization_scope": "staging_or_dev_draft_write_only",
+  "contains_secrets": false,
+  "target": {
+    "environment": "staging",
+    "backend_connection_alias": "staging-cms-nonsecret-alias",
+    "database_connection_name": "staging",
+    "connection_secret_material_included": false,
+    "notes": "This packet records the non-secret operator authorization envelope only. Runtime credentials, DSNs, passwords, tokens, and private hosts must be supplied by the approved staging/dev runtime environment, not this repository artifact."
+  },
+  "source": {
+    "git_sha_at_packet_generation": "38a599056a10886e161c9d99cacb31d87b465a87",
+    "package_path": "generated/big-five-content-polish/cms-import-draft.polished.json",
+    "package_sha256": "15d6b6df08cf3ce7c9cd8a859b566c5bfd5fc4f6c6b279c493d48bc9e447ebc6",
+    "package_size_bytes": 260476,
+    "expected_row_count": 42,
+    "allowed_content_types": [
+      "hub_page",
+      "trait_page",
+      "trait_range_page",
+      "combination_page",
+      "cross_reading_page",
+      "result_review_page"
+    ],
+    "allowed_locales": [
+      "zh-CN",
+      "en-US"
+    ]
+  },
+  "preflight_evidence": {
+    "dry_run_report": "generated/big-five-cms-import-dryrun/dryrun_report.json",
+    "dry_run_ok": true,
+    "dry_run_row_count": 42,
+    "dry_run_writes_committed": false,
+    "dry_run_cms_write_attempted": false,
+    "dry_run_publish_attempted": false,
+    "dry_run_index_attempted": false,
+    "dry_run_sitemap_llms_release_attempted": false,
+    "preview_readback_planning_report": "generated/big-five-cms-preview-readback-qa/readback_qa_report.json",
+    "preview_readback_planning_status": "pass"
+  },
+  "authorized_actions": {
+    "staging_or_dev_cms_draft_write": true,
+    "production_import": false,
+    "publish": false,
+    "indexability_release": false,
+    "sitemap_release": false,
+    "llms_release": false,
+    "jsonld_runtime_release": false,
+    "search_submission": false,
+    "manual_deploy": false,
+    "staging_deploy_wait": false,
+    "production_deploy": false
+  },
+  "required_write_guardrails": {
+    "reject_production_environment": true,
+    "reject_production_database_connection": true,
+    "reject_package_sha_mismatch": true,
+    "reject_row_count_mismatch": true,
+    "reject_old_short_big_five_routes": true,
+    "reject_private_result_order_share_payment_account_urls": true,
+    "reject_sensitive_query_parameters": true,
+    "keep_rows_draft_review": true,
+    "keep_rows_noindex": true,
+    "keep_rows_not_public": true,
+    "keep_rows_not_sitemap_eligible": true,
+    "keep_rows_not_llms_eligible": true,
+    "keep_runtime_jsonld_blocked": true,
+    "keep_faq_field_as_only_structured_faq_source": true
+  },
+  "rollback": {
+    "strategy": "import_batch_id_plus_pre_import_snapshot_or_export",
+    "required_before_write": true,
+    "acceptable_handles": [
+      "import_batch_id",
+      "per_row_previous_revision_ids",
+      "pre_import_export_file",
+      "staging_database_snapshot_id",
+      "deterministic_delete_criteria_for_import_batch"
+    ],
+    "must_not_touch_production": true
+  },
+  "operator_authorization": {
+    "operator_name_or_handle": "rainie",
+    "approval_record": "Codex thread goal d59d041f-27b5-4bec-ad1b-c3de20141b7b authorized generating this non-secret packet; staging/dev write execution remains conditional on runtime connection availability.",
+    "confirmation_phrase": "I authorize Big Five CMS staging/dev draft import only. No production import, publish, indexability, sitemap, llms, JSON-LD runtime, deploy, or search release is authorized."
+  },
+  "execution_boundary": {
+    "this_packet_executes_writes": false,
+    "this_packet_adds_write_command": false,
+    "pr_10_must_stop_if_no_staging_dev_connection": true,
+    "pr_10_must_not_simulate_success": true,
+    "pr_11_must_wait_for_pr_10_write_evidence": true
+  }
+}
