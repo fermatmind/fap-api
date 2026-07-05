@@ -80684,7 +80684,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01"
     ],
-    "status": "ready_to_merge",
+    "status": "merged",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -80698,20 +80698,24 @@
       "local_validation": {
         "status": "pass",
         "evidence": "php -l command/test, artisan list articles, focused PHPUnit, targeted Pint, route:list api, YAML/JSON parse, and git diff --check passed locally."
+      },
+      "merge_reconciliation": {
+        "status": "pass",
+        "evidence": "PR #2736 is MERGED at merge commit 5ef398f3cdbd6e4e14751524db8a5f25ab1a4f72; origin/main contains the merge commit; local main was synced; task branch codex/iq-method-pages-publish-gate-01 was deleted locally and remotely."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": true
     },
-    "commit_sha": null,
+    "commit_sha": "5ef398f3cdbd6e4e14751524db8a5f25ab1a4f72",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2736",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T08:02:35Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_migration_execution_allowed": false,
     "database_mutation": false,
@@ -80753,6 +80757,11 @@
         "at": "2026-07-05T16:24:00+08:00",
         "status": "ready_to_merge",
         "summary": "GitHub checks passed for PR #2736 after the current-scope freeze-classifier fix. Ready for squash merge under the PR train merge policy."
+      },
+      {
+        "at": "2026-07-05T16:25:00+08:00",
+        "status": "merged",
+        "summary": "Reconciled post-merge state for PR #2736: GitHub reports MERGED, origin/main contains merge commit 5ef398f3cdbd6e4e14751524db8a5f25ab1a4f72, local main is synced, and the task branch is deleted locally/remotely."
       }
     ]
   },
@@ -80766,7 +80775,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01"
     ],
-    "status": "pending_dependency",
+    "status": "local_validation_passed",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -80774,13 +80783,17 @@
         "evidence": "User authorized adding this missing PR-train item after the scan split publish/activation into gated tasks."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Wait for IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01 to merge before starting review approval workflow implementation."
+        "status": "pass",
+        "evidence": "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01 PR #2736 is merged; origin/main contains merge commit 5ef398f3cdbd6e4e14751524db8a5f25ab1a4f72."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "php -l command/test, artisan list articles, targeted Pint, focused ArticleIqMethodPagesReviewApprovalCommandTest, focused BigFive freeze classifier tests, YAML/JSON parse, and git diff --check passed locally."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -80806,6 +80819,16 @@
         "at": "2026-07-05T13:55:29+08:00",
         "status": "pending_dependency",
         "summary": "Registered controlled review approval workflow. Execution waits for publish gate merge and still requires exact deployed SHA authorization before any production review approval write."
+      },
+      {
+        "at": "2026-07-05T16:25:00+08:00",
+        "status": "in_progress",
+        "summary": "Started controlled review approval workflow on branch codex/iq-method-pages-review-approval-01 from origin/main after publish gate dependency merge was reconciled. Scope excludes publish, indexability, sitemap/llms activation, search submission, frontend fallback, deploy, and production execution."
+      },
+      {
+        "at": "2026-07-05T16:28:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "Implemented controlled review approval command and tests. Local validation passed; no production review approval write, publish, indexability, sitemap, llms, search action, deploy, or frontend fallback was performed."
       }
     ]
   },
