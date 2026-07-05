@@ -1,0 +1,68 @@
+{
+  "task_id": "RESULT-INTERPRETATION-PAGE-INVENTORY-READONLY-01",
+  "repo": "fap-api",
+  "generated_at": "2026-07-06",
+  "scope": "generated-only read-only inventory of public result interpretation pages for six core tests",
+  "runtime_impact": "none",
+  "cms_impact": "none",
+  "search_submission_impact": "none",
+  "deploy_impact": "none",
+  "fap_web_impact": "none",
+  "private_result_url_access": false,
+  "decision": "result_interpretation_inventory_completed_content_gaps_confirmed",
+  "inventory": {
+    "MBTI": [
+      "/zh/articles/mbti-full-report-career-relationship-communication",
+      "/en/articles/mbti-full-report-career-relationship-communication",
+      "/zh/articles/mbti-growth-guide",
+      "/zh/articles/mbti-narrative-portrait",
+      "/zh/career/guides/from-mbti-to-job-fit"
+    ],
+    "BIG5_OCEAN": [
+      "/zh/articles/big-five-growth-guide",
+      "/zh/articles/big-five-narrative-portrait",
+      "/zh/articles/big-five-tool-guide",
+      "/zh/career/guides/big5-for-career-decisions"
+    ],
+    "ENNEAGRAM": [
+      "/zh/articles/enneagram-personality-test-explained"
+    ],
+    "RIASEC": [
+      "/zh/articles/riasec-holland-career-interest-test-explained",
+      "/zh/articles/gaokao-score-major-shortlist-riasec-checklist"
+    ],
+    "IQ_RAVEN": [
+      "/zh/articles/iq-test-score-and-limits-explained",
+      "/zh/articles/iq-test-growth-guide",
+      "/zh/articles/iq-test-narrative-portrait",
+      "/zh/articles/iq-test-tool-guide",
+      "/zh/career/guides/iq-eq-balance-at-work"
+    ],
+    "EQ_60": [
+      "/zh/articles/eq-test-tool-guide"
+    ]
+  },
+  "evidence_sources": [
+    "https://fermatmind.com/sitemap.xml",
+    "backend/docs/seo/result-en-parity-00-assessment-result-content-inventory.md",
+    "backend/docs/seo/daily-runs/2026-07-06/money-intent-owner-page-map-readonly-01/OWNER_PAGE_MAP.md"
+  ],
+  "next_requested_train_item": "ZH-RIASEC-GAOKAO-MAJOR-CAREER-CLUSTER-PLAN-01",
+  "deferred_items": [
+    "no CMS write",
+    "no article draft creation",
+    "no private result URL access",
+    "no result/report API mutation",
+    "no title/meta/H1/FAQ/schema edits",
+    "no sitemap or llms edits",
+    "no search submission",
+    "no staging deploy wait",
+    "no manual deploy",
+    "no production deploy"
+  ],
+  "validation": {
+    "json_tool": "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-06/result-interpretation-page-inventory-readonly-01/scan_manifest.json >/dev/null",
+    "diff_check": "git diff --check",
+    "cached_diff_check": "git diff --cached --check"
+  }
+}
