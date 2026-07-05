@@ -80651,8 +80651,8 @@
     "depends_on": [
       "BIG5-CMS-FAQ-DEDUPE-02"
     ],
-    "status": "pr_open",
-    "commit_sha": "b7c242a86",
+    "status": "ready_to_merge",
+    "commit_sha": "57ca03963bd0c9cf3383b73a714c43fa78f6ab0e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2725",
     "failure_reason": null,
     "merged_at": null,
@@ -80700,12 +80700,16 @@
         "status": "pass",
         "command": "cd backend && php artisan route:list --path=api --except-vendor --no-ansi >/tmp/fap-api-route-list-api-big5-03.txt",
         "evidence": "PASS: route list generated 222 lines at /tmp/fap-api-route-list-api-big5-03.txt; no route path changes were introduced."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2725 head 57ca03963bd0c9cf3383b73a714c43fa78f6ab0e: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -80732,6 +80736,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR #2725 for BIG5-CMS-INDEXABILITY-GATE-03 and pushed branch codex/big5-cms-indexability-gate-03."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "PR #2725 remote checks passed. Marked ready to merge under squash merge policy."
       }
     ]
   },
