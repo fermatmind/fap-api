@@ -81209,9 +81209,9 @@
     "depends_on": [
       "BIG5-CMS-DISCOVERABILITY-SURFACE-04"
     ],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "c713e9aed91d25d72bbe9beaaa31d77afc09d7db",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2730",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -81279,6 +81279,12 @@
         "from": "local_checks_passed",
         "to": "committed",
         "note": "Committed BIG5-CONTENT-QUALITY-REVIEW-05 review artifacts at c713e9aed."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2730 for BIG5-CONTENT-QUALITY-REVIEW-05 and pushed branch codex/big5-content-quality-review-05."
       }
     ]
   }
