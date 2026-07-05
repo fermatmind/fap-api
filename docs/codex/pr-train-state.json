@@ -81987,7 +81987,7 @@
     "depends_on": [
       "BIG5-CMS-STAGING-AUTH-PACKET-10A"
     ],
-    "status": "ci_fix_applied",
+    "status": "merged_staging_write_evidence_recorded",
     "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
     "checks": {
       "manifest_registration": {
@@ -82028,27 +82028,51 @@
         "evidence": "Opened PR #2751: https://github.com/fermatmind/fap-api/pull/2751"
       },
       "github_checks": {
-        "status": "failed_then_fixed_locally",
-        "evidence": "PR #2751 verify-bigfive failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier flagged the new PR10 import-only command/service and Kernel registration as runtime changes. Logs inspected for jobs 85224630726 and 85224633459. Added explicit classifier allowlist and test for PersonalityBigFiveCmsStagingWriteImport/BigFiveCmsImportDraftStagingWriter; focused freeze test now passes locally."
+        "status": "pass",
+        "evidence": "PR #2751 verify-bigfive initially failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier flagged the new PR10 import-only command/service and Kernel registration as runtime changes. Logs inspected for jobs 85224630726 and 85224633459. Added explicit classifier allowlist and test for PersonalityBigFiveCmsStagingWriteImport/BigFiveCmsImportDraftStagingWriter; required GitHub checks passed before squash merge into main as 09b0af0e911451ffa1bcbd3f1050cb7a0cbaf4f6."
       },
       "ci_fix_validation": {
         "status": "pass",
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|big_five_cms_staging_write_import' --no-ansi; cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsStagingWriteImportCommandTest --no-ansi; cd backend && ./vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php; ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"; python3 -m json.tool docs/codex/pr-train-state.json >/dev/null; git diff --check",
         "evidence": "PASS: focused failing freeze tests, staging write command tests, scoped Pint, YAML/JSON validation, and diff check passed. PHPUnit emitted existing missing backend/.env warnings; assertions passed."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "origin/main contains PR #2751 squash merge commit 09b0af0e911451ffa1bcbd3f1050cb7a0cbaf4f6; local main was synced before staging runtime execution; PR10 task branch cleanup completed before evidence closeout."
+      },
+      "staging_runtime_command": {
+        "status": "pass",
+        "evidence": "Staging release /var/www/fap-api-staging/releases/28741701561-1 exposes personality:big-five-cms-import-draft-dry-run and personality:big-five-cms-staging-write-import."
+      },
+      "staging_dry_run_execution": {
+        "status": "pass",
+        "evidence": "Remote staging dry-run passed with row_count=42, write=false, writes_committed=false, and expected package SHA 15d6b6df08cf3ce7c9cd8a859b566c5bfd5fc4f6c6b279c493d48bc9e447ebc6. Evidence: generated/big-five-cms-staging-write-import/staging_dryrun_evidence.json."
+      },
+      "staging_write_execution": {
+        "status": "pass",
+        "evidence": "Remote staging/dev write passed with row_count=42, created_asset_count=42, updated_asset_count=0, skipped_existing_count=0, writes_committed=true, rollback_handle=big5-cms-staging-15d6b6df08cf-20260705140633. Evidence: generated/big-five-cms-staging-write-import/write_evidence.json."
+      },
+      "staging_readback_gate": {
+        "status": "pass",
+        "evidence": "Readback by source_package_hash found 42 rows; is_public/index/sitemap/llms/published_at/runtime_jsonld counts are all 0; robots=noindex,follow; launch_state=review; review_state=cms_import_draft_pending_review; FAQ-like body_sections count=0. Evidence: generated/big-five-cms-staging-write-import/staging_write_readback_gate.json."
+      },
+      "evidence_closeout_scope_validation": {
+        "status": "pass",
+        "evidence": "Evidence closeout changed only generated/big-five-cms-staging-write-import/** and docs/codex/pr-train-state.json, both allowed by the PR10 manifest scope."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
-    "commit_sha": "e743e0fa2e677de2d3f270846cf54122a6fdf2d7",
+    "commit_sha": "09b0af0e911451ffa1bcbd3f1050cb7a0cbaf4f6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2751",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T13:03:07Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_migration_execution_allowed": false,
     "database_mutation": true,
@@ -82100,6 +82124,11 @@
         "at": "2026-07-05T12:57:31Z",
         "status": "ci_fix_applied",
         "summary": "Inspected failed verify-bigfive job and fixed the PR10-caused runtime freeze classifier allowlist gap within backend/tests/Unit scope. No CMS write, publish, indexability, sitemap/llms/JSON-LD runtime, search, deploy, or production action was performed."
+      },
+      {
+        "at": "2026-07-05T14:10:00Z",
+        "status": "merged_staging_write_evidence_recorded",
+        "summary": "Recorded PR10 merge, staging dry-run, staging/dev draft write, readback gate, rollback handle, and evidence artifacts. No production import, publish, indexability release, sitemap/llms release, JSON-LD runtime release, search submission, manual deploy, or production deploy was performed."
       }
     ]
   },
@@ -82112,7 +82141,7 @@
     "depends_on": [
       "BIG5-CMS-STAGING-WRITE-IMPORT-10"
     ],
-    "status": "pending_dependency",
+    "status": "pending",
     "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
     "checks": {
       "manifest_registration": {
@@ -82120,8 +82149,8 @@
         "evidence": "User provided explicit id/title/scope/branch/dependency details in the /goal objective and allowed missing manifest/state entries to be added before implementation."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Execution waits for BIG5-CMS-STAGING-WRITE-IMPORT-10 to merge."
+        "status": "pass",
+        "evidence": "BIG5-CMS-STAGING-WRITE-IMPORT-10 PR #2751 is merged and its staging/dev write/readback evidence is recorded in generated/big-five-cms-staging-write-import/."
       }
     },
     "scope_validation": {
@@ -82152,6 +82181,11 @@
         "at": "2026-07-05T08:50:40Z",
         "status": "pending_dependency",
         "summary": "Registered Big Five CMS staging-to-release readiness PR train item from the active /goal objective. Authorization-gated items must stop until their explicit gates are satisfied."
+      },
+      {
+        "at": "2026-07-05T14:10:00Z",
+        "status": "pending",
+        "summary": "Dependency BIG5-CMS-STAGING-WRITE-IMPORT-10 is merged and staging write evidence is recorded; PR11 may start preview/readback QA."
       }
     ]
   },
