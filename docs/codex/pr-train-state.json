@@ -80775,7 +80775,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
     "checks": {
       "manifest_registration": {
@@ -80791,17 +80791,17 @@
         "evidence": "php -l command/test, artisan list articles, targeted Pint, focused ArticleIqMethodPagesReviewApprovalCommandTest, focused BigFive freeze classifier tests, YAML/JSON parse, and git diff --check passed locally."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "PR #2738 opened for branch codex/iq-method-pages-review-approval-01; waiting for required GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2738 GitHub checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
-    "commit_sha": "edceae391cf4ccd5fd69f8f7f1a19ce2e96f345f",
+    "commit_sha": "f4da8facec47bf0afd63431fea6ea4e4183055c5",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2738",
     "failure_reason": null,
     "merged_at": null,
@@ -80838,6 +80838,11 @@
         "at": "2026-07-05T16:34:00+08:00",
         "status": "github_checks_pending",
         "summary": "Opened PR #2738 for the scoped review approval workflow and pushed the local-validation-passed implementation. Waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-07-05T16:42:00+08:00",
+        "status": "ready_to_merge",
+        "summary": "GitHub checks passed for PR #2738. Ready for squash merge under the PR train merge policy; no publish, indexability, sitemap, llms, search action, deploy, or production execution was performed."
       }
     ]
   },
