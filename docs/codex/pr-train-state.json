@@ -26298,7 +26298,7 @@
         "status": "pass"
       },
       "github": {
-        "evidence": "PR #2525 checks succeeded after rebase on head 86e2b196cf2121393ca00be73ce382148e859ebd: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload.",
+        "evidence": "PR #2731 merged at 2026-07-05T07:25:27Z with merge commit d0c409f27e27cbe793ec9b05f85024226dee8cba after required GitHub checks succeeded. Prior PR #2525 was already merged and reconciled as the earlier 4-item FAQ authority pass.",
         "status": "pass"
       },
       "manifest_yaml_parse": {
@@ -26331,7 +26331,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": "bf9d1eb05",
+    "commit_sha": "d0c409f27e27cbe793ec9b05f85024226dee8cba",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -26383,17 +26383,22 @@
         "at": "2026-07-05T14:54:20+08:00",
         "status": "pr_open",
         "note": "Opened PR #2731 for the 2026-07-05 MBTI main visible FAQ 8-item authority expansion."
+      },
+      {
+        "at": "2026-07-05T15:25:27+08:00",
+        "status": "merged",
+        "note": "PR #2731 merged with merge commit d0c409f27e27cbe793ec9b05f85024226dee8cba. Post-merge cleanup confirmed origin/main contains the merge commit, local main was synced, the worktree was clean, local task branch was deleted, and the remote task branch was absent after prune."
       }
     ],
     "failure_reason": null,
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-05T07:25:27Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2731",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "merged",
     "title": "MBTI-MAIN-FREE-FAQ-CONTENT-01: seo(mbti): strengthen main free-test visible FAQ authority",
     "train_scope": "mbti_main_visible_faq_content_authority"
   },
