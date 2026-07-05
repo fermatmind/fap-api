@@ -446,6 +446,61 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->assertStringNotContainsString('/personality/big-five', $sitemapLocs);
     }
 
+    public function test_big_five_assets_do_not_enter_sitemap_without_explicit_discoverability_release_surface(): void
+    {
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'index_eligible' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'published_at' => now()->subMinute(),
+            'schema_json' => [
+                '@type' => 'WebPage',
+                'name' => 'Published indexable Big Five page',
+            ],
+        ]));
+
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'entity_key' => 'big-five-zh',
+            'locale' => 'zh-CN',
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'canonical_json' => [
+                'path' => '/zh/personality/big-five',
+            ],
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            'index_eligible' => false,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+        ]));
+
+        $publishedAsset = PersonalityPublicContentAsset::query()
+            ->where('locale', 'en')
+            ->firstOrFail();
+        $draftReviewAsset = PersonalityPublicContentAsset::query()
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+
+        $this->assertTrue((bool) $publishedAsset->sitemap_eligible);
+        $this->assertTrue((bool) $publishedAsset->llms_eligible);
+        $this->assertFalse((bool) $draftReviewAsset->sitemap_eligible);
+        $this->assertFalse((bool) $draftReviewAsset->llms_eligible);
+
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/big-five?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.index_eligible', true)
+            ->assertJsonPath('personality_public_content_asset_v1.sitemap_eligible', true)
+            ->assertJsonPath('personality_public_content_asset_v1.llms_eligible', true)
+            ->assertJsonPath('personality_public_content_asset_v1.schema_runtime_eligible', true);
+
+        $sitemapLocs = collect(app(SitemapGenerator::class)->generateUrls())
+            ->pluck('loc')
+            ->implode("\n");
+
+        $this->assertStringNotContainsString('https://fermatmind.com/en/personality/big-five', $sitemapLocs);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five', $sitemapLocs);
+        $this->assertStringNotContainsString('/personality/big-five', $sitemapLocs);
+    }
+
     public function test_noindex_content_ready_big_five_asset_suppresses_runtime_schema(): void
     {
         PersonalityPublicContentAsset::query()->create($this->assetAttributes([

@@ -80982,13 +80982,13 @@
     "depends_on": [
       "BIG5-CMS-FAQ-DEDUPE-02"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "57ca03963bd0c9cf3383b73a714c43fa78f6ab0e",
+    "status": "merged",
+    "commit_sha": "170f41cddc898d0def3262111a96384b30f718cd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2725",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T06:09:02Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -81035,13 +81035,17 @@
       "github_checks": {
         "status": "pass",
         "evidence": "PASS on PR #2725 head 57ca03963bd0c9cf3383b73a714c43fa78f6ab0e: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #2725 merged at 2026-07-05T06:09:02Z with merge commit 170f41cddc898d0def3262111a96384b30f718cd. origin/main contains the merge commit, local main was synced to origin/main, worktree was clean, and branch codex/big5-cms-indexability-gate-03 was absent locally and remotely."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -81073,6 +81077,12 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "PR #2725 remote checks passed. Marked ready to merge under squash merge policy."
+      },
+      {
+        "at": "2026-07-05T06:09:02Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #2725 merge before continuing BIG5-CMS-DISCOVERABILITY-SURFACE-04. GitHub reports merged, origin/main contains merge commit 170f41cddc898d0def3262111a96384b30f718cd, local main was synced, and the task branch is already deleted locally and remotely."
       }
     ]
   },
@@ -81085,9 +81095,9 @@
     "depends_on": [
       "BIG5-CMS-INDEXABILITY-GATE-03"
     ],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "c632eac7bb73e4e8b6899b5599d982e61407cc53",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2728",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -81098,14 +81108,47 @@
         "evidence": "User explicitly authorized registering BIG5-CMS-DISCOVERABILITY-SURFACE-04 in the attached /goal execution request."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for BIG5-CMS-INDEXABILITY-GATE-03 to merge."
+        "status": "pass",
+        "evidence": "BIG5-CMS-INDEXABILITY-GATE-03 PR #2725 is merged and origin/main contains merge commit 170f41cddc898d0def3262111a96384b30f718cd."
+      },
+      "focused_discoverability_regression": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityPublicContentAssetContractTest::test_big_five_assets_do_not_enter_sitemap_without_explicit_discoverability_release_surface' --no-ansi",
+        "evidence": "PASS: 1 test, 12 assertions. Covers fail-closed Big Five sitemap enumeration when CMS flags exist and no explicit discoverability release surface exists."
+      },
+      "manifest_required_tests": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityPublicContentAssetContractTest|SitemapSourceApiTest|SitemapGeneratorTest' --no-ansi",
+        "evidence": "PASS: 29 tests, 912 assertions."
+      },
+      "pint_targeted": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/SitemapGeneratorTest.php",
+        "evidence": "PASS: 3 files."
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+        "evidence": "PASS: full backend verification chain completed successfully. Generated Big Five compiled artifacts were restored because they were verification byproducts outside current PR scope."
+      },
+      "manifest_state_diff_validation": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "evidence": "PASS: train YAML parses, state JSON parses, and diff whitespace check passes."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to BIG5-CMS-DISCOVERABILITY-SURFACE-04 allowed paths: backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php and docs/codex/pr-train-state.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2728 head c632eac7bb73e4e8b6899b5599d982e61407cc53: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -81114,6 +81157,36 @@
         "from": "user_authorized",
         "to": "pending_dependency",
         "note": "Registered dependent PR train item; execution waits for BIG5-CMS-INDEXABILITY-GATE-03 merge."
+      },
+      {
+        "at": "2026-07-05T06:09:02Z",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "note": "Started discoverability-surface audit PR after BIG5-CMS-INDEXABILITY-GATE-03 merge was verified."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Added fail-closed Big Five public content asset sitemap enumeration regression and completed manifest local validation. No sitemap, llms, JSON-LD, CMS write, publishing, or production action was performed."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed BIG5-CMS-DISCOVERABILITY-SURFACE-04 discoverability surface regression scope at ba5c55f75."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2728 for BIG5-CMS-DISCOVERABILITY-SURFACE-04 and pushed branch codex/big5-cms-discoverability-surface-04."
+      },
+      {
+        "at": "2026-07-05T06:28:41Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "PR #2728 remote checks passed. Marked ready to merge under squash merge policy."
       }
     ]
   },
