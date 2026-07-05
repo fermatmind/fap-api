@@ -180,6 +180,7 @@ use App\Console\Commands\PersonalityAgentApprovalQueueCommand;
 use App\Console\Commands\PersonalityAgentApprovalQueueReviewCommand;
 use App\Console\Commands\PersonalityAgentPostPromotionSearchGateCommand;
 use App\Console\Commands\PersonalityBigFiveCmsImportDraftDryRun;
+use App\Console\Commands\PersonalityBigFiveCmsStagingWriteImport;
 use App\Console\Commands\PersonalityBigFivePublicProfileAgentDraft;
 use App\Console\Commands\PersonalityEnneagramCmsDraft;
 use App\Console\Commands\PersonalityImportDesktopCloneBaseline;
@@ -269,6 +270,7 @@ class Kernel extends ConsoleKernel
         PersonalityAgentApprovalQueueReviewCommand::class,
         PersonalityAgentPostPromotionSearchGateCommand::class,
         PersonalityBigFiveCmsImportDraftDryRun::class,
+        PersonalityBigFiveCmsStagingWriteImport::class,
         PersonalityBigFivePublicProfileAgentDraft::class,
         PersonalityEnneagramCmsPromote::class,
         PersonalityEnneagramCmsDraft::class,
