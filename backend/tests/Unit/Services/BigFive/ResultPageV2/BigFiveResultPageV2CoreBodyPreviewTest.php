@@ -180,6 +180,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ];
 
         $changed = $this->gitChangedFilesInBranchDiff($runtimePaths);
+        $changed = $this->mbtiImpactingRuntimeChanges($changed, (string) getcwd(), 'origin/main');
 
         $this->assertSame([], $changed);
     }
@@ -426,6 +427,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $kernelChangedLines = [
             '+use App\\Console\\Commands\\PersonalityBigFiveCmsPreviewRenderQa;',
             '+        PersonalityBigFiveCmsPreviewRenderQa::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
+    public function test_runtime_freeze_classifier_ignores_big_five_cms_publish_gate_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityBigFiveCmsPublishGate.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/BigFiveCmsPublishGateWriter.php',
+            'backend/tests/Feature/Console/PersonalityBigFiveCmsPublishGateCommandTest.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\PersonalityBigFiveCmsPublishGate;',
+            '+        PersonalityBigFiveCmsPublishGate::class,',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
@@ -5089,6 +5106,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveCmsPublishGateFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveProductionContentAuditFile($file)) {
                 continue;
             }
@@ -6386,6 +6407,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsBigFiveCmsImportDraftDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveCmsStagingWriteImportOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveCmsPreviewRenderQaOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsBigFiveCmsPublishGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFivePublicProfileAgentDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFivePublicProfileAgentPromotionOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoOpsP0CtrArticleCmsUpdateWriterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6632,6 +6654,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveCmsPreviewRenderQa.php',
             'backend/app/Services/Cms/BigFiveCmsPreviewRenderQaValidator.php',
+        ], true);
+    }
+
+    private function isBigFiveCmsPublishGateFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveCmsPublishGate.php',
+            'backend/app/Services/Cms/BigFiveCmsPublishGateWriter.php',
+            'backend/tests/Feature/Console/PersonalityBigFiveCmsPublishGateCommandTest.php',
         ], true);
     }
 
@@ -11040,6 +11071,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         foreach ($changedLines as $line) {
             $normalized = ltrim($line, '+-');
             if (preg_match('/\bPersonalityBigFiveCmsPreviewRenderQa\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsBigFiveCmsPublishGateOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\bPersonalityBigFiveCmsPublishGate\b/u', $normalized) !== 1) {
                 return false;
             }
         }
