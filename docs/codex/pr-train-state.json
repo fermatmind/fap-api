@@ -81095,8 +81095,8 @@
     "depends_on": [
       "BIG5-CMS-INDEXABILITY-GATE-03"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "ba5c55f7546e1659d7409ccd831ff903a2bd8d6e",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -81165,6 +81165,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Added fail-closed Big Five public content asset sitemap enumeration regression and completed manifest local validation. No sitemap, llms, JSON-LD, CMS write, publishing, or production action was performed."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed BIG5-CMS-DISCOVERABILITY-SURFACE-04 discoverability surface regression scope at ba5c55f75."
       }
     ]
   },
