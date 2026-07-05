@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "id": "RIASEC-ZH-TEST-LANDING-P0-DIAGNOSTIC-01",
+  "repo": "fap-api",
+  "generated_at": "2026-07-05T14:44:55Z",
+  "run_type": "generated_only_read_only_diagnostic",
+  "target": {
+    "path": "/zh/tests/holland-career-interest-test-riasec",
+    "url": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+    "locale": "zh",
+    "surface": "test_landing_page"
+  },
+  "final_verdict": "RIASEC_P0_DIAGNOSTIC_HANDOFF_READY",
+  "runtime_readback": {
+    "http_status": 200,
+    "final_url": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+    "cache_control": "public, s-maxage=60, stale-while-revalidate=300",
+    "x_proxy_cache": "MISS",
+    "title": "免费霍兰德职业兴趣测试：RIASEC 完整结果 | FermatMind",
+    "meta_description": "免费完成霍兰德职业兴趣测试，查看 RIASEC 兴趣排序和职业探索线索。结果用于方向参考，不承诺专业或录取结果。",
+    "robots": "index, follow",
+    "canonical": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+    "alternate_count": 3,
+    "json_ld_types": [
+      "WebPage",
+      "BreadcrumbList",
+      "SoftwareApplication",
+      "FAQPage"
+    ],
+    "faq_json_ld_count": 4,
+    "faq_json_ld_questions": [
+      "需要多久？",
+      "每道题都要回答吗？",
+      "可以重复测试吗？",
+      "这是诊断吗？"
+    ],
+    "visible_faq_headings_after_faq": [
+      "免责声明",
+      "准备开始？"
+    ],
+    "visible_jsonld_faq_parity": "unverified",
+    "private_url_hit_count": 0
+  },
+  "discoverability_readback": {
+    "sitemap_xml_contains_path": true,
+    "llms_txt_contains_path": true,
+    "llms_full_txt_contains_path": true,
+    "robots_txt_contains_path": false
+  },
+  "backend_authority": {
+    "confirmed": true,
+    "scale_registry_primary_slug": "holland-career-interest-test-riasec",
+    "forms": [
+      "riasec_60",
+      "riasec_140"
+    ],
+    "default_form_code": "riasec_60",
+    "paywall_mode": "free_only",
+    "commercial_price_tier": "FREE",
+    "future_writes_authority": "backend_cms",
+    "fap_web_role": "renderer_consumer_only"
+  },
+  "gsc_seo_intel": {
+    "data_quality_gate_status": "blocked",
+    "data_origin": "fixture",
+    "opportunity_queue_eligible": false,
+    "ctr_repair_justified": false
+  },
+  "diagnostic_questions": {
+    "free_question_answered_above_fold_or_faq": "partial_title_h1_meta_cta_yes_exact_faq_no",
+    "sixty_vs_one_forty_explained": "present",
+    "exploration_signal_not_precise_recommendation": "present_with_room_to_strengthen",
+    "course_job_activity_major_validation_without_overclaim": "present",
+    "visible_faq_matches_faqpage_json_ld": "unverified",
+    "cta_links_public_non_private_analytics_safe": "pass",
+    "fap_api_backend_correct_authority": "yes",
+    "fap_web_renderer_consumer_only": "yes",
+    "immediate_repair_required": "no_wait_for_gated_gsc_seo_intel_and_parity_readback"
+  },
+  "forbidden_actions": {
+    "cms_write": false,
+    "cms_publish": false,
+    "content_import": false,
+    "search_channel_enqueue": false,
+    "search_provider_submission": false,
+    "url_truth_write": false,
+    "sitemap_mutation": false,
+    "llms_mutation": false,
+    "schema_mutation": false,
+    "hreflang_mutation": false,
+    "frontend_fallback_content": false,
+    "fap_web_edit": false,
+    "deploy": false,
+    "runtime_api_mutation": false,
+    "title_meta_faq_copy_write": false,
+    "invented_gsc_metrics": false,
+    "raw_gsc_payloads": false,
+    "screenshot_derived_metrics_as_formal_evidence": false
+  },
+  "required_output_files": [
+    "EXECUTIVE_DECISION.md",
+    "CURRENT_RUNTIME_READBACK.md",
+    "BACKEND_AUTHORITY_MAP.md",
+    "FAQ_GEO_ANSWER_SURFACE_AUDIT.md",
+    "CTA_INTERNAL_LINK_AUDIT.md",
+    "CLAIM_BOUNDARY_REVIEW.md",
+    "PRIVATE_URL_GUARD.md",
+    "FUTURE_DRY_RUN_OPTIONS.md",
+    "NEXT_EXACT_AUTHORIZATION_PROMPTS.md",
+    "BLOCKED_OR_UNVERIFIED_ASSUMPTIONS.md",
+    "scan_manifest.json"
+  ],
+  "required_checks": [
+    "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-05/riasec-zh-test-landing-p0-diagnostic-01/scan_manifest.json >/dev/null",
+    "git diff --check",
+    "git diff --cached --check"
+  ],
+  "recommended_next_pr": "RIASEC-ZH-TEST-LANDING-FAQ-PARITY-READBACK-01"
+}
