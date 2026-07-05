@@ -81317,13 +81317,13 @@
     "depends_on": [
       "BIG5-CONTENT-QUALITY-REVIEW-05"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "merged",
+    "commit_sha": "0387b3c1651a6c35b6825a20da109b3d665c0ca0",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2732",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T07:12:57Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -81341,13 +81341,21 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to BIG5-TRAIN-LEDGER-CLOSEOUT-06 allowed metadata paths: docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2732: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #2732 is MERGED; origin/main contains merge commit 0387b3c1651a6c35b6825a20da109b3d665c0ca0; local main was synced; task branch codex/big5-train-ledger-closeout-06 is absent locally and remotely."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -81373,7 +81381,7 @@
     "depends_on": [
       "BIG5-TRAIN-LEDGER-CLOSEOUT-06"
     ],
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
     "failure_reason": null,
@@ -81384,11 +81392,23 @@
       "manifest_registration": {
         "status": "pass",
         "evidence": "User explicitly authorized registering this Big Five CMS asset readiness PR train item in the attached /goal execution request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-TRAIN-LEDGER-CLOSEOUT-06 PR #2732 is merged, and origin/main contains merge commit 0387b3c1651a6c35b6825a20da109b3d665c0ca0."
+      },
+      "content_polish_validation": {
+        "status": "pass",
+        "evidence": "Generated generated/big-five-content-polish/cms-import-draft.polished.json plus JSON/Markdown reports. The polished package keeps 42 rows, all draft_review_required/manual_review_required, zero short-route residue, zero bad canonical paths, zero English FAQ count issues, zero English depth issues under 450 words, zero zh-CN combination pages under 800 CJK chars, and zero mechanical forbidden-claim hits."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to BIG5-CONTENT-POLISH-06 allowed paths: generated/big-five-content-polish/** and docs/codex/pr-train-state.json."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -81398,6 +81418,18 @@
         "from": "user_authorized",
         "to": "pending_dependency",
         "note": "Registered dependent content-polish PR; execution waits for BIG5-TRAIN-LEDGER-CLOSEOUT-06 merge."
+      },
+      {
+        "at": "2026-07-05T07:20:17Z",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "note": "Started backend-side content polish after BIG5-TRAIN-LEDGER-CLOSEOUT-06 merge was verified. Scope excludes CMS writes, publishing, indexability release, sitemap/llms/JSON-LD runtime, and deploys."
+      },
+      {
+        "at": "2026-07-05T07:20:17Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Generated polished draft package and validation report. Local JSON parse, content count, route, gate, FAQ, depth, forbidden-claim, YAML/JSON, and diff checks passed."
       }
     ]
   },

@@ -1,0 +1,134 @@
+{
+  "source": "/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json",
+  "output": "generated/big-five-content-polish/cms-import-draft.polished.json",
+  "total_rows": 42,
+  "locale_counts": {
+    "zh-CN": 36,
+    "en-US": 6
+  },
+  "content_type_counts": {
+    "combination_page": 6,
+    "cross_reading_page": 5,
+    "hub_page": 2,
+    "trait_range_page": 15,
+    "result_review_page": 4,
+    "trait_page": 10
+  },
+  "status_counts": {
+    "draft_review_required": 42
+  },
+  "indexability_gate_counts": {
+    "manual_review_required": 42
+  },
+  "short_route_residue": {
+    "/zh/big-five": 0,
+    "/en/big-five": 0
+  },
+  "bad_canonical_paths": [],
+  "english_pages": [
+    {
+      "id": "en-US:hub_page:big-five",
+      "words": 498,
+      "faq_count": 5,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    },
+    {
+      "id": "en-US:trait_page:agreeableness",
+      "words": 523,
+      "faq_count": 5,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    },
+    {
+      "id": "en-US:trait_page:conscientiousness",
+      "words": 522,
+      "faq_count": 5,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    },
+    {
+      "id": "en-US:trait_page:extraversion",
+      "words": 524,
+      "faq_count": 5,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    },
+    {
+      "id": "en-US:trait_page:neuroticism",
+      "words": 525,
+      "faq_count": 5,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    },
+    {
+      "id": "en-US:trait_page:openness",
+      "words": 521,
+      "faq_count": 5,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    }
+  ],
+  "zh_combination_pages": [
+    {
+      "id": "zh-CN:combination_page:high-agreeableness-high-neuroticism",
+      "cjk_chars": 827,
+      "faq_count": 5,
+      "repeated_generic_block_count_after_polish": 0,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    },
+    {
+      "id": "zh-CN:combination_page:high-openness-high-extraversion",
+      "cjk_chars": 836,
+      "faq_count": 5,
+      "repeated_generic_block_count_after_polish": 0,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    },
+    {
+      "id": "zh-CN:combination_page:high-openness-low-conscientiousness",
+      "cjk_chars": 874,
+      "faq_count": 5,
+      "repeated_generic_block_count_after_polish": 0,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    },
+    {
+      "id": "zh-CN:combination_page:low-agreeableness-high-conscientiousness",
+      "cjk_chars": 836,
+      "faq_count": 5,
+      "repeated_generic_block_count_after_polish": 0,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    },
+    {
+      "id": "zh-CN:combination_page:low-extraversion-high-conscientiousness",
+      "cjk_chars": 843,
+      "faq_count": 5,
+      "repeated_generic_block_count_after_polish": 0,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    },
+    {
+      "id": "zh-CN:combination_page:low-neuroticism-high-conscientiousness",
+      "cjk_chars": 822,
+      "faq_count": 5,
+      "repeated_generic_block_count_after_polish": 0,
+      "status": "draft_review_required",
+      "indexability_gate": "manual_review_required"
+    }
+  ],
+  "publish_allowed": false,
+  "seo_expansion_allowed": false,
+  "cms_write_performed": false,
+  "runtime_surface_changed": false,
+  "notes": [
+    "Polished package remains CMS/backend-authoritative draft review content.",
+    "FAQ body_sections are retained as visible draft content; importer dedupe policy must continue treating top-level faq as the structured FAQ source.",
+    "English pages remain draft-only and blocked from SEO expansion despite improved depth."
+  ],
+  "english_faq_count_issues": [],
+  "english_depth_issues": [],
+  "zh_combination_depth_issues": []
+}
