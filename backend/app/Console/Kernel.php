@@ -179,6 +179,7 @@ use App\Console\Commands\PaymentsPruneEvents;
 use App\Console\Commands\PersonalityAgentApprovalQueueCommand;
 use App\Console\Commands\PersonalityAgentApprovalQueueReviewCommand;
 use App\Console\Commands\PersonalityAgentPostPromotionSearchGateCommand;
+use App\Console\Commands\PersonalityBigFiveCmsImportDraftDryRun;
 use App\Console\Commands\PersonalityBigFivePublicProfileAgentDraft;
 use App\Console\Commands\PersonalityEnneagramCmsDraft;
 use App\Console\Commands\PersonalityImportDesktopCloneBaseline;
@@ -267,6 +268,7 @@ class Kernel extends ConsoleKernel
         PersonalityAgentApprovalQueueCommand::class,
         PersonalityAgentApprovalQueueReviewCommand::class,
         PersonalityAgentPostPromotionSearchGateCommand::class,
+        PersonalityBigFiveCmsImportDraftDryRun::class,
         PersonalityBigFivePublicProfileAgentDraft::class,
         PersonalityEnneagramCmsPromote::class,
         PersonalityEnneagramCmsDraft::class,

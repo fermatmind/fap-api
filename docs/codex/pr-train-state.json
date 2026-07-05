@@ -1,4 +1,171 @@
 {
+  "BIG5-CMS-IMPORT-DRYRUN-01": {
+    "id": "BIG5-CMS-IMPORT-DRYRUN-01",
+    "repo": "fap-api",
+    "title": "BIG5-CMS-IMPORT-DRYRUN-01: add Big Five cms-import-draft dry-run validator",
+    "base": "main",
+    "branch": "codex/big5-cms-import-dryrun-01",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "commit_sha": "79170c68c15d2b5a9dabf5d1ed03a8edcbb4b338",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2722",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding BIG5-CMS-IMPORT-DRYRUN-01 and BIG5-CMS-FAQ-DEDUPE-02 to the fap-api PR train from the attached /goal execution request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-CMS-IMPORT-DRYRUN-01 has no declared dependencies."
+      },
+      "syntax": {
+        "status": "pass",
+        "command": "php -l backend/app/Console/Commands/PersonalityBigFiveCmsImportDraftDryRun.php && php -l backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php && php -l backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php",
+        "evidence": "PASS: dry-run command, planner, and focused command test file all report no syntax errors."
+      },
+      "focused_command_contract": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi",
+        "evidence": "PASS: 4 tests, 42 assertions. Covers valid 42-page draft package planning, rejected short Big Five route residue, required --dry-run, refused --write, and no database write behavior."
+      },
+      "desktop_v2_package_dry_run": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json",
+        "evidence": "PASS: ok=true, status=pass, row_count=42, row_count_matches_expected=true, old_short_big_five_route_residue_count=0, locale_counts zh-CN=36 and en-US=6, and content type counts cover hub, trait, trait_range, combination, cross_reading, and result_review pages."
+      },
+      "focused_bigfive_runtime_freeze_classifier": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_big_five_cms_import_draft_dry_run_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+        "evidence": "PASS: 2 tests, 4 assertions. The current PR dry-run command/planner files are explicitly classified as non-runtime-only, and the runtime path diff check passes locally."
+      },
+      "pint_targeted": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveCmsImportDraftDryRun.php app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "evidence": "PASS: 4 files."
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+        "evidence": "PASS: full backend verification chain completed successfully, including MBTI/Big Five suites and focused PersonalityBigFiveCmsImportDraftDryRunCommandTest coverage."
+      },
+      "manifest_state_diff_validation": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "evidence": "PASS: train YAML parses, state JSON parses, and git diff whitespace check passes."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to BIG5-CMS-IMPORT-DRYRUN-01 allowed paths: backend/app/Console/Commands/PersonalityBigFiveCmsImportDraftDryRun.php, backend/app/Console/Kernel.php, backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php, backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      },
+      "github_verify_bigfive_initial": {
+        "status": "fail",
+        "evidence": "FAIL on PR #2722 verify-bigfive: PersonalityBigFiveCmsImportDraftDryRunCommandTest::test_dry_run_reads_desktop_cms_import_draft_without_writes returned exit code 1 because the test referenced /Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json, which is not present on GitHub runners."
+      },
+      "github_verify_bigfive_fix_local": {
+        "status": "pass",
+        "command": "php -l backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php && cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json && vendor/bin/pint --test tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php",
+        "evidence": "PASS: replaced the CI test input with a repo-generated 42-row fixture while keeping the real desktop v2 package dry-run as a local validation command; focused command tests passed with 4 tests and 42 assertions."
+      },
+      "local_full_verify_after_ci_fix": {
+        "status": "external_blocker_recorded",
+        "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+        "evidence": "Focused current-scope checks passed, but full local verification was affected by local worktree/branch-diff interference from IQ method files outside this PR scope. Recorded sidecar details in generated/pr-train-sidecar-issues/sidecar_issues.md and sidecar_issues.json."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PASS on PR #2722 head 79170c68c15d2b5a9dabf5d1ed03a8edcbb4b338: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started backend-only Big Five cms-import-draft dry-run validator from latest origin/main in an isolated worktree. Scope excludes CMS writes, production imports, publishing, indexability, sitemap/llms/search release, runtime SEO changes, and deploys."
+      },
+      {
+        "at": "2026-07-05T04:31:06Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Implemented Big Five cms-import-draft dry-run command, planner, tests, runtime-freeze classifier exemption, and user-authorized train metadata. Syntax checks, focused PHPUnit, real desktop v2 package dry-run, targeted Pint, full ci_verify_mbti, YAML/JSON parse, diff check, and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-07-05T04:31:06Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed BIG5-CMS-IMPORT-DRYRUN-01 dry-run validator scope at 3b6ad7c9df92a1fdf5e811a42e6f212c5c9c3130."
+      },
+      {
+        "at": "2026-07-05T04:31:06Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2722 for BIG5-CMS-IMPORT-DRYRUN-01 and pushed branch codex/big5-cms-import-dryrun-01."
+      },
+      {
+        "at": "2026-07-05T04:31:06Z",
+        "from": "pr_open",
+        "to": "ci_fix_in_progress",
+        "note": "Inspected failing verify-bigfive job. Failure was current PR scope: the focused command test depended on the operator desktop package path. Replaced the CI test input with an equivalent generated 42-row fixture and kept the real desktop package dry-run as a local validation command."
+      },
+      {
+        "at": "2026-07-05T04:31:06Z",
+        "from": "ci_fix_in_progress",
+        "to": "ready_to_merge",
+        "note": "PR #2722 remote checks passed after the portable fixture fix. Marked ready to merge under squash merge policy."
+      }
+    ]
+  },
+  "BIG5-CMS-FAQ-DEDUPE-02": {
+    "id": "BIG5-CMS-FAQ-DEDUPE-02",
+    "repo": "fap-api",
+    "title": "BIG5-CMS-FAQ-DEDUPE-02: guard Big Five CMS FAQ duplicate rendering",
+    "base": "main",
+    "branch": "codex/big5-cms-faq-dedupe-02",
+    "depends_on": [
+      "BIG5-CMS-IMPORT-DRYRUN-01"
+    ],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding BIG5-CMS-FAQ-DEDUPE-02 to the fap-api PR train from the attached /goal execution request."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "BIG5-CMS-FAQ-DEDUPE-02 depends on BIG5-CMS-IMPORT-DRYRUN-01 being merged into main."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "user_authorized",
+        "to": "pending_dependency",
+        "note": "Registered dependent FAQ deduplication PR; execution waits for BIG5-CMS-IMPORT-DRYRUN-01 merge."
+      }
+    ]
+  },
   "MBTI-CMS-13": {
     "id": "MBTI-CMS-13",
     "repo": "fap-api",

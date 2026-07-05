@@ -1,0 +1,12 @@
+[
+  {
+    "repo": "fap-api",
+    "pr_id": "BIG5-CMS-IMPORT-DRYRUN-01",
+    "branch": "codex/big5-cms-import-dryrun-01",
+    "blocker_type": "local_worktree_branch_diff_interference",
+    "evidence": "After the CI-scope test fix, focused tests and desktop package dry-run passed, but local full scripts/ci_verify_mbti.sh failed in BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff with IQ method files: backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php, backend/app/Models/TopicProfileEntry.php, backend/app/Services/Cms/IqMethodPages/IqMethodPagesDraftImporter.php.",
+    "why_not_current_pr_scope": "git diff --name-only origin/main...HEAD in the isolated PR worktree contains only the Big Five CMS import dry-run command, planner, tests, Kernel registration, and PR train metadata; it does not contain the IQ method files.",
+    "required_checks_affected": "Local full-check reproduction was affected. GitHub required checks run in a clean checkout; the current PR fix targets the actual GitHub failure, which was the hardcoded desktop package path in the test.",
+    "recommended_follow_up": "Keep IQ method page work isolated in its own branch/PR and avoid sharing dirty local worktree state with PR-train verification worktrees."
+  }
+]
