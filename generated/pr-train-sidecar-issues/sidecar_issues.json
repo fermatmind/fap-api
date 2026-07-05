@@ -46,5 +46,15 @@
     "why_not_current_pr_scope": "Current PR scope only adds the read-only IQ method pages CMS readback command/test, registers the command, extends the Big Five runtime-freeze classifier exemption for that command, and updates PR-train metadata. The observed full-suite failures are in Career, Content, MBTI personalization/PDF, Architecture, ClinicalCombo, and Commerce surfaces outside the changed READBACK files.",
     "required_checks_affected": "unknown_until_github_checks; local focused validation passed and GitHub required checks must still be inspected before merge",
     "recommended_follow_up": "Track and fix the failing Career/Content/MBTI/PDF/Architecture/ClinicalCombo/Commerce tests under their owning PR scopes. Do not mix those repairs into IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01."
+  },
+  {
+    "repo": "fermatmind/fap-api",
+    "pr_id": "PR-C",
+    "branch": "codex/big5-production-content-audit-c",
+    "blocker_type": "local_environment_unavailable",
+    "evidence": "bash scripts/verify_mbti.sh failed at [1/8] health: http://127.0.0.1:1827 with curl: (7) Failed to connect to 127.0.0.1 port 1827.",
+    "why_not_current_pr_scope": "PR-C only adds a read-only Big Five production content audit command, focused tests, and generated evidence. It does not start, stop, configure, or route the local API server.",
+    "required_checks_affected": "Local verify_mbti.sh could not run without the expected local server. Targeted PHPUnit, syntax, Pint, command discovery, route list, and scope validation passed.",
+    "recommended_follow_up": "Run bash scripts/verify_mbti.sh in an environment where the Laravel API is listening on 127.0.0.1:1827, or use the repository's standard local stack bootstrap before this check."
   }
 ]

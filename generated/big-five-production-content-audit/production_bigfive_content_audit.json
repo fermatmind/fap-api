@@ -1,0 +1,89 @@
+{
+  "artifact": "BIG5-PRODUCTION-CONTENT-AUDIT-C-PUBLIC-API-EVIDENCE",
+  "scanned_at": "2026-07-05T16:03:47.219Z",
+  "scan_mode": "public_api_readonly_no_credentials_no_db_write",
+  "status": "pass",
+  "conclusion": {
+    "production_public_api_big_five_total_rows": 34,
+    "production_public_api_big_five_rows_per_locale": {
+      "zh-CN": 17,
+      "en": 17
+    },
+    "v2_42_package_rows_visible_in_public_api": 0,
+    "title_only_section_rows_visible_in_public_api": 34,
+    "schema_runtime_eligible_rows_visible_in_public_api": 0,
+    "index_eligible_true_rows_visible_in_public_api": 0,
+    "sitemap_eligible_true_rows_visible_in_public_api": 0,
+    "llms_eligible_true_rows_visible_in_public_api": 0
+  },
+  "locale_summaries": {
+    "zh-CN": {
+      "locale": "zh-CN",
+      "ok": true,
+      "api_total": 17,
+      "item_count": 17,
+      "v2_source_package_rows": 0,
+      "source_package_counts": {
+        "big-five-v1-content-editorial-repair-02": 17
+      },
+      "robots_counts": {
+        "noindex,follow": 17
+      },
+      "launch_state_counts": {
+        "content_ready": 17
+      },
+      "schema_runtime_eligible_rows": 0,
+      "index_eligible_true_rows": 0,
+      "sitemap_eligible_true_rows": 0,
+      "llms_eligible_true_rows": 0,
+      "title_only_section_rows": 17,
+      "sample_canonical_paths": [
+        "/zh/personality/big-five/agreeableness",
+        "/zh/personality/big-five/conscientiousness",
+        "/zh/personality/big-five/extraversion",
+        "/zh/personality/big-five/neuroticism",
+        "/zh/personality/big-five/openness"
+      ],
+      "endpoint": "https://api.fermatmind.com/api/v0.5/personality-content-assets?framework=big_five&locale=zh-CN&per_page=100"
+    },
+    "en": {
+      "locale": "en",
+      "ok": true,
+      "api_total": 17,
+      "item_count": 17,
+      "v2_source_package_rows": 0,
+      "source_package_counts": {
+        "big-five-v1-content-editorial-repair-02": 17
+      },
+      "robots_counts": {
+        "noindex,follow": 17
+      },
+      "launch_state_counts": {
+        "content_ready": 17
+      },
+      "schema_runtime_eligible_rows": 0,
+      "index_eligible_true_rows": 0,
+      "sitemap_eligible_true_rows": 0,
+      "llms_eligible_true_rows": 0,
+      "title_only_section_rows": 17,
+      "sample_canonical_paths": [
+        "/en/personality/big-five/agreeableness",
+        "/en/personality/big-five/conscientiousness",
+        "/en/personality/big-five/extraversion",
+        "/en/personality/big-five/neuroticism",
+        "/en/personality/big-five/openness"
+      ],
+      "endpoint": "https://api.fermatmind.com/api/v0.5/personality-content-assets?framework=big_five&locale=en&per_page=100"
+    }
+  },
+  "safety": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "production_import_attempted": false,
+    "publish_attempted": false,
+    "index_attempted": false,
+    "sitemap_llms_release_attempted": false,
+    "jsonld_runtime_release_attempted": false,
+    "production_deploy_attempted": false
+  }
+}
