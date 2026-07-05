@@ -80516,7 +80516,7 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-07-05T12:00:00+08:00",
+  "updated_at": "2026-07-05T13:55:29+08:00",
   "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01": {
     "id": "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01",
     "repo": "fap-api",
@@ -80527,7 +80527,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01"
     ],
-    "status": "pr_open",
+    "status": "merged",
     "authorized_by_user": "2026-07-05 user explicitly provided IQ 7 pages CMS上线执行计划 with readback as PR train step 3, after backend CMS import and before publish.",
     "checks": {
       "dependency": {
@@ -80585,20 +80585,28 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to the READBACK allowed paths: backend/app/Console/Commands/ArticleIqMethodPagesReadback.php, backend/bootstrap/app.php, backend/tests/Feature/Console/ArticleIqMethodPagesReadbackCommandTest.php, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, and generated/pr-train-sidecar-issues/**."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #2724 is MERGED; required checks were green before merge."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #2724 is MERGED at d73366e9467fab5ad3dcf2fb16e3d50520ed38ca; origin/main contains the merge commit; local and remote task branches are absent in this worktree."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
-    "commit_sha": "ac72416ce2583c2614c7726404e4d232c908af28",
+    "commit_sha": "d73366e9467fab5ad3dcf2fb16e3d50520ed38ca",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2724",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-05T05:40:14Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_migration_execution_allowed": false,
     "database_mutation": false,
@@ -80629,6 +80637,329 @@
         "at": "2026-07-05T14:00:00+08:00",
         "status": "pr_open",
         "summary": "Opened PR #2724 at https://github.com/fermatmind/fap-api/pull/2724 for IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01."
+      },
+      {
+        "at": "2026-07-05T13:55:29+08:00",
+        "status": "merged",
+        "summary": "Reconciled GitHub state: PR #2724 is MERGED at d73366e9467fab5ad3dcf2fb16e3d50520ed38ca, origin/main contains the merge commit, and the task branch is absent locally and remotely."
+      }
+    ]
+  },
+  "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01": {
+    "id": "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-method-pages-publish-gate-01",
+    "title": "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01: add IQ method publish readiness gate",
+    "train_scope": "iq_method_pages_zh_cn_publish_readiness",
+    "depends_on": [
+      "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01"
+    ],
+    "status": "user_authorized",
+    "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User authorized adding this missing PR-train item after the scan split publish/activation into gated tasks."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01 PR #2724 is merged; origin/main contains merge commit d73366e9467fab5ad3dcf2fb16e3d50520ed38ca."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": "IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01",
+    "transitions": [
+      {
+        "at": "2026-07-05T13:55:29+08:00",
+        "status": "user_authorized",
+        "summary": "Registered read-only publish readiness gate. Scope excludes review approval writes, publish, indexability, sitemap/llms activation, search submission, frontend fallback, production deploy, and production execution without exact SHA authorization."
+      }
+    ]
+  },
+  "IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01": {
+    "id": "IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-method-pages-review-approval-01",
+    "title": "IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01: add IQ method review approval workflow",
+    "train_scope": "iq_method_pages_zh_cn_review_approval",
+    "depends_on": [
+      "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01"
+    ],
+    "status": "pending_dependency",
+    "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User authorized adding this missing PR-train item after the scan split publish/activation into gated tasks."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Wait for IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-GATE-01 to merge before starting review approval workflow implementation."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": true,
+    "cms_mutation": true,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-01",
+    "transitions": [
+      {
+        "at": "2026-07-05T13:55:29+08:00",
+        "status": "pending_dependency",
+        "summary": "Registered controlled review approval workflow. Execution waits for publish gate merge and still requires exact deployed SHA authorization before any production review approval write."
+      }
+    ]
+  },
+  "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-01": {
+    "id": "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-method-pages-cms-publish-01",
+    "title": "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-01: add controlled IQ method article publish workflow",
+    "train_scope": "iq_method_pages_zh_cn_publish",
+    "depends_on": [
+      "IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01"
+    ],
+    "status": "pending_dependency",
+    "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User authorized adding this missing PR-train item after the scan split publish/activation into gated tasks."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Wait for IQ-METHOD-PAGES-ZH-CN-CMS-REVIEW-APPROVAL-01 to merge before starting controlled publish workflow implementation."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": true,
+    "cms_mutation": true,
+    "api_runtime_change": true,
+    "publish_allowed": true,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": "IQ-METHOD-PAGES-ZH-CN-CMS-POST-PUBLISH-READBACK-01",
+    "transitions": [
+      {
+        "at": "2026-07-05T13:55:29+08:00",
+        "status": "pending_dependency",
+        "summary": "Registered controlled publish workflow. Execution waits for review approval merge and excludes production publish execution without exact deployed SHA and command authorization."
+      }
+    ]
+  },
+  "IQ-METHOD-PAGES-ZH-CN-CMS-POST-PUBLISH-READBACK-01": {
+    "id": "IQ-METHOD-PAGES-ZH-CN-CMS-POST-PUBLISH-READBACK-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-method-pages-post-publish-readback-01",
+    "title": "IQ-METHOD-PAGES-ZH-CN-CMS-POST-PUBLISH-READBACK-01: verify published IQ method articles before indexing",
+    "train_scope": "iq_method_pages_zh_cn_post_publish_readback",
+    "depends_on": [
+      "IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-01"
+    ],
+    "status": "pending_dependency",
+    "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User authorized adding this missing PR-train item after the scan split publish/activation into gated tasks."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Wait for IQ-METHOD-PAGES-ZH-CN-CMS-PUBLISH-01 to merge before starting post-publish readback implementation."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01",
+    "transitions": [
+      {
+        "at": "2026-07-05T13:55:29+08:00",
+        "status": "pending_dependency",
+        "summary": "Registered post-publish readback. Execution waits for controlled publish merge and must keep indexability, sitemap, and llms disabled."
+      }
+    ]
+  },
+  "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01": {
+    "id": "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-method-pages-seo-geo-activate-gate-01",
+    "title": "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01: add IQ method SEO/GEO activation gate",
+    "train_scope": "iq_method_pages_zh_cn_seo_geo_activation_readiness",
+    "depends_on": [
+      "IQ-METHOD-PAGES-ZH-CN-CMS-POST-PUBLISH-READBACK-01"
+    ],
+    "status": "pending_dependency",
+    "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User authorized adding this missing PR-train item after the scan split publish/activation into gated tasks."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Wait for IQ-METHOD-PAGES-ZH-CN-CMS-POST-PUBLISH-READBACK-01 to merge before starting SEO/GEO activation gate implementation."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-01",
+    "transitions": [
+      {
+        "at": "2026-07-05T13:55:29+08:00",
+        "status": "pending_dependency",
+        "summary": "Registered read-only SEO/GEO activation gate. Execution waits for post-publish readback merge and excludes sitemap/llms/indexability writes."
+      }
+    ]
+  },
+  "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-01": {
+    "id": "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/iq-method-pages-seo-geo-activate-01",
+    "title": "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-01: add controlled IQ method sitemap and llms activation",
+    "train_scope": "iq_method_pages_zh_cn_seo_geo_activation",
+    "depends_on": [
+      "IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01"
+    ],
+    "status": "pending_dependency",
+    "authorized_by_user": "2026-07-05 user explicitly authorized adding the IQ method publish and SEO/GEO activation PR-train entries to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json.",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User authorized adding this missing PR-train item after the scan split publish/activation into gated tasks."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Wait for IQ-METHOD-PAGES-ZH-CN-SEO-GEO-ACTIVATE-GATE-01 to merge before starting controlled SEO/GEO activation implementation."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_migration_execution_allowed": false,
+    "database_mutation": true,
+    "cms_mutation": true,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "scheduler_activation": false,
+    "content_authority": "CMS/backend",
+    "next_task": null,
+    "transitions": [
+      {
+        "at": "2026-07-05T13:55:29+08:00",
+        "status": "pending_dependency",
+        "summary": "Registered controlled SEO/GEO activation workflow. Execution waits for activation gate merge and excludes production activation writes without exact deployed SHA and command authorization."
       }
     ]
   }
