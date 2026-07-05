@@ -1,6 +1,6 @@
 # EXECUTIVE_DECISION
 
-Final decision: FAQ_CONTENT_LOCAL_PASS_READY_FOR_PR
+Final decision: FAQ_CONTENT_PR_READY_FOR_REVIEW
 
 Scope executed:
 - Expanded MBTI zh lookup FAQ authority from 4 visible items to the approved 8-item set.
@@ -26,4 +26,4 @@ Validation summary:
 - Full MBTI CI on latest `origin/main` `65b4e1b1c`: PASS.
 - YAML/JSON parse checks: PASS.
 - Scope validation: PASS.
-
+- PR: https://github.com/fermatmind/fap-api/pull/2731

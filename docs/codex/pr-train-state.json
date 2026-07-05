@@ -26331,7 +26331,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "bf9d1eb05",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -26378,17 +26378,22 @@
         "at": "2026-07-05T14:52:10+08:00",
         "status": "local_checks_passed",
         "note": "Rebased onto latest origin/main 65b4e1b1c and reran route-list, focused lookup FAQ test, local curl lookup readback, full MBTI CI, YAML/JSON parsing, and scope validation. All passed; local curl readback returned the approved 8-item FAQ set."
+      },
+      {
+        "at": "2026-07-05T14:54:20+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2731 for the 2026-07-05 MBTI main visible FAQ 8-item authority expansion."
       }
     ],
     "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2731",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "MBTI-MAIN-FREE-FAQ-CONTENT-01: seo(mbti): strengthen main free-test visible FAQ authority",
     "train_scope": "mbti_main_visible_faq_content_authority"
   },
