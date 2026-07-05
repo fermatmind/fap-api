@@ -1,0 +1,88 @@
+{
+  "run_id": "seo-ops-mbti-main-free-faq-content-01-20260705-00",
+  "final_decision": "FAQ_CONTENT_PR_READY_FOR_REVIEW",
+  "repo": "fap-api",
+  "branch": "codex/mbti-main-free-faq-content-01",
+  "base": {
+    "name": "origin/main",
+    "commit": "65b4e1b1c"
+  },
+  "pr_url": "https://github.com/fermatmind/fap-api/pull/2731",
+  "commit_sha": "bf9d1eb05",
+  "authority": {
+    "source": "backend",
+    "field": "content_i18n_json.zh.faq",
+    "scale": "MBTI",
+    "locale": "zh"
+  },
+  "changed_files": [
+    "backend/database/seeders/ScaleRegistrySeeder.php",
+    "backend/tests/Feature/V0_3/ScalesLookupSeoMetadataTest.php",
+    "docs/codex/pr-train.yaml",
+    "docs/codex/pr-train-state.json",
+    "generated/seo-ops-mbti-main-free-faq-content-01-20260705-00/EXECUTIVE_DECISION.md",
+    "generated/seo-ops-mbti-main-free-faq-content-01-20260705-00/FAQ_CONTENT_CHANGE_REPORT.md",
+    "generated/seo-ops-mbti-main-free-faq-content-01-20260705-00/FAQ_SCHEMA_PARITY_CONFIRMATION.md",
+    "generated/seo-ops-mbti-main-free-faq-content-01-20260705-00/CLAIM_PRIVATE_URL_RECHECK.md",
+    "generated/seo-ops-mbti-main-free-faq-content-01-20260705-00/LOCAL_LOOKUP_READBACK.md",
+    "generated/seo-ops-mbti-main-free-faq-content-01-20260705-00/TEST_RESULTS.md",
+    "generated/seo-ops-mbti-main-free-faq-content-01-20260705-00/CHANGED_FILES.md",
+    "generated/seo-ops-mbti-main-free-faq-content-01-20260705-00/NEXT_EXACT_AUTHORIZATION_PROMPTS.md",
+    "generated/seo-ops-mbti-main-free-faq-content-01-20260705-00/scan_manifest.json"
+  ],
+  "faq_questions": [
+    "MBTI 测试免费吗？",
+    "MBTI 完整结果能看到什么？",
+    "MBTI 测试一般多久？",
+    "MBTI 能决定职业吗？",
+    "MBTI 是心理诊断吗？",
+    "16 型人格结果会变吗？",
+    "MBTI 和大五人格有什么区别？",
+    "做完 MBTI 后下一步看什么？"
+  ],
+  "checks": [
+    {
+      "name": "route_list",
+      "status": "pass",
+      "command": "cd backend && php artisan route:list"
+    },
+    {
+      "name": "focused_lookup_faq_test",
+      "status": "pass",
+      "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/ScalesLookupSeoMetadataTest.php --filter mbti_zh_lookup_uses_free_test_visible_faq_authority --no-ansi"
+    },
+    {
+      "name": "local_lookup_readback",
+      "status": "pass",
+      "command": "curl -sS http://127.0.0.1:18317/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types&locale=zh | jq .content_i18n_json.zh.faq"
+    },
+    {
+      "name": "mbti_ci",
+      "status": "pass",
+      "command": "bash backend/scripts/ci_verify_mbti.sh"
+    },
+    {
+      "name": "yaml_parse",
+      "status": "pass",
+      "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\""
+    },
+    {
+      "name": "json_parse",
+      "status": "pass",
+      "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+    }
+  ],
+  "forbidden_actions": {
+    "tdk_modified": false,
+    "v0_5_landing_modified": false,
+    "page_blocks_modified": false,
+    "fap_web_modified": false,
+    "frontend_fallback_added": false,
+    "schema_policy_modified": false,
+    "sitemap_modified": false,
+    "llms_modified": false,
+    "search_submission_performed": false,
+    "production_cms_write_performed": false,
+    "deploy_performed": false
+  }
+}

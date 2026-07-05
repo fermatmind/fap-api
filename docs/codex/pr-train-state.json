@@ -26270,7 +26270,7 @@
   },
   "MBTI-MAIN-FREE-FAQ-CONTENT-01": {
     "api_runtime_change": true,
-    "authorized_by_user": "2026-06-28 explicit implementation request for MBTI main TDK/FAQ/Schema three PR plan; continuing PR2 after PR1 merged.",
+    "authorized_by_user": "2026-07-05 explicit RUN_MBTI_MAIN_FREE_FAQ_CONTENT_01 request to expand canonical MBTI zh lookup FAQ from 4 items to the approved 8-item set.",
     "base": "main",
     "branch": "codex/mbti-main-free-faq-content-01",
     "checks": {
@@ -26280,12 +26280,12 @@
       },
       "curl_lookup_faq_readback": {
         "command": "local sqlite seed + php artisan serve on 127.0.0.1:18317 + curl /api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types&locale=zh",
-        "evidence": "PASS; readback returned 4 FAQ questions including MBTI免费测试 fee intent, 16型人格完整结果/报告, and职业或心理诊断 boundary; forbidden phrases were absent.",
+        "evidence": "PASS; readback returned the approved 8-item MBTI zh FAQ set from content_i18n_json.zh.faq, covering free-test, complete-result, duration, career-boundary, non-diagnostic, result-change, Big Five comparison, and next-step intents; forbidden phrases were absent.",
         "status": "pass"
       },
       "dependency_verification": {
-        "evidence": "PR #2520 is merged and origin/main contains merge commit e4480b9521d6e872dd52a9cc4c6743e4ea232194.",
-        "status": "pass"
+        "status": "pass",
+        "evidence": "Dependency MBTI-MAIN-FREE-SERP-TDK-01 is merged; GitHub PR #2520 is MERGED and ledger records merged_at 2026-06-28T13:56:32Z."
       },
       "diff_check": {
         "command": "git diff --check",
@@ -26294,7 +26294,7 @@
       },
       "focused_lookup_faq_test": {
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/ScalesLookupSeoMetadataTest.php --filter mbti_zh_lookup_uses_free_test_visible_faq_authority --no-ansi",
-        "evidence": "PASS with existing file_get_contents warning; 1 test, 13 assertions. Asserted MBTI zh lookup content_i18n_json.zh.faq covers MBTI免费测试, 16型人格完整结果/报告, fee intent, non-diagnostic boundary, and excludes high-risk copy.",
+        "evidence": "PASS with existing file_get_contents warning; 1 test, 19 assertions. Asserted MBTI zh lookup content_i18n_json.zh.faq returns exactly the approved 8-item visible FAQ question set and excludes high-risk copy.",
         "status": "pass"
       },
       "github": {
@@ -26308,7 +26308,7 @@
       },
       "mbti_ci": {
         "command": "bash backend/scripts/ci_verify_mbti.sh",
-        "evidence": "PASS; full MBTI CI chain exited 0, including verify_mbti, event acceptance, personality authority gate, auth/order/security, migration/static/schema gates, OpenAPI, and dependency security gates.",
+        "evidence": "PASS on latest origin/main 65b4e1b1c after rebase; full MBTI CI chain exited 0, including verify_mbti, event acceptance, personality authority gate, auth/order/security, migration/static/schema gates, OpenAPI, and dependency security gates.",
         "status": "pass"
       },
       "route_list": {
@@ -26324,10 +26324,14 @@
         "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
         "evidence": "PASS; pr-train-state.json parsed successfully.",
         "status": "pass"
+      },
+      "prior_pr_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub reports previous PR #2525 as MERGED at 2026-06-28T14:46:06Z with merge commit 66eaffb3be13fe5622a0c512e4cb827627bf7154; this 2026-07-05 run starts a new branch with the same user-requested PR-train id to expand FAQ authority to 8 items."
       }
     },
     "cms_mutation": false,
-    "commit_sha": "ccf256a8523e713e6ef671eea93e5490d8b30eca",
+    "commit_sha": "bf9d1eb05",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -26364,12 +26368,27 @@
         "at": "2026-06-28T22:40:05+08:00",
         "note": "Fresh GitHub checks passed after rebase and PR #2525 returned to CLEAN merge state.",
         "status": "ready_to_merge"
+      },
+      {
+        "at": "2026-07-05T14:27:26+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started explicit 2026-07-05 continuation of MBTI main visible FAQ authority from origin/main in an isolated worktree. Prior PR #2525 was verified as merged; this run expands content_i18n_json.zh.faq from 4 to 8 approved claim-safe FAQ items and keeps scope limited to ScaleRegistrySeeder, focused lookup coverage, authorized docs/codex bookkeeping, and required generated reports."
+      },
+      {
+        "at": "2026-07-05T14:52:10+08:00",
+        "status": "local_checks_passed",
+        "note": "Rebased onto latest origin/main 65b4e1b1c and reran route-list, focused lookup FAQ test, local curl lookup readback, full MBTI CI, YAML/JSON parsing, and scope validation. All passed; local curl readback returned the approved 8-item FAQ set."
+      },
+      {
+        "at": "2026-07-05T14:54:20+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2731 for the 2026-07-05 MBTI main visible FAQ 8-item authority expansion."
       }
     ],
     "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/2525",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2731",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
