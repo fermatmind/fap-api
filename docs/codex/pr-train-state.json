@@ -80651,8 +80651,8 @@
     "depends_on": [
       "BIG5-CMS-FAQ-DEDUPE-02"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "b7c242a86",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -80720,6 +80720,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Implemented public API schema runtime gate and focused Big Five indexability regressions. Syntax, focused PHPUnit, targeted Pint, full ci_verify_mbti, YAML/JSON parse, diff checks, and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-07-05T00:00:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed BIG5-CMS-INDEXABILITY-GATE-03 schema runtime gate scope at b7c242a86."
       }
     ]
   },
