@@ -33,6 +33,7 @@ return Application::configure(basePath: dirname(__DIR__))
         \App\Console\Commands\ArticleImportIqMethodPagesDraft::class,
         \App\Console\Commands\ArticleIqMethodPagesPublishGate::class,
         \App\Console\Commands\ArticleIqMethodPagesReadback::class,
+        \App\Console\Commands\ArticleIqMethodPagesReviewApproval::class,
         \App\Console\Commands\PersonalityEnneagramCmsPromote::class,
         \App\Console\Commands\FapResolvePack::class,
         \App\Console\Commands\RiasecResultPageAssetAgentAuditCommand::class,
