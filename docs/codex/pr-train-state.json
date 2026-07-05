@@ -6,9 +6,9 @@
     "base": "main",
     "branch": "codex/big5-cms-import-dryrun-01",
     "depends_on": [],
-    "status": "committed",
-    "commit_sha": "e01ecea6f82d17d85ece409d0ad7d5d43c1a9107",
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "3b6ad7c9df92a1fdf5e811a42e6f212c5c9c3130",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2722",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -85,7 +85,13 @@
         "at": "2026-07-05T04:31:06Z",
         "from": "local_checks_passed",
         "to": "committed",
-        "note": "Committed BIG5-CMS-IMPORT-DRYRUN-01 dry-run validator scope at e01ecea6f82d17d85ece409d0ad7d5d43c1a9107."
+        "note": "Committed BIG5-CMS-IMPORT-DRYRUN-01 dry-run validator scope at 3b6ad7c9df92a1fdf5e811a42e6f212c5c9c3130."
+      },
+      {
+        "at": "2026-07-05T04:31:06Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2722 for BIG5-CMS-IMPORT-DRYRUN-01 and pushed branch codex/big5-cms-import-dryrun-01."
       }
     ]
   },
