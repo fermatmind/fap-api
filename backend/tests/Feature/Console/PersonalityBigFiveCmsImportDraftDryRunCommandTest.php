@@ -19,9 +19,9 @@ final class PersonalityBigFiveCmsImportDraftDryRunCommandTest extends TestCase
         $this->app->make(Kernel::class)->registerCommand($this->app->make(PersonalityBigFiveCmsImportDraftDryRun::class));
     }
 
-    public function test_dry_run_reads_desktop_cms_import_draft_without_writes(): void
+    public function test_dry_run_reads_forty_two_row_cms_import_draft_without_writes(): void
     {
-        $packagePath = '/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json';
+        $packagePath = $this->writePackage($this->validFortyTwoRowPackage());
 
         $exitCode = Artisan::call('personality:big-five-cms-import-draft-dry-run', [
             '--package' => $packagePath,
@@ -117,11 +117,108 @@ final class PersonalityBigFiveCmsImportDraftDryRunCommandTest extends TestCase
     }
 
     /**
+     * @return list<array<string,mixed>>
+     */
+    private function validFortyTwoRowPackage(): array
+    {
+        $rows = [
+            $this->validRow([
+                'slug' => 'big-five',
+                'content_type' => 'hub_page',
+                'title' => '大五人格',
+                'canonical_path' => '/zh/personality/big-five',
+                'schema_recommendation' => 'CollectionPage',
+            ]),
+            $this->validRow([
+                'slug' => 'big-five',
+                'locale' => 'en-US',
+                'content_type' => 'hub_page',
+                'title' => 'Big Five Personality',
+                'canonical_path' => '/en/personality/big-five',
+                'schema_recommendation' => 'CollectionPage',
+            ]),
+        ];
+
+        foreach (['openness', 'conscientiousness', 'extraversion', 'agreeableness', 'neuroticism'] as $trait) {
+            $rows[] = $this->validRow([
+                'slug' => $trait,
+                'content_type' => 'trait_page',
+                'title' => $trait,
+                'canonical_path' => '/zh/personality/big-five/'.$trait,
+            ]);
+            $rows[] = $this->validRow([
+                'slug' => $trait,
+                'locale' => 'en-US',
+                'content_type' => 'trait_page',
+                'title' => $trait,
+                'canonical_path' => '/en/personality/big-five/'.$trait,
+            ]);
+
+            foreach (['high', 'mid', 'low'] as $range) {
+                $rows[] = $this->validRow([
+                    'slug' => $trait.'-'.$range,
+                    'content_type' => 'trait_range_page',
+                    'title' => $trait.' '.$range,
+                    'canonical_path' => '/zh/personality/big-five/'.$trait.'/'.$range,
+                ]);
+            }
+        }
+
+        foreach ([
+            'high-openness-low-conscientiousness',
+            'low-extraversion-high-conscientiousness',
+            'high-agreeableness-high-neuroticism',
+            'high-conscientiousness-low-agreeableness',
+            'high-openness-high-extraversion',
+            'low-neuroticism-high-conscientiousness',
+        ] as $combination) {
+            $rows[] = $this->validRow([
+                'slug' => $combination,
+                'content_type' => 'combination_page',
+                'title' => $combination,
+                'canonical_path' => '/zh/personality/big-five/combinations/'.$combination,
+            ]);
+        }
+
+        foreach ([
+            'big-five-vs-mbti',
+            'big-five-and-career',
+            'big-five-and-riasec',
+            'big-five-and-stress',
+            'big-five-and-relationships',
+        ] as $crossReading) {
+            $rows[] = $this->validRow([
+                'slug' => $crossReading,
+                'content_type' => 'cross_reading_page',
+                'title' => $crossReading,
+                'canonical_path' => '/zh/personality/big-five/cross-reading/'.$crossReading,
+            ]);
+        }
+
+        foreach ([
+            'how-to-read-big-five-results',
+            'big-five-result-review-work',
+            'big-five-result-review-learning',
+            'big-five-result-review-relationships',
+        ] as $resultReview) {
+            $rows[] = $this->validRow([
+                'slug' => $resultReview,
+                'content_type' => 'result_review_page',
+                'title' => $resultReview,
+                'canonical_path' => '/zh/personality/big-five/result-review/'.$resultReview,
+            ]);
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @param  array<string,mixed>  $overrides
      * @return array<string,mixed>
      */
-    private function validRow(): array
+    private function validRow(array $overrides = []): array
     {
-        return [
+        return array_replace_recursive([
             'slug' => 'openness',
             'locale' => 'zh-CN',
             'content_type' => 'trait_page',
@@ -152,7 +249,7 @@ final class PersonalityBigFiveCmsImportDraftDryRunCommandTest extends TestCase
             ],
             'schema_recommendation' => 'FAQPage',
             'indexability_gate' => 'manual_review_required',
-        ];
+        ], $overrides);
     }
 
     /**

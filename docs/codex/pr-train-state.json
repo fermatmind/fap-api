@@ -60,6 +60,20 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to BIG5-CMS-IMPORT-DRYRUN-01 allowed paths: backend/app/Console/Commands/PersonalityBigFiveCmsImportDraftDryRun.php, backend/app/Console/Kernel.php, backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php, backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      },
+      "github_verify_bigfive_initial": {
+        "status": "fail",
+        "evidence": "FAIL on PR #2722 verify-bigfive: PersonalityBigFiveCmsImportDraftDryRunCommandTest::test_dry_run_reads_desktop_cms_import_draft_without_writes returned exit code 1 because the test referenced /Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json, which is not present on GitHub runners."
+      },
+      "github_verify_bigfive_fix_local": {
+        "status": "pass",
+        "command": "php -l backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php && cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json && vendor/bin/pint --test tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php",
+        "evidence": "PASS: replaced the CI test input with a repo-generated 42-row fixture while keeping the real desktop v2 package dry-run as a local validation command; focused command tests passed with 4 tests and 42 assertions."
+      },
+      "local_full_verify_after_ci_fix": {
+        "status": "external_blocker_recorded",
+        "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+        "evidence": "Focused current-scope checks passed, but full local verification was affected by local worktree/branch-diff interference from IQ method files outside this PR scope. Recorded sidecar details in generated/pr-train-sidecar-issues/sidecar_issues.md and sidecar_issues.json."
       }
     },
     "scope_validation": {
@@ -92,6 +106,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR #2722 for BIG5-CMS-IMPORT-DRYRUN-01 and pushed branch codex/big5-cms-import-dryrun-01."
+      },
+      {
+        "at": "2026-07-05T04:31:06Z",
+        "from": "pr_open",
+        "to": "ci_fix_in_progress",
+        "note": "Inspected failing verify-bigfive job. Failure was current PR scope: the focused command test depended on the operator desktop package path. Replaced the CI test input with an equivalent generated 42-row fixture and kept the real desktop package dry-run as a local validation command."
       }
     ]
   },
