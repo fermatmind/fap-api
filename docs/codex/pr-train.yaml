@@ -37527,18 +37527,64 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend
+    next_task: BIG5-CMS-STAGING-AUTH-PACKET-10A
+
+  - id: BIG5-CMS-STAGING-AUTH-PACKET-10A
+    repo: fap-api
+    depends_on:
+      - BIG5-CMS-STAGING-IMPORT-RUNBOOK-09
+    branch: codex/big5-cms-staging-auth-packet-10a
+    title: "BIG5-CMS-STAGING-AUTH-PACKET-10A: generate Big Five staging CMS write authorization packet"
+    train_scope: big_five_cms_staging_write_readiness
+    status: user_authorized
+    scope:
+      - Generate a non-secret staging/dev authorization packet for Big Five CMS draft write readiness.
+      - Output generated/big-five-cms-staging-write-import/authorization_packet.json.
+      - Record package path, package SHA-256, expected row count, target environment, connection alias, rollback strategy, and confirmation phrase.
+      - Use staging as the default target environment and a non-secret placeholder connection alias.
+      - Keep this evidence-only; do not execute CMS writes, add a write command, publish, release indexability, sitemap, llms, JSON-LD runtime, search submission, or deploy.
+    allowed_paths:
+      - generated/big-five-cms-staging-write-import/authorization_packet.json
+      - generated/big-five-cms-staging-write-import/authorization_packet.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Modify backend runtime, importer logic, public API runtime, production CMS content, sitemap/llms runtime, JSON-LD runtime, canonical/noindex behavior, permissions, scheduler behavior, secrets, staging deploy, or production deploy.
+      - Store passwords, tokens, private DSNs, private hosts, or secret material.
+      - Execute BIG5-CMS-STAGING-WRITE-IMPORT-10 or any CMS write scope in this PR.
+    validation:
+      - python3 -m json.tool generated/big-five-cms-staging-write-import/authorization_packet.json >/dev/null
+      - python3 -m json.tool generated/big-five-content-polish/cms-import-draft.polished.json >/dev/null
+      - python3 -m json.tool generated/big-five-cms-import-dryrun/dryrun_report.json >/dev/null
+      - python3 -m json.tool generated/big-five-cms-preview-readback-qa/readback_qa_report.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - rg -n "BIG5-CMS-STAGING-AUTH-PACKET-10A|BIG5-CMS-STAGING-WRITE-IMPORT-10|BIG5-CMS-PREVIEW-RENDER-QA-11" docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
     next_task: BIG5-CMS-STAGING-WRITE-IMPORT-10
 
   - id: BIG5-CMS-STAGING-WRITE-IMPORT-10
     repo: fap-api
     depends_on:
-      - BIG5-CMS-STAGING-IMPORT-RUNBOOK-09
+      - BIG5-CMS-STAGING-AUTH-PACKET-10A
     branch: codex/big5-cms-staging-write-import-10
     title: "BIG5-CMS-STAGING-WRITE-IMPORT-10: execute authorized Big Five staging CMS write import"
     train_scope: big_five_cms_staging_write_import
-    status: blocked_pending_staging_dev_write_authorization
+    status: pending_dependency
     scope:
-      - Execute the Big Five CMS staging/dev draft import only after explicit operator authorization.
+      - Execute the Big Five CMS staging/dev draft import only after BIG5-CMS-STAGING-AUTH-PACKET-10A is merged and runtime staging/dev connection availability is verified.
       - Record exact package path, package SHA, target environment, command, rollback handle, and resulting evidence.
       - Keep imported rows draft/review, noindex, not public, not sitemap eligible, not llms eligible, and without runtime JSON-LD release.
       - Do not touch production, publish content, release SEO/GEO discoverability, trigger deploy, or submit search.
@@ -37554,7 +37600,7 @@ prs:
       - generated/pr-train-sidecar-issues/**
     do_not:
       - Modify fap-web.
-      - Execute any CMS write unless the thread contains the exact staging/dev authorization packet and confirmation phrase from the runbook.
+      - Execute any CMS write unless BIG5-CMS-STAGING-AUTH-PACKET-10A is merged and the runtime staging/dev connection is available.
       - Run production import, publish, indexability release, sitemap/llms release, JSON-LD runtime release, search submission, manual deploy, staging deploy wait, or production deploy.
     validation:
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
