@@ -79559,7 +79559,7 @@
     "depends_on": [
       "IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01"
     ],
-    "status": "committed",
+    "status": "pr_open",
     "authorized_by_user": "2026-07-05 user explicitly provided IQ 7 pages CMS上线执行计划 with readback as PR train step 3, after backend CMS import and before publish.",
     "checks": {
       "dependency": {
@@ -79626,7 +79626,7 @@
       "post_merge_revalidated": null
     },
     "commit_sha": "ac72416ce2583c2614c7726404e4d232c908af28",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2724",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -79656,6 +79656,11 @@
         "at": "2026-07-05T13:55:00+08:00",
         "status": "committed",
         "summary": "Committed IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01 scoped backend readback QA changes at 49c3008b77969b0b147fc223aa8c4c9e8792da18."
+      },
+      {
+        "at": "2026-07-05T14:00:00+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #2724 at https://github.com/fermatmind/fap-api/pull/2724 for IQ-METHOD-PAGES-ZH-CN-CMS-READBACK-01."
       }
     ]
   }
