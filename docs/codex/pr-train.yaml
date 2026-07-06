@@ -37773,3 +37773,56 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
     next_task: MBTI-MAIN-FAQ-SCHEMA-PARITY-REPAIR-01
+
+  - id: MBTI-CMS-26
+    repo: fap-api
+    depends_on:
+      - MBTI-CMS-13
+    branch: codex/mbti-cms-26-content15-mixed-import-preflight
+    title: "MBTI-CMS-26: add CONTENT-15 mixed package importer preflight"
+    train_scope: mbti_content15_mixed_package_import_preflight
+    status: user_authorized
+    scope:
+      - Add a backend-only CONTENT-15 mixed package preflight command for the 9-record MBTI CMS package.
+      - Read CMS-22 and CMS-23 package artifacts and map profile, A/T comparison, and cross-type comparison records.
+      - Validate exact source package sha256, authorization payload sha256, import scope mode, record count, field mapping, FAQ/section coverage, safe public links, and held indexability.
+      - Keep the command dry-run only; --write must fail closed before any package read or mutation.
+      - Do not write CMS, publish, release sitemap/llms, release indexability, submit GSC, trigger deploy, or modify frontend runtime.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityMbtiContent15MixedImportPreflight.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php
+      - backend/tests/Feature/Console/PersonalityMbtiContent15MixedImportPreflightCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Add frontend content fallback.
+      - Write CMS, run production imports, run database migrations, publish, enable indexability, release sitemap/llms, submit GSC, trigger staging deploy, trigger production deploy, or add public runtime content.
+      - Change public API routes, runtime personality rendering, content authority, canonical/noindex behavior, JSON-LD runtime, scheduler behavior, permissions, or secrets.
+      - Implement MBTI-CMS-27, MBTI-CMS-28, or MBTI-INDEX-24 scope in this PR.
+    validation:
+      - php -l backend/app/Console/Commands/PersonalityMbtiContent15MixedImportPreflight.php
+      - php -l backend/app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php
+      - php -l backend/tests/Feature/Console/PersonalityMbtiContent15MixedImportPreflightCommandTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityMbtiContent15MixedImportPreflightCommandTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_content15_mixed_import_preflight_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiContent15MixedImportPreflight.php app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php tests/Feature/Console/PersonalityMbtiContent15MixedImportPreflightCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: MBTI-CMS-27

@@ -82480,5 +82480,81 @@
         "note": "Opened PR #2744 for read-only production runtime FAQ readback evidence."
       }
     ]
+  },
+  "MBTI-CMS-26": {
+    "id": "MBTI-CMS-26",
+    "repo": "fap-api",
+    "title": "MBTI-CMS-26: add CONTENT-15 mixed package importer preflight",
+    "base": "main",
+    "branch": "codex/mbti-cms-26-content15-mixed-import-preflight",
+    "depends_on": [
+      "MBTI-CMS-13"
+    ],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized MBTI-CMS-26 in the attached /goal execution request for the CMS import gate PR train."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "MBTI-CMS-13 is recorded as merged in this fap-api train ledger before MBTI-CMS-26 starts."
+      },
+      "syntax_and_format": {
+        "status": "pass",
+        "command": "php -l backend/app/Console/Commands/PersonalityMbtiContent15MixedImportPreflight.php && php -l backend/app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php && php -l backend/tests/Feature/Console/PersonalityMbtiContent15MixedImportPreflightCommandTest.php && php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php && cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiContent15MixedImportPreflight.php app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php tests/Feature/Console/PersonalityMbtiContent15MixedImportPreflightCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "evidence": "PASS: PHP syntax checks passed for all scoped PHP files, and Pint reported PASS for 4 files."
+      },
+      "focused_tests": {
+        "status": "pass_with_phpunit_warnings",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityMbtiContent15MixedImportPreflightCommandTest --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_content15_mixed_import_preflight_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+        "evidence": "PASS exit code 0: 5 command tests with 54 assertions and 2 runtime-freeze tests with 4 assertions completed after rebase. PHPUnit reported warnings from local path/environment reads, not assertion failures."
+      },
+      "real_package_preflight": {
+        "status": "pass",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json",
+        "evidence": "PASS: real CMS-22/CMS-23 package preflight returned status=pass, record_count=9, profile_record_count=4, comparison_record_count=5, writes_committed=false."
+      },
+      "full_mbti_ci": {
+        "status": "pass",
+        "command": "bash scripts/ci_verify_mbti.sh",
+        "evidence": "PASS: verify_mbti, content_graph rollback, events acceptance, personality full-32 authority gate, payment uniqueness, migration safety, auth guest contract, openapi diff, order security, psychometrics streaming, dependency security, webhook/attempt regression, and related gates completed with exit code 0."
+      },
+      "manifest_and_diff": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "evidence": "PASS: train YAML parses, state JSON parses, and git diff whitespace check passes."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to MBTI-CMS-26 backend command/planner/tests, Kernel command registration, runtime-freeze classifier test allowlist, and authorized docs/codex PR-train metadata."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started backend-only CONTENT-15 mixed package importer preflight from an isolated fap-api worktree. Scope excludes production CMS writes, production imports, publish, indexability release, sitemap/llms, GSC submission, frontend runtime, staging deploy, and production deploy."
+      },
+      {
+        "at": "2026-07-06T04:00:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Implemented fail-closed CONTENT-15 mixed package preflight command and planner, validated the real 9-record CMS-22/CMS-23 package in dry-run mode, passed focused tests, formatting, manifest parsing, diff check, and full scripts/ci_verify_mbti.sh."
+      }
+    ]
   }
 }
