@@ -39,11 +39,11 @@
     "required_checks_affected": "Local verify_mbti.sh could not run without the expected local server. Targeted PHPUnit, syntax, Pint, command discovery, route list, and scope validation passed.",
     "recommended_follow_up": "Run bash scripts/verify_mbti.sh in an environment where the Laravel API is listening on 127.0.0.1:1827, or use the repository's standard local stack bootstrap before this check."
   },
-  {
-    "repo": "fermatmind/fap-api",
-    "pr_id": "BIG5-SITEMAP-LLMS-PERSONALITY-ASSET-14",
-    "branch": "codex/big5-sitemap-llms-personality-asset-14",
-    "blocker_type": "existing_broad_seo_test_failure",
+    {
+        "repo": "fermatmind/fap-api",
+        "pr_id": "BIG5-SITEMAP-LLMS-PERSONALITY-ASSET-14",
+        "branch": "codex/big5-sitemap-llms-personality-asset-14",
+        "blocker_type": "existing_broad_seo_test_failure",
     "evidence": [
       {
         "command": "php artisan test --filter=Sitemap",
@@ -56,8 +56,24 @@
         "failure": "Expected sitemap locs not to contain https://fermatmind.com/en/support."
       }
     ],
-    "why_not_current_pr_scope": "PR14 only adds Big Five personality_public_content_assets enumeration and targeted SEO tests. It does not change ContentPage, static index URL policy, English foundation/support content, or SeoIntel parity rules.",
-    "required_checks_affected": "Targeted Big Five checks pass. The broad local Sitemap filter is affected by pre-existing non-Big-Five failures.",
-    "recommended_follow_up": "Create a separate content/help policy sitemap cleanup PR for /en/foundation and /en/support exposure rules."
-  }
+        "why_not_current_pr_scope": "PR14 only adds Big Five personality_public_content_assets enumeration and targeted SEO tests. It does not change ContentPage, static index URL policy, English foundation/support content, or SeoIntel parity rules.",
+        "required_checks_affected": "Targeted Big Five checks pass. The broad local Sitemap filter is affected by pre-existing non-Big-Five failures.",
+        "recommended_follow_up": "Create a separate content/help policy sitemap cleanup PR for /en/foundation and /en/support exposure rules."
+    },
+    {
+        "repo": "fap-api",
+        "pr_id": "MONEY-INTENT-OWNER-PAGE-RUNTIME-RECONCILE-01",
+        "branch": "codex/money-intent-owner-page-runtime-reconcile-01",
+        "blocker_type": "external_generic_owner_and_gsc_quality_gate_partial",
+        "evidence": [
+            "Six direct zh assessment owner pages returned HTTP 200, self canonical, index/follow robots, and matching title/H1 evidence.",
+            "/zh/tests is a plausible broad 免费测试 owner with HTTP 200, self canonical, index/follow robots, title 测评入口中心, and H1 免费测试.",
+            "免费性格测试 and 免费职业测试 still need unique-owner proof because /zh/tests, /zh/personality, /zh/career, and the RIASEC landing can overlap in intent.",
+            "Prior P5 evidence keeps GSC/seo_intel quality blocked for write decisions."
+        ],
+        "why_not_current_pr_scope": "Current PR scope is read-only runtime reconciliation and generated evidence only. It is not authorized to write title/meta/H1/FAQ/internal links, mutate CMS/registry data, or run live GSC imports.",
+        "required_checks_affected": false,
+        "recommended_follow_up": "Complete MONEY-INTENT-CANNIBALIZATION-LINK-GRAPH-READONLY-01, then complete the GSC/read-model quality proof card before any TDK/CTR repair selection.",
+        "train_continued": true
+    }
 ]
