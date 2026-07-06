@@ -224,3 +224,20 @@
   - Do not attach those staged docs to SECURITY-169 API PR scopes.
   - Use an isolated PR-train worktree from `origin/main` for ledger closeout and next API PRs until the user-owned main worktree is clean.
 - whether train continued: `true`
+
+## COMPETITOR-ALTERNATIVE-HELD-READINESS-01 operator held competitor alternative
+
+- repo: `fermatmind/fap-api`
+- PR id / branch: `COMPETITOR-ALTERNATIVE-HELD-READINESS-01` / `codex/competitor-alternative-held-readiness-01`
+- blocker type: `operator_held_competitor_alternative`
+- evidence:
+  - Competitor alternative pages are explicitly held pending source ledger and legal/claim review.
+  - Candidate pages such as 16P, Truity, and 123test alternatives need explicit operator approval before route, CMS, copy, indexability, sitemap, `llms`, schema, or runtime work.
+  - Current PR is generated-only readiness reporting and does not authorize implementation.
+- why not current PR scope:
+  - Current PR is a generated-only held/readiness artifact.
+  - It is not authorized to draft public copy, create routes, write CMS content, make comparative claims, mutate discoverability surfaces, or deploy.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Continue to `COMPETITOR-ALTERNATIVE-SOURCE-LEDGER-GAP-AUDIT-01` and `COMPETITOR-ALTERNATIVE-LEGAL-CLAIM-REVIEW-HANDOFF-01` as generated-only artifacts before any implementation authorization.
+- whether train continued: `true`
