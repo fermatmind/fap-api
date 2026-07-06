@@ -1,0 +1,21 @@
+{
+  "task_id": "CTR-TDK-REPAIR-DRYRUN-QUEUE-01",
+  "date": "2026-07-06",
+  "repo": "fermatmind/fap-api",
+  "scope": "generated_docs_only",
+  "output_path": "backend/docs/seo/daily-runs/2026-07-06/ctr-tdk-repair-dryrun-queue-01/",
+  "final_verdict": "BLOCKED_BY_GSC_DATA_QUALITY",
+  "queue_status": "blocked",
+  "candidate_pages_selected": 0,
+  "tdk_changes_proposed": 0,
+  "cms_write": false,
+  "search_channel_enqueue": false,
+  "live_gsc_api_call": false,
+  "seo_gsc_daily_import": false,
+  "sidecar_required": true,
+  "validation": [
+    "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-06/ctr-tdk-repair-dryrun-queue-01/scan_manifest.json >/dev/null",
+    "python3 -m json.tool generated/pr-train-sidecar-issues/sidecar_issues.json >/dev/null",
+    "git diff --check"
+  ]
+}
