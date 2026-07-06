@@ -1,0 +1,35 @@
+{
+  "task_id": "SIX-TEST-HUB-BACKEND-AUTHORITY-OWNER-MATRIX-01",
+  "repo": "fap-api",
+  "branch": "codex/six-test-hub-backend-authority-owner-matrix-01",
+  "output_path": "backend/docs/seo/daily-runs/2026-07-06/six-test-hub-backend-authority-owner-matrix-01/",
+  "generated_at": "2026-07-06",
+  "final_verdict": "AUTHORITY_MATRIX_READY",
+  "owner_surfaces_mapped": 8,
+  "backend_authority_candidate": "scales_registry",
+  "primary_fields": [
+    "seo_schema_json",
+    "seo_i18n_json",
+    "content_i18n_json",
+    "report_summary_i18n_json"
+  ],
+  "public_read_paths_reviewed": [
+    "/api/v0.3/scales/catalog",
+    "/api/v0.3/scales/lookup",
+    "/api/v0.3/scales/sitemap-source",
+    "/api/v0.5/seo/sitemap-source"
+  ],
+  "repair_implemented": false,
+  "cms_write_performed": false,
+  "runtime_mutation_performed": false,
+  "database_write_performed": false,
+  "sitemap_mutation_performed": false,
+  "llms_mutation_performed": false,
+  "schema_mutation_performed": false,
+  "fap_web_edit_performed": false,
+  "search_submission_performed": false,
+  "deploy_triggered": false,
+  "staging_deploy_waited": false,
+  "production_deploy_triggered": false,
+  "next_task": "MONEY-INTENT-OWNER-PAGE-RUNTIME-RECONCILE-01"
+}
