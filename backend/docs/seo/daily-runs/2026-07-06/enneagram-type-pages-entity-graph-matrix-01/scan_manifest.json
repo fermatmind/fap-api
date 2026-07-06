@@ -1,0 +1,29 @@
+{
+  "task_id": "ENNEAGRAM-TYPE-PAGES-ENTITY-GRAPH-MATRIX-01",
+  "date": "2026-07-06",
+  "repo": "fermatmind/fap-api",
+  "scope": "generated_docs_only",
+  "output_path": "backend/docs/seo/daily-runs/2026-07-06/enneagram-type-pages-entity-graph-matrix-01/",
+  "final_verdict": "ENTITY_RUNTIME_MATRIX_READY",
+  "runtime_readback": {
+    "public_route_shape": "/{locale}/personality/enneagram/type-{number}",
+    "zh_routes_checked": 9,
+    "zh_routes_http_200": 9,
+    "en_routes_checked": 9,
+    "en_routes_http_200": 9,
+    "non_owner_shapes_spot_checked": [
+      "/{locale}/personality/enneagram/{number}",
+      "/{locale}/personality/enneagram-{number}",
+      "/{locale}/personality/type-{number}",
+      "/{locale}/personality/enneagram/{type-name}"
+    ]
+  },
+  "changed_runtime": false,
+  "changed_cms": false,
+  "changed_discoverability": false,
+  "sidecar_required": false,
+  "validation": [
+    "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-06/enneagram-type-pages-entity-graph-matrix-01/scan_manifest.json >/dev/null",
+    "git diff --check"
+  ]
+}
