@@ -88,3 +88,21 @@
   - Complete `MONEY-INTENT-CANNIBALIZATION-LINK-GRAPH-READONLY-01`.
   - Complete the GSC/read-model quality proof card before any TDK/CTR repair selection.
 - whether train continued: `true`
+
+## MONEY-INTENT-TDK-DRYRUN-CANDIDATE-SELECTION-01 GSC gate blocked
+
+- repo: `fap-api`
+- PR id / branch: `MONEY-INTENT-TDK-DRYRUN-CANDIDATE-SELECTION-01` / `codex/money-intent-tdk-dryrun-candidate-selection-01`
+- blocker type: `blocked_by_gsc_data_quality`
+- evidence:
+  - `GSC-SEO-INTEL-QUALITY-REFRESH-READONLY-01` records the current gate as blocked.
+  - Current evidence does not prove `data_origin=live_gsc_api`.
+  - Current evidence does not prove opportunity queue eligibility.
+  - TDK/CTR repair selection is forbidden from fixture/mock/static/unknown data.
+- why not current PR scope:
+  - Current PR is generated-only blocked reporting.
+  - It is not authorized to call live GSC, import data, write CMS fields, write title/meta/H1/FAQ, or submit Search URLs.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Complete `GSC-SEO-INTEL-LIVE-READMODEL-QUALITY-PROOF-READONLY-01` or a separately authorized equivalent before any TDK/CTR selection.
+- whether train continued: `true`
