@@ -75,5 +75,21 @@
         "required_checks_affected": false,
         "recommended_follow_up": "Complete MONEY-INTENT-CANNIBALIZATION-LINK-GRAPH-READONLY-01, then complete the GSC/read-model quality proof card before any TDK/CTR repair selection.",
         "train_continued": true
+    },
+    {
+        "repo": "fap-api",
+        "pr_id": "MONEY-INTENT-TDK-DRYRUN-CANDIDATE-SELECTION-01",
+        "branch": "codex/money-intent-tdk-dryrun-candidate-selection-01",
+        "blocker_type": "blocked_by_gsc_data_quality",
+        "evidence": [
+            "GSC-SEO-INTEL-QUALITY-REFRESH-READONLY-01 records the current gate as blocked.",
+            "Current evidence does not prove data_origin=live_gsc_api.",
+            "Current evidence does not prove opportunity queue eligibility.",
+            "TDK/CTR repair selection is forbidden from fixture/mock/static/unknown data."
+        ],
+        "why_not_current_pr_scope": "Current PR is generated-only blocked reporting. It is not authorized to call live GSC, import data, write CMS fields, write title/meta/H1/FAQ, or submit Search URLs.",
+        "required_checks_affected": false,
+        "recommended_follow_up": "Complete GSC-SEO-INTEL-LIVE-READMODEL-QUALITY-PROOF-READONLY-01 or a separately authorized equivalent before any TDK/CTR selection.",
+        "train_continued": true
     }
 ]
