@@ -82606,6 +82606,81 @@
       }
     ]
   },
+  "MBTI-CMS-26B": {
+    "id": "MBTI-CMS-26B",
+    "repo": "fap-api",
+    "title": "MBTI-CMS-26B: add MBTI cross-type comparison authority storage",
+    "base": "main",
+    "branch": "codex/mbti-cms-26b-cross-type-authority",
+    "depends_on": [
+      "MBTI-CMS-26"
+    ],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly requested a new prerequisite PR, MBTI-CMS-26B or MBTI-CMS-27A, for cross-type comparison backend authority storage and readmodel without production writes."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "MBTI-CMS-26 is recorded as merged before MBTI-CMS-26B starts."
+      },
+      "production_write_gate": {
+        "status": "held",
+        "evidence": "This PR adds storage/readmodel support only. Production CMS import remains deferred to MBTI-CMS-27 after this prerequisite merges."
+      },
+      "syntax_and_migration": {
+        "status": "pass",
+        "command": "php -l backend/database/migrations/2026_07_06_000100_create_mbti_cross_type_comparison_authorities_table.php && php -l backend/app/Models/MbtiCrossTypeComparisonAuthority.php && php -l backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php && php -l backend/app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php && php -l backend/app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php && php -l backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force --no-ansi",
+        "evidence": "PASS: syntax checks passed for scoped PHP files and full testing SQLite migration created mbti_cross_type_comparison_authorities."
+      },
+      "focused_tests": {
+        "status": "pass_with_phpunit_warnings",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=MbtiCrossTypeComparisonAuthorityReadModelTest --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityMbtiComparisonCmsImportDryRunCommandTest|PersonalityMbtiContent15MixedImportPreflightCommandTest' --no-ansi",
+        "evidence": "PASS exit code 0: cross-type authority readmodel tests passed with 34 assertions; comparison dry-run and mixed preflight tests passed with 109 assertions. PHPUnit reported local path/environment warnings, not assertion failures."
+      },
+      "real_package_preflight": {
+        "status": "pass",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json",
+        "evidence": "PASS: real CMS-22/CMS-23 preflight returned status=pass, cross_type_comparison_count=4, writes_committed=false, and cross-type rows target mbti_cross_type_comparison_authorities."
+      },
+      "format_and_manifest": {
+        "status": "pass",
+        "command": "vendor/bin/pint --test ... && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "evidence": "PASS: Pint reported PASS for 7 scoped files, train YAML parses, state JSON parses, and git diff whitespace check passes."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to MBTI-CMS-26B storage/readmodel/planner/tests plus authorized docs/codex PR-train metadata."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started a backend-only prerequisite PR for MBTI cross-type comparison authority storage and public readmodel support. Scope excludes production CMS writes, production imports, sitemap/llms/indexability release, GSC submission, deploy, and frontend fallback content."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Added the cross-type authority table/model, DB-backed list/detail readmodel support, preflight target mapping, and tests. Local validation passed; production CMS write remains deferred."
+      }
+    ]
+  },
   "MBTI-CMS-27": {
     "id": "MBTI-CMS-27",
     "repo": "fap-api",
@@ -82613,12 +82688,12 @@
     "base": "main",
     "branch": "codex/mbti-cms-27-content15-production-import",
     "depends_on": [
-      "MBTI-CMS-26"
+      "MBTI-CMS-26B"
     ],
-    "status": "blocked_needs_operator_authorization",
+    "status": "blocked_dependency",
     "commit_sha": null,
     "pr_url": null,
-    "failure_reason": "Production CMS write is explicitly blocked until the operator provides separate exact authorization containing source_package_sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb, authorization_payload_sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15, import_scope_mode=top_blocker_batch_only, and record_count=9.",
+    "failure_reason": "Production CMS write is explicitly blocked until MBTI-CMS-26B merges and provides cross-type comparison backend authority storage/readmodel support. The operator has provided the exact MBTI-CMS-27 authorization values, but import execution must wait for this prerequisite.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -82628,12 +82703,12 @@
         "evidence": "User explicitly authorized adding MBTI-CMS-27 to the fap-api train in the attached /goal execution request."
       },
       "dependency": {
-        "status": "pass",
-        "evidence": "MBTI-CMS-26 PR #2771 is merged and origin/main contains merge commit 63f1f9b35d90d3f409468640fd1ede3604f7e909."
+        "status": "blocked_dependency",
+        "evidence": "MBTI-CMS-26B has been inserted as a prerequisite for cross-type comparison authority storage before MBTI-CMS-27 production CMS import can run."
       },
       "operator_authorization": {
-        "status": "blocked_needs_exact_authorization",
-        "evidence": "The attached /goal requires stopping before MBTI-CMS-27 until separate exact production CMS write authorization is provided. No production CMS write was attempted."
+        "status": "pass_held_until_dependency",
+        "evidence": "The operator provided exact authorization values for source_package_sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb, authorization_payload_sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15, import_scope_mode=top_blocker_batch_only, and record_count=9. No production CMS write was attempted because MBTI-CMS-26B must merge first."
       }
     },
     "scope_validation": {
@@ -82647,7 +82722,13 @@
         "at": "2026-07-06T04:12:02Z",
         "from": "manifest_registered",
         "to": "blocked_needs_operator_authorization",
-        "note": "Registered MBTI-CMS-27 but stopped before production CMS import because separate exact operator authorization has not been provided in a new explicit write-authorization instruction."
+        "note": "Registered MBTI-CMS-27 but stopped before production CMS import because separate exact operator authorization had not yet been provided in a new explicit write-authorization instruction."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "from": "blocked_needs_operator_authorization",
+        "to": "blocked_dependency",
+        "note": "Operator later provided exact production import authorization, but execution remains blocked until MBTI-CMS-26B merges cross-type comparison backend authority storage and readmodel support."
       }
     ]
   },
