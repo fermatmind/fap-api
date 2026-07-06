@@ -82333,6 +82333,11 @@
       "github_verify_bigfive_initial": {
         "status": "fail",
         "evidence": "FAIL on PR #2766 verify-bigfive: BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff classified PR13 Big Five SEO release command, writer, and Kernel registration as MBTI-impacting runtime changes."
+      },
+      "github_verify_bigfive_fix_local": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_big_five_seo_discoverability_release_files' --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveSeoDiscoverabilityReleaseCommandTest --no-ansi && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php app/Console/Commands/PersonalityBigFiveSeoDiscoverabilityRelease.php app/Services/Cms/BigFiveSeoDiscoverabilityReleaseWriter.php app/Services/SEO/SeoDiscoverabilityCacheInvalidator.php tests/Feature/Console/PersonalityBigFiveSeoDiscoverabilityReleaseCommandTest.php",
+        "evidence": "PASS: runtime freeze classifier now ignores PR13 Big Five SEO release command/writer/Kernel registration; PR13 focused command contract and targeted Pint also pass. Local temp clone still emits dotenv .env warnings with exit code 0."
       }
     },
     "scope_validation": {
@@ -82388,6 +82393,11 @@
         "at": "2026-07-06T00:00:00Z",
         "status": "ci_fix_in_progress",
         "summary": "Inspected failing GitHub verify-bigfive job. Failure is current PR scope: runtime-freeze classifier needed to recognize the PR13 Big Five SEO discoverability release command and writer as non-MBTI runtime changes."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "status": "ci_fix_local_checks_passed",
+        "summary": "Updated runtime-freeze classifier for PR13 Big Five SEO discoverability release files and restored Kernel diff to PR13-only lines. Focused classifier tests, PR13 command tests, targeted Pint, YAML/JSON parse, and diff check passed locally."
       }
     ]
   },
