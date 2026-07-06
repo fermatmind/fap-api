@@ -14,6 +14,22 @@ final class SeoDiscoverabilityCacheInvalidator
      */
     public function flushArticleDiscoverabilityCaches(): array
     {
+        return $this->flushSharedDiscoverabilityCaches();
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function flushPersonalityPublicContentDiscoverabilityCaches(): array
+    {
+        return $this->flushSharedDiscoverabilityCaches();
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function flushSharedDiscoverabilityCaches(): array
+    {
         $keys = [
             SitemapSourceController::CACHE_KEY_FRESH,
             SitemapSourceController::CACHE_KEY_STALE,
