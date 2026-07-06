@@ -30,6 +30,11 @@ final class PersonalityBigFiveSeoDiscoverabilityReleaseCommandTest extends TestC
         $this->assertArrayHasKey('personality:big-five-seo-discoverability-release', Artisan::all());
     }
 
+    public function test_release_review_state_fits_personality_public_asset_column(): void
+    {
+        $this->assertLessThanOrEqual(32, strlen(BigFiveSeoDiscoverabilityReleaseWriter::REVIEW_STATE));
+    }
+
     public function test_dry_run_plans_exact_twenty_authorized_rows_without_writes(): void
     {
         [$packagePath, $sha256] = $this->writePackage($this->validFortyTwoRowPackage());

@@ -12,7 +12,7 @@ use RuntimeException;
 
 final class BigFiveSeoDiscoverabilityReleaseWriter
 {
-    public const REVIEW_STATE = 'operator_approved_seo_discoverability_released';
+    public const REVIEW_STATE = 'seo_discoverability_released';
 
     /**
      * @param  array<string,mixed>  $plan
