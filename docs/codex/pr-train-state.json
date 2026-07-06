@@ -41873,7 +41873,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "17b937704d8fff2274ab45ac218836fd42dd6b46",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -41895,18 +41895,23 @@
         "at": "2026-07-06T00:00:00+08:00",
         "note": "Local validation and scope validation passed after rebasing onto latest origin/main; no staging, manual deploy, production deploy, CMS write, or DB migration was executed.",
         "status": "validated"
+      },
+      {
+        "at": "2026-07-06T13:39:47+08:00",
+        "note": "PR #2781 merged after GitHub checks passed; staging deploy was not waited on and no manual or production deploy was triggered.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-05",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-06T05:39:47Z",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2781",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-05: seal IQ answer-key, asset, and claim boundaries",
     "train_scope": "security_169_fap_api_audit"
   },
