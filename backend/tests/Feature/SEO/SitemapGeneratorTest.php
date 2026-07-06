@@ -8,6 +8,7 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
 use App\Models\ContentPage;
+use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
@@ -176,6 +177,80 @@ class SitemapGeneratorTest extends TestCase
         }
 
         $this->assertStringNotContainsString('https://fermatmind.com/en/help/about', $xml);
+    }
+
+    public function test_generate_includes_released_zh_big_five_public_content_assets_only(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $traitSlugs = [
+            'openness',
+            'conscientiousness',
+            'extraversion',
+            'agreeableness',
+            'neuroticism',
+        ];
+        $rangeSlugs = [];
+        foreach ($traitSlugs as $traitSlug) {
+            foreach (['high', 'mid', 'low'] as $range) {
+                $rangeSlugs[] = "{$traitSlug}-{$range}";
+            }
+        }
+
+        foreach ($traitSlugs as $slug) {
+            $this->createBigFivePublicContentAsset($slug, PersonalityPublicContentAsset::ENTITY_DOMAIN);
+        }
+        foreach ($rangeSlugs as $slug) {
+            $this->createBigFivePublicContentAsset($slug, PersonalityPublicContentAsset::ENTITY_POLARITY);
+        }
+
+        $this->createBigFivePublicContentAsset('openness-en', PersonalityPublicContentAsset::ENTITY_DOMAIN, [
+            'entity_key' => 'openness',
+            'slug' => 'big-five/openness-en',
+            'locale' => 'en',
+            'canonical_json' => ['path' => '/en/personality/big-five/openness'],
+        ]);
+        $this->createBigFivePublicContentAsset('hub', PersonalityPublicContentAsset::ENTITY_HUB, [
+            'canonical_json' => ['path' => '/zh/personality/big-five'],
+        ]);
+        $this->createBigFivePublicContentAsset('openness-noindex', PersonalityPublicContentAsset::ENTITY_DOMAIN, [
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'index_eligible' => false,
+            'sitemap_eligible' => false,
+            'canonical_json' => ['path' => '/zh/personality/big-five/openness-noindex'],
+        ]);
+        $this->createBigFivePublicContentAsset('openness-review', PersonalityPublicContentAsset::ENTITY_DOMAIN, [
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            'sitemap_eligible' => false,
+            'canonical_json' => ['path' => '/zh/personality/big-five/openness-review'],
+        ]);
+        $this->createBigFivePublicContentAsset('openness-sitemap-off', PersonalityPublicContentAsset::ENTITY_DOMAIN, [
+            'sitemap_eligible' => false,
+            'canonical_json' => ['path' => '/zh/personality/big-five/openness-sitemap-off'],
+        ]);
+        $this->createBigFivePublicContentAsset('openness-llms-off', PersonalityPublicContentAsset::ENTITY_DOMAIN, [
+            'llms_eligible' => false,
+            'canonical_json' => ['path' => '/zh/personality/big-five/openness-llms-off'],
+        ]);
+        $this->createBigFivePublicContentAsset('openness-short-path', PersonalityPublicContentAsset::ENTITY_DOMAIN, [
+            'canonical_json' => ['path' => '/zh/big-five/openness'],
+        ]);
+
+        $payload = app(SitemapGenerator::class)->generate();
+        $xml = (string) ($payload['xml'] ?? '');
+        $slugList = (array) ($payload['slug_list'] ?? []);
+
+        foreach (array_merge($traitSlugs, $rangeSlugs) as $slug) {
+            $this->assertStringContainsString("https://fermatmind.com/zh/personality/big-five/{$slug}", $xml);
+            $this->assertContains("personality-public-content:big-five:zh:{$slug}", $slugList);
+        }
+
+        $this->assertStringNotContainsString('https://fermatmind.com/en/personality/big-five/openness', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-noindex', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-review', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-sitemap-off', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-llms-off', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/big-five/openness', $xml);
     }
 
     public function test_generate_excludes_science_content_pages_until_public_readiness_gate_passes(): void
@@ -897,6 +972,60 @@ class SitemapGeneratorTest extends TestCase
             'twitter_image_url' => null,
             'robots' => null,
             'jsonld_overrides_json' => null,
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createBigFivePublicContentAsset(
+        string $entityKey,
+        string $entityType,
+        array $overrides = [],
+    ): PersonalityPublicContentAsset {
+        $canonicalPath = "/zh/personality/big-five/{$entityKey}";
+
+        /** @var PersonalityPublicContentAsset */
+        return PersonalityPublicContentAsset::query()->create(array_merge([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => $entityType,
+            'entity_key' => $entityKey,
+            'slug' => 'big-five/'.$entityKey,
+            'locale' => 'zh-CN',
+            'title' => 'Big Five '.$entityKey,
+            'summary' => 'Big Five public content asset.',
+            'content_sections_json' => [
+                ['id' => 'overview', 'heading' => 'Overview', 'body' => 'Visible reviewed body.'],
+            ],
+            'seo_json' => [
+                'title' => 'Big Five '.$entityKey,
+                'description' => 'Big Five SEO description.',
+            ],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
+            'canonical_json' => ['path' => $canonicalPath],
+            'hreflang_json' => [],
+            'faq_json' => [
+                ['question' => 'What is this page?', 'answer' => 'A reviewed Big Five content asset.'],
+            ],
+            'media_json' => [],
+            'schema_json' => ['runtime_jsonld_enabled' => true],
+            'method_boundary_json' => ['non_diagnostic' => true],
+            'evidence_notes_json' => ['status' => 'reviewed'],
+            'internal_links_json' => [],
+            'is_public' => true,
+            'index_eligible' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'seo_discoverability_released',
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+            'source_package' => 'test-package',
+            'source_hash' => str_repeat('a', 64),
+            'published_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),
+            'last_reviewed_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),
+            'created_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 7, 2, 8, 0, 0, 'UTC'),
         ], $overrides));
     }
 
