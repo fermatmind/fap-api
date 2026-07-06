@@ -82616,7 +82616,7 @@
       "MBTI-CMS-26"
     ],
     "status": "pr_open",
-    "commit_sha": "841cccfd26eb914102073ac264c9de450d3d19a1",
+    "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2785",
     "failure_reason": null,
     "merged_at": null,
@@ -82655,13 +82655,18 @@
         "command": "vendor/bin/pint --test ... && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
         "evidence": "PASS: Pint reported PASS for 7 scoped files, train YAML parses, state JSON parses, and git diff whitespace check passes."
       },
+      "runtime_freeze_ci_fix": {
+        "status": "pass_with_phpunit_warnings",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_cross_type_authority_storage_readmodel_files' --no-ansi",
+        "evidence": "PASS exit code 0: added a scoped runtime-freeze classifier allowlist for MBTI-CMS-26B backend authority storage/readmodel files after PR #2785 verify-bigfive flagged the new model and migration. PHPUnit emitted local fixture-path warnings; assertions passed."
+      },
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to MBTI-CMS-26B storage/readmodel/planner/tests plus authorized docs/codex PR-train metadata."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "PR #2785 opened for MBTI-CMS-26B; GitHub checks are pending."
+        "status": "current_scope_fix_pending_remote_checks",
+        "evidence": "PR #2785 verify-bigfive failed because BigFiveResultPageV2CoreBodyPreviewTest classified the new MBTI-CMS-26B authority model and migration as uncommitted runtime diff. The current-scope classifier fix passed locally and will be pushed for GitHub recheck."
       }
     },
     "scope_validation": {
@@ -82688,6 +82693,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened PR #2785 for MBTI-CMS-26B: https://github.com/fermatmind/fap-api/pull/2785."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "from": "pr_open",
+        "to": "current_scope_ci_fix_local_checks_passed",
+        "note": "Inspected PR #2785 verify-bigfive failure. The failure was in the runtime-freeze classifier and was caused by this PR's new MBTI cross-type authority storage files. Added a scoped allowlist and regression test; focused local validation passed."
       }
     ]
   },

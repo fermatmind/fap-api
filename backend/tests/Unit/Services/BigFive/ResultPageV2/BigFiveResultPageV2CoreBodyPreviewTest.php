@@ -402,6 +402,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_cross_type_authority_storage_readmodel_files(): void
+    {
+        $changed = [
+            'backend/app/Models/MbtiCrossTypeComparisonAuthority.php',
+            'backend/database/migrations/2026_07_06_000100_create_mbti_cross_type_comparison_authorities_table.php',
+            'backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_big_five_cms_import_draft_dry_run_files(): void
     {
         $changed = [
@@ -5129,6 +5140,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiCrossTypeAuthorityStorageReadmodelFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsImportDraftDryRunFile($file)) {
                 continue;
             }
@@ -6679,6 +6694,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbtiContent15MixedImportPreflight.php',
             'backend/app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php',
+        ], true);
+    }
+
+    private function isMbtiCrossTypeAuthorityStorageReadmodelFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Models/MbtiCrossTypeComparisonAuthority.php',
+            'backend/database/migrations/2026_07_06_000100_create_mbti_cross_type_comparison_authorities_table.php',
+            'backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php',
         ], true);
     }
 
