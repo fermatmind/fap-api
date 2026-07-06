@@ -8,7 +8,8 @@
 
 - Backend `iq_norm_authorities` records are the only source allowed to unlock public IQ estimate, percentile, or confidence interval claims.
 - Frontend, CMS, SEO metadata, and paid-report rendering must not infer norm availability from local content, copy, payment state, or item-bank metadata.
-- A norm authority is claim-eligible only when it is locked, license-verified, not retired, sample-size gated, and in a claim-eligible status.
+- A norm authority is claim-eligible only when the backend gate emits literal boolean `true`; string values such as `"true"` or `"false"` are not authority.
+- A claim-eligible authority must be locked, license-verified, not retired, sample-size gated, and in a claim-eligible status.
 - Future importers must run schema validation and dry-run checks before any authority record can be locked.
 
 ## Claim-eligible statuses

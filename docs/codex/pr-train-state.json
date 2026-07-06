@@ -41862,6 +41862,14 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "local_validation": {
+        "evidence": "Ran syntax checks, focused IQ owner asset/session and IQ report builder tests, route:list, sqlite migrate, OpenAPI snapshot check, JSON/YAML parsing, git diff --check, and backend/scripts/ci_verify_mbti.sh after rebasing onto latest origin/main.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "Changed files are confined to API-05 allowed IQ owner asset/session delivery, spoofable anon ownership, norm claim authority, OpenAPI snapshot, and train manifest/state paths.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -41877,6 +41885,16 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-05; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-06T00:00:00+08:00",
+        "note": "Started SECURITY-169-API-05 from latest origin/main in isolated worktree; scope is IQ answer-key, asset delivery, spoofable anon ownership, and norm claim authority boundaries only.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-06T00:00:00+08:00",
+        "note": "Local validation and scope validation passed after rebasing onto latest origin/main; no staging, manual deploy, production deploy, CMS write, or DB migration was executed.",
+        "status": "validated"
       }
     ],
     "failure_reason": null,
@@ -41888,7 +41906,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-05: seal IQ answer-key, asset, and claim boundaries",
     "train_scope": "security_169_fap_api_audit"
   },

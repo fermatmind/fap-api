@@ -1151,7 +1151,8 @@
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
-                    "App\\Http\\Middleware\\ResolveOrgContext"
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenAuth"
                 ],
                 "x-laravel-name": "api.v0_3.iq_owner_original_30.assets.show"
             }

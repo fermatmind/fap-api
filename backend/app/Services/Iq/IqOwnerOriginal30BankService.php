@@ -9,7 +9,6 @@ use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 final class IqOwnerOriginal30BankService
@@ -128,7 +127,7 @@ final class IqOwnerOriginal30BankService
             ],
             'questions' => [
                 'schema_version' => 'fm.iq.owner_image_bank.items.public.v1',
-                'items' => [$this->publicItem($item, $this->publicRequestOrigin($request))],
+                'items' => [$this->publicItem($item, $this->publicRequestOrigin(), (string) $attempt->id)],
             ],
             'meta' => [
                 'source' => 'attempt_bound_owner_bank',
@@ -375,12 +374,12 @@ final class IqOwnerOriginal30BankService
      * @param  array<string,mixed>  $item
      * @return array<string,mixed>
      */
-    private function publicItem(array $item, string $publicAssetOrigin): array
+    private function publicItem(array $item, string $publicAssetOrigin, string $attemptId): array
     {
         $options = [];
         foreach (($item['options'] ?? []) as $option) {
             if (is_array($option)) {
-                $options[] = $this->onlyPublicOptionFields($option, $publicAssetOrigin);
+                $options[] = $this->onlyPublicOptionFields($option, $publicAssetOrigin, $attemptId);
             }
         }
 
@@ -396,7 +395,8 @@ final class IqOwnerOriginal30BankService
             'title' => (string) ($item['title'] ?? ''),
             'stem' => $this->onlyPublicMediaFields(
                 is_array($item['stem'] ?? null) ? $item['stem'] : [],
-                $publicAssetOrigin
+                $publicAssetOrigin,
+                $attemptId
             ),
             'options' => $options,
         ];
@@ -427,12 +427,12 @@ final class IqOwnerOriginal30BankService
      * @param  array<string,mixed>  $option
      * @return array<string,mixed>
      */
-    private function onlyPublicOptionFields(array $option, string $publicAssetOrigin): array
+    private function onlyPublicOptionFields(array $option, string $publicAssetOrigin, string $attemptId): array
     {
         return [
             'code' => strtoupper(trim((string) ($option['code'] ?? ''))),
             'label' => (string) ($option['label'] ?? $option['code'] ?? ''),
-            ...$this->onlyPublicMediaFields($option, $publicAssetOrigin),
+            ...$this->onlyPublicMediaFields($option, $publicAssetOrigin, $attemptId),
         ];
     }
 
@@ -440,18 +440,18 @@ final class IqOwnerOriginal30BankService
      * @param  array<string,mixed>  $media
      * @return array<string,mixed>
      */
-    private function onlyPublicMediaFields(array $media, string $publicAssetOrigin): array
+    private function onlyPublicMediaFields(array $media, string $publicAssetOrigin, string $attemptId): array
     {
         $assets = is_array($media['assets'] ?? null) ? $media['assets'] : [];
         $publicUrl = $this->publicAssetUrl(
             is_string($assets['image'] ?? null) ? (string) $assets['image'] : '',
-            $publicAssetOrigin
+            $publicAssetOrigin,
+            $attemptId
         );
 
         return [
             'type' => (string) ($media['type'] ?? 'image'),
             'media_type' => (string) ($media['media_type'] ?? 'image/webp'),
-            'assets' => $assets,
             ...($publicUrl !== null ? [
                 'src' => $publicUrl,
                 'public_url' => $publicUrl,
@@ -463,34 +463,19 @@ final class IqOwnerOriginal30BankService
         ];
     }
 
-    private function publicAssetUrl(string $assetPath, string $publicAssetOrigin): ?string
+    private function publicAssetUrl(string $assetPath, string $publicAssetOrigin, string $attemptId): ?string
     {
         $routePath = $this->publicRoutePathForAsset($assetPath);
-        if ($routePath === null) {
+        if ($routePath === null || $attemptId === '') {
             return null;
         }
 
-        return $publicAssetOrigin.'/api/v0.3/iq-owner-original-30/assets/'.$this->encodePublicPath($routePath);
+        return $publicAssetOrigin.'/api/v0.3/iq-owner-original-30/assets/'.$this->encodePublicPath($routePath)
+            .'?attempt_id='.rawurlencode($attemptId);
     }
 
-    private function publicRequestOrigin(?Request $request): string
+    private function publicRequestOrigin(): string
     {
-        if ($request !== null) {
-            $forwardedProto = trim((string) $request->headers->get('x-forwarded-proto', ''));
-            $forwardedHost = trim((string) $request->headers->get('x-forwarded-host', ''));
-
-            $scheme = $forwardedProto !== ''
-                ? strtolower(trim(Str::before($forwardedProto, ',')))
-                : $request->getScheme();
-            $host = $forwardedHost !== ''
-                ? trim(Str::before($forwardedHost, ','))
-                : $request->getHost();
-
-            if ($host !== '') {
-                return rtrim($scheme.'://'.$host, '/');
-            }
-        }
-
         return rtrim((string) config('app.url'), '/');
     }
 
