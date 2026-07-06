@@ -1,0 +1,49 @@
+{
+  "task_id": "CLAIM-BOUNDARY-VISIBLE-SURFACE-MATRIX-01",
+  "date": "2026-07-06",
+  "repo": "fermatmind/fap-api",
+  "mode": "read_only_runtime_evidence",
+  "final_verdict": "CLAIM_BOUNDARY_MATRIX_READY",
+  "source_host": "https://fermatmind.com",
+  "method": "unauthenticated_public_http_visible_text_claim_boundary_scan",
+  "outputs": [
+    "EXECUTIVE_DECISION.md",
+    "CLAIM_BOUNDARY_VISIBLE_SURFACE_MATRIX.md",
+    "NEXT_EXACT_AUTHORIZATION_PROMPTS.md",
+    "scan_manifest.json"
+  ],
+  "routes_evaluated": [
+    "/zh/tests/mbti-personality-test-16-personality-types",
+    "/en/tests/mbti-personality-test-16-personality-types",
+    "/zh/tests/big-five-personality-test-ocean-model",
+    "/en/tests/big-five-personality-test-ocean-model",
+    "/zh/tests/enneagram-personality-test-nine-types",
+    "/en/tests/enneagram-personality-test-nine-types",
+    "/zh/tests/holland-career-interest-test-riasec",
+    "/en/tests/holland-career-interest-test-riasec",
+    "/zh/tests/iq-test-intelligence-quotient-assessment",
+    "/en/tests/iq-test-intelligence-quotient-assessment",
+    "/zh/tests/eq-test-emotional-intelligence-assessment",
+    "/en/tests/eq-test-emotional-intelligence-assessment"
+  ],
+  "summary": {
+    "http_200_routes": 12,
+    "page_level_boundary_present_routes": 12,
+    "strict_pass_routes": 11,
+    "partial_pass_routes": 1,
+    "iq_caution_routes": 2
+  },
+  "scope_guard": {
+    "runtime_mutation": false,
+    "cms_mutation": false,
+    "schema_mutation": false,
+    "sitemap_or_llms_mutation": false,
+    "frontend_mutation": false,
+    "production_deploy": false
+  },
+  "next_cards": [
+    "COMPETITOR-ALTERNATIVE-HELD-READINESS-01",
+    "COMPETITOR-ALTERNATIVE-SOURCE-LEDGER-GAP-AUDIT-01",
+    "COMPETITOR-ALTERNATIVE-LEGAL-CLAIM-REVIEW-HANDOFF-01"
+  ]
+}
