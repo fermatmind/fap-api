@@ -1,0 +1,53 @@
+{
+  "task_id": "CORE-HUB-FIRST-SCREEN-ANSWER-BLOCK-READBACK-01",
+  "date": "2026-07-06",
+  "repo": "fermatmind/fap-api",
+  "mode": "read_only_runtime_evidence",
+  "final_verdict": "FIRST_SCREEN_READBACK_READY",
+  "source_host": "https://fermatmind.com",
+  "method": "unauthenticated_public_http_text_readback",
+  "proxy_definition": [
+    "title",
+    "meta_description",
+    "h1",
+    "first_1400_characters_of_stripped_page_text"
+  ],
+  "outputs": [
+    "EXECUTIVE_DECISION.md",
+    "FIRST_SCREEN_READBACK_MATRIX.md",
+    "NEXT_EXACT_AUTHORIZATION_PROMPTS.md",
+    "scan_manifest.json"
+  ],
+  "routes_evaluated": [
+    "/zh/tests/mbti-personality-test-16-personality-types",
+    "/en/tests/mbti-personality-test-16-personality-types",
+    "/zh/tests/big-five-personality-test-ocean-model",
+    "/en/tests/big-five-personality-test-ocean-model",
+    "/zh/tests/enneagram-personality-test-nine-types",
+    "/en/tests/enneagram-personality-test-nine-types",
+    "/zh/tests/holland-career-interest-test-riasec",
+    "/en/tests/holland-career-interest-test-riasec",
+    "/zh/tests/iq-test-intelligence-quotient-assessment",
+    "/en/tests/iq-test-intelligence-quotient-assessment",
+    "/zh/tests/eq-test-emotional-intelligence-assessment",
+    "/en/tests/eq-test-emotional-intelligence-assessment"
+  ],
+  "summary": {
+    "http_200_routes": 12,
+    "pass": 7,
+    "partial": 5,
+    "gap": 0
+  },
+  "scope_guard": {
+    "runtime_mutation": false,
+    "cms_mutation": false,
+    "schema_mutation": false,
+    "sitemap_or_llms_mutation": false,
+    "frontend_mutation": false,
+    "production_deploy": false
+  },
+  "next_cards": [
+    "FAQ-VISIBLE-PARITY-MATRIX-ALL-HUBS-01",
+    "CLAIM-BOUNDARY-VISIBLE-SURFACE-MATRIX-01"
+  ]
+}
