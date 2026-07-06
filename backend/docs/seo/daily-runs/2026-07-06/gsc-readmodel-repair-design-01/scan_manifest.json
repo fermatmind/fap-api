@@ -1,0 +1,21 @@
+{
+  "task_id": "GSC-READMODEL-REPAIR-DESIGN-01",
+  "date": "2026-07-06",
+  "repo": "fermatmind/fap-api",
+  "scope": "design_only_generated_docs",
+  "output_path": "backend/docs/seo/daily-runs/2026-07-06/gsc-readmodel-repair-design-01/",
+  "final_verdict": "READMODEL_REPAIR_DESIGN_READY",
+  "depends_on_prior_blocker": "GSC-SEO-INTEL-LIVE-READMODEL-QUALITY-PROOF-READONLY-01",
+  "live_gsc_api_call": false,
+  "credential_operation": false,
+  "seo_gsc_daily_import": false,
+  "database_write": false,
+  "search_channel_enqueue": false,
+  "cms_write": false,
+  "changed_runtime": false,
+  "sidecar_required": false,
+  "validation": [
+    "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-06/gsc-readmodel-repair-design-01/scan_manifest.json >/dev/null",
+    "git diff --check"
+  ]
+}
