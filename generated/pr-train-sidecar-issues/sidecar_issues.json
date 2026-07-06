@@ -117,5 +117,20 @@
         "required_checks_affected": false,
         "recommended_follow_up": "Run RIASEC-SIX-TYPE-PUBLIC-OWNER-ROUTE-DESIGN-01 as a generated-only design PR before any runtime/CMS/discoverability implementation.",
         "train_continued": true
+    },
+    {
+        "repo": "fap-api",
+        "pr_id": "CAREER-MAJOR-PAGES-ENTITY-GRAPH-MATRIX-01",
+        "branch": "codex/career-major-pages-entity-graph-matrix-01",
+        "blocker_type": "blocked_by_authority_ambiguity",
+        "evidence": [
+            "Career job/detail backend controllers, occupation tables, and indexability fields exist.",
+            "Sitemap source filtering references runtime-published career job detail URLs.",
+            "Standalone major-page owner routes, CMS authority, and indexability policy were not proven in current generated-only scan."
+        ],
+        "why_not_current_pr_scope": "Current PR is generated-only evidence reporting. It is not authorized to create routes, import CMS content, mutate sitemap/llms/schema/canonical/noindex, or edit fap-web.",
+        "required_checks_affected": false,
+        "recommended_follow_up": "Run CAREER-PAGES-RUNTIME-DISCOVERABILITY-READBACK-01 for career pages and MAJOR-PAGES-PUBLIC-AUTHORITY-DESIGN-01 before any standalone major-page implementation.",
+        "train_continued": true
     }
 ]
