@@ -1,0 +1,46 @@
+{
+  "task_id": "GEO-AEO-ANSWER-BLOCK-GAP-MATRIX-01",
+  "date": "2026-07-06",
+  "repo": "fermatmind/fap-api",
+  "mode": "generated_only_readonly",
+  "final_verdict": "ANSWER_BLOCK_GAP_MATRIX_READY",
+  "inputs": [
+    "backend/docs/seo/daily-runs/2026-07-06/six-test-hub-12-route-runtime-readback-01/RUNTIME_READBACK_MATRIX.md",
+    "backend/docs/seo/daily-runs/2026-07-06/six-test-hub-llms-full-presence-readback-01/LLMS_FULL_READBACK.md",
+    "backend/docs/seo/daily-runs/2026-07-06/six-test-hub-faq-cta-claim-gap-matrix-01/FAQ_CTA_CLAIM_GAP_MATRIX.md",
+    "repository claim-boundary and SEO/GEO authority rules"
+  ],
+  "outputs": [
+    "EXECUTIVE_DECISION.md",
+    "ANSWER_BLOCK_GAP_MATRIX.md",
+    "NEXT_EXACT_AUTHORIZATION_PROMPTS.md",
+    "scan_manifest.json"
+  ],
+  "routes_evaluated": [
+    "/zh/tests/mbti-personality-test-16-personality-types",
+    "/en/tests/mbti-personality-test-16-personality-types",
+    "/zh/tests/big-five-personality-test-ocean-model",
+    "/en/tests/big-five-personality-test-ocean-model",
+    "/zh/tests/enneagram-personality-test-nine-types",
+    "/en/tests/enneagram-personality-test-nine-types",
+    "/zh/tests/holland-career-interest-test-riasec",
+    "/en/tests/holland-career-interest-test-riasec",
+    "/zh/tests/iq-test-intelligence-quotient-assessment",
+    "/en/tests/iq-test-intelligence-quotient-assessment",
+    "/zh/tests/eq-test-emotional-intelligence-assessment",
+    "/en/tests/eq-test-emotional-intelligence-assessment"
+  ],
+  "scope_guard": {
+    "runtime_mutation": false,
+    "cms_mutation": false,
+    "schema_mutation": false,
+    "sitemap_or_llms_mutation": false,
+    "frontend_mutation": false,
+    "production_deploy": false
+  },
+  "next_cards": [
+    "CORE-HUB-FIRST-SCREEN-ANSWER-BLOCK-READBACK-01",
+    "FAQ-VISIBLE-PARITY-MATRIX-ALL-HUBS-01",
+    "CLAIM-BOUNDARY-VISIBLE-SURFACE-MATRIX-01"
+  ]
+}
