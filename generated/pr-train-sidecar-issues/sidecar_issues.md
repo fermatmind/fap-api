@@ -69,3 +69,22 @@
 - why not current PR scope: PR14 only adds Big Five `personality_public_content_assets` enumeration and targeted SEO tests. It does not change `ContentPage`, static index URL policy, English foundation/support content, or SeoIntel parity rules.
 - whether required checks are affected: Targeted Big Five checks pass. The broad local `Sitemap` filter is affected by pre-existing non-Big-Five failures.
 - recommended follow-up: Create a separate content/help policy sitemap cleanup PR for `/en/foundation` and `/en/support` exposure rules.
+
+## MONEY-INTENT-OWNER-PAGE-RUNTIME-RECONCILE-01 generic owner and GSC gate partial
+
+- repo: `fap-api`
+- PR id / branch: `MONEY-INTENT-OWNER-PAGE-RUNTIME-RECONCILE-01` / `codex/money-intent-owner-page-runtime-reconcile-01`
+- blocker type: `external_generic_owner_and_gsc_quality_gate_partial`
+- evidence:
+  - Six direct zh assessment owner pages returned HTTP 200, self canonical, `index, follow`, and matching title/H1 evidence.
+  - `/zh/tests` is a plausible broad `免费测试` owner with HTTP 200, self canonical, `index, follow`, title `测评入口中心`, and H1 `免费测试`.
+  - `免费性格测试` and `免费职业测试` still need unique-owner proof because `/zh/tests`, `/zh/personality`, `/zh/career`, and the RIASEC landing can overlap in intent.
+  - Prior P5 evidence keeps GSC/seo_intel quality blocked for write decisions.
+- why not current PR scope:
+  - Current PR scope is read-only runtime reconciliation and generated evidence only.
+  - It is not authorized to write title/meta/H1/FAQ/internal links, mutate CMS/registry data, or run live GSC imports.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Complete `MONEY-INTENT-CANNIBALIZATION-LINK-GRAPH-READONLY-01`.
+  - Complete the GSC/read-model quality proof card before any TDK/CTR repair selection.
+- whether train continued: `true`
