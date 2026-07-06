@@ -42,6 +42,7 @@ final class AnalyticsTrafficExclusionPolicy
     public function isExcludedAttemptRow(object $attempt): bool
     {
         return $this->isExcludedAttemptId($attempt->id ?? null)
+            || $this->isExcludedAttemptId($attempt->attempt_id ?? null)
             || $this->hasExcludedProbePrefix($attempt->anon_id ?? null);
     }
 

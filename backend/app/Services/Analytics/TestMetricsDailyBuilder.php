@@ -18,6 +18,10 @@ final class TestMetricsDailyBuilder
         'completed',
     ];
 
+    public function __construct(
+        private readonly AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy,
+    ) {}
+
     /**
      * @param  list<int>  $orgIds
      * @param  list<string>  $scaleCodes
@@ -157,7 +161,7 @@ final class TestMetricsDailyBuilder
 
         $query = DB::table('attempts')
             ->whereIn('id', $attemptIds)
-            ->select(['id', 'org_id', 'scale_code']);
+            ->select(['id', 'anon_id', 'org_id', 'scale_code']);
 
         $this->applyOrgFilter($query, 'attempts', $orgIds);
         $this->applyScaleFilter($query, 'attempts', $scaleCodes);
@@ -177,6 +181,10 @@ final class TestMetricsDailyBuilder
 
         $dimensions = [];
         foreach ($query->get() as $row) {
+            if ($this->trafficExclusionPolicy->isExcludedAttemptRow($row)) {
+                continue;
+            }
+
             $attemptId = trim((string) ($row->id ?? ''));
             if ($attemptId === '') {
                 continue;
@@ -289,7 +297,7 @@ final class TestMetricsDailyBuilder
         $timeColumn = SchemaBaseline::hasColumn('attempts', 'started_at') ? 'started_at' : 'created_at';
         $query = DB::table('attempts')
             ->whereBetween($timeColumn, [$fromAt, $toAt])
-            ->select(['id as attempt_id', $timeColumn.' as metric_at']);
+            ->select(['id as attempt_id', 'anon_id', $timeColumn.' as metric_at']);
 
         $this->applyOrgFilter($query, 'attempts', $orgIds);
         $this->applyScaleFilter($query, 'attempts', $scaleCodes);
@@ -313,7 +321,7 @@ final class TestMetricsDailyBuilder
         if (SchemaBaseline::hasTable('attempts') && SchemaBaseline::hasColumn('attempts', 'submitted_at')) {
             $query = DB::table('attempts')
                 ->whereBetween('submitted_at', [$fromAt, $toAt])
-                ->select(['id as attempt_id', 'submitted_at as metric_at']);
+                ->select(['id as attempt_id', 'anon_id', 'submitted_at as metric_at']);
             $this->applyOrgFilter($query, 'attempts', $orgIds);
             $this->applyScaleFilter($query, 'attempts', $scaleCodes);
             $entries = $this->mergeDistinctEntries($entries, $this->entriesFromRows($query->get()));
@@ -327,6 +335,7 @@ final class TestMetricsDailyBuilder
                 ->whereBetween(DB::raw($timeExpression), [$fromAt, $toAt])
                 ->select([
                     'attempt_submissions.attempt_id as attempt_id',
+                    'attempts.anon_id',
                     DB::raw($timeExpression.' as metric_at'),
                 ]);
             $this->applyOrgFilter($query, 'attempt_submissions', $orgIds);
@@ -341,6 +350,7 @@ final class TestMetricsDailyBuilder
                 ->whereBetween('results.'.$timeColumn, [$fromAt, $toAt])
                 ->select([
                     'results.attempt_id as attempt_id',
+                    'attempts.anon_id',
                     'results.'.$timeColumn.' as metric_at',
                 ]);
             $this->applyOrgFilter($query, 'results', $orgIds);
@@ -373,6 +383,7 @@ final class TestMetricsDailyBuilder
             ->whereBetween(DB::raw($timeExpression), [$fromAt, $toAt])
             ->select([
                 'attempt_submissions.attempt_id as attempt_id',
+                'attempts.anon_id',
                 DB::raw($timeExpression.' as metric_at'),
             ]);
 
@@ -390,6 +401,10 @@ final class TestMetricsDailyBuilder
     {
         $entries = [];
         foreach ($rows as $row) {
+            if ($this->trafficExclusionPolicy->isExcludedAttemptRow($row)) {
+                continue;
+            }
+
             $attemptId = trim((string) ($row->attempt_id ?? ''));
             $metricAt = $row->metric_at ?? null;
             if ($attemptId === '' || $metricAt === null) {

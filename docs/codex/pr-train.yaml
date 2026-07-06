@@ -35159,13 +35159,21 @@ prs:
       - backend/app/Providers/AppServiceProvider.php
       - backend/database/migrations/2025_12_14_084436_create_attempts_table.php
       - backend/database/migrations/2025_12_13_231207_create_results_table.php
+      - backend/tests/Feature/Attempts/Big5RetakeCooldownTest.php
+      - backend/tests/Feature/Analytics/TestMetricsDailyBuilderTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
     validation:
       - cd backend && php artisan route:list --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-07.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Big5RetakeCooldownTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=TestMetricsDailyBuilderTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi
       - bash backend/scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
