@@ -1,0 +1,26 @@
+{
+  "task_id": "RIASEC-ZH-TEST-LANDING-FAQ-PARITY-READBACK-01",
+  "date_prepared": "2026-07-06",
+  "repo": "fermatmind/fap-api",
+  "mode": "generated_only_operator_held",
+  "final_verdict": "OPERATOR_HELD_REAUTH_REQUIRED",
+  "outputs": [
+    "EXECUTIVE_DECISION.md",
+    "HELD_READBACK_REPORT.md",
+    "scan_manifest.json"
+  ],
+  "blocked_by": {
+    "type": "operator_hold_requires_fresh_authorization",
+    "runtime_readback_executed": false,
+    "required_checks_affected": false
+  },
+  "scope_guard": {
+    "runtime_mutation": false,
+    "cms_mutation": false,
+    "schema_mutation": false,
+    "sitemap_or_llms_mutation": false,
+    "frontend_mutation": false,
+    "production_deploy": false,
+    "runtime_fetch": false
+  }
+}

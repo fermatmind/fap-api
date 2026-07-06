@@ -275,3 +275,20 @@
 - recommended follow-up:
   - Re-run `MBTI-MAIN-FAQ-D28-OBSERVATION-01` on or after 2026-08-02 as read-only evidence.
 - whether train continued: `true`
+
+## RIASEC-ZH-TEST-LANDING-FAQ-PARITY-READBACK-01 operator hold
+
+- repo: `fermatmind/fap-api`
+- PR id / branch: `RIASEC-ZH-TEST-LANDING-FAQ-PARITY-READBACK-01` / `codex/riasec-zh-test-landing-faq-parity-readback-01`
+- blocker type: `operator_hold_requires_fresh_authorization`
+- evidence:
+  - The card is included in the 33-card train.
+  - Prior sequencing held RIASEC zh test landing FAQ parity readback as temporarily deferred / not current next step.
+  - No fresh authorization in this PR scope permits runtime fetch, API/CMS readback, or repair.
+- why not current PR scope:
+  - Current PR is generated-only held reporting.
+  - It is not authorized to fetch production runtime, query CMS/API, edit FAQ, edit JSON-LD, mutate SEO surfaces, or deploy.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Provide fresh exact authorization for `RIASEC-ZH-TEST-LANDING-FAQ-PARITY-READBACK-01` before running runtime parity readback.
+- whether train continued: `true`
