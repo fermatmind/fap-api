@@ -82490,8 +82490,8 @@
     "depends_on": [
       "MBTI-CMS-13"
     ],
-    "status": "pr_open",
-    "commit_sha": "bd720e93ec09af97ad109fe75cf9a42b49888f51",
+    "status": "ready_to_merge",
+    "commit_sha": "bdaab31ebfe446111fdd884b32a4b60c5da17834",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2771",
     "failure_reason": null,
     "merged_at": null,
@@ -82534,12 +82534,16 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to MBTI-CMS-26 backend command/planner/tests, Kernel command registration, runtime-freeze classifier test allowlist, and authorized docs/codex PR-train metadata."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "GitHub PR #2771 checks passed: Semgrep blocking secrets, Semgrep OSS, semgrep sarif non-blocking upload, hygiene, content-pack-build-validate, supply-chain, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -82560,6 +82564,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened PR #2771 for MBTI-CMS-26: https://github.com/fermatmind/fap-api/pull/2771."
+      },
+      {
+        "at": "2026-07-06T04:00:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2771; ready for squash merge under repo policy. No staging deploy wait or production import was performed."
       }
     ]
   }
