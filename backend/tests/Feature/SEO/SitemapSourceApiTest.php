@@ -9,6 +9,7 @@ use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Models\PersonalityPublicContentAsset;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\File;
@@ -115,6 +116,46 @@ class SitemapSourceApiTest extends TestCase
         $this->assertNotContains('https://fermatmind.com/zh/career/jobs/backend-engineer', $locs);
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/software-engineer', $locs);
         $this->assertNotContains('https://fermatmind.com/zh/career/jobs/software-engineer', $locs);
+    }
+
+    public function test_sitemap_source_warm_includes_released_zh_big_five_public_content_assets(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        config(['app.url' => 'https://fermatmind.com']);
+
+        foreach (['openness', 'openness-high', 'neuroticism-low'] as $slug) {
+            $this->createBigFivePublicContentAsset(
+                $slug,
+                str_contains($slug, '-') ? PersonalityPublicContentAsset::ENTITY_POLARITY : PersonalityPublicContentAsset::ENTITY_DOMAIN,
+            );
+        }
+
+        $this->createBigFivePublicContentAsset('openness-en', PersonalityPublicContentAsset::ENTITY_DOMAIN, [
+            'entity_key' => 'openness',
+            'slug' => 'big-five/openness-en',
+            'locale' => 'en',
+            'canonical_json' => ['path' => '/en/personality/big-five/openness'],
+        ]);
+        $this->createBigFivePublicContentAsset('openness-noindex', PersonalityPublicContentAsset::ENTITY_DOMAIN, [
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'index_eligible' => false,
+            'sitemap_eligible' => false,
+            'canonical_json' => ['path' => '/zh/personality/big-five/openness-noindex'],
+        ]);
+
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
+
+        $response = $this->getJson('/api/v0.5/seo/sitemap-source');
+        $response->assertOk();
+
+        $locs = collect($response->json('items'))->pluck('loc')->all();
+
+        $this->assertContains('https://fermatmind.com/zh/personality/big-five/openness', $locs);
+        $this->assertContains('https://fermatmind.com/zh/personality/big-five/openness-high', $locs);
+        $this->assertContains('https://fermatmind.com/zh/personality/big-five/neuroticism-low', $locs);
+        $this->assertNotContains('https://fermatmind.com/en/personality/big-five/openness', $locs);
+        $this->assertNotContains('https://fermatmind.com/zh/personality/big-five/openness-noindex', $locs);
     }
 
     /**
@@ -426,6 +467,52 @@ class SitemapSourceApiTest extends TestCase
         $route = app('router')->getRoutes()->getByName('seo.sitemap-source');
         $this->assertNotNull($route, 'Route seo.sitemap-source must be named');
         $this->assertSame(['GET', 'HEAD'], $route->methods());
+    }
+
+    private function createBigFivePublicContentAsset(string $entityKey, string $entityType, array $overrides = []): PersonalityPublicContentAsset
+    {
+        /** @var PersonalityPublicContentAsset */
+        return PersonalityPublicContentAsset::query()->create(array_merge([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => $entityType,
+            'entity_key' => $entityKey,
+            'slug' => 'big-five/'.$entityKey,
+            'locale' => 'zh-CN',
+            'title' => 'Big Five '.$entityKey,
+            'summary' => 'Big Five public content asset.',
+            'content_sections_json' => [
+                ['id' => 'overview', 'heading' => 'Overview', 'body' => 'Visible reviewed body.'],
+            ],
+            'seo_json' => [
+                'title' => 'Big Five '.$entityKey,
+                'description' => 'Big Five SEO description.',
+            ],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
+            'canonical_json' => ['path' => "/zh/personality/big-five/{$entityKey}"],
+            'hreflang_json' => [],
+            'faq_json' => [
+                ['question' => 'What is this page?', 'answer' => 'A reviewed Big Five content asset.'],
+            ],
+            'media_json' => [],
+            'schema_json' => ['runtime_jsonld_enabled' => true],
+            'method_boundary_json' => ['non_diagnostic' => true],
+            'evidence_notes_json' => ['status' => 'reviewed'],
+            'internal_links_json' => [],
+            'is_public' => true,
+            'index_eligible' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'seo_discoverability_released',
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+            'source_package' => 'test-package',
+            'source_hash' => str_repeat('b', 64),
+            'published_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),
+            'last_reviewed_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),
+            'created_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 7, 2, 8, 0, 0, 'UTC'),
+        ], $overrides));
     }
 
     private function createDisplayAsset(Occupation $occupation, array $overrides = []): CareerJobDisplayAsset

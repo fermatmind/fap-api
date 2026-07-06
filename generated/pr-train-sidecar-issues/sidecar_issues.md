@@ -84,3 +84,13 @@
 - why not current PR scope: PR-C only adds a read-only Big Five production content audit command, focused tests, and generated evidence. It does not start, stop, configure, or route the local API server.
 - whether required checks are affected: Local `verify_mbti.sh` could not run without the expected local server. Targeted PHPUnit, syntax, Pint, command discovery, route list, and scope validation passed.
 - recommended follow-up: Run `bash scripts/verify_mbti.sh` in an environment where the Laravel API is listening on `127.0.0.1:1827`, or use the repository's standard local stack bootstrap before this check.
+
+## BIG5-SITEMAP-LLMS-PERSONALITY-ASSET-14 broad sitemap filter existing failures
+
+- repo: `fermatmind/fap-api`
+- PR id / branch: BIG5-SITEMAP-LLMS-PERSONALITY-ASSET-14 / `codex/big5-sitemap-llms-personality-asset-14`
+- blocker type: `existing_broad_seo_test_failure`
+- evidence: `php artisan test --filter=Sitemap` failed in `Tests\Feature\SeoIntel\EnParity03ContentPagesParityImportPackageTest::deferred_missing_english_pages_do_not_enter_sitemap` because `/en/foundation` is present, and `Tests\Feature\SeoIntel\GlobalEnZhParityP001ContentHelpPolicyDiscoverabilityTest::backend_sitemap_source_does_not_emit_missing_content_help_policy_urls` because `/en/support` is present.
+- why not current PR scope: PR14 only adds Big Five `personality_public_content_assets` enumeration and targeted SEO tests. It does not change `ContentPage`, static index URL policy, English foundation/support content, or SeoIntel parity rules.
+- whether required checks are affected: Targeted Big Five checks pass. The broad local `Sitemap` filter is affected by pre-existing non-Big-Five failures.
+- recommended follow-up: Create a separate content/help policy sitemap cleanup PR for `/en/foundation` and `/en/support` exposure rules.

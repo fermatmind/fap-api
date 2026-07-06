@@ -7,6 +7,7 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\ContentPage;
+use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\TopicProfile;
@@ -98,6 +99,7 @@ class SitemapGenerator
             $this->getCareerJobUrls(),
             $this->getCareerGuideUrls(),
             $this->getPersonalityUrls(),
+            $this->getPersonalityPublicContentAssetUrls(),
             $this->getPersonalityComparisonUrls(),
             $this->getTopicUrls(),
             $this->getContentPageUrls(),
@@ -304,6 +306,56 @@ class SitemapGenerator
                 'loc' => $baseUrl.'/'.$segment.'/personality',
                 'lastmod' => $lastmod->toAtomString(),
                 'slug' => 'personality-list:'.$segment,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+        }
+
+        return $urls;
+    }
+
+    private function getPersonalityPublicContentAssetUrls(): array
+    {
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        if ($baseUrl === '') {
+            return [];
+        }
+
+        $rows = PersonalityPublicContentAsset::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
+            ->where('locale', 'zh-CN')
+            ->whereIn('entity_type', [
+                PersonalityPublicContentAsset::ENTITY_DOMAIN,
+                PersonalityPublicContentAsset::ENTITY_POLARITY,
+            ])
+            ->where('is_public', true)
+            ->where('launch_state', PersonalityPublicContentAsset::LAUNCH_PUBLISHED)
+            ->where('robots', PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW)
+            ->where('index_eligible', true)
+            ->where('sitemap_eligible', true)
+            ->where('llms_eligible', true)
+            ->select(['entity_key', 'canonical_json', 'updated_at', 'published_at'])
+            ->orderBy('entity_type')
+            ->orderBy('entity_key')
+            ->get();
+
+        $urls = [];
+
+        foreach ($rows as $row) {
+            $path = trim((string) data_get($row->canonical_json, 'path', ''));
+            if (! str_starts_with($path, '/zh/personality/big-five/')) {
+                continue;
+            }
+
+            $lastmod = $row->updated_at
+                ?? $row->published_at
+                ?? now();
+
+            $urls[] = [
+                'loc' => $baseUrl.$path,
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'personality-public-content:big-five:zh:'.strtolower((string) $row->entity_key),
                 'updated_at' => $lastmod->toDateTimeString(),
             ];
         }
