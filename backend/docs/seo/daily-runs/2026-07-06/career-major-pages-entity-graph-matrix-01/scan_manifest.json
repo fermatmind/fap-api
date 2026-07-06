@@ -1,0 +1,26 @@
+{
+  "task_id": "CAREER-MAJOR-PAGES-ENTITY-GRAPH-MATRIX-01",
+  "date": "2026-07-06",
+  "repo": "fermatmind/fap-api",
+  "scope": "generated_docs_only",
+  "output_path": "backend/docs/seo/daily-runs/2026-07-06/career-major-pages-entity-graph-matrix-01/",
+  "final_verdict": "BLOCKED_BY_AUTHORITY_AMBIGUITY",
+  "career_authority_status": "partial_backend_authority_evidenced",
+  "major_authority_status": "standalone_public_authority_not_proven",
+  "backend_authority_signals": [
+    "backend/app/Http/Controllers/API/V0_5/Cms/CareerJobController.php",
+    "backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php",
+    "backend/app/Http/Controllers/API/V0_5/Cms/CareerGuideController.php",
+    "backend/app/Http/Controllers/API/V0_5/Cms/CareerRecommendationController.php",
+    "backend/database/migrations/2026_04_07_000200_create_occupations_table.php"
+  ],
+  "changed_runtime": false,
+  "changed_cms": false,
+  "changed_discoverability": false,
+  "sidecar_required": true,
+  "validation": [
+    "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-06/career-major-pages-entity-graph-matrix-01/scan_manifest.json >/dev/null",
+    "python3 -m json.tool generated/pr-train-sidecar-issues/sidecar_issues.json >/dev/null",
+    "git diff --check"
+  ]
+}

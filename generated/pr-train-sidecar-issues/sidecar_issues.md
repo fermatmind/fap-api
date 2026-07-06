@@ -134,3 +134,21 @@
 - recommended follow-up:
   - Run a separate `RIASEC-SIX-TYPE-PUBLIC-OWNER-ROUTE-DESIGN-01` generated-only design PR before any runtime/CMS/discoverability implementation.
 - whether train continued: `true`
+
+## CAREER-MAJOR-PAGES-ENTITY-GRAPH-MATRIX-01 authority ambiguity
+
+- repo: `fap-api`
+- PR id / branch: `CAREER-MAJOR-PAGES-ENTITY-GRAPH-MATRIX-01` / `codex/career-major-pages-entity-graph-matrix-01`
+- blocker type: `blocked_by_authority_ambiguity`
+- evidence:
+  - Career job/detail backend controllers, occupation tables, and indexability fields exist.
+  - Sitemap source filtering references runtime-published career job detail URLs.
+  - Standalone major-page owner routes, CMS authority, and indexability policy were not proven in current generated-only scan.
+- why not current PR scope:
+  - Current PR is generated-only evidence reporting.
+  - It is not authorized to create routes, import CMS content, mutate sitemap/llms/schema/canonical/noindex, or edit fap-web.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Run `CAREER-PAGES-RUNTIME-DISCOVERABILITY-READBACK-01` for career pages.
+  - Run `MAJOR-PAGES-PUBLIC-AUTHORITY-DESIGN-01` before any standalone major-page implementation.
+- whether train continued: `true`
