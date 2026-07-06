@@ -194,5 +194,20 @@
         "required_checks_affected": false,
         "recommended_follow_up": "Finish, stash, or commit the SEO daily-run staged files in their owning task/thread; do not attach those staged docs to SECURITY-169 API PR scopes. Use an isolated PR-train worktree from origin/main for ledger closeout and next API PRs until the user-owned main worktree is clean.",
         "train_continued": true
+    },
+    {
+        "repo": "fermatmind/fap-api",
+        "pr_id": "COMPETITOR-ALTERNATIVE-HELD-READINESS-01",
+        "branch": "codex/competitor-alternative-held-readiness-01",
+        "blocker_type": "operator_held_competitor_alternative",
+        "evidence": [
+            "Competitor alternative pages are explicitly held pending source ledger and legal/claim review.",
+            "Candidate pages such as 16P, Truity, and 123test alternatives need explicit operator approval before route, CMS, copy, indexability, sitemap, llms, schema, or runtime work.",
+            "Current PR is generated-only readiness reporting and does not authorize implementation."
+        ],
+        "why_not_current_pr_scope": "Current PR is a generated-only held/readiness artifact. It is not authorized to draft public copy, create routes, write CMS content, make comparative claims, mutate discoverability surfaces, or deploy.",
+        "required_checks_affected": false,
+        "recommended_follow_up": "Continue to COMPETITOR-ALTERNATIVE-SOURCE-LEDGER-GAP-AUDIT-01 and COMPETITOR-ALTERNATIVE-LEGAL-CLAIM-REVIEW-HANDOFF-01 as generated-only artifacts before any implementation authorization.",
+        "train_continued": true
     }
 ]
