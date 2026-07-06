@@ -162,5 +162,20 @@
         "required_checks_affected": false,
         "recommended_follow_up": "Re-run CTR eligibility only after sanitized live GSC evidence and read-model quality gate pass.",
         "train_continued": true
+    },
+    {
+        "repo": "fap-api",
+        "pr_id": "CTR-TDK-REPAIR-DRYRUN-QUEUE-01",
+        "branch": "codex/ctr-tdk-repair-dryrun-queue-01",
+        "blocker_type": "blocked_by_gsc_data_quality",
+        "evidence": [
+            "CTR eligibility is blocked.",
+            "No passable live GSC read-model row set exists.",
+            "Candidate queue size is 0."
+        ],
+        "why_not_current_pr_scope": "Current PR is generated-only dry-run queue reporting. It is not authorized to select from fixture/static evidence, edit TDK, write CMS, or enqueue Search Channel.",
+        "required_checks_affected": false,
+        "recommended_follow_up": "Re-run dry-run queue only after CTR eligibility passes from gated live seo_intel rows.",
+        "train_continued": true
     }
 ]

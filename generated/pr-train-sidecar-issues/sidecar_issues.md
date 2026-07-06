@@ -186,3 +186,20 @@
 - recommended follow-up:
   - Re-run CTR eligibility only after sanitized live GSC evidence and read-model quality gate pass.
 - whether train continued: `true`
+
+## CTR-TDK-REPAIR-DRYRUN-QUEUE-01 GSC data quality
+
+- repo: `fap-api`
+- PR id / branch: `CTR-TDK-REPAIR-DRYRUN-QUEUE-01` / `codex/ctr-tdk-repair-dryrun-queue-01`
+- blocker type: `blocked_by_gsc_data_quality`
+- evidence:
+  - CTR eligibility is blocked.
+  - No passable live GSC read-model row set exists.
+  - Candidate queue size is 0.
+- why not current PR scope:
+  - Current PR is generated-only dry-run queue reporting.
+  - It is not authorized to select from fixture/static evidence, edit TDK, write CMS, or enqueue Search Channel.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Re-run dry-run queue only after CTR eligibility passes from gated live `seo_intel` rows.
+- whether train continued: `true`
