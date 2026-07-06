@@ -82615,9 +82615,9 @@
     "depends_on": [
       "MBTI-CMS-26"
     ],
-    "status": "in_progress",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "841cccfd26eb914102073ac264c9de450d3d19a1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2785",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -82658,6 +82658,10 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to MBTI-CMS-26B storage/readmodel/planner/tests plus authorized docs/codex PR-train metadata."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR #2785 opened for MBTI-CMS-26B; GitHub checks are pending."
       }
     },
     "scope_validation": {
@@ -82678,6 +82682,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Added the cross-type authority table/model, DB-backed list/detail readmodel support, preflight target mapping, and tests. Local validation passed; production CMS write remains deferred."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened PR #2785 for MBTI-CMS-26B: https://github.com/fermatmind/fap-api/pull/2785."
       }
     ]
   },
