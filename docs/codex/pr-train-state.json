@@ -82285,7 +82285,7 @@
     "depends_on": [
       "BIG5-CMS-PUBLISH-GATE-12"
     ],
-    "status": "committed",
+    "status": "pr_open",
     "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
     "checks": {
       "manifest_registration": {
@@ -82338,7 +82338,7 @@
       "post_merge_revalidated": null
     },
     "commit_sha": "d4333f830c001d87e87ece8ac9529ea0299a17f0",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2766",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -82374,6 +82374,11 @@
         "at": "2026-07-06T00:00:00Z",
         "status": "committed",
         "summary": "Committed BIG5-SEO-DISCOVERABILITY-RELEASE-13 backend command scope at d4333f830c001d87e87ece8ac9529ea0299a17f0."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "status": "pr_open",
+        "summary": "Opened PR #2766 for BIG5-SEO-DISCOVERABILITY-RELEASE-13: https://github.com/fermatmind/fap-api/pull/2766."
       }
     ]
   },
