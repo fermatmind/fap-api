@@ -183,6 +183,7 @@ use App\Console\Commands\PersonalityBigFiveCmsImportDraftDryRun;
 use App\Console\Commands\PersonalityBigFiveCmsPreviewRenderQa;
 use App\Console\Commands\PersonalityBigFiveCmsStagingWriteImport;
 use App\Console\Commands\PersonalityBigFivePublicProfileAgentDraft;
+use App\Console\Commands\PersonalityBigFiveSeoDiscoverabilityRelease;
 use App\Console\Commands\PersonalityEnneagramCmsDraft;
 use App\Console\Commands\PersonalityImportDesktopCloneBaseline;
 use App\Console\Commands\PersonalityMbti64GscQueryReadonlyExport;
@@ -272,6 +273,7 @@ class Kernel extends ConsoleKernel
         PersonalityAgentPostPromotionSearchGateCommand::class,
         PersonalityBigFiveCmsImportDraftDryRun::class,
         PersonalityBigFiveCmsPreviewRenderQa::class,
+        PersonalityBigFiveSeoDiscoverabilityRelease::class,
         PersonalityBigFiveCmsStagingWriteImport::class,
         PersonalityBigFivePublicProfileAgentDraft::class,
         PersonalityEnneagramCmsPromote::class,

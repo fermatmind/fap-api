@@ -82285,7 +82285,7 @@
     "depends_on": [
       "BIG5-CMS-PUBLISH-GATE-12"
     ],
-    "status": "blocked_pending_release_authorization",
+    "status": "pr_open",
     "authorized_by_user": "2026-07-05 user explicitly authorized this Big Five CMS staging-to-release readiness PR train in the /goal objective file.",
     "checks": {
       "manifest_registration": {
@@ -82293,18 +82293,61 @@
         "evidence": "User provided explicit id/title/scope/branch/dependency details in the /goal objective and allowed missing manifest/state entries to be added before implementation."
       },
       "release_authorization_gate": {
-        "status": "blocked",
-        "evidence": "No explicit SEO discoverability release authorization is present yet."
+        "status": "pass",
+        "evidence": "User explicitly authorized SEO discoverability release in this thread on 2026-07-06. Production deploy and production command execution remain separate exact-SHA gates."
+      },
+      "syntax": {
+        "status": "pass",
+        "command": "php -l backend/app/Console/Commands/PersonalityBigFiveSeoDiscoverabilityRelease.php && php -l backend/app/Services/Cms/BigFiveSeoDiscoverabilityReleaseWriter.php && php -l backend/app/Services/SEO/SeoDiscoverabilityCacheInvalidator.php && php -l backend/tests/Feature/Console/PersonalityBigFiveSeoDiscoverabilityReleaseCommandTest.php && php -l backend/app/Console/Kernel.php",
+        "evidence": "PASS: PR13 command, writer, cache invalidator, focused test, and Kernel report no syntax errors."
+      },
+      "focused_command_contract": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveSeoDiscoverabilityReleaseCommandTest --no-ansi",
+        "evidence": "PASS: 6 tests, 269 assertions. Local release clone emitted dotenv .env warnings, but PHPUnit exited 0. Covers command registration, dry-run no-write planning, exact 20-row release, safety/confirmation/SHA guards, locked-source rejection, and idempotency."
+      },
+      "pint_targeted": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveSeoDiscoverabilityRelease.php app/Services/Cms/BigFiveSeoDiscoverabilityReleaseWriter.php app/Services/SEO/SeoDiscoverabilityCacheInvalidator.php tests/Feature/Console/PersonalityBigFiveSeoDiscoverabilityReleaseCommandTest.php app/Console/Kernel.php",
+        "evidence": "PASS: 5 files."
+      },
+      "api_route_list": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api --except-vendor --no-ansi",
+        "evidence": "PASS: route list command completed; output captured locally with 218 API routes."
+      },
+      "command_registration": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan list --no-ansi | rg 'personality:big-five-seo-discoverability-release'",
+        "evidence": "PASS: personality:big-five-seo-discoverability-release is visible to Artisan."
+      },
+      "manifest_state_diff_validation": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && git diff --check",
+        "evidence": "PASS: train YAML parses, state JSON parses, and git diff whitespace check passes."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to BIG5-SEO-DISCOVERABILITY-RELEASE-13 allowed paths: backend/app/Console/Commands/PersonalityBigFiveSeoDiscoverabilityRelease.php, backend/app/Console/Kernel.php, backend/app/Services/Cms/BigFiveSeoDiscoverabilityReleaseWriter.php, backend/app/Services/SEO/SeoDiscoverabilityCacheInvalidator.php, backend/tests/Feature/Console/PersonalityBigFiveSeoDiscoverabilityReleaseCommandTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      },
+      "github_verify_bigfive_initial": {
+        "status": "fail",
+        "evidence": "FAIL on PR #2766 verify-bigfive: BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff classified PR13 Big Five SEO release command, writer, and Kernel registration as MBTI-impacting runtime changes."
+      },
+      "github_verify_bigfive_fix_local": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_big_five_seo_discoverability_release_files' --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveSeoDiscoverabilityReleaseCommandTest --no-ansi && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php app/Console/Commands/PersonalityBigFiveSeoDiscoverabilityRelease.php app/Services/Cms/BigFiveSeoDiscoverabilityReleaseWriter.php app/Services/SEO/SeoDiscoverabilityCacheInvalidator.php tests/Feature/Console/PersonalityBigFiveSeoDiscoverabilityReleaseCommandTest.php",
+        "evidence": "PASS: runtime freeze classifier now ignores PR13 Big Five SEO release command/writer/Kernel registration; PR13 focused command contract and targeted Pint also pass. Local temp clone still emits dotenv .env warnings with exit code 0."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "d4333f830c001d87e87ece8ac9529ea0299a17f0",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2766",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -82314,7 +82357,7 @@
     "database_mutation": true,
     "cms_mutation": true,
     "api_runtime_change": true,
-    "publish_allowed": false,
+    "publish_allowed": true,
     "search_channel_action": false,
     "deploy_allowed": false,
     "scheduler_activation": false,
@@ -82325,6 +82368,36 @@
         "at": "2026-07-05T08:50:40Z",
         "status": "blocked_pending_release_authorization",
         "summary": "Registered Big Five CMS staging-to-release readiness PR train item from the active /goal objective. Authorization-gated items must stop until their explicit gates are satisfied."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "status": "in_progress",
+        "summary": "User explicitly authorized SEO discoverability release. Started backend-only PR13 implementation for a controlled command that can release exactly 20 reviewed zh-CN Big Five v2 trait/range pages to index, sitemap, llms, and JSON-LD runtime after separate deploy and command execution gates."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "status": "local_checks_passed",
+        "summary": "Implemented PR13 controlled backend release command, writer, cache invalidation hook, focused tests, Kernel registration, and train ledger update. Focused PHPUnit, targeted Pint, route:list, command registration, YAML/JSON parse, diff check, and scope validation passed locally."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "status": "committed",
+        "summary": "Committed BIG5-SEO-DISCOVERABILITY-RELEASE-13 backend command scope at d4333f830c001d87e87ece8ac9529ea0299a17f0."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "status": "pr_open",
+        "summary": "Opened PR #2766 for BIG5-SEO-DISCOVERABILITY-RELEASE-13: https://github.com/fermatmind/fap-api/pull/2766."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "status": "ci_fix_in_progress",
+        "summary": "Inspected failing GitHub verify-bigfive job. Failure is current PR scope: runtime-freeze classifier needed to recognize the PR13 Big Five SEO discoverability release command and writer as non-MBTI runtime changes."
+      },
+      {
+        "at": "2026-07-06T00:00:00Z",
+        "status": "ci_fix_local_checks_passed",
+        "summary": "Updated runtime-freeze classifier for PR13 Big Five SEO discoverability release files and restored Kernel diff to PR13-only lines. Focused classifier tests, PR13 command tests, targeted Pint, YAML/JSON parse, and diff check passed locally."
       }
     ]
   },

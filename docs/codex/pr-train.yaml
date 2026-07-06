@@ -37703,7 +37703,7 @@ prs:
     branch: codex/big5-seo-discoverability-release-13
     title: "BIG5-SEO-DISCOVERABILITY-RELEASE-13: release reviewed Big Five assets to sitemap llms JSON-LD and indexability surfaces"
     train_scope: big_five_seo_discoverability_release
-    status: blocked_pending_release_authorization
+    status: in_progress
     scope:
       - Release only reviewed and approved Big Five CMS assets to sitemap, llms, JSON-LD runtime, and canonical indexability surfaces.
       - Keep unreviewed English pages blocked.
@@ -37732,7 +37732,7 @@ prs:
     database_mutation: true
     cms_mutation: true
     api_runtime_change: true
-    publish_allowed: false
+    publish_allowed: true
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend

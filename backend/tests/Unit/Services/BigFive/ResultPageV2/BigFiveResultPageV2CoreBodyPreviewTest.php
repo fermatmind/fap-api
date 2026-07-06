@@ -448,6 +448,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_big_five_seo_discoverability_release_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityBigFiveSeoDiscoverabilityRelease.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/BigFiveSeoDiscoverabilityReleaseWriter.php',
+            'backend/tests/Feature/Console/PersonalityBigFiveSeoDiscoverabilityReleaseCommandTest.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\PersonalityBigFiveSeoDiscoverabilityRelease;',
+            '+        PersonalityBigFiveSeoDiscoverabilityRelease::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_big_five_production_content_audit_command(): void
     {
         $changed = [
@@ -5110,6 +5126,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveSeoDiscoverabilityReleaseFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveProductionContentAuditFile($file)) {
                 continue;
             }
@@ -6408,6 +6428,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsBigFiveCmsStagingWriteImportOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveCmsPreviewRenderQaOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveCmsPublishGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsBigFiveSeoDiscoverabilityReleaseOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFivePublicProfileAgentDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFivePublicProfileAgentPromotionOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoOpsP0CtrArticleCmsUpdateWriterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6663,6 +6684,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PersonalityBigFiveCmsPublishGate.php',
             'backend/app/Services/Cms/BigFiveCmsPublishGateWriter.php',
             'backend/tests/Feature/Console/PersonalityBigFiveCmsPublishGateCommandTest.php',
+        ], true);
+    }
+
+    private function isBigFiveSeoDiscoverabilityReleaseFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveSeoDiscoverabilityRelease.php',
+            'backend/app/Services/Cms/BigFiveSeoDiscoverabilityReleaseWriter.php',
+            'backend/tests/Feature/Console/PersonalityBigFiveSeoDiscoverabilityReleaseCommandTest.php',
         ], true);
     }
 
@@ -11090,6 +11120,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         foreach ($changedLines as $line) {
             $normalized = ltrim($line, '+-');
             if (preg_match('/\bPersonalityBigFiveCmsPublishGate\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsBigFiveSeoDiscoverabilityReleaseOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\bPersonalityBigFiveSeoDiscoverabilityRelease\b/u', $normalized) !== 1) {
                 return false;
             }
         }
