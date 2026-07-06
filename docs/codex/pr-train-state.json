@@ -42144,6 +42144,15 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "dependency": {
+        "evidence": "SECURITY-169-API-07 implementation PR #2797 and ledger closeout PR #2802 are merged into origin/main.",
+        "status": "pass"
+      },
+      "external_main_advances": {
+        "evidence": "Rebased over external docs-only origin/main commits fcbc67594 and 11b5d888e; changed paths were backend/docs/seo/daily-runs/... and did not intersect API08 runtime scope.",
+        "required_checks_affected": false,
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42156,6 +42165,36 @@
     "deploy_allowed": false,
     "events": [
       {
+        "at": "2026-07-06T16:25:00+08:00",
+        "note": "GitHub verify-bigfive failed because the initial API08 commit touched backend/app/Services/Analytics/EventRecorder.php, which BigFive runtime freeze treats as MBTI-impacting runtime. Inspected failing job and fixed within current scope by removing the EventRecorder change; EQ feedback analytics suppression remains at the only eq_journey_feedback_submitted call site in AttemptReadController.",
+        "status": "ci_fix_in_progress"
+      },
+      {
+        "at": "2026-07-06T16:16:00+08:00",
+        "note": "Rebased SECURITY-169-API-08 onto latest origin/main 11b5d888e after external docs-only main advances; reran focused EQ tests, route list, SQLite migrate, and diff check on the final base.",
+        "status": "local_validation_passed"
+      },
+      {
+        "at": "2026-07-06T16:15:42+08:00",
+        "note": "Full required CI passed on rebased main before the external docs-only parity readback commit advanced origin/main again: cd backend && bash scripts/ci_verify_mbti.sh.",
+        "status": "local_validation_passed"
+      },
+      {
+        "at": "2026-07-06T16:09:38+08:00",
+        "note": "Initial full required CI passed for SECURITY-169-API-08: cd backend && bash scripts/ci_verify_mbti.sh.",
+        "status": "local_validation_passed"
+      },
+      {
+        "at": "2026-07-06T15:54:00+08:00",
+        "note": "Implemented API08 runtime hardening: forbidden-claim provider bypass, fallback forbidden-claim phrase coverage, per-attempt provider throttle, OpenAI max-output cap, and no-consent EQ journey analytics suppression.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-06T15:50:00+08:00",
+        "note": "Started SECURITY-169-API-08 from latest origin/main after SECURITY-169-API-07 ledger closeout.",
+        "status": "in_progress"
+      },
+      {
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-08; execution waits for declared dependency merge.",
         "status": "planned"
@@ -42164,13 +42203,48 @@
     "failure_reason": null,
     "id": "SECURITY-169-API-08",
     "local_cleanup_executed": false,
+    "local_validation": {
+      "commands": [
+        "php -l backend/app/Services/Eq/EqAgentRuntimeResponder.php",
+        "php -l backend/app/Services/Eq/EqAgentProviderManager.php",
+        "php -l backend/app/Services/Eq/OpenAiEqAgentProviderClient.php",
+        "php -l backend/app/Http/Controllers/API/V0_3/AttemptReadController.php",
+        "php -l backend/config/ai.php",
+        "cd backend && ./vendor/bin/pint app/Services/Eq/EqAgentRuntimeResponder.php app/Services/Eq/EqAgentProviderManager.php app/Services/Eq/OpenAiEqAgentProviderClient.php app/Http/Controllers/API/V0_3/AttemptReadController.php config/ai.php",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=EqAgentContextApiTest --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Eq60JourneyStateContractTest --no-ansi",
+        "cd backend && php artisan route:list --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-08.sqlite php artisan migrate --force --no-ansi",
+        "cd backend && bash scripts/ci_verify_mbti.sh",
+        "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+        "git diff --check"
+      ],
+      "status": "pass"
+    },
     "merged_at": null,
     "pr_url": null,
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "scope_validation": {
+      "changed_files": [
+        "backend/app/Http/Controllers/API/V0_3/AttemptReadController.php",
+        "backend/app/Services/Eq/EqAgentProviderManager.php",
+        "backend/app/Services/Eq/EqAgentRuntimeResponder.php",
+        "backend/app/Services/Eq/OpenAiEqAgentProviderClient.php",
+        "backend/config/ai.php",
+        "docs/codex/pr-train-state.json"
+      ],
+      "generated_artifacts_restored": [
+        "backend/content_packs/EQ_60/v1/compiled/*.json",
+        "backend/content_packs/BIG5_OCEAN/v1/compiled/*.json"
+      ],
+      "local_validation_passed": true,
+      "status": "pass"
+    },
+    "status": "local_validation_passed",
     "title": "SECURITY-169-API-08: harden EQ agent runtime safety and cost controls",
     "train_scope": "security_169_fap_api_audit"
   },

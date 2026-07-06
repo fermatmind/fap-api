@@ -41,6 +41,10 @@ return [
         'staging_only' => env('EQ_AGENT_LLM_STAGING_ONLY', true),
         'model' => env('EQ_AGENT_LLM_MODEL', env('AI_MODEL', '')),
         'fail_open_mode' => env('EQ_AGENT_LLM_FAIL_OPEN_MODE', 'deterministic'),
+        'provider_limits' => [
+            'max_calls_per_attempt_hour' => (int) env('EQ_AGENT_PROVIDER_MAX_CALLS_PER_ATTEMPT_HOUR', 6),
+            'attempt_decay_seconds' => (int) env('EQ_AGENT_PROVIDER_ATTEMPT_DECAY_SECONDS', 3600),
+        ],
         'openai' => [
             'base_url' => rtrim((string) env('EQ_AGENT_OPENAI_BASE_URL', env('OPENAI_BASE_URL', 'https://api.openai.com/v1')), '/'),
             'api_key' => env('EQ_AGENT_OPENAI_API_KEY', env('OPENAI_API_KEY', '')),
@@ -50,6 +54,7 @@ return [
             'max_retries' => (int) env('EQ_AGENT_OPENAI_MAX_RETRIES', 0),
             'retry_sleep_milliseconds' => (int) env('EQ_AGENT_OPENAI_RETRY_SLEEP_MS', 250),
             'max_output_tokens' => (int) env('EQ_AGENT_OPENAI_MAX_OUTPUT_TOKENS', 900),
+            'max_output_tokens_cap' => (int) env('EQ_AGENT_OPENAI_MAX_OUTPUT_TOKENS_CAP', 900),
         ],
     ],
 ];

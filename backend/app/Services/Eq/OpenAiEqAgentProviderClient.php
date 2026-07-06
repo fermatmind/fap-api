@@ -151,7 +151,10 @@ final class OpenAiEqAgentProviderClient implements EqAgentProviderClient
 
     private function maxOutputTokens(): int
     {
-        return max(256, (int) config('ai.eq_agent.openai.max_output_tokens', 900));
+        $configured = max(128, (int) config('ai.eq_agent.openai.max_output_tokens', 900));
+        $cap = max(128, (int) config('ai.eq_agent.openai.max_output_tokens_cap', 900));
+
+        return min($configured, $cap);
     }
 
     private function systemPrompt(string $locale): string
