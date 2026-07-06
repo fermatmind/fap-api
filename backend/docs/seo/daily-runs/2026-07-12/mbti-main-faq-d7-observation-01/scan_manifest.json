@@ -1,0 +1,35 @@
+{
+  "task_id": "MBTI-MAIN-FAQ-D7-OBSERVATION-01",
+  "date_prepared": "2026-07-06",
+  "earliest_valid_observation_date": "2026-07-12",
+  "repo": "fermatmind/fap-api",
+  "mode": "generated_only_date_window_blocked",
+  "final_verdict": "BLOCKED_BY_DATE_WINDOW",
+  "outputs": [
+    "EXECUTIVE_DECISION.md",
+    "D7_OBSERVATION_BLOCKED_REPORT.md",
+    "scan_manifest.json"
+  ],
+  "blocked_metrics": [
+    "GSC page/query CTR",
+    "GSC impressions",
+    "GSC average position",
+    "GA organic sessions",
+    "article_to_test",
+    "start_test",
+    "visible FAQ count",
+    "FAQPage JSON-LD count"
+  ],
+  "scope_guard": {
+    "runtime_mutation": false,
+    "cms_mutation": false,
+    "schema_mutation": false,
+    "sitemap_or_llms_mutation": false,
+    "frontend_mutation": false,
+    "production_deploy": false,
+    "gsc_or_ga_query": false
+  },
+  "next_cards": [
+    "MBTI-MAIN-FAQ-D28-OBSERVATION-01"
+  ]
+}
