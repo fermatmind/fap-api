@@ -203,3 +203,24 @@
 - recommended follow-up:
   - Re-run dry-run queue only after CTR eligibility passes from gated live `seo_intel` rows.
 - whether train continued: `true`
+
+## SECURITY-169-API-07 external dirty main worktree
+
+- repo: `fermatmind/fap-api`
+- PR id / branch: SECURITY-169-API-07 / `codex/security-169-api-07-harden-attempt-start-retake-analytics-abuse-cont`
+- blocker type: `external_dirty_local_main_worktree`
+- evidence:
+  - PR #2797 merged on GitHub with merge commit `4161bef5e7e30930a630b3284ddf4ecb26208692`.
+  - `origin/main` contains `4161bef5e7e30930a630b3284ddf4ecb26208692`.
+  - Remote task branch `codex/security-169-api-07-harden-attempt-start-retake-analytics-abuse-cont` was deleted by merge cleanup.
+  - Local `gh pr merge --squash --delete-branch` reported `fatal: 'main' is already used by worktree at '/Users/rainie/Desktop/GitHub/fap-api-mbti-main-free-faq-content-01'` after the remote merge completed.
+  - That main worktree still has pre-existing staged SEO daily-run docs under `backend/docs/seo/daily-runs/2026-07-05/...`.
+- why not current PR scope:
+  - The staged SEO daily-run docs predate API07 and are unrelated to attempt start, retake, analytics abuse controls, or the scoped Big Five CI classifier fix.
+  - API07 implementation and GitHub checks were complete before the local main worktree cleanup conflict surfaced.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Finish, stash, or commit the SEO daily-run staged files in their owning task/thread.
+  - Do not attach those staged docs to SECURITY-169 API PR scopes.
+  - Use an isolated PR-train worktree from `origin/main` for ledger closeout and next API PRs until the user-owned main worktree is clean.
+- whether train continued: `true`
