@@ -65,10 +65,11 @@ final class PersonalityMbtiContent15MixedImportPreflightCommandTest extends Test
         $this->assertSame('personality_profile_sections', $at['target']['target_table']);
         $this->assertSame('mbti64_comparison_a_vs_t', $at['target']['section_key']);
         $this->assertSame('at', $at['identity']['comparison_kind']);
-        $this->assertSame('planned_mbti_cross_type_comparison_authority', $crossType['target']['target_table']);
+        $this->assertSame('mbti_cross_type_comparison_authorities', $crossType['target']['target_table']);
         $this->assertSame('cross_type', $crossType['identity']['comparison_kind']);
         $this->assertContains('personality_profile_variant_revisions', $payload['field_mapping_contract']['profile_target_tables']);
         $this->assertContains('personality_profile_sections', $payload['field_mapping_contract']['at_comparison_target_tables']);
+        $this->assertContains('mbti_cross_type_comparison_authorities', $payload['field_mapping_contract']['cross_type_comparison_target_tables']);
         $this->assertContains('comparison_public_projection_v1', $payload['field_mapping_contract']['cross_type_comparison_target_tables']);
         $this->assertSame(self::SOURCE_PACKAGE_SHA, $payload['production_import_gate']['required_exact_authorization']['source_package_sha256']);
         $this->assertSame(self::AUTHORIZATION_PAYLOAD_SHA, $payload['production_import_gate']['required_exact_authorization']['authorization_payload_sha256']);

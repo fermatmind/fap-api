@@ -37834,12 +37834,74 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend
+    next_task: MBTI-CMS-26B
+
+  - id: MBTI-CMS-26B
+    repo: fap-api
+    depends_on:
+      - MBTI-CMS-26
+    branch: codex/mbti-cms-26b-cross-type-authority
+    title: "MBTI-CMS-26B: add MBTI cross-type comparison authority storage"
+    train_scope: mbti_cross_type_comparison_authority_storage_readmodel
+    status: user_authorized
+    scope:
+      - Add backend authority storage for MBTI cross-type comparison content.
+      - Add a DB-backed authority model and readmodel path for public MBTI cross-type comparison list/detail projections.
+      - Keep the existing dry-run/draft package fallback when no DB authority row exists.
+      - Update CMS-13/CMS-26 preflight target mapping from planned virtual storage to the real backend authority table.
+      - Add tests proving DB authority rows can power comparison list/detail responses while sitemap, llms, and search submission gates remain closed.
+      - Do not write production CMS content, run production imports, release sitemap/llms/indexability, submit GSC, trigger deploy, or modify frontend fallback/runtime content.
+    allowed_paths:
+      - backend/database/migrations/2026_07_06_000100_create_mbti_cross_type_comparison_authorities_table.php
+      - backend/app/Models/MbtiCrossTypeComparisonAuthority.php
+      - backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
+      - backend/app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php
+      - backend/app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php
+      - backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php
+      - backend/tests/Feature/Console/PersonalityMbtiComparisonCmsImportDryRunCommandTest.php
+      - backend/tests/Feature/Console/PersonalityMbtiContent15MixedImportPreflightCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Add frontend content fallback.
+      - Write production CMS content, run production imports, publish, enable indexability, release sitemap/llms, submit GSC, trigger staging deploy, trigger production deploy, or add public runtime content outside the DB-backed readmodel.
+      - Change public API routes, scheduler behavior, permissions, secrets, production authorization hashes, or import execution semantics.
+      - Implement MBTI-CMS-27, MBTI-CMS-28, or MBTI-INDEX-24 scope in this PR.
+    validation:
+      - php -l backend/database/migrations/2026_07_06_000100_create_mbti_cross_type_comparison_authorities_table.php
+      - php -l backend/app/Models/MbtiCrossTypeComparisonAuthority.php
+      - php -l backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
+      - php -l backend/app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php
+      - php -l backend/app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php
+      - php -l backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=MbtiCrossTypeComparisonAuthorityReadModelTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityMbtiComparisonCmsImportDryRunCommandTest|PersonalityMbtiContent15MixedImportPreflightCommandTest' --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_cross_type_authority_storage_readmodel_files' --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
+      - cd backend && vendor/bin/pint --test app/Models/MbtiCrossTypeComparisonAuthority.php app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php tests/Feature/Console/PersonalityMbtiComparisonCmsImportDryRunCommandTest.php tests/Feature/Console/PersonalityMbtiContent15MixedImportPreflightCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: true
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
     next_task: MBTI-CMS-27
 
   - id: MBTI-CMS-27
     repo: fap-api
     depends_on:
-      - MBTI-CMS-26
+      - MBTI-CMS-26B
     branch: codex/mbti-cms-27-content15-production-import
     title: "MBTI-CMS-27: execute CONTENT-15 production CMS import"
     train_scope: mbti_content15_production_cms_import_execution

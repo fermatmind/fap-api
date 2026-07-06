@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
+use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Models\PersonalityProfile;
 use App\Support\CanonicalFrontendUrl;
 use Illuminate\Support\Facades\File;
@@ -80,9 +81,10 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             return $this->assetsBySlug;
         }
 
+        $authorityAssets = $this->authorityAssetsBySlug();
         $plan = $this->planner->planSourceDir(self::SOURCE_DIR);
         if (($plan['ok'] ?? false) !== true) {
-            return $this->assetsBySlug = [];
+            return $this->assetsBySlug = $authorityAssets;
         }
 
         $assets = [];
@@ -112,8 +114,90 @@ final class Mbti64CrossTypeComparisonPublicReadModel
         }
 
         ksort($assets);
+        $assets = array_merge($assets, $authorityAssets);
+        ksort($assets);
 
         return $this->assetsBySlug = $assets;
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    private function authorityAssetsBySlug(): array
+    {
+        $assets = [];
+        $rows = MbtiCrossTypeComparisonAuthority::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('locale', self::LOCALE)
+            ->where('comparison_type', self::COMPARISON_TYPE)
+            ->where('is_public', true)
+            ->orderBy('slug')
+            ->get();
+
+        foreach ($rows as $row) {
+            if (! $row instanceof MbtiCrossTypeComparisonAuthority) {
+                continue;
+            }
+
+            $asset = $this->assetFromAuthority($row);
+            if ($asset === null) {
+                continue;
+            }
+
+            $assets[(string) $asset['slug']] = $asset;
+        }
+
+        return $assets;
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function assetFromAuthority(MbtiCrossTypeComparisonAuthority $authority): ?array
+    {
+        $slug = $this->stringValue($authority->slug);
+        if ($slug === null || ! $this->isCrossTypeSlug($slug)) {
+            return null;
+        }
+
+        $leftType = strtoupper((string) $authority->left_type_code);
+        $rightType = strtoupper((string) $authority->right_type_code);
+        if (! in_array($leftType, PersonalityProfile::BASE_TYPE_CODES, true)
+            || ! in_array($rightType, PersonalityProfile::BASE_TYPE_CODES, true)
+            || $leftType === $rightType
+        ) {
+            return null;
+        }
+
+        $payload = is_array($authority->content_payload_json) ? $authority->content_payload_json : [];
+
+        return [
+            '_authority_source' => 'database',
+            '_is_public' => (bool) $authority->is_public,
+            '_is_indexable' => (bool) $authority->is_indexable,
+            '_sitemap_eligible' => (bool) $authority->sitemap_eligible,
+            '_llms_eligible' => (bool) $authority->llms_eligible,
+            '_source_sha256' => (string) ($authority->source_sha256 ?? ''),
+            'slug' => $slug,
+            'comparison_type' => self::COMPARISON_TYPE,
+            'locale' => (string) $authority->locale,
+            'left_type' => $leftType,
+            'right_type' => $rightType,
+            'title' => (string) $authority->title,
+            'seo_title' => (string) $authority->seo_title,
+            'seo_description' => (string) $authority->seo_description,
+            'summary' => (string) $authority->summary,
+            'sections' => is_array($payload['sections'] ?? null) ? $payload['sections'] : [],
+            'faq' => is_array($payload['faq'] ?? null) ? $payload['faq'] : [],
+            'internal_links' => is_array($payload['internal_links'] ?? null) ? $payload['internal_links'] : [],
+            'claim_boundary' => (string) ($authority->claim_boundary ?: ($payload['claim_boundary'] ?? '')),
+            'source_notes' => is_array($payload['source_notes'] ?? null) ? $payload['source_notes'] : [],
+            'source_package_id' => (string) ($authority->source_package_id ?? ''),
+            'review_status' => (string) $authority->review_status,
+            'publish_status' => (string) $authority->publish_status,
+            'indexability_status' => (string) $authority->indexability_status,
+        ];
     }
 
     /**
@@ -151,8 +235,10 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'summary' => (string) $asset['summary'],
             'public_url' => $this->canonicalUrl($slug, $locale),
             'canonical_url' => $this->canonicalUrl($slug, $locale),
-            'is_public' => true,
-            'is_indexable' => false,
+            'is_public' => (bool) ($asset['_is_public'] ?? true),
+            'is_indexable' => (bool) ($asset['_is_indexable'] ?? false),
+            'sitemap_eligible' => (bool) ($asset['_sitemap_eligible'] ?? false),
+            'llms_eligible' => (bool) ($asset['_llms_eligible'] ?? false),
             'status' => 'authority_ready',
             'review_status' => (string) $asset['review_status'],
             'publish_status' => (string) $asset['publish_status'],
@@ -201,13 +287,15 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'claim_boundary' => (string) $asset['claim_boundary'],
             'source_notes' => $this->sourceNotes($asset),
             'source_refs' => [
-                'mbti-cross-type-comparison-content-assets-draft-20260702',
+                (string) ($asset['source_package_id'] ?? 'mbti-cross-type-comparison-content-assets-draft-20260702'),
                 self::AUTHORITY_CONTRACT_VERSION,
                 self::READMODEL_CONTRACT_VERSION,
             ],
             'source_sha256' => (string) ($asset['_source_sha256'] ?? ''),
-            'is_public' => true,
-            'is_indexable' => false,
+            'is_public' => (bool) ($asset['_is_public'] ?? true),
+            'is_indexable' => (bool) ($asset['_is_indexable'] ?? false),
+            'sitemap_eligible' => (bool) ($asset['_sitemap_eligible'] ?? false),
+            'llms_eligible' => (bool) ($asset['_llms_eligible'] ?? false),
             'review_status' => (string) $asset['review_status'],
             'publish_status' => (string) $asset['publish_status'],
             'indexability_status' => (string) $asset['indexability_status'],
@@ -227,21 +315,29 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             }
 
             $id = $this->stringValue($section['id'] ?? null) ?? 'section-'.($index + 1);
+            $id = $this->stringValue($section['key'] ?? null) ?? $id;
             $title = $this->stringValue($section['title'] ?? null);
+            $bodySource = $section['body'] ?? [];
             $body = array_values(array_filter(array_map(
                 fn (mixed $line): ?string => $this->stringValue($line),
-                (array) ($section['body'] ?? [])
+                is_array($bodySource) ? $bodySource : [$bodySource]
             )));
 
             if ($title === null || $body === []) {
                 continue;
             }
 
-            $sections[] = [
+            $projection = [
                 'id' => $id,
                 'title' => $title,
                 'body' => $body,
             ];
+
+            if (is_array($section['rows'] ?? null)) {
+                $projection['rows'] = array_values((array) $section['rows']);
+            }
+
+            $sections[] = $projection;
         }
 
         return $sections;

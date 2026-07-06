@@ -438,10 +438,10 @@ final class MbtiContent15MixedImportPreflightPlanner
         }
 
         return [
-            'target_table' => 'planned_mbti_cross_type_comparison_authority',
-            'target_model' => 'backend_authority_layer',
+            'target_table' => 'mbti_cross_type_comparison_authorities',
+            'target_model' => 'App\\Models\\MbtiCrossTypeComparisonAuthority',
             'planned_live_tables' => [
-                'mbti_cross_type_comparison_authority',
+                'mbti_cross_type_comparison_authorities',
                 'comparison_public_projection_v1',
             ],
             'lookup' => [
@@ -480,7 +480,7 @@ final class MbtiContent15MixedImportPreflightPlanner
                 'personality_profile_sections',
             ],
             'cross_type_comparison_target_tables' => [
-                'planned_mbti_cross_type_comparison_authority',
+                'mbti_cross_type_comparison_authorities',
                 'comparison_public_projection_v1',
             ],
             'runtime_release_blocked_until' => [

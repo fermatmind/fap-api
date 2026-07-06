@@ -52,10 +52,10 @@ final class PersonalityMbtiComparisonCmsImportDryRunCommandTest extends TestCase
         $this->assertSame('cross_type', $crossTypeRow['identity']['comparison_kind'] ?? null);
         $this->assertSame('ENTJ', $crossTypeRow['identity']['left_type_code'] ?? null);
         $this->assertSame('INTJ', $crossTypeRow['identity']['right_type_code'] ?? null);
-        $this->assertSame('planned_mbti_cross_type_comparison_authority', $crossTypeRow['target']['target_table'] ?? null);
+        $this->assertSame('mbti_cross_type_comparison_authorities', $crossTypeRow['target']['target_table'] ?? null);
         $this->assertSame('entj-vs-intj', $crossTypeRow['target']['lookup']['comparison_slug'] ?? null);
         $this->assertContains('personality_profile_sections', $payload['field_mapping_contract']['target_tables']);
-        $this->assertContains('planned_mbti_cross_type_comparison_authority', $payload['field_mapping_contract']['target_tables']);
+        $this->assertContains('mbti_cross_type_comparison_authorities', $payload['field_mapping_contract']['target_tables']);
         $this->assertContains('comparison_public_projection_v1', $payload['field_mapping_contract']['target_tables']);
     }
 

@@ -355,8 +355,8 @@ final class MbtiComparisonCmsImportDryRunPlanner
         }
 
         return [
-            'target_model' => 'backend_authority.mbti64_cross_type_comparison',
-            'target_table' => 'planned_mbti_cross_type_comparison_authority',
+            'target_model' => 'App\\Models\\MbtiCrossTypeComparisonAuthority',
+            'target_table' => 'mbti_cross_type_comparison_authorities',
             'lookup' => [
                 'org_id' => 0,
                 'scale_code' => 'MBTI',
@@ -388,7 +388,7 @@ final class MbtiComparisonCmsImportDryRunPlanner
     private function firstClassDestinations(): array
     {
         return [
-            'identity' => 'A/T rows map to personality_profile_sections by base type; cross-type rows map to a future comparison authority draft by comparison slug',
+            'identity' => 'A/T rows map to personality_profile_sections by base type; cross-type rows map to mbti_cross_type_comparison_authorities by comparison slug',
             'seo' => 'planned destination: comparison public projection SEO fields after a separate approved promotion/write PR',
             'sections' => 'planned destination: comparison answer/section projection after a separate approved promotion/write PR',
             'draft_payload' => 'this dry-run emits the complete importable draft contract only; it does not write DB rows',
@@ -403,7 +403,7 @@ final class MbtiComparisonCmsImportDryRunPlanner
         return [
             'target_tables' => [
                 'personality_profile_sections',
-                'planned_mbti_cross_type_comparison_authority',
+                'mbti_cross_type_comparison_authorities',
                 'comparison_public_projection_v1',
             ],
             'lookup_contract' => [
