@@ -1,0 +1,23 @@
+{
+  "task_id": "GSC-SEO-INTEL-LIVE-READMODEL-QUALITY-PROOF-READONLY-01",
+  "date": "2026-07-06",
+  "repo": "fermatmind/fap-api",
+  "scope": "generated_docs_only",
+  "output_path": "backend/docs/seo/daily-runs/2026-07-06/gsc-seo-intel-live-readmodel-quality-proof-readonly-01/",
+  "final_verdict": "BLOCKED_BY_GSC_DATA_QUALITY",
+  "live_gsc_api_call": false,
+  "credential_operation": false,
+  "seo_gsc_daily_import": false,
+  "database_write": false,
+  "search_channel_enqueue": false,
+  "cms_write": false,
+  "current_proven_data_origin": "fixture",
+  "required_data_origin": "live_gsc_api",
+  "opportunity_queue_eligible": false,
+  "sidecar_required": true,
+  "validation": [
+    "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-06/gsc-seo-intel-live-readmodel-quality-proof-readonly-01/scan_manifest.json >/dev/null",
+    "python3 -m json.tool generated/pr-train-sidecar-issues/sidecar_issues.json >/dev/null",
+    "git diff --check"
+  ]
+}
