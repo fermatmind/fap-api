@@ -82490,9 +82490,9 @@
     "depends_on": [
       "MBTI-CMS-13"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "bd720e93ec09af97ad109fe75cf9a42b49888f51",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2771",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -82554,6 +82554,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Implemented fail-closed CONTENT-15 mixed package preflight command and planner, validated the real 9-record CMS-22/CMS-23 package in dry-run mode, passed focused tests, formatting, manifest parsing, diff check, and full scripts/ci_verify_mbti.sh."
+      },
+      {
+        "at": "2026-07-06T04:00:00Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened PR #2771 for MBTI-CMS-26: https://github.com/fermatmind/fap-api/pull/2771."
       }
     ]
   }
