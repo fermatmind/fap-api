@@ -82490,13 +82490,13 @@
     "depends_on": [
       "MBTI-CMS-13"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "bdaab31ebfe446111fdd884b32a4b60c5da17834",
+    "status": "merged",
+    "commit_sha": "63f1f9b35d90d3f409468640fd1ede3604f7e909",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2771",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-06T04:12:02Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -82538,6 +82538,10 @@
       "github_checks": {
         "status": "pass",
         "evidence": "GitHub PR #2771 checks passed: Semgrep blocking secrets, Semgrep OSS, semgrep sarif non-blocking upload, hygiene, content-pack-build-validate, supply-chain, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "post_merge_revalidation": {
+        "status": "partial_external_local_main_sync_blocked",
+        "evidence": "PR #2771 is MERGED; origin/main contains merge commit 63f1f9b35d90d3f409468640fd1ede3604f7e909; remote branch codex/mbti-cms-26-content15-mixed-import-preflight is deleted; local task worktree /Users/rainie/Desktop/GitHub/fap-api-mbti-cms-26 and local task branch were deleted. Local main sync is blocked by unrelated staged files in /Users/rainie/Desktop/GitHub/fap-api-mbti-main-free-faq-content-01 and is recorded in generated/pr-train-sidecar-issues."
       }
     },
     "scope_validation": {
@@ -82570,6 +82574,98 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "GitHub checks passed for PR #2771; ready for squash merge under repo policy. No staging deploy wait or production import was performed."
+      },
+      {
+        "at": "2026-07-06T04:12:02Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2771 was squash merged with merge commit 63f1f9b35d90d3f409468640fd1ede3604f7e909. origin/main contains the merge commit, remote branch is deleted, and local task branch/worktree cleanup was executed. Local main sync remains blocked by unrelated staged files in the separate main worktree."
+      }
+    ]
+  },
+  "MBTI-CMS-27": {
+    "id": "MBTI-CMS-27",
+    "repo": "fap-api",
+    "title": "MBTI-CMS-27: execute CONTENT-15 production CMS import",
+    "base": "main",
+    "branch": "codex/mbti-cms-27-content15-production-import",
+    "depends_on": [
+      "MBTI-CMS-26"
+    ],
+    "status": "blocked_needs_operator_authorization",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": "Production CMS write is explicitly blocked until the operator provides separate exact authorization containing source_package_sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb, authorization_payload_sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15, import_scope_mode=top_blocker_batch_only, and record_count=9.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding MBTI-CMS-27 to the fap-api train in the attached /goal execution request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "MBTI-CMS-26 PR #2771 is merged and origin/main contains merge commit 63f1f9b35d90d3f409468640fd1ede3604f7e909."
+      },
+      "operator_authorization": {
+        "status": "blocked_needs_exact_authorization",
+        "evidence": "The attached /goal requires stopping before MBTI-CMS-27 until separate exact production CMS write authorization is provided. No production CMS write was attempted."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-06T04:12:02Z",
+        "from": "manifest_registered",
+        "to": "blocked_needs_operator_authorization",
+        "note": "Registered MBTI-CMS-27 but stopped before production CMS import because separate exact operator authorization has not been provided in a new explicit write-authorization instruction."
+      }
+    ]
+  },
+  "MBTI-CMS-28": {
+    "id": "MBTI-CMS-28",
+    "repo": "fap-api",
+    "title": "MBTI-CMS-28: verify CONTENT-15 CMS import read-only",
+    "base": "main",
+    "branch": "codex/mbti-cms-28-content15-post-import-readonly-verification",
+    "depends_on": [
+      "MBTI-CMS-27"
+    ],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": "Waiting for MBTI-CMS-27 production CMS import to complete after separate exact authorization.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding MBTI-CMS-28 to the fap-api train in the attached /goal execution request."
+      },
+      "dependency": {
+        "status": "pending_dependency",
+        "evidence": "MBTI-CMS-27 has not run because production CMS write authorization is still required."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-06T04:12:02Z",
+        "from": "manifest_registered",
+        "to": "pending_dependency",
+        "note": "Registered MBTI-CMS-28 as the read-only post-import verification step. It cannot start until MBTI-CMS-27 production import is authorized, executed, and merged/evidence-recorded."
       }
     ]
   }
