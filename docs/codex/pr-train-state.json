@@ -42153,10 +42153,14 @@
         "evidence": "Rebased over external docs-only origin/main commits fcbc67594 and 11b5d888e; changed paths were backend/docs/seo/daily-runs/... and did not intersect API08 runtime scope.",
         "required_checks_affected": false,
         "status": "pass"
+      },
+      "github_required_checks": {
+        "evidence": "PR #2808 required GitHub checks passed after inspecting verify-bigfive failure and amending the implementation commit to f4ee6c2a5fe22769fbb39c97307d9cbb9bdfd247.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "f4ee6c2a5fe22769fbb39c97307d9cbb9bdfd247",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -42165,9 +42169,19 @@
     "deploy_allowed": false,
     "events": [
       {
+        "at": "2026-07-06T16:33:00+08:00",
+        "note": "PR #2808 merged at bd6903946c73b906ec3bae252dd2412953ca0342. Post-merge revalidate confirmed origin/main contains the merge commit, the local train worktree is detached at origin/main, local main sync is represented by origin/main in this isolated worktree, the worktree is clean, the local task branch was deleted, and the remote task branch was deleted by merge cleanup. No staging deploy wait, manual deploy, production deploy, CMS mutation, or production write was performed.",
+        "status": "merged"
+      },
+      {
+        "at": "2026-07-06T16:31:00+08:00",
+        "note": "After the scoped fix, GitHub required checks for PR #2808 passed on amended implementation commit f4ee6c2a5fe22769fbb39c97307d9cbb9bdfd247, including verify-bigfive, verify-mbti-legacy, verify-mbti-v2, hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, and SARIF upload.",
+        "status": "github_checks_passed"
+      },
+      {
         "at": "2026-07-06T16:25:00+08:00",
         "note": "GitHub verify-bigfive failed because the initial API08 commit touched backend/app/Services/Analytics/EventRecorder.php, which BigFive runtime freeze treats as MBTI-impacting runtime. Inspected failing job and fixed within current scope by removing the EventRecorder change; EQ feedback analytics suppression remains at the only eq_journey_feedback_submitted call site in AttemptReadController.",
-        "status": "ci_fix_in_progress"
+        "status": "ci_fix_completed"
       },
       {
         "at": "2026-07-06T16:16:00+08:00",
@@ -42202,7 +42216,7 @@
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-08",
-    "local_cleanup_executed": false,
+    "local_cleanup_executed": true,
     "local_validation": {
       "commands": [
         "php -l backend/app/Services/Eq/EqAgentRuntimeResponder.php",
@@ -42222,11 +42236,11 @@
       ],
       "status": "pass"
     },
-    "merged_at": null,
-    "pr_url": null,
+    "merged_at": "2026-07-06T08:32:37Z",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2808",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "changed_files": [
@@ -42244,7 +42258,7 @@
       "local_validation_passed": true,
       "status": "pass"
     },
-    "status": "local_validation_passed",
+    "status": "merged",
     "title": "SECURITY-169-API-08: harden EQ agent runtime safety and cost controls",
     "train_scope": "security_169_fap_api_audit"
   },
