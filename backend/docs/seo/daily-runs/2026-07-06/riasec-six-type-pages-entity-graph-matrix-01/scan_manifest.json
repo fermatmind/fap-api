@@ -1,0 +1,24 @@
+{
+  "task_id": "RIASEC-SIX-TYPE-PAGES-ENTITY-GRAPH-MATRIX-01",
+  "date": "2026-07-06",
+  "repo": "fermatmind/fap-api",
+  "scope": "generated_docs_only",
+  "output_path": "backend/docs/seo/daily-runs/2026-07-06/riasec-six-type-pages-entity-graph-matrix-01/",
+  "final_verdict": "BLOCKED_BY_AUTHORITY_AMBIGUITY",
+  "dimension_count": 6,
+  "backend_authority_signals": [
+    "backend/database/seeders/ScaleRegistrySeeder.php",
+    "backend/app/Services/Content/RiasecPackLoader.php",
+    "backend/app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php"
+  ],
+  "public_six_type_route_proof": "not_proven",
+  "changed_runtime": false,
+  "changed_cms": false,
+  "changed_discoverability": false,
+  "sidecar_required": true,
+  "validation": [
+    "python3 -m json.tool backend/docs/seo/daily-runs/2026-07-06/riasec-six-type-pages-entity-graph-matrix-01/scan_manifest.json >/dev/null",
+    "python3 -m json.tool generated/pr-train-sidecar-issues/sidecar_issues.json >/dev/null",
+    "git diff --check"
+  ]
+}
