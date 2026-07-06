@@ -132,5 +132,20 @@
         "required_checks_affected": false,
         "recommended_follow_up": "Run CAREER-PAGES-RUNTIME-DISCOVERABILITY-READBACK-01 for career pages and MAJOR-PAGES-PUBLIC-AUTHORITY-DESIGN-01 before any standalone major-page implementation.",
         "train_continued": true
+    },
+    {
+        "repo": "fap-api",
+        "pr_id": "GSC-SEO-INTEL-LIVE-READMODEL-QUALITY-PROOF-READONLY-01",
+        "branch": "codex/gsc-seo-intel-live-readmodel-quality-proof-readonly-01",
+        "blocker_type": "blocked_by_gsc_data_quality",
+        "evidence": [
+            "Existing generated gate evidence records data_origin=fixture.",
+            "opportunity_queue_eligible=false.",
+            "Required pass condition is data_origin=live_gsc_api plus sanitized read-model quality gate pass."
+        ],
+        "why_not_current_pr_scope": "Current PR is generated-only proof reporting. It is not authorized to call live GSC, read credentials, import seo_gsc_daily, write CMS, enqueue Search Channel, or submit URLs.",
+        "required_checks_affected": false,
+        "recommended_follow_up": "Separately authorize sanitized live read-only GSC evidence capture and dry-run import readback before any CTR/TDK queue.",
+        "train_continued": true
     }
 ]

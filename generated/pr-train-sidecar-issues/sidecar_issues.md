@@ -152,3 +152,20 @@
   - Run `CAREER-PAGES-RUNTIME-DISCOVERABILITY-READBACK-01` for career pages.
   - Run `MAJOR-PAGES-PUBLIC-AUTHORITY-DESIGN-01` before any standalone major-page implementation.
 - whether train continued: `true`
+
+## GSC-SEO-INTEL-LIVE-READMODEL-QUALITY-PROOF-READONLY-01 GSC data quality
+
+- repo: `fap-api`
+- PR id / branch: `GSC-SEO-INTEL-LIVE-READMODEL-QUALITY-PROOF-READONLY-01` / `codex/gsc-seo-intel-live-readmodel-quality-proof-readonly-01`
+- blocker type: `blocked_by_gsc_data_quality`
+- evidence:
+  - Existing generated gate evidence records `data_origin=fixture`.
+  - `opportunity_queue_eligible=false`.
+  - Required pass condition is `data_origin=live_gsc_api` plus sanitized read-model quality gate pass.
+- why not current PR scope:
+  - Current PR is generated-only proof reporting.
+  - It is not authorized to call live GSC, read credentials, import `seo_gsc_daily`, write CMS, enqueue Search Channel, or submit URLs.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Separately authorize sanitized live read-only GSC evidence capture and dry-run import readback before any CTR/TDK queue.
+- whether train continued: `true`
