@@ -42026,10 +42026,18 @@
       "scope_validation": {
         "evidence": "Changed files are limited to API07 allowed runtime paths, focused test paths, Big Five runtime freeze classifier test adjustment for the current API07 CI failure, and PR train manifest/state ledger paths.",
         "status": "pass"
+      },
+      "github_checks": {
+        "evidence": "PR #2797 required GitHub checks passed after inspecting and fixing the current-scope verify-bigfive failure.",
+        "status": "pass"
+      },
+      "post_merge_revalidation": {
+        "evidence": "PR #2797 is merged; origin/main contains 4161bef5e7e30930a630b3284ddf4ecb26208692; implementation remote branch is deleted; implementation local task branch was deleted from the isolated worktree. The primary main worktree has unrelated staged SEO daily-run docs and is recorded in generated/pr-train-sidecar-issues as an external blocker that does not affect API07 required checks or merge policy.",
+        "status": "pass_with_external_sidecar"
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "4161bef5e7e30930a630b3284ddf4ecb26208692",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -42037,6 +42045,11 @@
     ],
     "deploy_allowed": false,
     "events": [
+      {
+        "at": "2026-07-06T15:26:35+08:00",
+        "note": "PR #2797 merged after required GitHub checks passed; origin/main contains 4161bef5e7e30930a630b3284ddf4ecb26208692. Remote implementation branch was deleted by GitHub merge cleanup, local implementation task branch was deleted in the isolated worktree, staging deploy was not waited on, and no manual or production deploy was triggered. An unrelated dirty primary main worktree was recorded in sidecar and did not stop the train.",
+        "status": "merged"
+      },
       {
         "at": "2026-07-06T15:20:09+08:00",
         "note": "Current-scope CI fix local validation passed: BigFiveResultPageV2CoreBodyPreviewTest, Big5RetakeCooldownTest, TestMetricsDailyBuilderTest, and the verify-bigfive equivalent sqlite command sequence all passed; generated Big Five compiled artifacts were restored as out-of-scope test output.",
@@ -42080,14 +42093,45 @@
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-07",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "local_validation": {
+      "commands": [
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=Big5RetakeCooldownTest --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=TestMetricsDailyBuilderTest --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+        "cd backend && php artisan route:list --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-07.sqlite php artisan migrate --force --no-ansi",
+        "cd backend && bash scripts/ci_verify_mbti.sh",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-ci-bigfive-api07.sqlite QUEUE_CONNECTION=sync FAP_PACKS_DRIVER=local FAP_PACKS_ROOT=/private/tmp/fap-api-security-169-api-07/content_packages FAP_DEFAULT_REGION=CN_MAINLAND FAP_DEFAULT_LOCALE=zh-CN FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.3 FAP_DEFAULT_DIR_VERSION=MBTI-CN-v0.3 CONTENT_LOADER_CACHE_STORE=array MBTI_RESPONSE_CACHE_STORE=array CONTENT_PACKS_INDEX_ARTIFACT_ENABLED=true CONTENT_PACKS_INDEX_ARTIFACT_PATH=storage/app/private/content_packs_index/content-packs-index.json bash scripts/ci/verify_big5_norms.sh && php -d memory_limit=1024M artisan content:lint --pack=BIG5_OCEAN --pack-version=v1 && php -d memory_limit=1024M artisan content:compile --pack=BIG5_OCEAN --pack-version=v1 && php -d memory_limit=1024M artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi",
+        "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+        "git diff --check"
+      ],
+      "status": "pass"
+    },
+    "merged_at": "2026-07-06T07:26:35Z",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2797",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "ci_fix_local_checks_passed",
+    "scope_validation": {
+      "changed_files": [
+        "backend/app/Http/Middleware/ResolveAnonId.php",
+        "backend/app/Http/Requests/V0_3/StartAttemptRequest.php",
+        "backend/app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php",
+        "backend/app/Services/Analytics/TestMetricsDailyBuilder.php",
+        "backend/config/fap.php",
+        "backend/tests/Feature/Analytics/TestMetricsDailyBuilderTest.php",
+        "backend/tests/Feature/Attempts/Big5RetakeCooldownTest.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train-state.json",
+        "docs/codex/pr-train.yaml"
+      ],
+      "local_validation_passed": true,
+      "status": "pass"
+    },
+    "status": "merged",
     "title": "SECURITY-169-API-07: harden attempt start, retake, analytics abuse controls",
     "train_scope": "security_169_fap_api_audit"
   },
