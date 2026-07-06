@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use App\Services\Analytics\AnalyticsTrafficExclusionPolicy;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,6 +41,10 @@ class ResolveAnonId
             if (mb_strpos($lower, $bad) !== false) {
                 return null;
             }
+        }
+
+        if (app(AnalyticsTrafficExclusionPolicy::class)->hasExcludedProbePrefix($trimmed)) {
+            return null;
         }
 
         return $trimmed;

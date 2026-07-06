@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature\Attempts;
 
 use App\Models\Attempt;
-use App\Services\Auth\FmTokenService;
 use App\Services\Attempts\AttemptStartService;
+use App\Services\Auth\FmTokenService;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +24,7 @@ final class Big5RetakeCooldownTest extends TestCase
     {
         parent::setUp();
 
-        config()->set('fap.big5_retake.enforce_pack_policy', false);
+        config()->set('fap.big5_retake.enforce_pack_policy', true);
         config()->set('fap.big5_retake.cooldown_hours', null);
         config()->set('fap.big5_retake.max_attempts_per_30_days', null);
 
@@ -38,15 +38,12 @@ final class Big5RetakeCooldownTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_big5_90_retake_window_limits_are_disabled_by_default_for_same_anon(): void
+    public function test_big5_90_retake_window_limits_are_enforced_by_default_for_same_anon(): void
     {
         (new ScaleRegistrySeeder)->run();
 
-        $anonId = 'anon_big5_90_default_retake_allowed';
+        $anonId = 'anon_big5_90_default_retake_blocked';
         $this->createAttempt($anonId, now()->subHours(1), 'big5_90');
-        $this->createAttempt($anonId, now()->subDays(2), 'big5_90');
-        $this->createAttempt($anonId, now()->subDays(10), 'big5_90');
-        $this->createAttempt($anonId, now()->subDays(20), 'big5_90');
 
         $response = $this->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'BIG5_OCEAN',
@@ -56,15 +53,61 @@ final class Big5RetakeCooldownTest extends TestCase
             'form_code' => 'big5_90',
         ]);
 
-        $response->assertStatus(200);
-        $response->assertJsonPath('form_code', 'big5_90');
+        $response->assertStatus(429);
+        $response->assertJsonPath('error_code', 'RETAKE_COOLDOWN');
+        $response->assertJsonPath('details.form_code', 'big5_90');
     }
 
-    public function test_big5_120_retake_window_limits_are_disabled_by_default_for_same_anon(): void
+    public function test_big5_120_retake_window_limits_are_enforced_by_default_for_same_anon(): void
     {
         (new ScaleRegistrySeeder)->run();
 
-        $anonId = 'anon_big5_120_default_retake_allowed';
+        $anonId = 'anon_big5_120_default_retake_blocked';
+        $this->createAttempt($anonId, now()->subHours(1), 'big5_120');
+
+        $response = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'BIG5_OCEAN',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'anon_id' => $anonId,
+            'form_code' => 'big5_120',
+        ]);
+
+        $response->assertStatus(429);
+        $response->assertJsonPath('error_code', 'RETAKE_COOLDOWN');
+        $response->assertJsonPath('details.form_code', 'big5_120');
+    }
+
+    public function test_big5_retake_window_limits_are_enforced_by_default_for_same_user(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+
+        $userId = 2002;
+        $anonId = 'anon_big5_user_default_retake_blocked';
+        $token = $this->issueUserToken((string) $userId, $anonId);
+        $this->createAttempt($anonId, now()->subHours(1), 'big5_90', $userId);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'BIG5_OCEAN',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'anon_id' => $anonId,
+            'form_code' => 'big5_90',
+        ]);
+
+        $response->assertStatus(429);
+        $response->assertJsonPath('error_code', 'RETAKE_COOLDOWN');
+        $response->assertJsonPath('details.form_code', 'big5_90');
+    }
+
+    public function test_big5_retake_window_limits_can_be_disabled_by_runtime_config(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+        config()->set('fap.big5_retake.enforce_pack_policy', false);
+
+        $anonId = 'anon_big5_runtime_retake_allowed';
         $this->createAttempt($anonId, now()->subHours(1), 'big5_120');
         $this->createAttempt($anonId, now()->subDays(2), 'big5_120');
         $this->createAttempt($anonId, now()->subDays(10), 'big5_120');
@@ -82,30 +125,40 @@ final class Big5RetakeCooldownTest extends TestCase
         $response->assertJsonPath('form_code', 'big5_120');
     }
 
-    public function test_big5_retake_window_limits_are_disabled_by_default_for_same_user(): void
+    public function test_attempt_start_reserves_probe_anon_ids_from_header_and_body(): void
     {
         (new ScaleRegistrySeeder)->run();
+        config()->set('analytics.smoke_attempt_exclusion.anon_id_prefixes', ['codex_probe_']);
 
-        $userId = 2002;
-        $anonId = 'anon_big5_user_default_retake_allowed';
-        $token = $this->issueUserToken((string) $userId, $anonId);
-        $this->createAttempt($anonId, now()->subHours(1), 'big5_90', $userId);
-        $this->createAttempt($anonId, now()->subDays(2), 'big5_90', $userId);
-        $this->createAttempt($anonId, now()->subDays(10), 'big5_90', $userId);
-        $this->createAttempt($anonId, now()->subDays(20), 'big5_90', $userId);
-
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer '.$token,
+        $headerResponse = $this->withHeaders([
+            'X-Anon-Id' => 'codex_probe_header_spoof',
         ])->postJson('/api/v0.3/attempts/start', [
-            'scale_code' => 'BIG5_OCEAN',
+            'scale_code' => 'MBTI',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'anon_id' => $anonId,
-            'form_code' => 'big5_90',
+            'anon_id' => 'codex_probe_body_spoof',
         ]);
 
-        $response->assertStatus(200);
-        $response->assertJsonPath('form_code', 'big5_90');
+        $headerResponse->assertStatus(200);
+        $headerAnonId = (string) $headerResponse->json('anon_id');
+        $this->assertNotSame('', $headerAnonId);
+        $this->assertFalse(str_starts_with($headerAnonId, 'codex_probe_'));
+
+        $bodyResponse = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'MBTI',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'anon_id' => 'codex_probe_body_only_spoof',
+        ]);
+
+        $bodyResponse->assertStatus(200);
+        $bodyAnonId = (string) $bodyResponse->json('anon_id');
+        $this->assertNotSame('', $bodyAnonId);
+        $this->assertFalse(str_starts_with($bodyAnonId, 'codex_probe_'));
+
+        $this->assertDatabaseMissing('attempts', ['anon_id' => 'codex_probe_header_spoof']);
+        $this->assertDatabaseMissing('attempts', ['anon_id' => 'codex_probe_body_spoof']);
+        $this->assertDatabaseMissing('attempts', ['anon_id' => 'codex_probe_body_only_spoof']);
     }
 
     public function test_big5_retake_cooldown_can_be_restored_from_pack_policy(): void
@@ -312,8 +365,7 @@ final class Big5RetakeCooldownTest extends TestCase
         \DateTimeInterface $startedAt,
         string $formCode = 'big5_120',
         ?int $userId = null
-    ): void
-    {
+    ): void {
         $normalizedFormCode = strtolower(trim($formCode)) === 'big5_90' ? 'big5_90' : 'big5_120';
         $dirVersion = $normalizedFormCode === 'big5_90' ? 'v1-form-90' : 'v1';
         $questionCount = $normalizedFormCode === 'big5_90' ? 90 : 120;

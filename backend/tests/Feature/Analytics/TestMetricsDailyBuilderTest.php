@@ -80,6 +80,39 @@ final class TestMetricsDailyBuilderTest extends TestCase
         ]);
     }
 
+    public function test_builder_excludes_reserved_probe_attempts_from_test_metrics(): void
+    {
+        config()->set('analytics.smoke_attempt_exclusion.anon_id_prefixes', ['codex_probe_']);
+
+        $day = CarbonImmutable::parse('2026-06-15 09:00:00');
+        $normalAttempt = (string) Str::uuid();
+        $probeAttempt = (string) Str::uuid();
+
+        $this->insertAttempt($normalAttempt, 11, 'MBTI', 'MBTI', 'zh-CN', $day, $day->addMinutes(8));
+        $this->insertAttempt(
+            $probeAttempt,
+            11,
+            'MBTI',
+            'MBTI',
+            'zh-CN',
+            $day->addMinutes(2),
+            $day->addMinutes(9),
+            'codex_probe_metrics_spoof'
+        );
+
+        $this->insertSubmission($normalAttempt, 11, 'succeeded', $day->addMinutes(9));
+        $this->insertSubmission($probeAttempt, 11, 'succeeded', $day->addMinutes(10));
+
+        $payload = app(TestMetricsDailyBuilder::class)->build($day, $day, [11], ['MBTI']);
+
+        $this->assertCount(1, $payload['rows']);
+        $row = $payload['rows'][0];
+        $this->assertSame(1, (int) $row['started_attempts']);
+        $this->assertSame(1, (int) $row['successful_attempts']);
+        $this->assertSame(0, (int) $row['failed_attempts']);
+        $this->assertSame(1, (int) $row['total_attempts']);
+    }
+
     private function insertAttempt(
         string $attemptId,
         int $orgId,
@@ -87,11 +120,12 @@ final class TestMetricsDailyBuilderTest extends TestCase
         string $scaleCodeV2,
         string $locale,
         CarbonImmutable $startedAt,
-        ?CarbonImmutable $submittedAt
+        ?CarbonImmutable $submittedAt,
+        ?string $anonId = null
     ): void {
         $row = [
             'id' => $attemptId,
-            'anon_id' => 'anon_'.substr(str_replace('-', '', $attemptId), 0, 10),
+            'anon_id' => $anonId ?? 'anon_'.substr(str_replace('-', '', $attemptId), 0, 10),
             'user_id' => null,
             'org_id' => $orgId,
             'scale_code' => $scaleCode,

@@ -1216,6 +1216,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_security_169_attempt_anon_id_hardening_files(): void
+    {
+        $changed = [
+            'backend/app/Http/Middleware/ResolveAnonId.php',
+            'backend/app/Http/Requests/V0_3/StartAttemptRequest.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_content_release_revalidate_automation_files(): void
     {
         $changed = [
@@ -5264,6 +5274,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSecurity169AttemptAnonIdHardeningFile($file)) {
+                continue;
+            }
+
             if ($this->isCiScaleImpactCommandFile($file)) {
                 continue;
             }
@@ -6908,6 +6922,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isMbtiPrivateRelationshipAuthHardeningFile(string $file): bool
     {
         return $file === 'backend/app/Services/V0_3/MbtiCompareInviteService.php';
+    }
+
+    private function isSecurity169AttemptAnonIdHardeningFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Middleware/ResolveAnonId.php',
+            'backend/app/Http/Requests/V0_3/StartAttemptRequest.php',
+        ], true);
     }
 
     private function isCiScaleImpactCommandFile(string $file): bool

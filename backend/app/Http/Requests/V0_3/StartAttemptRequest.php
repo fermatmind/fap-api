@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\V0_3;
 
+use App\Services\Analytics\AnalyticsTrafficExclusionPolicy;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StartAttemptRequest extends FormRequest
@@ -19,6 +20,7 @@ class StartAttemptRequest extends FormRequest
             $this->input('form_code', $this->input('form')),
             64
         );
+        $anonId = $this->normalizePublicAnonId($this->input('anon_id'), 64);
 
         $normalizedUtm = $this->normalizeUtm($this->input('utm'));
         $flatUtm = $this->normalizeFlatUtm();
@@ -58,6 +60,9 @@ class StartAttemptRequest extends FormRequest
         ];
         if ($formCode !== null) {
             $merged['form_code'] = $formCode;
+        }
+        if ($anonId !== null || $this->has('anon_id')) {
+            $merged['anon_id'] = $anonId;
         }
 
         $this->merge($merged);
@@ -150,6 +155,20 @@ class StartAttemptRequest extends FormRequest
 
         if (mb_strlen($normalized, 'UTF-8') > $maxLength) {
             $normalized = mb_substr($normalized, 0, $maxLength, 'UTF-8');
+        }
+
+        return $normalized;
+    }
+
+    private function normalizePublicAnonId(mixed $value, int $maxLength): ?string
+    {
+        $normalized = $this->normalizeString($value, $maxLength);
+        if ($normalized === null) {
+            return null;
+        }
+
+        if (app(AnalyticsTrafficExclusionPolicy::class)->hasExcludedProbePrefix($normalized)) {
+            return null;
         }
 
         return $normalized;
