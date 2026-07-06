@@ -102,5 +102,20 @@
         "required_checks_affected": false,
         "recommended_follow_up": "Finish, stash, or commit the SEO daily-run staged files in their owning task/thread; do not attach them to SECURITY-169 API PR scopes.",
         "train_continued": true
+    },
+    {
+        "repo": "fap-api",
+        "pr_id": "RIASEC-SIX-TYPE-PAGES-ENTITY-GRAPH-MATRIX-01",
+        "branch": "codex/riasec-six-type-pages-entity-graph-matrix-01",
+        "blocker_type": "blocked_by_authority_ambiguity",
+        "evidence": [
+            "ScaleRegistrySeeder defines RIASEC and names the six Holland/RIASEC dimensions.",
+            "RiasecPackLoader and RIASEC result projection services support assessment/result contracts.",
+            "Current generated-only scan did not prove canonical public owner routes for the six individual RIASEC type pages."
+        ],
+        "why_not_current_pr_scope": "Current PR is generated-only evidence reporting. It is not authorized to create routes, write CMS content, mutate sitemap/llms/schema/canonical/noindex, or edit fap-web.",
+        "required_checks_affected": false,
+        "recommended_follow_up": "Run RIASEC-SIX-TYPE-PUBLIC-OWNER-ROUTE-DESIGN-01 as a generated-only design PR before any runtime/CMS/discoverability implementation.",
+        "train_continued": true
     }
 ]
