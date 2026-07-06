@@ -35112,13 +35112,17 @@ prs:
       - backend/app/Services/Scale/ScaleRegistry.php
       - backend/app/Http/Controllers/API/V0_3/ScalesController.php
       - backend/config/content_packs.php
+      - backend/tests/Feature/V0_3/ScaleQuestionsResponseCacheTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
     validation:
       - cd backend && php artisan route:list --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-06.sqlite php artisan migrate --force
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ScaleQuestionsResponseCacheTest --no-ansi
       - bash backend/scripts/ci_verify_mbti.sh
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml"); puts "yaml ok"'
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }

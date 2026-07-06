@@ -41939,10 +41939,37 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-06; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-06T00:00:00+08:00",
+        "note": "Started SECURITY-169-API-06 from latest origin/main in isolated worktree; scope is tenant/org question pack and scale registry HTTP cache privacy only.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-06T14:17:29+08:00",
+        "note": "Local validation and scope validation passed for tenant/org scale registry and question-pack cache privacy; generated BIG5_OCEAN compiled artifacts from CI were restored as out-of-scope noise.",
+        "status": "local_validation_passed"
+      },
+      {
+        "at": "2026-07-06T14:18:20+08:00",
+        "note": "Rebased onto latest origin/main and reran focused API06 cache privacy test, route:list, JSON/YAML parse, and diff whitespace checks successfully.",
+        "status": "post_rebase_local_validation_passed"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-06",
+    "local_validation": {
+      "commands": [
+        "php -l backend/app/Http/Middleware/ResolveOrgContext.php && php -l backend/tests/Feature/V0_3/ScaleQuestionsResponseCacheTest.php",
+        "cd backend && ./vendor/bin/pint app/Http/Middleware/ResolveOrgContext.php tests/Feature/V0_3/ScaleQuestionsResponseCacheTest.php",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ScaleQuestionsResponseCacheTest --display-warnings --no-ansi",
+        "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\"); puts \"yaml ok\"' && git diff --check",
+        "cd backend && php artisan route:list --no-ansi >/tmp/fap-api-security-169-api-06-route-list.txt",
+        "rm -f /tmp/fap-api-security-169-api-06.sqlite && cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-06.sqlite php artisan migrate --force --no-ansi",
+        "cd backend && bash scripts/ci_verify_mbti.sh"
+      ],
+      "status": "pass"
+    },
     "local_cleanup_executed": false,
     "merged_at": null,
     "pr_url": null,
@@ -41950,7 +41977,17 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "scope_validation": {
+      "changed_files": [
+        "backend/app/Http/Middleware/ResolveOrgContext.php",
+        "backend/tests/Feature/V0_3/ScaleQuestionsResponseCacheTest.php",
+        "docs/codex/pr-train-state.json",
+        "docs/codex/pr-train.yaml"
+      ],
+      "local_validation_passed": true,
+      "status": "pass"
+    },
+    "status": "local_validation_passed",
     "title": "SECURITY-169-API-06: fix public question pack cache privacy",
     "train_scope": "security_169_fap_api_audit"
   },
