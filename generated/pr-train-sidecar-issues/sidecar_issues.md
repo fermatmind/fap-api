@@ -169,3 +169,20 @@
 - recommended follow-up:
   - Separately authorize sanitized live read-only GSC evidence capture and dry-run import readback before any CTR/TDK queue.
 - whether train continued: `true`
+
+## CTR-REPAIR-LOOP-ELIGIBILITY-READONLY-01 GSC data quality
+
+- repo: `fap-api`
+- PR id / branch: `CTR-REPAIR-LOOP-ELIGIBILITY-READONLY-01` / `codex/ctr-repair-loop-eligibility-readonly-01`
+- blocker type: `blocked_by_gsc_data_quality`
+- evidence:
+  - Current GSC quality proof records `data_origin=fixture`.
+  - `opportunity_queue_eligible=false`.
+  - CTR repair loop requires passable live read-model rows before selecting pages.
+- why not current PR scope:
+  - Current PR is generated-only eligibility reporting.
+  - It is not authorized to call GSC, import rows, write CMS fields, enqueue Search Channel, or edit title/meta/H1/FAQ.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Re-run CTR eligibility only after sanitized live GSC evidence and read-model quality gate pass.
+- whether train continued: `true`
