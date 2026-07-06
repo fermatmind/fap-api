@@ -106,3 +106,14 @@
 - recommended follow-up:
   - Complete `GSC-SEO-INTEL-LIVE-READMODEL-QUALITY-PROOF-READONLY-01` or a separately authorized equivalent before any TDK/CTR selection.
 - whether train continued: `true`
+
+## SECURITY-169-API-06 external dirty main worktree
+
+- repo: `fermatmind/fap-api`
+- PR id / branch: SECURITY-169-API-06 / `codex/security-169-api-06-fix-public-question-pack-cache-privacy`
+- blocker type: `external_dirty_local_main_worktree`
+- evidence: `/Users/rainie/Desktop/GitHub/fap-api-mbti-main-free-faq-content-01` held `main` with pre-existing staged files under `backend/docs/seo/daily-runs/2026-07-05/...`. The worktree was fast-forwarded to `origin/main` at `98b3986355bb85491989aa57a55e04d2d0436122`, but those staged SEO files remain.
+- why not current PR scope: the staged files are SEO daily-run documentation paths, unrelated to API06 tenant/org scale registry and question-pack cache privacy.
+- whether required checks are affected: `false`
+- recommended follow-up: finish, stash, or commit the SEO daily-run staged files in their owning task/thread; do not attach them to SECURITY-169 API PR scopes.
+- whether train continued: `true`
