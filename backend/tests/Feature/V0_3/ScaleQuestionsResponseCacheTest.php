@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature\V0_3;
 
+use App\Services\Auth\FmTokenService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 final class ScaleQuestionsResponseCacheTest extends TestCase
@@ -84,6 +86,109 @@ final class ScaleQuestionsResponseCacheTest extends TestCase
         $this->assertNotContains('correct_answer', $keys);
         $this->assertNotContains('correct_option', $keys);
         $this->assertNotContains('scoring_key', $keys);
+    }
+
+    public function test_tenant_registry_and_question_cache_responses_are_private_no_store(): void
+    {
+        [$orgId, $token] = $this->createTenantMemberToken();
+        $this->seedTenantRiasecRegistry($orgId);
+
+        $headers = [
+            'Authorization' => 'Bearer '.$token,
+            'X-Org-Id' => (string) $orgId,
+        ];
+
+        $registry = $this->withHeaders($headers)->getJson('/api/v0.3/scales');
+        $registry->assertStatus(200)
+            ->assertJson(['ok' => true]);
+        $this->assertPrivateNoStore($registry->headers->get('Cache-Control'));
+
+        $first = $this->withHeaders($headers)
+            ->getJson('/api/v0.3/scales/RIASEC/questions?locale=zh-CN&form_code=riasec_60');
+        $first->assertStatus(200)
+            ->assertHeader('X-FAP-Cache', 'miss')
+            ->assertJsonPath('form_code', 'riasec_60');
+        $this->assertPrivateNoStore($first->headers->get('Cache-Control'));
+
+        $second = $this->withHeaders($headers)
+            ->getJson('/api/v0.3/scales/RIASEC/questions?locale=zh-CN&form_code=riasec_60');
+        $second->assertStatus(200)
+            ->assertHeader('X-FAP-Cache', 'hit')
+            ->assertJsonPath('form_code', 'riasec_60');
+        $this->assertPrivateNoStore($second->headers->get('Cache-Control'));
+    }
+
+    /**
+     * @return array{0:int,1:string}
+     */
+    private function createTenantMemberToken(): array
+    {
+        $now = now();
+        $userId = DB::table('users')->insertGetId([
+            'name' => 'Tenant Cache User',
+            'email' => 'tenant-cache@example.com',
+            'password' => bcrypt('secret'),
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
+        $orgId = DB::table('organizations')->insertGetId([
+            'name' => 'Tenant Cache Org',
+            'owner_user_id' => $userId,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
+        DB::table('organization_members')->insert([
+            'org_id' => $orgId,
+            'user_id' => $userId,
+            'role' => 'member',
+            'joined_at' => $now,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
+        $issued = app(FmTokenService::class)->issueForUser((string) $userId, [
+            'org_id' => $orgId,
+            'role' => 'member',
+        ]);
+
+        return [$orgId, (string) ($issued['token'] ?? '')];
+    }
+
+    private function seedTenantRiasecRegistry(int $orgId): void
+    {
+        DB::table('scales_registry_v2')->updateOrInsert(
+            ['org_id' => $orgId, 'code' => 'RIASEC'],
+            [
+                'primary_slug' => 'tenant-riasec',
+                'slugs_json' => json_encode(['tenant-riasec'], JSON_THROW_ON_ERROR),
+                'driver_type' => 'riasec',
+                'assessment_driver' => 'riasec',
+                'default_pack_id' => 'RIASEC',
+                'default_region' => 'CN_MAINLAND',
+                'default_locale' => 'zh-CN',
+                'default_dir_version' => 'v1-standard-60',
+                'capabilities_json' => json_encode(['questions' => true], JSON_THROW_ON_ERROR),
+                'view_policy_json' => json_encode([], JSON_THROW_ON_ERROR),
+                'commercial_json' => json_encode([], JSON_THROW_ON_ERROR),
+                'seo_schema_json' => json_encode([], JSON_THROW_ON_ERROR),
+                'is_public' => false,
+                'is_active' => true,
+                'is_indexable' => false,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+    }
+
+    private function assertPrivateNoStore(?string $cacheControl): void
+    {
+        $value = (string) $cacheControl;
+
+        $this->assertStringContainsString('private', $value);
+        $this->assertStringContainsString('no-store', $value);
+        $this->assertStringNotContainsString('public', $value);
     }
 
     /**

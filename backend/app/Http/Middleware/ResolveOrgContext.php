@@ -98,7 +98,15 @@ class ResolveOrgContext
         $this->orgContext->set($orgId, $userId, $role, $anonId, $contextKind);
         app()->instance(OrgContext::class, $this->orgContext);
 
-        return $next($request);
+        $response = $next($request);
+
+        if ($orgId > 0 && $this->isScaleRegistryOrQuestionPackPath($request)) {
+            $response->headers->set('Cache-Control', 'private, no-store');
+            $response->headers->set('Pragma', 'no-cache');
+            $response->headers->set('Expires', '0');
+        }
+
+        return $response;
     }
 
     private function isAdminGuardAuthenticated(): bool
@@ -204,6 +212,30 @@ class ResolveOrgContext
             || $request->is('api/v0.3/attempts/*/report-access')
             || $request->is('api/v0.3/attempts/*/report.pdf')
             || preg_match('#^api/v0\.3/attempts/[0-9a-fA-F-]+$#', ltrim($request->path(), '/')) === 1;
+    }
+
+    private function isScaleRegistryOrQuestionPackPath(Request $request): bool
+    {
+        $path = trim($request->path(), '/');
+        if ($path === 'api/v0.3/scales') {
+            return true;
+        }
+
+        $segments = explode('/', $path);
+        if (count($segments) < 4 || $segments[0] !== 'api' || $segments[1] !== 'v0.3' || $segments[2] !== 'scales') {
+            return false;
+        }
+
+        $scaleSegment = trim((string) ($segments[3] ?? ''));
+        if ($scaleSegment === '' || in_array($scaleSegment, ['catalog', 'lookup', 'sitemap-source'], true)) {
+            return false;
+        }
+
+        if (count($segments) === 4) {
+            return true;
+        }
+
+        return count($segments) === 5 && in_array($segments[4], ['questions', 'technical-note'], true);
     }
 
     private function hasExplicitTenantOrgSignal(Request $request): bool
