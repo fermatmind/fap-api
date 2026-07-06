@@ -41924,10 +41924,18 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "local_validation": {
+        "evidence": "Ran syntax checks, Pint, focused ScaleQuestionsResponseCacheTest, route:list, sqlite migrate, JSON/YAML parsing, git diff --check, and backend/scripts/ci_verify_mbti.sh after rebasing onto latest origin/main.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "Changed files were confined to API-06 tenant/org scale registry and question-pack cache privacy middleware/test and train manifest/state paths. CI-generated BIG5_OCEAN compiled artifacts were restored before commit.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "98b3986355bb85491989aa57a55e04d2d0436122",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -41954,6 +41962,11 @@
         "at": "2026-07-06T14:18:20+08:00",
         "note": "Rebased onto latest origin/main and reran focused API06 cache privacy test, route:list, JSON/YAML parse, and diff whitespace checks successfully.",
         "status": "post_rebase_local_validation_passed"
+      },
+      {
+        "at": "2026-07-06T14:26:21+08:00",
+        "note": "PR #2790 merged after GitHub checks passed; staging deploy was not waited on and no manual or production deploy was triggered. Remote task branch deleted; local task worktree and branch cleaned.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
@@ -41970,12 +41983,12 @@
       ],
       "status": "pass"
     },
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-06T06:26:21Z",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2790",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_validation": {
       "changed_files": [
@@ -41987,7 +42000,7 @@
       "local_validation_passed": true,
       "status": "pass"
     },
-    "status": "local_validation_passed",
+    "status": "merged",
     "title": "SECURITY-169-API-06: fix public question pack cache privacy",
     "train_scope": "security_169_fap_api_audit"
   },
