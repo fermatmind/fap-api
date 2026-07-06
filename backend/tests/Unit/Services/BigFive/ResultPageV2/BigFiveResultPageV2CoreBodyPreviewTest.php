@@ -387,6 +387,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_content15_mixed_import_preflight_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityMbtiContent15MixedImportPreflight.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\PersonalityMbtiContent15MixedImportPreflight;',
+            '+        PersonalityMbtiContent15MixedImportPreflight::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_big_five_cms_import_draft_dry_run_files(): void
     {
         $changed = [
@@ -5110,6 +5125,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiContent15MixedImportPreflightFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsImportDraftDryRunFile($file)) {
                 continue;
             }
@@ -6414,6 +6433,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsIqNormImportDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsIqMethodPagesCmsDraftImporterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64BackendImportContractOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsMbtiContent15MixedImportPreflightOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsRevisionDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsInternalLinkDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsProjectionDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6651,6 +6671,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbtiComparisonCmsImportDryRun.php',
             'backend/app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php',
+        ], true);
+    }
+
+    private function isMbtiContent15MixedImportPreflightFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbtiContent15MixedImportPreflight.php',
+            'backend/app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php',
         ], true);
     }
 
@@ -10819,6 +10847,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         foreach ($changedLines as $line) {
             $normalized = ltrim($line, '+-');
             if (preg_match('/\bPersonalityMbti64BackendImportContract\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsMbtiContent15MixedImportPreflightOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\bPersonalityMbtiContent15MixedImportPreflight\b/u', $normalized) !== 1) {
                 return false;
             }
         }
