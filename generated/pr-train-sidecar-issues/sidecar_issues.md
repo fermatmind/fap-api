@@ -258,3 +258,20 @@
 - recommended follow-up:
   - Re-run `MBTI-MAIN-FAQ-D7-OBSERVATION-01` on or after 2026-07-12 as read-only evidence.
 - whether train continued: `true`
+
+## MBTI-MAIN-FAQ-D28-OBSERVATION-01 date window
+
+- repo: `fermatmind/fap-api`
+- PR id / branch: `MBTI-MAIN-FAQ-D28-OBSERVATION-01` / `codex/mbti-main-faq-d28-observation-01`
+- blocker type: `blocked_by_date_window`
+- evidence:
+  - Current date is 2026-07-06.
+  - Earliest valid D28 observation date is 2026-08-02.
+  - Collecting GSC/GA/FAQ observation now would mislabeled pre-D28 evidence as D28.
+- why not current PR scope:
+  - Current PR is generated-only date-window blocked reporting.
+  - It is not authorized to query GSC/GA, mutate CMS, edit SEO surfaces, submit URLs, verify deployment, or trigger deployment.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Re-run `MBTI-MAIN-FAQ-D28-OBSERVATION-01` on or after 2026-08-02 as read-only evidence.
+- whether train continued: `true`
