@@ -37826,3 +37826,111 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
     next_task: MBTI-CMS-27
+
+  - id: MBTI-CMS-27
+    repo: fap-api
+    depends_on:
+      - MBTI-CMS-26
+    branch: codex/mbti-cms-27-content15-production-import
+    title: "MBTI-CMS-27: execute CONTENT-15 production CMS import"
+    train_scope: mbti_content15_production_cms_import_execution
+    status: blocked_needs_operator_authorization
+    scope:
+      - Execute the CONTENT-15 production CMS import only after separate exact operator authorization is provided.
+      - Require exact source_package_sha256, authorization_payload_sha256, import_scope_mode, and record_count before any write.
+      - Run dry-run first, then production write only when the dry-run passes and exact authorization matches.
+      - Write only the 9-record top blocker batch from CMS-22/CMS-23.
+      - Produce exact import evidence artifacts.
+      - Do not release sitemap, llms, canonical/noindex gates, schema indexability, GSC submission, deploy, or frontend fallback content.
+    required_exact_authorization:
+      source_package_sha256: 75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb
+      authorization_payload_sha256: be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15
+      import_scope_mode: top_blocker_batch_only
+      record_count: 9
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Services/Cms/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/**
+      - generated/mbti-cms-27-content15-production-import/**
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Start without separate exact operator authorization.
+      - Modify fap-web.
+      - Add frontend content fallback.
+      - Release sitemap, llms, canonical/noindex gates, schema indexability, Search Channel/GSC, staging deploy, production deploy, or public URL expansion.
+      - Import any package other than the exact authorized 9-record top blocker batch.
+      - Implement MBTI-CMS-28 or MBTI-INDEX-24 scope in this PR.
+    validation:
+      - cd backend && APP_ENV=production php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: true
+    api_runtime_change: false
+    publish_allowed: true
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: MBTI-CMS-28
+
+  - id: MBTI-CMS-28
+    repo: fap-api
+    depends_on:
+      - MBTI-CMS-27
+    branch: codex/mbti-cms-28-content15-post-import-readonly-verification
+    title: "MBTI-CMS-28: verify CONTENT-15 CMS import read-only"
+    train_scope: mbti_content15_post_import_readonly_verification
+    status: pending_dependency
+    scope:
+      - Read-only verify the 9 imported CONTENT-15 URLs from CMS/API authority.
+      - Verify answer block, FAQ, SEO fields, internal links, sections, and schema/source fields exist for each URL.
+      - Verify sitemap_eligible, llms_eligible, and indexability gates have not been released early.
+      - Produce passed / needs_revision artifacts for the 4 profile URLs and 5 comparison URLs.
+      - Stop before MBTI-INDEX-24 if any URL fails verification.
+    urls:
+      profile:
+        - /zh/personality/istj-a
+        - /zh/personality/istp-a
+        - /zh/personality/isfp-a
+        - /zh/personality/esfj-a
+      comparison:
+        - /zh/personality/intp-a-vs-intp-t
+        - /zh/personality/intj-vs-intp
+        - /zh/personality/entj-vs-intj
+        - /zh/personality/infj-vs-infp
+        - /zh/personality/istj-vs-isfj
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Services/Cms/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/**
+      - generated/mbti-cms-28-content15-post-import-readonly-verification/**
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Write CMS, publish, run production imports, release sitemap/llms, release indexability, submit GSC, trigger deploy, or add frontend fallback content.
+      - Implement MBTI-INDEX-24 scope in this PR.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: MBTI-INDEX-24

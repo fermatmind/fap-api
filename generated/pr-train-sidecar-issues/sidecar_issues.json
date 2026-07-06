@@ -1,37 +1,19 @@
 [
   {
     "repo": "fap-api",
-    "pr_id": "BIG5-CMS-IMPORT-DRYRUN-01",
-    "branch": "codex/big5-cms-import-dryrun-01",
-    "blocker_type": "local_worktree_branch_diff_interference",
-    "evidence": "After the CI-scope test fix, focused tests and desktop package dry-run passed, but local full scripts/ci_verify_mbti.sh failed in BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff with IQ method files: backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php, backend/app/Models/TopicProfileEntry.php, backend/app/Services/Cms/IqMethodPages/IqMethodPagesDraftImporter.php.",
-    "why_not_current_pr_scope": "git diff --name-only origin/main...HEAD in the isolated PR worktree contains only the Big Five CMS import dry-run command, planner, tests, Kernel registration, and PR train metadata; it does not contain the IQ method files.",
-    "required_checks_affected": "Local full-check reproduction was affected. GitHub required checks run in a clean checkout; the current PR fix targets the actual GitHub failure, which was the hardcoded desktop package path in the test.",
-    "recommended_follow_up": "Keep IQ method page work isolated in its own branch/PR and avoid sharing dirty local worktree state with PR-train verification worktrees."
-  },
-  {
-    "repo": "fap-api",
-    "pr_id": "BIG5-CMS-FAQ-DEDUPE-02",
-    "branch": "codex/big5-cms-faq-dedupe-02",
-    "blocker_type": "local_worktree_branch_diff_interference",
-    "evidence": "PR2 focused syntax, PHPUnit, desktop package dry-run, Pint, YAML/JSON parse, and diff checks passed, but local full scripts/ci_verify_mbti.sh failed in BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff with IQ method files: backend/app/Console/Commands/ArticleImportIqMethodPagesDraft.php, backend/app/Models/TopicProfileEntry.php, backend/app/Services/Cms/IqMethodPages/IqMethodPagesDraftImporter.php.",
-    "why_not_current_pr_scope": "PR2 only changes BigFiveCmsImportDraftDryRunPlanner.php, PersonalityBigFiveCmsImportDraftDryRunCommandTest.php, PR train metadata, and this sidecar record. It does not add or modify the IQ method files.",
-    "required_checks_affected": "Local full-check reproduction was affected. GitHub required checks run in a clean checkout and should validate the actual PR2 scope without the local IQ branch-diff interference.",
-    "recommended_follow_up": "Isolate or merge/close the IQ method branch separately; do not use that local branch state as a blocker for Big Five CMS import readiness PRs."
-  },
-  {
-    "repo": "fap-api",
-    "pr_id": "IQ-METHOD-PAGES-ZH-CN-CMS-IMPORT-01",
-    "branch": "codex/iq-method-pages-cms-import-01",
-    "blocker_type": "external_full_suite_failure_timeout",
+    "pr_id": "MBTI-CMS-26",
+    "branch": "codex/mbti-cms-26-content15-mixed-import-preflight",
+    "blocker_type": "local_main_sync_blocked_by_unrelated_staged_files",
     "evidence": [
-      "cd backend && composer test exited with code 1 after Composer process timeout at 300 seconds.",
-      "Unrelated failures observed before timeout: Tests\\Unit\\Services\\Content\\CulturalCalibrationLayerServiceTest, Tests\\Feature\\Architecture\\ServiceLayerBoundaryTest, Tests\\Feature\\Career\\CareerCnProxyPublicOwnerApiTest, Tests\\Feature\\Career\\CareerJobDetailApiTest, Tests\\Feature\\CareerCms\\ArticleBaselineImportTest.",
-      "Focused rerun of ServiceLayerBoundaryTest reported existing HTTP helper violations in backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogFixtureParser.php and backend/app/Services/Iq/IqOwnerOriginal30BankService.php."
+      "PR #2771 is merged at 2026-07-06T04:12:02Z.",
+      "origin/main contains merge commit 63f1f9b35d90d3f409468640fd1ede3604f7e909.",
+      "Remote branch codex/mbti-cms-26-content15-mixed-import-preflight is deleted.",
+      "Local task worktree /Users/rainie/Desktop/GitHub/fap-api-mbti-cms-26 and local task branch were deleted.",
+      "Local main is checked out in /Users/rainie/Desktop/GitHub/fap-api-mbti-main-free-faq-content-01 and has unrelated staged files under backend/docs/seo/daily-runs/2026-07-05/."
     ],
-    "why_not_current_pr_scope": "Current PR scope only adds the IQ method pages CMS draft importer command/service/test, registers the command, extends the topic group whitelist, and updates PR-train metadata. The observed failures are in Content, Architecture, Career, and CareerCms surfaces outside the changed IQ method importer files.",
-    "required_checks_affected": "unknown_until_github_checks; local focused validation passed",
-    "recommended_follow_up": "Track and fix the failing Content/Career/Architecture tests under their owning PR scopes. Do not mix those repairs into the IQ method pages CMS import PR."
+    "why_not_current_pr_scope": "The staged files belong to a separate SEO/diagnostic daily-runs task and are outside MBTI-CMS-26, MBTI-CMS-27, and MBTI-CMS-28 scope. Touching, unstaging, stashing, or rebasing that worktree would risk altering user/other-task work.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Finish, commit, stash, or explicitly discard the unrelated staged daily-runs files in /Users/rainie/Desktop/GitHub/fap-api-mbti-main-free-faq-content-01, then run git -C /Users/rainie/Desktop/GitHub/fap-api-mbti-main-free-faq-content-01 pull --ff-only origin main and verify main == origin/main."
   },
   {
     "repo": "fap-api",
