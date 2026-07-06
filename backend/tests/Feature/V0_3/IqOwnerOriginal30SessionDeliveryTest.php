@@ -86,9 +86,9 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
     }
 
     #[Test]
-    public function current_question_payload_uses_request_origin_instead_of_app_url_for_asset_urls(): void
+    public function current_question_payload_ignores_forwarded_origin_for_asset_urls(): void
     {
-        config(['app.url' => 'https://139.224.130.204']);
+        config(['app.url' => 'https://api.fermatmind.com']);
 
         $attempt = $this->createOwnerAttempt('anon_iq_owner_public_origin');
         $request = Request::create(
@@ -100,13 +100,13 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
             [
                 'HTTPS' => 'on',
                 'HTTP_HOST' => 'api.fermatmind.com',
-                'HTTP_X_FORWARDED_PROTO' => 'https',
-                'HTTP_X_FORWARDED_HOST' => 'api.fermatmind.com',
+                'HTTP_X_FORWARDED_PROTO' => 'http',
+                'HTTP_X_FORWARDED_HOST' => 'evil.example',
             ]
         );
 
         $this->assertSame('api.fermatmind.com', $request->getHost());
-        $this->assertSame('https', $request->headers->get('x-forwarded-proto'));
+        $this->assertSame('http', $request->headers->get('x-forwarded-proto'));
 
         $payload = app(IqOwnerOriginal30BankService::class)->publicQuestionPayload($attempt, 0, $request);
 
@@ -114,6 +114,7 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
             $payload['questions']['items'][0],
             'https://api.fermatmind.com'
         );
+        $this->assertStringNotContainsString('evil.example', json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertSame(
             ['matrix_reasoning', 'pattern_recognition', 'visual_reasoning'],
             data_get($payload, 'questions.items.0.safe_dimension_aliases')
@@ -124,12 +125,47 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
     #[Test]
     public function owner_original_asset_route_rejects_invalid_paths(): void
     {
-        $response = $this->getJson('/api/v0.3/iq-owner-original-30/assets/iq_owner_original_30/../banks/IQ_OWNER_ORIGINAL_30/answer_key.json');
+        $anonId = 'anon_iq_owner_asset_invalid';
+        $token = $this->issueAnonToken($anonId);
+        $attempt = $this->createOwnerAttempt($anonId);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/iq-owner-original-30/assets/iq_owner_original_30/../banks/IQ_OWNER_ORIGINAL_30/answer_key.json?attempt_id='.$attempt->id);
 
         $response->assertStatus(404);
         $response->assertJson([
             'error_code' => 'IQ_OWNER_ASSET_NOT_FOUND',
         ]);
+    }
+
+    #[Test]
+    public function owner_original_asset_route_requires_token_and_attempt_owner(): void
+    {
+        $attempt = $this->createOwnerAttempt('anon_iq_owner_asset_real');
+        $assetPath = '/api/v0.3/iq-owner-original-30/assets/iq_owner_original_30/q01/stem.webp?attempt_id='.$attempt->id;
+
+        $this->getJson($assetPath)->assertStatus(401);
+
+        $wrongToken = $this->issueAnonToken('anon_iq_owner_asset_wrong');
+        $this->withHeaders([
+            'Authorization' => 'Bearer '.$wrongToken,
+        ])->getJson($assetPath)->assertStatus(404);
+    }
+
+    #[Test]
+    public function current_question_delivery_rejects_body_anon_id_spoofing(): void
+    {
+        $attempt = $this->createOwnerAttempt('anon_iq_owner_real_body_spoof');
+        $wrongToken = $this->issueAnonToken('anon_iq_owner_wrong_body_spoof');
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$wrongToken,
+        ])->json('GET', '/api/v0.3/attempts/'.$attempt->id.'/questions?index=0', [
+            'anon_id' => 'anon_iq_owner_real_body_spoof',
+        ]);
+
+        $response->assertStatus(404);
     }
 
     #[Test]
@@ -490,21 +526,23 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
             $this->assertIsArray($payload, $label.' media payload missing');
             $src = (string) data_get($payload, 'src');
             $publicUrl = (string) data_get($payload, 'public_url');
-            $assetPath = (string) data_get($payload, 'assets.image');
 
             $this->assertNotSame('', $src, $label.' src missing');
             $this->assertSame($src, $publicUrl, $label.' public_url should match src');
+            $this->assertArrayNotHasKey('assets', $payload);
             if ($expectedOrigin !== null) {
                 $this->assertStringStartsWith($expectedOrigin.'/api/v0.3/iq-owner-original-30/assets/iq_owner_original_30/q01/', $src);
             }
             $this->assertStringContainsString('/api/v0.3/iq-owner-original-30/assets/iq_owner_original_30/q01/', $src);
-            $this->assertStringStartsWith('assets/iq_owner_original_30/q01/', $assetPath);
+            $this->assertStringContainsString('attempt_id=', $src);
             $this->assertStringNotContainsString('139.224.130.204', $src);
             $this->assertStringNotContainsString(base_path(), $src);
             $this->assertStringNotContainsString('/private/', $src);
             $this->assertStringNotContainsString('../', $src);
 
-            $assetResponse = $this->get($this->pathFromPublicUrl($src));
+            $assetResponse = $this->withHeaders([
+                'Authorization' => 'Bearer '.$this->issueAnonToken($this->anonIdFromAttemptUrl($src)),
+            ])->get($this->pathFromPublicUrl($src));
             $assetResponse->assertStatus(200);
             $assetResponse->assertHeader('X-Content-Type-Options', 'nosniff');
             $this->assertStringStartsWith('image/webp', (string) $assetResponse->headers->get('content-type'));
@@ -517,7 +555,17 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         $path = parse_url($url, PHP_URL_PATH);
         $this->assertIsString($path);
         $this->assertStringStartsWith('/api/v0.3/iq-owner-original-30/assets/', $path);
+        $query = parse_url($url, PHP_URL_QUERY);
+        $this->assertIsString($query);
 
-        return $path;
+        return $path.'?'.$query;
+    }
+
+    private function anonIdFromAttemptUrl(string $url): string
+    {
+        parse_str((string) parse_url($url, PHP_URL_QUERY), $query);
+        $attempt = Attempt::query()->findOrFail((string) ($query['attempt_id'] ?? ''));
+
+        return (string) $attempt->anon_id;
     }
 }

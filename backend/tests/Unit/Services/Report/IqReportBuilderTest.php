@@ -142,6 +142,43 @@ final class IqReportBuilderTest extends TestCase
         $this->assertFalse((bool) data_get($lockedPayload, 'report.summary.claim_policy.claim_eligible'));
     }
 
+    public function test_builder_treats_string_false_claim_policy_as_not_eligible(): void
+    {
+        $builder = app(IqReportBuilder::class);
+        $attempt = new Attempt([
+            'id' => 'attempt-iq-report-string-false',
+            'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
+        ]);
+        $payload = $this->scoredPayloadWithNormClaimPolicy(false);
+        $payload['norms']['status'] = 'production_normed';
+        $payload['norms']['iq_estimate'] = 131.0;
+        $payload['norms']['percentile'] = 98.0;
+        $payload['norms']['confidence_interval'] = [126.5, 135.5];
+        $payload['norms']['score_claim_level'] = 'iq_estimate';
+        $payload['norms']['claim_policy']['claim_eligible'] = 'false';
+        $payload['norms']['claim_policy']['score_claim_level'] = 'iq_estimate';
+        $payload['norms']['claim_policy']['iq_estimate_allowed'] = 'false';
+
+        $result = new Result([
+            'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
+            'result_json' => [
+                'normed_json' => $payload,
+            ],
+        ]);
+
+        $report = $builder->composeVariant($attempt, $result, ReportAccess::VARIANT_FULL, [
+            'report_access_level' => ReportAccess::REPORT_ACCESS_FULL,
+        ]);
+
+        $this->assertNull(data_get($report, 'report.summary.iq_estimate'));
+        $this->assertNull(data_get($report, 'report.summary.percentile'));
+        $this->assertNull(data_get($report, 'report.summary.confidence_interval'));
+        $this->assertSame('raw_score_only', data_get($report, 'report.summary.score_claim_level'));
+        $this->assertSame('raw_score_only', data_get($report, 'report.summary.claim_policy.score_claim_level'));
+        $this->assertFalse((bool) data_get($report, 'report.summary.claim_policy.claim_eligible'));
+        $this->assertFalse((bool) data_get($report, 'report.summary.claim_policy.iq_estimate_allowed'));
+    }
+
     public function test_builder_keeps_blocked_unscored_legacy_demo_report_explicit(): void
     {
         $builder = app(IqReportBuilder::class);

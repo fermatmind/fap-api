@@ -74,8 +74,6 @@ final class AttemptQuestionDeliveryController extends Controller
         $candidates = [
             $request->attributes->get('anon_id'),
             $request->attributes->get('fm_anon_id'),
-            $request->attributes->get('client_anon_id'),
-            $request->input('anon_id'),
             $context->anonId(),
         ];
 

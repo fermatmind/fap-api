@@ -259,7 +259,7 @@ final class IqReportBuilder
         $scored = $status === 'scored';
         $hasNormAuthority = $this->hasNormAuthority($norms);
         $claimPolicy = $this->normalizeClaimPolicy($norms);
-        $scoreClaimLevel = $this->stringOrNull($norms['score_claim_level'] ?? ($claimPolicy['score_claim_level'] ?? null))
+        $scoreClaimLevel = $this->stringOrNull($claimPolicy['score_claim_level'] ?? null)
             ?? 'raw_score_only';
         $claimWarnings = $this->normalizeStringList($norms['claim_warnings'] ?? ($claimPolicy['claim_warnings'] ?? []));
 
@@ -300,14 +300,15 @@ final class IqReportBuilder
     {
         $claimPolicy = is_array($norms['claim_policy'] ?? null) ? $norms['claim_policy'] : [];
         $claimEligible = ($claimPolicy['claim_eligible'] ?? null) === true;
-        $scoreClaimLevel = $this->stringOrNull($norms['score_claim_level'] ?? ($claimPolicy['score_claim_level'] ?? null))
-            ?? ($claimEligible ? 'iq_estimate' : 'raw_score_only');
+        $scoreClaimLevel = $claimEligible
+            ? ($this->stringOrNull($norms['score_claim_level'] ?? ($claimPolicy['score_claim_level'] ?? null)) ?? 'iq_estimate')
+            : 'raw_score_only';
         $claimWarnings = $this->normalizeStringList($norms['claim_warnings'] ?? ($claimPolicy['claim_warnings'] ?? []));
 
         $claimPolicy['claim_eligible'] = $claimEligible;
         $claimPolicy['score_claim_level'] = $scoreClaimLevel;
         $claimPolicy['claim_warnings'] = $claimWarnings;
-        $claimPolicy['iq_estimate_allowed'] = $scoreClaimLevel !== 'raw_score_only';
+        $claimPolicy['iq_estimate_allowed'] = $claimEligible && $scoreClaimLevel === 'iq_estimate';
         $claimPolicy['source'] = $this->stringOrNull($claimPolicy['source'] ?? null) ?? 'iq_norm_authority';
 
         return $claimPolicy;

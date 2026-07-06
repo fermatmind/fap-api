@@ -235,6 +235,8 @@ Route::prefix('v0.3')->middleware([
         Route::get('/public-gateways/help', [PublicGatewaySurfaceController::class, 'help']);
         Route::get('/public-gateways/help/{slug}', [PublicGatewaySurfaceController::class, 'helpDetail']);
         Route::get('/iq-owner-original-30/assets/{path}', [IqOwnerOriginal30AssetController::class, 'show'])
+            ->middleware([\App\Http\Middleware\FmTokenAuth::class])
+            ->defaults('public_realm', true)
             ->where('path', '.*')
             ->name('api.v0_3.iq_owner_original_30.assets.show');
         Route::get('/scales/{scale_code}/questions', [ScalesController::class, 'questions']);
