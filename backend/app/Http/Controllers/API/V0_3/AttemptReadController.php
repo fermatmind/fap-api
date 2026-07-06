@@ -3319,20 +3319,25 @@ class AttemptReadController extends Controller
         ]);
 
         $contract = $this->eqJourneyStateService->submit($attempt, $result, $payload);
-        $request->merge(['attempt_id' => (string) $attempt->id]);
-        $this->eventRecorder->recordFromRequest($request, 'eq_journey_feedback_submitted', $this->resolveUserId($request), [
-            'scale_code' => 'EQ_60',
-            'eq_report_mode' => data_get($contract, 'eq_journey_state_v1.eq_report_mode'),
-            'status' => data_get($contract, 'eq_journey_state_v1.status'),
-            'persisted' => data_get($contract, 'eq_journey_state_v1.persisted'),
-            'read_depth' => data_get($contract, 'eq_journey_state_v1.signals.read_depth'),
-            'result_resonance' => data_get($contract, 'eq_journey_state_v1.signals.result_resonance'),
-            'action_completion' => data_get($contract, 'eq_journey_state_v1.signals.action_completion'),
-            'retest_intent' => data_get($contract, 'eq_journey_state_v1.signals.retest_intent'),
-            'low_confidence_caution' => data_get($contract, 'eq_journey_state_v1.interpretation_guard.low_confidence_caution'),
-            'affects_scores' => false,
-            'profile_memory_write' => false,
-        ]);
+        $consentToStore = (bool) data_get($contract, 'eq_journey_state_v1.consent.consent_to_store', false);
+        $persisted = (bool) data_get($contract, 'eq_journey_state_v1.persisted', false);
+        if ($consentToStore && $persisted) {
+            $request->merge(['attempt_id' => (string) $attempt->id]);
+            $this->eventRecorder->recordFromRequest($request, 'eq_journey_feedback_submitted', $this->resolveUserId($request), [
+                'scale_code' => 'EQ_60',
+                'eq_report_mode' => data_get($contract, 'eq_journey_state_v1.eq_report_mode'),
+                'status' => data_get($contract, 'eq_journey_state_v1.status'),
+                'persisted' => $persisted,
+                'consent_to_store' => $consentToStore,
+                'read_depth' => data_get($contract, 'eq_journey_state_v1.signals.read_depth'),
+                'result_resonance' => data_get($contract, 'eq_journey_state_v1.signals.result_resonance'),
+                'action_completion' => data_get($contract, 'eq_journey_state_v1.signals.action_completion'),
+                'retest_intent' => data_get($contract, 'eq_journey_state_v1.signals.retest_intent'),
+                'low_confidence_caution' => data_get($contract, 'eq_journey_state_v1.interpretation_guard.low_confidence_caution'),
+                'affects_scores' => false,
+                'profile_memory_write' => false,
+            ]);
+        }
 
         return response()->json([
             'ok' => true,

@@ -80,13 +80,15 @@ final class EqAgentRuntimeResponder
             ],
         ];
 
-        $providerResponse = $this->providerManager->tryGenerate(new EqAgentProviderRequest(
-            $context,
-            $payload,
-            $messageText,
-            $intent,
-            $resolvedLocale,
-        ));
+        $providerResponse = $this->shouldTryProvider($detectedClaimIds, $intentContext)
+            ? $this->providerManager->tryGenerate(new EqAgentProviderRequest(
+                $context,
+                $payload,
+                $messageText,
+                $intent,
+                $resolvedLocale,
+            ))
+            : null;
 
         if ($providerResponse !== null && $this->providerResponseIsSafe($providerResponse, $agentKnowledge, $sourceAssetIds, $boundaryIds)) {
             $payload['mode'] = 'llm_provider_read_only';
@@ -100,6 +102,21 @@ final class EqAgentRuntimeResponder
         }
 
         return $payload;
+    }
+
+    /**
+     * @param  list<string>  $detectedClaimIds
+     * @param  array<string,mixed>  $intentContext
+     */
+    private function shouldTryProvider(array $detectedClaimIds, array $intentContext): bool
+    {
+        if ($detectedClaimIds !== []) {
+            return false;
+        }
+
+        $mode = strtolower(trim((string) ($intentContext['allowed_response_mode'] ?? '')));
+
+        return ! in_array($mode, ['boundary_refusal', 'planned_unavailable_boundary'], true);
     }
 
     /**
@@ -258,7 +275,11 @@ final class EqAgentRuntimeResponder
 
                 continue;
             }
-            foreach ($this->stringList($claim['blocked_patterns'] ?? null) as $pattern) {
+            $patterns = array_values(array_unique(array_merge(
+                $this->stringList($claim['blocked_patterns'] ?? null),
+                $this->fallbackForbiddenClaimPatterns((string) $claimId)
+            )));
+            foreach ($patterns as $pattern) {
                 if ($pattern !== '' && str_contains($normalizedMessage, mb_strtolower($pattern))) {
                     $detected[] = (string) $claimId;
                     break;
@@ -267,6 +288,31 @@ final class EqAgentRuntimeResponder
         }
 
         return array_values(array_unique($detected));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function fallbackForbiddenClaimPatterns(string $claimId): array
+    {
+        return match ($claimId) {
+            'true_emotional_ability' => [
+                'true emotional ability',
+                'objective emotional ability',
+                'real emotional ability',
+                'emotional ability test',
+            ],
+            'msceit_like' => ['msceit'],
+            'certified_ei' => ['certified emotional intelligence', 'ei certification', 'eq certification'],
+            'job_performance_prediction' => [
+                'job performance',
+                'predict work performance',
+                'predict job performance',
+                '预测工作表现',
+                '工作表现',
+            ],
+            default => [],
+        };
     }
 
     /**
