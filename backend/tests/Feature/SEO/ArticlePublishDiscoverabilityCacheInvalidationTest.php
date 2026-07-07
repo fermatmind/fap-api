@@ -78,7 +78,7 @@ final class ArticlePublishDiscoverabilityCacheInvalidationTest extends TestCase
     private function assertDiscoverabilityCachesFlushed(): void
     {
         $this->assertNull(Cache::get(SitemapSourceController::CACHE_KEY_FRESH));
-        $this->assertNull(Cache::get(SitemapSourceController::CACHE_KEY_STALE));
+        $this->assertNotNull(Cache::get(SitemapSourceController::CACHE_KEY_STALE), 'Stale sitemap-source cache must be retained as safety net during gap window.');
         $this->assertNull(Cache::get(SitemapCache::XML_CACHE_KEY));
         $this->assertNull(Cache::get(SitemapCache::ETAG_CACHE_KEY));
     }

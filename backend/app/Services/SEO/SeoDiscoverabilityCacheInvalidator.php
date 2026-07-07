@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Cache;
 final class SeoDiscoverabilityCacheInvalidator
 {
     /**
+     * Flush article discoverability caches.
+     *
+     * Deletes the fresh sitemap-source cache and backend XML sitemap/ETag caches,
+     * but KEEPS the stale sitemap-source cache as a safety net during the gap window
+     * between publish and the next seo:warm-sitemap-source-cache run.
+     *
      * @return list<string>
      */
     public function flushArticleDiscoverabilityCaches(): array
@@ -32,7 +38,6 @@ final class SeoDiscoverabilityCacheInvalidator
     {
         $keys = [
             SitemapSourceController::CACHE_KEY_FRESH,
-            SitemapSourceController::CACHE_KEY_STALE,
             SitemapCache::XML_CACHE_KEY,
             SitemapCache::ETAG_CACHE_KEY,
         ];
