@@ -326,6 +326,7 @@ class SitemapGenerator
             ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
             ->where('locale', 'zh-CN')
             ->whereIn('entity_type', [
+                PersonalityPublicContentAsset::ENTITY_HUB,
                 PersonalityPublicContentAsset::ENTITY_DOMAIN,
                 PersonalityPublicContentAsset::ENTITY_POLARITY,
             ])
@@ -344,7 +345,8 @@ class SitemapGenerator
 
         foreach ($rows as $row) {
             $path = trim((string) data_get($row->canonical_json, 'path', ''));
-            if (! str_starts_with($path, '/zh/personality/big-five/')) {
+            if (! str_starts_with($path, '/zh/personality/big-five/')
+                && $path !== '/zh/personality/big-five') {
                 continue;
             }
 
