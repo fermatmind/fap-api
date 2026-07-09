@@ -264,7 +264,7 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-noindex', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-review', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-sitemap-off', $xml);
-        $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-llms-off', $xml);
+        $this->assertStringContainsString('https://fermatmind.com/zh/personality/big-five/openness-llms-off', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/zh/big-five/openness', $xml);
 
         // Hub should NOT be included when noindex or draft
