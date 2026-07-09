@@ -1,0 +1,11 @@
+{
+  "artifact": "ENNEAGRAM-EN13-SOURCE-LEDGER-01",
+  "framework": "enneagram",
+  "locale": "en",
+  "status": "ready_for_package_qa",
+  "sources": [
+    {"kind":"internal_structural_source","path":"docs/seo/personality/enneagram/content-packages/zh13-cms-v1/enneagram-zh13-cms-package-v1.json","use":"route, section, FAQ, method-boundary, and internal-link parity","limitations":"English wording is independently localized."},
+    {"kind":"internal_claim_boundary","path":"docs/seo/personality/enneagram/full-content-asset-audit-source-of-truth-2026-07-09.md","use":"public route and no-go boundaries","limitations":"Not scientific-validity evidence."}
+  ],
+  "claim_policy":{"allowed":["self-observation","communication reflection","conditional tendency language"],"forbidden":["diagnosis","clinical validity claim","hiring use","prediction","fixed identity claim","private result language"]}
+}

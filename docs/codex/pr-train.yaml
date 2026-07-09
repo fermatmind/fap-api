@@ -38015,3 +38015,147 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
     next_task: MBTI-INDEX-24
+
+  - id: ENNEAGRAM-EN13-CONTENT-PACKAGE-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/enneagram-en13-content-package-01
+    title: "ENNEAGRAM-EN13-CONTENT-PACKAGE-01: add reviewed English Enneagram CMS package"
+    train_scope: enneagram_en13_content_package
+    status: user_authorized
+    allowed_paths: [docs/seo/personality/enneagram/content-packages/en13-cms-v1/**, docs/seo/personality/enneagram/en13-content-qa-01.json, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
+    validation: ["node docs/seo/personality/enneagram/content-packages/en13-cms-v1/build-package.mjs", "jq empty docs/seo/personality/enneagram/content-packages/en13-cms-v1/enneagram-en13-cms-package-v1.json", "jq empty docs/seo/personality/enneagram/en13-content-qa-01.json", "git diff --check"]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-EN13-PUBLISH-GATE-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-EN13-CONTENT-PACKAGE-01]
+    branch: codex/enneagram-en13-publish-gate-01
+    title: "ENNEAGRAM-EN13-PUBLISH-GATE-01: permit reviewed English assets through publish gate"
+    train_scope: enneagram_en13_publish_gate
+    status: pending_dependency
+    allowed_paths: [backend/app/Services/Cms/EnneagramCmsPublishGateService.php, backend/app/Console/Commands/PersonalityEnneagramCmsPublishGate.php, backend/tests/Feature/Console/PersonalityEnneagramCmsPublishGateCommandTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
+    validation: ["cd backend && php artisan test --filter=PersonalityEnneagramCmsPublishGateCommandTest --no-ansi", "cd backend && bash scripts/ci_verify_mbti.sh", "git diff --check"]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-EN13-SITEMAP-LOCALE-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-EN13-PUBLISH-GATE-01]
+    branch: codex/enneagram-en13-sitemap-locale-01
+    title: "ENNEAGRAM-EN13-SITEMAP-LOCALE-01: enumerate published English Enneagram assets"
+    train_scope: enneagram_en13_sitemap_authority
+    status: pending_dependency
+    allowed_paths: [backend/app/Services/SEO/SitemapGenerator.php, backend/tests/Feature/SEO/SitemapGeneratorTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
+    validation: ["cd backend && php artisan test --filter=SitemapGeneratorTest --no-ansi", "cd backend && bash scripts/ci_verify_mbti.sh", "git diff --check"]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-EN13-CMS-DRY-RUN-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-EN13-SITEMAP-LOCALE-01]
+    branch: codex/enneagram-en13-cms-dry-run-01
+    title: "ENNEAGRAM-EN13-CMS-DRY-RUN-01: validate English CMS package without writes"
+    train_scope: enneagram_en13_cms_dry_run
+    status: pending_dependency
+    allowed_paths: [docs/seo/personality/enneagram/**, generated/enneagram-en13-cms-dry-run/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
+    validation: ["git diff --check"]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-EN13-CMS-DRY-RUN-01]
+    branch: codex/enneagram-en13-cms-import-promote-01
+    title: "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01: import and promote English Enneagram assets"
+    train_scope: enneagram_en13_controlled_cms_write
+    status: pending_exact_production_authorization
+    allowed_paths: [docs/seo/personality/enneagram/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
+    validation: ["git diff --check"]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: true
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01]
+    branch: codex/enneagram-en13-noindex-runtime-smoke-01
+    title: "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01: verify English noindex runtime"
+    train_scope: enneagram_en13_runtime_smoke
+    status: pending_dependency
+    allowed_paths: [generated/enneagram-en13-runtime-smoke/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
+    validation: ["git diff --check"]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01]
+    branch: codex/enneagram-en13-publish-cache-warm-01
+    title: "ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01: publish English assets and warm sitemap source"
+    train_scope: enneagram_en13_controlled_publish
+    status: pending_exact_production_authorization
+    allowed_paths: [docs/seo/personality/enneagram/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
+    validation: ["git diff --check"]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: true
+    api_runtime_change: true
+    publish_allowed: true
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-EN13-BILINGUAL-PRODUCTION-REVALIDATION-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01]
+    branch: codex/enneagram-en13-bilingual-production-revalidation-01
+    title: "ENNEAGRAM-EN13-BILINGUAL-PRODUCTION-REVALIDATION-01: verify 26 published bilingual assets"
+    train_scope: enneagram_en13_bilingual_revalidation
+    status: pending_dependency
+    allowed_paths: [generated/enneagram-en13-bilingual-production-revalidation/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
+    validation: ["git diff --check"]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
