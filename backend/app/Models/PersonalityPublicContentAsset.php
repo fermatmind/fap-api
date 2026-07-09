@@ -34,6 +34,8 @@ final class PersonalityPublicContentAsset extends Model
 
     public const ENTITY_FACET = 'facet';
 
+    public const ENTITY_FACET_DETAIL = 'facet_detail';
+
     public const ENTITY_CENTER = 'center';
 
     public const ENTITY_CORE_TYPE = 'core_type';
@@ -48,6 +50,7 @@ final class PersonalityPublicContentAsset extends Model
         self::ENTITY_POLARITY,
         self::ENTITY_FACET_HUB,
         self::ENTITY_FACET,
+        self::ENTITY_FACET_DETAIL,
         self::ENTITY_CENTER,
         self::ENTITY_CORE_TYPE,
         self::ENTITY_WING,
@@ -61,6 +64,7 @@ final class PersonalityPublicContentAsset extends Model
             self::ENTITY_POLARITY,
             self::ENTITY_FACET_HUB,
             self::ENTITY_FACET,
+            self::ENTITY_FACET_DETAIL,
         ],
         self::FRAMEWORK_ENNEAGRAM => [
             self::ENTITY_HUB,
