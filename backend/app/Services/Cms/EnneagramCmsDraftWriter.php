@@ -365,6 +365,13 @@ final class EnneagramCmsDraftWriter
      */
     private function contentSections(string $quickAnswer, array $recommendations): array
     {
+        // Generic sections array takes priority when present.
+        $genericSections = $recommendations['sections'] ?? null;
+        if (is_array($genericSections) && $genericSections !== []) {
+            return $this->normalizeSections($genericSections);
+        }
+
+        // Legacy: quick_answer + differentiation_notes
         $sections = [];
         if ($quickAnswer !== '') {
             $sections[] = [
@@ -387,6 +394,24 @@ final class EnneagramCmsDraftWriter
         }
 
         return $sections;
+    }
+
+    /**
+     * @param  list<array{key?:string,title?:string,body_md?:string,body_html?:string}>  $sections
+     * @return list<array{key:string,title:string,body_md:string}>
+     */
+    private function normalizeSections(array $sections): array
+    {
+        return array_values(array_filter(
+            array_map(static function (array $section): array {
+                return [
+                    'key' => trim((string) ($section['key'] ?? '')),
+                    'title' => trim((string) ($section['title'] ?? '')),
+                    'body_md' => trim((string) ($section['body_md'] ?? $section['body_html'] ?? '')),
+                ];
+            }, $sections),
+            static fn (array $section): bool => $section['key'] !== ''
+        ));
     }
 
     private function qaDecisionPasses(string $decision): bool
