@@ -36,7 +36,8 @@ final class PersonalityEnneagramCmsDraft extends Command
         {--no-sitemap : Required for --write; confirms no sitemap action}
         {--no-llms : Required for --write; confirms no llms action}
         {--no-search-release : Required for --write; confirms no search release action}
-        {--operator-approved= : Required exact approval token for --write}';
+        {--operator-approved= : Required exact approval token for --write}
+        {--update-existing : Update content on existing content_ready assets instead of blocking (use with --write for production backfill)}';
 
     protected $description = 'Create Enneagram public profile CMS draft assets with explicit no-publish/no-index guards.';
 
@@ -90,8 +91,8 @@ final class PersonalityEnneagramCmsDraft extends Command
         }
 
         $summary = $write
-            ? $writer->write($package, $qa, hash('sha256', $packageRaw), hash('sha256', $qaRaw))
-            : $writer->plan($package, $qa, hash('sha256', $packageRaw), hash('sha256', $qaRaw));
+            ? $writer->write($package, $qa, hash('sha256', $packageRaw), hash('sha256', $qaRaw), (bool) $this->option('update-existing'))
+            : $writer->plan($package, $qa, hash('sha256', $packageRaw), hash('sha256', $qaRaw), (bool) $this->option('update-existing'));
 
         return array_merge($summary, [
             'package_path' => $packagePath,
@@ -151,6 +152,7 @@ final class PersonalityEnneagramCmsDraft extends Command
         $this->line('writes_committed='.(($summary['writes_committed'] ?? false) ? '1' : '0'));
         $this->line('row_count='.(string) ($summary['row_count'] ?? 0));
         $this->line('created_asset_count='.(string) ($summary['created_asset_count'] ?? 0));
+        $this->line('updated_asset_count='.(string) ($summary['updated_asset_count'] ?? 0));
         $this->line('skipped_existing_count='.(string) ($summary['skipped_existing_count'] ?? 0));
     }
 

@@ -34,9 +34,9 @@ final class EnneagramCmsDraftWriter
      * @param  array<string,mixed>  $qa
      * @return array<string,mixed>
      */
-    public function plan(array $package, array $qa, string $sourceSha256, string $qaSha256): array
+    public function plan(array $package, array $qa, string $sourceSha256, string $qaSha256, bool $updateExisting = false): array
     {
-        return $this->buildSummary($package, $qa, $sourceSha256, $qaSha256, false);
+        return $this->buildSummary($package, $qa, $sourceSha256, $qaSha256, false, $updateExisting);
     }
 
     /**
@@ -44,9 +44,9 @@ final class EnneagramCmsDraftWriter
      * @param  array<string,mixed>  $qa
      * @return array<string,mixed>
      */
-    public function write(array $package, array $qa, string $sourceSha256, string $qaSha256): array
+    public function write(array $package, array $qa, string $sourceSha256, string $qaSha256, bool $updateExisting = false): array
     {
-        return DB::transaction(fn (): array => $this->buildSummary($package, $qa, $sourceSha256, $qaSha256, true));
+        return DB::transaction(fn (): array => $this->buildSummary($package, $qa, $sourceSha256, $qaSha256, true, $updateExisting));
     }
 
     /**
@@ -54,7 +54,7 @@ final class EnneagramCmsDraftWriter
      * @param  array<string,mixed>  $qa
      * @return array<string,mixed>
      */
-    private function buildSummary(array $package, array $qa, string $sourceSha256, string $qaSha256, bool $write): array
+    private function buildSummary(array $package, array $qa, string $sourceSha256, string $qaSha256, bool $write, bool $updateExisting = false): array
     {
         $qaRows = $this->qaRowsByUrl($qa);
         $errors = [];
@@ -102,11 +102,25 @@ final class EnneagramCmsDraftWriter
 
             $existing = $this->existingAsset($identity);
             if ($existing instanceof PersonalityPublicContentAsset && ! $this->existingAssetIsWritableDraft($existing, $sourceSha256)) {
-                $errors[] = [
-                    'field' => 'recommendations.'.((string) $position).'.target_url',
-                    'code' => 'existing_live_or_foreign_asset_blocks_draft_write',
-                    'message' => 'Existing public/content-ready/published/indexable or foreign-source asset blocks draft-only writes.',
-                ];
+                if ($updateExisting && $this->assetIsUpdatableContentReady($existing)) {
+                    // Allow: updating an existing content_ready asset with new content.
+                } else {
+                    $errors[] = [
+                        'field' => 'recommendations.'.((string) $position).'.target_url',
+                        'code' => 'existing_live_or_foreign_asset_blocks_draft_write',
+                        'message' => 'Existing public/content-ready/published/indexable or foreign-source asset blocks draft-only writes. Use --update-existing to backfill content_ready assets.',
+                    ];
+                }
+            }
+
+            if ($errors === [] || $write) {
+                // Determine action for existing assets
+                $action = 'create_draft_asset';
+                if ($existing instanceof PersonalityPublicContentAsset) {
+                    $action = $updateExisting && $this->assetIsUpdatableContentReady($existing)
+                        ? 'update_existing_content_ready'
+                        : ($this->existingAssetIsWritableDraft($existing, $sourceSha256) ? 'skip_existing_same_source_draft' : 'blocked_existing');
+                }
             }
 
             $rows[] = [
@@ -121,7 +135,7 @@ final class EnneagramCmsDraftWriter
                 'qa_source_sha256' => $qaSha256,
                 'recommendation_sha256' => hash('sha256', $recommendationJson),
                 'existing_asset_id' => $existing?->id !== null ? (int) $existing->id : null,
-                'action' => $existing instanceof PersonalityPublicContentAsset ? 'skip_existing_same_source_draft' : 'create_draft_asset',
+                'action' => $action,
                 'asset_preview' => $this->assetPayload($recommendation, $identity, $sourceSha256, $qaSha256),
             ];
         }
@@ -144,12 +158,37 @@ final class EnneagramCmsDraftWriter
         }
 
         $created = 0;
+        $updated = 0;
         $skipped = 0;
         if ($write) {
             foreach ($rows as &$row) {
-                if (($row['existing_asset_id'] ?? null) !== null) {
+                if ($row['action'] === 'skip_existing_same_source_draft') {
                     $row['action'] = 'skipped_existing';
                     $skipped++;
+
+                    continue;
+                }
+
+                if ($row['action'] === 'blocked_existing') {
+                    continue;
+                }
+
+                if ($row['action'] === 'update_existing_content_ready' && ($row['existing_asset_id'] ?? null) !== null) {
+                    $payload = (array) $row['asset_preview'];
+                    // Only update content fields; preserve state fields on existing content_ready assets.
+                    unset(
+                        $payload['org_id'], $payload['framework'], $payload['entity_type'], $payload['entity_key'],
+                        $payload['slug'], $payload['locale'],
+                        $payload['is_public'], $payload['index_eligible'], $payload['sitemap_eligible'],
+                        $payload['llms_eligible'], $payload['launch_state'], $payload['review_state'],
+                        $payload['robots'], $payload['contract_version'], $payload['source_package'], $payload['source_hash'],
+                    );
+                    PersonalityPublicContentAsset::query()
+                        ->withoutGlobalScopes()
+                        ->whereKey((int) $row['existing_asset_id'])
+                        ->update($payload);
+                    $row['action'] = 'updated_content_ready_asset';
+                    $updated++;
 
                     continue;
                 }
@@ -170,8 +209,9 @@ final class EnneagramCmsDraftWriter
             'core_type_row_count' => $this->countRows($rows, PersonalityPublicContentAsset::ENTITY_CORE_TYPE),
             'would_create_asset_count' => $write ? 0 : count(array_filter($rows, static fn (array $row): bool => ($row['existing_asset_id'] ?? null) === null)),
             'created_asset_count' => $created,
+            'updated_asset_count' => $updated,
             'skipped_existing_count' => $skipped,
-            'writes_committed' => $write && $created > 0,
+            'writes_committed' => $write && ($created > 0 || $updated > 0),
             'rows' => $rows,
             'errors' => [],
             'warnings' => [],
@@ -296,6 +336,16 @@ final class EnneagramCmsDraftWriter
                 PersonalityPublicContentAsset::LAUNCH_DRAFT,
                 PersonalityPublicContentAsset::LAUNCH_REVIEW,
             ], true);
+    }
+
+    private function assetIsUpdatableContentReady(PersonalityPublicContentAsset $asset): bool
+    {
+        return (bool) $asset->is_public === true
+            && (bool) $asset->index_eligible === false
+            && (bool) $asset->sitemap_eligible === false
+            && (bool) $asset->llms_eligible === false
+            && $asset->launch_state === PersonalityPublicContentAsset::LAUNCH_CONTENT_READY
+            && $asset->robots === PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW;
     }
 
     /**
