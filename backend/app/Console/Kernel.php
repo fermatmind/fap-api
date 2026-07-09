@@ -196,6 +196,7 @@ use App\Console\Commands\PersonalityTdkNextBatchApprovalDraftGateCommand;
 use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessCommand;
 use App\Console\Commands\PersonalityMbtiContent15MixedImportPreflight;
 use App\Console\Commands\PersonalityEnneagramCmsPromote;
+use App\Console\Commands\PersonalityEnneagramCmsPublishGate;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
 use App\Console\Commands\RiasecResultPageAssetAgentAuditCommand;
@@ -278,6 +279,7 @@ class Kernel extends ConsoleKernel
         PersonalityBigFiveCmsStagingWriteImport::class,
         PersonalityBigFivePublicProfileAgentDraft::class,
         PersonalityEnneagramCmsPromote::class,
+        PersonalityEnneagramCmsPublishGate::class,
         PersonalityEnneagramCmsDraft::class,
         PersonalityImportDesktopCloneBaseline::class,
         PersonalityMbti64GscQueryReadonlyExport::class,
