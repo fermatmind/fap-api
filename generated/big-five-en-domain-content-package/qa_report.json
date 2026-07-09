@@ -1,0 +1,22 @@
+{
+  "package": "big-five-en-domain-content-package-2026-07-10",
+  "expected_assets": 5,
+  "expected_locale": "en",
+  "expected_entity_type": "domain",
+  "expected_robots": "noindex,follow",
+  "expected_indexability": {
+    "index_eligible": false,
+    "sitemap_eligible": false,
+    "llms_eligible": false
+  },
+  "checks": {
+    "v1_envelope": "pass",
+    "body_md_only": "pass",
+    "required_domain_keys_preserved": "pass",
+    "faq_count_per_asset": 5,
+    "internal_links_per_asset": 7,
+    "private_result_boundary": "pass_by_content_review",
+    "forbidden_claims": "pass_by_content_review",
+    "publish_indexability": "blocked_noindex_package_only"
+  }
+}

@@ -19,8 +19,8 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
     {
         $this->artisan('personality-public-assets:import')
             ->expectsOutputToContain('dry_run=1')
-            ->expectsOutputToContain('assets_found=154')
-            ->expectsOutputToContain('valid_count=154')
+            ->expectsOutputToContain('assets_found=94')
+            ->expectsOutputToContain('valid_count=94')
             ->expectsOutputToContain('errors_count=0')
             ->expectsOutputToContain('indexable_count=0')
             ->expectsOutputToContain('sitemap_eligible_count=0')
@@ -36,18 +36,24 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             '--write' => true,
         ])
             ->expectsOutputToContain('dry_run=0')
-            ->expectsOutputToContain('will_create=154')
+            ->expectsOutputToContain('will_create=94')
             ->expectsOutputToContain('indexable_count=0')
             ->expectsOutputToContain('sitemap_eligible_count=0')
             ->expectsOutputToContain('llms_eligible_count=0')
             ->assertExitCode(0);
 
-        $this->assertSame(154, PersonalityPublicContentAsset::query()->count());
+        $this->assertSame(94, PersonalityPublicContentAsset::query()->count());
+        $this->assertSame(0, PersonalityPublicContentAsset::query()
+            ->where('entity_type', PersonalityPublicContentAsset::ENTITY_FACET)
+            ->count());
+        $this->assertSame(60, PersonalityPublicContentAsset::query()
+            ->where('entity_type', PersonalityPublicContentAsset::ENTITY_FACET_DETAIL)
+            ->count());
 
         $this->artisan('personality-public-assets:import', [
             '--write' => true,
         ])
-            ->expectsOutputToContain('will_skip=154')
+            ->expectsOutputToContain('will_skip=94')
             ->assertExitCode(0);
 
         $asset = PersonalityPublicContentAsset::query()
@@ -64,15 +70,15 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&locale=en')
             ->assertOk()
             ->assertJsonPath('ok', true)
-            ->assertJsonPath('pagination.total', 17)
-            ->assertJsonCount(17, 'items')
+            ->assertJsonPath('pagination.total', 47)
+            ->assertJsonCount(47, 'items')
             ->assertJsonPath('items.0.index_eligible', false)
             ->assertJsonPath('items.0.robots', PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW);
 
         $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&locale=zh-CN')
             ->assertOk()
-            ->assertJsonPath('pagination.total', 17)
-            ->assertJsonCount(17, 'items');
+            ->assertJsonPath('pagination.total', 47)
+            ->assertJsonCount(47, 'items');
 
         $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&locale=en&entity_type=facet')
             ->assertOk()
@@ -88,6 +94,11 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
 
         $this->getJson('/api/v0.5/personality-content-assets/big_five/facet/imagination?locale=en')
             ->assertNotFound();
+
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/facet_detail/imagination?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.entity_type', PersonalityPublicContentAsset::ENTITY_FACET_DETAIL)
+            ->assertJsonPath('personality_public_content_asset_v1.code', 'imagination');
 
         $sitemapLocs = collect(app(SitemapGenerator::class)->generateUrls())
             ->pluck('loc')
@@ -156,12 +167,11 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
 
             return $asset['locale'] === 'zh-CN'
                 ? str_starts_with($canonicalPath, '/zh/personality/big-five/facets/')
-                    && str_ends_with($canonicalPath, '/' . $code)
+                    && str_ends_with($canonicalPath, '/'.$code)
                 : str_starts_with($canonicalPath, '/en/personality/big-five/facets/')
-                    && str_ends_with($canonicalPath, '/' . $code);
+                    && str_ends_with($canonicalPath, '/'.$code);
         }));
-        $this->assertTrue($facetDetails->every(fn (array $asset): bool =>
-            str_starts_with((string) ($asset['slug'] ?? ''), 'big-five/facets/')
+        $this->assertTrue($facetDetails->every(fn (array $asset): bool => str_starts_with((string) ($asset['slug'] ?? ''), 'big-five/facets/')
             && str_ends_with((string) ($asset['slug'] ?? ''), (string) ($asset['code'] ?? ''))
         ));
         $facetDetailEnCodes = $facetDetails->where('locale', 'en')->pluck('code')->sort()->values()->all();
