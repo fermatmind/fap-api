@@ -42279,6 +42279,10 @@
       "local_validation": {
         "evidence": "Passed Pint; Eq60V5ReportContractTest (15 tests, 719 assertions); php artisan route:list (233 routes); clean SQLite migrate; bash backend/scripts/ci_verify_mbti.sh; JSON/YAML parsing; and git diff --check.",
         "status": "pass"
+      },
+      "github_required_checks": {
+        "evidence": "PR #2828 reached CLEAN after hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, and Semgrep checks completed successfully.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42290,6 +42294,11 @@
     ],
     "deploy_allowed": false,
     "events": [
+      {
+        "at": "2026-07-10T07:39:38+08:00",
+        "note": "PR #2828 merged as 9f23b9e26; origin/main was fetched, the isolated worktree synchronized cleanly, and local and remote implementation branches were deleted before ledger closeout.",
+        "status": "merged"
+      },
       {
         "at": "2026-07-10T07:31:54+08:00",
         "note": "Completed API09 local validation in the isolated worktree; CI master chain passed with no deployment, CMS, import, or production action.",
@@ -42331,7 +42340,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "b4677ec2ba00722289522a2eb358c26129731884",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -42347,12 +42356,25 @@
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-10",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "local_validation": {
+      "commands": [
+        "cd backend && ./vendor/bin/pint app/Services/Report/Eq60ReportComposer.php tests/Feature/Report/Eq60V5ReportContractTest.php",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Feature/Report/Eq60V5ReportContractTest.php --no-ansi",
+        "cd backend && php artisan route:list --no-ansi",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-09.sqlite php artisan migrate --force --no-ansi",
+        "bash backend/scripts/ci_verify_mbti.sh",
+        "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\"",
+        "git diff --check"
+      ],
+      "status": "pass"
+    },
+    "merged_at": "2026-07-09T23:38:38Z",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2828",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "status": "planned",
     "title": "SECURITY-169-API-10: seal personality public content and CTA exposure",
@@ -48100,7 +48122,21 @@
     "history": [
       {
         "at": "2026-05-18T16:02:02Z",
-        "status": "in_progress",
+    "scope_validation": {
+      "changed_files": [
+        "backend/app/Services/Report/Eq60ReportComposer.php",
+        "backend/tests/Feature/Report/Eq60V5ReportContractTest.php",
+        "docs/codex/pr-train-state.json",
+        "docs/codex/pr-train.yaml"
+      ],
+      "generated_artifacts_restored": [
+        "backend/content_packs/EQ_60/v1/compiled/*.json",
+        "backend/content_packs/BIG5_OCEAN/v1/compiled/*.json"
+      ],
+      "local_validation_passed": true,
+      "status": "pass"
+    },
+    "status": "merged",
         "summary": "Registered authorized SEO-DASH-PROD-03D-FIX and started bounded drift issue canary implementation. Scope excludes production writes, scheduler, deploy, Metabase, external APIs, production crawler log reads, env edits, SSH, and migrations."
       },
       {
