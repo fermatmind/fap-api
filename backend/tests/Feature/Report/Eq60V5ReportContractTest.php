@@ -250,17 +250,35 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertTrue((bool) ($composed['ok'] ?? false));
         $report = (array) ($composed['report'] ?? []);
         $this->assertSame('aware_but_unregulated', (string) data_get($report, 'interpretation.core_formulation_id'));
-        $this->assertStringStartsWith('route.eq.', (string) data_get($report, 'interpretation.route_id'));
+        $this->assertSame('route.eq.aware_but_unregulated.gap_focus.quality_ab', (string) data_get($report, 'interpretation.route_id'));
         $this->assertNotSame('', (string) data_get($report, 'interpretation.signal_signature.match_pattern'));
-        $this->assertSame('SA_ER_high_low', (string) data_get($report, 'interpretation.primary_mechanism_ids.0'));
-        $this->assertSame('feedback', (string) data_get($report, 'interpretation.primary_scene_ids.0'));
-        $this->assertSame('eq.scene.feedback.aware_but_unregulated.primary', (string) data_get($report, 'interpretation.primary_scene_variant_ids.0'));
-        $this->assertSame('eq.scene.feedback.aware_but_unregulated.primary', (string) data_get($report, 'assets.reality_scenes.0.id'));
+        $this->assertSame('SA_ER_EM_under_pressure_gap', (string) data_get($report, 'interpretation.primary_mechanism_ids.0'));
+        $this->assertSame('team_collaboration', (string) data_get($report, 'interpretation.primary_scene_ids.0'));
+        $this->assertSame('eq.scene.team_collaboration.aware_but_unregulated.primary', (string) data_get($report, 'interpretation.primary_scene_variant_ids.0'));
+        $this->assertSame('eq.scene.team_collaboration.aware_but_unregulated.primary', (string) data_get($report, 'assets.reality_scenes.0.id'));
         $this->assertSame('pause_recovery', (string) data_get($report, 'interpretation.action_prescription_id'));
         $this->assertSame('pause_recovery', (string) data_get($report, 'interpretation.selected_asset_ids.action_prescription_id'));
         $this->assertSame((string) data_get($report, 'interpretation.route_id'), (string) data_get($report, 'asset_refs.personalization_route_id'));
         $this->assertSame((string) data_get($report, 'interpretation.route_id'), (string) data_get($report, 'assets.personalization_route.id'));
         $this->assertNotSame('', (string) data_get($report, 'assets.personalization_route.route_headline'));
+        $this->assertSame('eq.depth.development_path.aware_but_unregulated', (string) data_get($report, 'interpretation.result_page_depth_module_id'));
+        $this->assertContains('eq.depth.development_path.aware_but_unregulated', (array) data_get($report, 'asset_refs.result_page_depth_module_ids'));
+        $this->assertSame('Action Prescription', (string) data_get($report, 'assets.result_page_depth_modules.3.placement'));
+        $this->assertSame('eq.depth.development_path.aware_but_unregulated', (string) data_get($report, 'assets.result_page_depth_modules.3.id'));
+    }
+
+    public function test_eq_v2_compiled_scientific_contract_matches_its_raw_asset(): void
+    {
+        $rawPath = base_path('content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/scientific_contract.json');
+        $compiledPath = base_path('content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json');
+
+        $raw = json_decode((string) File::get($rawPath), true, 512, JSON_THROW_ON_ERROR);
+        $compiled = json_decode((string) File::get($compiledPath), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(
+            (array) data_get($raw, 'assets.eq.scientific_contract.default'),
+            (array) data_get($compiled, 'assets.scientific_contract.assets.eq.scientific_contract.default')
+        );
     }
 
     public function test_eq_v5_payload_has_no_user_visible_paywall_runtime_contract(): void
@@ -458,16 +476,18 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertCount(7, (array) data_get($fixture, 'report.asset_refs.commercial_conversion_ids'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.asset_refs.quality_confidence_id'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.asset_refs.psychometric_evidence_ids'));
+        $depthModuleIds = (array) data_get($fixture, 'report.asset_refs.result_page_depth_module_ids');
         $this->assertSame([
             'eq.depth.how_to_read.default',
             'eq.depth.evidence_stack.default',
             'eq.depth.reality_check.default',
-        ], (array) data_get($fixture, 'report.asset_refs.result_page_depth_module_ids'));
+        ], array_slice($depthModuleIds, 0, 3));
+        $this->assertContains((string) data_get($fixture, 'report.interpretation.result_page_depth_module_id'), $depthModuleIds);
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.result_snapshot'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.commercial_conversion_actions'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.quality_confidence'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.psychometric_evidence_status'));
-        $this->assertCount(3, (array) data_get($fixture, 'report.assets.result_page_depth_modules'));
+        $this->assertCount(4, (array) data_get($fixture, 'report.assets.result_page_depth_modules'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.assets.result_page_depth_modules.0.title'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.assets.result_page_depth_modules.0.body'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.score_system.band_details'));

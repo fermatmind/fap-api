@@ -428,6 +428,7 @@ final class Eq60ReportComposer
             'primary_scene_variant_ids' => $selectedAssetIds['scene_variant_ids'],
             'career_environment_ids' => $selectedAssetIds['career_environment_ids'],
             'action_prescription_id' => $selectedAssetIds['action_prescription_id'],
+            'result_page_depth_module_id' => $selectedAssetIds['result_page_depth_module_id'],
             'selected_asset_ids' => $selectedAssetIds,
             'personalization_route' => $this->publicPersonalizationRoute($route),
         ];
@@ -537,9 +538,14 @@ final class Eq60ReportComposer
      */
     private function matchesDimensionPattern(array $dimensionScores, string $code, string $expected): bool
     {
+        $expected = strtolower(trim($expected));
+        if ($expected === 'mixed') {
+            return $this->hasMixedDimensionProfile($dimensionScores);
+        }
+
         $bucket = $this->dimensionBucket($dimensionScores, $code);
 
-        return match (strtolower(trim($expected))) {
+        return match ($expected) {
             'any' => true,
             'high' => $bucket === 'high',
             'mid_high' => $bucket === 'mid_high',
@@ -597,6 +603,22 @@ final class Eq60ReportComposer
     }
 
     /**
+     * A route-level "mixed" predicate means the four scored dimensions do not
+     * collapse into one percentile band. It is not a per-dimension band.
+     *
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function hasMixedDimensionProfile(array $dimensionScores): bool
+    {
+        $buckets = [];
+        foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
+            $buckets[$this->dimensionBucket($dimensionScores, $code)] = true;
+        }
+
+        return count($buckets) > 1;
+    }
+
+    /**
      * @param  array<string,array<string,mixed>>  $dimensionScores
      */
     private function dimensionBucketRank(array $dimensionScores, string $code): int
@@ -612,7 +634,7 @@ final class Eq60ReportComposer
     /**
      * @param  array<string,mixed>  $route
      * @param  array<string,array<string,mixed>>  $dimensionScores
-     * @return array{core_formulation_id:string,mechanism_ids:list<string>,scene_ids:list<string>,career_environment_ids:list<string>,action_prescription_id:string}
+     * @return array{core_formulation_id:string,mechanism_ids:list<string>,scene_ids:list<string>,career_environment_ids:list<string>,action_prescription_id:string,result_page_depth_module_id:string}
      */
     private function selectedAssetIds(array $route, string $formulationId, array $dimensionScores, ?string $developmentLever): array
     {
@@ -622,6 +644,7 @@ final class Eq60ReportComposer
         $selectedScenes = $selected['scene_ids'] ?? $selected['scenes'] ?? null;
         $selectedCareer = $selected['career_environment_ids'] ?? $selected['career_environment'] ?? null;
         $selectedAction = trim((string) ($selected['action_prescription_id'] ?? $this->stripAssetPrefix((string) ($selected['action_prescription'] ?? ''), 'eq.action.')));
+        $selectedDepthModule = trim((string) ($selected['result_page_depth_module_id'] ?? $selected['result_snapshot'] ?? ''));
 
         if ($formulationId === 'low_confidence_result') {
             $selectedCore = 'low_confidence_result';
@@ -648,6 +671,7 @@ final class Eq60ReportComposer
             'scene_variant_ids' => $sceneSelection['scene_variant_ids'],
             'career_environment_ids' => $this->normalizeCareerEnvironmentIds(is_array($selectedCareer) ? $selectedCareer : $this->selectCareerEnvironmentIds($formulationId)),
             'action_prescription_id' => $selectedAction ?: $this->selectActionPrescriptionId($formulationId, $developmentLever),
+            'result_page_depth_module_id' => str_starts_with($selectedDepthModule, 'eq.depth.') ? $selectedDepthModule : '',
         ];
     }
 
@@ -1079,11 +1103,7 @@ final class Eq60ReportComposer
                 'eq.evidence.measurement_invariance',
                 'eq.evidence.criterion_validity',
             ],
-            'result_page_depth_module_ids' => [
-                'eq.depth.how_to_read.default',
-                'eq.depth.evidence_stack.default',
-                'eq.depth.reality_check.default',
-            ],
+            'result_page_depth_module_ids' => $this->resultPageDepthModuleIds($interpretation),
             'agent_playbook_ids' => [
                 'eq.agent.playbook.understand_result',
                 'eq.agent.playbook.scene_advice',
@@ -1217,17 +1237,14 @@ final class Eq60ReportComposer
         }
 
         $resultPageDepthModules = [];
-        foreach ([
-            'eq.depth.how_to_read.default',
-            'eq.depth.evidence_stack.default',
-            'eq.depth.reality_check.default',
-        ] as $id) {
-            $asset = $this->localizedAsset((array) ($depthAssets[$id] ?? []), $locale);
+        foreach ($this->resultPageDepthModuleIds($interpretation) as $id) {
+            $depthAsset = (array) ($depthAssets[$id] ?? []);
+            $asset = $this->localizedAsset($depthAsset, $locale);
             if ($asset !== []) {
                 $resultPageDepthModules[] = array_merge(
                     [
                         'id' => $id,
-                        'placement' => (string) data_get($depthAssets, $id.'.meta.placement', ''),
+                        'placement' => (string) data_get($depthAsset, 'meta.placement', ''),
                     ],
                     $asset
                 );
@@ -1350,6 +1367,25 @@ final class Eq60ReportComposer
             static fn ($value): string => trim((string) $value),
             $values
         ), static fn (string $value): bool => $value !== '')));
+    }
+
+    /**
+     * @param  array<string,mixed>  $interpretation
+     * @return list<string>
+     */
+    private function resultPageDepthModuleIds(array $interpretation): array
+    {
+        $ids = [
+            'eq.depth.how_to_read.default',
+            'eq.depth.evidence_stack.default',
+            'eq.depth.reality_check.default',
+        ];
+        $selectedDepthModuleId = trim((string) ($interpretation['result_page_depth_module_id'] ?? ''));
+        if (str_starts_with($selectedDepthModuleId, 'eq.depth.')) {
+            $ids[] = $selectedDepthModuleId;
+        }
+
+        return $this->nonEmptyStringList($ids);
     }
 
     /**
