@@ -42271,6 +42271,14 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "dependency": {
+        "evidence": "SECURITY-169-API-08 implementation PR #2808 and its ledger closeout were merged before API09 started.",
+        "status": "pass"
+      },
+      "local_validation": {
+        "evidence": "Passed Pint; Eq60V5ReportContractTest (15 tests, 719 assertions); php artisan route:list (233 routes); clean SQLite migrate; bash backend/scripts/ci_verify_mbti.sh; JSON/YAML parsing; and git diff --check.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42282,6 +42290,16 @@
     ],
     "deploy_allowed": false,
     "events": [
+      {
+        "at": "2026-07-10T07:31:54+08:00",
+        "note": "Completed API09 local validation in the isolated worktree; CI master chain passed with no deployment, CMS, import, or production action.",
+        "status": "validated"
+      },
+      {
+        "at": "2026-07-10T07:21:57+08:00",
+        "note": "Started SECURITY-169-API-09 from clean isolated worktree at origin/main 1cd0d063a after confirming API08 is merged and ledger-closed.",
+        "status": "in_progress"
+      },
       {
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-09; execution waits for declared dependency merge.",
@@ -42297,7 +42315,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-09: repair EQ report asset/composer correctness",
     "train_scope": "security_169_fap_api_audit"
   },

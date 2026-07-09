@@ -35243,6 +35243,8 @@ prs:
       - backend/app/Services/Assessment/Scorers/Eq60ScorerV1NormedValidity.php
       - backend/content_packs/EQ_60/v1/raw/personalization_routes/route_matrix.json
       - backend/content_packs/EQ_60/v1/raw/report_assets/result_page_depth_modules.json
+      - backend/tests/Feature/Report/Eq60V5ReportContractTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
