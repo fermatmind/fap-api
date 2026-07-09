@@ -340,7 +340,6 @@ class SitemapGenerator
             ->where('robots', PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW)
             ->where('index_eligible', true)
             ->where('sitemap_eligible', true)
-            ->where('llms_eligible', true)
             ->select(['entity_key', 'framework', 'canonical_json', 'updated_at', 'published_at'])
             ->orderBy('entity_type')
             ->orderBy('entity_key')
