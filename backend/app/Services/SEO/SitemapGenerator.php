@@ -323,12 +323,17 @@ class SitemapGenerator
         $rows = PersonalityPublicContentAsset::query()
             ->withoutGlobalScopes()
             ->where('org_id', 0)
-            ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
+            ->whereIn('framework', [
+                PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+                PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            ])
             ->where('locale', 'zh-CN')
             ->whereIn('entity_type', [
                 PersonalityPublicContentAsset::ENTITY_HUB,
                 PersonalityPublicContentAsset::ENTITY_DOMAIN,
                 PersonalityPublicContentAsset::ENTITY_POLARITY,
+                PersonalityPublicContentAsset::ENTITY_CENTER,
+                PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
             ])
             ->where('is_public', true)
             ->where('launch_state', PersonalityPublicContentAsset::LAUNCH_PUBLISHED)
@@ -336,7 +341,7 @@ class SitemapGenerator
             ->where('index_eligible', true)
             ->where('sitemap_eligible', true)
             ->where('llms_eligible', true)
-            ->select(['entity_key', 'canonical_json', 'updated_at', 'published_at'])
+            ->select(['entity_key', 'framework', 'canonical_json', 'updated_at', 'published_at'])
             ->orderBy('entity_type')
             ->orderBy('entity_key')
             ->get();
@@ -345,10 +350,19 @@ class SitemapGenerator
 
         foreach ($rows as $row) {
             $path = trim((string) data_get($row->canonical_json, 'path', ''));
-            if (! str_starts_with($path, '/zh/personality/big-five/')
-                && $path !== '/zh/personality/big-five') {
+            $framework = $row->framework;
+
+            // Accept only Big Five or Enneagram personality paths
+            $isBigFive = str_starts_with($path, '/zh/personality/big-five/')
+                || $path === '/zh/personality/big-five';
+            $isEnneagram = str_starts_with($path, '/zh/personality/enneagram/')
+                || $path === '/zh/personality/enneagram';
+
+            if (! $isBigFive && ! $isEnneagram) {
                 continue;
             }
+
+            $frameworkKey = $framework === 'enneagram' ? 'enneagram' : 'big-five';
 
             $lastmod = $row->updated_at
                 ?? $row->published_at
@@ -357,7 +371,7 @@ class SitemapGenerator
             $urls[] = [
                 'loc' => $baseUrl.$path,
                 'lastmod' => $lastmod->toAtomString(),
-                'slug' => 'personality-public-content:big-five:zh:'.strtolower((string) $row->entity_key),
+                'slug' => 'personality-public-content:'.$frameworkKey.':zh:'.strtolower((string) $row->entity_key),
                 'updated_at' => $lastmod->toDateTimeString(),
             ];
         }
