@@ -19,8 +19,8 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
     {
         $this->artisan('personality-public-assets:import')
             ->expectsOutputToContain('dry_run=1')
-            ->expectsOutputToContain('assets_found=94')
-            ->expectsOutputToContain('valid_count=94')
+            ->expectsOutputToContain('assets_found=154')
+            ->expectsOutputToContain('valid_count=154')
             ->expectsOutputToContain('errors_count=0')
             ->expectsOutputToContain('indexable_count=0')
             ->expectsOutputToContain('sitemap_eligible_count=0')
@@ -36,18 +36,18 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             '--write' => true,
         ])
             ->expectsOutputToContain('dry_run=0')
-            ->expectsOutputToContain('will_create=94')
+            ->expectsOutputToContain('will_create=154')
             ->expectsOutputToContain('indexable_count=0')
             ->expectsOutputToContain('sitemap_eligible_count=0')
             ->expectsOutputToContain('llms_eligible_count=0')
             ->assertExitCode(0);
 
-        $this->assertSame(94, PersonalityPublicContentAsset::query()->count());
+        $this->assertSame(154, PersonalityPublicContentAsset::query()->count());
 
         $this->artisan('personality-public-assets:import', [
             '--write' => true,
         ])
-            ->expectsOutputToContain('will_skip=94')
+            ->expectsOutputToContain('will_skip=154')
             ->assertExitCode(0);
 
         $asset = PersonalityPublicContentAsset::query()
@@ -101,21 +101,26 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $payload = json_decode((string) file_get_contents(base_path('content_assets/personality_public/big_five_v1_seed.json')), true);
         $assets = collect(is_array($payload['assets'] ?? null) ? $payload['assets'] : []);
 
-        $this->assertSame(94, $assets->count());
-        $this->assertSame(['en' => 47, 'zh-CN' => 47], $assets->countBy('locale')->sortKeys()->all());
+        $this->assertSame(154, $assets->count());
+        $this->assertSame(['en' => 77, 'zh-CN' => 77], $assets->countBy('locale')->sortKeys()->all());
         $this->assertSame([
             'domain' => 10,
             'facet' => 60,
+            'facet_detail' => 60,
             'facet_hub' => 2,
             'hub' => 2,
             'polarity' => 20,
         ], $assets->countBy('entity_type')->sortKeys()->all());
 
-        $renderCandidates = $assets->where('launch_state', PersonalityPublicContentAsset::LAUNCH_CONTENT_READY)->values();
+        $renderCandidates = $assets->where('launch_state', PersonalityPublicContentAsset::LAUNCH_CONTENT_READY)
+            ->whereNotIn('entity_type', [PersonalityPublicContentAsset::ENTITY_FACET_DETAIL])
+            ->values();
         $facetStubs = $assets->where('entity_type', PersonalityPublicContentAsset::ENTITY_FACET)->values();
+        $facetDetails = $assets->where('entity_type', PersonalityPublicContentAsset::ENTITY_FACET_DETAIL)->values();
 
         $this->assertSame(34, $renderCandidates->count());
         $this->assertSame(60, $facetStubs->count());
+        $this->assertSame(60, $facetDetails->count());
         $this->assertTrue($assets->every(fn (array $asset): bool => $asset['robots'] === PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW));
         $this->assertTrue($assets->every(fn (array $asset): bool => $asset['index_eligible'] === false && $asset['sitemap_eligible'] === false && $asset['llms_eligible'] === false));
         $this->assertTrue($renderCandidates->every(fn (array $asset): bool => $asset['robots'] === PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW));
@@ -137,6 +142,32 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $enCodes = $renderCandidates->where('locale', 'en')->pluck('code')->sort()->values()->all();
         $zhCodes = $renderCandidates->where('locale', 'zh-CN')->pluck('code')->sort()->values()->all();
         $this->assertSame($enCodes, $zhCodes);
+
+        // facet_detail-specific assertions
+        $this->assertTrue($facetDetails->every(fn (array $asset): bool => $asset['launch_state'] === PersonalityPublicContentAsset::LAUNCH_CONTENT_READY));
+        $this->assertTrue($facetDetails->every(fn (array $asset): bool => $asset['robots'] === PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW));
+        $this->assertTrue($facetDetails->every(fn (array $asset): bool => $asset['index_eligible'] === false && $asset['sitemap_eligible'] === false && $asset['llms_eligible'] === false));
+        $this->assertTrue($facetDetails->every(fn (array $asset): bool => count($asset['sections'] ?? []) >= 3));
+        $this->assertTrue($facetDetails->every(fn (array $asset): bool => count($asset['faq'] ?? []) >= 1));
+        $this->assertTrue($facetDetails->every(fn (array $asset): bool => count($asset['internal_links'] ?? []) >= 3));
+        $this->assertTrue($facetDetails->every(function (array $asset): bool {
+            $canonicalPath = (string) data_get($asset, 'canonical.path', '');
+            $code = (string) ($asset['code'] ?? '');
+
+            return $asset['locale'] === 'zh-CN'
+                ? str_starts_with($canonicalPath, '/zh/personality/big-five/facets/')
+                    && str_ends_with($canonicalPath, '/' . $code)
+                : str_starts_with($canonicalPath, '/en/personality/big-five/facets/')
+                    && str_ends_with($canonicalPath, '/' . $code);
+        }));
+        $this->assertTrue($facetDetails->every(fn (array $asset): bool =>
+            str_starts_with((string) ($asset['slug'] ?? ''), 'big-five/facets/')
+            && str_ends_with((string) ($asset['slug'] ?? ''), (string) ($asset['code'] ?? ''))
+        ));
+        $facetDetailEnCodes = $facetDetails->where('locale', 'en')->pluck('code')->sort()->values()->all();
+        $facetDetailZhCodes = $facetDetails->where('locale', 'zh-CN')->pluck('code')->sort()->values()->all();
+        $this->assertSame($facetDetailEnCodes, $facetDetailZhCodes);
+        $this->assertCount(30, $facetDetailEnCodes);
 
         $serializedSeed = strtolower((string) json_encode($assets->all(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         foreach ([
