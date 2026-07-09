@@ -42286,7 +42286,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "b4677ec2ba00722289522a2eb358c26129731884",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -42295,8 +42295,8 @@
     "deploy_allowed": false,
     "events": [
       {
-        "at": "2026-07-10T07:39:38+08:00",
-        "note": "PR #2828 merged as 9f23b9e26; origin/main was fetched, the isolated worktree synchronized cleanly, and local and remote implementation branches were deleted before ledger closeout.",
+        "at": "2026-07-10T07:47:27+08:00",
+        "note": "Corrected ledger closeout: PR #2828 merged as 9f23b9e26; origin/main contains the merge commit, the isolated worktree is synchronized and clean, and local and remote implementation branches were deleted. The superseded closeout record had written fields outside API09.",
         "status": "merged"
       },
       {
@@ -42317,45 +42317,6 @@
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-09",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
-    "production_write_execution": false,
-    "publish_allowed": false,
-    "remote_branch_deleted": false,
-    "repo": "fap-api",
-    "status": "in_progress",
-    "title": "SECURITY-169-API-09: repair EQ report asset/composer correctness",
-    "train_scope": "security_169_fap_api_audit"
-  },
-  "SECURITY-169-API-10": {
-    "api_runtime_change": true,
-    "authorized_by_user": "2026-07-03 attached /goal SECURITY-169 fap-api audit PR train continuous execution request.",
-    "base": "origin/main",
-    "branch": "codex/security-169-api-10-seal-personality-public-content-and-cta-exposure",
-    "checks": {
-      "authorization": {
-        "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
-        "status": "pass"
-      }
-    },
-    "cms_mutation": false,
-    "commit_sha": "b4677ec2ba00722289522a2eb358c26129731884",
-    "content_authority": "backend",
-    "database_mutation": false,
-    "depends_on": [
-      "SECURITY-169-API-09"
-    ],
-    "deploy_allowed": false,
-    "events": [
-      {
-        "at": "2026-07-03T00:00:00+08:00",
-        "note": "Registered authorized SECURITY-169-API-10; execution waits for declared dependency merge.",
-        "status": "planned"
-      }
-    ],
-    "failure_reason": null,
-    "id": "SECURITY-169-API-10",
     "local_cleanup_executed": true,
     "local_validation": {
       "commands": [
@@ -42375,6 +42336,59 @@
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": true,
+    "repo": "fap-api",
+    "scope_validation": {
+      "changed_files": [
+        "backend/app/Services/Report/Eq60ReportComposer.php",
+        "backend/tests/Feature/Report/Eq60V5ReportContractTest.php",
+        "docs/codex/pr-train-state.json",
+        "docs/codex/pr-train.yaml"
+      ],
+      "generated_artifacts_restored": [
+        "backend/content_packs/EQ_60/v1/compiled/*.json",
+        "backend/content_packs/BIG5_OCEAN/v1/compiled/*.json"
+      ],
+      "local_validation_passed": true,
+      "status": "pass"
+    },
+    "status": "merged",
+    "title": "SECURITY-169-API-09: repair EQ report asset/composer correctness",
+    "train_scope": "security_169_fap_api_audit"
+  },
+  "SECURITY-169-API-10": {
+    "api_runtime_change": true,
+    "authorized_by_user": "2026-07-03 attached /goal SECURITY-169 fap-api audit PR train continuous execution request.",
+    "base": "origin/main",
+    "branch": "codex/security-169-api-10-seal-personality-public-content-and-cta-exposure",
+    "checks": {
+      "authorization": {
+        "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
+        "status": "pass"
+      }
+    },
+    "cms_mutation": false,
+    "commit_sha": null,
+    "content_authority": "backend",
+    "database_mutation": false,
+    "depends_on": [
+      "SECURITY-169-API-09"
+    ],
+    "deploy_allowed": false,
+    "events": [
+      {
+        "at": "2026-07-03T00:00:00+08:00",
+        "note": "Registered authorized SECURITY-169-API-10; execution waits for declared dependency merge.",
+        "status": "planned"
+      }
+    ],
+    "failure_reason": null,
+    "id": "SECURITY-169-API-10",
+    "local_cleanup_executed": false,
+    "merged_at": null,
+    "pr_url": null,
+    "production_write_execution": false,
+    "publish_allowed": false,
+    "remote_branch_deleted": false,
     "repo": "fap-api",
     "status": "planned",
     "title": "SECURITY-169-API-10: seal personality public content and CTA exposure",
@@ -48122,21 +48136,7 @@
     "history": [
       {
         "at": "2026-05-18T16:02:02Z",
-    "scope_validation": {
-      "changed_files": [
-        "backend/app/Services/Report/Eq60ReportComposer.php",
-        "backend/tests/Feature/Report/Eq60V5ReportContractTest.php",
-        "docs/codex/pr-train-state.json",
-        "docs/codex/pr-train.yaml"
-      ],
-      "generated_artifacts_restored": [
-        "backend/content_packs/EQ_60/v1/compiled/*.json",
-        "backend/content_packs/BIG5_OCEAN/v1/compiled/*.json"
-      ],
-      "local_validation_passed": true,
-      "status": "pass"
-    },
-    "status": "merged",
+        "status": "in_progress",
         "summary": "Registered authorized SEO-DASH-PROD-03D-FIX and started bounded drift issue canary implementation. Scope excludes production writes, scheduler, deploy, Metabase, external APIs, production crawler log reads, env edits, SSH, and migrations."
       },
       {
