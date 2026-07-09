@@ -1,0 +1,71 @@
+{
+  "artifact": "ENNEAGRAM-ZH13-CMS-PACKAGE-NORMALIZE-01",
+  "status": "conditional",
+  "normalize_date": "2026-07-09",
+  "repo": "fap-api",
+  "source_repo": "fap-web",
+  "package_path": "docs/seo/personality/enneagram/content-packages/zh13-cms-v1/enneagram-zh13-cms-package-v1.json",
+  "summary": {
+    "page_count": 13,
+    "hub_count": 1,
+    "core_type_count": 9,
+    "center_count": 3,
+    "json_parse_pass": true,
+    "backend_contract_detected": true,
+    "backend_contract_compatible": true,
+    "all_required_pages_present": true,
+    "all_rows_draft_only": true,
+    "all_rows_noindex": true,
+    "all_rows_no_sitemap": true,
+    "all_rows_no_llms": true,
+    "total_sections": 101,
+    "total_faq": 56,
+    "total_body_chars": 38956,
+    "private_route_hits": [],
+    "forbidden_claim_hits": [],
+    "ready_for_backend_import_dry_run": true,
+    "ready_for_cms_write": false,
+    "ready_for_publish": false,
+    "ready_for_index": false,
+    "ready_for_sitemap": false,
+    "ready_for_llms": false,
+    "ready_for_search_release": false
+  },
+  "per_page_results": [
+    {"path": "/zh/personality/enneagram", "entity_type": "hub", "sections": 11, "faq": 7},
+    {"path": "/zh/personality/enneagram/type-1", "entity_type": "core_type", "sections": 7, "faq": 4},
+    {"path": "/zh/personality/enneagram/type-2", "entity_type": "core_type", "sections": 7, "faq": 3},
+    {"path": "/zh/personality/enneagram/type-3", "entity_type": "core_type", "sections": 7, "faq": 4},
+    {"path": "/zh/personality/enneagram/type-4", "entity_type": "core_type", "sections": 7, "faq": 3},
+    {"path": "/zh/personality/enneagram/type-5", "entity_type": "core_type", "sections": 7, "faq": 4},
+    {"path": "/zh/personality/enneagram/type-6", "entity_type": "core_type", "sections": 7, "faq": 3},
+    {"path": "/zh/personality/enneagram/type-7", "entity_type": "core_type", "sections": 7, "faq": 3},
+    {"path": "/zh/personality/enneagram/type-8", "entity_type": "core_type", "sections": 7, "faq": 3},
+    {"path": "/zh/personality/enneagram/type-9", "entity_type": "core_type", "sections": 7, "faq": 3},
+    {"path": "/zh/personality/enneagram/centers/gut", "entity_type": "center", "sections": 9, "faq": 7},
+    {"path": "/zh/personality/enneagram/centers/heart", "entity_type": "center", "sections": 9, "faq": 6},
+    {"path": "/zh/personality/enneagram/centers/head", "entity_type": "center", "sections": 9, "faq": 6}
+  ],
+  "mapping_notes": [
+    "Hub+Types from fap-web output/PACKAGE.json (existing CMS import format, already contract-compatible)",
+    "Centers converted from zh-centers-v1 body[] arrays to body_md strings matching PACKAGE format",
+    "All sections use body_md field (EnneagramCmsDraftWriter::normalizeSections expects body_md or body_html)",
+    "FAQ and internal_links format identical between sources"
+  ],
+  "blockers": [],
+  "warnings": [
+    "Backend dry-run not executed locally — SQLite DB not configured for CMS commands. Static contract compatibility confirmed via source code inspection.",
+    "Status 'conditional' because local dry-run could not run. Proceed to dedicated dry-run PR with proper DB access."
+  ],
+  "known_holds": [
+    "not imported into CMS",
+    "not written to production DB",
+    "not published",
+    "not indexable",
+    "not in sitemap",
+    "not in llms",
+    "not in llms-full",
+    "not search submitted"
+  ],
+  "recommended_next_pr": "ENNEAGRAM-ZH13-CMS-IMPORT-DRY-RUN-01"
+}
