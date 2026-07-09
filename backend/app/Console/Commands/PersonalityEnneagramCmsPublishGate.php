@@ -15,10 +15,6 @@ final class PersonalityEnneagramCmsPublishGate extends Command
     private const OPERATOR_APPROVAL = 'ENNEAGRAM-ZH13-CMS-PUBLISH-GATE-01';
 
     private const WRITE_SAFETY_FLAGS = [
-        'draft-only',
-        'no-publish',
-        'no-index',
-        'no-sitemap',
         'no-llms',
         'no-search-release',
     ];
@@ -29,12 +25,12 @@ final class PersonalityEnneagramCmsPublishGate extends Command
         {--write : Publish matching Enneagram public content assets to live published state}
         {--json : Emit the full JSON summary}
         {--output= : Optional path to write the JSON summary}
-        {--draft-only : Required for --write; confirms draft-only state intent}
-        {--no-publish : Required for --write; confirms no publish action}
-        {--no-index : Required for --write; confirms no indexability action}
-        {--no-sitemap : Required for --write; confirms no sitemap action}
-        {--no-llms : Required for --write; confirms no llms action}
-        {--no-search-release : Required for --write; confirms no search release action}
+        {--draft-only : (deprecated; retained for backward compatibility only)}
+        {--no-publish : (deprecated; retained for backward compatibility only)}
+        {--no-index : (deprecated; retained for backward compatibility only)}
+        {--no-sitemap : (deprecated; retained for backward compatibility only)}
+        {--no-llms : Required for --write; confirms no LLMs release}
+        {--no-search-release : Required for --write; confirms no search release}
         {--operator-approved= : Required exact approval token for --write}';
 
     protected $description = 'Publish Enneagram public profile CMS assets to live published state with index/sitemap eligibility but no LLMs/search release.';
