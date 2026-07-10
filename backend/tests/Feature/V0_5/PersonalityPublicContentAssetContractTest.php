@@ -571,6 +571,90 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ->assertJsonPath('personality_public_content_asset_v1.schema', []);
     }
 
+    public function test_public_api_normalizes_enneagram_alias_fields_and_rejects_unsafe_links(): void
+    {
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_HUB,
+            'entity_key' => 'enneagram',
+            'slug' => 'enneagram',
+            'title' => 'Enneagram',
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'canonical_json' => ['path' => '/en/personality/enneagram'],
+            'faq_json' => [
+                ['q' => 'Alias question?', 'a' => 'Alias answer.'],
+                ['question' => 'Canonical question?', 'answer' => 'Canonical answer.'],
+                ['q' => '', 'a' => 'Missing question.'],
+                ['q' => 'Missing answer?', 'a' => ''],
+                'invalid',
+            ],
+            'internal_links_json' => [
+                ['label' => 'Alias link', 'url' => '/en/personality/enneagram/type-1'],
+                ['label' => 'Canonical link', 'href' => 'https://www.fermatmind.com/en/personality/enneagram/type-2?source=cms#overview'],
+                ['label' => 'Alias fallback', 'href' => '', 'url' => '/en/personality/enneagram/type-3'],
+                ['label' => 'Page section', 'href' => '#overview'],
+                ['label' => 'External link', 'url' => 'https://example.com/not-internal'],
+                ['label' => 'Unsafe scheme', 'url' => 'javascript:alert(1)'],
+                ['label' => 'Protocol relative', 'url' => '//example.com/path'],
+                ['label' => 'Backslash', 'url' => '/en\\personality\\enneagram'],
+                ['label' => 'Invalid anchor', 'url' => '#bad anchor'],
+                ['label' => '', 'url' => '/en/personality/enneagram/type-3'],
+                'invalid',
+            ],
+            'is_public' => true,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+        ]));
+
+        $response = $this->getJson('/api/v0.5/personality-content-assets/enneagram/hub/enneagram?locale=en')
+            ->assertOk();
+
+        $this->assertSame([
+            ['question' => 'Alias question?', 'answer' => 'Alias answer.'],
+            ['question' => 'Canonical question?', 'answer' => 'Canonical answer.'],
+        ], $response->json('personality_public_content_asset_v1.faq'));
+        $this->assertSame([
+            ['label' => 'Alias link', 'href' => '/en/personality/enneagram/type-1'],
+            ['label' => 'Canonical link', 'href' => '/en/personality/enneagram/type-2?source=cms#overview'],
+            ['label' => 'Alias fallback', 'href' => '/en/personality/enneagram/type-3'],
+            ['label' => 'Page section', 'href' => '#overview'],
+        ], $response->json('personality_public_content_asset_v1.internal_links'));
+    }
+
+    public function test_public_api_preserves_canonical_big_five_faq_and_internal_link_contract(): void
+    {
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'faq_json' => [
+                ['question' => 'What does Big Five describe?', 'answer' => 'It describes broad trait dimensions.'],
+            ],
+            'internal_links_json' => [
+                [
+                    'label' => 'Openness',
+                    'href' => '/en/personality/big-five/openness',
+                    'relationship' => 'dimension',
+                    'target_code' => 'openness',
+                ],
+            ],
+            'is_public' => true,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+        ]));
+
+        $response = $this->getJson('/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=en')
+            ->assertOk();
+
+        $this->assertSame([
+            ['question' => 'What does Big Five describe?', 'answer' => 'It describes broad trait dimensions.'],
+        ], $response->json('personality_public_content_asset_v1.faq'));
+        $this->assertSame([
+            [
+                'label' => 'Openness',
+                'href' => '/en/personality/big-five/openness',
+                'relationship' => 'dimension',
+                'target_code' => 'openness',
+            ],
+        ], $response->json('personality_public_content_asset_v1.internal_links'));
+    }
+
     public function test_published_non_indexable_big_five_asset_suppresses_runtime_schema(): void
     {
         PersonalityPublicContentAsset::query()->create($this->assetAttributes([

@@ -403,13 +403,13 @@
     "depends_on": [
       "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01"
     ],
-    "status": "ready_to_merge_no_go_evidence",
-    "commit_sha": "4de28a365c70b50b732292a3414708f891105ffe",
+    "status": "merged",
+    "commit_sha": "a4d477eef16c024bec5804bb0240d940be210754",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2890",
     "failure_reason": "The 13 English pages pass API, content_ready/noindex, rich-section, canonical, hreflang, discoverability-hold, and private-boundary runtime gates. However, the backend returns 56 FAQ items as q/a and 39 internal links as label/url while the frontend adapter accepts question/answer and label/href. All FAQ and CMS internal links are therefore filtered from visible HTML, so publish/cache-warm progression is NO-GO. Repair paths are outside this manifest scope.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-10T23:12:42+08:00",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "dependency_reconciliation": {
         "status": "pass",
@@ -446,13 +446,17 @@
       "merge_policy": {
         "status": "pass_for_no_go_evidence_merge",
         "evidence": "Manifest auto_merge=true. Merging this generated evidence PR records the NO-GO result; it does not satisfy the runtime acceptance blocker or authorize the dependent publish/cache-warm item."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #2890 is MERGED at a4d477eef16c024bec5804bb0240d940be210754; origin/main contains the merge commit, local main was synchronized, the worktree was clean, and the local and remote task branches were absent."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -478,6 +482,79 @@
         "from": "blocked_runtime_contract_mismatch_pr_open",
         "to": "ready_to_merge_no_go_evidence",
         "note": "All 15 reported GitHub checks passed and changed files, title, PR body, and manifest scope were revalidated. The evidence PR is ready to merge while the runtime contract blocker remains active."
+      },
+      {
+        "at": "2026-07-11T02:32:09+08:00",
+        "from": "ready_to_merge_no_go_evidence",
+        "to": "merged",
+        "note": "Reconciled the verified PR #2890 merge, origin/main ancestry, synchronized clean local main, and deleted local/remote task branches before starting the authorized contract-normalization dependency."
+      }
+    ]
+  },
+  "ENNEAGRAM-EN13-PUBLIC-ASSET-CONTRACT-NORMALIZE-01": {
+    "id": "ENNEAGRAM-EN13-PUBLIC-ASSET-CONTRACT-NORMALIZE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/enneagram-en13-public-asset-contract-normalize-01",
+    "title": "ENNEAGRAM-EN13-PUBLIC-ASSET-CONTRACT-NORMALIZE-01: normalize public FAQ and internal-link fields",
+    "depends_on": [
+      "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01"
+    ],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "dependency_reconciliation": {
+        "status": "pass",
+        "evidence": "PR #2890 is merged at a4d477eef16c024bec5804bb0240d940be210754, origin/main contains the merge commit, local main equals origin/main, and local/remote task branches are absent."
+      },
+      "scope_preflight": {
+        "status": "pass",
+        "evidence": "The authorized branch was created from latest origin/main in a clean isolated worktree; only the four manifest-authorized paths may change."
+      },
+      "api_contract_normalization": {
+        "status": "pass",
+        "evidence": "Public API payloads canonicalize q/a and question/answer to question/answer, canonicalize url and href to href, preserve canonical Big Five metadata, and fail closed on empty, malformed, external, dangerous-scheme, protocol-relative, backslash, and invalid-anchor links."
+      },
+      "focused_phpunit": {
+        "status": "pass",
+        "evidence": "php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --filter='test_public_api_' passed 2 tests with 6 assertions. The isolated worktree reported only the known missing local .env warning; no environment file or secret was read."
+      },
+      "manifest_phpunit": {
+        "status": "pass",
+        "evidence": "php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php passed 16 tests with 427 assertions. The isolated worktree reported only the known missing local .env warning."
+      },
+      "php_syntax_and_style": {
+        "status": "pass",
+        "evidence": "php -l passed for both PHP scope files and Pint --test passed for both files."
+      },
+      "manifest_and_scope_validation": {
+        "status": "pass",
+        "evidence": "pr-train YAML and state JSON parse successfully; git diff --check passed; changed files are exactly the four authorized paths."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T02:32:09+08:00",
+        "from": "authorized_manifest_initialization",
+        "to": "in_progress",
+        "note": "Initialized the explicitly authorized contract-normalization item after confirming its #2890 dependency, latest main, isolated worktree, and absent local/remote target branch."
+      },
+      {
+        "at": "2026-07-11T02:35:10+08:00",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Canonical API normalization, Enneagram alias and unsafe-link coverage, Big Five canonical regression coverage, full manifest test file, PHP syntax, Pint, JSON/YAML parsing, scope validation, and git diff checks passed."
       }
     ]
   },
