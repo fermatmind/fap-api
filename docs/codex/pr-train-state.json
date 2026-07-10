@@ -619,7 +619,7 @@
       "ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01"
     ],
     "status": "pending_dependency",
-    "commit_sha": null,
+    "commit_sha": "50bada975a27b6a39944acf6e2f4759aaac1dd26",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -44875,18 +44875,23 @@
         "at": "2026-07-11T05:36:00+08:00",
         "note": "Analytics-only changes now retain required MBTI smoke, CI rejects attempts to disable it, and destructive migration/scale lookup controller changes remain blocking runtime-freeze inputs; focused, route/migration, scope, and full local CI validation passed.",
         "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T05:42:06+08:00",
+        "note": "Implementation PR #2919 passed all 15 GitHub checks and squash-merged as 30b974ad2567bc66d12a549757be1fe76e2d3671; origin/main contains the merge, main-sync is synchronized, and implementation branches were deleted locally and remotely.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-37",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-11T05:42:06+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2919",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-37: repair CI/runtime-freeze security guardrails",
     "train_scope": "security_169_fap_api_audit"
   },
