@@ -86,6 +86,31 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
         self::assertStringNotContainsString('order_no=', (string) $response->getContent());
     }
 
+    public function test_cross_type_comparison_keeps_a_row_only_quick_judgment_table(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $payload = $this->contentPayload();
+        unset($payload['sections'][1]['body']);
+
+        $this->createAuthority([
+            'slug' => 'intj-vs-intp',
+            'left_type_code' => 'INTJ',
+            'right_type_code' => 'INTP',
+            'content_payload_json' => $payload,
+        ]);
+
+        $response = $this->getJson('/api/v0.5/personality/comparisons/intj-vs-intp?locale=zh-CN');
+
+        $response->assertOk();
+
+        $quickJudgmentTable = collect((array) $response->json('comparison_public_projection_v1.sections'))
+            ->firstWhere('id', 'quick_judgment_table');
+
+        self::assertIsArray($quickJudgmentTable);
+        self::assertSame('判断入口', data_get($quickJudgmentTable, 'rows.0.dimension'));
+        self::assertSame([], $quickJudgmentTable['body']);
+    }
+
     /**
      * @param  array<string,mixed>  $overrides
      */

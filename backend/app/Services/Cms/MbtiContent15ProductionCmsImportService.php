@@ -316,6 +316,17 @@ final class MbtiContent15ProductionCmsImportService
                     array_merge($section, ['personality_profile_variant_id' => (int) $variant->id]),
                 );
         }
+        foreach ($this->profileSupportingSections((array) $preparedRow['payload']) as $section) {
+            PersonalityProfileVariantSection::query()
+                ->withoutGlobalScopes()
+                ->updateOrCreate(
+                    [
+                        'personality_profile_variant_id' => (int) $variant->id,
+                        'section_key' => (string) $section['section_key'],
+                    ],
+                    array_merge($section, ['personality_profile_variant_id' => (int) $variant->id]),
+                );
+        }
         PersonalityProfileVariantSeoMeta::query()
             ->withoutGlobalScopes()
             ->updateOrCreate(
@@ -495,6 +506,47 @@ final class MbtiContent15ProductionCmsImportService
                 'body_html' => null,
                 'payload_json' => $section,
                 'sort_order' => 960 + (int) $index,
+                'is_enabled' => true,
+            ];
+        }
+
+        return $sections;
+    }
+
+    /**
+     * Keep CMS-backed supporting assets as first-class variant sections so the
+     * public read model can expose them without reconstructing editorial data.
+     *
+     * @param  array<string,mixed>  $payload
+     * @return list<array<string,mixed>>
+     */
+    private function profileSupportingSections(array $payload): array
+    {
+        $sections = [];
+        $faq = array_values(array_filter((array) ($payload['faq'] ?? []), 'is_array'));
+        if ($faq !== []) {
+            $sections[] = [
+                'org_id' => 0,
+                'section_key' => 'mbti_content15_faq',
+                'render_variant' => 'faq',
+                'body_md' => null,
+                'body_html' => null,
+                'payload_json' => ['items' => $faq],
+                'sort_order' => 980,
+                'is_enabled' => true,
+            ];
+        }
+
+        $internalLinks = array_values(array_filter((array) ($payload['internal_links'] ?? []), 'is_array'));
+        if ($internalLinks !== []) {
+            $sections[] = [
+                'org_id' => 0,
+                'section_key' => 'mbti_content15_internal_links',
+                'render_variant' => 'links',
+                'body_md' => null,
+                'body_html' => null,
+                'payload_json' => ['items' => $internalLinks],
+                'sort_order' => 981,
                 'is_enabled' => true,
             ];
         }

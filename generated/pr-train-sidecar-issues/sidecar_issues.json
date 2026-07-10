@@ -264,5 +264,44 @@
         "why_not_current_pr_scope": "Production credentials, runtime availability, deployment, and a production runner are environment ownership concerns. This PR must not change secrets, deployment, database configuration, or create a deployment workflow.",
         "required_checks_affected": true,
         "recommended_follow_up": "Merge the fail-closed importer capability through a separately validated code-delivery path, then obtain a platform-owner approved production runner or use an already-approved deployed runtime. Run the exact production dry-run with the authorized package values; only then run the exact write command and MBTI-CMS-28 read-only verification."
-    }
+  },
+  {
+    "repo": "fap-api",
+    "pr_id": "MBTI-CMS-29",
+    "branch": "codex/mbti-cms-29-content15-readmodel-repair",
+    "blocker_type": "production_content_reimport_requires_fresh_exact_authorization",
+    "evidence": [
+      "The nine CONTENT-15 records were already imported before this readmodel repair.",
+      "MBTI-CMS-29 persists profile FAQ/internal-link sections for future imports, but it does not mutate the existing production CMS records."
+    ],
+    "why_not_current_pr_scope": "This PR is limited to backend authority/readmodel code and automated validation. Re-importing existing production CMS content is a separate production-write operation requiring a new exact package and authorization.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "After MBTI-CMS-29 is deployed, obtain explicit authorization to replay the exact approved CONTENT-15 package, then run MBTI-CMS-28 read-only verification."
+  },
+  {
+    "repo": "fap-api",
+    "pr_id": "MBTI-CMS-29",
+    "branch": "codex/mbti-cms-29-content15-readmodel-repair",
+    "blocker_type": "real_package_preflight_requires_seeded_authority_targets",
+    "evidence": [
+      "The final package targets existing CMS profile slugs and cannot pass target resolution against an empty in-memory SQLite process without those authoritative profiles.",
+      "Focused importer and public readmodel tests seed the required targets and validate the same schema, section, FAQ, link, and indexability-hold behavior."
+    ],
+    "why_not_current_pr_scope": "Creating or importing a local production-equivalent CMS snapshot is environment/data ownership work outside this code-only repair PR.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Run the exact-package preflight on the approved deployed authority environment before any future production replay; do not treat the empty SQLite limitation as production-import approval."
+  },
+  {
+    "repo": "fap-api",
+    "pr_id": "MBTI-CMS-29",
+    "branch": "codex/mbti-cms-29-content15-readmodel-repair",
+    "blocker_type": "local_mbti_http_verifier_requires_running_api",
+    "evidence": [
+      "bash scripts/ci_verify_mbti.sh exited before business checks because curl could not connect to http://127.0.0.1:8000.",
+      "Focused in-memory importer and public readmodel tests, PHP syntax, and Pint passed without a runtime server."
+    ],
+    "why_not_current_pr_scope": "Starting, configuring, or routing a shared local API server is local-environment ownership work and is not part of this code-only readmodel repair.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Run bash scripts/ci_verify_mbti.sh from a standard local stack with the API listening on 127.0.0.1:8000; do not treat this local-server absence as a production verification result."
+  }
 ]

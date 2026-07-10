@@ -145,6 +145,7 @@ class PersonalityController extends Controller
         );
         $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
         $sections = $this->publicSectionPayloads($profile, $variant);
+        $internalLinks = $this->content15ProfileInternalLinks($sections, $validated['locale']);
         $seoSurface = $this->buildSeoSurface($meta, $jsonLd, $this->personalitySeoSurfaceType($profile));
         $landingSurface = $this->buildDetailLandingSurface($profile, $variant, $projection, $validated['locale']);
 
@@ -152,6 +153,7 @@ class PersonalityController extends Controller
             'ok' => true,
             'profile' => $this->profileDetailPayload($profile, $variant),
             'sections' => $sections,
+            'internal_links' => $internalLinks,
             'seo_meta' => $this->seoMetaPayload($profile, $variant),
             'personality_public_projection_v1' => $projection,
             'seo_surface_v1' => $seoSurface,
@@ -164,6 +166,7 @@ class PersonalityController extends Controller
                 $seoSurface,
                 $landingSurface,
                 $validated['locale'],
+                $internalLinks,
             ),
         ];
 
@@ -462,8 +465,8 @@ class PersonalityController extends Controller
             'public_url' => $meta['canonical'] ?? $this->comparisonCanonicalUrl($baseTypeCode, $locale),
             'canonical_url' => $meta['canonical'] ?? $this->comparisonCanonicalUrl($baseTypeCode, $locale),
             'is_public' => (bool) $profile->is_public,
-            'is_indexable' => (bool) $profile->is_indexable,
-            'status' => (string) $profile->status,
+            'is_indexable' => ! $this->comparisonIndexabilityHeld($comparisonOverlay) && (bool) $profile->is_indexable,
+            'status' => $this->comparisonIndexabilityHeld($comparisonOverlay) ? 'held_for_mbti_index_24' : (string) $profile->status,
         ];
     }
 
@@ -479,6 +482,7 @@ class PersonalityController extends Controller
             ? $baseTypeCode.'-A 和 '.$baseTypeCode.'-T 区别：特点、职业、爱情与稀有度'
             : $baseTypeCode.'-A vs '.$baseTypeCode.'-T: Traits, Careers, Love & Rarity');
         $description = $this->normalizedString($overlaySeo['seo_description'] ?? null)
+            ?? $this->normalizedString($overlaySeo['meta_description'] ?? null)
             ?? $this->normalizedString($overlaySeo['description'] ?? null)
             ?? $this->normalizedString($overlaySeo['quick_answer_summary'] ?? null)
             ?? ($locale === 'zh-CN'
@@ -508,8 +512,16 @@ class PersonalityController extends Controller
                 'description' => $description,
                 'image' => null,
             ],
-            'robots' => 'index,follow',
+            'robots' => $this->comparisonIndexabilityHeld($comparisonOverlay) ? 'noindex,follow' : 'index,follow',
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $comparisonOverlay
+     */
+    private function comparisonIndexabilityHeld(?array $comparisonOverlay): bool
+    {
+        return $comparisonOverlay !== null && ($comparisonOverlay['indexability_held'] ?? false) === true;
     }
 
     /**
@@ -640,8 +652,8 @@ class PersonalityController extends Controller
         }
 
         $payload = is_array($section->payload_json) ? $section->payload_json : [];
-        $seo = is_array($payload['seo'] ?? null) ? $payload['seo'] : [];
         $content = is_array($payload['content'] ?? null) ? $payload['content'] : [];
+        $seo = is_array($content['seo'] ?? null) ? $content['seo'] : (is_array($payload['seo'] ?? null) ? $payload['seo'] : []);
 
         if ($seo === [] && $content === []) {
             return null;
@@ -651,10 +663,11 @@ class PersonalityController extends Controller
             'section' => $this->sectionPayload($section),
             'seo' => $seo,
             'content' => $content,
-            'faq' => is_array($payload['faq'] ?? null) ? array_values((array) $payload['faq']) : [],
-            'internal_links' => is_array($payload['internal_links'] ?? null) ? array_values((array) $payload['internal_links']) : [],
+            'faq' => is_array($content['faq'] ?? null) ? array_values((array) $content['faq']) : (is_array($payload['faq'] ?? null) ? array_values((array) $payload['faq']) : []),
+            'internal_links' => is_array($content['internal_links'] ?? null) ? array_values((array) $content['internal_links']) : (is_array($payload['internal_links'] ?? null) ? array_values((array) $payload['internal_links']) : []),
             'source' => $this->normalizedString($payload['source'] ?? null) ?? 'mbti64_comparison_a_vs_t',
             'snapshot_key' => $this->normalizedString($payload['snapshot_key'] ?? null),
+            'indexability_held' => (bool) ($payload['indexability_held'] ?? false),
         ];
     }
 
@@ -666,7 +679,7 @@ class PersonalityController extends Controller
         array $projection,
         ?array $comparisonOverlay,
         string $baseTypeCode,
-        string $locale
+        string $locale,
     ): array {
         if ($comparisonOverlay === null) {
             return $projection;
@@ -675,6 +688,7 @@ class PersonalityController extends Controller
         $seo = is_array($comparisonOverlay['seo'] ?? null) ? $comparisonOverlay['seo'] : [];
         $content = is_array($comparisonOverlay['content'] ?? null) ? $comparisonOverlay['content'] : [];
         $blocks = $this->mbti64PromotedComparisonBlocks($content);
+        $sections = $this->mbti64PromotedComparisonSections($content);
         $title = $this->normalizedString($seo['h1'] ?? null)
             ?? $this->normalizedString($seo['seo_title'] ?? null)
             ?? $this->normalizedString($seo['title'] ?? null);
@@ -685,7 +699,7 @@ class PersonalityController extends Controller
         $faq = $this->mbti64PromotedComparisonFaq($comparisonOverlay);
         $internalLinks = $this->mbti64PromotedComparisonInternalLinks($comparisonOverlay, $locale);
 
-        if ($blocks === [] && $title === null && $description === null && $faq === [] && $internalLinks === []) {
+        if ($blocks === [] && $sections === [] && $title === null && $description === null && $faq === [] && $internalLinks === []) {
             return $projection;
         }
 
@@ -697,6 +711,9 @@ class PersonalityController extends Controller
         $projection['description'] = $description ?? ($projection['description'] ?? null);
         if ($blocks !== []) {
             $projection['comparison_blocks'] = $blocks;
+        }
+        if ($sections !== []) {
+            $projection['sections'] = $sections;
         }
         $projection['source_refs'] = array_values(array_unique(array_merge(
             (array) ($projection['source_refs'] ?? []),
@@ -713,6 +730,12 @@ class PersonalityController extends Controller
             'snapshot_key' => $snapshotKey,
             'base_type_code' => $baseTypeCode,
         ];
+        if ($this->comparisonIndexabilityHeld($comparisonOverlay)) {
+            $projection['is_indexable'] = false;
+            $projection['sitemap_eligible'] = false;
+            $projection['llms_eligible'] = false;
+            $projection['indexability_status'] = 'held_for_mbti_index_24';
+        }
 
         return $projection;
     }
@@ -723,6 +746,22 @@ class PersonalityController extends Controller
      */
     private function mbti64PromotedComparisonBlocks(array $content): array
     {
+        $contentSections = $this->mbti64PromotedComparisonSections($content);
+        if ($contentSections !== []) {
+            return array_values(array_map(function (array $section): array {
+                $body = implode("\n\n", (array) ($section['body'] ?? []));
+
+                return [
+                    'key' => (string) ($section['id'] ?? ''),
+                    'title' => (string) ($section['title'] ?? ''),
+                    'source' => 'personality_profile_sections.mbti64_comparison_a_vs_t',
+                    'variants' => ['a' => $body, 't' => $body],
+                    'body_md' => $body,
+                    'rows' => is_array($section['rows'] ?? null) ? $section['rows'] : [],
+                ];
+            }, $contentSections));
+        }
+
         $blocks = [];
         $summary = is_array($content['side_by_side_summary'] ?? null) ? $content['side_by_side_summary'] : [];
         $rows = is_array($summary['rows'] ?? null) ? array_values((array) $summary['rows']) : [];
@@ -781,6 +820,40 @@ class PersonalityController extends Controller
         }
 
         return $blocks;
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return list<array<string,mixed>>
+     */
+    private function mbti64PromotedComparisonSections(array $content): array
+    {
+        $sections = [];
+        foreach (array_values((array) ($content['sections'] ?? [])) as $index => $section) {
+            if (! is_array($section)) {
+                continue;
+            }
+
+            $key = $this->normalizedString($section['key'] ?? null) ?? 'section-'.($index + 1);
+            $title = $this->normalizedString($section['title'] ?? null);
+            $body = $this->normalizedString($section['body'] ?? null);
+            $rows = is_array($section['rows'] ?? null) ? array_values((array) $section['rows']) : [];
+            if ($title === null || ($body === null && $rows === [])) {
+                continue;
+            }
+
+            $projection = [
+                'id' => $key,
+                'title' => $title,
+                'body' => $body === null ? [] : [$body],
+            ];
+            if ($rows !== []) {
+                $projection['rows'] = $rows;
+            }
+            $sections[] = $projection;
+        }
+
+        return $sections;
     }
 
     private function comparisonBlockKey(string $value, string $fallback): string
@@ -849,6 +922,42 @@ class PersonalityController extends Controller
                 'kind' => $this->normalizedString($link['role'] ?? null) ?? 'content_continue',
                 'locale' => $locale,
             ];
+        }
+
+        return $links;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $sections
+     * @return list<array<string,string|null>>
+     */
+    private function content15ProfileInternalLinks(array $sections, string $locale): array
+    {
+        $links = [];
+        foreach ($sections as $section) {
+            if (! is_array($section) || (string) ($section['section_key'] ?? '') !== 'mbti_content15_internal_links') {
+                continue;
+            }
+
+            foreach ((array) data_get($section, 'payload_json.items', []) as $index => $link) {
+                if (! is_array($link) || ($link['safe_public_route'] ?? null) !== true) {
+                    continue;
+                }
+
+                $href = $this->normalizedString($link['href'] ?? null);
+                $label = $this->normalizedString($link['anchor_text'] ?? null);
+                if ($href === null || $label === null || $this->containsForbiddenPublicRoute($href)) {
+                    continue;
+                }
+
+                $links[] = [
+                    'key' => $this->normalizedString($link['role'] ?? null) ?? 'mbti-content15-profile-link-'.$index,
+                    'label' => $label,
+                    'href' => $href,
+                    'kind' => $this->normalizedString($link['role'] ?? null) ?? 'content_continue',
+                    'locale' => $locale,
+                ];
+            }
         }
 
         return $links;
@@ -1101,9 +1210,10 @@ class PersonalityController extends Controller
 
             return true;
         }));
+        $indexabilityHeld = $this->comparisonIndexabilityHeld($comparisonOverlay);
 
         return $this->landingSurfaceContractService->build([
-            'landing_scope' => 'public_indexable_detail',
+            'landing_scope' => $indexabilityHeld ? 'public_noindex_detail' : 'public_indexable_detail',
             'entry_surface' => 'personality_comparison',
             'entry_type' => 'mbti_at_pair',
             'summary_blocks' => [
@@ -1119,7 +1229,7 @@ class PersonalityController extends Controller
             'start_test_target' => $startTestPath,
             'content_continue_target' => '/'.$segment.'/personality/'.$baseSlug.'-a',
             'cta_bundle' => $ctaBundle,
-            'indexability_state' => 'indexable',
+            'indexability_state' => $indexabilityHeld ? 'noindex' : 'indexable',
             'attribution_scope' => 'public_personality_landing',
             'seo_surface_ref' => $this->comparisonSlug($baseTypeCode),
             'surface_family' => 'personality',
@@ -1148,6 +1258,7 @@ class PersonalityController extends Controller
         array $landingSurface,
         ?array $comparisonOverlay = null
     ): array {
+        $indexabilityHeld = $this->comparisonIndexabilityHeld($comparisonOverlay);
         $summaryBlocks = [
             [
                 'key' => 'comparison_summary',
@@ -1175,7 +1286,7 @@ class PersonalityController extends Controller
         }
 
         return $this->answerSurfaceContractService->build([
-            'answer_scope' => 'public_indexable_detail',
+            'answer_scope' => $indexabilityHeld ? 'public_noindex_detail' : 'public_indexable_detail',
             'surface_type' => 'personality_comparison_public_detail',
             'summary_blocks' => $summaryBlocks,
             'compare_blocks' => $compareBlocks,
@@ -1193,8 +1304,8 @@ class PersonalityController extends Controller
                 'personality_variant_seo_meta',
                 $comparisonOverlay !== null ? 'personality_profile_sections.mbti64_comparison_a_vs_t' : null,
             ])),
-            'public_safety_state' => 'public_indexable',
-            'indexability_state' => 'indexable',
+            'public_safety_state' => $indexabilityHeld ? 'public_noindex' : 'public_indexable',
+            'indexability_state' => $indexabilityHeld ? 'noindex' : 'indexable',
             'attribution_scope' => 'public_personality_answer',
             'seo_surface_ref' => (string) ($seoSurface['metadata_fingerprint'] ?? ''),
             'landing_surface_ref' => (string) ($landingSurface['landing_fingerprint'] ?? ''),
@@ -1324,7 +1435,8 @@ class PersonalityController extends Controller
         array $sections,
         array $seoSurface,
         array $landingSurface,
-        string $locale
+        string $locale,
+        array $internalLinks = [],
     ): array {
         $summary = trim((string) ($projection['summary_card']['summary'] ?? $profile->excerpt ?? ''));
         $subtitle = trim((string) ($projection['summary_card']['subtitle'] ?? $profile->subtitle ?? ''));
@@ -1360,8 +1472,11 @@ class PersonalityController extends Controller
             'compare_blocks' => $compareBlocks,
             'scene_summary_blocks' => $sceneSummaryBlocks,
             'next_step_blocks' => $this->answerSurfaceContractService->buildNextStepBlocksFromCtas(
-                is_array($landingSurface['cta_bundle'] ?? null) ? $landingSurface['cta_bundle'] : [],
-                3
+                array_merge(
+                    $internalLinks,
+                    is_array($landingSurface['cta_bundle'] ?? null) ? $landingSurface['cta_bundle'] : [],
+                ),
+                5
             ),
             'answer_bundle' => [
                 ['key' => 'summary', 'title' => 'summary', 'count' => count($summaryBlocks)],
@@ -1374,6 +1489,7 @@ class PersonalityController extends Controller
                 $isMbtiScale ? 'mbti_public_projection_v1' : '',
                 count($compareBlocks) > 0 ? 'projection_dimensions' : '',
                 count($sections) > 0 ? 'personality_sections' : '',
+                $internalLinks !== [] ? 'personality_profile_variant_sections.mbti_content15_internal_links' : '',
                 $sceneSummaryBlocks !== [] ? 'scene_summary_blocks' : '',
             ])),
             'public_safety_state' => 'public_indexable',
