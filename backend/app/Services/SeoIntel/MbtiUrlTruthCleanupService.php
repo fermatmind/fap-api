@@ -159,6 +159,13 @@ final class MbtiUrlTruthCleanupService
         }
 
         $result['duplicate_cluster_prevented'] = $this->duplicateClusterPrevented($writeRequested);
+        if (! $result['duplicate_cluster_prevented']) {
+            $issues[] = 'duplicate_cluster_postcondition_failed';
+        }
+
+        if ($writeRequested && ! $result['writes_committed']) {
+            $issues[] = 'cleanup_write_not_committed';
+        }
 
         return $this->finish(
             result: $result,

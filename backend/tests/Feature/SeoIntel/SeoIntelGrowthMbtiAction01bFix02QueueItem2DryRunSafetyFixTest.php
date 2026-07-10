@@ -151,7 +151,8 @@ final class SeoIntelGrowthMbtiAction01bFix02QueueItem2DryRunSafetyFixTest extend
         $exitCode = Artisan::call('seo-intel:mbti-url-truth-cleanup', $arguments);
         $output = json_decode(trim(Artisan::output()), true, 512, JSON_THROW_ON_ERROR);
         $this->assertIsArray($output);
-        $this->assertSame(0, $exitCode, (string) json_encode($output, JSON_UNESCAPED_SLASHES));
+        $expectedExitCode = ($output['status'] ?? null) === 'blocked' ? 1 : 0;
+        $this->assertSame($expectedExitCode, $exitCode, (string) json_encode($output, JSON_UNESCAPED_SLASHES));
 
         return $output;
     }

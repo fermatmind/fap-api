@@ -39,6 +39,9 @@ final class SeoAgentPriorityQueueSchedulerTest extends TestCase
             'seo_intel.search_channel_queue.live_submission.indexnow.endpoint' => 'https://api.indexnow.test/indexnow',
             'seo_intel.search_channel_queue.live_submission.indexnow.key' => 'secret-indexnow-key',
             'seo_intel.search_channel_queue.live_submission.indexnow.key_location' => 'https://fermatmind.com/indexnow.txt',
+            'seo_intel.indexnow_live_api_enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.external_api_calls_enabled' => true,
             'seo_intel.search_channel_queue.approved_source_authorities' => [
                 'backend_cms',
                 'backend_public_surface',
@@ -171,6 +174,40 @@ final class SeoAgentPriorityQueueSchedulerTest extends TestCase
         foreach ($this->forbiddenStrings() as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $combined, $forbidden);
         }
+    }
+
+    #[Test]
+    public function preflight_only_mode_reports_blocked_when_live_submission_readiness_is_disabled(): void
+    {
+        Http::fake();
+        config([
+            'seo_intel.search_channel_queue.live_submission.external_api_calls_enabled' => false,
+        ]);
+        $page = $this->createContentPage();
+        $this->seedSeoUrl('https://fermatmind.com/zh/priority-scheduler-page', (string) $page->id);
+
+        $artifactDir = $this->artifactDir();
+        $exitCode = Artisan::call('seo-agent:priority-queue-scheduler', [
+            '--mode' => 'weekly-l5-low-risk',
+            '--sources' => 'cms-tdk-gap',
+            '--limit' => 10,
+            '--draft-limit' => 10,
+            '--publish-limit' => 1,
+            '--artifact-dir' => $artifactDir,
+            '--preflight-only' => true,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode, Artisan::output());
+        $this->assertSame('blocked', $summary['status'] ?? null);
+        $this->assertSame('indexnow_config_preflight_blocked', $summary['issue'] ?? null);
+        $this->assertSame('blocked', data_get($summary, 'indexnow_config_preflight.status'));
+        $this->assertFalse((bool) data_get($summary, 'indexnow_config_preflight.ready_for_live_submit', true));
+        $this->assertSame('not_reviewed', (string) $page->refresh()->claim_gate_status);
+        $this->assertSame(0, CmsTranslationRevision::query()->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        Http::assertNothingSent();
     }
 
     #[Test]

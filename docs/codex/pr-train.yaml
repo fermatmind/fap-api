@@ -35857,6 +35857,13 @@ prs:
       - backend/app/Console/Commands/WarmSitemapSourceCacheCommand.php
       - backend/app/Console/Commands/SeoAgentPriorityQueueSchedulerCommand.php
       - backend/app/Services/SeoIntel/MbtiUrlTruthCleanupService.php
+      - backend/app/Console/Commands/SeoIntelMbtiUrlTruthCleanupCommand.php
+      - backend/tests/Feature/SEO/SitemapSourceCacheTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentPriorityQueueSchedulerTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bFix02QueueItem2DryRunSafetyFixTest.php
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
