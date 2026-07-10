@@ -82470,8 +82470,8 @@
     "depends_on": [
       "MBTI-CMS-26B"
     ],
-    "status": "in_progress",
-    "commit_sha": null,
+    "status": "local_checks_passed",
+    "commit_sha": "50e9ea0b6bdfcb2792030a0578c22ad7bfa43ea9",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -82517,7 +82517,7 @@
         "at": "2026-07-10T00:00:00Z",
         "from": "in_progress",
         "to": "local_checks_passed",
-        "note": "The fail-closed importer command/service and regression tests passed syntax, SQLite migration, focused test, real package preflight, Pint, manifest parse, diff, and scope validation."
+        "note": "The fail-closed importer command/service and regression tests passed syntax, SQLite migration, focused test, real package preflight, Pint, manifest parse, diff, and scope validation. Importer code commit: 50e9ea0b6bdfcb2792030a0578c22ad7bfa43ea9."
       }
     ]
   },
