@@ -84217,8 +84217,8 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-agreeableness-content-package-01",
     "depends_on": ["BIG5-ZH-FACET-EXTRAVERSION-CONTENT-PACKAGE-01"],
-    "status": "pr_open",
-    "commit_sha": "e1acc041db157e262f699810d9f40987cc78079d",
+    "status": "ready_to_merge",
+    "commit_sha": "4a7db26060b2a8bb5ba6a9298802da6ee3c46eb6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2896",
     "failure_reason": null,
     "merged_at": null,
@@ -84231,15 +84231,17 @@
       "package_qa": { "status": "pass", "evidence": "Codex-native raw/review/repaired/V1/QA artifacts pass for exactly six zh-CN agreeableness Facets; every asset has 9 substantive sections, 5 FAQ items, 7 structured internal links, body_md, shared-ledger inheritance, distinct construct boundaries, and locked noindex/index/sitemap/llms gates." },
       "generic_importer_dry_run": { "status": "pass", "evidence": "No-write generic importer returned dry_run=1, assets_found=6, valid_count=6, errors_count=0, will_create=6, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets." },
       "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions." },
-      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." }
+      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
+      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head 4a7db26060b2a8bb5ba6a9298802da6ee3c46eb6; PR #2896 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": null, "post_merge_revalidated": false },
+    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false },
     "transitions": [
       { "at": "2026-07-10T15:58:38Z", "from": "unregistered", "to": "planned", "note": "Registered only the current locked agreeableness six-page PR after the extraversion dependency merged and was cleaned." },
       { "at": "2026-07-10T15:58:38Z", "from": "planned", "to": "in_progress", "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN agreeableness Facet routes." },
       { "at": "2026-07-10T16:06:07Z", "from": "in_progress", "to": "local_checks_passed", "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed." },
       { "at": "2026-07-10T16:06:42Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped six-page agreeableness package and train metadata at b2a522a5ccbc082138ff542121b41a94526fb4a8." },
-      { "at": "2026-07-10T16:07:38Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2896 from head e1acc041db157e262f699810d9f40987cc78079d." }
+      { "at": "2026-07-10T16:07:38Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2896 from head e1acc041db157e262f699810d9f40987cc78079d." },
+      { "at": "2026-07-10T16:13:47Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." }
     ]
   }
 }
