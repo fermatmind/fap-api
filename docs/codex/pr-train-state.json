@@ -500,9 +500,9 @@
     "depends_on": [
       "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01"
     ],
-    "status": "committed",
+    "status": "github_checks_pending",
     "commit_sha": "06e08dbb21c559af4bc538c84f3cd4656c5477b2",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2905",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -535,6 +535,10 @@
       "manifest_and_scope_validation": {
         "status": "pass",
         "evidence": "pr-train YAML and state JSON parse successfully; git diff --check passed; changed files are exactly the four authorized paths."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #2905 is open and required GitHub checks are pending."
       }
     },
     "scope_validation": {
@@ -561,6 +565,12 @@
         "from": "local_checks_passed",
         "to": "committed",
         "note": "Committed the four authorized paths at implementation commit 06e08dbb21c559af4bc538c84f3cd4656c5477b2 after explicit path-limited staging."
+      },
+      {
+        "at": "2026-07-11T02:38:20+08:00",
+        "from": "committed",
+        "to": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #2905; required GitHub checks are pending."
       }
     ]
   },
