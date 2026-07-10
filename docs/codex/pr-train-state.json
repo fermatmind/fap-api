@@ -42707,6 +42707,10 @@
         ],
         "evidence": "Focused salary asset tests passed: 20 tests, 177 assertions. Route listing, isolated SQLite migration, and ci_verify_mbti passed.",
         "status": "pass"
+      },
+      "github_required_checks": {
+        "evidence": "PR #2846 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, and Semgrep OSS.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42727,18 +42731,23 @@
         "at": "2026-07-10T10:03:27+08:00",
         "note": "Bound salary preview/import targets to configured non-empty allowlist authority, including full-file mode. No CMS, production import, deploy, or external write was performed.",
         "status": "implementation_validated"
+      },
+      {
+        "at": "2026-07-10T10:09:47+08:00",
+        "note": "PR #2846 merged as b97460a9176d0bdc38fcf0eb6261f047729319c0 after required checks passed; implementation branch was deleted locally and remotely. No staging wait, manual deploy, or production deploy was performed.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-14",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T02:09:47Z",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2846",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "implementation_validated",
+    "status": "merged",
     "title": "SECURITY-169-API-14: harden career salary/display asset gates",
     "train_scope": "security_169_fap_api_audit"
   },
