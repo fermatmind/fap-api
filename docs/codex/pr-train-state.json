@@ -43322,6 +43322,30 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "51 focused tests passed with 732 assertions across public path normalization, runtime and TDK scanners, URL Truth opportunity readout, search-channel eligibility, and proof redaction.",
+        "status": "pass"
+      },
+      "fresh_migration": {
+        "evidence": "APP_ENV=testing SQLite migration completed successfully at /tmp/fap-api-security-169-api-22.sqlite.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "ci_verify_mbti passed, including the 1180-test suite (150138 assertions), MBTI smoke/report/share, events, payment, migration, auth, order-security, dependency, and webhook/attempt gates.",
+        "status": "pass"
+      },
+      "proof_redaction": {
+        "evidence": "Ops API proof JSON and Markdown contain no committed SSH aliases, machine hostnames, IP addresses, forced-resolve targets, response fingerprints, exact timings, or process counters; focused contract tests and leak scan passed.",
+        "status": "pass"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 15 changed paths are listed in SECURITY-169-API-22 allowed_paths; JSON/YAML parsing, proof leak scan, and git diff --check passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -43337,18 +43361,33 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-22; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T18:05:00+08:00",
+        "note": "Dependency SECURITY-169-API-21 implementation merged at 36869f33955fed23a6466e52eb20290e97c76aed and ledger-closed at d2e893527c0287fc5e50635900baa0917f1fdd76; started API22 in an isolated worktree from latest origin/main.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-10T18:16:17+08:00",
+        "note": "Public-path guard implementation, 51 focused tests, proof redaction scan, Pint, route listing, fresh migration, full CI, JSON/YAML validation, and 15-path scope validation passed.",
+        "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-10T18:18:08+08:00",
+        "note": "Opened PR #2875 from the rebased scoped API22 branch.",
+        "status": "pr_open"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-22",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2875",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "pr_open",
     "title": "SECURITY-169-API-22: harden SEO scanners against private/cross-tenant paths",
     "train_scope": "security_169_fap_api_audit"
   },

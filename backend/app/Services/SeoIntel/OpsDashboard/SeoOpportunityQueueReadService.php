@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\OpsDashboard;
 
 use App\Services\SeoIntel\GscDataQualityGate;
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueEligibilityEvaluator;
 
 final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadService
 {
     public function __construct(
         ?string $connectionName = null,
         private readonly GscDataQualityGate $dataQualityGate = new GscDataQualityGate,
+        private readonly SearchChannelQueueEligibilityEvaluator $eligibilityEvaluator = new SearchChannelQueueEligibilityEvaluator,
     ) {
         parent::__construct($connectionName);
     }
@@ -54,22 +56,10 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
      */
     private function gscRows(): array
     {
-        return $this->table('seo_gsc_daily')
-            ->leftJoinSub(
-                $this->table('seo_urls')
-                    ->select('canonical_url_hash')
-                    ->selectRaw('MIN(canonical_url) AS canonical_url')
-                    ->groupBy('canonical_url_hash'),
-                'url_truth',
-                function ($join): void {
-                    $join->on('seo_gsc_daily.canonical_url_hash', '=', 'url_truth.canonical_url_hash');
-                }
-            )
+        $rows = $this->table('seo_gsc_daily')
             ->select([
                 'seo_gsc_daily.report_date',
                 'seo_gsc_daily.canonical_url_hash',
-                'seo_gsc_daily.canonical_url AS gsc_canonical_url',
-                'url_truth.canonical_url AS url_truth_canonical_url',
                 'seo_gsc_daily.query_hash',
                 'seo_gsc_daily.query_display_masked',
                 'seo_gsc_daily.locale',
@@ -85,26 +75,64 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
             ->where('seo_gsc_daily.source_engine', 'google')
             ->orderByDesc('seo_gsc_daily.report_date')
             ->limit(500)
-            ->get()
-            ->map(fn (object $row): array => [
-                'report_date' => (string) $row->report_date,
-                'canonical_url_hash' => (string) $row->canonical_url_hash,
-                'canonical_url' => is_string($row->url_truth_canonical_url ?? null)
-                    ? $row->url_truth_canonical_url
-                    : (is_string($row->gsc_canonical_url ?? null) ? $row->gsc_canonical_url : null),
-                'query_hash' => (string) $row->query_hash,
-                'query_display_masked' => is_string($row->query_display_masked ?? null) ? $row->query_display_masked : null,
-                'locale' => is_string($row->locale ?? null) ? $row->locale : null,
-                'source_engine' => (string) $row->source_engine,
-                'clicks' => (int) ($row->clicks ?? 0),
-                'impressions' => (int) ($row->impressions ?? 0),
-                'ctr_ppm' => $row->ctr_ppm === null ? null : (int) $row->ctr_ppm,
-                'average_position_milli' => $row->average_position_milli === null ? null : (int) $row->average_position_milli,
-                'is_brand_query' => (bool) ($row->is_brand_query ?? false),
-                'query_type' => is_string($row->query_type ?? null) ? $row->query_type : 'unknown',
-                'metadata_json' => $this->decodeJson($row->metadata_json ?? null),
-            ])
+            ->get();
+        $urlTruthByHash = $this->publicUrlTruthByHash(
+            $rows->pluck('canonical_url_hash')->filter()->map(static fn (mixed $hash): string => (string) $hash)->all()
+        );
+
+        return $rows->map(fn (object $row): array => [
+            'report_date' => (string) $row->report_date,
+            'canonical_url_hash' => (string) $row->canonical_url_hash,
+            'canonical_path' => $urlTruthByHash[(string) $row->canonical_url_hash] ?? null,
+            'query_hash' => (string) $row->query_hash,
+            'query_display_masked' => is_string($row->query_display_masked ?? null) ? $row->query_display_masked : null,
+            'locale' => is_string($row->locale ?? null) ? $row->locale : null,
+            'source_engine' => (string) $row->source_engine,
+            'clicks' => (int) ($row->clicks ?? 0),
+            'impressions' => (int) ($row->impressions ?? 0),
+            'ctr_ppm' => $row->ctr_ppm === null ? null : (int) $row->ctr_ppm,
+            'average_position_milli' => $row->average_position_milli === null ? null : (int) $row->average_position_milli,
+            'is_brand_query' => (bool) ($row->is_brand_query ?? false),
+            'query_type' => is_string($row->query_type ?? null) ? $row->query_type : 'unknown',
+            'metadata_json' => $this->decodeJson($row->metadata_json ?? null),
+        ])
             ->all();
+    }
+
+    /**
+     * @param  list<string>  $hashes
+     * @return array<string, string>
+     */
+    private function publicUrlTruthByHash(array $hashes): array
+    {
+        if ($hashes === []) {
+            return [];
+        }
+
+        $result = [];
+        $rows = $this->table('seo_urls')
+            ->whereIn('canonical_url_hash', array_values(array_unique($hashes)))
+            ->orderBy('id')
+            ->get();
+
+        foreach ($rows as $row) {
+            $payload = (array) $row;
+            if (! $this->eligibilityEvaluator->evaluate($payload)->eligible) {
+                continue;
+            }
+
+            $path = SearchChannelQueueEligibilityEvaluator::publicPathFromCanonicalUrl(
+                is_string($row->canonical_url ?? null) ? $row->canonical_url : null
+            );
+            $hash = (string) ($row->canonical_url_hash ?? '');
+            if ($path === null || $hash === '' || isset($result[$hash])) {
+                continue;
+            }
+
+            $result[$hash] = $path;
+        }
+
+        return $result;
     }
 
     /**
@@ -126,7 +154,8 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
                 && $positionMilli >= 8000
                 && $positionMilli <= 20000
                 && ! (bool) ($row['is_brand_query'] ?? false)
-                && ($row['query_type'] ?? 'unknown') === 'non_brand';
+                && ($row['query_type'] ?? 'unknown') === 'non_brand'
+                && is_string($row['canonical_path'] ?? null);
         }));
 
         usort($candidates, static function (array $left, array $right): int {
@@ -142,7 +171,7 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
                 (string) $row['canonical_url_hash'],
                 (string) $row['query_hash'],
             ])),
-            'canonical_path' => $this->safePath(is_string($row['canonical_url'] ?? null) ? $row['canonical_url'] : null),
+            'canonical_path' => $row['canonical_path'],
             'canonical_url_hash' => (string) $row['canonical_url_hash'],
             'query_hash' => (string) $row['query_hash'],
             'query_display_masked' => $row['query_display_masked'],

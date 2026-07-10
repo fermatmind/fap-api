@@ -7,6 +7,7 @@ namespace App\Services\SeoAgent;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ContentPage;
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueEligibilityEvaluator;
 
 final class CmsTdkGapReadonlyScanner
 {
@@ -87,6 +88,7 @@ final class CmsTdkGapReadonlyScanner
     {
         $rows = Article::query()
             ->withoutGlobalScopes()
+            ->where('org_id', 0)
             ->with(['seoMeta' => static fn ($query) => $query->withoutGlobalScopes()])
             ->published()
             ->orderBy('id')
@@ -95,6 +97,11 @@ final class CmsTdkGapReadonlyScanner
 
         $candidates = [];
         foreach ($rows as $article) {
+            $safePath = $this->articleSafePath($article);
+            if ($safePath === null) {
+                continue;
+            }
+
             $seoMeta = $article->seoMeta instanceof ArticleSeoMeta ? $article->seoMeta : null;
             $gaps = [];
 
@@ -126,7 +133,7 @@ final class CmsTdkGapReadonlyScanner
             $candidates[] = $this->candidate(
                 subjectType: 'article',
                 subjectRef: 'article:'.(int) $article->id.':'.(string) $article->locale,
-                safePath: $this->articleSafePath($article),
+                safePath: $safePath,
                 locale: (string) $article->locale,
                 isIndexable: (bool) $article->is_indexable,
                 gapTypes: $gaps,
@@ -147,6 +154,7 @@ final class CmsTdkGapReadonlyScanner
     {
         $rows = ContentPage::query()
             ->withoutGlobalScopes()
+            ->where('org_id', 0)
             ->publishedPublic()
             ->orderBy('id')
             ->limit($limit * 3)
@@ -154,6 +162,11 @@ final class CmsTdkGapReadonlyScanner
 
         $candidates = [];
         foreach ($rows as $page) {
+            $safePath = $this->contentPageSafePath($page);
+            if ($safePath === null) {
+                continue;
+            }
+
             $gaps = [];
 
             if (trim((string) $page->seo_title) === '') {
@@ -177,7 +190,7 @@ final class CmsTdkGapReadonlyScanner
             $candidates[] = $this->candidate(
                 subjectType: 'content_page',
                 subjectRef: 'content_page:'.(int) $page->id.':'.(string) $page->locale,
-                safePath: $this->contentPageSafePath($page),
+                safePath: $safePath,
                 locale: (string) $page->locale,
                 isIndexable: (bool) $page->is_indexable,
                 gapTypes: $gaps,
@@ -237,33 +250,28 @@ final class CmsTdkGapReadonlyScanner
         return 'p3';
     }
 
-    private function articleSafePath(Article $article): string
+    private function articleSafePath(Article $article): ?string
     {
         $slug = $this->safeSlug((string) $article->slug);
         if ($slug === '') {
             $slug = 'article-'.substr(hash('sha256', (string) $article->id), 0, 12);
         }
 
-        return str_starts_with(strtolower((string) $article->locale), 'zh')
+        $path = str_starts_with(strtolower((string) $article->locale), 'zh')
             ? '/zh/articles/'.$slug
             : '/articles/'.$slug;
+
+        return SearchChannelQueueEligibilityEvaluator::normalizePublicPath($path);
     }
 
-    private function contentPageSafePath(ContentPage $page): string
+    private function contentPageSafePath(ContentPage $page): ?string
     {
         $path = trim((string) $page->path);
         if ($path === '') {
             $path = '/'.$this->safeSlug((string) $page->slug);
         }
 
-        if (preg_match('#^https?://#i', $path) === 1) {
-            $parsedPath = parse_url($path, PHP_URL_PATH);
-            $path = is_string($parsedPath) && $parsedPath !== '' ? $parsedPath : '/content-page-'.substr(hash('sha256', (string) $page->id), 0, 12);
-        }
-
-        $path = '/'.ltrim(strtok($path, '?#') ?: $path, '/');
-
-        return preg_replace('#/+#', '/', $path) ?: '/';
+        return SearchChannelQueueEligibilityEvaluator::normalizePublicPath($path);
     }
 
     private function safeSlug(string $slug): string

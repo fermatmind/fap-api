@@ -35773,7 +35773,13 @@ prs:
       - backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityEvaluator.php
       - backend/docs/seo/generated/ops-api-internal-resolve-proof.v1.json
       - backend/docs/seo/ops-api-internal-resolve-proof.md
-      - docs/codex/pr-train-state.json
+      - backend/tests/Feature/SeoIntel/SeoAgentRuntimeSeoQaReadonlyScannerTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentCmsTdkGapReadonlyScannerTest.php
+      - backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelQueueRuntimeTest.php
+      - backend/tests/Feature/SeoIntel/OpsApiInternalResolveProofTest.php
+      - backend/tests/Unit/Support/PublicSeoPathTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

@@ -67,6 +67,26 @@ final class SeoAgentCmsTdkGapReadonlyScannerTest extends TestCase
     }
 
     #[Test]
+    public function scanner_exports_only_global_public_paths(): void
+    {
+        $publicPage = $this->createContentPage('global-public-gap');
+        $privatePage = $this->createContentPage('private-gap', 0, '/zh/results/private-attempt');
+        $tenantPage = $this->createContentPage('tenant-gap', 23);
+        $tenantArticle = $this->createArticle('tenant-article-gap', 23);
+
+        $artifact = (new CmsTdkGapReadonlyScanner)->scan('all', 20);
+        $encoded = json_encode($artifact, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+
+        $this->assertSame(1, $artifact['candidate_count'] ?? null);
+        $this->assertSame('content_page:'.$publicPage->id.':zh-CN', data_get($artifact, 'candidates.0.subject_ref'));
+        $candidateRefs = array_column($artifact['candidates'] ?? [], 'subject_ref');
+        $this->assertNotContains('content_page:'.$privatePage->id.':zh-CN', $candidateRefs);
+        $this->assertNotContains('content_page:'.$tenantPage->id.':zh-CN', $candidateRefs);
+        $this->assertNotContains('article:'.$tenantArticle->id.':zh-CN', $candidateRefs);
+        $this->assertStringNotContainsString('/results/', $encoded);
+    }
+
+    #[Test]
     public function command_writes_scanner_packet_and_codex_review_handoff_artifacts_without_db_writes(): void
     {
         $this->createArticle('zh-command-gap');
@@ -184,10 +204,10 @@ final class SeoAgentCmsTdkGapReadonlyScannerTest extends TestCase
         }
     }
 
-    private function createArticle(string $slug): Article
+    private function createArticle(string $slug, int $orgId = 0): Article
     {
         return Article::query()->create([
-            'org_id' => 0,
+            'org_id' => $orgId,
             'slug' => $slug,
             'locale' => 'zh-CN',
             'title' => 'Readable title',
@@ -201,12 +221,12 @@ final class SeoAgentCmsTdkGapReadonlyScannerTest extends TestCase
         ]);
     }
 
-    private function createContentPage(string $slug): ContentPage
+    private function createContentPage(string $slug, int $orgId = 0, ?string $path = null): ContentPage
     {
         return ContentPage::query()->create([
-            'org_id' => 0,
+            'org_id' => $orgId,
             'slug' => $slug,
-            'path' => '/zh/'.$slug,
+            'path' => $path ?? '/zh/'.$slug,
             'kind' => ContentPage::KIND_COMPANY,
             'page_type' => 'company',
             'title' => 'Content page',
