@@ -77,6 +77,48 @@ final class Batch2ResultPageDryRunGateCommandTest extends TestCase
         ])->assertExitCode(1);
     }
 
+    public function test_command_rejects_run_ids_that_can_escape_or_ambiguously_resolve_artifact_directory(): void
+    {
+        $root = $this->tempDir('batch2-result-page-invalid-run-id');
+
+        try {
+            foreach (['.', '..', '../escaped', 'safe/../../escaped', str_repeat('a', 65)] as $runId) {
+                $this->artisan('result-page:batch2-dry-run-gate', [
+                    '--run-id' => $runId,
+                    '--artifact-dir' => $root,
+                    '--strict' => true,
+                    '--json' => true,
+                ])->assertExitCode(1);
+            }
+
+            $this->assertSame([], array_values(array_diff(scandir($root) ?: [], ['.', '..'])));
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
+    public function test_command_rejects_preexisting_symlink_run_directory_without_writing_target(): void
+    {
+        $root = $this->tempDir('batch2-result-page-symlink-root');
+        $target = $this->tempDir('batch2-result-page-symlink-target');
+        symlink($target, $root.'/batch2-gate');
+
+        try {
+            $this->artisan('result-page:batch2-dry-run-gate', [
+                '--run-id' => 'batch2-gate',
+                '--artifact-dir' => $root,
+                '--strict' => true,
+                '--json' => true,
+            ])->assertExitCode(1);
+
+            $this->assertSame([], array_values(array_diff(scandir($target) ?: [], ['.', '..'])));
+        } finally {
+            unlink($root.'/batch2-gate');
+            $this->deleteDirectory($root);
+            $this->deleteDirectory($target);
+        }
+    }
+
     private function tempDir(string $prefix): string
     {
         $path = sys_get_temp_dir().'/'.$prefix.'-'.bin2hex(random_bytes(4));

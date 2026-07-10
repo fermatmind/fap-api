@@ -35632,6 +35632,8 @@ prs:
     allowed_paths:
       - backend/app/Console/Commands/Batch2ResultPageDryRunGateCommand.php
       - backend/app/Services/Content/Batch2ResultPageDryRunGate.php
+      - backend/tests/Feature/Console/Batch2ResultPageDryRunGateCommandTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

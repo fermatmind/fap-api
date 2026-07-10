@@ -43069,6 +43069,30 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "dependency": {
+        "evidence": "SECURITY-169-API-18 implementation and ledger closeout are merged on origin/main at c0b7881b1d67d371083deabbf789a661155909dc.",
+        "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "Batch2ResultPageDryRunGateCommandTest passed 4 tests with 46 assertions, including path escape and symlink rejection cases.",
+        "status": "pass"
+      },
+      "local_ci": {
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh completed with exit code 0, including 1179 tests / 150137 assertions in the main suite and all downstream gates.",
+        "status": "pass"
+      },
+      "migration": {
+        "evidence": "Fresh SQLite php artisan migrate completed successfully for API19 validation.",
+        "status": "pass"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --path=api --except-vendor completed successfully with 237 output lines.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 4 changed files are within the API19 manifest allowlist; git diff --check, JSON/YAML parsing, and focused Pint checks passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -43080,6 +43104,26 @@
     ],
     "deploy_allowed": false,
     "events": [
+      {
+        "at": "2026-07-10T16:13:00+08:00",
+        "note": "Final API19 changed-file allowlist, diff, manifest/state parse, and formatting validations passed.",
+        "status": "scope_validation_passed"
+      },
+      {
+        "at": "2026-07-10T16:11:30+08:00",
+        "note": "Full local CI, API route listing, and fresh SQLite migration validation passed. Final scope validation remains before commit.",
+        "status": "local_validation_passed"
+      },
+      {
+        "at": "2026-07-10T16:05:51+08:00",
+        "note": "Implemented strict Batch2 run-id validation and canonical non-symlink artifact subdirectory containment. Focused tests passed; no candidate generation, staging write, production write, or deploy was executed.",
+        "status": "focused_tests_passed"
+      },
+      {
+        "at": "2026-07-10T16:02:00+08:00",
+        "note": "Started API19 from the merged API18 ledger head in an isolated worktree; production, CMS, staging, and deploy actions remain prohibited.",
+        "status": "in_progress"
+      },
       {
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-19; execution waits for declared dependency merge.",
@@ -43095,7 +43139,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-19: fix Batch2 dry-run artifact path traversal",
     "train_scope": "security_169_fap_api_audit"
   },
