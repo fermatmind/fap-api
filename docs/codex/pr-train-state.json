@@ -83678,8 +83678,8 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-openness-content-package-01",
     "depends_on": ["BIG5-ZH-FACET-HUB-CONTENT-REPAIR-01"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "02470f4c70613c2e9ad4b7ce48875533ea0bc1a7",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -83739,6 +83739,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed."
+      },
+      {
+        "at": "2026-07-10T14:50:25Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the scoped six-page openness package and train metadata at 02470f4c70613c2e9ad4b7ce48875533ea0bc1a7."
       }
     ]
   }
