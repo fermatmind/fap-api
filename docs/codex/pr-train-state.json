@@ -43949,6 +43949,10 @@
         "evidence": "backend/scripts/ci_verify_mbti.sh passed on the final implementation, including Big Five, Enneagram, Partner API, MBTI smoke/report/share, auth, OpenAPI, order-security, migration, dependency, webhook/attempt, and strict queue backlog gates.",
         "status": "pass"
       },
+      "github_required_checks": {
+        "evidence": "PR #2889 final head b676e31dd737ed4cc5e1de91989342d7c313bbb0 passed all 15 checks: push and pull-request hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 jobs, plus Semgrep blocking secrets, Semgrep OSS, and SARIF upload.",
+        "status": "pass"
+      },
       "route_list": {
         "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
         "status": "pass"
@@ -43959,7 +43963,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "37f2610eeb83209020a04f2874a911fb7bfa3d75",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -43986,18 +43990,23 @@
         "at": "2026-07-10T23:02:00+08:00",
         "note": "Inspected GitHub PR-event verify-bigfive failure in run 29101671267 job 86392130721: runtime-freeze classifier rejected the declared SEO attribution route/controller diff. Added an exact fail-closed classifier allowance and manifest path; 2 classifier tests/26 assertions and the original 33 focused tests/322 assertions passed locally.",
         "status": "github_check_remediated"
+      },
+      {
+        "at": "2026-07-10T23:12:39+08:00",
+        "note": "PR #2889 merged after all 15 GitHub checks passed; merge commit 37f2610eeb83209020a04f2874a911fb7bfa3d75. origin/main and local main were synchronized, and local/remote API27 implementation branches were deleted.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-27",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T23:12:39+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2889",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "local_checks_passed",
+    "status": "merged",
     "title": "SECURITY-169-API-27: harden SEO ingest and GSC artifact privacy",
     "train_scope": "security_169_fap_api_audit"
   },
