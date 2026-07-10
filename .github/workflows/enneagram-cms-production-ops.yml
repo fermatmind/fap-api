@@ -184,27 +184,55 @@ jobs:
           fi
 
           phase="promotion_inspect_classification"
-          promotion_inspect_state="$(jq -r '
+          promotion_inspect_state="$(jq -nr \
+            --slurpfile draft "$RUN_DIR/draft-dry-run.json" \
+            --slurpfile promote "$RUN_DIR/promote-dry-run.json" '
+            ($draft[0]) as $draft_inspect |
+            ($promote[0]) as $promotion_inspect |
             if
-              .ok == true and .status == "pass" and .row_count == 13 and
-              .writes_attempted == false and .writes_committed == false and
-              .publish_attempted == false and .index_attempted == false and
-              .sitemap_llms_release_attempted == false and .search_release_attempted == false and
-              .missing_target_count == 0 and .forbidden_route_count == 0 and
-              .stale_or_invalid_asset_count == 0 and (.errors | length) == 0
+              $promotion_inspect.ok == true and $promotion_inspect.status == "pass" and $promotion_inspect.row_count == 13 and
+              $promotion_inspect.writes_attempted == false and $promotion_inspect.writes_committed == false and
+              $promotion_inspect.publish_attempted == false and $promotion_inspect.index_attempted == false and
+              $promotion_inspect.sitemap_llms_release_attempted == false and $promotion_inspect.search_release_attempted == false and
+              $promotion_inspect.missing_target_count == 0 and $promotion_inspect.forbidden_route_count == 0 and
+              $promotion_inspect.stale_or_invalid_asset_count == 0 and ($promotion_inspect.errors | length) == 0
             then "ready"
             elif
-              .ok == false and .status == "fail" and .row_count == 13 and
-              .writes_attempted == false and .writes_committed == false and
-              .publish_attempted == false and .index_attempted == false and
-              .sitemap_llms_release_attempted == false and .search_release_attempted == false and
-              .missing_target_count == 13 and .forbidden_route_count == 0 and
-              .stale_or_invalid_asset_count == 0 and (.errors | length) == 13 and
-              all(.errors[]; .code == "missing_draft_asset")
+              $promotion_inspect.ok == false and $promotion_inspect.status == "fail" and $promotion_inspect.row_count == 13 and
+              $promotion_inspect.writes_attempted == false and $promotion_inspect.writes_committed == false and
+              $promotion_inspect.publish_attempted == false and $promotion_inspect.index_attempted == false and
+              $promotion_inspect.sitemap_llms_release_attempted == false and $promotion_inspect.search_release_attempted == false and
+              $promotion_inspect.missing_target_count == 13 and $promotion_inspect.forbidden_route_count == 0 and
+              $promotion_inspect.stale_or_invalid_asset_count == 0 and ($promotion_inspect.errors | length) == 13 and
+              all($promotion_inspect.errors[]; .code == "missing_draft_asset")
             then "first_import_missing_drafts"
+            elif
+              $draft_inspect.ok == true and $draft_inspect.status == "pass" and
+              $draft_inspect.row_count == 13 and $draft_inspect.hub_row_count == 1 and
+              $draft_inspect.center_row_count == 3 and $draft_inspect.core_type_row_count == 9 and
+              $draft_inspect.writes_attempted == false and $draft_inspect.writes_committed == false and
+              $draft_inspect.would_create_asset_count == 0 and $draft_inspect.created_asset_count == 0 and
+              $draft_inspect.updated_asset_count == 0 and $draft_inspect.skipped_existing_count == 0 and
+              $draft_inspect.publish_attempted == false and $draft_inspect.index_attempted == false and
+              $draft_inspect.sitemap_llms_release_attempted == false and $draft_inspect.search_release_attempted == false and
+              ($draft_inspect.errors | length) == 0 and
+              ([$draft_inspect.rows[]? | select(.action == "update_existing_content_ready")] | length) == 13 and
+              all($draft_inspect.rows[]; .action == "update_existing_content_ready") and
+              $promotion_inspect.ok == false and $promotion_inspect.status == "fail" and
+              $promotion_inspect.row_count == 13 and $promotion_inspect.hub_row_count == 1 and
+              $promotion_inspect.center_row_count == 3 and $promotion_inspect.core_type_row_count == 9 and
+              $promotion_inspect.writes_attempted == false and $promotion_inspect.writes_committed == false and
+              $promotion_inspect.publish_attempted == false and $promotion_inspect.index_attempted == false and
+              $promotion_inspect.sitemap_llms_release_attempted == false and $promotion_inspect.search_release_attempted == false and
+              $promotion_inspect.missing_target_count == 0 and $promotion_inspect.forbidden_route_count == 0 and
+              $promotion_inspect.stale_or_invalid_asset_count == 13 and ($promotion_inspect.errors | length) == 13 and
+              all($promotion_inspect.errors[]; .code == "source_hash_mismatch") and
+              ([$promotion_inspect.rows[]? | select(.action == "blocked_source_hash_mismatch")] | length) == 13 and
+              all($promotion_inspect.rows[]; .action == "blocked_source_hash_mismatch")
+            then "source_refresh_required"
             else "blocked"
             end
-          ' "$RUN_DIR/promote-dry-run.json")"
+          ')"
           write_inspection_summary() {
             local outcome="$1"
             jq -n \
@@ -233,6 +261,7 @@ jobs:
                      action_counts:{
                        create_draft_asset:count_action("create_draft_asset"),
                        update_existing_content_ready:count_action("update_existing_content_ready"),
+                       skip_existing_content_ready_same_source:count_action("skip_existing_content_ready_same_source"),
                        skip_existing_same_source_draft:count_action("skip_existing_same_source_draft"),
                        blocked_existing:count_action("blocked_existing")
                      }
@@ -265,6 +294,9 @@ jobs:
               test "$promotion_inspect_status" -eq 0
               ;;
             first_import_missing_drafts)
+              test "$promotion_inspect_status" -ne 0
+              ;;
+            source_refresh_required)
               test "$promotion_inspect_status" -ne 0
               ;;
             *)
@@ -366,12 +398,13 @@ jobs:
               all([.inspection.promotion][]; .publish_attempted == false and .index_attempted == false and .sitemap_llms_release_attempted == false and .search_release_attempted == false) and
               (
                 (.inspection.promotion.inspection_state == "ready" and .inspection.promotion.command_exit_code == 0 and .inspection.promotion.ok == true and .inspection.promotion.missing_target_count == 0 and .inspection.promotion.forbidden_route_count == 0 and .inspection.promotion.stale_or_invalid_asset_count == 0 and .inspection.promotion.error_count == 0) or
-                (.inspection.promotion.inspection_state == "first_import_missing_drafts" and .inspection.promotion.command_exit_code != 0 and .inspection.promotion.ok == false and .inspection.promotion.missing_target_count == 13 and .inspection.promotion.forbidden_route_count == 0 and .inspection.promotion.stale_or_invalid_asset_count == 0 and .inspection.promotion.error_count == 13)
+                (.inspection.promotion.inspection_state == "first_import_missing_drafts" and .inspection.promotion.command_exit_code != 0 and .inspection.promotion.ok == false and .inspection.promotion.missing_target_count == 13 and .inspection.promotion.forbidden_route_count == 0 and .inspection.promotion.stale_or_invalid_asset_count == 0 and .inspection.promotion.error_count == 13) or
+                (.inspection.promotion.inspection_state == "source_refresh_required" and .inspection.promotion.command_exit_code != 0 and .inspection.draft.action_counts.update_existing_content_ready == 13 and .inspection.promotion.ok == false and .inspection.promotion.missing_target_count == 0 and .inspection.promotion.forbidden_route_count == 0 and .inspection.promotion.stale_or_invalid_asset_count == 13 and .inspection.promotion.error_count == 13 and .inspection.promotion.error_counts.source_hash_mismatch == 13 and .inspection.promotion.error_counts.asset_not_promotable_draft == 0 and .inspection.promotion.error_counts.forbidden_private_route == 0)
               )
             else
               .outcome == "success" and
               .dry_run.ok == true and .dry_run.row_count == 13 and .dry_run.writes_attempted == false and
-              (.prewrite_promotion_inspect.inspection_state == "first_import_missing_drafts" or .prewrite_promotion_inspect.inspection_state == "ready") and
+              (.prewrite_promotion_inspect.inspection_state == "first_import_missing_drafts" or .prewrite_promotion_inspect.inspection_state == "source_refresh_required" or .prewrite_promotion_inspect.inspection_state == "ready") and
               .draft_write.ok == true and .draft_write.row_count == 13 and
               ((.draft_write.created_asset_count + .draft_write.updated_asset_count + .draft_write.skipped_existing_count) == 13) and
               .promotion_inspect.ok == true and .promotion_inspect.row_count == 13 and .promotion_inspect.writes_attempted == false and .promotion_inspect.writes_committed == false and

@@ -100,6 +100,7 @@ final class EnneagramCmsDraftWriter
                 ];
             }
 
+            $assetPayload = $this->assetPayload($recommendation, $identity, $sourceSha256, $qaSha256);
             $existing = $this->existingAsset($identity);
             if ($existing instanceof PersonalityPublicContentAsset && ! $this->existingAssetIsWritableDraft($existing, $sourceSha256)) {
                 if ($updateExisting && $this->assetIsUpdatableContentReady($existing)) {
@@ -117,9 +118,15 @@ final class EnneagramCmsDraftWriter
                 // Determine action for existing assets
                 $action = 'create_draft_asset';
                 if ($existing instanceof PersonalityPublicContentAsset) {
-                    $action = $updateExisting && $this->assetIsUpdatableContentReady($existing)
-                        ? 'update_existing_content_ready'
-                        : ($this->existingAssetIsWritableDraft($existing, $sourceSha256) ? 'skip_existing_same_source_draft' : 'blocked_existing');
+                    if ($updateExisting && $this->assetIsUpdatableContentReady($existing)) {
+                        $action = $this->contentReadyAssetMatchesPayload($existing, $assetPayload)
+                            ? 'skip_existing_content_ready_same_source'
+                            : 'update_existing_content_ready';
+                    } else {
+                        $action = $this->existingAssetIsWritableDraft($existing, $sourceSha256)
+                            ? 'skip_existing_same_source_draft'
+                            : 'blocked_existing';
+                    }
                 }
             }
 
@@ -136,7 +143,7 @@ final class EnneagramCmsDraftWriter
                 'recommendation_sha256' => hash('sha256', $recommendationJson),
                 'existing_asset_id' => $existing?->id !== null ? (int) $existing->id : null,
                 'action' => $action,
-                'asset_preview' => $this->assetPayload($recommendation, $identity, $sourceSha256, $qaSha256),
+                'asset_preview' => $assetPayload,
             ];
         }
 
@@ -162,7 +169,10 @@ final class EnneagramCmsDraftWriter
         $skipped = 0;
         if ($write) {
             foreach ($rows as &$row) {
-                if ($row['action'] === 'skip_existing_same_source_draft') {
+                if (in_array($row['action'], [
+                    'skip_existing_same_source_draft',
+                    'skip_existing_content_ready_same_source',
+                ], true)) {
                     $row['action'] = 'skipped_existing';
                     $skipped++;
 
@@ -174,15 +184,7 @@ final class EnneagramCmsDraftWriter
                 }
 
                 if ($row['action'] === 'update_existing_content_ready' && ($row['existing_asset_id'] ?? null) !== null) {
-                    $payload = (array) $row['asset_preview'];
-                    // Only update content fields; preserve state fields on existing content_ready assets.
-                    unset(
-                        $payload['org_id'], $payload['framework'], $payload['entity_type'], $payload['entity_key'],
-                        $payload['slug'], $payload['locale'],
-                        $payload['is_public'], $payload['index_eligible'], $payload['sitemap_eligible'],
-                        $payload['llms_eligible'], $payload['launch_state'], $payload['review_state'],
-                        $payload['robots'], $payload['contract_version'], $payload['source_package'], $payload['source_hash'],
-                    );
+                    $payload = $this->contentReadyUpdatePayload((array) $row['asset_preview']);
                     PersonalityPublicContentAsset::query()
                         ->withoutGlobalScopes()
                         ->whereKey((int) $row['existing_asset_id'])
@@ -346,6 +348,37 @@ final class EnneagramCmsDraftWriter
             && (bool) $asset->llms_eligible === false
             && $asset->launch_state === PersonalityPublicContentAsset::LAUNCH_CONTENT_READY
             && $asset->robots === PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW;
+    }
+
+    /**
+     * @param  array<string,mixed>  $assetPayload
+     */
+    private function contentReadyAssetMatchesPayload(PersonalityPublicContentAsset $asset, array $assetPayload): bool
+    {
+        foreach ($this->contentReadyUpdatePayload($assetPayload) as $field => $expectedValue) {
+            if ($asset->getAttribute($field) !== $expectedValue) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  array<string,mixed>  $assetPayload
+     * @return array<string,mixed>
+     */
+    private function contentReadyUpdatePayload(array $assetPayload): array
+    {
+        unset(
+            $assetPayload['org_id'], $assetPayload['framework'], $assetPayload['entity_type'], $assetPayload['entity_key'],
+            $assetPayload['slug'], $assetPayload['locale'],
+            $assetPayload['is_public'], $assetPayload['index_eligible'], $assetPayload['sitemap_eligible'],
+            $assetPayload['llms_eligible'], $assetPayload['launch_state'], $assetPayload['review_state'],
+            $assetPayload['robots'], $assetPayload['last_reviewed_at'],
+        );
+
+        return $assetPayload;
     }
 
     /**

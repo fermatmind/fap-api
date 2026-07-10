@@ -90,6 +90,101 @@ final class PersonalityEnneagramCmsDraftCommandTest extends TestCase
         $this->assertSame(26, PersonalityPublicContentAsset::query()->count());
     }
 
+    public function test_update_existing_content_ready_refreshes_provenance_preserves_state_and_is_idempotent(): void
+    {
+        $lastReviewedAt = now()->subDay()->startOfSecond();
+        PersonalityPublicContentAsset::query()->create([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_HUB,
+            'entity_key' => 'enneagram',
+            'slug' => 'enneagram',
+            'locale' => 'en',
+            'title' => 'Old content-ready title',
+            'summary' => 'Old content-ready summary',
+            'content_sections_json' => [],
+            'seo_json' => ['title' => 'Old content-ready title'],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'canonical_json' => ['path' => '/en/personality/enneagram'],
+            'hreflang_json' => [],
+            'faq_json' => [],
+            'media_json' => [],
+            'schema_json' => [],
+            'method_boundary_json' => [],
+            'evidence_notes_json' => [['package_sha256' => 'old-package-sha']],
+            'internal_links_json' => [],
+            'is_public' => true,
+            'index_eligible' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            'review_state' => 'existing_content_ready_review',
+            'contract_version' => 'legacy.v0',
+            'source_package' => 'legacy_source_package',
+            'source_hash' => 'old-source-hash',
+            'last_reviewed_at' => $lastReviewedAt,
+        ]);
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->singleHubPackage(), $this->singleHubQa());
+        $sourceSha256 = hash('sha256', (string) File::get($packagePath));
+        $qaSha256 = hash('sha256', (string) File::get($qaPath));
+
+        $dryRunExitCode = Artisan::call('personality:enneagram-cms-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--update-existing' => true,
+            '--json' => true,
+        ]);
+
+        $dryRunPayload = $this->jsonOutput();
+        $this->assertSame(0, $dryRunExitCode);
+        $this->assertTrue($dryRunPayload['ok']);
+        $this->assertFalse($dryRunPayload['writes_committed']);
+        $this->assertSame('update_existing_content_ready', $dryRunPayload['rows'][0]['action']);
+        $this->assertSame('old-source-hash', PersonalityPublicContentAsset::query()->first()?->source_hash);
+
+        $writeOptions = array_merge($this->writeOptions($packagePath, $qaPath), [
+            '--update-existing' => true,
+        ]);
+        $firstWriteExitCode = Artisan::call('personality:enneagram-cms-draft', $writeOptions);
+
+        $firstWritePayload = $this->jsonOutput();
+        $this->assertSame(0, $firstWriteExitCode);
+        $this->assertTrue($firstWritePayload['ok']);
+        $this->assertTrue($firstWritePayload['writes_committed']);
+        $this->assertSame(0, $firstWritePayload['created_asset_count']);
+        $this->assertSame(1, $firstWritePayload['updated_asset_count']);
+        $this->assertSame(0, $firstWritePayload['skipped_existing_count']);
+
+        $asset = PersonalityPublicContentAsset::query()->firstOrFail();
+        $this->assertSame('Enneagram H1', $asset->title);
+        $this->assertSame('enneagram_agent_projection_draft_v1', $asset->source_package);
+        $this->assertSame($sourceSha256, $asset->source_hash);
+        $this->assertSame(PersonalityPublicContentAsset::CONTRACT_VERSION_V1, $asset->contract_version);
+        $this->assertSame($sourceSha256, $asset->evidence_notes_json[0]['package_sha256'] ?? null);
+        $this->assertSame($qaSha256, $asset->evidence_notes_json[0]['qa_sha256'] ?? null);
+        $this->assertTrue($asset->is_public);
+        $this->assertSame(PersonalityPublicContentAsset::LAUNCH_CONTENT_READY, $asset->launch_state);
+        $this->assertSame(PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW, $asset->robots);
+        $this->assertFalse($asset->index_eligible);
+        $this->assertFalse($asset->sitemap_eligible);
+        $this->assertFalse($asset->llms_eligible);
+        $this->assertSame('existing_content_ready_review', $asset->review_state);
+        $this->assertSame($lastReviewedAt->toISOString(), $asset->last_reviewed_at?->toISOString());
+
+        $secondWriteExitCode = Artisan::call('personality:enneagram-cms-draft', $writeOptions);
+
+        $secondWritePayload = $this->jsonOutput();
+        $this->assertSame(0, $secondWriteExitCode);
+        $this->assertTrue($secondWritePayload['ok']);
+        $this->assertFalse($secondWritePayload['writes_committed']);
+        $this->assertSame(0, $secondWritePayload['created_asset_count']);
+        $this->assertSame(0, $secondWritePayload['updated_asset_count']);
+        $this->assertSame(1, $secondWritePayload['skipped_existing_count']);
+        $this->assertSame(1, PersonalityPublicContentAsset::query()->count());
+        $this->assertSame($sourceSha256, PersonalityPublicContentAsset::query()->first()?->source_hash);
+    }
+
     public function test_write_requires_all_safety_flags_and_exact_operator_token(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
