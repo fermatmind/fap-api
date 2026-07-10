@@ -1,0 +1,176 @@
+{
+  "package": "big-five-zh-facet-extraversion-source-ledger-2026-07-10",
+  "access_date": "2026-07-10",
+  "scope": "Six Chinese extraversion Facet content packages only.",
+  "inherits": {
+    "path": "generated/big-five-zh-facet-hub-content-repair/source_ledger.json",
+    "package": "big-five-zh-facet-shared-source-ledger-2026-07-10"
+  },
+  "sources": [
+    {
+      "id": "I1",
+      "type": "internal",
+      "reference": "backend/content_assets/personality_public/big_five_v1_seed.json",
+      "use": "Frozen CMS field shape, current Chinese route keys, locale, launch state, robots, and 5×6 taxonomy labels.",
+      "limitation": "The existing short body copy is an input to audit, not an authority for new academic claims."
+    },
+    {
+      "id": "I2",
+      "type": "internal",
+      "reference": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+      "use": "Non-diagnostic, non-deterministic, non-screening public claim boundaries."
+    },
+    {
+      "id": "I3",
+      "type": "internal",
+      "reference": "generated/big-five-zh-legacy-route-audit/legacy_route_audit.json",
+      "use": "Frozen V2 public route family and duplicate-route boundary."
+    },
+    {
+      "id": "A1",
+      "type": "official_research_resource",
+      "title": "NEO Facets Table",
+      "author_or_source": "International Personality Item Pool, Oregon Research Institute",
+      "year": null,
+      "url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+      "accessed_at": "2026-07-10",
+      "claim": "Documents corresponding IPIP scales for the 30 NEO-PI-R facet constructs.",
+      "limitation": "IPIP scales measure similar constructs; this does not make them identical to proprietary NEO scales or authorize score conversion."
+    },
+    {
+      "id": "A2",
+      "type": "peer_reviewed",
+      "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets",
+      "author_or_source": "Soto, C. J., & John, O. P.",
+      "year": 2017,
+      "doi": "10.1037/pspp0000096",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+      "accessed_at": "2026-07-10",
+      "claim": "Supports a hierarchical domain-and-facet reading of Big Five traits using 15 facets.",
+      "limitation": "BFI-2 has 15 facets, not the 30-facet taxonomy used for this CMS route set."
+    },
+    {
+      "id": "A3",
+      "type": "peer_reviewed",
+      "title": "Between facets and domains: 10 aspects of the Big Five",
+      "author_or_source": "DeYoung, C. G., Quilty, L. C., & Peterson, J. B.",
+      "year": 2007,
+      "doi": "10.1037/0022-3514.93.5.880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
+      "accessed_at": "2026-07-10",
+      "claim": "Shows an alternative intermediate hierarchy with two aspects per domain.",
+      "limitation": "The ten aspects are not interchangeable with either BFI-2 facets or NEO/IPIP 30 facets."
+    },
+    {
+      "id": "A4",
+      "type": "academic_review",
+      "title": "Paradigm Shift to the Integrative Big Five Trait Taxonomy: History, Measurement, and Conceptual Issues",
+      "author_or_source": "John, O. P., Naumann, L. P., & Soto, C. J.",
+      "year": 2008,
+      "reference": "In Handbook of Personality: Theory and Research (3rd ed.), pp. 114–158.",
+      "claim": "Supports broad Big Five taxonomy framing and continuous trait language.",
+      "limitation": "No individual prediction, numeric validity, or universal facet naming claim is taken from this review."
+    }
+  ],
+  "taxonomy": [
+    {
+      "domain_code": "extraversion",
+      "domain_title_zh": "外向性",
+      "facets": [
+        {
+          "code": "warmth",
+          "title_zh": "热情",
+          "route": "/zh/personality/big-five/facets/warmth"
+        },
+        {
+          "code": "gregariousness",
+          "title_zh": "合群性",
+          "route": "/zh/personality/big-five/facets/gregariousness"
+        },
+        {
+          "code": "assertiveness",
+          "title_zh": "表达主导性",
+          "route": "/zh/personality/big-five/facets/assertiveness"
+        },
+        {
+          "code": "activity",
+          "title_zh": "活跃度",
+          "route": "/zh/personality/big-five/facets/activity"
+        },
+        {
+          "code": "excitement-seeking",
+          "title_zh": "刺激寻求",
+          "route": "/zh/personality/big-five/facets/excitement-seeking"
+        },
+        {
+          "code": "positive-emotions",
+          "title_zh": "积极情绪",
+          "route": "/zh/personality/big-five/facets/positive-emotions"
+        }
+      ]
+    }
+  ],
+  "claim_map": [
+    {
+      "claim": "The six routes are narrower descriptors under extraversion, not six personality types.",
+      "evidence_ids": [
+        "I1",
+        "A1",
+        "A4"
+      ]
+    },
+    {
+      "claim": "Interest or attention in a facet is not equivalent to ability, diagnosis, or outcome prediction.",
+      "evidence_ids": [
+        "I2",
+        "A4"
+      ]
+    },
+    {
+      "claim": "The route taxonomy must not be directly converted to BFI-2 facets or BFAS aspects.",
+      "evidence_ids": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    }
+  ],
+  "facet_boundaries": {
+    "warmth": {
+      "title_zh": "热情",
+      "construct_summary": "在一对一或小范围互动中主动表达亲近、关心和友好情感的通常倾向",
+      "explicit_non_equivalence": "它不等于同理心、善良、宜人性、恋爱意愿或人际能力。表达亲近较少的人仍可能深切关心他人，表达热情较多也不保证理解对方需要"
+    },
+    "gregariousness": {
+      "title_zh": "合群性",
+      "construct_summary": "对与多人相处、加入群体活动和从共同在场中获得刺激的通常偏好程度",
+      "explicit_non_equivalence": "它不等于社交技巧、人缘、孤独、社交焦虑或是否喜欢某个人。想参加群体和能否处理复杂社交是不同问题，独处偏好也不是关系缺失"
+    },
+    "assertiveness": {
+      "title_zh": "表达主导性",
+      "construct_summary": "在群体中主动说出观点、提出方向、影响讨论或承担带领角色的通常倾向",
+      "explicit_non_equivalence": "它不等于攻击性、权力欲、自信、专业正确或领导能力。说得早和说得响不能证明判断更好，较少发言也不代表没有观点或不能领导"
+    },
+    "activity": {
+      "title_zh": "活跃度",
+      "construct_summary": "对较快生活节奏、同时推进事务和保持身体或行动忙碌的通常偏好程度",
+      "explicit_non_equivalence": "它不等于体能、健康、生产力、勤奋或 ADHD。忙碌不保证产生价值，节奏较慢也不表示懒惰；临床或身体状态需要独立证据"
+    },
+    "excitement-seeking": {
+      "title_zh": "刺激寻求",
+      "construct_summary": "对新鲜、强烈、快速或高刺激体验的通常兴趣和接近倾向",
+      "explicit_non_equivalence": "它不等于鲁莽、勇敢、成瘾、冒险结果或违法倾向。喜欢刺激的人可以严格管理风险，偏好低刺激的人也可能在有意义时承担重大挑战"
+    },
+    "positive-emotions": {
+      "title_zh": "积极情绪",
+      "construct_summary": "体验并表达愉快、兴奋、活力和庆祝感的通常频率与明显程度",
+      "explicit_non_equivalence": "它不等于乐观判断、心理健康、幸福水平、善良或没有负面情绪。表达较少不能诊断抑郁，表达较多也不表示没有压力或困难"
+    }
+  },
+  "limitations": [
+    "The frozen CMS taxonomy is NEO/IPIP-like; it is not claimed as the single universal Big Five facet standard.",
+    "No proprietary assessment items, scoring keys, norms, or copyrighted manual text are reproduced.",
+    "No reliability, validity, percentile, clinical, hiring, admission, salary, relationship-outcome, or deterministic career claim is made.",
+    "GSC_EVIDENCE_PENDING: this package is content-authority preparation, not a search-performance claim."
+  ]
+}
