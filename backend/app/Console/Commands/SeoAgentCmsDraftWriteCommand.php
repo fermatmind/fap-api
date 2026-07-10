@@ -371,7 +371,7 @@ final class SeoAgentCmsDraftWriteCommand extends Command
             'revision_status' => CmsTranslationRevision::STATUS_DRAFT,
             'source_version_hash' => $page->source_version_hash,
             'translated_from_version_hash' => $page->translated_from_version_hash,
-            'payload_json' => $this->revisionPayload($proposal, $packageSha, $targetFields),
+            'payload_json' => $this->revisionPayload($proposal, $packageSha, $targetFields, $page),
             'supersedes_revision_id' => $page->working_revision_id ? (int) $page->working_revision_id : null,
             'created_by_admin_id' => null,
             'reviewed_at' => null,
@@ -409,8 +409,12 @@ final class SeoAgentCmsDraftWriteCommand extends Command
      * @param  list<string>  $targetFields
      * @return array<string, mixed>
      */
-    private function revisionPayload(array $proposal, string $packageSha, array $targetFields): array
-    {
+    private function revisionPayload(
+        array $proposal,
+        string $packageSha,
+        array $targetFields,
+        ?ContentPage $contentPage = null
+    ): array {
         $proposalPayload = [
             'safe_path' => (string) ($proposal['safe_path'] ?? ''),
             'proposed_seo_title' => $proposal['proposed_seo_title'] ?? null,
@@ -426,17 +430,29 @@ final class SeoAgentCmsDraftWriteCommand extends Command
             }
         }
 
+        $seoAgent = [
+            'task' => self::TASK,
+            'package_sha256' => $packageSha,
+            'subject_ref' => (string) ($proposal['subject_ref'] ?? ''),
+            'target_fields' => $targetFields,
+            'claim_gate_required' => true,
+            'human_approval_required' => true,
+            'publish_allowed' => false,
+            'search_submit_allowed' => false,
+            'indexing_request_allowed' => false,
+        ];
+
+        if ($contentPage instanceof ContentPage) {
+            $seoAgent['content_page_gate_provenance'] = $contentPage->seoAgentPublishGateProvenance();
+        }
+
+        if (is_array($proposal['review_provenance'] ?? null)) {
+            $seoAgent['review_provenance'] = $proposal['review_provenance'];
+        }
+
         return [
             'seo_agent' => [
-                'task' => self::TASK,
-                'package_sha256' => $packageSha,
-                'subject_ref' => (string) ($proposal['subject_ref'] ?? ''),
-                'target_fields' => $targetFields,
-                'claim_gate_required' => true,
-                'human_approval_required' => true,
-                'publish_allowed' => false,
-                'search_submit_allowed' => false,
-                'indexing_request_allowed' => false,
+                ...$seoAgent,
             ],
             'proposal' => $proposalPayload,
         ];

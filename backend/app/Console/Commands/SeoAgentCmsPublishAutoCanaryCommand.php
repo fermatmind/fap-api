@@ -306,11 +306,12 @@ final class SeoAgentCmsPublishAutoCanaryCommand extends Command
 
         if ($execute) {
             $input['--confirm-package-sha256'] = $packageSha;
+            $input['--confirm-draft-write-evidence-sha256'] = hash_file('sha256', $evidencePath) ?: '';
             $input['--auto-approve-low-risk'] = true;
             $input['--execute'] = true;
         }
 
-        $buffer = new BufferedOutput();
+        $buffer = new BufferedOutput;
         $exitCode = $command->run(new ArrayInput($input), $buffer);
         $summary = json_decode(trim($buffer->fetch()), true);
         if (! is_array($summary)) {

@@ -330,6 +330,10 @@ final class SeoAgentArticleCmsPublishCanaryCommand extends Command
             if (($gateVerdict['gate_status'] ?? null) !== 'publish_ready') {
                 $issues[] = 'publish_gate_not_ready';
             }
+            $expectedPhrase = 'I explicitly approve production CMS publish canary for '.$target.' revision '.$revisionId.' using write evidence sha256 '.$writeSha.'; no URL Truth, no sitemap, no IndexNow, no search, no indexing, no scheduler.';
+            if (! hash_equals($expectedPhrase, (string) ($gateVerdict['publish_approval_phrase'] ?? ''))) {
+                $issues[] = 'publish_gate_approval_phrase_evidence_mismatch';
+            }
         }
 
         $articleId = $this->idFromSubjectRef($target, 'article');
@@ -381,10 +385,7 @@ final class SeoAgentArticleCmsPublishCanaryCommand extends Command
             }
         }
 
-        $requiredPhrase = (string) data_get($gateVerdict, 'publish_approval_phrase', '');
-        if ($requiredPhrase === '') {
-            $requiredPhrase = 'I explicitly approve production CMS publish canary for '.$target.' revision '.$revisionId.' using write evidence sha256 '.$writeSha.'; no URL Truth, no sitemap, no IndexNow, no search, no indexing, no scheduler.';
-        }
+        $requiredPhrase = 'I explicitly approve production CMS publish canary for '.$target.' revision '.$revisionId.' using write evidence sha256 '.$writeSha.'; no URL Truth, no sitemap, no IndexNow, no search, no indexing, no scheduler.';
 
         return [
             'issues' => array_values(array_unique($issues)),

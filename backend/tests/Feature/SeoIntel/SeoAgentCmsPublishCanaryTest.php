@@ -53,6 +53,7 @@ final class SeoAgentCmsPublishCanaryTest extends TestCase
             '--draft-write-evidence' => $draftEvidencePath,
             '--limit' => 1,
             '--confirm-package-sha256' => $packageSha,
+            '--confirm-draft-write-evidence-sha256' => hash_file('sha256', $draftEvidencePath) ?: '',
             '--auto-approve-low-risk' => true,
             '--execute' => true,
             '--json' => true,
@@ -88,6 +89,7 @@ final class SeoAgentCmsPublishCanaryTest extends TestCase
             '--draft-write-evidence' => $draftEvidencePath,
             '--limit' => 1,
             '--confirm-package-sha256' => $packageSha,
+            '--confirm-draft-write-evidence-sha256' => hash_file('sha256', $draftEvidencePath) ?: '',
             '--auto-approve-low-risk' => true,
             '--execute' => true,
             '--json' => true,
@@ -139,6 +141,41 @@ final class SeoAgentCmsPublishCanaryTest extends TestCase
         $summary = json_decode(trim(Artisan::output()), true);
         $this->assertSame(1, $exitCode);
         $this->assertContains('article_publish_canary_not_supported_in_v1', $summary['issues'] ?? []);
+    }
+
+    #[Test]
+    public function dry_run_blocks_mismatched_draft_ref_and_stale_content_page_gate_provenance(): void
+    {
+        $page = $this->createContentPage();
+        [$packagePath, $draftEvidencePath] = $this->createPackageAndDraftEvidence($page);
+        $draftEvidence = $this->readJson($draftEvidencePath);
+        $draftEvidence['affected_refs'][0]['revision_id'] = 999999;
+        File::put($draftEvidencePath, json_encode($draftEvidence, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)."\n");
+
+        $exitCode = Artisan::call('seo-agent:cms-publish-canary', [
+            '--package' => $packagePath,
+            '--draft-write-evidence' => $draftEvidencePath,
+            '--limit' => 1,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('draft_write_subject_revision_evidence_mismatch', data_get($summary, 'plan.issue'));
+
+        [$packagePath, $draftEvidencePath] = $this->createPackageAndDraftEvidence($page);
+        $page->forceFill(['path' => '/zh/content-page-candidate-updated'])->save();
+
+        $exitCode = Artisan::call('seo-agent:cms-publish-canary', [
+            '--package' => $packagePath,
+            '--draft-write-evidence' => $draftEvidencePath,
+            '--limit' => 1,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('content_page_gate_provenance_mismatch', data_get($summary, 'plan.issue'));
     }
 
     #[Test]
@@ -206,7 +243,7 @@ final class SeoAgentCmsPublishCanaryTest extends TestCase
             'execution_permission' => false,
         ], $proposalOverrides);
 
-        $packagePath = $this->writeJson('seo-agent-cms-draft-package-', [
+        $sourcePackagePath = $this->writeJson('seo-agent-cms-draft-package-source-', [
             'schema_version' => 'seo-agent-cms-draft-package-dry-run.v1',
             'dry_run' => true,
             'cms_write_allowed' => false,
@@ -217,6 +254,46 @@ final class SeoAgentCmsPublishCanaryTest extends TestCase
             'human_approval_required' => true,
         ]);
 
+        $reviewPath = $this->writeJson('seo-agent-l5a-candidate-review-', [
+            'schema_version' => 'seo-agent-l5a-candidate-review.v1',
+            'status' => 'success',
+            'selected_count' => 1,
+            'selected_candidate' => $proposal,
+            'input_artifacts' => [
+                'cms_draft_package_dry_run' => [
+                    'sha256' => hash_file('sha256', $sourcePackagePath) ?: '',
+                ],
+            ],
+        ]);
+        $reviewSha = hash_file('sha256', $reviewPath) ?: '';
+        $sourcePackageSha = hash_file('sha256', $sourcePackagePath) ?: '';
+        $proposal['review_provenance'] = [
+            'candidate_review_sha256' => $reviewSha,
+            'source_package_sha256' => $sourcePackageSha,
+            'selected_subject_ref' => (string) ($proposal['subject_ref'] ?? ''),
+            'selected_safe_path' => (string) ($proposal['safe_path'] ?? ''),
+        ];
+        $packagePath = $this->writeJson('seo-agent-cms-draft-package-', [
+            'schema_version' => 'seo-agent-cms-draft-package-dry-run.v1',
+            'dry_run' => true,
+            'cms_write_allowed' => false,
+            'execution_permission' => false,
+            'proposal_count' => 1,
+            'proposal_items' => [$proposal],
+            'claim_gate_required' => true,
+            'human_approval_required' => true,
+            'l5a_canary' => [
+                'candidate_review' => [
+                    'path' => $reviewPath,
+                    'sha256' => $reviewSha,
+                    'schema_version' => 'seo-agent-l5a-candidate-review.v1',
+                ],
+                'source_package_sha256' => $sourcePackageSha,
+                'selected_subject_ref' => (string) ($proposal['subject_ref'] ?? ''),
+                'selected_safe_path' => (string) ($proposal['safe_path'] ?? ''),
+            ],
+        ]);
+
         if (($proposal['target_model'] ?? '') === 'content_page') {
             $exitCode = Artisan::call('seo-agent:cms-draft-write', [
                 '--package' => $packagePath,
@@ -225,6 +302,7 @@ final class SeoAgentCmsPublishCanaryTest extends TestCase
                 '--execute' => true,
                 '--json' => true,
             ]);
+            $draftWriteSummary = json_decode(trim(Artisan::output()), true);
             $this->assertSame(0, $exitCode, Artisan::output());
             $draftEvidence = [
                 'schema_version' => 'seo-agent-controlled-cms-draft-write.v1',
@@ -236,6 +314,7 @@ final class SeoAgentCmsPublishCanaryTest extends TestCase
                 'writes_attempted' => true,
                 'writes_committed' => true,
                 'rows_created' => 1,
+                'affected_refs' => (array) ($draftWriteSummary['affected_refs'] ?? []),
                 'negative_guarantees' => [
                     'cms_publish' => false,
                     'search_channel_submit' => false,

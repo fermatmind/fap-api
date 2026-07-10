@@ -172,6 +172,26 @@ final class SeoAgentL5aCmsDraftWriteCanaryTest extends TestCase
         $this->assertSame(0, CmsTranslationRevision::query()->count());
     }
 
+    #[Test]
+    public function candidate_review_with_mismatched_source_package_hash_is_rejected(): void
+    {
+        $page = $this->createContentPage();
+        [$candidateReviewPath, , $candidateReview] = $this->writeCandidateReview($page);
+        data_set($candidateReview, 'input_artifacts.cms_draft_package_dry_run.sha256', str_repeat('0', 64));
+        File::put($candidateReviewPath, json_encode($candidateReview, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)."\n");
+
+        $exitCode = Artisan::call('seo-agent:l5a-cms-draft-write-canary', [
+            '--candidate-review' => $candidateReviewPath,
+            '--limit' => 1,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('source_draft_package_missing', $summary['issues'] ?? []);
+        $this->assertSame(0, CmsTranslationRevision::query()->count());
+    }
+
     private function createContentPage(): ContentPage
     {
         return ContentPage::query()->create([

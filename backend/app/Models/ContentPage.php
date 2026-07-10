@@ -177,6 +177,24 @@ final class ContentPage extends Model
         return true;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
+    public function seoAgentPublishGateProvenance(): array
+    {
+        return [
+            'content_page_id' => (int) $this->id,
+            'org_id' => (int) $this->org_id,
+            'locale' => (string) $this->locale,
+            'safe_path' => (string) $this->path,
+            'source_version_hash' => (string) ($this->source_version_hash ?? ''),
+            'working_revision_id' => $this->working_revision_id ? (int) $this->working_revision_id : null,
+            'published_revision_id' => $this->published_revision_id ? (int) $this->published_revision_id : null,
+            'status' => (string) $this->status,
+            'is_public' => (bool) $this->is_public,
+        ];
+    }
+
     protected static function booted(): void
     {
         self::saving(function (self $page): void {

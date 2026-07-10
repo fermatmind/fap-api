@@ -240,6 +240,40 @@ final class SeoAgentCmsPublishAutoCanaryTest extends TestCase
             ], $overrides[$index] ?? []);
         }
 
+        $sourcePackagePath = $this->writeJson('seo-agent-cms-draft-package-source-', [
+            'schema_version' => 'seo-agent-cms-draft-package-dry-run.v1',
+            'dry_run' => true,
+            'cms_write_allowed' => false,
+            'execution_permission' => false,
+            'proposal_count' => count($proposals),
+            'proposal_items' => $proposals,
+            'claim_gate_required' => true,
+            'human_approval_required' => true,
+        ]);
+
+        $reviewPath = $this->writeJson('seo-agent-l5a-candidate-review-', [
+            'schema_version' => 'seo-agent-l5a-candidate-review.v1',
+            'status' => 'success',
+            'selected_count' => count($proposals),
+            'selected_candidates' => $proposals,
+            'input_artifacts' => [
+                'cms_draft_package_dry_run' => [
+                    'sha256' => hash_file('sha256', $sourcePackagePath) ?: '',
+                ],
+            ],
+        ]);
+        $reviewSha = hash_file('sha256', $reviewPath) ?: '';
+        $sourcePackageSha = hash_file('sha256', $sourcePackagePath) ?: '';
+        $proposals = array_map(static function (array $proposal) use ($reviewSha, $sourcePackageSha): array {
+            $proposal['review_provenance'] = [
+                'candidate_review_sha256' => $reviewSha,
+                'source_package_sha256' => $sourcePackageSha,
+                'selected_subject_ref' => (string) ($proposal['subject_ref'] ?? ''),
+                'selected_safe_path' => (string) ($proposal['safe_path'] ?? ''),
+            ];
+
+            return $proposal;
+        }, $proposals);
         $packagePath = $this->writeJson('seo-agent-cms-draft-package-', [
             'schema_version' => 'seo-agent-cms-draft-package-dry-run.v1',
             'dry_run' => true,
@@ -249,6 +283,14 @@ final class SeoAgentCmsPublishAutoCanaryTest extends TestCase
             'proposal_items' => $proposals,
             'claim_gate_required' => true,
             'human_approval_required' => true,
+            'l5a_canary' => [
+                'candidate_review' => [
+                    'path' => $reviewPath,
+                    'sha256' => $reviewSha,
+                    'schema_version' => 'seo-agent-l5a-candidate-review.v1',
+                ],
+                'source_package_sha256' => $sourcePackageSha,
+            ],
         ]);
 
         $packageSha = hash_file('sha256', $packagePath) ?: '';
@@ -260,6 +302,7 @@ final class SeoAgentCmsPublishAutoCanaryTest extends TestCase
                 '--execute' => true,
                 '--json' => true,
             ]);
+            $draftWriteSummary = json_decode(trim(Artisan::output()), true);
             $this->assertSame(0, $exitCode, Artisan::output());
             $draftEvidence = [
                 'schema_version' => 'seo-agent-controlled-cms-draft-write.v1',
@@ -271,6 +314,7 @@ final class SeoAgentCmsPublishAutoCanaryTest extends TestCase
                 'writes_attempted' => true,
                 'writes_committed' => true,
                 'rows_created' => count($proposals),
+                'affected_refs' => (array) ($draftWriteSummary['affected_refs'] ?? []),
                 'negative_guarantees' => [
                     'cms_publish' => false,
                     'search_channel_submit' => false,
