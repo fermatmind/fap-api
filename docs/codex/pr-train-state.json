@@ -42991,6 +42991,10 @@
         "evidence": "73 tests passed with 1227 assertions across SEO package import, Science draft dry-run/import, controlled ContentPage revision writing, and controlled publish source gates.",
         "status": "pass"
       },
+      "github_required_checks": {
+        "evidence": "PR #2862 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, and Semgrep blocking secrets.",
+        "status": "pass"
+      },
       "local_ci": {
         "evidence": "bash backend/scripts/ci_verify_mbti.sh passed on latest origin/main, including Big Five, Enneagram, MBTI E2E, OpenAPI, migration safety, auth, order, dependency, and regression gates.",
         "status": "pass"
@@ -43009,7 +43013,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "276cb1653c0054e9acad484553bdbbff7ec3b381",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -43017,6 +43021,11 @@
     ],
     "deploy_allowed": false,
     "events": [
+      {
+        "at": "2026-07-10T15:55:23+08:00",
+        "note": "PR #2862 squash merged at 276cb1653c0054e9acad484553bdbbff7ec3b381 after all required checks passed. origin/main contains the merge commit, local main is synchronized and clean, and the implementation branch was deleted locally and remotely. No staging wait, CMS write, manual deploy, or production deploy was performed.",
+        "status": "merged"
+      },
       {
         "at": "2026-07-10T15:48:00+08:00",
         "note": "API18 local validation passed on origin/main 843cddf93: Pint, 73 focused tests / 1227 assertions, route list, fresh SQLite migration, full ci_verify_mbti, metadata parsing, and allowed-path scope validation. No production or CMS action executed.",
@@ -43040,14 +43049,14 @@
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-18",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T15:55:23+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2862",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-18: harden CMS draft package import validation",
     "train_scope": "security_169_fap_api_audit"
   },
