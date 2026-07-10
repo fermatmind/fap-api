@@ -200,9 +200,9 @@
     "depends_on": [
       "ENNEAGRAM-EN13-SITEMAP-LOCALE-01"
     ],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2867",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -83239,6 +83239,12 @@
         "from": "local_checks_passed",
         "to": "committed",
         "note": "Committed the scoped audit, validator, and current-PR-only manifest/state registration."
+      },
+      {
+        "at": "2026-07-10T08:32:48Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2867 for the locked audit scope; required GitHub checks are pending."
       }
     ]
   }
