@@ -118,7 +118,12 @@ jobs:
             "DEPLOY_PATH=$q_deploy_path RELEASE_SHA=$q_release_sha PACKAGE_PATH=$q_package_path QA_PATH=$q_qa_path PACKAGE_SHA=$q_package_sha QA_SHA=$q_qa_sha RUN_DIR=$q_run_dir bash -s" <<'REMOTE'
           set -euo pipefail
           cd "$DEPLOY_PATH/current"
-          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+          if [ -f REVISION ]; then
+            deployed_sha="$(tr -d '\r\n' < REVISION)"
+          else
+            deployed_sha="$(git rev-parse HEAD)"
+          fi
+          test "$deployed_sha" = "$RELEASE_SHA"
           cd backend
           test -f artisan
           test -r "../$PACKAGE_PATH"
