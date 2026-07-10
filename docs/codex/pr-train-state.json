@@ -43279,18 +43279,23 @@
         "at": "2026-07-10T17:34:41+08:00",
         "note": "Scoped implementation, focused regressions, fresh migration, route listing, OpenAPI synchronization, full CI, and scope validation passed.",
         "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-10T17:38:06+08:00",
+        "note": "Opened PR #2872 from the scoped API21 branch after rebasing onto latest origin/main.",
+        "status": "pr_open"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-21",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2872",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "SECURITY-169-API-21: harden ops access, TOTP, and dashboard inputs",
     "train_scope": "security_169_fap_api_audit"
   },
