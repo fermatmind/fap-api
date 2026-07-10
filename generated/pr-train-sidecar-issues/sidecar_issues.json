@@ -254,5 +254,15 @@
         "required_checks_affected": false,
         "recommended_follow_up": "Provide fresh exact authorization for RIASEC-ZH-TEST-LANDING-FAQ-PARITY-READBACK-01 before running runtime parity readback.",
         "train_continued": true
+    },
+    {
+        "repo": "fap-api",
+        "pr_id": "MBTI-CMS-27",
+        "branch": "codex/mbti-cms-27-content15-production-import",
+        "blocker_type": "production_runtime_database_access_unavailable_locally",
+        "evidence": "APP_ENV=production dry-run reached package preflight but failed resolving the first CMS target because the local production configuration points to 127.0.0.1:3306/fap_api without a configured MySQL credential. Repository inspection also found no MBTI CONTENT-15 production import workflow or existing remote runner; the only production import workflow is career-content-production-import.yml.",
+        "why_not_current_pr_scope": "Production credentials, runtime availability, deployment, and a production runner are environment ownership concerns. This PR must not change secrets, deployment, database configuration, or create a deployment workflow.",
+        "required_checks_affected": true,
+        "recommended_follow_up": "Merge the fail-closed importer capability through a separately validated code-delivery path, then obtain a platform-owner approved production runner or use an already-approved deployed runtime. Run the exact production dry-run with the authorized package values; only then run the exact write command and MBTI-CMS-28 read-only verification."
     }
 ]

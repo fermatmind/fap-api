@@ -82408,13 +82408,13 @@
     "depends_on": [
       "MBTI-CMS-26"
     ],
-    "status": "pr_open",
-    "commit_sha": null,
+    "status": "merged",
+    "commit_sha": "ec2581dd7de4ba872fe6f66b3e7ea33e9b7a1fc8",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2785",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-06T06:36:51Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -82465,8 +82465,8 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": false
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -82498,6 +82498,99 @@
         "from": "current_scope_ci_fix_local_checks_passed",
         "to": "ready_to_merge",
         "note": "GitHub checks passed for PR #2785 after the scoped classifier fix. Ready for squash merge under the PR train merge policy; no production CMS write, sitemap/llms/indexability release, GSC submission, staging deploy wait, manual deploy, or production deploy was performed."
+      },
+      {
+        "at": "2026-07-06T06:36:51Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2785 was squash merged with merge commit ec2581dd7de4ba872fe6f66b3e7ea33e9b7a1fc8. origin/main contains the merge commit; the remote branch and isolated local task worktree were removed."
+      }
+    ]
+  },
+  "MBTI-CMS-27A": {
+    "id": "MBTI-CMS-27A",
+    "repo": "fap-api",
+    "title": "MBTI-CMS-27A: deliver fail-closed CONTENT-15 CMS importer",
+    "base": "main",
+    "branch": "codex/mbti-cms-27a-importer-code-delivery",
+    "depends_on": [
+      "MBTI-CMS-26B"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "b3bd52c37a4bc22d0f7e950734009085291ee20c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2838",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The operator explicitly authorized MBTI-CMS-27A for fail-closed importer code delivery before any production write or deployment."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "MBTI-CMS-26B merged as PR #2785 with merge commit ec2581dd7de4ba872fe6f66b3e7ea33e9b7a1fc8."
+      },
+      "production_execution": {
+        "status": "held",
+        "evidence": "CMS-27A is code delivery only. The exact production deployment SHA and production CMS write remain deferred to MBTI-CMS-27 after this PR merges."
+      },
+      "local_validation": {
+        "status": "pass_with_phpunit_warnings",
+        "command": "php -l importer files && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityMbtiContent15ProductionImportCommandTest|PersonalityMbtiContent15MixedImportPreflightCommandTest|MbtiCrossTypeComparisonAuthorityReadModelTest' --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight ... --dry-run --json && vendor/bin/pint --test importer files",
+        "evidence": "PASS: SQLite migrations completed; focused tests passed with 126 assertions; real CMS-22/CMS-23 package preflight returned 9 rows including 4 cross-type comparisons without writes; Pint passed. PHPUnit warnings were missing local .env/path warnings, not assertion failures."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the authorized importer command, service, test, PR-train metadata, and sidecar record."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2838 required checks are green after the scoped classifier fix: verify-bigfive, verify-mbti-v2, verify-mbti-legacy, content-pack-build-validate, hygiene, supply-chain, and Code Scanning passed."
+      },
+      "runtime_freeze_ci_fix": {
+        "status": "pass_with_phpunit_warnings",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-ci-bigfive-local.sqlite QUEUE_CONNECTION=sync FAP_PACKS_DRIVER=local FAP_PACKS_ROOT=$PWD/content_packages CONTENT_LOADER_CACHE_STORE=array MBTI_RESPONSE_CACHE_STORE=array php artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi",
+        "evidence": "PASS: added the two fail-closed importer files to the Big Five runtime-freeze classifier and a regression test. The CI-equivalent Big Five suite passed locally; PHPUnit emitted known local .env/path warnings only."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Split fail-closed importer code delivery from MBTI-CMS-27 production execution. This PR does not write CMS content or deploy."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "The fail-closed importer command/service and regression tests passed syntax, SQLite migration, focused test, real package preflight, Pint, manifest parse, diff, and scope validation. Importer code commit: 50e9ea0b6bdfcb2792030a0578c22ad7bfa43ea9."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened PR #2838 for MBTI-CMS-27A. Required GitHub checks must pass before merge; no production deployment or CMS write is part of this PR."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "pr_open",
+        "to": "current_scope_ci_fix_local_checks_passed",
+        "note": "Inspected verify-bigfive failure. The two new importer files were not recognized as non-runtime by the shared Big Five classifier. Added a scoped allowlist and regression test; focused and CI-equivalent Big Five validation passed locally."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "current_scope_ci_fix_local_checks_passed",
+        "to": "ready_to_merge",
+        "note": "PR #2838 required GitHub checks are green. Revalidated the authorized changed-file scope before squash merge; production deployment and CMS write remain outside this code-delivery PR."
       }
     ]
   },
@@ -82508,12 +82601,13 @@
     "base": "main",
     "branch": "codex/mbti-cms-27-content15-production-import",
     "depends_on": [
-      "MBTI-CMS-26B"
+      "MBTI-CMS-26B",
+      "MBTI-CMS-27A"
     ],
     "status": "blocked_dependency",
     "commit_sha": null,
     "pr_url": null,
-    "failure_reason": "Production CMS write is explicitly blocked until MBTI-CMS-26B merges and provides cross-type comparison backend authority storage/readmodel support. The operator has provided the exact MBTI-CMS-27 authorization values, but import execution must wait for this prerequisite.",
+    "failure_reason": "Waiting for MBTI-CMS-27A importer code delivery to merge. Production execution also remains held until an exact deployed SHA and platform-owner approved production runner are available.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -82524,16 +82618,26 @@
       },
       "dependency": {
         "status": "blocked_dependency",
-        "evidence": "MBTI-CMS-26B has been inserted as a prerequisite for cross-type comparison authority storage before MBTI-CMS-27 production CMS import can run."
+        "evidence": "MBTI-CMS-26B is merged, but MBTI-CMS-27A must first deliver the fail-closed importer command to main."
       },
       "operator_authorization": {
-        "status": "pass_held_until_dependency",
-        "evidence": "The operator provided exact authorization values for source_package_sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb, authorization_payload_sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15, import_scope_mode=top_blocker_batch_only, and record_count=9. No production CMS write was attempted because MBTI-CMS-26B must merge first."
+        "status": "pass",
+        "evidence": "The operator provided exact authorization values for source_package_sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb, authorization_payload_sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15, import_scope_mode=top_blocker_batch_only, and record_count=9."
+      },
+      "local_importer_validation": {
+        "status": "pass_with_phpunit_warnings",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight ... --dry-run --json && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityMbtiContent15ProductionImportCommandTest|PersonalityMbtiContent15MixedImportPreflightCommandTest|MbtiCrossTypeComparisonAuthorityReadModelTest' --no-ansi && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiContent15ProductionImport.php app/Services/Cms/MbtiContent15ProductionCmsImportService.php tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php",
+        "evidence": "PASS: real CMS-22/CMS-23 package preflight returned 9 records with 4 cross-type rows; the fail-closed production importer integration tests passed with 126 assertions. PHPUnit warnings were local missing .env/path warnings, not assertion failures. Pint passed."
+      },
+      "production_runtime_dry_run": {
+        "status": "blocked_external_runtime",
+        "command": "APP_ENV=production php artisan personality:mbti-content15-production-import ... --dry-run --json",
+        "evidence": "Blocked before any write: local production configuration attempted 127.0.0.1:3306/fap_api and MySQL rejected root@localhost because no production credential is configured in this isolated worktree. Repository inspection found no MBTI CONTENT-15 production import workflow or existing remote runner; only a career-specific production import workflow exists."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": false,
       "github_checks_green": null,
       "post_merge_revalidated": false
     },
@@ -82549,6 +82653,24 @@
         "from": "blocked_needs_operator_authorization",
         "to": "blocked_dependency",
         "note": "Operator later provided exact production import authorization, but execution remains blocked until MBTI-CMS-26B merges cross-type comparison backend authority storage and readmodel support."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "blocked_dependency",
+        "to": "in_progress",
+        "note": "MBTI-CMS-26B has merged. Started the isolated CMS-27 importer implementation; production writing remains fail-closed pending its local and GitHub validation plus a production-runtime dry-run."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "in_progress",
+        "to": "blocked_external_runtime",
+        "note": "The exact operator authorization is present and focused SQLite validation passed, but the required APP_ENV=production dry-run cannot connect to a production CMS database from this local worktree. No CMS write or search/indexability release was performed; production execution remains held for a deployed runtime with credentials."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "blocked_external_runtime",
+        "to": "blocked_dependency",
+        "note": "Split importer code delivery into MBTI-CMS-27A. CMS-27 remains the exact production execution step after 27A merges and an exact deployed SHA plus approved production runner are available."
       }
     ]
   },
