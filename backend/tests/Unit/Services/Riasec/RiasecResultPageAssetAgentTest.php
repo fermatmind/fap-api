@@ -227,6 +227,64 @@ final class RiasecResultPageAssetAgentTest extends TestCase
         }
     }
 
+    public function test_audit_writes_no_go_artifacts_for_malformed_selector_asset(): void
+    {
+        $artifactRoot = $this->tempDir('riasec-result-agent-malformed-artifacts');
+        $assetRoot = $this->tempDir('riasec-result-agent-malformed-assets');
+        file_put_contents($assetRoot.'/malformed.json', '{');
+
+        try {
+            $summary = app(RiasecResultPageAssetAgent::class)->audit([
+                'run_id' => 'malformed-audit',
+                'artifact_dir' => $artifactRoot,
+                'content_asset_root' => $assetRoot,
+                'source_ledger_dir' => $this->backendPath('content_assets/riasec/result_page_v2/source_ledger'),
+            ]);
+
+            $this->assertFalse((bool) ($summary['ok'] ?? true));
+            $this->assertSame('blocked', $summary['status'] ?? null);
+            $this->assertContains('asset_inventory_invalid', $summary['strict_failures'] ?? []);
+            $this->assertFileExists($artifactRoot.'/malformed-audit/validation_report.json');
+            $this->assertStringContainsString(
+                'NO-GO for staging-only audit evidence',
+                (string) file_get_contents($artifactRoot.'/malformed-audit/go_no_go.md')
+            );
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+            $this->deleteDirectory($assetRoot);
+        }
+    }
+
+    public function test_staging_import_dry_run_writes_no_go_artifacts_for_malformed_jsonl(): void
+    {
+        $artifactRoot = $this->tempDir('riasec-result-staging-malformed-artifacts');
+        $selectorReadyRoot = $this->tempDir('riasec-result-staging-malformed-assets');
+        $packageRoot = $selectorReadyRoot.'/malformed-package';
+        mkdir($packageRoot, 0777, true);
+        file_put_contents($packageRoot.'/assets.jsonl', "{\n");
+        file_put_contents($packageRoot.'/manifest.json', '{');
+
+        try {
+            $summary = app(RiasecResultPageAssetAgent::class)->stagingImportDryRun([
+                'run_id' => 'malformed-staging-import',
+                'artifact_dir' => $artifactRoot,
+                'content_asset_root' => $selectorReadyRoot,
+            ]);
+
+            $this->assertFalse((bool) ($summary['ok'] ?? true));
+            $this->assertSame('blocked', $summary['status'] ?? null);
+            $this->assertContains('selector_ready_inventory_invalid', $summary['errors'] ?? []);
+            $this->assertFileExists($artifactRoot.'/malformed-staging-import/checksum_inventory.json');
+            $this->assertFileExists($artifactRoot.'/malformed-staging-import/go_no_go.md');
+            $inventory = $this->readJson($artifactRoot.'/malformed-staging-import/checksum_inventory.json');
+            $this->assertFalse((bool) data_get($inventory, 'packages.0.assets_valid', true));
+            $this->assertFalse((bool) data_get($inventory, 'packages.0.manifest_valid', true));
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+            $this->deleteDirectory($selectorReadyRoot);
+        }
+    }
+
     private function tempDir(string $prefix): string
     {
         $path = sys_get_temp_dir().'/'.$prefix.'-'.bin2hex(random_bytes(4));
