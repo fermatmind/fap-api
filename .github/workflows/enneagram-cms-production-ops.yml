@@ -1,0 +1,174 @@
+name: Enneagram CMS Production Ops
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Exact deployed fap-api release SHA (40 lowercase hex characters)
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: Exact SHA-bound human approval phrase
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: enneagram-cms-production-ops
+  cancel-in-progress: false
+
+jobs:
+  import-and-promote-en13:
+    name: Import and promote EN13 as noindex content
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: production
+    env:
+      DEPLOY_HOST: "139.224.130.204"
+      DEPLOY_PATH: "/var/www/fap-api"
+      DEPLOY_PORT: "22"
+      DEPLOY_USER: "ubuntu"
+      RELEASE_SHA: ${{ inputs.release_sha }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      PACKAGE_PATH: "docs/seo/personality/enneagram/content-packages/en13-cms-v1/enneagram-en13-cms-package-v1.json"
+      QA_PATH: "docs/seo/personality/enneagram/en13-content-qa-01.json"
+
+    steps:
+      - name: Validate SHA-bound approval
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "release_sha must be 40 lowercase hexadecimal characters." >&2
+            exit 2
+          fi
+          expected="Approve ENNEAGRAM-EN13 CMS import and noindex promotion for SHA ${RELEASE_SHA}"
+          if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected" ]; then
+            echo "operator_approval_phrase does not match the exact SHA-bound phrase." >&2
+            exit 2
+          fi
+
+      - name: Checkout authorized revision
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.release_sha }}
+          fetch-depth: 0
+
+      - name: Verify authorized revision belongs to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          test "$actual" = "$RELEASE_SHA"
+          git fetch --no-tags origin main
+          git merge-base --is-ancestor "$RELEASE_SHA" origin/main
+
+      - name: Hash immutable EN13 inputs
+        id: inputs_hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -r "$PACKAGE_PATH"
+          test -r "$QA_PATH"
+          echo "package_sha=$(sha256sum "$PACKAGE_PATH" | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          echo "qa_sha=$(sha256sum "$QA_PATH" | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Import and promote EN13 without release side effects
+        shell: bash
+        env:
+          PACKAGE_SHA: ${{ steps.inputs_hash.outputs.package_sha }}
+          QA_SHA: ${{ steps.inputs_hash.outputs.qa_sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          target="$DEPLOY_USER@$DEPLOY_HOST"
+          run_dir="/tmp/enneagram-cms-ops-${GITHUB_RUN_ID}"
+
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_release_sha '%q' "$RELEASE_SHA"
+          printf -v q_package_path '%q' "$PACKAGE_PATH"
+          printf -v q_qa_path '%q' "$QA_PATH"
+          printf -v q_package_sha '%q' "$PACKAGE_SHA"
+          printf -v q_qa_sha '%q' "$QA_SHA"
+          printf -v q_run_dir '%q' "$run_dir"
+
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$target" \
+            "DEPLOY_PATH=$q_deploy_path RELEASE_SHA=$q_release_sha PACKAGE_PATH=$q_package_path QA_PATH=$q_qa_path PACKAGE_SHA=$q_package_sha QA_SHA=$q_qa_sha RUN_DIR=$q_run_dir bash -s" <<'REMOTE'
+          set -euo pipefail
+          cd "$DEPLOY_PATH/current"
+          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+          cd backend
+          test -f artisan
+          test -r "../$PACKAGE_PATH"
+          test -r "../$QA_PATH"
+          printf '%s  %s\n' "$PACKAGE_SHA" "../$PACKAGE_PATH" | sha256sum -c -
+          printf '%s  %s\n' "$QA_SHA" "../$QA_PATH" | sha256sum -c -
+          mkdir -p "$RUN_DIR"
+
+          php artisan personality:enneagram-cms-draft \
+            --package="../$PACKAGE_PATH" --qa="../$QA_PATH" --dry-run --json \
+            --output="$RUN_DIR/draft-dry-run.json" >/dev/null
+
+          php artisan personality:enneagram-cms-draft \
+            --package="../$PACKAGE_PATH" --qa="../$QA_PATH" --write --update-existing --json \
+            --draft-only --no-publish --no-index --no-sitemap --no-llms --no-search-release \
+            --operator-approved=ENNEAGRAM-CMS-DRAFT-WRITER-CONTRACT-01 \
+            --output="$RUN_DIR/draft-write.json" >/dev/null
+
+          php artisan personality:enneagram-cms-promote \
+            --package="../$PACKAGE_PATH" --write --json \
+            --promote-live-content --no-publish --no-index --no-sitemap --no-llms --no-search-release \
+            --operator-approved=ENNEAGRAM-CMS-PROMOTION-CONTRACT-01 \
+            --output="$RUN_DIR/promote-write.json" >/dev/null
+
+          jq -n \
+            --arg release_sha "$RELEASE_SHA" \
+            --arg package_sha "$PACKAGE_SHA" \
+            --arg qa_sha "$QA_SHA" \
+            --slurpfile dry "$RUN_DIR/draft-dry-run.json" \
+            --slurpfile draft "$RUN_DIR/draft-write.json" \
+            --slurpfile promote "$RUN_DIR/promote-write.json" \
+            '{release_sha:$release_sha,package_sha256:$package_sha,qa_sha256:$qa_sha, dry_run:($dry[0]|{ok,status,row_count,writes_attempted,writes_committed,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,errors}), draft_write:($draft[0]|{ok,status,row_count,created_asset_count,updated_asset_count,skipped_existing_count,writes_committed,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,errors}), promote_write:($promote[0]|{ok,status,row_count,promoted_count,skipped_existing_count,writes_committed,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,errors})}' \
+            > "$RUN_DIR/summary.json"
+          REMOTE
+
+          scp -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -P "$DEPLOY_PORT" "$target:$run_dir/summary.json" artifacts/summary.json
+          jq -e '
+            .dry_run.ok == true and .dry_run.row_count == 13 and .dry_run.writes_attempted == false and
+            .draft_write.ok == true and .draft_write.row_count == 13 and .draft_write.writes_committed == true and
+            ((.draft_write.created_asset_count + .draft_write.updated_asset_count + .draft_write.skipped_existing_count) == 13) and
+            .promote_write.ok == true and .promote_write.row_count == 13 and
+            ((.promote_write.promoted_count + .promote_write.skipped_existing_count) == 13) and
+            all([.draft_write, .promote_write][]; .publish_attempted == false and .index_attempted == false and .sitemap_llms_release_attempted == false and .search_release_attempted == false and (.errors | length) == 0)
+          ' artifacts/summary.json >/dev/null
+
+      - name: Upload redacted operation summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: enneagram-cms-production-ops-summary
+          path: artifacts/summary.json
+          if-no-files-found: warn
