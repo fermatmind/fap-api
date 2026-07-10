@@ -1,0 +1,176 @@
+{
+  "package": "big-five-zh-facet-conscientiousness-source-ledger-2026-07-10",
+  "access_date": "2026-07-10",
+  "scope": "Six Chinese conscientiousness Facet content packages only.",
+  "inherits": {
+    "path": "generated/big-five-zh-facet-hub-content-repair/source_ledger.json",
+    "package": "big-five-zh-facet-shared-source-ledger-2026-07-10"
+  },
+  "sources": [
+    {
+      "id": "I1",
+      "type": "internal",
+      "reference": "backend/content_assets/personality_public/big_five_v1_seed.json",
+      "use": "Frozen CMS field shape, current Chinese route keys, locale, launch state, robots, and 5×6 taxonomy labels.",
+      "limitation": "The existing short body copy is an input to audit, not an authority for new academic claims."
+    },
+    {
+      "id": "I2",
+      "type": "internal",
+      "reference": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+      "use": "Non-diagnostic, non-deterministic, non-screening public claim boundaries."
+    },
+    {
+      "id": "I3",
+      "type": "internal",
+      "reference": "generated/big-five-zh-legacy-route-audit/legacy_route_audit.json",
+      "use": "Frozen V2 public route family and duplicate-route boundary."
+    },
+    {
+      "id": "A1",
+      "type": "official_research_resource",
+      "title": "NEO Facets Table",
+      "author_or_source": "International Personality Item Pool, Oregon Research Institute",
+      "year": null,
+      "url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+      "accessed_at": "2026-07-10",
+      "claim": "Documents corresponding IPIP scales for the 30 NEO-PI-R facet constructs.",
+      "limitation": "IPIP scales measure similar constructs; this does not make them identical to proprietary NEO scales or authorize score conversion."
+    },
+    {
+      "id": "A2",
+      "type": "peer_reviewed",
+      "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets",
+      "author_or_source": "Soto, C. J., & John, O. P.",
+      "year": 2017,
+      "doi": "10.1037/pspp0000096",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+      "accessed_at": "2026-07-10",
+      "claim": "Supports a hierarchical domain-and-facet reading of Big Five traits using 15 facets.",
+      "limitation": "BFI-2 has 15 facets, not the 30-facet taxonomy used for this CMS route set."
+    },
+    {
+      "id": "A3",
+      "type": "peer_reviewed",
+      "title": "Between facets and domains: 10 aspects of the Big Five",
+      "author_or_source": "DeYoung, C. G., Quilty, L. C., & Peterson, J. B.",
+      "year": 2007,
+      "doi": "10.1037/0022-3514.93.5.880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
+      "accessed_at": "2026-07-10",
+      "claim": "Shows an alternative intermediate hierarchy with two aspects per domain.",
+      "limitation": "The ten aspects are not interchangeable with either BFI-2 facets or NEO/IPIP 30 facets."
+    },
+    {
+      "id": "A4",
+      "type": "academic_review",
+      "title": "Paradigm Shift to the Integrative Big Five Trait Taxonomy: History, Measurement, and Conceptual Issues",
+      "author_or_source": "John, O. P., Naumann, L. P., & Soto, C. J.",
+      "year": 2008,
+      "reference": "In Handbook of Personality: Theory and Research (3rd ed.), pp. 114–158.",
+      "claim": "Supports broad Big Five taxonomy framing and continuous trait language.",
+      "limitation": "No individual prediction, numeric validity, or universal facet naming claim is taken from this review."
+    }
+  ],
+  "taxonomy": [
+    {
+      "domain_code": "conscientiousness",
+      "domain_title_zh": "尽责性",
+      "facets": [
+        {
+          "code": "competence",
+          "title_zh": "胜任感",
+          "route": "/zh/personality/big-five/facets/competence"
+        },
+        {
+          "code": "order",
+          "title_zh": "条理性",
+          "route": "/zh/personality/big-five/facets/order"
+        },
+        {
+          "code": "dutifulness",
+          "title_zh": "责任感",
+          "route": "/zh/personality/big-five/facets/dutifulness"
+        },
+        {
+          "code": "achievement-striving",
+          "title_zh": "成就追求",
+          "route": "/zh/personality/big-five/facets/achievement-striving"
+        },
+        {
+          "code": "self-discipline",
+          "title_zh": "自律",
+          "route": "/zh/personality/big-five/facets/self-discipline"
+        },
+        {
+          "code": "deliberation",
+          "title_zh": "审慎",
+          "route": "/zh/personality/big-five/facets/deliberation"
+        }
+      ]
+    }
+  ],
+  "claim_map": [
+    {
+      "claim": "The six routes are narrower descriptors under conscientiousness, not six personality types.",
+      "evidence_ids": [
+        "I1",
+        "A1",
+        "A4"
+      ]
+    },
+    {
+      "claim": "Interest or attention in a facet is not equivalent to ability, diagnosis, or outcome prediction.",
+      "evidence_ids": [
+        "I2",
+        "A4"
+      ]
+    },
+    {
+      "claim": "The route taxonomy must not be directly converted to BFI-2 facets or BFAS aspects.",
+      "evidence_ids": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    }
+  ],
+  "facet_boundaries": {
+    "competence": {
+      "title_zh": "胜任感",
+      "construct_summary": "对自己能否理解要求、组织行动并有效处理日常任务的通常把握感",
+      "explicit_non_equivalence": "它不等于实际能力、智力、资历或自信口号。一个人可以能力很强但低估自己，也可以主观把握很高却缺少相关知识；能力仍需由具体任务证据判断"
+    },
+    "order": {
+      "title_zh": "条理性",
+      "construct_summary": "对分类、安排、整洁、顺序和可预期工作结构的通常偏好程度",
+      "explicit_non_equivalence": "它不等于强迫症、洁癖、完美主义或工作质量。桌面整洁不能单独证明条理性，环境较乱也不代表不能交付；临床概念更不能由人格页面推断"
+    },
+    "dutifulness": {
+      "title_zh": "责任感",
+      "construct_summary": "对承诺、职责、规则依据和他人合理期待的通常重视与履行倾向",
+      "explicit_non_equivalence": "它不等于服从权威、讨好、道德高低或永不拒绝。负责任也包括澄清不合理要求、保护自身边界和在条件变化时重新协商，而不是承担所有人的任务"
+    },
+    "achievement-striving": {
+      "title_zh": "成就追求",
+      "construct_summary": "为较高标准、进步目标和有挑战成果投入努力的通常倾向",
+      "explicit_non_equivalence": "它不等于社会地位、收入、忙碌程度、内卷或最终成就。机会、资源、健康、照护责任与团队条件都会影响结果；追求较少也不代表懒惰或没有价值感"
+    },
+    "self-discipline": {
+      "title_zh": "自律",
+      "construct_summary": "在任务乏味、困难或回报延迟时启动行动并维持到合理完成点的通常倾向",
+      "explicit_non_equivalence": "它不等于道德意志、懒惰、执行功能诊断或永远高产。睡眠、压力、照护负担、环境摩擦与健康状态都会影响启动和坚持，不能由本页判断 ADHD 等临床问题"
+    },
+    "deliberation": {
+      "title_zh": "审慎",
+      "construct_summary": "在行动或承诺前考虑后果、选项、风险与可逆性的通常倾向",
+      "explicit_non_equivalence": "它不等于优柔寡断、焦虑、聪明程度或绝不冒险。审慎关注的是行动前权衡的习惯；考虑很多不保证结论正确，行动较快也不必然是冲动"
+    }
+  },
+  "limitations": [
+    "The frozen CMS taxonomy is NEO/IPIP-like; it is not claimed as the single universal Big Five facet standard.",
+    "No proprietary assessment items, scoring keys, norms, or copyrighted manual text are reproduced.",
+    "No reliability, validity, percentile, clinical, hiring, admission, salary, relationship-outcome, or deterministic career claim is made.",
+    "GSC_EVIDENCE_PENDING: this package is content-authority preparation, not a search-performance claim."
+  ]
+}
