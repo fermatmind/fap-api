@@ -49,6 +49,11 @@ final class CareerSalaryAssetPreviewService
             return null;
         }
 
+        $previewSlugs = $this->previewSlugs();
+        if ($previewSlugs === [] || ! in_array($normalizedSlug, $previewSlugs, true)) {
+            return null;
+        }
+
         return CareerJobSalaryAsset::query()
             ->where('career_job_slug', $normalizedSlug)
             ->where('locale', $normalizedLocale)

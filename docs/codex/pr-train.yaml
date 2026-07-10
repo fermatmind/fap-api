@@ -35433,6 +35433,8 @@ prs:
       - backend/app/Console/Commands/CareerImportSalaryAssetsPreview.php
       - backend/app/Console/Commands/CareerImportSelectedDisplayAssets.php
       - backend/app/Console/Commands/CareerNormalizeLegacyDisplayAssets.php
+      - backend/tests/Feature/Career/CareerSalaryAssetPreviewImportTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
