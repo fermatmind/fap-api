@@ -1,0 +1,1273 @@
+{
+  "package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10-repaired",
+  "contract_version": "personality_public_asset.v1",
+  "generated_at": "2026-07-10T00:00:00Z",
+  "assets": [
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "competence",
+      "entity_key": "competence",
+      "slug": "big-five/facets/competence",
+      "locale": "zh-CN",
+      "title": "胜任感",
+      "summary": "胜任感描述对自己能否理解要求、组织行动并有效处理日常任务的通常把握感。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格胜任感：含义、表现、误解与行动建议",
+        "description": "理解尽责性细分面向“胜任感”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/competence",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/competence"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/competence",
+        "zh-CN": "/zh/personality/big-five/facets/competence"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "胜任感越高越好吗？",
+          "answer": "不是。胜任感两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "胜任感会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "胜任感能代表整个尽责性吗？",
+          "answer": "不能。它只是尽责性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的胜任感分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "胜任感可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "胜任感"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释尽责性下的“胜任感”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向尽责性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "胜任感是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "尽责性",
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "条理性",
+          "href": "/zh/personality/big-five/facets/order",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "责任感",
+          "href": "/zh/personality/big-five/facets/dutifulness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "成就追求",
+          "href": "/zh/personality/big-five/facets/achievement-striving",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "自律",
+          "href": "/zh/personality/big-five/facets/self-discipline",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "审慎",
+          "href": "/zh/personality/big-five/facets/deliberation",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：胜任感是什么",
+          "body_md": "胜任感描述对自己能否理解要求、组织行动并有效处理日常任务的通常把握感。它是尽责性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "胜任感主要在观察什么",
+          "body_md": "胜任感关注的是人在面对目标、责任和约束时，通常怎样判断要求、组织资源、启动行动、维持投入或权衡后果。它不单看一次行为，也不把完成结果直接等同于人格。更可靠的阅读方式，是比较多个时间点和至少两个不同情境，再询问这种模式带来了什么便利、成本与支持需求。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "胜任感较明显时可能怎样表现",
+          "body_md": "较容易相信自己可以弄清问题、调动资源并把事情推进，遇到障碍时通常先寻找可控步骤。这种倾向在匹配的任务里可能提高连续性、可预期性或完成概率，但也可能带来控制过细、标准僵硬、承担过多或难以及时停下等成本。是否有帮助取决于目标是否合理、资源是否足够，以及能否配合优先级、授权和停止条件。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "胜任感较不明显时可能怎样表现",
+          "body_md": "面对陌生、复杂或高压任务时更可能怀疑自己是否能处理，需要更清楚的示范、反馈或支持才开始。这并不表示缺少尽责性、道德或能力，而可能反映任务意义、环境结构、资源和其他面向的组合。在需要速度、弹性或低成本试错时，这一端可能有实际价值；当遗漏代价较高时，则可以借助清单、反馈、时间盒或协作结构补足。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "接手熟悉项目时，较明显的胜任感可帮助人快速承担责任；进入高风险新领域时，保留不确定感反而能推动核对权限、请教专家和设置复核点。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于实际能力、智力、资历或自信口号。一个人可以能力很强但低估自己，也可以主观把握很高却缺少相关知识；能力仍需由具体任务证据判断。尽责性六个面向也不必同步：某人在这个面向上较明显，不代表胜任感、条理性、责任感、成就追求、自律和审慎都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "记录自己接到熟悉任务和陌生任务时的第一句话、求助时点与拆解方式，区分“我不会”“我还没有信息”和“这超出我的职责或资源”。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "选一项略有挑战的小任务，开始前写下已会的两件事、缺少的一条信息和可求助的人；完成后用实际证据更新判断，而不是只根据开始前的紧张或兴奋下结论。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“胜任感”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-competence-2026-07-10",
+        "codex-skeptical-review-conscientiousness-2026-07-10",
+        "codex-repair-competence-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "order",
+      "entity_key": "order",
+      "slug": "big-five/facets/order",
+      "locale": "zh-CN",
+      "title": "条理性",
+      "summary": "条理性描述对分类、安排、整洁、顺序和可预期工作结构的通常偏好程度。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格条理性：含义、表现、误解与行动建议",
+        "description": "理解尽责性细分面向“条理性”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/order",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/order"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/order",
+        "zh-CN": "/zh/personality/big-five/facets/order"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "条理性越高越好吗？",
+          "answer": "不是。条理性两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "条理性会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "条理性能代表整个尽责性吗？",
+          "answer": "不能。它只是尽责性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的条理性分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "条理性可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "条理性"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释尽责性下的“条理性”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向尽责性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "条理性是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "尽责性",
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "胜任感",
+          "href": "/zh/personality/big-five/facets/competence",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "责任感",
+          "href": "/zh/personality/big-five/facets/dutifulness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "成就追求",
+          "href": "/zh/personality/big-five/facets/achievement-striving",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "自律",
+          "href": "/zh/personality/big-five/facets/self-discipline",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "审慎",
+          "href": "/zh/personality/big-five/facets/deliberation",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：条理性是什么",
+          "body_md": "条理性描述对分类、安排、整洁、顺序和可预期工作结构的通常偏好程度。它是尽责性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "条理性主要在观察什么",
+          "body_md": "条理性关注的是人在面对目标、责任和约束时，通常怎样判断要求、组织资源、启动行动、维持投入或权衡后果。它不单看一次行为，也不把完成结果直接等同于人格。更可靠的阅读方式，是比较多个时间点和至少两个不同情境，再询问这种模式带来了什么便利、成本与支持需求。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "条理性较明显时可能怎样表现",
+          "body_md": "较愿意提前整理材料、明确位置与步骤，并通过清单、命名或时间安排降低遗漏和寻找成本。这种倾向在匹配的任务里可能提高连续性、可预期性或完成概率，但也可能带来控制过细、标准僵硬、承担过多或难以及时停下等成本。是否有帮助取决于目标是否合理、资源是否足够，以及能否配合优先级、授权和停止条件。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "条理性较不明显时可能怎样表现",
+          "body_md": "更能容忍开放的摆放和临时调整，常把精力先放在核心结果上，不一定主动维护固定顺序或整洁标准。这并不表示缺少尽责性、道德或能力，而可能反映任务意义、环境结构、资源和其他面向的组合。在需要速度、弹性或低成本试错时，这一端可能有实际价值；当遗漏代价较高时，则可以借助清单、反馈、时间盒或协作结构补足。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "交接多人协作材料时，较明显的条理性能降低沟通成本；在快速探索阶段，过早建立细密分类可能增加维护负担，而允许临时结构有助于先验证方向。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于强迫症、洁癖、完美主义或工作质量。桌面整洁不能单独证明条理性，环境较乱也不代表不能交付；临床概念更不能由人格页面推断。尽责性六个面向也不必同步：某人在这个面向上较明显，不代表胜任感、条理性、责任感、成就追求、自律和审慎都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "查看自己如何管理文件、日程、物品和多人任务，分别记录组织行为节省了多少时间、又花了多少维护成本，并比较独立工作与协作交接时的差异。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "选择一个反复寻找或容易遗漏的小环节，只增加一个命名规则或两分钟收尾清单；一周后比较查找时间和维护成本，若规则没有净收益就缩小或撤销。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“条理性”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-order-2026-07-10",
+        "codex-skeptical-review-conscientiousness-2026-07-10",
+        "codex-repair-order-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "dutifulness",
+      "entity_key": "dutifulness",
+      "slug": "big-five/facets/dutifulness",
+      "locale": "zh-CN",
+      "title": "责任感",
+      "summary": "责任感描述对承诺、职责、规则依据和他人合理期待的通常重视与履行倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格责任感：含义、表现、误解与行动建议",
+        "description": "理解尽责性细分面向“责任感”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/dutifulness",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/dutifulness"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/dutifulness",
+        "zh-CN": "/zh/personality/big-five/facets/dutifulness"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "责任感越高越好吗？",
+          "answer": "不是。责任感两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "责任感会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "责任感能代表整个尽责性吗？",
+          "answer": "不能。它只是尽责性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的责任感分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "责任感可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "责任感"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释尽责性下的“责任感”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向尽责性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "责任感是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "尽责性",
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "胜任感",
+          "href": "/zh/personality/big-five/facets/competence",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "条理性",
+          "href": "/zh/personality/big-five/facets/order",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "成就追求",
+          "href": "/zh/personality/big-five/facets/achievement-striving",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "自律",
+          "href": "/zh/personality/big-five/facets/self-discipline",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "审慎",
+          "href": "/zh/personality/big-five/facets/deliberation",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：责任感是什么",
+          "body_md": "责任感描述对承诺、职责、规则依据和他人合理期待的通常重视与履行倾向。它是尽责性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "责任感主要在观察什么",
+          "body_md": "责任感关注的是人在面对目标、责任和约束时，通常怎样判断要求、组织资源、启动行动、维持投入或权衡后果。它不单看一次行为，也不把完成结果直接等同于人格。更可靠的阅读方式，是比较多个时间点和至少两个不同情境，再询问这种模式带来了什么便利、成本与支持需求。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "责任感较明显时可能怎样表现",
+          "body_md": "较容易把已答应的事项视为需要兑现的义务，主动确认边界、跟进进度，并在无法完成时尽早说明。这种倾向在匹配的任务里可能提高连续性、可预期性或完成概率，但也可能带来控制过细、标准僵硬、承担过多或难以及时停下等成本。是否有帮助取决于目标是否合理、资源是否足够，以及能否配合优先级、授权和停止条件。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "责任感较不明显时可能怎样表现",
+          "body_md": "更可能依据当下优先级、实际后果和自主判断调整承诺，对形式性规则或未说明理由的要求不一定持续投入。这并不表示缺少尽责性、道德或能力，而可能反映任务意义、环境结构、资源和其他面向的组合。在需要速度、弹性或低成本试错时，这一端可能有实际价值；当遗漏代价较高时，则可以借助清单、反馈、时间盒或协作结构补足。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "涉及客户承诺和安全流程时，较明显的责任感有助于保持可预期；当旧规则与现实冲突时，机械服从可能掩盖问题，及时提出异议和重新协商也可能是负责的行为。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于服从权威、讨好、道德高低或永不拒绝。负责任也包括澄清不合理要求、保护自身边界和在条件变化时重新协商，而不是承担所有人的任务。尽责性六个面向也不必同步：某人在这个面向上较明显，不代表胜任感、条理性、责任感、成就追求、自律和审慎都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "回看最近三次答应、拒绝或延期的事项，记录承诺是否清楚、谁会受到影响、自己何时预警，并区分真正职责、习惯性内疚和别人临时转移的责任。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "对一项近期承诺写下交付物、截止时间、依赖和无法完成时的通知点；若任务不合理，练习在答应前提出一个边界或替代方案，并观察关系和结果。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“责任感”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-dutifulness-2026-07-10",
+        "codex-skeptical-review-conscientiousness-2026-07-10",
+        "codex-repair-dutifulness-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "achievement-striving",
+      "entity_key": "achievement-striving",
+      "slug": "big-five/facets/achievement-striving",
+      "locale": "zh-CN",
+      "title": "成就追求",
+      "summary": "成就追求描述为较高标准、进步目标和有挑战成果投入努力的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格成就追求：含义、表现、误解与行动建议",
+        "description": "理解尽责性细分面向“成就追求”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/achievement-striving",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/achievement-striving"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/achievement-striving",
+        "zh-CN": "/zh/personality/big-five/facets/achievement-striving"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "成就追求越高越好吗？",
+          "answer": "不是。成就追求两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "成就追求会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "成就追求能代表整个尽责性吗？",
+          "answer": "不能。它只是尽责性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的成就追求分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "成就追求可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "成就追求"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释尽责性下的“成就追求”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向尽责性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "成就追求是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "尽责性",
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "胜任感",
+          "href": "/zh/personality/big-five/facets/competence",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "条理性",
+          "href": "/zh/personality/big-five/facets/order",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "责任感",
+          "href": "/zh/personality/big-five/facets/dutifulness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "自律",
+          "href": "/zh/personality/big-five/facets/self-discipline",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "审慎",
+          "href": "/zh/personality/big-five/facets/deliberation",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：成就追求是什么",
+          "body_md": "成就追求描述为较高标准、进步目标和有挑战成果投入努力的通常倾向。它是尽责性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "成就追求主要在观察什么",
+          "body_md": "成就追求关注的是人在面对目标、责任和约束时，通常怎样判断要求、组织资源、启动行动、维持投入或权衡后果。它不单看一次行为，也不把完成结果直接等同于人格。更可靠的阅读方式，是比较多个时间点和至少两个不同情境，再询问这种模式带来了什么便利、成本与支持需求。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "成就追求较明显时可能怎样表现",
+          "body_md": "较愿意设定有难度的目标、比较进展并持续提高标准，常从完成和成长中获得推动力。这种倾向在匹配的任务里可能提高连续性、可预期性或完成概率，但也可能带来控制过细、标准僵硬、承担过多或难以及时停下等成本。是否有帮助取决于目标是否合理、资源是否足够，以及能否配合优先级、授权和停止条件。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "成就追求较不明显时可能怎样表现",
+          "body_md": "更可能在达到足够好或生活平衡后停止加码，不一定愿意持续竞争、扩张目标或把绩效置于其他需要之前。这并不表示缺少尽责性、道德或能力，而可能反映任务意义、环境结构、资源和其他面向的组合。在需要速度、弹性或低成本试错时，这一端可能有实际价值；当遗漏代价较高时，则可以借助清单、反馈、时间盒或协作结构补足。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "需要长期训练或突破指标时，较明显的成就追求可以维持投入；在资源有限或恢复期，持续抬高标准可能造成范围膨胀，而接受足够好能保护更重要的目标。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于社会地位、收入、忙碌程度、内卷或最终成就。机会、资源、健康、照护责任与团队条件都会影响结果；追求较少也不代表懒惰或没有价值感。尽责性六个面向也不必同步：某人在这个面向上较明显，不代表胜任感、条理性、责任感、成就追求、自律和审慎都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "列出最近一个主动加码和一个选择停下的任务，检查标准是谁设定的、额外投入换来了什么、挤占了什么，并区分成长目标、外部比较和对不够好的担忧。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "为一个两周目标同时定义最低可接受、理想和停止加码三条线；每次增加范围前写下预期收益与被挤占事项，到期后用结果判断标准是否值得保留。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“成就追求”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-achievement-striving-2026-07-10",
+        "codex-skeptical-review-conscientiousness-2026-07-10",
+        "codex-repair-achievement-striving-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "self-discipline",
+      "entity_key": "self-discipline",
+      "slug": "big-five/facets/self-discipline",
+      "locale": "zh-CN",
+      "title": "自律",
+      "summary": "自律描述在任务乏味、困难或回报延迟时启动行动并维持到合理完成点的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格自律：含义、表现、误解与行动建议",
+        "description": "理解尽责性细分面向“自律”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/self-discipline",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/self-discipline"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/self-discipline",
+        "zh-CN": "/zh/personality/big-five/facets/self-discipline"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "自律越高越好吗？",
+          "answer": "不是。自律两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "自律会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "自律能代表整个尽责性吗？",
+          "answer": "不能。它只是尽责性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的自律分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "自律可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "自律"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释尽责性下的“自律”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向尽责性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "自律是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "尽责性",
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "胜任感",
+          "href": "/zh/personality/big-five/facets/competence",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "条理性",
+          "href": "/zh/personality/big-five/facets/order",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "责任感",
+          "href": "/zh/personality/big-five/facets/dutifulness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "成就追求",
+          "href": "/zh/personality/big-five/facets/achievement-striving",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "审慎",
+          "href": "/zh/personality/big-five/facets/deliberation",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：自律是什么",
+          "body_md": "自律描述在任务乏味、困难或回报延迟时启动行动并维持到合理完成点的通常倾向。它是尽责性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "自律主要在观察什么",
+          "body_md": "自律关注的是人在面对目标、责任和约束时，通常怎样判断要求、组织资源、启动行动、维持投入或权衡后果。它不单看一次行为，也不把完成结果直接等同于人格。更可靠的阅读方式，是比较多个时间点和至少两个不同情境，再询问这种模式带来了什么便利、成本与支持需求。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "自律较明显时可能怎样表现",
+          "body_md": "较能在不想做时仍按计划开始，把注意拉回任务，并在短期诱惑出现时继续推进既定事项。这种倾向在匹配的任务里可能提高连续性、可预期性或完成概率，但也可能带来控制过细、标准僵硬、承担过多或难以及时停下等成本。是否有帮助取决于目标是否合理、资源是否足够，以及能否配合优先级、授权和停止条件。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "自律较不明显时可能怎样表现",
+          "body_md": "更依赖即时兴趣、外部结构、同伴节奏或明确反馈来启动和坚持，长周期、低反馈任务更容易被推迟或中断。这并不表示缺少尽责性、道德或能力，而可能反映任务意义、环境结构、资源和其他面向的组合。在需要速度、弹性或低成本试错时，这一端可能有实际价值；当遗漏代价较高时，则可以借助清单、反馈、时间盒或协作结构补足。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "复习、康复训练和重复运营中，较明显的自律有助于积累；在目标已经失效时，过度坚持会增加沉没成本，而及时停止、休息或重设任务可能更合理。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于道德意志、懒惰、执行功能诊断或永远高产。睡眠、压力、照护负担、环境摩擦与健康状态都会影响启动和坚持，不能由本页判断 ADHD 等临床问题。尽责性六个面向也不必同步：某人在这个面向上较明显，不代表胜任感、条理性、责任感、成就追求、自律和审慎都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "比较自己在有兴趣、有人监督和完全自主三种任务中的启动时间、分心点与恢复方式，寻找环境条件而非只用“意志力强弱”解释结果。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "把一项容易拖延的任务缩成十分钟可完成的第一步，提前移开一个干扰并约定结束点；连续三次记录启动是否变容易，再决定增加时长还是继续借助外部结构。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“自律”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-self-discipline-2026-07-10",
+        "codex-skeptical-review-conscientiousness-2026-07-10",
+        "codex-repair-self-discipline-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "deliberation",
+      "entity_key": "deliberation",
+      "slug": "big-five/facets/deliberation",
+      "locale": "zh-CN",
+      "title": "审慎",
+      "summary": "审慎描述在行动或承诺前考虑后果、选项、风险与可逆性的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格审慎：含义、表现、误解与行动建议",
+        "description": "理解尽责性细分面向“审慎”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/deliberation",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/deliberation"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/deliberation",
+        "zh-CN": "/zh/personality/big-five/facets/deliberation"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "审慎越高越好吗？",
+          "answer": "不是。审慎两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "审慎会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "审慎能代表整个尽责性吗？",
+          "answer": "不能。它只是尽责性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的审慎分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "审慎可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "审慎"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释尽责性下的“审慎”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向尽责性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "审慎是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "尽责性",
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "胜任感",
+          "href": "/zh/personality/big-five/facets/competence",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "条理性",
+          "href": "/zh/personality/big-five/facets/order",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "责任感",
+          "href": "/zh/personality/big-five/facets/dutifulness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "成就追求",
+          "href": "/zh/personality/big-five/facets/achievement-striving",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "自律",
+          "href": "/zh/personality/big-five/facets/self-discipline",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：审慎是什么",
+          "body_md": "审慎描述在行动或承诺前考虑后果、选项、风险与可逆性的通常倾向。它是尽责性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "审慎主要在观察什么",
+          "body_md": "审慎关注的是人在面对目标、责任和约束时，通常怎样判断要求、组织资源、启动行动、维持投入或权衡后果。它不单看一次行为，也不把完成结果直接等同于人格。更可靠的阅读方式，是比较多个时间点和至少两个不同情境，再询问这种模式带来了什么便利、成本与支持需求。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "审慎较明显时可能怎样表现",
+          "body_md": "较愿意暂停一下、核对关键信息并预想可能后果，尤其在错误代价较高或难以撤回时。这种倾向在匹配的任务里可能提高连续性、可预期性或完成概率，但也可能带来控制过细、标准僵硬、承担过多或难以及时停下等成本。是否有帮助取决于目标是否合理、资源是否足够，以及能否配合优先级、授权和停止条件。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "审慎较不明显时可能怎样表现",
+          "body_md": "更倾向根据已有线索及时行动，在可逆、低风险或需要速度的情境里不一定进行长时间比较。这并不表示缺少尽责性、道德或能力，而可能反映任务意义、环境结构、资源和其他面向的组合。在需要速度、弹性或低成本试错时，这一端可能有实际价值；当遗漏代价较高时，则可以借助清单、反馈、时间盒或协作结构补足。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "合同、权限和安全决策中，较明显的审慎有助于发现不可逆风险；在事故响应或小成本试验中，等待所有信息可能错过窗口，先行动再快速校正更有效。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于优柔寡断、焦虑、聪明程度或绝不冒险。审慎关注的是行动前权衡的习惯；考虑很多不保证结论正确，行动较快也不必然是冲动。尽责性六个面向也不必同步：某人在这个面向上较明显，不代表胜任感、条理性、责任感、成就追求、自律和审慎都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "回看最近一次快速决定和一次延迟决定，记录当时可获得的信息、错误代价、可逆性与等待成本，判断思考时间是否与风险匹配，而非只看结果好坏。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "为一类重复决定设置简短门槛：低风险可逆事项两分钟内决定，高风险事项核对三项关键证据并请一人复核；一周后检查是否减少了无效等待或可避免错误。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“审慎”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-deliberation-2026-07-10",
+        "codex-skeptical-review-conscientiousness-2026-07-10",
+        "codex-repair-deliberation-2026-07-10"
+      ]
+    }
+  ]
+}
