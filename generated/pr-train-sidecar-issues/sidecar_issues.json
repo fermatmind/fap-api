@@ -303,5 +303,35 @@
     "why_not_current_pr_scope": "Starting, configuring, or routing a shared local API server is local-environment ownership work and is not part of this code-only readmodel repair.",
     "required_checks_affected": false,
     "recommended_follow_up": "Run bash scripts/ci_verify_mbti.sh from a standard local stack with the API listening on 127.0.0.1:8000; do not treat this local-server absence as a production verification result."
+  },
+  {
+    "repo": "fermatmind/fap-api",
+    "pr_id": "SECURITY-169-API-20",
+    "branch": "codex/security-169-api-20-harden-cms-article-qa-malformed-artifact-handlin",
+    "blocker_type": "inherited_test_fixture_not_publishable",
+    "evidence": [
+      "On clean base 659c9e5596d03cc81288c2a8e301ce3f0b16812f, php artisan test tests/Feature/SeoIntel/SeoAgentL5aContentPagePublishCanaryTest.php fails the same three pre-existing assertions.",
+      "The nested publish canary reports publish_plan_not_publishable; setup also leaves working_revision_id=1 while the legacy assertion expects null.",
+      "API20's new malformed-package regression passes and reports artifact_json_invalid without crashing."
+    ],
+    "why_not_current_pr_scope": "The inherited valid publish-plan fixture and CMS draft-write state contract failed on the exact API20 base before this branch's changes. Repairing publish eligibility or CMS draft-write semantics is outside malformed-artifact handling.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Repair the content-page publish-canary fixture or its publish-plan authority in a separate scoped PR, then restore the full file to green.",
+    "train_continued": true
+  },
+  {
+    "repo": "fermatmind/fap-api",
+    "pr_id": "SECURITY-169-API-20",
+    "branch": "codex/security-169-api-20-harden-cms-article-qa-malformed-artifact-handlin",
+    "blocker_type": "unrelated_local_acceptance_authentication_failure",
+    "evidence": [
+      "bash backend/scripts/ci_verify_mbti.sh passed its 1179-test suite (150137 assertions), Enneagram gate, Partner API smoke, MBTI report/share verification, phone OTP acceptance, ACCEPT_F, ACCEPT_G, and ACCEPT_E.",
+      "The final ACCEPT_H request returned HTTP 401.",
+      "API20 changes no auth middleware, token handling, share controller, route, or ACCEPT_H script path."
+    ],
+    "why_not_current_pr_scope": "API20 is limited to CMS/article malformed-artifact fail-closed handling and has no authentication or share-ownership behavior changes.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Re-run ACCEPT_H in a clean acceptance environment and inspect its request ownership/token setup in a separate scoped reliability task if the 401 persists.",
+    "train_continued": true
   }
 ]

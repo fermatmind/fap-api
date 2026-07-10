@@ -30,7 +30,6 @@ final class ArticleReleaseCloseoutService
         'assets.fermatmind.com',
         'fermatmind.com',
         'www.fermatmind.com',
-        'ops.fermatmind.com',
     ];
 
     public const COMPLETE_SEARCH_OBSERVATION_PENDING = 'ARTICLE_RELEASE_COMPLETE_SEARCH_OBSERVATION_PENDING';
@@ -55,8 +54,7 @@ final class ArticleReleaseCloseoutService
         ?array $publicSmoke = null,
         ?array $gscManual = null,
         ?array $observation = null,
-    ): array
-    {
+    ): array {
         $errors = [];
 
         if ($articleId <= 0) {
@@ -625,7 +623,7 @@ final class ArticleReleaseCloseoutService
         }
 
         $issues = [];
-        $status = strtolower((string) ($gscManual['status'] ?? ''));
+        $status = strtolower($this->scalarString($gscManual['status'] ?? null));
         $okFlag = $gscManual['ok'] ?? null;
         $statusOk = $status === 'success' || $okFlag === true;
         if (! $statusOk) {
@@ -674,7 +672,7 @@ final class ArticleReleaseCloseoutService
             return $this->manualCheck('d1_d7_d14_queue_record_required');
         }
 
-        $status = strtolower((string) ($observation['status'] ?? ''));
+        $status = strtolower($this->scalarString($observation['status'] ?? null));
         $hasChecklist = is_array($observation['checklist'] ?? null)
             || is_array($observation['d1_d7_d14_checklist'] ?? null)
             || is_array($observation['observation_windows'] ?? null)
@@ -793,12 +791,19 @@ final class ArticleReleaseCloseoutService
         }
 
         foreach (['request_indexing_confirmation', 'request_indexing_result', 'confirmation', 'confirmed_at'] as $key) {
-            if (trim((string) ($record[$key] ?? '')) !== '') {
+            if ($this->scalarString($record[$key] ?? null) !== '') {
                 return true;
             }
         }
 
         return false;
+    }
+
+    private function scalarString(mixed $value): string
+    {
+        return is_string($value) || is_int($value) || is_float($value)
+            ? trim((string) $value)
+            : '';
     }
 
     /**

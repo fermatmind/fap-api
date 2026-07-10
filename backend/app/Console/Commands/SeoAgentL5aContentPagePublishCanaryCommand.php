@@ -75,7 +75,11 @@ final class SeoAgentL5aContentPagePublishCanaryCommand extends Command
             return $this->finish($this->failureSummary('filtered_package_unreadable'));
         }
 
-        $package = $this->readJson($packagePath);
+        try {
+            $package = $this->readJson($packagePath);
+        } catch (RuntimeException $exception) {
+            return $this->finish($this->failureSummary($exception->getMessage()));
+        }
         if (($package['schema_version'] ?? null) !== self::PACKAGE_SCHEMA_VERSION) {
             return $this->finish($this->failureSummary('filtered_package_schema_invalid'));
         }

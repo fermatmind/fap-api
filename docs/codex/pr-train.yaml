@@ -35658,7 +35658,7 @@ prs:
     branch: codex/security-169-api-20-harden-cms-article-qa-malformed-artifact-handlin
     title: "SECURITY-169-API-20: harden CMS/article QA malformed-artifact handling"
     train_scope: security_169_fap_api_audit
-    status: user_authorized
+    status: in_progress
     scope:
       - Return controlled NO-GO results instead of crashes for malformed closeout, preview, readback, FAQ, target, and publish-canary artifacts.
     allowed_paths:
@@ -35674,6 +35674,18 @@ prs:
       - backend/app/Console/Commands/SeoAgentCmsDraftReadbackQaCommand.php
       - backend/app/Console/Commands/SeoAgentL5aContentPagePublishCanaryCommand.php
       - backend/app/Services/Cms/ArticleSeoGateRollout.php
+      - backend/tests/Feature/Console/ArticleReleaseCloseoutCommandTest.php
+      - backend/tests/Unit/Support/PublicMediaUrlGuardTest.php
+      - backend/tests/Feature/SeoIntel/SeoOpsP0CtrArticleCmsUpdateWriterCommandTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentCmsDraftPayloadRepairCanaryTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentArticleDraftPreviewRuntimeQaTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentArticleDraftClaimRiskQaTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentCmsDraftReadbackQaTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentL5aContentPagePublishCanaryTest.php
+      - backend/tests/Feature/Console/ArticleSeoGateRolloutCommandTest.php
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

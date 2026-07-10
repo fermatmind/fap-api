@@ -190,6 +190,29 @@ final class SeoAgentCmsDraftReadbackQaTest extends TestCase
         $this->assertFalse((bool) data_get($contract, 'negative_guarantees.search_channel_submit', true));
     }
 
+    #[Test]
+    public function it_fails_closed_for_a_malformed_article_subject_ref(): void
+    {
+        $article = $this->article();
+        $proposal = $this->proposal((int) $article->id);
+        $proposal['subject_ref'] = 'article:not-an-id:en';
+        $packagePath = $this->writePackage([$proposal]);
+        $sha = hash_file('sha256', $packagePath) ?: '';
+        $revision = $this->articleRevision($article, $proposal, $sha, includeOptionalProposalFields: true);
+        $writeEvidencePath = $this->writeEvidence($sha, $proposal['subject_ref'], (int) $revision->id);
+
+        $exitCode = Artisan::call('seo-agent:cms-draft-readback-qa', [
+            '--package' => $packagePath,
+            '--write-evidence' => $writeEvidencePath,
+            '--target' => $proposal['subject_ref'],
+            '--json' => true,
+        ]);
+
+        $summary = json_decode(trim(Artisan::output()), true);
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('subject_ref_invalid', $summary['issues'] ?? []);
+    }
+
     private function article(): Article
     {
         return Article::query()->create([

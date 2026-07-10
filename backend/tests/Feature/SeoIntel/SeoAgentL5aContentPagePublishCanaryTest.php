@@ -155,6 +155,27 @@ final class SeoAgentL5aContentPagePublishCanaryTest extends TestCase
         $this->assertNull($page->refresh()->working_revision_id);
     }
 
+    #[Test]
+    public function malformed_filtered_package_is_reported_without_crashing(): void
+    {
+        $page = $this->createContentPage();
+        [$draftWriteEvidencePath, $packagePath, $draftWriteEvidence] = $this->createDraftWriteEvidence($page);
+        File::put($packagePath, '{');
+        $draftWriteEvidence['filtered_package']['sha256'] = hash_file('sha256', $packagePath) ?: '';
+        $draftWriteEvidence['filtered_package']['size'] = filesize($packagePath) ?: 0;
+        File::put($draftWriteEvidencePath, json_encode($draftWriteEvidence, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n");
+
+        $exitCode = Artisan::call('seo-agent:l5a-contentpage-publish-canary', [
+            '--draft-write-evidence' => $draftWriteEvidencePath,
+            '--limit' => 1,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('artifact_json_invalid', $summary['issues'] ?? []);
+    }
+
     private function createContentPage(): ContentPage
     {
         return ContentPage::query()->create([

@@ -44,6 +44,10 @@ final class PublicMediaUrlGuardTest extends TestCase
             $this->assertNull(PublicMediaUrlGuard::sanitizeNullableUrl($blockedUrl), $blockedUrl);
         }
 
+        foreach ([null, 42, true, ['url' => 'https://assets.fermatmind.com/static/cover.png'], new \stdClass] as $malformedUrl) {
+            $this->assertNull(PublicMediaUrlGuard::sanitizeNullableUrl($malformedUrl));
+        }
+
         foreach ([
             'https://assets.fermatmind.com/static/share/mbti_wide_1200x630.png',
             'https://api.fermatmind.com/storage/media-library/variants/article-daily/hero_1600x900.jpg',
@@ -87,7 +91,7 @@ final class PublicMediaUrlGuardTest extends TestCase
             'og_image_url' => 'https://bucket.cos.ap-shanghai.myqcloud.com/og.png',
             'twitter_image_url' => 'https://assets.fermatmind.com/static/twitter.png',
             'variants' => [
-                'hero' => ['url' => 'https://127.0.0.1/internal.png'],
+                'hero' => ['url' => ['malformed']],
                 'card' => ['url' => 'https://api.fermatmind.com/static/card.png'],
             ],
             'title' => 'SEO',

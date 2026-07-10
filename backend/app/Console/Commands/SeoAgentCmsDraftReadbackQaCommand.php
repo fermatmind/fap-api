@@ -133,6 +133,11 @@ final class SeoAgentCmsDraftReadbackQaCommand extends Command
         }
 
         $articleId = $this->idFromSubjectRef($target, 'article');
+        if ($articleId === null) {
+            return $this->finish($this->failureSummary('subject_ref_invalid', [
+                'target' => $target,
+            ]));
+        }
         $article = Article::query()->withoutGlobalScopes()->find($articleId);
         if (! $article instanceof Article) {
             return $this->finish($this->failureSummary('article_not_found', [
@@ -518,11 +523,16 @@ final class SeoAgentCmsDraftReadbackQaCommand extends Command
         return $value;
     }
 
-    private function idFromSubjectRef(string $subjectRef, string $expectedType): int
+    private function idFromSubjectRef(string $subjectRef, string $expectedType): ?int
     {
         $parts = explode(':', $subjectRef);
-        if (($parts[0] ?? '') !== $expectedType || ! isset($parts[1]) || ! ctype_digit($parts[1])) {
-            throw new RuntimeException('subject_ref_invalid');
+        if (count($parts) !== 3
+            || ($parts[0] ?? '') !== $expectedType
+            || ! isset($parts[1])
+            || ! ctype_digit($parts[1])
+            || (int) $parts[1] <= 0
+            || ! in_array($parts[2] ?? '', ['en', 'zh-CN'], true)) {
+            return null;
         }
 
         return (int) $parts[1];

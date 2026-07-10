@@ -354,8 +354,8 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
             if (! is_array($item)) {
                 return ['issue' => 'override_proposed_faq_item_invalid'];
             }
-            $question = trim((string) ($item['question'] ?? ''));
-            $answer = trim((string) ($item['answer'] ?? ''));
+            $question = is_string($item['question'] ?? null) ? trim($item['question']) : '';
+            $answer = is_string($item['answer'] ?? null) ? trim($item['answer']) : '';
             if ($question === '' || $answer === '' || str_contains($question, "\0") || str_contains($answer, "\0")) {
                 return ['issue' => 'override_proposed_faq_item_invalid'];
             }

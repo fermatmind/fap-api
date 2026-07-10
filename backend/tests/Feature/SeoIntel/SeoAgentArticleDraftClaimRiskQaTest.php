@@ -174,6 +174,26 @@ final class SeoAgentArticleDraftClaimRiskQaTest extends TestCase
     }
 
     #[Test]
+    public function it_fails_closed_for_a_malformed_article_subject_ref(): void
+    {
+        [, $proposal, $packagePath, , $revision, $writeEvidencePath] = $this->draftFixture([
+            'subject_ref' => 'article:not-an-id:en',
+        ]);
+
+        $exitCode = Artisan::call('seo-agent:article-draft-claim-risk-qa', [
+            '--package' => $packagePath,
+            '--write-evidence' => $writeEvidencePath,
+            '--target' => $proposal['subject_ref'],
+            '--revision-id' => (string) $revision->id,
+            '--json' => true,
+        ]);
+
+        $summary = json_decode(trim(Artisan::output()), true);
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('subject_ref_invalid', $summary['issues'] ?? []);
+    }
+
+    #[Test]
     public function generated_contract_documents_claim_risk_qa_boundaries(): void
     {
         $contract = $this->readJson(base_path('docs/seo/generated/seo-agent-article-draft-claim-risk-qa.v1.json'));

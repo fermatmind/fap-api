@@ -53,6 +53,28 @@ final class SeoAgentCmsDraftPayloadRepairCanaryTest extends TestCase
     }
 
     #[Test]
+    public function malformed_faq_override_is_reported_without_crashing(): void
+    {
+        [, $proposal, $packagePath, , , $writeEvidencePath] = $this->oldDraftMissingOptionalFields();
+        $faqPath = $this->writeJson('seo-agent-malformed-faq-override-', [[
+            'question' => ['malformed'],
+            'answer' => 'A scalar answer.',
+        ]]);
+
+        $exitCode = Artisan::call('seo-agent:cms-draft-payload-repair-canary', [
+            '--package' => $packagePath,
+            '--write-evidence' => $writeEvidencePath,
+            '--target' => $proposal['subject_ref'],
+            '--override-proposed-faq-json' => $faqPath,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('override_proposed_faq_item_invalid', $summary['issues'] ?? []);
+    }
+
+    #[Test]
     public function execute_appends_repaired_revision_and_readback_qa_succeeds_with_compatible_evidence(): void
     {
         [$article, $proposal, $packagePath, $sha, $oldRevision, $writeEvidencePath] = $this->oldDraftMissingOptionalFields();
