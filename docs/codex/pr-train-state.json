@@ -73,13 +73,13 @@
     "depends_on": [
       "ENNEAGRAM-EN13-CONTENT-PACKAGE-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "3f96f3a8671c778c70ee0a00df4053fc4d0237e6",
+    "status": "merged",
+    "commit_sha": "03f454c3e91acd79ab9408c1c5c069a841d21778",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2833",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-10T08:23:44+08:00",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "publish_gate_feature": {
         "status": "pass",
@@ -150,6 +150,12 @@
         "from": "committed",
         "to": "ready_to_merge",
         "note": "All required GitHub checks are green; PR scope, changed files, body, and squash merge policy were revalidated."
+      },
+      {
+        "at": "2026-07-10T08:25:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Verified PR #2833 squash merge 03f454c3e91acd79ab9408c1c5c069a841d21778 in origin/main; task branch cleanup completed."
       }
     ]
   },
@@ -162,21 +168,27 @@
     "depends_on": [
       "ENNEAGRAM-EN13-PUBLISH-GATE-01"
     ],
-    "status": "pending_dependency",
+    "status": "committed",
     "commit_sha": null,
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "checks": {},
+    "checks": {
+      "sitemap_generator": {"status":"pass","evidence":"SitemapGeneratorTest passed 10 tests and 226 assertions, including 13 English and 13 Chinese Enneagram URLs."},
+      "mbti_ci": {"status":"pass","evidence":"backend/scripts/ci_verify_mbti.sh passed in the isolated SQLite test environment."}
+    },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": false
     },
-    "transitions": []
+    "transitions": [
+      {"at":"2026-07-10T08:26:00+08:00","from":"pending_dependency","to":"in_progress","note":"Dependency ENNEAGRAM-EN13-PUBLISH-GATE-01 is merged and post-merge revalidated."},
+      {"at":"2026-07-10T08:26:00+08:00","from":"in_progress","to":"committed","note":"Sitemap regression, MBTI CI, YAML/JSON, diff, and scope validation passed."}
+    ]
   },
   "ENNEAGRAM-EN13-CMS-DRY-RUN-01": {
     "id": "ENNEAGRAM-EN13-CMS-DRY-RUN-01",
