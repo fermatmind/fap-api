@@ -35464,6 +35464,8 @@ prs:
       - Stop quality writer evidence from bypassing article locks or unverified article identity.
     allowed_paths:
       - backend/app/Console/Commands/SeoOpsZhArticleQualityControlledWriterCommand.php
+      - backend/tests/Feature/SeoIntel/SeoOpsZhArticleQualityControlledWriterTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

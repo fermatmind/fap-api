@@ -42760,6 +42760,17 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "local_validation": {
+        "commands": [
+          "cd backend && php artisan test tests/Feature/SeoIntel/SeoOpsZhArticleQualityControlledWriterTest.php --no-ansi",
+          "cd backend && php artisan route:list --path=api --except-vendor --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-15.sqlite php artisan migrate --force --no-interaction",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "git diff --check"
+        ],
+        "evidence": "Focused controlled-writer tests passed: 6 tests, 49 assertions. Route listing, isolated SQLite migration, and ci_verify_mbti passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42775,6 +42786,11 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-15; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T10:21:16+08:00",
+        "note": "Bound controlled article-quality writer evidence to verified article identity, path, target, locale, and published revision snapshots before write. No CMS publish, production import, deploy, or external write was performed.",
+        "status": "implementation_validated"
       }
     ],
     "failure_reason": null,
@@ -42786,7 +42802,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "implementation_validated",
     "title": "SECURITY-169-API-15: bind article-quality writer to article locks",
     "train_scope": "security_169_fap_api_audit"
   },
