@@ -69,6 +69,10 @@ final class RiasecResultPageV2ProductionImportExecutor
         $execute = (bool) ($options['execute'] ?? false);
         $outputDir = trim((string) ($options['output_dir'] ?? ''));
         $summary = $this->buildValidationSummary($options);
+        $validatedInputContents = is_array($summary['_validated_input_contents'] ?? null)
+            ? $summary['_validated_input_contents']
+            : [];
+        unset($summary['_validated_input_contents']);
 
         if ($summary['errors'] !== []) {
             $summary['decision'] = 'fail';
@@ -101,7 +105,7 @@ final class RiasecResultPageV2ProductionImportExecutor
             return $summary;
         }
 
-        $execution = $this->executeImport($summary);
+        $execution = $this->executeImport($summary, $validatedInputContents);
         $summary['decision'] = 'pass';
         $summary['mode'] = 'production_import_execute';
         $summary['execution'] = $execution;
@@ -112,9 +116,22 @@ final class RiasecResultPageV2ProductionImportExecutor
         return $summary;
     }
 
-    public static function expectedConfirmExecuteToken(string $snapshotId, string $snapshotSha256): string
-    {
-        return 'RIASEC_RESULT_PAGE_V2_PRODUCTION_IMPORT_EXECUTE:'.$snapshotId.':'.$snapshotSha256.':NO_ROLLOUT';
+    public static function expectedConfirmExecuteToken(
+        string $snapshotId,
+        string $snapshotSha256,
+        string $approvalId,
+        string $approvalSha256,
+        string $dryRunSha256,
+    ): string {
+        $binding = hash('sha256', implode('|', [
+            $snapshotId,
+            $snapshotSha256,
+            $approvalId,
+            $approvalSha256,
+            $dryRunSha256,
+        ]));
+
+        return 'RIASEC_RESULT_PAGE_V2_PRODUCTION_IMPORT_EXECUTE:'.$binding.':NO_ROLLOUT';
     }
 
     /**
@@ -127,9 +144,9 @@ final class RiasecResultPageV2ProductionImportExecutor
         $approvalPath = $this->absolutePath((string) ($options['approval_evidence_path'] ?? self::DEFAULT_APPROVAL_EVIDENCE_PATH));
         $dryRunPath = $this->absolutePath((string) ($options['dry_run_artifact_path'] ?? self::DEFAULT_DRY_RUN_ARTIFACT_PATH));
 
-        $snapshot = $this->decodeJsonFile($snapshotPath);
-        $approval = $this->decodeJsonFile($approvalPath);
-        $dryRun = $this->decodeJsonFile($dryRunPath);
+        [$snapshot, $snapshotContents] = $this->decodeJsonFile($snapshotPath);
+        [$approval, $approvalContents] = $this->decodeJsonFile($approvalPath);
+        [$dryRun, $dryRunContents] = $this->decodeJsonFile($dryRunPath);
 
         $expectedSnapshotId = trim((string) ($options['approved_snapshot_id'] ?? ''));
         $expectedSnapshotSha = $this->normalizeSha256((string) ($options['approved_snapshot_sha256'] ?? ''));
@@ -137,9 +154,9 @@ final class RiasecResultPageV2ProductionImportExecutor
         $expectedApprovalSha = $this->normalizeSha256((string) ($options['approval_evidence_sha256'] ?? ''));
         $expectedDryRunSha = $this->normalizeSha256((string) ($options['dry_run_artifact_sha256'] ?? ''));
 
-        $snapshotSha = hash_file('sha256', $snapshotPath) ?: '';
-        $approvalSha = hash_file('sha256', $approvalPath) ?: '';
-        $dryRunSha = hash_file('sha256', $dryRunPath) ?: '';
+        $snapshotSha = hash('sha256', $snapshotContents);
+        $approvalSha = hash('sha256', $approvalContents);
+        $dryRunSha = hash('sha256', $dryRunContents);
 
         $errors = [];
         $this->requireEquals($errors, 'approved_snapshot_id', $expectedSnapshotId, (string) ($snapshot['snapshot_id'] ?? ''));
@@ -148,7 +165,7 @@ final class RiasecResultPageV2ProductionImportExecutor
         $this->requireEquals($errors, 'approval_evidence_sha256', $expectedApprovalSha, $approvalSha);
         $this->requireEquals($errors, 'dry_run_artifact_sha256', $expectedDryRunSha, $dryRunSha);
 
-        $this->assertSnapshot($errors, $snapshot, $expectedSnapshotId, $expectedSnapshotSha);
+        $this->assertSnapshot($errors, $snapshot, $expectedSnapshotId, $expectedSnapshotSha, $snapshotSha);
         $this->assertApproval($errors, $approval, $expectedApprovalId, $expectedSnapshotId, $expectedSnapshotSha);
         $this->assertDryRun($errors, $dryRun, $expectedSnapshotId, $expectedSnapshotSha);
         $this->assertScope($errors, $options, $snapshot, $approval);
@@ -159,7 +176,13 @@ final class RiasecResultPageV2ProductionImportExecutor
             'dry_run_artifact' => $dryRunPath,
         ]);
 
-        $releaseId = $this->deterministicReleaseUuid($expectedSnapshotId, $expectedSnapshotSha, $expectedDryRunSha);
+        $releaseId = $this->deterministicReleaseUuid(
+            $expectedSnapshotId,
+            $expectedSnapshotSha,
+            $expectedApprovalId,
+            $expectedApprovalSha,
+            $expectedDryRunSha,
+        );
 
         return [
             'schema_version' => self::RELEASE_SCHEMA_VERSION,
@@ -168,7 +191,18 @@ final class RiasecResultPageV2ProductionImportExecutor
             'mode' => 'production_import_dry_run',
             'release_id' => $releaseId,
             'release_snapshot_id' => $expectedSnapshotId,
-            'expected_confirm_execute' => self::expectedConfirmExecuteToken($expectedSnapshotId, $expectedSnapshotSha),
+            'expected_confirm_execute' => self::expectedConfirmExecuteToken(
+                $expectedSnapshotId,
+                $expectedSnapshotSha,
+                $expectedApprovalId,
+                $expectedApprovalSha,
+                $expectedDryRunSha,
+            ),
+            '_validated_input_contents' => [
+                'approved_snapshot.json' => $snapshotContents,
+                'approval_evidence.json' => $approvalContents,
+                'import_gate_dry_run.json' => $dryRunContents,
+            ],
             'inputs' => [
                 'approved_snapshot' => [
                     'path' => $this->relativeToBasePath($snapshotPath),
@@ -225,7 +259,7 @@ final class RiasecResultPageV2ProductionImportExecutor
      * @param  array<string,mixed>  $summary
      * @return array<string,mixed>
      */
-    private function executeImport(array $summary): array
+    private function executeImport(array $summary, array $validatedInputContents): array
     {
         $storagePath = (string) data_get($summary, 'storage.storage_path');
         $storageRoot = storage_path('app/'.$storagePath);
@@ -235,18 +269,13 @@ final class RiasecResultPageV2ProductionImportExecutor
 
         $this->resetDirectory($storageRoot);
         File::put($storageRoot.DIRECTORY_SEPARATOR.'manifest.json', $releaseManifestJson);
-        File::copy(
-            base_path(self::DEFAULT_APPROVED_SNAPSHOT_PATH),
-            $storageRoot.DIRECTORY_SEPARATOR.'approved_snapshot.json'
-        );
-        File::copy(
-            base_path(self::DEFAULT_APPROVAL_EVIDENCE_PATH),
-            $storageRoot.DIRECTORY_SEPARATOR.'approval_evidence.json'
-        );
-        File::copy(
-            base_path(self::DEFAULT_DRY_RUN_ARTIFACT_PATH),
-            $storageRoot.DIRECTORY_SEPARATOR.'import_gate_dry_run.json'
-        );
+        foreach (['approved_snapshot.json', 'approval_evidence.json', 'import_gate_dry_run.json'] as $filename) {
+            $contents = $validatedInputContents[$filename] ?? null;
+            if (! is_string($contents) || $contents === '') {
+                throw new RuntimeException('Validated input content is missing: '.$filename);
+            }
+            File::put($storageRoot.DIRECTORY_SEPARATOR.$filename, $contents);
+        }
 
         $releaseId = (string) ($summary['release_id'] ?? '');
         $now = now();
@@ -368,8 +397,13 @@ final class RiasecResultPageV2ProductionImportExecutor
      * @param  list<string>  $errors
      * @param  array<string,mixed>  $snapshot
      */
-    private function assertSnapshot(array &$errors, array $snapshot, string $expectedSnapshotId, string $expectedSnapshotSha): void
-    {
+    private function assertSnapshot(
+        array &$errors,
+        array $snapshot,
+        string $expectedSnapshotId,
+        string $expectedSnapshotSha,
+        string $actualSnapshotSha,
+    ): void {
         $this->requireEquals($errors, 'snapshot.schema_version', 'fap.riasec.result_page_v2.production_approved_snapshot.v0.1', (string) ($snapshot['schema_version'] ?? ''));
         $this->requireEquals($errors, 'snapshot.snapshot_id', $expectedSnapshotId, (string) ($snapshot['snapshot_id'] ?? ''));
         $this->requireTrue($errors, 'snapshot.production_use_allowed', (bool) ($snapshot['production_use_allowed'] ?? false));
@@ -384,7 +418,7 @@ final class RiasecResultPageV2ProductionImportExecutor
         $this->requireEquals($errors, 'snapshot.approval_summary.approval_type', 'production_import', (string) data_get($snapshot, 'approval_summary.approval_type', ''));
         $this->requireEquals($errors, 'snapshot.approval_summary.decision', 'GO', (string) data_get($snapshot, 'approval_summary.decision', ''));
         $this->requireEquals($errors, 'snapshot.source_snapshot_sha256', '4e5b7a3c356324bbd854ad2a3c8586caf07f0e05fee6bb26ab56af5c29f4b853', (string) ($snapshot['source_snapshot_sha256'] ?? ''));
-        $this->requireEquals($errors, 'snapshot.expected_sha256_self_reference', $expectedSnapshotSha, hash_file('sha256', base_path(self::DEFAULT_APPROVED_SNAPSHOT_PATH)) ?: '');
+        $this->requireEquals($errors, 'snapshot.expected_sha256_self_reference', $expectedSnapshotSha, $actualSnapshotSha);
     }
 
     /**
@@ -543,9 +577,20 @@ final class RiasecResultPageV2ProductionImportExecutor
         return preg_match('/^[a-f0-9]{64}$/', $value) === 1 ? $value : '';
     }
 
-    private function deterministicReleaseUuid(string $snapshotId, string $snapshotSha, string $dryRunSha): string
-    {
-        $hex = substr(hash('sha256', $snapshotId.'|'.$snapshotSha.'|'.$dryRunSha), 0, 32);
+    private function deterministicReleaseUuid(
+        string $snapshotId,
+        string $snapshotSha,
+        string $approvalId,
+        string $approvalSha,
+        string $dryRunSha,
+    ): string {
+        $hex = substr(hash('sha256', implode('|', [
+            $snapshotId,
+            $snapshotSha,
+            $approvalId,
+            $approvalSha,
+            $dryRunSha,
+        ])), 0, 32);
 
         return substr($hex, 0, 8).'-'.substr($hex, 8, 4).'-'.substr($hex, 12, 4).'-'.substr($hex, 16, 4).'-'.substr($hex, 20, 12);
     }
@@ -567,19 +612,20 @@ final class RiasecResultPageV2ProductionImportExecutor
     }
 
     /**
-     * @return array<string,mixed>
+     * @return array{array<string,mixed>,string}
      */
     private function decodeJsonFile(string $path): array
     {
         if (! is_file($path)) {
             throw new RuntimeException('JSON file does not exist: '.$path);
         }
-        $decoded = json_decode((string) File::get($path), true);
+        $contents = (string) File::get($path);
+        $decoded = json_decode($contents, true);
         if (! is_array($decoded)) {
             throw new RuntimeException('Invalid JSON file: '.$path);
         }
 
-        return $decoded;
+        return [$decoded, $contents];
     }
 
     private function resetDirectory(string $path): void

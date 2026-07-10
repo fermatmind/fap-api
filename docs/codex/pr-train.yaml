@@ -36278,6 +36278,9 @@ prs:
       - backend/app/Services/Riasec/RiasecPublicProjectionService.php
       - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
       - backend/app/Services/Report/RiasecReportComposer.php
+      - backend/tests/Feature/Console/RiasecResultPageV2ProductionImportCommandTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

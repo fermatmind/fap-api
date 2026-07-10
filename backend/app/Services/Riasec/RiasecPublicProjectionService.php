@@ -190,7 +190,7 @@ final class RiasecPublicProjectionService
         $projection['module_visibility_policy'] = $this->moduleSelector->build($projection);
         $projection['deep_content_slots_v1'] = $this->deepContentSlotsEnvelope($projection, $locale);
         $projection['exploration_feedback_overlay_v0_1'] = $this->feedbackOverlay->build($result, $projection, $snapshotBound);
-        $projection['lifecycle_copy_v1'] = $this->lifecycleCopy->lifecycleCopyContract($snapshotBound);
+        $projection['lifecycle_copy_v1'] = $this->lifecycleCopy->lifecycleCopyContract($snapshotBound, $locale);
 
         return $projection;
     }

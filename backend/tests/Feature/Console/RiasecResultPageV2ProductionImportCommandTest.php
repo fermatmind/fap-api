@@ -31,6 +31,7 @@ final class RiasecResultPageV2ProductionImportCommandTest extends TestCase
         $this->assertFalse((bool) data_get($summary, 'execution.production_import_performed'));
         $this->assertFalse(ContentPackRelease::query()->whereKey($summary['release_id'])->exists());
         $this->assertSame($this->expectedConfirmToken(), $summary['expected_confirm_execute'] ?? null);
+        $this->assertArrayNotHasKey('_validated_input_contents', $summary);
     }
 
     public function test_execute_requires_exact_confirmation_token(): void
@@ -112,6 +113,26 @@ final class RiasecResultPageV2ProductionImportCommandTest extends TestCase
         $this->assertSame(0, ContentPackRelease::query()->count());
     }
 
+    public function test_confirmation_token_binds_all_approved_artifacts(): void
+    {
+        $baseline = $this->expectedConfirmToken();
+
+        $this->assertNotSame($baseline, RiasecResultPageV2ProductionImportExecutor::expectedConfirmExecuteToken(
+            'riasec_result_page_v2_prod_approved_2026_06_22_01',
+            str_repeat('a', 64),
+            'riasec_result_page_v2_production_import_approval_2026_06_22_01',
+            str_repeat('b', 64),
+            str_repeat('c', 64),
+        ));
+        $this->assertNotSame($baseline, RiasecResultPageV2ProductionImportExecutor::expectedConfirmExecuteToken(
+            'riasec_result_page_v2_prod_approved_2026_06_22_01',
+            '999dc22a4c01b50891b342d75713a2fda1ce99b79933470f91fe1073744e0741',
+            'different-approval',
+            '1fecb849e2ee47d2234631ad10614e327463928be2a390a0836552acdff23095',
+            '038f8118a992caf58112ff06e225272bfdaeda603e4d5f26ad3ac30aab89b55d',
+        ));
+    }
+
     /**
      * @return array<string,mixed>
      */
@@ -138,6 +159,9 @@ final class RiasecResultPageV2ProductionImportCommandTest extends TestCase
         return RiasecResultPageV2ProductionImportExecutor::expectedConfirmExecuteToken(
             'riasec_result_page_v2_prod_approved_2026_06_22_01',
             '999dc22a4c01b50891b342d75713a2fda1ce99b79933470f91fe1073744e0741',
+            'riasec_result_page_v2_production_import_approval_2026_06_22_01',
+            '1fecb849e2ee47d2234631ad10614e327463928be2a390a0836552acdff23095',
+            '038f8118a992caf58112ff06e225272bfdaeda603e4d5f26ad3ac30aab89b55d',
         );
     }
 
