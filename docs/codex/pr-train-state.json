@@ -84286,8 +84286,8 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-neuroticism-content-package-01",
     "depends_on": ["BIG5-ZH-FACET-AGREEABLENESS-CONTENT-PACKAGE-01"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "02f83b97d8bd6dd47423dbf0fe8810d3e74a2cf7",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -84306,7 +84306,8 @@
     "transitions": [
       { "at": "2026-07-10T16:20:53Z", "from": "unregistered", "to": "planned", "note": "Registered only the current locked neuroticism six-page PR after the agreeableness dependency merged and was cleaned." },
       { "at": "2026-07-10T16:20:53Z", "from": "planned", "to": "in_progress", "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN emotional-sensitivity Facet routes." },
-      { "at": "2026-07-10T16:30:05Z", "from": "in_progress", "to": "local_checks_passed", "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed." }
+      { "at": "2026-07-10T16:30:05Z", "from": "in_progress", "to": "local_checks_passed", "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed." },
+      { "at": "2026-07-10T16:30:41Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped six-page emotional-sensitivity package and train metadata at 02f83b97d8bd6dd47423dbf0fe8810d3e74a2cf7." }
     ]
   }
 }
