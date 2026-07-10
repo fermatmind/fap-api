@@ -82470,8 +82470,8 @@
     "depends_on": [
       "MBTI-CMS-26B"
     ],
-    "status": "pr_open",
-    "commit_sha": "50e9ea0b6bdfcb2792030a0578c22ad7bfa43ea9",
+    "status": "ready_to_merge",
+    "commit_sha": "b3bd52c37a4bc22d0f7e950734009085291ee20c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2838",
     "failure_reason": null,
     "merged_at": null,
@@ -82500,8 +82500,8 @@
         "evidence": "Changed files are limited to the authorized importer command, service, test, PR-train metadata, and sidecar record."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "PR #2838 is open. The initial verify-bigfive failure was caused by this PR's two new importer files being absent from the shared non-runtime classifier; a scoped classifier regression fix was pushed and the required checks were re-requested."
+        "status": "pass",
+        "evidence": "PR #2838 required checks are green after the scoped classifier fix: verify-bigfive, verify-mbti-v2, verify-mbti-legacy, content-pack-build-validate, hygiene, supply-chain, and Code Scanning passed."
       },
       "runtime_freeze_ci_fix": {
         "status": "pass_with_phpunit_warnings",
@@ -82512,7 +82512,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -82539,6 +82539,12 @@
         "from": "pr_open",
         "to": "current_scope_ci_fix_local_checks_passed",
         "note": "Inspected verify-bigfive failure. The two new importer files were not recognized as non-runtime by the shared Big Five classifier. Added a scoped allowlist and regression test; focused and CI-equivalent Big Five validation passed locally."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "current_scope_ci_fix_local_checks_passed",
+        "to": "ready_to_merge",
+        "note": "PR #2838 required GitHub checks are green. Revalidated the authorized changed-file scope before squash merge; production deployment and CMS write remain outside this code-delivery PR."
       }
     ]
   },
