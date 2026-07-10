@@ -8,11 +8,11 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
 use App\Models\ContentPage;
-use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantSeoMeta;
+use App\Models\PersonalityPublicContentAsset;
 use App\Models\TopicProfile;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
@@ -270,6 +270,43 @@ class SitemapGeneratorTest extends TestCase
         // Hub should NOT be included when noindex or draft
         $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five-noindex', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five-draft', $xml);
+    }
+
+    public function test_generate_includes_thirteen_released_enneagram_assets_in_both_supported_locales(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $paths = [
+            'enneagram' => '/personality/enneagram',
+            'gut' => '/personality/enneagram/centers/gut',
+            'heart' => '/personality/enneagram/centers/heart',
+            'head' => '/personality/enneagram/centers/head',
+            ...array_combine(array_map(static fn (int $type): string => 'type-'.$type, range(1, 9)), array_map(static fn (int $type): string => '/personality/enneagram/type-'.$type, range(1, 9))),
+        ];
+
+        foreach (['zh-CN' => 'zh', 'en' => 'en'] as $locale => $segment) {
+            foreach ($paths as $entityKey => $path) {
+                $this->createEnneagramPublicContentAsset($entityKey, $locale, '/'.$segment.$path);
+            }
+        }
+        $this->createEnneagramPublicContentAsset('type-9-noindex', 'en', '/en/personality/enneagram/type-9-noindex', [
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'index_eligible' => false,
+            'sitemap_eligible' => false,
+        ]);
+
+        $payload = app(SitemapGenerator::class)->generate();
+        $xml = (string) ($payload['xml'] ?? '');
+        $slugList = (array) ($payload['slug_list'] ?? []);
+
+        foreach ($paths as $entityKey => $path) {
+            $this->assertStringContainsString('https://fermatmind.com/en'.$path, $xml);
+            $this->assertStringContainsString('https://fermatmind.com/zh'.$path, $xml);
+            $this->assertContains('personality-public-content:enneagram:en:'.$entityKey, $slugList);
+            $this->assertContains('personality-public-content:enneagram:zh:'.$entityKey, $slugList);
+        }
+
+        $this->assertStringNotContainsString('https://fermatmind.com/en/personality/enneagram/type-9-noindex', $xml);
     }
 
     public function test_generate_excludes_science_content_pages_until_public_readiness_gate_passes(): void
@@ -1041,6 +1078,53 @@ class SitemapGeneratorTest extends TestCase
             'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
             'source_package' => 'test-package',
             'source_hash' => str_repeat('a', 64),
+            'published_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),
+            'last_reviewed_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),
+            'created_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 7, 2, 8, 0, 0, 'UTC'),
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createEnneagramPublicContentAsset(string $entityKey, string $locale, string $canonicalPath, array $overrides = []): PersonalityPublicContentAsset
+    {
+        $entityType = match (true) {
+            $entityKey === 'enneagram' => PersonalityPublicContentAsset::ENTITY_HUB,
+            in_array($entityKey, ['gut', 'heart', 'head'], true) => PersonalityPublicContentAsset::ENTITY_CENTER,
+            default => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+        };
+
+        return PersonalityPublicContentAsset::query()->create(array_merge([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => $entityType,
+            'entity_key' => $entityKey,
+            'slug' => 'enneagram/'.$entityKey,
+            'locale' => $locale,
+            'title' => 'Enneagram '.$entityKey,
+            'summary' => 'Enneagram public content asset.',
+            'content_sections_json' => [['id' => 'overview', 'heading' => 'Overview', 'body' => 'Visible reviewed body.']],
+            'seo_json' => ['title' => 'Enneagram '.$entityKey, 'description' => 'Enneagram SEO description.'],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
+            'canonical_json' => ['path' => $canonicalPath],
+            'hreflang_json' => [],
+            'faq_json' => [['question' => 'What is this page?', 'answer' => 'A reviewed Enneagram content asset.']],
+            'media_json' => [],
+            'schema_json' => ['runtime_jsonld_enabled' => true],
+            'method_boundary_json' => ['non_diagnostic' => true],
+            'evidence_notes_json' => ['status' => 'reviewed'],
+            'internal_links_json' => [],
+            'is_public' => true,
+            'index_eligible' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => false,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'seo_discoverability_released',
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+            'source_package' => 'test-package',
+            'source_hash' => str_repeat('b', 64),
             'published_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),
             'last_reviewed_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),
             'created_at' => Carbon::create(2026, 7, 1, 8, 0, 0, 'UTC'),

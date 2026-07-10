@@ -7,9 +7,9 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\ContentPage;
-use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityPublicContentAsset;
 use App\Models\TopicProfile;
 use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\Career\Dataset\CareerDatasetPublicationMetadataService;
@@ -327,7 +327,19 @@ class SitemapGenerator
                 PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
                 PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
             ])
-            ->where('locale', 'zh-CN')
+            ->where(static function ($query): void {
+                $query
+                    ->where(static function ($query): void {
+                        $query
+                            ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
+                            ->where('locale', 'zh-CN');
+                    })
+                    ->orWhere(static function ($query): void {
+                        $query
+                            ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM)
+                            ->whereIn('locale', ['zh-CN', 'en']);
+                    });
+            })
             ->whereIn('entity_type', [
                 PersonalityPublicContentAsset::ENTITY_HUB,
                 PersonalityPublicContentAsset::ENTITY_DOMAIN,
@@ -340,7 +352,7 @@ class SitemapGenerator
             ->where('robots', PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW)
             ->where('index_eligible', true)
             ->where('sitemap_eligible', true)
-            ->select(['entity_key', 'framework', 'canonical_json', 'updated_at', 'published_at'])
+            ->select(['entity_key', 'framework', 'locale', 'canonical_json', 'updated_at', 'published_at'])
             ->orderBy('entity_type')
             ->orderBy('entity_key')
             ->get();
@@ -355,7 +367,9 @@ class SitemapGenerator
             $isBigFive = str_starts_with($path, '/zh/personality/big-five/')
                 || $path === '/zh/personality/big-five';
             $isEnneagram = str_starts_with($path, '/zh/personality/enneagram/')
-                || $path === '/zh/personality/enneagram';
+                || $path === '/zh/personality/enneagram'
+                || str_starts_with($path, '/en/personality/enneagram/')
+                || $path === '/en/personality/enneagram';
 
             if (! $isBigFive && ! $isEnneagram) {
                 continue;
@@ -370,7 +384,7 @@ class SitemapGenerator
             $urls[] = [
                 'loc' => $baseUrl.$path,
                 'lastmod' => $lastmod->toAtomString(),
-                'slug' => 'personality-public-content:'.$frameworkKey.':zh:'.strtolower((string) $row->entity_key),
+                'slug' => 'personality-public-content:'.$frameworkKey.':'.($row->locale === 'en' ? 'en' : 'zh').':'.strtolower((string) $row->entity_key),
                 'updated_at' => $lastmod->toDateTimeString(),
             ];
         }
