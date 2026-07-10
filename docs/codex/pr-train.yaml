@@ -21413,7 +21413,7 @@ prs:
     base: main
     title: "feat(foundation): add manual Daily Giving social sync MVP"
     train_scope: foundation_daily_giving_social_sync
-    status: in_progress
+    status: ready_to_merge
     scope:
       - Add a manual-only Foundation Daily Giving social sync MVP using existing social URL fields and Ops admin workflow.
       - Surface manual social sync status in Ops without adding database schema, credentials, external API clients, posting queues, automatic posting, CMS mutation, deploy, Search Channel action, or URL submission.
@@ -38443,6 +38443,24 @@ prs:
     database_mutation: false
     cms_mutation: false
     api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-EN13-PUBLIC-ASSET-CONTRACT-NORMALIZE-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01]
+    branch: codex/enneagram-en13-public-asset-contract-normalize-01
+    title: "ENNEAGRAM-EN13-PUBLIC-ASSET-CONTRACT-NORMALIZE-01: normalize public FAQ and internal-link fields"
+    train_scope: enneagram_en13_public_asset_contract_normalization
+    status: in_progress
+    allowed_paths: [backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php, backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: ["cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php", "php -l backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php", "php -l backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php", "git diff --check"]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
     publish_allowed: false
     deploy_allowed: false
     content_authority: CMS/backend

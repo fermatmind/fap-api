@@ -186,13 +186,15 @@ final class PersonalityPublicContentAssetController extends Controller
             'canonical_path' => (string) data_get($canonical, 'path', ''),
             'canonical' => $canonical,
             'hreflang' => is_array($asset->hreflang_json) ? $asset->hreflang_json : [],
-            'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
+            'faq' => $this->canonicalFaq(is_array($asset->faq_json) ? $asset->faq_json : []),
             'media' => is_array($asset->media_json) ? $asset->media_json : [],
             'schema' => $schemaRuntimeEligible && is_array($asset->schema_json) ? $asset->schema_json : [],
             'schema_runtime_eligible' => $schemaRuntimeEligible,
             'method_boundary' => is_array($asset->method_boundary_json) ? $asset->method_boundary_json : [],
             'evidence_notes' => is_array($asset->evidence_notes_json) ? $asset->evidence_notes_json : [],
-            'internal_links' => is_array($asset->internal_links_json) ? $asset->internal_links_json : [],
+            'internal_links' => $this->canonicalInternalLinks(
+                is_array($asset->internal_links_json) ? $asset->internal_links_json : []
+            ),
             'is_public' => (bool) $asset->is_public,
             'index_eligible' => (bool) $asset->index_eligible,
             'sitemap_eligible' => (bool) $asset->sitemap_eligible,
@@ -205,6 +207,139 @@ final class PersonalityPublicContentAssetController extends Controller
             'last_reviewed_at' => $asset->last_reviewed_at?->toAtomString(),
             'updated_at' => $asset->updated_at?->toAtomString(),
         ];
+    }
+
+    /**
+     * @param  array<int,mixed>  $items
+     * @return list<array<string,mixed>>
+     */
+    private function canonicalFaq(array $items): array
+    {
+        $canonical = [];
+
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $question = $this->firstNonEmptyString($item['question'] ?? null, $item['q'] ?? null);
+            $answer = $this->firstNonEmptyString($item['answer'] ?? null, $item['a'] ?? null);
+            if ($question === null || $answer === null) {
+                continue;
+            }
+
+            unset($item['q'], $item['a']);
+            $item['question'] = $question;
+            $item['answer'] = $answer;
+            $canonical[] = $item;
+        }
+
+        return $canonical;
+    }
+
+    /**
+     * @param  array<int,mixed>  $items
+     * @return list<array<string,mixed>>
+     */
+    private function canonicalInternalLinks(array $items): array
+    {
+        $canonical = [];
+
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $label = $this->firstNonEmptyString($item['label'] ?? null);
+            $href = $this->canonicalInternalHref(
+                $this->firstNonEmptyString($item['href'] ?? null, $item['url'] ?? null)
+            );
+            if ($label === null || $href === null) {
+                continue;
+            }
+
+            unset($item['url']);
+            $item['label'] = $label;
+            $item['href'] = $href;
+            $canonical[] = $item;
+        }
+
+        return $canonical;
+    }
+
+    private function firstNonEmptyString(mixed ...$values): ?string
+    {
+        foreach ($values as $value) {
+            if (! is_string($value) && ! is_numeric($value)) {
+                continue;
+            }
+
+            $normalized = trim((string) $value);
+            if ($normalized !== '') {
+                return $normalized;
+            }
+        }
+
+        return null;
+    }
+
+    private function canonicalInternalHref(mixed $value): ?string
+    {
+        if (! is_string($value) && ! is_numeric($value)) {
+            return null;
+        }
+
+        $withoutControlCharacters = preg_replace('/[\x00-\x1F\x7F-\x9F]/u', '', (string) $value);
+        if (! is_string($withoutControlCharacters)) {
+            return null;
+        }
+
+        $href = trim($withoutControlCharacters);
+        $compact = strtolower((string) preg_replace('/\s+/', '', $href));
+        if ($href === '' || preg_match('/[<>\\\\]/', $href) === 1 || str_starts_with($compact, '//')) {
+            return null;
+        }
+
+        if (str_starts_with($href, '#')) {
+            return preg_match('/^#[A-Za-z0-9][\w:.-]{0,127}$/', $href) === 1 ? $href : null;
+        }
+
+        $parts = parse_url($href);
+        if (! is_array($parts) || isset($parts['user']) || isset($parts['pass'])) {
+            return null;
+        }
+
+        if (str_starts_with($href, '/')) {
+            if (isset($parts['scheme']) || isset($parts['host'])) {
+                return null;
+            }
+
+            return $this->pathFromUrlParts($parts);
+        }
+
+        $scheme = strtolower((string) ($parts['scheme'] ?? ''));
+        $host = strtolower(rtrim((string) ($parts['host'] ?? ''), '.'));
+        if (! in_array($scheme, ['http', 'https'], true)
+            || ! in_array($host, ['fermatmind.com', 'www.fermatmind.com'], true)) {
+            return null;
+        }
+
+        return $this->pathFromUrlParts($parts);
+    }
+
+    /**
+     * @param  array<string,mixed>  $parts
+     */
+    private function pathFromUrlParts(array $parts): ?string
+    {
+        $path = (string) ($parts['path'] ?? '/');
+        if (! str_starts_with($path, '/')) {
+            return null;
+        }
+
+        return $path
+            .(isset($parts['query']) ? '?'.(string) $parts['query'] : '')
+            .(isset($parts['fragment']) ? '#'.(string) $parts['fragment'] : '');
     }
 
     private function isSchemaRuntimeEligible(PersonalityPublicContentAsset $asset): bool
