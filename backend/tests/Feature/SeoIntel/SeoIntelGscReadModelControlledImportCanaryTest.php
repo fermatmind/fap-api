@@ -228,7 +228,7 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
     }
 
     #[Test]
-    public function execute_is_idempotent_for_the_same_canary_key(): void
+    public function execute_is_idempotent_when_existing_row_uses_legacy_delimiter_key(): void
     {
         Http::fake();
         $artifactPath = $this->writeArtifact($this->validArtifact());
@@ -243,6 +243,9 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
         ];
 
         $this->runCanaryCommand($arguments);
+        DB::connection('seo_intel')->table('seo_gsc_daily')->update([
+            'idempotency_key' => $this->legacyIdempotencyKey(),
+        ]);
         [$exitCode, $payload] = $this->runCanaryCommand($arguments);
 
         $this->assertSame(0, $exitCode);
@@ -313,6 +316,27 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
         $this->assertSame(1, $payload['rows_skipped_existing'] ?? null);
         $this->assertSame(10, DB::connection('seo_intel')->table('seo_gsc_daily')->count());
         Http::assertNothingSent();
+    }
+
+    #[Test]
+    public function idempotency_key_serialization_does_not_collapse_delimiter_ambiguous_tuples(): void
+    {
+        $method = new \ReflectionMethod(GscReadModelControlledImportCanary::class, 'idempotencyKey');
+        $canary = app(GscReadModelControlledImportCanary::class);
+        $base = $this->safeRow(0);
+
+        $first = $method->invoke($canary, [
+            ...$base,
+            'device' => 'mobile|US',
+            'country' => 'CA',
+        ]);
+        $second = $method->invoke($canary, [
+            ...$base,
+            'device' => 'mobile',
+            'country' => 'US|CA',
+        ]);
+
+        $this->assertNotSame($first, $second);
     }
 
     #[Test]
@@ -489,6 +513,19 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
     }
 
     private function expectedIdempotencyKey(): string
+    {
+        return hash('sha256', json_encode([
+            '2026-06-17',
+            hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics-0'),
+            hash('sha256', 'mbti测试0'),
+            'google',
+            '',
+            '',
+            'web',
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+    }
+
+    private function legacyIdempotencyKey(): string
     {
         return hash('sha256', implode('|', [
             '2026-06-17',

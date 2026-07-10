@@ -35942,6 +35942,10 @@ prs:
       - backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php
       - backend/app/Services/SeoIntel/GscReadModelControlledImportCanary.php
       - backend/database/migrations/seo_intel/2026_06_20_130000_add_idempotency_key_to_seo_gsc_daily_table.php
+      - backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelGscReadModelControlledImportCanaryTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelTwoStageUrlTruthHandoffTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
