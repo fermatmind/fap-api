@@ -144,6 +144,27 @@ final class SeoOpsZhArticleQualityControlledWriterTest extends TestCase
     }
 
     #[Test]
+    public function writer_blocks_evidence_that_does_not_match_the_article_identity_lock(): void
+    {
+        $this->seedArticleAuthorityRows();
+        $evidence = $this->dryRunEvidence();
+        $evidence['article_operation_plans'][0]['slug'] = 'mismatched-article';
+        $dryRun = $this->writeJson($evidence);
+
+        $exitCode = Artisan::call('seo-ops:zh-article-quality-controlled-writer', [
+            '--dry-run-evidence' => $dryRun['path'],
+            '--confirm-dry-run-evidence-sha256' => $dryRun['sha256'],
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+        $summary = $this->jsonOutput();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('article_slug_mismatch', data_get($summary, 'article_repair_plans.0.issues', []));
+        $this->assertFalse((bool) data_get($summary, 'side_effects.database_write', true));
+    }
+
+    #[Test]
     public function generated_contract_documents_controlled_writer_boundaries(): void
     {
         $contract = $this->readJson(base_path('docs/seo/generated/seo-ops-zh-article-quality-controlled-writer.v1.json'));

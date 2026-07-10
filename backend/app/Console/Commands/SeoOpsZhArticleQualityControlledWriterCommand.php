@@ -9,6 +9,7 @@ use App\Models\ArticleTranslationRevision;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use RuntimeException;
 
 final class SeoOpsZhArticleQualityControlledWriterCommand extends Command
 {
@@ -248,6 +249,25 @@ final class SeoOpsZhArticleQualityControlledWriterCommand extends Command
         if ((bool) data_get($plan, 'resolved') !== true) {
             $issues[] = 'dry_run_plan_not_resolved';
         }
+        if ($article instanceof Article) {
+            $expectedPath = '/zh/articles/'.(string) $article->slug;
+            if ((string) data_get($plan, 'slug') !== (string) $article->slug) {
+                $issues[] = 'article_slug_mismatch';
+            }
+            if ((string) data_get($plan, 'path') !== $expectedPath
+                || (string) data_get($plan, 'current.canonical_path') !== $expectedPath) {
+                $issues[] = 'article_path_mismatch';
+            }
+            if ((string) data_get($plan, 'target') !== 'article:'.(int) $article->id.':zh-CN') {
+                $issues[] = 'article_target_mismatch';
+            }
+            if ((int) data_get($plan, 'current.article_id') !== (int) $article->id) {
+                $issues[] = 'article_id_mismatch';
+            }
+            if ((string) $article->locale !== 'zh-CN' || ! $article->publishedRevision instanceof ArticleTranslationRevision) {
+                $issues[] = 'article_published_revision_not_zh_cn';
+            }
+        }
 
         $replacements = $this->validatedReplacements($plan);
         if ($replacements === []) {
@@ -327,6 +347,9 @@ final class SeoOpsZhArticleQualityControlledWriterCommand extends Command
                 }
                 /** @var Article $article */
                 $article = Article::query()->withoutGlobalScopes()->with(['publishedRevision' => static fn ($query) => $query->withoutGlobalScopes()])->findOrFail((int) $plan['article_id']);
+                if (($plan['protected_snapshot'] ?? null) !== $this->protectedSnapshot($article)) {
+                    throw new RuntimeException('article_identity_lock_mismatch:'.(int) $article->id);
+                }
                 $revision = $article->publishedRevision;
                 $before = $this->protectedSnapshot($article);
                 $articleMd = (string) $article->content_md;
