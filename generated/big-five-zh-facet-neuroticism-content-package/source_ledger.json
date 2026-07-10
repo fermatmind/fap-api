@@ -1,0 +1,176 @@
+{
+  "package": "big-five-zh-facet-neuroticism-source-ledger-2026-07-10",
+  "access_date": "2026-07-10",
+  "scope": "Six Chinese neuroticism Facet content packages only.",
+  "inherits": {
+    "path": "generated/big-five-zh-facet-hub-content-repair/source_ledger.json",
+    "package": "big-five-zh-facet-shared-source-ledger-2026-07-10"
+  },
+  "sources": [
+    {
+      "id": "I1",
+      "type": "internal",
+      "reference": "backend/content_assets/personality_public/big_five_v1_seed.json",
+      "use": "Frozen CMS field shape, current Chinese route keys, locale, launch state, robots, and 5×6 taxonomy labels.",
+      "limitation": "The existing short body copy is an input to audit, not an authority for new academic claims."
+    },
+    {
+      "id": "I2",
+      "type": "internal",
+      "reference": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+      "use": "Non-diagnostic, non-deterministic, non-screening public claim boundaries."
+    },
+    {
+      "id": "I3",
+      "type": "internal",
+      "reference": "generated/big-five-zh-legacy-route-audit/legacy_route_audit.json",
+      "use": "Frozen V2 public route family and duplicate-route boundary."
+    },
+    {
+      "id": "A1",
+      "type": "official_research_resource",
+      "title": "NEO Facets Table",
+      "author_or_source": "International Personality Item Pool, Oregon Research Institute",
+      "year": null,
+      "url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+      "accessed_at": "2026-07-10",
+      "claim": "Documents corresponding IPIP scales for the 30 NEO-PI-R facet constructs.",
+      "limitation": "IPIP scales measure similar constructs; this does not make them identical to proprietary NEO scales or authorize score conversion."
+    },
+    {
+      "id": "A2",
+      "type": "peer_reviewed",
+      "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets",
+      "author_or_source": "Soto, C. J., & John, O. P.",
+      "year": 2017,
+      "doi": "10.1037/pspp0000096",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+      "accessed_at": "2026-07-10",
+      "claim": "Supports a hierarchical domain-and-facet reading of Big Five traits using 15 facets.",
+      "limitation": "BFI-2 has 15 facets, not the 30-facet taxonomy used for this CMS route set."
+    },
+    {
+      "id": "A3",
+      "type": "peer_reviewed",
+      "title": "Between facets and domains: 10 aspects of the Big Five",
+      "author_or_source": "DeYoung, C. G., Quilty, L. C., & Peterson, J. B.",
+      "year": 2007,
+      "doi": "10.1037/0022-3514.93.5.880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
+      "accessed_at": "2026-07-10",
+      "claim": "Shows an alternative intermediate hierarchy with two aspects per domain.",
+      "limitation": "The ten aspects are not interchangeable with either BFI-2 facets or NEO/IPIP 30 facets."
+    },
+    {
+      "id": "A4",
+      "type": "academic_review",
+      "title": "Paradigm Shift to the Integrative Big Five Trait Taxonomy: History, Measurement, and Conceptual Issues",
+      "author_or_source": "John, O. P., Naumann, L. P., & Soto, C. J.",
+      "year": 2008,
+      "reference": "In Handbook of Personality: Theory and Research (3rd ed.), pp. 114–158.",
+      "claim": "Supports broad Big Five taxonomy framing and continuous trait language.",
+      "limitation": "No individual prediction, numeric validity, or universal facet naming claim is taken from this review."
+    }
+  ],
+  "taxonomy": [
+    {
+      "domain_code": "neuroticism",
+      "domain_title_zh": "情绪敏感性（研究中常称神经质）",
+      "facets": [
+        {
+          "code": "anxiety",
+          "title_zh": "焦虑倾向",
+          "route": "/zh/personality/big-five/facets/anxiety"
+        },
+        {
+          "code": "anger",
+          "title_zh": "愤怒倾向",
+          "route": "/zh/personality/big-five/facets/anger"
+        },
+        {
+          "code": "depression",
+          "title_zh": "低落倾向",
+          "route": "/zh/personality/big-five/facets/depression"
+        },
+        {
+          "code": "self-consciousness",
+          "title_zh": "自我意识",
+          "route": "/zh/personality/big-five/facets/self-consciousness"
+        },
+        {
+          "code": "impulsiveness",
+          "title_zh": "冲动性",
+          "route": "/zh/personality/big-five/facets/impulsiveness"
+        },
+        {
+          "code": "vulnerability",
+          "title_zh": "脆弱性",
+          "route": "/zh/personality/big-five/facets/vulnerability"
+        }
+      ]
+    }
+  ],
+  "claim_map": [
+    {
+      "claim": "The six routes are narrower descriptors under neuroticism, not six personality types.",
+      "evidence_ids": [
+        "I1",
+        "A1",
+        "A4"
+      ]
+    },
+    {
+      "claim": "Interest or attention in a facet is not equivalent to ability, diagnosis, or outcome prediction.",
+      "evidence_ids": [
+        "I2",
+        "A4"
+      ]
+    },
+    {
+      "claim": "The route taxonomy must not be directly converted to BFI-2 facets or BFAS aspects.",
+      "evidence_ids": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    }
+  ],
+  "facet_boundaries": {
+    "anxiety": {
+      "title_zh": "焦虑倾向",
+      "construct_summary": "在不确定或潜在威胁出现时较快产生担忧、紧张和风险预期的通常倾向",
+      "explicit_non_equivalence": "它不等于焦虑障碍、胆小、准确预感或心理健康结论。人格面向描述通常反应，不能判断症状是否达到临床标准，也不能替代专业评估"
+    },
+    "anger": {
+      "title_zh": "愤怒倾向",
+      "construct_summary": "在受阻、不公平或边界被侵犯时较快体验恼怒、敌意或愤怒唤起的通常倾向",
+      "explicit_non_equivalence": "它不等于攻击、暴力、坏脾气定性、道德缺陷或任何临床诊断。感到愤怒与如何行动是两件事，任何暴力行为都不能用人格分数合理化"
+    },
+    "depression": {
+      "title_zh": "低落倾向",
+      "construct_summary": "在挫折、失去或压力下较容易体验悲伤、灰心和低期待的通常倾向",
+      "explicit_non_equivalence": "它不等于抑郁障碍、意志薄弱、悲观人格或诊断结果。页面不能判断症状持续时间、严重度和功能影响，也不能代替临床评估或治疗建议"
+    },
+    "self-consciousness": {
+      "title_zh": "自我意识",
+      "construct_summary": "在被观察、评价或可能出丑时较快感到尴尬、不自在和自我关注的通常倾向",
+      "explicit_non_equivalence": "它不等于自我觉察能力、自恋、低自尊、社交焦虑障碍或社交技巧。人格倾向不能判断临床症状，也不能证明他人真的在负面评价"
+    },
+    "impulsiveness": {
+      "title_zh": "冲动性",
+      "construct_summary": "在强烈欲望或情绪出现时延迟满足、抑制即时行动的通常难易程度",
+      "explicit_non_equivalence": "它不等于刺激寻求、审慎不足、道德失败、成瘾或 ADHD。相邻构念与临床状态不能由本页换算，具体行为还受环境、压力和资源影响"
+    },
+    "vulnerability": {
+      "title_zh": "脆弱性",
+      "construct_summary": "在高压力、复杂要求或支持不足时感到难以应对和容易被压垮的通常倾向",
+      "explicit_non_equivalence": "它不等于软弱、创伤史、韧性定论、能力不足或任何诊断。一次危机反应不能代表稳定人格，环境支持会显著改变表现"
+    }
+  },
+  "limitations": [
+    "The frozen CMS taxonomy is NEO/IPIP-like; it is not claimed as the single universal Big Five facet standard.",
+    "No proprietary assessment items, scoring keys, norms, or copyrighted manual text are reproduced.",
+    "No reliability, validity, percentile, clinical, hiring, admission, salary, relationship-outcome, or deterministic career claim is made.",
+    "GSC_EVIDENCE_PENDING: this package is content-authority preparation, not a search-performance claim."
+  ]
+}

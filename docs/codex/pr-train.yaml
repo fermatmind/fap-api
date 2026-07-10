@@ -38714,3 +38714,45 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: BIG5-ZH-FACET-NEUROTICISM-CONTENT-PACKAGE-01
+    repo: fap-api
+    depends_on: [BIG5-ZH-FACET-AGREEABLENESS-CONTENT-PACKAGE-01]
+    branch: codex/big5-zh-facet-neuroticism-content-package-01
+    title: "BIG5-ZH-FACET-NEUROTICISM-CONTENT-PACKAGE-01: build six Chinese neuroticism Facet content packages"
+    train_scope: big5_zh_facet_neuroticism_content_package
+    status: planned
+    scope:
+      - Upgrade exactly the six existing Chinese neuroticism Facet routes: anxiety, anger, depression, self-consciousness, impulsiveness, and vulnerability.
+      - Reuse the merged shared 5x6 source ledger and add emotional-sensitivity-specific construct, non-diagnostic, and non-equivalence boundaries.
+      - Produce Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts with nine sections, five FAQ items, and seven structured internal links per asset.
+      - Preserve content_ready plus noindex,follow and keep all index, sitemap, and llms eligibility gates false.
+    allowed_paths:
+      - generated/big-five-zh-facet-neuroticism-content-package/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify the other twenty-four Chinese Facet assets or any English asset.
+      - Write CMS or production data, use --write, change database schema, modify backend runtime/API code, or modify frontend code.
+      - Change canonical routes, robots, indexability, sitemap, llms, JSON-LD runtime, search submission, permissions, secrets, or deployment configuration.
+    validation:
+      - node generated/big-five-zh-facet-neuroticism-content-package/build-package.mjs
+      - node generated/big-five-zh-facet-neuroticism-content-package/validate-package.mjs
+      - find generated/big-five-zh-facet-neuroticism-content-package -name '*.json' -print0 | xargs -0 -n1 python3 -m json.tool >/dev/null
+      - cd backend && php artisan personality-public-assets:import --source=../generated/big-five-zh-facet-neuroticism-content-package/big_five_zh_facet_neuroticism_seed.json --framework=big_five --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend

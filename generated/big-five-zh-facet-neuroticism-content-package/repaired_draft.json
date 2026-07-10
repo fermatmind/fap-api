@@ -1,0 +1,1273 @@
+{
+  "package": "big-five-zh-facet-neuroticism-content-package-2026-07-10-repaired",
+  "contract_version": "personality_public_asset.v1",
+  "generated_at": "2026-07-10T00:00:00Z",
+  "assets": [
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "anxiety",
+      "entity_key": "anxiety",
+      "slug": "big-five/facets/anxiety",
+      "locale": "zh-CN",
+      "title": "焦虑倾向",
+      "summary": "焦虑倾向描述在不确定或潜在威胁出现时较快产生担忧、紧张和风险预期的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格焦虑倾向：含义、表现、误解与行动建议",
+        "description": "理解情绪敏感性细分面向“焦虑倾向”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/anxiety",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/anxiety"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/anxiety",
+        "zh-CN": "/zh/personality/big-five/facets/anxiety"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "焦虑倾向越高越好吗？",
+          "answer": "不是。焦虑倾向两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "焦虑倾向会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "焦虑倾向能代表整个情绪敏感性吗？",
+          "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的焦虑倾向分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "焦虑倾向可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "焦虑倾向"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释情绪敏感性下的“焦虑倾向”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "焦虑倾向是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "情绪敏感性",
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "愤怒倾向",
+          "href": "/zh/personality/big-five/facets/anger",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "低落倾向",
+          "href": "/zh/personality/big-five/facets/depression",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "自我意识",
+          "href": "/zh/personality/big-five/facets/self-consciousness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "冲动性",
+          "href": "/zh/personality/big-five/facets/impulsiveness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "脆弱性",
+          "href": "/zh/personality/big-five/facets/vulnerability",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：焦虑倾向是什么",
+          "body_md": "焦虑倾向描述在不确定或潜在威胁出现时较快产生担忧、紧张和风险预期的通常倾向。它是情绪敏感性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "焦虑倾向主要在观察什么",
+          "body_md": "焦虑倾向关注的是人在威胁、不确定、受阻、评价或高压力下，通常怎样体验负向情绪与恢复行动。它不单看一次反应，也不把人格面向直接等同于症状或诊断。更可靠的阅读方式，是比较多个时间点和不同情境，并同时查看持续时间、功能影响、现实压力与支持条件。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "焦虑倾向较明显时可能怎样表现",
+          "body_md": "较容易提前想到可能出错之处，身体和注意可能更快进入警觉，并反复确认风险。这种倾向可能较早提示风险、边界或支持需要，但也可能带来注意被占用、恢复变慢或行动空间缩小等成本。是否有帮助取决于能否区分信号与结论、调节强度、使用现实证据并获得合适支持。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "焦虑倾向较不明显时可能怎样表现",
+          "body_md": "面对不确定时通常较平静，不容易长时间预演负面结果，可能更快把注意转回当前行动。这并不表示没有情绪、风险或照护需要，而可能更容易维持平静与行动。在压力较高时这一端可能有实际价值；同时也需要避免忽略真实危险、他人反馈或身体极限，并在必要时主动检查和求助。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "安全检查和复杂计划中，较高焦虑倾向能提示被忽略的风险；若警觉持续占用注意，则需要借助优先级和证据停止无效确认。较低一端也需避免低估高代价风险。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于焦虑障碍、胆小、准确预感或心理健康结论。人格面向描述通常反应，不能判断症状是否达到临床标准，也不能替代专业评估。情绪敏感性六个面向也不必同步：某人在这个面向上较明显，不代表焦虑倾向、愤怒倾向、低落倾向、自我意识、冲动性和脆弱性都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "记录担忧出现的触发、身体线索、实际证据和最终结果，区分可行动风险、重复假设和由睡眠、压力或现实负担造成的短期变化。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "把一个担忧分成可控制、可监测和暂不可控制三栏，只为第一栏安排一个小行动，并为重复确认设置结束时间；若困扰持续或明显影响生活，寻求合格专业支持。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“焦虑倾向”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-anxiety-2026-07-10",
+        "codex-skeptical-review-neuroticism-2026-07-10",
+        "codex-repair-anxiety-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "anger",
+      "entity_key": "anger",
+      "slug": "big-five/facets/anger",
+      "locale": "zh-CN",
+      "title": "愤怒倾向",
+      "summary": "愤怒倾向描述在受阻、不公平或边界被侵犯时较快体验恼怒、敌意或愤怒唤起的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格愤怒倾向：含义、表现、误解与行动建议",
+        "description": "理解情绪敏感性细分面向“愤怒倾向”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/anger",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/anger"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/anger",
+        "zh-CN": "/zh/personality/big-five/facets/anger"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "愤怒倾向越高越好吗？",
+          "answer": "不是。愤怒倾向两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "愤怒倾向会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "愤怒倾向能代表整个情绪敏感性吗？",
+          "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的愤怒倾向分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "愤怒倾向可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "愤怒倾向"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释情绪敏感性下的“愤怒倾向”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "愤怒倾向是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "情绪敏感性",
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "焦虑倾向",
+          "href": "/zh/personality/big-five/facets/anxiety",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "低落倾向",
+          "href": "/zh/personality/big-five/facets/depression",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "自我意识",
+          "href": "/zh/personality/big-five/facets/self-consciousness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "冲动性",
+          "href": "/zh/personality/big-five/facets/impulsiveness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "脆弱性",
+          "href": "/zh/personality/big-five/facets/vulnerability",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：愤怒倾向是什么",
+          "body_md": "愤怒倾向描述在受阻、不公平或边界被侵犯时较快体验恼怒、敌意或愤怒唤起的通常倾向。它是情绪敏感性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "愤怒倾向主要在观察什么",
+          "body_md": "愤怒倾向关注的是人在威胁、不确定、受阻、评价或高压力下，通常怎样体验负向情绪与恢复行动。它不单看一次反应，也不把人格面向直接等同于症状或诊断。更可靠的阅读方式，是比较多个时间点和不同情境，并同时查看持续时间、功能影响、现实压力与支持条件。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "愤怒倾向较明显时可能怎样表现",
+          "body_md": "较容易觉察冒犯和阻碍，情绪强度上升较快，并可能产生立即反驳或纠正的冲动。这种倾向可能较早提示风险、边界或支持需要，但也可能带来注意被占用、恢复变慢或行动空间缩小等成本。是否有帮助取决于能否区分信号与结论、调节强度、使用现实证据并获得合适支持。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "愤怒倾向较不明显时可能怎样表现",
+          "body_md": "较少因受阻而持续生气，通常更容易保持平静、延后回应或寻找非对抗解释。这并不表示没有情绪、风险或照护需要，而可能更容易维持平静与行动。在压力较高时这一端可能有实际价值；同时也需要避免忽略真实危险、他人反馈或身体极限，并在必要时主动检查和求助。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "面对不公平时，愤怒可提示边界和价值受损；若未经调节直接行动，可能扩大冲突。较少愤怒有助降温，但也可能让重要边界没有被及时表达。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于攻击、暴力、坏脾气定性、道德缺陷或任何临床诊断。感到愤怒与如何行动是两件事，任何暴力行为都不能用人格分数合理化。情绪敏感性六个面向也不必同步：某人在这个面向上较明显，不代表焦虑倾向、愤怒倾向、低落倾向、自我意识、冲动性和脆弱性都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "记录愤怒前的事件、解释、身体变化和之后行为，区分事实性边界侵犯、误解、累积疲劳和可以延后处理的刺激。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "在低风险冲突中先暂停九十秒，用“发生了什么—影响—边界—请求”表达；若存在失控或伤害风险，先离开现场并联系可信支持或当地紧急资源。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“愤怒倾向”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-anger-2026-07-10",
+        "codex-skeptical-review-neuroticism-2026-07-10",
+        "codex-repair-anger-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "depression",
+      "entity_key": "depression",
+      "slug": "big-five/facets/depression",
+      "locale": "zh-CN",
+      "title": "低落倾向",
+      "summary": "低落倾向描述在挫折、失去或压力下较容易体验悲伤、灰心和低期待的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格低落倾向：含义、表现、误解与行动建议",
+        "description": "理解情绪敏感性细分面向“低落倾向”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/depression",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/depression"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/depression",
+        "zh-CN": "/zh/personality/big-five/facets/depression"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "低落倾向越高越好吗？",
+          "answer": "不是。低落倾向两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "低落倾向会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "低落倾向能代表整个情绪敏感性吗？",
+          "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的低落倾向分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "低落倾向可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "低落倾向"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释情绪敏感性下的“低落倾向”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "低落倾向是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "情绪敏感性",
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "焦虑倾向",
+          "href": "/zh/personality/big-five/facets/anxiety",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "愤怒倾向",
+          "href": "/zh/personality/big-five/facets/anger",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "自我意识",
+          "href": "/zh/personality/big-five/facets/self-consciousness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "冲动性",
+          "href": "/zh/personality/big-five/facets/impulsiveness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "脆弱性",
+          "href": "/zh/personality/big-five/facets/vulnerability",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：低落倾向是什么",
+          "body_md": "低落倾向描述在挫折、失去或压力下较容易体验悲伤、灰心和低期待的通常倾向。它是情绪敏感性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "低落倾向主要在观察什么",
+          "body_md": "低落倾向关注的是人在威胁、不确定、受阻、评价或高压力下，通常怎样体验负向情绪与恢复行动。它不单看一次反应，也不把人格面向直接等同于症状或诊断。更可靠的阅读方式，是比较多个时间点和不同情境，并同时查看持续时间、功能影响、现实压力与支持条件。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "低落倾向较明显时可能怎样表现",
+          "body_md": "遇到失败时较容易把注意停留在损失和不足，恢复积极预期可能需要更多时间与支持。这种倾向可能较早提示风险、边界或支持需要，但也可能带来注意被占用、恢复变慢或行动空间缩小等成本。是否有帮助取决于能否区分信号与结论、调节强度、使用现实证据并获得合适支持。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "低落倾向较不明显时可能怎样表现",
+          "body_md": "情绪低落通常较短或较轻，较容易重新看到可行动部分，但不代表不会悲伤或不受重大事件影响。这并不表示没有情绪、风险或照护需要，而可能更容易维持平静与行动。在压力较高时这一端可能有实际价值；同时也需要避免忽略真实危险、他人反馈或身体极限，并在必要时主动检查和求助。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "低落可提示需要休息、哀悼或调整不可持续目标；持续把暂时挫折概括为全部未来，可能缩小行动空间。较低一端也应允许真实损失被看见。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于抑郁障碍、意志薄弱、悲观人格或诊断结果。页面不能判断症状持续时间、严重度和功能影响，也不能代替临床评估或治疗建议。情绪敏感性六个面向也不必同步：某人在这个面向上较明显，不代表焦虑倾向、愤怒倾向、低落倾向、自我意识、冲动性和脆弱性都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "记录低落持续时间、触发、睡眠与日常功能变化，以及是否仍有短暂缓解；不要只凭单次心情或人格标签解释全部体验。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "选择一个十分钟可完成的照护或行动步骤，并联系一位可信的人；若低落持续、明显影响生活，或出现自伤念头，及时联系合格专业人员或当地紧急支持。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“低落倾向”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-depression-2026-07-10",
+        "codex-skeptical-review-neuroticism-2026-07-10",
+        "codex-repair-depression-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "self-consciousness",
+      "entity_key": "self-consciousness",
+      "slug": "big-five/facets/self-consciousness",
+      "locale": "zh-CN",
+      "title": "自我意识",
+      "summary": "自我意识描述在被观察、评价或可能出丑时较快感到尴尬、不自在和自我关注的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格自我意识：含义、表现、误解与行动建议",
+        "description": "理解情绪敏感性细分面向“自我意识”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/self-consciousness",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/self-consciousness"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/self-consciousness",
+        "zh-CN": "/zh/personality/big-five/facets/self-consciousness"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "自我意识越高越好吗？",
+          "answer": "不是。自我意识两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "自我意识会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "自我意识能代表整个情绪敏感性吗？",
+          "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的自我意识分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "自我意识可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "自我意识"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释情绪敏感性下的“自我意识”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "自我意识是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "情绪敏感性",
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "焦虑倾向",
+          "href": "/zh/personality/big-five/facets/anxiety",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "愤怒倾向",
+          "href": "/zh/personality/big-five/facets/anger",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "低落倾向",
+          "href": "/zh/personality/big-five/facets/depression",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "冲动性",
+          "href": "/zh/personality/big-five/facets/impulsiveness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "脆弱性",
+          "href": "/zh/personality/big-five/facets/vulnerability",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：自我意识是什么",
+          "body_md": "自我意识描述在被观察、评价或可能出丑时较快感到尴尬、不自在和自我关注的通常倾向。它是情绪敏感性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "自我意识主要在观察什么",
+          "body_md": "自我意识关注的是人在威胁、不确定、受阻、评价或高压力下，通常怎样体验负向情绪与恢复行动。它不单看一次反应，也不把人格面向直接等同于症状或诊断。更可靠的阅读方式，是比较多个时间点和不同情境，并同时查看持续时间、功能影响、现实压力与支持条件。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "自我意识较明显时可能怎样表现",
+          "body_md": "较容易想象他人如何看自己，在公开表现、陌生群体或失误后反复注意自己的言行。这种倾向可能较早提示风险、边界或支持需要，但也可能带来注意被占用、恢复变慢或行动空间缩小等成本。是否有帮助取决于能否区分信号与结论、调节强度、使用现实证据并获得合适支持。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "自我意识较不明显时可能怎样表现",
+          "body_md": "在受到关注时通常较自在，不容易因小失误长时间羞窘，但仍可能在重要评价中紧张。这并不表示没有情绪、风险或照护需要，而可能更容易维持平静与行动。在压力较高时这一端可能有实际价值；同时也需要避免忽略真实危险、他人反馈或身体极限，并在必要时主动检查和求助。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "适度自我意识可帮助读取规范和他人反馈；过度监控会占用任务注意。较低一端能自然表达，也需留意是否忽略场合与他人反应。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于自我觉察能力、自恋、低自尊、社交焦虑障碍或社交技巧。人格倾向不能判断临床症状，也不能证明他人真的在负面评价。情绪敏感性六个面向也不必同步：某人在这个面向上较明显，不代表焦虑倾向、愤怒倾向、低落倾向、自我意识、冲动性和脆弱性都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "比较独处、熟人、小组和公开场景中的身体反应、注意焦点与事后复盘，记录实际反馈和脑中推测分别是什么。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "在一个可控场景把注意从“我看起来怎样”转到一项外部任务，并允许一个小的不完美；事后只记录可见事实与一条学习，不进行无限复盘。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“自我意识”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-self-consciousness-2026-07-10",
+        "codex-skeptical-review-neuroticism-2026-07-10",
+        "codex-repair-self-consciousness-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "impulsiveness",
+      "entity_key": "impulsiveness",
+      "slug": "big-five/facets/impulsiveness",
+      "locale": "zh-CN",
+      "title": "冲动性",
+      "summary": "冲动性描述在强烈欲望或情绪出现时延迟满足、抑制即时行动的通常难易程度。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格冲动性：含义、表现、误解与行动建议",
+        "description": "理解情绪敏感性细分面向“冲动性”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/impulsiveness",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/impulsiveness"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/impulsiveness",
+        "zh-CN": "/zh/personality/big-five/facets/impulsiveness"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "冲动性越高越好吗？",
+          "answer": "不是。冲动性两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "冲动性会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "冲动性能代表整个情绪敏感性吗？",
+          "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的冲动性分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "冲动性可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "冲动性"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释情绪敏感性下的“冲动性”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "冲动性是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "情绪敏感性",
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "焦虑倾向",
+          "href": "/zh/personality/big-five/facets/anxiety",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "愤怒倾向",
+          "href": "/zh/personality/big-five/facets/anger",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "低落倾向",
+          "href": "/zh/personality/big-five/facets/depression",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "自我意识",
+          "href": "/zh/personality/big-five/facets/self-consciousness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "脆弱性",
+          "href": "/zh/personality/big-five/facets/vulnerability",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：冲动性是什么",
+          "body_md": "冲动性描述在强烈欲望或情绪出现时延迟满足、抑制即时行动的通常难易程度。它是情绪敏感性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "冲动性主要在观察什么",
+          "body_md": "冲动性关注的是人在威胁、不确定、受阻、评价或高压力下，通常怎样体验负向情绪与恢复行动。它不单看一次反应，也不把人格面向直接等同于症状或诊断。更可靠的阅读方式，是比较多个时间点和不同情境，并同时查看持续时间、功能影响、现实压力与支持条件。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "冲动性较明显时可能怎样表现",
+          "body_md": "面对食物、消费、表达或其他即时诱因时较难停顿，短期缓解可能压过长期计划。这种倾向可能较早提示风险、边界或支持需要，但也可能带来注意被占用、恢复变慢或行动空间缩小等成本。是否有帮助取决于能否区分信号与结论、调节强度、使用现实证据并获得合适支持。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "冲动性较不明显时可能怎样表现",
+          "body_md": "较能让冲动经过一段时间再决定，通常更容易坚持预先边界，但不表示从不改变计划。这并不表示没有情绪、风险或照护需要，而可能更容易维持平静与行动。在压力较高时这一端可能有实际价值；同时也需要避免忽略真实危险、他人反馈或身体极限，并在必要时主动检查和求助。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "快速回应在低风险窗口可能有价值；涉及金钱、健康、安全和关系时，给冲动增加延迟与摩擦能保护长期目标。过度控制也可能让合理需要被长期压下。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于刺激寻求、审慎不足、道德失败、成瘾或 ADHD。相邻构念与临床状态不能由本页换算，具体行为还受环境、压力和资源影响。情绪敏感性六个面向也不必同步：某人在这个面向上较明显，不代表焦虑倾向、愤怒倾向、低落倾向、自我意识、冲动性和脆弱性都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "记录冲动前的情绪、诱因、可获得选项和十分钟后的变化，区分寻求刺激、逃离不适、习惯线索与经过考虑的选择。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "为一类高成本冲动设置十分钟延迟、移开触发物并写下替代动作；若行为持续失控或造成显著伤害，寻求合格专业支持而非依赖人格标签。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“冲动性”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-impulsiveness-2026-07-10",
+        "codex-skeptical-review-neuroticism-2026-07-10",
+        "codex-repair-impulsiveness-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet",
+      "code": "vulnerability",
+      "entity_key": "vulnerability",
+      "slug": "big-five/facets/vulnerability",
+      "locale": "zh-CN",
+      "title": "脆弱性",
+      "summary": "脆弱性描述在高压力、复杂要求或支持不足时感到难以应对和容易被压垮的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格脆弱性：含义、表现、误解与行动建议",
+        "description": "理解情绪敏感性细分面向“脆弱性”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/vulnerability",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/vulnerability"
+      },
+      "hreflang": {
+        "en": "/en/personality/big-five/facets/vulnerability",
+        "zh-CN": "/zh/personality/big-five/facets/vulnerability"
+      },
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "脆弱性越高越好吗？",
+          "answer": "不是。脆弱性两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "脆弱性会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "脆弱性能代表整个情绪敏感性吗？",
+          "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的脆弱性分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "脆弱性可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "hero_image_asset_key": null,
+        "alt": "脆弱性"
+      },
+      "schema": {
+        "@type": "WebPage",
+        "about": "Big Five personality model",
+        "status": "noindex_facet_content_package_01"
+      },
+      "method_boundary": {
+        "summary": "本页解释情绪敏感性下的“脆弱性”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "脆弱性是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "情绪敏感性",
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "焦虑倾向",
+          "href": "/zh/personality/big-five/facets/anxiety",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "愤怒倾向",
+          "href": "/zh/personality/big-five/facets/anger",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "低落倾向",
+          "href": "/zh/personality/big-five/facets/depression",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "自我意识",
+          "href": "/zh/personality/big-five/facets/self-consciousness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "冲动性",
+          "href": "/zh/personality/big-five/facets/impulsiveness",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答：脆弱性是什么",
+          "body_md": "脆弱性描述在高压力、复杂要求或支持不足时感到难以应对和容易被压垮的通常倾向。它是情绪敏感性下的一个连续细分面向，不是一种人格类型，也不是给个人下定论的标签。较明显或较不明显只表示通常关注点可能不同；具体表现还会随任务、经验、资源、角色和压力改变。"
+        },
+        {
+          "key": "what_it_captures",
+          "title": "脆弱性主要在观察什么",
+          "body_md": "脆弱性关注的是人在威胁、不确定、受阻、评价或高压力下，通常怎样体验负向情绪与恢复行动。它不单看一次反应，也不把人格面向直接等同于症状或诊断。更可靠的阅读方式，是比较多个时间点和不同情境，并同时查看持续时间、功能影响、现实压力与支持条件。"
+        },
+        {
+          "key": "higher_expression",
+          "title": "脆弱性较明显时可能怎样表现",
+          "body_md": "压力累积时较容易失去清晰感，需要更多时间、结构或他人支持才能重新组织行动。这种倾向可能较早提示风险、边界或支持需要，但也可能带来注意被占用、恢复变慢或行动空间缩小等成本。是否有帮助取决于能否区分信号与结论、调节强度、使用现实证据并获得合适支持。"
+        },
+        {
+          "key": "lower_expression",
+          "title": "脆弱性较不明显时可能怎样表现",
+          "body_md": "在压力下通常较能保持工作感和方向，较少主观感到无助，但仍会受到资源极限和重大事件影响。这并不表示没有情绪、风险或照护需要，而可能更容易维持平静与行动。在压力较高时这一端可能有实际价值；同时也需要避免忽略真实危险、他人反馈或身体极限，并在必要时主动检查和求助。"
+        },
+        {
+          "key": "context_examples",
+          "title": "放进真实情境理解",
+          "body_md": "感到难以应对可提示任务、资源或支持需要调整；若把所有压力都归为个人弱点，会忽略环境问题。较低一端也需避免超负荷和忽视求助。这些例子只说明同一倾向在不同任务中可能产生不同效果，不预测个人表现。判断前应同时查看目标、风险、时限、协作者和可逆性。"
+        },
+        {
+          "key": "common_misreads",
+          "title": "常见误解与相邻概念",
+          "body_md": "它不等于软弱、创伤史、韧性定论、能力不足或任何诊断。一次危机反应不能代表稳定人格，环境支持会显著改变表现。情绪敏感性六个面向也不必同步：某人在这个面向上较明显，不代表焦虑倾向、愤怒倾向、低落倾向、自我意识、冲动性和脆弱性都会处在同一位置。"
+        },
+        {
+          "key": "observe_in_context",
+          "title": "怎样观察自己的模式",
+          "body_md": "回看压力上升时最先变化的睡眠、注意、身体和决策，并记录哪些任务结构、关系支持与恢复条件真正帮助自己。尽量使用可观察行为和原话，不用“我就是这样的人”概括。若只有一次事件，先记为线索；当反例出现时，更新假设而不是把反例解释掉。"
+        },
+        {
+          "key": "small_experiment",
+          "title": "一个可逆的小实验",
+          "body_md": "为当前压力列出必须做、可延后和需要支持三栏，减少一个非必要负担并提出具体求助；若安全或基本功能受到影响，及时联系专业或紧急支持。实验的目的不是把分数推向某一端，而是增加选择：知道什么时候沿用默认方式，什么时候换一种策略，并保留退出和复盘空间。"
+        },
+        {
+          "key": "method_boundary",
+          "title": "方法与使用边界",
+          "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“脆弱性”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
+        }
+      ],
+      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "source_hash": null,
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-vulnerability-2026-07-10",
+        "codex-skeptical-review-neuroticism-2026-07-10",
+        "codex-repair-vulnerability-2026-07-10"
+      ]
+    }
+  ]
+}
