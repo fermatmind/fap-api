@@ -43252,7 +43252,7 @@
         "status": "pass"
       },
       "scope_validation": {
-        "evidence": "All 13 changed files are listed in SECURITY-169-API-21 allowed_paths; JSON/YAML parsing, OpenAPI strict diff, and git diff --check passed.",
+        "evidence": "All 14 changed files are listed in SECURITY-169-API-21 allowed_paths; JSON/YAML parsing, OpenAPI strict diff, and git diff --check passed.",
         "status": "pass"
       }
     },
@@ -43284,6 +43284,11 @@
         "at": "2026-07-10T17:38:06+08:00",
         "note": "Opened PR #2872 from the scoped API21 branch after rebasing onto latest origin/main.",
         "status": "pr_open"
+      },
+      {
+        "at": "2026-07-10T17:49:00+08:00",
+        "note": "Inspected the verify-bigfive failure: its runtime-freeze classifier flagged this PR's OpsAccessControl and API route hardening. Added exact diff-line classification and regression coverage; the full 313-test classifier suite, 27 scoped feature tests, OpenAPI check, and 14-path scope validation pass.",
+        "status": "local_checks_passed"
       }
     ],
     "failure_reason": null,

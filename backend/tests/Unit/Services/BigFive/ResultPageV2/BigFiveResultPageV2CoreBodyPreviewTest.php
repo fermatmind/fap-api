@@ -1594,6 +1594,39 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_ops_route_security_hardening_only(): void
+    {
+        $changed = [
+            'backend/app/Http/Middleware/OpsAccessControl.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\\Http\\Middleware\\EnsureAdminTotpVerified;',
+            '+use App\\Http\\Middleware\\OpsAccessControl;',
+            '+            EnsureAdminTotpVerified::class,',
+            '+            OpsAccessControl::class,',
+        ];
+        $opsAccessControlChangedLines = [
+            "-        if ((\$routeName === '' || ! str_starts_with(\$routeName, 'filament.ops.')) && ! \$isOpsLivewireRequest) {",
+            '+        if (! $this->isProtectedOpsRoute($routeName) && ! $isOpsLivewireRequest) {',
+            '+',
+            '+    private function isProtectedOpsRoute(string $routeName): bool',
+            '+    {',
+            "+        return str_starts_with(\$routeName, 'filament.ops.')",
+            "+            || str_starts_with(\$routeName, 'ops.')",
+            "+            || str_starts_with(\$routeName, 'api.v0_5.ops.');",
+            '+    }',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+            opsAccessControlChangedLines: $opsAccessControlChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_opportunity_queue_readonly_files(): void
     {
         $changed = [
@@ -5108,6 +5141,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $assessmentEngineChangedLines = null,
         ?array $bigFivePublicProjectionChangedLines = null,
         ?array $shareControllerChangedLines = null,
+        ?array $opsAccessControlChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -5519,6 +5553,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isSeoDashApiReadOnlyContractFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Http/Middleware/OpsAccessControl.php'
+                && $this->opsAccessControlDiffIsNamedOpsRouteProtectionOnly(
+                    $opsAccessControlChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
                 continue;
             }
 
@@ -5987,6 +6034,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsSeoDashApiReadOnlyContractOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsSeoDashApiSecurityMiddlewareOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
                 continue;
             }
@@ -11531,6 +11585,61 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/^\+.*(SeoIntelDashboardController|EnsureSeoIntelReadAuthorized|ops\\/seo-intel|api\\.v0_5\\.ops\\.seo_intel|overview|urlTruth|url-truth|issues|trends|pagePerformance|page-performance|opportunityQueue|opportunity-queue|opportunity_queue|cmsAdminMiddleware|Route::prefix|Route::get|middleware|group|name)/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsSeoDashApiSecurityMiddlewareOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowedLines = [
+            '+use App\\Http\\Middleware\\EnsureAdminTotpVerified;',
+            '+use App\\Http\\Middleware\\OpsAccessControl;',
+            '+            EnsureAdminTotpVerified::class,',
+            '+            OpsAccessControl::class,',
+        ];
+
+        foreach ($changedLines as $line) {
+            if (! in_array($line, $allowedLines, true)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function opsAccessControlDiffIsNamedOpsRouteProtectionOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowedLines = [
+            "-        if ((\$routeName === '' || ! str_starts_with(\$routeName, 'filament.ops.')) && ! \$isOpsLivewireRequest) {",
+            '+        if (! $this->isProtectedOpsRoute($routeName) && ! $isOpsLivewireRequest) {',
+            '+',
+            '+    private function isProtectedOpsRoute(string $routeName): bool',
+            '+    {',
+            "+        return str_starts_with(\$routeName, 'filament.ops.')",
+            "+            || str_starts_with(\$routeName, 'ops.')",
+            "+            || str_starts_with(\$routeName, 'api.v0_5.ops.');",
+            '+    }',
+        ];
+
+        foreach ($changedLines as $line) {
+            if (! in_array($line, $allowedLines, true)) {
                 return false;
             }
         }
