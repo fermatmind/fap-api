@@ -84407,9 +84407,9 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-production-importer-ops-01",
     "depends_on": ["BIG5-ZH-FACET-IMPORT-DRYRUN-01"],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "dcbe5dbca4827039f92b6b7984867069c16ebc71",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2904",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -84426,7 +84426,8 @@
       { "at": "2026-07-10T18:24:32Z", "from": "unregistered", "to": "planned", "note": "Registered only the locked SHA-bound 31-page production importer operations PR after the combined dry-run dependency merged." },
       { "at": "2026-07-10T18:24:32Z", "from": "planned", "to": "in_progress", "note": "Started the manually dispatched production-environment workflow contract; no workflow dispatch, CMS write, deploy, or secret change is authorized in this PR." },
       { "at": "2026-07-10T18:34:22Z", "from": "in_progress", "to": "local_checks_passed", "note": "Workflow YAML, independent 31-row seed contract, required-string scan, full core CI, full-32 authority gate, manifest/state syntax, diff, and allowed-path validation passed; the workflow was not dispatched." },
-      { "at": "2026-07-10T18:36:21Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped guarded workflow and train metadata at dcbe5dbca4827039f92b6b7984867069c16ebc71." }
+      { "at": "2026-07-10T18:36:21Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped guarded workflow and train metadata at dcbe5dbca4827039f92b6b7984867069c16ebc71." },
+      { "at": "2026-07-10T18:38:15Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2904 from head a67a207b3314ee27a402dd6c5703e1892262d7a3." }
     ]
   }
 }
