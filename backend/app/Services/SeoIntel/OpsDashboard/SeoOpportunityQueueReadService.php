@@ -6,7 +6,6 @@ namespace App\Services\SeoIntel\OpsDashboard;
 
 use App\Services\SeoIntel\GscDataQualityGate;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueEligibilityEvaluator;
-use App\Support\PublicSeoPath;
 
 final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadService
 {
@@ -122,7 +121,9 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
                 continue;
             }
 
-            $path = PublicSeoPath::fromCanonicalUrl(is_string($row->canonical_url ?? null) ? $row->canonical_url : null);
+            $path = SearchChannelQueueEligibilityEvaluator::publicPathFromCanonicalUrl(
+                is_string($row->canonical_url ?? null) ? $row->canonical_url : null
+            );
             $hash = (string) ($row->canonical_url_hash ?? '');
             if ($path === null || $hash === '' || isset($result[$hash])) {
                 continue;

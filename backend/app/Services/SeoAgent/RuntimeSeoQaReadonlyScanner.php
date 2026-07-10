@@ -6,7 +6,7 @@ namespace App\Services\SeoAgent;
 
 use App\Models\Article;
 use App\Models\ContentPage;
-use App\Support\PublicSeoPath;
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueEligibilityEvaluator;
 use Illuminate\Support\Facades\Http;
 
 final class RuntimeSeoQaReadonlyScanner
@@ -267,7 +267,7 @@ final class RuntimeSeoQaReadonlyScanner
             ? '/zh/articles/'.$slug
             : '/articles/'.$slug;
 
-        return PublicSeoPath::normalizePath($path);
+        return SearchChannelQueueEligibilityEvaluator::normalizePublicPath($path);
     }
 
     private function contentPageSafePath(ContentPage $page): ?string
@@ -277,7 +277,7 @@ final class RuntimeSeoQaReadonlyScanner
             $path = '/'.$this->safeSlug((string) $page->slug);
         }
 
-        return PublicSeoPath::normalizePath($path);
+        return SearchChannelQueueEligibilityEvaluator::normalizePublicPath($path);
     }
 
     private function safeSlug(string $slug): string

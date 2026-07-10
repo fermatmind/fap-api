@@ -7,7 +7,7 @@ namespace App\Services\SeoAgent;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ContentPage;
-use App\Support\PublicSeoPath;
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueEligibilityEvaluator;
 
 final class CmsTdkGapReadonlyScanner
 {
@@ -261,7 +261,7 @@ final class CmsTdkGapReadonlyScanner
             ? '/zh/articles/'.$slug
             : '/articles/'.$slug;
 
-        return PublicSeoPath::normalizePath($path);
+        return SearchChannelQueueEligibilityEvaluator::normalizePublicPath($path);
     }
 
     private function contentPageSafePath(ContentPage $page): ?string
@@ -271,7 +271,7 @@ final class CmsTdkGapReadonlyScanner
             $path = '/'.$this->safeSlug((string) $page->slug);
         }
 
-        return PublicSeoPath::normalizePath($path);
+        return SearchChannelQueueEligibilityEvaluator::normalizePublicPath($path);
     }
 
     private function safeSlug(string $slug): string

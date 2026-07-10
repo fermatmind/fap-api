@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Support;
 
-use App\Support\PublicSeoPath;
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueEligibilityEvaluator;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -15,9 +15,9 @@ final class PublicSeoPathTest extends TestCase
     {
         config(['seo_intel.public_canonical_host' => 'https://fermatmind.com']);
 
-        $this->assertSame('/zh/articles/example', PublicSeoPath::normalizePath('//zh//articles/example/'));
-        $this->assertSame('/en/tests/mbti', PublicSeoPath::fromCanonicalUrl('https://www.fermatmind.com/en/tests/mbti'));
-        $this->assertSame('/', PublicSeoPath::fromCanonicalUrl('https://fermatmind.com/'));
+        $this->assertSame('/zh/articles/example', SearchChannelQueueEligibilityEvaluator::normalizePublicPath('//zh//articles/example/'));
+        $this->assertSame('/en/tests/mbti', SearchChannelQueueEligibilityEvaluator::publicPathFromCanonicalUrl('https://www.fermatmind.com/en/tests/mbti'));
+        $this->assertSame('/', SearchChannelQueueEligibilityEvaluator::publicPathFromCanonicalUrl('https://fermatmind.com/'));
     }
 
     #[Test]
@@ -35,7 +35,7 @@ final class PublicSeoPathTest extends TestCase
             '/articles\\example',
             'https://fermatmind.com/articles/example',
         ] as $path) {
-            $this->assertNull(PublicSeoPath::normalizePath($path), $path);
+            $this->assertNull(SearchChannelQueueEligibilityEvaluator::normalizePublicPath($path), $path);
         }
 
         foreach ([
@@ -46,7 +46,7 @@ final class PublicSeoPathTest extends TestCase
             'https://fermatmind.com/en/results/private-id',
             'https://fermatmind.com/en/articles/example?token=secret',
         ] as $url) {
-            $this->assertNull(PublicSeoPath::fromCanonicalUrl($url), $url);
+            $this->assertNull(SearchChannelQueueEligibilityEvaluator::publicPathFromCanonicalUrl($url), $url);
         }
     }
 }
