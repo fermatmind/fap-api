@@ -42578,6 +42578,10 @@
         ],
         "evidence": "Focused publication-gate tests passed: 27 tests, 127 assertions. ci_verify_mbti passed: 1178 tests, 150136 assertions. Route listing and isolated SQLite migration passed.",
         "status": "pass"
+      },
+      "github_required_checks": {
+        "evidence": "PR #2842 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, and Semgrep OSS.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42598,18 +42602,23 @@
         "at": "2026-07-10T08:57:00+08:00",
         "note": "Restored fail-closed forbidden-surface evidence gates for full visible Career publication claims; no CMS, production, deploy, or external write was performed.",
         "status": "implementation_validated"
+      },
+      {
+        "at": "2026-07-10T09:05:45+08:00",
+        "note": "PR #2842 merged as 4066b4b1e2b3469cea77f90065723e9ce1455ee6 after required checks passed; implementation branch was deleted locally and remotely. No staging wait or deploy was performed.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-12",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T01:05:45Z",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2842",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-12: restore career publication readiness evidence gates",
     "train_scope": "security_169_fap_api_audit"
   },
