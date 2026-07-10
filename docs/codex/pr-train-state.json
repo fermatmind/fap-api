@@ -84130,9 +84130,9 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-extraversion-content-package-01",
     "depends_on": ["BIG5-ZH-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01"],
-    "status": "committed",
-    "commit_sha": "fe115fd8b461b6655d7bfcda3b53ed2d4bce5f27",
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "c8decf66cd21c5d8f2e8b4c08ebaa4cf24cb1206",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2894",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -84151,7 +84151,8 @@
       { "at": "2026-07-10T15:29:44Z", "from": "unregistered", "to": "planned", "note": "Registered only the current locked extraversion six-page PR after the conscientiousness dependency merged and was cleaned." },
       { "at": "2026-07-10T15:29:44Z", "from": "planned", "to": "in_progress", "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN extraversion Facet routes." },
       { "at": "2026-07-10T15:43:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed." },
-      { "at": "2026-07-10T15:43:54Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped six-page extraversion package and train metadata at fe115fd8b461b6655d7bfcda3b53ed2d4bce5f27." }
+      { "at": "2026-07-10T15:43:54Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped six-page extraversion package and train metadata at fe115fd8b461b6655d7bfcda3b53ed2d4bce5f27." },
+      { "at": "2026-07-10T15:44:51Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2894 from head c8decf66cd21c5d8f2e8b4c08ebaa4cf24cb1206." }
     ]
   }
 }
