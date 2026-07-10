@@ -35658,7 +35658,7 @@ prs:
     branch: codex/security-169-api-20-harden-cms-article-qa-malformed-artifact-handlin
     title: "SECURITY-169-API-20: harden CMS/article QA malformed-artifact handling"
     train_scope: security_169_fap_api_audit
-    status: in_progress
+    status: merged
     scope:
       - Return controlled NO-GO results instead of crashes for malformed closeout, preview, readback, FAQ, target, and publish-canary artifacts.
     allowed_paths:

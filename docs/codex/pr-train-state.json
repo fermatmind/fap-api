@@ -43174,6 +43174,10 @@
         "evidence": "ci_verify_mbti passed the 1179-test suite (150137 assertions), Enneagram, Partner API, MBTI report/share, phone OTP, ACCEPT_F/G/E; unrelated final ACCEPT_H returned 401 and is sidecar-recorded.",
         "status": "pass_with_sidecar"
       },
+      "github_required_checks": {
+        "evidence": "PR #2868 checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload.",
+        "status": "pass"
+      },
       "route_list": {
         "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
         "status": "pass"
@@ -43184,7 +43188,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "f29e02b77d98bd410ee18fbe1643e44105dac878",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -43201,18 +43205,23 @@
         "at": "2026-07-10T16:25:00+08:00",
         "note": "Dependency SECURITY-169-API-19 merged at 659c9e5596d03cc81288c2a8e301ce3f0b16812f; started scoped implementation and regression coverage.",
         "status": "in_progress"
+      },
+      {
+        "at": "2026-07-10T16:58:02+08:00",
+        "note": "PR #2868 merged after all GitHub checks passed; merge commit f29e02b77d98bd410ee18fbe1643e44105dac878. Local and remote implementation task branches were deleted.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-20",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T16:58:02+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2868",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-20: harden CMS/article QA malformed-artifact handling",
     "train_scope": "security_169_fap_api_audit"
   },
