@@ -44127,6 +44127,10 @@
         "evidence": "backend/scripts/ci_verify_mbti.sh passed on the rebased implementation, including 1181 Big Five tests with 150139 assertions plus Enneagram, personality, payment, migration, auth, OpenAPI, order-security, MBTI smoke/report/share, events, dependency, webhook/attempt, and strict queue backlog gates.",
         "status": "pass"
       },
+      "github_required_checks": {
+        "evidence": "PR #2897 final head 573e667d9378860c6a7ad92e66d7463a4311fefe passed all 15 checks: push and pull-request hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 jobs, plus Semgrep blocking secrets, Semgrep OSS, and SARIF upload.",
+        "status": "pass"
+      },
       "route_list": {
         "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
         "status": "pass"
@@ -44137,7 +44141,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "b16f2ae44cd52d4fe59ba4b56e94f502e116011c",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -44159,18 +44163,23 @@
         "at": "2026-07-11T00:11:03+08:00",
         "note": "Rebased onto origin/main c49760ace, then passed 49 focused tests/699 assertions, 233-route inventory, fresh SQLite migration, final backend/scripts/ci_verify_mbti.sh, Pint, PHP syntax, JSON/YAML parsing, and scope/diff checks. No CMS/search write, external submission, deploy, production import, or production write was performed.",
         "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-11T00:18:32+08:00",
+        "note": "PR #2897 merged after all 15 GitHub checks passed; merge commit b16f2ae44cd52d4fe59ba4b56e94f502e116011c. origin/main and local main were synchronized, and local/remote API29 implementation branches were deleted.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-29",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-11T00:18:32+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2897",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "local_checks_passed",
+    "status": "merged",
     "title": "SECURITY-169-API-29: harden SEO approval artifacts and sanitization",
     "train_scope": "security_169_fap_api_audit"
   },
