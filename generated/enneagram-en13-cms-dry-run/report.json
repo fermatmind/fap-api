@@ -1,0 +1,1793 @@
+{
+    "artifact": "ENNEAGRAM-CMS-DRAFT-WRITER-CONTRACT-01",
+    "status": "pass",
+    "ok": true,
+    "framework": "enneagram",
+    "package_artifact": "ENNEAGRAM-EN13-CMS-PACKAGE-01",
+    "qa_artifact": "ENNEAGRAM-EN13-CONTENT-QA-01",
+    "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+    "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+    "dry_run": true,
+    "write": false,
+    "writes_attempted": false,
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "cms_mutation_attempted": false,
+    "publish_attempted": false,
+    "index_attempted": false,
+    "sitemap_llms_release_attempted": false,
+    "search_release_attempted": false,
+    "enqueue_attempted": false,
+    "external_calls_attempted": false,
+    "row_count": 13,
+    "hub_row_count": 1,
+    "center_row_count": 3,
+    "core_type_row_count": 9,
+    "would_create_asset_count": 13,
+    "created_asset_count": 0,
+    "updated_asset_count": 0,
+    "skipped_existing_count": 0,
+    "rows": [
+        {
+            "position": 1,
+            "url": "/en/personality/enneagram",
+            "path": "/en/personality/enneagram",
+            "locale": "en",
+            "entity_type": "hub",
+            "entity_key": "enneagram",
+            "slug": "enneagram",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "fdd272b8fe257b4b24934083985da2be52d7675f2fe9326f24582275369c513e",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "hub",
+                "entity_key": "enneagram",
+                "slug": "enneagram",
+                "locale": "en",
+                "title": "Enneagram Public Guide",
+                "summary": "The Enneagram is a reflection framework for recurring motives and responses. It is not a diagnosis or fixed identity.",
+                "content_sections_json": [
+                    {
+                        "key": "answer_block",
+                        "title": "",
+                        "body_md": "### answer block\n\nThe Enneagram is commonly used as a language for observing recurring motives, attention habits, and protective responses. It is not a diagnosis or a fixed identity."
+                    },
+                    {
+                        "key": "enneagram_definition",
+                        "title": "",
+                        "body_md": "### enneagram definition\n\nThis public guide treats the Enneagram as a reflective framework. It can help people ask why a familiar response appears, without claiming to determine personality, health, ability, or future outcomes."
+                    },
+                    {
+                        "key": "three_centers",
+                        "title": "",
+                        "body_md": "### three centers\n\nThe three centres group Types 8–9–1, 2–3–4, and 5–6–7 around recurring attention themes. They are starting points for reading, not categories that settle a person’s type."
+                    },
+                    {
+                        "key": "nine_types_grid",
+                        "title": "",
+                        "body_md": "### nine types grid\n\nRead the nine type pages as hypotheses. Pay attention to the motive beneath a repeated response, especially in ordinary pressure, feedback, and relationship situations."
+                    },
+                    {
+                        "key": "not_type_trap",
+                        "title": "",
+                        "body_md": "### not type trap\n\nA type description should increase options, not become a label. People can recognise many patterns and can respond differently across context and time."
+                    },
+                    {
+                        "key": "result_usage_scenarios",
+                        "title": "",
+                        "body_md": "### result usage scenarios\n\nA useful application is to turn a result or description into a small observation question for work, learning, communication, or recovery after stress."
+                    },
+                    {
+                        "key": "enneagram_mbti_bridge",
+                        "title": "",
+                        "body_md": "### enneagram mbti bridge\n\nEnneagram and MBTI use different languages. Neither framework should be treated as a diagnosis, a hiring tool, or a deterministic recommendation system."
+                    },
+                    {
+                        "key": "type_self_check",
+                        "title": "",
+                        "body_md": "### type self check\n\nStart with the type descriptions that create the most useful questions, then compare them with repeated real-world examples and trusted feedback."
+                    },
+                    {
+                        "key": "faq_expansion",
+                        "title": "",
+                        "body_md": "### faq expansion\n\nCommon questions are answered below. Keep the boundary clear: this is educational self-observation, not clinical assessment."
+                    },
+                    {
+                        "key": "method_boundary",
+                        "title": "",
+                        "body_md": "### method boundary\n\nDo not use Enneagram descriptions for clinical diagnosis, hiring, admissions, ability judgments, career predictions, relationship guarantees, or fixed identity claims."
+                    },
+                    {
+                        "key": "cta_related_links",
+                        "title": "",
+                        "body_md": "### cta related links\n\nExplore the type pages or take the Enneagram test as a starting hypothesis. Review results with self-observation rather than treating a score as a verdict."
+                    }
+                ],
+                "seo_json": {
+                    "title": "Enneagram Guide: Motives, Types, and Self-Observation | FermatMind",
+                    "description": "Explore nine Enneagram types and three centres as a self-observation framework, with clear non-diagnostic boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is the Enneagram a diagnosis?",
+                        "a": "No. Use public Enneagram material as a self-observation prompt and not as a clinical, selection, prediction, or fixed-identity tool."
+                    },
+                    {
+                        "q": "Can a test decide my type?",
+                        "a": "No. Use public Enneagram material as a self-observation prompt and not as a clinical, selection, prediction, or fixed-identity tool."
+                    },
+                    {
+                        "q": "Can it be used for hiring?",
+                        "a": "No. Use public Enneagram material as a self-observation prompt and not as a clinical, selection, prediction, or fixed-identity tool."
+                    },
+                    {
+                        "q": "Can I relate to more than one type?",
+                        "a": "No. Use public Enneagram material as a self-observation prompt and not as a clinical, selection, prediction, or fixed-identity tool."
+                    },
+                    {
+                        "q": "How is it different from MBTI?",
+                        "a": "No. Use public Enneagram material as a self-observation prompt and not as a clinical, selection, prediction, or fixed-identity tool."
+                    },
+                    {
+                        "q": "What is a helpful next step?",
+                        "a": "No. Use public Enneagram material as a self-observation prompt and not as a clinical, selection, prediction, or fixed-identity tool."
+                    },
+                    {
+                        "q": "Can it predict a relationship or career outcome?",
+                        "a": "No. Use public Enneagram material as a self-observation prompt and not as a clinical, selection, prediction, or fixed-identity tool."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Type 1: The Reformer",
+                        "url": "/en/personality/enneagram/type-1"
+                    },
+                    {
+                        "label": "Type 2: The Helper",
+                        "url": "/en/personality/enneagram/type-2"
+                    },
+                    {
+                        "label": "Type 3: The Achiever",
+                        "url": "/en/personality/enneagram/type-3"
+                    },
+                    {
+                        "label": "Type 4: The Individualist",
+                        "url": "/en/personality/enneagram/type-4"
+                    },
+                    {
+                        "label": "Type 5: The Investigator",
+                        "url": "/en/personality/enneagram/type-5"
+                    },
+                    {
+                        "label": "Type 6: The Loyalist",
+                        "url": "/en/personality/enneagram/type-6"
+                    },
+                    {
+                        "label": "Type 7: The Enthusiast",
+                        "url": "/en/personality/enneagram/type-7"
+                    },
+                    {
+                        "label": "Type 8: The Challenger",
+                        "url": "/en/personality/enneagram/type-8"
+                    },
+                    {
+                        "label": "Type 9: The Peacemaker",
+                        "url": "/en/personality/enneagram/type-9"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 2,
+            "url": "/en/personality/enneagram/type-1",
+            "path": "/en/personality/enneagram/type-1",
+            "locale": "en",
+            "entity_type": "core_type",
+            "entity_key": "type-1",
+            "slug": "enneagram/type-1",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "1820f0cb555f5237fe6611dced895d070bdb3431815ef6355a45a681c4581d4e",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "core_type",
+                "entity_key": "type-1",
+                "slug": "enneagram/type-1",
+                "locale": "en",
+                "title": "Type 1: The Reformer",
+                "summary": "Type 1 is commonly discussed through principle, improvement, and integrity. Use this as a reflection prompt, not a diagnosis or fixed label.",
+                "content_sections_json": [
+                    {
+                        "key": "type_overview",
+                        "title": "",
+                        "body_md": "### Type 1: The Reformer\n\nType 1 is often described through a recurring concern with principle, improvement, and integrity. This is a public reflection guide, not a claim that every person with similar behaviour has the same motive. Look for patterns that repeat across pressure, feedback, relationships, and ordinary decisions."
+                    },
+                    {
+                        "key": "core_motivation",
+                        "title": "",
+                        "body_md": "### Core motivation\n\nA useful question for this type is: *what am I trying to protect or secure here?* The language of principle, improvement, and integrity can make a familiar response more visible. It should be held lightly: motive is inferred through reflection, not assigned by another person or a test score."
+                    },
+                    {
+                        "key": "strengths_and_blind_spots",
+                        "title": "",
+                        "body_md": "### Strengths and blind spots\n\nAt their best, people who identify with this pattern may bring commitment, perspective, and follow-through to a group. Under strain, the same strategy can become rigid or harsh. A strength becomes more useful when it remains a choice rather than the only available response."
+                    },
+                    {
+                        "key": "stress_and_growth",
+                        "title": "",
+                        "body_md": "### Stress and growth\n\nStress can narrow attention and make a familiar protective strategy feel urgent. Instead of treating that moment as proof of a type, pause and describe the trigger, body signal, story, and action. A small practice is to notice what is already good before correcting it."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### Work and relationships\n\nIn collaboration, explain the need beneath your preferred style rather than assuming others can infer it. Ask what the other person is protecting as well. This can support clearer boundaries and feedback without turning Enneagram labels into explanations for every conflict."
+                    },
+                    {
+                        "key": "self_checklist",
+                        "title": "",
+                        "body_md": "### Self-check\n\n- Which situations make principle, improvement, and integrity feel especially urgent?\n- What do I do when that need is not met?\n- What alternative response would still respect the value I care about?\n- What feedback from trusted people would help me test this pattern?"
+                    },
+                    {
+                        "key": "faq_and_cta",
+                        "title": "",
+                        "body_md": "### Continue exploring\n\nRead the [Enneagram public guide](/en/personality/enneagram), compare nearby types, or use the [Enneagram test](/en/tests/enneagram-personality-test-nine-types) as a starting hypothesis. A result is not a final identity or diagnosis."
+                    }
+                ],
+                "seo_json": {
+                    "title": "Enneagram Type 1: The Reformer | FermatMind",
+                    "description": "A public self-observation guide to Enneagram Type 1, including motivation, blind spots, stress patterns, work, relationships, and boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/type-1"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is Type 1 a diagnosis?",
+                        "a": "No. Type 1 is a self-observation description, not a diagnosis, clinical assessment, or fixed identity."
+                    },
+                    {
+                        "q": "Can I recognize parts of myself in more than one type?",
+                        "a": "Yes. Many descriptions can feel familiar. Use the recurring motive behind a pattern as a question to explore, not as a verdict."
+                    },
+                    {
+                        "q": "Can this type be used for hiring or judging people?",
+                        "a": "No. Enneagram language should not be used for hiring, admissions, ability judgments, or predictions about a person."
+                    },
+                    {
+                        "q": "What is a useful next step?",
+                        "a": "Read the hub and compare Type 1 with nearby descriptions, then test whether the theme of principle, improvement, and integrity fits repeated real situations."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Enneagram test",
+                        "url": "/en/tests/enneagram-personality-test-nine-types"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 3,
+            "url": "/en/personality/enneagram/type-2",
+            "path": "/en/personality/enneagram/type-2",
+            "locale": "en",
+            "entity_type": "core_type",
+            "entity_key": "type-2",
+            "slug": "enneagram/type-2",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "0b75ed3b84c2d05025c17aa57e76b5b691df7d2ee7d376d1de2bab205be37f8d",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "core_type",
+                "entity_key": "type-2",
+                "slug": "enneagram/type-2",
+                "locale": "en",
+                "title": "Type 2: The Helper",
+                "summary": "Type 2 is commonly discussed through connection, care, and being needed. Use this as a reflection prompt, not a diagnosis or fixed label.",
+                "content_sections_json": [
+                    {
+                        "key": "type_overview",
+                        "title": "",
+                        "body_md": "### Type 2: The Helper\n\nType 2 is often described through a recurring concern with connection, care, and being needed. This is a public reflection guide, not a claim that every person with similar behaviour has the same motive. Look for patterns that repeat across pressure, feedback, relationships, and ordinary decisions."
+                    },
+                    {
+                        "key": "core_motivation",
+                        "title": "",
+                        "body_md": "### Core motivation\n\nA useful question for this type is: *what am I trying to protect or secure here?* The language of connection, care, and being needed can make a familiar response more visible. It should be held lightly: motive is inferred through reflection, not assigned by another person or a test score."
+                    },
+                    {
+                        "key": "strengths_and_blind_spots",
+                        "title": "",
+                        "body_md": "### Strengths and blind spots\n\nAt their best, people who identify with this pattern may bring commitment, perspective, and follow-through to a group. Under strain, the same strategy can overlook personal needs or over-involve themselves. A strength becomes more useful when it remains a choice rather than the only available response."
+                    },
+                    {
+                        "key": "stress_and_growth",
+                        "title": "",
+                        "body_md": "### Stress and growth\n\nStress can narrow attention and make a familiar protective strategy feel urgent. Instead of treating that moment as proof of a type, pause and describe the trigger, body signal, story, and action. A small practice is to name a need directly rather than earning care through usefulness."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### Work and relationships\n\nIn collaboration, explain the need beneath your preferred style rather than assuming others can infer it. Ask what the other person is protecting as well. This can support clearer boundaries and feedback without turning Enneagram labels into explanations for every conflict."
+                    },
+                    {
+                        "key": "self_checklist",
+                        "title": "",
+                        "body_md": "### Self-check\n\n- Which situations make connection, care, and being needed feel especially urgent?\n- What do I do when that need is not met?\n- What alternative response would still respect the value I care about?\n- What feedback from trusted people would help me test this pattern?"
+                    },
+                    {
+                        "key": "faq_and_cta",
+                        "title": "",
+                        "body_md": "### Continue exploring\n\nRead the [Enneagram public guide](/en/personality/enneagram), compare nearby types, or use the [Enneagram test](/en/tests/enneagram-personality-test-nine-types) as a starting hypothesis. A result is not a final identity or diagnosis."
+                    }
+                ],
+                "seo_json": {
+                    "title": "Enneagram Type 2: The Helper | FermatMind",
+                    "description": "A public self-observation guide to Enneagram Type 2, including motivation, blind spots, stress patterns, work, relationships, and boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/type-2"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is Type 2 a diagnosis?",
+                        "a": "No. Type 2 is a self-observation description, not a diagnosis, clinical assessment, or fixed identity."
+                    },
+                    {
+                        "q": "Can I recognize parts of myself in more than one type?",
+                        "a": "Yes. Many descriptions can feel familiar. Use the recurring motive behind a pattern as a question to explore, not as a verdict."
+                    },
+                    {
+                        "q": "Can this type be used for hiring or judging people?",
+                        "a": "No. Enneagram language should not be used for hiring, admissions, ability judgments, or predictions about a person."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Enneagram test",
+                        "url": "/en/tests/enneagram-personality-test-nine-types"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 4,
+            "url": "/en/personality/enneagram/type-3",
+            "path": "/en/personality/enneagram/type-3",
+            "locale": "en",
+            "entity_type": "core_type",
+            "entity_key": "type-3",
+            "slug": "enneagram/type-3",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "92a5ab5da85a5005f10815e4f49cb948fc1ef7c9361df314a7f349e366b1e5f2",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "core_type",
+                "entity_key": "type-3",
+                "slug": "enneagram/type-3",
+                "locale": "en",
+                "title": "Type 3: The Achiever",
+                "summary": "Type 3 is commonly discussed through progress, effectiveness, and recognition. Use this as a reflection prompt, not a diagnosis or fixed label.",
+                "content_sections_json": [
+                    {
+                        "key": "type_overview",
+                        "title": "",
+                        "body_md": "### Type 3: The Achiever\n\nType 3 is often described through a recurring concern with progress, effectiveness, and recognition. This is a public reflection guide, not a claim that every person with similar behaviour has the same motive. Look for patterns that repeat across pressure, feedback, relationships, and ordinary decisions."
+                    },
+                    {
+                        "key": "core_motivation",
+                        "title": "",
+                        "body_md": "### Core motivation\n\nA useful question for this type is: *what am I trying to protect or secure here?* The language of progress, effectiveness, and recognition can make a familiar response more visible. It should be held lightly: motive is inferred through reflection, not assigned by another person or a test score."
+                    },
+                    {
+                        "key": "strengths_and_blind_spots",
+                        "title": "",
+                        "body_md": "### Strengths and blind spots\n\nAt their best, people who identify with this pattern may bring commitment, perspective, and follow-through to a group. Under strain, the same strategy can equate worth with performance. A strength becomes more useful when it remains a choice rather than the only available response."
+                    },
+                    {
+                        "key": "stress_and_growth",
+                        "title": "",
+                        "body_md": "### Stress and growth\n\nStress can narrow attention and make a familiar protective strategy feel urgent. Instead of treating that moment as proof of a type, pause and describe the trigger, body signal, story, and action. A small practice is to separate a meaningful goal from the image of succeeding."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### Work and relationships\n\nIn collaboration, explain the need beneath your preferred style rather than assuming others can infer it. Ask what the other person is protecting as well. This can support clearer boundaries and feedback without turning Enneagram labels into explanations for every conflict."
+                    },
+                    {
+                        "key": "self_checklist",
+                        "title": "",
+                        "body_md": "### Self-check\n\n- Which situations make progress, effectiveness, and recognition feel especially urgent?\n- What do I do when that need is not met?\n- What alternative response would still respect the value I care about?\n- What feedback from trusted people would help me test this pattern?"
+                    },
+                    {
+                        "key": "faq_and_cta",
+                        "title": "",
+                        "body_md": "### Continue exploring\n\nRead the [Enneagram public guide](/en/personality/enneagram), compare nearby types, or use the [Enneagram test](/en/tests/enneagram-personality-test-nine-types) as a starting hypothesis. A result is not a final identity or diagnosis."
+                    }
+                ],
+                "seo_json": {
+                    "title": "Enneagram Type 3: The Achiever | FermatMind",
+                    "description": "A public self-observation guide to Enneagram Type 3, including motivation, blind spots, stress patterns, work, relationships, and boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/type-3"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is Type 3 a diagnosis?",
+                        "a": "No. Type 3 is a self-observation description, not a diagnosis, clinical assessment, or fixed identity."
+                    },
+                    {
+                        "q": "Can I recognize parts of myself in more than one type?",
+                        "a": "Yes. Many descriptions can feel familiar. Use the recurring motive behind a pattern as a question to explore, not as a verdict."
+                    },
+                    {
+                        "q": "Can this type be used for hiring or judging people?",
+                        "a": "No. Enneagram language should not be used for hiring, admissions, ability judgments, or predictions about a person."
+                    },
+                    {
+                        "q": "What is a useful next step?",
+                        "a": "Read the hub and compare Type 3 with nearby descriptions, then test whether the theme of progress, effectiveness, and recognition fits repeated real situations."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Enneagram test",
+                        "url": "/en/tests/enneagram-personality-test-nine-types"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 5,
+            "url": "/en/personality/enneagram/type-4",
+            "path": "/en/personality/enneagram/type-4",
+            "locale": "en",
+            "entity_type": "core_type",
+            "entity_key": "type-4",
+            "slug": "enneagram/type-4",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "07cc6ffef9555a5c3fa4e2d8f04dfac8bd94240c6e3409771e1a5d0f17e707e2",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "core_type",
+                "entity_key": "type-4",
+                "slug": "enneagram/type-4",
+                "locale": "en",
+                "title": "Type 4: The Individualist",
+                "summary": "Type 4 is commonly discussed through authenticity, depth, and distinctiveness. Use this as a reflection prompt, not a diagnosis or fixed label.",
+                "content_sections_json": [
+                    {
+                        "key": "type_overview",
+                        "title": "",
+                        "body_md": "### Type 4: The Individualist\n\nType 4 is often described through a recurring concern with authenticity, depth, and distinctiveness. This is a public reflection guide, not a claim that every person with similar behaviour has the same motive. Look for patterns that repeat across pressure, feedback, relationships, and ordinary decisions."
+                    },
+                    {
+                        "key": "core_motivation",
+                        "title": "",
+                        "body_md": "### Core motivation\n\nA useful question for this type is: *what am I trying to protect or secure here?* The language of authenticity, depth, and distinctiveness can make a familiar response more visible. It should be held lightly: motive is inferred through reflection, not assigned by another person or a test score."
+                    },
+                    {
+                        "key": "strengths_and_blind_spots",
+                        "title": "",
+                        "body_md": "### Strengths and blind spots\n\nAt their best, people who identify with this pattern may bring commitment, perspective, and follow-through to a group. Under strain, the same strategy can focus too long on what feels missing. A strength becomes more useful when it remains a choice rather than the only available response."
+                    },
+                    {
+                        "key": "stress_and_growth",
+                        "title": "",
+                        "body_md": "### Stress and growth\n\nStress can narrow attention and make a familiar protective strategy feel urgent. Instead of treating that moment as proof of a type, pause and describe the trigger, body signal, story, and action. A small practice is to return to the ordinary supports that are already present."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### Work and relationships\n\nIn collaboration, explain the need beneath your preferred style rather than assuming others can infer it. Ask what the other person is protecting as well. This can support clearer boundaries and feedback without turning Enneagram labels into explanations for every conflict."
+                    },
+                    {
+                        "key": "self_checklist",
+                        "title": "",
+                        "body_md": "### Self-check\n\n- Which situations make authenticity, depth, and distinctiveness feel especially urgent?\n- What do I do when that need is not met?\n- What alternative response would still respect the value I care about?\n- What feedback from trusted people would help me test this pattern?"
+                    },
+                    {
+                        "key": "faq_and_cta",
+                        "title": "",
+                        "body_md": "### Continue exploring\n\nRead the [Enneagram public guide](/en/personality/enneagram), compare nearby types, or use the [Enneagram test](/en/tests/enneagram-personality-test-nine-types) as a starting hypothesis. A result is not a final identity or diagnosis."
+                    }
+                ],
+                "seo_json": {
+                    "title": "Enneagram Type 4: The Individualist | FermatMind",
+                    "description": "A public self-observation guide to Enneagram Type 4, including motivation, blind spots, stress patterns, work, relationships, and boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/type-4"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is Type 4 a diagnosis?",
+                        "a": "No. Type 4 is a self-observation description, not a diagnosis, clinical assessment, or fixed identity."
+                    },
+                    {
+                        "q": "Can I recognize parts of myself in more than one type?",
+                        "a": "Yes. Many descriptions can feel familiar. Use the recurring motive behind a pattern as a question to explore, not as a verdict."
+                    },
+                    {
+                        "q": "Can this type be used for hiring or judging people?",
+                        "a": "No. Enneagram language should not be used for hiring, admissions, ability judgments, or predictions about a person."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Enneagram test",
+                        "url": "/en/tests/enneagram-personality-test-nine-types"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 6,
+            "url": "/en/personality/enneagram/type-5",
+            "path": "/en/personality/enneagram/type-5",
+            "locale": "en",
+            "entity_type": "core_type",
+            "entity_key": "type-5",
+            "slug": "enneagram/type-5",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "c88674c77f18c269e07ea6c2b16af4914192a9f59927844d69338e55aad6b17c",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "core_type",
+                "entity_key": "type-5",
+                "slug": "enneagram/type-5",
+                "locale": "en",
+                "title": "Type 5: The Investigator",
+                "summary": "Type 5 is commonly discussed through understanding, privacy, and sufficient inner resources. Use this as a reflection prompt, not a diagnosis or fixed label.",
+                "content_sections_json": [
+                    {
+                        "key": "type_overview",
+                        "title": "",
+                        "body_md": "### Type 5: The Investigator\n\nType 5 is often described through a recurring concern with understanding, privacy, and sufficient inner resources. This is a public reflection guide, not a claim that every person with similar behaviour has the same motive. Look for patterns that repeat across pressure, feedback, relationships, and ordinary decisions."
+                    },
+                    {
+                        "key": "core_motivation",
+                        "title": "",
+                        "body_md": "### Core motivation\n\nA useful question for this type is: *what am I trying to protect or secure here?* The language of understanding, privacy, and sufficient inner resources can make a familiar response more visible. It should be held lightly: motive is inferred through reflection, not assigned by another person or a test score."
+                    },
+                    {
+                        "key": "strengths_and_blind_spots",
+                        "title": "",
+                        "body_md": "### Strengths and blind spots\n\nAt their best, people who identify with this pattern may bring commitment, perspective, and follow-through to a group. Under strain, the same strategy can withdraw before participating. A strength becomes more useful when it remains a choice rather than the only available response."
+                    },
+                    {
+                        "key": "stress_and_growth",
+                        "title": "",
+                        "body_md": "### Stress and growth\n\nStress can narrow attention and make a familiar protective strategy feel urgent. Instead of treating that moment as proof of a type, pause and describe the trigger, body signal, story, and action. A small practice is to share one workable observation before information feels complete."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### Work and relationships\n\nIn collaboration, explain the need beneath your preferred style rather than assuming others can infer it. Ask what the other person is protecting as well. This can support clearer boundaries and feedback without turning Enneagram labels into explanations for every conflict."
+                    },
+                    {
+                        "key": "self_checklist",
+                        "title": "",
+                        "body_md": "### Self-check\n\n- Which situations make understanding, privacy, and sufficient inner resources feel especially urgent?\n- What do I do when that need is not met?\n- What alternative response would still respect the value I care about?\n- What feedback from trusted people would help me test this pattern?"
+                    },
+                    {
+                        "key": "faq_and_cta",
+                        "title": "",
+                        "body_md": "### Continue exploring\n\nRead the [Enneagram public guide](/en/personality/enneagram), compare nearby types, or use the [Enneagram test](/en/tests/enneagram-personality-test-nine-types) as a starting hypothesis. A result is not a final identity or diagnosis."
+                    }
+                ],
+                "seo_json": {
+                    "title": "Enneagram Type 5: The Investigator | FermatMind",
+                    "description": "A public self-observation guide to Enneagram Type 5, including motivation, blind spots, stress patterns, work, relationships, and boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/type-5"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is Type 5 a diagnosis?",
+                        "a": "No. Type 5 is a self-observation description, not a diagnosis, clinical assessment, or fixed identity."
+                    },
+                    {
+                        "q": "Can I recognize parts of myself in more than one type?",
+                        "a": "Yes. Many descriptions can feel familiar. Use the recurring motive behind a pattern as a question to explore, not as a verdict."
+                    },
+                    {
+                        "q": "Can this type be used for hiring or judging people?",
+                        "a": "No. Enneagram language should not be used for hiring, admissions, ability judgments, or predictions about a person."
+                    },
+                    {
+                        "q": "What is a useful next step?",
+                        "a": "Read the hub and compare Type 5 with nearby descriptions, then test whether the theme of understanding, privacy, and sufficient inner resources fits repeated real situations."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Enneagram test",
+                        "url": "/en/tests/enneagram-personality-test-nine-types"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 7,
+            "url": "/en/personality/enneagram/type-6",
+            "path": "/en/personality/enneagram/type-6",
+            "locale": "en",
+            "entity_type": "core_type",
+            "entity_key": "type-6",
+            "slug": "enneagram/type-6",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "d7a373e336ff9b318133b4bdc0eb14dbd30e583e07751eaf074c98c607466815",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "core_type",
+                "entity_key": "type-6",
+                "slug": "enneagram/type-6",
+                "locale": "en",
+                "title": "Type 6: The Loyalist",
+                "summary": "Type 6 is commonly discussed through security, reliability, and preparation. Use this as a reflection prompt, not a diagnosis or fixed label.",
+                "content_sections_json": [
+                    {
+                        "key": "type_overview",
+                        "title": "",
+                        "body_md": "### Type 6: The Loyalist\n\nType 6 is often described through a recurring concern with security, reliability, and preparation. This is a public reflection guide, not a claim that every person with similar behaviour has the same motive. Look for patterns that repeat across pressure, feedback, relationships, and ordinary decisions."
+                    },
+                    {
+                        "key": "core_motivation",
+                        "title": "",
+                        "body_md": "### Core motivation\n\nA useful question for this type is: *what am I trying to protect or secure here?* The language of security, reliability, and preparation can make a familiar response more visible. It should be held lightly: motive is inferred through reflection, not assigned by another person or a test score."
+                    },
+                    {
+                        "key": "strengths_and_blind_spots",
+                        "title": "",
+                        "body_md": "### Strengths and blind spots\n\nAt their best, people who identify with this pattern may bring commitment, perspective, and follow-through to a group. Under strain, the same strategy can give worst-case possibilities too much authority. A strength becomes more useful when it remains a choice rather than the only available response."
+                    },
+                    {
+                        "key": "stress_and_growth",
+                        "title": "",
+                        "body_md": "### Stress and growth\n\nStress can narrow attention and make a familiar protective strategy feel urgent. Instead of treating that moment as proof of a type, pause and describe the trigger, body signal, story, and action. A small practice is to test a concern against present evidence and trusted support."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### Work and relationships\n\nIn collaboration, explain the need beneath your preferred style rather than assuming others can infer it. Ask what the other person is protecting as well. This can support clearer boundaries and feedback without turning Enneagram labels into explanations for every conflict."
+                    },
+                    {
+                        "key": "self_checklist",
+                        "title": "",
+                        "body_md": "### Self-check\n\n- Which situations make security, reliability, and preparation feel especially urgent?\n- What do I do when that need is not met?\n- What alternative response would still respect the value I care about?\n- What feedback from trusted people would help me test this pattern?"
+                    },
+                    {
+                        "key": "faq_and_cta",
+                        "title": "",
+                        "body_md": "### Continue exploring\n\nRead the [Enneagram public guide](/en/personality/enneagram), compare nearby types, or use the [Enneagram test](/en/tests/enneagram-personality-test-nine-types) as a starting hypothesis. A result is not a final identity or diagnosis."
+                    }
+                ],
+                "seo_json": {
+                    "title": "Enneagram Type 6: The Loyalist | FermatMind",
+                    "description": "A public self-observation guide to Enneagram Type 6, including motivation, blind spots, stress patterns, work, relationships, and boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/type-6"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is Type 6 a diagnosis?",
+                        "a": "No. Type 6 is a self-observation description, not a diagnosis, clinical assessment, or fixed identity."
+                    },
+                    {
+                        "q": "Can I recognize parts of myself in more than one type?",
+                        "a": "Yes. Many descriptions can feel familiar. Use the recurring motive behind a pattern as a question to explore, not as a verdict."
+                    },
+                    {
+                        "q": "Can this type be used for hiring or judging people?",
+                        "a": "No. Enneagram language should not be used for hiring, admissions, ability judgments, or predictions about a person."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Enneagram test",
+                        "url": "/en/tests/enneagram-personality-test-nine-types"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 8,
+            "url": "/en/personality/enneagram/type-7",
+            "path": "/en/personality/enneagram/type-7",
+            "locale": "en",
+            "entity_type": "core_type",
+            "entity_key": "type-7",
+            "slug": "enneagram/type-7",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "fe84b4bc7760373b90fa1a7c38ec2869df4c0698749e697bca0bfaafd70d8c46",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "core_type",
+                "entity_key": "type-7",
+                "slug": "enneagram/type-7",
+                "locale": "en",
+                "title": "Type 7: The Enthusiast",
+                "summary": "Type 7 is commonly discussed through possibility, freedom, and engaging experience. Use this as a reflection prompt, not a diagnosis or fixed label.",
+                "content_sections_json": [
+                    {
+                        "key": "type_overview",
+                        "title": "",
+                        "body_md": "### Type 7: The Enthusiast\n\nType 7 is often described through a recurring concern with possibility, freedom, and engaging experience. This is a public reflection guide, not a claim that every person with similar behaviour has the same motive. Look for patterns that repeat across pressure, feedback, relationships, and ordinary decisions."
+                    },
+                    {
+                        "key": "core_motivation",
+                        "title": "",
+                        "body_md": "### Core motivation\n\nA useful question for this type is: *what am I trying to protect or secure here?* The language of possibility, freedom, and engaging experience can make a familiar response more visible. It should be held lightly: motive is inferred through reflection, not assigned by another person or a test score."
+                    },
+                    {
+                        "key": "strengths_and_blind_spots",
+                        "title": "",
+                        "body_md": "### Strengths and blind spots\n\nAt their best, people who identify with this pattern may bring commitment, perspective, and follow-through to a group. Under strain, the same strategy can move away from discomfort too quickly. A strength becomes more useful when it remains a choice rather than the only available response."
+                    },
+                    {
+                        "key": "stress_and_growth",
+                        "title": "",
+                        "body_md": "### Stress and growth\n\nStress can narrow attention and make a familiar protective strategy feel urgent. Instead of treating that moment as proof of a type, pause and describe the trigger, body signal, story, and action. A small practice is to stay with one difficult feeling long enough to learn from it."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### Work and relationships\n\nIn collaboration, explain the need beneath your preferred style rather than assuming others can infer it. Ask what the other person is protecting as well. This can support clearer boundaries and feedback without turning Enneagram labels into explanations for every conflict."
+                    },
+                    {
+                        "key": "self_checklist",
+                        "title": "",
+                        "body_md": "### Self-check\n\n- Which situations make possibility, freedom, and engaging experience feel especially urgent?\n- What do I do when that need is not met?\n- What alternative response would still respect the value I care about?\n- What feedback from trusted people would help me test this pattern?"
+                    },
+                    {
+                        "key": "faq_and_cta",
+                        "title": "",
+                        "body_md": "### Continue exploring\n\nRead the [Enneagram public guide](/en/personality/enneagram), compare nearby types, or use the [Enneagram test](/en/tests/enneagram-personality-test-nine-types) as a starting hypothesis. A result is not a final identity or diagnosis."
+                    }
+                ],
+                "seo_json": {
+                    "title": "Enneagram Type 7: The Enthusiast | FermatMind",
+                    "description": "A public self-observation guide to Enneagram Type 7, including motivation, blind spots, stress patterns, work, relationships, and boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/type-7"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is Type 7 a diagnosis?",
+                        "a": "No. Type 7 is a self-observation description, not a diagnosis, clinical assessment, or fixed identity."
+                    },
+                    {
+                        "q": "Can I recognize parts of myself in more than one type?",
+                        "a": "Yes. Many descriptions can feel familiar. Use the recurring motive behind a pattern as a question to explore, not as a verdict."
+                    },
+                    {
+                        "q": "Can this type be used for hiring or judging people?",
+                        "a": "No. Enneagram language should not be used for hiring, admissions, ability judgments, or predictions about a person."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Enneagram test",
+                        "url": "/en/tests/enneagram-personality-test-nine-types"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 9,
+            "url": "/en/personality/enneagram/type-8",
+            "path": "/en/personality/enneagram/type-8",
+            "locale": "en",
+            "entity_type": "core_type",
+            "entity_key": "type-8",
+            "slug": "enneagram/type-8",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "32f5be9216756dd7f258f75ac2e3fb311d255db9b0a80c8f94cff40d0983500c",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "core_type",
+                "entity_key": "type-8",
+                "slug": "enneagram/type-8",
+                "locale": "en",
+                "title": "Type 8: The Challenger",
+                "summary": "Type 8 is commonly discussed through strength, autonomy, and protection. Use this as a reflection prompt, not a diagnosis or fixed label.",
+                "content_sections_json": [
+                    {
+                        "key": "type_overview",
+                        "title": "",
+                        "body_md": "### Type 8: The Challenger\n\nType 8 is often described through a recurring concern with strength, autonomy, and protection. This is a public reflection guide, not a claim that every person with similar behaviour has the same motive. Look for patterns that repeat across pressure, feedback, relationships, and ordinary decisions."
+                    },
+                    {
+                        "key": "core_motivation",
+                        "title": "",
+                        "body_md": "### Core motivation\n\nA useful question for this type is: *what am I trying to protect or secure here?* The language of strength, autonomy, and protection can make a familiar response more visible. It should be held lightly: motive is inferred through reflection, not assigned by another person or a test score."
+                    },
+                    {
+                        "key": "strengths_and_blind_spots",
+                        "title": "",
+                        "body_md": "### Strengths and blind spots\n\nAt their best, people who identify with this pattern may bring commitment, perspective, and follow-through to a group. Under strain, the same strategy can lead with force when vulnerability would help. A strength becomes more useful when it remains a choice rather than the only available response."
+                    },
+                    {
+                        "key": "stress_and_growth",
+                        "title": "",
+                        "body_md": "### Stress and growth\n\nStress can narrow attention and make a familiar protective strategy feel urgent. Instead of treating that moment as proof of a type, pause and describe the trigger, body signal, story, and action. A small practice is to state the boundary and the underlying concern together."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### Work and relationships\n\nIn collaboration, explain the need beneath your preferred style rather than assuming others can infer it. Ask what the other person is protecting as well. This can support clearer boundaries and feedback without turning Enneagram labels into explanations for every conflict."
+                    },
+                    {
+                        "key": "self_checklist",
+                        "title": "",
+                        "body_md": "### Self-check\n\n- Which situations make strength, autonomy, and protection feel especially urgent?\n- What do I do when that need is not met?\n- What alternative response would still respect the value I care about?\n- What feedback from trusted people would help me test this pattern?"
+                    },
+                    {
+                        "key": "faq_and_cta",
+                        "title": "",
+                        "body_md": "### Continue exploring\n\nRead the [Enneagram public guide](/en/personality/enneagram), compare nearby types, or use the [Enneagram test](/en/tests/enneagram-personality-test-nine-types) as a starting hypothesis. A result is not a final identity or diagnosis."
+                    }
+                ],
+                "seo_json": {
+                    "title": "Enneagram Type 8: The Challenger | FermatMind",
+                    "description": "A public self-observation guide to Enneagram Type 8, including motivation, blind spots, stress patterns, work, relationships, and boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/type-8"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is Type 8 a diagnosis?",
+                        "a": "No. Type 8 is a self-observation description, not a diagnosis, clinical assessment, or fixed identity."
+                    },
+                    {
+                        "q": "Can I recognize parts of myself in more than one type?",
+                        "a": "Yes. Many descriptions can feel familiar. Use the recurring motive behind a pattern as a question to explore, not as a verdict."
+                    },
+                    {
+                        "q": "Can this type be used for hiring or judging people?",
+                        "a": "No. Enneagram language should not be used for hiring, admissions, ability judgments, or predictions about a person."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Enneagram test",
+                        "url": "/en/tests/enneagram-personality-test-nine-types"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 10,
+            "url": "/en/personality/enneagram/type-9",
+            "path": "/en/personality/enneagram/type-9",
+            "locale": "en",
+            "entity_type": "core_type",
+            "entity_key": "type-9",
+            "slug": "enneagram/type-9",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "c65924308bfab292b8a4d821364a5f77ef07d5f1645467d3f71254936c2ed675",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "core_type",
+                "entity_key": "type-9",
+                "slug": "enneagram/type-9",
+                "locale": "en",
+                "title": "Type 9: The Peacemaker",
+                "summary": "Type 9 is commonly discussed through harmony, comfort, and reduced conflict. Use this as a reflection prompt, not a diagnosis or fixed label.",
+                "content_sections_json": [
+                    {
+                        "key": "type_overview",
+                        "title": "",
+                        "body_md": "### Type 9: The Peacemaker\n\nType 9 is often described through a recurring concern with harmony, comfort, and reduced conflict. This is a public reflection guide, not a claim that every person with similar behaviour has the same motive. Look for patterns that repeat across pressure, feedback, relationships, and ordinary decisions."
+                    },
+                    {
+                        "key": "core_motivation",
+                        "title": "",
+                        "body_md": "### Core motivation\n\nA useful question for this type is: *what am I trying to protect or secure here?* The language of harmony, comfort, and reduced conflict can make a familiar response more visible. It should be held lightly: motive is inferred through reflection, not assigned by another person or a test score."
+                    },
+                    {
+                        "key": "strengths_and_blind_spots",
+                        "title": "",
+                        "body_md": "### Strengths and blind spots\n\nAt their best, people who identify with this pattern may bring commitment, perspective, and follow-through to a group. Under strain, the same strategy can defer their own priorities to keep the peace. A strength becomes more useful when it remains a choice rather than the only available response."
+                    },
+                    {
+                        "key": "stress_and_growth",
+                        "title": "",
+                        "body_md": "### Stress and growth\n\nStress can narrow attention and make a familiar protective strategy feel urgent. Instead of treating that moment as proof of a type, pause and describe the trigger, body signal, story, and action. A small practice is to name one preference before adapting to the group."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### Work and relationships\n\nIn collaboration, explain the need beneath your preferred style rather than assuming others can infer it. Ask what the other person is protecting as well. This can support clearer boundaries and feedback without turning Enneagram labels into explanations for every conflict."
+                    },
+                    {
+                        "key": "self_checklist",
+                        "title": "",
+                        "body_md": "### Self-check\n\n- Which situations make harmony, comfort, and reduced conflict feel especially urgent?\n- What do I do when that need is not met?\n- What alternative response would still respect the value I care about?\n- What feedback from trusted people would help me test this pattern?"
+                    },
+                    {
+                        "key": "faq_and_cta",
+                        "title": "",
+                        "body_md": "### Continue exploring\n\nRead the [Enneagram public guide](/en/personality/enneagram), compare nearby types, or use the [Enneagram test](/en/tests/enneagram-personality-test-nine-types) as a starting hypothesis. A result is not a final identity or diagnosis."
+                    }
+                ],
+                "seo_json": {
+                    "title": "Enneagram Type 9: The Peacemaker | FermatMind",
+                    "description": "A public self-observation guide to Enneagram Type 9, including motivation, blind spots, stress patterns, work, relationships, and boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/type-9"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is Type 9 a diagnosis?",
+                        "a": "No. Type 9 is a self-observation description, not a diagnosis, clinical assessment, or fixed identity."
+                    },
+                    {
+                        "q": "Can I recognize parts of myself in more than one type?",
+                        "a": "Yes. Many descriptions can feel familiar. Use the recurring motive behind a pattern as a question to explore, not as a verdict."
+                    },
+                    {
+                        "q": "Can this type be used for hiring or judging people?",
+                        "a": "No. Enneagram language should not be used for hiring, admissions, ability judgments, or predictions about a person."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Enneagram test",
+                        "url": "/en/tests/enneagram-personality-test-nine-types"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 11,
+            "url": "/en/personality/enneagram/centers/gut",
+            "path": "/en/personality/enneagram/centers/gut",
+            "locale": "en",
+            "entity_type": "center",
+            "entity_key": "gut",
+            "slug": "enneagram/centers/gut",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "23095463ca5d1e1c638033a6b1f8fc8136de883f3889eeae79c0294a6d1aad5b",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "center",
+                "entity_key": "gut",
+                "slug": "enneagram/centers/gut",
+                "locale": "en",
+                "title": "The Gut Centre",
+                "summary": "The Gut Centre groups Types 8, 9, 1 for reflection on body signals, boundaries, and action impulses.",
+                "content_sections_json": [
+                    {
+                        "key": "center_definition",
+                        "title": "",
+                        "body_md": "### center definition\n\nThe Gut Centre is a public grouping for reflection on body signals, boundaries, and action impulses. It is not a medical or scientific classification."
+                    },
+                    {
+                        "key": "included_types",
+                        "title": "",
+                        "body_md": "### included types\n\nThis centre includes Types 8, 9, 1. Shared grouping does not make people within it the same."
+                    },
+                    {
+                        "key": "core_attention_pattern",
+                        "title": "",
+                        "body_md": "### core attention pattern\n\nAttention may move toward body signals, boundaries, and action impulses, especially when a situation feels consequential."
+                    },
+                    {
+                        "key": "core_motivation_and_blindspot",
+                        "title": "",
+                        "body_md": "### core motivation and blindspot\n\nA familiar strategy can be helpful and can also become automatic. The useful question is what it protects and what it leaves out."
+                    },
+                    {
+                        "key": "stress_pattern",
+                        "title": "",
+                        "body_md": "### stress pattern\n\nUnder stress, slow the sequence down: situation, signal, interpretation, action, and consequence."
+                    },
+                    {
+                        "key": "communication_pattern",
+                        "title": "",
+                        "body_md": "### communication pattern\n\nDescribe the concern behind a reaction and ask others what they need; avoid using a centre as shorthand for character."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### work and relationships\n\nUse these descriptions to improve observation and communication, never for hiring, ranking, or predicting outcomes."
+                    },
+                    {
+                        "key": "growth_practice",
+                        "title": "",
+                        "body_md": "### growth practice\n\nOne experiment is to notice tension or urgency before acting. Then note what changes in the next conversation or decision."
+                    },
+                    {
+                        "key": "how_to_use_and_boundary",
+                        "title": "",
+                        "body_md": "### how to use and boundary\n\nRead this alongside the hub and type pages. Enneagram is a self-observation framework, not diagnosis, treatment, or a fixed identity."
+                    }
+                ],
+                "seo_json": {
+                    "title": "The Gut Centre in the Enneagram | FermatMind",
+                    "description": "A public guide to the Enneagram The Gut Centre, its included types, recurring attention patterns, and safe use boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/centers/gut"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is The Gut Centre a diagnosis?",
+                        "a": "No. It is a self-observation framework, not diagnosis or clinical assessment."
+                    },
+                    {
+                        "q": "How should I use this The Gut Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Gut Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Gut Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Gut Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Gut Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Gut Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Type 8",
+                        "url": "/en/personality/enneagram/type-8"
+                    },
+                    {
+                        "label": "Type 9",
+                        "url": "/en/personality/enneagram/type-9"
+                    },
+                    {
+                        "label": "Type 1",
+                        "url": "/en/personality/enneagram/type-1"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 12,
+            "url": "/en/personality/enneagram/centers/heart",
+            "path": "/en/personality/enneagram/centers/heart",
+            "locale": "en",
+            "entity_type": "center",
+            "entity_key": "heart",
+            "slug": "enneagram/centers/heart",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "45244626b2dd80e83cdf1bf7ac7857f800a95959d990e4f4294be4bf1820d1bf",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "center",
+                "entity_key": "heart",
+                "slug": "enneagram/centers/heart",
+                "locale": "en",
+                "title": "The Heart Centre",
+                "summary": "The Heart Centre groups Types 2, 3, 4 for reflection on image, emotional meaning, and relational signals.",
+                "content_sections_json": [
+                    {
+                        "key": "center_definition",
+                        "title": "",
+                        "body_md": "### center definition\n\nThe Heart Centre is a public grouping for reflection on image, emotional meaning, and relational signals. It is not a medical or scientific classification."
+                    },
+                    {
+                        "key": "included_types",
+                        "title": "",
+                        "body_md": "### included types\n\nThis centre includes Types 2, 3, 4. Shared grouping does not make people within it the same."
+                    },
+                    {
+                        "key": "core_attention_pattern",
+                        "title": "",
+                        "body_md": "### core attention pattern\n\nAttention may move toward image, emotional meaning, and relational signals, especially when a situation feels consequential."
+                    },
+                    {
+                        "key": "core_motivation_and_blindspot",
+                        "title": "",
+                        "body_md": "### core motivation and blindspot\n\nA familiar strategy can be helpful and can also become automatic. The useful question is what it protects and what it leaves out."
+                    },
+                    {
+                        "key": "stress_pattern",
+                        "title": "",
+                        "body_md": "### stress pattern\n\nUnder stress, slow the sequence down: situation, signal, interpretation, action, and consequence."
+                    },
+                    {
+                        "key": "communication_pattern",
+                        "title": "",
+                        "body_md": "### communication pattern\n\nDescribe the concern behind a reaction and ask others what they need; avoid using a centre as shorthand for character."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### work and relationships\n\nUse these descriptions to improve observation and communication, never for hiring, ranking, or predicting outcomes."
+                    },
+                    {
+                        "key": "growth_practice",
+                        "title": "",
+                        "body_md": "### growth practice\n\nOne experiment is to separate what is felt from what needs to be proved. Then note what changes in the next conversation or decision."
+                    },
+                    {
+                        "key": "how_to_use_and_boundary",
+                        "title": "",
+                        "body_md": "### how to use and boundary\n\nRead this alongside the hub and type pages. Enneagram is a self-observation framework, not diagnosis, treatment, or a fixed identity."
+                    }
+                ],
+                "seo_json": {
+                    "title": "The Heart Centre in the Enneagram | FermatMind",
+                    "description": "A public guide to the Enneagram The Heart Centre, its included types, recurring attention patterns, and safe use boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/centers/heart"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is The Heart Centre a diagnosis?",
+                        "a": "No. It is a self-observation framework, not diagnosis or clinical assessment."
+                    },
+                    {
+                        "q": "How should I use this The Heart Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Heart Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Heart Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Heart Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Heart Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Type 2",
+                        "url": "/en/personality/enneagram/type-2"
+                    },
+                    {
+                        "label": "Type 3",
+                        "url": "/en/personality/enneagram/type-3"
+                    },
+                    {
+                        "label": "Type 4",
+                        "url": "/en/personality/enneagram/type-4"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        },
+        {
+            "position": 13,
+            "url": "/en/personality/enneagram/centers/head",
+            "path": "/en/personality/enneagram/centers/head",
+            "locale": "en",
+            "entity_type": "center",
+            "entity_key": "head",
+            "slug": "enneagram/centers/head",
+            "source_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+            "qa_source_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f",
+            "recommendation_sha256": "6e5a1f75016d469c4d64f05543d9fa8a88f28544e6288273672d05dd5f1f45d9",
+            "existing_asset_id": null,
+            "action": "create_draft_asset",
+            "asset_preview": {
+                "org_id": 0,
+                "framework": "enneagram",
+                "entity_type": "center",
+                "entity_key": "head",
+                "slug": "enneagram/centers/head",
+                "locale": "en",
+                "title": "The Head Centre",
+                "summary": "The Head Centre groups Types 5, 6, 7 for reflection on analysis, anticipation, and uncertainty management.",
+                "content_sections_json": [
+                    {
+                        "key": "center_definition",
+                        "title": "",
+                        "body_md": "### center definition\n\nThe Head Centre is a public grouping for reflection on analysis, anticipation, and uncertainty management. It is not a medical or scientific classification."
+                    },
+                    {
+                        "key": "included_types",
+                        "title": "",
+                        "body_md": "### included types\n\nThis centre includes Types 5, 6, 7. Shared grouping does not make people within it the same."
+                    },
+                    {
+                        "key": "core_attention_pattern",
+                        "title": "",
+                        "body_md": "### core attention pattern\n\nAttention may move toward analysis, anticipation, and uncertainty management, especially when a situation feels consequential."
+                    },
+                    {
+                        "key": "core_motivation_and_blindspot",
+                        "title": "",
+                        "body_md": "### core motivation and blindspot\n\nA familiar strategy can be helpful and can also become automatic. The useful question is what it protects and what it leaves out."
+                    },
+                    {
+                        "key": "stress_pattern",
+                        "title": "",
+                        "body_md": "### stress pattern\n\nUnder stress, slow the sequence down: situation, signal, interpretation, action, and consequence."
+                    },
+                    {
+                        "key": "communication_pattern",
+                        "title": "",
+                        "body_md": "### communication pattern\n\nDescribe the concern behind a reaction and ask others what they need; avoid using a centre as shorthand for character."
+                    },
+                    {
+                        "key": "work_and_relationships",
+                        "title": "",
+                        "body_md": "### work and relationships\n\nUse these descriptions to improve observation and communication, never for hiring, ranking, or predicting outcomes."
+                    },
+                    {
+                        "key": "growth_practice",
+                        "title": "",
+                        "body_md": "### growth practice\n\nOne experiment is to distinguish useful preparation from repetitive worry. Then note what changes in the next conversation or decision."
+                    },
+                    {
+                        "key": "how_to_use_and_boundary",
+                        "title": "",
+                        "body_md": "### how to use and boundary\n\nRead this alongside the hub and type pages. Enneagram is a self-observation framework, not diagnosis, treatment, or a fixed identity."
+                    }
+                ],
+                "seo_json": {
+                    "title": "The Head Centre in the Enneagram | FermatMind",
+                    "description": "A public guide to the Enneagram The Head Centre, its included types, recurring attention patterns, and safe use boundaries."
+                },
+                "robots": "noindex,follow",
+                "canonical_json": {
+                    "path": "/en/personality/enneagram/centers/head"
+                },
+                "hreflang_json": [],
+                "faq_json": [
+                    {
+                        "q": "Is The Head Centre a diagnosis?",
+                        "a": "No. It is a self-observation framework, not diagnosis or clinical assessment."
+                    },
+                    {
+                        "q": "How should I use this The Head Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Head Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Head Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Head Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    },
+                    {
+                        "q": "How should I use this The Head Centre guide?",
+                        "a": "Use it to notice recurring patterns and communicate more clearly; do not use it to label or judge people."
+                    }
+                ],
+                "media_json": [],
+                "schema_json": [],
+                "method_boundary_json": {
+                    "summary": "Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.",
+                    "not_for": [
+                        "clinical diagnosis",
+                        "employment screening",
+                        "deterministic decisions"
+                    ]
+                },
+                "evidence_notes_json": [
+                    {
+                        "source_type": "agent_recommendation",
+                        "source": "enneagram_agent_projection_draft_v1",
+                        "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                        "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+                    }
+                ],
+                "internal_links_json": [
+                    {
+                        "label": "Enneagram public guide",
+                        "url": "/en/personality/enneagram"
+                    },
+                    {
+                        "label": "Type 5",
+                        "url": "/en/personality/enneagram/type-5"
+                    },
+                    {
+                        "label": "Type 6",
+                        "url": "/en/personality/enneagram/type-6"
+                    },
+                    {
+                        "label": "Type 7",
+                        "url": "/en/personality/enneagram/type-7"
+                    }
+                ],
+                "is_public": false,
+                "index_eligible": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "launch_state": "review",
+                "review_state": "agent_draft_pending_review",
+                "contract_version": "personality_public_asset.v1",
+                "source_package": "enneagram_agent_projection_draft_v1",
+                "source_hash": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+                "last_reviewed_at": null
+            }
+        }
+    ],
+    "errors": [],
+    "warnings": [],
+    "package_path": "/Users/rainie/Desktop/GitHub/fap-api-en13/backend/../docs/seo/personality/enneagram/content-packages/en13-cms-v1/enneagram-en13-cms-package-v1.json",
+    "qa_path": "/Users/rainie/Desktop/GitHub/fap-api-en13/backend/../docs/seo/personality/enneagram/en13-content-qa-01.json",
+    "command": "personality:enneagram-cms-draft"
+}
