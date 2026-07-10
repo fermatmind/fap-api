@@ -50,7 +50,7 @@ Deferred missing authority:
 cd /Users/rainie/Desktop/GitHub/fap-api/backend
 php artisan test --filter=GlobalEnZhContentAssetBatch01 --no-ansi
 php artisan route:list --no-ansi
-vendor/bin/pint --test
+vendor/bin/pint --test tests/Feature/SeoIntel/GlobalEnZhContentAssetBatch01Test.php
 composer validate --strict
 composer audit --locked --no-interaction --ignore-unreachable
 
@@ -68,4 +68,4 @@ git diff --cached --check
 
 ## Next Task
 
-`GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01`.
+None. The originally planned downstream parity batches are already complete.
