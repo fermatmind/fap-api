@@ -380,5 +380,20 @@
     "required_checks_affected": false,
     "recommended_follow_up": "Reconcile the ContentPage URL Truth authority-status contract and stale assertion in a dedicated scoped test/contract PR.",
     "train_continued": true
+  },
+  {
+    "repo": "fermatmind/fap-api",
+    "pr_id": "SECURITY-169-API-39",
+    "branch": "codex/security-169-api-39-harden-personality-approval-and-revision-writers",
+    "blocker_type": "inherited_big_five_rendered_qa_expectation_drift",
+    "evidence": [
+      "bash backend/scripts/ci_verify_mbti.sh completed with 1182 passing tests and 4 failures in BigFiveResultPageV2ExpandedRenderedQaTest and BigFiveResultPageV2RenderedQaTest.",
+      "The unchanged tests expect pending_surface and no passed surfaces, while the unchanged generated rendered-QA artifacts now report pass for all six surfaces.",
+      "API39 focused tests passed for approval queue, MBTI revision promotion, Big Five/Enneagram draft writers, and ContentPage editor fields."
+    ],
+    "why_not_current_pr_scope": "API39 changes personality approval/revision writers and does not change the Big Five rendered-QA artifacts or either failing test. Reconciling those stale generated-artifact expectations is a separate Big Five QA contract scope.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Reconcile the two rendered-QA tests with the authoritative generated artifacts in a dedicated Big Five QA contract PR.",
+    "train_continued": true
   }
 ]

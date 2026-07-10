@@ -424,10 +424,10 @@ final class BigFivePublicProfileAgentDraftWriter
     private function assetPayload(array $recommendation, array $identity, string $sourceSha256, string $qaSha256, string $recommendationSha256): array
     {
         $recommendations = is_array($recommendation['recommendations'] ?? null) ? $recommendation['recommendations'] : [];
-        $title = trim((string) ($recommendations['h1'] ?? $recommendations['title'] ?? 'Big Five public profile draft'));
-        $seoTitle = trim((string) ($recommendations['title'] ?? $title));
-        $description = trim((string) ($recommendations['description'] ?? ''));
-        $quickAnswer = trim((string) ($recommendations['quick_answer'] ?? ''));
+        $title = $this->recommendationText($recommendations['h1'] ?? $recommendations['title'] ?? null, 'Big Five public profile draft');
+        $seoTitle = $this->recommendationText($recommendations['title'] ?? null, $title);
+        $description = $this->recommendationText($recommendations['description'] ?? null);
+        $quickAnswer = $this->recommendationText($recommendations['quick_answer'] ?? null);
 
         return [
             'org_id' => 0,
@@ -476,6 +476,15 @@ final class BigFivePublicProfileAgentDraftWriter
             'source_hash' => $sourceSha256,
             'last_reviewed_at' => null,
         ];
+    }
+
+    private function recommendationText(mixed $value, string $fallback = ''): string
+    {
+        if (is_array($value)) {
+            $value = $value['recommended'] ?? $value['current'] ?? null;
+        }
+
+        return is_scalar($value) ? trim((string) $value) : $fallback;
     }
 
     /**

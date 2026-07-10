@@ -89,6 +89,23 @@
   - Complete the GSC/read-model quality proof card before any TDK/CTR repair selection.
 - whether train continued: `true`
 
+## SECURITY-169-API-39 inherited Big Five rendered-QA expectation drift
+
+- repo: `fermatmind/fap-api`
+- PR id / branch: `SECURITY-169-API-39` / `codex/security-169-api-39-harden-personality-approval-and-revision-writers`
+- blocker type: `inherited_big_five_rendered_qa_expectation_drift`
+- evidence:
+  - `bash backend/scripts/ci_verify_mbti.sh` completed with 1182 passing tests and 4 failures in `BigFiveResultPageV2ExpandedRenderedQaTest` and `BigFiveResultPageV2RenderedQaTest`.
+  - The unchanged tests expect `pending_surface` and no passed surfaces, while the unchanged generated rendered-QA artifacts now report `pass` for all six surfaces.
+  - API39 focused tests passed for approval queue, MBTI revision promotion, Big Five/Enneagram draft writers, and ContentPage editor fields.
+- why not current PR scope:
+  - API39 changes personality approval/revision writers and does not change the Big Five rendered-QA artifacts or either failing test.
+  - Reconciling those stale generated-artifact expectations is a separate Big Five QA contract scope.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Reconcile the two rendered-QA tests with the authoritative generated artifacts in a dedicated Big Five QA contract PR.
+- whether train continued: `true`
+
 ## SECURITY-169-API-28 inherited ContentPage authority-status assertion
 
 - repo: `fermatmind/fap-api`

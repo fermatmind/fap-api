@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature\Console;
 
 use App\Models\PersonalityProfile;
-use App\Models\PersonalityProfileRevision;
 use App\Models\PersonalityProfileSection;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantRevision;
@@ -101,7 +100,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             ->firstOrFail();
         $this->assertSame('SEO title for /en/personality/intj-a', $seo->seo_title);
         $this->assertSame('/en/personality/intj-a', $seo->canonical_url);
-        $this->assertSame('index,follow', $seo->robots);
+        $this->assertSame('noindex,follow', $seo->robots);
 
         $section = PersonalityProfileVariantSection::query()
             ->where('personality_profile_variant_id', (int) $targets['en|INTJ-A']->id)
@@ -786,7 +785,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             ->firstOrFail();
         $this->assertSame('INTJ-A 人格：战略思维、独立判断与长期执行', $seo->seo_title);
         $this->assertSame('/zh/personality/intj-a', $seo->canonical_url);
-        $this->assertSame('index,follow', $seo->robots);
+        $this->assertSame('noindex,follow', $seo->robots);
 
         $section = PersonalityProfileVariantSection::query()
             ->where('personality_profile_variant_id', (int) $targets['zh-CN|INTJ-A']->id)
