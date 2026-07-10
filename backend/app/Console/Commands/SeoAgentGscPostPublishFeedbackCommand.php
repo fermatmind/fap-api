@@ -197,7 +197,7 @@ final class SeoAgentGscPostPublishFeedbackCommand extends Command
                     continue;
                 }
                 $subjectRef = trim((string) ($affected['subject_ref'] ?? ''));
-                if (! $this->contentPageIdFromRef($subjectRef)) {
+                if ($this->contentPageRef($subjectRef) === null) {
                     continue;
                 }
                 $refs[$subjectRef] = [
@@ -216,10 +216,23 @@ final class SeoAgentGscPostPublishFeedbackCommand extends Command
      */
     private function targetFeedback(array $ref, int $window): array
     {
-        $pageId = $this->contentPageIdFromRef($ref['subject_ref']);
-        $page = $pageId ? ContentPage::query()->withoutGlobalScopes()->find($pageId) : null;
+        $identity = $this->contentPageRef($ref['subject_ref']);
+        $page = $identity === null ? null : ContentPage::query()
+            ->withoutGlobalScopes()
+            ->whereKey($identity['id'])
+            ->where('org_id', 0)
+            ->where('locale', $identity['locale'])
+            ->where('status', ContentPage::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->first();
         if (! $page instanceof ContentPage) {
-            return $this->targetBlocked($ref, 'content_page_not_found');
+            return $this->targetBlocked($ref, 'content_page_authority_mismatch');
+        }
+
+        $authoritativePath = $this->safePath((string) ($page->canonical_path ?: $page->path));
+        if ($authoritativePath === '' || ! hash_equals($authoritativePath, $ref['safe_path'])) {
+            return $this->targetBlocked($ref, 'publish_evidence_safe_path_mismatch');
         }
 
         $publishedAt = $page->published_at instanceof Carbon ? $page->published_at->copy()->startOfDay() : null;
@@ -278,10 +291,13 @@ final class SeoAgentGscPostPublishFeedbackCommand extends Command
     {
         $query = DB::connection((string) config('seo_intel.connection', 'seo_intel'))
             ->table('seo_urls')
-            ->select(['canonical_url_hash', 'canonical_url', 'indexability_state', 'page_entity_type', 'entity_id_or_slug'])
+            ->select(['canonical_url_hash', 'canonical_url', 'locale', 'source_authority', 'indexability_state', 'page_entity_type', 'entity_id_or_slug', 'is_private_flow'])
             ->where('page_entity_type', 'content_page')
             ->where('entity_id_or_slug', (string) $page->id)
+            ->where('locale', (string) $page->locale)
+            ->whereIn('source_authority', ['backend_cms', 'cms_content_page'])
             ->where('indexability_state', 'indexable')
+            ->where('is_private_flow', false)
             ->orderByDesc('updated_at');
 
         $rows = $query->get()->map(fn (object $row): array => [
@@ -296,7 +312,7 @@ final class SeoAgentGscPostPublishFeedbackCommand extends Command
             }
         }
 
-        return $rows[0] ?? null;
+        return null;
     }
 
     /**
@@ -557,14 +573,24 @@ final class SeoAgentGscPostPublishFeedbackCommand extends Command
         return ($summary['ok'] ?? false) === true ? self::SUCCESS : self::FAILURE;
     }
 
-    private function contentPageIdFromRef(string $subjectRef): ?int
+    /**
+     * @return array{id:int,locale:string}|null
+     */
+    private function contentPageRef(string $subjectRef): ?array
     {
         $parts = explode(':', $subjectRef);
-        if (($parts[0] ?? '') !== 'content_page' || ! isset($parts[1]) || ! ctype_digit($parts[1])) {
+        if (count($parts) !== 3
+            || $parts[0] !== 'content_page'
+            || ! ctype_digit($parts[1])
+            || (int) $parts[1] < 1
+            || preg_match('/\A[A-Za-z]{2}(?:-[A-Za-z]{2})?\z/', $parts[2]) !== 1) {
             return null;
         }
 
-        return (int) $parts[1];
+        return [
+            'id' => (int) $parts[1],
+            'locale' => $parts[2],
+        ];
     }
 
     private function safePath(string $path): string
