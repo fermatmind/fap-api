@@ -43429,6 +43429,16 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-23; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T18:41:00+08:00",
+        "note": "Dependency SECURITY-169-API-22 implementation merged at d539291c7478aeb1ad5397a99ef9369eb61cc622 and ledger-closed at a920e7d626f922475a19c1188c0a756519e90981; started API23 in an isolated worktree from latest origin/main.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-10T19:00:00+08:00",
+        "note": "Local validation passed: focused API23 tests 38 tests/558 assertions; expanded search submission regression 128 tests/1692 assertions; route inventory 233 routes; fresh SQLite migration; full backend/scripts/ci_verify_mbti.sh including 1180-test main suite and all follow-on gates; Pint, JSON/YAML parsing, git diff --check, and scope validation with 16 changed paths and zero outside the allowlist. No provider, CMS, deploy, or production write was performed.",
+        "status": "local_checks_passed"
       }
     ],
     "failure_reason": null,
@@ -43440,7 +43450,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "local_checks_passed",
     "title": "SECURITY-169-API-23: harden live search submission kill switches",
     "train_scope": "security_169_fap_api_audit"
   },

@@ -314,7 +314,10 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
             return ['issue' => 'subject_ref_invalid'];
         }
 
-        $page = ContentPage::query()->withoutGlobalScopes()->find($pageId);
+        $page = ContentPage::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->find($pageId);
         if (! $page instanceof ContentPage) {
             return ['issue' => 'content_page_not_found'];
         }
@@ -322,11 +325,17 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
             return ['issue' => 'content_page_not_public_indexable'];
         }
 
+        $safePath = trim((string) ($affected['safe_path'] ?? ''));
+        $currentPath = trim((string) ($page->canonical_path ?: $page->path));
+        if ($safePath === '' || $safePath !== $currentPath) {
+            return ['issue' => 'content_page_canonical_safe_path_mismatch'];
+        }
+
         return [
             'issue' => null,
             'target_model' => 'content_page',
             'page_entity_type' => 'content_page',
-            'safe_path' => (string) ($affected['safe_path'] ?? ''),
+            'safe_path' => $currentPath,
         ];
     }
 

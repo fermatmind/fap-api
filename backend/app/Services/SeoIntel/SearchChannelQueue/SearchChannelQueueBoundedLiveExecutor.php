@@ -15,6 +15,7 @@ final class SearchChannelQueueBoundedLiveExecutor
     public function __construct(
         private readonly SearchChannelQueueAuditLogger $events,
         private readonly SearchChannelSubmissionStatusNormalizer $statusNormalizer,
+        private readonly SearchChannelQueueEligibilityEvaluator $eligibilityEvaluator,
     ) {}
 
     /**
@@ -34,7 +35,7 @@ final class SearchChannelQueueBoundedLiveExecutor
         $allowedChannels = $this->allowedChannels($channels);
         $expectedPhrase = $this->approvalPhrase($queueItemIds, $allowedChannels);
         $expectedToken = hash('sha256', $expectedPhrase);
-        $setupIssues = $this->setupIssues($queueItemIds, $allowedChannels);
+        $setupIssues = $this->setupIssues($queueItemIds, $allowedChannels, $dryRun);
 
         $items = $queueItemIds === []
             ? collect()
@@ -136,7 +137,7 @@ final class SearchChannelQueueBoundedLiveExecutor
         $configured = array_values(config('seo_intel.search_channel_queue.live_submission.allowed_channels', []));
 
         if ($channels === []) {
-            return ['indexnow', 'baidu_push'];
+            return $configured;
         }
 
         return array_values(array_intersect($channels, $configured));
@@ -147,7 +148,7 @@ final class SearchChannelQueueBoundedLiveExecutor
      * @param  list<string>  $channels
      * @return list<string>
      */
-    private function setupIssues(array $queueItemIds, array $channels): array
+    private function setupIssues(array $queueItemIds, array $channels, bool $dryRun): array
     {
         $issues = [];
 
@@ -157,6 +158,21 @@ final class SearchChannelQueueBoundedLiveExecutor
 
         if ($channels === []) {
             $issues[] = 'valid_channels_required';
+        }
+
+        if (! $dryRun) {
+            if (! (bool) config('seo_intel.search_channel_queue.live_submission.enabled', false)) {
+                $issues[] = 'live_submission_gate_disabled';
+            }
+            if (! (bool) config('seo_intel.search_channel_queue.live_submission.external_api_calls_enabled', false)) {
+                $issues[] = 'external_api_gate_disabled';
+            }
+            if (in_array('indexnow', $channels, true) && ! (bool) config('seo_intel.indexnow_live_api_enabled', false)) {
+                $issues[] = 'indexnow_live_api_disabled';
+            }
+            if (in_array('baidu_push', $channels, true) && ! (bool) config('seo_intel.baidu_live_api_enabled', false)) {
+                $issues[] = 'baidu_live_api_disabled';
+            }
         }
 
         return $issues;
@@ -232,7 +248,19 @@ final class SearchChannelQueueBoundedLiveExecutor
             $issues[] = 'host_not_allowed';
         }
 
+        $eligibility = $this->eligibilityEvaluator->evaluate([
+            ...(array) $item,
+            'is_private_flow' => (bool) $item->private_flow,
+        ]);
+        foreach ($eligibility->reasonCodes as $reasonCode) {
+            $issues[] = 'eligibility_'.$reasonCode;
+        }
+
         if ($channel === 'indexnow') {
+            if (! $this->isHttpsEndpoint((string) config('seo_intel.search_channel_queue.live_submission.indexnow.endpoint'))) {
+                $issues[] = 'indexnow_endpoint_not_https';
+            }
+
             if (trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.key')) === '') {
                 $issues[] = 'indexnow_key_missing';
             }
@@ -241,6 +269,10 @@ final class SearchChannelQueueBoundedLiveExecutor
                 $issues[] = 'indexnow_key_location_missing';
             }
         } elseif ($channel === 'baidu_push') {
+            if (! $this->isHttpsEndpoint((string) config('seo_intel.search_channel_queue.live_submission.baidu.endpoint'))) {
+                $issues[] = 'baidu_endpoint_not_https';
+            }
+
             if (trim((string) config('seo_intel.search_channel_queue.live_submission.baidu.endpoint')) === '') {
                 $issues[] = 'baidu_endpoint_missing';
             }
@@ -257,6 +289,13 @@ final class SearchChannelQueueBoundedLiveExecutor
         }
 
         return array_values(array_unique($issues));
+    }
+
+    private function isHttpsEndpoint(string $endpoint): bool
+    {
+        return filter_var($endpoint, FILTER_VALIDATE_URL) !== false
+            && strtolower((string) parse_url($endpoint, PHP_URL_SCHEME)) === 'https'
+            && is_string(parse_url($endpoint, PHP_URL_HOST));
     }
 
     /**
@@ -286,7 +325,7 @@ final class SearchChannelQueueBoundedLiveExecutor
             'channel' => (string) $item->channel,
             'url_hash' => (string) $item->url_hash,
             'approval_token_hash' => hash('sha256', $approvalToken),
-            'global_live_gates_required' => false,
+            'global_live_gates_required' => true,
         ], 'operator', $actorId);
 
         $submission = $this->submitToChannel((string) $item->channel, (string) $item->canonical_url);
@@ -559,7 +598,7 @@ final class SearchChannelQueueBoundedLiveExecutor
             'writes_attempted' => $writesAttempted,
             'writes_committed' => $writesCommitted,
             'safety_flags' => [
-                'global_live_gates_required' => false,
+                'global_live_gates_required' => true,
                 'queue_item_ids_required' => true,
                 'approved_queue_state_required' => true,
                 'dry_run_default' => true,
