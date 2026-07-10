@@ -168,7 +168,7 @@
     "depends_on": [
       "ENNEAGRAM-EN13-PUBLISH-GATE-01"
     ],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "8783dceab",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2837",
     "failure_reason": null,
@@ -82916,7 +82916,8 @@
       "dependency": {"status": "pass", "evidence": "PR #2836 is merged at 4c5b634be5b4c9fe3a2b2ea20a871867f0566b78 and origin/main contains that merge commit."},
       "exact_sha_production_authorization": {"status": "pass", "evidence": "User approved the bounded CMS import for release 931ea2d4e6f989e8cb0e93a9a96d347024228ecd and seed SHA-256 98213f603f3dccdd4f3699406878879f4f302c98081293bbfb92c534ebfb65d3."},
       "bounded_production_import": {"status": "pass", "evidence": "Workflow run 29074124844 validated the deployed SHA and seed, dry-ran five assets, then updated five assets with valid_count=5, errors_count=0, and all indexability counts zero."},
-      "runtime_closeout": {"status": "pass", "evidence": "All five API and public-page readbacks passed: five FAQs, seven internal links, HTML noindex, and no matching paths in sitemap, llms, llms-full, or robots checks."}
+      "runtime_closeout": {"status": "pass", "evidence": "All five API and public-page readbacks passed: five FAQs, seven internal links, HTML noindex, and no matching paths in sitemap, llms, llms-full, or robots checks."},
+      "github_required_checks": {"status": "pass", "evidence": "PR #2856 CI and Code Scanning checks were all successful and GitHub reported mergeStateStatus=CLEAN before the ready-to-merge ledger update."}
     },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
     "transitions": [
@@ -82924,7 +82925,8 @@
       {"at": "2026-07-10T06:33:12Z", "from": "manifest_registered", "to": "in_progress", "note": "Started the read-only five-page API/page, FAQ/internal-link, noindex, sitemap, robots, and llms closeout."},
       {"at": "2026-07-10T06:33:12Z", "from": "in_progress", "to": "local_checks_passed", "note": "The closeout report JSON, manifest YAML, state JSON, git diff --check, and allowed-path scope validation passed."},
       {"at": "2026-07-10T06:33:12Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the runtime closeout evidence at 36f8883a8fe9dfc4e26597c49be6a8bce8a7ed7e after rebasing onto the latest main."},
-      {"at": "2026-07-10T06:33:12Z", "from": "committed", "to": "pr_open", "note": "Opened PR #2856 for the locked runtime closeout scope; required GitHub checks are pending."}
+      {"at": "2026-07-10T06:33:12Z", "from": "committed", "to": "pr_open", "note": "Opened PR #2856 for the locked runtime closeout scope; required GitHub checks are pending."},
+      {"at": "2026-07-10T06:33:12Z", "from": "pr_open", "to": "ready_to_merge", "note": "PR #2856 CI and Code Scanning checks are green and GitHub reports mergeStateStatus=CLEAN; the manifest permits squash auto-merge after the ledger update checks complete."}
     ]
   }
 }
