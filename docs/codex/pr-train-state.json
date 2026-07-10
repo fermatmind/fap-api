@@ -43870,7 +43870,7 @@
         "status": "pass"
       },
       "focused_tests": {
-        "evidence": "33 focused API27 tests passed with 322 assertions across SEO attribution ingest, GSC post-publish feedback, opportunity auto-draft artifacts, and controlled import canary confirmation binding.",
+        "evidence": "35 focused API27 tests passed with 348 assertions across SEO attribution ingest, GSC post-publish feedback, opportunity auto-draft artifacts, controlled import canary confirmation binding, and exact runtime-freeze classifier coverage.",
         "status": "pass"
       },
       "fresh_migration": {
@@ -43886,7 +43886,7 @@
         "status": "pass"
       },
       "scope_validation": {
-        "evidence": "All 10 changed paths are listed in SECURITY-169-API-27 allowed_paths; Pint, PHP syntax, JSON/YAML parsing, git diff --check, and scope validation passed.",
+        "evidence": "All 11 changed paths are listed in SECURITY-169-API-27 allowed_paths; Pint, PHP syntax, JSON/YAML parsing, git diff --check, and scope validation passed.",
         "status": "pass"
       }
     },
@@ -43913,6 +43913,11 @@
         "at": "2026-07-10T22:52:54+08:00",
         "note": "Local validation passed: 33 focused API27 tests/322 assertions; 233-route inventory; fresh SQLite migration; final backend/scripts/ci_verify_mbti.sh pass; Pint, PHP syntax, JSON/YAML parsing, git diff --check, and scope validation with 10 changed paths. No CMS/search write, external submission, deploy, production import, or production write was performed.",
         "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-10T23:02:00+08:00",
+        "note": "Inspected GitHub PR-event verify-bigfive failure in run 29101671267 job 86392130721: runtime-freeze classifier rejected the declared SEO attribution route/controller diff. Added an exact fail-closed classifier allowance and manifest path; 2 classifier tests/26 assertions and the original 33 focused tests/322 assertions passed locally.",
+        "status": "github_check_remediated"
       }
     ],
     "failure_reason": null,

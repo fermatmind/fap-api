@@ -3295,6 +3295,52 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_attribution_privacy_hardening(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php',
+            'backend/routes/api.php',
+        ];
+        $controllerChangedLines = [
+            '-        $isSeoConversionEvent = $this->isSeoConversionEvent($eventName, $payload);',
+            '+        $isSeoConversionEvent = $this->isSeoPrivacyIngest($request)',
+            '+            || $this->isSeoConversionEvent($eventName, $payload);',
+            '+    private function isSeoPrivacyIngest(Request $request): bool',
+            '+    {',
+            '+        $route = $request->route();',
+            '+',
+            "+        return is_object(\$route) && (\$route->defaults['seo_privacy_ingest'] ?? null) === true;",
+            '+    }',
+            '+',
+            '-        if ($this->isPrivateAnalyticsPath($path)) {',
+            '+        if ($this->isPrivateAnalyticsPath($this->decodePath($path))) {',
+            '+    private function decodePath(string $path): string',
+            '+    {',
+            '+        for ($attempt = 0; $attempt < 3; $attempt++) {',
+            '+            $decoded = rawurldecode($path);',
+            '+            if ($decoded === $path) {',
+            '+                break;',
+            '+            }',
+            '+            $path = $decoded;',
+            '+        }',
+            '+',
+            '+        return $path;',
+            '+    }',
+            '+',
+        ];
+        $routeChangedLines = [
+            "+        ->defaults('seo_privacy_ingest', true)",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+            attributionControllerChangedLines: $controllerChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_iq_identity_metadata_seed_changes(): void
     {
         $changed = [
@@ -6276,11 +6322,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php'
-                && $this->attributionControllerDiffIsSeoFunnelContractOnly(
-                    $attributionControllerChangedLines ?? (
-                        $repoRoot !== '' && $baseRef !== ''
-                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
-                            : []
+                && (
+                    $this->attributionControllerDiffIsSeoFunnelContractOnly(
+                        $attributionControllerChangedLines ?? (
+                            $repoRoot !== '' && $baseRef !== ''
+                                ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                                : []
+                        )
+                    )
+                    || $this->attributionControllerDiffIsSeoPrivacyHardeningOnly(
+                        $attributionControllerChangedLines ?? (
+                            $repoRoot !== '' && $baseRef !== ''
+                                ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                                : []
+                        )
                     )
                 )
             ) {
@@ -6492,7 +6547,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/routes/api.php'
-                && $this->routeDiffIsSeoAttributionIngestOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+                && (
+                    $this->routeDiffIsSeoAttributionIngestOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+                    || $this->routeDiffIsSeoAttributionPrivacyHardeningOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+                )
             ) {
                 continue;
             }
@@ -9457,6 +9515,42 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     /**
      * @param  list<string>  $changedLines
      */
+    private function attributionControllerDiffIsSeoPrivacyHardeningOnly(array $changedLines): bool
+    {
+        $allowed = [
+            '-        $isSeoConversionEvent = $this->isSeoConversionEvent($eventName, $payload);',
+            '+        $isSeoConversionEvent = $this->isSeoPrivacyIngest($request)',
+            '+            || $this->isSeoConversionEvent($eventName, $payload);',
+            '+    private function isSeoPrivacyIngest(Request $request): bool',
+            '+    {',
+            '+        $route = $request->route();',
+            '+',
+            "+        return is_object(\$route) && (\$route->defaults['seo_privacy_ingest'] ?? null) === true;",
+            '+    }',
+            '+',
+            '-        if ($this->isPrivateAnalyticsPath($path)) {',
+            '+        if ($this->isPrivateAnalyticsPath($this->decodePath($path))) {',
+            '+    private function decodePath(string $path): string',
+            '+    {',
+            '+        for ($attempt = 0; $attempt < 3; $attempt++) {',
+            '+            $decoded = rawurldecode($path);',
+            '+            if ($decoded === $path) {',
+            '+                break;',
+            '+            }',
+            '+            $path = $decoded;',
+            '+        }',
+            '+',
+            '+        return $path;',
+            '+    }',
+            '+',
+        ];
+
+        return array_values($changedLines) === $allowed;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
     private function routeDiffIsSeoAttributionIngestOnly(array $changedLines): bool
     {
         $allowed = [
@@ -9469,6 +9563,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ];
 
         return $changedLines !== [] && array_values($changedLines) === $allowed;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsSeoAttributionPrivacyHardeningOnly(array $changedLines): bool
+    {
+        return array_values($changedLines) === [
+            "+        ->defaults('seo_privacy_ingest', true)",
+        ];
     }
 
     /**
