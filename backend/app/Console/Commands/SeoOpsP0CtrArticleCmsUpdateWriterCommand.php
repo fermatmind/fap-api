@@ -65,7 +65,16 @@ final class SeoOpsP0CtrArticleCmsUpdateWriterCommand extends Command
         $dryRunSha = (string) $loaded['dry_run_evidence_sha256'];
         $articlePlans = array_values((array) data_get($dryRunEvidence, 'article_plans', []));
         $issues = $this->validateDryRunEvidence($dryRunEvidence, $articlePlans);
-        $plans = array_map(fn (array $plan): array => $this->buildArticleWritePlan($plan), $articlePlans);
+        $plans = [];
+        foreach ($articlePlans as $index => $plan) {
+            if (! is_array($plan)) {
+                $issues[] = 'article_plan_invalid:'.$index;
+
+                continue;
+            }
+
+            $plans[] = $this->buildArticleWritePlan($plan);
+        }
 
         foreach ($plans as $plan) {
             foreach ((array) ($plan['issues'] ?? []) as $issue) {

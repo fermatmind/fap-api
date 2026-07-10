@@ -43161,6 +43161,26 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "59 scoped regression tests passed with 518 assertions; inherited content-page publish fixture failures are recorded in sidecar evidence.",
+        "status": "pass"
+      },
+      "fresh_migration": {
+        "evidence": "APP_ENV=testing SQLite migration completed successfully at /tmp/fap-api-security-169-api-20.sqlite.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "ci_verify_mbti passed the 1179-test suite (150137 assertions), Enneagram, Partner API, MBTI report/share, phone OTP, ACCEPT_F/G/E; unrelated final ACCEPT_H returned 401 and is sidecar-recorded.",
+        "status": "pass_with_sidecar"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All changed files are listed in SECURITY-169-API-20 allowed_paths; JSON/YAML parsing and git diff --check passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -43176,6 +43196,11 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-20; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T16:25:00+08:00",
+        "note": "Dependency SECURITY-169-API-19 merged at 659c9e5596d03cc81288c2a8e301ce3f0b16812f; started scoped implementation and regression coverage.",
+        "status": "in_progress"
       }
     ],
     "failure_reason": null,
@@ -43187,7 +43212,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-20: harden CMS/article QA malformed-artifact handling",
     "train_scope": "security_169_fap_api_audit"
   },

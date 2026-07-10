@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Models\Article;
 use App\Models\ArticleRevision;
+use App\Models\ArticleTranslationRevision;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
@@ -121,6 +122,10 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
             ]));
         }
 
+        $runtimeWorkingRevision = $article->workingRevision instanceof ArticleTranslationRevision
+            ? $article->workingRevision
+            : null;
+
         $publishedRevision = null;
         $publishedRevisionPointer = null;
         if ($article->published_revision_id !== null) {
@@ -134,7 +139,19 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
         }
 
         $payload = is_array($revision->payload_json) ? $revision->payload_json : [];
-        $evidence = $this->evidence($writeEvidencePath, $writeEvidence, $writeRef, $article, $revision, $publishedRevision, $publishedRevisionPointer, $payload, $target, $beforeState);
+        $evidence = $this->evidence(
+            $writeEvidencePath,
+            $writeEvidence,
+            $writeRef,
+            $article,
+            $revision,
+            $runtimeWorkingRevision,
+            $publishedRevision,
+            $publishedRevisionPointer,
+            $payload,
+            $target,
+            $beforeState
+        );
         $artifactRef = $this->writeArtifact(
             $artifactDir,
             'seo-agent-article-draft-preview-runtime-qa-'.Carbon::now('UTC')->format('Ymd\THis\Z').'.json',
@@ -206,6 +223,7 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
         array $writeRef,
         Article $article,
         ArticleRevision $revision,
+        ?ArticleTranslationRevision $runtimeWorkingRevision,
         ?ArticleRevision $publishedRevision,
         ?ArticleRevision $publishedRevisionPointer,
         array $payload,
@@ -215,7 +233,18 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
         $article->refresh();
         $afterState = $this->articleState($article);
         $publicRuntimeMode = $this->publicRuntimeMode($article, $revision, $publishedRevision);
-        $findings = $this->qaFindings($writeEvidence, $article, $revision, $publishedRevision, $payload, $target, $beforeState, $afterState);
+        $previewReadable = $this->runtimePreviewMatchesDraft($article, $revision, $runtimeWorkingRevision, $payload);
+        $findings = $this->qaFindings(
+            $writeEvidence,
+            $article,
+            $revision,
+            $runtimeWorkingRevision,
+            $publishedRevision,
+            $payload,
+            $target,
+            $beforeState,
+            $afterState
+        );
         $criticalCount = count(array_filter($findings, static fn (array $finding): bool => ($finding['severity'] ?? '') === 'critical'));
         $warningCount = count(array_filter($findings, static fn (array $finding): bool => ($finding['severity'] ?? '') === 'warning'));
         $status = $criticalCount > 0 ? 'blocked' : 'success';
@@ -242,14 +271,18 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
                 ],
             ],
             'preview_read' => [
-                'preview_readable' => ! $isPublishedRevision && (int) $revision->article_id === (int) $article->id,
+                'preview_readable' => $previewReadable,
                 'mode' => 'draft_revision_locked_read',
-                'target_model' => 'article_revision',
+                'target_model' => 'article_translation_revision',
+                'evidence_revision_model' => 'article_revision',
                 'revision_id' => (int) $revision->id,
                 'revision_no' => (int) $revision->revision_no,
                 'article_id' => (int) $revision->article_id,
                 'is_published_revision' => $isPublishedRevision,
-                'is_working_revision' => (int) ($article->working_revision_id ?? 0) === (int) $revision->id,
+                'is_working_revision' => $previewReadable,
+                'runtime_working_revision_id' => $runtimeWorkingRevision?->id !== null
+                    ? (int) $runtimeWorkingRevision->id
+                    : null,
                 'payload_identity' => [
                     'writer_task' => (string) data_get($payload, 'seo_agent.task', ''),
                     'subject_ref' => (string) data_get($payload, 'seo_agent.subject_ref', ''),
@@ -304,6 +337,7 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
         array $writeEvidence,
         Article $article,
         ArticleRevision $revision,
+        ?ArticleTranslationRevision $runtimeWorkingRevision,
         ?ArticleRevision $publishedRevision,
         array $payload,
         string $target,
@@ -323,6 +357,9 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
         }
         if ((int) ($article->published_revision_id ?? 0) === (int) $revision->id) {
             $findings[] = $this->finding('public_runtime', 'critical', 'draft_revision_is_public_published_revision');
+        }
+        if (! $this->runtimePreviewMatchesDraft($article, $revision, $runtimeWorkingRevision, $payload)) {
+            $findings[] = $this->finding('preview_read', 'critical', 'draft_revision_store_not_used_by_preview_runtime');
         }
         if ($beforeState !== $afterState) {
             $findings[] = $this->finding('read_only', 'critical', 'article_state_mutated_by_preview_runtime_qa');
@@ -347,6 +384,30 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
         }
 
         return $findings;
+    }
+
+    /**
+     * The Ops preview renders ArticleTranslationRevision. A legacy ArticleRevision
+     * is previewable only when the runtime pointer resolves to matching content.
+     */
+    private function runtimePreviewMatchesDraft(
+        Article $article,
+        ArticleRevision $revision,
+        ?ArticleTranslationRevision $runtimeWorkingRevision,
+        array $payload
+    ): bool {
+        if (! $runtimeWorkingRevision instanceof ArticleTranslationRevision
+            || (int) $runtimeWorkingRevision->id !== (int) $revision->id
+            || (int) $runtimeWorkingRevision->article_id !== (int) $article->id
+            || (int) $runtimeWorkingRevision->org_id !== (int) $article->org_id
+            || (string) $runtimeWorkingRevision->locale !== (string) $article->locale) {
+            return false;
+        }
+
+        $proposal = is_array($payload['proposal'] ?? null) ? $payload['proposal'] : [];
+
+        return (string) $runtimeWorkingRevision->seo_title === (string) ($proposal['proposed_seo_title'] ?? '')
+            && (string) $runtimeWorkingRevision->seo_description === (string) ($proposal['proposed_seo_description'] ?? '');
     }
 
     private function publicRuntimeMode(Article $article, ArticleRevision $draftRevision, ?ArticleRevision $publishedRevision): string

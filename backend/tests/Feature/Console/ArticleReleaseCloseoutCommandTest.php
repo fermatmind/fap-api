@@ -63,7 +63,7 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
         $this->assertFalse($payload['sitemap_llms_mutation_attempted']);
     }
 
-    public function test_closeout_accepts_ops_media_library_origin_and_explicit_schema_hreflang_holds(): void
+    public function test_closeout_blocks_ops_media_library_origin_even_with_explicit_schema_hreflang_holds(): void
     {
         $article = $this->createReleasedArticle([
             'content_md' => '# 高考出分后专业太多怎么筛？'."\n\n![流程图](https://ops.fermatmind.com/storage/media-library/body.png)\n\n正文。",
@@ -95,14 +95,14 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
         ]);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
-        $this->assertTrue($payload['ok']);
-        $this->assertTrue(data_get($payload, 'checks.media.ok'));
+        $this->assertSame(1, $exitCode, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse(data_get($payload, 'checks.media.ok'));
         $this->assertSame('held', data_get($payload, 'checks.schema_hreflang.schema_state'));
         $this->assertSame('held', data_get($payload, 'checks.schema_hreflang.hreflang_state'));
         $this->assertTrue(data_get($payload, 'checks.schema_hreflang.schema_hold'));
         $this->assertTrue(data_get($payload, 'checks.schema_hreflang.hreflang_hold'));
-        $this->assertErrorCodeMissing($payload, 'media_url_not_public_origin');
+        $this->assertErrorCode($payload, 'media_url_not_public_origin');
         $this->assertErrorCodeMissing($payload, 'article_schema_not_enabled');
         $this->assertErrorCodeMissing($payload, 'breadcrumb_schema_not_enabled');
         $this->assertErrorCodeMissing($payload, 'hreflang_policy_missing');
@@ -338,6 +338,35 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
         $this->assertFalse(data_get($payload, 'checks.gsc_manual.ok'));
         $this->assertSame('provided_but_invalid', data_get($payload, 'remaining_operator_inputs.gsc_manual_request_indexing'));
         $this->assertErrorCode($payload, 'gsc_manual_url_mismatch');
+    }
+
+    public function test_closeout_fails_closed_for_non_scalar_gsc_manual_evidence(): void
+    {
+        $article = $this->createReleasedArticle();
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+        $gscPath = $this->writeEvidenceJson([
+            'runtime' => 'gsc_manual_request_indexing',
+            'status' => ['malformed'],
+            'urls' => [[
+                'canonical_url' => $canonicalUrl,
+                'request_indexing_confirmation' => ['malformed'],
+            ]],
+        ]);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--gsc-manual-json' => $gscPath,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'gsc_manual_status_not_success');
+        $this->assertErrorCode($payload, 'gsc_manual_confirmation_missing');
     }
 
     public function test_closeout_records_observation_evidence_as_pending_window(): void

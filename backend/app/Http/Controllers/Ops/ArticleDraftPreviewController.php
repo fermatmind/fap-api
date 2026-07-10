@@ -183,7 +183,9 @@ final class ArticleDraftPreviewController extends Controller
         }
 
         return [
-            'asset_key' => trim((string) ($metadata['body_visual_asset_key'] ?? '')),
+            'asset_key' => is_string($metadata['body_visual_asset_key'] ?? null)
+                ? trim($metadata['body_visual_asset_key'])
+                : '',
             'image_url' => $imageUrl,
             'fallback_authorized' => (bool) ($metadata['body_visual_fallback_authorized'] ?? false),
         ];

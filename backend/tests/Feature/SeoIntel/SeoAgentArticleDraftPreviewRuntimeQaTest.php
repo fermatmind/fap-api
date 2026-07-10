@@ -18,7 +18,7 @@ final class SeoAgentArticleDraftPreviewRuntimeQaTest extends TestCase
     use RefreshDatabase;
 
     #[Test]
-    public function it_verifies_draft_preview_runtime_state_without_mutating_rows(): void
+    public function it_blocks_when_the_draft_revision_store_is_not_used_by_preview_runtime(): void
     {
         [$article, $publishedRevision, $draftRevision, $writeEvidencePath] = $this->draftFixture();
         $countsBefore = $this->rowCounts();
@@ -33,9 +33,9 @@ final class SeoAgentArticleDraftPreviewRuntimeQaTest extends TestCase
         ]);
 
         $summary = json_decode(trim(Artisan::output()), true);
-        $this->assertSame(0, $exitCode, json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: Artisan::output());
-        $this->assertSame('success', $summary['status'] ?? null);
-        $this->assertTrue((bool) ($summary['preview_readable'] ?? false));
+        $this->assertSame(1, $exitCode, json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: Artisan::output());
+        $this->assertSame('blocked', $summary['status'] ?? null);
+        $this->assertFalse((bool) ($summary['preview_readable'] ?? true));
         $this->assertTrue((bool) ($summary['public_runtime_uses_published_revision'] ?? false));
         $this->assertFalse((bool) ($summary['mutation_detected'] ?? true));
         $this->assertFalse((bool) data_get($summary, 'negative_guarantees.cms_publish', true));
@@ -44,12 +44,13 @@ final class SeoAgentArticleDraftPreviewRuntimeQaTest extends TestCase
         $this->assertSame($articleStateBefore, $this->articleState($article->refresh()));
 
         $artifact = $this->readJson((string) data_get($summary, 'artifact.path'));
-        $this->assertTrue((bool) ($artifact['ok'] ?? false));
+        $this->assertFalse((bool) ($artifact['ok'] ?? true));
         $this->assertSame((int) $draftRevision->id, data_get($artifact, 'preview_read.revision_id'));
         $this->assertSame((int) $publishedRevision->id, data_get($artifact, 'public_runtime.published_revision_id'));
         $this->assertFalse((bool) data_get($artifact, 'preview_read.is_published_revision', true));
         $this->assertFalse((bool) data_get($artifact, 'public_runtime.draft_revision_leaked_to_public_runtime', true));
         $this->assertTrue((bool) data_get($artifact, 'read_only_invariants.article_state_unchanged_by_this_read', false));
+        $this->assertContains('draft_revision_store_not_used_by_preview_runtime', array_column($artifact['qa_findings'] ?? [], 'issue'));
 
         $encoded = json_encode($artifact, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         $this->assertIsString($encoded);
@@ -81,7 +82,7 @@ final class SeoAgentArticleDraftPreviewRuntimeQaTest extends TestCase
     }
 
     #[Test]
-    public function it_accepts_legacy_inline_published_articles_when_revision_pointer_targets_another_article(): void
+    public function it_blocks_legacy_inline_articles_when_draft_revision_store_is_not_used_by_preview_runtime(): void
     {
         [$article, $foreignRevision, $draftRevision, $writeEvidencePath] = $this->legacyInlinePublishedFixture();
 
@@ -94,23 +95,24 @@ final class SeoAgentArticleDraftPreviewRuntimeQaTest extends TestCase
         ]);
 
         $summary = json_decode(trim(Artisan::output()), true);
-        $this->assertSame(0, $exitCode, json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: Artisan::output());
-        $this->assertSame('success', $summary['status'] ?? null);
-        $this->assertTrue((bool) ($summary['preview_readable'] ?? false));
+        $this->assertSame(1, $exitCode, json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: Artisan::output());
+        $this->assertSame('blocked', $summary['status'] ?? null);
+        $this->assertFalse((bool) ($summary['preview_readable'] ?? true));
         $this->assertFalse((bool) ($summary['public_runtime_uses_published_revision'] ?? true));
         $this->assertFalse((bool) ($summary['mutation_detected'] ?? true));
 
         $artifact = $this->readJson((string) data_get($summary, 'artifact.path'));
-        $this->assertTrue((bool) ($artifact['ok'] ?? false));
+        $this->assertFalse((bool) ($artifact['ok'] ?? true));
         $this->assertSame('article_inline_published_content', data_get($artifact, 'public_runtime.public_runtime_source'));
         $this->assertTrue((bool) data_get($artifact, 'public_runtime.public_runtime_safe', false));
         $this->assertFalse((bool) data_get($artifact, 'public_runtime.published_revision_exists', true));
         $this->assertTrue((bool) data_get($artifact, 'public_runtime.published_revision_pointer_exists', false));
         $this->assertSame((int) $foreignRevision->article_id, data_get($artifact, 'public_runtime.published_revision_pointer_article_id'));
         $this->assertFalse((bool) data_get($artifact, 'public_runtime.draft_revision_leaked_to_public_runtime', true));
-        $this->assertSame(0, (int) data_get($artifact, 'critical_finding_count'));
+        $this->assertSame(1, (int) data_get($artifact, 'critical_finding_count'));
         $this->assertSame(1, (int) data_get($artifact, 'warning_finding_count'));
         $this->assertContains('published_revision_pointer_not_same_article_using_inline_article_content', array_column($artifact['qa_findings'] ?? [], 'issue'));
+        $this->assertContains('draft_revision_store_not_used_by_preview_runtime', array_column($artifact['qa_findings'] ?? [], 'issue'));
     }
 
     #[Test]

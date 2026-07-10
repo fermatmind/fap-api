@@ -64,6 +64,15 @@ final class ArticleSeoGateRollout
         if ((bool) ($options['enable_hreflang'] ?? false) && (bool) ($options['no_hreflang_policy'] ?? false)) {
             $errors[] = $this->issue('hreflang', 'hreflang_policy_conflict', '--enable-hreflang cannot be combined with --no-hreflang-policy.');
         }
+        if ((bool) ($options['enable_hreflang'] ?? false)
+            && $setTranslationGroupId !== ''
+            && $setTranslationGroupId !== $translationGroupId) {
+            $errors[] = $this->issue(
+                'hreflang',
+                'hreflang_translation_group_change_conflict',
+                'Change translation_group_id in a separate locked operation before enabling hreflang.'
+            );
+        }
 
         if ($execute) {
             foreach (self::EXECUTE_SAFETY_FLAGS as $flag) {

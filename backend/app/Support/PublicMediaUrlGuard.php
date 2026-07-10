@@ -42,7 +42,11 @@ final class PublicMediaUrlGuard
 
     public static function sanitizeNullableUrl(mixed $url): ?string
     {
-        $normalized = trim((string) $url);
+        if (! is_string($url)) {
+            return null;
+        }
+
+        $normalized = trim($url);
 
         if ($normalized === '') {
             return null;

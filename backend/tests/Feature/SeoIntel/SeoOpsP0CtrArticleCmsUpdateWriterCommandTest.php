@@ -65,6 +65,28 @@ final class SeoOpsP0CtrArticleCmsUpdateWriterCommandTest extends TestCase
     }
 
     #[Test]
+    public function malformed_article_plan_is_reported_without_crashing(): void
+    {
+        $this->seedAuthorityRows();
+        $dryRun = $this->writeDryRunEvidence();
+        $evidence = $this->readJson($dryRun['path']);
+        $evidence['article_plans'][0] = 'malformed';
+        File::put($dryRun['path'], json_encode($evidence, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n");
+
+        $exitCode = Artisan::call('seo-ops:p0-ctr-article-cms-update-writer', [
+            '--dry-run-evidence' => $dryRun['path'],
+            '--confirm-dry-run-evidence-sha256' => hash_file('sha256', $dryRun['path']),
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+        $summary = $this->jsonOutput();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $summary['status'] ?? null);
+        $this->assertContains('article_plan_invalid:0', $summary['issues'] ?? []);
+    }
+
+    #[Test]
     public function execute_updates_live_article_seo_and_cta_metadata_without_publish_or_search_side_effects(): void
     {
         $articles = $this->seedAuthorityRows();

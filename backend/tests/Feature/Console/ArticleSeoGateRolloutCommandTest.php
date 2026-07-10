@@ -293,6 +293,43 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
         $this->assertSame('reciprocal_counterparts_verified', data_get($payload, 'after.1.schema_gates.hreflang_gate_v1.policy'));
     }
 
+    public function test_enable_hreflang_blocks_simultaneous_translation_group_change(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $oldGroupId = 'tg_article_eq_test_tool_guide_old';
+        $newGroupId = 'tg_article_eq_test_tool_guide_new';
+        $zh = $this->createArticle([
+            'id' => 4,
+            'slug' => 'eq-test-tool-guide',
+            'locale' => 'zh-CN',
+            'translation_group_id' => $oldGroupId,
+        ]);
+        $en = $this->createArticle([
+            'id' => 40,
+            'slug' => 'eq-test-tool-guide',
+            'locale' => 'en',
+            'translation_group_id' => $oldGroupId,
+        ]);
+        $this->createSeoMeta($zh);
+        $this->createSeoMeta($en);
+
+        $exitCode = Artisan::call('articles:seo-gate-rollout', [
+            '--article-ids' => $zh->id.','.$en->id,
+            '--translation-group-id' => $oldGroupId,
+            '--set-translation-group-id' => $newGroupId,
+            '--expected-slugs' => 'eq-test-tool-guide,eq-test-tool-guide',
+            '--enable-hreflang' => true,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'hreflang_translation_group_change_conflict');
+        $this->assertSame($oldGroupId, (string) $zh->refresh()->translation_group_id);
+        $this->assertSame($oldGroupId, (string) $en->refresh()->translation_group_id);
+    }
+
     public function test_execute_requires_all_safety_flags(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
