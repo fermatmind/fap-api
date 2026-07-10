@@ -218,6 +218,27 @@ final class FunnelConversionPageTest extends TestCase
         }
     }
 
+    public function test_array_scope_query_falls_back_to_current_org_without_crashing(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_MENU_COMMERCE,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Array Scope Org');
+
+        $this->withSession($this->opsSession($admin, $selectedOrg))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/funnel-conversion?scope%5B%5D=global_org0')
+            ->assertOk();
+
+        $normalizeScope = new \ReflectionMethod(FunnelConversionPage::class, 'normalizeFunnelScope');
+
+        $this->assertSame(
+            'current_org',
+            $normalizeScope->invoke(app(FunnelConversionPage::class), ['global_org0']),
+        );
+    }
+
     private function createOrganization(string $name): Organization
     {
         return Organization::query()->create([

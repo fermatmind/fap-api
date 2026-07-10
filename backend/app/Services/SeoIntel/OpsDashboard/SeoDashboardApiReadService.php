@@ -186,9 +186,9 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
     /**
      * @return array<string, mixed>
      */
-    public function conversionFunnel(array $filters = [], int $limit = 25): array
+    public function conversionFunnel(int $orgId, array $filters = [], int $limit = 25): array
     {
-        return (new SeoConversionFunnelReadService)->read($filters, $limit);
+        return (new SeoConversionFunnelReadService)->read($orgId, $filters, $limit);
     }
 
     /**

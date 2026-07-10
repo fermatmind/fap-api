@@ -334,6 +334,10 @@ class FunnelConversionPage extends Page
 
     private function normalizeFunnelScope(mixed $scope): string
     {
+        if (! is_scalar($scope)) {
+            return self::FUNNEL_SCOPE_CURRENT_ORG;
+        }
+
         $normalized = strtolower(trim((string) $scope));
 
         return match ($normalized) {

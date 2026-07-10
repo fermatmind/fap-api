@@ -43234,6 +43234,26 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "27 scoped regression tests passed with 331 assertions across Ops access control, TOTP API wiring, conversion funnel tenant/privacy boundaries, and array scope handling.",
+        "status": "pass"
+      },
+      "fresh_migration": {
+        "evidence": "APP_ENV=testing SQLite migration completed successfully at /tmp/fap-api-security-169-api-21.sqlite.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "ci_verify_mbti passed after OpenAPI snapshot synchronization, including the 1179-test suite (150137 assertions), Enneagram, MBTI smoke/report/share, event, payment, migration, auth, order-security, dependency, and webhook/attempt gates.",
+        "status": "pass"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 14 changed files are listed in SECURITY-169-API-21 allowed_paths; JSON/YAML parsing, OpenAPI strict diff, and git diff --check passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -43249,18 +43269,38 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-21; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T17:19:46+08:00",
+        "note": "Dependency SECURITY-169-API-20 merged at f29e02b77d98bd410ee18fbe1643e44105dac878 and ledger-closed at f3281ce712c01e766450ed557353e8884a5b0e10; started scoped implementation and regression coverage.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-10T17:34:41+08:00",
+        "note": "Scoped implementation, focused regressions, fresh migration, route listing, OpenAPI synchronization, full CI, and scope validation passed.",
+        "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-10T17:38:06+08:00",
+        "note": "Opened PR #2872 from the scoped API21 branch after rebasing onto latest origin/main.",
+        "status": "pr_open"
+      },
+      {
+        "at": "2026-07-10T17:49:00+08:00",
+        "note": "Inspected the verify-bigfive failure: its runtime-freeze classifier flagged this PR's OpsAccessControl and API route hardening. Added exact diff-line classification and regression coverage; the full 313-test classifier suite, 27 scoped feature tests, OpenAPI check, and 14-path scope validation pass.",
+        "status": "local_checks_passed"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-21",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2872",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "pr_open",
     "title": "SECURITY-169-API-21: harden ops access, TOTP, and dashboard inputs",
     "train_scope": "security_169_fap_api_audit"
   },

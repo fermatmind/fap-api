@@ -35726,6 +35726,13 @@ prs:
       - backend/app/Http/Responses/Auth/OpsLoginResponse.php
       - backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php
       - backend/app/Filament/Ops/Pages/FunnelConversionPage.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/tests/Feature/Ops/OpsAccessControlMiddlewareTest.php
+      - backend/tests/Feature/Ops/FunnelConversionPageTest.php
+      - backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - backend/tests/Feature/SeoIntel/SeoConversionFunnelOpsReadoutTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

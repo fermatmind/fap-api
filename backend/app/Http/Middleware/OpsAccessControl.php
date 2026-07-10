@@ -23,7 +23,7 @@ class OpsAccessControl
     {
         $routeName = (string) optional($request->route())->getName();
         $isOpsLivewireRequest = $this->isOpsLivewireRequest($request);
-        if (($routeName === '' || ! str_starts_with($routeName, 'filament.ops.')) && ! $isOpsLivewireRequest) {
+        if (! $this->isProtectedOpsRoute($routeName) && ! $isOpsLivewireRequest) {
             return $next($request);
         }
         if ($isOpsLivewireRequest) {
@@ -386,6 +386,13 @@ class OpsAccessControl
             'filament.ops.auth.logout',
             'filament.ops.pages.select-org',
         ], true);
+    }
+
+    private function isProtectedOpsRoute(string $routeName): bool
+    {
+        return str_starts_with($routeName, 'filament.ops.')
+            || str_starts_with($routeName, 'ops.')
+            || str_starts_with($routeName, 'api.v0_5.ops.');
     }
 
     private function hasSensitiveActionPermission(?Authenticatable $user): bool

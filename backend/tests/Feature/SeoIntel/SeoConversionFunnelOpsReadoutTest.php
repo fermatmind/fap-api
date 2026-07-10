@@ -125,6 +125,70 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
         }
     }
 
+    #[Test]
+    public function conversion_funnel_is_scoped_to_trusted_org_and_rejects_private_dimensions_for_every_grouping(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
+
+        $this->insertDailyRow([
+            'org_id' => 41,
+            'source_article' => 'allowed-article',
+            'source_article_hash' => sha1('allowed-article'),
+            'landing_pv_count' => 3,
+        ]);
+        $this->insertDailyRow([
+            'org_id' => 42,
+            'source_article' => 'other-org-article',
+            'source_article_hash' => sha1('other-org-article'),
+            'landing_pv_count' => 99,
+        ]);
+        $this->insertDailyRow([
+            'org_id' => 41,
+            'url' => 'https://fermatmind.com/en/results/private-result',
+            'url_hash' => sha1('https://fermatmind.com/en/results/private-result'),
+            'source_article' => 'private-url-article',
+            'source_article_hash' => sha1('private-url-article'),
+            'landing_pv_count' => 7,
+        ]);
+        $this->insertDailyRow([
+            'org_id' => 41,
+            'source_url' => 'https://fermatmind.com/en/orders/private-order',
+            'source_url_hash' => sha1('https://fermatmind.com/en/orders/private-order'),
+            'source_article' => 'private-source-article',
+            'source_article_hash' => sha1('private-source-article'),
+            'landing_pv_count' => 8,
+        ]);
+        $this->insertDailyRow([
+            'org_id' => 41,
+            'target_test' => '/en/share/private-share',
+            'target_test_hash' => sha1('/en/share/private-share'),
+            'source_article' => 'private-target-article',
+            'source_article_hash' => sha1('private-target-article'),
+            'landing_pv_count' => 9,
+        ]);
+
+        foreach (['article', 'test', 'session'] as $groupBy) {
+            $response = $this->withSession(['ops_org_id' => 41])
+                ->actingAs($admin, (string) config('admin.guard', 'admin'))
+                ->getJson('/api/v0.5/ops/seo-intel/conversion-funnel?group_by='.$groupBy)
+                ->assertOk()
+                ->assertJsonPath('data.totals.landing_pv_count', 3);
+
+            $json = $response->getContent();
+            foreach ([
+                'other-org-article',
+                'private-url-article',
+                'private-source-article',
+                'private-target-article',
+                'private-result',
+                'private-order',
+                'private-share',
+            ] as $forbidden) {
+                $this->assertStringNotContainsString($forbidden, $json);
+            }
+        }
+    }
+
     /**
      * @param  array<string,mixed>  $overrides
      */

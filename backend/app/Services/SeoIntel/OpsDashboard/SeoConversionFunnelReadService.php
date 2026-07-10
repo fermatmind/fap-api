@@ -41,7 +41,7 @@ final class SeoConversionFunnelReadService
     /**
      * @return array<string,mixed>
      */
-    public function read(array $filters = [], int $limit = 25): array
+    public function read(int $orgId, array $filters = [], int $limit = 25): array
     {
         $groupBy = $this->normalizeGroupBy($filters['group_by'] ?? null);
         $limit = max(1, min($limit, 100));
@@ -51,7 +51,9 @@ final class SeoConversionFunnelReadService
         }
 
         $groupColumns = $this->groupColumns($groupBy);
-        $query = DB::table(self::TABLE)->select($groupColumns);
+        $query = DB::table(self::TABLE)
+            ->select($groupColumns)
+            ->where('org_id', max(0, $orgId));
 
         foreach (self::METRICS as $metric) {
             $query->selectRaw(sprintf('SUM(%s) AS %s', $metric, $metric));
@@ -127,10 +129,10 @@ final class SeoConversionFunnelReadService
     private function groupColumns(string $groupBy): array
     {
         return match ($groupBy) {
-            'article' => ['source_article', 'lang', 'page_type', 'scale_id', 'form_id'],
-            'test' => ['target_test', 'lang', 'scale_id', 'form_id'],
-            'session' => ['session_id_hash', 'lang', 'source_article', 'target_test', 'scale_id', 'form_id'],
-            default => ['url', 'lang', 'page_type', 'source_article', 'target_test', 'scale_id', 'form_id'],
+            'article' => ['source_article', 'lang', 'page_type', 'scale_id', 'form_id', 'url', 'source_url', 'target_test'],
+            'test' => ['target_test', 'lang', 'scale_id', 'form_id', 'url', 'source_url'],
+            'session' => ['session_id_hash', 'lang', 'source_article', 'target_test', 'scale_id', 'form_id', 'url', 'source_url'],
+            default => ['url', 'lang', 'page_type', 'source_article', 'target_test', 'scale_id', 'form_id', 'source_url'],
         };
     }
 
@@ -201,7 +203,7 @@ final class SeoConversionFunnelReadService
         $sourcePath = $this->safePath($row->source_url ?? null);
         $targetPath = $this->safePath($row->target_test ?? null);
 
-        if ($urlPath !== null && $this->isPrivatePath($urlPath)) {
+        if ($this->containsPrivatePath([$urlPath, $sourcePath, $targetPath])) {
             return null;
         }
 
@@ -326,5 +328,19 @@ final class SeoConversionFunnelReadService
             : $segments[0];
 
         return in_array($firstContentSegment, self::PRIVATE_PATH_SEGMENTS, true);
+    }
+
+    /**
+     * @param  list<?string>  $paths
+     */
+    private function containsPrivatePath(array $paths): bool
+    {
+        foreach ($paths as $path) {
+            if ($path !== null && $this->isPrivatePath($path)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

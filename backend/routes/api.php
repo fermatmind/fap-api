@@ -88,12 +88,14 @@ use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Http\Controllers\HealthzController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\EnsureAdminTotpVerified;
 use App\Http\Middleware\EnsureCmsAdminAuthorized;
 use App\Http\Middleware\EnsureSeoIntelReadAuthorized;
 use App\Http\Middleware\ForcePublicAttemptRealm;
 use App\Http\Middleware\HealthzAccessControl;
 use App\Http\Middleware\LimitWebhookPayloadSize;
 use App\Http\Middleware\NormalizeApiErrorContract;
+use App\Http\Middleware\OpsAccessControl;
 use App\Http\Middleware\PartnerApiKeyAuth;
 use App\Http\Middleware\ResolveOrgContext;
 use App\Http\Middleware\SetOpsRequestContext;
@@ -588,6 +590,8 @@ Route::prefix('v0.5')->group(function () {
     Route::prefix('ops/seo-intel')
         ->middleware([
             ...$cmsAdminMiddleware,
+            EnsureAdminTotpVerified::class,
+            OpsAccessControl::class,
             EnsureSeoIntelReadAuthorized::class,
         ])
         ->group(function () {

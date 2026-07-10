@@ -46,7 +46,11 @@ final class SeoIntelDashboardController
 
     public function conversionFunnel(Request $request): JsonResponse
     {
-        return $this->respond($this->readService->conversionFunnel($this->safeFilters($request), $this->limit($request)));
+        return $this->respond($this->readService->conversionFunnel(
+            $this->trustedOrgId($request),
+            $this->safeFilters($request),
+            $this->limit($request),
+        ));
     }
 
     /**
@@ -90,5 +94,24 @@ final class SeoIntelDashboardController
             'form_id',
             'session_id_hash',
         ]);
+    }
+
+    private function trustedOrgId(Request $request): int
+    {
+        if ($request->attributes->get('org_context_trusted') !== true) {
+            abort(403, 'Trusted organization context is required.');
+        }
+
+        $orgId = $request->attributes->get('fm_org_id');
+        if (! is_int($orgId) && ! is_string($orgId) && ! is_numeric($orgId)) {
+            abort(403, 'Trusted organization context is required.');
+        }
+
+        $normalized = trim((string) $orgId);
+        if ($normalized === '' || preg_match('/^\d+$/', $normalized) !== 1) {
+            abort(403, 'Trusted organization context is required.');
+        }
+
+        return max(0, (int) $normalized);
     }
 }

@@ -232,6 +232,36 @@ final class OpsAccessControlMiddlewareTest extends TestCase
         $this->assertSame(403, $response->getStatusCode());
     }
 
+    public function test_custom_ops_and_ops_api_routes_respect_host_policy(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        config()->set('ops.access_control.allowed_host', 'ops.example.test');
+        config()->set('ops.access_control.ip_allowlist', []);
+
+        Redis::shouldReceive('sismember')->never();
+        Redis::shouldReceive('incr')->never();
+
+        foreach ([
+            ['ops.articles.preview', '/ops/article-preview/1'],
+            ['api.v0_5.ops.seo_intel.overview', '/api/v0.5/ops/seo-intel/overview'],
+        ] as [$routeName, $path]) {
+            $request = Request::create($path, 'GET', [], [], [], [
+                'REMOTE_ADDR' => '8.8.8.8',
+                'HTTP_HOST' => 'blocked.example.test',
+            ]);
+            $route = new Route(['GET'], $path, static fn (): Response => response('ok'));
+            $route->name($routeName);
+            $request->setRouteResolver(static fn (): Route => $route);
+
+            $response = app(OpsAccessControl::class)->handle(
+                $request,
+                static fn (): Response => response('allowed'),
+            );
+
+            $this->assertSame(403, $response->getStatusCode(), $routeName);
+        }
+    }
+
     public function test_select_org_route_respects_host_and_ip_blocks(): void
     {
         $this->app->detectEnvironment(static fn (): string => 'production');
