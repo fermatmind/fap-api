@@ -174,9 +174,48 @@ jobs:
             --output="$RUN_DIR/draft-dry-run.json" >/dev/null
 
           phase="promotion_inspect"
-          php artisan personality:enneagram-cms-promote \
+          promotion_inspect_status=0
+          if php artisan personality:enneagram-cms-promote \
             --package="../$PACKAGE_PATH" --dry-run --json \
-            --output="$RUN_DIR/promote-dry-run.json" >/dev/null
+            --output="$RUN_DIR/promote-dry-run.json" >/dev/null; then
+            promotion_inspect_status=0
+          else
+            promotion_inspect_status=$?
+          fi
+
+          phase="promotion_inspect_classification"
+          promotion_inspect_state="$(jq -r '
+            if
+              .ok == true and .status == "pass" and .row_count == 13 and
+              .writes_attempted == false and .writes_committed == false and
+              .publish_attempted == false and .index_attempted == false and
+              .sitemap_llms_release_attempted == false and .search_release_attempted == false and
+              .missing_target_count == 0 and .forbidden_route_count == 0 and
+              .stale_or_invalid_asset_count == 0 and (.errors | length) == 0
+            then "ready"
+            elif
+              .ok == false and .status == "fail" and .row_count == 13 and
+              .writes_attempted == false and .writes_committed == false and
+              .publish_attempted == false and .index_attempted == false and
+              .sitemap_llms_release_attempted == false and .search_release_attempted == false and
+              .missing_target_count == 13 and .forbidden_route_count == 0 and
+              .stale_or_invalid_asset_count == 0 and (.errors | length) == 13 and
+              all(.errors[]; .code == "missing_draft_asset")
+            then "first_import_missing_drafts"
+            else "blocked"
+            end
+          ' "$RUN_DIR/promote-dry-run.json")"
+          case "$promotion_inspect_state" in
+            ready)
+              test "$promotion_inspect_status" -eq 0
+              ;;
+            first_import_missing_drafts)
+              test "$promotion_inspect_status" -ne 0
+              ;;
+            *)
+              exit 1
+              ;;
+          esac
 
           phase="operation_mode"
           if [ "$OPERATION_MODE" = "inspect" ]; then
@@ -186,6 +225,8 @@ jobs:
               --arg operation_mode "$OPERATION_MODE" \
               --arg package_sha "$PACKAGE_SHA" \
               --arg qa_sha "$QA_SHA" \
+              --arg promotion_inspect_state "$promotion_inspect_state" \
+              --argjson promotion_inspect_exit_code "$promotion_inspect_status" \
               --slurpfile draft "$RUN_DIR/draft-dry-run.json" \
               --slurpfile promote "$RUN_DIR/promote-dry-run.json" \
               'def action_counts: (.rows // [] | map(.action // "unknown") | sort | group_by(.) | map({action:.[0], count:length}));
@@ -198,11 +239,12 @@ jobs:
                  qa_sha256:$qa_sha,
                  inspection:{
                    draft:($draft[0]|{
-                     ok,status,row_count,hub_row_count,center_row_count,core_type_row_count,writes_attempted,writes_committed,would_create_asset_count,created_asset_count,updated_asset_count,skipped_existing_count,
+                     ok,status,row_count,hub_row_count,center_row_count,core_type_row_count,writes_attempted,writes_committed,would_create_asset_count,created_asset_count,updated_asset_count,skipped_existing_count,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,
                      error_count:(.errors|length),action_counts:action_counts
                    }),
                    promotion:($promote[0]|{
-                     ok,status,row_count,hub_row_count,center_row_count,core_type_row_count,writes_attempted,writes_committed,would_promote_count,promoted_count,skipped_existing_count,missing_target_count,forbidden_route_count,stale_or_invalid_asset_count,
+                     inspection_state:$promotion_inspect_state,command_exit_code:$promotion_inspect_exit_code,
+                     ok,status,row_count,hub_row_count,center_row_count,core_type_row_count,writes_attempted,writes_committed,would_promote_count,promoted_count,skipped_existing_count,missing_target_count,forbidden_route_count,stale_or_invalid_asset_count,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,
                      error_count:(.errors|length),action_counts:action_counts
                    })
                  }
@@ -217,6 +259,20 @@ jobs:
             --operator-approved=ENNEAGRAM-CMS-DRAFT-WRITER-CONTRACT-01 \
             --output="$RUN_DIR/draft-write.json" >/dev/null
 
+          phase="promotion_reinspect"
+          php artisan personality:enneagram-cms-promote \
+            --package="../$PACKAGE_PATH" --dry-run --json \
+            --output="$RUN_DIR/promote-after-draft-dry-run.json" >/dev/null
+          jq -e '
+            .ok == true and .status == "pass" and .row_count == 13 and
+            .writes_attempted == false and .writes_committed == false and
+            .publish_attempted == false and .index_attempted == false and
+            .sitemap_llms_release_attempted == false and .search_release_attempted == false and
+            ((.would_promote_count + .skipped_existing_count) == 13) and
+            .missing_target_count == 0 and .forbidden_route_count == 0 and
+            .stale_or_invalid_asset_count == 0 and (.errors | length) == 0
+          ' "$RUN_DIR/promote-after-draft-dry-run.json" >/dev/null
+
           phase="promotion_write"
           php artisan personality:enneagram-cms-promote \
             --package="../$PACKAGE_PATH" --write --json \
@@ -230,8 +286,11 @@ jobs:
             --arg operation_mode "$OPERATION_MODE" \
             --arg package_sha "$PACKAGE_SHA" \
             --arg qa_sha "$QA_SHA" \
+            --arg prewrite_promotion_inspect_state "$promotion_inspect_state" \
+            --argjson prewrite_promotion_inspect_exit_code "$promotion_inspect_status" \
             --slurpfile dry "$RUN_DIR/draft-dry-run.json" \
-            --slurpfile inspect_promote "$RUN_DIR/promote-dry-run.json" \
+            --slurpfile prewrite_inspect_promote "$RUN_DIR/promote-dry-run.json" \
+            --slurpfile inspect_promote "$RUN_DIR/promote-after-draft-dry-run.json" \
             --slurpfile draft "$RUN_DIR/draft-write.json" \
             --slurpfile promote "$RUN_DIR/promote-write.json" \
             '{
@@ -241,8 +300,9 @@ jobs:
               operation_mode:$operation_mode,
               package_sha256:$package_sha,
               qa_sha256:$qa_sha,
-              dry_run:($dry[0]|{ok,status,row_count,writes_attempted,writes_committed,would_create_asset_count,created_asset_count,updated_asset_count,skipped_existing_count,error_count:(.errors|length)}),
-              promotion_inspect:($inspect_promote[0]|{ok,status,row_count,writes_attempted,writes_committed,would_promote_count,promoted_count,skipped_existing_count,missing_target_count,forbidden_route_count,stale_or_invalid_asset_count,error_count:(.errors|length)}),
+              dry_run:($dry[0]|{ok,status,row_count,writes_attempted,writes_committed,would_create_asset_count,created_asset_count,updated_asset_count,skipped_existing_count,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,error_count:(.errors|length)}),
+              prewrite_promotion_inspect:($prewrite_inspect_promote[0]|{inspection_state:$prewrite_promotion_inspect_state,command_exit_code:$prewrite_promotion_inspect_exit_code,ok,status,row_count,writes_attempted,writes_committed,would_promote_count,promoted_count,skipped_existing_count,missing_target_count,forbidden_route_count,stale_or_invalid_asset_count,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,error_count:(.errors|length)}),
+              promotion_inspect:($inspect_promote[0]|{ok,status,row_count,writes_attempted,writes_committed,would_promote_count,promoted_count,skipped_existing_count,missing_target_count,forbidden_route_count,stale_or_invalid_asset_count,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,error_count:(.errors|length)}),
               draft_write:($draft[0]|{ok,status,row_count,created_asset_count,updated_asset_count,skipped_existing_count,writes_committed,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,error_count:(.errors|length)}),
               promote_write:($promote[0]|{ok,status,row_count,promoted_count,skipped_existing_count,writes_committed,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,error_count:(.errors|length)})
             }' \
@@ -272,15 +332,25 @@ jobs:
             if .operation_mode == "inspect" then
               .outcome == "success" and
               .inspection.draft.ok == true and .inspection.draft.row_count == 13 and .inspection.draft.writes_attempted == false and .inspection.draft.writes_committed == false and .inspection.draft.error_count == 0 and
-              .inspection.promotion.ok == true and .inspection.promotion.row_count == 13 and .inspection.promotion.writes_attempted == false and .inspection.promotion.writes_committed == false and .inspection.promotion.error_count == 0
+              all([.inspection.draft][]; .publish_attempted == false and .index_attempted == false and .sitemap_llms_release_attempted == false and .search_release_attempted == false) and
+              .inspection.promotion.row_count == 13 and .inspection.promotion.writes_attempted == false and .inspection.promotion.writes_committed == false and
+              all([.inspection.promotion][]; .publish_attempted == false and .index_attempted == false and .sitemap_llms_release_attempted == false and .search_release_attempted == false) and
+              (
+                (.inspection.promotion.inspection_state == "ready" and .inspection.promotion.command_exit_code == 0 and .inspection.promotion.ok == true and .inspection.promotion.missing_target_count == 0 and .inspection.promotion.forbidden_route_count == 0 and .inspection.promotion.stale_or_invalid_asset_count == 0 and .inspection.promotion.error_count == 0) or
+                (.inspection.promotion.inspection_state == "first_import_missing_drafts" and .inspection.promotion.command_exit_code != 0 and .inspection.promotion.ok == false and .inspection.promotion.missing_target_count == 13 and .inspection.promotion.forbidden_route_count == 0 and .inspection.promotion.stale_or_invalid_asset_count == 0 and .inspection.promotion.error_count == 13)
+              )
             else
               .outcome == "success" and
               .dry_run.ok == true and .dry_run.row_count == 13 and .dry_run.writes_attempted == false and
-              .draft_write.ok == true and .draft_write.row_count == 13 and .draft_write.writes_committed == true and
+              (.prewrite_promotion_inspect.inspection_state == "first_import_missing_drafts" or .prewrite_promotion_inspect.inspection_state == "ready") and
+              .draft_write.ok == true and .draft_write.row_count == 13 and
               ((.draft_write.created_asset_count + .draft_write.updated_asset_count + .draft_write.skipped_existing_count) == 13) and
+              .promotion_inspect.ok == true and .promotion_inspect.row_count == 13 and .promotion_inspect.writes_attempted == false and .promotion_inspect.writes_committed == false and
+              ((.promotion_inspect.would_promote_count + .promotion_inspect.skipped_existing_count) == 13) and
+              .promotion_inspect.missing_target_count == 0 and .promotion_inspect.forbidden_route_count == 0 and .promotion_inspect.stale_or_invalid_asset_count == 0 and .promotion_inspect.error_count == 0 and
               .promote_write.ok == true and .promote_write.row_count == 13 and
               ((.promote_write.promoted_count + .promote_write.skipped_existing_count) == 13) and
-              all([.draft_write, .promote_write][]; .publish_attempted == false and .index_attempted == false and .sitemap_llms_release_attempted == false and .search_release_attempted == false and .error_count == 0)
+              all([.dry_run, .draft_write, .promotion_inspect, .promote_write][]; .publish_attempted == false and .index_attempted == false and .sitemap_llms_release_attempted == false and .search_release_attempted == false and .error_count == 0)
             end
           ' artifacts/summary.json >/dev/null
 
