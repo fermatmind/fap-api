@@ -120,13 +120,13 @@ class DailyGivingRecordPublicApiTest extends TestCase
         $this->assertArrayNotHasKey('proof_redaction_notes', $data);
         $this->assertArrayNotHasKey('created_by_admin_user_id', $data);
         $this->assertArrayNotHasKey('updated_by_admin_user_id', $data);
+        $this->assertArrayNotHasKey('receipt_reference_redacted', $data);
     }
 
     public function test_show_exposes_allowed_public_fields(): void
     {
         $record = DailyGivingRecord::factory()->completed()->create([
             'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/original-2026-06-05.png',
-            'receipt_reference_redacted' => 'REF-REDACTED',
             'social_x_url' => 'https://x.com/fermatmind/status/123',
             'social_linkedin_url' => 'https://linkedin.com/feed/update/456',
             'social_weibo_url' => 'https://weibo.com/789',
@@ -140,9 +140,34 @@ class DailyGivingRecordPublicApiTest extends TestCase
         $data = $response->json('record');
 
         $this->assertSame($record->proof_public_url, $data['proof_public_url']);
-        $this->assertSame($record->receipt_reference_redacted, $data['receipt_reference_redacted']);
         $this->assertSame($record->social_x_url, $data['social_x_url']);
         $this->assertSame($record->public_notes, $data['public_notes']);
+    }
+
+    public function test_public_endpoints_hide_records_with_non_publishable_proof_state(): void
+    {
+        $record = DailyGivingRecord::factory()->completed()->create([
+            'proof_status' => DailyGivingRecord::PROOF_OPERATOR_APPROVED_PENDING,
+        ]);
+
+        $this->getJson('/api/v0.5/foundation/giving-records')
+            ->assertOk()
+            ->assertJsonCount(0, 'items');
+        $this->getJson("/api/v0.5/foundation/giving-records/{$record->record_code}")
+            ->assertNotFound();
+    }
+
+    public function test_public_serializer_fails_closed_for_unapproved_or_private_proof_url(): void
+    {
+        $record = DailyGivingRecord::factory()->completed()->make([
+            'proof_status' => DailyGivingRecord::PROOF_OPERATOR_APPROVED_PENDING,
+            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/pending.png',
+        ]);
+        $this->assertNull($record->toPublicArray()['proof_public_url']);
+
+        $record->proof_status = DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE;
+        $record->proof_public_url = 'https://media.fermatmind.com/foundation/daily-giving/private/raw.pdf';
+        $this->assertNull($record->toPublicArray()['proof_public_url']);
     }
 
     public function test_months_returns_distinct_months(): void
