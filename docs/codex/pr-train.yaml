@@ -38092,6 +38092,54 @@ prs:
     content_authority: CMS/backend
     next_task: MBTI-INDEX-24
 
+  - id: MBTI-CMS-29
+    repo: fap-api
+    depends_on:
+      - MBTI-CMS-27A
+    branch: codex/mbti-cms-29-content15-readmodel-repair
+    title: "MBTI-CMS-29: repair CONTENT-15 public authority readmodels"
+    train_scope: mbti_content15_post_import_authority_readmodel_repair
+    status: user_authorized
+    scope:
+      - Persist CONTENT-15 profile FAQ and safe internal-link payloads as CMS-backed variant sections.
+      - Render CONTENT-15 A/T comparison authority payloads through the public comparison readmodel while preserving the noindex, sitemap, llms, and search hold.
+      - Render cross-type quick_judgment_table sections when a table has rows but no prose body.
+      - Add focused importer and public API regression coverage; do not write production CMS content in this PR.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - backend/app/Services/Cms/MbtiContent15ProductionCmsImportService.php
+      - backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
+      - backend/tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php
+      - backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write or replay production CMS content, run a production import, deploy, release sitemap/llms/indexability, submit GSC, or add frontend fallback content.
+      - Alter CMS-22/CMS-23 source assets, canonical routes, JSON-LD, public API routes, permissions, secrets, or production authorization hashes.
+      - Mark MBTI-CMS-28 passed before the repaired code is deployed and the required production profile replay has been explicitly authorized and verified read-only.
+    validation:
+      - php -l backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - php -l backend/app/Services/Cms/MbtiContent15ProductionCmsImportService.php
+      - php -l backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityMbtiContent15ProductionImportCommandTest|MbtiCrossTypeComparisonAuthorityReadModelTest' --no-ansi
+      - Real-package preflight is deferred to the deployed CMS authority because an empty SQLite process has no published MBTI profile rows; the focused importer/API test supplies the equivalent published authority fixture and exact fail-closed guard coverage.
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/PersonalityController.php app/Services/Cms/MbtiContent15ProductionCmsImportService.php app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: MBTI-CMS-28
+
   - id: ENNEAGRAM-EN13-CONTENT-PACKAGE-01
     repo: fap-api
     depends_on: []

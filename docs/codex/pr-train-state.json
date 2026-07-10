@@ -1669,7 +1669,7 @@
       "Reference-only fap-web worktree had unrelated dirty changes before and after this task; no fap-web files were modified.",
       "Composer dependencies were installed in the isolated worktree because vendor/ was absent."
     ],
-    "status": "pr_open_checks_pending",
+    "status": "ready_to_merge",
     "title": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01 fix production dry-run SQL compatibility",
     "transitions": [
       {
@@ -82895,6 +82895,85 @@
         "from": "manifest_registered",
         "to": "pending_dependency",
         "note": "Registered MBTI-CMS-28 as the read-only post-import verification step. It cannot start until MBTI-CMS-27 production import is authorized, executed, and merged/evidence-recorded."
+      }
+    ]
+  },
+  "MBTI-CMS-29": {
+    "id": "MBTI-CMS-29",
+    "repo": "fap-api",
+    "title": "MBTI-CMS-29: repair CONTENT-15 public authority readmodels",
+    "base": "main",
+    "branch": "codex/mbti-cms-29-content15-readmodel-repair",
+    "depends_on": [
+      "MBTI-CMS-27A"
+    ],
+    "status": "pr_open_checks_pending",
+    "commit_sha": "23833bfcca8cd1d015efb827271dcf2f60aa52f7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2860",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized registering MBTI-CMS-29 and updating the fap-api PR-train manifest and state ledger before execution."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "MBTI-CMS-27A merged as PR #2838 with merge commit 30fdcd6d3b816a66205132628d01255913d080b9, which is contained in origin/main."
+      },
+      "production_replay": {
+        "status": "held_external_authorization_required",
+        "evidence": "This repair PR must not replay production CMS content. The follow-up requires a newly explicit authorization after the repair SHA is deployed."
+      },
+      "cms_28": {
+        "status": "held_pending_repair_deploy_and_profile_replay",
+        "evidence": "The 2026-07-10 read-only CMS-28 report found missing persisted profile FAQ/internal links and a cross-type quick_judgment_table readmodel omission."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "2026-07-10: PHP syntax passed for all three changed runtime files; focused PersonalityMbtiContent15ProductionImportCommandTest and MbtiCrossTypeComparisonAuthorityReadModelTest passed (91 assertions); Pint passed; in-memory SQLite migrations and API route listing passed; YAML/JSON parsing and git diff --check passed."
+      },
+      "local_mbti_http_verifier": {
+        "status": "external_environment_unavailable",
+        "evidence": "bash scripts/ci_verify_mbti.sh could not connect to the expected local API at 127.0.0.1:8000 before business checks. This is recorded in generated/pr-train-sidecar-issues and is not a manifest required check."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2860 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, and Semgrep blocking secrets."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started isolated MBTI-CMS-29 code repair after the operator explicitly authorized manifest/state registration. Production write, deployment, indexability release, and GSC remain out of scope."
+      },
+      {
+        "at": "2026-07-10T07:08:56Z",
+        "from": "in_progress",
+        "to": "local_validation_passed",
+        "note": "Focused importer/readmodel validation, syntax, Pint, SQLite migrations, route listing, YAML/JSON parsing, diff check, and changed-file scope validation passed. The local HTTP verifier requires an API at 127.0.0.1:8000 and is recorded as an external sidecar condition."
+      },
+      {
+        "at": "2026-07-10T07:11:00Z",
+        "from": "local_validation_passed",
+        "to": "pr_open_checks_pending",
+        "note": "Opened PR #2860. Required GitHub checks and repository merge policy must pass before merge; no deployment or production CMS replay is authorized by this PR."
+      },
+      {
+        "at": "2026-07-10T07:23:00Z",
+        "from": "pr_open_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed. Scope remains restricted to MBTI-CMS-29 authority/readmodel repair; production CMS replay, deploy, indexability release, and GSC remain deferred."
       }
     ]
   },

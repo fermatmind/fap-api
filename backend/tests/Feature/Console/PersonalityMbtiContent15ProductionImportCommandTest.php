@@ -66,6 +66,16 @@ final class PersonalityMbtiContent15ProductionImportCommandTest extends TestCase
             ->where('section_key', 'direct_answer')
             ->firstOrFail();
         self::assertSame('fixture section for istj-a', $section->body_md);
+        $faqSection = PersonalityProfileVariantSection::query()
+            ->where('personality_profile_variant_id', (int) $istj->id)
+            ->where('section_key', 'mbti_content15_faq')
+            ->firstOrFail();
+        self::assertSame('Q1', data_get($faqSection->payload_json, 'items.0.question'));
+        $internalLinksSection = PersonalityProfileVariantSection::query()
+            ->where('personality_profile_variant_id', (int) $istj->id)
+            ->where('section_key', 'mbti_content15_internal_links')
+            ->firstOrFail();
+        self::assertSame('/zh/personality', data_get($internalLinksSection->payload_json, 'items.0.href'));
         self::assertSame(4, PersonalityProfileVariantRevision::query()->count());
 
         $seo = PersonalityProfileVariantSeoMeta::query()
@@ -92,6 +102,24 @@ final class PersonalityMbtiContent15ProductionImportCommandTest extends TestCase
         self::assertSame('ENTJ', $authority->left_type_code);
         self::assertSame('INTJ', $authority->right_type_code);
         self::assertSame(4, MbtiCrossTypeComparisonAuthority::query()->count());
+
+        $profileResponse = $this->getJson('/api/v0.5/personality/istj-a?locale=zh-CN');
+        $profileResponse->assertOk()
+            ->assertJsonPath('answer_surface_v1.faq_blocks.0.question', 'Q1')
+            ->assertJsonPath('internal_links.0.href', '/zh/personality')
+            ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', '/zh/personality');
+
+        $atResponse = $this->getJson('/api/v0.5/personality/comparisons/intp-a-vs-intp-t?locale=zh-CN');
+        $atResponse->assertOk()
+            ->assertJsonPath('seo_meta.seo_title', 'INTP-A-VS-INTP-T | FermatMind')
+            ->assertJsonPath('seo_meta.robots', 'noindex,follow')
+            ->assertJsonPath('comparison_public_projection_v1.sections.1.id', 'quick_judgment_table')
+            ->assertJsonPath('comparison_public_projection_v1.sections.1.rows.0.dimension', '判断入口')
+            ->assertJsonPath('comparison_public_projection_v1.faq.0.question', 'Q1')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.href', '/zh/personality')
+            ->assertJsonPath('answer_surface_v1.faq_blocks.0.question', 'Q1')
+            ->assertJsonPath('answer_surface_v1.indexability_state', 'noindex')
+            ->assertJsonPath('landing_surface_v1.indexability_state', 'noindex');
     }
 
     public function test_write_is_refused_before_package_reading_without_every_exact_execution_guard(): void
@@ -146,21 +174,19 @@ final class PersonalityMbtiContent15ProductionImportCommandTest extends TestCase
                 'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
             ]);
 
-            if ($typeCode === 'INTP') {
-                continue;
+            foreach (['A', 'T'] as $variantCode) {
+                PersonalityProfileVariant::query()->create([
+                    'org_id' => 0,
+                    'personality_profile_id' => (int) $profile->id,
+                    'canonical_type_code' => $typeCode,
+                    'variant_code' => $variantCode,
+                    'runtime_type_code' => $typeCode.'-'.$variantCode,
+                    'type_name' => $typeCode.' '.$variantCode,
+                    'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+                    'is_published' => true,
+                    'published_at' => now()->subMinute(),
+                ]);
             }
-
-            PersonalityProfileVariant::query()->create([
-                'org_id' => 0,
-                'personality_profile_id' => (int) $profile->id,
-                'canonical_type_code' => $typeCode,
-                'variant_code' => 'A',
-                'runtime_type_code' => $typeCode.'-A',
-                'type_name' => $typeCode.' A',
-                'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
-                'is_published' => true,
-                'published_at' => now()->subMinute(),
-            ]);
         }
     }
 

@@ -322,8 +322,9 @@ final class Mbti64CrossTypeComparisonPublicReadModel
                 fn (mixed $line): ?string => $this->stringValue($line),
                 is_array($bodySource) ? $bodySource : [$bodySource]
             )));
+            $rows = is_array($section['rows'] ?? null) ? array_values((array) $section['rows']) : [];
 
-            if ($title === null || $body === []) {
+            if ($title === null || ($body === [] && $rows === [])) {
                 continue;
             }
 
@@ -333,8 +334,8 @@ final class Mbti64CrossTypeComparisonPublicReadModel
                 'body' => $body,
             ];
 
-            if (is_array($section['rows'] ?? null)) {
-                $projection['rows'] = array_values((array) $section['rows']);
+            if ($rows !== []) {
+                $projection['rows'] = $rows;
             }
 
             $sections[] = $projection;

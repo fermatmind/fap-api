@@ -308,3 +308,46 @@
 - recommended follow-up:
   - Merge the fail-closed importer capability through a separately validated code-delivery path.
   - Use a platform-owner approved production runner or already-approved deployed runtime for the exact authorized dry-run, then the exact write command, then MBTI-CMS-28 read-only verification.
+
+## MBTI-CMS-29 production content reimport requires fresh exact authorization
+
+- repo: `fap-api`
+- PR id / branch: `MBTI-CMS-29` / `codex/mbti-cms-29-content15-readmodel-repair`
+- blocker type: `production_content_reimport_requires_fresh_exact_authorization`
+- evidence:
+  - The nine CONTENT-15 records were imported before this readmodel repair.
+  - This PR persists profile FAQ/internal-link sections for future imports but does not mutate existing production CMS records.
+- why not current PR scope:
+  - This is a backend authority/readmodel code repair only.
+  - Re-importing production CMS content requires a new exact package and explicit production-write authorization.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - After this PR is deployed, obtain explicit authorization to replay the exact approved CONTENT-15 package, then run MBTI-CMS-28 read-only verification.
+
+## MBTI-CMS-29 real package preflight needs seeded authority targets
+
+- repo: `fap-api`
+- PR id / branch: `MBTI-CMS-29` / `codex/mbti-cms-29-content15-readmodel-repair`
+- blocker type: `real_package_preflight_requires_seeded_authority_targets`
+- evidence:
+  - The final package targets existing CMS profile slugs and cannot resolve them against an empty in-memory SQLite process.
+  - Focused importer/readmodel tests seed the required targets and validate schema, sections, FAQ, internal links, and the indexability hold.
+- why not current PR scope:
+  - Creating or importing a production-equivalent CMS snapshot is environment/data ownership work, not a code-only repair.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Run the exact-package preflight on the approved deployed authority environment before any future production replay; do not use this limitation as production-import approval.
+
+## MBTI-CMS-29 local MBTI HTTP verifier needs a running API
+
+- repo: `fap-api`
+- PR id / branch: `MBTI-CMS-29` / `codex/mbti-cms-29-content15-readmodel-repair`
+- blocker type: `local_mbti_http_verifier_requires_running_api`
+- evidence:
+  - `bash scripts/ci_verify_mbti.sh` exited before business checks because curl could not connect to `http://127.0.0.1:8000`.
+  - Focused in-memory importer/readmodel tests, PHP syntax, and Pint passed without a runtime server.
+- why not current PR scope:
+  - Starting, configuring, or routing a shared local API server is local-environment ownership work, not this code-only repair.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Run `bash scripts/ci_verify_mbti.sh` from a standard local stack with the API listening on `127.0.0.1:8000`; do not treat the local-server absence as production verification.
