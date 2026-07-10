@@ -200,9 +200,9 @@
     "depends_on": [
       "ENNEAGRAM-EN13-SITEMAP-LOCALE-01"
     ],
-    "status": "committed",
+    "status": "ready_to_merge",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2867",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -83171,6 +83171,95 @@
       {"at": "2026-07-10T06:33:12Z", "from": "committed", "to": "pr_open", "note": "Opened PR #2856 for the locked runtime closeout scope; required GitHub checks are pending."},
       {"at": "2026-07-10T06:33:12Z", "from": "pr_open", "to": "ready_to_merge", "note": "PR #2856 CI and Code Scanning checks are green and GitHub reports mergeStateStatus=CLEAN; the manifest permits squash auto-merge after the ledger update checks complete."},
       {"at": "2026-07-10T06:58:54Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled from GitHub: PR #2856 squash merged at 7ff0de609f637923e552d78583095ea6440dd516; origin/main contains the merge commit, the local task worktree/branch were removed, and the remote task branch was already deleted."}
+    ]
+  },
+  "BIG5-ZH-LEGACY-ROUTE-AUDIT-01": {
+    "id": "BIG5-ZH-LEGACY-ROUTE-AUDIT-01",
+    "repo": "fap-api",
+    "title": "BIG5-ZH-LEGACY-ROUTE-AUDIT-01: freeze ten Chinese Legacy-to-V2 route mappings",
+    "base": "main",
+    "branch": "codex/big5-zh-legacy-route-audit-01",
+    "depends_on": [],
+    "status": "committed",
+    "commit_sha": "eee3cf697d9f13880f01c0ac14a4ae0964ab63ce",
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The user-provided locked goal explicitly authorized this exact PR id, scope, branch, paths, checks, and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "This first train item has no dependencies."
+      },
+      "audit_contract": {
+        "status": "pass",
+        "evidence": "The validator proved the exact ordered ten-row mapping, unique endpoints, live status/robots/canonical observations, Legacy seed identities, V2 package identities, and the Markdown handoff contract."
+      },
+      "yaml_json_validation": {
+        "status": "pass",
+        "evidence": "Audit JSON and state JSON parsed; the PR train manifest parsed as YAML."
+      },
+      "scope_and_diff": {
+        "status": "pass",
+        "evidence": "All changed and untracked files are inside this PR's allowed_paths and git diff --check passed."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2867 completed 15 checks successfully with zero failures or pending checks before the ready-to-merge ledger update."
+      },
+      "merge_policy": {
+        "status": "pass",
+        "evidence": "GitHub reported MERGEABLE/CLEAN, no review requirement, no branch protection rule, and the manifest permits squash auto-merge after required checks pass."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-10T08:25:00Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered only the current locked PR; no future train item was registered."
+      },
+      {
+        "at": "2026-07-10T08:25:00Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started the read-only ten-route Chinese Legacy-to-V2 mapping audit."
+      },
+      {
+        "at": "2026-07-10T08:31:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Exact ten-row audit, repository evidence, live read-only evidence, YAML/JSON parsing, scope validation, and git diff checks passed."
+      },
+      {
+        "at": "2026-07-10T08:31:22Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the scoped audit, validator, and current-PR-only manifest/state registration."
+      },
+      {
+        "at": "2026-07-10T08:32:48Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2867 for the locked audit scope; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-10T08:39:01Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All 15 GitHub checks passed and scope, changed files, PR body, review state, branch policy, and squash merge policy were revalidated."
+      }
     ]
   }
 }
