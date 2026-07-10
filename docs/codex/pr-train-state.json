@@ -43371,18 +43371,23 @@
         "at": "2026-07-10T18:16:17+08:00",
         "note": "Public-path guard implementation, 51 focused tests, proof redaction scan, Pint, route listing, fresh migration, full CI, JSON/YAML validation, and 15-path scope validation passed.",
         "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-10T18:18:08+08:00",
+        "note": "Opened PR #2875 from the rebased scoped API22 branch.",
+        "status": "pr_open"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-22",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2875",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "pr_open",
     "title": "SECURITY-169-API-22: harden SEO scanners against private/cross-tenant paths",
     "train_scope": "security_169_fap_api_audit"
   },
