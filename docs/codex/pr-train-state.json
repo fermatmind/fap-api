@@ -232,7 +232,7 @@
     "depends_on": [
       "ENNEAGRAM-EN13-CMS-DRY-RUN-01"
     ],
-    "status": "pr_open",
+    "status": "pending_external_merge",
     "commit_sha": "e7c985319ac1b742542c7a7acf5a80b2890372af",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2887",
     "failure_reason": null,
@@ -303,12 +303,20 @@
         "status": "external_follow_up_recorded",
         "required_checks_affected": false,
         "evidence": "Production MySQL JSON normalization causes four nested JSON fields to compare unequal under strict PHP array comparison, so a repeated draft write would falsely update 13 rows even though promotion is ready. The completed CMS state is correct; repair requires writer/test paths outside this manifest scope and is recorded in generated/pr-train-sidecar-issues."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2887 completed its first full check set with 15 successful checks and zero failures, cancellations, or pending checks."
+      },
+      "merge_policy": {
+        "status": "pending_external_merge",
+        "evidence": "Scope, changed files, title, PR body, and checks pass. The manifest explicitly sets auto_merge=false, so Codex must not merge this PR automatically."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -371,6 +379,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR #2887 with only manifest-allowed train ledger and sidecar evidence files; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-10T22:34:00+08:00",
+        "from": "pr_open",
+        "to": "pending_external_merge",
+        "note": "All 15 reported GitHub checks passed and PR scope/body/title were revalidated. Manifest merge_policy.auto_merge=false requires an external merge decision, so the train stops before merge and before the dependent runtime-smoke item."
       }
     ]
   },
