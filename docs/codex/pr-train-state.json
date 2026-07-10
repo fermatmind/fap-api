@@ -200,21 +200,26 @@
     "depends_on": [
       "ENNEAGRAM-EN13-SITEMAP-LOCALE-01"
     ],
-    "status": "pending_dependency",
+    "status": "committed",
     "commit_sha": null,
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "checks": {},
+    "checks": {
+      "cms_dry_run": {"status":"pass","evidence":"Temporary SQLite dry-run planned 13 English draft assets (1 hub, 3 centres, 9 core types) with writes_attempted=false, writes_committed=false, and no release/external calls."}
+    },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": false
     },
-    "transitions": []
+    "transitions": [
+      {"at":"2026-07-10T08:35:00+08:00","from":"pending_dependency","to":"in_progress","note":"Dependency ENNEAGRAM-EN13-SITEMAP-LOCALE-01 is merged and locally revalidated."},
+      {"at":"2026-07-10T08:35:00+08:00","from":"in_progress","to":"committed","note":"Temporary SQLite CMS dry-run completed with zero writes and 13 planned English draft assets."}
+    ]
   },
   "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01": {
     "id": "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01",
