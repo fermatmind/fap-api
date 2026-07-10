@@ -36520,6 +36520,8 @@ prs:
       - backend/app/Filament/Ops/Resources/MediaAssetResource/Pages/EditMediaAsset.php
       - backend/app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php
       - backend/routes/api.php
+      - backend/tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
