@@ -135,6 +135,33 @@ final class ContentPagesControlledPublishService
                     throw new RuntimeException('Target content page disappeared during controlled publish: '.$targetLocale.':'.$key);
                 }
 
+                $page->load('workingRevision');
+                $working = $page->workingRevision;
+                if (! $working instanceof CmsTranslationRevision) {
+                    throw new RuntimeException('Target content page has no working revision during controlled publish: '.$targetLocale.':'.$key);
+                }
+
+                $expectedRevisionId = (int) ($pagePlan['working_revision_id'] ?? 0);
+                $expectedPayloadHash = (string) ($pagePlan['working_revision_payload_sha256'] ?? '');
+                $lockedErrors = $this->workspace->publishValidationErrors('content_page', $page, $working);
+                if ($expectedRevisionId < 1
+                    || (int) $working->id !== $expectedRevisionId
+                    || $expectedPayloadHash === ''
+                    || ! hash_equals($expectedPayloadHash, $this->workspace->revisionPayloadHash($working))) {
+                    $lockedErrors[] = 'working revision changed after controlled publish preflight';
+                }
+
+                if ($lockedErrors === []) {
+                    $lockedErrors = $this->preflightPage($scope, $this->preflightRecord($page));
+                }
+
+                if ($lockedErrors !== []) {
+                    throw new RuntimeException('Target content page failed locked controlled publish revalidation: '.implode('; ', array_map(
+                        static fn (mixed $error): string => is_array($error) ? (string) ($error['code'] ?? 'preflight_failed') : (string) $error,
+                        $lockedErrors,
+                    )));
+                }
+
                 $action = (string) ($pagePlan['action'] ?? $this->actionForPage($scope, $page));
                 if ($action === 'skip_already_published') {
                     $skipped[] = (string) ($pagePlan['target_key'] ?? $key);
@@ -148,7 +175,17 @@ final class ContentPagesControlledPublishService
                     $page = $this->prepareScienceControlledGateForPublish($page);
                 }
 
-                $publishedPage = $this->workspace->publishWorkingRevision('content_page', $page);
+                $page->load('workingRevision');
+                $publishPayloadHash = $page->workingRevision instanceof CmsTranslationRevision
+                    ? $this->workspace->revisionPayloadHash($page->workingRevision)
+                    : $expectedPayloadHash;
+
+                $publishedPage = $this->workspace->publishWorkingRevision(
+                    'content_page',
+                    $page,
+                    $expectedRevisionId,
+                    $publishPayloadHash,
+                );
                 if ($scope === self::SCOPE_SCIENCE_ZH) {
                     $publishedPage = $this->prepareScienceZhForPublish($publishedPage);
                 } elseif ($scope === self::SCOPE_HELP_SERVICE && $publishedPage->isScienceControlledPage()) {
@@ -264,7 +301,23 @@ final class ContentPagesControlledPublishService
                     continue;
                 }
 
-                $pageErrors = $this->preflightPage($scope, $page);
+                $working = $page->workingRevision;
+                $payloadErrors = $working instanceof CmsTranslationRevision
+                    ? $this->workspace->publishValidationErrors('content_page', $page, $working)
+                    : ['working revision missing'];
+                $pageErrors = array_map(
+                    fn (string $message): array => $this->issue(
+                        'content_pages.'.$targetKey.'.working_revision',
+                        'invalid_working_revision_payload',
+                        $message,
+                    ),
+                    $payloadErrors,
+                );
+                $preflightPage = $page;
+                if ($pageErrors === [] && $working instanceof CmsTranslationRevision) {
+                    $preflightPage = $this->preflightRecord($page);
+                }
+                array_push($pageErrors, ...$this->preflightPage($scope, $preflightPage));
                 array_push($errors, ...$pageErrors);
 
                 $action = $this->actionForPage($scope, $page);
@@ -273,6 +326,10 @@ final class ContentPagesControlledPublishService
                     'locale' => $targetLocale,
                     'target_key' => $targetKey,
                     'id' => (int) $page->id,
+                    'working_revision_id' => $working instanceof CmsTranslationRevision ? (int) $working->id : null,
+                    'working_revision_payload_sha256' => $working instanceof CmsTranslationRevision && is_array($working->payload_json)
+                        ? $this->workspace->revisionPayloadHash($working)
+                        : null,
                     'before_state' => $this->state($page),
                     'after_state_preview' => $this->afterStatePreview($page),
                     'action' => $action,
@@ -388,6 +445,17 @@ final class ContentPagesControlledPublishService
         }
 
         return $errors;
+    }
+
+    private function preflightRecord(ContentPage $page): ContentPage
+    {
+        /** @var ContentPage $candidate */
+        $candidate = $this->workspace->editorRecord('content_page', $page);
+        if ($this->isPublishedTarget($page)) {
+            $this->workspace->adapter('content_page')->markPublished($candidate);
+        }
+
+        return $candidate;
     }
 
     /**
@@ -696,10 +764,23 @@ final class ContentPagesControlledPublishService
     private function readinessArtifactState(string $scope): array
     {
         if ($scope === self::SCOPE_HELP_SERVICE) {
+            $path = base_path('docs/help/generated/help-content-draft-publish-preflight-r3-01.v1.json');
+            $decoded = is_file($path) ? json_decode((string) file_get_contents($path), true) : null;
+            $exactScope = data_get($decoded, 'decision.required_exact_publish_scope');
+
             return [
-                'ready' => true,
-                'reason' => 'help_service_runtime_scope_authorized_by_manifest',
-                'required_follow_up' => 'HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01 remains required before any production publish execution.',
+                'ready' => is_array($decoded)
+                    && data_get($decoded, 'decision.final_decision') === 'GO_FOR_EXACT_PUBLISH_AUTHORIZATION_PROMPT'
+                    && data_get($decoded, 'decision.ready_for_exact_publish_authorization') === true
+                    && data_get($decoded, 'decision.blocking_reasons') === []
+                    && data_get($exactScope, 'target_count') === 12
+                    && data_get($exactScope, 'target_locales') === self::HELP_SERVICE_LOCALES
+                    && data_get($exactScope, 'keep_indexable_false') === true
+                    && data_get($exactScope, 'search_submission_allowed') === false
+                    && data_get($exactScope, 'sitemap_llms_footer_enablement_allowed') === false,
+                'reason' => is_array($decoded) ? 'help_service_r3_preflight_evaluated' : 'help_service_r3_preflight_missing_or_invalid',
+                'path' => $path,
+                'final_decision' => data_get($decoded, 'decision.final_decision'),
             ];
         }
 

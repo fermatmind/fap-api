@@ -43,6 +43,10 @@
     "no_record_creation": true,
     "no_upsert_missing": true,
     "no_out_of_scope_cms_write": true,
+    "working_revision_payload_validated": true,
+    "working_revision_identity_bound_to_target": true,
+    "locked_revision_id_and_payload_hash_revalidated": true,
+    "merged_r3_publish_preflight_artifact_required": true,
     "keeps_is_indexable_false": true,
     "search_channel_action_attempted": false,
     "url_submission_attempted": false,
@@ -75,10 +79,16 @@
   "publish_allowed_by_this_artifact": false,
   "cms_mutation_performed": false,
   "final_decision": "RUNTIME_READY_PUBLISH_STILL_REQUIRES_PREFLIGHT_AND_EXACT_AUTHORIZATION",
-  "next_task": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01",
+  "readiness_artifact": {
+    "path": "backend/docs/help/generated/help-content-draft-publish-preflight-r3-01.v1.json",
+    "required_final_decision": "GO_FOR_EXACT_PUBLISH_AUTHORIZATION_PROMPT",
+    "required_blocking_reasons": [],
+    "runtime_enforcement": "fail_closed"
+  },
+  "next_task": "Exact publish authorization for the artifact-bound 12-row scope",
   "notes": [
     "This artifact records runtime capability only.",
     "It does not authorize production publish execution.",
-    "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01 must re-check the 12 production CMS draft rows before any publish execute request."
+    "Execute fails closed unless the merged R3 preflight artifact retains its exact target, no-index, no-search, and no-discoverability decisions."
   ]
 }

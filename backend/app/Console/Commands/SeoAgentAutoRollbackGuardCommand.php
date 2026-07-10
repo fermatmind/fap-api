@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
+use App\Services\Cms\RowBackedRevisionWorkspace;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -312,23 +313,40 @@ final class SeoAgentAutoRollbackGuardCommand extends Command
                 ->where('content_type', 'content_page')
                 ->where('content_id', (int) $page->id)
                 ->whereKey($previousRevisionId)
+                ->lockForUpdate()
                 ->first();
             $candidate = CmsTranslationRevision::query()
                 ->where('content_type', 'content_page')
                 ->where('content_id', (int) $page->id)
                 ->whereKey($candidateRevisionId)
+                ->lockForUpdate()
                 ->first();
             if (! $previous instanceof CmsTranslationRevision || ! $candidate instanceof CmsTranslationRevision) {
                 return ['attempted' => true, 'executed_count' => 0, 'skipped_count' => 0, 'issues' => ['rollback_revision_missing']];
             }
 
+            $workspace = app(RowBackedRevisionWorkspace::class);
+            $validationErrors = $workspace->publishValidationErrors('content_page', $page, $previous);
+            if ($validationErrors !== []) {
+                return [
+                    'attempted' => true,
+                    'executed_count' => 0,
+                    'skipped_count' => 0,
+                    'issues' => ['previous_revision_payload_invalid'],
+                ];
+            }
+
             $now = Carbon::now('UTC');
+            $adapter = $workspace->adapter('content_page');
+            $adapter->applyRevisionPayload($page, $previous->payload_json ?? []);
+            $adapter->markPublished($page);
             $page->forceFill([
                 'published_revision_id' => (int) $previous->id,
                 'working_revision_id' => (int) $previous->id,
-                'reviewer' => 'seo_agent_auto_rollback_guard',
+                'translation_status' => CmsTranslationRevision::STATUS_PUBLISHED,
                 'last_reviewed_at' => $now,
-            ])->save();
+                'published_at' => $previous->published_at ?? $now,
+            ])->saveQuietly();
             $candidate->forceFill([
                 'revision_status' => CmsTranslationRevision::STATUS_ARCHIVED,
                 'archived_at' => $candidate->archived_at ?? $now,

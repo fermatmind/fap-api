@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 final class ContentReleaseAudit
 {
-    public static function log(string $type, object $record, string $source): void
+    public static function log(string $type, object $record, string $source, bool $dispatchFollowUp = true): void
     {
         $targetType = match ($type) {
             'article' => 'article',
@@ -49,7 +49,9 @@ final class ContentReleaseAudit
             result: 'success',
         );
 
-        ContentReleaseFollowUp::dispatch($type, $record, $source, $request);
+        if ($dispatchFollowUp) {
+            ContentReleaseFollowUp::dispatch($type, $record, $source, $request);
+        }
     }
 
     /**

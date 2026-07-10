@@ -38,6 +38,31 @@ final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdap
         ]));
     }
 
+    public function requiredPayloadBlockers(array $payload): array
+    {
+        $blockers = parent::requiredPayloadBlockers($payload);
+
+        foreach (['path', 'kind', 'page_type', 'template', 'animation_profile'] as $field) {
+            if (! array_key_exists($field, $payload) || ! is_string($payload[$field]) || trim($payload[$field]) === '') {
+                $blockers[] = $field.' missing or invalid';
+            }
+        }
+
+        foreach (['is_public', 'is_indexable', 'schema_enabled', 'publish_allowed', 'operator_approval_required', 'faq_schema_eligible'] as $field) {
+            if (! array_key_exists($field, $payload) || ! is_bool($payload[$field])) {
+                $blockers[] = $field.' missing or invalid';
+            }
+        }
+
+        foreach (['headings_json', 'faq_items', 'forbidden_claims'] as $field) {
+            if (! array_key_exists($field, $payload) || ! is_array($payload[$field])) {
+                $blockers[] = $field.' missing or invalid';
+            }
+        }
+
+        return $blockers;
+    }
+
     protected function titleField(): string
     {
         return 'title';

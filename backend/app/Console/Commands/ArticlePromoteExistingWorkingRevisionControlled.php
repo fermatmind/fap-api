@@ -127,7 +127,8 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                     $articleId,
                     $workingRevisionId,
                     $currentPublishedRevisionId,
-                    'controlled_existing_article_working_revision_promotion'
+                    'controlled_existing_article_working_revision_promotion',
+                    dispatchFollowUp: false,
                 );
 
                 $this->logPromotion($auditLogger, $article, $plan, $confirmation);

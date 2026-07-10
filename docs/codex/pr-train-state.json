@@ -42890,6 +42890,30 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "dependency": {
+        "evidence": "SECURITY-169-API-16 implementation and ledger closeout are merged on origin/main.",
+        "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "29 tests passed with 683 assertions across ContentPages controlled publish, rollback guard, and existing-article controlled promotion.",
+        "status": "pass"
+      },
+      "local_ci": {
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh passed, including 1179 Big Five tests, MBTI E2E, OpenAPI, migration safety, auth, order, dependency, and regression gates.",
+        "status": "pass"
+      },
+      "migration": {
+        "evidence": "Fresh isolated SQLite migration completed successfully at /tmp/fap-api-security-169-api-17.sqlite.",
+        "status": "pass"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --no-ansi completed successfully with 237 output lines.",
+        "status": "pass"
+      },
+      "scope": {
+        "evidence": "All changed paths are listed in the API17 manifest; CI-generated Big Five compiled noise was removed; git diff --check passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42901,6 +42925,16 @@
     ],
     "deploy_allowed": false,
     "events": [
+      {
+        "at": "2026-07-10T15:07:46+08:00",
+        "note": "Implementation and local gates passed on latest origin/main: revision payload identity/hash validation, R3 Help preflight binding, no-revalidation promotion, stale revision repair, and full rollback field restoration. No production or CMS action executed.",
+        "status": "validated"
+      },
+      {
+        "at": "2026-07-10T15:00:34+08:00",
+        "note": "Started API17 from the merged API16 ledger head in an isolated worktree; no production, CMS, search, publish, or deploy action is authorized.",
+        "status": "in_progress"
+      },
       {
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-17; execution waits for declared dependency merge.",
@@ -42916,7 +42950,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-17: harden ContentPages controlled publish and rollback",
     "train_scope": "security_169_fap_api_audit"
   },
