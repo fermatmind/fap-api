@@ -7,6 +7,7 @@ namespace App\Services\Content;
 use App\Services\BigFive\ResultPageV2\AssetAgent\BigFiveResultPageV2AssetAgent;
 use App\Services\Enneagram\Assets\Agent\EnneagramResultPageContentBatchAutomation;
 use Illuminate\Support\Facades\File;
+use InvalidArgumentException;
 
 final class Batch2ResultPageDryRunGate
 {
@@ -35,7 +36,7 @@ final class Batch2ResultPageDryRunGate
      */
     public function run(array $options = []): array
     {
-        $runId = $this->sanitizeSlug((string) ($options['run_id'] ?? 'batch2-dry-run-gate'));
+        $runId = $this->validatedRunId((string) ($options['run_id'] ?? ''));
         $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
         $bigFiveCandidateDir = $this->absolutePathOrDefault(
             (string) ($options['bigfive_candidate_dir'] ?? ''),
@@ -46,18 +47,19 @@ final class Batch2ResultPageDryRunGate
             ? (array) $options['enneagram_public_payload']
             : null;
 
-        $this->ensureDirectory($artifactDir);
+        $bigFiveArtifactDir = $this->artifactSubdirectory($artifactDir, 'bigfive');
+        $enneagramArtifactDir = $this->artifactSubdirectory($artifactDir, 'enneagram');
 
         $bigFive = $this->bigFiveAgent->stageCandidates([
             'run_id' => 'bigfive-stage',
-            'artifact_dir' => $artifactDir.'/bigfive',
+            'artifact_dir' => $bigFiveArtifactDir,
             'candidate_dir' => $bigFiveCandidateDir,
             'allow_staging_write' => false,
         ]);
 
         $enneagram = $this->enneagramAutomation->evaluate([
             'run_id' => 'enneagram-evaluate',
-            'artifact_dir' => $artifactDir.'/enneagram',
+            'artifact_dir' => $enneagramArtifactDir,
             'public_payload' => $enneagramPublicPayload,
             'strict' => $strict,
         ]);
@@ -217,9 +219,52 @@ final class Batch2ResultPageDryRunGate
 
     private function artifactDir(string $root, string $runId): string
     {
-        $artifactRoot = trim($root) !== '' ? rtrim($root, DIRECTORY_SEPARATOR) : base_path(self::DEFAULT_ARTIFACT_RELATIVE_DIR);
+        $artifactRoot = $this->absolutePathOrDefault($root, base_path(self::DEFAULT_ARTIFACT_RELATIVE_DIR));
+        if (str_contains($artifactRoot, "\0")) {
+            throw new InvalidArgumentException('artifact_dir contains an invalid null byte.');
+        }
 
-        return $artifactRoot.DIRECTORY_SEPARATOR.$runId;
+        $this->ensureDirectory($artifactRoot);
+        if (is_link($artifactRoot)) {
+            throw new InvalidArgumentException('artifact_dir must not be a symbolic link.');
+        }
+
+        $canonicalRoot = realpath($artifactRoot);
+        if (! is_string($canonicalRoot) || ! is_dir($canonicalRoot)) {
+            throw new InvalidArgumentException('artifact_dir could not be resolved.');
+        }
+
+        return $this->artifactSubdirectory($canonicalRoot, $runId);
+    }
+
+    private function artifactSubdirectory(string $root, string $name): string
+    {
+        if (preg_match('/\A[A-Za-z0-9][A-Za-z0-9_-]{0,63}\z/D', $name) !== 1) {
+            throw new InvalidArgumentException('artifact subdirectory name is invalid.');
+        }
+
+        $canonicalRoot = realpath($root);
+        if (! is_string($canonicalRoot) || ! is_dir($canonicalRoot) || is_link($root)) {
+            throw new InvalidArgumentException('artifact root must be a resolved non-symlink directory.');
+        }
+
+        $path = $canonicalRoot.DIRECTORY_SEPARATOR.$name;
+        if (is_link($path)) {
+            throw new InvalidArgumentException('artifact subdirectory must not be a symbolic link.');
+        }
+        if (file_exists($path) && ! is_dir($path)) {
+            throw new InvalidArgumentException('artifact subdirectory must be a directory.');
+        }
+
+        $this->ensureDirectory($path);
+        $canonicalPath = realpath($path);
+        if (! is_string($canonicalPath)
+            || dirname($canonicalPath) !== $canonicalRoot
+            || ! str_starts_with($canonicalPath, $canonicalRoot.DIRECTORY_SEPARATOR)) {
+            throw new InvalidArgumentException('artifact subdirectory escaped its configured root.');
+        }
+
+        return $canonicalPath;
     }
 
     private function absolutePathOrDefault(string $value, string $default): string
@@ -242,11 +287,17 @@ final class Batch2ResultPageDryRunGate
         return $path;
     }
 
-    private function sanitizeSlug(string $value): string
+    private function validatedRunId(string $value): string
     {
-        $sanitized = preg_replace('/[^A-Za-z0-9_.-]+/', '-', trim($value)) ?: '';
+        $runId = trim($value);
+        if ($runId === '') {
+            return 'batch2-dry-run-gate';
+        }
+        if (preg_match('/\A[A-Za-z0-9][A-Za-z0-9_-]{0,63}\z/D', $runId) !== 1) {
+            throw new InvalidArgumentException('run_id must be 1-64 ASCII letters, digits, underscores, or hyphens and must start with a letter or digit.');
+        }
 
-        return trim($sanitized, '-') ?: 'batch2-dry-run-gate';
+        return $runId;
     }
 
     private function ensureDirectory(string $path): void
