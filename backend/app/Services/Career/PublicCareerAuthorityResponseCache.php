@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Career;
 
 use App\Domain\Career\Publish\CareerLaunchGovernanceClosureService;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Http\Resources\Career\CareerDatasetHubResource;
 use App\Http\Resources\Career\CareerDatasetMethodResource;
 use App\Http\Resources\Career\CareerJobDetailResource;
@@ -32,6 +33,7 @@ final class PublicCareerAuthorityResponseCache
         private readonly CareerLaunchGovernanceClosureService $launchGovernanceClosureService,
         private readonly CareerJobListBundleBuilder $careerJobListBundleBuilder,
         private readonly CareerJobDetailBundleBuilder $careerJobDetailBundleBuilder,
+        private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
     ) {}
 
     /**
@@ -78,13 +80,14 @@ final class PublicCareerAuthorityResponseCache
      */
     public function jobIndexPayload(string $publicLocale = 'zh-CN', bool $includeNonIndexable = false): array
     {
-        $cacheKey = $this->jobIndexCacheKey($publicLocale, $includeNonIndexable);
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $cacheKey = $this->jobIndexCacheKey($normalizedLocale, $includeNonIndexable);
         $cached = Cache::get($cacheKey);
         if (is_array($cached)) {
-            return $cached;
+            return $this->filterJobIndexPayloadForPublicLocale($cached, $normalizedLocale);
         }
 
-        return $this->refreshJobIndexPayload($publicLocale, $includeNonIndexable);
+        return $this->refreshJobIndexPayload($normalizedLocale, $includeNonIndexable);
     }
 
     /**
@@ -97,13 +100,20 @@ final class PublicCareerAuthorityResponseCache
             return null;
         }
 
-        $cacheKey = $this->jobDetailCacheKey($normalizedSlug, $publicLocale);
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $cacheKey = $this->jobDetailCacheKey($normalizedSlug, $normalizedLocale);
+        if (! $this->detailReadIsPublishedForLocale($normalizedSlug, $normalizedLocale)) {
+            Cache::forget($cacheKey);
+
+            return null;
+        }
+
         $cached = Cache::get($cacheKey);
         if (is_array($cached)) {
             return $cached;
         }
 
-        return $this->refreshJobDetailPayload($normalizedSlug, $publicLocale);
+        return $this->refreshJobDetailPayload($normalizedSlug, $normalizedLocale);
     }
 
     public function forgetJobDetailPayload(string $slug, string $publicLocale = 'zh-CN'): bool
@@ -298,6 +308,8 @@ final class PublicCareerAuthorityResponseCache
             'items' => $items,
         ];
 
+        $payload = $this->filterJobIndexPayloadForPublicLocale($payload, $publicLocale);
+
         Cache::forever($this->jobIndexCacheKey($publicLocale, $includeNonIndexable), $payload);
 
         return $payload;
@@ -308,6 +320,10 @@ final class PublicCareerAuthorityResponseCache
      */
     private function refreshJobDetailPayload(string $slug, string $publicLocale): ?array
     {
+        if (! $this->detailReadIsPublishedForLocale($slug, $publicLocale)) {
+            return null;
+        }
+
         $bundle = $this->careerJobDetailBundleBuilder->buildBySlug($slug, $publicLocale);
         if ($bundle === null) {
             return null;
@@ -320,6 +336,48 @@ final class PublicCareerAuthorityResponseCache
         Cache::forever($this->jobDetailCacheKey($slug, $publicLocale), $payload);
 
         return $payload;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function filterJobIndexPayloadForPublicLocale(array $payload, string $publicLocale): array
+    {
+        $items = is_array($payload['items'] ?? null) ? $payload['items'] : [];
+        $payload['items'] = array_values(array_filter($items, function (mixed $item) use ($publicLocale): bool {
+            if (! is_array($item)) {
+                return false;
+            }
+
+            $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
+            $projectionItem = $this->runtimePublishProjection->itemForSlug($slug, $publicLocale);
+
+            return $slug !== '' && $this->detailReadIsPublishedForLocale($slug, $publicLocale)
+                && ($projectionItem['dataset_visible'] ?? false) === true;
+        }));
+
+        return $payload;
+    }
+
+    private function detailReadIsPublishedForLocale(string $slug, string $publicLocale): bool
+    {
+        $item = $this->runtimePublishProjection->itemForSlug($slug, $publicLocale);
+        $state = is_array($item)
+            ? (string) (
+                $item['runtime_publish_state']
+                ?? $item['runtime_state']
+                ?? $item['projection_state']
+                ?? $item['state']
+                ?? ''
+            )
+            : '';
+
+        return is_array($item)
+            && $state === 'published'
+            && ($item['detail_route_enabled'] ?? false) === true
+            && ($item['robots_indexable'] ?? false) === true
+            && ($item['release_gate_pass'] ?? false) === true;
     }
 
     private function normalizePublicLocale(string $publicLocale): string

@@ -42493,6 +42493,20 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "local_validation": {
+        "commands": [
+          "cd backend && ./vendor/bin/pint app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php app/Services/Career/PublicCareerAuthorityResponseCache.php tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-11.sqlite php artisan migrate --force --no-ansi",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "Focused Career runtime projection/cache suite passed with 43 assertions. route:list, isolated sqlite migration, JSON/YAML/diff checks, and ci_verify_mbti.sh passed; CI-generated BIG5_OCEAN compiled artifacts were restored.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42508,6 +42522,11 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-11; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T08:33:34+08:00",
+        "note": "Implemented fail-closed Career runtime projection/cache behavior and completed local validation without deployment, CMS, or production writes.",
+        "status": "validated"
       }
     ],
     "failure_reason": null,
@@ -42519,7 +42538,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-11: harden career runtime cache and publish projection",
     "train_scope": "security_169_fap_api_audit"
   },

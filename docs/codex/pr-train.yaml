@@ -35319,6 +35319,7 @@ prs:
       - backend/app/Http/Resources/Career/CareerJobDetailResource.php
       - backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php
       - backend/app/Services/Career/Bundles/CareerLocaleIntegrityGate.php
+      - backend/tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

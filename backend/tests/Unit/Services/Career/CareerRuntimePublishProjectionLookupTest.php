@@ -6,12 +6,12 @@ namespace Tests\Unit\Services\Career;
 
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
-use App\Models\Occupation;
-use App\Models\OccupationFamily;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Mockery;
 use Tests\TestCase;
 
 final class CareerRuntimePublishProjectionLookupTest extends TestCase
@@ -74,6 +74,7 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->assertTrue($lookup->searchVisible('actors'));
         $this->assertTrue($lookup->robotsIndexable('actors'));
         $this->assertTrue($lookup->releaseGatePass('actors'));
+        $this->assertNull($lookup->itemForSlug('actors', 'zh-CN'));
         $this->assertSame(['actors'], array_column($lookup->publicDatasetItems(), 'slug'));
         $this->assertSame(['actors'], array_column($lookup->publicDetailItems(), 'slug'));
         $this->assertFalse($lookup->detailRouteEnabled('software-developers'));
@@ -84,33 +85,8 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->assertFalse($lookup->familyHubLive('computer-and-information-technology'));
     }
 
-    public function test_it_infers_family_hub_authority_from_published_child_projection_without_explicit_family_row(): void
+    public function test_it_requires_an_explicit_published_family_hub_projection_row(): void
     {
-        $family = OccupationFamily::query()->create([
-            'canonical_slug' => 'computer-and-information-technology',
-            'title_en' => 'Computer and Information Technology',
-            'title_zh' => '计算机与信息技术',
-        ]);
-
-        Occupation::query()->create([
-            'family_id' => $family->id,
-            'canonical_slug' => 'data-scientists',
-            'entity_level' => 'market_child',
-            'truth_market' => 'US',
-            'display_market' => 'CN',
-            'crosswalk_mode' => 'direct_match',
-            'canonical_title_en' => 'Data Scientists',
-            'canonical_title_zh' => '数据科学家',
-            'search_h1_zh' => '数据科学家职业',
-            'structural_stability' => 0.84,
-            'task_prototype_signature' => ['analysis' => 0.9],
-            'market_semantics_gap' => 0.1,
-            'regulatory_divergence' => 0.1,
-            'toolchain_divergence' => 0.1,
-            'skill_gap_threshold' => 0.4,
-            'trust_inheritance_scope' => ['allow_task_truth' => true],
-        ]);
-
         $this->writeProjection($this->projectionTimestamp, [
             [
                 'slug' => 'data-scientists',
@@ -131,42 +107,12 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
 
         $lookup = app(CareerRuntimePublishProjectionLookup::class);
 
-        $this->assertSame(1, Occupation::query()->where('family_id', $family->id)->count());
         $this->assertTrue($lookup->detailRouteEnabled('data-scientists'));
-        $this->assertTrue($lookup->familyHubLive('computer-and-information-technology'));
+        $this->assertFalse($lookup->familyHubLive('computer-and-information-technology'));
     }
 
-    public function test_it_does_not_infer_family_hub_authority_without_published_children_or_for_broad_holds(): void
+    public function test_it_requires_a_published_family_hub_projection_row_for_all_family_slugs(): void
     {
-        OccupationFamily::query()->create([
-            'canonical_slug' => 'empty-family',
-            'title_en' => 'Empty Family',
-            'title_zh' => '空家族',
-        ]);
-        OccupationFamily::query()->create([
-            'canonical_slug' => 'agricultural-workers-all-other',
-            'title_en' => 'Agricultural Workers, All Other',
-            'title_zh' => '其他农业工作者',
-        ]);
-
-        $this->writeProjection($this->projectionTimestamp, [
-            [
-                'slug' => 'data-scientists',
-                'locale' => 'en',
-                'public_resolution_type' => 'public_canonical_job',
-                'runtime_publish_state' => 'published',
-                'detail_route_enabled' => true,
-                'dataset_visible' => true,
-                'search_visible' => true,
-                'sitemap_live' => true,
-                'llms_live' => true,
-                'llms_full_live' => true,
-                'canonical_self' => true,
-                'robots_indexable' => true,
-                'release_gate_pass' => true,
-            ],
-        ]);
-
         $lookup = app(CareerRuntimePublishProjectionLookup::class);
 
         $this->assertFalse($lookup->familyHubLive('empty-family'));
@@ -210,7 +156,37 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->assertTrue($lookup->releaseGatePass('architectural-and-civil-drafters'));
     }
 
-    public function test_it_falls_back_to_cached_dataset_hub_without_rebuilding_projection(): void
+    public function test_it_reloads_projection_visibility_when_newer_materialized_authority_appears(): void
+    {
+        $this->writeProjection('first', [[
+            'slug' => 'actors',
+            'locale' => 'en',
+            'runtime_publish_state' => 'blocked',
+            'detail_route_enabled' => false,
+            'dataset_visible' => false,
+            'search_visible' => false,
+            'robots_indexable' => false,
+            'release_gate_pass' => false,
+        ]], 1_000);
+
+        $lookup = app(CareerRuntimePublishProjectionLookup::class);
+        $this->assertFalse($lookup->detailRouteEnabled('actors'));
+
+        $this->writeProjection('second', [[
+            'slug' => 'actors',
+            'locale' => 'en',
+            'runtime_publish_state' => 'published',
+            'detail_route_enabled' => true,
+            'dataset_visible' => true,
+            'search_visible' => true,
+            'robots_indexable' => true,
+            'release_gate_pass' => true,
+        ]], 2_000);
+
+        $this->assertTrue($lookup->detailRouteEnabled('actors'));
+    }
+
+    public function test_it_does_not_derive_runtime_visibility_from_cached_dataset_payloads(): void
     {
         Cache::put(PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY, [
             'members' => [
@@ -233,19 +209,71 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
 
         $lookup = app(CareerRuntimePublishProjectionLookup::class);
 
-        $this->assertTrue($lookup->detailRouteEnabled('actuaries'));
-        $this->assertTrue($lookup->datasetVisible('actuaries'));
-        $this->assertTrue($lookup->searchVisible('actuaries'));
-        $this->assertTrue($lookup->robotsIndexable('actuaries'));
-        $this->assertTrue($lookup->releaseGatePass('actuaries'));
-        $this->assertSame(['actuaries'], array_column($lookup->publicDatasetItems(), 'slug'));
-        $this->assertSame(['actuaries'], array_column($lookup->publicDetailItems(), 'slug'));
+        $this->assertFalse($lookup->detailRouteEnabled('actuaries'));
+        $this->assertFalse($lookup->datasetVisible('actuaries'));
+        $this->assertFalse($lookup->searchVisible('actuaries'));
+        $this->assertFalse($lookup->robotsIndexable('actuaries'));
+        $this->assertFalse($lookup->releaseGatePass('actuaries'));
+        $this->assertSame([], $lookup->publicDatasetItems());
+        $this->assertSame([], $lookup->publicDetailItems());
 
         $this->assertFalse($lookup->detailRouteEnabled('accountants-and-auditors'));
         $this->assertFalse($lookup->datasetVisible('accountants-and-auditors'));
         $this->assertFalse($lookup->searchVisible('accountants-and-auditors'));
         $this->assertFalse($lookup->robotsIndexable('accountants-and-auditors'));
         $this->assertFalse($lookup->releaseGatePass('accountants-and-auditors'));
+    }
+
+    public function test_it_discards_cached_detail_payloads_when_the_requested_locale_is_not_published(): void
+    {
+        $visibility = Mockery::mock(CareerRuntimePublishProjectionVisibility::class);
+        $visibility->shouldReceive('itemForSlug')
+            ->with('actors', 'zh-CN')
+            ->once()
+            ->andReturn(null);
+        $this->app->instance(CareerRuntimePublishProjectionVisibility::class, $visibility);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cacheKey = $cache->jobDetailCacheKey('actors', 'zh-CN');
+        Cache::forever($cacheKey, ['identity' => ['canonical_slug' => 'actors']]);
+
+        $this->assertNull($cache->jobDetailPayload('actors', 'zh-CN'));
+        $this->assertFalse(Cache::has($cacheKey));
+    }
+
+    public function test_it_filters_cached_job_index_items_against_requested_locale_projection(): void
+    {
+        $publishedActor = [
+            'runtime_publish_state' => 'published',
+            'detail_route_enabled' => true,
+            'robots_indexable' => true,
+            'release_gate_pass' => true,
+            'dataset_visible' => true,
+        ];
+        $visibility = Mockery::mock(CareerRuntimePublishProjectionVisibility::class);
+        $visibility->shouldReceive('itemForSlug')
+            ->with('actors', 'zh-CN')
+            ->twice()
+            ->andReturn($publishedActor);
+        $visibility->shouldReceive('itemForSlug')
+            ->with('accountants-and-auditors', 'zh-CN')
+            ->twice()
+            ->andReturn(null);
+        $this->app->instance(CareerRuntimePublishProjectionVisibility::class, $visibility);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        Cache::forever(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':zh-CN:public', [
+            'bundle_kind' => 'career_job_index',
+            'bundle_version' => 'career.protocol.job_index.v1',
+            'items' => [
+                ['identity' => ['canonical_slug' => 'actors']],
+                ['identity' => ['canonical_slug' => 'accountants-and-auditors']],
+            ],
+        ]);
+
+        $payload = $cache->jobIndexPayload('zh-CN');
+
+        $this->assertSame(['actors'], collect($payload['items'])->pluck('identity.canonical_slug')->all());
     }
 
     protected function tearDown(): void
