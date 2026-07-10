@@ -42982,6 +42982,30 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "dependency": {
+        "evidence": "SECURITY-169-API-17 implementation and ledger closeout are merged on origin/main at 85c96e66a2cc65da34292ae91e1808cfecdc0ec9.",
+        "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "73 tests passed with 1227 assertions across SEO package import, Science draft dry-run/import, controlled ContentPage revision writing, and controlled publish source gates.",
+        "status": "pass"
+      },
+      "local_ci": {
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh passed on latest origin/main, including Big Five, Enneagram, MBTI E2E, OpenAPI, migration safety, auth, order, dependency, and regression gates.",
+        "status": "pass"
+      },
+      "migration": {
+        "evidence": "Fresh isolated SQLite migration completed successfully at /tmp/fap-api-security-169-api-18.sqlite.",
+        "status": "pass"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --no-ansi completed successfully with 237 output lines.",
+        "status": "pass"
+      },
+      "scope": {
+        "evidence": "All 15 changed paths are listed in the API18 manifest; CI-generated Big Five compiled files were restored; JSON/YAML parsing and git diff --check passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42993,6 +43017,21 @@
     ],
     "deploy_allowed": false,
     "events": [
+      {
+        "at": "2026-07-10T15:48:00+08:00",
+        "note": "API18 local validation passed on origin/main 843cddf93: Pint, 73 focused tests / 1227 assertions, route list, fresh SQLite migration, full ci_verify_mbti, metadata parsing, and allowed-path scope validation. No production or CMS action executed.",
+        "status": "validated"
+      },
+      {
+        "at": "2026-07-10T15:42:05+08:00",
+        "note": "Implemented API18 fail-closed package path containment, strict draft flags, inline frontmatter route parsing, private route and source provenance guards, and ContentPage working revision linkage on latest origin/main. Focused tests passed; no import, CMS/search write, publish, or deploy action was executed.",
+        "status": "focused_tests_passed"
+      },
+      {
+        "at": "2026-07-10T15:32:00+08:00",
+        "note": "Started API18 in an isolated worktree after API17 ledger closeout; production writes, CMS mutation, publishing, search submission, and deploy remain prohibited.",
+        "status": "in_progress"
+      },
       {
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-18; execution waits for declared dependency merge.",
@@ -43008,7 +43047,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-18: harden CMS draft package import validation",
     "train_scope": "security_169_fap_api_audit"
   },

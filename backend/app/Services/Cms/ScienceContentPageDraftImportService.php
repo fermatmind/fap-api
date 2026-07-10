@@ -217,8 +217,10 @@ final class ScienceContentPageDraftImportService
         }
 
         $file = (string) ($dryRunPage['file'] ?? '');
-        $filePath = $root.DIRECTORY_SEPARATOR.str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $file);
-        if ($file === '' || ! is_file($filePath)) {
+        $filePath = $file !== ''
+            ? app(ScienceContentPageFrontmatterReader::class)->resolvePackagePagePath($root, $file)
+            : null;
+        if (! is_string($filePath)) {
             return [
                 'page_key' => $pageKey,
                 'slug' => $slug,
@@ -279,7 +281,7 @@ final class ScienceContentPageDraftImportService
             'translation_group_id' => 'science-contentpage-'.$slug.'-zh-CN',
             'source_locale' => $sourceLocale,
             'translation_status' => $translationStatus,
-            'source_doc' => basename($root).'/'.$file,
+            'source_doc' => $this->sourceDocument($root, $file),
             'is_public' => false,
             'is_indexable' => false,
             'review_state' => (string) ($normalized['review_state'] ?? 'science_review'),
@@ -311,6 +313,23 @@ final class ScienceContentPageDraftImportService
     private function readFrontmatter(string $path): array
     {
         return app(ScienceContentPageFrontmatterReader::class)->read($path);
+    }
+
+    private function sourceDocument(string $root, string $file): string
+    {
+        $canonicalRoot = realpath($root);
+        $canonicalBase = realpath(base_path('docs/seo/import-packages'));
+        if (is_string($canonicalRoot)
+            && is_string($canonicalBase)
+            && ($canonicalRoot === $canonicalBase || str_starts_with($canonicalRoot, $canonicalBase.DIRECTORY_SEPARATOR))) {
+            $relativeRoot = str_replace(DIRECTORY_SEPARATOR, '/', substr($canonicalRoot, strlen($canonicalBase) + 1));
+
+            return 'docs/seo/import-packages/'.$relativeRoot.'/'.str_replace('\\', '/', $file);
+        }
+
+        $manifestHash = hash_file('sha256', $root.DIRECTORY_SEPARATOR.'manifest.json') ?: 'unknown';
+
+        return 'untrusted-package-sha256/'.$manifestHash.'/'.str_replace('\\', '/', $file);
     }
 
     /**

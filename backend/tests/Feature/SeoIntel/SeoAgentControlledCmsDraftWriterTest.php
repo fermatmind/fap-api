@@ -124,6 +124,8 @@ final class SeoAgentControlledCmsDraftWriterTest extends TestCase
         $freshPage = ContentPage::query()->withoutGlobalScopes()->findOrFail((int) $page->id);
         $this->assertSame($article->published_revision_id, $freshArticle->published_revision_id);
         $this->assertSame($page->published_revision_id, $freshPage->published_revision_id);
+        $this->assertSame((int) $pageRevision->id, (int) $freshPage->working_revision_id);
+        $this->assertSame(CmsTranslationRevision::STATUS_DRAFT, (string) $freshPage->translation_status);
         $this->assertSame(ContentPage::STATUS_PUBLISHED, $freshPage->status);
 
         $exitCode = Artisan::call('seo-agent:cms-draft-write', [

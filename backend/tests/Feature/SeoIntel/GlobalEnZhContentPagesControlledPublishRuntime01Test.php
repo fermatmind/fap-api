@@ -681,7 +681,7 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
             'source_locale' => 'zh-CN',
             'translation_status' => ContentPage::TRANSLATION_STATUS_SOURCE,
             'published_at' => null,
-            'source_doc' => 'science-contentpage-gpt55-review-draft-2026-06-08/pages/'.$key.'.md',
+            'source_doc' => 'docs/seo/import-packages/science-contentpage-gpt55-review-draft-2026-06-08/pages/'.$key.'.md',
             'is_public' => false,
             'is_indexable' => false,
             'review_state' => 'science_review',

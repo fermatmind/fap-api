@@ -142,8 +142,59 @@ final class ScienceContentPageDraftDryRunCommandTest extends TestCase
             ->expectsOutputToContain('issue_count=1')
             ->expectsOutputToContain('status=blocked_no_write_dry_run')
             ->expectsOutputToContain('dry-run completed with blockers; no writes performed.')
-            ->assertExitCode(0);
+            ->assertExitCode(1);
 
+        $this->assertSame(0, ContentPage::query()->count());
+    }
+
+    #[Test]
+    public function dry_run_requires_each_page_and_frontmatter_exposure_flag_to_be_strict_false(): void
+    {
+        $package = $this->writeSciencePackage();
+        $manifestPath = $package.DIRECTORY_SEPARATOR.'manifest.json';
+        $manifest = json_decode((string) file_get_contents($manifestPath), true);
+        $this->assertIsArray($manifest);
+        $manifest['pages'][0]['is_public'] = true;
+        file_put_contents($manifestPath, json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        $payload = app(ScienceContentPageDraftDryRunService::class)->dryRun($package);
+
+        $this->assertSame('blocked_no_write_dry_run', $payload['status']);
+        $this->assertContains('unsafe_is_public', array_column($payload['issues'], 'code'));
+        $this->assertSame(0, ContentPage::query()->count());
+    }
+
+    #[Test]
+    public function dry_run_rejects_manifest_page_paths_outside_package_pages_directory(): void
+    {
+        $package = $this->writeSciencePackage();
+        file_put_contents($package.DIRECTORY_SEPARATOR.'outside.md', "---\npage_key: OUTSIDE\n---\nunsafe\n");
+        $manifestPath = $package.DIRECTORY_SEPARATOR.'manifest.json';
+        $manifest = json_decode((string) file_get_contents($manifestPath), true);
+        $this->assertIsArray($manifest);
+        $manifest['pages'][0]['file'] = 'pages/../outside.md';
+        file_put_contents($manifestPath, json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        $payload = app(ScienceContentPageDraftDryRunService::class)->dryRun($package);
+
+        $this->assertSame('blocked_no_write_dry_run', $payload['status']);
+        $this->assertContains('page_file_outside_package', array_column($payload['issues'], 'code'));
+        $this->assertSame(0, ContentPage::query()->count());
+    }
+
+    #[Test]
+    public function dry_run_parses_inline_route_lists_and_blocks_private_share_routes(): void
+    {
+        $package = $this->writeSciencePackage();
+        $pagePath = $package.DIRECTORY_SEPARATOR.'pages'.DIRECTORY_SEPARATOR.'01-science-hub-content-01.md';
+        $page = (string) file_get_contents($pagePath);
+        $page = str_replace("internal_links_allowed:\n  - /tests\n  - /privacy", 'internal_links_allowed: [/tests, /shares/private-result]', $page);
+        file_put_contents($pagePath, $page);
+
+        $payload = app(ScienceContentPageDraftDryRunService::class)->dryRun($package);
+
+        $this->assertSame('blocked_no_write_dry_run', $payload['status']);
+        $this->assertContains('private_route_pattern_present', array_column($payload['issues'], 'code'));
         $this->assertSame(0, ContentPage::query()->count());
     }
 

@@ -35596,6 +35596,12 @@ prs:
       - backend/app/Services/Cms/ScienceContentPageFrontmatterReader.php
       - backend/app/Services/Cms/ScienceContentPagePreImportQaService.php
       - backend/app/Console/Commands/ScienceContentPageDraftDryRunCommand.php
+      - backend/tests/Feature/Console/ArticleImportSeoContentPackageDraftCommandTest.php
+      - backend/tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php
+      - backend/tests/Feature/Console/ScienceContentPageImportDraftsCommandTest.php
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublishRuntime01Test.php
+      - backend/tests/Feature/SeoIntel/SeoAgentControlledCmsDraftWriterTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

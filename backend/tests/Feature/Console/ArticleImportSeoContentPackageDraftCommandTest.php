@@ -264,6 +264,60 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_dry_run_rejects_private_share_plural_url_in_page_body(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['pages/en-career-interest-test-vs-personality-test.md'] .= "\n\n[private](/shares/abc123)\n";
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'private_route_found_in_active_surface');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_private_routes_in_route_alias_keys_or_targets(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['contracts/ROUTE_ALIAS_CONTRACT.json']['known_aliases'] = [
+                '/public-alias' => '/shares/private-result',
+            ];
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'route_alias_contract_private_route');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_body_markdown_paths_outside_package_pages_directory(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['outside.md'] = $files['pages/en-career-interest-test-vs-personality-test.md'];
+            $files['cms/CMS_IMPORT_DRAFT_en_career-interest-test-vs-personality-test.json']['body_markdown_file'] = 'pages/../outside.md';
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'page_file_outside_package');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
     public function test_dry_run_accepts_sensitive_keys_in_dynamic_cta_forbidden_tracking_params(): void
     {
         $package = $this->writeModeCPackage(static function (array &$files): void {

@@ -29,7 +29,9 @@ final class ScienceContentPageDraftDryRunCommand extends Command
             if ((bool) $this->option('json')) {
                 $this->line(json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
 
-                return self::SUCCESS;
+                return ($summary['status'] ?? '') === 'pass_no_write_dry_run'
+                    ? self::SUCCESS
+                    : self::FAILURE;
             }
 
             $this->line('task='.$summary['task']);
@@ -61,7 +63,7 @@ final class ScienceContentPageDraftDryRunCommand extends Command
             if (($summary['issue_count'] ?? 0) > 0) {
                 $this->warn('dry-run completed with blockers; no writes performed.');
 
-                return self::SUCCESS;
+                return self::FAILURE;
             }
 
             $this->info('dry-run validation complete; no writes performed.');

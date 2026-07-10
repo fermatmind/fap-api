@@ -184,13 +184,15 @@ final class ScienceContentPagePreImportQaService
         $issues = [];
         $pageKey = (string) ($manifestPage['page_key'] ?? 'Unknown');
         $file = (string) ($manifestPage['file'] ?? '');
-        $path = $file !== '' ? $root.DIRECTORY_SEPARATOR.str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $file) : '';
+        $path = $file !== ''
+            ? app(ScienceContentPageFrontmatterReader::class)->resolvePackagePagePath($root, $file)
+            : null;
 
         $frontmatter = [];
         $body = '';
         $raw = '';
-        if ($file === '' || ! is_file($path)) {
-            $issues[] = $this->issue($pageKey, 'page_file_not_found', 'page file does not exist: '.$file);
+        if ($file === '' || ! is_string($path)) {
+            $issues[] = $this->issue($pageKey, 'page_file_outside_package', 'page file must be a readable Markdown file inside the package pages directory.');
         } else {
             $raw = (string) file_get_contents($path);
             [$frontmatter, $body] = $this->readFrontmatter($path);
@@ -282,9 +284,12 @@ final class ScienceContentPagePreImportQaService
 
     private function hasPrivateUrlPattern(string $raw): bool
     {
-        $withoutForbiddenRoutes = preg_replace('/forbidden_routes:\s*(?:(?:\r?\n)\s*-\s*[^\r\n]+)+/m', '', $raw) ?? $raw;
+        $withoutForbiddenRoutes = preg_replace([
+            '/forbidden_routes:\s*(?:(?:\r?\n)\s*-\s*[^\r\n]+)+/m',
+            '/forbidden_routes:\s*\[[^\]]*\]/m',
+        ], '', $raw) ?? $raw;
 
-        return preg_match('#/(?:results?/|orders?(?:/|\b)|pay(?:/|\b)|payment(?:/|\b)|checkout(?:/|\b)|share/|history(?:/|\b))#i', $withoutForbiddenRoutes) === 1
+        return preg_match('#/(?:results?(?:/|\b)|orders?(?:/|\b)|pay(?:/|\b)|payment(?:/|\b)|checkout(?:/|\b)|shares?(?:/|\b)|history(?:/|\b))#i', $withoutForbiddenRoutes) === 1
             || preg_match('/(?:token=|orderNo=|payment_intent=|client_secret=|recovery_token=)/i', $withoutForbiddenRoutes) === 1;
     }
 

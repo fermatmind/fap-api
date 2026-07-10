@@ -30,7 +30,7 @@ final class ContentPagesControlledPublishService
 
     public const HELP_SERVICE_SOURCE_MARKER = 'HELP-SERVICE-CONTENT-DRAFTS-01';
 
-    public const SCIENCE_ZH_SOURCE_MARKER = 'science-contentpage-gpt55-review-draft-2026-06-08/pages/';
+    public const SCIENCE_ZH_SOURCE_MARKER = 'docs/seo/import-packages/science-contentpage-gpt55-review-draft-2026-06-08/pages/';
 
     public const FOUNDATION_FACT_STATE = 'planned_public_benefit_shareholding';
 
@@ -407,7 +407,7 @@ final class ContentPagesControlledPublishService
         }
 
         $sourceMarker = $this->sourceMarker($scope);
-        if (! str_contains((string) $page->source_doc, $sourceMarker)) {
+        if (! str_starts_with((string) $page->source_doc, $sourceMarker)) {
             $errors[] = $this->issue('content_pages.'.$key.'.source_doc', 'missing_cms_draft_update_marker', 'Target content page must reflect the approved CMS draft update source marker.', [
                 'expected_marker' => $sourceMarker,
             ]);
