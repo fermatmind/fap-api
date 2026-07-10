@@ -331,6 +331,20 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         }
     }
 
+    public function test_public_projection_propagates_locale_into_lifecycle_copy(): void
+    {
+        $projection = app(RiasecPublicProjectionService::class)
+            ->buildV2FromResult($this->resultForOrderedCode('RIA'), 'en-US');
+
+        $this->assertSame('en', data_get($projection, 'locale'));
+        $this->assertSame('en', data_get($projection, 'lifecycle_copy_v1.locale'));
+        $this->assertSame('available', data_get($projection, 'lifecycle_copy_v1.status'));
+        $this->assertStringContainsString(
+            'interest snapshot',
+            strtolower((string) data_get($projection, 'lifecycle_copy_v1.surfaces.0.copy')),
+        );
+    }
+
     public function test_140q_projection_selects_layer_emphasis_without_cross_form_score_comparison(): void
     {
         $projection = app(RiasecPublicProjectionService::class)->buildV2FromResult($this->resultFor140qLayerTension(), 'zh-CN');

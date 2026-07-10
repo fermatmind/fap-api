@@ -44611,6 +44611,22 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "RIASEC production import command and full content fixture matrix tests passed: 11 tests, 838 assertions.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed, including Big Five, personality, payment, migration, auth, OpenAPI, order-security, MBTI smoke/report/share, events, dependency, webhook/attempt, and strict queue backlog gates.",
+        "status": "pass"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 6 changed paths are listed in SECURITY-169-API-34 allowed_paths; Pint, PHP syntax, JSON/YAML parsing, git diff --check, artifact binding, locale propagation, and fresh SQLite migration checks passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -44626,6 +44642,16 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-34; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-11T04:08:00+08:00",
+        "note": "Dependency SECURITY-169-API-33 is implementation-merged and ledger-closed; started scoped remediation for findings #090 and #168.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T04:10:20+08:00",
+        "note": "Implementation, focused tests, route/migration checks, scope validation, artifact-binding/locale regression checks, and full local CI passed; no production import, deploy, CMS/search write, or external submission executed.",
+        "status": "in_progress"
       }
     ],
     "failure_reason": null,
@@ -44637,7 +44663,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-34: harden RIASEC import and public projection",
     "train_scope": "security_169_fap_api_audit"
   },
