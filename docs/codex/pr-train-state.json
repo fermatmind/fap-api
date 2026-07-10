@@ -42643,6 +42643,10 @@
         ],
         "evidence": "Focused AI-impact asset tests passed: 27 tests, 444 assertions. Route listing, isolated SQLite migration, and ci_verify_mbti passed; the main suite reported 1179 tests and 150137 assertions.",
         "status": "pass"
+      },
+      "github_required_checks": {
+        "evidence": "PR #2844 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, and Semgrep OSS.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42663,18 +42667,23 @@
         "at": "2026-07-10T09:34:21+08:00",
         "note": "Hardened AI-impact preview/import slug authority, approval transitions, and approved-source production import checks. No CMS, production import, deploy, or external write was performed.",
         "status": "implementation_validated"
+      },
+      {
+        "at": "2026-07-10T09:43:13+08:00",
+        "note": "PR #2844 merged as cd8a8e3568a7d32e9772c5cbc013e7b3ab0e1e16 after required checks passed; implementation branch was deleted locally and remotely. No staging wait, manual deploy, or production deploy was performed.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-13",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T01:41:35Z",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2844",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "implementation_validated",
+    "status": "merged",
     "title": "SECURITY-169-API-13: harden career AI-impact asset approval gates",
     "train_scope": "security_169_fap_api_audit"
   },
