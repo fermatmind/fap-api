@@ -182,6 +182,9 @@ final class CareerProgressiveCohortCloseoutPlannerTest extends TestCase
                 'detail_ready_count' => 1048,
                 'public_detail_indexable_count' => 1048,
                 'canonical_public_slug_count' => 1048,
+                'sitemap_noindex_url_count' => 0,
+                'llms_noindex_url_count' => 0,
+                'llms_full_noindex_url_count' => 0,
             ];
             $artifact['found_published'] = 2096;
             $artifact['release_gate']['pass_count'] = 2096;
@@ -194,6 +197,9 @@ final class CareerProgressiveCohortCloseoutPlannerTest extends TestCase
                 'detail_ready_count' => 2786,
                 'public_detail_indexable_count' => 2786,
                 'canonical_public_slug_count' => 2786,
+                'sitemap_noindex_url_count' => 0,
+                'llms_noindex_url_count' => 0,
+                'llms_full_noindex_url_count' => 0,
             ];
             $artifact['found_published'] = 5572;
             $artifact['release_gate']['pass_count'] = 5572;

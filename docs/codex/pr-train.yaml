@@ -35356,12 +35356,17 @@ prs:
       - backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php
       - backend/app/Domain/Career/Audit/CareerDeltaRolloutManifestPlanner.php
       - backend/app/Domain/Career/Audit/CareerRuntimeArtifactRefreshPlanner.php
+      - backend/tests/Unit/Domain/Career/Audit/CareerFullVisiblePublicationGateTest.php
+      - backend/tests/Unit/Domain/Career/Audit/Career80TotalLiveAcceptancePlannerTest.php
+      - backend/tests/Unit/Domain/Career/Audit/CareerProgressiveCohortCloseoutPlannerTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
     validation:
       - cd backend && php artisan route:list --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-12.sqlite php artisan migrate --force
+      - cd backend && php artisan test tests/Unit/Domain/Career/Audit/CareerFullVisiblePublicationGateTest.php tests/Unit/Domain/Career/Audit/Career80TotalLiveAcceptancePlannerTest.php tests/Unit/Domain/Career/Audit/CareerProgressiveCohortCloseoutPlannerTest.php --no-ansi
       - bash backend/scripts/ci_verify_mbti.sh
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check

@@ -42565,6 +42565,19 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "local_validation": {
+        "commands": [
+          "cd backend && php artisan test tests/Unit/Domain/Career/Audit/CareerFullVisiblePublicationGateTest.php tests/Unit/Domain/Career/Audit/Career80TotalLiveAcceptancePlannerTest.php tests/Unit/Domain/Career/Audit/CareerProgressiveCohortCloseoutPlannerTest.php --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-12.sqlite php artisan migrate --force --no-ansi",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "Focused publication-gate tests passed: 27 tests, 127 assertions. ci_verify_mbti passed: 1178 tests, 150136 assertions. Route listing and isolated SQLite migration passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42580,6 +42593,11 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-12; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T08:57:00+08:00",
+        "note": "Restored fail-closed forbidden-surface evidence gates for full visible Career publication claims; no CMS, production, deploy, or external write was performed.",
+        "status": "implementation_validated"
       }
     ],
     "failure_reason": null,
@@ -42591,7 +42609,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-12: restore career publication readiness evidence gates",
     "train_scope": "security_169_fap_api_audit"
   },
