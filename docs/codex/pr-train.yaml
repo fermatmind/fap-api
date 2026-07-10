@@ -15948,7 +15948,7 @@ prs:
     validation:
       - cd backend && php artisan test --filter=GlobalEnZhContentAssetBatch01 --no-ansi
       - cd backend && php artisan route:list --no-ansi
-      - cd backend && vendor/bin/pint --test
+      - cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/GlobalEnZhContentAssetBatch01Test.php
       - cd backend && composer validate --strict
       - cd backend && composer audit --locked --no-interaction --ignore-unreachable
       - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-asset-batch-01.v1.json >/dev/null
@@ -15963,7 +15963,7 @@ prs:
     deploy_allowed: false
     fap_web_commit_allowed: false
     content_generation_allowed: false
-    next_task: GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01
+    next_task: null
 
   - id: GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01
     repo: fap-api

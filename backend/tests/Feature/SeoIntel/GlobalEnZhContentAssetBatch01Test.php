@@ -44,7 +44,8 @@ final class GlobalEnZhContentAssetBatch01Test extends TestCase
 
         $this->assertSame(12, $payload['target_summary']['targeted_content_help_policy_items'] ?? null);
         $this->assertSame(5, $payload['target_summary']['draft_review_only'] ?? null);
-        $this->assertSame(2, $payload['target_summary']['deferred_missing_authority'] ?? null);
+        $this->assertSame(6, $payload['target_summary']['authority_backed_pair_or_import_ready'] ?? null);
+        $this->assertSame(1, $payload['target_summary']['deferred_missing_authority'] ?? null);
         $this->assertSame(0, $payload['target_summary']['published_by_this_pr'] ?? null);
         $this->assertSame(0, $payload['target_summary']['sitemap_llms_exposure_added_by_this_pr'] ?? null);
 
@@ -85,6 +86,6 @@ final class GlobalEnZhContentAssetBatch01Test extends TestCase
             'content_asset_batch_import_package_ready_with_human_review_deferred_assets',
             $payload['final_decision'] ?? null
         );
-        $this->assertSame('GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01', $payload['next_task'] ?? null);
+        $this->assertNull($payload['next_task'] ?? null);
     }
 }

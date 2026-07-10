@@ -44904,6 +44904,22 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "GlobalEnZhContentAssetBatch01 passed: 3 tests, 47 assertions; structured JSON/YAML metadata consistency assertions also passed.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed, including Big Five, MBTI smoke/E2E, migration, auth, OpenAPI, order-security, dependency, webhook/attempt, and strict queue backlog gates.",
+        "status": "pass"
+      },
+      "route_and_migration": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes, and a fresh SQLite migration completed successfully.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 5 changed paths are listed in SECURITY-169-API-38 allowed_paths; focused Pint, JSON/YAML parsing, metadata assertions, and git diff --check passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -44919,6 +44935,16 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-38; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-11T05:55:00+08:00",
+        "note": "Dependency SECURITY-169-API-37 is implementation-merged and ledger-closed; started scoped metadata consistency remediation for findings #154, #156, #161, #163, and #167.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T06:02:00+08:00",
+        "note": "Corrected generated counts and next-task metadata, stale merged state, cross-repository PR links, and unrelated Pint scope; focused, structural, route/migration, scope, and full local CI validation passed.",
+        "status": "in_progress"
       }
     ],
     "failure_reason": null,
@@ -44930,7 +44956,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-38: repair PR-train and generated metadata consistency",
     "train_scope": "security_169_fap_api_audit"
   },
@@ -59766,7 +59792,7 @@
       "local_cleanup_executed": false,
       "merged_at": null,
       "next_task": "GLOBAL-EN-ZH-FULL-PARITY-VERIFY-POST-BATCH",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1851",
+      "pr_url": "https://github.com/fermatmind/fap-web/pull/905",
       "remote_branch_deleted": false,
       "repo": "fap-web",
       "scope": {
@@ -70057,7 +70083,7 @@
       "failure_reason": null,
       "local_cleanup_executed": false,
       "merged_at": "2026-05-22T10:38:13Z",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1423",
+      "pr_url": "https://github.com/fermatmind/fap-web/pull/784",
       "remote_branch_deleted": true,
       "repo": "fap-web",
       "scope_type": "frontend_fail_closed_consumer_only",
@@ -70085,7 +70111,7 @@
       "failure_reason": null,
       "local_cleanup_executed": false,
       "merged_at": null,
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1440",
+      "pr_url": "https://github.com/fermatmind/fap-web/pull/785",
       "remote_branch_deleted": false,
       "repo": "fap-web",
       "scope_type": "fixture_matrix_contracts_only",
@@ -76160,7 +76186,7 @@
       "failure_reason": null,
       "local_cleanup_executed": false,
       "merged_at": null,
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1356",
+      "pr_url": "https://github.com/fermatmind/fap-web/pull/633",
       "remote_branch_deleted": false,
       "repo": "fap-web",
       "sidecar_issues": [],
@@ -76186,7 +76212,7 @@
       "failure_reason": null,
       "local_cleanup_executed": false,
       "merged_at": null,
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1451",
+      "pr_url": "https://github.com/fermatmind/fap-web/pull/631",
       "remote_branch_deleted": false,
       "repo": "fap-web",
       "sidecar_issues": [],
@@ -78285,13 +78311,14 @@
           "status": "passed"
         },
         "github_required_checks": {
-          "status": "pending"
+          "evidence": "GitHub PR #1683 merged with required checks successful.",
+          "status": "passed"
         },
         "local_validation": {
           "commands": [
             "php artisan test --filter=GlobalEnZhContentAssetBatch01 --no-ansi",
             "php artisan route:list --no-ansi",
-            "vendor/bin/pint --test",
+            "vendor/bin/pint --test tests/Feature/SeoIntel/GlobalEnZhContentAssetBatch01Test.php",
             "composer validate --strict",
             "composer audit --locked --no-interaction --ignore-unreachable",
             "python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-asset-batch-01.v1.json >/dev/null",
@@ -78300,7 +78327,7 @@
             "git diff --check",
             "git diff --cached --check"
           ],
-          "evidence": "Focused SeoIntel test passed 3 tests / 46 assertions; route:list passed; Pint passed 3555 files; composer validate/audit passed; JSON/YAML parse and diff checks passed.",
+          "evidence": "Focused SeoIntel test passed 3 tests / 47 assertions; route:list passed; focused Pint passed; composer validate/audit passed; JSON/YAML parse and diff checks passed.",
           "status": "pass"
         },
         "production_safety": {
@@ -78340,14 +78367,19 @@
           "at": "2026-05-25T21:17:47+08:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened fap-api PR #1683; waiting for GitHub checks."
+        },
+        {
+          "at": "2026-05-25T13:36:07Z",
+          "status": "merged",
+          "summary": "GitHub PR #1683 merged as ff9b062d72aa3076289c2f8a2d223e9254d85839; required checks completed successfully."
         }
       ],
-      "local_cleanup_executed": false,
-      "merged_at": null,
+      "local_cleanup_executed": true,
+      "merged_at": "2026-05-25T13:36:07Z",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1683",
-      "remote_branch_deleted": false,
+      "remote_branch_deleted": true,
       "repo": "fap-api",
-      "status": "pr_open_github_checks_pending",
+      "status": "merged",
       "title": "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01 content help policy import package"
     },
     "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01": {
