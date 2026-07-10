@@ -48,8 +48,11 @@ final class BigFiveInactiveCandidateReleaseImporter
         $forbiddenClaimReport = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'forbidden_claim_report.json');
 
         $candidateManifestHashActual = hash_file('sha256', $candidateManifestPath) ?: '';
-        $expectedCandidateManifestHash = trim((string) ($contracts['candidate_manifest_sha256'] ?? $candidateHashes['candidate_manifest_sha256'] ?? ''));
-        if ($expectedCandidateManifestHash !== '' && $candidateManifestHashActual !== $expectedCandidateManifestHash) {
+        $expectedCandidateManifestHash = trim((string) ($contracts['candidate_manifest_sha256'] ?? ''));
+        if (preg_match('/^[a-f0-9]{64}$/', $expectedCandidateManifestHash) !== 1) {
+            throw new RuntimeException('A trusted candidate_manifest_sha256 contract is required.');
+        }
+        if ($candidateManifestHashActual !== $expectedCandidateManifestHash) {
             throw new RuntimeException('Candidate manifest hash mismatch: '.$candidateManifestHashActual);
         }
         if ((string) ($candidateHashes['candidate_manifest_sha256'] ?? '') !== $candidateManifestHashActual) {
@@ -77,10 +80,25 @@ final class BigFiveInactiveCandidateReleaseImporter
         }
 
         $recordedPayloadHashes = (array) ($payloadHashes['payload_file_sha256'] ?? []);
+        $anchoredPayloadHashes = (array) ($candidateManifest['payload_file_sha256'] ?? []);
+        ksort($recordedPayloadHashes);
+        ksort($anchoredPayloadHashes);
+        if ($recordedPayloadHashes === [] || $recordedPayloadHashes !== $anchoredPayloadHashes) {
+            throw new RuntimeException('Candidate payload hashes are not anchored to candidate_manifest.json.');
+        }
         foreach ($payloadFiles as $payloadFile) {
             $fileName = basename($payloadFile);
             if (($recordedPayloadHashes[$fileName] ?? null) !== (hash_file('sha256', $payloadFile) ?: '')) {
                 throw new RuntimeException('candidate_payload_hashes.json mismatch for '.$fileName);
+            }
+        }
+        if (array_keys($recordedPayloadHashes) !== array_map('basename', $payloadFiles)) {
+            throw new RuntimeException('Candidate payload hash file list mismatch.');
+        }
+        $payloadSetSha256 = hash('sha256', $this->encodeJson($recordedPayloadHashes));
+        foreach ([$candidateManifest, $candidateHashes, $payloadsManifest, $payloadHashes] as $hashArtifact) {
+            if (($hashArtifact['payload_set_sha256'] ?? null) !== $payloadSetSha256) {
+                throw new RuntimeException('Candidate payload set hash mismatch.');
             }
         }
 
@@ -92,6 +110,7 @@ final class BigFiveInactiveCandidateReleaseImporter
         $storageRoot = storage_path('app/'.$storagePath);
         $this->resetDirectory($storageRoot);
         $this->copyCandidateArtifacts($candidateDir, $storageRoot);
+        $this->assertCopiedPayloadIntegrity($storageRoot, $recordedPayloadHashes, $payloadSetSha256);
 
         $releaseManifestHash = 'sha256:'.$candidateManifestHashActual;
         $releasePayload = [
@@ -102,6 +121,7 @@ final class BigFiveInactiveCandidateReleaseImporter
             'candidate_source_directory' => $candidateDir,
             'candidate_manifest_sha256' => $candidateManifestHashActual,
             'source_assets_sha256' => $sourceAssetsShaActual,
+            'candidate_payload_set_sha256' => $payloadSetSha256,
             'candidate_payload_count' => count($payloadFiles),
             'storage_layout' => [
                 'candidate_root' => $storagePath.'/candidate',
@@ -174,6 +194,7 @@ final class BigFiveInactiveCandidateReleaseImporter
             'source_assets_hash_expected' => $expectedSourceAssetsSha ?: $sourceAssetsShaActual,
             'source_assets_hash_actual' => $sourceAssetsShaActual,
             'candidate_payload_count' => count($payloadFiles),
+            'candidate_payload_set_sha256' => $payloadSetSha256,
             'release_metadata_result' => [
                 'content_pack_release_id' => (string) $release->getKey(),
                 'content_pack_release_action' => BigFiveCandidatePackageContract::RELEASE_ACTION,
@@ -270,6 +291,23 @@ final class BigFiveInactiveCandidateReleaseImporter
 
         if (! File::copyDirectory($candidateDir.DIRECTORY_SEPARATOR.'candidate_payloads', $candidateRoot.DIRECTORY_SEPARATOR.'candidate_payloads')) {
             throw new RuntimeException('Failed to copy candidate_payloads into inactive release artifact.');
+        }
+    }
+
+    /**
+     * @param  array<string,string>  $expectedHashes
+     */
+    private function assertCopiedPayloadIntegrity(string $storageRoot, array $expectedHashes, string $expectedSetHash): void
+    {
+        $copiedHashes = [];
+        foreach (File::glob($storageRoot.'/candidate/candidate_payloads/*.json') ?: [] as $path) {
+            $copiedHashes[basename($path)] = hash_file('sha256', $path) ?: '';
+        }
+        ksort($copiedHashes);
+
+        if ($copiedHashes !== $expectedHashes
+            || hash('sha256', $this->encodeJson($copiedHashes)) !== $expectedSetHash) {
+            throw new RuntimeException('Copied candidate payload integrity verification failed.');
         }
     }
 

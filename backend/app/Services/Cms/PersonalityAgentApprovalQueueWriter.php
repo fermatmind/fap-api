@@ -648,6 +648,14 @@ final class PersonalityAgentApprovalQueueWriter
         if ((array) ($qaResult['blockers'] ?? []) !== []) {
             return 'qa_blockers_present';
         }
+        if ((array) ($qaResult['failed_gates'] ?? []) !== []) {
+            return 'qa_failed_gates_present';
+        }
+        foreach (['eligible_for_approval_queue', 'eligible_for_cms_draft_path'] as $eligibilityFlag) {
+            if (array_key_exists($eligibilityFlag, $qaResult) && $qaResult[$eligibilityFlag] !== true) {
+                return 'qa_eligibility_gate_failed';
+            }
+        }
 
         return null;
     }

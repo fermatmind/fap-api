@@ -1467,6 +1467,7 @@ prs:
     allowed_paths:
       - backend/app/Services/Cms/PersonalityAgentApprovalQueueWriter.php
       - backend/tests/Feature/Console/PersonalityAgentApprovalQueueCommandTest.php
+      - backend/tests/Feature/Console/BigFiveCandidateReleaseCommandTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -36107,10 +36108,16 @@ prs:
       - backend/tests/Feature/Console/PersonalityAgentApprovalQueueCommandTest.php
       - backend/content_assets/big5/result_page_v2/qa/pilot_rendered_qa/v0_1/big5_o59_pilot_rendered_qa_report_v0_1.json
       - backend/content_assets/big5/result_page_v2/qa/pilot_rendered_qa/v0_1/big5_o59_pilot_rendered_qa_surface_matrix_v0_1.json
+      - backend/content_assets/big5/result_page_v2/qa/pilot_rendered_qa/v0_1/SHA256SUMS
       - backend/content_assets/big5/result_page_v2/qa/rendered_preview/expanded_surfaces/v0_1/big5_o59_expanded_rendered_qa_report_v0_1.json
       - backend/content_assets/big5/result_page_v2/qa/rendered_preview/expanded_surfaces/v0_1/big5_o59_expanded_rendered_qa_surface_matrix_v0_1.json
+      - backend/content_assets/big5/result_page_v2/qa/rendered_preview/expanded_surfaces/v0_1/SHA256SUMS
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2RenderedQaTest.php
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ExpandedRenderedQaTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/Candidate/BigFiveProductionEquivalentCandidatePayloadExporterTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/Candidate/BigFiveInactiveCandidateReleaseImporterTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

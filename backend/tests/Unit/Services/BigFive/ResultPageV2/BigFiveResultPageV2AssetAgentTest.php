@@ -9,6 +9,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use Symfony\Component\Process\Process;
 use Tests\TestCase;
 
 final class BigFiveResultPageV2AssetAgentTest extends TestCase
@@ -521,6 +522,61 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_execute_github_mutation_recomputes_live_scope_from_repository_changes(): void
+    {
+        $artifactRoot = $this->tempDir('big5-v2-agent-live-scope-recompute');
+        $repoRoot = $artifactRoot.'/repo';
+        mkdir($repoRoot.'/backend/app', 0777, true);
+        file_put_contents($repoRoot.'/README.md', "fixture\n");
+
+        try {
+            foreach ([
+                ['git', 'init'],
+                ['git', 'config', 'user.email', 'security-test@example.invalid'],
+                ['git', 'config', 'user.name', 'Security Test'],
+                ['git', 'add', 'README.md'],
+                ['git', 'commit', '-m', 'fixture'],
+            ] as $command) {
+                $process = new Process($command, $repoRoot);
+                $process->mustRun();
+            }
+            file_put_contents($repoRoot.'/backend/app/out-of-scope.php', "<?php\n");
+            $planPath = $artifactRoot.'/plan.json';
+            file_put_contents($planPath, json_encode([
+                'task' => 'auto_pr_orchestrator_plan',
+                'ok' => true,
+                'execution_mode' => 'dry_run_artifact_only',
+                'pr' => [
+                    'branch' => 'codex/forged-scope',
+                    'title' => 'forged scope',
+                    'commit_message' => 'forged scope',
+                    'body_artifact' => 'auto_pr_body.md',
+                ],
+                'planned_changed_files' => ['docs/codex/claimed-safe.json'],
+                'scope_validation' => ['valid' => true],
+            ], JSON_THROW_ON_ERROR));
+
+            $result = app(BigFiveResultPageV2AssetAgent::class)->executeGithubMutation([
+                'run_id' => 'scope-recompute',
+                'artifact_dir' => $artifactRoot,
+                'execution_plan_json' => $planPath,
+                'repo_root' => $repoRoot,
+                'github_repo' => 'fermatmind/fap-api',
+                'mutation_mode' => 'live',
+                'allow_github_mutation' => true,
+            ]);
+
+            $report = $this->readJson($artifactRoot.'/scope-recompute/github_mutation_execution_report.json');
+            $this->assertFalse((bool) data_get($report, 'preflight.valid', true));
+            $this->assertContains('repository_changed_files_scope_invalid', (array) data_get($report, 'preflight.blockers'));
+            $this->assertSame(['backend/app/out-of-scope.php'], data_get($report, 'preflight.recomputed_changed_files'));
+            $this->assertFalse((bool) data_get($report, 'live_execution_performed', true));
+            $this->assertFalse((bool) ($result['ok'] ?? true));
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
     public function test_inspect_ci_classifies_failures_and_only_plans_mechanical_fixes(): void
     {
         $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-ci-inspector');
@@ -903,7 +959,10 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertSame([], data_get($plan, 'gate.blockers'));
             $this->assertSame(0, (int) data_get($plan, 'gate.pending_check_count', -1));
             $this->assertSame(0, (int) data_get($plan, 'gate.failed_check_count', -1));
-            $this->assertContains('gh pr merge 2250 --squash --delete-branch', (array) ($plan['planned_commands'] ?? []));
+            $this->assertContains(
+                ['gh', 'pr', 'merge', '2250', '--squash', '--delete-branch'],
+                (array) ($plan['planned_commands'] ?? [])
+            );
 
             foreach ([
                 'github_merge_performed',
@@ -918,6 +977,37 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             ] as $guarantee) {
                 $this->assertFalse((bool) data_get($plan, "negative_guarantees.{$guarantee}", true), $guarantee);
             }
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
+    public function test_plan_merge_cleanup_rejects_unsafe_pr_number_and_head_ref(): void
+    {
+        $artifactRoot = $this->tempDir('big5-v2-agent-unsafe-merge-fields');
+        $statePath = $artifactRoot.'/pr-state.json';
+        file_put_contents($statePath, json_encode([
+            'number' => '2250; touch /tmp/unsafe',
+            'headRefName' => 'codex/safe; rm -rf /',
+            'isDraft' => false,
+            'mergeStateStatus' => 'CLEAN',
+            'reviewDecision' => 'APPROVED',
+            'statusCheckRollup' => [],
+        ], JSON_THROW_ON_ERROR));
+
+        try {
+            $result = app(BigFiveResultPageV2AssetAgent::class)->planMergeCleanup([
+                'run_id' => 'unsafe-fields',
+                'artifact_dir' => $artifactRoot,
+                'pr_state_json' => $statePath,
+            ]);
+            $plan = $this->readJson($artifactRoot.'/unsafe-fields/auto_merge_cleanup_plan.json');
+
+            $this->assertTrue((bool) ($result['ok'] ?? false));
+            $this->assertFalse((bool) data_get($plan, 'gate.can_merge', true));
+            $this->assertContains('pr_number_invalid', (array) data_get($plan, 'gate.blockers'));
+            $this->assertContains('head_ref_invalid', (array) data_get($plan, 'gate.blockers'));
+            $this->assertSame([], $plan['planned_commands'] ?? null);
         } finally {
             $this->deleteDirectory($artifactRoot);
         }
@@ -1077,11 +1167,10 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
-    public function test_stage_candidates_imports_only_reviewed_candidates_to_staging_package(): void
+    public function test_stage_candidates_rejects_self_attested_uncommitted_review_package(): void
     {
-        $artifactRoot = $this->tempDir('big5-v2-agent-stage-reviewed');
+        $artifactRoot = $this->tempDir('big5-v2-agent-stage-self-attested-review');
         $candidateDir = $artifactRoot.'/candidate-run';
-        $stagingDir = $artifactRoot.'/content_assets/big5/result_page_v2/staging_candidate_imports/reviewed-run';
 
         try {
             app(BigFiveResultPageV2AssetAgent::class)->generateCandidates([
@@ -1089,20 +1178,46 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 'artifact_dir' => $artifactRoot,
             ]);
             file_put_contents($candidateDir.'/review_manifest.json', json_encode([
-                'schema_version' => 'fap.big5.result_page_v2.staging_review_manifest.v0.1',
                 'human_reviewed' => true,
                 'review_status' => 'approved_for_staging',
                 'runtime_use' => 'staging_only',
                 'production_use_allowed' => false,
                 'ready_for_pilot' => false,
-                'reviewed_by' => 'unit_test_editorial_gate',
-                'reviewed_at' => '2026-06-21T00:00:00Z',
+                'reviewed_by' => 'untrusted_self_attestation',
+                'reviewed_at' => '2026-07-11T00:00:00+08:00',
                 'approved_candidate_files' => [
                     'selector_asset_candidates.jsonl',
                     'content_asset_candidates.jsonl',
                 ],
-            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
+            ], JSON_THROW_ON_ERROR));
 
+            $result = app(BigFiveResultPageV2AssetAgent::class)->stageCandidates([
+                'run_id' => 'stage-run',
+                'artifact_dir' => $artifactRoot,
+                'candidate_dir' => $candidateDir,
+                'staging_output_dir' => $artifactRoot.'/staging-package',
+                'allow_staging_write' => true,
+            ]);
+
+            $this->assertFalse((bool) ($result['ok'] ?? true));
+            $summary = $this->readJson($artifactRoot.'/stage-run/staging_import_summary.json');
+            $this->assertStringContainsString(
+                'review_package_not_repository_bound',
+                implode("\n", (array) data_get($summary, 'repair_log.entries', []))
+            );
+            $this->assertFalse((bool) data_get($result, 'summary.staging_write_performed', true));
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
+    public function test_stage_candidates_imports_only_reviewed_candidates_to_staging_package(): void
+    {
+        $artifactRoot = $this->tempDir('big5-v2-agent-stage-reviewed');
+        $candidateDir = base_path('content_assets/big5/result_page_v2/agent_runs/candidate_batch_001');
+        $stagingDir = $artifactRoot.'/content_assets/big5/result_page_v2/staging_candidate_imports/reviewed-run';
+
+        try {
             $this->artisan('big5:result-page-v2-agent', [
                 'action' => 'stage-candidates',
                 '--run-id' => 'stage-run',
