@@ -43078,6 +43078,10 @@
         "evidence": "Batch2ResultPageDryRunGateCommandTest passed 4 tests with 46 assertions, including path escape and symlink rejection cases.",
         "status": "pass"
       },
+      "github_required_checks": {
+        "evidence": "PR #2864 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, and Semgrep blocking secrets.",
+        "status": "pass"
+      },
       "local_ci": {
         "evidence": "bash backend/scripts/ci_verify_mbti.sh completed with exit code 0, including 1179 tests / 150137 assertions in the main suite and all downstream gates.",
         "status": "pass"
@@ -43096,7 +43100,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "f2b345194d64483ab6340f4446db2444b06f18cb",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -43104,6 +43108,11 @@
     ],
     "deploy_allowed": false,
     "events": [
+      {
+        "at": "2026-07-10T16:18:10+08:00",
+        "note": "PR #2864 squash merged at f2b345194d64483ab6340f4446db2444b06f18cb after all required checks passed. origin/main contains the merge commit, local main is synchronized and clean, and the implementation branch was deleted locally and was already absent remotely. No staging wait, CMS write, manual deploy, or production deploy was performed.",
+        "status": "merged"
+      },
       {
         "at": "2026-07-10T16:13:00+08:00",
         "note": "Final API19 changed-file allowlist, diff, manifest/state parse, and formatting validations passed.",
@@ -43132,14 +43141,14 @@
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-19",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T16:18:10+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2864",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-19: fix Batch2 dry-run artifact path traversal",
     "train_scope": "security_169_fap_api_audit"
   },
