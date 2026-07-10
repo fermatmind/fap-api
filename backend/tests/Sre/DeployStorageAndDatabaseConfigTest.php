@@ -33,6 +33,27 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function deploy_keeps_career_runtime_publication_authority_readable_by_php_fpm(): void
+    {
+        $source = $this->readRepoFile('deploy.php');
+
+        $this->assertStringContainsString(
+            "'shared/backend/storage/app/private/career_release_ledger'",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "'shared/backend/storage/app/private/career_runtime_publish_projection'",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "ensureOwnedWritableTree(deploySharedPath(\$base, \$relativePath), \$owner, 'www-data');",
+            $source,
+        );
+        $this->assertStringContainsString('find {$quotedPath} -type d -exec chmod 2775', $source);
+        $this->assertStringContainsString('find {$quotedPath} -type f -exec chmod 664', $source);
+    }
+
+    #[Test]
     public function deploy_nginx_static_media_route_skips_when_static_location_already_exists(): void
     {
         $source = $this->readRepoFile('deploy.php');

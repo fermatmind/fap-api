@@ -707,6 +707,8 @@ task('ensure:shared-perms', function () {
         'shared/backend/storage/framework/views',
         'shared/backend/storage/logs',
         'shared/backend/storage/app/content-packs',
+        'shared/backend/storage/app/private/career_release_ledger',
+        'shared/backend/storage/app/private/career_runtime_publish_projection',
         'shared/backend/storage/app/private/packs_v2_materialized',
     ];
 
