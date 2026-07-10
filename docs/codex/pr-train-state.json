@@ -82905,8 +82905,8 @@
     "base": "main",
     "branch": "codex/big5-en-domain-runtime-closeout-03",
     "depends_on": ["BIG5-EN-DOMAIN-IMPORT-DRYRUN-02"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "36f8883a8fe9dfc4e26597c49be6a8bce8a7ed7e",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -82922,7 +82922,8 @@
     "transitions": [
       {"at": "2026-07-10T06:33:12Z", "from": "unregistered", "to": "manifest_registered", "note": "Registered after the exact-SHA production import succeeded and its bounded receipt was downloaded."},
       {"at": "2026-07-10T06:33:12Z", "from": "manifest_registered", "to": "in_progress", "note": "Started the read-only five-page API/page, FAQ/internal-link, noindex, sitemap, robots, and llms closeout."},
-      {"at": "2026-07-10T06:33:12Z", "from": "in_progress", "to": "local_checks_passed", "note": "The closeout report JSON, manifest YAML, state JSON, git diff --check, and allowed-path scope validation passed."}
+      {"at": "2026-07-10T06:33:12Z", "from": "in_progress", "to": "local_checks_passed", "note": "The closeout report JSON, manifest YAML, state JSON, git diff --check, and allowed-path scope validation passed."},
+      {"at": "2026-07-10T06:33:12Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the runtime closeout evidence at 36f8883a8fe9dfc4e26597c49be6a8bce8a7ed7e after rebasing onto the latest main."}
     ]
   }
 }
