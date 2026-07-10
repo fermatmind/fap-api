@@ -69,6 +69,39 @@ final class PersonalityTdkRuntimePromotionSearchGateReadinessTest extends TestCa
     }
 
     #[Test]
+    public function it_rejects_any_explicit_readback_failure_and_rows_without_a_verdict(): void
+    {
+        $verdicts = [
+            ['status' => 'failed', 'decision' => 'pass'],
+            ['status' => 'success', 'decision' => 'blocked'],
+            [],
+        ];
+
+        foreach ($verdicts as $verdict) {
+            $readback = $this->readbackFixture();
+            $readback['targets'][0] = [
+                'path' => '/zh/personality/intp-a',
+                'public_runtime_changed' => false,
+                ...$verdict,
+            ];
+
+            $exitCode = Artisan::call('personality:tdk-runtime-promotion-search-gate-readiness', [
+                '--approval-draft-gate' => $this->writeJson('approval-gate', $this->approvalGateFixture()),
+                '--draft-readback' => $this->writeJson('readback', $readback),
+                '--promotion-dry-run' => $this->writeJson('promotion', $this->promotionDryRunFixture()),
+                '--artifact-dir' => $this->artifactDir(),
+                '--json' => true,
+            ]);
+            $summary = $this->jsonOutput();
+
+            $this->assertSame(0, $exitCode, Artisan::output());
+            $this->assertSame('review_required', $summary['status'] ?? null);
+            $this->assertFalse((bool) ($summary['runtime_readback_ready'] ?? true));
+            $this->assertFalse((bool) ($summary['promotion_execute_approval_ready'] ?? true));
+        }
+    }
+
+    #[Test]
     public function it_blocks_forbidden_input_fields(): void
     {
         $gate = $this->approvalGateFixture();

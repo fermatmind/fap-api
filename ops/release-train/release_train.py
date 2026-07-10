@@ -340,23 +340,24 @@ def evaluate_item(
             if blocking_smoke:
                 result["status"] = "blocked"
                 result["failures"].append("smoke_failed")
-        else:
-            # content scan guard
-            for entry in smoke_results:
-                if entry["response_snippet"]:
-                    hits = has_forbidden_content(entry["response_snippet"])
-                    if hits:
-                        result["status"] = "blocked"
+        # Private/held content scanning is independent of transport status and
+        # must still run when another smoke result is eligible for soft-alert.
+        for entry in smoke_results:
+            if entry["response_snippet"]:
+                hits = has_forbidden_content(entry["response_snippet"])
+                if hits:
+                    result["status"] = "blocked"
+                    if "forbidden_content_detected" not in result["failures"]:
                         result["failures"].append("forbidden_content_detected")
-                        result["sidecars"].append(
-                            classify_check_failure(
-                                check_name=f"smoke:{entry['url']}",
-                                required=True,
-                                observed_failure="forbidden content: " + ",".join(hits),
-                                is_core_smoke=True,
-                                is_private_or_held_exposure=True,
-                            )
+                    result["sidecars"].append(
+                        classify_check_failure(
+                            check_name=f"smoke:{entry['url']}",
+                            required=True,
+                            observed_failure="forbidden content: " + ",".join(hits),
+                            is_core_smoke=True,
+                            is_private_or_held_exposure=True,
                         )
+                    )
 
     if item.get("deploy_required") and allow_deploy and mode == "run" and repo == "fap-api":
         release_name = str(item.get("release_name") or item.get("id") or "").strip()

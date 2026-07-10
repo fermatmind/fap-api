@@ -89,6 +89,24 @@
   - Complete the GSC/read-model quality proof card before any TDK/CTR repair selection.
 - whether train continued: `true`
 
+## SECURITY-169-API-28 inherited ContentPage authority-status assertion
+
+- repo: `fermatmind/fap-api`
+- PR id / branch: `SECURITY-169-API-28` / `codex/security-169-api-28-harden-seo-readiness-and-gate-artifacts`
+- blocker type: `inherited_content_page_authority_status_assertion_mismatch`
+- evidence:
+  - On clean exact base `51988fcb354aae50d90f066d88eedfeaf7f3dc66`, `php artisan test tests/Feature/SeoIntel/EnParity01UrlTruthCanonicalBaselineTest.php --filter=content_pages_enter_url_truth_only_when_authority_backed_and_indexable` fails at line 138.
+  - The unchanged source returns ContentPage `authorityStatus=published_approved`, while the unchanged test expects `published`.
+  - API28's relevant `articles_enter_url_truth_only_when_published_indexable_sitemap_and_llms_eligible` method passes with the new soft-deleted article exclusion.
+- why not current PR scope:
+  - API28 changes only Article URL Truth eligibility in this source/test area; it does not change ContentPage authority status or its contract.
+  - Updating the unrelated ContentPage assertion would mix a pre-existing contract correction into the Article/readiness/security scope.
+- whether required checks are affected: `false`
+  - The same mismatch exists on the exact base and prior required checks were green; API28 will still inspect all GitHub jobs before merge.
+- recommended follow-up:
+  - Reconcile the ContentPage URL Truth authority-status contract and stale assertion in a dedicated scoped test/contract PR.
+- whether train continued: `true`
+
 ## SECURITY-169-API-24 inherited scheduler publish-canary fixture failure
 
 - repo: `fermatmind/fap-api`

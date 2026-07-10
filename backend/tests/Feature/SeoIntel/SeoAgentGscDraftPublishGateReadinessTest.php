@@ -18,9 +18,10 @@ final class SeoAgentGscDraftPublishGateReadinessTest extends TestCase
         $target = 'article:41:en';
         $revisionId = 68;
         $write = $this->writeEvidence($target, $revisionId);
-        $readback = $this->artifact('seo-agent-cms-draft-readback-qa.v1', $target, ['status' => 'success', 'mismatch_count' => 0]);
-        $claim = $this->artifact('seo-agent-article-draft-claim-risk-qa.v1', $target, ['status' => 'success', 'critical_finding_count' => 0]);
-        $preview = $this->artifact('seo-agent-article-draft-preview-runtime-qa.v1', $target, ['status' => 'success', 'ok' => true]);
+        $writeSha = hash_file('sha256', $write) ?: '';
+        $readback = $this->artifact('seo-agent-cms-draft-readback-qa.v1', $target, $revisionId, $writeSha, ['status' => 'success', 'mismatch_count' => 0]);
+        $claim = $this->artifact('seo-agent-article-draft-claim-risk-qa.v1', $target, $revisionId, $writeSha, ['status' => 'success', 'critical_finding_count' => 0]);
+        $preview = $this->artifact('seo-agent-article-draft-preview-runtime-qa.v1', $target, $revisionId, $writeSha, ['status' => 'success', 'ok' => true]);
 
         $exitCode = Artisan::call('seo-agent:gsc-draft-publish-gate-readiness', [
             '--write-evidence' => $write,
@@ -47,8 +48,10 @@ final class SeoAgentGscDraftPublishGateReadinessTest extends TestCase
     public function it_does_not_emit_a_publish_phrase_when_required_qa_is_missing_or_failing(): void
     {
         $target = 'article:41:en';
-        $write = $this->writeEvidence($target, 68);
-        $readback = $this->artifact('seo-agent-cms-draft-readback-qa.v1', $target, ['status' => 'success', 'mismatch_count' => 0]);
+        $revisionId = 68;
+        $write = $this->writeEvidence($target, $revisionId);
+        $writeSha = hash_file('sha256', $write) ?: '';
+        $readback = $this->artifact('seo-agent-cms-draft-readback-qa.v1', $target, $revisionId, $writeSha, ['status' => 'success', 'mismatch_count' => 0]);
 
         $exitCode = Artisan::call('seo-agent:gsc-draft-publish-gate-readiness', [
             '--write-evidence' => $write,
@@ -65,6 +68,49 @@ final class SeoAgentGscDraftPublishGateReadinessTest extends TestCase
         $this->assertNull(data_get($artifact, 'draft_verdicts.0.publish_approval_phrase'));
         $this->assertContains('claim_risk_qa_missing', data_get($artifact, 'draft_verdicts.0.issues', []));
         $this->assertContains('preview_runtime_qa_missing', data_get($artifact, 'draft_verdicts.0.issues', []));
+    }
+
+    #[Test]
+    public function it_blocks_stale_or_unbound_qa_artifacts(): void
+    {
+        $target = 'article:41:en';
+        $revisionId = 68;
+        $write = $this->writeEvidence($target, $revisionId);
+        $writeSha = hash_file('sha256', $write) ?: '';
+        $readback = $this->writeJson('unbound-readback-', [
+            'schema_version' => 'seo-agent-cms-draft-readback-qa.v1',
+            'target' => $target,
+            'status' => 'success',
+            'mismatch_count' => 0,
+        ]);
+        $claim = $this->artifact('seo-agent-article-draft-claim-risk-qa.v1', $target, $revisionId - 1, $writeSha, [
+            'status' => 'success',
+            'critical_finding_count' => 0,
+        ]);
+        $preview = $this->artifact('seo-agent-article-draft-preview-runtime-qa.v1', $target, $revisionId, str_repeat('a', 64), [
+            'status' => 'success',
+            'ok' => true,
+        ]);
+
+        $exitCode = Artisan::call('seo-agent:gsc-draft-publish-gate-readiness', [
+            '--write-evidence' => $write,
+            '--readback-qa' => [$readback],
+            '--claim-risk-qa' => [$claim],
+            '--preview-runtime-qa' => [$preview],
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+
+        $summary = json_decode(trim(Artisan::output()), true);
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('blocked', $summary['status'] ?? null);
+
+        $artifact = $this->readJson((string) data_get($summary, 'artifact.path'));
+        $issues = data_get($artifact, 'draft_verdicts.0.issues', []);
+        $this->assertContains('readback_qa_binding_invalid', $issues);
+        $this->assertContains('claim_risk_qa_binding_invalid', $issues);
+        $this->assertContains('preview_runtime_qa_binding_invalid', $issues);
+        $this->assertNull(data_get($artifact, 'draft_verdicts.0.publish_approval_phrase'));
     }
 
     #[Test]
@@ -121,13 +167,30 @@ final class SeoAgentGscDraftPublishGateReadinessTest extends TestCase
     /**
      * @param  array<string, mixed>  $extra
      */
-    private function artifact(string $schema, string $target, array $extra): string
+    private function artifact(string $schema, string $target, int $revisionId, string $writeEvidenceSha, array $extra): string
     {
-        return $this->writeJson('qa-artifact-', [
+        $payload = [
             'schema_version' => $schema,
             'target' => $target,
+            'package_sha256' => hash('sha256', 'package'),
+            'write_evidence' => [
+                'sha256' => $writeEvidenceSha,
+            ],
+            'write_summary' => [
+                'target_write_ref' => [
+                    'subject_ref' => $target,
+                    'revision_id' => $revisionId,
+                ],
+            ],
             ...$extra,
-        ]);
+        ];
+        if ($schema === 'seo-agent-article-draft-preview-runtime-qa.v1') {
+            $payload['preview_read'] = ['revision_id' => $revisionId];
+        } else {
+            $payload['draft_revision'] = ['revision_id' => $revisionId];
+        }
+
+        return $this->writeJson('qa-artifact-', $payload);
     }
 
     private function artifactDir(): string

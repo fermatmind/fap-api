@@ -107,7 +107,7 @@ final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
             '--dry-run' => true,
             '--json' => true,
             '--urls' => $canonicalUrl,
-        ]);
+        ], 1);
 
         $this->assertSame('NO_GO_SURFACE_OR_SAFETY', $output['final_decision'] ?? null);
         $this->assertContains('sitemap_private_pattern_present', $output['issues'] ?? []);
@@ -178,7 +178,7 @@ final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
             '--dry-run' => true,
             '--json' => true,
             '--urls' => $canonicalUrl,
-        ]);
+        ], 1);
 
         $this->assertSame('NO_GO_SURFACE_OR_SAFETY', $output['final_decision'] ?? null);
         $this->assertContains('noindex_present', $output['issues'] ?? []);
@@ -276,12 +276,12 @@ final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
      * @param  array<string, mixed>  $arguments
      * @return array<string, mixed>
      */
-    private function runGate(array $arguments): array
+    private function runGate(array $arguments, int $expectedExitCode = 0): array
     {
         $exitCode = Artisan::call('personality:agent-post-promotion-search-gate', $arguments);
         $output = json_decode(trim(Artisan::output()), true);
 
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame($expectedExitCode, $exitCode, Artisan::output());
         $this->assertIsArray($output);
 
         return $output;

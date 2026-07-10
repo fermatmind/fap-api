@@ -365,5 +365,20 @@
     "required_checks_affected": false,
     "recommended_follow_up": "Create a separate scoped backend repair PR that canonicalizes nested JSON before comparison or uses semantic deep equality, adds key-order normalization regression coverage, and preserves all existing fail-closed state and eligibility guards. Require a new exact-SHA authorization for any later production CMS write.",
     "train_continued": true
+  },
+  {
+    "repo": "fermatmind/fap-api",
+    "pr_id": "SECURITY-169-API-28",
+    "branch": "codex/security-169-api-28-harden-seo-readiness-and-gate-artifacts",
+    "blocker_type": "inherited_content_page_authority_status_assertion_mismatch",
+    "evidence": [
+      "On clean exact base 51988fcb354aae50d90f066d88eedfeaf7f3dc66, php artisan test tests/Feature/SeoIntel/EnParity01UrlTruthCanonicalBaselineTest.php --filter=content_pages_enter_url_truth_only_when_authority_backed_and_indexable fails at line 138.",
+      "The unchanged source returns ContentPage authorityStatus=published_approved while the unchanged test expects published.",
+      "API28's relevant articles_enter_url_truth_only_when_published_indexable_sitemap_and_llms_eligible method passes with the new soft-deleted article exclusion."
+    ],
+    "why_not_current_pr_scope": "API28 changes only Article URL Truth eligibility in this source/test area and does not change the ContentPage authority-status contract. Updating the unrelated assertion would mix a pre-existing contract correction into this security scope.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Reconcile the ContentPage URL Truth authority-status contract and stale assertion in a dedicated scoped test/contract PR.",
+    "train_continued": true
   }
 ]

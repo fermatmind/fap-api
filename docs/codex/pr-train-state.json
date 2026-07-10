@@ -44019,6 +44019,34 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "dependency_reconciliation": {
+        "evidence": "SECURITY-169-API-27 implementation PR #2889 and ledger closeout PR #2891 are merged; both merge commits are contained by origin/main, local main equals origin/main, and API27 implementation/ledger branches are absent locally and remotely.",
+        "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "After rebasing to latest origin/main, 27 focused API28 PHP tests passed with 286 assertions and all 12 release-train Python tests passed. The unrelated ContentPage assertion was reproduced on clean exact base and recorded in sidecar.",
+        "status": "pass"
+      },
+      "fresh_migration": {
+        "evidence": "APP_ENV=testing SQLite migration completed successfully at /tmp/fap-api-security-169-api-28.sqlite.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed on the final implementation, including 1181 Big Five tests with 150139 assertions plus personality, payment, migration, auth, OpenAPI, order-security, MBTI smoke/report/share, events, dependency, webhook/attempt, and strict queue backlog gates.",
+        "status": "pass"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 16 changed paths are either listed in SECURITY-169-API-28 allowed_paths or are the two explicitly permitted sidecar files; Pint, PHP/Python syntax, JSON/YAML parsing, git diff --check, and scope validation passed.",
+        "status": "pass"
+      },
+      "sidecar": {
+        "evidence": "Recorded the inherited EnParity01 ContentPage authority-status assertion mismatch in generated/pr-train-sidecar-issues; clean base 51988fcb354aae50d90f066d88eedfeaf7f3dc66 reproduces it and prior required checks were unaffected.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -44034,6 +44062,21 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-28; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T23:26:12+08:00",
+        "note": "Dependency API27 is implementation-merged and ledger-closed; started scoped fail-closed remediation for findings #081, #082, #089, #091, #121, and #129 assigned to API28.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-10T23:38:23+08:00",
+        "note": "Local validation passed: API28 PHP and Python regressions, 233-route inventory, fresh SQLite migration, final backend/scripts/ci_verify_mbti.sh, Pint, PHP/Python syntax, JSON/YAML parsing, and git diff checks. One unrelated ContentPage assertion was reproduced on the clean exact base and recorded as a non-blocking sidecar. No CMS/search write, external submission, deploy, production import, or production write was performed.",
+        "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-10T23:40:29+08:00",
+        "note": "Rebased cleanly onto origin/main 25832172ba15f49f9acd8ac4198d70c94d221927 and reran 27 focused PHP tests/286 assertions plus 12 Python release-train tests successfully; scope and formatting validation remained clean.",
+        "status": "rebased_local_checks_passed"
       }
     ],
     "failure_reason": null,
@@ -44045,7 +44088,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "local_checks_passed",
     "title": "SECURITY-169-API-28: harden SEO readiness and gate artifacts",
     "train_scope": "security_169_fap_api_audit"
   },
