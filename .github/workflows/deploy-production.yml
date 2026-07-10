@@ -177,7 +177,7 @@ jobs:
               sleep "$retry_delay"
             done
           }
-          ssh_retry "TARGET='$TARGET' DEPLOY_PATH='$DEPLOY_PATH' bash -s" <<'REMOTE'
+          LOCK_GUARD_SCRIPT="$(cat <<'REMOTE'
           set -euo pipefail
           LOCK="$DEPLOY_PATH/.dep/deploy.lock"
           META="$DEPLOY_PATH/.dep/deploy.lock.meta.json"
@@ -199,9 +199,22 @@ jobs:
             echo "deploy lock guard: active deploy-like process exists"
             exit 1
           fi
+          STALE_LOCK_SECONDS="${STALE_LOCK_SECONDS:-1800}"
+          if [ "$OWNER" = "ci" ] \
+            && [ "$AGE_SECONDS" -ge "$STALE_LOCK_SECONDS" ] \
+            && [ -f "$META" ] \
+            && grep -Fq '"env":"production"' "$META" \
+            && grep -Fq '"repository":"'"$GITHUB_REPOSITORY"'"' "$META"; then
+            echo "deploy lock guard: removing verified stale production CI lock"
+            rm -f "$LOCK" "$META"
+            exit 0
+          fi
           echo "deploy lock guard: production lock is not safe to remove automatically"
           exit 1
           REMOTE
+          )"
+          LOCK_GUARD_B64="$(printf '%s' "$LOCK_GUARD_SCRIPT" | base64 | tr -d '\n')"
+          ssh_retry "TARGET='$TARGET' DEPLOY_PATH='$DEPLOY_PATH' STALE_LOCK_SECONDS='1800' GITHUB_REPOSITORY='$GITHUB_REPOSITORY' bash -lc 'printf %s $LOCK_GUARD_B64 | base64 -d | bash'"
 
       - name: Deploy production with Deployer
         if: steps.latest_main_guard.outputs.skip_deploy != 'true'
