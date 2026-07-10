@@ -1,0 +1,176 @@
+{
+  "package": "big-five-zh-facet-agreeableness-source-ledger-2026-07-10",
+  "access_date": "2026-07-10",
+  "scope": "Six Chinese agreeableness Facet content packages only.",
+  "inherits": {
+    "path": "generated/big-five-zh-facet-hub-content-repair/source_ledger.json",
+    "package": "big-five-zh-facet-shared-source-ledger-2026-07-10"
+  },
+  "sources": [
+    {
+      "id": "I1",
+      "type": "internal",
+      "reference": "backend/content_assets/personality_public/big_five_v1_seed.json",
+      "use": "Frozen CMS field shape, current Chinese route keys, locale, launch state, robots, and 5×6 taxonomy labels.",
+      "limitation": "The existing short body copy is an input to audit, not an authority for new academic claims."
+    },
+    {
+      "id": "I2",
+      "type": "internal",
+      "reference": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+      "use": "Non-diagnostic, non-deterministic, non-screening public claim boundaries."
+    },
+    {
+      "id": "I3",
+      "type": "internal",
+      "reference": "generated/big-five-zh-legacy-route-audit/legacy_route_audit.json",
+      "use": "Frozen V2 public route family and duplicate-route boundary."
+    },
+    {
+      "id": "A1",
+      "type": "official_research_resource",
+      "title": "NEO Facets Table",
+      "author_or_source": "International Personality Item Pool, Oregon Research Institute",
+      "year": null,
+      "url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+      "accessed_at": "2026-07-10",
+      "claim": "Documents corresponding IPIP scales for the 30 NEO-PI-R facet constructs.",
+      "limitation": "IPIP scales measure similar constructs; this does not make them identical to proprietary NEO scales or authorize score conversion."
+    },
+    {
+      "id": "A2",
+      "type": "peer_reviewed",
+      "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets",
+      "author_or_source": "Soto, C. J., & John, O. P.",
+      "year": 2017,
+      "doi": "10.1037/pspp0000096",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+      "accessed_at": "2026-07-10",
+      "claim": "Supports a hierarchical domain-and-facet reading of Big Five traits using 15 facets.",
+      "limitation": "BFI-2 has 15 facets, not the 30-facet taxonomy used for this CMS route set."
+    },
+    {
+      "id": "A3",
+      "type": "peer_reviewed",
+      "title": "Between facets and domains: 10 aspects of the Big Five",
+      "author_or_source": "DeYoung, C. G., Quilty, L. C., & Peterson, J. B.",
+      "year": 2007,
+      "doi": "10.1037/0022-3514.93.5.880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
+      "accessed_at": "2026-07-10",
+      "claim": "Shows an alternative intermediate hierarchy with two aspects per domain.",
+      "limitation": "The ten aspects are not interchangeable with either BFI-2 facets or NEO/IPIP 30 facets."
+    },
+    {
+      "id": "A4",
+      "type": "academic_review",
+      "title": "Paradigm Shift to the Integrative Big Five Trait Taxonomy: History, Measurement, and Conceptual Issues",
+      "author_or_source": "John, O. P., Naumann, L. P., & Soto, C. J.",
+      "year": 2008,
+      "reference": "In Handbook of Personality: Theory and Research (3rd ed.), pp. 114–158.",
+      "claim": "Supports broad Big Five taxonomy framing and continuous trait language.",
+      "limitation": "No individual prediction, numeric validity, or universal facet naming claim is taken from this review."
+    }
+  ],
+  "taxonomy": [
+    {
+      "domain_code": "agreeableness",
+      "domain_title_zh": "宜人性",
+      "facets": [
+        {
+          "code": "trust",
+          "title_zh": "信任",
+          "route": "/zh/personality/big-five/facets/trust"
+        },
+        {
+          "code": "straightforwardness",
+          "title_zh": "坦率",
+          "route": "/zh/personality/big-five/facets/straightforwardness"
+        },
+        {
+          "code": "altruism",
+          "title_zh": "利他",
+          "route": "/zh/personality/big-five/facets/altruism"
+        },
+        {
+          "code": "compliance",
+          "title_zh": "顺应",
+          "route": "/zh/personality/big-five/facets/compliance"
+        },
+        {
+          "code": "modesty",
+          "title_zh": "谦逊",
+          "route": "/zh/personality/big-five/facets/modesty"
+        },
+        {
+          "code": "tender-mindedness",
+          "title_zh": "柔软心肠",
+          "route": "/zh/personality/big-five/facets/tender-mindedness"
+        }
+      ]
+    }
+  ],
+  "claim_map": [
+    {
+      "claim": "The six routes are narrower descriptors under agreeableness, not six personality types.",
+      "evidence_ids": [
+        "I1",
+        "A1",
+        "A4"
+      ]
+    },
+    {
+      "claim": "Interest or attention in a facet is not equivalent to ability, diagnosis, or outcome prediction.",
+      "evidence_ids": [
+        "I2",
+        "A4"
+      ]
+    },
+    {
+      "claim": "The route taxonomy must not be directly converted to BFI-2 facets or BFAS aspects.",
+      "evidence_ids": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    }
+  ],
+  "facet_boundaries": {
+    "trust": {
+      "title_zh": "信任",
+      "construct_summary": "在证据不足时对他人诚意、可靠性和合作意图持较积极预期的通常倾向",
+      "explicit_non_equivalence": "它不等于天真、可被骗、绝对安全、道德优越或对所有人开放。高信任仍需要边界和验证，低信任也不证明冷漠或偏执；临床判断不属于本页"
+    },
+    "straightforwardness": {
+      "title_zh": "坦率",
+      "construct_summary": "在沟通中直接说明真实立场、减少操纵和隐瞒关键意图的通常倾向",
+      "explicit_non_equivalence": "它不等于刻薄、口无遮拦、泄露隐私、永远正确或道德纯度。诚实可以兼顾措辞和安全，间接表达也不必然是欺骗"
+    },
+    "altruism": {
+      "title_zh": "利他",
+      "construct_summary": "注意他人需要并愿意在合理成本内提供时间、信息或实际帮助的通常倾向",
+      "explicit_non_equivalence": "它不等于自我牺牲、讨好、慈善金额、没有边界或道德高低。帮助行为受资源和角色影响，较少主动帮助也不表示没有关心"
+    },
+    "compliance": {
+      "title_zh": "顺应",
+      "construct_summary": "在冲突中抑制对抗、寻找让步和恢复合作的通常倾向",
+      "explicit_non_equivalence": "它不等于服从、软弱、同意、放弃权利或没有愤怒。降温不代表接受伤害，敢于冲突也不等于攻击；任何同意都应独立、明确且可撤回"
+    },
+    "modesty": {
+      "title_zh": "谦逊",
+      "construct_summary": "在展示成就和比较地位时减少自我抬高、不过度要求特殊认可的通常倾向",
+      "explicit_non_equivalence": "它不等于低自尊、缺少能力、自我贬低、害羞或必须拒绝赞美。谦逊关注自我呈现方式，不要求否认事实或容忍不公平归功"
+    },
+    "tender-mindedness": {
+      "title_zh": "柔软心肠",
+      "construct_summary": "对他人痛苦、脆弱处境和照护需要产生同情并重视其影响的通常倾向",
+      "explicit_non_equivalence": "它不等于脆弱、感性失控、女性化、心理健康状态或总是赞同。情感敏感不保证方案有效，保持距离也不证明残酷"
+    }
+  },
+  "limitations": [
+    "The frozen CMS taxonomy is NEO/IPIP-like; it is not claimed as the single universal Big Five facet standard.",
+    "No proprietary assessment items, scoring keys, norms, or copyrighted manual text are reproduced.",
+    "No reliability, validity, percentile, clinical, hiring, admission, salary, relationship-outcome, or deterministic career claim is made.",
+    "GSC_EVIDENCE_PENDING: this package is content-authority preparation, not a search-performance claim."
+  ]
+}
