@@ -44468,6 +44468,10 @@
         "evidence": "backend/scripts/ci_verify_mbti.sh passed, including Big Five, personality, payment, migration, auth, OpenAPI, order-security, MBTI smoke/report/share, events, dependency, webhook/attempt, and strict queue backlog gates.",
         "status": "pass"
       },
+      "github_required_checks": {
+        "evidence": "PR #2908 head ae368cdf11284a6d0fbd20db9f993e627328b4ec passed all 15 checks: push and pull-request hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 jobs, plus Semgrep blocking secrets, Semgrep OSS, and SARIF upload.",
+        "status": "pass"
+      },
       "route_list": {
         "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
         "status": "pass"
@@ -44478,7 +44482,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "ae368cdf11284a6d0fbd20db9f993e627328b4ec",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -44500,18 +44504,23 @@
         "at": "2026-07-11T03:10:03+08:00",
         "note": "Implementation, focused tests, route/migration checks, scope validation, CLI fail-closed/path-containment validation, and full local CI passed; ready to commit and open the implementation PR.",
         "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T03:17:49+08:00",
+        "note": "Implementation PR #2908 passed all 15 GitHub checks and squash-merged as 1be1dea448066b8af7f3e8cea3f483432d9210e6; origin/main and local main contain the merge, and implementation branches were deleted locally and remotely.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-32",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-11T03:17:49+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2908",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-32: harden Enneagram ops scope and artifact paths",
     "train_scope": "security_169_fap_api_audit"
   },
