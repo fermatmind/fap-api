@@ -175,7 +175,8 @@ final class MediaLibraryPublicApiTest extends TestCase
 
         $this->assertSame(1800, (int) $asset->width);
         $this->assertSame(1200, (int) $asset->height);
-        $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/sources/articleshero/', (string) $asset->url);
+        $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/sources/org-0/media-asset-'.$asset->id.'-articleshero/', (string) $asset->url);
+        $this->assertArrayNotHasKey('source_original_name', $asset->payload_json ?? []);
         $this->assertSame(6, $asset->variants()->count());
 
         foreach (['hero', 'card', 'thumbnail', 'og', 'preload'] as $variantKey) {
@@ -186,7 +187,7 @@ final class MediaLibraryPublicApiTest extends TestCase
 
             $this->assertSame('image/jpeg', (string) $variant->mime_type);
             $this->assertNotEmpty($variant->path);
-            $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/variants/articleshero/', (string) $variant->url);
+            $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-'.$asset->id.'-articleshero/', (string) $variant->url);
             Storage::disk('public')->assertExists((string) $variant->path);
         }
     }
@@ -223,12 +224,12 @@ final class MediaLibraryPublicApiTest extends TestCase
 
         $this->assertSame('public', (string) $asset->disk);
         $this->assertStringStartsWith(
-            'media-library/sources/daily-giving-unicef-receipt-2026-06-05/source-',
+            'media-library/sources/org-0/media-asset-'.$asset->id.'-daily-giving-unicef-receipt-2026-06-05/source-',
             (string) $asset->path
         );
         $this->assertFalse(str_starts_with((string) $asset->path, '/tmp/'));
         $this->assertStringStartsWith(
-            'https://assets.fermatmind.com/storage/media-library/sources/daily-giving-unicef-receipt-2026-06-05/source-',
+            'https://assets.fermatmind.com/storage/media-library/sources/org-0/media-asset-'.$asset->id.'-daily-giving-unicef-receipt-2026-06-05/source-',
             (string) $asset->url
         );
         $this->assertSame(1239, (int) $asset->width);
@@ -237,8 +238,35 @@ final class MediaLibraryPublicApiTest extends TestCase
         $this->assertSame(MediaAsset::SYNC_SKIPPED, (string) $asset->sync_status);
         $this->assertSame(MediaAsset::CDN_SKIPPED, (string) $asset->cdn_status);
         $this->assertSame(6, $asset->variants()->count());
+        $this->assertArrayNotHasKey('source_original_name', $asset->payload_json ?? []);
 
         Storage::disk('public')->assertExists((string) $asset->path);
+    }
+
+    public function test_slug_colliding_asset_keys_use_distinct_variant_directories(): void
+    {
+        Storage::fake('public');
+
+        foreach (['articles.hero-cover', 'articles.hero.cover'] as $assetKey) {
+            $this->actingAsContentWriter()->post('/api/v0.5/internal/media-assets/'.$assetKey.'/upload', [
+                'file' => UploadedFile::fake()->image('private-working-name.jpg', 1800, 1200),
+                'alt' => 'Collision-safe media asset',
+                'status' => 'published',
+                'is_public' => true,
+            ])->assertOk()->assertJsonMissing(['source_original_name' => 'private-working-name.jpg']);
+        }
+
+        $assets = MediaAsset::query()->withoutGlobalScopes()->whereIn('asset_key', [
+            'articles.hero-cover',
+            'articles.hero.cover',
+        ])->with('variants')->get();
+
+        $this->assertCount(2, $assets);
+        $directories = $assets->map(fn (MediaAsset $asset): string => dirname((string) $asset->variants->firstWhere('variant_key', 'hero')?->path));
+        $this->assertCount(2, $directories->unique());
+        foreach ($assets as $asset) {
+            $this->assertArrayNotHasKey('source_original_name', $asset->payload_json ?? []);
+        }
     }
 
     public function test_article_cover_binding_requires_verified_public_standard_variants(): void

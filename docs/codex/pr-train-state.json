@@ -45047,6 +45047,24 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "commands": [
+          "cd backend && php artisan test tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php",
+          "cd backend && php artisan test tests/Feature/Console/MediaAssetsImportSeoImageBundleCommandTest.php"
+        ],
+        "evidence": "Media Library API/upload tests passed with 11 tests and 128 assertions; SEO image bundle importer passed 22 tests and 146 assertions.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "evidence": "1182 tests passed with 150106 assertions; the same 4 inherited Big Five rendered-QA expectation failures recorded by API39 remain outside API40 media scope.",
+        "required_checks_affected": false,
+        "status": "external_failure_recorded"
+      },
+      "scope_validation": {
+        "evidence": "All 5 changed paths are listed in SECURITY-169-API-40 allowed_paths; route listing, fresh SQLite migration, Pint, YAML/JSON parse, and git diff --check passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -45062,6 +45080,11 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-40; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-11T06:50:00+08:00",
+        "note": "Implemented asset-ID-bound storage namespaces and removed original upload filenames from persistence and API serialization; focused media/import tests passed.",
+        "status": "in_progress"
       }
     ],
     "failure_reason": null,
@@ -45073,7 +45096,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-40: harden media upload and variant filename privacy",
     "train_scope": "security_169_fap_api_audit"
   },

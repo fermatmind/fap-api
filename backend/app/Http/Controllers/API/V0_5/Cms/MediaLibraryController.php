@@ -305,7 +305,7 @@ final class MediaLibraryController extends Controller
             'synced_at' => optional($asset->synced_at)->toISOString(),
             'verified_at' => optional($asset->verified_at)->toISOString(),
             'last_error' => $asset->last_error,
-            'payload_json' => is_array($asset->payload_json) ? $asset->payload_json : [],
+            'payload_json' => $this->publicPayloadJson($asset->payload_json),
             'variants' => $asset->variants
                 ->map(fn (MediaVariant $variant): array => $this->variantPayload($variant, (string) $asset->disk))
                 ->values()
@@ -342,6 +342,20 @@ final class MediaLibraryController extends Controller
     private function normalizeKey(string $key): string
     {
         return strtolower(trim($key));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function publicPayloadJson(mixed $payload): array
+    {
+        if (! is_array($payload)) {
+            return [];
+        }
+
+        unset($payload['source_original_name']);
+
+        return $payload;
     }
 
     private function nullableString(mixed $value): ?string

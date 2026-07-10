@@ -48,10 +48,12 @@ final class MediaVariantGenerator
             'url' => $this->publicUrl($disk, $sourcePath),
             'mime_type' => $file->getMimeType(),
             'bytes' => $file->getSize(),
-            'payload_json' => array_merge($asset->payload_json ?? [], [
-                'source_original_name' => $file->getClientOriginalName(),
-                'variant_pipeline' => 'gd-cover-v1',
-            ]),
+            'payload_json' => array_merge(
+                array_diff_key($asset->payload_json ?? [], ['source_original_name' => true]),
+                [
+                    'variant_pipeline' => 'gd-cover-v1',
+                ]
+            ),
         ]);
         $asset->save();
 
@@ -233,7 +235,13 @@ final class MediaVariantGenerator
 
     private function assetDirectory(MediaAsset $asset): string
     {
-        return Str::slug((string) $asset->asset_key) ?: 'media-asset-'.$asset->getKey();
+        if (! $asset->exists || $asset->getKey() === null) {
+            throw new RuntimeException('Media asset must be persisted before generating storage paths.');
+        }
+
+        $slug = Str::slug((string) $asset->asset_key) ?: 'asset';
+
+        return sprintf('org-%d/media-asset-%d-%s', (int) $asset->org_id, (int) $asset->getKey(), $slug);
     }
 
     private function publicUrl(string $disk, string $path): ?string
