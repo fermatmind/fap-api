@@ -84330,8 +84330,8 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-import-dryrun-01",
     "depends_on": ["BIG5-ZH-FACET-NEUROTICISM-CONTENT-PACKAGE-01"],
-    "status": "pr_open",
-    "commit_sha": "7c15e770abedfb93b21c8c9f6c9725d3bb48ecdb",
+    "status": "ready_to_merge",
+    "commit_sha": "2a1990b5431e1411ba3ffae16f5d15aa762d6d34",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2902",
     "failure_reason": null,
     "merged_at": null,
@@ -84343,15 +84343,17 @@
       "combined_package": { "status": "pass", "evidence": "Combined V1 seed contains exactly 31 unique zh-CN rows: one Facet Hub and thirty Facets; all use body_md, content_ready, noindex,follow, and zero index/sitemap/llms eligibility. Seed SHA-256 is 47605736590fab6f6eac6d374f947925946ef125f39a273f4d136b6d30df5815." },
       "generic_importer_dry_run": { "status": "pass", "evidence": "No-write importer returned dry_run=1, assets_found=31, valid_count=31, errors_count=0, will_create=31, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets." },
       "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions." },
-      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." }
+      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
+      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head 2a1990b5431e1411ba3ffae16f5d15aa762d6d34; PR #2902 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": null, "post_merge_revalidated": false },
+    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false },
     "transitions": [
       { "at": "2026-07-10T16:45:57Z", "from": "unregistered", "to": "planned", "note": "Registered only the locked combined 31-page no-write dry-run PR after all five domain packages merged." },
       { "at": "2026-07-10T16:45:57Z", "from": "planned", "to": "in_progress", "note": "Started deterministic composition and dry-run validation for one Hub plus thirty Facet assets." },
       { "at": "2026-07-10T16:53:15Z", "from": "in_progress", "to": "local_checks_passed", "note": "Combined package QA, 31-row generic importer dry-run, focused contract, full core CI, full-32 authority gate, syntax, diff, and allowed-path validation passed without writes." },
       { "at": "2026-07-10T16:53:57Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped 31-page combined dry-run package and train metadata at f8bc72477afa3f83fb1b7266a66853ea3d2cb7dd." },
-      { "at": "2026-07-10T16:54:53Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2902 from head 7c15e770abedfb93b21c8c9f6c9725d3bb48ecdb." }
+      { "at": "2026-07-10T16:54:53Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2902 from head 7c15e770abedfb93b21c8c9f6c9725d3bb48ecdb." },
+      { "at": "2026-07-10T17:01:19Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." }
     ]
   }
 }
