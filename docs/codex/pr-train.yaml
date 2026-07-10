@@ -35550,10 +35550,16 @@ prs:
       - backend/app/Services/Cms/ArticlePublishService.php
       - backend/app/Filament/Ops/Support/ContentReleaseAudit.php
       - backend/app/Filament/Ops/Support/ContentReleaseFollowUp.php
+      - backend/tests/Feature/Console/ArticlePromoteExistingWorkingRevisionControlledCommandTest.php
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublishRuntime01Test.php
+      - backend/tests/Feature/SeoIntel/SeoAgentAutoRollbackGuardTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
     validation:
+      - cd backend && php artisan test tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublishRuntime01Test.php tests/Feature/SeoIntel/SeoAgentAutoRollbackGuardTest.php tests/Feature/Console/ArticlePromoteExistingWorkingRevisionControlledCommandTest.php --no-ansi
       - cd backend && php artisan route:list --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-17.sqlite php artisan migrate --force
       - bash backend/scripts/ci_verify_mbti.sh

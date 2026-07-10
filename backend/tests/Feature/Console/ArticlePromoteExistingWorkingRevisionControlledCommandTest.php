@@ -12,6 +12,7 @@ use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends TestCase
@@ -58,6 +59,10 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
 
     public function test_execute_promotes_existing_article_working_revision_and_preserves_route_state(): void
     {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', ['https://cache.example.test/revalidate']);
+        config()->set('ops.content_release_observability.broadcast_webhook', 'https://events.example.test/releases');
+        Http::fake();
+
         $article = $this->createExistingArticleWithWorkingRevision();
         $previousPublishedRevisionId = (int) $article->published_revision_id;
         $workingRevisionId = (int) $article->working_revision_id;
@@ -102,11 +107,16 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
         $this->assertSame(ArticleTranslationRevision::STATUS_PUBLISHED, (string) $article->workingRevision?->revision_status);
         $this->assertSame($workingRevisionId, (int) $article->publishedRevision?->id);
         $this->assertNotSame($previousPublishedRevisionId, (int) $article->published_revision_id);
+        $this->assertSame(
+            ArticleTranslationRevision::STATUS_STALE,
+            (string) ArticleTranslationRevision::query()->withoutGlobalScopes()->findOrFail($previousPublishedRevisionId)->revision_status,
+        );
         $this->assertSame('EQ测试怎么用：从分数到情绪调节的完整指南 | FermatMind', (string) $article->seoMeta?->seo_title);
         $this->assertSame('更新后的 EQ SEO 描述。', (string) $article->seoMeta?->seo_description);
         $this->assertSame('https://fermatmind.com'.self::CANONICAL, (string) $article->seoMeta?->canonical_url);
         $this->assertSame('https://ops.fermatmind.com/storage/media-library/variants/articleeqscoreemotional-intelligencepillarcoverv1/hero_1600x900.jpg', (string) $article->seoMeta?->og_image_url);
         $this->assertSame('index,follow', (string) $article->seoMeta?->robots);
+        Http::assertNothingSent();
     }
 
     public function test_dry_run_rejects_human_review_revision(): void

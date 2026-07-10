@@ -93,7 +93,8 @@ final class ArticlePublishService
         int $articleId,
         int $workingRevisionId,
         int $currentPublishedRevisionId,
-        string $source = 'existing_article_controlled_promotion'
+        string $source = 'existing_article_controlled_promotion',
+        bool $dispatchFollowUp = true,
     ): Article {
         if ($articleId <= 0) {
             throw new InvalidArgumentException('article_id must be positive.');
@@ -132,6 +133,16 @@ final class ArticlePublishService
 
             if ($workingRevisionId === $currentPublishedRevisionId) {
                 throw new InvalidArgumentException('working revision must be isolated from the current published revision.');
+            }
+
+            $previousPublishedRevision = ArticleTranslationRevision::query()
+                ->withoutGlobalScopes()
+                ->where('id', $currentPublishedRevisionId)
+                ->where('article_id', $articleId)
+                ->lockForUpdate()
+                ->first();
+            if (! $previousPublishedRevision instanceof ArticleTranslationRevision) {
+                throw new RuntimeException('current published revision not found.');
             }
 
             $this->assertPublishable($article);
@@ -193,6 +204,10 @@ final class ArticlePublishService
                 'published_at' => $publishedAt,
             ])->save();
 
+            $previousPublishedRevision->forceFill([
+                'revision_status' => ArticleTranslationRevision::STATUS_STALE,
+            ])->saveQuietly();
+
             $seoUpdates = [];
             if (filled($workingRevision->seo_title)) {
                 $seoUpdates['seo_title'] = (string) $workingRevision->seo_title;
@@ -213,7 +228,7 @@ final class ArticlePublishService
             return $article->fresh(['publishedRevision', 'workingRevision', 'seoMeta']) ?? $article;
         });
 
-        ContentReleaseAudit::log('article', $article, $source);
+        ContentReleaseAudit::log('article', $article, $source, $dispatchFollowUp);
         $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
 
         return $article;

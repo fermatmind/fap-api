@@ -106,6 +106,9 @@ final class SeoAgentAutoRollbackGuardTest extends TestCase
         $this->assertSame(1, data_get($artifact, 'result.rollback_executed_count'));
         $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.content_page_rollback_beyond_one', true));
         $this->assertSame((int) $previous->id, (int) $page->refresh()->published_revision_id);
+        $this->assertSame('Previous', (string) $page->refresh()->title);
+        $this->assertFalse((bool) $page->refresh()->is_indexable);
+        $this->assertNull($page->refresh()->reviewer);
         $this->assertSame(CmsTranslationRevision::STATUS_ARCHIVED, (string) $candidate->refresh()->revision_status);
         $this->assertSame(CmsTranslationRevision::STATUS_PUBLISHED, (string) $previous->refresh()->revision_status);
     }
@@ -154,6 +157,42 @@ final class SeoAgentAutoRollbackGuardTest extends TestCase
             'published_at' => now()->subDay(),
         ]);
 
+        $basePayload = [
+            'title' => 'Previous',
+            'summary' => 'Previous summary.',
+            'body_md' => '# Previous body',
+            'body_html' => '',
+            'seo_title' => 'Previous SEO title',
+            'seo_description' => 'Previous SEO description',
+            'path' => '/zh/rollback-guard-page',
+            'kind' => ContentPage::KIND_HELP,
+            'page_type' => 'support_static',
+            'kicker' => null,
+            'template' => 'company',
+            'animation_profile' => 'none',
+            'owner' => null,
+            'legal_review_required' => false,
+            'science_review_required' => false,
+            'source_doc' => null,
+            'headings_json' => [],
+            'meta_description' => 'Previous meta description',
+            'canonical_path' => '/zh/rollback-guard-page',
+            'is_public' => true,
+            'is_indexable' => false,
+            'support_contact' => null,
+            'policy_version' => null,
+            'reviewer' => null,
+            'faq_items' => [],
+            'schema_enabled' => false,
+            'publish_allowed' => true,
+            'operator_approval_required' => false,
+            'operator_approved_at' => null,
+            'claim_gate_status' => 'passed',
+            'forbidden_claims' => [],
+            'faq_schema_eligible' => false,
+            'schema_eligibility_reviewed_at' => null,
+        ];
+
         $previous = CmsTranslationRevision::query()->create([
             'org_id' => 0,
             'content_type' => 'content_page',
@@ -163,7 +202,7 @@ final class SeoAgentAutoRollbackGuardTest extends TestCase
             'source_locale' => 'zh-CN',
             'revision_number' => 1,
             'revision_status' => CmsTranslationRevision::STATUS_PUBLISHED,
-            'payload_json' => ['title' => 'Previous'],
+            'payload_json' => $basePayload,
             'published_at' => now()->subDay(),
         ]);
         $candidate = CmsTranslationRevision::query()->create([
@@ -175,7 +214,7 @@ final class SeoAgentAutoRollbackGuardTest extends TestCase
             'source_locale' => 'zh-CN',
             'revision_number' => 2,
             'revision_status' => CmsTranslationRevision::STATUS_PUBLISHED,
-            'payload_json' => ['title' => 'Candidate'],
+            'payload_json' => [...$basePayload, 'title' => 'Candidate', 'is_indexable' => true, 'reviewer' => 'candidate-reviewer'],
             'published_at' => now(),
         ]);
         $page->forceFill([

@@ -190,10 +190,60 @@ final class RowBackedRevisionWorkspace
         return $record->refresh();
     }
 
-    public function publishWorkingRevision(string $contentType, Model $record): Model
+    /**
+     * @return list<string>
+     */
+    public function publishValidationErrors(string $contentType, Model $record, CmsTranslationRevision $working): array
     {
+        $errors = [];
+
+        if ((string) $working->content_type !== $contentType
+            || (int) $working->content_id !== (int) $record->getKey()
+            || (int) $working->org_id !== (int) $record->org_id
+            || (string) $working->locale !== (string) $record->locale
+            || (string) $working->translation_group_id !== (string) $record->translation_group_id) {
+            $errors[] = 'working revision identity does not match the target record';
+        }
+
+        $payload = $working->payload_json;
+        if (! is_array($payload)) {
+            $errors[] = 'working revision payload must be an object';
+
+            return $errors;
+        }
+
+        return [...$errors, ...$this->adapter($contentType)->requiredPayloadBlockers($payload)];
+    }
+
+    public function revisionPayloadHash(CmsTranslationRevision $revision): string
+    {
+        return hash('sha256', json_encode(
+            $revision->payload_json,
+            JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+        ));
+    }
+
+    public function publishWorkingRevision(
+        string $contentType,
+        Model $record,
+        ?int $expectedRevisionId = null,
+        ?string $expectedPayloadHash = null,
+    ): Model {
         $adapter = $this->adapter($contentType);
         $working = $this->workingRevision($contentType, $record);
+
+        if ($expectedRevisionId !== null && (int) $working->id !== $expectedRevisionId) {
+            throw new CmsTranslationWorkflowException('Working revision changed after controlled publish preflight.');
+        }
+
+        if ($expectedPayloadHash !== null && ! hash_equals($expectedPayloadHash, $this->revisionPayloadHash($working))) {
+            throw new CmsTranslationWorkflowException('Working revision payload changed after controlled publish preflight.');
+        }
+
+        $validationErrors = $this->publishValidationErrors($contentType, $record, $working);
+        if ($validationErrors !== []) {
+            throw new CmsTranslationWorkflowException('Working revision cannot be published: '.implode('; ', $validationErrors).'.');
+        }
 
         $adapter->applyRevisionPayload($record, $working->payload_json ?? []);
         $adapter->markPublished($record);

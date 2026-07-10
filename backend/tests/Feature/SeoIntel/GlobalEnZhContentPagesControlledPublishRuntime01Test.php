@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
+use App\Services\Cms\RowBackedRevisionWorkspace;
+use App\Services\ContentPages\ContentPagesControlledPublishService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -107,15 +110,38 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
     {
         $this->seedControlledTargets();
         $foundation = $this->contentPage('foundation');
-        $foundation->forceFill([
-            'content_md' => "# Public-Benefit Mission and Governance\n\nFermatMind is a registered foundation with a planned public-benefit shareholding arrangement.",
-        ])->save();
+        $working = CmsTranslationRevision::query()->withoutGlobalScopes()->findOrFail((int) $foundation->working_revision_id);
+        $payload = (array) $working->payload_json;
+        $payload['body_md'] = "# Public-Benefit Mission and Governance\n\nFermatMind is a registered foundation with a planned public-benefit shareholding arrangement.";
+        $working->forceFill(['payload_json' => $payload])->save();
 
         $output = $this->runPublishCommand(['--execute' => true], expectedExitCode: 1);
 
         $this->assertFalse($output['ok'] ?? true);
         $this->assertContains('foundation_overclaim_detected', $this->errorCodes($output));
         $this->assertSame(ContentPage::STATUS_DRAFT, (string) $this->contentPage('foundation')->status);
+    }
+
+    public function test_dry_run_refuses_invalid_working_revision_payload_even_when_base_row_is_valid(): void
+    {
+        $this->seedControlledTargets();
+        $page = ContentPage::query()->withoutGlobalScopes()->where('slug', 'brand')->firstOrFail();
+        $working = CmsTranslationRevision::query()
+            ->withoutGlobalScopes()
+            ->findOrFail((int) $page->working_revision_id);
+        $payload = (array) $working->payload_json;
+        unset($payload['body_md']);
+        $working->forceFill(['payload_json' => $payload])->save();
+
+        $result = app(ContentPagesControlledPublishService::class)->dryRun(
+            ContentPagesControlledPublishService::SCOPE_GLOBAL_EN_WAVE1,
+            'en',
+            self::targetKeys(),
+        );
+
+        $this->assertFalse((bool) ($result['ok'] ?? true));
+        $this->assertContains('invalid_working_revision_payload', $this->errorCodes($result));
+        $this->assertSame(ContentPage::STATUS_DRAFT, (string) $page->refresh()->status);
     }
 
     public function test_execute_is_idempotent(): void
@@ -443,7 +469,10 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
         $this->assertSame('help-service', $generated['runtime_scope'] ?? null);
         $this->assertSame(12, $generated['target_count'] ?? null);
         $this->assertFalse((bool) ($generated['publish_executed_in_this_pr'] ?? true));
-        $this->assertSame('HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01', $generated['next_task'] ?? null);
+        $this->assertSame('Exact publish authorization for the artifact-bound 12-row scope', $generated['next_task'] ?? null);
+        $this->assertSame('fail_closed', data_get($generated, 'readiness_artifact.runtime_enforcement'));
+        $this->assertTrue((bool) data_get($generated, 'runtime_guards.working_revision_payload_validated'));
+        $this->assertTrue((bool) data_get($generated, 'runtime_guards.locked_revision_id_and_payload_hash_revalidated'));
     }
 
     public function test_generated_science_zh_controlled_publish_readiness_report_exists_and_parses(): void
@@ -475,14 +504,16 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
                 continue;
             }
 
-            ContentPage::query()->withoutGlobalScopes()->create($this->pageAttributes($key));
+            $page = ContentPage::query()->withoutGlobalScopes()->create($this->pageAttributes($key));
+            app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $page);
         }
     }
 
     private function seedHelpServiceTargets(): void
     {
         foreach ($this->helpServiceSourceRows() as $row) {
-            ContentPage::query()->withoutGlobalScopes()->create($this->helpServicePageAttributes($row));
+            $page = ContentPage::query()->withoutGlobalScopes()->create($this->helpServicePageAttributes($row));
+            app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $page);
         }
     }
 
@@ -497,7 +528,8 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
                 continue;
             }
 
-            ContentPage::query()->withoutGlobalScopes()->create($this->scienceZhPageAttributes($key, $overridesByKey[$key] ?? []));
+            $page = ContentPage::query()->withoutGlobalScopes()->create($this->scienceZhPageAttributes($key, $overridesByKey[$key] ?? []));
+            app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $page);
         }
     }
 
@@ -505,7 +537,7 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
     {
         foreach (self::scienceZhTargetKeys() as $key) {
             ContentPage::withoutEvents(function () use ($key): void {
-                ContentPage::query()->withoutGlobalScopes()->create($this->scienceZhPageAttributes($key, [
+                $page = ContentPage::query()->withoutGlobalScopes()->create($this->scienceZhPageAttributes($key, [
                     'status' => ContentPage::STATUS_PUBLISHED,
                     'is_public' => true,
                     'is_indexable' => true,
@@ -519,6 +551,7 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
                     'claim_gate_status' => 'not_reviewed',
                     'forbidden_claims' => [],
                 ]));
+                app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $page);
             });
         }
     }
