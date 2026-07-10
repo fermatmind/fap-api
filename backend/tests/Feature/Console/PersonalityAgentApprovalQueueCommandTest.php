@@ -248,6 +248,41 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
     }
 
+    public function test_auto_qa_approval_handoff_cannot_be_written(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->autoApprovalHandoffPackage(), $this->autoApprovalHandoffQa());
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(2, $payload['blocked_item_count']);
+        $this->assertSame(['qa_decision_dry_run_only'], array_values(array_unique(array_column($payload['blocked_items'], 'blocked_reason'))));
+        $this->assertSame(0, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
+    }
+
+    public function test_deceptive_target_urls_are_rejected_and_never_stored(): void
+    {
+        $package = $this->validPackage();
+        $qa = $this->validQa();
+        $deceptiveUrl = 'https://evil.example\\@fermatmind.com/en/personality/intj-a';
+        $package['recommendations'][0]['target_url'] = $deceptiveUrl;
+        $qa['page_results'][0]['target_url'] = $deceptiveUrl;
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertContains('unsupported_or_private_target_url', array_column($payload['blocked_items'], 'blocked_reason'));
+        $this->assertSame(1, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(1, DB::table('personality_agent_approval_items')->count());
+        $this->assertFalse(DB::table('personality_agent_approval_items')->where('target_url', $deceptiveUrl)->exists());
+    }
+
     public function test_mbti64_v85_v5_bilingual_package_can_enter_human_approval_queue_dry_run_only(): void
     {
         $exitCode = Artisan::call('personality:agent-approval-queue', [

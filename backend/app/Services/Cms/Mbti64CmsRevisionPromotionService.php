@@ -63,9 +63,7 @@ final class Mbti64CmsRevisionPromotionService
         'https://fermatmind.com/zh/personality/enfj-a',
     ];
 
-    public function __construct(private readonly Mbti64BackendImportContractPlanner $planner)
-    {
-    }
+    public function __construct(private readonly Mbti64BackendImportContractPlanner $planner) {}
 
     /**
      * @param  array<string,mixed>  $package
@@ -774,7 +772,7 @@ final class Mbti64CmsRevisionPromotionService
             ];
         } else {
             $revision = $this->matchingRevision($pageType, $targetField, $targetId, $snapshotKey, $sourceSha256);
-            $latestRevisionNo = $this->latestRevisionNo($pageType, $targetField, $targetId);
+            $latestRevisionNo = $this->latestRevisionNo($pageType, $targetField, $targetId, $snapshotKey);
 
             if (! $revision instanceof Model) {
                 $errors[] = [
@@ -922,13 +920,23 @@ final class Mbti64CmsRevisionPromotionService
         return null;
     }
 
-    private function latestRevisionNo(string $pageType, string $targetField, int $targetId): int
+    private function latestRevisionNo(string $pageType, string $targetField, int $targetId, string $snapshotKey): int
     {
         $query = $pageType === 'comparison'
             ? PersonalityProfileRevision::query()->where($targetField, $targetId)
             : PersonalityProfileVariantRevision::query()->where($targetField, $targetId);
 
-        return (int) $query->max('revision_no');
+        foreach ($query->orderByDesc('revision_no')->get() as $revision) {
+            $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
+            if (is_array($snapshot[self::AGENT_PROJECTION_SNAPSHOT_KEY] ?? null)
+                && ! is_array($snapshot[$snapshotKey] ?? null)) {
+                continue;
+            }
+
+            return (int) $revision->revision_no;
+        }
+
+        return 0;
     }
 
     /**
@@ -981,7 +989,7 @@ final class Mbti64CmsRevisionPromotionService
                 'og_description' => $this->nullableString($seo['og_description'] ?? ($seo['seo_description'] ?? ($seo['description'] ?? null))),
                 'twitter_title' => $this->nullableString($seo['twitter_title'] ?? ($seo['seo_title'] ?? ($seo['title'] ?? null))),
                 'twitter_description' => $this->nullableString($seo['twitter_description'] ?? ($seo['seo_description'] ?? ($seo['description'] ?? null))),
-                'robots' => 'index,follow',
+                'robots' => 'noindex,follow',
                 'jsonld_overrides_json' => [
                     'name' => $this->nullableString($seo['h1'] ?? ($seo['seo_title'] ?? ($seo['title'] ?? null))),
                     'description' => $this->nullableString($seo['seo_description'] ?? ($seo['description'] ?? null)),

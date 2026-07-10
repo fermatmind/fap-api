@@ -44974,6 +44974,26 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "commands": [
+          "cd backend && php artisan test tests/Feature/Console/PersonalityAgentApprovalQueueCommandTest.php",
+          "cd backend && php artisan test tests/Feature/Console/PersonalityMbti64CmsRevisionPromoteCommandTest.php",
+          "cd backend && php artisan test tests/Feature/Console/PersonalityBigFivePublicProfileAgentDraftCommandTest.php tests/Feature/Console/PersonalityEnneagramCmsDraftCommandTest.php",
+          "cd backend && php artisan test tests/Feature/Ops/OpsCmsEditPolishTest.php tests/Feature/Foundation/FoundationCmsFieldMapTest.php tests/Feature/Cms/HelpContentImportPackageTest.php"
+        ],
+        "evidence": "Approval queue 30 tests / 426 assertions passed; MBTI revision promotion 33 tests / 1406 assertions passed; Big Five and Enneagram draft writers 16 tests passed; ContentPage editor field coverage 6 tests / 607 assertions passed.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "evidence": "1182 tests passed with 150106 assertions; 4 inherited failures remain in BigFiveResultPageV2ExpandedRenderedQaTest and BigFiveResultPageV2RenderedQaTest because unchanged tests expect pending_surface while unchanged generated artifacts report pass. Recorded in generated/pr-train-sidecar-issues.",
+        "required_checks_affected": false,
+        "status": "external_failure_recorded"
+      },
+      "scope_validation": {
+        "evidence": "Every changed path is listed in SECURITY-169-API-39 allowed_paths; Ruby YAML parse, JSON parse, Pint, and git diff --check passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -44989,6 +45009,11 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-39; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-11T06:30:00+08:00",
+        "note": "Implemented scoped remediation for deceptive approval URLs, dry-run-only handoffs, noindex promotion, revision ordering, draft package compatibility, and ContentPage editor field preservation.",
+        "status": "in_progress"
       }
     ],
     "failure_reason": null,
@@ -45000,7 +45025,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-39: harden personality approval and revision writers",
     "train_scope": "security_169_fap_api_audit"
   },

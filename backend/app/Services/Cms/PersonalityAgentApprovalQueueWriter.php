@@ -111,7 +111,7 @@ final class PersonalityAgentApprovalQueueWriter
 
         foreach ($this->recommendations($package) as $position => $recommendation) {
             $qaResult = $qaResultsByUrl[(string) ($recommendation['target_url'] ?? '')] ?? [];
-            $prepared = $this->prepareItem($recommendation, $qaResult, $position + 1);
+            $prepared = $this->prepareItem($recommendation, $qaResult, $position + 1, $write);
             if (($prepared['blocked_reason'] ?? null) !== null) {
                 $blockedItems[] = $prepared;
 
@@ -589,17 +589,17 @@ final class PersonalityAgentApprovalQueueWriter
      * @param  array<string,mixed>  $qaResult
      * @return array<string,mixed>
      */
-    private function prepareItem(array $recommendation, array $qaResult, int $position): array
+    private function prepareItem(array $recommendation, array $qaResult, int $position, bool $write): array
     {
         $identity = $this->identityForRecommendation($recommendation);
         $recommendationJson = $this->jsonString($recommendation);
         $qaDecision = (string) ($qaResult['decision'] ?? $qaResult['qa_decision'] ?? $qaResult['status'] ?? $qaResult['qa_status'] ?? '');
-        $blockedReason = $this->blockedReason($recommendation, $qaResult, $identity, $recommendationJson);
+        $blockedReason = $this->blockedReason($recommendation, $qaResult, $identity, $recommendationJson, $write);
 
         return [
             'position' => $position,
             'framework' => (string) ($recommendation['framework'] ?? ''),
-            'target_url' => (string) ($recommendation['target_url'] ?? ''),
+            'target_url' => (string) ($identity['target_url'] ?? ($recommendation['target_url'] ?? '')),
             'path' => (string) ($identity['path'] ?? ''),
             'locale' => (string) ($identity['locale'] ?? $recommendation['locale'] ?? ''),
             'entity_type' => (string) ($recommendation['entity_type'] ?? $identity['entity_type'] ?? ''),
@@ -620,7 +620,7 @@ final class PersonalityAgentApprovalQueueWriter
      * @param  array<string,mixed>  $qaResult
      * @param  array<string,mixed>|null  $identity
      */
-    private function blockedReason(array $recommendation, array $qaResult, ?array $identity, string $recommendationJson): ?string
+    private function blockedReason(array $recommendation, array $qaResult, ?array $identity, string $recommendationJson, bool $write): ?string
     {
         if ($identity === null) {
             return 'unsupported_or_private_target_url';
@@ -641,6 +641,9 @@ final class PersonalityAgentApprovalQueueWriter
         }
 
         $decision = (string) ($qaResult['decision'] ?? $qaResult['qa_decision'] ?? $qaResult['status'] ?? $qaResult['qa_status'] ?? '');
+        if ($write && $decision === 'PASS_READY_FOR_APPROVAL_HANDOFF') {
+            return 'qa_decision_dry_run_only';
+        }
         if (! $this->qaDecisionPasses($decision)) {
             return 'qa_not_pass';
         }
@@ -667,15 +670,29 @@ final class PersonalityAgentApprovalQueueWriter
     private function identityForRecommendation(array $recommendation): ?array
     {
         $targetUrl = (string) ($recommendation['target_url'] ?? '');
-        $host = (string) (parse_url($targetUrl, PHP_URL_HOST) ?: '');
-        $path = (string) (parse_url($targetUrl, PHP_URL_PATH) ?: '');
-        if ($host !== 'fermatmind.com') {
+        if ($targetUrl === '' || preg_match('/[\\x00-\\x20\\x7f\\\\]/', $targetUrl) === 1) {
             return null;
         }
+
+        $scheme = strtolower((string) (parse_url($targetUrl, PHP_URL_SCHEME) ?: ''));
+        $host = (string) (parse_url($targetUrl, PHP_URL_HOST) ?: '');
+        $path = (string) (parse_url($targetUrl, PHP_URL_PATH) ?: '');
+        if ($scheme !== 'https'
+            || strtolower($host) !== 'fermatmind.com'
+            || parse_url($targetUrl, PHP_URL_USER) !== null
+            || parse_url($targetUrl, PHP_URL_PASS) !== null
+            || parse_url($targetUrl, PHP_URL_PORT) !== null
+            || parse_url($targetUrl, PHP_URL_QUERY) !== null
+            || parse_url($targetUrl, PHP_URL_FRAGMENT) !== null) {
+            return null;
+        }
+
+        $targetUrl = 'https://fermatmind.com'.$path;
 
         if (preg_match('#^/(?<prefix>en|zh)/personality/(?<type>[a-z]{4})-(?<variant>a|t)$#i', $path, $matches) === 1) {
             return [
                 'path' => $path,
+                'target_url' => $targetUrl,
                 'locale' => $this->localeFromPrefix((string) $matches['prefix']),
                 'page_type' => 'personality_profile_variant',
             ];
@@ -684,6 +701,7 @@ final class PersonalityAgentApprovalQueueWriter
         if (preg_match('#^/(?<prefix>en|zh)/personality/(?<type>[a-z]{4})-a-vs-\k<type>-t$#i', $path, $matches) === 1) {
             return [
                 'path' => $path,
+                'target_url' => $targetUrl,
                 'locale' => $this->localeFromPrefix((string) $matches['prefix']),
                 'page_type' => 'personality_profile_comparison',
             ];
@@ -692,6 +710,7 @@ final class PersonalityAgentApprovalQueueWriter
         if ($this->isEnneagramPublicContentAssetPath($path, $matches)) {
             return [
                 'path' => $path,
+                'target_url' => $targetUrl,
                 'locale' => $this->localeFromPrefix((string) $matches['prefix']),
                 'entity_type' => 'enneagram_public_content_asset',
                 'page_type' => 'personality_public_content_asset',
@@ -701,6 +720,7 @@ final class PersonalityAgentApprovalQueueWriter
         if ($this->isBigFivePublicContentAssetPath($path, $matches)) {
             return [
                 'path' => $path,
+                'target_url' => $targetUrl,
                 'locale' => $this->localeFromPrefix((string) $matches['prefix']),
                 'entity_type' => 'big_five_public_content_asset',
                 'page_type' => 'personality_public_content_asset',
@@ -710,6 +730,7 @@ final class PersonalityAgentApprovalQueueWriter
         if (preg_match('#^/(?<prefix>en|zh)/personality/[a-z0-9-]+$#i', $path, $matches) === 1) {
             return [
                 'path' => $path,
+                'target_url' => $targetUrl,
                 'locale' => $this->localeFromPrefix((string) $matches['prefix']),
                 'page_type' => (string) ($recommendation['page_type'] ?? 'personality_profile'),
             ];

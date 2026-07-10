@@ -36474,6 +36474,7 @@ prs:
       - backend/docs/seo/personality/personality-agent-auto-approval-handoff-package-2026-06-27.json
       - backend/docs/seo/personality/personality-agent-auto-qa-and-approval-handoff-2026-06-27.json
       - backend/tests/Feature/Console/PersonalityAgentApprovalQueueCommandTest.php
+      - backend/tests/Feature/Console/PersonalityMbti64CmsRevisionPromoteCommandTest.php
       - backend/docs/seo/personality/big-five-public-profile-agent-pilot-2026-06-24.json
       - backend/app/Services/Cms/BigFivePublicProfileAgentDraftWriter.php
       - backend/docs/seo/personality/enneagram-public-profile-agent-pilot-2026-06-24.json
@@ -36482,7 +36483,10 @@ prs:
       - backend/app/Filament/Ops/Resources/ContentPageResource.php
       - backend/app/Filament/Ops/Resources/ContentPageResource/Pages/EditContentPage.php
       - backend/app/Services/Cms/ContentPageTranslationAdapter.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
     validation:

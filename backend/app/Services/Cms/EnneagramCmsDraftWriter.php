@@ -464,7 +464,12 @@ final class EnneagramCmsDraftWriter
             ];
         }
 
-        foreach (array_values(is_array($recommendations['differentiation_notes'] ?? null) ? $recommendations['differentiation_notes'] : []) as $index => $note) {
+        $differentiationNotes = $recommendations['differentiation_notes'] ?? [];
+        if (is_scalar($differentiationNotes)) {
+            $differentiationNotes = [$differentiationNotes];
+        }
+
+        foreach (array_values(is_array($differentiationNotes) ? $differentiationNotes : []) as $index => $note) {
             if (! is_scalar($note) || trim((string) $note) === '') {
                 continue;
             }
