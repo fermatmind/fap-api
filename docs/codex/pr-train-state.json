@@ -232,9 +232,9 @@
     "depends_on": [
       "ENNEAGRAM-EN13-CMS-DRY-RUN-01"
     ],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "e7c985319ac1b742542c7a7acf5a80b2890372af",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2887",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -365,6 +365,12 @@
         "from": "production_operation_completed",
         "to": "committed",
         "note": "Recorded the exact workflow evidence, 13-row noindex CMS aggregate readback, and a non-blocking sidecar for production JSON normalization causing false repeat-update classification. Current CMS state and required operation gates pass."
+      },
+      {
+        "at": "2026-07-10T22:29:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2887 with only manifest-allowed train ledger and sidecar evidence files; required GitHub checks are pending."
       }
     ]
   },
