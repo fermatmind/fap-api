@@ -120,6 +120,74 @@ final class EnneagramResultPageOpsAgentRunOrchestratorTest extends TestCase
         }
     }
 
+    public function test_mutating_modes_require_explicit_changed_files(): void
+    {
+        $root = $this->tempDir('enneagram-ops-runner-missing-scope');
+
+        try {
+            $summary = app(EnneagramResultPageOpsAgentRunOrchestrator::class)->plan([
+                'run_id' => 'missing-scope-run',
+                'artifact_dir' => $root,
+                'mode' => 'auto-to-pr',
+                'scope_id' => 'ops-agent-runner',
+                'strict' => true,
+            ]);
+
+            $this->assertFalse((bool) ($summary['ok'] ?? true));
+            $this->assertContains('changed_files_required', $summary['errors'] ?? []);
+            $this->assertFalse((bool) data_get($summary, 'summary.scope_valid', true));
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
+    public function test_scope_validation_rejects_dot_segments_and_file_prefix_spoofing(): void
+    {
+        $root = $this->tempDir('enneagram-ops-runner-path-scope');
+
+        try {
+            foreach ([
+                'backend/app/Services/Enneagram/Assets/Agent/../Unsafe.php',
+                'backend/app/Console/Commands/EnneagramResultPageOpsRunnerCommand.php.bak',
+            ] as $index => $changedFile) {
+                $summary = app(EnneagramResultPageOpsAgentRunOrchestrator::class)->plan([
+                    'run_id' => 'invalid-scope-'.$index,
+                    'artifact_dir' => $root,
+                    'mode' => 'auto-to-pr',
+                    'scope_id' => 'ops-agent-runner',
+                    'changed_files' => [$changedFile],
+                    'strict' => true,
+                ]);
+
+                $this->assertFalse((bool) ($summary['ok'] ?? true));
+                $this->assertContains('scope_validation_failed', $summary['errors'] ?? []);
+            }
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
+    public function test_run_id_cannot_escape_artifact_root(): void
+    {
+        $root = $this->tempDir('enneagram-ops-runner-traversal');
+
+        try {
+            $summary = app(EnneagramResultPageOpsAgentRunOrchestrator::class)->plan([
+                'run_id' => '..',
+                'artifact_dir' => $root,
+                'mode' => 'auto-to-report',
+                'scope_id' => 'ops-agent-runner',
+                'strict' => true,
+            ]);
+
+            $this->assertSame('ops-agent-runner', $summary['run_id'] ?? null);
+            $this->assertFileExists($root.'/ops-agent-runner/ops_agent_run_orchestrator_plan.json');
+            $this->assertFileDoesNotExist(dirname($root).'/ops_agent_run_orchestrator_plan.json');
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
     private function tempDir(string $prefix): string
     {
         $path = sys_get_temp_dir().'/'.$prefix.'-'.bin2hex(random_bytes(4));

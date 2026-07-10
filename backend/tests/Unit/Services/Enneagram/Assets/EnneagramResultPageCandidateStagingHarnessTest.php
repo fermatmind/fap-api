@@ -239,7 +239,7 @@ final class EnneagramResultPageCandidateStagingHarnessTest extends TestCase
             'phase8b_summary.json' => ['verdict' => 'PASS_FOR_PRODUCTION_EQUIVALENT_E2E_QA'],
             'candidate_payloads_manifest.json' => ['total_payload_count' => 630],
             'candidate_payload_hashes.json' => ['candidate_payloads_manifest_sha256' => 'fixture'],
-            'candidate_payload_source_mapping.json' => ['source_mapping_failure_count' => 0],
+            'candidate_payload_source_mapping.json' => $this->payloadSourceMappingFixture(),
         ] as $file => $payload) {
             File::put($candidateDir.'/'.$file, json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         }
@@ -265,6 +265,26 @@ final class EnneagramResultPageCandidateStagingHarnessTest extends TestCase
     /**
      * @return array<string,mixed>
      */
+    private function payloadSourceMappingFixture(): array
+    {
+        return [
+            'source_mapping_failure_count' => 0,
+            'missing_count' => 0,
+            'fallback_count' => 0,
+            'blocked_count' => 0,
+            'duplicate_selection_count' => 0,
+            'branch_provenance_mismatch_count' => 0,
+            'branch_payload_counts' => [
+                'low_resonance_response' => 108,
+                'partial_resonance_response' => 90,
+                'diffuse_convergence_response' => 108,
+                'close_call_pair' => 36,
+                'scene_localization_response' => 162,
+                'fc144_recommendation_response' => 90,
+            ],
+        ];
+    }
+
     private function readJson(string $path): array
     {
         $decoded = json_decode((string) file_get_contents($path), true);

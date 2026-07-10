@@ -230,6 +230,7 @@ final class EnneagramResultPageOpsControlPlane
         foreach ((array) ($contract['allowed_modes'] ?? []) as $modeRow) {
             if (! is_array($modeRow)) {
                 $errors[] = 'allowed_mode_row_malformed';
+
                 continue;
             }
 
@@ -326,7 +327,7 @@ final class EnneagramResultPageOpsControlPlane
 
         $sanitized = preg_replace('/[^A-Za-z0-9_.-]+/', '-', $trimmed) ?: '';
 
-        return trim($sanitized, '-') ?: 'ops-control-plane';
+        return trim($sanitized, '-._') ?: 'ops-control-plane';
     }
 
     private function ensureDirectory(string $path): void

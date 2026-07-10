@@ -89,6 +89,23 @@ final class EnneagramInactiveCandidateReleaseImporterTest extends TestCase
         );
     }
 
+    public function test_importer_rejects_incomplete_payload_source_mapping(): void
+    {
+        $fixture = $this->makeCandidateFixture('importer_incomplete_payload_source_mapping');
+        File::put($fixture['candidate_dir'].'/candidate_payload_source_mapping.json', json_encode([
+            'source_mapping_failure_count' => 0,
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Candidate payload source mapping contains invalid counter: missing_count');
+
+        app(EnneagramInactiveCandidateReleaseImporter::class)->import(
+            $fixture['candidate_dir'],
+            $fixture['output_dir'],
+            $fixture['contracts']
+        );
+    }
+
     public function test_explicit_activation_row_can_resolve_materialized_release_root(): void
     {
         $fixture = $this->makeCandidateFixture('importer_activation_override');
@@ -222,6 +239,19 @@ final class EnneagramInactiveCandidateReleaseImporterTest extends TestCase
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/candidate_payload_source_mapping.json', json_encode([
             'source_mapping_failure_count' => 0,
+            'missing_count' => 0,
+            'fallback_count' => 0,
+            'blocked_count' => 0,
+            'duplicate_selection_count' => 0,
+            'branch_provenance_mismatch_count' => 0,
+            'branch_payload_counts' => [
+                'low_resonance_response' => 108,
+                'partial_resonance_response' => 90,
+                'diffuse_convergence_response' => 108,
+                'close_call_pair' => 36,
+                'scene_localization_response' => 162,
+                'fc144_recommendation_response' => 90,
+            ],
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 
         for ($i = 0; $i < 630; $i++) {
