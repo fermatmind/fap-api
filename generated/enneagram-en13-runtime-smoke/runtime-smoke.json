@@ -1,0 +1,102 @@
+{
+  "schema_version": "enneagram_en13_noindex_runtime_smoke.v1",
+  "accessed_at": "2026-07-10T14:53:43Z",
+  "verdict": "NO_GO",
+  "scope": "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01",
+  "environment": {
+    "api_base": "https://api.fermatmind.com",
+    "web_base": "https://fermatmind.com",
+    "backend_revision": "caf9a7c6c9cd6281c824c660dc160a77c054f31a",
+    "backend_revision_evidence": "production REVISION readback",
+    "frontend_latest_successful_production_workflow_sha": "ba2e91b19af098920ab8fc8e75d06dd8869040e6",
+    "frontend_production_workflow_run_id": 29100165689
+  },
+  "authority": {
+    "package_sha256": "af1a34b238509b4f189e3978b187d7df5e02527e1c92bc8d59cd6e7ec1a25042",
+    "qa_sha256": "e338fea78b54161262f8b9084032e04a50a1336d4847c0311fe9667971ef524f"
+  },
+  "summary": {
+    "route_count": 13,
+    "list_status": 200,
+    "list_total": 13,
+    "list_item_count": 13,
+    "api_200": 13,
+    "web_200": 13,
+    "content_ready_public": 13,
+    "api_noindex_safe": 13,
+    "section_total": 101,
+    "rendered_section_total": 101,
+    "section_parity_pages": 13,
+    "method_boundary_pages": 13,
+    "canonical_ok": 13,
+    "hreflang_ok": 13,
+    "robots_meta_noindex_follow": 13,
+    "api_private_boundary_clean": 13,
+    "html_internal_private_boundary_clean": 13,
+    "faq_api_total": 56,
+    "faq_adapter_total": 0,
+    "faq_visible_total": 0,
+    "faq_jsonld_pages": 0,
+    "internal_link_api_total": 39,
+    "internal_link_adapter_total": 0,
+    "internal_link_panel_pages": 0,
+    "invalid_web_404": 3,
+    "invalid_api_status": 404
+  },
+  "discoverability_surfaces": {
+    "sitemap": {"status": 200, "english_en13_hits": 0},
+    "llms": {"status": 200, "english_en13_hits": 0},
+    "llms_full": {"status": 200, "english_en13_hits": 0}
+  },
+  "private_route_probes": [
+    {"path": "/en/personality/enneagram/results", "status": 404},
+    {"path": "/en/personality/enneagram/type-10", "status": 404},
+    {"path": "/en/personality/enneagram/centers/body", "status": 404},
+    {"api_code": "enneagram/core_type/result", "status": 404}
+  ],
+  "rows": [
+    {"path":"/en/personality/enneagram","entity_type":"hub","code":"enneagram","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":11,"rendered_section_count":11,"faq_count":7,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":9,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":[],"payload_sha256":"4cc7baf262cadf9f7593338673d766740d13cf2290e0db19f3fda3048cb4f0f8"},
+    {"path":"/en/personality/enneagram/type-1","entity_type":"core_type","code":"type-1","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":7,"rendered_section_count":7,"faq_count":4,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":2,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"7f74a457c1bb2e6e8846f6904b353a0599bdc0f6d3b2c08622131c87f26d0261"},
+    {"path":"/en/personality/enneagram/type-2","entity_type":"core_type","code":"type-2","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":7,"rendered_section_count":7,"faq_count":3,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":2,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"970eb704fefca6e2c6b26c81177247579f6059b04687e56a7ff8697260797f94"},
+    {"path":"/en/personality/enneagram/type-3","entity_type":"core_type","code":"type-3","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":7,"rendered_section_count":7,"faq_count":4,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":2,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"7c19ff9de9bb2892621c89ab1a3056112939b4b3c202ca7d57aaab889d09c93a"},
+    {"path":"/en/personality/enneagram/type-4","entity_type":"core_type","code":"type-4","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":7,"rendered_section_count":7,"faq_count":3,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":2,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"e539f3ef98486ce380b5fa3ad5ce3de1a2cc0f961a710bcba9c140aebe5c45a3"},
+    {"path":"/en/personality/enneagram/type-5","entity_type":"core_type","code":"type-5","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":7,"rendered_section_count":7,"faq_count":4,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":2,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"b138cfe719dd4af75e2099c576f50532325e2eb512310320d480514160101ed3"},
+    {"path":"/en/personality/enneagram/type-6","entity_type":"core_type","code":"type-6","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":7,"rendered_section_count":7,"faq_count":3,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":2,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"b199fb99a4043c077ff6b1027fd42015dcf4730ece88e2c7f819ab47b1080a61"},
+    {"path":"/en/personality/enneagram/type-7","entity_type":"core_type","code":"type-7","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":7,"rendered_section_count":7,"faq_count":3,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":2,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"0ea56d951ef974a4b3be170ab7588830bd5c7d479622511c5ab699b919f3cfd8"},
+    {"path":"/en/personality/enneagram/type-8","entity_type":"core_type","code":"type-8","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":7,"rendered_section_count":7,"faq_count":3,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":2,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"fa39cf73f4b08dea13883196e7b494d9337c8c574da854a9d80f61774d29ecac"},
+    {"path":"/en/personality/enneagram/type-9","entity_type":"core_type","code":"type-9","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":7,"rendered_section_count":7,"faq_count":3,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":2,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"8bd9c079c587d39df380e2aaa3196835a09337cfc6b383c76cbef634be010da4"},
+    {"path":"/en/personality/enneagram/centers/gut","entity_type":"center","code":"gut","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":9,"rendered_section_count":9,"faq_count":7,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":4,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"c6ee62b00bc5129714b1e848d0b99f4f6c966d5bfe37fec4775e95d9e2c80dba"},
+    {"path":"/en/personality/enneagram/centers/heart","entity_type":"center","code":"heart","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":9,"rendered_section_count":9,"faq_count":6,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":4,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"60b9d51ff190dc90c2e0b6eaffea237f29f3b5b99d41180afbfefc3d5ad484e9"},
+    {"path":"/en/personality/enneagram/centers/head","entity_type":"center","code":"head","api_status":200,"web_status":200,"launch_state":"content_ready","is_public":true,"robots":"noindex,follow","index_eligible":false,"sitemap_eligible":false,"llms_eligible":false,"schema_runtime_eligible":false,"section_count":9,"rendered_section_count":9,"faq_count":6,"adapter_faq_count":0,"visible_faq_count":0,"faq_jsonld_present":false,"internal_link_count":4,"adapter_internal_link_count":0,"internal_link_panel_present":false,"method_boundary_present":true,"canonical_ok":true,"hreflang_ok":true,"robots_meta_noindex_follow":true,"api_private_boundary_hits":[],"html_internal_private_href_hits":[],"jsonld_types":["BreadcrumbList","ListItem","WebPage"],"payload_sha256":"c4c2392b4daeecf14b7ab49cef24bf0599670473df399c707ab69d0e7fc9b4c3"}
+  ],
+  "blockers": [
+    {
+      "code": "faq_field_shape_not_consumed",
+      "api_shape": "q/a",
+      "frontend_contract_shape": "question/answer",
+      "api_count": 56,
+      "adapter_count": 0,
+      "visible_count": 0,
+      "faq_jsonld_pages": 0
+    },
+    {
+      "code": "internal_link_field_shape_not_consumed",
+      "api_shape": "label/url",
+      "frontend_contract_shape": "label/href",
+      "api_count": 39,
+      "adapter_count": 0,
+      "panel_pages": 0
+    }
+  ],
+  "scope_boundaries": {
+    "cms_writes": false,
+    "production_deploy": false,
+    "manual_deploy": false,
+    "publish": false,
+    "index_release": false,
+    "sitemap_release": false,
+    "llms_release": false,
+    "search_release": false,
+    "private_payloads_read": false
+  }
+}

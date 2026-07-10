@@ -232,13 +232,13 @@
     "depends_on": [
       "ENNEAGRAM-EN13-CMS-DRY-RUN-01"
     ],
-    "status": "pending_external_merge",
-    "commit_sha": "e7c985319ac1b742542c7a7acf5a80b2890372af",
+    "status": "merged",
+    "commit_sha": "c0b4fd065961809ebb4fedeccf4d9bfc2938de53",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2887",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-10T22:45:12+08:00",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "dependency_reconciliation": {
         "status": "pass",
@@ -309,15 +309,15 @@
         "evidence": "PR #2887 completed its first full check set with 15 successful checks and zero failures, cancellations, or pending checks."
       },
       "merge_policy": {
-        "status": "pending_external_merge",
-        "evidence": "Scope, changed files, title, PR body, and checks pass. The manifest explicitly sets auto_merge=false, so Codex must not merge this PR automatically."
+        "status": "pass",
+        "evidence": "The operator explicitly authorized merging PR #2887 after the manifest auto-merge gate stopped Codex. GitHub squash-merged the PR at c0b4fd065961809ebb4fedeccf4d9bfc2938de53."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -385,6 +385,12 @@
         "from": "pr_open",
         "to": "pending_external_merge",
         "note": "All 15 reported GitHub checks passed and PR scope/body/title were revalidated. Manifest merge_policy.auto_merge=false requires an external merge decision, so the train stops before merge and before the dependent runtime-smoke item."
+      },
+      {
+        "at": "2026-07-10T22:45:12+08:00",
+        "from": "pending_external_merge",
+        "to": "merged",
+        "note": "After explicit operator merge authorization, PR #2887 squash-merged at c0b4fd065961809ebb4fedeccf4d9bfc2938de53. origin/main contains the merge, local main was fast-forwarded to origin/main, the clean task worktree was revalidated, and local/remote task branches were deleted."
       }
     ]
   },
@@ -397,21 +403,63 @@
     "depends_on": [
       "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01"
     ],
-    "status": "pending_dependency",
+    "status": "blocked_runtime_contract_mismatch",
     "commit_sha": null,
     "pr_url": null,
-    "failure_reason": null,
+    "failure_reason": "The 13 English pages pass API, content_ready/noindex, rich-section, canonical, hreflang, discoverability-hold, and private-boundary runtime gates. However, the backend returns 56 FAQ items as q/a and 39 internal links as label/url while the frontend adapter accepts question/answer and label/href. All FAQ and CMS internal links are therefore filtered from visible HTML, so publish/cache-warm progression is NO-GO. Repair paths are outside this manifest scope.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "checks": {},
+    "checks": {
+      "dependency_reconciliation": {
+        "status": "pass",
+        "evidence": "PR #2887 is merged at c0b4fd065961809ebb4fedeccf4d9bfc2938de53, origin/main contains the merge, local main equals origin/main, and local/remote task branches are absent."
+      },
+      "production_authority": {
+        "status": "pass",
+        "evidence": "Backend production REVISION is caf9a7c6c9cd6281c824c660dc160a77c054f31a. The latest successful frontend production workflow observed before the scan was run 29100165689 for ba2e91b19af098920ab8fc8e75d06dd8869040e6."
+      },
+      "api_noindex_runtime": {
+        "status": "pass",
+        "evidence": "13/13 API detail requests and the 13-row list request passed. All assets are public content_ready with noindex,follow and index/sitemap/llms/schema-runtime eligibility disabled."
+      },
+      "rich_content_runtime": {
+        "status": "pass",
+        "evidence": "13/13 web routes returned 200; 101 API content sections produced 101 visible section nodes, and method-boundary content rendered on all 13 pages."
+      },
+      "metadata_runtime": {
+        "status": "pass",
+        "evidence": "Canonical, en/zh-CN/x-default hreflang, and noindex/follow HTML robots passed on all 13 pages."
+      },
+      "private_and_discoverability_boundaries": {
+        "status": "pass",
+        "evidence": "API payload and internal FermatMind href scans found zero private-result route/key leaks; unsupported web/API probes returned 404; English EN13 membership remained zero in sitemap.xml, llms.txt, and llms-full.txt."
+      },
+      "faq_internal_link_contract": {
+        "status": "fail",
+        "evidence": "The API returned 56 FAQ rows using q/a and 39 internal-link rows using label/url. The frontend adapter accepts question/answer and label/href, producing zero visible FAQ details, zero FAQPage JSON-LD pages, and zero CMS internal-link panels."
+      }
+    },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": false
     },
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-10T22:47:00+08:00",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "note": "PR #2887 dependency was confirmed merged, origin/main and local main were synchronized, task-branch cleanup completed, and a clean manifest branch was created from latest origin/main."
+      },
+      {
+        "at": "2026-07-10T22:53:43+08:00",
+        "from": "in_progress",
+        "to": "blocked_runtime_contract_mismatch",
+        "note": "Full 13-page production smoke passed core API/noindex/sections/metadata/private/discoverability gates but found that FAQ q/a and internal-link url fields are not consumed by the frontend question/answer and href adapter contract. Publish/cache-warm progression is NO-GO; no CMS write, publish, deploy, sitemap, llms, or search release was attempted."
+      }
+    ]
   },
   "ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01": {
     "id": "ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01",
