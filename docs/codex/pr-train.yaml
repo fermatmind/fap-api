@@ -38178,6 +38178,41 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-EN-DOMAIN-RUNTIME-CLOSEOUT-03
+    repo: fap-api
+    depends_on: [BIG5-EN-DOMAIN-IMPORT-DRYRUN-02]
+    branch: codex/big5-en-domain-runtime-closeout-03
+    title: "BIG5-EN-DOMAIN-RUNTIME-CLOSEOUT-03: verify approved five-page English domain production import"
+    train_scope: big5_en_domain_production_runtime_closeout
+    status: user_authorized
+    scope:
+      - Register the approved post-import runtime closeout after the exact-SHA production CMS import has completed.
+      - Record the bounded importer receipt and five-page API/page, FAQ/internal-link, noindex, sitemap, robots, and llms readback evidence.
+      - Reconcile the already-merged prerequisite dry-run ledger facts required to resolve this dependency.
+    allowed_paths:
+      - generated/big-five-en-domain-runtime-closeout/**
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify CMS assets, database schema, production data, backend runtime code, frontend code, SEO runtime, sitemap, llms, canonical, robots, JSON-LD, permissions, secrets, or deployment configuration.
+      - Trigger any additional production import, production deploy, manual deploy, search submission, or publish/indexability change.
+    validation:
+      - python3 -m json.tool generated/big-five-en-domain-runtime-closeout/production_runtime_closeout_2026-07-10.json >/dev/null
+      - node -e "const fs=require('fs'); const x=JSON.parse(fs.readFileSync('generated/big-five-en-domain-runtime-closeout/production_runtime_closeout_2026-07-10.json')); if (x.outcome!=='pass'||x.production_import.write.valid_count!==5||x.production_import.write.errors_count!==0||!x.api_readback.all_pass||!x.page_readback.all_pass||!x.enumeration_leakage.all_pass) process.exit(1);"
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: ENNEAGRAM-EN13-PUBLISH-GATE-01
     repo: fap-api
     depends_on: [ENNEAGRAM-EN13-CONTENT-PACKAGE-01]
