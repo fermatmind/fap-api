@@ -52,6 +52,7 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
         {--limit=1 : Maximum CMS drafts to publish; first canary requires exactly 1}
         {--subject-ref= : Optional exact package proposal subject_ref to publish}
         {--confirm-package-sha256= : Required package sha256 for execute mode}
+        {--confirm-draft-write-evidence-sha256= : Required draft-write evidence sha256 for execute mode}
         {--confirm-publish= : Exact confirmation phrase for execute mode when not using low-risk auto approval}
         {--auto-approve-low-risk : Execute one low-risk ContentPage canary without an exact publish phrase}
         {--execute : Actually publish one bounded CMS draft}
@@ -96,6 +97,7 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
         }
 
         $packageSha = hash_file('sha256', $packagePath) ?: '';
+        $draftWriteSha = hash_file('sha256', $evidencePath) ?: '';
         $draftIssue = $this->validateDraftWriteEvidence($draftWrite, $packageSha);
         if ($draftIssue !== null) {
             return $this->finish($this->failureSummary($draftIssue, [
@@ -122,6 +124,27 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
         $execute = (bool) $this->option('execute');
         $autoApproveLowRisk = (bool) $this->option('auto-approve-low-risk');
         $plan = $this->publishPlan($proposal, $packageSha);
+        if ((bool) ($plan['publishable'] ?? false)) {
+            $draftRefIssue = $this->validateDraftWriteRef($draftWrite, $proposal, (int) ($plan['revision_id'] ?? 0));
+            if ($draftRefIssue !== null) {
+                $plan = ['publishable' => false, 'issue' => $draftRefIssue];
+            }
+        }
+
+        if ($autoApproveLowRisk && (bool) ($plan['publishable'] ?? false)) {
+            $reviewIssue = $this->reviewProvenanceIssue($package, $proposal, $plan);
+            if ($reviewIssue !== null) {
+                $plan = ['publishable' => false, 'issue' => $reviewIssue];
+            }
+        }
+
+        if (! (bool) ($plan['publishable'] ?? false)) {
+            return $this->finish($this->failureSummary('publish_plan_not_publishable', [
+                'package_sha256' => $packageSha,
+                'draft_write_evidence_sha256' => $draftWriteSha,
+                'plan' => $plan,
+            ]));
+        }
 
         if (! $execute) {
             return $this->finish([
@@ -134,6 +157,7 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
                 'planned_count' => (bool) ($plan['publishable'] ?? false) ? 1 : 0,
                 'max_rows_per_execution' => 1,
                 'package_sha256' => $packageSha,
+                'draft_write_evidence_sha256' => $draftWriteSha,
                 'required_confirmation_phrase' => $requiredPhrase,
                 'auto_approve_low_risk_available' => true,
                 'plan' => $plan,
@@ -150,17 +174,17 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
             ]));
         }
 
+        if ((string) $this->option('confirm-draft-write-evidence-sha256') !== $draftWriteSha) {
+            return $this->finish($this->failureSummary('draft_write_evidence_sha256_confirmation_mismatch', [
+                'package_sha256' => $packageSha,
+                'draft_write_evidence_sha256' => $draftWriteSha,
+            ]));
+        }
+
         if (! $autoApproveLowRisk && (string) $this->option('confirm-publish') !== $requiredPhrase) {
             return $this->finish($this->failureSummary('confirm_publish_phrase_mismatch', [
                 'package_sha256' => $packageSha,
                 'required_confirmation_phrase' => $requiredPhrase,
-            ]));
-        }
-
-        if (! (bool) ($plan['publishable'] ?? false)) {
-            return $this->finish($this->failureSummary('publish_plan_not_publishable', [
-                'package_sha256' => $packageSha,
-                'plan' => $plan,
             ]));
         }
 
@@ -174,6 +198,7 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
             'execute' => true,
             'approval_mode' => $autoApproveLowRisk ? 'low_risk_auto_approved' : 'exact_human_confirmation',
             'package_sha256' => $packageSha,
+            'draft_write_evidence_sha256' => $draftWriteSha,
             'writes_attempted' => true,
             'writes_committed' => (bool) ($result['writes_committed'] ?? false),
             'published_count' => (int) ($result['published_count'] ?? 0),
@@ -340,6 +365,13 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
         $alreadyPublished = $page->published_revision_id !== null
             && (int) $page->published_revision_id === (int) $revision->id
             && (string) $revision->revision_status === CmsTranslationRevision::STATUS_PUBLISHED;
+        $gateProvenance = data_get($revision->payload_json, 'seo_agent.content_page_gate_provenance');
+        if (! $alreadyPublished && (! is_array($gateProvenance) || $gateProvenance !== $page->seoAgentPublishGateProvenance())) {
+            return [
+                'publishable' => false,
+                'issue' => 'content_page_gate_provenance_mismatch',
+            ];
+        }
 
         return [
             'publishable' => true,
@@ -351,6 +383,7 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
             'target_fields' => $this->targetFields($proposal),
             'rollback_snapshot_available' => true,
             'claim_gate' => 'pass_after_forbidden_claim_scan',
+            'review_provenance' => (array) data_get($revision->payload_json, 'seo_agent.review_provenance', []),
         ];
     }
 
@@ -374,6 +407,10 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
                 'affected_refs' => [$this->affectedRef('skipped_existing', $proposal, (int) $revision->id)],
                 'rollback_evidence' => $this->rollbackEvidence($page, $revision),
             ];
+        }
+
+        if ((array) data_get($revision->payload_json, 'seo_agent.content_page_gate_provenance', []) !== $page->seoAgentPublishGateProvenance()) {
+            throw new RuntimeException('content_page_gate_provenance_mismatch');
         }
 
         $rollback = $this->rollbackEvidence($page, $revision);
@@ -465,13 +502,15 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
             $query->lockForUpdate();
         }
 
-        $revision = $query->get()->first(function (CmsTranslationRevision $revision) use ($packageSha, $targetFields): bool {
+        $subjectRef = (string) ($proposal['subject_ref'] ?? '');
+        $revision = $query->get()->first(function (CmsTranslationRevision $revision) use ($packageSha, $subjectRef, $targetFields): bool {
             $payload = is_array($revision->payload_json) ? $revision->payload_json : [];
             $fields = array_values(array_map('strval', (array) data_get($payload, 'seo_agent.target_fields', [])));
             sort($fields);
 
             return data_get($payload, 'seo_agent.task') === 'SEO-AGENT-CONTROLLED-CMS-DRAFT-WRITER-01'
                 && data_get($payload, 'seo_agent.package_sha256') === $packageSha
+                && data_get($payload, 'seo_agent.subject_ref') === $subjectRef
                 && $fields === $targetFields;
         });
 
@@ -483,6 +522,72 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
         }
 
         return $revision;
+    }
+
+    /**
+     * @param  array<string, mixed>  $draftWrite
+     * @param  array<string, mixed>  $proposal
+     */
+    private function validateDraftWriteRef(array $draftWrite, array $proposal, int $revisionId): ?string
+    {
+        foreach ((array) ($draftWrite['affected_refs'] ?? []) as $ref) {
+            if (is_array($ref)
+                && (string) ($ref['target_model'] ?? '') === 'content_page'
+                && (string) ($ref['subject_ref'] ?? '') === (string) ($proposal['subject_ref'] ?? '')
+                && (int) ($ref['revision_id'] ?? 0) === $revisionId
+                && in_array((string) ($ref['status'] ?? ''), ['created', 'skipped_existing'], true)) {
+                return null;
+            }
+        }
+
+        return 'draft_write_subject_revision_evidence_mismatch';
+    }
+
+    /**
+     * @param  array<string, mixed>  $package
+     * @param  array<string, mixed>  $proposal
+     * @param  array<string, mixed>  $plan
+     */
+    private function reviewProvenanceIssue(array $package, array $proposal, array $plan): ?string
+    {
+        $reviewRef = data_get($package, 'l5a_canary.candidate_review');
+        if (! is_array($reviewRef) || ($reviewRef['schema_version'] ?? null) !== 'seo-agent-l5a-candidate-review.v1') {
+            return 'candidate_review_provenance_missing';
+        }
+
+        $reviewPath = $this->readablePath((string) ($reviewRef['path'] ?? ''));
+        $reviewSha = (string) ($reviewRef['sha256'] ?? '');
+        if ($reviewPath === null || $reviewSha === '' || ! hash_equals($reviewSha, hash_file('sha256', $reviewPath) ?: '')) {
+            return 'candidate_review_provenance_hash_mismatch';
+        }
+
+        $review = json_decode((string) file_get_contents($reviewPath), true);
+        $selectedCandidates = array_values(array_filter(
+            (array) (is_array($review) ? ($review['selected_candidates'] ?? []) : []),
+            static fn ($candidate): bool => is_array($candidate)
+        ));
+        if ($selectedCandidates === [] && is_array($review) && is_array($review['selected_candidate'] ?? null)) {
+            $selectedCandidates[] = $review['selected_candidate'];
+        }
+        $selected = collect($selectedCandidates)->first(fn (array $candidate): bool => (string) ($candidate['subject_ref'] ?? '') === (string) ($proposal['subject_ref'] ?? '')
+            && (string) ($candidate['safe_path'] ?? '') === (string) ($proposal['safe_path'] ?? '')
+        );
+        if (! is_array($selected)
+            || ! is_array($review)
+            || ($review['schema_version'] ?? null) !== 'seo-agent-l5a-candidate-review.v1'
+            || ($review['status'] ?? null) !== 'success') {
+            return 'candidate_review_subject_mismatch';
+        }
+
+        $revisionReview = (array) ($plan['review_provenance'] ?? []);
+        if (($revisionReview['candidate_review_sha256'] ?? null) !== $reviewSha
+            || ($revisionReview['source_package_sha256'] ?? null) !== data_get($review, 'input_artifacts.cms_draft_package_dry_run.sha256')
+            || ($revisionReview['selected_subject_ref'] ?? null) !== (string) ($proposal['subject_ref'] ?? '')
+            || ($revisionReview['selected_safe_path'] ?? null) !== (string) ($proposal['safe_path'] ?? '')) {
+            return 'draft_revision_review_provenance_mismatch';
+        }
+
+        return null;
     }
 
     private function idFromSubjectRef(string $subjectRef, string $expectedType): int

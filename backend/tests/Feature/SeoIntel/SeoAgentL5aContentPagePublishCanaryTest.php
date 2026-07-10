@@ -32,7 +32,6 @@ final class SeoAgentL5aContentPagePublishCanaryTest extends TestCase
             '--json' => true,
         ]);
         $summary = json_decode(trim(Artisan::output()), true);
-
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertSame('planned', $summary['status'] ?? null);
         $this->assertTrue((bool) ($summary['dry_run'] ?? false));
@@ -73,7 +72,6 @@ final class SeoAgentL5aContentPagePublishCanaryTest extends TestCase
             '--json' => true,
         ]);
         $summary = json_decode(trim(Artisan::output()), true);
-
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertSame('success', $summary['status'] ?? null);
         $this->assertFalse((bool) ($summary['dry_run'] ?? true));
@@ -224,7 +222,9 @@ final class SeoAgentL5aContentPagePublishCanaryTest extends TestCase
             'human_approval_required' => true,
             'execution_permission' => false,
         ];
-        $package = [
+        $dir = storage_path('framework/testing/l5a-contentpage-publish-'.Str::uuid()->toString());
+        File::ensureDirectoryExists($dir);
+        $sourcePackage = [
             'schema_version' => 'seo-agent-cms-draft-package-dry-run.v1',
             'dry_run' => true,
             'cms_write_allowed' => false,
@@ -233,15 +233,48 @@ final class SeoAgentL5aContentPagePublishCanaryTest extends TestCase
             'proposal_items' => [$proposal],
             'claim_gate_required' => true,
             'human_approval_required' => true,
+        ];
+        $sourcePackagePath = $dir.'/source-package.json';
+        File::put($sourcePackagePath, json_encode($sourcePackage, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n");
+        $sourcePackageSha = hash_file('sha256', $sourcePackagePath) ?: '';
+        $candidateReview = [
+            'schema_version' => 'seo-agent-l5a-candidate-review.v1',
+            'status' => 'success',
+            'selected_count' => 1,
+            'selected_candidate' => $candidate,
+            'input_artifacts' => [
+                'cms_draft_package_dry_run' => [
+                    'sha256' => $sourcePackageSha,
+                ],
+            ],
+        ];
+        $candidateReviewPath = $dir.'/candidate-review.json';
+        File::put($candidateReviewPath, json_encode($candidateReview, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n");
+        $candidateReviewSha = hash_file('sha256', $candidateReviewPath) ?: '';
+        $proposal['review_provenance'] = [
+            'candidate_review_sha256' => $candidateReviewSha,
+            'source_package_sha256' => $sourcePackageSha,
+            'selected_subject_ref' => $candidate['subject_ref'],
+            'selected_safe_path' => $candidate['safe_path'],
+        ];
+        $package = [
+            ...$sourcePackage,
+            'proposal_items' => [$proposal],
             'l5a_canary' => [
                 'task' => 'SEO-AGENT-L5A-CMS-DRAFT-WRITE-CANARY1-01',
+                'candidate_review' => [
+                    'path' => $candidateReviewPath,
+                    'size' => filesize($candidateReviewPath) ?: 0,
+                    'sha256' => $candidateReviewSha,
+                    'schema_version' => 'seo-agent-l5a-candidate-review.v1',
+                ],
+                'source_candidate_review_sha256' => $candidateReviewSha,
+                'source_package_sha256' => $sourcePackageSha,
                 'selected_subject_ref' => $candidate['subject_ref'],
                 'selected_safe_path' => $candidate['safe_path'],
                 'source_candidate_review_schema' => 'seo-agent-l5a-candidate-review.v1',
             ],
         ];
-        $dir = storage_path('framework/testing/l5a-contentpage-publish-'.Str::uuid()->toString());
-        File::ensureDirectoryExists($dir);
         $packagePath = $dir.'/filtered-package.json';
         File::put($packagePath, json_encode($package, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n");
         $packageSha = hash_file('sha256', $packagePath) ?: '';

@@ -35497,10 +35497,17 @@ prs:
       - backend/app/Console/Commands/SeoAgentCmsPublishCanaryCommand.php
       - backend/app/Console/Commands/SeoAgentArticleCmsPublishCanaryCommand.php
       - backend/app/Console/Commands/SeoAgentL5aCmsDraftWriteCanaryCommand.php
+      - backend/app/Console/Commands/SeoAgentL5aContentPagePublishCanaryCommand.php
       - backend/app/Console/Commands/SeoAgentCmsDraftWriteCommand.php
       - backend/app/Console/Commands/SeoAgentCmsPublishAutoCanaryCommand.php
       - backend/app/Services/SeoAgent/AutoApprovalPolicy.php
       - backend/app/Models/ContentPage.php
+      - backend/tests/Feature/SeoIntel/SeoAgentArticleCmsPublishCanaryTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentCmsPublishAutoCanaryTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentCmsPublishCanaryTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentL5aCmsDraftWriteCanaryTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentL5aContentPagePublishCanaryTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

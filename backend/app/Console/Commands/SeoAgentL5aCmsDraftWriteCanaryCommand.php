@@ -253,13 +253,13 @@ final class SeoAgentL5aCmsDraftWriteCanaryCommand extends Command
     private function sourcePackagePath(array $candidateReview): ?string
     {
         $path = trim((string) data_get($candidateReview, 'input_artifacts.cms_draft_package_dry_run.path'));
-        if ($path !== '' && ! str_contains($path, "\0") && is_file($path) && is_readable($path)) {
-            return $path;
-        }
-
         $sha = strtolower(trim((string) data_get($candidateReview, 'input_artifacts.cms_draft_package_dry_run.sha256')));
         if (preg_match('/\A[a-f0-9]{64}\z/', $sha) !== 1) {
             return null;
+        }
+
+        if ($path !== '' && ! str_contains($path, "\0") && is_file($path) && is_readable($path)) {
+            return hash_equals($sha, hash_file('sha256', $path) ?: '') ? $path : null;
         }
 
         return $this->sourcePackagePathBySha($sha);
@@ -326,15 +326,13 @@ final class SeoAgentL5aCmsDraftWriteCanaryCommand extends Command
         ));
 
         foreach ($items as $item) {
-            if ((string) ($item['source_id'] ?? '') !== ''
-                && (string) ($item['source_id'] ?? '') === (string) ($candidate['source_id'] ?? '')) {
-                return $item;
-            }
-        }
-
-        foreach ($items as $item) {
-            if ((string) ($item['subject_ref'] ?? '') === (string) ($candidate['subject_ref'] ?? '')
-                && (string) ($item['safe_path'] ?? '') === (string) ($candidate['safe_path'] ?? '')) {
+            $candidateSourceId = (string) ($candidate['source_id'] ?? '');
+            if ($candidateSourceId !== ''
+                && (string) ($item['source_id'] ?? '') === $candidateSourceId
+                && (string) ($item['subject_ref'] ?? '') === (string) ($candidate['subject_ref'] ?? '')
+                && (string) ($item['safe_path'] ?? '') === (string) ($candidate['safe_path'] ?? '')
+                && (string) ($item['target_model'] ?? $item['subject_type'] ?? '') === 'content_page'
+                && $this->normalizedFields($item) === $this->normalizedFields($candidate)) {
                 return $item;
             }
         }
@@ -351,13 +349,24 @@ final class SeoAgentL5aCmsDraftWriteCanaryCommand extends Command
     private function filteredPackage(array $sourcePackage, array $proposal, string $candidateReviewPath, array $candidate): array
     {
         $package = $sourcePackage;
+        $reviewSha = hash_file('sha256', $candidateReviewPath) ?: '';
+        $sourcePackageSha = (string) data_get($this->readJson($candidateReviewPath), 'input_artifacts.cms_draft_package_dry_run.sha256');
+        $reviewProvenance = [
+            'candidate_review_sha256' => $reviewSha,
+            'source_package_sha256' => $sourcePackageSha,
+            'selected_subject_ref' => (string) ($candidate['subject_ref'] ?? ''),
+            'selected_safe_path' => (string) ($candidate['safe_path'] ?? ''),
+        ];
+        $proposal['review_provenance'] = $reviewProvenance;
         $package['draft_brief_count'] = 1;
         $package['draft_briefs'] = [$proposal];
         $package['proposal_count'] = 1;
         $package['proposal_items'] = [$proposal];
         $package['l5a_canary'] = [
             'task' => 'SEO-AGENT-L5A-CMS-DRAFT-WRITE-CANARY1-01',
-            'source_candidate_review_sha256' => hash_file('sha256', $candidateReviewPath) ?: '',
+            'candidate_review' => $this->artifactRef($candidateReviewPath, self::CANDIDATE_REVIEW_SCHEMA_VERSION),
+            'source_candidate_review_sha256' => $reviewSha,
+            'source_package_sha256' => $sourcePackageSha,
             'selected_subject_ref' => (string) ($candidate['subject_ref'] ?? ''),
             'selected_safe_path' => (string) ($candidate['safe_path'] ?? ''),
             'max_rows_per_execution' => 1,
@@ -367,6 +376,18 @@ final class SeoAgentL5aCmsDraftWriteCanaryCommand extends Command
         ];
 
         return $package;
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @return list<string>
+     */
+    private function normalizedFields(array $candidate): array
+    {
+        $fields = array_values(array_unique(array_map('strval', (array) ($candidate['target_fields'] ?? []))));
+        sort($fields);
+
+        return $fields;
     }
 
     /**

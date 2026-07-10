@@ -408,6 +408,7 @@ final class SeoAgentL5aContentPagePublishCanaryCommand extends Command
             'writes_committed' => (int) ($draftWrite['rows_created'] ?? 0) === 1,
             'rows_created' => (int) ($draftWrite['rows_created'] ?? 0),
             'rows_skipped_existing' => (int) ($draftWrite['rows_skipped_existing'] ?? 0),
+            'affected_refs' => array_values((array) ($draftWrite['draft_refs'] ?? [])),
             'negative_guarantees' => [
                 'cms_publish' => false,
                 'search_channel_submit' => false,
@@ -433,6 +434,7 @@ final class SeoAgentL5aContentPagePublishCanaryCommand extends Command
         ];
         if ($execute) {
             $input['--confirm-package-sha256'] = $packageSha;
+            $input['--confirm-draft-write-evidence-sha256'] = hash_file('sha256', $delegatedEvidencePath) ?: '';
             $input['--auto-approve-low-risk'] = true;
             $input['--execute'] = true;
         }

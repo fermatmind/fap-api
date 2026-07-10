@@ -42824,6 +42824,19 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "local_validation": {
+        "commands": [
+          "cd backend && php artisan test tests/Feature/SeoIntel/SeoAgentControlledCmsDraftWriterTest.php tests/Feature/SeoIntel/SeoAgentCmsPublishCanaryTest.php tests/Feature/SeoIntel/SeoAgentCmsPublishAutoCanaryTest.php tests/Feature/SeoIntel/SeoAgentL5aCmsDraftWriteCanaryTest.php tests/Feature/SeoIntel/SeoAgentL5aContentPagePublishCanaryTest.php tests/Feature/SeoIntel/SeoAgentArticleCmsPublishCanaryTest.php --no-ansi",
+          "cd backend && php artisan route:list --path=api --except-vendor --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-16.sqlite php artisan migrate --force --no-interaction",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "ruby -rdate -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), permitted_classes: [Date, Time], aliases: true)'",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --check"
+        ],
+        "evidence": "Focused SEO/CMS canary tests passed: 32 tests, 409 assertions. Route listing showed 218 routes; isolated SQLite migration and ci_verify_mbti passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42839,6 +42852,11 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-16; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T14:32:51+08:00",
+        "note": "Bound L5-A review evidence to source package and selected subject, bound publish execution to exact draft evidence and revision, and revalidated ContentPage gate provenance before publish. No CMS write, production import, deploy, or external submission was performed.",
+        "status": "implementation_validated"
       }
     ],
     "failure_reason": null,
@@ -42850,7 +42868,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "implementation_validated",
     "title": "SECURITY-169-API-16: bind SEO/CMS canaries to reviewed evidence",
     "train_scope": "security_169_fap_api_audit"
   },

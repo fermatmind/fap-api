@@ -185,6 +185,29 @@ final class SeoAgentArticleCmsPublishCanaryTest extends TestCase
     }
 
     #[Test]
+    public function dry_run_rejects_publish_gate_phrase_not_bound_to_write_evidence(): void
+    {
+        $fixture = $this->fixture([
+            'approval_phrase' => 'I approve a different evidence artifact.',
+        ]);
+
+        $exitCode = Artisan::call('seo-agent:article-cms-publish-canary', [
+            '--package' => $fixture['package_path'],
+            '--write-evidence' => $fixture['write_evidence_path'],
+            '--publish-gate-evidence' => $fixture['gate_evidence_path'],
+            '--target' => $fixture['target'],
+            '--revision-id' => $fixture['draft_revision_id'],
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('publish_gate_approval_phrase_evidence_mismatch', $summary['issues'] ?? []);
+        $this->assertFalse((bool) ($summary['writes_committed'] ?? true));
+    }
+
+    #[Test]
     public function generated_contract_documents_article_publish_boundaries(): void
     {
         $contract = $this->readJson(base_path('docs/seo/generated/seo-agent-article-cms-publish-canary.v1.json'));
