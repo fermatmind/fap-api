@@ -403,9 +403,9 @@
     "depends_on": [
       "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01"
     ],
-    "status": "blocked_runtime_contract_mismatch",
+    "status": "blocked_runtime_contract_mismatch_pr_open",
     "commit_sha": "4de28a365c70b50b732292a3414708f891105ffe",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2890",
     "failure_reason": "The 13 English pages pass API, content_ready/noindex, rich-section, canonical, hreflang, discoverability-hold, and private-boundary runtime gates. However, the backend returns 56 FAQ items as q/a and 39 internal links as label/url while the frontend adapter accepts question/answer and label/href. All FAQ and CMS internal links are therefore filtered from visible HTML, so publish/cache-warm progression is NO-GO. Repair paths are outside this manifest scope.",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -458,6 +458,12 @@
         "from": "in_progress",
         "to": "blocked_runtime_contract_mismatch",
         "note": "Full 13-page production smoke passed core API/noindex/sections/metadata/private/discoverability gates but found that FAQ q/a and internal-link url fields are not consumed by the frontend question/answer and href adapter contract. Publish/cache-warm progression is NO-GO; no CMS write, publish, deploy, sitemap, llms, or search release was attempted."
+      },
+      {
+        "at": "2026-07-10T22:59:00+08:00",
+        "from": "blocked_runtime_contract_mismatch",
+        "to": "blocked_runtime_contract_mismatch_pr_open",
+        "note": "Opened PR #2890 with only generated runtime evidence and train state. The PR records a NO-GO verification result and does not authorize or implement the out-of-scope contract repair."
       }
     ]
   },
