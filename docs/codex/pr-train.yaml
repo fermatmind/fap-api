@@ -38803,3 +38803,40 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01
+    repo: fap-api
+    depends_on: [BIG5-ZH-FACET-IMPORT-DRYRUN-01]
+    branch: codex/big5-zh-facet-production-importer-ops-01
+    title: "BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01: add SHA-bound 31-page production CMS importer workflow"
+    train_scope: big5_zh_facet_production_importer_ops
+    status: planned
+    scope:
+      - Add one manually dispatched production-environment workflow dedicated to the merged 31-page Chinese Facet seed.
+      - Require exact deployed release SHA, exact seed SHA-256, exact operator approval phrase, 31 unique rows, body_md, content_ready, and noindex gates.
+      - Always run the generic importer dry-run before an explicitly selected write mode and upload a bounded receipt.
+    allowed_paths:
+      - .github/workflows/big-five-zh-facet-production-cms-import.yml
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Dispatch the workflow, write CMS or production data, deploy, modify secrets, change backend runtime/API code, or alter the combined seed.
+      - Change indexability, canonical, robots, sitemap, llms, JSON-LD, search submission, or frontend code.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/big-five-zh-facet-production-cms-import.yml'); puts 'workflow yaml ok'"
+      - rg -n "expected_release_sha|expected_seed_sha256|production|assets_found=31|valid_count=31|noindex,follow|body_md|--write" .github/workflows/big-five-zh-facet-production-cms-import.yml
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'manifest yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
