@@ -560,6 +560,7 @@ Route::prefix('v0.5')->group(function () {
             \App\Http\Middleware\LimitApiPublicPayloadSize::class,
             'throttle:api_track',
         ])
+        ->defaults('seo_privacy_ingest', true)
         ->name('api.v0_5.seo.attribution_events.store');
     Route::get('/foundation/giving-records/months', [DailyGivingRecordController::class, 'months']);
     Route::get('/foundation/giving-records/months/{yearMonth}', [DailyGivingRecordController::class, 'monthRecords']);

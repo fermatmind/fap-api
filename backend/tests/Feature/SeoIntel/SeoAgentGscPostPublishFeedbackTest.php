@@ -56,7 +56,7 @@ final class SeoAgentGscPostPublishFeedbackTest extends TestCase
         $publishEvidence = $this->writePublishEvidence($artifactDir, $page);
         $countsBefore = $this->rowCounts();
 
-        $output = new BufferedOutput();
+        $output = new BufferedOutput;
         $exitCode = Artisan::call('seo-agent:gsc-post-publish-feedback', [
             '--publish-evidence' => $publishEvidence,
             '--window' => 7,
@@ -97,7 +97,7 @@ final class SeoAgentGscPostPublishFeedbackTest extends TestCase
         $artifactDir = $this->artifactDir();
         $publishEvidence = $this->writePublishEvidence($artifactDir, $page);
 
-        $output = new BufferedOutput();
+        $output = new BufferedOutput;
         $exitCode = Artisan::call('seo-agent:gsc-post-publish-feedback', [
             '--publish-evidence' => $publishEvidence,
             '--window' => 14,
@@ -112,6 +112,33 @@ final class SeoAgentGscPostPublishFeedbackTest extends TestCase
         $this->assertContains('no_gsc_rows_for_window', data_get($artifact, 'targets.0.source_gate.reasons'));
         $this->assertSame('insufficient_data', data_get($artifact, 'targets.0.classification'));
         $this->assertSame(1, data_get($artifact, 'classification_counts.insufficient_data'));
+    }
+
+    #[Test]
+    public function command_does_not_fall_back_to_another_url_truth_row_for_forged_publish_evidence(): void
+    {
+        $page = $this->createPublishedContentPage();
+        $this->seedUrlTruth($page);
+        $this->seedGscRows($page);
+        $artifactDir = $this->artifactDir();
+        $publishEvidence = $this->writePublishEvidence($artifactDir, $page, '/en/forged-tenant-page');
+
+        $exitCode = Artisan::call('seo-agent:gsc-post-publish-feedback', [
+            '--publish-evidence' => $publishEvidence,
+            '--window' => 7,
+            '--artifact-dir' => $artifactDir,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $artifact = $this->readJson($this->latestArtifact($artifactDir, 'seo-agent-gsc-post-publish-feedback-*.json'));
+
+        $this->assertSame('blocked', data_get($artifact, 'targets.0.source_gate.status'));
+        $this->assertSame(['publish_evidence_safe_path_mismatch'], data_get($artifact, 'targets.0.source_gate.reasons'));
+        $this->assertSame('insufficient_data', data_get($artifact, 'targets.0.classification'));
+        $this->assertNull(data_get($artifact, 'targets.0.canonical_url_hash'));
+        $this->assertNull(data_get($artifact, 'targets.0.before'));
+        $this->assertNull(data_get($artifact, 'targets.0.after'));
     }
 
     #[Test]
@@ -204,7 +231,7 @@ final class SeoAgentGscPostPublishFeedbackTest extends TestCase
         ]);
     }
 
-    private function writePublishEvidence(string $dir, ContentPage $page): string
+    private function writePublishEvidence(string $dir, ContentPage $page, ?string $safePath = null): string
     {
         $path = rtrim($dir, '/').'/publish-evidence.json';
         $payload = [
@@ -221,7 +248,7 @@ final class SeoAgentGscPostPublishFeedbackTest extends TestCase
                 'target_model' => 'content_page',
                 'subject_ref' => 'content_page:'.$page->id.':en',
                 'revision_id' => 1001,
-                'safe_path' => '/en/feedback-page',
+                'safe_path' => $safePath ?? '/en/feedback-page',
             ]],
             'rollback_evidence' => [
                 'available' => true,

@@ -28,7 +28,11 @@ final class SeoIntelGscReadModelImportCanaryCommand extends Command
         }
 
         try {
-            $decoded = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+            $raw = file_get_contents($path);
+            if (! is_string($raw)) {
+                return $this->finish($this->failureSummary('artifact_unreadable'));
+            }
+            $decoded = json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
         } catch (Throwable) {
             return $this->finish($this->failureSummary('artifact_json_invalid'));
         }
@@ -37,7 +41,7 @@ final class SeoIntelGscReadModelImportCanaryCommand extends Command
             return $this->finish($this->failureSummary('artifact_must_be_object'));
         }
 
-        $sha256 = (string) hash_file('sha256', $path);
+        $sha256 = hash('sha256', $raw);
         $limit = $this->limit();
         if ($limit === null) {
             return $this->finish([

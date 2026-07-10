@@ -158,9 +158,12 @@ final class SeoAgentGscOpportunityAutoDraftCommand extends Command
                 'seo_urls.canonical_url',
                 'seo_urls.page_entity_type',
                 'seo_urls.entity_id_or_slug',
+                'seo_urls.source_authority',
                 'seo_urls.indexability_state',
+                'seo_urls.is_private_flow',
             ])
             ->where('seo_gsc_daily.source_engine', 'google')
+            ->whereColumn('seo_gsc_daily.locale', 'seo_urls.locale')
             ->orderByDesc('seo_gsc_daily.report_date')
             ->limit(500)
             ->get()
@@ -181,7 +184,9 @@ final class SeoAgentGscOpportunityAutoDraftCommand extends Command
                 'safe_path' => $this->safePath(is_string($row->canonical_url ?? null) ? $row->canonical_url : null),
                 'page_entity_type' => is_string($row->page_entity_type ?? null) ? $row->page_entity_type : '',
                 'entity_id_or_slug' => is_string($row->entity_id_or_slug ?? null) ? $row->entity_id_or_slug : '',
+                'source_authority' => is_string($row->source_authority ?? null) ? $row->source_authority : '',
                 'indexability_state' => is_string($row->indexability_state ?? null) ? $row->indexability_state : '',
+                'is_private_flow' => (bool) ($row->is_private_flow ?? true),
             ])
             ->all();
     }
@@ -238,7 +243,14 @@ final class SeoAgentGscOpportunityAutoDraftCommand extends Command
             && ! (bool) ($row['is_brand_query'] ?? false)
             && ($row['query_type'] ?? 'unknown') === 'non_brand'
             && ($row['safe_path'] ?? null) !== null
-            && ($row['indexability_state'] ?? '') === 'indexable';
+            && ($row['indexability_state'] ?? '') === 'indexable'
+            && ! (bool) ($row['is_private_flow'] ?? true)
+            && in_array((string) ($row['source_authority'] ?? ''), [
+                'backend_cms',
+                'backend_cms_article',
+                'cms_article',
+                'cms_content_page',
+            ], true);
     }
 
     /**
@@ -255,45 +267,39 @@ final class SeoAgentGscOpportunityAutoDraftCommand extends Command
         $entityIdOrSlug = (string) ($row['entity_id_or_slug'] ?? '');
         $locale = (string) ($row['locale'] ?? '');
         $safePath = (string) ($row['safe_path'] ?? '');
-        $id = null;
-
-        if ($entityIdOrSlug !== '' && ctype_digit($entityIdOrSlug)) {
-            $id = (int) $entityIdOrSlug;
-        } elseif ($entityType === 'article') {
-            $id = Article::query()
-                ->withoutGlobalScopes()
-                ->where('slug', $entityIdOrSlug !== '' ? $entityIdOrSlug : basename(trim($safePath, '/')))
-                ->when($locale !== '', fn ($query) => $query->where('locale', $locale))
-                ->value('id');
-        } else {
-            $id = ContentPage::query()
-                ->withoutGlobalScopes()
-                ->where(static function ($query) use ($entityIdOrSlug, $safePath): void {
-                    if ($entityIdOrSlug !== '') {
-                        $query->where('slug', $entityIdOrSlug);
-                    }
-                    if ($safePath !== '') {
-                        $query->orWhere('path', $safePath);
-                    }
-                })
-                ->when($locale !== '', fn ($query) => $query->where('locale', $locale))
-                ->value('id');
-        }
-
-        if (! is_numeric($id) || (int) $id < 1) {
+        if ($locale === '' || $safePath === '') {
             return null;
         }
 
-        $exists = $entityType === 'article'
-            ? Article::query()->withoutGlobalScopes()->whereKey((int) $id)->exists()
-            : ContentPage::query()->withoutGlobalScopes()->whereKey((int) $id)->exists();
-        if (! $exists) {
+        $query = $entityType === 'article'
+            ? Article::query()->withoutGlobalScopes()
+            : ContentPage::query()->withoutGlobalScopes();
+        $target = $query
+            ->when(
+                ctype_digit($entityIdOrSlug),
+                fn ($builder) => $builder->whereKey((int) $entityIdOrSlug),
+                fn ($builder) => $builder->where('slug', $entityIdOrSlug !== '' ? $entityIdOrSlug : basename($safePath)),
+            )
+            ->where('org_id', 0)
+            ->where('locale', $locale)
+            ->where('status', 'published')
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->first();
+        if (! $target instanceof Article && ! $target instanceof ContentPage) {
+            return null;
+        }
+
+        $authoritativePath = $target instanceof ContentPage
+            ? $this->safePath((string) ($target->canonical_path ?: $target->path))
+            : $this->safePath('/'.(str_starts_with(strtolower($locale), 'zh') ? 'zh' : 'en').'/articles/'.rawurlencode((string) $target->slug));
+        if ($authoritativePath === null || ! hash_equals($authoritativePath, $safePath)) {
             return null;
         }
 
         return [
             'type' => $entityType,
-            'ref' => $entityType.':'.(int) $id.':'.($locale !== '' ? $locale : 'unknown'),
+            'ref' => $entityType.':'.(int) $target->id.':'.$locale,
         ];
     }
 
@@ -582,14 +588,31 @@ final class SeoAgentGscOpportunityAutoDraftCommand extends Command
             return null;
         }
 
-        $path = parse_url($canonicalUrl, PHP_URL_PATH);
-        $query = parse_url($canonicalUrl, PHP_URL_QUERY);
+        $parts = parse_url($canonicalUrl);
+        if ($parts === false) {
+            return null;
+        }
+
+        $path = $parts['path'] ?? null;
 
         if (! is_string($path) || $path === '') {
             return '/';
         }
 
-        return is_string($query) && $query !== '' ? $path.'?'.$query : $path;
+        $path = preg_replace('#/+#', '/', '/'.ltrim($path, '/')) ?: '/';
+        $decodedPath = $path;
+        for ($attempt = 0; $attempt < 3; $attempt++) {
+            $decoded = rawurldecode($decodedPath);
+            if ($decoded === $decodedPath) {
+                break;
+            }
+            $decodedPath = $decoded;
+        }
+        if (preg_match('#(^|/)(result|results|order|orders|share|shares|pay|payment|history)(/|$)#i', $decodedPath) === 1) {
+            return null;
+        }
+
+        return $path;
     }
 
     /**

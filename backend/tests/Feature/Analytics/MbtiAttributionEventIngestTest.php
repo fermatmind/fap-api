@@ -210,6 +210,36 @@ final class MbtiAttributionEventIngestTest extends TestCase
         $this->assertSame(0, DB::table('events')->count());
     }
 
+    public function test_seo_attribution_route_forces_privacy_sanitization_for_general_event_names(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ingest_test_token',
+        ])->postJson('/api/v0.5/seo/attribution/events', [
+            'eventName' => 'landing_view',
+            'path' => '/en/tests/mbti?session=private',
+            'payload' => [
+                'url' => 'https://fermatmind.com/en/tests/mbti?gclid=private',
+                'landing_path' => '/en/tests/mbti?utm_term=private',
+                'session_id' => 'seo_sess_1234567890abcdef',
+            ],
+        ]);
+
+        $response->assertStatus(202);
+        $row = DB::table('events')->where('event_code', 'landing_view')->first();
+        $this->assertNotNull($row);
+        $meta = is_array($row->meta_json ?? null)
+            ? $row->meta_json
+            : (json_decode((string) ($row->meta_json ?? '{}'), true) ?: []);
+        $encoded = json_encode($meta, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+
+        $this->assertSame('/en/tests/mbti', $meta['path'] ?? null);
+        $this->assertSame('https://fermatmind.com/en/tests/mbti', data_get($meta, 'raw_payload.url'));
+        $this->assertStringNotContainsString('private', $encoded);
+        $this->assertStringNotContainsString('?', $encoded);
+    }
+
     public function test_ingest_endpoint_accepts_purchase_payload_with_non_pii_order_identifier(): void
     {
         config()->set('fap.events.ingest_token', 'ingest_test_token');

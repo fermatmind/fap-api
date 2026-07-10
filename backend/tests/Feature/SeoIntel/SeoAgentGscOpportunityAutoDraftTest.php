@@ -126,6 +126,33 @@ final class SeoAgentGscOpportunityAutoDraftTest extends TestCase
     }
 
     #[Test]
+    public function command_strips_query_strings_from_every_auto_draft_artifact(): void
+    {
+        $page = $this->createPublishedContentPage();
+        $this->seedGscRows($page, canonicalUrl: 'https://fermatmind.com/en/gsc-opportunity-page?token=private');
+        $artifactDir = $this->artifactDir();
+
+        $exitCode = Artisan::call('seo-agent:gsc-opportunity-auto-draft', [
+            '--limit' => 10,
+            '--artifact-dir' => $artifactDir,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $paths = File::glob($artifactDir.'/*.json') ?: [];
+        $this->assertNotEmpty($paths);
+        foreach ($paths as $path) {
+            $encoded = (string) file_get_contents($path);
+            $this->assertStringNotContainsString('token=private', $encoded, $path);
+            $this->assertStringNotContainsString('/en/gsc-opportunity-page?', $encoded, $path);
+        }
+
+        $evidence = $this->readJson($this->latestArtifact($artifactDir, 'seo-agent-gsc-opportunity-auto-draft-evidence-*.json'));
+        $source = $this->readJson(data_get($evidence, 'artifacts.gsc_opportunity_source.path'));
+        $this->assertSame('/en/gsc-opportunity-page', data_get($source, 'candidates.0.safe_path'));
+    }
+
+    #[Test]
     public function generated_contract_documents_gsc_auto_draft_boundaries(): void
     {
         $contract = $this->readJson(base_path('docs/seo/generated/seo-agent-gsc-opportunity-auto-draft.v1.json'));
@@ -170,13 +197,16 @@ final class SeoAgentGscOpportunityAutoDraftTest extends TestCase
         ]);
     }
 
-    private function seedGscRows(ContentPage $page, string $dataOrigin = 'live_gsc_api'): void
-    {
-        $hash = hash('sha256', 'https://fermatmind.com/en/gsc-opportunity-page');
+    private function seedGscRows(
+        ContentPage $page,
+        string $dataOrigin = 'live_gsc_api',
+        string $canonicalUrl = 'https://fermatmind.com/en/gsc-opportunity-page'
+    ): void {
+        $hash = hash('sha256', $canonicalUrl);
 
         DB::connection('seo_intel')->table('seo_urls')->insert([
             'canonical_url_hash' => $hash,
-            'canonical_url' => 'https://fermatmind.com/en/gsc-opportunity-page',
+            'canonical_url' => $canonicalUrl,
             'locale' => 'en',
             'page_entity_type' => 'content_page',
             'entity_id_or_slug' => (string) $page->id,

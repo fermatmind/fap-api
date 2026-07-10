@@ -221,7 +221,8 @@ final class MbtiAttributionEventController extends Controller
 
         $payload = is_array($data['payload'] ?? null) ? $data['payload'] : [];
         $path = $this->normalizeOptionalString($data['path'] ?? null, 2048) ?? '/';
-        $isSeoConversionEvent = $this->isSeoConversionEvent($eventName, $payload);
+        $isSeoConversionEvent = $this->isSeoPrivacyIngest($request)
+            || $this->isSeoConversionEvent($eventName, $payload);
         if ($isSeoConversionEvent) {
             $path = $this->sanitizeSeoPublicUrl($path, 'path') ?? '/';
             $payload = $this->sanitizeSeoConversionPayload($payload);
@@ -388,6 +389,13 @@ final class MbtiAttributionEventController extends Controller
         return false;
     }
 
+    private function isSeoPrivacyIngest(Request $request): bool
+    {
+        $route = $request->route();
+
+        return is_object($route) && ($route->defaults['seo_privacy_ingest'] ?? null) === true;
+    }
+
     /**
      * @param  array<string, mixed>  $payload
      * @return array<string, mixed>
@@ -466,7 +474,7 @@ final class MbtiAttributionEventController extends Controller
             $path = '/'.$path;
         }
 
-        if ($this->isPrivateAnalyticsPath($path)) {
+        if ($this->isPrivateAnalyticsPath($this->decodePath($path))) {
             throw ValidationException::withMessages([
                 $field => 'Canonical SEO conversion ingest does not accept private result, order, share, pay, or history paths.',
             ]);
@@ -490,6 +498,19 @@ final class MbtiAttributionEventController extends Controller
     private function isPrivateAnalyticsPath(string $path): bool
     {
         return preg_match('#(^|/)(result|results|order|orders|share|shares|pay|payment|history)(/|$)#i', $path) === 1;
+    }
+
+    private function decodePath(string $path): string
+    {
+        for ($attempt = 0; $attempt < 3; $attempt++) {
+            $decoded = rawurldecode($path);
+            if ($decoded === $path) {
+                break;
+            }
+            $path = $decoded;
+        }
+
+        return $path;
     }
 
     /**
