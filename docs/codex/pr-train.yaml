@@ -38763,3 +38763,43 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: BIG5-ZH-FACET-IMPORT-DRYRUN-01
+    repo: fap-api
+    depends_on: [BIG5-ZH-FACET-NEUROTICISM-CONTENT-PACKAGE-01]
+    branch: codex/big5-zh-facet-import-dryrun-01
+    title: "BIG5-ZH-FACET-IMPORT-DRYRUN-01: validate combined 31-page Chinese Facet import package"
+    train_scope: big5_zh_facet_import_dryrun
+    status: planned
+    scope:
+      - Combine exactly the merged Chinese Facet Hub asset and thirty merged Chinese Facet detail assets into one V1 importer envelope.
+      - Validate 31 unique rows, body_md, content_ready plus noindex,follow, and zero index, sitemap, or llms eligibility.
+      - Run only the generic importer dry-run and repository validation; do not write CMS or production data.
+    allowed_paths:
+      - generated/big-five-zh-facet-import-dryrun/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify source content packages, backend runtime/API code, database schema, frontend code, canonical, robots, sitemap, llms, JSON-LD, permissions, secrets, or deployment configuration.
+      - Use --write, mutate CMS or production data, trigger production import, or publish any asset.
+    validation:
+      - node generated/big-five-zh-facet-import-dryrun/build-combined-package.mjs
+      - node generated/big-five-zh-facet-import-dryrun/validate-combined-package.mjs
+      - find generated/big-five-zh-facet-import-dryrun -name '*.json' -print0 | xargs -0 -n1 python3 -m json.tool >/dev/null
+      - cd backend && php artisan personality-public-assets:import --source=../generated/big-five-zh-facet-import-dryrun/big_five_zh_facet_31_seed.json --framework=big_five --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
