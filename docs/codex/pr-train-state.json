@@ -41309,7 +41309,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "4a430df941c9574300a268184b3fcacca4ba97b4",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -44945,18 +44945,23 @@
         "at": "2026-07-11T06:02:00+08:00",
         "note": "Corrected generated counts and next-task metadata, stale merged state, cross-repository PR links, and unrelated Pint scope; focused, structural, route/migration, scope, and full local CI validation passed.",
         "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T06:08:11+08:00",
+        "note": "Implementation PR #2921 passed all 15 GitHub checks and squash-merged as 74eb8ed8e2beac7cbd5b46d0b1df711d64b5dc32; origin/main contains the merge, main-sync is synchronized, and implementation branches were deleted locally and remotely.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-38",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-11T06:08:11+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2921",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-38: repair PR-train and generated metadata consistency",
     "train_scope": "security_169_fap_api_audit"
   },
