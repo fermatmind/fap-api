@@ -404,7 +404,7 @@
       "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01"
     ],
     "status": "blocked_runtime_contract_mismatch",
-    "commit_sha": null,
+    "commit_sha": "4de28a365c70b50b732292a3414708f891105ffe",
     "pr_url": null,
     "failure_reason": "The 13 English pages pass API, content_ready/noindex, rich-section, canonical, hreflang, discoverability-hold, and private-boundary runtime gates. However, the backend returns 56 FAQ items as q/a and 39 internal links as label/url while the frontend adapter accepts question/answer and label/href. All FAQ and CMS internal links are therefore filtered from visible HTML, so publish/cache-warm progression is NO-GO. Repair paths are outside this manifest scope.",
     "merged_at": null,
