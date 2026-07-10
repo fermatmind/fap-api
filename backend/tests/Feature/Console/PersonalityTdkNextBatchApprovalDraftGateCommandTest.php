@@ -69,6 +69,32 @@ final class PersonalityTdkNextBatchApprovalDraftGateCommandTest extends TestCase
     }
 
     #[Test]
+    public function it_blocks_recommendations_outside_the_exact_three_target_contract(): void
+    {
+        $recommendations = $this->recommendationsFixture();
+        $recommendations['recommendations'][] = $this->recommendation(
+            '/en/personality/intj-a',
+            'en',
+            'INTJ'
+        );
+
+        $exitCode = Artisan::call('personality:tdk-next-batch-approval-draft-gate', [
+            '--recommendations' => $this->writeJson('recommendations-extra-target', $recommendations),
+            '--qa' => $this->writeJson('qa', $this->qaFixture()),
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+        $summary = $this->jsonOutput();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $summary['status'] ?? null);
+
+        $artifact = $this->readJson((string) data_get($summary, 'artifact.path'));
+        $this->assertContains('recommendations_target_set_mismatch', $artifact['issues'] ?? []);
+        $this->assertFalse((bool) data_get($artifact, 'gate_statuses.approval_queue_dry_run_ready', true));
+    }
+
+    #[Test]
     public function generated_contract_documents_personality_tdk_boundaries(): void
     {
         $contract = $this->readJson(base_path('docs/seo/generated/personality-tdk-next-batch-approval-draft-gate.v1.json'));

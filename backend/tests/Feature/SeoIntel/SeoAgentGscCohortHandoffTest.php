@@ -189,6 +189,36 @@ final class SeoAgentGscCohortHandoffTest extends TestCase
     }
 
     #[Test]
+    public function command_blocks_json_escaped_forbidden_fields(): void
+    {
+        $payload = [
+            'schema_version' => 'fermatmind-seo-agent-gsc-draft-proposals.v1',
+            'proposal_count' => 1,
+            'proposals' => [[
+                'proposal_type' => 'article_title_meta_faq_internal_link_draft',
+                'raw_url' => 'https://example.test/private',
+            ]],
+        ];
+        $encoded = json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $this->assertIsString($encoded);
+        $encoded = str_replace('"raw_url"', '"raw_\\u0075rl"', $encoded);
+        $path = storage_path('framework/testing/seo-agent-gsc-escaped-'.Str::uuid()->toString().'.json');
+        File::ensureDirectoryExists(dirname($path));
+        File::put($path, $encoded."\n");
+
+        $exitCode = Artisan::call('seo-agent:gsc-cohort-handoff', [
+            '--classified' => $this->writeClassifiedArtifact(),
+            '--proposals' => $path,
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('forbidden_input_field_present', $summary['issues'] ?? []);
+    }
+
+    #[Test]
     public function generated_contract_documents_gsc_cohort_handoff_boundaries(): void
     {
         $contract = $this->readJson(base_path('docs/seo/generated/seo-agent-gsc-cohort-handoff.v1.json'));

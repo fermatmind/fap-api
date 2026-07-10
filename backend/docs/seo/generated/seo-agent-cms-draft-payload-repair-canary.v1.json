@@ -52,9 +52,14 @@
   "forbidden_input": [
     "raw_url",
     "raw_query",
-    "credentials",
-    "cookies",
-    "tokens",
+    "credential_path",
+    "service_account_json",
+    "client_email",
+    "private_key",
+    "bearer",
+    "token",
+    "cookie",
+    "session",
     "content_html",
     "content_md",
     "cms_draft_body"

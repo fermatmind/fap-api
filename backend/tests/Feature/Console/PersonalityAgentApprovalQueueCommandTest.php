@@ -96,6 +96,41 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
     }
 
+    public function test_next_batch_contract_rejects_an_extra_qa_passed_target(): void
+    {
+        $package = $this->nextBatchThreePackage();
+        $qa = $this->nextBatchThreeQa();
+        $extraUrl = 'https://fermatmind.com/en/personality/intj-a';
+        $package['recommendations'][] = $this->recommendation(
+            'personality-agent-next-batch:/en/personality/intj-a',
+            $extraUrl,
+            'en'
+        );
+        $qa['page_results'][] = $this->qaDecisionRow($extraUrl, 'PASS_READY_FOR_APPROVAL_REVIEW');
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains(
+            'tdk_next_batch_target_set_mismatch',
+            array_column($payload['errors'] ?? [], 'code')
+        );
+        $this->assertContains(
+            'tdk_next_batch_qa_target_set_mismatch',
+            array_column($payload['errors'] ?? [], 'code')
+        );
+        $this->assertSame(0, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
+    }
+
     public function test_competitor_gap_content_expansion_pass_can_enter_human_approval_queue_dry_run_only(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts(

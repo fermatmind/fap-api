@@ -75,6 +75,26 @@ final class SeoAgentCmsDraftPayloadRepairCanaryTest extends TestCase
     }
 
     #[Test]
+    public function token_strings_cannot_enter_a_repaired_draft_payload(): void
+    {
+        [, $proposal, $packagePath, , , $writeEvidencePath] = $this->oldDraftMissingOptionalFields();
+
+        $exitCode = Artisan::call('seo-agent:cms-draft-payload-repair-canary', [
+            '--package' => $packagePath,
+            '--write-evidence' => $writeEvidencePath,
+            '--target' => $proposal['subject_ref'],
+            '--override-proposed-seo-title' => 'SEO Access ToKeN Review',
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('forbidden_input_field_present', $summary['issues'] ?? []);
+        $this->assertSame(1, ArticleRevision::query()->count());
+    }
+
+    #[Test]
     public function execute_appends_repaired_revision_and_readback_qa_succeeds_with_compatible_evidence(): void
     {
         [$article, $proposal, $packagePath, $sha, $oldRevision, $writeEvidencePath] = $this->oldDraftMissingOptionalFields();

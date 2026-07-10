@@ -22,6 +22,16 @@ final class PersonalityAgentApprovalQueueWriter
 
     private const MBTI64_V85_V5_QA_SHA256 = '9246f6f2644c218b6b5e4d678a2364b558a21bf2ee7d1d2cf96ef43fe21d6011';
 
+    private const TDK_NEXT_BATCH_PACKAGE_ARTIFACT = 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-RECOMMENDATIONS-01';
+
+    private const TDK_NEXT_BATCH_QA_ARTIFACT = 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-QA-01';
+
+    private const TDK_NEXT_BATCH_TARGET_URLS = [
+        'https://fermatmind.com/zh/personality/intp-a',
+        'https://fermatmind.com/zh/personality/esfp-a',
+        'https://fermatmind.com/en/personality/enfj-a',
+    ];
+
     private const MBTI64_TYPES = [
         'enfj',
         'enfp',
@@ -786,6 +796,10 @@ final class PersonalityAgentApprovalQueueWriter
             ];
         }
 
+        if ($this->isTdkNextBatchContractCandidate($package, $qa)) {
+            $errors = array_merge($errors, $this->tdkNextBatchContractErrors($package, $qa));
+        }
+
         $isMbti64V85V5ContractCandidate = $this->isMbti64V85V5ContractCandidate($package, $qa);
         if (! $isMbti64V85V5ContractCandidate && $this->hasFapApiArtifactSyncDecision($qa)) {
             $errors[] = [
@@ -800,6 +814,74 @@ final class PersonalityAgentApprovalQueueWriter
                 $errors,
                 $this->mbti64V85V5ContractErrors($package, $qa, $sourceSha256, $qaSha256, $queueItems)
             );
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     * @param  array<string,mixed>  $qa
+     */
+    private function isTdkNextBatchContractCandidate(array $package, array $qa): bool
+    {
+        return (string) ($package['artifact'] ?? '') === self::TDK_NEXT_BATCH_PACKAGE_ARTIFACT
+            || (string) ($qa['artifact'] ?? '') === self::TDK_NEXT_BATCH_QA_ARTIFACT;
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     * @param  array<string,mixed>  $qa
+     * @return list<array<string,string>>
+     */
+    private function tdkNextBatchContractErrors(array $package, array $qa): array
+    {
+        $errors = [];
+        if ((string) ($package['artifact'] ?? '') !== self::TDK_NEXT_BATCH_PACKAGE_ARTIFACT) {
+            $errors[] = [
+                'field' => 'package.artifact',
+                'code' => 'tdk_next_batch_package_artifact_invalid',
+                'message' => 'The TDK next-batch package artifact lock is required.',
+            ];
+        }
+        if ((string) ($qa['artifact'] ?? '') !== self::TDK_NEXT_BATCH_QA_ARTIFACT) {
+            $errors[] = [
+                'field' => 'qa.artifact',
+                'code' => 'tdk_next_batch_qa_artifact_invalid',
+                'message' => 'The TDK next-batch QA artifact lock is required.',
+            ];
+        }
+
+        $recommendationUrls = array_map(
+            static fn (array $row): string => (string) ($row['target_url'] ?? ''),
+            $this->recommendations($package)
+        );
+        $qaRows = array_values(array_filter(
+            is_array($qa['page_results'] ?? null) ? $qa['page_results'] : [],
+            static fn (mixed $row): bool => is_array($row)
+        ));
+        $qaUrls = array_map(
+            static fn (array $row): string => (string) ($row['target_url'] ?? $row['url'] ?? ''),
+            $qaRows
+        );
+        $expectedUrls = self::TDK_NEXT_BATCH_TARGET_URLS;
+        sort($recommendationUrls);
+        sort($qaUrls);
+        sort($expectedUrls);
+
+        if ($recommendationUrls !== $expectedUrls) {
+            $errors[] = [
+                'field' => 'package.recommendations.target_url',
+                'code' => 'tdk_next_batch_target_set_mismatch',
+                'message' => 'The TDK next-batch package must contain exactly the three approved target URLs.',
+            ];
+        }
+        if ($qaUrls !== $expectedUrls) {
+            $errors[] = [
+                'field' => 'qa.page_results.target_url',
+                'code' => 'tdk_next_batch_qa_target_set_mismatch',
+                'message' => 'The TDK next-batch QA artifact must cover exactly the three approved target URLs.',
+            ];
         }
 
         return $errors;
