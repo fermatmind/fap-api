@@ -1,0 +1,83 @@
+{
+  "schema_version": "big_five_en_domain_runtime_closeout_v1",
+  "train_id": "BIG5-EN-DOMAIN-RUNTIME-CLOSEOUT-03",
+  "verified_at_utc": "2026-07-10T06:33:12Z",
+  "outcome": "pass",
+  "production_release": {
+    "sha": "931ea2d4e6f989e8cb0e93a9a96d347024228ecd",
+    "release_name": "big5-domain-import-931ea2d4",
+    "post_deploy_checks": {
+      "schema_verify": "pass",
+      "health_snapshot": "pass",
+      "public_content_verify": "pass",
+      "nginx": "active",
+      "supervisor": "active",
+      "supervisor_processes_running": 4
+    }
+  },
+  "production_import": {
+    "workflow_run_id": 29074124844,
+    "workflow_ref": "main",
+    "workflow_head_sha": "5c8a681ff6a4e4255396ea30345aff07f94786ba",
+    "workflow_definition_unchanged_from_approved_release": true,
+    "approved_release_sha": "931ea2d4e6f989e8cb0e93a9a96d347024228ecd",
+    "seed_sha256": "98213f603f3dccdd4f3699406878879f4f302c98081293bbfb92c534ebfb65d3",
+    "package": "big-five-en-domain-content-package-2026-07-10",
+    "dry_run": {
+      "assets_found": 5,
+      "valid_count": 5,
+      "errors_count": 0,
+      "indexable_count": 0,
+      "sitemap_eligible_count": 0,
+      "llms_eligible_count": 0
+    },
+    "write": {
+      "assets_found": 5,
+      "valid_count": 5,
+      "errors_count": 0,
+      "will_create": 0,
+      "will_update": 5,
+      "will_skip": 0,
+      "indexable_count": 0,
+      "sitemap_eligible_count": 0,
+      "llms_eligible_count": 0
+    }
+  },
+  "api_readback": {
+    "all_pass": true,
+    "expected_source_package": "big-five-en-domain-content-package-2026-07-10",
+    "expected_robots": "noindex,follow",
+    "expected_indexability": {
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false
+    },
+    "assets": [
+      {"code": "openness", "sections": 12, "faq": 5, "internal_links": 7, "canonical_path": "/en/personality/big-five/openness"},
+      {"code": "conscientiousness", "sections": 12, "faq": 5, "internal_links": 7, "canonical_path": "/en/personality/big-five/conscientiousness"},
+      {"code": "extraversion", "sections": 12, "faq": 5, "internal_links": 7, "canonical_path": "/en/personality/big-five/extraversion"},
+      {"code": "agreeableness", "sections": 13, "faq": 5, "internal_links": 7, "canonical_path": "/en/personality/big-five/agreeableness"},
+      {"code": "neuroticism", "sections": 13, "faq": 5, "internal_links": 7, "canonical_path": "/en/personality/big-five/neuroticism"}
+    ]
+  },
+  "page_readback": {
+    "all_pass": true,
+    "each_page": {
+      "http_status": 200,
+      "html_robots_noindex": true,
+      "canonical_path_present": true,
+      "first_faq_visible": true,
+      "all_seven_internal_links_visible": true
+    }
+  },
+  "enumeration_leakage": {
+    "all_pass": true,
+    "checked_surfaces": {
+      "sitemap.xml": {"http_status": 200, "matching_domain_paths": 0},
+      "sitemap_index.xml": {"http_status": 404, "matching_domain_paths": 0},
+      "llms.txt": {"http_status": 200, "matching_domain_paths": 0},
+      "llms-full.txt": {"http_status": 200, "matching_domain_paths": 0},
+      "robots.txt": {"http_status": 200, "matching_domain_paths": 0}
+    }
+  }
+}
