@@ -232,10 +232,10 @@
     "depends_on": [
       "ENNEAGRAM-EN13-CMS-DRY-RUN-01"
     ],
-    "status": "pending_exact_production_authorization",
+    "status": "blocked_unverified_production_revision",
     "commit_sha": null,
     "pr_url": null,
-    "failure_reason": "The source-refresh workflow gate was repaired by PR #2871 and deployed successfully at 85d17b8df841f8c149fcc974931936d7cfa85e60. The previous CMS authorization for 843cddf9369f56c51a987c34ba113b3ad1dcd4fb is stale, newer main deployments are still converging, and the latest operator instruction explicitly forbids Enneagram CMS Production Ops and CMS writes. A new exact deployed SHA authorization is required before retry. No CMS write was attempted.",
+    "failure_reason": "The operator lifted the earlier CMS Ops/write prohibition but supplied a placeholder instead of an exact 40-character SHA. Production run 29091507295 switched /current to 6bf0bf8ebbe64c3f9a5edc2178d26467609a24f4, then failed healthcheck:public with HTTP 504 before the workflow-level revision, health, contract, and ops smoke checks. A later caf9a7c6c9cd6281c824c660dc160a77c054f31a attempt failed at deploy:lock and did not switch the release. There is no healthy, independently verified deployed SHA that can safely receive CMS write authorization. No CMS write was attempted.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -245,8 +245,8 @@
         "evidence": "PR #2840 is merged at 5ccc2988056689ef7608cf144ae60fe109747612 and contained in origin/main."
       },
       "production_authorization": {
-        "status": "stale",
-        "evidence": "The earlier exact workflow approval applied only to deployed SHA 843cddf9369f56c51a987c34ba113b3ad1dcd4fb. Production has since advanced, so that authorization cannot be reused."
+        "status": "invalid_placeholder",
+        "evidence": "The earlier exact workflow approval for 843cddf9369f56c51a987c34ba113b3ad1dcd4fb is stale. The operator lifted the CMS Ops/write prohibition but supplied <最终 deployed 40位 SHA> rather than an exact 40-character deployed SHA, so no new production write authorization exists."
       },
       "production_inspect": {
         "status": "fail_closed",
@@ -266,6 +266,18 @@
         "staging_run_id": 29083066886,
         "production_run_id": 29084163927,
         "evidence": "The exact 13-row source-refresh workflow repair merged and both automatic staging and production workflows completed successfully, including deployed revision, health, contract, and ops smoke checks."
+      },
+      "latest_production_revision_candidate": {
+        "status": "unverified_health_failure",
+        "run_id": 29091507295,
+        "candidate_sha": "6bf0bf8ebbe64c3f9a5edc2178d26467609a24f4",
+        "evidence": "Deployer created the release, wrote its REVISION, ran migrations and cache warming, and executed deploy:symlink to move /current to this release. healthcheck:public then returned HTTP 504; the workflow-level Verify deployed revision, health/contract smoke, and ops smoke steps were skipped."
+      },
+      "subsequent_production_attempt": {
+        "status": "blocked_stale_deploy_lock",
+        "run_id": 29093607921,
+        "candidate_sha": "caf9a7c6c9cd6281c824c660dc160a77c054f31a",
+        "evidence": "The remote lock guard reported the lock from run 29091507295, and Deployer failed at deploy:lock before release creation or symlink switch. This run cannot establish a newer deployed revision."
       },
       "cms_write_after_repair": {
         "status": "not_attempted",
@@ -302,6 +314,12 @@
         "from": "blocked_source_refresh_workflow_gate",
         "to": "pending_exact_production_authorization",
         "note": "Ad-hoc repair PR #2871 merged and deployed successfully, resolving the exact 13-row source-refresh workflow gate. The prior 843cddf9369f56c51a987c34ba113b3ad1dcd4fb authorization is stale, and the latest operator instruction prohibits Enneagram CMS Ops/CMS writes until a new exact deployed SHA authorization is provided."
+      },
+      {
+        "at": "2026-07-10T22:00:20+08:00",
+        "from": "pending_exact_production_authorization",
+        "to": "blocked_unverified_production_revision",
+        "note": "The operator lifted the CMS Ops/write prohibition but supplied a placeholder rather than an exact SHA. GitHub evidence shows run 29091507295 switched production to candidate SHA 6bf0bf8ebbe64c3f9a5edc2178d26467609a24f4 and then failed healthcheck:public with HTTP 504; run 29093607921 was subsequently blocked by the stale deploy lock. CMS import/promote remains fail-closed until a production deployment completes revision, health, contract, and ops smoke verification and the operator authorizes that exact SHA."
       }
     ]
   },
