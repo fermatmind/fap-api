@@ -40,7 +40,7 @@ final class SeoContentPackageDraftImporter
         'hreflang_hold',
     ];
 
-    private const PRIVATE_ROUTE_PATTERN = '~(?<![A-Za-z0-9_-])/(?:result|results|orders|order|share|pay|payment|history|take)(?:/|[?#\s)"\']|$)~i';
+    private const PRIVATE_ROUTE_PATTERN = '~(?<![A-Za-z0-9_-])/(?:result|results|orders|order|share|shares|pay|payment|history|take)(?:/|[?#\s)"\']|$)~i';
 
     private const SENSITIVE_QUERY_PATTERN = '/(?:[?&]|^)(?:result_id|order_id|payment_id|token|score|user_id|report_id)=/i';
 
@@ -538,6 +538,13 @@ final class SeoContentPackageDraftImporter
         $allowedOldAliasCount = 0;
 
         foreach ($aliases as $alias => $target) {
+            if (preg_match(self::PRIVATE_ROUTE_PATTERN, (string) $alias) === 1
+                || preg_match(self::PRIVATE_ROUTE_PATTERN, $target) === 1
+                || $this->isSensitiveQueryKeyLiteral((string) $alias)
+                || $this->isSensitiveQueryKeyLiteral($target)) {
+                $errors[] = $this->issue('contract_integrity_scan.route_alias_contract', 'route_alias_contract_private_route', 'Route aliases and targets must not contain private routes or sensitive query keys.');
+            }
+
             if (preg_match(self::OLD_BIG_FIVE_ROUTE_PATTERN, (string) $alias) === 1) {
                 if ($target !== self::CANONICAL_BIG_FIVE_ROUTE) {
                     $errors[] = $this->issue('contract_integrity_scan.route_alias_contract', 'route_alias_contract_invalid', 'Old Big Five alias must resolve to the canonical OCEAN route.');
@@ -809,18 +816,50 @@ final class SeoContentPackageDraftImporter
         if ($relative === '') {
             $matches = glob($root.'/pages/'.($locale === 'zh-CN' ? 'zh-CN-*' : 'en-*').'.md') ?: [];
             if (count($matches) === 1) {
-                return $matches[0];
+                $relative = 'pages/'.basename($matches[0]);
             }
         }
 
-        $path = $relative !== '' ? $root.'/'.ltrim($relative, '/') : '';
-        if ($path === '' || ! is_file($path)) {
-            $errors[] = $this->issue($locale.'.page', 'page_file_not_found', 'Markdown page for locale was not found.');
+        $path = $this->resolvePackagePagePath($root, $relative);
+        if ($path === null) {
+            $errors[] = $this->issue($locale.'.page', 'page_file_outside_package', 'Markdown page must be a readable .md file inside the package pages directory.');
 
             return null;
         }
 
         return $path;
+    }
+
+    private function resolvePackagePagePath(string $root, string $relative): ?string
+    {
+        $relative = trim(str_replace('\\', '/', $relative));
+        if ($relative === ''
+            || str_contains($relative, "\0")
+            || str_starts_with($relative, '/')
+            || preg_match('/\A[A-Za-z]:\//', $relative) === 1) {
+            return null;
+        }
+
+        $segments = explode('/', $relative);
+        if (($segments[0] ?? '') !== 'pages'
+            || in_array('', $segments, true)
+            || in_array('.', $segments, true)
+            || in_array('..', $segments, true)
+            || strtolower((string) pathinfo($relative, PATHINFO_EXTENSION)) !== 'md') {
+            return null;
+        }
+
+        $canonicalRoot = realpath($root);
+        $canonicalPath = realpath($root.'/'.str_replace('/', DIRECTORY_SEPARATOR, $relative));
+        if (! is_string($canonicalRoot)
+            || ! is_string($canonicalPath)
+            || ! is_file($canonicalPath)
+            || ! is_readable($canonicalPath)
+            || ! str_starts_with($canonicalPath, $canonicalRoot.DIRECTORY_SEPARATOR)) {
+            return null;
+        }
+
+        return $canonicalPath;
     }
 
     /**

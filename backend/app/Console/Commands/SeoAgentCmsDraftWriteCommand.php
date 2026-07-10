@@ -344,7 +344,7 @@ final class SeoAgentCmsDraftWriteCommand extends Command
     private function writeContentPageRevision(array $proposal, string $packageSha): array
     {
         $pageId = $this->idFromSubjectRef((string) ($proposal['subject_ref'] ?? ''), 'content_page');
-        $page = ContentPage::query()->withoutGlobalScopes()->find($pageId);
+        $page = ContentPage::query()->withoutGlobalScopes()->lockForUpdate()->find($pageId);
         if (! $page instanceof ContentPage) {
             throw new RuntimeException('content_page_not_found');
         }
@@ -379,6 +379,11 @@ final class SeoAgentCmsDraftWriteCommand extends Command
             'archived_at' => null,
             'published_at' => null,
         ]);
+
+        $page->forceFill([
+            'working_revision_id' => (int) $revision->id,
+            'translation_status' => CmsTranslationRevision::STATUS_DRAFT,
+        ])->save();
 
         return $this->affectedRef('created', 'content_page', (string) ($proposal['subject_ref'] ?? ''), (int) $revision->id);
     }

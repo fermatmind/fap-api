@@ -6,6 +6,38 @@ namespace App\Services\Cms;
 
 final class ScienceContentPageFrontmatterReader
 {
+    public function resolvePackagePagePath(string $root, string $relativePath): ?string
+    {
+        $relativePath = trim(str_replace('\\', '/', $relativePath));
+        if ($relativePath === ''
+            || str_contains($relativePath, "\0")
+            || str_starts_with($relativePath, '/')
+            || preg_match('/\A[A-Za-z]:\//', $relativePath) === 1) {
+            return null;
+        }
+
+        $segments = explode('/', $relativePath);
+        if (($segments[0] ?? '') !== 'pages'
+            || in_array('', $segments, true)
+            || in_array('.', $segments, true)
+            || in_array('..', $segments, true)
+            || strtolower((string) pathinfo($relativePath, PATHINFO_EXTENSION)) !== 'md') {
+            return null;
+        }
+
+        $canonicalRoot = realpath($root);
+        $canonicalPath = realpath($root.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $relativePath));
+        if (! is_string($canonicalRoot)
+            || ! is_string($canonicalPath)
+            || ! is_file($canonicalPath)
+            || ! is_readable($canonicalPath)
+            || ! str_starts_with($canonicalPath, $canonicalRoot.DIRECTORY_SEPARATOR)) {
+            return null;
+        }
+
+        return $canonicalPath;
+    }
+
     /**
      * @return array{0: array<string, mixed>, 1: string}
      */
@@ -60,6 +92,18 @@ final class ScienceContentPageFrontmatterReader
     private function scalar(string $value): mixed
     {
         $value = trim($value);
+        if (str_starts_with($value, '[') && str_ends_with($value, ']')) {
+            $inline = trim(substr($value, 1, -1));
+            if ($inline === '') {
+                return [];
+            }
+
+            return array_values(array_map(
+                fn (string $item): mixed => $this->scalar($item),
+                str_getcsv($inline, ',', '"', '\\'),
+            ));
+        }
+
         if ($value === 'true') {
             return true;
         }

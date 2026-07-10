@@ -146,14 +146,16 @@ final class ScienceContentPageDraftDryRunService
         $issues = [];
         $pageKey = (string) ($manifestPage['page_key'] ?? 'Unknown');
         $file = (string) ($manifestPage['file'] ?? '');
-        $filePath = $file !== '' ? $root.DIRECTORY_SEPARATOR.str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $file) : '';
+        $filePath = $file !== ''
+            ? app(ScienceContentPageFrontmatterReader::class)->resolvePackagePagePath($root, $file)
+            : null;
         $frontmatter = [];
         $body = '';
 
         if ($file === '') {
             $issues[] = $this->issue($pageKey, 'missing_file', 'manifest page file is required.');
-        } elseif (! is_file($filePath)) {
-            $issues[] = $this->issue($pageKey, 'page_file_not_found', 'page file does not exist: '.$file);
+        } elseif (! is_string($filePath)) {
+            $issues[] = $this->issue($pageKey, 'page_file_outside_package', 'page file must be a readable Markdown file inside the package pages directory.');
         } else {
             [$frontmatter, $body] = $this->readFrontmatter($filePath);
         }
@@ -175,7 +177,9 @@ final class ScienceContentPageDraftDryRunService
         }
 
         foreach (self::DRAFT_FALSE_FIELDS as $field) {
-            if (($manifestPage[$field] ?? false) !== false && ($frontmatter[$field] ?? false) !== false) {
+            if ((array_key_exists($field, $manifestPage) && $manifestPage[$field] !== false)
+                || ! array_key_exists($field, $frontmatter)
+                || $frontmatter[$field] !== false) {
                 $issues[] = $this->issue($pageKey, 'unsafe_'.$field, $field.' must remain false for dry-run import.');
             }
         }
@@ -197,7 +201,11 @@ final class ScienceContentPageDraftDryRunService
             $issues[] = $this->issue($pageKey, 'missing_canonical_path', 'A public canonical candidate path is required.');
         }
 
-        if ($this->hasPrivateRouteReference($body) || $this->hasPrivateRouteReference(json_encode($manifestPage, JSON_UNESCAPED_SLASHES) ?: '')) {
+        $activeFrontmatter = $frontmatter;
+        unset($activeFrontmatter['forbidden_routes']);
+        if ($this->hasPrivateRouteReference($body)
+            || $this->hasPrivateRouteReference(json_encode($manifestPage, JSON_UNESCAPED_SLASHES) ?: '')
+            || $this->hasPrivateRouteReference(json_encode($activeFrontmatter, JSON_UNESCAPED_SLASHES) ?: '')) {
             $issues[] = $this->issue($pageKey, 'private_route_pattern_present', 'Private route patterns may only appear as blocked metadata, not body/internal links.');
         }
 
@@ -332,9 +340,12 @@ final class ScienceContentPageDraftDryRunService
 
     private function hasPrivateRouteReference(string $value): bool
     {
-        $bodyWithoutForbiddenList = preg_replace('/forbidden_routes:\s*(?:(?:\r?\n)\s*-\s*[^\r\n]+)+/m', '', $value) ?? $value;
+        $bodyWithoutForbiddenList = preg_replace([
+            '/forbidden_routes:\s*(?:(?:\r?\n)\s*-\s*[^\r\n]+)+/m',
+            '/forbidden_routes:\s*\[[^\]]*\]/m',
+        ], '', $value) ?? $value;
 
-        return preg_match('#/(?:results?/|orders?\b|pay\b|payment\b|checkout\b|share/|history\b)#i', $bodyWithoutForbiddenList) === 1
+        return preg_match('#/(?:results?(?:/|\b)|orders?(?:/|\b)|pay(?:/|\b)|payment(?:/|\b)|checkout(?:/|\b)|shares?(?:/|\b)|history(?:/|\b))#i', $bodyWithoutForbiddenList) === 1
             || preg_match('/(?:token=|orderNo=|payment_intent=)/i', $bodyWithoutForbiddenList) === 1;
     }
 

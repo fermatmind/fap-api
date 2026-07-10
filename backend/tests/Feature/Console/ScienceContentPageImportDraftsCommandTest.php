@@ -8,6 +8,8 @@ use App\Models\ContentPage;
 use App\Services\Cms\ScienceContentPageDraftImportService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -35,6 +37,24 @@ final class ScienceContentPageImportDraftsCommandTest extends TestCase
         $this->assertSame(0, $payload['blocked_count']);
         $this->assertFalse($payload['publish_allowed']);
         $this->assertFalse($payload['discoverability_allowed']);
+        $this->assertSame(0, ContentPage::query()->withoutGlobalScopes()->count());
+    }
+
+    #[Test]
+    public function package_directory_basename_cannot_spoof_trusted_publish_source_marker(): void
+    {
+        $parent = storage_path('framework/testing/science-source-spoof-'.Str::uuid()->toString());
+        $package = $parent.DIRECTORY_SEPARATOR.basename(self::PACKAGE_PATH);
+        File::ensureDirectoryExists($parent);
+        File::copyDirectory(base_path(self::PACKAGE_PATH), $package);
+
+        $payload = app(ScienceContentPageDraftImportService::class)->dryRun($package);
+        $science = collect($payload['pages'])->firstWhere('page_key', 'SCIENCE-HUB-CONTENT-01');
+        $sourceDoc = (string) data_get($science, 'content_page_attributes.source_doc');
+
+        $this->assertTrue($payload['ok']);
+        $this->assertStringStartsWith('untrusted-package-sha256/', $sourceDoc);
+        $this->assertStringNotContainsString('docs/seo/import-packages/'.basename(self::PACKAGE_PATH).'/pages/', $sourceDoc);
         $this->assertSame(0, ContentPage::query()->withoutGlobalScopes()->count());
     }
 
