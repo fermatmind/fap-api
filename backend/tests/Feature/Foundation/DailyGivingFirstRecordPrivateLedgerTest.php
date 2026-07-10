@@ -87,6 +87,7 @@ final class DailyGivingFirstRecordPrivateLedgerTest extends TestCase
             '4380.55',
             'proof_private_path',
             'receipt_reference_private',
+            'receipt_reference_redacted',
             'proof_redaction_notes',
         ] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $combined, $forbidden);

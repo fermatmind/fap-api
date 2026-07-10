@@ -36313,6 +36313,9 @@ prs:
       - backend/routes/api.php
       - backend/app/Http/Controllers/API/V0_5/Foundation/DailyGivingRecordController.php
       - backend/tests/Feature/Foundation/DailyGivingFirstRecordPrivateLedgerTest.php
+      - backend/tests/Feature/Foundation/DailyGivingRecordPublicApiTest.php
+      - backend/tests/Feature/Foundation/DailyGivingRecordPublicationGateTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

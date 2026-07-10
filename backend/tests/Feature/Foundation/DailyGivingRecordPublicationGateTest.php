@@ -192,7 +192,7 @@ class DailyGivingRecordPublicationGateTest extends TestCase
         $this->assertArrayHasKey('donation_status', $public);
         $this->assertArrayHasKey('proof_status', $public);
         $this->assertArrayHasKey('proof_public_url', $public);
-        $this->assertArrayHasKey('receipt_reference_redacted', $public);
+        $this->assertArrayNotHasKey('receipt_reference_redacted', $public);
         $this->assertArrayHasKey('social_x_url', $public);
         $this->assertArrayHasKey('social_linkedin_url', $public);
         $this->assertArrayHasKey('social_weibo_url', $public);

@@ -140,7 +140,13 @@ class DailyGivingRecord extends Model
             ->where('is_public', true)
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
-            ->whereIn('donation_status', self::PUBLISHABLE_DONATION_STATUSES);
+            ->whereNotNull('donation_date')
+            ->whereNotNull('recipient_name')
+            ->where('recipient_name', '!=', '')
+            ->whereNotNull('recipient_official_url')
+            ->where('recipient_official_url', '!=', '')
+            ->whereIn('donation_status', self::PUBLISHABLE_DONATION_STATUSES)
+            ->whereIn('proof_status', self::PUBLISHABLE_PROOF_STATUSES);
     }
 
     public function isPublishable(): bool
@@ -211,8 +217,7 @@ class DailyGivingRecord extends Model
             'currency' => $this->currency,
             'donation_status' => $this->donation_status,
             'proof_status' => $this->proof_status,
-            'proof_public_url' => $this->proof_public_url,
-            'receipt_reference_redacted' => $this->receipt_reference_redacted,
+            'proof_public_url' => $this->publicProofUrl(),
             'social_x_url' => $this->social_x_url,
             'social_linkedin_url' => $this->social_linkedin_url,
             'social_weibo_url' => $this->social_weibo_url,
@@ -221,6 +226,19 @@ class DailyGivingRecord extends Model
             'public_notes' => $this->public_notes,
             'published_at' => $this->published_at?->toDateTimeString(),
         ];
+    }
+
+    public function publicProofUrl(): ?string
+    {
+        $url = trim((string) ($this->proof_public_url ?? ''));
+
+        if ($url === ''
+            || ! in_array($this->proof_status, self::PUBLIC_PROOF_AVAILABLE_STATUSES, true)
+            || ! $this->looksLikeOperatorApprovedPublicProofUrl($url)) {
+            return null;
+        }
+
+        return $url;
     }
 
     /**
