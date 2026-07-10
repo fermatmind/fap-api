@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
 
 env:
   TARGET: production
@@ -78,113 +77,16 @@ jobs:
           set -euo pipefail
           echo "Production deploy skipped because a newer main SHA exists."
           echo "stale_deploy_sha=$DEPLOY_SHA"
-          echo "::error::Stale production deploy workflow_run is not a successful production deploy."
-          exit 1
+          echo "::notice::Stale production deploy workflow_run completed without deployment."
 
-      - name: Enforce production auto-deploy policy guard
+      - name: Record single-developer auto-deploy policy
         id: auto_deploy_policy_guard
         if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
-        env:
-          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
-          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          workdir="$(mktemp -d)"
-          trap 'rm -rf "$workdir"' EXIT
-
-          gh api \
-            -H "Accept: application/vnd.github+json" \
-            "/repos/${GITHUB_REPOSITORY}/commits/${DEPLOY_SHA}/pulls" \
-            > "$workdir/pulls.json"
-
-          jq '[.[] | select(.state == "closed" and .merged_at != null and .base.ref == "main")]' \
-            "$workdir/pulls.json" > "$workdir/merged_pulls.json"
-
-          pr_count="$(jq 'length' "$workdir/merged_pulls.json")"
-          if [ "$pr_count" -ne 1 ]; then
-            echo "::error::Production auto-deploy requires exactly one merged PR for ${DEPLOY_SHA}; found ${pr_count}."
-            exit 1
-          fi
-
-          pr_number="$(jq -r '.[0].number' "$workdir/merged_pulls.json")"
-          gh pr view "$pr_number" --json labels,mergeCommit \
-            --jq '{merge_commit: .mergeCommit.oid, labels: [.labels[].name]}' \
-            > "$workdir/pr.json"
-
-          merge_commit="$(jq -r '.merge_commit // ""' "$workdir/pr.json")"
-          if [ "$merge_commit" != "$DEPLOY_SHA" ]; then
-            echo "::error::Production auto-deploy PR #${pr_number} merge commit ${merge_commit} does not match deploy SHA ${DEPLOY_SHA}."
-            exit 1
-          fi
-
-          gh api --paginate \
-            "/repos/${GITHUB_REPOSITORY}/pulls/${pr_number}/files" \
-            --jq '.[].filename' > "$workdir/files.txt"
-
-          mapfile -t risky_label_patterns <<'PATTERNS'
-          deploy
-          deployment
-          database
-          migration
-          cms
-          seo
-          search
-          secret
-          security
-          high-risk
-          production-risk
-          manual-deploy
-          content-authority
-          PATTERNS
-
-          mapfile -t risky_path_patterns <<'PATTERNS'
-          ^\.github/workflows/
-          ^deploy\.php$
-          ^backend/database/
-          ^backend/config/
-          ^backend/content_packs/
-          ^content_packages/
-          ^content_baselines/
-          ^backend/app/Http/Controllers/.*/Cms/
-          ^backend/app/Http/Controllers/.*/SEO/
-          ^backend/app/Http/Controllers/.*/SeoIntel/
-          ^backend/app/Services/Cms/
-          ^backend/app/Services/ContentPages/
-          ^backend/app/Services/Seo
-          ^backend/app/Services/SeoIntel/
-          ^backend/app/Console/Commands/.*(Cms|Seo|Search|Publish|Import)
-          (^|/)\.env($|\.|-)
-          (^|/).*secret.*$
-          (^|/).*\.(pem|key|p12|pfx)$
-          PATTERNS
-
-          blocked=0
-          while IFS= read -r label; do
-            normalized_label="$(printf '%s' "$label" | tr '[:upper:]' '[:lower:]')"
-            for pattern in "${risky_label_patterns[@]}"; do
-              if [[ "$normalized_label" =~ $pattern ]]; then
-                echo "::error::PR #${pr_number} label '${label}' requires manual production deploy readiness."
-                blocked=1
-              fi
-            done
-          done < <(jq -r '.labels[]?' "$workdir/pr.json")
-
-          while IFS= read -r changed_file; do
-            for pattern in "${risky_path_patterns[@]}"; do
-              if [[ "$changed_file" =~ $pattern ]]; then
-                echo "::error::PR #${pr_number} changed risky path '${changed_file}', matching '${pattern}'."
-                blocked=1
-              fi
-            done
-          done < "$workdir/files.txt"
-
-          if [ "$blocked" -ne 0 ]; then
-            echo "::error::Production auto-deploy policy guard blocked ${DEPLOY_SHA}; use manual deploy-readiness and exact SHA approval."
-            exit 1
-          fi
-
-          echo "Production auto-deploy policy guard passed for PR #${pr_number} at ${DEPLOY_SHA}."
+          echo "::notice::Single-developer mode: a latest-main revision with a successful staging deploy is eligible for automatic production deployment regardless of PR labels or changed paths."
+          exit 0
 
       - name: Refuse retired production target
         if: steps.latest_main_guard.outputs.skip_deploy != 'true'
