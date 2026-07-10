@@ -57,7 +57,8 @@ Baidu push additionally requires:
 - `SEO_INTEL_BAIDU_LIVE_API_ENABLED=true`
 - `SEO_INTEL_BAIDU_SITE` is present
 - `SEO_INTEL_BAIDU_PUSH_TOKEN` is present
-- `SEO_INTEL_BAIDU_PUSH_ENDPOINT` defaults to `http://data.zz.baidu.com/urls`
+- `SEO_INTEL_BAIDU_PUSH_ENDPOINT` must be HTTPS. The executor never disables TLS
+  verification and never sends the token over HTTP.
 
 Default config keeps these gates disabled or empty.
 
@@ -87,6 +88,34 @@ only when the HTTP response is successful and the JSON `success` count is at
 least 1.
 
 Failed provider calls are recorded as `execution_state=submit_failed`.
+
+## Baidu Transport Security Hold
+
+If Baidu has no verifiable HTTPS submission path, operators may record an
+explicit provider hold instead of weakening transport security:
+
+```bash
+php artisan seo-intel:search-channel-provider-hold \
+  --queue-ids=313,315 \
+  --channels=baidu_push \
+  --reason=transport_security_unavailable \
+  --json
+```
+
+Dry-run is the default and returns the exact approval phrase/token. Execute is
+allowed only for approved, indexable, claim-safe Baidu items when either the
+configured endpoint is not HTTPS or a prior bounded HTTPS submission recorded
+a transport failure without an HTTP response. The execute path performs no
+external request, does not print or transmit provider credentials, and records
+`execution_state=provider_security_hold` with an audit event.
+
+Article release closeout accepts this state only when the matching audit event
+records `transport_security_unavailable` and confirms that no external call or
+search submission was attempted. It remains an intentional provider hold, not
+a successful Baidu submission. IndexNow still has to be submitted normally.
+
+Do not use the Media Library importer, CMS backfill, disabled TLS verification,
+or a plaintext token request to repair a Baidu transport-security failure.
 
 If another process has already claimed or submitted the item, the executor
 blocks before any external call.

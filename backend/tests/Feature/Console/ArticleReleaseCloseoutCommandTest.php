@@ -251,6 +251,60 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
         $this->assertErrorCode($payload, 'search_channel_queue_missing');
     }
 
+    public function test_closeout_accepts_audited_baidu_provider_security_hold(): void
+    {
+        $article = $this->createReleasedArticle();
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+        DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', 59)->update([
+            'execution_state' => 'provider_security_hold',
+        ]);
+        $this->insertProviderSecurityHoldEvidence(59);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('ARTICLE_RELEASE_COMPLETE_SEARCH_OBSERVATION_PENDING', $payload['decision']);
+        $this->assertTrue(data_get($payload, 'checks.search_channel.channels.indexnow.submitted'));
+        $this->assertFalse(data_get($payload, 'checks.search_channel.channels.indexnow.intentional_hold'));
+        $this->assertFalse(data_get($payload, 'checks.search_channel.channels.baidu_push.submitted'));
+        $this->assertTrue(data_get($payload, 'checks.search_channel.channels.baidu_push.intentional_hold'));
+        $this->assertSame('transport_security_unavailable', data_get($payload, 'checks.search_channel.channels.baidu_push.hold_reason'));
+        $this->assertErrorCodeMissing($payload, 'search_channel_queue_not_accepted');
+    }
+
+    public function test_closeout_rejects_baidu_provider_security_hold_without_audit_evidence(): void
+    {
+        $article = $this->createReleasedArticle();
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+        DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', 59)->update([
+            'execution_state' => 'provider_security_hold',
+        ]);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('BLOCKED_SEARCH_QUEUE_GAP', $payload['decision']);
+        $this->assertFalse(data_get($payload, 'checks.search_channel.channels.baidu_push.intentional_hold'));
+        $this->assertErrorCode($payload, 'search_channel_queue_not_accepted');
+    }
+
     public function test_internal_taxonomy_and_private_media_block_operator_input(): void
     {
         $article = $this->createReleasedArticle([
@@ -631,6 +685,17 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
             $table->timestamp('approved_at')->nullable();
             $table->timestamps();
         });
+
+        Schema::connection('seo_intel')->create('seo_search_channel_queue_events', function ($table): void {
+            $table->id();
+            $table->unsignedBigInteger('queue_item_id')->nullable();
+            $table->unsignedBigInteger('batch_id')->nullable();
+            $table->string('event_type', 96);
+            $table->json('event_payload')->nullable();
+            $table->string('actor_type', 64)->default('system');
+            $table->string('actor_id', 128)->nullable();
+            $table->timestamp('created_at')->useCurrent();
+        });
     }
 
     private function insertUrlTruth(string $canonicalUrl, string $locale, string $slug): void
@@ -682,6 +747,26 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
             'approved_at' => now(),
             'created_at' => now(),
             'updated_at' => now(),
+        ]);
+    }
+
+    private function insertProviderSecurityHoldEvidence(int $queueItemId): void
+    {
+        DB::connection('seo_intel')->table('seo_search_channel_queue_events')->insert([
+            'queue_item_id' => $queueItemId,
+            'batch_id' => null,
+            'event_type' => 'search_channel_provider_security_hold_recorded',
+            'event_payload' => json_encode([
+                'channel' => 'baidu_push',
+                'to_execution_state' => 'provider_security_hold',
+                'reason' => 'transport_security_unavailable',
+                'evidence_kind' => 'verified_https_transport_failure',
+                'external_calls_attempted' => false,
+                'search_submission_attempted' => false,
+            ], JSON_THROW_ON_ERROR),
+            'actor_type' => 'operator',
+            'actor_id' => 'seo-ops',
+            'created_at' => now(),
         ]);
     }
 
