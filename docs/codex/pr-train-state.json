@@ -43414,10 +43414,34 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "38 focused API23 tests passed with 558 assertions; the expanded search-submission regression passed 128 tests with 1692 assertions.",
+        "status": "pass"
+      },
+      "fresh_migration": {
+        "evidence": "APP_ENV=testing SQLite migration completed successfully at /tmp/fap-api-security-169-api-23.sqlite.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "ci_verify_mbti passed, including the 1180-test suite (150138 assertions), MBTI smoke/report/share, events, payment, migration, auth, order-security, dependency, and webhook/attempt gates.",
+        "status": "pass"
+      },
+      "github_required_checks": {
+        "evidence": "PR #2878 final head bc6f9be795c167800527c5cce238f70f3a969b6a passed both hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 jobs, plus Semgrep blocking secrets, Semgrep OSS, and SARIF upload checks.",
+        "status": "pass"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 16 final changed paths are listed in SECURITY-169-API-23 allowed_paths; Pint, Big Five runtime freeze classification, JSON/YAML parsing, and git diff --check passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "13337cd690a9ef6a2360be5188de7b55fa700ab8",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -43439,18 +43463,23 @@
         "at": "2026-07-10T19:00:00+08:00",
         "note": "Local validation passed: focused API23 tests 38 tests/558 assertions; expanded search submission regression 128 tests/1692 assertions; route inventory 233 routes; fresh SQLite migration; full backend/scripts/ci_verify_mbti.sh including 1180-test main suite and all follow-on gates; Pint, JSON/YAML parsing, git diff --check, and scope validation with 16 changed paths and zero outside the allowlist. No provider, CMS, deploy, or production write was performed.",
         "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-10T19:04:34+08:00",
+        "note": "PR #2878 merged after all GitHub checks passed; merge commit 13337cd690a9ef6a2360be5188de7b55fa700ab8. origin/main and the dedicated local main were synchronized, and local/remote API23 implementation branches were deleted.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-23",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T19:04:34+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2878",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "local_checks_passed",
+    "status": "merged",
     "title": "SECURITY-169-API-23: harden live search submission kill switches",
     "train_scope": "security_169_fap_api_audit"
   },
