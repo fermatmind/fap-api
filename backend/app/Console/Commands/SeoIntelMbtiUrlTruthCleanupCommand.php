@@ -39,7 +39,7 @@ final class SeoIntelMbtiUrlTruthCleanupCommand extends Command
             }
         }
 
-        return ($execute && ($result['status'] ?? null) === 'blocked') ? self::FAILURE : self::SUCCESS;
+        return ($result['status'] ?? null) === 'blocked' ? self::FAILURE : self::SUCCESS;
     }
 
     private function nullableOption(string $key): ?string

@@ -89,6 +89,23 @@
   - Complete the GSC/read-model quality proof card before any TDK/CTR repair selection.
 - whether train continued: `true`
 
+## SECURITY-169-API-24 inherited scheduler publish-canary fixture failure
+
+- repo: `fermatmind/fap-api`
+- PR id / branch: `SECURITY-169-API-24` / `codex/security-169-api-24-fix-sitemap-readiness-cleanup-fail-closed-status`
+- blocker type: `inherited_scheduler_publish_canary_fixture_not_publishable`
+- evidence:
+  - On clean exact base `0a89b775cc56b4e4018528c1993955473bacd23a`, the existing `command_orchestrates_weekly_l5_low_risk_path_with_indexnow_only` test fails before API24 code is applied.
+  - The scheduler reaches `cms_publish_auto_canary` and the nested canary reports `publish_plan_not_publishable`; API24's new preflight-only readiness regression passes.
+  - The baseline failure is independent of sitemap cache handling, scheduler readiness aggregation, and MBTI cleanup status changes.
+- why not current PR scope:
+  - Repairing CMS publish-plan provenance or the inherited publish-canary fixture is a separate CMS authority scope.
+  - API24 is limited to sitemap stale-cache exclusion and accurate readiness/cleanup blocked status reporting.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Repair the content-page publish-canary fixture/provenance contract in a dedicated scoped PR, then restore the full scheduler test file to isolated green.
+- whether train continued: `true`
+
 ## SECURITY-169-API-20 local ACCEPT_H authentication failure
 
 - repo: `fermatmind/fap-api`

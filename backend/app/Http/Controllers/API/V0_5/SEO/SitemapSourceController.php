@@ -22,8 +22,6 @@ class SitemapSourceController extends Controller
 
     public const FRESH_TTL_SECONDS = 600;
 
-    public const STALE_TTL_SECONDS = 86400;
-
     public const LOCK_TTL_SECONDS = 120;
 
     private const FALLBACK_LASTMOD = '2026-06-08T00:00:00+00:00';
@@ -59,10 +57,8 @@ class SitemapSourceController extends Controller
             return $this->cachedResponse($fresh, 'hit');
         }
 
-        $stale = Cache::get(self::CACHE_KEY_STALE);
-        if (is_array($stale)) {
-            return $this->cachedResponse($stale, 'stale');
-        }
+        // Dynamic URLs may have been depublished since this cache was written.
+        Cache::forget(self::CACHE_KEY_STALE);
 
         return $this->cachedResponse($this->fallbackPayload(), 'fallback');
     }
@@ -128,7 +124,7 @@ class SitemapSourceController extends Controller
     public function storeCache(array $payload): void
     {
         Cache::put(self::CACHE_KEY_FRESH, $payload, self::FRESH_TTL_SECONDS);
-        Cache::put(self::CACHE_KEY_STALE, $payload, self::STALE_TTL_SECONDS);
+        Cache::forget(self::CACHE_KEY_STALE);
     }
 
     /**
@@ -137,7 +133,6 @@ class SitemapSourceController extends Controller
     private function cachedResponse(array $payload, string $cacheState): JsonResponse
     {
         $cacheControl = match ($cacheState) {
-            'stale' => 'public, max-age=60, s-maxage=120',
             'fallback' => 'public, max-age=30, s-maxage=60',
             default => 'public, max-age=300, s-maxage=600',
         };

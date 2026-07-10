@@ -43492,6 +43492,26 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "20 focused API24 tests passed with 357 assertions across sitemap cache fallback, SEO scheduler readiness, and URL Truth cleanup status contracts.",
+        "status": "pass"
+      },
+      "fresh_migration": {
+        "evidence": "APP_ENV=testing SQLite migration completed successfully at /tmp/fap-api-security-169-api-24.sqlite.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed, including the main PHPUnit suite, MBTI smoke/report/share flow, events, payment, migration, auth, order-security, dependency, and webhook/attempt gates.",
+        "status": "pass"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 12 changed paths are listed in SECURITY-169-API-24 allowed_paths; Pint, JSON/YAML parsing, sidecar JSON parsing, and git diff --check passed. The inherited scheduler CMS publish canary fixture failure reproduced on the exact unmodified base and is recorded in the sidecar without affecting API24 required checks.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -43507,6 +43527,16 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-24; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T19:16:00+08:00",
+        "note": "Dependency SECURITY-169-API-23 implementation merged at 13337cd690a9ef6a2360be5188de7b55fa700ab8 and ledger-closed at 0a89b775cc56b4e4018528c1993955473bacd23a; started API24 in an isolated worktree from latest origin/main.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-10T19:28:00+08:00",
+        "note": "Local validation passed: 20 focused API24 tests/357 assertions; 233-route inventory; fresh SQLite migration; full backend/scripts/ci_verify_mbti.sh and all follow-on gates; Pint, JSON/YAML parsing, git diff --check, and scope validation with 12 changed paths and zero outside the allowlist. The inherited scheduler CMS publish canary fixture failure reproduced on exact base 0a89b775cc56b4e4018528c1993955473bacd23a and was recorded as a sidecar. No CMS, provider, deploy, or production write was performed.",
+        "status": "local_checks_passed"
       }
     ],
     "failure_reason": null,
@@ -43518,7 +43548,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "local_checks_passed",
     "title": "SECURITY-169-API-24: fix sitemap/readiness/cleanup fail-closed status",
     "train_scope": "security_169_fap_api_audit"
   },

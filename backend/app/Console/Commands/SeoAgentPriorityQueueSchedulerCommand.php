@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Carbon;
 use RuntimeException;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -269,20 +269,28 @@ final class SeoAgentPriorityQueueSchedulerCommand extends Command
             '--json' => true,
         ]);
         $steps['rollback_preflight'] = $this->stepSummary($preflight);
+        $urlTruthPreflight = $this->urlTruthPreflight();
+        $indexnowConfigPreflight = $this->indexnowConfigPreflight();
+        $issue = match (true) {
+            ! $this->guardPassed($preflight) => 'rollback_preflight_blocked',
+            ! $this->urlTruthPreflightPassed($urlTruthPreflight) => 'url_truth_preflight_blocked',
+            ! $this->indexnowConfigPreflightPassed($indexnowConfigPreflight) => 'indexnow_config_preflight_blocked',
+            default => null,
+        };
 
         return $this->finishPreflightWithEvidence(
             $artifactDir,
             $timestamp,
-            $this->guardPassed($preflight) ? 'success' : 'blocked',
+            $issue === null ? 'success' : 'blocked',
             $sources,
             $limit,
             $draftLimit,
             $publishLimit,
             $steps,
             [
-                'issue' => $this->guardPassed($preflight) ? null : 'rollback_preflight_blocked',
-                'url_truth_preflight' => $this->urlTruthPreflight(),
-                'indexnow_config_preflight' => $this->indexnowConfigPreflight(),
+                'issue' => $issue,
+                'url_truth_preflight' => $urlTruthPreflight,
+                'indexnow_config_preflight' => $indexnowConfigPreflight,
             ]
         );
     }
@@ -331,7 +339,7 @@ final class SeoAgentPriorityQueueSchedulerCommand extends Command
             return $this->failureSummary($name.'_missing');
         }
 
-        $buffer = new BufferedOutput();
+        $buffer = new BufferedOutput;
         $exitCode = $command->run(new ArrayInput(['command' => $name, ...$input]), $buffer);
         $summary = json_decode(trim($buffer->fetch()), true);
         if (! is_array($summary)) {
@@ -440,16 +448,40 @@ final class SeoAgentPriorityQueueSchedulerCommand extends Command
         $keyLocationPresent = trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.key_location')) !== '';
         $liveSubmissionEnabled = (bool) config('seo_intel.search_channel_queue.live_submission.enabled', false);
         $externalCallsEnabled = (bool) config('seo_intel.search_channel_queue.live_submission.external_api_calls_enabled', false);
+        $channelLiveApiEnabled = (bool) config('seo_intel.indexnow_live_api_enabled', false);
+        $readyForLiveSubmit = $keyPresent
+            && $keyLocationPresent
+            && $liveSubmissionEnabled
+            && $externalCallsEnabled
+            && $channelLiveApiEnabled;
 
         return [
-            'status' => $keyPresent && $keyLocationPresent ? 'pass' : 'blocked',
+            'status' => $readyForLiveSubmit ? 'pass' : 'blocked',
             'key_present' => $keyPresent,
             'key_location_present' => $keyLocationPresent,
             'live_submission_enabled' => $liveSubmissionEnabled,
             'external_api_calls_enabled' => $externalCallsEnabled,
-            'ready_for_live_submit' => $keyPresent && $keyLocationPresent && $liveSubmissionEnabled && $externalCallsEnabled,
+            'channel_live_api_enabled' => $channelLiveApiEnabled,
+            'ready_for_live_submit' => $readyForLiveSubmit,
             'secret_values_printed' => false,
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $preflight
+     */
+    private function urlTruthPreflightPassed(array $preflight): bool
+    {
+        return in_array((string) ($preflight['status'] ?? ''), ['pass', 'soft_pass_no_current_rows'], true);
+    }
+
+    /**
+     * @param  array<string, mixed>  $preflight
+     */
+    private function indexnowConfigPreflightPassed(array $preflight): bool
+    {
+        return ($preflight['status'] ?? null) === 'pass'
+            && ($preflight['ready_for_live_submit'] ?? false) === true;
     }
 
     /**

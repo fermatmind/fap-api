@@ -43,11 +43,6 @@ final class WarmSitemapSourceCacheCommand extends Command
             }
         } catch (\Throwable $throwable) {
             $elapsed = round(microtime(true) - $start, 3);
-            $stale = Cache::get(SitemapSourceController::CACHE_KEY_STALE);
-            if (is_array($stale)) {
-                return $this->emitResult('stale_retained', (int) ($stale['count'] ?? 0), $elapsed, $throwable->getMessage());
-            }
-
             $controller = app(SitemapSourceController::class);
             $payload = $controller->fallbackPayload();
             $controller->storeCache($payload);

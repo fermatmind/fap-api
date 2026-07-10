@@ -333,5 +333,20 @@
     "required_checks_affected": false,
     "recommended_follow_up": "Re-run ACCEPT_H in a clean acceptance environment and inspect its request ownership/token setup in a separate scoped reliability task if the 401 persists.",
     "train_continued": true
+  },
+  {
+    "repo": "fermatmind/fap-api",
+    "pr_id": "SECURITY-169-API-24",
+    "branch": "codex/security-169-api-24-fix-sitemap-readiness-cleanup-fail-closed-status",
+    "blocker_type": "inherited_scheduler_publish_canary_fixture_not_publishable",
+    "evidence": [
+      "On clean exact base 0a89b775cc56b4e4018528c1993955473bacd23a, the existing command_orchestrates_weekly_l5_low_risk_path_with_indexnow_only test fails before API24 code is applied.",
+      "The scheduler reaches cms_publish_auto_canary and the nested canary reports publish_plan_not_publishable; API24's new preflight-only readiness regression passes.",
+      "The same baseline failure is independent of sitemap cache handling, scheduler readiness aggregation, and MBTI cleanup status changes."
+    ],
+    "why_not_current_pr_scope": "Repairing CMS publish-plan provenance or the inherited publish-canary fixture is a separate CMS authority scope. API24 is limited to sitemap stale-cache exclusion and accurate readiness/cleanup blocked status reporting.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Repair the content-page publish-canary fixture/provenance contract in a dedicated scoped PR, then restore the full scheduler test file to isolated green.",
+    "train_continued": true
   }
 ]

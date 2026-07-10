@@ -80,7 +80,7 @@ class SitemapSourceCacheTest extends TestCase
             ->assertHeader('X-Fermat-Cache', 'hit');
     }
 
-    public function test_stale_fallback_returns_stale_when_fresh_expired(): void
+    public function test_stale_dynamic_payload_is_not_served_when_fresh_expired(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         config(['app.url' => 'https://fermatmind.com']);
@@ -106,12 +106,15 @@ class SitemapSourceCacheTest extends TestCase
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
         $response->assertOk()
-            ->assertHeader('X-Fermat-Cache', 'stale')
-            ->assertJsonPath('count', 10)
-            ->assertJsonPath('items.0.loc', 'https://fermatmind.com/en/career/jobs/stale-test-slug');
+            ->assertHeader('X-Fermat-Cache', 'fallback')
+            ->assertJsonPath('source', 'backend_sitemap_generator_fallback');
+
+        $locs = collect($response->json('items'))->pluck('loc')->all();
+        $this->assertNotContains('https://fermatmind.com/en/career/jobs/stale-test-slug', $locs);
+        $this->assertNull(Cache::get('seo:sitemap-source:v1:stale'));
     }
 
-    public function test_stale_returns_different_cache_control(): void
+    public function test_stale_cache_miss_uses_short_fallback_cache_control(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         config(['app.url' => 'https://fermatmind.com']);
@@ -126,11 +129,11 @@ class SitemapSourceCacheTest extends TestCase
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
-        $response->assertHeader('X-Fermat-Cache', 'stale');
-        $this->assertStringContainsString('max-age=60', (string) $response->headers->get('Cache-Control'));
+        $response->assertHeader('X-Fermat-Cache', 'fallback');
+        $this->assertStringContainsString('max-age=30', (string) $response->headers->get('Cache-Control'));
     }
 
-    public function test_warm_command_populates_both_cache_layers(): void
+    public function test_warm_command_populates_only_the_bounded_fresh_cache(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         config(['app.url' => 'https://fermatmind.com']);
@@ -150,16 +153,23 @@ class SitemapSourceCacheTest extends TestCase
         $stale = Cache::get('seo:sitemap-source:v1:stale');
 
         $this->assertIsArray($fresh);
-        $this->assertIsArray($stale);
         $this->assertTrue($fresh['ok']);
-        $this->assertTrue($stale['ok']);
-        $this->assertSame($fresh['count'], $stale['count']);
+        $this->assertNull($stale);
     }
 
-    public function test_warm_command_writes_safe_fallback_when_generator_fails_without_stale_cache(): void
+    public function test_warm_command_replaces_stale_dynamic_cache_with_safe_fallback_when_generator_fails(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         config(['app.url' => 'https://fermatmind.com']);
+        Cache::put('seo:sitemap-source:v1:stale', [
+            'ok' => true,
+            'source' => 'backend_sitemap_generator',
+            'count' => 1,
+            'items' => [[
+                'loc' => 'https://fermatmind.com/en/career/jobs/depublished-role',
+                'lastmod' => '2026-01-01T00:00:00+00:00',
+            ]],
+        ], 86400);
 
         $this->mock(SitemapGenerator::class, function ($mock): void {
             $mock->shouldReceive('generateUrls')
@@ -174,11 +184,13 @@ class SitemapSourceCacheTest extends TestCase
         $stale = Cache::get('seo:sitemap-source:v1:stale');
 
         $this->assertIsArray($fresh);
-        $this->assertIsArray($stale);
         $this->assertSame('backend_sitemap_generator_fallback', $fresh['source']);
-        $this->assertSame('backend_sitemap_generator_fallback', $stale['source']);
         $this->assertGreaterThan(10, $fresh['count']);
-        $this->assertSame($fresh['items'], $stale['items']);
+        $this->assertNull($stale);
+        $this->assertNotContains(
+            'https://fermatmind.com/en/career/jobs/depublished-role',
+            collect($fresh['items'])->pluck('loc')->all(),
+        );
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
         $response->assertOk()
