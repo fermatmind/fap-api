@@ -44391,6 +44391,10 @@
         "status": "pass"
       },
       "github_required_checks": {
+        "evidence": "PR #2910 head 9c054367bbe17a06904e032d67af2db1cc915d13 passed all 15 checks: push and pull-request hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 jobs, plus Semgrep blocking secrets, Semgrep OSS, and SARIF upload.",
+        "status": "pass"
+      },
+      "github_required_checks": {
         "evidence": "PR #2903 head ec7a69f07cca835e90af80d2cdd3bf61a1cffcb1 passed all 15 checks: push and pull-request hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 jobs, plus Semgrep blocking secrets, Semgrep OSS, and SARIF upload.",
         "status": "pass"
       },
@@ -44556,7 +44560,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "9c054367bbe17a06904e032d67af2db1cc915d13",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -44578,18 +44582,23 @@
         "at": "2026-07-11T03:42:01+08:00",
         "note": "Implementation, focused tests, route/migration checks, scope validation, CLI fail-closed/NO-GO validation, and full local CI passed; ready to commit and rebase onto latest origin/main.",
         "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T03:50:57+08:00",
+        "note": "Implementation PR #2910 passed all 15 GitHub checks and squash-merged as 118f1b8415d1ad8d81c62c66fb4285c5e17d3ef6; origin/main and local main contain the merge, and implementation branches were deleted locally and remotely.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-33",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-11T03:50:57+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2910",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-33: harden RIASEC ops runner and sidecar modes",
     "train_scope": "security_169_fap_api_audit"
   },
