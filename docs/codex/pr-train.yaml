@@ -35896,6 +35896,12 @@ prs:
       - backend/app/Console/Commands/PersonalityMbti64GscQueryReadonlyExport.php
       - backend/scripts/seo/gsc_weekly_readonly_runner.sh
       - backend/scripts/seo/gsc_sidecar_runner.sh
+      - backend/tests/Feature/SeoIntel/PersonalityMbti64GscQueryReadonlyExportCommandTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelGscWeeklyReadonlyAutomationPlanTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelGscSidecarRuntimeEnvBoundaryTest.php
+      - backend/docs/seo/gsc-hk-sidecar-runner.md
+      - backend/docs/seo/generated/gsc-hk-sidecar-runner.v1.json
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

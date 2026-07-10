@@ -147,6 +147,60 @@ final class PersonalityMbti64GscQueryReadonlyExportCommandTest extends TestCase
     }
 
     #[Test]
+    public function csv_export_neutralizes_spreadsheet_formula_cells(): void
+    {
+        $this->enableAccessTokenConfig();
+        $targets = $this->targetFile(['/en/personality/enfj-a']);
+        $csvOutput = storage_path('framework/testing/mbti64-gsc-formula-'.Str::uuid()->toString().'.csv');
+
+        Http::fake(Http::response([
+            'rows' => array_map(static fn (string $query): array => [
+                'keys' => [$query, 'https://fermatmind.com/en/personality/enfj-a'],
+                'clicks' => 1,
+                'impressions' => 10,
+                'ctr' => 0.1,
+                'position' => 9.5,
+            ], [
+                '=HYPERLINK("https://example.test")',
+                '+SUM(1,1)',
+                '-1+2',
+                '@cmd',
+                " \t=1+1",
+                'safe personality query',
+            ]),
+        ], 200));
+
+        $exitCode = Artisan::call('personality:mbti64-gsc-query-readonly-export', [
+            '--targets' => $targets,
+            '--start-date' => '2026-06-20',
+            '--end-date' => '2026-06-23',
+            '--dry-run' => true,
+            '--execute-live-read' => true,
+            '--csv-output' => $csvOutput,
+            '--json' => true,
+        ]);
+
+        $handle = fopen($csvOutput, 'r');
+        $this->assertIsResource($handle);
+        fgetcsv($handle);
+        $queries = [];
+        while (($row = fgetcsv($handle)) !== false) {
+            $queries[] = $row[2] ?? null;
+        }
+        fclose($handle);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame([
+            '\'=HYPERLINK("https://example.test")',
+            '\'+SUM(1,1)',
+            '\'-1+2',
+            '\'@cmd',
+            "' \t=1+1",
+            'safe personality query',
+        ], $queries);
+    }
+
+    #[Test]
     public function command_rejects_private_or_non_personality_targets_before_any_gsc_call(): void
     {
         Http::fake();

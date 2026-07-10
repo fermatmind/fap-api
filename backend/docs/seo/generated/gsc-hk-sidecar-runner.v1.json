@@ -261,8 +261,11 @@
     "script": "backend/scripts/seo/gsc_sidecar_runner.sh",
     "default_env_file": "/opt/fermatmind/seo-gsc-runner/env/gsc-sidecar.env",
     "env_file_override": "SIDECAR_ENV_FILE",
-    "default_app_config_cache": "/tmp/fermatmind-gsc-sidecar-config.php",
-    "app_config_cache_override": "SIDECAR_CONFIG_CACHE",
+    "env_file_parser": "strict literal KEY=VALUE parser without shell evaluation",
+    "default_app_config_cache": "private mktemp directory under /tmp",
+    "app_config_cache_override": null,
+    "cache_directory_mode": "0700",
+    "cache_cleanup_on_exit": true,
     "production_env_edited_by_pr": false,
     "scheduler_enabled": false,
     "queue_worker_enabled": false,
@@ -273,8 +276,7 @@
       "SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=true",
       "SEO_INTEL_GSC_PROPERTY_URL",
       "SEO_INTEL_GSC_AUTH_MODE=service_account",
-      "SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH",
-      "SIDECAR_CONFIG_CACHE"
+      "SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH"
     ],
     "forbidden_env_file_values": [
       "service-account JSON content",
@@ -290,7 +292,9 @@
     ],
     "fail_closed_if": [
       "env file is missing or unreadable",
-      "APP_CONFIG_CACHE must not point under bootstrap/cache",
+      "env file contains malformed, unsupported, or unbalanced quoted input",
+      "APP_CONFIG_CACHE or SIDECAR_CONFIG_CACHE override is present",
+      "private config cache directory cannot be created",
       "required GSC env is missing",
       "SEO_INTEL_GSC_AUTH_MODE is not service_account",
       "SEO_INTEL_GSC_ACCESS_TOKEN is non-empty",
