@@ -69,9 +69,9 @@ backend/scripts/seo/gsc_sidecar_runner.sh --mode=live-read --start-date=YYYY-MM-
 - sidecar wrapper must call only `seo-intel:collect --collector=gsc_foundation`
 - sidecar wrapper must force `--dry-run --no-write --json`
 - sidecar wrapper must fail if the collector reports any write, CMS, Search Channel, or indexing boundary as enabled
-- sidecar launcher must load runtime gates from `/opt/fermatmind/seo-gsc-runner/env/gsc-sidecar.env` unless `SIDECAR_ENV_FILE` overrides it
-- sidecar launcher must set `APP_CONFIG_CACHE=${SIDECAR_CONFIG_CACHE:-/tmp/fermatmind-gsc-sidecar-config.php}` before Laravel starts
-- sidecar launcher must fail closed if `APP_CONFIG_CACHE` points under `bootstrap/cache`
+- sidecar launcher must parse runtime gates from `/opt/fermatmind/seo-gsc-runner/env/gsc-sidecar.env` as literal `KEY=VALUE` data unless `SIDECAR_ENV_FILE` selects another absolute, non-symlink operator-controlled file
+- sidecar launcher must create a mode-`0700` private random directory under `/tmp`, place `APP_CONFIG_CACHE` inside it, and remove it on exit
+- sidecar launcher must reject `APP_CONFIG_CACHE` and `SIDECAR_CONFIG_CACHE` overrides
 - sidecar launcher must fail closed if inline service-account JSON or access-token env values are present
 
 ## Secret Placement
@@ -193,10 +193,10 @@ Task: `SEO-GSC-SIDECAR-RUNTIME-ENV-CACHE-BOUNDARY-01`
 Launcher guarantees:
 
 - defaults to `/opt/fermatmind/seo-gsc-runner/env/gsc-sidecar.env`
-- supports `SIDECAR_ENV_FILE=/path/to/env` for operator-controlled sidecar env placement
-- sets `APP_CONFIG_CACHE` before Laravel bootstraps
-- defaults `APP_CONFIG_CACHE` to `/tmp/fermatmind-gsc-sidecar-config.php`
-- rejects `APP_CONFIG_CACHE` under `bootstrap/cache`
+- supports `SIDECAR_ENV_FILE=/path/to/env` for absolute, non-symlink operator-controlled sidecar env placement
+- parses only the explicit GSC allowlist as literal `KEY=VALUE` data without evaluating shell syntax
+- creates a private random config-cache directory under `/tmp` with `umask 077`, sets `APP_CONFIG_CACHE` inside it before Laravel bootstraps, and removes it on exit
+- rejects caller-provided `APP_CONFIG_CACHE` and `SIDECAR_CONFIG_CACHE`
 - requires the GSC live-read gates and service-account path to be present
 - rejects inline service-account JSON and access-token env values
 - delegates only to `php artisan seo-intel:gsc-sidecar-runner "$@"`

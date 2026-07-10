@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -19,6 +20,7 @@ final class SeoIntelGscWeeklyReadonlyAutomationPlanTest extends TestCase
 
         $script = (string) file_get_contents($scriptPath);
 
+        $this->assertStringContainsString('PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"', $script);
         $this->assertStringContainsString('WINDOW_DAYS="${WINDOW_DAYS:-28}"', $script);
         $this->assertStringContainsString('7|28', $script);
         $this->assertStringContainsString('LIMIT="${LIMIT:-250}"', $script);
@@ -29,6 +31,8 @@ final class SeoIntelGscWeeklyReadonlyAutomationPlanTest extends TestCase
         $this->assertStringContainsString('seo-intel:gsc-readmodel-import-dry-run', $script);
         $this->assertStringContainsString('--dry-run', $script);
         $this->assertStringContainsString('gsc-weekly-readonly-run.v1', $script);
+        $this->assertStringContainsString('weekly_end_date_must_be_iso_date', $script);
+        $this->assertStringContainsString('weekly_start_date_must_be_iso_date', $script);
 
         $this->assertStringNotContainsString('--execute', $script);
         $this->assertStringNotContainsString('seo-intel:gsc-readmodel-import-canary', $script);
@@ -38,6 +42,24 @@ final class SeoIntelGscWeeklyReadonlyAutomationPlanTest extends TestCase
         $this->assertStringNotContainsString('client_email', $script);
         $this->assertStringNotContainsString('Bearer ', $script);
         $this->assertStringNotContainsString('ya29.', $script);
+    }
+
+    #[Test]
+    public function weekly_runner_rejects_window_arithmetic_payload_before_expansion(): void
+    {
+        $scriptPath = base_path('scripts/seo/gsc_weekly_readonly_runner.sh');
+        $marker = '/tmp/fap-api-gsc-weekly-'.Str::uuid()->toString();
+        @unlink($marker);
+
+        [$exitCode, $output] = $this->runScript($scriptPath, [
+            'PATH' => (string) getenv('PATH'),
+            'WINDOW_DAYS' => 'window[$(touch '.$marker.')]',
+            'END_DATE' => '2026-06-20',
+        ]);
+
+        $this->assertNotSame(0, $exitCode);
+        $this->assertStringContainsString('weekly_window_days_must_be_7_or_28', $output);
+        $this->assertFileDoesNotExist($marker);
     }
 
     #[Test]
@@ -81,5 +103,28 @@ final class SeoIntelGscWeeklyReadonlyAutomationPlanTest extends TestCase
         $this->assertFalse((bool) data_get($artifact, 'allowed_external_call.google_indexing_api', true));
         $this->assertContains('laravel_scheduler_activation', $artifact['held_items'] ?? []);
         $this->assertContains('automatic_tdk_or_content_mutation', $artifact['held_items'] ?? []);
+    }
+
+    /**
+     * @param  array<string, string>  $environment
+     * @return array{int, string}
+     */
+    private function runScript(string $scriptPath, array $environment): array
+    {
+        $pipes = [];
+        $process = proc_open(
+            [$scriptPath],
+            [1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
+            $pipes,
+            base_path(),
+            $environment
+        );
+        $this->assertIsResource($process);
+
+        $output = stream_get_contents($pipes[1]).stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+
+        return [proc_close($process), $output];
     }
 }

@@ -423,27 +423,48 @@ final class PersonalityMbti64GscQueryReadonlyExport extends Command
             throw new RuntimeException('failed to write CSV artifact.');
         }
 
-        fputcsv($handle, ['target_url', 'path', 'query', 'query_hash', 'clicks', 'impressions', 'ctr', 'position', 'start_date', 'end_date', 'source']);
-        foreach ((array) ($summary['query_rows'] ?? []) as $row) {
-            if (! is_array($row)) {
-                continue;
+        try {
+            if (fputcsv($handle, ['target_url', 'path', 'query', 'query_hash', 'clicks', 'impressions', 'ctr', 'position', 'start_date', 'end_date', 'source']) === false) {
+                throw new RuntimeException('failed to write CSV header.');
             }
-            fputcsv($handle, [
-                $row['target_url'] ?? '',
-                $row['path'] ?? '',
-                $row['query'] ?? '',
-                $row['query_hash'] ?? '',
-                $row['clicks'] ?? 0,
-                $row['impressions'] ?? 0,
-                $row['ctr'] ?? '',
-                $row['position'] ?? '',
-                data_get($row, 'date_range.start_date'),
-                data_get($row, 'date_range.end_date'),
-                $row['source'] ?? '',
-            ]);
+
+            foreach ((array) ($summary['query_rows'] ?? []) as $row) {
+                if (! is_array($row)) {
+                    continue;
+                }
+
+                $cells = [
+                    $row['target_url'] ?? '',
+                    $row['path'] ?? '',
+                    $row['query'] ?? '',
+                    $row['query_hash'] ?? '',
+                    $row['clicks'] ?? 0,
+                    $row['impressions'] ?? 0,
+                    $row['ctr'] ?? '',
+                    $row['position'] ?? '',
+                    data_get($row, 'date_range.start_date'),
+                    data_get($row, 'date_range.end_date'),
+                    $row['source'] ?? '',
+                ];
+
+                if (fputcsv($handle, array_map($this->spreadsheetSafeCell(...), $cells)) === false) {
+                    throw new RuntimeException('failed to write CSV row.');
+                }
+            }
+        } finally {
+            fclose($handle);
+        }
+    }
+
+    private function spreadsheetSafeCell(mixed $value): mixed
+    {
+        if (! is_string($value)) {
+            return $value;
         }
 
-        fclose($handle);
+        return preg_match('/^(?:\s*[=+\-@]|[\t\r\n])/u', $value) === 1
+            ? "'".$value
+            : $value;
     }
 
     /**

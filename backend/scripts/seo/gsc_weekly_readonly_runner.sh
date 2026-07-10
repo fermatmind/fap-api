@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 ARTIFACT_DIR="${ARTIFACT_DIR:-/opt/fermatmind/seo-gsc-runner/artifacts}"
 WINDOW_DAYS="${WINDOW_DAYS:-28}"
 LIMIT="${LIMIT:-250}"
 DIMENSIONS="${DIMENSIONS:-query,page}"
-END_DATE="${END_DATE:-$(date -u -d '3 days ago' +%F)}"
-START_DATE="${START_DATE:-$(date -u -d "${END_DATE} - $((WINDOW_DAYS - 1)) days" +%F)}"
+END_DATE="${END_DATE:-}"
+START_DATE="${START_DATE:-}"
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
 
 fail() {
@@ -32,6 +35,37 @@ fi
 
 if [[ "${DIMENSIONS}" != "query,page" ]]; then
   fail "weekly_dimensions_must_be_query_page"
+fi
+
+validate_iso_date() {
+  local value="$1"
+  local issue="$2"
+
+  if [[ ! "${value}" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+    fail "${issue}"
+  fi
+
+  if [[ "$(date -u -d "${value}" +%F 2>/dev/null)" != "${value}" ]]; then
+    fail "${issue}"
+  fi
+}
+
+if [[ -z "${END_DATE}" ]]; then
+  END_DATE="$(date -u -d '3 days ago' +%F)"
+else
+  validate_iso_date "${END_DATE}" "weekly_end_date_must_be_iso_date"
+fi
+
+if [[ -z "${START_DATE}" ]]; then
+  START_DATE="$(date -u -d "${END_DATE} - $((WINDOW_DAYS - 1)) days" +%F)"
+else
+  validate_iso_date "${START_DATE}" "weekly_start_date_must_be_iso_date"
+fi
+
+validate_iso_date "${START_DATE}" "weekly_start_date_must_be_iso_date"
+
+if [[ "${START_DATE}" > "${END_DATE}" ]]; then
+  fail "weekly_start_date_must_not_follow_end_date"
 fi
 
 mkdir -p "${ARTIFACT_DIR}"
