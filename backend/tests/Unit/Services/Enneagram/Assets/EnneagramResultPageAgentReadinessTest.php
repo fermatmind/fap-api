@@ -166,6 +166,35 @@ final class EnneagramResultPageAgentReadinessTest extends TestCase
         }
     }
 
+    public function test_strict_mode_rejects_duplicate_and_unknown_source_ids(): void
+    {
+        $root = $this->tempDir('enneagram-agent-ledger-source-ids');
+        $sourceLedgerDir = $root.'/ledger';
+        mkdir($sourceLedgerDir, 0777, true);
+        $ledger = $this->readJson($this->sourceLedgerDir().'/source_ledger.json');
+        $ledger['sources'][] = $ledger['sources'][0];
+        $ledger['sources'][] = array_merge($ledger['sources'][0], ['source_id' => 'unapproved_source']);
+        file_put_contents($sourceLedgerDir.'/source_ledger.json', json_encode($ledger, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        try {
+            $summary = app(EnneagramResultPageAgentReadiness::class)->audit([
+                'run_id' => 'invalid-source-ids',
+                'artifact_dir' => $root.'/artifacts',
+                'source_ledger_dir' => $sourceLedgerDir,
+                'strict' => true,
+            ]);
+
+            $this->assertFalse((bool) ($summary['ok'] ?? true));
+            $this->assertContains('source_ledger_invalid', $summary['strict_failures'] ?? []);
+            $inventory = $this->readJson($root.'/artifacts/invalid-source-ids/source_ledger_inventory.json');
+            $errors = implode("\n", (array) data_get($inventory, 'source_ledger.errors', []));
+            $this->assertStringContainsString('source_id values must be unique', $errors);
+            $this->assertStringContainsString('unexpected source_id unapproved_source', $errors);
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
     public function test_strict_mode_rejects_incomplete_candidate_directory(): void
     {
         $root = $this->tempDir('enneagram-agent-strict');
@@ -209,6 +238,7 @@ final class EnneagramResultPageAgentReadinessTest extends TestCase
             $this->assertFalse((bool) ($summary['ok'] ?? true));
             $this->assertContains('metadata_leakage_hits', $summary['strict_failures']);
             $this->assertContains('forbidden_claim_hits', $summary['strict_failures']);
+            $this->assertContains('source_mapping_failures', $summary['strict_failures']);
 
             $metadata = $this->readJson($root.'/artifacts/strict-leak/metadata_leakage_report.json');
             $this->assertGreaterThan(0, (int) ($metadata['hit_count'] ?? 0));

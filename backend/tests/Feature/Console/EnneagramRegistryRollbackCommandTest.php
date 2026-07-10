@@ -92,6 +92,29 @@ final class EnneagramRegistryRollbackCommandTest extends TestCase
     }
 
     /**
+     * @return array<string,mixed>
+     */
+    private function payloadSourceMappingFixture(): array
+    {
+        return [
+            'source_mapping_failure_count' => 0,
+            'missing_count' => 0,
+            'fallback_count' => 0,
+            'blocked_count' => 0,
+            'duplicate_selection_count' => 0,
+            'branch_provenance_mismatch_count' => 0,
+            'branch_payload_counts' => [
+                'low_resonance_response' => 108,
+                'partial_resonance_response' => 90,
+                'diffuse_convergence_response' => 108,
+                'close_call_pair' => 36,
+                'scene_localization_response' => 162,
+                'fc144_recommendation_response' => 90,
+            ],
+        ];
+    }
+
+    /**
      * @return array{candidate_manifest_sha256:string,runtime_registry_manifest_sha256:string}
      */
     private function seedCandidateArtifacts(string $candidateDir): array
@@ -175,7 +198,7 @@ final class EnneagramRegistryRollbackCommandTest extends TestCase
         File::put($candidateDir.'/phase8b_summary.json', json_encode(['verdict' => 'PASS_FOR_PRODUCTION_EQUIVALENT_E2E_QA'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/candidate_payloads_manifest.json', json_encode(['total_payload_count' => 630], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/candidate_payload_hashes.json', json_encode(['candidate_payloads_manifest_sha256' => 'fixture'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
-        File::put($candidateDir.'/candidate_payload_source_mapping.json', json_encode(['source_mapping_failure_count' => 0], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+        File::put($candidateDir.'/candidate_payload_source_mapping.json', json_encode($this->payloadSourceMappingFixture(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 
         for ($i = 0; $i < 630; $i++) {
             File::put($candidateDir.'/candidate_payloads/payload_'.str_pad((string) $i, 3, '0', STR_PAD_LEFT).'.json', '{}');

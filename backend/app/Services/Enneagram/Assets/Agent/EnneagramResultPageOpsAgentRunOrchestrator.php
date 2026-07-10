@@ -79,7 +79,7 @@ final class EnneagramResultPageOpsAgentRunOrchestrator
 
         $contract = $this->readContract($contractPath);
         $contractErrors = $this->contractErrors($contract);
-        $scopeReport = $this->scopeValidationReport($changedFiles, $simulateCurrentScopeFailure);
+        $scopeReport = $this->scopeValidationReport($mode, $changedFiles, $simulateCurrentScopeFailure);
         $failureReport = $this->failureClassificationReport($simulateExternalBlocker, $simulateCurrentScopeFailure);
         $queueItem = $this->queueItem($runId, $mode, $scopeId, $baseBranch, $prTitle);
         $branchPlan = $this->branchPlan($scopeId, $baseBranch);
@@ -196,8 +196,9 @@ final class EnneagramResultPageOpsAgentRunOrchestrator
     /**
      * @return array<string,mixed>
      */
-    private function scopeValidationReport(array $changedFiles, bool $simulateCurrentScopeFailure): array
+    private function scopeValidationReport(string $mode, array $changedFiles, bool $simulateCurrentScopeFailure): array
     {
+        $changedFilesRequired = in_array($mode, ['auto-to-pr', 'auto-to-staging'], true);
         $outOfScope = [];
         foreach ($changedFiles as $file) {
             if (! $this->fileIsAllowed($file)) {
@@ -209,12 +210,18 @@ final class EnneagramResultPageOpsAgentRunOrchestrator
             $outOfScope[] = 'backend/routes/api.php';
         }
 
+        $errors = $outOfScope === [] ? [] : ['scope_validation_failed'];
+        if ($changedFilesRequired && $changedFiles === []) {
+            $errors[] = 'changed_files_required';
+        }
+
         return [
-            'valid' => $outOfScope === [],
+            'valid' => $errors === [],
+            'changed_files_required' => $changedFilesRequired,
             'changed_files' => $changedFiles,
             'allowed_prefixes' => self::ALLOWED_CHANGED_FILE_PREFIXES,
             'out_of_scope_files' => array_values(array_unique($outOfScope)),
-            'errors' => $outOfScope === [] ? [] : ['scope_validation_failed'],
+            'errors' => $errors,
         ];
     }
 
@@ -381,8 +388,17 @@ final class EnneagramResultPageOpsAgentRunOrchestrator
 
     private function fileIsAllowed(string $file): bool
     {
+        if ($file === '' || str_starts_with($file, '/') || str_contains($file, '\\') || str_contains($file, "\0")) {
+            return false;
+        }
+
+        $segments = explode('/', $file);
+        if (in_array('.', $segments, true) || in_array('..', $segments, true)) {
+            return false;
+        }
+
         foreach (self::ALLOWED_CHANGED_FILE_PREFIXES as $allowed) {
-            if ($file === $allowed || str_starts_with($file, $allowed)) {
+            if ((str_ends_with($allowed, '/') && str_starts_with($file, $allowed)) || $file === $allowed) {
                 return true;
             }
         }
@@ -451,7 +467,7 @@ final class EnneagramResultPageOpsAgentRunOrchestrator
     {
         $sanitized = preg_replace('/[^A-Za-z0-9_.-]+/', '-', trim($value)) ?: '';
 
-        return trim($sanitized, '-') ?: 'ops-agent-runner';
+        return trim($sanitized, '-._') ?: 'ops-agent-runner';
     }
 
     private function sanitizeBranchSegment(string $value): string

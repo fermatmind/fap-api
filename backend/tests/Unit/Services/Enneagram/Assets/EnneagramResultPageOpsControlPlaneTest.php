@@ -9,6 +9,26 @@ use Tests\TestCase;
 
 final class EnneagramResultPageOpsControlPlaneTest extends TestCase
 {
+    public function test_run_id_cannot_escape_artifact_root(): void
+    {
+        $root = $this->tempDir('enneagram-ops-control-plane-traversal');
+
+        try {
+            $summary = app(EnneagramResultPageOpsControlPlane::class)->audit([
+                'run_id' => '..',
+                'artifact_dir' => $root,
+                'mode' => 'auto-to-report',
+                'strict' => true,
+            ]);
+
+            $this->assertSame('ops-control-plane', $summary['run_id'] ?? null);
+            $this->assertFileExists($root.'/ops-control-plane/ops_agent_control_plane_report.json');
+            $this->assertFileDoesNotExist(dirname($root).'/ops_agent_control_plane_report.json');
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
     public function test_control_plane_audit_writes_report_for_auto_to_report_without_production_permissions(): void
     {
         $root = $this->tempDir('enneagram-ops-control-plane');

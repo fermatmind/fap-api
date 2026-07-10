@@ -8,6 +8,29 @@ use Tests\TestCase;
 
 final class EnneagramResultPageOpsControlPlaneCommandTest extends TestCase
 {
+    public function test_control_plane_command_sanitizes_traversal_run_id(): void
+    {
+        $root = sys_get_temp_dir().'/enneagram-ops-control-plane-command-traversal-'.bin2hex(random_bytes(4));
+
+        try {
+            $this->artisan('enneagram:result-page-ops-control-plane', [
+                'action' => 'audit',
+                '--run-id' => '..',
+                '--artifact-dir' => $root,
+                '--mode' => 'auto-to-report',
+                '--strict' => true,
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            $this->assertFileExists($root.'/ops-control-plane/ops_agent_control_plane_report.json');
+            $this->assertFileDoesNotExist(dirname($root).'/ops_agent_control_plane_report.json');
+        } finally {
+            if (is_dir($root)) {
+                \Illuminate\Support\Facades\File::deleteDirectory($root);
+            }
+        }
+    }
+
     public function test_control_plane_command_writes_read_only_report(): void
     {
         $root = $this->tempDir('enneagram-ops-control-plane-command');

@@ -547,27 +547,46 @@ final class EnneagramResultPageAgentReadiness
 
             $status['payload_source_mapping_present'] = is_array($payloadMapping);
 
-            foreach ([
+            $this->appendMappingCounterIssues($issues, $sourceMapping, [
                 'source_mapping_failure_count',
                 'fallback_source_count',
                 'blocked_source_count',
                 'duplicate_selection_count',
                 'branch_provenance_mismatch_count',
-            ] as $counter) {
-                $value = data_get($sourceMapping, $counter);
-                if ($value !== null && (int) $value !== 0) {
-                    $issues[] = [
-                        'counter' => $counter,
-                        'count' => (int) $value,
-                    ];
-                }
-            }
+            ], 'source_mapping_report');
 
             if (! is_array($payloadMapping)) {
                 $issues[] = [
                     'counter' => 'candidate_payload_source_mapping_missing',
                     'count' => 1,
                 ];
+            } else {
+                $this->appendMappingCounterIssues($issues, $payloadMapping, [
+                    'source_mapping_failure_count',
+                    'missing_count',
+                    'fallback_count',
+                    'blocked_count',
+                    'duplicate_selection_count',
+                    'branch_provenance_mismatch_count',
+                ], 'candidate_payload_source_mapping');
+
+                $expectedBranchCounts = [
+                    'low_resonance_response' => 108,
+                    'partial_resonance_response' => 90,
+                    'diffuse_convergence_response' => 108,
+                    'close_call_pair' => 36,
+                    'scene_localization_response' => 162,
+                    'fc144_recommendation_response' => 90,
+                ];
+                foreach ($expectedBranchCounts as $branch => $expected) {
+                    $actual = data_get($payloadMapping, 'branch_payload_counts.'.$branch);
+                    if (! is_int($actual) || $actual !== $expected) {
+                        $issues[] = [
+                            'counter' => 'candidate_payload_source_mapping.branch_payload_counts.'.$branch,
+                            'count' => is_numeric($actual) ? (int) $actual : -1,
+                        ];
+                    }
+                }
             }
         }
 
@@ -587,6 +606,24 @@ final class EnneagramResultPageAgentReadiness
             'issues' => $issues,
             'negative_guarantees' => $this->negativeGuarantees(),
         ];
+    }
+
+    /**
+     * @param  list<array{counter:string,count:int}>  $issues
+     * @param  array<string,mixed>|null  $report
+     * @param  list<string>  $counters
+     */
+    private function appendMappingCounterIssues(array &$issues, ?array $report, array $counters, string $reportName): void
+    {
+        foreach ($counters as $counter) {
+            $value = data_get($report, $counter);
+            if (! is_int($value) || $value !== 0) {
+                $issues[] = [
+                    'counter' => $reportName.'.'.$counter,
+                    'count' => is_numeric($value) ? (int) $value : -1,
+                ];
+            }
+        }
     }
 
     /**
@@ -843,6 +880,17 @@ final class EnneagramResultPageAgentReadiness
         }
 
         $presentIds = $this->presentSourceIds($sources);
+        $rawIds = array_map(
+            static fn ($source): string => is_array($source) ? trim((string) ($source['source_id'] ?? '')) : '',
+            $sources
+        );
+        if (count($rawIds) !== count(array_unique($rawIds))) {
+            $errors[] = 'source_ledger source_id values must be unique';
+        }
+        $unexpectedIds = array_values(array_diff($presentIds, self::SOURCE_LEDGER_REQUIRED_SOURCE_IDS));
+        foreach ($unexpectedIds as $sourceId) {
+            $errors[] = "source_ledger unexpected source_id {$sourceId}";
+        }
         foreach (self::SOURCE_LEDGER_REQUIRED_SOURCE_IDS as $sourceId) {
             if (! in_array($sourceId, $presentIds, true)) {
                 $errors[] = "source_ledger missing required source_id {$sourceId}";
@@ -857,6 +905,9 @@ final class EnneagramResultPageAgentReadiness
             }
 
             $sourceId = (string) ($source['source_id'] ?? 'unknown');
+            if (preg_match('/^[a-z0-9][a-z0-9_]*$/', $sourceId) !== 1) {
+                $errors[] = "source_ledger source row {$index} has invalid source_id";
+            }
             $label = (string) ($source['source_label'] ?? '');
             if (! in_array($label, self::SOURCE_LEDGER_ALLOWED_LABELS, true)) {
                 $errors[] = "source_ledger {$sourceId} has invalid source_label {$label}";

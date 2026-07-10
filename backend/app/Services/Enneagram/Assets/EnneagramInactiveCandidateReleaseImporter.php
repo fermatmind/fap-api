@@ -113,6 +113,7 @@ final class EnneagramInactiveCandidateReleaseImporter
         $importDiffSummary = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'import_diff_summary.json');
         $replacementAdditiveMap = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'replacement_additive_map.json');
         $sourceMappingReport = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'source_mapping_report.json');
+        $payloadSourceMapping = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'candidate_payload_source_mapping.json');
         $forbiddenClaimReport = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'forbidden_claim_report.json');
         $legacyResidualScan = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'legacy_residual_scan.json');
         $fc144BoundaryReport = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'fc144_boundary_report.json');
@@ -146,7 +147,7 @@ final class EnneagramInactiveCandidateReleaseImporter
         }
 
         $this->assertLaunchScope($candidateManifest);
-        $this->assertGovernance($candidateManifest, $phase8bSummary, $importDiffSummary, $replacementAdditiveMap, $sourceMappingReport, $forbiddenClaimReport, $legacyResidualScan, $fc144BoundaryReport);
+        $this->assertGovernance($candidateManifest, $phase8bSummary, $importDiffSummary, $replacementAdditiveMap, $sourceMappingReport, $payloadSourceMapping, $forbiddenClaimReport, $legacyResidualScan, $fc144BoundaryReport);
 
         $runtimeContextBefore = $this->registryReleaseResolver->runtimeRegistryContext(self::PACK_VERSION);
         $releaseId = $this->deterministicReleaseId($candidateManifestHashActual);
@@ -315,6 +316,7 @@ final class EnneagramInactiveCandidateReleaseImporter
      * @param  array<string,mixed>  $importDiffSummary
      * @param  array<string,mixed>  $replacementAdditiveMap
      * @param  array<string,mixed>  $sourceMappingReport
+     * @param  array<string,mixed>  $payloadSourceMapping
      * @param  array<string,mixed>  $forbiddenClaimReport
      * @param  array<string,mixed>  $legacyResidualScan
      * @param  array<string,mixed>  $fc144BoundaryReport
@@ -325,6 +327,7 @@ final class EnneagramInactiveCandidateReleaseImporter
         array $importDiffSummary,
         array $replacementAdditiveMap,
         array $sourceMappingReport,
+        array $payloadSourceMapping,
         array $forbiddenClaimReport,
         array $legacyResidualScan,
         array $fc144BoundaryReport,
@@ -365,6 +368,8 @@ final class EnneagramInactiveCandidateReleaseImporter
             throw new RuntimeException('Source mapping report contains failures.');
         }
 
+        $this->assertPayloadSourceMapping($payloadSourceMapping);
+
         if ((int) ($legacyResidualScan['legacy_deep_core_residual_count'] ?? -1) !== 0) {
             throw new RuntimeException('Legacy residual scan is not clean.');
         }
@@ -375,6 +380,31 @@ final class EnneagramInactiveCandidateReleaseImporter
 
         if ((int) ($fc144BoundaryReport['violation_count'] ?? -1) !== 0) {
             throw new RuntimeException('FC144 boundary report is not clean.');
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $mapping
+     */
+    private function assertPayloadSourceMapping(array $mapping): void
+    {
+        foreach (['source_mapping_failure_count', 'missing_count', 'fallback_count', 'blocked_count', 'duplicate_selection_count', 'branch_provenance_mismatch_count'] as $counter) {
+            if (! array_key_exists($counter, $mapping) || ! is_int($mapping[$counter]) || $mapping[$counter] !== 0) {
+                throw new RuntimeException('Candidate payload source mapping contains invalid counter: '.$counter);
+            }
+        }
+
+        foreach ([
+            'low_resonance_response' => 108,
+            'partial_resonance_response' => 90,
+            'diffuse_convergence_response' => 108,
+            'close_call_pair' => 36,
+            'scene_localization_response' => 162,
+            'fc144_recommendation_response' => 90,
+        ] as $branch => $expected) {
+            if (data_get($mapping, 'branch_payload_counts.'.$branch) !== $expected) {
+                throw new RuntimeException('Candidate payload source mapping branch count mismatch: '.$branch);
+            }
         }
     }
 

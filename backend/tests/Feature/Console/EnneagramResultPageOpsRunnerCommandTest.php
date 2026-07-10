@@ -58,6 +58,28 @@ final class EnneagramResultPageOpsRunnerCommandTest extends TestCase
         }
     }
 
+    public function test_ops_runner_command_blocks_missing_changed_file_scope(): void
+    {
+        $root = $this->tempDir('enneagram-ops-runner-command-missing-scope');
+
+        try {
+            $this->artisan('enneagram:result-page-ops-runner', [
+                'action' => 'plan',
+                '--run-id' => 'command-missing-scope',
+                '--artifact-dir' => $root,
+                '--mode' => 'auto-to-pr',
+                '--scope-id' => 'ops-agent-runner',
+                '--strict' => true,
+                '--json' => true,
+            ])->assertExitCode(1);
+
+            $report = $this->readJson($root.'/command-missing-scope/ops_agent_run_orchestrator_plan.json');
+            $this->assertContains('changed_files_required', $report['errors'] ?? []);
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
     private function tempDir(string $prefix): string
     {
         $path = sys_get_temp_dir().'/'.$prefix.'-'.bin2hex(random_bytes(4));

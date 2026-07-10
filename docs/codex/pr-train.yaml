@@ -36196,6 +36196,18 @@ prs:
       - backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageAgentReadiness.php
       - backend/app/Services/Enneagram/Assets/EnneagramProductionEquivalentCandidatePayloadExporter.php
       - backend/app/Services/Enneagram/Assets/EnneagramInactiveCandidateReleaseImporter.php
+      - backend/tests/Feature/Console/EnneagramResultPageOpsControlPlaneCommandTest.php
+      - backend/tests/Feature/Console/EnneagramResultPageOpsRunnerCommandTest.php
+      - backend/tests/Feature/Console/EnneagramInactiveCandidateReleaseCommandTest.php
+      - backend/tests/Feature/Console/EnneagramRegistryActivationCommandTest.php
+      - backend/tests/Feature/Console/EnneagramRegistryRollbackCommandTest.php
+      - backend/tests/Unit/Services/Enneagram/Assets/EnneagramInactiveCandidateReleaseImporterTest.php
+      - backend/tests/Unit/Services/Enneagram/Assets/EnneagramResultPageAgentReadinessTest.php
+      - backend/tests/Unit/Services/Enneagram/Assets/EnneagramResultPageCandidateStagingHarnessTest.php
+      - backend/tests/Unit/Services/Enneagram/Assets/EnneagramResultPageOpsAgentRunOrchestratorTest.php
+      - backend/tests/Unit/Services/Enneagram/Assets/EnneagramResultPageOpsControlPlaneTest.php
+      - backend/tests/Unit/Services/Ops/EnneagramRegistryActivationGateServiceTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
