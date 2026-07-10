@@ -1,0 +1,80 @@
+{
+  "package": "big-five-zh-facet-hub-content-repair-2026-07-10",
+  "outcome": "pass",
+  "generated_at": "2026-07-10T00:00:00Z",
+  "model_sessions": [
+    {
+      "id": "codex-native-raw-2026-07-10",
+      "mode": "codex_native_draft",
+      "external_model": false
+    },
+    {
+      "id": "codex-skeptical-review-2026-07-10",
+      "mode": "codex_skeptical_self_review",
+      "external_model": false
+    },
+    {
+      "id": "codex-repair-2026-07-10",
+      "mode": "codex_repair",
+      "external_model": false
+    }
+  ],
+  "coverage": {
+    "assets": 1,
+    "locale": "zh-CN",
+    "entity_type": "facet_hub",
+    "section_count": 15,
+    "section_lengths": {
+      "quick_answer": 139,
+      "facet_domain_relationship": 148,
+      "why_facets": 145,
+      "openness_facets": 116,
+      "conscientiousness_facets": 111,
+      "extraversion_facets": 125,
+      "agreeableness_facets": 123,
+      "neuroticism_facets": 131,
+      "reading_method": 161,
+      "cross_facet_examples": 180,
+      "common_misunderstandings": 149,
+      "how_to_use": 149,
+      "method_boundary": 189,
+      "publish_state": 135,
+      "related_links": 120
+    },
+    "faq_count": 6,
+    "structured_internal_link_count": 7,
+    "linked_facet_route_count": 30,
+    "shared_ledger_domain_count": 5,
+    "shared_ledger_facet_count": 30
+  },
+  "checks": {
+    "v1_assets_envelope": "pass",
+    "body_md_only": "pass",
+    "substantive_sections": "pass",
+    "five_group_navigation": "pass",
+    "all_thirty_facet_routes": "pass",
+    "cross_facet_examples": "pass",
+    "faq_gate": "pass",
+    "structured_internal_links": "pass",
+    "source_traceability": "pass",
+    "taxonomy_system_boundary": "pass",
+    "private_result_boundary": "pass",
+    "duplicate_template_risk": "pass_single_hub",
+    "forbidden_claims": "pass",
+    "raw_draft_audited": "pass",
+    "repaired_draft_matches_seed": "pass",
+    "publish_indexability": "blocked_noindex_package_only"
+  },
+  "indexability": {
+    "robots": "noindex,follow",
+    "launch_state": "content_ready",
+    "index_eligible": false,
+    "sitemap_eligible": false,
+    "llms_eligible": false
+  },
+  "blockers": [],
+  "deferred": [
+    "Thirty Facet detail packages remain content_stub until their five separate domain PRs are completed.",
+    "CMS write/import, runtime readback, indexability, sitemap, llms, canonical release, JSON-LD release, and search submission are outside this PR."
+  ]
+}

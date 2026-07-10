@@ -83433,13 +83433,13 @@
     "base": "main",
     "branch": "codex/big5-zh-legacy-route-audit-01",
     "depends_on": [],
-    "status": "committed",
-    "commit_sha": "eee3cf697d9f13880f01c0ac14a4ae0964ab63ce",
-    "pr_url": null,
+    "status": "merged",
+    "commit_sha": "3730de5e8175b67273c0e0a9ef17db0de2a0a09b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2867",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-10T08:44:46Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -83473,8 +83473,8 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": false
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -83512,6 +83512,95 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "All 15 GitHub checks passed and scope, changed files, PR body, review state, branch policy, and squash merge policy were revalidated."
+      },
+      {
+        "at": "2026-07-10T09:46:56Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in the next same-repository PR: GitHub reports PR #2867 merged at 3730de5e8175b67273c0e0a9ef17db0de2a0a09b; origin/main contains the merge commit and the local and remote task branches were cleaned."
+      }
+    ]
+  },
+  "BIG5-ZH-FACET-HUB-CONTENT-REPAIR-01": {
+    "id": "BIG5-ZH-FACET-HUB-CONTENT-REPAIR-01",
+    "repo": "fap-api",
+    "title": "BIG5-ZH-FACET-HUB-CONTENT-REPAIR-01: repair Chinese Big Five facet hub content package",
+    "base": "main",
+    "branch": "codex/big5-zh-facet-hub-content-repair-01",
+    "depends_on": ["BIG5-ZH-LEGACY-ROUTE-DEPRECATION-02"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The user-provided locked goal explicitly authorized this exact PR id, scope, branch, paths, checks, and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "fap-web PR #1650 is MERGED at 397326812208f9a8b1a7a9e3276155efb9a6d8e4; fap-web origin/main contains the merge commit and its task branch cleanup was verified."
+      },
+      "source_preflight": {
+        "status": "pass",
+        "evidence": "Confirmed the backend Facet Hub authority, current content_ready/noindex gates, thirty content_stub Facet routes, fap-web noindex consumer boundary, and the NEO/IPIP, BFI-2, and BFAS taxonomy distinction."
+      },
+      "package_qa": {
+        "status": "pass",
+        "evidence": "Codex-native raw/review/repaired/V1/QA artifacts pass: one zh-CN Facet Hub, 15 substantive sections, 6 FAQ, 7 structured links, all 30 Facet routes, 5x6 shared ledger, body_md only, and noindex gates locked."
+      },
+      "generic_importer_dry_run": {
+        "status": "pass",
+        "evidence": "No-write generic importer returned dry_run=1, assets_found=1, valid_count=1, errors_count=0, will_create=1, and zero index/sitemap/llms eligible assets."
+      },
+      "focused_contract": {
+        "status": "pass",
+        "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions."
+      },
+      "core_ci": {
+        "status": "pass",
+        "evidence": "After rebasing onto origin/main caf9a7c6c and using a physical worktree-local vendor directory, backend/scripts/ci_verify_mbti.sh passed end to end. The personality full-32 authority gate passed 59 tests and 4847 assertions."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-10T09:46:56Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered only the current PR after its cross-repository redirect dependency merged and was cleaned."
+      },
+      {
+        "at": "2026-07-10T09:46:56Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started the shared source ledger and Chinese Facet Hub Codex-native content repair; no Facet detail content or CMS write is included."
+      },
+      {
+        "at": "2026-07-10T10:01:18Z",
+        "from": "in_progress",
+        "to": "local_checks_failed",
+        "note": "Stopped before commit/push/PR because required core CI has two order-dependent failures reproduced on clean latest origin/main and cannot be repaired within the generated-content-only scope."
+      },
+      {
+        "at": "2026-07-10T14:12:21Z",
+        "from": "local_checks_failed",
+        "to": "in_progress",
+        "note": "Resumed after correcting the test environment: a shared vendor symlink had loaded application code from an unrelated dirty worktree. A physical isolated vendor on latest main passes the exact full-32 gate and complete core CI."
+      },
+      {
+        "at": "2026-07-10T14:20:59Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All manifest checks passed after rebasing: content build/QA, JSON/YAML parsing, no-write importer, 14-test focused contract, complete core CI, diff check, and allowed-path scope validation."
       }
     ]
   }

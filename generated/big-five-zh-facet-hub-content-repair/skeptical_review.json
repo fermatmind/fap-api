@@ -1,0 +1,21 @@
+{
+  "package": "big-five-zh-facet-hub-content-repair-2026-07-10",
+  "raw_draft": "raw_codex_draft.json",
+  "reviewer_mode": "codex_skeptical_self_review",
+  "critical_violations": [],
+  "major_repairs": [
+    "Replace short placeholder sentences with substantive Chinese explanations and a complete 5×6 navigation.",
+    "Correct the raw FAQ implication that BFI-2 supports this exact 30-facet taxonomy; BFI-2 uses 15 facets.",
+    "Remove public-facing implementation language about noindex, sitemap, llms, and future route rollout from the editorial body.",
+    "Add a cross-instrument taxonomy boundary for NEO/IPIP 30 facets, BFI-2 15 facets, and BFAS 10 aspects.",
+    "Add cross-facet examples, common misunderstandings, an actionable reading method, and six non-diagnostic FAQs."
+  ],
+  "minor_repairs": [
+    "Use Chinese-first wording for facet while preserving the English term once for precision.",
+    "Use body_md exclusively and retain a strict V1 assets envelope.",
+    "Replace the self-link in structured internal links with the fifth domain page while keeping seven unique links."
+  ],
+  "private_result_boundary": "pass_after_repair",
+  "duplicate_template_risk": "pass_for_single_hub_after_repair",
+  "adjudication": "repaired_required"
+}

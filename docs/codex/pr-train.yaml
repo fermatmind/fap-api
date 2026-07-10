@@ -38480,3 +38480,46 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: BIG5-ZH-FACET-HUB-CONTENT-REPAIR-01
+    repo: fap-api
+    depends_on: [BIG5-ZH-LEGACY-ROUTE-DEPRECATION-02]
+    branch: codex/big5-zh-facet-hub-content-repair-01
+    title: "BIG5-ZH-FACET-HUB-CONTENT-REPAIR-01: repair Chinese Big Five facet hub content package"
+    train_scope: big5_zh_facet_hub_content_repair
+    status: planned
+    scope:
+      - Build one shared source and 5x6 taxonomy ledger for the Chinese Facet Hub and thirty later Facet detail packages.
+      - Repair only the Chinese Facet Hub content with Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts.
+      - Preserve content_ready plus noindex,follow and keep all index, sitemap, and llms eligibility gates false.
+      - Cover the Facet-to-Domain relationship, five Facet groups, reading method, cross-Facet examples, misunderstandings, method boundary, and CTA.
+      - Require at least ten substantive sections, six FAQ items, seven structured internal links, and all thirty Facet routes in body navigation.
+    allowed_paths:
+      - generated/big-five-zh-facet-hub-content-repair/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Upgrade any of the thirty Facet detail assets from content_stub or produce their final content in this PR.
+      - Write CMS or production data, use --write, change database schema, modify backend runtime/API code, or modify frontend code.
+      - Change canonical, robots, indexability, sitemap, llms, JSON-LD runtime, search submission, permissions, secrets, or deployment configuration.
+    validation:
+      - node generated/big-five-zh-facet-hub-content-repair/build-package.mjs
+      - node generated/big-five-zh-facet-hub-content-repair/validate-package.mjs
+      - find generated/big-five-zh-facet-hub-content-repair -name '*.json' -print0 | xargs -0 -n1 python3 -m json.tool >/dev/null
+      - cd backend && php artisan personality-public-assets:import --source=../generated/big-five-zh-facet-hub-content-repair/big_five_zh_facet_hub_seed.json --framework=big_five --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
