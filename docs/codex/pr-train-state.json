@@ -83143,9 +83143,9 @@
     "base": "main",
     "branch": "codex/big5-en-domain-import-dryrun-02",
     "depends_on": ["BIG5-EN-DOMAIN-CONTENT-PACKAGE-01"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "a31594d89",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2836",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -83160,7 +83160,8 @@
     "transitions": [
       {"at": "2026-07-10T00:00:00Z", "from": "unregistered", "to": "planned", "note": "Registered only after its dependency was merged."},
       {"at": "2026-07-10T00:00:00Z", "from": "planned", "to": "in_progress", "note": "Started the generic importer dry-run without --write."},
-      {"at": "2026-07-10T00:00:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Five-asset V1/body_md/noindex gates and the process-local dry-run passed."}
+      {"at": "2026-07-10T00:00:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Five-asset V1/body_md/noindex gates and the process-local dry-run passed."},
+      {"at": "2026-07-10T00:17:22Z", "from": "local_checks_passed", "to": "pr_open", "note": "Opened PR #2836 for the no-write generic importer dry-run."}
     ]
   }
 }
