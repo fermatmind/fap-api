@@ -83919,9 +83919,9 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-conscientiousness-content-package-01",
     "depends_on": ["BIG5-ZH-FACET-OPENNESS-CONTENT-PACKAGE-01"],
-    "status": "committed",
-    "commit_sha": "051efe0ca4c55d567504e286869ea7d4b3cd39a7",
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "53d83f83c420323c8d6791b37e4c308e7b1ac2c6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2892",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -83986,6 +83986,12 @@
         "from": "local_checks_passed",
         "to": "committed",
         "note": "Committed the scoped six-page conscientiousness package and train metadata at 051efe0ca4c55d567504e286869ea7d4b3cd39a7."
+      },
+      {
+        "at": "2026-07-10T15:16:05Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2892 from head 53d83f83c420323c8d6791b37e4c308e7b1ac2c6."
       }
     ]
   }
