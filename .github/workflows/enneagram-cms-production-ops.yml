@@ -11,6 +11,14 @@ on:
         description: Exact SHA-bound human approval phrase
         required: true
         type: string
+      operation_mode:
+        description: Inspect is read-only; write performs the guarded CMS import and promotion.
+        required: true
+        default: inspect
+        type: choice
+        options:
+          - inspect
+          - write
 
 permissions:
   contents: read
@@ -21,7 +29,7 @@ concurrency:
 
 jobs:
   import-and-promote-en13:
-    name: Import and promote EN13 as noindex content
+    name: Inspect or import EN13 as noindex content
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment:
@@ -33,6 +41,7 @@ jobs:
       DEPLOY_USER: "ubuntu"
       RELEASE_SHA: ${{ inputs.release_sha }}
       OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      OPERATION_MODE: ${{ inputs.operation_mode }}
       PACKAGE_PATH: "docs/seo/personality/enneagram/content-packages/en13-cms-v1/enneagram-en13-cms-package-v1.json"
       QA_PATH: "docs/seo/personality/enneagram/en13-content-qa-01.json"
 
@@ -50,6 +59,10 @@ jobs:
             echo "operator_approval_phrase does not match the exact SHA-bound phrase." >&2
             exit 2
           fi
+          case "$OPERATION_MODE" in
+            inspect|write) ;;
+            *) echo "operation_mode must be inspect or write." >&2; exit 2 ;;
+          esac
 
       - name: Checkout authorized revision
         uses: actions/checkout@v6
@@ -94,11 +107,12 @@ jobs:
           ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
             || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
 
-      - name: Import and promote EN13 without release side effects
+      - name: Inspect or import EN13 without release side effects
         shell: bash
         env:
           PACKAGE_SHA: ${{ steps.inputs_hash.outputs.package_sha }}
           QA_SHA: ${{ steps.inputs_hash.outputs.qa_sha }}
+          OPERATION_MODE: ${{ inputs.operation_mode }}
         run: |
           set -euo pipefail
           mkdir -p artifacts
@@ -112,62 +126,162 @@ jobs:
           printf -v q_package_sha '%q' "$PACKAGE_SHA"
           printf -v q_qa_sha '%q' "$QA_SHA"
           printf -v q_run_dir '%q' "$run_dir"
+          printf -v q_operation_mode '%q' "$OPERATION_MODE"
 
+          set +e
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$target" \
-            "DEPLOY_PATH=$q_deploy_path RELEASE_SHA=$q_release_sha PACKAGE_PATH=$q_package_path QA_PATH=$q_qa_path PACKAGE_SHA=$q_package_sha QA_SHA=$q_qa_sha RUN_DIR=$q_run_dir bash -s" <<'REMOTE'
-          set -euo pipefail
+            "DEPLOY_PATH=$q_deploy_path RELEASE_SHA=$q_release_sha PACKAGE_PATH=$q_package_path QA_PATH=$q_qa_path PACKAGE_SHA=$q_package_sha QA_SHA=$q_qa_sha RUN_DIR=$q_run_dir OPERATION_MODE=$q_operation_mode bash -s" <<'REMOTE'
+          set -Eeuo pipefail
+          phase="remote_bootstrap"
+          mkdir -p "$RUN_DIR"
+          write_failure_summary() {
+            local exit_code=$?
+            trap - ERR
+            jq -n \
+              --arg release_sha "$RELEASE_SHA" \
+              --arg operation_mode "$OPERATION_MODE" \
+              --arg phase "$phase" \
+              --argjson exit_code "$exit_code" \
+              '{schema_version:"enneagram_cms_production_ops.v2", outcome:"failure", release_sha:$release_sha, operation_mode:$operation_mode, failed_phase:$phase, exit_code:$exit_code}' \
+              > "$RUN_DIR/summary.json" || true
+            exit "$exit_code"
+          }
+          trap write_failure_summary ERR
+
+          phase="release_root"
           cd "$DEPLOY_PATH/current"
+          phase="deployed_revision"
           if [ -f REVISION ]; then
             deployed_sha="$(tr -d '\r\n' < REVISION)"
           else
             deployed_sha="$(git rev-parse HEAD)"
           fi
           test "$deployed_sha" = "$RELEASE_SHA"
+          phase="backend_root"
           cd backend
           test -f artisan
+          phase="package_readability"
           test -r "../$PACKAGE_PATH"
           test -r "../$QA_PATH"
+          phase="package_hash"
           printf '%s  %s\n' "$PACKAGE_SHA" "../$PACKAGE_PATH" | sha256sum -c -
           printf '%s  %s\n' "$QA_SHA" "../$QA_PATH" | sha256sum -c -
-          mkdir -p "$RUN_DIR"
 
+          phase="draft_inspect"
           php artisan personality:enneagram-cms-draft \
-            --package="../$PACKAGE_PATH" --qa="../$QA_PATH" --dry-run --json \
+            --package="../$PACKAGE_PATH" --qa="../$QA_PATH" --dry-run --update-existing --json \
             --output="$RUN_DIR/draft-dry-run.json" >/dev/null
 
+          phase="promotion_inspect"
+          php artisan personality:enneagram-cms-promote \
+            --package="../$PACKAGE_PATH" --dry-run --json \
+            --output="$RUN_DIR/promote-dry-run.json" >/dev/null
+
+          phase="operation_mode"
+          if [ "$OPERATION_MODE" = "inspect" ]; then
+            phase="inspect_summary"
+            jq -n \
+              --arg release_sha "$RELEASE_SHA" \
+              --arg operation_mode "$OPERATION_MODE" \
+              --arg package_sha "$PACKAGE_SHA" \
+              --arg qa_sha "$QA_SHA" \
+              --slurpfile draft "$RUN_DIR/draft-dry-run.json" \
+              --slurpfile promote "$RUN_DIR/promote-dry-run.json" \
+              'def action_counts: (.rows // [] | map(.action // "unknown") | sort | group_by(.) | map({action:.[0], count:length}));
+               {
+                 schema_version:"enneagram_cms_production_ops.v2",
+                 outcome:"success",
+                 release_sha:$release_sha,
+                 operation_mode:$operation_mode,
+                 package_sha256:$package_sha,
+                 qa_sha256:$qa_sha,
+                 inspection:{
+                   draft:($draft[0]|{
+                     ok,status,row_count,hub_row_count,center_row_count,core_type_row_count,writes_attempted,writes_committed,would_create_asset_count,created_asset_count,updated_asset_count,skipped_existing_count,
+                     error_count:(.errors|length),action_counts:action_counts
+                   }),
+                   promotion:($promote[0]|{
+                     ok,status,row_count,hub_row_count,center_row_count,core_type_row_count,writes_attempted,writes_committed,would_promote_count,promoted_count,skipped_existing_count,missing_target_count,forbidden_route_count,stale_or_invalid_asset_count,
+                     error_count:(.errors|length),action_counts:action_counts
+                   })
+                 }
+               }' > "$RUN_DIR/summary.json"
+            exit 0
+          fi
+
+          phase="draft_write"
           php artisan personality:enneagram-cms-draft \
             --package="../$PACKAGE_PATH" --qa="../$QA_PATH" --write --update-existing --json \
             --draft-only --no-publish --no-index --no-sitemap --no-llms --no-search-release \
             --operator-approved=ENNEAGRAM-CMS-DRAFT-WRITER-CONTRACT-01 \
             --output="$RUN_DIR/draft-write.json" >/dev/null
 
+          phase="promotion_write"
           php artisan personality:enneagram-cms-promote \
             --package="../$PACKAGE_PATH" --write --json \
             --promote-live-content --no-publish --no-index --no-sitemap --no-llms --no-search-release \
             --operator-approved=ENNEAGRAM-CMS-PROMOTION-CONTRACT-01 \
             --output="$RUN_DIR/promote-write.json" >/dev/null
 
+          phase="write_summary"
           jq -n \
             --arg release_sha "$RELEASE_SHA" \
+            --arg operation_mode "$OPERATION_MODE" \
             --arg package_sha "$PACKAGE_SHA" \
             --arg qa_sha "$QA_SHA" \
             --slurpfile dry "$RUN_DIR/draft-dry-run.json" \
+            --slurpfile inspect_promote "$RUN_DIR/promote-dry-run.json" \
             --slurpfile draft "$RUN_DIR/draft-write.json" \
             --slurpfile promote "$RUN_DIR/promote-write.json" \
-            '{release_sha:$release_sha,package_sha256:$package_sha,qa_sha256:$qa_sha, dry_run:($dry[0]|{ok,status,row_count,writes_attempted,writes_committed,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,errors}), draft_write:($draft[0]|{ok,status,row_count,created_asset_count,updated_asset_count,skipped_existing_count,writes_committed,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,errors}), promote_write:($promote[0]|{ok,status,row_count,promoted_count,skipped_existing_count,writes_committed,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,errors})}' \
+            '{
+              schema_version:"enneagram_cms_production_ops.v2",
+              outcome:"success",
+              release_sha:$release_sha,
+              operation_mode:$operation_mode,
+              package_sha256:$package_sha,
+              qa_sha256:$qa_sha,
+              dry_run:($dry[0]|{ok,status,row_count,writes_attempted,writes_committed,would_create_asset_count,created_asset_count,updated_asset_count,skipped_existing_count,error_count:(.errors|length)}),
+              promotion_inspect:($inspect_promote[0]|{ok,status,row_count,writes_attempted,writes_committed,would_promote_count,promoted_count,skipped_existing_count,missing_target_count,forbidden_route_count,stale_or_invalid_asset_count,error_count:(.errors|length)}),
+              draft_write:($draft[0]|{ok,status,row_count,created_asset_count,updated_asset_count,skipped_existing_count,writes_committed,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,error_count:(.errors|length)}),
+              promote_write:($promote[0]|{ok,status,row_count,promoted_count,skipped_existing_count,writes_committed,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,error_count:(.errors|length)})
+            }' \
             > "$RUN_DIR/summary.json"
           REMOTE
+          remote_status=$?
+          set -e
 
+          summary_status=0
           scp -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -P "$DEPLOY_PORT" "$target:$run_dir/summary.json" artifacts/summary.json
+            -P "$DEPLOY_PORT" "$target:$run_dir/summary.json" artifacts/summary.json \
+            || summary_status=$?
+          if [ "$summary_status" -ne 0 ]; then
+            jq -n \
+              --arg release_sha "$RELEASE_SHA" \
+              --arg operation_mode "$OPERATION_MODE" \
+              --arg phase "summary_transfer" \
+              --argjson remote_exit_code "$remote_status" \
+              --argjson summary_transfer_exit_code "$summary_status" \
+              '{schema_version:"enneagram_cms_production_ops.v2", outcome:"failure", release_sha:$release_sha, operation_mode:$operation_mode, failed_phase:$phase, remote_exit_code:$remote_exit_code, summary_transfer_exit_code:$summary_transfer_exit_code}' \
+              > artifacts/summary.json
+          fi
+          if [ "$remote_status" -ne 0 ]; then
+            exit "$remote_status"
+          fi
           jq -e '
-            .dry_run.ok == true and .dry_run.row_count == 13 and .dry_run.writes_attempted == false and
-            .draft_write.ok == true and .draft_write.row_count == 13 and .draft_write.writes_committed == true and
-            ((.draft_write.created_asset_count + .draft_write.updated_asset_count + .draft_write.skipped_existing_count) == 13) and
-            .promote_write.ok == true and .promote_write.row_count == 13 and
-            ((.promote_write.promoted_count + .promote_write.skipped_existing_count) == 13) and
-            all([.draft_write, .promote_write][]; .publish_attempted == false and .index_attempted == false and .sitemap_llms_release_attempted == false and .search_release_attempted == false and (.errors | length) == 0)
+            if .operation_mode == "inspect" then
+              .outcome == "success" and
+              .inspection.draft.ok == true and .inspection.draft.row_count == 13 and .inspection.draft.writes_attempted == false and .inspection.draft.writes_committed == false and .inspection.draft.error_count == 0 and
+              .inspection.promotion.ok == true and .inspection.promotion.row_count == 13 and .inspection.promotion.writes_attempted == false and .inspection.promotion.writes_committed == false and .inspection.promotion.error_count == 0
+            else
+              .outcome == "success" and
+              .dry_run.ok == true and .dry_run.row_count == 13 and .dry_run.writes_attempted == false and
+              .draft_write.ok == true and .draft_write.row_count == 13 and .draft_write.writes_committed == true and
+              ((.draft_write.created_asset_count + .draft_write.updated_asset_count + .draft_write.skipped_existing_count) == 13) and
+              .promote_write.ok == true and .promote_write.row_count == 13 and
+              ((.promote_write.promoted_count + .promote_write.skipped_existing_count) == 13) and
+              all([.draft_write, .promote_write][]; .publish_attempted == false and .index_attempted == false and .sitemap_llms_release_attempted == false and .search_release_attempted == false and .error_count == 0)
+            end
           ' artifacts/summary.json >/dev/null
 
       - name: Upload redacted operation summary
