@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Http\Middleware\EnsureAdminTotpVerified;
+use App\Http\Middleware\OpsAccessControl;
 use App\Models\AdminUser;
 use App\Models\Permission;
 use App\Models\Role;
@@ -51,6 +53,8 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
 
             $this->assertNotNull($route, $routeName.' must be registered');
             $this->assertContains('GET', $route->methods());
+            $this->assertContains(EnsureAdminTotpVerified::class, $route->gatherMiddleware());
+            $this->assertContains(OpsAccessControl::class, $route->gatherMiddleware());
         }
 
         $this->assertTrue((bool) $artifact['runtime_api_added']);
@@ -80,6 +84,23 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
                 'error_code' => 'FORBIDDEN',
                 'message' => 'admin_seo_intel_read_required',
             ]);
+    }
+
+    #[Test]
+    public function totp_enrolled_admin_must_complete_the_challenge_before_reading_seo_intel_api(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
+        $admin->forceFill(['totp_enabled_at' => now()])->save();
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson('/api/v0.5/ops/seo-intel/overview')
+            ->assertRedirect(route('filament.ops.pages.two-factor-challenge'));
+
+        $this->withSession(['ops_admin_totp_verified_user_id' => (int) $admin->id])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson('/api/v0.5/ops/seo-intel/overview')
+            ->assertOk()
+            ->assertJsonPath('ok', true);
     }
 
     #[Test]
