@@ -29,9 +29,13 @@ final class BigFiveImportInactiveCandidateRelease extends Command
             if ($outputDir === '') {
                 throw new \RuntimeException('--output-dir or BIG5_PHASE_OUTPUT_DIR is required.');
             }
+            $expectedCandidateManifestSha256 = trim((string) (getenv('BIG5_EXPECTED_CANDIDATE_MANIFEST_SHA256') ?: ''));
+            if (preg_match('/^[a-f0-9]{64}$/', $expectedCandidateManifestSha256) !== 1) {
+                throw new \RuntimeException('BIG5_EXPECTED_CANDIDATE_MANIFEST_SHA256 must provide the trusted 64-character lowercase SHA-256.');
+            }
 
             $contracts = array_filter([
-                'candidate_manifest_sha256' => trim((string) (getenv('BIG5_EXPECTED_CANDIDATE_MANIFEST_SHA256') ?: '')),
+                'candidate_manifest_sha256' => $expectedCandidateManifestSha256,
                 'source_assets_sha256' => trim((string) (getenv('BIG5_EXPECTED_SOURCE_ASSETS_SHA256') ?: '')),
             ], static fn (string $value): bool => $value !== '');
 

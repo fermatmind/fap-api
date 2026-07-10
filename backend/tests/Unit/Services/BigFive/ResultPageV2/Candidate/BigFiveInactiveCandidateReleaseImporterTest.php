@@ -93,6 +93,29 @@ final class BigFiveInactiveCandidateReleaseImporterTest extends TestCase
         );
     }
 
+    public function test_importer_rejects_payload_and_self_rewritten_hash_file_when_manifest_anchor_is_unchanged(): void
+    {
+        $fixture = $this->candidateFixture('importer_payload_anchor_mismatch');
+        $payloadFile = (File::glob($fixture['candidate_dir'].'/candidate_payloads/*.json') ?: [])[0];
+        File::put($payloadFile, File::get($payloadFile)."\n");
+        $payloadHashesPath = $fixture['candidate_dir'].'/candidate_payload_hashes.json';
+        $payloadHashes = json_decode((string) File::get($payloadHashesPath), true, flags: JSON_THROW_ON_ERROR);
+        $payloadHashes['payload_file_sha256'][basename($payloadFile)] = hash_file('sha256', $payloadFile);
+        File::put($payloadHashesPath, json_encode($payloadHashes, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n");
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('not anchored to candidate_manifest.json');
+
+        app(BigFiveInactiveCandidateReleaseImporter::class)->import(
+            $fixture['candidate_dir'],
+            $fixture['import_output_dir'],
+            [
+                'candidate_manifest_sha256' => $fixture['candidate_manifest_sha256'],
+                'source_assets_sha256' => $fixture['source_assets_sha256'],
+            ],
+        );
+    }
+
     /**
      * @return array{candidate_dir:string,import_output_dir:string,candidate_manifest_sha256:string,source_assets_sha256:string}
      */

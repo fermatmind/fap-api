@@ -33,7 +33,7 @@ final class BigFiveResultPageV2ExpandedRenderedQaTest extends TestCase
         $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.production_blocked'));
     }
 
-    public function test_surface_matrix_marks_all_required_surfaces_as_pass_with_evidence(): void
+    public function test_surface_matrix_keeps_cross_repository_rendered_contracts_pending(): void
     {
         $matrix = $this->jsonFile('big5_o59_expanded_rendered_qa_surface_matrix_v0_1.json');
         $surfaces = $this->surfacesByKey($matrix);
@@ -47,28 +47,30 @@ final class BigFiveResultPageV2ExpandedRenderedQaTest extends TestCase
             'share_card',
         ], array_keys($surfaces));
 
-        $this->assertSame('pass', data_get($surfaces, 'result_page_desktop.status'));
-        $this->assertSame('pass', data_get($surfaces, 'result_page_mobile.status'));
-        $this->assertSame('existing_fap_web_contract', data_get($surfaces, 'result_page_desktop.coverage'));
-        $this->assertSame('existing_fap_web_contract', data_get($surfaces, 'result_page_mobile.coverage'));
+        $this->assertSame('pending_surface', data_get($surfaces, 'result_page_desktop.status'));
+        $this->assertSame('pending_surface', data_get($surfaces, 'result_page_mobile.status'));
+        $this->assertSame('unverified_cross_repository_rendered_contract', data_get($surfaces, 'result_page_desktop.coverage'));
+        $this->assertSame('unverified_cross_repository_rendered_contract', data_get($surfaces, 'result_page_mobile.coverage'));
 
         foreach (['pdf', 'share_card', 'history', 'compare'] as $surfaceKey) {
-            $this->assertSame('pass', data_get($surfaces, "{$surfaceKey}.status"), $surfaceKey);
+            $this->assertSame('pending_surface', data_get($surfaces, "{$surfaceKey}.status"), $surfaceKey);
             $this->assertNotSame([], data_get($surfaces, "{$surfaceKey}.evidence"), $surfaceKey);
             $this->assertStringContainsString('fap-web/tests/contracts/big5-', implode(' ', data_get($surfaces, "{$surfaceKey}.evidence", [])), $surfaceKey);
         }
 
         $this->assertSame([
-            'pass' => 6,
-            'pending_surface' => 0,
+            'pass' => 0,
+            'pending_surface' => 6,
             'fail' => 0,
         ], $matrix['status_counts'] ?? null);
     }
 
-    public function test_report_marks_expanded_rendered_qa_complete_without_runtime_enablement(): void
+    public function test_report_keeps_expanded_rendered_qa_incomplete_without_verified_contracts(): void
     {
         $report = $this->jsonFile('big5_o59_expanded_rendered_qa_report_v0_1.json');
 
+        $this->assertSame([], $report['passed_surfaces'] ?? null);
+        $this->assertSame([], $report['failed_surfaces'] ?? null);
         $this->assertSame([
             'result_page_desktop',
             'result_page_mobile',
@@ -76,15 +78,13 @@ final class BigFiveResultPageV2ExpandedRenderedQaTest extends TestCase
             'share_card',
             'history',
             'compare',
-        ], $report['passed_surfaces'] ?? null);
-        $this->assertSame([], $report['failed_surfaces'] ?? null);
-        $this->assertSame([], $report['pending_surfaces'] ?? null);
-        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.pdf_contract_available'));
-        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.share_card_contract_available'));
-        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.history_contract_available'));
-        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.compare_contract_available'));
-        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.all_required_surfaces_passed'));
-        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.expanded_rendered_qa_complete'));
+        ], $report['pending_surfaces'] ?? null);
+        $this->assertFalse((bool) data_get($report, 'staging_preview_readiness.pdf_contract_available'));
+        $this->assertFalse((bool) data_get($report, 'staging_preview_readiness.share_card_contract_available'));
+        $this->assertFalse((bool) data_get($report, 'staging_preview_readiness.history_contract_available'));
+        $this->assertFalse((bool) data_get($report, 'staging_preview_readiness.compare_contract_available'));
+        $this->assertFalse((bool) data_get($report, 'staging_preview_readiness.all_required_surfaces_passed'));
+        $this->assertFalse((bool) data_get($report, 'staging_preview_readiness.expanded_rendered_qa_complete'));
         $this->assertFalse((bool) ($report['ready_for_runtime'] ?? true));
         $this->assertFalse((bool) ($report['ready_for_production'] ?? true));
     }

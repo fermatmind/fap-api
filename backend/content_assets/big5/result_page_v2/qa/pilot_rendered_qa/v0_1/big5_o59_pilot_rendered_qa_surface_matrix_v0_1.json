@@ -30,8 +30,8 @@
   "surfaces": [
     {
       "surface_key": "result_page_desktop",
-      "status": "pass",
-      "coverage": "existing_fap_web_pilot_payload_only_contract",
+      "status": "pending_surface",
+      "coverage": "unverified_cross_repository_rendered_contract",
       "evidence": [
         "fap-web/tests/contracts/big5-pilot-payload-only-renderer.contract.test.tsx",
         "fap-web/tests/contracts/big5-pilot-rendered-qa.contract.test.tsx",
@@ -62,8 +62,8 @@
     },
     {
       "surface_key": "result_page_mobile",
-      "status": "pass",
-      "coverage": "fap_web_pilot_rendered_qa_contract",
+      "status": "pending_surface",
+      "coverage": "unverified_cross_repository_rendered_contract",
       "evidence": [
         "fap-web/tests/contracts/big5-pilot-rendered-qa.contract.test.tsx",
         "PILOT-7B merged mobile rendered QA contract"
@@ -92,8 +92,8 @@
     },
     {
       "surface_key": "pdf",
-      "status": "pass",
-      "coverage": "backend_adapter_fixture_plus_fap_web_rendered_contract",
+      "status": "pending_surface",
+      "coverage": "unverified_cross_repository_rendered_contract",
       "evidence": [
         "backend/app/Services/BigFive/ResultPageV2/Pdf/BigFiveV2PdfPayloadAdapter.php",
         "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2PdfPayloadAdapterTest.php",
@@ -119,8 +119,8 @@
     },
     {
       "surface_key": "share_card",
-      "status": "pass",
-      "coverage": "backend_share_safe_fixture_plus_fap_web_rendered_contract",
+      "status": "pending_surface",
+      "coverage": "unverified_cross_repository_rendered_contract",
       "evidence": [
         "backend/app/Services/BigFive/ResultPageV2/Share/BigFiveV2ShareSafeSummaryAdapter.php",
         "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ShareSafeSummaryAdapterTest.php",
@@ -145,8 +145,8 @@
     },
     {
       "surface_key": "history",
-      "status": "pass",
-      "coverage": "backend_history_snapshot_fixture_plus_fap_web_rendered_contract",
+      "status": "pending_surface",
+      "coverage": "unverified_cross_repository_rendered_contract",
       "evidence": [
         "backend/app/Services/BigFive/ResultPageV2/History/BigFiveV2HistorySnapshotAdapter.php",
         "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2HistorySnapshotAdapterTest.php",
@@ -171,8 +171,8 @@
     },
     {
       "surface_key": "compare",
-      "status": "pass",
-      "coverage": "backend_compare_snapshot_fixture_plus_fap_web_rendered_contract",
+      "status": "pending_surface",
+      "coverage": "unverified_cross_repository_rendered_contract",
       "evidence": [
         "backend/app/Services/BigFive/ResultPageV2/Compare/BigFiveV2CompareSnapshotAdapter.php",
         "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CompareSnapshotAdapterTest.php",
@@ -197,8 +197,8 @@
     }
   ],
   "status_counts": {
-    "pass": 6,
-    "pending_surface": 0,
+    "pass": 0,
+    "pending_surface": 6,
     "fail": 0
   },
   "banned_rendered_terms_union": [

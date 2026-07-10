@@ -35,6 +35,12 @@ final class BigFiveProductionEquivalentCandidatePayloadExporterTest extends Test
 
         $this->assertSame(BigFiveCandidatePackageContract::MANIFEST_SCHEMA_VERSION, $manifest['schema_version']);
         $this->assertSame(325, $manifest['payload_count']);
+        $this->assertCount(325, $manifest['payload_file_sha256']);
+        $this->assertSame($manifest['payload_set_sha256'], $hashes['payload_set_sha256']);
+        $this->assertSame(
+            $manifest['payload_set_sha256'],
+            hash('sha256', json_encode($manifest['payload_file_sha256'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n")
+        );
         $this->assertSame('staging_only', $manifest['runtime_use']);
         $this->assertFalse((bool) $manifest['production_use_allowed']);
         $this->assertFalse((bool) $manifest['ready_for_runtime']);

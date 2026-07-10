@@ -965,6 +965,29 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         );
     }
 
+    public function test_big_five_pass_decision_with_failed_gate_does_not_enter_approval_queue(): void
+    {
+        $package = $this->validBigFivePackage();
+        $qa = $this->validBigFiveQa();
+        $targetUrl = 'https://fermatmind.com/zh/personality/big-five';
+        foreach ($qa['evaluations'] as $index => $evaluation) {
+            if (($evaluation['target_url'] ?? null) === $targetUrl) {
+                $qa['evaluations'][$index] = $this->qaEvaluationRow($targetUrl, 'pass', ['claim_safety_gate']);
+                break;
+            }
+        }
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(1, $payload['blocked_item_count']);
+        $this->assertSame('qa_failed_gates_present', data_get($payload, 'blocked_items.0.blocked_reason'));
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->where('target_url', $targetUrl)->count());
+    }
+
     /**
      * @return array<string,mixed>
      */

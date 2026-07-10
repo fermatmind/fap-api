@@ -132,6 +132,7 @@ final class BigFiveProductionEquivalentCandidatePayloadExporter
         foreach ($payloadFiles as $fileName => $path) {
             $payloadFileHashes[$fileName] = hash_file('sha256', $path) ?: '';
         }
+        $payloadSetSha256 = hash('sha256', $this->encodeJson($payloadFileHashes));
 
         $candidateManifest = [
             'schema_version' => BigFiveCandidatePackageContract::MANIFEST_SCHEMA_VERSION,
@@ -145,6 +146,8 @@ final class BigFiveProductionEquivalentCandidatePayloadExporter
                 'selector_ready_manifest' => BigFiveCandidatePackageContract::SOURCE_MANIFEST_RELATIVE_PATH,
             ],
             'payload_count' => count($payloadFiles),
+            'payload_set_sha256' => $payloadSetSha256,
+            'payload_file_sha256' => $payloadFileHashes,
             'coverage' => $coverage,
             'runtime_use' => 'staging_only',
             'production_use_allowed' => false,
@@ -160,6 +163,7 @@ final class BigFiveProductionEquivalentCandidatePayloadExporter
         $candidateHashes = [
             'candidate_manifest_sha256' => $candidateManifestSha,
             'source_assets_sha256' => $sourceAssetsSha,
+            'payload_set_sha256' => $payloadSetSha256,
             'payload_file_sha256' => $payloadFileHashes,
         ];
         $payloadsManifest = [
@@ -167,6 +171,7 @@ final class BigFiveProductionEquivalentCandidatePayloadExporter
             'payload_dir' => $candidateDir.DIRECTORY_SEPARATOR.'candidate_payloads',
             'payload_count' => count($payloadFiles),
             'source_assets_sha256' => $sourceAssetsSha,
+            'payload_set_sha256' => $payloadSetSha256,
             'payload_files' => array_keys($payloadFiles),
         ];
         $sourceMappingReport = [
@@ -195,6 +200,7 @@ final class BigFiveProductionEquivalentCandidatePayloadExporter
         File::put($candidateDir.DIRECTORY_SEPARATOR.'candidate_payloads_manifest.json', $this->encodeJson($payloadsManifest));
         File::put($candidateDir.DIRECTORY_SEPARATOR.'candidate_payload_hashes.json', $this->encodeJson([
             'candidate_payloads_manifest_sha256' => hash('sha256', $this->encodeJson($payloadsManifest)),
+            'payload_set_sha256' => $payloadSetSha256,
             'payload_file_sha256' => $payloadFileHashes,
         ]));
         File::put($candidateDir.DIRECTORY_SEPARATOR.'candidate_payload_source_mapping.json', $this->encodeJson($payloadSourceMapping));
@@ -209,6 +215,7 @@ final class BigFiveProductionEquivalentCandidatePayloadExporter
             'candidate_payload_output_directory' => $candidateDir.DIRECTORY_SEPARATOR.'candidate_payloads',
             'candidate_manifest_sha256' => $candidateManifestSha,
             'source_assets_sha256' => $sourceAssetsSha,
+            'payload_set_sha256' => $payloadSetSha256,
             'payload_count' => count($payloadFiles),
             'coverage' => $coverage,
             'source_mapping_result' => $sourceMappingReport,

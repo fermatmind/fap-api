@@ -338,7 +338,7 @@ final class BigFiveResultPageV2AssetAgent
         $contentCandidates = $candidateDir === '' ? [] : $this->readJsonl($candidateDir.'/content_asset_candidates.jsonl');
         $reviewManifest = $candidateDir === '' ? null : $this->readOptionalJson($candidateDir.'/review_manifest.json');
         $validation = $this->candidateValidationReport($selectorCandidates, $contentCandidates);
-        $reviewErrors = $this->reviewManifestErrors($reviewManifest);
+        $reviewErrors = $this->reviewManifestErrors($reviewManifest, $candidateDir);
         $leakScan = $this->candidateLeakScan($selectorCandidates, $contentCandidates);
 
         $stagingWritePerformed = false;
@@ -793,11 +793,16 @@ final class BigFiveResultPageV2AssetAgent
         $isDraft = (bool) ($state['isDraft'] ?? false);
         $headRef = (string) ($state['headRefName'] ?? '');
         $prNumber = (string) ($state['number'] ?? '');
+        $prNumberIsSafe = preg_match('/^[1-9][0-9]*$/', $prNumber) === 1;
+        $headRefIsSafe = preg_match('#^codex/[A-Za-z0-9][A-Za-z0-9_./-]*$#', $headRef) === 1
+            && ! str_contains($headRef, '..');
         $canMerge = $state !== []
             && ! $isDraft
             && $mergeState === 'CLEAN'
             && $pending === []
             && $failed === []
+            && $prNumberIsSafe
+            && $headRefIsSafe
             && in_array($reviewDecision, ['', 'APPROVED'], true);
 
         $blockers = array_values(array_filter([
@@ -806,6 +811,8 @@ final class BigFiveResultPageV2AssetAgent
             $mergeState !== 'CLEAN' ? 'merge_state_not_clean' : null,
             $pending !== [] ? 'checks_pending' : null,
             $failed !== [] ? 'checks_failed' : null,
+            ! $prNumberIsSafe ? 'pr_number_invalid' : null,
+            ! $headRefIsSafe ? 'head_ref_invalid' : null,
             ! in_array($reviewDecision, ['', 'APPROVED'], true) ? 'review_not_approved' : null,
         ]));
 
@@ -829,11 +836,11 @@ final class BigFiveResultPageV2AssetAgent
                 'failed_check_count' => count($failed),
             ],
             'planned_commands' => $canMerge ? [
-                'gh pr merge '.$prNumber.' --squash --delete-branch',
-                'git fetch origin main --prune',
-                'git checkout main',
-                'git pull --ff-only origin main',
-                'git branch -d '.$headRef,
+                ['gh', 'pr', 'merge', $prNumber, '--squash', '--delete-branch'],
+                ['git', 'fetch', 'origin', 'main', '--prune'],
+                ['git', 'checkout', 'main'],
+                ['git', 'pull', '--ff-only', 'origin', 'main'],
+                ['git', 'branch', '-d', $headRef],
             ] : [],
             'negative_guarantees' => $this->mergeCleanupNegativeGuarantees(),
         ];
@@ -903,7 +910,10 @@ final class BigFiveResultPageV2AssetAgent
         $plan = $this->readOptionalJson($planJson) ?? [];
         $task = (string) ($plan['task'] ?? '');
         $preflight = $this->githubMutationPreflight($plan, $planJson, $repoRoot, $githubRepo, $mutationMode, $allowGithubMutation);
-        $steps = $this->githubMutationSteps($plan, dirname($planJson), $githubRepo);
+        $trustedChangedFiles = $mutationMode === 'live'
+            ? (array) ($preflight['recomputed_changed_files'] ?? [])
+            : (array) ($plan['planned_changed_files'] ?? []);
+        $steps = $this->githubMutationSteps($plan, dirname($planJson), $githubRepo, $trustedChangedFiles);
         $live = $mutationMode === 'live' && $allowGithubMutation && $preflight['valid'] === true;
         $results = [];
 
@@ -2191,7 +2201,7 @@ final class BigFiveResultPageV2AssetAgent
      * @param  array<string,mixed>|null  $reviewManifest
      * @return list<string>
      */
-    private function reviewManifestErrors(?array $reviewManifest): array
+    private function reviewManifestErrors(?array $reviewManifest, string $candidateDir): array
     {
         if ($reviewManifest === null) {
             return ['review_manifest.json missing'];
@@ -2222,6 +2232,42 @@ final class BigFiveResultPageV2AssetAgent
         foreach (['selector_asset_candidates.jsonl', 'content_asset_candidates.jsonl'] as $filename) {
             if (! in_array($filename, (array) ($reviewManifest['approved_candidate_files'] ?? []), true)) {
                 $errors[] = "review_manifest approved_candidate_files missing {$filename}";
+            }
+        }
+
+        $errors = array_merge($errors, $this->repositoryBoundReviewErrors($candidateDir));
+
+        return $errors;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function repositoryBoundReviewErrors(string $candidateDir): array
+    {
+        $repoRoot = dirname(base_path());
+        $paths = [
+            $candidateDir.'/review_manifest.json',
+            $candidateDir.'/selector_asset_candidates.jsonl',
+            $candidateDir.'/content_asset_candidates.jsonl',
+        ];
+        $errors = [];
+
+        foreach ($paths as $path) {
+            $realPath = realpath($path);
+            if ($realPath === false || ! str_starts_with($realPath, $repoRoot.DIRECTORY_SEPARATOR)) {
+                $errors[] = 'review_package_not_repository_bound: '.basename($path);
+
+                continue;
+            }
+
+            $relativePath = substr($realPath, strlen($repoRoot) + 1);
+            $tracked = new Process(['git', '-C', $repoRoot, 'ls-files', '--error-unmatch', '--', $relativePath]);
+            $tracked->run();
+            $unchanged = new Process(['git', '-C', $repoRoot, 'diff', '--quiet', 'HEAD', '--', $relativePath]);
+            $unchanged->run();
+            if (! $tracked->isSuccessful() || ! $unchanged->isSuccessful()) {
+                $errors[] = 'review_package_not_bound_to_head: '.$relativePath;
             }
         }
 
@@ -2811,7 +2857,7 @@ final class BigFiveResultPageV2AssetAgent
     }
 
     /**
-     * @return array{valid:bool,blockers:list<string>,allowed_plan_tasks:list<string>}
+     * @return array{valid:bool,blockers:list<string>,allowed_plan_tasks:list<string>,recomputed_changed_files:list<string>}
      */
     private function githubMutationPreflight(
         array $plan,
@@ -2823,6 +2869,7 @@ final class BigFiveResultPageV2AssetAgent
     ): array {
         $blockers = [];
         $task = (string) ($plan['task'] ?? '');
+        $recomputedChangedFiles = [];
 
         if ($planJson === '' || ! is_file($planJson)) {
             $blockers[] = 'execution_plan_json_missing';
@@ -2839,7 +2886,7 @@ final class BigFiveResultPageV2AssetAgent
         if ($mutationMode === 'live' && ! $allowGithubMutation) {
             $blockers[] = 'live_github_mutation_not_allowed';
         }
-        if ($mutationMode === 'live' && ! is_dir($repoRoot.'/.git')) {
+        if ($mutationMode === 'live' && ! is_dir($repoRoot.'/.git') && ! is_file($repoRoot.'/.git')) {
             $blockers[] = 'repo_root_missing_git_directory';
         }
         if ($mutationMode === 'live' && ! preg_match('/^[A-Za-z0-9_.-]+\\/[A-Za-z0-9_.-]+$/', $githubRepo)) {
@@ -2847,7 +2894,13 @@ final class BigFiveResultPageV2AssetAgent
         }
 
         if ($task === 'auto_pr_orchestrator_plan') {
-            $blockers = array_merge($blockers, $this->githubPrPlanBlockers($plan));
+            if ($mutationMode === 'live') {
+                $recomputedChangedFiles = $this->repositoryChangedFiles($repoRoot);
+            }
+            $blockers = array_merge(
+                $blockers,
+                $this->githubPrPlanBlockers($plan, $recomputedChangedFiles, $mutationMode === 'live')
+            );
         }
         if ($task === 'auto_merge_cleanup_plan') {
             $blockers = array_merge($blockers, $this->githubMergeCleanupPlanBlockers($plan));
@@ -2857,13 +2910,14 @@ final class BigFiveResultPageV2AssetAgent
             'valid' => $blockers === [],
             'blockers' => array_values(array_unique($blockers)),
             'allowed_plan_tasks' => self::GITHUB_MUTATION_ALLOWED_PLAN_TASKS,
+            'recomputed_changed_files' => $recomputedChangedFiles,
         ];
     }
 
     /**
      * @return list<string>
      */
-    private function githubPrPlanBlockers(array $plan): array
+    private function githubPrPlanBlockers(array $plan, array $recomputedChangedFiles, bool $enforceRecomputedScope): array
     {
         $blockers = [];
         $branch = (string) data_get($plan, 'pr.branch', '');
@@ -2897,8 +2951,47 @@ final class BigFiveResultPageV2AssetAgent
                 $blockers[] = 'planned_changed_file_path_invalid';
             }
         }
+        if ($enforceRecomputedScope) {
+            if ($recomputedChangedFiles === []) {
+                $blockers[] = 'repository_changed_files_missing';
+            }
+            if (($this->orchestratorScopeValidation($recomputedChangedFiles)['valid'] ?? false) !== true) {
+                $blockers[] = 'repository_changed_files_scope_invalid';
+            }
+        }
 
         return $blockers;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function repositoryChangedFiles(string $repoRoot): array
+    {
+        if (! is_dir($repoRoot) || (! is_dir($repoRoot.'/.git') && ! is_file($repoRoot.'/.git'))) {
+            return [];
+        }
+
+        $files = [];
+        foreach ([
+            ['git', '-C', $repoRoot, 'diff', '--name-only', 'HEAD'],
+            ['git', '-C', $repoRoot, 'ls-files', '--others', '--exclude-standard'],
+        ] as $command) {
+            $process = new Process($command);
+            $process->run();
+            if (! $process->isSuccessful()) {
+                return [];
+            }
+            foreach (preg_split('/\R/', trim($process->getOutput())) ?: [] as $file) {
+                if (trim($file) !== '') {
+                    $files[] = trim($file);
+                }
+            }
+        }
+
+        sort($files, SORT_STRING);
+
+        return array_values(array_unique($files));
     }
 
     /**
@@ -2919,7 +3012,7 @@ final class BigFiveResultPageV2AssetAgent
             $blockers[] = 'planned_commands_missing';
         }
         foreach ($commands as $command) {
-            if (! is_string($command) || ! $this->mergeCleanupCommandAllowed($command)) {
+            if (! is_array($command) || ! $this->mergeCleanupCommandAllowed($command)) {
                 $blockers[] = 'planned_command_not_allowed';
             }
         }
@@ -2927,19 +3020,27 @@ final class BigFiveResultPageV2AssetAgent
         return $blockers;
     }
 
-    private function mergeCleanupCommandAllowed(string $command): bool
+    private function mergeCleanupCommandAllowed(array $command): bool
     {
-        return preg_match('/^gh pr merge [0-9]+ --squash --delete-branch$/', $command) === 1
-            || $command === 'git fetch origin main --prune'
-            || $command === 'git checkout main'
-            || $command === 'git pull --ff-only origin main'
-            || preg_match('/^git branch -d codex\\/[A-Za-z0-9_\\/.:-]+$/', $command) === 1;
+        $command = array_values(array_map('strval', $command));
+
+        return (count($command) === 6
+                && array_slice($command, 0, 3) === ['gh', 'pr', 'merge']
+                && preg_match('/^[1-9][0-9]*$/', $command[3]) === 1
+                && array_slice($command, 4) === ['--squash', '--delete-branch'])
+            || $command === ['git', 'fetch', 'origin', 'main', '--prune']
+            || $command === ['git', 'checkout', 'main']
+            || $command === ['git', 'pull', '--ff-only', 'origin', 'main']
+            || (count($command) === 4
+                && array_slice($command, 0, 3) === ['git', 'branch', '-d']
+                && preg_match('#^codex/[A-Za-z0-9][A-Za-z0-9_./-]*$#', $command[3]) === 1
+                && ! str_contains($command[3], '..'));
     }
 
     /**
      * @return list<array{name:string,command:list<string>}>
      */
-    private function githubMutationSteps(array $plan, string $planDir, string $githubRepo): array
+    private function githubMutationSteps(array $plan, string $planDir, string $githubRepo, array $trustedChangedFiles): array
     {
         $task = (string) ($plan['task'] ?? '');
         if ($task === 'auto_pr_orchestrator_plan') {
@@ -2947,7 +3048,7 @@ final class BigFiveResultPageV2AssetAgent
             $title = (string) data_get($plan, 'pr.title', '');
             $commitMessage = (string) data_get($plan, 'pr.commit_message', $title);
             $bodyPath = rtrim($planDir, '/').'/'.(string) data_get($plan, 'pr.body_artifact', 'auto_pr_body.md');
-            $plannedFiles = array_values(array_map('strval', (array) ($plan['planned_changed_files'] ?? [])));
+            $plannedFiles = array_values(array_map('strval', $trustedChangedFiles));
 
             return [
                 ['name' => 'fetch_main', 'command' => ['git', 'fetch', 'origin', 'main', '--prune']],
@@ -2975,23 +3076,24 @@ final class BigFiveResultPageV2AssetAgent
     {
         $steps = [];
         foreach ($commands as $command) {
-            if (! is_string($command) || ! $this->mergeCleanupCommandAllowed($command)) {
+            if (! is_array($command) || ! $this->mergeCleanupCommandAllowed($command)) {
                 continue;
             }
+            $command = array_values(array_map('strval', $command));
 
-            if (preg_match('/^gh pr merge ([0-9]+) --squash --delete-branch$/', $command, $matches) === 1) {
+            if (array_slice($command, 0, 3) === ['gh', 'pr', 'merge']) {
                 $steps[] = [
                     'name' => 'squash_merge_pr',
-                    'command' => ['gh', 'pr', 'merge', $matches[1], '--repo', $githubRepo, '--squash', '--delete-branch'],
+                    'command' => ['gh', 'pr', 'merge', $command[3], '--repo', $githubRepo, '--squash', '--delete-branch'],
                 ];
 
                 continue;
             }
 
-            if (preg_match('/^git branch -d (codex\\/[A-Za-z0-9_\\/.:-]+)$/', $command, $matches) === 1) {
+            if (array_slice($command, 0, 3) === ['git', 'branch', '-d']) {
                 $steps[] = [
                     'name' => 'delete_local_branch',
-                    'command' => ['git', 'branch', '-d', $matches[1]],
+                    'command' => $command,
                 ];
 
                 continue;
@@ -2999,12 +3101,12 @@ final class BigFiveResultPageV2AssetAgent
 
             $steps[] = [
                 'name' => match ($command) {
-                    'git fetch origin main --prune' => 'fetch_main',
-                    'git checkout main' => 'checkout_main',
-                    'git pull --ff-only origin main' => 'pull_main_ff_only',
+                    ['git', 'fetch', 'origin', 'main', '--prune'] => 'fetch_main',
+                    ['git', 'checkout', 'main'] => 'checkout_main',
+                    ['git', 'pull', '--ff-only', 'origin', 'main'] => 'pull_main_ff_only',
                     default => 'unknown',
                 },
-                'command' => explode(' ', $command),
+                'command' => $command,
             ];
         }
 

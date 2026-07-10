@@ -44192,6 +44192,30 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "dependency_reconciliation": {
+        "evidence": "SECURITY-169-API-29 implementation PR #2897 and ledger closeout PR #2898 are merged; merge commits b16f2ae44cd52d4fe59ba4b56e94f502e116011c and f7f1738a059b40c796eed958b7e157097f1651b0 are contained by origin/main, and API29 is ledger-closed.",
+        "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "The seven API30 focused test files passed 108 tests with 85184 assertions; targeted mutation, merge, and staging regressions passed 6 tests with 67 assertions, including live scope recomputation, argv-only merge plans, repository-bound reviews, payload-set anchoring, failed-gate rejection, and pending rendered QA evidence.",
+        "status": "pass"
+      },
+      "fresh_migration": {
+        "evidence": "APP_ENV=testing SQLite migration completed successfully at /tmp/fap-api-security-169-api-30.sqlite.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed, including 1185 Big Five tests with 150160 assertions plus Enneagram, personality, payment, migration, auth, OpenAPI, order-security, MBTI smoke/report/share, events, dependency, webhook/attempt, and strict queue backlog gates.",
+        "status": "pass"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 19 changed paths are listed in SECURITY-169-API-30 allowed_paths; Pint, PHP syntax, JSON/YAML parsing, both QA checksum manifests, git diff --check, and path-limited scope validation passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -44207,6 +44231,16 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-30; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-11T00:29:02+08:00",
+        "note": "Dependency SECURITY-169-API-29 is merged and ledger-closed; started scoped remediation for findings #033, #034, #036, #086, #098, and #100.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T00:43:30+08:00",
+        "note": "Implementation, focused tests, route/migration checks, checksum validation, scope validation, and full local CI passed; ready to commit and open the implementation PR.",
+        "status": "in_progress"
       }
     ],
     "failure_reason": null,
@@ -44218,7 +44252,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-30: harden Big Five asset agent mutation and QA gates",
     "train_scope": "security_169_fap_api_audit"
   },
