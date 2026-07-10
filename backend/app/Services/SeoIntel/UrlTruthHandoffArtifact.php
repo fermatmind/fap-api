@@ -381,14 +381,25 @@ final class UrlTruthHandoffArtifact
     {
         $issues = [];
         $url = (string) ($candidate['canonical_url'] ?? '');
-        $scheme = Str::lower((string) parse_url($url, PHP_URL_SCHEME));
-        $host = Str::lower((string) parse_url($url, PHP_URL_HOST));
-        $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
+        $urlParts = @parse_url($url);
+        if (! is_array($urlParts)) {
+            return ['candidate_canonical_url_invalid:'.$index];
+        }
+
+        $scheme = Str::lower((string) ($urlParts['scheme'] ?? ''));
+        $host = Str::lower((string) ($urlParts['host'] ?? ''));
+        $path = (string) ($urlParts['path'] ?? '');
         $pathLocale = preg_match('#^/(en|zh)(?:/|$)#', $path, $localeMatches) === 1
             ? (string) $localeMatches[1]
             : null;
         $pathSlug = Str::after($path, $policy['route_fragment']);
         $locale = (string) ($candidate['locale'] ?? '');
+
+        foreach (['query', 'fragment', 'user', 'pass', 'port'] as $forbiddenComponent) {
+            if (array_key_exists($forbiddenComponent, $urlParts)) {
+                $issues[] = 'candidate_canonical_url_component_forbidden:'.$forbiddenComponent.':'.$index;
+            }
+        }
 
         if (($candidate['page_entity_type'] ?? null) !== $pageEntityType) {
             $issues[] = $policy['type_issue'].':'.$index;
@@ -517,7 +528,11 @@ final class UrlTruthHandoffArtifact
         }
 
         if ($pageEntityType === self::ARTICLE_PAGE_ENTITY_TYPE) {
-            return $entityIdOrSlug === '' || ! ctype_digit($entityIdOrSlug);
+            return $entityIdOrSlug === ''
+                || ! ctype_digit($entityIdOrSlug)
+                || $pathSlug === ''
+                || data_get($candidate, 'metadata.slug_hash') !== hash('sha256', $pathSlug)
+                || data_get($candidate, 'attributes.article_id_hash') !== hash('sha256', $entityIdOrSlug);
         }
 
         if ($pageEntityType === self::CONTENT_PAGE_ENTITY_TYPE) {

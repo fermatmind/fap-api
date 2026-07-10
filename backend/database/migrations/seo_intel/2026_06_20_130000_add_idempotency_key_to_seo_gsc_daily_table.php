@@ -62,7 +62,7 @@ return new class extends Migration
      */
     private function idempotencyKey(array $row): string
     {
-        return hash('sha256', implode('|', [
+        return hash('sha256', json_encode([
             $this->normalized($row['report_date'] ?? ''),
             $this->normalized($row['canonical_url_hash'] ?? ''),
             $this->normalized($row['query_hash'] ?? ''),
@@ -70,7 +70,7 @@ return new class extends Migration
             $this->normalized($row['device'] ?? ''),
             $this->normalized($row['country'] ?? ''),
             $this->normalized($row['search_type'] ?? ''),
-        ]));
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
     }
 
     private function normalized(mixed $value): string

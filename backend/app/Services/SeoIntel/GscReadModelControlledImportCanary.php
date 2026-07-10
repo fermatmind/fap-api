@@ -197,7 +197,13 @@ final class GscReadModelControlledImportCanary
     {
         return DB::connection($connection)
             ->table(self::TARGET_TABLE)
-            ->where('idempotency_key', $this->idempotencyKey($row))
+            ->whereRaw("COALESCE(TRIM(report_date), '') = ?", [$this->normalized($row['report_date'] ?? '')])
+            ->whereRaw("COALESCE(TRIM(canonical_url_hash), '') = ?", [$this->normalized($row['canonical_url_hash'] ?? '')])
+            ->whereRaw("COALESCE(TRIM(query_hash), '') = ?", [$this->normalized($row['query_hash'] ?? '')])
+            ->whereRaw("COALESCE(TRIM(source_engine), '') = ?", [$this->normalized($row['source_engine'] ?? 'google')])
+            ->whereRaw("COALESCE(TRIM(device), '') = ?", [$this->normalized($row['device'] ?? null)])
+            ->whereRaw("COALESCE(TRIM(country), '') = ?", [$this->normalized($row['country'] ?? null)])
+            ->whereRaw("COALESCE(TRIM(search_type), '') = ?", [$this->normalized($row['search_type'] ?? null)])
             ->exists();
     }
 
@@ -271,7 +277,7 @@ final class GscReadModelControlledImportCanary
      */
     private function idempotencyKey(array $row): string
     {
-        return hash('sha256', implode('|', [
+        return hash('sha256', json_encode([
             $this->normalized((string) ($row['report_date'] ?? '')),
             $this->normalized((string) ($row['canonical_url_hash'] ?? '')),
             $this->normalized((string) ($row['query_hash'] ?? '')),
@@ -279,7 +285,7 @@ final class GscReadModelControlledImportCanary
             $this->normalized($row['device'] ?? null),
             $this->normalized($row['country'] ?? null),
             $this->normalized($row['search_type'] ?? null),
-        ]));
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
     }
 
     private function normalized(mixed $value): string

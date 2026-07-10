@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel;
 
+use App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
 use Illuminate\Support\Facades\DB;
+use InvalidArgumentException;
 
 final class UrlTruthInventoryRecordWriter
 {
@@ -13,6 +15,11 @@ final class UrlTruthInventoryRecordWriter
      */
     public function write(array $records): int
     {
+        $bindingIssues = $this->authorityBindingIssues($records);
+        if ($bindingIssues !== []) {
+            throw new InvalidArgumentException(implode(',', $bindingIssues));
+        }
+
         $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
         $now = now();
         $written = 0;
@@ -70,5 +77,50 @@ final class UrlTruthInventoryRecordWriter
         }
 
         return $written;
+    }
+
+    /**
+     * @param  list<UrlTruthInventoryRecord>  $records
+     * @return list<string>
+     */
+    public function authorityBindingIssues(array $records): array
+    {
+        $articleIndexes = [];
+        foreach ($records as $index => $record) {
+            if ($record->pageEntityType === UrlTruthHandoffArtifact::ARTICLE_PAGE_ENTITY_TYPE) {
+                $articleIndexes[$index] = $record;
+            }
+        }
+
+        if ($articleIndexes === []) {
+            return [];
+        }
+
+        $authoritativeKeys = [];
+        foreach ((new BackendAuthorityUrlTruthSource)->candidates() as $candidate) {
+            if ($candidate->pageEntityType === UrlTruthHandoffArtifact::ARTICLE_PAGE_ENTITY_TYPE) {
+                $authoritativeKeys[$this->bindingKey($candidate)] = true;
+            }
+        }
+
+        $issues = [];
+        foreach ($articleIndexes as $index => $record) {
+            if (! isset($authoritativeKeys[$this->bindingKey($record)])) {
+                $issues[] = 'candidate_not_bound_to_backend_authority:'.$index;
+            }
+        }
+
+        return $issues;
+    }
+
+    private function bindingKey(UrlTruthInventoryRecord $record): string
+    {
+        return hash('sha256', json_encode([
+            $record->canonicalUrl,
+            $record->locale,
+            $record->pageEntityType,
+            $record->entityIdOrSlug,
+            $record->sourceAuthority,
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
     }
 }

@@ -325,6 +325,21 @@ final class SeoConversionDailyBuilder
             return null;
         }
 
+        for ($decodePass = 0; $decodePass < 5; $decodePass++) {
+            $decoded = rawurldecode($path);
+            if ($decoded === $path) {
+                break;
+            }
+
+            $path = $decoded;
+        }
+
+        if (preg_match('/%[0-9a-f]{2}/i', $path) === 1
+            || preg_match('/[\x00-\x1F\x7F]/', $path) === 1
+            || str_contains($path, '\\')) {
+            return null;
+        }
+
         $path = preg_replace('#/+#', '/', $path) ?: '/';
         $path = rtrim($path, '/');
 

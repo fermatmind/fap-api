@@ -154,11 +154,19 @@ final class SeoConversionDailyBuilderTest extends TestCase
             'form_id' => 'mbti_144',
             'session_id' => 'seo_sess_private',
         ]);
+        $this->insertSeoEvent(0, 'view_result', $day->addSecond(), [
+            'url' => 'https://fermatmind.com/en/%72esults/encoded-result-id',
+            'lang' => 'en',
+            'page_type' => 'result',
+            'scale_id' => 'MBTI',
+            'form_id' => 'mbti_144',
+            'session_id' => 'seo_sess_encoded_private',
+        ]);
 
         $result = app(SeoConversionDailyBuilder::class)->refresh($day, $day, [], false);
 
         $this->assertSame(0, (int) ($result['upserted_rows'] ?? 0));
-        $this->assertSame(1, (int) ($result['skipped_rows'] ?? 0));
+        $this->assertSame(2, (int) ($result['skipped_rows'] ?? 0));
         $this->assertSame(0, DB::table('analytics_seo_conversion_daily')->count());
     }
 

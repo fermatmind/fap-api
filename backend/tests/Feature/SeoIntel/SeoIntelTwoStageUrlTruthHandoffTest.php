@@ -710,6 +710,7 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
                 'canonical_path_hash' => hash('sha256', '/en/articles/mbti-personality-types-salary-turnover-report'),
                 'source_table_hash' => hash('sha256', 'research_reports'),
             ]),
+            $this->validRecord(canonicalUrl: 'https://www.fermatmind.com/en/research/mbti-personality-types-salary-turnover-report?%74oken=secret'),
         ]);
 
         $path = sys_get_temp_dir().'/tenant-research-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
@@ -728,6 +729,7 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
         $this->assertContains('candidate_untrusted_tenant_host:0', $output['issues'] ?? []);
         $this->assertContains('candidate_research_path_slug_mismatch:1', $output['issues'] ?? []);
         $this->assertContains('candidate_canonical_path_hash_mismatch:2', $output['issues'] ?? []);
+        $this->assertContains('candidate_canonical_url_component_forbidden:query:3', $output['issues'] ?? []);
         $this->assertFalse((bool) ($output['writes_committed'] ?? true));
     }
 
@@ -776,7 +778,7 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
     }
 
     #[Test]
-    public function article_import_write_can_use_exact_bounded_override_when_config_write_flags_are_disabled(): void
+    public function article_import_write_cannot_override_disabled_config_write_flags(): void
     {
         $this->prepareSeoIntelSqliteConnection();
         config([
@@ -806,8 +808,6 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
 
         $this->assertSame(1, $blockedExitCode);
         $this->assertContains('seo_intel_write_flags_disabled', $blockedOutput['issues'] ?? []);
-        $this->assertContains('bounded_write_override_confirmation_required', $blockedOutput['issues'] ?? []);
-        $this->assertSame($overrideConfirmation, $blockedOutput['required_bounded_write_override_confirmation'] ?? null);
         $this->assertSame(0, DB::connection('seo_intel')->table('seo_urls')->count());
         $this->assertSame(0, DB::connection('seo_intel')->table('seo_url_entities')->count());
 
@@ -822,17 +822,56 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
         ]);
         $writeOutput = json_decode(trim(Artisan::output()), true);
 
-        $this->assertSame(0, $writeExitCode, json_encode($writeOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
-        $this->assertSame('success', $writeOutput['status'] ?? null);
+        $this->assertSame(1, $writeExitCode, json_encode($writeOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('blocked', $writeOutput['status'] ?? null);
         $this->assertSame('import_write', $writeOutput['mode'] ?? null);
         $this->assertSame('article', $writeOutput['page_entity_type'] ?? null);
-        $this->assertSame('bounded_command_override', $writeOutput['write_authorization'] ?? null);
-        $this->assertTrue((bool) ($writeOutput['config_write_flags_bypassed'] ?? false));
-        $this->assertTrue((bool) ($writeOutput['writes_committed'] ?? false));
-        $this->assertFalse((bool) ($writeOutput['search_url_submission'] ?? true));
+        $this->assertContains('seo_intel_write_flags_disabled', $writeOutput['issues'] ?? []);
+        $this->assertFalse((bool) ($writeOutput['writes_committed'] ?? true));
         $this->assertSame(['seo_urls', 'seo_url_entities'], $writeOutput['target_tables'] ?? null);
-        $this->assertSame(1, DB::connection('seo_intel')->table('seo_urls')->count());
-        $this->assertSame(1, DB::connection('seo_intel')->table('seo_url_entities')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_urls')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_url_entities')->count());
+    }
+
+    #[Test]
+    public function article_import_write_rejects_entity_id_not_bound_to_backend_authority(): void
+    {
+        $this->prepareSeoIntelSqliteConnection();
+        config([
+            'app.frontend_url' => 'https://fermatmind.com',
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com',
+            'seo_intel.enabled' => true,
+            'seo_intel.write_enabled' => true,
+        ]);
+
+        $article = $this->createPublishedArticle([
+            'slug' => 'bound-article',
+            'locale' => 'zh-CN',
+            'title' => 'Bound Article',
+        ]);
+        $unboundId = (string) ((int) $article->id + 1000);
+        $artifact = new UrlTruthHandoffArtifact;
+        $path = sys_get_temp_dir().'/unbound-article-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+        $artifact->writeJson($path, $artifact->fromRecords([
+            $this->articleRecord('https://fermatmind.com/zh/articles/bound-article', $unboundId),
+        ], pageEntityType: 'article'));
+
+        $exitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--write' => true,
+            '--confirm-artifact-sha256' => $artifact->sha256($path),
+            '--json' => true,
+            '--limit' => 20,
+            '--page-type' => 'article',
+        ]);
+        $output = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode, json_encode($output, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('blocked', $output['status'] ?? null);
+        $this->assertContains('candidate_not_bound_to_backend_authority:0', $output['issues'] ?? []);
+        $this->assertFalse((bool) ($output['writes_committed'] ?? true));
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_urls')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_url_entities')->count());
     }
 
     #[Test]
@@ -920,6 +959,7 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
             metadata: [
                 'canonical_path_hash' => hash('sha256', $path),
                 'source_table_hash' => hash('sha256', 'articles'),
+                'slug_hash' => hash('sha256', basename($path)),
                 'claim_boundary_state' => 'claim_safe',
                 'claim_safe' => true,
                 'sitemap_eligible' => true,
