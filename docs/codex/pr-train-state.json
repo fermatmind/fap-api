@@ -84031,13 +84031,13 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-conscientiousness-content-package-01",
     "depends_on": ["BIG5-ZH-FACET-OPENNESS-CONTENT-PACKAGE-01"],
-    "status": "ready_to_merge",
-    "commit_sha": "4baaaf435f0ceb72d52e9cdc4cdec1a17e10e597",
+    "status": "merged",
+    "commit_sha": "25832172ba15f49f9acd8ac4198d70c94d221927",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2892",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-10T15:28:01Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -84076,7 +84076,7 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -84114,7 +84114,43 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated."
+      },
+      {
+        "at": "2026-07-10T15:29:44Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in the dependent same-repository PR: PR #2892 is merged at 25832172ba15f49f9acd8ac4198d70c94d221927; origin/main contains the merge, local main is synced and clean, and local/remote task branches are deleted."
       }
+    ]
+  },
+  "BIG5-ZH-FACET-EXTRAVERSION-CONTENT-PACKAGE-01": {
+    "id": "BIG5-ZH-FACET-EXTRAVERSION-CONTENT-PACKAGE-01",
+    "repo": "fap-api",
+    "title": "BIG5-ZH-FACET-EXTRAVERSION-CONTENT-PACKAGE-01: build six Chinese extraversion Facet content packages",
+    "base": "main",
+    "branch": "codex/big5-zh-facet-extraversion-content-package-01",
+    "depends_on": ["BIG5-ZH-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": { "status": "pass", "evidence": "The locked user goal explicitly authorized this PR id, six-page extraversion scope, dependency, and manifest/state registration." },
+      "dependency": { "status": "pass", "evidence": "PR #2892 is MERGED at 25832172ba15f49f9acd8ac4198d70c94d221927; origin/main contains the merge and both task branches were cleaned." },
+      "source_preflight": { "status": "pass", "evidence": "Confirmed the six existing zh-CN extraversion Facet content_stub routes, shared 5x6 ledger, NEO/IPIP-like route taxonomy, BFI-2/BFAS non-equivalence, and noindex backend authority boundary." },
+      "package_qa": { "status": "pass", "evidence": "Codex-native raw/review/repaired/V1/QA artifacts pass for exactly six zh-CN extraversion Facets; every asset has 9 substantive sections, 5 FAQ items, 7 structured internal links, body_md, shared-ledger inheritance, distinct construct boundaries, and locked noindex/index/sitemap/llms gates." },
+      "generic_importer_dry_run": { "status": "pass", "evidence": "No-write generic importer returned dry_run=1, assets_found=6, valid_count=6, errors_count=0, will_create=6, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets." },
+      "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions." },
+      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." }
+    },
+    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": null, "post_merge_revalidated": false },
+    "transitions": [
+      { "at": "2026-07-10T15:29:44Z", "from": "unregistered", "to": "planned", "note": "Registered only the current locked extraversion six-page PR after the conscientiousness dependency merged and was cleaned." },
+      { "at": "2026-07-10T15:29:44Z", "from": "planned", "to": "in_progress", "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN extraversion Facet routes." },
+      { "at": "2026-07-10T15:43:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed." }
     ]
   }
 }
