@@ -500,7 +500,7 @@
     "depends_on": [
       "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "06e08dbb21c559af4bc538c84f3cd4656c5477b2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2905",
     "failure_reason": null,
@@ -537,14 +537,18 @@
         "evidence": "pr-train YAML and state JSON parse successfully; git diff --check passed; changed files are exactly the four authorized paths."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #2905 is open and required GitHub checks are pending."
+        "status": "pass",
+        "evidence": "PR #2905 completed 15 reported GitHub checks successfully with zero failures, cancellations, or pending checks at head 38a52a01462e0f72b5d31cb1d43e3d3ec794cc05."
+      },
+      "merge_policy": {
+        "status": "pass",
+        "evidence": "Manifest requires GitHub checks, squash merge, and permits auto-merge. PR #2905 is mergeable with exact four-path scope and a complete validation/deferred-items body."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -571,6 +575,12 @@
         "from": "committed",
         "to": "github_checks_pending",
         "note": "Pushed the scoped branch and opened PR #2905; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-11T02:44:26+08:00",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 15 reported GitHub checks passed; title, body, four-file scope, head SHA, and merge policy were revalidated."
       }
     ]
   },
