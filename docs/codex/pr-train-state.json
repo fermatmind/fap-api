@@ -42512,10 +42512,14 @@
         ],
         "evidence": "Focused Career runtime projection/cache suite passed with 43 assertions. route:list, isolated sqlite migration, JSON/YAML/diff checks, and ci_verify_mbti.sh passed; CI-generated BIG5_OCEAN compiled artifacts were restored.",
         "status": "pass"
+      },
+      "github_required_checks": {
+        "evidence": "PR #2839 was CLEAN after hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, and Semgrep checks succeeded.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "199acc49058df877f884fd018ab4caa74105bf4e",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -42532,18 +42536,23 @@
         "at": "2026-07-10T08:33:34+08:00",
         "note": "Implemented fail-closed Career runtime projection/cache behavior and completed local validation without deployment, CMS, or production writes.",
         "status": "validated"
+      },
+      {
+        "at": "2026-07-10T08:41:05+08:00",
+        "note": "PR #2839 merged as d9ad064bf6d2c8c0e508d583880089511e6f6937; implementation branch was deleted locally and remotely. No staging wait, manual deploy, or production deploy was performed.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-11",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T00:41:05Z",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2839",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-11: harden career runtime cache and publish projection",
     "train_scope": "security_169_fap_api_audit"
   },
