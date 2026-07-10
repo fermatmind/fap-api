@@ -500,8 +500,8 @@
     "depends_on": [
       "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "06e08dbb2e9197631e9ef0f7c307ec88d60d28ef",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -555,6 +555,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Canonical API normalization, Enneagram alias and unsafe-link coverage, Big Five canonical regression coverage, full manifest test file, PHP syntax, Pint, JSON/YAML parsing, scope validation, and git diff checks passed."
+      },
+      {
+        "at": "2026-07-11T02:36:55+08:00",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the four authorized paths at implementation commit 06e08dbb2e9197631e9ef0f7c307ec88d60d28ef after explicit path-limited staging."
       }
     ]
   },
