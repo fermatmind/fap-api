@@ -83528,8 +83528,8 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-hub-content-repair-01",
     "depends_on": ["BIG5-ZH-LEGACY-ROUTE-DEPRECATION-02"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "da37c23083f88de68c84a08c67fe1c1803b5f9fb",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -83601,6 +83601,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All manifest checks passed after rebasing: content build/QA, JSON/YAML parsing, no-write importer, 14-test focused contract, complete core CI, diff check, and allowed-path scope validation."
+      },
+      {
+        "at": "2026-07-10T14:21:41Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the scoped Facet Hub content package, shared source ledger, QA artifacts, and authorized manifest/state metadata at da37c23083f88de68c84a08c67fe1c1803b5f9fb."
       }
     ]
   }
