@@ -44209,6 +44209,10 @@
         "evidence": "backend/scripts/ci_verify_mbti.sh passed, including 1185 Big Five tests with 150160 assertions plus Enneagram, personality, payment, migration, auth, OpenAPI, order-security, MBTI smoke/report/share, events, dependency, webhook/attempt, and strict queue backlog gates.",
         "status": "pass"
       },
+      "github_required_checks": {
+        "evidence": "PR #2900 head 9b3d7ff9fc5de6e11fe54a6bda88354e453fc486 passed all 15 checks: push and pull-request hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 jobs, plus Semgrep blocking secrets, Semgrep OSS, and SARIF upload.",
+        "status": "pass"
+      },
       "route_list": {
         "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
         "status": "pass"
@@ -44219,7 +44223,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "9b3d7ff9fc5de6e11fe54a6bda88354e453fc486",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -44241,18 +44245,23 @@
         "at": "2026-07-11T00:43:30+08:00",
         "note": "Implementation, focused tests, route/migration checks, checksum validation, scope validation, and full local CI passed; ready to commit and open the implementation PR.",
         "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T00:51:31+08:00",
+        "note": "Implementation PR #2900 passed all 15 GitHub checks and squash-merged as d07edd62d0214de355ce9bec833160b7c1a18dfc; origin/main and local main contain the merge, and implementation branches were deleted locally and remotely.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-30",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-11T00:51:31+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2900",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-30: harden Big Five asset agent mutation and QA gates",
     "train_scope": "security_169_fap_api_audit"
   },
