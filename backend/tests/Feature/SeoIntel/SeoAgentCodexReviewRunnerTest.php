@@ -149,6 +149,28 @@ final class SeoAgentCodexReviewRunnerTest extends TestCase
     }
 
     #[Test]
+    public function command_blocks_forbidden_fields_hidden_behind_html_entities(): void
+    {
+        $handoffPath = $this->writeHandoff([
+            $this->candidate('p1', 'encoded forbidden', [
+                'proposal_payload' => [
+                    'draft_angle' => 'Review raw&#95;url evidence.',
+                ],
+            ]),
+        ]);
+
+        $exitCode = Artisan::call('seo-agent:codex-review-runner', [
+            '--handoff' => $handoffPath,
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('forbidden_input_field_present', $summary['issues'] ?? []);
+    }
+
+    #[Test]
     public function generated_contract_documents_review_runner_boundaries(): void
     {
         $artifact = $this->readJson(base_path('docs/seo/generated/seo-agent-codex-review-runner.v1.json'));

@@ -103,6 +103,12 @@ final class PersonalityTdkNextBatchApprovalDraftGateCommand extends Command
         if (($qa['final_decision'] ?? null) !== 'PASS_READY_FOR_APPROVAL_REVIEW') {
             $issues[] = 'qa_final_decision_not_ready_for_approval_review';
         }
+        if (! $this->hasExactExpectedTargets($recommendationRows)) {
+            $issues[] = 'recommendations_target_set_mismatch';
+        }
+        if (! $this->hasExactExpectedTargets($qaRows)) {
+            $issues[] = 'qa_target_set_mismatch';
+        }
 
         $candidates = [];
         foreach ($recommendationRows as $row) {
@@ -204,6 +210,34 @@ final class PersonalityTdkNextBatchApprovalDraftGateCommand extends Command
             'issues' => array_values(array_unique($issues)),
             'negative_guarantees' => $this->negativeGuarantees(),
         ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     */
+    private function hasExactExpectedTargets(array $rows): bool
+    {
+        if (count($rows) !== count(self::EXPECTED_TARGETS)) {
+            return false;
+        }
+
+        $paths = [];
+        foreach ($rows as $row) {
+            $path = (string) ($row['path'] ?? '');
+            if (! in_array($path, self::EXPECTED_TARGETS, true)
+                || (string) ($row['target_url'] ?? '') !== 'https://fermatmind.com'.$path
+            ) {
+                return false;
+            }
+
+            $paths[] = $path;
+        }
+
+        sort($paths);
+        $expected = self::EXPECTED_TARGETS;
+        sort($expected);
+
+        return $paths === $expected;
     }
 
     /**

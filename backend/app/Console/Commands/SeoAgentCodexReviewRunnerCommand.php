@@ -416,14 +416,39 @@ final class SeoAgentCodexReviewRunnerCommand extends Command
      */
     private function forbiddenStringsPresent(string $raw): array
     {
+        $normalized = $this->normalizedForbiddenInput($raw);
         $matches = [];
         foreach (self::FORBIDDEN_STRINGS as $needle) {
-            if (str_contains($raw, $needle)) {
+            if (str_contains($normalized, mb_strtolower($needle, 'UTF-8'))) {
                 $matches[] = $needle;
             }
         }
 
         return $matches;
+    }
+
+    private function normalizedForbiddenInput(string $raw): string
+    {
+        $decodedJson = json_decode($raw, true);
+        if (is_array($decodedJson)) {
+            $canonical = json_encode(
+                $decodedJson,
+                JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE
+            );
+            if (is_string($canonical)) {
+                $raw = $canonical;
+            }
+        }
+
+        for ($attempt = 0; $attempt < 2; $attempt++) {
+            $decoded = rawurldecode(html_entity_decode($raw, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+            if ($decoded === $raw) {
+                break;
+            }
+            $raw = $decoded;
+        }
+
+        return mb_strtolower($raw, 'UTF-8');
     }
 
     /**

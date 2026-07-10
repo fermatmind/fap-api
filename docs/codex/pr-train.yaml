@@ -36065,6 +36065,12 @@ prs:
       - backend/docs/seo/generated/seo-agent-cms-draft-payload-repair-canary.v1.json
       - backend/app/Console/Commands/SeoAgentGscCohortHandoffCommand.php
       - backend/app/Console/Commands/SeoAgentCodexReviewRunnerCommand.php
+      - backend/tests/Feature/Console/PersonalityTdkNextBatchApprovalDraftGateCommandTest.php
+      - backend/tests/Feature/Console/PersonalityAgentApprovalQueueCommandTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentCmsDraftPayloadRepairCanaryTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentGscCohortHandoffTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentCodexReviewRunnerTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
