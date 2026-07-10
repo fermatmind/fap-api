@@ -44473,6 +44473,10 @@
         "status": "pass"
       },
       "github_required_checks": {
+        "evidence": "PR #2915 head 317a6e6217271380b5d28671da9d8a40b11655f6 passed all 15 GitHub checks.",
+        "status": "pass"
+      },
+      "github_required_checks": {
         "evidence": "PR #2912 head 334127e976c27d93a8b88b87e7b906190148db3c passed all 15 GitHub checks.",
         "status": "pass"
       },
@@ -44704,7 +44708,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "317a6e6217271380b5d28671da9d8a40b11655f6",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -44726,18 +44730,23 @@
         "at": "2026-07-11T04:31:00+08:00",
         "note": "Implementation, focused tests, route/migration checks, scope validation, proof-boundary regression checks, and full local CI passed; no CMS write, production import, deploy, or external submission executed.",
         "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T04:39:45+08:00",
+        "note": "Implementation PR #2915 passed all 15 GitHub checks and squash-merged as 21a23caed809ea9b0e43c4039cbed7901c559870; origin/main contains the merge, and implementation branches were deleted locally and remotely.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-35",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-11T04:39:45+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2915",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-35: harden DailyGiving public/private proof boundaries",
     "train_scope": "security_169_fap_api_audit"
   },
