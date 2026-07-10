@@ -42837,6 +42837,10 @@
         ],
         "evidence": "Focused SEO/CMS canary tests passed: 32 tests, 409 assertions. Route listing showed 218 routes; isolated SQLite migration and ci_verify_mbti passed.",
         "status": "pass"
+      },
+      "github_required_checks": {
+        "evidence": "PR #2854 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, and Semgrep blocking secrets.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42857,18 +42861,23 @@
         "at": "2026-07-10T14:32:51+08:00",
         "note": "Bound L5-A review evidence to source package and selected subject, bound publish execution to exact draft evidence and revision, and revalidated ContentPage gate provenance before publish. No CMS write, production import, deploy, or external submission was performed.",
         "status": "implementation_validated"
+      },
+      {
+        "at": "2026-07-10T14:40:25+08:00",
+        "note": "PR #2854 merged as bb85dca1a6e712ac6e36315ec0dbf961ea16390a after required checks passed; implementation branch was deleted locally and remotely. No staging wait, CMS write, manual deploy, or production deploy was performed.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-16",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T14:40:25+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2854",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "implementation_validated",
+    "status": "merged",
     "title": "SECURITY-169-API-16: bind SEO/CMS canaries to reviewed evidence",
     "train_scope": "security_169_fap_api_audit"
   },
