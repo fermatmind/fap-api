@@ -42900,8 +42900,8 @@
         "status": "pass"
       },
       "github_checks": {
-        "evidence": "PR #2859 verify-bigfive failed only because the runtime-freeze classifier did not recognize ContentReleaseAudit and RowBackedRevisionWorkspace as scoped controlled-publish infrastructure. The exact failing job and step were inspected; the classifier and regression cases were updated in scope, and the complete classifier file now passes 312 tests with 673 assertions. Replacement GitHub checks are pending.",
-        "status": "pending"
+        "evidence": "PR #2859 required checks passed after the current-scope classifier correction: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, and Semgrep blocking secrets.",
+        "status": "pass"
       },
       "local_ci": {
         "evidence": "bash backend/scripts/ci_verify_mbti.sh passed, including 1179 Big Five tests, MBTI E2E, OpenAPI, migration safety, auth, order, dependency, and regression gates.",
@@ -42921,7 +42921,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": "7310a64ed1bf390a9a721cd79758197bc36abee2",
+    "commit_sha": "c741cb411d327682fb1f9d29c23eb6f03389ad8f",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -42929,6 +42929,11 @@
     ],
     "deploy_allowed": false,
     "events": [
+      {
+        "at": "2026-07-10T15:24:19+08:00",
+        "note": "PR #2859 squash merged at c741cb411d327682fb1f9d29c23eb6f03389ad8f after all required checks passed. origin/main contains the merge commit, local main is synchronized and clean, and the implementation branch was deleted locally and remotely. No staging wait, CMS write, manual deploy, or production deploy was performed.",
+        "status": "merged"
+      },
       {
         "at": "2026-07-10T15:17:50+08:00",
         "note": "Inspected PR #2859 verify-bigfive failure and fixed the current-scope runtime-freeze path classification for ContentReleaseAudit and RowBackedRevisionWorkspace. The complete classifier file passed 312 tests / 673 assertions and API17 focused tests remained green at 29 tests / 683 assertions; replacement checks await push.",
@@ -42957,14 +42962,14 @@
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-17",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T15:24:19+08:00",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2859",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "merged",
     "title": "SECURITY-169-API-17: harden ContentPages controlled publish and rollback",
     "train_scope": "security_169_fap_api_audit"
   },
