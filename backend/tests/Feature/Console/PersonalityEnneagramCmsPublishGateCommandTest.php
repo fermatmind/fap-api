@@ -131,16 +131,10 @@ final class PersonalityEnneagramCmsPublishGateCommandTest extends TestCase
         $this->assertSame(13, PersonalityPublicContentAsset::query()->where('launch_state', PersonalityPublicContentAsset::LAUNCH_PUBLISHED)->count());
     }
 
-    public function test_en_locale_rows_are_rejected(): void
+    public function test_dry_run_plans_thirteen_en_publish_gate_rows_without_writes(): void
     {
-        $pkg = [
-            'artifact' => 'TEST',
-            'framework' => 'enneagram',
-            'recommendations' => [
-                $this->recommendation('https://fermatmind.com/en/personality/enneagram', 'en', 'hub'),
-            ],
-        ];
-        $packagePath = $this->writePackage($pkg);
+        $packagePath = $this->writePackage($this->en13Package());
+        $this->seedContentReadyAssets('en');
 
         $exitCode = $this->callPublishGate([
             '--package' => $packagePath,
@@ -149,9 +143,31 @@ final class PersonalityEnneagramCmsPublishGateCommandTest extends TestCase
         ]);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(1, $exitCode);
-        $this->assertFalse($payload['ok']);
-        $this->assertContains('locale_not_supported_for_publish', array_column($payload['errors'], 'code'));
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertSame(13, $payload['row_count']);
+        $this->assertSame(13, $payload['would_publish_count']);
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->where('launch_state', PersonalityPublicContentAsset::LAUNCH_PUBLISHED)->count());
+        $this->assertSame(13, PersonalityPublicContentAsset::query()->where('locale', 'en')->where('launch_state', PersonalityPublicContentAsset::LAUNCH_CONTENT_READY)->count());
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->where('llms_eligible', true)->count());
+    }
+
+    public function test_write_publishes_thirteen_en_assets_without_llms_or_search_release(): void
+    {
+        $packagePath = $this->writePackage($this->en13Package());
+        $this->seedContentReadyAssets('en');
+
+        $exitCode = $this->callPublishGate($this->writeOptions($packagePath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(13, $payload['published_count']);
+        $this->assertFalse($payload['llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame(13, PersonalityPublicContentAsset::query()->where('locale', 'en')->where('launch_state', PersonalityPublicContentAsset::LAUNCH_PUBLISHED)->count());
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->where('locale', 'en')->where('llms_eligible', true)->count());
     }
 
     public function test_non_content_ready_assets_are_rejected(): void
@@ -202,7 +218,7 @@ final class PersonalityEnneagramCmsPublishGateCommandTest extends TestCase
         return Artisan::call('personality:enneagram-cms-publish-gate', $options);
     }
 
-    private function seedContentReadyAssets(): void
+    private function seedContentReadyAssets(string $locale = 'zh-CN'): void
     {
         // Create content_ready assets matching zh13 package
         $entities = [
@@ -220,7 +236,7 @@ final class PersonalityEnneagramCmsPublishGateCommandTest extends TestCase
                 'entity_type' => $entity['entity_type'],
                 'entity_key' => $entity['entity_key'],
                 'slug' => $entity['entity_key'],
-                'locale' => 'zh-CN',
+                'locale' => $locale,
                 'title' => 'Test: '.$entity['entity_key'],
                 'summary' => 'Test summary',
                 'is_public' => true,
@@ -250,7 +266,7 @@ final class PersonalityEnneagramCmsPublishGateCommandTest extends TestCase
             '--no-sitemap' => true,
             '--no-llms' => true,
             '--no-search-release' => true,
-            '--operator-approved' => 'ENNEAGRAM-ZH13-CMS-PUBLISH-GATE-01',
+            '--operator-approved' => 'ENNEAGRAM-CMS-PUBLISH-GATE-01',
             '--json' => true,
         ];
     }
@@ -271,6 +287,27 @@ final class PersonalityEnneagramCmsPublishGateCommandTest extends TestCase
 
         return [
             'artifact' => 'ENNEAGRAM-ZH13-CMS-PACKAGE-NORMALIZE-01',
+            'framework' => 'enneagram',
+            'recommendations' => $recommendations,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function en13Package(): array
+    {
+        $recommendations = [];
+        $recommendations[] = $this->recommendation('https://fermatmind.com/en/personality/enneagram', 'en', 'hub');
+        foreach (['gut', 'heart', 'head'] as $center) {
+            $recommendations[] = $this->recommendation("https://fermatmind.com/en/personality/enneagram/centers/{$center}", 'en', 'center');
+        }
+        for ($type = 1; $type <= 9; $type++) {
+            $recommendations[] = $this->recommendation("https://fermatmind.com/en/personality/enneagram/type-{$type}", 'en', 'core_type');
+        }
+
+        return [
+            'artifact' => 'ENNEAGRAM-EN13-CMS-PACKAGE-V1',
             'framework' => 'enneagram',
             'recommendations' => $recommendations,
         ];

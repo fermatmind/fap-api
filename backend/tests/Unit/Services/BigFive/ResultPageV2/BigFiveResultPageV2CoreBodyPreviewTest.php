@@ -670,6 +670,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_cms_publish_gate_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityEnneagramCmsPublishGate.php',
+            'backend/app/Services/Cms/EnneagramCmsPublishGateService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_enneagram_registry_validator_changes(): void
     {
         $changed = [
@@ -5214,6 +5224,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEnneagramCmsPublishGateFile($file)) {
+                continue;
+            }
+
             if ($this->isEnneagramRegistryValidatorFile($file)) {
                 continue;
             }
@@ -6838,6 +6852,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityEnneagramCmsPromote.php',
             'backend/app/Services/Cms/EnneagramCmsPromotionService.php',
+        ], true);
+    }
+
+    private function isEnneagramCmsPublishGateFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityEnneagramCmsPublishGate.php',
+            'backend/app/Services/Cms/EnneagramCmsPublishGateService.php',
         ], true);
     }
 
