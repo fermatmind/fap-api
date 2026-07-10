@@ -35710,7 +35710,7 @@ prs:
     branch: codex/security-169-api-21-harden-ops-access-totp-and-dashboard-inputs
     title: "SECURITY-169-API-21: harden ops access, TOTP, and dashboard inputs"
     train_scope: security_169_fap_api_audit
-    status: user_authorized
+    status: merged
     scope:
       - Restore ops host/IP/TOTP controls and normalize dashboard/funnel query inputs safely.
     allowed_paths:

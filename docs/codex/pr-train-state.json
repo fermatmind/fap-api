@@ -43247,6 +43247,10 @@
         "evidence": "ci_verify_mbti passed after OpenAPI snapshot synchronization, including the 1179-test suite (150137 assertions), Enneagram, MBTI smoke/report/share, event, payment, migration, auth, order-security, dependency, and webhook/attempt gates.",
         "status": "pass"
       },
+      "github_required_checks": {
+        "evidence": "PR #2872 final head b7f9324c60a6111ac46fdaf8e42a7be815c76ce4 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload checks.",
+        "status": "pass"
+      },
       "route_list": {
         "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
         "status": "pass"
@@ -43257,7 +43261,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "36869f33955fed23a6466e52eb20290e97c76aed",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -43289,18 +43293,23 @@
         "at": "2026-07-10T17:49:00+08:00",
         "note": "Inspected the verify-bigfive failure: its runtime-freeze classifier flagged this PR's OpsAccessControl and API route hardening. Added exact diff-line classification and regression coverage; the full 313-test classifier suite, 27 scoped feature tests, OpenAPI check, and 14-path scope validation pass.",
         "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-10T17:56:02+08:00",
+        "note": "PR #2872 merged after all GitHub checks passed; merge commit 36869f33955fed23a6466e52eb20290e97c76aed. origin/main and the dedicated local main were synchronized, and local/remote API21 task branches were deleted.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-21",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T17:55:21+08:00",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2872",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "merged",
     "title": "SECURITY-169-API-21: harden ops access, TOTP, and dashboard inputs",
     "train_scope": "security_169_fap_api_audit"
   },
