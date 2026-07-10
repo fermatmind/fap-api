@@ -1573,6 +1573,55 @@ final class PersonalityPublicApiTest extends TestCase
         }
     }
 
+    public function test_detail_excludes_disabled_and_premium_teaser_sections(): void
+    {
+        $profile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'overview',
+            'title' => 'Overview',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Public overview.',
+            'sort_order' => 10,
+            'is_enabled' => true,
+        ]);
+        PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'draft.internal',
+            'title' => 'Draft',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Draft-only body.',
+            'sort_order' => 20,
+            'is_enabled' => false,
+        ]);
+        PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'growth.motivators',
+            'title' => 'Premium growth',
+            'render_variant' => 'premium_teaser',
+            'body_md' => 'Premium-only body.',
+            'payload_json' => ['cta' => ['href' => '/checkout']],
+            'sort_order' => 30,
+            'is_enabled' => true,
+        ]);
+
+        $this->getJson('/api/v0.5/personality/intj?locale=en')
+            ->assertOk()
+            ->assertJsonCount(1, 'sections')
+            ->assertJsonPath('sections.0.section_key', 'overview')
+            ->assertJsonMissingPath('sections.1')
+            ->assertDontSee('Draft-only body.')
+            ->assertDontSee('Premium-only body.')
+            ->assertDontSee('/checkout');
+    }
+
     private function expectedSearchIntentSeoTitle(string $locale, string $runtimeTypeCode, string $typeName): string
     {
         $typeLabel = trim($runtimeTypeCode.' '.$typeName);

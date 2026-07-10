@@ -137,7 +137,9 @@ class PersonalityController extends Controller
         $profile = $routeProfile['profile'];
         /** @var PersonalityProfileVariant|null $variant */
         $variant = $routeProfile['variant'];
-        $projection = $this->personalityProfileService->buildPublicProjection($profile, $variant);
+        $projection = $this->sanitizePublicProjection(
+            $this->personalityProfileService->buildPublicProjection($profile, $variant)
+        );
         $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
             $this->personalityProfileSeoService->buildMeta($profile, $variant)
         );
@@ -351,8 +353,12 @@ class PersonalityController extends Controller
             return $this->notFoundResponse('personality comparison not found.');
         }
 
-        $assertiveProjection = $this->personalityProfileService->buildPublicProjection($assertiveProfile, $assertiveVariant);
-        $turbulentProjection = $this->personalityProfileService->buildPublicProjection($turbulentProfile, $turbulentVariant);
+        $assertiveProjection = $this->sanitizePublicProjection(
+            $this->personalityProfileService->buildPublicProjection($assertiveProfile, $assertiveVariant)
+        );
+        $turbulentProjection = $this->sanitizePublicProjection(
+            $this->personalityProfileService->buildPublicProjection($turbulentProfile, $turbulentVariant)
+        );
         $assertiveSections = $this->publicSectionPayloads($assertiveProfile, $assertiveVariant);
         $turbulentSections = $this->publicSectionPayloads($turbulentProfile, $turbulentVariant);
         $comparisonOverlay = $this->mbti64PromotedComparisonOverlay($assertiveProfile);
@@ -1586,7 +1592,9 @@ class PersonalityController extends Controller
             return [];
         }
 
-        $projection = $this->personalityProfileService->buildPublicProjection($profile, $variant);
+        $projection = $this->sanitizePublicProjection(
+            $this->personalityProfileService->buildPublicProjection($profile, $variant)
+        );
         $runtimeTypeCode = strtoupper(trim((string) ($variant->runtime_type_code ?? '')));
         $canonicalTypeCode = strtoupper(trim((string) ($variant->canonical_type_code ?: $profile->canonical_type_code ?: $profile->type_code)));
         $routeSlug = strtolower($runtimeTypeCode);
@@ -1724,6 +1732,10 @@ class PersonalityController extends Controller
     private function publicSectionPayloads(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
     {
         $sections = $profile->sections
+            ->filter(fn (PersonalityProfileSection $section): bool => $this->isPublicSection(
+                (bool) $section->is_enabled,
+                (string) $section->render_variant,
+            ))
             ->mapWithKeys(fn (PersonalityProfileSection $section): array => [
                 (string) $section->section_key => $this->sectionPayload($section),
             ]);
@@ -1739,7 +1751,7 @@ class PersonalityController extends Controller
                     continue;
                 }
 
-                if (! (bool) $section->is_enabled) {
+                if (! $this->isPublicSection((bool) $section->is_enabled, (string) $section->render_variant)) {
                     $sections->forget($sectionKey);
 
                     continue;
@@ -1791,6 +1803,28 @@ class PersonalityController extends Controller
             ])
             ->values()
             ->all();
+    }
+
+    private function isPublicSection(bool $isEnabled, string $renderVariant): bool
+    {
+        return $isEnabled && $renderVariant !== 'premium_teaser';
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @return array<string,mixed>
+     */
+    private function sanitizePublicProjection(array $projection): array
+    {
+        $projection['sections'] = array_values(array_filter(
+            (array) ($projection['sections'] ?? []),
+            fn (mixed $section): bool => is_array($section) && $this->isPublicSection(
+                (bool) ($section['is_enabled'] ?? false),
+                (string) ($section['render'] ?? ''),
+            )
+        ));
+
+        return $projection;
     }
 
     /**

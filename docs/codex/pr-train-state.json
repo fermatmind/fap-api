@@ -42372,6 +42372,14 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "dependency": {
+        "evidence": "SECURITY-169-API-09 implementation PR #2828, ledger closeout PR #2829, and ledger correction PR #2831 are merged on origin/main.",
+        "status": "pass"
+      },
+      "local_validation": {
+        "evidence": "Passed Pint; PersonalityPublicApiTest (22 tests, 3225 assertions); route list (233 routes); clean SQLite migrate; JSON/YAML parsing; git diff --check; and AuthGuestTokenTest (5 tests) after the CI runner's stale /tmp/fap-ci.sqlite read-only error. ci_verify_mbti.sh otherwise passed MBTI, personality, Big Five, payment, and migration gates before that non-scope environment error.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42383,6 +42391,11 @@
     ],
     "deploy_allowed": false,
     "events": [
+      {
+        "at": "2026-07-10T08:03:07+08:00",
+        "note": "Started API10 from clean isolated worktree at origin/main d4a34f2a2 after confirming API09 is ledger-closed; local validation passed with a non-scope stale SQLite CI environment error independently revalidated by AuthGuestTokenTest.",
+        "status": "validated"
+      },
       {
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-10; execution waits for declared dependency merge.",
@@ -42398,7 +42411,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-10: seal personality public content and CTA exposure",
     "train_scope": "security_169_fap_api_audit"
   },

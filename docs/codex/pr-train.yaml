@@ -35280,6 +35280,7 @@ prs:
       - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
       - backend/app/Models/PersonalityPublicContentAsset.php
       - backend/app/Services/Cms/PersonalityPublicContentAssetContract.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
