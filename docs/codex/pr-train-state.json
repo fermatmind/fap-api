@@ -200,7 +200,7 @@
     "depends_on": [
       "ENNEAGRAM-EN13-SITEMAP-LOCALE-01"
     ],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2867",
     "failure_reason": null,
@@ -83207,6 +83207,14 @@
       "scope_and_diff": {
         "status": "pass",
         "evidence": "All changed and untracked files are inside this PR's allowed_paths and git diff --check passed."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2867 completed 15 checks successfully with zero failures or pending checks before the ready-to-merge ledger update."
+      },
+      "merge_policy": {
+        "status": "pass",
+        "evidence": "GitHub reported MERGEABLE/CLEAN, no review requirement, no branch protection rule, and the manifest permits squash auto-merge after required checks pass."
       }
     },
     "scope_validation": {
@@ -83245,6 +83253,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR #2867 for the locked audit scope; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-10T08:39:01Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All 15 GitHub checks passed and scope, changed files, PR body, review state, branch policy, and squash merge policy were revalidated."
       }
     ]
   }
