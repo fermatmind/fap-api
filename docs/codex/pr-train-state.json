@@ -84286,8 +84286,8 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-neuroticism-content-package-01",
     "depends_on": ["BIG5-ZH-FACET-AGREEABLENESS-CONTENT-PACKAGE-01"],
-    "status": "pr_open",
-    "commit_sha": "d492e155f81dcfb03744ac967aab3ab80353327d",
+    "status": "ready_to_merge",
+    "commit_sha": "619480be08375b4b5067a0ddaf654e68ae2a8a37",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2899",
     "failure_reason": null,
     "merged_at": null,
@@ -84300,15 +84300,17 @@
       "package_qa": { "status": "pass", "evidence": "Codex-native raw/review/repaired/V1/QA artifacts pass for exactly six zh-CN emotional-sensitivity Facets; every asset has 9 substantive sections, 5 FAQ items, 7 structured internal links, body_md, shared-ledger inheritance, explicit non-diagnostic boundaries, and locked noindex/index/sitemap/llms gates." },
       "generic_importer_dry_run": { "status": "pass", "evidence": "No-write generic importer returned dry_run=1, assets_found=6, valid_count=6, errors_count=0, will_create=6, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets." },
       "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions." },
-      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." }
+      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
+      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head 619480be08375b4b5067a0ddaf654e68ae2a8a37; PR #2899 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": null, "post_merge_revalidated": false },
+    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false },
     "transitions": [
       { "at": "2026-07-10T16:20:53Z", "from": "unregistered", "to": "planned", "note": "Registered only the current locked neuroticism six-page PR after the agreeableness dependency merged and was cleaned." },
       { "at": "2026-07-10T16:20:53Z", "from": "planned", "to": "in_progress", "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN emotional-sensitivity Facet routes." },
       { "at": "2026-07-10T16:30:05Z", "from": "in_progress", "to": "local_checks_passed", "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed." },
       { "at": "2026-07-10T16:30:41Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped six-page emotional-sensitivity package and train metadata at 02f83b97d8bd6dd47423dbf0fe8810d3e74a2cf7." },
-      { "at": "2026-07-10T16:31:38Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2899 from head d492e155f81dcfb03744ac967aab3ab80353327d." }
+      { "at": "2026-07-10T16:31:38Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2899 from head d492e155f81dcfb03744ac967aab3ab80353327d." },
+      { "at": "2026-07-10T16:37:58Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." }
     ]
   }
 }
