@@ -84330,9 +84330,9 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-import-dryrun-01",
     "depends_on": ["BIG5-ZH-FACET-NEUROTICISM-CONTENT-PACKAGE-01"],
-    "status": "committed",
-    "commit_sha": "f8bc72477afa3f83fb1b7266a66853ea3d2cb7dd",
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "7c15e770abedfb93b21c8c9f6c9725d3bb48ecdb",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2902",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -84350,7 +84350,8 @@
       { "at": "2026-07-10T16:45:57Z", "from": "unregistered", "to": "planned", "note": "Registered only the locked combined 31-page no-write dry-run PR after all five domain packages merged." },
       { "at": "2026-07-10T16:45:57Z", "from": "planned", "to": "in_progress", "note": "Started deterministic composition and dry-run validation for one Hub plus thirty Facet assets." },
       { "at": "2026-07-10T16:53:15Z", "from": "in_progress", "to": "local_checks_passed", "note": "Combined package QA, 31-row generic importer dry-run, focused contract, full core CI, full-32 authority gate, syntax, diff, and allowed-path validation passed without writes." },
-      { "at": "2026-07-10T16:53:57Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped 31-page combined dry-run package and train metadata at f8bc72477afa3f83fb1b7266a66853ea3d2cb7dd." }
+      { "at": "2026-07-10T16:53:57Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped 31-page combined dry-run package and train metadata at f8bc72477afa3f83fb1b7266a66853ea3d2cb7dd." },
+      { "at": "2026-07-10T16:54:53Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2902 from head 7c15e770abedfb93b21c8c9f6c9725d3bb48ecdb." }
     ]
   }
 }
