@@ -84217,9 +84217,9 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-agreeableness-content-package-01",
     "depends_on": ["BIG5-ZH-FACET-EXTRAVERSION-CONTENT-PACKAGE-01"],
-    "status": "committed",
-    "commit_sha": "b2a522a5ccbc082138ff542121b41a94526fb4a8",
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "e1acc041db157e262f699810d9f40987cc78079d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2896",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -84238,7 +84238,8 @@
       { "at": "2026-07-10T15:58:38Z", "from": "unregistered", "to": "planned", "note": "Registered only the current locked agreeableness six-page PR after the extraversion dependency merged and was cleaned." },
       { "at": "2026-07-10T15:58:38Z", "from": "planned", "to": "in_progress", "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN agreeableness Facet routes." },
       { "at": "2026-07-10T16:06:07Z", "from": "in_progress", "to": "local_checks_passed", "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed." },
-      { "at": "2026-07-10T16:06:42Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped six-page agreeableness package and train metadata at b2a522a5ccbc082138ff542121b41a94526fb4a8." }
+      { "at": "2026-07-10T16:06:42Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped six-page agreeableness package and train metadata at b2a522a5ccbc082138ff542121b41a94526fb4a8." },
+      { "at": "2026-07-10T16:07:38Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2896 from head e1acc041db157e262f699810d9f40987cc78079d." }
     ]
   }
 }
