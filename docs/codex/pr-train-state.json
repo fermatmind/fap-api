@@ -42631,6 +42631,18 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "local_validation": {
+        "commands": [
+          "cd backend && php artisan test tests/Feature/Career/CareerAiImpactAssetPreviewImportTest.php --no-ansi",
+          "cd backend && php artisan route:list --path=api --except-vendor --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-13.sqlite php artisan migrate --force --no-interaction",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --check"
+        ],
+        "evidence": "Focused AI-impact asset tests passed: 27 tests, 444 assertions. Route listing, isolated SQLite migration, and ci_verify_mbti passed; the main suite reported 1179 tests and 150137 assertions.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42646,6 +42658,11 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-13; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T09:34:21+08:00",
+        "note": "Hardened AI-impact preview/import slug authority, approval transitions, and approved-source production import checks. No CMS, production import, deploy, or external write was performed.",
+        "status": "implementation_validated"
       }
     ],
     "failure_reason": null,
@@ -42657,7 +42674,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "implementation_validated",
     "title": "SECURITY-169-API-13: harden career AI-impact asset approval gates",
     "train_scope": "security_169_fap_api_audit"
   },

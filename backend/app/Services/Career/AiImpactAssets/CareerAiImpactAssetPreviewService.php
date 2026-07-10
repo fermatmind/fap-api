@@ -53,6 +53,11 @@ final class CareerAiImpactAssetPreviewService
             return null;
         }
 
+        $previewSlugs = $this->previewSlugs();
+        if ($previewSlugs === [] || ! in_array($normalizedSlug, $previewSlugs, true)) {
+            return null;
+        }
+
         return CareerJobAiImpactAsset::query()
             ->where('career_job_slug', $normalizedSlug)
             ->where('locale', $normalizedLocale)

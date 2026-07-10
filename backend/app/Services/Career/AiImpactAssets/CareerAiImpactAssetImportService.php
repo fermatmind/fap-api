@@ -112,6 +112,21 @@ final class CareerAiImpactAssetImportService
             ? array_values(array_keys($slugsFromFile))
             : $this->targetSlugs($requestedSlugs, $errors, $enforcePreviewAllowlist);
 
+        if ($allSlugsFromFile && $enforcePreviewAllowlist) {
+            $allowlist = $this->previewService->previewSlugs();
+            if ($targetSlugs === []) {
+                $errors[] = 'AI Impact target slugs must be configured and non-empty.';
+            }
+            if ($allowlist === []) {
+                $errors[] = 'AI Impact staging preview allowlist must be configured and non-empty.';
+            }
+            foreach ($targetSlugs as $slug) {
+                if (! in_array($slug, $allowlist, true)) {
+                    $errors[] = "{$slug}: slug is not in the AI Impact staging preview allowlist.";
+                }
+            }
+        }
+
         $sourceFileSha256 = hash_file('sha256', $file) ?: null;
         $expectedSha256 = $this->normalizeSha256($expectedSha256);
         if ($expectedSha256 !== null && $sourceFileSha256 !== $expectedSha256) {
@@ -421,7 +436,6 @@ final class CareerAiImpactAssetImportService
         $rollbackRows = [];
         $previousStatusCounts = [];
         $approvableStatuses = [
-            CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
             CareerJobAiImpactAsset::STATUS_EDITORIAL_REVIEW,
             CareerJobAiImpactAsset::STATUS_APPROVED,
         ];
@@ -436,7 +450,11 @@ final class CareerAiImpactAssetImportService
 
             $previousStatus = (string) $asset->status;
             $previousStatusCounts[$previousStatus] = (int) ($previousStatusCounts[$previousStatus] ?? 0) + 1;
-            if (! in_array($previousStatus, $approvableStatuses, true)) {
+            if (
+                ! in_array($previousStatus, $approvableStatuses, true)
+                || ($previousStatus !== CareerJobAiImpactAsset::STATUS_APPROVED
+                    && ! $this->stateMachine->allowsTransition($previousStatus, CareerJobAiImpactAsset::STATUS_APPROVED))
+            ) {
                 $errors[] = "{$target['slug']}/{$target['locale']}: cannot approve from status {$previousStatus}.";
             }
 
@@ -489,7 +507,6 @@ final class CareerAiImpactAssetImportService
                 ->whereIn('career_job_slug', $targetSlugs)
                 ->whereIn('locale', ['zh-CN', 'en'])
                 ->whereIn('status', [
-                    CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
                     CareerJobAiImpactAsset::STATUS_EDITORIAL_REVIEW,
                     CareerJobAiImpactAsset::STATUS_APPROVED,
                 ])
@@ -583,7 +600,7 @@ final class CareerAiImpactAssetImportService
             ]);
         }
 
-        $validation = $this->validateFile($file, $requestedSlugs, $expectedSha256, $allSlugsFromFile, false);
+        $validation = $this->validateFile($file, $requestedSlugs, $expectedSha256, $allSlugsFromFile);
         if (($validation['decision'] ?? null) !== 'pass') {
             return array_merge($validation, [
                 'mode' => $write ? 'production_import' : 'production_import_dry_run',
@@ -636,13 +653,14 @@ final class CareerAiImpactAssetImportService
             $previousStatus = $asset instanceof CareerJobAiImpactAsset ? (string) $asset->status : 'missing';
             $previousStatusCounts[$previousStatus] = (int) ($previousStatusCounts[$previousStatus] ?? 0) + 1;
 
-            if ($asset instanceof CareerJobAiImpactAsset) {
-                if (! in_array($previousStatus, [
-                    CareerJobAiImpactAsset::STATUS_APPROVED,
-                    CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
-                ], true)) {
-                    $errors[] = "{$target['slug']}/{$target['locale']}: production import requires approved source rows or an empty production target, found {$previousStatus}.";
-                }
+            if (! $asset instanceof CareerJobAiImpactAsset) {
+                $errors[] = "{$target['slug']}/{$target['locale']}: production import requires an existing approved source row.";
+            } elseif (! in_array($previousStatus, [
+                CareerJobAiImpactAsset::STATUS_APPROVED,
+                CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+            ], true)) {
+                $errors[] = "{$target['slug']}/{$target['locale']}: production import requires approved source rows, found {$previousStatus}.";
+            } else {
 
                 if (is_string($asset->source_artifact_sha256) && $sourceFileSha256 !== null && $asset->source_artifact_sha256 !== $sourceFileSha256) {
                     $errors[] = "{$target['slug']}/{$target['locale']}: existing source artifact SHA does not match the approved production artifact SHA.";
@@ -1236,7 +1254,14 @@ final class CareerAiImpactAssetImportService
                 $requestedSlugs
             )));
 
+        if ($target === []) {
+            $errors[] = 'AI Impact target slugs must be configured and non-empty.';
+        }
+
         if ($enforcePreviewAllowlist) {
+            if ($allowlist === []) {
+                $errors[] = 'AI Impact staging preview allowlist must be configured and non-empty.';
+            }
             foreach ($target as $slug) {
                 if (! in_array($slug, $allowlist, true)) {
                     $errors[] = "{$slug}: slug is not in the AI Impact staging preview allowlist.";

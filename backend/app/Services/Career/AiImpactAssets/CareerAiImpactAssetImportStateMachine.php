@@ -46,6 +46,11 @@ final class CareerAiImpactAssetImportStateMachine
         ];
     }
 
+    public function allowsTransition(string $from, string $to): bool
+    {
+        return in_array($to, $this->transitions()[$from] ?? [], true);
+    }
+
     /**
      * @return array<string, mixed>
      */
