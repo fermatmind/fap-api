@@ -168,13 +168,13 @@
     "depends_on": [
       "ENNEAGRAM-EN13-PUBLISH-GATE-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "8783dceab",
+    "status": "merged",
+    "commit_sha": "c15b5085ca0b6806cba02dd872b89ff160f689a7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2837",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-10T08:33:22+08:00",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "sitemap_generator": {"status":"pass","evidence":"SitemapGeneratorTest passed 10 tests and 226 assertions, including 13 English and 13 Chinese Enneagram URLs."},
       "mbti_ci": {"status":"pass","evidence":"backend/scripts/ci_verify_mbti.sh passed in the isolated SQLite test environment."}
@@ -182,13 +182,14 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": false
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {"at":"2026-07-10T08:26:00+08:00","from":"pending_dependency","to":"in_progress","note":"Dependency ENNEAGRAM-EN13-PUBLISH-GATE-01 is merged and post-merge revalidated."},
       {"at":"2026-07-10T08:26:00+08:00","from":"in_progress","to":"committed","note":"Sitemap regression, MBTI CI, YAML/JSON, diff, and scope validation passed."},
-      {"at":"2026-07-10T08:27:00+08:00","from":"committed","to":"pr_open","note":"Opened PR #2837 for the locked English sitemap-locale scope."}
+      {"at":"2026-07-10T08:27:00+08:00","from":"committed","to":"pr_open","note":"Opened PR #2837 for the locked English sitemap-locale scope."},
+      {"at":"2026-07-10T16:30:57+08:00","from":"ready_to_merge","to":"merged","note":"Reconciled GitHub PR #2837 squash merge c15b5085ca0b6806cba02dd872b89ff160f689a7 in origin/main; required checks were green and local/remote task branches are absent."}
     ]
   },
   "ENNEAGRAM-EN13-CMS-DRY-RUN-01": {
@@ -200,25 +201,26 @@
     "depends_on": [
       "ENNEAGRAM-EN13-SITEMAP-LOCALE-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": null,
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/2867",
+    "status": "merged",
+    "commit_sha": "5ccc2988056689ef7608cf144ae60fe109747612",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2840",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-10T08:42:17+08:00",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "cms_dry_run": {"status":"pass","evidence":"Temporary SQLite dry-run planned 13 English draft assets (1 hub, 3 centres, 9 core types) with writes_attempted=false, writes_committed=false, and no release/external calls."}
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": false
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {"at":"2026-07-10T08:35:00+08:00","from":"pending_dependency","to":"in_progress","note":"Dependency ENNEAGRAM-EN13-SITEMAP-LOCALE-01 is merged and locally revalidated."},
-      {"at":"2026-07-10T08:35:00+08:00","from":"in_progress","to":"committed","note":"Temporary SQLite CMS dry-run completed with zero writes and 13 planned English draft assets."}
+      {"at":"2026-07-10T08:35:00+08:00","from":"in_progress","to":"committed","note":"Temporary SQLite CMS dry-run completed with zero writes and 13 planned English draft assets."},
+      {"at":"2026-07-10T16:30:57+08:00","from":"committed","to":"merged","note":"Reconciled GitHub PR #2840 squash merge 5ccc2988056689ef7608cf144ae60fe109747612 in origin/main; required checks were green and local/remote task branches are absent."}
     ]
   },
   "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01": {
@@ -233,18 +235,75 @@
     "status": "pending_exact_production_authorization",
     "commit_sha": null,
     "pr_url": null,
-    "failure_reason": "Requires separate exact production SHA authorization.",
+    "failure_reason": "The source-refresh workflow gate was repaired by PR #2871 and deployed successfully at 85d17b8df841f8c149fcc974931936d7cfa85e60. The previous CMS authorization for 843cddf9369f56c51a987c34ba113b3ad1dcd4fb is stale, newer main deployments are still converging, and the latest operator instruction explicitly forbids Enneagram CMS Production Ops and CMS writes. A new exact deployed SHA authorization is required before retry. No CMS write was attempted.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "checks": {},
+    "checks": {
+      "dependency_reconciliation": {
+        "status": "pass",
+        "evidence": "PR #2840 is merged at 5ccc2988056689ef7608cf144ae60fe109747612 and contained in origin/main."
+      },
+      "production_authorization": {
+        "status": "stale",
+        "evidence": "The earlier exact workflow approval applied only to deployed SHA 843cddf9369f56c51a987c34ba113b3ad1dcd4fb. Production has since advanced, so that authorization cannot be reused."
+      },
+      "production_inspect": {
+        "status": "fail_closed",
+        "run_id": 29080112445,
+        "evidence": "Authorization, authorized revision membership, deployed REVISION equality, and package/QA hashes passed. The remote operation exited 1 after promotion classification; summary transfer then failed because the blocked classification path did not create summary.json. No CMS write, publish, index, sitemap, llms, or search operation was attempted."
+      },
+      "production_inspect_after_redacted_summary_fix": {
+        "status": "blocked_source_refresh",
+        "run_id": 29081577050,
+        "workflow_merge_sha": "fbb930777156a1198b8d4800290d301f64d85b90",
+        "evidence": "Deployed REVISION remained 843cddf9369f56c51a987c34ba113b3ad1dcd4fb. Draft inspection passed for 13 rows and reported update_existing_content_ready=13 with zero writes and zero errors. Promotion inspection reported source_hash_mismatch=13, stale_or_invalid_asset_count=13, with missing=0, forbidden=0, asset_not_promotable=0, and zero publish/index/sitemap/llms/search attempts. The workflow failed closed before write mode."
+      },
+      "source_refresh_repair_deployed": {
+        "status": "pass",
+        "pr_number": 2871,
+        "merge_sha": "85d17b8df841f8c149fcc974931936d7cfa85e60",
+        "staging_run_id": 29083066886,
+        "production_run_id": 29084163927,
+        "evidence": "The exact 13-row source-refresh workflow repair merged and both automatic staging and production workflows completed successfully, including deployed revision, health, contract, and ops smoke checks."
+      },
+      "cms_write_after_repair": {
+        "status": "not_attempted",
+        "evidence": "No Enneagram CMS Production Ops run was dispatched after repair deployment; the most recent run remains read-only fail-closed run 29081577050."
+      }
+    },
     "scope_validation": {
       "allowed_paths_only": null,
       "local_validation_passed": null,
       "github_checks_green": null,
       "post_merge_revalidated": false
     },
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-10T16:30:57+08:00",
+        "from": "pending_exact_production_authorization",
+        "to": "in_progress",
+        "note": "Dependency PR #2840 is merged and exact SHA-bound production CMS import/noindex promotion authorization was received for deployed SHA 843cddf9369f56c51a987c34ba113b3ad1dcd4fb."
+      },
+      {
+        "at": "2026-07-10T16:35:41+08:00",
+        "from": "in_progress",
+        "to": "blocked_production_inspect",
+        "note": "Read-only workflow run 29080112445 failed closed on a non-allowlisted production CMS promotion state. The workflow's blocked classification path exited before emitting the intended redacted staged summary, so write mode was not dispatched."
+      },
+      {
+        "at": "2026-07-10T17:01:40+08:00",
+        "from": "blocked_production_inspect",
+        "to": "blocked_source_refresh_workflow_gate",
+        "note": "After ad-hoc workflow fix PR #2869 merged, read-only run 29081577050 classified all 13 existing content_ready/noindex assets as source_hash_mismatch against the authorized package. Draft inspection can safely refresh all 13, but the current workflow does not yet allow this exact state to reach draft_write."
+      },
+      {
+        "at": "2026-07-10T18:05:05+08:00",
+        "from": "blocked_source_refresh_workflow_gate",
+        "to": "pending_exact_production_authorization",
+        "note": "Ad-hoc repair PR #2871 merged and deployed successfully, resolving the exact 13-row source-refresh workflow gate. The prior 843cddf9369f56c51a987c34ba113b3ad1dcd4fb authorization is stale, and the latest operator instruction prohibits Enneagram CMS Ops/CMS writes until a new exact deployed SHA authorization is provided."
+      }
+    ]
   },
   "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01": {
     "id": "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01",
