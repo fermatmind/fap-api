@@ -10,6 +10,7 @@ use App\Models\ContentPage;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\ResearchReport;
+use App\Models\Scopes\TenantScope;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use Illuminate\Support\Carbon;
@@ -102,7 +103,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
 
         try {
             $articles = Article::query()
-                ->withoutGlobalScopes()
+                ->withoutGlobalScope(TenantScope::class)
                 ->with('seoMeta')
                 ->where('org_id', 0)
                 ->publiclySitemapEligible()

@@ -36024,6 +36024,13 @@ prs:
       - ops/release-train/release_train.py
       - ops/release-train/sidecar.py
       - ops/release-train/smoke.py
+      - tests/ops/test_release_train_soft_alerts.py
+      - backend/tests/Feature/Console/PersonalityTdkRuntimePromotionSearchGateReadinessTest.php
+      - backend/tests/Feature/SeoIntel/PersonalityAgentPostPromotionSearchGateCommandTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentArticlePostPublishPropagationDryRunTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentGscDraftPublishGateReadinessTest.php
+      - backend/tests/Feature/SeoIntel/EnParity01UrlTruthCanonicalBaselineTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

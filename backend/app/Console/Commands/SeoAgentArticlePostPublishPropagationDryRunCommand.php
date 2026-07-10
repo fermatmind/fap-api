@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\ArticleRevision;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\Scopes\TenantScope;
 use App\Services\SeoIntel\UrlTruthHandoffArtifact;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -91,7 +92,7 @@ final class SeoAgentArticlePostPublishPropagationDryRunCommand extends Command
         $articleId = $this->articleIdFromTarget($target);
         $article = $articleId > 0
             ? Article::query()
-                ->withoutGlobalScopes()
+                ->withoutGlobalScope(TenantScope::class)
                 ->with([
                     'publishedRevision' => static fn ($query) => $query->withoutGlobalScopes(),
                     'seoMeta' => static fn ($query) => $query->withoutGlobalScopes(),
@@ -285,6 +286,9 @@ final class SeoAgentArticlePostPublishPropagationDryRunCommand extends Command
 
         if ((string) $article->status !== 'published') {
             $blocking[] = 'article_not_published';
+        }
+        if (in_array((string) $article->lifecycle_state, [Article::LIFECYCLE_ARCHIVED, Article::LIFECYCLE_SOFT_DELETED], true)) {
+            $blocking[] = 'article_lifecycle_not_active';
         }
         if (! (bool) $article->is_public) {
             $blocking[] = 'article_not_public';

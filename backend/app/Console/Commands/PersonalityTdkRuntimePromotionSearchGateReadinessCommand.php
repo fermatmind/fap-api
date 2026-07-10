@@ -231,7 +231,11 @@ final class PersonalityTdkRuntimePromotionSearchGateReadinessCommand extends Com
         }
 
         foreach ($this->extractRows($readback) as $row) {
-            if (($row['status'] ?? 'success') !== 'success' && ($row['decision'] ?? 'pass') !== 'pass') {
+            $status = array_key_exists('status', $row) ? (string) $row['status'] : null;
+            $decision = array_key_exists('decision', $row) ? (string) $row['decision'] : null;
+            if (($status === null && $decision === null)
+                || ($status !== null && $status !== 'success')
+                || ($decision !== null && $decision !== 'pass')) {
                 return false;
             }
             if (($row['public_runtime_changed'] ?? false) === true) {

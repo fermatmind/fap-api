@@ -338,6 +338,7 @@ final class PersonalityAgentPostPromotionSearchGateCommand extends Command
         foreach ($payload as $key => $value) {
             if (is_array($value)) {
                 $values = array_merge($values, $this->collectTargetValues($value));
+
                 continue;
             }
             if (! is_string($value)) {
@@ -769,7 +770,7 @@ final class PersonalityAgentPostPromotionSearchGateCommand extends Command
             $this->line('status='.(string) ($payload['status'] ?? 'unknown'));
         }
 
-        return ($payload['final_decision'] ?? $payload['status'] ?? null) === 'NO_GO_SAFETY_VIOLATION'
+        return str_starts_with((string) ($payload['final_decision'] ?? $payload['status'] ?? ''), 'NO_GO_')
             ? self::FAILURE
             : self::SUCCESS;
     }

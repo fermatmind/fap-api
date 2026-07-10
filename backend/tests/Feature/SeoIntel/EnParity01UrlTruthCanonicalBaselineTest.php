@@ -196,6 +196,12 @@ final class EnParity01UrlTruthCanonicalBaselineTest extends TestCase
         $this->createArticleSeoMeta($unsafeCanonical, [
             'canonical_url' => 'https://fermatmind.com/en/results/unsafe-canonical',
         ]);
+        $softDeleted = $this->createArticle([
+            'slug' => 'soft-deleted-article',
+            'locale' => 'en',
+            'title' => 'Soft Deleted Article',
+        ]);
+        $softDeleted->delete();
 
         $source = new BackendAuthorityUrlTruthSource;
         $records = $source->candidates();
@@ -206,6 +212,7 @@ final class EnParity01UrlTruthCanonicalBaselineTest extends TestCase
         $this->assertNotContains('https://fermatmind.com/en/articles/draft-article', $urls);
         $this->assertNotContains('https://fermatmind.com/en/articles/no-llms-article', $urls);
         $this->assertNotContains('https://fermatmind.com/en/results/unsafe-canonical', $urls);
+        $this->assertNotContains('https://fermatmind.com/en/articles/soft-deleted-article', $urls);
 
         $enRecord = collect($records)->first(
             static fn ($record): bool => $record->canonicalUrl === 'https://fermatmind.com/en/articles/career-interest-test-vs-personality-test'

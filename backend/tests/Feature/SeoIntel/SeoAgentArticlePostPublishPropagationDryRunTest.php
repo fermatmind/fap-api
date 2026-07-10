@@ -140,6 +140,47 @@ final class SeoAgentArticlePostPublishPropagationDryRunTest extends TestCase
     }
 
     #[Test]
+    public function dry_run_blocks_soft_deleted_article(): void
+    {
+        $fixture = $this->fixture();
+        Article::query()->withoutGlobalScopes()->findOrFail($fixture['article_id'])->delete();
+
+        $exitCode = Artisan::call('seo-agent:article-post-publish-propagation-dry-run', [
+            '--publish-evidence' => $fixture['publish_evidence_path'],
+            '--target' => $fixture['target'],
+            '--revision-id' => $fixture['article_revision_id'],
+            '--limit' => 1,
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $summary['status'] ?? null);
+        $this->assertContains('article_not_found', $summary['issues'] ?? []);
+    }
+
+    #[Test]
+    public function dry_run_blocks_archived_article(): void
+    {
+        $fixture = $this->fixture(['lifecycle_state' => Article::LIFECYCLE_ARCHIVED]);
+
+        $exitCode = Artisan::call('seo-agent:article-post-publish-propagation-dry-run', [
+            '--publish-evidence' => $fixture['publish_evidence_path'],
+            '--target' => $fixture['target'],
+            '--revision-id' => $fixture['article_revision_id'],
+            '--limit' => 1,
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $summary['status'] ?? null);
+        $this->assertContains('article_lifecycle_not_active', $summary['issues'] ?? []);
+    }
+
+    #[Test]
     public function generated_contract_documents_article_propagation_boundaries(): void
     {
         $contract = $this->readJson(base_path('docs/seo/generated/seo-agent-article-post-publish-propagation-dry-run.v1.json'));
@@ -169,6 +210,7 @@ final class SeoAgentArticlePostPublishPropagationDryRunTest extends TestCase
             'content_md' => 'Existing article markdown.',
             'content_html' => '<p>Existing article HTML.</p>',
             'status' => (string) ($overrides['article_status'] ?? 'published'),
+            'lifecycle_state' => (string) ($overrides['lifecycle_state'] ?? Article::LIFECYCLE_ACTIVE),
             'is_public' => (bool) ($overrides['is_public'] ?? true),
             'is_indexable' => (bool) ($overrides['is_indexable'] ?? true),
             'sitemap_eligible' => (bool) ($overrides['sitemap_eligible'] ?? true),

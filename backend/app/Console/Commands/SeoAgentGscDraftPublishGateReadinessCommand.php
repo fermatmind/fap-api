@@ -75,7 +75,13 @@ final class SeoAgentGscDraftPublishGateReadinessCommand extends Command
             return $this->finish($this->failureSummary('write_evidence_not_success_execute'));
         }
 
-        $evidence = $this->evidence($loaded['artifacts'], $writeEvidence, hash_file('sha256', $writePath) ?: '');
+        $writeEvidenceSha = hash_file('sha256', $writePath) ?: '';
+        $packageSha = strtolower(trim((string) ($writeEvidence['package_sha256'] ?? '')));
+        if ($writeEvidenceSha === '' || preg_match('/\A[a-f0-9]{64}\z/', $packageSha) !== 1) {
+            return $this->finish($this->failureSummary('write_evidence_binding_invalid'));
+        }
+
+        $evidence = $this->evidence($loaded['artifacts'], $writeEvidence, $writeEvidenceSha, $packageSha);
         $artifactRef = $this->writeArtifact(
             $artifactDir,
             'seo-agent-gsc-draft-publish-gate-readiness-'.Carbon::now('UTC')->format('Ymd\THis\Z').'.json',
@@ -98,7 +104,7 @@ final class SeoAgentGscDraftPublishGateReadinessCommand extends Command
      * @param  array<string, mixed>  $writeEvidence
      * @return array<string, mixed>
      */
-    private function evidence(array $artifacts, array $writeEvidence, string $writeEvidenceSha): array
+    private function evidence(array $artifacts, array $writeEvidence, string $writeEvidenceSha, string $packageSha): array
     {
         $readback = $this->indexByTarget($artifacts['readback_qa'] ?? []);
         $claimRisk = $this->indexByTarget($artifacts['claim_risk_qa'] ?? []);
@@ -108,7 +114,7 @@ final class SeoAgentGscDraftPublishGateReadinessCommand extends Command
             if (! is_array($ref) || (string) ($ref['target_model'] ?? '') !== 'article') {
                 continue;
             }
-            $drafts[] = $this->draftVerdict($ref, $readback, $claimRisk, $preview, $writeEvidenceSha);
+            $drafts[] = $this->draftVerdict($ref, $readback, $claimRisk, $preview, $writeEvidenceSha, $packageSha);
         }
         $readyCount = count(array_filter($drafts, static fn (array $draft): bool => ($draft['gate_status'] ?? '') === 'publish_ready'));
         $blockedCount = count(array_filter($drafts, static fn (array $draft): bool => ($draft['gate_status'] ?? '') === 'blocked'));
@@ -136,14 +142,38 @@ final class SeoAgentGscDraftPublishGateReadinessCommand extends Command
      * @param  array<string, array<string, mixed>>  $preview
      * @return array<string, mixed>
      */
-    private function draftVerdict(array $ref, array $readback, array $claimRisk, array $preview, string $writeEvidenceSha): array
-    {
+    private function draftVerdict(
+        array $ref,
+        array $readback,
+        array $claimRisk,
+        array $preview,
+        string $writeEvidenceSha,
+        string $packageSha
+    ): array {
         $target = (string) ($ref['subject_ref'] ?? '');
         $revisionId = (int) ($ref['revision_id'] ?? 0);
         $issues = [];
+        $bindingIssues = [];
+        if (preg_match('/\Aarticle:[1-9][0-9]*:(?:en|zh-CN)\z/', $target) !== 1 || $revisionId <= 0) {
+            $bindingIssues[] = 'write_evidence_ref_invalid';
+        }
         foreach (['readback_qa' => $readback, 'claim_risk_qa' => $claimRisk, 'preview_runtime_qa' => $preview] as $label => $index) {
             if (! isset($index[$target])) {
                 $issues[] = $label.'_missing';
+
+                continue;
+            }
+
+            $bindingIssue = $this->qaBindingIssue(
+                $label,
+                $index[$target],
+                $target,
+                $revisionId,
+                $writeEvidenceSha,
+                $packageSha
+            );
+            if ($bindingIssue !== null) {
+                $bindingIssues[] = $bindingIssue;
             }
         }
         if (isset($readback[$target]) && (($readback[$target]['status'] ?? null) !== 'success' || (int) ($readback[$target]['mismatch_count'] ?? count((array) ($readback[$target]['mismatches'] ?? []))) !== 0)) {
@@ -156,7 +186,8 @@ final class SeoAgentGscDraftPublishGateReadinessCommand extends Command
             $issues[] = 'preview_runtime_qa_not_passing';
         }
 
-        $status = $issues === [] ? 'publish_ready' : 'review_required';
+        $issues = array_values(array_unique([...$issues, ...$bindingIssues]));
+        $status = $bindingIssues !== [] ? 'blocked' : ($issues === [] ? 'publish_ready' : 'review_required');
 
         return [
             'subject_ref' => $target,
@@ -173,6 +204,35 @@ final class SeoAgentGscDraftPublishGateReadinessCommand extends Command
     }
 
     /**
+     * @param  array<string, mixed>  $payload
+     */
+    private function qaBindingIssue(
+        string $label,
+        array $payload,
+        string $target,
+        int $revisionId,
+        string $writeEvidenceSha,
+        string $packageSha
+    ): ?string {
+        $artifactRevisionId = match ($label) {
+            'preview_runtime_qa' => (int) data_get($payload, 'preview_read.revision_id', 0),
+            default => (int) data_get($payload, 'draft_revision.revision_id', 0),
+        };
+
+        if (($payload['_duplicate_artifact'] ?? false) === true
+            || (string) ($payload['target'] ?? '') !== $target
+            || strtolower(trim((string) ($payload['package_sha256'] ?? ''))) !== $packageSha
+            || strtolower(trim((string) data_get($payload, 'write_evidence.sha256', ''))) !== $writeEvidenceSha
+            || (string) data_get($payload, 'write_summary.target_write_ref.subject_ref', '') !== $target
+            || (int) data_get($payload, 'write_summary.target_write_ref.revision_id', 0) !== $revisionId
+            || $artifactRevisionId !== $revisionId) {
+            return $label.'_binding_invalid';
+        }
+
+        return null;
+    }
+
+    /**
      * @param  list<array<string, mixed>>  $artifacts
      * @return array<string, array<string, mixed>>
      */
@@ -182,7 +242,13 @@ final class SeoAgentGscDraftPublishGateReadinessCommand extends Command
         foreach ($artifacts as $artifact) {
             $payload = $artifact['payload'] ?? [];
             if (is_array($payload) && (string) ($payload['target'] ?? '') !== '') {
-                $out[(string) $payload['target']] = $payload;
+                $target = (string) $payload['target'];
+                if (isset($out[$target])) {
+                    $out[$target]['_duplicate_artifact'] = true;
+
+                    continue;
+                }
+                $out[$target] = $payload;
             }
         }
 
