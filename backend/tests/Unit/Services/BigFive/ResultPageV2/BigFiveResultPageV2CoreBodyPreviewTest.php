@@ -2181,6 +2181,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Console/Commands/SeoIntelSearchChannelApproveCommand.php',
+            'backend/app/Console/Commands/SeoIntelSearchChannelProviderHoldCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelQueueCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelRetryResetCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelSubmitApprovedCommand.php',
@@ -2194,6 +2195,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueIdempotency.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueLiveSubmissionExecutor.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueuePlanner.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueProviderHoldRecorder.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueRetryResetter.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueWriteService.php',
             'backend/database/migrations/seo_intel/2026_05_20_220000_create_seo_search_channel_queue_tables.php',
@@ -7831,6 +7833,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/SeoIntelSearchChannelApproveCommand.php',
+            'backend/app/Console/Commands/SeoIntelSearchChannelProviderHoldCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelQueueCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelRetryResetCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelSubmitApprovedCommand.php',
@@ -7844,6 +7847,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueIdempotency.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueLiveSubmissionExecutor.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueuePlanner.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueProviderHoldRecorder.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueRetryResetter.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueWriteService.php',
             'backend/database/migrations/seo_intel/2026_05_20_220000_create_seo_search_channel_queue_tables.php',
