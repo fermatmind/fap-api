@@ -43583,6 +43583,10 @@
         "evidence": "backend/scripts/ci_verify_mbti.sh passed on the complete rerun, including Big Five, Enneagram, MBTI smoke/report/share, events, payment, migration, auth, order-security, dependency, and webhook/attempt gates. An initial Packagist audit timeout was transient, reproduced as a first-attempt network error on exact base, and recovered before the successful full rerun.",
         "status": "pass"
       },
+      "github_required_checks": {
+        "evidence": "PR #2882 final head 7d6d0f7f5ee0e7d05030d63334d54e9dd1324cde passed both hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 jobs, plus Semgrep blocking secrets, Semgrep OSS, and SARIF upload checks.",
+        "status": "pass"
+      },
       "route_list": {
         "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
         "status": "pass"
@@ -43593,7 +43597,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "19f64ea0ec35550a1643bb15a134d903e6d7823c",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -43615,18 +43619,23 @@
         "at": "2026-07-10T20:07:00+08:00",
         "note": "Local validation passed: 11 focused API25 tests/141 assertions; Bash syntax checks; 233-route inventory; fresh SQLite migration; complete successful rerun of backend/scripts/ci_verify_mbti.sh and all follow-on gates; Pint, JSON/YAML parsing, git diff --check, and scope validation with 10 changed paths and zero outside the allowlist. The first full-CI attempt encountered a transient Packagist timeout in the unchanged dependency audit; exact base showed the same first-attempt network behavior and recovered, then the API25 targeted audit and complete full-CI rerun passed. No GSC live read, provider/search write, CMS mutation, deploy, or production write was performed.",
         "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-10T20:15:21+08:00",
+        "note": "PR #2882 merged after all GitHub checks passed; merge commit 19f64ea0ec35550a1643bb15a134d903e6d7823c. origin/main and the dedicated local main were synchronized, and local/remote API25 implementation branches were deleted.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-25",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T20:15:21+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2882",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "local_checks_passed",
+    "status": "merged",
     "title": "SECURITY-169-API-25: harden GSC CSV and shell sidecar exports",
     "train_scope": "security_169_fap_api_audit"
   },
