@@ -43505,6 +43505,10 @@
         "evidence": "backend/scripts/ci_verify_mbti.sh passed, including the main PHPUnit suite, MBTI smoke/report/share flow, events, payment, migration, auth, order-security, dependency, and webhook/attempt gates.",
         "status": "pass"
       },
+      "github_required_checks": {
+        "evidence": "PR #2880 final head 8f7f0beba249005e9deb7e2e629f392ba8ef02b7 passed both hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 jobs, plus Semgrep blocking secrets, Semgrep OSS, and SARIF upload checks.",
+        "status": "pass"
+      },
       "route_list": {
         "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
         "status": "pass"
@@ -43515,7 +43519,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "21d5578f5bff012f8d9513b4571a0496280aa4e0",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -43537,18 +43541,23 @@
         "at": "2026-07-10T19:28:00+08:00",
         "note": "Local validation passed: 20 focused API24 tests/357 assertions; 233-route inventory; fresh SQLite migration; full backend/scripts/ci_verify_mbti.sh and all follow-on gates; Pint, JSON/YAML parsing, git diff --check, and scope validation with 12 changed paths and zero outside the allowlist. The inherited scheduler CMS publish canary fixture failure reproduced on exact base 0a89b775cc56b4e4018528c1993955473bacd23a and was recorded as a sidecar. No CMS, provider, deploy, or production write was performed.",
         "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-10T19:36:08+08:00",
+        "note": "PR #2880 merged after all GitHub checks passed; merge commit 21d5578f5bff012f8d9513b4571a0496280aa4e0. origin/main and the dedicated local main were synchronized, and local/remote API24 implementation branches were deleted.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-24",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T19:36:08+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2880",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "local_checks_passed",
+    "status": "merged",
     "title": "SECURITY-169-API-24: fix sitemap/readiness/cleanup fail-closed status",
     "train_scope": "security_169_fap_api_audit"
   },
