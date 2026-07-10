@@ -1250,6 +1250,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Console/Commands/ContentReleaseRevalidate.php',
+            'backend/app/Filament/Ops/Support/ContentReleaseAudit.php',
             'backend/app/Filament/Ops/Support/ContentReleaseFollowUp.php',
             'backend/app/Services/Cms/ContentReleasePathPlanner.php',
         ];
@@ -2296,6 +2297,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Console/Commands/ContentPagesPublishControlledCommand.php',
             'backend/app/Services/ContentPages/ContentPagesControlledPublishService.php',
+            'backend/app/Services/Cms/RowBackedRevisionWorkspace.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -7006,6 +7008,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/ContentReleaseRevalidate.php',
+            'backend/app/Filament/Ops/Support/ContentReleaseAudit.php',
             'backend/app/Filament/Ops/Support/ContentReleaseFollowUp.php',
             'backend/app/Services/Cms/ContentReleasePathPlanner.php',
         ], true);
@@ -7789,6 +7792,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/ContentPagesPublishControlledCommand.php',
             'backend/app/Services/ContentPages/ContentPagesControlledPublishService.php',
+            'backend/app/Services/Cms/RowBackedRevisionWorkspace.php',
         ], true);
     }
 

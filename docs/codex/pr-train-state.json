@@ -42899,6 +42899,10 @@
         "evidence": "29 tests passed with 683 assertions across ContentPages controlled publish, rollback guard, and existing-article controlled promotion.",
         "status": "pass"
       },
+      "github_checks": {
+        "evidence": "PR #2859 verify-bigfive failed only because the runtime-freeze classifier did not recognize ContentReleaseAudit and RowBackedRevisionWorkspace as scoped controlled-publish infrastructure. The exact failing job and step were inspected; the classifier and regression cases were updated in scope, and the complete classifier file now passes 312 tests with 673 assertions. Replacement GitHub checks are pending.",
+        "status": "pending"
+      },
       "local_ci": {
         "evidence": "bash backend/scripts/ci_verify_mbti.sh passed, including 1179 Big Five tests, MBTI E2E, OpenAPI, migration safety, auth, order, dependency, and regression gates.",
         "status": "pass"
@@ -42917,7 +42921,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "7310a64ed1bf390a9a721cd79758197bc36abee2",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -42925,6 +42929,16 @@
     ],
     "deploy_allowed": false,
     "events": [
+      {
+        "at": "2026-07-10T15:17:50+08:00",
+        "note": "Inspected PR #2859 verify-bigfive failure and fixed the current-scope runtime-freeze path classification for ContentReleaseAudit and RowBackedRevisionWorkspace. The complete classifier file passed 312 tests / 673 assertions and API17 focused tests remained green at 29 tests / 683 assertions; replacement checks await push.",
+        "status": "ci_fix_validated"
+      },
+      {
+        "at": "2026-07-10T15:09:08+08:00",
+        "note": "Opened PR #2859 from commit 7310a64ed1bf390a9a721cd79758197bc36abee2 after local validation passed.",
+        "status": "pr_open"
+      },
       {
         "at": "2026-07-10T15:07:46+08:00",
         "note": "Implementation and local gates passed on latest origin/main: revision payload identity/hash validation, R3 Help preflight binding, no-revalidation promotion, stale revision repair, and full rollback field restoration. No production or CMS action executed.",
@@ -42945,12 +42959,12 @@
     "id": "SECURITY-169-API-17",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2859",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "pr_open",
     "title": "SECURITY-169-API-17: harden ContentPages controlled publish and rollback",
     "train_scope": "security_169_fap_api_audit"
   },
