@@ -11,11 +11,11 @@ use Throwable;
 final class RiasecResultPageOpsRunnerCommand extends Command
 {
     protected $signature = 'riasec:result-page-ops-runner
-        {action=plan : Supported actions: plan, staging-dry-run}
+        {action=plan : Supported actions: plan, staging-dry-run, report}
         {--run-id= : Stable run identifier for the artifact directory}
         {--artifact-dir= : Optional artifact root; defaults to backend/artifacts/riasec_result_page_v2_agent}
         {--permission-model-path= : Optional permission model path}
-        {--mode=auto-to-pr : Requested mode: auto-to-pr, auto-to-staging, auto-to-report}
+        {--mode= : Requested mode: auto-to-pr, auto-to-staging, auto-to-report; defaults to the action-specific mode}
         {--scope-id=ops-agent-pr-train-orchestrator : Stable scope id for deterministic run and branch naming}
         {--pr-title=RIASEC: add result page ops agent PR train orchestrator : Planned PR title}
         {--base-branch=main : Planned base branch}
@@ -30,11 +30,32 @@ final class RiasecResultPageOpsRunnerCommand extends Command
     public function handle(RiasecResultPageOpsAgentRunOrchestrator $orchestrator): int
     {
         try {
+            $action = (string) $this->argument('action');
+            $requiredMode = match ($action) {
+                'plan' => 'auto-to-pr',
+                'staging-dry-run' => 'auto-to-staging',
+                'report' => 'auto-to-report',
+                default => null,
+            };
+            if ($requiredMode === null) {
+                $this->error('Unsupported action. Supported actions: plan, staging-dry-run, report');
+
+                return self::FAILURE;
+            }
+
+            $requestedMode = trim((string) $this->option('mode'));
+            $mode = $requestedMode === '' ? $requiredMode : $requestedMode;
+            if ($mode !== $requiredMode) {
+                $this->error('Requested mode is inconsistent with action.');
+
+                return self::FAILURE;
+            }
+
             $options = [
                 'run_id' => trim((string) $this->option('run-id')),
                 'artifact_dir' => trim((string) $this->option('artifact-dir')),
                 'permission_model_path' => trim((string) $this->option('permission-model-path')),
-                'mode' => trim((string) $this->option('mode')),
+                'mode' => $mode,
                 'scope_id' => trim((string) $this->option('scope-id')),
                 'pr_title' => trim((string) $this->option('pr-title')),
                 'base_branch' => trim((string) $this->option('base-branch')),
@@ -44,17 +65,11 @@ final class RiasecResultPageOpsRunnerCommand extends Command
                 'strict' => (bool) $this->option('strict'),
             ];
 
-            $summary = match ($this->argument('action')) {
+            $summary = match ($action) {
                 'plan' => $orchestrator->plan($options),
                 'staging-dry-run' => $orchestrator->stagingDryRun($options),
-                default => null,
+                'report' => $orchestrator->report($options),
             };
-
-            if (! is_array($summary)) {
-                $this->error('Unsupported action. Supported actions: plan, staging-dry-run');
-
-                return self::FAILURE;
-            }
 
             $this->render($summary);
 

@@ -119,7 +119,7 @@ final class RiasecResultPageOpsAgentRunOrchestrator
             'sidecar_issue_payload.json' => $this->writeJson($artifactDir.'/sidecar_issue_payload.json', $sidecarPayload),
         ];
 
-        $ok = $errors === [] || (! $strict && $failureReport['train_can_continue'] === true && $scopeReport['valid'] === true);
+        $ok = $errors === [];
 
         return [
             'schema_version' => self::SCHEMA_VERSION,
@@ -165,7 +165,8 @@ final class RiasecResultPageOpsAgentRunOrchestrator
      */
     public function stagingDryRun(array $options = []): array
     {
-        $options['mode'] = $options['mode'] ?? 'auto-to-staging';
+        $requestedMode = trim((string) ($options['mode'] ?? 'auto-to-staging'));
+        $options['mode'] = $requestedMode;
         $plan = $this->plan($options);
         $runId = (string) ($plan['run_id'] ?? $this->runId('', 'auto-to-staging', 'ops-agent-staging-runner', 'main', 'RIASEC staging dry-run'));
         $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
@@ -219,6 +220,9 @@ final class RiasecResultPageOpsAgentRunOrchestrator
         ];
 
         $errors = (array) ($plan['errors'] ?? []);
+        if ($requestedMode !== 'auto-to-staging') {
+            $errors[] = 'mode_action_mismatch:staging-dry-run_requires_auto-to-staging';
+        }
         if (($dryRunReport['checks']['permission_model_valid'] ?? false) !== true) {
             $errors[] = 'permission_model_invalid';
         }
@@ -234,7 +238,7 @@ final class RiasecResultPageOpsAgentRunOrchestrator
             'status' => $ok ? 'success' : 'blocked',
             'run_id' => $runId,
             'artifact_dir' => $this->redactPath($artifactDir),
-            'mode' => 'auto-to-staging',
+            'mode' => $requestedMode,
             'scope_id' => (string) ($plan['scope_id'] ?? ''),
             'summary' => [
                 'staging_dry_run_report_created' => true,
@@ -269,7 +273,8 @@ final class RiasecResultPageOpsAgentRunOrchestrator
      */
     public function report(array $options = []): array
     {
-        $options['mode'] = $options['mode'] ?? 'auto-to-report';
+        $requestedMode = trim((string) ($options['mode'] ?? 'auto-to-report'));
+        $options['mode'] = $requestedMode;
         $plan = $this->plan($options);
         $runId = (string) ($plan['run_id'] ?? $this->runId('', 'auto-to-report', 'ops-agent-reporting-sidecar', 'main', 'RIASEC reporting sidecar'));
         $scopeId = (string) ($plan['scope_id'] ?? $this->sanitizeSlug((string) ($options['scope_id'] ?? 'ops-agent-reporting-sidecar')));
@@ -281,7 +286,12 @@ final class RiasecResultPageOpsAgentRunOrchestrator
         $failureReport = (array) ($plan['failure_classification'] ?? []);
         $externalBlockersRecorded = (bool) ($failureReport['external_blockers_recorded_as_sidecar'] ?? false);
         $currentScopeBlocked = in_array('current_pr_scope_failure', (array) ($failureReport['blocking_errors'] ?? []), true);
-        $trainCanContinue = $scopeValid && $permissionModelValid && ! $currentScopeBlocked;
+        $modeMatchesAction = $requestedMode === 'auto-to-report';
+        $trainCanContinue = ($plan['ok'] ?? false) === true
+            && $modeMatchesAction
+            && $scopeValid
+            && $permissionModelValid
+            && ! $currentScopeBlocked;
         $goNoGo = $trainCanContinue ? 'GO_FOR_TRAIN_CONTINUATION' : 'NO_GO_CURRENT_PR_BLOCKED';
 
         $goNoGoReport = [
@@ -343,6 +353,9 @@ final class RiasecResultPageOpsAgentRunOrchestrator
         ];
 
         $errors = (array) ($plan['errors'] ?? []);
+        if (! $modeMatchesAction) {
+            $errors[] = 'mode_action_mismatch:report_requires_auto-to-report';
+        }
         if (! $trainCanContinue && $errors === []) {
             $errors[] = 'reporting_go_no_go_blocked';
         }
@@ -356,7 +369,7 @@ final class RiasecResultPageOpsAgentRunOrchestrator
             'status' => $trainCanContinue ? 'success' : 'blocked',
             'run_id' => $runId,
             'artifact_dir' => $this->redactPath($artifactDir),
-            'mode' => 'auto-to-report',
+            'mode' => $requestedMode,
             'scope_id' => $scopeId,
             'summary' => [
                 'go_no_go' => $goNoGo,

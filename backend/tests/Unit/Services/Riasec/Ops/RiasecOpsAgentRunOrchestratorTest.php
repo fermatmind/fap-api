@@ -121,6 +121,60 @@ final class RiasecOpsAgentRunOrchestratorTest extends TestCase
         }
     }
 
+    public function test_invalid_mode_is_blocked_even_without_strict_mode(): void
+    {
+        $root = $this->tempDir('riasec-ops-runner-invalid-mode');
+
+        try {
+            $summary = app(RiasecResultPageOpsAgentRunOrchestrator::class)->plan([
+                'run_id' => 'invalid-mode',
+                'artifact_dir' => $root,
+                'mode' => 'automatic-production',
+                'scope_id' => 'ops-agent-pr-train-orchestrator',
+                'changed_files' => [
+                    'backend/app/Services/Riasec/Ops/RiasecResultPageOpsAgentRunOrchestrator.php',
+                ],
+            ]);
+
+            $this->assertFalse((bool) ($summary['ok'] ?? true));
+            $this->assertSame('blocked', $summary['status'] ?? null);
+            $this->assertContains('mode_not_allowed:automatic-production', $summary['errors'] ?? []);
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
+    public function test_staging_and_reporting_actions_reject_inconsistent_modes(): void
+    {
+        $root = $this->tempDir('riasec-ops-runner-mode-mismatch');
+        $options = [
+            'artifact_dir' => $root,
+            'scope_id' => 'ops-agent-pr-train-orchestrator',
+            'changed_files' => [
+                'backend/app/Services/Riasec/Ops/RiasecResultPageOpsAgentRunOrchestrator.php',
+            ],
+        ];
+
+        try {
+            $staging = app(RiasecResultPageOpsAgentRunOrchestrator::class)->stagingDryRun($options + [
+                'run_id' => 'staging-mode-mismatch',
+                'mode' => 'auto-to-report',
+            ]);
+            $report = app(RiasecResultPageOpsAgentRunOrchestrator::class)->report($options + [
+                'run_id' => 'report-mode-mismatch',
+                'mode' => 'auto-to-pr',
+            ]);
+
+            $this->assertFalse((bool) ($staging['ok'] ?? true));
+            $this->assertContains('mode_action_mismatch:staging-dry-run_requires_auto-to-staging', $staging['errors'] ?? []);
+            $this->assertFalse((bool) ($report['ok'] ?? true));
+            $this->assertSame('NO_GO_CURRENT_PR_BLOCKED', data_get($report, 'summary.go_no_go'));
+            $this->assertContains('mode_action_mismatch:report_requires_auto-to-report', $report['errors'] ?? []);
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
     public function test_staging_dry_run_writes_staging_only_reports_without_runtime_or_cms_writes(): void
     {
         $root = $this->tempDir('riasec-ops-runner-staging');

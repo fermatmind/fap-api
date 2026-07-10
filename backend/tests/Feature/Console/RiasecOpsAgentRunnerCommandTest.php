@@ -87,6 +87,40 @@ final class RiasecOpsAgentRunnerCommandTest extends TestCase
         }
     }
 
+    public function test_ops_runner_command_rejects_action_mode_mismatch(): void
+    {
+        $this->artisan('riasec:result-page-ops-runner', [
+            'action' => 'staging-dry-run',
+            '--mode' => 'auto-to-report',
+            '--json' => true,
+        ])->assertExitCode(1);
+    }
+
+    public function test_ops_runner_command_exposes_reporting_sidecar_with_action_specific_default_mode(): void
+    {
+        $root = $this->tempDir('riasec-ops-runner-command-report');
+
+        try {
+            $this->artisan('riasec:result-page-ops-runner', [
+                'action' => 'report',
+                '--run-id' => 'command-report',
+                '--artifact-dir' => $root,
+                '--scope-id' => 'ops-agent-reporting-sidecar',
+                '--changed-file' => [
+                    'backend/app/Services/Riasec/Ops/RiasecResultPageOpsAgentRunOrchestrator.php',
+                ],
+                '--strict' => true,
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            $report = $this->readJson($root.'/command-report/go_no_go_report.json');
+            $this->assertSame('GO_FOR_TRAIN_CONTINUATION', $report['go_no_go'] ?? null);
+            $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
     private function tempDir(string $prefix): string
     {
         $path = sys_get_temp_dir().'/'.$prefix.'-'.bin2hex(random_bytes(4));

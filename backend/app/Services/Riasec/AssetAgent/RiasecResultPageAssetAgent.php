@@ -142,11 +142,12 @@ final class RiasecResultPageAssetAgent
             'safety_report.json' => $this->writeJson($artifactDir.'/safety_report.json', $safetyReport),
             'go_no_go.md' => $this->writeText($artifactDir.'/go_no_go.md', $goNoGo),
         ];
+        $ok = $strictFailures === [];
 
         return [
             'schema_version' => self::SCHEMA_VERSION,
-            'ok' => ! $strict || $strictFailures === [],
-            'status' => ($strict && $strictFailures !== []) ? 'blocked' : 'success',
+            'ok' => $ok,
+            'status' => $ok ? 'success' : 'blocked',
             'run_id' => $runId,
             'artifact_dir' => $artifactDir,
             'artifacts' => $artifacts,
@@ -245,8 +246,8 @@ final class RiasecResultPageAssetAgent
 
         return [
             'schema_version' => self::SCHEMA_VERSION,
-            'ok' => ! $strict || $ok,
-            'status' => ($strict && ! $ok) ? 'blocked' : 'success',
+            'ok' => $ok,
+            'status' => $ok ? 'success' : 'blocked',
             'run_id' => $runId,
             'artifact_dir' => $artifactDir,
             'artifacts' => $artifacts,
@@ -341,6 +342,9 @@ final class RiasecResultPageAssetAgent
         $hits = [];
         foreach ($this->assetFiles($contentAssetRoot) as $file) {
             $relativePath = $this->repoRelativePath($file->getPathname());
+            if ($this->structuredFileErrors($file->getPathname()) !== []) {
+                continue;
+            }
             $decoded = $this->readStructuredFile($file->getPathname());
             if ($decoded === null) {
                 continue;
@@ -448,6 +452,7 @@ final class RiasecResultPageAssetAgent
             foreach ($claims as $index => $claim) {
                 if (! is_array($claim)) {
                     $errors[] = 'invalid_claim_row_'.$index;
+
                     continue;
                 }
                 foreach (['claim_id', 'claim_text', 'source_id', 'source_ref', 'permitted_use', 'limitations', 'disallowed_use', 'claim_status'] as $field) {
@@ -521,7 +526,9 @@ final class RiasecResultPageAssetAgent
             '',
             '## Decision',
             '',
-            'GO for staging-only audit evidence. NO-GO for asset generation, CMS import, runtime wrapper enablement, pilot access, or production rollout.',
+            $strictFailures === []
+                ? 'GO for staging-only audit evidence. NO-GO for asset generation, CMS import, runtime wrapper enablement, pilot access, or production rollout.'
+                : 'NO-GO for staging-only audit evidence until current validation failures are fixed. NO-GO for asset generation, CMS import, runtime wrapper enablement, pilot access, or production rollout.',
             '',
         ]);
     }
@@ -547,6 +554,7 @@ final class RiasecResultPageAssetAgent
 
             if (is_array($value)) {
                 $hits = array_merge($hits, $this->scanPayload($value, $sourceFile, $path));
+
                 continue;
             }
 
@@ -613,20 +621,26 @@ final class RiasecResultPageAssetAgent
                     $errors[] = basename($packageDir).': '.implode(',', $fileErrors);
                     $package['assets_valid'] = false;
                 }
-                $lineCount = count($this->readJsonLines($assetsPath));
+                $lineCount = $fileErrors === [] ? count($this->readJsonLines($assetsPath)) : 0;
                 $package['assets_line_count'] = $lineCount;
                 $assetCount += $lineCount;
             }
 
             if (is_file($manifestPath)) {
-                $manifest = $this->readJson($manifestPath);
-                foreach ($this->requiredFalseFlags() as $flag) {
-                    if (($manifest[$flag] ?? null) !== false) {
-                        $errors[] = basename($packageDir).': invalid_'.$flag;
+                $manifestErrors = $this->structuredFileErrors($manifestPath);
+                if ($manifestErrors !== []) {
+                    $errors[] = basename($packageDir).': '.implode(',', $manifestErrors);
+                    $package['manifest_valid'] = false;
+                } else {
+                    $manifest = $this->readJson($manifestPath);
+                    foreach ($this->requiredFalseFlags() as $flag) {
+                        if (($manifest[$flag] ?? null) !== false) {
+                            $errors[] = basename($packageDir).': invalid_'.$flag;
+                        }
                     }
-                }
-                if (($manifest['runtime_use'] ?? null) !== 'staging_only') {
-                    $errors[] = basename($packageDir).': invalid_runtime_use';
+                    if (($manifest['runtime_use'] ?? null) !== 'staging_only') {
+                        $errors[] = basename($packageDir).': invalid_runtime_use';
+                    }
                 }
             } else {
                 $errors[] = basename($packageDir).': missing_manifest_json';
@@ -658,6 +672,9 @@ final class RiasecResultPageAssetAgent
         foreach ($this->selectorReadyPackageDirs($selectorReadyRoot) as $packageDir) {
             $assetsPath = $packageDir.'/assets.jsonl';
             if (! is_file($assetsPath)) {
+                continue;
+            }
+            if ($this->structuredFileErrors($assetsPath) !== []) {
                 continue;
             }
             foreach ($this->readJsonLines($assetsPath) as $rowIndex => $payload) {
@@ -825,7 +842,7 @@ final class RiasecResultPageAssetAgent
     /**
      * @return list<array<string,mixed>>|array<string,mixed>|null
      */
-    private function readStructuredFile(string $path): array|null
+    private function readStructuredFile(string $path): ?array
     {
         $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
         if ($extension === 'json') {
