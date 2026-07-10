@@ -254,6 +254,10 @@ jobs:
           while IFS='=' read -r key value; do
             case "$key" in
               run_mbti_smoke)
+                if [[ "$value" != "1" ]]; then
+                  echo "Scale impact resolver attempted to disable required MBTI smoke checks." >&2
+                  exit 1
+                fi
                 printf 'RUN_MBTI_SMOKE=%s\n' "$value"
                 ;;
               scale_scope)

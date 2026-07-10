@@ -184,7 +184,7 @@ final class ScaleImpactResolverTest extends TestCase
         $this->assertSame('full_regression', (string) ($result['scale_scope'] ?? ''));
     }
 
-    public function test_analytics_command_change_skips_mbti_smoke(): void
+    public function test_analytics_command_change_keeps_mbti_smoke(): void
     {
         $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
@@ -193,11 +193,11 @@ final class ScaleImpactResolverTest extends TestCase
 
         $this->assertTrue((bool) ($result['analytics_changed'] ?? false));
         $this->assertFalse((bool) ($result['shared_changed'] ?? true));
-        $this->assertFalse((bool) ($result['run_mbti_smoke'] ?? true));
-        $this->assertSame('analytics_only_no_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
+        $this->assertTrue((bool) ($result['run_mbti_smoke'] ?? false));
+        $this->assertSame('analytics_only_with_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
     }
 
-    public function test_analytics_migration_change_skips_mbti_smoke(): void
+    public function test_analytics_migration_change_keeps_mbti_smoke(): void
     {
         $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
@@ -206,7 +206,7 @@ final class ScaleImpactResolverTest extends TestCase
 
         $this->assertTrue((bool) ($result['analytics_changed'] ?? false));
         $this->assertFalse((bool) ($result['shared_changed'] ?? true));
-        $this->assertFalse((bool) ($result['run_mbti_smoke'] ?? true));
-        $this->assertSame('analytics_only_no_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
+        $this->assertTrue((bool) ($result['run_mbti_smoke'] ?? false));
+        $this->assertSame('analytics_only_with_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
     }
 }

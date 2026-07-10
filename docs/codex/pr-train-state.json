@@ -44834,6 +44834,22 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "Scale impact resolver and runtime-freeze classifier regressions passed: 17 tests, 68 assertions; ci_verify_mbti.sh also rejected RUN_MBTI_SMOKE=0 as required.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed with required MBTI smoke/E2E plus Big Five, migration, auth, OpenAPI, order-security, dependency, webhook/attempt, and strict queue backlog gates.",
+        "status": "pass"
+      },
+      "route_and_migration": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes, and a fresh SQLite migration completed successfully.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 7 changed paths are listed in SECURITY-169-API-37 allowed_paths; Pint, shell syntax, workflow/manifest YAML parsing, state JSON parsing, and git diff --check passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -44849,6 +44865,16 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-37; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-11T05:25:00+08:00",
+        "note": "Dependency SECURITY-169-API-36 is implementation-merged and ledger-closed; started scoped remediation for findings #032, #077, and #084.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T05:36:00+08:00",
+        "note": "Analytics-only changes now retain required MBTI smoke, CI rejects attempts to disable it, and destructive migration/scale lookup controller changes remain blocking runtime-freeze inputs; focused, route/migration, scope, and full local CI validation passed.",
+        "status": "in_progress"
       }
     ],
     "failure_reason": null,
@@ -44860,7 +44886,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-37: repair CI/runtime-freeze security guardrails",
     "train_scope": "security_169_fap_api_audit"
   },
