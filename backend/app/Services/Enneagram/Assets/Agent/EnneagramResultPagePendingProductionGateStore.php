@@ -9,9 +9,7 @@ use RuntimeException;
 
 final class EnneagramResultPagePendingProductionGateStore
 {
-    public const SCHEMA_VERSION = 'fap.enneagram.result_page.pending_production_activation_gate.v0.1';
-
-    public const APPROVAL_PHRASE = '我同意';
+    public const SCHEMA_VERSION = 'fap.enneagram.result_page.pending_production_activation_gate.v0.2';
 
     public const DEFAULT_TTL_MINUTES = 120;
 
@@ -60,7 +58,6 @@ final class EnneagramResultPagePendingProductionGateStore
             'status' => 'pending',
             'pending_gate_id' => $pendingGateId,
             'single_pending_gate' => true,
-            'approval_phrase' => self::APPROVAL_PHRASE,
             'run_id' => $runId,
             'issued_at' => $issuedAt->toIso8601String(),
             'expires_at' => $expiresAt->toIso8601String(),
@@ -75,7 +72,7 @@ final class EnneagramResultPagePendingProductionGateStore
             ],
             'evidence_bundle' => $evidence,
             'authorization_scope' => [
-                'phrase_authorizes_only_this_pending_gate' => true,
+                'all_locked_fields_must_be_resubmitted' => true,
                 'permanent_authorization' => false,
                 'agent_may_decide_production_rollout' => false,
                 'chat_may_override_locked_release_or_hashes' => false,
@@ -99,20 +96,27 @@ final class EnneagramResultPagePendingProductionGateStore
             'sha256' => hash_file('sha256', $path) ?: '',
             'pending_gate_id' => $pendingGateId,
             'expires_at' => $expiresAt->toIso8601String(),
-            'approval_phrase' => self::APPROVAL_PHRASE,
             'locked_contract' => $packet['locked_contract'],
+            'confirmation_requirements' => [
+                'pending_gate_id' => $pendingGateId,
+                'release_id' => $releaseId,
+                'confirm_release_id' => $releaseId,
+                'candidate_manifest_sha256' => $candidateManifestSha256,
+                'runtime_registry_sha256' => $runtimeRegistrySha256,
+            ],
         ];
     }
 
     /**
      * @return array{pending_gate_id:string,release_id:string,confirm_release_id:string,candidate_manifest_sha256:string,runtime_registry_sha256:string,rollback_window:string}
      */
-    public function consume(string $approvalPhrase): array
-    {
-        if ($approvalPhrase !== self::APPROVAL_PHRASE) {
-            throw new RuntimeException('Pending production gate approval phrase mismatch.');
-        }
-
+    public function consume(
+        string $pendingGateId,
+        string $releaseId,
+        string $confirmReleaseId,
+        string $candidateManifestSha256,
+        string $runtimeRegistrySha256,
+    ): array {
         $packet = $this->readPendingPacket();
         $errors = $this->pendingPacketErrors($packet);
         if ($errors !== []) {
@@ -120,14 +124,32 @@ final class EnneagramResultPagePendingProductionGateStore
         }
 
         $locked = (array) ($packet['locked_contract'] ?? []);
-        $releaseId = (string) ($locked['release_id'] ?? '');
-
-        return [
+        $expected = [
             'pending_gate_id' => (string) ($packet['pending_gate_id'] ?? ''),
-            'release_id' => $releaseId,
-            'confirm_release_id' => $releaseId,
+            'release_id' => (string) ($locked['release_id'] ?? ''),
+            'confirm_release_id' => (string) ($locked['confirm_release_id'] ?? ''),
             'candidate_manifest_sha256' => (string) ($locked['candidate_manifest_sha256'] ?? ''),
             'runtime_registry_sha256' => (string) ($locked['runtime_registry_sha256'] ?? ''),
+        ];
+        $provided = [
+            'pending_gate_id' => trim($pendingGateId),
+            'release_id' => trim($releaseId),
+            'confirm_release_id' => trim($confirmReleaseId),
+            'candidate_manifest_sha256' => trim($candidateManifestSha256),
+            'runtime_registry_sha256' => trim($runtimeRegistrySha256),
+        ];
+        foreach ($expected as $field => $value) {
+            if ($value === '' || ! hash_equals($value, $provided[$field])) {
+                throw new RuntimeException('Pending production gate '.$field.' mismatch.');
+            }
+        }
+
+        return [
+            'pending_gate_id' => $expected['pending_gate_id'],
+            'release_id' => $expected['release_id'],
+            'confirm_release_id' => $expected['confirm_release_id'],
+            'candidate_manifest_sha256' => $expected['candidate_manifest_sha256'],
+            'runtime_registry_sha256' => $expected['runtime_registry_sha256'],
             'rollback_window' => (string) ($locked['rollback_window'] ?? ''),
         ];
     }
@@ -231,8 +253,8 @@ final class EnneagramResultPagePendingProductionGateStore
         if (($packet['single_pending_gate'] ?? null) !== true) {
             $errors[] = 'single_pending_gate_must_be_true';
         }
-        if (($packet['approval_phrase'] ?? null) !== self::APPROVAL_PHRASE) {
-            $errors[] = 'approval_phrase_not_locked';
+        if (preg_match('/^[a-f0-9]{64}$/', (string) ($packet['pending_gate_id'] ?? '')) !== 1) {
+            $errors[] = 'pending_gate_id_invalid';
         }
         if (strtotime((string) ($packet['expires_at'] ?? '')) <= time()) {
             $errors[] = 'pending_gate_expired';
@@ -247,8 +269,8 @@ final class EnneagramResultPagePendingProductionGateStore
         if (($locked['post_activation_smoke_acknowledged'] ?? null) !== true) {
             $errors[] = 'locked_post_activation_smoke_acknowledgement_missing';
         }
-        if (($packet['authorization_scope']['phrase_authorizes_only_this_pending_gate'] ?? null) !== true) {
-            $errors[] = 'phrase_scope_not_single_gate';
+        if (($packet['authorization_scope']['all_locked_fields_must_be_resubmitted'] ?? null) !== true) {
+            $errors[] = 'locked_fields_resubmission_not_required';
         }
         if (($packet['authorization_scope']['permanent_authorization'] ?? true) !== false) {
             $errors[] = 'permanent_authorization_must_be_false';

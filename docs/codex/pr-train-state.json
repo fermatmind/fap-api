@@ -44274,6 +44274,26 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "API31 focused activation, pending-gate, importer, staging harness, and manual-gate tests passed 33 tests with 136 assertions, including exact gate/release/SHA resubmission, required forbidden-claim evidence, report hash tamper rejection, contradictory counter rejection, and empty CLI option default preservation.",
+        "status": "pass"
+      },
+      "fresh_migration": {
+        "evidence": "APP_ENV=testing SQLite migration completed successfully at /tmp/fap-api-security-169-api-31.sqlite.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed, including Big Five, Enneagram, personality, payment, migration, auth, OpenAPI, order-security, MBTI smoke/report/share, events, dependency, webhook/attempt, and strict queue backlog gates.",
+        "status": "pass"
+      },
+      "route_list": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 15 changed paths are listed in SECURITY-169-API-31 allowed_paths; Pint, PHP syntax, JSON/YAML parsing, git diff --check, and path-limited scope validation passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -44289,6 +44309,16 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-31; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-11T01:10:00+08:00",
+        "note": "Started API31 from merged API30 ledger head bc3bbd23; revalidated findings 031, 097, and 151 against current source.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T02:32:47+08:00",
+        "note": "Implementation, focused tests, route/migration checks, scope validation, CLI fail-closed validation, and full local CI passed; ready to commit and open the implementation PR.",
+        "status": "in_progress"
       }
     ],
     "failure_reason": null,
@@ -44300,7 +44330,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-31: harden Enneagram activation approval gates",
     "train_scope": "security_169_fap_api_audit"
   },

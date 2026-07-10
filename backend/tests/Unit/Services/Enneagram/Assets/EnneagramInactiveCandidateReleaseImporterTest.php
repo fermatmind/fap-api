@@ -45,6 +45,8 @@ final class EnneagramInactiveCandidateReleaseImporterTest extends TestCase
         ]);
         $this->assertDirectoryExists(storage_path('app/'.$summary['inactive_release_storage_path'].'/registry'));
         $this->assertDirectoryExists(storage_path('app/'.$summary['inactive_release_storage_path'].'/candidate/candidate_payloads'));
+        $this->assertFileExists(storage_path('app/'.$summary['inactive_release_storage_path'].'/candidate/forbidden_claim_report.json'));
+        $this->assertSame(0, $summary['forbidden_claim_violation_count']);
         $this->assertCount(
             630,
             File::glob(storage_path('app/'.$summary['inactive_release_storage_path'].'/candidate/candidate_payloads/*.json')) ?: []
@@ -52,6 +54,39 @@ final class EnneagramInactiveCandidateReleaseImporterTest extends TestCase
 
         $resolver = app(EnneagramRegistryReleaseResolver::class);
         $this->assertSame(base_path('content_packs/ENNEAGRAM/v2/registry'), $resolver->runtimeRegistryRoot());
+    }
+
+    public function test_importer_rejects_candidate_without_forbidden_claim_report(): void
+    {
+        $fixture = $this->makeCandidateFixture('importer_missing_forbidden_claim_report');
+        File::delete($fixture['candidate_dir'].'/forbidden_claim_report.json');
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Missing required candidate artifact: forbidden_claim_report.json');
+
+        app(EnneagramInactiveCandidateReleaseImporter::class)->import(
+            $fixture['candidate_dir'],
+            $fixture['output_dir'],
+            $fixture['contracts']
+        );
+    }
+
+    public function test_importer_rejects_contradictory_forbidden_claim_counters(): void
+    {
+        $fixture = $this->makeCandidateFixture('importer_contradictory_forbidden_claim_counters');
+        File::put($fixture['candidate_dir'].'/forbidden_claim_report.json', json_encode([
+            'violation_count' => 0,
+            'hit_count' => 1,
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Forbidden claim report is not clean.');
+
+        app(EnneagramInactiveCandidateReleaseImporter::class)->import(
+            $fixture['candidate_dir'],
+            $fixture['output_dir'],
+            $fixture['contracts']
+        );
     }
 
     public function test_explicit_activation_row_can_resolve_materialized_release_root(): void
@@ -166,6 +201,9 @@ final class EnneagramInactiveCandidateReleaseImporterTest extends TestCase
             'blocked_count' => 0,
             'duplicate_selection_count' => 0,
             'metadata_leak_count' => 0,
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+        File::put($candidateDir.'/forbidden_claim_report.json', json_encode([
+            'violation_count' => 0,
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/legacy_residual_scan.json', json_encode([
             'legacy_deep_core_residual_count' => 0,

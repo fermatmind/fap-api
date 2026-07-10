@@ -86,7 +86,7 @@ final class EnneagramRegistryActivationCommandTest extends TestCase
         $this->assertSame($fixture['release_id'], DB::table('content_pack_activations')->where('pack_id', 'ENNEAGRAM')->where('pack_version', 'v2')->value('release_id'));
     }
 
-    public function test_inactive_candidate_activation_command_can_consume_pending_gate_with_simple_approval_phrase(): void
+    public function test_inactive_candidate_activation_command_consumes_pending_gate_with_exact_bound_contract(): void
     {
         $fixture = $this->importInactiveFixture('inactive_candidate_activation_command_pending_gate');
         $pendingGate = $this->writePendingGateForFixture($fixture, 'activation-pending-gate');
@@ -94,7 +94,11 @@ final class EnneagramRegistryActivationCommandTest extends TestCase
 
         $this->artisan('enneagram:activate-inactive-candidate-release', [
             '--use-pending-gate' => true,
-            '--approval-phrase' => EnneagramResultPagePendingProductionGateStore::APPROVAL_PHRASE,
+            '--pending-gate-id' => $pendingGate['pending_gate_id'],
+            '--release-id' => $fixture['release_id'],
+            '--confirm-release-id' => $fixture['release_id'],
+            '--candidate-manifest-sha256' => $fixture['contracts']['candidate_manifest_sha256'],
+            '--runtime-registry-sha256' => $fixture['contracts']['runtime_registry_manifest_sha256'],
             '--output-dir' => $outputDir,
             '--actor' => 'activation_pending_gate_test',
             '--json' => true,
@@ -110,15 +114,19 @@ final class EnneagramRegistryActivationCommandTest extends TestCase
         $this->assertSame('activated', $packet['status'] ?? null);
     }
 
-    public function test_inactive_candidate_activation_command_rejects_pending_gate_without_exact_approval_phrase(): void
+    public function test_inactive_candidate_activation_command_rejects_pending_gate_with_mismatched_bound_contract(): void
     {
         $fixture = $this->importInactiveFixture('inactive_candidate_activation_command_pending_gate_bad_phrase');
-        $this->writePendingGateForFixture($fixture, 'activation-pending-gate-bad-phrase');
+        $pendingGate = $this->writePendingGateForFixture($fixture, 'activation-pending-gate-bad-contract');
 
         $this->artisan('enneagram:activate-inactive-candidate-release', [
             '--use-pending-gate' => true,
-            '--approval-phrase' => '同意',
-            '--output-dir' => $fixture['output_dir'].'/inactive_candidate_activate_pending_gate_bad_phrase',
+            '--pending-gate-id' => $pendingGate['pending_gate_id'],
+            '--release-id' => $fixture['release_id'],
+            '--confirm-release-id' => $fixture['release_id'],
+            '--candidate-manifest-sha256' => hash('sha256', 'wrong-candidate'),
+            '--runtime-registry-sha256' => $fixture['contracts']['runtime_registry_manifest_sha256'],
+            '--output-dir' => $fixture['output_dir'].'/inactive_candidate_activate_pending_gate_bad_contract',
             '--json' => true,
         ])->assertExitCode(1);
 

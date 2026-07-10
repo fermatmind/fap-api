@@ -35,18 +35,27 @@ final class EnneagramResultPageCandidateStagingHarnessCommand extends Command
                 return self::FAILURE;
             }
 
-            $summary = $harness->run([
+            $options = [
                 'run_id' => trim((string) $this->option('run-id')),
                 'artifact_dir' => trim((string) $this->option('artifact-dir')),
                 'contract_path' => trim((string) $this->option('contract-path')),
                 'candidate_dir' => trim((string) $this->option('candidate-dir')),
                 'output_dir' => trim((string) $this->option('output-dir')),
-                'expected_candidate_manifest_sha256' => trim((string) $this->option('expected-candidate-manifest-sha256')),
-                'expected_runtime_registry_sha256' => trim((string) $this->option('expected-runtime-registry-sha256')),
                 'run_export' => (bool) $this->option('run-export'),
                 'run_staging_import' => (bool) $this->option('run-staging-import'),
                 'strict' => (bool) $this->option('strict'),
-            ]);
+            ];
+            foreach ([
+                'expected_candidate_manifest_sha256' => 'expected-candidate-manifest-sha256',
+                'expected_runtime_registry_sha256' => 'expected-runtime-registry-sha256',
+            ] as $key => $option) {
+                $value = trim((string) $this->option($option));
+                if ($value !== '') {
+                    $options[$key] = $value;
+                }
+            }
+
+            $summary = $harness->run($options);
 
             $this->render($summary);
 

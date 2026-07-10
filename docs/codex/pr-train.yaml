@@ -36154,6 +36154,13 @@ prs:
       - backend/app/Services/Enneagram/Assets/EnneagramInactiveCandidateReleaseImporter.php
       - backend/app/Console/Commands/EnneagramResultPageCandidateStagingHarnessCommand.php
       - backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageCandidateStagingHarness.php
+      - backend/tests/Feature/Console/EnneagramRegistryActivationCommandTest.php
+      - backend/tests/Feature/Console/EnneagramResultPageCandidateStagingHarnessCommandTest.php
+      - backend/tests/Unit/Services/Enneagram/Assets/EnneagramInactiveCandidateReleaseImporterTest.php
+      - backend/tests/Unit/Services/Enneagram/Assets/EnneagramResultPageCandidateStagingHarnessTest.php
+      - backend/tests/Unit/Services/Enneagram/Assets/EnneagramResultPageProductionManualGateRunbookTest.php
+      - backend/tests/Unit/Services/Ops/EnneagramRegistryActivationGateServiceTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
