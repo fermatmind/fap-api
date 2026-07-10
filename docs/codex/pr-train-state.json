@@ -44994,10 +44994,14 @@
       "scope_validation": {
         "evidence": "Every changed path is listed in SECURITY-169-API-39 allowed_paths; Ruby YAML parse, JSON parse, Pint, and git diff --check passed.",
         "status": "pass"
+      },
+      "github_checks": {
+        "evidence": "PR #2923 passed all 15 GitHub checks, including both CI workflow matrices and code scanning.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "78d492dab5124e3cea711f93eb5809404e0ecc20",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -45014,18 +45018,23 @@
         "at": "2026-07-11T06:30:00+08:00",
         "note": "Implemented scoped remediation for deceptive approval URLs, dry-run-only handoffs, noindex promotion, revision ordering, draft package compatibility, and ContentPage editor field preservation.",
         "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T06:40:29+08:00",
+        "note": "Implementation PR #2923 passed all 15 GitHub checks and squash-merged as 78d492dab5124e3cea711f93eb5809404e0ecc20; origin/main contains the merge, main-sync is synchronized, and implementation branches were deleted locally and remotely.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-39",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-11T06:40:29+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2923",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-39: harden personality approval and revision writers",
     "train_scope": "security_169_fap_api_audit"
   },
