@@ -35808,6 +35808,7 @@ prs:
     scope:
       - Require live kill switches and safety allowlists for search submission, Baidu/IndexNow delegation, and post-publish queues.
     allowed_paths:
+      - backend/.env.example
       - backend/config/seo_intel.php
       - backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueLiveSubmissionExecutor.php
       - backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueBoundedLiveExecutor.php
@@ -35817,6 +35818,12 @@ prs:
       - backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityEvaluator.php
       - backend/app/Console/Commands/SeoAgentL5aIndexnowSubmitCanaryCommand.php
       - backend/app/Console/Commands/SeoAgentPostPublishIndexnowAutoCommand.php
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelLiveSubmissionExecutorTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelApproveCommandTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentPostPublishSearchSubmitTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentPostPublishIndexnowAutoTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentL5aIndexnowSubmitCanaryTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

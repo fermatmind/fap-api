@@ -15,6 +15,7 @@ final class SearchChannelQueueLiveSubmissionExecutor
     public function __construct(
         private readonly SearchChannelQueueAuditLogger $events,
         private readonly SearchChannelSubmissionStatusNormalizer $statusNormalizer,
+        private readonly SearchChannelQueueEligibilityEvaluator $eligibilityEvaluator,
     ) {}
 
     /**
@@ -192,7 +193,15 @@ final class SearchChannelQueueLiveSubmissionExecutor
             $issues[] = 'host_not_allowed';
         }
 
-        return $issues;
+        $eligibility = $this->eligibilityEvaluator->evaluate([
+            ...(array) $item,
+            'is_private_flow' => (bool) $item->private_flow,
+        ]);
+        foreach ($eligibility->reasonCodes as $reasonCode) {
+            $issues[] = 'eligibility_'.$reasonCode;
+        }
+
+        return array_values(array_unique($issues));
     }
 
     /**
@@ -227,6 +236,10 @@ final class SearchChannelQueueLiveSubmissionExecutor
             if (trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.key_location')) === '') {
                 $issues[] = 'indexnow_key_location_missing';
             }
+
+            if (! $this->isHttpsEndpoint((string) config('seo_intel.search_channel_queue.live_submission.indexnow.endpoint'))) {
+                $issues[] = 'indexnow_endpoint_not_https';
+            }
         } elseif ($channel === 'baidu_push') {
             if (! (bool) config('seo_intel.baidu_live_api_enabled', false)) {
                 $issues[] = 'baidu_live_api_disabled';
@@ -243,11 +256,22 @@ final class SearchChannelQueueLiveSubmissionExecutor
             if (trim((string) config('seo_intel.search_channel_queue.live_submission.baidu.token')) === '') {
                 $issues[] = 'baidu_token_missing';
             }
+
+            if (! $this->isHttpsEndpoint((string) config('seo_intel.search_channel_queue.live_submission.baidu.endpoint'))) {
+                $issues[] = 'baidu_endpoint_not_https';
+            }
         } else {
             $issues[] = 'unsupported_live_submission_channel';
         }
 
         return $issues;
+    }
+
+    private function isHttpsEndpoint(string $endpoint): bool
+    {
+        return filter_var($endpoint, FILTER_VALIDATE_URL) !== false
+            && strtolower((string) parse_url($endpoint, PHP_URL_SCHEME)) === 'https'
+            && is_string(parse_url($endpoint, PHP_URL_HOST));
     }
 
     /**

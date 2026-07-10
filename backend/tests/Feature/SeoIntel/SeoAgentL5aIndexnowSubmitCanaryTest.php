@@ -33,6 +33,9 @@ final class SeoAgentL5aIndexnowSubmitCanaryTest extends TestCase
                 'foreign_key_constraints' => false,
             ],
             'seo_intel.connection' => 'seo_intel',
+            'seo_intel.indexnow_live_api_enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.external_api_calls_enabled' => true,
             'seo_intel.search_channel_queue.live_submission.allowed_channels' => ['indexnow', 'baidu_push'],
             'seo_intel.search_channel_queue.live_submission.allowed_hosts' => ['fermatmind.com'],
             'seo_intel.search_channel_queue.live_submission.indexnow.endpoint' => 'https://api.indexnow.test/indexnow',
@@ -84,6 +87,32 @@ final class SeoAgentL5aIndexnowSubmitCanaryTest extends TestCase
         $this->assertTrue((bool) data_get($artifact, 'url_truth.ok'));
         $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.google_indexing_api_call', true));
         $this->assertNoForbiddenStrings($artifact);
+    }
+
+    #[Test]
+    public function delegated_indexnow_command_preserves_explicit_base_url(): void
+    {
+        Http::fake();
+        config(['app.url' => 'https://wrong.invalid']);
+        $page = $this->createPublishedPage();
+        $this->seedSeoUrl('https://fermatmind.com/about', (string) $page->id);
+        $evidencePath = $this->writePublishEvidence($page);
+        $artifactDir = storage_path('framework/testing/l5a-indexnow-'.Str::uuid()->toString());
+
+        $exitCode = Artisan::call('seo-agent:l5a-indexnow-submit-canary', [
+            '--publish-evidence' => $evidencePath,
+            '--limit' => 1,
+            '--base-url' => 'https://fermatmind.com',
+            '--artifact-dir' => $artifactDir,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('planned', $summary['status'] ?? null);
+        $this->assertSame(1, $summary['planned_queue_count'] ?? null);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        Http::assertNothingSent();
     }
 
     #[Test]

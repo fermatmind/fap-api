@@ -10,6 +10,7 @@ final class SearchChannelQueueApprovalExecutor
 {
     public function __construct(
         private readonly SearchChannelQueueAuditLogger $events,
+        private readonly SearchChannelQueueEligibilityEvaluator $eligibilityEvaluator,
     ) {}
 
     /**
@@ -129,7 +130,7 @@ final class SearchChannelQueueApprovalExecutor
         $configured = array_values(config('seo_intel.search_channel_queue.live_submission.allowed_channels', []));
 
         if ($channels === []) {
-            return ['indexnow', 'baidu_push'];
+            return $configured;
         }
 
         return array_values(array_intersect($channels, $configured));
@@ -220,6 +221,14 @@ final class SearchChannelQueueApprovalExecutor
 
         if (! in_array($host, config('seo_intel.search_channel_queue.live_submission.allowed_hosts', []), true)) {
             $issues[] = 'host_not_allowed';
+        }
+
+        $eligibility = $this->eligibilityEvaluator->evaluate([
+            ...(array) $item,
+            'is_private_flow' => (bool) $item->private_flow,
+        ]);
+        foreach ($eligibility->reasonCodes as $reasonCode) {
+            $issues[] = 'eligibility_'.$reasonCode;
         }
 
         return array_values(array_unique($issues));

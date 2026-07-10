@@ -270,6 +270,29 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
     }
 
     #[Test]
+    public function content_page_evidence_path_must_match_current_global_public_authority(): void
+    {
+        $page = $this->createPublishedPage();
+        $evidencePath = $this->writePublishEvidence($page, [
+            'affected_refs' => [[
+                'safe_path' => '/ops/private-dashboard',
+            ]],
+        ]);
+
+        $exitCode = Artisan::call('seo-agent:post-publish-search-submit', [
+            '--publish-evidence' => $evidencePath,
+            '--channels' => 'indexnow',
+            '--limit' => 1,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('content_page_canonical_safe_path_mismatch', $summary['issues'] ?? []);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+    }
+
+    #[Test]
     public function generated_contract_documents_post_publish_boundaries(): void
     {
         $artifact = $this->readJson(base_path('docs/seo/generated/seo-agent-post-publish-search-submit.v1.json'));

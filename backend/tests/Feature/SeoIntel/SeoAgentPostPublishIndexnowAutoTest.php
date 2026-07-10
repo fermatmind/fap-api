@@ -33,6 +33,9 @@ final class SeoAgentPostPublishIndexnowAutoTest extends TestCase
                 'foreign_key_constraints' => false,
             ],
             'seo_intel.connection' => 'seo_intel',
+            'seo_intel.indexnow_live_api_enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.external_api_calls_enabled' => true,
             'seo_intel.search_channel_queue.live_submission.allowed_channels' => ['indexnow', 'baidu_push'],
             'seo_intel.search_channel_queue.live_submission.allowed_hosts' => ['fermatmind.com'],
             'seo_intel.search_channel_queue.live_submission.indexnow.endpoint' => 'https://api.indexnow.test/indexnow',
@@ -184,6 +187,31 @@ final class SeoAgentPostPublishIndexnowAutoTest extends TestCase
     }
 
     #[Test]
+    public function publish_evidence_path_must_match_current_global_content_page_path(): void
+    {
+        Http::fake();
+        $page = $this->createPublishedPage();
+        $evidencePath = $this->writeSinglePublishEvidence($page, [
+            'affected_refs' => [[
+                'safe_path' => '/ops/private-dashboard',
+            ]],
+        ]);
+
+        $exitCode = Artisan::call('seo-agent:post-publish-indexnow-auto', [
+            '--publish-evidence' => $evidencePath,
+            '--limit' => 1,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('published_target_validation_failed', $summary['issues'] ?? []);
+        $this->assertContains('content_page_canonical_safe_path_mismatch', $summary['target_issues'] ?? []);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        Http::assertNothingSent();
+    }
+
+    #[Test]
     public function generated_contract_documents_indexnow_auto_boundaries(): void
     {
         $artifact = $this->readJson(base_path('docs/seo/generated/seo-agent-post-publish-indexnow-auto.v1.json'));
@@ -227,9 +255,9 @@ final class SeoAgentPostPublishIndexnowAutoTest extends TestCase
         ]);
     }
 
-    private function writeSinglePublishEvidence(ContentPage $page): string
+    private function writeSinglePublishEvidence(ContentPage $page, array $overrides = []): string
     {
-        return $this->writeJson('seo-agent-cms-publish-canary-', [
+        return $this->writeJson('seo-agent-cms-publish-canary-', array_replace_recursive([
             'schema_version' => 'seo-agent-cms-publish-canary.v1',
             'ok' => true,
             'status' => 'success',
@@ -252,7 +280,7 @@ final class SeoAgentPostPublishIndexnowAutoTest extends TestCase
                 'search_channel_enqueue' => false,
                 'indexing_request' => false,
             ],
-        ]);
+        ], $overrides));
     }
 
     private function writeAutoPublishEvidence(ContentPage $page): string

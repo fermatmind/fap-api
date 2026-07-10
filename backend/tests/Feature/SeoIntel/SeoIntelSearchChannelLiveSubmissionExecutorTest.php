@@ -356,7 +356,7 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
     }
 
     #[Test]
-    public function failed_baidu_submission_captures_sanitized_provider_diagnostics(): void
+    public function baidu_submission_rejects_plaintext_endpoint_before_claim_or_http_call(): void
     {
         config([
             'seo_intel.baidu_live_api_enabled' => true,
@@ -367,12 +367,7 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
             'seo_intel.search_channel_queue.live_submission.baidu.token' => 'secret-baidu-token',
         ]);
 
-        Http::fake([
-            'data.zz.baidu.test/*' => Http::response([
-                'error' => 401,
-                'message' => 'site https://fermatmind.com token secret-baidu-token rejected for https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice',
-            ], 400),
-        ]);
+        Http::fake();
 
         $canonicalUrl = 'https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice';
         $queueItemId = $this->seedQueueItem([
@@ -388,7 +383,7 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
         $approvalPhrase = app(SearchChannelQueueLiveSubmissionExecutor::class)
             ->approvalPhrase($queueItemId, 'baidu_push', $canonicalUrl);
 
-        [$exitCode, $payload, $rawOutput] = $this->runSubmitCommand([
+        [$exitCode, $payload] = $this->runSubmitCommand([
             '--queue-item-id' => $queueItemId,
             '--approval-phrase' => $approvalPhrase,
             '--actor' => 'seo-ops@example.com',
@@ -396,42 +391,15 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
         ]);
 
         $this->assertSame(1, $exitCode);
-        $this->assertSame('failed', $payload['status'] ?? null);
-        $this->assertSame('failed', $payload['submission_status'] ?? null);
-        $this->assertSame('submit_failed', $payload['execution_state'] ?? null);
-        $this->assertSame(400, $payload['http_status'] ?? null);
-        $this->assertSame('401', $payload['provider_error_code'] ?? null);
-        $this->assertSame('site [redacted] token [redacted] rejected for [redacted]', $payload['provider_error_message'] ?? null);
-        $this->assertStringNotContainsString('secret-baidu-token', $rawOutput);
-
-        Http::assertSent(function (Request $request) use ($canonicalUrl): bool {
-            $query = [];
-            parse_str((string) parse_url($request->url(), PHP_URL_QUERY), $query);
-
-            return $request->method() === 'POST'
-                && parse_url($request->url(), PHP_URL_SCHEME) === 'http'
-                && parse_url($request->url(), PHP_URL_HOST) === 'data.zz.baidu.test'
-                && $query['site'] === 'https://fermatmind.com'
-                && $query['token'] === 'secret-baidu-token'
-                && $request->body() === $canonicalUrl
-                && $request->hasHeader('Content-Type', 'text/plain');
-        });
+        $this->assertSame('blocked', $payload['status'] ?? null);
+        $this->assertContains('baidu_endpoint_not_https', $payload['issues'] ?? []);
+        $this->assertFalse((bool) ($payload['external_calls_attempted'] ?? true));
+        Http::assertNothingSent();
 
         $item = DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $queueItemId)->first();
-        $this->assertSame('approved', $item->approval_state);
-        $this->assertSame('submit_failed', $item->execution_state);
-
-        $responseEvent = DB::connection('seo_intel')
-            ->table('seo_search_channel_queue_events')
-            ->where('queue_item_id', $queueItemId)
-            ->where('event_type', 'live_submission_response')
-            ->first();
-
-        $this->assertNotNull($responseEvent);
-        $this->assertStringContainsString('"provider_error_code":"401"', (string) $responseEvent->event_payload);
-        $this->assertStringContainsString('"provider_error_message":"site [redacted] token [redacted] rejected for [redacted]"', (string) $responseEvent->event_payload);
-        $this->assertStringNotContainsString('secret-baidu-token', (string) $responseEvent->event_payload);
-        $this->assertStringNotContainsString($canonicalUrl, (string) $responseEvent->event_payload);
+        $this->assertSame('pending', $item->approval_state);
+        $this->assertSame('dry_run_ready', $item->execution_state);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_events')->count());
     }
 
     #[Test]

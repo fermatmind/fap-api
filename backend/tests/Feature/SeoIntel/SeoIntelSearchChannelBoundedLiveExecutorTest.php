@@ -72,7 +72,7 @@ final class SeoIntelSearchChannelBoundedLiveExecutorTest extends TestCase
         $this->assertSame(0, $exitCode);
         $this->assertSame('success', $payload['status'] ?? null);
         $this->assertTrue((bool) ($payload['dry_run'] ?? false));
-        $this->assertFalse((bool) data_get($payload, 'safety_flags.global_live_gates_required'));
+        $this->assertTrue((bool) data_get($payload, 'safety_flags.global_live_gates_required'));
         $this->assertFalse((bool) ($payload['external_calls_attempted'] ?? true));
         $this->assertFalse((bool) ($payload['writes_committed'] ?? true));
         $this->assertSame(
@@ -123,6 +123,9 @@ final class SeoIntelSearchChannelBoundedLiveExecutorTest extends TestCase
         $this->assertSame(1, $exitCode);
         $this->assertSame('blocked', $payload['status'] ?? null);
         $this->assertContains('bounded_live_approval_required', $payload['issues'] ?? []);
+        $this->assertContains('live_submission_gate_disabled', $payload['issues'] ?? []);
+        $this->assertContains('external_api_gate_disabled', $payload['issues'] ?? []);
+        $this->assertContains('indexnow_live_api_disabled', $payload['issues'] ?? []);
         $this->assertFalse((bool) ($payload['external_calls_attempted'] ?? true));
         $this->assertSame('approved', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $queueItemId)->value('approval_state'));
         $this->assertSame('dry_run_ready', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $queueItemId)->value('execution_state'));
@@ -130,8 +133,15 @@ final class SeoIntelSearchChannelBoundedLiveExecutorTest extends TestCase
     }
 
     #[Test]
-    public function live_mode_submits_indexnow_and_baidu_without_global_live_gates_and_logs_sanitized_events(): void
+    public function live_mode_submits_indexnow_and_baidu_only_with_all_live_gates_and_logs_sanitized_events(): void
     {
+        config([
+            'seo_intel.indexnow_live_api_enabled' => true,
+            'seo_intel.baidu_live_api_enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.external_api_calls_enabled' => true,
+        ]);
+
         Http::fake([
             'api.indexnow.test/*' => Http::response('', 202),
             'data.zz.baidu.test/*' => Http::response(['success' => 1, 'remain' => 99], 200),
@@ -225,6 +235,12 @@ final class SeoIntelSearchChannelBoundedLiveExecutorTest extends TestCase
     #[Test]
     public function baidu_site_initialization_failure_marks_platform_action_required_without_auto_retry(): void
     {
+        config([
+            'seo_intel.baidu_live_api_enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.external_api_calls_enabled' => true,
+        ]);
+
         Http::fake([
             'data.zz.baidu.test/*' => Http::response([
                 'error' => 400,
@@ -266,6 +282,38 @@ final class SeoIntelSearchChannelBoundedLiveExecutorTest extends TestCase
         $this->assertSame('blocked', $secondPayload['status'] ?? null);
         $this->assertContains('execution_state_not_dry_run_ready', $secondPayload['issues'] ?? []);
         Http::assertSentCount(1);
+    }
+
+    #[Test]
+    public function valid_approval_cannot_bypass_disabled_live_gates_or_insecure_baidu_endpoint(): void
+    {
+        Http::fake();
+        config([
+            'seo_intel.search_channel_queue.live_submission.baidu.endpoint' => 'http://data.zz.baidu.test/urls',
+        ]);
+        $queueItemId = $this->seedQueueItem([
+            'canonical_url' => 'https://fermatmind.com/zh/articles/career-confusion-test-map',
+            'channel' => 'baidu_push',
+        ]);
+        $approvalPhrase = app(SearchChannelQueueBoundedLiveExecutor::class)
+            ->approvalPhrase([$queueItemId], ['baidu_push']);
+
+        [$exitCode, $payload] = $this->runBoundedCommand([
+            '--queue-ids' => (string) $queueItemId,
+            '--channels' => 'baidu_push',
+            '--approval-phrase' => $approvalPhrase,
+            '--live' => true,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status'] ?? null);
+        $this->assertContains('live_submission_gate_disabled', $payload['issues'] ?? []);
+        $this->assertContains('external_api_gate_disabled', $payload['issues'] ?? []);
+        $this->assertContains('baidu_live_api_disabled', $payload['issues'] ?? []);
+        $this->assertContains('baidu_endpoint_not_https', $payload['issues'] ?? []);
+        $this->assertSame('dry_run_ready', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $queueItemId)->value('execution_state'));
+        Http::assertNothingSent();
     }
 
     /**

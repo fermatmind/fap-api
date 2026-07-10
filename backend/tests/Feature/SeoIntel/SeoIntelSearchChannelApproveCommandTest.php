@@ -221,6 +221,38 @@ final class SeoIntelSearchChannelApproveCommandTest extends TestCase
         Http::assertNothingSent();
     }
 
+    #[Test]
+    public function approval_rechecks_channel_page_source_and_public_url_allowlists(): void
+    {
+        Http::fake();
+        config([
+            'seo_intel.search_channel_queue.live_submission.allowed_channels' => ['indexnow'],
+        ]);
+        $queueItemId = $this->seedQueueItem([
+            'canonical_url' => 'https://fermatmind.com/ops/private-dashboard',
+            'page_entity_type' => 'ops',
+            'source_authority' => 'external_search_source',
+            'channel' => 'baidu_push',
+        ]);
+
+        [$exitCode, $payload] = $this->runApproveCommand([
+            '--queue-ids' => (string) $queueItemId,
+            '--channels' => '',
+            '--json' => true,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status'] ?? null);
+        $this->assertContains('channel_not_requested', $payload['issues'] ?? []);
+        $this->assertContains('source_authority_not_approved', $payload['issues'] ?? []);
+        $this->assertContains('eligibility_canonical_url_not_public', $payload['issues'] ?? []);
+        $this->assertContains('eligibility_page_entity_type_not_allowed', $payload['issues'] ?? []);
+        $this->assertContains('eligibility_page_entity_type_forbidden', $payload['issues'] ?? []);
+        $this->assertContains('eligibility_source_authority_forbidden', $payload['issues'] ?? []);
+        $this->assertSame('pending', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $queueItemId)->value('approval_state'));
+        Http::assertNothingSent();
+    }
+
     /**
      * @param  array<string, mixed>  $arguments
      * @return array{0:int,1:array<string,mixed>,2:string}

@@ -98,6 +98,7 @@ final class SeoAgentPostPublishIndexnowAutoCommand extends Command
             $target = $this->publishedTarget($ref);
             if (($target['ok'] ?? false) !== true) {
                 $issues[] = (string) ($target['issue'] ?? 'published_target_invalid');
+
                 continue;
             }
             $targets[] = $target;
@@ -131,10 +132,12 @@ final class SeoAgentPostPublishIndexnowAutoCommand extends Command
                 $existing = $this->existingIndexnowQueueItem($canonicalUrl);
                 if ($existing !== null && ($existing['execution_state'] ?? '') === 'submitted') {
                     $duplicateSubmitted[] = $existing;
+
                     continue;
                 }
                 if ($existing !== null && in_array(($existing['execution_state'] ?? ''), ['dry_run_ready'], true)) {
                     $duplicateReadyIds[] = (int) $existing['id'];
+
                     continue;
                 }
 
@@ -193,7 +196,7 @@ final class SeoAgentPostPublishIndexnowAutoCommand extends Command
         if (! in_array(($approveResult['status'] ?? 'success'), ['success', 'skipped'], true)) {
             $artifact = $this->writeEvidence($artifactDir, $evidencePath, $evidenceSha, 'blocked', [
                 'execute' => true,
-                'write_result' => $writeResult,
+                'write_result' => $this->safeWriteResult($writeResult),
                 'approve_result' => $this->safeExecutorSummary($approveResult),
                 'blocked_states' => $blockedStates,
             ]);
@@ -219,7 +222,7 @@ final class SeoAgentPostPublishIndexnowAutoCommand extends Command
         $artifact = $this->writeEvidence($artifactDir, $evidencePath, $evidenceSha, $ok ? 'success' : 'blocked', [
             'execute' => true,
             'target_count' => count($targets),
-            'write_result' => $writeResult,
+            'write_result' => $this->safeWriteResult($writeResult),
             'queue_item_ids' => $queueItemIds,
             'submitted_queue_item_ids' => $submitIds,
             'already_submitted_queue_item_ids' => array_values(array_unique(array_merge(
@@ -367,7 +370,10 @@ final class SeoAgentPostPublishIndexnowAutoCommand extends Command
             return ['ok' => false, 'issue' => 'subject_ref_invalid'];
         }
 
-        $page = ContentPage::query()->withoutGlobalScopes()->find($pageId);
+        $page = ContentPage::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->find($pageId);
         if (! $page instanceof ContentPage) {
             return ['ok' => false, 'issue' => 'content_page_not_found'];
         }
@@ -375,7 +381,13 @@ final class SeoAgentPostPublishIndexnowAutoCommand extends Command
             return ['ok' => false, 'issue' => 'content_page_not_public_indexable'];
         }
 
-        $safePath = (string) ($ref['safe_path'] ?? $page->canonical_path ?? $page->path ?? '');
+        $safePath = trim((string) ($ref['safe_path'] ?? ''));
+        $currentPath = trim((string) ($page->canonical_path ?: $page->path));
+        if ($safePath === '' || $safePath !== $currentPath) {
+            return ['ok' => false, 'issue' => 'content_page_canonical_safe_path_mismatch'];
+        }
+
+        $safePath = $currentPath;
         $canonicalUrl = $this->canonicalUrl($safePath);
         if ($canonicalUrl === null) {
             return ['ok' => false, 'issue' => 'canonical_url_resolution_failed'];
@@ -483,6 +495,7 @@ final class SeoAgentPostPublishIndexnowAutoCommand extends Command
             $id = (int) $item->id;
             if ((string) $item->channel !== 'indexnow') {
                 $blocked[] = ['queue_item_id' => $id, 'issue' => 'non_indexnow_channel_blocked'];
+
                 continue;
             }
 
@@ -553,6 +566,19 @@ final class SeoAgentPostPublishIndexnowAutoCommand extends Command
                 'http_status' => data_get(is_array($item) ? $item : [], 'http_status'),
                 'issues' => array_values(array_map('strval', (array) data_get(is_array($item) ? $item : [], 'issues', []))),
             ], (array) ($result['items'] ?? []))),
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $result
+     * @return array<string, mixed>
+     */
+    private function safeWriteResult(array $result): array
+    {
+        return [
+            'batch_ids' => array_values(array_map('intval', (array) ($result['batch_ids'] ?? []))),
+            'queue_item_ids' => array_values(array_map('intval', (array) ($result['queue_item_ids'] ?? []))),
+            'written_items' => (int) ($result['written_items'] ?? 0),
         ];
     }
 

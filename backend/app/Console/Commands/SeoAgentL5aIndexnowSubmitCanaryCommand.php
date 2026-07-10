@@ -97,7 +97,12 @@ final class SeoAgentL5aIndexnowSubmitCanaryCommand extends Command
         $delegatedPath = rtrim($artifactDir, '/').'/seo-agent-l5a-indexnow-submit-canary-delegated-publish-'.$timestamp.'.json';
         $this->writeJson($delegatedPath, $this->delegatedPublishEvidence($publishEvidence, $target));
 
-        $delegatedSummary = $this->runPostPublishIndexnowAuto($delegatedPath, $artifactDir, $execute);
+        $delegatedSummary = $this->runPostPublishIndexnowAuto(
+            $delegatedPath,
+            $artifactDir,
+            $execute,
+            trim((string) $this->option('base-url')),
+        );
         $delegatedOk = ($delegatedSummary['ok'] ?? false) === true
             && in_array((string) ($delegatedSummary['status'] ?? ''), ['planned', 'success'], true);
 
@@ -229,7 +234,10 @@ final class SeoAgentL5aIndexnowSubmitCanaryCommand extends Command
             return ['ok' => false, 'issue' => 'subject_ref_invalid'];
         }
 
-        $page = ContentPage::query()->withoutGlobalScopes()->find($pageId);
+        $page = ContentPage::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->find($pageId);
         if (! $page instanceof ContentPage) {
             return ['ok' => false, 'issue' => 'content_page_not_found'];
         }
@@ -354,7 +362,7 @@ final class SeoAgentL5aIndexnowSubmitCanaryCommand extends Command
     /**
      * @return array<string, mixed>
      */
-    private function runPostPublishIndexnowAuto(string $delegatedPath, string $artifactDir, bool $execute): array
+    private function runPostPublishIndexnowAuto(string $delegatedPath, string $artifactDir, bool $execute, string $baseUrl): array
     {
         $command = $this->getApplication()?->find('seo-agent:post-publish-indexnow-auto');
         if ($command === null) {
@@ -368,6 +376,9 @@ final class SeoAgentL5aIndexnowSubmitCanaryCommand extends Command
             '--artifact-dir' => $artifactDir,
             '--json' => true,
         ];
+        if ($baseUrl !== '') {
+            $input['--base-url'] = $baseUrl;
+        }
         if ($execute) {
             $input['--execute'] = true;
         }
