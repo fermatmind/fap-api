@@ -43335,6 +43335,10 @@
         "evidence": "ci_verify_mbti passed, including the 1180-test suite (150138 assertions), MBTI smoke/report/share, events, payment, migration, auth, order-security, dependency, and webhook/attempt gates.",
         "status": "pass"
       },
+      "github_required_checks": {
+        "evidence": "PR #2875 final head e7051a01355c9a548b30dda3e3de665692b035fc passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload checks.",
+        "status": "pass"
+      },
       "proof_redaction": {
         "evidence": "Ops API proof JSON and Markdown contain no committed SSH aliases, machine hostnames, IP addresses, forced-resolve targets, response fingerprints, exact timings, or process counters; focused contract tests and leak scan passed.",
         "status": "pass"
@@ -43344,12 +43348,12 @@
         "status": "pass"
       },
       "scope_validation": {
-        "evidence": "All 15 changed paths are listed in SECURITY-169-API-22 allowed_paths; JSON/YAML parsing, proof leak scan, and git diff --check passed.",
+        "evidence": "All 14 final changed paths are listed in SECURITY-169-API-22 allowed_paths; JSON/YAML parsing, proof leak scan, and git diff --check passed.",
         "status": "pass"
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "d539291c7478aeb1ad5397a99ef9369eb61cc622",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -43376,18 +43380,28 @@
         "at": "2026-07-10T18:18:08+08:00",
         "note": "Opened PR #2875 from the rebased scoped API22 branch.",
         "status": "pr_open"
+      },
+      {
+        "at": "2026-07-10T18:27:15+08:00",
+        "note": "Inspected both verify-bigfive failures: the runtime-freeze classifier flagged the newly added generic Support path. Moved the shared guard into the already-scoped search eligibility evaluator, removed the generic Support file, and revalidated the classifier, 51 focused tests, Pint, and 14-path scope validation.",
+        "status": "local_checks_passed"
+      },
+      {
+        "at": "2026-07-10T18:34:00+08:00",
+        "note": "PR #2875 merged after all GitHub checks passed; merge commit d539291c7478aeb1ad5397a99ef9369eb61cc622. origin/main and the dedicated local main were synchronized, and local/remote API22 task branches were deleted.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-22",
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T18:33:20+08:00",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2875",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "merged",
     "title": "SECURITY-169-API-22: harden SEO scanners against private/cross-tenant paths",
     "train_scope": "security_169_fap_api_audit"
   },

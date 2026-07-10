@@ -35757,7 +35757,7 @@ prs:
     branch: codex/security-169-api-22-harden-seo-scanners-against-private-cross-tenant
     title: "SECURITY-169-API-22: harden SEO scanners against private/cross-tenant paths"
     train_scope: security_169_fap_api_audit
-    status: user_authorized
+    status: merged
     scope:
       - Restrict runtime SEO scanners and opportunity queues from probing or exporting private/cross-tenant CMS paths or infra details.
     allowed_paths:
