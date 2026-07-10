@@ -76,22 +76,36 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
-    public function production_auto_deploy_policy_requires_manual_readiness_for_risky_paths(): void
+    public function production_auto_deploy_requires_successful_staging_and_latest_main(): void
     {
         $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
 
-        $this->assertStringContainsString('Production auto-deploy requires exactly one merged PR', $source);
-        $this->assertStringContainsString('Production auto-deploy policy guard blocked', $source);
-        $this->assertStringContainsString('Stale production deploy workflow_run is not a successful production deploy', $source);
-        $this->assertStringContainsString('/repos/${GITHUB_REPOSITORY}/commits/${DEPLOY_SHA}/pulls', $source);
-        $this->assertStringContainsString('/repos/${GITHUB_REPOSITORY}/pulls/${pr_number}/files', $source);
-        $this->assertStringContainsString('^backend/config/', $source);
-        $this->assertStringContainsString('^backend/database/', $source);
-        $this->assertStringContainsString('^\\.github/workflows/', $source);
-        $this->assertStringContainsString('^backend/app/Http/Controllers/.*/Cms/', $source);
-        $this->assertStringContainsString('^backend/app/Services/Seo', $source);
-        $this->assertStringContainsString('(^|/)\\.env($|\\.|-)', $source);
-        $this->assertStringContainsString('(^|/).*secret.*$', $source);
+        $this->assertStringContainsString("workflows: [\"Deploy Application\"]", $source);
+        $this->assertStringContainsString("github.event.workflow_run.conclusion == 'success'", $source);
+        $this->assertStringContainsString("github.event.workflow_run.event == 'push'", $source);
+        $this->assertStringContainsString("github.event.workflow_run.head_branch == 'main'", $source);
+        $this->assertStringContainsString('Confirm approved revision is still latest main', $source);
+        $this->assertStringContainsString('if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]', $source);
+        $this->assertStringContainsString('Single-developer mode: a latest-main revision with a successful staging deploy is eligible for automatic production deployment regardless of PR labels or changed paths.', $source);
+        $this->assertStringNotContainsString('Production auto-deploy requires exactly one merged PR', $source);
+        $this->assertStringNotContainsString('/repos/${GITHUB_REPOSITORY}/pulls/${pr_number}/files', $source);
+    }
+
+    #[Test]
+    public function production_deploy_lock_guard_retries_the_full_script_and_only_removes_verified_stale_ci_locks(): void
+    {
+        $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
+
+        $this->assertStringContainsString('LOCK_GUARD_SCRIPT="$(cat', $source);
+        $this->assertStringContainsString('LOCK_GUARD_B64="$(printf', $source);
+        $this->assertStringContainsString("base64 -d | bash", $source);
+        $this->assertStringNotContainsString("ssh_retry \"TARGET='\$TARGET' DEPLOY_PATH='\$DEPLOY_PATH' bash -s\" <<'REMOTE'", $source);
+        $this->assertStringContainsString('STALE_LOCK_SECONDS="${STALE_LOCK_SECONDS:-1800}"', $source);
+        $this->assertStringContainsString('[ "$OWNER" = "ci" ]', $source);
+        $this->assertStringContainsString("grep -Fq '\"env\":\"production\"'", $source);
+        $this->assertStringContainsString("grep -Fq '\"repository\":\"'\"\$GITHUB_REPOSITORY\"'\"'", $source);
+        $this->assertStringContainsString('deploy lock guard: active deploy-like process exists', $source);
+        $this->assertStringContainsString('rm -f "$LOCK" "$META"', $source);
     }
 
     private function readRepoFile(string $relativePath): string
