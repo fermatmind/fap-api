@@ -82470,9 +82470,9 @@
     "depends_on": [
       "MBTI-CMS-26B"
     ],
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "commit_sha": "50e9ea0b6bdfcb2792030a0578c22ad7bfa43ea9",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2838",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -82498,6 +82498,10 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to the authorized importer command, service, test, PR-train metadata, and sidecar record."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR #2838 is open and required GitHub checks are pending."
       }
     },
     "scope_validation": {
@@ -82518,6 +82522,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "The fail-closed importer command/service and regression tests passed syntax, SQLite migration, focused test, real package preflight, Pint, manifest parse, diff, and scope validation. Importer code commit: 50e9ea0b6bdfcb2792030a0578c22ad7bfa43ea9."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened PR #2838 for MBTI-CMS-27A. Required GitHub checks must pass before merge; no production deployment or CMS write is part of this PR."
       }
     ]
   },
