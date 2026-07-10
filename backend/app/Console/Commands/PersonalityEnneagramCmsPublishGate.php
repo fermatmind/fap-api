@@ -12,7 +12,7 @@ use Throwable;
 
 final class PersonalityEnneagramCmsPublishGate extends Command
 {
-    private const OPERATOR_APPROVAL = 'ENNEAGRAM-ZH13-CMS-PUBLISH-GATE-01';
+    private const OPERATOR_APPROVAL = 'ENNEAGRAM-CMS-PUBLISH-GATE-01';
 
     private const WRITE_SAFETY_FLAGS = [
         'no-llms',

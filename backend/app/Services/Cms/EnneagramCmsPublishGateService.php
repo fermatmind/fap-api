@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 final class EnneagramCmsPublishGateService
 {
+    private const SUPPORTED_LOCALES = ['zh-CN', 'en'];
+
     private const FORBIDDEN_ROUTE_PATTERNS = [
         '#/results?(?:/|$)#i',
         '#/orders?(?:/|$)#i',
@@ -63,12 +65,11 @@ final class EnneagramCmsPublishGateService
                 continue;
             }
 
-            // Only zh-CN is supported for publish gate
-            if ($identity['locale'] !== 'zh-CN') {
+            if (! in_array($identity['locale'], self::SUPPORTED_LOCALES, true)) {
                 $errors[] = [
                     'field' => 'recommendations.'.((string) $position).'.target_url',
                     'code' => 'locale_not_supported_for_publish',
-                    'message' => 'Only zh-CN locale is supported for the Enneagram publish gate.',
+                    'message' => 'Only zh-CN and en locales are supported for the Enneagram publish gate.',
                 ];
 
                 continue;
@@ -273,6 +274,8 @@ final class EnneagramCmsPublishGateService
     {
         return (bool) $asset->is_public === true
             && (bool) $asset->index_eligible === true
+            && (bool) $asset->sitemap_eligible === true
+            && (bool) $asset->llms_eligible === false
             && $asset->robots === PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW
             && $asset->launch_state === PersonalityPublicContentAsset::LAUNCH_PUBLISHED;
     }
