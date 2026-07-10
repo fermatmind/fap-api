@@ -232,7 +232,7 @@
     "depends_on": [
       "ENNEAGRAM-EN13-CMS-DRY-RUN-01"
     ],
-    "status": "pending_exact_production_authorization",
+    "status": "committed",
     "commit_sha": null,
     "pr_url": null,
     "failure_reason": null,
@@ -245,8 +245,9 @@
         "evidence": "PR #2840 is merged at 5ccc2988056689ef7608cf144ae60fe109747612 and contained in origin/main."
       },
       "production_authorization": {
-        "status": "pending_exact_cms_write_authorization",
-        "evidence": "The operator explicitly authorized production deploy recovery for caf9a7c6c9cd6281c824c660dc160a77c054f31a but prohibited Enneagram CMS Production Ops and CMS writes during recovery. A separate exact-SHA authorization is still required before dispatching write mode."
+        "status": "pass",
+        "authorized_sha": "caf9a7c6c9cd6281c824c660dc160a77c054f31a",
+        "evidence": "The operator explicitly approved ENNEAGRAM-EN13 CMS import and noindex promotion for the exact deployed SHA and authorized Enneagram CMS Production Ops write for this train item."
       },
       "production_inspect": {
         "status": "fail_closed",
@@ -288,13 +289,25 @@
         "evidence": "GitHub reported success for Deploy production with Deployer, Verify deployed revision, Healthcheck and contract smoke, and Ops entry and asset smoke. A post-run read-only check confirmed the same REVISION, no deploy lock, and zero active deploy-like processes."
       },
       "cms_write_after_repair": {
-        "status": "not_attempted",
-        "evidence": "No Enneagram CMS Production Ops run was dispatched during deploy recovery; the most recent run remains read-only fail-closed run 29081577050."
+        "status": "pass",
+        "inspect_run_id": 29099198242,
+        "write_run_id": 29099293804,
+        "post_write_inspect_run_id": 29099424288,
+        "evidence": "The prewrite inspect matched the exact 13-row source-refresh allowlist. Write mode updated 13 existing content_ready assets, promotion reinspect passed, and promotion write skipped all 13 already-content-ready rows. All stages reported zero publish, index, sitemap, llms, and search release attempts."
+      },
+      "production_cms_state_readback": {
+        "status": "pass",
+        "evidence": "A post-write read-only aggregate found exactly 13 English Enneagram assets (1 hub, 3 centers, 9 core types): all 13 are public content_ready with noindex,follow; index, sitemap, and llms eligibility are false; contract version and package/QA provenance hashes match 13/13. No content bodies, route topology, secrets, or private payloads were emitted."
+      },
+      "repeat_write_idempotency_sidecar": {
+        "status": "external_follow_up_recorded",
+        "required_checks_affected": false,
+        "evidence": "Production MySQL JSON normalization causes four nested JSON fields to compare unequal under strict PHP array comparison, so a repeated draft write would falsely update 13 rows even though promotion is ready. The completed CMS state is correct; repair requires writer/test paths outside this manifest scope and is recorded in generated/pr-train-sidecar-issues."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": false
     },
@@ -334,6 +347,24 @@
         "from": "blocked_unverified_production_revision",
         "to": "pending_exact_production_authorization",
         "note": "Operator-authorized recovery verified no active deploy process, removed only the stale lock owned by run 29091507295, and reran production run 29093607921. Attempt 2 deployed caf9a7c6c9cd6281c824c660dc160a77c054f31a and passed revision, health/contract, and Ops smoke checks. No Enneagram CMS Ops or CMS write was dispatched; exact-SHA CMS write authorization remains pending."
+      },
+      {
+        "at": "2026-07-10T22:16:00+08:00",
+        "from": "pending_exact_production_authorization",
+        "to": "in_progress",
+        "note": "Received exact-SHA authorization for Enneagram CMS Production Ops write against deployed revision caf9a7c6c9cd6281c824c660dc160a77c054f31a."
+      },
+      {
+        "at": "2026-07-10T22:21:00+08:00",
+        "from": "in_progress",
+        "to": "production_operation_completed",
+        "note": "Read-only inspect run 29099198242 matched the exact source-refresh allowlist; write run 29099293804 refreshed 13 content_ready rows and completed guarded promotion reinspect/write with zero publish, index, sitemap, llms, or search side effects; post-write inspect run 29099424288 reported promotion ready for all 13."
+      },
+      {
+        "at": "2026-07-10T22:25:49+08:00",
+        "from": "production_operation_completed",
+        "to": "committed",
+        "note": "Recorded the exact workflow evidence, 13-row noindex CMS aggregate readback, and a non-blocking sidecar for production JSON normalization causing false repeat-update classification. Current CMS state and required operation gates pass."
       }
     ]
   },

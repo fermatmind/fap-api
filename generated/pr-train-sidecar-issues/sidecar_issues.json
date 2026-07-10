@@ -348,5 +348,22 @@
     "required_checks_affected": false,
     "recommended_follow_up": "Repair the content-page publish-canary fixture/provenance contract in a dedicated scoped PR, then restore the full scheduler test file to isolated green.",
     "train_continued": true
+  },
+  {
+    "repo": "fap-api",
+    "pr_id": "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01",
+    "branch": "codex/enneagram-en13-cms-import-promote-01",
+    "blocker_type": "production_mysql_json_normalization_false_update",
+    "evidence": [
+      "Authorized write run 29099293804 succeeded and refreshed exactly 13 existing content_ready/noindex rows; the guarded promotion reinspect passed and promotion write skipped all 13 already-matching rows.",
+      "Post-write inspect run 29099424288 reported promotion state ready, 13 skip_existing_live_match rows, and zero missing, forbidden, stale/invalid, publish, index, sitemap, llms, or search actions.",
+      "A read-only field-name-only comparison found 13/13 draft rows still classified as updates solely because evidence_notes_json, faq_json, internal_links_json, and method_boundary_json compare unequal after production JSON storage normalization.",
+      "The writer currently uses strict PHP array comparison for persisted JSON payloads; production MySQL JSON normalization can reorder associative keys without changing semantic content.",
+      "Read-only aggregate state remains correct: 13/13 rows are public content_ready, noindex,follow, index/sitemap/llms ineligible, and match the authorized package and QA provenance hashes."
+    ],
+    "why_not_current_pr_scope": "The current manifest allows only Enneagram evidence, train metadata, and sidecar paths. Repairing JSON semantic comparison requires changes to the draft writer and focused tests outside this PR scope.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Create a separate scoped backend repair PR that canonicalizes nested JSON before comparison or uses semantic deep equality, adds key-order normalization regression coverage, and preserves all existing fail-closed state and eligibility guards. Require a new exact-SHA authorization for any later production CMS write.",
+    "train_continued": true
   }
 ]

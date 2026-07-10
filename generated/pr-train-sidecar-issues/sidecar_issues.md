@@ -106,6 +106,28 @@
   - Repair the content-page publish-canary fixture/provenance contract in a dedicated scoped PR, then restore the full scheduler test file to isolated green.
 - whether train continued: `true`
 
+## ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01 production JSON normalization idempotency gap
+
+- repo: `fap-api`
+- PR id / branch: `ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01` / `codex/enneagram-en13-cms-import-promote-01`
+- blocker type: `production_mysql_json_normalization_false_update`
+- evidence:
+  - Authorized write run `29099293804` succeeded and refreshed exactly 13 existing `content_ready/noindex` rows; the guarded promotion reinspect passed and promotion write skipped all 13 already-matching rows.
+  - Post-write inspect run `29099424288` reported promotion state `ready`, 13 `skip_existing_live_match` rows, and zero missing, forbidden, stale/invalid, publish, index, sitemap, llms, or search actions.
+  - A read-only field-name-only comparison found 13/13 draft rows still classified as updates solely because `evidence_notes_json`, `faq_json`, `internal_links_json`, and `method_boundary_json` compare unequal after production JSON storage normalization.
+  - The writer currently uses strict PHP array comparison for persisted JSON payloads; production MySQL JSON normalization can reorder associative keys without changing semantic content.
+  - Read-only aggregate state remains correct: 13/13 rows are public `content_ready`, `noindex,follow`, index/sitemap/llms ineligible, and match the authorized package and QA provenance hashes.
+- why not current PR scope:
+  - The current manifest allows only Enneagram evidence, train metadata, and sidecar paths.
+  - Repairing JSON semantic comparison requires changes to the draft writer and focused tests, which are outside this PR scope and must not be mixed into the production-operation closeout.
+- whether required checks are affected: `false`
+  - The authorized inspect, write, promotion reinspect, promotion write, and post-write inspect workflows all passed.
+  - The issue affects repeat-write no-op behavior, not the correctness or safety state of the completed 13-row import/promotion.
+- recommended follow-up:
+  - Create a separate scoped backend repair PR that canonicalizes nested JSON before comparison or uses semantic deep equality, adds key-order normalization regression coverage, and preserves all existing fail-closed state and eligibility guards.
+  - Do not replay production CMS writes merely to test the repair; require a new exact-SHA authorization for any later write.
+- whether train continued: `true`
+
 ## SECURITY-169-API-20 local ACCEPT_H authentication failure
 
 - repo: `fermatmind/fap-api`
