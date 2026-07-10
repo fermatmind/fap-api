@@ -1,0 +1,63 @@
+{
+  "package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+  "outcome": "pass",
+  "generated_at": "2026-07-10T00:00:00Z",
+  "model_sessions": [
+    {
+      "id": "codex-native-neuroticism-raw-2026-07-10",
+      "mode": "codex_native_draft",
+      "external_model": false
+    },
+    {
+      "id": "codex-skeptical-review-neuroticism-2026-07-10",
+      "mode": "codex_skeptical_self_review",
+      "external_model": false
+    },
+    {
+      "id": "codex-repair-neuroticism-2026-07-10",
+      "mode": "codex_repair",
+      "external_model": false
+    }
+  ],
+  "coverage": {
+    "assets": 6,
+    "locale": "zh-CN",
+    "entity_type": "facet",
+    "facet_codes": [
+      "anxiety",
+      "anger",
+      "depression",
+      "self-consciousness",
+      "impulsiveness",
+      "vulnerability"
+    ],
+    "sections_per_asset": 9,
+    "faq_per_asset": 5,
+    "internal_links_per_asset": 7
+  },
+  "checks": {
+    "v1_assets_envelope": "pass",
+    "body_md_only": "pass",
+    "substantive_sections": "pass",
+    "source_traceability": "pass_shared_ledger",
+    "facet_non_equivalence_boundaries": "pass",
+    "private_result_boundary": "pass",
+    "duplicate_template_risk": "pass_no_exact_section_duplicates",
+    "forbidden_claims": "pass",
+    "raw_draft_audited": "pass",
+    "repaired_draft_matches_seed": "pass",
+    "publish_indexability": "blocked_noindex_package_only"
+  },
+  "indexability": {
+    "robots": "noindex,follow",
+    "launch_state": "content_ready",
+    "index_eligible": false,
+    "sitemap_eligible": false,
+    "llms_eligible": false
+  },
+  "blockers": [],
+  "deferred": [
+    "All thirty Chinese Facet content packages are covered after this final domain PR; combined dry-run and production import remain separate follow-up scopes.",
+    "CMS write/import, runtime readback, indexability, sitemap, llms, JSON-LD release, search submission, and deployment remain outside this PR."
+  ]
+}
