@@ -139,6 +139,18 @@ final class CareerSalaryAssetImportService
 
         if ($allSlugsFromFile) {
             $targetSlugs = array_keys($slugsInFileOrder);
+            $allowlist = $this->previewService->previewSlugs();
+            if ($targetSlugs === []) {
+                $errors[] = 'Salary asset target slugs must be configured and non-empty.';
+            }
+            if ($allowlist === []) {
+                $errors[] = 'Salary asset staging preview allowlist must be configured and non-empty.';
+            }
+            foreach ($targetSlugs as $slug) {
+                if (! in_array($slug, $allowlist, true)) {
+                    $errors[] = "{$slug}: slug is not in the salary asset staging preview allowlist.";
+                }
+            }
         }
 
         $sourceFileSha256 = hash_file('sha256', $file) ?: null;
@@ -1171,6 +1183,13 @@ final class CareerSalaryAssetImportService
                 fn (string $slug): string => $this->previewService->normalizeSlug($slug),
                 $requestedSlugs
             )));
+
+        if ($target === []) {
+            $errors[] = 'Salary asset target slugs must be configured and non-empty.';
+        }
+        if ($allowlist === []) {
+            $errors[] = 'Salary asset staging preview allowlist must be configured and non-empty.';
+        }
 
         foreach ($target as $slug) {
             if (! in_array($slug, $allowlist, true)) {

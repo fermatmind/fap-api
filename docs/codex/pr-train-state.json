@@ -42696,6 +42696,17 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "local_validation": {
+        "commands": [
+          "cd backend && php artisan test tests/Feature/Career/CareerSalaryAssetPreviewImportTest.php --no-ansi",
+          "cd backend && php artisan route:list --path=api --except-vendor --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-169-api-14.sqlite php artisan migrate --force --no-interaction",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "git diff --check"
+        ],
+        "evidence": "Focused salary asset tests passed: 20 tests, 177 assertions. Route listing, isolated SQLite migration, and ci_verify_mbti passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42711,6 +42722,11 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-14; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-10T10:03:27+08:00",
+        "note": "Bound salary preview/import targets to configured non-empty allowlist authority, including full-file mode. No CMS, production import, deploy, or external write was performed.",
+        "status": "implementation_validated"
       }
     ],
     "failure_reason": null,
@@ -42722,7 +42738,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "implementation_validated",
     "title": "SECURITY-169-API-14: harden career salary/display asset gates",
     "train_scope": "security_169_fap_api_audit"
   },
