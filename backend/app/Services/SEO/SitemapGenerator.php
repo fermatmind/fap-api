@@ -272,11 +272,12 @@ class SitemapGenerator
                     continue;
                 }
 
-                $canonical = trim((string) data_get(
-                    $this->personalityProfileSeoService->buildMeta($row, $variant),
-                    'canonical',
-                    ''
-                ));
+                $meta = $this->personalityProfileSeoService->buildMeta($row, $variant);
+                if (! $this->personalityVariantAllowsIndexing($row, $variant, $meta)) {
+                    continue;
+                }
+
+                $canonical = trim((string) data_get($meta, 'canonical', ''));
 
                 if ($canonical === '') {
                     continue;
@@ -436,6 +437,10 @@ class SitemapGenerator
                 continue;
             }
 
+            if (! $this->personalityAtComparisonAllowsIndexing($row, $variants)) {
+                continue;
+            }
+
             $slug = strtolower($baseTypeCode).'-a-vs-'.strtolower($baseTypeCode).'-t';
             $lastmod = $this->latestCarbon([
                 $variants['A']->updated_at,
@@ -489,6 +494,50 @@ class SitemapGenerator
         }
 
         return $urls;
+    }
+
+    /**
+     * @param  array<string, mixed>|null  $meta
+     */
+    private function personalityVariantAllowsIndexing(
+        PersonalityProfile $profile,
+        PersonalityProfileVariant $variant,
+        ?array $meta = null,
+    ): bool {
+        $robots = strtolower(trim((string) ($variant->seoMeta?->robots ?? '')));
+        if ($robots === '') {
+            $robots = strtolower(trim((string) data_get(
+                $meta ?? $this->personalityProfileSeoService->buildMeta($profile, $variant),
+                'robots',
+                ''
+            )));
+        }
+
+        return $robots !== '' && ! str_contains($robots, 'noindex');
+    }
+
+    /**
+     * @param  array<string, PersonalityProfileVariant>  $variants
+     */
+    private function personalityAtComparisonAllowsIndexing(PersonalityProfile $profile, array $variants): bool
+    {
+        foreach (['A', 'T'] as $variantCode) {
+            $variant = $variants[$variantCode] ?? null;
+            if (! $variant instanceof PersonalityProfileVariant) {
+                return false;
+            }
+
+            if (! $this->personalityVariantAllowsIndexing($profile, $variant)) {
+                return false;
+            }
+        }
+
+        $comparisonSection = $profile->sections->first(
+            static fn (mixed $section): bool => (string) ($section->section_key ?? '') === 'mbti64_comparison_a_vs_t'
+                && (bool) ($section->is_enabled ?? false)
+        );
+
+        return data_get($comparisonSection?->payload_json, 'indexability_held') !== true;
     }
 
     private function getCareerJobUrls(): array

@@ -9,6 +9,7 @@ use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
 use App\Models\ContentPage;
 use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileSection;
 use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantSeoMeta;
@@ -596,6 +597,57 @@ class SitemapGeneratorTest extends TestCase
         $this->assertSame('AboutPage', data_get($seoService->buildJsonLd($eligibleEn, $eligibleEnVariant), '@type'));
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleEn, $eligibleEnVariant), 'canonical'), $xml);
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, $eligibleZhVariant), 'canonical'), $xml);
+    }
+
+    public function test_generate_excludes_held_personality_variants_and_at_comparisons(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+
+        $profile = $this->createPersonalityProfile([
+            'type_code' => 'ISTJ',
+            'slug' => 'istj',
+            'locale' => 'zh-CN',
+            'is_indexable' => true,
+        ]);
+        $assertive = $this->createPersonalityVariant($profile, [
+            'canonical_type_code' => 'ISTJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'ISTJ-A',
+        ]);
+        $turbulent = $this->createPersonalityVariant($profile, [
+            'canonical_type_code' => 'ISTJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'ISTJ-T',
+        ]);
+        $this->createPersonalityVariantSeoMeta($assertive, [
+            'canonical_url' => 'https://staging.fermatmind.com/zh/personality/istj-a',
+            'robots' => 'noindex,follow',
+        ]);
+        $this->createPersonalityVariantSeoMeta($turbulent, [
+            'canonical_url' => 'https://staging.fermatmind.com/zh/personality/istj-t',
+            'robots' => 'index,follow',
+        ]);
+
+        PersonalityProfileSection::query()->create([
+            'org_id' => 0,
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'mbti64_comparison_a_vs_t',
+            'title' => 'ISTJ-A vs ISTJ-T',
+            'render_variant' => 'rich_text',
+            'payload_json' => ['indexability_held' => true],
+            'sort_order' => 920,
+            'is_enabled' => true,
+        ]);
+
+        $seoService = app(PersonalityProfileSeoService::class);
+        $this->assertSame('noindex,follow', data_get($seoService->buildMeta($profile, $assertive), 'robots'));
+        $this->assertSame('index,follow', data_get($seoService->buildMeta($profile, $turbulent), 'robots'));
+
+        $xml = (string) (app(SitemapGenerator::class)->generate()['xml'] ?? '');
+
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/zh/personality/istj-a</loc>', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/zh/personality/istj-t</loc>', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/zh/personality/istj-a-vs-istj-t</loc>', $xml);
     }
 
     public function test_generate_includes_only_indexable_global_topic_urls_with_locale_aware_paths(): void
