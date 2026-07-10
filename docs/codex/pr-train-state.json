@@ -82501,7 +82501,12 @@
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "PR #2838 is open and required GitHub checks are pending."
+        "evidence": "PR #2838 is open. The initial verify-bigfive failure was caused by this PR's two new importer files being absent from the shared non-runtime classifier; a scoped classifier regression fix was pushed and the required checks were re-requested."
+      },
+      "runtime_freeze_ci_fix": {
+        "status": "pass_with_phpunit_warnings",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-ci-bigfive-local.sqlite QUEUE_CONNECTION=sync FAP_PACKS_DRIVER=local FAP_PACKS_ROOT=$PWD/content_packages CONTENT_LOADER_CACHE_STORE=array MBTI_RESPONSE_CACHE_STORE=array php artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi",
+        "evidence": "PASS: added the two fail-closed importer files to the Big Five runtime-freeze classifier and a regression test. The CI-equivalent Big Five suite passed locally; PHPUnit emitted known local .env/path warnings only."
       }
     },
     "scope_validation": {
@@ -82528,6 +82533,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened PR #2838 for MBTI-CMS-27A. Required GitHub checks must pass before merge; no production deployment or CMS write is part of this PR."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "pr_open",
+        "to": "current_scope_ci_fix_local_checks_passed",
+        "note": "Inspected verify-bigfive failure. The two new importer files were not recognized as non-runtime by the shared Big Five classifier. Added a scoped allowlist and regression test; focused and CI-equivalent Big Five validation passed locally."
       }
     ]
   },

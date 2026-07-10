@@ -402,6 +402,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_content15_production_importer_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityMbtiContent15ProductionImport.php',
+            'backend/app/Services/Cms/MbtiContent15ProductionCmsImportService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_cross_type_authority_storage_readmodel_files(): void
     {
         $changed = [
@@ -5160,6 +5170,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiContent15ProductionImporterFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiCrossTypeAuthorityStorageReadmodelFile($file)) {
                 continue;
             }
@@ -6722,6 +6736,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbtiContent15MixedImportPreflight.php',
             'backend/app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php',
+        ], true);
+    }
+
+    private function isMbtiContent15ProductionImporterFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbtiContent15ProductionImport.php',
+            'backend/app/Services/Cms/MbtiContent15ProductionCmsImportService.php',
         ], true);
     }
 

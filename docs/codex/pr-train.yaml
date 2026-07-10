@@ -37925,6 +37925,7 @@ prs:
       - backend/app/Console/Commands/PersonalityMbtiContent15ProductionImport.php
       - backend/app/Services/Cms/MbtiContent15ProductionCmsImportService.php
       - backend/tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - generated/pr-train-sidecar-issues/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -37938,6 +37939,7 @@ prs:
       - php -l backend/tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityMbtiContent15ProductionImportCommandTest|PersonalityMbtiContent15MixedImportPreflightCommandTest|MbtiCrossTypeComparisonAuthorityReadModelTest' --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_content15_production_importer_files --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
       - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiContent15ProductionImport.php app/Services/Cms/MbtiContent15ProductionCmsImportService.php tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
