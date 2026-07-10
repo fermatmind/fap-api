@@ -31676,7 +31676,7 @@
       "local_validation_passed": true,
       "post_merge_revalidated": null
     },
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "PR-EQ-ASSET-SCI-08: repair EQ career_environment decision boundaries",
     "transitions": [
       {
@@ -83563,12 +83563,16 @@
       "core_ci": {
         "status": "pass",
         "evidence": "After rebasing onto origin/main caf9a7c6c and using a physical worktree-local vendor directory, backend/scripts/ci_verify_mbti.sh passed end to end. The personality full-32 authority gate passed 59 tests and 4847 assertions."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All 15 GitHub checks passed; the PR is mergeable, CLEAN, non-draft, and has no blocking review decision."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -83613,6 +83617,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Pushed the scoped branch and opened PR #2885 with validation evidence and explicit deferred CMS/runtime/SEO/deploy work."
+      },
+      {
+        "at": "2026-07-10T14:29:16Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All 15 GitHub checks passed and scope, changed files, PR body, review state, branch policy, and squash merge policy were revalidated."
       }
     ]
   }
