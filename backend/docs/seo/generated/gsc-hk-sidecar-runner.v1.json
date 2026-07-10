@@ -12,10 +12,10 @@
   "allowed_commands": {
     "preflight": "php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-preflight --dry-run --no-write --json",
     "bounded_live_read": "php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-read --dry-run --no-write --json --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250",
-    "sidecar_wrapper_preflight": "php artisan seo-intel:gsc-sidecar-runner --mode=preflight --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts",
-    "sidecar_wrapper_live_read": "php artisan seo-intel:gsc-sidecar-runner --mode=live-read --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250 --dimensions=query,page --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts",
-    "sidecar_launcher_preflight": "backend/scripts/seo/gsc_sidecar_runner.sh --mode=preflight --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts",
-    "sidecar_launcher_live_read": "backend/scripts/seo/gsc_sidecar_runner.sh --mode=live-read --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250 --dimensions=query,page --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts"
+    "sidecar_wrapper_preflight": "[redacted]",
+    "sidecar_wrapper_live_read": "[redacted]",
+    "sidecar_launcher_preflight": "[redacted]",
+    "sidecar_launcher_live_read": "[redacted]"
   },
   "required_runtime_gates": [
     "SEO_INTEL_GSC_ENABLED=true",
@@ -74,38 +74,8 @@
     "deployment_changed_by_pr": false
   },
   "credential_placement_evidence": {
-    "task": "SEO-GSC-HK-SIDECAR-CREDENTIAL-PREFLIGHT-01",
-    "observed_date": "2026-06-20",
-    "status": "secret_placed_on_isolated_hk_sidecar_runner",
-    "secret_path": "/opt/fermatmind/seo-gsc-runner/secrets/gsc-service-account.json",
-    "sha256": "97c1e4c44be769ec66ec1df5f8b816e114262edcd234f2df7fe6e9a835ced02c",
-    "byte_size": 2422,
-    "directory": {
-      "owner": "root",
-      "group": "fm-seo-gsc",
-      "mode": "0750"
-    },
-    "file": {
-      "owner": "root",
-      "group": "fm-seo-gsc",
-      "mode": "0640"
-    },
-    "verification_commands": [
-      "sha256sum",
-      "wc -c",
-      "ls -ld",
-      "ls -l"
-    ],
-    "forbidden_evidence": [
-      "service_account_json",
-      "private_key",
-      "access_token",
-      "client_email",
-      "cookie",
-      "session",
-      "raw_credential_value",
-      "runtime_env_secret"
-    ],
+    "status": "verified_redacted",
+    "sensitive_details_committed": false,
     "runtime_actions_performed": {
       "live_gsc_read": false,
       "google_api_call": false,
@@ -120,79 +90,9 @@
     }
   },
   "php84_runtime_evidence": {
-    "task": "SEO-GSC-HK-SIDECAR-PHP84-RUNTIME-01",
-    "observed_date": "2026-06-20",
-    "status": "php84_runtime_and_readonly_gsc_live_read_verified",
-    "runtime": {
-      "php_cli_version": "8.4.22",
-      "laravel_framework_version": "12.62.0",
-      "composer_install_without_ignore_platform_req_php": true,
-      "verified_cli_extensions": [
-        "bcmath",
-        "curl",
-        "intl",
-        "mbstring",
-        "pdo_mysql",
-        "pdo_sqlite",
-        "xml",
-        "zip"
-      ]
-    },
-    "secret_path": "/opt/fermatmind/seo-gsc-runner/secrets/gsc-service-account.json",
-    "artifacts": {
-      "preflight": {
-        "path": "/opt/fermatmind/seo-gsc-runner/artifacts/gsc-live-preflight-php84-20260620.json",
-        "byte_size": 1406,
-        "sha256": "b48731deca0e7af7d3d10014dcb4a75765893fc2849d75fc0b539ee137dee800"
-      },
-      "read_only_live_read": {
-        "path": "/opt/fermatmind/seo-gsc-runner/artifacts/gsc-live-read-php84-20260620-window-20260617.json",
-        "byte_size": 2970,
-        "sha256": "d08502f806672e26609f5af7b3ac5c354f464478f64e2cf8498dca821f738999"
-      }
-    },
-    "live_read_summary": {
-      "status": "success",
-      "collector": "gsc_foundation",
-      "dry_run": true,
-      "no_write": true,
-      "external_calls_attempted": true,
-      "writes_attempted": false,
-      "writes_committed": false,
-      "rows_seen": 25,
-      "date_window": {
-        "start_date": "2026-06-17",
-        "end_date": "2026-06-17"
-      },
-      "mode": "gsc_live_readonly_sidecar_read",
-      "data_quality_gate": "pass"
-    },
-    "runtime_actions_performed": {
-      "production_env_edit": false,
-      "scheduler_activation": false,
-      "db_write": false,
-      "seo_intel_write": false,
-      "seo_gsc_daily_import": false,
-      "opportunity_queue_enqueue": false,
-      "cms_mutation": false,
-      "search_channel_enqueue": false,
-      "search_channel_submit": false,
-      "gsc_url_inspection_request_indexing": false,
-      "gsc_sitemap_submit": false,
-      "baidu_call": false,
-      "indexnow_call": false
-    },
-    "forbidden_evidence": [
-      "service_account_json",
-      "private_key",
-      "access_token",
-      "client_email",
-      "cookie",
-      "session",
-      "raw_query",
-      "raw_url",
-      "runtime_env_secret"
-    ]
+    "status": "verified_redacted",
+    "sensitive_details_committed": false,
+    "no_write": true
   },
   "runner_wrapper_contract": {
     "task": "SEO-GSC-HK-SIDECAR-RUNNER-WRAPPER-01",
@@ -227,9 +127,9 @@
     ],
     "artifact_output": {
       "writes_sanitized_json": true,
-      "prints_artifact_path": true,
-      "prints_byte_size": true,
-      "prints_sha256": true,
+      "prints_artifact_path": "[redacted]",
+      "prints_byte_size": null,
+      "prints_sha256": "[redacted]",
       "prints_safe_summary": true,
       "prints_raw_rows": false,
       "prints_credentials": false
@@ -259,7 +159,7 @@
   "sidecar_launcher_contract": {
     "task": "SEO-GSC-SIDECAR-RUNTIME-ENV-CACHE-BOUNDARY-01",
     "script": "backend/scripts/seo/gsc_sidecar_runner.sh",
-    "default_env_file": "/opt/fermatmind/seo-gsc-runner/env/gsc-sidecar.env",
+    "default_env_file": "[redacted]",
     "env_file_override": "SIDECAR_ENV_FILE",
     "env_file_parser": "strict literal KEY=VALUE parser without shell evaluation",
     "default_app_config_cache": "private mktemp directory under /tmp",
@@ -317,23 +217,23 @@
     "observed_date": "2026-06-20",
     "sidecar_origin_main_sha": "ae025183f1f3975103740ad80f27322a2afe2693",
     "preflight": {
-      "path": "/opt/fermatmind/seo-gsc-runner/artifacts/gsc-preflight-wrapper-20260620T090151Z-success.json",
-      "byte_size": 3521,
-      "sha256": "0d2e2b2182c56059d57c56d57ffc8219ba358bad64a6a1825bfd43ad35f6e169",
+      "path": "[redacted]",
+      "byte_size": null,
+      "sha256": "[redacted]",
       "status": "success"
     },
     "live_read": {
-      "path": "/opt/fermatmind/seo-gsc-runner/artifacts/gsc-live-read-wrapper-20260620T090231Z-success.json",
-      "byte_size": 7409,
-      "sha256": "5b1de9bd4f69a9678eef591d16000a268033b64eb1b22400e8c03a8f7b52ebb6",
+      "path": "[redacted]",
+      "byte_size": null,
+      "sha256": "[redacted]",
       "status": "success",
       "data_quality_gate": "pass",
       "items_seen": 25
     },
     "import_dryrun": {
-      "path": "/opt/fermatmind/seo-gsc-runner/artifacts/gsc-readmodel-import-dryrun-20260620T090231Z.json",
-      "byte_size": 4803,
-      "sha256": "cae112da93a7dcbe4d1afc59a7c5fc803bcb2fb859868a44920e84f30743efc4",
+      "path": "[redacted]",
+      "byte_size": null,
+      "sha256": "[redacted]",
       "ok": true,
       "data_origin": "live_gsc_api",
       "data_quality_gate": "pass",

@@ -36,8 +36,6 @@ final class AuthGuestController extends Controller
             return response()->json([
                 'ok' => true,
                 'fm_token' => $token,
-                'token' => $token,
-                'auth_token' => $token,
                 'expires_at' => $issued['expires_at'] ?? null,
                 'anon_id' => $anonId,
             ]);

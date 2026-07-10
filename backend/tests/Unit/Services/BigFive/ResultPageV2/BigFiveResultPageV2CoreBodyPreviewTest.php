@@ -1246,6 +1246,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_security_169_guest_token_response_hardening(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/AuthGuestController.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_content_release_revalidate_automation_files(): void
     {
         $changed = [
@@ -5390,6 +5399,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSecurity169GuestTokenResponseHardeningFile($file)) {
+                continue;
+            }
+
             if ($this->isCiScaleImpactCommandFile($file)) {
                 continue;
             }
@@ -7090,6 +7103,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Http/Middleware/ResolveAnonId.php',
             'backend/app/Http/Requests/V0_3/StartAttemptRequest.php',
         ], true);
+    }
+
+    private function isSecurity169GuestTokenResponseHardeningFile(string $file): bool
+    {
+        return $file === 'backend/app/Http/Controllers/API/V0_3/AuthGuestController.php';
     }
 
     private function isCiScaleImpactCommandFile(string $file): bool

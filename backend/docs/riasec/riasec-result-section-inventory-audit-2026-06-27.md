@@ -34,7 +34,7 @@ Not allowed in this PR:
 
 Chrome read-only inspection covered a current RIASEC result page:
 
-- URL: `https://fermatmind.com/zh/result/6440ed3f-f07e-46fc-9232-fca3a5ceb541`
+- URL: `[redacted private result URL]`
 - Result code shown: `RIA`
 - Form shown: `60题标准版 · 60题 · 约8分钟`
 - Score bars shown: `R=100, I=100, A=100, S=100, E=100, C=100`
@@ -67,7 +67,7 @@ Share button observation: clicking `分享结果` changed the button state to `�
 
 ### PDF Observation
 
-The local PDF at `/Users/rainie/Desktop/霍兰德.pdf` was reviewed as rendered evidence.
+An operator-local PDF was reviewed as rendered evidence; its filesystem path is intentionally not committed.
 
 - The PDF has 6 pages.
 - Page 1 contains the result card, six bars, and the start of `深度内容`.
