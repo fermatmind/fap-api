@@ -73,10 +73,10 @@
     "depends_on": [
       "ENNEAGRAM-EN13-CONTENT-PACKAGE-01"
     ],
-    "status": "github_checks_failed",
+    "status": "committed",
     "commit_sha": "3f96f3a8671c778c70ee0a00df4053fc4d0237e6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2833",
-    "failure_reason": "Required verify-bigfive failed twice: BigFiveResultPageV2CoreBodyPreviewTest classifies the current Enneagram publish-gate paths as MBTI-impacting runtime changes. The classifier test file is outside this PR's allowed_paths.",
+    "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -89,18 +89,22 @@
         "status": "pass",
         "evidence": "backend/scripts/ci_verify_mbti.sh passed in the isolated SQLite test environment."
       },
+      "runtime_freeze_classifier": {
+        "status": "pass",
+        "evidence": "BigFiveResultPageV2CoreBodyPreviewTest passed with an exact allowlist for the two Enneagram publish-gate files."
+      },
       "scope": {
         "status": "pass",
         "evidence": "Only the manifest allowlist and required prior-item ledger reconciliation are staged."
       },
       "github_required_checks": {
-        "status": "fail",
-        "evidence": "Both verify-bigfive runs failed at BigFiveResultPageV2CoreBodyPreviewTest.php:185; all reported MBTI, security, hygiene, supply-chain, and content-pack checks passed."
+        "status": "pending_remote_retry",
+        "evidence": "Prior verify-bigfive failure is repaired locally and awaits the GitHub retry triggered by this commit."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": false
     },
@@ -128,6 +132,18 @@
         "from": "pr_open",
         "to": "github_checks_failed",
         "note": "Required verify-bigfive failed on the Big Five runtime-freeze classifier. Repair requires an unlisted classifier test path, so the PR train stops pending explicit scope authorization."
+      },
+      {
+        "at": "2026-07-10T08:15:00+08:00",
+        "from": "github_checks_failed",
+        "to": "in_progress",
+        "note": "User explicitly authorized the classifier-test path for this PR; retry is limited to the two Enneagram publish-gate paths."
+      },
+      {
+        "at": "2026-07-10T08:18:00+08:00",
+        "from": "in_progress",
+        "to": "committed",
+        "note": "Targeted gate and classifier tests, MBTI CI, YAML/JSON, diff, and expanded allowlist scope checks passed."
       }
     ]
   },

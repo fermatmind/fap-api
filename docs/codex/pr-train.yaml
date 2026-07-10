@@ -38041,7 +38041,7 @@ prs:
     title: "ENNEAGRAM-EN13-PUBLISH-GATE-01: permit reviewed English assets through publish gate"
     train_scope: enneagram_en13_publish_gate
     status: pending_dependency
-    allowed_paths: [backend/app/Services/Cms/EnneagramCmsPublishGateService.php, backend/app/Console/Commands/PersonalityEnneagramCmsPublishGate.php, backend/tests/Feature/Console/PersonalityEnneagramCmsPublishGateCommandTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
+    allowed_paths: [backend/app/Services/Cms/EnneagramCmsPublishGateService.php, backend/app/Console/Commands/PersonalityEnneagramCmsPublishGate.php, backend/tests/Feature/Console/PersonalityEnneagramCmsPublishGateCommandTest.php, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
     validation: ["cd backend && php artisan test --filter=PersonalityEnneagramCmsPublishGateCommandTest --no-ansi", "cd backend && bash scripts/ci_verify_mbti.sh", "git diff --check"]
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
