@@ -37,6 +37,7 @@ final class EnneagramInactiveCandidateReleaseImporter
         'import_diff_summary.json',
         'replacement_additive_map.json',
         'source_mapping_report.json',
+        'forbidden_claim_report.json',
         'legacy_residual_scan.json',
         'fc144_boundary_report.json',
         'phase8b_summary.json',
@@ -112,6 +113,7 @@ final class EnneagramInactiveCandidateReleaseImporter
         $importDiffSummary = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'import_diff_summary.json');
         $replacementAdditiveMap = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'replacement_additive_map.json');
         $sourceMappingReport = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'source_mapping_report.json');
+        $forbiddenClaimReport = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'forbidden_claim_report.json');
         $legacyResidualScan = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'legacy_residual_scan.json');
         $fc144BoundaryReport = $this->decodeJsonFile($candidateDir.DIRECTORY_SEPARATOR.'fc144_boundary_report.json');
 
@@ -144,7 +146,7 @@ final class EnneagramInactiveCandidateReleaseImporter
         }
 
         $this->assertLaunchScope($candidateManifest);
-        $this->assertGovernance($candidateManifest, $phase8bSummary, $importDiffSummary, $replacementAdditiveMap, $sourceMappingReport, $legacyResidualScan, $fc144BoundaryReport);
+        $this->assertGovernance($candidateManifest, $phase8bSummary, $importDiffSummary, $replacementAdditiveMap, $sourceMappingReport, $forbiddenClaimReport, $legacyResidualScan, $fc144BoundaryReport);
 
         $runtimeContextBefore = $this->registryReleaseResolver->runtimeRegistryContext(self::PACK_VERSION);
         $releaseId = $this->deterministicReleaseId($candidateManifestHashActual);
@@ -164,6 +166,7 @@ final class EnneagramInactiveCandidateReleaseImporter
             'candidate_source_directory' => $candidateDir,
             'candidate_manifest_sha256' => $candidateManifestHashActual,
             'runtime_registry_manifest_sha256' => $expectedRuntimeRegistryHash,
+            'forbidden_claim_report_sha256' => hash_file('sha256', $candidateDir.DIRECTORY_SEPARATOR.'forbidden_claim_report.json') ?: '',
             'candidate_payload_count' => count($payloadFiles),
             'out_of_launch_scope' => array_values((array) ($candidateManifest['out_of_launch_scope'] ?? [])),
             'replacement_coverage' => $candidateManifest['replacement_coverage'] ?? [],
@@ -272,6 +275,7 @@ final class EnneagramInactiveCandidateReleaseImporter
                 'out_of_launch_scope' => array_values((array) ($candidateManifest['out_of_launch_scope'] ?? [])),
             ],
             'fc144_boundary_violation_count' => (int) ($fc144BoundaryReport['violation_count'] ?? 0),
+            'forbidden_claim_violation_count' => $this->forbiddenClaimViolationCount($forbiddenClaimReport),
         ];
 
         $this->writeReportFiles($outputDir, $summary, $releasePayload, $importDiffSummary);
@@ -311,6 +315,7 @@ final class EnneagramInactiveCandidateReleaseImporter
      * @param  array<string,mixed>  $importDiffSummary
      * @param  array<string,mixed>  $replacementAdditiveMap
      * @param  array<string,mixed>  $sourceMappingReport
+     * @param  array<string,mixed>  $forbiddenClaimReport
      * @param  array<string,mixed>  $legacyResidualScan
      * @param  array<string,mixed>  $fc144BoundaryReport
      */
@@ -320,6 +325,7 @@ final class EnneagramInactiveCandidateReleaseImporter
         array $importDiffSummary,
         array $replacementAdditiveMap,
         array $sourceMappingReport,
+        array $forbiddenClaimReport,
         array $legacyResidualScan,
         array $fc144BoundaryReport,
     ): void {
@@ -363,9 +369,28 @@ final class EnneagramInactiveCandidateReleaseImporter
             throw new RuntimeException('Legacy residual scan is not clean.');
         }
 
+        if ($this->forbiddenClaimViolationCount($forbiddenClaimReport) !== 0) {
+            throw new RuntimeException('Forbidden claim report is not clean.');
+        }
+
         if ((int) ($fc144BoundaryReport['violation_count'] ?? -1) !== 0) {
             throw new RuntimeException('FC144 boundary report is not clean.');
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $report
+     */
+    private function forbiddenClaimViolationCount(array $report): int
+    {
+        $counts = [];
+        foreach (['violation_count', 'forbidden_claim_violation_count', 'failure_count', 'hit_count'] as $key) {
+            if (array_key_exists($key, $report)) {
+                $counts[] = (int) $report[$key];
+            }
+        }
+
+        return $counts === [] ? -1 : max($counts);
     }
 
     private function deterministicReleaseId(string $candidateManifestHashActual): string

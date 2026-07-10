@@ -18,8 +18,8 @@ final class EnneagramActivateInactiveCandidateRelease extends Command
         {--runtime-registry-sha256= : Expected runtime registry manifest SHA256}
         {--output-dir= : Report output directory}
         {--actor=ops : Operator label recorded in release snapshots}
-        {--use-pending-gate : Load locked release/hash contract from the singleton pending production gate}
-        {--approval-phrase= : Exact human approval phrase for the pending gate}
+        {--use-pending-gate : Require the singleton pending production gate in addition to exact release/hash confirmations}
+        {--pending-gate-id= : Exact pending gate id to consume}
         {--json : Emit JSON summary}';
 
     protected $description = 'Activate a validated ENNEAGRAM inactive candidate release with exact hash and release-id confirmations.';
@@ -34,10 +34,20 @@ final class EnneagramActivateInactiveCandidateRelease extends Command
     public function handle(): int
     {
         $usePendingGate = (bool) $this->option('use-pending-gate');
+        $releaseId = trim((string) $this->option('release-id'));
+        $confirmReleaseId = trim((string) $this->option('confirm-release-id'));
+        $candidateManifestSha256 = trim((string) $this->option('candidate-manifest-sha256'));
+        $runtimeRegistrySha256 = trim((string) $this->option('runtime-registry-sha256'));
         $pendingGateId = null;
         if ($usePendingGate) {
             try {
-                $pendingGate = $this->pendingGateStore->consume(trim((string) $this->option('approval-phrase')));
+                $pendingGate = $this->pendingGateStore->consume(
+                    trim((string) $this->option('pending-gate-id')),
+                    $releaseId,
+                    $confirmReleaseId,
+                    $candidateManifestSha256,
+                    $runtimeRegistrySha256,
+                );
             } catch (RuntimeException $e) {
                 $this->components->error($e->getMessage());
 
@@ -49,11 +59,6 @@ final class EnneagramActivateInactiveCandidateRelease extends Command
             $confirmReleaseId = $pendingGate['confirm_release_id'];
             $candidateManifestSha256 = $pendingGate['candidate_manifest_sha256'];
             $runtimeRegistrySha256 = $pendingGate['runtime_registry_sha256'];
-        } else {
-            $releaseId = trim((string) $this->option('release-id'));
-            $confirmReleaseId = trim((string) $this->option('confirm-release-id'));
-            $candidateManifestSha256 = trim((string) $this->option('candidate-manifest-sha256'));
-            $runtimeRegistrySha256 = trim((string) $this->option('runtime-registry-sha256'));
         }
         $outputDir = trim((string) $this->option('output-dir'));
         if ($outputDir === '') {

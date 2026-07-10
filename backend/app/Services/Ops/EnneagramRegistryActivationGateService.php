@@ -593,6 +593,13 @@ final class EnneagramRegistryActivationGateService
             'runtime_registry_manifest_hash_actual' => $runtimeRegistryManifestHashActual,
             'candidate_payload_count' => count($payloadFiles),
             'forbidden_claim_violation_count' => $this->forbiddenClaimViolationCount($forbiddenClaimReport),
+            'forbidden_claim_report_present' => is_file($forbiddenClaimReportPath),
+            'forbidden_claim_report_hash_actual' => is_file($forbiddenClaimReportPath)
+                ? (hash_file('sha256', $forbiddenClaimReportPath) ?: '')
+                : '',
+            'forbidden_claim_report_hash_expected' => $release instanceof ContentPackRelease
+                ? trim((string) data_get($release->manifest_json, 'forbidden_claim_report_sha256', ''))
+                : '',
             'fc144_boundary_violation_count' => (int) ($fc144BoundaryReport['violation_count'] ?? 0),
         ];
     }
@@ -608,6 +615,16 @@ final class EnneagramRegistryActivationGateService
 
         if ((string) ($inspection['release_action'] ?? '') !== 'enneagram_registry_import_inactive_candidate') {
             throw new RuntimeException('Release is not an inactive candidate import.');
+        }
+
+        if (($inspection['forbidden_claim_report_present'] ?? false) !== true) {
+            throw new RuntimeException('Inactive candidate forbidden claim report is missing.');
+        }
+
+        $expectedHash = (string) ($inspection['forbidden_claim_report_hash_expected'] ?? '');
+        $actualHash = (string) ($inspection['forbidden_claim_report_hash_actual'] ?? '');
+        if ($expectedHash === '' || $actualHash === '' || ! hash_equals($expectedHash, $actualHash)) {
+            throw new RuntimeException('Inactive candidate forbidden claim report hash mismatch.');
         }
     }
 
@@ -715,13 +732,14 @@ final class EnneagramRegistryActivationGateService
      */
     private function forbiddenClaimViolationCount(array $forbiddenClaimReport): int
     {
-        foreach (['violation_count', 'forbidden_claim_violation_count', 'failure_count'] as $key) {
+        $counts = [];
+        foreach (['violation_count', 'forbidden_claim_violation_count', 'failure_count', 'hit_count'] as $key) {
             if (array_key_exists($key, $forbiddenClaimReport)) {
-                return (int) $forbiddenClaimReport[$key];
+                $counts[] = (int) $forbiddenClaimReport[$key];
             }
         }
 
-        return 0;
+        return $counts === [] ? -1 : max($counts);
     }
 
     private function assertControlledSqlite(): void

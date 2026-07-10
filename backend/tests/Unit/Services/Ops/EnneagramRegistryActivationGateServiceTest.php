@@ -228,6 +228,28 @@ final class EnneagramRegistryActivationGateServiceTest extends TestCase
         );
     }
 
+    public function test_inactive_candidate_activation_rejects_tampered_clean_forbidden_claim_report(): void
+    {
+        $fixture = $this->importInactiveFixture('service_production_activation_tampered_forbidden_claim');
+        $hashes = $this->importedCandidateHashes($fixture['storage_path']);
+        File::put(
+            storage_path('app/'.$fixture['storage_path'].'/candidate/forbidden_claim_report.json'),
+            json_encode(['violation_count' => 0, 'tampered' => true], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)
+        );
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Inactive candidate forbidden claim report hash mismatch.');
+
+        app(EnneagramRegistryActivationGateService::class)->activateInactiveCandidateRelease(
+            $fixture['release_id'],
+            $fixture['release_id'],
+            $hashes['candidate_manifest_sha256'],
+            $hashes['runtime_registry_manifest_sha256'],
+            $fixture['output_dir'].'/production_activate_tampered_forbidden_claim',
+            'ops_activation_test'
+        );
+    }
+
     public function test_inactive_candidate_rollback_restores_recorded_previous_release(): void
     {
         $previous = $this->createPublishedReleaseFixture('enneagram_previous_active_for_inactive_candidate_rollback');

@@ -69,14 +69,16 @@ final class EnneagramResultPageProductionManualGateRunbookTest extends TestCase
 
         $this->assertTrue((bool) ($summary['ok'] ?? false));
         $this->assertTrue((bool) data_get($summary, 'summary.pending_gate_written', false));
-        $this->assertSame(EnneagramResultPagePendingProductionGateStore::APPROVAL_PHRASE, data_get($summary, 'summary.approval_phrase_required'));
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) data_get($summary, 'summary.pending_gate_id_required'));
+        $this->assertTrue((bool) data_get($summary, 'summary.locked_contract_resubmission_required', false));
 
         $packet = $this->readJson(storage_path('app/'.EnneagramResultPagePendingProductionGateStore::DEFAULT_RELATIVE_PATH));
         $this->assertSame('pending', $packet['status'] ?? null);
         $this->assertTrue((bool) ($packet['single_pending_gate'] ?? false));
-        $this->assertSame('我同意', $packet['approval_phrase'] ?? null);
+        $this->assertSame($packet['pending_gate_id'] ?? null, data_get($summary, 'summary.pending_gate_id_required'));
+        $this->assertArrayNotHasKey('approval_phrase', $packet);
         $this->assertSame(EnneagramResultPageProductionManualGateRunbook::EXPECTED_RELEASE_ID, data_get($packet, 'locked_contract.release_id'));
-        $this->assertTrue((bool) data_get($packet, 'authorization_scope.phrase_authorizes_only_this_pending_gate', false));
+        $this->assertTrue((bool) data_get($packet, 'authorization_scope.all_locked_fields_must_be_resubmitted', false));
         $this->assertFalse((bool) data_get($packet, 'authorization_scope.permanent_authorization', true));
         $this->assertFalse((bool) data_get($packet, 'authorization_scope.agent_may_decide_production_rollout', true));
     }

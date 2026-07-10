@@ -81,7 +81,6 @@ final class EnneagramResultPageProductionManualGateRunbook
         $pendingGate = [
             'requested' => $writePendingGate,
             'written' => false,
-            'approval_phrase' => EnneagramResultPagePendingProductionGateStore::APPROVAL_PHRASE,
             'ttl_minutes' => $pendingGateTtlMinutes,
         ];
         if ($writePendingGate) {
@@ -143,7 +142,8 @@ final class EnneagramResultPageProductionManualGateRunbook
                 'rollback_window_recorded' => $rollbackWindow !== '',
                 'pending_gate_written' => (bool) ($pendingGate['written'] ?? false),
                 'pending_gate_expires_at' => $pendingGate['expires_at'] ?? null,
-                'approval_phrase_required' => EnneagramResultPagePendingProductionGateStore::APPROVAL_PHRASE,
+                'pending_gate_id_required' => $pendingGate['pending_gate_id'] ?? null,
+                'locked_contract_resubmission_required' => true,
             ],
             'errors' => $errors,
             'negative_guarantees' => $this->negativeGuarantees(),

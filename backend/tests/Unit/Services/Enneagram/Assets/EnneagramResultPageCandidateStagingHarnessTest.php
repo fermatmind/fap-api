@@ -145,6 +145,25 @@ final class EnneagramResultPageCandidateStagingHarnessTest extends TestCase
         $this->assertContains('metadata_leak_count_nonzero', $summary['errors'] ?? []);
     }
 
+    public function test_harness_fails_closed_without_forbidden_claim_report(): void
+    {
+        $fixture = $this->makeCandidateFixture('harness_missing_forbidden_claim_report');
+        File::delete($fixture['candidate_dir'].'/forbidden_claim_report.json');
+
+        $summary = app(EnneagramResultPageCandidateStagingHarness::class)->run([
+            'run_id' => 'missing-forbidden-claim-run',
+            'artifact_dir' => storage_path('framework/testing/enneagram_candidate_staging_harness_artifacts/missing_forbidden_claim'),
+            'candidate_dir' => $fixture['candidate_dir'],
+            'output_dir' => $fixture['output_dir'],
+            'expected_candidate_manifest_sha256' => $fixture['contracts']['candidate_manifest_sha256'],
+            'expected_runtime_registry_sha256' => $fixture['contracts']['runtime_registry_manifest_sha256'],
+            'strict' => true,
+        ]);
+
+        $this->assertFalse((bool) ($summary['ok'] ?? true));
+        $this->assertContains('candidate_report_missing:forbidden_claim_report.json', $summary['errors'] ?? []);
+    }
+
     /**
      * @return array{candidate_dir:string,output_dir:string,contracts:array{candidate_manifest_sha256:string,runtime_registry_manifest_sha256:string}}
      */

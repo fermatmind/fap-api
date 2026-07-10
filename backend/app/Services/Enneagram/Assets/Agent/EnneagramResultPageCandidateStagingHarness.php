@@ -54,8 +54,10 @@ final class EnneagramResultPageCandidateStagingHarness
         $contractPath = $this->contractPath((string) ($options['contract_path'] ?? ''));
         $candidateDir = rtrim(trim((string) ($options['candidate_dir'] ?? '')), DIRECTORY_SEPARATOR);
         $outputDir = rtrim(trim((string) ($options['output_dir'] ?? '')), DIRECTORY_SEPARATOR);
-        $expectedCandidateHash = trim((string) ($options['expected_candidate_manifest_sha256'] ?? self::DEFAULT_EXPECTED_CANDIDATE_MANIFEST_SHA256));
-        $expectedRuntimeHash = trim((string) ($options['expected_runtime_registry_sha256'] ?? self::DEFAULT_EXPECTED_RUNTIME_REGISTRY_SHA256));
+        $expectedCandidateHash = trim((string) ($options['expected_candidate_manifest_sha256'] ?? ''));
+        $expectedRuntimeHash = trim((string) ($options['expected_runtime_registry_sha256'] ?? ''));
+        $expectedCandidateHash = $expectedCandidateHash !== '' ? $expectedCandidateHash : self::DEFAULT_EXPECTED_CANDIDATE_MANIFEST_SHA256;
+        $expectedRuntimeHash = $expectedRuntimeHash !== '' ? $expectedRuntimeHash : self::DEFAULT_EXPECTED_RUNTIME_REGISTRY_SHA256;
         $runExport = ($options['run_export'] ?? false) === true;
         $runStagingImport = ($options['run_staging_import'] ?? false) === true;
         $strict = ($options['strict'] ?? false) === true;
@@ -228,11 +230,9 @@ final class EnneagramResultPageCandidateStagingHarness
             'forbidden_claim_report.json' => ['violation_count', 'forbidden_claim_violation_count', 'failure_count'],
         ] as $file => $counters) {
             $path = $candidateDir.'/'.$file;
-            if (! is_file($path) && $file === 'forbidden_claim_report.json') {
-                continue;
-            }
             if (! is_file($path)) {
                 $errors[] = 'candidate_report_missing:'.$file;
+
                 continue;
             }
             $report = $this->readJson($path, $file);
