@@ -82854,9 +82854,9 @@
     "depends_on": [
       "MBTI-CMS-27A"
     ],
-    "status": "local_validation_passed",
+    "status": "pr_open_checks_pending",
     "commit_sha": "23833bfcca8cd1d015efb827271dcf2f60aa52f7",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2860",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -82905,6 +82905,12 @@
         "from": "in_progress",
         "to": "local_validation_passed",
         "note": "Focused importer/readmodel validation, syntax, Pint, SQLite migrations, route listing, YAML/JSON parsing, diff check, and changed-file scope validation passed. The local HTTP verifier requires an API at 127.0.0.1:8000 and is recorded as an external sidecar condition."
+      },
+      {
+        "at": "2026-07-10T07:11:00Z",
+        "from": "local_validation_passed",
+        "to": "pr_open_checks_pending",
+        "note": "Opened PR #2860. Required GitHub checks and repository merge policy must pass before merge; no deployment or production CMS replay is authorized by this PR."
       }
     ]
   },
