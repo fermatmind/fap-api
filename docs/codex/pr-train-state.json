@@ -1669,7 +1669,7 @@
       "Reference-only fap-web worktree had unrelated dirty changes before and after this task; no fap-web files were modified.",
       "Composer dependencies were installed in the isolated worktree because vendor/ was absent."
     ],
-    "status": "pr_open_checks_pending",
+    "status": "ready_to_merge",
     "title": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01 fix production dry-run SQL compatibility",
     "transitions": [
       {
@@ -82885,6 +82885,10 @@
       "local_mbti_http_verifier": {
         "status": "external_environment_unavailable",
         "evidence": "bash scripts/ci_verify_mbti.sh could not connect to the expected local API at 127.0.0.1:8000 before business checks. This is recorded in generated/pr-train-sidecar-issues and is not a manifest required check."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2860 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, and Semgrep blocking secrets."
       }
     },
     "scope_validation": {
@@ -82911,6 +82915,12 @@
         "from": "local_validation_passed",
         "to": "pr_open_checks_pending",
         "note": "Opened PR #2860. Required GitHub checks and repository merge policy must pass before merge; no deployment or production CMS replay is authorized by this PR."
+      },
+      {
+        "at": "2026-07-10T07:23:00Z",
+        "from": "pr_open_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed. Scope remains restricted to MBTI-CMS-29 authority/readmodel repair; production CMS replay, deploy, indexability release, and GSC remain deferred."
       }
     ]
   },
