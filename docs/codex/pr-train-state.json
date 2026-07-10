@@ -168,9 +168,9 @@
     "depends_on": [
       "ENNEAGRAM-EN13-PUBLISH-GATE-01"
     ],
-    "status": "committed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "8783dceab",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2837",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -187,7 +187,8 @@
     },
     "transitions": [
       {"at":"2026-07-10T08:26:00+08:00","from":"pending_dependency","to":"in_progress","note":"Dependency ENNEAGRAM-EN13-PUBLISH-GATE-01 is merged and post-merge revalidated."},
-      {"at":"2026-07-10T08:26:00+08:00","from":"in_progress","to":"committed","note":"Sitemap regression, MBTI CI, YAML/JSON, diff, and scope validation passed."}
+      {"at":"2026-07-10T08:26:00+08:00","from":"in_progress","to":"committed","note":"Sitemap regression, MBTI CI, YAML/JSON, diff, and scope validation passed."},
+      {"at":"2026-07-10T08:27:00+08:00","from":"committed","to":"pr_open","note":"Opened PR #2837 for the locked English sitemap-locale scope."}
     ]
   },
   "ENNEAGRAM-EN13-CMS-DRY-RUN-01": {
