@@ -38400,3 +38400,38 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: BIG5-ZH-LEGACY-ROUTE-AUDIT-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/big5-zh-legacy-route-audit-01
+    title: "BIG5-ZH-LEGACY-ROUTE-AUDIT-01: freeze ten Chinese Legacy-to-V2 route mappings"
+    train_scope: big5_zh_legacy_route_audit
+    status: planned
+    scope:
+      - Freeze exactly ten Chinese Big Five Legacy-to-V2 route mappings and their repository and live-surface evidence.
+      - Record duplicate-routing risk and recommend Chinese-only permanent redirects in the dependent fap-web PR.
+      - Keep this PR read-only with respect to runtime routes, CMS, indexability, sitemap, llms, schema, search, and deployment.
+    allowed_paths:
+      - generated/big-five-zh-legacy-route-audit/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify runtime routes, fap-web, CMS records, database schema, canonical output, robots, sitemap, llms, JSON-LD, search submission, or deployment configuration.
+      - Expand the recommendation to English routes or produce new Legacy editorial content.
+    validation:
+      - node generated/big-five-zh-legacy-route-audit/validate-audit.mjs
+      - python3 -m json.tool generated/big-five-zh-legacy-route-audit/legacy_route_audit.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend

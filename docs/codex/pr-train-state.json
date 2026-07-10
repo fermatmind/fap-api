@@ -83172,5 +83172,68 @@
       {"at": "2026-07-10T06:33:12Z", "from": "pr_open", "to": "ready_to_merge", "note": "PR #2856 CI and Code Scanning checks are green and GitHub reports mergeStateStatus=CLEAN; the manifest permits squash auto-merge after the ledger update checks complete."},
       {"at": "2026-07-10T06:58:54Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled from GitHub: PR #2856 squash merged at 7ff0de609f637923e552d78583095ea6440dd516; origin/main contains the merge commit, the local task worktree/branch were removed, and the remote task branch was already deleted."}
     ]
+  },
+  "BIG5-ZH-LEGACY-ROUTE-AUDIT-01": {
+    "id": "BIG5-ZH-LEGACY-ROUTE-AUDIT-01",
+    "repo": "fap-api",
+    "title": "BIG5-ZH-LEGACY-ROUTE-AUDIT-01: freeze ten Chinese Legacy-to-V2 route mappings",
+    "base": "main",
+    "branch": "codex/big5-zh-legacy-route-audit-01",
+    "depends_on": [],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The user-provided locked goal explicitly authorized this exact PR id, scope, branch, paths, checks, and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "This first train item has no dependencies."
+      },
+      "audit_contract": {
+        "status": "pass",
+        "evidence": "The validator proved the exact ordered ten-row mapping, unique endpoints, live status/robots/canonical observations, Legacy seed identities, V2 package identities, and the Markdown handoff contract."
+      },
+      "yaml_json_validation": {
+        "status": "pass",
+        "evidence": "Audit JSON and state JSON parsed; the PR train manifest parsed as YAML."
+      },
+      "scope_and_diff": {
+        "status": "pass",
+        "evidence": "All changed and untracked files are inside this PR's allowed_paths and git diff --check passed."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-10T08:25:00Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered only the current locked PR; no future train item was registered."
+      },
+      {
+        "at": "2026-07-10T08:25:00Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started the read-only ten-route Chinese Legacy-to-V2 mapping audit."
+      },
+      {
+        "at": "2026-07-10T08:31:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Exact ten-row audit, repository evidence, live read-only evidence, YAML/JSON parsing, scope validation, and git diff checks passed."
+      }
+    ]
   }
 }

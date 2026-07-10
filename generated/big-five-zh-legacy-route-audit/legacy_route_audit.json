@@ -1,0 +1,158 @@
+{
+  "pr_id": "BIG5-ZH-LEGACY-ROUTE-AUDIT-01",
+  "status": "pass",
+  "scope": {
+    "framework": "big_five",
+    "locale": "zh-CN",
+    "legacy_route_count": 10,
+    "runtime_changes_in_this_pr": false,
+    "english_routes_in_scope": false
+  },
+  "observed_at": "2026-07-10T08:25:00Z",
+  "evidence": {
+    "fap_web": {
+      "commit_sha": "25f8ec3ace9e3cb99ab2a38ba262ed0815a9d3a3",
+      "route_registry": "lib/personality/bigFivePublicRoutes.ts",
+      "runtime_page": "app/(localized)/[locale]/personality/big-five/[...slug]/page.tsx",
+      "finding": "The route registry accepts both the ten Legacy polarity slugs and the fifteen V2 trait-range slugs; the runtime page resolves both through the CMS-backed public content API."
+    },
+    "fap_api": {
+      "commit_sha": "659c9e5596d03cc81288c2a8e301ce3f0b16812f",
+      "legacy_seed": "backend/content_assets/personality_public/big_five_v1_seed.json",
+      "v2_dry_run_report": "generated/big-five-cms-import-dryrun/dryrun_report.json",
+      "finding": "Backend artifacts retain the ten Legacy zh-CN polarity identities while the V2 content package evidence contains the corresponding trait-range identities."
+    },
+    "live_surface": {
+      "base_url": "https://fermatmind.com/zh/personality/big-five",
+      "method": "Read-only HTTPS GET with redirects followed; HTTP status, HTML robots meta, and canonical link were recorded.",
+      "write_attempted": false
+    }
+  },
+  "decision": {
+    "recommended_action": "permanent_redirect",
+    "recommended_status": 301,
+    "locale_boundary": "zh-CN only",
+    "canonical_content_owner": "V2 target route",
+    "legacy_content_policy": "Do not maintain independent body, FAQ, media, or schema for Legacy routes.",
+    "english_policy": "No English redirect is authorized by this audit."
+  },
+  "mappings": [
+    {
+      "legacy_slug": "high-openness",
+      "v2_slug": "openness-high",
+      "legacy_path": "/zh/personality/big-five/high-openness",
+      "v2_path": "/zh/personality/big-five/openness-high",
+      "legacy_live": {"http_status": 200, "robots": "noindex, follow, noarchive, nocache", "canonical": "https://fermatmind.com/zh/personality/big-five/high-openness"},
+      "v2_live": {"http_status": 200, "robots": "index, follow", "canonical": "https://fermatmind.com/zh/personality/big-five/openness-high"},
+      "duplicate_risk": "medium",
+      "recommendation": "301 Legacy to V2"
+    },
+    {
+      "legacy_slug": "low-openness",
+      "v2_slug": "openness-low",
+      "legacy_path": "/zh/personality/big-five/low-openness",
+      "v2_path": "/zh/personality/big-five/openness-low",
+      "legacy_live": {"http_status": 200, "robots": "noindex, follow, noarchive, nocache", "canonical": "https://fermatmind.com/zh/personality/big-five/low-openness"},
+      "v2_live": {"http_status": 200, "robots": "index, follow", "canonical": "https://fermatmind.com/zh/personality/big-five/openness-low"},
+      "duplicate_risk": "medium",
+      "recommendation": "301 Legacy to V2"
+    },
+    {
+      "legacy_slug": "high-conscientiousness",
+      "v2_slug": "conscientiousness-high",
+      "legacy_path": "/zh/personality/big-five/high-conscientiousness",
+      "v2_path": "/zh/personality/big-five/conscientiousness-high",
+      "legacy_live": {"http_status": 200, "robots": "noindex, follow, noarchive, nocache", "canonical": "https://fermatmind.com/zh/personality/big-five/high-conscientiousness"},
+      "v2_live": {"http_status": 200, "robots": "index, follow", "canonical": "https://fermatmind.com/zh/personality/big-five/conscientiousness-high"},
+      "duplicate_risk": "medium",
+      "recommendation": "301 Legacy to V2"
+    },
+    {
+      "legacy_slug": "low-conscientiousness",
+      "v2_slug": "conscientiousness-low",
+      "legacy_path": "/zh/personality/big-five/low-conscientiousness",
+      "v2_path": "/zh/personality/big-five/conscientiousness-low",
+      "legacy_live": {"http_status": 200, "robots": "noindex, follow, noarchive, nocache", "canonical": "https://fermatmind.com/zh/personality/big-five/low-conscientiousness"},
+      "v2_live": {"http_status": 200, "robots": "index, follow", "canonical": "https://fermatmind.com/zh/personality/big-five/conscientiousness-low"},
+      "duplicate_risk": "medium",
+      "recommendation": "301 Legacy to V2"
+    },
+    {
+      "legacy_slug": "high-extraversion",
+      "v2_slug": "extraversion-high",
+      "legacy_path": "/zh/personality/big-five/high-extraversion",
+      "v2_path": "/zh/personality/big-five/extraversion-high",
+      "legacy_live": {"http_status": 200, "robots": "noindex, follow, noarchive, nocache", "canonical": "https://fermatmind.com/zh/personality/big-five/high-extraversion"},
+      "v2_live": {"http_status": 200, "robots": "index, follow", "canonical": "https://fermatmind.com/zh/personality/big-five/extraversion-high"},
+      "duplicate_risk": "medium",
+      "recommendation": "301 Legacy to V2"
+    },
+    {
+      "legacy_slug": "low-extraversion",
+      "v2_slug": "extraversion-low",
+      "legacy_path": "/zh/personality/big-five/low-extraversion",
+      "v2_path": "/zh/personality/big-five/extraversion-low",
+      "legacy_live": {"http_status": 200, "robots": "noindex, follow, noarchive, nocache", "canonical": "https://fermatmind.com/zh/personality/big-five/low-extraversion"},
+      "v2_live": {"http_status": 200, "robots": "index, follow", "canonical": "https://fermatmind.com/zh/personality/big-five/extraversion-low"},
+      "duplicate_risk": "medium",
+      "recommendation": "301 Legacy to V2"
+    },
+    {
+      "legacy_slug": "high-agreeableness",
+      "v2_slug": "agreeableness-high",
+      "legacy_path": "/zh/personality/big-five/high-agreeableness",
+      "v2_path": "/zh/personality/big-five/agreeableness-high",
+      "legacy_live": {"http_status": 200, "robots": "noindex, follow, noarchive, nocache", "canonical": "https://fermatmind.com/zh/personality/big-five/high-agreeableness"},
+      "v2_live": {"http_status": 200, "robots": "index, follow", "canonical": "https://fermatmind.com/zh/personality/big-five/agreeableness-high"},
+      "duplicate_risk": "medium",
+      "recommendation": "301 Legacy to V2"
+    },
+    {
+      "legacy_slug": "low-agreeableness",
+      "v2_slug": "agreeableness-low",
+      "legacy_path": "/zh/personality/big-five/low-agreeableness",
+      "v2_path": "/zh/personality/big-five/agreeableness-low",
+      "legacy_live": {"http_status": 200, "robots": "noindex, follow, noarchive, nocache", "canonical": "https://fermatmind.com/zh/personality/big-five/low-agreeableness"},
+      "v2_live": {"http_status": 200, "robots": "index, follow", "canonical": "https://fermatmind.com/zh/personality/big-five/agreeableness-low"},
+      "duplicate_risk": "medium",
+      "recommendation": "301 Legacy to V2"
+    },
+    {
+      "legacy_slug": "high-neuroticism",
+      "v2_slug": "neuroticism-high",
+      "legacy_path": "/zh/personality/big-five/high-neuroticism",
+      "v2_path": "/zh/personality/big-five/neuroticism-high",
+      "legacy_live": {"http_status": 200, "robots": "noindex, follow, noarchive, nocache", "canonical": "https://fermatmind.com/zh/personality/big-five/high-neuroticism"},
+      "v2_live": {"http_status": 200, "robots": "index, follow", "canonical": "https://fermatmind.com/zh/personality/big-five/neuroticism-high"},
+      "duplicate_risk": "medium",
+      "recommendation": "301 Legacy to V2"
+    },
+    {
+      "legacy_slug": "emotional-stability",
+      "v2_slug": "neuroticism-low",
+      "legacy_path": "/zh/personality/big-five/emotional-stability",
+      "v2_path": "/zh/personality/big-five/neuroticism-low",
+      "legacy_live": {"http_status": 200, "robots": "noindex, follow, noarchive, nocache", "canonical": "https://fermatmind.com/zh/personality/big-five/emotional-stability"},
+      "v2_live": {"http_status": 200, "robots": "index, follow", "canonical": "https://fermatmind.com/zh/personality/big-five/neuroticism-low"},
+      "duplicate_risk": "medium",
+      "recommendation": "301 Legacy to V2"
+    }
+  ],
+  "risk_summary": {
+    "legacy_200_count": 10,
+    "legacy_self_canonical_count": 10,
+    "legacy_noindex_count": 10,
+    "v2_200_count": 10,
+    "v2_self_canonical_count": 10,
+    "v2_index_count": 10,
+    "assessment": "Legacy noindex reduces direct index duplication, but two stable 200 routes still split navigation, backlinks, analytics, and future maintenance. A Chinese-only permanent redirect consolidates the route contract without creating new content authority."
+  },
+  "qa": {
+    "exact_mapping_count": true,
+    "unique_legacy_slugs": true,
+    "unique_v2_slugs": true,
+    "live_read_only_evidence_complete": true,
+    "runtime_change_absent": true,
+    "english_scope_absent": true
+  }
+}
