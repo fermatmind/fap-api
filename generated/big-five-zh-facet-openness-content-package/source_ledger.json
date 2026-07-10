@@ -1,0 +1,176 @@
+{
+  "package": "big-five-zh-facet-openness-source-ledger-2026-07-10",
+  "access_date": "2026-07-10",
+  "scope": "Six Chinese openness Facet content packages only.",
+  "inherits": {
+    "path": "generated/big-five-zh-facet-hub-content-repair/source_ledger.json",
+    "package": "big-five-zh-facet-shared-source-ledger-2026-07-10"
+  },
+  "sources": [
+    {
+      "id": "I1",
+      "type": "internal",
+      "reference": "backend/content_assets/personality_public/big_five_v1_seed.json",
+      "use": "Frozen CMS field shape, current Chinese route keys, locale, launch state, robots, and 5×6 taxonomy labels.",
+      "limitation": "The existing short body copy is an input to audit, not an authority for new academic claims."
+    },
+    {
+      "id": "I2",
+      "type": "internal",
+      "reference": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+      "use": "Non-diagnostic, non-deterministic, non-screening public claim boundaries."
+    },
+    {
+      "id": "I3",
+      "type": "internal",
+      "reference": "generated/big-five-zh-legacy-route-audit/legacy_route_audit.json",
+      "use": "Frozen V2 public route family and duplicate-route boundary."
+    },
+    {
+      "id": "A1",
+      "type": "official_research_resource",
+      "title": "NEO Facets Table",
+      "author_or_source": "International Personality Item Pool, Oregon Research Institute",
+      "year": null,
+      "url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+      "accessed_at": "2026-07-10",
+      "claim": "Documents corresponding IPIP scales for the 30 NEO-PI-R facet constructs.",
+      "limitation": "IPIP scales measure similar constructs; this does not make them identical to proprietary NEO scales or authorize score conversion."
+    },
+    {
+      "id": "A2",
+      "type": "peer_reviewed",
+      "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets",
+      "author_or_source": "Soto, C. J., & John, O. P.",
+      "year": 2017,
+      "doi": "10.1037/pspp0000096",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+      "accessed_at": "2026-07-10",
+      "claim": "Supports a hierarchical domain-and-facet reading of Big Five traits using 15 facets.",
+      "limitation": "BFI-2 has 15 facets, not the 30-facet taxonomy used for this CMS route set."
+    },
+    {
+      "id": "A3",
+      "type": "peer_reviewed",
+      "title": "Between facets and domains: 10 aspects of the Big Five",
+      "author_or_source": "DeYoung, C. G., Quilty, L. C., & Peterson, J. B.",
+      "year": 2007,
+      "doi": "10.1037/0022-3514.93.5.880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
+      "accessed_at": "2026-07-10",
+      "claim": "Shows an alternative intermediate hierarchy with two aspects per domain.",
+      "limitation": "The ten aspects are not interchangeable with either BFI-2 facets or NEO/IPIP 30 facets."
+    },
+    {
+      "id": "A4",
+      "type": "academic_review",
+      "title": "Paradigm Shift to the Integrative Big Five Trait Taxonomy: History, Measurement, and Conceptual Issues",
+      "author_or_source": "John, O. P., Naumann, L. P., & Soto, C. J.",
+      "year": 2008,
+      "reference": "In Handbook of Personality: Theory and Research (3rd ed.), pp. 114–158.",
+      "claim": "Supports broad Big Five taxonomy framing and continuous trait language.",
+      "limitation": "No individual prediction, numeric validity, or universal facet naming claim is taken from this review."
+    }
+  ],
+  "taxonomy": [
+    {
+      "domain_code": "openness",
+      "domain_title_zh": "开放性",
+      "facets": [
+        {
+          "code": "imagination",
+          "title_zh": "想象力",
+          "route": "/zh/personality/big-five/facets/imagination"
+        },
+        {
+          "code": "aesthetics",
+          "title_zh": "审美",
+          "route": "/zh/personality/big-five/facets/aesthetics"
+        },
+        {
+          "code": "feelings",
+          "title_zh": "感受性",
+          "route": "/zh/personality/big-five/facets/feelings"
+        },
+        {
+          "code": "actions",
+          "title_zh": "行动开放",
+          "route": "/zh/personality/big-five/facets/actions"
+        },
+        {
+          "code": "ideas",
+          "title_zh": "观念开放",
+          "route": "/zh/personality/big-five/facets/ideas"
+        },
+        {
+          "code": "values",
+          "title_zh": "价值开放",
+          "route": "/zh/personality/big-five/facets/values"
+        }
+      ]
+    }
+  ],
+  "claim_map": [
+    {
+      "claim": "The six routes are narrower descriptors under openness, not six personality types.",
+      "evidence_ids": [
+        "I1",
+        "A1",
+        "A4"
+      ]
+    },
+    {
+      "claim": "Interest or attention in a facet is not equivalent to ability, diagnosis, or outcome prediction.",
+      "evidence_ids": [
+        "I2",
+        "A4"
+      ]
+    },
+    {
+      "claim": "The route taxonomy must not be directly converted to BFI-2 facets or BFAS aspects.",
+      "evidence_ids": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    }
+  ],
+  "facet_boundaries": {
+    "imagination": {
+      "title_zh": "想象力",
+      "construct_summary": "对心理图景、假设情景、故事与隐喻的通常投入程度",
+      "explicit_non_equivalence": "它不是是否务实、是否会做白日梦或是否有创造天赋的判定。想象丰富的人仍可严谨核验，偏好具体事实的人也能通过经验和工具完成创新"
+    },
+    "aesthetics": {
+      "title_zh": "审美",
+      "construct_summary": "对形式、色彩、声音、节奏、文字和环境氛围的通常注意与投入程度",
+      "explicit_non_equivalence": "它不等于艺术技能、品位等级、消费偏好或文化资本。能否画画、是否喜欢某种音乐，以及是否购买昂贵物品，都不能单独代表这个面向"
+    },
+    "feelings": {
+      "title_zh": "感受性",
+      "construct_summary": "对自身情绪经验的辨认、关注和表达兴趣，而不是情绪强弱本身",
+      "explicit_non_equivalence": "它不等于情绪不稳定、同理心、脆弱或心理健康状态。能觉察感受的人未必波动更大，较少谈感受的人也不代表没有情绪或不关心他人"
+    },
+    "actions": {
+      "title_zh": "行动开放",
+      "construct_summary": "对改变熟悉做法、尝试新活动和接触陌生环境的通常意愿",
+      "explicit_non_equivalence": "它不等于勇敢、旅行次数、冲动性或喜欢危险。谨慎的人也可以通过小规模试点探索，常尝试新事物的人仍需要评估成本、退出条件与他人影响"
+    },
+    "ideas": {
+      "title_zh": "观念开放",
+      "construct_summary": "对抽象问题、复杂解释、概念联系与不同观点的通常探索兴趣",
+      "explicit_non_equivalence": "它不是智力、学历、知识量或正确率。喜欢抽象讨论不保证判断准确，偏好具体问题也不表示理解能力较弱；能力证据必须来自相应任务和测量"
+    },
+    "values": {
+      "title_zh": "价值开放",
+      "construct_summary": "对重新检查惯例、规则依据和自身价值假设的通常意愿",
+      "explicit_non_equivalence": "它不等于道德水平、政治立场、叛逆程度或是否尊重传统。持何种观点与愿不愿审查观点是不同问题，任何立场都需要说明证据、代价和权利边界"
+    }
+  },
+  "limitations": [
+    "The frozen CMS taxonomy is NEO/IPIP-like; it is not claimed as the single universal Big Five facet standard.",
+    "No proprietary assessment items, scoring keys, norms, or copyrighted manual text are reproduced.",
+    "No reliability, validity, percentile, clinical, hiring, admission, salary, relationship-outcome, or deterministic career claim is made.",
+    "GSC_EVIDENCE_PENDING: this package is content-authority preparation, not a search-performance claim."
+  ]
+}
