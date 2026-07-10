@@ -83528,9 +83528,9 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-hub-content-repair-01",
     "depends_on": ["BIG5-ZH-LEGACY-ROUTE-DEPRECATION-02"],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "da37c23083f88de68c84a08c67fe1c1803b5f9fb",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2885",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -83607,6 +83607,12 @@
         "from": "local_checks_passed",
         "to": "committed",
         "note": "Committed the scoped Facet Hub content package, shared source ledger, QA artifacts, and authorized manifest/state metadata at da37c23083f88de68c84a08c67fe1c1803b5f9fb."
+      },
+      {
+        "at": "2026-07-10T14:22:47Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2885 with validation evidence and explicit deferred CMS/runtime/SEO/deploy work."
       }
     ]
   }
