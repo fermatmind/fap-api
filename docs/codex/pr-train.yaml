@@ -44,7 +44,7 @@ prs:
       - php -l backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php
       - php -l backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi
-      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=<local-home>/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_big_five_cms_import_draft_dry_run_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
       - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveCmsImportDraftDryRun.php app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && bash scripts/ci_verify_mbti.sh
@@ -91,7 +91,7 @@ prs:
       - php -l backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php
       - php -l backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi
-      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=<local-home>/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json
       - cd backend && vendor/bin/pint --test app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && bash scripts/ci_verify_mbti.sh
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
@@ -219,7 +219,7 @@ prs:
       - Modify frontend runtime, public API runtime, production CMS content, sitemap/llms runtime, JSON-LD runtime, canonical/noindex behavior, permissions, scheduler behavior, secrets, staging deploy, or production deploy.
       - Mark English Big Five pages indexable or bypass manual review for combination pages.
     validation:
-      - python3 -m json.tool /Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json >/dev/null
+      - python3 -m json.tool <local-home>/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json >/dev/null
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -10055,7 +10055,7 @@ prs:
       - python3 yaml parse for docs/codex/pr-train.yaml
       - git diff --check
       - git diff --cached --check
-      - cd /Users/rainie/Desktop/GitHub/fap-web && git status --short
+      - cd <local-home>/Desktop/GitHub/fap-web && git status --short
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     scheduler_activation: false
@@ -10145,10 +10145,10 @@ prs:
       - git diff --check
       - git diff --cached --check
     reference_validation:
-      - cd /Users/rainie/Desktop/GitHub/fap-web && git status --short
-      - cd /Users/rainie/Desktop/GitHub/fap-web && pnpm lint
-      - cd /Users/rainie/Desktop/GitHub/fap-web && pnpm test:contract
-      - cd /Users/rainie/Desktop/GitHub/fap-web && NEXT_PUBLIC_API_URL=https://api.fermatmind.com pnpm build
+      - cd <local-home>/Desktop/GitHub/fap-web && git status --short
+      - cd <local-home>/Desktop/GitHub/fap-web && pnpm lint
+      - cd <local-home>/Desktop/GitHub/fap-web && pnpm test:contract
+      - cd <local-home>/Desktop/GitHub/fap-web && NEXT_PUBLIC_API_URL=https://api.fermatmind.com pnpm build
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     cms_mutation: false
@@ -16195,7 +16195,7 @@ prs:
       - "python3 - <<'PY'\nimport yaml, pathlib\nyaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\nprint('yaml ok')\nPY"
       - git diff --check
       - git diff --cached --check
-      - cd /Users/rainie/Desktop/GitHub/fap-web && git status --short
+      - cd <local-home>/Desktop/GitHub/fap-web && git status --short
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     cms_mutation: false
@@ -18399,17 +18399,17 @@ prs:
       - Produce a repo-backed report, generated JSON artifact, and focused test only.
       - Do not write production, mutate DB/CMS, promote runtime, deploy, change fap-web runtime, submit URLs, enqueue Search Channel, call external search APIs, edit env/DNS/nginx, read raw logs, or access production user data.
     validation:
-      - cd /Users/rainie/Desktop/GitHub/fap-api/backend && php artisan test --filter=Career1046OpsScopeReconciliation01 --no-ansi
-      - cd /Users/rainie/Desktop/GitHub/fap-api/backend && php artisan route:list --no-ansi
-      - cd /Users/rainie/Desktop/GitHub/fap-api/backend && vendor/bin/pint --test
-      - cd /Users/rainie/Desktop/GitHub/fap-api/backend && composer validate --strict
-      - cd /Users/rainie/Desktop/GitHub/fap-api/backend && composer audit --locked --no-interaction --ignore-unreachable
-      - cd /Users/rainie/Desktop/GitHub/fap-api && python3 -m json.tool backend/docs/seo/generated/career-1046-ops-scope-reconciliation-01.v1.json >/dev/null
-      - cd /Users/rainie/Desktop/GitHub/fap-api && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
-      - cd /Users/rainie/Desktop/GitHub/fap-api && python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
-      - cd /Users/rainie/Desktop/GitHub/fap-api && git diff --check
-      - cd /Users/rainie/Desktop/GitHub/fap-api && git diff --cached --check
-      - cd /Users/rainie/Desktop/GitHub/fap-web && git status --short
+      - cd <local-home>/Desktop/GitHub/fap-api/backend && php artisan test --filter=Career1046OpsScopeReconciliation01 --no-ansi
+      - cd <local-home>/Desktop/GitHub/fap-api/backend && php artisan route:list --no-ansi
+      - cd <local-home>/Desktop/GitHub/fap-api/backend && vendor/bin/pint --test
+      - cd <local-home>/Desktop/GitHub/fap-api/backend && composer validate --strict
+      - cd <local-home>/Desktop/GitHub/fap-api/backend && composer audit --locked --no-interaction --ignore-unreachable
+      - cd <local-home>/Desktop/GitHub/fap-api && python3 -m json.tool backend/docs/seo/generated/career-1046-ops-scope-reconciliation-01.v1.json >/dev/null
+      - cd <local-home>/Desktop/GitHub/fap-api && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - cd <local-home>/Desktop/GitHub/fap-api && python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd <local-home>/Desktop/GitHub/fap-api && git diff --check
+      - cd <local-home>/Desktop/GitHub/fap-api && git diff --cached --check
+      - cd <local-home>/Desktop/GitHub/fap-web && git status --short
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     database_mutation: false
@@ -23895,14 +23895,14 @@ prs:
     depends_on:
       - HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-01
     scope:
-      - Use the existing v01 Help service content package at `/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip`.
+      - Use the existing v01 Help service content package at `<local-home>/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip`.
       - Revise only the local v01 package draft fields needed to clear the #1919 private-identifier/result-link guard findings.
       - Recompute package hash and rerun the editorial review request scan against the revised local v01 package.
       - Archive revision evidence, guard-scan result, review request status, package hash delta, and sidecar issues.
       - Do not claim Operator editorial approval; approval remains a separate hard gate.
     external_asset_paths:
-      - /Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
-      - /Users/rainie/Desktop/fermatmind-help-service-content-drafts-01
+      - <local-home>/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
+      - <local-home>/Desktop/fermatmind-help-service-content-drafts-01
     allowed_paths:
       - backend/docs/help/generated/help-content-draft-revision-request-01.v1.json
       - backend/docs/operations/help-content-draft-revision-request-2026-06-05.md
@@ -23944,14 +23944,14 @@ prs:
     depends_on:
       - HELP-CONTENT-DRAFT-REVISION-REQUEST-01
     scope:
-      - Use the revised v01 Help service content package at `/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip`.
+      - Use the revised v01 Help service content package at `<local-home>/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip`.
       - Sync revised v01 package content to the existing 12 Help `ContentPage` CMS drafts through the controlled `content-pages:import-local-baseline --upsert --status=draft` path.
       - Keep every synced row draft, non-public, non-indexable, unpublished, and in owner review.
       - Archive dry-run output, import output, post-sync CMS draft state, public absence checks, package hash, and sidecar issues.
       - Do not claim Operator editorial approval; approval remains a separate hard gate.
     external_asset_paths:
-      - /Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
-      - /Users/rainie/Desktop/fermatmind-help-service-content-drafts-01
+      - <local-home>/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
+      - <local-home>/Desktop/fermatmind-help-service-content-drafts-01
     allowed_paths:
       - backend/docs/help/generated/help-content-draft-cms-sync-01.v1.json
       - backend/docs/operations/help-content-draft-cms-sync-2026-06-05.md
@@ -23994,7 +23994,7 @@ prs:
       - Record review output without rewriting content, mutating CMS, publishing, deploying, submitting search URLs, accessing private URLs, reading secrets, or claiming Operator approval if blockers remain.
       - Preserve blocked/conditional status where policy-owner inputs are missing.
     external_asset_paths:
-      - /Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
+      - <local-home>/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
     allowed_paths:
       - backend/docs/help/generated/help-content-draft-operator-review-01.v1.json
       - backend/docs/operations/help-content-draft-operator-review-2026-06-05.md
@@ -24036,7 +24036,7 @@ prs:
       - Map the answers to prior blockers and list the follow-up PR train without applying content revisions, mutating CMS, publishing, deploying, submitting search URLs, accessing private URLs, reading secrets, or claiming Operator approval.
       - Preserve publish and Operator review gates for later explicitly authorized tasks.
     external_asset_paths:
-      - /Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
+      - <local-home>/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
     allowed_paths:
       - backend/docs/help/generated/help-content-draft-policy-owner-answers-01.v1.json
       - backend/docs/operations/help-content-draft-policy-owner-answers-2026-06-05.md
@@ -24045,7 +24045,7 @@ prs:
     do_not:
       - Publish, deploy, submit search URLs, mutate CMS, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, change payment-provider behavior, rewrite content, or claim Operator approval.
     validation:
-      - shasum -a 256 /Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
+      - shasum -a 256 <local-home>/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
       - python3 -m json.tool backend/docs/help/generated/help-content-draft-policy-owner-answers-01.v1.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
@@ -28095,7 +28095,7 @@ prs:
       - php -l backend/tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php
       - php -l backend/tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php --no-ansi
-      - cd backend && php artisan career:validate-full-display-workbook --file='/Users/rainie/Desktop/费马资料文件/职业：人格与职业决策操作系统/职业内容资产/第九版_d23b_schema_repaired.xlsx' --json --summary-only --output=/private/tmp/career-zh-parity-fix-01-readiness.json --plan-output=/private/tmp/career-zh-parity-fix-01-plan.json --plan-md-output=/private/tmp/career-zh-parity-fix-01-plan.md
+      - cd backend && php artisan career:validate-full-display-workbook --file='<local-home>/Desktop/费马资料文件/职业：人格与职业决策操作系统/职业内容资产/第九版_d23b_schema_repaired.xlsx' --json --summary-only --output=/private/tmp/career-zh-parity-fix-01-readiness.json --plan-output=/private/tmp/career-zh-parity-fix-01-plan.json --plan-md-output=/private/tmp/career-zh-parity-fix-01-plan.md
       - python3 -m json.tool /private/tmp/career-zh-parity-fix-01-readiness.json >/dev/null
       - python3 -m json.tool /private/tmp/career-zh-parity-fix-01-plan.json >/dev/null
       - python3 -m json.tool backend/docs/career/generated/career-zh-parity-fix-01-readiness-report.json >/dev/null
@@ -36345,6 +36345,8 @@ prs:
       - Redact private result IDs, anonymous IDs, order/token/credential paths, production metrics, and local developer paths from committed docs/generated artifacts.
     allowed_paths:
       - backend/app/Http/Controllers/API/V0_3/AuthGuestController.php
+      - backend/tests/Feature/V0_3/AuthGuestTokenTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/routes/api.php
       - backend/app/Repositories/Report/ReportSubjectRepository.php
       - docs/codex/pr-train-state.json
@@ -36362,8 +36364,11 @@ prs:
       - backend/content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized/README.md
       - backend/content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized/normalization_manifest.json
       - backend/content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized/source_qa_scan.json
+      - backend/content_assets/big5/result_page_v2/agent_runs/canonical_profiles_revised_v0_3_normalized/SHA256SUMS.txt
       - backend/docs/seo/gsc-hk-sidecar-runner.md
       - backend/docs/seo/generated/gsc-hk-sidecar-runner.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGscSidecarRuntimeEnvBoundaryTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.
@@ -37966,7 +37971,7 @@ prs:
       - php -l backend/app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php
       - php -l backend/tests/Feature/Console/PersonalityMbtiContent15MixedImportPreflightCommandTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityMbtiContent15MixedImportPreflightCommandTest --no-ansi
-      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_content15_mixed_import_preflight_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
       - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiContent15MixedImportPreflight.php app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php tests/Feature/Console/PersonalityMbtiContent15MixedImportPreflightCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && bash scripts/ci_verify_mbti.sh
@@ -38030,7 +38035,7 @@ prs:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=MbtiCrossTypeComparisonAuthorityReadModelTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityMbtiComparisonCmsImportDryRunCommandTest|PersonalityMbtiContent15MixedImportPreflightCommandTest' --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_cross_type_authority_storage_readmodel_files' --no-ansi
-      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
       - cd backend && vendor/bin/pint --test app/Models/MbtiCrossTypeComparisonAuthority.php app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php app/Services/Cms/MbtiContent15MixedImportPreflightPlanner.php tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php tests/Feature/Console/PersonalityMbtiComparisonCmsImportDryRunCommandTest.php tests/Feature/Console/PersonalityMbtiContent15MixedImportPreflightCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
@@ -38078,7 +38083,7 @@ prs:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='PersonalityMbtiContent15ProductionImportCommandTest|PersonalityMbtiContent15MixedImportPreflightCommandTest|MbtiCrossTypeComparisonAuthorityReadModelTest' --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_content15_production_importer_files --no-ansi
-      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
       - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiContent15ProductionImport.php app/Services/Cms/MbtiContent15ProductionCmsImportService.php tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
@@ -38133,7 +38138,7 @@ prs:
       - Import any package other than the exact authorized 9-record top blocker batch.
       - Implement MBTI-CMS-28 or MBTI-INDEX-24 scope in this PR.
     validation:
-      - cd backend && APP_ENV=production php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
+      - cd backend && APP_ENV=production php artisan personality:mbti-content15-mixed-import-preflight --package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check

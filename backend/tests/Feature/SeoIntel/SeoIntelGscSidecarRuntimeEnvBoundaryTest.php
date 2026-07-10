@@ -22,7 +22,7 @@ final class SeoIntelGscSidecarRuntimeEnvBoundaryTest extends TestCase
         $script = (string) file_get_contents($scriptPath);
 
         $this->assertStringContainsString('PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"', $script);
-        $this->assertStringContainsString('SIDECAR_ENV_FILE="${SIDECAR_ENV_FILE:-/opt/fermatmind/seo-gsc-runner/env/gsc-sidecar.env}"', $script);
+        $this->assertMatchesRegularExpression('/SIDECAR_ENV_FILE="\$\{SIDECAR_ENV_FILE:-[^}]+\}"/', $script);
         $this->assertStringContainsString('sidecar_env_key_forbidden', $script);
         $this->assertStringContainsString('sidecar_env_line_invalid', $script);
         $this->assertStringContainsString('sidecar_config_cache_override_forbidden', $script);
@@ -81,7 +81,7 @@ final class SeoIntelGscSidecarRuntimeEnvBoundaryTest extends TestCase
         $this->assertIsArray($artifact);
 
         $this->assertSame('backend/scripts/seo/gsc_sidecar_runner.sh', data_get($artifact, 'sidecar_launcher_contract.script'));
-        $this->assertSame('/opt/fermatmind/seo-gsc-runner/env/gsc-sidecar.env', data_get($artifact, 'sidecar_launcher_contract.default_env_file'));
+        $this->assertSame('[redacted]', data_get($artifact, 'sidecar_launcher_contract.default_env_file'));
         $this->assertSame('private mktemp directory under /tmp', data_get($artifact, 'sidecar_launcher_contract.default_app_config_cache'));
         $this->assertSame('strict literal KEY=VALUE parser without shell evaluation', data_get($artifact, 'sidecar_launcher_contract.env_file_parser'));
         $this->assertSame('0700', data_get($artifact, 'sidecar_launcher_contract.cache_directory_mode'));

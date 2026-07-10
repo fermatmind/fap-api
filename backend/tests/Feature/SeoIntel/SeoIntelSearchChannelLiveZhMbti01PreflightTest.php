@@ -23,11 +23,8 @@ final class SeoIntelSearchChannelLiveZhMbti01PreflightTest extends TestCase
     {
         $artifact = $this->artifact();
 
-        $this->assertSame(3, $artifact['queue_item_id'] ?? null);
-        $this->assertSame(
-            'https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types',
-            $artifact['target_url'] ?? null
-        );
+        $this->assertSame('[redacted]', $artifact['queue_item_id'] ?? null);
+        $this->assertSame('[redacted public target]', $artifact['target_url'] ?? null);
         $this->assertSame('indexnow', $artifact['channel'] ?? null);
     }
 
@@ -36,14 +33,7 @@ final class SeoIntelSearchChannelLiveZhMbti01PreflightTest extends TestCase
     {
         $state = $this->artifact()['queue_item_state'] ?? [];
 
-        $this->assertTrue($state['exists'] ?? false);
-        $this->assertSame(3, $state['id'] ?? null);
-        $this->assertSame('pending', $state['approval_state'] ?? null);
-        $this->assertSame('dry_run_ready', $state['execution_state'] ?? null);
-        $this->assertSame('eligible', $state['eligibility_state'] ?? null);
-        $this->assertSame('scale_catalog', $state['source_authority'] ?? null);
-        $this->assertSame('test_detail', $state['page_entity_type'] ?? null);
-        $this->assertSame('claim_safe', $state['claim_boundary_state'] ?? null);
+        $this->assertFalse($state['details_committed'] ?? true);
         $this->assertFalse($state['private_flow'] ?? true);
     }
 
@@ -54,18 +44,10 @@ final class SeoIntelSearchChannelLiveZhMbti01PreflightTest extends TestCase
         $duplicate = $artifact['duplicate_check'] ?? [];
         $item2 = $artifact['queue_item_2_state'] ?? [];
 
-        $this->assertSame(1, $duplicate['target_queue_count'] ?? null);
-        $this->assertTrue($duplicate['duplicate_detected'] ?? false);
-        $this->assertSame('existing_active_queue_item', $duplicate['blocked_reason'] ?? null);
+        $this->assertFalse($duplicate['details_committed'] ?? true);
         $this->assertFalse($duplicate['live_submission_response_event_exists'] ?? true);
 
-        $this->assertSame(2, $item2['id'] ?? null);
-        $this->assertSame(
-            'https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types',
-            $item2['canonical_url'] ?? null
-        );
-        $this->assertSame('approved', $item2['approval_state'] ?? null);
-        $this->assertSame('submitted', $item2['execution_state'] ?? null);
+        $this->assertFalse($item2['details_committed'] ?? true);
         $this->assertTrue($item2['unchanged'] ?? false);
     }
 
@@ -96,13 +78,7 @@ final class SeoIntelSearchChannelLiveZhMbti01PreflightTest extends TestCase
 
         $this->assertTrue($readiness['key_configured'] ?? false);
         $this->assertTrue($readiness['key_location_configured'] ?? false);
-        $this->assertSame(
-            'https://fermatmind.com/8d59565935303aad72c5eb0ec5bfa42e.txt',
-            $readiness['key_location'] ?? null
-        );
-        $this->assertSame(200, $readiness['public_key_location_status'] ?? null);
-        $this->assertSame(32, $readiness['body_length'] ?? null);
-        $this->assertTrue($readiness['public_key_location_matches_configured_key'] ?? false);
+        $this->assertFalse($readiness['details_committed'] ?? true);
         $this->assertTrue($readiness['ready'] ?? false);
         $this->assertFalse($readiness['raw_key_exposed'] ?? true);
     }
@@ -112,19 +88,14 @@ final class SeoIntelSearchChannelLiveZhMbti01PreflightTest extends TestCase
     {
         $artifact = $this->artifact();
 
-        $this->assertSame(
-            'I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 3 channel indexnow URL https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types.',
-            $artifact['future_approval_phrase'] ?? null
-        );
+        $this->assertSame('[redacted; fresh exact authorization required]', $artifact['future_approval_phrase'] ?? null);
         $this->assertFalse($artifact['live_submission_performed'] ?? true);
         $this->assertFalse($artifact['external_api_call_performed'] ?? true);
         $this->assertFalse($artifact['enqueue_performed'] ?? true);
         $this->assertTrue($artifact['research_deferred'] ?? false);
-        $this->assertSame('ready_for_human_approved_zh_mbti_live_submission', $artifact['final_decision'] ?? null);
-        $this->assertSame(
-            'SEARCH-CHANNEL-LIVE-ZH-MBTI-02｜Human-approved live submission for queue item 3',
-            $artifact['next_task'] ?? null
-        );
+        $this->assertSame('preflight_evidence_redacted_no_execution', $artifact['final_decision'] ?? null);
+        $this->assertSame('[redacted separately authorized follow-up]', $artifact['next_task'] ?? null);
+        $this->assertStringNotContainsString('queue item 3', json_encode($artifact, JSON_THROW_ON_ERROR));
     }
 
     /** @return array<string, mixed> */

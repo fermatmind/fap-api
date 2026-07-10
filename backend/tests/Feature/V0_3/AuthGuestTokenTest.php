@@ -27,8 +27,8 @@ final class AuthGuestTokenTest extends TestCase
 
         $token = (string) $response->json('fm_token');
         $this->assertMatchesRegularExpression('/^fm_[0-9a-fA-F-]{36}$/', $token);
-        $this->assertSame($token, (string) $response->json('token'));
-        $this->assertSame($token, (string) $response->json('auth_token'));
+        $response->assertJsonMissingPath('token')
+            ->assertJsonMissingPath('auth_token');
 
         $legacyRow = DB::table('fm_tokens')
             ->where('token_hash', hash('sha256', $token))

@@ -669,7 +669,7 @@
       },
       "desktop_v2_package_dry_run": {
         "status": "pass",
-        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=<local-home>/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json",
         "evidence": "PASS: ok=true, status=pass, row_count=42, row_count_matches_expected=true, old_short_big_five_route_residue_count=0, locale_counts zh-CN=36 and en-US=6, and content type counts cover hub, trait, trait_range, combination, cross_reading, and result_review pages."
       },
       "focused_bigfive_runtime_freeze_classifier": {
@@ -698,11 +698,11 @@
       },
       "github_verify_bigfive_initial": {
         "status": "fail",
-        "evidence": "FAIL on PR #2722 verify-bigfive: PersonalityBigFiveCmsImportDraftDryRunCommandTest::test_dry_run_reads_desktop_cms_import_draft_without_writes returned exit code 1 because the test referenced /Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json, which is not present on GitHub runners."
+        "evidence": "FAIL on PR #2722 verify-bigfive: PersonalityBigFiveCmsImportDraftDryRunCommandTest::test_dry_run_reads_desktop_cms_import_draft_without_writes returned exit code 1 because the test referenced <local-home>/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json, which is not present on GitHub runners."
       },
       "github_verify_bigfive_fix_local": {
         "status": "pass",
-        "command": "php -l backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php && cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json && vendor/bin/pint --test tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php",
+        "command": "php -l backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php && cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityBigFiveCmsImportDraftDryRunCommandTest --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=<local-home>/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json && vendor/bin/pint --test tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php",
         "evidence": "PASS: replaced the CI test input with a repo-generated 42-row fixture while keeping the real desktop v2 package dry-run as a local validation command; focused command tests passed with 4 tests and 42 assertions."
       },
       "local_full_verify_after_ci_fix": {
@@ -807,7 +807,7 @@
       },
       "desktop_v2_package_faq_dedupe_dry_run": {
         "status": "pass",
-        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=/Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-cms-import-draft-dry-run --package=<local-home>/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json --dry-run --json",
         "evidence": "PASS: real desktop v2 package reports ok=true, row_count=42, faq_body_section_count=42, and faq_body_section_rows_count=42; render preview planning excludes FAQ body sections while keeping faq as the structured source."
       },
       "pint_targeted": {
@@ -2189,7 +2189,7 @@
         "status": "pass"
       },
       "workspace_safety": {
-        "evidence": "Started from clean /Users/rainie/Desktop/GitHub/fap-api main after git pull --ff-only origin main.",
+        "evidence": "Started from clean <local-home>/Desktop/GitHub/fap-api main after git pull --ff-only origin main.",
         "status": "pass"
       }
     },
@@ -7952,27 +7952,27 @@
         "summary": "Public runtime source is runtime projection / dataset authority; CMS/Ops source is career_jobs org_id=0; SEO Ops blockers are CMS CareerJob/CareerGuide SEO meta scope; SEO Intel dashboard reads seo_intel read-model tables and does not enumerate 1046 career runtime in inspected source."
       },
       {
-        "command": "cd /Users/rainie/Desktop/GitHub/fap-api/backend && php artisan test --filter=Career1046OpsScopeReconciliation01 --no-ansi",
+        "command": "cd <local-home>/Desktop/GitHub/fap-api/backend && php artisan test --filter=Career1046OpsScopeReconciliation01 --no-ansi",
         "status": "passed",
         "summary": "1 test / 54 assertions passed with a PHPUnit warning; exit code 0."
       },
       {
-        "command": "cd /Users/rainie/Desktop/GitHub/fap-api/backend && php artisan route:list --no-ansi",
+        "command": "cd <local-home>/Desktop/GitHub/fap-api/backend && php artisan route:list --no-ansi",
         "status": "passed",
         "summary": "203 routes listed."
       },
       {
-        "command": "cd /Users/rainie/Desktop/GitHub/fap-api/backend && vendor/bin/pint --test",
+        "command": "cd <local-home>/Desktop/GitHub/fap-api/backend && vendor/bin/pint --test",
         "status": "passed",
         "summary": "3626 files passed."
       },
       {
-        "command": "cd /Users/rainie/Desktop/GitHub/fap-api/backend && composer validate --strict",
+        "command": "cd <local-home>/Desktop/GitHub/fap-api/backend && composer validate --strict",
         "status": "passed",
         "summary": "composer.json is valid."
       },
       {
-        "command": "cd /Users/rainie/Desktop/GitHub/fap-api/backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "command": "cd <local-home>/Desktop/GitHub/fap-api/backend && composer audit --locked --no-interaction --ignore-unreachable",
         "status": "passed",
         "summary": "No security vulnerability advisories found."
       },
@@ -10286,7 +10286,7 @@
         "status": "pass"
       },
       "readiness_run": {
-        "evidence": "cd backend && php artisan career:validate-full-display-workbook --file=/Users/rainie/Desktop/费马资料文件/职业：人格与职业决策操作系统/职业内容资产/第九版_d23b_schema_repaired.xlsx --json --summary-only --output=/private/tmp/career-zh-parity-fix-01-readiness.json --plan-output=/private/tmp/career-zh-parity-fix-01-plan.json --plan-md-output=/private/tmp/career-zh-parity-fix-01-plan.md completed with exit 0. Summary report is 16319 bytes; full plan artifact is 3203390 bytes.",
+        "evidence": "cd backend && php artisan career:validate-full-display-workbook --file=<local-home>/Desktop/费马资料文件/职业：人格与职业决策操作系统/职业内容资产/第九版_d23b_schema_repaired.xlsx --json --summary-only --output=/private/tmp/career-zh-parity-fix-01-readiness.json --plan-output=/private/tmp/career-zh-parity-fix-01-plan.json --plan-md-output=/private/tmp/career-zh-parity-fix-01-plan.md completed with exit 0. Summary report is 16319 bytes; full plan artifact is 3203390 bytes.",
         "status": "pass"
       },
       "scope_validation": {
@@ -11064,7 +11064,7 @@
       {
         "at": "2026-05-31T06:52:16+08:00",
         "status": "in_progress",
-        "summary": "Started from origin/main in isolated worktree /Users/rainie/Desktop/GitHub/fap-api-content-packs-ci-artifact-consumer-split-01."
+        "summary": "Started from origin/main in isolated worktree <local-home>/Desktop/GitHub/fap-api-content-packs-ci-artifact-consumer-split-01."
       },
       {
         "at": "2026-05-31T07:02:42+08:00",
@@ -17978,7 +17978,7 @@
           "python3 - <<'PY'\nimport yaml, pathlib\nyaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\nprint('yaml ok')\nPY",
           "git diff --check",
           "git diff --cached --check",
-          "git -C /Users/rainie/Desktop/GitHub/fap-web status --short"
+          "git -C <local-home>/Desktop/GitHub/fap-web status --short"
         ],
         "evidence": "Focused Enneagram locale test, Enneagram flow regression, Big Five freeze classifier, route list, Pint, composer validate/audit, JSON/YAML parse, diff checks, and fap-web reference status passed locally.",
         "status": "pass"
@@ -18721,7 +18721,7 @@
           "python3 yaml parse for docs/codex/pr-train.yaml",
           "git diff --check",
           "git diff --cached --check",
-          "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
         ],
         "evidence": "Focused FermatMarketingSkillsAdaptation01 test passed with 1 test and 22 assertions. route:list exited 0 with 203 routes. Pint passed 3555 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, state JSON, manifest YAML parse, diff check, and fap-web reference status passed. Isolated worktree used local ignored vendor/.env only for validation.",
         "status": "pass"
@@ -18799,7 +18799,7 @@
           "python3 yaml parse for docs/codex/pr-train.yaml",
           "git diff --check",
           "git diff --cached --check",
-          "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
         ],
         "evidence": "Focused FermatMarketingSkillsAdaptation02 test passed with 1 test and 26 assertions. route:list exited 0 with 203 routes. Pint passed 3556 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, state JSON, manifest YAML parse, diff check, and fap-web reference status passed. Isolated worktree used local ignored vendor/.env only for validation.",
         "status": "pass"
@@ -19924,7 +19924,7 @@
         "status": "passed"
       },
       "fap_web_reference_check": {
-        "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+        "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
         "evidence": "No fap-web changes.",
         "status": "passed"
       },
@@ -20357,7 +20357,7 @@
         "status": "passed"
       },
       "fap_web_reference_check": {
-        "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+        "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
         "evidence": "Observed pre-existing untracked .playwright-mcp/ and article-image-smoke.png; no fap-web changes were made or committed by this task.",
         "status": "passed_with_preexisting_untracked_files"
       },
@@ -20479,7 +20479,7 @@
         "status": "passed"
       },
       "fap_web_reference_check": {
-        "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+        "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
         "evidence": "Observed pre-existing untracked fap-web files; no fap-web changes were made or committed by this task.",
         "status": "passed_with_preexisting_untracked_files"
       },
@@ -20600,7 +20600,7 @@
         "url": "https://github.com/fermatmind/fap-api/pull/1721"
       },
       "reference_only_fap_web": {
-        "evidence": "git status --short in /Users/rainie/Desktop/GitHub/fap-web returned clean; no fap-web files were committed.",
+        "evidence": "git status --short in <local-home>/Desktop/GitHub/fap-web returned clean; no fap-web files were committed.",
         "status": "passed"
       },
       "scope": {
@@ -20680,7 +20680,7 @@
         "status": "passed"
       },
       "fap_web_reference_check": {
-        "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+        "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
         "evidence": "No fap-web changes.",
         "status": "passed"
       },
@@ -20810,7 +20810,7 @@
         "url": "https://github.com/fermatmind/fap-api/pull/1723"
       },
       "reference_only_fap_web": {
-        "evidence": "git status --short in /Users/rainie/Desktop/GitHub/fap-web returned clean; no fap-web files were changed.",
+        "evidence": "git status --short in <local-home>/Desktop/GitHub/fap-web returned clean; no fap-web files were changed.",
         "status": "passed"
       },
       "scope": {
@@ -20887,7 +20887,7 @@
         "status": "passed"
       },
       "fap_web_reference_check": {
-        "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+        "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
         "evidence": "Observed pre-existing untracked .playwright-mcp/ and article-image-smoke.png; no fap-web changes were made or committed by this task.",
         "status": "passed_with_preexisting_untracked_files"
       },
@@ -23636,7 +23636,7 @@
       "local": {
         "commands": [
           {
-            "command": "shasum -a 256 /Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
+            "command": "shasum -a 256 <local-home>/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
             "status": "pass"
           },
           {
@@ -24155,7 +24155,7 @@
         "status": "pass"
       },
       "source_package": {
-        "evidence": "Uploaded zip /Users/rainie/Desktop/fermatmind-help-service-content-drafts-01.zip exists; SHA-256 2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6; zip contains 14 files including six md/yaml draft packages, README, and index.json.",
+        "evidence": "Uploaded zip <local-home>/Desktop/fermatmind-help-service-content-drafts-01.zip exists; SHA-256 2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6; zip contains 14 files including six md/yaml draft packages, README, and index.json.",
         "status": "pass"
       },
       "support_contact": {
@@ -25022,7 +25022,7 @@
         "status": "pass"
       },
       "source_package": {
-        "evidence": "Uploaded zip exists at /Users/rainie/Desktop/fermatmind-help-service-content-drafts-01.zip; SHA-256 2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6; index publish_allowed=false and requires_operator_review=true.",
+        "evidence": "Uploaded zip exists at <local-home>/Desktop/fermatmind-help-service-content-drafts-01.zip; SHA-256 2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6; index publish_allowed=false and requires_operator_review=true.",
         "status": "pass"
       },
       "support_contact": {
@@ -25208,8 +25208,8 @@
       "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-01"
     ],
     "external_asset_paths": [
-      "/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
-      "/Users/rainie/Desktop/fermatmind-help-service-content-drafts-01"
+      "<local-home>/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
+      "<local-home>/Desktop/fermatmind-help-service-content-drafts-01"
     ],
     "failure_reason": null,
     "local_cleanup_executed": true,
@@ -26427,7 +26427,7 @@
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "python3 yaml parse for docs/codex/pr-train.yaml",
           "git diff --check",
-          "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short --branch"
+          "cd <local-home>/Desktop/GitHub/fap-web && git status --short --branch"
         ],
         "evidence": "Focused test passed with 1 test and 22 assertions. route:list exited 0 with 203 routes. Pint passed 3553 files. composer validate --strict passed. composer audit reported no security advisories. Generated JSON, state JSON, manifest YAML parse, and diff check passed. fap-web remained reference-only with pre-existing unrelated GLOBAL parity branch modifications.",
         "status": "pass"
@@ -27636,7 +27636,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1476",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [
       {
         "blocks_merge": false,
@@ -27693,7 +27693,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1607",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "github_checks_passed",
     "title": "fix(ci): eliminate CiScaleImpact Semgrep findings"
@@ -28086,7 +28086,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1478",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "docs(ops): codify release operator workflow and deploy incident governance"
@@ -28149,7 +28149,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1477",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "docs(ops): codify canonical healthz and release-only deploy policy"
@@ -28182,7 +28182,7 @@
         "status": "pass"
       },
       "fap_web_reference_status": {
-        "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+        "command": "cd <local-home>/Desktop/GitHub/fap-web && git status --short",
         "evidence": "PASS: no fap-web changes reported.",
         "status": "pass"
       },
@@ -28323,7 +28323,7 @@
         "status": "pass"
       },
       "fap_web_reference_status": {
-        "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+        "command": "cd <local-home>/Desktop/GitHub/fap-web && git status --short",
         "evidence": "PASS: no fap-web changes reported.",
         "status": "pass"
       },
@@ -28453,7 +28453,7 @@
         "status": "pass"
       },
       "fap_web_reference_status": {
-        "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+        "command": "cd <local-home>/Desktop/GitHub/fap-web && git status --short",
         "evidence": "PASS: no fap-web changes reported.",
         "status": "pass"
       },
@@ -28591,7 +28591,7 @@
         "status": "pass"
       },
       "fap_web_reference_status": {
-        "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+        "command": "cd <local-home>/Desktop/GitHub/fap-web && git status --short",
         "evidence": "PASS: fap-web reference worktree clean.",
         "status": "pass"
       },
@@ -28712,7 +28712,7 @@
         "status": "pass"
       },
       "fap_web_reference_status": {
-        "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+        "command": "cd <local-home>/Desktop/GitHub/fap-web && git status --short",
         "evidence": "PASS: no fap-web changes reported.",
         "status": "pass"
       },
@@ -35327,7 +35327,7 @@
           "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
           "git diff --check",
           "git diff --cached --check",
-          "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
         ],
         "evidence": "Focused ResultEnParity05MbtiContentExport test passed with 5 tests and 79 assertions. route:list exited 0 with 203 routes. Pint passed 3545 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, manifest/state parse, git diff checks, and fap-web reference status passed; fap-web only has pre-existing untracked .playwright-mcp/.",
         "status": "pass"
@@ -35409,7 +35409,7 @@
           "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
           "git diff --check",
           "git diff --cached --check",
-          "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
         ],
         "evidence": "Focused ResultEnParity06BigFiveV2EnAssets test passed with 5 tests and 93 assertions. Focused Big Five runtime-freeze classifier test passed. php artisan test --filter=BigFive passed with 772 tests and 60954 assertions. route:list exited 0 with 203 routes. Pint passed 3547 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, draft catalog JSON parse, manifest/state parse, diff checks, and fap-web reference status passed; fap-web only has pre-existing untracked .playwright-mcp/.",
         "status": "pass"
@@ -37504,7 +37504,7 @@
           "python3 - <<'PY'\nimport yaml, pathlib\nyaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\nprint('yaml ok')\nPY",
           "git diff --check",
           "git diff --cached --check",
-          "git -C /Users/rainie/Desktop/GitHub/fap-web status --short"
+          "git -C <local-home>/Desktop/GitHub/fap-web status --short"
         ],
         "evidence": "After CI fix, Big Five freeze classifier test passed, RIASEC focused and flow tests passed, and route list, Pint, composer validate/audit, JSON/YAML parse, diff checks, and fap-web reference status passed locally.",
         "status": "pass"
@@ -37895,7 +37895,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1487",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-04: Top3 code chain strategy asset import"
@@ -37984,7 +37984,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1497",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-05: Import backend-authoritative RIASEC activity/task examples asset"
@@ -38078,7 +38078,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1496",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-05-PREFLIGHT: Activity/task examples asset preflight"
@@ -38162,7 +38162,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1500",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-06: Import backend-authoritative RIASEC occupation examples boundary asset"
@@ -38250,7 +38250,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1499",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-06-PREFLIGHT: Occupation examples asset preflight"
@@ -38344,7 +38344,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1493",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-07: 140Q task/environment/role narrative asset import"
@@ -38436,7 +38436,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1494",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-08: Low quality / confidence / near-tie copy asset import"
@@ -38515,7 +38515,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1502",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-09: Import backend-authoritative aspirations and disagree path assets"
@@ -38605,7 +38605,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1501",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-09-PREFLIGHT: Aspirations and disagree path asset preflight"
@@ -38700,7 +38700,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1505",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [
       {
         "summary": "PACK-10-FE is required after backend payload contract if Action Lab / Next Exploration Nodes should render as visible modules. No fap-web work in PACK-10-BE.",
@@ -38782,7 +38782,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1503",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [
       {
         "summary": "Unrelated SEO Intel files were present during PACK-10-PREFLIGHT local validation and were intentionally left untouched/uncommitted.",
@@ -38878,7 +38878,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1509",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-11-BE: Backend lifecycle copy import for Share/PDF/History/FAQ/Technical Note"
@@ -38971,7 +38971,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1507",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "merged",
     "title": "RIASEC-FULL-CONTENT-PACK-11-BE-PREFLIGHT: Share/PDF/History/FAQ/Technical Note lifecycle copy backend preflight"
@@ -39062,7 +39062,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1511",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "repo_path": "<local-home>/Desktop/GitHub/fap-api",
     "sidecar_issues": [],
     "status": "pr_opened_github_checks_pending",
     "title": "RIASEC-FULL-CONTENT-PACK-13-BE: Backend full content fixture matrix and forbidden claim freeze"
@@ -44759,6 +44759,22 @@
       "authorization": {
         "evidence": "Authorized by the 2026-07-03 SECURITY-169 attached /goal.",
         "status": "pass"
+      },
+      "focused_tests": {
+        "evidence": "Auth guest, order/search redaction contracts, GSC generated/live/sidecar contracts, and Big Five canonical normalization passed: 17 tests, 2878 assertions.",
+        "status": "pass"
+      },
+      "full_ci": {
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed, including auth guest, order security, migration, OpenAPI, dependency security, webhook/attempt, and strict queue backlog gates.",
+        "status": "pass"
+      },
+      "route_and_migration": {
+        "evidence": "php artisan route:list --no-ansi completed with 233 routes, and a fresh SQLite migration completed successfully.",
+        "status": "pass"
+      },
+      "scope_validation": {
+        "evidence": "All 19 changed paths are listed in SECURITY-169-API-36 allowed_paths; Pint, JSON/YAML parsing, SHA256SUMS verification, sensitive-evidence scans, runtime-freeze classification, and git diff --check passed.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -44774,6 +44790,21 @@
         "at": "2026-07-03T00:00:00+08:00",
         "note": "Registered authorized SECURITY-169-API-36; execution waits for declared dependency merge.",
         "status": "planned"
+      },
+      {
+        "at": "2026-07-11T04:55:00+08:00",
+        "note": "Dependency SECURITY-169-API-35 is implementation-merged and ledger-closed; started scoped remediation for findings #012, #017, #020, #075, #076, #079, #108, #109, #114, #116, #117, #123, and #130.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T05:02:00+08:00",
+        "note": "Implementation, focused tests, route/migration checks, artifact checksum and redaction scans, scope validation, and full local CI passed; no CMS/search write, production import, deploy, or external submission executed.",
+        "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T05:09:00+08:00",
+        "note": "Inspected the first GitHub verify-bigfive failure: its runtime-freeze branch classifier treated the non-MBTI AuthGuestController response hardening as MBTI-impacting. Added an exact-path classifier regression in current scope; the failing assertions and the full Big Five gate then passed (1186 tests, 150161 assertions).",
+        "status": "in_progress"
       }
     ],
     "failure_reason": null,
@@ -44785,7 +44816,7 @@
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "planned",
+    "status": "in_progress",
     "title": "SECURITY-169-API-36: redact committed sensitive docs and local paths",
     "train_scope": "security_169_fap_api_audit"
   },
@@ -50058,9 +50089,9 @@
       },
       "frontend_readonly_code_inspection": {
         "commands": [
-          "sed -n '620,900p' /Users/rainie/Desktop/GitHub/fap-web/next-sitemap.config.js",
-          "sed -n '995,1035p' /Users/rainie/Desktop/GitHub/fap-web/app/llms-full.txt/route.ts",
-          "sed -n '1,310p' /Users/rainie/Desktop/GitHub/fap-web/app/api/content-release/revalidate/route.ts"
+          "sed -n '620,900p' <local-home>/Desktop/GitHub/fap-web/next-sitemap.config.js",
+          "sed -n '995,1035p' <local-home>/Desktop/GitHub/fap-web/app/llms-full.txt/route.ts",
+          "sed -n '1,310p' <local-home>/Desktop/GitHub/fap-web/app/api/content-release/revalidate/route.ts"
         ],
         "notes": "fap-web was read only. next-sitemap builds article paths at build time; llms-full uses 60-minute fresh and 24-hour stale response cache; article revalidation derives article list/detail paths but not llms.txt or llms-full.txt by default.",
         "status": "passed"
@@ -51635,7 +51666,7 @@
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "git diff --check",
-          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/iq-method-pages.<temp>.sqlite php artisan migrate --force --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/iq-method-pages.<temp>.sqlite php artisan articles:import-iq-method-pages-draft --package=/Users/rainie/Desktop/GitHub/fap-web --dry-run --json"
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/iq-method-pages.<temp>.sqlite php artisan migrate --force --no-ansi && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/iq-method-pages.<temp>.sqlite php artisan articles:import-iq-method-pages-draft --package=<local-home>/Desktop/GitHub/fap-web --dry-run --json"
         ],
         "notes": "Syntax, command discovery, targeted Pint, focused PHPUnit, route:list, YAML/JSON parse, diff check, and real fap-web IQ method dry-run package validation passed. Real package dry-run returned ok=true, action=would_create_draft, article_count=7, errors_count=0."
       },
@@ -59029,7 +59060,7 @@
             "YAML parse docs/codex/pr-train.yaml",
             "git diff --check",
             "git diff --cached --check",
-            "git -C /Users/rainie/Desktop/GitHub/fap-web status --short"
+            "git -C <local-home>/Desktop/GitHub/fap-web status --short"
           ],
           "evidence": "Focused test, route:list, Pint, composer validate/audit, JSON/YAML parse, diff checks, and fap-web reference clean status passed locally.",
           "status": "pass"
@@ -59241,7 +59272,7 @@
             "python3 YAML parse docs/codex/pr-train.yaml",
             "git diff --check",
             "git diff --cached --check",
-            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+            "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3565 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed.",
           "status": "pass"
@@ -59354,7 +59385,7 @@
             "python3 YAML parse docs/codex/pr-train.yaml",
             "git diff --check",
             "git diff --cached --check",
-            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+            "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3568 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed.",
           "status": "pass"
@@ -59532,7 +59563,7 @@
             "python3 YAML parse docs/codex/pr-train.yaml",
             "git diff --check",
             "git diff --cached --check",
-            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+            "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3564 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed.",
           "status": "pass"
@@ -59634,7 +59665,7 @@
             "python3 yaml parse for docs/codex/pr-train.yaml",
             "git diff --check",
             "git diff --cached --check",
-            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+            "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "Focused test passed: 1 test, 18 assertions. route:list exited 0 with 203 routes. Pint passed 3562 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, batch plan JSON, state JSON, manifest YAML parse, git diff --check, git diff --cached --check, and fap-web reference status passed.",
           "status": "pass"
@@ -59811,7 +59842,7 @@
             "YAML parse docs/codex/pr-train.yaml",
             "git diff --check",
             "git diff --cached --check",
-            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+            "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "All Batch-07 local validation commands passed; focused test reported 1 isolated-env warning but 793 assertions completed with no failures.",
           "status": "pass"
@@ -59980,7 +60011,7 @@
             "python3 yaml parse for docs/codex/pr-train.yaml",
             "git diff --check",
             "git diff --cached --check",
-            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+            "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "Focused GlobalEnZhParityScan00 test exited 0 with 23 assertions and a PHPUnit warning; php artisan route:list exited 0 with 203 routes; vendor/bin/pint --test passed 3552 files; composer validate --strict passed; composer audit --locked --no-interaction --ignore-unreachable reported no advisories; generated JSON parsed; pr-train state JSON parsed; pr-train YAML parsed; git diff --check and git diff --cached --check passed; fap-web reference git status --short was clean.",
           "status": "pass"
@@ -60069,7 +60100,7 @@
             "python3 YAML parse docs/codex/pr-train.yaml",
             "git diff --check",
             "git diff --cached --check",
-            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+            "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3567 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed.",
           "status": "pass"
@@ -60185,7 +60216,7 @@
             "YAML parse docs/codex/pr-train.yaml",
             "git diff --check",
             "git diff --cached --check",
-            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+            "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "All Batch-06 local validation commands passed; focused test reported 1 warning in isolated env but 343 assertions completed with no failures.",
           "status": "pass"
@@ -60288,7 +60319,7 @@
             "python3 YAML parse docs/codex/pr-train.yaml",
             "git diff --check",
             "git diff --cached --check",
-            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+            "cd <local-home>/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3566 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed.",
           "status": "pass"
@@ -61540,7 +61571,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1480",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "merged",
       "title": "docs(seo-intel): add Metabase ops access runbook"
@@ -61597,7 +61628,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1486",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [
         {
           "evidence": "The item is merged on GitHub and local main is synced, but the ledger still records pr_opened_github_checks_pending.",
@@ -61669,7 +61700,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1488",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "merged",
       "title": "docs(seo-intel): add Ops Portal SEO auth audit contract"
@@ -61726,7 +61757,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1489",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "merged",
       "title": "feat(ops): add SEO dashboard access shell"
@@ -61783,7 +61814,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1490",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "merged",
       "title": "docs(seo-intel): add private Metabase access bridge contract"
@@ -61847,7 +61878,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1491",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "merged",
       "title": "docs(seo-intel): add Ops Portal SEO access verification contract"
@@ -61889,7 +61920,7 @@
       "pr_url": null,
       "remote_branch_deleted": null,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "verified",
       "title": "/ops/seo production access verification"
@@ -64266,7 +64297,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1481",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "merged",
       "title": "feat(cms): add Research Asset backend MVP"
@@ -64340,7 +64371,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1482",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "merged",
       "title": "docs(research): add SEO GEO search channel contract"
@@ -68519,7 +68550,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1504",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "merged",
       "title": "feat(seo-intel): add Research report URL Truth observation"
@@ -68572,7 +68603,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1485",
       "remote_branch_deleted": false,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "github_checks_passed_pending_merge",
       "title": "docs(research): add first Research publish readiness checklist"
@@ -69696,7 +69727,7 @@
       "scope_type": "backend_projection_report_deep_content_slots_only",
       "sidecar_issues": [
         {
-          "evidence": "/Users/rainie/Desktop/GitHub/fap-api has uncommitted backend/docs/codex/pr-train.yaml and backend/docs/codex/pr-train-state.json edits on codex/pr-cms-01-article-editorial-package-draft-gate. 08A is isolated in /private/tmp/fap-api-riasec-deep-copy-08a.",
+          "evidence": "<local-home>/Desktop/GitHub/fap-api has uncommitted backend/docs/codex/pr-train.yaml and backend/docs/codex/pr-train-state.json edits on codex/pr-cms-01-article-editorial-package-draft-gate. 08A is isolated in /private/tmp/fap-api-riasec-deep-copy-08a.",
           "severity": "medium",
           "suggested_owner": "repo-maintenance",
           "title": "Primary fap-api worktree contains unrelated PR-CMS train metadata edits"
@@ -70395,7 +70426,7 @@
         "local": {
           "composer_audit": "passed: composer audit --locked --no-interaction --ignore-unreachable",
           "composer_validate": "passed: composer validate --strict",
-          "fap_web_reference_status": "passed: git status --short returned clean in /Users/rainie/Desktop/GitHub/fap-web",
+          "fap_web_reference_status": "passed: git status --short returned clean in <local-home>/Desktop/GitHub/fap-web",
           "focused_twenty_four_hour_review_test": "passed: php artisan test --filter=SeoIntelSearchChannelLiveZhMbti02TwentyFourHourReview --no-ansi (1 test, 20 assertions)",
           "git_diff_cached_check": "passed: git diff --cached --check",
           "git_diff_check": "passed: git diff --check",
@@ -71905,7 +71936,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1551",
       "remote_branch_deleted": false,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "merged",
       "title": "docs(seo-intel): finalize SEO Dash MVP online closeout"
@@ -71977,7 +72008,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1479",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [
         {
           "evidence": "GitHub reports PR #1478 merged and origin/main contains f04fe2048cab11f61fa18e1fbbde5023e5193bcf; state file still showed in_progress before this PR.",
@@ -74560,7 +74591,7 @@
           "why_external_to_current_pr": "This scan does not modify API TLS, gateway, DNS, or backend runtime; production public page checks still completed through fermatmind.com."
         },
         {
-          "affected_command_or_check": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+          "affected_command_or_check": "cd <local-home>/Desktop/GitHub/fap-web && git status --short",
           "evidence": "branch codex/search-channel-live-zh-mbti-01a-indexnow-keylocation-fix with untracked .playwright-mcp/",
           "follow_up_recommendation": "Run fap-web reference validation from clean main before implementation PRs that touch frontend runtime.",
           "repo": "fap-web",
@@ -74990,7 +75021,7 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1512",
       "remote_branch_deleted": true,
       "repo": "fap-api",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "repo_path": "<local-home>/Desktop/GitHub/fap-api",
       "sidecar_issues": [],
       "status": "merged",
       "title": "feat(seo-intel): add two-stage URL Truth handoff"
@@ -75560,7 +75591,7 @@
           "status": "pass"
         },
         "github_ci_failure_triage": {
-          "command": "python3 /Users/rainie/.codex/skills/gh-fix-ci/scripts/inspect_pr_checks.py --repo /Users/rainie/Desktop/GitHub/fap-api --pr 1454 --json",
+          "command": "python3 <local-home>/.codex/skills/gh-fix-ci/scripts/inspect_pr_checks.py --repo <local-home>/Desktop/GitHub/fap-api --pr 1454 --json",
           "evidence": "GitHub failed verify-mbti-legacy and verify-mbti-v2 because BigFive runtime freeze classifier flagged backend/app/Console/Commands/StorageReleaseRootsAudit.php as a runtime path diff.",
           "status": "pass"
         },
@@ -77514,7 +77545,7 @@
           "status": "passed"
         },
         "fap_web_reference_check": {
-          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes.",
           "status": "passed"
         },
@@ -77624,7 +77655,7 @@
           "status": "passed"
         },
         "fap_web_reference_check": {
-          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes.",
           "status": "passed"
         },
@@ -77738,7 +77769,7 @@
           "status": "passed"
         },
         "fap_web_reference_check": {
-          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes.",
           "status": "passed"
         },
@@ -77857,7 +77888,7 @@
           "status": "passed"
         },
         "fap_web_reference_check": {
-          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes.",
           "status": "passed"
         },
@@ -77969,7 +78000,7 @@
           "status": "passed"
         },
         "fap_web_reference_check": {
-          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes after removing local browser snapshot artifacts.",
           "status": "passed"
         },
@@ -78463,7 +78494,7 @@
           "status": "passed"
         },
         "fap_web_reference_check": {
-          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes.",
           "status": "passed"
         },
@@ -78574,7 +78605,7 @@
           "status": "passed"
         },
         "fap_web_reference_check": {
-          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes after removing local browser snapshot artifacts.",
           "status": "passed"
         },
@@ -78693,7 +78724,7 @@
           "status": "passed"
         },
         "fap_web_reference_check": {
-          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "command": "git -C <local-home>/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes.",
           "status": "passed"
         },
@@ -80275,7 +80306,7 @@
           "status": "pass"
         },
         "fap_web_reference_status": {
-          "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+          "command": "cd <local-home>/Desktop/GitHub/fap-web && git status --short",
           "evidence": "PASS: fap-web reference worktree clean.",
           "status": "pass"
         },
@@ -81672,7 +81703,7 @@
       },
       "real_package_temp_sqlite_readback": {
         "status": "pass",
-        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/iq-method-readback-<temp>.sqlite php artisan migrate --force --no-ansi && php artisan articles:import-iq-method-pages-draft --package=/Users/rainie/Desktop/GitHub/fap-web --json && php artisan articles:iq-method-pages-readback --package=/Users/rainie/Desktop/GitHub/fap-web --json",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/iq-method-readback-<temp>.sqlite php artisan migrate --force --no-ansi && php artisan articles:import-iq-method-pages-draft --package=<local-home>/Desktop/GitHub/fap-web --json && php artisan articles:iq-method-pages-readback --package=<local-home>/Desktop/GitHub/fap-web --json",
         "evidence": "PASS: real fap-web IQ method dry-run package imported 7 draft articles into temp sqlite and readback returned ok=true, status=pass, article_readbacks=7, mismatch_count=0."
       },
       "route_list": {
@@ -82525,7 +82556,7 @@
       },
       "cms_import_draft_json": {
         "status": "pass",
-        "command": "python3 -m json.tool /Users/rainie/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json >/dev/null",
+        "command": "python3 -m json.tool <local-home>/Desktop/fermatmind-big-five-public-assets-v2-repaired/cms/cms-import-draft.json >/dev/null",
         "evidence": "PASS: cms-import-draft.json parses as JSON."
       },
       "report_json": {
@@ -83592,7 +83623,7 @@
       },
       "real_package_preflight": {
         "status": "pass",
-        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json",
         "evidence": "PASS: real CMS-22/CMS-23 package preflight returned status=pass, record_count=9, profile_record_count=4, comparison_record_count=5, writes_committed=false."
       },
       "full_mbti_ci": {
@@ -83615,7 +83646,7 @@
       },
       "post_merge_revalidation": {
         "status": "partial_external_local_main_sync_blocked",
-        "evidence": "PR #2771 is MERGED; origin/main contains merge commit 63f1f9b35d90d3f409468640fd1ede3604f7e909; remote branch codex/mbti-cms-26-content15-mixed-import-preflight is deleted; local task worktree /Users/rainie/Desktop/GitHub/fap-api-mbti-cms-26 and local task branch were deleted. Local main sync is blocked by unrelated staged files in /Users/rainie/Desktop/GitHub/fap-api-mbti-main-free-faq-content-01 and is recorded in generated/pr-train-sidecar-issues."
+        "evidence": "PR #2771 is MERGED; origin/main contains merge commit 63f1f9b35d90d3f409468640fd1ede3604f7e909; remote branch codex/mbti-cms-26-content15-mixed-import-preflight is deleted; local task worktree <local-home>/Desktop/GitHub/fap-api-mbti-cms-26 and local task branch were deleted. Local main sync is blocked by unrelated staged files in <local-home>/Desktop/GitHub/fap-api-mbti-main-free-faq-content-01 and is recorded in generated/pr-train-sidecar-issues."
       }
     },
     "scope_validation": {
@@ -83698,7 +83729,7 @@
       },
       "real_package_preflight": {
         "status": "pass",
-        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=/Users/rainie/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json",
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:mbti-content15-mixed-import-preflight --package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-22-import-dry-run-final-2026-07-05.json --authorization-package=<local-home>/Desktop/GitHub/fap-web/docs/seo/personality/mbti-cms-23-production-import-authorization-package-2026-07-05.json --source-package-sha256=75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb --authorization-payload-sha256=be0d1bb584c15f383322c9e5aff560709c46ea1e34d135cb9ced6d1e4601fe15 --import-scope-mode=top_blocker_batch_only --record-count=9 --dry-run --json",
         "evidence": "PASS: real CMS-22/CMS-23 preflight returned status=pass, cross_type_comparison_count=4, writes_committed=false, and cross-type rows target mbti_cross_type_comparison_authorities."
       },
       "format_and_manifest": {
