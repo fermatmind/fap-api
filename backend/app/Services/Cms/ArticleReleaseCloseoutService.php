@@ -440,12 +440,22 @@ final class ArticleReleaseCloseoutService
                 continue;
             }
 
-            $channelOk = in_array((string) $row->approval_state, ['approved'], true)
+            $submitted = (string) $row->approval_state === 'approved'
                 && in_array((string) $row->execution_state, ['accepted', 'submitted', 'submit_succeeded'], true);
+            $providerHold = $channel === 'baidu_push'
+                && (string) $row->approval_state === 'approved'
+                && (string) $row->execution_state === 'provider_security_hold'
+                ? $this->providerSecurityHoldEvidence((int) $row->id)
+                : null;
+            $channelOk = $submitted || $providerHold !== null;
 
             $channels[$channel] = [
                 'present' => true,
                 'ok' => $channelOk,
+                'submitted' => $submitted,
+                'intentional_hold' => $providerHold !== null,
+                'hold_reason' => $providerHold['reason'] ?? null,
+                'hold_evidence_event_id' => $providerHold['event_id'] ?? null,
                 'queue_item_id' => (int) $row->id,
                 'approval_state' => (string) $row->approval_state,
                 'execution_state' => (string) $row->execution_state,
@@ -453,7 +463,7 @@ final class ArticleReleaseCloseoutService
             ];
 
             if (! $channelOk) {
-                $issues[] = $this->issue('search_channel.'.$channel, 'search_channel_queue_not_accepted', 'Search Channel queue item must be approved and accepted/submitted.', [
+                $issues[] = $this->issue('search_channel.'.$channel, 'search_channel_queue_not_accepted', 'Search Channel queue item must be approved and accepted/submitted, or Baidu must have a verified provider security hold.', [
                     'channel' => $channel,
                     'queue_item_id' => (int) $row->id,
                     'approval_state' => (string) $row->approval_state,
@@ -467,6 +477,38 @@ final class ArticleReleaseCloseoutService
             'table_available' => true,
             'channels' => $channels,
             'issues' => $issues,
+        ];
+    }
+
+    /** @return array{event_id:int,reason:string,evidence_kind:?string}|null */
+    private function providerSecurityHoldEvidence(int $queueItemId): ?array
+    {
+        $connection = (string) config('seo_intel.connection', 'seo_intel');
+        if (! Schema::connection($connection)->hasTable('seo_search_channel_queue_events')) {
+            return null;
+        }
+
+        $event = DB::connection($connection)
+            ->table('seo_search_channel_queue_events')
+            ->where('queue_item_id', $queueItemId)
+            ->where('event_type', 'search_channel_provider_security_hold_recorded')
+            ->orderByDesc('id')
+            ->first();
+        $payload = $event === null ? null : json_decode((string) $event->event_payload, true);
+
+        if (! is_array($payload)
+            || ($payload['channel'] ?? null) !== 'baidu_push'
+            || ($payload['to_execution_state'] ?? null) !== 'provider_security_hold'
+            || ($payload['reason'] ?? null) !== 'transport_security_unavailable'
+            || ($payload['external_calls_attempted'] ?? null) !== false
+            || ($payload['search_submission_attempted'] ?? null) !== false) {
+            return null;
+        }
+
+        return [
+            'event_id' => (int) $event->id,
+            'reason' => 'transport_security_unavailable',
+            'evidence_kind' => is_string($payload['evidence_kind'] ?? null) ? $payload['evidence_kind'] : null,
         ];
     }
 
