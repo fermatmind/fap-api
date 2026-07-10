@@ -83104,5 +83104,35 @@
         "note": "Registered MBTI-CMS-28 as the read-only post-import verification step. It cannot start until MBTI-CMS-27 production import is authorized, executed, and merged/evidence-recorded."
       }
     ]
+  },
+  "BIG5-EN-DOMAIN-CONTENT-PACKAGE-01": {
+    "id": "BIG5-EN-DOMAIN-CONTENT-PACKAGE-01",
+    "repo": "fap-api",
+    "title": "BIG5-EN-DOMAIN-CONTENT-PACKAGE-01: package five English Big Five domain assets",
+    "base": "main",
+    "branch": "codex/big5-en-domain-content-package-01",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "commit_sha": "903e1200a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2832",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {"status": "pass", "evidence": "User authorized the locked PR train and current-PR-only registration."},
+      "package_dry_run": {"status": "pass", "evidence": "Five-asset V1 package: valid_count=5, errors_count=0, and all indexability gates false."},
+      "required_local_contract_test": {"status": "pass", "evidence": "14 tests / 421 assertions passed after legacy facet collision handling was corrected."},
+      "core_ci": {"status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed locally."},
+      "github_checks": {"status": "pass", "evidence": "PR #2832 required CI and Code Scanning checks passed after the rebase at 2026-07-10T00:07:43Z."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "transitions": [
+      {"at": "2026-07-10T00:00:00Z", "from": "unregistered", "to": "planned", "note": "Registered only the current PR."},
+      {"at": "2026-07-10T00:00:00Z", "from": "planned", "to": "in_progress", "note": "Generated and validated the noindex draft-only package."},
+      {"at": "2026-07-10T00:00:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Dry-run, contract test, and core CI passed."},
+      {"at": "2026-07-10T00:00:00Z", "from": "local_checks_passed", "to": "pr_open", "note": "Opened PR #2832 and recorded green required checks prior to rebase."},
+      {"at": "2026-07-10T00:07:43Z", "from": "pr_open", "to": "ready_to_merge", "note": "Rebased PR checks and Code Scanning are green; merge policy permits squash auto-merge."}
+    ]
   }
 }

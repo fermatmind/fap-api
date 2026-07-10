@@ -177,6 +177,20 @@ final class PersonalityPublicAssetsImport extends Command
      */
     private function filterAssets(array $assets, array $selectedFrameworks, string $sourcePackage, string $sourceHash): array
     {
+        $canonicalFacetDetailPersistenceKeys = [];
+        foreach ($assets as $asset) {
+            if (! is_array($asset)) {
+                continue;
+            }
+
+            if (($asset['framework'] ?? null) !== PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE
+                || ($asset['entity_type'] ?? null) !== PersonalityPublicContentAsset::ENTITY_FACET_DETAIL) {
+                continue;
+            }
+
+            $canonicalFacetDetailPersistenceKeys[$this->persistenceKey($asset)] = true;
+        }
+
         $filtered = [];
         foreach ($assets as $asset) {
             if (! is_array($asset)) {
@@ -188,12 +202,34 @@ final class PersonalityPublicAssetsImport extends Command
                 continue;
             }
 
+            $entityType = (string) ($asset['entity_type'] ?? '');
+            if ($framework === PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE
+                && $entityType === PersonalityPublicContentAsset::ENTITY_FACET
+                && isset($canonicalFacetDetailPersistenceKeys[$this->persistenceKey($asset)])) {
+                // The table has a unique persisted slug per framework/locale. facet_detail is the
+                // current canonical route entity; the legacy facet stub cannot coexist with it.
+                continue;
+            }
+
             $asset['source_package'] = trim((string) ($asset['source_package'] ?? $sourcePackage));
             $asset['source_hash'] = trim((string) ($asset['source_hash'] ?? $sourceHash));
             $filtered[] = $asset;
         }
 
         return $filtered;
+    }
+
+    /**
+     * @param  array<string,mixed>  $asset
+     */
+    private function persistenceKey(array $asset): string
+    {
+        return implode('|', [
+            max(0, (int) ($asset['org_id'] ?? 0)),
+            PersonalityPublicContentAsset::normalizeToken((string) ($asset['framework'] ?? '')),
+            PersonalityPublicContentAsset::normalizeSlug((string) ($asset['slug'] ?? '')),
+            PersonalityPublicContentAsset::normalizeLocale((string) ($asset['locale'] ?? 'en')),
+        ]);
     }
 
     private function findExisting(PersonalityPublicContentAssetData $asset): ?PersonalityPublicContentAsset

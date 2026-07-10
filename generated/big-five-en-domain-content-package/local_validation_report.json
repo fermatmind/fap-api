@@ -1,0 +1,23 @@
+{
+  "pr_id": "BIG5-EN-DOMAIN-CONTENT-PACKAGE-01",
+  "recorded_at": "2026-07-10T00:00:00Z",
+  "package_validation": {
+    "source": "generated/big-five-en-domain-content-package/big_five_en_domain_5_seed.json",
+    "assets_found": 5,
+    "valid_count": 5,
+    "errors_count": 0,
+    "bodyMd_count": 0,
+    "empty_body_md_count": 0,
+    "indexable_count": 0,
+    "sitemap_eligible_count": 0,
+    "llms_eligible_count": 0,
+    "status": "pass"
+  },
+  "required_local_check": {
+    "command": "cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --no-ansi",
+    "status": "pass",
+    "failure": null,
+    "scope_assessment": "A user-authorized importer correction skips legacy facet stubs that collide with canonical facet_detail persisted slugs. The repaired contract test passes with 421 assertions."
+  },
+  "overall": "pass"
+}

@@ -1,0 +1,36 @@
+{
+  "package": "big-five-en-domain-content-package-2026-07-10",
+  "access_date": "2026-07-10",
+  "sources": [
+    {
+      "id": "internal-existing-assets",
+      "type": "internal",
+      "reference": "backend/content_assets/personality_public/big_five_v1_seed.json",
+      "use": "field shape, current section keys, route and launch gates"
+    },
+    {
+      "id": "internal-editorial-review",
+      "type": "internal",
+      "reference": "fap-web/docs/research/personality/big-five-v1-editorial-ux-review-02",
+      "use": "thin-content and duplicate-risk findings"
+    },
+    {
+      "id": "public-framework-boundary",
+      "type": "internal",
+      "reference": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+      "use": "non-diagnostic and non-deterministic public claim boundary"
+    },
+    {
+      "id": "bfm-review",
+      "type": "academic",
+      "reference": "John, O. P., Naumann, L. P., & Soto, C. J. (2008). Paradigm Shift to the Integrative Big Five Trait Taxonomy.",
+      "use": "broad five-factor trait framing",
+      "limitation": "No numeric validity or individual predictive claim is made."
+    }
+  ],
+  "gsc_evidence": "GSC_EVIDENCE_PENDING",
+  "limitations": [
+    "This package is public explanatory content, not an individual interpretation.",
+    "No clinical, hiring, admission, salary, relationship-success, or deterministic career claims are allowed."
+  ]
+}
