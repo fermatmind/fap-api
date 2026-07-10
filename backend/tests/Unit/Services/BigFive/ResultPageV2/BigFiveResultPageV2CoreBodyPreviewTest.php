@@ -1002,13 +1002,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_ignores_scale_lookup_public_commercial_projection(): void
+    public function test_runtime_freeze_classifier_keeps_scale_lookup_controller_changes_blocking(): void
     {
         $changed = [
             'backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php',
         ];
 
-        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+        $this->assertSame($changed, $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
     public function test_runtime_freeze_classifier_ignores_clinical_combo_en_paid_parity_changes(): void
@@ -2774,13 +2774,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_ignores_destructive_migration_retirement_evidence(): void
+    public function test_runtime_freeze_classifier_keeps_destructive_migration_changes_blocking(): void
     {
         $changed = [
             'backend/database/migrations/2026_03_26_120000_drop_attempt_quality_table.php',
         ];
 
-        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+        $this->assertSame($changed, $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
     public function test_runtime_freeze_classifier_ignores_order_tenant_ownership_boundary_changes(): void
@@ -5874,10 +5874,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if ($this->isDestructiveMigrationRetirementEvidenceFile($file)) {
-                continue;
-            }
-
             if (
                 $file === 'backend/app/Services/Attempts/AttemptSubmitService.php'
                 && $this->attemptSubmitServiceDiffIsIqResultSecrecyRedactionOnly(
@@ -6549,10 +6545,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isFreeFullReportModeFeatureFlagFile($file)) {
-                continue;
-            }
-
-            if ($this->isScaleLookupPublicCommercialProjectionFile($file)) {
                 continue;
             }
 
@@ -8090,11 +8082,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
-    private function isDestructiveMigrationRetirementEvidenceFile(string $file): bool
-    {
-        return $file === 'backend/database/migrations/2026_03_26_120000_drop_attempt_quality_table.php';
-    }
-
     private function isIqScoringContractFoundationFile(string $file): bool
     {
         return in_array($file, [
@@ -8426,11 +8413,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Report/Resolvers/AccessResolver.php',
             'backend/config/fap.php',
         ], true);
-    }
-
-    private function isScaleLookupPublicCommercialProjectionFile(string $file): bool
-    {
-        return $file === 'backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php';
     }
 
     private function isClinicalComboEnPaidParityFile(string $file): bool

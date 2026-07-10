@@ -36400,9 +36400,11 @@ prs:
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - .github/workflows/ci.yml
       - backend/app/Services/Ci/ScaleImpactResolver.php
+      - backend/tests/Unit/Ci/ScaleImpactResolverTest.php
       - backend/scripts/ci_verify_mbti.sh
       - backend/database/migrations/2026_03_26_120000_drop_attempt_quality_table.php
       - backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Run deploys, production imports, CMS/search writes, external submissions, or unrelated frontend changes.

@@ -104,14 +104,7 @@ final class ScaleImpactResolver
         $runSds20Gate = $sharedChanged || $sdsChanged;
         $runEq60Gate = $sharedChanged || $eqChanged;
         $runSdsNormsGate = $sharedChanged || $sdsNormsChanged;
-        $runMbtiSmoke = ! $analyticsChanged
-            || $sharedChanged
-            || $mbtiChanged
-            || $big5Changed
-            || $clinicalChanged
-            || $sdsChanged
-            || $eqChanged
-            || $sdsNormsChanged;
+        $runMbtiSmoke = true;
 
         $scaleScope = $this->buildScaleScope(
             $analyticsChanged,
@@ -377,7 +370,7 @@ final class ScaleImpactResolver
         }
 
         if ($analyticsChanged && ! $mbtiChanged && ! $big5Changed && ! $clinicalChanged && ! $sdsChanged && ! $eqChanged) {
-            return 'analytics_only_no_mbti_smoke';
+            return 'analytics_only_with_mbti_smoke';
         }
 
         if ($runBig5OceanGate && $runClinicalCombo68Gate && $runSds20Gate) {
@@ -466,7 +459,7 @@ final class ScaleImpactResolver
         }
 
         if ($analyticsChanged && ! $mbtiChanged && ! $big5Changed && ! $clinicalChanged && ! $sdsChanged && ! $eqChanged && ! $sdsNormsChanged) {
-            return 'analytics-only change: skip MBTI smoke and keep backend analytics checks scoped';
+            return 'analytics-only change: keep backend analytics checks scoped and retain MBTI smoke';
         }
 
         if ($big5Changed && $clinicalChanged && $sdsChanged) {
