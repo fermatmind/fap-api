@@ -45074,13 +45074,17 @@
         "evidence": "Added MediaVariantGenerator to the scoped CMS media pipeline classifier and its explicit regression input; 303 tests with 322 assertions and scoped Pint passed.",
         "status": "pass"
       },
+      "github_final": {
+        "evidence": "PR #2925 passed all GitHub checks after the scoped classifier repair and merged as c3b45b30ee1e05f35343f1283301c07a548c1509; origin/main contains the merge commit.",
+        "status": "pass"
+      },
       "scope_validation": {
         "evidence": "All 6 changed paths are listed in SECURITY-169-API-40 allowed_paths; route listing, fresh SQLite migration, focused tests, Pint, YAML/JSON parse, and git diff --check passed.",
         "status": "pass"
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "c3b45b30ee1e05f35343f1283301c07a548c1509",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -45097,18 +45101,23 @@
         "at": "2026-07-11T06:50:00+08:00",
         "note": "Implemented asset-ID-bound storage namespaces and removed original upload filenames from persistence and API serialization; focused media/import tests passed.",
         "status": "in_progress"
+      },
+      {
+        "at": "2026-07-11T07:09:46+08:00",
+        "note": "PR #2925 merged after all required checks passed; origin/main synced and implementation task branches/worktree cleaned.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-40",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-11T07:09:10+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2925",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "in_progress",
+    "status": "merged",
     "title": "SECURITY-169-API-40: harden media upload and variant filename privacy",
     "train_scope": "security_169_fap_api_audit"
   },
