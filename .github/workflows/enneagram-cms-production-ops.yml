@@ -205,6 +205,61 @@ jobs:
             else "blocked"
             end
           ' "$RUN_DIR/promote-dry-run.json")"
+          write_inspection_summary() {
+            local outcome="$1"
+            jq -n \
+              --arg release_sha "$RELEASE_SHA" \
+              --arg operation_mode "$OPERATION_MODE" \
+              --arg package_sha "$PACKAGE_SHA" \
+              --arg qa_sha "$QA_SHA" \
+              --arg outcome "$outcome" \
+              --arg promotion_inspect_state "$promotion_inspect_state" \
+              --argjson promotion_inspect_exit_code "$promotion_inspect_status" \
+              --slurpfile draft "$RUN_DIR/draft-dry-run.json" \
+              --slurpfile promote "$RUN_DIR/promote-dry-run.json" \
+              'def count_action($name): [.rows[]? | select((.action // "") == $name)] | length;
+               def count_error($code): [.errors[]? | select((.code // "") == $code)] | length;
+               {
+                 schema_version:"enneagram_cms_production_ops.v2",
+                 outcome:$outcome,
+                 release_sha:$release_sha,
+                 operation_mode:$operation_mode,
+                 package_sha256:$package_sha,
+                 qa_sha256:$qa_sha,
+                 inspection:{
+                   draft:($draft[0]|{
+                     ok,status,row_count,hub_row_count,center_row_count,core_type_row_count,writes_attempted,writes_committed,would_create_asset_count,created_asset_count,updated_asset_count,skipped_existing_count,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,
+                     error_count:(.errors|length),
+                     action_counts:{
+                       create_draft_asset:count_action("create_draft_asset"),
+                       update_existing_content_ready:count_action("update_existing_content_ready"),
+                       skip_existing_same_source_draft:count_action("skip_existing_same_source_draft"),
+                       blocked_existing:count_action("blocked_existing")
+                     }
+                   }),
+                   promotion:($promote[0]|{
+                     inspection_state:$promotion_inspect_state,command_exit_code:$promotion_inspect_exit_code,
+                     ok,status,row_count,hub_row_count,center_row_count,core_type_row_count,writes_attempted,writes_committed,would_promote_count,promoted_count,skipped_existing_count,missing_target_count,forbidden_route_count,stale_or_invalid_asset_count,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,
+                     error_count:(.errors|length),
+                     error_counts:{
+                       missing_draft_asset:count_error("missing_draft_asset"),
+                       unsupported_target:count_error("unsupported_enneagram_target_url"),
+                       source_hash_mismatch:count_error("source_hash_mismatch"),
+                       asset_not_promotable_draft:count_error("asset_not_promotable_draft"),
+                       forbidden_private_route:count_error("forbidden_private_route_pattern_present")
+                     },
+                     action_counts:{
+                       promote_to_content_ready:count_action("promote_to_content_ready"),
+                       missing_draft_asset:count_action("missing_draft_asset"),
+                       blocked_source_hash_mismatch:count_action("blocked_source_hash_mismatch"),
+                       skip_existing_live_match:count_action("skip_existing_live_match"),
+                       blocked_not_promotable:count_action("blocked_not_promotable")
+                     }
+                   })
+                 }
+               } + if $outcome == "failure" then {failed_phase:"promotion_inspect_classification"} else {} end' \
+              > "$RUN_DIR/summary.json"
+          }
           case "$promotion_inspect_state" in
             ready)
               test "$promotion_inspect_status" -eq 0
@@ -213,6 +268,8 @@ jobs:
               test "$promotion_inspect_status" -ne 0
               ;;
             *)
+              phase="promotion_inspect_classification"
+              write_inspection_summary "failure"
               exit 1
               ;;
           esac
@@ -220,35 +277,7 @@ jobs:
           phase="operation_mode"
           if [ "$OPERATION_MODE" = "inspect" ]; then
             phase="inspect_summary"
-            jq -n \
-              --arg release_sha "$RELEASE_SHA" \
-              --arg operation_mode "$OPERATION_MODE" \
-              --arg package_sha "$PACKAGE_SHA" \
-              --arg qa_sha "$QA_SHA" \
-              --arg promotion_inspect_state "$promotion_inspect_state" \
-              --argjson promotion_inspect_exit_code "$promotion_inspect_status" \
-              --slurpfile draft "$RUN_DIR/draft-dry-run.json" \
-              --slurpfile promote "$RUN_DIR/promote-dry-run.json" \
-              'def action_counts: (.rows // [] | map(.action // "unknown") | sort | group_by(.) | map({action:.[0], count:length}));
-               {
-                 schema_version:"enneagram_cms_production_ops.v2",
-                 outcome:"success",
-                 release_sha:$release_sha,
-                 operation_mode:$operation_mode,
-                 package_sha256:$package_sha,
-                 qa_sha256:$qa_sha,
-                 inspection:{
-                   draft:($draft[0]|{
-                     ok,status,row_count,hub_row_count,center_row_count,core_type_row_count,writes_attempted,writes_committed,would_create_asset_count,created_asset_count,updated_asset_count,skipped_existing_count,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,
-                     error_count:(.errors|length),action_counts:action_counts
-                   }),
-                   promotion:($promote[0]|{
-                     inspection_state:$promotion_inspect_state,command_exit_code:$promotion_inspect_exit_code,
-                     ok,status,row_count,hub_row_count,center_row_count,core_type_row_count,writes_attempted,writes_committed,would_promote_count,promoted_count,skipped_existing_count,missing_target_count,forbidden_route_count,stale_or_invalid_asset_count,publish_attempted,index_attempted,sitemap_llms_release_attempted,search_release_attempted,
-                     error_count:(.errors|length),action_counts:action_counts
-                   })
-                 }
-               }' > "$RUN_DIR/summary.json"
+            write_inspection_summary "success"
             exit 0
           fi
 
