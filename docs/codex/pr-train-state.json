@@ -83112,12 +83112,12 @@
     "base": "main",
     "branch": "codex/big5-en-domain-content-package-01",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "903e1200a",
+    "status": "merged",
+    "commit_sha": "03fb5627dd0f45a55f31ab908e187f56b18dfa4b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2832",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-07-10T00:13:50Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "checks": {
       "manifest_registration": {"status": "pass", "evidence": "User authorized the locked PR train and current-PR-only registration."},
@@ -83126,13 +83126,41 @@
       "core_ci": {"status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed locally."},
       "github_checks": {"status": "pass", "evidence": "PR #2832 required CI and Code Scanning checks passed after the rebase at 2026-07-10T00:07:43Z."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
     "transitions": [
       {"at": "2026-07-10T00:00:00Z", "from": "unregistered", "to": "planned", "note": "Registered only the current PR."},
       {"at": "2026-07-10T00:00:00Z", "from": "planned", "to": "in_progress", "note": "Generated and validated the noindex draft-only package."},
       {"at": "2026-07-10T00:00:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Dry-run, contract test, and core CI passed."},
       {"at": "2026-07-10T00:00:00Z", "from": "local_checks_passed", "to": "pr_open", "note": "Opened PR #2832 and recorded green required checks prior to rebase."},
-      {"at": "2026-07-10T00:07:43Z", "from": "pr_open", "to": "ready_to_merge", "note": "Rebased PR checks and Code Scanning are green; merge policy permits squash auto-merge."}
+      {"at": "2026-07-10T00:07:43Z", "from": "pr_open", "to": "ready_to_merge", "note": "Rebased PR checks and Code Scanning are green; merge policy permits squash auto-merge."},
+      {"at": "2026-07-10T00:13:50Z", "from": "ready_to_merge", "to": "merged", "note": "PR #2832 squash merged at 03fb5627dd0f45a55f31ab908e187f56b18dfa4b; origin/main contains the merge commit and the remote branch is deleted. Local primary worktree cleanup was not performed because it contains pre-existing user changes."}
+    ]
+  },
+  "BIG5-EN-DOMAIN-IMPORT-DRYRUN-02": {
+    "id": "BIG5-EN-DOMAIN-IMPORT-DRYRUN-02",
+    "repo": "fap-api",
+    "title": "BIG5-EN-DOMAIN-IMPORT-DRYRUN-02: validate five English domain assets without writes",
+    "base": "main",
+    "branch": "codex/big5-en-domain-import-dryrun-02",
+    "depends_on": ["BIG5-EN-DOMAIN-CONTENT-PACKAGE-01"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {"status": "pass", "evidence": "User authorized the locked train and current-PR-only manifest/state registration."},
+      "dependency": {"status": "pass", "evidence": "PR #2832 is merged and origin/main contains 03fb5627dd0f45a55f31ab908e187f56b18dfa4b."},
+      "seed_static_gates": {"status": "pass", "evidence": "V1 envelope, five assets, body_md-only sections, noindex robots, and all three false indexability gates passed."},
+      "generic_importer_dry_run": {"status": "pass", "evidence": "Process-local SQLite dry-run returned assets_found=5, valid_count=5, errors_count=0, will_create=5, and all indexability counts=0; --write was not used."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [
+      {"at": "2026-07-10T00:00:00Z", "from": "unregistered", "to": "planned", "note": "Registered only after its dependency was merged."},
+      {"at": "2026-07-10T00:00:00Z", "from": "planned", "to": "in_progress", "note": "Started the generic importer dry-run without --write."},
+      {"at": "2026-07-10T00:00:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Five-asset V1/body_md/noindex gates and the process-local dry-run passed."}
     ]
   }
 }

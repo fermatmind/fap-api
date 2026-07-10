@@ -38074,6 +38074,41 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-EN-DOMAIN-IMPORT-DRYRUN-02
+    repo: fap-api
+    depends_on: [BIG5-EN-DOMAIN-CONTENT-PACKAGE-01]
+    branch: codex/big5-en-domain-import-dryrun-02
+    title: "BIG5-EN-DOMAIN-IMPORT-DRYRUN-02: validate five English domain assets without writes"
+    train_scope: big5_en_domain_import_dryrun
+    status: planned
+    scope:
+      - Run the generic personality public asset importer without --write against the five-asset V1 package.
+      - Verify the V1 assets envelope, body_md field, all five rows, and noindex/sitemap/llms gates.
+      - Record dry-run evidence only; do not write CMS or a persistent database.
+    allowed_paths:
+      - generated/big-five-en-domain-content-package/import_dryrun_report.json
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Pass --write, write CMS or production data, modify database schema, publish state, SEO runtime, sitemap, llms, canonical, robots, JSON-LD, frontend code, or baseline seeds.
+    validation:
+      - node -e "const fs=require('fs'); const x=JSON.parse(fs.readFileSync('generated/big-five-en-domain-content-package/big_five_en_domain_5_seed.json')); if (!x.package || !Array.isArray(x.assets) || x.assets.length!==5) process.exit(1); for (const a of x.assets) { if (a.robots!=='noindex,follow' || a.index_eligible!==false || a.sitemap_eligible!==false || a.llms_eligible!==false) process.exit(1); for (const s of a.sections||[]) if (!Object.hasOwn(s,'body_md') || Object.hasOwn(s,'bodyMd')) process.exit(1); }"
+      - cd backend && DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan personality-public-assets:import --source=../generated/big-five-en-domain-content-package/big_five_en_domain_5_seed.json
+      - python3 -m json.tool generated/big-five-en-domain-content-package/import_dryrun_report.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: ENNEAGRAM-EN13-PUBLISH-GATE-01
     repo: fap-api
     depends_on: [ENNEAGRAM-EN13-CONTENT-PACKAGE-01]
