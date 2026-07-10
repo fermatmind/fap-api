@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\SearchChannelQueue;
 
+use App\Support\PublicSeoPath;
+
 final class SearchChannelQueueEligibilityEvaluator
 {
     /**
@@ -20,6 +22,8 @@ final class SearchChannelQueueEligibilityEvaluator
 
         if (! $this->isValidCanonical($canonicalUrl)) {
             $reasonCodes[] = 'canonical_url_invalid';
+        } elseif (PublicSeoPath::fromCanonicalUrl($canonicalUrl) === null) {
+            $reasonCodes[] = 'canonical_url_not_public';
         }
 
         if (! in_array($sourceAuthority, $this->approvedSourceAuthorities(), true)) {
@@ -134,7 +138,7 @@ final class SearchChannelQueueEligibilityEvaluator
         $scheme = parse_url($url, PHP_URL_SCHEME);
         $host = parse_url($url, PHP_URL_HOST);
 
-        return in_array($scheme, ['http', 'https'], true) && is_string($host) && $host !== '';
+        return $scheme === 'https' && is_string($host) && $host !== '';
     }
 
     /**

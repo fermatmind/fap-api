@@ -303,6 +303,30 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
     }
 
     #[Test]
+    public function stale_public_flags_cannot_admit_unowned_private_or_query_canonicals(): void
+    {
+        foreach ([
+            'https://example.invalid/en/articles/off-domain',
+            'https://fermatmind.com/en/results/private-attempt',
+            'https://fermatmind.com/en/articles/query-bearing?token=secret',
+        ] as $canonicalUrl) {
+            $this->seedSeoUrl([
+                'canonical_url' => $canonicalUrl,
+                'page_entity_type' => 'article',
+                'source_authority' => 'backend_cms',
+                'is_private_flow' => false,
+                'metadata_json' => ['publication_state' => 'published', 'claim_safe' => true],
+            ]);
+        }
+
+        $output = $this->runQueueCommand(['--dry-run' => true, '--no-write' => true, '--json' => true, '--limit' => 20]);
+
+        $this->assertSame(0, $output['eligible_count'] ?? null);
+        $this->assertSame(3, $output['blocked_count'] ?? null);
+        $this->assertSame(3, data_get($output, 'reason_code_breakdown.canonical_url_not_public'));
+    }
+
+    #[Test]
     public function noindex_url_is_blocked(): void
     {
         $this->seedSeoUrl(['indexability_state' => 'noindex']);

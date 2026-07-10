@@ -83,6 +83,32 @@ final class SeoAgentRuntimeSeoQaReadonlyScannerTest extends TestCase
     }
 
     #[Test]
+    public function scanner_only_requests_global_public_paths_and_skips_private_or_cross_tenant_rows(): void
+    {
+        config(['seo_intel.public_canonical_host' => 'https://fermatmind.com']);
+        $publicPage = $this->createContentPage('public-runtime-page', '/zh/public-runtime-page');
+        $privatePage = $this->createContentPage('private-runtime-page', '/zh/results/private-attempt');
+        $tenantPage = $this->createContentPage('tenant-runtime-page', '/zh/tenant-runtime-page', 42);
+        $tenantArticle = $this->createArticle('tenant-runtime-article', 42);
+
+        Http::fake([
+            'https://fermatmind.com/zh/public-runtime-page' => Http::response($this->html('/zh/public-runtime-page', false), 200),
+        ]);
+
+        $artifact = (new RuntimeSeoQaReadonlyScanner)->scan('cms-indexable', 10);
+
+        $this->assertSame(1, $artifact['targets_checked'] ?? null);
+        $this->assertSame(1, $artifact['candidate_count'] ?? null);
+        $this->assertSame('content_page:'.$publicPage->id.':zh-CN', data_get($artifact, 'candidates.0.subject_ref'));
+        $candidateRefs = array_column($artifact['candidates'] ?? [], 'subject_ref');
+        $this->assertNotContains('content_page:'.$privatePage->id.':zh-CN', $candidateRefs);
+        $this->assertNotContains('content_page:'.$tenantPage->id.':zh-CN', $candidateRefs);
+        $this->assertNotContains('article:'.$tenantArticle->id.':zh-CN', $candidateRefs);
+        Http::assertSentCount(1);
+        Http::assertSent(static fn ($request): bool => $request->url() === 'https://fermatmind.com/zh/public-runtime-page');
+    }
+
+    #[Test]
     public function command_writes_sanitized_runtime_qa_artifact_without_db_writes(): void
     {
         config(['seo_intel.public_canonical_host' => 'https://fermatmind.com']);
@@ -187,10 +213,10 @@ final class SeoAgentRuntimeSeoQaReadonlyScannerTest extends TestCase
         }
     }
 
-    private function createArticle(string $slug): Article
+    private function createArticle(string $slug, int $orgId = 0): Article
     {
         return Article::query()->create([
-            'org_id' => 0,
+            'org_id' => $orgId,
             'slug' => $slug,
             'locale' => 'zh-CN',
             'title' => 'Readable title',
@@ -204,10 +230,10 @@ final class SeoAgentRuntimeSeoQaReadonlyScannerTest extends TestCase
         ]);
     }
 
-    private function createContentPage(string $slug, string $path): ContentPage
+    private function createContentPage(string $slug, string $path, int $orgId = 0): ContentPage
     {
         return ContentPage::query()->create([
-            'org_id' => 0,
+            'org_id' => $orgId,
             'slug' => $slug,
             'path' => $path,
             'kind' => ContentPage::KIND_COMPANY,

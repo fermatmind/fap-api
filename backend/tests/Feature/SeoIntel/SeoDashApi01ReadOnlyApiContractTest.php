@@ -274,6 +274,56 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
         }
     }
 
+    #[Test]
+    public function opportunity_queue_excludes_private_url_truth_paths_even_when_flags_are_stale(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
+        $hash = str_repeat('b', 64);
+        DB::connection('seo_intel')->table('seo_urls')->insert([
+            'canonical_url_hash' => $hash,
+            'canonical_url' => 'https://fermatmind.com/en/results/private-attempt-id',
+            'locale' => 'en',
+            'page_entity_type' => 'test_detail',
+            'entity_id_or_slug' => 'stale-private-row',
+            'cluster' => 'tests',
+            'source_authority' => 'scale_catalog',
+            'indexability_state' => 'indexable',
+            'is_private_flow' => false,
+            'metadata_json' => json_encode(['claim_boundary_state' => 'claim_safe'], JSON_THROW_ON_ERROR),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::connection('seo_intel')->table('seo_gsc_daily')->insert([
+            'report_date' => now()->subDays(4)->toDateString(),
+            'canonical_url_hash' => $hash,
+            'canonical_url' => 'https://fermatmind.com/en/results/private-attempt-id?token=secret',
+            'query_hash' => hash('sha256', 'private result query'),
+            'query_display_masked' => 'p**********y',
+            'locale' => 'en',
+            'source_engine' => 'google',
+            'clicks' => 0,
+            'impressions' => 500,
+            'ctr_ppm' => 0,
+            'average_position_milli' => 10700,
+            'is_brand_query' => false,
+            'query_type' => 'non_brand',
+            'data_state' => 'final',
+            'metadata_json' => json_encode(['data_origin' => 'live_gsc_api', 'row_source' => 'live_gsc_api'], JSON_THROW_ON_ERROR),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $response = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson('/api/v0.5/ops/seo-intel/opportunity-queue?limit=10')
+            ->assertOk()
+            ->assertJsonPath('data.total_count', 1);
+
+        $encoded = $response->getContent();
+        $this->assertStringNotContainsString('private-attempt-id', $encoded);
+        $this->assertStringNotContainsString('token=secret', $encoded);
+        $this->assertStringNotContainsString('p**********y', $encoded);
+    }
+
     /**
      * @param  list<string>  $permissions
      */
