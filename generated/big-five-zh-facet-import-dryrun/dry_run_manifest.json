@@ -1,0 +1,52 @@
+{
+  "package": "big-five-zh-facet-31-page-import-dryrun-2026-07-10",
+  "mode": "dry_run_only",
+  "source_packages": [
+    {
+      "path": "generated/big-five-zh-facet-hub-content-repair/big_five_zh_facet_hub_seed.json",
+      "package": "big-five-zh-facet-hub-content-repair-2026-07-10",
+      "sha256": "961596d70e2b19a56642ee9021ed3d7f10f7a7f315fbfa010f91a4fbec565a03",
+      "assets": 1
+    },
+    {
+      "path": "generated/big-five-zh-facet-openness-content-package/big_five_zh_facet_openness_seed.json",
+      "package": "big-five-zh-facet-openness-content-package-2026-07-10",
+      "sha256": "d3d18eeb628645066b60fa224fc54a20219d237dc7fcf4a32ef77e4e2d152f70",
+      "assets": 6
+    },
+    {
+      "path": "generated/big-five-zh-facet-conscientiousness-content-package/big_five_zh_facet_conscientiousness_seed.json",
+      "package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+      "sha256": "b8935052888580f3e1aca820bbec1f510f5d579fe40106fa468d1fc6766bb1ce",
+      "assets": 6
+    },
+    {
+      "path": "generated/big-five-zh-facet-extraversion-content-package/big_five_zh_facet_extraversion_seed.json",
+      "package": "big-five-zh-facet-extraversion-content-package-2026-07-10",
+      "sha256": "7264f55fec7088ad83d89f45caec958ab5633b8ad7098fc935e7e815d3b9c6e1",
+      "assets": 6
+    },
+    {
+      "path": "generated/big-five-zh-facet-agreeableness-content-package/big_five_zh_facet_agreeableness_seed.json",
+      "package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+      "sha256": "cafddf723268d93867f511bee0858c2858bf9d6e4e8bff7d032fa78bb65fd4c1",
+      "assets": 6
+    },
+    {
+      "path": "generated/big-five-zh-facet-neuroticism-content-package/big_five_zh_facet_neuroticism_seed.json",
+      "package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "sha256": "d608e49680ef1b9ec5f597e8bdfe413b84751f21358812194504198f5f313033",
+      "assets": 6
+    }
+  ],
+  "combined_seed_sha256": "47605736590fab6f6eac6d374f947925946ef125f39a273f4d136b6d30df5815",
+  "expected_rows": 31,
+  "actual_rows": 31,
+  "hub_rows": 1,
+  "facet_rows": 30,
+  "indexable_rows": 0,
+  "sitemap_rows": 0,
+  "llms_rows": 0,
+  "cms_write_allowed": false,
+  "production_import_allowed": false
+}
