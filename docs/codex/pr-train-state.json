@@ -42771,6 +42771,10 @@
         ],
         "evidence": "Focused controlled-writer tests passed: 6 tests, 49 assertions. Route listing, isolated SQLite migration, and ci_verify_mbti passed.",
         "status": "pass"
+      },
+      "github_required_checks": {
+        "evidence": "PR #2848 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, and Semgrep blocking secrets.",
+        "status": "pass"
       }
     },
     "cms_mutation": false,
@@ -42791,18 +42795,23 @@
         "at": "2026-07-10T10:21:16+08:00",
         "note": "Bound controlled article-quality writer evidence to verified article identity, path, target, locale, and published revision snapshots before write. No CMS publish, production import, deploy, or external write was performed.",
         "status": "implementation_validated"
+      },
+      {
+        "at": "2026-07-10T10:28:53+08:00",
+        "note": "PR #2848 merged as f13d92c360db005fc14c9d2faadb976b4c8cda34 after required checks passed; implementation branch was deleted locally and remotely. No staging wait, manual deploy, or production deploy was performed.",
+        "status": "merged"
       }
     ],
     "failure_reason": null,
     "id": "SECURITY-169-API-15",
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-07-10T10:28:53+08:00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2848",
     "production_write_execution": false,
     "publish_allowed": false,
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "implementation_validated",
+    "status": "merged",
     "title": "SECURITY-169-API-15: bind article-quality writer to article locks",
     "train_scope": "security_169_fap_api_audit"
   },
