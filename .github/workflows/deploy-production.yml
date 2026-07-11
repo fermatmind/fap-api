@@ -19,6 +19,15 @@ on:
         description: "Exact SHA-bound production deploy approval phrase"
         required: true
         type: string
+      deploy_mode:
+        description: "auto permits only a strict code-only scope; standard remains explicit"
+        required: false
+        default: auto
+        type: choice
+        options:
+          - auto
+          - code_only
+          - standard
 
 permissions:
   contents: read
@@ -41,18 +50,22 @@ jobs:
     outputs:
       eligible: ${{ steps.latest_main_guard.outputs.eligible }}
       deploy_sha: ${{ steps.latest_main_guard.outputs.deploy_sha }}
+      deploy_mode: ${{ steps.resolve_deploy_mode.outputs.deploy_mode }}
     steps:
       - name: Checkout deploy revision for eligibility
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: ${{ env.DEPLOY_SHA }}
+          fetch-depth: 2
 
       - name: Validate manual exact-SHA approval and staging evidence
+        id: resolve_deploy_mode
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           STAGING_RUN_ID: ${{ inputs.staging_run_id }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+          REQUESTED_DEPLOY_MODE: ${{ inputs.deploy_mode }}
         run: |
           set -euo pipefail
           if [[ ! "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]; then
@@ -67,11 +80,52 @@ jobs:
             echo "release_id must use 1-80 safe identifier characters." >&2
             exit 2
           fi
-          EXPECTED_APPROVAL="I explicitly approve backend production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
+          case "$REQUESTED_DEPLOY_MODE" in
+            auto|code_only|standard) ;;
+            *)
+              echo "deploy_mode must be auto, code_only, or standard." >&2
+              exit 2
+              ;;
+          esac
+          if ! git rev-parse "${DEPLOY_SHA}^" >/dev/null 2>&1; then
+            echo "code-only scope classification requires an available parent revision." >&2
+            exit 1
+          fi
+          mapfile -t CHANGED_FILES < <(git diff --no-renames --name-only "${DEPLOY_SHA}^" "$DEPLOY_SHA")
+          if [ "${#CHANGED_FILES[@]}" -eq 0 ]; then
+            echo "code-only scope classification refused an empty revision diff." >&2
+            exit 1
+          fi
+          CODE_ONLY_SCOPE=true
+          for path in "${CHANGED_FILES[@]}"; do
+            case "$path" in
+              backend/app/*|backend/bootstrap/*|backend/config/*|backend/public/*|backend/resources/*|backend/routes/*|backend/tests/*|tests/*|backend/composer.json|backend/composer.lock|deploy.php|.github/workflows/deploy-production.yml)
+                ;;
+              *)
+                CODE_ONLY_SCOPE=false
+                echo "code-only scope refused path: $path" >&2
+                ;;
+            esac
+          done
+          case "$REQUESTED_DEPLOY_MODE" in
+            standard)
+              RESOLVED_DEPLOY_MODE=standard
+              EXPECTED_APPROVAL="I explicitly approve backend production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
+              ;;
+            auto|code_only)
+              if [ "$CODE_ONLY_SCOPE" != true ]; then
+                echo "code-only deployment refused: revision contains a path outside the strict allowlist; rerun only with an explicit standard deployment approval." >&2
+                exit 1
+              fi
+              RESOLVED_DEPLOY_MODE=code_only
+              EXPECTED_APPROVAL="I explicitly approve backend code-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
+              ;;
+          esac
           if [ "$OPERATOR_APPROVAL_PHRASE" != "$EXPECTED_APPROVAL" ]; then
-            echo "operator_approval_phrase does not match the exact SHA-bound approval phrase." >&2
+            echo "operator_approval_phrase does not match the exact SHA-bound approval phrase for ${RESOLVED_DEPLOY_MODE}." >&2
             exit 2
           fi
+          echo "deploy_mode=$RESOLVED_DEPLOY_MODE" >> "$GITHUB_OUTPUT"
 
           RUN_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}")"
           jq -e --arg sha "$DEPLOY_SHA" \
@@ -127,6 +181,7 @@ jobs:
       HEALTHCHECK_URL: ${{ vars.PRODUCTION_HEALTHCHECK_URL }}
       AUTH_GUEST_CHECK_URL: ${{ vars.PRODUCTION_AUTH_GUEST_CHECK_URL }}
       OPS_HOST: ${{ vars.PRODUCTION_OPS_HOST }}
+      DEPLOY_MODE: ${{ needs.deployment-eligibility.outputs.deploy_mode }}
 
     steps:
       - name: Checkout deploy revision
@@ -276,6 +331,10 @@ jobs:
             echo "deploy lock guard: active deploy-like process exists"
             exit 1
           fi
+          if [ "$DEPLOY_MODE" = "code_only" ]; then
+            echo "deploy lock guard: code-only deploy refuses to remove an existing lock automatically"
+            exit 1
+          fi
           STALE_LOCK_SECONDS="${STALE_LOCK_SECONDS:-1800}"
           if [ "$OWNER" = "ci" ] \
             && [ "$AGE_SECONDS" -ge "$STALE_LOCK_SECONDS" ] \
@@ -291,7 +350,7 @@ jobs:
           REMOTE
           )"
           LOCK_GUARD_B64="$(printf '%s' "$LOCK_GUARD_SCRIPT" | base64 | tr -d '\n')"
-          ssh_retry "TARGET='$TARGET' DEPLOY_PATH='$DEPLOY_PATH' STALE_LOCK_SECONDS='1800' GITHUB_REPOSITORY='$GITHUB_REPOSITORY' bash -lc 'printf %s $LOCK_GUARD_B64 | base64 -d | bash'"
+          ssh_retry "TARGET='$TARGET' DEPLOY_MODE='$DEPLOY_MODE' DEPLOY_PATH='$DEPLOY_PATH' STALE_LOCK_SECONDS='1800' GITHUB_REPOSITORY='$GITHUB_REPOSITORY' bash -lc 'printf %s $LOCK_GUARD_B64 | base64 -d | bash'"
 
       - name: Deploy production with Deployer
         shell: bash
@@ -320,12 +379,18 @@ jobs:
           export DEPLOY_LOCK_METADATA
           export DEPLOY_LOCK_RUN_ID="$GITHUB_RUN_ID"
           export DEPLOY_LOCK_RUN_ATTEMPT="$GITHUB_RUN_ATTEMPT"
-          php /tmp/dep.phar deploy production -f deploy.php \
+          DEPLOY_TASK=deploy
+          if [ "$DEPLOY_MODE" = "code_only" ]; then
+            DEPLOY_TASK=deploy:code-only
+          fi
+          php /tmp/dep.phar "$DEPLOY_TASK" production -f deploy.php \
             --revision "$DEPLOY_SHA" \
             -o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            -o deploy_mode="$DEPLOY_MODE" \
             -vvv --no-interaction
 
       - name: Restart queue workers through Laravel queue restart
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -403,7 +468,11 @@ jobs:
             fi
             sleep 3
           done
-          ssh_retry "curl -fsS --resolve '$AUTH_HOST:443:127.0.0.1' -H 'Content-Type: application/json' -X POST 'https://$AUTH_HOST/api/v0.3/auth/guest' --data '{\"anon_id\":\"deploy_contract_probe\"}' | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'" >/dev/null
+          if [ "$DEPLOY_MODE" = "standard" ]; then
+            ssh_retry "curl -fsS --resolve '$AUTH_HOST:443:127.0.0.1' -H 'Content-Type: application/json' -X POST 'https://$AUTH_HOST/api/v0.3/auth/guest' --data '{\"anon_id\":\"deploy_contract_probe\"}' | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'" >/dev/null
+          else
+            echo "code-only deploy: auth guest POST contract probe intentionally skipped"
+          fi
 
       - name: Ops entry and asset smoke
         shell: bash

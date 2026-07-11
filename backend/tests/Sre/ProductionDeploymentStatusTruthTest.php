@@ -41,7 +41,27 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
 
         $this->assertStringContainsString('test "$DEPLOYED_SHA" = "$DEPLOY_SHA"', $deploy);
         $this->assertStringNotContainsString('continue-on-error: true', $deploy);
-        $this->assertStringNotContainsString('steps.latest_main_guard.outputs', $deploy);
+        $this->assertStringNotContainsString('steps.latest_main_guard.outputs.eligible', $deploy);
+    }
+
+    public function test_auto_mode_is_fail_closed_to_a_strict_code_only_lane(): void
+    {
+        $workflow = $this->workflow();
+        $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
+        $deploy = strstr($workflow, '  deploy-production:') ?: '';
+
+        $this->assertStringContainsString('fetch-depth: 2', $eligibility);
+        $this->assertStringContainsString('git diff --no-renames --name-only "${DEPLOY_SHA}^" "$DEPLOY_SHA"', $eligibility);
+        $this->assertStringContainsString('code-only scope refused path:', $eligibility);
+        $this->assertStringContainsString('rerun only with an explicit standard deployment approval', $eligibility);
+        $this->assertStringContainsString('RESOLVED_DEPLOY_MODE=code_only', $eligibility);
+        $this->assertStringContainsString('echo "deploy_mode=$RESOLVED_DEPLOY_MODE" >> "$GITHUB_OUTPUT"', $eligibility);
+        $this->assertStringContainsString('DEPLOY_MODE: ${{ needs.deployment-eligibility.outputs.deploy_mode }}', $deploy);
+        $this->assertStringContainsString('DEPLOY_TASK=deploy', $deploy);
+        $this->assertStringContainsString('DEPLOY_TASK=deploy:code-only', $deploy);
+        $this->assertStringContainsString('-o deploy_mode="$DEPLOY_MODE"', $deploy);
+        $this->assertStringContainsString("if: \${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' }}", $deploy);
+        $this->assertStringContainsString('code-only deploy: auth guest POST contract probe intentionally skipped', $deploy);
     }
 
     #[DataProvider('deploymentOutcomes')]
@@ -84,7 +104,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
 
     private function workflow(): string
     {
-        return (string) file_get_contents(base_path('../.github/workflows/deploy-production.yml'));
+        return (string) file_get_contents(dirname(__DIR__, 3).'/.github/workflows/deploy-production.yml');
     }
 
     private function between(string $source, string $start, string $end): string
