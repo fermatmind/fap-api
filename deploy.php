@@ -518,7 +518,7 @@ task('seo:warm-sitemap-source-cache', function () {
     $timeoutSeconds = max(120, $timeoutSeconds);
 
     run(sprintf(
-        'timeout %d {{bin/php}} %s seo:warm-sitemap-source-cache --json --no-interaction --ansi',
+        'timeout %d sudo -n -u www-data -- {{bin/php}} %s seo:warm-sitemap-source-cache --json --no-interaction --ansi',
         $timeoutSeconds,
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
     ));
@@ -1316,8 +1316,8 @@ task('fap:deploy-unlock-owned', function () {
     $metaPath = '{{deploy_path}}/'.get('deploy_lock_metadata_path');
     $checkScript = <<<'PHP'
 $path = $argv[1] ?? '';
-$expectedRunId = getenv('DEPLOY_LOCK_RUN_ID') ?: '';
-$expectedRunAttempt = getenv('DEPLOY_LOCK_RUN_ATTEMPT') ?: '';
+$expectedRunId = $argv[2] ?? '';
+$expectedRunAttempt = $argv[3] ?? '';
 
 if ($path === '' || ! is_file($path)) {
     fwrite(STDERR, "deploy lock metadata is missing\n");
@@ -1343,7 +1343,12 @@ echo "owned\n";
 PHP;
 
     try {
-        $result = run('php -r '.deployShellArg($checkScript).' '.deployShellArg($metaPath));
+        $result = run(
+            'php -r '.deployShellArg($checkScript)
+            .' '.deployShellArg($metaPath)
+            .' '.deployShellArg($runId)
+            .' '.deployShellArg($runAttempt),
+        );
     } catch (\Throwable $e) {
         writeln('<comment>Skipping deploy:unlock because lock ownership could not be verified.</comment>');
         writeln('<comment>'.$e->getMessage().'</comment>');
