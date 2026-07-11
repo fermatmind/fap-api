@@ -39460,3 +39460,40 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: AUDIT-PRR2-API-07
+    repo: fap-api
+    depends_on: [AUDIT-PRR2-API-01]
+    branch: codex/audit-prr2-api-07-report-job-failure-contract
+    title: "AUDIT-PRR2-API-07: make report artifact completion truthful"
+    train_scope: prr2_report_job_failure_contract
+    status: user_authorized
+    scope:
+      - Persist the report artifact before recording a successful report job.
+      - Rethrow artifact persistence failures for bounded queue retry.
+      - Add explicit retry, backoff, timeout, timeout-failure, and terminal failed callback contracts.
+      - Prove artifact failure cannot leave report_json or a false successful state.
+    allowed_paths:
+      - backend/app/Jobs/GenerateReportJob.php
+      - backend/app/Services/Storage/ArtifactStore.php
+      - backend/tests/Feature/Jobs/GenerateReportJobFailureContractTest.php
+      - backend/tests/Feature/V0_3/ReportDirVersionTruthTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change report composition, scoring, authorization, PDF behavior, queue replay, logging redaction, CMS/SEO, deploy, or production state.
+    validation:
+      - cd backend && php artisan test tests/Feature/Jobs/GenerateReportJobFailureContractTest.php tests/Feature/V0_3/ReportDirVersionTruthTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Jobs/GenerateReportJob.php tests/Feature/Jobs/GenerateReportJobFailureContractTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
