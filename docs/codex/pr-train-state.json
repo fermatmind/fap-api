@@ -1,4 +1,85 @@
 {
+  "CAREER-DETAIL-READ-MODEL-10K-01": {
+    "id": "CAREER-DETAIL-READ-MODEL-10K-01",
+    "repo": "fap-api",
+    "title": "CAREER-DETAIL-READ-MODEL-10K-01 career detail read model for 10k",
+    "base": "main",
+    "branch": "codex/career-detail-read-model-10k-01",
+    "depends_on": ["CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01"],
+    "status": "ready_to_merge",
+    "commit_sha": "b89d30e75191954c2723d0a2266757298ec4b081",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2962",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "scheduler_activation": false,
+    "deploy_allowed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The Career 10k Stability /goal explicitly authorized PR5 and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR2 #2956 is merged as 746d4a1e9d4fec90de554b11128f1f933ab07df4 and origin/main contains that merge commit."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "Detail read-model/cache/queue and warm-command contracts pass 18 tests/204 assertions; nine affected API contracts pass 80 assertions; Big Five classifier passes 2/4; warm API p95 is below 400ms; route, Composer, YAML/JSON, diff, and scoped Pint pass."
+      },
+      "full_composer_test": {
+        "status": "external_baseline_user_overridden",
+        "evidence": "The clean-origin/main composer baseline failure is sidecarred; the user authorized focused local checks plus GitHub required checks."
+      },
+      "pint": {
+        "status": "external_baseline_user_overridden",
+        "evidence": "Changed-PHP scoped Pint passes all eight changed PHP files; the clean-origin/main repository Pint baseline failure is sidecarred under the user's explicit override."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2962 passes hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and non-blocking SARIF upload."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T17:42:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Started from PR4 merge commit 540a92ef8 in an isolated worktree after PR2 dependency and clean origin/main were verified; no production warm, deployment, CMS, or DB action was performed."
+      },
+      {
+        "at": "2026-07-11T17:55:00+08:00",
+        "from": "in_progress",
+        "to": "focused_checks_passed",
+        "note": "Versioned per-slug/locale active+LKG detail reads, fail-closed published misses, authority-known negative caching, bounded resumable queue warming, 2s cold-build gate, 400ms warm API budget, affected detail contracts, scoped Pint, and exact ten-path scope checks passed."
+      },
+      {
+        "at": "2026-07-11T18:00:00+08:00",
+        "from": "focused_checks_passed",
+        "to": "pr_open",
+        "note": "Committed and pushed the exact ten-path scope as 3beafa964, then opened PR #2962; GitHub required checks are pending."
+      },
+      {
+        "at": "2026-07-11T18:07:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed; GitHub reports CLEAN/MERGEABLE and the exact ten-path scope plus diff validation passed."
+      }
+    ]
+  },
   "CAREER-RUNTIME-SLO-ALERTING-01": {
     "id": "CAREER-RUNTIME-SLO-ALERTING-01",
     "repo": "fap-api",
@@ -6,13 +87,13 @@
     "base": "main",
     "branch": "codex/career-runtime-slo-alerting-01",
     "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01", "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01", "CAREER-DIRECTORY-ERROR-SEMANTICS-01"],
-    "status": "ready_to_merge",
-    "commit_sha": "947ac9860a6819faf0f188cc25ab7b4d85ea468e",
+    "status": "merged",
+    "commit_sha": "540a92ef8cc16e2e6efe1c8d65bfc939521d4dbc",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2960",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T07:33:30Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -51,7 +132,7 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {

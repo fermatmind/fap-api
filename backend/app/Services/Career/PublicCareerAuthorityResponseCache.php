@@ -10,6 +10,8 @@ use App\Http\Resources\Career\CareerDatasetHubResource;
 use App\Http\Resources\Career\CareerDatasetMethodResource;
 use App\Http\Resources\Career\CareerJobDetailResource;
 use App\Http\Resources\Career\CareerJobListItemResource;
+use App\Services\Career\AiImpactAssets\CareerAiImpactPreviewDetailShellBuilder;
+use App\Services\Career\Bundles\CareerCnProxyPublicOwnerSurfaceBuilder;
 use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
 use App\Services\Career\Bundles\CareerJobListBundleBuilder;
 use App\Services\Career\Dataset\CareerPublicDatasetContractBuilder;
@@ -30,6 +32,10 @@ final class PublicCareerAuthorityResponseCache
 
     public const JOB_DETAIL_CACHE_KEY_PREFIX = 'career:public-authority:job-detail:v1';
 
+    public const JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:job-detail:v2';
+
+    public const JOB_DETAIL_NEGATIVE_CACHE_TTL_SECONDS = 300;
+
     public const DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX = 'career:public-authority:directory-read-model:v1';
 
     public const DIRECTORY_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:directory-read-model:v2';
@@ -41,6 +47,8 @@ final class PublicCareerAuthorityResponseCache
         private readonly CareerLaunchGovernanceClosureService $launchGovernanceClosureService,
         private readonly CareerJobListBundleBuilder $careerJobListBundleBuilder,
         private readonly CareerJobDetailBundleBuilder $careerJobDetailBundleBuilder,
+        private readonly CareerCnProxyPublicOwnerSurfaceBuilder $cnProxySurfaceBuilder,
+        private readonly CareerAiImpactPreviewDetailShellBuilder $aiImpactPreviewDetailShellBuilder,
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
         private readonly CareerDirectoryReadModelBuilder $careerDirectoryReadModelBuilder,
     ) {}
@@ -140,19 +148,41 @@ final class PublicCareerAuthorityResponseCache
         }
 
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-        $cacheKey = $this->jobDetailCacheKey($normalizedSlug, $normalizedLocale);
         if (! $this->detailReadIsPublishedForLocale($normalizedSlug, $normalizedLocale)) {
-            Cache::forget($cacheKey);
+            if (is_array($this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale))) {
+                Cache::put(
+                    $this->jobDetailNegativeKey($normalizedSlug, $normalizedLocale),
+                    true,
+                    now()->addSeconds(self::JOB_DETAIL_NEGATIVE_CACHE_TTL_SECONDS),
+                );
+            }
 
             return null;
         }
 
-        $cached = Cache::get($cacheKey);
-        if (is_array($cached)) {
-            return $cached;
+        Cache::forget($this->jobDetailNegativeKey($normalizedSlug, $normalizedLocale));
+        foreach ([$this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale), $this->jobDetailLkgVersionKey($normalizedSlug, $normalizedLocale)] as $pointerKey) {
+            $version = Cache::get($pointerKey);
+            $payload = is_string($version) && $version !== ''
+                ? Cache::get($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version))
+                : null;
+            if (is_array($payload)) {
+                return $payload;
+            }
         }
 
-        return $this->refreshJobDetailPayload($normalizedSlug, $normalizedLocale);
+        $legacy = Cache::get($this->jobDetailCacheKey($normalizedSlug, $normalizedLocale));
+        if (is_array($legacy)) {
+            $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $legacy);
+
+            return $legacy;
+        }
+
+        throw new \RuntimeException(sprintf(
+            'Career detail authority cache is unavailable for published slug %s (%s).',
+            $normalizedSlug,
+            $normalizedLocale,
+        ));
     }
 
     public function forgetJobDetailPayload(string $slug, string $publicLocale = 'zh-CN'): bool
@@ -162,7 +192,18 @@ final class PublicCareerAuthorityResponseCache
             return false;
         }
 
-        return Cache::forget($this->jobDetailCacheKey($normalizedSlug, $publicLocale));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $forgotten = false;
+        foreach ([
+            $this->jobDetailCacheKey($normalizedSlug, $normalizedLocale),
+            $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale),
+            $this->jobDetailLkgVersionKey($normalizedSlug, $normalizedLocale),
+            $this->jobDetailNegativeKey($normalizedSlug, $normalizedLocale),
+        ] as $key) {
+            $forgotten = Cache::forget($key) || $forgotten;
+        }
+
+        return $forgotten;
     }
 
     /**
@@ -182,12 +223,22 @@ final class PublicCareerAuthorityResponseCache
             ];
         }
 
-        $cacheKey = $this->jobDetailCacheKey($normalizedSlug, $normalizedLocale);
+        $cacheKey = $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale);
         if ($forgetFirst) {
-            Cache::forget($cacheKey);
+            $this->forgetJobDetailPayload($normalizedSlug, $normalizedLocale);
         }
 
-        $payload = $this->refreshJobDetailPayload($normalizedSlug, $normalizedLocale);
+        $started = hrtime(true);
+        $payload = $this->buildJobDetailReadModel($normalizedSlug, $normalizedLocale);
+        $buildMs = round((hrtime(true) - $started) / 1_000_000, 3);
+        if ($payload !== null && $buildMs > 2000) {
+            throw new \RuntimeException(sprintf(
+                'Career detail projection exceeded 2000ms budget for %s (%s).',
+                $normalizedSlug,
+                $normalizedLocale,
+            ));
+        }
+        $version = $payload === null ? null : $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $payload);
 
         return [
             'cache_key' => $cacheKey,
@@ -195,7 +246,29 @@ final class PublicCareerAuthorityResponseCache
             'slug' => $normalizedSlug,
             'status' => $payload === null ? 'missing' : 'cached',
             'member_count' => $payload === null ? 0 : count((array) data_get($payload, 'sections', data_get($payload, 'modules', []))),
+            'version' => $version,
+            'build_ms' => $buildMs,
         ];
+    }
+
+    /** @param array<string, mixed> $payload */
+    public function publishJobDetailReadModel(string $slug, string $publicLocale, array $payload): string
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $version = (string) Str::ulid();
+        $activeKey = $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale);
+        $previousVersion = Cache::get($activeKey);
+
+        Cache::forever($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version), $payload);
+        if (is_string($previousVersion) && $previousVersion !== '') {
+            Cache::forever($this->jobDetailLkgVersionKey($normalizedSlug, $normalizedLocale), $previousVersion);
+        }
+        Cache::forever($activeKey, $version);
+        Cache::forget($this->jobDetailNegativeKey($normalizedSlug, $normalizedLocale));
+        Cache::forget($this->jobDetailCacheKey($normalizedSlug, $normalizedLocale));
+
+        return $version;
     }
 
     /**
@@ -460,24 +533,21 @@ final class PublicCareerAuthorityResponseCache
     /**
      * @return array<string, mixed>|null
      */
-    private function refreshJobDetailPayload(string $slug, string $publicLocale): ?array
+    private function buildJobDetailReadModel(string $slug, string $publicLocale): ?array
     {
         if (! $this->detailReadIsPublishedForLocale($slug, $publicLocale)) {
             return null;
         }
 
         $bundle = $this->careerJobDetailBundleBuilder->buildBySlug($slug, $publicLocale);
-        if ($bundle === null) {
-            return null;
+        if ($bundle !== null) {
+            return (new CareerJobDetailResource($bundle))->toArray(
+                Request::create('/api/v0.5/career/jobs/'.$slug, 'GET', ['locale' => $publicLocale])
+            );
         }
 
-        $payload = (new CareerJobDetailResource($bundle))->toArray(
-            Request::create('/api/v0.5/career/jobs/'.$slug, 'GET', ['locale' => $publicLocale])
-        );
-
-        Cache::forever($this->jobDetailCacheKey($slug, $publicLocale), $payload);
-
-        return $payload;
+        return $this->cnProxySurfaceBuilder->buildBySlug($slug, $publicLocale)
+            ?? $this->aiImpactPreviewDetailShellBuilder->build($slug, $publicLocale);
     }
 
     /**
@@ -552,6 +622,26 @@ final class PublicCareerAuthorityResponseCache
             strtolower(trim($slug)),
             $this->normalizePublicLocale($publicLocale)
         );
+    }
+
+    public function jobDetailActiveVersionKey(string $slug, string $publicLocale): string
+    {
+        return sprintf('%s:%s:%s:active', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale));
+    }
+
+    private function jobDetailLkgVersionKey(string $slug, string $publicLocale): string
+    {
+        return sprintf('%s:%s:%s:lkg', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale));
+    }
+
+    private function jobDetailVersionPayloadKey(string $slug, string $publicLocale, string $version): string
+    {
+        return sprintf('%s:%s:%s:versions:%s', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale), $version);
+    }
+
+    public function jobDetailNegativeKey(string $slug, string $publicLocale): string
+    {
+        return sprintf('%s:%s:%s:negative', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale));
     }
 
     private function directoryReadModelCacheKey(string $publicLocale): string
