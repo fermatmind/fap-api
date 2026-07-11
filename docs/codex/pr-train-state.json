@@ -6,8 +6,8 @@
     "base": "main",
     "branch": "codex/career-detail-read-model-10k-01",
     "depends_on": ["CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01"],
-    "status": "pr_open",
-    "commit_sha": "3beafa9645d562187cafad08043fe3015092f95c",
+    "status": "ready_to_merge",
+    "commit_sha": "b89d30e75191954c2723d0a2266757298ec4b081",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2962",
     "failure_reason": null,
     "merged_at": null,
@@ -42,12 +42,15 @@
         "status": "external_baseline_user_overridden",
         "evidence": "Changed-PHP scoped Pint passes all eight changed PHP files; the clean-origin/main repository Pint baseline failure is sidecarred under the user's explicit override."
       },
-      "github_required_checks": {"status": "pending", "evidence": null}
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2962 passes hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and non-blocking SARIF upload."
+      }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -68,6 +71,12 @@
         "from": "focused_checks_passed",
         "to": "pr_open",
         "note": "Committed and pushed the exact ten-path scope as 3beafa964, then opened PR #2962; GitHub required checks are pending."
+      },
+      {
+        "at": "2026-07-11T18:07:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed; GitHub reports CLEAN/MERGEABLE and the exact ten-path scope plus diff validation passed."
       }
     ]
   },
