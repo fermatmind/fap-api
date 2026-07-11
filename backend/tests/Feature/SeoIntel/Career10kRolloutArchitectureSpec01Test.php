@@ -25,12 +25,30 @@ final class Career10kRolloutArchitectureSpec01Test extends TestCase
         $this->assertSame('career_10k_rollout_architecture_spec.v1', $report['schema_version'] ?? null);
         $this->assertSame('CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01', $report['task'] ?? null);
         $this->assertSame(
-            'career_10k_rollout_architecture_spec_completed_ready_for_future_scoped_prs',
+            'career_10k_stability_architecture_implemented_release_still_requires_exact_sha_authorization',
             $report['final_decision'] ?? null,
         );
         $this->assertSame(1046, $report['current_public_detail_count'] ?? null);
         $this->assertSame(2092, $report['current_localized_detail_url_count'] ?? null);
         $this->assertSame(10000, $report['target_scale'] ?? null);
+        $this->assertSame('all_eight_prs_merged', data_get($report, 'implementation_update.status'));
+        $this->assertCount(8, data_get($report, 'implementation_update.tasks', []));
+        $this->assertSame(
+            [
+                'CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01',
+                'CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01',
+                'CAREER-DIRECTORY-ERROR-SEMANTICS-01',
+                'CAREER-RUNTIME-SLO-ALERTING-01',
+                'CAREER-DETAIL-READ-MODEL-10K-01',
+                'CAREER-DETAIL-DELIVERY-10K-01',
+                'CAREER-10K-CAPACITY-CHAOS-GATE-01',
+                'CAREER-10K-CONTROLLED-ROLLOUT-01',
+            ],
+            array_column(data_get($report, 'implementation_update.tasks', []), 'id'),
+        );
+        $this->assertFalse(data_get($report, 'implementation_update.production_import_performed', true));
+        $this->assertFalse(data_get($report, 'implementation_update.production_promotion_performed', true));
+        $this->assertFalse(data_get($report, 'implementation_update.production_deploy_performed', true));
 
         $this->assertSame('fap-api', $report['authority_source']['owner'] ?? null);
         $this->assertFalse($report['authority_source']['frontend_fallback_allowed'] ?? true);
@@ -92,7 +110,14 @@ final class Career10kRolloutArchitectureSpec01Test extends TestCase
         }
 
         $this->assertFalse($report['held_slug_release_performed'] ?? true);
-        $this->assertSame('none', $report['next_task'] ?? null);
+        $this->assertSame(
+            'separate_exact_sha_authorized_batch_rollout_only_after_all_evidence_gates_pass',
+            $report['next_task'] ?? null,
+        );
+        foreach (data_get($report, 'implementation_update.tasks', []) as $task) {
+            $this->assertStringContainsString((string) ($task['id'] ?? ''), $markdown);
+            $this->assertMatchesRegularExpression('/^[a-f0-9]{40}$/', (string) ($task['merge_commit'] ?? ''));
+        }
         $this->assertStringContainsString('10k Target Architecture Contract', $handbook);
         $this->assertStringContainsString('Runtime expansion still requires separate authority', $handbook);
         $this->assertStringContainsString('manifests, dry-runs, controlled apply approval', $handbook);

@@ -2,6 +2,8 @@
 
 Date: 2026-06-01
 
+Implementation update: 2026-07-11
+
 ## Executive Summary
 
 FermatMind Career is production-stable at the current 1046 public detail
@@ -63,6 +65,68 @@ Every future cohort expansion must pass:
 
 No ad hoc SQL, tinker write, production migration, Search Channel action, or
 URL submission is part of the rollout apply path.
+
+## 2026-07 Career 10k Stability Implementation Train
+
+The architecture above was implemented and hardened through eight scoped PRs
+across `fap-api` and `fap-web`. All eight PRs are merged. The train changed
+read and delivery architecture, failure semantics, runtime observability,
+capacity gates, and rollout controls. It did **not** import or publish 10,000
+occupations, mutate production CMS/DB state, trigger production deployment,
+or submit URLs to Search Channel.
+
+| Task | Repo | PR / merge commit | Implemented architecture outcome |
+| --- | --- | --- | --- |
+| `CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01` | fap-api | `#2952` / `342e17cebd1a` | Replaced request-time full-index processing with a versioned directory read model; bounded pagination, search, and facets to lightweight directory fields. |
+| `CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01` | fap-api | `#2956` / `746d4a1e9d4f` | Added single-flight rebuilds, atomic cache-version switching, last-known-good serving, EN/ZH warming, and observable cache states. |
+| `CAREER-DIRECTORY-ERROR-SEMANTICS-01` | fap-web | `#1680` / `6508f2da6fb5` | Separated `success`, `empty`, `stale`, and `unavailable`; backend failures can no longer render as a false zero-career result. |
+| `CAREER-RUNTIME-SLO-ALERTING-01` | fap-api | `#2960` / `540a92ef8cc1` | Added runtime directory latency/status sampling, bilingual/public-surface probes, cache-age and rebuild telemetry, and operations-webhook alert evaluation. |
+| `CAREER-DETAIL-READ-MODEL-10K-01` | fap-api | `#2962` / `48e73fa88ed7` | Added versioned per-slug/per-locale detail projections, targeted invalidation, active/LKG reads, held-slug negative caching, and bounded resumable warm queues. |
+| `CAREER-DETAIL-DELIVERY-10K-01` | fap-web | `#1682` / `5f3c37fb889d` | Added bounded detail-page revalidation, exact locale/slug tags, shared metadata/body authority loads, hard-expiry handling, and request-count budgets. |
+| `CAREER-10K-CAPACITY-CHAOS-GATE-01` | fap-api | `#2965` / `db8eff09ae0f` | Replaced the declared synthetic-count check with real 10,000-directory/20,000-bilingual-projection generation, concurrency/fault scenarios, measured query budgets, and CI-enforced latency/memory/payload limits. |
+| `CAREER-10K-CONTROLLED-ROLLOUT-01` | fap-api | `#2967` / `c7d6ce157f0a` | Added fail-closed `100 → 500 → 1,000 → 2,500 → 5,000 → 10,000` readiness gates, strict evidence validation, exact-prefix advancement, and usable rollback-version requirements. |
+
+### Resulting Runtime and Release Contract
+
+- Directory warm p95 budgets remain `≤300 ms` for 1,046 rows and `≤500 ms`
+  for a generated 10,000-row fixture; the response contains only the current
+  bounded page and never fans out into detail assets.
+- A cache miss, Redis failure, rebuild failure, or upstream timeout must
+  produce stale/LKG or unavailable semantics, never a fabricated empty list.
+- Detail authority is projected before public reads. A public request must not
+  assemble 10,000 CMS, SEO, scoring, or evidence payloads synchronously.
+- Public HTML caching is bounded and precisely invalidated by locale and slug;
+  metadata and page body share the same authority load.
+- The required CI chain exercises real 10k directory and bilingual detail
+  projections, search, facets, deep pagination, 50/100 request windows,
+  Redis miss/unavailable behavior, rebuild failure, worker restart, and
+  old/new version coexistence.
+- Batch advancement is fail closed. API SLO, frontend success, backend
+  authority count, EN/ZH parity, canonical/robots/structured data,
+  sitemap/LLM completeness, cache warm completion, 404/5xx/504 budgets,
+  publication/indexability approval, and rollback evidence must all pass.
+- A rollout-gate pass means only
+  `ready_for_separate_exact_sha_approval=true`; it never authorizes or executes
+  production import, publication, cache warming, deployment, or Search Channel
+  submission.
+
+### Operational Entry Points
+
+```bash
+php artisan career:validate-directory-10k-scale-readiness \
+  --expected-public-count=<current-authority-count> \
+  --expected-sitemap-career-urls=<current-authority-count-times-two> \
+  --synthetic-count=10000 \
+  --json
+
+php artisan career:validate-10k-controlled-rollout \
+  --batch=<100|500|1000|2500|5000|10000> \
+  --evidence=<immutable-evidence.json> \
+  --json
+```
+
+The controlled-rollout operating procedure is maintained at
+`backend/docs/career/career-10k-controlled-rollout-sop.md`.
 
 ## Directory API Budget
 
@@ -168,7 +232,12 @@ Channel actions in one PR.
 
 ## Final Decision
 
-`career_10k_rollout_architecture_spec_completed_ready_for_future_scoped_prs`
+`career_10k_stability_architecture_implemented_release_still_requires_exact_sha_authorization`
 
-Next task: none for this train. Future 10k work needs a new scoped train and
-explicit manifest/state authorization.
+The system now has the read models, cache resilience, frontend failure
+semantics, runtime SLOs, detail delivery budgets, real 10k capacity gate, and
+controlled rollout gate required for staged expansion. This is architectural
+readiness, not evidence that 10,000 occupations are already published.
+Production import, promotion, or deploy remains outside this train and requires
+separate exact-SHA authorization plus batch evidence that passes the backend
+publication/indexability gate.
