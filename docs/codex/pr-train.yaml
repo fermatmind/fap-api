@@ -38763,6 +38763,47 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: ENNEAGRAM-90-BACKEND-CMS-OPS-WORKFLOW-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01]
+    branch: codex/enneagram-90-backend-cms-ops-workflow-01
+    title: "ENNEAGRAM-90-BACKEND-CMS-OPS-WORKFLOW-01: add guarded Enneagram 90 CMS Ops workflow"
+    train_scope: enneagram_90_backend_cms_ops_workflow
+    status: user_authorized
+    scope:
+      - Add a non-deploy workflow_dispatch CMS Ops workflow for ENNEAGRAM-90 production operations.
+      - Support 90-page dry-run, draft import, promotion inspect, promotion write, publish dry-run, and publish write modes.
+      - Require exact release SHA and exact operator approval phrase before any workflow operation can run.
+      - Fail closed on deployed SHA mismatch, package hash mismatch, invalid asset package, unsafe index/sitemap/llms/search side effects, and unexpected create/update/skip counts.
+      - Preserve no-deploy/no-CMS-write behavior for this PR itself; this PR only adds workflow code and train bookkeeping.
+      - Reconcile ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01 merged/cleanup ledger facts after PR #2976.
+    allowed_paths:
+      - .github/workflows/enneagram-90-cms-production-ops.yml
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify backend runtime code, fap-web, database schema, CMS production content, sitemap runtime, llms runtime, public API runtime, JSON-LD runtime, canonical/noindex runtime behavior, permissions, scheduler behavior, secrets, staging deploy, or production deploy.
+      - Trigger the workflow, write CMS, run production imports, promote, publish, warm sitemap cache, enable llms/search release, or add frontend fallback content.
+      - Weaken existing fail-closed Enneagram CMS gate behavior.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/enneagram-90-cms-production-ops.yml'); puts 'workflow yaml ok'"
+      - bash -n <(ruby -e "require 'yaml'; y=YAML.load_file('.github/workflows/enneagram-90-cms-production-ops.yml'); puts y['jobs']['enneagram-90-cms-ops']['steps'].find { |s| s['name'] == 'Run guarded ENNEAGRAM-90 CMS operation' }['run']")
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality-public-assets:import --no-ansi --source=../docs/seo/personality/enneagram/content-packages/enneagram-90-cms-v1/cms-import-dry-run-package.json --framework=enneagram
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: BIG5-EN-DOMAIN-CONTENT-PACKAGE-01
     repo: fap-api
     depends_on: []

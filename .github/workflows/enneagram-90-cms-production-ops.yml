@@ -1,0 +1,390 @@
+name: Enneagram 90 CMS Production Ops
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Exact deployed fap-api release SHA (40 lowercase hex characters)
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: "Exact phrase: Approve ENNEAGRAM-90 CMS Ops <operation_mode> for SHA <release_sha>"
+        required: true
+        type: string
+      operation_mode:
+        description: Select one guarded ENNEAGRAM-90 CMS operation. This workflow never deploys.
+        required: true
+        default: dry_run
+        type: choice
+        options:
+          - dry_run
+          - draft_write
+          - promotion_inspect
+          - promotion_write
+          - publish_dry_run
+          - publish_write
+
+permissions:
+  contents: read
+
+concurrency:
+  group: enneagram-90-cms-production-ops
+  cancel-in-progress: false
+
+jobs:
+  enneagram-90-cms-ops:
+    name: Run guarded ENNEAGRAM-90 CMS operation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: production
+    env:
+      DEPLOY_HOST: "139.224.130.204"
+      DEPLOY_PATH: "/var/www/fap-api"
+      DEPLOY_PORT: "22"
+      DEPLOY_USER: "ubuntu"
+      RELEASE_SHA: ${{ inputs.release_sha }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      OPERATION_MODE: ${{ inputs.operation_mode }}
+      PACKAGE_PATH: "docs/seo/personality/enneagram/content-packages/enneagram-90-cms-v1/cms-import-dry-run-package.json"
+
+    steps:
+      - name: Validate SHA-bound approval
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "release_sha must be 40 lowercase hexadecimal characters." >&2
+            exit 2
+          fi
+          case "$OPERATION_MODE" in
+            dry_run|draft_write|promotion_inspect|promotion_write|publish_dry_run|publish_write) ;;
+            *) echo "operation_mode is not supported." >&2; exit 2 ;;
+          esac
+          expected="Approve ENNEAGRAM-90 CMS Ops ${OPERATION_MODE} for SHA ${RELEASE_SHA}"
+          if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected" ]; then
+            echo "operator_approval_phrase does not match the exact SHA-bound phrase." >&2
+            exit 2
+          fi
+
+      - name: Checkout authorized revision
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.release_sha }}
+          fetch-depth: 0
+
+      - name: Verify authorized revision belongs to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          test "$actual" = "$RELEASE_SHA"
+          git fetch --no-tags origin main
+          git merge-base --is-ancestor "$RELEASE_SHA" origin/main
+
+      - name: Hash immutable ENNEAGRAM-90 source package
+        id: inputs_hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -r "$PACKAGE_PATH"
+          echo "package_sha=$(sha256sum "$PACKAGE_PATH" | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run guarded ENNEAGRAM-90 CMS operation
+        shell: bash
+        env:
+          PACKAGE_SHA: ${{ steps.inputs_hash.outputs.package_sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          target="$DEPLOY_USER@$DEPLOY_HOST"
+          run_dir="/tmp/enneagram-90-cms-ops-${GITHUB_RUN_ID}"
+
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_release_sha '%q' "$RELEASE_SHA"
+          printf -v q_package_path '%q' "$PACKAGE_PATH"
+          printf -v q_package_sha '%q' "$PACKAGE_SHA"
+          printf -v q_run_dir '%q' "$run_dir"
+          printf -v q_operation_mode '%q' "$OPERATION_MODE"
+
+          set +e
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$target" \
+            "DEPLOY_PATH=$q_deploy_path RELEASE_SHA=$q_release_sha PACKAGE_PATH=$q_package_path PACKAGE_SHA=$q_package_sha RUN_DIR=$q_run_dir OPERATION_MODE=$q_operation_mode bash -s" <<'REMOTE'
+          set -Eeuo pipefail
+          phase="remote_bootstrap"
+          mkdir -p "$RUN_DIR"
+          write_failure_summary() {
+            local exit_code=$?
+            trap - ERR
+            jq -n \
+              --arg release_sha "$RELEASE_SHA" \
+              --arg operation_mode "$OPERATION_MODE" \
+              --arg phase "$phase" \
+              --argjson exit_code "$exit_code" \
+              '{schema_version:"enneagram_90_cms_production_ops.v1", outcome:"failure", release_sha:$release_sha, operation_mode:$operation_mode, failed_phase:$phase, exit_code:$exit_code}' \
+              > "$RUN_DIR/summary.json" || true
+            exit "$exit_code"
+          }
+          trap write_failure_summary ERR
+
+          phase="release_root"
+          cd "$DEPLOY_PATH/current"
+          phase="deployed_revision"
+          if [ -f REVISION ]; then
+            deployed_sha="$(tr -d '\r\n' < REVISION)"
+          else
+            deployed_sha="$(git rev-parse HEAD)"
+          fi
+          test "$deployed_sha" = "$RELEASE_SHA"
+          phase="backend_root"
+          cd backend
+          test -f artisan
+          phase="package_readability"
+          test -r "../$PACKAGE_PATH"
+          phase="package_hash"
+          printf '%s  %s\n' "$PACKAGE_SHA" "../$PACKAGE_PATH" | sha256sum -c -
+
+          phase="build_operation_packages"
+          jq --arg source_hash "$PACKAGE_SHA" '
+            .assets |= map(
+              .source_hash = $source_hash |
+              .is_public = false |
+              .index_eligible = false |
+              .sitemap_eligible = false |
+              .llms_eligible = false |
+              .robots = "noindex,follow" |
+              .launch_state = "draft" |
+              .review_state = "draft" |
+              .last_reviewed_at = null
+            ) |
+            .write_authorized = false |
+            .publish_authorized = false
+          ' "../$PACKAGE_PATH" > "$RUN_DIR/draft-package.json"
+          jq --arg source_hash "$PACKAGE_SHA" '
+            .assets |= map(
+              .source_hash = $source_hash |
+              .is_public = true |
+              .index_eligible = false |
+              .sitemap_eligible = false |
+              .llms_eligible = false |
+              .robots = "noindex,follow" |
+              .launch_state = "content_ready" |
+              .review_state = "operator_promoted_content_ready" |
+              .last_reviewed_at = null
+            ) |
+            .write_authorized = false |
+            .publish_authorized = false
+          ' "../$PACKAGE_PATH" > "$RUN_DIR/content-ready-package.json"
+          jq --arg source_hash "$PACKAGE_SHA" '
+            .assets |= map(
+              .source_hash = $source_hash |
+              .is_public = true |
+              .index_eligible = true |
+              .sitemap_eligible = true |
+              .llms_eligible = false |
+              .robots = "index,follow" |
+              .launch_state = "published" |
+              .review_state = "published_no_llms" |
+              .last_reviewed_at = null
+            ) |
+            .write_authorized = false |
+            .publish_authorized = false
+          ' "../$PACKAGE_PATH" > "$RUN_DIR/published-package.json"
+
+          parse_summary() {
+            local file="$1"
+            jq -Rn '
+              [inputs | select(test("^[A-Za-z0-9_]+=")) | split("=") | {(.[0]): .[1]}] | add |
+              with_entries(
+                if (.value | test("^[0-9]+$")) then .value |= tonumber
+                elif .value == "1" then .value = true
+                elif .value == "0" then .value = false
+                else . end
+              )
+            ' < "$file"
+          }
+
+          run_import() {
+            local label="$1"
+            local package="$2"
+            local write_flag="$3"
+            local allow_indexable="$4"
+            local output="$RUN_DIR/${label}.txt"
+            local args=(personality-public-assets:import --no-ansi --source="$package" --framework=enneagram)
+            if [ "$write_flag" = "write" ]; then
+              args+=(--write)
+            fi
+            if [ "$allow_indexable" = "allow-indexable" ]; then
+              args+=(--allow-indexable)
+            fi
+            php artisan "${args[@]}" | tee "$output" >/dev/null
+            parse_summary "$output" > "$RUN_DIR/${label}.json"
+          }
+
+          assert_draft_summary() {
+            local file="$1"
+            jq -e '
+              .assets_found == 90 and .valid_count == 90 and .errors_count == 0 and
+              ((.will_create + .will_update + .will_skip) == 90) and
+              .indexable_count == 0 and .sitemap_eligible_count == 0 and .llms_eligible_count == 0
+            ' "$file" >/dev/null
+          }
+
+          assert_promote_inspect_summary() {
+            local file="$1"
+            jq -e '
+              .assets_found == 90 and .valid_count == 90 and .errors_count == 0 and
+              .will_create == 0 and ((.will_update + .will_skip) == 90) and
+              .indexable_count == 0 and .sitemap_eligible_count == 0 and .llms_eligible_count == 0
+            ' "$file" >/dev/null
+          }
+
+          assert_publish_summary() {
+            local file="$1"
+            jq -e '
+              .assets_found == 90 and .valid_count == 90 and .errors_count == 0 and
+              .will_create == 0 and ((.will_update + .will_skip) == 90) and
+              .indexable_count == 90 and .sitemap_eligible_count == 90 and .llms_eligible_count == 0
+            ' "$file" >/dev/null
+          }
+
+          phase="dry_run"
+          run_import "draft-dry-run" "$RUN_DIR/draft-package.json" dry-run no-indexable
+          assert_draft_summary "$RUN_DIR/draft-dry-run.json"
+
+          case "$OPERATION_MODE" in
+            dry_run)
+              ;;
+            draft_write)
+              phase="draft_write"
+              run_import "draft-write" "$RUN_DIR/draft-package.json" write no-indexable
+              assert_draft_summary "$RUN_DIR/draft-write.json"
+              ;;
+            promotion_inspect)
+              phase="promotion_inspect"
+              run_import "promotion-inspect" "$RUN_DIR/content-ready-package.json" dry-run no-indexable
+              assert_promote_inspect_summary "$RUN_DIR/promotion-inspect.json"
+              ;;
+            promotion_write)
+              phase="promotion_inspect"
+              run_import "promotion-inspect" "$RUN_DIR/content-ready-package.json" dry-run no-indexable
+              assert_promote_inspect_summary "$RUN_DIR/promotion-inspect.json"
+              phase="promotion_write"
+              run_import "promotion-write" "$RUN_DIR/content-ready-package.json" write no-indexable
+              assert_promote_inspect_summary "$RUN_DIR/promotion-write.json"
+              ;;
+            publish_dry_run)
+              phase="publish_dry_run"
+              run_import "publish-dry-run" "$RUN_DIR/published-package.json" dry-run allow-indexable
+              assert_publish_summary "$RUN_DIR/publish-dry-run.json"
+              ;;
+            publish_write)
+              phase="publish_dry_run"
+              run_import "publish-dry-run" "$RUN_DIR/published-package.json" dry-run allow-indexable
+              assert_publish_summary "$RUN_DIR/publish-dry-run.json"
+              phase="publish_write"
+              run_import "publish-write" "$RUN_DIR/published-package.json" write allow-indexable
+              assert_publish_summary "$RUN_DIR/publish-write.json"
+              ;;
+          esac
+
+          phase="write_summary"
+          for optional_summary in draft-write promotion-inspect promotion-write publish-dry-run publish-write; do
+            if [ ! -f "$RUN_DIR/${optional_summary}.json" ]; then
+              printf 'null\n' > "$RUN_DIR/${optional_summary}.json"
+            fi
+          done
+          jq -n \
+            --arg release_sha "$RELEASE_SHA" \
+            --arg operation_mode "$OPERATION_MODE" \
+            --arg package_sha "$PACKAGE_SHA" \
+            --slurpfile draft "$RUN_DIR/draft-dry-run.json" \
+            --slurpfile draft_write "$RUN_DIR/draft-write.json" \
+            --slurpfile promotion_inspect "$RUN_DIR/promotion-inspect.json" \
+            --slurpfile promotion_write "$RUN_DIR/promotion-write.json" \
+            --slurpfile publish_dry_run "$RUN_DIR/publish-dry-run.json" \
+            --slurpfile publish_write "$RUN_DIR/publish-write.json" \
+            '{
+              schema_version:"enneagram_90_cms_production_ops.v1",
+              outcome:"success",
+              release_sha:$release_sha,
+              operation_mode:$operation_mode,
+              package_sha256:$package_sha,
+              no_deploy_attempted:true,
+              llms_release_attempted:false,
+              search_release_attempted:false,
+              draft_dry_run:($draft[0] // null),
+              draft_write:($draft_write[0] // null),
+              promotion_inspect:($promotion_inspect[0] // null),
+              promotion_write:($promotion_write[0] // null),
+              publish_dry_run:($publish_dry_run[0] // null),
+              publish_write:($publish_write[0] // null)
+            }' > "$RUN_DIR/summary.json"
+          REMOTE
+          remote_status=$?
+          set -e
+
+          summary_status=0
+          scp -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -P "$DEPLOY_PORT" "$target:$run_dir/summary.json" artifacts/summary.json \
+            || summary_status=$?
+          if [ "$summary_status" -ne 0 ]; then
+            jq -n \
+              --arg release_sha "$RELEASE_SHA" \
+              --arg operation_mode "$OPERATION_MODE" \
+              --arg phase "summary_transfer" \
+              --argjson remote_exit_code "$remote_status" \
+              --argjson summary_transfer_exit_code "$summary_status" \
+              '{schema_version:"enneagram_90_cms_production_ops.v1", outcome:"failure", release_sha:$release_sha, operation_mode:$operation_mode, failed_phase:$phase, remote_exit_code:$remote_exit_code, summary_transfer_exit_code:$summary_transfer_exit_code}' \
+              > artifacts/summary.json
+          fi
+          if [ "$remote_status" -ne 0 ]; then
+            exit "$remote_status"
+          fi
+          jq -e '
+            .outcome == "success" and
+            .no_deploy_attempted == true and
+            .llms_release_attempted == false and
+            .search_release_attempted == false and
+            .draft_dry_run.assets_found == 90 and
+            .draft_dry_run.valid_count == 90 and
+            .draft_dry_run.errors_count == 0 and
+            .draft_dry_run.indexable_count == 0 and
+            .draft_dry_run.sitemap_eligible_count == 0 and
+            .draft_dry_run.llms_eligible_count == 0 and
+            (
+              (.operation_mode == "dry_run") or
+              (.operation_mode == "draft_write" and .draft_write.assets_found == 90 and .draft_write.errors_count == 0 and .draft_write.indexable_count == 0 and .draft_write.sitemap_eligible_count == 0 and .draft_write.llms_eligible_count == 0) or
+              (.operation_mode == "promotion_inspect" and .promotion_inspect.assets_found == 90 and .promotion_inspect.will_create == 0 and .promotion_inspect.errors_count == 0 and .promotion_inspect.indexable_count == 0 and .promotion_inspect.sitemap_eligible_count == 0 and .promotion_inspect.llms_eligible_count == 0) or
+              (.operation_mode == "promotion_write" and .promotion_inspect.assets_found == 90 and .promotion_inspect.will_create == 0 and .promotion_write.assets_found == 90 and .promotion_write.will_create == 0 and .promotion_write.errors_count == 0) or
+              (.operation_mode == "publish_dry_run" and .publish_dry_run.assets_found == 90 and .publish_dry_run.will_create == 0 and .publish_dry_run.indexable_count == 90 and .publish_dry_run.sitemap_eligible_count == 90 and .publish_dry_run.llms_eligible_count == 0) or
+              (.operation_mode == "publish_write" and .publish_dry_run.assets_found == 90 and .publish_dry_run.will_create == 0 and .publish_write.assets_found == 90 and .publish_write.will_create == 0 and .publish_write.indexable_count == 90 and .publish_write.sitemap_eligible_count == 90 and .publish_write.llms_eligible_count == 0)
+            )
+          ' artifacts/summary.json >/dev/null
+
+      - name: Upload redacted operation summary
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: enneagram-90-cms-production-ops-summary
+          path: artifacts/summary.json
+          if-no-files-found: warn
