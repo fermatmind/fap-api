@@ -54,6 +54,30 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function sitemap_cache_warm_uses_the_php_fpm_identity_for_shared_file_cache_writes(): void
+    {
+        $source = $this->readRepoFile('deploy.php');
+
+        $this->assertStringContainsString(
+            "sudo -n -u www-data -- {{bin/php}} %s seo:warm-sitemap-source-cache",
+            $source,
+        );
+    }
+
+    #[Test]
+    public function failed_deploy_unlock_passes_runner_identity_to_the_remote_verifier_explicitly(): void
+    {
+        $source = $this->readRepoFile('deploy.php');
+
+        $this->assertStringContainsString("\$expectedRunId = \$argv[2] ?? '';", $source);
+        $this->assertStringContainsString("\$expectedRunAttempt = \$argv[3] ?? '';", $source);
+        $this->assertStringContainsString(".' '.deployShellArg(\$runId)", $source);
+        $this->assertStringContainsString(".' '.deployShellArg(\$runAttempt)", $source);
+        $this->assertStringNotContainsString("\$expectedRunId = getenv('DEPLOY_LOCK_RUN_ID')", $source);
+        $this->assertStringNotContainsString("\$expectedRunAttempt = getenv('DEPLOY_LOCK_RUN_ATTEMPT')", $source);
+    }
+
+    #[Test]
     public function deploy_nginx_static_media_route_skips_when_static_location_already_exists(): void
     {
         $source = $this->readRepoFile('deploy.php');
