@@ -39,6 +39,7 @@ use App\Models\EditorialReview;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Services\Cms\ArticlePublishService;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -193,7 +194,7 @@ final class ContentCmsProductLayerTest extends TestCase
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
         $this->approveRecord($admin, (int) $session['ops_org_id'], 'article', $article);
-        ArticleResource::releaseRecord($article);
+        app(ArticlePublishService::class)->publishArticle((int) $article->id, 'controlled_publish_test');
 
         $article->refresh();
         $this->assertSame('published', $article->status);
@@ -265,7 +266,7 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertForbidden();
     }
 
-    public function test_content_release_admin_can_release_draft_content_records(): void
+    public function test_content_release_admin_cannot_bypass_controlled_publish_for_draft_records(): void
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_RELEASE,
@@ -294,33 +295,22 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->approveRecord($admin, (int) $session['ops_org_id'], 'guide', $guide);
         $this->approveRecord($admin, (int) $session['ops_org_id'], 'job', $job);
 
-        ArticleResource::releaseRecord($article);
-        CareerGuideResource::releaseRecord($guide);
-        CareerJobResource::releaseRecord($job);
-
         $article->refresh();
         $guide->refresh();
         $job->refresh();
 
-        $this->assertSame('published', $article->status);
-        $this->assertTrue($article->is_public);
-        $this->assertNotNull($article->published_at);
-
-        $this->assertSame(CareerGuide::STATUS_PUBLISHED, $guide->status);
-        $this->assertTrue($guide->is_public);
-        $this->assertNotNull($guide->published_at);
-
-        $this->assertSame(CareerJob::STATUS_PUBLISHED, $job->status);
-        $this->assertTrue($job->is_public);
-        $this->assertNotNull($job->published_at);
-
-        $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale=en&org_id='.(int) $session['ops_org_id'])
-            ->assertOk()
-            ->assertJsonPath('ok', true)
-            ->assertJsonPath('article.slug', $article->slug);
+        $this->assertFalse(method_exists(ArticleResource::class, 'releaseRecord'));
+        $this->assertFalse(method_exists(CareerGuideResource::class, 'releaseRecord'));
+        $this->assertFalse(method_exists(CareerJobResource::class, 'releaseRecord'));
+        $this->assertSame('draft', $article->status);
+        $this->assertFalse($article->is_public);
+        $this->assertSame(CareerGuide::STATUS_DRAFT, $guide->status);
+        $this->assertFalse($guide->is_public);
+        $this->assertSame(CareerJob::STATUS_DRAFT, $job->status);
+        $this->assertFalse($job->is_public);
     }
 
-    public function test_article_release_marks_translation_published_without_changing_source_linkage(): void
+    public function test_translation_draft_stays_unpublished_without_controlled_publish(): void
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_RELEASE,
@@ -387,19 +377,19 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->approveRecord($admin, $selectedOrgId, 'article', $translation);
         $this->setOpsContext($selectedOrgId, $admin, '/ops/content-release');
 
-        ArticleResource::releaseRecord($translation);
+        $this->assertFalse(method_exists(ArticleResource::class, 'releaseRecord'));
 
         $translation->refresh();
         $revision->refresh();
         $source->refresh();
 
-        $this->assertSame('published', $translation->status);
-        $this->assertTrue($translation->is_public);
-        $this->assertSame(Article::TRANSLATION_STATUS_PUBLISHED, $translation->translation_status);
-        $this->assertSame((int) $revision->id, (int) $translation->published_revision_id);
+        $this->assertSame('draft', $translation->status);
+        $this->assertFalse($translation->is_public);
+        $this->assertSame(Article::TRANSLATION_STATUS_HUMAN_REVIEW, $translation->translation_status);
+        $this->assertNull($translation->published_revision_id);
         $this->assertSame((int) $source->id, (int) $translation->source_article_id);
         $this->assertSame((string) $source->translation_group_id, (string) $translation->translation_group_id);
-        $this->assertSame(ArticleTranslationRevision::STATUS_PUBLISHED, $revision->revision_status);
+        $this->assertSame(ArticleTranslationRevision::STATUS_APPROVED, $revision->revision_status);
         $this->assertSame(0, (int) $revision->org_id);
         $this->assertSame(Article::TRANSLATION_STATUS_SOURCE, $source->translation_status);
         $this->assertSame('published', $source->status);
@@ -462,9 +452,9 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->approveRecord($admin, $selectedOrgId, 'article', $translation);
         $this->setOpsContext($selectedOrgId, $admin, '/ops/content-release');
 
-        $this->expectException(AuthorizationException::class);
-
-        ArticleResource::releaseRecord($translation);
+        $this->assertFalse(method_exists(ArticleResource::class, 'releaseRecord'));
+        $this->assertSame('draft', $translation->fresh()->status);
+        $this->assertFalse((bool) $translation->fresh()->is_public);
     }
 
     public function test_content_write_admin_cannot_release_draft_content_records(): void
@@ -481,9 +471,9 @@ final class ContentCmsProductLayerTest extends TestCase
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
 
-        $this->expectException(AuthorizationException::class);
-
-        ArticleResource::releaseRecord($article);
+        $this->assertFalse(method_exists(ArticleResource::class, 'releaseRecord'));
+        $this->assertSame('draft', $article->fresh()->status);
+        $this->assertFalse((bool) $article->fresh()->is_public);
     }
 
     public function test_content_overview_stays_on_visible_cms_modules_only(): void
@@ -727,9 +717,7 @@ final class ContentCmsProductLayerTest extends TestCase
 
         $this->setOpsContext($selectedOrgId, $publisher, '/ops/content-release');
 
-        Livewire::test(ContentReleasePage::class)
-            ->assertOk()
-            ->call('releaseItem', 'article', (int) $article->id);
+        app(ArticlePublishService::class)->publishArticle((int) $article->id, 'controlled_publish_test');
 
         $article->refresh();
         $this->assertSame('published', $article->status);
@@ -915,9 +903,9 @@ final class ContentCmsProductLayerTest extends TestCase
 
         $this->setOpsContext($selectedOrgId, $publisher, '/ops/content-release');
 
-        $this->expectException(AuthorizationException::class);
-
-        ArticleResource::releaseRecord($article);
+        $this->assertFalse(method_exists(ArticleResource::class, 'releaseRecord'));
+        $this->assertSame('draft', $article->fresh()->status);
+        $this->assertFalse((bool) $article->fresh()->is_public);
     }
 
     public function test_editorial_review_cannot_approve_record_before_submission(): void

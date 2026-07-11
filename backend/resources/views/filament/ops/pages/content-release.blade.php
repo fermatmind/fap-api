@@ -118,16 +118,7 @@
                                     {{ __('ops.custom_pages.common.actions.open') }}
                                 </x-filament::button>
 
-                                @if ($item['releaseable'])
-                                    <x-filament::button
-                                        size="xs"
-                                        color="primary"
-                                        type="button"
-                                        wire:click="releaseItem('{{ $item['type'] }}', {{ $item['id'] }})"
-                                    >
-                                        {{ __('ops.custom_pages.common.actions.publish') }}
-                                    </x-filament::button>
-                                @elseif ($item['status'] === 'draft')
+                                @if ($item['status'] === 'draft')
                                     <x-filament::button size="xs" color="warning" disabled>
                                         {{ __('ops.custom_pages.content_release.needs_workflow') }}
                                     </x-filament::button>

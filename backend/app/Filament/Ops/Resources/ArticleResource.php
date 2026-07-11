@@ -8,8 +8,6 @@ use App\Filament\Ops\Resources\ArticleResource\Pages;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleSeoReleaseStatus;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
-use App\Filament\Ops\Support\ContentReleaseAudit;
-use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\OpsContentLocaleScope;
 use App\Filament\Ops\Support\OpsEdit;
 use App\Filament\Ops\Support\OpsTable;
@@ -27,7 +25,6 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
@@ -557,14 +554,6 @@ class ArticleResource extends Resource
                     ->label(__('ops.resources.articles.actions.edit'))
                     ->icon('heroicon-o-pencil-square')
                     ->color('gray'),
-                Tables\Actions\Action::make('release')
-                    ->label(__('ops.resources.articles.actions.release'))
-                    ->icon('heroicon-o-rocket-launch')
-                    ->color('primary')
-                    ->visible(fn (Article $record): bool => ContentAccess::canRelease()
-                        && $record->status !== 'published'
-                        && (EditorialReviewAudit::latestState('article', $record)['state'] ?? null) === EditorialReviewAudit::STATE_APPROVED)
-                    ->action(fn (Article $record) => self::releaseRecord($record, 'resource_table')),
             ])
             ->bulkActions([]);
     }
@@ -873,62 +862,5 @@ class ArticleResource extends Resource
         }
 
         return array_values(array_unique($failures));
-    }
-
-    public static function releaseRecord(Article $record, string $source = 'resource_table'): void
-    {
-        if (! ContentAccess::canRelease()) {
-            throw new AuthorizationException('You do not have permission to release articles.');
-        }
-
-        if ($record->status === 'published') {
-            return;
-        }
-
-        if ((EditorialReviewAudit::latestState('article', $record)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
-            throw new AuthorizationException('This article must be approved in editorial review before it can be published.');
-        }
-
-        $publishedRevision = $record->workingRevision instanceof ArticleTranslationRevision
-            ? $record->workingRevision
-            : self::revisionWorkspace()->resolveWorkingRevision($record);
-
-        if (
-            $publishedRevision->revision_status === ArticleTranslationRevision::STATUS_STALE
-            || $publishedRevision->revision_status === ArticleTranslationRevision::STATUS_ARCHIVED
-            || ! $publishedRevision->isPublishableForArticle($record)
-        ) {
-            throw new AuthorizationException('This article revision is not publishable.');
-        }
-
-        $publishedRevision->forceFill([
-            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
-            'published_at' => $publishedRevision->published_at ?? now(),
-        ])->save();
-
-        $record->forceFill([
-            'status' => 'published',
-            'is_public' => true,
-            'published_at' => $record->published_at ?? now(),
-            'published_revision_id' => $publishedRevision->id,
-            'translation_status' => $record->isSourceArticle()
-                ? Article::TRANSLATION_STATUS_SOURCE
-                : Article::TRANSLATION_STATUS_PUBLISHED,
-        ])->save();
-
-        if ($record->isSourceArticle()
-            && filled($publishedRevision->source_version_hash)) {
-            $record->forceFill([
-                'source_version_hash' => $publishedRevision->source_version_hash,
-            ])->saveQuietly();
-        }
-
-        ContentReleaseAudit::log('article', $record->fresh(), $source);
-
-        Notification::make()
-            ->title('Article released')
-            ->body('The article is now marked as published.')
-            ->success()
-            ->send();
     }
 }

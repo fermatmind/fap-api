@@ -39153,3 +39153,53 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: AUDIT-PRR2-API-03
+    repo: fap-api
+    depends_on: [AUDIT-PRR2-API-01]
+    branch: codex/audit-prr2-api-03-controlled-cms-release
+    title: "AUDIT-PRR2-API-03: remove generic CMS release mutations"
+    train_scope: prr2_controlled_cms_release_only
+    status: user_authorized
+    scope:
+      - Remove generic Article, CareerGuide, and CareerJob Filament release actions and direct releaseRecord mutations.
+      - Remove the ContentReleasePage releaseItem mutation and render the release workspace fail closed.
+      - Preserve the existing controlled article publish command/service and migrate affected tests away from deleted generic entry points.
+      - Keep CareerGuide and CareerJob release read-only until a separately approved controlled publish contract exists.
+    allowed_paths:
+      - AGENTS.md
+      - backend/app/Filament/Ops/Pages/ContentReleasePage.php
+      - backend/app/Filament/Ops/Resources/ArticleResource.php
+      - backend/app/Filament/Ops/Resources/CareerGuideResource.php
+      - backend/app/Filament/Ops/Resources/CareerJobResource.php
+      - backend/resources/views/filament/ops/pages/content-release.blade.php
+      - backend/tests/Feature/Ops/ControlledContentReleaseOnlyTest.php
+      - backend/tests/Feature/Ops/ContentCmsProductLayerTest.php
+      - backend/tests/Feature/Ops/PostReleaseObservabilityPageTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Invent or enable a CareerGuide/CareerJob controlled publisher, mutate CMS content, change indexability, submit search URLs, revalidate runtime content, or modify frontend code.
+      - Change article controlled-command confirmation, revision/hash, rollback, deployment, permissions, secrets, migrations, or production data.
+      - Run deploys, production imports, CMS/search writes, queue replays, payments, or production database mutations.
+    validation:
+      - cd backend && php artisan test tests/Feature/Ops/ControlledContentReleaseOnlyTest.php tests/Feature/Ops/ContentCmsProductLayerTest.php tests/Feature/Ops/PostReleaseObservabilityPageTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Console/ArticlePublishControlledCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_generic_cms_release_surface_files' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Filament/Ops/Pages/ContentReleasePage.php app/Filament/Ops/Resources/ArticleResource.php app/Filament/Ops/Resources/CareerGuideResource.php app/Filament/Ops/Resources/CareerJobResource.php tests/Feature/Ops/ControlledContentReleaseOnlyTest.php tests/Feature/Ops/ContentCmsProductLayerTest.php tests/Feature/Ops/PostReleaseObservabilityPageTest.php
+      - cd backend && php artisan view:cache --no-ansi
+      - cd backend && php artisan view:clear --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend

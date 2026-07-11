@@ -1267,6 +1267,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_generic_cms_release_surface_files(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Pages/ContentReleasePage.php',
+            'backend/app/Filament/Ops/Resources/CareerGuideResource.php',
+            'backend/app/Filament/Ops/Resources/CareerJobResource.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_cms_media_pipeline_files(): void
     {
         $changed = [
@@ -5486,6 +5497,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isGenericCmsReleaseSurfaceFile($file)) {
+                continue;
+            }
+
             if ($this->isCmsMediaPipelineFile($file)) {
                 continue;
             }
@@ -7207,6 +7222,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Support/ContentReleaseAudit.php',
             'backend/app/Filament/Ops/Support/ContentReleaseFollowUp.php',
             'backend/app/Services/Cms/ContentReleasePathPlanner.php',
+        ], true);
+    }
+
+    private function isGenericCmsReleaseSurfaceFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Pages/ContentReleasePage.php',
+            'backend/app/Filament/Ops/Resources/CareerGuideResource.php',
+            'backend/app/Filament/Ops/Resources/CareerJobResource.php',
         ], true);
     }
 
