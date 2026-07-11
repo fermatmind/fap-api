@@ -273,6 +273,33 @@ if ($stagingIdentityFile !== null) {
     $stagingHost->setIdentityFile($stagingIdentityFile);
 }
 
+/**
+ * Fail before the current symlink moves unless Deployer materialized the
+ * exact revision authorized by the production workflow_run event.
+ */
+task('guard:expected-release-revision', function () {
+    if (currentHost()->getAlias() !== 'production') {
+        return;
+    }
+
+    $expectedRevision = trim((string) (getenv('DEPLOY_SHA') ?: ''));
+
+    if (! preg_match('/\A[a-f0-9]{40}\z/i', $expectedRevision)) {
+        throw new \RuntimeException('DEPLOY_SHA must be an exact 40-character Git revision');
+    }
+
+    $quotedExpectedRevision = deployShellArg(strtolower($expectedRevision));
+
+    run(<<<BASH
+set -euo pipefail
+test -f '{{release_path}}/REVISION'
+release_revision="$(tr -d '\r\n' < '{{release_path}}/REVISION')"
+test "\$release_revision" = {$quotedExpectedRevision}
+BASH);
+});
+
+before('deploy:symlink', 'guard:expected-release-revision');
+
 task('guard:ops-theme-asset', function () {
     $asset = deployPlaceholderPathArg('{{release_path}}', 'backend/public/css/app/ops-theme.css');
 

@@ -86,9 +86,24 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString("github.event.workflow_run.head_branch == 'main'", $source);
         $this->assertStringContainsString('Confirm approved revision is still latest main', $source);
         $this->assertStringContainsString('if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]', $source);
+        $this->assertStringContainsString('--revision "$DEPLOY_SHA"', $source);
+        $this->assertStringContainsString("tr -d '\\r\\n' < REVISION", $source);
         $this->assertStringContainsString('Single-developer mode: a latest-main revision with a successful staging deploy is eligible for automatic production deployment regardless of PR labels or changed paths.', $source);
         $this->assertStringNotContainsString('Production auto-deploy requires exactly one merged PR', $source);
         $this->assertStringNotContainsString('/repos/${GITHUB_REPOSITORY}/pulls/${pr_number}/files', $source);
+    }
+
+    #[Test]
+    public function production_deploy_validates_the_exact_release_revision_before_symlink_activation(): void
+    {
+        $source = $this->readRepoFile('deploy.php');
+
+        $this->assertStringContainsString("task('guard:expected-release-revision'", $source);
+        $this->assertStringContainsString("currentHost()->getAlias() !== 'production'", $source);
+        $this->assertStringContainsString("getenv('DEPLOY_SHA')", $source);
+        $this->assertStringContainsString("test -f '{{release_path}}/REVISION'", $source);
+        $this->assertStringContainsString("tr -d '\\r\\n' < '{{release_path}}/REVISION'", $source);
+        $this->assertStringContainsString("before('deploy:symlink', 'guard:expected-release-revision')", $source);
     }
 
     #[Test]
