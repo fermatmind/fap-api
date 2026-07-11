@@ -45,26 +45,23 @@ env:
   RELEASE_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.release_id || format('auto-{0}', github.event.workflow_run.head_sha) }}
 
 jobs:
-  deploy-production:
-    name: Deploy fap-api production
+  deployment-eligibility:
+    name: Resolve production deployment eligibility
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'push' &&
       github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-    concurrency:
-      group: deploy-${{ github.repository }}-production
-      cancel-in-progress: false
-    environment:
-      name: production
-
+    timeout-minutes: 10
+    outputs:
+      eligible: ${{ steps.latest_main_guard.outputs.eligible }}
+      deploy_sha: ${{ steps.latest_main_guard.outputs.deploy_sha }}
     steps:
-      - name: Checkout deploy revision
+      - name: Checkout deploy revision for eligibility
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.expected_release_sha || github.event.workflow_run.head_sha }}
+          ref: ${{ env.DEPLOY_SHA }}
 
       - name: Validate manual exact-SHA approval and staging evidence
         if: github.event_name == 'workflow_dispatch'
@@ -94,29 +91,20 @@ jobs:
           fi
 
           RUN_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}")"
-          jq -e \
-            --arg sha "$DEPLOY_SHA" \
+          jq -e --arg sha "$DEPLOY_SHA" \
             '.name == "Deploy Application"
              and .path == ".github/workflows/deploy.yml"
              and (.event == "push" or .event == "workflow_dispatch")
              and .status == "completed"
              and .conclusion == "success"
              and .head_branch == "main"
-             and .head_sha == $sha' \
-            <<<"$RUN_JSON" >/dev/null
+             and .head_sha == $sha' <<<"$RUN_JSON" >/dev/null
 
           JOBS_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}/jobs?per_page=100")"
           jq -e \
             '([.jobs[] | select(.name == "Deploy checks (staging)" and .conclusion == "success")] | length) == 1
              and ([.jobs[] | select(.name == "Deploy (staging)" and .conclusion == "success")] | length) == 1' \
             <<<"$JOBS_JSON" >/dev/null
-          echo "manual production approval and exact staging evidence verified"
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.4"
-          coverage: none
 
       - name: Confirm approved revision is still latest main
         id: latest_main_guard
@@ -125,31 +113,45 @@ jobs:
           set -euo pipefail
           git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
           LATEST_MAIN_SHA="$(git rev-parse origin/main)"
-          echo "deploy_sha=$DEPLOY_SHA"
-          echo "latest_main_sha=$LATEST_MAIN_SHA"
+          echo "deploy_sha=$DEPLOY_SHA" >> "$GITHUB_OUTPUT"
           if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
             if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
               echo "Manual production deploy refused because expected_release_sha is not latest main." >&2
               exit 1
             fi
-            echo "skip_deploy=true" >> "$GITHUB_OUTPUT"
-            echo "::notice::Skipping production deploy because this workflow_run SHA is no longer latest main."
+            echo "eligible=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Stale workflow_run is ineligible; production deploy job will be skipped."
             exit 0
           fi
-          echo "skip_deploy=false" >> "$GITHUB_OUTPUT"
+          echo "eligible=true" >> "$GITHUB_OUTPUT"
 
-      - name: Report stale production deploy skip
-        if: github.event_name == 'workflow_run' && steps.latest_main_guard.outputs.skip_deploy == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          echo "Production deploy skipped because a newer main SHA exists."
-          echo "stale_deploy_sha=$DEPLOY_SHA"
-          echo "::notice::Stale production deploy workflow_run completed without deployment."
+  deploy-production:
+    name: Deploy fap-api production
+    needs: deployment-eligibility
+    if: ${{ needs.deployment-eligibility.outputs.eligible == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: deploy-${{ github.repository }}-production
+      cancel-in-progress: false
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout deploy revision
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.deployment-eligibility.outputs.deploy_sha }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
 
       - name: Record single-developer auto-deploy policy
         id: auto_deploy_policy_guard
-        if: github.event_name == 'workflow_run' && steps.latest_main_guard.outputs.skip_deploy != 'true'
+        if: github.event_name == 'workflow_run'
         shell: bash
         run: |
           set -euo pipefail
@@ -157,7 +159,6 @@ jobs:
           exit 0
 
       - name: Refuse retired production target
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -167,7 +168,6 @@ jobs:
           fi
 
       - name: Install Deployer (pinned)
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -176,20 +176,17 @@ jobs:
           php /tmp/dep.phar --version
 
       - name: Set up SSH
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Debug SSH agent (fingerprints only)
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
           ssh-add -l
 
       - name: Install pinned SSH known_hosts
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
@@ -201,7 +198,6 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
 
       - name: SSH preflight
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -225,7 +221,6 @@ jobs:
           ssh_retry "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
 
       - name: Remote deploy lock guard
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -285,7 +280,6 @@ jobs:
           ssh_retry "TARGET='$TARGET' DEPLOY_PATH='$DEPLOY_PATH' STALE_LOCK_SECONDS='1800' GITHUB_REPOSITORY='$GITHUB_REPOSITORY' bash -lc 'printf %s $LOCK_GUARD_B64 | base64 -d | bash'"
 
       - name: Deploy production with Deployer
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         env:
           DEPLOYER_NO_INTERACTION: "1"
@@ -318,7 +312,6 @@ jobs:
             -vvv --no-interaction
 
       - name: Restart queue workers through Laravel queue restart
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -341,7 +334,6 @@ jobs:
           ssh_retry "cd '$DEPLOY_PATH/current/backend' && php artisan queue:restart"
 
       - name: Verify deployed revision
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -366,7 +358,6 @@ jobs:
           test "$DEPLOYED_SHA" = "$DEPLOY_SHA"
 
       - name: Healthcheck and contract smoke
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -401,7 +392,6 @@ jobs:
           ssh_retry "curl -fsS --resolve '$AUTH_HOST:443:127.0.0.1' -H 'Content-Type: application/json' -X POST 'https://$AUTH_HOST/api/v0.3/auth/guest' --data '{\"anon_id\":\"deploy_contract_probe\"}' | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'" >/dev/null
 
       - name: Ops entry and asset smoke
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
