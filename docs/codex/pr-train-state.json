@@ -85475,9 +85475,9 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-03-controlled-cms-release",
     "depends_on": ["AUDIT-PRR2-API-01"],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "0fcc8b615f3bd53d30b43d931312e54a792d35ca",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2946",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -85531,6 +85531,12 @@
         "from": "focused_checks_passed",
         "to": "committed",
         "note": "Committed the twelve-path controlled CMS release-only scope at 0fcc8b615f3bd53d30b43d931312e54a792d35ca on current origin/main."
+      },
+      {
+        "at": "2026-07-11T12:53:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2946; GitHub required checks are pending and no CMS or production action was performed."
       }
     ]
   }
