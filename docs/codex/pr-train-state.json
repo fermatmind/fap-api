@@ -85563,9 +85563,9 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-04-mandatory-admin-totp",
     "depends_on": [],
-    "status": "in_progress",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "b7ae6888e5e41dfdeac1313a0bfae822de4d3650",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2948",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -85583,7 +85583,8 @@
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
     "transitions": [
       {"at": "2026-07-11T13:12:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Registered and started mandatory administrator TOTP enrollment, hidden bootstrap password input, and time-limited audited recovery in the isolated API train worktree; no production administrator data was read or modified."},
-      {"at": "2026-07-11T13:25:00+08:00", "from": "in_progress", "to": "focused_checks_passed", "note": "TOTP enforcement, SEO API compatibility, recovery audit/expiry, bootstrap password, runtime-freeze, Pint and Blade checks passed."}
+      {"at": "2026-07-11T13:25:00+08:00", "from": "in_progress", "to": "focused_checks_passed", "note": "TOTP enforcement, SEO API compatibility, recovery audit/expiry, bootstrap password, runtime-freeze, Pint and Blade checks passed."},
+      {"at": "2026-07-11T13:28:00+08:00", "from": "focused_checks_passed", "to": "pr_open", "note": "Committed and pushed the sixteen-path administrator MFA scope at b7ae6888e5e41dfdeac1313a0bfae822de4d3650, then opened PR #2948; GitHub required checks are pending."}
     ]
   }
 }
