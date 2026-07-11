@@ -40603,3 +40603,40 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: AUDIT-PRR2-API-15
+    repo: fap-api
+    depends_on: [AUDIT-PRR2-API-06]
+    branch: codex/audit-prr2-api-15-protected-topology
+    title: "AUDIT-PRR2-API-15: protect production deployment topology"
+    train_scope: prr2_production_topology_environment_variables
+    status: user_authorized
+    scope:
+      - Remove production and retired host, user, port, deploy path, healthcheck URLs, and Ops hostname values from workflow source.
+      - Resolve topology only from protected GitHub production environment variables and map the exact Deployer aliases.
+      - Fail closed before SSH or Deployer when any variable is missing or malformed, without logging values.
+    allowed_paths:
+      - .github/workflows/deploy-production.yml
+      - backend/tests/Sre/ProductionDeployProtectedTopologyTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate GitHub environment variables or secrets, dispatch a workflow, deploy, connect to a server, change deploy.php or staging topology, CMS/SEO, or production state.
+    validation:
+      - cd backend && php artisan test tests/Sre/ProductionDeployProtectedTopologyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Sre/ProductionDeployProtectedTopologyTest.php
+      - actionlint -ignore 'SC2016:' -ignore 'SC2034:' .github/workflows/deploy-production.yml
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/deploy-production.yml'); YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    workflow_policy_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
