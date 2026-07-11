@@ -87814,9 +87814,9 @@
     "branch": "codex/mbti-index-24b-promote-nine-personality-records",
     "title": "MBTI-INDEX-24B: promote nine MBTI personality records",
     "depends_on": ["MBTI-INDEX-24A-API"],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "cd8d5ea82428b39a323c722521257058080fdf3e",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3000",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -87835,6 +87835,7 @@
     "transitions": [
       {"at": "2026-07-12T00:00:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Registered the exact nine-record fail-closed indexability promotion implementation. No production promotion, GSC, or URL Inspection is authorized."},
       {"at": "2026-07-12T01:15:00+08:00", "from": "in_progress", "to": "committed", "note": "All manifest local checks passed; implementation commit cd8d5ea82428b39a323c722521257058080fdf3e contains only the six authorized paths."}
+      ,{"at": "2026-07-12T01:20:00+08:00", "from": "committed", "to": "pr_open", "note": "Opened PR #3000 with the exact authorized six-path scope; GitHub required checks are pending."}
     ]
   },
   "AUDIT-PRR2-API-06": {
