@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Services\Cms\SeoContentPackage\SeoContentPackageDraftImporter;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
@@ -16,6 +17,7 @@ final class SeoAgentArticleReleaseCommand extends Command
     private const SCHEMA_VERSION = 'seo-agent-article-release-gate-report.v1';
 
     private const STAGES = [
+        'platform-readiness',
         'package-qa',
         'media-readiness',
         'cms-draft-dry-run',
@@ -32,7 +34,13 @@ final class SeoAgentArticleReleaseCommand extends Command
         {--dry-run : Generate a no-write gate report}
         {--json : Emit a JSON gate report}
         {--expected-zh-slug= : Expected zh-CN article slug}
-        {--expected-en-slug= : Expected en article slug}';
+        {--expected-en-slug= : Expected en article slug}
+        {--checkpoint= : Audited checkpoint JSON artifact path}
+        {--resume : Resume from an existing audited checkpoint}
+        {--actor=seo-agent : Actor recorded in checkpoint history}
+        {--article-ids= : Optional comma-separated article ids for checkpoint identity}
+        {--revision-ids= : Optional comma-separated revision ids for checkpoint identity}
+        {--evidence= : Optional comma-separated evidence paths whose hashes must remain stable}';
 
     protected $description = 'No-write staged SEO article release gate reporter for Mode C packages.';
 
@@ -52,8 +60,35 @@ final class SeoAgentArticleReleaseCommand extends Command
         $translationGroupId = trim((string) $this->option('translation-group-id'));
         $base = $this->baseReport($stage, $packageRoot, $translationGroupId, $locales);
 
+        $checkpointPath = $this->checkpointPath();
+        $checkpoint = null;
+        if ((bool) $this->option('resume')) {
+            if ($checkpointPath === null || ! is_file($checkpointPath)) {
+                return $this->finish($this->failureReport($stage, 'checkpoint_unreadable', 'Resume requires a readable checkpoint JSON artifact.', $base));
+            }
+            $checkpoint = json_decode((string) file_get_contents($checkpointPath), true);
+            $checkpointError = $this->checkpointError(is_array($checkpoint) ? $checkpoint : [], $base);
+            if ($checkpointError !== null) {
+                return $this->finish($this->failureReport($stage, $checkpointError, 'Checkpoint identity or evidence no longer matches the current release inputs.', $base));
+            }
+            if (in_array($stage, (array) ($checkpoint['completed_read_only_stages'] ?? []), true)) {
+                $base['ok'] = true;
+                $base['status'] = 'already_completed';
+                $base['checkpoint'] = $this->checkpointSummary($checkpointPath, $checkpoint);
+
+                return $this->finish($base);
+            }
+        }
+
+        $base['platform_readiness'] = $this->platformReadiness();
+
         try {
             $report = match ($stage) {
+                'platform-readiness' => array_replace($base, [
+                    'ok' => (bool) ($base['platform_readiness']['ok'] ?? false),
+                    'status' => (bool) ($base['platform_readiness']['ok'] ?? false) ? 'passed' : 'blocked_missing_capability',
+                    'stage_report' => ['platform_readiness' => $base['platform_readiness']],
+                ]),
                 'package-qa' => $this->packageQaReport($base, $importer, $packageRoot, $translationGroupId, $locales),
                 'media-readiness' => $this->mediaReadinessReport($base, $packageRoot, $locales),
                 'cms-draft-dry-run' => $this->cmsDraftDryRunReport($base, $importer, $packageRoot, $translationGroupId, $locales),
@@ -65,7 +100,143 @@ final class SeoAgentArticleReleaseCommand extends Command
             $report = $this->failureReport($stage, 'runtime_error', $exception->getMessage(), $base);
         }
 
+        if ($checkpointPath !== null) {
+            $checkpoint = $this->advanceCheckpoint($checkpoint ?? [], $base, $report);
+            $this->writeCheckpoint($checkpointPath, $checkpoint);
+            $report['checkpoint'] = $this->checkpointSummary($checkpointPath, $checkpoint);
+        }
+
         return $this->finish($report);
+    }
+
+    private function checkpointPath(): ?string
+    {
+        $path = trim((string) $this->option('checkpoint'));
+        if ($path === '' || str_contains($path, "\0")) {
+            return null;
+        }
+
+        return str_starts_with($path, '/') ? $path : base_path($path);
+    }
+
+    /** @param array<string,mixed> $checkpoint @param array<string,mixed> $base */
+    private function checkpointError(array $checkpoint, array $base): ?string
+    {
+        if (($checkpoint['schema_version'] ?? null) !== 'seo-agent-article-release-checkpoint.v1') {
+            return 'checkpoint_schema_invalid';
+        }
+        if (($checkpoint['package']['sha256'] ?? null) !== ($base['package']['sha256'] ?? null)
+            || ($checkpoint['translation_group_id'] ?? null) !== ($base['translation_group_id'] ?? null)
+            || ($checkpoint['locales'] ?? null) !== ($base['locales'] ?? null)) {
+            return 'checkpoint_package_identity_mismatch';
+        }
+        foreach ((array) ($checkpoint['evidence'] ?? []) as $evidence) {
+            if (! is_array($evidence) || ! is_file((string) ($evidence['path'] ?? ''))
+                || hash_file('sha256', (string) $evidence['path']) !== ($evidence['sha256'] ?? null)) {
+                return 'checkpoint_evidence_hash_mismatch';
+            }
+        }
+
+        return null;
+    }
+
+    /** @param array<string,mixed> $checkpoint @param array<string,mixed> $base @param array<string,mixed> $report @return array<string,mixed> */
+    private function advanceCheckpoint(array $checkpoint, array $base, array $report): array
+    {
+        $now = now()->toIso8601String();
+        $completed = array_values(array_unique(array_filter((array) ($checkpoint['completed_read_only_stages'] ?? []), 'is_string')));
+        if (($report['ok'] ?? false) === true) {
+            $completed[] = (string) $base['stage'];
+            $completed = array_values(array_unique($completed));
+        }
+        $evidence = [];
+        foreach (array_filter(array_map('trim', explode(',', (string) $this->option('evidence')))) as $path) {
+            $resolved = str_starts_with($path, '/') ? $path : base_path($path);
+            if (is_file($resolved)) {
+                $evidence[] = ['path' => $resolved, 'sha256' => hash_file('sha256', $resolved) ?: ''];
+            }
+        }
+        $history = array_values(array_filter((array) ($checkpoint['history'] ?? []), 'is_array'));
+        $history[] = ['stage' => $base['stage'], 'status' => $report['status'] ?? 'blocked', 'actor' => (string) $this->option('actor'), 'at' => $now];
+
+        return [
+            'schema_version' => 'seo-agent-article-release-checkpoint.v1',
+            'package' => $base['package'],
+            'translation_group_id' => $base['translation_group_id'],
+            'locales' => $base['locales'],
+            'slugs' => ['zh-CN' => (string) $this->option('expected-zh-slug'), 'en' => (string) $this->option('expected-en-slug')],
+            'article_ids' => $this->integerList('article-ids'),
+            'revision_ids' => $this->integerList('revision-ids'),
+            'canonicals' => array_values(array_filter(array_map(static fn (array $item): string => (string) ($item['canonical_url'] ?? ''), $this->cmsImportDraftItems((string) $base['package']['path'], (array) $base['locales'])))),
+            'completed_read_only_stages' => $completed,
+            'release_states' => array_replace([
+                'package_compiled' => in_array('package-qa', $completed, true), 'media_ready' => in_array('media-readiness', $completed, true),
+                'cms_draft_imported' => false, 'preview_passed' => false, 'published' => false, 'discoverability_complete' => false,
+                'body_visual_parity' => in_array('cms-draft-dry-run', $completed, true), 'seo_enhancement_complete' => false,
+                'url_truth_complete' => false, 'indexnow' => 'pending', 'baidu' => 'pending', 'gsc' => 'pending', 'closeout' => 'pending',
+            ], (array) ($checkpoint['release_states'] ?? [])),
+            'platform_readiness' => $base['platform_readiness'] ?? $this->platformReadiness(),
+            'evidence' => $evidence !== [] ? $evidence : (array) ($checkpoint['evidence'] ?? []),
+            'last_successful_stage' => ($report['ok'] ?? false) ? $base['stage'] : ($checkpoint['last_successful_stage'] ?? null),
+            'next_stage' => $this->nextStage($completed),
+            'created_at' => $checkpoint['created_at'] ?? $now, 'updated_at' => $now, 'actor' => (string) $this->option('actor'), 'history' => $history,
+        ];
+    }
+
+    /** @return list<int> */
+    private function integerList(string $option): array
+    {
+        return array_values(array_filter(array_map('intval', array_filter(array_map('trim', explode(',', (string) $this->option($option))))), static fn (int $id): bool => $id > 0));
+    }
+
+    /** @param list<string> $completed */
+    private function nextStage(array $completed): ?string
+    {
+        foreach (self::STAGES as $stage) {
+            if (! in_array($stage, $completed, true)) {
+                return $stage;
+            }
+        }
+
+        return null;
+    }
+
+    /** @param array<string,mixed> $checkpoint */
+    private function writeCheckpoint(string $path, array $checkpoint): void
+    {
+        if (! is_dir(dirname($path))) {
+            mkdir(dirname($path), 0777, true);
+        }
+        $temporary = $path.'.tmp';
+        file_put_contents($temporary, json_encode($checkpoint, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+        rename($temporary, $path);
+    }
+
+    /** @param array<string,mixed> $checkpoint @return array<string,mixed> */
+    private function checkpointSummary(string $path, array $checkpoint): array
+    {
+        return ['path' => $path, 'sha256' => hash_file('sha256', $path) ?: '', 'last_successful_stage' => $checkpoint['last_successful_stage'] ?? null, 'next_stage' => $checkpoint['next_stage'] ?? null];
+    }
+
+    /** @return array<string,mixed> */
+    private function platformReadiness(): array
+    {
+        $required = ['seo-agent:compile-mode-c-package', 'media-assets:seo-release-preflight', 'articles:release-closeout', 'articles:seo-gate-rollout', 'content-release:revalidate', 'seo-intel:search-channel-provider-preflight'];
+        $available = array_keys(Artisan::all());
+        $commands = array_combine($required, array_map(static fn (string $command): bool => in_array($command, $available, true), $required));
+        $missing = array_keys(array_filter($commands ?: [], static fn (bool $present): bool => ! $present));
+        $revisionPath = base_path('../REVISION');
+
+        return [
+            'ok' => $missing === [], 'backend_revision' => is_file($revisionPath) ? trim((string) file_get_contents($revisionPath)) : 'unavailable',
+            'frontend_revision' => (string) (env('FRONTEND_REVISION') ?: 'unavailable'), 'required_commands' => $commands,
+            'missing_capabilities' => $missing, 'compiler_version' => 'seo-agent-mode-c-package-compiler.v1',
+            'importer' => ['class' => SeoContentPackageDraftImporter::class, 'available' => class_exists(SeoContentPackageDraftImporter::class)],
+            'public_baselines' => ['sitemap' => 'external_readback_required', 'llms' => 'external_readback_required', 'llms_full' => 'external_readback_required'],
+            'schema_hreflang_gate_available' => in_array('articles:seo-gate-rollout', $available, true),
+            'provider_capability_preflight_available' => in_array('seo-intel:search-channel-provider-preflight', $available, true),
+            'runtime_lock_state' => 'external_readback_required', 'writes_authorized' => false,
+        ];
     }
 
     /**
