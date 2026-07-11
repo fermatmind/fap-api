@@ -39446,6 +39446,48 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-EN-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01
+    repo: fap-api
+    depends_on: [BIG5-EN-FACET-OPENNESS-CONTENT-PACKAGE-01]
+    branch: codex/big5-en-facet-conscientiousness-content-package-01
+    title: "BIG5-EN-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01: strengthen six English Conscientiousness Facets"
+    train_scope: big5_en_facet_conscientiousness_content_package
+    status: user_authorized
+    scope:
+      - Register and build the locked content package for exactly six English Conscientiousness Facet assets: competence, order, dutifulness, achievement-striving, self-discipline, and deliberation.
+      - Produce the source ledger, raw Codex draft, skeptical review, repaired draft, final V1 assets envelope, and QA report with nine sections, five FAQs, and seven internal links per asset.
+      - Preserve the existing public identities, canonical and hreflang paths, content_ready launch state, and all noindex/discoverability gates.
+    allowed_paths:
+      - generated/big-five-en-facet-conscientiousness-content-package/**
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify the remaining eighteen English Facet assets, Openness package assets, Chinese assets, CMS data, baseline seeds, importer/runtime code, database schema, frontend code, SEO runtime, sitemap, llms, canonical routes, redirects, JSON-LD, permissions, secrets, or deployment configuration.
+      - Trigger CMS import, indexability promotion, deploy, publish, search submission, or any production workflow dispatch.
+    validation:
+      - node generated/big-five-en-facet-conscientiousness-content-package/build-package.mjs
+      - node generated/big-five-en-facet-conscientiousness-content-package/validate-package.mjs
+      - python3 -m json.tool generated/big-five-en-facet-conscientiousness-content-package/source_ledger.json >/dev/null
+      - python3 -m json.tool generated/big-five-en-facet-conscientiousness-content-package/raw_codex_draft.json >/dev/null
+      - python3 -m json.tool generated/big-five-en-facet-conscientiousness-content-package/skeptical_review.json >/dev/null
+      - python3 -m json.tool generated/big-five-en-facet-conscientiousness-content-package/repaired_draft.json >/dev/null
+      - python3 -m json.tool generated/big-five-en-facet-conscientiousness-content-package/big_five_en_facet_conscientiousness_seed.json >/dev/null
+      - python3 -m json.tool generated/big-five-en-facet-conscientiousness-content-package/qa_report.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []
