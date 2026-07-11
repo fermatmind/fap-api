@@ -67,6 +67,26 @@ final class CareerValidate10kControlledRolloutTest extends TestCase
         }
     }
 
+    public function test_rejects_string_and_malformed_numeric_evidence(): void
+    {
+        $data = $this->payload(100, []);
+        $data['frontend']['success_rate'] = '0.999';
+        $data['authority']['public_count'] = '100';
+        $data['errors'] = ['http_404_rate' => 'n/a', 'http_5xx_rate' => 'n/a', 'http_504_count' => 'none'];
+
+        $exit = Artisan::call('career:validate-10k-controlled-rollout', [
+            '--batch' => 100,
+            '--evidence' => $this->write($data),
+            '--json' => true,
+        ]);
+        $report = json_decode((string) Artisan::output(), true);
+
+        $this->assertSame(1, $exit);
+        foreach (['frontend_success_failed', 'authority_count_failed', 'error_budget_failed'] as $error) {
+            $this->assertContains($error, $report['errors']);
+        }
+    }
+
     private function evidence(int $count, array $completed): string
     {
         return $this->write($this->payload($count, $completed));
