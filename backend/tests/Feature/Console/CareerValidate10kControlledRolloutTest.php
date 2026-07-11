@@ -105,6 +105,25 @@ final class CareerValidate10kControlledRolloutTest extends TestCase
         $this->assertContains('error_budget_failed', $report['errors']);
     }
 
+    public function test_rejects_rates_outside_zero_to_one(): void
+    {
+        $data = $this->payload(100, []);
+        $data['frontend']['success_rate'] = 99;
+        $data['cache']['warm_completion_rate'] = 1.1;
+        $data['errors']['http_404_rate'] = -1;
+
+        Artisan::call('career:validate-10k-controlled-rollout', [
+            '--batch' => 100,
+            '--evidence' => $this->write($data),
+            '--json' => true,
+        ]);
+        $report = json_decode((string) Artisan::output(), true);
+
+        foreach (['frontend_success_failed', 'cache_warm_failed', 'error_budget_failed'] as $error) {
+            $this->assertContains($error, $report['errors']);
+        }
+    }
+
     private function evidence(int $count, array $completed): string
     {
         return $this->write($this->payload($count, $completed));

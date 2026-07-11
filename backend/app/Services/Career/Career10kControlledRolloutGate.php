@@ -30,10 +30,10 @@ final class Career10kControlledRolloutGate
             $errors[] = 'previous_batches_not_completed';
         }
 
-        $frontendSuccessRate = $this->number(data_get($evidence, 'frontend.success_rate'));
-        $cacheWarmRate = $this->number(data_get($evidence, 'cache.warm_completion_rate'));
-        $http404Rate = $this->number(data_get($evidence, 'errors.http_404_rate'));
-        $http5xxRate = $this->number(data_get($evidence, 'errors.http_5xx_rate'));
+        $frontendSuccessRate = $this->ratio(data_get($evidence, 'frontend.success_rate'));
+        $cacheWarmRate = $this->ratio(data_get($evidence, 'cache.warm_completion_rate'));
+        $http404Rate = $this->ratio(data_get($evidence, 'errors.http_404_rate'));
+        $http5xxRate = $this->ratio(data_get($evidence, 'errors.http_5xx_rate'));
 
         $checks = [
             'api_slo' => data_get($evidence, 'api_slo.passed') === true,
@@ -91,5 +91,12 @@ final class Career10kControlledRolloutGate
     private function number(mixed $value): ?float
     {
         return is_int($value) || is_float($value) ? (float) $value : null;
+    }
+
+    private function ratio(mixed $value): ?float
+    {
+        $number = $this->number($value);
+
+        return $number !== null && $number >= 0.0 && $number <= 1.0 ? $number : null;
     }
 }
