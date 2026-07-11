@@ -184,7 +184,7 @@
     "depends_on": [
       "ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01"
     ],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "1618c5b9dfd4ea60c259a51403c3021fbbdbcf67",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2978",
     "failure_reason": null,
@@ -221,12 +221,16 @@
       "diff_checks": {
         "status": "pass",
         "evidence": "git diff --check and git diff --cached --check completed without errors."
+      },
+      "github_required": {
+        "status": "pass",
+        "evidence": "PR #2978 checks all completed successfully: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif upload."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -253,6 +257,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR #2978 for the locked ENNEAGRAM-90 backend CMS Ops workflow scope."
+      },
+      {
+        "at": "2026-07-11T10:46:00.000Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All GitHub checks reported success; PR files remain scoped to the workflow plus docs/codex manifest/state."
       }
     ]
   },
