@@ -1,10 +1,28 @@
 {
   "schema_version": "career_10k_rollout_architecture_spec.v1",
   "task": "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01",
-  "final_decision": "career_10k_rollout_architecture_spec_completed_ready_for_future_scoped_prs",
+  "final_decision": "career_10k_stability_architecture_implemented_release_still_requires_exact_sha_authorization",
   "current_public_detail_count": 1046,
   "current_localized_detail_url_count": 2092,
   "target_scale": 10000,
+  "implementation_update": {
+    "date": "2026-07-11",
+    "status": "all_eight_prs_merged",
+    "tasks": [
+      {"id": "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01", "repo": "fap-api", "pr": 2952, "merge_commit": "342e17cebd1a32a6901770521b47478d48f47048"},
+      {"id": "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01", "repo": "fap-api", "pr": 2956, "merge_commit": "746d4a1e9d4fec90de554b11128f1f933ab07df4"},
+      {"id": "CAREER-DIRECTORY-ERROR-SEMANTICS-01", "repo": "fap-web", "pr": 1680, "merge_commit": "6508f2da6fb56a59eff804e7f3cf244595c16b29"},
+      {"id": "CAREER-RUNTIME-SLO-ALERTING-01", "repo": "fap-api", "pr": 2960, "merge_commit": "540a92ef8cc16e2e6efe1c8d65bfc939521d4dbc"},
+      {"id": "CAREER-DETAIL-READ-MODEL-10K-01", "repo": "fap-api", "pr": 2962, "merge_commit": "48e73fa88ed73351495a584930540a7e4b873be3"},
+      {"id": "CAREER-DETAIL-DELIVERY-10K-01", "repo": "fap-web", "pr": 1682, "merge_commit": "5f3c37fb889d0d3feb4103143e3dd67905496fd7"},
+      {"id": "CAREER-10K-CAPACITY-CHAOS-GATE-01", "repo": "fap-api", "pr": 2965, "merge_commit": "db8eff09ae0f8b01ae5a40fd475872c014e49336"},
+      {"id": "CAREER-10K-CONTROLLED-ROLLOUT-01", "repo": "fap-api", "pr": 2967, "merge_commit": "c7d6ce157f0ad5e627ae702b5e3b65055b764764"}
+    ],
+    "production_import_performed": false,
+    "production_promotion_performed": false,
+    "production_deploy_performed": false,
+    "search_channel_action_performed": false
+  },
   "authority_source": {
     "owner": "fap-api",
     "truth_boundary": "backend_runtime_projection_release_gate_directory_authority",
@@ -119,5 +137,5 @@
   "no_url_submission": true,
   "no_external_search_api_call": true,
   "held_slug_release_performed": false,
-  "next_task": "none"
+  "next_task": "separate_exact_sha_authorized_batch_rollout_only_after_all_evidence_gates_pass"
 }
