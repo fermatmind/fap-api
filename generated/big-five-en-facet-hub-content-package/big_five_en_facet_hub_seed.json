@@ -1,0 +1,189 @@
+{
+  "package": "big-five-en-facet-hub-content-package-2026-07-11",
+  "contract_version": "personality_public_asset.v1",
+  "assets": [
+    {
+      "contract_version": "personality_public_asset.v1",
+      "framework": "big_five",
+      "entity_type": "facet_hub",
+      "entity_key": "facets",
+      "code": "facets",
+      "slug": "big-five/facets",
+      "locale": "en",
+      "title": "The 30 Big Five Facets",
+      "summary": "Explore the 30 Big Five facets as a 5×6 navigation for more precise, non-diagnostic reflection.",
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "What are the 30 Big Five facets?",
+          "body_md": "Big Five facets are narrower descriptive dimensions nested under the five broad domains. This hub uses a 5×6 navigation aligned with the NEO/IPIP 30-facet tradition. Facets are not 30 personality types, diagnoses, rankings, or fixed identities; they are prompts for more precise observation."
+        },
+        {
+          "key": "domain_relationship",
+          "title": "How facets relate to the five domains",
+          "body_md": "A domain is a broad region of the personality map; facets distinguish patterns inside that region. Two people with similar domain-level tendencies may differ in the situations, motives, and behaviors that produce them. Read the domain first, then use one or two facets to test a narrower hypothesis."
+        },
+        {
+          "key": "why_facets",
+          "title": "Why look below the domain level?",
+          "body_md": "Broad scores can combine different behavioral routes. Facets separate questions such as curiosity about ideas, preference for novelty, social energy, task order, trust, and stress sensitivity. The extra resolution supports reflection and communication, but does not remove the influence of context, skills, resources, roles, or time."
+        },
+        {
+          "key": "openness",
+          "title": "Openness: six facets",
+          "body_md": "Openness includes imagination, aesthetics, feelings, actions, ideas, and values. These tendencies need not move together: enjoying abstract discussion does not guarantee a preference for changing routines, and aesthetic sensitivity is not the same as accepting every new idea."
+        },
+        {
+          "key": "conscientiousness",
+          "title": "Conscientiousness: six facets",
+          "body_md": "Conscientiousness includes competence, order, dutifulness, achievement striving, self-discipline, and deliberation. A person may care deeply about commitments without preferring a tidy environment, or plan carefully while needing support to sustain repetitive work."
+        },
+        {
+          "key": "extraversion",
+          "title": "Extraversion: six facets",
+          "body_md": "Extraversion includes warmth, gregariousness, assertiveness, activity, excitement seeking, and positive emotions. Someone can be warm in one-to-one conversation yet avoid large groups; a fast activity pace does not automatically imply leadership or social confidence."
+        },
+        {
+          "key": "agreeableness",
+          "title": "Agreeableness: six facets",
+          "body_md": "Agreeableness includes trust, straightforwardness, altruism, compliance, modesty, and tender-mindedness. Cooperation does not require weak boundaries, and directness does not imply lack of care. Interpret these facets alongside relationship risk, power, and explicit expectations."
+        },
+        {
+          "key": "neuroticism",
+          "title": "Neuroticism: six facets and a clinical boundary",
+          "body_md": "This taxonomy includes anxiety, anger, depression, self-consciousness, impulsiveness, and vulnerability as historical facet keys. Here they describe ordinary trait tendencies only. A page title or score cannot determine a mental-health condition, crisis risk, resilience, or treatment need."
+        },
+        {
+          "key": "reading_method",
+          "title": "A practical four-step reading method",
+          "body_md": "First identify the broad domain. Second choose one or two facets relevant to the question. Third compare at least two contexts, such as calm versus pressured work. Fourth write the conclusion as a tentative pattern and record counterexamples. Use a specific assessment’s own scoring and norms for personal results."
+        }
+      ],
+      "faq": [
+        {
+          "id": "why-thirty",
+          "question": "Why are there 30 facets here?",
+          "answer": "This hub uses a five-domain, six-facet navigation similar to the NEO/IPIP tradition. It is a common hierarchy, not the only Big Five structure."
+        },
+        {
+          "id": "are-types",
+          "question": "Are these 30 personality types?",
+          "answer": "No. Facets are continuous descriptive dimensions nested within broad domains, not discrete types."
+        },
+        {
+          "id": "other-models",
+          "question": "Why do other sources list 10 or 15?",
+          "answer": "Different instruments use different levels: BFI-2 has 15 facets and BFAS has 10 aspects. Their scores are not directly interchangeable."
+        },
+        {
+          "id": "higher-better",
+          "question": "Is a higher facet always better?",
+          "answer": "No. Usefulness depends on task, context, regulation, and tradeoffs; either end can create advantages and costs."
+        },
+        {
+          "id": "personal-result",
+          "question": "Can this hub interpret my personal result?",
+          "answer": "No. It explains public concepts only. Personal interpretation requires the specific test contract, response quality, norms, context, and your own feedback."
+        }
+      ],
+      "seo": {
+        "title": "The 30 Big Five Facets | FermatMind",
+        "description": "Explore all 30 Big Five facets across five domains, with practical reading guidance and clear evidence boundaries."
+      },
+      "canonical": {
+        "path": "/en/personality/big-five/facets"
+      },
+      "canonical_path": "/en/personality/big-five/facets",
+      "hreflang": {
+        "en": "/en/personality/big-five/facets",
+        "zh-CN": "/zh/personality/big-five/facets"
+      },
+      "robots": "noindex,follow",
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "is_public": true,
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "media": [],
+      "schema": {
+        "recommendation": "CollectionPage",
+        "runtime_release": false
+      },
+      "method_boundary": {
+        "non_diagnostic": true,
+        "non_predictive": true,
+        "no_hiring_screening": true
+      },
+      "evidence_notes": [
+        {
+          "source_id": "I1",
+          "claim": "Frozen 5×6 route taxonomy and public claim boundaries.",
+          "limitation": "English copy must be independently authored."
+        },
+        {
+          "source_id": "A1",
+          "claim": "Documents 30 facet constructs corresponding to the NEO tradition.",
+          "limitation": "Does not authorize score conversion or equivalence claims."
+        },
+        {
+          "source_id": "A2",
+          "claim": "Supports hierarchical domain-and-facet interpretation.",
+          "limitation": "BFI-2 uses 15 facets, not this 30-facet navigation."
+        },
+        {
+          "source_id": "A3",
+          "claim": "Documents an alternative 10-aspect hierarchy.",
+          "limitation": "Aspects are not interchangeable with 30 facets."
+        }
+      ],
+      "internal_links": [
+        {
+          "label": "Big Five overview",
+          "href": "/en/personality/big-five",
+          "relationship": "hub"
+        },
+        {
+          "label": "Big Five test",
+          "href": "/en/tests/big-five-personality-test-ocean-model",
+          "relationship": "test_landing"
+        },
+        {
+          "label": "Openness",
+          "href": "/en/personality/big-five/openness",
+          "relationship": "domain"
+        },
+        {
+          "label": "Conscientiousness",
+          "href": "/en/personality/big-five/conscientiousness",
+          "relationship": "domain"
+        },
+        {
+          "label": "Extraversion",
+          "href": "/en/personality/big-five/extraversion",
+          "relationship": "domain"
+        },
+        {
+          "label": "Agreeableness",
+          "href": "/en/personality/big-five/agreeableness",
+          "relationship": "domain"
+        },
+        {
+          "label": "Neuroticism",
+          "href": "/en/personality/big-five/neuroticism",
+          "relationship": "domain"
+        }
+      ],
+      "source_ledger_refs": [
+        "source_ledger.json"
+      ],
+      "model_output_refs": [
+        "raw_codex_draft.json",
+        "skeptical_review.json",
+        "repaired_draft.json"
+      ],
+      "last_reviewed_at": "2026-07-11",
+      "source_hash": "44b3fc71dd340510eee7b3c515a12e87b41541220f70a484686f6d32f60de17a"
+    }
+  ]
+}
