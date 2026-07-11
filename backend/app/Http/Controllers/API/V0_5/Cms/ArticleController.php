@@ -22,6 +22,7 @@ use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -51,7 +52,7 @@ class ArticleController extends Controller
             ->withoutGlobalScopes()
             ->where('org_id', $validated['org_id'])
             ->publiclyReadable()
-            ->with($this->articleRelations());
+            ->with($this->articleListRelations());
 
         if ($validated['locale'] !== null) {
             $query->where('locale', $validated['locale']);
@@ -90,7 +91,7 @@ class ArticleController extends Controller
             ->orderByRaw('voice_order is null')
             ->orderBy('voice_order')
             ->orderByDesc('id')
-            ->paginate(20, ['*'], 'page', $validated['page']);
+            ->paginate($validated['per_page'], ['*'], 'page', $validated['page']);
 
         $items = [];
         foreach ($paginator->items() as $article) {
@@ -98,7 +99,7 @@ class ArticleController extends Controller
                 continue;
             }
 
-            $items[] = $this->publicArticlePayload($article);
+            $items[] = $this->publicArticleListPayload($article);
         }
 
         return response()->json([
@@ -898,7 +899,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @return array{org_id:int,locale:?string,related_test_slug:?string,voice:?string,page:int}|JsonResponse
+     * @return array{org_id:int,locale:?string,related_test_slug:?string,voice:?string,page:int,per_page:int}|JsonResponse
      */
     private function validateListQuery(Request $request): array|JsonResponse
     {
@@ -908,6 +909,7 @@ class ArticleController extends Controller
             'related_test_slug' => ['nullable', 'string', 'max:127'],
             'voice' => ['nullable', 'string', 'max:32'],
             'page' => ['nullable', 'integer', 'min:1'],
+            'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
         ]);
 
         if ($validator->fails()) {
@@ -922,6 +924,7 @@ class ArticleController extends Controller
             'related_test_slug' => isset($validated['related_test_slug']) ? trim((string) $validated['related_test_slug']) : null,
             'voice' => isset($validated['voice']) ? trim((string) $validated['voice']) : null,
             'page' => (int) ($validated['page'] ?? 1),
+            'per_page' => (int) ($validated['per_page'] ?? 20),
         ];
     }
 
@@ -999,6 +1002,19 @@ class ArticleController extends Controller
                 ->orderBy('sort_order')
                 ->orderBy('id'),
         ];
+    }
+
+    /**
+     * Public list responses only load relations required by article cards and filters.
+     *
+     * @return array<string, \Closure>
+     */
+    private function articleListRelations(): array
+    {
+        $relations = $this->articleRelations();
+        unset($relations['seoMeta']);
+
+        return $relations;
     }
 
     private function findPublicArticle(string $slug, string $locale, int $orgId): ?Article
@@ -1081,6 +1097,62 @@ class ArticleController extends Controller
             'category' => $this->scopedCategory($article),
             'tags' => $this->scopedTags($article),
             'seo_meta' => $this->publicSeoMetaSnapshot($article, $revision),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function publicArticleListPayload(Article $article): array
+    {
+        $revision = $this->publicRevision($article);
+        if (! $revision instanceof ArticleTranslationRevision) {
+            throw new RuntimeException('published revision not found.');
+        }
+
+        $excerpt = trim((string) ($revision->excerpt ?? ''));
+        if ($excerpt === '') {
+            $plainBody = preg_replace('/[#*_>`~\[\]()!-]+/u', ' ', (string) $revision->content_md) ?? '';
+            $excerpt = Str::limit(trim((string) preg_replace('/\s+/u', ' ', strip_tags($plainBody))), 240, '…');
+        }
+
+        return [
+            'id' => (int) $article->id,
+            'org_id' => (int) $article->org_id,
+            'category_id' => $article->category_id !== null ? (int) $article->category_id : null,
+            'author_admin_user_id' => $article->author_admin_user_id !== null ? (int) $article->author_admin_user_id : null,
+            'author_name' => $article->author_name,
+            'reviewer_name' => $article->reviewer_name,
+            'reading_minutes' => $article->reading_minutes !== null ? (int) $article->reading_minutes : null,
+            'slug' => (string) $article->slug,
+            'locale' => (string) $article->locale,
+            'translation_group_id' => (string) ($article->translation_group_id ?? ''),
+            'source_article_id' => $article->source_article_id !== null ? (int) $article->source_article_id : null,
+            'source_locale' => $article->source_locale,
+            'published_revision_id' => (int) $revision->id,
+            'title' => (string) $revision->title,
+            'excerpt' => $excerpt,
+            'cover_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($article->cover_image_url),
+            'cover_image_alt' => $article->cover_image_alt,
+            'cover_image_width' => $article->cover_image_width !== null ? (int) $article->cover_image_width : null,
+            'cover_image_height' => $article->cover_image_height !== null ? (int) $article->cover_image_height : null,
+            'cover_image_variants' => $this->publicCoverImageVariants($article),
+            'related_test_slug' => $article->related_test_slug,
+            'related_test_slugs' => $this->publicRelatedTestSlugs($article),
+            'test_edges' => $this->publicTestEdges($article),
+            'voice' => $article->voice,
+            'voice_order' => $article->voice_order !== null ? (int) $article->voice_order : null,
+            'status' => (string) $article->status,
+            'is_public' => (bool) $article->is_public,
+            'is_indexable' => (bool) $article->is_indexable,
+            'sitemap_eligible' => (bool) $article->sitemap_eligible,
+            'llms_eligible' => (bool) $article->llms_eligible,
+            'published_at' => $article->published_at?->toISOString(),
+            'scheduled_at' => $article->scheduled_at?->toISOString(),
+            'created_at' => $article->created_at?->toISOString(),
+            'updated_at' => $revision->updated_at?->toISOString() ?? $article->updated_at?->toISOString(),
+            'category' => $this->scopedCategory($article),
+            'tags' => $this->scopedTags($article),
         ];
     }
 
