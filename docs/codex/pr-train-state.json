@@ -95,7 +95,7 @@
     "depends_on": [
       "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01"
     ],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "1005466d5b3baf0421d1b66b2841d3d5554e8e6f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2976",
     "failure_reason": null,
@@ -122,13 +122,14 @@
         "evidence": "Working tree changed files are limited to the three Enneagram CMS gate services, three focused command tests, and docs/codex manifest/state."
       },
       "github_required": {
-        "status": "pending"
+        "status": "pass",
+        "evidence": "PR #2976 checks all completed successfully: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif upload."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -155,6 +156,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR #2976 for the locked ENNEAGRAM-90 backend CMS gate identity scope."
+      },
+      {
+        "at": "2026-07-11T10:28:00.000Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All GitHub checks reported success and PR is mergeable."
       }
     ]
   },
