@@ -121,6 +121,43 @@ final class SeoAgentArticleReleaseCommandTest extends TestCase
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_article_release_checkpoint_resumes_without_repeating_completed_read_only_stage(): void
+    {
+        $package = $this->writeModeCPackage();
+        $checkpoint = sys_get_temp_dir().'/fm-article-release-checkpoint-'.Str::random(12).'.json';
+
+        $this->assertSame(0, Artisan::call('seo-agent:article-release', $this->commandOptions($package, [
+            '--stage' => 'package-qa', '--dry-run' => true, '--json' => true, '--checkpoint' => $checkpoint,
+        ])));
+        $first = $this->jsonOutput();
+        $this->assertFileExists($checkpoint);
+        $this->assertSame('platform-readiness', $first['checkpoint']['next_stage']);
+        $this->assertTrue($first['platform_readiness']['ok']);
+
+        $this->assertSame(0, Artisan::call('seo-agent:article-release', $this->commandOptions($package, [
+            '--stage' => 'package-qa', '--dry-run' => true, '--json' => true, '--checkpoint' => $checkpoint, '--resume' => true,
+        ])));
+        $resumed = $this->jsonOutput();
+        $this->assertSame('already_completed', $resumed['status']);
+        $this->assertFalse($resumed['writes_attempted']);
+    }
+
+    public function test_article_release_checkpoint_blocks_when_package_identity_changes(): void
+    {
+        $package = $this->writeModeCPackage();
+        $checkpoint = sys_get_temp_dir().'/fm-article-release-checkpoint-'.Str::random(12).'.json';
+        $this->assertSame(0, Artisan::call('seo-agent:article-release', $this->commandOptions($package, [
+            '--stage' => 'package-qa', '--dry-run' => true, '--json' => true, '--checkpoint' => $checkpoint,
+        ])));
+        file_put_contents($package.'/brief/GEO_BRIEF.md', "changed\n");
+
+        $this->assertSame(1, Artisan::call('seo-agent:article-release', $this->commandOptions($package, [
+            '--stage' => 'media-readiness', '--dry-run' => true, '--json' => true, '--checkpoint' => $checkpoint, '--resume' => true,
+        ])));
+        $payload = $this->jsonOutput();
+        $this->assertSame('checkpoint_package_identity_mismatch', $payload['errors'][0]['code']);
+    }
+
     /**
      * @return array<string,mixed>
      */
