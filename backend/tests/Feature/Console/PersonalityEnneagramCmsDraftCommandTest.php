@@ -204,13 +204,41 @@ final class PersonalityEnneagramCmsDraftCommandTest extends TestCase
         $this->assertSame(0, PersonalityPublicContentAsset::query()->count());
     }
 
+    public function test_draft_gate_supports_wing_and_instinctual_subtype_identity_without_public_side_effects(): void
+    {
+        $package = $this->wingAndSubtypePackage();
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, [
+            'artifact' => 'ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01',
+            'page_results' => array_map(
+                fn (array $recommendation): array => $this->qaRow((string) $recommendation['target_url']),
+                $package['recommendations']
+            ),
+        ]);
+
+        $exitCode = Artisan::call('personality:enneagram-cms-draft', $this->writeOptions($packagePath, $qaPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(4, $payload['row_count']);
+        $this->assertSame(2, $payload['wing_row_count']);
+        $this->assertSame(2, $payload['instinctual_subtype_row_count']);
+        $this->assertSame(4, $payload['created_asset_count']);
+        $this->assertSame(2, PersonalityPublicContentAsset::query()->where('entity_type', PersonalityPublicContentAsset::ENTITY_WING)->count());
+        $this->assertSame(2, PersonalityPublicContentAsset::query()->where('entity_type', PersonalityPublicContentAsset::ENTITY_INSTINCTUAL_SUBTYPE)->count());
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->where('is_public', true)->count());
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->where('index_eligible', true)->count());
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->where('sitemap_eligible', true)->count());
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->where('llms_eligible', true)->count());
+        $this->assertSame('1w9', PersonalityPublicContentAsset::query()->where('slug', 'enneagram/wings/1w9')->value('entity_key'));
+        $this->assertSame('type-1/self-preservation', PersonalityPublicContentAsset::query()->where('slug', 'enneagram/type-1/instincts/self-preservation')->value('entity_key'));
+    }
+
     public function test_wing_instinct_tritype_and_private_routes_fail_closed_with_zero_writes(): void
     {
         $package = [
             'artifact' => 'ENNEAGRAM-PUBLIC-PROFILE-AGENT-PILOT-01',
             'recommendations' => [
-                $this->recommendation('https://fermatmind.com/en/personality/enneagram/type-1-wing-9', 'en', 'wing'),
-                $this->recommendation('https://fermatmind.com/en/personality/enneagram/instinctual-subtypes', 'en', 'instinctual_subtype'),
                 $this->recommendation('https://fermatmind.com/zh/personality/enneagram/tritype', 'zh-CN', 'tritype'),
                 $this->recommendation('https://fermatmind.com/en/personality/enneagram/type-1?token=secret', 'en', 'core_type'),
             ],
@@ -341,6 +369,22 @@ final class PersonalityEnneagramCmsDraftCommandTest extends TestCase
             'artifact' => 'ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01',
             'page_results' => [
                 $this->qaRow('https://fermatmind.com/en/personality/enneagram'),
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function wingAndSubtypePackage(): array
+    {
+        return [
+            'artifact' => 'ENNEAGRAM-90-CMS-V1-GATE-IDENTITY-TEST',
+            'recommendations' => [
+                $this->recommendation('https://fermatmind.com/zh/personality/enneagram/wings/1w9', 'zh-CN', 'wing'),
+                $this->recommendation('https://fermatmind.com/en/personality/enneagram/wings/1w9', 'en', 'wing'),
+                $this->recommendation('https://fermatmind.com/zh/personality/enneagram/type-1/instincts/self-preservation', 'zh-CN', 'instinctual_subtype'),
+                $this->recommendation('https://fermatmind.com/en/personality/enneagram/type-1/instincts/self-preservation', 'en', 'instinctual_subtype'),
             ],
         ];
     }

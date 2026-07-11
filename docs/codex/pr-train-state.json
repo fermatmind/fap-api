@@ -6,12 +6,13 @@
     "branch": "codex/enneagram-90-content-package-freeze-01",
     "title": "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01: freeze 90 Enneagram CMS assets",
     "depends_on": [],
-    "status": "ready_to_merge",
+    "status": "merged",
+    "commit_sha": "7cfa170d872244a8537b7dfb5b4af5fcd5dc7dbe",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2974",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T10:03:57Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -44,7 +45,7 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -76,6 +77,72 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "All GitHub checks reported success and PR is mergeable."
+      },
+      {
+        "at": "2026-07-11T10:04:32.000Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2974 merged as 7cfa170d872244a8537b7dfb5b4af5fcd5dc7dbe; origin/main contains the merge commit; local and remote task branches were deleted."
+      }
+    ]
+  },
+  "ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01": {
+    "id": "ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/enneagram-90-backend-cms-gate-identity-01",
+    "title": "ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01: support Enneagram wing and subtype CMS gate identities",
+    "depends_on": [
+      "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01"
+    ],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01 PR #2974 merged as 7cfa170d872244a8537b7dfb5b4af5fcd5dc7dbe and origin/main contains the merge commit."
+      },
+      "focused_local": {
+        "status": "pass",
+        "evidence": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Feature/Console/PersonalityEnneagramCmsDraftCommandTest.php tests/Feature/Console/PersonalityEnneagramCmsPromoteCommandTest.php tests/Feature/Console/PersonalityEnneagramCmsPublishGateCommandTest.php --no-ansi passed with 24 warnings and 280 assertions."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Working tree changed files are limited to the three Enneagram CMS gate services, three focused command tests, and docs/codex manifest/state."
+      },
+      "github_required": {
+        "status": "pending"
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T10:05:00.000Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Goal authorized ENNEAGRAM-90 backend CMS gate identity support for bilingual wing and instinctual subtype assets; no production writes, publish, deploy, llms, or search release."
+      },
+      {
+        "at": "2026-07-11T10:16:00.000Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Focused Enneagram CMS draft, promotion, and publish gate command tests passed after adding wing/subtype identity support."
       }
     ]
   },
