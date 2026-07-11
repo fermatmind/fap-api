@@ -6,7 +6,7 @@
     "base": "main",
     "branch": "codex/career-10k-controlled-rollout-01",
     "depends_on": ["CAREER-10K-CAPACITY-CHAOS-GATE-01"],
-    "status": "in_progress",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
     "failure_reason": null,
@@ -85867,6 +85867,32 @@
       {"at": "2026-07-11T09:34:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at 7c3568052."},
       {"at": "2026-07-11T09:36:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2970; required GitHub checks are pending."},
       {"at": "2026-07-11T09:43:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."}
+    ]
+  },
+  "BIG5-EN-FACET-AGREEABLENESS-CONTENT-PACKAGE-01": {
+    "id": "BIG5-EN-FACET-AGREEABLENESS-CONTENT-PACKAGE-01",
+    "repo": "fap-api",
+    "title": "BIG5-EN-FACET-AGREEABLENESS-CONTENT-PACKAGE-01: strengthen six English Agreeableness Facets",
+    "base": "main",
+    "branch": "codex/big5-en-facet-agreeableness-content-package-01",
+    "depends_on": ["BIG5-EN-FACET-EXTRAVERSION-CONTENT-PACKAGE-01"],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."},
+      "dependency": {"status": "pass", "evidence": "PR #2970 is merged at d9ceea58565493d08d4bc501fde7c58f7831654b and origin/main contains that squash merge."},
+      "content_scope": {"status": "pass", "evidence": "Exactly six independently authored English Agreeableness Facet assets contain nine substantive sections, five FAQs, seven internal links, source traceability, and balanced non-diagnostic boundaries."},
+      "local_validation": {"status": "pass", "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [
+      {"at": "2026-07-11T09:45:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the fifth locked train item after verifying its Extraversion dependency on origin/main and started in an isolated clean worktree; no production action is in scope."},
+      {"at": "2026-07-11T09:51:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."}
     ]
   },
   "AUDIT-PRR2-API-01": {

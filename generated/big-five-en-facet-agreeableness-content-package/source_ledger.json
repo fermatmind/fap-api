@@ -1,0 +1,176 @@
+{
+  "package": "big-five-en-facet-agreeableness-source-ledger-2026-07-11",
+  "access_date": "2026-07-11",
+  "scope": "Six English Agreeableness Facet content packages only.",
+  "inherits": {
+    "path": "generated/big-five-zh-facet-hub-content-repair/source_ledger.json",
+    "package": "big-five-zh-facet-shared-source-ledger-2026-07-10"
+  },
+  "sources": [
+    {
+      "id": "I1",
+      "type": "internal",
+      "reference": "backend/content_assets/personality_public/big_five_v1_seed.json",
+      "use": "Frozen CMS field shape, current Chinese route keys, locale, launch state, robots, and 5×6 taxonomy labels.",
+      "limitation": "The existing short body copy is an input to audit, not an authority for new academic claims."
+    },
+    {
+      "id": "I2",
+      "type": "internal",
+      "reference": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+      "use": "Non-diagnostic, non-deterministic, non-screening public claim boundaries."
+    },
+    {
+      "id": "I3",
+      "type": "internal",
+      "reference": "generated/big-five-zh-legacy-route-audit/legacy_route_audit.json",
+      "use": "Frozen V2 public route family and duplicate-route boundary."
+    },
+    {
+      "id": "A1",
+      "type": "official_research_resource",
+      "title": "NEO Facets Table",
+      "author_or_source": "International Personality Item Pool, Oregon Research Institute",
+      "year": null,
+      "url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+      "accessed_at": "2026-07-10",
+      "claim": "Documents corresponding IPIP scales for the 30 NEO-PI-R facet constructs.",
+      "limitation": "IPIP scales measure similar constructs; this does not make them identical to proprietary NEO scales or authorize score conversion."
+    },
+    {
+      "id": "A2",
+      "type": "peer_reviewed",
+      "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets",
+      "author_or_source": "Soto, C. J., & John, O. P.",
+      "year": 2017,
+      "doi": "10.1037/pspp0000096",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+      "accessed_at": "2026-07-10",
+      "claim": "Supports a hierarchical domain-and-facet reading of Big Five traits using 15 facets.",
+      "limitation": "BFI-2 has 15 facets, not the 30-facet taxonomy used for this CMS route set."
+    },
+    {
+      "id": "A3",
+      "type": "peer_reviewed",
+      "title": "Between facets and domains: 10 aspects of the Big Five",
+      "author_or_source": "DeYoung, C. G., Quilty, L. C., & Peterson, J. B.",
+      "year": 2007,
+      "doi": "10.1037/0022-3514.93.5.880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
+      "accessed_at": "2026-07-10",
+      "claim": "Shows an alternative intermediate hierarchy with two aspects per domain.",
+      "limitation": "The ten aspects are not interchangeable with either BFI-2 facets or NEO/IPIP 30 facets."
+    },
+    {
+      "id": "A4",
+      "type": "academic_review",
+      "title": "Paradigm Shift to the Integrative Big Five Trait Taxonomy: History, Measurement, and Conceptual Issues",
+      "author_or_source": "John, O. P., Naumann, L. P., & Soto, C. J.",
+      "year": 2008,
+      "reference": "In Handbook of Personality: Theory and Research (3rd ed.), pp. 114–158.",
+      "claim": "Supports broad Big Five taxonomy framing and continuous trait language.",
+      "limitation": "No individual prediction, numeric validity, or universal facet naming claim is taken from this review."
+    }
+  ],
+  "taxonomy": [
+    {
+      "domain_code": "agreeableness",
+      "domain_title_en": "Agreeableness",
+      "facets": [
+        {
+          "code": "trust",
+          "title_en": "Trust",
+          "route": "/en/personality/big-five/facets/trust"
+        },
+        {
+          "code": "straightforwardness",
+          "title_en": "Straightforwardness",
+          "route": "/en/personality/big-five/facets/straightforwardness"
+        },
+        {
+          "code": "altruism",
+          "title_en": "Altruism",
+          "route": "/en/personality/big-five/facets/altruism"
+        },
+        {
+          "code": "compliance",
+          "title_en": "Compliance",
+          "route": "/en/personality/big-five/facets/compliance"
+        },
+        {
+          "code": "modesty",
+          "title_en": "Modesty",
+          "route": "/en/personality/big-five/facets/modesty"
+        },
+        {
+          "code": "tender-mindedness",
+          "title_en": "Tender-Mindedness",
+          "route": "/en/personality/big-five/facets/tender-mindedness"
+        }
+      ]
+    }
+  ],
+  "claim_map": [
+    {
+      "claim": "The six routes are narrower continuous descriptors under Agreeableness, not personality types.",
+      "evidence_ids": [
+        "I1",
+        "A1",
+        "A4"
+      ]
+    },
+    {
+      "claim": "Facet interest or attention is not equivalent to ability, diagnosis, or outcome prediction.",
+      "evidence_ids": [
+        "I2",
+        "A4"
+      ]
+    },
+    {
+      "claim": "This route taxonomy must not be directly converted to BFI-2 facets or BFAS aspects.",
+      "evidence_ids": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    }
+  ],
+  "facet_boundaries": {
+    "trust": {
+      "title_en": "Trust",
+      "construct_summary": "the usual tendency to expect goodwill, reliability, and cooperative intent from others when evidence is incomplete",
+      "explicit_non_equivalence": "It is not naivety, vulnerability to deception, guaranteed safety, moral superiority, or openness to everyone. Higher trust still needs boundaries; lower trust does not establish coldness, paranoia, or a clinical condition"
+    },
+    "straightforwardness": {
+      "title_en": "Straightforwardness",
+      "construct_summary": "the usual tendency to state a genuine position directly and avoid manipulating others or concealing material intent",
+      "explicit_non_equivalence": "It is not cruelty, blurting everything out, exposing private information, always being correct, or moral purity. Honesty can include tact and safety, while indirect expression is not automatically deception"
+    },
+    "altruism": {
+      "title_en": "Altruism",
+      "construct_summary": "the usual tendency to notice another person's needs and offer time, information, or practical help at a reasonable cost",
+      "explicit_non_equivalence": "It is not self-sacrifice, people-pleasing, donation amount, absence of boundaries, or moral rank. Resources and roles affect helping behavior, and less proactive help does not establish lack of concern"
+    },
+    "compliance": {
+      "title_en": "Compliance",
+      "construct_summary": "the usual tendency to restrain confrontation, seek compromise, and restore cooperation during conflict",
+      "explicit_non_equivalence": "It is not obedience, weakness, agreement, surrendering rights, or absence of anger. De-escalation does not accept harm, direct conflict is not automatically aggression, and consent must remain independent, explicit, and revocable"
+    },
+    "modesty": {
+      "title_en": "Modesty",
+      "construct_summary": "the usual tendency to avoid elevating oneself or demanding special recognition when presenting achievement and status",
+      "explicit_non_equivalence": "It is not low self-esteem, lack of ability, self-denigration, shyness, or an obligation to reject praise. Modesty concerns presentation and does not require denying facts or tolerating unfair attribution"
+    },
+    "tender-mindedness": {
+      "title_en": "Tender-Mindedness",
+      "construct_summary": "the usual tendency to feel concern for suffering and vulnerability and to give weight to care needs and human impact",
+      "explicit_non_equivalence": "It is not fragility, emotional loss of control, femininity, mental-health status, or always agreeing. Sensitivity does not guarantee an effective plan, and emotional distance does not establish cruelty"
+    }
+  },
+  "limitations": [
+    "The frozen CMS taxonomy is NEO/IPIP-like; it is not claimed as the single universal Big Five facet standard.",
+    "No proprietary assessment items, scoring keys, norms, or copyrighted manual text are reproduced.",
+    "No reliability, validity, percentile, clinical, hiring, admission, salary, relationship-outcome, or deterministic career claim is made.",
+    "GSC_EVIDENCE_PENDING: this package is content-authority preparation, not a search-performance claim."
+  ]
+}
