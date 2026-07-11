@@ -184,9 +184,9 @@
     "depends_on": [
       "ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01"
     ],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "1618c5b9dfd4ea60c259a51403c3021fbbdbcf67",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2978",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -247,6 +247,12 @@
         "from": "local_checks_passed",
         "to": "committed",
         "note": "Committed scoped ENNEAGRAM-90 CMS Ops workflow changes after path-limited staging."
+      },
+      {
+        "at": "2026-07-11T10:45:00.000Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2978 for the locked ENNEAGRAM-90 backend CMS Ops workflow scope."
       }
     ]
   },
