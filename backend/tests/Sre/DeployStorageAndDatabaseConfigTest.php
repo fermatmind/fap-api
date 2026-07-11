@@ -123,9 +123,9 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringNotContainsString('auto-{0}', $source);
         $this->assertStringContainsString('DEPLOY_SHA: ${{ inputs.expected_release_sha }}', $source);
         $this->assertStringContainsString('RELEASE_ID: ${{ inputs.release_id }}', $source);
-        $this->assertStringContainsString('Confirm approved revision is still latest main', $source);
+        $this->assertStringContainsString('Confirm approved release satisfies deployment mode policy', $source);
         $this->assertStringContainsString('if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]', $source);
-        $this->assertStringContainsString('Manual production deploy refused because expected_release_sha is not latest main.', $source);
+        $this->assertStringContainsString('Manual standard production deploy refused because expected_release_sha is not latest main.', $source);
         $this->assertStringContainsString('--revision "$DEPLOY_SHA"', $source);
         $this->assertStringContainsString("tr -d '\\r\\n' < REVISION", $source);
     }
@@ -158,7 +158,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('.head_sha == $sha', $source);
         $this->assertStringContainsString('.name == "Deploy checks (staging)" and .conclusion == "success"', $source);
         $this->assertStringContainsString('.name == "Deploy (staging)" and .conclusion == "success"', $source);
-        $this->assertStringContainsString('Manual production deploy refused because expected_release_sha is not latest main.', $source);
+        $this->assertStringContainsString('Manual standard production deploy refused because expected_release_sha is not latest main.', $source);
+        $this->assertStringContainsString('Code-only production deploy refused because expected_release_sha is not reachable from latest main.', $source);
         $this->assertStringContainsString('-o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"', $source);
         $this->assertLessThan(
             strpos($source, '- name: Deploy production with Deployer'),
@@ -222,6 +223,18 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('test -f REVISION && tr -d', $source);
         $this->assertStringContainsString('remote deployed REVISION does not match expected_deployed_revision', $source);
         $this->assertStringContainsString('EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}', $source);
+    }
+
+    #[Test]
+    public function release_candidate_record_keeps_the_main_head_and_undeployed_commit_list_auditable(): void
+    {
+        $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
+
+        $this->assertStringContainsString('- name: Record production release candidate', $source);
+        $this->assertStringContainsString('main_sha_at_eligibility: ${MAIN_SHA}', $source);
+        $this->assertStringContainsString('main_commits_not_deployed: ${UNDEPLOYED_COUNT}', $source);
+        $this->assertStringContainsString('Main commits intentionally not deployed', $source);
+        $this->assertStringContainsString('git log --format=', $source);
     }
 
     #[Test]
