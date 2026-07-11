@@ -88350,7 +88350,7 @@
     "base": "main",
     "branch": "codex/enneagram-search-release-readiness-01",
     "depends_on": [],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "06ab4becf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2994",
     "failure_reason": null,
@@ -88370,10 +88370,11 @@
       "dependency": {"status": "pass", "evidence": "The preceding EN90/EN116 production train is complete: 116 published bilingual canonical paths were previously revalidated with sitemap membership and zero llms/search leakage."},
       "production_readonly_scan": {"status": "pass", "evidence": "116/116 HTTP 200, canonical, robots, bilingual hreflang, API authority, provenance, sitemap and FAQPage checks passed; 562/562 FAQ items and 468/468 internal links rendered; zero private paths and zero llms/feed membership."},
       "search_queue_readiness": {"status": "blocked_fail_closed", "evidence": "The approved report-only scope has no safe production queue inspection surface, so production plan and duplicate state remain unobserved and the decision is NO_GO_SEARCH_RELEASE. No write, approval, enqueue, external API call, or submission was attempted."},
-      "local_validation": {"status": "pass", "evidence": "Scanner execution, readiness JSON parse, train YAML/state JSON parse, changed-file scope validation, and diff whitespace checks passed."}
+      "local_validation": {"status": "pass", "evidence": "Scanner execution, readiness JSON parse, train YAML/state JSON parse, changed-file scope validation, and diff whitespace checks passed."},
+      "github_required_checks": {"status": "pass", "evidence": "PR #2994 head 6e418d860 passed all nine CI and Semgrep checks with zero failures or pending checks."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": null, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-11T23:00:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the exact read-only search readiness scope from origin/main ad17573ac; no Search Queue write, approval, submission, CMS mutation, llms release, cache warm, or deploy is authorized."}, {"at": "2026-07-11T23:25:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "All 116 public paths pass runtime/API/sitemap/FAQ/internal-link safety checks. Search release remains NO_GO because production queue planning and duplicate state were not observable in the approved report-only scope; no production action occurred."}, {"at": "2026-07-11T23:29:00+08:00", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact five-path report/train scope at 06ab4becf; no production action occurred."}, {"at": "2026-07-11T23:33:00+08:00", "from": "committed", "to": "pr_open", "note": "Opened PR #2994 for the exact report-only scope; required checks are pending and no production action occurred."}]
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T23:00:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the exact read-only search readiness scope from origin/main ad17573ac; no Search Queue write, approval, submission, CMS mutation, llms release, cache warm, or deploy is authorized."}, {"at": "2026-07-11T23:25:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "All 116 public paths pass runtime/API/sitemap/FAQ/internal-link safety checks. Search release remains NO_GO because production queue planning and duplicate state were not observable in the approved report-only scope; no production action occurred."}, {"at": "2026-07-11T23:29:00+08:00", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact five-path report/train scope at 06ab4becf; no production action occurred."}, {"at": "2026-07-11T23:33:00+08:00", "from": "committed", "to": "pr_open", "note": "Opened PR #2994 for the exact report-only scope; required checks are pending and no production action occurred."}, {"at": "2026-07-11T23:40:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks are green; scope, changed files, PR body, review state, and squash-auto-merge policy are satisfied."}]
   },
   "ENNEAGRAM-LLMS-GEO-RELEASE-01": {
     "id": "ENNEAGRAM-LLMS-GEO-RELEASE-01",
