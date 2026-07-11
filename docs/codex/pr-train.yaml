@@ -38900,3 +38900,41 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01
+    repo: fap-api
+    depends_on: [BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01]
+    branch: codex/personality-public-asset-import-atomicity-01
+    title: "PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01: make public asset imports collision-safe and atomic"
+    train_scope: personality_public_asset_import_atomicity
+    status: planned
+    scope:
+      - Preflight the complete filtered importer package for incoming and persisted identity/slug collisions before any mutation.
+      - Execute all create and update operations in one database transaction so any failure rolls back the entire package.
+      - Fail closed without partial writes when validation errors or persistence conflicts exist, in both dry-run and write modes.
+      - Add focused regression coverage for the production-shaped facet versus facet_detail slug collision and transaction rollback.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityPublicAssetsImport.php
+      - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify content packages, seeds, workflows, database schema, public API contracts, frontend code, canonical, robots, sitemap, llms, JSON-LD, permissions, secrets, or deployment configuration.
+      - Dispatch workflows, write CMS or production data, deploy, publish, or change any production asset.
+    validation:
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'manifest yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend

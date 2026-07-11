@@ -8,6 +8,7 @@ use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
@@ -105,6 +106,158 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ->implode("\n");
 
         $this->assertStringNotContainsString('/personality/big-five', $sitemapLocs);
+    }
+
+    public function test_import_preflights_persisted_slug_collision_before_any_write(): void
+    {
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_FACET_HUB,
+            'entity_key' => 'facets',
+            'slug' => 'big-five/facets',
+            'locale' => 'zh-CN',
+            'title' => 'Existing Facet Hub',
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'canonical_json' => ['path' => '/zh/personality/big-five/facets'],
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+        ]));
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_FACET_DETAIL,
+            'entity_key' => 'imagination',
+            'slug' => 'big-five/facets/imagination',
+            'locale' => 'zh-CN',
+            'title' => 'Existing Imagination Detail',
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'canonical_json' => ['path' => '/zh/personality/big-five/facets/imagination'],
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+        ]));
+
+        $source = $this->temporaryImportPackage([
+            $this->contractPayload([
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_FACET_HUB,
+                'code' => 'facets',
+                'entity_key' => 'facets',
+                'slug' => 'big-five/facets',
+                'locale' => 'zh-CN',
+                'title' => 'Updated Facet Hub',
+                'canonical' => ['path' => '/zh/personality/big-five/facets'],
+                'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            ]),
+            $this->contractPayload([
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_FACET,
+                'code' => 'imagination',
+                'entity_key' => 'imagination',
+                'slug' => 'big-five/facets/imagination',
+                'locale' => 'zh-CN',
+                'title' => 'Incoming Imagination Facet',
+                'canonical' => ['path' => '/zh/personality/big-five/facets/imagination'],
+                'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            ]),
+        ]);
+
+        try {
+            $this->artisan('personality-public-assets:import', ['--source' => $source])
+                ->expectsOutputToContain('Persistence slug conflict')
+                ->assertExitCode(1);
+            $this->artisan('personality-public-assets:import', [
+                '--source' => $source,
+                '--write' => true,
+            ])
+                ->expectsOutputToContain('Persistence slug conflict')
+                ->assertExitCode(1);
+        } finally {
+            @unlink($source);
+        }
+
+        $this->assertSame(2, PersonalityPublicContentAsset::query()->count());
+        $this->assertSame(
+            'Existing Facet Hub',
+            PersonalityPublicContentAsset::query()->where('entity_key', 'facets')->value('title')
+        );
+        $this->assertSame(
+            'Existing Imagination Detail',
+            PersonalityPublicContentAsset::query()->where('entity_key', 'imagination')->value('title')
+        );
+    }
+
+    public function test_write_import_rolls_back_the_entire_package_when_a_later_write_fails(): void
+    {
+        $source = $this->temporaryImportPackage([
+            $this->contractPayload([
+                'code' => 'atomic-first',
+                'entity_key' => 'atomic-first',
+                'slug' => 'big-five/atomic-first',
+                'title' => 'Atomic First',
+                'canonical' => ['path' => '/en/personality/big-five/atomic-first'],
+                'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            ]),
+            $this->contractPayload([
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_DOMAIN,
+                'code' => 'atomic-second',
+                'entity_key' => 'atomic-second',
+                'slug' => 'big-five/atomic-second',
+                'title' => 'Atomic Second',
+                'canonical' => ['path' => '/en/personality/big-five/atomic-second'],
+                'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            ]),
+        ]);
+        $event = 'eloquent.creating: '.PersonalityPublicContentAsset::class;
+        Event::listen($event, static function (PersonalityPublicContentAsset $asset): void {
+            if ($asset->entity_key === 'atomic-second') {
+                throw new \RuntimeException('forced second write failure');
+            }
+        });
+
+        try {
+            $this->artisan('personality-public-assets:import', [
+                '--source' => $source,
+                '--write' => true,
+            ])
+                ->expectsOutputToContain('forced second write failure')
+                ->assertExitCode(1);
+        } finally {
+            Event::forget($event);
+            @unlink($source);
+        }
+
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->count());
+    }
+
+    public function test_write_import_does_not_persist_valid_subset_when_package_has_validation_errors(): void
+    {
+        $source = $this->temporaryImportPackage([
+            $this->contractPayload([
+                'code' => 'valid-subset',
+                'entity_key' => 'valid-subset',
+                'slug' => 'big-five/valid-subset',
+                'title' => 'Valid Subset',
+                'canonical' => ['path' => '/en/personality/big-five/valid-subset'],
+                'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            ]),
+            $this->contractPayload([
+                'code' => 'invalid-subset',
+                'entity_key' => 'invalid-subset',
+                'slug' => 'big-five/invalid-subset',
+                'title' => '',
+                'canonical' => ['path' => '/en/personality/big-five/invalid-subset'],
+                'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            ]),
+        ]);
+
+        try {
+            $this->artisan('personality-public-assets:import', [
+                '--source' => $source,
+                '--write' => true,
+            ])
+                ->expectsOutputToContain('valid_count=1')
+                ->expectsOutputToContain('errors_count=1')
+                ->expectsOutputToContain('will_create=0')
+                ->expectsOutputToContain('validation_errors=')
+                ->assertExitCode(1);
+        } finally {
+            @unlink($source);
+        }
+
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->count());
     }
 
     public function test_big_five_seed_has_expected_counts_parity_and_indexability(): void
@@ -878,5 +1031,23 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             'sitemap_eligible' => false,
             'llms_eligible' => false,
         ], $overrides);
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $assets
+     */
+    private function temporaryImportPackage(array $assets): string
+    {
+        $path = tempnam(sys_get_temp_dir(), 'personality-public-assets-');
+        if ($path === false) {
+            throw new \RuntimeException('Unable to create temporary personality asset package.');
+        }
+
+        file_put_contents($path, json_encode([
+            'package' => 'personality-public-assets-atomicity-test',
+            'assets' => $assets,
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+
+        return $path;
     }
 }
