@@ -40,6 +40,8 @@ final class ArticleReleaseCloseoutService
 
     public const BLOCKED_PUBLIC_HTML_DRIFT = 'BLOCKED_PUBLIC_HTML_DRIFT';
 
+    public const BLOCKED_BODY_VISUAL_PUBLIC_PARITY = 'BLOCKED_BODY_VISUAL_PUBLIC_PARITY';
+
     public const BLOCKED_OPERATOR_INPUT = 'BLOCKED_OPERATOR_INPUT';
 
     /**
@@ -92,7 +94,7 @@ final class ArticleReleaseCloseoutService
             'url_truth' => $this->urlTruthCheck($article, $canonicalUrl),
             'search_channel' => $this->searchChannelCheck($canonicalUrl),
             'schema_hreflang' => $this->schemaHreflangCheck($article),
-            'public_html_smoke' => $this->publicSmokeCheck($publicSmoke),
+            'public_html_smoke' => $this->publicSmokeCheck($publicSmoke, $article),
             'gsc_manual' => $this->gscManualCheck($gscManual, $canonicalUrl),
             'observation' => $this->observationCheck($observation),
         ];
@@ -229,6 +231,13 @@ final class ArticleReleaseCloseoutService
     {
         $seoMeta = $article->seoMeta;
         $bodyUrls = $this->bodyVisualUrls((string) $article->content_md, (string) $article->content_html);
+        $variants = is_array($article->cover_image_variants) ? $article->cover_image_variants : [];
+        $metadata = is_array($variants['editorial_package_v1'] ?? null) ? $variants['editorial_package_v1'] : [];
+        $bodyVisualRequired = (bool) ($metadata['body_visual_required'] ?? false);
+        $bodyVisualAssetKey = $this->scalarString($metadata['body_visual_asset_key'] ?? null);
+        $bodyVisualImageUrl = $this->scalarString($metadata['body_visual_image_url'] ?? null);
+        $bodyAnchor = $this->scalarString($metadata['body_anchor'] ?? null);
+        $answerBlockId = $this->scalarString($metadata['answer_block_id'] ?? null);
         $urls = [
             'cover_image_url' => (string) $article->cover_image_url,
             'seo_meta.og_image_url' => $seoMeta instanceof ArticleSeoMeta ? (string) $seoMeta->og_image_url : '',
@@ -255,11 +264,43 @@ final class ArticleReleaseCloseoutService
             }
         }
 
+        if ($bodyVisualRequired) {
+            foreach ([
+                'cover_image_variants.editorial_package_v1.body_visual_asset_key' => [$bodyVisualAssetKey, 'body_visual_asset_key_missing'],
+                'cover_image_variants.editorial_package_v1.body_visual_image_url' => [$bodyVisualImageUrl, 'body_visual_image_url_missing'],
+                'cover_image_variants.editorial_package_v1.body_anchor' => [$bodyAnchor, 'body_visual_anchor_missing'],
+                'cover_image_variants.editorial_package_v1.answer_block_id' => [$answerBlockId, 'body_visual_answer_block_missing'],
+            ] as $field => [$value, $code]) {
+                if ($value === '') {
+                    $issues[] = $this->issue($field, $code, 'Required body visual parity metadata is missing.');
+                }
+            }
+
+            if ($bodyVisualImageUrl !== '' && ! $this->isPublicMediaUrl($bodyVisualImageUrl)) {
+                $issues[] = $this->issue('cover_image_variants.editorial_package_v1.body_visual_image_url', 'body_visual_url_not_public_origin', 'Required body visual must use a public FermatMind origin.');
+            }
+            if ($bodyVisualImageUrl !== '' && ! in_array($bodyVisualImageUrl, $bodyUrls, true)) {
+                $issues[] = $this->issue('article.content_md', 'body_visual_projection_missing', 'Required body visual URL is not projected into the article body.');
+            }
+            $combinedBody = (string) $article->content_md."\n".(string) $article->content_html;
+            if ($bodyAnchor !== '' && ! str_contains($combinedBody, $bodyAnchor)) {
+                $issues[] = $this->issue('article.content_md', 'body_visual_anchor_not_found', 'Required body visual anchor is not present in the article body.');
+            }
+            if ($answerBlockId !== '' && ! str_contains($combinedBody, $answerBlockId)) {
+                $issues[] = $this->issue('article.content_md', 'body_visual_answer_block_not_found', 'Required body visual answer block is not present in the article body.');
+            }
+        }
+
         return [
             'ok' => $issues === [],
             'cover_image_url' => (string) $article->cover_image_url,
             'og_image_url' => $seoMeta instanceof ArticleSeoMeta ? (string) $seoMeta->og_image_url : null,
             'body_visual_url_count' => count($bodyUrls),
+            'body_visual_required' => $bodyVisualRequired,
+            'body_visual_asset_key' => $bodyVisualAssetKey,
+            'body_visual_image_url' => $bodyVisualImageUrl,
+            'body_anchor' => $bodyAnchor,
+            'answer_block_id' => $answerBlockId,
             'issues' => $issues,
         ];
     }
@@ -618,26 +659,43 @@ final class ArticleReleaseCloseoutService
      * @param  array<string,mixed>|null  $publicSmoke
      * @return array<string,mixed>
      */
-    private function publicSmokeCheck(?array $publicSmoke): array
+    private function publicSmokeCheck(?array $publicSmoke, Article $article): array
     {
+        $variants = is_array($article->cover_image_variants) ? $article->cover_image_variants : [];
+        $metadata = is_array($variants['editorial_package_v1'] ?? null) ? $variants['editorial_package_v1'] : [];
+        $bodyVisualRequired = (bool) ($metadata['body_visual_required'] ?? false);
         if ($publicSmoke === null) {
             return [
-                'ok' => null,
-                'state' => 'not_provided',
-                'issues' => [],
+                'ok' => $bodyVisualRequired ? false : null,
+                'state' => $bodyVisualRequired ? 'body_visual_evidence_required' : 'not_provided',
+                'issues' => $bodyVisualRequired ? [
+                    $this->issue('public_html_smoke.body_visual', 'body_visual_public_evidence_missing', 'Required body visual needs public HTML parity evidence.'),
+                ] : [],
             ];
         }
 
-        $ok = (bool) ($publicSmoke['ok'] ?? false);
+        $publicSmokeOk = (bool) ($publicSmoke['ok'] ?? false);
+        $bodyVisual = data_get($publicSmoke, 'checks.body_visual', data_get($publicSmoke, 'body_visual'));
+        $bodyVisualOk = ! $bodyVisualRequired
+            || (is_array($bodyVisual) && (bool) ($bodyVisual['ok'] ?? false) && (int) ($bodyVisual['url_count'] ?? 0) >= 1);
+        $issues = [];
+        if (! $publicSmokeOk) {
+            $issues[] = $this->issue('public_html_smoke', 'public_html_smoke_failed', 'Public HTML smoke evidence reported failure.', [
+                'decision' => $publicSmoke['decision'] ?? null,
+            ]);
+        }
+        if (! $bodyVisualOk) {
+            $issues[] = $this->issue('public_html_smoke.body_visual', 'body_visual_public_parity_failed', 'Required body visual public HTML parity failed.', [
+                'body_visual' => $bodyVisual,
+            ]);
+        }
+
+        $ok = $publicSmokeOk && $bodyVisualOk;
 
         return [
             'ok' => $ok,
             'state' => $ok ? 'passed' : 'failed',
-            'issues' => $ok ? [] : [
-                $this->issue('public_html_smoke', 'public_html_smoke_failed', 'Public HTML smoke evidence reported failure.', [
-                    'decision' => $publicSmoke['decision'] ?? null,
-                ]),
-            ],
+            'issues' => $issues,
             'evidence' => $publicSmoke,
         ];
     }
@@ -786,6 +844,7 @@ final class ArticleReleaseCloseoutService
                 self::BLOCKED_DISCOVERABILITY_GAP,
                 self::BLOCKED_SEARCH_QUEUE_GAP,
                 self::BLOCKED_PUBLIC_HTML_DRIFT,
+                self::BLOCKED_BODY_VISUAL_PUBLIC_PARITY,
                 self::BLOCKED_OPERATOR_INPUT,
             ],
         ];
@@ -855,11 +914,26 @@ final class ArticleReleaseCloseoutService
      */
     private function decision(array $checks, array $issues, ?array $publicSmoke): string
     {
+        $codes = array_map(static fn (array $issue): string => (string) ($issue['code'] ?? ''), $issues);
+        if (array_intersect($codes, [
+            'body_visual_public_evidence_missing',
+            'body_visual_public_parity_failed',
+            'body_visual_asset_key_missing',
+            'body_visual_image_url_missing',
+            'body_visual_anchor_missing',
+            'body_visual_answer_block_missing',
+            'body_visual_url_not_public_origin',
+            'body_visual_projection_missing',
+            'body_visual_anchor_not_found',
+            'body_visual_answer_block_not_found',
+        ]) !== []) {
+            return self::BLOCKED_BODY_VISUAL_PUBLIC_PARITY;
+        }
+
         if (($checks['public_html_smoke']['ok'] ?? null) === false) {
             return self::BLOCKED_PUBLIC_HTML_DRIFT;
         }
 
-        $codes = array_map(static fn (array $issue): string => (string) ($issue['code'] ?? ''), $issues);
         foreach ([
             'article_not_found',
             'article_id_required',
