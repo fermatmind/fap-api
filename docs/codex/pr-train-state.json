@@ -88167,87 +88167,19 @@
     ]
   },
   "AUDIT-PRR2-API-12": {
-    "id": "AUDIT-PRR2-API-12",
-    "repo": "fap-api",
-    "title": "AUDIT-PRR2-API-12: route QueueMonitor replay through DLQ service",
-    "base": "main",
-    "branch": "codex/audit-prr2-api-12-dlq-replay-single-path",
-    "depends_on": [
-      "AUDIT-PRR2-API-09"
-    ],
-    "status": "ready_to_merge",
-    "commit_sha": "860c07f7efc5505d21c5cff26070b2b25dae6da0",
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/2966",
-    "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
-    "production_write_execution": false,
-    "database_mutation": false,
-    "cms_mutation": false,
-    "api_runtime_change": true,
-    "queue_replay_execution": false,
-    "publish_allowed": false,
-    "deploy_allowed": false,
-    "checks": {
-      "authorization": {
-        "status": "pass",
-        "evidence": "The PRR2 /goal explicitly authorized API-12 code/tests but forbids executing a real replay."
-      },
-      "dependency": {
-        "status": "pass",
-        "evidence": "API-09 is merged and origin/main contains it."
-      },
-      "focused_tests": {
-        "status": "pass",
-        "evidence": "QueueMonitor replay contract passed 2 tests with 10 assertions; runtime-freeze contract passed 2 tests with 4 assertions."
-      },
-      "scope_validation": {
-        "status": "pass",
-        "evidence": "QueueMonitor contains no Artisan/queue:retry path; scoped Pint, YAML/JSON, diff and exact five-path validation passed."
-      },
-      "github_required_checks": {
-        "status": "pass",
-        "evidence": "PR #2966 head b1018982f passed all nine required CI and Semgrep checks."
-      }
-    },
-    "scope_validation": {
-      "allowed_paths_only": true,
-      "local_validation_passed": true,
-      "github_checks_green": true,
-      "post_merge_revalidated": false
-    },
-    "transitions": [
-      {
-        "at": "2026-07-11T20:35:00+08:00",
-        "from": "unregistered",
-        "to": "in_progress",
-        "note": "Started the QueueMonitor-to-QueueDlqService single replay path from current origin/main; no failed job, queue, CMS, production data, or deploy action was executed."
-      },
-      {
-        "at": "2026-07-11T20:43:00+08:00",
-        "from": "in_progress",
-        "to": "local_verified",
-        "note": "Single service invocation, authenticated admin attribution, bounded audit outcome, direct Artisan-path absence, runtime-freeze, Pint, YAML/JSON, diff and exact five-path scope checks passed; no replay was executed."
-      },
-      {
-        "at": "2026-07-11T20:46:00+08:00",
-        "from": "local_verified",
-        "to": "committed",
-        "note": "Committed the exact five-path DLQ replay scope at 860c07f7efc5505d21c5cff26070b2b25dae6da0 on current origin/main; no failed job or queue was touched."
-      },
-      {
-        "at": "2026-07-11T20:49:00+08:00",
-        "from": "committed",
-        "to": "pr_open",
-        "note": "Pushed the exact five-path scope and opened PR #2966; required checks are pending and no queue replay or production action occurred."
-      },
-      {
-        "at": "2026-07-11T20:56:00+08:00",
-        "from": "pr_open",
-        "to": "ready_to_merge",
-        "note": "All nine required CI/security checks passed on head b1018982f; PR #2966 is mergeable, review-unblocked, and its five paths match the manifest."
-      }
-    ]
+    "id": "AUDIT-PRR2-API-12", "repo": "fap-api", "title": "AUDIT-PRR2-API-12: route QueueMonitor replay through DLQ service", "base": "main", "branch": "codex/audit-prr2-api-12-dlq-replay-single-path", "depends_on": ["AUDIT-PRR2-API-09"],
+    "status": "merged", "commit_sha": "906f10e11e07da2459fa37b1826079ec6f7907fe", "pr_url": "https://github.com/fermatmind/fap-api/pull/2966", "failure_reason": null, "merged_at": "2026-07-11T08:53:15Z", "remote_branch_deleted": true, "local_cleanup_executed": true,
+    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": true, "queue_replay_execution": false, "publish_allowed": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "The PRR2 /goal explicitly authorized API-12 code/tests but forbids executing a real replay."}, "dependency": {"status": "pass", "evidence": "API-09 is merged and origin/main contains it."}, "focused_tests": {"status": "pass", "evidence": "QueueMonitor replay contract passed 2 tests with 10 assertions; runtime-freeze contract passed 2 tests with 4 assertions."}, "scope_validation": {"status": "pass", "evidence": "QueueMonitor contains no Artisan/queue:retry path; scoped Pint, YAML/JSON, diff and exact five-path validation passed."}, "github_required_checks": {"status": "pass", "evidence": "PR #2966 head b1018982f passed all nine required CI and Semgrep checks."}},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "transitions": [{"at": "2026-07-11T20:35:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the QueueMonitor-to-QueueDlqService single replay path from current origin/main; no failed job, queue, CMS, production data, or deploy action was executed."}, {"at": "2026-07-11T20:43:00+08:00", "from": "in_progress", "to": "local_verified", "note": "Single service invocation, authenticated admin attribution, bounded audit outcome, direct Artisan-path absence, runtime-freeze, Pint, YAML/JSON, diff and exact five-path scope checks passed; no replay was executed."}, {"at": "2026-07-11T20:46:00+08:00", "from": "local_verified", "to": "committed", "note": "Committed the exact five-path DLQ replay scope at 860c07f7efc5505d21c5cff26070b2b25dae6da0 on current origin/main; no failed job or queue was touched."}, {"at": "2026-07-11T20:49:00+08:00", "from": "committed", "to": "pr_open", "note": "Pushed the exact five-path scope and opened PR #2966; required checks are pending and no queue replay or production action occurred."}, {"at": "2026-07-11T20:56:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required CI/security checks passed on head b1018982f; PR #2966 is mergeable, review-unblocked, and its five paths match the manifest."}, {"at": "2026-07-11T21:04:00+08:00", "from": "ready_to_merge", "to": "merged", "note": "PR #2966 merged at 906f10e11e07da2459fa37b1826079ec6f7907fe; origin/main contains it, branches are deleted, and post-merge tests passed without replay execution."}]
+  },
+  "AUDIT-PRR2-API-13": {
+    "id": "AUDIT-PRR2-API-13", "repo": "fap-api", "title": "AUDIT-PRR2-API-13: constrain system bearer token HTTP authority", "base": "main", "branch": "codex/audit-prr2-api-13-system-token-boundary", "depends_on": [],
+    "status": "local_verified", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": true, "publish_allowed": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "The PRR2 /goal explicitly authorized API-13; the solo-developer decision removes any second-user requirement."}},
+    "scope_validation": {"allowed_paths_only": null, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T21:35:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started explicit system bearer identity, route scope, short TTL, revocation and HTTP audit enforcement; no token issuance/revocation, auth-row mutation, deploy, or production access was executed."}, {"at": "2026-07-11T21:49:00+08:00", "from": "in_progress", "to": "local_verified", "note": "System token positive, issuer/audience/scope/TTL/revocation negative, optional-auth bypass, issuance, legacy regression, Pint, route-list, YAML/JSON, diff and exact nine-path scope checks passed: 14 tests with 30 assertions."}]
   }
 }

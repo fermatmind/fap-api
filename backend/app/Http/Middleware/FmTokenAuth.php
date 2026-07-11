@@ -53,6 +53,7 @@ class FmTokenAuth
             'meta_json',
             'expires_at',
             'revoked_at',
+            'created_at',
         ];
 
         $row = $this->findTokenRow($token, $tokenHash, $select);
@@ -111,6 +112,10 @@ class FmTokenAuth
         $existingRole = trim((string) $request->attributes->get('org_role', ''));
         if ($orgId > 0 && $existingRole !== '') {
             $role = $existingRole;
+        }
+
+        if (strtolower(trim($role)) === 'system' && ! $this->authorizeSystemHttpToken($request, $row, $tokenHash)) {
+            return $this->unauthorizedResponse($request, 'system_token_contract_invalid');
         }
 
         $request->attributes->set('fm_org_id', $orgId);
@@ -497,5 +502,54 @@ class FmTokenAuth
         $normalizedRole = strtolower(trim($role));
 
         return in_array($normalizedRole, ['system', 'ops', 'admin'], true);
+    }
+
+    private function authorizeSystemHttpToken(Request $request, object $row, string $tokenHash): bool
+    {
+        $meta = $this->decodeMeta($row->meta_json ?? null);
+        $issuer = trim((string) ($meta['issuer'] ?? ''));
+        $audience = trim((string) ($meta['audience'] ?? ''));
+        $configuredIssuer = trim((string) config('fap.system_tokens.issuer', ''));
+        $configuredAudience = trim((string) config('fap.system_tokens.audience', ''));
+        $maxTtl = max(1, (int) config('fap.system_tokens.max_ttl_seconds', 900));
+        $scopes = is_array($meta['route_scopes'] ?? null) ? $meta['route_scopes'] : [];
+        $routeName = is_object($request->route()) ? trim((string) $request->route()->getName()) : '';
+        $pathScope = 'path:'.ltrim($request->path(), '/');
+        $routeScope = $routeName !== '' ? 'route:'.$routeName : '';
+
+        $createdAt = strtotime((string) ($row->created_at ?? ''));
+        $expiresAt = strtotime((string) ($row->expires_at ?? ''));
+        $ttlValid = $createdAt !== false
+            && $expiresAt !== false
+            && $expiresAt > time()
+            && ($expiresAt - $createdAt) > 0
+            && ($expiresAt - $createdAt) <= $maxTtl;
+        $scopeValid = in_array($pathScope, $scopes, true)
+            || ($routeScope !== '' && in_array($routeScope, $scopes, true));
+        $authorized = $configuredIssuer !== ''
+            && $configuredAudience !== ''
+            && hash_equals($configuredIssuer, $issuer)
+            && hash_equals($configuredAudience, $audience)
+            && $ttlValid
+            && $scopeValid;
+
+        Log::log($authorized ? 'info' : 'warning', '[SEC] system_token_http_access', [
+            'authorized' => $authorized,
+            'token_fingerprint' => substr($tokenHash, 0, 16),
+            'issuer' => $issuer !== '' ? $issuer : null,
+            'audience' => $audience !== '' ? $audience : null,
+            'route_name' => $routeName !== '' ? $routeName : null,
+            'path' => $request->path(),
+            'scope_matched' => $scopeValid,
+            'ttl_valid' => $ttlValid,
+        ]);
+
+        if ($authorized) {
+            $request->attributes->set('system_actor_http_authorized', true);
+            $request->attributes->set('system_actor_issuer', $issuer);
+            $request->attributes->set('system_actor_audience', $audience);
+        }
+
+        return $authorized;
     }
 }

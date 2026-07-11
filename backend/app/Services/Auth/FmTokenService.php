@@ -31,8 +31,6 @@ class FmTokenService
             $ttlDays = 30;
         }
 
-        $expiresAt = now()->addDays($ttlDays);
-
         $orgId = 0;
         if (isset($meta['org_id']) && is_numeric($meta['org_id'])) {
             $orgId = max(0, (int) $meta['org_id']);
@@ -44,6 +42,29 @@ class FmTokenService
             if ($candidate !== '') {
                 $role = $candidate;
             }
+        }
+
+        $expiresAt = now()->addDays($ttlDays);
+        if (strtolower($role) === 'system') {
+            $issuer = trim((string) ($meta['issuer'] ?? ''));
+            $audience = trim((string) ($meta['audience'] ?? ''));
+            $routeScopes = $meta['route_scopes'] ?? null;
+            $configuredIssuer = trim((string) config('fap.system_tokens.issuer', ''));
+            $configuredAudience = trim((string) config('fap.system_tokens.audience', ''));
+            $validScopes = is_array($routeScopes)
+                && $routeScopes !== []
+                && collect($routeScopes)->every(static fn (mixed $scope): bool => is_string($scope)
+                    && preg_match('/^(?:route|path):[^*\s]+$/', $scope) === 1);
+            if ($configuredIssuer === ''
+                || $configuredAudience === ''
+                || ! hash_equals($configuredIssuer, $issuer)
+                || ! hash_equals($configuredAudience, $audience)
+                || ! $validScopes) {
+                throw new \InvalidArgumentException('system token issuer, audience, and route_scopes are required');
+            }
+
+            $meta['issued_at'] = now()->toIso8601String();
+            $expiresAt = now()->addSeconds(max(1, (int) config('fap.system_tokens.max_ttl_seconds', 900)));
         }
 
         $anonId = $rawUserId;

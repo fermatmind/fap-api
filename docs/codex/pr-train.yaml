@@ -40379,3 +40379,43 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: AUDIT-PRR2-API-13
+    repo: fap-api
+    depends_on: []
+    branch: codex/audit-prr2-api-13-system-token-boundary
+    title: "AUDIT-PRR2-API-13: constrain system bearer token HTTP authority"
+    train_scope: prr2_system_bearer_http_boundary
+    status: user_authorized
+    scope:
+      - Require explicit issuer, audience, exact route scope, short TTL, active revocation state, and redacted HTTP audit for role=system bearer tokens.
+      - Reject system tokens in optional-auth middleware paths so role alone cannot gain global report authority.
+      - Require explicit system identity claims when issuing a system token through FmTokenService.
+    allowed_paths:
+      - backend/.env.example
+      - backend/config/fap.php
+      - backend/app/Http/Middleware/FmTokenAuth.php
+      - backend/app/Http/Middleware/FmTokenOptional.php
+      - backend/app/Http/Middleware/FmTokenOptionalAuth.php
+      - backend/app/Services/Auth/FmTokenService.php
+      - backend/tests/Feature/SystemBearerTokenHttpBoundaryTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Issue or revoke a real token, mutate production auth rows, add a second approver, change report ownership rules, deploy, or access production.
+    validation:
+      - cd backend && php artisan test tests/Feature/SystemBearerTokenHttpBoundaryTest.php tests/Feature/AuthTokensSingleSourceTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Middleware/FmTokenAuth.php app/Http/Middleware/FmTokenOptional.php app/Http/Middleware/FmTokenOptionalAuth.php app/Services/Auth/FmTokenService.php config/fap.php tests/Feature/SystemBearerTokenHttpBoundaryTest.php
+      - cd backend && php artisan route:list --path=api --except-vendor --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

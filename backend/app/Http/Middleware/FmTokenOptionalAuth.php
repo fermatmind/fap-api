@@ -73,6 +73,16 @@ class FmTokenOptionalAuth
             }
         }
 
+        $role = $this->resolveRole($row->role ?? null, $row->meta_json ?? null);
+        if (strtolower(trim($role)) === 'system') {
+            Log::warning('[SEC] system_token_optional_auth_rejected', [
+                'path' => $request->path(),
+                'token_fingerprint' => substr($tokenHash, 0, 16),
+            ]);
+
+            return $this->unauthorizedResponse();
+        }
+
         // user_id: only trust explicit user_id-like columns, never fall back to anon_id
         $userId = $this->resolveUserId($row);
         if ($userId !== '') {
@@ -97,7 +107,6 @@ class FmTokenOptionalAuth
         }
 
         $orgId = $this->resolveNumeric($row->org_id ?? null) ?? 0;
-        $role = $this->resolveRole($row->role ?? null, $row->meta_json ?? null);
 
         $request->attributes->set('fm_org_id', $orgId);
         $request->attributes->set('org_id', $orgId);
