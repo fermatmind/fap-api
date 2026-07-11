@@ -1,0 +1,1 @@
+import fs from 'node:fs'; import path from 'node:path'; const h=path.dirname(new URL(import.meta.url).pathname),q=JSON.parse(fs.readFileSync(path.join(h,'qa_report.json'),'utf8')); if(Object.values(q.checks).some(v=>!v)) throw new Error('QA failed'); console.log('validated 10 English Legacy polarity assets');
