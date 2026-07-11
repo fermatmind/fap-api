@@ -1,0 +1,32 @@
+{
+    "artifact": "BIG5-124-PUBLISH-IMPORT-DRYRUN-01",
+    "status": "pass",
+    "ok": true,
+    "dry_run_only": true,
+    "write_supported_in_this_pr": false,
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "publish_attempted": false,
+    "index_attempted": false,
+    "search_release_attempted": false,
+    "sitemap_llms_release_attempted": false,
+    "source_sha256": "8bb7166ce5eba0daf30044d990c6356fb108c80f453c964d831c849ef6f9c0ce",
+    "row_count": 124,
+    "expected_row_count": 124,
+    "row_count_matches_expected": true,
+    "locale_counts": {
+        "zh-CN": 62,
+        "en": 62
+    },
+    "entity_type_counts": {
+        "domain": 10,
+        "facet_detail": 60,
+        "facet_hub": 2,
+        "hub": 2,
+        "polarity": 50
+    },
+    "canonical_assets": 114,
+    "redirect_only_aliases": 10,
+    "errors": [],
+    "warnings": []
+}
