@@ -86894,6 +86894,32 @@
       {"at": "2026-07-11T09:56:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."}
     ]
   },
+  "BIG5-EN-FACET-NEUROTICISM-CONTENT-PACKAGE-01": {
+    "id": "BIG5-EN-FACET-NEUROTICISM-CONTENT-PACKAGE-01",
+    "repo": "fap-api",
+    "title": "BIG5-EN-FACET-NEUROTICISM-CONTENT-PACKAGE-01: strengthen six English Neuroticism Facets",
+    "base": "main",
+    "branch": "codex/big5-en-facet-neuroticism-content-package-01",
+    "depends_on": ["BIG5-EN-FACET-AGREEABLENESS-CONTENT-PACKAGE-01"],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."},
+      "dependency": {"status": "pass", "evidence": "PR #2973 is merged at d72bf91696f09a245a620889819acf8b5f28dac4 and origin/main contains that squash merge."},
+      "content_scope": {"status": "pass", "evidence": "Exactly six independently authored English Neuroticism Facet assets contain nine substantive sections, five FAQs, seven internal links, source traceability, explicit clinical non-equivalence, and crisis-support boundaries."},
+      "local_validation": {"status": "pass", "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [
+      {"at": "2026-07-11T09:58:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the sixth locked train item after verifying its Agreeableness dependency on origin/main and started in an isolated clean worktree; no production action is in scope."},
+      {"at": "2026-07-11T10:04:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."}
+    ]
+  },
   "AUDIT-PRR2-API-01": {
     "id": "AUDIT-PRR2-API-01",
     "repo": "fap-api",

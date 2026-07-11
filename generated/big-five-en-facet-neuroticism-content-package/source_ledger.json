@@ -1,0 +1,176 @@
+{
+  "package": "big-five-en-facet-neuroticism-source-ledger-2026-07-11",
+  "access_date": "2026-07-11",
+  "scope": "Six English Neuroticism Facet content packages only.",
+  "inherits": {
+    "path": "generated/big-five-zh-facet-hub-content-repair/source_ledger.json",
+    "package": "big-five-zh-facet-shared-source-ledger-2026-07-10"
+  },
+  "sources": [
+    {
+      "id": "I1",
+      "type": "internal",
+      "reference": "backend/content_assets/personality_public/big_five_v1_seed.json",
+      "use": "Frozen CMS field shape, current Chinese route keys, locale, launch state, robots, and 5×6 taxonomy labels.",
+      "limitation": "The existing short body copy is an input to audit, not an authority for new academic claims."
+    },
+    {
+      "id": "I2",
+      "type": "internal",
+      "reference": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+      "use": "Non-diagnostic, non-deterministic, non-screening public claim boundaries."
+    },
+    {
+      "id": "I3",
+      "type": "internal",
+      "reference": "generated/big-five-zh-legacy-route-audit/legacy_route_audit.json",
+      "use": "Frozen V2 public route family and duplicate-route boundary."
+    },
+    {
+      "id": "A1",
+      "type": "official_research_resource",
+      "title": "NEO Facets Table",
+      "author_or_source": "International Personality Item Pool, Oregon Research Institute",
+      "year": null,
+      "url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+      "accessed_at": "2026-07-10",
+      "claim": "Documents corresponding IPIP scales for the 30 NEO-PI-R facet constructs.",
+      "limitation": "IPIP scales measure similar constructs; this does not make them identical to proprietary NEO scales or authorize score conversion."
+    },
+    {
+      "id": "A2",
+      "type": "peer_reviewed",
+      "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets",
+      "author_or_source": "Soto, C. J., & John, O. P.",
+      "year": 2017,
+      "doi": "10.1037/pspp0000096",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+      "accessed_at": "2026-07-10",
+      "claim": "Supports a hierarchical domain-and-facet reading of Big Five traits using 15 facets.",
+      "limitation": "BFI-2 has 15 facets, not the 30-facet taxonomy used for this CMS route set."
+    },
+    {
+      "id": "A3",
+      "type": "peer_reviewed",
+      "title": "Between facets and domains: 10 aspects of the Big Five",
+      "author_or_source": "DeYoung, C. G., Quilty, L. C., & Peterson, J. B.",
+      "year": 2007,
+      "doi": "10.1037/0022-3514.93.5.880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
+      "accessed_at": "2026-07-10",
+      "claim": "Shows an alternative intermediate hierarchy with two aspects per domain.",
+      "limitation": "The ten aspects are not interchangeable with either BFI-2 facets or NEO/IPIP 30 facets."
+    },
+    {
+      "id": "A4",
+      "type": "academic_review",
+      "title": "Paradigm Shift to the Integrative Big Five Trait Taxonomy: History, Measurement, and Conceptual Issues",
+      "author_or_source": "John, O. P., Naumann, L. P., & Soto, C. J.",
+      "year": 2008,
+      "reference": "In Handbook of Personality: Theory and Research (3rd ed.), pp. 114–158.",
+      "claim": "Supports broad Big Five taxonomy framing and continuous trait language.",
+      "limitation": "No individual prediction, numeric validity, or universal facet naming claim is taken from this review."
+    }
+  ],
+  "taxonomy": [
+    {
+      "domain_code": "neuroticism",
+      "domain_title_en": "Neuroticism",
+      "facets": [
+        {
+          "code": "anxiety",
+          "title_en": "Anxiety",
+          "route": "/en/personality/big-five/facets/anxiety"
+        },
+        {
+          "code": "anger",
+          "title_en": "Anger",
+          "route": "/en/personality/big-five/facets/anger"
+        },
+        {
+          "code": "depression",
+          "title_en": "Depression",
+          "route": "/en/personality/big-five/facets/depression"
+        },
+        {
+          "code": "self-consciousness",
+          "title_en": "Self-Consciousness",
+          "route": "/en/personality/big-five/facets/self-consciousness"
+        },
+        {
+          "code": "impulsiveness",
+          "title_en": "Impulsiveness",
+          "route": "/en/personality/big-five/facets/impulsiveness"
+        },
+        {
+          "code": "vulnerability",
+          "title_en": "Vulnerability",
+          "route": "/en/personality/big-five/facets/vulnerability"
+        }
+      ]
+    }
+  ],
+  "claim_map": [
+    {
+      "claim": "The six routes are narrower continuous descriptors under Neuroticism, not personality types.",
+      "evidence_ids": [
+        "I1",
+        "A1",
+        "A4"
+      ]
+    },
+    {
+      "claim": "Facet interest or attention is not equivalent to ability, diagnosis, or outcome prediction.",
+      "evidence_ids": [
+        "I2",
+        "A4"
+      ]
+    },
+    {
+      "claim": "This route taxonomy must not be directly converted to BFI-2 facets or BFAS aspects.",
+      "evidence_ids": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    }
+  ],
+  "facet_boundaries": {
+    "anxiety": {
+      "title_en": "Anxiety",
+      "construct_summary": "the usual tendency to experience worry, tension, and risk anticipation relatively quickly when uncertainty or possible threat appears",
+      "explicit_non_equivalence": "It is not an anxiety disorder, cowardice, accurate premonition, or a mental-health conclusion. This facet describes a usual response and cannot establish clinical duration, severity, or impairment"
+    },
+    "anger": {
+      "title_en": "Anger",
+      "construct_summary": "the usual tendency to experience irritation, hostility, or angry arousal relatively quickly when blocked, treated unfairly, or faced with a boundary violation",
+      "explicit_non_equivalence": "It is not aggression, violence, a permanent bad temper, moral failure, or a diagnosis. Feeling anger and choosing an action are different, and no violent behavior is justified by a personality score"
+    },
+    "depression": {
+      "title_en": "Depression",
+      "construct_summary": "the usual tendency to experience sadness, discouragement, and lower expectations relatively readily after loss, setback, or stress",
+      "explicit_non_equivalence": "It is not depressive disorder, weak will, a fixed pessimistic identity, or a diagnosis. This page cannot assess symptom duration, severity, functional impact, or treatment need"
+    },
+    "self-consciousness": {
+      "title_en": "Self-Consciousness",
+      "construct_summary": "the usual tendency to feel embarrassment, discomfort, and self-focused attention when being watched, evaluated, or at risk of making a social mistake",
+      "explicit_non_equivalence": "It is not reflective self-awareness, narcissism, low self-esteem, social-anxiety disorder, or social skill. A trait tendency cannot establish a clinical condition or prove that others are judging negatively"
+    },
+    "impulsiveness": {
+      "title_en": "Impulsiveness",
+      "construct_summary": "the usual difficulty of delaying gratification or inhibiting immediate action when a strong desire or emotion appears",
+      "explicit_non_equivalence": "It is not excitement-seeking, low deliberation, moral failure, addiction, or ADHD. Nearby constructs and clinical conditions cannot be converted from this page, and environment, stress, and resources affect behavior"
+    },
+    "vulnerability": {
+      "title_en": "Vulnerability",
+      "construct_summary": "the usual tendency to feel unable to cope or easily overwhelmed when pressure is high, demands are complex, or support is insufficient",
+      "explicit_non_equivalence": "It is not weakness, trauma history, a final statement about resilience, lack of ability, or a diagnosis. One crisis response does not establish a stable personality pattern, and environmental support can change performance substantially"
+    }
+  },
+  "limitations": [
+    "The frozen CMS taxonomy is NEO/IPIP-like; it is not claimed as the single universal Big Five facet standard.",
+    "No proprietary assessment items, scoring keys, norms, or copyrighted manual text are reproduced.",
+    "No reliability, validity, percentile, clinical, hiring, admission, salary, relationship-outcome, or deterministic career claim is made.",
+    "GSC_EVIDENCE_PENDING: this package is content-authority preparation, not a search-performance claim."
+  ]
+}
