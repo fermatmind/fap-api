@@ -7,6 +7,7 @@ use App\Models\ReportJob;
 use App\Models\Result;
 use App\Services\Report\ReportComposer;
 use App\Services\Storage\ArtifactStore;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -110,13 +111,13 @@ class GenerateReportJob implements ShouldQueue
             $job->failed_at = null;
             $job->finished_at = null;
             $job->last_error = $e->getMessage();
-            $job->last_error_trace = $e->getTraceAsString();
+            $job->last_error_trace = null;
             $job->save();
 
             Log::warning('[report_job] failed', [
-                'attempt_id' => $this->attemptId,
-                'job_id' => $job->id,
-                'err' => $e->getMessage(),
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->attemptId),
+                'job_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) $job->id),
+                'err' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
             ]);
 
             throw $e;
@@ -134,7 +135,7 @@ class GenerateReportJob implements ShouldQueue
         $job->failed_at = now();
         $job->finished_at = null;
         $job->last_error = $exception->getMessage();
-        $job->last_error_trace = $exception->getTraceAsString();
+        $job->last_error_trace = null;
         $job->save();
     }
 
@@ -144,7 +145,7 @@ class GenerateReportJob implements ShouldQueue
             ->putReportJson($scaleCode, $attemptId, $reportPayload);
 
         Log::info('[report_job] persisted report.json', [
-            'attempt_id' => $attemptId,
+            'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
             'disk' => 'local',
             'latest' => $latestRelPath,
             'snapshot' => null,

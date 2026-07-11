@@ -39689,3 +39689,44 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: AUDIT-PRR2-API-09
+    repo: fap-api
+    depends_on: [AUDIT-PRR2-API-07]
+    branch: codex/audit-prr2-api-09-log-redaction
+    title: "AUDIT-PRR2-API-09: redact sensitive diagnostics and raw traces"
+    train_scope: prr2_sensitive_diagnostic_redaction
+    status: user_authorized
+    scope:
+      - Redact attempt, order, user, token, secret, and exception diagnostics on every configured application log channel.
+      - Persist only sanitized report-job failure summaries and prohibit persistent raw exception traces.
+      - Replace report-job log identifiers with non-reversible fingerprints.
+    allowed_paths:
+      - backend/app/Jobs/GenerateReportJob.php
+      - backend/app/Logging/RedactSensitiveLogContext.php
+      - backend/app/Models/ReportJob.php
+      - backend/app/Support/Logging/SensitiveDiagnosticRedactor.php
+      - backend/config/logging.php
+      - backend/tests/Feature/Jobs/GenerateReportJobFailureContractTest.php
+      - backend/tests/Unit/Logging/RedactSensitiveLogContextTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change queue replay, DLQ behavior, report generation/scoring, authorization, CMS/SEO, deployment, or production state.
+    validation:
+      - cd backend && php artisan test tests/Unit/Logging/RedactSensitiveLogContextTest.php tests/Feature/Jobs/GenerateReportJobFailureContractTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_sensitive_diagnostic_redaction' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Jobs/GenerateReportJob.php app/Logging/RedactSensitiveLogContext.php app/Models/ReportJob.php app/Support/Logging/SensitiveDiagnosticRedactor.php config/logging.php tests/Feature/Jobs/GenerateReportJobFailureContractTest.php tests/Unit/Logging/RedactSensitiveLogContextTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

@@ -32,14 +32,19 @@ final class SensitiveDiagnosticRedactor
         'candidate_invitee_attempt_id' => true,
         'invitee_anon_id' => true,
         'invitee_attempt_id' => true,
+        'job_id' => true,
+        'order_no' => true,
         'password' => true,
         'password_confirmation' => true,
         'phone' => true,
         'private_key' => true,
         'signature' => true,
         'target_attempt_id' => true,
+        'trace' => true,
+        'exception_trace' => true,
         'token' => true,
         'unlock_code' => true,
+        'user_id' => true,
         'webhook_secret' => true,
     ];
 
@@ -53,12 +58,15 @@ final class SensitiveDiagnosticRedactor
         'email',
         'id_card',
         'id_number',
+        'order_no',
         'password',
         'phone',
         'private_key',
         'secret',
         'signature',
         'token',
+        'trace',
+        'user_id',
         'webhook_secret',
     ];
 
@@ -83,7 +91,11 @@ final class SensitiveDiagnosticRedactor
                 continue;
             }
 
-            $result[$key] = is_string($value) ? self::redactString($value) : $value;
+            if ($value instanceof \Throwable) {
+                $result[$key] = self::REDACTED;
+            } else {
+                $result[$key] = is_string($value) ? self::redactString($value) : $value;
+            }
         }
 
         return $result;
@@ -92,13 +104,13 @@ final class SensitiveDiagnosticRedactor
     public static function redactString(string $value): string
     {
         $value = preg_replace(
-            '/\b((?:webhook_)?secret|client_secret|api_key|token|invite_token|invite_unlock_code|invite_code|anon_id|attempt_id|target_attempt_id|signature)=([^&\s"\']+)/i',
+            '/\b((?:webhook_)?secret|client_secret|api_key|token|invite_token|invite_unlock_code|invite_code|anon_id|attempt_id|target_attempt_id|order_no|user_id|signature)=([^&\s"\']+)/i',
             '$1='.self::REDACTED,
             $value
         ) ?? $value;
 
         $value = preg_replace(
-            '/("(?:(?:webhook_)?secret|client_secret|api_key|token|invite_token|invite_unlock_code|invite_code|anon_id|attempt_id|target_attempt_id|signature)"\s*:\s*")([^"]*)(")/i',
+            '/("(?:(?:webhook_)?secret|client_secret|api_key|token|invite_token|invite_unlock_code|invite_code|anon_id|attempt_id|target_attempt_id|order_no|user_id|signature)"\s*:\s*")([^"]*)(")/i',
             '$1'.self::REDACTED.'$3',
             $value
         ) ?? $value;
