@@ -85388,8 +85388,8 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-02-payment-repair-schedule",
     "depends_on": [],
-    "status": "focused_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "413091296c768fe1f0941b2f6d4fc831e0ba3a7c",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -85438,6 +85438,12 @@
         "from": "in_progress",
         "to": "focused_checks_passed",
         "note": "Effective-schedule, full repair-engine, exact runtime-freeze classifier, Pint, YAML/JSON, diff, and allowed-path checks passed; no payment, queue replay, deploy, or production mutation was performed."
+      },
+      {
+        "at": "2026-07-11T12:24:00+08:00",
+        "from": "focused_checks_passed",
+        "to": "committed",
+        "note": "Committed the five-path payment repair schedule scope at 413091296c768fe1f0941b2f6d4fc831e0ba3a7c on current origin/main."
       }
     ]
   }
