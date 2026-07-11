@@ -88479,9 +88479,9 @@
     "base": "main",
     "branch": "codex/enneagram-search-release-readiness-02",
     "depends_on": ["ENNEAGRAM-SEARCH-QUEUE-READONLY-INSPECT-01"],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "47b8325927db9d3155703288b6035470fb46fc64",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3001",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -88502,7 +88502,7 @@
       "local_validation": {"status": "pass", "evidence": "Readiness JSON and train state JSON parse, train YAML parses, diff whitespace is clean, and changed paths are restricted to the four manifest-allowed report/ledger paths. No heavy local verification process was running."}
     },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": null, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-11T17:14:00Z", "from": "unregistered", "to": "in_progress", "note": "Started the exact production read-only Search readiness evidence scope after deployed Queue inspection run 29161158292. It returned NO_GO because no eligible Queue candidates were produced; no Queue or CMS write, submission, cache warm, or deploy occurred in this task."}, {"at": "2026-07-11T17:17:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Report JSON/state JSON/YAML parsing, exact four-path scope validation, and diff whitespace checks passed. The outcome remains NO_GO_SEARCH_RELEASE; no production write occurred."}, {"at": "2026-07-11T17:18:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact four-path readiness report and ledger scope at 47b8325927db9d3155703288b6035470fb46fc64. No production write occurred."}]
+    "transitions": [{"at": "2026-07-11T17:14:00Z", "from": "unregistered", "to": "in_progress", "note": "Started the exact production read-only Search readiness evidence scope after deployed Queue inspection run 29161158292. It returned NO_GO because no eligible Queue candidates were produced; no Queue or CMS write, submission, cache warm, or deploy occurred in this task."}, {"at": "2026-07-11T17:17:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Report JSON/state JSON/YAML parsing, exact four-path scope validation, and diff whitespace checks passed. The outcome remains NO_GO_SEARCH_RELEASE; no production write occurred."}, {"at": "2026-07-11T17:18:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact four-path readiness report and ledger scope at 47b8325927db9d3155703288b6035470fb46fc64. No production write occurred."}, {"at": "2026-07-11T17:19:00Z", "from": "committed", "to": "pr_open", "note": "Opened PR #3001 for the exact read-only report scope. Required GitHub checks are pending; Search enqueue remains prohibited by NO_GO_SEARCH_RELEASE."}]
   },
   "BIG5-114-INDEXABILITY-PUBLISH-GATE-01": {
     "id": "BIG5-114-INDEXABILITY-PUBLISH-GATE-01", "repo": "fap-api", "title": "BIG5-114-INDEXABILITY-PUBLISH-GATE-01: prepare controlled 93-page indexability promotion", "base": "main", "branch": "codex/big5-114-indexability-publish-gate-01", "depends_on": ["BIG5-124-PRODUCTION-IMPORTER-OPS-01"],
