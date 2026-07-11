@@ -1,0 +1,204 @@
+{
+  "task_id": "DEEPREAD-REPAIR-TYPE-2-01",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "reviewed_assets": [
+    "wing-2w1-zh-CN",
+    "wing-2w3-zh-CN",
+    "wing-2w1-en",
+    "wing-2w3-en",
+    "subtype-type-2-self-preservation-zh-CN",
+    "subtype-type-2-social-zh-CN",
+    "subtype-type-2-one-to-one-zh-CN",
+    "subtype-type-2-self-preservation-en",
+    "subtype-type-2-social-en",
+    "subtype-type-2-one-to-one-en"
+  ],
+  "repaired_issue_ids": [
+    "DR-0007",
+    "DR-0008",
+    "DR-0009",
+    "DR-0010",
+    "DR-0011",
+    "DR-0012",
+    "DR-0013",
+    "DR-0014",
+    "DR-0015",
+    "DR-0016",
+    "DR-0017"
+  ],
+  "false_positive_issue_ids": [],
+  "remaining_open_issue_ids": [],
+  "changed_assets": [],
+  "before_after_summary": [],
+  "qa_results": {
+    "command": "node build-package.mjs qa-type 2",
+    "status": "PASS"
+  },
+  "duplicate_growth_geo_results": {
+    "status": "PASS",
+    "results": [
+      {
+        "asset_id": "wing-2w1-zh-CN",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 3165
+      },
+      {
+        "asset_id": "wing-2w3-zh-CN",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 3118
+      },
+      {
+        "asset_id": "wing-2w1-en",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 1824
+      },
+      {
+        "asset_id": "wing-2w3-en",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 1791
+      },
+      {
+        "asset_id": "subtype-type-2-self-preservation-zh-CN",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 3199
+      },
+      {
+        "asset_id": "subtype-type-2-social-zh-CN",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 3140
+      },
+      {
+        "asset_id": "subtype-type-2-one-to-one-zh-CN",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 3137
+      },
+      {
+        "asset_id": "subtype-type-2-self-preservation-en",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 1787
+      },
+      {
+        "asset_id": "subtype-type-2-social-en",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 1756
+      },
+      {
+        "asset_id": "subtype-type-2-one-to-one-en",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 1749
+      }
+    ],
+    "duplicate_growth_clusters": []
+  },
+  "bilingual_alignment_results": {
+    "status": "PASS",
+    "results": [
+      {
+        "pair": "wing:2w1",
+        "pass": true
+      },
+      {
+        "pair": "wing:2w3",
+        "pass": true
+      },
+      {
+        "pair": "instinctual_subtype:type-2/self-preservation",
+        "pass": true
+      },
+      {
+        "pair": "instinctual_subtype:type-2/social",
+        "pass": true
+      },
+      {
+        "pair": "instinctual_subtype:type-2/one-to-one",
+        "pass": true
+      }
+    ]
+  },
+  "launch_boundary_results": {
+    "status": "PASS"
+  },
+  "final_decision": "PASS",
+  "hash_before_after": [
+    {
+      "asset_id": "wing-2w1-zh-CN",
+      "before_sha256": "181273026a049edb744097955c47cb808f8bdbe20445420a4e194ad9349f8e92",
+      "after_sha256": "181273026a049edb744097955c47cb808f8bdbe20445420a4e194ad9349f8e92",
+      "changed": false
+    },
+    {
+      "asset_id": "wing-2w3-zh-CN",
+      "before_sha256": "8042c2826e1e135ce7185c70a621c112a7946a3c4402de37bbe18b23f12ea3f1",
+      "after_sha256": "8042c2826e1e135ce7185c70a621c112a7946a3c4402de37bbe18b23f12ea3f1",
+      "changed": false
+    },
+    {
+      "asset_id": "wing-2w1-en",
+      "before_sha256": "75aa3ae239333447299a3983184e32a6f7415bd13b2b9f38ad5b824bdc406cfe",
+      "after_sha256": "75aa3ae239333447299a3983184e32a6f7415bd13b2b9f38ad5b824bdc406cfe",
+      "changed": false
+    },
+    {
+      "asset_id": "wing-2w3-en",
+      "before_sha256": "c1d67c15fbababe65fadbd8ff0bcb7be577ce0dff4d771f363a3c2789f72c9e8",
+      "after_sha256": "c1d67c15fbababe65fadbd8ff0bcb7be577ce0dff4d771f363a3c2789f72c9e8",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-2-self-preservation-zh-CN",
+      "before_sha256": "a66f4e733bb517bdabd322be42738d51e69010ca8c0b7e1486f85a745e124e9e",
+      "after_sha256": "a66f4e733bb517bdabd322be42738d51e69010ca8c0b7e1486f85a745e124e9e",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-2-social-zh-CN",
+      "before_sha256": "f2af12652ea9d7236de15e9f1f887dc7244f19ae051e8f8a005cceb9fddb566c",
+      "after_sha256": "f2af12652ea9d7236de15e9f1f887dc7244f19ae051e8f8a005cceb9fddb566c",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-2-one-to-one-zh-CN",
+      "before_sha256": "59360f6108d3a5101784c09cb05e30da9ab3c3fc96ab2ceb6530b8902bdf2495",
+      "after_sha256": "59360f6108d3a5101784c09cb05e30da9ab3c3fc96ab2ceb6530b8902bdf2495",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-2-self-preservation-en",
+      "before_sha256": "3a7ba5b38c166eb0a7b25dae503a6b3153238e4e3f136beca54ff78cb1ca31a1",
+      "after_sha256": "3a7ba5b38c166eb0a7b25dae503a6b3153238e4e3f136beca54ff78cb1ca31a1",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-2-social-en",
+      "before_sha256": "3977943ef80c789afebf861cb10ad97fd05f57db479f6bff2de7f96c25bb0840",
+      "after_sha256": "3977943ef80c789afebf861cb10ad97fd05f57db479f6bff2de7f96c25bb0840",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-2-one-to-one-en",
+      "before_sha256": "1cc56a641f452f12076441bd5e6aa93a82172ea55098ac800cf257c722d10833",
+      "after_sha256": "1cc56a641f452f12076441bd5e6aa93a82172ea55098ac800cf257c722d10833",
+      "changed": false
+    }
+  ]
+}

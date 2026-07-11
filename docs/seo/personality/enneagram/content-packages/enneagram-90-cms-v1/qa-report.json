@@ -1,0 +1,203 @@
+{
+  "artifact": "ENNEAGRAM-90-QA-REPORT",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "status": "PASS",
+  "tasks": [
+    {
+      "order": 1,
+      "task_id": "ENNEAGRAM-90-SCHEMA-WRITING-SPEC-FREEZE-01",
+      "status": "frozen",
+      "failure_reason": null
+    },
+    {
+      "order": 2,
+      "task_id": "ENNEAGRAM-90-TYPE-1-CONTENT-01",
+      "status": "frozen",
+      "failure_reason": null
+    },
+    {
+      "order": 3,
+      "task_id": "ENNEAGRAM-90-TYPE-2-CONTENT-01",
+      "status": "frozen",
+      "failure_reason": null
+    },
+    {
+      "order": 4,
+      "task_id": "ENNEAGRAM-90-TYPE-3-CONTENT-01",
+      "status": "frozen",
+      "failure_reason": null
+    },
+    {
+      "order": 5,
+      "task_id": "ENNEAGRAM-90-TYPE-4-CONTENT-01",
+      "status": "frozen",
+      "failure_reason": null
+    },
+    {
+      "order": 6,
+      "task_id": "ENNEAGRAM-90-TYPE-5-CONTENT-01",
+      "status": "frozen",
+      "failure_reason": null
+    },
+    {
+      "order": 7,
+      "task_id": "ENNEAGRAM-90-TYPE-6-CONTENT-01",
+      "status": "frozen",
+      "failure_reason": null
+    },
+    {
+      "order": 8,
+      "task_id": "ENNEAGRAM-90-TYPE-7-CONTENT-01",
+      "status": "frozen",
+      "failure_reason": null
+    },
+    {
+      "order": 9,
+      "task_id": "ENNEAGRAM-90-TYPE-8-CONTENT-01",
+      "status": "frozen",
+      "failure_reason": null
+    },
+    {
+      "order": 10,
+      "task_id": "ENNEAGRAM-90-TYPE-9-CONTENT-01",
+      "status": "frozen",
+      "failure_reason": null
+    },
+    {
+      "order": 11,
+      "task_id": "ENNEAGRAM-90-GLOBAL-BILINGUAL-SEO-GEO-QA-01",
+      "status": "frozen",
+      "failure_reason": null
+    },
+    {
+      "order": 12,
+      "task_id": "ENNEAGRAM-90-CMS-PACKAGE-ASSEMBLY-DRY-RUN-01",
+      "status": "frozen",
+      "failure_reason": null
+    }
+  ],
+  "inventory": {
+    "total": 90,
+    "wings": 36,
+    "instinctual_subtypes": 54,
+    "zh-CN": 45,
+    "en": 45
+  },
+  "type_qa": [
+    {
+      "task_id": "ENNEAGRAM-90-TYPE-1-CONTENT-01",
+      "status": "PASS",
+      "counts": {
+        "assets": 10,
+        "zh-CN": 5,
+        "en": 5,
+        "bilingual_pairs": 5
+      }
+    },
+    {
+      "task_id": "ENNEAGRAM-90-TYPE-2-CONTENT-01",
+      "status": "PASS",
+      "counts": {
+        "assets": 10,
+        "zh-CN": 5,
+        "en": 5,
+        "bilingual_pairs": 5
+      }
+    },
+    {
+      "task_id": "ENNEAGRAM-90-TYPE-3-CONTENT-01",
+      "status": "PASS",
+      "counts": {
+        "assets": 10,
+        "zh-CN": 5,
+        "en": 5,
+        "bilingual_pairs": 5
+      }
+    },
+    {
+      "task_id": "ENNEAGRAM-90-TYPE-4-CONTENT-01",
+      "status": "PASS",
+      "counts": {
+        "assets": 10,
+        "zh-CN": 5,
+        "en": 5,
+        "bilingual_pairs": 5
+      }
+    },
+    {
+      "task_id": "ENNEAGRAM-90-TYPE-5-CONTENT-01",
+      "status": "PASS",
+      "counts": {
+        "assets": 10,
+        "zh-CN": 5,
+        "en": 5,
+        "bilingual_pairs": 5
+      }
+    },
+    {
+      "task_id": "ENNEAGRAM-90-TYPE-6-CONTENT-01",
+      "status": "PASS",
+      "counts": {
+        "assets": 10,
+        "zh-CN": 5,
+        "en": 5,
+        "bilingual_pairs": 5
+      }
+    },
+    {
+      "task_id": "ENNEAGRAM-90-TYPE-7-CONTENT-01",
+      "status": "PASS",
+      "counts": {
+        "assets": 10,
+        "zh-CN": 5,
+        "en": 5,
+        "bilingual_pairs": 5
+      }
+    },
+    {
+      "task_id": "ENNEAGRAM-90-TYPE-8-CONTENT-01",
+      "status": "PASS",
+      "counts": {
+        "assets": 10,
+        "zh-CN": 5,
+        "en": 5,
+        "bilingual_pairs": 5
+      }
+    },
+    {
+      "task_id": "ENNEAGRAM-90-TYPE-9-CONTENT-01",
+      "status": "PASS",
+      "counts": {
+        "assets": 10,
+        "zh-CN": 5,
+        "en": 5,
+        "bilingual_pairs": 5
+      }
+    }
+  ],
+  "global_qa": {
+    "status": "PASS",
+    "pages_passed": 90,
+    "bilingual_pairs_passed": 45,
+    "duplicate_report_status": "PASS"
+  },
+  "cms_contract_dry_run": {
+    "status": "PASS",
+    "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality-public-assets:import --source=/Users/rainie/Desktop/GitHub/.codex-worktrees/fap-api-enneagram-90-content-package-freeze-01/docs/seo/personality/enneagram/content-packages/enneagram-90-cms-v1/cms-import-dry-run-package.json --framework=enneagram",
+    "assets_found": 90,
+    "valid_count": 90,
+    "errors_count": 0,
+    "write": false
+  },
+  "indexability": {
+    "robots": "noindex,follow",
+    "launch_state": "draft",
+    "is_public": false,
+    "index_eligible": false,
+    "sitemap_eligible": false,
+    "llms_eligible": false
+  },
+  "unresolved_risks": [
+    "All assets remain Codex drafts pending manual editorial review; this package does not authorize CMS writes, publishing, indexing, sitemap, llms, search release, or deployment."
+  ]
+}

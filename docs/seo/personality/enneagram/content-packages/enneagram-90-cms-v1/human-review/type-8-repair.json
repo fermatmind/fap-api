@@ -1,0 +1,102 @@
+{
+  "task_id": "ENNEAGRAM-90-HUMAN-TYPE-8-REPAIR-01",
+  "status": "PASS",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "source_scan_task_id": "ENNEAGRAM-90-HUMAN-TYPE-8-SCAN-01",
+  "action": "NO_CHANGES_REQUIRED",
+  "reviewed_assets": [
+    "wing-8w7-zh-CN",
+    "wing-8w9-zh-CN",
+    "wing-8w7-en",
+    "wing-8w9-en",
+    "subtype-type-8-self-preservation-zh-CN",
+    "subtype-type-8-social-zh-CN",
+    "subtype-type-8-one-to-one-zh-CN",
+    "subtype-type-8-self-preservation-en",
+    "subtype-type-8-social-en",
+    "subtype-type-8-one-to-one-en"
+  ],
+  "repaired_issues": [],
+  "unchanged_assets": [
+    "wing-8w7-zh-CN",
+    "wing-8w9-zh-CN",
+    "wing-8w7-en",
+    "wing-8w9-en",
+    "subtype-type-8-self-preservation-zh-CN",
+    "subtype-type-8-social-zh-CN",
+    "subtype-type-8-one-to-one-zh-CN",
+    "subtype-type-8-self-preservation-en",
+    "subtype-type-8-social-en",
+    "subtype-type-8-one-to-one-en"
+  ],
+  "hash_before_after": [
+    {
+      "asset_id": "wing-8w7-zh-CN",
+      "before_hash": "a26004070628857e233bc93180ecc93709681fc334b648244e06ff45c5475ab1",
+      "after_hash": "a26004070628857e233bc93180ecc93709681fc334b648244e06ff45c5475ab1",
+      "changed": false
+    },
+    {
+      "asset_id": "wing-8w9-zh-CN",
+      "before_hash": "f22b025de90a32f0abd2e73cfad98590d35a9d38935e7597e2ff231f7df55dc5",
+      "after_hash": "f22b025de90a32f0abd2e73cfad98590d35a9d38935e7597e2ff231f7df55dc5",
+      "changed": false
+    },
+    {
+      "asset_id": "wing-8w7-en",
+      "before_hash": "7134a25afe9d7a09fc71e15b3fa92686709677591b9ce072a5ef33ab22572c34",
+      "after_hash": "7134a25afe9d7a09fc71e15b3fa92686709677591b9ce072a5ef33ab22572c34",
+      "changed": false
+    },
+    {
+      "asset_id": "wing-8w9-en",
+      "before_hash": "86e25e3e49ae5c3d16298722fd96329769d1adf03c2c5491567a312840137051",
+      "after_hash": "86e25e3e49ae5c3d16298722fd96329769d1adf03c2c5491567a312840137051",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-8-self-preservation-zh-CN",
+      "before_hash": "aeca88de6e4fc697deb3fef7782f93d94c23e6ef0278bc1705ee068fdb7790ff",
+      "after_hash": "aeca88de6e4fc697deb3fef7782f93d94c23e6ef0278bc1705ee068fdb7790ff",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-8-social-zh-CN",
+      "before_hash": "9f2bfc70a147b0586fdfe2714a1cc446ddfd14860002af92e1989c794b2c3a7d",
+      "after_hash": "9f2bfc70a147b0586fdfe2714a1cc446ddfd14860002af92e1989c794b2c3a7d",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-8-one-to-one-zh-CN",
+      "before_hash": "6d8ffb24cfe38efee4d6855027f13952bcc281915d631e222132804bbe941cd5",
+      "after_hash": "6d8ffb24cfe38efee4d6855027f13952bcc281915d631e222132804bbe941cd5",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-8-self-preservation-en",
+      "before_hash": "318135812d439721c29b43d602523c53742dcdbba1df7c60a336b79e92bd24d4",
+      "after_hash": "318135812d439721c29b43d602523c53742dcdbba1df7c60a336b79e92bd24d4",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-8-social-en",
+      "before_hash": "980bdc9d64b0f4bb2a1eae126720986741ea40b44f90e0349efe7eeee29b7134",
+      "after_hash": "980bdc9d64b0f4bb2a1eae126720986741ea40b44f90e0349efe7eeee29b7134",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-8-one-to-one-en",
+      "before_hash": "9cff9131820ca6a3600bcdfec40c0b0998c7efaed35eb771acf1ee47fb00df52",
+      "after_hash": "9cff9131820ca6a3600bcdfec40c0b0998c7efaed35eb771acf1ee47fb00df52",
+      "changed": false
+    }
+  ],
+  "qa_rerun": {
+    "command": "node build-package.mjs qa-type 8",
+    "status": "PASS"
+  },
+  "preview_regenerated": true,
+  "final_decision": "PASS",
+  "blocked_items": [],
+  "notes": []
+}

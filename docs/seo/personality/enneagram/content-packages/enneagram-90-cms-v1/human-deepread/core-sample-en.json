@@ -1,0 +1,432 @@
+{
+  "task_id": "ENNEAGRAM-90-DEEPREAD-CORE-SAMPLE-EN-01",
+  "status": "PASS",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "reviewer_mode": "gpt-5.5-high-strict-readonly-core-sample-english",
+  "reviewed_assets": [
+    "wing-1w9-en",
+    "wing-2w1-en",
+    "wing-3w2-en",
+    "wing-4w5-en",
+    "wing-5w6-en",
+    "wing-6w5-en",
+    "wing-7w8-en",
+    "wing-8w9-en",
+    "wing-9w1-en"
+  ],
+  "task_scope": "9 en representative wing pages",
+  "sampling_rule": "English counterparts for the zh-CN representative sample.",
+  "strictness_rules_applied": [
+    "read JSON asset body rather than trusting existing QA PASS",
+    "minimum five page-specific notes per reviewed page",
+    "minimum three short evidence quotes per reviewed page",
+    "issues require severity and concrete required_edits",
+    "no asset, preview, manifest, ledger, QA, CMS, deploy, sitemap, llms, search, git, branch, commit, push, or PR mutation"
+  ],
+  "per_page_results": [
+    {
+      "asset_id": "wing-1w9-en",
+      "file": "assets/wings/en/1w9.json",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "1w9",
+      "reviewer_verdict": "PASS",
+      "page_intent_summary": "Enneagram 1w9: Improving What Matters Without Adding Noise targets wing 1w9 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 1w9: title and summary target Type 1 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: Enneagram 1w9 means Type 1 is the proposed core pattern and adjacent …",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: Both hypotheses keep Type 1's proposed focus on responsibility, stand…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: For seven days, choose one situation each day that you want to improv…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Research on the Enneagram includes measurement and applied studies, b…",
+        "No blocking issue found in the requested dimension for wing-1w9-en; keep this as evidence-backed PASS, not an automatic QA PASS."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "Enneagram 1w9: Improving What Matters Without Adding Noise",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "Enneagram 1w9 is an interpretive wing pattern built on Type 1's concern with principles, re…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "Enneagram 1w9 means Type 1 is the proposed core pattern and adjacent Type 9 is the proposed…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [],
+      "required_edits": [],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: not a fixed or independently validated",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "asset_id": "wing-2w1-en",
+      "file": "assets/wings/en/2w1.json",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "2w1",
+      "reviewer_verdict": "PASS",
+      "page_intent_summary": "Enneagram 2w1: Care Shaped by Responsibility and Method targets wing 2w1 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 2w1: title and summary target Type 2 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: Enneagram 2w1 means Type 2 is the proposed core pattern and adjacent …",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: Both hypotheses retain Type 2's proposed connection-and-being-needed …",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: For seven days, record each impulse to help: the observable trigger, …",
+        "Evidence section contains boundary language that should not be removed as a false positive: Current evidence does not establish 2w1 as an independent, universal …",
+        "No blocking issue found in the requested dimension for wing-2w1-en; keep this as evidence-backed PASS, not an automatic QA PASS."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "Enneagram 2w1: Care Shaped by Responsibility and Method",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "Enneagram 2w1 is an interpretive wing pattern with Type 2's concern for connection, respons…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "Enneagram 2w1 means Type 2 is the proposed core pattern and adjacent Type 1 is the proposed…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [],
+      "required_edits": [],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: does not predict",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "asset_id": "wing-3w2-en",
+      "file": "assets/wings/en/3w2.json",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "3w2",
+      "reviewer_verdict": "PASS",
+      "page_intent_summary": "Enneagram 3w2: The Relational Achiever targets wing 3w2 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 3w2: title and summary target Type 3 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 3w2 is an interpretive combination in which Type 3—pursuing achieveme…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | Dimension (3w2 comparison) | 3w2 | 3w4 | |---|---|---| | Shared cor…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: For seven days, choose one event involving a deliverable. Record the …",
+        "Evidence section contains boundary language that should not be removed as a false positive: This page treats wings as tradition-dependent self-observation hypoth…",
+        "No blocking issue found in the requested dimension for wing-3w2-en; keep this as evidence-backed PASS, not an automatic QA PASS."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "Enneagram 3w2: The Relational Achiever",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "3w2 uses Type 3 achievement and visible value as the proposed core, with Type 2 language de…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "3w2 is an interpretive combination in which Type 3—pursuing achievement, efficiency, and vi…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [],
+      "required_edits": [],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: is not a health explanation and must not be used to predict",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "asset_id": "wing-4w5-en",
+      "file": "assets/wings/en/4w5.json",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "4w5",
+      "reviewer_verdict": "PASS",
+      "page_intent_summary": "Enneagram 4w5: The Analytical Individualist targets wing 4w5 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 4w5: title and summary target Type 4 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 4w5 is an interpretive combination in which Type 4—pursuing identity,…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | Dimension (4w5 comparison) | 4w5 | 4w3 | |---|---|---| | Shared cor…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: For seven days, choose one unfinished idea that feels personally impo…",
+        "Evidence section contains boundary language that should not be removed as a false positive: This page treats wings as tradition-dependent self-observation hypoth…",
+        "No blocking issue found in the requested dimension for wing-4w5-en; keep this as evidence-backed PASS, not an automatic QA PASS."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "Enneagram 4w5: The Analytical Individualist",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "4w5 uses Type 4 identity, meaning, and emotional authenticity as the proposed core, with Ty…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "4w5 is an interpretive combination in which Type 4—pursuing identity, meaning, and emotiona…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [],
+      "required_edits": [],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: is not a health explanation and must not be used to predict",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "asset_id": "wing-5w6-en",
+      "file": "assets/wings/en/5w6.json",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "5w6",
+      "reviewer_verdict": "PASS",
+      "page_intent_summary": "Enneagram 5w6: The Systems-Oriented Investigator targets wing 5w6 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 5w6: title and summary target Type 5 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 5w6 is an interpretive combination in which Type 5—pursuing understan…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | Dimension (5w6 comparison) | 5w6 | 5w4 | |---|---|---| | Shared cor…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: For seven days, choose one decision with enough evidence to act and f…",
+        "Evidence section contains boundary language that should not be removed as a false positive: This page treats wings as tradition-dependent self-observation hypoth…",
+        "No blocking issue found in the requested dimension for wing-5w6-en; keep this as evidence-backed PASS, not an automatic QA PASS."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "Enneagram 5w6: The Systems-Oriented Investigator",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "5w6 uses Type 5 understanding, competence, and sufficient inner resources as the proposed c…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "5w6 is an interpretive combination in which Type 5—pursuing understanding, competence, and …",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [],
+      "required_edits": [],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: is not a health explanation and must not be used to predict",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "asset_id": "wing-6w5-en",
+      "file": "assets/wings/en/6w5.json",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "6w5",
+      "reviewer_verdict": "PASS",
+      "page_intent_summary": "Enneagram 6w5: The Analytical Loyalist targets wing 6w5 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 6w5: title and summary target Type 6 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 6w5 is an interpretive combination in which Type 6—pursuing security,…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | Dimension (6w5 comparison) | 6w5 | 6w7 | |---|---|---| | Shared cor…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: For seven days, choose one risk decision with a defined evidence limi…",
+        "Evidence section contains boundary language that should not be removed as a false positive: This page treats wings as tradition-dependent self-observation hypoth…",
+        "No blocking issue found in the requested dimension for wing-6w5-en; keep this as evidence-backed PASS, not an automatic QA PASS."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "Enneagram 6w5: The Analytical Loyalist",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "6w5 uses Type 6 security, trust, and workable responses to uncertainty as the proposed core…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "6w5 is an interpretive combination in which Type 6—pursuing security, trust, and workable r…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [],
+      "required_edits": [],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: is not a health explanation and must not be used to predict",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "asset_id": "wing-7w8-en",
+      "file": "assets/wings/en/7w8.json",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "7w8",
+      "reviewer_verdict": "PASS",
+      "page_intent_summary": "Enneagram 7w8: The Assertive Explorer targets wing 7w8 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 7w8: title and summary target Type 7 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 7w8 is an interpretive combination in which Type 7—pursuing freedom, …",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | Dimension (7w8 comparison) | 7w8 | 7w6 | |---|---|---| | Shared cor…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: For seven days, choose one strongly desired action and stay with its …",
+        "Evidence section contains boundary language that should not be removed as a false positive: This page treats wings as tradition-dependent self-observation hypoth…",
+        "No blocking issue found in the requested dimension for wing-7w8-en; keep this as evidence-backed PASS, not an automatic QA PASS."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "Enneagram 7w8: The Assertive Explorer",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "7w8 uses Type 7 freedom, possibility, and keeping options open when limitation appears as t…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "7w8 is an interpretive combination in which Type 7—pursuing freedom, possibility, and keepi…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [],
+      "required_edits": [],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: is not a health explanation and must not be used to predict",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "asset_id": "wing-8w9-en",
+      "file": "assets/wings/en/8w9.json",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "8w9",
+      "reviewer_verdict": "PASS",
+      "page_intent_summary": "Enneagram 8w9: The Grounded Challenger targets wing 8w9 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 8w9: title and summary target Type 8 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 8w9 is an interpretive combination in which Type 8—pursuing autonomy,…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | Dimension (8w9 comparison) | 8w9 | 8w7 | |---|---|---| | Shared cor…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: For seven days, choose one delayed boundary and state it calmly befor…",
+        "Evidence section contains boundary language that should not be removed as a false positive: This page treats wings as tradition-dependent self-observation hypoth…",
+        "No blocking issue found in the requested dimension for wing-8w9-en; keep this as evidence-backed PASS, not an automatic QA PASS."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "Enneagram 8w9: The Grounded Challenger",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "8w9 uses Type 8 autonomy, direct impact, protection, and resistance to being controlled as …",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "8w9 is an interpretive combination in which Type 8—pursuing autonomy, direct impact, protec…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [],
+      "required_edits": [],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: is not a health explanation and must not be used to predict",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "asset_id": "wing-9w1-en",
+      "file": "assets/wings/en/9w1.json",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "9w1",
+      "reviewer_verdict": "PASS",
+      "page_intent_summary": "Enneagram 9w1: The Principled Peacemaker targets wing 9w1 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 9w1: title and summary target Type 9 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 9w1 is an interpretive combination in which Type 9—pursuing stability…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | Dimension (9w1 comparison) | 9w1 | 9w8 | |---|---|---| | Shared cor…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: For seven days, choose one disagreement hidden behind correct process…",
+        "Evidence section contains boundary language that should not be removed as a false positive: This page treats wings as tradition-dependent self-observation hypoth…",
+        "No blocking issue found in the requested dimension for wing-9w1-en; keep this as evidence-backed PASS, not an automatic QA PASS."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "Enneagram 9w1: The Principled Peacemaker",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "9w1 uses Type 9 stability, connection, reduced inner conflict, and keeping priorities from …",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "9w1 is an interpretive combination in which Type 9—pursuing stability, connection, reduced …",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [],
+      "required_edits": [],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: is not a health explanation and must not be used to predict",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "cross_page_findings": [],
+  "p0_issues": [],
+  "p1_issues": [],
+  "p2_issues": [],
+  "p3_issues": [],
+  "false_positive_notes": [
+    "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+    "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+    "Negated boundary wording should be preserved: not a fixed or independently validated",
+    "Truity references are competitor/coverage benchmarks, not scientific proof claims.",
+    "Negated boundary wording should be preserved: does not predict",
+    "Negated boundary wording should be preserved: is not a health explanation and must not be used to predict"
+  ],
+  "required_edits": [],
+  "blocked_items": [],
+  "confidence": "medium",
+  "final_decision": "PASS"
+}

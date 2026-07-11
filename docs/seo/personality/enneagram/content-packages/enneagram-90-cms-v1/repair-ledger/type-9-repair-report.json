@@ -1,0 +1,220 @@
+{
+  "task_id": "DEEPREAD-REPAIR-TYPE-9-01",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "reviewed_assets": [
+    "wing-9w8-zh-CN",
+    "wing-9w1-zh-CN",
+    "wing-9w8-en",
+    "wing-9w1-en",
+    "subtype-type-9-self-preservation-zh-CN",
+    "subtype-type-9-social-zh-CN",
+    "subtype-type-9-one-to-one-zh-CN",
+    "subtype-type-9-self-preservation-en",
+    "subtype-type-9-social-en",
+    "subtype-type-9-one-to-one-en"
+  ],
+  "repaired_issue_ids": [
+    "DR-0202",
+    "DR-0203",
+    "DR-0204",
+    "DR-0205",
+    "DR-0206",
+    "DR-0207",
+    "DR-0208",
+    "DR-0209",
+    "DR-0210",
+    "DR-0211",
+    "DR-0212",
+    "DR-0213",
+    "DR-0214",
+    "DR-0215",
+    "DR-0216",
+    "DR-0217",
+    "DR-0218",
+    "DR-0219",
+    "DR-0220",
+    "DR-0221",
+    "DR-0222",
+    "DR-0223",
+    "DR-0224",
+    "DR-0225",
+    "DR-0226",
+    "DR-0227",
+    "DR-0228"
+  ],
+  "false_positive_issue_ids": [],
+  "remaining_open_issue_ids": [],
+  "changed_assets": [],
+  "before_after_summary": [],
+  "qa_results": {
+    "command": "node build-package.mjs qa-type 9",
+    "status": "PASS"
+  },
+  "duplicate_growth_geo_results": {
+    "status": "PASS",
+    "results": [
+      {
+        "asset_id": "wing-9w8-zh-CN",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 3895
+      },
+      {
+        "asset_id": "wing-9w1-zh-CN",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 3885
+      },
+      {
+        "asset_id": "wing-9w8-en",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 2238
+      },
+      {
+        "asset_id": "wing-9w1-en",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 2240
+      },
+      {
+        "asset_id": "subtype-type-9-self-preservation-zh-CN",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 2782
+      },
+      {
+        "asset_id": "subtype-type-9-social-zh-CN",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 2778
+      },
+      {
+        "asset_id": "subtype-type-9-one-to-one-zh-CN",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 2839
+      },
+      {
+        "asset_id": "subtype-type-9-self-preservation-en",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 2004
+      },
+      {
+        "asset_id": "subtype-type-9-social-en",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 2047
+      },
+      {
+        "asset_id": "subtype-type-9-one-to-one-en",
+        "unresolved_template": false,
+        "faq_thin": 0,
+        "geo_thin": 0,
+        "visible_length": 2052
+      }
+    ],
+    "duplicate_growth_clusters": []
+  },
+  "bilingual_alignment_results": {
+    "status": "PASS",
+    "results": [
+      {
+        "pair": "wing:9w8",
+        "pass": true
+      },
+      {
+        "pair": "wing:9w1",
+        "pass": true
+      },
+      {
+        "pair": "instinctual_subtype:type-9/self-preservation",
+        "pass": true
+      },
+      {
+        "pair": "instinctual_subtype:type-9/social",
+        "pass": true
+      },
+      {
+        "pair": "instinctual_subtype:type-9/one-to-one",
+        "pass": true
+      }
+    ]
+  },
+  "launch_boundary_results": {
+    "status": "PASS"
+  },
+  "final_decision": "PASS",
+  "hash_before_after": [
+    {
+      "asset_id": "wing-9w8-zh-CN",
+      "before_sha256": "c9ffb813b0885784ffd816fb8c818ab65e1fba01369be8fbfe700dcf1403b66e",
+      "after_sha256": "c9ffb813b0885784ffd816fb8c818ab65e1fba01369be8fbfe700dcf1403b66e",
+      "changed": false
+    },
+    {
+      "asset_id": "wing-9w1-zh-CN",
+      "before_sha256": "cf3c20d0ff11fed5cdccabd19b31bbb848a93ad810aac882284f731e7ed79ef3",
+      "after_sha256": "cf3c20d0ff11fed5cdccabd19b31bbb848a93ad810aac882284f731e7ed79ef3",
+      "changed": false
+    },
+    {
+      "asset_id": "wing-9w8-en",
+      "before_sha256": "b137b9f950276b6870fcec4d46e79ed3616950087d4002743238377decbb7a7e",
+      "after_sha256": "b137b9f950276b6870fcec4d46e79ed3616950087d4002743238377decbb7a7e",
+      "changed": false
+    },
+    {
+      "asset_id": "wing-9w1-en",
+      "before_sha256": "863ebb9f6c65c554c63e5755884cb3207969451612a7c15bbee987a2ae3fd42d",
+      "after_sha256": "863ebb9f6c65c554c63e5755884cb3207969451612a7c15bbee987a2ae3fd42d",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-9-self-preservation-zh-CN",
+      "before_sha256": "a61bfd6858bca655e6b679ed58522fa746d1dcb563e82ec1ff87eb3a847908fd",
+      "after_sha256": "a61bfd6858bca655e6b679ed58522fa746d1dcb563e82ec1ff87eb3a847908fd",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-9-social-zh-CN",
+      "before_sha256": "518719b64b1d72e25dd3c49704b14cc19f15792da392945ed20bb501db8723ad",
+      "after_sha256": "518719b64b1d72e25dd3c49704b14cc19f15792da392945ed20bb501db8723ad",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-9-one-to-one-zh-CN",
+      "before_sha256": "3edc36740cc249d805286eacd661422e09f97f90af621b47973dc8873b4b0779",
+      "after_sha256": "3edc36740cc249d805286eacd661422e09f97f90af621b47973dc8873b4b0779",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-9-self-preservation-en",
+      "before_sha256": "2f2a7add7e4cdba202bd9e772122a99b8307c8aa4012276239d33945abb728d2",
+      "after_sha256": "2f2a7add7e4cdba202bd9e772122a99b8307c8aa4012276239d33945abb728d2",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-9-social-en",
+      "before_sha256": "2f89d0cddbdd19235c6c9bb544a263523cb217d1c9617311f15ac52384780799",
+      "after_sha256": "2f89d0cddbdd19235c6c9bb544a263523cb217d1c9617311f15ac52384780799",
+      "changed": false
+    },
+    {
+      "asset_id": "subtype-type-9-one-to-one-en",
+      "before_sha256": "659e66405cf6739fe8788b3ecef6f16e7dd431d2bdae6910c0b85ca14c9f0472",
+      "after_sha256": "659e66405cf6739fe8788b3ecef6f16e7dd431d2bdae6910c0b85ca14c9f0472",
+      "changed": false
+    }
+  ]
+}

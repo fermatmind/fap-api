@@ -1,0 +1,45 @@
+{
+  "artifact": "ENNEAGRAM-90-DUPLICATE-REPORT",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "status": "PASS",
+  "policy": {
+    "visible_paragraph_ngram": {
+      "zh": "8-character",
+      "en": "5-word",
+      "threshold": 0.9,
+      "exclusions": [
+        "evidence section",
+        "comparison table"
+      ]
+    },
+    "meta_description_ngram": {
+      "zh": "5-character",
+      "en": "3-word",
+      "threshold": 0.9
+    },
+    "faq_set_ngram": {
+      "zh": "5-character",
+      "en": "3-word",
+      "threshold": 0.92
+    },
+    "exact_uniqueness_fields": [
+      "title",
+      "slug_locale",
+      "canonical",
+      "meta_title",
+      "meta_description",
+      "h1",
+      "search_intent_signature",
+      "faq_signature"
+    ]
+  },
+  "counts": {
+    "visible_paragraphs_checked": 1909,
+    "near_duplicate_visible_paragraphs": 0,
+    "near_duplicate_meta_descriptions": 0,
+    "near_duplicate_faq_sets": 0
+  },
+  "near_duplicate_visible_paragraphs": [],
+  "near_duplicate_meta_descriptions": [],
+  "near_duplicate_faq_sets": []
+}

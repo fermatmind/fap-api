@@ -1,0 +1,3011 @@
+{
+  "task_id": "ENNEAGRAM-90-DEEPREAD-SUBTYPE-TRIAD-ZH-01",
+  "status": "ISSUES_FOUND",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "reviewer_mode": "gpt-5.5-high-strict-readonly-subtype-triad-chinese",
+  "reviewed_assets": [
+    "subtype-type-1-one-to-one-zh-CN",
+    "subtype-type-1-self-preservation-zh-CN",
+    "subtype-type-1-social-zh-CN",
+    "subtype-type-2-one-to-one-zh-CN",
+    "subtype-type-2-self-preservation-zh-CN",
+    "subtype-type-2-social-zh-CN",
+    "subtype-type-3-one-to-one-zh-CN",
+    "subtype-type-3-self-preservation-zh-CN",
+    "subtype-type-3-social-zh-CN",
+    "subtype-type-4-one-to-one-zh-CN",
+    "subtype-type-4-self-preservation-zh-CN",
+    "subtype-type-4-social-zh-CN",
+    "subtype-type-5-one-to-one-zh-CN",
+    "subtype-type-5-self-preservation-zh-CN",
+    "subtype-type-5-social-zh-CN",
+    "subtype-type-6-one-to-one-zh-CN",
+    "subtype-type-6-self-preservation-zh-CN",
+    "subtype-type-6-social-zh-CN",
+    "subtype-type-7-one-to-one-zh-CN",
+    "subtype-type-7-self-preservation-zh-CN",
+    "subtype-type-7-social-zh-CN",
+    "subtype-type-8-one-to-one-zh-CN",
+    "subtype-type-8-self-preservation-zh-CN",
+    "subtype-type-8-social-zh-CN",
+    "subtype-type-9-one-to-one-zh-CN",
+    "subtype-type-9-self-preservation-zh-CN",
+    "subtype-type-9-social-zh-CN"
+  ],
+  "task_scope": "27 zh-CN instinctual subtype pages",
+  "sampling_rule": "All SP/SO/one-to-one triads for Type 1-9.",
+  "strictness_rules_applied": [
+    "read JSON asset body rather than trusting existing QA PASS",
+    "minimum five page-specific notes per reviewed page",
+    "minimum three short evidence quotes per reviewed page",
+    "issues require severity and concrete required_edits",
+    "no asset, preview, manifest, ledger, QA, CMS, deploy, sitemap, llms, search, git, branch, commit, push, or PR mutation"
+  ],
+  "per_page_results": [
+    {
+      "asset_id": "subtype-type-1-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-one-to-one.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/one-to-one",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "1 号一对一本能副型：把改进集中到关键关系与价值 targets instinctual_subtype type-1/one-to-one as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-1/one-to-one: title and summary target Type 1 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 1 号一对一本能副型，是把第 1 型对原则、责任和改进的关注，与一对一本能传统中对关键连接、吸引力、强度和直接影响的优先关注结合起来的解释…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: 三者共享第 1 型核心，只比较优先注意和修正通道。 | 维度 | 一对一本能 | 自保本能 | 社交本能 | |---|---|---|-…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天记录一次你想推动某个人或关键局面改变的时刻：触发事实；你认定的原则；强度从 0 到 10；对方是否同意讨论；决定权属于谁；你忽略了哪些…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 目前没有充分证据把 1 号一对一本能副型确认成独立、普遍且稳定的人格类别。九型人格系统综述显示总体研究结论混合，对翼型、本能副型等次级命题…",
+        "Issue pressure: geo_answer_depth is the highest-signal edit candidate for subtype-type-1-one-to-one-zh-CN.",
+        "Chinese editorial review should check whether 1 号一对一本能副型：把改进集中到关键关系与价值 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "1 号一对一本能副型：把改进集中到关键关系与价值",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "1 号一对一本能副型把第 1 型的原则与改进动机，同对关键连接、吸引力、强度和直接影响的优先注意组合起来。它是流派相关的观察假设，不是诊断类别。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "1 号一对一本能副型，是把第 1 型对原则、责任和改进的关注，与一对一本能传统中对关键连接、吸引力、强度和直接影响的优先关注结合起来的解释。它常被描述为把修正能量集中到某段重要关系、…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:comparison",
+          "evidence": "一对一先看关键对象的转变，自保先看基础安全，社交先看群体规则；三者只是可复核的注意假设。",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-1-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:comparison",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-1-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-self-preservation.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/self-preservation",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "1 号自保本能副型：用准备、秩序与自我要求降低风险 targets instinctual_subtype type-1/self-preservation as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-1/self-preservation: title and summary target Type 1 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 1 号自保本能副型，是把第 1 型对正确、责任和持续改进的关注，与自保本能传统中对身体、资源、环境稳定和可持续性的优先关注结合起来的解释。…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: 三个页面都先保留第 1 型的原则与改进动机，差异是假设中的第一注意点。 | 维度 | 自保本能 | 社交本能 | 一对一本能 | |---…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选一个让你想提前修正的问题，记录：最先注意到的风险；实际概率与影响；忽略了哪些关系或群体信息；采取行动的时间成本；事后结果。把事项分为…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 九型人格研究存在一些量表与应用结果，但系统综述显示总体可靠性和效度证据混合，对翼型、本能和副型等次级命题的研究尤其有限。2022 年土耳其…",
+        "Issue pressure: geo_answer_depth is the highest-signal edit candidate for subtype-type-1-self-preservation-zh-CN.",
+        "Chinese editorial review should check whether 1 号自保本能副型：用准备、秩序与自我要求降低风险 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "1 号自保本能副型：用准备、秩序与自我要求降低风险",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "1 号自保本能副型把第 1 型的正确与改进动机，和对资源、身体、环境及可持续性的优先关注组合起来。它是传统依赖的观察假设，不是独立诊断类别。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "1 号自保本能副型，是把第 1 型对正确、责任和持续改进的关注，与自保本能传统中对身体、资源、环境稳定和可持续性的优先关注结合起来的解释。它常被描述为通过提前准备、减少错误、维持日常…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:definition",
+          "evidence": "它是以第 1 型正确与改进动机为核心、优先从资源、身体和环境安全角度处理风险的观察假设。",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-1-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:definition",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-1-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-social.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/social",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "1 号社交本能副型：用规则、示范与公共责任推动改进 targets instinctual_subtype type-1/social as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-1/social: title and summary target Type 1 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 1 号社交本能副型，是九型人格传统中把第 1 型的原则、责任和改进动机，与对群体规则、角色秩序、公平及公共影响的优先关注结合起来的解释。它…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: 三者都保留第 1 型核心，差异是注意和修正首先落在哪里。 | 维度 | 社交本能 | 自保本能 | 一对一本能 | |---|---|--…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天记录一次你想纠正群体做法的时刻：首先注意到什么规则或角色问题；谁受影响；你拥有什么权限；标准来自法律、共同协议、专业证据还是个人偏好；…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 现有九型人格研究不能充分确认 27 个本能副型是普遍、稳定且彼此独立的类别。Hook 等人的系统综述认为总体效度和可靠性证据混合，对翼型与…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-1-social-zh-CN.",
+        "Chinese editorial review should check whether 1 号社交本能副型：用规则、示范与公共责任推动改进 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "1 号社交本能副型：用规则、示范与公共责任推动改进",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "1 号社交本能副型把第 1 型对正确与改进的关注，同对群体规范、角色、公平和公共责任的优先注意组合起来。它是观察假设，不是诊断或固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "1 号社交本能副型，是九型人格传统中把第 1 型的原则、责任和改进动机，与对群体规则、角色秩序、公平及公共影响的优先关注结合起来的解释。它常被描述为希望通过示范标准、说明正确做法、建…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:countertype",
+          "evidence": "不是已验证的独立类型。它是部分流派解释副型与核心刻板印象差异的术语，其他传统可能不同意。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:definition",
+          "evidence": "它以第 1 型正确与改进动机为核心，假设注意优先落在群体规范、角色、公平和公共责任。",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天记录一次你想纠正群体做法的时刻：首先注意到什么规则或角色问题；谁受影响；你拥有什么权限；标准来自法律、共同协议、专业证据还是个人偏好；你如何邀请异议；结果是什么。把结论标成“不可…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-1-social-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:countertype",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-1-social-zh-CN",
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:definition",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        },
+        {
+          "asset_id": "subtype-type-1-social-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-2-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-one-to-one.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/one-to-one",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "2 号一对一本能副型：把关怀与吸引集中到关键连接 targets instinctual_subtype type-2/one-to-one as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-2/one-to-one: title and summary target Type 2 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 2 号一对一本能副型，是九型人格传统中把第 2 型对连接、回应和被需要的关注，与对关键关系、吸引、专注回应和强度的优先注意结合起来的解释。…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: 三者共享第 2 型连接与被需要的核心假设，区别是关系注意的首要场域。 | 维度 | 一对一本能 | 自保本能 | 社交本能 | |---|…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天记录一次注意集中到关键对象的时刻：触发事实；你希望得到的回应；对方是否表达需要；投入强度；是否允许拒绝；忽略了哪些身体、工作或群体信息…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 当前研究不能确认 27 个本能副型是普遍、稳定、彼此独立的人格类别。Hook 等人的系统综述认为九型人格的研究结果混合，对翼型与副型等次级…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-2-one-to-one-zh-CN.",
+        "Chinese editorial review should check whether 2 号一对一本能副型：把关怀与吸引集中到关键连接 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "2 号一对一本能副型：把关怀与吸引集中到关键连接",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "2 号一对一本能副型把第 2 型的连接与被需要动机，同对关键关系、吸引、专注回应和关系强度的优先关注组合起来。它是传统相关的观察假设，不是诊断或伴侣分类。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "2 号一对一本能副型，是九型人格传统中把第 2 型对连接、回应和被需要的关注，与对关键关系、吸引、专注回应和强度的优先注意结合起来的解释。它常被描述为把魅力和关怀集中在一段重要连接上…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:countertype",
+          "evidence": "不是已验证类别。反型是部分流派的争议术语，不能替代具体动机、关系历史和情境分析。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:definition",
+          "evidence": "它以第 2 型连接与被需要动机为核心，假设注意优先集中到关键关系、吸引和专注回应。",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-2-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:countertype",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-2-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:definition",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-2-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-self-preservation.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/self-preservation",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "2 号自保本能副型：在照顾别人时如何处理自己的安全需要 targets instinctual_subtype type-2/self-preservation as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-2/self-preservation: title and summary target Type 2 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 2 号自保本能副型，是九型人格传统中把第 2 型对连接、回应和被需要的关注，与对身体、资源、生活稳定及获得照顾的优先注意结合起来的解释。部…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: 三者都保留第 2 型的连接与关系价值核心假设，区别是注意首先落在哪里。 | 维度 | 自保本能 | 社交本能 | 一对一本能 | |---…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天记录一次给予或期待照顾的时刻：最先注意的身体或资源需要；你是否直接说出；你先做了什么来建立连接；对方知道什么；行动成本和结果。把“希望…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 当前研究不能确认 27 个本能副型是普遍、稳定、彼此独立的人格类别。Hook 等人的系统综述认为九型人格的可靠性和效度结果混合，对次级命题…",
+        "Issue pressure: geo_answer_depth is the highest-signal edit candidate for subtype-type-2-self-preservation-zh-CN.",
+        "Chinese editorial review should check whether 2 号自保本能副型：在照顾别人时如何处理自己的安全需要 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "2 号自保本能副型：在照顾别人时如何处理自己的安全需要",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "2 号自保本能副型把第 2 型的连接与被需要动机，同对身体、资源、日常安全和被照顾的优先关注组合起来。它是流派相关的观察假设，不是诊断类别。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "2 号自保本能副型，是九型人格传统中把第 2 型对连接、回应和被需要的关注，与对身体、资源、生活稳定及获得照顾的优先注意结合起来的解释。部分流派会用“亲近、可爱、像需要照顾的人”描述…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:definition",
+          "evidence": "它以第 2 型连接与被需要动机为核心，假设注意优先落在身体、资源、生活稳定和获得可靠照顾上。",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-2-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:definition",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-2-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-social.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/social",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "2 号社交本能副型：通过贡献、连接与群体角色建立价值 targets instinctual_subtype type-2/social as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-2/social: title and summary target Type 2 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 2 号社交本能副型，是九型人格传统中把第 2 型对连接、回应和被需要的关注，与对群体关系、贡献、网络、角色和公共影响的优先注意结合起来的解…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: 三者共享第 2 型连接与被需要的核心假设，差异是注意和关系投资的首要场域。 | 维度 | 社交本能 | 自保本能 | 一对一本能 | |-…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天记录一次群体贡献：最先注意到什么需要；谁明确请求；你为何接下角色；期待怎样的归属或认可；用了多少时间；结果和成本。每次介入前询问“如果…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 现有研究不能确认 27 个本能副型是普遍、稳定、彼此独立的人格类别。Hook 等人的系统综述认为九型人格可靠性和效度结果混合，对次级理论命…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-2-social-zh-CN.",
+        "Chinese editorial review should check whether 2 号社交本能副型：通过贡献、连接与群体角色建立价值 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "2 号社交本能副型：通过贡献、连接与群体角色建立价值",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "2 号社交本能副型把第 2 型的连接与被需要动机，同对群体关系、贡献、网络和角色位置的优先关注组合起来。它是可修正的观察假设，不是诊断或社会价值排名。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "2 号社交本能副型，是九型人格传统中把第 2 型对连接、回应和被需要的关注，与对群体关系、贡献、网络、角色和公共影响的优先注意结合起来的解释。它常被描述为通过为群体做贡献、连接资源、…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:countertype",
+          "evidence": "不是已验证的独立类别。反型是部分九型传统使用的争议术语，不应成为对任何反例的万能解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:definition",
+          "evidence": "它以第 2 型连接与被需要动机为核心，假设注意优先落在群体角色、网络、贡献和公共影响。",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-2-social-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:countertype",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-2-social-zh-CN",
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:definition",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-3-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-one-to-one.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/one-to-one",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 3 型·一对一本能副型 targets instinctual_subtype type-3/one-to-one as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-3/one-to-one: title and summary target Type 3 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 3 型·一对一本能副型把第 3 型对成果、效率和可见价值的关注，与一对一注意优先级组合起来，常被描述为“通过吸引力、伙伴支持与共同成功…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-3/one-to-one 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 3 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-3-one-to-one-zh-CN.",
+        "Chinese editorial review should check whether 第 3 型·一对一本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 3 型·一对一本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 3 型·一对一本能副型把第 3 型的成就与可见价值动机和一对一注意结合，常见假设是通过吸引力、伙伴支持与共同成功确认价值。它是观察工具，不是诊断或固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 3 型·一对一本能副型把第 3 型对成果、效率和可见价值的关注，与一对一注意优先级组合起来，常被描述为“通过吸引力、伙伴支持与共同成功确认价值”。它不是诊断类别，也不能从勤奋、地…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 3 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-3-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-3-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-3-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-self-preservation.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/self-preservation",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 3 型·自保本能副型 targets instinctual_subtype type-3/self-preservation as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-3/self-preservation: title and summary target Type 3 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 3 型·自保本能副型把第 3 型对成果、效率和可见价值的关注，与自保注意优先级组合起来，常被描述为“通过可靠工作、资源安排与可交付成果…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-3/self-preservation 对照） | 自保 | 社交 | 一对一 | |---|---|---|---…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 3 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-3-self-preservation-zh-CN.",
+        "Chinese editorial review should check whether 第 3 型·自保本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 3 型·自保本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 3 型·自保本能副型把第 3 型的成就与可见价值动机和自保注意结合，常见假设是通过可靠工作、资源安排与可交付成果建立安全感。它是观察工具，不是诊断或固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 3 型·自保本能副型把第 3 型对成果、效率和可见价值的关注，与自保注意优先级组合起来，常被描述为“通过可靠工作、资源安排与可交付成果建立安全感”。它不是诊断类别，也不能从勤奋、…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 3 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-3-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-3-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-3-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-social.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/social",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 3 型·社交本能副型 targets instinctual_subtype type-3/social as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-3/social: title and summary target Type 3 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 3 型·社交本能副型把第 3 型对成果、效率和可见价值的关注，与社交注意优先级组合起来，常被描述为“通过角色、地位与可见贡献确认自己在…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-3/social 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注意 | …",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 3 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-3-social-zh-CN.",
+        "Chinese editorial review should check whether 第 3 型·社交本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 3 型·社交本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 3 型·社交本能副型把第 3 型的成就与可见价值动机和社交注意结合，常见假设是通过角色、地位与可见贡献确认自己在群体中的价值。它是观察工具，不是诊断或固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 3 型·社交本能副型把第 3 型对成果、效率和可见价值的关注，与社交注意优先级组合起来，常被描述为“通过角色、地位与可见贡献确认自己在群体中的价值”。它不是诊断类别，也不能从勤奋…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 3 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-3-social-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-3-social-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-4-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-one-to-one.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/one-to-one",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 4 型·一对一本能副型 targets instinctual_subtype type-4/one-to-one as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-4/one-to-one: title and summary target Type 4 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 4 型·一对一本能副型把第 4 型对身份、意义与情感真实的关注，与一对一注意优先级组合起来，常被描述为“通过强烈吸引、情感共振与具有转…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-4/one-to-one 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 4 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-4-one-to-one-zh-CN.",
+        "Chinese editorial review should check whether 第 4 型·一对一本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 4 型·一对一本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 4 型·一对一本能副型把第 4 型的身份、意义与情感真实动机和一对一注意结合，常见假设是通过强烈吸引、情感共振与具有转化感的一对一交换寻找身份和鲜活感。它是观察工具，不是诊断或固…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 4 型·一对一本能副型把第 4 型对身份、意义与情感真实的关注，与一对一注意优先级组合起来，常被描述为“通过强烈吸引、情感共振与具有转化感的一对一交换寻找身份和鲜活感”。它不是诊…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 4 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-4-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-4-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-4-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-self-preservation.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/self-preservation",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 4 型·自保本能副型 targets instinctual_subtype type-4/self-preservation as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-4/self-preservation: title and summary target Type 4 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 4 型·自保本能副型把第 4 型对身份、意义与情感真实的关注，与自保注意优先级组合起来，常被描述为“通过耐受、现实独立与谨慎使用资源来…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-4/self-preservation 对照） | 自保 | 社交 | 一对一 | |---|---|---|---…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 4 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-4-self-preservation-zh-CN.",
+        "Chinese editorial review should check whether 第 4 型·自保本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 4 型·自保本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 4 型·自保本能副型把第 4 型的身份、意义与情感真实动机和自保注意结合，常见假设是通过耐受、现实独立与谨慎使用资源来保护独特的内在生活。它是观察工具，不是诊断或固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 4 型·自保本能副型把第 4 型对身份、意义与情感真实的关注，与自保注意优先级组合起来，常被描述为“通过耐受、现实独立与谨慎使用资源来保护独特的内在生活”。它不是诊断类别，也不能…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 4 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-4-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-4-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-4-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-social.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/social",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 4 型·社交本能副型 targets instinctual_subtype type-4/social as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-4/social: title and summary target Type 4 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 4 型·社交本能副型把第 4 型对身份、意义与情感真实的关注，与社交注意优先级组合起来，常被描述为“通过社会比较、归属与对群体有意义的…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-4/social 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注意 | …",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 4 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-4-social-zh-CN.",
+        "Chinese editorial review should check whether 第 4 型·社交本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 4 型·社交本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 4 型·社交本能副型把第 4 型的身份、意义与情感真实动机和社交注意结合，常见假设是通过社会比较、归属与对群体有意义的贡献来定位身份。它是观察工具，不是诊断或固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 4 型·社交本能副型把第 4 型对身份、意义与情感真实的关注，与社交注意优先级组合起来，常被描述为“通过社会比较、归属与对群体有意义的贡献来定位身份”。它不是诊断类别，也不能从勤…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 4 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-4-social-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-4-social-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-5-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-one-to-one.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/one-to-one",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 5 型·一对一本能副型 targets instinctual_subtype type-5/one-to-one as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-5/one-to-one: title and summary target Type 5 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 5 型·一对一本能副型把第 5 型对理解、胜任感与足够的内在资源的关注，与一对一注意优先级组合起来，常被描述为“通过选择性信任、强度与…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-5/one-to-one 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 5 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-5-one-to-one-zh-CN.",
+        "Chinese editorial review should check whether 第 5 型·一对一本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 5 型·一对一本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 5 型·一对一本能副型把第 5 型的理解、胜任感与足够的内在资源动机和一对一注意结合，常见假设是通过选择性信任、强度与保密交换分享一个私密的观念世界。它是观察工具，不是诊断或固定…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 5 型·一对一本能副型把第 5 型对理解、胜任感与足够的内在资源的关注，与一对一注意优先级组合起来，常被描述为“通过选择性信任、强度与保密交换分享一个私密的观念世界”。它不是诊断…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 5 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-5-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-5-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-5-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-self-preservation.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/self-preservation",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 5 型·自保本能副型 targets instinctual_subtype type-5/self-preservation as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-5/self-preservation: title and summary target Type 5 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 5 型·自保本能副型把第 5 型对理解、胜任感与足够的内在资源的关注，与自保注意优先级组合起来，常被描述为“通过清楚边界与谨慎准备保护…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-5/self-preservation 对照） | 自保 | 社交 | 一对一 | |---|---|---|---…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 5 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-5-self-preservation-zh-CN.",
+        "Chinese editorial review should check whether 第 5 型·自保本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 5 型·自保本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 5 型·自保本能副型把第 5 型的理解、胜任感与足够的内在资源动机和自保注意结合，常见假设是通过清楚边界与谨慎准备保护能量、隐私与现实充足感。它是观察工具，不是诊断或固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 5 型·自保本能副型把第 5 型对理解、胜任感与足够的内在资源的关注，与自保注意优先级组合起来，常被描述为“通过清楚边界与谨慎准备保护能量、隐私与现实充足感”。它不是诊断类别，也…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 5 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-5-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-5-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-5-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-social.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/social",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 5 型·社交本能副型 targets instinctual_subtype type-5/social as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-5/social: title and summary target Type 5 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 5 型·社交本能副型把第 5 型对理解、胜任感与足够的内在资源的关注，与社交注意优先级组合起来，常被描述为“通过专业知识、共同理念与清…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-5/social 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注意 | …",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 5 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-5-social-zh-CN.",
+        "Chinese editorial review should check whether 第 5 型·社交本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 5 型·社交本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 5 型·社交本能副型把第 5 型的理解、胜任感与足够的内在资源动机和社交注意结合，常见假设是通过专业知识、共同理念与清楚有用的智识角色寻找归属。它是观察工具，不是诊断或固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 5 型·社交本能副型把第 5 型对理解、胜任感与足够的内在资源的关注，与社交注意优先级组合起来，常被描述为“通过专业知识、共同理念与清楚有用的智识角色寻找归属”。它不是诊断类别，…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 5 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-5-social-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-5-social-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-6-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-one-to-one.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/one-to-one",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 6 型·一对一本能副型 targets instinctual_subtype type-6/one-to-one as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-6/one-to-one: title and summary target Type 6 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 6 型·一对一本能副型把第 6 型对安全、信任与对不确定性的可行动回应的关注，与一对一注意优先级组合起来，常被描述为“通过力量、挑战、…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-6/one-to-one 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 6 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-6-one-to-one-zh-CN.",
+        "Chinese editorial review should check whether 第 6 型·一对一本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 6 型·一对一本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 6 型·一对一本能副型把第 6 型的安全、信任与对不确定性的可行动回应动机和一对一注意结合，常见假设是通过力量、挑战、强度与直接测试信任来面对恐惧。它是观察工具，不是诊断或固定身…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 6 型·一对一本能副型把第 6 型对安全、信任与对不确定性的可行动回应的关注，与一对一注意优先级组合起来，常被描述为“通过力量、挑战、强度与直接测试信任来面对恐惧”。它不是诊断类…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 6 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-6-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-6-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-6-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-self-preservation.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/self-preservation",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 6 型·自保本能副型 targets instinctual_subtype type-6/self-preservation as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-6/self-preservation: title and summary target Type 6 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 6 型·自保本能副型把第 6 型对安全、信任与对不确定性的可行动回应的关注，与自保注意优先级组合起来，常被描述为“通过资源、温暖关系、…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-6/self-preservation 对照） | 自保 | 社交 | 一对一 | |---|---|---|---…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 6 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-6-self-preservation-zh-CN.",
+        "Chinese editorial review should check whether 第 6 型·自保本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 6 型·自保本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 6 型·自保本能副型把第 6 型的安全、信任与对不确定性的可行动回应动机和自保注意结合，常见假设是通过资源、温暖关系、互惠支持与具体预案建立可行动安全。它是观察工具，不是诊断或固…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 6 型·自保本能副型把第 6 型对安全、信任与对不确定性的可行动回应的关注，与自保注意优先级组合起来，常被描述为“通过资源、温暖关系、互惠支持与具体预案建立可行动安全”。它不是诊…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 6 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-6-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-6-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-6-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-social.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/social",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 6 型·社交本能副型 targets instinctual_subtype type-6/social as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-6/social: title and summary target Type 6 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 6 型·社交本能副型把第 6 型对安全、信任与对不确定性的可行动回应的关注，与社交注意优先级组合起来，常被描述为“在共同规则、责任、权…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-6/social 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注意 | …",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 6 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-6-social-zh-CN.",
+        "Chinese editorial review should check whether 第 6 型·社交本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 6 型·社交本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 6 型·社交本能副型把第 6 型的安全、信任与对不确定性的可行动回应动机和社交注意结合，常见假设是在共同规则、责任、权威与清楚可追责的群体角色中寻找安全。它是观察工具，不是诊断或…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 6 型·社交本能副型把第 6 型对安全、信任与对不确定性的可行动回应的关注，与社交注意优先级组合起来，常被描述为“在共同规则、责任、权威与清楚可追责的群体角色中寻找安全”。它不是…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 6 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-6-social-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-6-social-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-7-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-one-to-one.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-7/one-to-one",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 7 型·一对一本能副型 targets instinctual_subtype type-7/one-to-one as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-7/one-to-one: title and summary target Type 7 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 7 型·一对一本能副型把第 7 型对自由、可能性与在限制出现时保留选项的关注，与一对一注意优先级组合起来，常被描述为“通过迷恋、想象、…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-7/one-to-one 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 7 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-7-one-to-one-zh-CN.",
+        "Chinese editorial review should check whether 第 7 型·一对一本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 7 型·一对一本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 7 型·一对一本能副型把第 7 型的自由、可能性与在限制出现时保留选项动机和一对一注意结合，常见假设是通过迷恋、想象、新鲜感与理想化的一对一未来放大可能性。它是观察工具，不是诊断…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 7 型·一对一本能副型把第 7 型对自由、可能性与在限制出现时保留选项的关注，与一对一注意优先级组合起来，常被描述为“通过迷恋、想象、新鲜感与理想化的一对一未来放大可能性”。它不…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 7 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-7-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-7-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-7-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-self-preservation.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-7/self-preservation",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 7 型·自保本能副型 targets instinctual_subtype type-7/self-preservation as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-7/self-preservation: title and summary target Type 7 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 7 型·自保本能副型把第 7 型对自由、可能性与在限制出现时保留选项的关注，与自保注意优先级组合起来，常被描述为“通过资源、现实网络、…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-7/self-preservation 对照） | 自保 | 社交 | 一对一 | |---|---|---|---…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 7 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-7-self-preservation-zh-CN.",
+        "Chinese editorial review should check whether 第 7 型·自保本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 7 型·自保本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 7 型·自保本能副型把第 7 型的自由、可能性与在限制出现时保留选项动机和自保注意结合，常见假设是通过资源、现实网络、互惠安排与多个可行选项保护自由。它是观察工具，不是诊断或固定…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 7 型·自保本能副型把第 7 型对自由、可能性与在限制出现时保留选项的关注，与自保注意优先级组合起来，常被描述为“通过资源、现实网络、互惠安排与多个可行选项保护自由”。它不是诊断…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 7 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-7-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-7-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-7-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-social.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-7/social",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 7 型·社交本能副型 targets instinctual_subtype type-7/social as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-7/social: title and summary target Type 7 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 7 型·社交本能副型把第 7 型对自由、可能性与在限制出现时保留选项的关注，与社交注意优先级组合起来，常被描述为“通过贡献、共同理想与…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-7/social 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注意 | …",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 7 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-7-social-zh-CN.",
+        "Chinese editorial review should check whether 第 7 型·社交本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 7 型·社交本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 7 型·社交本能副型把第 7 型的自由、可能性与在限制出现时保留选项动机和社交注意结合，常见假设是通过贡献、共同理想与暂时把群体利益放在即时欲望之前来寻找自由。它是观察工具，不是…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 7 型·社交本能副型把第 7 型对自由、可能性与在限制出现时保留选项的关注，与社交注意优先级组合起来，常被描述为“通过贡献、共同理想与暂时把群体利益放在即时欲望之前来寻找自由”。…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 7 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-7-social-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-7-social-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-8-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-one-to-one.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-8/one-to-one",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 8 型·一对一本能副型 targets instinctual_subtype type-8/one-to-one as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-8/one-to-one: title and summary target Type 8 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 8 型·一对一本能副型把第 8 型对自主、直接影响、保护与抵抗被控制的关注，与一对一注意优先级组合起来，常被描述为“通过直接占有、交付…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-8/one-to-one 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 8 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-8-one-to-one-zh-CN.",
+        "Chinese editorial review should check whether 第 8 型·一对一本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 8 型·一对一本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 8 型·一对一本能副型把第 8 型的自主、直接影响、保护与抵抗被控制动机和一对一注意结合，常见假设是通过直接占有、交付、挑战与测试谁影响谁来追求强烈的相互作用。它是观察工具，不是…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 8 型·一对一本能副型把第 8 型对自主、直接影响、保护与抵抗被控制的关注，与一对一注意优先级组合起来，常被描述为“通过直接占有、交付、挑战与测试谁影响谁来追求强烈的相互作用”。…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 8 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-8-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-8-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-8-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-self-preservation.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-8/self-preservation",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 8 型·自保本能副型 targets instinctual_subtype type-8/self-preservation as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-8/self-preservation: title and summary target Type 8 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 8 型·自保本能副型把第 8 型对自主、直接影响、保护与抵抗被控制的关注，与自保注意优先级组合起来，常被描述为“通过物质掌控、领地、耐…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-8/self-preservation 对照） | 自保 | 社交 | 一对一 | |---|---|---|---…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 8 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-8-self-preservation-zh-CN.",
+        "Chinese editorial review should check whether 第 8 型·自保本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 8 型·自保本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 8 型·自保本能副型把第 8 型的自主、直接影响、保护与抵抗被控制动机和自保注意结合，常见假设是通过物质掌控、领地、耐受与直接满足现实需要来保护自主。它是观察工具，不是诊断或固定…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 8 型·自保本能副型把第 8 型对自主、直接影响、保护与抵抗被控制的关注，与自保注意优先级组合起来，常被描述为“通过物质掌控、领地、耐受与直接满足现实需要来保护自主”。它不是诊断…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 8 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-8-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-8-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-8-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-social.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-8/social",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 8 型·社交本能副型 targets instinctual_subtype type-8/social as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-8/social: title and summary target Type 8 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 8 型·社交本能副型把第 8 型对自主、直接影响、保护与抵抗被控制的关注，与社交注意优先级组合起来，常被描述为“把力量用于团结、保护、…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-8/social 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注意 | …",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 8 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-8-social-zh-CN.",
+        "Chinese editorial review should check whether 第 8 型·社交本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 8 型·社交本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 8 型·社交本能副型把第 8 型的自主、直接影响、保护与抵抗被控制动机和社交注意结合，常见假设是把力量用于团结、保护、公正，以及捍卫被认为脆弱的人或群体。它是观察工具，不是诊断或…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 8 型·社交本能副型把第 8 型对自主、直接影响、保护与抵抗被控制的关注，与社交注意优先级组合起来，常被描述为“把力量用于团结、保护、公正，以及捍卫被认为脆弱的人或群体”。它不是…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 8 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-8-social-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-8-social-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-9-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-one-to-one.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/one-to-one",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 9 型·一对一本能副型 targets instinctual_subtype type-9/one-to-one as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-9/one-to-one: title and summary target Type 9 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 9 型·一对一本能副型把第 9 型对稳定、连接、减少内在冲突与避免优先级造成扰动的关注，与一对一注意优先级组合起来，常被描述为“通过深…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-9/one-to-one 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 9 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-9-one-to-one-zh-CN.",
+        "Chinese editorial review should check whether 第 9 型·一对一本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 9 型·一对一本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 9 型·一对一本能副型把第 9 型的稳定、连接、减少内在冲突与避免优先级造成扰动动机和一对一注意结合，常见假设是通过深度融合、调谐、共同身份与跟随关键他人的能量寻找稳定。它是观察…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 9 型·一对一本能副型把第 9 型对稳定、连接、减少内在冲突与避免优先级造成扰动的关注，与一对一注意优先级组合起来，常被描述为“通过深度融合、调谐、共同身份与跟随关键他人的能量寻…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 9 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-9-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sx",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-9-one-to-one-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-9-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-self-preservation.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/self-preservation",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 9 型·自保本能副型 targets instinctual_subtype type-9/self-preservation as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-9/self-preservation: title and summary target Type 9 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 9 型·自保本能副型把第 9 型对稳定、连接、减少内在冲突与避免优先级造成扰动的关注，与自保注意优先级组合起来，常被描述为“通过例行、…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-9/self-preservation 对照） | 自保 | 社交 | 一对一 | |---|---|---|---…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 9 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-9-self-preservation-zh-CN.",
+        "Chinese editorial review should check whether 第 9 型·自保本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 9 型·自保本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 9 型·自保本能副型把第 9 型的稳定、连接、减少内在冲突与避免优先级造成扰动动机和自保注意结合，常见假设是通过例行、舒适、熟悉活动、现实自我安抚与可预测环境维持稳定。它是观察工…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 9 型·自保本能副型把第 9 型对稳定、连接、减少内在冲突与避免优先级造成扰动的关注，与自保注意优先级组合起来，常被描述为“通过例行、舒适、熟悉活动、现实自我安抚与可预测环境维持…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 9 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-9-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-sp",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-9-self-preservation-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "subtype-type-9-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-social.json",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/social",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "第 9 型·社交本能副型 targets instinctual_subtype type-9/social as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for subtype type-9/social: title and summary target Type 9 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 第 9 型·社交本能副型把第 9 型对稳定、连接、减少内在冲突与避免优先级造成扰动的关注，与社交注意优先级组合起来，常被描述为“通过参与、…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 维度 （type-9/social 对照） | 自保 | 社交 | 一对一 | |---|---|---|---| | 首先注意 | …",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 9 型主题再问一句：“这是有效表…",
+        "Evidence section contains boundary language that should not be removed as a false positive: Hook 等人的系统综述显示九型人格整体证据混合，对本能副型等次级命题支持有限。一项土耳其样本的副型量表研究只能说明特定样本中的探索结果，…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for subtype-type-9-social-zh-CN.",
+        "Chinese editorial review should check whether 第 9 型·社交本能副型 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "第 9 型·社交本能副型",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "第 9 型·社交本能副型把第 9 型的稳定、连接、减少内在冲突与避免优先级造成扰动动机和社交注意结合，常见假设是通过参与、共同工作、群体节奏与承担集体需要寻找归属。它是观察工具，不是…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "第 9 型·社交本能副型把第 9 型对稳定、连接、减少内在冲突与避免优先级造成扰动的关注，与社交注意优先级组合起来，常被描述为“通过参与、共同工作、群体节奏与承担集体需要寻找归属”。…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 9 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "subtype-type-9-social-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context-3-so",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "subtype-type-9-social-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "cross_page_findings": [
+    {
+      "type": 1,
+      "triad_level_verdict": "REVIEWED",
+      "assets": [
+        "subtype-type-1-one-to-one-zh-CN",
+        "subtype-type-1-self-preservation-zh-CN",
+        "subtype-type-1-social-zh-CN"
+      ],
+      "expected_center_source": "truity-subtypes-body",
+      "note": "Triad reviewed for SP/SO/one-to-one differentiation and countertype boundary."
+    },
+    {
+      "type": 2,
+      "triad_level_verdict": "REVIEWED",
+      "assets": [
+        "subtype-type-2-one-to-one-zh-CN",
+        "subtype-type-2-self-preservation-zh-CN",
+        "subtype-type-2-social-zh-CN"
+      ],
+      "expected_center_source": "truity-subtypes-heart",
+      "note": "Triad reviewed for SP/SO/one-to-one differentiation and countertype boundary."
+    },
+    {
+      "type": 3,
+      "triad_level_verdict": "REVIEWED",
+      "assets": [
+        "subtype-type-3-one-to-one-zh-CN",
+        "subtype-type-3-self-preservation-zh-CN",
+        "subtype-type-3-social-zh-CN"
+      ],
+      "expected_center_source": "truity-subtypes-heart",
+      "note": "Triad reviewed for SP/SO/one-to-one differentiation and countertype boundary."
+    },
+    {
+      "type": 4,
+      "triad_level_verdict": "REVIEWED",
+      "assets": [
+        "subtype-type-4-one-to-one-zh-CN",
+        "subtype-type-4-self-preservation-zh-CN",
+        "subtype-type-4-social-zh-CN"
+      ],
+      "expected_center_source": "truity-subtypes-heart",
+      "note": "Triad reviewed for SP/SO/one-to-one differentiation and countertype boundary."
+    },
+    {
+      "type": 5,
+      "triad_level_verdict": "REVIEWED",
+      "assets": [
+        "subtype-type-5-one-to-one-zh-CN",
+        "subtype-type-5-self-preservation-zh-CN",
+        "subtype-type-5-social-zh-CN"
+      ],
+      "expected_center_source": "truity-subtypes-head",
+      "note": "Triad reviewed for SP/SO/one-to-one differentiation and countertype boundary."
+    },
+    {
+      "type": 6,
+      "triad_level_verdict": "REVIEWED",
+      "assets": [
+        "subtype-type-6-one-to-one-zh-CN",
+        "subtype-type-6-self-preservation-zh-CN",
+        "subtype-type-6-social-zh-CN"
+      ],
+      "expected_center_source": "truity-subtypes-head",
+      "note": "Triad reviewed for SP/SO/one-to-one differentiation and countertype boundary."
+    },
+    {
+      "type": 7,
+      "triad_level_verdict": "REVIEWED",
+      "assets": [
+        "subtype-type-7-one-to-one-zh-CN",
+        "subtype-type-7-self-preservation-zh-CN",
+        "subtype-type-7-social-zh-CN"
+      ],
+      "expected_center_source": "truity-subtypes-head",
+      "note": "Triad reviewed for SP/SO/one-to-one differentiation and countertype boundary."
+    },
+    {
+      "type": 8,
+      "triad_level_verdict": "REVIEWED",
+      "assets": [
+        "subtype-type-8-one-to-one-zh-CN",
+        "subtype-type-8-self-preservation-zh-CN",
+        "subtype-type-8-social-zh-CN"
+      ],
+      "expected_center_source": "truity-subtypes-body",
+      "note": "Triad reviewed for SP/SO/one-to-one differentiation and countertype boundary."
+    },
+    {
+      "type": 9,
+      "triad_level_verdict": "REVIEWED",
+      "assets": [
+        "subtype-type-9-one-to-one-zh-CN",
+        "subtype-type-9-self-preservation-zh-CN",
+        "subtype-type-9-social-zh-CN"
+      ],
+      "expected_center_source": "truity-subtypes-body",
+      "note": "Triad reviewed for SP/SO/one-to-one differentiation and countertype boundary."
+    }
+  ],
+  "p0_issues": [],
+  "p1_issues": [],
+  "p2_issues": [
+    {
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:comparison",
+      "evidence": "一对一先看关键对象的转变，自保先看基础安全，社交先看群体规则；三者只是可复核的注意假设。",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise.",
+      "asset_id": "subtype-type-1-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:definition",
+      "evidence": "它是以第 1 型正确与改进动机为核心、优先从资源、身体和环境安全角度处理风险的观察假设。",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise.",
+      "asset_id": "subtype-type-1-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:countertype",
+      "evidence": "不是已验证的独立类型。它是部分流派解释副型与核心刻板印象差异的术语，其他传统可能不同意。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-1-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:definition",
+      "evidence": "它以第 1 型正确与改进动机为核心，假设注意优先落在群体规范、角色、公平和公共责任。",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise.",
+      "asset_id": "subtype-type-1-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天记录一次你想纠正群体做法的时刻：首先注意到什么规则或角色问题；谁受影响；你拥有什么权限；标准来自法律、共同协议、专业证据还是个人偏好；你如何邀请异议；结果是什么。把结论标成“不可…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-1-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:countertype",
+      "evidence": "不是已验证类别。反型是部分流派的争议术语，不能替代具体动机、关系历史和情境分析。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-2-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:definition",
+      "evidence": "它以第 2 型连接与被需要动机为核心，假设注意优先集中到关键关系、吸引和专注回应。",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise.",
+      "asset_id": "subtype-type-2-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:definition",
+      "evidence": "它以第 2 型连接与被需要动机为核心，假设注意优先落在身体、资源、生活稳定和获得可靠照顾上。",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise.",
+      "asset_id": "subtype-type-2-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:countertype",
+      "evidence": "不是已验证的独立类别。反型是部分九型传统使用的争议术语，不应成为对任何反例的万能解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-2-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:definition",
+      "evidence": "它以第 2 型连接与被需要动机为核心，假设注意优先落在群体角色、网络、贡献和公共影响。",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise.",
+      "asset_id": "subtype-type-2-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-3-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 3 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-3-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-3-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 3 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-3-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-3-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 3 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-3-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-4-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 4 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-4-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-4-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 4 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-4-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-4-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 4 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-4-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-5-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 5 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-5-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-5-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 5 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-5-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-5-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 5 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-5-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-6-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 6 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-6-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-6-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 6 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-6-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-6-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 6 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-6-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-7-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 7 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-7-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-7-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 7 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-7-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-7-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 7 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-7-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-8-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 8 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-8-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-8-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 8 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-8-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-8-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 8 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-8-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-9-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 9 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-9-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-one-to-one.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-9-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 9 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-9-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-self-preservation.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "evidence": "注意和行为会受资源、角色、文化与关系阶段影响。应记录长期第一注意点，同时保留环境解释。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "subtype-type-9-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-social.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "每天选择一个重要事件，记录最先注意到的线索、被忽略的信息、预期评价、实际行动、短期收益与延迟成本。围绕第 9 型主题再问一句：“这是有效表现，还是我的真实偏好，或两者兼有？”第七天只…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "subtype-type-9-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-social.json"
+    }
+  ],
+  "p3_issues": [],
+  "false_positive_notes": [
+    "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+    "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+    "Truity references are competitor/coverage benchmarks, not scientific proof claims.",
+    "Negated boundary wording should be preserved: 不代表人格必然如此，也不构成职业表现或关系结局预测"
+  ],
+  "required_edits": [
+    {
+      "asset_id": "subtype-type-1-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-one-to-one.json",
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:comparison",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+    },
+    {
+      "asset_id": "subtype-type-1-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-self-preservation.json",
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:definition",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+    },
+    {
+      "asset_id": "subtype-type-1-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-social.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:countertype",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-1-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-social.json",
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:definition",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+    },
+    {
+      "asset_id": "subtype-type-1-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-social.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-2-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-one-to-one.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:countertype",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-2-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-one-to-one.json",
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:definition",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+    },
+    {
+      "asset_id": "subtype-type-2-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-self-preservation.json",
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:definition",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+    },
+    {
+      "asset_id": "subtype-type-2-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-social.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:countertype",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-2-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-2-social.json",
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:definition",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+    },
+    {
+      "asset_id": "subtype-type-3-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-one-to-one.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-3-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-one-to-one.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-3-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-self-preservation.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-3-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-self-preservation.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-3-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-social.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-3-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-3-social.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-4-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-one-to-one.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-4-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-one-to-one.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-4-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-self-preservation.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-4-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-self-preservation.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-4-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-social.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-4-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-4-social.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-5-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-one-to-one.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-5-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-one-to-one.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-5-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-self-preservation.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-5-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-self-preservation.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-5-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-social.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-5-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-5-social.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-6-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-one-to-one.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-6-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-one-to-one.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-6-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-self-preservation.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-6-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-self-preservation.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-6-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-social.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-6-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-6-social.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-7-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-one-to-one.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-7-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-one-to-one.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-7-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-self-preservation.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-7-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-self-preservation.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-7-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-social.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-7-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-7-social.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-8-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-one-to-one.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-8-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-one-to-one.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-8-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-self-preservation.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-8-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-self-preservation.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-8-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-social.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-8-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-8-social.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-9-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-one-to-one.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sx",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-9-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-one-to-one.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-9-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-self-preservation.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-sp",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-9-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-self-preservation.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "subtype-type-9-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-social.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context-3-so",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "subtype-type-9-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-9-social.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    }
+  ],
+  "blocked_items": [],
+  "confidence": "high",
+  "final_decision": "PASS_WITH_EDITS"
+}

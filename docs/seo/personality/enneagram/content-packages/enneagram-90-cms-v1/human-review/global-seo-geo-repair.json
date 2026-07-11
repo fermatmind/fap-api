@@ -1,0 +1,823 @@
+{
+  "task_id": "ENNEAGRAM-90-HUMAN-GLOBAL-SEO-GEO-REPAIR-01",
+  "status": "PASS",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "source_scan_task_id": "ENNEAGRAM-90-HUMAN-GLOBAL-SEO-GEO-SCAN-01",
+  "action": "SCOPED_GEO_CONTRACT_AND_SHORT_ANSWER_NORMALIZATION",
+  "reviewed_assets": [
+    "wing-1w9-zh-CN",
+    "wing-1w2-zh-CN",
+    "wing-2w1-zh-CN",
+    "wing-2w3-zh-CN",
+    "wing-3w2-zh-CN",
+    "wing-3w4-zh-CN",
+    "wing-4w3-zh-CN",
+    "wing-4w5-zh-CN",
+    "wing-5w4-zh-CN",
+    "wing-5w6-zh-CN",
+    "wing-6w5-zh-CN",
+    "wing-6w7-zh-CN",
+    "wing-7w6-zh-CN",
+    "wing-7w8-zh-CN",
+    "wing-8w7-zh-CN",
+    "wing-8w9-zh-CN",
+    "wing-9w8-zh-CN",
+    "wing-9w1-zh-CN",
+    "wing-1w9-en",
+    "wing-1w2-en",
+    "wing-2w1-en",
+    "wing-2w3-en",
+    "wing-3w2-en",
+    "wing-3w4-en",
+    "wing-4w3-en",
+    "wing-4w5-en",
+    "wing-5w4-en",
+    "wing-5w6-en",
+    "wing-6w5-en",
+    "wing-6w7-en",
+    "wing-7w6-en",
+    "wing-7w8-en",
+    "wing-8w7-en",
+    "wing-8w9-en",
+    "wing-9w8-en",
+    "wing-9w1-en",
+    "subtype-type-1-self-preservation-zh-CN",
+    "subtype-type-1-social-zh-CN",
+    "subtype-type-1-one-to-one-zh-CN",
+    "subtype-type-2-self-preservation-zh-CN",
+    "subtype-type-2-social-zh-CN",
+    "subtype-type-2-one-to-one-zh-CN",
+    "subtype-type-3-self-preservation-zh-CN",
+    "subtype-type-3-social-zh-CN",
+    "subtype-type-3-one-to-one-zh-CN",
+    "subtype-type-4-self-preservation-zh-CN",
+    "subtype-type-4-social-zh-CN",
+    "subtype-type-4-one-to-one-zh-CN",
+    "subtype-type-5-self-preservation-zh-CN",
+    "subtype-type-5-social-zh-CN",
+    "subtype-type-5-one-to-one-zh-CN",
+    "subtype-type-6-self-preservation-zh-CN",
+    "subtype-type-6-social-zh-CN",
+    "subtype-type-6-one-to-one-zh-CN",
+    "subtype-type-7-self-preservation-zh-CN",
+    "subtype-type-7-social-zh-CN",
+    "subtype-type-7-one-to-one-zh-CN",
+    "subtype-type-8-self-preservation-zh-CN",
+    "subtype-type-8-social-zh-CN",
+    "subtype-type-8-one-to-one-zh-CN",
+    "subtype-type-9-self-preservation-zh-CN",
+    "subtype-type-9-social-zh-CN",
+    "subtype-type-9-one-to-one-zh-CN",
+    "subtype-type-1-self-preservation-en",
+    "subtype-type-1-social-en",
+    "subtype-type-1-one-to-one-en",
+    "subtype-type-2-self-preservation-en",
+    "subtype-type-2-social-en",
+    "subtype-type-2-one-to-one-en",
+    "subtype-type-3-self-preservation-en",
+    "subtype-type-3-social-en",
+    "subtype-type-3-one-to-one-en",
+    "subtype-type-4-self-preservation-en",
+    "subtype-type-4-social-en",
+    "subtype-type-4-one-to-one-en",
+    "subtype-type-5-self-preservation-en",
+    "subtype-type-5-social-en",
+    "subtype-type-5-one-to-one-en",
+    "subtype-type-6-self-preservation-en",
+    "subtype-type-6-social-en",
+    "subtype-type-6-one-to-one-en",
+    "subtype-type-7-self-preservation-en",
+    "subtype-type-7-social-en",
+    "subtype-type-7-one-to-one-en",
+    "subtype-type-8-self-preservation-en",
+    "subtype-type-8-social-en",
+    "subtype-type-8-one-to-one-en",
+    "subtype-type-9-self-preservation-en",
+    "subtype-type-9-social-en",
+    "subtype-type-9-one-to-one-en"
+  ],
+  "repaired_issues": [
+    {
+      "asset_id": "wing-3w2-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-3w4-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-4w3-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-4w5-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-5w4-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-5w6-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-6w5-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-6w7-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-7w6-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-7w8-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-8w7-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-8w9-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-9w8-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-9w1-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-3w2-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-3w4-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-4w3-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-4w5-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-5w4-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-5w6-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-6w5-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-6w7-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-7w6-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-7w8-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-8w7-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-8w9-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-9w8-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-9w1-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-3-self-preservation-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-3-social-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-3-one-to-one-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-4-self-preservation-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-4-social-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-4-one-to-one-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-5-self-preservation-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-5-social-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-5-one-to-one-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-6-self-preservation-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-6-social-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-6-one-to-one-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-7-self-preservation-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-7-social-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-7-one-to-one-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-8-self-preservation-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-8-social-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-8-one-to-one-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-9-self-preservation-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-9-social-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-9-one-to-one-zh-CN",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-3-self-preservation-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-3-social-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-3-one-to-one-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-4-self-preservation-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-4-social-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-4-one-to-one-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-5-self-preservation-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-5-social-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-5-one-to-one-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-6-self-preservation-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-6-social-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-6-one-to-one-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-7-self-preservation-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-7-social-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-7-one-to-one-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-8-self-preservation-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-8-social-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-8-one-to-one-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-9-self-preservation-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-9-social-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "subtype-type-9-one-to-one-en",
+      "issue": "invalid_geo_kind",
+      "action": "Normalize third GEO block kind from practice to observation_protocol."
+    },
+    {
+      "asset_id": "wing-2w1-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "wing-2w3-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "wing-3w2-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "wing-3w4-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "wing-4w3-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "wing-4w5-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "wing-5w4-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "wing-5w6-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "wing-6w5-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "wing-6w7-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-1-social-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-3-self-preservation-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-3-social-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-3-one-to-one-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-4-self-preservation-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-4-social-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-4-one-to-one-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-5-self-preservation-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-5-social-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-5-one-to-one-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-6-self-preservation-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-6-social-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-6-one-to-one-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-7-self-preservation-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-7-social-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-7-one-to-one-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-8-self-preservation-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-8-social-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-8-one-to-one-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-9-self-preservation-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-9-social-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-9-one-to-one-zh-CN",
+      "issue": "geo_answer_not_standalone",
+      "action": "Expand short GEO answer with counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-3-self-preservation-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-3-social-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-3-one-to-one-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-4-self-preservation-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-4-social-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-4-one-to-one-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-5-self-preservation-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-5-social-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-5-one-to-one-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-6-self-preservation-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-6-social-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-6-one-to-one-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-7-self-preservation-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-7-social-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-7-one-to-one-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-8-self-preservation-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-8-social-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-8-one-to-one-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-9-self-preservation-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-9-social-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    },
+    {
+      "asset_id": "subtype-type-9-one-to-one-zh-CN",
+      "issue": "faq_too_thin",
+      "action": "Expand short FAQ answer with motive/context/counterexample boundary."
+    }
+  ],
+  "changed_assets": [
+    "subtype-type-1-social-zh-CN",
+    "subtype-type-3-one-to-one-en",
+    "subtype-type-3-one-to-one-zh-CN",
+    "subtype-type-3-self-preservation-en",
+    "subtype-type-3-self-preservation-zh-CN",
+    "subtype-type-3-social-en",
+    "subtype-type-3-social-zh-CN",
+    "subtype-type-4-one-to-one-en",
+    "subtype-type-4-one-to-one-zh-CN",
+    "subtype-type-4-self-preservation-en",
+    "subtype-type-4-self-preservation-zh-CN",
+    "subtype-type-4-social-en",
+    "subtype-type-4-social-zh-CN",
+    "subtype-type-5-one-to-one-en",
+    "subtype-type-5-one-to-one-zh-CN",
+    "subtype-type-5-self-preservation-en",
+    "subtype-type-5-self-preservation-zh-CN",
+    "subtype-type-5-social-en",
+    "subtype-type-5-social-zh-CN",
+    "subtype-type-6-one-to-one-en",
+    "subtype-type-6-one-to-one-zh-CN",
+    "subtype-type-6-self-preservation-en",
+    "subtype-type-6-self-preservation-zh-CN",
+    "subtype-type-6-social-en",
+    "subtype-type-6-social-zh-CN",
+    "subtype-type-7-one-to-one-en",
+    "subtype-type-7-one-to-one-zh-CN",
+    "subtype-type-7-self-preservation-en",
+    "subtype-type-7-self-preservation-zh-CN",
+    "subtype-type-7-social-en",
+    "subtype-type-7-social-zh-CN",
+    "subtype-type-8-one-to-one-en",
+    "subtype-type-8-one-to-one-zh-CN",
+    "subtype-type-8-self-preservation-en",
+    "subtype-type-8-self-preservation-zh-CN",
+    "subtype-type-8-social-en",
+    "subtype-type-8-social-zh-CN",
+    "subtype-type-9-one-to-one-en",
+    "subtype-type-9-one-to-one-zh-CN",
+    "subtype-type-9-self-preservation-en",
+    "subtype-type-9-self-preservation-zh-CN",
+    "subtype-type-9-social-en",
+    "subtype-type-9-social-zh-CN",
+    "wing-2w1-zh-CN",
+    "wing-2w3-zh-CN",
+    "wing-3w2-en",
+    "wing-3w2-zh-CN",
+    "wing-3w4-en",
+    "wing-3w4-zh-CN",
+    "wing-4w3-en",
+    "wing-4w3-zh-CN",
+    "wing-4w5-en",
+    "wing-4w5-zh-CN",
+    "wing-5w4-en",
+    "wing-5w4-zh-CN",
+    "wing-5w6-en",
+    "wing-5w6-zh-CN",
+    "wing-6w5-en",
+    "wing-6w5-zh-CN",
+    "wing-6w7-en",
+    "wing-6w7-zh-CN",
+    "wing-7w6-en",
+    "wing-7w6-zh-CN",
+    "wing-7w8-en",
+    "wing-7w8-zh-CN",
+    "wing-8w7-en",
+    "wing-8w7-zh-CN",
+    "wing-8w9-en",
+    "wing-8w9-zh-CN",
+    "wing-9w1-en",
+    "wing-9w1-zh-CN",
+    "wing-9w8-en",
+    "wing-9w8-zh-CN"
+  ],
+  "repair_summary": {
+    "invalid_geo_kind_normalized": 70,
+    "geo_answers_expanded": 32,
+    "faq_answers_expanded": 21
+  },
+  "qa_rerun": {
+    "affected_type_qa": [
+      "type-1",
+      "type-2",
+      "type-3",
+      "type-4",
+      "type-5",
+      "type-6",
+      "type-7",
+      "type-8",
+      "type-9"
+    ],
+    "global_qa": "PASS",
+    "duplicate_report": "PASS",
+    "meta_faq_paragraph_near_duplicate_check": "PASS"
+  },
+  "post_repair_scan": {
+    "status": "PASS",
+    "required_repairs": 0,
+    "geo_kinds": {
+      "definition": 90,
+      "comparison": 90,
+      "observation_protocol": 90
+    }
+  },
+  "final_decision": "PASS",
+  "blocked_items": []
+}

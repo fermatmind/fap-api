@@ -1,0 +1,40 @@
+{
+  "artifact": "ENNEAGRAM-90-CMS-PACKAGE-ASSEMBLY-DRY-RUN-01",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "status": "PASS",
+  "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality-public-assets:import --source=/Users/rainie/Desktop/GitHub/.codex-worktrees/fap-api-enneagram-90-content-package-freeze-01/docs/seo/personality/enneagram/content-packages/enneagram-90-cms-v1/cms-import-dry-run-package.json --framework=enneagram",
+  "command_contract": {
+    "class": "backend/app/Console/Commands/PersonalityPublicAssetsImport.php",
+    "validator": "backend/app/Services/Cms/PersonalityPublicContentAssetContract.php",
+    "write_flag_present": false,
+    "dry_run_default_without_write": true,
+    "supports_entity_types": [
+      "wing",
+      "instinctual_subtype"
+    ]
+  },
+  "exit_code": 0,
+  "summary": {
+    "dry_run": true,
+    "assets_found": 90,
+    "valid_count": 90,
+    "errors_count": 0,
+    "will_create": 90,
+    "will_update": 0,
+    "will_skip": 0,
+    "indexable_count": 0,
+    "sitemap_eligible_count": 0,
+    "llms_eligible_count": 0
+  },
+  "side_effect_assertions": {
+    "cms_write": false,
+    "database_write": false,
+    "publish": false,
+    "promote": false,
+    "indexability_change": false,
+    "sitemap_change": false,
+    "llms_change": false,
+    "search_release": false,
+    "deployment": false
+  }
+}

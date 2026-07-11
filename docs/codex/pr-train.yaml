@@ -38675,6 +38675,50 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/enneagram-90-content-package-freeze-01
+    title: "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01: freeze 90 Enneagram CMS assets"
+    train_scope: enneagram_90_content_package_freeze
+    status: user_authorized
+    scope:
+      - Add the reviewed ENNEAGRAM-90-CMS-V1 content package to the backend repository as draft-only CMS source assets.
+      - Include 36 bilingual wing pages and 54 bilingual instinctual subtype pages, totaling 90 JSON authority assets.
+      - Include QA, duplicate, repair-ledger, package manifest, generation ledger, source ledger, preview, and dry-run artifacts needed to reproduce the package freeze.
+      - Preserve draft/noindex/non-public/sitemap=false/llms=false/search=false boundaries.
+      - Keep this package freeze local/repository-only; no CMS writes, publishing, sitemap/llms release, search release, staging deploy, or production deploy.
+    allowed_paths:
+      - docs/seo/personality/enneagram/content-packages/enneagram-90-cms-v1/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Modify backend runtime code, public API code, database schema, production CMS content, sitemap runtime, llms runtime, JSON-LD runtime, canonical/noindex runtime behavior, permissions, scheduler behavior, secrets, staging deploy, or production deploy.
+      - Write CMS, run production imports, publish, enable indexability, enable sitemap/llms/search release, or add frontend fallback content.
+      - Add deterministic typing, diagnostic, career-success, relationship-compatibility, health, income, hiring, admission, or legal/financial outcome claims.
+    validation:
+      - node docs/seo/personality/enneagram/content-packages/enneagram-90-cms-v1/repair-ledger/deepread-repair-runner.mjs
+      - python3 -m json.tool docs/seo/personality/enneagram/content-packages/enneagram-90-cms-v1/package-manifest.json >/dev/null
+      - python3 -m json.tool docs/seo/personality/enneagram/content-packages/enneagram-90-cms-v1/qa/global.json >/dev/null
+      - python3 -m json.tool docs/seo/personality/enneagram/content-packages/enneagram-90-cms-v1/duplicate-report.json >/dev/null
+      - python3 -m json.tool docs/seo/personality/enneagram/content-packages/enneagram-90-cms-v1/repair-ledger/final-regression-report.json >/dev/null
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality-public-assets:import --source=../docs/seo/personality/enneagram/content-packages/enneagram-90-cms-v1/cms-import-dry-run-package.json --framework=enneagram
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: BIG5-EN-DOMAIN-CONTENT-PACKAGE-01
     repo: fap-api
     depends_on: []

@@ -1,4 +1,84 @@
 {
+  "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01": {
+    "id": "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/enneagram-90-content-package-freeze-01",
+    "title": "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01: freeze 90 Enneagram CMS assets",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2974",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "No dependencies for ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01."
+      },
+      "package_freeze": {
+        "status": "pass",
+        "evidence": "deepread-repair-runner completed with DEEPREAD_REPAIR_COMPLETE_GO, 228 unique issues closed, 9 type reports, and 90 dry-run-valid assets."
+      },
+      "cms_dry_run": {
+        "status": "pass",
+        "evidence": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan personality-public-assets:import reported assets_found=90 valid_count=90 errors_count=0 indexable_count=0 sitemap_eligible_count=0 llms_eligible_count=0."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to ENNEAGRAM-90 package directory plus docs/codex manifest/state."
+      },
+      "github_required": {
+        "status": "pass",
+        "evidence": "PR #2974 checks all completed successfully: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif upload."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T09:44:31.110Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Goal authorized ENNEAGRAM-90 content package freeze and manifest/state initialization; package remains draft-only and noindex."
+      },
+      {
+        "at": "2026-07-11T09:46:31.002Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Package runner, JSON/YAML checks, SQLite CMS import dry-run, and diff checks passed."
+      },
+      {
+        "at": "2026-07-11T09:46:57.642Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Ready to commit package freeze after scoped staging and cached diff check."
+      },
+      {
+        "at": "2026-07-11T09:47:52.261Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2974 for the locked ENNEAGRAM-90 content package freeze scope."
+      },
+      {
+        "at": "2026-07-11T09:53:41.315Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All GitHub checks reported success and PR is mergeable."
+      }
+    ]
+  },
   "CAREER-10K-CONTROLLED-ROLLOUT-01": {
     "id": "CAREER-10K-CONTROLLED-ROLLOUT-01",
     "repo": "fap-api",
@@ -20,10 +100,21 @@
     "publish_allowed": false,
     "deploy_allowed": false,
     "checks": {
-      "dependency": {"status": "pass", "evidence": "PR7 #2965 merged as db8eff09ae0f8b01ae5a40fd475872c014e49336."},
-      "focused_local": {"status": "pass", "evidence": "PR8 command tests pass 16 assertions; freeze classifier passes 4 assertions; changed-PHP Pint and Composer validation pass."},
-      "scope_validation": {"status": "pass", "evidence": "All changes are within the user-authorized PR8 manifest scope."},
-      "github_required": {"status": "pending"}
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR7 #2965 merged as db8eff09ae0f8b01ae5a40fd475872c014e49336."
+      },
+      "focused_local": {
+        "status": "pass",
+        "evidence": "PR8 command tests pass 16 assertions; freeze classifier passes 4 assertions; changed-PHP Pint and Composer validation pass."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "All changes are within the user-authorized PR8 manifest scope."
+      },
+      "github_required": {
+        "status": "pending"
+      }
     }
   },
   "CAREER-10K-CAPACITY-CHAOS-GATE-01": {
@@ -32,7 +123,11 @@
     "title": "CAREER-10K-CAPACITY-CHAOS-GATE-01 real 10k capacity and chaos gate",
     "base": "main",
     "branch": "codex/career-10k-capacity-chaos-gate-01",
-    "depends_on": ["CAREER-RUNTIME-SLO-ALERTING-01", "CAREER-DETAIL-READ-MODEL-10K-01", "CAREER-DETAIL-DELIVERY-10K-01"],
+    "depends_on": [
+      "CAREER-RUNTIME-SLO-ALERTING-01",
+      "CAREER-DETAIL-READ-MODEL-10K-01",
+      "CAREER-DETAIL-DELIVERY-10K-01"
+    ],
     "status": "merged",
     "commit_sha": "db8eff09ae0f8b01ae5a40fd475872c014e49336",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2965",
@@ -47,10 +142,22 @@
     "publish_allowed": false,
     "deploy_allowed": false,
     "checks": {
-      "dependency": {"status": "pass", "evidence": "PR4, PR5, and cross-repository PR6 are merged."},
-      "focused_local": {"status": "pass", "evidence": "2 command tests / 39 assertions and 2 freeze-classifier tests / 4 assertions passed; changed-PHP scoped Pint and composer validate passed."},
-      "scope_validation": {"status": "pass", "evidence": "All changed files are within the user-authorized PR7 manifest scope."},
-      "github_required": {"status": "pass", "evidence": "All required checks passed on head ab73cb02c99847a42c7bcc225bdb52dd9854952e before squash merge."}
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR4, PR5, and cross-repository PR6 are merged."
+      },
+      "focused_local": {
+        "status": "pass",
+        "evidence": "2 command tests / 39 assertions and 2 freeze-classifier tests / 4 assertions passed; changed-PHP scoped Pint and composer validate passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "All changed files are within the user-authorized PR7 manifest scope."
+      },
+      "github_required": {
+        "status": "pass",
+        "evidence": "All required checks passed on head ab73cb02c99847a42c7bcc225bdb52dd9854952e before squash merge."
+      }
     }
   },
   "CAREER-DETAIL-READ-MODEL-10K-01": {
@@ -59,7 +166,9 @@
     "title": "CAREER-DETAIL-READ-MODEL-10K-01 career detail read model for 10k",
     "base": "main",
     "branch": "codex/career-detail-read-model-10k-01",
-    "depends_on": ["CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01"],
+    "depends_on": [
+      "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01"
+    ],
     "status": "merged",
     "commit_sha": "48e73fa88ed73351495a584930540a7e4b873be3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2962",
@@ -140,7 +249,11 @@
     "title": "CAREER-RUNTIME-SLO-ALERTING-01 career runtime SLO and alerting",
     "base": "main",
     "branch": "codex/career-runtime-slo-alerting-01",
-    "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01", "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01", "CAREER-DIRECTORY-ERROR-SEMANTICS-01"],
+    "depends_on": [
+      "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01",
+      "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01",
+      "CAREER-DIRECTORY-ERROR-SEMANTICS-01"
+    ],
     "status": "merged",
     "commit_sha": "540a92ef8cc16e2e6efe1c8d65bfc939521d4dbc",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2960",
@@ -233,7 +346,9 @@
     "title": "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01 career public authority cache resilience",
     "base": "main",
     "branch": "codex/career-public-authority-cache-resilience-01",
-    "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01"],
+    "depends_on": [
+      "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01"
+    ],
     "status": "merged",
     "commit_sha": "746d4a1e9d4fec90de554b11128f1f933ab07df4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2956",
@@ -619,8 +734,14 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
     "checks": {
-      "sitemap_generator": {"status":"pass","evidence":"SitemapGeneratorTest passed 10 tests and 226 assertions, including 13 English and 13 Chinese Enneagram URLs."},
-      "mbti_ci": {"status":"pass","evidence":"backend/scripts/ci_verify_mbti.sh passed in the isolated SQLite test environment."}
+      "sitemap_generator": {
+        "status": "pass",
+        "evidence": "SitemapGeneratorTest passed 10 tests and 226 assertions, including 13 English and 13 Chinese Enneagram URLs."
+      },
+      "mbti_ci": {
+        "status": "pass",
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed in the isolated SQLite test environment."
+      }
     },
     "scope_validation": {
       "allowed_paths_only": true,
@@ -629,10 +750,30 @@
       "post_merge_revalidated": true
     },
     "transitions": [
-      {"at":"2026-07-10T08:26:00+08:00","from":"pending_dependency","to":"in_progress","note":"Dependency ENNEAGRAM-EN13-PUBLISH-GATE-01 is merged and post-merge revalidated."},
-      {"at":"2026-07-10T08:26:00+08:00","from":"in_progress","to":"committed","note":"Sitemap regression, MBTI CI, YAML/JSON, diff, and scope validation passed."},
-      {"at":"2026-07-10T08:27:00+08:00","from":"committed","to":"pr_open","note":"Opened PR #2837 for the locked English sitemap-locale scope."},
-      {"at":"2026-07-10T16:30:57+08:00","from":"ready_to_merge","to":"merged","note":"Reconciled GitHub PR #2837 squash merge c15b5085ca0b6806cba02dd872b89ff160f689a7 in origin/main; required checks were green and local/remote task branches are absent."}
+      {
+        "at": "2026-07-10T08:26:00+08:00",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "note": "Dependency ENNEAGRAM-EN13-PUBLISH-GATE-01 is merged and post-merge revalidated."
+      },
+      {
+        "at": "2026-07-10T08:26:00+08:00",
+        "from": "in_progress",
+        "to": "committed",
+        "note": "Sitemap regression, MBTI CI, YAML/JSON, diff, and scope validation passed."
+      },
+      {
+        "at": "2026-07-10T08:27:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2837 for the locked English sitemap-locale scope."
+      },
+      {
+        "at": "2026-07-10T16:30:57+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled GitHub PR #2837 squash merge c15b5085ca0b6806cba02dd872b89ff160f689a7 in origin/main; required checks were green and local/remote task branches are absent."
+      }
     ]
   },
   "ENNEAGRAM-EN13-CMS-DRY-RUN-01": {
@@ -652,7 +793,10 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
     "checks": {
-      "cms_dry_run": {"status":"pass","evidence":"Temporary SQLite dry-run planned 13 English draft assets (1 hub, 3 centres, 9 core types) with writes_attempted=false, writes_committed=false, and no release/external calls."}
+      "cms_dry_run": {
+        "status": "pass",
+        "evidence": "Temporary SQLite dry-run planned 13 English draft assets (1 hub, 3 centres, 9 core types) with writes_attempted=false, writes_committed=false, and no release/external calls."
+      }
     },
     "scope_validation": {
       "allowed_paths_only": true,
@@ -661,9 +805,24 @@
       "post_merge_revalidated": true
     },
     "transitions": [
-      {"at":"2026-07-10T08:35:00+08:00","from":"pending_dependency","to":"in_progress","note":"Dependency ENNEAGRAM-EN13-SITEMAP-LOCALE-01 is merged and locally revalidated."},
-      {"at":"2026-07-10T08:35:00+08:00","from":"in_progress","to":"committed","note":"Temporary SQLite CMS dry-run completed with zero writes and 13 planned English draft assets."},
-      {"at":"2026-07-10T16:30:57+08:00","from":"committed","to":"merged","note":"Reconciled GitHub PR #2840 squash merge 5ccc2988056689ef7608cf144ae60fe109747612 in origin/main; required checks were green and local/remote task branches are absent."}
+      {
+        "at": "2026-07-10T08:35:00+08:00",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "note": "Dependency ENNEAGRAM-EN13-SITEMAP-LOCALE-01 is merged and locally revalidated."
+      },
+      {
+        "at": "2026-07-10T08:35:00+08:00",
+        "from": "in_progress",
+        "to": "committed",
+        "note": "Temporary SQLite CMS dry-run completed with zero writes and 13 planned English draft assets."
+      },
+      {
+        "at": "2026-07-10T16:30:57+08:00",
+        "from": "committed",
+        "to": "merged",
+        "note": "Reconciled GitHub PR #2840 squash merge 5ccc2988056689ef7608cf144ae60fe109747612 in origin/main; required checks were green and local/remote task branches are absent."
+      }
     ]
   },
   "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01": {
@@ -44994,10 +45153,6 @@
         "status": "pass"
       },
       "github_required_checks": {
-        "evidence": "PR #2910 head 9c054367bbe17a06904e032d67af2db1cc915d13 passed all 15 checks: push and pull-request hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 jobs, plus Semgrep blocking secrets, Semgrep OSS, and SARIF upload.",
-        "status": "pass"
-      },
-      "github_required_checks": {
         "evidence": "PR #2903 head ec7a69f07cca835e90af80d2cdd3bf61a1cffcb1 passed all 15 checks: push and pull-request hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 jobs, plus Semgrep blocking secrets, Semgrep OSS, and SARIF upload.",
         "status": "pass"
       },
@@ -45073,14 +45228,6 @@
       },
       "full_ci": {
         "evidence": "backend/scripts/ci_verify_mbti.sh passed, including Big Five, personality, payment, migration, auth, OpenAPI, order-security, MBTI smoke/report/share, events, dependency, webhook/attempt, and strict queue backlog gates.",
-        "status": "pass"
-      },
-      "github_required_checks": {
-        "evidence": "PR #2915 head 317a6e6217271380b5d28671da9d8a40b11655f6 passed all 15 GitHub checks.",
-        "status": "pass"
-      },
-      "github_required_checks": {
-        "evidence": "PR #2912 head 334127e976c27d93a8b88b87e7b906190148db3c passed all 15 GitHub checks.",
         "status": "pass"
       },
       "github_required_checks": {
@@ -84947,20 +85094,70 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "checks": {
-      "manifest_registration": {"status": "pass", "evidence": "User authorized the locked PR train and current-PR-only registration."},
-      "package_dry_run": {"status": "pass", "evidence": "Five-asset V1 package: valid_count=5, errors_count=0, and all indexability gates false."},
-      "required_local_contract_test": {"status": "pass", "evidence": "14 tests / 421 assertions passed after legacy facet collision handling was corrected."},
-      "core_ci": {"status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed locally."},
-      "github_checks": {"status": "pass", "evidence": "PR #2832 required CI and Code Scanning checks passed after the rebase at 2026-07-10T00:07:43Z."}
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User authorized the locked PR train and current-PR-only registration."
+      },
+      "package_dry_run": {
+        "status": "pass",
+        "evidence": "Five-asset V1 package: valid_count=5, errors_count=0, and all indexability gates false."
+      },
+      "required_local_contract_test": {
+        "status": "pass",
+        "evidence": "14 tests / 421 assertions passed after legacy facet collision handling was corrected."
+      },
+      "core_ci": {
+        "status": "pass",
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed locally."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2832 required CI and Code Scanning checks passed after the rebase at 2026-07-10T00:07:43Z."
+      }
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
     "transitions": [
-      {"at": "2026-07-10T00:00:00Z", "from": "unregistered", "to": "planned", "note": "Registered only the current PR."},
-      {"at": "2026-07-10T00:00:00Z", "from": "planned", "to": "in_progress", "note": "Generated and validated the noindex draft-only package."},
-      {"at": "2026-07-10T00:00:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Dry-run, contract test, and core CI passed."},
-      {"at": "2026-07-10T00:00:00Z", "from": "local_checks_passed", "to": "pr_open", "note": "Opened PR #2832 and recorded green required checks prior to rebase."},
-      {"at": "2026-07-10T00:07:43Z", "from": "pr_open", "to": "ready_to_merge", "note": "Rebased PR checks and Code Scanning are green; merge policy permits squash auto-merge."},
-      {"at": "2026-07-10T00:13:50Z", "from": "ready_to_merge", "to": "merged", "note": "PR #2832 squash merged at 03fb5627dd0f45a55f31ab908e187f56b18dfa4b; origin/main contains the merge commit and the remote branch is deleted. Local primary worktree cleanup was not performed because it contains pre-existing user changes."}
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered only the current PR."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Generated and validated the noindex draft-only package."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Dry-run, contract test, and core CI passed."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened PR #2832 and recorded green required checks prior to rebase."
+      },
+      {
+        "at": "2026-07-10T00:07:43Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "Rebased PR checks and Code Scanning are green; merge policy permits squash auto-merge."
+      },
+      {
+        "at": "2026-07-10T00:13:50Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2832 squash merged at 03fb5627dd0f45a55f31ab908e187f56b18dfa4b; origin/main contains the merge commit and the remote branch is deleted. Local primary worktree cleanup was not performed because it contains pre-existing user changes."
+      }
     ]
   },
   "BIG5-EN-DOMAIN-IMPORT-DRYRUN-02": {
@@ -84969,7 +85166,9 @@
     "title": "BIG5-EN-DOMAIN-IMPORT-DRYRUN-02: validate five English domain assets without writes",
     "base": "main",
     "branch": "codex/big5-en-domain-import-dryrun-02",
-    "depends_on": ["BIG5-EN-DOMAIN-CONTENT-PACKAGE-01"],
+    "depends_on": [
+      "BIG5-EN-DOMAIN-CONTENT-PACKAGE-01"
+    ],
     "status": "merged",
     "commit_sha": "4c5b634be5b4c9fe3a2b2ea20a871867f0566b78",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2836",
@@ -84978,20 +85177,70 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "checks": {
-      "manifest_registration": {"status": "pass", "evidence": "User authorized the locked train and current-PR-only manifest/state registration."},
-      "dependency": {"status": "pass", "evidence": "PR #2832 is merged and origin/main contains 03fb5627dd0f45a55f31ab908e187f56b18dfa4b."},
-      "seed_static_gates": {"status": "pass", "evidence": "V1 envelope, five assets, body_md-only sections, noindex robots, and all three false indexability gates passed."},
-      "generic_importer_dry_run": {"status": "pass", "evidence": "Process-local SQLite dry-run returned assets_found=5, valid_count=5, errors_count=0, will_create=5, and all indexability counts=0; --write was not used."},
-      "github_checks": {"status": "pass", "evidence": "PR #2836 required CI and Code Scanning checks passed at 2026-07-10T00:23:15Z."}
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User authorized the locked train and current-PR-only manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2832 is merged and origin/main contains 03fb5627dd0f45a55f31ab908e187f56b18dfa4b."
+      },
+      "seed_static_gates": {
+        "status": "pass",
+        "evidence": "V1 envelope, five assets, body_md-only sections, noindex robots, and all three false indexability gates passed."
+      },
+      "generic_importer_dry_run": {
+        "status": "pass",
+        "evidence": "Process-local SQLite dry-run returned assets_found=5, valid_count=5, errors_count=0, will_create=5, and all indexability counts=0; --write was not used."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2836 required CI and Code Scanning checks passed at 2026-07-10T00:23:15Z."
+      }
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
     "transitions": [
-      {"at": "2026-07-10T00:00:00Z", "from": "unregistered", "to": "planned", "note": "Registered only after its dependency was merged."},
-      {"at": "2026-07-10T00:00:00Z", "from": "planned", "to": "in_progress", "note": "Started the generic importer dry-run without --write."},
-      {"at": "2026-07-10T00:00:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Five-asset V1/body_md/noindex gates and the process-local dry-run passed."},
-      {"at": "2026-07-10T00:17:22Z", "from": "local_checks_passed", "to": "pr_open", "note": "Opened PR #2836 for the no-write generic importer dry-run."},
-      {"at": "2026-07-10T00:23:15Z", "from": "pr_open", "to": "ready_to_merge", "note": "Required CI and Code Scanning are green; merge policy permits squash auto-merge."},
-      {"at": "2026-07-10T06:33:12Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled from GitHub: PR #2836 was squash merged at 4c5b634be5b4c9fe3a2b2ea20a871867f0566b78 on 2026-07-10T00:29:04Z; origin/main contains the merge commit and the remote task branch is deleted."}
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered only after its dependency was merged."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started the generic importer dry-run without --write."
+      },
+      {
+        "at": "2026-07-10T00:00:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Five-asset V1/body_md/noindex gates and the process-local dry-run passed."
+      },
+      {
+        "at": "2026-07-10T00:17:22Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened PR #2836 for the no-write generic importer dry-run."
+      },
+      {
+        "at": "2026-07-10T00:23:15Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "Required CI and Code Scanning are green; merge policy permits squash auto-merge."
+      },
+      {
+        "at": "2026-07-10T06:33:12Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled from GitHub: PR #2836 was squash merged at 4c5b634be5b4c9fe3a2b2ea20a871867f0566b78 on 2026-07-10T00:29:04Z; origin/main contains the merge commit and the remote task branch is deleted."
+      }
     ]
   },
   "BIG5-EN-DOMAIN-RUNTIME-CLOSEOUT-03": {
@@ -85000,7 +85249,9 @@
     "title": "BIG5-EN-DOMAIN-RUNTIME-CLOSEOUT-03: verify approved five-page English domain production import",
     "base": "main",
     "branch": "codex/big5-en-domain-runtime-closeout-03",
-    "depends_on": ["BIG5-EN-DOMAIN-IMPORT-DRYRUN-02"],
+    "depends_on": [
+      "BIG5-EN-DOMAIN-IMPORT-DRYRUN-02"
+    ],
     "status": "merged",
     "commit_sha": "7ff0de609f637923e552d78583095ea6440dd516",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2856",
@@ -85009,22 +85260,80 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
     "checks": {
-      "dependency": {"status": "pass", "evidence": "PR #2836 is merged at 4c5b634be5b4c9fe3a2b2ea20a871867f0566b78 and origin/main contains that merge commit."},
-      "exact_sha_production_authorization": {"status": "pass", "evidence": "User approved the bounded CMS import for release 931ea2d4e6f989e8cb0e93a9a96d347024228ecd and seed SHA-256 98213f603f3dccdd4f3699406878879f4f302c98081293bbfb92c534ebfb65d3."},
-      "bounded_production_import": {"status": "pass", "evidence": "Workflow run 29074124844 validated the deployed SHA and seed, dry-ran five assets, then updated five assets with valid_count=5, errors_count=0, and all indexability counts zero."},
-      "runtime_closeout": {"status": "pass", "evidence": "All five API and public-page readbacks passed: five FAQs, seven internal links, HTML noindex, and no matching paths in sitemap, llms, llms-full, or robots checks."},
-      "github_required_checks": {"status": "pass", "evidence": "PR #2856 CI and Code Scanning checks were all successful and GitHub reported mergeStateStatus=CLEAN before the ready-to-merge ledger update."},
-      "post_merge_cleanup": {"status": "pass", "evidence": "GitHub reports PR #2856 merged at 7ff0de609f637923e552d78583095ea6440dd516; origin/main contains that commit, local main is synced, and the local and remote task branches were removed."}
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2836 is merged at 4c5b634be5b4c9fe3a2b2ea20a871867f0566b78 and origin/main contains that merge commit."
+      },
+      "exact_sha_production_authorization": {
+        "status": "pass",
+        "evidence": "User approved the bounded CMS import for release 931ea2d4e6f989e8cb0e93a9a96d347024228ecd and seed SHA-256 98213f603f3dccdd4f3699406878879f4f302c98081293bbfb92c534ebfb65d3."
+      },
+      "bounded_production_import": {
+        "status": "pass",
+        "evidence": "Workflow run 29074124844 validated the deployed SHA and seed, dry-ran five assets, then updated five assets with valid_count=5, errors_count=0, and all indexability counts zero."
+      },
+      "runtime_closeout": {
+        "status": "pass",
+        "evidence": "All five API and public-page readbacks passed: five FAQs, seven internal links, HTML noindex, and no matching paths in sitemap, llms, llms-full, or robots checks."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2856 CI and Code Scanning checks were all successful and GitHub reported mergeStateStatus=CLEAN before the ready-to-merge ledger update."
+      },
+      "post_merge_cleanup": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #2856 merged at 7ff0de609f637923e552d78583095ea6440dd516; origin/main contains that commit, local main is synced, and the local and remote task branches were removed."
+      }
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
     "transitions": [
-      {"at": "2026-07-10T06:33:12Z", "from": "unregistered", "to": "manifest_registered", "note": "Registered after the exact-SHA production import succeeded and its bounded receipt was downloaded."},
-      {"at": "2026-07-10T06:33:12Z", "from": "manifest_registered", "to": "in_progress", "note": "Started the read-only five-page API/page, FAQ/internal-link, noindex, sitemap, robots, and llms closeout."},
-      {"at": "2026-07-10T06:33:12Z", "from": "in_progress", "to": "local_checks_passed", "note": "The closeout report JSON, manifest YAML, state JSON, git diff --check, and allowed-path scope validation passed."},
-      {"at": "2026-07-10T06:33:12Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the runtime closeout evidence at 36f8883a8fe9dfc4e26597c49be6a8bce8a7ed7e after rebasing onto the latest main."},
-      {"at": "2026-07-10T06:33:12Z", "from": "committed", "to": "pr_open", "note": "Opened PR #2856 for the locked runtime closeout scope; required GitHub checks are pending."},
-      {"at": "2026-07-10T06:33:12Z", "from": "pr_open", "to": "ready_to_merge", "note": "PR #2856 CI and Code Scanning checks are green and GitHub reports mergeStateStatus=CLEAN; the manifest permits squash auto-merge after the ledger update checks complete."},
-      {"at": "2026-07-10T06:58:54Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled from GitHub: PR #2856 squash merged at 7ff0de609f637923e552d78583095ea6440dd516; origin/main contains the merge commit, the local task worktree/branch were removed, and the remote task branch was already deleted."}
+      {
+        "at": "2026-07-10T06:33:12Z",
+        "from": "unregistered",
+        "to": "manifest_registered",
+        "note": "Registered after the exact-SHA production import succeeded and its bounded receipt was downloaded."
+      },
+      {
+        "at": "2026-07-10T06:33:12Z",
+        "from": "manifest_registered",
+        "to": "in_progress",
+        "note": "Started the read-only five-page API/page, FAQ/internal-link, noindex, sitemap, robots, and llms closeout."
+      },
+      {
+        "at": "2026-07-10T06:33:12Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "The closeout report JSON, manifest YAML, state JSON, git diff --check, and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-07-10T06:33:12Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the runtime closeout evidence at 36f8883a8fe9dfc4e26597c49be6a8bce8a7ed7e after rebasing onto the latest main."
+      },
+      {
+        "at": "2026-07-10T06:33:12Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2856 for the locked runtime closeout scope; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-10T06:33:12Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "PR #2856 CI and Code Scanning checks are green and GitHub reports mergeStateStatus=CLEAN; the manifest permits squash auto-merge after the ledger update checks complete."
+      },
+      {
+        "at": "2026-07-10T06:58:54Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled from GitHub: PR #2856 squash merged at 7ff0de609f637923e552d78583095ea6440dd516; origin/main contains the merge commit, the local task worktree/branch were removed, and the remote task branch was already deleted."
+      }
     ]
   },
   "BIG5-ZH-LEGACY-ROUTE-AUDIT-01": {
@@ -85128,7 +85437,9 @@
     "title": "BIG5-ZH-FACET-HUB-CONTENT-REPAIR-01: repair Chinese Big Five facet hub content package",
     "base": "main",
     "branch": "codex/big5-zh-facet-hub-content-repair-01",
-    "depends_on": ["BIG5-ZH-LEGACY-ROUTE-DEPRECATION-02"],
+    "depends_on": [
+      "BIG5-ZH-LEGACY-ROUTE-DEPRECATION-02"
+    ],
     "status": "merged",
     "commit_sha": "fc3e96c28963ea463a50e5b54a9f2fa68c348302",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2885",
@@ -85239,7 +85550,9 @@
     "title": "BIG5-ZH-FACET-OPENNESS-CONTENT-PACKAGE-01: build six Chinese openness Facet content packages",
     "base": "main",
     "branch": "codex/big5-zh-facet-openness-content-package-01",
-    "depends_on": ["BIG5-ZH-FACET-HUB-CONTENT-REPAIR-01"],
+    "depends_on": [
+      "BIG5-ZH-FACET-HUB-CONTENT-REPAIR-01"
+    ],
     "status": "merged",
     "commit_sha": "73bbc46ca2d63e04f79f8e85dd333d7c5d29c6e3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2888",
@@ -85338,7 +85651,9 @@
     "title": "BIG5-ZH-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01: build six Chinese conscientiousness Facet content packages",
     "base": "main",
     "branch": "codex/big5-zh-facet-conscientiousness-content-package-01",
-    "depends_on": ["BIG5-ZH-FACET-OPENNESS-CONTENT-PACKAGE-01"],
+    "depends_on": [
+      "BIG5-ZH-FACET-OPENNESS-CONTENT-PACKAGE-01"
+    ],
     "status": "merged",
     "commit_sha": "25832172ba15f49f9acd8ac4198d70c94d221927",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2892",
@@ -85437,7 +85752,9 @@
     "title": "BIG5-ZH-FACET-EXTRAVERSION-CONTENT-PACKAGE-01: build six Chinese extraversion Facet content packages",
     "base": "main",
     "branch": "codex/big5-zh-facet-extraversion-content-package-01",
-    "depends_on": ["BIG5-ZH-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01"],
+    "depends_on": [
+      "BIG5-ZH-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01"
+    ],
     "status": "merged",
     "commit_sha": "c49760acef4d0a1bb0077e5a1b5bfb3a2bd3bee3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2894",
@@ -85446,24 +85763,88 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
     "checks": {
-      "manifest_registration": { "status": "pass", "evidence": "The locked user goal explicitly authorized this PR id, six-page extraversion scope, dependency, and manifest/state registration." },
-      "dependency": { "status": "pass", "evidence": "PR #2892 is MERGED at 25832172ba15f49f9acd8ac4198d70c94d221927; origin/main contains the merge and both task branches were cleaned." },
-      "source_preflight": { "status": "pass", "evidence": "Confirmed the six existing zh-CN extraversion Facet content_stub routes, shared 5x6 ledger, NEO/IPIP-like route taxonomy, BFI-2/BFAS non-equivalence, and noindex backend authority boundary." },
-      "package_qa": { "status": "pass", "evidence": "Codex-native raw/review/repaired/V1/QA artifacts pass for exactly six zh-CN extraversion Facets; every asset has 9 substantive sections, 5 FAQ items, 7 structured internal links, body_md, shared-ledger inheritance, distinct construct boundaries, and locked noindex/index/sitemap/llms gates." },
-      "generic_importer_dry_run": { "status": "pass", "evidence": "No-write generic importer returned dry_run=1, assets_found=6, valid_count=6, errors_count=0, will_create=6, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets." },
-      "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions." },
-      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
-      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head 325acfccc2433046e2e1244e0451ee9cd8369fbd; PR #2894 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The locked user goal explicitly authorized this PR id, six-page extraversion scope, dependency, and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2892 is MERGED at 25832172ba15f49f9acd8ac4198d70c94d221927; origin/main contains the merge and both task branches were cleaned."
+      },
+      "source_preflight": {
+        "status": "pass",
+        "evidence": "Confirmed the six existing zh-CN extraversion Facet content_stub routes, shared 5x6 ledger, NEO/IPIP-like route taxonomy, BFI-2/BFAS non-equivalence, and noindex backend authority boundary."
+      },
+      "package_qa": {
+        "status": "pass",
+        "evidence": "Codex-native raw/review/repaired/V1/QA artifacts pass for exactly six zh-CN extraversion Facets; every asset has 9 substantive sections, 5 FAQ items, 7 structured internal links, body_md, shared-ledger inheritance, distinct construct boundaries, and locked noindex/index/sitemap/llms gates."
+      },
+      "generic_importer_dry_run": {
+        "status": "pass",
+        "evidence": "No-write generic importer returned dry_run=1, assets_found=6, valid_count=6, errors_count=0, will_create=6, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets."
+      },
+      "focused_contract": {
+        "status": "pass",
+        "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions."
+      },
+      "core_ci": {
+        "status": "pass",
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All 15 GitHub checks passed on head 325acfccc2433046e2e1244e0451ee9cd8369fbd; PR #2894 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision."
+      }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
     "transitions": [
-      { "at": "2026-07-10T15:29:44Z", "from": "unregistered", "to": "planned", "note": "Registered only the current locked extraversion six-page PR after the conscientiousness dependency merged and was cleaned." },
-      { "at": "2026-07-10T15:29:44Z", "from": "planned", "to": "in_progress", "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN extraversion Facet routes." },
-      { "at": "2026-07-10T15:43:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed." },
-      { "at": "2026-07-10T15:43:54Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped six-page extraversion package and train metadata at fe115fd8b461b6655d7bfcda3b53ed2d4bce5f27." },
-      { "at": "2026-07-10T15:44:51Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2894 from head c8decf66cd21c5d8f2e8b4c08ebaa4cf24cb1206." },
-      { "at": "2026-07-10T15:51:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." },
-      { "at": "2026-07-10T15:58:38Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in the dependent same-repository PR: PR #2894 is merged at c49760acef4d0a1bb0077e5a1b5bfb3a2bd3bee3; origin/main contains the merge, local main is synced and clean, and local/remote task branches are deleted." }
+      {
+        "at": "2026-07-10T15:29:44Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered only the current locked extraversion six-page PR after the conscientiousness dependency merged and was cleaned."
+      },
+      {
+        "at": "2026-07-10T15:29:44Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN extraversion Facet routes."
+      },
+      {
+        "at": "2026-07-10T15:43:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed."
+      },
+      {
+        "at": "2026-07-10T15:43:54Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the scoped six-page extraversion package and train metadata at fe115fd8b461b6655d7bfcda3b53ed2d4bce5f27."
+      },
+      {
+        "at": "2026-07-10T15:44:51Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2894 from head c8decf66cd21c5d8f2e8b4c08ebaa4cf24cb1206."
+      },
+      {
+        "at": "2026-07-10T15:51:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated."
+      },
+      {
+        "at": "2026-07-10T15:58:38Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in the dependent same-repository PR: PR #2894 is merged at c49760acef4d0a1bb0077e5a1b5bfb3a2bd3bee3; origin/main contains the merge, local main is synced and clean, and local/remote task branches are deleted."
+      }
     ]
   },
   "BIG5-ZH-FACET-AGREEABLENESS-CONTENT-PACKAGE-01": {
@@ -85472,7 +85853,9 @@
     "title": "BIG5-ZH-FACET-AGREEABLENESS-CONTENT-PACKAGE-01: build six Chinese agreeableness Facet content packages",
     "base": "main",
     "branch": "codex/big5-zh-facet-agreeableness-content-package-01",
-    "depends_on": ["BIG5-ZH-FACET-EXTRAVERSION-CONTENT-PACKAGE-01"],
+    "depends_on": [
+      "BIG5-ZH-FACET-EXTRAVERSION-CONTENT-PACKAGE-01"
+    ],
     "status": "merged",
     "commit_sha": "6ee912292dab2a1e217ad1ab15f17941bf1c5d0c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2896",
@@ -85481,24 +85864,88 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
     "checks": {
-      "manifest_registration": { "status": "pass", "evidence": "The locked user goal explicitly authorized this PR id, six-page agreeableness scope, dependency, and manifest/state registration." },
-      "dependency": { "status": "pass", "evidence": "PR #2894 is MERGED at c49760acef4d0a1bb0077e5a1b5bfb3a2bd3bee3; origin/main contains the merge and both task branches were cleaned." },
-      "source_preflight": { "status": "pass", "evidence": "Confirmed the six existing zh-CN agreeableness Facet content_stub routes, shared 5x6 ledger, NEO/IPIP-like route taxonomy, BFI-2/BFAS non-equivalence, and noindex backend authority boundary." },
-      "package_qa": { "status": "pass", "evidence": "Codex-native raw/review/repaired/V1/QA artifacts pass for exactly six zh-CN agreeableness Facets; every asset has 9 substantive sections, 5 FAQ items, 7 structured internal links, body_md, shared-ledger inheritance, distinct construct boundaries, and locked noindex/index/sitemap/llms gates." },
-      "generic_importer_dry_run": { "status": "pass", "evidence": "No-write generic importer returned dry_run=1, assets_found=6, valid_count=6, errors_count=0, will_create=6, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets." },
-      "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions." },
-      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
-      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head 4a7db26060b2a8bb5ba6a9298802da6ee3c46eb6; PR #2896 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The locked user goal explicitly authorized this PR id, six-page agreeableness scope, dependency, and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2894 is MERGED at c49760acef4d0a1bb0077e5a1b5bfb3a2bd3bee3; origin/main contains the merge and both task branches were cleaned."
+      },
+      "source_preflight": {
+        "status": "pass",
+        "evidence": "Confirmed the six existing zh-CN agreeableness Facet content_stub routes, shared 5x6 ledger, NEO/IPIP-like route taxonomy, BFI-2/BFAS non-equivalence, and noindex backend authority boundary."
+      },
+      "package_qa": {
+        "status": "pass",
+        "evidence": "Codex-native raw/review/repaired/V1/QA artifacts pass for exactly six zh-CN agreeableness Facets; every asset has 9 substantive sections, 5 FAQ items, 7 structured internal links, body_md, shared-ledger inheritance, distinct construct boundaries, and locked noindex/index/sitemap/llms gates."
+      },
+      "generic_importer_dry_run": {
+        "status": "pass",
+        "evidence": "No-write generic importer returned dry_run=1, assets_found=6, valid_count=6, errors_count=0, will_create=6, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets."
+      },
+      "focused_contract": {
+        "status": "pass",
+        "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions."
+      },
+      "core_ci": {
+        "status": "pass",
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All 15 GitHub checks passed on head 4a7db26060b2a8bb5ba6a9298802da6ee3c46eb6; PR #2896 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision."
+      }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
     "transitions": [
-      { "at": "2026-07-10T15:58:38Z", "from": "unregistered", "to": "planned", "note": "Registered only the current locked agreeableness six-page PR after the extraversion dependency merged and was cleaned." },
-      { "at": "2026-07-10T15:58:38Z", "from": "planned", "to": "in_progress", "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN agreeableness Facet routes." },
-      { "at": "2026-07-10T16:06:07Z", "from": "in_progress", "to": "local_checks_passed", "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed." },
-      { "at": "2026-07-10T16:06:42Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped six-page agreeableness package and train metadata at b2a522a5ccbc082138ff542121b41a94526fb4a8." },
-      { "at": "2026-07-10T16:07:38Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2896 from head e1acc041db157e262f699810d9f40987cc78079d." },
-      { "at": "2026-07-10T16:13:47Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." },
-      { "at": "2026-07-10T16:20:53Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in the dependent same-repository PR: PR #2896 is merged at 6ee912292dab2a1e217ad1ab15f17941bf1c5d0c; origin/main contains the merge, local main is synced and clean, and local/remote task branches are deleted." }
+      {
+        "at": "2026-07-10T15:58:38Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered only the current locked agreeableness six-page PR after the extraversion dependency merged and was cleaned."
+      },
+      {
+        "at": "2026-07-10T15:58:38Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN agreeableness Facet routes."
+      },
+      {
+        "at": "2026-07-10T16:06:07Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed."
+      },
+      {
+        "at": "2026-07-10T16:06:42Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the scoped six-page agreeableness package and train metadata at b2a522a5ccbc082138ff542121b41a94526fb4a8."
+      },
+      {
+        "at": "2026-07-10T16:07:38Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2896 from head e1acc041db157e262f699810d9f40987cc78079d."
+      },
+      {
+        "at": "2026-07-10T16:13:47Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated."
+      },
+      {
+        "at": "2026-07-10T16:20:53Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in the dependent same-repository PR: PR #2896 is merged at 6ee912292dab2a1e217ad1ab15f17941bf1c5d0c; origin/main contains the merge, local main is synced and clean, and local/remote task branches are deleted."
+      }
     ]
   },
   "BIG5-ZH-FACET-NEUROTICISM-CONTENT-PACKAGE-01": {
@@ -85507,7 +85954,9 @@
     "title": "BIG5-ZH-FACET-NEUROTICISM-CONTENT-PACKAGE-01: build six Chinese neuroticism Facet content packages",
     "base": "main",
     "branch": "codex/big5-zh-facet-neuroticism-content-package-01",
-    "depends_on": ["BIG5-ZH-FACET-AGREEABLENESS-CONTENT-PACKAGE-01"],
+    "depends_on": [
+      "BIG5-ZH-FACET-AGREEABLENESS-CONTENT-PACKAGE-01"
+    ],
     "status": "merged",
     "commit_sha": "20fd31b67ecc8b8f682539a2098883f1209a95d2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2899",
@@ -85516,24 +85965,88 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
     "checks": {
-      "manifest_registration": { "status": "pass", "evidence": "The locked user goal explicitly authorized this PR id, six-page neuroticism scope, dependency, and manifest/state registration." },
-      "dependency": { "status": "pass", "evidence": "PR #2896 is MERGED at 6ee912292dab2a1e217ad1ab15f17941bf1c5d0c; origin/main contains the merge and both task branches were cleaned." },
-      "source_preflight": { "status": "pass", "evidence": "Confirmed the six existing zh-CN emotional-sensitivity Facet content_stub routes, shared 5x6 ledger, NEO/IPIP-like route taxonomy, BFI-2/BFAS non-equivalence, non-diagnostic wording requirement, and noindex backend authority boundary." },
-      "package_qa": { "status": "pass", "evidence": "Codex-native raw/review/repaired/V1/QA artifacts pass for exactly six zh-CN emotional-sensitivity Facets; every asset has 9 substantive sections, 5 FAQ items, 7 structured internal links, body_md, shared-ledger inheritance, explicit non-diagnostic boundaries, and locked noindex/index/sitemap/llms gates." },
-      "generic_importer_dry_run": { "status": "pass", "evidence": "No-write generic importer returned dry_run=1, assets_found=6, valid_count=6, errors_count=0, will_create=6, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets." },
-      "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions." },
-      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
-      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head 619480be08375b4b5067a0ddaf654e68ae2a8a37; PR #2899 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The locked user goal explicitly authorized this PR id, six-page neuroticism scope, dependency, and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2896 is MERGED at 6ee912292dab2a1e217ad1ab15f17941bf1c5d0c; origin/main contains the merge and both task branches were cleaned."
+      },
+      "source_preflight": {
+        "status": "pass",
+        "evidence": "Confirmed the six existing zh-CN emotional-sensitivity Facet content_stub routes, shared 5x6 ledger, NEO/IPIP-like route taxonomy, BFI-2/BFAS non-equivalence, non-diagnostic wording requirement, and noindex backend authority boundary."
+      },
+      "package_qa": {
+        "status": "pass",
+        "evidence": "Codex-native raw/review/repaired/V1/QA artifacts pass for exactly six zh-CN emotional-sensitivity Facets; every asset has 9 substantive sections, 5 FAQ items, 7 structured internal links, body_md, shared-ledger inheritance, explicit non-diagnostic boundaries, and locked noindex/index/sitemap/llms gates."
+      },
+      "generic_importer_dry_run": {
+        "status": "pass",
+        "evidence": "No-write generic importer returned dry_run=1, assets_found=6, valid_count=6, errors_count=0, will_create=6, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets."
+      },
+      "focused_contract": {
+        "status": "pass",
+        "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions."
+      },
+      "core_ci": {
+        "status": "pass",
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All 15 GitHub checks passed on head 619480be08375b4b5067a0ddaf654e68ae2a8a37; PR #2899 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision."
+      }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
     "transitions": [
-      { "at": "2026-07-10T16:20:53Z", "from": "unregistered", "to": "planned", "note": "Registered only the current locked neuroticism six-page PR after the agreeableness dependency merged and was cleaned." },
-      { "at": "2026-07-10T16:20:53Z", "from": "planned", "to": "in_progress", "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN emotional-sensitivity Facet routes." },
-      { "at": "2026-07-10T16:30:05Z", "from": "in_progress", "to": "local_checks_passed", "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed." },
-      { "at": "2026-07-10T16:30:41Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped six-page emotional-sensitivity package and train metadata at 02f83b97d8bd6dd47423dbf0fe8810d3e74a2cf7." },
-      { "at": "2026-07-10T16:31:38Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2899 from head d492e155f81dcfb03744ac967aab3ab80353327d." },
-      { "at": "2026-07-10T16:37:58Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." },
-      { "at": "2026-07-10T16:45:57Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in the dependent same-repository PR: PR #2899 is merged at 20fd31b67ecc8b8f682539a2098883f1209a95d2; origin/main contains the merge, local main is synced and clean, and local/remote task branches are deleted." }
+      {
+        "at": "2026-07-10T16:20:53Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered only the current locked neuroticism six-page PR after the agreeableness dependency merged and was cleaned."
+      },
+      {
+        "at": "2026-07-10T16:20:53Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started Codex-native raw, skeptical-review, repaired, V1 seed, and QA artifacts for exactly six zh-CN emotional-sensitivity Facet routes."
+      },
+      {
+        "at": "2026-07-10T16:30:05Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Package QA, six-row no-write importer dry-run, focused public-content contract, full core CI, full-32 authority gate, schema syntax, diff, and allowed-path validation passed."
+      },
+      {
+        "at": "2026-07-10T16:30:41Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the scoped six-page emotional-sensitivity package and train metadata at 02f83b97d8bd6dd47423dbf0fe8810d3e74a2cf7."
+      },
+      {
+        "at": "2026-07-10T16:31:38Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2899 from head d492e155f81dcfb03744ac967aab3ab80353327d."
+      },
+      {
+        "at": "2026-07-10T16:37:58Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated."
+      },
+      {
+        "at": "2026-07-10T16:45:57Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in the dependent same-repository PR: PR #2899 is merged at 20fd31b67ecc8b8f682539a2098883f1209a95d2; origin/main contains the merge, local main is synced and clean, and local/remote task branches are deleted."
+      }
     ]
   },
   "BIG5-ZH-FACET-IMPORT-DRYRUN-01": {
@@ -85542,7 +86055,9 @@
     "title": "BIG5-ZH-FACET-IMPORT-DRYRUN-01: validate combined 31-page Chinese Facet import package",
     "base": "main",
     "branch": "codex/big5-zh-facet-import-dryrun-01",
-    "depends_on": ["BIG5-ZH-FACET-NEUROTICISM-CONTENT-PACKAGE-01"],
+    "depends_on": [
+      "BIG5-ZH-FACET-NEUROTICISM-CONTENT-PACKAGE-01"
+    ],
     "status": "merged",
     "commit_sha": "e5accaa5e1db2b28ac9f1fa52f6b9456570d50b9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2902",
@@ -85551,23 +86066,84 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
     "checks": {
-      "manifest_registration": { "status": "pass", "evidence": "The locked user goal explicitly authorized this exact 31-page dry-run PR and manifest/state registration." },
-      "dependency": { "status": "pass", "evidence": "PR #2899 is MERGED at 20fd31b67ecc8b8f682539a2098883f1209a95d2; origin/main contains the merge and both task branches were cleaned." },
-      "combined_package": { "status": "pass", "evidence": "Combined V1 seed contains exactly 31 unique zh-CN rows: one Facet Hub and thirty Facets; all use body_md, content_ready, noindex,follow, and zero index/sitemap/llms eligibility. Seed SHA-256 is 47605736590fab6f6eac6d374f947925946ef125f39a273f4d136b6d30df5815." },
-      "generic_importer_dry_run": { "status": "pass", "evidence": "No-write importer returned dry_run=1, assets_found=31, valid_count=31, errors_count=0, will_create=31, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets." },
-      "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions." },
-      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
-      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head 2a1990b5431e1411ba3ffae16f5d15aa762d6d34; PR #2902 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The locked user goal explicitly authorized this exact 31-page dry-run PR and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2899 is MERGED at 20fd31b67ecc8b8f682539a2098883f1209a95d2; origin/main contains the merge and both task branches were cleaned."
+      },
+      "combined_package": {
+        "status": "pass",
+        "evidence": "Combined V1 seed contains exactly 31 unique zh-CN rows: one Facet Hub and thirty Facets; all use body_md, content_ready, noindex,follow, and zero index/sitemap/llms eligibility. Seed SHA-256 is 47605736590fab6f6eac6d374f947925946ef125f39a273f4d136b6d30df5815."
+      },
+      "generic_importer_dry_run": {
+        "status": "pass",
+        "evidence": "No-write importer returned dry_run=1, assets_found=31, valid_count=31, errors_count=0, will_create=31, will_update=0, will_skip=0, and zero index/sitemap/llms eligible assets."
+      },
+      "focused_contract": {
+        "status": "pass",
+        "evidence": "PersonalityPublicContentAssetContractTest passed 14 tests and 421 assertions."
+      },
+      "core_ci": {
+        "status": "pass",
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end; the Big Five gate passed 1180 tests and 150138 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All 15 GitHub checks passed on head 2a1990b5431e1411ba3ffae16f5d15aa762d6d34; PR #2902 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision."
+      }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
     "transitions": [
-      { "at": "2026-07-10T16:45:57Z", "from": "unregistered", "to": "planned", "note": "Registered only the locked combined 31-page no-write dry-run PR after all five domain packages merged." },
-      { "at": "2026-07-10T16:45:57Z", "from": "planned", "to": "in_progress", "note": "Started deterministic composition and dry-run validation for one Hub plus thirty Facet assets." },
-      { "at": "2026-07-10T16:53:15Z", "from": "in_progress", "to": "local_checks_passed", "note": "Combined package QA, 31-row generic importer dry-run, focused contract, full core CI, full-32 authority gate, syntax, diff, and allowed-path validation passed without writes." },
-      { "at": "2026-07-10T16:53:57Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped 31-page combined dry-run package and train metadata at f8bc72477afa3f83fb1b7266a66853ea3d2cb7dd." },
-      { "at": "2026-07-10T16:54:53Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2902 from head 7c15e770abedfb93b21c8c9f6c9725d3bb48ecdb." },
-      { "at": "2026-07-10T17:01:19Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." },
-      { "at": "2026-07-10T18:24:32Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in the dependent same-repository PR: PR #2902 is merged at e5accaa5e1db2b28ac9f1fa52f6b9456570d50b9; origin/main contains the merge, local main is synced and clean, and local/remote task branches are deleted." }
+      {
+        "at": "2026-07-10T16:45:57Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered only the locked combined 31-page no-write dry-run PR after all five domain packages merged."
+      },
+      {
+        "at": "2026-07-10T16:45:57Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started deterministic composition and dry-run validation for one Hub plus thirty Facet assets."
+      },
+      {
+        "at": "2026-07-10T16:53:15Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Combined package QA, 31-row generic importer dry-run, focused contract, full core CI, full-32 authority gate, syntax, diff, and allowed-path validation passed without writes."
+      },
+      {
+        "at": "2026-07-10T16:53:57Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the scoped 31-page combined dry-run package and train metadata at f8bc72477afa3f83fb1b7266a66853ea3d2cb7dd."
+      },
+      {
+        "at": "2026-07-10T16:54:53Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2902 from head 7c15e770abedfb93b21c8c9f6c9725d3bb48ecdb."
+      },
+      {
+        "at": "2026-07-10T17:01:19Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated."
+      },
+      {
+        "at": "2026-07-10T18:24:32Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in the dependent same-repository PR: PR #2902 is merged at e5accaa5e1db2b28ac9f1fa52f6b9456570d50b9; origin/main contains the merge, local main is synced and clean, and local/remote task branches are deleted."
+      }
     ]
   },
   "BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01": {
@@ -85576,7 +86152,9 @@
     "title": "BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01: add SHA-bound 31-page production CMS importer workflow",
     "base": "main",
     "branch": "codex/big5-zh-facet-production-importer-ops-01",
-    "depends_on": ["BIG5-ZH-FACET-IMPORT-DRYRUN-01"],
+    "depends_on": [
+      "BIG5-ZH-FACET-IMPORT-DRYRUN-01"
+    ],
     "status": "merged",
     "commit_sha": "6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2904",
@@ -85585,22 +86163,80 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
     "checks": {
-      "manifest_registration": { "status": "pass", "evidence": "The locked user goal explicitly authorized this production importer operations PR and manifest/state registration without authorizing a workflow dispatch or production write." },
-      "dependency": { "status": "pass", "evidence": "PR #2902 is MERGED at e5accaa5e1db2b28ac9f1fa52f6b9456570d50b9; origin/main contains the merge and both task branches were cleaned." },
-      "workflow_contract": { "status": "pass", "evidence": "Workflow YAML parses; the checked-in seed independently passes the exact package, 31-row, 1 Hub plus 30 Facet, unique identity, zh-CN, content_ready, noindex, body_md, 9-section, 5-FAQ, and 7-link gates. The workflow requires exact release SHA, exact seed SHA-256, exact operator approval phrase, production environment secrets, generic dry-run before write, and a bounded receipt." },
-      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
-      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on final head 9a2f3ced11e077ddd15fa6792a35054dd86e72f2; PR #2904 was CLEAN, MERGEABLE, non-draft, and had no blocking review decision." },
-      "production_import_attempt": { "status": "failed", "evidence": "Authorized run 29116619791 verified release e5accaa5e1db2b28ac9f1fa52f6b9456570d50b9, seed SHA-256 47605736590fab6f6eac6d374f947925946ef125f39a273f4d136b6d30df5815, the 31-row contract, and a clean dry-run, then failed on a facet versus persisted facet_detail slug collision. Public readback proved one Facet Hub update and zero of thirty Facet detail updates." }
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The locked user goal explicitly authorized this production importer operations PR and manifest/state registration without authorizing a workflow dispatch or production write."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2902 is MERGED at e5accaa5e1db2b28ac9f1fa52f6b9456570d50b9; origin/main contains the merge and both task branches were cleaned."
+      },
+      "workflow_contract": {
+        "status": "pass",
+        "evidence": "Workflow YAML parses; the checked-in seed independently passes the exact package, 31-row, 1 Hub plus 30 Facet, unique identity, zh-CN, content_ready, noindex, body_md, 9-section, 5-FAQ, and 7-link gates. The workflow requires exact release SHA, exact seed SHA-256, exact operator approval phrase, production environment secrets, generic dry-run before write, and a bounded receipt."
+      },
+      "core_ci": {
+        "status": "pass",
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed and the personality full-32 authority gate passed 59 tests and 4847 assertions."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All 15 GitHub checks passed on final head 9a2f3ced11e077ddd15fa6792a35054dd86e72f2; PR #2904 was CLEAN, MERGEABLE, non-draft, and had no blocking review decision."
+      },
+      "production_import_attempt": {
+        "status": "failed",
+        "evidence": "Authorized run 29116619791 verified release e5accaa5e1db2b28ac9f1fa52f6b9456570d50b9, seed SHA-256 47605736590fab6f6eac6d374f947925946ef125f39a273f4d136b6d30df5815, the 31-row contract, and a clean dry-run, then failed on a facet versus persisted facet_detail slug collision. Public readback proved one Facet Hub update and zero of thirty Facet detail updates."
+      }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
     "transitions": [
-      { "at": "2026-07-10T18:24:32Z", "from": "unregistered", "to": "planned", "note": "Registered only the locked SHA-bound 31-page production importer operations PR after the combined dry-run dependency merged." },
-      { "at": "2026-07-10T18:24:32Z", "from": "planned", "to": "in_progress", "note": "Started the manually dispatched production-environment workflow contract; no workflow dispatch, CMS write, deploy, or secret change is authorized in this PR." },
-      { "at": "2026-07-10T18:34:22Z", "from": "in_progress", "to": "local_checks_passed", "note": "Workflow YAML, independent 31-row seed contract, required-string scan, full core CI, full-32 authority gate, manifest/state syntax, diff, and allowed-path validation passed; the workflow was not dispatched." },
-      { "at": "2026-07-10T18:36:21Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped guarded workflow and train metadata at dcbe5dbca4827039f92b6b7984867069c16ebc71." },
-      { "at": "2026-07-10T18:38:15Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2904 from head a67a207b3314ee27a402dd6c5703e1892262d7a3." },
-      { "at": "2026-07-10T18:44:22Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." },
-      { "at": "2026-07-11T00:40:41Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in the authorized atomicity repair PR: PR #2904 is merged at 6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768; origin/main contains the merge and local/remote task branches were cleaned. The later authorized production import attempt failed on a persistence identity/slug collision after one partial Hub update." }
+      {
+        "at": "2026-07-10T18:24:32Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered only the locked SHA-bound 31-page production importer operations PR after the combined dry-run dependency merged."
+      },
+      {
+        "at": "2026-07-10T18:24:32Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started the manually dispatched production-environment workflow contract; no workflow dispatch, CMS write, deploy, or secret change is authorized in this PR."
+      },
+      {
+        "at": "2026-07-10T18:34:22Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Workflow YAML, independent 31-row seed contract, required-string scan, full core CI, full-32 authority gate, manifest/state syntax, diff, and allowed-path validation passed; the workflow was not dispatched."
+      },
+      {
+        "at": "2026-07-10T18:36:21Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the scoped guarded workflow and train metadata at dcbe5dbca4827039f92b6b7984867069c16ebc71."
+      },
+      {
+        "at": "2026-07-10T18:38:15Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2904 from head a67a207b3314ee27a402dd6c5703e1892262d7a3."
+      },
+      {
+        "at": "2026-07-10T18:44:22Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated."
+      },
+      {
+        "at": "2026-07-11T00:40:41Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in the authorized atomicity repair PR: PR #2904 is merged at 6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768; origin/main contains the merge and local/remote task branches were cleaned. The later authorized production import attempt failed on a persistence identity/slug collision after one partial Hub update."
+      }
     ]
   },
   "SECURITY-124-API-01": {
@@ -85658,7 +86294,9 @@
     "title": "PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01: make public asset imports collision-safe and atomic",
     "base": "main",
     "branch": "codex/personality-public-asset-import-atomicity-01",
-    "depends_on": ["BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01"],
+    "depends_on": [
+      "BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01"
+    ],
     "status": "merged",
     "commit_sha": "36dccba4dc0b99ebdb5a51870a914a16a7fdb0f9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2929",
@@ -85667,21 +86305,76 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
     "checks": {
-      "manifest_registration": { "status": "pass", "evidence": "The user explicitly authorized this exact repair PR id, scope, and manifest/state registration after production run 29116619791 exposed a partial-write collision." },
-      "dependency": { "status": "pass", "evidence": "PR #2904 is MERGED at 6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768; origin/main contains the merge and its task branch was cleaned." },
-      "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 19 tests and 443 assertions, including persisted facet_detail slug collision preflight, forced second-write transaction rollback, and validation-error prevention of valid-subset persistence." },
-      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end after the final regression test; the Big Five gate passed and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
-      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head c533374662457b9efe05e098770519ccd7996d48; PR #2929 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The user explicitly authorized this exact repair PR id, scope, and manifest/state registration after production run 29116619791 exposed a partial-write collision."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2904 is MERGED at 6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768; origin/main contains the merge and its task branch was cleaned."
+      },
+      "focused_contract": {
+        "status": "pass",
+        "evidence": "PersonalityPublicContentAssetContractTest passed 19 tests and 443 assertions, including persisted facet_detail slug collision preflight, forced second-write transaction rollback, and validation-error prevention of valid-subset persistence."
+      },
+      "core_ci": {
+        "status": "pass",
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end after the final regression test; the Big Five gate passed and the personality full-32 authority gate passed 59 tests and 4847 assertions."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All 15 GitHub checks passed on head c533374662457b9efe05e098770519ccd7996d48; PR #2929 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision."
+      }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
     "transitions": [
-      { "at": "2026-07-11T00:40:41Z", "from": "unregistered", "to": "planned", "note": "Registered the authorized generic importer atomicity repair after the production-shaped facet/facet_detail slug collision was fully diagnosed." },
-      { "at": "2026-07-11T00:40:41Z", "from": "planned", "to": "in_progress", "note": "Started whole-package persistence preflight, transaction rollback, and focused regression coverage; no CMS or production write is in scope." },
-      { "at": "2026-07-11T00:57:11Z", "from": "in_progress", "to": "local_checks_passed", "note": "Focused importer contracts, full core CI, full-32 authority gate, syntax, formatting, manifest/state syntax, diff, and allowed-path validation passed; no CMS or production write was performed." },
-      { "at": "2026-07-11T00:58:30Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped importer atomicity repair, regression coverage, and authorized train metadata at e14ef197b6e8aa7b75fc5eb70b47843fadf42201." },
-      { "at": "2026-07-11T01:00:02Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2929; GitHub checks are pending." },
-      { "at": "2026-07-11T01:05:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." },
-      { "at": "2026-07-11T01:10:37Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in the dependent identity repair PR: PR #2929 is merged at 36dccba4dc0b99ebdb5a51870a914a16a7fdb0f9; origin/main contains the merge, detached local main is synced and clean, and local/remote task branches are deleted." }
+      {
+        "at": "2026-07-11T00:40:41Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered the authorized generic importer atomicity repair after the production-shaped facet/facet_detail slug collision was fully diagnosed."
+      },
+      {
+        "at": "2026-07-11T00:40:41Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started whole-package persistence preflight, transaction rollback, and focused regression coverage; no CMS or production write is in scope."
+      },
+      {
+        "at": "2026-07-11T00:57:11Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Focused importer contracts, full core CI, full-32 authority gate, syntax, formatting, manifest/state syntax, diff, and allowed-path validation passed; no CMS or production write was performed."
+      },
+      {
+        "at": "2026-07-11T00:58:30Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the scoped importer atomicity repair, regression coverage, and authorized train metadata at e14ef197b6e8aa7b75fc5eb70b47843fadf42201."
+      },
+      {
+        "at": "2026-07-11T01:00:02Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2929; GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-11T01:05:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated."
+      },
+      {
+        "at": "2026-07-11T01:10:37Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in the dependent identity repair PR: PR #2929 is merged at 36dccba4dc0b99ebdb5a51870a914a16a7fdb0f9; origin/main contains the merge, detached local main is synced and clean, and local/remote task branches are deleted."
+      }
     ]
   },
   "BIG5-ZH-FACET-IMPORT-IDENTITY-REPAIR-01": {
@@ -85690,7 +86383,9 @@
     "title": "BIG5-ZH-FACET-IMPORT-IDENTITY-REPAIR-01: align 30 Chinese Facet assets with persisted identities",
     "base": "main",
     "branch": "codex/big5-zh-facet-import-identity-repair-01",
-    "depends_on": ["PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01"],
+    "depends_on": [
+      "PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01"
+    ],
     "status": "merged",
     "commit_sha": "16a31281b1f73f6691b0c708cc3c6d62e58073f2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2930",
@@ -85699,23 +86394,84 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
     "checks": {
-      "manifest_registration": { "status": "pass", "evidence": "The user explicitly authorized this exact identity repair PR and fap-api manifest/state registration after the production-shaped facet versus facet_detail collision." },
-      "dependency": { "status": "pass", "evidence": "PR #2929 is MERGED at 36dccba4dc0b99ebdb5a51870a914a16a7fdb0f9; origin/main contains the merge and its local/remote task branches were cleaned." },
-      "package_identity": { "status": "pass", "evidence": "All five domain packages and the combined V1 seed regenerate and validate with exactly one facet_hub plus thirty facet_detail identities, 31 unique rows, body_md, content_ready, noindex,follow, and zero index/sitemap/llms eligibility. New seed SHA-256 is 88be4e72d18bf61b2be382423d754e46ca094ee6ed227430ed833b471ab0688d." },
-      "generic_importer_dry_run": { "status": "pass", "evidence": "Against an ephemeral SQLite database initialized from the canonical Big Five baseline, the corrected seed returned assets_found=31, valid_count=31, errors_count=0, will_create=0, will_update=31, will_skip=0, and zero discoverability eligibility; no production or persistent CMS write occurred." },
-      "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 19 tests and 443 assertions." },
-      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end; the Big Five gate passed 1186 tests and 150161 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
-      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head 44d3a6b5ff1e6a0c5863dcb0049a7bfc12607c7a; PR #2930 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The user explicitly authorized this exact identity repair PR and fap-api manifest/state registration after the production-shaped facet versus facet_detail collision."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2929 is MERGED at 36dccba4dc0b99ebdb5a51870a914a16a7fdb0f9; origin/main contains the merge and its local/remote task branches were cleaned."
+      },
+      "package_identity": {
+        "status": "pass",
+        "evidence": "All five domain packages and the combined V1 seed regenerate and validate with exactly one facet_hub plus thirty facet_detail identities, 31 unique rows, body_md, content_ready, noindex,follow, and zero index/sitemap/llms eligibility. New seed SHA-256 is 88be4e72d18bf61b2be382423d754e46ca094ee6ed227430ed833b471ab0688d."
+      },
+      "generic_importer_dry_run": {
+        "status": "pass",
+        "evidence": "Against an ephemeral SQLite database initialized from the canonical Big Five baseline, the corrected seed returned assets_found=31, valid_count=31, errors_count=0, will_create=0, will_update=31, will_skip=0, and zero discoverability eligibility; no production or persistent CMS write occurred."
+      },
+      "focused_contract": {
+        "status": "pass",
+        "evidence": "PersonalityPublicContentAssetContractTest passed 19 tests and 443 assertions."
+      },
+      "core_ci": {
+        "status": "pass",
+        "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end; the Big Five gate passed 1186 tests and 150161 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All 15 GitHub checks passed on head 44d3a6b5ff1e6a0c5863dcb0049a7bfc12607c7a; PR #2930 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision."
+      }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
     "transitions": [
-      { "at": "2026-07-11T01:12:20Z", "from": "unregistered", "to": "planned", "note": "Registered the authorized identity repair after the atomic importer dependency merged and cleaned." },
-      { "at": "2026-07-11T01:12:20Z", "from": "planned", "to": "in_progress", "note": "Started deterministic facet_detail identity alignment, combined seed regeneration, and workflow gate repair; no CMS write, workflow dispatch, or deploy is in scope." },
-      { "at": "2026-07-11T01:20:48Z", "from": "in_progress", "to": "local_checks_passed", "note": "Five package builds/validators, corrected 31-row composition, baseline-shaped importer dry-run, focused contract, full core CI, full-32 authority gate, JSON/YAML syntax, hash, diff, and allowed-path validation passed without production writes." },
-      { "at": "2026-07-11T01:21:59Z", "from": "local_checks_passed", "to": "committed", "note": "Rebased cleanly onto latest origin/main, reran package validators and the 19-test focused contract, and committed the scoped identity repair at fc50dc8ebfef5c200f955ddbc593b1a439c68225." },
-      { "at": "2026-07-11T01:23:04Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2930; GitHub checks are pending." },
-      { "at": "2026-07-11T01:28:37Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, seed hash, and allowed-path scope were revalidated." },
-      { "at": "2026-07-11T01:34:15Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled from GitHub: PR #2930 squash merged at 16a31281b1f73f6691b0c708cc3c6d62e58073f2; origin/main contains the merge and local/remote task branches were cleaned." }
+      {
+        "at": "2026-07-11T01:12:20Z",
+        "from": "unregistered",
+        "to": "planned",
+        "note": "Registered the authorized identity repair after the atomic importer dependency merged and cleaned."
+      },
+      {
+        "at": "2026-07-11T01:12:20Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started deterministic facet_detail identity alignment, combined seed regeneration, and workflow gate repair; no CMS write, workflow dispatch, or deploy is in scope."
+      },
+      {
+        "at": "2026-07-11T01:20:48Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Five package builds/validators, corrected 31-row composition, baseline-shaped importer dry-run, focused contract, full core CI, full-32 authority gate, JSON/YAML syntax, hash, diff, and allowed-path validation passed without production writes."
+      },
+      {
+        "at": "2026-07-11T01:21:59Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Rebased cleanly onto latest origin/main, reran package validators and the 19-test focused contract, and committed the scoped identity repair at fc50dc8ebfef5c200f955ddbc593b1a439c68225."
+      },
+      {
+        "at": "2026-07-11T01:23:04Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2930; GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-11T01:28:37Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, seed hash, and allowed-path scope were revalidated."
+      },
+      {
+        "at": "2026-07-11T01:34:15Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled from GitHub: PR #2930 squash merged at 16a31281b1f73f6691b0c708cc3c6d62e58073f2; origin/main contains the merge and local/remote task branches were cleaned."
+      }
     ]
   },
   "BIG5-ZH-FACET-RUNTIME-CLOSEOUT-01": {
@@ -85724,7 +86480,10 @@
     "title": "BIG5-ZH-FACET-RUNTIME-CLOSEOUT-01: verify approved 31-page Chinese Facet production import",
     "base": "main",
     "branch": "codex/big5-zh-facet-runtime-closeout-01",
-    "depends_on": ["BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01", "BIG5-ZH-FACET-IMPORT-IDENTITY-REPAIR-01"],
+    "depends_on": [
+      "BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01",
+      "BIG5-ZH-FACET-IMPORT-IDENTITY-REPAIR-01"
+    ],
     "status": "ready_to_merge",
     "commit_sha": "1d04c8b08",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2955",
@@ -85733,21 +86492,74 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "checks": {
-      "manifest_registration": {"status": "pass", "evidence": "The locked 11-item train explicitly authorized this final runtime closeout and current-PR-only manifest/state registration."},
-      "dependency": {"status": "pass", "evidence": "PR #2904 is merged at 6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768 and PR #2930 is merged at 16a31281b1f73f6691b0c708cc3c6d62e58073f2; origin/main contains both."},
-      "exact_sha_production_authorization": {"status": "pass", "evidence": "The operator approved the bounded CMS import for release 585c6c4d44a89b9883790081ec2a7c13bff731d3 and seed SHA-256 88be4e72d18bf61b2be382423d754e46ca094ee6ed227430ed833b471ab0688d."},
-      "bounded_production_import": {"status": "pass", "evidence": "Workflow run 29141944035 verified the deployed release and seed, dry-ran 31 assets, then updated 31 assets atomically with valid_count=31, errors_count=0, and all indexability counts zero."},
-      "runtime_closeout": {"status": "pass", "evidence": "All 31 API and public-page readbacks passed: at least nine sections, five FAQs, seven internal links, HTML noindex, canonical paths, and zero matching paths in sitemap, llms, llms-full, or robots surfaces."},
-      "github_required_checks": {"status": "pass", "evidence": "PR #2955 head 48b63e860 passed all nine reported CI and Code Scanning checks, including verify-bigfive and both MBTI verification jobs."}
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The locked 11-item train explicitly authorized this final runtime closeout and current-PR-only manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2904 is merged at 6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768 and PR #2930 is merged at 16a31281b1f73f6691b0c708cc3c6d62e58073f2; origin/main contains both."
+      },
+      "exact_sha_production_authorization": {
+        "status": "pass",
+        "evidence": "The operator approved the bounded CMS import for release 585c6c4d44a89b9883790081ec2a7c13bff731d3 and seed SHA-256 88be4e72d18bf61b2be382423d754e46ca094ee6ed227430ed833b471ab0688d."
+      },
+      "bounded_production_import": {
+        "status": "pass",
+        "evidence": "Workflow run 29141944035 verified the deployed release and seed, dry-ran 31 assets, then updated 31 assets atomically with valid_count=31, errors_count=0, and all indexability counts zero."
+      },
+      "runtime_closeout": {
+        "status": "pass",
+        "evidence": "All 31 API and public-page readbacks passed: at least nine sections, five FAQs, seven internal links, HTML noindex, canonical paths, and zero matching paths in sitemap, llms, llms-full, or robots surfaces."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2955 head 48b63e860 passed all nine reported CI and Code Scanning checks, including verify-bigfive and both MBTI verification jobs."
+      }
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
     "transitions": [
-      {"at": "2026-07-11T05:54:43Z", "from": "unregistered", "to": "manifest_registered", "note": "Registered after the exact-SHA 31-page production import succeeded and its bounded receipt was downloaded."},
-      {"at": "2026-07-11T05:54:43Z", "from": "manifest_registered", "to": "in_progress", "note": "Started the read-only 31-page API/page, FAQ/internal-link, noindex, sitemap, robots, and llms closeout."},
-      {"at": "2026-07-11T06:00:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "All 31 API and page probes plus five enumeration surfaces passed; report JSON, manifest YAML, state JSON, diff, and allowed-path scope validation passed."},
-      {"at": "2026-07-11T06:02:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact-SHA import receipt, 31-page runtime evidence, manifest registration, and dependency reconciliation at 1d04c8b08."},
-      {"at": "2026-07-11T06:03:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2955; required GitHub checks are pending."},
-      {"at": "2026-07-11T06:10:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required CI and Code Scanning checks passed; PR body, review state, changed files, and allowed-path scope were revalidated."}
+      {
+        "at": "2026-07-11T05:54:43Z",
+        "from": "unregistered",
+        "to": "manifest_registered",
+        "note": "Registered after the exact-SHA 31-page production import succeeded and its bounded receipt was downloaded."
+      },
+      {
+        "at": "2026-07-11T05:54:43Z",
+        "from": "manifest_registered",
+        "to": "in_progress",
+        "note": "Started the read-only 31-page API/page, FAQ/internal-link, noindex, sitemap, robots, and llms closeout."
+      },
+      {
+        "at": "2026-07-11T06:00:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All 31 API and page probes plus five enumeration surfaces passed; report JSON, manifest YAML, state JSON, diff, and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-07-11T06:02:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the exact-SHA import receipt, 31-page runtime evidence, manifest registration, and dependency reconciliation at 1d04c8b08."
+      },
+      {
+        "at": "2026-07-11T06:03:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2955; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-11T06:10:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine required CI and Code Scanning checks passed; PR body, review state, changed files, and allowed-path scope were revalidated."
+      }
     ]
   },
   "BIG5-124-PUBLISH-READINESS-AUDIT-01": {
@@ -85765,18 +86577,60 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "checks": {
-      "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."},
-      "production_baseline": {"status": "pass", "evidence": "Read-only production API evidence at 2026-07-11T06:36:10Z returned 62 zh-CN plus 62 en Big Five assets, 124 unique identities, and exactly ten Chinese redirect-only aliases."},
-      "scope": {"status": "pass", "evidence": "This audit records evidence only and does not mutate CMS, SEO runtime, redirects, indexability, sitemap, llms, frontend code, secrets, or production data."},
-      "github_required_checks": {"status": "pass", "evidence": "PR #2958 head 00001eac04a2b06cc5ed2afed74dcf8e062d81d5 passed all nine reported CI and Code Scanning checks, including verify-bigfive and both MBTI verification jobs."}
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."
+      },
+      "production_baseline": {
+        "status": "pass",
+        "evidence": "Read-only production API evidence at 2026-07-11T06:36:10Z returned 62 zh-CN plus 62 en Big Five assets, 124 unique identities, and exactly ten Chinese redirect-only aliases."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "This audit records evidence only and does not mutate CMS, SEO runtime, redirects, indexability, sitemap, llms, frontend code, secrets, or production data."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2958 head 00001eac04a2b06cc5ed2afed74dcf8e062d81d5 passed all nine reported CI and Code Scanning checks, including verify-bigfive and both MBTI verification jobs."
+      }
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
     "transitions": [
-      {"at": "2026-07-11T06:36:10Z", "from": "unregistered", "to": "in_progress", "note": "Registered the first locked audit scope in an isolated clean worktree; no production action is in scope."},
-      {"at": "2026-07-11T06:37:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Production baseline JSON, 124/114/10 assertions, manifest YAML, state JSON, diff, and exact allowed-path validation passed."},
-      {"at": "2026-07-11T06:38:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped production baseline, current manifest registration, and state initialization at 5e4be54af0efd0d36a7eb8e006d1707c869d844c."},
-      {"at": "2026-07-11T06:39:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the exact three-path audit scope and opened PR #2958; required checks are pending."},
-      {"at": "2026-07-11T06:44:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required CI and Code Scanning checks passed; review, merge policy, changed files, and allowed-path scope were revalidated."}
+      {
+        "at": "2026-07-11T06:36:10Z",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Registered the first locked audit scope in an isolated clean worktree; no production action is in scope."
+      },
+      {
+        "at": "2026-07-11T06:37:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Production baseline JSON, 124/114/10 assertions, manifest YAML, state JSON, diff, and exact allowed-path validation passed."
+      },
+      {
+        "at": "2026-07-11T06:38:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the scoped production baseline, current manifest registration, and state initialization at 5e4be54af0efd0d36a7eb8e006d1707c869d844c."
+      },
+      {
+        "at": "2026-07-11T06:39:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the exact three-path audit scope and opened PR #2958; required checks are pending."
+      },
+      {
+        "at": "2026-07-11T06:44:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine required CI and Code Scanning checks passed; review, merge policy, changed files, and allowed-path scope were revalidated."
+      }
     ]
   },
   "BIG5-EN-FACET-OPENNESS-CONTENT-PACKAGE-01": {
@@ -85785,7 +86639,9 @@
     "title": "BIG5-EN-FACET-OPENNESS-CONTENT-PACKAGE-01: strengthen six English Openness Facets",
     "base": "main",
     "branch": "codex/big5-en-facet-openness-content-package-01",
-    "depends_on": ["BIG5-124-PUBLISH-READINESS-AUDIT-01"],
+    "depends_on": [
+      "BIG5-124-PUBLISH-READINESS-AUDIT-01"
+    ],
     "status": "ready_to_merge",
     "commit_sha": "5c2a7a10e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2969",
@@ -85794,19 +86650,64 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "checks": {
-      "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."},
-      "dependency": {"status": "pass", "evidence": "PR #2958 is merged at 440dabb855fa0e86fbd9876a706c32da46f1c2a4 and origin/main contains that squash merge."},
-      "content_scope": {"status": "pass", "evidence": "Exactly six independently authored English Openness Facet assets contain nine substantive sections, five FAQs, seven internal links, source traceability, and balanced non-diagnostic boundaries."},
-      "local_validation": {"status": "pass", "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."},
-      "github_required_checks": {"status": "pass", "evidence": "PR #2968 head 763af5d8b passed all nine reported CI and Code Scanning checks, including content-pack-build-validate, verify-bigfive, and both MBTI verification jobs."}
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2958 is merged at 440dabb855fa0e86fbd9876a706c32da46f1c2a4 and origin/main contains that squash merge."
+      },
+      "content_scope": {
+        "status": "pass",
+        "evidence": "Exactly six independently authored English Openness Facet assets contain nine substantive sections, five FAQs, seven internal links, source traceability, and balanced non-diagnostic boundaries."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2968 head 763af5d8b passed all nine reported CI and Code Scanning checks, including content-pack-build-validate, verify-bigfive, and both MBTI verification jobs."
+      }
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
     "transitions": [
-      {"at": "2026-07-11T07:08:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the second locked train item after verifying its audit dependency on origin/main and started in an isolated clean worktree; no production action is in scope."},
-      {"at": "2026-07-11T07:16:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."},
-      {"at": "2026-07-11T07:18:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at cc7484c6f."},
-      {"at": "2026-07-11T07:20:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2968; required GitHub checks are pending."},
-      {"at": "2026-07-11T09:01:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."}
+      {
+        "at": "2026-07-11T07:08:00Z",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Registered the second locked train item after verifying its audit dependency on origin/main and started in an isolated clean worktree; no production action is in scope."
+      },
+      {
+        "at": "2026-07-11T07:16:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."
+      },
+      {
+        "at": "2026-07-11T07:18:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at cc7484c6f."
+      },
+      {
+        "at": "2026-07-11T07:20:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2968; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-11T09:01:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."
+      }
     ]
   },
   "BIG5-EN-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01": {
@@ -85815,7 +86716,9 @@
     "title": "BIG5-EN-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01: strengthen six English Conscientiousness Facets",
     "base": "main",
     "branch": "codex/big5-en-facet-conscientiousness-content-package-01",
-    "depends_on": ["BIG5-EN-FACET-OPENNESS-CONTENT-PACKAGE-01"],
+    "depends_on": [
+      "BIG5-EN-FACET-OPENNESS-CONTENT-PACKAGE-01"
+    ],
     "status": "ready_to_merge",
     "commit_sha": "7c3568052",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2970",
@@ -85824,19 +86727,64 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "checks": {
-      "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."},
-      "dependency": {"status": "pass", "evidence": "PR #2968 is merged at 37b0ebd4c62f77fdd6bcec0c35de1bca965f4c17 and origin/main contains that squash merge."},
-      "content_scope": {"status": "pass", "evidence": "Exactly six independently authored English Conscientiousness Facet assets contain nine substantive sections, five FAQs, seven internal links, source traceability, and balanced non-diagnostic boundaries."},
-      "local_validation": {"status": "pass", "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."},
-      "github_required_checks": {"status": "pass", "evidence": "PR #2969 head d1648e9de passed all nine reported CI and Code Scanning checks, including content-pack-build-validate, verify-bigfive, and both MBTI verification jobs."}
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2968 is merged at 37b0ebd4c62f77fdd6bcec0c35de1bca965f4c17 and origin/main contains that squash merge."
+      },
+      "content_scope": {
+        "status": "pass",
+        "evidence": "Exactly six independently authored English Conscientiousness Facet assets contain nine substantive sections, five FAQs, seven internal links, source traceability, and balanced non-diagnostic boundaries."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2969 head d1648e9de passed all nine reported CI and Code Scanning checks, including content-pack-build-validate, verify-bigfive, and both MBTI verification jobs."
+      }
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
     "transitions": [
-      {"at": "2026-07-11T09:10:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the third locked train item after verifying its Openness dependency on origin/main and started in an isolated clean worktree; no production action is in scope."},
-      {"at": "2026-07-11T09:15:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."},
-      {"at": "2026-07-11T09:17:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at 5c2a7a10e."},
-      {"at": "2026-07-11T09:19:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2969; required GitHub checks are pending."},
-      {"at": "2026-07-11T09:26:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."}
+      {
+        "at": "2026-07-11T09:10:00Z",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Registered the third locked train item after verifying its Openness dependency on origin/main and started in an isolated clean worktree; no production action is in scope."
+      },
+      {
+        "at": "2026-07-11T09:15:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."
+      },
+      {
+        "at": "2026-07-11T09:17:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at 5c2a7a10e."
+      },
+      {
+        "at": "2026-07-11T09:19:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2969; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-11T09:26:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."
+      }
     ]
   },
   "BIG5-EN-FACET-EXTRAVERSION-CONTENT-PACKAGE-01": {
@@ -85845,7 +86793,9 @@
     "title": "BIG5-EN-FACET-EXTRAVERSION-CONTENT-PACKAGE-01: strengthen six English Extraversion Facets",
     "base": "main",
     "branch": "codex/big5-en-facet-extraversion-content-package-01",
-    "depends_on": ["BIG5-EN-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01"],
+    "depends_on": [
+      "BIG5-EN-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01"
+    ],
     "status": "in_progress",
     "commit_sha": null,
     "pr_url": null,
@@ -85854,19 +86804,64 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "checks": {
-      "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."},
-      "dependency": {"status": "pass", "evidence": "PR #2969 is merged at 5055ef606338daadbdabee79bc8b26b7dcef4f35 and origin/main contains that squash merge."},
-      "content_scope": {"status": "pass", "evidence": "Exactly six independently authored English Extraversion Facet assets contain nine substantive sections, five FAQs, seven internal links, source traceability, and balanced non-diagnostic boundaries."},
-      "local_validation": {"status": "pass", "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."},
-      "github_required_checks": {"status": "pass", "evidence": "PR #2970 head 9f433ad96 passed all nine reported CI and Code Scanning checks, including content-pack-build-validate, verify-bigfive, and both MBTI verification jobs."}
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2969 is merged at 5055ef606338daadbdabee79bc8b26b7dcef4f35 and origin/main contains that squash merge."
+      },
+      "content_scope": {
+        "status": "pass",
+        "evidence": "Exactly six independently authored English Extraversion Facet assets contain nine substantive sections, five FAQs, seven internal links, source traceability, and balanced non-diagnostic boundaries."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2970 head 9f433ad96 passed all nine reported CI and Code Scanning checks, including content-pack-build-validate, verify-bigfive, and both MBTI verification jobs."
+      }
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
     "transitions": [
-      {"at": "2026-07-11T09:25:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the fourth locked train item after verifying its Conscientiousness dependency on origin/main and started in an isolated clean worktree; no production action is in scope."},
-      {"at": "2026-07-11T09:32:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."},
-      {"at": "2026-07-11T09:34:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at 7c3568052."},
-      {"at": "2026-07-11T09:36:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2970; required GitHub checks are pending."},
-      {"at": "2026-07-11T09:43:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."}
+      {
+        "at": "2026-07-11T09:25:00Z",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Registered the fourth locked train item after verifying its Conscientiousness dependency on origin/main and started in an isolated clean worktree; no production action is in scope."
+      },
+      {
+        "at": "2026-07-11T09:32:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."
+      },
+      {
+        "at": "2026-07-11T09:34:00Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at 7c3568052."
+      },
+      {
+        "at": "2026-07-11T09:36:00Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2970; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-11T09:43:00Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."
+      }
     ]
   },
   "BIG5-EN-FACET-AGREEABLENESS-CONTENT-PACKAGE-01": {
@@ -86099,7 +87094,9 @@
     "title": "AUDIT-PRR2-API-03: remove generic CMS release mutations",
     "base": "main",
     "branch": "codex/audit-prr2-api-03-controlled-cms-release",
-    "depends_on": ["AUDIT-PRR2-API-01"],
+    "depends_on": [
+      "AUDIT-PRR2-API-01"
+    ],
     "status": "merged",
     "commit_sha": "585c6c4d44a89b9883790081ec2a7c13bff731d3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2946",
@@ -86202,25 +87199,124 @@
     "publish_allowed": false,
     "deploy_allowed": false,
     "checks": {
-      "manifest_registration": {"status": "pass", "evidence": "The 2026-07-11 PRR2 /goal explicitly authorized AUDIT-PRR2-API-04 and manifest/state registration with a production fail-closed conservative default."},
-      "dependency": {"status": "pass", "evidence": "This item has no declared dependency and started from origin/main 585c6c4d44a89b9883790081ec2a7c13bff731d3."}
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The 2026-07-11 PRR2 /goal explicitly authorized AUDIT-PRR2-API-04 and manifest/state registration with a production fail-closed conservative default."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "This item has no declared dependency and started from origin/main 585c6c4d44a89b9883790081ec2a7c13bff731d3."
+      }
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
     "transitions": [
-      {"at": "2026-07-11T13:12:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Registered and started mandatory administrator TOTP enrollment, hidden bootstrap password input, and time-limited audited recovery in the isolated API train worktree; no production administrator data was read or modified."},
-      {"at": "2026-07-11T13:25:00+08:00", "from": "in_progress", "to": "focused_checks_passed", "note": "TOTP enforcement, SEO API compatibility, recovery audit/expiry, bootstrap password, runtime-freeze, Pint and Blade checks passed."},
-      {"at": "2026-07-11T13:28:00+08:00", "from": "focused_checks_passed", "to": "pr_open", "note": "Committed and pushed the sixteen-path administrator MFA scope at b7ae6888e5e41dfdeac1313a0bfae822de4d3650, then opened PR #2948; GitHub required checks are pending."},
-      {"at": "2026-07-11T13:38:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed on head e830ab053f00682fc892108bee2f246af23dbe30; PR #2948 is mergeable, review-unblocked, and its changed paths match the manifest."},
-      {"at": "2026-07-11T13:48:00+08:00", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in AUDIT-PRR2-API-05: PR #2948 merged at b113bf4023c5c0d947fe00a05ed034a80ac1a1d5; origin/main contains it, main is synced, post-merge tests passed, and task branches are deleted."}
+      {
+        "at": "2026-07-11T13:12:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Registered and started mandatory administrator TOTP enrollment, hidden bootstrap password input, and time-limited audited recovery in the isolated API train worktree; no production administrator data was read or modified."
+      },
+      {
+        "at": "2026-07-11T13:25:00+08:00",
+        "from": "in_progress",
+        "to": "focused_checks_passed",
+        "note": "TOTP enforcement, SEO API compatibility, recovery audit/expiry, bootstrap password, runtime-freeze, Pint and Blade checks passed."
+      },
+      {
+        "at": "2026-07-11T13:28:00+08:00",
+        "from": "focused_checks_passed",
+        "to": "pr_open",
+        "note": "Committed and pushed the sixteen-path administrator MFA scope at b7ae6888e5e41dfdeac1313a0bfae822de4d3650, then opened PR #2948; GitHub required checks are pending."
+      },
+      {
+        "at": "2026-07-11T13:38:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed on head e830ab053f00682fc892108bee2f246af23dbe30; PR #2948 is mergeable, review-unblocked, and its changed paths match the manifest."
+      },
+      {
+        "at": "2026-07-11T13:48:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in AUDIT-PRR2-API-05: PR #2948 merged at b113bf4023c5c0d947fe00a05ed034a80ac1a1d5; origin/main contains it, main is synced, post-merge tests passed, and task branches are deleted."
+      }
     ]
   },
   "AUDIT-PRR2-API-05": {
-    "id": "AUDIT-PRR2-API-05", "repo": "fap-api", "title": "AUDIT-PRR2-API-05: hard-disable LemonSqueezy in production", "base": "main", "branch": "codex/audit-prr2-api-05-lemon-webhook-freshness", "depends_on": ["AUDIT-PRR2-API-02"],
-    "status": "merged", "commit_sha": "b922eeffbd721249590b840d671e8c3ed92f99cc", "pr_url": "https://github.com/fermatmind/fap-api/pull/2949", "failure_reason": null, "merged_at": "2026-07-11T05:25:31Z", "remote_branch_deleted": true, "local_cleanup_executed": true,
-    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": true, "publish_allowed": false, "deploy_allowed": false,
-    "checks": {"manifest_registration": {"status": "pass", "evidence": "The PRR2 /goal authorized production hard-disable when provider-native freshness cannot be proven."}, "dependency": {"status": "pass", "evidence": "AUDIT-PRR2-API-02 is merged."}},
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
-    "transitions": [{"at": "2026-07-11T13:48:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the authorized production hard-disable after confirming LemonSqueezy signs only the raw body and exposes no authenticated freshness value."}, {"at": "2026-07-11T13:52:00+08:00", "from": "in_progress", "to": "focused_checks_passed", "note": "Production-disable, signature, go-live compatibility, runtime-freeze, Pint, YAML/JSON and diff checks passed."}, {"at": "2026-07-11T13:55:00+08:00", "from": "focused_checks_passed", "to": "pr_open", "note": "Committed and pushed the six-path LemonSqueezy production-disable scope at 2d5bd5d51e2a655a6215176491240dbf40f38d03, then opened PR #2949; required checks are pending."}, {"at": "2026-07-11T14:06:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed on head 0cb4d2b7bcd71cc441968f946b38045e36eac8c3; PR #2949 is mergeable and scope-clean."}, {"at": "2026-07-11T14:30:00+08:00", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in API-06: PR #2949 merged at b922eeffbd721249590b840d671e8c3ed92f99cc; origin/main contains it, main is synced, branches are deleted, and post-merge tests passed."}]
+    "id": "AUDIT-PRR2-API-05",
+    "repo": "fap-api",
+    "title": "AUDIT-PRR2-API-05: hard-disable LemonSqueezy in production",
+    "base": "main",
+    "branch": "codex/audit-prr2-api-05-lemon-webhook-freshness",
+    "depends_on": [
+      "AUDIT-PRR2-API-02"
+    ],
+    "status": "merged",
+    "commit_sha": "b922eeffbd721249590b840d671e8c3ed92f99cc",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2949",
+    "failure_reason": null,
+    "merged_at": "2026-07-11T05:25:31Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The PRR2 /goal authorized production hard-disable when provider-native freshness cannot be proven."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "AUDIT-PRR2-API-02 is merged."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T13:48:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Started the authorized production hard-disable after confirming LemonSqueezy signs only the raw body and exposes no authenticated freshness value."
+      },
+      {
+        "at": "2026-07-11T13:52:00+08:00",
+        "from": "in_progress",
+        "to": "focused_checks_passed",
+        "note": "Production-disable, signature, go-live compatibility, runtime-freeze, Pint, YAML/JSON and diff checks passed."
+      },
+      {
+        "at": "2026-07-11T13:55:00+08:00",
+        "from": "focused_checks_passed",
+        "to": "pr_open",
+        "note": "Committed and pushed the six-path LemonSqueezy production-disable scope at 2d5bd5d51e2a655a6215176491240dbf40f38d03, then opened PR #2949; required checks are pending."
+      },
+      {
+        "at": "2026-07-11T14:06:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed on head 0cb4d2b7bcd71cc441968f946b38045e36eac8c3; PR #2949 is mergeable and scope-clean."
+      },
+      {
+        "at": "2026-07-11T14:30:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in API-06: PR #2949 merged at b922eeffbd721249590b840d671e8c3ed92f99cc; origin/main contains it, main is synced, branches are deleted, and post-merge tests passed."
+      }
+    ]
   },
   "MBTI-INDEX-24A-API": {
     "id": "MBTI-INDEX-24A-API",
@@ -86228,7 +87324,9 @@
     "base": "main",
     "branch": "codex/mbti-index-24a-api-comparison-schema-authority",
     "title": "MBTI-INDEX-24A-API: add cross-type comparison schema authority",
-    "depends_on": ["MBTI-CMS-28A"],
+    "depends_on": [
+      "MBTI-CMS-28A"
+    ],
     "status": "ready_to_merge",
     "commit_sha": "016063eb506b87e68a867ad5f2910d46d40be37d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2951",
@@ -86237,74 +87335,652 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "checks": {
-      "authorization": {"status": "pass", "evidence": "The operator explicitly authorized registration and execution while keeping deploy, production promotion, and GSC out of scope."},
-      "dependency": {"status": "pass", "evidence": "MBTI-CMS-28A is merged; execution was rebased onto current origin/main b922eeffb."},
-      "focused_tests": {"status": "pass", "evidence": "Cross-type readmodel: 3 tests/57 assertions; comparison API: 8/140; sitemap: 11/231; scoped Pint and complete scripts/ci_verify_mbti.sh passed on the rebased scope."},
-      "scope_validation": {"status": "pass", "evidence": "YAML, JSON, PHP syntax, git diff --check and exact four-path scope passed; verify-generated compiled diffs were restored."},
-      "github_required_checks": {"status": "pass", "evidence": "PR #2951 head 016063eb506b87e68a867ad5f2910d46d40be37d passed all nine reported checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and all Code Scanning checks."}
+      "authorization": {
+        "status": "pass",
+        "evidence": "The operator explicitly authorized registration and execution while keeping deploy, production promotion, and GSC out of scope."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "MBTI-CMS-28A is merged; execution was rebased onto current origin/main b922eeffb."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "Cross-type readmodel: 3 tests/57 assertions; comparison API: 8/140; sitemap: 11/231; scoped Pint and complete scripts/ci_verify_mbti.sh passed on the rebased scope."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "YAML, JSON, PHP syntax, git diff --check and exact four-path scope passed; verify-generated compiled diffs were restored."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2951 head 016063eb506b87e68a867ad5f2910d46d40be37d passed all nine reported checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and all Code Scanning checks."
+      }
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
     "transitions": [
-      {"at": "2026-07-11T15:00:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Registered and started the authorized backend schema-authority prerequisite in an isolated worktree."},
-      {"at": "2026-07-11T15:28:00+08:00", "from": "in_progress", "to": "committed", "note": "All manifest checks passed after rebasing onto current origin/main; no production mutation or deploy occurred."},
-      {"at": "2026-07-11T15:33:00+08:00", "from": "committed", "to": "pr_open", "note": "Pushed the exact four-path scope and opened PR #2951; required GitHub checks are pending."},
-      {"at": "2026-07-11T15:46:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed; PR #2951 is mergeable and the four changed paths match the authorized manifest."}
+      {
+        "at": "2026-07-11T15:00:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Registered and started the authorized backend schema-authority prerequisite in an isolated worktree."
+      },
+      {
+        "at": "2026-07-11T15:28:00+08:00",
+        "from": "in_progress",
+        "to": "committed",
+        "note": "All manifest checks passed after rebasing onto current origin/main; no production mutation or deploy occurred."
+      },
+      {
+        "at": "2026-07-11T15:33:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the exact four-path scope and opened PR #2951; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-11T15:46:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed; PR #2951 is mergeable and the four changed paths match the authorized manifest."
+      }
     ]
   },
   "AUDIT-PRR2-API-06": {
-    "id": "AUDIT-PRR2-API-06", "repo": "fap-api", "title": "AUDIT-PRR2-API-06: make production deployment status truthful", "base": "main", "branch": "codex/audit-prr2-api-06-deployment-status-truth", "depends_on": ["AUDIT-PRR2-API-02"],
-    "status": "merged", "commit_sha": "dc55e39ee50cb25279ef12d8a6c66ed5ca28db76", "pr_url": "https://github.com/fermatmind/fap-api/pull/2953", "failure_reason": null, "merged_at": "2026-07-11T06:13:52Z", "remote_branch_deleted": true, "local_cleanup_executed": true,
-    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": false, "publish_allowed": false, "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pass", "evidence": "The PRR2 /goal explicitly authorized API-06 workflow/code tests without staging wait or production dispatch."}, "dependency": {"status": "pass", "evidence": "API-02 is merged."}, "github_required_checks": {"status": "pass", "evidence": "PR #2953 head e79a9656d passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-bigfive, verify-mbti-legacy, and both Code Scanning jobs."}},
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
-    "transitions": [{"at": "2026-07-11T14:30:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started from current origin/main; no deploy, workflow dispatch, server verification, or production action is in scope."}, {"at": "2026-07-11T14:38:00+08:00", "from": "in_progress", "to": "local_verified", "note": "Actionlint, 19 SRE tests with 115 assertions, Pint, workflow/manifest/state parse, diff, and exact four-file scope validation passed."}, {"at": "2026-07-11T16:02:00+08:00", "from": "local_verified", "to": "committed", "note": "Rebased onto current origin/main e04b250b8, preserved concurrent ledger entries, reran all scope checks, and committed the implementation."}, {"at": "2026-07-11T16:08:00+08:00", "from": "committed", "to": "pr_open", "note": "Pushed the exact four-path scope and opened PR #2953; required GitHub checks were pending and no deployment occurred."}, {"at": "2026-07-11T16:14:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed; PR #2953 was mergeable and scope-clean."}, {"at": "2026-07-11T16:26:00+08:00", "from": "ready_to_merge", "to": "merged", "note": "PR #2953 merged at dc55e39ee50cb25279ef12d8a6c66ed5ca28db76; origin/main contains it, local main is synced, branches are deleted, and 19 post-merge tests passed."}]
+    "id": "AUDIT-PRR2-API-06",
+    "repo": "fap-api",
+    "title": "AUDIT-PRR2-API-06: make production deployment status truthful",
+    "base": "main",
+    "branch": "codex/audit-prr2-api-06-deployment-status-truth",
+    "depends_on": [
+      "AUDIT-PRR2-API-02"
+    ],
+    "status": "merged",
+    "commit_sha": "dc55e39ee50cb25279ef12d8a6c66ed5ca28db76",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2953",
+    "failure_reason": null,
+    "merged_at": "2026-07-11T06:13:52Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "The PRR2 /goal explicitly authorized API-06 workflow/code tests without staging wait or production dispatch."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "API-02 is merged."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2953 head e79a9656d passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-bigfive, verify-mbti-legacy, and both Code Scanning jobs."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T14:30:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Started from current origin/main; no deploy, workflow dispatch, server verification, or production action is in scope."
+      },
+      {
+        "at": "2026-07-11T14:38:00+08:00",
+        "from": "in_progress",
+        "to": "local_verified",
+        "note": "Actionlint, 19 SRE tests with 115 assertions, Pint, workflow/manifest/state parse, diff, and exact four-file scope validation passed."
+      },
+      {
+        "at": "2026-07-11T16:02:00+08:00",
+        "from": "local_verified",
+        "to": "committed",
+        "note": "Rebased onto current origin/main e04b250b8, preserved concurrent ledger entries, reran all scope checks, and committed the implementation."
+      },
+      {
+        "at": "2026-07-11T16:08:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the exact four-path scope and opened PR #2953; required GitHub checks were pending and no deployment occurred."
+      },
+      {
+        "at": "2026-07-11T16:14:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed; PR #2953 was mergeable and scope-clean."
+      },
+      {
+        "at": "2026-07-11T16:26:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2953 merged at dc55e39ee50cb25279ef12d8a6c66ed5ca28db76; origin/main contains it, local main is synced, branches are deleted, and 19 post-merge tests passed."
+      }
+    ]
   },
   "AUDIT-PRR2-API-07": {
-    "id": "AUDIT-PRR2-API-07", "repo": "fap-api", "title": "AUDIT-PRR2-API-07: make report artifact completion truthful", "base": "main", "branch": "codex/audit-prr2-api-07-report-job-failure-contract", "depends_on": ["AUDIT-PRR2-API-01"],
-    "status": "merged", "commit_sha": "44172dbc2e844e5bf573e82a058356facaeee2d2", "pr_url": "https://github.com/fermatmind/fap-api/pull/2957", "failure_reason": null, "merged_at": "2026-07-11T06:38:52Z", "remote_branch_deleted": true, "local_cleanup_executed": true,
-    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": true, "publish_allowed": false, "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pass", "evidence": "The PRR2 /goal explicitly authorized API-07."}, "dependency": {"status": "pass", "evidence": "API-01 is merged and origin/main contains it."}, "github_required_checks": {"status": "pass", "evidence": "PR #2957 head 6e7af9d47 passed all nine required CI and Code Scanning checks after the scoped runtime-freeze classifier fix."}},
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
-    "transitions": [{"at": "2026-07-11T16:28:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started from current origin/main after API-06 cleanup; no report generation, queue dispatch, production data, or deploy action was executed."}, {"at": "2026-07-11T16:40:00+08:00", "from": "in_progress", "to": "local_verified", "note": "Artifact exception/false-write, retry/backoff/timeout/final failure, success regression, scoped Pint, YAML/JSON, diff, and allowed-path checks passed: 4 tests with 28 assertions."}, {"at": "2026-07-11T16:45:00+08:00", "from": "local_verified", "to": "committed", "note": "Rebased onto current origin/main and committed the implementation; focused tests passed again."}, {"at": "2026-07-11T16:48:00+08:00", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2957; required GitHub checks were pending."}, {"at": "2026-07-11T17:02:00+08:00", "from": "pr_open", "to": "pr_open", "note": "Inspected verify-bigfive failure: runtime-freeze classifier treated the two authorized report artifact files as MBTI-impacting. Added the current-scope classifier contract; focused freeze tests pass."}, {"at": "2026-07-11T17:12:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed on rebased head 6e7af9d47; PR #2957 is mergeable, review-unblocked, and scope-clean."}]
+    "id": "AUDIT-PRR2-API-07",
+    "repo": "fap-api",
+    "title": "AUDIT-PRR2-API-07: make report artifact completion truthful",
+    "base": "main",
+    "branch": "codex/audit-prr2-api-07-report-job-failure-contract",
+    "depends_on": [
+      "AUDIT-PRR2-API-01"
+    ],
+    "status": "merged",
+    "commit_sha": "44172dbc2e844e5bf573e82a058356facaeee2d2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2957",
+    "failure_reason": null,
+    "merged_at": "2026-07-11T06:38:52Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "The PRR2 /goal explicitly authorized API-07."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "API-01 is merged and origin/main contains it."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2957 head 6e7af9d47 passed all nine required CI and Code Scanning checks after the scoped runtime-freeze classifier fix."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T16:28:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Started from current origin/main after API-06 cleanup; no report generation, queue dispatch, production data, or deploy action was executed."
+      },
+      {
+        "at": "2026-07-11T16:40:00+08:00",
+        "from": "in_progress",
+        "to": "local_verified",
+        "note": "Artifact exception/false-write, retry/backoff/timeout/final failure, success regression, scoped Pint, YAML/JSON, diff, and allowed-path checks passed: 4 tests with 28 assertions."
+      },
+      {
+        "at": "2026-07-11T16:45:00+08:00",
+        "from": "local_verified",
+        "to": "committed",
+        "note": "Rebased onto current origin/main and committed the implementation; focused tests passed again."
+      },
+      {
+        "at": "2026-07-11T16:48:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2957; required GitHub checks were pending."
+      },
+      {
+        "at": "2026-07-11T17:02:00+08:00",
+        "from": "pr_open",
+        "to": "pr_open",
+        "note": "Inspected verify-bigfive failure: runtime-freeze classifier treated the two authorized report artifact files as MBTI-impacting. Added the current-scope classifier contract; focused freeze tests pass."
+      },
+      {
+        "at": "2026-07-11T17:12:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed on rebased head 6e7af9d47; PR #2957 is mergeable, review-unblocked, and scope-clean."
+      }
+    ]
   },
   "AUDIT-PRR2-API-08": {
-    "id": "AUDIT-PRR2-API-08", "repo": "fap-api", "title": "AUDIT-PRR2-API-08: enforce verified media public promotion", "base": "main", "branch": "codex/audit-prr2-api-08-media-promotion-state-machine", "depends_on": ["AUDIT-PRR2-API-03"],
-    "status": "merged", "commit_sha": "82b30cbaf815f34cbbe8f627f99fbdd7bdad63f5", "pr_url": "https://github.com/fermatmind/fap-api/pull/2959", "failure_reason": null, "merged_at": "2026-07-11T07:03:27Z", "remote_branch_deleted": true, "local_cleanup_executed": true,
-    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": true, "publish_allowed": false, "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pass", "evidence": "The PRR2 /goal explicitly authorized API-08 without CMS or production writes."}, "dependency": {"status": "pass", "evidence": "API-03 is merged and origin/main contains it."}, "github_required_checks": {"status": "pass", "evidence": "PR #2959 head 7f403ff88 passed all nine CI and Code Scanning checks."}},
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
-    "transitions": [{"at": "2026-07-11T17:30:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the media draft/verified/public state machine in the isolated API worktree; no media upload, CMS mutation, import, promotion, or production action was executed."}, {"at": "2026-07-11T17:48:00+08:00", "from": "in_progress", "to": "local_verified", "note": "Media promotion, public API, OSS/CDN, false-write, stale-path, runtime-freeze, Pint, YAML/JSON, diff, and allowed-path contracts passed: 20 tests with 193 assertions."}, {"at": "2026-07-11T17:52:00+08:00", "from": "local_verified", "to": "committed", "note": "Rebased onto current origin/main and committed the implementation; 19 media tests with 192 assertions passed again."}, {"at": "2026-07-11T17:55:00+08:00", "from": "committed", "to": "pr_open", "note": "Pushed the exact twelve-path scope and opened PR #2959; required GitHub checks were pending."}, {"at": "2026-07-11T18:04:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed on head 7f403ff88; PR #2959 is mergeable, review-unblocked, and its twelve paths match the manifest."}, {"at": "2026-07-11T18:12:00+08:00", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in API-09: PR #2959 merged at 82b30cbaf815f34cbbe8f627f99fbdd7bdad63f5; origin/main contains it, local main is synced, branches are deleted, and post-merge verification passed."}]
+    "id": "AUDIT-PRR2-API-08",
+    "repo": "fap-api",
+    "title": "AUDIT-PRR2-API-08: enforce verified media public promotion",
+    "base": "main",
+    "branch": "codex/audit-prr2-api-08-media-promotion-state-machine",
+    "depends_on": [
+      "AUDIT-PRR2-API-03"
+    ],
+    "status": "merged",
+    "commit_sha": "82b30cbaf815f34cbbe8f627f99fbdd7bdad63f5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2959",
+    "failure_reason": null,
+    "merged_at": "2026-07-11T07:03:27Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "The PRR2 /goal explicitly authorized API-08 without CMS or production writes."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "API-03 is merged and origin/main contains it."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2959 head 7f403ff88 passed all nine CI and Code Scanning checks."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T17:30:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Started the media draft/verified/public state machine in the isolated API worktree; no media upload, CMS mutation, import, promotion, or production action was executed."
+      },
+      {
+        "at": "2026-07-11T17:48:00+08:00",
+        "from": "in_progress",
+        "to": "local_verified",
+        "note": "Media promotion, public API, OSS/CDN, false-write, stale-path, runtime-freeze, Pint, YAML/JSON, diff, and allowed-path contracts passed: 20 tests with 193 assertions."
+      },
+      {
+        "at": "2026-07-11T17:52:00+08:00",
+        "from": "local_verified",
+        "to": "committed",
+        "note": "Rebased onto current origin/main and committed the implementation; 19 media tests with 192 assertions passed again."
+      },
+      {
+        "at": "2026-07-11T17:55:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the exact twelve-path scope and opened PR #2959; required GitHub checks were pending."
+      },
+      {
+        "at": "2026-07-11T18:04:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed on head 7f403ff88; PR #2959 is mergeable, review-unblocked, and its twelve paths match the manifest."
+      },
+      {
+        "at": "2026-07-11T18:12:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in API-09: PR #2959 merged at 82b30cbaf815f34cbbe8f627f99fbdd7bdad63f5; origin/main contains it, local main is synced, branches are deleted, and post-merge verification passed."
+      }
+    ]
   },
   "AUDIT-PRR2-API-09": {
-    "id": "AUDIT-PRR2-API-09", "repo": "fap-api", "title": "AUDIT-PRR2-API-09: redact sensitive diagnostics and raw traces", "base": "main", "branch": "codex/audit-prr2-api-09-log-redaction", "depends_on": ["AUDIT-PRR2-API-07"],
-    "status": "merged", "commit_sha": "80be3fdb0ec9bad71c78cacac5a96bc2f88bf313", "pr_url": "https://github.com/fermatmind/fap-api/pull/2961", "failure_reason": null, "merged_at": "2026-07-11T07:49:20Z", "remote_branch_deleted": true, "local_cleanup_executed": true,
-    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": true, "publish_allowed": false, "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pass", "evidence": "The PRR2 /goal explicitly authorized API-09 and manifest/state registration."}, "dependency": {"status": "pass", "evidence": "API-07 is merged and origin/main contains it."}, "focused_tests": {"status": "pass", "evidence": "Global logging redaction and report-job failure contracts passed 6 tests with 37 assertions."}, "github_required_checks": {"status": "pass", "evidence": "PR #2961 head e813a0971 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and all Semgrep checks."}},
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
-    "transitions": [{"at": "2026-07-11T18:14:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started global diagnostic redaction and raw report-job trace removal in the isolated API worktree; no queue replay, CMS mutation, production write, or deploy was executed."}, {"at": "2026-07-11T18:22:00+08:00", "from": "in_progress", "to": "local_verified", "note": "Logging tap, sensitive identifier/message/exception redaction, report-job persistence, terminal failure, Pint, and raw-trace source checks passed: 6 tests with 37 assertions."}, {"at": "2026-07-11T18:31:00+08:00", "from": "local_verified", "to": "committed", "note": "Rebased onto origin/main 540a92ef8, reran all focused checks, and committed the exact ten-path scope at 3d3b28317916580499e02e2a7644d4d63e4d5cb3."}, {"at": "2026-07-11T18:34:00+08:00", "from": "committed", "to": "pr_open", "note": "Pushed the exact ten-path scope and opened PR #2961; required GitHub checks are pending and no production action was performed."}, {"at": "2026-07-11T18:40:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required CI and security checks passed on head e813a0971; PR #2961 is mergeable, review-unblocked, and its ten paths match the manifest."}, {"at": "2026-07-11T19:51:00+08:00", "from": "ready_to_merge", "to": "merged", "note": "PR #2961 merged at 80be3fdb0ec9bad71c78cacac5a96bc2f88bf313; origin/main and clean main are synced, local/remote branches are deleted, and 6 post-merge tests with 37 assertions passed."}]
+    "id": "AUDIT-PRR2-API-09",
+    "repo": "fap-api",
+    "title": "AUDIT-PRR2-API-09: redact sensitive diagnostics and raw traces",
+    "base": "main",
+    "branch": "codex/audit-prr2-api-09-log-redaction",
+    "depends_on": [
+      "AUDIT-PRR2-API-07"
+    ],
+    "status": "merged",
+    "commit_sha": "80be3fdb0ec9bad71c78cacac5a96bc2f88bf313",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2961",
+    "failure_reason": null,
+    "merged_at": "2026-07-11T07:49:20Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "The PRR2 /goal explicitly authorized API-09 and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "API-07 is merged and origin/main contains it."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "Global logging redaction and report-job failure contracts passed 6 tests with 37 assertions."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2961 head e813a0971 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and all Semgrep checks."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T18:14:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Started global diagnostic redaction and raw report-job trace removal in the isolated API worktree; no queue replay, CMS mutation, production write, or deploy was executed."
+      },
+      {
+        "at": "2026-07-11T18:22:00+08:00",
+        "from": "in_progress",
+        "to": "local_verified",
+        "note": "Logging tap, sensitive identifier/message/exception redaction, report-job persistence, terminal failure, Pint, and raw-trace source checks passed: 6 tests with 37 assertions."
+      },
+      {
+        "at": "2026-07-11T18:31:00+08:00",
+        "from": "local_verified",
+        "to": "committed",
+        "note": "Rebased onto origin/main 540a92ef8, reran all focused checks, and committed the exact ten-path scope at 3d3b28317916580499e02e2a7644d4d63e4d5cb3."
+      },
+      {
+        "at": "2026-07-11T18:34:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the exact ten-path scope and opened PR #2961; required GitHub checks are pending and no production action was performed."
+      },
+      {
+        "at": "2026-07-11T18:40:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine required CI and security checks passed on head e813a0971; PR #2961 is mergeable, review-unblocked, and its ten paths match the manifest."
+      },
+      {
+        "at": "2026-07-11T19:51:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2961 merged at 80be3fdb0ec9bad71c78cacac5a96bc2f88bf313; origin/main and clean main are synced, local/remote branches are deleted, and 6 post-merge tests with 37 assertions passed."
+      }
+    ]
   },
   "AUDIT-PRR2-API-10": {
-    "id": "AUDIT-PRR2-API-10", "repo": "fap-api", "title": "AUDIT-PRR2-API-10: require mutating-route security guardrails", "base": "main", "branch": "codex/audit-prr2-api-10-security-guardrails-ci", "depends_on": ["AUDIT-PRR2-API-01"],
-    "status": "merged", "commit_sha": "bc960cea282632061976e1601b332d1db788fa95", "pr_url": "https://github.com/fermatmind/fap-api/pull/2963", "failure_reason": null, "merged_at": "2026-07-11T08:11:24Z", "remote_branch_deleted": true, "local_cleanup_executed": true,
-    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": false, "publish_allowed": false, "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pass", "evidence": "The PRR2 /goal explicitly authorized API-10 and manifest/state registration."}, "dependency": {"status": "pass", "evidence": "API-01 is merged and origin/main contains it."}, "focused_tests": {"status": "pass", "evidence": "SecurityGuardrailsTest passed 20 tests with 113 assertions, including an unprotected POST negative fixture and exact owner/token controller contracts."}, "scope_validation": {"status": "pass", "evidence": "Scoped Pint, route list, actionlint with the two pre-existing SC2016 informational findings ignored, YAML/JSON, diff, and exact four-path validation passed."}, "github_required_checks": {"status": "pass", "evidence": "PR #2963 head 5e87bc6cb passed all nine CI and Semgrep checks, including the newly required mutating-route guard in both MBTI modes."}},
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
-    "transitions": [{"at": "2026-07-11T19:53:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started exact controller-level route guard contracts and required CI enforcement from current origin/main; no runtime route/controller, deployment, CMS, or production state is in scope."}, {"at": "2026-07-11T20:04:00+08:00", "from": "in_progress", "to": "local_verified", "note": "The previously failing guard now passes 20 tests with 113 assertions; negative fixture, exact controller guard contracts, required-CI wiring, Pint, route list, actionlint, YAML/JSON, diff and exact four-path scope checks passed."}, {"at": "2026-07-11T20:09:00+08:00", "from": "local_verified", "to": "committed", "note": "Rebased onto origin/main 48e73fa88, reran focused tests and workflow checks, and committed the exact four-path scope at 578353d74ed864dc676e852454988a9d6f92770c."}, {"at": "2026-07-11T20:12:00+08:00", "from": "committed", "to": "pr_open", "note": "Pushed the exact four-path scope and opened PR #2963; required GitHub checks are pending and no production action was performed."}, {"at": "2026-07-11T20:20:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required CI/security checks passed on head 5e87bc6cb; PR #2963 is mergeable, review-unblocked, and its four paths match the manifest."}, {"at": "2026-07-11T20:11:24+08:00", "from": "ready_to_merge", "to": "merged", "note": "PR #2963 merged at bc960cea282632061976e1601b332d1db788fa95; origin/main and clean main are synced, local/remote branches are deleted, and 20 post-merge tests with 113 assertions passed."}]
+    "id": "AUDIT-PRR2-API-10",
+    "repo": "fap-api",
+    "title": "AUDIT-PRR2-API-10: require mutating-route security guardrails",
+    "base": "main",
+    "branch": "codex/audit-prr2-api-10-security-guardrails-ci",
+    "depends_on": [
+      "AUDIT-PRR2-API-01"
+    ],
+    "status": "merged",
+    "commit_sha": "bc960cea282632061976e1601b332d1db788fa95",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2963",
+    "failure_reason": null,
+    "merged_at": "2026-07-11T08:11:24Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "The PRR2 /goal explicitly authorized API-10 and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "API-01 is merged and origin/main contains it."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "SecurityGuardrailsTest passed 20 tests with 113 assertions, including an unprotected POST negative fixture and exact owner/token controller contracts."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Scoped Pint, route list, actionlint with the two pre-existing SC2016 informational findings ignored, YAML/JSON, diff, and exact four-path validation passed."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2963 head 5e87bc6cb passed all nine CI and Semgrep checks, including the newly required mutating-route guard in both MBTI modes."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T19:53:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Started exact controller-level route guard contracts and required CI enforcement from current origin/main; no runtime route/controller, deployment, CMS, or production state is in scope."
+      },
+      {
+        "at": "2026-07-11T20:04:00+08:00",
+        "from": "in_progress",
+        "to": "local_verified",
+        "note": "The previously failing guard now passes 20 tests with 113 assertions; negative fixture, exact controller guard contracts, required-CI wiring, Pint, route list, actionlint, YAML/JSON, diff and exact four-path scope checks passed."
+      },
+      {
+        "at": "2026-07-11T20:09:00+08:00",
+        "from": "local_verified",
+        "to": "committed",
+        "note": "Rebased onto origin/main 48e73fa88, reran focused tests and workflow checks, and committed the exact four-path scope at 578353d74ed864dc676e852454988a9d6f92770c."
+      },
+      {
+        "at": "2026-07-11T20:12:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the exact four-path scope and opened PR #2963; required GitHub checks are pending and no production action was performed."
+      },
+      {
+        "at": "2026-07-11T20:20:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine required CI/security checks passed on head 5e87bc6cb; PR #2963 is mergeable, review-unblocked, and its four paths match the manifest."
+      },
+      {
+        "at": "2026-07-11T20:11:24+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2963 merged at bc960cea282632061976e1601b332d1db788fa95; origin/main and clean main are synced, local/remote branches are deleted, and 20 post-merge tests with 113 assertions passed."
+      }
+    ]
   },
   "AUDIT-PRR2-API-11": {
-    "id": "AUDIT-PRR2-API-11", "repo": "fap-api", "title": "AUDIT-PRR2-API-11: pin all GitHub Actions immutably", "base": "main", "branch": "codex/audit-prr2-api-11-actions-immutable-pins", "depends_on": ["AUDIT-PRR2-API-06"],
-    "status": "merged", "commit_sha": "f505e9397ef49e43bff76e814704c0c723f61c61", "pr_url": "https://github.com/fermatmind/fap-api/pull/2964", "failure_reason": null, "merged_at": "2026-07-11T08:33:04Z", "remote_branch_deleted": true, "local_cleanup_executed": true,
-    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": false, "publish_allowed": false, "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pass", "evidence": "The PRR2 /goal explicitly authorized API-11 and manifest/state registration."}, "dependency": {"status": "pass", "evidence": "API-06 is merged and origin/main contains it."}, "upstream_refs": {"status": "pass", "evidence": "All 11 action/tag combinations were resolved from their upstream GitHub refs; annotated tags use the peeled commit object."}, "focused_tests": {"status": "pass", "evidence": "Immutable action scanner plus security guardrails passed 26 tests with 131 assertions; mutable tags, branch refs and missing release comments fail."}, "scope_validation": {"status": "pass", "evidence": "All 49 external uses entries are 40-hex pinned with release comments; scoped Pint, baseline-aware actionlint, workflow/manifest YAML, state/sidecar JSON, diff and exact 13-path validation passed."}, "github_required_checks": {"status": "pass", "evidence": "PR #2964 head cc89c6615 passed all nine CI and Semgrep checks using the pinned action commits."}},
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
-    "transitions": [{"at": "2026-07-11T20:13:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started immutable pinning for all external workflow actions from current origin/main; no workflow dispatch, secret access, deploy, CMS write, or production action is in scope."}, {"at": "2026-07-11T20:29:00+08:00", "from": "in_progress", "to": "local_verified", "note": "Upstream refs, all external uses pins, mutable-ref negative fixtures, required-CI scanner wiring, Pint, baseline-aware actionlint, YAML/JSON, diff and exact 13-path scope checks passed; pre-existing workflow lint findings were recorded as a sidecar."}, {"at": "2026-07-11T20:33:00+08:00", "from": "local_verified", "to": "committed", "note": "Committed the exact 13-path immutable-action scope at b23f30858adc772e67022c216c31f7281deca48e on current origin/main bc960cea2; no workflow was dispatched."}, {"at": "2026-07-11T20:36:00+08:00", "from": "committed", "to": "pr_open", "note": "Pushed the exact 13-path scope and opened PR #2964; required GitHub checks are pending and no workflow dispatch or deployment occurred."}, {"at": "2026-07-11T20:44:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required CI/security checks passed on head cc89c6615; PR #2964 is mergeable, review-unblocked, and its 13 paths match the manifest."}, {"at": "2026-07-11T20:33:04+08:00", "from": "ready_to_merge", "to": "merged", "note": "PR #2964 merged at f505e9397ef49e43bff76e814704c0c723f61c61; main is synced, task branches are deleted, and 26 post-merge tests with 131 assertions passed."}]
+    "id": "AUDIT-PRR2-API-11",
+    "repo": "fap-api",
+    "title": "AUDIT-PRR2-API-11: pin all GitHub Actions immutably",
+    "base": "main",
+    "branch": "codex/audit-prr2-api-11-actions-immutable-pins",
+    "depends_on": [
+      "AUDIT-PRR2-API-06"
+    ],
+    "status": "merged",
+    "commit_sha": "f505e9397ef49e43bff76e814704c0c723f61c61",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2964",
+    "failure_reason": null,
+    "merged_at": "2026-07-11T08:33:04Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "The PRR2 /goal explicitly authorized API-11 and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "API-06 is merged and origin/main contains it."
+      },
+      "upstream_refs": {
+        "status": "pass",
+        "evidence": "All 11 action/tag combinations were resolved from their upstream GitHub refs; annotated tags use the peeled commit object."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "Immutable action scanner plus security guardrails passed 26 tests with 131 assertions; mutable tags, branch refs and missing release comments fail."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "All 49 external uses entries are 40-hex pinned with release comments; scoped Pint, baseline-aware actionlint, workflow/manifest YAML, state/sidecar JSON, diff and exact 13-path validation passed."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2964 head cc89c6615 passed all nine CI and Semgrep checks using the pinned action commits."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T20:13:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Started immutable pinning for all external workflow actions from current origin/main; no workflow dispatch, secret access, deploy, CMS write, or production action is in scope."
+      },
+      {
+        "at": "2026-07-11T20:29:00+08:00",
+        "from": "in_progress",
+        "to": "local_verified",
+        "note": "Upstream refs, all external uses pins, mutable-ref negative fixtures, required-CI scanner wiring, Pint, baseline-aware actionlint, YAML/JSON, diff and exact 13-path scope checks passed; pre-existing workflow lint findings were recorded as a sidecar."
+      },
+      {
+        "at": "2026-07-11T20:33:00+08:00",
+        "from": "local_verified",
+        "to": "committed",
+        "note": "Committed the exact 13-path immutable-action scope at b23f30858adc772e67022c216c31f7281deca48e on current origin/main bc960cea2; no workflow was dispatched."
+      },
+      {
+        "at": "2026-07-11T20:36:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the exact 13-path scope and opened PR #2964; required GitHub checks are pending and no workflow dispatch or deployment occurred."
+      },
+      {
+        "at": "2026-07-11T20:44:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine required CI/security checks passed on head cc89c6615; PR #2964 is mergeable, review-unblocked, and its 13 paths match the manifest."
+      },
+      {
+        "at": "2026-07-11T20:33:04+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2964 merged at f505e9397ef49e43bff76e814704c0c723f61c61; main is synced, task branches are deleted, and 26 post-merge tests with 131 assertions passed."
+      }
+    ]
   },
   "AUDIT-PRR2-API-12": {
-    "id": "AUDIT-PRR2-API-12", "repo": "fap-api", "title": "AUDIT-PRR2-API-12: route QueueMonitor replay through DLQ service", "base": "main", "branch": "codex/audit-prr2-api-12-dlq-replay-single-path", "depends_on": ["AUDIT-PRR2-API-09"],
-    "status": "ready_to_merge", "commit_sha": "860c07f7efc5505d21c5cff26070b2b25dae6da0", "pr_url": "https://github.com/fermatmind/fap-api/pull/2966", "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
-    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": true, "queue_replay_execution": false, "publish_allowed": false, "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pass", "evidence": "The PRR2 /goal explicitly authorized API-12 code/tests but forbids executing a real replay."}, "dependency": {"status": "pass", "evidence": "API-09 is merged and origin/main contains it."}, "focused_tests": {"status": "pass", "evidence": "QueueMonitor replay contract passed 2 tests with 10 assertions; runtime-freeze contract passed 2 tests with 4 assertions."}, "scope_validation": {"status": "pass", "evidence": "QueueMonitor contains no Artisan/queue:retry path; scoped Pint, YAML/JSON, diff and exact five-path validation passed."}, "github_required_checks": {"status": "pass", "evidence": "PR #2966 head b1018982f passed all nine required CI and Semgrep checks."}},
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-11T20:35:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the QueueMonitor-to-QueueDlqService single replay path from current origin/main; no failed job, queue, CMS, production data, or deploy action was executed."}, {"at": "2026-07-11T20:43:00+08:00", "from": "in_progress", "to": "local_verified", "note": "Single service invocation, authenticated admin attribution, bounded audit outcome, direct Artisan-path absence, runtime-freeze, Pint, YAML/JSON, diff and exact five-path scope checks passed; no replay was executed."}, {"at": "2026-07-11T20:46:00+08:00", "from": "local_verified", "to": "committed", "note": "Committed the exact five-path DLQ replay scope at 860c07f7efc5505d21c5cff26070b2b25dae6da0 on current origin/main; no failed job or queue was touched."}, {"at": "2026-07-11T20:49:00+08:00", "from": "committed", "to": "pr_open", "note": "Pushed the exact five-path scope and opened PR #2966; required checks are pending and no queue replay or production action occurred."}, {"at": "2026-07-11T20:56:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required CI/security checks passed on head b1018982f; PR #2966 is mergeable, review-unblocked, and its five paths match the manifest."}]
+    "id": "AUDIT-PRR2-API-12",
+    "repo": "fap-api",
+    "title": "AUDIT-PRR2-API-12: route QueueMonitor replay through DLQ service",
+    "base": "main",
+    "branch": "codex/audit-prr2-api-12-dlq-replay-single-path",
+    "depends_on": [
+      "AUDIT-PRR2-API-09"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "860c07f7efc5505d21c5cff26070b2b25dae6da0",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2966",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "queue_replay_execution": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "The PRR2 /goal explicitly authorized API-12 code/tests but forbids executing a real replay."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "API-09 is merged and origin/main contains it."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "QueueMonitor replay contract passed 2 tests with 10 assertions; runtime-freeze contract passed 2 tests with 4 assertions."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "QueueMonitor contains no Artisan/queue:retry path; scoped Pint, YAML/JSON, diff and exact five-path validation passed."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2966 head b1018982f passed all nine required CI and Semgrep checks."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T20:35:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Started the QueueMonitor-to-QueueDlqService single replay path from current origin/main; no failed job, queue, CMS, production data, or deploy action was executed."
+      },
+      {
+        "at": "2026-07-11T20:43:00+08:00",
+        "from": "in_progress",
+        "to": "local_verified",
+        "note": "Single service invocation, authenticated admin attribution, bounded audit outcome, direct Artisan-path absence, runtime-freeze, Pint, YAML/JSON, diff and exact five-path scope checks passed; no replay was executed."
+      },
+      {
+        "at": "2026-07-11T20:46:00+08:00",
+        "from": "local_verified",
+        "to": "committed",
+        "note": "Committed the exact five-path DLQ replay scope at 860c07f7efc5505d21c5cff26070b2b25dae6da0 on current origin/main; no failed job or queue was touched."
+      },
+      {
+        "at": "2026-07-11T20:49:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the exact five-path scope and opened PR #2966; required checks are pending and no queue replay or production action occurred."
+      },
+      {
+        "at": "2026-07-11T20:56:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine required CI/security checks passed on head b1018982f; PR #2966 is mergeable, review-unblocked, and its five paths match the manifest."
+      }
+    ]
   }
 }

@@ -1,0 +1,90 @@
+{
+  "task_id": "DEEPREAD-REPAIR-FINAL-REGRESSION-01",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "type_reports": [
+    {
+      "task_id": "DEEPREAD-REPAIR-TYPE-1-01",
+      "final_decision": "PASS"
+    },
+    {
+      "task_id": "DEEPREAD-REPAIR-TYPE-2-01",
+      "final_decision": "PASS"
+    },
+    {
+      "task_id": "DEEPREAD-REPAIR-TYPE-3-01",
+      "final_decision": "PASS"
+    },
+    {
+      "task_id": "DEEPREAD-REPAIR-TYPE-4-01",
+      "final_decision": "PASS"
+    },
+    {
+      "task_id": "DEEPREAD-REPAIR-TYPE-5-01",
+      "final_decision": "PASS"
+    },
+    {
+      "task_id": "DEEPREAD-REPAIR-TYPE-6-01",
+      "final_decision": "PASS"
+    },
+    {
+      "task_id": "DEEPREAD-REPAIR-TYPE-7-01",
+      "final_decision": "PASS"
+    },
+    {
+      "task_id": "DEEPREAD-REPAIR-TYPE-8-01",
+      "final_decision": "PASS"
+    },
+    {
+      "task_id": "DEEPREAD-REPAIR-TYPE-9-01",
+      "final_decision": "PASS"
+    }
+  ],
+  "json_assets_parsed": 90,
+  "previews_regenerated": 90,
+  "type_qa": [
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS"
+  ],
+  "global_qa": "PASS",
+  "duplicate_report": "PASS",
+  "bilingual_pairs_passed": 45,
+  "launch_boundary_failures": [],
+  "unique_repair_map_open_issues": [],
+  "growth_geo_regression": {
+    "generic_growth_and_observation_protocol_unresolved": 0,
+    "exercise_template_risk_unresolved": 0,
+    "growth_section_semantic_reuse_unresolved": 0,
+    "no_new_growth_observation_protocol_near_duplicate_clusters": true
+  },
+  "cms_contract_dry_run": {
+    "dry_run": true,
+    "assets_found": 90,
+    "valid_count": 90,
+    "errors_count": 0,
+    "will_create": 90,
+    "will_update": 0,
+    "will_skip": 0,
+    "indexable_count": 0,
+    "sitemap_eligible_count": 0,
+    "llms_eligible_count": 0
+  },
+  "side_effects": {
+    "cms_write": false,
+    "database_write": false,
+    "publish": false,
+    "promote": false,
+    "indexability_change": false,
+    "sitemap_change": false,
+    "llms_change": false,
+    "search_release": false,
+    "deployment": false
+  },
+  "final_decision": "DEEPREAD_REPAIR_COMPLETE_GO"
+}

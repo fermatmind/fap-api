@@ -1,0 +1,137 @@
+{
+  "ledger_id": "ENNEAGRAM-90-SOURCE-LEDGER-2026-07-11",
+  "generated_at": "2026-07-11",
+  "sources": [
+    {
+      "id": "truity-wings-guide",
+      "kind": "competitor_benchmark",
+      "title": "A Guide to Enneagram Wings: What Are They All About?",
+      "url": "https://www.truity.com/blog/guide-enneagram-wings-what-are-they-all-about",
+      "use": "Wing definition, adjacency, naming and reader questions; structure only, never copy."
+    },
+    {
+      "id": "truity-wings-boundary",
+      "kind": "competitor_benchmark",
+      "title": "Understanding Enneagram Wings: What They Are and What They Are Not",
+      "url": "https://www.truity.com/blog/understanding-enneagram-wings-what-they-are-and-what-they-are-not",
+      "use": "Boundary and misconception coverage."
+    },
+    {
+      "id": "truity-wings-growth",
+      "kind": "competitor_benchmark",
+      "title": "How to Use Enneagram Wings for Growth",
+      "url": "https://www.truity.com/blog/how-use-enneagram-wings-growth",
+      "use": "Growth-question coverage and practical application."
+    },
+    {
+      "id": "truity-subtypes-overview",
+      "kind": "competitor_benchmark",
+      "title": "Subtypes and Instincts in the Enneagram",
+      "url": "https://www.truity.com/blog/subtypes-and-instincts-enneagram-what-are-they-and-how-do-they-affect-human-behavior",
+      "use": "Three-instinct overview and terminology."
+    },
+    {
+      "id": "truity-subtypes-body",
+      "kind": "competitor_benchmark",
+      "title": "A Deeper Dive into Enneagram Subtypes: Body Types 8, 9 and 1",
+      "url": "https://www.truity.com/blog/deeper-dive-enneagram-subtypes-body-types-8-9-and-1",
+      "use": "Body-center subtype topic coverage."
+    },
+    {
+      "id": "truity-subtypes-heart",
+      "kind": "competitor_benchmark",
+      "title": "A Deeper Dive into Enneagram Subtypes: Heart Types 2, 3 and 4",
+      "url": "https://www.truity.com/blog/deeper-dive-enneagram-subtypes-heart-types-2-3-and-4",
+      "use": "Heart-center subtype topic coverage."
+    },
+    {
+      "id": "truity-subtypes-head",
+      "kind": "competitor_benchmark",
+      "title": "A Deeper Dive into Enneagram Subtypes: Head Types 5, 6 and 7",
+      "url": "https://www.truity.com/blog/deeper-dive-enneagram-subtypes-head-types-5-6-and-7",
+      "use": "Head-center subtype topic coverage."
+    },
+    {
+      "id": "truity-countertypes",
+      "kind": "competitor_benchmark",
+      "title": "Understanding Countertypes",
+      "url": "https://www.truity.com/blog/understanding-countertypes-upside-down-types-enneagram",
+      "use": "Countertype reader intent; present as a disputed tradition, not a fact."
+    },
+    {
+      "id": "truity-subtypes-growth",
+      "kind": "competitor_benchmark",
+      "title": "Your Guide to Personal Growth Paths for the 27 Enneagram Subtypes",
+      "url": "https://www.truity.com/blog/your-guide-personal-growth-paths-27-enneagram-subtypes",
+      "use": "Growth prompt coverage."
+    },
+    {
+      "id": "truity-subtypes-disagreement",
+      "kind": "competitor_benchmark",
+      "title": "No One Can Agree What Enneagram Subtypes Are—Here’s Why",
+      "url": "https://www.truity.com/blog/no-one-can-agree-what-enneagram-subtypes-are-heres-why",
+      "use": "Tradition disagreement and uncertainty disclosure."
+    },
+    {
+      "id": "hook-2021",
+      "kind": "systematic_review",
+      "title": "Enneagram: A systematic review of the literature and directions for future research",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+      "doi": "10.1002/jclp.23097",
+      "use": "Primary scientific boundary: mixed evidence; little research supports wings and other secondary propositions."
+    },
+    {
+      "id": "turkish-subtype-inventory",
+      "kind": "primary_study",
+      "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+      "url": "https://search.trdizin.gov.tr/tr/yayin/detay/1134808",
+      "doi": "10.21673/anadoluklin.1104082",
+      "use": "Sample-specific subtype measurement evidence; never generalize as universal validation."
+    },
+    {
+      "id": "truity-technical",
+      "kind": "publisher_technical_document",
+      "title": "Enneagram Technical Document",
+      "url": "https://www.truity.com/sites/default/files/uploads/EnneagramTechnicalDocument.pdf",
+      "use": "Package-level benchmark for disclosure pattern; not independent validation and not an asset-level claim source.",
+      "scope": "package_disclosure_benchmark",
+      "asset_reference_required": false
+    }
+  ],
+  "claim_rules": {
+    "wings": "Interpretive secondary feature; Hook et al. found little supporting research for secondary propositions.",
+    "subtypes": "Tradition-dependent construct; sample-specific inventory studies do not establish universal validity.",
+    "countertype": "Present only as a disputed/tradition-specific interpretation.",
+    "application": "Self-reflection and communication hypotheses only; not diagnosis, selection, or outcome prediction."
+  },
+  "package": "enneagram-90-cms-v1",
+  "accessed_at": "2026-07-11",
+  "status": "verified_for_draft_generation",
+  "source_policy": {
+    "academic": "Peer-reviewed or official bibliographic sources support evidence-boundary claims only.",
+    "competitor": "Truity sources benchmark reader questions and topic coverage only.",
+    "internal": "Existing FermatMind core-type assets provide product language and route context, not scientific proof."
+  },
+  "verification_notes": [
+    {
+      "source_id": "hook-2021",
+      "result": "verified",
+      "limitation": "Systematic review reports mixed evidence and little research on secondary propositions such as wings."
+    },
+    {
+      "source_id": "turkish-subtype-inventory",
+      "result": "verified",
+      "limitation": "Single Turkish online sample; does not establish universal subtype validity or individual classification accuracy."
+    },
+    {
+      "source_id": "truity-wings-guide",
+      "result": "verified_competitor_only",
+      "limitation": "Publisher explanation; not independent scientific validation."
+    },
+    {
+      "source_id": "truity-subtypes-overview",
+      "result": "verified_competitor_only",
+      "limitation": "Tradition-specific terminology; claims must be reframed as hypotheses."
+    }
+  ]
+}
