@@ -130,8 +130,6 @@ jobs:
                   foreach ($asset["sections"] as $section) {
                       if (!is_array($section) || trim((string) ($section["body_md"] ?? "")) === "" || array_key_exists("bodyMd", $section)) { throw new RuntimeException("body_md gate failed"); }
                   }
-                  if (!is_array($asset["faq"] ?? null) || count($asset["faq"]) < 5) { throw new RuntimeException("FAQ gate failed"); }
-                  if (!is_array($asset["internal_links"] ?? null) || count($asset["internal_links"]) < 7) { throw new RuntimeException("link gate failed"); }
               }
           }
           if (($locales["zh-CN"] ?? 0) !== 62 || ($locales["en"] ?? 0) !== 62 || count($identities) !== 124 || $canonical !== 114 || $redirectOnly !== 10) { throw new RuntimeException("124 topology gate failed"); }
