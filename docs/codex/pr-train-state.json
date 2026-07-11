@@ -88410,6 +88410,37 @@
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
     "transitions": [{"at": "2026-07-11T23:00:00+08:00", "from": "unregistered", "to": "pending_dependency", "note": "Registered behind ENNEAGRAM-SEARCH-RELEASE-READINESS-01; no llms or llms-full release is authorized."}, {"at": "2026-07-11T23:36:00+08:00", "from": "pending_dependency", "to": "in_progress", "note": "Started the read-only llms and llms-full assessment after PR #2994 merged and cleanup completed; no CMS eligibility, feed, cache, search, or deploy action is authorized."}, {"at": "2026-07-11T23:48:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "llms.txt readiness is GO only for a later separate authorization; llms-full remains NO_GO because 26 EN13 assets lack the enriched evidence gate. No production action occurred."}, {"at": "2026-07-11T23:51:00+08:00", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact five-path LLM/GEO assessment scope at 28e3c1820; no CMS eligibility, feed, cache, search, or deploy action occurred."}, {"at": "2026-07-11T23:55:00+08:00", "from": "committed", "to": "pr_open", "note": "Opened PR #2996 for the exact report-only LLM/GEO scope; required checks are pending and no production action occurred."}, {"at": "2026-07-12T00:02:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks are green; scope, changed files, PR body, review state, and squash-auto-merge policy are satisfied."}]
   },
+  "ENNEAGRAM-SEARCH-QUEUE-READONLY-INSPECT-01": {
+    "id": "ENNEAGRAM-SEARCH-QUEUE-READONLY-INSPECT-01",
+    "repo": "fap-api",
+    "title": "ENNEAGRAM-SEARCH-QUEUE-READONLY-INSPECT-01: add read-only Enneagram Queue inspection",
+    "base": "main",
+    "branch": "codex/enneagram-search-queue-readonly-inspect-01",
+    "depends_on": ["ENNEAGRAM-SEARCH-RELEASE-READINESS-01"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "search_channel_action": false,
+    "llms_release_execution": false,
+    "api_runtime_change": false,
+    "workflow_policy_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The attached locked 10-item /goal explicitly authorizes this manifest/state initialization and the non-deploy, zero-write capability PR."},
+      "dependency": {"status": "pass", "evidence": "ENNEAGRAM-SEARCH-RELEASE-READINESS-01 is merged at 54fa89aceb54e1e6fd1d5f6e9b8f2cce3716cea4 and origin/main contains it."},
+      "local_validation": {"status": "pass", "evidence": "PHP syntax, the focused Queue inspection suite (4 tests, 32 assertions), the Queue runtime-freeze classifier suite (331 tests, 696 assertions), Pint, actionlint, YAML/JSON parsing, diff whitespace, and exact allowed-path validation passed. No workflow was dispatched and no production or Queue mutation occurred."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": null, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-12T00:20:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started exact Queue inspect capability from origin/main 425e94a52. No workflow dispatch, production connection, Queue write, submission, CMS/DB/SEO mutation, cache warm, deploy, secret, or permission action is authorized."}, {"at": "2026-07-12T00:21:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "The 116-target fail-closed inspection command, production workflow safety gates, focused Queue tests, runtime-freeze regression, Pint, actionlint, YAML/JSON, diff, and exact scope checks passed. No production action occurred."}]
+  },
   "BIG5-114-INDEXABILITY-PUBLISH-GATE-01": {
     "id": "BIG5-114-INDEXABILITY-PUBLISH-GATE-01", "repo": "fap-api", "title": "BIG5-114-INDEXABILITY-PUBLISH-GATE-01: prepare controlled 93-page indexability promotion", "base": "main", "branch": "codex/big5-114-indexability-publish-gate-01", "depends_on": ["BIG5-124-PRODUCTION-IMPORTER-OPS-01"],
     "status": "local_checks_passed", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
