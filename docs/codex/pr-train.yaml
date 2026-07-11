@@ -278,6 +278,53 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: CAREER-10K-CONTROLLED-ROLLOUT-01
+    repo: fap-api
+    depends_on: [CAREER-10K-CAPACITY-CHAOS-GATE-01]
+    branch: codex/career-10k-controlled-rollout-01
+    base: main
+    title: "CAREER-10K-CONTROLLED-ROLLOUT-01 controlled batches and rollback gate"
+    train_scope: career_10k_stability
+    status: in_progress
+    scope:
+      - Enforce the fixed 100, 500, 1000, 2500, 5000, and 10000 batch sequence with previous-batch completion.
+      - Fail closed on API, frontend, authority, locale, SEO, sitemap/llms, cache, error, publication, and rollback evidence.
+      - Produce only a readiness handoff for separate exact-SHA approval; never publish or deploy.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerValidate10kControlledRollout.php
+      - backend/app/Services/Career/Career10kControlledRolloutGate.php
+      - backend/tests/Feature/Console/CareerValidate10kControlledRolloutTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/career/career-10k-controlled-rollout-sop.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Import, publish, promote, deploy, warm production, mutate CMS/DB, submit URLs, or perform Search Channel actions.
+      - Change Career content, authority decisions, canonical, robots, structured data, sitemap, llms, or frontend runtime behavior.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/CareerValidate10kControlledRolloutTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_career_10k_controlled_rollout_gate' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/CareerValidate10kControlledRollout.php app/Services/Career/Career10kControlledRolloutGate.php tests/Feature/Console/CareerValidate10kControlledRolloutTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && composer validate --strict
+      - full repository Pint and composer test baseline failures recorded as authorized sidecars; GitHub required checks remain mandatory
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    scheduler_activation: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: MBTI-INDEX-24A-API
     repo: fap-api
     depends_on:
