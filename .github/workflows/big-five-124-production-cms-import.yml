@@ -137,11 +137,11 @@ jobs:
           ' "$SOURCE"
 
           cd "$BACKEND_ROOT"
-          php artisan personality-public-assets:import --no-ansi --source="../$PACKAGE_RELATIVE_PATH" | tee /tmp/big-five-124-dry-run.txt
-          for expected in dry_run=1 assets_found=124 valid_count=124 errors_count=0; do grep -Fx "$expected" /tmp/big-five-124-dry-run.txt >/dev/null; done
+          php artisan personality-public-assets:import --no-ansi --allow-indexable --source="../$PACKAGE_RELATIVE_PATH" | tee /tmp/big-five-124-dry-run.txt
+          for expected in dry_run=1 assets_found=124 valid_count=124 errors_count=0 indexable_count=21 sitemap_eligible_count=21 llms_eligible_count=21; do grep -Fx "$expected" /tmp/big-five-124-dry-run.txt >/dev/null; done
           if [ "$IMPORT_MODE" = "write" ]; then
-            php artisan personality-public-assets:import --no-ansi --source="../$PACKAGE_RELATIVE_PATH" --write | tee /tmp/big-five-124-write.txt
-            for expected in dry_run=0 assets_found=124 valid_count=124 errors_count=0; do grep -Fx "$expected" /tmp/big-five-124-write.txt >/dev/null; done
+            php artisan personality-public-assets:import --no-ansi --allow-indexable --source="../$PACKAGE_RELATIVE_PATH" --write | tee /tmp/big-five-124-write.txt
+            for expected in dry_run=0 assets_found=124 valid_count=124 errors_count=0 indexable_count=21 sitemap_eligible_count=21 llms_eligible_count=21; do grep -Fx "$expected" /tmp/big-five-124-write.txt >/dev/null; done
           fi
           REMOTE
 
