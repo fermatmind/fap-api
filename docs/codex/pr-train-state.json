@@ -708,8 +708,8 @@
     "depends_on": [
       "ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01"
     ],
-    "status": "local_verified",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "8887da1d59c20a854687f4e9fd102f9f734a71d7",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -767,6 +767,12 @@
         "from": "in_progress",
         "to": "local_verified",
         "note": "The repeatable scanner verified 26/26 bilingual pages, exact sitemap membership, robots/canonical/hreflang, 112 FAQ items and FAQPage parity, 108 internal links, private boundaries, and zero LLM/Search leakage. Three consecutive complete scans returned GO without writes, cache-warm commands, or deployment."
+      },
+      {
+        "at": "2026-07-11T11:09:30+08:00",
+        "from": "local_verified",
+        "to": "committed",
+        "note": "Committed the exact five-file manifest-authorized evidence, repeatable read-only scanner, and train metadata scope at 8887da1d59c20a854687f4e9fd102f9f734a71d7 using path-limited staging."
       }
     ]
   },

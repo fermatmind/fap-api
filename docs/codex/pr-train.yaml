@@ -38611,7 +38611,7 @@ prs:
     branch: codex/enneagram-en13-bilingual-production-revalidation-01
     title: "ENNEAGRAM-EN13-BILINGUAL-PRODUCTION-REVALIDATION-01: verify 26 published bilingual assets"
     train_scope: enneagram_en13_bilingual_revalidation
-    status: local_verified
+    status: committed
     allowed_paths: [generated/enneagram-en13-bilingual-production-revalidation/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
     validation: ["git diff --check"]
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
