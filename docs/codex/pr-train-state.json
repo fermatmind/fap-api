@@ -95,13 +95,13 @@
     "depends_on": [
       "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "1005466d5b3baf0421d1b66b2841d3d5554e8e6f",
+    "status": "merged",
+    "commit_sha": "e32f1de8bdd5def0615d70600fbcea467461b27f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2976",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T10:29:55Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -124,13 +124,17 @@
       "github_required": {
         "status": "pass",
         "evidence": "PR #2976 checks all completed successfully: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif upload."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #2976 merged as e32f1de8bdd5def0615d70600fbcea467461b27f; origin/main contains the merge commit; local and remote task branches were deleted."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -162,6 +166,87 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "All GitHub checks reported success and PR is mergeable."
+      },
+      {
+        "at": "2026-07-11T10:29:55.000Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2976 merged as e32f1de8bdd5def0615d70600fbcea467461b27f; origin/main contains the merge commit; local and remote task branches were deleted."
+      }
+    ]
+  },
+  "ENNEAGRAM-90-BACKEND-CMS-OPS-WORKFLOW-01": {
+    "id": "ENNEAGRAM-90-BACKEND-CMS-OPS-WORKFLOW-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/enneagram-90-backend-cms-ops-workflow-01",
+    "title": "ENNEAGRAM-90-BACKEND-CMS-OPS-WORKFLOW-01: add guarded Enneagram 90 CMS Ops workflow",
+    "depends_on": [
+      "ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01"
+    ],
+    "status": "committed",
+    "commit_sha": "6f9efdbbd1ece7b681a2e88445aa470927158b6e",
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01 PR #2976 merged as e32f1de8bdd5def0615d70600fbcea467461b27f and origin/main contains the merge commit."
+      },
+      "workflow_yaml": {
+        "status": "pass",
+        "evidence": "ruby YAML.parse check passed for .github/workflows/enneagram-90-cms-production-ops.yml."
+      },
+      "workflow_shell": {
+        "status": "pass",
+        "evidence": "bash -n passed for the extracted Run guarded ENNEAGRAM-90 CMS operation step."
+      },
+      "local_package_mode_smoke": {
+        "status": "pass",
+        "evidence": "Local SQLite import dry-runs passed for generated draft, content_ready, and published operation packages: each reported assets_found=90 valid_count=90 errors_count=0; published package reported indexable_count=90 sitemap_eligible_count=90 llms_eligible_count=0."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to .github/workflows/enneagram-90-cms-production-ops.yml plus docs/codex manifest/state."
+      },
+      "diff_checks": {
+        "status": "pass",
+        "evidence": "git diff --check and git diff --cached --check completed without errors."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T10:36:00.000Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Goal authorized a non-deploy ENNEAGRAM-90 CMS Ops workflow PR; no workflow execution, CMS writes, production import, publish, cache warm, deploy, llms, or search release in this PR."
+      },
+      {
+        "at": "2026-07-11T10:40:00.000Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Workflow YAML, extracted shell syntax, local package import dry-runs, manifest/state syntax, diff checks, and scope validation passed."
+      },
+      {
+        "at": "2026-07-11T10:42:00.000Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed scoped ENNEAGRAM-90 CMS Ops workflow changes after path-limited staging."
       }
     ]
   },
