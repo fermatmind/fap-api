@@ -73,6 +73,17 @@ class FmTokenOptional
             }
         }
 
+        $meta = $this->decodeMeta($row->meta_json ?? null);
+        $role = $this->resolveRole($row->role ?? null, $meta['role'] ?? null);
+        if (strtolower(trim($role)) === 'system') {
+            Log::warning('[SEC] system_token_optional_middleware_rejected', [
+                'path' => $request->path(),
+                'token_fingerprint' => substr($tokenHash, 0, 16),
+            ]);
+
+            return response()->json(['ok' => false, 'error_code' => 'UNAUTHENTICATED'], 401);
+        }
+
         $resolvedUserId = $this->resolveNumeric($row->user_id ?? null);
         if ($resolvedUserId !== null) {
             $request->attributes->set('fm_user_id', (string) $resolvedUserId);
@@ -85,11 +96,9 @@ class FmTokenOptional
             $request->attributes->set('fm_anon_id', $anonId);
         }
 
-        $meta = $this->decodeMeta($row->meta_json ?? null);
         $orgId = $this->resolveNumeric($row->org_id ?? null)
             ?? $this->resolveNumeric($meta['org_id'] ?? null)
             ?? 0;
-        $role = $this->resolveRole($row->role ?? null, $meta['role'] ?? null);
 
         $request->attributes->set('fm_org_id', $orgId);
         $request->attributes->set('org_id', $orgId);

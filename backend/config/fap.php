@@ -4,6 +4,12 @@ return [
     // Admin API token
     'admin_token' => env('FAP_ADMIN_TOKEN', ''),
 
+    'system_tokens' => [
+        'issuer' => env('FAP_SYSTEM_TOKEN_ISSUER', 'fermatmind-internal'),
+        'audience' => env('FAP_SYSTEM_TOKEN_AUDIENCE', 'fap-api'),
+        'max_ttl_seconds' => (int) env('FAP_SYSTEM_TOKEN_MAX_TTL_SECONDS', 900),
+    ],
+
     // Content packages
     'content_package_version' => env('FAP_CONTENT_PACKAGE_VERSION', 'MBTI-CN-v0.3'),
     'content_packages_dir' => env('FAP_CONTENT_PACKAGES_DIR', null),
