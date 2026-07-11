@@ -88350,13 +88350,13 @@
     "base": "main",
     "branch": "codex/enneagram-search-release-readiness-01",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "06ab4becf",
+    "status": "merged",
+    "commit_sha": "54fa89aceb54e1e6fd1d5f6e9b8f2cce3716cea4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2994",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T15:35:50Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -88373,8 +88373,8 @@
       "local_validation": {"status": "pass", "evidence": "Scanner execution, readiness JSON parse, train YAML/state JSON parse, changed-file scope validation, and diff whitespace checks passed."},
       "github_required_checks": {"status": "pass", "evidence": "PR #2994 head 6e418d860 passed all nine CI and Semgrep checks with zero failures or pending checks."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-11T23:00:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the exact read-only search readiness scope from origin/main ad17573ac; no Search Queue write, approval, submission, CMS mutation, llms release, cache warm, or deploy is authorized."}, {"at": "2026-07-11T23:25:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "All 116 public paths pass runtime/API/sitemap/FAQ/internal-link safety checks. Search release remains NO_GO because production queue planning and duplicate state were not observable in the approved report-only scope; no production action occurred."}, {"at": "2026-07-11T23:29:00+08:00", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact five-path report/train scope at 06ab4becf; no production action occurred."}, {"at": "2026-07-11T23:33:00+08:00", "from": "committed", "to": "pr_open", "note": "Opened PR #2994 for the exact report-only scope; required checks are pending and no production action occurred."}, {"at": "2026-07-11T23:40:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks are green; scope, changed files, PR body, review state, and squash-auto-merge policy are satisfied."}]
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "transitions": [{"at": "2026-07-11T23:00:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the exact read-only search readiness scope from origin/main ad17573ac; no Search Queue write, approval, submission, CMS mutation, llms release, cache warm, or deploy is authorized."}, {"at": "2026-07-11T23:25:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "All 116 public paths pass runtime/API/sitemap/FAQ/internal-link safety checks. Search release remains NO_GO because production queue planning and duplicate state were not observable in the approved report-only scope; no production action occurred."}, {"at": "2026-07-11T23:29:00+08:00", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact five-path report/train scope at 06ab4becf; no production action occurred."}, {"at": "2026-07-11T23:33:00+08:00", "from": "committed", "to": "pr_open", "note": "Opened PR #2994 for the exact report-only scope; required checks are pending and no production action occurred."}, {"at": "2026-07-11T23:40:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks are green; scope, changed files, PR body, review state, and squash-auto-merge policy are satisfied."}, {"at": "2026-07-11T15:35:50Z", "from": "ready_to_merge", "to": "merged", "note": "PR #2994 squash-merged at 54fa89aceb54e1e6fd1d5f6e9b8f2cce3716cea4; origin/main contains it, the worktree was clean, and local/remote task branches were deleted."}]
   },
   "ENNEAGRAM-LLMS-GEO-RELEASE-01": {
     "id": "ENNEAGRAM-LLMS-GEO-RELEASE-01",
@@ -88383,7 +88383,7 @@
     "base": "main",
     "branch": "codex/enneagram-llms-geo-release-01",
     "depends_on": ["ENNEAGRAM-SEARCH-RELEASE-READINESS-01"],
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
     "failure_reason": null,
@@ -88398,9 +88398,9 @@
     "api_runtime_change": false,
     "publish_allowed": false,
     "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pass", "evidence": "User explicitly authorized read-only llms/llms-full eligibility assessment and manifest/state initialization; no feed or CMS eligibility release is authorized."}},
-    "scope_validation": {"allowed_paths_only": null, "local_validation_passed": null, "github_checks_green": null, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-11T23:00:00+08:00", "from": "unregistered", "to": "pending_dependency", "note": "Registered behind ENNEAGRAM-SEARCH-RELEASE-READINESS-01; no llms or llms-full release is authorized."}]
+    "checks": {"authorization": {"status": "pass", "evidence": "User explicitly authorized read-only llms/llms-full eligibility assessment and manifest/state initialization; no feed or CMS eligibility release is authorized."}, "dependency": {"status": "pass", "evidence": "ENNEAGRAM-SEARCH-RELEASE-READINESS-01 is merged at 54fa89aceb54e1e6fd1d5f6e9b8f2cce3716cea4 and origin/main contains the merge."}, "production_readonly_scan": {"status": "pass", "evidence": "116 unique paths, 58 bilingual pairs, and 116/116 public gate, method boundary, answerability, provenance, and bilingual structure checks passed; zero private/sensitive path hits and zero current llms/feed membership."}, "llms_txt_readiness": {"status": "pass_requires_separate_authorization", "evidence": "Decision is GO_FOR_SEPARATE_LLMS_AUTHORIZATION for llms.txt only; this PR performs no eligibility or feed mutation."}, "llms_full_readiness": {"status": "blocked_fail_closed", "evidence": "Decision is NO_GO_LLMS_RELEASE: 90/116 assets pass the visible traceable evidence gate, while 26 EN13 hub/core/center assets remain agent-only provenance without evidence sections/source IDs/limitations."}, "local_validation": {"status": "pass", "evidence": "Scanner execution, readiness JSON contract, train YAML/state JSON parsing, exact scope, and diff whitespace checks passed."}},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": null, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T23:00:00+08:00", "from": "unregistered", "to": "pending_dependency", "note": "Registered behind ENNEAGRAM-SEARCH-RELEASE-READINESS-01; no llms or llms-full release is authorized."}, {"at": "2026-07-11T23:36:00+08:00", "from": "pending_dependency", "to": "in_progress", "note": "Started the read-only llms and llms-full assessment after PR #2994 merged and cleanup completed; no CMS eligibility, feed, cache, search, or deploy action is authorized."}, {"at": "2026-07-11T23:48:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "llms.txt readiness is GO only for a later separate authorization; llms-full remains NO_GO because 26 EN13 assets lack the enriched evidence gate. No production action occurred."}]
   },
   "BIG5-114-INDEXABILITY-PUBLISH-GATE-01": {
     "id": "BIG5-114-INDEXABILITY-PUBLISH-GATE-01", "repo": "fap-api", "title": "BIG5-114-INDEXABILITY-PUBLISH-GATE-01: prepare controlled 93-page indexability promotion", "base": "main", "branch": "codex/big5-114-indexability-publish-gate-01", "depends_on": ["BIG5-124-PRODUCTION-IMPORTER-OPS-01"],
