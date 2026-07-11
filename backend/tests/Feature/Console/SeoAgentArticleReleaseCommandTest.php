@@ -34,6 +34,7 @@ final class SeoAgentArticleReleaseCommandTest extends TestCase
         $this->assertSame('passed', $payload['status']);
         $this->assertFalse($payload['write_allowed']);
         $this->assertFalse($payload['writes_attempted']);
+        $this->assertSame('unavailable', $payload['platform_readiness']['frontend_revision']);
         $this->assertSame('passed', $payload['stage_report']['importer_plan']['active_surface_guard_scan']['status'] ?? null);
         $this->assertSame('passed', $payload['stage_report']['importer_plan']['contract_integrity_scan']['status'] ?? null);
         $this->assertSame(2, $payload['stage_report']['importer_plan']['article_count']);

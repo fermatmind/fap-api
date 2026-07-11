@@ -229,7 +229,7 @@ final class SeoAgentArticleReleaseCommand extends Command
 
         return [
             'ok' => $missing === [], 'backend_revision' => is_file($revisionPath) ? trim((string) file_get_contents($revisionPath)) : 'unavailable',
-            'frontend_revision' => (string) (env('FRONTEND_REVISION') ?: 'unavailable'), 'required_commands' => $commands,
+            'frontend_revision' => (string) config('app.frontend_revision', 'unavailable'), 'required_commands' => $commands,
             'missing_capabilities' => $missing, 'compiler_version' => 'seo-agent-mode-c-package-compiler.v1',
             'importer' => ['class' => SeoContentPackageDraftImporter::class, 'available' => class_exists(SeoContentPackageDraftImporter::class)],
             'public_baselines' => ['sitemap' => 'external_readback_required', 'llms' => 'external_readback_required', 'llms_full' => 'external_readback_required'],

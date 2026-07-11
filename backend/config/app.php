@@ -60,6 +60,8 @@ return [
 
     'frontend_url' => env('FRONTEND_URL', 'https://fermatmind.com'),
 
+    'frontend_revision' => env('FRONTEND_REVISION', 'unavailable'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
