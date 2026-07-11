@@ -39387,3 +39387,40 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: AUDIT-PRR2-API-06
+    repo: fap-api
+    depends_on: [AUDIT-PRR2-API-02]
+    branch: codex/audit-prr2-api-06-deployment-status-truth
+    title: "AUDIT-PRR2-API-06: make production deployment status truthful"
+    train_scope: prr2_api_deployment_status_truth
+    status: user_authorized
+    scope:
+      - Resolve exact-SHA/latest-main/staging eligibility in a non-environment job.
+      - Skip the production environment job entirely for stale workflow runs.
+      - Require deploy, queue restart, revision equality, health/contract smoke, and Ops asset smoke in every eligible deploy job.
+      - Add exact success, stale, deploy failure, queue skip, revision mismatch, and smoke failure fixtures.
+    allowed_paths:
+      - .github/workflows/deploy-production.yml
+      - backend/tests/Sre/ProductionDeploymentStatusTruthTest.php
+      - backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch staging/production workflows, deploy, access servers, mutate Environment/secrets, or change application runtime/CMS/SEO/payment behavior.
+    validation:
+      - actionlint .github/workflows/deploy-production.yml
+      - cd backend && php artisan test tests/Sre/ProductionDeploymentStatusTruthTest.php tests/Sre/DeployStorageAndDatabaseConfigTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Sre/ProductionDeploymentStatusTruthTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/deploy-production.yml'); YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
