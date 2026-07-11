@@ -85418,9 +85418,9 @@
     "base": "main",
     "branch": "codex/big5-124-publish-readiness-audit-01",
     "depends_on": [],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "5e4be54af0efd0d36a7eb8e006d1707c869d844c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2958",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -85434,7 +85434,9 @@
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
     "transitions": [
       {"at": "2026-07-11T06:36:10Z", "from": "unregistered", "to": "in_progress", "note": "Registered the first locked audit scope in an isolated clean worktree; no production action is in scope."},
-      {"at": "2026-07-11T06:37:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Production baseline JSON, 124/114/10 assertions, manifest YAML, state JSON, diff, and exact allowed-path validation passed."}
+      {"at": "2026-07-11T06:37:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Production baseline JSON, 124/114/10 assertions, manifest YAML, state JSON, diff, and exact allowed-path validation passed."},
+      {"at": "2026-07-11T06:38:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped production baseline, current manifest registration, and state initialization at 5e4be54af0efd0d36a7eb8e006d1707c869d844c."},
+      {"at": "2026-07-11T06:39:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the exact three-path audit scope and opened PR #2958; required checks are pending."}
     ]
   },
   "AUDIT-PRR2-API-01": {
