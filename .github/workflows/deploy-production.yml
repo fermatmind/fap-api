@@ -245,6 +245,7 @@ jobs:
           export DEPLOY_LOCK_RUN_ID="$GITHUB_RUN_ID"
           export DEPLOY_LOCK_RUN_ATTEMPT="$GITHUB_RUN_ATTEMPT"
           php /tmp/dep.phar deploy production -f deploy.php \
+            --revision "$DEPLOY_SHA" \
             -o release_name="production-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${DEPLOY_SHA:0:12}" \
             -vvv --no-interaction
 
@@ -294,7 +295,7 @@ jobs:
               sleep "$retry_delay"
             done
           }
-          DEPLOYED_SHA="$(ssh_retry "cd '$DEPLOY_PATH/current' && if [ -f REVISION ]; then tr -d '\n' < REVISION; else git rev-parse HEAD; fi")"
+          DEPLOYED_SHA="$(ssh_retry "cd '$DEPLOY_PATH/current' && if [ -f REVISION ]; then tr -d '\r\n' < REVISION; else git rev-parse HEAD; fi")"
           echo "deployed_sha=$DEPLOYED_SHA"
           test "$DEPLOYED_SHA" = "$DEPLOY_SHA"
 
