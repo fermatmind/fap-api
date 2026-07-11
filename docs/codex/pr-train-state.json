@@ -85281,9 +85281,9 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-01-attempt-owner-binding",
     "depends_on": [],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "b1fec7a2a4a1e5cb6447189c71d32582b93821a5",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2943",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -85347,6 +85347,12 @@
         "from": "focused_checks_passed",
         "to": "committed",
         "note": "Committed the four-path scoped repair, rebased cleanly onto origin/main 76e35f4f3dfc5a587617fb729c507736b238da6c, and retained implementation commit b1fec7a2a4a1e5cb6447189c71d32582b93821a5."
+      },
+      {
+        "at": "2026-07-11T11:52:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2943; GitHub required checks are pending and no production action was performed."
       }
     ]
   }
