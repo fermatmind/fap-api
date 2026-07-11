@@ -85386,7 +85386,7 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-runtime-closeout-01",
     "depends_on": ["BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01", "BIG5-ZH-FACET-IMPORT-IDENTITY-REPAIR-01"],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "1d04c8b08",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2955",
     "failure_reason": null,
@@ -85399,15 +85399,16 @@
       "exact_sha_production_authorization": {"status": "pass", "evidence": "The operator approved the bounded CMS import for release 585c6c4d44a89b9883790081ec2a7c13bff731d3 and seed SHA-256 88be4e72d18bf61b2be382423d754e46ca094ee6ed227430ed833b471ab0688d."},
       "bounded_production_import": {"status": "pass", "evidence": "Workflow run 29141944035 verified the deployed release and seed, dry-ran 31 assets, then updated 31 assets atomically with valid_count=31, errors_count=0, and all indexability counts zero."},
       "runtime_closeout": {"status": "pass", "evidence": "All 31 API and public-page readbacks passed: at least nine sections, five FAQs, seven internal links, HTML noindex, canonical paths, and zero matching paths in sitemap, llms, llms-full, or robots surfaces."},
-      "github_required_checks": {"status": "pending", "evidence": "Required checks will be recorded after the PR is opened."}
+      "github_required_checks": {"status": "pass", "evidence": "PR #2955 head 48b63e860 passed all nine reported CI and Code Scanning checks, including verify-bigfive and both MBTI verification jobs."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
     "transitions": [
       {"at": "2026-07-11T05:54:43Z", "from": "unregistered", "to": "manifest_registered", "note": "Registered after the exact-SHA 31-page production import succeeded and its bounded receipt was downloaded."},
       {"at": "2026-07-11T05:54:43Z", "from": "manifest_registered", "to": "in_progress", "note": "Started the read-only 31-page API/page, FAQ/internal-link, noindex, sitemap, robots, and llms closeout."},
       {"at": "2026-07-11T06:00:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "All 31 API and page probes plus five enumeration surfaces passed; report JSON, manifest YAML, state JSON, diff, and allowed-path scope validation passed."},
       {"at": "2026-07-11T06:02:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact-SHA import receipt, 31-page runtime evidence, manifest registration, and dependency reconciliation at 1d04c8b08."},
-      {"at": "2026-07-11T06:03:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2955; required GitHub checks are pending."}
+      {"at": "2026-07-11T06:03:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2955; required GitHub checks are pending."},
+      {"at": "2026-07-11T06:10:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required CI and Code Scanning checks passed; PR body, review state, changed files, and allowed-path scope were revalidated."}
     ]
   },
   "AUDIT-PRR2-API-01": {
