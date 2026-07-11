@@ -60,6 +60,10 @@ final class BigFiveCmsImportDraftDryRunPlanner
      */
     public function plan(array $package, string $sourceSha256 = ''): array
     {
+        if (($package['contract_version'] ?? null) === 'personality_public_asset.v1' && is_array($package['assets'] ?? null)) {
+            return $this->planV1Assets((array) $package['assets'], $sourceSha256);
+        }
+
         $errors = [];
         $warnings = [];
         $rows = $this->rows($package, $errors);
@@ -117,6 +121,39 @@ final class BigFiveCmsImportDraftDryRunPlanner
             'errors' => $errors,
             'warnings' => $warnings,
         ];
+    }
+
+    /** @param list<mixed> $assets @return array<string,mixed> */
+    private function planV1Assets(array $assets, string $sourceSha256): array
+    {
+        $errors = [];
+        $identity = [];
+        $localeCounts = [];
+        $typeCounts = [];
+        $canonical = 0;
+        $redirectOnly = 0;
+        $legacyAliases = ['emotional-stability','high-agreeableness','high-conscientiousness','high-extraversion','high-neuroticism','high-openness','low-agreeableness','low-conscientiousness','low-extraversion','low-openness'];
+        foreach ($assets as $index => $asset) {
+            if (! is_array($asset)) { $errors[] = $this->issue('assets.'.$index, 'asset_not_object', 'Each V1 asset must be an object.'); continue; }
+            foreach (['framework','entity_type','entity_key','locale','canonical_path','sections','faq','internal_links','robots'] as $field) {
+                if (! array_key_exists($field, $asset)) $errors[] = $this->issue('assets.'.$index.'.'.$field, 'required_field_missing', 'Required V1 asset field is missing.');
+            }
+            if (($asset['framework'] ?? '') !== PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE) $errors[] = $this->issue('assets.'.$index.'.framework', 'framework_invalid', 'V1 assets must use big_five.');
+            $key = implode(':', [(string)($asset['locale'] ?? ''), (string)($asset['entity_type'] ?? ''), (string)($asset['entity_key'] ?? '')]);
+            if (isset($identity[$key])) $errors[] = $this->issue('assets.'.$index, 'identity_duplicate', 'V1 asset identity must be unique.');
+            $identity[$key] = true;
+            $isLegacyAlias = ($asset['locale'] ?? '') === 'zh-CN' && in_array((string)($asset['entity_key'] ?? ''), $legacyAliases, true);
+            if (! $isLegacyAlias) foreach ((array)($asset['sections'] ?? []) as $sectionIndex => $section) if (!is_array($section) || trim((string)($section['body_md'] ?? '')) === '') $errors[] = $this->issue('assets.'.$index.'.sections.'.$sectionIndex.'.body_md', 'body_md_missing', 'Canonical V1 sections must use non-empty body_md.');
+            if (str_contains((string) json_encode($asset), 'bodyMd')) $errors[] = $this->issue('assets.'.$index, 'bodyMd_forbidden', 'V1 assets must use body_md, never bodyMd.');
+            $robots = (string)($asset['robots'] ?? '');
+            if ($isLegacyAlias) $redirectOnly++; else $canonical++;
+            if (($asset['index_eligible'] ?? false) && $robots !== 'index,follow') $errors[] = $this->issue('assets.'.$index.'.robots', 'indexability_gate_invalid', 'Indexable assets require index,follow.');
+            $locale = (string)($asset['locale'] ?? ''); $localeCounts[$locale] = ($localeCounts[$locale] ?? 0) + 1;
+            $type = (string)($asset['entity_type'] ?? ''); $typeCounts[$type] = ($typeCounts[$type] ?? 0) + 1;
+        }
+        if (count($assets) !== 124) $errors[] = $this->issue('assets', 'row_count_invalid', 'V1 Big Five publish package must contain exactly 124 assets.');
+        if ($canonical !== 114 || $redirectOnly !== 10) $errors[] = $this->issue('assets', 'topology_invalid', 'Expected 114 canonical/indexable assets and 10 noindex redirect-only aliases.');
+        return ['artifact'=>'BIG5-124-PUBLISH-IMPORT-DRYRUN-01','status'=>$errors===[]?'pass':'fail','ok'=>$errors===[],'dry_run_only'=>true,'write_supported_in_this_pr'=>false,'writes_committed'=>false,'cms_write_attempted'=>false,'publish_attempted'=>false,'index_attempted'=>false,'search_release_attempted'=>false,'sitemap_llms_release_attempted'=>false,'source_sha256'=>$sourceSha256,'row_count'=>count($assets),'expected_row_count'=>124,'row_count_matches_expected'=>count($assets)===124,'locale_counts'=>$localeCounts,'entity_type_counts'=>$typeCounts,'canonical_assets'=>$canonical,'redirect_only_aliases'=>$redirectOnly,'errors'=>$errors,'warnings'=>[]];
     }
 
     /**

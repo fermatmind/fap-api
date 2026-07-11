@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Console;
 
 use App\Console\Commands\PersonalityBigFiveCmsImportDraftDryRun;
+use App\Services\Cms\BigFiveCmsImportDraftDryRunPlanner;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
@@ -67,6 +68,29 @@ final class PersonalityBigFiveCmsImportDraftDryRunCommandTest extends TestCase
         $this->assertSame(2, $firstRow['render_preview_section_count'] ?? null);
         $this->assertSame(5, $firstRow['faq_count'] ?? null);
         $this->assertNotContains('FAQ', $firstRow['render_preview_body_section_headings'] ?? []);
+    }
+
+    public function test_planner_accepts_the_124_asset_v1_publish_package_without_writes(): void
+    {
+        $path = base_path('../generated/big-five-124-publish-import-dryrun/big_five_124_merged_v1_seed.json');
+        $raw = (string) File::get($path);
+        $package = json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
+
+        $payload = $this->app->make(BigFiveCmsImportDraftDryRunPlanner::class)
+            ->plan($package, hash('sha256', $raw));
+
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame(124, $payload['row_count']);
+        $this->assertSame(124, $payload['expected_row_count']);
+        $this->assertTrue($payload['row_count_matches_expected']);
+        $this->assertSame(114, $payload['canonical_assets']);
+        $this->assertSame(10, $payload['redirect_only_aliases']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['cms_write_attempted']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertSame([], $payload['errors']);
     }
 
     public function test_command_requires_explicit_dry_run(): void

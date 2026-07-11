@@ -39989,6 +39989,22 @@ prs:
     publish_allowed: false
     deploy_allowed: false
 
+  - id: BIG5-124-PUBLISH-IMPORT-DRYRUN-01
+    repo: fap-api
+    depends_on: [BIG5-EN-LEGACY-POLARITY-CONTENT-PACKAGE-01]
+    branch: codex/big5-124-publish-import-dryrun-01
+    title: "BIG5-124-PUBLISH-IMPORT-DRYRUN-01: validate the merged 124-asset V1 package without writes"
+    train_scope: big5_124_publish_import_dryrun
+    status: user_authorized
+    scope: [Assemble and validate exactly 124 Big Five V1 assets with 114 canonical pages and 10 Chinese redirect-only aliases using a no-write planner.]
+    allowed_paths: [backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php, backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php, generated/big-five-124-publish-import-dryrun/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [node generated/big-five-124-publish-import-dryrun/build-package.mjs, cd backend && php artisan test tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php --no-ansi, git diff --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []
