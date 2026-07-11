@@ -11,6 +11,7 @@ use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -864,6 +865,7 @@ final class PersonalityPublicApiTest extends TestCase
             'runtime_type_code' => 'INTP-T',
         ]);
 
+        app(PublicCareerAuthorityResponseCache::class)->warm();
         $locs = collect(app(SitemapGenerator::class)->generateUrls())
             ->pluck('loc')
             ->all();

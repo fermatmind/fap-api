@@ -6,7 +6,7 @@
     "base": "main",
     "branch": "codex/career-public-authority-cache-resilience-01",
     "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01"],
-    "status": "pr_open",
+    "status": "ci_fix_validated",
     "commit_sha": "9fec8cbae25aa1b59616b7a5efc766146d4a7bc7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2956",
     "failure_reason": null,
@@ -85,6 +85,12 @@
         "from": "ci_fix_validated",
         "to": "pr_open",
         "note": "Rebased onto origin/main 13b1c3f4c while preserving all concurrent manifest/state entries; reran the full focused PR scope successfully and prepared the scoped CI fix for required-check rerun."
+      },
+      {
+        "at": "2026-07-11T16:13:00+08:00",
+        "from": "pr_open",
+        "to": "ci_fix_validated",
+        "note": "Inspected the second verify-mbti-legacy/v2 failure: one PersonalityPublicApi sitemap-source test still invoked the shared sitemap generator without a warmed Career directory. Added explicit test warm; the exact failing test now passes 1/3 and scoped Pint passes."
       }
     ]
   },
