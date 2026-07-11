@@ -6,9 +6,9 @@
     "base": "main",
     "branch": "codex/career-public-authority-cache-resilience-01",
     "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01"],
-    "status": "focused_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "6435b285f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2956",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -61,6 +61,12 @@
         "from": "in_progress",
         "to": "focused_checks_passed",
         "note": "Single-flight, atomic version switching, LKG, no-fake-empty, EN/ZH verify, scheduler, directory compatibility, scoped Pint, Composer, YAML/JSON, and exact nine-path scope checks passed."
+      },
+      {
+        "at": "2026-07-11T15:36:00+08:00",
+        "from": "focused_checks_passed",
+        "to": "pr_open",
+        "note": "Committed implementation as 6435b285f, pushed the scoped branch, and opened PR #2956; GitHub required checks are pending."
       }
     ]
   },
