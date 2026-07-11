@@ -86953,9 +86953,9 @@
     "base": "main",
     "branch": "codex/big5-zh-published-link-hreflang-repair-01",
     "depends_on": ["BIG5-EN-FACET-NEUROTICISM-CONTENT-PACKAGE-01"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "4c6a8bf47197b251b28ebe9fa63f44038f3b32a8",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2977",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -86968,7 +86968,8 @@
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
     "transitions": [
       {"at": "2026-07-11T10:30:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the seventh locked train item after verifying the Neuroticism dependency on origin/main; production writes and runtime release remain out of scope."},
-      {"at": "2026-07-11T10:38:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The exact 20-row V1 repair package passed all manifest checks, including seven unique localized links, reciprocal hreflang, body_md, topology, and scope validation."}
+      {"at": "2026-07-11T10:38:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The exact 20-row V1 repair package passed all manifest checks, including seven unique localized links, reciprocal hreflang, body_md, topology, and scope validation."},
+      {"at": "2026-07-11T10:42:00Z", "from": "local_checks_passed", "to": "pr_open", "note": "Committed and pushed the scoped package at 4c6a8bf47 and opened PR #2977; required GitHub checks are pending."}
     ]
   },
   "AUDIT-PRR2-API-01": {
