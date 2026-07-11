@@ -59,7 +59,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $source = $this->readRepoFile('deploy.php');
 
         $this->assertStringContainsString(
-            "sudo -n -u www-data -- {{bin/php}} %s seo:warm-sitemap-source-cache",
+            'sudo -n -u www-data -- {{bin/php}} %s seo:warm-sitemap-source-cache',
             $source,
         );
     }
@@ -100,21 +100,34 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
-    public function production_auto_deploy_requires_successful_staging_and_latest_main(): void
+    public function production_deploy_is_manual_only_and_staging_success_cannot_trigger_it(): void
     {
         $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
+        $triggerStart = strpos($source, "on:\n");
+        $permissionsStart = strpos($source, "\npermissions:");
 
-        $this->assertStringContainsString("workflows: [\"Deploy Application\"]", $source);
-        $this->assertStringContainsString("github.event.workflow_run.conclusion == 'success'", $source);
-        $this->assertStringContainsString("github.event.workflow_run.event == 'push'", $source);
-        $this->assertStringContainsString("github.event.workflow_run.head_branch == 'main'", $source);
+        $this->assertIsInt($triggerStart);
+        $this->assertIsInt($permissionsStart);
+        $triggerBlock = substr(
+            $source,
+            $triggerStart,
+            $permissionsStart - $triggerStart
+        );
+
+        $this->assertStringContainsString('workflow_dispatch:', $triggerBlock);
+        $this->assertStringNotContainsString('workflow_run:', $triggerBlock);
+        $this->assertStringNotContainsString('push:', $triggerBlock);
+        $this->assertStringNotContainsString('pull_request:', $triggerBlock);
+        $this->assertStringNotContainsString('github.event.workflow_run', $source);
+        $this->assertStringNotContainsString('auto_deploy_policy_guard', $source);
+        $this->assertStringNotContainsString('auto-{0}', $source);
+        $this->assertStringContainsString('DEPLOY_SHA: ${{ inputs.expected_release_sha }}', $source);
+        $this->assertStringContainsString('RELEASE_ID: ${{ inputs.release_id }}', $source);
         $this->assertStringContainsString('Confirm approved revision is still latest main', $source);
         $this->assertStringContainsString('if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]', $source);
+        $this->assertStringContainsString('Manual production deploy refused because expected_release_sha is not latest main.', $source);
         $this->assertStringContainsString('--revision "$DEPLOY_SHA"', $source);
         $this->assertStringContainsString("tr -d '\\r\\n' < REVISION", $source);
-        $this->assertStringContainsString('Single-developer mode: a latest-main revision with a successful staging deploy is eligible for automatic production deployment regardless of PR labels or changed paths.', $source);
-        $this->assertStringNotContainsString('Production auto-deploy requires exactly one merged PR', $source);
-        $this->assertStringNotContainsString('/repos/${GITHUB_REPOSITORY}/pulls/${pr_number}/files', $source);
     }
 
     #[Test]
@@ -126,8 +139,13 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('staging_run_id:', $source);
         $this->assertStringContainsString('release_id:', $source);
         $this->assertStringContainsString('operator_approval_phrase:', $source);
+        $this->assertSame(4, substr_count($source, 'required: true'));
         $this->assertStringContainsString('actions: read', $source);
         $this->assertStringContainsString('Validate manual exact-SHA approval and staging evidence', $source);
+        $this->assertStringNotContainsString("if: github.event_name == 'workflow_dispatch'", $source);
+        $this->assertStringContainsString('[[ ! "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]', $source);
+        $this->assertStringContainsString('[[ ! "$STAGING_RUN_ID" =~ ^[0-9]+$ ]]', $source);
+        $this->assertStringContainsString('[[ ! "$RELEASE_ID" =~ ^[A-Za-z0-9._-]{1,80}$ ]]', $source);
         $this->assertStringContainsString('I explicitly approve backend production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
         $this->assertStringContainsString('.name == "Deploy Application"', $source);
         $this->assertStringContainsString('.path == ".github/workflows/deploy.yml"', $source);
@@ -137,6 +155,10 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('.name == "Deploy (staging)" and .conclusion == "success"', $source);
         $this->assertStringContainsString('Manual production deploy refused because expected_release_sha is not latest main.', $source);
         $this->assertStringContainsString('-o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"', $source);
+        $this->assertLessThan(
+            strpos($source, '- name: Deploy production with Deployer'),
+            strpos($source, '- name: Validate manual exact-SHA approval and staging evidence')
+        );
     }
 
     #[Test]
@@ -171,7 +193,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
 
         $this->assertStringContainsString('LOCK_GUARD_SCRIPT="$(cat', $source);
         $this->assertStringContainsString('LOCK_GUARD_B64="$(printf', $source);
-        $this->assertStringContainsString("base64 -d | bash", $source);
+        $this->assertStringContainsString('base64 -d | bash', $source);
         $this->assertStringNotContainsString("ssh_retry \"TARGET='\$TARGET' DEPLOY_PATH='\$DEPLOY_PATH' bash -s\" <<'REMOTE'", $source);
         $this->assertStringContainsString('STALE_LOCK_SECONDS="${STALE_LOCK_SECONDS:-1800}"', $source);
         $this->assertStringContainsString('[ "$OWNER" = "ci" ]', $source);

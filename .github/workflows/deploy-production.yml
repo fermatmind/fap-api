@@ -1,10 +1,6 @@
 name: Deploy API Production
 
 on:
-  workflow_run:
-    workflows: ["Deploy Application"]
-    types: [completed]
-    branches: [main]
   workflow_dispatch:
     inputs:
       expected_release_sha:
@@ -34,17 +30,12 @@ env:
   DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
   SSH_RETRY_ATTEMPTS: "3"
   SSH_RETRY_DELAY_SECONDS: "10"
-  DEPLOY_SHA: ${{ github.event_name == 'workflow_dispatch' && inputs.expected_release_sha || github.event.workflow_run.head_sha }}
-  RELEASE_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.release_id || format('auto-{0}', github.event.workflow_run.head_sha) }}
+  DEPLOY_SHA: ${{ inputs.expected_release_sha }}
+  RELEASE_ID: ${{ inputs.release_id }}
 
 jobs:
   deployment-eligibility:
     name: Resolve production deployment eligibility
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.event == 'push' &&
-      github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
@@ -57,7 +48,6 @@ jobs:
           ref: ${{ env.DEPLOY_SHA }}
 
       - name: Validate manual exact-SHA approval and staging evidence
-        if: github.event_name == 'workflow_dispatch'
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -108,13 +98,8 @@ jobs:
           LATEST_MAIN_SHA="$(git rev-parse origin/main)"
           echo "deploy_sha=$DEPLOY_SHA" >> "$GITHUB_OUTPUT"
           if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
-            if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
-              echo "Manual production deploy refused because expected_release_sha is not latest main." >&2
-              exit 1
-            fi
-            echo "eligible=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::Stale workflow_run is ineligible; production deploy job will be skipped."
-            exit 0
+            echo "Manual production deploy refused because expected_release_sha is not latest main." >&2
+            exit 1
           fi
           echo "eligible=true" >> "$GITHUB_OUTPUT"
 
@@ -154,15 +139,6 @@ jobs:
         with:
           php-version: "8.4"
           coverage: none
-
-      - name: Record single-developer auto-deploy policy
-        id: auto_deploy_policy_guard
-        if: github.event_name == 'workflow_run'
-        shell: bash
-        run: |
-          set -euo pipefail
-          echo "::notice::Single-developer mode: a latest-main revision with a successful staging deploy is eligible for automatic production deployment regardless of PR labels or changed paths."
-          exit 0
 
       - name: Validate protected production topology
         shell: bash
