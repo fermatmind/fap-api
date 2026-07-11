@@ -14,6 +14,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Throwable;
 
 class GenerateReportJob implements ShouldQueue
 {
@@ -22,6 +23,15 @@ class GenerateReportJob implements ShouldQueue
     public string $attemptId;
 
     public ?string $jobId;
+
+    public int $tries = 3;
+
+    public int $timeout = 180;
+
+    public bool $failOnTimeout = true;
+
+    /** @var array<int, int> */
+    public array $backoff = [10, 30, 60];
 
     public function __construct(string $attemptId, ?string $jobId = null)
     {
@@ -89,15 +99,16 @@ class GenerateReportJob implements ShouldQueue
                 $reportPayload['tags'] = [];
             }
 
+            $this->persistReportJson((string) ($attempt->scale_code ?? 'MBTI'), $attemptId, $reportPayload);
+
             $job->status = 'success';
             $job->finished_at = now();
             $job->report_json = $reportPayload;
             $job->save();
-
-            $this->persistReportJson((string) ($attempt->scale_code ?? 'MBTI'), $attemptId, $reportPayload);
-        } catch (\Throwable $e) {
-            $job->status = 'failed';
-            $job->failed_at = now();
+        } catch (Throwable $e) {
+            $job->status = 'queued';
+            $job->failed_at = null;
+            $job->finished_at = null;
             $job->last_error = $e->getMessage();
             $job->last_error_trace = $e->getTraceAsString();
             $job->save();
@@ -112,24 +123,31 @@ class GenerateReportJob implements ShouldQueue
         }
     }
 
+    public function failed(Throwable $exception): void
+    {
+        $job = ReportJob::query()->where('attempt_id', $this->attemptId)->first();
+        if (! $job instanceof ReportJob || $job->status === 'success') {
+            return;
+        }
+
+        $job->status = 'failed';
+        $job->failed_at = now();
+        $job->finished_at = null;
+        $job->last_error = $exception->getMessage();
+        $job->last_error_trace = $exception->getTraceAsString();
+        $job->save();
+    }
+
     private function persistReportJson(string $scaleCode, string $attemptId, array $reportPayload): void
     {
-        try {
-            $latestRelPath = app(ArtifactStore::class)
-                ->putReportJson($scaleCode, $attemptId, $reportPayload);
+        $latestRelPath = app(ArtifactStore::class)
+            ->putReportJson($scaleCode, $attemptId, $reportPayload);
 
-            Log::info('[report_job] persisted report.json', [
-                'attempt_id' => $attemptId,
-                'disk' => 'local',
-                'latest' => $latestRelPath,
-                'snapshot' => null,
-            ]);
-        } catch (\Throwable $e) {
-            Log::warning('[report_job] persist report.json failed', [
-                'attempt_id' => $attemptId,
-                'path' => null,
-                'err' => $e->getMessage(),
-            ]);
-        }
+        Log::info('[report_job] persisted report.json', [
+            'attempt_id' => $attemptId,
+            'disk' => 'local',
+            'latest' => $latestRelPath,
+            'snapshot' => null,
+        ]);
     }
 }

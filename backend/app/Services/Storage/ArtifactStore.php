@@ -54,7 +54,9 @@ final class ArtifactStore
             throw new \RuntimeException('REPORT_JSON_ENCODE_FAILED: '.json_last_error_msg());
         }
 
-        Storage::disk('local')->put($path, $json);
+        if (! Storage::disk('local')->put($path, $json)) {
+            throw new \RuntimeException('REPORT_JSON_WRITE_FAILED');
+        }
         $this->catalogBlobMetadata(
             $path,
             $json,
