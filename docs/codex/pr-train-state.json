@@ -83666,7 +83666,7 @@
     "depends_on": [
       "MBTI-MAIN-FREE-FAQ-CONTENT-01-CLOSEOUT"
     ],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "e02e0f8efc646ef3b58d99f1bbec91509d1650cd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2744",
     "failure_reason": null,
@@ -85053,15 +85053,16 @@
       "generic_importer_dry_run": { "status": "pass", "evidence": "Against an ephemeral SQLite database initialized from the canonical Big Five baseline, the corrected seed returned assets_found=31, valid_count=31, errors_count=0, will_create=0, will_update=31, will_skip=0, and zero discoverability eligibility; no production or persistent CMS write occurred." },
       "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 19 tests and 443 assertions." },
       "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end; the Big Five gate passed 1186 tests and 150161 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
-      "github_checks": { "status": "pending", "evidence": null }
+      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head 44d3a6b5ff1e6a0c5863dcb0049a7bfc12607c7a; PR #2930 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false },
+    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false },
     "transitions": [
       { "at": "2026-07-11T01:12:20Z", "from": "unregistered", "to": "planned", "note": "Registered the authorized identity repair after the atomic importer dependency merged and cleaned." },
       { "at": "2026-07-11T01:12:20Z", "from": "planned", "to": "in_progress", "note": "Started deterministic facet_detail identity alignment, combined seed regeneration, and workflow gate repair; no CMS write, workflow dispatch, or deploy is in scope." },
       { "at": "2026-07-11T01:20:48Z", "from": "in_progress", "to": "local_checks_passed", "note": "Five package builds/validators, corrected 31-row composition, baseline-shaped importer dry-run, focused contract, full core CI, full-32 authority gate, JSON/YAML syntax, hash, diff, and allowed-path validation passed without production writes." },
       { "at": "2026-07-11T01:21:59Z", "from": "local_checks_passed", "to": "committed", "note": "Rebased cleanly onto latest origin/main, reran package validators and the 19-test focused contract, and committed the scoped identity repair at fc50dc8ebfef5c200f955ddbc593b1a439c68225." },
-      { "at": "2026-07-11T01:23:04Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2930; GitHub checks are pending." }
+      { "at": "2026-07-11T01:23:04Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2930; GitHub checks are pending." },
+      { "at": "2026-07-11T01:28:37Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, seed hash, and allowed-path scope were revalidated." }
     ]
   }
 }
