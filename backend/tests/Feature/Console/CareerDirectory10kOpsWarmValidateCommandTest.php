@@ -9,6 +9,7 @@ use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
@@ -35,6 +36,7 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
         $this->createDirectoryOccupation('actors', 'Actors', '演员');
         $this->createDirectoryOccupation('software-developers', 'Software Developers', '软件开发人员');
         $this->publishRuntimeProjection(['accountants-and-auditors', 'actors', 'software-developers']);
+        app(PublicCareerAuthorityResponseCache::class)->warm();
 
         $exitCode = Artisan::call('career:validate-directory-10k-scale-readiness', [
             '--expected-public-count' => 2,
@@ -65,6 +67,7 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
     {
         $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师');
         $this->publishRuntimeProjection(['actuaries']);
+        app(PublicCareerAuthorityResponseCache::class)->warm();
 
         $exitCode = Artisan::call('career:validate-directory-10k-scale-readiness', [
             '--expected-public-count' => 1046,

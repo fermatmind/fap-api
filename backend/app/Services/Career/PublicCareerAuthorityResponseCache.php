@@ -15,6 +15,8 @@ use App\Services\Career\Bundles\CareerJobListBundleBuilder;
 use App\Services\Career\Dataset\CareerPublicDatasetContractBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 final class PublicCareerAuthorityResponseCache
 {
@@ -30,6 +32,8 @@ final class PublicCareerAuthorityResponseCache
 
     public const DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX = 'career:public-authority:directory-read-model:v1';
 
+    public const DIRECTORY_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:directory-read-model:v2';
+
     public function __construct(
         private readonly CareerPublicDatasetContractBuilder $datasetContractBuilder,
         private readonly CareerLaunchGovernanceClosureService $launchGovernanceClosureService,
@@ -43,18 +47,30 @@ final class PublicCareerAuthorityResponseCache
     public function directoryReadModelPayload(string $publicLocale = 'zh-CN'): array
     {
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-        $cacheKey = $this->directoryReadModelCacheKey($normalizedLocale);
-        $cached = Cache::get($cacheKey);
-        if (is_array($cached)) {
-            return $cached;
+        foreach (['active' => $this->directoryActiveVersionKey($normalizedLocale), 'stale' => $this->directoryLkgVersionKey($normalizedLocale)] as $state => $pointerKey) {
+            $version = Cache::get($pointerKey);
+            $payload = is_string($version) && $version !== ''
+                ? Cache::get($this->directoryVersionPayloadKey($normalizedLocale, $version))
+                : null;
+            if (is_array($payload)) {
+                $this->logDirectoryCacheState($normalizedLocale, $state === 'active' ? 'hit' : 'stale', $version);
+
+                return $payload;
+            }
         }
 
-        $jobIndex = $this->jobIndexPayload($normalizedLocale);
-        $rows = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
-        $payload = $this->careerDirectoryReadModelBuilder->build($rows, $normalizedLocale);
-        Cache::forever($cacheKey, $payload);
+        // One-release compatibility bridge for the v1 read model. This never rebuilds
+        // authority on the HTTP request path and is promoted by the next warm command.
+        $legacy = Cache::get($this->directoryReadModelCacheKey($normalizedLocale));
+        if (is_array($legacy)) {
+            $this->logDirectoryCacheState($normalizedLocale, 'stale', 'legacy-v1');
 
-        return $payload;
+            return $legacy;
+        }
+
+        $this->logDirectoryCacheState($normalizedLocale, 'miss', null);
+
+        throw new \RuntimeException(sprintf('Career directory authority cache is unavailable for locale %s.', $normalizedLocale));
     }
 
     /**
@@ -219,11 +235,11 @@ final class PublicCareerAuthorityResponseCache
         $reporter?->__invoke('dataset_payloads', 'finished');
 
         $reporter?->__invoke('job_index_en', 'starting');
-        $jobIndexEn = $this->refreshJobIndexPayload('en');
+        $jobIndexEn = $this->warmJobIndexPayload('en');
         $reporter?->__invoke('job_index_en', 'finished');
 
         $reporter?->__invoke('job_index_zh_cn', 'starting');
-        $jobIndexZhCn = $this->refreshJobIndexPayload('zh-CN');
+        $jobIndexZhCn = $this->warmJobIndexPayload('zh-CN');
         $reporter?->__invoke('job_index_zh_cn', 'finished');
 
         $reporter?->__invoke('launch_governance_closure', 'starting');
@@ -333,14 +349,99 @@ final class PublicCareerAuthorityResponseCache
 
         Cache::forever($this->jobIndexCacheKey($publicLocale, $includeNonIndexable), $payload);
 
-        if (! $includeNonIndexable) {
-            Cache::forever(
-                $this->directoryReadModelCacheKey($publicLocale),
-                $this->careerDirectoryReadModelBuilder->build($items, $publicLocale),
-            );
-        }
-
         return $payload;
+    }
+
+    /** @return array<string, mixed> */
+    private function warmJobIndexPayload(string $publicLocale): array
+    {
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $observedVersion = Cache::get($this->directoryActiveVersionKey($normalizedLocale));
+
+        return $this->singleFlightDirectoryRebuild(
+            $normalizedLocale,
+            is_string($observedVersion) ? $observedVersion : null,
+            function () use ($normalizedLocale): array {
+                $jobIndex = $this->refreshJobIndexPayload($normalizedLocale);
+                $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
+                $this->publishDirectoryReadModel(
+                    $normalizedLocale,
+                    $this->careerDirectoryReadModelBuilder->build($items, $normalizedLocale),
+                );
+
+                return $jobIndex;
+            },
+        );
+    }
+
+    /**
+     * @param  callable(): array<string, mixed>  $rebuild
+     * @return array<string, mixed>
+     */
+    public function singleFlightDirectoryRebuild(string $publicLocale, ?string $observedVersion, callable $rebuild): array
+    {
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $lock = Cache::lock($this->directoryRebuildLockKey($normalizedLocale), 60);
+
+        return $lock->block(65, function () use ($normalizedLocale, $observedVersion, $rebuild): array {
+            $currentVersion = Cache::get($this->directoryActiveVersionKey($normalizedLocale));
+            if ($currentVersion !== null && $currentVersion !== $observedVersion) {
+                $this->logDirectoryCacheState($normalizedLocale, 'hit', (string) $currentVersion, ['rebuild' => 'coalesced']);
+
+                $cached = Cache::get($this->jobIndexCacheKey($normalizedLocale, false));
+                if (is_array($cached)) {
+                    return $cached;
+                }
+            }
+
+            $this->logDirectoryCacheState($normalizedLocale, 'rebuild', is_string($currentVersion) ? $currentVersion : null, ['rebuild' => 'starting']);
+
+            try {
+                return $rebuild();
+            } catch (\Throwable $throwable) {
+                $this->logDirectoryCacheState($normalizedLocale, 'stale', is_string($currentVersion) ? $currentVersion : null, [
+                    'rebuild' => 'failed',
+                    'error_class' => $throwable::class,
+                ]);
+
+                throw $throwable;
+            }
+        });
+    }
+
+    /** @param array<string, mixed> $payload */
+    public function publishDirectoryReadModel(string $publicLocale, array $payload): string
+    {
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $version = (string) Str::ulid();
+        $activeKey = $this->directoryActiveVersionKey($normalizedLocale);
+        $previousVersion = Cache::get($activeKey);
+
+        Cache::forever($this->directoryVersionPayloadKey($normalizedLocale, $version), $payload);
+        if (is_string($previousVersion) && $previousVersion !== '') {
+            Cache::forever($this->directoryLkgVersionKey($normalizedLocale), $previousVersion);
+        }
+        Cache::forever($activeKey, $version);
+        Cache::forget($this->directoryReadModelCacheKey($normalizedLocale));
+        $this->logDirectoryCacheState($normalizedLocale, 'rebuild', $version, ['rebuild' => 'finished']);
+
+        return $version;
+    }
+
+    /** @return array{locale: string, status: string, active_version: ?string, lkg_version: ?string} */
+    public function directoryCacheStatus(string $publicLocale): array
+    {
+        $locale = $this->normalizePublicLocale($publicLocale);
+        $active = Cache::get($this->directoryActiveVersionKey($locale));
+        $lkg = Cache::get($this->directoryLkgVersionKey($locale));
+        $activePayload = is_string($active) ? Cache::get($this->directoryVersionPayloadKey($locale, $active)) : null;
+
+        return [
+            'locale' => $locale,
+            'status' => is_array($activePayload) ? 'ready' : 'unavailable',
+            'active_version' => is_string($active) ? $active : null,
+            'lkg_version' => is_string($lkg) ? $lkg : null,
+        ];
     }
 
     /**
@@ -447,5 +548,36 @@ final class PublicCareerAuthorityResponseCache
             self::DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX,
             $this->normalizePublicLocale($publicLocale),
         );
+    }
+
+    private function directoryActiveVersionKey(string $publicLocale): string
+    {
+        return sprintf('%s:%s:active', self::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX, $this->normalizePublicLocale($publicLocale));
+    }
+
+    private function directoryLkgVersionKey(string $publicLocale): string
+    {
+        return sprintf('%s:%s:lkg', self::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX, $this->normalizePublicLocale($publicLocale));
+    }
+
+    private function directoryVersionPayloadKey(string $publicLocale, string $version): string
+    {
+        return sprintf('%s:%s:versions:%s', self::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX, $this->normalizePublicLocale($publicLocale), $version);
+    }
+
+    private function directoryRebuildLockKey(string $publicLocale): string
+    {
+        return sprintf('%s:%s:rebuild-lock', self::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX, $this->normalizePublicLocale($publicLocale));
+    }
+
+    /** @param array<string, mixed> $extra */
+    private function logDirectoryCacheState(string $locale, string $state, ?string $version, array $extra = []): void
+    {
+        Log::info('career_public_authority_cache', array_merge([
+            'surface' => 'directory',
+            'locale' => $locale,
+            'cache_state' => $state,
+            'version' => $version,
+        ], $extra));
     }
 }

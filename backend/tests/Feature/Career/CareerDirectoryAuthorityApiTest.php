@@ -9,6 +9,7 @@ use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -32,6 +33,7 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance');
         $this->createDirectoryOccupation('actors', 'Actors', '演员', 'arts-media', 'Arts and Media');
         $this->publishRuntimeProjection(['accountants-and-auditors', 'actuaries', 'actors']);
+        $this->warmDirectoryAuthority();
 
         $response = $this->getJson('/api/v0.5/career/directory?locale=en&page=1&per_page=2')
             ->assertOk()
@@ -67,6 +69,7 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance');
         $this->createDirectoryOccupation('actors', 'Actors', '演员', 'arts-media', 'Arts and Media');
         $this->publishRuntimeProjection(['accountants-and-auditors', 'actuaries', 'actors']);
+        $this->warmDirectoryAuthority();
 
         $this->getJson('/api/v0.5/career/directory?locale=zh-CN&family=business-finance&q=actuar&page=1&per_page=50')
             ->assertOk()
@@ -95,6 +98,7 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
                 'release_gate_pass' => false,
             ],
         ]);
+        $this->warmDirectoryAuthority();
 
         $slugs = collect($this->getJson('/api/v0.5/career/directory?locale=en&per_page=100')->assertOk()->json('items'))
             ->pluck('slug')
@@ -184,6 +188,11 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         ]);
 
         return $occupation;
+    }
+
+    private function warmDirectoryAuthority(): void
+    {
+        app(PublicCareerAuthorityResponseCache::class)->warm();
     }
 
     /**

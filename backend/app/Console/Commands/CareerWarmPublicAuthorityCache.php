@@ -16,6 +16,7 @@ final class CareerWarmPublicAuthorityCache extends Command
         {--job-detail-locales=zh-CN : Comma-separated public locales for detail cache warm}
         {--forget-job-detail : Forget targeted job detail caches before warming them}
         {--job-detail-only : Warm only targeted job detail caches}
+        {--verify-only : Verify EN/ZH directory versions without rebuilding authority}
         {--json : Emit JSON output}';
 
     protected $description = 'Warm public Career dataset and launch-governance authority response caches outside the HTTP request path.';
@@ -23,6 +24,10 @@ final class CareerWarmPublicAuthorityCache extends Command
     public function handle(PublicCareerAuthorityResponseCache $cache): int
     {
         try {
+            if ((bool) $this->option('verify-only')) {
+                return $this->verifyDirectoryCaches($cache);
+            }
+
             $manifestPath = trim((string) $this->option('job-detail-manifest'));
             $manifestSource = trim((string) $this->option('job-detail-manifest-source'));
             $jobDetailSlugs = array_values(array_unique(array_merge(
@@ -99,6 +104,38 @@ final class CareerWarmPublicAuthorityCache extends Command
 
             return self::FAILURE;
         }
+    }
+
+    private function verifyDirectoryCaches(PublicCareerAuthorityResponseCache $cache): int
+    {
+        $entries = [
+            'en' => $cache->directoryCacheStatus('en'),
+            'zh-CN' => $cache->directoryCacheStatus('zh-CN'),
+        ];
+        $ready = array_reduce(
+            $entries,
+            static fn (bool $carry, array $entry): bool => $carry && ($entry['status'] ?? null) === 'ready',
+            true,
+        );
+
+        if ((bool) $this->option('json')) {
+            $this->line((string) json_encode([
+                'status' => $ready ? 'ready' : 'unavailable',
+                'entries' => $entries,
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+        } else {
+            foreach ($entries as $locale => $entry) {
+                $this->line(sprintf(
+                    'career_directory_cache locale=%s status=%s active_version=%s lkg_version=%s',
+                    $locale,
+                    (string) ($entry['status'] ?? 'unavailable'),
+                    (string) ($entry['active_version'] ?? ''),
+                    (string) ($entry['lkg_version'] ?? ''),
+                ));
+            }
+        }
+
+        return $ready ? self::SUCCESS : self::FAILURE;
     }
 
     /**

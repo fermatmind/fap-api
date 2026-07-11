@@ -1,4 +1,109 @@
 {
+  "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01": {
+    "id": "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01",
+    "repo": "fap-api",
+    "title": "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01 career public authority cache resilience",
+    "base": "main",
+    "branch": "codex/career-public-authority-cache-resilience-01",
+    "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01"],
+    "status": "ready_to_merge",
+    "commit_sha": "4c939e09d241892c8c17bd6c3f15c04d97366b78",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2956",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "scheduler_activation": true,
+    "deploy_allowed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The Career 10k Stability /goal explicitly authorized this PR and its fap-api manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2952 is merged as 342e17cebd1a32a6901770521b47478d48f47048 and origin/main contains that merge commit."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "Cache command contracts passed 12 tests/129 assertions; CareerDirectory passed 7 tests/120 assertions; Big Five runtime classifier passed 2 tests/4 assertions; scheduler registration, scoped Pint, Composer validation, YAML/JSON, and diff checks passed."
+      },
+      "full_composer_test": {
+        "status": "external_baseline_user_overridden",
+        "evidence": "The train-wide clean-origin/main composer baseline failure is recorded in generated/pr-train-sidecar-issues; the user authorized focused local plus GitHub required checks as the merge gate."
+      },
+      "pint": {
+        "status": "external_baseline_user_overridden",
+        "evidence": "Changed-PHP scoped Pint passes all ten changed PHP files; the train-wide clean-origin/main repository Pint baseline failure is sidecarred under the user's explicit override."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2956 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and non-blocking SARIF upload after both inspected sitemap contract fixes."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T15:05:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Started from merged PR #2952 on origin/main in an isolated worktree; scope is limited to public directory cache resilience, verification scheduling, and focused contracts."
+      },
+      {
+        "at": "2026-07-11T15:28:00+08:00",
+        "from": "in_progress",
+        "to": "focused_checks_passed",
+        "note": "Single-flight, atomic version switching, LKG, no-fake-empty, EN/ZH verify, scheduler, directory compatibility, scoped Pint, Composer, YAML/JSON, and exact nine-path scope checks passed."
+      },
+      {
+        "at": "2026-07-11T15:36:00+08:00",
+        "from": "focused_checks_passed",
+        "to": "pr_open",
+        "note": "Committed implementation as 6435b285f, pushed the scoped branch, and opened PR #2956; GitHub required checks are pending."
+      },
+      {
+        "at": "2026-07-11T15:45:00+08:00",
+        "from": "pr_open",
+        "to": "github_checks_failed_fix_in_progress",
+        "note": "Inspected failed verify-mbti-legacy/v2 jobs: SitemapGeneratorTest and SitemapXmlTest still relied on request-time Career directory cache construction. Updated only those focused contracts to warm authority explicitly before sitemap generation; production HTTP behavior remains unchanged."
+      },
+      {
+        "at": "2026-07-11T15:51:00+08:00",
+        "from": "github_checks_failed_fix_in_progress",
+        "to": "ci_fix_validated",
+        "note": "The exact failing sitemap suites now pass 15 tests/324 assertions; combined cache+sitemap contracts pass 27 tests/453 assertions, CareerDirectory 7/120, Big Five classifier 2/4, and scoped Pint passes nine PHP files."
+      },
+      {
+        "at": "2026-07-11T16:02:00+08:00",
+        "from": "ci_fix_validated",
+        "to": "pr_open",
+        "note": "Rebased onto origin/main 13b1c3f4c while preserving all concurrent manifest/state entries; reran the full focused PR scope successfully and prepared the scoped CI fix for required-check rerun."
+      },
+      {
+        "at": "2026-07-11T16:13:00+08:00",
+        "from": "pr_open",
+        "to": "ci_fix_validated",
+        "note": "Inspected the second verify-mbti-legacy/v2 failure: one PersonalityPublicApi sitemap-source test still invoked the shared sitemap generator without a warmed Career directory. Added explicit test warm; the exact failing test now passes 1/3 and scoped Pint passes."
+      },
+      {
+        "at": "2026-07-11T16:22:00+08:00",
+        "from": "ci_fix_validated",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed after the scoped fixes; GitHub reports CLEAN/MERGEABLE and the exact twelve-path scope plus diff validation passed."
+      }
+    ]
+  },
   "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01": {
     "id": "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01",
     "repo": "fap-api",
@@ -6,13 +111,13 @@
     "base": "main",
     "branch": "codex/career-directory-read-model-performance-01",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "35d9f210fae677f3be9672798f25caa4eed502dd",
+    "status": "merged",
+    "commit_sha": "342e17cebd1a32a6901770521b47478d48f47048",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2952",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T06:00:20Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -50,7 +155,7 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -100,6 +205,12 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "All GitHub required checks passed, GitHub reports the PR clean and mergeable, and the exact eleven-path scope plus diff validation were rechecked before merge."
+      },
+      {
+        "at": "2026-07-11T15:00:20+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2952 squash-merged as 342e17cebd1a32a6901770521b47478d48f47048; origin/main and local main were synchronized, the worktree was clean, and local/remote task branches were deleted."
       }
     ]
   },

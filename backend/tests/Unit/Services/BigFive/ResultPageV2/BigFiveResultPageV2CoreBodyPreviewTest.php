@@ -4412,6 +4412,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_public_authority_cache_resilience(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/CareerWarmPublicAuthorityCache.php',
+            'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
+            'backend/bootstrap/app.php',
+        ];
+        $bootstrapChangedLines = [
+            "+        \$schedule->command('career:warm-public-authority-cache --verify-only --json')->everyTenMinutes()->withoutOverlapping();",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            bootstrapAppChangedLines: $bootstrapChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_salary_asset_staging_preview_changes(): void
     {
         $changed = [
@@ -6843,6 +6862,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
+                    || $this->kernelDiffIsCareerPublicAuthorityCacheVerifyOnly(
+                        $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    )
                 )
             ) {
                 continue;
@@ -6857,6 +6879,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsTestMetricsSchedulerOnly($bootstrapAppChangedLines ?? [])
                     || $this->kernelDiffIsIqMethodPagesCmsDraftImporterOnly($bootstrapAppChangedLines ?? [])
                     || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly($bootstrapAppChangedLines ?? [])
+                    || $this->kernelDiffIsCareerPublicAuthorityCacheVerifyOnly($bootstrapAppChangedLines ?? [])
                 )
             ) {
                 continue;
@@ -11250,6 +11273,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return true;
+    }
+
+    /** @param list<string> $changedLines */
+    private function kernelDiffIsCareerPublicAuthorityCacheVerifyOnly(array $changedLines): bool
+    {
+        return $changedLines === [
+            "+        \$schedule->command('career:warm-public-authority-cache --verify-only --json')->everyTenMinutes()->withoutOverlapping();",
+        ];
     }
 
     /**
