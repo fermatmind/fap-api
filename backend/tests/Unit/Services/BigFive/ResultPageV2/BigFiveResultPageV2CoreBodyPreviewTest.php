@@ -2293,6 +2293,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_seo_intel_search_channel_queue_runtime_files(): void
     {
         $changed = [
+            'backend/app/Console/Commands/PersonalityEnneagramSearchQueueInspect.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelApproveCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelProviderHoldCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelProviderPreflightCommand.php',
@@ -8202,6 +8203,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isSeoIntelSearchChannelQueueRuntimeFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/PersonalityEnneagramSearchQueueInspect.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelApproveCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelProviderHoldCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelProviderPreflightCommand.php',

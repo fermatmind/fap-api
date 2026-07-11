@@ -40863,3 +40863,47 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: ENNEAGRAM-SEARCH-QUEUE-READONLY-INSPECT-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-SEARCH-RELEASE-READINESS-01]
+    branch: codex/enneagram-search-queue-readonly-inspect-01
+    title: "ENNEAGRAM-SEARCH-QUEUE-READONLY-INSPECT-01: add read-only Enneagram Queue inspection"
+    train_scope: enneagram_search_queue_readonly_inspect
+    status: in_progress
+    scope:
+      - Add a fail-closed Artisan command that derives the exact 116 published bilingual Enneagram assets from CMS authority and inspects IndexNow Queue eligibility, active duplicates, stale submissions, and reason counts without writes.
+      - Add a non-deploy production workflow that verifies the deployed revision and invokes only the required dry-run command through protected production topology variables.
+      - Emit only public canonical paths, hashes, aggregate counts, reason codes, and negative guarantees; do not expose secrets, private routes, raw queue payloads, or server topology.
+    allowed_paths:
+      - .github/workflows/enneagram-search-queue-production-inspect.yml
+      - backend/app/Console/Commands/PersonalityEnneagramSearchQueueInspect.php
+      - backend/tests/Feature/Console/PersonalityEnneagramSearchQueueInspectCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Dispatch the workflow, connect to production, deploy, write/approve/enqueue Queue items, submit IndexNow, call an external search API, mutate CMS/DB/SEO eligibility, warm cache, modify secrets or permissions.
+    validation:
+      - php -l backend/app/Console/Commands/PersonalityEnneagramSearchQueueInspect.php
+      - php -l backend/tests/Feature/Console/PersonalityEnneagramSearchQueueInspectCommandTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/PersonalityEnneagramSearchQueueInspectCommandTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_freeze_classifier_ignores_seo_intel_search_channel_queue_runtime_files' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityEnneagramSearchQueueInspect.php tests/Feature/Console/PersonalityEnneagramSearchQueueInspectCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - actionlint -ignore 'SC2016:' -ignore 'SC2034:' .github/workflows/enneagram-search-queue-production-inspect.yml
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/enneagram-search-queue-production-inspect.yml'); YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    search_channel_action: false
+    llms_release_execution: false
+    api_runtime_change: false
+    workflow_policy_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
