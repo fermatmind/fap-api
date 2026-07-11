@@ -84234,6 +84234,85 @@
       }
     ]
   },
+  "MBTI-CMS-28A": {
+    "id": "MBTI-CMS-28A",
+    "repo": "fap-api",
+    "title": "MBTI-CMS-28A: align MBTI profile indexability readmodels",
+    "base": "main",
+    "branch": "codex/mbti-cms-28a-profile-indexability-readmodel",
+    "depends_on": [
+      "MBTI-CMS-29"
+    ],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized registering and executing MBTI-CMS-28A and updating the fap-api PR-train manifest and state ledger."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "MBTI-CMS-29 merge commit 843cddf93 is contained in origin/main."
+      },
+      "cms28_readonly_evidence": {
+        "status": "needs_revision",
+        "evidence": "The latest CMS-28 read-only verification found four production profile details where profile.is_indexable and answer/landing readmodels reported indexable while final SEO robots, rendered pages, sitemap, and llms remained noindex-held."
+      },
+      "focused_profile_api": {
+        "status": "pass_with_warnings",
+        "evidence": "PersonalityPublicApiTest passed 23 tests and 3249 assertions, including effective indexability coverage for profile flag and final variant robots. PHP 8.5 compatibility warnings did not fail the suite."
+      },
+      "content15_import_readmodel": {
+        "status": "pass_with_warnings",
+        "evidence": "PersonalityMbtiContent15ProductionImportCommandTest passed 2 tests and 60 assertions, including ISTJ-A noindex detail/list/landing/answer readmodel assertions. PHP 8.5 compatibility warnings did not fail the suite."
+      },
+      "sitemap_regression": {
+        "status": "pass_with_warnings",
+        "evidence": "SitemapGeneratorTest passed 11 tests and 231 assertions; held personality variants and comparisons remain excluded. PHP 8.5 compatibility warnings did not fail the suite."
+      },
+      "pint": {
+        "status": "pass",
+        "evidence": "Pint passed for the controller and two focused test files after applying one scoped unary-operator spacing fix."
+      },
+      "route_list": {
+        "status": "pass",
+        "evidence": "php artisan route:list --path=api --except-vendor completed successfully."
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "evidence": "bash scripts/ci_verify_mbti.sh completed successfully, including full MBTI verification, full-32 authority, migration safety, OpenAPI, commerce/share security, dependency security, and runtime freeze gates."
+      },
+      "metadata_and_diff": {
+        "status": "pass",
+        "evidence": "PR-train YAML parsed, state JSON parsed, and git diff --check passed."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-10T19:36:14Z",
+        "from": "manifest_registered",
+        "to": "in_progress",
+        "note": "Started the isolated effective-indexability readmodel alignment. CMS writes, sitemap/llms release, deploy, GSC, MBTI-CMS-28 production verification, and MBTI-INDEX-24 remain out of scope."
+      },
+      {
+        "at": "2026-07-10T19:51:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Focused API/import/sitemap tests, Pint, route listing, complete MBTI CI, YAML/JSON parsing, diff check, and five-path scope validation passed."
+      }
+    ]
+  },
   "BIG5-EN-DOMAIN-CONTENT-PACKAGE-01": {
     "id": "BIG5-EN-DOMAIN-CONTENT-PACKAGE-01",
     "repo": "fap-api",

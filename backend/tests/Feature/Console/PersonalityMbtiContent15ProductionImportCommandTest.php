@@ -105,8 +105,15 @@ final class PersonalityMbtiContent15ProductionImportCommandTest extends TestCase
 
         $profileResponse = $this->getJson('/api/v0.5/personality/istj-a?locale=zh-CN');
         $profileResponse->assertOk()
+            ->assertJsonPath('profile.is_indexable', false)
+            ->assertJsonPath('seo_meta.robots', 'noindex,follow')
             ->assertJsonPath('answer_surface_v1.faq_blocks.0.question', 'Q1')
             ->assertJsonPath('internal_links.0.href', '/zh/personality')
+            ->assertJsonPath('landing_surface_v1.landing_scope', 'public_noindex_detail')
+            ->assertJsonPath('landing_surface_v1.indexability_state', 'noindex')
+            ->assertJsonPath('answer_surface_v1.answer_scope', 'public_noindex_detail')
+            ->assertJsonPath('answer_surface_v1.public_safety_state', 'public_noindex')
+            ->assertJsonPath('answer_surface_v1.indexability_state', 'noindex')
             ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', '/zh/personality');
 
         $atResponse = $this->getJson('/api/v0.5/personality/comparisons/intp-a-vs-intp-t?locale=zh-CN');

@@ -143,15 +143,22 @@ class PersonalityController extends Controller
         $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
             $this->personalityProfileSeoService->buildMeta($profile, $variant)
         );
+        $isIndexable = $this->profileAllowsIndexing($profile, $meta);
         $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
         $sections = $this->publicSectionPayloads($profile, $variant);
         $internalLinks = $this->content15ProfileInternalLinks($sections, $validated['locale']);
         $seoSurface = $this->buildSeoSurface($meta, $jsonLd, $this->personalitySeoSurfaceType($profile));
-        $landingSurface = $this->buildDetailLandingSurface($profile, $variant, $projection, $validated['locale']);
+        $landingSurface = $this->buildDetailLandingSurface(
+            $profile,
+            $variant,
+            $projection,
+            $validated['locale'],
+            $isIndexable,
+        );
 
         $payload = [
             'ok' => true,
-            'profile' => $this->profileDetailPayload($profile, $variant),
+            'profile' => $this->profileDetailPayload($profile, $variant, $isIndexable),
             'sections' => $sections,
             'internal_links' => $internalLinks,
             'seo_meta' => $this->seoMetaPayload($profile, $variant),
@@ -167,6 +174,7 @@ class PersonalityController extends Controller
                 $landingSurface,
                 $validated['locale'],
                 $internalLinks,
+                $isIndexable,
             ),
         ];
 
@@ -1348,7 +1356,8 @@ class PersonalityController extends Controller
         PersonalityProfile $profile,
         ?PersonalityProfileVariant $variant,
         array $projection,
-        string $locale
+        string $locale,
+        bool $isIndexable,
     ): array {
         $segment = $this->frontendLocaleSegment($locale);
         $routeSlug = $this->resolveRouteSlug($profile, $variant);
@@ -1358,7 +1367,7 @@ class PersonalityController extends Controller
         $startTestPath = $this->personalityStartTestPath($profile, $segment);
 
         return $this->landingSurfaceContractService->build([
-            'landing_scope' => 'public_indexable_detail',
+            'landing_scope' => $isIndexable ? 'public_indexable_detail' : 'public_noindex_detail',
             'entry_surface' => 'personality_detail',
             'entry_type' => 'personality_profile',
             'summary_blocks' => [
@@ -1403,7 +1412,7 @@ class PersonalityController extends Controller
                     'kind' => 'discover',
                 ],
             ])),
-            'indexability_state' => $profile->is_indexable ? 'indexable' : 'noindex',
+            'indexability_state' => $isIndexable ? 'indexable' : 'noindex',
             'attribution_scope' => 'public_personality_landing',
             'seo_surface_ref' => (string) ($profile->slug ?? ''),
             'surface_family' => 'personality',
@@ -1437,6 +1446,7 @@ class PersonalityController extends Controller
         array $landingSurface,
         string $locale,
         array $internalLinks = [],
+        bool $isIndexable = false,
     ): array {
         $summary = trim((string) ($projection['summary_card']['summary'] ?? $profile->excerpt ?? ''));
         $subtitle = trim((string) ($projection['summary_card']['subtitle'] ?? $profile->subtitle ?? ''));
@@ -1465,7 +1475,7 @@ class PersonalityController extends Controller
         ]));
 
         return $this->answerSurfaceContractService->build([
-            'answer_scope' => ($profile->is_indexable ?? false) ? 'public_indexable_detail' : 'public_noindex_detail',
+            'answer_scope' => $isIndexable ? 'public_indexable_detail' : 'public_noindex_detail',
             'surface_type' => 'personality_public_detail',
             'summary_blocks' => $summaryBlocks,
             'faq_blocks' => $this->answerSurfaceContractService->extractFaqBlocksFromSectionPayloads($sections),
@@ -1492,8 +1502,8 @@ class PersonalityController extends Controller
                 $internalLinks !== [] ? 'personality_profile_variant_sections.mbti_content15_internal_links' : '',
                 $sceneSummaryBlocks !== [] ? 'scene_summary_blocks' : '',
             ])),
-            'public_safety_state' => 'public_indexable',
-            'indexability_state' => ($profile->is_indexable ?? false) ? 'indexable' : 'noindex',
+            'public_safety_state' => $isIndexable ? 'public_indexable' : 'public_noindex',
+            'indexability_state' => $isIndexable ? 'indexable' : 'noindex',
             'attribution_scope' => 'public_personality_answer',
             'seo_surface_ref' => (string) ($seoSurface['metadata_fingerprint'] ?? ''),
             'landing_surface_ref' => (string) ($landingSurface['landing_fingerprint'] ?? ''),
@@ -1711,6 +1721,10 @@ class PersonalityController extends Controller
         $projection = $this->sanitizePublicProjection(
             $this->personalityProfileService->buildPublicProjection($profile, $variant)
         );
+        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
+            $this->personalityProfileSeoService->buildMeta($profile, $variant)
+        );
+        $isIndexable = $this->profileAllowsIndexing($profile, $meta);
         $runtimeTypeCode = strtoupper(trim((string) ($variant->runtime_type_code ?? '')));
         $canonicalTypeCode = strtoupper(trim((string) ($variant->canonical_type_code ?: $profile->canonical_type_code ?: $profile->type_code)));
         $routeSlug = strtolower($runtimeTypeCode);
@@ -1734,7 +1748,7 @@ class PersonalityController extends Controller
             'hero_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($profile->hero_image_url),
             'status' => 'published',
             'is_public' => true,
-            'is_indexable' => (bool) $profile->is_indexable,
+            'is_indexable' => $isIndexable,
             'published_at' => $variant->published_at?->toISOString(),
             'updated_at' => $variant->updated_at?->toISOString(),
             'seo_meta' => $this->variantSeoMetaSummaryPayload($profile, $variant),
@@ -1747,8 +1761,11 @@ class PersonalityController extends Controller
     /**
      * @return array<string, mixed>
      */
-    private function profileDetailPayload(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
-    {
+    private function profileDetailPayload(
+        PersonalityProfile $profile,
+        ?PersonalityProfileVariant $variant = null,
+        bool $isIndexable = false,
+    ): array {
         return array_merge([
             'id' => (int) $profile->id,
             'org_id' => (int) $profile->org_id,
@@ -1764,10 +1781,24 @@ class PersonalityController extends Controller
             'hero_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($profile->hero_image_url),
             'status' => (string) $profile->status,
             'is_public' => (bool) $profile->is_public,
-            'is_indexable' => (bool) $profile->is_indexable,
+            'is_indexable' => $isIndexable,
             'published_at' => $profile->published_at?->toISOString(),
             'updated_at' => $profile->updated_at?->toISOString(),
         ], $this->personalityProfileService->publicCanonicalFields($profile, $variant));
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     */
+    private function profileAllowsIndexing(PersonalityProfile $profile, array $meta): bool
+    {
+        if (! (bool) $profile->is_indexable) {
+            return false;
+        }
+
+        $robots = strtolower(trim((string) ($meta['robots'] ?? '')));
+
+        return $robots !== '' && ! str_contains($robots, 'noindex');
     }
 
     /**
