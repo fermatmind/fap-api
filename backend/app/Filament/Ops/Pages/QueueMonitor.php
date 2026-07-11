@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Pages;
 
 use App\Services\Audit\AuditLogger;
+use App\Services\Queue\QueueDlqService;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Pages\Page;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 class QueueMonitor extends Page
@@ -99,26 +99,38 @@ class QueueMonitor extends Page
 
     public function retry(int $failedJobId): void
     {
-        Artisan::call('queue:retry', [
-            'id' => [(string) $failedJobId],
-        ]);
-
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+        $adminId = is_object($user) && method_exists($user, 'getAuthIdentifier')
+            ? max(0, (int) $user->getAuthIdentifier())
+            : 0;
+        $requestedBy = $adminId > 0 ? 'admin:'.$adminId : 'admin:unknown';
+        $result = app(QueueDlqService::class)->replayFailedJob($failedJobId, $requestedBy);
+        $status = (string) ($result['status'] ?? 'unknown');
+
         app(AuditLogger::class)->log(
             request(),
-            'queue_failed_job_retry',
+            'queue_failed_job_replay',
             'failed_jobs',
             (string) $failedJobId,
             [
+                'actor_admin_id' => $adminId > 0 ? $adminId : null,
                 'org_id' => $orgId,
                 'correlation_id' => (string) \Illuminate\Support\Str::uuid(),
                 'failed_job_id' => $failedJobId,
+                'replay_log_id' => max(0, (int) ($result['replay_log_id'] ?? 0)),
+                'replay_status' => $status,
             ],
-            'ops_retry_failed_job',
-            'requested',
+            'ops_replay_failed_job',
+            (bool) ($result['ok'] ?? false) ? 'success' : 'failed',
         );
 
-        $this->statusMessage = 'Retry queued for failed job #'.$failedJobId;
+        $this->statusMessage = match ($status) {
+            'replayed' => 'Replay queued for failed job #'.$failedJobId,
+            'already_replayed' => 'Failed job #'.$failedJobId.' was already replayed',
+            default => 'Replay failed for job #'.$failedJobId.' ('.$status.')',
+        };
         $this->refresh();
     }
 }

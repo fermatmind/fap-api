@@ -39866,3 +39866,41 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: AUDIT-PRR2-API-12
+    repo: fap-api
+    depends_on: [AUDIT-PRR2-API-09]
+    branch: codex/audit-prr2-api-12-dlq-replay-single-path
+    title: "AUDIT-PRR2-API-12: route QueueMonitor replay through DLQ service"
+    train_scope: prr2_dlq_replay_single_path
+    status: user_authorized
+    scope:
+      - Remove QueueMonitor's direct queue:retry command path.
+      - Route each operator replay exactly once through QueueDlqService with the authenticated admin identity.
+      - Audit the bounded service outcome and expose success, duplicate, or failure status without raw payloads.
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/QueueMonitor.php
+      - backend/app/Services/Queue/QueueDlqService.php
+      - backend/tests/Unit/Ops/QueueMonitorReplayContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute a real replay, change failed-job payloads, broaden replay authorization, alter queue workers/configuration, CMS/SEO, deployment, or production state.
+    validation:
+      - cd backend && php artisan test tests/Unit/Ops/QueueMonitorReplayContractTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_dlq_replay_single_path' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Filament/Ops/Pages/QueueMonitor.php tests/Unit/Ops/QueueMonitorReplayContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    queue_replay_execution: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
