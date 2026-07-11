@@ -366,6 +366,47 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: MBTI-INDEX-24B
+    repo: fap-api
+    depends_on:
+      - MBTI-INDEX-24A-API
+    branch: codex/mbti-index-24b-promote-nine-personality-records
+    title: "MBTI-INDEX-24B: promote nine MBTI personality records"
+    train_scope: mbti_content15_nine_record_indexability_promotion
+    status: user_authorized
+    scope:
+      - Add a fail-closed dry-run and exact-authorized promotion command for the nine CONTENT-15 MBTI records.
+      - Release indexability, sitemap, and llms eligibility while keeping search submission disabled.
+      - Emit the exact promotion package and authorization payload SHA256 values.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityMbtiContent15IndexabilityPromote.php
+      - backend/app/Services/Cms/MbtiContent15IndexabilityPromotionService.php
+      - backend/content_assets/personality_public/mbti-content15-indexability-promotion-v1.json
+      - backend/tests/Feature/Console/PersonalityMbtiContent15IndexabilityPromotionCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute production promotion, GSC submission, URL Inspection, indexing requests, or search submission in this PR.
+      - Modify MBTI editorial content, routes, schema, canonical logic, or frontend code.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/PersonalityMbtiContent15IndexabilityPromotionCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/SEO/SitemapGeneratorTest.php --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiContent15IndexabilityPromote.php app/Services/Cms/MbtiContent15IndexabilityPromotionService.php tests/Feature/Console/PersonalityMbtiContent15IndexabilityPromotionCommandTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: true
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: true
+    content_authority: backend
+
   - id: BIG5-CMS-FAQ-DEDUPE-02
     repo: fap-api
     depends_on:

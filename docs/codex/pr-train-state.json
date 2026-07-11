@@ -87739,13 +87739,13 @@
     "depends_on": [
       "MBTI-CMS-28A"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "016063eb506b87e68a867ad5f2910d46d40be37d",
+    "status": "merged",
+    "commit_sha": "e04b250b87028c32908e76262719e0a902a32be5",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2951",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T05:54:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "authorization": {
         "status": "pass",
@@ -87772,7 +87772,7 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -87798,7 +87798,42 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "All nine GitHub checks passed; PR #2951 is mergeable and the four changed paths match the authorized manifest."
+      },
+      {
+        "at": "2026-07-12T01:00:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled while registering MBTI-INDEX-24B: GitHub reports PR #2951 merged at e04b250b87028c32908e76262719e0a902a32be5; branch cleanup and origin/main containment were previously completed."
       }
+    ]
+  },
+  "MBTI-INDEX-24B": {
+    "id": "MBTI-INDEX-24B",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/mbti-index-24b-promote-nine-personality-records",
+    "title": "MBTI-INDEX-24B: promote nine MBTI personality records",
+    "depends_on": ["MBTI-INDEX-24A-API"],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "search_channel_action": false,
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "Operator authorized registration, implementation, PR, merge, and deployment; production promotion and all GSC/index requests remain explicitly unauthorized."},
+      "dependency": {"status": "pass", "evidence": "MBTI-INDEX-24A-API is merged and its backend comparison schema authority is deployed."},
+      "local_validation": {"status": "pass", "evidence": "Focused command tests 3/15, SitemapGeneratorTest 11/412, scoped Pint, complete scripts/ci_verify_mbti.sh, YAML/JSON parsing, and git diff checks passed."},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [
+      {"at": "2026-07-12T00:00:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Registered the exact nine-record fail-closed indexability promotion implementation. No production promotion, GSC, or URL Inspection is authorized."}
     ]
   },
   "AUDIT-PRR2-API-06": {
