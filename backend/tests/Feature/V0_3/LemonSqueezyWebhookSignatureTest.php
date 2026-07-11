@@ -15,6 +15,27 @@ final class LemonSqueezyWebhookSignatureTest extends TestCase
     use MockeryPHPUnitIntegration;
     use RefreshDatabase;
 
+    public function test_production_rejects_lemonsqueezy_even_when_configured_enabled(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        config([
+            'payments.providers.lemonsqueezy.enabled' => true,
+            'services.lemonsqueezy.webhook_secret' => 'ls_whsec_test',
+        ]);
+
+        $processor = Mockery::mock(PaymentWebhookProcessor::class);
+        $processor->shouldNotReceive('process');
+        $this->app->instance(PaymentWebhookProcessor::class, $processor);
+
+        $raw = $this->encodePayload(['data' => ['id' => 'old-but-valid']]);
+        $response = $this->call('POST', '/api/v0.3/webhooks/payment/lemonsqueezy', [], [], [], [
+            'CONTENT_TYPE' => 'application/json',
+            'HTTP_X_SIGNATURE' => hash_hmac('sha256', $raw, 'ls_whsec_test'),
+        ], $raw);
+
+        $response->assertNotFound()->assertJsonPath('error_code', 'PROVIDER_DISABLED');
+    }
+
     public function test_invalid_signature_returns_400(): void
     {
         config([

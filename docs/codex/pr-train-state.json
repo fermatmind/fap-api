@@ -85563,13 +85563,13 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-04-mandatory-admin-totp",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "b7ae6888e5e41dfdeac1313a0bfae822de4d3650",
+    "status": "merged",
+    "commit_sha": "b113bf4023c5c0d947fe00a05ed034a80ac1a1d5",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2948",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T05:08:53Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -85580,12 +85580,21 @@
       "manifest_registration": {"status": "pass", "evidence": "The 2026-07-11 PRR2 /goal explicitly authorized AUDIT-PRR2-API-04 and manifest/state registration with a production fail-closed conservative default."},
       "dependency": {"status": "pass", "evidence": "This item has no declared dependency and started from origin/main 585c6c4d44a89b9883790081ec2a7c13bff731d3."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
     "transitions": [
       {"at": "2026-07-11T13:12:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Registered and started mandatory administrator TOTP enrollment, hidden bootstrap password input, and time-limited audited recovery in the isolated API train worktree; no production administrator data was read or modified."},
       {"at": "2026-07-11T13:25:00+08:00", "from": "in_progress", "to": "focused_checks_passed", "note": "TOTP enforcement, SEO API compatibility, recovery audit/expiry, bootstrap password, runtime-freeze, Pint and Blade checks passed."},
       {"at": "2026-07-11T13:28:00+08:00", "from": "focused_checks_passed", "to": "pr_open", "note": "Committed and pushed the sixteen-path administrator MFA scope at b7ae6888e5e41dfdeac1313a0bfae822de4d3650, then opened PR #2948; GitHub required checks are pending."},
-      {"at": "2026-07-11T13:38:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed on head e830ab053f00682fc892108bee2f246af23dbe30; PR #2948 is mergeable, review-unblocked, and its changed paths match the manifest."}
+      {"at": "2026-07-11T13:38:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed on head e830ab053f00682fc892108bee2f246af23dbe30; PR #2948 is mergeable, review-unblocked, and its changed paths match the manifest."},
+      {"at": "2026-07-11T13:48:00+08:00", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in AUDIT-PRR2-API-05: PR #2948 merged at b113bf4023c5c0d947fe00a05ed034a80ac1a1d5; origin/main contains it, main is synced, post-merge tests passed, and task branches are deleted."}
     ]
+  },
+  "AUDIT-PRR2-API-05": {
+    "id": "AUDIT-PRR2-API-05", "repo": "fap-api", "title": "AUDIT-PRR2-API-05: hard-disable LemonSqueezy in production", "base": "main", "branch": "codex/audit-prr2-api-05-lemon-webhook-freshness", "depends_on": ["AUDIT-PRR2-API-02"],
+    "status": "ready_to_merge", "commit_sha": "2d5bd5d51e2a655a6215176491240dbf40f38d03", "pr_url": "https://github.com/fermatmind/fap-api/pull/2949", "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": true, "publish_allowed": false, "deploy_allowed": false,
+    "checks": {"manifest_registration": {"status": "pass", "evidence": "The PRR2 /goal authorized production hard-disable when provider-native freshness cannot be proven."}, "dependency": {"status": "pass", "evidence": "AUDIT-PRR2-API-02 is merged."}},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T13:48:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the authorized production hard-disable after confirming LemonSqueezy signs only the raw body and exposes no authenticated freshness value."}, {"at": "2026-07-11T13:52:00+08:00", "from": "in_progress", "to": "focused_checks_passed", "note": "Production-disable, signature, go-live compatibility, runtime-freeze, Pint, YAML/JSON and diff checks passed."}, {"at": "2026-07-11T13:55:00+08:00", "from": "focused_checks_passed", "to": "pr_open", "note": "Committed and pushed the six-path LemonSqueezy production-disable scope at 2d5bd5d51e2a655a6215176491240dbf40f38d03, then opened PR #2949; required checks are pending."}, {"at": "2026-07-11T14:06:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed on head 0cb4d2b7bcd71cc441968f946b38045e36eac8c3; PR #2949 is mergeable and scope-clean."}]
   }
 }

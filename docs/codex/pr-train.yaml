@@ -39255,3 +39255,41 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: AUDIT-PRR2-API-05
+    repo: fap-api
+    depends_on: [AUDIT-PRR2-API-02]
+    branch: codex/audit-prr2-api-05-lemon-webhook-freshness
+    title: "AUDIT-PRR2-API-05: hard-disable LemonSqueezy in production"
+    train_scope: prr2_lemonsqueezy_production_disable
+    status: user_authorized
+    scope:
+      - Hard-disable LemonSqueezy checkout and webhook paths in production because its current signature contract authenticates body integrity without freshness.
+      - Preserve explicit non-production testing while proving even a valid old signature is rejected in production.
+      - Document the production-disabled environment posture.
+    allowed_paths:
+      - backend/.env.example
+      - backend/app/Services/Payments/PaymentProviderRegistry.php
+      - backend/tests/Feature/V0_3/LemonSqueezyWebhookSignatureTest.php
+      - backend/tests/Unit/Ops/GoLiveGateServiceTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Invent an unsigned timestamp header, weaken HMAC verification, enable LemonSqueezy in production, alter other providers, or run payments/deploys/production writes.
+    validation:
+      - cd backend && php artisan test tests/Feature/V0_3/LemonSqueezyWebhookSignatureTest.php tests/Unit/Ops/GoLiveGateServiceTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_lemonsqueezy_production_disable' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Payments/PaymentProviderRegistry.php tests/Feature/V0_3/LemonSqueezyWebhookSignatureTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
