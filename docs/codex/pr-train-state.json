@@ -708,9 +708,9 @@
     "depends_on": [
       "ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01"
     ],
-    "status": "committed",
-    "commit_sha": "8887da1d59c20a854687f4e9fd102f9f734a71d7",
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "1e2b7206d73a9eac96a9f6c35bf1e25beefb4f4b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2939",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -773,6 +773,12 @@
         "from": "local_verified",
         "to": "committed",
         "note": "Committed the exact five-file manifest-authorized evidence, repeatable read-only scanner, and train metadata scope at 8887da1d59c20a854687f4e9fd102f9f734a71d7 using path-limited staging."
+      },
+      {
+        "at": "2026-07-11T11:11:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2939 with the exact manifest title and complete validation/deferred/rule-impact body; required GitHub checks are pending."
       }
     ]
   },
