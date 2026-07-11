@@ -42398,7 +42398,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "ca2d9da5178b4bbf87be2d8d0e1c6dc203d8f6d3",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -87365,7 +87365,7 @@
       "local_validation": {"status": "pass", "evidence": "Production verifier exited zero; report JSON, train state JSON and train manifest YAML parse; diff whitespace and exact allowed-path scope checks pass."}
     },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-12T02:20:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started read-only production closeout after exact backend/frontend deploys and 22-row CMS repair. No CMS/DB write, cache mutation, deploy, or search action is in scope."}, {"at": "2026-07-12T02:55:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "The complete 124/114/10 production verifier and all report/manifest/state/diff/scope checks passed after llms-full rebuilt its 114-path cache. No production mutation occurred."}]
+    "transitions": [{"at": "2026-07-12T02:20:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started read-only production closeout after exact backend/frontend deploys and 22-row CMS repair. No CMS/DB write, cache mutation, deploy, or search action is in scope."}, {"at": "2026-07-12T02:55:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "The complete 124/114/10 production verifier and all report/manifest/state/diff/scope checks passed after llms-full rebuilt its 114-path cache. No production mutation occurred."}, {"at": "2026-07-12T02:57:00+08:00", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact five-path read-only closeout scope at ca2d9da5178b4bbf87be2d8d0e1c6dc203d8f6d3. No production mutation occurred."}]
   },
   "AUDIT-PRR2-API-01": {
     "id": "AUDIT-PRR2-API-01",
