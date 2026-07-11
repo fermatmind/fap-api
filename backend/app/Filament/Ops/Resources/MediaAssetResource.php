@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\MediaAssetResource\Pages;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\OpsTable;
 use App\Models\MediaAsset;
+use App\Services\Cms\MediaAssetPromotionService;
 use App\Services\Cms\MediaAssetStorageSyncService;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -119,11 +120,12 @@ class MediaAssetResource extends Resource
                         ->native(false)
                         ->options([
                             MediaAsset::STATUS_DRAFT => 'Draft',
-                            MediaAsset::STATUS_PUBLISHED => 'Published',
                         ])
-                        ->default(MediaAsset::STATUS_PUBLISHED),
+                        ->default(MediaAsset::STATUS_DRAFT)
+                        ->disabled(),
                     Forms\Components\Toggle::make('is_public')
-                        ->default(true),
+                        ->default(false)
+                        ->disabled(),
                 ])
                 ->columns(2),
             Forms\Components\Section::make('Metadata')
@@ -244,6 +246,17 @@ class MediaAssetResource extends Resource
                     ->icon('heroicon-o-arrow-path')
                     ->visible(fn (): bool => self::canWrite())
                     ->action(fn (MediaAsset $record): MediaAsset => app(MediaAssetStorageSyncService::class)->syncAndVerify($record)),
+                Tables\Actions\Action::make('promote_public')
+                    ->label('Verify and promote public')
+                    ->icon('heroicon-o-check-badge')
+                    ->requiresConfirmation()
+                    ->visible(fn (MediaAsset $record): bool => self::canWrite() && (string) $record->status !== MediaAsset::STATUS_PUBLISHED)
+                    ->action(function (MediaAsset $record): MediaAsset {
+                        $synced = app(MediaAssetStorageSyncService::class)->syncAndVerify($record);
+                        $promotion = app(MediaAssetPromotionService::class);
+
+                        return $promotion->promote($promotion->markVerified($synced));
+                    }),
             ])
             ->bulkActions([]);
     }

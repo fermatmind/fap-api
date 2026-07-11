@@ -16,6 +16,14 @@ class EditMediaAsset extends EditRecord
 {
     protected static string $resource = MediaAssetResource::class;
 
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['status'] = MediaAsset::STATUS_DRAFT;
+        $data['is_public'] = false;
+
+        return $data;
+    }
+
     protected function getHeaderActions(): array
     {
         return [

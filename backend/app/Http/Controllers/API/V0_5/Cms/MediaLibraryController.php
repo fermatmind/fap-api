@@ -7,6 +7,7 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 use App\Http\Controllers\Controller;
 use App\Models\MediaAsset;
 use App\Models\MediaVariant;
+use App\Services\Cms\MediaAssetPromotionService;
 use App\Services\Cms\MediaAssetStorageSyncService;
 use App\Services\Cms\MediaVariantGenerator;
 use App\Support\PublicMediaUrlGuard;
@@ -16,6 +17,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use RuntimeException;
 
 final class MediaLibraryController extends Controller
 {
@@ -98,7 +100,7 @@ final class MediaLibraryController extends Controller
         ]);
     }
 
-    public function internalUpdate(Request $request, string $assetKey): JsonResponse
+    public function internalUpdate(Request $request, string $assetKey, MediaAssetPromotionService $promotion): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
@@ -138,6 +140,8 @@ final class MediaLibraryController extends Controller
         $orgId = (int) ($validated['org_id'] ?? 0);
         $normalizedKey = $this->normalizeKey($assetKey);
 
+        $promotionRequested = (string) $validated['status'] === MediaAsset::STATUS_PUBLISHED
+            || (bool) $validated['is_public'];
         $asset = DB::transaction(function () use ($orgId, $normalizedKey, $validated): MediaAsset {
             $asset = MediaAsset::query()
                 ->withoutGlobalScopes()
@@ -161,8 +165,8 @@ final class MediaLibraryController extends Controller
                 'alt' => $this->nullableString($validated['alt'] ?? null),
                 'caption' => $this->nullableString($validated['caption'] ?? null),
                 'credit' => $this->nullableString($validated['credit'] ?? null),
-                'status' => (string) $validated['status'],
-                'is_public' => (bool) $validated['is_public'],
+                'status' => MediaAsset::STATUS_DRAFT,
+                'is_public' => false,
                 'payload_json' => $validated['payload_json'] ?? [],
             ]);
             $asset->save();
@@ -190,6 +194,14 @@ final class MediaLibraryController extends Controller
             return $asset->load('variants');
         });
 
+        if ($promotionRequested) {
+            try {
+                $asset = $promotion->promote($promotion->markVerified($asset));
+            } catch (RuntimeException $exception) {
+                return $this->promotionBlockedResponse($asset, $exception);
+            }
+        }
+
         return response()->json([
             'ok' => true,
             'asset' => $this->assetPayload($asset),
@@ -200,7 +212,8 @@ final class MediaLibraryController extends Controller
         Request $request,
         string $assetKey,
         MediaVariantGenerator $generator,
-        MediaAssetStorageSyncService $syncService
+        MediaAssetStorageSyncService $syncService,
+        MediaAssetPromotionService $promotion
     ): JsonResponse {
         $validator = Validator::make($request->all(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
@@ -242,13 +255,22 @@ final class MediaLibraryController extends Controller
             'alt' => $this->nullableString($validated['alt'] ?? null),
             'caption' => $this->nullableString($validated['caption'] ?? null),
             'credit' => $this->nullableString($validated['credit'] ?? null),
-            'status' => (string) ($validated['status'] ?? MediaAsset::STATUS_PUBLISHED),
-            'is_public' => (bool) ($validated['is_public'] ?? true),
+            'status' => MediaAsset::STATUS_DRAFT,
+            'is_public' => false,
             'payload_json' => $validated['payload_json'] ?? ($asset->payload_json ?? []),
         ]);
         $asset->save();
 
+        $promotionRequested = (string) ($validated['status'] ?? MediaAsset::STATUS_DRAFT) === MediaAsset::STATUS_PUBLISHED
+            || (bool) ($validated['is_public'] ?? false);
         $asset = $syncService->syncAndVerify($generator->storeUploadAndGenerate($asset, $file));
+        if ($promotionRequested) {
+            try {
+                $asset = $promotion->promote($promotion->markVerified($asset));
+            } catch (RuntimeException $exception) {
+                return $this->promotionBlockedResponse($asset, $exception);
+            }
+        }
 
         return response()->json([
             'ok' => true,
@@ -275,6 +297,16 @@ final class MediaLibraryController extends Controller
         return [
             'org_id' => (int) ($validated['org_id'] ?? 0),
         ];
+    }
+
+    private function promotionBlockedResponse(MediaAsset $asset, RuntimeException $exception): JsonResponse
+    {
+        return response()->json([
+            'ok' => false,
+            'error_code' => 'MEDIA_PROMOTION_BLOCKED',
+            'message' => $exception->getMessage(),
+            'asset' => $this->assetPayload($asset->fresh('variants') ?? $asset),
+        ], 409);
     }
 
     /**

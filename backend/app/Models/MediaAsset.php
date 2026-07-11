@@ -15,6 +15,8 @@ final class MediaAsset extends Model
 
     public const STATUS_DRAFT = 'draft';
 
+    public const STATUS_VERIFIED = 'verified';
+
     public const STATUS_PUBLISHED = 'published';
 
     public const SYNC_PENDING = 'pending';

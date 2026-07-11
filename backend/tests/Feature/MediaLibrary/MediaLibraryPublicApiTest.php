@@ -72,8 +72,8 @@ final class MediaLibraryPublicApiTest extends TestCase
             'width' => 1200,
             'height' => 630,
             'alt' => 'Updated share image',
-            'status' => 'published',
-            'is_public' => true,
+            'status' => 'draft',
+            'is_public' => false,
             'variants' => [
                 [
                     'variant_key' => 'og',
@@ -87,6 +87,8 @@ final class MediaLibraryPublicApiTest extends TestCase
         ])
             ->assertOk()
             ->assertJsonPath('ok', true)
+            ->assertJsonPath('asset.status', MediaAsset::STATUS_DRAFT)
+            ->assertJsonPath('asset.is_public', false)
             ->assertJsonPath('asset.alt', 'Updated share image')
             ->assertJsonPath('asset.url', 'https://assets.fermatmind.com/static/share/mbti_wide_1200x630.png')
             ->assertJsonPath('asset.variants.0.url', 'https://assets.fermatmind.com/static/share/mbti_wide_1200x630.png')
@@ -153,14 +155,16 @@ final class MediaLibraryPublicApiTest extends TestCase
             'alt' => 'Article hero image',
             'caption' => 'Generated through Media Library.',
             'credit' => 'FermatMind',
-            'status' => 'published',
-            'is_public' => true,
+            'status' => 'draft',
+            'is_public' => false,
         ])
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('asset.asset_key', 'articles.hero')
             ->assertJsonPath('asset.disk', 'public')
             ->assertJsonPath('asset.alt', 'Article hero image')
+            ->assertJsonPath('asset.status', MediaAsset::STATUS_DRAFT)
+            ->assertJsonPath('asset.is_public', false)
             ->assertJsonFragment(['variant_key' => 'hero'])
             ->assertJsonFragment(['variant_key' => 'card'])
             ->assertJsonFragment(['variant_key' => 'thumbnail'])
@@ -251,8 +255,8 @@ final class MediaLibraryPublicApiTest extends TestCase
             $this->actingAsContentWriter()->post('/api/v0.5/internal/media-assets/'.$assetKey.'/upload', [
                 'file' => UploadedFile::fake()->image('private-working-name.jpg', 1800, 1200),
                 'alt' => 'Collision-safe media asset',
-                'status' => 'published',
-                'is_public' => true,
+                'status' => 'draft',
+                'is_public' => false,
             ])->assertOk()->assertJsonMissing(['source_original_name' => 'private-working-name.jpg']);
         }
 
@@ -309,8 +313,8 @@ final class MediaLibraryPublicApiTest extends TestCase
         $this->actingAsContentWriter()->putJson('/api/v0.5/internal/media-assets/articles.legacy', [
             'url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/article.jpg',
             'alt' => 'Legacy article image',
-            'status' => 'published',
-            'is_public' => true,
+            'status' => 'draft',
+            'is_public' => false,
             'variants' => [
                 [
                     'variant_key' => 'card',
@@ -327,9 +331,7 @@ final class MediaLibraryPublicApiTest extends TestCase
             ->assertJsonPath('asset.variants.0.url', null);
 
         $this->getJson('/api/v0.5/media-assets/articles.legacy?org_id=0')
-            ->assertOk()
-            ->assertJsonPath('asset.url', null)
-            ->assertJsonPath('asset.variants.0.url', null);
+            ->assertNotFound();
     }
 
     public function test_legacy_media_url_audit_reports_findings_without_writes(): void
