@@ -1,0 +1,1869 @@
+{
+  "task_id": "ENNEAGRAM-90-DEEPREAD-WING-PAIR-ZH-01",
+  "status": "ISSUES_FOUND",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "reviewer_mode": "gpt-5.5-high-strict-readonly-wing-pair-chinese",
+  "reviewed_assets": [
+    "wing-1w2-zh-CN",
+    "wing-1w9-zh-CN",
+    "wing-2w1-zh-CN",
+    "wing-2w3-zh-CN",
+    "wing-3w2-zh-CN",
+    "wing-3w4-zh-CN",
+    "wing-4w3-zh-CN",
+    "wing-4w5-zh-CN",
+    "wing-5w4-zh-CN",
+    "wing-5w6-zh-CN",
+    "wing-6w5-zh-CN",
+    "wing-6w7-zh-CN",
+    "wing-7w6-zh-CN",
+    "wing-7w8-zh-CN",
+    "wing-8w7-zh-CN",
+    "wing-8w9-zh-CN",
+    "wing-9w1-zh-CN",
+    "wing-9w8-zh-CN"
+  ],
+  "task_scope": "18 zh-CN wing pages",
+  "sampling_rule": "All two-wing pairs for Type 1-9.",
+  "strictness_rules_applied": [
+    "read JSON asset body rather than trusting existing QA PASS",
+    "minimum five page-specific notes per reviewed page",
+    "minimum three short evidence quotes per reviewed page",
+    "issues require severity and concrete required_edits",
+    "no asset, preview, manifest, ledger, QA, CMS, deploy, sitemap, llms, search, git, branch, commit, push, or PR mutation"
+  ],
+  "per_page_results": [
+    {
+      "asset_id": "wing-1w2-zh-CN",
+      "file": "assets/wings/zh-CN/1w2.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "1w2",
+      "reviewer_verdict": "PASS",
+      "page_intent_summary": "1w2 翼型人格：通过帮助与示范推动改进 targets wing 1w2 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 1w2: title and summary target Type 1 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 1w2 是九型人格翼型传统中的一种解释：核心仍然是第 1 型，对正确、责任、标准和持续改进较敏感；相邻第 2 型用于描述这种关注可能更常通…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: 两者共享第 1 型核心，比较的是修正问题时更自然的第二通道。 | 维度 | 1w2 假设 | 1w9 假设 | |---|---|---|…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天，每当你想纠正或帮助某人，先记录：我看见的事实是什么；我担心违反了什么原则；对方是否表达需要；决定权属于谁。随后只选择一种动作：倾…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 关于九型人格的研究结论并不统一。Hook 等人的系统综述发现，相关量表在可靠性和效度方面呈混合结果，而且对翼型等次级理论命题的研究很少。因…",
+        "No blocking issue found in the requested dimension for wing-1w2-zh-CN; keep this as evidence-backed PASS, not an automatic QA PASS."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "1w2 翼型人格：通过帮助与示范推动改进",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "1w2 以第 1 型对正确、责任和改进的关注为核心，并用相邻第 2 型的关系与帮助倾向描述表达方式。它是可复核的观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "1w2 是九型人格翼型传统中的一种解释：核心仍然是第 1 型，对正确、责任、标准和持续改进较敏感；相邻第 2 型用于描述这种关注可能更常通过帮助、教导、照顾或亲自示范来表达。最值得观…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [],
+      "required_edits": [],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "asset_id": "wing-1w9-zh-CN",
+      "file": "assets/wings/zh-CN/1w9.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "1w9",
+      "reviewer_verdict": "PASS",
+      "page_intent_summary": "1w9 翼型人格：沉静地推动正确与改进 targets wing 1w9 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 1w9: title and summary target Type 1 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 1w9 是九型人格传统中的一种翼型写法：核心仍是第 1 型，关注正确、责任、原则和持续改进；相邻第 9 型只用于描述这种动机可能如何被表达…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: 两者都以第 1 型的原则、责任和改进动机为核心，差异只是假设性的表达重点。 | 比较维度 | 1w9 假设 | 1w2 假设 | |---…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 进行一个不用于判型的七天实验。每天选择一件你想修正的事，记录四列：触发了什么；你首先解释成什么；采取了什么行动；结果和代价是什么。随后给问…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 九型人格有一些量表和应用研究，但整体证据并不一致。Hook 等人的系统综述指出，现有研究在可靠性和效度上呈混合结果，对翼型等次级命题的支持…",
+        "No blocking issue found in the requested dimension for wing-1w9-zh-CN; keep this as evidence-backed PASS, not an automatic QA PASS."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "1w9 翼型人格：沉静地推动正确与改进",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "1w9 是以第 1 型的原则与改进动机为核心、用相邻第 9 型的稳定与和谐倾向修饰表达方式的解释性组合。它适合作为观察假设，不是固定身份或科学上独立成立的人格类别。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "1w9 是九型人格传统中的一种翼型写法：核心仍是第 1 型，关注正确、责任、原则和持续改进；相邻第 9 型只用于描述这种动机可能如何被表达得更克制、平稳和系统。一个人若暂时采用 1w…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [],
+      "required_edits": [],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "asset_id": "wing-2w1-zh-CN",
+      "file": "assets/wings/zh-CN/2w1.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "2w1",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "2w1 翼型人格：把关怀变成有原则、有边界的支持 targets wing 2w1 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 2w1: title and summary target Type 2 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 2w1 是九型人格翼型传统中的一种写法：核心仍按第 2 型理解，关注连接、回应他人、在关系中有价值和被需要；相邻第 1 型用于描述帮助可能…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: 两者共享第 2 型的连接和被需要动机，差异是假设中的第二行动语言。 | 维度 | 2w1 假设 | 2w3 假设 | |---|---|-…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天，每次想主动帮助时记录：触发事实；对方是否表达需要；你担心什么关系后果；你认定的正确做法；行动；结果。介入前先问“你现在需要倾听、…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 现有研究不能把 2w1 确认为独立、普遍且稳定的人格类别。Hook 等人的系统综述认为九型人格相关可靠性和效度结果混合，对翼型等次级理论命…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-2w1-zh-CN.",
+        "Chinese editorial review should check whether 2w1 翼型人格：把关怀变成有原则、有边界的支持 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "2w1 翼型人格：把关怀变成有原则、有边界的支持",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "2w1 以第 2 型对连接、回应和被需要的关注为核心，并用相邻第 1 型的原则、责任与改进倾向描述表达方式。它是可复核的观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "2w1 是九型人格翼型传统中的一种写法：核心仍按第 2 型理解，关注连接、回应他人、在关系中有价值和被需要；相邻第 1 型用于描述帮助可能更克制、讲原则、重责任和方法。可观察的问题不…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context",
+          "evidence": "会。角色、文化、照护责任、精力和权力都会改变帮助方式。翼型若有参考，也不能覆盖所有情境。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "连续七天，每次想主动帮助时记录：触发事实；对方是否表达需要；你担心什么关系后果；你认定的正确做法；行动；结果。介入前先问“你现在需要倾听、一个建议，还是实际协助？”若答案是否定，练习…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-2w1-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:context",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-2w1-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-2w3-zh-CN",
+      "file": "assets/wings/zh-CN/2w3.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "2w3",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "2w3 翼型人格：让关怀产生可见影响与连接 targets wing 2w3 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 2w3: title and summary target Type 2 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 2w3 是九型人格翼型传统中的一种解释：核心按第 2 型理解，关注连接、回应他人、在关系中有价值和被需要；相邻第 3 型用于描述帮助可能更…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: 两者共享第 2 型连接与被需要的核心假设，差异在第二注意和行动方式。 | 维度 | 2w3 假设 | 2w1 假设 | |---|---|…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天，每次想快速帮助或展示价值时记录：对方明确表达了什么；你期待怎样的关系回应；若无人看见是否仍愿意做；承诺需要多少时间；行动和结果。…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 现有证据不能把 2w3 视为已经独立验证的人格类别。Hook 等人的系统综述发现，九型人格量表在可靠性和效度上的结果混合，对翼型等次级理论…",
+        "Issue pressure: geo_answer_depth is the highest-signal edit candidate for wing-2w3-zh-CN.",
+        "Chinese editorial review should check whether 2w3 翼型人格：让关怀产生可见影响与连接 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "2w3 翼型人格：让关怀产生可见影响与连接",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "2w3 以第 2 型对连接、回应和被需要的关注为核心，并用相邻第 3 型的成就、适配与可见价值倾向描述表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "2w3 是九型人格翼型传统中的一种解释：核心按第 2 型理解，关注连接、回应他人、在关系中有价值和被需要；相邻第 3 型用于描述帮助可能更主动、适配对象、关注结果与可见影响。真正要观…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:comparison",
+          "evidence": "两者核心同为第 2 型；2w3 更强调帮助的可见效果和影响，2w1 更强调帮助是否负责、正确。",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "连续七天，每次想快速帮助或展示价值时记录：对方明确表达了什么；你期待怎样的关系回应；若无人看见是否仍愿意做；承诺需要多少时间；行动和结果。帮助前先问，再给出有限选项，不把速度当作关怀…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-2w3-zh-CN",
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:comparison",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        },
+        {
+          "asset_id": "wing-2w3-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-3w2-zh-CN",
+      "file": "assets/wings/zh-CN/3w2.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "3w2",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "3w2 翼型人格：关系型成就者 targets wing 3w2 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 3w2: title and summary target Type 3 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 3w2 是以第 3 型“通过目标、效率与成果确认价值”为核心，并用相邻第 2 型描述表达风格的解释性组合。它可能呈现为亲和、鼓舞、重视人际…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （3w2 对照） | 3w2 | 3w4 | |---|---|---| | 共同核心 | 都以第 3 型的成果与可见价值为…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一个需要交付的事件，记录触发、脑中最先出现的成功标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每天…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-3w2-zh-CN.",
+        "Chinese editorial review should check whether 3w2 翼型人格：关系型成就者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "3w2 翼型人格：关系型成就者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "3w2 以第 3 型的成就与可见价值为核心，并用第 2 型倾向描述亲和、鼓舞、重视人际反馈的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "3w2 是以第 3 型“通过目标、效率与成果确认价值”为核心，并用相邻第 2 型描述表达风格的解释性组合。它可能呈现为亲和、鼓舞、重视人际反馈，但这不能把两种类型各算一半。更有用的问…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-3w2",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "连续七天选择一个需要交付的事件，记录触发、脑中最先出现的成功标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每天补写一句：“如果这次不需要证明价值，我仍愿意…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-3w2-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-3w2",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-3w2-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-3w4-zh-CN",
+      "file": "assets/wings/zh-CN/3w4.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "3w4",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "3w4 翼型人格：身份型成就者 targets wing 3w4 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 3w4: title and summary target Type 3 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 3w4 是以第 3 型“通过目标、效率与成果确认价值”为核心，并用相邻第 4 型描述表达风格的解释性组合。它可能呈现为内省、重视审美与作品…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （3w4 对照） | 3w4 | 3w2 | |---|---|---| | 共同核心 | 都以第 3 型的成果与可见价值为…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一个需要交付的事件，记录触发、脑中最先出现的成功标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每天…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-3w4-zh-CN.",
+        "Chinese editorial review should check whether 3w4 翼型人格：身份型成就者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "3w4 翼型人格：身份型成就者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "3w4 以第 3 型的成就与可见价值为核心，并用第 4 型倾向描述内省、重视审美与作品归属的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "3w4 是以第 3 型“通过目标、效率与成果确认价值”为核心，并用相邻第 4 型描述表达风格的解释性组合。它可能呈现为内省、重视审美与作品归属，但这不能把两种类型各算一半。更有用的问…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-3w4",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "连续七天选择一个需要交付的事件，记录触发、脑中最先出现的成功标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每天补写一句：“如果这次不需要证明价值，我仍愿意…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-3w4-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-3w4",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-3w4-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-4w3-zh-CN",
+      "file": "assets/wings/zh-CN/4w3.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "4w3",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "4w3 翼型人格：表达型个体主义者 targets wing 4w3 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 4w3: title and summary target Type 4 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 4w3 是以第 4 型“通过感受、意义与独特表达澄清身份”为核心，并用相邻第 3 型描述表达风格的解释性组合。它可能呈现为富有表达力、目标…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （4w3 对照） | 4w3 | 4w5 | |---|---|---| | 共同核心 | 都以第 4 型的身份、意义与情感…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一个需要把私人体验变成可被真实受众理解的草稿事件，记录触发、脑中最先出现的意义与真实表达的判断标准、你认为别人会怎样评价、被忽…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-4w3-zh-CN.",
+        "Chinese editorial review should check whether 4w3 翼型人格：表达型个体主义者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "4w3 翼型人格：表达型个体主义者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "4w3 以第 4 型的身份、意义与情感真实为核心，并用第 3 型倾向描述富有表达力、目标意识，并关注个人作品如何被理解的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "4w3 是以第 4 型“通过感受、意义与独特表达澄清身份”为核心，并用相邻第 3 型描述表达风格的解释性组合。它可能呈现为富有表达力、目标意识，并关注个人作品如何被理解，但这不能把两…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-4w3",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "连续七天选择一个需要把私人体验变成可被真实受众理解的草稿事件，记录触发、脑中最先出现的意义与真实表达的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-4w3-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-4w3",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-4w3-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-4w5-zh-CN",
+      "file": "assets/wings/zh-CN/4w5.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "4w5",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "4w5 翼型人格：分析型个体主义者 targets wing 4w5 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 4w5: title and summary target Type 4 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 4w5 是以第 4 型“通过感受、意义与独特表达澄清身份”为核心，并用相邻第 5 型描述表达风格的解释性组合。它可能呈现为内省、重视概念探…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （4w5 对照） | 4w5 | 4w3 | |---|---|---| | 共同核心 | 都以第 4 型的身份、意义与情感…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一个个人意义很强、却仍需外部证据检验的未完成想法，记录触发、脑中最先出现的意义与真实表达的判断标准、你认为别人会怎样评价、被忽…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-4w5-zh-CN.",
+        "Chinese editorial review should check whether 4w5 翼型人格：分析型个体主义者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "4w5 翼型人格：分析型个体主义者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "4w5 以第 4 型的身份、意义与情感真实为核心，并用第 5 型倾向描述内省、重视概念探索，并保护私人创作空间的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "4w5 是以第 4 型“通过感受、意义与独特表达澄清身份”为核心，并用相邻第 5 型描述表达风格的解释性组合。它可能呈现为内省、重视概念探索，并保护私人创作空间，但这不能把两种类型各…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-4w5",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "连续七天选择一个个人意义很强、却仍需外部证据检验的未完成想法，记录触发、脑中最先出现的意义与真实表达的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-4w5-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-4w5",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-4w5-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-5w4-zh-CN",
+      "file": "assets/wings/zh-CN/5w4.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "5w4",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "5w4 翼型人格：意义型观察者 targets wing 5w4 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 5w4: title and summary target Type 5 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 5w4 是以第 5 型“通过理解、准备与能力边界获得胜任感”为核心，并用相邻第 4 型描述表达风格的解释性组合。它可能呈现为内省、富有想象…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （5w4 对照） | 5w4 | 5w6 | |---|---|---| | 共同核心 | 都以第 5 型的理解、胜任感与足…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一份具有个人深度的解释笔记，并在它尚未完全原创前分享，记录触发、脑中最先出现的充分理解与准备的判断标准、你认为别人会怎样评价、…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-5w4-zh-CN.",
+        "Chinese editorial review should check whether 5w4 翼型人格：意义型观察者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "5w4 翼型人格：意义型观察者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "5w4 以第 5 型的理解、胜任感与足够的内在资源为核心，并用第 4 型倾向描述内省、富有想象，并关注知识的个人意义的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "5w4 是以第 5 型“通过理解、准备与能力边界获得胜任感”为核心，并用相邻第 4 型描述表达风格的解释性组合。它可能呈现为内省、富有想象，并关注知识的个人意义，但这不能把两种类型各…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-5w4",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "连续七天选择一份具有个人深度的解释笔记，并在它尚未完全原创前分享，记录触发、脑中最先出现的充分理解与准备的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-5w4-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-5w4",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-5w4-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-5w6-zh-CN",
+      "file": "assets/wings/zh-CN/5w6.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "5w6",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "5w6 翼型人格：系统型观察者 targets wing 5w6 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 5w6: title and summary target Type 5 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 5w6 是以第 5 型“通过理解、准备与能力边界获得胜任感”为核心，并用相邻第 6 型描述表达风格的解释性组合。它可能呈现为分析、重视验证…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （5w6 对照） | 5w6 | 5w4 | |---|---|---| | 共同核心 | 都以第 5 型的理解、胜任感与足…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一项已有足够证据可行动的决定，并预先冻结资料收集截止点，记录触发、脑中最先出现的充分理解与准备的判断标准、你认为别人会怎样评价…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-5w6-zh-CN.",
+        "Chinese editorial review should check whether 5w6 翼型人格：系统型观察者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "5w6 翼型人格：系统型观察者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "5w6 以第 5 型的理解、胜任感与足够的内在资源为核心，并用第 6 型倾向描述分析、重视验证，并关注可靠系统的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "5w6 是以第 5 型“通过理解、准备与能力边界获得胜任感”为核心，并用相邻第 6 型描述表达风格的解释性组合。它可能呈现为分析、重视验证，并关注可靠系统，但这不能把两种类型各算一半…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-5w6",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "连续七天选择一项已有足够证据可行动的决定，并预先冻结资料收集截止点，记录触发、脑中最先出现的充分理解与准备的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-5w6-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-5w6",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-5w6-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-6w5-zh-CN",
+      "file": "assets/wings/zh-CN/6w5.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "6w5",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "6w5 翼型人格：分析型谨慎者 targets wing 6w5 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 6w5: title and summary target Type 6 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 6w5 是以第 6 型“通过风险校验、可信支持与预案获得可行动安全”为核心，并用相邻第 5 型描述表达风格的解释性组合。它可能呈现为分析、…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （6w5 对照） | 6w5 | 6w7 | |---|---|---| | 共同核心 | 都以第 6 型的安全、信任与对不…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一项风险决策，只允许一个明确证据上限和一位具名专业支持者，记录触发、脑中最先出现的可信安全与行动的判断标准、你认为别人会怎样评…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-6w5-zh-CN.",
+        "Chinese editorial review should check whether 6w5 翼型人格：分析型谨慎者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "6w5 翼型人格：分析型谨慎者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "6w5 以第 6 型的安全、信任与对不确定性的可行动回应为核心，并用第 5 型倾向描述分析、克制，并关注证据与可靠专业性的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "6w5 是以第 6 型“通过风险校验、可信支持与预案获得可行动安全”为核心，并用相邻第 5 型描述表达风格的解释性组合。它可能呈现为分析、克制，并关注证据与可靠专业性，但这不能把两种…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-6w5",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "连续七天选择一项风险决策，只允许一个明确证据上限和一位具名专业支持者，记录触发、脑中最先出现的可信安全与行动的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-6w5-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-6w5",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-6w5-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-6w7-zh-CN",
+      "file": "assets/wings/zh-CN/6w7.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "6w7",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "6w7 翼型人格：互动型排险者 targets wing 6w7 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 6w7: title and summary target Type 6 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 6w7 是以第 6 型“通过风险校验、可信支持与预案获得可行动安全”为核心，并用相邻第 7 型描述表达风格的解释性组合。它可能呈现为互动、…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （6w7 对照） | 6w7 | 6w5 | |---|---|---| | 共同核心 | 都以第 6 型的安全、信任与对不…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一项共同计划，并在向盟友寻求安慰前先说明承诺阈值，记录触发、脑中最先出现的可信安全与行动的判断标准、你认为别人会怎样评价、被忽…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-6w7-zh-CN.",
+        "Chinese editorial review should check whether 6w7 翼型人格：互动型排险者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "6w7 翼型人格：互动型排险者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "6w7 以第 6 型的安全、信任与对不确定性的可行动回应为核心，并用第 7 型倾向描述互动、关注可能性，并倾向通过选项与盟友测试安全的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "6w7 是以第 6 型“通过风险校验、可信支持与预案获得可行动安全”为核心，并用相邻第 7 型描述表达风格的解释性组合。它可能呈现为互动、关注可能性，并倾向通过选项与盟友测试安全，但…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-6w7",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "evidence": "连续七天选择一项共同计划，并在向盟友寻求安慰前先说明承诺阈值，记录触发、脑中最先出现的可信安全与行动的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每…",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-6w7-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-6w7",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-6w7-zh-CN",
+          "severity": "P2",
+          "category": "exercise_template_risk",
+          "source_location": "section:growth/geo:observation_protocol",
+          "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-7w6-zh-CN",
+      "file": "assets/wings/zh-CN/7w6.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "7w6",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "7w6 翼型人格：协作型探索者 targets wing 7w6 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 7w6: title and summary target Type 7 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 7w6 是以第 7 型“通过重新框定、探索可能与保留行动空间应对限制”为核心，并用相邻第 6 型描述表达风格的解释性组合。它可能呈现为互动…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （7w6 对照） | 7w6 | 7w8 | |---|---|---| | 共同核心 | 都以第 7 型的自由、可能性与在…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一项与他人协商过的承诺，并在复核日前关闭替代选项，记录触发、脑中最先出现的有意义自由与完成承诺的判断标准、你认为别人会怎样评价…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-7w6-zh-CN.",
+        "Chinese editorial review should check whether 7w6 翼型人格：协作型探索者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "7w6 翼型人格：协作型探索者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "7w6 以第 7 型的自由、可能性与在限制出现时保留选项为核心，并用第 6 型倾向描述互动、协作，并关注盟友、共同计划与可预见风险的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "7w6 是以第 7 型“通过重新框定、探索可能与保留行动空间应对限制”为核心，并用相邻第 6 型描述表达风格的解释性组合。它可能呈现为互动、协作，并关注盟友、共同计划与可预见风险，但…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-7w6",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:observation_protocol",
+          "evidence": "连续七天分开记录有意义自由与完成承诺的判断标准、真实偏好、行动和结果，并主动寻找环境反例。",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-7w6-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-7w6",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-7w6-zh-CN",
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:observation_protocol",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-7w8-zh-CN",
+      "file": "assets/wings/zh-CN/7w8.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "7w8",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "7w8 翼型人格：进取型探索者 targets wing 7w8 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 7w8: title and summary target Type 7 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 7w8 是以第 7 型“通过重新框定、探索可能与保留行动空间应对限制”为核心，并用相邻第 8 型描述表达风格的解释性组合。它可能呈现为直接…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （7w8 对照） | 7w8 | 7w6 | |---|---|---| | 共同核心 | 都以第 7 型的自由、可能性与在…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一项强烈想做的行动，并留在它的日常限制中而不升级刺激，记录触发、脑中最先出现的有意义自由与完成承诺的判断标准、你认为别人会怎样…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-7w8-zh-CN.",
+        "Chinese editorial review should check whether 7w8 翼型人格：进取型探索者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "7w8 翼型人格：进取型探索者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "7w8 以第 7 型的自由、可能性与在限制出现时保留选项为核心，并用第 8 型倾向描述直接、充满能量，并关注自主、杠杆与绕开限制的即时路径的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "7w8 是以第 7 型“通过重新框定、探索可能与保留行动空间应对限制”为核心，并用相邻第 8 型描述表达风格的解释性组合。它可能呈现为直接、充满能量，并关注自主、杠杆与绕开限制的即时…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-7w8",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:observation_protocol",
+          "evidence": "连续七天分开记录有意义自由与完成承诺的判断标准、真实偏好、行动和结果，并主动寻找环境反例。",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-7w8-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-7w8",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-7w8-zh-CN",
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:observation_protocol",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-8w7-zh-CN",
+      "file": "assets/wings/zh-CN/8w7.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "8w7",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "8w7 翼型人格：扩张型挑战者 targets wing 8w7 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 8w7: title and summary target Type 8 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 8w7 是以第 8 型“通过直接行动、力量边界与保护责任维持自主”为核心，并用相邻第 7 型描述表达风格的解释性组合。它可能呈现为行动快速…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （8w7 对照） | 8w7 | 8w9 | |---|---|---| | 共同核心 | 都以第 8 型的自主、直接影响、…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一个紧急障碍，并在行动前写出最小力量、最大力量与同意边界，记录触发、脑中最先出现的适度力量与可追责保护的判断标准、你认为别人会…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-8w7-zh-CN.",
+        "Chinese editorial review should check whether 8w7 翼型人格：扩张型挑战者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "8w7 翼型人格：扩张型挑战者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "8w7 以第 8 型的自主、直接影响、保护与抵抗被控制为核心，并用第 7 型倾向描述行动快速、关注机会，并倾向以大胆行动扩展自主的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "8w7 是以第 8 型“通过直接行动、力量边界与保护责任维持自主”为核心，并用相邻第 7 型描述表达风格的解释性组合。它可能呈现为行动快速、关注机会，并倾向以大胆行动扩展自主，但这不…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-8w7",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:observation_protocol",
+          "evidence": "连续七天分开记录适度力量与可追责保护的判断标准、真实偏好、行动和结果，并主动寻找环境反例。",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-8w7-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-8w7",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-8w7-zh-CN",
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:observation_protocol",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-8w9-zh-CN",
+      "file": "assets/wings/zh-CN/8w9.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "8w9",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "8w9 翼型人格：沉稳型挑战者 targets wing 8w9 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 8w9: title and summary target Type 8 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 8w9 是以第 8 型“通过直接行动、力量边界与保护责任维持自主”为核心，并用相邻第 9 型描述表达风格的解释性组合。它可能呈现为沉稳、内…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （8w9 对照） | 8w9 | 8w7 | |---|---|---| | 共同核心 | 都以第 8 型的自主、直接影响、…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一项被延后的边界，并在抵抗变得不可移动前平静说出，记录触发、脑中最先出现的适度力量与可追责保护的判断标准、你认为别人会怎样评价…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-8w9-zh-CN.",
+        "Chinese editorial review should check whether 8w9 翼型人格：沉稳型挑战者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "8w9 翼型人格：沉稳型挑战者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "8w9 以第 8 型的自主、直接影响、保护与抵抗被控制为核心，并用第 9 型倾向描述沉稳、内敛，并关注持久影响、领地与平静使用力量的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "8w9 是以第 8 型“通过直接行动、力量边界与保护责任维持自主”为核心，并用相邻第 9 型描述表达风格的解释性组合。它可能呈现为沉稳、内敛，并关注持久影响、领地与平静使用力量，但这…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-8w9",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:observation_protocol",
+          "evidence": "连续七天分开记录适度力量与可追责保护的判断标准、真实偏好、行动和结果，并主动寻找环境反例。",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-8w9-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-8w9",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        },
+        {
+          "asset_id": "wing-8w9-zh-CN",
+          "severity": "P2",
+          "category": "geo_answer_depth",
+          "source_location": "geo:observation_protocol",
+          "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-9w1-zh-CN",
+      "file": "assets/wings/zh-CN/9w1.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "9w1",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "9w1 翼型人格：原则型调停者 targets wing 9w1 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 9w1: title and summary target Type 9 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 9w1 是以第 9 型“通过维持连接、降低冲突与保护稳定来应对自身优先级”为核心，并用相邻第 1 型描述表达风格的解释性组合。它可能呈现为…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （9w1 对照） | 9w1 | 9w8 | |---|---|---| | 共同核心 | 都以第 9 型的稳定、连接、减少…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一项藏在正确流程后的分歧，并在提出改进前先说个人偏好，记录触发、脑中最先出现的真实同意、可见优先级与可行动平静的判断标准、你认…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-9w1-zh-CN.",
+        "Chinese editorial review should check whether 9w1 翼型人格：原则型调停者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "9w1 翼型人格：原则型调停者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "9w1 以第 9 型的稳定、连接、减少内在冲突与避免优先级造成扰动为核心，并用第 1 型倾向描述内敛、尽责，并关注公平、正确过程与有秩序的平静的表达方式。它是观察假设，不是固定身份。",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "9w1 是以第 9 型“通过维持连接、降低冲突与保护稳定来应对自身优先级”为核心，并用相邻第 1 型描述表达风格的解释性组合。它可能呈现为内敛、尽责，并关注公平、正确过程与有秩序的平…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-9w1",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-9w1-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-9w1",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    },
+    {
+      "asset_id": "wing-9w8-zh-CN",
+      "file": "assets/wings/zh-CN/9w8.json",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "9w8",
+      "reviewer_verdict": "PASS_WITH_EDITS",
+      "page_intent_summary": "9w8 翼型人格：扎根型调停者 targets wing 9w8 as a draft/noindex public content asset.",
+      "per_page_notes": [
+        "Page intent is clear enough for wing 9w8: title and summary target Type 9 before secondary modifier language.",
+        "Quick answer is answer-first and frames the page as an interpretive hypothesis: 9w8 是以第 9 型“通过维持连接、降低冲突与保护稳定来应对自身优先级”为核心，并用相邻第 8 型描述表达风格的解释性组合。它可能呈现为…",
+        "Comparison section provides the main differentiation surface; reviewer should preserve matched dimensions when editing: | 比较维度 （9w8 对照） | 9w8 | 9w1 | |---|---|---| | 共同核心 | 都以第 9 型的稳定、连接、减少…",
+        "Growth section is observable in principle, but strict review checks whether its fields are page-specific rather than reusable: 连续七天选择一个被埋藏的拒绝，并在关系仍有协商空间时表达，记录触发、脑中最先出现的真实同意、可见优先级与可行动平静的判断标准、你认为别人会…",
+        "Evidence section contains boundary language that should not be removed as a false positive: 本页把翼型作为传统依赖的自我观察框架。Hook 等人的系统综述指出，九型人格研究在信度、效度与应用结果上呈混合证据，对翼型等次级命题支持有…",
+        "Issue pressure: faq_depth is the highest-signal edit candidate for wing-9w8-zh-CN.",
+        "Chinese editorial review should check whether 9w8 翼型人格：扎根型调停者 reads like a polished public page rather than a translated template."
+      ],
+      "quoted_evidence": [
+        {
+          "source_location": "title",
+          "quote": "9w8 翼型人格：扎根型调停者",
+          "why_it_matters": "Confirms the page target and reader promise."
+        },
+        {
+          "source_location": "summary",
+          "quote": "9w8 以第 9 型的稳定、连接、减少内在冲突与避免优先级造成扰动为核心，并用第 8 型倾向描述沉稳、扎根，并在边界或保护空间被越过时更愿直接用力的表达方式。它是观察假设，不是固定身…",
+          "why_it_matters": "Shows whether the page frames the asset as an interpretive hypothesis rather than a fixed type."
+        },
+        {
+          "source_location": "section:quick_answer",
+          "quote": "9w8 是以第 9 型“通过维持连接、降低冲突与保护稳定来应对自身优先级”为核心，并用相邻第 8 型描述表达风格的解释性组合。它可能呈现为沉稳、扎根，并在边界或保护空间被越过时更愿直…",
+          "why_it_matters": "Tests whether the answer-first opening is independently understandable."
+        }
+      ],
+      "issue_list": [
+        {
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-9w8",
+          "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        }
+      ],
+      "required_edits": [
+        {
+          "asset_id": "wing-9w8-zh-CN",
+          "severity": "P2",
+          "category": "faq_depth",
+          "source_location": "faq:adjacent-9w8",
+          "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+        }
+      ],
+      "false_positive_notes": [
+        "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+        "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+        "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "cross_page_findings": [
+    {
+      "type": 1,
+      "pair_level_verdict": "REVIEWED",
+      "assets": [
+        "wing-1w2-zh-CN",
+        "wing-1w9-zh-CN"
+      ],
+      "note": "Pair reviewed for shared core motive and adjacent-wing differentiation."
+    },
+    {
+      "type": 2,
+      "pair_level_verdict": "REVIEWED",
+      "assets": [
+        "wing-2w1-zh-CN",
+        "wing-2w3-zh-CN"
+      ],
+      "note": "Pair reviewed for shared core motive and adjacent-wing differentiation."
+    },
+    {
+      "type": 3,
+      "pair_level_verdict": "REVIEWED",
+      "assets": [
+        "wing-3w2-zh-CN",
+        "wing-3w4-zh-CN"
+      ],
+      "note": "Pair reviewed for shared core motive and adjacent-wing differentiation."
+    },
+    {
+      "type": 4,
+      "pair_level_verdict": "REVIEWED",
+      "assets": [
+        "wing-4w3-zh-CN",
+        "wing-4w5-zh-CN"
+      ],
+      "note": "Pair reviewed for shared core motive and adjacent-wing differentiation."
+    },
+    {
+      "type": 5,
+      "pair_level_verdict": "REVIEWED",
+      "assets": [
+        "wing-5w4-zh-CN",
+        "wing-5w6-zh-CN"
+      ],
+      "note": "Pair reviewed for shared core motive and adjacent-wing differentiation."
+    },
+    {
+      "type": 6,
+      "pair_level_verdict": "REVIEWED",
+      "assets": [
+        "wing-6w5-zh-CN",
+        "wing-6w7-zh-CN"
+      ],
+      "note": "Pair reviewed for shared core motive and adjacent-wing differentiation."
+    },
+    {
+      "type": 7,
+      "pair_level_verdict": "REVIEWED",
+      "assets": [
+        "wing-7w6-zh-CN",
+        "wing-7w8-zh-CN"
+      ],
+      "note": "Pair reviewed for shared core motive and adjacent-wing differentiation."
+    },
+    {
+      "type": 8,
+      "pair_level_verdict": "REVIEWED",
+      "assets": [
+        "wing-8w7-zh-CN",
+        "wing-8w9-zh-CN"
+      ],
+      "note": "Pair reviewed for shared core motive and adjacent-wing differentiation."
+    },
+    {
+      "type": 9,
+      "pair_level_verdict": "REVIEWED",
+      "assets": [
+        "wing-9w1-zh-CN",
+        "wing-9w8-zh-CN"
+      ],
+      "note": "Pair reviewed for shared core motive and adjacent-wing differentiation."
+    }
+  ],
+  "p0_issues": [],
+  "p1_issues": [],
+  "p2_issues": [
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context",
+      "evidence": "会。角色、文化、照护责任、精力和权力都会改变帮助方式。翼型若有参考，也不能覆盖所有情境。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-2w1-zh-CN",
+      "file": "assets/wings/zh-CN/2w1.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "连续七天，每次想主动帮助时记录：触发事实；对方是否表达需要；你担心什么关系后果；你认定的正确做法；行动；结果。介入前先问“你现在需要倾听、一个建议，还是实际协助？”若答案是否定，练习…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "wing-2w1-zh-CN",
+      "file": "assets/wings/zh-CN/2w1.json"
+    },
+    {
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:comparison",
+      "evidence": "两者核心同为第 2 型；2w3 更强调帮助的可见效果和影响，2w1 更强调帮助是否负责、正确。",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise.",
+      "asset_id": "wing-2w3-zh-CN",
+      "file": "assets/wings/zh-CN/2w3.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "连续七天，每次想快速帮助或展示价值时记录：对方明确表达了什么；你期待怎样的关系回应；若无人看见是否仍愿意做；承诺需要多少时间；行动和结果。帮助前先问，再给出有限选项，不把速度当作关怀…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "wing-2w3-zh-CN",
+      "file": "assets/wings/zh-CN/2w3.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-3w2",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-3w2-zh-CN",
+      "file": "assets/wings/zh-CN/3w2.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "连续七天选择一个需要交付的事件，记录触发、脑中最先出现的成功标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每天补写一句：“如果这次不需要证明价值，我仍愿意…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "wing-3w2-zh-CN",
+      "file": "assets/wings/zh-CN/3w2.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-3w4",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-3w4-zh-CN",
+      "file": "assets/wings/zh-CN/3w4.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "连续七天选择一个需要交付的事件，记录触发、脑中最先出现的成功标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每天补写一句：“如果这次不需要证明价值，我仍愿意…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "wing-3w4-zh-CN",
+      "file": "assets/wings/zh-CN/3w4.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-4w3",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-4w3-zh-CN",
+      "file": "assets/wings/zh-CN/4w3.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "连续七天选择一个需要把私人体验变成可被真实受众理解的草稿事件，记录触发、脑中最先出现的意义与真实表达的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "wing-4w3-zh-CN",
+      "file": "assets/wings/zh-CN/4w3.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-4w5",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-4w5-zh-CN",
+      "file": "assets/wings/zh-CN/4w5.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "连续七天选择一个个人意义很强、却仍需外部证据检验的未完成想法，记录触发、脑中最先出现的意义与真实表达的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "wing-4w5-zh-CN",
+      "file": "assets/wings/zh-CN/4w5.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-5w4",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-5w4-zh-CN",
+      "file": "assets/wings/zh-CN/5w4.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "连续七天选择一份具有个人深度的解释笔记，并在它尚未完全原创前分享，记录触发、脑中最先出现的充分理解与准备的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "wing-5w4-zh-CN",
+      "file": "assets/wings/zh-CN/5w4.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-5w6",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-5w6-zh-CN",
+      "file": "assets/wings/zh-CN/5w6.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "连续七天选择一项已有足够证据可行动的决定，并预先冻结资料收集截止点，记录触发、脑中最先出现的充分理解与准备的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "wing-5w6-zh-CN",
+      "file": "assets/wings/zh-CN/5w6.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-6w5",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-6w5-zh-CN",
+      "file": "assets/wings/zh-CN/6w5.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "连续七天选择一项风险决策，只允许一个明确证据上限和一位具名专业支持者，记录触发、脑中最先出现的可信安全与行动的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "wing-6w5-zh-CN",
+      "file": "assets/wings/zh-CN/6w5.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-6w7",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-6w7-zh-CN",
+      "file": "assets/wings/zh-CN/6w7.json"
+    },
+    {
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "evidence": "连续七天选择一项共同计划，并在向盟友寻求安慰前先说明承诺阈值，记录触发、脑中最先出现的可信安全与行动的判断标准、你认为别人会怎样评价、被忽略的身体或情绪信息、采取的行动与实际结果。每…",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype.",
+      "asset_id": "wing-6w7-zh-CN",
+      "file": "assets/wings/zh-CN/6w7.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-7w6",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-7w6-zh-CN",
+      "file": "assets/wings/zh-CN/7w6.json"
+    },
+    {
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:observation_protocol",
+      "evidence": "连续七天分开记录有意义自由与完成承诺的判断标准、真实偏好、行动和结果，并主动寻找环境反例。",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise.",
+      "asset_id": "wing-7w6-zh-CN",
+      "file": "assets/wings/zh-CN/7w6.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-7w8",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-7w8-zh-CN",
+      "file": "assets/wings/zh-CN/7w8.json"
+    },
+    {
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:observation_protocol",
+      "evidence": "连续七天分开记录有意义自由与完成承诺的判断标准、真实偏好、行动和结果，并主动寻找环境反例。",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise.",
+      "asset_id": "wing-7w8-zh-CN",
+      "file": "assets/wings/zh-CN/7w8.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-8w7",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-8w7-zh-CN",
+      "file": "assets/wings/zh-CN/8w7.json"
+    },
+    {
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:observation_protocol",
+      "evidence": "连续七天分开记录适度力量与可追责保护的判断标准、真实偏好、行动和结果，并主动寻找环境反例。",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise.",
+      "asset_id": "wing-8w7-zh-CN",
+      "file": "assets/wings/zh-CN/8w7.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-8w9",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-8w9-zh-CN",
+      "file": "assets/wings/zh-CN/8w9.json"
+    },
+    {
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:observation_protocol",
+      "evidence": "连续七天分开记录适度力量与可追责保护的判断标准、真实偏好、行动和结果，并主动寻找环境反例。",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise.",
+      "asset_id": "wing-8w9-zh-CN",
+      "file": "assets/wings/zh-CN/8w9.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-9w1",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-9w1-zh-CN",
+      "file": "assets/wings/zh-CN/9w1.json"
+    },
+    {
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-9w8",
+      "evidence": "不会。翼型传统只用相邻类型描述可能的表达影响，不意味着核心类型变成邻型，也不是两者各占一半。",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample.",
+      "asset_id": "wing-9w8-zh-CN",
+      "file": "assets/wings/zh-CN/9w8.json"
+    }
+  ],
+  "p3_issues": [],
+  "false_positive_notes": [
+    "Do not treat noindex/draft/llms-disabled state as a defect in this package; it is required by scope.",
+    "Do not remove non-diagnostic boundary language simply because it sounds cautious.",
+    "Truity references are competitor/coverage benchmarks, not scientific proof claims."
+  ],
+  "required_edits": [
+    {
+      "asset_id": "wing-2w1-zh-CN",
+      "file": "assets/wings/zh-CN/2w1.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:context",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-2w1-zh-CN",
+      "file": "assets/wings/zh-CN/2w1.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "wing-2w3-zh-CN",
+      "file": "assets/wings/zh-CN/2w3.json",
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:comparison",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+    },
+    {
+      "asset_id": "wing-2w3-zh-CN",
+      "file": "assets/wings/zh-CN/2w3.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "wing-3w2-zh-CN",
+      "file": "assets/wings/zh-CN/3w2.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-3w2",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-3w2-zh-CN",
+      "file": "assets/wings/zh-CN/3w2.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "wing-3w4-zh-CN",
+      "file": "assets/wings/zh-CN/3w4.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-3w4",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-3w4-zh-CN",
+      "file": "assets/wings/zh-CN/3w4.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "wing-4w3-zh-CN",
+      "file": "assets/wings/zh-CN/4w3.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-4w3",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-4w3-zh-CN",
+      "file": "assets/wings/zh-CN/4w3.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "wing-4w5-zh-CN",
+      "file": "assets/wings/zh-CN/4w5.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-4w5",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-4w5-zh-CN",
+      "file": "assets/wings/zh-CN/4w5.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "wing-5w4-zh-CN",
+      "file": "assets/wings/zh-CN/5w4.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-5w4",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-5w4-zh-CN",
+      "file": "assets/wings/zh-CN/5w4.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "wing-5w6-zh-CN",
+      "file": "assets/wings/zh-CN/5w6.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-5w6",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-5w6-zh-CN",
+      "file": "assets/wings/zh-CN/5w6.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "wing-6w5-zh-CN",
+      "file": "assets/wings/zh-CN/6w5.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-6w5",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-6w5-zh-CN",
+      "file": "assets/wings/zh-CN/6w5.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "wing-6w7-zh-CN",
+      "file": "assets/wings/zh-CN/6w7.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-6w7",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-6w7-zh-CN",
+      "file": "assets/wings/zh-CN/6w7.json",
+      "severity": "P2",
+      "category": "exercise_template_risk",
+      "source_location": "section:growth/geo:observation_protocol",
+      "required_edit": "Rewrite the exercise so the trigger, observation fields, and counterexample are specific to this exact wing or subtype."
+    },
+    {
+      "asset_id": "wing-7w6-zh-CN",
+      "file": "assets/wings/zh-CN/7w6.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-7w6",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-7w6-zh-CN",
+      "file": "assets/wings/zh-CN/7w6.json",
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:observation_protocol",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+    },
+    {
+      "asset_id": "wing-7w8-zh-CN",
+      "file": "assets/wings/zh-CN/7w8.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-7w8",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-7w8-zh-CN",
+      "file": "assets/wings/zh-CN/7w8.json",
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:observation_protocol",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+    },
+    {
+      "asset_id": "wing-8w7-zh-CN",
+      "file": "assets/wings/zh-CN/8w7.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-8w7",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-8w7-zh-CN",
+      "file": "assets/wings/zh-CN/8w7.json",
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:observation_protocol",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+    },
+    {
+      "asset_id": "wing-8w9-zh-CN",
+      "file": "assets/wings/zh-CN/8w9.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-8w9",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-8w9-zh-CN",
+      "file": "assets/wings/zh-CN/8w9.json",
+      "severity": "P2",
+      "category": "geo_answer_depth",
+      "source_location": "geo:observation_protocol",
+      "required_edit": "Make the GEO answer independently understandable while keeping it concise."
+    },
+    {
+      "asset_id": "wing-9w1-zh-CN",
+      "file": "assets/wings/zh-CN/9w1.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-9w1",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    },
+    {
+      "asset_id": "wing-9w8-zh-CN",
+      "file": "assets/wings/zh-CN/9w8.json",
+      "severity": "P2",
+      "category": "faq_depth",
+      "source_location": "faq:adjacent-9w8",
+      "required_edit": "Expand thin FAQ answers with a direct answer, boundary, and observable counterexample."
+    }
+  ],
+  "blocked_items": [],
+  "confidence": "high",
+  "final_decision": "PASS_WITH_EDITS"
+}

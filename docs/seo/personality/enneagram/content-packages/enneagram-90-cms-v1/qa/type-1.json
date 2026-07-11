@@ -1,0 +1,336 @@
+{
+  "artifact": "ENNEAGRAM-90-TYPE-1-CONTENT-01-QA",
+  "task_id": "ENNEAGRAM-90-TYPE-1-CONTENT-01",
+  "generated_at": "2026-07-11T00:00:00+08:00",
+  "status": "PASS",
+  "model_session": {
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "high"
+  },
+  "codex_native_audit": {
+    "raw_contract_audit": "PASS",
+    "skeptical_self_review": "PASS",
+    "critical_violations": 0,
+    "major_violations": 0,
+    "repairs": [
+      "normalized blueprint self-vs-self sibling typo to reciprocal 1w9 vs 1w2",
+      "corrected deterministic builder Buffer hashing before final Type 1 freeze"
+    ]
+  },
+  "counts": {
+    "assets": 10,
+    "zh-CN": 5,
+    "en": 5,
+    "bilingual_pairs": 5
+  },
+  "page_results": [
+    {
+      "asset_id": "wing-1w9-zh-CN",
+      "file": "assets/wings/zh-CN/1w9.json",
+      "pass": true,
+      "checks": {
+        "missing_fields": [],
+        "locale_matches_inventory": true,
+        "entity_matches_inventory": true,
+        "canonical_matches_inventory": true,
+        "section_keys_match": true,
+        "faq_count": 5,
+        "geo_answer_block_count": 3,
+        "visible_length": 3565,
+        "visible_length_range": [
+          2500,
+          4000
+        ],
+        "unresolved_sources": [],
+        "unsafe_internal_links": [],
+        "deterministic_claim_hits": [],
+        "fail_closed": true,
+        "private_result_language_hits": []
+      }
+    },
+    {
+      "asset_id": "wing-1w2-zh-CN",
+      "file": "assets/wings/zh-CN/1w2.json",
+      "pass": true,
+      "checks": {
+        "missing_fields": [],
+        "locale_matches_inventory": true,
+        "entity_matches_inventory": true,
+        "canonical_matches_inventory": true,
+        "section_keys_match": true,
+        "faq_count": 5,
+        "geo_answer_block_count": 3,
+        "visible_length": 3295,
+        "visible_length_range": [
+          2500,
+          4000
+        ],
+        "unresolved_sources": [],
+        "unsafe_internal_links": [],
+        "deterministic_claim_hits": [],
+        "fail_closed": true,
+        "private_result_language_hits": []
+      }
+    },
+    {
+      "asset_id": "wing-1w9-en",
+      "file": "assets/wings/en/1w9.json",
+      "pass": true,
+      "checks": {
+        "missing_fields": [],
+        "locale_matches_inventory": true,
+        "entity_matches_inventory": true,
+        "canonical_matches_inventory": true,
+        "section_keys_match": true,
+        "faq_count": 5,
+        "geo_answer_block_count": 3,
+        "visible_length": 2131,
+        "visible_length_range": [
+          1600,
+          2500
+        ],
+        "unresolved_sources": [],
+        "unsafe_internal_links": [],
+        "deterministic_claim_hits": [],
+        "fail_closed": true,
+        "private_result_language_hits": []
+      }
+    },
+    {
+      "asset_id": "wing-1w2-en",
+      "file": "assets/wings/en/1w2.json",
+      "pass": true,
+      "checks": {
+        "missing_fields": [],
+        "locale_matches_inventory": true,
+        "entity_matches_inventory": true,
+        "canonical_matches_inventory": true,
+        "section_keys_match": true,
+        "faq_count": 5,
+        "geo_answer_block_count": 3,
+        "visible_length": 2039,
+        "visible_length_range": [
+          1600,
+          2500
+        ],
+        "unresolved_sources": [],
+        "unsafe_internal_links": [],
+        "deterministic_claim_hits": [],
+        "fail_closed": true,
+        "private_result_language_hits": []
+      }
+    },
+    {
+      "asset_id": "subtype-type-1-self-preservation-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-self-preservation.json",
+      "pass": true,
+      "checks": {
+        "missing_fields": [],
+        "locale_matches_inventory": true,
+        "entity_matches_inventory": true,
+        "canonical_matches_inventory": true,
+        "section_keys_match": true,
+        "faq_count": 5,
+        "geo_answer_block_count": 3,
+        "visible_length": 3502,
+        "visible_length_range": [
+          2500,
+          4000
+        ],
+        "unresolved_sources": [],
+        "unsafe_internal_links": [],
+        "deterministic_claim_hits": [],
+        "fail_closed": true,
+        "private_result_language_hits": []
+      }
+    },
+    {
+      "asset_id": "subtype-type-1-social-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-social.json",
+      "pass": true,
+      "checks": {
+        "missing_fields": [],
+        "locale_matches_inventory": true,
+        "entity_matches_inventory": true,
+        "canonical_matches_inventory": true,
+        "section_keys_match": true,
+        "faq_count": 5,
+        "geo_answer_block_count": 3,
+        "visible_length": 3546,
+        "visible_length_range": [
+          2500,
+          4000
+        ],
+        "unresolved_sources": [],
+        "unsafe_internal_links": [],
+        "deterministic_claim_hits": [],
+        "fail_closed": true,
+        "private_result_language_hits": []
+      }
+    },
+    {
+      "asset_id": "subtype-type-1-one-to-one-zh-CN",
+      "file": "assets/instinctual-subtypes/zh-CN/type-1-one-to-one.json",
+      "pass": true,
+      "checks": {
+        "missing_fields": [],
+        "locale_matches_inventory": true,
+        "entity_matches_inventory": true,
+        "canonical_matches_inventory": true,
+        "section_keys_match": true,
+        "faq_count": 5,
+        "geo_answer_block_count": 3,
+        "visible_length": 3417,
+        "visible_length_range": [
+          2500,
+          4000
+        ],
+        "unresolved_sources": [],
+        "unsafe_internal_links": [],
+        "deterministic_claim_hits": [],
+        "fail_closed": true,
+        "private_result_language_hits": []
+      }
+    },
+    {
+      "asset_id": "subtype-type-1-self-preservation-en",
+      "file": "assets/instinctual-subtypes/en/type-1-self-preservation.json",
+      "pass": true,
+      "checks": {
+        "missing_fields": [],
+        "locale_matches_inventory": true,
+        "entity_matches_inventory": true,
+        "canonical_matches_inventory": true,
+        "section_keys_match": true,
+        "faq_count": 5,
+        "geo_answer_block_count": 3,
+        "visible_length": 1970,
+        "visible_length_range": [
+          1600,
+          2500
+        ],
+        "unresolved_sources": [],
+        "unsafe_internal_links": [],
+        "deterministic_claim_hits": [],
+        "fail_closed": true,
+        "private_result_language_hits": []
+      }
+    },
+    {
+      "asset_id": "subtype-type-1-social-en",
+      "file": "assets/instinctual-subtypes/en/type-1-social.json",
+      "pass": true,
+      "checks": {
+        "missing_fields": [],
+        "locale_matches_inventory": true,
+        "entity_matches_inventory": true,
+        "canonical_matches_inventory": true,
+        "section_keys_match": true,
+        "faq_count": 5,
+        "geo_answer_block_count": 3,
+        "visible_length": 1964,
+        "visible_length_range": [
+          1600,
+          2500
+        ],
+        "unresolved_sources": [],
+        "unsafe_internal_links": [],
+        "deterministic_claim_hits": [],
+        "fail_closed": true,
+        "private_result_language_hits": []
+      }
+    },
+    {
+      "asset_id": "subtype-type-1-one-to-one-en",
+      "file": "assets/instinctual-subtypes/en/type-1-one-to-one.json",
+      "pass": true,
+      "checks": {
+        "missing_fields": [],
+        "locale_matches_inventory": true,
+        "entity_matches_inventory": true,
+        "canonical_matches_inventory": true,
+        "section_keys_match": true,
+        "faq_count": 5,
+        "geo_answer_block_count": 3,
+        "visible_length": 1964,
+        "visible_length_range": [
+          1600,
+          2500
+        ],
+        "unresolved_sources": [],
+        "unsafe_internal_links": [],
+        "deterministic_claim_hits": [],
+        "fail_closed": true,
+        "private_result_language_hits": []
+      }
+    }
+  ],
+  "bilingual_pair_results": [
+    {
+      "pair": "wing:1w9",
+      "pass": true,
+      "checks": {
+        "locales_present": true,
+        "section_keys_equal": true,
+        "faq_count_equal": true,
+        "source_refs_equal": true,
+        "hreflang_reciprocal": true
+      }
+    },
+    {
+      "pair": "wing:1w2",
+      "pass": true,
+      "checks": {
+        "locales_present": true,
+        "section_keys_equal": true,
+        "faq_count_equal": true,
+        "source_refs_equal": true,
+        "hreflang_reciprocal": true
+      }
+    },
+    {
+      "pair": "instinctual_subtype:type-1/self-preservation",
+      "pass": true,
+      "checks": {
+        "locales_present": true,
+        "section_keys_equal": true,
+        "faq_count_equal": true,
+        "source_refs_equal": true,
+        "hreflang_reciprocal": true
+      }
+    },
+    {
+      "pair": "instinctual_subtype:type-1/social",
+      "pass": true,
+      "checks": {
+        "locales_present": true,
+        "section_keys_equal": true,
+        "faq_count_equal": true,
+        "source_refs_equal": true,
+        "hreflang_reciprocal": true
+      }
+    },
+    {
+      "pair": "instinctual_subtype:type-1/one-to-one",
+      "pass": true,
+      "checks": {
+        "locales_present": true,
+        "section_keys_equal": true,
+        "faq_count_equal": true,
+        "source_refs_equal": true,
+        "hreflang_reciprocal": true
+      }
+    }
+  ],
+  "family_checks": {
+    "expected_assets": true,
+    "unique_titles": true,
+    "unique_meta_titles": true,
+    "unique_canonicals": true,
+    "bilingual_pairs": true,
+    "exact_long_paragraph_duplicates": [],
+    "wing_sibling_reciprocity": true,
+    "subtype_three_way_links": true
+  },
+  "failures": []
+}
