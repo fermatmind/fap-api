@@ -85281,8 +85281,8 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-01-attempt-owner-binding",
     "depends_on": [],
-    "status": "focused_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "b1fec7a2a4a1e5cb6447189c71d32582b93821a5",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -85341,6 +85341,12 @@
         "from": "in_progress",
         "to": "focused_checks_passed",
         "note": "Focused ownership/idempotency tests, Pint, route listing, YAML/JSON syntax, diff, and exact allowed-path validation passed; full core CI remains pending behind the local process guard."
+      },
+      {
+        "at": "2026-07-11T11:48:00+08:00",
+        "from": "focused_checks_passed",
+        "to": "committed",
+        "note": "Committed the four-path scoped repair, rebased cleanly onto origin/main 76e35f4f3dfc5a587617fb729c507736b238da6c, and retained implementation commit b1fec7a2a4a1e5cb6447189c71d32582b93821a5."
       }
     ]
   }
