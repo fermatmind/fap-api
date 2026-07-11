@@ -61,6 +61,47 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: MBTI-INDEX-24A-API
+    repo: fap-api
+    depends_on:
+      - MBTI-CMS-28A
+    branch: codex/mbti-index-24a-api-comparison-schema-authority
+    title: "MBTI-INDEX-24A-API: add cross-type comparison schema authority"
+    train_scope: mbti_cross_type_comparison_schema_authority
+    status: user_authorized
+    scope:
+      - Return backend-authoritative SEO metadata, JSON-LD, and SEO surface contracts for public MBTI cross-type comparison detail responses.
+      - Keep all existing indexability, sitemap, and llms gates closed.
+      - Keep comparison FAQ schema exactly aligned with the visible backend FAQ projection.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify CMS content, authority rows, indexability, sitemap, llms, canonical routes, frontend code, or GSC state.
+      - Run production writes, imports, promotions, deploys, or GSC submissions.
+    validation:
+      - cd backend && php artisan test tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter=personality_comparison --no-ansi
+      - cd backend && php artisan test tests/Feature/SEO/SitemapGeneratorTest.php --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: BIG5-CMS-FAQ-DEDUPE-02
     repo: fap-api
     depends_on:

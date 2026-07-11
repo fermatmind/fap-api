@@ -85596,5 +85596,32 @@
     "checks": {"manifest_registration": {"status": "pass", "evidence": "The PRR2 /goal authorized production hard-disable when provider-native freshness cannot be proven."}, "dependency": {"status": "pass", "evidence": "AUDIT-PRR2-API-02 is merged."}},
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
     "transitions": [{"at": "2026-07-11T13:48:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the authorized production hard-disable after confirming LemonSqueezy signs only the raw body and exposes no authenticated freshness value."}, {"at": "2026-07-11T13:52:00+08:00", "from": "in_progress", "to": "focused_checks_passed", "note": "Production-disable, signature, go-live compatibility, runtime-freeze, Pint, YAML/JSON and diff checks passed."}, {"at": "2026-07-11T13:55:00+08:00", "from": "focused_checks_passed", "to": "pr_open", "note": "Committed and pushed the six-path LemonSqueezy production-disable scope at 2d5bd5d51e2a655a6215176491240dbf40f38d03, then opened PR #2949; required checks are pending."}, {"at": "2026-07-11T14:06:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed on head 0cb4d2b7bcd71cc441968f946b38045e36eac8c3; PR #2949 is mergeable and scope-clean."}]
+  },
+  "MBTI-INDEX-24A-API": {
+    "id": "MBTI-INDEX-24A-API",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/mbti-index-24a-api-comparison-schema-authority",
+    "title": "MBTI-INDEX-24A-API: add cross-type comparison schema authority",
+    "depends_on": ["MBTI-CMS-28A"],
+    "status": "committed",
+    "commit_sha": "b932a915bb3e639fa280c23735598d7daa075f95",
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The operator explicitly authorized registration and execution while keeping deploy, production promotion, and GSC out of scope."},
+      "dependency": {"status": "pass", "evidence": "MBTI-CMS-28A is merged; execution was rebased onto current origin/main b922eeffb."},
+      "focused_tests": {"status": "pass", "evidence": "Cross-type readmodel: 3 tests/57 assertions; comparison API: 8/140; sitemap: 11/231; scoped Pint and complete scripts/ci_verify_mbti.sh passed on the rebased scope."},
+      "scope_validation": {"status": "pass", "evidence": "YAML, JSON, PHP syntax, git diff --check and exact four-path scope passed; verify-generated compiled diffs were restored."},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [
+      {"at": "2026-07-11T15:00:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Registered and started the authorized backend schema-authority prerequisite in an isolated worktree."},
+      {"at": "2026-07-11T15:28:00+08:00", "from": "in_progress", "to": "committed", "note": "All manifest checks passed after rebasing onto current origin/main; no production mutation or deploy occurred."}
+    ]
   }
 }
