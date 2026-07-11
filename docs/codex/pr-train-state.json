@@ -708,13 +708,13 @@
     "depends_on": [
       "ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "1e2b7206d73a9eac96a9f6c35bf1e25beefb4f4b",
+    "status": "merged",
+    "commit_sha": "3dcd5f4a0681d79ce9bf3368387d17e3f24a6c00",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2939",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T03:22:36Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "dependency": {
         "status": "pass",
@@ -753,7 +753,7 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -785,6 +785,12 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "All 9 reported GitHub checks passed; exact five-file scope, title, body, head SHA, mergeability, and auto-merge policy were revalidated."
+      },
+      {
+        "at": "2026-07-11T11:22:36+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2939 squash-merged at 3dcd5f4a0681d79ce9bf3368387d17e3f24a6c00 under manifest auto-merge policy. The skip instruction prevented push-triggered deployment workflows; origin/main contains the merge, local main equals origin/main, the worktree is clean, and local/remote task branches were deleted."
       }
     ]
   },
