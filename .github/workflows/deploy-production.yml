@@ -28,6 +28,11 @@ on:
           - auto
           - code_only
           - standard
+      expected_deployed_revision:
+        description: "Required 40-character current production REVISION for auto or code_only"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
@@ -56,7 +61,7 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: ${{ env.DEPLOY_SHA }}
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Validate manual exact-SHA approval and staging evidence
         id: resolve_deploy_mode
@@ -66,6 +71,7 @@ jobs:
           STAGING_RUN_ID: ${{ inputs.staging_run_id }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
           REQUESTED_DEPLOY_MODE: ${{ inputs.deploy_mode }}
+          EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
         run: |
           set -euo pipefail
           if [[ ! "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]; then
@@ -87,34 +93,46 @@ jobs:
               exit 2
               ;;
           esac
-          if ! git rev-parse "${DEPLOY_SHA}^" >/dev/null 2>&1; then
-            echo "code-only scope classification requires an available parent revision." >&2
-            exit 1
-          fi
-          mapfile -t CHANGED_FILES < <(git diff --no-renames --name-only "${DEPLOY_SHA}^" "$DEPLOY_SHA")
-          if [ "${#CHANGED_FILES[@]}" -eq 0 ]; then
-            echo "code-only scope classification refused an empty revision diff." >&2
-            exit 1
-          fi
-          CODE_ONLY_SCOPE=true
-          for path in "${CHANGED_FILES[@]}"; do
-            case "$path" in
-              backend/app/*|backend/bootstrap/*|backend/config/*|backend/public/*|backend/resources/*|backend/routes/*|backend/tests/*|tests/*|backend/composer.json|backend/composer.lock|deploy.php|.github/workflows/deploy-production.yml)
-                ;;
-              *)
-                CODE_ONLY_SCOPE=false
-                echo "code-only scope refused path: $path" >&2
-                ;;
-            esac
-          done
           case "$REQUESTED_DEPLOY_MODE" in
             standard)
               RESOLVED_DEPLOY_MODE=standard
               EXPECTED_APPROVAL="I explicitly approve backend production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
               ;;
             auto|code_only)
+              if [[ ! "$EXPECTED_DEPLOYED_REVISION" =~ ^[0-9a-f]{40}$ ]]; then
+                echo "auto/code_only requires expected_deployed_revision as a lowercase 40-character deployed REVISION." >&2
+                exit 2
+              fi
+              if ! git cat-file -e "${EXPECTED_DEPLOYED_REVISION}^{commit}"; then
+                echo "code-only scope classification cannot resolve expected_deployed_revision." >&2
+                exit 1
+              fi
+              if ! git merge-base --is-ancestor "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"; then
+                echo "code-only scope classification requires expected_deployed_revision to be an ancestor of expected_release_sha." >&2
+                exit 1
+              fi
+              mapfile -t CHANGED_FILES < <(git diff --no-renames --name-only "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA")
+              if [ "${#CHANGED_FILES[@]}" -eq 0 ]; then
+                echo "code-only scope classification refused an empty deployed-revision diff." >&2
+                exit 1
+              fi
+              CODE_ONLY_SCOPE=true
+              for path in "${CHANGED_FILES[@]}"; do
+                case "$path" in
+                  backend/database/*|backend/content_assets/*|backend/content_packs/*|backend/content_baselines/*|content_assets/*|content_packages/*|content_baselines/*|docs/seo/*|generated/*|backend/storage/*|backend/app/Services/Cms/*|backend/app/Filament/*|backend/app/Models/*|backend/resources/views/*)
+                    CODE_ONLY_SCOPE=false
+                    echo "code-only scope refused authority or generated path: $path" >&2
+                    ;;
+                  backend/app/*|backend/bootstrap/*|backend/config/*|backend/public/*|backend/resources/*|backend/routes/*|backend/tests/*|tests/*|backend/composer.json|backend/composer.lock|deploy.php|.github/workflows/deploy-production.yml|docs/codex/*)
+                    ;;
+                  *)
+                    CODE_ONLY_SCOPE=false
+                    echo "code-only scope refused unknown path: $path" >&2
+                    ;;
+                esac
+              done
               if [ "$CODE_ONLY_SCOPE" != true ]; then
-                echo "code-only deployment refused: revision contains a path outside the strict allowlist; rerun only with an explicit standard deployment approval." >&2
+                echo "code-only deployment refused: cumulative deployed-revision diff contains a forbidden or unknown path; rerun only with an explicit standard deployment approval." >&2
                 exit 1
               fi
               RESOLVED_DEPLOY_MODE=code_only
@@ -182,6 +200,7 @@ jobs:
       AUTH_GUEST_CHECK_URL: ${{ vars.PRODUCTION_AUTH_GUEST_CHECK_URL }}
       OPS_HOST: ${{ vars.PRODUCTION_OPS_HOST }}
       DEPLOY_MODE: ${{ needs.deployment-eligibility.outputs.deploy_mode }}
+      EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
 
     steps:
       - name: Checkout deploy revision
@@ -288,6 +307,34 @@ jobs:
           }
           ssh_retry 'whoami; hostname; id'
           ssh_retry "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
+
+      - name: Verify code-only deployed baseline before writes
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'code_only' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh_retry() {
+            local attempt rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+              if [ "$rc" -eq 0 ]; then return 0; fi
+              if [ "$attempt" -ge "$max_attempts" ]; then return "$rc"; fi
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+          DEPLOYED_BASELINE="$(ssh_retry "cd '$DEPLOY_PATH/current' && test -f REVISION && tr -d '\r\n' < REVISION")"
+          if [ "$DEPLOYED_BASELINE" != "$EXPECTED_DEPLOYED_REVISION" ]; then
+            echo "code-only deployment refused: remote deployed REVISION does not match expected_deployed_revision." >&2
+            exit 1
+          fi
+          echo "code-only deployed baseline verified"
 
       - name: Remote deploy lock guard
         shell: bash
