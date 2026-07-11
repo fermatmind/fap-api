@@ -267,7 +267,7 @@ final class CareerJobDetailApiTest extends TestCase
             'is_enabled' => true,
         ]);
 
-        $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors')
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/accountants-and-auditors')
             ->assertOk()
             ->assertJsonPath('bundle_kind', 'career_job_detail')
             ->assertJsonPath('identity.canonical_slug', 'accountants-and-auditors')
@@ -323,13 +323,13 @@ final class CareerJobDetailApiTest extends TestCase
             ],
         ]);
 
-        $this->getJson('/api/v0.5/career/jobs/canonical-locale-regression?locale=en')
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/canonical-locale-regression?locale=en')
             ->assertOk()
             ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/canonical-locale-regression')
             ->assertJsonPath('seo_contract.canonical_target', '/en/career/jobs/canonical-locale-regression')
             ->assertJsonPath('seo_contract.robots_policy', 'index,follow');
 
-        $this->getJson('/api/v0.5/career/jobs/canonical-locale-regression?locale=zh-CN')
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/canonical-locale-regression?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/canonical-locale-regression')
             ->assertJsonPath('seo_contract.canonical_target', '/zh/career/jobs/canonical-locale-regression')
@@ -355,7 +355,7 @@ final class CareerJobDetailApiTest extends TestCase
         ] as $slug) {
             $this->createPublishedDocxCareerJob($slug);
 
-            $this->getJson('/api/v0.5/career/jobs/'.$slug)
+            $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/'.$slug)
                 ->assertStatus(404)
                 ->assertJsonPath('ok', false)
                 ->assertJsonPath('error_code', 'NOT_FOUND');
@@ -371,7 +371,7 @@ final class CareerJobDetailApiTest extends TestCase
         $occupation = $this->createDisplayAssetBackedOccupation('display-backed-duplicate-hold');
         $this->createDisplayAsset($occupation);
 
-        $this->getJson('/api/v0.5/career/jobs/display-backed-duplicate-hold')
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/display-backed-duplicate-hold')
             ->assertStatus(404)
             ->assertJsonPath('ok', false)
             ->assertJsonPath('error_code', 'NOT_FOUND');
@@ -386,7 +386,7 @@ final class CareerJobDetailApiTest extends TestCase
         $occupation = $this->createDisplayAssetBackedOccupation('display-backed-public-canonical');
         $this->createDisplayAsset($occupation);
 
-        $this->getJson('/api/v0.5/career/jobs/display-backed-public-canonical')
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/display-backed-public-canonical')
             ->assertOk()
             ->assertJsonPath('bundle_kind', 'career_job_detail')
             ->assertJsonPath('identity.canonical_slug', 'display-backed-public-canonical')
@@ -415,7 +415,7 @@ final class CareerJobDetailApiTest extends TestCase
             ],
         ]);
 
-        $this->getJson('/api/v0.5/career/jobs/data-scientists?locale=zh-CN')
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/data-scientists?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('titles.canonical_zh', '展示资产职业')
             ->assertJsonPath('seo_contract.index_state', 'indexable')
@@ -425,7 +425,7 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.implementation_contract.authority', 'runtime_publish_projection')
             ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'restricted');
 
-        $this->getJson('/api/v0.5/career/jobs/data-scientists?locale=en')
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/data-scientists?locale=en')
             ->assertOk()
             ->assertJsonPath('seo_contract.index_state', 'indexable')
             ->assertJsonPath('display_surface_v1.page.locale', 'en')
@@ -474,7 +474,7 @@ final class CareerJobDetailApiTest extends TestCase
             ],
         ]);
 
-        $this->getJson('/api/v0.5/career/jobs/reviewed-zh-display-asset?locale=zh-CN')
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/reviewed-zh-display-asset?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('trust_manifest.logic_version', 'career.protocol.job_detail.display_asset_backed.v1')
             ->assertJsonPath('integrity_summary.integrity_state', 'display_asset_backed')
@@ -522,10 +522,10 @@ final class CareerJobDetailApiTest extends TestCase
             ],
         ]);
 
-        $zhResponse = $this->getJson('/api/v0.5/career/jobs/english-module-subset-display-asset?locale=zh-CN')
+        $zhResponse = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/english-module-subset-display-asset?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
-        $enResponse = $this->getJson('/api/v0.5/career/jobs/english-module-subset-display-asset?locale=en')
+        $enResponse = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/english-module-subset-display-asset?locale=en')
             ->assertOk()
             ->assertJsonPath('display_surface_v1.page.locale', 'en')
             ->assertJsonPath('display_surface_v1.page.content.responsibilities_block.module_state', 'pending_reviewed_locale_content')
@@ -555,7 +555,7 @@ final class CareerJobDetailApiTest extends TestCase
 
         $this->createDisplayAssetBackedOccupation('agricultural-workers-all-other');
 
-        $this->getJson('/api/v0.5/career/jobs/agricultural-workers-all-other?locale=en')
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/agricultural-workers-all-other?locale=en')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'agricultural-workers-all-other')
             ->assertJsonPath('trust_manifest.logic_version', 'career.protocol.job_detail.runtime_published_shell.v1')
@@ -577,7 +577,7 @@ final class CareerJobDetailApiTest extends TestCase
 
         $this->createDisplayAssetBackedOccupation('blocked-runtime-shell');
 
-        $this->getJson('/api/v0.5/career/jobs/blocked-runtime-shell?locale=en')
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/blocked-runtime-shell?locale=en')
             ->assertStatus(404)
             ->assertJsonPath('ok', false)
             ->assertJsonPath('error_code', 'NOT_FOUND');
@@ -638,6 +638,17 @@ final class CareerJobDetailApiTest extends TestCase
                 items: $items,
             ),
         );
+    }
+
+    private function getWarmedJobDetailJson(string $uri): \Illuminate\Testing\TestResponse
+    {
+        $path = (string) parse_url($uri, PHP_URL_PATH);
+        $slug = (string) basename($path);
+        parse_str((string) parse_url($uri, PHP_URL_QUERY), $query);
+        $locale = is_string($query['locale'] ?? null) ? $query['locale'] : 'zh-CN';
+        app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, $locale, true);
+
+        return $this->getJson($uri);
     }
 
     private function createPublishedDocxCareerJob(string $slug): CareerJob

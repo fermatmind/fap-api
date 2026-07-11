@@ -71,8 +71,9 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
 
     public function test_command_can_forget_and_warm_targeted_job_detail_cache_by_slug_and_locale(): void
     {
-        $cacheKey = PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':missing-career:zh-CN';
-        Cache::forever($cacheKey, ['stale' => true]);
+        $legacyCacheKey = PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':missing-career:zh-CN';
+        $cacheKey = PublicCareerAuthorityResponseCache::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX.':missing-career:zh-CN:active';
+        Cache::forever($legacyCacheKey, ['stale' => true]);
 
         $this->artisan('career:warm-public-authority-cache', [
             '--job-detail-slugs' => 'missing-career',
@@ -86,13 +87,15 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
             ->expectsOutputToContain('status=warmed')
             ->assertExitCode(0);
 
+        $this->assertFalse(Cache::has($legacyCacheKey));
         $this->assertFalse(Cache::has($cacheKey));
     }
 
     public function test_command_emits_json_report_for_targeted_job_detail_cache_refresh(): void
     {
-        $cacheKey = PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':missing-career:zh-CN';
-        Cache::forever($cacheKey, ['stale' => true]);
+        $legacyCacheKey = PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':missing-career:zh-CN';
+        $cacheKey = PublicCareerAuthorityResponseCache::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX.':missing-career:zh-CN:active';
+        Cache::forever($legacyCacheKey, ['stale' => true]);
 
         $exitCode = Artisan::call('career:warm-public-authority-cache', [
             '--job-detail-slugs' => 'missing-career',
@@ -108,6 +111,7 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->assertSame($cacheKey, $report['entries']['job_detail_zh_cn_missing-career']['cache_key']);
         $this->assertSame('missing', $report['entries']['job_detail_zh_cn_missing-career']['status']);
         $this->assertSame(0, $report['entries']['job_detail_zh_cn_missing-career']['member_count']);
+        $this->assertFalse(Cache::has($legacyCacheKey));
         $this->assertFalse(Cache::has($cacheKey));
     }
 

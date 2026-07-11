@@ -4442,6 +4442,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_detail_read_model_10k(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
+            'backend/app/Jobs/Career/WarmCareerJobDetailProjection.php',
+            'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_salary_asset_staging_preview_changes(): void
     {
         $changed = [
@@ -6166,6 +6177,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCareerRuntimeSloObservabilityFile($file)) {
+                continue;
+            }
+
+            if ($this->isCareerDetailReadModel10kFile($file)) {
                 continue;
             }
 
@@ -8962,6 +8977,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Http/Middleware/RecordCareerRuntimeSlo.php',
             'backend/app/Services/Career/CareerRuntimeSloService.php',
+        ], true);
+    }
+
+    private function isCareerDetailReadModel10kFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
+            'backend/app/Jobs/Career/WarmCareerJobDetailProjection.php',
+            'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
         ], true);
     }
 

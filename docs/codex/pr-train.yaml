@@ -80,6 +80,7 @@ prs:
       - backend/tests/Feature/Career/CareerDirectoryAuthorityApiTest.php
       - backend/tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php
       - backend/tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/tests/Feature/SEO/SitemapGeneratorTest.php
       - backend/tests/Feature/SEO/SitemapXmlTest.php
       - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
@@ -169,6 +170,60 @@ prs:
     publish_allowed: false
     search_channel_action: false
     scheduler_activation: true
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: CAREER-DETAIL-READ-MODEL-10K-01
+    repo: fap-api
+    depends_on:
+      - CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01
+    branch: codex/career-detail-read-model-10k-01
+    base: main
+    title: "CAREER-DETAIL-READ-MODEL-10K-01 career detail read model for 10k"
+    train_scope: career_10k_stability
+    status: in_progress
+    scope:
+      - Serve published Career details from versioned per-slug and per-locale projections with atomic active/LKG switching.
+      - Keep detail bundle, SEO, scoring, and evidence assembly out of the public HTTP request path.
+      - Queue bounded, resumable, unique warm jobs and retain targeted refresh for changed Career slugs only.
+      - Negative-cache only authority-known unpublished/held entries and keep held, noindex, private, or release-blocked entries out of public projections.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerQueueWarmJobDetails.php
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php
+      - backend/app/Jobs/Career/WarmCareerJobDetailProjection.php
+      - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
+      - backend/tests/Feature/Career/CareerJobDetailReadModel10kTest.php
+      - backend/tests/Feature/Career/CareerJobDetailApiTest.php
+      - backend/tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Change CMS/backend authority, public content, publication/indexability decisions, canonical, sitemap, llms, JSON-LD, or frontend rendering/cache behavior.
+      - Deploy, import, publish, mutate CMS/DB, run production warm, or wait for staging deployment.
+      - Implement frontend detail delivery, 10k chaos gates, or controlled rollout work from PR6-PR8.
+    validation:
+      - cd backend && php artisan test tests/Feature/Career/CareerJobDetailReadModel10kTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Career/CareerJobDetailApiTest.php --filter='docx_baseline_canonical|public_resolution_guard|display_asset|runtime_published|runtime_shell' --no-ansi
+      - cd backend && php artisan route:list --path=api/v0.5/career/jobs --except-vendor
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_career_detail_read_model_10k' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/CareerQueueWarmJobDetails.php app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php app/Jobs/Career/WarmCareerJobDetailProjection.php app/Services/Career/PublicCareerAuthorityResponseCache.php tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerJobDetailReadModel10kTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && composer validate --strict
+      - full repository Pint and composer test baseline failures recorded as authorized sidecars; GitHub required checks remain mandatory
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    scheduler_activation: false
     deploy_allowed: false
     content_authority: backend
 
