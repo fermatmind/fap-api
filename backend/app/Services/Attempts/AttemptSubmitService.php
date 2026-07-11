@@ -148,13 +148,9 @@ class AttemptSubmitService
             ->where('id', $attemptId)
             ->where('org_id', $ctx->scopedOrgId());
 
-        $role = (string) ($ctx->role() ?? '');
-        if (in_array($role, ['owner', 'admin'], true)) {
-            return $query;
-        }
-
         $userId = $this->resolveUserId($ctx, $actorUserId);
         $anonId = $this->resolveAnonId($ctx, $actorAnonId);
+        $role = (string) ($ctx->role() ?? '');
 
         if (in_array($role, ['member', 'viewer'], true)) {
             if ($userId !== null) {

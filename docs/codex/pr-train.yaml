@@ -39073,3 +39073,43 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: AUDIT-PRR2-API-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/audit-prr2-api-01-attempt-owner-binding
+    title: "AUDIT-PRR2-API-01: enforce attempt-owner identity on writes"
+    train_scope: prr2_attempt_write_owner_binding
+    status: user_authorized
+    scope:
+      - Remove the owner/admin role-only bypass from the attempt submit write query.
+      - Require user_id or anon_id identity binding for every human tenant role.
+      - Preserve uniform 404 behavior for same-org foreign, cross-org, and nonexistent attempts.
+      - Preserve successful submission and idempotency for an actor's own attempt.
+    allowed_paths:
+      - backend/app/Services/Attempts/AttemptSubmitService.php
+      - backend/tests/Feature/V0_3/AttemptOwnershipAnd404Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify attempt read authorization, scoring, report generation, token/system-role design, routes, migrations, deployment configuration, or frontend code.
+      - Run deploys, production imports, CMS/search writes, queue replays, payments, or production database mutations.
+    validation:
+      - cd backend && php artisan test tests/Feature/V0_3/AttemptOwnershipAnd404Test.php --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_3/AttemptSubmitIdempotencyTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_attempt_owner_identity_binding_only' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Attempts/AttemptSubmitService.php tests/Feature/V0_3/AttemptOwnershipAnd404Test.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan route:list --path=api/v0.3/attempts --except-vendor --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
