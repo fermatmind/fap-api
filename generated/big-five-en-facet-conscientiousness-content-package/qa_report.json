@@ -1,0 +1,64 @@
+{
+  "package": "big-five-en-facet-conscientiousness-content-package-2026-07-11",
+  "outcome": "pass",
+  "generated_at": "2026-07-11T00:00:00Z",
+  "model_sessions": [
+    {
+      "id": "codex-native-en-conscientiousness-raw-2026-07-11",
+      "mode": "codex_native_draft",
+      "external_model": false
+    },
+    {
+      "id": "codex-skeptical-review-en-conscientiousness-2026-07-11",
+      "mode": "codex_skeptical_self_review",
+      "external_model": false
+    },
+    {
+      "id": "codex-repair-en-conscientiousness-2026-07-11",
+      "mode": "codex_repair",
+      "external_model": false
+    }
+  ],
+  "coverage": {
+    "assets": 6,
+    "locale": "en",
+    "entity_type": "facet_detail",
+    "facet_codes": [
+      "competence",
+      "order",
+      "dutifulness",
+      "achievement-striving",
+      "self-discipline",
+      "deliberation"
+    ],
+    "sections_per_asset": 9,
+    "faq_per_asset": 5,
+    "internal_links_per_asset": 7
+  },
+  "checks": {
+    "v1_assets_envelope": "pass",
+    "body_md_only": "pass",
+    "substantive_sections": "pass",
+    "source_traceability": "pass_shared_ledger",
+    "independently_authored_english": "pass",
+    "facet_non_equivalence_boundaries": "pass",
+    "private_result_boundary": "pass",
+    "duplicate_template_risk": "pass_no_exact_section_duplicates",
+    "forbidden_claims": "pass",
+    "raw_draft_audited": "pass",
+    "repaired_draft_matches_seed": "pass",
+    "publish_indexability": "blocked_noindex_package_only"
+  },
+  "indexability": {
+    "robots": "noindex,follow",
+    "launch_state": "content_ready",
+    "index_eligible": false,
+    "sitemap_eligible": false,
+    "llms_eligible": false
+  },
+  "blockers": [],
+  "deferred": [
+    "The remaining twenty-four English Facet pages retain their current thin content until their four domain PRs complete.",
+    "CMS write/import, combined dry-run, runtime readback, indexability, sitemap, llms, JSON-LD release, search submission, and deployment remain outside this PR."
+  ]
+}

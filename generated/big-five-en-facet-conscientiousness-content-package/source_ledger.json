@@ -1,0 +1,176 @@
+{
+  "package": "big-five-en-facet-conscientiousness-source-ledger-2026-07-11",
+  "access_date": "2026-07-11",
+  "scope": "Six English Conscientiousness Facet content packages only.",
+  "inherits": {
+    "path": "generated/big-five-zh-facet-hub-content-repair/source_ledger.json",
+    "package": "big-five-zh-facet-shared-source-ledger-2026-07-10"
+  },
+  "sources": [
+    {
+      "id": "I1",
+      "type": "internal",
+      "reference": "backend/content_assets/personality_public/big_five_v1_seed.json",
+      "use": "Frozen CMS field shape, current Chinese route keys, locale, launch state, robots, and 5×6 taxonomy labels.",
+      "limitation": "The existing short body copy is an input to audit, not an authority for new academic claims."
+    },
+    {
+      "id": "I2",
+      "type": "internal",
+      "reference": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+      "use": "Non-diagnostic, non-deterministic, non-screening public claim boundaries."
+    },
+    {
+      "id": "I3",
+      "type": "internal",
+      "reference": "generated/big-five-zh-legacy-route-audit/legacy_route_audit.json",
+      "use": "Frozen V2 public route family and duplicate-route boundary."
+    },
+    {
+      "id": "A1",
+      "type": "official_research_resource",
+      "title": "NEO Facets Table",
+      "author_or_source": "International Personality Item Pool, Oregon Research Institute",
+      "year": null,
+      "url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+      "accessed_at": "2026-07-10",
+      "claim": "Documents corresponding IPIP scales for the 30 NEO-PI-R facet constructs.",
+      "limitation": "IPIP scales measure similar constructs; this does not make them identical to proprietary NEO scales or authorize score conversion."
+    },
+    {
+      "id": "A2",
+      "type": "peer_reviewed",
+      "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets",
+      "author_or_source": "Soto, C. J., & John, O. P.",
+      "year": 2017,
+      "doi": "10.1037/pspp0000096",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+      "accessed_at": "2026-07-10",
+      "claim": "Supports a hierarchical domain-and-facet reading of Big Five traits using 15 facets.",
+      "limitation": "BFI-2 has 15 facets, not the 30-facet taxonomy used for this CMS route set."
+    },
+    {
+      "id": "A3",
+      "type": "peer_reviewed",
+      "title": "Between facets and domains: 10 aspects of the Big Five",
+      "author_or_source": "DeYoung, C. G., Quilty, L. C., & Peterson, J. B.",
+      "year": 2007,
+      "doi": "10.1037/0022-3514.93.5.880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
+      "accessed_at": "2026-07-10",
+      "claim": "Shows an alternative intermediate hierarchy with two aspects per domain.",
+      "limitation": "The ten aspects are not interchangeable with either BFI-2 facets or NEO/IPIP 30 facets."
+    },
+    {
+      "id": "A4",
+      "type": "academic_review",
+      "title": "Paradigm Shift to the Integrative Big Five Trait Taxonomy: History, Measurement, and Conceptual Issues",
+      "author_or_source": "John, O. P., Naumann, L. P., & Soto, C. J.",
+      "year": 2008,
+      "reference": "In Handbook of Personality: Theory and Research (3rd ed.), pp. 114–158.",
+      "claim": "Supports broad Big Five taxonomy framing and continuous trait language.",
+      "limitation": "No individual prediction, numeric validity, or universal facet naming claim is taken from this review."
+    }
+  ],
+  "taxonomy": [
+    {
+      "domain_code": "conscientiousness",
+      "domain_title_en": "Conscientiousness",
+      "facets": [
+        {
+          "code": "competence",
+          "title_en": "Competence",
+          "route": "/en/personality/big-five/facets/competence"
+        },
+        {
+          "code": "order",
+          "title_en": "Order",
+          "route": "/en/personality/big-five/facets/order"
+        },
+        {
+          "code": "dutifulness",
+          "title_en": "Dutifulness",
+          "route": "/en/personality/big-five/facets/dutifulness"
+        },
+        {
+          "code": "achievement-striving",
+          "title_en": "Achievement Striving",
+          "route": "/en/personality/big-five/facets/achievement-striving"
+        },
+        {
+          "code": "self-discipline",
+          "title_en": "Self-Discipline",
+          "route": "/en/personality/big-five/facets/self-discipline"
+        },
+        {
+          "code": "deliberation",
+          "title_en": "Deliberation",
+          "route": "/en/personality/big-five/facets/deliberation"
+        }
+      ]
+    }
+  ],
+  "claim_map": [
+    {
+      "claim": "The six routes are narrower continuous descriptors under Conscientiousness, not personality types.",
+      "evidence_ids": [
+        "I1",
+        "A1",
+        "A4"
+      ]
+    },
+    {
+      "claim": "Facet interest or attention is not equivalent to ability, diagnosis, or outcome prediction.",
+      "evidence_ids": [
+        "I2",
+        "A4"
+      ]
+    },
+    {
+      "claim": "This route taxonomy must not be directly converted to BFI-2 facets or BFAS aspects.",
+      "evidence_ids": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    }
+  ],
+  "facet_boundaries": {
+    "competence": {
+      "title_en": "Competence",
+      "construct_summary": "the usual confidence that one can understand requirements, organize action, and handle everyday tasks effectively",
+      "explicit_non_equivalence": "It is not actual ability, intelligence, credentials, or a confidence slogan. A skilled person can underestimate capacity, while high subjective confidence can coexist with missing knowledge; task evidence remains necessary"
+    },
+    "order": {
+      "title_en": "Order",
+      "construct_summary": "the usual preference for classification, arrangement, tidiness, sequence, and predictable work structures",
+      "explicit_non_equivalence": "It is not obsessive-compulsive disorder, cleanliness, perfectionism, or work quality. A neat desk does not establish this facet, a cluttered setting does not prove poor delivery, and a personality page cannot infer a clinical condition"
+    },
+    "dutifulness": {
+      "title_en": "Dutifulness",
+      "construct_summary": "the usual importance placed on commitments, responsibilities, reasons for rules, and reasonable expectations from others",
+      "explicit_non_equivalence": "It is not obedience to authority, people-pleasing, moral worth, or never saying no. Responsibility includes challenging unreasonable demands, protecting boundaries, and renegotiating when conditions change"
+    },
+    "achievement-striving": {
+      "title_en": "Achievement Striving",
+      "construct_summary": "the usual tendency to invest effort in demanding standards, improvement goals, and challenging outcomes",
+      "explicit_non_equivalence": "It is not social status, income, busyness, competition, or eventual achievement. Opportunity, resources, health, caregiving, and team conditions affect outcomes; lower striving does not establish laziness or lack of values"
+    },
+    "self-discipline": {
+      "title_en": "Self-Discipline",
+      "construct_summary": "the usual tendency to begin and sustain action toward a reasonable completion point when a task is dull, difficult, or slow to reward",
+      "explicit_non_equivalence": "It is not moral willpower, laziness, an executive-function diagnosis, or permanent productivity. Sleep, stress, caregiving, environmental friction, and health affect initiation; this page cannot infer ADHD or another clinical condition"
+    },
+    "deliberation": {
+      "title_en": "Deliberation",
+      "construct_summary": "the usual tendency to consider consequences, alternatives, risk, and reversibility before acting or committing",
+      "explicit_non_equivalence": "It is not indecision, anxiety, intelligence, or refusal to take risk. Considering more does not guarantee a correct conclusion, and deciding quickly is not necessarily impulsive"
+    }
+  },
+  "limitations": [
+    "The frozen CMS taxonomy is NEO/IPIP-like; it is not claimed as the single universal Big Five facet standard.",
+    "No proprietary assessment items, scoring keys, norms, or copyrighted manual text are reproduced.",
+    "No reliability, validity, percentile, clinical, hiring, admission, salary, relationship-outcome, or deterministic career claim is made.",
+    "GSC_EVIDENCE_PENDING: this package is content-authority preparation, not a search-performance claim."
+  ]
+}
