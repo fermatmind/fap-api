@@ -74,6 +74,13 @@ Prefer a repo-compatible default implementation and mark options as optional.
 - Follow `type(scope): summary` (e.g., `feat(tp5): ...`).
 - PR description must include summary + tests ran.
 
+### Local Verification Tiers
+- Ordinary scoped PRs default to focused local verification: run the PHPUnit tests that directly cover the changed behavior, Pint or the relevant static check for touched files, and git diff --check.
+- Run php artisan route:list when routes or route wiring change.
+- Run a fresh SQLite migration when migrations or schema-dependent behavior change.
+- Run bash backend/scripts/ci_verify_mbti.sh locally only when the PR manifest, a security/high-risk skill, the changed runtime boundary, or the user explicitly requires it.
+- Pull requests still require the repository's complete GitHub required checks. A focused local check never permits merging with a failed or missing required check.
+
 ### PR Train Manifest Discipline
 - If a requested PR train item is missing from `docs/codex/pr-train.yaml`, stop and report the gap unless the user explicitly authorizes updating the train manifest and state ledger.
 - This stop rule applies only when the user requested a PR-train item. It must not block an explicitly requested ad-hoc PR whose scope does not modify PR-train metadata.
@@ -93,7 +100,8 @@ Prefer a repo-compatible default implementation and mark options as optional.
 - Scan/planning-only tasks must not modify `docs/codex/pr-train.yaml` or `docs/codex/pr-train-state.json` unless the user explicitly authorizes manifest/state updates in that same turn.
 - If the user provides a concrete `/goal` or equivalent execution request with an explicit PR id, title, and scope, Codex may treat those as user-provided manifest details. If the id is missing from the manifest, Codex may add the manifest/state entry before implementation only when the user also explicitly authorizes updating both files.
 - After merging a PR-train PR, close its state as `merged` in the same workflow whenever possible.
-- If branch protection prevents direct ledger closeout, use one ledger-only follow-up PR with no new train id.
+- If branch protection prevents recording final merge facts in the implementation PR, report the verified PR, merge SHA, origin/main containment, and cleanup facts in the final response. Do not automatically open a standalone ledger-only PR.
+- Reconcile stale state in the next same-repository PR that already modifies docs/codex. If stale state blocks dependency resolution and no natural follow-up exists, request explicit user authorization before opening one ad-hoc ledger reconciliation PR; never create a new train id solely for reconciliation.
 
 ### Controlled CMS Publish Discipline
 - Controlled Codex-assisted article publish is permitted only through the backend `articles:publish-controlled` command after exact user confirmation, successful preflight, explicit boundary-context claim-warning acknowledgement when needed, and audit logging.
