@@ -40005,6 +40005,39 @@ prs:
     publish_allowed: false
     deploy_allowed: false
 
+  - id: BIG5-124-PRODUCTION-IMPORTER-OPS-01
+    repo: fap-api
+    depends_on: [BIG5-124-PUBLISH-IMPORT-DRYRUN-01]
+    branch: codex/big5-124-production-importer-ops-01
+    title: "BIG5-124-PRODUCTION-IMPORTER-OPS-01: add exact-SHA 124-asset production CMS importer workflow"
+    train_scope: big5_124_production_importer_ops
+    status: user_authorized
+    scope:
+      - Add one manually dispatched production-environment workflow dedicated to the locked 124-asset V1 seed.
+      - Require exact deployed release SHA, exact seed SHA-256, exact operator approval phrase, 124 unique rows, 114 canonical assets, 10 Chinese redirect-only aliases, body_md, and alias noindex gates.
+      - Always run the generic importer dry-run before an explicitly selected write mode and upload a bounded receipt.
+    allowed_paths: [.github/workflows/big-five-124-production-cms-import.yml, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
+    do_not:
+      - Dispatch the workflow, write CMS or production data, deploy, modify secrets, change backend runtime/API code, or alter the locked seed.
+      - Change indexability, canonical, robots, sitemap, llms, JSON-LD, search submission, or frontend code.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/big-five-124-production-cms-import.yml'); YAML.load_file('docs/codex/pr-train.yaml'); puts 'workflow and manifest yaml ok'"
+      - rg -n "expected_release_sha|expected_seed_sha256|assets_found=124|canonical_assets=114|redirect_only_aliases=10|noindex,follow|body_md|--write" .github/workflows/big-five-124-production-cms-import.yml
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    workflow_policy_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []
