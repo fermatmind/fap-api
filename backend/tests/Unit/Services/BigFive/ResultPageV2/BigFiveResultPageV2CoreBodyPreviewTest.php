@@ -3481,6 +3481,37 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_attempt_owner_identity_binding_only(): void
+    {
+        $changed = [
+            'backend/app/Services/Attempts/AttemptSubmitService.php',
+        ];
+        $allowedChangedLines = [
+            '-        $role = (string) ($ctx->role() ?? \'\');',
+            '-        if (in_array($role, [\'owner\', \'admin\'], true)) {',
+            '-            return $query;',
+            '-        }',
+            '-',
+            '+        $role = (string) ($ctx->role() ?? \'\');',
+        ];
+        $blockedChangedLines = [
+            '+        $payload[\'big5_result_page_v2\'] = [];',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            attemptSubmitServiceChangedLines: $allowedChangedLines,
+        ));
+        $this->assertSame($changed, $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            attemptSubmitServiceChangedLines: $blockedChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_iq_owner_original30_session_delivery_backend(): void
     {
         $changed = [
@@ -5877,11 +5908,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/app/Services/Attempts/AttemptSubmitService.php'
-                && $this->attemptSubmitServiceDiffIsIqResultSecrecyRedactionOnly(
-                    $attemptSubmitServiceChangedLines ?? (
-                        $repoRoot !== '' && $baseRef !== ''
-                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
-                            : []
+                && (
+                    $this->attemptSubmitServiceDiffIsIqResultSecrecyRedactionOnly(
+                        $attemptSubmitServiceChangedLines ?? (
+                            $repoRoot !== '' && $baseRef !== ''
+                                ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                                : []
+                        )
+                    )
+                    || $this->attemptSubmitServiceDiffIsOwnerIdentityBindingOnly(
+                        $attemptSubmitServiceChangedLines ?? (
+                            $repoRoot !== '' && $baseRef !== ''
+                                ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                                : []
+                        )
                     )
                 )
             ) {
@@ -8208,6 +8248,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '+            $compatScores = IqResultPayloadRedactor::redactAnswerKeys($compatScores);',
             '+        }',
             '+',
+        ];
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function attemptSubmitServiceDiffIsOwnerIdentityBindingOnly(array $changedLines): bool
+    {
+        return $changedLines === [
+            '-        $role = (string) ($ctx->role() ?? \'\');',
+            '-        if (in_array($role, [\'owner\', \'admin\'], true)) {',
+            '-            return $query;',
+            '-        }',
+            '-',
+            '+        $role = (string) ($ctx->role() ?? \'\');',
         ];
     }
 

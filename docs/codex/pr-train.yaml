@@ -39089,6 +39089,7 @@ prs:
     allowed_paths:
       - backend/app/Services/Attempts/AttemptSubmitService.php
       - backend/tests/Feature/V0_3/AttemptOwnershipAnd404Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -39097,7 +39098,8 @@ prs:
     validation:
       - cd backend && php artisan test tests/Feature/V0_3/AttemptOwnershipAnd404Test.php --no-ansi
       - cd backend && php artisan test tests/Feature/V0_3/AttemptSubmitIdempotencyTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Services/Attempts/AttemptSubmitService.php tests/Feature/V0_3/AttemptOwnershipAnd404Test.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_attempt_owner_identity_binding_only' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Attempts/AttemptSubmitService.php tests/Feature/V0_3/AttemptOwnershipAnd404Test.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && php artisan route:list --path=api/v0.3/attempts --except-vendor --no-ansi
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null

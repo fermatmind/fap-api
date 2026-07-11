@@ -85248,7 +85248,7 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-import-identity-repair-01",
     "depends_on": ["PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01"],
-    "status": "pr_open",
+    "status": "github_fix_local_checks_passed",
     "commit_sha": "fc50dc8ebfef5c200f955ddbc593b1a439c68225",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2930",
     "failure_reason": null,
@@ -85320,7 +85320,8 @@
         "evidence": "A second full validation was not run because another FermatMind API ci_verify_mbti and Web contract suite were already running; the briefly invoked local command was stopped during migration setup without reaching assertions. Current PR correctness remains gated by focused checks and GitHub required checks."
       },
       "github_required_checks": {
-        "status": "pending"
+        "status": "retry_pending",
+        "evidence": "PR #2943 verify-bigfive initially failed because the runtime-freeze classifier treated backend/app/Services/Attempts/AttemptSubmitService.php as an unclassified Big Five-impacting change. Added an exact full-diff classifier contract; the branch-diff gate and negative classifier test now pass locally."
       }
     },
     "scope_validation": {
@@ -85353,6 +85354,18 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Pushed the scoped branch and opened PR #2943; GitHub required checks are pending and no production action was performed."
+      },
+      {
+        "at": "2026-07-11T11:58:00+08:00",
+        "from": "pr_open",
+        "to": "github_checks_failed_fixing",
+        "note": "Inspected verify-bigfive failure: the only failure was the branch-diff runtime-freeze classifier rejecting the current AttemptSubmitService security change; added a narrow exact full-diff classifier contract within PR1 scope."
+      },
+      {
+        "at": "2026-07-11T12:03:00+08:00",
+        "from": "github_checks_failed_fixing",
+        "to": "github_fix_local_checks_passed",
+        "note": "The exact full-diff owner-binding classifier and its negative Big Five mutation case pass; ownership/idempotency tests, Pint, YAML/JSON and diff checks also remain green."
       }
     ]
   }
