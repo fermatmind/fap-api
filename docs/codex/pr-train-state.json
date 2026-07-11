@@ -86920,7 +86920,7 @@
     "base": "main",
     "branch": "codex/big5-en-facet-neuroticism-content-package-01",
     "depends_on": ["BIG5-EN-FACET-AGREEABLENESS-CONTENT-PACKAGE-01"],
-    "status": "pr_open_rebased",
+    "status": "ready_to_merge",
     "commit_sha": "4f45c3db3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2975",
     "failure_reason": null,
@@ -86932,16 +86932,17 @@
       "dependency": {"status": "pass", "evidence": "PR #2973 is merged at d72bf91696f09a245a620889819acf8b5f28dac4 and origin/main contains that squash merge."},
       "content_scope": {"status": "pass", "evidence": "Exactly six independently authored English Neuroticism Facet assets contain nine substantive sections, five FAQs, seven internal links, source traceability, explicit clinical non-equivalence, and crisis-support boundaries."},
       "local_validation": {"status": "pass", "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."},
-      "github_required_checks": {"status": "pending_rebased_head", "evidence": "The prior head passed all nine checks, but main advanced and the branch was rebased onto origin/main 7cfa170d8; required checks must pass again on the force-pushed rebased head."}
+      "github_required_checks": {"status": "pass", "evidence": "PR #2975 rebased head 103d5f54b passed all nine reported CI and Code Scanning checks, including content-pack-build-validate, verify-bigfive, and both MBTI verification jobs."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
     "transitions": [
       {"at": "2026-07-11T09:58:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the sixth locked train item after verifying its Agreeableness dependency on origin/main and started in an isolated clean worktree; no production action is in scope."},
       {"at": "2026-07-11T10:04:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."},
       {"at": "2026-07-11T10:06:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at f1d9d288d."},
       {"at": "2026-07-11T10:08:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2975; required GitHub checks are pending."},
       {"at": "2026-07-11T10:12:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed on the pre-rebase head; a later main advance invalidated mergeability."},
-      {"at": "2026-07-11T10:16:00Z", "from": "ready_to_merge", "to": "pr_open_rebased", "note": "Rebased onto origin/main 7cfa170d8 after the concurrent Enneagram merge created a docs/codex conflict; preserved current scope and reconciled verified dependency merge facts. Required checks must rerun on the rebased head."}
+      {"at": "2026-07-11T10:16:00Z", "from": "ready_to_merge", "to": "pr_open_rebased", "note": "Rebased onto origin/main 7cfa170d8 after the concurrent Enneagram merge created a docs/codex conflict; preserved current scope and reconciled verified dependency merge facts. Required checks must rerun on the rebased head."},
+      {"at": "2026-07-11T10:20:00Z", "from": "pr_open_rebased", "to": "ready_to_merge", "note": "All nine required checks passed on rebased head 103d5f54b; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."}
     ]
   },
   "AUDIT-PRR2-API-01": {
