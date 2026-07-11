@@ -1,0 +1,86 @@
+{
+  "artifact": "ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01",
+  "schema_version": "enneagram_en13_publish_cache_warm.v1",
+  "executed_at": "2026-07-11T02:18:46Z",
+  "authorized_release_sha": "9bb8319a23e11f4c359bebabc0e604db25191898",
+  "authorization": {
+    "status": "pass",
+    "scope": "13 English Enneagram assets only",
+    "publish_write": true,
+    "sitemap_cache_warm": true,
+    "deployment": false,
+    "llms_release": false,
+    "search_release": false
+  },
+  "prewrite_dry_run": {
+    "ok": true,
+    "status": "pass",
+    "dry_run": true,
+    "writes_attempted": false,
+    "writes_committed": false,
+    "row_count": 13,
+    "hub_row_count": 1,
+    "center_row_count": 3,
+    "core_type_row_count": 9,
+    "would_publish_count": 13,
+    "published_count": 0,
+    "skipped_existing_count": 0,
+    "error_count": 0,
+    "llms_release_attempted": false,
+    "search_release_attempted": false,
+    "external_calls_attempted": false
+  },
+  "write": {
+    "command": "personality:enneagram-cms-publish-gate",
+    "operator_token": "ENNEAGRAM-CMS-PUBLISH-GATE-01",
+    "no_llms": true,
+    "no_search_release": true,
+    "durable_outcome": "committed",
+    "summary_capture": "wrapper_stdout_unavailable_after_command",
+    "retry_attempted": false,
+    "verification_basis": "13-row public API state plus idempotent postwrite dry-run"
+  },
+  "postwrite_idempotency": {
+    "ok": true,
+    "status": "pass",
+    "dry_run": true,
+    "writes_attempted": false,
+    "writes_committed": false,
+    "row_count": 13,
+    "would_publish_count": 0,
+    "published_count": 0,
+    "skipped_existing_count": 13,
+    "error_count": 0,
+    "llms_release_attempted": false,
+    "search_release_attempted": false,
+    "external_calls_attempted": false
+  },
+  "postwrite_api": {
+    "row_count": 13,
+    "published_count": 13,
+    "index_follow_count": 13,
+    "index_eligible_count": 13,
+    "sitemap_eligible_count": 13,
+    "schema_runtime_eligible_count": 13,
+    "llms_eligible_count": 0,
+    "search_release_eligible_count": 0,
+    "nonconforming_count": 0
+  },
+  "sitemap_cache": {
+    "warm_command": "seo:warm-sitemap-source-cache",
+    "summary_capture": "wrapper_stdout_unavailable_after_command",
+    "retry_attempted": false,
+    "source_count": 2478,
+    "english_en13_count": 13,
+    "public_sitemap_english_en13_count": 13,
+    "verification_basis": "fresh sitemap-source response and public sitemap membership"
+  },
+  "holds": {
+    "llms_txt_english_en13_count": 0,
+    "llms_full_txt_english_en13_count": 0,
+    "search_release_attempted": false,
+    "manual_deploy_attempted": false,
+    "production_deploy_attempted": false
+  },
+  "verdict": "GO"
+}

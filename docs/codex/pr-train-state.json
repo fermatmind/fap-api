@@ -406,7 +406,7 @@
     "status": "merged",
     "commit_sha": "a4d477eef16c024bec5804bb0240d940be210754",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2890",
-    "failure_reason": "The 13 English pages pass API, content_ready/noindex, rich-section, canonical, hreflang, discoverability-hold, and private-boundary runtime gates. However, the backend returns 56 FAQ items as q/a and 39 internal links as label/url while the frontend adapter accepts question/answer and label/href. All FAQ and CMS internal links are therefore filtered from visible HTML, so publish/cache-warm progression is NO-GO. Repair paths are outside this manifest scope.",
+    "failure_reason": null,
     "merged_at": "2026-07-10T23:12:42+08:00",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
@@ -436,8 +436,12 @@
         "evidence": "API payload and internal FermatMind href scans found zero private-result route/key leaks; unsupported web/API probes returned 404; English EN13 membership remained zero in sitemap.xml, llms.txt, and llms-full.txt."
       },
       "faq_internal_link_contract": {
-        "status": "fail",
-        "evidence": "The API returned 56 FAQ rows using q/a and 39 internal-link rows using label/url. The frontend adapter accepts question/answer and label/href, producing zero visible FAQ details, zero FAQPage JSON-LD pages, and zero CMS internal-link panels."
+        "status": "pass",
+        "evidence": "Post-repair production revalidation on frontend SHA 3dfad6336ecc38d0e982dcc70aed007d061916dc rendered 56/56 FAQ items, FAQPage on 13/13 pages, and 39/39 CMS internal links after backend contract normalization."
+      },
+      "post_repair_runtime_revalidation": {
+        "status": "pass",
+        "evidence": "The read-only 13-page smoke passed API/web 13/13, sections 101/101, FAQ 56/56, FAQPage 13/13, links 39/39, canonical/hreflang/robots/method/private gates 13/13, invalid probes 4/4 as 404, and zero English EN13 membership in sitemap/llms surfaces before publish."
       },
       "github_required_checks": {
         "status": "pass",
@@ -488,6 +492,12 @@
         "from": "ready_to_merge_no_go_evidence",
         "to": "merged",
         "note": "Reconciled the verified PR #2890 merge, origin/main ancestry, synchronized clean local main, and deleted local/remote task branches before starting the authorized contract-normalization dependency."
+      },
+      {
+        "at": "2026-07-11T10:11:03+08:00",
+        "from": "merged",
+        "to": "merged",
+        "note": "Revalidated the repaired production runtime after backend contract normalization and frontend hub FAQPage deployment: all 13 pages, 56 FAQ items, 13 FAQPage schemas, and 39 internal links passed, clearing the historical NO-GO blocker."
       }
     ]
   },
@@ -593,21 +603,95 @@
     "depends_on": [
       "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01"
     ],
-    "status": "pending_exact_production_authorization",
-    "commit_sha": "97657dbeaa5143a650c255737d16ef9e72c3b508",
-    "pr_url": null,
-    "failure_reason": "Requires separate exact production SHA authorization.",
+    "status": "pending_external_merge",
+    "commit_sha": "c7ab12e2023da0e4c7a9bbefc21b62bfc53d43d1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2936",
+    "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "checks": {},
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "Operator explicitly authorized the 13-asset publish dry-run, guarded write, and sitemap source cache warm for deployed backend SHA 9bb8319a23e11f4c359bebabc0e604db25191898, with llms/search held and no deployment."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01 is merged and its post-repair production revalidation passed 13/13 pages, 56/56 FAQ, 13/13 FAQPage, and 39/39 internal links."
+      },
+      "production_revision": {
+        "status": "pass",
+        "evidence": "The production REVISION was rechecked immediately before dry-run, write, and cache warm and matched the exact authorized SHA 9bb8319a23e11f4c359bebabc0e604db25191898."
+      },
+      "prewrite_dry_run": {
+        "status": "pass",
+        "evidence": "13 rows passed: 1 hub, 3 centers, 9 core types; would_publish=13 with zero writes, errors, external calls, llms release, or search release."
+      },
+      "guarded_publish_write": {
+        "status": "pass",
+        "evidence": "Durable API state and the no-retry idempotent postwrite dry-run prove all 13 rows committed. Postwrite dry-run reported skipped_existing=13 and would_publish=0. The wrapper stdout capture anomaly is disclosed in the scoped evidence."
+      },
+      "postwrite_api": {
+        "status": "pass",
+        "evidence": "13/13 English assets are published, index,follow, public, index eligible, sitemap eligible, and schema-runtime eligible; llms eligible and search-release eligible counts are both zero."
+      },
+      "sitemap_cache_warm": {
+        "status": "pass",
+        "evidence": "The authorized cache warm command was executed; fresh sitemap-source authority contains 13 English EN13 URLs and public sitemap.xml contains all 13."
+      },
+      "llms_search_hold": {
+        "status": "pass",
+        "evidence": "llms.txt and llms-full.txt contain zero English EN13 URLs; no search release or external enqueue was attempted."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Evidence JSON, train state JSON, and manifest YAML parse successfully; git diff --check passed; changed and untracked files are exactly the four manifest-authorized evidence/metadata paths."
+      }
+    },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
-      "github_checks_green": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-11T10:16:00+08:00",
+        "from": "pending_exact_production_authorization",
+        "to": "in_progress",
+        "note": "Started from latest origin/main in a clean isolated worktree after exact SHA authorization and repaired runtime acceptance were confirmed."
+      },
+      {
+        "at": "2026-07-11T10:18:46+08:00",
+        "from": "in_progress",
+        "to": "production_write_completed",
+        "note": "The 13-row dry-run passed, the guarded publish write committed, and sitemap source cache warm executed without deployment, LLM release, or search release."
+      },
+      {
+        "at": "2026-07-11T10:19:34+08:00",
+        "from": "production_write_completed",
+        "to": "local_verified",
+        "note": "Durable API, idempotent postwrite dry-run, sitemap-source, public sitemap, llms, and search-hold evidence passed; JSON/YAML parsing, git diff checks, and exact four-file scope validation also passed."
+      },
+      {
+        "at": "2026-07-11T10:22:20+08:00",
+        "from": "local_verified",
+        "to": "committed",
+        "note": "Committed the exact four-file evidence and train metadata scope at b78ce9c19112c89eaba58721185d2660e9e0f9b8 using path-limited staging."
+      },
+      {
+        "at": "2026-07-11T10:23:09+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2936; required GitHub checks are pending and manifest auto_merge=false remains binding."
+      },
+      {
+        "at": "2026-07-11T10:46:34+08:00",
+        "from": "pr_open",
+        "to": "pending_external_merge",
+        "note": "All 15 reported GitHub checks passed after the authorized Code Scanning rerun; title, body, exact four-file scope, head SHA, and mergeability were revalidated. Manifest merge_policy.auto_merge=false requires explicit operator merge authorization before squash merge."
+      }
+    ]
   },
   "ENNEAGRAM-EN13-BILINGUAL-PRODUCTION-REVALIDATION-01": {
     "id": "ENNEAGRAM-EN13-BILINGUAL-PRODUCTION-REVALIDATION-01",

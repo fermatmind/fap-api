@@ -38539,7 +38539,7 @@ prs:
     branch: codex/enneagram-en13-cms-import-promote-01
     title: "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01: import and promote English Enneagram assets"
     train_scope: enneagram_en13_controlled_cms_write
-    status: pending_exact_production_authorization
+    status: pr_open
     allowed_paths: [docs/seo/personality/enneagram/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
     validation: ["git diff --check"]
     merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
@@ -38593,7 +38593,7 @@ prs:
     branch: codex/enneagram-en13-publish-cache-warm-01
     title: "ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01: publish English assets and warm sitemap source"
     train_scope: enneagram_en13_controlled_publish
-    status: pending_exact_production_authorization
+    status: pending_external_merge
     allowed_paths: [docs/seo/personality/enneagram/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
     validation: ["git diff --check"]
     merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
