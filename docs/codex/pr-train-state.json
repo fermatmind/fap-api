@@ -285,7 +285,7 @@
     "depends_on": [
       "ENNEAGRAM-90-BACKEND-CMS-OPS-WORKFLOW-01"
     ],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "519e65d1720a427374b71adaeff505bdb5097c2f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2979",
     "failure_reason": null,
@@ -322,12 +322,16 @@
       "diff_checks": {
         "status": "pass",
         "evidence": "git diff --check and git diff --cached --check completed without errors."
+      },
+      "github_required": {
+        "status": "pass",
+        "evidence": "PR #2979 checks all completed successfully: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif upload."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -354,6 +358,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR #2979 for the locked ENNEAGRAM-90 backend sitemap entity/locale scope."
+      },
+      {
+        "at": "2026-07-11T11:04:00.000Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All GitHub checks reported success; PR files remain scoped to SitemapGenerator, SitemapGeneratorTest, and docs/codex manifest/state."
       }
     ]
   },
