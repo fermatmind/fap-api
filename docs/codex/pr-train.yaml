@@ -140,6 +140,7 @@ prs:
       - backend/bootstrap/app.php
       - backend/config/ops.php
       - backend/tests/Feature/Observability/CareerRuntimeSloAlertingTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/sidecar_issues.md
@@ -151,6 +152,7 @@ prs:
     validation:
       - cd backend && php artisan test tests/Feature/Observability/CareerRuntimeSloAlertingTest.php --no-ansi
       - cd backend && php artisan schedule:list --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_career_runtime_slo_observability' --no-ansi
       - cd backend && vendor/bin/pint --test app/Console/Commands/CareerRuntimeSloCheck.php app/Http/Middleware/RecordCareerRuntimeSlo.php app/Services/Career/CareerRuntimeSloService.php app/Services/Career/PublicCareerAuthorityResponseCache.php bootstrap/app.php config/ops.php tests/Feature/Observability/CareerRuntimeSloAlertingTest.php
       - cd backend && composer validate --strict
       - full repository Pint and composer test baseline failures recorded as authorized sidecars; GitHub required checks remain mandatory

@@ -6,7 +6,7 @@
     "base": "main",
     "branch": "codex/career-runtime-slo-alerting-01",
     "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01", "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01", "CAREER-DIRECTORY-ERROR-SEMANTICS-01"],
-    "status": "pr_open",
+    "status": "ci_fix_validated",
     "commit_sha": "47a58213f6809e53142dbf0bf6eb22a53cae0271",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2960",
     "failure_reason": null,
@@ -32,7 +32,7 @@
       },
       "focused_tests": {
         "status": "pass",
-        "evidence": "Career runtime SLO contracts pass 5 tests/18 assertions; scheduler registration, scoped Pint across seven changed PHP files, Composer validation, YAML/JSON, and diff checks pass."
+        "evidence": "Career runtime SLO contracts pass 5 tests/18 assertions; the exact Big Five runtime-classifier regression passes 2 tests/4 assertions; scheduler registration, scoped Pint across eight changed PHP files, Composer validation, YAML/JSON, and diff checks pass."
       },
       "full_composer_test": {
         "status": "external_baseline_user_overridden",
@@ -40,7 +40,7 @@
       },
       "pint": {
         "status": "external_baseline_user_overridden",
-        "evidence": "Changed-PHP scoped Pint passes all seven changed PHP files; the clean-origin/main repository Pint baseline failure is sidecarred under the user's explicit override."
+        "evidence": "Changed-PHP scoped Pint passes all eight changed PHP files; the clean-origin/main repository Pint baseline failure is sidecarred under the user's explicit override."
       },
       "github_required_checks": {"status": "pending", "evidence": null}
     },
@@ -68,6 +68,18 @@
         "from": "focused_checks_passed",
         "to": "pr_open",
         "note": "Committed and pushed the exact nine-path scope as 47a58213f, then opened PR #2960; GitHub required checks are pending."
+      },
+      {
+        "at": "2026-07-11T17:28:00+08:00",
+        "from": "pr_open",
+        "to": "github_checks_failed_fix_in_progress",
+        "note": "Inspected verify-bigfive: 1192 tests passed and only the runtime freeze classifier rejected the new Career-only middleware/service paths. Added an explicit Career SLO observability classifier exemption and regression test within PR4 scope; no Big Five runtime behavior changed."
+      },
+      {
+        "at": "2026-07-11T17:31:00+08:00",
+        "from": "github_checks_failed_fix_in_progress",
+        "to": "ci_fix_validated",
+        "note": "The exact failing runtime-path check plus new classifier regression pass 2 tests/4 assertions; Career SLO contracts pass 5/18 and scoped Pint passes all eight changed PHP files."
       }
     ]
   },

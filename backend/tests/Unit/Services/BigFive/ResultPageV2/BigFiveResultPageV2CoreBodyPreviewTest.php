@@ -4432,6 +4432,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_runtime_slo_observability(): void
+    {
+        $changed = [
+            'backend/app/Http/Middleware/RecordCareerRuntimeSlo.php',
+            'backend/app/Services/Career/CareerRuntimeSloService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_salary_asset_staging_preview_changes(): void
     {
         $changed = [
@@ -6152,6 +6162,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCareerDirectoryAuthorityApiFile($file)) {
+                continue;
+            }
+
+            if ($this->isCareerRuntimeSloObservabilityFile($file)) {
                 continue;
             }
 
@@ -8940,6 +8954,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/CareerDirectoryAuthorityService.php',
             'backend/app/Services/Career/CareerDirectoryReadModelBuilder.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
+        ], true);
+    }
+
+    private function isCareerRuntimeSloObservabilityFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Middleware/RecordCareerRuntimeSlo.php',
+            'backend/app/Services/Career/CareerRuntimeSloService.php',
         ], true);
     }
 
