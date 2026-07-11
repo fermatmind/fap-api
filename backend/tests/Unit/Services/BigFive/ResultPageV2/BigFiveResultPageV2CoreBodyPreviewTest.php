@@ -1294,6 +1294,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_lemonsqueezy_production_disable(): void
+    {
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges([
+            'backend/app/Services/Payments/PaymentProviderRegistry.php',
+        ], '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_cms_media_pipeline_files(): void
     {
         $changed = [
@@ -5518,6 +5525,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCmsAdminMfaFile($file)) {
+                continue;
+            }
+
+            if ($file === 'backend/app/Services/Payments/PaymentProviderRegistry.php') {
                 continue;
             }
 

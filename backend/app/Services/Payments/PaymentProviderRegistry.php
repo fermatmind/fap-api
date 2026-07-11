@@ -53,6 +53,13 @@ final class PaymentProviderRegistry
             return false;
         }
 
+        // LemonSqueezy signs only the raw body in the current provider contract.
+        // Without a provider-authenticated timestamp, production cannot enforce
+        // webhook freshness, so checkout and webhook entry points stay disabled.
+        if ($provider === 'lemonsqueezy' && app()->environment('production')) {
+            return false;
+        }
+
         $providerConfig = config('payments.providers.'.$provider, []);
         $explicitEnabled = (bool) (is_array($providerConfig) ? ($providerConfig['enabled'] ?? false) : false);
         if ($explicitEnabled) {
