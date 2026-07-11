@@ -40954,3 +40954,41 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: ENNEAGRAM-SEARCH-RELEASE-READINESS-02
+    repo: fap-api
+    depends_on: [ENNEAGRAM-SEARCH-QUEUE-READONLY-INSPECT-01]
+    branch: codex/enneagram-search-release-readiness-02
+    title: "ENNEAGRAM-SEARCH-RELEASE-READINESS-02: verify Enneagram Queue readiness in production"
+    train_scope: enneagram_search_release_readiness_02
+    status: in_progress
+    scope:
+      - Record the deployed 116-target production read-only Queue inspection and fresh public API/runtime/sitemap safety evidence.
+      - Produce only GO_FOR_SEPARATE_SEARCH_QUEUE_AUTHORIZATION or NO_GO_SEARCH_RELEASE evidence; retain aggregate counts and artifact digest without content bodies, secrets, private paths, or topology.
+      - Fail closed when the Queue planner cannot yield exactly 116 eligible, duplicate-safe candidates.
+    allowed_paths:
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/enneagram-search-release-readiness-02/**
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Write, approve, enqueue, or submit Search Queue items.
+      - Change CMS assets, indexability, sitemap, llms, canonical, hreflang, runtime code, configuration, secrets, cache, or deployment state.
+      - Persist content bodies, secrets, private paths, tokens, or internal topology in generated evidence.
+    validation:
+      - python3 -m json.tool generated/enneagram-search-release-readiness-02/readiness.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    search_channel_action: false
+    llms_release_execution: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
