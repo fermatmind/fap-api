@@ -39207,6 +39207,42 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-124-PUBLISH-READINESS-AUDIT-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/big5-124-publish-readiness-audit-01
+    title: "BIG5-124-PUBLISH-READINESS-AUDIT-01: freeze 124-asset publish baseline"
+    train_scope: big5_124_publish_readiness_audit
+    status: user_authorized
+    scope:
+      - Freeze the production baseline of 124 Big Five CMS assets, 114 canonical pages, and ten Chinese Legacy redirect-only aliases.
+      - Record public API count, unique identity, publication/indexability, canonical-route, redirect, and content-quality evidence without mutating any runtime state.
+      - Record the locked downstream gaps only; do not implement a future content, metadata, importer, publish, sitemap, llms, or frontend repair.
+    allowed_paths:
+      - generated/big-five-124-publish-readiness-audit/**
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify CMS assets, seed packages, database schema, API/runtime code, frontend code, redirects, canonical, hreflang, robots, sitemap, llms, JSON-LD, permissions, secrets, deployment configuration, or production data.
+      - Trigger CMS import, indexability promotion, deploy, publish, search submission, or any production workflow dispatch.
+    validation:
+      - python3 -m json.tool generated/big-five-124-publish-readiness-audit/production_baseline_2026-07-11.json >/dev/null
+      - node -e "const x=require('./generated/big-five-124-publish-readiness-audit/production_baseline_2026-07-11.json'); if(x.outcome!=='pass'||x.frozen_topology.cms_assets!==124||x.frozen_topology.canonical_pages!==114||x.frozen_topology.redirect_only_aliases!==10||!x.frozen_topology.identity_unique) process.exit(1);"
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []

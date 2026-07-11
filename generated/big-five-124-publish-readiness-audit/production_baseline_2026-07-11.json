@@ -1,0 +1,364 @@
+{
+  "schema_version": "big_five_124_publish_readiness_audit_v1",
+  "train_id": "BIG5-124-PUBLISH-READINESS-AUDIT-01",
+  "verified_at_utc": "2026-07-11T06:35:31.237Z",
+  "outcome": "pass",
+  "authority": {
+    "source": "fap-api public PersonalityPublicContentAsset API",
+    "framework": "big_five",
+    "api_evidence": [
+      {
+        "locale": "zh-CN",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets?framework=big_five&locale=zh-CN&org_id=0&per_page=100",
+        "http_status": 200,
+        "total": 62
+      },
+      {
+        "locale": "en",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets?framework=big_five&locale=en&org_id=0&per_page=100",
+        "http_status": 200,
+        "total": 62
+      }
+    ]
+  },
+  "frozen_topology": {
+    "cms_assets": 124,
+    "locale_counts": {
+      "zh-CN": 62,
+      "en": 62
+    },
+    "entity_type_counts": [
+      {
+        "locale": "en",
+        "entity_type": "domain",
+        "count": 5
+      },
+      {
+        "locale": "en",
+        "entity_type": "facet_detail",
+        "count": 30
+      },
+      {
+        "locale": "en",
+        "entity_type": "facet_hub",
+        "count": 1
+      },
+      {
+        "locale": "en",
+        "entity_type": "hub",
+        "count": 1
+      },
+      {
+        "locale": "en",
+        "entity_type": "polarity",
+        "count": 25
+      },
+      {
+        "locale": "zh-CN",
+        "entity_type": "domain",
+        "count": 5
+      },
+      {
+        "locale": "zh-CN",
+        "entity_type": "facet_detail",
+        "count": 30
+      },
+      {
+        "locale": "zh-CN",
+        "entity_type": "facet_hub",
+        "count": 1
+      },
+      {
+        "locale": "zh-CN",
+        "entity_type": "hub",
+        "count": 1
+      },
+      {
+        "locale": "zh-CN",
+        "entity_type": "polarity",
+        "count": 25
+      }
+    ],
+    "canonical_pages": 114,
+    "canonical_pages_by_locale": {
+      "zh-CN": 52,
+      "en": 62
+    },
+    "redirect_only_aliases": 10,
+    "redirects": [
+      {
+        "entity_type": "polarity",
+        "entity_key": "emotional-stability",
+        "from_path": "/zh/personality/big-five/emotional-stability",
+        "http_status": 308,
+        "location": "/zh/personality/big-five/neuroticism-low"
+      },
+      {
+        "entity_type": "polarity",
+        "entity_key": "high-agreeableness",
+        "from_path": "/zh/personality/big-five/high-agreeableness",
+        "http_status": 308,
+        "location": "/zh/personality/big-five/agreeableness-high"
+      },
+      {
+        "entity_type": "polarity",
+        "entity_key": "high-conscientiousness",
+        "from_path": "/zh/personality/big-five/high-conscientiousness",
+        "http_status": 308,
+        "location": "/zh/personality/big-five/conscientiousness-high"
+      },
+      {
+        "entity_type": "polarity",
+        "entity_key": "high-extraversion",
+        "from_path": "/zh/personality/big-five/high-extraversion",
+        "http_status": 308,
+        "location": "/zh/personality/big-five/extraversion-high"
+      },
+      {
+        "entity_type": "polarity",
+        "entity_key": "high-neuroticism",
+        "from_path": "/zh/personality/big-five/high-neuroticism",
+        "http_status": 308,
+        "location": "/zh/personality/big-five/neuroticism-high"
+      },
+      {
+        "entity_type": "polarity",
+        "entity_key": "high-openness",
+        "from_path": "/zh/personality/big-five/high-openness",
+        "http_status": 308,
+        "location": "/zh/personality/big-five/openness-high"
+      },
+      {
+        "entity_type": "polarity",
+        "entity_key": "low-agreeableness",
+        "from_path": "/zh/personality/big-five/low-agreeableness",
+        "http_status": 308,
+        "location": "/zh/personality/big-five/agreeableness-low"
+      },
+      {
+        "entity_type": "polarity",
+        "entity_key": "low-conscientiousness",
+        "from_path": "/zh/personality/big-five/low-conscientiousness",
+        "http_status": 308,
+        "location": "/zh/personality/big-five/conscientiousness-low"
+      },
+      {
+        "entity_type": "polarity",
+        "entity_key": "low-extraversion",
+        "from_path": "/zh/personality/big-five/low-extraversion",
+        "http_status": 308,
+        "location": "/zh/personality/big-five/extraversion-low"
+      },
+      {
+        "entity_type": "polarity",
+        "entity_key": "low-openness",
+        "from_path": "/zh/personality/big-five/low-openness",
+        "http_status": 308,
+        "location": "/zh/personality/big-five/openness-low"
+      }
+    ],
+    "identity_unique": true
+  },
+  "publication_baseline": {
+    "published": 21,
+    "content_ready": 103,
+    "index_eligible": 21,
+    "sitemap_eligible": 21,
+    "llms_eligible": 21,
+    "index_follow": 21,
+    "noindex_follow": 103
+  },
+  "quality_gap_baseline": {
+    "sections_lt_9": [
+      "en:facet_detail:achievement-striving",
+      "en:facet_detail:actions",
+      "en:facet_detail:activity",
+      "en:facet_detail:aesthetics",
+      "en:facet_detail:altruism",
+      "en:facet_detail:anger",
+      "en:facet_detail:anxiety",
+      "en:facet_detail:assertiveness",
+      "en:facet_detail:competence",
+      "en:facet_detail:compliance",
+      "en:facet_detail:deliberation",
+      "en:facet_detail:depression",
+      "en:facet_detail:dutifulness",
+      "en:facet_detail:excitement-seeking",
+      "en:facet_detail:feelings",
+      "en:facet_detail:gregariousness",
+      "en:facet_detail:ideas",
+      "en:facet_detail:imagination",
+      "en:facet_detail:impulsiveness",
+      "en:facet_detail:modesty",
+      "en:facet_detail:order",
+      "en:facet_detail:positive-emotions",
+      "en:facet_detail:self-consciousness",
+      "en:facet_detail:self-discipline",
+      "en:facet_detail:straightforwardness",
+      "en:facet_detail:tender-mindedness",
+      "en:facet_detail:trust",
+      "en:facet_detail:values",
+      "en:facet_detail:vulnerability",
+      "en:facet_detail:warmth"
+    ],
+    "faq_lt_5": [
+      "en:facet_detail:achievement-striving",
+      "en:facet_detail:actions",
+      "en:facet_detail:activity",
+      "en:facet_detail:aesthetics",
+      "en:facet_detail:altruism",
+      "en:facet_detail:anger",
+      "en:facet_detail:anxiety",
+      "en:facet_detail:assertiveness",
+      "en:facet_detail:competence",
+      "en:facet_detail:compliance",
+      "en:facet_detail:deliberation",
+      "en:facet_detail:depression",
+      "en:facet_detail:dutifulness",
+      "en:facet_detail:excitement-seeking",
+      "en:facet_detail:feelings",
+      "en:facet_detail:gregariousness",
+      "en:facet_detail:ideas",
+      "en:facet_detail:imagination",
+      "en:facet_detail:impulsiveness",
+      "en:facet_detail:modesty",
+      "en:facet_detail:order",
+      "en:facet_detail:positive-emotions",
+      "en:facet_detail:self-consciousness",
+      "en:facet_detail:self-discipline",
+      "en:facet_detail:straightforwardness",
+      "en:facet_detail:tender-mindedness",
+      "en:facet_detail:trust",
+      "en:facet_detail:values",
+      "en:facet_detail:vulnerability",
+      "en:facet_detail:warmth"
+    ],
+    "links_lt_7": [
+      "zh-CN:domain:agreeableness",
+      "zh-CN:domain:conscientiousness",
+      "zh-CN:domain:extraversion",
+      "zh-CN:domain:neuroticism",
+      "zh-CN:domain:openness",
+      "zh-CN:polarity:agreeableness-high",
+      "zh-CN:polarity:agreeableness-low",
+      "zh-CN:polarity:agreeableness-mid",
+      "zh-CN:polarity:conscientiousness-high",
+      "zh-CN:polarity:conscientiousness-low",
+      "zh-CN:polarity:conscientiousness-mid",
+      "zh-CN:polarity:emotional-stability",
+      "zh-CN:polarity:extraversion-high",
+      "zh-CN:polarity:extraversion-low",
+      "zh-CN:polarity:extraversion-mid",
+      "zh-CN:polarity:high-agreeableness",
+      "zh-CN:polarity:high-conscientiousness",
+      "zh-CN:polarity:high-extraversion",
+      "zh-CN:polarity:high-neuroticism",
+      "zh-CN:polarity:high-openness",
+      "zh-CN:polarity:low-agreeableness",
+      "zh-CN:polarity:low-conscientiousness",
+      "zh-CN:polarity:low-extraversion",
+      "zh-CN:polarity:low-openness",
+      "zh-CN:polarity:neuroticism-high",
+      "zh-CN:polarity:neuroticism-low",
+      "zh-CN:polarity:neuroticism-mid",
+      "zh-CN:polarity:openness-high",
+      "zh-CN:polarity:openness-low",
+      "zh-CN:polarity:openness-mid",
+      "en:facet_detail:achievement-striving",
+      "en:facet_detail:actions",
+      "en:facet_detail:activity",
+      "en:facet_detail:aesthetics",
+      "en:facet_detail:altruism",
+      "en:facet_detail:anger",
+      "en:facet_detail:anxiety",
+      "en:facet_detail:assertiveness",
+      "en:facet_detail:competence",
+      "en:facet_detail:compliance",
+      "en:facet_detail:deliberation",
+      "en:facet_detail:depression",
+      "en:facet_detail:dutifulness",
+      "en:facet_detail:excitement-seeking",
+      "en:facet_detail:feelings",
+      "en:facet_detail:gregariousness",
+      "en:facet_detail:ideas",
+      "en:facet_detail:imagination",
+      "en:facet_detail:impulsiveness",
+      "en:facet_detail:modesty",
+      "en:facet_detail:order",
+      "en:facet_detail:positive-emotions",
+      "en:facet_detail:self-consciousness",
+      "en:facet_detail:self-discipline",
+      "en:facet_detail:straightforwardness",
+      "en:facet_detail:tender-mindedness",
+      "en:facet_detail:trust",
+      "en:facet_detail:values",
+      "en:facet_detail:vulnerability",
+      "en:facet_detail:warmth",
+      "en:polarity:emotional-stability",
+      "en:polarity:high-agreeableness",
+      "en:polarity:high-conscientiousness",
+      "en:polarity:high-extraversion",
+      "en:polarity:high-neuroticism",
+      "en:polarity:high-openness",
+      "en:polarity:low-agreeableness",
+      "en:polarity:low-conscientiousness",
+      "en:polarity:low-extraversion",
+      "en:polarity:low-openness"
+    ],
+    "missing_hreflang": [
+      "zh-CN:domain:agreeableness",
+      "zh-CN:domain:conscientiousness",
+      "zh-CN:domain:extraversion",
+      "zh-CN:domain:neuroticism",
+      "zh-CN:domain:openness",
+      "zh-CN:polarity:agreeableness-high",
+      "zh-CN:polarity:agreeableness-low",
+      "zh-CN:polarity:agreeableness-mid",
+      "zh-CN:polarity:conscientiousness-high",
+      "zh-CN:polarity:conscientiousness-low",
+      "zh-CN:polarity:conscientiousness-mid",
+      "zh-CN:polarity:extraversion-high",
+      "zh-CN:polarity:extraversion-low",
+      "zh-CN:polarity:extraversion-mid",
+      "zh-CN:polarity:neuroticism-high",
+      "zh-CN:polarity:neuroticism-low",
+      "zh-CN:polarity:neuroticism-mid",
+      "zh-CN:polarity:openness-high",
+      "zh-CN:polarity:openness-low",
+      "zh-CN:polarity:openness-mid"
+    ],
+    "missing_evidence_notes": [
+      "en:polarity:agreeableness-high",
+      "en:polarity:agreeableness-low",
+      "en:polarity:agreeableness-mid",
+      "en:polarity:conscientiousness-high",
+      "en:polarity:conscientiousness-low",
+      "en:polarity:conscientiousness-mid",
+      "en:polarity:extraversion-high",
+      "en:polarity:extraversion-low",
+      "en:polarity:extraversion-mid",
+      "en:polarity:neuroticism-high",
+      "en:polarity:neuroticism-low",
+      "en:polarity:neuroticism-mid",
+      "en:polarity:openness-high",
+      "en:polarity:openness-low",
+      "en:polarity:openness-mid"
+    ]
+  },
+  "required_invariants": {
+    "aliases_remain_redirect_only": true,
+    "aliases_excluded_from_sitemap_llms_schema": true,
+    "do_not_create_big_five_32_type_pages": true,
+    "noindex_before_explicit_publish_gate": true
+  },
+  "next_locked_scopes": [
+    "BIG5-EN-FACET-OPENNESS-CONTENT-PACKAGE-01",
+    "BIG5-EN-FACET-CONSCIENTIOUSNESS-CONTENT-PACKAGE-01",
+    "BIG5-EN-FACET-EXTRAVERSION-CONTENT-PACKAGE-01",
+    "BIG5-EN-FACET-AGREEABLENESS-CONTENT-PACKAGE-01",
+    "BIG5-EN-FACET-NEUROTICISM-CONTENT-PACKAGE-01",
+    "BIG5-ZH-PUBLISHED-LINK-HREFLANG-REPAIR-01",
+    "BIG5-EN-LEGACY-POLARITY-LINK-REPAIR-01",
+    "BIG5-EN-V2-RANGE-EVIDENCE-REPAIR-01"
+  ]
+}
