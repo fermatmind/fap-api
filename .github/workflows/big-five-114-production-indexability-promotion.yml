@@ -1,0 +1,130 @@
+name: Big Five 114 Production Indexability Promotion
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry-run validates only; write performs the separately approved 93-row promotion"
+        required: true
+        default: dry-run
+        type: choice
+        options: [dry-run, write]
+      expected_release_sha:
+        description: "Exact deployed backend release SHA"
+        required: true
+        type: string
+      expected_promotion_sha256:
+        description: "Exact SHA-256 of the locked 93-row promotion package"
+        required: true
+        type: string
+      expected_target_count:
+        description: "Exact promotion target count; must be 93"
+        required: true
+        default: "93"
+        type: string
+      operator_approval_phrase:
+        description: "Exact release/package/count-bound approval phrase"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: big-five-114-production-indexability-promotion
+  cancel-in-progress: false
+
+jobs:
+  production-promotion:
+    name: Big Five 93-page indexability promotion (${{ inputs.mode }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: production
+    env:
+      DEPLOY_USER: ubuntu
+      DEPLOY_HOST: 139.224.130.204
+      DEPLOY_PORT: "22"
+      DEPLOY_PATH: /var/www/fap-api
+      PACKAGE_RELATIVE_PATH: generated/big-five-114-indexability-publish-gate/big_five_93_indexability_promotion_v1_seed.json
+      EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+      EXPECTED_PROMOTION_SHA256: ${{ inputs.expected_promotion_sha256 }}
+      EXPECTED_TARGET_COUNT: ${{ inputs.expected_target_count }}
+      PROMOTION_MODE: ${{ inputs.mode }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+
+    steps:
+      - name: Validate exact authorization inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$EXPECTED_RELEASE_SHA" =~ ^[a-fA-F0-9]{40}$ ]]
+          [[ "$EXPECTED_PROMOTION_SHA256" =~ ^[a-fA-F0-9]{64}$ ]]
+          test "$EXPECTED_TARGET_COUNT" = "93"
+          expected_phrase="批准 BIG5 114 indexability promotion, release SHA ${EXPECTED_RELEASE_SHA}, promotion SHA-256 ${EXPECTED_PROMOTION_SHA256}, target count 93"
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+          case "$PROMOTION_MODE" in dry-run|write) ;; *) exit 2 ;; esac
+
+      - name: Set up production SSH identity
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Verify release and run bounded promotion
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt_dir="$RUNNER_TEMP/big-five-114-indexability-promotion"
+          mkdir -p "$receipt_dir"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH='$DEPLOY_PATH' PACKAGE_RELATIVE_PATH='$PACKAGE_RELATIVE_PATH' EXPECTED_RELEASE_SHA='$EXPECTED_RELEASE_SHA' EXPECTED_PROMOTION_SHA256='$EXPECTED_PROMOTION_SHA256' PROMOTION_MODE='$PROMOTION_MODE' bash -s" \
+            <<'REMOTE' | tee "$receipt_dir/receipt.txt"
+          set -euo pipefail
+          RELEASE_ROOT="$DEPLOY_PATH/current"
+          BACKEND_ROOT="$RELEASE_ROOT/backend"
+          SOURCE="$RELEASE_ROOT/$PACKAGE_RELATIVE_PATH"
+          test -f "$SOURCE"
+          DEPLOYED_SHA="$(tr -d '\n' < "$RELEASE_ROOT/REVISION")"
+          echo "deployed_release_sha=$DEPLOYED_SHA"
+          test "$DEPLOYED_SHA" = "$EXPECTED_RELEASE_SHA"
+          ACTUAL_SHA="$(sha256sum "$SOURCE" | awk '{print $1}')"
+          echo "promotion_sha256=$ACTUAL_SHA"
+          test "$ACTUAL_SHA" = "$EXPECTED_PROMOTION_SHA256"
+
+          php -r '
+          $payload=json_decode((string)file_get_contents($argv[1]),true,512,JSON_THROW_ON_ERROR);
+          $assets=$payload["assets"]??null; if(!is_array($assets)||count($assets)!==93) throw new RuntimeException("expected 93 promotion assets");
+          $aliases=array_fill_keys(["emotional-stability","high-agreeableness","high-conscientiousness","high-extraversion","high-neuroticism","high-openness","low-agreeableness","low-conscientiousness","low-extraversion","low-openness"],true);
+          $ids=[]; foreach($assets as $asset){$id=implode("|",[$asset["locale"]??"",$asset["entity_type"]??"",$asset["entity_key"]??""]); if(isset($ids[$id])) throw new RuntimeException("duplicate identity"); $ids[$id]=true; if(($asset["locale"]??"")==="zh-CN"&&isset($aliases[$asset["entity_key"]??""])) throw new RuntimeException("alias promotion blocked"); if(($asset["launch_state"]??"")!=="published"||($asset["robots"]??"")!=="index,follow"||($asset["index_eligible"]??false)!==true||($asset["sitemap_eligible"]??false)!==true||($asset["llms_eligible"]??false)!==true) throw new RuntimeException("indexability gate failed");}
+          echo "promotion_targets=93\nalias_targets=0\npromotion_contract=pass\n";
+          ' "$SOURCE"
+
+          cd "$BACKEND_ROOT"
+          php artisan personality-public-assets:import --no-ansi --allow-indexable --source="../$PACKAGE_RELATIVE_PATH" | tee /tmp/big-five-114-promotion-dry-run.txt
+          for expected in dry_run=1 assets_found=93 valid_count=93 errors_count=0 will_update=93 indexable_count=93 sitemap_eligible_count=93 llms_eligible_count=93; do grep -Fx "$expected" /tmp/big-five-114-promotion-dry-run.txt >/dev/null; done
+          if [ "$PROMOTION_MODE" = "write" ]; then
+            php artisan personality-public-assets:import --no-ansi --allow-indexable --source="../$PACKAGE_RELATIVE_PATH" --write | tee /tmp/big-five-114-promotion-write.txt
+            for expected in dry_run=0 assets_found=93 valid_count=93 errors_count=0 will_update=93 indexable_count=93 sitemap_eligible_count=93 llms_eligible_count=93; do grep -Fx "$expected" /tmp/big-five-114-promotion-write.txt >/dev/null; done
+          fi
+          REMOTE
+
+      - name: Publish bounded promotion receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: big-five-114-indexability-promotion-receipt
+          path: ${{ runner.temp }}/big-five-114-indexability-promotion/receipt.txt
+          if-no-files-found: warn
+          retention-days: 30
