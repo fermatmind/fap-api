@@ -32,7 +32,7 @@ const report = {
   expected_rows: 31,
   actual_rows: assets.length,
   hub_rows: assets.filter((asset) => asset.entity_type === "facet_hub").length,
-  facet_rows: assets.filter((asset) => asset.entity_type === "facet").length,
+  facet_detail_rows: assets.filter((asset) => asset.entity_type === "facet_detail").length,
   indexable_rows: assets.filter((asset) => asset.index_eligible).length,
   sitemap_rows: assets.filter((asset) => asset.sitemap_eligible).length,
   llms_rows: assets.filter((asset) => asset.llms_eligible).length,

@@ -27,7 +27,7 @@ assert(expectedCodes.every((code) => seed.assets.some((asset) => asset.entity_ke
 
 const sectionBodies = [];
 for (const asset of seed.assets) {
-  assert(asset.framework === "big_five" && asset.entity_type === "facet", `${asset.entity_key}: wrong identity`);
+  assert(asset.framework === "big_five" && asset.entity_type === "facet_detail", `${asset.entity_key}: wrong identity`);
   assert(asset.locale === "zh-CN", `${asset.entity_key}: wrong locale`);
   assert(asset.slug === `big-five/facets/${asset.entity_key}`, `${asset.entity_key}: slug drift`);
   assert(asset.canonical_path === `/zh/personality/big-five/facets/${asset.entity_key}`, `${asset.entity_key}: canonical drift`);
@@ -75,7 +75,7 @@ const qaReport = {
   coverage: {
     assets: 6,
     locale: "zh-CN",
-    entity_type: "facet",
+    entity_type: "facet_detail",
     facet_codes: expectedCodes,
     sections_per_asset: 9,
     faq_per_asset: 5,

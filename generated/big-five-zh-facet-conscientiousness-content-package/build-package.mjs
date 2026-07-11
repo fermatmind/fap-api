@@ -81,7 +81,7 @@ const baseSeed = JSON.parse(await readFile(baseSeedPath, "utf8"));
 const sharedLedger = JSON.parse(await readFile(sharedLedgerPath, "utf8"));
 
 const baseAssets = new Map(baseSeed.assets
-  .filter((asset) => asset.framework === "big_five" && asset.entity_type === "facet" && asset.locale === "zh-CN")
+  .filter((asset) => asset.framework === "big_five" && asset.entity_type === "facet_detail" && asset.locale === "zh-CN")
   .map((asset) => [asset.entity_key, asset]));
 
 const internalLinksFor = (currentCode) => [

@@ -5,16 +5,16 @@
   "assets": [
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "anxiety",
       "entity_key": "anxiety",
       "slug": "big-five/facets/anxiety",
       "locale": "zh-CN",
-      "title": "焦虑倾向",
-      "summary": "焦虑倾向是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "焦虑（神经质 / 情绪敏感性）",
+      "summary": "焦虑描述对未来和不确定性感到担忧和紧张的倾向，是神经质维度中与预期性担忧相关的细分面向。",
       "seo": {
-        "title": "焦虑倾向 | FermatMind Big Five",
-        "description": "焦虑倾向是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "焦虑｜大五人格 30 个细分面向",
+        "description": "焦虑描述对未来和不确定性感到担忧和紧张的倾向，是神经质维度中与预期性担忧相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/anxiety",
@@ -22,57 +22,106 @@
         "path": "/zh/personality/big-five/facets/anxiety"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/anxiety",
-        "zh-CN": "/zh/personality/big-five/facets/anxiety"
+        "zh-CN": "/zh/personality/big-five/facets/anxiety",
+        "en": "/en/personality/big-five/facets/anxiety"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "焦虑描述对未来和不确定性感到担忧和紧张的倾向，是神经质维度中与预期性担忧相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是焦虑？",
+          "body": "焦虑是神经质维度中与未来导向的担忧和紧张相关的细分面向。高分通常表示对未来和不确定性容易产生担忧，脑海中经常预演负面可能性，在面对不明确的情境时紧张感较强。低分通常表示对未来的担忧较少，能在不确定性中保持平静，不容易陷入反复的负面预演。焦虑反映的是担忧的倾向性，不是焦虑障碍的判断标准——后者需要专业诊断。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：在不确定情境下容易产生紧张和担忧，倾向于预演各种负面可能性，在需要风险预警和细致把关的任务中有价值——高焦虑者往往是最先注意到潜在问题的人，但也因为持续的高警觉状态消耗大量心理资源。\n\n**偏低时**：在面临不确定性和风险时保持相对平静，不容易被“what if”式的担忧干扰注意力，在需要冷静判断和快速决策的场景中有优势。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "anxiety-faq-1",
+          "question": "焦虑分数高就是焦虑症吗？",
+          "answer": "不是。焦虑分数反映的是担忧的倾向性，是一种人格特质。焦虑症是临床诊断，需要达到特定的症状标准和功能损害程度。如果你对焦虑水平感到困扰，建议咨询专业心理健康服务。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "焦虑倾向"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "焦虑的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "神经质 / 情绪敏感性",
-          "target_code": "neuroticism",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/neuroticism"
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "焦虑倾向是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -85,16 +134,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "anger",
       "entity_key": "anger",
       "slug": "big-five/facets/anger",
       "locale": "zh-CN",
-      "title": "愤怒倾向",
-      "summary": "愤怒倾向是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "愤怒（神经质 / 情绪敏感性）",
+      "summary": "愤怒描述体验到愤怒、挫折和怨恨情绪的倾向，是神经质维度中与敌意反应相关的细分面向。",
       "seo": {
-        "title": "愤怒倾向 | FermatMind Big Five",
-        "description": "愤怒倾向是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "愤怒｜大五人格 30 个细分面向",
+        "description": "愤怒描述体验到愤怒、挫折和怨恨情绪的倾向，是神经质维度中与敌意反应相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/anger",
@@ -102,57 +151,106 @@
         "path": "/zh/personality/big-five/facets/anger"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/anger",
-        "zh-CN": "/zh/personality/big-five/facets/anger"
+        "zh-CN": "/zh/personality/big-five/facets/anger",
+        "en": "/en/personality/big-five/facets/anger"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "愤怒描述体验到愤怒、挫折和怨恨情绪的倾向，是神经质维度中与敌意反应相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是愤怒？",
+          "body": "愤怒是神经质维度中与敌意和挫折感相关的细分面向。高分通常表示容易因为不公平、受阻或失望而体验到愤怒，愤怒情绪的触发阈值较低，在受挫后可能较难平复。低分通常表示不容易被激怒，对挫折和冒犯的容忍度较高，负面情绪恢复较快。愤怒本身是正常且有时必要的情绪——这个 facet 测量的是愤怒被触发和持续的容易程度。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：对不公平和不合理的事情反应强烈，挫折感容易被触发，在需要维护正义和挑战不公的场景中有优势——高愤怒者往往是推动改变的重要力量，但也需要管理愤怒的表达方式以避免关系破坏。\n\n**偏低时**：不容易因为外界事件而发怒，对挫折和冒犯有较高的容忍度，在需要耐心和情绪稳定的沟通场景中有优势。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "anger-faq-1",
+          "question": "愤怒分数低就是没脾气吗？",
+          "answer": "不是。低愤怒只是意味着你不容易因为外部事件而体验到愤怒情绪。这在面对挑衅时可能是优势，但也可能意味着你在应该愤怒的时候没有及时表达——适当的愤怒对于维护边界和正义是有价值的。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "愤怒倾向"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "愤怒的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "神经质 / 情绪敏感性",
-          "target_code": "neuroticism",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/neuroticism"
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "愤怒倾向是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -165,16 +263,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "depression",
       "entity_key": "depression",
       "slug": "big-five/facets/depression",
       "locale": "zh-CN",
-      "title": "低落倾向",
-      "summary": "低落倾向是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "抑郁（神经质 / 情绪敏感性）",
+      "summary": "抑郁描述体验到悲伤、低落和无力感的倾向，是神经质维度中与负面心境相关的细分面向。",
       "seo": {
-        "title": "低落倾向 | FermatMind Big Five",
-        "description": "低落倾向是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "抑郁｜大五人格 30 个细分面向",
+        "description": "抑郁描述体验到悲伤、低落和无力感的倾向，是神经质维度中与负面心境相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/depression",
@@ -182,57 +280,106 @@
         "path": "/zh/personality/big-five/facets/depression"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/depression",
-        "zh-CN": "/zh/personality/big-five/facets/depression"
+        "zh-CN": "/zh/personality/big-five/facets/depression",
+        "en": "/en/personality/big-five/facets/depression"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "抑郁描述体验到悲伤、低落和无力感的倾向，是神经质维度中与负面心境相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是抑郁？",
+          "body": "抑郁是神经质维度中与悲伤和低落情绪相关的细分面向。高分通常表示较容易体验到悲伤、无力和挫败感，在遇到挫折后有较长的低落期，对未来可能持有较悲观的预期。低分通常表示较少体验到悲伤和低落情绪，在遭遇挫折后能较快恢复。需要明确区分：这个 facet 测量的是体验悲伤的倾向性，不是抑郁症的判断标准。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：对损失和挫折有更强烈的情绪反应，悲伤和失落的体验较深且恢复较慢，在需要深度情感理解和艺术表达的活动中有独特的敏锐度，但也因为较长的恢复周期而消耗较多心理资源。\n\n**偏低时**：在遭遇挫折后能较快恢复到正常状态，较少被低落情绪占据，在需要持续稳定输出的场景中有优势。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "depression-faq-1",
+          "question": "抑郁分数高和抑郁症有什么关系？",
+          "answer": "抑郁 facet 反映的是体验悲伤和低落的倾向性，是一种人格特质维度。抑郁症是临床诊断，需要专业评估。高分数不表示你患有抑郁症，但如果你长期感到无法摆脱的低落情绪，建议寻求专业帮助。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "低落倾向"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "抑郁的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "神经质 / 情绪敏感性",
-          "target_code": "neuroticism",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/neuroticism"
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "低落倾向是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -245,16 +392,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "self-consciousness",
       "entity_key": "self-consciousness",
       "slug": "big-five/facets/self-consciousness",
       "locale": "zh-CN",
-      "title": "自我意识",
-      "summary": "自我意识是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "自我意识（神经质 / 情绪敏感性）",
+      "summary": "自我意识描述在社交场合中感到尴尬、不自在和被审视的倾向，是神经质维度中与社交敏感性相关的细分面向。",
       "seo": {
-        "title": "自我意识 | FermatMind Big Five",
-        "description": "自我意识是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "自我意识｜大五人格 30 个细分面向",
+        "description": "自我意识描述在社交场合中感到尴尬、不自在和被审视的倾向，是神经质维度中与社交敏感性相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/self-consciousness",
@@ -262,57 +409,106 @@
         "path": "/zh/personality/big-five/facets/self-consciousness"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/self-consciousness",
-        "zh-CN": "/zh/personality/big-five/facets/self-consciousness"
+        "zh-CN": "/zh/personality/big-five/facets/self-consciousness",
+        "en": "/en/personality/big-five/facets/self-consciousness"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "自我意识描述在社交场合中感到尴尬、不自在和被审视的倾向，是神经质维度中与社交敏感性相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是自我意识？",
+          "body": "自我意识是神经质维度中与社交场合的自我觉察和不自在感相关的细分面向。高分通常表示在社交场合中容易感到被注视和评判，在意他人对自己的看法，在人群中常有“大家都在看我”的感觉。低分通常表示在社交场合中较少感到不自在，不会过度担心他人怎么看待自己，在公众场合表现自然。自我意识与害羞相关但不完全相同——你可以很害羞但没有过强的自我意识。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：在社交场合中容易感到不自在和被审视，对自己的外表和言行高度关注，在需要精确自我监控和社交礼仪的场景中有优势，但在需要自然和放松表达的场合中可能过于紧张。\n\n**偏低时**：在社交和公众场合中自然放松，不过度在意他人的目光，在需要公众表达和即兴发挥的场景中有优势，但可能在需要精细化礼仪和社交敏感度的场景中不够警觉。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "self-consciousness-faq-1",
+          "question": "自我意识高就是社交焦虑障碍吗？",
+          "answer": "不是。自我意识高只是在社交场合中会更加在意自己的表现，但通常不会因此回避社交。如果这种在意已经严重到让你回避社交活动、影响生活质量，才可能涉及社交焦虑障碍，建议咨询专业帮助。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "自我意识"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "自我意识的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "神经质 / 情绪敏感性",
-          "target_code": "neuroticism",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/neuroticism"
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "自我意识是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -325,16 +521,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "impulsiveness",
       "entity_key": "impulsiveness",
       "slug": "big-five/facets/impulsiveness",
       "locale": "zh-CN",
-      "title": "冲动性",
-      "summary": "冲动性是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "冲动性（神经质 / 情绪敏感性）",
+      "summary": "冲动性描述在面对诱惑和欲望时控制冲动的能力，是神经质维度中与自我控制相关的细分面向。",
       "seo": {
-        "title": "冲动性 | FermatMind Big Five",
-        "description": "冲动性是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "冲动性｜大五人格 30 个细分面向",
+        "description": "冲动性描述在面对诱惑和欲望时控制冲动的能力，是神经质维度中与自我控制相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/impulsiveness",
@@ -342,57 +538,106 @@
         "path": "/zh/personality/big-five/facets/impulsiveness"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/impulsiveness",
-        "zh-CN": "/zh/personality/big-five/facets/impulsiveness"
+        "zh-CN": "/zh/personality/big-five/facets/impulsiveness",
+        "en": "/en/personality/big-five/facets/impulsiveness"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "冲动性描述在面对诱惑和欲望时控制冲动的能力，是神经质维度中与自我控制相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是冲动性？",
+          "body": "冲动性是神经质维度中与冲动控制相关的细分面向。高分通常表示在面对即时诱惑时较难控制冲动，容易做出事后后悔的决定，对满足即时需求的渴望较强。低分通常表示有较好的冲动控制能力，能抵抗短期诱惑以追求长期目标，在需要等待和延迟满足的场景中有优势。冲动性描述的是对冲动的控制难度，不是道德判断——高冲动性不等于意志薄弱。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：面对即时诱惑（如美食、购物、社交媒体）时较难抵抗，倾向于即兴而为而非提前规划，在需要快速反应和即时行动的领域可能有优势，但在需要长期自律和延迟满足的领域可能遇到困难。\n\n**偏低时**：对冲动有较好的控制能力，不容易被即时诱惑左右，在需要长期规划和持续自律的任务中有优势。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "impulsiveness-faq-1",
+          "question": "冲动性高就是自制力差吗？",
+          "answer": "冲动性反映的是你在面对诱惑时感到冲动的强度，而不是你最终是否屈服。一个高冲动性的人仍然可以通过环境策略（如移除诱惑、设定明确规则）来有效管理行为。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "冲动性"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "冲动性的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "神经质 / 情绪敏感性",
-          "target_code": "neuroticism",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/neuroticism"
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "冲动性是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -405,16 +650,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "vulnerability",
       "entity_key": "vulnerability",
       "slug": "big-five/facets/vulnerability",
       "locale": "zh-CN",
-      "title": "脆弱性",
-      "summary": "脆弱性是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "脆弱性（神经质 / 情绪敏感性）",
+      "summary": "脆弱性描述在压力下应对和恢复正常的能力，是神经质维度中与压力耐受相关的细分面向。",
       "seo": {
-        "title": "脆弱性 | FermatMind Big Five",
-        "description": "脆弱性是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "脆弱性｜大五人格 30 个细分面向",
+        "description": "脆弱性描述在压力下应对和恢复正常的能力，是神经质维度中与压力耐受相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/vulnerability",
@@ -422,57 +667,106 @@
         "path": "/zh/personality/big-five/facets/vulnerability"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/vulnerability",
-        "zh-CN": "/zh/personality/big-five/facets/vulnerability"
+        "zh-CN": "/zh/personality/big-five/facets/vulnerability",
+        "en": "/en/personality/big-five/facets/vulnerability"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "脆弱性描述在压力下应对和恢复正常的能力，是神经质维度中与压力耐受相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是脆弱性？",
+          "body": "脆弱性是神经质维度中与压力应对能力相关的细分面向。高分通常表示在压力下容易感到无助和不知所措，面对紧急和高压情境时应对能力下降，需要较长时间恢复到正常状态。低分通常表示在压力下能保持相对冷静和有效应对，紧急情况下能维持判断力和行动力，恢复速度较快。脆弱性反映的是压力下的应对容易程度，不是软弱或坚强的人格判断。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：在高压情境下容易感到不知所措和资源枯竭，需要明确的支援和恢复时间，在需要高度警觉和风险敏感的任务中有预警价值，但高压场景本身会带来较高的恢复成本。\n\n**偏低时**：在压力和紧急情况下能保持相对稳定的判断和执行力，恢复速度较快，在需要危机处理和高压决策的场景中有优势。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "vulnerability-faq-1",
+          "question": "脆弱性高的人是不是抗压能力差？",
+          "answer": "脆弱性反映的是压力下你感到吃力程度的主观体验。一些看起来“抗压能力差”的人，在其他条件相同的情况下，可能只是需要更多的恢复时间而不是能力不足。而且高脆弱性在需要高度警觉和风险敏感的工作中可能是一种优势。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "脆弱性"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "脆弱性的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "神经质 / 情绪敏感性",
-          "target_code": "neuroticism",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/neuroticism"
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "脆弱性是神经质 / 情绪敏感性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",

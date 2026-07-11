@@ -5,16 +5,16 @@
   "assets": [
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "competence",
       "entity_key": "competence",
       "slug": "big-five/facets/competence",
       "locale": "zh-CN",
-      "title": "胜任感",
-      "summary": "胜任感是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "胜任感（尽责性）",
+      "summary": "胜任感描述对自己能够有效完成任务的确信程度，是尽责性维度中与自我效能感相关的细分面向。",
       "seo": {
-        "title": "胜任感 | FermatMind Big Five",
-        "description": "胜任感是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "胜任感｜大五人格 30 个细分面向",
+        "description": "胜任感描述对自己能够有效完成任务的确信程度，是尽责性维度中与自我效能感相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/competence",
@@ -22,57 +22,106 @@
         "path": "/zh/personality/big-five/facets/competence"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/competence",
-        "zh-CN": "/zh/personality/big-five/facets/competence"
+        "zh-CN": "/zh/personality/big-five/facets/competence",
+        "en": "/en/personality/big-five/facets/competence"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "胜任感描述对自己能够有效完成任务的确信程度，是尽责性维度中与自我效能感相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是胜任感？",
+          "body": "胜任感是尽责性维度中与自我效能感相关的细分面向。高分通常表示对自己完成任务的能力有信心，相信自己的努力能产生预期结果，遇到困难时倾向于坚持而非放弃。低分通常表示对自己能力的信心较低，做决策时常伴随犹豫和自我怀疑。胜任感反映的是主观信念而非客观能力——一个实际能力很强的人也可能胜任感偏低。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：面对新任务时倾向于认为自己能处理好，在挑战面前保持积极的心态，对自己的判断和决策有信心，可能因为过度自信而低估任务的真实难度。\n\n**偏低时**：对自己的能力持审慎态度，做事之前倾向于充分准备和反复确认，在需要谨慎规划和风险控制的场景中有优势，但可能因自我怀疑而错过机会。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "competence-faq-1",
+          "question": "胜任感和实际能力是一回事吗？",
+          "answer": "不是。胜任感是你对自己能力的主观信念，实际能力是客观的技能和知识水平。两者不一定同步——有些能力很强的人胜任感偏低，反之亦然。提升胜任感的一种方式是记录自己成功完成任务的经历。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "胜任感"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "胜任感的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "尽责性",
-          "target_code": "conscientiousness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/conscientiousness"
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "胜任感是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -85,16 +134,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "order",
       "entity_key": "order",
       "slug": "big-five/facets/order",
       "locale": "zh-CN",
-      "title": "条理性",
-      "summary": "条理性是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "秩序（尽责性）",
+      "summary": "秩序描述对条理、整洁和组织性的偏好，是尽责性维度中与结构化环境相关的细分面向。",
       "seo": {
-        "title": "条理性 | FermatMind Big Five",
-        "description": "条理性是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "秩序｜大五人格 30 个细分面向",
+        "description": "秩序描述对条理、整洁和组织性的偏好，是尽责性维度中与结构化环境相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/order",
@@ -102,57 +151,106 @@
         "path": "/zh/personality/big-five/facets/order"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/order",
-        "zh-CN": "/zh/personality/big-five/facets/order"
+        "zh-CN": "/zh/personality/big-five/facets/order",
+        "en": "/en/personality/big-five/facets/order"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "秩序描述对条理、整洁和组织性的偏好，是尽责性维度中与结构化环境相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是秩序？",
+          "body": "秩序是尽责性维度中与结构化偏好相关的细分面向。高分通常表示喜欢整洁有序的环境，做事有条理，日程安排清楚，混乱和无序会带来不适。低分通常表示对环境的秩序要求不高，能在相对随意和灵活的空间中高效工作，不一定认为“整齐”等同于“高效”。秩序偏好反映的是对结构化环境的舒适度，不是自律能力。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：桌面整洁、文件分类清楚、计划安排有序，环境中物品各有其位，在需要规范流程和精确管理的任务中有天然优势，可能因为过度追求秩序而花费过多时间整理。\n\n**偏低时**：能在相对随意的环境中保持高效，不因为物品摆放或流程细节的不完美而分心，在创意工作和需要灵活适应的场景中有优势，但可能因为缺乏整理而遗漏关键信息。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "order-faq-1",
+          "question": "秩序分数高的人一定更有效率吗？",
+          "answer": "不一定。秩序偏好反映的是对结构化环境的舒适度，效率取决于任务性质。有些创造性工作需要一定的“有序的混乱”来激发灵感，而精确的流程性工作则更适合高秩序偏好。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "条理性"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "秩序的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "尽责性",
-          "target_code": "conscientiousness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/conscientiousness"
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "条理性是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -165,16 +263,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "dutifulness",
       "entity_key": "dutifulness",
       "slug": "big-five/facets/dutifulness",
       "locale": "zh-CN",
-      "title": "责任感",
-      "summary": "责任感是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "责任感（尽责性）",
+      "summary": "责任感描述遵守规则、履行承诺和遵循道德准则的倾向，是尽责性维度中与义务意识相关的细分面向。",
       "seo": {
-        "title": "责任感 | FermatMind Big Five",
-        "description": "责任感是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "责任感｜大五人格 30 个细分面向",
+        "description": "责任感描述遵守规则、履行承诺和遵循道德准则的倾向，是尽责性维度中与义务意识相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/dutifulness",
@@ -182,57 +280,106 @@
         "path": "/zh/personality/big-five/facets/dutifulness"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/dutifulness",
-        "zh-CN": "/zh/personality/big-five/facets/dutifulness"
+        "zh-CN": "/zh/personality/big-five/facets/dutifulness",
+        "en": "/en/personality/big-five/facets/dutifulness"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "责任感描述遵守规则、履行承诺和遵循道德准则的倾向，是尽责性维度中与义务意识相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是责任感？",
+          "body": "责任感是尽责性维度中与义务和规则遵守相关的细分面向。高分通常表示重视承诺和规则，认为遵守约定和社会规范是重要的，在团队中是可以信赖的成员。低分通常表示对规则和约定持更灵活的态度，倾向于根据具体情况调整行为，不一定认为所有规则都需要严格遵循。责任感不是道德判断——它反映的是你多大程度上以内化的义务感驱动行为。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：承诺过的事会尽力完成，重视守时和诚信，倾向于遵守流程和规范，在需要可靠性和一致性的角色中有显著优势，可能因为过于坚守规则而在需要灵活变通时感到困难。\n\n**偏低时**：对规则和承诺持更弹性的态度，能根据情境判断什么是更合理的做法，在需要突破常规和创新解决方案的场景中有优势，但可能在需要长期承诺和稳定交付的任务中出现断档。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "dutifulness-faq-1",
+          "question": "责任感和道德水平有关吗？",
+          "answer": "责任感是人格特质，描述的是你倾向于遵守承诺和规则的程度，不是道德水平的高低。一个低责任感的人可能有很强的个人道德准则，只是不认为所有形式的规则和承诺都需要同等对待。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "责任感"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "责任感的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "尽责性",
-          "target_code": "conscientiousness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/conscientiousness"
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "责任感是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -245,16 +392,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "achievement-striving",
       "entity_key": "achievement-striving",
       "slug": "big-five/facets/achievement-striving",
       "locale": "zh-CN",
-      "title": "成就追求",
-      "summary": "成就追求是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "成就追求（尽责性）",
+      "summary": "成就追求描述设立高目标并努力达成的倾向，是尽责性维度中与抱负和进取心相关的细分面向。",
       "seo": {
-        "title": "成就追求 | FermatMind Big Five",
-        "description": "成就追求是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "成就追求｜大五人格 30 个细分面向",
+        "description": "成就追求描述设立高目标并努力达成的倾向，是尽责性维度中与抱负和进取心相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/achievement-striving",
@@ -262,57 +409,106 @@
         "path": "/zh/personality/big-five/facets/achievement-striving"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/achievement-striving",
-        "zh-CN": "/zh/personality/big-five/facets/achievement-striving"
+        "zh-CN": "/zh/personality/big-five/facets/achievement-striving",
+        "en": "/en/personality/big-five/facets/achievement-striving"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "成就追求描述设立高目标并努力达成的倾向，是尽责性维度中与抱负和进取心相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是成就追求？",
+          "body": "成就追求是尽责性维度中与目标设定和进取心相关的细分面向。高分通常表示有强烈的成就感驱动，喜欢设立具有挑战性的目标并为之努力，对自身进步和成就感到满足。低分通常表示对成就的追求较温和，不一定需要不断挑战更高目标来获得满足，能在不施加额外成就压力的情况下保持平衡。高成就追求带来动力，但也可能带来倦怠风险。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：经常为自己设定更高的目标，对职业和个人成长有明确的抱负，完成任务后很快开始寻找下一个挑战，在竞争性环境和需要持续进步的岗位中有优势，可能因为过度追求而忽视休息和关系。\n\n**偏低时**：更看重过程而非结果，能在不刻意追求的情况下享受工作和生活，不容易因外部成就标准而焦虑，在需要稳定输出和长期平衡的场景中有优势。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "achievement-striving-faq-1",
+          "question": "成就追求分数低就是不上进吗？",
+          "answer": "不是。低成就追求不等于不上进，只是不太以高标准目标作为主要驱动力。你可能更关注工作本身的意义、关系的质量或生活的平衡，这些同样是积极的人生态度。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "成就追求"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "成就追求的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "尽责性",
-          "target_code": "conscientiousness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/conscientiousness"
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "成就追求是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -325,16 +521,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "self-discipline",
       "entity_key": "self-discipline",
       "slug": "big-five/facets/self-discipline",
       "locale": "zh-CN",
-      "title": "自律",
-      "summary": "自律是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "自律（尽责性）",
+      "summary": "自律描述开始任务并坚持完成的能力，是尽责性维度中与执行力和毅力相关的细分面向。",
       "seo": {
-        "title": "自律 | FermatMind Big Five",
-        "description": "自律是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "自律｜大五人格 30 个细分面向",
+        "description": "自律描述开始任务并坚持完成的能力，是尽责性维度中与执行力和毅力相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/self-discipline",
@@ -342,57 +538,106 @@
         "path": "/zh/personality/big-five/facets/self-discipline"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/self-discipline",
-        "zh-CN": "/zh/personality/big-five/facets/self-discipline"
+        "zh-CN": "/zh/personality/big-five/facets/self-discipline",
+        "en": "/en/personality/big-five/facets/self-discipline"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "自律描述开始任务并坚持完成的能力，是尽责性维度中与执行力和毅力相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是自律？",
+          "body": "自律是尽责性维度中与执行坚持力相关的细分面向。高分通常表示能够主动开始不愉快的任务并坚持到底，不容易被干扰和诱惑打断，在需要长期投入的项目中有稳定的执行力。低分通常表示在开始和坚持任务方面存在困难，容易被外界干扰或内在分心打断，倾向于在截止日期临近时集中完成任务。自律是可以训练的能力，不完全由天生的倾向决定。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：即使任务枯燥或不愉快也能坚持下去，能抵抗短期诱惑以完成长期目标，日常行为有较强的内在驱动力，在需要持续纪律性的任务中有显著优势，可能因为过于严格而给自己带来不必要的压力。\n\n**偏低时**：倾向于在动力充沛时高效完成工作，在截止日期压力下能快速产出，在需要快速反应和灵活调整的任务中有优势，但可能在需要持续投入的长期项目中遇到困难。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "self-discipline-faq-1",
+          "question": "自律分数低的人就是懒吗？",
+          "answer": "不是。自律反映的是在缺乏外部约束时自我驱动的容易程度。很多低自律者在有明确外部结构（如截止日期、团队协作、责任分工）的环境中表现优异。了解自己的自律模式后，可以用环境设计来补偿——比如分批设定小目标、寻找问责伙伴。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "自律"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "自律的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "尽责性",
-          "target_code": "conscientiousness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/conscientiousness"
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "自律是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -405,16 +650,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "deliberation",
       "entity_key": "deliberation",
       "slug": "big-five/facets/deliberation",
       "locale": "zh-CN",
-      "title": "审慎",
-      "summary": "审慎是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "审慎（尽责性）",
+      "summary": "审慎描述在做决定前仔细思考、评估后果的倾向，是尽责性维度中与决策谨慎度相关的细分面向。",
       "seo": {
-        "title": "审慎 | FermatMind Big Five",
-        "description": "审慎是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "审慎｜大五人格 30 个细分面向",
+        "description": "审慎描述在做决定前仔细思考、评估后果的倾向，是尽责性维度中与决策谨慎度相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/deliberation",
@@ -422,57 +667,106 @@
         "path": "/zh/personality/big-five/facets/deliberation"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/deliberation",
-        "zh-CN": "/zh/personality/big-five/facets/deliberation"
+        "zh-CN": "/zh/personality/big-five/facets/deliberation",
+        "en": "/en/personality/big-five/facets/deliberation"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "审慎描述在做决定前仔细思考、评估后果的倾向，是尽责性维度中与决策谨慎度相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是审慎？",
+          "body": "审慎是尽责性维度中与决策前的思考过程相关的细分面向。高分通常表示在行动前会仔细权衡利弊，倾向于收集充分信息后再做决定，不容易冲动行事。低分通常表示决策速度较快，不倾向于花太多时间在权衡和分析上，更信任自己的直觉和即时判断。审慎和决断力是同一维度的两端——两者的价值取决于任务性质。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：重大决策前会进行系统性的分析和信息收集，不容易被冲动或情绪驱动做出仓促决定，在高风险和高后果的场景中有显著优势，可能因为反复权衡而错过时间窗口。\n\n**偏低时**：决策果断、行动迅速，在需要快速反应和灵活调整的场景中有优势，不因过多分析而陷入决策瘫痪，但可能在重要决策中因为缺乏充分思考而付出代价。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "deliberation-faq-1",
+          "question": "审慎和优柔寡断有什么区别？",
+          "answer": "审慎是有意识地在行动前考虑后果，是一种可控的策略选择。优柔寡断则是在已经掌握足够信息后仍然无法做出决定，通常伴随焦虑和回避。高审慎的人可以在信息充分后果断决策。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "审慎"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "审慎的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "尽责性",
-          "target_code": "conscientiousness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/conscientiousness"
+          "href": "/zh/personality/big-five/conscientiousness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "审慎是尽责性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",

@@ -5,16 +5,16 @@
   "assets": [
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "trust",
       "entity_key": "trust",
       "slug": "big-five/facets/trust",
       "locale": "zh-CN",
-      "title": "信任",
-      "summary": "信任是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "信任（宜人性）",
+      "summary": "信任描述相信他人意图是善意的倾向，是宜人性维度中与对人基本态度相关的细分面向。",
       "seo": {
-        "title": "信任 | FermatMind Big Five",
-        "description": "信任是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "信任｜大五人格 30 个细分面向",
+        "description": "信任描述相信他人意图是善意的倾向，是宜人性维度中与对人基本态度相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/trust",
@@ -22,57 +22,106 @@
         "path": "/zh/personality/big-five/facets/trust"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/trust",
-        "zh-CN": "/zh/personality/big-five/facets/trust"
+        "zh-CN": "/zh/personality/big-five/facets/trust",
+        "en": "/en/personality/big-five/facets/trust"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "信任描述相信他人意图是善意的倾向，是宜人性维度中与对人基本态度相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是信任？",
+          "body": "信任是宜人性维度中最基础的人际态度细分面向。高分通常表示倾向于相信他人的动机是善意的，认为大多数人值得信赖，在初次交往中持开放和友好的态度。低分通常表示对他人动机持审慎态度，倾向于先观察再判断，不轻易假设他人出于善意。信任不是天真——高信任者同样能够识别恶意，只是默认假设不同。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：与人交往时持开放和善意的预设，愿意先给予信任而非等待对方证明，在需要快速建立合作和信任关系的场景中有优势，可能在有过负面经历后仍然保持较高的信任基线。\n\n**偏低时**：对自己和他人的界限更警觉，倾向于先验证再信任，在需要风险控制和批判性评估的场景中有优势，但可能因为信任门槛过高而错过建立深度关系的机会。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "trust-faq-1",
+          "question": "信任和判断力有冲突吗？",
+          "answer": "不必然。高信任反映的是你的默认假设——你认为大多数人的意图是善意的。这不等于你失去了判断和识别恶意的能力。信任是一种社交策略，判断力是一种认知能力，两者可以共存。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "信任"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "信任的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "宜人性",
-          "target_code": "agreeableness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/agreeableness"
+          "href": "/zh/personality/big-five/agreeableness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "信任是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -85,16 +134,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "straightforwardness",
       "entity_key": "straightforwardness",
       "slug": "big-five/facets/straightforwardness",
       "locale": "zh-CN",
-      "title": "坦率",
-      "summary": "坦率是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "直接性（宜人性）",
+      "summary": "直接性描述以坦诚、直接的方式与人交流的倾向，是宜人性维度中与沟通风格相关的细分面向。",
       "seo": {
-        "title": "坦率 | FermatMind Big Five",
-        "description": "坦率是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "直接性｜大五人格 30 个细分面向",
+        "description": "直接性描述以坦诚、直接的方式与人交流的倾向，是宜人性维度中与沟通风格相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/straightforwardness",
@@ -102,57 +151,106 @@
         "path": "/zh/personality/big-five/facets/straightforwardness"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/straightforwardness",
-        "zh-CN": "/zh/personality/big-five/facets/straightforwardness"
+        "zh-CN": "/zh/personality/big-five/facets/straightforwardness",
+        "en": "/en/personality/big-five/facets/straightforwardness"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "直接性描述以坦诚、直接的方式与人交流的倾向，是宜人性维度中与沟通风格相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是直接性？",
+          "body": "直接性是宜人性维度中与沟通坦诚度相关的细分面向。高分通常表示交流时坦诚直接，不喜欢绕弯子或策略性表达，认为实话实说是尊重对方的表现。低分通常表示沟通时更讲究方式和策略，倾向于考虑表达可能带来的影响后再选择措辞。直接性反映的是沟通风格而非诚实程度——一个策略性表达的人同样可以是诚实的。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：有话直说，不喜欢拐弯抹角，在需要快速澄清和透明沟通的场景中有优势，可能在敏感话题上因为表达方式直接而引发对方不适。\n\n**偏低时**：在表达前会考虑措辞和时机，善于用对方容易接受的方式传递信息，在需要关系维护和敏感沟通的场景中有优势，但可能因为表达不够直接而导致信息失真。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "straightforwardness-faq-1",
+          "question": "直接性高就是说话不好听吗？",
+          "answer": "不是。直接性反映的是你倾向于多直接地表达想法，不是你是否关心对方的感受。一个高直接性的人可以既坦诚又友善——关键在于坦诚的内容是建设性的还是攻击性的。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "坦率"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "直接性的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "宜人性",
-          "target_code": "agreeableness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/agreeableness"
+          "href": "/zh/personality/big-five/agreeableness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "坦率是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -165,16 +263,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "altruism",
       "entity_key": "altruism",
       "slug": "big-five/facets/altruism",
       "locale": "zh-CN",
-      "title": "利他",
-      "summary": "利他是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "利他（宜人性）",
+      "summary": "利他描述主动关心和帮助他人的倾向，是宜人性维度中与助人动机相关的细分面向。",
       "seo": {
-        "title": "利他 | FermatMind Big Five",
-        "description": "利他是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "利他｜大五人格 30 个细分面向",
+        "description": "利他描述主动关心和帮助他人的倾向，是宜人性维度中与助人动机相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/altruism",
@@ -182,57 +280,106 @@
         "path": "/zh/personality/big-five/facets/altruism"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/altruism",
-        "zh-CN": "/zh/personality/big-five/facets/altruism"
+        "zh-CN": "/zh/personality/big-five/facets/altruism",
+        "en": "/en/personality/big-five/facets/altruism"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "利他描述主动关心和帮助他人的倾向，是宜人性维度中与助人动机相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是利他？",
+          "body": "利他是宜人性维度中与助人行为相关的细分面向。高分通常表示愿意主动帮助他人，在看到他人需要时会产生帮助的内在驱动力，从助人中获得满足感。低分通常表示帮助他人的内在驱动力较弱，更倾向于让每个人自己解决问题，不认为牺牲自己来帮助他人是必要的。利他反映的是助人的内在动机而非实际助人行为——你不一定有内在驱动力但仍然会在需要时伸出援手。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：主动关注他人的困难并提供帮助，在团队中承担额外的支持性工作，从他人的改善中获得满足感，在需要高度协作和人本关怀的角色中有优势，但可能因为过度付出而忽视自身需求。\n\n**偏低时**：认为每个人应该首先为自己负责，帮助他人更多是基于理性判断而非情感驱动，在需要保持独立判断和资源优化的场景中有优势。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "altruism-faq-1",
+          "question": "利他分数低就是自私吗？",
+          "answer": "不是。低利他只表示帮助他人的内在驱动力较弱，不等于你自私或不会帮助别人。你可能基于原则或理性决策来帮助他人，只是不觉得这是天经地义的义务。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "利他"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "利他的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "宜人性",
-          "target_code": "agreeableness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/agreeableness"
+          "href": "/zh/personality/big-five/agreeableness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "利他是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -245,16 +392,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "compliance",
       "entity_key": "compliance",
       "slug": "big-five/facets/compliance",
       "locale": "zh-CN",
-      "title": "顺应",
-      "summary": "顺应是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "顺从（宜人性）",
+      "summary": "顺从描述在冲突中让步和配合的倾向，是宜人性维度中与冲突处理风格相关的细分面向。",
       "seo": {
-        "title": "顺应 | FermatMind Big Five",
-        "description": "顺应是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "顺从｜大五人格 30 个细分面向",
+        "description": "顺从描述在冲突中让步和配合的倾向，是宜人性维度中与冲突处理风格相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/compliance",
@@ -262,57 +409,106 @@
         "path": "/zh/personality/big-five/facets/compliance"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/compliance",
-        "zh-CN": "/zh/personality/big-five/facets/compliance"
+        "zh-CN": "/zh/personality/big-five/facets/compliance",
+        "en": "/en/personality/big-five/facets/compliance"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "顺从描述在冲突中让步和配合的倾向，是宜人性维度中与冲突处理风格相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是顺从？",
+          "body": "顺从是宜人性维度中与冲突回避和配合意愿相关的细分面向。高分通常表示在冲突中倾向于退让和寻求和解，不喜欢对抗和竞争，认为维持关系和谐比争赢更重要。低分通常表示在冲突中不回避对抗，敢于坚持立场和挑战不同意见，认为把问题说清楚比表面的和谐更重要。顺从不是软弱——它是在冲突中优先选择关系还是立场的差异。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：冲突中首先考虑如何维护关系，不介意做出让步以达成共识，在需要协调多方利益和化解矛盾的场景中有优势，可能因为过度退让而压抑了自己的合理需求。\n\n**偏低时**：在冲突中不回避争论，愿意直面分歧并坚持自己的立场，在需要维护原则和推动变革的场景中有优势，但可能在关系维护上付出较高的沟通成本。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "compliance-faq-1",
+          "question": "顺从和讨好有什么不同？",
+          "answer": "顺从是在冲突中选择配合和退让的策略倾向，前提是你清楚自己的立场并自愿选择退让。讨好则是出于对被拒绝或不被喜欢的恐惧而压抑真实需求，常常伴随焦虑和自我否定。前者是策略，后者是防御。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "顺应"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "顺从的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "宜人性",
-          "target_code": "agreeableness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/agreeableness"
+          "href": "/zh/personality/big-five/agreeableness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "顺应是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -325,16 +521,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "modesty",
       "entity_key": "modesty",
       "slug": "big-five/facets/modesty",
       "locale": "zh-CN",
-      "title": "谦逊",
-      "summary": "谦逊是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "谦逊（宜人性）",
+      "summary": "谦逊描述对自己成就的低调呈现和自我评价的倾向，是宜人性维度中与自我展示风格相关的细分面向。",
       "seo": {
-        "title": "谦逊 | FermatMind Big Five",
-        "description": "谦逊是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "谦逊｜大五人格 30 个细分面向",
+        "description": "谦逊描述对自己成就的低调呈现和自我评价的倾向，是宜人性维度中与自我展示风格相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/modesty",
@@ -342,57 +538,106 @@
         "path": "/zh/personality/big-five/facets/modesty"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/modesty",
-        "zh-CN": "/zh/personality/big-five/facets/modesty"
+        "zh-CN": "/zh/personality/big-five/facets/modesty",
+        "en": "/en/personality/big-five/facets/modesty"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "谦逊描述对自己成就的低调呈现和自我评价的倾向，是宜人性维度中与自我展示风格相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是谦逊？",
+          "body": "谦逊是宜人性维度中与自我呈现相关的细分面向。高分通常表示不倾向于谈论自己的成就和优势，在评价自己时偏保守和克制，让他人有机会展示。低分通常表示对自己的成就和优势有较高的认知和表达意愿，不回避展示自己的实力。谦逊不是自卑——高谦逊者可以清楚地知道自己的优势，只是选择不主动展示。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：不喜欢成为关注焦点，对自己的成就轻描淡写，倾向于将成功归因于外部因素，在需要团队协作和低调领导的场景中有优势，可能在需要自我推销的环境中吃亏。\n\n**偏低时**：对自己的能力有自信的表达，不回避谈论自己的成就和优势，在需要突出个人能力和竞争性展示的场景中有优势，但可能在强调团队和谐的文化中被视为不够谦虚。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "modesty-faq-1",
+          "question": "谦逊分数高代表自卑吗？",
+          "answer": "完全不是。谦逊是一种社交风格——你选择如何呈现自己。一个高谦逊的人可以非常自信，只是觉得没有必要大声说出来。自卑则是内心深处对自己的否定，两者的心理机制完全不同。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "谦逊"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "谦逊的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "宜人性",
-          "target_code": "agreeableness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/agreeableness"
+          "href": "/zh/personality/big-five/agreeableness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "谦逊是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
@@ -405,16 +650,16 @@
     },
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "tender-mindedness",
       "entity_key": "tender-mindedness",
       "slug": "big-five/facets/tender-mindedness",
       "locale": "zh-CN",
-      "title": "柔软心肠",
-      "summary": "柔软心肠是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。",
+      "title": "温和（宜人性）",
+      "summary": "温和描述对他人处境产生同情和关怀的倾向，是宜人性维度中与共情敏感性相关的细分面向。",
       "seo": {
-        "title": "柔软心肠 | FermatMind Big Five",
-        "description": "柔软心肠是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
+        "title": "温和｜大五人格 30 个细分面向",
+        "description": "温和描述对他人处境产生同情和关怀的倾向，是宜人性维度中与共情敏感性相关的细分面向。"
       },
       "robots": "noindex,follow",
       "canonical_path": "/zh/personality/big-five/facets/tender-mindedness",
@@ -422,57 +667,106 @@
         "path": "/zh/personality/big-five/facets/tender-mindedness"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/tender-mindedness",
-        "zh-CN": "/zh/personality/big-five/facets/tender-mindedness"
+        "zh-CN": "/zh/personality/big-five/facets/tender-mindedness",
+        "en": "/en/personality/big-five/facets/tender-mindedness"
       },
-      "faq": [],
+      "sections": [
+        {
+          "key": "quick_answer",
+          "title": "快速回答",
+          "body": "温和描述对他人处境产生同情和关怀的倾向，是宜人性维度中与共情敏感性相关的细分面向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "what_is",
+          "title": "什么是温和？",
+          "body": "温和是宜人性维度中与共情和关怀相关的细分面向。高分通常表示容易被他人的困境和情绪所触动，对弱势群体有较强的关怀和保护欲，在做涉及人的决策时优先考虑感受因素。低分通常表示在做决策时更依赖逻辑和原则，不太容易被情绪或他人的处境所影响，能在需要客观判断的场景中保持理性。温和不是冷漠——低温和者仍然可以关心他人，只是方式更偏向理性和原则导向。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        },
+        {
+          "key": "high_low",
+          "title": "偏高与偏低",
+          "body": "**偏高时**：容易被感人的故事或他人的困境触动，在做决定时优先考虑对人的影响，在需要人本关怀的角色（如护理、教育、心理咨询）中有天然优势，可能在需要做出艰难决策时因为情感因素而犹豫。\n\n**偏低时**：决策时更依赖逻辑和客观标准，不容易因情感诉求而改变立场，在需要秉公处理、严格执行标准和危机决策的场景中有优势。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "id": "tender-mindedness-faq-1",
+          "question": "温和分数低就是冷酷无情吗？",
+          "answer": "不是。低温和的人更倾向于用理性和原则而非情感来指导对他人的关怀。一个外科医生可能温和分数不高，但他/她能通过专业能力和精准判断来救人——这是另一种形式的关心。",
+          "evidence_ids": [
+            "A1",
+            "A8"
+          ]
+        }
+      ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "柔软心肠"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model"
+        "image_url": null,
+        "alt": "温和的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "该 facet 仅作 taxonomy 草稿，不应作为完整 SEO 正文或官方类型页面。",
+        "summary": "本页解释大五人格的公共知识和沟通语言，不解读个人测评结果，也不替代专业判断。",
         "not_for": [
-          "clinical diagnosis",
-          "employment screening",
-          "deterministic life decisions"
+          "临床诊断",
+          "心理治疗建议",
+          "招聘筛选",
+          "能力或智力判断",
+          "职业或伴侣关系决定"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "method_boundary",
-          "note": "产品文案应使用“倾向”“可能”“通常”等限定表达。"
-        }
-      ],
       "internal_links": [
         {
+          "label": "大五人格",
+          "href": "/zh/personality/big-five",
+          "relationship": "hub",
+          "target_code": null
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_overview",
+          "target_code": null
+        },
+        {
           "label": "宜人性",
-          "target_code": "agreeableness",
-          "relationship": "parent_domain",
-          "href": "/zh/personality/big-five/agreeableness"
+          "href": "/zh/personality/big-five/agreeableness",
+          "relationship": "domain",
+          "target_code": null
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "note": "本页依据大五人格作为连续特质模型的公开研究脉络撰写，参考 BFI-2、五因素模型综述、IPIP 公开量表生态和 30 facets 文献。"
+        },
+        {
+          "note": "这些说明用于理解人格语言和沟通差异，不用于临床诊断、心理治疗、招聘筛选、能力判断或职业决定。"
+        },
+        {
+          "note": "竞品页面只用于发现用户问题和内容缺口，不复制其结构、示例或措辞。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_raw_untrusted",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_stub",
-      "review_state": "codex_raw_untrusted",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
-      "sections": [
-        {
-          "key": "taxonomy_note",
-          "title": "草稿说明",
-          "body_md": "柔软心肠是宜人性下的一个细分 facet。本版本保留为草稿 taxonomy，不作为独立公开 SEO 页面。"
-        }
-      ],
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10-raw",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "source_ledger_refs": [
         "SHARED",
         "I1",
