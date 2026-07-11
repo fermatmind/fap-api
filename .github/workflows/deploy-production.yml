@@ -32,13 +32,6 @@ env:
   TARGET: production
   DEPLOYER_VERSION: "7.5.12"
   DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
-  DEPLOY_USER: "ubuntu"
-  DEPLOY_PORT: "22"
-  DEPLOY_HOST: "139.224.130.204"
-  DEPLOY_PATH: "/var/www/fap-api"
-  HEALTHCHECK_URL: "https://api.fermatmind.com/api/healthz"
-  AUTH_GUEST_CHECK_URL: "https://api.fermatmind.com/api/v0.3/auth/guest"
-  OPS_HOST: "ops.fermatmind.com"
   SSH_RETRY_ATTEMPTS: "3"
   SSH_RETRY_DELAY_SECONDS: "10"
   DEPLOY_SHA: ${{ github.event_name == 'workflow_dispatch' && inputs.expected_release_sha || github.event.workflow_run.head_sha }}
@@ -136,6 +129,19 @@ jobs:
       cancel-in-progress: false
     environment:
       name: production
+    env:
+      DEPLOY_USER: ${{ vars.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ vars.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ vars.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ vars.PRODUCTION_DEPLOY_PATH }}
+      DEPLOY_USER_PROD: ${{ vars.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT_PROD: ${{ vars.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST_PROD: ${{ vars.PRODUCTION_DEPLOY_HOST }}
+      DEPLOY_PATH_PROD: ${{ vars.PRODUCTION_DEPLOY_PATH }}
+      HEALTHCHECK_URL: ${{ vars.PRODUCTION_HEALTHCHECK_URL }}
+      AUTH_GUEST_CHECK_URL: ${{ vars.PRODUCTION_AUTH_GUEST_CHECK_URL }}
+      OPS_HOST: ${{ vars.PRODUCTION_OPS_HOST }}
 
     steps:
       - name: Checkout deploy revision
@@ -158,11 +164,43 @@ jobs:
           echo "::notice::Single-developer mode: a latest-main revision with a successful staging deploy is eligible for automatic production deployment regardless of PR labels or changed paths."
           exit 0
 
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH
+            DEPLOY_USER_PROD DEPLOY_PORT_PROD DEPLOY_HOST_PROD DEPLOY_PATH_PROD
+            HEALTHCHECK_URL AUTH_GUEST_CHECK_URL OPS_HOST
+          )
+          for name in "${required[@]}"; do
+            if [ -z "${!name:-}" ]; then
+              echo "Protected production environment variable ${name} is required." >&2
+              exit 2
+            fi
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [ "$DEPLOY_PORT" -ge 1 ] && [ "$DEPLOY_PORT" -le 65535 ]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [ "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST" ]
+          [[ "$OPS_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          [[ "$HEALTHCHECK_URL" =~ ^https://[A-Za-z0-9.-]+/[^[:space:]]+$ ]]
+          [[ "$AUTH_GUEST_CHECK_URL" =~ ^https://[A-Za-z0-9.-]+/[^[:space:]]+$ ]]
+          [ "$DEPLOY_USER" = "$DEPLOY_USER_PROD" ]
+          [ "$DEPLOY_PORT" = "$DEPLOY_PORT_PROD" ]
+          [ "$DEPLOY_HOST" = "$DEPLOY_HOST_PROD" ]
+          [ "$DEPLOY_PATH" = "$DEPLOY_PATH_PROD" ]
+          echo "Protected production topology validation passed without disclosing values."
+
       - name: Refuse retired production target
         shell: bash
         run: |
           set -euo pipefail
-          if [ "$DEPLOY_HOST" = "122.152.221.126" ]; then
+          if [ "$DEPLOY_HOST" = "$RETIRED_DEPLOY_HOST" ]; then
             echo "Refusing production deploy to retired Tencent Node3"
             exit 1
           fi
