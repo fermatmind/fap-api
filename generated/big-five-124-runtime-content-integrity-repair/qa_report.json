@@ -1,0 +1,23 @@
+{
+  "schema_version": "big_five_124_runtime_content_integrity_repair_qa_v1",
+  "train_id": "BIG5-124-RUNTIME-CONTENT-INTEGRITY-REPAIR-01",
+  "outcome": "pass",
+  "seed_sha256": "cbfda8484df4065302f9be208f3488e5fe9015fde516ffa077dc15d7c8c0b111",
+  "final_state_sha256": "6121801070271f14c0d07dc4a97e719a6e57d872b4be28a580cf8e23df9908c0",
+  "counts": {
+    "assets": 124,
+    "en": 62,
+    "zh": 62,
+    "canonical": 114,
+    "redirect_aliases": 10,
+    "published_indexable": 114,
+    "zh_domain_range_repaired": 20,
+    "hubs_with_seven_links": 2
+  },
+  "source_layers": [
+    "generated/big-five-124-publish-import-dryrun/big_five_124_merged_v1_seed.json",
+    "generated/big-five-114-indexability-publish-gate/big_five_93_indexability_promotion_v1_seed.json",
+    "generated/big-five-zh-published-link-hreflang-repair/big_five_zh_published_link_hreflang_repair_20_seed.json"
+  ],
+  "production_action": "not_executed"
+}
