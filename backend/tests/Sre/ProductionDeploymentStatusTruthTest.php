@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class ProductionDeploymentStatusTruthTest extends TestCase
 {
-    public function test_stale_manual_sha_fails_closed_before_the_environment_deploy_job(): void
+    public function test_standard_stale_sha_fails_closed_before_the_environment_deploy_job(): void
     {
         $source = $this->workflow();
         $eligibility = $this->between($source, '  deployment-eligibility:', '  deploy-production:');
@@ -17,7 +17,9 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
 
         $this->assertStringNotContainsString('environment:', $eligibility);
         $this->assertStringContainsString('if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]', $eligibility);
-        $this->assertStringContainsString('Manual production deploy refused because expected_release_sha is not latest main.', $eligibility);
+        $this->assertStringContainsString('Manual standard production deploy refused because expected_release_sha is not latest main.', $eligibility);
+        $this->assertStringContainsString('Code-only production deploy refused because expected_release_sha is not reachable from latest main.', $eligibility);
+        $this->assertStringContainsString('git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_SHA"', $eligibility);
         $this->assertStringContainsString('exit 1', $eligibility);
         $this->assertStringNotContainsString('eligible=false', $eligibility);
         $this->assertStringContainsString('needs: deployment-eligibility', $deploy);
@@ -33,6 +35,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             'Deploy production with Deployer',
             'Restart queue workers through Laravel queue restart',
             'Verify deployed revision',
+            'Record production release candidate',
             'Healthcheck and contract smoke',
             'Ops entry and asset smoke',
         ] as $step) {
@@ -54,9 +57,11 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('expected_deployed_revision as a lowercase 40-character deployed REVISION', $eligibility);
         $this->assertStringContainsString('git merge-base --is-ancestor "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"', $eligibility);
         $this->assertStringContainsString('git diff --no-renames --name-only "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"', $eligibility);
-        $this->assertStringContainsString('code-only scope refused authority or generated path:', $eligibility);
+        $this->assertStringContainsString('code-only scope refused authority path:', $eligibility);
         $this->assertStringContainsString('code-only scope refused unknown path:', $eligibility);
         $this->assertStringContainsString('generated/*', $eligibility);
+        $this->assertStringNotContainsString('docs/seo/*|generated/*', $eligibility);
+        $this->assertStringContainsString('docs/codex/*|generated/*)', $eligibility);
         $this->assertStringContainsString('backend/database/*', $eligibility);
         $this->assertStringContainsString('backend/app/Services/Cms/*', $eligibility);
         $this->assertStringContainsString('cumulative deployed-revision diff contains a forbidden or unknown path', $eligibility);
@@ -70,6 +75,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('code-only deploy: auth guest POST contract probe intentionally skipped', $deploy);
         $this->assertStringContainsString('Verify code-only deployed baseline before writes', $deploy);
         $this->assertStringContainsString('remote deployed REVISION does not match expected_deployed_revision', $deploy);
+        $this->assertStringContainsString('main_commits_not_deployed: ${UNDEPLOYED_COUNT}', $deploy);
     }
 
     #[DataProvider('deploymentOutcomes')]

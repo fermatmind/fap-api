@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       expected_release_sha:
-        description: "Exact 40-character latest-main SHA to deploy"
+        description: "Exact 40-character staged release SHA to deploy"
         required: true
         type: string
       staging_run_id:
@@ -56,6 +56,7 @@ jobs:
       eligible: ${{ steps.latest_main_guard.outputs.eligible }}
       deploy_sha: ${{ steps.latest_main_guard.outputs.deploy_sha }}
       deploy_mode: ${{ steps.resolve_deploy_mode.outputs.deploy_mode }}
+      main_sha: ${{ steps.latest_main_guard.outputs.main_sha }}
     steps:
       - name: Checkout deploy revision for eligibility
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -119,11 +120,11 @@ jobs:
               CODE_ONLY_SCOPE=true
               for path in "${CHANGED_FILES[@]}"; do
                 case "$path" in
-                  backend/database/*|backend/content_assets/*|backend/content_packs/*|backend/content_baselines/*|content_assets/*|content_packages/*|content_baselines/*|docs/seo/*|generated/*|backend/storage/*|backend/app/Services/Cms/*|backend/app/Filament/*|backend/app/Models/*|backend/resources/views/*)
+                  backend/database/*|backend/content_assets/*|backend/content_packs/*|backend/content_baselines/*|content_assets/*|content_packages/*|content_baselines/*|docs/seo/*|backend/storage/*|backend/app/Services/Cms/*|backend/app/Filament/*|backend/app/Models/*|backend/resources/views/*)
                     CODE_ONLY_SCOPE=false
-                    echo "code-only scope refused authority or generated path: $path" >&2
+                    echo "code-only scope refused authority path: $path" >&2
                     ;;
-                  backend/app/*|backend/bootstrap/*|backend/config/*|backend/public/*|backend/resources/*|backend/routes/*|backend/tests/*|tests/*|backend/composer.json|backend/composer.lock|deploy.php|.github/workflows/deploy-production.yml|docs/codex/*)
+                  backend/app/*|backend/bootstrap/*|backend/config/*|backend/public/*|backend/resources/*|backend/routes/*|backend/tests/*|tests/*|backend/composer.json|backend/composer.lock|deploy.php|.github/workflows/deploy-production.yml|docs/codex/*|generated/*)
                     ;;
                   *)
                     CODE_ONLY_SCOPE=false
@@ -161,18 +162,35 @@ jobs:
              and ([.jobs[] | select(.name == "Deploy (staging)" and .conclusion == "success")] | length) == 1' \
             <<<"$JOBS_JSON" >/dev/null
 
-      - name: Confirm approved revision is still latest main
+      - name: Confirm approved release satisfies deployment mode policy
         id: latest_main_guard
         shell: bash
+        env:
+          DEPLOY_MODE: ${{ steps.resolve_deploy_mode.outputs.deploy_mode }}
         run: |
           set -euo pipefail
-          git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+          git fetch --no-tags origin main:refs/remotes/origin/main
           LATEST_MAIN_SHA="$(git rev-parse origin/main)"
           echo "deploy_sha=$DEPLOY_SHA" >> "$GITHUB_OUTPUT"
-          if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
-            echo "Manual production deploy refused because expected_release_sha is not latest main." >&2
-            exit 1
-          fi
+          echo "main_sha=$LATEST_MAIN_SHA" >> "$GITHUB_OUTPUT"
+          case "$DEPLOY_MODE" in
+            standard)
+              if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
+                echo "Manual standard production deploy refused because expected_release_sha is not latest main." >&2
+                exit 1
+              fi
+              ;;
+            code_only)
+              if ! git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_SHA"; then
+                echo "Code-only production deploy refused because expected_release_sha is not reachable from latest main." >&2
+                exit 1
+              fi
+              ;;
+            *)
+              echo "Resolved deploy mode is invalid." >&2
+              exit 2
+              ;;
+          esac
           echo "eligible=true" >> "$GITHUB_OUTPUT"
 
   deploy-production:
@@ -207,6 +225,7 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: ${{ needs.deployment-eligibility.outputs.deploy_sha }}
+          fetch-depth: 0
 
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
@@ -460,6 +479,7 @@ jobs:
           ssh_retry "cd '$DEPLOY_PATH/current/backend' && php artisan queue:restart"
 
       - name: Verify deployed revision
+        id: deployed_revision
         shell: bash
         run: |
           set -euo pipefail
@@ -482,6 +502,7 @@ jobs:
           DEPLOYED_SHA="$(ssh_retry "cd '$DEPLOY_PATH/current' && if [ -f REVISION ]; then tr -d '\r\n' < REVISION; else git rev-parse HEAD; fi")"
           echo "deployed_sha=$DEPLOYED_SHA"
           test "$DEPLOYED_SHA" = "$DEPLOY_SHA"
+          echo "deployed_sha=$DEPLOYED_SHA" >> "$GITHUB_OUTPUT"
 
       - name: Healthcheck and contract smoke
         shell: bash
@@ -582,3 +603,27 @@ jobs:
           retry "Ops forms.css smoke" 5 ssh_remote "curl -fsSI --resolve '${OPS_HOST}:443:127.0.0.1' 'https://${OPS_HOST}/css/filament/forms/forms.css' >/dev/null"
           retry "Ops support.css smoke" 5 ssh_remote "curl -fsSI --resolve '${OPS_HOST}:443:127.0.0.1' 'https://${OPS_HOST}/css/filament/support/support.css' >/dev/null"
           retry "Ops app.js smoke" 5 ssh_remote "curl -fsSI --resolve '${OPS_HOST}:443:127.0.0.1' 'https://${OPS_HOST}/js/filament/filament/app.js' >/dev/null"
+
+      - name: Record production release candidate
+        shell: bash
+        env:
+          MAIN_SHA: ${{ needs.deployment-eligibility.outputs.main_sha }}
+          DEPLOYED_SHA: ${{ steps.deployed_revision.outputs.deployed_sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          git cat-file -e "${MAIN_SHA}^{commit}"
+          UNDEPLOYED_COUNT="$(git rev-list --count "${DEPLOY_SHA}..${MAIN_SHA}")"
+          {
+            echo "## Production release record"
+            echo "- target_release_sha: ${DEPLOY_SHA}"
+            echo "- main_sha_at_eligibility: ${MAIN_SHA}"
+            echo "- deployed_sha: ${DEPLOYED_SHA}"
+            echo "- deploy_mode: ${DEPLOY_MODE}"
+            echo "- main_commits_not_deployed: ${UNDEPLOYED_COUNT}"
+            if [ "$UNDEPLOYED_COUNT" -gt 0 ]; then
+              echo ""
+              echo "### Main commits intentionally not deployed"
+              git log --format='- %H %s' "${DEPLOY_SHA}..${MAIN_SHA}"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
