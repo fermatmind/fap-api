@@ -15,6 +15,14 @@ class CreateMediaAsset extends CreateRecord
 {
     protected static string $resource = MediaAssetResource::class;
 
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['status'] = MediaAsset::STATUS_DRAFT;
+        $data['is_public'] = false;
+
+        return $data;
+    }
+
     protected function afterCreate(): void
     {
         if ($this->record instanceof MediaAsset) {

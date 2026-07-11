@@ -39590,3 +39590,47 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: AUDIT-PRR2-API-08
+    repo: fap-api
+    depends_on: [AUDIT-PRR2-API-03]
+    branch: codex/audit-prr2-api-08-media-promotion-state-machine
+    title: "AUDIT-PRR2-API-08: enforce verified media public promotion"
+    train_scope: prr2_media_promotion_state_machine
+    status: user_authorized
+    scope:
+      - Force CMS media creates, edits, and internal writes to stage as draft/private.
+      - Require source and complete standard variants to be OSS-synced and CDN-verified before verified state.
+      - Permit public promotion only from verified state under a row lock.
+      - Return a stable 409 contract when requested promotion is blocked.
+    allowed_paths:
+      - backend/app/Filament/Ops/Resources/MediaAssetResource.php
+      - backend/app/Filament/Ops/Resources/MediaAssetResource/Pages/CreateMediaAsset.php
+      - backend/app/Filament/Ops/Resources/MediaAssetResource/Pages/EditMediaAsset.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php
+      - backend/app/Models/MediaAsset.php
+      - backend/app/Services/Cms/MediaAssetPromotionService.php
+      - backend/tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php
+      - backend/tests/Feature/V0_5/MediaLibraryOssSyncTest.php
+      - backend/tests/Unit/Services/Cms/MediaAssetPromotionServiceTest.php
+      - backend/tests/Unit/Services/Cms/MediaAssetStorageSyncServiceTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Upload media, write CMS/production data, change article publication authority, import baselines, change SEO runtime, deploy, or promote any real asset.
+    validation:
+      - cd backend && php artisan test tests/Unit/Services/Cms/MediaAssetPromotionServiceTest.php tests/Unit/Services/Cms/MediaAssetStorageSyncServiceTest.php tests/Feature/V0_5/MediaLibraryOssSyncTest.php tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Models/MediaAsset.php app/Services/Cms/MediaAssetPromotionService.php app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php app/Filament/Ops/Resources/MediaAssetResource.php app/Filament/Ops/Resources/MediaAssetResource/Pages/CreateMediaAsset.php app/Filament/Ops/Resources/MediaAssetResource/Pages/EditMediaAsset.php tests/Unit/Services/Cms/MediaAssetPromotionServiceTest.php tests/Feature/V0_5/MediaLibraryOssSyncTest.php tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

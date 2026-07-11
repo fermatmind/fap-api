@@ -49,7 +49,9 @@ final class MediaLibraryOssSyncTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('asset.asset_key', 'pr-media-01-cover')
             ->assertJsonPath('asset.sync_status', MediaAsset::SYNC_SYNCED)
-            ->assertJsonPath('asset.cdn_status', MediaAsset::CDN_VERIFIED);
+            ->assertJsonPath('asset.cdn_status', MediaAsset::CDN_VERIFIED)
+            ->assertJsonPath('asset.status', MediaAsset::STATUS_PUBLISHED)
+            ->assertJsonPath('asset.is_public', true);
 
         foreach (['hero', 'card', 'thumbnail', 'og', 'preload'] as $variantKey) {
             $response->assertJsonFragment([
@@ -59,11 +61,10 @@ final class MediaLibraryOssSyncTest extends TestCase
             ]);
         }
 
-        Storage::disk('s3')->assertExists('storage/media-library/variants/pr-media-01-cover/hero_1600x900.jpg');
-        Storage::disk('s3')->assertExists('storage/media-library/variants/pr-media-01-cover/card_800x450.jpg');
-        Storage::disk('s3')->assertExists('storage/media-library/variants/pr-media-01-cover/thumbnail_400x225.jpg');
-        Storage::disk('s3')->assertExists('storage/media-library/variants/pr-media-01-cover/og_1200x630.jpg');
-        Storage::disk('s3')->assertExists('storage/media-library/variants/pr-media-01-cover/preload_64x36.jpg');
+        $asset = MediaAsset::query()->withoutGlobalScopes()->where('asset_key', 'pr-media-01-cover')->firstOrFail();
+        foreach ($asset->variants()->whereIn('variant_key', ['hero', 'card', 'thumbnail', 'og', 'preload'])->get() as $variant) {
+            Storage::disk('s3')->assertExists('storage/'.ltrim((string) $variant->path, '/'));
+        }
 
         $this->assertDatabaseHas('media_assets', [
             'asset_key' => 'pr-media-01-cover',
@@ -91,13 +92,18 @@ final class MediaLibraryOssSyncTest extends TestCase
                 'is_public' => true,
             ]);
 
-        $response->assertStatus(200)
-            ->assertJsonPath('ok', true)
+        $response->assertStatus(409)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'MEDIA_PROMOTION_BLOCKED')
             ->assertJsonPath('asset.sync_status', MediaAsset::SYNC_FAILED)
-            ->assertJsonPath('asset.cdn_status', MediaAsset::CDN_SKIPPED);
+            ->assertJsonPath('asset.cdn_status', MediaAsset::CDN_SKIPPED)
+            ->assertJsonPath('asset.status', MediaAsset::STATUS_DRAFT)
+            ->assertJsonPath('asset.is_public', false);
 
         $asset = MediaAsset::query()->withoutGlobalScopes()->where('asset_key', 'pr-media-01-failed-cover')->firstOrFail();
         $this->assertSame(MediaAsset::SYNC_FAILED, (string) $asset->sync_status);
+        $this->assertSame(MediaAsset::STATUS_DRAFT, (string) $asset->status);
+        $this->assertFalse((bool) $asset->is_public);
         $this->assertNotSame('', trim((string) $asset->last_error));
     }
 
