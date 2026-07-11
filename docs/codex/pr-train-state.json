@@ -85759,9 +85759,9 @@
     "base": "main",
     "branch": "codex/big5-en-facet-openness-content-package-01",
     "depends_on": ["BIG5-124-PUBLISH-READINESS-AUDIT-01"],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "5c2a7a10e",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2969",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -85806,7 +85806,8 @@
     "transitions": [
       {"at": "2026-07-11T09:10:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the third locked train item after verifying its Openness dependency on origin/main and started in an isolated clean worktree; no production action is in scope."},
       {"at": "2026-07-11T09:15:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."},
-      {"at": "2026-07-11T09:17:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at 5c2a7a10e."}
+      {"at": "2026-07-11T09:17:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at 5c2a7a10e."},
+      {"at": "2026-07-11T09:19:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2969; required GitHub checks are pending."}
     ]
   },
   "AUDIT-PRR2-API-01": {
