@@ -39973,6 +39973,22 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-EN-LEGACY-POLARITY-CONTENT-PACKAGE-01
+    repo: fap-api
+    depends_on: [BIG5-EN-FACET-HUB-CONTENT-PACKAGE-01]
+    branch: codex/big5-en-legacy-polarity-content-package-01
+    title: "BIG5-EN-LEGACY-POLARITY-CONTENT-PACKAGE-01: add ten English Legacy polarity content assets"
+    train_scope: big5_en_legacy_polarity_content_package
+    status: user_authorized
+    scope: [Generate source ledger and audited V1 content for exactly ten English Legacy polarity canonical assets with nine sections five FAQs and seven links while preserving noindex.]
+    allowed_paths: [generated/big-five-en-legacy-polarity-content-package/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [node generated/big-five-en-legacy-polarity-content-package/build-package.mjs, node generated/big-five-en-legacy-polarity-content-package/validate-package.mjs, git diff --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []

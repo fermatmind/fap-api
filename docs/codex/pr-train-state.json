@@ -87303,6 +87303,7 @@
     "scope_validation":{"allowed_paths_only":false,"local_validation_passed":false,"github_checks_green":false,"post_merge_revalidated":false},
     "transitions":[{"at":"2026-07-11T12:00:00Z","from":"unregistered","to":"in_progress","note":"Registered the explicitly authorized English Facet Hub corrective package; no production action is in scope."},{"at":"2026-07-11T12:05:00Z","from":"in_progress","to":"pr_open","note":"Local package and scope checks passed; committed at e63378ca8 and opened PR #2983."}]
   },
+  "BIG5-EN-LEGACY-POLARITY-CONTENT-PACKAGE-01":{"id":"BIG5-EN-LEGACY-POLARITY-CONTENT-PACKAGE-01","repo":"fap-api","branch":"codex/big5-en-legacy-polarity-content-package-01","depends_on":["BIG5-EN-FACET-HUB-CONTENT-PACKAGE-01"],"status":"local_checks_passed","commit_sha":"852c627b5","pr_url":null,"failure_reason":null,"merged_at":null,"remote_branch_deleted":false,"local_cleanup_executed":false,"checks":{"manifest_registration":{"status":"pass"},"local_validation":{"status":"pass"}},"transitions":[{"at":"2026-07-11T12:20:00Z","from":"unregistered","to":"local_checks_passed","note":"User-authorized ten-asset package passed build and QA; no production action."}]},
   "AUDIT-PRR2-API-01": {
     "id": "AUDIT-PRR2-API-01",
     "repo": "fap-api",
