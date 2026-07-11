@@ -9,9 +9,11 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ContentPage;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityPublicContentAsset;
 use App\Models\ResearchReport;
 use App\Models\Scopes\TenantScope;
 use App\Services\Scale\ScaleRegistry;
+use App\Services\SeoIntel\UrlTruthHandoffArtifact;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use Illuminate\Support\Carbon;
 
@@ -47,6 +49,12 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
 
     private ?string $personalityProfilesUnavailableReason = null;
 
+    private bool $enneagramAssetsAttempted = false;
+
+    private bool $enneagramAssetsAvailable = false;
+
+    private ?string $enneagramAssetsUnavailableReason = null;
+
     /**
      * @return list<UrlTruthInventoryRecord>
      */
@@ -58,6 +66,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             ...$this->contentPageCandidates(),
             ...$this->articleCandidates(),
             ...$this->personalityProfileCandidates(),
+            ...$this->enneagramPersonalityPublicContentAssetCandidates(),
             ...$this->configuredBackendAuthorityCandidates(),
         ]);
     }
@@ -83,6 +92,9 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             'personality_profiles_attempted' => $this->personalityProfilesAttempted,
             'personality_profiles_available' => $this->personalityProfilesAvailable,
             'personality_profiles_unavailable_reason' => $this->personalityProfilesUnavailableReason,
+            'enneagram_assets_attempted' => $this->enneagramAssetsAttempted,
+            'enneagram_assets_available' => $this->enneagramAssetsAvailable,
+            'enneagram_assets_unavailable_reason' => $this->enneagramAssetsUnavailableReason,
             'configured_backend_authority_canary_available' => $this->configuredBackendAuthorityCandidates() !== [],
             'fetches_public_html' => false,
             'external_api_calls' => false,
@@ -380,6 +392,91 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
     /**
      * @return list<UrlTruthInventoryRecord>
      */
+    private function enneagramPersonalityPublicContentAssetCandidates(): array
+    {
+        $this->enneagramAssetsAttempted = true;
+
+        try {
+            $assets = PersonalityPublicContentAsset::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM)
+                ->whereIn('entity_type', PersonalityPublicContentAsset::FRAMEWORK_ENTITY_TYPES[PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM])
+                ->whereIn('locale', PersonalityPublicContentAsset::SUPPORTED_LOCALES)
+                ->where('is_public', true)
+                ->where('launch_state', PersonalityPublicContentAsset::LAUNCH_PUBLISHED)
+                ->where('robots', PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW)
+                ->where('index_eligible', true)
+                ->where('sitemap_eligible', true)
+                ->orderBy('locale')
+                ->orderBy('entity_type')
+                ->orderBy('entity_key')
+                ->get();
+        } catch (\Throwable) {
+            $this->enneagramAssetsUnavailableReason = 'enneagram_personality_public_content_assets_unavailable';
+
+            return [];
+        }
+
+        $records = [];
+        foreach ($assets as $asset) {
+            if (! $asset instanceof PersonalityPublicContentAsset) {
+                continue;
+            }
+
+            $path = '/'.ltrim((string) data_get($asset->canonical_json, 'path', ''), '/');
+            $sourceHash = strtolower(trim((string) $asset->source_hash));
+            $updatedAt = $asset->updated_at instanceof Carbon ? $asset->updated_at : null;
+            $publishedAt = $asset->published_at instanceof Carbon ? $asset->published_at : null;
+            $lastmodAt = $updatedAt ?? $publishedAt;
+            $entityType = (string) $asset->entity_type;
+            $entityKey = (string) $asset->entity_key;
+
+            $records[] = new UrlTruthInventoryRecord(
+                canonicalUrl: $this->canonicalUrl($path),
+                locale: (string) $asset->locale,
+                pageEntityType: UrlTruthHandoffArtifact::ENNEAGRAM_PERSONALITY_PUBLIC_CONTENT_ASSET_PAGE_ENTITY_TYPE,
+                entityIdOrSlug: (string) $asset->locale.':'.$entityType.':'.$entityKey,
+                sourceAuthority: UrlTruthHandoffArtifact::SOURCE_AUTHORITY,
+                indexabilityState: 'indexable',
+                lastmodAt: $lastmodAt,
+                lastmodSource: 'personality_public_content_assets.updated_at',
+                cluster: 'personality',
+                entitySource: 'personality_public_content_assets',
+                authorityStatus: 'published_approved',
+                sourceUpdatedAt: $updatedAt ?? $publishedAt,
+                metadata: [
+                    'source_table_hash' => hash('sha256', 'personality_public_content_assets'),
+                    'canonical_path_hash' => hash('sha256', $path),
+                    'asset_entity_type' => $entityType,
+                    'entity_key_hash' => hash('sha256', $entityKey),
+                    'source_package_hash' => hash('sha256', (string) $asset->source_package),
+                    'source_hash' => $sourceHash,
+                    'content_hash' => $sourceHash,
+                    'content_hash_source' => 'personality_public_content_assets.source_hash',
+                    'claim_boundary_state' => 'claim_safe',
+                    'claim_safe' => true,
+                    'sitemap_eligible' => true,
+                    'publication_state' => 'published',
+                    'robots' => 'index',
+                ],
+                attributes: [
+                    'claim_safe' => true,
+                    'asset_entity_type' => $entityType,
+                    'entity_key_hash' => hash('sha256', $entityKey),
+                    'source_hash' => $sourceHash,
+                ],
+            );
+        }
+
+        $this->enneagramAssetsAvailable = count($records) === 116;
+        if (! $this->enneagramAssetsAvailable) {
+            $this->enneagramAssetsUnavailableReason = 'enneagram_personality_public_content_assets_not_exactly_116';
+        }
+
+        return $records;
+    }
+
     private function scaleCatalogCandidates(): array
     {
         $this->scaleCatalogAttempted = true;

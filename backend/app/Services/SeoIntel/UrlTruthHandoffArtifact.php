@@ -24,6 +24,8 @@ final class UrlTruthHandoffArtifact
 
     public const PERSONALITY_PROFILE_COMPARISON_PAGE_ENTITY_TYPE = 'personality_profile_comparison';
 
+    public const ENNEAGRAM_PERSONALITY_PUBLIC_CONTENT_ASSET_PAGE_ENTITY_TYPE = 'personality_public_content_asset';
+
     public const SOURCE_AUTHORITY = 'backend_cms';
 
     private const PRIVATE_ROUTE_FRAGMENTS = [
@@ -111,6 +113,17 @@ final class UrlTruthHandoffArtifact
             'entity_source_issue' => 'candidate_entity_source_not_personality_profiles',
             'route_issue' => 'candidate_route_not_personality_profile_comparison',
             'entity_identity_issue' => 'candidate_personality_profile_comparison_entity_id_invalid',
+        ],
+        self::ENNEAGRAM_PERSONALITY_PUBLIC_CONTENT_ASSET_PAGE_ENTITY_TYPE => [
+            'mode' => 'two_stage_enneagram_personality_public_content_asset_url_truth_handoff',
+            'route_regex' => '^/(en|zh)/personality/enneagram(?:/centers/(?:gut|heart|head)|/type-[1-9](?:/instincts/(?:self-preservation|social|one-to-one))?|/wings/(?:1w9|1w2|2w1|2w3|3w2|3w4|4w3|4w5|5w4|5w6|6w5|6w7|7w6|7w8|8w7|8w9|9w8|9w1))?$',
+            'entity_source' => 'personality_public_content_assets',
+            'route_fragment' => '/personality/enneagram',
+            'forbidden_route_fragments' => self::PRIVATE_ROUTE_FRAGMENTS,
+            'type_issue' => 'candidate_not_enneagram_personality_public_content_asset',
+            'entity_source_issue' => 'candidate_entity_source_not_personality_public_content_assets',
+            'route_issue' => 'candidate_route_not_enneagram_personality_public_content_asset',
+            'entity_identity_issue' => 'candidate_enneagram_personality_public_content_asset_identity_invalid',
         ],
     ];
 
@@ -224,6 +237,10 @@ final class UrlTruthHandoffArtifact
             }
 
             $records[] = $this->hydrateRecord($candidate);
+        }
+
+        if ($pageEntityType === self::ENNEAGRAM_PERSONALITY_PUBLIC_CONTENT_ASSET_PAGE_ENTITY_TYPE) {
+            array_push($issues, ...$this->enneagramCandidateSetIssues($artifact, $boundedCandidates));
         }
 
         return [
@@ -551,7 +568,93 @@ final class UrlTruthHandoffArtifact
                 || preg_match('/^([a-z]{4})-a-vs-\1-t$/i', $pathSlug) !== 1;
         }
 
+        if ($pageEntityType === self::ENNEAGRAM_PERSONALITY_PUBLIC_CONTENT_ASSET_PAGE_ENTITY_TYPE) {
+            $parts = explode(':', $entityIdOrSlug, 3);
+            if (count($parts) !== 3) {
+                return true;
+            }
+
+            [$entityLocale, $entityType, $entityKey] = $parts;
+            $expectedEntityTypes = ['hub', 'center', 'core_type', 'wing', 'instinctual_subtype'];
+
+            return ! in_array($entityLocale, ['en', 'zh-CN'], true)
+                || $entityLocale !== (string) ($candidate['locale'] ?? '')
+                || ! in_array($entityType, $expectedEntityTypes, true)
+                || $entityKey === ''
+                || data_get($candidate, 'metadata.asset_entity_type') !== $entityType
+                || data_get($candidate, 'metadata.entity_key_hash') !== hash('sha256', $entityKey);
+        }
+
         return true;
+    }
+
+    /**
+     * @param  array<string, mixed>  $artifact
+     * @param  list<mixed>  $candidates
+     * @return list<string>
+     */
+    private function enneagramCandidateSetIssues(array $artifact, array $candidates): array
+    {
+        $issues = [];
+        $expectedEntityCounts = [
+            'center' => 6,
+            'core_type' => 18,
+            'hub' => 2,
+            'instinctual_subtype' => 54,
+            'wing' => 36,
+        ];
+
+        if (($artifact['candidate_count'] ?? null) !== count($candidates)) {
+            $issues[] = 'enneagram_artifact_candidate_count_mismatch';
+        }
+
+        if (count($candidates) !== 116) {
+            $issues[] = 'enneagram_exact_candidate_count_mismatch';
+        }
+
+        $canonicalUrls = [];
+        $localeCounts = [];
+        $entityCounts = [];
+
+        foreach ($candidates as $index => $candidate) {
+            if (! is_array($candidate)) {
+                $issues[] = 'enneagram_candidate_invalid:'.$index;
+
+                continue;
+            }
+
+            $canonicalUrls[] = (string) ($candidate['canonical_url'] ?? '');
+            $locale = (string) ($candidate['locale'] ?? '');
+            $entityType = (string) data_get($candidate, 'metadata.asset_entity_type', '');
+            $sourceHash = strtolower(trim((string) data_get($candidate, 'metadata.source_hash', '')));
+
+            $localeCounts[$locale] = ($localeCounts[$locale] ?? 0) + 1;
+            $entityCounts[$entityType] = ($entityCounts[$entityType] ?? 0) + 1;
+
+            if (preg_match('/^[a-f0-9]{64}$/', $sourceHash) !== 1) {
+                $issues[] = 'enneagram_candidate_source_hash_invalid:'.$index;
+            }
+
+            if (data_get($candidate, 'metadata.content_hash') !== $sourceHash) {
+                $issues[] = 'enneagram_candidate_content_provenance_mismatch:'.$index;
+            }
+        }
+
+        if (count(array_unique($canonicalUrls)) !== count($canonicalUrls)) {
+            $issues[] = 'enneagram_canonical_url_set_not_unique';
+        }
+
+        ksort($localeCounts);
+        if ($localeCounts !== ['en' => 58, 'zh-CN' => 58]) {
+            $issues[] = 'enneagram_locale_candidate_count_mismatch';
+        }
+
+        ksort($entityCounts);
+        if ($entityCounts !== $expectedEntityCounts) {
+            $issues[] = 'enneagram_entity_candidate_count_mismatch';
+        }
+
+        return $issues;
     }
 
     /**

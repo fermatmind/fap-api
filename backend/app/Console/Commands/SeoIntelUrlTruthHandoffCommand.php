@@ -37,6 +37,16 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
         $pageType = $this->stringOption($this->option('page-type')) ?? ResearchReport::PAGE_ENTITY_TYPE;
         $canonicalPath = $this->normalizedPathOption($this->option('canonical-path'));
 
+        if ($pageType === UrlTruthHandoffArtifact::ENNEAGRAM_PERSONALITY_PUBLIC_CONTENT_ASSET_PAGE_ENTITY_TYPE && $limit !== 116) {
+            return $this->finish([
+                'status' => 'blocked',
+                'issues' => ['enneagram_exact_116_limit_required'],
+                'dry_run' => true,
+                'writes_committed' => false,
+                'target_tables' => ['seo_urls', 'seo_url_entities'],
+            ], $pageType);
+        }
+
         if (($exportPath === null && $importPath === null) || ($exportPath !== null && $importPath !== null)) {
             return $this->finish([
                 'status' => 'blocked',
@@ -243,7 +253,10 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
         }
 
         $writer = new UrlTruthInventoryRecordWriter;
-        $bindingIssues = $writer->authorityBindingIssues($validation['records']);
+        $bindingIssues = array_values(array_unique([
+            ...$writer->authorityBindingIssues($validation['records']),
+            ...$this->enneagramAuthorityBindingIssues($validation['records'], $pageType),
+        ]));
         if ($bindingIssues !== []) {
             return $this->finish([
                 'status' => 'blocked',
@@ -319,6 +332,44 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
         }
 
         return min($max, max(1, (int) $rawLimit));
+    }
+
+    /**
+     * @param  list<UrlTruthInventoryRecord>  $records
+     * @return list<string>
+     */
+    private function enneagramAuthorityBindingIssues(array $records, string $pageType): array
+    {
+        if ($pageType !== UrlTruthHandoffArtifact::ENNEAGRAM_PERSONALITY_PUBLIC_CONTENT_ASSET_PAGE_ENTITY_TYPE) {
+            return [];
+        }
+
+        $authoritativeKeys = [];
+        foreach ((new BackendAuthorityUrlTruthSource)->candidates() as $candidate) {
+            if ($candidate->pageEntityType === $pageType) {
+                $authoritativeKeys[$this->authorityBindingKey($candidate)] = true;
+            }
+        }
+
+        $issues = [];
+        foreach ($records as $index => $record) {
+            if (! isset($authoritativeKeys[$this->authorityBindingKey($record)])) {
+                $issues[] = 'enneagram_candidate_not_bound_to_backend_authority:'.$index;
+            }
+        }
+
+        return $issues;
+    }
+
+    private function authorityBindingKey(UrlTruthInventoryRecord $record): string
+    {
+        return hash('sha256', json_encode([
+            $record->canonicalUrl,
+            $record->locale,
+            $record->pageEntityType,
+            $record->entityIdOrSlug,
+            $record->sourceAuthority,
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
     }
 
     private function normalizedPathOption(mixed $value): ?string

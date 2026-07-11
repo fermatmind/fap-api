@@ -30,7 +30,7 @@ return [
     'url_truth_inventory' => [
         'canary_default_limit' => 10,
         'canary_max_limit' => 50,
-        'handoff_max_limit' => 100,
+        'handoff_max_limit' => 116,
         'write_requires_bound' => true,
         'research_report_candidate_limit' => 100,
         'source_authority' => 'backend_sitemap_source',
@@ -43,6 +43,7 @@ return [
             'personality',
             'personality_profile_variant',
             'personality_profile_comparison',
+            'personality_public_content_asset',
             'career_job',
             'career_recommendation',
             'methodology',
@@ -304,6 +305,7 @@ return [
             'test_detail',
             'personality_profile_variant',
             'personality_profile_comparison',
+            'personality_public_content_asset',
         ],
         'forbidden_page_entity_types' => [
             'take',

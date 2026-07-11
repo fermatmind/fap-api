@@ -118,6 +118,52 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-SEARCH-RELEASE-READINESS-02]
+    branch: codex/enneagram-search-url-truth-repair-01
+    title: "ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01: add 116-asset Enneagram URL Truth handoff"
+    train_scope: enneagram_search_url_truth_repair
+    status: in_progress
+    scope:
+      - Add a fail-closed URL Truth source and artifact policy for exactly 116 published bilingual Enneagram CMS assets across hub, center, core_type, wing, and instinctual_subtype entities.
+      - Require exact count, unique canonical paths, indexability/publicity, source-hash provenance, safe routes, artifact SHA confirmation, and authoritative readback before a bounded URL Truth write may occur.
+      - Keep Search Queue, IndexNow, CMS eligibility, sitemap, llms, cache, deployment, and production URL Truth writes outside this code PR.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/Sources/BackendAuthorityUrlTruthSource.php
+      - backend/app/Services/SeoIntel/UrlTruthHandoffArtifact.php
+      - backend/app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php
+      - backend/config/seo_intel.php
+      - backend/tests/Feature/SeoIntel/EnneagramUrlTruthHandoffTest.php
+      - backend/tests/Feature/Console/PersonalityEnneagramSearchQueueInspectCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute or authorize a production URL Truth write, Search Queue write, IndexNow submission, CMS mutation, SEO eligibility mutation, cache warm, deployment, secret, or permission change.
+      - Add frontend fallback authority, public content bodies, private route data, raw source packages, or production topology to artifacts.
+    validation:
+      - php -l backend/app/Services/SeoIntel/Sources/BackendAuthorityUrlTruthSource.php
+      - php -l backend/app/Services/SeoIntel/UrlTruthHandoffArtifact.php
+      - php -l backend/app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php
+      - php -l backend/tests/Feature/SeoIntel/EnneagramUrlTruthHandoffTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/EnneagramUrlTruthHandoffTest.php tests/Feature/Console/PersonalityEnneagramSearchQueueInspectCommandTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/SeoIntel/Sources/BackendAuthorityUrlTruthSource.php app/Services/SeoIntel/UrlTruthHandoffArtifact.php app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php config/seo_intel.php tests/Feature/SeoIntel/EnneagramUrlTruthHandoffTest.php tests/Feature/Console/PersonalityEnneagramSearchQueueInspectCommandTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    search_channel_action: false
+    llms_release_execution: false
+    api_runtime_change: true
+    workflow_policy_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: CAREER-RUNTIME-SLO-ALERTING-01
     repo: fap-api
     depends_on:
