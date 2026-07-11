@@ -88606,6 +88606,38 @@
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
     "transitions": [{"at": "2026-07-12T01:58:27+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the authorized 116-asset URL Truth repair after the production Search readiness NO_GO. This code PR must not write production URL Truth, enqueue Queue items, submit IndexNow, mutate CMS/eligibility, warm cache, or deploy."}, {"at": "2026-07-12T01:58:27+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "Focused 116-target URL Truth export/import/idempotency/Queue planner readback plus Queue inspection tests, Pint, YAML/JSON, diff, and allowed-path validation passed. Test-local SQLite writes only; no production action occurred."}, {"at": "2026-07-11T18:10:21Z", "from": "local_checks_passed", "to": "merged", "note": "Reconciled from GitHub: PR #3002 squash-merged at 398e26967ba49d79f6f4fb075f815d3497068f1d; required checks were green and task branches were cleaned."}]
   },
+  "ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01": {
+    "id": "ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01",
+    "repo": "fap-api",
+    "title": "ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01: add artifact-bound production import gate",
+    "base": "main",
+    "branch": "codex/enneagram-search-url-truth-ops-gate-01",
+    "depends_on": ["ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "search_channel_action": false,
+    "llms_release_execution": false,
+    "api_runtime_change": true,
+    "workflow_policy_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "User explicitly authorized this independent PR train item, its exact five-file scope, and manifest/state initialization. The PR must not dispatch production Ops, deploy, or perform production writes."},
+      "dependency": {"status": "pass", "evidence": "ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01 is merged and the existing importer fail-closed in production because cached global SEO Intel write flags remained disabled."},
+      "local_validation": {"status": "pass", "evidence": "Enneagram focused suite passed 6 tests/96 assertions; the combined Enneagram and generic two-stage URL Truth suite passed 24 tests/338 assertions. PHP syntax, scoped Pint, actionlint, YAML/JSON parsing, artifact payload-size check, diff whitespace, and exact five-path scope validation passed."},
+      "github_required_checks": {"status": "pending", "evidence": "PR has not been opened."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T20:22:02Z", "from": "unregistered", "to": "in_progress", "note": "Started the authorized artifact-bound URL Truth Ops gate PR from clean latest main. No deployment, production URL Truth write, Queue action, IndexNow submission, CMS/eligibility mutation, cache warm, secret, permission, persistent environment, or config-cache change is authorized."}, {"at": "2026-07-11T20:31:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Command-scoped cached-config gate, exact artifact binding, 116-target/idempotent write behavior, generic page-type regression, workflow dry-run-before-write contract, actionlint/YAML/JSON, Pint, diff, and exact five-path scope validation passed. No workflow dispatch, deploy, production write, Queue action, or configuration mutation occurred."}]
+  },
   "BIG5-114-INDEXABILITY-PUBLISH-GATE-01": {
     "id": "BIG5-114-INDEXABILITY-PUBLISH-GATE-01", "repo": "fap-api", "title": "BIG5-114-INDEXABILITY-PUBLISH-GATE-01: prepare controlled 93-page indexability promotion", "base": "main", "branch": "codex/big5-114-indexability-publish-gate-01", "depends_on": ["BIG5-124-PRODUCTION-IMPORTER-OPS-01"],
     "status": "local_checks_passed", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,

@@ -178,6 +178,81 @@ final class EnneagramUrlTruthHandoffTest extends TestCase
         $this->assertSame(0, $this->queueItemCount());
     }
 
+    #[Test]
+    public function it_allows_only_the_exact_artifact_bound_command_scoped_gate_when_cached_write_config_is_disabled(): void
+    {
+        $this->seedTargetSet();
+        [$exportExit, $export] = $this->runExport();
+        $this->assertSame(0, $exportExit);
+        $sha256 = (string) ($export['artifact_sha256'] ?? '');
+
+        [$dryRunExit, $dryRun] = $this->runImport();
+        $this->assertSame(0, $dryRunExit);
+        $this->assertSame('import_dry_run', $dryRun['mode'] ?? null);
+        $this->assertSame(0, $this->seoUrlCount());
+
+        [$shaMismatchExit, $shaMismatch] = $this->runImport(
+            write: true,
+            sha256: str_repeat('f', 64),
+            operatorApproval: 'ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01:'.str_repeat('f', 64),
+        );
+        $this->assertSame(1, $shaMismatchExit);
+        $this->assertContains('artifact_sha256_confirmation_required', $shaMismatch['issues'] ?? []);
+        $this->assertSame(0, $this->seoUrlCount());
+
+        [$blockedExit, $blocked] = $this->runImport(
+            write: true,
+            sha256: $sha256,
+            operatorApproval: 'ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01:'.str_repeat('0', 64),
+        );
+        $this->assertSame(1, $blockedExit);
+        $this->assertContains('seo_intel_write_flags_disabled', $blocked['issues'] ?? []);
+        $this->assertSame(0, $this->seoUrlCount());
+        $this->assertSame(0, $this->seoEntityCount());
+        $this->assertSame(0, $this->queueItemCount());
+
+        $approval = 'ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01:'.$sha256;
+        [$writeExit, $write] = $this->runImport(write: true, sha256: $sha256, operatorApproval: $approval);
+        $this->assertSame(0, $writeExit, Artisan::output());
+        $this->assertSame('artifact_bound_enneagram_command_scope', $write['write_authorization'] ?? null);
+        $this->assertTrue((bool) ($write['config_write_flags_bypassed'] ?? false));
+        $this->assertSame(116, $write['written_records'] ?? null);
+        $this->assertSame(116, $this->seoUrlCount());
+        $this->assertSame(116, $this->seoEntityCount());
+        $this->assertSame(0, $this->queueItemCount());
+
+        [$repeatExit, $repeat] = $this->runImport(write: true, sha256: $sha256, operatorApproval: $approval);
+        $this->assertSame(0, $repeatExit, Artisan::output());
+        $this->assertSame(116, $repeat['written_records'] ?? null);
+        $this->assertSame(116, $this->seoUrlCount());
+        $this->assertSame(116, $this->seoEntityCount());
+        $this->assertSame(0, $this->queueItemCount());
+    }
+
+    #[Test]
+    public function production_ops_workflow_locks_sha_artifact_and_dry_run_before_write(): void
+    {
+        $workflow = (string) file_get_contents(base_path('../.github/workflows/enneagram-url-truth-production-ops.yml'));
+
+        $this->assertStringContainsString('workflow_dispatch:', $workflow);
+        $this->assertStringContainsString('expected="Approve ENNEAGRAM URL Truth import for SHA ${RELEASE_SHA} artifact ${ARTIFACT_SHA256}"', $workflow);
+        $this->assertStringContainsString('test "$deployed_sha" = "$RELEASE_SHA"', $workflow);
+        $this->assertStringContainsString('--dry-run --limit=116', $workflow);
+        $this->assertStringContainsString('--write --limit=116', $workflow);
+        $this->assertStringContainsString('--page-type=personality_public_content_asset', $workflow);
+        $this->assertStringContainsString('--operator-approved="ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01:${ARTIFACT_SHA256}"', $workflow);
+        $this->assertStringContainsString('seo_urls', $workflow);
+        $this->assertStringContainsString('seo_url_entities', $workflow);
+        $this->assertStringNotContainsString('SEO_INTEL_WRITE_ENABLED=true', $workflow);
+        $this->assertStringNotContainsString('config:clear', $workflow);
+
+        $dryRunPosition = strpos($workflow, '--dry-run --limit=116');
+        $writePosition = strpos($workflow, '--write --limit=116');
+        $this->assertIsInt($dryRunPosition);
+        $this->assertIsInt($writePosition);
+        $this->assertLessThan($writePosition, $dryRunPosition);
+    }
+
     /** @return array{0:int,1:array<string,mixed>} */
     private function runExport(): array
     {
@@ -193,8 +268,11 @@ final class EnneagramUrlTruthHandoffTest extends TestCase
     }
 
     /** @return array{0:int,1:array<string,mixed>} */
-    private function runImport(bool $write = false, ?string $sha256 = null): array
-    {
+    private function runImport(
+        bool $write = false,
+        ?string $sha256 = null,
+        ?string $operatorApproval = null,
+    ): array {
         $arguments = [
             '--import' => $this->artifactPath,
             '--limit' => 116,
@@ -205,6 +283,9 @@ final class EnneagramUrlTruthHandoffTest extends TestCase
         if ($write) {
             $arguments['--write'] = true;
             $arguments['--confirm-artifact-sha256'] = $sha256;
+            if ($operatorApproval !== null) {
+                $arguments['--operator-approved'] = $operatorApproval;
+            }
         } else {
             $arguments['--dry-run'] = true;
         }

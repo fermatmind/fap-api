@@ -13,6 +13,8 @@ use Illuminate\Console\Command;
 
 final class SeoIntelUrlTruthHandoffCommand extends Command
 {
+    private const ENNEAGRAM_COMMAND_SCOPED_APPROVAL_PREFIX = 'ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01:';
+
     protected $signature = 'seo-intel:url-truth-handoff
         {--export= : Export a dry-run/no-write URL Truth handoff JSON artifact}
         {--import= : Import and validate a URL Truth handoff JSON artifact}
@@ -22,6 +24,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
         {--page-type=research_report : Required page entity type}
         {--canonical-path= : Optional exact canonical path filter for export, e.g. /help/about}
         {--confirm-artifact-sha256= : Required SHA256 confirmation for write mode}
+        {--operator-approved= : Exact artifact-bound command-scoped approval for the 116-target Enneagram import}
         {--confirm-bounded-write-override= : Deprecated; disabled config write flags cannot be overridden}
         {--json : Output safe machine-readable JSON}';
 
@@ -240,7 +243,15 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
             ], $pageType);
         }
 
-        if (! (bool) config('seo_intel.enabled', false) || ! (bool) config('seo_intel.write_enabled', false)) {
+        $configWriteGateOpen = (bool) config('seo_intel.enabled', false)
+            && (bool) config('seo_intel.write_enabled', false);
+        $commandScopedWriteGateOpen = $this->enneagramCommandScopedWriteGateOpen(
+            pageType: $pageType,
+            artifactSha256: $sha256,
+            confirmation: $confirmation,
+        );
+
+        if (! $configWriteGateOpen && ! $commandScopedWriteGateOpen) {
             return $this->finish([
                 'status' => 'blocked',
                 'mode' => 'import_write',
@@ -282,14 +293,35 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
             'written_records' => $written,
             'planned_url_count' => $validation['metadata']['planned_url_count'],
             'planned_entity_count' => $validation['metadata']['planned_entity_count'],
-            'write_authorization' => 'config_flags',
-            'config_write_flags_bypassed' => false,
+            'write_authorization' => $commandScopedWriteGateOpen
+                ? 'artifact_bound_enneagram_command_scope'
+                : 'config_flags',
+            'config_write_flags_bypassed' => ! $configWriteGateOpen,
             'target_tables' => ['seo_urls', 'seo_url_entities'],
             'external_api_calls' => false,
             'search_url_submission' => false,
             'crawler_log_read' => false,
             'issues' => [],
         ], $pageType);
+    }
+
+    private function enneagramCommandScopedWriteGateOpen(
+        string $pageType,
+        string $artifactSha256,
+        ?string $confirmation,
+    ): bool {
+        if ($pageType !== UrlTruthHandoffArtifact::ENNEAGRAM_PERSONALITY_PUBLIC_CONTENT_ASSET_PAGE_ENTITY_TYPE) {
+            return false;
+        }
+
+        if ($confirmation === null || ! hash_equals($artifactSha256, $confirmation)) {
+            return false;
+        }
+
+        $operatorApproval = $this->stringOption($this->option('operator-approved'));
+        $expected = self::ENNEAGRAM_COMMAND_SCOPED_APPROVAL_PREFIX.$artifactSha256;
+
+        return $operatorApproval !== null && hash_equals($expected, $operatorApproval);
     }
 
     /**
