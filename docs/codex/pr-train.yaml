@@ -22006,6 +22006,45 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     content_authority: CMS/backend
+
+  - id: SECURITY-124-API-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/security-124-api-01
+    title: "SECURITY-124-API-01: pin production SSH action trust"
+    train_scope: security_124_api_production_ssh_action_trust
+    status: user_authorized
+    scope:
+      - Pin the shared third-party SSH agent action to the reviewed v0.10.0 commit in every production SSH workflow.
+      - Add a regression guard covering all production SSH consumers without changing deploy behavior or secrets.
+    allowed_paths:
+      - .github/workflows/deploy.yml
+      - .github/workflows/deploy-production.yml
+      - .github/workflows/career-content-production-dry-run.yml
+      - .github/workflows/career-content-production-import.yml
+      - backend/tests/Unit/Security/SecurityGuardrailsTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch workflows, deploy, mutate production, read or change secrets, or alter workflow inputs and production targets.
+      - Change backend runtime, routes, database schema, CMS content, frontend code, or unrelated security scopes.
+    validation:
+      - cd backend && php artisan test tests/Unit/Security/SecurityGuardrailsTest.php --filter=test_ci_deploy_supply_chain_uses_pinned_trust_material --no-ansi
+      - ruby -e "require 'yaml'; %w[.github/workflows/deploy.yml .github/workflows/deploy-production.yml .github/workflows/career-content-production-dry-run.yml .github/workflows/career-content-production-import.yml].each { |path| YAML.load_file(path) }; puts 'workflow yaml ok'"
+      - cd backend && vendor/bin/pint --test tests/Unit/Security/SecurityGuardrailsTest.php
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-security-124-api-01.sqlite php artisan migrate --force
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
     next_task: SEO-CMS-CANARY-IMPORT-DRYRUN-01 should verify these package artifacts before any draft-only execution
 
   - id: SEO-CMS-CANARY-IMPORT-DRYRUN-01
