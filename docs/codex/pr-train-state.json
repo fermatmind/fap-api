@@ -85604,8 +85604,8 @@
     "branch": "codex/mbti-index-24a-api-comparison-schema-authority",
     "title": "MBTI-INDEX-24A-API: add cross-type comparison schema authority",
     "depends_on": ["MBTI-CMS-28A"],
-    "status": "pr_open",
-    "commit_sha": "9c431296350d33de71dfa7cc00500907a6622b61",
+    "status": "ready_to_merge",
+    "commit_sha": "016063eb506b87e68a867ad5f2910d46d40be37d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2951",
     "failure_reason": null,
     "merged_at": null,
@@ -85616,13 +85616,14 @@
       "dependency": {"status": "pass", "evidence": "MBTI-CMS-28A is merged; execution was rebased onto current origin/main b922eeffb."},
       "focused_tests": {"status": "pass", "evidence": "Cross-type readmodel: 3 tests/57 assertions; comparison API: 8/140; sitemap: 11/231; scoped Pint and complete scripts/ci_verify_mbti.sh passed on the rebased scope."},
       "scope_validation": {"status": "pass", "evidence": "YAML, JSON, PHP syntax, git diff --check and exact four-path scope passed; verify-generated compiled diffs were restored."},
-      "github_required_checks": {"status": "pending", "evidence": null}
+      "github_required_checks": {"status": "pass", "evidence": "PR #2951 head 016063eb506b87e68a867ad5f2910d46d40be37d passed all nine reported checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and all Code Scanning checks."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
     "transitions": [
       {"at": "2026-07-11T15:00:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Registered and started the authorized backend schema-authority prerequisite in an isolated worktree."},
       {"at": "2026-07-11T15:28:00+08:00", "from": "in_progress", "to": "committed", "note": "All manifest checks passed after rebasing onto current origin/main; no production mutation or deploy occurred."},
-      {"at": "2026-07-11T15:33:00+08:00", "from": "committed", "to": "pr_open", "note": "Pushed the exact four-path scope and opened PR #2951; required GitHub checks are pending."}
+      {"at": "2026-07-11T15:33:00+08:00", "from": "committed", "to": "pr_open", "note": "Pushed the exact four-path scope and opened PR #2951; required GitHub checks are pending."},
+      {"at": "2026-07-11T15:46:00+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed; PR #2951 is mergeable and the four changed paths match the authorized manifest."}
     ]
   }
 }
