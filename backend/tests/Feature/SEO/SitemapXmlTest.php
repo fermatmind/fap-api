@@ -15,6 +15,7 @@ use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Models\TopicProfile;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -465,6 +466,7 @@ class SitemapXmlTest extends TestCase
             'updated_at' => Carbon::create(2026, 1, 31, 15, 0, 0, 'UTC'),
         ]);
 
+        app(PublicCareerAuthorityResponseCache::class)->warm();
         $response = $this->get('/sitemap.xml');
 
         $response->assertStatus(200);
@@ -600,6 +602,7 @@ class SitemapXmlTest extends TestCase
             'updated_at' => Carbon::create(2026, 1, 31, 9, 0, 0),
         ]);
 
+        app(PublicCareerAuthorityResponseCache::class)->warm();
         $body = (string) $this->get('/sitemap.xml')->getContent();
 
         $this->assertStringContainsString('<loc>https://fermatmind.com/en/tests/host-check</loc>', $body);
@@ -672,6 +675,7 @@ class SitemapXmlTest extends TestCase
             ],
         ]);
 
+        app(PublicCareerAuthorityResponseCache::class)->warm();
         $body = (string) $this->get('/sitemap.xml')->getContent();
 
         $this->assertStringContainsString('<loc>https://fermatmind.com/en/tests/v2-public</loc>', $body);

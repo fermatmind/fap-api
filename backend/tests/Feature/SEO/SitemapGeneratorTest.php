@@ -15,6 +15,7 @@ use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\TopicProfile;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerJobSeoService;
@@ -98,7 +99,7 @@ class SitemapGeneratorTest extends TestCase
             ],
         ]);
 
-        $payload = app(SitemapGenerator::class)->generate();
+        $payload = $this->generateSitemap();
 
         $slugList = (array) ($payload['slug_list'] ?? []);
         sort($slugList, SORT_STRING);
@@ -149,7 +150,7 @@ class SitemapGeneratorTest extends TestCase
             'updated_at' => Carbon::create(2026, 3, 8, 9, 0, 0, 'UTC'),
         ]);
 
-        $payload = app(SitemapGenerator::class)->generate();
+        $payload = $this->generateSitemap();
         $xml = (string) ($payload['xml'] ?? '');
 
         foreach ([
@@ -248,7 +249,7 @@ class SitemapGeneratorTest extends TestCase
             'canonical_json' => ['path' => '/zh/big-five/openness'],
         ]);
 
-        $payload = app(SitemapGenerator::class)->generate();
+        $payload = $this->generateSitemap();
         $xml = (string) ($payload['xml'] ?? '');
         $slugList = (array) ($payload['slug_list'] ?? []);
 
@@ -296,7 +297,7 @@ class SitemapGeneratorTest extends TestCase
             'sitemap_eligible' => false,
         ]);
 
-        $payload = app(SitemapGenerator::class)->generate();
+        $payload = $this->generateSitemap();
         $xml = (string) ($payload['xml'] ?? '');
         $slugList = (array) ($payload['slug_list'] ?? []);
 
@@ -364,7 +365,7 @@ class SitemapGeneratorTest extends TestCase
             'updated_at' => Carbon::create(2026, 6, 8, 9, 0, 0, 'UTC'),
         ]);
 
-        $xml = (string) (app(SitemapGenerator::class)->generate()['xml'] ?? '');
+        $xml = (string) ($this->generateSitemap()['xml'] ?? '');
 
         $this->assertStringContainsString('https://fermatmind.com/en/method-boundaries', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/en/item-design-notes', $xml);
@@ -431,7 +432,7 @@ class SitemapGeneratorTest extends TestCase
             'updated_at' => Carbon::create(2026, 3, 6, 13, 45, 0, 'UTC'),
         ]);
 
-        $payload = app(SitemapGenerator::class)->generate();
+        $payload = $this->generateSitemap();
         $xml = (string) ($payload['xml'] ?? '');
 
         $this->assertStringContainsString('https://staging.fermatmind.com/en/articles', $xml);
@@ -555,7 +556,7 @@ class SitemapGeneratorTest extends TestCase
             'updated_at' => Carbon::create(2026, 3, 7, 13, 45, 0, 'UTC'),
         ]);
 
-        $payload = app(SitemapGenerator::class)->generate();
+        $payload = $this->generateSitemap();
         $xml = (string) ($payload['xml'] ?? '');
         $this->assertSame(2, DB::table('personality_profiles')
             ->where('org_id', 0)
@@ -643,7 +644,7 @@ class SitemapGeneratorTest extends TestCase
         $this->assertSame('noindex,follow', data_get($seoService->buildMeta($profile, $assertive), 'robots'));
         $this->assertSame('index,follow', data_get($seoService->buildMeta($profile, $turbulent), 'robots'));
 
-        $xml = (string) (app(SitemapGenerator::class)->generate()['xml'] ?? '');
+        $xml = (string) ($this->generateSitemap()['xml'] ?? '');
 
         $this->assertStringNotContainsString('https://staging.fermatmind.com/zh/personality/istj-a</loc>', $xml);
         $this->assertStringContainsString('https://staging.fermatmind.com/zh/personality/istj-t</loc>', $xml);
@@ -710,7 +711,7 @@ class SitemapGeneratorTest extends TestCase
             'updated_at' => Carbon::create(2026, 3, 7, 13, 30, 0, 'UTC'),
         ]);
 
-        $payload = app(SitemapGenerator::class)->generate();
+        $payload = $this->generateSitemap();
         $xml = (string) ($payload['xml'] ?? '');
 
         $this->assertStringContainsString('https://staging.fermatmind.com/en/topics', $xml);
@@ -842,7 +843,7 @@ class SitemapGeneratorTest extends TestCase
             'updated_at' => Carbon::create(2026, 3, 8, 13, 45, 0, 'UTC'),
         ]);
 
-        $payload = app(SitemapGenerator::class)->generate();
+        $payload = $this->generateSitemap();
         $xml = (string) ($payload['xml'] ?? '');
 
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs', $xml);
@@ -958,7 +959,7 @@ class SitemapGeneratorTest extends TestCase
             'updated_at' => Carbon::create(2026, 3, 9, 18, 15, 0, 'UTC'),
         ]);
 
-        $payload = app(SitemapGenerator::class)->generate();
+        $payload = $this->generateSitemap();
         $xml = (string) ($payload['xml'] ?? '');
         $entries = $this->sitemapEntries($xml);
 
@@ -1339,6 +1340,14 @@ class SitemapGeneratorTest extends TestCase
             'created_at' => Carbon::create(2026, 3, 9, 8, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 3, 9, 8, 0, 0, 'UTC'),
         ], $overrides));
+    }
+
+    /** @return array<string, mixed> */
+    private function generateSitemap(): array
+    {
+        app(PublicCareerAuthorityResponseCache::class)->warm();
+
+        return app(SitemapGenerator::class)->generate();
     }
 
     /**

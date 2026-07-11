@@ -6,7 +6,7 @@
     "base": "main",
     "branch": "codex/career-public-authority-cache-resilience-01",
     "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01"],
-    "status": "pr_open",
+    "status": "ci_fix_validated",
     "commit_sha": "6435b285f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2956",
     "failure_reason": null,
@@ -67,6 +67,18 @@
         "from": "focused_checks_passed",
         "to": "pr_open",
         "note": "Committed implementation as 6435b285f, pushed the scoped branch, and opened PR #2956; GitHub required checks are pending."
+      },
+      {
+        "at": "2026-07-11T15:45:00+08:00",
+        "from": "pr_open",
+        "to": "github_checks_failed_fix_in_progress",
+        "note": "Inspected failed verify-mbti-legacy/v2 jobs: SitemapGeneratorTest and SitemapXmlTest still relied on request-time Career directory cache construction. Updated only those focused contracts to warm authority explicitly before sitemap generation; production HTTP behavior remains unchanged."
+      },
+      {
+        "at": "2026-07-11T15:51:00+08:00",
+        "from": "github_checks_failed_fix_in_progress",
+        "to": "ci_fix_validated",
+        "note": "The exact failing sitemap suites now pass 15 tests/324 assertions; combined cache+sitemap contracts pass 27 tests/453 assertions, CareerDirectory 7/120, Big Five classifier 2/4, and scoped Pint passes nine PHP files."
       }
     ]
   },

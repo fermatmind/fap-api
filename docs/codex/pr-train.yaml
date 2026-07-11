@@ -80,6 +80,8 @@ prs:
       - backend/tests/Feature/Career/CareerDirectoryAuthorityApiTest.php
       - backend/tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php
       - backend/tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php
+      - backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - backend/tests/Feature/SEO/SitemapXmlTest.php
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -92,7 +94,7 @@ prs:
     validation:
       - cd backend && php artisan test tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php --no-ansi
       - cd backend && php artisan test --filter=CareerDirectory --no-ansi
-      - cd backend && vendor/bin/pint --test app/Console/Commands/CareerWarmPublicAuthorityCache.php app/Services/Career/PublicCareerAuthorityResponseCache.php bootstrap/app.php tests/Feature/Career/CareerDirectoryAuthorityApiTest.php tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && vendor/bin/pint --test app/Console/Commands/CareerWarmPublicAuthorityCache.php app/Services/Career/PublicCareerAuthorityResponseCache.php bootstrap/app.php tests/Feature/Career/CareerDirectoryAuthorityApiTest.php tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - full repository Pint baseline failure recorded as an authorized sidecar; GitHub required checks remain mandatory
       - cd backend && composer validate --strict
       - cd backend && php artisan schedule:list --no-ansi
