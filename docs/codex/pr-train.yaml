@@ -39821,3 +39821,48 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: AUDIT-PRR2-API-11
+    repo: fap-api
+    depends_on: [AUDIT-PRR2-API-06]
+    branch: codex/audit-prr2-api-11-actions-immutable-pins
+    title: "AUDIT-PRR2-API-11: pin all GitHub Actions immutably"
+    train_scope: prr2_api_actions_immutable_pins
+    status: user_authorized
+    scope:
+      - Resolve every external GitHub Action release tag to its upstream 40-hex commit SHA.
+      - Preserve the reviewed release tag as an inline comment for dependency update review.
+      - Add a required scanner contract that rejects mutable refs and missing release comments.
+    allowed_paths:
+      - .github/workflows/big-five-en-domain-production-cms-import.yml
+      - .github/workflows/big-five-zh-facet-production-cms-import.yml
+      - .github/workflows/career-content-production-dry-run.yml
+      - .github/workflows/career-content-production-import.yml
+      - .github/workflows/ci.yml
+      - .github/workflows/codeql.yml
+      - .github/workflows/deploy-production.yml
+      - .github/workflows/deploy.yml
+      - .github/workflows/enneagram-cms-production-ops.yml
+      - .github/workflows/release-train.yml
+      - backend/tests/Unit/Security/ImmutableGithubActionsTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change workflow triggers, permissions, job logic, secrets, environment protection, deploy behavior, runtime code, CMS/SEO, or production state.
+    validation:
+      - cd backend && php artisan test tests/Unit/Security/ImmutableGithubActionsTest.php tests/Unit/Security/SecurityGuardrailsTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Unit/Security/ImmutableGithubActionsTest.php
+      - actionlint -ignore 'SC2016:' -ignore 'SC2034:' -ignore 'if: condition .*always evaluated' -ignore 'unexpected key "queue"' .github/workflows/*.{yml,yaml}
+      - ruby -e "require 'yaml'; Dir['.github/workflows/*.{yml,yaml}'].each { |path| YAML.load_file(path) }; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - immutable external uses scan
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
