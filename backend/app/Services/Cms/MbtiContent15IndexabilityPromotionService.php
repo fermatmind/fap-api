@@ -121,8 +121,8 @@ final class MbtiContent15IndexabilityPromotionService
         $held = (bool) ($payload['indexability_held'] ?? false);
         $robots = strtolower((string) data_get($payload, 'content.seo.robots', data_get($payload, 'seo.robots', '')));
         $alreadyPromoted = ! $held && $robots !== '' && ! str_contains($robots, 'noindex');
-        if (! $alreadyPromoted && (! $held || ! str_contains($robots, 'noindex'))) {
-            throw new RuntimeException('A/T comparison expected pre-state does not match held + noindex.');
+        if (! $alreadyPromoted && (! $held || ($robots !== '' && ! str_contains($robots, 'noindex')))) {
+            throw new RuntimeException('A/T comparison expected pre-state does not match the held indexability gate.');
         }
 
         return ['already_promoted' => $alreadyPromoted, 'section_id' => $section->id, 'indexability_held' => $held, 'robots' => $robots];

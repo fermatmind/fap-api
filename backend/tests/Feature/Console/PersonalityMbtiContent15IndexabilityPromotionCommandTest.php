@@ -54,6 +54,21 @@ final class PersonalityMbtiContent15IndexabilityPromotionCommandTest extends Tes
         self::assertSame('noindex,follow', PersonalityProfileVariantSeoMeta::query()->firstOrFail()->robots);
     }
 
+    public function test_dry_run_rejects_a_held_comparison_with_explicit_index_robots(): void
+    {
+        $section = PersonalityProfileSection::query()->firstOrFail();
+        $payload = (array) $section->payload_json;
+        data_set($payload, 'content.seo.robots', 'index,follow');
+        $section->forceFill(['payload_json' => $payload])->save();
+
+        self::assertSame(1, Artisan::call('personality:mbti-content15-indexability-promote', [
+            '--package' => $this->packagePath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+        self::assertStringContainsString('held indexability gate', Artisan::output());
+    }
+
     public function test_exact_authorized_write_promotes_all_nine_but_never_search_submission(): void
     {
         Artisan::call('personality:mbti-content15-indexability-promote', ['--package' => $this->packagePath, '--dry-run' => true, '--json' => true]);
@@ -100,7 +115,7 @@ final class PersonalityMbtiContent15IndexabilityPromotionCommandTest extends Tes
         $intp = $this->profile('INTP');
         PersonalityProfileSection::query()->create([
             'org_id' => 0, 'profile_id' => $intp->id, 'section_key' => 'mbti64_comparison_a_vs_t',
-            'render_variant' => 'comparison', 'payload_json' => ['indexability_held' => true, 'content' => ['seo' => ['robots' => 'noindex,follow']]],
+            'render_variant' => 'comparison', 'payload_json' => ['indexability_held' => true, 'content' => ['seo' => ['title' => 'INTP A/T comparison']]],
             'sort_order' => 1, 'is_enabled' => true,
         ]);
 
