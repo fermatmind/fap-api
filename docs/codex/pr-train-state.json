@@ -85039,8 +85039,8 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-import-identity-repair-01",
     "depends_on": ["PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "fc50dc8ebfef5c200f955ddbc593b1a439c68225",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -85059,7 +85059,8 @@
     "transitions": [
       { "at": "2026-07-11T01:12:20Z", "from": "unregistered", "to": "planned", "note": "Registered the authorized identity repair after the atomic importer dependency merged and cleaned." },
       { "at": "2026-07-11T01:12:20Z", "from": "planned", "to": "in_progress", "note": "Started deterministic facet_detail identity alignment, combined seed regeneration, and workflow gate repair; no CMS write, workflow dispatch, or deploy is in scope." },
-      { "at": "2026-07-11T01:20:48Z", "from": "in_progress", "to": "local_checks_passed", "note": "Five package builds/validators, corrected 31-row composition, baseline-shaped importer dry-run, focused contract, full core CI, full-32 authority gate, JSON/YAML syntax, hash, diff, and allowed-path validation passed without production writes." }
+      { "at": "2026-07-11T01:20:48Z", "from": "in_progress", "to": "local_checks_passed", "note": "Five package builds/validators, corrected 31-row composition, baseline-shaped importer dry-run, focused contract, full core CI, full-32 authority gate, JSON/YAML syntax, hash, diff, and allowed-path validation passed without production writes." },
+      { "at": "2026-07-11T01:21:59Z", "from": "local_checks_passed", "to": "committed", "note": "Rebased cleanly onto latest origin/main, reran package validators and the 19-test focused contract, and committed the scoped identity repair at fc50dc8ebfef5c200f955ddbc593b1a439c68225." }
     ]
   }
 }
