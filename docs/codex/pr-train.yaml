@@ -164,6 +164,48 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01]
+    branch: codex/enneagram-search-url-truth-ops-gate-01
+    title: "ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01: add artifact-bound production import gate"
+    train_scope: enneagram_search_url_truth_ops_gate
+    status: in_progress
+    scope:
+      - Add a manual, non-deploy production workflow locked to an exact deployed SHA, artifact SHA256, exact 116-target Enneagram page type, and exact operator approval phrase.
+      - Require an official import dry-run before a bounded write, then require a 116-target readback with zero Queue, IndexNow, CMS, eligibility, sitemap, llms, cache, deployment, persistent configuration, secret, or permission side effects.
+      - Permit a command-scoped write gate only for the exact validated Enneagram artifact while the global cached SEO Intel write configuration remains disabled.
+    allowed_paths:
+      - .github/workflows/enneagram-url-truth-production-ops.yml
+      - backend/app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php
+      - backend/tests/Feature/SeoIntel/EnneagramUrlTruthHandoffTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch the workflow, deploy, write production URL Truth rows, create or modify Search Queue items, submit IndexNow, call external search APIs, mutate CMS/SEO eligibility, warm cache, or change secrets, permissions, persistent environment, or Laravel config cache.
+      - Permit command-scoped writes for another page type, a non-116 target, a mismatched artifact SHA, an unbound authority record, a private route, or target tables other than seo_urls and seo_url_entities.
+    validation:
+      - php -l backend/app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php
+      - php -l backend/tests/Feature/SeoIntel/EnneagramUrlTruthHandoffTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/EnneagramUrlTruthHandoffTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php tests/Feature/SeoIntel/EnneagramUrlTruthHandoffTest.php
+      - actionlint -ignore 'SC2016:' -ignore 'SC2034:' .github/workflows/enneagram-url-truth-production-ops.yml
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/enneagram-url-truth-production-ops.yml'); YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    search_channel_action: false
+    llms_release_execution: false
+    api_runtime_change: true
+    workflow_policy_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: CAREER-RUNTIME-SLO-ALERTING-01
     repo: fap-api
     depends_on:

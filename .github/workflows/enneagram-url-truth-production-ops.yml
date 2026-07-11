@@ -1,0 +1,277 @@
+name: Enneagram URL Truth Production Ops
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Exact deployed fap-api release SHA (40 lowercase hex characters)
+        required: true
+        type: string
+      artifact_sha256:
+        description: Exact SHA256 of the approved 116-target URL Truth artifact
+        required: true
+        type: string
+      artifact_gzip_base64:
+        description: Gzip+base64 encoded approved artifact; never content bodies or secrets
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: Exact SHA- and artifact-bound production import approval phrase
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: enneagram-url-truth-production-ops
+  cancel-in-progress: false
+
+jobs:
+  import-url-truth:
+    name: Import exact 116-target Enneagram URL Truth artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: production
+    env:
+      DEPLOY_USER: ${{ vars.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ vars.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ vars.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ vars.PRODUCTION_DEPLOY_PATH }}
+      RELEASE_SHA: ${{ inputs.release_sha }}
+      ARTIFACT_SHA256: ${{ inputs.artifact_sha256 }}
+      ARTIFACT_GZIP_BASE64: ${{ inputs.artifact_gzip_base64 }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+
+    steps:
+      - name: Validate exact SHA- and artifact-bound approval
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$ARTIFACT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          test "${#ARTIFACT_GZIP_BASE64}" -ge 100
+          test "${#ARTIFACT_GZIP_BASE64}" -le 60000
+          [[ "$ARTIFACT_GZIP_BASE64" =~ ^[A-Za-z0-9+/=]+$ ]]
+          expected="Approve ENNEAGRAM URL Truth import for SHA ${RELEASE_SHA} artifact ${ARTIFACT_SHA256}"
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+
+      - name: Decode and validate approved artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p artifacts
+          printf '%s' "$ARTIFACT_GZIP_BASE64" | base64 -d | gzip -d > artifacts/handoff.json
+          test "$(sha256sum artifacts/handoff.json | awk '{print $1}')" = "$ARTIFACT_SHA256"
+          jq -e '
+            .schema_version == "seo-intel-url-truth-handoff.v1" and
+            .collector == "url_truth_inventory" and
+            .candidate_count == 116 and (.candidates | length) == 116 and
+            .constraints.allowed_page_entity_type == "personality_public_content_asset" and
+            .constraints.allowed_source_authority == "backend_cms" and
+            .constraints.no_external_api == true and
+            .constraints.no_search_submission == true and
+            .constraints.no_crawler_log_read == true and
+            .target_tables == ["seo_urls", "seo_url_entities"] and
+            ([.candidates[].canonical_url] | unique | length) == 116 and
+            ([.candidates[] | select(.is_private_flow == true)] | length) == 0
+          ' artifacts/handoff.json >/dev/null
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run dry-run then bounded URL Truth import
+        shell: bash
+        run: |
+          set -euo pipefail
+          target="$DEPLOY_USER@$DEPLOY_HOST"
+          run_dir="/tmp/enneagram-url-truth-ops-${GITHUB_RUN_ID}"
+          printf -v q_run_dir '%q' "$run_dir"
+
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$target" "umask 077; mkdir -p $q_run_dir"
+          scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            -P "$DEPLOY_PORT" artifacts/handoff.json "$target:$run_dir/handoff.json"
+
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_release_sha '%q' "$RELEASE_SHA"
+          printf -v q_artifact_sha '%q' "$ARTIFACT_SHA256"
+          printf -v q_run_dir '%q' "$run_dir"
+
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$target" \
+            "DEPLOY_PATH=$q_deploy_path RELEASE_SHA=$q_release_sha ARTIFACT_SHA256=$q_artifact_sha RUN_DIR=$q_run_dir bash -s" <<'REMOTE' > artifacts/summary.json
+          set -Eeuo pipefail
+          trap 'rm -rf "$RUN_DIR"' EXIT
+          artifact="$RUN_DIR/handoff.json"
+
+          cd "$DEPLOY_PATH/current"
+          deployed_sha="$(if [ -f REVISION ]; then tr -d '\r\n' < REVISION; else git rev-parse HEAD; fi)"
+          test "$deployed_sha" = "$RELEASE_SHA"
+          test "$(sha256sum "$artifact" | awk '{print $1}')" = "$ARTIFACT_SHA256"
+
+          cd backend
+          php artisan seo-intel:url-truth-handoff \
+            --import="$artifact" --dry-run --limit=116 \
+            --page-type=personality_public_content_asset --json --no-ansi \
+            > "$RUN_DIR/dry-run.json"
+          jq -e --arg sha "$ARTIFACT_SHA256" '
+            .status == "success" and .mode == "import_dry_run" and
+            .artifact_sha256 == $sha and .dry_run == true and
+            .writes_committed == false and .planned_url_count == 116 and
+            .planned_entity_count == 116 and
+            .target_tables == ["seo_urls", "seo_url_entities"] and
+            .external_api_calls == false and .search_url_submission == false and
+            (.issues | length) == 0
+          ' "$RUN_DIR/dry-run.json" >/dev/null
+
+          php artisan seo-intel:url-truth-handoff \
+            --import="$artifact" --write --limit=116 \
+            --page-type=personality_public_content_asset \
+            --confirm-artifact-sha256="$ARTIFACT_SHA256" \
+            --operator-approved="ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01:${ARTIFACT_SHA256}" \
+            --json --no-ansi > "$RUN_DIR/write.json"
+          jq -e --arg sha "$ARTIFACT_SHA256" '
+            .status == "success" and .mode == "import_write" and
+            .artifact_sha256 == $sha and .writes_attempted == true and
+            .writes_committed == true and .written_records == 116 and
+            .planned_url_count == 116 and .planned_entity_count == 116 and
+            .write_authorization == "artifact_bound_enneagram_command_scope" and
+            .config_write_flags_bypassed == true and
+            .target_tables == ["seo_urls", "seo_url_entities"] and
+            .external_api_calls == false and .search_url_submission == false and
+            (.issues | length) == 0
+          ' "$RUN_DIR/write.json" >/dev/null
+
+          php artisan personality:enneagram-search-queue-inspect --dry-run --json --no-ansi \
+            > "$RUN_DIR/readback.json"
+          jq -e '
+            .schema_version == "enneagram-search-queue-inspect.v1" and
+            .decision == "GO_FOR_SEPARATE_SEARCH_QUEUE_AUTHORIZATION" and
+            .target_count == 116 and .summary.candidate_count == 116 and
+            .summary.eligible_count == 116 and .summary.blocked_count == 0 and
+            .summary.planned_queue_count == 116 and
+            .summary.active_duplicate_count == 0 and
+            .summary.stale_submitted_count == 0 and
+            .negative_guarantees.database_write == false and
+            .negative_guarantees.queue_write == false and
+            .negative_guarantees.queue_enqueue == false and
+            .negative_guarantees.search_submit == false and
+            .negative_guarantees.external_search_api_call == false and
+            .negative_guarantees.cms_write == false and
+            .negative_guarantees.llms_sitemap_cache_mutation == false and
+            .negative_guarantees.deploy == false
+          ' "$RUN_DIR/readback.json" >/dev/null
+
+          jq -n \
+            --arg release_sha "$RELEASE_SHA" \
+            --arg artifact_sha256 "$ARTIFACT_SHA256" \
+            --slurpfile dry_run "$RUN_DIR/dry-run.json" \
+            --slurpfile write "$RUN_DIR/write.json" \
+            --slurpfile readback "$RUN_DIR/readback.json" \
+            '{
+              schema_version: "enneagram-url-truth-production-ops.v1",
+              status: "success",
+              release_sha: $release_sha,
+              artifact_sha256: $artifact_sha256,
+              dry_run: {
+                planned_url_count: $dry_run[0].planned_url_count,
+                planned_entity_count: $dry_run[0].planned_entity_count,
+                writes_committed: $dry_run[0].writes_committed
+              },
+              write: {
+                written_records: $write[0].written_records,
+                target_tables: $write[0].target_tables,
+                authorization: $write[0].write_authorization
+              },
+              readback: {
+                target_count: $readback[0].target_count,
+                candidate_count: $readback[0].summary.candidate_count,
+                eligible_count: $readback[0].summary.eligible_count,
+                planned_queue_count: $readback[0].summary.planned_queue_count,
+                blocked_count: $readback[0].summary.blocked_count,
+                active_duplicate_count: $readback[0].summary.active_duplicate_count,
+                stale_submitted_count: $readback[0].summary.stale_submitted_count
+              },
+              negative_guarantees: {
+                queue_write: false,
+                queue_enqueue: false,
+                search_submit: false,
+                external_search_api_call: false,
+                cms_write: false,
+                eligibility_write: false,
+                sitemap_llms_cache_mutation: false,
+                deploy: false,
+                persistent_config_change: false
+              }
+            }'
+          REMOTE
+
+          jq -e '
+            .status == "success" and .dry_run.writes_committed == false and
+            .write.written_records == 116 and
+            .write.target_tables == ["seo_urls", "seo_url_entities"] and
+            .readback.target_count == 116 and .readback.candidate_count == 116 and
+            .readback.eligible_count == 116 and .readback.planned_queue_count == 116 and
+            .readback.blocked_count == 0 and .readback.active_duplicate_count == 0 and
+            .readback.stale_submitted_count == 0 and
+            ([.negative_guarantees[]] | all(. == false))
+          ' artifacts/summary.json >/dev/null
+
+      - name: Ensure remote temporary artifact cleanup
+        if: always()
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -u
+          target="$DEPLOY_USER@$DEPLOY_HOST"
+          run_dir="/tmp/enneagram-url-truth-ops-${GITHUB_RUN_ID}"
+          [[ "$run_dir" =~ ^/tmp/enneagram-url-truth-ops-[0-9]+$ ]] || exit 1
+          printf -v q_run_dir '%q' "$run_dir"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$target" "rm -rf -- $q_run_dir"
+
+      - name: Remove decoded local artifact
+        if: always()
+        shell: bash
+        run: rm -f artifacts/handoff.json
+
+      - name: Upload sanitized Ops summary
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: enneagram-url-truth-production-ops-${{ github.run_id }}
+          path: artifacts/summary.json
+          if-no-files-found: error
