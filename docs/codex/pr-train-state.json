@@ -6,7 +6,7 @@
     "base": "main",
     "branch": "codex/career-10k-capacity-chaos-gate-01",
     "depends_on": ["CAREER-RUNTIME-SLO-ALERTING-01", "CAREER-DETAIL-READ-MODEL-10K-01", "CAREER-DETAIL-DELIVERY-10K-01"],
-    "status": "in_progress",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
     "failure_reason": null,
@@ -85750,6 +85750,32 @@
       {"at": "2026-07-11T06:38:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped production baseline, current manifest registration, and state initialization at 5e4be54af0efd0d36a7eb8e006d1707c869d844c."},
       {"at": "2026-07-11T06:39:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the exact three-path audit scope and opened PR #2958; required checks are pending."},
       {"at": "2026-07-11T06:44:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required CI and Code Scanning checks passed; review, merge policy, changed files, and allowed-path scope were revalidated."}
+    ]
+  },
+  "BIG5-EN-FACET-OPENNESS-CONTENT-PACKAGE-01": {
+    "id": "BIG5-EN-FACET-OPENNESS-CONTENT-PACKAGE-01",
+    "repo": "fap-api",
+    "title": "BIG5-EN-FACET-OPENNESS-CONTENT-PACKAGE-01: strengthen six English Openness Facets",
+    "base": "main",
+    "branch": "codex/big5-en-facet-openness-content-package-01",
+    "depends_on": ["BIG5-124-PUBLISH-READINESS-AUDIT-01"],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."},
+      "dependency": {"status": "pass", "evidence": "PR #2958 is merged at 440dabb855fa0e86fbd9876a706c32da46f1c2a4 and origin/main contains that squash merge."},
+      "content_scope": {"status": "pass", "evidence": "Exactly six independently authored English Openness Facet assets contain nine substantive sections, five FAQs, seven internal links, source traceability, and balanced non-diagnostic boundaries."},
+      "local_validation": {"status": "pass", "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [
+      {"at": "2026-07-11T07:08:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the second locked train item after verifying its audit dependency on origin/main and started in an isolated clean worktree; no production action is in scope."},
+      {"at": "2026-07-11T07:16:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."}
     ]
   },
   "AUDIT-PRR2-API-01": {

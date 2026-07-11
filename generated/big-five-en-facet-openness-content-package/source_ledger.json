@@ -1,0 +1,176 @@
+{
+  "package": "big-five-en-facet-openness-source-ledger-2026-07-11",
+  "access_date": "2026-07-11",
+  "scope": "Six English Openness Facet content packages only.",
+  "inherits": {
+    "path": "generated/big-five-zh-facet-hub-content-repair/source_ledger.json",
+    "package": "big-five-zh-facet-shared-source-ledger-2026-07-10"
+  },
+  "sources": [
+    {
+      "id": "I1",
+      "type": "internal",
+      "reference": "backend/content_assets/personality_public/big_five_v1_seed.json",
+      "use": "Frozen CMS field shape, current Chinese route keys, locale, launch state, robots, and 5×6 taxonomy labels.",
+      "limitation": "The existing short body copy is an input to audit, not an authority for new academic claims."
+    },
+    {
+      "id": "I2",
+      "type": "internal",
+      "reference": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+      "use": "Non-diagnostic, non-deterministic, non-screening public claim boundaries."
+    },
+    {
+      "id": "I3",
+      "type": "internal",
+      "reference": "generated/big-five-zh-legacy-route-audit/legacy_route_audit.json",
+      "use": "Frozen V2 public route family and duplicate-route boundary."
+    },
+    {
+      "id": "A1",
+      "type": "official_research_resource",
+      "title": "NEO Facets Table",
+      "author_or_source": "International Personality Item Pool, Oregon Research Institute",
+      "year": null,
+      "url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+      "accessed_at": "2026-07-10",
+      "claim": "Documents corresponding IPIP scales for the 30 NEO-PI-R facet constructs.",
+      "limitation": "IPIP scales measure similar constructs; this does not make them identical to proprietary NEO scales or authorize score conversion."
+    },
+    {
+      "id": "A2",
+      "type": "peer_reviewed",
+      "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets",
+      "author_or_source": "Soto, C. J., & John, O. P.",
+      "year": 2017,
+      "doi": "10.1037/pspp0000096",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+      "accessed_at": "2026-07-10",
+      "claim": "Supports a hierarchical domain-and-facet reading of Big Five traits using 15 facets.",
+      "limitation": "BFI-2 has 15 facets, not the 30-facet taxonomy used for this CMS route set."
+    },
+    {
+      "id": "A3",
+      "type": "peer_reviewed",
+      "title": "Between facets and domains: 10 aspects of the Big Five",
+      "author_or_source": "DeYoung, C. G., Quilty, L. C., & Peterson, J. B.",
+      "year": 2007,
+      "doi": "10.1037/0022-3514.93.5.880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
+      "accessed_at": "2026-07-10",
+      "claim": "Shows an alternative intermediate hierarchy with two aspects per domain.",
+      "limitation": "The ten aspects are not interchangeable with either BFI-2 facets or NEO/IPIP 30 facets."
+    },
+    {
+      "id": "A4",
+      "type": "academic_review",
+      "title": "Paradigm Shift to the Integrative Big Five Trait Taxonomy: History, Measurement, and Conceptual Issues",
+      "author_or_source": "John, O. P., Naumann, L. P., & Soto, C. J.",
+      "year": 2008,
+      "reference": "In Handbook of Personality: Theory and Research (3rd ed.), pp. 114–158.",
+      "claim": "Supports broad Big Five taxonomy framing and continuous trait language.",
+      "limitation": "No individual prediction, numeric validity, or universal facet naming claim is taken from this review."
+    }
+  ],
+  "taxonomy": [
+    {
+      "domain_code": "openness",
+      "domain_title_en": "Openness",
+      "facets": [
+        {
+          "code": "imagination",
+          "title_en": "Imagination",
+          "route": "/en/personality/big-five/facets/imagination"
+        },
+        {
+          "code": "aesthetics",
+          "title_en": "Aesthetics",
+          "route": "/en/personality/big-five/facets/aesthetics"
+        },
+        {
+          "code": "feelings",
+          "title_en": "Feelings",
+          "route": "/en/personality/big-five/facets/feelings"
+        },
+        {
+          "code": "actions",
+          "title_en": "Actions",
+          "route": "/en/personality/big-five/facets/actions"
+        },
+        {
+          "code": "ideas",
+          "title_en": "Ideas",
+          "route": "/en/personality/big-five/facets/ideas"
+        },
+        {
+          "code": "values",
+          "title_en": "Values",
+          "route": "/en/personality/big-five/facets/values"
+        }
+      ]
+    }
+  ],
+  "claim_map": [
+    {
+      "claim": "The six routes are narrower continuous descriptors under Openness, not personality types.",
+      "evidence_ids": [
+        "I1",
+        "A1",
+        "A4"
+      ]
+    },
+    {
+      "claim": "Facet interest or attention is not equivalent to ability, diagnosis, or outcome prediction.",
+      "evidence_ids": [
+        "I2",
+        "A4"
+      ]
+    },
+    {
+      "claim": "This route taxonomy must not be directly converted to BFI-2 facets or BFAS aspects.",
+      "evidence_ids": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    }
+  ],
+  "facet_boundaries": {
+    "imagination": {
+      "title_en": "Imagination",
+      "construct_summary": "the usual tendency to engage with mental imagery, hypothetical scenes, stories, and metaphor",
+      "explicit_non_equivalence": "It is not a verdict on practicality, daydreaming, or creative talent. A person with vivid imagery can verify rigorously, while a concrete thinker can innovate through experience, iteration, and tools"
+    },
+    "aesthetics": {
+      "title_en": "Aesthetics",
+      "construct_summary": "the usual attention given to form, color, sound, rhythm, language, and the atmosphere of an environment",
+      "explicit_non_equivalence": "It is not artistic skill, a rank of taste, purchasing preference, or cultural status. Drawing ability, a favorite music genre, and spending on expensive objects do not establish this facet"
+    },
+    "feelings": {
+      "title_en": "Feelings",
+      "construct_summary": "interest in identifying, attending to, and expressing one's own emotional experience rather than the intensity of emotion itself",
+      "explicit_non_equivalence": "It is not emotional instability, empathy, fragility, or mental-health status. Awareness does not imply larger mood swings, and limited emotional discussion does not imply absence of feeling or concern for others"
+    },
+    "actions": {
+      "title_en": "Actions",
+      "construct_summary": "the usual willingness to vary familiar routines, try new activities, and enter unfamiliar settings",
+      "explicit_non_equivalence": "It is not courage, travel frequency, impulsivity, or appetite for danger. A cautious person can explore through small pilots, and an eager experimenter still needs cost, exit, and stakeholder boundaries"
+    },
+    "ideas": {
+      "title_en": "Ideas",
+      "construct_summary": "the usual interest in abstract questions, complex explanations, conceptual connections, and differing viewpoints",
+      "explicit_non_equivalence": "It is not intelligence, education, knowledge volume, or correctness. Enjoying abstraction does not ensure sound judgment, and preferring concrete questions does not indicate weaker comprehension"
+    },
+    "values": {
+      "title_en": "Values",
+      "construct_summary": "the usual willingness to re-examine conventions, the reasons for rules, and one's own value assumptions",
+      "explicit_non_equivalence": "It is not moral quality, political position, rebelliousness, or respect for tradition. What someone believes and how willing they are to examine a belief are different questions"
+    }
+  },
+  "limitations": [
+    "The frozen CMS taxonomy is NEO/IPIP-like; it is not claimed as the single universal Big Five facet standard.",
+    "No proprietary assessment items, scoring keys, norms, or copyrighted manual text are reproduced.",
+    "No reliability, validity, percentile, clinical, hiring, admission, salary, relationship-outcome, or deterministic career claim is made.",
+    "GSC_EVIDENCE_PENDING: this package is content-authority preparation, not a search-performance claim."
+  ]
+}
