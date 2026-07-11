@@ -6,8 +6,8 @@
     "base": "main",
     "branch": "codex/career-directory-read-model-performance-01",
     "depends_on": [],
-    "status": "pr_open",
-    "commit_sha": "f5e5cd0e8",
+    "status": "ready_to_merge",
+    "commit_sha": "35d9f210fae677f3be9672798f25caa4eed502dd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2952",
     "failure_reason": null,
     "merged_at": null,
@@ -40,12 +40,16 @@
       "pint": {
         "status": "external_baseline_user_overridden",
         "evidence": "Scoped Pint passes all six changed PHP files; full Pint fails on both the current worktree and detached unmodified origin/main b922eeffb. The user explicitly authorized scoped Pint plus focused checks, scope validation, and GitHub required checks."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2952 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and the non-blocking SARIF upload before the ready-to-merge transition."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -90,6 +94,12 @@
         "from": "focused_checks_passed",
         "to": "pr_open",
         "note": "Rebased onto origin/main d20276068, reran focused checks and scope validation, pushed implementation f5e5cd0e8, and opened PR #2952; GitHub required checks are pending."
+      },
+      {
+        "at": "2026-07-11T14:54:42+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All GitHub required checks passed, GitHub reports the PR clean and mergeable, and the exact eleven-path scope plus diff validation were rechecked before merge."
       }
     ]
   },
