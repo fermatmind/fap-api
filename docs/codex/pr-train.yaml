@@ -39749,6 +39749,44 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-ZH-PUBLISHED-LINK-HREFLANG-REPAIR-01
+    repo: fap-api
+    depends_on: [BIG5-EN-FACET-NEUROTICISM-CONTENT-PACKAGE-01]
+    branch: codex/big5-zh-published-link-hreflang-repair-01
+    title: "BIG5-ZH-PUBLISHED-LINK-HREFLANG-REPAIR-01: repair 20 published Chinese Domain and Range links"
+    train_scope: big5_zh_published_link_hreflang_repair
+    status: user_authorized
+    scope:
+      - Build a V1 repair package for exactly five published Chinese Domain assets and fifteen published Chinese V2 Range assets frozen by BIG5-124-PUBLISH-READINESS-AUDIT-01.
+      - Replace empty internal-link arrays with exactly seven unique localized canonical links and add reciprocal zh-CN/en hreflang paths.
+      - Preserve content, public identities, published/indexable state, canonical paths, and existing SEO/runtime release gates; perform no CMS write or runtime release.
+    allowed_paths:
+      - generated/big-five-zh-published-link-hreflang-repair/**
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify English assets, Chinese Facet assets, Legacy aliases, CMS data, importer/runtime code, database schema, frontend code, routes, sitemap, llms, JSON-LD, permissions, secrets, or deployment configuration.
+      - Trigger CMS import, indexability promotion, deploy, publish, search submission, or any production workflow dispatch.
+    validation:
+      - node generated/big-five-zh-published-link-hreflang-repair/build-package.mjs
+      - node generated/big-five-zh-published-link-hreflang-repair/validate-package.mjs
+      - python3 -m json.tool generated/big-five-zh-published-link-hreflang-repair/big_five_zh_published_link_hreflang_repair_20_seed.json >/dev/null
+      - python3 -m json.tool generated/big-five-zh-published-link-hreflang-repair/qa_report.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []
