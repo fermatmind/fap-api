@@ -9,14 +9,17 @@ use Tests\TestCase;
 
 final class ProductionDeploymentStatusTruthTest extends TestCase
 {
-    public function test_stale_run_skips_the_environment_deploy_job(): void
+    public function test_stale_manual_sha_fails_closed_before_the_environment_deploy_job(): void
     {
         $source = $this->workflow();
         $eligibility = $this->between($source, '  deployment-eligibility:', '  deploy-production:');
         $deploy = strstr($source, '  deploy-production:') ?: '';
 
         $this->assertStringNotContainsString('environment:', $eligibility);
-        $this->assertStringContainsString('eligible=false', $eligibility);
+        $this->assertStringContainsString('if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]', $eligibility);
+        $this->assertStringContainsString('Manual production deploy refused because expected_release_sha is not latest main.', $eligibility);
+        $this->assertStringContainsString('exit 1', $eligibility);
+        $this->assertStringNotContainsString('eligible=false', $eligibility);
         $this->assertStringContainsString('needs: deployment-eligibility', $deploy);
         $this->assertStringContainsString("if: \${{ needs.deployment-eligibility.outputs.eligible == 'true' }}", $deploy);
         $this->assertStringContainsString("environment:\n      name: production", $deploy);
@@ -63,7 +66,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
     public static function deploymentOutcomes(): iterable
     {
         yield 'exact SHA success' => [true, true, true, true, true, 'success'];
-        yield 'stale workflow run' => [false, false, false, false, false, 'skipped'];
+        yield 'eligibility not granted' => [false, false, false, false, false, 'skipped'];
         yield 'deploy failure' => [true, false, false, false, false, 'failed'];
         yield 'queue restart skipped' => [true, true, false, true, true, 'failed'];
         yield 'revision mismatch' => [true, true, true, false, true, 'failed'];

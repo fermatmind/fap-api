@@ -143,13 +143,13 @@ High-risk paths require manual approval and are blocked by default:
 - queue/scheduler deploy tooling paths
 - database/auth/order/payment/Search Channel/URL submission/clinical/depression/software-developers/raw career paths
 - backend config, CMS controller/service, SEO/search service, content package,
-  and secret-looking paths in the production auto-deploy workflow
+  and secret-looking paths in the production deployment workflow
 
-The production auto-deploy workflow must also prove that the deployment SHA maps
-to exactly one merged PR on `main`. If that single-PR proof, label check, or
-risky-path check fails, production deployment must stop before production SSH
-credentials are loaded and the operator must use the manual exact-SHA readiness
-path.
+Production deployment has no `push`, `pull_request`, or `workflow_run` trigger.
+It is available only through manual `workflow_dispatch` after exact-SHA approval,
+successful staging evidence for the same latest-main SHA, a safe release ID, and
+the exact SHA-bound approval phrase. Any missing or mismatched evidence stops
+before production SSH credentials are loaded.
 
 ## fap-web handling in V1
 - `fap-web` is a reference only.

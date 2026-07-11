@@ -40,18 +40,14 @@ Backend release readiness must resolve and record:
 
 Backend deploy may proceed only after an explicit approval phrase naming the exact SHA and release name.
 
-## Automated production deploy guard
+## Manual-only production deploy guard
 
-The GitHub Actions production auto-deploy path is limited to a single merged PR
-whose merge commit is still current `origin/main` and whose labels and changed
-files are not classified as risky by the in-repository policy guard. Risky
-workflow, deploy tooling, database, backend config, CMS, SEO/search, content
-package, and secret-looking changes must not auto-deploy from a push-to-main
-workflow run.
-
-When the policy guard blocks a workflow run, use the manual backend readiness
-process and require an exact SHA deploy approval phrase before any production
-deploy. A stale workflow-run SHA is not a successful production deployment.
+The production workflow is triggered only through `workflow_dispatch`. A push,
+PR merge, or successful staging workflow cannot create a production deployment.
+The operator must supply the current latest-main SHA, the successful staging run
+ID for that exact SHA, a safe release ID, and the exact SHA-bound approval phrase.
+Missing evidence, a stale SHA, a mismatched staging run, or an invalid approval
+phrase stops before production SSH credentials are loaded.
 
 ## Frontend readiness governance
 
