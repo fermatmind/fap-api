@@ -70,6 +70,25 @@ gate when needed.
 Do not try to repair `/llms-full.txt` degraded mode through the Media Library
 importer, CMS image backfill, or the SEO content package draft importer.
 
+## Package Normalization And Body Visual Boundary
+
+The Media Library stage accepts an importer-compatible Stage 4 package; it does
+not repair package file names, synthesize missing CMS field projections, shorten
+metadata, or reconcile article/FAQ/CTA/internal-link identity. Stage 4 must
+provide one `FINAL_DERIVED_IMPORT_READY_PACKAGE` with source and derived hashes
+and a deterministic change ledger before this runner starts.
+
+The runner owns source validation, Media Library registration, CDN availability,
+variant generation, asset keys, and CMS image metadata readiness. Those facts
+do not prove that a required body visual is rendered in preview or in the public
+article body. Preview/public body visual parity remains a downstream article
+release gate and must verify the markdown/body projection, body anchor, answer
+block, public URL, and closeout URL count.
+
+Do not use Media Library import or image metadata backfill to repair Mode C
+file naming, CMS field mapping, article content, or `/llms-full.txt` runtime
+state.
+
 ## Half-Failed Asset Recovery
 
 When an earlier run created MediaAsset rows but CDN/object truth was not ready, audit first:
