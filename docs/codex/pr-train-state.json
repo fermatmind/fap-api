@@ -85388,9 +85388,9 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-02-payment-repair-schedule",
     "depends_on": [],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "413091296c768fe1f0941b2f6d4fc831e0ba3a7c",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2945",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -85444,6 +85444,12 @@
         "from": "focused_checks_passed",
         "to": "committed",
         "note": "Committed the five-path payment repair schedule scope at 413091296c768fe1f0941b2f6d4fc831e0ba3a7c on current origin/main."
+      },
+      {
+        "at": "2026-07-11T12:26:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2945; GitHub required checks are pending and no production action was performed."
       }
     ]
   }
