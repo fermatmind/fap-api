@@ -40499,3 +40499,41 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: AUDIT-PRR2-API-14
+    repo: fap-api
+    depends_on: []
+    branch: codex/audit-prr2-api-14-content-pack-lkg
+    title: "AUDIT-PRR2-API-14: atomically promote validated content pack LKG"
+    train_scope: prr2_content_pack_versioned_lkg
+    status: user_authorized
+    scope:
+      - Materialize each content pack release into an isolated versioned staging directory and validate every JSON file plus the declared manifest hash before promotion.
+      - Atomically switch the immutable materialized version and its per-pack/version last-known-good pointer.
+      - Preserve and serve the prior LKG on validation or remote rehydration failure, with structured failure metric fields.
+    allowed_paths:
+      - backend/app/Services/Content/ContentPackV2Materializer.php
+      - backend/app/Services/Content/ContentPackV2Resolver.php
+      - backend/tests/Unit/Content/ContentPackV2ResolverMaterializationTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish or activate a real content pack, mutate content payloads or production data, change scoring/report semantics, CMS/SEO, deploy, or access production.
+    validation:
+      - cd backend && php artisan test tests/Unit/Content/ContentPackV2ResolverMaterializationTest.php tests/Unit/Content/ContentPackV2ResolverRemoteRehydrateFallbackTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=test_runtime_freeze_classifier_ignores_content_pack_lkg_changes --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Content/ContentPackV2Materializer.php app/Services/Content/ContentPackV2Resolver.php tests/Unit/Content/ContentPackV2ResolverMaterializationTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    content_pack_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

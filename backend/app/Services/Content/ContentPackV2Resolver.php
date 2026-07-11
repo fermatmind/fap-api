@@ -108,15 +108,21 @@ final class ContentPackV2Resolver
                 try {
                     return $this->materializer->materialize($release, $compiledDir);
                 } catch (Throwable $e) {
+                    $lastKnownGood = $this->materializer->lastKnownGoodCompiledDir(
+                        strtoupper(trim((string) ($release->to_pack_id ?? ''))),
+                        trim((string) ($release->pack_version ?? $release->dir_alias ?? '')),
+                    );
                     Log::warning('PACKS2_RESOLVER_MATERIALIZATION_FAILED', [
+                        'metric' => 'content_pack.materialization_failure',
                         'release_id' => trim((string) ($release->id ?? '')),
                         'manifest_hash' => strtolower(trim((string) ($release->manifest_hash ?? ''))),
                         'storage_path' => $storagePath,
                         'source_compiled_dir' => $compiledDir,
                         'error' => $e->getMessage(),
+                        'fallback' => $lastKnownGood !== null ? 'lkg' : 'source',
                     ]);
 
-                    return $compiledDir;
+                    return $lastKnownGood ?? $compiledDir;
                 }
             }
         }
@@ -128,14 +134,20 @@ final class ContentPackV2Resolver
         try {
             return $this->remoteRehydrate->materializeFromRemote($release, $this->remoteRehydrateDisk());
         } catch (Throwable $e) {
+            $lastKnownGood = $this->materializer->lastKnownGoodCompiledDir(
+                strtoupper(trim((string) ($release->to_pack_id ?? ''))),
+                trim((string) ($release->pack_version ?? $release->dir_alias ?? '')),
+            );
             Log::warning('PACKS2_RESOLVER_REMOTE_REHYDRATE_FAILED', [
+                'metric' => 'content_pack.remote_rehydrate_failure',
                 'release_id' => trim((string) ($release->id ?? '')),
                 'manifest_hash' => strtolower(trim((string) ($release->manifest_hash ?? ''))),
                 'storage_path' => $storagePath,
                 'error' => $e->getMessage(),
+                'fallback' => $lastKnownGood !== null ? 'lkg' : 'none',
             ]);
 
-            return null;
+            return $lastKnownGood;
         }
     }
 

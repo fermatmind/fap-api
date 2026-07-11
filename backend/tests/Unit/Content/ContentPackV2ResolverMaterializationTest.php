@@ -169,6 +169,47 @@ final class ContentPackV2ResolverMaterializationTest extends TestCase
         $this->assertSame($historyRowId, (string) ($sentinel['release_id'] ?? ''));
     }
 
+    public function test_invalid_new_version_keeps_and_serves_versioned_last_known_good(): void
+    {
+        config()->set('storage_rollout.resolver_materialization_enabled', true);
+
+        $goodReleaseId = (string) Str::uuid();
+        $goodHash = str_repeat('e', 64);
+        $goodStoragePath = 'private/packs_v2/BIG5_OCEAN/v1/'.$goodReleaseId;
+        $this->insertRelease($goodReleaseId, $goodHash, $goodStoragePath, createdAt: now()->subMinute());
+        $this->activateRelease($goodReleaseId);
+        $this->writeCompiledTree(storage_path('app/'.$goodStoragePath.'/compiled'), [
+            'manifest.json' => json_encode(['compiled_hash' => $goodHash], JSON_THROW_ON_ERROR),
+            'questions.compiled.json' => '{"source":"lkg"}',
+        ]);
+
+        /** @var ContentPackV2Resolver $resolver */
+        $resolver = app(ContentPackV2Resolver::class);
+        $lastKnownGood = $resolver->resolveActiveCompiledPath('BIG5_OCEAN', 'v1');
+        $this->assertNotNull($lastKnownGood);
+
+        $badReleaseId = (string) Str::uuid();
+        $badHash = str_repeat('f', 64);
+        $badStoragePath = 'private/packs_v2/BIG5_OCEAN/v1/'.$badReleaseId;
+        $this->insertRelease($badReleaseId, $badHash, $badStoragePath, createdAt: now());
+        $this->activateRelease($badReleaseId);
+        $this->writeCompiledTree(storage_path('app/'.$badStoragePath.'/compiled'), [
+            'manifest.json' => json_encode(['compiled_hash' => $badHash], JSON_THROW_ON_ERROR),
+            'questions.compiled.json' => '{invalid-json',
+        ]);
+
+        $resolved = $resolver->resolveActiveCompiledPath('BIG5_OCEAN', 'v1');
+
+        $this->assertSame($lastKnownGood, $resolved);
+        $this->assertSame('{"source":"lkg"}', (string) File::get($resolved.'/questions.compiled.json'));
+        $this->assertDirectoryDoesNotExist(dirname($this->expectedMaterializedDir($badStoragePath, $badHash)));
+    }
+
+    private function expectedMaterializedDir(string $storagePath, string $manifestHash): string
+    {
+        return storage_path('app/private/packs_v2_materialized/BIG5_OCEAN/v1/'.hash('sha256', $storagePath).'/'.$manifestHash.'/compiled');
+    }
+
     private function insertRelease(
         string $releaseId,
         string $manifestHash,
