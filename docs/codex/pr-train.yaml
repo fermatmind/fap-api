@@ -21413,7 +21413,7 @@ prs:
     base: main
     title: "feat(foundation): add manual Daily Giving social sync MVP"
     train_scope: foundation_daily_giving_social_sync
-    status: ready_to_merge
+    status: merged
     scope:
       - Add a manual-only Foundation Daily Giving social sync MVP using existing social URL fields and Ops admin workflow.
       - Surface manual social sync status in Ops without adding database schema, credentials, external API clients, posting queues, automatic posting, CMS mutation, deploy, Search Channel action, or URL submission.
