@@ -85388,13 +85388,13 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-02-payment-repair-schedule",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "413091296c768fe1f0941b2f6d4fc831e0ba3a7c",
+    "status": "merged",
+    "commit_sha": "8aff9125eed8ef97a09581b3e835e2d22d28e25c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2945",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T04:25:42Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -85427,7 +85427,7 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -85459,6 +85459,94 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "All nine GitHub checks passed on head fe75b0b39bc44feb482b72a48f1e36f0ff01d529; PR #2945 is CLEAN, MERGEABLE, non-draft, review-unblocked, and its five changed paths match the manifest."
+      },
+      {
+        "at": "2026-07-11T12:36:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in AUDIT-PRR2-API-03: PR #2945 merged at 8aff9125eed8ef97a09581b3e835e2d22d28e25c; origin/main contains the merge, local main is synced, post-merge checks passed, and local/remote task branches are deleted."
+      }
+    ]
+  },
+  "AUDIT-PRR2-API-03": {
+    "id": "AUDIT-PRR2-API-03",
+    "repo": "fap-api",
+    "title": "AUDIT-PRR2-API-03: remove generic CMS release mutations",
+    "base": "main",
+    "branch": "codex/audit-prr2-api-03-controlled-cms-release",
+    "depends_on": ["AUDIT-PRR2-API-01"],
+    "status": "ready_to_merge",
+    "commit_sha": "0fcc8b615f3bd53d30b43d931312e54a792d35ca",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2946",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The 2026-07-11 PRR2 /goal explicitly authorized AUDIT-PRR2-API-03 plus manifest/state registration and a conservative fail-closed mitigation when the cross-content publish contract is not frozen."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "AUDIT-PRR2-API-01 is merged at 3fa2ac2071fb502f6a375a158d045b3575022504 and origin/main contains the merge."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "ControlledContentReleaseOnlyTest, ContentCmsProductLayerTest, PostReleaseObservabilityPageTest and ArticlePublishControlledCommandTest passed 39 tests with 343 assertions; the Big Five runtime-freeze classifier passed 2 tests with 4 assertions."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Scoped Pint, Blade compile/clear, manifest YAML, state JSON, git diff --check and exact allowed-path validation passed. Generic Article/CareerGuide/CareerJob release methods and the release workspace mutation are absent."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "On head e40f9ff92cb942f5135205630344a7f632832d13, hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive and all Code Scanning checks passed."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T12:32:48+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Registered and started the explicitly authorized fail-closed removal of generic CMS release mutations in the isolated API train worktree; no CMS write or production action is in scope."
+      },
+      {
+        "at": "2026-07-11T12:48:00+08:00",
+        "from": "in_progress",
+        "to": "focused_checks_passed",
+        "note": "CMS release, controlled-command, observability, Big Five classifier, Pint, Blade, YAML/JSON, diff and allowed-path checks passed; no CMS mutation or production action was performed."
+      },
+      {
+        "at": "2026-07-11T12:50:00+08:00",
+        "from": "focused_checks_passed",
+        "to": "committed",
+        "note": "Committed the twelve-path controlled CMS release-only scope at 0fcc8b615f3bd53d30b43d931312e54a792d35ca on current origin/main."
+      },
+      {
+        "at": "2026-07-11T12:53:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2946; GitHub required checks are pending and no CMS or production action was performed."
+      },
+      {
+        "at": "2026-07-11T13:05:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed on head e40f9ff92cb942f5135205630344a7f632832d13; PR #2946 is CLEAN, MERGEABLE, non-draft, review-unblocked, and its twelve changed paths match the manifest."
       }
     ]
   }

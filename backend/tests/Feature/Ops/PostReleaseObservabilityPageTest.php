@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
-use App\Filament\Ops\Pages\ContentReleasePage;
 use App\Filament\Ops\Pages\PostReleaseObservabilityPage;
-use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\AdminUser;
 use App\Models\Article;
@@ -20,6 +18,7 @@ use App\Models\CareerJobSeoMeta;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Services\Cms\ArticlePublishService;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -257,9 +256,7 @@ final class PostReleaseObservabilityPageTest extends TestCase
         app()->instance(OrgContext::class, $context);
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, 'article', $article);
 
-        Livewire::test(ContentReleasePage::class)
-            ->assertOk()
-            ->call('releaseItem', 'article', (int) $article->id);
+        app(ArticlePublishService::class)->publishArticle((int) $article->id, 'release_workspace');
 
         $article->refresh();
 
@@ -355,7 +352,7 @@ final class PostReleaseObservabilityPageTest extends TestCase
             ->assertCount('auditCards', 4);
     }
 
-    public function test_resource_release_action_triggers_failure_alerts_and_observability_ignores_other_org_rows(): void
+    public function test_controlled_publish_service_triggers_failure_alerts_and_observability_ignores_other_org_rows(): void
     {
         config()->set('ops.content_release_observability.cache_invalidation_urls', [
             'https://cache.example.test/invalidate?webhook_secret=cache-secret',
@@ -418,7 +415,7 @@ final class PostReleaseObservabilityPageTest extends TestCase
         $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
         app()->instance(OrgContext::class, $context);
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, 'article', $article);
-        ArticleResource::releaseRecord($article, 'resource_table');
+        app(ArticlePublishService::class)->publishArticle((int) $article->id, 'controlled_publish_test');
 
         $article->refresh();
         $this->assertSame('published', $article->status);

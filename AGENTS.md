@@ -106,6 +106,7 @@ Prefer a repo-compatible default implementation and mark options as optional.
 ### Controlled CMS Publish Discipline
 - Controlled Codex-assisted article publish is permitted only through the backend `articles:publish-controlled` command after exact user confirmation, successful preflight, explicit boundary-context claim-warning acknowledgement when needed, and audit logging.
 - Controlled Codex-assisted promotion of an already-published article's existing SEO update working revision is permitted only through the backend `articles:promote-existing-working-revision` command after exact article/revision/route locks, authenticated preview QA acknowledgement, downstream schema/hreflang/search/sitemap/llms/revalidation holds, successful preflight, and audit logging.
+- Generic Filament release actions and direct `releaseRecord`/`releaseItem` entry points are prohibited for Article, CareerGuide, and CareerJob. A content type without an approved controlled publisher must remain read-only and fail closed on the release workspace.
 - Codex must not use generic CMS UI publish clicks, uncontrolled API publish endpoints, or production content mutation outside that controlled SOP.
 
 ### DailyGiving Proof Handling Discipline

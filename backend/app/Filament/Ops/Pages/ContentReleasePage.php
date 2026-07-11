@@ -15,7 +15,6 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Support\OrgContext;
 use Filament\Pages\Page;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Collection;
 
 class ContentReleasePage extends Page
@@ -78,32 +77,6 @@ class ContentReleasePage extends Page
     public static function canAccess(): bool
     {
         return ContentAccess::canRelease();
-    }
-
-    public function releaseItem(string $type, int $id): void
-    {
-        if (! ContentAccess::canRelease()) {
-            throw new AuthorizationException(__('ops.custom_pages.common.errors.release_content_forbidden'));
-        }
-
-        $record = match ($type) {
-            'article' => Article::query()->whereIn('org_id', $this->currentOrgIds())->findOrFail($id),
-            'guide' => CareerGuide::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
-            'job' => CareerJob::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
-            default => throw new AuthorizationException(__('ops.custom_pages.common.errors.unsupported_content_type')),
-        };
-
-        if ($this->reviewState($type, $record) !== EditorialReviewAudit::STATE_APPROVED) {
-            throw new AuthorizationException(__('ops.custom_pages.common.errors.must_be_approved_before_publish'));
-        }
-
-        match ($type) {
-            'article' => ArticleResource::releaseRecord($record, 'release_workspace'),
-            'guide' => CareerGuideResource::releaseRecord($record, 'release_workspace'),
-            'job' => CareerJobResource::releaseRecord($record, 'release_workspace'),
-        };
-
-        $this->refreshWorkspace();
     }
 
     private function refreshWorkspace(): void
@@ -269,7 +242,7 @@ class ContentReleasePage extends Page
             'updated_at_sort' => strtotime($updatedAt) ?: 0,
             'edit_url' => $editUrl,
             'index_url' => $indexUrl,
-            'releaseable' => $status === 'draft' && $reviewState === EditorialReviewAudit::STATE_APPROVED,
+            'releaseable' => false,
         ];
     }
 
