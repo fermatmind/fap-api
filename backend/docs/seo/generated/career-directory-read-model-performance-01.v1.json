@@ -1,0 +1,36 @@
+{
+  "schema_version": "career.directory_read_model_performance.v1",
+  "task": "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01",
+  "authority": "CMS/backend public Career job index",
+  "fixture_counts": [1046, 10000],
+  "budgets": {
+    "warm_p95_ms_1046": 300,
+    "warm_p95_ms_10000": 500,
+    "offline_build_max_ms": 2000,
+    "first_page_max_bytes": 262144,
+    "peak_memory_delta_max_bytes": 134217728,
+    "read_model_build_max_queries": 1,
+    "first_page_items": 50
+  },
+  "observed_local_validation": {
+    "1046": {
+      "warm_p95_ms": 5.16,
+      "warm_p99_ms": 5.236,
+      "offline_build_ms": 3.39,
+      "database_queries": 1,
+      "first_page_bytes": 21783,
+      "peak_memory_delta_bytes": 0
+    },
+    "10000": {
+      "warm_p95_ms": 5.184,
+      "warm_p99_ms": 5.221,
+      "offline_build_ms": 39.13,
+      "database_queries": 1,
+      "first_page_bytes": 21788,
+      "peak_memory_delta_bytes": 12582912
+    }
+  },
+  "runtime_authority_changed": false,
+  "seo_runtime_changed": false,
+  "production_action_performed": false
+}

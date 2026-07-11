@@ -395,5 +395,36 @@
     "required_checks_affected": false,
     "recommended_follow_up": "Reconcile the two rendered-QA tests with the authoritative generated artifacts in a dedicated Big Five QA contract PR.",
     "train_continued": true
+  },
+  {
+    "repo": "fap-api",
+    "pr_id": "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01",
+    "branch": "codex/career-directory-read-model-performance-01",
+    "blocker_type": "required_local_check_external_baseline_failure",
+    "evidence": [
+      "Full composer test exceeded the 300-second process timeout and reported unrelated failures.",
+      "Detached unmodified origin/main b922eeffb independently reproduced CareerJobListApiTest::it_returns_a_resource_backed_lightweight_job_index returning zero items.",
+      "The current PR CareerDirectory suite passes 7 tests and 120 assertions."
+    ],
+    "why_not_current_pr_scope": "The failure reproduces without the directory read-model changes.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Repair the baseline test/runtime-fixture contract in a separate scoped PR.",
+    "user_override": "The user explicitly authorized focused local checks plus GitHub required checks on 2026-07-11.",
+    "train_continued": true
+  },
+  {
+    "repo": "fap-api",
+    "pr_id": "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01",
+    "branch": "codex/career-directory-read-model-performance-01",
+    "blocker_type": "required_local_check_external_baseline_failure",
+    "evidence": [
+      "Full vendor/bin/pint --test fails on the unchanged repository and detached unmodified origin/main b922eeffb.",
+      "Scoped Pint passes all six PHP files changed by this PR."
+    ],
+    "why_not_current_pr_scope": "Every changed PHP file passes Pint and the repository-wide failure reproduces without this PR.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Repair repository-wide baseline formatting separately.",
+    "user_override": "The user explicitly authorized changed-PHP scoped Pint plus focused checks, scope validation, and GitHub required checks on 2026-07-11.",
+    "train_continued": true
   }
 ]

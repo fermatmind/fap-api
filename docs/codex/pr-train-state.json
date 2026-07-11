@@ -1,4 +1,92 @@
 {
+  "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01": {
+    "id": "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01",
+    "repo": "fap-api",
+    "title": "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01 career directory read model performance",
+    "base": "main",
+    "branch": "codex/career-directory-read-model-performance-01",
+    "depends_on": [],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The attached Career 10k Stability /goal explicitly authorized this PR and its fap-api manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "This first train item has no dependency and started from origin/main a39226300."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "CareerDirectory tests passed 7 tests and 120 assertions, including real generated 1046/10000-row budgets; the scoped Big Five runtime classifier passed 2 tests and 4 assertions."
+      },
+      "full_composer_test": {
+        "status": "external_baseline_user_overridden",
+        "evidence": "Full composer test exceeded 300 seconds and baseline origin/main b922eeffb independently reproduces a CareerJobListApi failure. The user explicitly authorized focused local checks plus GitHub required checks on 2026-07-11."
+      },
+      "pint": {
+        "status": "external_baseline_user_overridden",
+        "evidence": "Scoped Pint passes all six changed PHP files; full Pint fails on both the current worktree and detached unmodified origin/main b922eeffb. The user explicitly authorized scoped Pint plus focused checks, scope validation, and GitHub required checks."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T13:48:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Registered and started the backend-authoritative Career directory read-model performance scope in an isolated origin/main worktree; no production action was performed."
+      },
+      {
+        "at": "2026-07-11T14:05:00+08:00",
+        "from": "in_progress",
+        "to": "stopped_required_local_check",
+        "note": "Scoped CareerDirectory and 10k performance checks pass, but required full composer test is baseline-broken and timed out; stopped before staging, commit, push, or PR creation under the attached goal's strict local-check rule."
+      },
+      {
+        "at": "2026-07-11T14:12:00+08:00",
+        "from": "stopped_required_local_check",
+        "to": "in_progress",
+        "note": "User explicitly authorized the independently reproduced full composer baseline failure as a sidecar and set focused local checks plus GitHub required checks as the merge gate."
+      },
+      {
+        "at": "2026-07-11T14:18:00+08:00",
+        "from": "in_progress",
+        "to": "stopped_required_local_check",
+        "note": "Focused Career tests and scoped Pint pass, but full Pint independently fails on unmodified origin/main; stopped before commit/push because the current exception covers only composer test."
+      },
+      {
+        "at": "2026-07-11T14:22:00+08:00",
+        "from": "stopped_required_local_check",
+        "to": "in_progress",
+        "note": "User explicitly authorized changed-PHP scoped Pint plus focused local checks, scope validation, and GitHub required checks for the independently reproduced repository-wide Pint baseline failure."
+      },
+      {
+        "at": "2026-07-11T14:28:00+08:00",
+        "from": "in_progress",
+        "to": "focused_checks_passed",
+        "note": "CareerDirectory tests passed 7 tests/120 assertions, Big Five classifier passed 2 tests/4 assertions, scoped Pint, route, migrate pretend, Composer validation, YAML/JSON, diff, generated metrics, and exact eleven-path scope validation passed."
+      }
+    ]
+  },
   "ENNEAGRAM-EN13-CONTENT-PACKAGE-01": {
     "id": "ENNEAGRAM-EN13-CONTENT-PACKAGE-01",
     "repo": "fap-api",
