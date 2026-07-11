@@ -85411,6 +85411,32 @@
       {"at": "2026-07-11T06:10:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required CI and Code Scanning checks passed; PR body, review state, changed files, and allowed-path scope were revalidated."}
     ]
   },
+  "BIG5-124-PUBLISH-READINESS-AUDIT-01": {
+    "id": "BIG5-124-PUBLISH-READINESS-AUDIT-01",
+    "repo": "fap-api",
+    "title": "BIG5-124-PUBLISH-READINESS-AUDIT-01: freeze 124-asset publish baseline",
+    "base": "main",
+    "branch": "codex/big5-124-publish-readiness-audit-01",
+    "depends_on": [],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."},
+      "production_baseline": {"status": "pass", "evidence": "Read-only production API evidence at 2026-07-11T06:36:10Z returned 62 zh-CN plus 62 en Big Five assets, 124 unique identities, and exactly ten Chinese redirect-only aliases."},
+      "scope": {"status": "pass", "evidence": "This audit records evidence only and does not mutate CMS, SEO runtime, redirects, indexability, sitemap, llms, frontend code, secrets, or production data."},
+      "github_required_checks": {"status": "pending", "evidence": "Required checks will be recorded after the audit PR is opened."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [
+      {"at": "2026-07-11T06:36:10Z", "from": "unregistered", "to": "in_progress", "note": "Registered the first locked audit scope in an isolated clean worktree; no production action is in scope."},
+      {"at": "2026-07-11T06:37:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Production baseline JSON, 124/114/10 assertions, manifest YAML, state JSON, diff, and exact allowed-path validation passed."}
+    ]
+  },
   "AUDIT-PRR2-API-01": {
     "id": "AUDIT-PRR2-API-01",
     "repo": "fap-api",
