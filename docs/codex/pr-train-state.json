@@ -95,8 +95,8 @@
     "depends_on": [
       "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "1005466d5b3baf0421d1b66b2841d3d5554e8e6f",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -143,6 +143,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Focused Enneagram CMS draft, promotion, and publish gate command tests passed after adding wing/subtype identity support."
+      },
+      {
+        "at": "2026-07-11T10:18:00.000Z",
+        "from": "local_checks_passed",
+        "to": "committed",
+        "note": "Committed scoped ENNEAGRAM-90 backend CMS gate identity changes after path-limited staging."
       }
     ]
   },
