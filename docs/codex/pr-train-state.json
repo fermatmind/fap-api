@@ -6,8 +6,8 @@
     "base": "main",
     "branch": "codex/career-runtime-slo-alerting-01",
     "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01", "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01", "CAREER-DIRECTORY-ERROR-SEMANTICS-01"],
-    "status": "ci_fix_validated",
-    "commit_sha": "47a58213f6809e53142dbf0bf6eb22a53cae0271",
+    "status": "ready_to_merge",
+    "commit_sha": "947ac9860a6819faf0f188cc25ab7b4d85ea468e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2960",
     "failure_reason": null,
     "merged_at": null,
@@ -42,12 +42,15 @@
         "status": "external_baseline_user_overridden",
         "evidence": "Changed-PHP scoped Pint passes all eight changed PHP files; the clean-origin/main repository Pint baseline failure is sidecarred under the user's explicit override."
       },
-      "github_required_checks": {"status": "pending", "evidence": null}
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2960 passes hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and non-blocking SARIF upload after the inspected classifier fix."
+      }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -80,6 +83,12 @@
         "from": "github_checks_failed_fix_in_progress",
         "to": "ci_fix_validated",
         "note": "The exact failing runtime-path check plus new classifier regression pass 2 tests/4 assertions; Career SLO contracts pass 5/18 and scoped Pint passes all eight changed PHP files."
+      },
+      {
+        "at": "2026-07-11T17:39:00+08:00",
+        "from": "ci_fix_validated",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed after the scoped classifier fix; GitHub reports CLEAN/MERGEABLE and the exact ten-path scope plus diff validation passed."
       }
     ]
   },
