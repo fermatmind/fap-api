@@ -40038,6 +40038,41 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-114-INDEXABILITY-PUBLISH-GATE-01
+    repo: fap-api
+    depends_on: [BIG5-124-PRODUCTION-IMPORTER-OPS-01]
+    external_prerequisites:
+      - production CMS import run 29154837152 completed successfully for release 5f366679bc4f78f5adbf6601f477a1a7b8c968e7 and seed 8bb7166ce5eba0daf30044d990c6356fb108c80f453c964d831c849ef6f9c0ce
+    branch: codex/big5-114-indexability-publish-gate-01
+    title: "BIG5-114-INDEXABILITY-PUBLISH-GATE-01: prepare controlled 93-page indexability promotion"
+    train_scope: big5_114_indexability_publish_gate
+    status: user_authorized
+    scope:
+      - Derive exactly 93 unpublished canonical Big Five assets from the locked 124-asset seed while preserving the existing 21 published canonical assets.
+      - Exclude all 10 zh-CN Legacy redirect-only aliases and freeze the final 114-canonical indexability topology.
+      - Add an exact-release-SHA, exact-package-hash, exact-93-row production promotion workflow that always dry-runs before a separately approved write.
+    allowed_paths: [.github/workflows/big-five-114-production-indexability-promotion.yml, generated/big-five-114-indexability-publish-gate/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    do_not:
+      - Dispatch the workflow, mutate production CMS, deploy, submit search URLs, or change frontend runtime code in this PR.
+      - Promote any Legacy alias or alter the 21 already-published canonical assets.
+    validation:
+      - node generated/big-five-114-indexability-publish-gate/build-package.mjs
+      - cd backend && DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan personality-public-assets:import --no-ansi --allow-indexable --source=../generated/big-five-114-indexability-publish-gate/big_five_93_indexability_promotion_v1_seed.json
+      - actionlint .github/workflows/big-five-114-production-indexability-promotion.yml
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    workflow_policy_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []
