@@ -68,7 +68,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
       - name: Validate dispatch inputs
         shell: bash
@@ -242,7 +242,7 @@ jobs:
 
       - name: Upload dry-run report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: career-content-production-readiness-dry-run-${{ github.event.inputs.asset_channel }}
           path: artifacts/

@@ -76,7 +76,7 @@ jobs:
           esac
 
       - name: Set up production SSH identity
-        uses: webfactory/ssh-agent@v0.10.0
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
@@ -165,7 +165,7 @@ jobs:
 
       - name: Publish bounded import receipt
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: big-five-zh-facet-cms-import-receipt
           path: ${{ runner.temp }}/big-five-zh-facet-cms-import/receipt.txt

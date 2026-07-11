@@ -57,7 +57,7 @@ jobs:
     name: Validate train manifest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Validate manifest
         env:
           RELEASE_TRAIN_MANIFEST_PATH: ${{ github.event.inputs.manifest_path }}
@@ -86,7 +86,7 @@ jobs:
           python3 ops/release-train/release_train.py plan \
             --manifest "${RELEASE_TRAIN_MANIFEST_PATH}" \
             --output artifacts/plan.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: release-train-validate
@@ -100,7 +100,7 @@ jobs:
     if: ${{ github.event.inputs.mode == 'dry-run' || github.event.inputs.mode == 'validate' || github.event.inputs.dry_run == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Dry-run execution
         env:
           RELEASE_TRAIN_MANIFEST_PATH: ${{ github.event.inputs.manifest_path }}
@@ -125,7 +125,7 @@ jobs:
           python3 ops/release-train/release_train.py dry-run \
             --manifest "${RELEASE_TRAIN_MANIFEST_PATH}" \
             --output artifacts/dry-run.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: release-train-dry-run
@@ -138,7 +138,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Execute train
         env:
           RELEASE_TRAIN_MANIFEST_PATH: ${{ github.event.inputs.manifest_path }}
@@ -172,7 +172,7 @@ jobs:
             --allow-rollback "${RELEASE_TRAIN_ALLOW_ROLLBACK}" \
             --output artifacts/run.json
           cat artifacts/run.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: release-train-run

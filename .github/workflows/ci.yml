@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
       - name: Guard no committed secrets (H-02)
         run: bash backend/scripts/ci/guard_no_committed_secrets.sh
@@ -34,10 +34,10 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: '8.4'
           coverage: none
@@ -82,10 +82,10 @@ jobs:
       CONTENT_PACKS_INDEX_ARTIFACT_PATH: storage/app/private/content_packs_index/content-packs-index.json
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: '8.4'
           coverage: none
@@ -94,7 +94,7 @@ jobs:
             mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
 
       - name: Cache Composer
-        uses: actions/cache@v5
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         with:
           path: |
             backend/vendor
@@ -151,7 +151,7 @@ jobs:
           php artisan test --filter=ContentPacksIndexArtifact --no-ansi
 
       - name: Upload content packs index artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: content-packs-index
           path: backend/storage/app/private/content_packs_index/content-packs-index.json
@@ -192,10 +192,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: '8.4'
           coverage: none
@@ -204,12 +204,12 @@ jobs:
             mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
 
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: '24'
 
       - name: Cache Composer
-        uses: actions/cache@v5
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         with:
           path: |
             backend/vendor
@@ -242,10 +242,10 @@ jobs:
 
       - name: Enforce mutating-route security guardrails
         working-directory: backend
-        run: php artisan test tests/Unit/Security/SecurityGuardrailsTest.php --no-ansi
+        run: php artisan test tests/Unit/Security/SecurityGuardrailsTest.php tests/Unit/Security/ImmutableGithubActionsTest.php --no-ansi
 
       - name: Download content packs index artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           name: content-packs-index
           path: backend/storage/app/private/content_packs_index
@@ -278,7 +278,7 @@ jobs:
 
       - name: Upload verify_mbti artifacts (on failure)
         if: failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: ci_verify_mbti_${{ matrix.mode }}
           path: backend/artifacts/verify_mbti
@@ -310,10 +310,10 @@ jobs:
       CONTENT_PACKS_INDEX_ARTIFACT_PATH: storage/app/private/content_packs_index/content-packs-index.json
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: '8.4'
           coverage: none
@@ -322,7 +322,7 @@ jobs:
             mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
 
       - name: Cache Composer
-        uses: actions/cache@v5
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         with:
           path: |
             backend/vendor
@@ -354,7 +354,7 @@ jobs:
           php artisan key:generate --force
 
       - name: Download content packs index artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           name: content-packs-index
           path: backend/storage/app/private/content_packs_index
