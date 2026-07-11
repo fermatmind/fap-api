@@ -34,6 +34,8 @@ final class PublicCareerAuthorityResponseCache
 
     public const DIRECTORY_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:directory-read-model:v2';
 
+    public const DIRECTORY_CACHE_MAX_AGE_SECONDS = 1800;
+
     public function __construct(
         private readonly CareerPublicDatasetContractBuilder $datasetContractBuilder,
         private readonly CareerLaunchGovernanceClosureService $launchGovernanceClosureService,
@@ -396,6 +398,7 @@ final class PublicCareerAuthorityResponseCache
 
             $this->logDirectoryCacheState($normalizedLocale, 'rebuild', is_string($currentVersion) ? $currentVersion : null, ['rebuild' => 'starting']);
 
+            $started = hrtime(true);
             try {
                 return $rebuild();
             } catch (\Throwable $throwable) {
@@ -405,6 +408,11 @@ final class PublicCareerAuthorityResponseCache
                 ]);
 
                 throw $throwable;
+            } finally {
+                Cache::forever(
+                    $this->directoryLastRebuildDurationKey($normalizedLocale),
+                    round((hrtime(true) - $started) / 1_000_000, 3),
+                );
             }
         });
     }
@@ -422,25 +430,30 @@ final class PublicCareerAuthorityResponseCache
             Cache::forever($this->directoryLkgVersionKey($normalizedLocale), $previousVersion);
         }
         Cache::forever($activeKey, $version);
+        Cache::forever($this->directoryActivatedAtKey($normalizedLocale), now()->timestamp);
         Cache::forget($this->directoryReadModelCacheKey($normalizedLocale));
         $this->logDirectoryCacheState($normalizedLocale, 'rebuild', $version, ['rebuild' => 'finished']);
 
         return $version;
     }
 
-    /** @return array{locale: string, status: string, active_version: ?string, lkg_version: ?string} */
+    /** @return array{locale: string, status: string, active_version: ?string, lkg_version: ?string, age_seconds: ?int, last_rebuild_ms: ?float} */
     public function directoryCacheStatus(string $publicLocale): array
     {
         $locale = $this->normalizePublicLocale($publicLocale);
         $active = Cache::get($this->directoryActiveVersionKey($locale));
         $lkg = Cache::get($this->directoryLkgVersionKey($locale));
         $activePayload = is_string($active) ? Cache::get($this->directoryVersionPayloadKey($locale, $active)) : null;
+        $activatedAt = Cache::get($this->directoryActivatedAtKey($locale));
+        $lastRebuildMs = Cache::get($this->directoryLastRebuildDurationKey($locale));
 
         return [
             'locale' => $locale,
             'status' => is_array($activePayload) ? 'ready' : 'unavailable',
             'active_version' => is_string($active) ? $active : null,
             'lkg_version' => is_string($lkg) ? $lkg : null,
+            'age_seconds' => is_numeric($activatedAt) ? max(0, now()->timestamp - (int) $activatedAt) : null,
+            'last_rebuild_ms' => is_numeric($lastRebuildMs) ? (float) $lastRebuildMs : null,
         ];
     }
 
@@ -568,6 +581,16 @@ final class PublicCareerAuthorityResponseCache
     private function directoryRebuildLockKey(string $publicLocale): string
     {
         return sprintf('%s:%s:rebuild-lock', self::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX, $this->normalizePublicLocale($publicLocale));
+    }
+
+    private function directoryActivatedAtKey(string $publicLocale): string
+    {
+        return sprintf('%s:%s:activated-at', self::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX, $this->normalizePublicLocale($publicLocale));
+    }
+
+    private function directoryLastRebuildDurationKey(string $publicLocale): string
+    {
+        return sprintf('%s:%s:last-rebuild-ms', self::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX, $this->normalizePublicLocale($publicLocale));
     }
 
     /** @param array<string, mixed> $extra */

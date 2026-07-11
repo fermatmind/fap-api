@@ -64,6 +64,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('norms:eq60:drift-check --from=active --to=candidate')->monthlyOn(1, '05:00')->withoutOverlapping();
         $schedule->command('seo:warm-sitemap-source-cache --json')->everyTenMinutes()->withoutOverlapping();
         $schedule->command('career:warm-public-authority-cache --verify-only --json')->everyTenMinutes()->withoutOverlapping();
+        $schedule->command('career:runtime-slo-check --json')->everyFiveMinutes()->withoutOverlapping();
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
@@ -75,6 +76,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Ensure every API response (including throttled responses) gets a request id header.
         $middleware->prependToGroup('api', \App\Http\Middleware\AttachRequestId::class);
         $middleware->appendToGroup('api', \App\Http\Middleware\DetectRegion::class);
+        $middleware->appendToGroup('api', \App\Http\Middleware\RecordCareerRuntimeSlo::class);
 
         // 你原来其他 middleware 配置保留
     })

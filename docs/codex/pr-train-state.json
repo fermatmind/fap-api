@@ -1,4 +1,70 @@
 {
+  "CAREER-RUNTIME-SLO-ALERTING-01": {
+    "id": "CAREER-RUNTIME-SLO-ALERTING-01",
+    "repo": "fap-api",
+    "title": "CAREER-RUNTIME-SLO-ALERTING-01 career runtime SLO and alerting",
+    "base": "main",
+    "branch": "codex/career-runtime-slo-alerting-01",
+    "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01", "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01", "CAREER-DIRECTORY-ERROR-SEMANTICS-01"],
+    "status": "focused_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "scheduler_activation": true,
+    "deploy_allowed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The Career 10k Stability /goal explicitly authorized PR4 and manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR1 #2952, PR2 #2956, and fap-web PR3 #1680 are merged; their merge commits were verified on the corresponding origin/main branches."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "Career runtime SLO contracts pass 5 tests/18 assertions; scheduler registration, scoped Pint across seven changed PHP files, Composer validation, YAML/JSON, and diff checks pass."
+      },
+      "full_composer_test": {
+        "status": "external_baseline_user_overridden",
+        "evidence": "The clean-origin/main composer baseline failure is sidecarred; the user authorized focused local checks plus GitHub required checks."
+      },
+      "pint": {
+        "status": "external_baseline_user_overridden",
+        "evidence": "Changed-PHP scoped Pint passes all seven changed PHP files; the clean-origin/main repository Pint baseline failure is sidecarred under the user's explicit override."
+      },
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T17:05:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Started from latest fap-api origin/main in an isolated worktree after all three dependencies were verified merged; no production or deployment action was performed."
+      },
+      {
+        "at": "2026-07-11T17:18:00+08:00",
+        "from": "in_progress",
+        "to": "focused_checks_passed",
+        "note": "Runtime SLO middleware, scheduled bilingual/public-surface probes, cache age/rebuild telemetry, fail-open sampling, ops webhook alerting, scoped Pint, Composer/YAML/JSON, scheduler, diff, and exact nine-path scope checks passed."
+      }
+    ]
+  },
   "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01": {
     "id": "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01",
     "repo": "fap-api",
@@ -6,13 +72,13 @@
     "base": "main",
     "branch": "codex/career-public-authority-cache-resilience-01",
     "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01"],
-    "status": "ready_to_merge",
-    "commit_sha": "4c939e09d241892c8c17bd6c3f15c04d97366b78",
+    "status": "merged",
+    "commit_sha": "746d4a1e9d4fec90de554b11128f1f933ab07df4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2956",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T06:41:50Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -51,7 +117,7 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
