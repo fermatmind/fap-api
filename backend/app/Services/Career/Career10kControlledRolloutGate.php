@@ -25,22 +25,22 @@ final class Career10kControlledRolloutGate
         }
 
         $checks = [
-            'api_slo' => (bool) data_get($evidence, 'api_slo.passed', false),
+            'api_slo' => data_get($evidence, 'api_slo.passed') === true,
             'frontend_success' => (float) data_get($evidence, 'frontend.success_rate', 0) >= 0.99,
             'authority_count' => (int) data_get($evidence, 'authority.public_count', -1) === $target,
             'locale_parity' => (int) data_get($evidence, 'authority.en_count', -1) === $target
                 && (int) data_get($evidence, 'authority.zh_count', -2) === $target,
-            'seo_contracts' => (bool) data_get($evidence, 'seo.canonical_robots_structured_data_passed', false),
+            'seo_contracts' => data_get($evidence, 'seo.canonical_robots_structured_data_passed') === true,
             'sitemap_llms' => (int) data_get($evidence, 'discoverability.sitemap_url_count', -1) === $target * 2
                 && (int) data_get($evidence, 'discoverability.llms_url_count', -2) === $target * 2,
             'cache_warm' => (float) data_get($evidence, 'cache.warm_completion_rate', 0) === 1.0,
             'error_budget' => (float) data_get($evidence, 'errors.http_404_rate', 1) <= 0.01
                 && (float) data_get($evidence, 'errors.http_5xx_rate', 1) <= 0.01
                 && (int) data_get($evidence, 'errors.http_504_count', 1) === 0,
-            'rollback_ready' => (bool) data_get($evidence, 'rollback.ready', false)
+            'rollback_ready' => data_get($evidence, 'rollback.ready') === true
                 && is_string(data_get($evidence, 'rollback.previous_version'))
                 && data_get($evidence, 'rollback.previous_version') !== '',
-            'publication_indexability_gate' => (bool) data_get($evidence, 'publication_gate.passed', false)
+            'publication_indexability_gate' => data_get($evidence, 'publication_gate.passed') === true
                 && (int) data_get($evidence, 'publication_gate.approved_count', -1) === $target,
         ];
 

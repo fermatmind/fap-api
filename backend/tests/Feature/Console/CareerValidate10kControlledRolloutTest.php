@@ -46,6 +46,27 @@ final class CareerValidate10kControlledRolloutTest extends TestCase
         $this->assertFalse($report['ready_for_separate_exact_sha_approval']);
     }
 
+    public function test_rejects_truthy_string_boolean_evidence(): void
+    {
+        $data = $this->payload(100, []);
+        $data['api_slo']['passed'] = 'false';
+        $data['seo']['canonical_robots_structured_data_passed'] = 'true';
+        $data['rollback']['ready'] = 'yes';
+        $data['publication_gate']['passed'] = 1;
+
+        $exit = Artisan::call('career:validate-10k-controlled-rollout', [
+            '--batch' => 100,
+            '--evidence' => $this->write($data),
+            '--json' => true,
+        ]);
+        $report = json_decode((string) Artisan::output(), true);
+
+        $this->assertSame(1, $exit);
+        foreach (['api_slo_failed', 'seo_contracts_failed', 'rollback_ready_failed', 'publication_indexability_gate_failed'] as $error) {
+            $this->assertContains($error, $report['errors']);
+        }
+    }
+
     private function evidence(int $count, array $completed): string
     {
         return $this->write($this->payload($count, $completed));
