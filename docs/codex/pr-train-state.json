@@ -86920,13 +86920,13 @@
     "base": "main",
     "branch": "codex/big5-en-facet-neuroticism-content-package-01",
     "depends_on": ["BIG5-EN-FACET-AGREEABLENESS-CONTENT-PACKAGE-01"],
-    "status": "ready_to_merge",
-    "commit_sha": "4f45c3db3",
+    "status": "merged",
+    "commit_sha": "9c747c35f47c759877ed6ff54d0b7f951833346f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2975",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T10:22:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."},
       "dependency": {"status": "pass", "evidence": "PR #2973 is merged at d72bf91696f09a245a620889819acf8b5f28dac4 and origin/main contains that squash merge."},
@@ -86934,7 +86934,7 @@
       "local_validation": {"status": "pass", "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."},
       "github_required_checks": {"status": "pass", "evidence": "PR #2975 rebased head 103d5f54b passed all nine reported CI and Code Scanning checks, including content-pack-build-validate, verify-bigfive, and both MBTI verification jobs."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
     "transitions": [
       {"at": "2026-07-11T09:58:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the sixth locked train item after verifying its Agreeableness dependency on origin/main and started in an isolated clean worktree; no production action is in scope."},
       {"at": "2026-07-11T10:04:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."},
@@ -86942,7 +86942,33 @@
       {"at": "2026-07-11T10:08:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2975; required GitHub checks are pending."},
       {"at": "2026-07-11T10:12:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed on the pre-rebase head; a later main advance invalidated mergeability."},
       {"at": "2026-07-11T10:16:00Z", "from": "ready_to_merge", "to": "pr_open_rebased", "note": "Rebased onto origin/main 7cfa170d8 after the concurrent Enneagram merge created a docs/codex conflict; preserved current scope and reconciled verified dependency merge facts. Required checks must rerun on the rebased head."},
-      {"at": "2026-07-11T10:20:00Z", "from": "pr_open_rebased", "to": "ready_to_merge", "note": "All nine required checks passed on rebased head 103d5f54b; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."}
+      {"at": "2026-07-11T10:20:00Z", "from": "pr_open_rebased", "to": "ready_to_merge", "note": "All nine required checks passed on rebased head 103d5f54b; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."},
+      {"at": "2026-07-11T10:22:00Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled from GitHub: PR #2975 squash merged at 9c747c35f47c759877ed6ff54d0b7f951833346f; origin/main contains the merge and local/remote task branches are deleted."}
+    ]
+  },
+  "BIG5-ZH-PUBLISHED-LINK-HREFLANG-REPAIR-01": {
+    "id": "BIG5-ZH-PUBLISHED-LINK-HREFLANG-REPAIR-01",
+    "repo": "fap-api",
+    "title": "BIG5-ZH-PUBLISHED-LINK-HREFLANG-REPAIR-01: repair 20 published Chinese Domain and Range links",
+    "base": "main",
+    "branch": "codex/big5-zh-published-link-hreflang-repair-01",
+    "depends_on": ["BIG5-EN-FACET-NEUROTICISM-CONTENT-PACKAGE-01"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical goal explicitly authorizes this PR id and manifest/state registration."},
+      "dependency": {"status": "pass", "evidence": "PR #2975 is merged at 9c747c35f47c759877ed6ff54d0b7f951833346f and origin/main contains the squash merge."},
+      "local_validation": {"status": "pass", "evidence": "Build, validator, seed/QA JSON, manifest YAML, ledger JSON, git diff --check, and exact allowed-path validation passed for 5 Domain + 15 V2 Range assets."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [
+      {"at": "2026-07-11T10:30:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the seventh locked train item after verifying the Neuroticism dependency on origin/main; production writes and runtime release remain out of scope."},
+      {"at": "2026-07-11T10:38:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The exact 20-row V1 repair package passed all manifest checks, including seven unique localized links, reciprocal hreflang, body_md, topology, and scope validation."}
     ]
   },
   "AUDIT-PRR2-API-01": {
