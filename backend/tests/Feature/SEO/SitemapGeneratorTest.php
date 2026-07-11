@@ -274,7 +274,7 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five-draft', $xml);
     }
 
-    public function test_generate_includes_thirteen_released_enneagram_assets_in_both_supported_locales(): void
+    public function test_generate_includes_released_enneagram_assets_in_both_supported_locales(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
@@ -284,7 +284,20 @@ class SitemapGeneratorTest extends TestCase
             'heart' => '/personality/enneagram/centers/heart',
             'head' => '/personality/enneagram/centers/head',
             ...array_combine(array_map(static fn (int $type): string => 'type-'.$type, range(1, 9)), array_map(static fn (int $type): string => '/personality/enneagram/type-'.$type, range(1, 9))),
+            ...array_combine(
+                ['1w9', '1w2', '2w1', '2w3', '3w2', '3w4', '4w3', '4w5', '5w4', '5w6', '6w5', '6w7', '7w6', '7w8', '8w7', '8w9', '9w8', '9w1'],
+                array_map(
+                    static fn (string $wing): string => '/personality/enneagram/wings/'.$wing,
+                    ['1w9', '1w2', '2w1', '2w3', '3w2', '3w4', '4w3', '4w5', '5w4', '5w6', '6w5', '6w7', '7w6', '7w8', '8w7', '8w9', '9w8', '9w1']
+                )
+            ),
         ];
+
+        foreach (range(1, 9) as $type) {
+            foreach (['self-preservation', 'social', 'one-to-one'] as $subtype) {
+                $paths['type-'.$type.'/'.$subtype] = '/personality/enneagram/type-'.$type.'/instincts/'.$subtype;
+            }
+        }
 
         foreach (['zh-CN' => 'zh', 'en' => 'en'] as $locale => $segment) {
             foreach ($paths as $entityKey => $path) {
@@ -1146,6 +1159,8 @@ class SitemapGeneratorTest extends TestCase
         $entityType = match (true) {
             $entityKey === 'enneagram' => PersonalityPublicContentAsset::ENTITY_HUB,
             in_array($entityKey, ['gut', 'heart', 'head'], true) => PersonalityPublicContentAsset::ENTITY_CENTER,
+            preg_match('/^[1-9]w[1-9]$/', $entityKey) === 1 => PersonalityPublicContentAsset::ENTITY_WING,
+            preg_match('#^type-[1-9]/(?:self-preservation|social|one-to-one)$#', $entityKey) === 1 => PersonalityPublicContentAsset::ENTITY_INSTINCTUAL_SUBTYPE,
             default => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
         };
 
