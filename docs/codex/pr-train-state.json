@@ -85418,7 +85418,7 @@
     "base": "main",
     "branch": "codex/big5-124-publish-readiness-audit-01",
     "depends_on": [],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "5e4be54af0efd0d36a7eb8e006d1707c869d844c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2958",
     "failure_reason": null,
@@ -85429,14 +85429,15 @@
       "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."},
       "production_baseline": {"status": "pass", "evidence": "Read-only production API evidence at 2026-07-11T06:36:10Z returned 62 zh-CN plus 62 en Big Five assets, 124 unique identities, and exactly ten Chinese redirect-only aliases."},
       "scope": {"status": "pass", "evidence": "This audit records evidence only and does not mutate CMS, SEO runtime, redirects, indexability, sitemap, llms, frontend code, secrets, or production data."},
-      "github_required_checks": {"status": "pending", "evidence": "Required checks will be recorded after the audit PR is opened."}
+      "github_required_checks": {"status": "pass", "evidence": "PR #2958 head 00001eac04a2b06cc5ed2afed74dcf8e062d81d5 passed all nine reported CI and Code Scanning checks, including verify-bigfive and both MBTI verification jobs."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
     "transitions": [
       {"at": "2026-07-11T06:36:10Z", "from": "unregistered", "to": "in_progress", "note": "Registered the first locked audit scope in an isolated clean worktree; no production action is in scope."},
       {"at": "2026-07-11T06:37:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Production baseline JSON, 124/114/10 assertions, manifest YAML, state JSON, diff, and exact allowed-path validation passed."},
       {"at": "2026-07-11T06:38:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped production baseline, current manifest registration, and state initialization at 5e4be54af0efd0d36a7eb8e006d1707c869d844c."},
-      {"at": "2026-07-11T06:39:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the exact three-path audit scope and opened PR #2958; required checks are pending."}
+      {"at": "2026-07-11T06:39:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the exact three-path audit scope and opened PR #2958; required checks are pending."},
+      {"at": "2026-07-11T06:44:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required CI and Code Scanning checks passed; review, merge policy, changed files, and allowed-path scope were revalidated."}
     ]
   },
   "AUDIT-PRR2-API-01": {
