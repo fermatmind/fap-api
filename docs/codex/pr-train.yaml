@@ -117,6 +117,61 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: CAREER-RUNTIME-SLO-ALERTING-01
+    repo: fap-api
+    depends_on:
+      - CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01
+      - CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01
+      - CAREER-DIRECTORY-ERROR-SEMANTICS-01
+    branch: codex/career-runtime-slo-alerting-01
+    base: main
+    title: "CAREER-RUNTIME-SLO-ALERTING-01 career runtime SLO and alerting"
+    train_scope: career_10k_stability
+    status: in_progress
+    scope:
+      - Record rolling public Career directory status and latency metrics without loading detail assets.
+      - Probe EN/ZH directory pages, a sampled detail page, sitemap, llms, and llms-full on the scheduler.
+      - Alert through the existing operations webhook for 5xx rate, latency, rebuild duration, false empty, locale mismatch, stale cache, and smoke failures.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerRuntimeSloCheck.php
+      - backend/app/Http/Middleware/RecordCareerRuntimeSlo.php
+      - backend/app/Services/Career/CareerRuntimeSloService.php
+      - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
+      - backend/bootstrap/app.php
+      - backend/config/ops.php
+      - backend/tests/Feature/Observability/CareerRuntimeSloAlertingTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Change Career authority, content, publication/indexability gates, canonical, robots, JSON-LD, sitemap/llms enumeration, or frontend behavior.
+      - Deploy, import, publish, mutate CMS/DB, submit URLs, or wait for staging deployment.
+      - Implement Career detail read models, frontend detail delivery, 10k chaos gates, or rollout controls from later train items.
+    validation:
+      - cd backend && php artisan test tests/Feature/Observability/CareerRuntimeSloAlertingTest.php --no-ansi
+      - cd backend && php artisan schedule:list --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_career_runtime_slo_observability' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/CareerRuntimeSloCheck.php app/Http/Middleware/RecordCareerRuntimeSlo.php app/Services/Career/CareerRuntimeSloService.php app/Services/Career/PublicCareerAuthorityResponseCache.php bootstrap/app.php config/ops.php tests/Feature/Observability/CareerRuntimeSloAlertingTest.php
+      - cd backend && composer validate --strict
+      - full repository Pint and composer test baseline failures recorded as authorized sidecars; GitHub required checks remain mandatory
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    scheduler_activation: true
+    deploy_allowed: false
+    content_authority: backend
+
   - id: MBTI-INDEX-24A-API
     repo: fap-api
     depends_on:

@@ -33,6 +33,12 @@ return [
         'webhook' => env('OPS_ALERT_WEBHOOK'),
     ],
 
+    'career_runtime_slo' => [
+        'site_url' => env('CAREER_RUNTIME_SLO_SITE_URL', env('FRONTEND_URL', 'https://fermatmind.com')),
+        'api_url' => env('CAREER_RUNTIME_SLO_API_URL', env('APP_URL', 'https://api.fermatmind.com')),
+        'timeout_seconds' => (int) env('CAREER_RUNTIME_SLO_TIMEOUT_SECONDS', 8),
+    ],
+
     'content_release_observability' => [
         'cache_invalidation_urls' => array_values(array_filter(array_map(
             static fn (string $value): string => trim($value),
