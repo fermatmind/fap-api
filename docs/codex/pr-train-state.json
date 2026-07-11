@@ -6,8 +6,8 @@
     "base": "main",
     "branch": "codex/career-public-authority-cache-resilience-01",
     "depends_on": ["CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01"],
-    "status": "ci_fix_validated",
-    "commit_sha": "6435b285f",
+    "status": "pr_open",
+    "commit_sha": "9fec8cbae25aa1b59616b7a5efc766146d4a7bc7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2956",
     "failure_reason": null,
     "merged_at": null,
@@ -79,6 +79,12 @@
         "from": "github_checks_failed_fix_in_progress",
         "to": "ci_fix_validated",
         "note": "The exact failing sitemap suites now pass 15 tests/324 assertions; combined cache+sitemap contracts pass 27 tests/453 assertions, CareerDirectory 7/120, Big Five classifier 2/4, and scoped Pint passes nine PHP files."
+      },
+      {
+        "at": "2026-07-11T16:02:00+08:00",
+        "from": "ci_fix_validated",
+        "to": "pr_open",
+        "note": "Rebased onto origin/main 13b1c3f4c while preserving all concurrent manifest/state entries; reran the full focused PR scope successfully and prepared the scoped CI fix for required-check rerun."
       }
     ]
   },
