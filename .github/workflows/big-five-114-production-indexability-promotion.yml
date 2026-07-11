@@ -113,10 +113,42 @@ jobs:
 
           cd "$BACKEND_ROOT"
           php artisan personality-public-assets:import --no-ansi --allow-indexable --source="../$PACKAGE_RELATIVE_PATH" | tee /tmp/big-five-114-promotion-dry-run.txt
-          for expected in dry_run=1 assets_found=93 valid_count=93 errors_count=0 will_update=93 indexable_count=93 sitemap_eligible_count=93 llms_eligible_count=93; do grep -Fx "$expected" /tmp/big-five-114-promotion-dry-run.txt >/dev/null; done
+          for expected in dry_run=1 assets_found=93 valid_count=93 errors_count=0 indexable_count=93 sitemap_eligible_count=93 llms_eligible_count=93; do grep -Fx "$expected" /tmp/big-five-114-promotion-dry-run.txt >/dev/null; done
+          if grep -Fx 'will_update=93' /tmp/big-five-114-promotion-dry-run.txt >/dev/null; then
+            grep -Fx 'will_skip=0' /tmp/big-five-114-promotion-dry-run.txt >/dev/null
+          else
+            grep -Fx 'will_update=0' /tmp/big-five-114-promotion-dry-run.txt >/dev/null
+            grep -Fx 'will_skip=93' /tmp/big-five-114-promotion-dry-run.txt >/dev/null
+          fi
           if [ "$PROMOTION_MODE" = "write" ]; then
             php artisan personality-public-assets:import --no-ansi --allow-indexable --source="../$PACKAGE_RELATIVE_PATH" --write | tee /tmp/big-five-114-promotion-write.txt
-            for expected in dry_run=0 assets_found=93 valid_count=93 errors_count=0 will_update=93 indexable_count=93 sitemap_eligible_count=93 llms_eligible_count=93; do grep -Fx "$expected" /tmp/big-five-114-promotion-write.txt >/dev/null; done
+            for expected in dry_run=0 assets_found=93 valid_count=93 errors_count=0 indexable_count=93 sitemap_eligible_count=93 llms_eligible_count=93; do grep -Fx "$expected" /tmp/big-five-114-promotion-write.txt >/dev/null; done
+            if grep -Fx 'will_update=93' /tmp/big-five-114-promotion-write.txt >/dev/null; then
+              grep -Fx 'will_skip=0' /tmp/big-five-114-promotion-write.txt >/dev/null
+            else
+              grep -Fx 'will_update=0' /tmp/big-five-114-promotion-write.txt >/dev/null
+              grep -Fx 'will_skip=93' /tmp/big-five-114-promotion-write.txt >/dev/null
+            fi
+            grep -F 'discoverability_cache_keys_flushed=seo:sitemap-source:v1:fresh' /tmp/big-five-114-promotion-write.txt >/dev/null
+
+            php artisan seo:warm-sitemap-source-cache --no-ansi --json | tee /tmp/big-five-114-sitemap-warm.json
+            php -r '
+            $payload=json_decode((string)file_get_contents($argv[1]),true,512,JSON_THROW_ON_ERROR);
+            if(($payload["status"]??null)!=="warmed") throw new RuntimeException("sitemap warm did not complete");
+            echo "sitemap_cache_warm=pass\n";
+            ' /tmp/big-five-114-sitemap-warm.json
+
+            curl -fsS --retry 3 --retry-delay 2 --retry-all-errors \
+              "https://api.fermatmind.com/api/v0.5/seo/sitemap-source?big5_release_sha=$EXPECTED_RELEASE_SHA" \
+              > /tmp/big-five-114-sitemap-readback.json
+            php -r '
+            $payload=json_decode((string)file_get_contents($argv[1]),true,512,JSON_THROW_ON_ERROR);
+            $aliases=array_fill_keys(["emotional-stability","high-agreeableness","high-conscientiousness","high-extraversion","high-neuroticism","high-openness","low-agreeableness","low-conscientiousness","low-extraversion","low-openness"],true);
+            $counts=["en"=>0,"zh"=>0,"aliases"=>0]; $paths=[];
+            foreach(($payload["items"]??[]) as $item){$path=(string)(parse_url((string)($item["loc"]??""),PHP_URL_PATH)??""); if(!preg_match("#^/(en|zh)/personality/big-five(?:/|$)#",$path,$m)) continue; $paths[$path]=true; $counts[$m[1]]++; $slug=basename($path); if($m[1]==="zh"&&isset($aliases[$slug])) $counts["aliases"]++;}
+            if(count($paths)!==114||$counts["en"]!==62||$counts["zh"]!==52||$counts["aliases"]!==0) throw new RuntimeException("unexpected Big Five sitemap-source topology: ".json_encode($counts)." total=".count($paths));
+            echo "sitemap_big_five_canonical=114\nsitemap_big_five_en=62\nsitemap_big_five_zh=52\nsitemap_big_five_aliases=0\nsitemap_readback=pass\n";
+            ' /tmp/big-five-114-sitemap-readback.json
           fi
           REMOTE
 

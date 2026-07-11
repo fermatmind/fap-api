@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_5;
 
 use App\Models\PersonalityPublicContentAsset;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,6 +16,12 @@ use Tests\TestCase;
 final class PersonalityPublicContentAssetContractTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        app(PublicCareerAuthorityResponseCache::class)->warm();
+    }
 
     public function test_import_dry_run_validates_big_five_seed_without_writing(): void
     {
@@ -640,7 +647,7 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->assertStringNotContainsString('/personality/big-five', $sitemapLocs);
     }
 
-    public function test_big_five_assets_do_not_enter_sitemap_without_explicit_discoverability_release_surface(): void
+    public function test_published_indexable_big_five_asset_enters_sitemap_only_with_all_discoverability_flags(): void
     {
         PersonalityPublicContentAsset::query()->create($this->assetAttributes([
             'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
@@ -690,9 +697,8 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ->pluck('loc')
             ->implode("\n");
 
-        $this->assertStringNotContainsString('https://fermatmind.com/en/personality/big-five', $sitemapLocs);
+        $this->assertStringContainsString('https://fermatmind.com/en/personality/big-five', $sitemapLocs);
         $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five', $sitemapLocs);
-        $this->assertStringNotContainsString('/personality/big-five', $sitemapLocs);
     }
 
     public function test_noindex_content_ready_big_five_asset_suppresses_runtime_schema(): void

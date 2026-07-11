@@ -181,7 +181,7 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringNotContainsString('https://fermatmind.com/en/help/about', $xml);
     }
 
-    public function test_generate_includes_released_zh_big_five_public_content_assets_only(): void
+    public function test_generate_includes_released_bilingual_big_five_public_content_assets_only(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
@@ -212,7 +212,7 @@ class SitemapGeneratorTest extends TestCase
             'locale' => 'en',
             'canonical_json' => ['path' => '/en/personality/big-five/openness'],
         ]);
-        $this->createBigFivePublicContentAsset('hub', PersonalityPublicContentAsset::ENTITY_HUB, [
+        $this->createBigFivePublicContentAsset('big-five', PersonalityPublicContentAsset::ENTITY_HUB, [
             'canonical_json' => ['path' => '/zh/personality/big-five'],
         ]);
         $this->createBigFivePublicContentAsset('hub-noindex', PersonalityPublicContentAsset::ENTITY_HUB, [
@@ -260,13 +260,14 @@ class SitemapGeneratorTest extends TestCase
 
         // Hub should be included when published and eligible
         $this->assertStringContainsString('https://fermatmind.com/zh/personality/big-five', $xml);
-        $this->assertContains('personality-public-content:big-five:zh:hub', $slugList);
+        $this->assertContains('personality-public-content:big-five:zh:big-five', $slugList);
 
-        $this->assertStringNotContainsString('https://fermatmind.com/en/personality/big-five/openness', $xml);
+        $this->assertStringContainsString('https://fermatmind.com/en/personality/big-five/openness', $xml);
+        $this->assertContains('personality-public-content:big-five:en:openness', $slugList);
         $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-noindex', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-review', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-sitemap-off', $xml);
-        $this->assertStringContainsString('https://fermatmind.com/zh/personality/big-five/openness-llms-off', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/personality/big-five/openness-llms-off', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/zh/big-five/openness', $xml);
 
         // Hub should NOT be included when noindex or draft

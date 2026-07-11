@@ -40073,6 +40073,56 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-114-BACKEND-SITEMAP-AUTHORITY-REPAIR-01
+    repo: fap-api
+    depends_on: [BIG5-114-INDEXABILITY-PUBLISH-GATE-01]
+    external_prerequisites:
+      - production promotion run 29156685228 completed successfully for release ad17573acbb4f0ce2d3542f4982e92b31e6ebe6c and package 8a363a094a64b6a1646eb66f66d0449f5cc23a65426c196442618a4aae434d44
+      - production sitemap-source readback remains Big Five en 0, zh 21, aliases 0
+    branch: codex/big5-114-backend-sitemap-authority-repair-01
+    title: "BIG5-114-BACKEND-SITEMAP-AUTHORITY-REPAIR-01: repair Big Five 114 sitemap authority"
+    train_scope: big5_114_backend_sitemap_authority_repair
+    status: user_authorized
+    scope:
+      - Enumerate the exact backend-authorized Big Five canonical cohort as en 62 plus zh 52, including facet_hub and facet_detail.
+      - Keep all 10 zh-CN Legacy aliases redirect-only and exclude unknown or mismatched canonical routes.
+      - Invalidate discoverability caches after successful personality asset writes.
+      - Make the controlled 93-row promotion workflow idempotent, warm sitemap-source after write, and require production HTTP readback of 114 canonical, en 62, zh 52, aliases 0.
+    allowed_paths:
+      - .github/workflows/big-five-114-production-indexability-promotion.yml
+      - backend/app/Console/Commands/PersonalityPublicAssetsImport.php
+      - backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php
+      - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/tests/Feature/SEO/BigFive114SitemapAuthorityRepairTest.php
+      - backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch workflows, mutate production data, deploy, clear production caches manually, submit search URLs, or modify frontend runtime in this PR.
+      - Re-enable any zh-CN Legacy alias as a canonical page or broaden personality sitemap paths beyond the locked catalogs.
+    validation:
+      - cd backend && php artisan test tests/Feature/SEO/BigFive114SitemapAuthorityRepairTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff\|runtime_freeze_classifier_ignores_sitemap_source_cache_command_changes
+      - cd backend && ./vendor/bin/pint --test app/Console/Commands/PersonalityPublicAssetsImport.php app/Services/SEO/BigFiveCanonicalRouteCatalog.php app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/BigFive114SitemapAuthorityRepairTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - actionlint .github/workflows/big-five-114-production-indexability-promotion.yml
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/big-five-114-production-indexability-promotion.yml'); YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    workflow_policy_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []

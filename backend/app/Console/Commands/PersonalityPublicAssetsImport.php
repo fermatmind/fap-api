@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\DTO\Personality\PersonalityPublicContentAssetData;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
+use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -23,8 +24,10 @@ final class PersonalityPublicAssetsImport extends Command
 
     protected $description = 'Validate and optionally import public Big Five / Enneagram personality content asset contracts.';
 
-    public function handle(PersonalityPublicContentAssetContract $contract): int
-    {
+    public function handle(
+        PersonalityPublicContentAssetContract $contract,
+        SeoDiscoverabilityCacheInvalidator $cacheInvalidator,
+    ): int {
         try {
             $sourcePath = $this->resolveSourcePath((string) $this->option('source'));
             $payload = $this->readPayload($sourcePath);
@@ -97,6 +100,12 @@ final class PersonalityPublicAssetsImport extends Command
 
             foreach ($plan as $operation) {
                 $summary['will_'.$operation['operation']]++;
+            }
+            if ($writeMode) {
+                $summary['discoverability_cache_keys_flushed'] = implode(
+                    ',',
+                    $cacheInvalidator->flushPersonalityPublicContentDiscoverabilityCaches(),
+                );
             }
             $this->printSummary($summary);
 
