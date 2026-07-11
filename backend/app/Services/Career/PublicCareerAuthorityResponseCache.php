@@ -28,13 +28,34 @@ final class PublicCareerAuthorityResponseCache
 
     public const JOB_DETAIL_CACHE_KEY_PREFIX = 'career:public-authority:job-detail:v1';
 
+    public const DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX = 'career:public-authority:directory-read-model:v1';
+
     public function __construct(
         private readonly CareerPublicDatasetContractBuilder $datasetContractBuilder,
         private readonly CareerLaunchGovernanceClosureService $launchGovernanceClosureService,
         private readonly CareerJobListBundleBuilder $careerJobListBundleBuilder,
         private readonly CareerJobDetailBundleBuilder $careerJobDetailBundleBuilder,
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
+        private readonly CareerDirectoryReadModelBuilder $careerDirectoryReadModelBuilder,
     ) {}
+
+    /** @return array<string, mixed> */
+    public function directoryReadModelPayload(string $publicLocale = 'zh-CN'): array
+    {
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $cacheKey = $this->directoryReadModelCacheKey($normalizedLocale);
+        $cached = Cache::get($cacheKey);
+        if (is_array($cached)) {
+            return $cached;
+        }
+
+        $jobIndex = $this->jobIndexPayload($normalizedLocale);
+        $rows = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
+        $payload = $this->careerDirectoryReadModelBuilder->build($rows, $normalizedLocale);
+        Cache::forever($cacheKey, $payload);
+
+        return $payload;
+    }
 
     /**
      * @return array<string, mixed>
@@ -312,6 +333,13 @@ final class PublicCareerAuthorityResponseCache
 
         Cache::forever($this->jobIndexCacheKey($publicLocale, $includeNonIndexable), $payload);
 
+        if (! $includeNonIndexable) {
+            Cache::forever(
+                $this->directoryReadModelCacheKey($publicLocale),
+                $this->careerDirectoryReadModelBuilder->build($items, $publicLocale),
+            );
+        }
+
         return $payload;
     }
 
@@ -409,6 +437,15 @@ final class PublicCareerAuthorityResponseCache
             self::JOB_DETAIL_CACHE_KEY_PREFIX,
             strtolower(trim($slug)),
             $this->normalizePublicLocale($publicLocale)
+        );
+    }
+
+    private function directoryReadModelCacheKey(string $publicLocale): string
+    {
+        return sprintf(
+            '%s:%s',
+            self::DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX,
+            $this->normalizePublicLocale($publicLocale),
         );
     }
 }

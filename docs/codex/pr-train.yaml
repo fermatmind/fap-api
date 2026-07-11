@@ -39334,3 +39334,56 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/career-directory-read-model-performance-01
+    base: main
+    title: "CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01 career directory read model performance"
+    train_scope: career_10k_stability
+    status: in_progress
+    scope:
+      - Replace per-request full Career job-index projection work with a versioned backend-authoritative directory read model.
+      - Preserve paginated EN/ZH directory, query, family facets, public counts, held-slug exclusions, and lightweight response fields.
+      - Add real generated 1046/10000-row warm performance budgets covering p95/p99, query count, payload bytes, and peak memory.
+    allowed_paths:
+      - backend/app/Services/Career/CareerDirectoryAuthorityService.php
+      - backend/app/Services/Career/CareerDirectoryReadModelBuilder.php
+      - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
+      - backend/tests/Feature/Career/CareerDirectoryAuthorityApiTest.php
+      - backend/tests/Unit/Services/Career/CareerDirectoryReadModelPerformanceTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/career-directory-read-model-performance-01.md
+      - backend/docs/seo/generated/career-directory-read-model-performance-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Change CMS authority, publication/indexability, public slugs, canonical, sitemap, llms, JSON-LD, held-slug policy, or frontend behavior.
+      - Run production migration, cache mutation, import, publish, deploy, Search Channel, or URL submission actions.
+      - Pull cache stampede, LKG, scheduler, runtime alerting, detail delivery, chaos gate, or rollout work from later train items.
+    validation:
+      - cd backend && php artisan route:list --path=api/v0.5/career/directory --except-vendor --no-ansi
+      - cd backend && php artisan migrate --pretend --no-ansi
+      - cd backend && php artisan test --filter=CareerDirectory --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Career/CareerDirectoryAuthorityService.php app/Services/Career/CareerDirectoryReadModelBuilder.php app/Services/Career/PublicCareerAuthorityResponseCache.php tests/Feature/Career/CareerDirectoryAuthorityApiTest.php tests/Unit/Services/Career/CareerDirectoryReadModelPerformanceTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - full repository Pint baseline failure recorded as an authorized sidecar; GitHub required checks remain mandatory
+      - cd backend && composer validate --strict
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_career_directory_authority_api_changes' --no-ansi
+      - full composer test baseline failure recorded as an authorized sidecar; GitHub required checks remain mandatory
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend

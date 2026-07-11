@@ -4378,6 +4378,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php',
             'backend/app/Services/Career/CareerDirectoryAuthorityService.php',
+            'backend/app/Services/Career/CareerDirectoryReadModelBuilder.php',
+            'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
             'backend/routes/api.php',
         ];
         $routeChangedLines = [
@@ -8881,6 +8883,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php',
             'backend/app/Services/Career/CareerDirectoryAuthorityService.php',
+            'backend/app/Services/Career/CareerDirectoryReadModelBuilder.php',
+            'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
         ], true);
     }
 

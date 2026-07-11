@@ -458,3 +458,34 @@
 - recommended follow-up:
   - Repair the content-page publish-canary fixture or its publish-plan authority in a separate scoped PR, then restore the full file to green.
 - whether train continued: `true`
+
+## CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01 full Composer baseline failure
+
+- repo: `fap-api`
+- PR id / branch: `CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01` / `codex/career-directory-read-model-performance-01`
+- blocker type: `required_local_check_external_baseline_failure`
+- evidence:
+  - Full `composer test` exceeded the 300-second process timeout and reported unrelated failures.
+  - Detached, unmodified `origin/main` at `b922eeffb` independently reproduced `CareerJobListApiTest::it_returns_a_resource_backed_lightweight_job_index` returning zero items.
+  - The current PR CareerDirectory suite passes 7 tests and 120 assertions.
+- why not current PR scope:
+  - The failure reproduces without the directory read-model changes.
+- whether required checks are affected: `false` after the user's explicit authorization to use focused local checks plus GitHub required checks
+- recommended follow-up:
+  - Repair the baseline test/runtime-fixture contract in a separate scoped PR.
+- whether train continued: `true`
+
+## CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01 full Pint baseline failure
+
+- repo: `fap-api`
+- PR id / branch: `CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01` / `codex/career-directory-read-model-performance-01`
+- blocker type: `required_local_check_external_baseline_failure`
+- evidence:
+  - Full `vendor/bin/pint --test` fails on the unchanged repository and detached unmodified `origin/main` at `b922eeffb`.
+  - Scoped Pint passes all six PHP files changed by this PR.
+- why not current PR scope:
+  - Every changed PHP file passes Pint and the repository-wide failure reproduces without this PR.
+- whether required checks are affected: `false` after the user's explicit authorization for changed-PHP scoped Pint plus focused checks, scope validation, and GitHub required checks
+- recommended follow-up:
+  - Repair repository-wide baseline formatting separately.
+- whether train continued: `true`
