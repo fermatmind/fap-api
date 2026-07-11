@@ -172,4 +172,112 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
             ->expectsOutput('--job-detail-only requires --job-detail-slugs or --job-detail-manifest.')
             ->assertExitCode(1);
     }
+
+    public function test_directory_versions_switch_atomically_and_fall_back_to_lkg(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $oldPayload = ['public_count' => 1046, 'items' => [['slug' => 'old']]];
+        $newPayload = ['public_count' => 1047, 'items' => [['slug' => 'new']]];
+
+        $oldVersion = $cache->publishDirectoryReadModel('zh-CN', $oldPayload);
+        $newVersion = $cache->publishDirectoryReadModel('zh-CN', $newPayload);
+
+        $this->assertSame($newPayload, $cache->directoryReadModelPayload('zh-CN'));
+        Cache::forget(PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:versions:'.$newVersion);
+        $this->assertSame($oldPayload, $cache->directoryReadModelPayload('zh-CN'));
+        $this->assertSame($oldVersion, $cache->directoryCacheStatus('zh-CN')['lkg_version']);
+    }
+
+    public function test_fifty_cold_rebuild_contenders_only_execute_one_builder(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $activeKey = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':en:active';
+        $lkgKey = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':en:lkg';
+        $jobIndexKey = PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':en:public';
+        Cache::forget($activeKey);
+        Cache::forget($lkgKey);
+        Cache::forget($jobIndexKey);
+        $rebuilds = 0;
+
+        for ($request = 0; $request < 50; $request++) {
+            $result = $cache->singleFlightDirectoryRebuild('en', null, function () use ($cache, &$rebuilds, $jobIndexKey): array {
+                $rebuilds++;
+                $jobIndex = ['bundle_kind' => 'career_job_index', 'items' => [['slug' => 'one']]];
+                Cache::forever($jobIndexKey, $jobIndex);
+                $cache->publishDirectoryReadModel('en', ['public_count' => 1, 'items' => [['slug' => 'one']]]);
+
+                return $jobIndex;
+            });
+
+            $this->assertSame('career_job_index', $result['bundle_kind']);
+        }
+
+        $this->assertSame(1, $rebuilds);
+    }
+
+    public function test_failed_rebuild_keeps_serving_previous_version_instead_of_empty_items(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $payload = ['public_count' => 1046, 'items' => [['slug' => 'known-good']]];
+        $version = $cache->publishDirectoryReadModel('zh-CN', $payload);
+
+        try {
+            $cache->singleFlightDirectoryRebuild('zh-CN', $version, static function (): array {
+                throw new \RuntimeException('synthetic rebuild failure');
+            });
+            $this->fail('The synthetic rebuild should fail.');
+        } catch (\RuntimeException $exception) {
+            $this->assertSame('synthetic rebuild failure', $exception->getMessage());
+        }
+
+        $this->assertSame($payload, $cache->directoryReadModelPayload('zh-CN'));
+        $this->assertSame(1046, $cache->directoryReadModelPayload('zh-CN')['public_count']);
+    }
+
+    public function test_missing_directory_authority_throws_instead_of_returning_fake_empty_array(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach ([
+            PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:active',
+            PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:lkg',
+            PublicCareerAuthorityResponseCache::DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX.':zh-CN',
+        ] as $key) {
+            Cache::forget($key);
+        }
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Career directory authority cache is unavailable');
+
+        $cache->directoryReadModelPayload('zh-CN');
+    }
+
+    public function test_verify_only_fails_without_versions_and_passes_after_en_zh_warm(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach (['en', 'zh-CN'] as $locale) {
+            Cache::forget(PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':'.$locale.':active');
+            Cache::forget(PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':'.$locale.':lkg');
+        }
+
+        $this->artisan('career:warm-public-authority-cache', ['--verify-only' => true, '--json' => true])
+            ->assertExitCode(1);
+
+        $cache->publishDirectoryReadModel('en', ['public_count' => 1, 'items' => [['slug' => 'one']]]);
+        $cache->publishDirectoryReadModel('zh-CN', ['public_count' => 1, 'items' => [['slug' => 'one']]]);
+
+        $this->artisan('career:warm-public-authority-cache', ['--verify-only' => true, '--json' => true])
+            ->expectsOutputToContain('"status": "ready"')
+            ->assertExitCode(0);
+    }
+
+    public function test_runtime_schedule_verifies_directory_cache_without_rebuilding(): void
+    {
+        $schedule = file_get_contents(base_path('bootstrap/app.php'));
+
+        $this->assertIsString($schedule);
+        $this->assertStringContainsString(
+            "career:warm-public-authority-cache --verify-only --json')->everyTenMinutes()->withoutOverlapping()",
+            $schedule,
+        );
+    }
 }

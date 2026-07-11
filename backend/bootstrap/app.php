@@ -63,6 +63,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('norms:big5:monthly-drift-check')->monthlyOn(1, '04:50')->withoutOverlapping();
         $schedule->command('norms:eq60:drift-check --from=active --to=candidate')->monthlyOn(1, '05:00')->withoutOverlapping();
         $schedule->command('seo:warm-sitemap-source-cache --json')->everyTenMinutes()->withoutOverlapping();
+        $schedule->command('career:warm-public-authority-cache --verify-only --json')->everyTenMinutes()->withoutOverlapping();
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([

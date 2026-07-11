@@ -61,6 +61,59 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01
+    repo: fap-api
+    depends_on: [CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01]
+    branch: codex/career-public-authority-cache-resilience-01
+    base: main
+    title: "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01 career public authority cache resilience"
+    train_scope: career_10k_stability
+    status: in_progress
+    scope:
+      - Add single-flight locking, versioned atomic directory cache switching, and last-known-good reads for EN/ZH public Career directory authority.
+      - Keep full directory authority rebuilds out of HTTP requests; warm explicitly and verify cache readiness on the scheduler.
+      - Expose structured hit, miss, stale, and rebuild log states and fail warm/verify commands when publication readiness is unavailable.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerWarmPublicAuthorityCache.php
+      - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
+      - backend/bootstrap/app.php
+      - backend/tests/Feature/Career/CareerDirectoryAuthorityApiTest.php
+      - backend/tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php
+      - backend/tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Change CMS/backend authority, publication/indexability gates, public slugs, canonical, sitemap, llms, JSON-LD, frontend behavior, or Career detail cache architecture.
+      - Run cache warm against production, deploy, import, publish, mutate CMS/DB, submit URLs, or wait for staging deploy.
+      - Pull runtime alerting, 10k detail delivery, chaos gate, or controlled rollout work from later train items.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php --no-ansi
+      - cd backend && php artisan test --filter=CareerDirectory --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/CareerWarmPublicAuthorityCache.php app/Services/Career/PublicCareerAuthorityResponseCache.php bootstrap/app.php tests/Feature/Career/CareerDirectoryAuthorityApiTest.php tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - full repository Pint baseline failure recorded as an authorized sidecar; GitHub required checks remain mandatory
+      - cd backend && composer validate --strict
+      - cd backend && php artisan schedule:list --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_career_public_authority_cache_resilience' --no-ansi
+      - full composer test baseline failure recorded as an authorized sidecar; GitHub required checks remain mandatory
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    scheduler_activation: true
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: MBTI-INDEX-24A-API
     repo: fap-api
     depends_on:
