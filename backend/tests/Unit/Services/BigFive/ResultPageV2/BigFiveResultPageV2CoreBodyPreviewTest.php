@@ -214,6 +214,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_content_pack_lkg_changes(): void
+    {
+        $allowed = [
+            'backend/app/Services/Content/ContentPackV2Materializer.php',
+            'backend/app/Services/Content/ContentPackV2Resolver.php',
+        ];
+        $blocked = ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_observation_artifact_command(): void
     {
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges([
@@ -5412,6 +5424,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $impacting = [];
 
         foreach ($changed as $file) {
+            if ($this->isContentPackLkgFile($file)) {
+                continue;
+            }
+
             if ($this->isSystemTokenHttpBoundaryFile($file)) {
                 continue;
             }
@@ -7484,6 +7500,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Http/Middleware/FmTokenOptionalAuth.php',
             'backend/app/Services/Auth/FmTokenService.php',
             'backend/config/fap.php',
+        ], true);
+    }
+
+    private function isContentPackLkgFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Content/ContentPackV2Materializer.php',
+            'backend/app/Services/Content/ContentPackV2Resolver.php',
         ], true);
     }
 
