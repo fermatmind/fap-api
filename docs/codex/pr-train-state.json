@@ -88549,13 +88549,13 @@
     "base": "main",
     "branch": "codex/enneagram-search-release-readiness-02",
     "depends_on": ["ENNEAGRAM-SEARCH-QUEUE-READONLY-INSPECT-01"],
-    "status": "ready_to_merge",
-    "commit_sha": "47b8325927db9d3155703288b6035470fb46fc64",
+    "status": "merged",
+    "commit_sha": "94f31e7d9a739843697102caf6a6ea1fa1b9eb64",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3001",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T17:36:33Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -88572,8 +88572,8 @@
       "local_validation": {"status": "pass", "evidence": "Readiness JSON and train state JSON parse, train YAML parses, diff whitespace is clean, and changed paths are restricted to the four manifest-allowed report/ledger paths. No heavy local verification process was running."},
       "github_required_checks": {"status": "pass", "evidence": "All nine PR #3001 checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep OSS, Semgrep blocking secrets, and SARIF upload."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-11T17:14:00Z", "from": "unregistered", "to": "in_progress", "note": "Started the exact production read-only Search readiness evidence scope after deployed Queue inspection run 29161158292. It returned NO_GO because no eligible Queue candidates were produced; no Queue or CMS write, submission, cache warm, or deploy occurred in this task."}, {"at": "2026-07-11T17:17:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Report JSON/state JSON/YAML parsing, exact four-path scope validation, and diff whitespace checks passed. The outcome remains NO_GO_SEARCH_RELEASE; no production write occurred."}, {"at": "2026-07-11T17:18:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact four-path readiness report and ledger scope at 47b8325927db9d3155703288b6035470fb46fc64. No production write occurred."}, {"at": "2026-07-11T17:19:00Z", "from": "committed", "to": "pr_open", "note": "Opened PR #3001 for the exact read-only report scope. Required GitHub checks are pending; Search enqueue remains prohibited by NO_GO_SEARCH_RELEASE."}, {"at": "2026-07-11T17:25:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required checks are green; exact four-path scope, report body, clean merge state, and squash merge policy were revalidated. The report remains NO_GO_SEARCH_RELEASE."}]
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "transitions": [{"at": "2026-07-11T17:14:00Z", "from": "unregistered", "to": "in_progress", "note": "Started the exact production read-only Search readiness evidence scope after deployed Queue inspection run 29161158292. It returned NO_GO because no eligible Queue candidates were produced; no Queue or CMS write, submission, cache warm, or deploy occurred in this task."}, {"at": "2026-07-11T17:17:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Report JSON/state JSON/YAML parsing, exact four-path scope validation, and diff whitespace checks passed. The outcome remains NO_GO_SEARCH_RELEASE; no production write occurred."}, {"at": "2026-07-11T17:18:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact four-path readiness report and ledger scope at 47b8325927db9d3155703288b6035470fb46fc64. No production write occurred."}, {"at": "2026-07-11T17:19:00Z", "from": "committed", "to": "pr_open", "note": "Opened PR #3001 for the exact read-only report scope. Required GitHub checks are pending; Search enqueue remains prohibited by NO_GO_SEARCH_RELEASE."}, {"at": "2026-07-11T17:25:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required checks are green; exact four-path scope, report body, clean merge state, and squash merge policy were revalidated. The report remains NO_GO_SEARCH_RELEASE."}, {"at": "2026-07-11T17:36:33Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled from GitHub: PR #3001 squash-merged at c50f068c2fd5d243c1e00405106d8d7d9293f53a; origin/main contains the merge and task branches were cleaned."}]
   },
   "ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01": {
     "id": "ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01",
@@ -88582,13 +88582,13 @@
     "base": "main",
     "branch": "codex/enneagram-search-url-truth-repair-01",
     "depends_on": ["ENNEAGRAM-SEARCH-RELEASE-READINESS-02"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "merged",
+    "commit_sha": "6963d67a922b6787b92ed5146e50a40091726355",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3002",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T18:10:21Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -88603,8 +88603,8 @@
       "dependency": {"status": "pass", "evidence": "PR #3001 is merged at c50f068c2fd5d243c1e00405106d8d7d9293f53a and origin/main contains the merge; its fail-closed NO_GO identified missing Enneagram URL Truth candidates."},
       "local_validation": {"status": "pass", "evidence": "PHP syntax, focused Enneagram URL Truth source/artifact/import/Queue planner readback and Queue inspection suites passed (8 tests, 84 assertions); Pint, YAML/JSON parsing, diff whitespace, and exact allowed-path validation passed. Test-local SQLite writes only; no production action occurred."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-12T01:58:27+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the authorized 116-asset URL Truth repair after the production Search readiness NO_GO. This code PR must not write production URL Truth, enqueue Queue items, submit IndexNow, mutate CMS/eligibility, warm cache, or deploy."}, {"at": "2026-07-12T01:58:27+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "Focused 116-target URL Truth export/import/idempotency/Queue planner readback plus Queue inspection tests, Pint, YAML/JSON, diff, and allowed-path validation passed. Test-local SQLite writes only; no production action occurred."}]
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "transitions": [{"at": "2026-07-12T01:58:27+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the authorized 116-asset URL Truth repair after the production Search readiness NO_GO. This code PR must not write production URL Truth, enqueue Queue items, submit IndexNow, mutate CMS/eligibility, warm cache, or deploy."}, {"at": "2026-07-12T01:58:27+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "Focused 116-target URL Truth export/import/idempotency/Queue planner readback plus Queue inspection tests, Pint, YAML/JSON, diff, and allowed-path validation passed. Test-local SQLite writes only; no production action occurred."}, {"at": "2026-07-11T18:10:21Z", "from": "local_checks_passed", "to": "merged", "note": "Reconciled from GitHub: PR #3002 squash-merged at 398e26967ba49d79f6f4fb075f815d3497068f1d; required checks were green and task branches were cleaned."}]
   },
   "BIG5-114-INDEXABILITY-PUBLISH-GATE-01": {
     "id": "BIG5-114-INDEXABILITY-PUBLISH-GATE-01", "repo": "fap-api", "title": "BIG5-114-INDEXABILITY-PUBLISH-GATE-01: prepare controlled 93-page indexability promotion", "base": "main", "branch": "codex/big5-114-indexability-publish-gate-01", "depends_on": ["BIG5-124-PRODUCTION-IMPORTER-OPS-01"],
@@ -88613,5 +88613,77 @@
     "checks": {"authorization": {"status": "pass", "evidence": "The locked 124/114 goal explicitly authorizes this PR and manifest/state registration, but requires separate exact authorization for production promotion."}, "dependency": {"status": "pass", "evidence": "Importer-ops is merged and production import run 29154837152 completed 124/124 with zero errors."}, "promotion_package": {"status": "pass", "evidence": "Locked package SHA-256 8a363a094a64b6a1646eb66f66d0449f5cc23a65426c196442618a4aae434d44 contains 93 unique canonical promotion targets, excludes all 10 aliases, and preserves the 21 existing published assets."}, "local_validation": {"status": "pass", "evidence": "Generic importer dry-run passed 93/93 with zero errors; actionlint/YAML/JSON/diff/scope checks passed; ci_verify_mbti passed including 1203 Big Five tests and 150193 assertions plus all downstream gates."}},
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
     "transitions": [{"at": "2026-07-11T21:50:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the locked 93-page promotion package and controlled workflow; no production CMS mutation, deploy, search submission, or alias promotion is authorized in this PR."}, {"at": "2026-07-11T22:05:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "93-target package, 21+93=114 topology, zero aliases, exact workflow gates, generic importer dry-run, actionlint, YAML/JSON, diff/scope, and the full ci_verify_mbti chain passed in an isolated dependency environment; no production action was executed."}]
+  },
+  "ENNEAGRAM-SEARCH-RELEASE-READINESS-03": {
+    "id": "ENNEAGRAM-SEARCH-RELEASE-READINESS-03", "repo": "fap-api", "title": "ENNEAGRAM-SEARCH-RELEASE-READINESS-03: revalidate Enneagram Queue candidates after URL Truth import", "base": "main", "branch": "codex/enneagram-search-release-readiness-03", "depends_on": ["ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01"],
+    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "search_channel_action": false, "llms_release_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "User authorized this manifest/state initialization only. Production readiness stays read-only and is blocked until the deployed URL Truth importer has a separately authorized exact 116-target artifact write."}},
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized after the prior NO_GO. No production read, Queue action, CMS/DB write, Search submission, cache warm, or deploy is authorized by this entry."}]
+  },
+  "ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01": {
+    "id": "ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01", "repo": "fap-api", "title": "ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01: enqueue 116 approved Enneagram URLs without submission", "base": "main", "branch": "codex/enneagram-search-queue-enqueue-01", "depends_on": ["ENNEAGRAM-SEARCH-RELEASE-READINESS-03"],
+    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "production_write_execution": true, "database_mutation": true, "cms_mutation": false, "search_channel_action": false, "llms_release_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pending_exact_production_authorization", "evidence": "Manifest initialization is authorized; Queue write requires a later exact deployed-SHA and artifact-SHA authorization after READINESS-03 returns GO."}},
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized with Queue-only boundary; external search submission remains prohibited."}]
+  },
+  "ENNEAGRAM-SEARCH-INDEXNOW-SUBMIT-01": {
+    "id": "ENNEAGRAM-SEARCH-INDEXNOW-SUBMIT-01", "repo": "fap-api", "title": "ENNEAGRAM-SEARCH-INDEXNOW-SUBMIT-01: submit approved Enneagram Queue canary then batch", "base": "main", "branch": "codex/enneagram-search-indexnow-submit-01", "depends_on": ["ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01"],
+    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "production_write_execution": true, "database_mutation": true, "cms_mutation": false, "search_channel_action": true, "llms_release_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pending_exact_production_authorization", "evidence": "Manifest initialization is authorized; canary and batch submission each require later explicit authorization after Queue enqueue evidence passes."}},
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized with canary-before-batch and no-CMS/no-llms boundaries."}]
+  },
+  "ENNEAGRAM-LLMS-TXT-RELEASE-GATE-01": {
+    "id": "ENNEAGRAM-LLMS-TXT-RELEASE-GATE-01", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-TXT-RELEASE-GATE-01: add exact 116-target llms.txt release gate", "base": "main", "branch": "codex/enneagram-llms-txt-release-gate-01", "depends_on": ["ENNEAGRAM-SEARCH-INDEXNOW-SUBMIT-01"],
+    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "search_channel_action": false, "llms_release_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "User authorized manifest/state initialization and future code-only gate work; llms eligibility, feed, cache, Search, and deploy actions remain separately gated."}},
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized as a dry-run/write-gate implementation task; no release is authorized."}]
+  },
+  "ENNEAGRAM-LLMS-TXT-RELEASE-01": {
+    "id": "ENNEAGRAM-LLMS-TXT-RELEASE-01", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-TXT-RELEASE-01: release 116 approved Enneagram llms.txt assets", "base": "main", "branch": "codex/enneagram-llms-txt-release-01", "depends_on": ["ENNEAGRAM-LLMS-TXT-RELEASE-GATE-01"],
+    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "production_write_execution": true, "database_mutation": true, "cms_mutation": true, "search_channel_action": false, "llms_release_execution": true, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pending_exact_production_authorization", "evidence": "Manifest initialization is authorized; an exact deployed-SHA authorization and successful 116-target gate are required for llms_eligible write and cache warm."}},
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized with llms-full and Search preserved as hard negative guarantees."}]
+  },
+  "ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01": {
+    "id": "ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01: revalidate Enneagram llms.txt release", "base": "main", "branch": "codex/enneagram-llms-txt-production-revalidation-01", "depends_on": ["ENNEAGRAM-LLMS-TXT-RELEASE-01"],
+    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "search_channel_action": false, "llms_release_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "User authorized manifest/state initialization; this later task is production read-only only."}},
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized to require llms.txt 116/116 and llms-full 0/116 before the evidence upgrade."}]
+  },
+  "ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01": {
+    "id": "ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01", "repo": "fap-api", "title": "ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01: upgrade EN13 evidence provenance for llms-full", "base": "main", "branch": "codex/enneagram-en13-evidence-provenance-upgrade-01", "depends_on": ["ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01"],
+    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "search_channel_action": false, "llms_release_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "User authorized manifest/state initialization and later local evidence-upgrade work only; CMS import and feed release remain separately authorized."}},
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized for 26 EN13 bilingual evidence/provenance repair without production mutation."}]
+  },
+  "ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02": {
+    "id": "ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02: re-evaluate Enneagram llms-full evidence gate", "base": "main", "branch": "codex/enneagram-llms-full-release-readiness-02", "depends_on": ["ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01"],
+    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "search_channel_action": false, "llms_release_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "User authorized manifest/state initialization; this later task is read-only and must decide llms.txt and llms-full separately."}},
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized with NO_GO as the default until enriched evidence gates pass."}]
+  },
+  "ENNEAGRAM-LLMS-FULL-RELEASE-01": {
+    "id": "ENNEAGRAM-LLMS-FULL-RELEASE-01", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-FULL-RELEASE-01: release approved Enneagram llms-full assets", "base": "main", "branch": "codex/enneagram-llms-full-release-01", "depends_on": ["ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02"],
+    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "production_write_execution": true, "database_mutation": true, "cms_mutation": true, "search_channel_action": false, "llms_release_execution": true, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pending_exact_production_authorization", "evidence": "Manifest initialization is authorized; exact deployed-SHA authorization and a green llms-full readiness decision are mandatory for any feed write or cache warm."}},
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized with llms.txt unchanged and Search untouched unless separately authorized."}]
   }
 }
