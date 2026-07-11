@@ -199,6 +199,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_observation_artifact_command(): void
+    {
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges([
+            'backend/app/Console/Commands/ArticleSeoObservationPlan.php',
+        ], '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_cli_artifact_path_guard_changes(): void
     {
         $changed = [
@@ -7476,6 +7483,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isArticleWeeklySeoObservationExportFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/ArticleSeoObservationPlan.php',
             'backend/app/Console/Commands/ArticleWeeklySeoObservationExport.php',
             'backend/app/Services/SeoIntel/ArticleWeeklySeoObservationExportService.php',
         ], true);
