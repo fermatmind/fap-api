@@ -87291,6 +87291,12 @@
       {"at": "2026-07-11T11:15:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed; merge policy, PR body, changed files, identity set, and exact allowed-path scope were revalidated."}
     ]
   },
+  "BIG5-EN-V2-RANGE-EVIDENCE-REPAIR-01": {
+    "id":"BIG5-EN-V2-RANGE-EVIDENCE-REPAIR-01", "repo":"fap-api", "title":"BIG5-EN-V2-RANGE-EVIDENCE-REPAIR-01: add evidence notes to 15 English V2 Range assets", "base":"main", "branch":"codex/big5-en-v2-range-evidence-repair-01", "depends_on":["BIG5-EN-LEGACY-POLARITY-LINK-REPAIR-01"], "status":"in_progress", "commit_sha":null, "pr_url":null, "failure_reason":null, "merged_at":null, "remote_branch_deleted":false, "local_cleanup_executed":false,
+    "checks":{"manifest_registration":{"status":"pass","evidence":"The locked 124-asset / 114-canonical goal explicitly authorizes this PR."},"dependency":{"status":"pass","evidence":"PR #2980 is merged at 52e3ee7cd9ced85fef11bbcce0acb193247ce0fc and origin/main contains the squash merge."}},
+    "scope_validation":{"allowed_paths_only":false,"local_validation_passed":false,"github_checks_green":false,"post_merge_revalidated":false},
+    "transitions":[{"at":"2026-07-11T11:25:00Z","from":"unregistered","to":"in_progress","note":"Registered the ninth locked train item after verifying the English Legacy link repair dependency; production actions remain out of scope."}]
+  },
   "AUDIT-PRR2-API-01": {
     "id": "AUDIT-PRR2-API-01",
     "repo": "fap-api",
