@@ -40258,6 +40258,47 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-114-RUNTIME-CLOSEOUT-01
+    repo: fap-api
+    depends_on: [BIG5-124-RUNTIME-CONTENT-INTEGRITY-REPAIR-01]
+    external_prerequisites:
+      - backend production deploy completed for 45017200138ef000dc4be758321fc7b983a91cb9 in run 29162685966
+      - controlled 22-row runtime integrity import completed for seed cbfda8484df4065302f9be208f3488e5fe9015fde516ffa077dc15d7c8c0b111 in run 29162978306
+      - frontend production deploy completed for 579bf294601ff953e3ebeae3d5e150f3a61c839f in run 29163017437
+    branch: codex/big5-114-runtime-closeout-01
+    title: "BIG5-114-RUNTIME-CLOSEOUT-01: verify Big Five 114 canonical production runtime"
+    train_scope: big5_114_runtime_closeout
+    status: user_authorized
+    scope:
+      - Produce read-only production evidence for the locked 114 canonical Big Five cohort: en 62, zh 52, and zero redirect-only aliases in canonical enumeration.
+      - Verify all 114 backend assets and public pages, FAQ/internal links, canonical, hreflang, robots, JSON-LD, sitemap, llms, llms-full, and duplicate/private-route boundaries.
+      - Verify the exact 10 Chinese Legacy aliases return 301 to their V2 targets while all 10 English Legacy canonical pages remain 200.
+    allowed_paths:
+      - generated/big-five-114-runtime-closeout/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Write CMS or database data, change indexability or content authority, warm or clear production caches, deploy, submit search URLs, or modify runtime code.
+      - Treat a fallback, stale, partial, duplicate, alias-bearing, or private-route-leaking surface as passing evidence.
+    validation:
+      - env EXPECTED_RELEASE_SHA=45017200138ef000dc4be758321fc7b983a91cb9 DEPLOY_RUN_ID=29162685966 FRONTEND_RELEASE_SHA=579bf294601ff953e3ebeae3d5e150f3a61c839f FRONTEND_DEPLOY_RUN_ID=29163017437 node generated/big-five-114-runtime-closeout/verify.mjs
+      - python3 -m json.tool generated/big-five-114-runtime-closeout/production_runtime_closeout_2026-07-12.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    workflow_policy_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []
