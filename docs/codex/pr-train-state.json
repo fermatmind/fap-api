@@ -85388,7 +85388,7 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-02-payment-repair-schedule",
     "depends_on": [],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "413091296c768fe1f0941b2f6d4fc831e0ba3a7c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2945",
     "failure_reason": null,
@@ -85418,12 +85418,15 @@
         "status": "pass",
         "evidence": "Both commands appear exactly once at */5 cadence, scoped Pint, manifest YAML, state JSON, git diff --check, and exact allowed-path validation passed."
       },
-      "github_required_checks": { "status": "pending" }
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "On head fe75b0b39bc44feb482b72a48f1e36f0ff01d529, hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive and all Code Scanning checks passed."
+      }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -85450,6 +85453,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Pushed the scoped branch and opened PR #2945; GitHub required checks are pending and no production action was performed."
+      },
+      {
+        "at": "2026-07-11T12:34:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed on head fe75b0b39bc44feb482b72a48f1e36f0ff01d529; PR #2945 is CLEAN, MERGEABLE, non-draft, review-unblocked, and its five changed paths match the manifest."
       }
     ]
   }
