@@ -87,6 +87,24 @@ final class CareerValidate10kControlledRolloutTest extends TestCase
         }
     }
 
+    public function test_rejects_malformed_batch_completed_batches_and_missing_rates(): void
+    {
+        $data = $this->payload(100, ['100abc', 100.9]);
+        unset($data['errors']['http_404_rate'], $data['errors']['http_5xx_rate']);
+
+        $exit = Artisan::call('career:validate-10k-controlled-rollout', [
+            '--batch' => '100abc',
+            '--evidence' => $this->write($data),
+            '--json' => true,
+        ]);
+        $report = json_decode((string) Artisan::output(), true);
+
+        $this->assertSame(1, $exit);
+        $this->assertContains('unsupported_rollout_batch', $report['errors']);
+        $this->assertContains('completed_batches_invalid', $report['errors']);
+        $this->assertContains('error_budget_failed', $report['errors']);
+    }
+
     private function evidence(int $count, array $completed): string
     {
         return $this->write($this->payload($count, $completed));

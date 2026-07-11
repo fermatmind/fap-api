@@ -19,23 +19,34 @@ final class Career10kControlledRolloutGate
         }
 
         $requiredPrevious = array_slice(self::BATCHES, 0, (int) $position);
-        $completed = array_values(array_map('intval', (array) ($evidence['completed_batches'] ?? [])));
+        $completedEvidence = $evidence['completed_batches'] ?? null;
+        $completed = is_array($completedEvidence)
+            ? array_values(array_filter($completedEvidence, fn (mixed $value): bool => is_int($value) && in_array($value, self::BATCHES, true)))
+            : [];
+        if (! is_array($completedEvidence) || count($completed) !== count($completedEvidence)) {
+            $errors[] = 'completed_batches_invalid';
+        }
         if (array_diff($requiredPrevious, $completed) !== []) {
             $errors[] = 'previous_batches_not_completed';
         }
 
+        $frontendSuccessRate = $this->number(data_get($evidence, 'frontend.success_rate'));
+        $cacheWarmRate = $this->number(data_get($evidence, 'cache.warm_completion_rate'));
+        $http404Rate = $this->number(data_get($evidence, 'errors.http_404_rate'));
+        $http5xxRate = $this->number(data_get($evidence, 'errors.http_5xx_rate'));
+
         $checks = [
             'api_slo' => data_get($evidence, 'api_slo.passed') === true,
-            'frontend_success' => $this->number(data_get($evidence, 'frontend.success_rate'))?->value >= 0.99,
+            'frontend_success' => $frontendSuccessRate !== null && $frontendSuccessRate >= 0.99,
             'authority_count' => $this->integer(data_get($evidence, 'authority.public_count')) === $target,
             'locale_parity' => $this->integer(data_get($evidence, 'authority.en_count')) === $target
                 && $this->integer(data_get($evidence, 'authority.zh_count')) === $target,
             'seo_contracts' => data_get($evidence, 'seo.canonical_robots_structured_data_passed') === true,
             'sitemap_llms' => $this->integer(data_get($evidence, 'discoverability.sitemap_url_count')) === $target * 2
                 && $this->integer(data_get($evidence, 'discoverability.llms_url_count')) === $target * 2,
-            'cache_warm' => $this->number(data_get($evidence, 'cache.warm_completion_rate'))?->value === 1.0,
-            'error_budget' => $this->number(data_get($evidence, 'errors.http_404_rate'))?->value <= 0.01
-                && $this->number(data_get($evidence, 'errors.http_5xx_rate'))?->value <= 0.01
+            'cache_warm' => $cacheWarmRate === 1.0,
+            'error_budget' => $http404Rate !== null && $http404Rate <= 0.01
+                && $http5xxRate !== null && $http5xxRate <= 0.01
                 && $this->integer(data_get($evidence, 'errors.http_504_count')) === 0,
             'rollback_ready' => data_get($evidence, 'rollback.ready') === true
                 && is_string(data_get($evidence, 'rollback.previous_version'))
@@ -77,8 +88,8 @@ final class Career10kControlledRolloutGate
         return is_int($value) ? $value : null;
     }
 
-    private function number(mixed $value): ?object
+    private function number(mixed $value): ?float
     {
-        return is_int($value) || is_float($value) ? (object) ['value' => (float) $value] : null;
+        return is_int($value) || is_float($value) ? (float) $value : null;
     }
 }

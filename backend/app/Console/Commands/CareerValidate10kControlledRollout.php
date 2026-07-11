@@ -22,7 +22,13 @@ final class CareerValidate10kControlledRollout extends Command
             $evidence = [];
         }
 
-        $report = $gate->evaluate((int) $this->option('batch'), $evidence);
+        $batch = $this->option('batch');
+        $target = match (true) {
+            is_int($batch) && in_array($batch, Career10kControlledRolloutGate::BATCHES, true) => $batch,
+            is_string($batch) && preg_match('/^(100|500|1000|2500|5000|10000)$/D', $batch) === 1 => (int) $batch,
+            default => -1,
+        };
+        $report = $gate->evaluate($target, $evidence);
         $this->line((string) json_encode($report, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 
         return $report['status'] === 'passed' ? self::SUCCESS : self::FAILURE;
