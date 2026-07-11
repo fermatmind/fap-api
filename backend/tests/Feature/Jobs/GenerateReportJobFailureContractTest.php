@@ -69,6 +69,24 @@ class GenerateReportJobFailureContractTest extends TestCase
         $this->assertNotNull($reportJob->failed_at);
         $this->assertNull($reportJob->finished_at);
         $this->assertSame('artifact retries exhausted', $reportJob->last_error);
+        $this->assertNull($reportJob->last_error_trace);
+    }
+
+    public function test_report_job_model_discards_raw_exception_traces(): void
+    {
+        [$attemptId] = $this->seedAttemptAndResult();
+        $reportJob = ReportJob::query()->create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'status' => 'failed',
+            'tries' => 3,
+            'last_error' => 'token=database-secret',
+            'last_error_trace' => '#0 /private/path.php(42): secret-token',
+        ]);
+
+        $this->assertNull($reportJob->fresh()?->last_error_trace);
+        $this->assertSame('token=[REDACTED]', $reportJob->fresh()?->last_error);
     }
 
     public function test_report_artifact_store_rejects_a_false_disk_write_result(): void

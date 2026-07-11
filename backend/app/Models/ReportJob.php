@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasOrgScope;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,5 +49,15 @@ class ReportJob extends Model
     public static function allowOrgZeroContext(): bool
     {
         return self::allowOrgZeroWithResolvedContext();
+    }
+
+    protected static function booted(): void
+    {
+        static::saving(static function (ReportJob $job): void {
+            if (is_string($job->last_error)) {
+                $job->last_error = SensitiveDiagnosticRedactor::redactString($job->last_error);
+            }
+            $job->last_error_trace = null;
+        });
     }
 }

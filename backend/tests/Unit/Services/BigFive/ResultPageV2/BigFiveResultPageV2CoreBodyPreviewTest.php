@@ -216,6 +216,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_sensitive_diagnostic_redaction(): void
+    {
+        $changed = [
+            'backend/app/Jobs/GenerateReportJob.php',
+            'backend/app/Logging/RedactSensitiveLogContext.php',
+            'backend/app/Models/ReportJob.php',
+            'backend/app/Support/Logging/SensitiveDiagnosticRedactor.php',
+            'backend/config/logging.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_cli_artifact_path_guard_changes(): void
     {
         $changed = [
@@ -5347,6 +5360,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $impacting = [];
 
         foreach ($changed as $file) {
+            if ($this->isSensitiveDiagnosticRedactionFile($file)) {
+                continue;
+            }
+
             if ($this->isReportArtifactPersistenceHardeningFile($file)) {
                 continue;
             }
@@ -7365,6 +7382,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Jobs/GenerateReportJob.php',
             'backend/app/Services/Storage/ArtifactStore.php',
+        ], true);
+    }
+
+    private function isSensitiveDiagnosticRedactionFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Jobs/GenerateReportJob.php',
+            'backend/app/Logging/RedactSensitiveLogContext.php',
+            'backend/app/Models/ReportJob.php',
+            'backend/app/Support/Logging/SensitiveDiagnosticRedactor.php',
+            'backend/config/logging.php',
         ], true);
     }
 
