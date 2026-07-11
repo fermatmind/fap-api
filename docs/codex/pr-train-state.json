@@ -85475,8 +85475,8 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-03-controlled-cms-release",
     "depends_on": ["AUDIT-PRR2-API-01"],
-    "status": "in_progress",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "0fcc8b615f3bd53d30b43d931312e54a792d35ca",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -85525,6 +85525,12 @@
         "from": "in_progress",
         "to": "focused_checks_passed",
         "note": "CMS release, controlled-command, observability, Big Five classifier, Pint, Blade, YAML/JSON, diff and allowed-path checks passed; no CMS mutation or production action was performed."
+      },
+      {
+        "at": "2026-07-11T12:50:00+08:00",
+        "from": "focused_checks_passed",
+        "to": "committed",
+        "note": "Committed the twelve-path controlled CMS release-only scope at 0fcc8b615f3bd53d30b43d931312e54a792d35ca on current origin/main."
       }
     ]
   }
