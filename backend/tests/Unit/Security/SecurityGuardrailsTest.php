@@ -282,6 +282,26 @@ final class SecurityGuardrailsTest extends TestCase
     public function test_ci_deploy_supply_chain_uses_pinned_trust_material(): void
     {
         $repoRoot = dirname(base_path());
+        $workflowPaths = [
+            '.github/workflows/deploy.yml',
+            '.github/workflows/deploy-production.yml',
+            '.github/workflows/career-content-production-dry-run.yml',
+            '.github/workflows/career-content-production-import.yml',
+        ];
+        $pinnedSshAgent = 'webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555';
+
+        foreach ($workflowPaths as $workflowPath) {
+            $workflow = file_get_contents($repoRoot.'/'.$workflowPath);
+            $this->assertIsString($workflow);
+            $this->assertStringContainsString($pinnedSshAgent, $workflow, $workflowPath);
+            $this->assertDoesNotMatchRegularExpression(
+                '/webfactory\/ssh-agent@v[^\s]+/',
+                $workflow,
+                $workflowPath
+            );
+            $this->assertStringContainsString('ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}', $workflow, $workflowPath);
+        }
+
         $deploy = file_get_contents($repoRoot.'/.github/workflows/deploy.yml');
         $this->assertIsString($deploy);
 

@@ -85000,6 +85000,45 @@
       { "at": "2026-07-11T00:40:41Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in the authorized atomicity repair PR: PR #2904 is merged at 6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768; origin/main contains the merge and local/remote task branches were cleaned. The later authorized production import attempt failed on a persistence identity/slug collision after one partial Hub update." }
     ]
   },
+  "SECURITY-124-API-01": {
+    "id": "SECURITY-124-API-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/security-124-api-01",
+    "title": "SECURITY-124-API-01: pin production SSH action trust",
+    "depends_on": [],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized SECURITY-124-API-01 and manifest/state registration."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Focused SecurityGuardrailsTest (1 test, 22 assertions), workflow YAML parsing, Pint, route list, fresh SQLite migrations, full ci_verify_mbti.sh, and git diff --check passed."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T09:30:00+08:00",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started the isolated production SSH action trust pinning scope; no workflow dispatch or deploy is authorized."
+      }
+    ]
+  },
   "PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01": {
     "id": "PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01",
     "repo": "fap-api",
