@@ -12,13 +12,14 @@ use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password;
 
 class AdminBootstrapOwner extends Command
 {
     protected $signature = 'admin:bootstrap-owner
         {--email= : Owner email}
-        {--password= : Owner password}
         {--name= : Owner name}';
 
     protected $description = 'Create or update admin owner and initialize roles/permissions';
@@ -26,11 +27,20 @@ class AdminBootstrapOwner extends Command
     public function handle(): int
     {
         $email = trim((string) $this->option('email'));
-        $password = trim((string) $this->option('password'));
+        $password = trim((string) $this->secret('Owner password'));
         $name = trim((string) $this->option('name'));
 
         if ($email === '' || $password === '') {
-            $this->error('Missing required --email or --password');
+            $this->error('Missing required --email or interactive password');
+
+            return 1;
+        }
+
+        $validator = Validator::make(['password' => $password], [
+            'password' => ['required', Password::min(14)->mixedCase()->numbers()->symbols()],
+        ]);
+        if ($validator->fails()) {
+            $this->error('Password must be at least 14 characters and include upper/lowercase letters, numbers, and symbols.');
 
             return 1;
         }

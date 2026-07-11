@@ -39203,3 +39203,55 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: AUDIT-PRR2-API-04
+    repo: fap-api
+    depends_on: []
+    branch: codex/audit-prr2-api-04-mandatory-admin-totp
+    title: "AUDIT-PRR2-API-04: require CMS administrator TOTP enrollment"
+    train_scope: prr2_mandatory_admin_totp
+    status: user_authorized
+    scope:
+      - Require unenrolled administrators to complete TOTP enrollment before ordinary Ops/CMS access.
+      - Require enrolled administrators to verify the current session and keep production fail closed.
+      - Remove plaintext bootstrap password options and enforce a strong hidden-input password contract.
+      - Make recovery codes time-limited, single-use, and actor-audited.
+    allowed_paths:
+      - AGENTS.md
+      - backend/.env.example
+      - backend/app/Console/Commands/AdminBootstrapOwner.php
+      - backend/app/Filament/Ops/Pages/TwoFactorChallenge.php
+      - backend/app/Filament/Ops/Pages/TwoFactorEnrollment.php
+      - backend/app/Http/Middleware/EnsureAdminTotpVerified.php
+      - backend/app/Http/Responses/Auth/OpsLoginResponse.php
+      - backend/app/Services/Audit/AuditLogger.php
+      - backend/app/Services/Auth/AdminTotpService.php
+      - backend/config/admin.php
+      - backend/resources/views/filament/ops/pages/two-factor-enrollment.blade.php
+      - backend/tests/Feature/Ops/AdminTotpEnforcementTest.php
+      - backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify production administrator data, add a general MFA bypass, expose secrets/recovery codes in logs, or change CMS content/permissions.
+      - Run deploys, production imports, CMS/search writes, queue replays, payments, or production database mutations.
+    validation:
+      - cd backend && php artisan test tests/Feature/Ops/AdminTotpEnforcementTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_cms_admin_mfa_files' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/AdminBootstrapOwner.php app/Filament/Ops/Pages/TwoFactorChallenge.php app/Filament/Ops/Pages/TwoFactorEnrollment.php app/Http/Middleware/EnsureAdminTotpVerified.php app/Http/Responses/Auth/OpsLoginResponse.php app/Services/Audit/AuditLogger.php app/Services/Auth/AdminTotpService.php tests/Feature/Ops/AdminTotpEnforcementTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan view:cache --no-ansi
+      - cd backend && php artisan view:clear --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend

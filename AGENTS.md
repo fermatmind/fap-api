@@ -109,6 +109,11 @@ Prefer a repo-compatible default implementation and mark options as optional.
 - Generic Filament release actions and direct `releaseRecord`/`releaseItem` entry points are prohibited for Article, CareerGuide, and CareerJob. A content type without an approved controlled publisher must remain read-only and fail closed on the release workspace.
 - Codex must not use generic CMS UI publish clicks, uncontrolled API publish endpoints, or production content mutation outside that controlled SOP.
 
+### CMS Administrator MFA Discipline
+- When TOTP is required, an unenrolled administrator may access only enrollment, recovery/challenge, and logout surfaces; ordinary Ops and CMS routes fail closed.
+- Production requires TOTP even if the environment toggle is misconfigured. Recovery codes are single-use, time-limited, and audited; their use requires credential rotation.
+- Owner bootstrap passwords must use hidden interactive input and the configured strength policy; plaintext password command options are prohibited.
+
 ### DailyGiving Proof Handling Discipline
 - Original charity donation receipt/proof images may be uploaded as the public proof media asset when the operator explicitly approves that original image for public use. A separate redacted derivative is not required for DailyGiving public proof.
 - Raw private storage paths, redaction notes, backend-only ledger fields, tokens, private URLs, secrets, and system credentials must never be exposed by public APIs, frontend rendering, sitemap, llms, social distribution, or search submission.

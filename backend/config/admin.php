@@ -20,6 +20,7 @@ return [
     'totp' => [
         'enabled' => (bool) env('OPS_ADMIN_TOTP_ENABLED', true),
         'issuer' => env('OPS_ADMIN_TOTP_ISSUER', 'Fermat Ops'),
+        'recovery_ttl_days' => (int) env('OPS_ADMIN_TOTP_RECOVERY_TTL_DAYS', 30),
     ],
 
     'permissions' => PermissionNames::all(),
