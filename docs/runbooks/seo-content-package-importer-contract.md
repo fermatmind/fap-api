@@ -76,9 +76,23 @@ release chain.
 
 ## Proposed Capabilities
 
+The deterministic compiler is available as:
+
+```bash
+php artisan seo-agent:compile-mode-c-package \
+  --package=/path/to/source-package \
+  --output-dir=/path/to/final-derived-package \
+  --locales=zh-CN,en \
+  --dry-run \
+  --json
+```
+
+Omit `--dry-run` only to write the explicitly named derived directory. The
+compiler refuses to overwrite the source or replace a different existing
+output.
+
 **Proposed capability - not yet implemented:**
 
-- `seo-agent:compile-mode-c-package`;
 - automatic checkpoint persistence and `--resume-from-checkpoint`;
 - automatic provider capability routing;
 - backend enforcement that blocks GEO closeout when a required body visual is

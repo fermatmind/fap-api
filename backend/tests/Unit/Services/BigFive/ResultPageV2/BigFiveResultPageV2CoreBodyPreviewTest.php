@@ -7269,6 +7269,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/ArticleImportSeoContentPackageDraft.php',
+            'backend/app/Console/Commands/SeoAgentCompileModeCPackageCommand.php',
             'backend/app/Console/Commands/ArticleTaxonomyHygiene.php',
             'backend/app/Console/Commands/ArticleUpdateExistingSeoContentPackage.php',
         ], true)
@@ -9704,7 +9705,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/\bArticleImportSeoContentPackageDraft\b/u', $line) !== 1) {
+            if (preg_match('/\b(ArticleImportSeoContentPackageDraft|SeoAgentCompileModeCPackageCommand)\b/u', $line) !== 1) {
                 return false;
             }
         }

@@ -9,6 +9,7 @@ use App\Console\Commands\ArticleDiscoverabilityRelease;
 use App\Console\Commands\ArticleEnsureSeoMetaBaseline;
 use App\Console\Commands\ArticleImportEditorialPackage;
 use App\Console\Commands\ArticleImportSeoContentPackageDraft;
+use App\Console\Commands\SeoAgentCompileModeCPackageCommand;
 use App\Console\Commands\ArticlePublishControlled;
 use App\Console\Commands\ArticleReleaseCloseout;
 use App\Console\Commands\ArticleReplaceInlineImageUrl;
@@ -453,6 +454,7 @@ class Kernel extends ConsoleKernel
         ExperimentGuardrailsEvaluate::class,
         ArticleImportEditorialPackage::class,
         ArticleImportSeoContentPackageDraft::class,
+        SeoAgentCompileModeCPackageCommand::class,
         ArticleEnsureSeoMetaBaseline::class,
         ArticleUpdateExistingSeoContentPackage::class,
         ArticleCoverPropagationSmoke::class,
