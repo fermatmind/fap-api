@@ -333,7 +333,7 @@ class SitemapGenerator
                     ->where(static function ($query): void {
                         $query
                             ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
-                            ->where('locale', 'zh-CN');
+                            ->whereIn('locale', PersonalityPublicContentAsset::SUPPORTED_LOCALES);
                     })
                     ->orWhere(static function ($query): void {
                         $query
@@ -345,6 +345,8 @@ class SitemapGenerator
                 PersonalityPublicContentAsset::ENTITY_HUB,
                 PersonalityPublicContentAsset::ENTITY_DOMAIN,
                 PersonalityPublicContentAsset::ENTITY_POLARITY,
+                PersonalityPublicContentAsset::ENTITY_FACET_HUB,
+                PersonalityPublicContentAsset::ENTITY_FACET_DETAIL,
                 PersonalityPublicContentAsset::ENTITY_CENTER,
                 PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
                 PersonalityPublicContentAsset::ENTITY_WING,
@@ -355,7 +357,7 @@ class SitemapGenerator
             ->where('robots', PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW)
             ->where('index_eligible', true)
             ->where('sitemap_eligible', true)
-            ->select(['entity_key', 'framework', 'locale', 'canonical_json', 'updated_at', 'published_at'])
+            ->select(['entity_key', 'entity_type', 'framework', 'locale', 'canonical_json', 'updated_at', 'published_at'])
             ->orderBy('entity_type')
             ->orderBy('entity_key')
             ->get();
@@ -364,11 +366,21 @@ class SitemapGenerator
 
         foreach ($rows as $row) {
             $path = trim((string) data_get($row->canonical_json, 'path', ''));
-            $framework = $row->framework;
+            $framework = (string) $row->framework;
+
+            if ($framework === PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE) {
+                $expectedPath = BigFiveCanonicalRouteCatalog::expectedPath(
+                    (string) $row->locale,
+                    (string) $row->entity_type,
+                    strtolower((string) $row->entity_key),
+                );
+                if ($expectedPath === null || $path !== $expectedPath) {
+                    continue;
+                }
+            }
 
             // Accept only Big Five or Enneagram personality paths
-            $isBigFive = str_starts_with($path, '/zh/personality/big-five/')
-                || $path === '/zh/personality/big-five';
+            $isBigFive = preg_match('#^/(?:en|zh)/personality/big-five(?:/|$)#', $path) === 1;
             $isEnneagram = str_starts_with($path, '/zh/personality/enneagram/')
                 || $path === '/zh/personality/enneagram'
                 || str_starts_with($path, '/en/personality/enneagram/')
