@@ -84243,9 +84243,9 @@
     "depends_on": [
       "MBTI-CMS-29"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open_checks_pending",
+    "commit_sha": "e08f3a29f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2928",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -84310,6 +84310,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Focused API/import/sitemap tests, Pint, route listing, complete MBTI CI, YAML/JSON parsing, diff check, and five-path scope validation passed."
+      },
+      {
+        "at": "2026-07-10T20:02:00Z",
+        "from": "local_checks_passed",
+        "to": "pr_open_checks_pending",
+        "note": "Opened PR #2928 from code commit e08f3a29f after rebasing onto latest origin/main and repeating focused validation."
       }
     ]
   },
