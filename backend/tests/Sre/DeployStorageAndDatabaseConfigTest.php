@@ -139,6 +139,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('staging_run_id:', $source);
         $this->assertStringContainsString('release_id:', $source);
         $this->assertStringContainsString('operator_approval_phrase:', $source);
+        $this->assertStringContainsString('deploy_mode:', $source);
+        $this->assertStringContainsString('default: auto', $source);
         $this->assertSame(4, substr_count($source, 'required: true'));
         $this->assertStringContainsString('actions: read', $source);
         $this->assertStringContainsString('Validate manual exact-SHA approval and staging evidence', $source);
@@ -147,6 +149,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('[[ ! "$STAGING_RUN_ID" =~ ^[0-9]+$ ]]', $source);
         $this->assertStringContainsString('[[ ! "$RELEASE_ID" =~ ^[A-Za-z0-9._-]{1,80}$ ]]', $source);
         $this->assertStringContainsString('I explicitly approve backend production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
+        $this->assertStringContainsString('I explicitly approve backend code-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
         $this->assertStringContainsString('.name == "Deploy Application"', $source);
         $this->assertStringContainsString('.path == ".github/workflows/deploy.yml"', $source);
         $this->assertStringContainsString('.head_branch == "main"', $source);
@@ -200,7 +203,46 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString("grep -Fq '\"env\":\"production\"'", $source);
         $this->assertStringContainsString("grep -Fq '\"repository\":\"'\"\$GITHUB_REPOSITORY\"'\"'", $source);
         $this->assertStringContainsString('deploy lock guard: active deploy-like process exists', $source);
+        $this->assertStringContainsString('code-only deploy refuses to remove an existing lock automatically', $source);
         $this->assertStringContainsString('rm -f "$LOCK" "$META"', $source);
+    }
+
+    #[Test]
+    public function code_only_deploy_task_excludes_application_data_and_authority_mutations(): void
+    {
+        $source = $this->readRepoFile('deploy.php');
+        $start = strpos($source, "task('deploy:code-only', [");
+        $this->assertNotFalse($start);
+        $end = strpos($source, ']);', (int) $start);
+        $this->assertNotFalse($end);
+        $task = substr($source, (int) $start, (int) $end - (int) $start + 3);
+
+        foreach ([
+            "'guard:code-only-mode'",
+            "'deploy:prepare'",
+            "'deploy:vendors'",
+            "'artisan:config:cache'",
+            "'guard:public-content-release'",
+            "'deploy:publish'",
+        ] as $requiredTask) {
+            $this->assertStringContainsString($requiredTask, $task);
+        }
+
+        foreach ([
+            'artisan:migrate',
+            'artisan:scales:seed-default',
+            'cms:import-landing-surface-baselines',
+            'cms:import-content-page-baselines',
+            'career:warm-public-authority-cache',
+            'seo:warm-sitemap-source-cache',
+        ] as $forbiddenTask) {
+            $this->assertStringNotContainsString($forbiddenTask, $task);
+        }
+
+        $this->assertStringContainsString('Skip queue worker reload in code_only deploy mode', $source);
+        $this->assertStringContainsString('Skip nginx reload in code_only deploy mode', $source);
+        $this->assertStringContainsString('Skip auth guest POST contract probe in code_only deploy mode', $source);
+        $this->assertStringContainsString('Skip shared content package copy in code_only deploy mode', $source);
     }
 
     private function readRepoFile(string $relativePath): string

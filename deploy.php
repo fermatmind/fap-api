@@ -15,6 +15,7 @@ set('repository', 'git@github.com:fermatmind/fap-api.git');
 set('git_tty', false);
 set('keep_releases', 5);
 set('default_timeout', 900);
+set('deploy_mode', 'standard');
 
 set('sentry_release', function () {
     return get('release_name');
@@ -121,6 +122,22 @@ function resolveDeployIdentityFile(string $envKey, array $candidates = []): ?str
 function deployShellArg(string $value): string
 {
     return escapeshellarg($value);
+}
+
+function deployMode(): string
+{
+    $mode = strtolower(trim((string) get('deploy_mode', 'standard')));
+
+    if (! in_array($mode, ['standard', 'code_only'], true)) {
+        throw new \RuntimeException("unsupported deploy_mode [{$mode}]");
+    }
+
+    return $mode;
+}
+
+function deployIsCodeOnly(): bool
+{
+    return deployMode() === 'code_only';
 }
 
 function deploySafeAbsolutePath(string $path, string $label): string
@@ -557,6 +574,12 @@ task('guard:forbid-destructive', function () {
     }
 });
 
+task('guard:code-only-mode', function () {
+    if (! deployIsCodeOnly()) {
+        throw new \RuntimeException('deploy:code-only requires deploy_mode=code_only');
+    }
+});
+
 task('guard:deploy-shell-config', function () {
     deploySafeAbsolutePath((string) get('deploy_path'), 'deploy_path');
     deploySafeAbsolutePath((string) get('nginx_site'), 'nginx_site');
@@ -603,10 +626,22 @@ task('reload:php-fpm', function () {
 });
 
 task('reload:nginx', function () {
+    if (deployIsCodeOnly()) {
+        writeln('<comment>Skip nginx reload in code_only deploy mode</comment>');
+
+        return;
+    }
+
     run('sudo -n /usr/bin/systemctl reload nginx');
 });
 
 task('queue:reload-workers', function () {
+    if (deployIsCodeOnly()) {
+        writeln('<comment>Skip queue worker reload in code_only deploy mode</comment>');
+
+        return;
+    }
+
     $manager = strtolower(trim((string) get('queue_manager', 'supervisor')));
 
     if ($manager === 'supervisor') {
@@ -806,6 +841,12 @@ task('ensure:release-public-static-compat', function () {
 });
 
 task('ensure:nginx-public-static-media-route', function () {
+    if (deployIsCodeOnly()) {
+        writeln('<comment>Skip nginx static media route mutation in code_only deploy mode</comment>');
+
+        return;
+    }
+
     $host = deploySafeHost((string) (get('static_media_healthcheck_host') ?: get('healthcheck_host')), 'static_media_healthcheck_host');
     $primaryHost = deploySafeHost((string) get('healthcheck_host', ''), 'healthcheck_host');
     $site = deploySafeAbsolutePath((string) get('nginx_site', ''), 'nginx_site');
@@ -1070,6 +1111,12 @@ task('healthcheck:public', function () {
 });
 
 task('healthcheck:auth-guest-contract', function () {
+    if (deployIsCodeOnly()) {
+        writeln('<comment>Skip auth guest POST contract probe in code_only deploy mode</comment>');
+
+        return;
+    }
+
     $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
     $resolveArg = deployCurlResolveArg($host, (bool) get('healthcheck_use_resolve', true));
     $url = deployHttpsUrlArg($host, '/api/v0.3/auth/guest');
@@ -1277,6 +1324,12 @@ BASH);
  * ======================================================
  */
 task('fap:seed_shared_content_packages', function () {
+    if (deployIsCodeOnly()) {
+        writeln('<comment>Skip shared content package copy in code_only deploy mode</comment>');
+
+        return;
+    }
+
     run('mkdir -p '.deployPlaceholderPathArg('{{deploy_path}}', 'shared/content_packages'));
     run('cp -an '.deployPlaceholderPathArg('{{release_path}}', 'content_packages').'/. '.deployPlaceholderPathArg('{{deploy_path}}', 'shared/content_packages').' || true');
 });
@@ -1410,6 +1463,26 @@ after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
 after('deploy:symlink', 'healthcheck:queue-smoke');
+
+/**
+ * A code-only release deliberately omits every task that can mutate application
+ * data or SEO/CMS authority. The workflow classifies the exact commit before
+ * invoking this task; this guard prevents direct use with a weaker mode.
+ */
+task('deploy:code-only', [
+    'guard:deploy-shell-config',
+    'guard:forbid-destructive',
+    'guard:code-only-mode',
+    'deploy:prepare',
+    'deploy:vendors',
+    'artisan:storage:link',
+    'artisan:config:cache',
+    'artisan:route:cache',
+    'artisan:view:cache',
+    'artisan:event:cache',
+    'guard:public-content-release',
+    'deploy:publish',
+]);
 
 after('rollback', 'bootstrap-cache:rebuild-current');
 after('bootstrap-cache:rebuild-current', 'rollback:healthcheck');
