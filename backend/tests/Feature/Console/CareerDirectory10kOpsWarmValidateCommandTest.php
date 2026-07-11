@@ -68,6 +68,7 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
         $this->assertTrue($report['capacity_chaos_gate']['faults']['old_new_versions_coexist']);
         $this->assertSame(50, $report['capacity_chaos_gate']['faults']['worker_restart_read_count']);
         $this->assertSame(0, $report['capacity_chaos_gate']['budgets']['db_queries_per_read']);
+        $this->assertSame(0, $report['capacity_chaos_gate']['budgets']['max_db_queries_per_read']);
         $this->assertLessThanOrEqual(500, $report['capacity_chaos_gate']['budgets']['p95_ms']);
         $this->assertLessThanOrEqual(800, $report['capacity_chaos_gate']['budgets']['p99_ms']);
         $this->assertLessThanOrEqual($report['capacity_chaos_gate']['budgets']['max_first_page_bytes'], $report['capacity_chaos_gate']['budgets']['first_page_bytes']);

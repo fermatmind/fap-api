@@ -8,6 +8,7 @@ use App\Services\Career\Career10kCapacityChaosGate;
 use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 final class CareerValidateDirectory10kScaleReadiness extends Command
 {
@@ -27,8 +28,15 @@ final class CareerValidateDirectory10kScaleReadiness extends Command
     ): int {
         $startedAt = microtime(true);
 
-        $enPayload = $directoryAuthority->payload('en', 1, 50);
-        $zhPayload = $directoryAuthority->payload('zh-CN', 1, 50);
+        DB::flushQueryLog();
+        DB::enableQueryLog();
+        try {
+            $enPayload = $directoryAuthority->payload('en', 1, 50);
+            $zhPayload = $directoryAuthority->payload('zh-CN', 1, 50);
+            $directoryQueriesPerRead = (int) ceil(count(DB::getQueryLog()) / 2);
+        } finally {
+            DB::disableQueryLog();
+        }
         $enItems = $directoryAuthority->indexableItems('en');
         $zhItems = $directoryAuthority->indexableItems('zh-CN');
         $sitemapCareerUrls = $sitemapGenerator->generateApprovedCareerJobDetailUrls();
@@ -79,7 +87,7 @@ final class CareerValidateDirectory10kScaleReadiness extends Command
         if ($sitemapCareerUrlCount !== ($publicCount * 2)) {
             $errors[] = 'sitemap_career_url_count_not_bilingual_public_count';
         }
-        $capacity = $capacityChaosGate->run($syntheticCount, $maxFirstPageBytes);
+        $capacity = $capacityChaosGate->run($syntheticCount, $maxFirstPageBytes, $directoryQueriesPerRead);
         if (($capacity['status'] ?? null) !== 'passed') {
             $errors[] = 'career_10k_capacity_chaos_gate_failed';
         }

@@ -7,7 +7,7 @@ namespace App\Services\Career;
 final class Career10kCapacityChaosGate
 {
     /** @return array<string, mixed> */
-    public function run(int $count = 10000, int $maxFirstPageBytes = 262144): array
+    public function run(int $count = 10000, int $maxFirstPageBytes = 262144, int $measuredDbQueriesPerRead = 0): array
     {
         $count = max(1, $count);
         $memoryBefore = memory_get_usage(true);
@@ -86,6 +86,9 @@ final class Career10kCapacityChaosGate
         if (count((array) ($restartedWorkerRead['items'] ?? [])) !== 50) {
             $errors[] = 'worker_restart_read_failed';
         }
+        if ($measuredDbQueriesPerRead > 0) {
+            $errors[] = 'directory_read_query_budget_exceeded';
+        }
         if (collect($responses)->contains(fn (array $response): bool => count((array) ($response['items'] ?? [])) > 50)) {
             $errors[] = 'detail_fanout_or_page_overfetch';
         }
@@ -98,7 +101,7 @@ final class Career10kCapacityChaosGate
             'faults' => [
                 'redis_miss_state' => $redisMiss['state'],
                 'redis_unavailable_state' => $redisUnavailable['state'],
-                'slow_db_query_count_on_read' => 0,
+                'slow_db_query_count_on_read' => $measuredDbQueriesPerRead,
                 'rebuild_failure_kept_old_version' => $versions['active'] === $beforeFailedRebuild,
                 'worker_restart_read_count' => count((array) $restartedWorkerRead['items']),
                 'old_new_versions_coexist' => $coexistence,
@@ -112,7 +115,8 @@ final class Career10kCapacityChaosGate
                 'max_first_page_bytes' => $maxFirstPageBytes,
                 'memory_bytes' => $memoryBytes,
                 'max_memory_bytes' => 268435456,
-                'db_queries_per_read' => 0,
+                'db_queries_per_read' => $measuredDbQueriesPerRead,
+                'max_db_queries_per_read' => 0,
                 'max_items_per_response' => 50,
             ],
             'errors' => $errors,
