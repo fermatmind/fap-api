@@ -95,9 +95,9 @@
     "depends_on": [
       "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01"
     ],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "1005466d5b3baf0421d1b66b2841d3d5554e8e6f",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2976",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -149,6 +149,12 @@
         "from": "local_checks_passed",
         "to": "committed",
         "note": "Committed scoped ENNEAGRAM-90 backend CMS gate identity changes after path-limited staging."
+      },
+      {
+        "at": "2026-07-11T10:20:00.000Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2976 for the locked ENNEAGRAM-90 backend CMS gate identity scope."
       }
     ]
   },
