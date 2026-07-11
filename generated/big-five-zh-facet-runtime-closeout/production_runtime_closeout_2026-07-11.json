@@ -1,0 +1,1674 @@
+{
+  "schema_version": "big_five_zh_facet_runtime_closeout_v1",
+  "train_id": "BIG5-ZH-FACET-RUNTIME-CLOSEOUT-01",
+  "verified_at_utc": "2026-07-11T05:59:36.306Z",
+  "outcome": "pass",
+  "production_release": {
+    "sha": "585c6c4d44a89b9883790081ec2a7c13bff731d3",
+    "deploy_workflow_run_id": 29140743649,
+    "import_workflow_run_id": 29141944035
+  },
+  "production_import": {
+    "seed_sha256": "88be4e72d18bf61b2be382423d754e46ca094ee6ed227430ed833b471ab0688d",
+    "seed_contract": "pass",
+    "package": "big-five-zh-facet-31-page-import-dryrun-2026-07-10",
+    "dry_run": {
+      "assets_found": 31,
+      "valid_count": 31,
+      "errors_count": 0,
+      "will_create": 0,
+      "will_update": 31,
+      "will_skip": 0,
+      "indexable_count": 0,
+      "sitemap_eligible_count": 0,
+      "llms_eligible_count": 0
+    },
+    "write": {
+      "assets_found": 31,
+      "valid_count": 31,
+      "errors_count": 0,
+      "will_create": 0,
+      "will_update": 31,
+      "will_skip": 0,
+      "indexable_count": 0,
+      "sitemap_eligible_count": 0,
+      "llms_eligible_count": 0
+    }
+  },
+  "api_readback": {
+    "all_pass": true,
+    "assets": [
+      {
+        "entity_type": "facet_hub",
+        "entity_key": "facets",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_hub/facets?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets",
+        "source_package": "big-five-zh-facet-hub-content-repair-2026-07-10",
+        "sections": 15,
+        "faq": 6,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "imagination",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/imagination?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/imagination",
+        "source_package": "big-five-zh-facet-openness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "aesthetics",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/aesthetics?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/aesthetics",
+        "source_package": "big-five-zh-facet-openness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "feelings",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/feelings?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/feelings",
+        "source_package": "big-five-zh-facet-openness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "actions",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/actions?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/actions",
+        "source_package": "big-five-zh-facet-openness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "ideas",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/ideas?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/ideas",
+        "source_package": "big-five-zh-facet-openness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "values",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/values?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/values",
+        "source_package": "big-five-zh-facet-openness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "competence",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/competence?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/competence",
+        "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "order",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/order?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/order",
+        "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "dutifulness",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/dutifulness?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/dutifulness",
+        "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "achievement-striving",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/achievement-striving?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/achievement-striving",
+        "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "self-discipline",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/self-discipline?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/self-discipline",
+        "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "deliberation",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/deliberation?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/deliberation",
+        "source_package": "big-five-zh-facet-conscientiousness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "warmth",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/warmth?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/warmth",
+        "source_package": "big-five-zh-facet-extraversion-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "gregariousness",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/gregariousness?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/gregariousness",
+        "source_package": "big-five-zh-facet-extraversion-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "assertiveness",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/assertiveness?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/assertiveness",
+        "source_package": "big-five-zh-facet-extraversion-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "activity",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/activity?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/activity",
+        "source_package": "big-five-zh-facet-extraversion-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "excitement-seeking",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/excitement-seeking?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/excitement-seeking",
+        "source_package": "big-five-zh-facet-extraversion-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "positive-emotions",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/positive-emotions?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/positive-emotions",
+        "source_package": "big-five-zh-facet-extraversion-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "trust",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/trust?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/trust",
+        "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "straightforwardness",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/straightforwardness?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/straightforwardness",
+        "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "altruism",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/altruism?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/altruism",
+        "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "compliance",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/compliance?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/compliance",
+        "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "modesty",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/modesty?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/modesty",
+        "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "tender-mindedness",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/tender-mindedness?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/tender-mindedness",
+        "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "anxiety",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/anxiety?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/anxiety",
+        "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "anger",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/anger?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/anger",
+        "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "depression",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/depression?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/depression",
+        "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "self-consciousness",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/self-consciousness?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/self-consciousness",
+        "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "impulsiveness",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/impulsiveness?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/impulsiveness",
+        "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "vulnerability",
+        "url": "https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/facet_detail/vulnerability?locale=zh-CN&org_id=0",
+        "http_status": 200,
+        "canonical_path": "/zh/personality/big-five/facets/vulnerability",
+        "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+        "sections": 9,
+        "faq": 5,
+        "internal_links": 7,
+        "robots": "noindex,follow",
+        "checks": {
+          "http_status_200": true,
+          "ok": true,
+          "identity_matches": true,
+          "canonical_matches": true,
+          "source_package_matches": true,
+          "sections_at_least_9": true,
+          "faq_at_least_5": true,
+          "internal_links_at_least_7": true,
+          "robots_noindex_follow": true,
+          "index_eligible_false": true,
+          "sitemap_eligible_false": true,
+          "llms_eligible_false": true
+        },
+        "pass": true
+      }
+    ]
+  },
+  "page_readback": {
+    "all_pass": true,
+    "pages": [
+      {
+        "entity_type": "facet_hub",
+        "entity_key": "facets",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets",
+        "http_status": 200,
+        "first_faq": "为什么这里是 30 个细分面向？",
+        "expected_internal_links": [
+          "/zh/personality/big-five",
+          "/zh/tests/big-five-personality-test-ocean-model",
+          "/zh/personality/big-five/openness",
+          "/zh/personality/big-five/conscientiousness",
+          "/zh/personality/big-five/extraversion",
+          "/zh/personality/big-five/agreeableness",
+          "/zh/personality/big-five/neuroticism"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "imagination",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/imagination",
+        "http_status": 200,
+        "first_faq": "想象力越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/openness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/aesthetics",
+          "/zh/personality/big-five/facets/feelings",
+          "/zh/personality/big-five/facets/actions",
+          "/zh/personality/big-five/facets/ideas",
+          "/zh/personality/big-five/facets/values"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "aesthetics",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/aesthetics",
+        "http_status": 200,
+        "first_faq": "审美越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/openness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/imagination",
+          "/zh/personality/big-five/facets/feelings",
+          "/zh/personality/big-five/facets/actions",
+          "/zh/personality/big-five/facets/ideas",
+          "/zh/personality/big-five/facets/values"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "feelings",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/feelings",
+        "http_status": 200,
+        "first_faq": "感受性越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/openness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/imagination",
+          "/zh/personality/big-five/facets/aesthetics",
+          "/zh/personality/big-five/facets/actions",
+          "/zh/personality/big-five/facets/ideas",
+          "/zh/personality/big-five/facets/values"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "actions",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/actions",
+        "http_status": 200,
+        "first_faq": "行动开放越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/openness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/imagination",
+          "/zh/personality/big-five/facets/aesthetics",
+          "/zh/personality/big-five/facets/feelings",
+          "/zh/personality/big-five/facets/ideas",
+          "/zh/personality/big-five/facets/values"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "ideas",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/ideas",
+        "http_status": 200,
+        "first_faq": "观念开放越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/openness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/imagination",
+          "/zh/personality/big-five/facets/aesthetics",
+          "/zh/personality/big-five/facets/feelings",
+          "/zh/personality/big-five/facets/actions",
+          "/zh/personality/big-five/facets/values"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "values",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/values",
+        "http_status": 200,
+        "first_faq": "价值开放越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/openness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/imagination",
+          "/zh/personality/big-five/facets/aesthetics",
+          "/zh/personality/big-five/facets/feelings",
+          "/zh/personality/big-five/facets/actions",
+          "/zh/personality/big-five/facets/ideas"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "competence",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/competence",
+        "http_status": 200,
+        "first_faq": "胜任感越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/conscientiousness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/order",
+          "/zh/personality/big-five/facets/dutifulness",
+          "/zh/personality/big-five/facets/achievement-striving",
+          "/zh/personality/big-five/facets/self-discipline",
+          "/zh/personality/big-five/facets/deliberation"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "order",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/order",
+        "http_status": 200,
+        "first_faq": "条理性越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/conscientiousness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/competence",
+          "/zh/personality/big-five/facets/dutifulness",
+          "/zh/personality/big-five/facets/achievement-striving",
+          "/zh/personality/big-five/facets/self-discipline",
+          "/zh/personality/big-five/facets/deliberation"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "dutifulness",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/dutifulness",
+        "http_status": 200,
+        "first_faq": "责任感越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/conscientiousness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/competence",
+          "/zh/personality/big-five/facets/order",
+          "/zh/personality/big-five/facets/achievement-striving",
+          "/zh/personality/big-five/facets/self-discipline",
+          "/zh/personality/big-five/facets/deliberation"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "achievement-striving",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/achievement-striving",
+        "http_status": 200,
+        "first_faq": "成就追求越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/conscientiousness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/competence",
+          "/zh/personality/big-five/facets/order",
+          "/zh/personality/big-five/facets/dutifulness",
+          "/zh/personality/big-five/facets/self-discipline",
+          "/zh/personality/big-five/facets/deliberation"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "self-discipline",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/self-discipline",
+        "http_status": 200,
+        "first_faq": "自律越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/conscientiousness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/competence",
+          "/zh/personality/big-five/facets/order",
+          "/zh/personality/big-five/facets/dutifulness",
+          "/zh/personality/big-five/facets/achievement-striving",
+          "/zh/personality/big-five/facets/deliberation"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "deliberation",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/deliberation",
+        "http_status": 200,
+        "first_faq": "审慎越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/conscientiousness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/competence",
+          "/zh/personality/big-five/facets/order",
+          "/zh/personality/big-five/facets/dutifulness",
+          "/zh/personality/big-five/facets/achievement-striving",
+          "/zh/personality/big-five/facets/self-discipline"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "warmth",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/warmth",
+        "http_status": 200,
+        "first_faq": "热情越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/extraversion",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/gregariousness",
+          "/zh/personality/big-five/facets/assertiveness",
+          "/zh/personality/big-five/facets/activity",
+          "/zh/personality/big-five/facets/excitement-seeking",
+          "/zh/personality/big-five/facets/positive-emotions"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "gregariousness",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/gregariousness",
+        "http_status": 200,
+        "first_faq": "合群性越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/extraversion",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/warmth",
+          "/zh/personality/big-five/facets/assertiveness",
+          "/zh/personality/big-five/facets/activity",
+          "/zh/personality/big-five/facets/excitement-seeking",
+          "/zh/personality/big-five/facets/positive-emotions"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "assertiveness",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/assertiveness",
+        "http_status": 200,
+        "first_faq": "表达主导性越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/extraversion",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/warmth",
+          "/zh/personality/big-five/facets/gregariousness",
+          "/zh/personality/big-five/facets/activity",
+          "/zh/personality/big-five/facets/excitement-seeking",
+          "/zh/personality/big-five/facets/positive-emotions"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "activity",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/activity",
+        "http_status": 200,
+        "first_faq": "活跃度越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/extraversion",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/warmth",
+          "/zh/personality/big-five/facets/gregariousness",
+          "/zh/personality/big-five/facets/assertiveness",
+          "/zh/personality/big-five/facets/excitement-seeking",
+          "/zh/personality/big-five/facets/positive-emotions"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "excitement-seeking",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/excitement-seeking",
+        "http_status": 200,
+        "first_faq": "刺激寻求越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/extraversion",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/warmth",
+          "/zh/personality/big-five/facets/gregariousness",
+          "/zh/personality/big-five/facets/assertiveness",
+          "/zh/personality/big-five/facets/activity",
+          "/zh/personality/big-five/facets/positive-emotions"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "positive-emotions",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/positive-emotions",
+        "http_status": 200,
+        "first_faq": "积极情绪越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/extraversion",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/warmth",
+          "/zh/personality/big-five/facets/gregariousness",
+          "/zh/personality/big-five/facets/assertiveness",
+          "/zh/personality/big-five/facets/activity",
+          "/zh/personality/big-five/facets/excitement-seeking"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "trust",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/trust",
+        "http_status": 200,
+        "first_faq": "信任越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/agreeableness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/straightforwardness",
+          "/zh/personality/big-five/facets/altruism",
+          "/zh/personality/big-five/facets/compliance",
+          "/zh/personality/big-five/facets/modesty",
+          "/zh/personality/big-five/facets/tender-mindedness"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "straightforwardness",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/straightforwardness",
+        "http_status": 200,
+        "first_faq": "坦率越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/agreeableness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/trust",
+          "/zh/personality/big-five/facets/altruism",
+          "/zh/personality/big-five/facets/compliance",
+          "/zh/personality/big-five/facets/modesty",
+          "/zh/personality/big-five/facets/tender-mindedness"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "altruism",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/altruism",
+        "http_status": 200,
+        "first_faq": "利他越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/agreeableness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/trust",
+          "/zh/personality/big-five/facets/straightforwardness",
+          "/zh/personality/big-five/facets/compliance",
+          "/zh/personality/big-five/facets/modesty",
+          "/zh/personality/big-five/facets/tender-mindedness"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "compliance",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/compliance",
+        "http_status": 200,
+        "first_faq": "顺应越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/agreeableness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/trust",
+          "/zh/personality/big-five/facets/straightforwardness",
+          "/zh/personality/big-five/facets/altruism",
+          "/zh/personality/big-five/facets/modesty",
+          "/zh/personality/big-five/facets/tender-mindedness"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "modesty",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/modesty",
+        "http_status": 200,
+        "first_faq": "谦逊越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/agreeableness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/trust",
+          "/zh/personality/big-five/facets/straightforwardness",
+          "/zh/personality/big-five/facets/altruism",
+          "/zh/personality/big-five/facets/compliance",
+          "/zh/personality/big-five/facets/tender-mindedness"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "tender-mindedness",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/tender-mindedness",
+        "http_status": 200,
+        "first_faq": "柔软心肠越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/agreeableness",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/trust",
+          "/zh/personality/big-five/facets/straightforwardness",
+          "/zh/personality/big-five/facets/altruism",
+          "/zh/personality/big-five/facets/compliance",
+          "/zh/personality/big-five/facets/modesty"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "anxiety",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/anxiety",
+        "http_status": 200,
+        "first_faq": "焦虑倾向越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/neuroticism",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/anger",
+          "/zh/personality/big-five/facets/depression",
+          "/zh/personality/big-five/facets/self-consciousness",
+          "/zh/personality/big-five/facets/impulsiveness",
+          "/zh/personality/big-five/facets/vulnerability"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "anger",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/anger",
+        "http_status": 200,
+        "first_faq": "愤怒倾向越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/neuroticism",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/anxiety",
+          "/zh/personality/big-five/facets/depression",
+          "/zh/personality/big-five/facets/self-consciousness",
+          "/zh/personality/big-five/facets/impulsiveness",
+          "/zh/personality/big-five/facets/vulnerability"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "depression",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/depression",
+        "http_status": 200,
+        "first_faq": "低落倾向越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/neuroticism",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/anxiety",
+          "/zh/personality/big-five/facets/anger",
+          "/zh/personality/big-five/facets/self-consciousness",
+          "/zh/personality/big-five/facets/impulsiveness",
+          "/zh/personality/big-five/facets/vulnerability"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "self-consciousness",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/self-consciousness",
+        "http_status": 200,
+        "first_faq": "自我意识越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/neuroticism",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/anxiety",
+          "/zh/personality/big-five/facets/anger",
+          "/zh/personality/big-five/facets/depression",
+          "/zh/personality/big-five/facets/impulsiveness",
+          "/zh/personality/big-five/facets/vulnerability"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "impulsiveness",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/impulsiveness",
+        "http_status": 200,
+        "first_faq": "冲动性越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/neuroticism",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/anxiety",
+          "/zh/personality/big-five/facets/anger",
+          "/zh/personality/big-five/facets/depression",
+          "/zh/personality/big-five/facets/self-consciousness",
+          "/zh/personality/big-five/facets/vulnerability"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      },
+      {
+        "entity_type": "facet_detail",
+        "entity_key": "vulnerability",
+        "url": "https://fermatmind.com/zh/personality/big-five/facets/vulnerability",
+        "http_status": 200,
+        "first_faq": "脆弱性越高越好吗？",
+        "expected_internal_links": [
+          "/zh/personality/big-five/neuroticism",
+          "/zh/personality/big-five/facets",
+          "/zh/personality/big-five/facets/anxiety",
+          "/zh/personality/big-five/facets/anger",
+          "/zh/personality/big-five/facets/depression",
+          "/zh/personality/big-five/facets/self-consciousness",
+          "/zh/personality/big-five/facets/impulsiveness"
+        ],
+        "checks": {
+          "http_status_200": true,
+          "html_robots_noindex": true,
+          "canonical_present": true,
+          "first_faq_present": true,
+          "seven_internal_links_present": true
+        },
+        "pass": true
+      }
+    ]
+  },
+  "enumeration_leakage": {
+    "all_pass": true,
+    "surfaces": [
+      {
+        "surface": "/sitemap.xml",
+        "url": "https://fermatmind.com/sitemap.xml",
+        "http_status": 200,
+        "matching_paths": [],
+        "matching_path_count": 0,
+        "pass": true
+      },
+      {
+        "surface": "/sitemap_index.xml",
+        "url": "https://fermatmind.com/sitemap_index.xml",
+        "http_status": 404,
+        "matching_paths": [],
+        "matching_path_count": 0,
+        "pass": true
+      },
+      {
+        "surface": "/llms.txt",
+        "url": "https://fermatmind.com/llms.txt",
+        "http_status": 200,
+        "matching_paths": [],
+        "matching_path_count": 0,
+        "pass": true
+      },
+      {
+        "surface": "/llms-full.txt",
+        "url": "https://fermatmind.com/llms-full.txt",
+        "http_status": 200,
+        "matching_paths": [],
+        "matching_path_count": 0,
+        "pass": true
+      },
+      {
+        "surface": "/robots.txt",
+        "url": "https://fermatmind.com/robots.txt",
+        "http_status": 200,
+        "matching_paths": [],
+        "matching_path_count": 0,
+        "pass": true
+      }
+    ]
+  }
+}

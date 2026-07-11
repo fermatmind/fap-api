@@ -39115,6 +39115,42 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-ZH-FACET-RUNTIME-CLOSEOUT-01
+    repo: fap-api
+    depends_on: [BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01, BIG5-ZH-FACET-IMPORT-IDENTITY-REPAIR-01]
+    branch: codex/big5-zh-facet-runtime-closeout-01
+    title: "BIG5-ZH-FACET-RUNTIME-CLOSEOUT-01: verify approved 31-page Chinese Facet production import"
+    train_scope: big5_zh_facet_production_runtime_closeout
+    status: user_authorized
+    scope:
+      - Register the locked post-import runtime closeout after the exact-SHA 31-page production CMS import has completed.
+      - Record the bounded importer receipt and all 31 API/page, FAQ/internal-link, noindex, sitemap, robots, and llms readback results.
+      - Reconcile the already-merged identity-repair ledger facts required to resolve this dependency.
+    allowed_paths:
+      - generated/big-five-zh-facet-runtime-closeout/**
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify CMS assets, database schema, production data, backend runtime code, frontend code, SEO runtime, sitemap, llms, canonical, robots, JSON-LD, permissions, secrets, or deployment configuration.
+      - Trigger any additional production import, production deploy, manual deploy, search submission, or publish/indexability change.
+    validation:
+      - python3 -m json.tool generated/big-five-zh-facet-runtime-closeout/production_runtime_closeout_2026-07-11.json >/dev/null
+      - node -e "const fs=require('fs'); const x=JSON.parse(fs.readFileSync('generated/big-five-zh-facet-runtime-closeout/production_runtime_closeout_2026-07-11.json')); if (x.outcome!=='pass'||x.production_import.write.valid_count!==31||x.production_import.write.errors_count!==0||x.api_readback.assets.length!==31||x.page_readback.pages.length!==31||!x.api_readback.all_pass||!x.page_readback.all_pass||!x.enumeration_leakage.all_pass) process.exit(1);"
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []
