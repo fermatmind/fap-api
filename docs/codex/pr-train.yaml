@@ -40096,6 +40096,7 @@ prs:
       - backend/tests/Feature/SEO/BigFive114SitemapAuthorityRepairTest.php
       - backend/tests/Feature/SEO/SitemapGeneratorTest.php
       - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -40103,6 +40104,7 @@ prs:
       - Re-enable any zh-CN Legacy alias as a canonical page or broaden personality sitemap paths beyond the locked catalogs.
     validation:
       - cd backend && php artisan test tests/Feature/SEO/BigFive114SitemapAuthorityRepairTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff\|runtime_freeze_classifier_ignores_sitemap_source_cache_command_changes
       - cd backend && ./vendor/bin/pint --test app/Console/Commands/PersonalityPublicAssetsImport.php app/Services/SEO/BigFiveCanonicalRouteCatalog.php app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/BigFive114SitemapAuthorityRepairTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
       - actionlint .github/workflows/big-five-114-production-indexability-promotion.yml
       - cd backend && bash scripts/ci_verify_mbti.sh
