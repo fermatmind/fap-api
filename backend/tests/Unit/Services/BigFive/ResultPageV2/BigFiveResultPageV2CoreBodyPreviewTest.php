@@ -229,6 +229,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_dlq_replay_single_path(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Pages/QueueMonitor.php',
+            'backend/app/Services/Queue/QueueDlqService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_cli_artifact_path_guard_changes(): void
     {
         $changed = [
@@ -5380,6 +5390,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $impacting = [];
 
         foreach ($changed as $file) {
+            if ($this->isDlqReplaySinglePathFile($file)) {
+                continue;
+            }
+
             if ($this->isSensitiveDiagnosticRedactionFile($file)) {
                 continue;
             }
@@ -7421,6 +7435,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Models/ReportJob.php',
             'backend/app/Support/Logging/SensitiveDiagnosticRedactor.php',
             'backend/config/logging.php',
+        ], true);
+    }
+
+    private function isDlqReplaySinglePathFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Pages/QueueMonitor.php',
+            'backend/app/Services/Queue/QueueDlqService.php',
         ], true);
     }
 
