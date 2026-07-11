@@ -84912,9 +84912,9 @@
     "base": "main",
     "branch": "codex/personality-public-asset-import-atomicity-01",
     "depends_on": ["BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01"],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "e14ef197b6e8aa7b75fc5eb70b47843fadf42201",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2929",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -84931,7 +84931,8 @@
       { "at": "2026-07-11T00:40:41Z", "from": "unregistered", "to": "planned", "note": "Registered the authorized generic importer atomicity repair after the production-shaped facet/facet_detail slug collision was fully diagnosed." },
       { "at": "2026-07-11T00:40:41Z", "from": "planned", "to": "in_progress", "note": "Started whole-package persistence preflight, transaction rollback, and focused regression coverage; no CMS or production write is in scope." },
       { "at": "2026-07-11T00:57:11Z", "from": "in_progress", "to": "local_checks_passed", "note": "Focused importer contracts, full core CI, full-32 authority gate, syntax, formatting, manifest/state syntax, diff, and allowed-path validation passed; no CMS or production write was performed." },
-      { "at": "2026-07-11T00:58:30Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped importer atomicity repair, regression coverage, and authorized train metadata at e14ef197b6e8aa7b75fc5eb70b47843fadf42201." }
+      { "at": "2026-07-11T00:58:30Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped importer atomicity repair, regression coverage, and authorized train metadata at e14ef197b6e8aa7b75fc5eb70b47843fadf42201." },
+      { "at": "2026-07-11T01:00:02Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2929; GitHub checks are pending." }
     ]
   }
 }
