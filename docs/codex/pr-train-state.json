@@ -85591,10 +85591,10 @@
   },
   "AUDIT-PRR2-API-05": {
     "id": "AUDIT-PRR2-API-05", "repo": "fap-api", "title": "AUDIT-PRR2-API-05: hard-disable LemonSqueezy in production", "base": "main", "branch": "codex/audit-prr2-api-05-lemon-webhook-freshness", "depends_on": ["AUDIT-PRR2-API-02"],
-    "status": "in_progress", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "status": "pr_open", "commit_sha": "2d5bd5d51e2a655a6215176491240dbf40f38d03", "pr_url": "https://github.com/fermatmind/fap-api/pull/2949", "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
     "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "api_runtime_change": true, "publish_allowed": false, "deploy_allowed": false,
     "checks": {"manifest_registration": {"status": "pass", "evidence": "The PRR2 /goal authorized production hard-disable when provider-native freshness cannot be proven."}, "dependency": {"status": "pass", "evidence": "AUDIT-PRR2-API-02 is merged."}},
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-11T13:48:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the authorized production hard-disable after confirming LemonSqueezy signs only the raw body and exposes no authenticated freshness value."}, {"at": "2026-07-11T13:52:00+08:00", "from": "in_progress", "to": "focused_checks_passed", "note": "Production-disable, signature, go-live compatibility, runtime-freeze, Pint, YAML/JSON and diff checks passed."}]
+    "transitions": [{"at": "2026-07-11T13:48:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the authorized production hard-disable after confirming LemonSqueezy signs only the raw body and exposes no authenticated freshness value."}, {"at": "2026-07-11T13:52:00+08:00", "from": "in_progress", "to": "focused_checks_passed", "note": "Production-disable, signature, go-live compatibility, runtime-freeze, Pint, YAML/JSON and diff checks passed."}, {"at": "2026-07-11T13:55:00+08:00", "from": "focused_checks_passed", "to": "pr_open", "note": "Committed and pushed the six-path LemonSqueezy production-disable scope at 2d5bd5d51e2a655a6215176491240dbf40f38d03, then opened PR #2949; required checks are pending."}]
   }
 }
