@@ -85281,13 +85281,13 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-01-attempt-owner-binding",
     "depends_on": [],
-    "status": "pr_open",
-    "commit_sha": "b1fec7a2a4a1e5cb6447189c71d32582b93821a5",
+    "status": "merged",
+    "commit_sha": "3fa2ac2071fb502f6a375a158d045b3575022504",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2943",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T04:07:07Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -85328,7 +85328,7 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -85372,6 +85372,93 @@
         "from": "github_fix_local_checks_passed",
         "to": "ready_to_merge",
         "note": "All nine GitHub checks passed on head 56aceac8ff74041e143ea875729168fa2412bdc0; PR #2943 is CLEAN, MERGEABLE, non-draft, review-unblocked, and its five changed paths match the manifest."
+      },
+      {
+        "at": "2026-07-11T12:15:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled in AUDIT-PRR2-API-02: PR #2943 merged at 3fa2ac2071fb502f6a375a158d045b3575022504; origin/main contains the merge, API local main is synced, post-merge focused tests passed, and local/remote task branches are deleted."
+      }
+    ]
+  },
+  "AUDIT-PRR2-API-02": {
+    "id": "AUDIT-PRR2-API-02",
+    "repo": "fap-api",
+    "title": "AUDIT-PRR2-API-02: register payment repairs in effective schedule",
+    "base": "main",
+    "branch": "codex/audit-prr2-api-02-payment-repair-schedule",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "commit_sha": "413091296c768fe1f0941b2f6d4fc831e0ba3a7c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2945",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The 2026-07-11 PRR2 /goal explicitly authorized AUDIT-PRR2-API-02 and corresponding manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "AUDIT-PRR2-API-02 has no declared dependency and started from origin/main 3fa2ac2071fb502f6a375a158d045b3575022504."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "PaymentRepairSchedulerBootstrapTest passed 1 test with 5 assertions; PaymentRepairEngineTest passed 15 tests with 109 assertions; the exact payment-scheduler runtime-freeze branch-diff and negative Big Five mutation tests passed 2 tests with 5 assertions."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Both commands appear exactly once at */5 cadence, scoped Pint, manifest YAML, state JSON, git diff --check, and exact allowed-path validation passed."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "On head fe75b0b39bc44feb482b72a48f1e36f0ff01d529, hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive and all Code Scanning checks passed."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T12:15:00+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Registered and started the explicitly authorized effective payment-repair schedule repair in the isolated API train worktree; no production action is in scope."
+      },
+      {
+        "at": "2026-07-11T12:22:00+08:00",
+        "from": "in_progress",
+        "to": "focused_checks_passed",
+        "note": "Effective-schedule, full repair-engine, exact runtime-freeze classifier, Pint, YAML/JSON, diff, and allowed-path checks passed; no payment, queue replay, deploy, or production mutation was performed."
+      },
+      {
+        "at": "2026-07-11T12:24:00+08:00",
+        "from": "focused_checks_passed",
+        "to": "committed",
+        "note": "Committed the five-path payment repair schedule scope at 413091296c768fe1f0941b2f6d4fc831e0ba3a7c on current origin/main."
+      },
+      {
+        "at": "2026-07-11T12:26:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Pushed the scoped branch and opened PR #2945; GitHub required checks are pending and no production action was performed."
+      },
+      {
+        "at": "2026-07-11T12:34:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed on head fe75b0b39bc44feb482b72a48f1e36f0ff01d529; PR #2945 is CLEAN, MERGEABLE, non-draft, review-unblocked, and its five changed paths match the manifest."
       }
     ]
   }

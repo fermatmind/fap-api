@@ -3146,6 +3146,33 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_payment_repair_scheduler_only(): void
+    {
+        $changed = [
+            'backend/bootstrap/app.php',
+        ];
+        $allowedChangedLines = [
+            "+        \$schedule->command('commerce:repair-paid-orders --limit=50')->everyFiveMinutes()->withoutOverlapping();",
+            "+        \$schedule->command('commerce:repair-post-commit-failed --limit=50')->everyFiveMinutes()->withoutOverlapping();",
+        ];
+        $blockedChangedLines = [
+            "+        \$schedule->command('big5:result-page-v2-agent audit --strict')->everyFiveMinutes();",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            bootstrapAppChangedLines: $allowedChangedLines,
+        ));
+        $this->assertSame($changed, $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            bootstrapAppChangedLines: $blockedChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_privacy_logs_dsar_key_rotation_changes(): void
     {
         $changed = [
@@ -6733,6 +6760,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     $this->kernelDiffIsAlipayPendingCompensationSchedulerOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
+                    || $this->kernelDiffIsPaymentRepairSchedulerOnly(
+                        $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    )
                     || $this->kernelDiffIsTestMetricsSchedulerOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
@@ -6752,7 +6782,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 && $repoRoot === ''
                 && $baseRef === ''
                 && (
-                    $this->kernelDiffIsTestMetricsSchedulerOnly($bootstrapAppChangedLines ?? [])
+                    $this->kernelDiffIsPaymentRepairSchedulerOnly($bootstrapAppChangedLines ?? [])
+                    || $this->kernelDiffIsTestMetricsSchedulerOnly($bootstrapAppChangedLines ?? [])
                     || $this->kernelDiffIsIqMethodPagesCmsDraftImporterOnly($bootstrapAppChangedLines ?? [])
                     || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly($bootstrapAppChangedLines ?? [])
                 )
@@ -11079,6 +11110,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsPaymentRepairSchedulerOnly(array $changedLines): bool
+    {
+        return $changedLines === [
+            "+        \$schedule->command('commerce:repair-paid-orders --limit=50')->everyFiveMinutes()->withoutOverlapping();",
+            "+        \$schedule->command('commerce:repair-post-commit-failed --limit=50')->everyFiveMinutes()->withoutOverlapping();",
+        ];
     }
 
     /**

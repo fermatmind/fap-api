@@ -39113,3 +39113,43 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: AUDIT-PRR2-API-02
+    repo: fap-api
+    depends_on: []
+    branch: codex/audit-prr2-api-02-payment-repair-schedule
+    title: "AUDIT-PRR2-API-02: register payment repairs in effective schedule"
+    train_scope: prr2_payment_repair_schedule
+    status: user_authorized
+    scope:
+      - Register the existing paid-order and post-commit-failure repair commands in Laravel 12's effective bootstrap schedule.
+      - Run each repair every five minutes with overlap protection.
+      - Add an effective schedule contract that requires each exact command once.
+      - Preserve existing repair-engine and provider state-machine behavior.
+    allowed_paths:
+      - backend/bootstrap/app.php
+      - backend/tests/Feature/Commerce/PaymentRepairSchedulerBootstrapTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify payment repair semantics, provider state machines, webhook handling, Alipay compensation, migrations, frontend code, secrets, or deployment configuration.
+      - Run deploys, production payments, queue replays, CMS/search writes, or production database mutations.
+    validation:
+      - cd backend && php artisan test tests/Feature/Commerce/PaymentRepairSchedulerBootstrapTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Commerce/PaymentRepairEngineTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_payment_repair_scheduler_only' --no-ansi
+      - cd backend && vendor/bin/pint --test bootstrap/app.php tests/Feature/Commerce/PaymentRepairSchedulerBootstrapTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan schedule:list --json --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
