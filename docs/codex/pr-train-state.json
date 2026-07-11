@@ -85007,13 +85007,13 @@
     "branch": "codex/security-124-api-01",
     "title": "SECURITY-124-API-01: pin production SSH action trust",
     "depends_on": [],
-    "status": "in_progress",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "merged",
+    "commit_sha": "9bb8319a23e11f4c359bebabc0e604db25191898",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2932",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T01:55:01Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "authorization": {
         "status": "pass",
@@ -85022,13 +85022,17 @@
       "local_validation": {
         "status": "pass",
         "evidence": "Focused SecurityGuardrailsTest (1 test, 22 assertions), workflow YAML parsing, Pint, route list, fresh SQLite migrations, full ci_verify_mbti.sh, and git diff --check passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2932 passed hygiene, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, content-pack validation, supply-chain, Semgrep, and code scanning after rebasing to latest main."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
-      "post_merge_revalidated": false
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -85036,6 +85040,12 @@
         "from": "user_authorized",
         "to": "in_progress",
         "note": "Started the isolated production SSH action trust pinning scope; no workflow dispatch or deploy is authorized."
+      },
+      {
+        "at": "2026-07-11T09:55:01+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2932 passed all required checks and merged as 9bb8319a23e11f4c359bebabc0e604db25191898; origin/main contains the merge and the implementation branch is deleted remotely."
       }
     ]
   },
