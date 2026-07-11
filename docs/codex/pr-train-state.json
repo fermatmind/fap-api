@@ -603,13 +603,13 @@
     "depends_on": [
       "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01"
     ],
-    "status": "pending_external_merge",
-    "commit_sha": "c7ab12e2023da0e4c7a9bbefc21b62bfc53d43d1",
+    "status": "merged",
+    "commit_sha": "7e1651a3e96eb374f61cdb1baeaeb28d2fabed94",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2936",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T02:55:34Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "authorization": {
         "status": "pass",
@@ -652,7 +652,7 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -690,6 +690,12 @@
         "from": "pr_open",
         "to": "pending_external_merge",
         "note": "All 15 reported GitHub checks passed after the authorized Code Scanning rerun; title, body, exact four-file scope, head SHA, and mergeability were revalidated. Manifest merge_policy.auto_merge=false requires explicit operator merge authorization before squash merge."
+      },
+      {
+        "at": "2026-07-11T10:55:34+08:00",
+        "from": "pending_external_merge",
+        "to": "merged",
+        "note": "After explicit operator authorization, PR #2936 squash-merged at 7e1651a3e96eb374f61cdb1baeaeb28d2fabed94 with a skip instruction so the docs/ledger-only main push triggered no deployment workflow. origin/main contains the merge, local main equals origin/main, the worktree is clean, and the local/remote task branches were deleted."
       }
     ]
   },
@@ -702,21 +708,67 @@
     "depends_on": [
       "ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01"
     ],
-    "status": "pending_dependency",
-    "commit_sha": "50bada975a27b6a39944acf6e2f4759aaac1dd26",
+    "status": "local_verified",
+    "commit_sha": null,
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEAGRAM-EN13-PUBLISH-CACHE-WARM-01 merged as PR #2936 at 7e1651a3e96eb374f61cdb1baeaeb28d2fabed94; origin/main contains the merge and post-merge branch cleanup passed."
+      },
+      "bilingual_api_runtime": {
+        "status": "pass",
+        "evidence": "26/26 API records and 26/26 web pages returned HTTP 200; all records are public, published, index/follow, index eligible, sitemap eligible, and schema-runtime eligible."
+      },
+      "metadata_and_hreflang": {
+        "status": "pass",
+        "evidence": "26/26 pages emitted index/follow HTML robots, exact canonical, and complete en, zh-CN, and x-default hreflang after the first-read stale cache keys converged."
+      },
+      "faq_and_schema": {
+        "status": "pass",
+        "evidence": "112/112 bilingual FAQ items rendered visibly and matched 112/112 FAQPage mainEntity records across 26/26 FAQPage schemas."
+      },
+      "internal_links": {
+        "status": "pass",
+        "evidence": "108/108 CMS-authoritative bilingual internal links rendered as safe anchors; all 26 HTML responses passed the private-boundary scan."
+      },
+      "discoverability": {
+        "status": "pass",
+        "evidence": "Public sitemap.xml contains exactly the expected 26 bilingual Enneagram personality-profile URLs with zero missing/unexpected entries. llms.txt and llms-full.txt contain zero such URLs, and no public payload reports a true search-release flag."
+      },
+      "stability": {
+        "status": "pass",
+        "evidence": "After documenting the shared Next revalidate=300 first-read stale metadata behavior, three consecutive complete read-only scans returned GO at 26/26. No cache-warm command was used."
+      },
+      "production_boundaries": {
+        "status": "pass",
+        "evidence": "The revalidation was read-only: no deployment, CMS write, publish command, sitemap/cache-warm command, LLM/search release, or search submission was triggered."
+      }
+    },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": false
     },
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-11T10:57:00+08:00",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "note": "Started the final read-only bilingual production revalidation from the merged dependency on a clean isolated branch based on latest origin/main."
+      },
+      {
+        "at": "2026-07-11T11:07:42+08:00",
+        "from": "in_progress",
+        "to": "local_verified",
+        "note": "The repeatable scanner verified 26/26 bilingual pages, exact sitemap membership, robots/canonical/hreflang, 112 FAQ items and FAQPage parity, 108 internal links, private boundaries, and zero LLM/Search leakage. Three consecutive complete scans returned GO without writes, cache-warm commands, or deployment."
+      }
+    ]
   },
   "BIG5-CMS-IMPORT-DRYRUN-01": {
     "id": "BIG5-CMS-IMPORT-DRYRUN-01",
