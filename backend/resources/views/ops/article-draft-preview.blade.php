@@ -107,7 +107,7 @@
                     <p><img src="{{ $coverImageUrl }}" alt="{{ $article->cover_image_alt ?: $title }}"></p>
                 @endif
 
-                @if ($bodyVisual)
+                @if (($bodyVisual['image_url'] ?? '') !== '')
                     <figure class="media-preview" data-preview-media="body_visual">
                         <img src="{{ $bodyVisual['image_url'] }}" alt="Body visual preview for {{ $title }}">
                         <figcaption>Body visual from public API media metadata.</figcaption>
@@ -132,6 +132,10 @@
                     <div class="field"><span>Private URL redactions</span>{{ $redactionCount }}</div>
                     <div class="field"><span>Body visual asset key</span>{{ $bodyVisual['asset_key'] ?? 'not set' }}</div>
                     <div class="field"><span>Body visual URL</span>{{ $bodyVisual['image_url'] ?? 'not set' }}</div>
+                    <div class="field"><span>Body visual required</span>{{ ($bodyVisual['required'] ?? false) ? 'true' : 'false' }}</div>
+                    <div class="field"><span>Body visual projected in body</span>{{ ($bodyVisual['projected_in_body'] ?? false) ? 'true' : 'false' }}</div>
+                    <div class="field"><span>Body visual anchor</span>{{ $bodyVisual['body_anchor'] ?? 'not set' }}</div>
+                    <div class="field"><span>Body visual answer block</span>{{ $bodyVisual['answer_block_id'] ?? 'not set' }}</div>
                     <div class="field"><span>Body visual fallback authorized</span>{{ ($bodyVisual['fallback_authorized'] ?? false) ? 'true' : 'false' }}</div>
                 </div>
 

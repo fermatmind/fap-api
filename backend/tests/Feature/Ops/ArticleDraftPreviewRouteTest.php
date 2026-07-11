@@ -55,6 +55,10 @@ final class ArticleDraftPreviewRouteTest extends TestCase
             ->assertSee('Body visual from public API media metadata.')
             ->assertSee('Body visual asset key')
             ->assertSee('article.preview.body-visual.v1')
+            ->assertSee('Body visual required')
+            ->assertSee('Body visual projected in body')
+            ->assertSee('Body visual anchor')
+            ->assertSee('Body visual answer block')
             ->assertSee('Body visual fallback authorized')
             ->assertSee('false')
             ->assertSee('schema_enabled: false')
@@ -128,9 +132,12 @@ final class ArticleDraftPreviewRouteTest extends TestCase
                     'height' => 900,
                 ],
                 'editorial_package_v1' => [
+                    'body_visual_required' => true,
                     'body_visual_asset_key' => 'article.preview.body-visual.v1',
                     'body_visual_image_url' => 'https://assets.fermatmind.com/storage/media-library/variants/articlepreviewbodyvisualv1/hero_1600x900.jpg',
                     'body_visual_fallback_authorized' => false,
+                    'body_anchor' => 'execution-plan',
+                    'answer_block_id' => 'answer-block-execution-plan',
                 ],
             ],
             'status' => 'draft',
@@ -152,7 +159,7 @@ final class ArticleDraftPreviewRouteTest extends TestCase
             'revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT,
             'title' => 'Working Revision Preview Title',
             'excerpt' => 'Working revision excerpt.',
-            'content_md' => '## Body\\n\\nDraft body with /result/abc123?token=abc123 private link.',
+            'content_md' => "## execution-plan\n\n<a id=\"answer-block-execution-plan\"></a>\n\n![Plan](https://assets.fermatmind.com/storage/media-library/variants/articlepreviewbodyvisualv1/hero_1600x900.jpg)\n\nDraft body with /result/abc123?token=abc123 private link.",
             'seo_title' => 'Revision SEO Title',
             'seo_description' => 'Revision SEO description.',
         ]);

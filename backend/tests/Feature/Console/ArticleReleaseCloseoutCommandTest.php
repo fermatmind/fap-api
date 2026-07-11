@@ -503,6 +503,79 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
         $this->assertSame('recorded_or_pending_window', data_get($payload, 'remaining_operator_inputs.d1_d7_d14_observation'));
     }
 
+    public function test_required_body_visual_parity_passes_with_projection_and_public_smoke_evidence(): void
+    {
+        $bodyUrl = 'https://api.fermatmind.com/storage/media-library/body.png';
+        $article = $this->createReleasedArticle([
+            'content_md' => "# 标题\n\n## execution-plan\n\n<a id=\"answer-block-execution-plan\"></a>\n\n![流程图]({$bodyUrl})",
+            'content_html' => "<h2 id=\"execution-plan\">计划</h2><div id=\"answer-block-execution-plan\"></div><img src=\"{$bodyUrl}\">",
+            'cover_image_variants' => [
+                'editorial_package_v1' => [
+                    'body_visual_required' => true,
+                    'body_visual_asset_key' => 'article.body.visual.v1',
+                    'body_visual_image_url' => $bodyUrl,
+                    'body_anchor' => 'execution-plan',
+                    'answer_block_id' => 'answer-block-execution-plan',
+                ],
+            ],
+        ]);
+        $this->assertTrue((bool) data_get($article->fresh()?->cover_image_variants, 'editorial_package_v1.body_visual_required'));
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+        $publicSmokePath = $this->writeEvidenceJson([
+            'ok' => true,
+            'checks' => ['body_visual' => ['ok' => true, 'url_count' => 1]],
+        ]);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => (string) $article->slug,
+            '--public-smoke-json' => $publicSmokePath,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_PRETTY_PRINT));
+        $this->assertTrue(data_get($payload, 'checks.media.ok'));
+        $this->assertSame(1, data_get($payload, 'checks.media.body_visual_url_count'));
+        $this->assertSame('ARTICLE_RELEASE_COMPLETE_SEARCH_OBSERVATION_PENDING', $payload['decision']);
+    }
+
+    public function test_required_body_visual_blocks_closeout_when_projection_and_public_evidence_are_missing(): void
+    {
+        $article = $this->createReleasedArticle([
+            'cover_image_variants' => [
+                'editorial_package_v1' => [
+                    'body_visual_required' => true,
+                    'body_visual_asset_key' => 'article.body.visual.v1',
+                    'body_visual_image_url' => 'https://api.fermatmind.com/storage/media-library/missing-body.png',
+                    'body_anchor' => 'missing-anchor',
+                    'answer_block_id' => 'missing-answer-block',
+                ],
+            ],
+        ]);
+        $this->assertTrue((bool) data_get($article->fresh()?->cover_image_variants, 'editorial_package_v1.body_visual_required'));
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => (string) $article->slug,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertTrue((bool) data_get($payload, 'checks.media.body_visual_required'), json_encode($payload, JSON_PRETTY_PRINT));
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('BLOCKED_BODY_VISUAL_PUBLIC_PARITY', $payload['decision']);
+        $this->assertErrorCode($payload, 'body_visual_projection_missing');
+        $this->assertErrorCode($payload, 'body_visual_public_evidence_missing');
+    }
+
     public function test_slug_lock_mismatch_blocks_discoverability(): void
     {
         $this->createReleasedArticle();
