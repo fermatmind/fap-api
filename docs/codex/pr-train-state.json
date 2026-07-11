@@ -8484,7 +8484,7 @@
         "summary": "Full vendor/bin/pint --test reports pre-existing new_with_parentheses style issues in EQ unit tests outside this career drift gate scope."
       }
     ],
-    "status": "pr_open_checks_pending",
+    "status": "ready_to_merge",
     "title": "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01 directory authority drift gate",
     "transitions": [
       {
@@ -84290,12 +84290,16 @@
       "metadata_and_diff": {
         "status": "pass",
         "evidence": "PR-train YAML parsed, state JSON parsed, and git diff --check passed."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #2928 checks passed for hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, and Semgrep blocking secrets."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -84316,6 +84320,12 @@
         "from": "local_checks_passed",
         "to": "pr_open_checks_pending",
         "note": "Opened PR #2928 from code commit e08f3a29f after rebasing onto latest origin/main and repeating focused validation."
+      },
+      {
+        "at": "2026-07-11T01:06:00Z",
+        "from": "pr_open_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed and the PR remained limited to the five authorized paths."
       }
     ]
   },
