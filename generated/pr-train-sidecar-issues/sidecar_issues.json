@@ -426,5 +426,19 @@
     "recommended_follow_up": "Repair repository-wide baseline formatting separately.",
     "user_override": "The user explicitly authorized changed-PHP scoped Pint plus focused checks, scope validation, and GitHub required checks on 2026-07-11.",
     "train_continued": true
+  },
+  {
+    "repo": "fap-api",
+    "pr_id": "CAREER-10K-CAPACITY-CHAOS-GATE-01",
+    "branch": "codex/career-10k-capacity-chaos-gate-01",
+    "blocker_type": "authorized_external_baseline_failure",
+    "evidence": [
+      "Full Composer and repository-wide Pint failures were reproduced on unmodified origin/main earlier in this train.",
+      "PR7 passes 43 focused assertions, changed-PHP scoped Pint, Composer validation, and changed-file scope validation."
+    ],
+    "why_not_current_pr_scope": "The full-suite failures predate and reproduce without the PR7 capacity gate.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Repair repository-wide Composer and Pint baselines in separate scoped work.",
+    "train_continued": true
   }
 ]

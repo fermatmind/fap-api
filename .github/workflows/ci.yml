@@ -150,6 +150,10 @@ jobs:
           '
           php artisan test --filter=ContentPacksIndexArtifact --no-ansi
 
+      - name: Gate Career 10k capacity and fault resilience
+        working-directory: backend
+        run: php artisan test tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php --no-ansi
+
       - name: Upload content packs index artifact
         uses: actions/upload-artifact@v7
         with:

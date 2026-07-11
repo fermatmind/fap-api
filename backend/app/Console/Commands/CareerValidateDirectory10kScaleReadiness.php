@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Career\Career10kCapacityChaosGate;
 use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Console\Command;
@@ -13,14 +14,17 @@ final class CareerValidateDirectory10kScaleReadiness extends Command
     protected $signature = 'career:validate-directory-10k-scale-readiness
         {--expected-public-count= : Optional expected public career detail count}
         {--expected-sitemap-career-urls= : Optional expected EN/ZH career detail URL count}
-        {--synthetic-count=10000 : Future scale count used for budget checks}
+        {--synthetic-count=10000 : Actual in-memory occupation count generated for the capacity and chaos gate}
         {--max-first-page-bytes=262144 : Maximum allowed first-page directory payload size}
         {--json : Emit JSON output}';
 
     protected $description = 'Validate career directory authority warm/readiness invariants for 10k-scale operation without mutating runtime state.';
 
-    public function handle(CareerDirectoryAuthorityService $directoryAuthority, SitemapGenerator $sitemapGenerator): int
-    {
+    public function handle(
+        CareerDirectoryAuthorityService $directoryAuthority,
+        SitemapGenerator $sitemapGenerator,
+        Career10kCapacityChaosGate $capacityChaosGate,
+    ): int {
         $startedAt = microtime(true);
 
         $enPayload = $directoryAuthority->payload('en', 1, 50);
@@ -75,6 +79,10 @@ final class CareerValidateDirectory10kScaleReadiness extends Command
         if ($sitemapCareerUrlCount !== ($publicCount * 2)) {
             $errors[] = 'sitemap_career_url_count_not_bilingual_public_count';
         }
+        $capacity = $capacityChaosGate->run($syntheticCount, $maxFirstPageBytes);
+        if (($capacity['status'] ?? null) !== 'passed') {
+            $errors[] = 'career_10k_capacity_chaos_gate_failed';
+        }
 
         $elapsed = round(microtime(true) - $startedAt, 3);
         $passed = $errors === [];
@@ -99,13 +107,7 @@ final class CareerValidateDirectory10kScaleReadiness extends Command
             'first_page_payload_bytes' => $firstPageBytes,
             'max_first_page_bytes' => $maxFirstPageBytes,
             'forbidden_item_fields' => $forbiddenItemFields,
-            'synthetic_scale_budget' => [
-                'target_directory_count' => $syntheticCount,
-                'target_bilingual_detail_url_count' => $syntheticCount * 2,
-                'directory_first_page_ssr_limit' => 50,
-                'full_directory_ssr_rendering_allowed' => false,
-                'sitemap_full_detail_url_exposure_expected' => true,
-            ],
+            'capacity_chaos_gate' => $capacity,
             'production_write_performed' => false,
             'runtime_promotion_performed' => false,
             'sitemap_llms_footer_exposure_performed' => false,
@@ -123,7 +125,7 @@ final class CareerValidateDirectory10kScaleReadiness extends Command
             $this->line('public_detail_indexable_count_en='.$publicCount);
             $this->line('public_detail_indexable_count_zh_cn='.$zhPublicCount);
             $this->line('sitemap_career_detail_url_count='.$sitemapCareerUrlCount);
-            $this->line('synthetic_bilingual_detail_url_count='.($syntheticCount * 2));
+            $this->line('generated_bilingual_detail_projection_count='.(int) data_get($capacity, 'generated.detail_projections', 0));
         }
 
         return $passed ? self::SUCCESS : self::FAILURE;

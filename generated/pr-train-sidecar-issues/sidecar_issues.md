@@ -89,6 +89,17 @@
   - Complete the GSC/read-model quality proof card before any TDK/CTR repair selection.
 - whether train continued: `true`
 
+## CAREER-10K-CAPACITY-CHAOS-GATE-01 inherited full-suite baselines
+
+- repo: `fap-api`
+- PR id / branch: `CAREER-10K-CAPACITY-CHAOS-GATE-01` / `codex/career-10k-capacity-chaos-gate-01`
+- blocker type: `authorized_external_baseline_failure`
+- evidence: full Composer and repository-wide Pint failures were already reproduced on an unmodified `origin/main`; PR7 passes 43 focused assertions, changed-PHP scoped Pint, composer validation, and scope validation.
+- why not current PR scope: the full-suite failures predate the PR7 capacity gate and reproduce without its changes.
+- whether required checks are affected: `false`; GitHub required checks remain mandatory.
+- recommended follow-up: repair the repository-wide Composer/Pint baselines in separate scoped work.
+- whether train continued: `true`
+
 ## SECURITY-169-API-39 inherited Big Five rendered-QA expectation drift
 
 - repo: `fermatmind/fap-api`

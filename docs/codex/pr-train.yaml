@@ -227,6 +227,57 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: CAREER-10K-CAPACITY-CHAOS-GATE-01
+    repo: fap-api
+    depends_on:
+      - CAREER-RUNTIME-SLO-ALERTING-01
+      - CAREER-DETAIL-READ-MODEL-10K-01
+      - CAREER-DETAIL-DELIVERY-10K-01
+    branch: codex/career-10k-capacity-chaos-gate-01
+    base: main
+    title: "CAREER-10K-CAPACITY-CHAOS-GATE-01 real 10k capacity and chaos gate"
+    train_scope: career_10k_stability
+    status: in_progress
+    scope:
+      - Generate and exercise 10,000 directory items and 20,000 EN/ZH detail projections in the release gate.
+      - Gate search, facets, deep paging, 50/100 request windows, Redis faults, rebuild failure, worker restart, and version coexistence.
+      - Enforce bounded latency, memory, response size, query count, and page size in an existing required GitHub check.
+    allowed_paths:
+      - .github/workflows/ci.yml
+      - backend/app/Console/Commands/CareerValidateDirectory10kScaleReadiness.php
+      - backend/app/Services/Career/Career10kCapacityChaosGate.php
+      - backend/tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Change Career content authority, publication/indexability decisions, canonical, robots, sitemap, llms, JSON-LD, or frontend behavior.
+      - Deploy, import, publish, mutate production/CMS/DB, warm production, or wait for staging deployment.
+      - Implement controlled rollout controls from PR8.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_career_10k_capacity_chaos_gate' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/CareerValidateDirectory10kScaleReadiness.php app/Services/Career/Career10kCapacityChaosGate.php tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && composer validate --strict
+      - full repository Pint and composer test baseline failures recorded as authorized sidecars; GitHub required checks remain mandatory
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    scheduler_activation: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: MBTI-INDEX-24A-API
     repo: fap-api
     depends_on:
