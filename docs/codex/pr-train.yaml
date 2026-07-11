@@ -39939,6 +39939,40 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-EN-FACET-HUB-CONTENT-PACKAGE-01
+    repo: fap-api
+    depends_on: [BIG5-EN-V2-RANGE-EVIDENCE-REPAIR-01]
+    branch: codex/big5-en-facet-hub-content-package-01
+    title: "BIG5-EN-FACET-HUB-CONTENT-PACKAGE-01: add the English 30-facet hub content package"
+    train_scope: big5_en_facet_hub_content_package
+    status: user_authorized
+    scope:
+      - Produce the source ledger, raw Codex draft, skeptical review, repaired draft, final V1 package, and QA report for exactly the English Big Five Facet Hub.
+      - Provide nine substantive sections, five FAQs, seven internal links, reciprocal hreflang, and explicit taxonomy and clinical boundaries.
+      - Preserve content_ready, noindex, sitemap exclusion, llms exclusion, and schema runtime-off gates.
+    allowed_paths: [generated/big-five-en-facet-hub-content-package/**, generated/pr-train-sidecar-issues/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    do_not:
+      - Modify other assets, CMS data, importer/runtime code, frontend code, SEO runtime, sitemap, llms, JSON-LD, permissions, secrets, or deployment configuration.
+      - Trigger CMS import, indexability promotion, deploy, publish, or production workflows.
+    validation:
+      - node generated/big-five-en-facet-hub-content-package/build-package.mjs
+      - node generated/big-five-en-facet-hub-content-package/validate-package.mjs
+      - python3 -m json.tool generated/big-five-en-facet-hub-content-package/source_ledger.json >/dev/null
+      - python3 -m json.tool generated/big-five-en-facet-hub-content-package/big_five_en_facet_hub_seed.json >/dev/null
+      - python3 -m json.tool generated/big-five-en-facet-hub-content-package/qa_report.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []
