@@ -6,7 +6,7 @@
     "base": "main",
     "branch": "codex/career-10k-capacity-chaos-gate-01",
     "depends_on": ["CAREER-RUNTIME-SLO-ALERTING-01", "CAREER-DETAIL-READ-MODEL-10K-01", "CAREER-DETAIL-DELIVERY-10K-01"],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "cc7484c6f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2968",
     "failure_reason": null,
@@ -85770,14 +85770,16 @@
       "manifest_registration": {"status": "pass", "evidence": "The locked 124-asset / 114-canonical execution goal explicitly authorizes this PR id and fap-api manifest/state registration."},
       "dependency": {"status": "pass", "evidence": "PR #2958 is merged at 440dabb855fa0e86fbd9876a706c32da46f1c2a4 and origin/main contains that squash merge."},
       "content_scope": {"status": "pass", "evidence": "Exactly six independently authored English Openness Facet assets contain nine substantive sections, five FAQs, seven internal links, source traceability, and balanced non-diagnostic boundaries."},
-      "local_validation": {"status": "pass", "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."}
+      "local_validation": {"status": "pass", "evidence": "Build, package validator, all six generated JSON parses, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path validation passed."},
+      "github_required_checks": {"status": "pass", "evidence": "PR #2968 head 763af5d8b passed all nine reported CI and Code Scanning checks, including content-pack-build-validate, verify-bigfive, and both MBTI verification jobs."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
     "transitions": [
       {"at": "2026-07-11T07:08:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the second locked train item after verifying its audit dependency on origin/main and started in an isolated clean worktree; no production action is in scope."},
       {"at": "2026-07-11T07:16:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."},
       {"at": "2026-07-11T07:18:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at cc7484c6f."},
-      {"at": "2026-07-11T07:20:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2968; required GitHub checks are pending."}
+      {"at": "2026-07-11T07:20:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2968; required GitHub checks are pending."},
+      {"at": "2026-07-11T09:01:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All nine GitHub checks passed; merge policy, review state, PR body, changed files, and exact allowed-path scope were revalidated."}
     ]
   },
   "AUDIT-PRR2-API-01": {
