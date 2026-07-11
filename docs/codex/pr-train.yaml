@@ -38539,7 +38539,7 @@ prs:
     branch: codex/enneagram-en13-cms-import-promote-01
     title: "ENNEAGRAM-EN13-CMS-IMPORT-PROMOTE-01: import and promote English Enneagram assets"
     train_scope: enneagram_en13_controlled_cms_write
-    status: local_verified
+    status: pr_open
     allowed_paths: [docs/seo/personality/enneagram/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/pr-train-sidecar-issues/**]
     validation: ["git diff --check"]
     merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
