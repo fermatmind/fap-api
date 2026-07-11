@@ -336,6 +336,64 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('error_code', 'INVALID_ARGUMENT');
     }
 
+    public function test_variant_robots_and_profile_flag_share_one_effective_indexability_state(): void
+    {
+        $profile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $assertive = $this->createVariant($profile, [
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'published_at' => now()->subMinute(),
+        ]);
+        $turbulent = $this->createVariant($profile, [
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariantSeoMeta($assertive, ['robots' => 'noindex,follow']);
+        $this->createVariantSeoMeta($turbulent, ['robots' => 'index,follow']);
+
+        $this->getJson('/api/v0.5/personality?locale=en&include_variants=1')
+            ->assertOk()
+            ->assertJsonPath('items.0.runtime_type_code', 'INTJ-A')
+            ->assertJsonPath('items.0.is_indexable', false)
+            ->assertJsonPath('items.1.runtime_type_code', 'INTJ-T')
+            ->assertJsonPath('items.1.is_indexable', true);
+
+        $this->getJson('/api/v0.5/personality/intj-a?locale=en')
+            ->assertOk()
+            ->assertJsonPath('profile.is_indexable', false)
+            ->assertJsonPath('seo_meta.robots', 'noindex,follow')
+            ->assertJsonPath('landing_surface_v1.landing_scope', 'public_noindex_detail')
+            ->assertJsonPath('landing_surface_v1.indexability_state', 'noindex')
+            ->assertJsonPath('answer_surface_v1.answer_scope', 'public_noindex_detail')
+            ->assertJsonPath('answer_surface_v1.public_safety_state', 'public_noindex')
+            ->assertJsonPath('answer_surface_v1.indexability_state', 'noindex');
+
+        $this->getJson('/api/v0.5/personality/intj-t?locale=en')
+            ->assertOk()
+            ->assertJsonPath('profile.is_indexable', true)
+            ->assertJsonPath('landing_surface_v1.indexability_state', 'indexable')
+            ->assertJsonPath('answer_surface_v1.public_safety_state', 'public_indexable')
+            ->assertJsonPath('answer_surface_v1.indexability_state', 'indexable');
+
+        $profile->update(['is_indexable' => false]);
+
+        $this->getJson('/api/v0.5/personality/intj-t?locale=en')
+            ->assertOk()
+            ->assertJsonPath('profile.is_indexable', false)
+            ->assertJsonPath('seo_meta.robots', 'index,follow')
+            ->assertJsonPath('landing_surface_v1.indexability_state', 'noindex')
+            ->assertJsonPath('answer_surface_v1.public_safety_state', 'public_noindex')
+            ->assertJsonPath('answer_surface_v1.indexability_state', 'noindex');
+    }
+
     public function test_detail_returns_profile_sections_and_seo_meta(): void
     {
         config(['app.frontend_url' => 'https://www.fermatmind.com']);

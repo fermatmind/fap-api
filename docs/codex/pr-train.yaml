@@ -38265,6 +38265,54 @@ prs:
     content_authority: CMS/backend
     next_task: MBTI-CMS-28
 
+  - id: MBTI-CMS-28A
+    repo: fap-api
+    depends_on:
+      - MBTI-CMS-29
+    branch: codex/mbti-cms-28a-profile-indexability-readmodel
+    title: "MBTI-CMS-28A: align MBTI profile indexability readmodels"
+    train_scope: mbti_profile_effective_indexability_readmodel_alignment
+    status: user_authorized
+    scope:
+      - Align public profile detail, list, landing, and answer readmodels with effective indexability derived from the base profile flag and final SEO robots.
+      - Keep noindex fail-closed when either authority denies indexing.
+      - Add regression coverage for robots hold, profile hold, and normal indexable behavior.
+      - Revalidate CMS-27 imported profile readmodels without changing CMS data.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - backend/tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write or re-import CMS content.
+      - Modify sitemap, llms, canonical URLs, comparison content, or frontend runtime.
+      - Trigger deploy, GSC submission, or indexability release.
+      - Implement MBTI-CMS-28 read-only production verification or MBTI-INDEX-24 release in this PR.
+    validation:
+      - php -l backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - php -l backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - php -l backend/tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - cd backend && php artisan test tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php
+      - cd backend && php artisan test tests/Feature/SEO/SitemapGeneratorTest.php
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: MBTI-CMS-28
+
   - id: ENNEAGRAM-EN13-CONTENT-PACKAGE-01
     repo: fap-api
     depends_on: []
