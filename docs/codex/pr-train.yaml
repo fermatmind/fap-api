@@ -38719,6 +38719,50 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01]
+    branch: codex/enneagram-90-backend-cms-gate-identity-01
+    title: "ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01: support Enneagram wing and subtype CMS gate identities"
+    train_scope: enneagram_90_backend_cms_gate_identity
+    status: user_authorized
+    scope:
+      - Extend Enneagram CMS draft, promotion, and publish gate identity parsing to support bilingual wing pages.
+      - Extend Enneagram CMS draft, promotion, and publish gate identity parsing to support bilingual instinctual subtype pages.
+      - Preserve existing hub, center, and core type behavior.
+      - Preserve fail-closed private route detection and no unsafe publish, sitemap, llms, search, deploy, or CMS production action in this PR.
+      - Reconcile ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01 merged/cleanup ledger facts after PR #2974.
+    allowed_paths:
+      - backend/app/Services/Cms/EnneagramCmsDraftWriter.php
+      - backend/app/Services/Cms/EnneagramCmsPromotionService.php
+      - backend/app/Services/Cms/EnneagramCmsPublishGateService.php
+      - backend/tests/Feature/Console/PersonalityEnneagramCmsDraftCommandTest.php
+      - backend/tests/Feature/Console/PersonalityEnneagramCmsPromoteCommandTest.php
+      - backend/tests/Feature/Console/PersonalityEnneagramCmsPublishGateCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, database schema, CMS production content, sitemap runtime, llms runtime, public API runtime, JSON-LD runtime, canonical/noindex runtime behavior, permissions, scheduler behavior, secrets, staging deploy, or production deploy.
+      - Write CMS, run production imports, publish, enable indexability, enable sitemap/llms/search release, or add frontend fallback content.
+      - Change Enneagram route canonical paths beyond recognizing existing `/wings/{code}` and `/type-{n}/instincts/{subtype}` identities.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/PersonalityEnneagramCmsDraftCommandTest.php tests/Feature/Console/PersonalityEnneagramCmsPromoteCommandTest.php tests/Feature/Console/PersonalityEnneagramCmsPublishGateCommandTest.php --no-ansi
+      - cd backend && php -l app/Services/Cms/EnneagramCmsDraftWriter.php && php -l app/Services/Cms/EnneagramCmsPromotionService.php && php -l app/Services/Cms/EnneagramCmsPublishGateService.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: BIG5-EN-DOMAIN-CONTENT-PACKAGE-01
     repo: fap-api
     depends_on: []

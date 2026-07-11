@@ -170,6 +170,32 @@ final class PersonalityEnneagramCmsPublishGateCommandTest extends TestCase
         $this->assertSame(0, PersonalityPublicContentAsset::query()->where('locale', 'en')->where('llms_eligible', true)->count());
     }
 
+    public function test_publish_gate_supports_wing_and_instinctual_subtype_identity_without_llms_or_search_release(): void
+    {
+        $package = $this->wingAndSubtypePackage();
+        $packagePath = $this->writePackage($package);
+        $this->seedContentReadyAssetsForPackage($package);
+
+        $exitCode = $this->callPublishGate($this->writeOptions($packagePath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(4, $payload['row_count']);
+        $this->assertSame(2, $payload['wing_row_count']);
+        $this->assertSame(2, $payload['instinctual_subtype_row_count']);
+        $this->assertSame(4, $payload['published_count']);
+        $this->assertFalse($payload['llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame(4, PersonalityPublicContentAsset::query()->where('launch_state', PersonalityPublicContentAsset::LAUNCH_PUBLISHED)->count());
+        $this->assertSame(4, PersonalityPublicContentAsset::query()->where('robots', PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW)->count());
+        $this->assertSame(4, PersonalityPublicContentAsset::query()->where('index_eligible', true)->count());
+        $this->assertSame(4, PersonalityPublicContentAsset::query()->where('sitemap_eligible', true)->count());
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->where('llms_eligible', true)->count());
+        $this->assertSame('1w9', PersonalityPublicContentAsset::query()->where('slug', 'enneagram/wings/1w9')->value('entity_key'));
+        $this->assertSame('type-1/self-preservation', PersonalityPublicContentAsset::query()->where('slug', 'enneagram/type-1/instincts/self-preservation')->value('entity_key'));
+    }
+
     public function test_non_content_ready_assets_are_rejected(): void
     {
         $packagePath = $this->writePackage($this->zh13Package());
@@ -252,6 +278,67 @@ final class PersonalityEnneagramCmsPublishGateCommandTest extends TestCase
     }
 
     /**
+     * @param  array<string,mixed>  $package
+     */
+    private function seedContentReadyAssetsForPackage(array $package): void
+    {
+        foreach ($package['recommendations'] as $recommendation) {
+            $path = (string) parse_url((string) $recommendation['target_url'], PHP_URL_PATH);
+            $identity = $this->identityFromPath($path);
+
+            PersonalityPublicContentAsset::query()->create([
+                'org_id' => 0,
+                'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+                'entity_type' => $identity['entity_type'],
+                'entity_key' => $identity['entity_key'],
+                'slug' => $identity['slug'],
+                'locale' => $identity['locale'],
+                'title' => 'Test: '.$identity['entity_key'],
+                'summary' => 'Test summary',
+                'is_public' => true,
+                'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+                'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+                'index_eligible' => false,
+                'sitemap_eligible' => false,
+                'llms_eligible' => false,
+                'canonical_json' => ['path' => $path],
+                'seo_json' => ['title' => 'SEO Title'],
+            ]);
+        }
+    }
+
+    /**
+     * @return array{locale:string,entity_type:string,entity_key:string,slug:string}
+     */
+    private function identityFromPath(string $path): array
+    {
+        if (preg_match('#^/(?<prefix>en|zh)/personality/enneagram/wings/(?<code>[1-9]w[1-9])$#i', $path, $matches) === 1) {
+            $code = strtolower((string) $matches['code']);
+
+            return [
+                'locale' => (string) $matches['prefix'] === 'zh' ? 'zh-CN' : 'en',
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_WING,
+                'entity_key' => $code,
+                'slug' => 'enneagram/wings/'.$code,
+            ];
+        }
+
+        if (preg_match('#^/(?<prefix>en|zh)/personality/enneagram/type-(?<type>[1-9])/instincts/(?<subtype>self-preservation|social|one-to-one)$#i', $path, $matches) === 1) {
+            $type = 'type-'.((string) $matches['type']);
+            $subtype = strtolower((string) $matches['subtype']);
+
+            return [
+                'locale' => (string) $matches['prefix'] === 'zh' ? 'zh-CN' : 'en',
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_INSTINCTUAL_SUBTYPE,
+                'entity_key' => $type.'/'.$subtype,
+                'slug' => 'enneagram/'.$type.'/instincts/'.$subtype,
+            ];
+        }
+
+        $this->fail('Unexpected test path: '.$path);
+    }
+
+    /**
      * @param  array<string,mixed>  $options
      * @return array<string,mixed>
      */
@@ -310,6 +397,23 @@ final class PersonalityEnneagramCmsPublishGateCommandTest extends TestCase
             'artifact' => 'ENNEAGRAM-EN13-CMS-PACKAGE-V1',
             'framework' => 'enneagram',
             'recommendations' => $recommendations,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function wingAndSubtypePackage(): array
+    {
+        return [
+            'artifact' => 'ENNEAGRAM-90-CMS-V1-GATE-IDENTITY-TEST',
+            'framework' => 'enneagram',
+            'recommendations' => [
+                $this->recommendation('https://fermatmind.com/zh/personality/enneagram/wings/1w9', 'zh-CN', 'wing'),
+                $this->recommendation('https://fermatmind.com/en/personality/enneagram/wings/1w9', 'en', 'wing'),
+                $this->recommendation('https://fermatmind.com/zh/personality/enneagram/type-1/instincts/self-preservation', 'zh-CN', 'instinctual_subtype'),
+                $this->recommendation('https://fermatmind.com/en/personality/enneagram/type-1/instincts/self-preservation', 'en', 'instinctual_subtype'),
+            ],
         ];
     }
 

@@ -155,6 +155,8 @@ final class EnneagramCmsDraftWriter
                 'hub_row_count' => $this->countRows($rows, PersonalityPublicContentAsset::ENTITY_HUB),
                 'center_row_count' => $this->countRows($rows, PersonalityPublicContentAsset::ENTITY_CENTER),
                 'core_type_row_count' => $this->countRows($rows, PersonalityPublicContentAsset::ENTITY_CORE_TYPE),
+                'wing_row_count' => $this->countRows($rows, PersonalityPublicContentAsset::ENTITY_WING),
+                'instinctual_subtype_row_count' => $this->countRows($rows, PersonalityPublicContentAsset::ENTITY_INSTINCTUAL_SUBTYPE),
                 'would_create_asset_count' => 0,
                 'created_asset_count' => 0,
                 'skipped_existing_count' => 0,
@@ -209,6 +211,8 @@ final class EnneagramCmsDraftWriter
             'hub_row_count' => $this->countRows($rows, PersonalityPublicContentAsset::ENTITY_HUB),
             'center_row_count' => $this->countRows($rows, PersonalityPublicContentAsset::ENTITY_CENTER),
             'core_type_row_count' => $this->countRows($rows, PersonalityPublicContentAsset::ENTITY_CORE_TYPE),
+            'wing_row_count' => $this->countRows($rows, PersonalityPublicContentAsset::ENTITY_WING),
+            'instinctual_subtype_row_count' => $this->countRows($rows, PersonalityPublicContentAsset::ENTITY_INSTINCTUAL_SUBTYPE),
             'would_create_asset_count' => $write ? 0 : count(array_filter($rows, static fn (array $row): bool => ($row['existing_asset_id'] ?? null) === null)),
             'created_asset_count' => $created,
             'updated_asset_count' => $updated,
@@ -306,6 +310,31 @@ final class EnneagramCmsDraftWriter
                 'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
                 'entity_key' => $code,
                 'slug' => 'enneagram/'.$code,
+            ];
+        }
+
+        if (preg_match('#^/(?<prefix>en|zh)/personality/enneagram/wings/(?<code>[1-9]w[1-9])$#i', $path, $matches) === 1) {
+            $code = strtolower((string) $matches['code']);
+
+            return [
+                'path' => $path,
+                'locale' => $this->localeFromPrefix((string) $matches['prefix']),
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_WING,
+                'entity_key' => $code,
+                'slug' => 'enneagram/wings/'.$code,
+            ];
+        }
+
+        if (preg_match('#^/(?<prefix>en|zh)/personality/enneagram/type-(?<type>[1-9])/instincts/(?<subtype>self-preservation|social|one-to-one)$#i', $path, $matches) === 1) {
+            $type = 'type-'.((string) $matches['type']);
+            $subtype = strtolower((string) $matches['subtype']);
+
+            return [
+                'path' => $path,
+                'locale' => $this->localeFromPrefix((string) $matches['prefix']),
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_INSTINCTUAL_SUBTYPE,
+                'entity_key' => $type.'/'.$subtype,
+                'slug' => 'enneagram/'.$type.'/instincts/'.$subtype,
             ];
         }
 
