@@ -40740,3 +40740,76 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: ENNEAGRAM-SEARCH-RELEASE-READINESS-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/enneagram-search-release-readiness-01
+    title: "ENNEAGRAM-SEARCH-RELEASE-READINESS-01: assess Enneagram search submission safety"
+    train_scope: enneagram_search_release_readiness
+    status: in_progress
+    scope:
+      - Read-only assess the 116 published bilingual Enneagram canonical paths for search submission safety.
+      - Verify public runtime, sitemap membership, backend API authority, indexability, FAQPage, internal links, private-route boundaries, and IndexNow queue planning evidence.
+      - Produce auditable GO_FOR_SEPARATE_SEARCH_QUEUE_AUTHORIZATION or NO_GO_SEARCH_RELEASE evidence without enqueue, approval, submission, external search API calls, CMS writes, llms changes, cache warm, or deploy.
+    allowed_paths:
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/enneagram-search-release-readiness/**
+    do_not:
+      - Write, approve, or submit Search Queue items.
+      - Change CMS assets, indexability, sitemap, llms, llms-full, canonical, hreflang, runtime code, configuration, secrets, cache, or deployment state.
+      - Persist content bodies, secrets, private paths, tokens, or internal topology in generated evidence.
+    validation:
+      - python3 -m json.tool generated/enneagram-search-release-readiness/readiness.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    search_channel_action: false
+    llms_release_execution: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-LLMS-GEO-RELEASE-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-SEARCH-RELEASE-READINESS-01]
+    branch: codex/enneagram-llms-geo-release-01
+    title: "ENNEAGRAM-LLMS-GEO-RELEASE-01: assess Enneagram llms and llms-full eligibility"
+    train_scope: enneagram_llms_geo_release_readiness
+    status: pending_dependency
+    scope:
+      - Read-only assess the same 116 published bilingual Enneagram paths independently for llms.txt and evidence-gated llms-full.txt eligibility.
+      - Verify visible evidence, provenance, claim boundaries, disclaimers, FAQ/GEO answerability, bilingual alignment, private-data safety, and current zero-feed membership.
+      - Produce separate GO_FOR_SEPARATE_LLMS_AUTHORIZATION or NO_GO_LLMS_RELEASE decisions without changing eligibility or generating production feeds.
+    allowed_paths:
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/enneagram-llms-geo-release/**
+    do_not:
+      - Change llms_eligible, llms.txt, llms-full.txt, CMS assets, search queues, sitemap, canonical, hreflang, runtime code, configuration, secrets, cache, or deployment state.
+      - Persist content bodies, secrets, private paths, tokens, or internal topology in generated evidence.
+    validation:
+      - python3 -m json.tool generated/enneagram-llms-geo-release/readiness.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    search_channel_action: false
+    llms_release_execution: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
