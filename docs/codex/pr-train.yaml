@@ -39907,6 +39907,38 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-EN-V2-RANGE-EVIDENCE-REPAIR-01
+    repo: fap-api
+    depends_on: [BIG5-EN-LEGACY-POLARITY-LINK-REPAIR-01]
+    branch: codex/big5-en-v2-range-evidence-repair-01
+    title: "BIG5-EN-V2-RANGE-EVIDENCE-REPAIR-01: add evidence notes to 15 English V2 Range assets"
+    train_scope: big5_en_v2_range_evidence_repair
+    status: user_authorized
+    scope:
+      - Build a V1 package for exactly 15 English canonical V2 Range assets and add three traceable evidence notes per asset.
+      - Preserve every existing content field, identity, canonical/hreflang path, seven-link set, content_ready state, and noindex/discoverability gate.
+    allowed_paths: [generated/big-five-en-v2-range-evidence-repair/**, generated/pr-train-sidecar-issues/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    do_not:
+      - Modify Legacy polarity, Facet, Domain, Chinese, CMS/runtime/importer/schema/frontend/SEO/deploy paths or trigger any production action.
+    validation:
+      - node generated/big-five-en-v2-range-evidence-repair/build-package.mjs
+      - node generated/big-five-en-v2-range-evidence-repair/validate-package.mjs
+      - python3 -m json.tool generated/big-five-en-v2-range-evidence-repair/source_ledger.json >/dev/null
+      - python3 -m json.tool generated/big-five-en-v2-range-evidence-repair/big_five_en_v2_range_evidence_repair_15_seed.json >/dev/null
+      - python3 -m json.tool generated/big-five-en-v2-range-evidence-repair/qa_report.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []
