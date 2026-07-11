@@ -292,6 +292,8 @@ class AttemptOwnershipAnd404Test extends TestCase
         $this->addMember($orgId, $memberA['user_id'], 'member');
         $this->addMember($orgId, $admin['user_id'], 'admin');
 
+        $this->createSubmittedAttempt($orgId, $owner['token'], 'owner-own-anon');
+        $this->createSubmittedAttempt($orgId, $admin['token'], 'admin-own-anon');
         $attemptId = $this->createSubmittedAttempt($orgId, $memberA['token'], 'member-a-admin-anon');
 
         $ownerHeaders = [
@@ -309,6 +311,13 @@ class AttemptOwnershipAnd404Test extends TestCase
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/result", $adminHeaders));
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report", $adminHeaders));
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report.pdf", $adminHeaders));
+        foreach ([$ownerHeaders, $adminHeaders] as $headers) {
+            $this->assertUniform404($this->postJson('/api/v0.3/attempts/submit', [
+                'attempt_id' => $attemptId,
+                'answers' => $this->defaultAnswers(),
+                'duration_ms' => 120000,
+            ], $headers));
+        }
     }
 
     public function test_tenant_admin_cannot_submit_public_org_zero_attempt(): void

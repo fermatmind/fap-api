@@ -85273,5 +85273,75 @@
       { "at": "2026-07-11T01:23:04Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2930; GitHub checks are pending." },
       { "at": "2026-07-11T01:28:37Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, seed hash, and allowed-path scope were revalidated." }
     ]
+  },
+  "AUDIT-PRR2-API-01": {
+    "id": "AUDIT-PRR2-API-01",
+    "repo": "fap-api",
+    "title": "AUDIT-PRR2-API-01: enforce attempt-owner identity on writes",
+    "base": "main",
+    "branch": "codex/audit-prr2-api-01-attempt-owner-binding",
+    "depends_on": [],
+    "status": "focused_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The 2026-07-11 PRR2 /goal explicitly authorized AUDIT-PRR2-API-01 and corresponding manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "This first PRR2 API item has no declared dependency and started from origin/main 3c58442811463e777a5f1b5977a16d13b1b6e893."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test tests/Feature/V0_3/AttemptOwnershipAnd404Test.php --no-ansi",
+          "cd backend && php artisan test tests/Feature/V0_3/AttemptSubmitIdempotencyTest.php --no-ansi"
+        ],
+        "evidence": "AttemptOwnershipAnd404Test passed 6 tests with 124 assertions, including owner/admin own-submit positive coverage and same-org foreign-submit uniform 404; AttemptSubmitIdempotencyTest passed 1 test with 11 assertions. Existing file-fixture warnings did not fail assertions."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Pint, scoped route listing, manifest YAML parse, state JSON parse, git diff --check, and exact allowed-path comparison passed."
+      },
+      "core_ci": {
+        "status": "not_repeated_process_guard",
+        "evidence": "A second full validation was not run because another FermatMind API ci_verify_mbti and Web contract suite were already running; the briefly invoked local command was stopped during migration setup without reaching assertions. Current PR correctness remains gated by focused checks and GitHub required checks."
+      },
+      "github_required_checks": {
+        "status": "pending"
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T11:37:13+08:00",
+        "from": "unregistered",
+        "to": "in_progress",
+        "note": "Registered and started the explicitly authorized attempt write-owner binding repair in an isolated clean worktree; no production action is in scope."
+      },
+      {
+        "at": "2026-07-11T11:42:00+08:00",
+        "from": "in_progress",
+        "to": "focused_checks_passed",
+        "note": "Focused ownership/idempotency tests, Pint, route listing, YAML/JSON syntax, diff, and exact allowed-path validation passed; full core CI remains pending behind the local process guard."
+      }
+    ]
   }
 }
