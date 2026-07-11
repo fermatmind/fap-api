@@ -8,6 +8,7 @@ use App\DTO\Personality\PersonalityPublicContentAssetData;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use RuntimeException;
@@ -73,50 +74,31 @@ final class PersonalityPublicAssetsImport extends Command
             }
 
             foreach ($valid as $asset) {
-                $attributes = $asset->toModelAttributes();
                 $summary['indexable_count'] += $asset->indexEligible ? 1 : 0;
                 $summary['sitemap_eligible_count'] += $asset->sitemapEligible ? 1 : 0;
                 $summary['llms_eligible_count'] += $asset->llmsEligible ? 1 : 0;
-
-                if (! $schemaReady) {
-                    $summary['will_create']++;
-
-                    continue;
-                }
-
-                $existing = $this->findExisting($asset);
-
-                if (! $existing instanceof PersonalityPublicContentAsset) {
-                    $summary['will_create']++;
-                    if ($writeMode) {
-                        PersonalityPublicContentAsset::query()->create($attributes);
-                    }
-
-                    continue;
-                }
-
-                if ($this->attributesMatch($existing, $attributes)) {
-                    $summary['will_skip']++;
-
-                    continue;
-                }
-
-                $summary['will_update']++;
-                if ($writeMode) {
-                    $existing->fill($attributes);
-                    $existing->save();
-                }
-            }
-
-            foreach ($summary as $key => $value) {
-                $this->line($key.'='.(is_bool($value) ? ($value ? '1' : '0') : (string) $value));
             }
 
             if ($errors !== []) {
+                $this->printSummary($summary);
                 $this->line('validation_errors='.json_encode($errors, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
                 return 1;
             }
+
+            $plan = $writeMode
+                ? DB::transaction(function () use ($valid): array {
+                    $lockedPlan = $this->buildPersistencePlan($valid, true, true);
+                    $this->applyPersistencePlan($lockedPlan);
+
+                    return $lockedPlan;
+                })
+                : $this->buildPersistencePlan($valid, $schemaReady, false);
+
+            foreach ($plan as $operation) {
+                $summary['will_'.$operation['operation']]++;
+            }
+            $this->printSummary($summary);
 
             $this->info($writeMode ? 'import complete' : 'dry-run complete');
 
@@ -232,16 +214,158 @@ final class PersonalityPublicAssetsImport extends Command
         ]);
     }
 
-    private function findExisting(PersonalityPublicContentAssetData $asset): ?PersonalityPublicContentAsset
+    /**
+     * @param  list<PersonalityPublicContentAssetData>  $assets
+     * @return list<array{attributes:array<string,mixed>,operation:'create'|'update'|'skip',existing:?PersonalityPublicContentAsset}>
+     */
+    private function buildPersistencePlan(array $assets, bool $schemaReady, bool $lockForUpdate): array
     {
-        return PersonalityPublicContentAsset::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', $asset->orgId)
-            ->where('framework', $asset->framework)
-            ->where('entity_type', $asset->entityType)
-            ->where('entity_key', $asset->entityKey)
-            ->where('locale', $asset->locale)
-            ->first();
+        $incomingIdentities = [];
+        $incomingSlugs = [];
+
+        foreach ($assets as $asset) {
+            $identity = $this->assetIdentity($asset);
+            $slugIdentity = $this->assetSlugIdentity($asset);
+
+            if (isset($incomingIdentities[$identity])) {
+                throw new RuntimeException('Duplicate incoming personality asset identity: '.$identity);
+            }
+
+            if (isset($incomingSlugs[$slugIdentity])) {
+                throw new RuntimeException(sprintf(
+                    'Incoming personality assets share persisted slug identity %s: %s conflicts with %s.',
+                    $slugIdentity,
+                    $identity,
+                    $incomingSlugs[$slugIdentity],
+                ));
+            }
+
+            $incomingIdentities[$identity] = true;
+            $incomingSlugs[$slugIdentity] = $identity;
+        }
+
+        $plan = [];
+        foreach ($assets as $asset) {
+            $attributes = $asset->toModelAttributes();
+            if (! $schemaReady) {
+                $plan[] = [
+                    'attributes' => $attributes,
+                    'operation' => 'create',
+                    'existing' => null,
+                ];
+
+                continue;
+            }
+
+            $existingQuery = PersonalityPublicContentAsset::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', $asset->orgId)
+                ->where('framework', $asset->framework)
+                ->where('entity_type', $asset->entityType)
+                ->where('entity_key', $asset->entityKey)
+                ->where('locale', $asset->locale);
+            if ($lockForUpdate) {
+                $existingQuery->lockForUpdate();
+            }
+            $existing = $existingQuery->first();
+
+            $slugOwnerQuery = PersonalityPublicContentAsset::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', $asset->orgId)
+                ->where('framework', $asset->framework)
+                ->where('slug', $asset->slug)
+                ->where('locale', $asset->locale);
+            if ($lockForUpdate) {
+                $slugOwnerQuery->lockForUpdate();
+            }
+            $slugOwner = $slugOwnerQuery->first();
+
+            if ($slugOwner instanceof PersonalityPublicContentAsset
+                && (! $existing instanceof PersonalityPublicContentAsset || $slugOwner->getKey() !== $existing->getKey())) {
+                throw new RuntimeException(sprintf(
+                    'Persistence slug conflict for %s: incoming identity %s conflicts with persisted identity %s.',
+                    $this->assetSlugIdentity($asset),
+                    $this->assetIdentity($asset),
+                    $this->modelIdentity($slugOwner),
+                ));
+            }
+
+            $operation = ! $existing instanceof PersonalityPublicContentAsset
+                ? 'create'
+                : ($this->attributesMatch($existing, $attributes) ? 'skip' : 'update');
+            $plan[] = [
+                'attributes' => $attributes,
+                'operation' => $operation,
+                'existing' => $existing,
+            ];
+        }
+
+        return $plan;
+    }
+
+    /**
+     * @param  list<array{attributes:array<string,mixed>,operation:'create'|'update'|'skip',existing:?PersonalityPublicContentAsset}>  $plan
+     */
+    private function applyPersistencePlan(array $plan): void
+    {
+        foreach ($plan as $operation) {
+            if ($operation['operation'] === 'create') {
+                PersonalityPublicContentAsset::query()->create($operation['attributes']);
+
+                continue;
+            }
+
+            if ($operation['operation'] === 'update') {
+                $existing = $operation['existing'];
+                if (! $existing instanceof PersonalityPublicContentAsset) {
+                    throw new RuntimeException('Atomic personality asset import lost its update target.');
+                }
+                $existing->fill($operation['attributes']);
+                $existing->save();
+            }
+        }
+    }
+
+    private function assetIdentity(PersonalityPublicContentAssetData $asset): string
+    {
+        return implode('|', [
+            $asset->orgId,
+            $asset->framework,
+            $asset->entityType,
+            $asset->entityKey,
+            $asset->locale,
+        ]);
+    }
+
+    private function assetSlugIdentity(PersonalityPublicContentAssetData $asset): string
+    {
+        return implode('|', [
+            $asset->orgId,
+            $asset->framework,
+            $asset->slug,
+            $asset->locale,
+        ]);
+    }
+
+    private function modelIdentity(PersonalityPublicContentAsset $asset): string
+    {
+        return implode('|', [
+            (int) $asset->org_id,
+            (string) $asset->framework,
+            (string) $asset->entity_type,
+            (string) $asset->entity_key,
+            (string) $asset->locale,
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $summary
+     */
+    private function printSummary(array $summary): void
+    {
+        foreach ($summary as $key => $value) {
+            $this->line($key.'='.(is_bool($value) ? ($value ? '1' : '0') : (string) $value));
+        }
     }
 
     /**

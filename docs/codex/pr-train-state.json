@@ -84879,28 +84879,58 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-production-importer-ops-01",
     "depends_on": ["BIG5-ZH-FACET-IMPORT-DRYRUN-01"],
-    "status": "pr_open",
-    "commit_sha": "dcbe5dbca4827039f92b6b7984867069c16ebc71",
+    "status": "merged",
+    "commit_sha": "6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2904",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-10T18:50:52Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": { "status": "pass", "evidence": "The locked user goal explicitly authorized this production importer operations PR and manifest/state registration without authorizing a workflow dispatch or production write." },
       "dependency": { "status": "pass", "evidence": "PR #2902 is MERGED at e5accaa5e1db2b28ac9f1fa52f6b9456570d50b9; origin/main contains the merge and both task branches were cleaned." },
       "workflow_contract": { "status": "pass", "evidence": "Workflow YAML parses; the checked-in seed independently passes the exact package, 31-row, 1 Hub plus 30 Facet, unique identity, zh-CN, content_ready, noindex, body_md, 9-section, 5-FAQ, and 7-link gates. The workflow requires exact release SHA, exact seed SHA-256, exact operator approval phrase, production environment secrets, generic dry-run before write, and a bounded receipt." },
       "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end from a physical worktree-local vendor directory; the Big Five gate passed and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
-      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head ac47073e6f8289478a9dc28243d6e84b1872a0e1; PR #2904 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
+      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on final head 9a2f3ced11e077ddd15fa6792a35054dd86e72f2; PR #2904 was CLEAN, MERGEABLE, non-draft, and had no blocking review decision." },
+      "production_import_attempt": { "status": "failed", "evidence": "Authorized run 29116619791 verified release e5accaa5e1db2b28ac9f1fa52f6b9456570d50b9, seed SHA-256 47605736590fab6f6eac6d374f947925946ef125f39a273f4d136b6d30df5815, the 31-row contract, and a clean dry-run, then failed on a facet versus persisted facet_detail slug collision. Public readback proved one Facet Hub update and zero of thirty Facet detail updates." }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false },
+    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true },
     "transitions": [
       { "at": "2026-07-10T18:24:32Z", "from": "unregistered", "to": "planned", "note": "Registered only the locked SHA-bound 31-page production importer operations PR after the combined dry-run dependency merged." },
       { "at": "2026-07-10T18:24:32Z", "from": "planned", "to": "in_progress", "note": "Started the manually dispatched production-environment workflow contract; no workflow dispatch, CMS write, deploy, or secret change is authorized in this PR." },
       { "at": "2026-07-10T18:34:22Z", "from": "in_progress", "to": "local_checks_passed", "note": "Workflow YAML, independent 31-row seed contract, required-string scan, full core CI, full-32 authority gate, manifest/state syntax, diff, and allowed-path validation passed; the workflow was not dispatched." },
       { "at": "2026-07-10T18:36:21Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped guarded workflow and train metadata at dcbe5dbca4827039f92b6b7984867069c16ebc71." },
       { "at": "2026-07-10T18:38:15Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2904 from head a67a207b3314ee27a402dd6c5703e1892262d7a3." },
-      { "at": "2026-07-10T18:44:22Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." }
+      { "at": "2026-07-10T18:44:22Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." },
+      { "at": "2026-07-11T00:40:41Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in the authorized atomicity repair PR: PR #2904 is merged at 6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768; origin/main contains the merge and local/remote task branches were cleaned. The later authorized production import attempt failed on a persistence identity/slug collision after one partial Hub update." }
+    ]
+  },
+  "PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01": {
+    "id": "PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01",
+    "repo": "fap-api",
+    "title": "PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01: make public asset imports collision-safe and atomic",
+    "base": "main",
+    "branch": "codex/personality-public-asset-import-atomicity-01",
+    "depends_on": ["BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": { "status": "pass", "evidence": "The user explicitly authorized this exact repair PR id, scope, and manifest/state registration after production run 29116619791 exposed a partial-write collision." },
+      "dependency": { "status": "pass", "evidence": "PR #2904 is MERGED at 6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768; origin/main contains the merge and its task branch was cleaned." },
+      "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 19 tests and 443 assertions, including persisted facet_detail slug collision preflight, forced second-write transaction rollback, and validation-error prevention of valid-subset persistence." },
+      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end after the final regression test; the Big Five gate passed and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
+      "github_checks": { "status": "pending", "evidence": null }
+    },
+    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false },
+    "transitions": [
+      { "at": "2026-07-11T00:40:41Z", "from": "unregistered", "to": "planned", "note": "Registered the authorized generic importer atomicity repair after the production-shaped facet/facet_detail slug collision was fully diagnosed." },
+      { "at": "2026-07-11T00:40:41Z", "from": "planned", "to": "in_progress", "note": "Started whole-package persistence preflight, transaction rollback, and focused regression coverage; no CMS or production write is in scope." },
+      { "at": "2026-07-11T00:57:11Z", "from": "in_progress", "to": "local_checks_passed", "note": "Focused importer contracts, full core CI, full-32 authority gate, syntax, formatting, manifest/state syntax, diff, and allowed-path validation passed; no CMS or production write was performed." }
     ]
   }
 }
