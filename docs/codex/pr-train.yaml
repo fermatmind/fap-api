@@ -39785,3 +39785,39 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: AUDIT-PRR2-API-10
+    repo: fap-api
+    depends_on: [AUDIT-PRR2-API-01]
+    branch: codex/audit-prr2-api-10-security-guardrails-ci
+    title: "AUDIT-PRR2-API-10: require mutating-route security guardrails"
+    train_scope: prr2_mutating_route_security_guardrails
+    status: user_authorized
+    scope:
+      - Make the mutating-route security guard pass without broad path exemptions.
+      - Represent the two intentional controller-level guards as exact route/action/source contracts.
+      - Prove an unprotected POST fixture is rejected and execute the guard in required CI.
+    allowed_paths:
+      - .github/workflows/ci.yml
+      - backend/tests/Unit/Security/SecurityGuardrailsTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add broad route-prefix allowlists, change runtime routes/controllers/authorization, pin GitHub Actions, deploy, or mutate production/CMS data.
+    validation:
+      - cd backend && php artisan test tests/Unit/Security/SecurityGuardrailsTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Unit/Security/SecurityGuardrailsTest.php
+      - actionlint -ignore 'SC2016:' .github/workflows/ci.yml
+      - cd backend && php artisan route:list --path=api --except-vendor --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/ci.yml'); YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
