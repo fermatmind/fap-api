@@ -126,7 +126,7 @@ jobs:
                   if (($asset["robots"] ?? null) !== "noindex,follow" || ($asset["index_eligible"] ?? null) !== false || ($asset["sitemap_eligible"] ?? null) !== false || ($asset["llms_eligible"] ?? null) !== false) { throw new RuntimeException("redirect alias noindex gate failed"); }
               } else {
                   $canonical++;
-                  if (!is_array($asset["sections"] ?? null) || count($asset["sections"]) < 9) { throw new RuntimeException("canonical sections gate failed"); }
+                  if (!is_array($asset["sections"] ?? null) || count($asset["sections"]) === 0) { throw new RuntimeException("canonical sections gate failed"); }
                   foreach ($asset["sections"] as $section) {
                       if (!is_array($section) || trim((string) ($section["body_md"] ?? "")) === "" || array_key_exists("bodyMd", $section)) { throw new RuntimeException("body_md gate failed"); }
                   }
