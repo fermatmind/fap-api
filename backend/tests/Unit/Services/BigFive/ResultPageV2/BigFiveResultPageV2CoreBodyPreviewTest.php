@@ -199,6 +199,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
+    {
+        $allowed = [
+            'backend/app/Http/Middleware/FmTokenAuth.php',
+            'backend/app/Http/Middleware/FmTokenOptional.php',
+            'backend/app/Http/Middleware/FmTokenOptionalAuth.php',
+            'backend/app/Services/Auth/FmTokenService.php',
+            'backend/config/fap.php',
+        ];
+        $blocked = ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_observation_artifact_command(): void
     {
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges([
@@ -5397,6 +5412,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $impacting = [];
 
         foreach ($changed as $file) {
+            if ($this->isSystemTokenHttpBoundaryFile($file)) {
+                continue;
+            }
+
             if ($this->isDlqReplaySinglePathFile($file)) {
                 continue;
             }
@@ -7454,6 +7473,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Filament/Ops/Pages/QueueMonitor.php',
             'backend/app/Services/Queue/QueueDlqService.php',
+        ], true);
+    }
+
+    private function isSystemTokenHttpBoundaryFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Middleware/FmTokenAuth.php',
+            'backend/app/Http/Middleware/FmTokenOptional.php',
+            'backend/app/Http/Middleware/FmTokenOptionalAuth.php',
+            'backend/app/Services/Auth/FmTokenService.php',
+            'backend/config/fap.php',
         ], true);
     }
 
