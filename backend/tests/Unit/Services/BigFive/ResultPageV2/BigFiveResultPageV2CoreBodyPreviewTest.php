@@ -474,6 +474,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Console/Commands/PersonalityMbtiContent15ProductionImport.php',
             'backend/app/Services/Cms/MbtiContent15ProductionCmsImportService.php',
+            'backend/app/Console/Commands/PersonalityMbtiContent15IndexabilityPromote.php',
+            'backend/app/Services/Cms/MbtiContent15IndexabilityPromotionService.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -7153,6 +7155,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbtiContent15ProductionImport.php',
             'backend/app/Services/Cms/MbtiContent15ProductionCmsImportService.php',
+            'backend/app/Console/Commands/PersonalityMbtiContent15IndexabilityPromote.php',
+            'backend/app/Services/Cms/MbtiContent15IndexabilityPromotionService.php',
         ], true);
     }
 
