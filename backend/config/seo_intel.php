@@ -357,12 +357,14 @@ return [
             ],
             'baidu' => [
                 'endpoint' => env('SEO_INTEL_BAIDU_PUSH_ENDPOINT', 'https://data.zz.baidu.com/urls'),
+                'allowed_endpoint_hosts' => ['data.zz.baidu.com'],
                 'site' => env('SEO_INTEL_BAIDU_SITE'),
                 'token' => env('SEO_INTEL_BAIDU_PUSH_TOKEN'),
                 'timeout_seconds' => env('SEO_INTEL_BAIDU_PUSH_TIMEOUT_SECONDS', 10),
             ],
             'indexnow' => [
                 'endpoint' => env('SEO_INTEL_INDEXNOW_ENDPOINT', 'https://api.indexnow.org/indexnow'),
+                'allowed_endpoint_hosts' => ['api.indexnow.org'],
                 'key' => env('SEO_INTEL_INDEXNOW_KEY'),
                 'key_location' => env('SEO_INTEL_INDEXNOW_KEY_LOCATION'),
                 'timeout_seconds' => env('SEO_INTEL_INDEXNOW_TIMEOUT_SECONDS', 10),
