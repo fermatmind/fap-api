@@ -85475,7 +85475,7 @@
     "base": "main",
     "branch": "codex/audit-prr2-api-03-controlled-cms-release",
     "depends_on": ["AUDIT-PRR2-API-01"],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "0fcc8b615f3bd53d30b43d931312e54a792d35ca",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2946",
     "failure_reason": null,
@@ -85505,12 +85505,16 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Scoped Pint, Blade compile/clear, manifest YAML, state JSON, git diff --check and exact allowed-path validation passed. Generic Article/CareerGuide/CareerJob release methods and the release workspace mutation are absent."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "On head e40f9ff92cb942f5135205630344a7f632832d13, hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive and all Code Scanning checks passed."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -85537,6 +85541,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Pushed the scoped branch and opened PR #2946; GitHub required checks are pending and no CMS or production action was performed."
+      },
+      {
+        "at": "2026-07-11T13:05:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed on head e40f9ff92cb942f5135205630344a7f632832d13; PR #2946 is CLEAN, MERGEABLE, non-draft, review-unblocked, and its twelve changed paths match the manifest."
       }
     ]
   }
