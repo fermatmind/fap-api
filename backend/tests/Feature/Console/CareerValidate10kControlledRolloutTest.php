@@ -124,6 +124,23 @@ final class CareerValidate10kControlledRolloutTest extends TestCase
         }
     }
 
+    public function test_rejects_blank_rollback_and_non_exact_completed_prefix(): void
+    {
+        $data = $this->payload(1000, [100, 500, 2500]);
+        $data['rollback']['previous_version'] = " \t ";
+
+        Artisan::call('career:validate-10k-controlled-rollout', [
+            '--batch' => 1000,
+            '--evidence' => $this->write($data),
+            '--json' => true,
+        ]);
+        $report = json_decode((string) Artisan::output(), true);
+
+        $this->assertContains('previous_batches_not_completed', $report['errors']);
+        $this->assertContains('rollback_ready_failed', $report['errors']);
+        $this->assertNull($report['rollback']['restore_version']);
+    }
+
     private function evidence(int $count, array $completed): string
     {
         return $this->write($this->payload($count, $completed));

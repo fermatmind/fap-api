@@ -26,7 +26,7 @@ final class Career10kControlledRolloutGate
         if (! is_array($completedEvidence) || count($completed) !== count($completedEvidence)) {
             $errors[] = 'completed_batches_invalid';
         }
-        if (array_diff($requiredPrevious, $completed) !== []) {
+        if ($completed !== $requiredPrevious) {
             $errors[] = 'previous_batches_not_completed';
         }
 
@@ -50,7 +50,7 @@ final class Career10kControlledRolloutGate
                 && $this->integer(data_get($evidence, 'errors.http_504_count')) === 0,
             'rollback_ready' => data_get($evidence, 'rollback.ready') === true
                 && is_string(data_get($evidence, 'rollback.previous_version'))
-                && data_get($evidence, 'rollback.previous_version') !== '',
+                && trim((string) data_get($evidence, 'rollback.previous_version')) !== '',
             'publication_indexability_gate' => data_get($evidence, 'publication_gate.passed') === true
                 && $this->integer(data_get($evidence, 'publication_gate.approved_count')) === $target,
         ];
@@ -77,7 +77,10 @@ final class Career10kControlledRolloutGate
             'search_channel_action_performed' => false,
             'rollback' => [
                 'scope' => 'target_batch_runtime_projection_only',
-                'restore_version' => data_get($evidence, 'rollback.previous_version'),
+                'restore_version' => is_string(data_get($evidence, 'rollback.previous_version'))
+                    && trim((string) data_get($evidence, 'rollback.previous_version')) !== ''
+                        ? trim((string) data_get($evidence, 'rollback.previous_version'))
+                        : null,
                 'automatic_on_gate_failure' => true,
             ],
         ];
