@@ -79,6 +79,33 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
             ->assertJsonPath('comparison_public_projection_v1.sitemap_eligible', false)
             ->assertJsonPath('comparison_public_projection_v1.llms_eligible', false);
 
+        $response->assertJsonPath('seo_meta.robots', 'noindex,follow')
+            ->assertJsonPath('seo_meta.canonical_url', 'https://fermatmind.com/zh/personality/istj-vs-isfj')
+            ->assertJsonPath('jsonld.@type', 'CollectionPage')
+            ->assertJsonPath('jsonld.url', 'https://fermatmind.com/zh/personality/istj-vs-isfj')
+            ->assertJsonPath('jsonld.mainEntity.@type', 'ItemList')
+            ->assertJsonPath('jsonld.mainEntity.itemListElement.0.name', 'ISTJ')
+            ->assertJsonPath('jsonld.mainEntity.itemListElement.1.name', 'ISFJ')
+            ->assertJsonPath('jsonld.hasPart.@type', 'FAQPage')
+            ->assertJsonPath('jsonld.hasPart.mainEntity.0.name', 'ISTJ 和 ISFJ 最大区别是什么？')
+            ->assertJsonPath('jsonld.hasPart.mainEntity.0.acceptedAnswer.text', 'ISTJ 更偏规则执行，ISFJ 更偏照护判断。')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'mbti_personality_cross_type_comparison')
+            ->assertJsonPath('seo_surface_v1.indexability_state', 'noindex')
+            ->assertJsonPath('seo_surface_v1.sitemap_state', 'excluded')
+            ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'withhold');
+
+        self::assertContains('CollectionPage', (array) $response->json('seo_surface_v1.structured_data_keys'));
+        self::assertContains('ItemList', (array) $response->json('seo_surface_v1.structured_data_keys'));
+        self::assertContains('BreadcrumbList', (array) $response->json('seo_surface_v1.structured_data_keys'));
+        self::assertContains('FAQPage', (array) $response->json('seo_surface_v1.structured_data_keys'));
+        self::assertSame(
+            $response->json('comparison_public_projection_v1.faq'),
+            collect((array) $response->json('jsonld.hasPart.mainEntity'))->map(static fn (array $item): array => [
+                'question' => $item['name'],
+                'answer' => $item['acceptedAnswer']['text'],
+            ])->all()
+        );
+
         self::assertGreaterThanOrEqual(5, count((array) $response->json('comparison_public_projection_v1.sections')));
         self::assertGreaterThanOrEqual(4, count((array) $response->json('comparison_public_projection_v1.faq')));
         self::assertGreaterThanOrEqual(3, count((array) $response->json('comparison_public_projection_v1.internal_links')));

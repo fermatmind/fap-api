@@ -317,10 +317,17 @@ class PersonalityController extends Controller
 
         $crossTypeComparison = $this->crossTypeComparisonReadModel->find($comparison, $validated['locale']);
         if ($crossTypeComparison !== null) {
+            $meta = $this->crossTypeComparisonMeta($crossTypeComparison);
+            $jsonLd = $this->crossTypeComparisonJsonLd($crossTypeComparison, $meta);
+            $seoSurface = $this->buildSeoSurface($meta, $jsonLd, 'mbti_personality_cross_type_comparison');
+
             return response()->json([
                 'ok' => true,
                 'comparison' => $crossTypeComparison,
                 'comparison_public_projection_v1' => $crossTypeComparison,
+                'seo_meta' => $this->comparisonSeoMetaPayload($meta),
+                'jsonld' => $jsonLd,
+                'seo_surface_v1' => $seoSurface,
             ]);
         }
 
@@ -374,7 +381,6 @@ class PersonalityController extends Controller
         $turbulentSections = $this->publicSectionPayloads($turbulentProfile, $turbulentVariant);
         $comparisonOverlay = $this->mbti64PromotedComparisonOverlay($assertiveProfile);
         $meta = $this->comparisonMeta($baseTypeCode, $validated['locale'], $comparisonOverlay);
-        $jsonLd = $this->comparisonJsonLd($baseTypeCode, $validated['locale'], $meta);
         $comparisonProjection = $this->comparisonProjectionPayload(
             $baseTypeCode,
             $validated['locale'],
@@ -393,6 +399,12 @@ class PersonalityController extends Controller
             $comparisonOverlay,
             $baseTypeCode,
             $validated['locale']
+        );
+        $jsonLd = $this->comparisonJsonLd(
+            $baseTypeCode,
+            $validated['locale'],
+            $meta,
+            is_array($comparisonProjection['faq'] ?? null) ? $comparisonProjection['faq'] : []
         );
         $seoSurface = $this->buildSeoSurface($meta, $jsonLd, 'mbti_personality_at_comparison');
         $landingSurface = $this->buildComparisonLandingSurface($baseTypeCode, $validated['locale'], $meta, $comparisonOverlay);
@@ -536,7 +548,7 @@ class PersonalityController extends Controller
      * @param  array<string,mixed>  $meta
      * @return array<string,mixed>
      */
-    private function comparisonJsonLd(string $baseTypeCode, string $locale, array $meta): array
+    private function comparisonJsonLd(string $baseTypeCode, string $locale, array $meta, array $faq = []): array
     {
         $segment = $this->frontendLocaleSegment($locale);
         $baseUrl = CanonicalFrontendUrl::fromConfig();
@@ -547,7 +559,7 @@ class PersonalityController extends Controller
             'T' => $baseUrl !== '' ? $baseUrl.'/'.$segment.'/personality/'.strtolower($baseTypeCode).'-t' : null,
         ];
 
-        return CanonicalFrontendUrl::normalizeNestedUrls([
+        $jsonLd = [
             '@context' => 'https://schema.org',
             '@type' => 'CollectionPage',
             'name' => $meta['title'] ?? null,
@@ -587,7 +599,146 @@ class PersonalityController extends Controller
                     ],
                 ],
             ],
-        ]);
+        ];
+
+        $faqPage = $this->comparisonFaqJsonLd($faq);
+        if ($faqPage !== null) {
+            $jsonLd['hasPart'] = $faqPage;
+        }
+
+        return CanonicalFrontendUrl::normalizeNestedUrls($jsonLd);
+    }
+
+    /**
+     * @param  array<string,mixed>  $comparison
+     * @return array<string,mixed>
+     */
+    private function crossTypeComparisonMeta(array $comparison): array
+    {
+        $title = (string) ($comparison['seo_title'] ?? $comparison['title'] ?? '');
+        $description = (string) ($comparison['seo_description'] ?? $comparison['description'] ?? $comparison['summary'] ?? '');
+        $canonical = (string) ($comparison['canonical_url'] ?? '');
+        $isIndexable = ($comparison['is_indexable'] ?? false) === true;
+
+        return [
+            'title' => $title,
+            'description' => $description,
+            'canonical' => $canonical,
+            'alternates' => is_array($comparison['alternates'] ?? null) ? $comparison['alternates'] : [],
+            'og' => [
+                'title' => $title,
+                'description' => $description,
+                'image' => null,
+                'type' => 'article',
+                'url' => $canonical,
+            ],
+            'twitter' => [
+                'card' => 'summary_large_image',
+                'title' => $title,
+                'description' => $description,
+                'image' => null,
+            ],
+            'robots' => $isIndexable ? 'index,follow' : 'noindex,follow',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $comparison
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>
+     */
+    private function crossTypeComparisonJsonLd(array $comparison, array $meta): array
+    {
+        $locale = (string) ($comparison['locale'] ?? 'zh-CN');
+        $segment = $this->frontendLocaleSegment($locale);
+        $baseUrl = CanonicalFrontendUrl::fromConfig();
+        $canonicalUrl = (string) ($meta['canonical'] ?? '');
+        $leftType = strtoupper((string) ($comparison['left_type'] ?? ''));
+        $rightType = strtoupper((string) ($comparison['right_type'] ?? ''));
+        $jsonLd = [
+            '@context' => 'https://schema.org',
+            '@type' => 'CollectionPage',
+            'name' => $meta['title'] ?? null,
+            'description' => $meta['description'] ?? null,
+            'url' => $canonicalUrl,
+            'mainEntity' => [
+                '@type' => 'ItemList',
+                'itemListElement' => [
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 1,
+                        'name' => $leftType,
+                        'url' => $baseUrl !== '' ? $baseUrl.'/'.$segment.'/personality/'.strtolower($leftType).'-a' : null,
+                    ],
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 2,
+                        'name' => $rightType,
+                        'url' => $baseUrl !== '' ? $baseUrl.'/'.$segment.'/personality/'.strtolower($rightType).'-a' : null,
+                    ],
+                ],
+            ],
+            'breadcrumb' => [
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => [
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 1,
+                        'name' => $locale === 'zh-CN' ? '人格类型' : 'Personality types',
+                        'item' => $baseUrl !== '' ? $baseUrl.'/'.$segment.'/personality' : null,
+                    ],
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 2,
+                        'name' => $leftType.' vs '.$rightType,
+                        'item' => $canonicalUrl,
+                    ],
+                ],
+            ],
+        ];
+
+        $faqPage = $this->comparisonFaqJsonLd(
+            is_array($comparison['faq'] ?? null) ? $comparison['faq'] : []
+        );
+        if ($faqPage !== null) {
+            $jsonLd['hasPart'] = $faqPage;
+        }
+
+        return CanonicalFrontendUrl::normalizeNestedUrls($jsonLd);
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $faq
+     * @return array<string,mixed>|null
+     */
+    private function comparisonFaqJsonLd(array $faq): ?array
+    {
+        $questions = [];
+        foreach ($faq as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $question = $this->normalizedString($item['question'] ?? null);
+            $answer = $this->normalizedString($item['answer'] ?? null);
+            if ($question === null || $answer === null) {
+                continue;
+            }
+
+            $questions[] = [
+                '@type' => 'Question',
+                'name' => $question,
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => $answer,
+                ],
+            ];
+        }
+
+        return $questions === [] ? null : [
+            '@type' => 'FAQPage',
+            'mainEntity' => $questions,
+        ];
     }
 
     /**
