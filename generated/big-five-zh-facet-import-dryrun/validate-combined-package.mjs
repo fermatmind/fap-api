@@ -11,7 +11,7 @@ assert(Array.isArray(seed.assets) && seed.assets.length === 31, "expected 31 ass
 const identities = seed.assets.map((asset) => `${asset.framework}:${asset.entity_type}:${asset.entity_key}:${asset.locale}`);
 assert(new Set(identities).size === 31, "duplicate asset identity");
 assert(seed.assets.filter((asset) => asset.entity_type === "facet_hub").length === 1, "expected one Facet Hub");
-assert(seed.assets.filter((asset) => asset.entity_type === "facet").length === 30, "expected thirty Facets");
+assert(seed.assets.filter((asset) => asset.entity_type === "facet_detail").length === 30, "expected thirty Facet details");
 for (const asset of seed.assets) {
   assert(asset.framework === "big_five" && asset.locale === "zh-CN", `${asset.entity_key}: identity drift`);
   assert(asset.launch_state === "content_ready" && asset.robots === "noindex,follow", `${asset.entity_key}: noindex drift`);
@@ -29,7 +29,7 @@ const qa = {
   outcome: "pass",
   rows: 31,
   hub_rows: 1,
-  facet_rows: 30,
+  facet_detail_rows: 30,
   v1_assets_envelope: "pass",
   body_md_only: "pass",
   unique_identity: "pass",

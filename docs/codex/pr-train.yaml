@@ -38986,3 +38986,51 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: BIG5-ZH-FACET-IMPORT-IDENTITY-REPAIR-01
+    repo: fap-api
+    depends_on: [PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01]
+    branch: codex/big5-zh-facet-import-identity-repair-01
+    title: "BIG5-ZH-FACET-IMPORT-IDENTITY-REPAIR-01: align 30 Chinese Facet assets with persisted identities"
+    train_scope: big5_zh_facet_import_identity_repair
+    status: planned
+    scope:
+      - Align all thirty Chinese Facet content assets with the persisted facet_detail identity while preserving their reviewed content and noindex gates.
+      - Regenerate and validate the five six-page packages and the combined one-Hub plus thirty-facet-detail V1 seed.
+      - Update the dedicated production importer workflow to enforce the corrected 31-row identity composition and exact regenerated seed hash.
+      - Prove the corrected seed updates the canonical baseline identities in a generic importer dry-run without creates or collisions.
+    allowed_paths:
+      - generated/big-five-zh-facet-openness-content-package/**
+      - generated/big-five-zh-facet-conscientiousness-content-package/**
+      - generated/big-five-zh-facet-extraversion-content-package/**
+      - generated/big-five-zh-facet-agreeableness-content-package/**
+      - generated/big-five-zh-facet-neuroticism-content-package/**
+      - generated/big-five-zh-facet-import-dryrun/**
+      - .github/workflows/big-five-zh-facet-production-cms-import.yml
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change editorial claims, indexability, canonical paths, robots, sitemap, llms, JSON-LD, backend runtime/API code, database schema, permissions, secrets, or frontend code.
+      - Dispatch workflows, write CMS or production data, deploy, publish, or reuse the previous SHA-bound production authorization.
+    validation:
+      - node each of the five domain build-package.mjs and validate-package.mjs scripts
+      - node generated/big-five-zh-facet-import-dryrun/build-combined-package.mjs
+      - node generated/big-five-zh-facet-import-dryrun/validate-combined-package.mjs
+      - find the six generated package directories -name '*.json' -print0 | xargs -0 -n1 python3 -m json.tool >/dev/null
+      - cd backend && php artisan personality-public-assets:import --source=../generated/big-five-zh-facet-import-dryrun/big_five_zh_facet_31_seed.json --framework=big_five --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/big-five-zh-facet-production-cms-import.yml'); YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend

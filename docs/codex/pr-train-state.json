@@ -83666,7 +83666,7 @@
     "depends_on": [
       "MBTI-MAIN-FREE-FAQ-CONTENT-01-CLOSEOUT"
     ],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "e02e0f8efc646ef3b58d99f1bbec91509d1650cd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2744",
     "failure_reason": null,
@@ -85007,13 +85007,13 @@
     "base": "main",
     "branch": "codex/personality-public-asset-import-atomicity-01",
     "depends_on": ["BIG5-ZH-FACET-PRODUCTION-IMPORTER-OPS-01"],
-    "status": "pr_open",
-    "commit_sha": "e14ef197b6e8aa7b75fc5eb70b47843fadf42201",
+    "status": "merged",
+    "commit_sha": "36dccba4dc0b99ebdb5a51870a914a16a7fdb0f9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2929",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T01:10:37Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": { "status": "pass", "evidence": "The user explicitly authorized this exact repair PR id, scope, and manifest/state registration after production run 29116619791 exposed a partial-write collision." },
       "dependency": { "status": "pass", "evidence": "PR #2904 is MERGED at 6e78aa9b6bb46c5b384dbe9f1398d6549e2a5768; origin/main contains the merge and its task branch was cleaned." },
@@ -85021,14 +85021,48 @@
       "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end after the final regression test; the Big Five gate passed and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
       "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head c533374662457b9efe05e098770519ccd7996d48; PR #2929 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
     },
-    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false },
+    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true },
     "transitions": [
       { "at": "2026-07-11T00:40:41Z", "from": "unregistered", "to": "planned", "note": "Registered the authorized generic importer atomicity repair after the production-shaped facet/facet_detail slug collision was fully diagnosed." },
       { "at": "2026-07-11T00:40:41Z", "from": "planned", "to": "in_progress", "note": "Started whole-package persistence preflight, transaction rollback, and focused regression coverage; no CMS or production write is in scope." },
       { "at": "2026-07-11T00:57:11Z", "from": "in_progress", "to": "local_checks_passed", "note": "Focused importer contracts, full core CI, full-32 authority gate, syntax, formatting, manifest/state syntax, diff, and allowed-path validation passed; no CMS or production write was performed." },
       { "at": "2026-07-11T00:58:30Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the scoped importer atomicity repair, regression coverage, and authorized train metadata at e14ef197b6e8aa7b75fc5eb70b47843fadf42201." },
       { "at": "2026-07-11T01:00:02Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2929; GitHub checks are pending." },
-      { "at": "2026-07-11T01:05:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." }
+      { "at": "2026-07-11T01:05:00Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, and allowed-path scope were revalidated." },
+      { "at": "2026-07-11T01:10:37Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled in the dependent identity repair PR: PR #2929 is merged at 36dccba4dc0b99ebdb5a51870a914a16a7fdb0f9; origin/main contains the merge, detached local main is synced and clean, and local/remote task branches are deleted." }
+    ]
+  },
+  "BIG5-ZH-FACET-IMPORT-IDENTITY-REPAIR-01": {
+    "id": "BIG5-ZH-FACET-IMPORT-IDENTITY-REPAIR-01",
+    "repo": "fap-api",
+    "title": "BIG5-ZH-FACET-IMPORT-IDENTITY-REPAIR-01: align 30 Chinese Facet assets with persisted identities",
+    "base": "main",
+    "branch": "codex/big5-zh-facet-import-identity-repair-01",
+    "depends_on": ["PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01"],
+    "status": "pr_open",
+    "commit_sha": "fc50dc8ebfef5c200f955ddbc593b1a439c68225",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2930",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": { "status": "pass", "evidence": "The user explicitly authorized this exact identity repair PR and fap-api manifest/state registration after the production-shaped facet versus facet_detail collision." },
+      "dependency": { "status": "pass", "evidence": "PR #2929 is MERGED at 36dccba4dc0b99ebdb5a51870a914a16a7fdb0f9; origin/main contains the merge and its local/remote task branches were cleaned." },
+      "package_identity": { "status": "pass", "evidence": "All five domain packages and the combined V1 seed regenerate and validate with exactly one facet_hub plus thirty facet_detail identities, 31 unique rows, body_md, content_ready, noindex,follow, and zero index/sitemap/llms eligibility. New seed SHA-256 is 88be4e72d18bf61b2be382423d754e46ca094ee6ed227430ed833b471ab0688d." },
+      "generic_importer_dry_run": { "status": "pass", "evidence": "Against an ephemeral SQLite database initialized from the canonical Big Five baseline, the corrected seed returned assets_found=31, valid_count=31, errors_count=0, will_create=0, will_update=31, will_skip=0, and zero discoverability eligibility; no production or persistent CMS write occurred." },
+      "focused_contract": { "status": "pass", "evidence": "PersonalityPublicContentAssetContractTest passed 19 tests and 443 assertions." },
+      "core_ci": { "status": "pass", "evidence": "backend/scripts/ci_verify_mbti.sh passed end to end; the Big Five gate passed 1186 tests and 150161 assertions, and the personality full-32 authority gate passed 59 tests and 4847 assertions." },
+      "github_checks": { "status": "pass", "evidence": "All 15 GitHub checks passed on head 44d3a6b5ff1e6a0c5863dcb0049a7bfc12607c7a; PR #2930 is CLEAN, MERGEABLE, non-draft, and has no blocking review decision." }
+    },
+    "scope_validation": { "allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false },
+    "transitions": [
+      { "at": "2026-07-11T01:12:20Z", "from": "unregistered", "to": "planned", "note": "Registered the authorized identity repair after the atomic importer dependency merged and cleaned." },
+      { "at": "2026-07-11T01:12:20Z", "from": "planned", "to": "in_progress", "note": "Started deterministic facet_detail identity alignment, combined seed regeneration, and workflow gate repair; no CMS write, workflow dispatch, or deploy is in scope." },
+      { "at": "2026-07-11T01:20:48Z", "from": "in_progress", "to": "local_checks_passed", "note": "Five package builds/validators, corrected 31-row composition, baseline-shaped importer dry-run, focused contract, full core CI, full-32 authority gate, JSON/YAML syntax, hash, diff, and allowed-path validation passed without production writes." },
+      { "at": "2026-07-11T01:21:59Z", "from": "local_checks_passed", "to": "committed", "note": "Rebased cleanly onto latest origin/main, reran package validators and the 19-test focused contract, and committed the scoped identity repair at fc50dc8ebfef5c200f955ddbc593b1a439c68225." },
+      { "at": "2026-07-11T01:23:04Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2930; GitHub checks are pending." },
+      { "at": "2026-07-11T01:28:37Z", "from": "pr_open", "to": "ready_to_merge", "note": "All 15 GitHub checks passed; merge policy, PR body, review state, changed files, seed hash, and allowed-path scope were revalidated." }
     ]
   }
 }

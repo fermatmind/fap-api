@@ -5,12 +5,12 @@
   "assets": [
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "anxiety",
       "entity_key": "anxiety",
       "slug": "big-five/facets/anxiety",
       "locale": "zh-CN",
-      "title": "焦虑倾向",
+      "title": "焦虑（神经质 / 情绪敏感性）",
       "summary": "焦虑倾向描述在不确定或潜在威胁出现时较快产生担忧、紧张和风险预期的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
       "seo": {
         "title": "大五人格焦虑倾向：含义、表现、误解与行动建议",
@@ -22,133 +22,9 @@
         "path": "/zh/personality/big-five/facets/anxiety"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/anxiety",
-        "zh-CN": "/zh/personality/big-five/facets/anxiety"
+        "zh-CN": "/zh/personality/big-five/facets/anxiety",
+        "en": "/en/personality/big-five/facets/anxiety"
       },
-      "faq": [
-        {
-          "id": "higher-better",
-          "question": "焦虑倾向越高越好吗？",
-          "answer": "不是。焦虑倾向两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
-          "evidence_ids": [
-            "I2",
-            "A4"
-          ]
-        },
-        {
-          "id": "can-change",
-          "question": "焦虑倾向会随情境变化吗？",
-          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
-          "evidence_ids": [
-            "A4"
-          ]
-        },
-        {
-          "id": "same-as-domain",
-          "question": "焦虑倾向能代表整个情绪敏感性吗？",
-          "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
-          "evidence_ids": [
-            "I1",
-            "A1"
-          ]
-        },
-        {
-          "id": "personal-score",
-          "question": "这个页面能解释我的焦虑倾向分数吗？",
-          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
-          "evidence_ids": [
-            "I1",
-            "I2"
-          ]
-        },
-        {
-          "id": "high-stakes",
-          "question": "焦虑倾向可以用于招聘、诊断或职业决定吗？",
-          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
-          "evidence_ids": [
-            "I2"
-          ]
-        }
-      ],
-      "media": {
-        "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "焦虑倾向"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
-      },
-      "method_boundary": {
-        "summary": "本页解释情绪敏感性下的“焦虑倾向”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
-        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
-        "not_for": [
-          "临床诊断",
-          "治疗建议",
-          "招聘或录取筛选",
-          "能力或智力判断",
-          "收入、关系或职业结果预测"
-        ]
-      },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "焦虑倾向是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
-      "internal_links": [
-        {
-          "label": "情绪敏感性",
-          "href": "/zh/personality/big-five/neuroticism",
-          "relationship": "parent_domain"
-        },
-        {
-          "label": "30 个细分面向",
-          "href": "/zh/personality/big-five/facets",
-          "relationship": "facet_hub"
-        },
-        {
-          "label": "愤怒倾向",
-          "href": "/zh/personality/big-five/facets/anger",
-          "relationship": "sibling_facet"
-        },
-        {
-          "label": "低落倾向",
-          "href": "/zh/personality/big-five/facets/depression",
-          "relationship": "sibling_facet"
-        },
-        {
-          "label": "自我意识",
-          "href": "/zh/personality/big-five/facets/self-consciousness",
-          "relationship": "sibling_facet"
-        },
-        {
-          "label": "冲动性",
-          "href": "/zh/personality/big-five/facets/impulsiveness",
-          "relationship": "sibling_facet"
-        },
-        {
-          "label": "脆弱性",
-          "href": "/zh/personality/big-five/facets/vulnerability",
-          "relationship": "sibling_facet"
-        }
-      ],
-      "is_public": true,
-      "index_eligible": false,
-      "sitemap_eligible": false,
-      "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "sections": [
         {
           "key": "quick_answer",
@@ -196,51 +72,11 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“焦虑倾向”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
-      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
-      "source_hash": null,
-      "source_ledger_refs": [
-        "SHARED",
-        "I1",
-        "I2",
-        "I3",
-        "A1",
-        "A2",
-        "A3",
-        "A4"
-      ],
-      "model_output_refs": [
-        "codex-native-raw-anxiety-2026-07-10",
-        "codex-skeptical-review-neuroticism-2026-07-10",
-        "codex-repair-anxiety-2026-07-10"
-      ]
-    },
-    {
-      "framework": "big_five",
-      "entity_type": "facet",
-      "code": "anger",
-      "entity_key": "anger",
-      "slug": "big-five/facets/anger",
-      "locale": "zh-CN",
-      "title": "愤怒倾向",
-      "summary": "愤怒倾向描述在受阻、不公平或边界被侵犯时较快体验恼怒、敌意或愤怒唤起的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
-      "seo": {
-        "title": "大五人格愤怒倾向：含义、表现、误解与行动建议",
-        "description": "理解情绪敏感性细分面向“愤怒倾向”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
-      },
-      "robots": "noindex,follow",
-      "canonical_path": "/zh/personality/big-five/facets/anger",
-      "canonical": {
-        "path": "/zh/personality/big-five/facets/anger"
-      },
-      "hreflang": {
-        "en": "/en/personality/big-five/facets/anger",
-        "zh-CN": "/zh/personality/big-five/facets/anger"
-      },
       "faq": [
         {
           "id": "higher-better",
-          "question": "愤怒倾向越高越好吗？",
-          "answer": "不是。愤怒倾向两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "question": "焦虑倾向越高越好吗？",
+          "answer": "不是。焦虑倾向两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
           "evidence_ids": [
             "I2",
             "A4"
@@ -248,7 +84,7 @@
         },
         {
           "id": "can-change",
-          "question": "愤怒倾向会随情境变化吗？",
+          "question": "焦虑倾向会随情境变化吗？",
           "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
           "evidence_ids": [
             "A4"
@@ -256,7 +92,7 @@
         },
         {
           "id": "same-as-domain",
-          "question": "愤怒倾向能代表整个情绪敏感性吗？",
+          "question": "焦虑倾向能代表整个情绪敏感性吗？",
           "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
           "evidence_ids": [
             "I1",
@@ -265,7 +101,7 @@
         },
         {
           "id": "personal-score",
-          "question": "这个页面能解释我的愤怒倾向分数吗？",
+          "question": "这个页面能解释我的焦虑倾向分数吗？",
           "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
           "evidence_ids": [
             "I1",
@@ -274,7 +110,7 @@
         },
         {
           "id": "high-stakes",
-          "question": "愤怒倾向可以用于招聘、诊断或职业决定吗？",
+          "question": "焦虑倾向可以用于招聘、诊断或职业决定吗？",
           "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
           "evidence_ids": [
             "I2"
@@ -283,16 +119,11 @@
       ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "愤怒倾向"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
+        "image_url": null,
+        "alt": "焦虑的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "本页解释情绪敏感性下的“愤怒倾向”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "summary": "本页解释情绪敏感性下的“焦虑倾向”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
         "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
         "not_for": [
           "临床诊断",
@@ -302,20 +133,6 @@
           "收入、关系或职业结果预测"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "愤怒倾向是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
       "internal_links": [
         {
           "label": "情绪敏感性",
@@ -328,8 +145,8 @@
           "relationship": "facet_hub"
         },
         {
-          "label": "焦虑倾向",
-          "href": "/zh/personality/big-five/facets/anxiety",
+          "label": "愤怒倾向",
+          "href": "/zh/personality/big-five/facets/anger",
           "relationship": "sibling_facet"
         },
         {
@@ -353,13 +170,72 @@
           "relationship": "sibling_facet"
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "焦虑倾向是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
+      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "source_hash": null,
       "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-anxiety-2026-07-10",
+        "codex-skeptical-review-neuroticism-2026-07-10",
+        "codex-repair-anxiety-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet_detail",
+      "code": "anger",
+      "entity_key": "anger",
+      "slug": "big-five/facets/anger",
+      "locale": "zh-CN",
+      "title": "愤怒（神经质 / 情绪敏感性）",
+      "summary": "愤怒倾向描述在受阻、不公平或边界被侵犯时较快体验恼怒、敌意或愤怒唤起的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格愤怒倾向：含义、表现、误解与行动建议",
+        "description": "理解情绪敏感性细分面向“愤怒倾向”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/anger",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/anger"
+      },
+      "hreflang": {
+        "zh-CN": "/zh/personality/big-five/facets/anger",
+        "en": "/en/personality/big-five/facets/anger"
+      },
       "sections": [
         {
           "key": "quick_answer",
@@ -407,51 +283,11 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“愤怒倾向”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
-      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
-      "source_hash": null,
-      "source_ledger_refs": [
-        "SHARED",
-        "I1",
-        "I2",
-        "I3",
-        "A1",
-        "A2",
-        "A3",
-        "A4"
-      ],
-      "model_output_refs": [
-        "codex-native-raw-anger-2026-07-10",
-        "codex-skeptical-review-neuroticism-2026-07-10",
-        "codex-repair-anger-2026-07-10"
-      ]
-    },
-    {
-      "framework": "big_five",
-      "entity_type": "facet",
-      "code": "depression",
-      "entity_key": "depression",
-      "slug": "big-five/facets/depression",
-      "locale": "zh-CN",
-      "title": "低落倾向",
-      "summary": "低落倾向描述在挫折、失去或压力下较容易体验悲伤、灰心和低期待的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
-      "seo": {
-        "title": "大五人格低落倾向：含义、表现、误解与行动建议",
-        "description": "理解情绪敏感性细分面向“低落倾向”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
-      },
-      "robots": "noindex,follow",
-      "canonical_path": "/zh/personality/big-five/facets/depression",
-      "canonical": {
-        "path": "/zh/personality/big-five/facets/depression"
-      },
-      "hreflang": {
-        "en": "/en/personality/big-five/facets/depression",
-        "zh-CN": "/zh/personality/big-five/facets/depression"
-      },
       "faq": [
         {
           "id": "higher-better",
-          "question": "低落倾向越高越好吗？",
-          "answer": "不是。低落倾向两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "question": "愤怒倾向越高越好吗？",
+          "answer": "不是。愤怒倾向两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
           "evidence_ids": [
             "I2",
             "A4"
@@ -459,7 +295,7 @@
         },
         {
           "id": "can-change",
-          "question": "低落倾向会随情境变化吗？",
+          "question": "愤怒倾向会随情境变化吗？",
           "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
           "evidence_ids": [
             "A4"
@@ -467,7 +303,7 @@
         },
         {
           "id": "same-as-domain",
-          "question": "低落倾向能代表整个情绪敏感性吗？",
+          "question": "愤怒倾向能代表整个情绪敏感性吗？",
           "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
           "evidence_ids": [
             "I1",
@@ -476,7 +312,7 @@
         },
         {
           "id": "personal-score",
-          "question": "这个页面能解释我的低落倾向分数吗？",
+          "question": "这个页面能解释我的愤怒倾向分数吗？",
           "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
           "evidence_ids": [
             "I1",
@@ -485,7 +321,7 @@
         },
         {
           "id": "high-stakes",
-          "question": "低落倾向可以用于招聘、诊断或职业决定吗？",
+          "question": "愤怒倾向可以用于招聘、诊断或职业决定吗？",
           "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
           "evidence_ids": [
             "I2"
@@ -494,16 +330,11 @@
       ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "低落倾向"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
+        "image_url": null,
+        "alt": "愤怒的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "本页解释情绪敏感性下的“低落倾向”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "summary": "本页解释情绪敏感性下的“愤怒倾向”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
         "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
         "not_for": [
           "临床诊断",
@@ -513,20 +344,6 @@
           "收入、关系或职业结果预测"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "低落倾向是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
       "internal_links": [
         {
           "label": "情绪敏感性",
@@ -544,8 +361,8 @@
           "relationship": "sibling_facet"
         },
         {
-          "label": "愤怒倾向",
-          "href": "/zh/personality/big-five/facets/anger",
+          "label": "低落倾向",
+          "href": "/zh/personality/big-five/facets/depression",
           "relationship": "sibling_facet"
         },
         {
@@ -564,13 +381,72 @@
           "relationship": "sibling_facet"
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "愤怒倾向是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
+      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "source_hash": null,
       "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-anger-2026-07-10",
+        "codex-skeptical-review-neuroticism-2026-07-10",
+        "codex-repair-anger-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet_detail",
+      "code": "depression",
+      "entity_key": "depression",
+      "slug": "big-five/facets/depression",
+      "locale": "zh-CN",
+      "title": "抑郁（神经质 / 情绪敏感性）",
+      "summary": "低落倾向描述在挫折、失去或压力下较容易体验悲伤、灰心和低期待的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格低落倾向：含义、表现、误解与行动建议",
+        "description": "理解情绪敏感性细分面向“低落倾向”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/depression",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/depression"
+      },
+      "hreflang": {
+        "zh-CN": "/zh/personality/big-five/facets/depression",
+        "en": "/en/personality/big-five/facets/depression"
+      },
       "sections": [
         {
           "key": "quick_answer",
@@ -618,51 +494,11 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“低落倾向”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
-      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
-      "source_hash": null,
-      "source_ledger_refs": [
-        "SHARED",
-        "I1",
-        "I2",
-        "I3",
-        "A1",
-        "A2",
-        "A3",
-        "A4"
-      ],
-      "model_output_refs": [
-        "codex-native-raw-depression-2026-07-10",
-        "codex-skeptical-review-neuroticism-2026-07-10",
-        "codex-repair-depression-2026-07-10"
-      ]
-    },
-    {
-      "framework": "big_five",
-      "entity_type": "facet",
-      "code": "self-consciousness",
-      "entity_key": "self-consciousness",
-      "slug": "big-five/facets/self-consciousness",
-      "locale": "zh-CN",
-      "title": "自我意识",
-      "summary": "自我意识描述在被观察、评价或可能出丑时较快感到尴尬、不自在和自我关注的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
-      "seo": {
-        "title": "大五人格自我意识：含义、表现、误解与行动建议",
-        "description": "理解情绪敏感性细分面向“自我意识”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
-      },
-      "robots": "noindex,follow",
-      "canonical_path": "/zh/personality/big-five/facets/self-consciousness",
-      "canonical": {
-        "path": "/zh/personality/big-five/facets/self-consciousness"
-      },
-      "hreflang": {
-        "en": "/en/personality/big-five/facets/self-consciousness",
-        "zh-CN": "/zh/personality/big-five/facets/self-consciousness"
-      },
       "faq": [
         {
           "id": "higher-better",
-          "question": "自我意识越高越好吗？",
-          "answer": "不是。自我意识两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "question": "低落倾向越高越好吗？",
+          "answer": "不是。低落倾向两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
           "evidence_ids": [
             "I2",
             "A4"
@@ -670,7 +506,7 @@
         },
         {
           "id": "can-change",
-          "question": "自我意识会随情境变化吗？",
+          "question": "低落倾向会随情境变化吗？",
           "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
           "evidence_ids": [
             "A4"
@@ -678,7 +514,7 @@
         },
         {
           "id": "same-as-domain",
-          "question": "自我意识能代表整个情绪敏感性吗？",
+          "question": "低落倾向能代表整个情绪敏感性吗？",
           "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
           "evidence_ids": [
             "I1",
@@ -687,7 +523,7 @@
         },
         {
           "id": "personal-score",
-          "question": "这个页面能解释我的自我意识分数吗？",
+          "question": "这个页面能解释我的低落倾向分数吗？",
           "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
           "evidence_ids": [
             "I1",
@@ -696,7 +532,7 @@
         },
         {
           "id": "high-stakes",
-          "question": "自我意识可以用于招聘、诊断或职业决定吗？",
+          "question": "低落倾向可以用于招聘、诊断或职业决定吗？",
           "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
           "evidence_ids": [
             "I2"
@@ -705,16 +541,11 @@
       ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "自我意识"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
+        "image_url": null,
+        "alt": "抑郁的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "本页解释情绪敏感性下的“自我意识”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "summary": "本页解释情绪敏感性下的“低落倾向”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
         "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
         "not_for": [
           "临床诊断",
@@ -724,20 +555,6 @@
           "收入、关系或职业结果预测"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "自我意识是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
       "internal_links": [
         {
           "label": "情绪敏感性",
@@ -760,8 +577,8 @@
           "relationship": "sibling_facet"
         },
         {
-          "label": "低落倾向",
-          "href": "/zh/personality/big-five/facets/depression",
+          "label": "自我意识",
+          "href": "/zh/personality/big-five/facets/self-consciousness",
           "relationship": "sibling_facet"
         },
         {
@@ -775,13 +592,72 @@
           "relationship": "sibling_facet"
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "低落倾向是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
+      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "source_hash": null,
       "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-depression-2026-07-10",
+        "codex-skeptical-review-neuroticism-2026-07-10",
+        "codex-repair-depression-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet_detail",
+      "code": "self-consciousness",
+      "entity_key": "self-consciousness",
+      "slug": "big-five/facets/self-consciousness",
+      "locale": "zh-CN",
+      "title": "自我意识（神经质 / 情绪敏感性）",
+      "summary": "自我意识描述在被观察、评价或可能出丑时较快感到尴尬、不自在和自我关注的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格自我意识：含义、表现、误解与行动建议",
+        "description": "理解情绪敏感性细分面向“自我意识”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/self-consciousness",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/self-consciousness"
+      },
+      "hreflang": {
+        "zh-CN": "/zh/personality/big-five/facets/self-consciousness",
+        "en": "/en/personality/big-five/facets/self-consciousness"
+      },
       "sections": [
         {
           "key": "quick_answer",
@@ -829,51 +705,11 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“自我意识”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
-      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
-      "source_hash": null,
-      "source_ledger_refs": [
-        "SHARED",
-        "I1",
-        "I2",
-        "I3",
-        "A1",
-        "A2",
-        "A3",
-        "A4"
-      ],
-      "model_output_refs": [
-        "codex-native-raw-self-consciousness-2026-07-10",
-        "codex-skeptical-review-neuroticism-2026-07-10",
-        "codex-repair-self-consciousness-2026-07-10"
-      ]
-    },
-    {
-      "framework": "big_five",
-      "entity_type": "facet",
-      "code": "impulsiveness",
-      "entity_key": "impulsiveness",
-      "slug": "big-five/facets/impulsiveness",
-      "locale": "zh-CN",
-      "title": "冲动性",
-      "summary": "冲动性描述在强烈欲望或情绪出现时延迟满足、抑制即时行动的通常难易程度。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
-      "seo": {
-        "title": "大五人格冲动性：含义、表现、误解与行动建议",
-        "description": "理解情绪敏感性细分面向“冲动性”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
-      },
-      "robots": "noindex,follow",
-      "canonical_path": "/zh/personality/big-five/facets/impulsiveness",
-      "canonical": {
-        "path": "/zh/personality/big-five/facets/impulsiveness"
-      },
-      "hreflang": {
-        "en": "/en/personality/big-five/facets/impulsiveness",
-        "zh-CN": "/zh/personality/big-five/facets/impulsiveness"
-      },
       "faq": [
         {
           "id": "higher-better",
-          "question": "冲动性越高越好吗？",
-          "answer": "不是。冲动性两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "question": "自我意识越高越好吗？",
+          "answer": "不是。自我意识两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
           "evidence_ids": [
             "I2",
             "A4"
@@ -881,7 +717,7 @@
         },
         {
           "id": "can-change",
-          "question": "冲动性会随情境变化吗？",
+          "question": "自我意识会随情境变化吗？",
           "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
           "evidence_ids": [
             "A4"
@@ -889,7 +725,7 @@
         },
         {
           "id": "same-as-domain",
-          "question": "冲动性能代表整个情绪敏感性吗？",
+          "question": "自我意识能代表整个情绪敏感性吗？",
           "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
           "evidence_ids": [
             "I1",
@@ -898,7 +734,7 @@
         },
         {
           "id": "personal-score",
-          "question": "这个页面能解释我的冲动性分数吗？",
+          "question": "这个页面能解释我的自我意识分数吗？",
           "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
           "evidence_ids": [
             "I1",
@@ -907,7 +743,7 @@
         },
         {
           "id": "high-stakes",
-          "question": "冲动性可以用于招聘、诊断或职业决定吗？",
+          "question": "自我意识可以用于招聘、诊断或职业决定吗？",
           "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
           "evidence_ids": [
             "I2"
@@ -916,16 +752,11 @@
       ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "冲动性"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
+        "image_url": null,
+        "alt": "自我意识的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "本页解释情绪敏感性下的“冲动性”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "summary": "本页解释情绪敏感性下的“自我意识”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
         "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
         "not_for": [
           "临床诊断",
@@ -935,20 +766,6 @@
           "收入、关系或职业结果预测"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "冲动性是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
       "internal_links": [
         {
           "label": "情绪敏感性",
@@ -976,8 +793,8 @@
           "relationship": "sibling_facet"
         },
         {
-          "label": "自我意识",
-          "href": "/zh/personality/big-five/facets/self-consciousness",
+          "label": "冲动性",
+          "href": "/zh/personality/big-five/facets/impulsiveness",
           "relationship": "sibling_facet"
         },
         {
@@ -986,13 +803,72 @@
           "relationship": "sibling_facet"
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "自我意识是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
+      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "source_hash": null,
       "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-self-consciousness-2026-07-10",
+        "codex-skeptical-review-neuroticism-2026-07-10",
+        "codex-repair-self-consciousness-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet_detail",
+      "code": "impulsiveness",
+      "entity_key": "impulsiveness",
+      "slug": "big-five/facets/impulsiveness",
+      "locale": "zh-CN",
+      "title": "冲动性（神经质 / 情绪敏感性）",
+      "summary": "冲动性描述在强烈欲望或情绪出现时延迟满足、抑制即时行动的通常难易程度。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格冲动性：含义、表现、误解与行动建议",
+        "description": "理解情绪敏感性细分面向“冲动性”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/impulsiveness",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/impulsiveness"
+      },
+      "hreflang": {
+        "zh-CN": "/zh/personality/big-five/facets/impulsiveness",
+        "en": "/en/personality/big-five/facets/impulsiveness"
+      },
       "sections": [
         {
           "key": "quick_answer",
@@ -1040,51 +916,11 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“冲动性”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
-      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
-      "source_hash": null,
-      "source_ledger_refs": [
-        "SHARED",
-        "I1",
-        "I2",
-        "I3",
-        "A1",
-        "A2",
-        "A3",
-        "A4"
-      ],
-      "model_output_refs": [
-        "codex-native-raw-impulsiveness-2026-07-10",
-        "codex-skeptical-review-neuroticism-2026-07-10",
-        "codex-repair-impulsiveness-2026-07-10"
-      ]
-    },
-    {
-      "framework": "big_five",
-      "entity_type": "facet",
-      "code": "vulnerability",
-      "entity_key": "vulnerability",
-      "slug": "big-five/facets/vulnerability",
-      "locale": "zh-CN",
-      "title": "脆弱性",
-      "summary": "脆弱性描述在高压力、复杂要求或支持不足时感到难以应对和容易被压垮的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
-      "seo": {
-        "title": "大五人格脆弱性：含义、表现、误解与行动建议",
-        "description": "理解情绪敏感性细分面向“脆弱性”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
-      },
-      "robots": "noindex,follow",
-      "canonical_path": "/zh/personality/big-five/facets/vulnerability",
-      "canonical": {
-        "path": "/zh/personality/big-five/facets/vulnerability"
-      },
-      "hreflang": {
-        "en": "/en/personality/big-five/facets/vulnerability",
-        "zh-CN": "/zh/personality/big-five/facets/vulnerability"
-      },
       "faq": [
         {
           "id": "higher-better",
-          "question": "脆弱性越高越好吗？",
-          "answer": "不是。脆弱性两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "question": "冲动性越高越好吗？",
+          "answer": "不是。冲动性两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
           "evidence_ids": [
             "I2",
             "A4"
@@ -1092,7 +928,7 @@
         },
         {
           "id": "can-change",
-          "question": "脆弱性会随情境变化吗？",
+          "question": "冲动性会随情境变化吗？",
           "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
           "evidence_ids": [
             "A4"
@@ -1100,7 +936,7 @@
         },
         {
           "id": "same-as-domain",
-          "question": "脆弱性能代表整个情绪敏感性吗？",
+          "question": "冲动性能代表整个情绪敏感性吗？",
           "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
           "evidence_ids": [
             "I1",
@@ -1109,7 +945,7 @@
         },
         {
           "id": "personal-score",
-          "question": "这个页面能解释我的脆弱性分数吗？",
+          "question": "这个页面能解释我的冲动性分数吗？",
           "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
           "evidence_ids": [
             "I1",
@@ -1118,7 +954,7 @@
         },
         {
           "id": "high-stakes",
-          "question": "脆弱性可以用于招聘、诊断或职业决定吗？",
+          "question": "冲动性可以用于招聘、诊断或职业决定吗？",
           "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
           "evidence_ids": [
             "I2"
@@ -1127,16 +963,11 @@
       ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "脆弱性"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
+        "image_url": null,
+        "alt": "冲动性的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "本页解释情绪敏感性下的“脆弱性”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "summary": "本页解释情绪敏感性下的“冲动性”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
         "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
         "not_for": [
           "临床诊断",
@@ -1146,20 +977,6 @@
           "收入、关系或职业结果预测"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "脆弱性是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
       "internal_links": [
         {
           "label": "情绪敏感性",
@@ -1192,18 +1009,77 @@
           "relationship": "sibling_facet"
         },
         {
-          "label": "冲动性",
-          "href": "/zh/personality/big-five/facets/impulsiveness",
+          "label": "脆弱性",
+          "href": "/zh/personality/big-five/facets/vulnerability",
           "relationship": "sibling_facet"
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "冲动性是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
+      "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
+      "source_hash": null,
       "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-impulsiveness-2026-07-10",
+        "codex-skeptical-review-neuroticism-2026-07-10",
+        "codex-repair-impulsiveness-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet_detail",
+      "code": "vulnerability",
+      "entity_key": "vulnerability",
+      "slug": "big-five/facets/vulnerability",
+      "locale": "zh-CN",
+      "title": "脆弱性（神经质 / 情绪敏感性）",
+      "summary": "脆弱性描述在高压力、复杂要求或支持不足时感到难以应对和容易被压垮的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格脆弱性：含义、表现、误解与行动建议",
+        "description": "理解情绪敏感性细分面向“脆弱性”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/vulnerability",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/vulnerability"
+      },
+      "hreflang": {
+        "zh-CN": "/zh/personality/big-five/facets/vulnerability",
+        "en": "/en/personality/big-five/facets/vulnerability"
+      },
       "sections": [
         {
           "key": "quick_answer",
@@ -1251,8 +1127,132 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“脆弱性”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "脆弱性越高越好吗？",
+          "answer": "不是。脆弱性两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "脆弱性会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "脆弱性能代表整个情绪敏感性吗？",
+          "answer": "不能。它只是情绪敏感性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的脆弱性分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "脆弱性可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "image_url": null,
+        "alt": "脆弱性的大五人格中性占位图，不使用 MBTI 品牌视觉。"
+      },
+      "method_boundary": {
+        "summary": "本页解释情绪敏感性下的“脆弱性”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "internal_links": [
+        {
+          "label": "情绪敏感性",
+          "href": "/zh/personality/big-five/neuroticism",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "焦虑倾向",
+          "href": "/zh/personality/big-five/facets/anxiety",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "愤怒倾向",
+          "href": "/zh/personality/big-five/facets/anger",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "低落倾向",
+          "href": "/zh/personality/big-five/facets/depression",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "自我意识",
+          "href": "/zh/personality/big-five/facets/self-consciousness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "冲动性",
+          "href": "/zh/personality/big-five/facets/impulsiveness",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向情绪敏感性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "脆弱性是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-neuroticism-content-package-2026-07-10",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
       "source_ledger_refs": [
         "SHARED",
         "I1",

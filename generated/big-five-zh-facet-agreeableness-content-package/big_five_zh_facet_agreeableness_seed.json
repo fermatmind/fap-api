@@ -5,12 +5,12 @@
   "assets": [
     {
       "framework": "big_five",
-      "entity_type": "facet",
+      "entity_type": "facet_detail",
       "code": "trust",
       "entity_key": "trust",
       "slug": "big-five/facets/trust",
       "locale": "zh-CN",
-      "title": "信任",
+      "title": "信任（宜人性）",
       "summary": "信任描述在证据不足时对他人诚意、可靠性和合作意图持较积极预期的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
       "seo": {
         "title": "大五人格信任：含义、表现、误解与行动建议",
@@ -22,133 +22,9 @@
         "path": "/zh/personality/big-five/facets/trust"
       },
       "hreflang": {
-        "en": "/en/personality/big-five/facets/trust",
-        "zh-CN": "/zh/personality/big-five/facets/trust"
+        "zh-CN": "/zh/personality/big-five/facets/trust",
+        "en": "/en/personality/big-five/facets/trust"
       },
-      "faq": [
-        {
-          "id": "higher-better",
-          "question": "信任越高越好吗？",
-          "answer": "不是。信任两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
-          "evidence_ids": [
-            "I2",
-            "A4"
-          ]
-        },
-        {
-          "id": "can-change",
-          "question": "信任会随情境变化吗？",
-          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
-          "evidence_ids": [
-            "A4"
-          ]
-        },
-        {
-          "id": "same-as-domain",
-          "question": "信任能代表整个宜人性吗？",
-          "answer": "不能。它只是宜人性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
-          "evidence_ids": [
-            "I1",
-            "A1"
-          ]
-        },
-        {
-          "id": "personal-score",
-          "question": "这个页面能解释我的信任分数吗？",
-          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
-          "evidence_ids": [
-            "I1",
-            "I2"
-          ]
-        },
-        {
-          "id": "high-stakes",
-          "question": "信任可以用于招聘、诊断或职业决定吗？",
-          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
-          "evidence_ids": [
-            "I2"
-          ]
-        }
-      ],
-      "media": {
-        "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "信任"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
-      },
-      "method_boundary": {
-        "summary": "本页解释宜人性下的“信任”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
-        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
-        "not_for": [
-          "临床诊断",
-          "治疗建议",
-          "招聘或录取筛选",
-          "能力或智力判断",
-          "收入、关系或职业结果预测"
-        ]
-      },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "信任是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
-      "internal_links": [
-        {
-          "label": "宜人性",
-          "href": "/zh/personality/big-five/agreeableness",
-          "relationship": "parent_domain"
-        },
-        {
-          "label": "30 个细分面向",
-          "href": "/zh/personality/big-five/facets",
-          "relationship": "facet_hub"
-        },
-        {
-          "label": "坦率",
-          "href": "/zh/personality/big-five/facets/straightforwardness",
-          "relationship": "sibling_facet"
-        },
-        {
-          "label": "利他",
-          "href": "/zh/personality/big-five/facets/altruism",
-          "relationship": "sibling_facet"
-        },
-        {
-          "label": "顺应",
-          "href": "/zh/personality/big-five/facets/compliance",
-          "relationship": "sibling_facet"
-        },
-        {
-          "label": "谦逊",
-          "href": "/zh/personality/big-five/facets/modesty",
-          "relationship": "sibling_facet"
-        },
-        {
-          "label": "柔软心肠",
-          "href": "/zh/personality/big-five/facets/tender-mindedness",
-          "relationship": "sibling_facet"
-        }
-      ],
-      "is_public": true,
-      "index_eligible": false,
-      "sitemap_eligible": false,
-      "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
-      "last_reviewed_at": "2026-07-10T00:00:00Z",
       "sections": [
         {
           "key": "quick_answer",
@@ -196,51 +72,11 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“信任”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
-      "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
-      "source_hash": null,
-      "source_ledger_refs": [
-        "SHARED",
-        "I1",
-        "I2",
-        "I3",
-        "A1",
-        "A2",
-        "A3",
-        "A4"
-      ],
-      "model_output_refs": [
-        "codex-native-raw-trust-2026-07-10",
-        "codex-skeptical-review-agreeableness-2026-07-10",
-        "codex-repair-trust-2026-07-10"
-      ]
-    },
-    {
-      "framework": "big_five",
-      "entity_type": "facet",
-      "code": "straightforwardness",
-      "entity_key": "straightforwardness",
-      "slug": "big-five/facets/straightforwardness",
-      "locale": "zh-CN",
-      "title": "坦率",
-      "summary": "坦率描述在沟通中直接说明真实立场、减少操纵和隐瞒关键意图的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
-      "seo": {
-        "title": "大五人格坦率：含义、表现、误解与行动建议",
-        "description": "理解宜人性细分面向“坦率”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
-      },
-      "robots": "noindex,follow",
-      "canonical_path": "/zh/personality/big-five/facets/straightforwardness",
-      "canonical": {
-        "path": "/zh/personality/big-five/facets/straightforwardness"
-      },
-      "hreflang": {
-        "en": "/en/personality/big-five/facets/straightforwardness",
-        "zh-CN": "/zh/personality/big-five/facets/straightforwardness"
-      },
       "faq": [
         {
           "id": "higher-better",
-          "question": "坦率越高越好吗？",
-          "answer": "不是。坦率两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "question": "信任越高越好吗？",
+          "answer": "不是。信任两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
           "evidence_ids": [
             "I2",
             "A4"
@@ -248,7 +84,7 @@
         },
         {
           "id": "can-change",
-          "question": "坦率会随情境变化吗？",
+          "question": "信任会随情境变化吗？",
           "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
           "evidence_ids": [
             "A4"
@@ -256,7 +92,7 @@
         },
         {
           "id": "same-as-domain",
-          "question": "坦率能代表整个宜人性吗？",
+          "question": "信任能代表整个宜人性吗？",
           "answer": "不能。它只是宜人性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
           "evidence_ids": [
             "I1",
@@ -265,7 +101,7 @@
         },
         {
           "id": "personal-score",
-          "question": "这个页面能解释我的坦率分数吗？",
+          "question": "这个页面能解释我的信任分数吗？",
           "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
           "evidence_ids": [
             "I1",
@@ -274,7 +110,7 @@
         },
         {
           "id": "high-stakes",
-          "question": "坦率可以用于招聘、诊断或职业决定吗？",
+          "question": "信任可以用于招聘、诊断或职业决定吗？",
           "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
           "evidence_ids": [
             "I2"
@@ -283,16 +119,11 @@
       ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "坦率"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
+        "image_url": null,
+        "alt": "信任的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "本页解释宜人性下的“坦率”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "summary": "本页解释宜人性下的“信任”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
         "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
         "not_for": [
           "临床诊断",
@@ -302,20 +133,6 @@
           "收入、关系或职业结果预测"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "坦率是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
       "internal_links": [
         {
           "label": "宜人性",
@@ -328,8 +145,8 @@
           "relationship": "facet_hub"
         },
         {
-          "label": "信任",
-          "href": "/zh/personality/big-five/facets/trust",
+          "label": "坦率",
+          "href": "/zh/personality/big-five/facets/straightforwardness",
           "relationship": "sibling_facet"
         },
         {
@@ -353,13 +170,72 @@
           "relationship": "sibling_facet"
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "信任是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
+      "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+      "source_hash": null,
       "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-trust-2026-07-10",
+        "codex-skeptical-review-agreeableness-2026-07-10",
+        "codex-repair-trust-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet_detail",
+      "code": "straightforwardness",
+      "entity_key": "straightforwardness",
+      "slug": "big-five/facets/straightforwardness",
+      "locale": "zh-CN",
+      "title": "直接性（宜人性）",
+      "summary": "坦率描述在沟通中直接说明真实立场、减少操纵和隐瞒关键意图的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格坦率：含义、表现、误解与行动建议",
+        "description": "理解宜人性细分面向“坦率”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/straightforwardness",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/straightforwardness"
+      },
+      "hreflang": {
+        "zh-CN": "/zh/personality/big-five/facets/straightforwardness",
+        "en": "/en/personality/big-five/facets/straightforwardness"
+      },
       "sections": [
         {
           "key": "quick_answer",
@@ -407,51 +283,11 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“坦率”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
-      "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
-      "source_hash": null,
-      "source_ledger_refs": [
-        "SHARED",
-        "I1",
-        "I2",
-        "I3",
-        "A1",
-        "A2",
-        "A3",
-        "A4"
-      ],
-      "model_output_refs": [
-        "codex-native-raw-straightforwardness-2026-07-10",
-        "codex-skeptical-review-agreeableness-2026-07-10",
-        "codex-repair-straightforwardness-2026-07-10"
-      ]
-    },
-    {
-      "framework": "big_five",
-      "entity_type": "facet",
-      "code": "altruism",
-      "entity_key": "altruism",
-      "slug": "big-five/facets/altruism",
-      "locale": "zh-CN",
-      "title": "利他",
-      "summary": "利他描述注意他人需要并愿意在合理成本内提供时间、信息或实际帮助的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
-      "seo": {
-        "title": "大五人格利他：含义、表现、误解与行动建议",
-        "description": "理解宜人性细分面向“利他”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
-      },
-      "robots": "noindex,follow",
-      "canonical_path": "/zh/personality/big-five/facets/altruism",
-      "canonical": {
-        "path": "/zh/personality/big-five/facets/altruism"
-      },
-      "hreflang": {
-        "en": "/en/personality/big-five/facets/altruism",
-        "zh-CN": "/zh/personality/big-five/facets/altruism"
-      },
       "faq": [
         {
           "id": "higher-better",
-          "question": "利他越高越好吗？",
-          "answer": "不是。利他两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "question": "坦率越高越好吗？",
+          "answer": "不是。坦率两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
           "evidence_ids": [
             "I2",
             "A4"
@@ -459,7 +295,7 @@
         },
         {
           "id": "can-change",
-          "question": "利他会随情境变化吗？",
+          "question": "坦率会随情境变化吗？",
           "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
           "evidence_ids": [
             "A4"
@@ -467,7 +303,7 @@
         },
         {
           "id": "same-as-domain",
-          "question": "利他能代表整个宜人性吗？",
+          "question": "坦率能代表整个宜人性吗？",
           "answer": "不能。它只是宜人性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
           "evidence_ids": [
             "I1",
@@ -476,7 +312,7 @@
         },
         {
           "id": "personal-score",
-          "question": "这个页面能解释我的利他分数吗？",
+          "question": "这个页面能解释我的坦率分数吗？",
           "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
           "evidence_ids": [
             "I1",
@@ -485,7 +321,7 @@
         },
         {
           "id": "high-stakes",
-          "question": "利他可以用于招聘、诊断或职业决定吗？",
+          "question": "坦率可以用于招聘、诊断或职业决定吗？",
           "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
           "evidence_ids": [
             "I2"
@@ -494,16 +330,11 @@
       ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "利他"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
+        "image_url": null,
+        "alt": "直接性的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "本页解释宜人性下的“利他”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "summary": "本页解释宜人性下的“坦率”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
         "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
         "not_for": [
           "临床诊断",
@@ -513,20 +344,6 @@
           "收入、关系或职业结果预测"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "利他是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
       "internal_links": [
         {
           "label": "宜人性",
@@ -544,8 +361,8 @@
           "relationship": "sibling_facet"
         },
         {
-          "label": "坦率",
-          "href": "/zh/personality/big-five/facets/straightforwardness",
+          "label": "利他",
+          "href": "/zh/personality/big-five/facets/altruism",
           "relationship": "sibling_facet"
         },
         {
@@ -564,13 +381,72 @@
           "relationship": "sibling_facet"
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "坦率是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
+      "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+      "source_hash": null,
       "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-straightforwardness-2026-07-10",
+        "codex-skeptical-review-agreeableness-2026-07-10",
+        "codex-repair-straightforwardness-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet_detail",
+      "code": "altruism",
+      "entity_key": "altruism",
+      "slug": "big-five/facets/altruism",
+      "locale": "zh-CN",
+      "title": "利他（宜人性）",
+      "summary": "利他描述注意他人需要并愿意在合理成本内提供时间、信息或实际帮助的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格利他：含义、表现、误解与行动建议",
+        "description": "理解宜人性细分面向“利他”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/altruism",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/altruism"
+      },
+      "hreflang": {
+        "zh-CN": "/zh/personality/big-five/facets/altruism",
+        "en": "/en/personality/big-five/facets/altruism"
+      },
       "sections": [
         {
           "key": "quick_answer",
@@ -618,51 +494,11 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“利他”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
-      "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
-      "source_hash": null,
-      "source_ledger_refs": [
-        "SHARED",
-        "I1",
-        "I2",
-        "I3",
-        "A1",
-        "A2",
-        "A3",
-        "A4"
-      ],
-      "model_output_refs": [
-        "codex-native-raw-altruism-2026-07-10",
-        "codex-skeptical-review-agreeableness-2026-07-10",
-        "codex-repair-altruism-2026-07-10"
-      ]
-    },
-    {
-      "framework": "big_five",
-      "entity_type": "facet",
-      "code": "compliance",
-      "entity_key": "compliance",
-      "slug": "big-five/facets/compliance",
-      "locale": "zh-CN",
-      "title": "顺应",
-      "summary": "顺应描述在冲突中抑制对抗、寻找让步和恢复合作的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
-      "seo": {
-        "title": "大五人格顺应：含义、表现、误解与行动建议",
-        "description": "理解宜人性细分面向“顺应”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
-      },
-      "robots": "noindex,follow",
-      "canonical_path": "/zh/personality/big-five/facets/compliance",
-      "canonical": {
-        "path": "/zh/personality/big-five/facets/compliance"
-      },
-      "hreflang": {
-        "en": "/en/personality/big-five/facets/compliance",
-        "zh-CN": "/zh/personality/big-five/facets/compliance"
-      },
       "faq": [
         {
           "id": "higher-better",
-          "question": "顺应越高越好吗？",
-          "answer": "不是。顺应两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "question": "利他越高越好吗？",
+          "answer": "不是。利他两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
           "evidence_ids": [
             "I2",
             "A4"
@@ -670,7 +506,7 @@
         },
         {
           "id": "can-change",
-          "question": "顺应会随情境变化吗？",
+          "question": "利他会随情境变化吗？",
           "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
           "evidence_ids": [
             "A4"
@@ -678,7 +514,7 @@
         },
         {
           "id": "same-as-domain",
-          "question": "顺应能代表整个宜人性吗？",
+          "question": "利他能代表整个宜人性吗？",
           "answer": "不能。它只是宜人性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
           "evidence_ids": [
             "I1",
@@ -687,7 +523,7 @@
         },
         {
           "id": "personal-score",
-          "question": "这个页面能解释我的顺应分数吗？",
+          "question": "这个页面能解释我的利他分数吗？",
           "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
           "evidence_ids": [
             "I1",
@@ -696,7 +532,7 @@
         },
         {
           "id": "high-stakes",
-          "question": "顺应可以用于招聘、诊断或职业决定吗？",
+          "question": "利他可以用于招聘、诊断或职业决定吗？",
           "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
           "evidence_ids": [
             "I2"
@@ -705,16 +541,11 @@
       ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "顺应"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
+        "image_url": null,
+        "alt": "利他的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "本页解释宜人性下的“顺应”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "summary": "本页解释宜人性下的“利他”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
         "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
         "not_for": [
           "临床诊断",
@@ -724,20 +555,6 @@
           "收入、关系或职业结果预测"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "顺应是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
       "internal_links": [
         {
           "label": "宜人性",
@@ -760,8 +577,8 @@
           "relationship": "sibling_facet"
         },
         {
-          "label": "利他",
-          "href": "/zh/personality/big-five/facets/altruism",
+          "label": "顺应",
+          "href": "/zh/personality/big-five/facets/compliance",
           "relationship": "sibling_facet"
         },
         {
@@ -775,13 +592,72 @@
           "relationship": "sibling_facet"
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "利他是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
+      "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+      "source_hash": null,
       "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-altruism-2026-07-10",
+        "codex-skeptical-review-agreeableness-2026-07-10",
+        "codex-repair-altruism-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet_detail",
+      "code": "compliance",
+      "entity_key": "compliance",
+      "slug": "big-five/facets/compliance",
+      "locale": "zh-CN",
+      "title": "顺从（宜人性）",
+      "summary": "顺应描述在冲突中抑制对抗、寻找让步和恢复合作的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格顺应：含义、表现、误解与行动建议",
+        "description": "理解宜人性细分面向“顺应”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/compliance",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/compliance"
+      },
+      "hreflang": {
+        "zh-CN": "/zh/personality/big-five/facets/compliance",
+        "en": "/en/personality/big-five/facets/compliance"
+      },
       "sections": [
         {
           "key": "quick_answer",
@@ -829,51 +705,11 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“顺应”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
-      "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
-      "source_hash": null,
-      "source_ledger_refs": [
-        "SHARED",
-        "I1",
-        "I2",
-        "I3",
-        "A1",
-        "A2",
-        "A3",
-        "A4"
-      ],
-      "model_output_refs": [
-        "codex-native-raw-compliance-2026-07-10",
-        "codex-skeptical-review-agreeableness-2026-07-10",
-        "codex-repair-compliance-2026-07-10"
-      ]
-    },
-    {
-      "framework": "big_five",
-      "entity_type": "facet",
-      "code": "modesty",
-      "entity_key": "modesty",
-      "slug": "big-five/facets/modesty",
-      "locale": "zh-CN",
-      "title": "谦逊",
-      "summary": "谦逊描述在展示成就和比较地位时减少自我抬高、不过度要求特殊认可的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
-      "seo": {
-        "title": "大五人格谦逊：含义、表现、误解与行动建议",
-        "description": "理解宜人性细分面向“谦逊”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
-      },
-      "robots": "noindex,follow",
-      "canonical_path": "/zh/personality/big-five/facets/modesty",
-      "canonical": {
-        "path": "/zh/personality/big-five/facets/modesty"
-      },
-      "hreflang": {
-        "en": "/en/personality/big-five/facets/modesty",
-        "zh-CN": "/zh/personality/big-five/facets/modesty"
-      },
       "faq": [
         {
           "id": "higher-better",
-          "question": "谦逊越高越好吗？",
-          "answer": "不是。谦逊两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "question": "顺应越高越好吗？",
+          "answer": "不是。顺应两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
           "evidence_ids": [
             "I2",
             "A4"
@@ -881,7 +717,7 @@
         },
         {
           "id": "can-change",
-          "question": "谦逊会随情境变化吗？",
+          "question": "顺应会随情境变化吗？",
           "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
           "evidence_ids": [
             "A4"
@@ -889,7 +725,7 @@
         },
         {
           "id": "same-as-domain",
-          "question": "谦逊能代表整个宜人性吗？",
+          "question": "顺应能代表整个宜人性吗？",
           "answer": "不能。它只是宜人性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
           "evidence_ids": [
             "I1",
@@ -898,7 +734,7 @@
         },
         {
           "id": "personal-score",
-          "question": "这个页面能解释我的谦逊分数吗？",
+          "question": "这个页面能解释我的顺应分数吗？",
           "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
           "evidence_ids": [
             "I1",
@@ -907,7 +743,7 @@
         },
         {
           "id": "high-stakes",
-          "question": "谦逊可以用于招聘、诊断或职业决定吗？",
+          "question": "顺应可以用于招聘、诊断或职业决定吗？",
           "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
           "evidence_ids": [
             "I2"
@@ -916,16 +752,11 @@
       ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "谦逊"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
+        "image_url": null,
+        "alt": "顺从的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "本页解释宜人性下的“谦逊”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "summary": "本页解释宜人性下的“顺应”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
         "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
         "not_for": [
           "临床诊断",
@@ -935,20 +766,6 @@
           "收入、关系或职业结果预测"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "谦逊是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
       "internal_links": [
         {
           "label": "宜人性",
@@ -976,8 +793,8 @@
           "relationship": "sibling_facet"
         },
         {
-          "label": "顺应",
-          "href": "/zh/personality/big-five/facets/compliance",
+          "label": "谦逊",
+          "href": "/zh/personality/big-five/facets/modesty",
           "relationship": "sibling_facet"
         },
         {
@@ -986,13 +803,72 @@
           "relationship": "sibling_facet"
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "顺应是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
+      "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+      "source_hash": null,
       "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-compliance-2026-07-10",
+        "codex-skeptical-review-agreeableness-2026-07-10",
+        "codex-repair-compliance-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet_detail",
+      "code": "modesty",
+      "entity_key": "modesty",
+      "slug": "big-five/facets/modesty",
+      "locale": "zh-CN",
+      "title": "谦逊（宜人性）",
+      "summary": "谦逊描述在展示成就和比较地位时减少自我抬高、不过度要求特殊认可的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格谦逊：含义、表现、误解与行动建议",
+        "description": "理解宜人性细分面向“谦逊”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/modesty",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/modesty"
+      },
+      "hreflang": {
+        "zh-CN": "/zh/personality/big-five/facets/modesty",
+        "en": "/en/personality/big-five/facets/modesty"
+      },
       "sections": [
         {
           "key": "quick_answer",
@@ -1040,51 +916,11 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“谦逊”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
-      "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
-      "source_hash": null,
-      "source_ledger_refs": [
-        "SHARED",
-        "I1",
-        "I2",
-        "I3",
-        "A1",
-        "A2",
-        "A3",
-        "A4"
-      ],
-      "model_output_refs": [
-        "codex-native-raw-modesty-2026-07-10",
-        "codex-skeptical-review-agreeableness-2026-07-10",
-        "codex-repair-modesty-2026-07-10"
-      ]
-    },
-    {
-      "framework": "big_five",
-      "entity_type": "facet",
-      "code": "tender-mindedness",
-      "entity_key": "tender-mindedness",
-      "slug": "big-five/facets/tender-mindedness",
-      "locale": "zh-CN",
-      "title": "柔软心肠",
-      "summary": "柔软心肠描述对他人痛苦、脆弱处境和照护需要产生同情并重视其影响的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
-      "seo": {
-        "title": "大五人格柔软心肠：含义、表现、误解与行动建议",
-        "description": "理解宜人性细分面向“柔软心肠”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
-      },
-      "robots": "noindex,follow",
-      "canonical_path": "/zh/personality/big-five/facets/tender-mindedness",
-      "canonical": {
-        "path": "/zh/personality/big-five/facets/tender-mindedness"
-      },
-      "hreflang": {
-        "en": "/en/personality/big-five/facets/tender-mindedness",
-        "zh-CN": "/zh/personality/big-five/facets/tender-mindedness"
-      },
       "faq": [
         {
           "id": "higher-better",
-          "question": "柔软心肠越高越好吗？",
-          "answer": "不是。柔软心肠两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "question": "谦逊越高越好吗？",
+          "answer": "不是。谦逊两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
           "evidence_ids": [
             "I2",
             "A4"
@@ -1092,7 +928,7 @@
         },
         {
           "id": "can-change",
-          "question": "柔软心肠会随情境变化吗？",
+          "question": "谦逊会随情境变化吗？",
           "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
           "evidence_ids": [
             "A4"
@@ -1100,7 +936,7 @@
         },
         {
           "id": "same-as-domain",
-          "question": "柔软心肠能代表整个宜人性吗？",
+          "question": "谦逊能代表整个宜人性吗？",
           "answer": "不能。它只是宜人性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
           "evidence_ids": [
             "I1",
@@ -1109,7 +945,7 @@
         },
         {
           "id": "personal-score",
-          "question": "这个页面能解释我的柔软心肠分数吗？",
+          "question": "这个页面能解释我的谦逊分数吗？",
           "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
           "evidence_ids": [
             "I1",
@@ -1118,7 +954,7 @@
         },
         {
           "id": "high-stakes",
-          "question": "柔软心肠可以用于招聘、诊断或职业决定吗？",
+          "question": "谦逊可以用于招聘、诊断或职业决定吗？",
           "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
           "evidence_ids": [
             "I2"
@@ -1127,16 +963,11 @@
       ],
       "media": {
         "status": "placeholder",
-        "hero_image_asset_key": null,
-        "alt": "柔软心肠"
-      },
-      "schema": {
-        "@type": "WebPage",
-        "about": "Big Five personality model",
-        "status": "noindex_facet_content_package_01"
+        "image_url": null,
+        "alt": "谦逊的大五人格中性占位图，不使用 MBTI 品牌视觉。"
       },
       "method_boundary": {
-        "summary": "本页解释宜人性下的“柔软心肠”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "summary": "本页解释宜人性下的“谦逊”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
         "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
         "not_for": [
           "临床诊断",
@@ -1146,20 +977,6 @@
           "收入、关系或职业结果预测"
         ]
       },
-      "evidence_notes": [
-        {
-          "source_type": "taxonomy",
-          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
-        },
-        {
-          "source_type": "boundary",
-          "note": "柔软心肠是连续倾向，不是人格类型、能力等级或确定性预测。"
-        },
-        {
-          "source_type": "search",
-          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
-        }
-      ],
       "internal_links": [
         {
           "label": "宜人性",
@@ -1192,18 +1009,77 @@
           "relationship": "sibling_facet"
         },
         {
-          "label": "谦逊",
-          "href": "/zh/personality/big-five/facets/modesty",
+          "label": "柔软心肠",
+          "href": "/zh/personality/big-five/facets/tender-mindedness",
           "relationship": "sibling_facet"
         }
       ],
-      "is_public": true,
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "谦逊是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
       "index_eligible": false,
       "sitemap_eligible": false,
       "llms_eligible": false,
-      "launch_state": "content_ready",
-      "review_state": "codex_repaired_ready",
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
+      "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
+      "source_hash": null,
       "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
+      "source_ledger_refs": [
+        "SHARED",
+        "I1",
+        "I2",
+        "I3",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "model_output_refs": [
+        "codex-native-raw-modesty-2026-07-10",
+        "codex-skeptical-review-agreeableness-2026-07-10",
+        "codex-repair-modesty-2026-07-10"
+      ]
+    },
+    {
+      "framework": "big_five",
+      "entity_type": "facet_detail",
+      "code": "tender-mindedness",
+      "entity_key": "tender-mindedness",
+      "slug": "big-five/facets/tender-mindedness",
+      "locale": "zh-CN",
+      "title": "温和（宜人性）",
+      "summary": "柔软心肠描述对他人痛苦、脆弱处境和照护需要产生同情并重视其影响的通常倾向。本页用平衡语言解释两端表现、情境差异、常见误解与可逆行动，不把它当作能力、诊断或固定身份。",
+      "seo": {
+        "title": "大五人格柔软心肠：含义、表现、误解与行动建议",
+        "description": "理解宜人性细分面向“柔软心肠”的含义、较明显与较不明显的表现、真实情境、常见误解和非诊断使用边界。"
+      },
+      "robots": "noindex,follow",
+      "canonical_path": "/zh/personality/big-five/facets/tender-mindedness",
+      "canonical": {
+        "path": "/zh/personality/big-five/facets/tender-mindedness"
+      },
+      "hreflang": {
+        "zh-CN": "/zh/personality/big-five/facets/tender-mindedness",
+        "en": "/en/personality/big-five/facets/tender-mindedness"
+      },
       "sections": [
         {
           "key": "quick_answer",
@@ -1251,8 +1127,132 @@
           "body_md": "本页沿用现有 CMS 与 NEO / IPIP 传统相近的 30-facet 导航来解释“柔软心肠”，不复制专有量表题目，也不把它与 BFI-2 的 15 facets 或 BFAS 的 10 aspects 直接换算。页面不读取私人测评结果，不提供常模、百分位、信效度数字，不用于诊断、治疗、招聘或录取筛选、能力判断、收入预测、关系结果预测或确定性职业建议。"
         }
       ],
+      "faq": [
+        {
+          "id": "higher-better",
+          "question": "柔软心肠越高越好吗？",
+          "answer": "不是。柔软心肠两端都可能在不同任务中有便利与成本，重点是情境匹配、调节方式和是否保留核验。",
+          "evidence_ids": [
+            "I2",
+            "A4"
+          ]
+        },
+        {
+          "id": "can-change",
+          "question": "柔软心肠会随情境变化吗？",
+          "answer": "会。人格语言描述通常倾向，不代表每次行为相同；角色、经验、压力、资源和明确规则都可能改变当下表现。",
+          "evidence_ids": [
+            "A4"
+          ]
+        },
+        {
+          "id": "same-as-domain",
+          "question": "柔软心肠能代表整个宜人性吗？",
+          "answer": "不能。它只是宜人性下六个细分面向之一，其他面向可能呈现不同位置，宽维度也不能被单一面向替代。",
+          "evidence_ids": [
+            "I1",
+            "A1"
+          ]
+        },
+        {
+          "id": "personal-score",
+          "question": "这个页面能解释我的柔软心肠分数吗？",
+          "answer": "不能。本页只解释公共概念。个人结果必须按具体量表的计分、作答质量、常模与解释契约阅读，并结合本人反馈。",
+          "evidence_ids": [
+            "I1",
+            "I2"
+          ]
+        },
+        {
+          "id": "high-stakes",
+          "question": "柔软心肠可以用于招聘、诊断或职业决定吗？",
+          "answer": "不可以。它不能替代临床评估、工作样本、结构化招聘流程、职业信息或其他高风险决定所需的证据。",
+          "evidence_ids": [
+            "I2"
+          ]
+        }
+      ],
+      "media": {
+        "status": "placeholder",
+        "image_url": null,
+        "alt": "温和的大五人格中性占位图，不使用 MBTI 品牌视觉。"
+      },
+      "method_boundary": {
+        "summary": "本页解释宜人性下的“柔软心肠”公共概念，不解释个人结果，也不替代具体量表契约或专业判断。",
+        "taxonomy_boundary": "NEO/IPIP-like 30-facet route taxonomy; no direct conversion to BFI-2 facets or BFAS aspects.",
+        "not_for": [
+          "临床诊断",
+          "治疗建议",
+          "招聘或录取筛选",
+          "能力或智力判断",
+          "收入、关系或职业结果预测"
+        ]
+      },
+      "internal_links": [
+        {
+          "label": "宜人性",
+          "href": "/zh/personality/big-five/agreeableness",
+          "relationship": "parent_domain"
+        },
+        {
+          "label": "30 个细分面向",
+          "href": "/zh/personality/big-five/facets",
+          "relationship": "facet_hub"
+        },
+        {
+          "label": "信任",
+          "href": "/zh/personality/big-five/facets/trust",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "坦率",
+          "href": "/zh/personality/big-five/facets/straightforwardness",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "利他",
+          "href": "/zh/personality/big-five/facets/altruism",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "顺应",
+          "href": "/zh/personality/big-five/facets/compliance",
+          "relationship": "sibling_facet"
+        },
+        {
+          "label": "谦逊",
+          "href": "/zh/personality/big-five/facets/modesty",
+          "relationship": "sibling_facet"
+        }
+      ],
+      "evidence_notes": [
+        {
+          "source_type": "taxonomy",
+          "note": "现有 CMS route set 采用与 NEO / IPIP 30-facet 传统相近的六面向宜人性导航。"
+        },
+        {
+          "source_type": "boundary",
+          "note": "柔软心肠是连续倾向，不是人格类型、能力等级或确定性预测。"
+        },
+        {
+          "source_type": "search",
+          "note": "GSC_EVIDENCE_PENDING；本包不主张搜索表现或可索引发布资格。"
+        }
+      ],
+      "launch_state": "content_ready",
+      "review_state": "codex_repaired_ready",
+      "index_eligible": false,
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "is_public": true,
+      "schema_runtime_eligible": false,
+      "org_id": 0,
       "source_package": "big-five-zh-facet-agreeableness-content-package-2026-07-10",
       "source_hash": null,
+      "last_reviewed_at": "2026-07-10T00:00:00Z",
+      "schema": {
+        "status": "noindex_facet_content_package_01"
+      },
       "source_ledger_refs": [
         "SHARED",
         "I1",

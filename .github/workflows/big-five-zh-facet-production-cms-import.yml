@@ -16,7 +16,7 @@ on:
       expected_seed_sha256:
         description: "Exact SHA-256 of generated/big-five-zh-facet-import-dryrun/big_five_zh_facet_31_seed.json"
         required: true
-        default: "47605736590fab6f6eac6d374f947925946ef125f39a273f4d136b6d30df5815"
+        default: "88be4e72d18bf61b2be382423d754e46ca094ee6ed227430ed833b471ab0688d"
         type: string
       operator_approval_phrase:
         description: "Exact SHA-bound operator approval phrase; required even for dry-run"
@@ -128,11 +128,11 @@ jobs:
           if (!is_array($assets) || count($assets) !== 31) { throw new RuntimeException("expected exactly 31 assets"); }
           $identities = [];
           $hubCount = 0;
-          $facetCount = 0;
+          $facetDetailCount = 0;
           foreach ($assets as $asset) {
               if (!is_array($asset) || ($asset["framework"] ?? null) !== "big_five" || ($asset["locale"] ?? null) !== "zh-CN") { throw new RuntimeException("invalid asset identity"); }
               $entityType = $asset["entity_type"] ?? null;
-              if ($entityType === "facet_hub") { $hubCount++; } elseif ($entityType === "facet") { $facetCount++; } else { throw new RuntimeException("unexpected entity type"); }
+              if ($entityType === "facet_hub") { $hubCount++; } elseif ($entityType === "facet_detail") { $facetDetailCount++; } else { throw new RuntimeException("unexpected entity type"); }
               $identity = implode("|", [$asset["framework"], $entityType, $asset["entity_key"] ?? "", $asset["locale"]]);
               if (($asset["entity_key"] ?? "") === "" || isset($identities[$identity])) { throw new RuntimeException("duplicate or empty identity"); }
               $identities[$identity] = true;
@@ -145,7 +145,7 @@ jobs:
               }
               if (!is_array($asset["faq"] ?? null) || count($asset["faq"]) < 5) { throw new RuntimeException("expected at least five FAQ items"); }
           }
-          if ($hubCount !== 1 || $facetCount !== 30 || count($identities) !== 31) { throw new RuntimeException("31-row composition gate failed"); }
+          if ($hubCount !== 1 || $facetDetailCount !== 30 || count($identities) !== 31) { throw new RuntimeException("31-row composition gate failed"); }
           echo "seed_contract=pass\n";
           ' "$SOURCE"
 
