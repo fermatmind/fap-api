@@ -184,13 +184,13 @@
     "depends_on": [
       "ENNEAGRAM-90-BACKEND-CMS-GATE-IDENTITY-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "1618c5b9dfd4ea60c259a51403c3021fbbdbcf67",
+    "status": "merged",
+    "commit_sha": "fb6eab1fb93aeac21258f03a7e9f4f4dbfcce819",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2978",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-11T10:52:37Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -225,13 +225,17 @@
       "github_required": {
         "status": "pass",
         "evidence": "PR #2978 checks all completed successfully: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif upload."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #2978 merged as fb6eab1fb93aeac21258f03a7e9f4f4dbfcce819; origin/main contains the merge commit; local and remote task branches were deleted."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -263,6 +267,81 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "All GitHub checks reported success; PR files remain scoped to the workflow plus docs/codex manifest/state."
+      },
+      {
+        "at": "2026-07-11T10:52:37.000Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #2978 merged as fb6eab1fb93aeac21258f03a7e9f4f4dbfcce819; origin/main contains the merge commit; local and remote task branches were deleted."
+      }
+    ]
+  },
+  "ENNEAGRAM-90-BACKEND-SITEMAP-ENTITY-LOCALE-01": {
+    "id": "ENNEAGRAM-90-BACKEND-SITEMAP-ENTITY-LOCALE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/enneagram-90-backend-sitemap-entity-locale-01",
+    "title": "ENNEAGRAM-90-BACKEND-SITEMAP-ENTITY-LOCALE-01: include Enneagram wings and subtypes in sitemap authority",
+    "depends_on": [
+      "ENNEAGRAM-90-BACKEND-CMS-OPS-WORKFLOW-01"
+    ],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEAGRAM-90-BACKEND-CMS-OPS-WORKFLOW-01 PR #2978 merged as fb6eab1fb93aeac21258f03a7e9f4f4dbfcce819 and origin/main contains the merge commit."
+      },
+      "focused_local": {
+        "status": "pass",
+        "evidence": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Feature/SEO/SitemapGeneratorTest.php --filter=Enneagram --no-ansi passed with 1 warning and 233 assertions."
+      },
+      "php_lint": {
+        "status": "pass",
+        "evidence": "php -l passed for app/Services/SEO/SitemapGenerator.php and tests/Feature/SEO/SitemapGeneratorTest.php."
+      },
+      "pint": {
+        "status": "pass",
+        "evidence": "vendor/bin/pint --test passed for app/Services/SEO/SitemapGenerator.php and tests/Feature/SEO/SitemapGeneratorTest.php."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to SitemapGenerator.php, SitemapGeneratorTest.php, and docs/codex manifest/state."
+      },
+      "diff_checks": {
+        "status": "pass",
+        "evidence": "git diff --check and git diff --cached --check completed without errors."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T10:55:00.000Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Goal authorized ENNEAGRAM-90 backend sitemap entity/locale support for bilingual wing and instinctual subtype assets; no production writes, publish, cache warm, deploy, llms, or search release."
+      },
+      {
+        "at": "2026-07-11T10:58:00.000Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Focused Enneagram sitemap test, PHP lint, Pint, manifest/state syntax, diff checks, and scope validation passed."
       }
     ]
   },

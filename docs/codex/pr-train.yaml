@@ -38804,6 +38804,47 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: ENNEAGRAM-90-BACKEND-SITEMAP-ENTITY-LOCALE-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-90-BACKEND-CMS-OPS-WORKFLOW-01]
+    branch: codex/enneagram-90-backend-sitemap-entity-locale-01
+    title: "ENNEAGRAM-90-BACKEND-SITEMAP-ENTITY-LOCALE-01: include Enneagram wings and subtypes in sitemap authority"
+    train_scope: enneagram_90_backend_sitemap_entity_locale
+    status: user_authorized
+    scope:
+      - Extend backend sitemap generation to include published, public, indexable, sitemap-eligible Enneagram wing assets in en and zh-CN.
+      - Extend backend sitemap generation to include published, public, indexable, sitemap-eligible Enneagram instinctual subtype assets in en and zh-CN.
+      - Preserve existing Big Five behavior and existing Enneagram hub, center, and core type behavior.
+      - Preserve fail-closed gating for noindex, non-public, non-published, non-indexable, non-sitemap-eligible, private, or non-Enneagram paths.
+      - Reconcile ENNEAGRAM-90-BACKEND-CMS-OPS-WORKFLOW-01 merged/cleanup ledger facts after PR #2978.
+    allowed_paths:
+      - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web, CMS production content, importer/publish workflows, database schema, llms runtime, public API runtime, JSON-LD runtime, canonical/noindex runtime behavior, permissions, scheduler behavior, secrets, staging deploy, or production deploy.
+      - Write CMS, run production imports, promote, publish, warm sitemap cache, enable llms/search release, or add frontend fallback content.
+      - Include draft/content_ready/noindex/private assets in sitemap.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/SitemapGeneratorTest.php --filter=Enneagram --no-ansi
+      - cd backend && php -l app/Services/SEO/SitemapGenerator.php && php -l tests/Feature/SEO/SitemapGeneratorTest.php
+      - cd backend && vendor/bin/pint --test app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/SitemapGeneratorTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: BIG5-EN-DOMAIN-CONTENT-PACKAGE-01
     repo: fap-api
     depends_on: []

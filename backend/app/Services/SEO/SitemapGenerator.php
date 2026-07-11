@@ -347,6 +347,8 @@ class SitemapGenerator
                 PersonalityPublicContentAsset::ENTITY_POLARITY,
                 PersonalityPublicContentAsset::ENTITY_CENTER,
                 PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+                PersonalityPublicContentAsset::ENTITY_WING,
+                PersonalityPublicContentAsset::ENTITY_INSTINCTUAL_SUBTYPE,
             ])
             ->where('is_public', true)
             ->where('launch_state', PersonalityPublicContentAsset::LAUNCH_PUBLISHED)
