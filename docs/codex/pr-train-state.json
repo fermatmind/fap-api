@@ -85248,7 +85248,7 @@
     "base": "main",
     "branch": "codex/big5-zh-facet-import-identity-repair-01",
     "depends_on": ["PERSONALITY-PUBLIC-ASSET-IMPORT-ATOMICITY-01"],
-    "status": "github_fix_local_checks_passed",
+    "status": "ready_to_merge",
     "commit_sha": "fc50dc8ebfef5c200f955ddbc593b1a439c68225",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2930",
     "failure_reason": null,
@@ -85320,14 +85320,14 @@
         "evidence": "A second full validation was not run because another FermatMind API ci_verify_mbti and Web contract suite were already running; the briefly invoked local command was stopped during migration setup without reaching assertions. Current PR correctness remains gated by focused checks and GitHub required checks."
       },
       "github_required_checks": {
-        "status": "retry_pending",
-        "evidence": "PR #2943 verify-bigfive initially failed because the runtime-freeze classifier treated backend/app/Services/Attempts/AttemptSubmitService.php as an unclassified Big Five-impacting change. Added an exact full-diff classifier contract; the branch-diff gate and negative classifier test now pass locally."
+        "status": "pass",
+        "evidence": "On head 56aceac8ff74041e143ea875729168fa2412bdc0, hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS all passed."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -85366,6 +85366,12 @@
         "from": "github_checks_failed_fixing",
         "to": "github_fix_local_checks_passed",
         "note": "The exact full-diff owner-binding classifier and its negative Big Five mutation case pass; ownership/idempotency tests, Pint, YAML/JSON and diff checks also remain green."
+      },
+      {
+        "at": "2026-07-11T12:10:00+08:00",
+        "from": "github_fix_local_checks_passed",
+        "to": "ready_to_merge",
+        "note": "All nine GitHub checks passed on head 56aceac8ff74041e143ea875729168fa2412bdc0; PR #2943 is CLEAN, MERGEABLE, non-draft, review-unblocked, and its five changed paths match the manifest."
       }
     ]
   }
