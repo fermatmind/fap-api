@@ -87169,9 +87169,9 @@
     "base": "main",
     "branch": "codex/big5-en-legacy-polarity-link-repair-01",
     "depends_on": ["BIG5-ZH-PUBLISHED-LINK-HREFLANG-REPAIR-01"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "e4a1e68b56d158386959f6bb51922a9a2ef6769b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2980",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -87184,7 +87184,8 @@
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
     "transitions": [
       {"at": "2026-07-11T10:50:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the eighth locked train item after verifying the Chinese link/hreflang repair dependency on origin/main; no production action is in scope."},
-      {"at": "2026-07-11T10:55:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The exact ten-row V1 overlay passed all manifest checks: seven unique English links, matching V2 Range targets, identity uniqueness, and preserved content_ready/noindex gates."}
+      {"at": "2026-07-11T10:55:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The exact ten-row V1 overlay passed all manifest checks: seven unique English links, matching V2 Range targets, identity uniqueness, and preserved content_ready/noindex gates."},
+      {"at": "2026-07-11T10:58:00Z", "from": "local_checks_passed", "to": "pr_open", "note": "Committed and pushed the scoped overlay at e4a1e68b5 and opened PR #2980; required GitHub checks are pending."}
     ]
   },
   "AUDIT-PRR2-API-01": {
