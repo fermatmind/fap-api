@@ -40123,6 +40123,53 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: BIG5-124-RUNTIME-CONTENT-INTEGRITY-REPAIR-01
+    repo: fap-api
+    depends_on: [BIG5-114-BACKEND-SITEMAP-AUTHORITY-REPAIR-01]
+    external_prerequisites:
+      - production deploy run 29159596251 completed successfully at 425e94a52c2fbeda5a2c851031c09d0257a191cc
+      - runtime closeout readback proved 20 zh Domain/V2 Range assets lack links and hreflang, and both hubs have only five links
+    branch: codex/big5-124-runtime-content-integrity-repair-01
+    title: "BIG5-124-RUNTIME-CONTENT-INTEGRITY-REPAIR-01: repair final 124-asset content integrity"
+    train_scope: big5_124_runtime_content_integrity_repair
+    status: user_authorized
+    scope:
+      - Build a final-state 124-asset V1 seed by applying the approved 93-row indexability promotion and the existing 20-row Chinese links/hreflang overlay to the locked merged seed.
+      - Add exactly two localized canonical links to each EN/ZH hub so both hubs expose at least seven links while preserving content and authority fields.
+      - Keep a corrected 124 final-state baseline, but make the controlled exact-release/exact-seed production workflow import only the 22 approved patch rows with 22 updates and zero unrelated writes.
+    allowed_paths:
+      - .github/workflows/big-five-124-runtime-content-integrity-repair.yml
+      - backend/tests/Feature/SEO/BigFive124RuntimeContentIntegrityRepairTest.php
+      - generated/big-five-124-runtime-content-integrity-repair/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute production import, deploy, indexability promotion, CMS write, search submission, frontend change, redirect change, or route expansion in this PR.
+      - Change the 114/10 topology, canonical paths, English Legacy identities, or Chinese alias noindex gates.
+    validation:
+      - node generated/big-five-124-runtime-content-integrity-repair/build-package.mjs
+      - node generated/big-five-124-runtime-content-integrity-repair/validate-package.mjs
+      - cd backend && php artisan test tests/Feature/SEO/BigFive124RuntimeContentIntegrityRepairTest.php
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/BigFive124RuntimeContentIntegrityRepairTest.php
+      - actionlint .github/workflows/big-five-124-runtime-content-integrity-repair.yml
+      - python3 -m json.tool generated/big-five-124-runtime-content-integrity-repair/big_five_124_runtime_integrity_v1_seed.json >/dev/null
+      - python3 -m json.tool generated/big-five-124-runtime-content-integrity-repair/big_five_22_runtime_integrity_patch_v1_seed.json >/dev/null
+      - python3 -m json.tool generated/big-five-124-runtime-content-integrity-repair/qa_report.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/big-five-124-runtime-content-integrity-repair.yml'); YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    workflow_policy_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: AUDIT-PRR2-API-01
     repo: fap-api
     depends_on: []
