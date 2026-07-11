@@ -6,9 +6,9 @@
     "base": "main",
     "branch": "codex/career-10k-controlled-rollout-01",
     "depends_on": ["CAREER-10K-CAPACITY-CHAOS-GATE-01"],
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": "faf98cba8",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2973",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -85893,7 +85893,8 @@
     "transitions": [
       {"at": "2026-07-11T09:45:00Z", "from": "unregistered", "to": "in_progress", "note": "Registered the fifth locked train item after verifying its Extraversion dependency on origin/main and started in an isolated clean worktree; no production action is in scope."},
       {"at": "2026-07-11T09:51:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "The V1 package build and QA validator passed for all six assets; JSON/YAML, diff, and exact changed-file scope validation also passed."},
-      {"at": "2026-07-11T09:53:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at faf98cba8."}
+      {"at": "2026-07-11T09:53:00Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact six-asset content package, QA evidence, and current manifest/state registration at faf98cba8."},
+      {"at": "2026-07-11T09:55:00Z", "from": "committed", "to": "pr_open", "note": "Pushed the scoped branch and opened PR #2973; required GitHub checks are pending."}
     ]
   },
   "AUDIT-PRR2-API-01": {
