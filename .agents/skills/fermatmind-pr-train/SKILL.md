@@ -36,8 +36,11 @@ Run exactly one fap-api PR-train item with strict scope, dependency, verificatio
 6. Run the required local acceptance commands.
 7. Open or update one PR with changed files, reason, validation, deferred items, and repository rule impact.
 8. Stop before merge unless checks, deploy status when relevant, reviews, and scope state are all clean.
+9. After merge, report verified merge and cleanup facts. Do not automatically create a standalone ledger-only PR; reconcile in the next same-repository docs/codex PR, or request explicit authorization if stale state blocks a dependency and no natural follow-up exists.
 
 ## Acceptance commands
+fermatmind-pr-train is a manifest-driven workflow, so its declared checks remain authoritative. The following full commands are not the default for ordinary ad-hoc PRs:
+
 ```bash
 cd /Users/rainie/Desktop/GitHub/fap-api/backend && php artisan route:list --no-ansi
 cd /Users/rainie/Desktop/GitHub/fap-api/backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-skill.sqlite php artisan migrate --force

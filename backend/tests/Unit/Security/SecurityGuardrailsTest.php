@@ -315,6 +315,32 @@ final class SecurityGuardrailsTest extends TestCase
         );
     }
 
+    public function test_solo_pr_flow_avoids_duplicate_full_ci_and_automatic_ledger_prs(): void
+    {
+        $repoRoot = dirname(base_path());
+        $ci = file_get_contents($repoRoot.'/.github/workflows/ci.yml');
+        $agents = file_get_contents($repoRoot.'/AGENTS.md');
+        $prTrainSkill = file_get_contents($repoRoot.'/.agents/skills/fermatmind-pr-train/SKILL.md');
+
+        $this->assertIsString($ci);
+        $this->assertStringContainsString("push:\n    branches: [main]", $ci);
+        $this->assertStringContainsString("pull_request:\n", $ci);
+        $this->assertStringContainsString("workflow_dispatch:\n", $ci);
+        $this->assertStringNotContainsString('branches: ["**"]', $ci);
+        foreach (['hygiene:', 'name: supply-chain', 'name: verify-mbti-${{ matrix.mode }}'] as $requiredJob) {
+            $this->assertStringContainsString($requiredJob, $ci);
+        }
+
+        $this->assertIsString($agents);
+        $this->assertStringContainsString('Ordinary scoped PRs default to focused local verification', $agents);
+        $this->assertStringContainsString('complete GitHub required checks', $agents);
+        $this->assertStringContainsString('Do not automatically open a standalone ledger-only PR', $agents);
+
+        $this->assertIsString($prTrainSkill);
+        $this->assertStringContainsString('Do not automatically create a standalone ledger-only PR', $prTrainSkill);
+        $this->assertStringContainsString('not the default for ordinary ad-hoc PRs', $prTrainSkill);
+    }
+
     public function test_code_scanning_uses_pinned_semgrep_install(): void
     {
         $repoRoot = dirname(base_path());
