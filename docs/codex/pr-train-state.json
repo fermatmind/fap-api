@@ -6,9 +6,8 @@
     "branch": "codex/enneagram-90-content-package-freeze-01",
     "title": "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01: freeze 90 Enneagram CMS assets",
     "depends_on": [],
-    "status": "committed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2974",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -64,6 +63,12 @@
         "from": "local_checks_passed",
         "to": "committed",
         "note": "Ready to commit package freeze after scoped staging and cached diff check."
+      },
+      {
+        "at": "2026-07-11T09:47:52.261Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR #2974 for the locked ENNEAGRAM-90 content package freeze scope."
       }
     ]
   },
