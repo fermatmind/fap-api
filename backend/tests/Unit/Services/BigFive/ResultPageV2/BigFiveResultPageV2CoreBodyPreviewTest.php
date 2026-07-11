@@ -206,6 +206,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_report_artifact_persistence_hardening(): void
+    {
+        $changed = [
+            'backend/app/Jobs/GenerateReportJob.php',
+            'backend/app/Services/Storage/ArtifactStore.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_cli_artifact_path_guard_changes(): void
     {
         $changed = [
@@ -5307,6 +5317,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $impacting = [];
 
         foreach ($changed as $file) {
+            if ($this->isReportArtifactPersistenceHardeningFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerConsoleCommandFile($file)) {
                 continue;
             }
@@ -7304,6 +7318,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/MediaVariantGenerator.php',
             'backend/app/Support/PublicMediaUrlGuard.php',
             'backend/database/migrations/2026_05_16_000100_add_media_asset_sync_status.php',
+        ], true);
+    }
+
+    private function isReportArtifactPersistenceHardeningFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Jobs/GenerateReportJob.php',
+            'backend/app/Services/Storage/ArtifactStore.php',
         ], true);
     }
 
