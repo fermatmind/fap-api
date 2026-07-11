@@ -44,16 +44,22 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringNotContainsString('steps.latest_main_guard.outputs.eligible', $deploy);
     }
 
-    public function test_auto_mode_is_fail_closed_to_a_strict_code_only_lane(): void
+    public function test_auto_mode_is_fail_closed_to_a_cumulative_code_only_lane(): void
     {
         $workflow = $this->workflow();
         $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
         $deploy = strstr($workflow, '  deploy-production:') ?: '';
 
-        $this->assertStringContainsString('fetch-depth: 2', $eligibility);
-        $this->assertStringContainsString('git diff --no-renames --name-only "${DEPLOY_SHA}^" "$DEPLOY_SHA"', $eligibility);
-        $this->assertStringContainsString('code-only scope refused path:', $eligibility);
-        $this->assertStringContainsString('rerun only with an explicit standard deployment approval', $eligibility);
+        $this->assertStringContainsString('fetch-depth: 0', $eligibility);
+        $this->assertStringContainsString('expected_deployed_revision as a lowercase 40-character deployed REVISION', $eligibility);
+        $this->assertStringContainsString('git merge-base --is-ancestor "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"', $eligibility);
+        $this->assertStringContainsString('git diff --no-renames --name-only "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"', $eligibility);
+        $this->assertStringContainsString('code-only scope refused authority or generated path:', $eligibility);
+        $this->assertStringContainsString('code-only scope refused unknown path:', $eligibility);
+        $this->assertStringContainsString('generated/*', $eligibility);
+        $this->assertStringContainsString('backend/database/*', $eligibility);
+        $this->assertStringContainsString('backend/app/Services/Cms/*', $eligibility);
+        $this->assertStringContainsString('cumulative deployed-revision diff contains a forbidden or unknown path', $eligibility);
         $this->assertStringContainsString('RESOLVED_DEPLOY_MODE=code_only', $eligibility);
         $this->assertStringContainsString('echo "deploy_mode=$RESOLVED_DEPLOY_MODE" >> "$GITHUB_OUTPUT"', $eligibility);
         $this->assertStringContainsString('DEPLOY_MODE: ${{ needs.deployment-eligibility.outputs.deploy_mode }}', $deploy);
@@ -62,6 +68,8 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('-o deploy_mode="$DEPLOY_MODE"', $deploy);
         $this->assertStringContainsString("if: \${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' }}", $deploy);
         $this->assertStringContainsString('code-only deploy: auth guest POST contract probe intentionally skipped', $deploy);
+        $this->assertStringContainsString('Verify code-only deployed baseline before writes', $deploy);
+        $this->assertStringContainsString('remote deployed REVISION does not match expected_deployed_revision', $deploy);
     }
 
     #[DataProvider('deploymentOutcomes')]

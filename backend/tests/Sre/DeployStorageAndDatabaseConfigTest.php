@@ -140,6 +140,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('release_id:', $source);
         $this->assertStringContainsString('operator_approval_phrase:', $source);
         $this->assertStringContainsString('deploy_mode:', $source);
+        $this->assertStringContainsString('expected_deployed_revision:', $source);
         $this->assertStringContainsString('default: auto', $source);
         $this->assertSame(4, substr_count($source, 'required: true'));
         $this->assertStringContainsString('actions: read', $source);
@@ -150,6 +151,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('[[ ! "$RELEASE_ID" =~ ^[A-Za-z0-9._-]{1,80}$ ]]', $source);
         $this->assertStringContainsString('I explicitly approve backend production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
         $this->assertStringContainsString('I explicitly approve backend code-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
+        $this->assertStringContainsString('expected_deployed_revision as a lowercase 40-character deployed REVISION', $source);
         $this->assertStringContainsString('.name == "Deploy Application"', $source);
         $this->assertStringContainsString('.path == ".github/workflows/deploy.yml"', $source);
         $this->assertStringContainsString('.head_branch == "main"', $source);
@@ -205,6 +207,21 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('deploy lock guard: active deploy-like process exists', $source);
         $this->assertStringContainsString('code-only deploy refuses to remove an existing lock automatically', $source);
         $this->assertStringContainsString('rm -f "$LOCK" "$META"', $source);
+    }
+
+    #[Test]
+    public function code_only_deploy_requires_a_remote_baseline_match_before_any_deploy_lock_action(): void
+    {
+        $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
+        $baselineStep = strpos($source, '- name: Verify code-only deployed baseline before writes');
+        $lockStep = strpos($source, '- name: Remote deploy lock guard');
+
+        $this->assertNotFalse($baselineStep);
+        $this->assertNotFalse($lockStep);
+        $this->assertLessThan((int) $lockStep, (int) $baselineStep);
+        $this->assertStringContainsString('test -f REVISION && tr -d', $source);
+        $this->assertStringContainsString('remote deployed REVISION does not match expected_deployed_revision', $source);
+        $this->assertStringContainsString('EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}', $source);
     }
 
     #[Test]
