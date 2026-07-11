@@ -5,9 +5,28 @@ on:
     workflows: ["Deploy Application"]
     types: [completed]
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      expected_release_sha:
+        description: "Exact 40-character latest-main SHA to deploy"
+        required: true
+        type: string
+      staging_run_id:
+        description: "Successful Deploy Application staging run for the exact SHA"
+        required: true
+        type: string
+      release_id:
+        description: "Operator-approved release identifier"
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: "Exact SHA-bound production deploy approval phrase"
+        required: true
+        type: string
 
 permissions:
   contents: read
+  actions: read
 
 env:
   TARGET: production
@@ -22,14 +41,17 @@ env:
   OPS_HOST: "ops.fermatmind.com"
   SSH_RETRY_ATTEMPTS: "3"
   SSH_RETRY_DELAY_SECONDS: "10"
+  DEPLOY_SHA: ${{ github.event_name == 'workflow_dispatch' && inputs.expected_release_sha || github.event.workflow_run.head_sha }}
+  RELEASE_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.release_id || format('auto-{0}', github.event.workflow_run.head_sha) }}
 
 jobs:
   deploy-production:
     name: Deploy fap-api production
     if: >-
-      github.event.workflow_run.conclusion == 'success' &&
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'push' &&
-      github.event.workflow_run.head_branch == 'main'
+      github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     concurrency:
@@ -42,7 +64,53 @@ jobs:
       - name: Checkout deploy revision
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.expected_release_sha || github.event.workflow_run.head_sha }}
+
+      - name: Validate manual exact-SHA approval and staging evidence
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "expected_release_sha must be a lowercase 40-character Git SHA." >&2
+            exit 2
+          fi
+          if [[ ! "$STAGING_RUN_ID" =~ ^[0-9]+$ ]]; then
+            echo "staging_run_id must be numeric." >&2
+            exit 2
+          fi
+          if [[ ! "$RELEASE_ID" =~ ^[A-Za-z0-9._-]{1,80}$ ]]; then
+            echo "release_id must use 1-80 safe identifier characters." >&2
+            exit 2
+          fi
+          EXPECTED_APPROVAL="I explicitly approve backend production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
+          if [ "$OPERATOR_APPROVAL_PHRASE" != "$EXPECTED_APPROVAL" ]; then
+            echo "operator_approval_phrase does not match the exact SHA-bound approval phrase." >&2
+            exit 2
+          fi
+
+          RUN_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}")"
+          jq -e \
+            --arg sha "$DEPLOY_SHA" \
+            '.name == "Deploy Application"
+             and .path == ".github/workflows/deploy.yml"
+             and (.event == "push" or .event == "workflow_dispatch")
+             and .status == "completed"
+             and .conclusion == "success"
+             and .head_branch == "main"
+             and .head_sha == $sha' \
+            <<<"$RUN_JSON" >/dev/null
+
+          JOBS_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}/jobs?per_page=100")"
+          jq -e \
+            '([.jobs[] | select(.name == "Deploy checks (staging)" and .conclusion == "success")] | length) == 1
+             and ([.jobs[] | select(.name == "Deploy (staging)" and .conclusion == "success")] | length) == 1' \
+            <<<"$JOBS_JSON" >/dev/null
+          echo "manual production approval and exact staging evidence verified"
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -53,8 +121,6 @@ jobs:
       - name: Confirm approved revision is still latest main
         id: latest_main_guard
         shell: bash
-        env:
-          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
           git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
@@ -62,6 +128,10 @@ jobs:
           echo "deploy_sha=$DEPLOY_SHA"
           echo "latest_main_sha=$LATEST_MAIN_SHA"
           if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
+            if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+              echo "Manual production deploy refused because expected_release_sha is not latest main." >&2
+              exit 1
+            fi
             echo "skip_deploy=true" >> "$GITHUB_OUTPUT"
             echo "::notice::Skipping production deploy because this workflow_run SHA is no longer latest main."
             exit 0
@@ -69,10 +139,8 @@ jobs:
           echo "skip_deploy=false" >> "$GITHUB_OUTPUT"
 
       - name: Report stale production deploy skip
-        if: steps.latest_main_guard.outputs.skip_deploy == 'true'
+        if: github.event_name == 'workflow_run' && steps.latest_main_guard.outputs.skip_deploy == 'true'
         shell: bash
-        env:
-          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
           echo "Production deploy skipped because a newer main SHA exists."
@@ -81,7 +149,7 @@ jobs:
 
       - name: Record single-developer auto-deploy policy
         id: auto_deploy_policy_guard
-        if: steps.latest_main_guard.outputs.skip_deploy != 'true'
+        if: github.event_name == 'workflow_run' && steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -221,7 +289,6 @@ jobs:
         shell: bash
         env:
           DEPLOYER_NO_INTERACTION: "1"
-          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
           DEPLOY_LOCK_METADATA="$(php -r '
@@ -233,6 +300,7 @@ jobs:
               "run_id" => $runId,
               "run_attempt" => getenv("GITHUB_RUN_ATTEMPT") ?: "",
               "sha" => getenv("DEPLOY_SHA") ?: getenv("GITHUB_SHA") ?: "",
+              "release_id" => getenv("RELEASE_ID") ?: "",
               "actor" => getenv("GITHUB_ACTOR") ?: "",
               "workflow" => getenv("GITHUB_WORKFLOW") ?: "",
               "repository" => $repository,
@@ -246,7 +314,7 @@ jobs:
           export DEPLOY_LOCK_RUN_ATTEMPT="$GITHUB_RUN_ATTEMPT"
           php /tmp/dep.phar deploy production -f deploy.php \
             --revision "$DEPLOY_SHA" \
-            -o release_name="production-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${DEPLOY_SHA:0:12}" \
+            -o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             -vvv --no-interaction
 
       - name: Restart queue workers through Laravel queue restart
@@ -275,8 +343,6 @@ jobs:
       - name: Verify deployed revision
         if: steps.latest_main_guard.outputs.skip_deploy != 'true'
         shell: bash
-        env:
-          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
           ssh_retry() {

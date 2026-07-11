@@ -118,6 +118,40 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function manual_production_deploy_requires_exact_approval_and_matching_staging_evidence(): void
+    {
+        $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
+
+        $this->assertStringContainsString('expected_release_sha:', $source);
+        $this->assertStringContainsString('staging_run_id:', $source);
+        $this->assertStringContainsString('release_id:', $source);
+        $this->assertStringContainsString('operator_approval_phrase:', $source);
+        $this->assertStringContainsString('actions: read', $source);
+        $this->assertStringContainsString('Validate manual exact-SHA approval and staging evidence', $source);
+        $this->assertStringContainsString('I explicitly approve backend production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
+        $this->assertStringContainsString('.name == "Deploy Application"', $source);
+        $this->assertStringContainsString('.path == ".github/workflows/deploy.yml"', $source);
+        $this->assertStringContainsString('.head_branch == "main"', $source);
+        $this->assertStringContainsString('.head_sha == $sha', $source);
+        $this->assertStringContainsString('.name == "Deploy checks (staging)" and .conclusion == "success"', $source);
+        $this->assertStringContainsString('.name == "Deploy (staging)" and .conclusion == "success"', $source);
+        $this->assertStringContainsString('Manual production deploy refused because expected_release_sha is not latest main.', $source);
+        $this->assertStringContainsString('-o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"', $source);
+    }
+
+    #[Test]
+    public function deploy_application_manual_entry_is_staging_only(): void
+    {
+        $source = $this->readRepoFile('.github/workflows/deploy.yml');
+
+        $this->assertStringContainsString('workflow_dispatch:', $source);
+        $this->assertStringContainsString('TARGET: staging', $source);
+        $this->assertStringContainsString('test "$TARGET" = "staging"', $source);
+        $this->assertStringNotContainsString('DEPLOY_HOST_PROD', $source);
+        $this->assertStringNotContainsString('- production', $source);
+    }
+
+    #[Test]
     public function production_deploy_validates_the_exact_release_revision_before_symlink_activation(): void
     {
         $source = $this->readRepoFile('deploy.php');

@@ -4,26 +4,17 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-    inputs:
-      env:
-        description: "deploy target"
-        required: true
-        default: "staging"
-        type: choice
-        options:
-          - staging
-          - production
 
 permissions:
   contents: read
 
 jobs:
   checks:
-    name: Deploy checks (${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }})
+    name: Deploy checks (staging)
     runs-on: ubuntu-latest
     timeout-minutes: 30
     concurrency:
-      group: deploy-checks-${{ github.repository }}-${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+      group: deploy-checks-${{ github.repository }}-staging
       cancel-in-progress: ${{ github.event_name == 'push' }}
 
     services:
@@ -50,17 +41,9 @@ jobs:
           --health-retries=12
 
     env:
-      TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+      TARGET: staging
       DEPLOYER_VERSION: "7.5.12"
       DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
-
-      # ====== production ======
-      DEPLOY_USER_PROD: "ubuntu"
-      DEPLOY_PORT_PROD: "22"
-      DEPLOY_HOST_PROD: "139.224.130.204"
-      DEPLOY_PATH_PROD: "/var/www/fap-api"
-      HEALTHCHECK_URL_PROD: "https://api.fermatmind.com/api/healthz"
-      AUTH_GUEST_CHECK_URL_PROD: "https://api.fermatmind.com/api/v0.3/auth/guest"
 
       # ====== staging ======
       DEPLOY_USER_STG: "ubuntu"
@@ -96,33 +79,13 @@ jobs:
         run: |
           set -euo pipefail
 
-          case "$TARGET" in
-            production)
-              DEPLOY_HOST="$DEPLOY_HOST_PROD"
-              DEPLOY_USER="$DEPLOY_USER_PROD"
-              DEPLOY_PORT="$DEPLOY_PORT_PROD"
-              DEPLOY_PATH="$DEPLOY_PATH_PROD"
-              HEALTHCHECK_URL="$HEALTHCHECK_URL_PROD"
-              AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_PROD"
-              ;;
-            staging)
-              DEPLOY_HOST="$DEPLOY_HOST_STG"
-              DEPLOY_USER="$DEPLOY_USER_STG"
-              DEPLOY_PORT="$DEPLOY_PORT_STG"
-              DEPLOY_PATH="$DEPLOY_PATH_STG"
-              HEALTHCHECK_URL="$HEALTHCHECK_URL_STG"
-              AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_STG"
-              ;;
-            *)
-              echo "invalid TARGET=$TARGET"
-              exit 2
-              ;;
-          esac
-
-          if [ "$TARGET" = "production" ] && [ "$DEPLOY_HOST" = "122.152.221.126" ]; then
-            echo "Refusing production deploy to retired Tencent Node3: $DEPLOY_HOST"
-            exit 1
-          fi
+          test "$TARGET" = "staging"
+          DEPLOY_HOST="$DEPLOY_HOST_STG"
+          DEPLOY_USER="$DEPLOY_USER_STG"
+          DEPLOY_PORT="$DEPLOY_PORT_STG"
+          DEPLOY_PATH="$DEPLOY_PATH_STG"
+          HEALTHCHECK_URL="$HEALTHCHECK_URL_STG"
+          AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_STG"
 
           {
             echo "DEPLOY_HOST=$DEPLOY_HOST"
@@ -197,31 +160,23 @@ jobs:
           bash ./backend/scripts/ci_verify_mbti.sh
 
   deploy:
-    name: Deploy (${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }})
+    name: Deploy (staging)
     needs: checks
     if: needs.checks.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     concurrency:
-      group: deploy-${{ github.repository }}-${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+      group: deploy-${{ github.repository }}-staging
       cancel-in-progress: false
 
     # 关键：绑定 GitHub Environment，使 secrets.SSH_PRIVATE_KEY 读取到对应环境的 Environment Secret
     environment:
-      name: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+      name: staging
 
     env:
-      TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+      TARGET: staging
       DEPLOYER_VERSION: "7.5.12"
       DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
-
-      # ====== production ======
-      DEPLOY_USER_PROD: "ubuntu"
-      DEPLOY_PORT_PROD: "22"
-      DEPLOY_HOST_PROD: "139.224.130.204"
-      DEPLOY_PATH_PROD: "/var/www/fap-api"
-      HEALTHCHECK_URL_PROD: "https://api.fermatmind.com/api/healthz"
-      AUTH_GUEST_CHECK_URL_PROD: "https://api.fermatmind.com/api/v0.3/auth/guest"
 
       # ====== staging ======
       DEPLOY_USER_STG: "ubuntu"
@@ -248,33 +203,13 @@ jobs:
         run: |
           set -euo pipefail
 
-          case "$TARGET" in
-            production)
-              DEPLOY_HOST="$DEPLOY_HOST_PROD"
-              DEPLOY_USER="$DEPLOY_USER_PROD"
-              DEPLOY_PORT="$DEPLOY_PORT_PROD"
-              DEPLOY_PATH="$DEPLOY_PATH_PROD"
-              HEALTHCHECK_URL="$HEALTHCHECK_URL_PROD"
-              AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_PROD"
-              ;;
-            staging)
-              DEPLOY_HOST="$DEPLOY_HOST_STG"
-              DEPLOY_USER="$DEPLOY_USER_STG"
-              DEPLOY_PORT="$DEPLOY_PORT_STG"
-              DEPLOY_PATH="$DEPLOY_PATH_STG"
-              HEALTHCHECK_URL="$HEALTHCHECK_URL_STG"
-              AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_STG"
-              ;;
-            *)
-              echo "invalid TARGET=$TARGET"
-              exit 2
-              ;;
-          esac
-
-          if [ "$TARGET" = "production" ] && [ "$DEPLOY_HOST" = "122.152.221.126" ]; then
-            echo "Refusing production deploy to retired Tencent Node3: $DEPLOY_HOST"
-            exit 1
-          fi
+          test "$TARGET" = "staging"
+          DEPLOY_HOST="$DEPLOY_HOST_STG"
+          DEPLOY_USER="$DEPLOY_USER_STG"
+          DEPLOY_PORT="$DEPLOY_PORT_STG"
+          DEPLOY_PATH="$DEPLOY_PATH_STG"
+          HEALTHCHECK_URL="$HEALTHCHECK_URL_STG"
+          AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_STG"
 
           {
             echo "DEPLOY_HOST=$DEPLOY_HOST"
@@ -630,20 +565,9 @@ jobs:
         run: |
           set -euo pipefail
 
-          case "$TARGET" in
-            production)
-              OPS_HOST="ops.fermatmind.com"
-              ASSERT_ROOT_REDIRECT="yes"
-              ;;
-            staging)
-              OPS_HOST="staging.fermatmind.com"
-              ASSERT_ROOT_REDIRECT="no"
-              ;;
-            *)
-              echo "invalid TARGET=$TARGET"
-              exit 2
-              ;;
-          esac
+          test "$TARGET" = "staging"
+          OPS_HOST="staging.fermatmind.com"
+          ASSERT_ROOT_REDIRECT="no"
 
           ROOT_URL="https://${OPS_HOST}/"
           ADMIN_URL="https://${OPS_HOST}/admin"
@@ -747,18 +671,8 @@ jobs:
         run: |
           set -euo pipefail
 
-          case "$TARGET" in
-            production)
-              OPS_HOST="ops.fermatmind.com"
-              ;;
-            staging)
-              OPS_HOST="staging.fermatmind.com"
-              ;;
-            *)
-              echo "invalid TARGET=$TARGET"
-              exit 2
-              ;;
-          esac
+          test "$TARGET" = "staging"
+          OPS_HOST="staging.fermatmind.com"
 
           LOGIN_URL="https://${OPS_HOST}/ops/login"
           THEME_URL="https://${OPS_HOST}/css/app/ops-theme.css"
