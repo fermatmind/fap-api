@@ -4485,6 +4485,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_10k_controlled_rollout_gate(): void
+    {
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges([
+            'backend/app/Services/Career/Career10kControlledRolloutGate.php',
+        ], '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_salary_asset_staging_preview_changes(): void
     {
         $changed = [
@@ -6225,6 +6232,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCareer10kCapacityChaosGateFile($file)) {
+                continue;
+            }
+
+            if ($file === 'backend/app/Services/Career/Career10kControlledRolloutGate.php') {
                 continue;
             }
 

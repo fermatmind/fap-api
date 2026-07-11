@@ -1,14 +1,14 @@
 {
-  "CAREER-10K-CAPACITY-CHAOS-GATE-01": {
-    "id": "CAREER-10K-CAPACITY-CHAOS-GATE-01",
+  "CAREER-10K-CONTROLLED-ROLLOUT-01": {
+    "id": "CAREER-10K-CONTROLLED-ROLLOUT-01",
     "repo": "fap-api",
-    "title": "CAREER-10K-CAPACITY-CHAOS-GATE-01 real 10k capacity and chaos gate",
+    "title": "CAREER-10K-CONTROLLED-ROLLOUT-01 controlled batches and rollback gate",
     "base": "main",
-    "branch": "codex/career-10k-capacity-chaos-gate-01",
-    "depends_on": ["CAREER-RUNTIME-SLO-ALERTING-01", "CAREER-DETAIL-READ-MODEL-10K-01", "CAREER-DETAIL-DELIVERY-10K-01"],
-    "status": "ready_to_merge",
-    "commit_sha": "cc7484c6f",
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/2968",
+    "branch": "codex/career-10k-controlled-rollout-01",
+    "depends_on": ["CAREER-10K-CAPACITY-CHAOS-GATE-01"],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -20,10 +20,37 @@
     "publish_allowed": false,
     "deploy_allowed": false,
     "checks": {
+      "dependency": {"status": "pass", "evidence": "PR7 #2965 merged as db8eff09ae0f8b01ae5a40fd475872c014e49336."},
+      "focused_local": {"status": "pass", "evidence": "PR8 command tests pass 16 assertions; freeze classifier passes 4 assertions; changed-PHP Pint and Composer validation pass."},
+      "scope_validation": {"status": "pass", "evidence": "All changes are within the user-authorized PR8 manifest scope."},
+      "github_required": {"status": "pending"}
+    }
+  },
+  "CAREER-10K-CAPACITY-CHAOS-GATE-01": {
+    "id": "CAREER-10K-CAPACITY-CHAOS-GATE-01",
+    "repo": "fap-api",
+    "title": "CAREER-10K-CAPACITY-CHAOS-GATE-01 real 10k capacity and chaos gate",
+    "base": "main",
+    "branch": "codex/career-10k-capacity-chaos-gate-01",
+    "depends_on": ["CAREER-RUNTIME-SLO-ALERTING-01", "CAREER-DETAIL-READ-MODEL-10K-01", "CAREER-DETAIL-DELIVERY-10K-01"],
+    "status": "merged",
+    "commit_sha": "db8eff09ae0f8b01ae5a40fd475872c014e49336",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2965",
+    "failure_reason": null,
+    "merged_at": "2026-07-11T08:40:47Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "checks": {
       "dependency": {"status": "pass", "evidence": "PR4, PR5, and cross-repository PR6 are merged."},
       "focused_local": {"status": "pass", "evidence": "2 command tests / 39 assertions and 2 freeze-classifier tests / 4 assertions passed; changed-PHP scoped Pint and composer validate passed."},
       "scope_validation": {"status": "pass", "evidence": "All changed files are within the user-authorized PR7 manifest scope."},
-      "github_required": {"status": "pending"}
+      "github_required": {"status": "pass", "evidence": "All required checks passed on head ab73cb02c99847a42c7bcc225bdb52dd9854952e before squash merge."}
     }
   },
   "CAREER-DETAIL-READ-MODEL-10K-01": {

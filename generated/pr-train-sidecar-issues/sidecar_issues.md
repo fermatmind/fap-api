@@ -89,6 +89,17 @@
   - Complete the GSC/read-model quality proof card before any TDK/CTR repair selection.
 - whether train continued: `true`
 
+## CAREER-10K-CONTROLLED-ROLLOUT-01 inherited full-suite baselines
+
+- repo: `fap-api`
+- PR id / branch: `CAREER-10K-CONTROLLED-ROLLOUT-01` / `codex/career-10k-controlled-rollout-01`
+- blocker type: `authorized_external_baseline_failure`
+- evidence: full Composer and repository-wide Pint failures were previously reproduced on unmodified `origin/main`; PR8 focused tests, changed-PHP Pint, Composer validation, and scope validation pass.
+- why not current PR scope: failures predate and reproduce without the read-only rollout gate.
+- whether required checks are affected: `false`; GitHub required checks remain mandatory.
+- recommended follow-up: repair the repository-wide baselines separately.
+- whether train continued: `true`
+
 ## CAREER-10K-CAPACITY-CHAOS-GATE-01 inherited full-suite baselines
 
 - repo: `fap-api`
