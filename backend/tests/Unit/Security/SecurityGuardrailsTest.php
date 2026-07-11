@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Security;
 
+use App\Http\Controllers\API\V0_3\AttemptReadController;
+use App\Http\Controllers\API\V0_3\MbtiAttributionEventController;
+use Illuminate\Routing\Route;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
@@ -54,6 +57,34 @@ final class SecurityGuardrailsTest extends TestCase
         'PartnerApiKeyAuth',
     ];
 
+    /**
+     * Exact controller-level authorization contracts for mutating routes that
+     * intentionally cannot use a standard auth middleware.
+     *
+     * @var array<string, array{action:string,source:string,required_patterns:list<string>}>
+     */
+    private const CONTROLLER_GUARDED_MUTATING_ROUTES = [
+        '/api/v0.3/attempts/{id}/eq/agent-runtime/messages' => [
+            'action' => AttemptReadController::class.'@eqAgentRuntimeMessage',
+            'source' => 'app/Http/Controllers/API/V0_3/AttemptReadController.php',
+            'required_patterns' => [
+                '/function\s+eqAgentRuntimeMessage\b[\s\S]*?\$this->eqAgentContext\(\$request,\s*\$id\)/',
+                '/function\s+eqAgentContext\b[\s\S]*?\$this->resolveAttemptForReportRead\(\$request,\s*\$id,\s*\$scaleCode\)/',
+                '/function\s+eqAgentContext\b[\s\S]*?\$this->enforceEmailBindingForRead\(\$request,\s*\$orgId,\s*\$attempt,\s*\$scaleCode\)/',
+            ],
+        ],
+        '/api/v0.5/seo/attribution/events' => [
+            'action' => MbtiAttributionEventController::class.'@store',
+            'source' => 'app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php',
+            'required_patterns' => [
+                '/function\s+store\b[\s\S]*?\$this->authorizeIngest\(\$request\)/',
+                '/function\s+authorizeIngest\b[\s\S]*?config\([\'\"]fap\.events\.ingest_token[\'\"]/',
+                '/function\s+authorizeIngest\b[\s\S]*?\$configuredToken\s*===\s*[\'\"][\'\"][\s\S]*?503/',
+                '/function\s+authorizeIngest\b[\s\S]*?hash_equals\(\$configuredToken,\s*\$provided\)/',
+            ],
+        ],
+    ];
+
     /** @var array<int, string> */
     private const OWNERSHIP_404_PATHS = [
         'app/Http/Controllers/API/V0_2/LegacyReportController.php',
@@ -81,9 +112,45 @@ final class SecurityGuardrailsTest extends TestCase
 
     public function test_state_changing_routes_require_auth_or_explicit_allowlist(): void
     {
+        $violations = $this->mutatingRouteViolations(app('router')->getRoutes()->getRoutes());
+
+        $this->assertSame(
+            [],
+            $violations,
+            "Mutating API routes must require auth middleware, an explicit public allowlist, or an exact controller guard contract.\n".implode("\n", $violations)
+        );
+    }
+
+    public function test_unprotected_mutating_route_fixture_is_rejected(): void
+    {
+        $route = new Route(['POST'], 'api/security-guard-fixture', static fn (): null => null);
+
+        $this->assertSame(
+            ['POST /api/security-guard-fixture [mw=]'],
+            $this->mutatingRouteViolations([$route])
+        );
+    }
+
+    public function test_controller_guarded_mutating_routes_keep_exact_owner_and_token_contracts(): void
+    {
+        foreach (self::CONTROLLER_GUARDED_MUTATING_ROUTES as $uri => $contract) {
+            $route = collect(app('router')->getRoutes()->getRoutes())
+                ->first(static fn (Route $candidate): bool => '/'.ltrim((string) $candidate->uri(), '/') === $uri);
+
+            $this->assertInstanceOf(Route::class, $route, "Missing audited route {$uri}");
+            $this->assertTrue($this->hasAuditedControllerGuard($route, $uri), "Controller guard contract drifted for {$uri}");
+        }
+    }
+
+    /**
+     * @param  iterable<int, Route>  $routes
+     * @return list<string>
+     */
+    private function mutatingRouteViolations(iterable $routes): array
+    {
         $violations = [];
 
-        foreach (app('router')->getRoutes()->getRoutes() as $route) {
+        foreach ($routes as $route) {
             $methods = array_values(array_diff($route->methods(), ['HEAD', 'OPTIONS']));
             if (! $this->hasMutatingMethod($methods)) {
                 continue;
@@ -95,6 +162,10 @@ final class SecurityGuardrailsTest extends TestCase
             }
 
             if ($this->isExplicitPublicMutatingRoute($uri)) {
+                continue;
+            }
+
+            if ($this->hasAuditedControllerGuard($route, $uri)) {
                 continue;
             }
 
@@ -117,11 +188,7 @@ final class SecurityGuardrailsTest extends TestCase
 
         sort($violations);
 
-        $this->assertSame(
-            [],
-            $violations,
-            "Mutating API routes must require auth middleware unless explicitly allowlisted.\n".implode("\n", $violations)
-        );
+        return $violations;
     }
 
     public function test_v0_3_attempt_submit_keeps_token_auth_and_submit_throttle(): void
@@ -541,6 +608,27 @@ final class SecurityGuardrailsTest extends TestCase
     private function isExplicitPublicMutatingRoute(string $uri): bool
     {
         return in_array($uri, self::EXPLICIT_PUBLIC_MUTATING_ROUTES, true);
+    }
+
+    private function hasAuditedControllerGuard(Route $route, string $uri): bool
+    {
+        $contract = self::CONTROLLER_GUARDED_MUTATING_ROUTES[$uri] ?? null;
+        if (! is_array($contract) || $route->getActionName() !== $contract['action']) {
+            return false;
+        }
+
+        $source = file_get_contents(base_path($contract['source']));
+        if (! is_string($source)) {
+            return false;
+        }
+
+        foreach ($contract['required_patterns'] as $pattern) {
+            if (preg_match($pattern, $source) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function isSecurityGateIgnored(string $source, int $line, string $label): bool

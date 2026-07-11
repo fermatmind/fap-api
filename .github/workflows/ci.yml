@@ -240,6 +240,10 @@ jobs:
           if [ ! -f .env ]; then cp .env.example .env; fi
           php artisan key:generate --force
 
+      - name: Enforce mutating-route security guardrails
+        working-directory: backend
+        run: php artisan test tests/Unit/Security/SecurityGuardrailsTest.php --no-ansi
+
       - name: Download content packs index artifact
         uses: actions/download-artifact@v7
         with:
