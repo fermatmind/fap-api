@@ -63,7 +63,7 @@ class AuditLogger
         $actorAdminId = null;
         $guard = (string) config('admin.guard', 'admin');
         $user = auth($guard)->user();
-        if ($user && property_exists($user, 'id')) {
+        if ($user && isset($user->id)) {
             $actorAdminId = (int) $user->id;
         }
 

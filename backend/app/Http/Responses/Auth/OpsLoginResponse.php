@@ -21,11 +21,12 @@ class OpsLoginResponse implements LoginResponseContract
 
         $guard = (string) config('admin.guard', 'admin');
         $user = auth($guard)->user();
-        if (
-            $user
-            && (bool) config('admin.totp.enabled', true)
-            && $user->totp_enabled_at !== null
-        ) {
+        $totpRequired = (bool) config('admin.totp.enabled', true) || app()->environment('production');
+        if ($user && $totpRequired && $user->totp_enabled_at === null) {
+            return redirect()->to('/ops/two-factor-enrollment');
+        }
+
+        if ($user && $totpRequired && $user->totp_enabled_at !== null) {
             return redirect()->to('/ops/two-factor-challenge');
         }
 

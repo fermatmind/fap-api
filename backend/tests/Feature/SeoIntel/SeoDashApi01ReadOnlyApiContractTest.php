@@ -29,6 +29,7 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
         parent::setUp();
 
         config([
+            'admin.totp.enabled' => false,
             'database.connections.seo_intel' => [
                 'driver' => 'sqlite',
                 'database' => ':memory:',
@@ -89,6 +90,7 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
     #[Test]
     public function totp_enrolled_admin_must_complete_the_challenge_before_reading_seo_intel_api(): void
     {
+        config()->set('admin.totp.enabled', true);
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
         $admin->forceFill(['totp_enabled_at' => now()])->save();
 

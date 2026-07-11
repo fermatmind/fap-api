@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Services\Auth;
 
 use App\Models\AdminUser;
+use App\Services\Audit\AuditLogger;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -107,6 +109,7 @@ class AdminTotpService
                 ->where('admin_user_id', (int) $user->id)
                 ->where('code_hash', $hash)
                 ->whereNull('used_at')
+                ->where('created_at', '>=', now()->subDays(max(1, (int) config('admin.totp.recovery_ttl_days', 30))))
                 ->lockForUpdate()
                 ->first();
 
@@ -120,6 +123,17 @@ class AdminTotpService
                     'used_at' => now(),
                     'updated_at' => now(),
                 ]);
+
+            $request = request() instanceof Request
+                ? request()
+                : Request::create('/ops/two-factor-challenge', 'POST');
+            app(AuditLogger::class)->log(
+                $request,
+                'admin_totp_recovery_code_used',
+                'AdminUser',
+                (string) $user->id,
+                ['rotated_required' => true]
+            );
 
             return true;
         });

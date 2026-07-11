@@ -1278,6 +1278,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_cms_admin_mfa_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/AdminBootstrapOwner.php',
+            'backend/app/Filament/Ops/Pages/TwoFactorChallenge.php',
+            'backend/app/Filament/Ops/Pages/TwoFactorEnrollment.php',
+            'backend/app/Http/Middleware/EnsureAdminTotpVerified.php',
+            'backend/app/Http/Responses/Auth/OpsLoginResponse.php',
+            'backend/app/Services/Audit/AuditLogger.php',
+            'backend/app/Services/Auth/AdminTotpService.php',
+            'backend/config/admin.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_cms_media_pipeline_files(): void
     {
         $changed = [
@@ -5501,6 +5517,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCmsAdminMfaFile($file)) {
+                continue;
+            }
+
             if ($this->isCmsMediaPipelineFile($file)) {
                 continue;
             }
@@ -7231,6 +7251,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Pages/ContentReleasePage.php',
             'backend/app/Filament/Ops/Resources/CareerGuideResource.php',
             'backend/app/Filament/Ops/Resources/CareerJobResource.php',
+        ], true);
+    }
+
+    private function isCmsAdminMfaFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/AdminBootstrapOwner.php',
+            'backend/app/Filament/Ops/Pages/TwoFactorChallenge.php',
+            'backend/app/Filament/Ops/Pages/TwoFactorEnrollment.php',
+            'backend/app/Http/Middleware/EnsureAdminTotpVerified.php',
+            'backend/app/Http/Responses/Auth/OpsLoginResponse.php',
+            'backend/app/Services/Audit/AuditLogger.php',
+            'backend/app/Services/Auth/AdminTotpService.php',
+            'backend/config/admin.php',
         ], true);
     }
 

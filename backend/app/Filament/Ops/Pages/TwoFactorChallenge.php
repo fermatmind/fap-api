@@ -28,9 +28,17 @@ class TwoFactorChallenge extends Page
             return;
         }
 
-        if (! (bool) config('admin.totp.enabled', true) || $user->totp_enabled_at === null) {
+        $totpRequired = (bool) config('admin.totp.enabled', true) || app()->environment('production');
+        if (! $totpRequired) {
             session(['ops_admin_totp_verified_user_id' => (int) $user->id]);
             $this->redirect('/ops/select-org', navigate: true);
+
+            return;
+        }
+
+        if ($user->totp_enabled_at === null) {
+            session()->forget('ops_admin_totp_verified_user_id');
+            $this->redirectRoute('filament.ops.pages.two-factor-enrollment', navigate: true);
 
             return;
         }
