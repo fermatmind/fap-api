@@ -87313,7 +87313,7 @@
     "base": "main",
     "branch": "codex/big5-124-runtime-content-integrity-repair-01",
     "depends_on": ["BIG5-114-BACKEND-SITEMAP-AUTHORITY-REPAIR-01"],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "8a0493fc8f88bf5374e3b4478e69a6944df18c3e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2999",
     "failure_reason": null,
@@ -87333,8 +87333,8 @@
       "importer_regression": {"status": "pass", "evidence": "Production-state simulation imported the original 124 seed plus 93-row promotion, then proved the repair patch produces exactly 22 updates, zero skips/errors and preserves 114 indexable assets; 1 test passed with 107 assertions."},
       "static_validation": {"status": "pass", "evidence": "Builder/validator, Pint, actionlint, YAML/JSON parse, git diff and allowed-path checks passed."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-12T00:50:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the explicitly authorized final-state 124 seed and controlled 22-update integrity repair workflow in an isolated worktree. No production action is authorized in this PR."}, {"at": "2026-07-12T01:05:00+08:00", "from": "in_progress", "to": "local_verified", "note": "Final-state 124 baseline, bounded 22-row patch, exact-hash workflow, importer simulation, static checks and scoped validation passed. No production action occurred."}, {"at": "2026-07-12T01:08:00+08:00", "from": "local_verified", "to": "pr_open", "note": "Committed and opened PR #2999 for the exact authorized scope; required GitHub checks are pending and no production action occurred."}]
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-12T00:50:00+08:00", "from": "unregistered", "to": "in_progress", "note": "Started the explicitly authorized final-state 124 seed and controlled 22-update integrity repair workflow in an isolated worktree. No production action is authorized in this PR."}, {"at": "2026-07-12T01:05:00+08:00", "from": "in_progress", "to": "local_verified", "note": "Final-state 124 baseline, bounded 22-row patch, exact-hash workflow, importer simulation, static checks and scoped validation passed. No production action occurred."}, {"at": "2026-07-12T01:08:00+08:00", "from": "local_verified", "to": "pr_open", "note": "Committed and opened PR #2999 for the exact authorized scope; required GitHub checks are pending and no production action occurred."}, {"at": "2026-07-12T01:07:13+08:00", "from": "pr_open", "to": "ready_to_merge", "note": "All nine required GitHub checks passed; exact allowed paths, changed files, PR body, clean merge state and squash merge policy were revalidated. No production action occurred."}]
   },
   "AUDIT-PRR2-API-01": {
     "id": "AUDIT-PRR2-API-01",
