@@ -73,6 +73,72 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('items.0.locale', 'zh-CN');
     }
 
+    public function test_list_honors_per_page_and_rejects_out_of_range_values(): void
+    {
+        foreach (range(1, 8) as $index) {
+            $this->createArticle([
+                'slug' => sprintf('paginated-article-%02d', $index),
+                'title' => sprintf('Paginated Article %02d', $index),
+            ]);
+        }
+
+        $this->getJson('/api/v0.5/articles?locale=en&page=1&per_page=6')
+            ->assertOk()
+            ->assertJsonPath('pagination.per_page', 6)
+            ->assertJsonPath('pagination.total', 8)
+            ->assertJsonPath('pagination.last_page', 2)
+            ->assertJsonCount(6, 'items');
+
+        $this->getJson('/api/v0.5/articles?per_page=0')->assertStatus(422);
+        $this->getJson('/api/v0.5/articles?per_page=101')->assertStatus(422);
+    }
+
+    public function test_list_returns_lightweight_card_payload_with_bounded_excerpt(): void
+    {
+        foreach (range(1, 6) as $index) {
+            $this->createArticle([
+                'slug' => sprintf('lightweight-article-%02d', $index),
+                'title' => sprintf('Lightweight Article %02d', $index),
+                'excerpt' => null,
+                'content_md' => '# Heading '.str_repeat('Long article body content. ', 1000),
+                'author_name' => 'FermatMind Editorial',
+                'reading_minutes' => 8,
+            ]);
+        }
+
+        $response = $this->getJson('/api/v0.5/articles?locale=en&per_page=6');
+
+        $response->assertOk()
+            ->assertJsonCount(6, 'items')
+            ->assertJsonPath('items.0.author_name', 'FermatMind Editorial')
+            ->assertJsonPath('items.0.reading_minutes', 8)
+            ->assertJsonMissingPath('items.0.content_md')
+            ->assertJsonMissingPath('items.0.content_html')
+            ->assertJsonMissingPath('items.0.body_visual')
+            ->assertJsonMissingPath('items.0.seo_meta');
+
+        $this->assertNotSame('', trim((string) $response->json('items.0.excerpt')));
+        $this->assertLessThanOrEqual(241, mb_strlen((string) $response->json('items.0.excerpt')));
+        $this->assertLessThan(75 * 1024, strlen((string) $response->getContent()));
+    }
+
+    public function test_detail_keeps_full_article_payload_after_list_optimization(): void
+    {
+        $article = $this->createArticle(
+            [
+                'slug' => 'full-detail-contract',
+                'content_md' => '# Full detail body',
+            ],
+            ['seo_title' => 'Article Title']
+        );
+        $this->createSeoMeta($article);
+
+        $this->getJson('/api/v0.5/articles/full-detail-contract?locale=en')
+            ->assertOk()
+            ->assertJsonPath('article.content_md', '## Full detail body')
+            ->assertJsonPath('article.seo_meta.seo_title', 'Article Title');
+    }
+
     public function test_list_orders_newest_articles_before_legacy_voice_order(): void
     {
         $this->createArticle([
