@@ -18,7 +18,7 @@ class EnsureAdminTotpVerified
             return $next($request);
         }
 
-        $totpRequired = (bool) config('admin.totp.enabled', true) || app()->environment('production');
+        $totpRequired = (bool) config('admin.totp.enabled', true);
         if (! $totpRequired) {
             $request->session()->put('ops_admin_totp_verified_user_id', (int) $user->id);
 

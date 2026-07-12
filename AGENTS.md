@@ -111,7 +111,7 @@ Prefer a repo-compatible default implementation and mark options as optional.
 
 ### CMS Administrator MFA Discipline
 - When TOTP is required, an unenrolled administrator may access only enrollment, recovery/challenge, and logout surfaces; ordinary Ops and CMS routes fail closed.
-- Production requires TOTP even if the environment toggle is misconfigured. Recovery codes are single-use, time-limited, and audited; their use requires credential rotation.
+- TOTP is enabled by default and may be explicitly disabled through `OPS_ADMIN_TOTP_ENABLED=false`; production must honor that runtime configuration rather than force TOTP unconditionally. Recovery codes are single-use, time-limited, and audited; their use requires credential rotation.
 - Owner bootstrap passwords must use hidden interactive input and the configured strength policy; plaintext password command options are prohibited.
 
 ### DailyGiving Proof Handling Discipline

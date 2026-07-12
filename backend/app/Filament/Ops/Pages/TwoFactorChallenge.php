@@ -28,7 +28,7 @@ class TwoFactorChallenge extends Page
             return;
         }
 
-        $totpRequired = (bool) config('admin.totp.enabled', true) || app()->environment('production');
+        $totpRequired = (bool) config('admin.totp.enabled', true);
         if (! $totpRequired) {
             session(['ops_admin_totp_verified_user_id' => (int) $user->id]);
             $this->redirect('/ops/select-org', navigate: true);
