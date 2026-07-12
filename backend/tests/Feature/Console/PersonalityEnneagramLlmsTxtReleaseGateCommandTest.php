@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature\Console;
 
 use App\Models\PersonalityPublicContentAsset;
+use App\Services\Cms\EnneagramCmsPublishGateService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 final class PersonalityEnneagramLlmsTxtReleaseGateCommandTest extends TestCase
@@ -17,7 +17,7 @@ final class PersonalityEnneagramLlmsTxtReleaseGateCommandTest extends TestCase
 
     protected function tearDown(): void
     {
-        putenv('ENNEAGRAM_LLMS_TXT_WRITE_ENABLED');
+        config(['personality.enneagram_llms_txt_write_enabled' => false]);
         parent::tearDown();
     }
 
@@ -25,14 +25,8 @@ final class PersonalityEnneagramLlmsTxtReleaseGateCommandTest extends TestCase
     {
         $this->seedCohort();
 
-        $exit = Artisan::call('personality:enneagram-llms-txt-release-gate', [
-            '--dry-run' => true,
-            '--deployed-sha' => self::DEPLOYED_SHA,
-            '--json' => true,
-        ]);
-        $payload = $this->payload();
+        $payload = $this->gate()->llmsTxtRelease(self::DEPLOYED_SHA);
 
-        $this->assertSame(0, $exit);
         $this->assertSame('dry_run_ready', $payload['status']);
         $this->assertSame(116, $payload['target_count']);
         $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', $payload['cohort_sha256']);
@@ -48,15 +42,12 @@ final class PersonalityEnneagramLlmsTxtReleaseGateCommandTest extends TestCase
         $cohortSha = $this->dryRun()['cohort_sha256'];
         $before = PersonalityPublicContentAsset::query()->orderBy('id')->get()->map(fn ($asset) => $asset->getAttributes())->all();
 
-        $blocked = Artisan::call('personality:enneagram-llms-txt-release-gate', $this->writeArgs($cohortSha));
-        $this->assertSame(1, $blocked);
-        $this->assertContains('process_write_gate_disabled', $this->payload()['issues']);
+        $blocked = $this->write($cohortSha);
+        $this->assertContains('process_write_gate_disabled', $blocked['issues']);
 
-        putenv('ENNEAGRAM_LLMS_TXT_WRITE_ENABLED=true');
-        $exit = Artisan::call('personality:enneagram-llms-txt-release-gate', $this->writeArgs($cohortSha));
-        $payload = $this->payload();
+        config(['personality.enneagram_llms_txt_write_enabled' => true]);
+        $payload = $this->write($cohortSha);
 
-        $this->assertSame(0, $exit);
         $this->assertSame('released', $payload['status']);
         $this->assertSame(116, $payload['updated_count']);
         $this->assertSame(116, PersonalityPublicContentAsset::query()->where('llms_eligible', true)->count());
@@ -70,9 +61,7 @@ final class PersonalityEnneagramLlmsTxtReleaseGateCommandTest extends TestCase
             $this->assertSame($attributes, $afterAttributes);
         }
 
-        $replay = Artisan::call('personality:enneagram-llms-txt-release-gate', $this->writeArgs($cohortSha));
-        $this->assertSame(0, $replay);
-        $this->assertSame('already_released', $this->payload()['status']);
+        $this->assertSame('already_released', $this->write($cohortSha)['status']);
     }
 
     public function test_gate_fails_closed_for_count_partial_private_source_and_visible_evidence_defects(): void
@@ -93,13 +82,7 @@ final class PersonalityEnneagramLlmsTxtReleaseGateCommandTest extends TestCase
         $asset->content_sections_json = [];
         $asset->evidence_notes_json = [];
         $asset->save();
-        $exit = Artisan::call('personality:enneagram-llms-txt-release-gate', [
-            '--dry-run' => true,
-            '--deployed-sha' => self::DEPLOYED_SHA,
-            '--json' => true,
-        ]);
-        $issues = implode('|', $this->payload()['issues']);
-        $this->assertSame(1, $exit);
+        $issues = implode('|', $this->gate()->llmsTxtRelease(self::DEPLOYED_SHA)['issues']);
         $this->assertStringContainsString('canonical_invalid_or_private', $issues);
         $this->assertStringContainsString('source_provenance_invalid', $issues);
         $this->assertStringContainsString('visible_content_incomplete', $issues);
@@ -116,8 +99,8 @@ final class PersonalityEnneagramLlmsTxtReleaseGateCommandTest extends TestCase
         $this->assertStringContainsString('operation_mode:', $workflow);
         $this->assertStringContainsString('dry_run', $workflow);
         $this->assertStringContainsString('write', $workflow);
-        $this->assertStringContainsString('personality:enneagram-llms-txt-release-gate --dry-run', $workflow);
-        $this->assertStringContainsString('ENNEAGRAM_LLMS_TXT_WRITE_ENABLED=true', $workflow);
+        $this->assertStringContainsString('llmsTxtRelease', $workflow);
+        $this->assertStringContainsString('personality.enneagram_llms_txt_write_enabled', $workflow);
         $this->assertStringContainsString('llms_full_release', $workflow);
         $this->assertStringNotContainsString('llms-full.txt', $workflow);
         $this->assertStringNotContainsString('IndexNow', $workflow);
@@ -126,46 +109,28 @@ final class PersonalityEnneagramLlmsTxtReleaseGateCommandTest extends TestCase
     /** @return array<string, mixed> */
     private function dryRun(): array
     {
-        $exit = Artisan::call('personality:enneagram-llms-txt-release-gate', [
-            '--dry-run' => true,
-            '--deployed-sha' => self::DEPLOYED_SHA,
-            '--json' => true,
-        ]);
-        $this->assertSame(0, $exit);
-
-        return $this->payload();
+        return $this->gate()->llmsTxtRelease(self::DEPLOYED_SHA);
     }
 
-    /** @return array<string, mixed> */
-    private function writeArgs(string $cohortSha): array
+    /** @return array<string,mixed> */
+    private function write(string $cohortSha): array
     {
-        return [
-            '--write' => true,
-            '--deployed-sha' => self::DEPLOYED_SHA,
-            '--confirm-cohort-sha256' => $cohortSha,
-            '--operator-approved' => 'ENNEAGRAM-LLMS-TXT-RELEASE-01:'.self::DEPLOYED_SHA.':'.$cohortSha,
-            '--json' => true,
-        ];
+        return $this->gate()->llmsTxtRelease(
+            self::DEPLOYED_SHA,
+            true,
+            $cohortSha,
+            'ENNEAGRAM-LLMS-TXT-RELEASE-01:'.self::DEPLOYED_SHA.':'.$cohortSha,
+        );
     }
 
     private function assertBlockedWith(string $issue): void
     {
-        $exit = Artisan::call('personality:enneagram-llms-txt-release-gate', [
-            '--dry-run' => true,
-            '--deployed-sha' => self::DEPLOYED_SHA,
-            '--json' => true,
-        ]);
-        $this->assertSame(1, $exit);
-        $this->assertContains($issue, $this->payload()['issues']);
+        $this->assertContains($issue, $this->gate()->llmsTxtRelease(self::DEPLOYED_SHA)['issues']);
     }
 
-    /** @return array<string, mixed> */
-    private function payload(): array
+    private function gate(): EnneagramCmsPublishGateService
     {
-        $payload = json_decode(trim(Artisan::output()), true, 512, JSON_THROW_ON_ERROR);
-        $this->assertIsArray($payload);
-
-        return $payload;
+        return app(EnneagramCmsPublishGateService::class);
     }
 
     private function seedCohort(): void

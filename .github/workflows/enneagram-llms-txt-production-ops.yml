@@ -113,15 +113,32 @@ jobs:
           deployed_sha="$(if [ -f REVISION ]; then tr -d '\r\n' < REVISION; else git rev-parse HEAD; fi)"
           test "$deployed_sha" = "$RELEASE_SHA"
           cd backend
-          php artisan personality:enneagram-llms-txt-release-gate --dry-run --deployed-sha="$RELEASE_SHA" --json > /tmp/enneagram-llms-txt-dry-run.json
+          RELEASE_SHA="$RELEASE_SHA" php -r '
+            require "vendor/autoload.php";
+            $app = require "bootstrap/app.php";
+            $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+            $result = app(App\Services\Cms\EnneagramCmsPublishGateService::class)
+                ->llmsTxtRelease(getenv("RELEASE_SHA") ?: "");
+            echo json_encode($result, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR), PHP_EOL;
+          ' > /tmp/enneagram-llms-txt-dry-run.json
           jq -e '.ok == true and (.status == "dry_run_ready" or .status == "already_released") and .target_count == 116 and (.issues | length) == 0' /tmp/enneagram-llms-txt-dry-run.json >/dev/null
           actual_cohort="$(jq -r '.cohort_sha256' /tmp/enneagram-llms-txt-dry-run.json)"
           if [ "$OPERATION_MODE" = write ]; then
             test "$actual_cohort" = "$COHORT_SHA256"
             token="ENNEAGRAM-LLMS-TXT-RELEASE-01:${RELEASE_SHA}:${COHORT_SHA256}"
-            ENNEAGRAM_LLMS_TXT_WRITE_ENABLED=true php artisan personality:enneagram-llms-txt-release-gate \
-              --write --deployed-sha="$RELEASE_SHA" --confirm-cohort-sha256="$COHORT_SHA256" \
-              --operator-approved="$token" --json > /tmp/enneagram-llms-txt-write.json
+            RELEASE_SHA="$RELEASE_SHA" COHORT_SHA256="$COHORT_SHA256" OPERATOR_TOKEN="$token" php -r '
+              require "vendor/autoload.php";
+              $app = require "bootstrap/app.php";
+              $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+              config(["personality.enneagram_llms_txt_write_enabled" => true]);
+              $result = app(App\Services\Cms\EnneagramCmsPublishGateService::class)->llmsTxtRelease(
+                  getenv("RELEASE_SHA") ?: "",
+                  true,
+                  getenv("COHORT_SHA256") ?: null,
+                  getenv("OPERATOR_TOKEN") ?: null,
+              );
+              echo json_encode($result, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR), PHP_EOL;
+            ' > /tmp/enneagram-llms-txt-write.json
             jq -e '.ok == true and (.status == "released" or .status == "already_released") and .target_count == 116 and (.issues | length) == 0' /tmp/enneagram-llms-txt-write.json >/dev/null
           fi
           jq -n \
