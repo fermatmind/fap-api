@@ -30,7 +30,6 @@ prs:
       - backend/app/Console/Kernel.php
       - backend/app/Services/Cms/BigFiveCmsImportDraftDryRunPlanner.php
       - backend/tests/Feature/Console/PersonalityBigFiveCmsImportDraftDryRunCommandTest.php
-      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
@@ -41450,5 +41449,40 @@ prs:
     production_write_execution: false
     database_mutation: false
     cms_mutation: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: PERSONALITY-CACHE-01
+    repo: fap-api
+    depends_on: [PUBLIC-API-CACHE-01]
+    branch: codex/personality-cache-01
+    title: "PERSONALITY-CACHE-01: cache public personality read models"
+    train_scope: personality_public_variant_read_model_cache
+    status: user_authorized
+    scope:
+      - Cache final safe detail and SEO payloads for anonymous org_id=0 MBTI A/T public routes.
+      - Keep detail and SEO keys separate with a bounded TTL.
+      - Bypass tenants, base 16-type routes, comparisons, invalid requests, and not-found responses.
+    allowed_paths:
+      - backend/app/Services/Cms/PersonalityPublicReadModelCache.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - backend/tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change response contracts, CMS data or publication state, DB schema, sitemap/llms/indexability, production cache contents, warmup, import, or deploy.
+    validation:
+      - cd backend && php artisan test tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - cd backend && ./vendor/bin/pint --test app/Services/Cms/PersonalityPublicReadModelCache.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    runtime_change: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
     deploy_allowed: false
     content_authority: CMS/backend
