@@ -1456,7 +1456,8 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('mbti_public_projection_v1.variant_code', 'A')
             ->assertJsonPath('mbti_public_projection_v1._meta.route_mode', 'public_variant')
             ->assertJsonPath('mbti_public_projection_v1._meta.public_route_type', '32-type')
-            ->assertJsonPath('mbti_public_projection_v1.seo.canonical_url', 'https://staging.fermatmind.com/en/personality/intj-a');
+            ->assertJsonPath('mbti_public_projection_v1.seo.canonical_url', 'https://staging.fermatmind.com/en/personality/intj-a')
+            ->assertJsonMissingPath('personality_public_projection_v1');
 
         $this->getJson('/api/v0.5/personality/intj-t?locale=en')
             ->assertStatus(404)

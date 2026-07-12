@@ -171,7 +171,6 @@ class PersonalityController extends Controller
             'sections' => $sections,
             'internal_links' => $internalLinks,
             'seo_meta' => $this->seoMetaPayload($profile, $variant),
-            'personality_public_projection_v1' => $projection,
             'seo_surface_v1' => $seoSurface,
             'landing_surface_v1' => $landingSurface,
             'answer_surface_v1' => $this->buildDetailAnswerSurface(
@@ -189,6 +188,10 @@ class PersonalityController extends Controller
 
         if ($this->isMbtiProfile($profile)) {
             $payload['mbti_public_projection_v1'] = $projection;
+        }
+
+        if (! $variant instanceof PersonalityProfileVariant) {
+            $payload['personality_public_projection_v1'] = $projection;
         }
 
         $this->personalityPublicReadModelCache->put(
@@ -1683,7 +1686,7 @@ class PersonalityController extends Controller
             'evidence_refs' => array_values(array_filter([
                 (string) ($seoSurface['metadata_fingerprint'] ?? ''),
                 (string) ($landingSurface['landing_fingerprint'] ?? ''),
-                'personality_public_projection_v1',
+                $variant instanceof PersonalityProfileVariant ? '' : 'personality_public_projection_v1',
                 $isMbtiScale ? 'mbti_public_projection_v1' : '',
                 count($compareBlocks) > 0 ? 'projection_dimensions' : '',
                 count($sections) > 0 ? 'personality_sections' : '',
