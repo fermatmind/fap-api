@@ -41257,7 +41257,7 @@ prs:
     branch: codex/enneagram-en13-evidence-provenance-upgrade-01
     title: "ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01: upgrade EN13 evidence provenance for llms-full"
     train_scope: enneagram_en13_evidence_provenance_upgrade
-    status: in_progress
+    status: merged
     scope:
       - Repair the 26 EN13 bilingual local content assets with visible evidence, stable source IDs, limitations, and aligned bilingual evidence structure for a later llms-full gate.
       - Keep all assets non-llms-full until a separate readiness result and authorization.
@@ -41273,13 +41273,35 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: ENNEAGRAM-EN13-EVIDENCE-REFRESH-READBACK-REPAIR-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01]
+    branch: codex/enneagram-en13-evidence-refresh-readback-repair-01
+    title: "ENNEAGRAM-EN13-EVIDENCE-REFRESH-READBACK-REPAIR-01: normalize evidence refresh readback"
+    train_scope: enneagram_en13_evidence_refresh_readback_repair
+    status: in_progress
+    scope:
+      - Compare evidence JSON fields by recursively normalized object-key semantics while preserving list order and exact scalar matching.
+      - Use run-local temporary files, emit and upload a sanitized phased summary on failure, and reject stale summary reuse before fail-closed validation.
+    allowed_paths: [.github/workflows/enneagram-en13-evidence-production-ops.yml, backend/app/Services/Cms/EnneagramCmsDraftWriter.php, backend/tests/Feature/Console/PersonalityEnneagramEvidenceRefreshCommandTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    do_not: [Deploy, write production CMS/DB, change CMS content or eligibility, release llms, warm cache, submit Search, expose content bodies, private paths, secrets, or topology.]
+    validation: [focused Enneagram evidence refresh regression tests including MySQL JSON key order and exact-26 idempotency, Pint, actionlint and YAML/JSON checks, changed-file scope validation, git diff --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    search_channel_action: false
+    llms_release_execution: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01
     repo: fap-api production CMS Ops
-    depends_on: [ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01]
+    depends_on: [ENNEAGRAM-EN13-EVIDENCE-REFRESH-READBACK-REPAIR-01]
     branch: codex/enneagram-en13-evidence-cms-refresh-01
     title: "ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01: refresh exact 26-page EN13 evidence provenance"
     train_scope: enneagram_en13_evidence_cms_refresh
-    status: pending_dependency
+    status: blocked_readback_repair
     scope:
       - After the evidence upgrade merge SHA is separately deployed, run an exact 26-page read-only dry-run and derive an immutable cohort SHA.
       - Only after separate exact deployed-SHA and cohort-SHA authorization, idempotently refresh visible evidence, evidence provenance, source package/hash, and contract version while preserving all release and review state.
