@@ -41170,7 +41170,7 @@ prs:
     branch: codex/enneagram-search-release-readiness-03
     title: "ENNEAGRAM-SEARCH-RELEASE-READINESS-03: revalidate Enneagram Queue candidates after URL Truth import"
     train_scope: enneagram_search_release_readiness_03
-    status: pending_dependency
+    status: in_progress
     scope:
       - After the URL Truth importer is deployed and its exact 116-target artifact is separately authorized and written, record a production read-only Queue inspection and public-runtime revalidation.
       - Produce only GO_FOR_SEPARATE_SEARCH_QUEUE_AUTHORIZATION or NO_GO_SEARCH_RELEASE; require exactly 116 unique, eligible, duplicate-safe candidates.

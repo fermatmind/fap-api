@@ -88648,11 +88648,18 @@
   },
   "ENNEAGRAM-SEARCH-RELEASE-READINESS-03": {
     "id": "ENNEAGRAM-SEARCH-RELEASE-READINESS-03", "repo": "fap-api", "title": "ENNEAGRAM-SEARCH-RELEASE-READINESS-03: revalidate Enneagram Queue candidates after URL Truth import", "base": "main", "branch": "codex/enneagram-search-release-readiness-03", "depends_on": ["ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01"],
-    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
+    "status": "local_checks_passed", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
     "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "search_channel_action": false, "llms_release_execution": false, "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pass", "evidence": "User authorized this manifest/state initialization only. Production readiness stays read-only and is blocked until the deployed URL Truth importer has a separately authorized exact 116-target artifact write."}},
-    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized after the prior NO_GO. No production read, Queue action, CMS/DB write, Search submission, cache warm, or deploy is authorized by this entry."}]
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The locked goal authorizes this production read-only readiness task. Queue enqueue, approval, IndexNow submission, CMS/eligibility mutation, cache warm, and deployment remain separately authorized operations."},
+      "dependency": {"status": "pass", "evidence": "URL Truth Ops run 29174893675 imported and read back the exact artifact-bound 116 URL and 116 entity rows on deployed SHA 56364881a51ca44c795fdbf5064d86171bf2bfc1; Queue items remained zero."},
+      "production_readonly_scan": {"status": "pass", "evidence": "Queue inspect run 29174948760 returned candidate=116, eligible=116, planned=116, blocked=0, active_duplicate=0, stale_submitted=0 and GO_FOR_SEPARATE_SEARCH_QUEUE_AUTHORIZATION with all write/external-call guarantees false."},
+      "public_runtime_revalidation": {"status": "pass", "evidence": "Fresh 116-target public scan passed HTTP/canonical/robots/hreflang/API/sitemap/FAQPage 116/116, FAQ 562/562, internal links 468/468, unsafe paths 0, llms membership 0, and llms-full membership 0."},
+      "local_validation": {"status": "pass", "evidence": "Readiness JSON and state JSON parse, train YAML parses, aggregate GO invariants recompute, diff whitespace is clean, and changed paths are restricted to the exact four manifest-allowed report/ledger paths."},
+      "github_required_checks": {"status": "pending", "evidence": "PR has not been opened."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized after the prior NO_GO. No production read, Queue action, CMS/DB write, Search submission, cache warm, or deploy is authorized by this entry."}, {"at": "2026-07-12T01:18:00Z", "from": "pending_dependency", "to": "in_progress", "note": "Started the read-only post-import readiness evidence task after exact 116/116 URL Truth readback. Production Queue inspection and fresh public runtime checks returned GO with zero writes, enqueue, approval, submission, external API calls, CMS/eligibility changes, cache warm, or deploy during readiness."}, {"at": "2026-07-12T01:22:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "GO report invariants, JSON/YAML parsing, diff whitespace, and exact four-path scope validation passed. Queue enqueue and IndexNow submission remain unexecuted and separately authorized."}]
   },
   "ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01": {
     "id": "ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01", "repo": "fap-api", "title": "ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01: enqueue 116 approved Enneagram URLs without submission", "base": "main", "branch": "codex/enneagram-search-queue-enqueue-01", "depends_on": ["ENNEAGRAM-SEARCH-RELEASE-READINESS-03"],

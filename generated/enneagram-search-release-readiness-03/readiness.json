@@ -1,0 +1,66 @@
+{
+  "schema_version": "enneagram-search-release-readiness-03.v1",
+  "task_id": "ENNEAGRAM-SEARCH-RELEASE-READINESS-03",
+  "decision": "GO_FOR_SEPARATE_SEARCH_QUEUE_AUTHORIZATION",
+  "decision_reason": "The exact 116 bilingual Enneagram URL Truth rows are authoritative and unique, the production Queue planner returns 116 eligible duplicate-safe IndexNow candidates, and the fresh public runtime contract is complete with Search, llms, and private-path release boundaries still held.",
+  "deployed_backend_sha": "56364881a51ca44c795fdbf5064d86171bf2bfc1",
+  "url_truth_import": {
+    "workflow_run_id": 29174893675,
+    "artifact_sha256": "0f70227567dca550ee2fa41b21b98135e0522c42390b136069b0401f5ef104d0",
+    "target_count": 116,
+    "url_rows": 116,
+    "unique_canonical_rows": 116,
+    "entity_rows": 116,
+    "queue_items_after_import": 0,
+    "target_tables": [
+      "seo_urls",
+      "seo_url_entities"
+    ],
+    "dry_run_before_write": true,
+    "readback_passed": true
+  },
+  "production_queue_inspect": {
+    "workflow_run_id": 29174948760,
+    "artifact_sha256": "0ca2bbeb48b0188b29882d08861d9476bc5031d994064f38a7832dcba9e12cc5",
+    "target_count": 116,
+    "candidate_count": 116,
+    "eligible_count": 116,
+    "blocked_count": 0,
+    "planned_queue_count": 116,
+    "active_duplicate_count": 0,
+    "stale_submitted_count": 0,
+    "reason_code_counts": []
+  },
+  "fresh_public_runtime_revalidation": {
+    "scan_sha256": "edd9f28ec2c8bc7b4cd10e111de7eeb0f925a663eb54c73da7dfd19b7b0a1b59",
+    "target_count": 116,
+    "unique_path_count": 116,
+    "http_200": 116,
+    "canonical_ok": 116,
+    "robots_index_follow": 116,
+    "hreflang_pair_ok": 116,
+    "api_authority_ok": 116,
+    "source_provenance_present": 116,
+    "sitemap_members": 116,
+    "faqpage_present": 116,
+    "faq_rendered": 562,
+    "faq_expected": 562,
+    "internal_links_rendered": 468,
+    "internal_links_expected": 468,
+    "unsafe_public_paths": 0,
+    "llms_members": 0,
+    "llms_full_members": 0
+  },
+  "negative_guarantees": {
+    "queue_write": false,
+    "queue_approve": false,
+    "queue_enqueue": false,
+    "search_submit": false,
+    "external_search_api_call": false,
+    "cms_write_during_readiness": false,
+    "eligibility_write_during_readiness": false,
+    "sitemap_llms_cache_mutation": false,
+    "deploy_during_readiness": false
+  },
+  "required_follow_up": "Run a fresh 116-target Queue enqueue dry-run, then obtain a separate exact deployed-SHA and artifact-SHA authorization for ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01. Do not submit IndexNow in the enqueue stage."
+}
