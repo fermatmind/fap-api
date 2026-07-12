@@ -1,0 +1,218 @@
+name: Enneagram Search Queue Production Enqueue
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Exact deployed fap-api SHA (40 lowercase hex)
+        required: true
+        type: string
+      artifact_sha256:
+        description: Exact SHA256 of the approved 116-target URL Truth artifact
+        required: true
+        type: string
+      operation_mode:
+        description: Read-only dry-run or bounded Queue enqueue
+        required: true
+        type: choice
+        options: [dry_run, enqueue]
+      operator_approval_phrase:
+        description: Exact SHA- and artifact-bound approval phrase
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: enneagram-search-queue-production-enqueue
+  cancel-in-progress: false
+
+jobs:
+  enqueue:
+    name: Dry-run then enqueue exact 116 Enneagram URLs
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+    env:
+      DEPLOY_USER: ${{ vars.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ vars.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ vars.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ vars.PRODUCTION_DEPLOY_PATH }}
+      RELEASE_SHA: ${{ inputs.release_sha }}
+      ARTIFACT_SHA256: ${{ inputs.artifact_sha256 }}
+      OPERATION_MODE: ${{ inputs.operation_mode }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+
+    steps:
+      - name: Validate exact release and artifact approval
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$ARTIFACT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$OPERATION_MODE" =~ ^(dry_run|enqueue)$ ]]
+          if [ "$OPERATION_MODE" = "enqueue" ]; then
+            expected="Approve ENNEAGRAM Search Queue enqueue for SHA ${RELEASE_SHA} artifact ${ARTIFACT_SHA256}"
+          else
+            expected="Approve ENNEAGRAM Search Queue dry-run for SHA ${RELEASE_SHA} artifact ${ARTIFACT_SHA256}"
+          fi
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run mandatory dry-run then optional bounded enqueue
+        shell: bash
+        run: |
+          set -euo pipefail
+          target="$DEPLOY_USER@$DEPLOY_HOST"
+          run_dir="/tmp/enneagram-search-queue-enqueue-${GITHUB_RUN_ID}"
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_release_sha '%q' "$RELEASE_SHA"
+          printf -v q_artifact_sha '%q' "$ARTIFACT_SHA256"
+          printf -v q_operation_mode '%q' "$OPERATION_MODE"
+          printf -v q_run_dir '%q' "$run_dir"
+
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$target" \
+            "DEPLOY_PATH=$q_deploy_path RELEASE_SHA=$q_release_sha ARTIFACT_SHA256=$q_artifact_sha OPERATION_MODE=$q_operation_mode RUN_DIR=$q_run_dir bash -s" <<'REMOTE' > summary.json
+          set -Eeuo pipefail
+          umask 077
+          mkdir -p "$RUN_DIR"
+          trap 'rm -rf "$RUN_DIR"' EXIT
+
+          cd "$DEPLOY_PATH/current"
+          deployed_sha="$(if [ -f REVISION ]; then tr -d '\r\n' < REVISION; else git rev-parse HEAD; fi)"
+          test "$deployed_sha" = "$RELEASE_SHA"
+          cd backend
+
+          php artisan personality:enneagram-search-queue-enqueue \
+            --dry-run --artifact-sha256="$ARTIFACT_SHA256" --json --no-ansi \
+            > "$RUN_DIR/dry-run.json"
+          jq -e --arg sha "$ARTIFACT_SHA256" '
+            .schema_version == "enneagram-search-queue-enqueue.v1" and
+            (.status == "dry_run_ready" or .status == "already_enqueued") and
+            .ok == true and .dry_run == true and
+            .write_requested == false and .artifact_sha256 == $sha and
+            .target_count == 116 and .summary.candidate_count == 116 and
+            .summary.eligible_count == 116 and .summary.stale_submitted_count == 0 and
+            ((.status == "dry_run_ready" and .summary.blocked_count == 0 and
+              .summary.planned_queue_count == 116) or
+             (.status == "already_enqueued" and .summary.blocked_count == 116 and
+              .summary.planned_queue_count == 0 and .summary.active_queue_item_count == 116)) and
+            (.issues | length) == 0 and
+            ([.negative_guarantees[]] | all(. == false))
+          ' "$RUN_DIR/dry-run.json" >/dev/null
+
+          if [ "$OPERATION_MODE" = "enqueue" ]; then
+            php artisan personality:enneagram-search-queue-enqueue \
+              --write --artifact-sha256="$ARTIFACT_SHA256" \
+              --confirm-artifact-sha256="$ARTIFACT_SHA256" \
+              --operator-approved="ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01:${ARTIFACT_SHA256}" \
+              --json --no-ansi > "$RUN_DIR/write.json"
+            jq -e --arg sha "$ARTIFACT_SHA256" '
+              .schema_version == "enneagram-search-queue-enqueue.v1" and
+              (.status == "enqueued" or .status == "already_enqueued") and
+              .ok == true and .write_requested == true and .artifact_sha256 == $sha and
+              .target_count == 116 and .summary.active_queue_item_count == 116 and
+              (.issues | length) == 0 and
+              ([.negative_guarantees[]] | all(. == false))
+            ' "$RUN_DIR/write.json" >/dev/null
+
+            php artisan personality:enneagram-search-queue-inspect --dry-run --json --no-ansi \
+              > "$RUN_DIR/readback.json"
+            jq -e '
+              .schema_version == "enneagram-search-queue-inspect.v1" and
+              .decision == "NO_GO_SEARCH_RELEASE" and .target_count == 116 and
+              .summary.candidate_count == 116 and .summary.eligible_count == 116 and
+              .summary.blocked_count == 116 and .summary.planned_queue_count == 0 and
+              .summary.active_duplicate_count == 116 and .summary.stale_submitted_count == 0 and
+              .summary.reason_code_counts.existing_active_queue_item == 116 and
+              .negative_guarantees.search_submit == false and
+              .negative_guarantees.external_search_api_call == false
+            ' "$RUN_DIR/readback.json" >/dev/null
+          fi
+
+          touch "$RUN_DIR/write.json" "$RUN_DIR/readback.json"
+          jq -n \
+            --arg release_sha "$RELEASE_SHA" \
+            --arg artifact_sha256 "$ARTIFACT_SHA256" \
+            --arg operation_mode "$OPERATION_MODE" \
+            --slurpfile dry_run "$RUN_DIR/dry-run.json" \
+            --slurpfile write "${RUN_DIR}/write.json" \
+            --slurpfile readback "${RUN_DIR}/readback.json" \
+            '{
+              schema_version: "enneagram-search-queue-production-enqueue.v1",
+              status: "success",
+              release_sha: $release_sha,
+              artifact_sha256: $artifact_sha256,
+              operation_mode: $operation_mode,
+              dry_run: $dry_run[0].summary,
+              write: (if ($write | length) == 1 then $write[0].summary else null end),
+              readback: (if ($readback | length) == 1 then {
+                candidate_count: $readback[0].summary.candidate_count,
+                eligible_count: $readback[0].summary.eligible_count,
+                active_duplicate_count: $readback[0].summary.active_duplicate_count,
+                planned_queue_count: $readback[0].summary.planned_queue_count
+              } else null end),
+              negative_guarantees: {
+                queue_approval: false,
+                search_submit: false,
+                external_search_api_call: false,
+                cms_or_eligibility_write: false,
+                sitemap_or_llms_cache_mutation: false,
+                deploy: false,
+                persistent_config_change: false
+              }
+            }'
+          REMOTE
+
+          jq -e '
+            .status == "success" and .dry_run.candidate_count == 116 and
+            .dry_run.eligible_count == 116 and
+            (if .operation_mode == "enqueue" then
+              .write.active_queue_item_count == 116 and
+              .readback.active_duplicate_count == 116 and .readback.planned_queue_count == 0
+            else .write == null and .readback == null end) and
+            ([.negative_guarantees[]] | all(. == false))
+          ' summary.json >/dev/null
+
+      - name: Upload sanitized aggregate summary
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: enneagram-search-queue-enqueue-${{ github.run_id }}
+          path: summary.json
+          if-no-files-found: error

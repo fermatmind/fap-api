@@ -16,6 +16,8 @@ final class PersonalityEnneagramSearchQueueInspectCommandTest extends TestCase
 {
     use RefreshDatabase;
 
+    private const ARTIFACT_SHA = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -135,6 +137,133 @@ final class PersonalityEnneagramSearchQueueInspectCommandTest extends TestCase
         $this->assertSame($before, $this->queueCounts());
     }
 
+    #[Test]
+    public function it_dry_runs_the_artifact_bound_116_target_enqueue_without_writes(): void
+    {
+        $this->seedTargetSet();
+        $before = $this->queueCounts();
+
+        $exitCode = Artisan::call('personality:enneagram-search-queue-enqueue', [
+            '--dry-run' => true,
+            '--artifact-sha256' => self::ARTIFACT_SHA,
+            '--json' => true,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('dry_run_ready', $payload['status'] ?? null);
+        $this->assertSame(116, data_get($payload, 'summary.candidate_count'));
+        $this->assertSame(116, data_get($payload, 'summary.planned_queue_count'));
+        $this->assertSame($before, $this->queueCounts());
+        $this->assertArrayNotHasKey('targets', $payload);
+    }
+
+    #[Test]
+    public function it_requires_exact_artifact_confirmation_and_operator_approval_before_write(): void
+    {
+        $this->seedTargetSet();
+        $before = $this->queueCounts();
+
+        $exitCode = Artisan::call('personality:enneagram-search-queue-enqueue', [
+            '--write' => true,
+            '--artifact-sha256' => self::ARTIFACT_SHA,
+            '--confirm-artifact-sha256' => str_repeat('b', 64),
+            '--operator-approved' => 'wrong',
+            '--json' => true,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status'] ?? null);
+        $this->assertContains('artifact_sha256_confirmation_mismatch', $payload['issues'] ?? []);
+        $this->assertContains('operator_approval_mismatch', $payload['issues'] ?? []);
+        $this->assertSame($before, $this->queueCounts());
+    }
+
+    #[Test]
+    public function it_fails_closed_before_write_when_the_url_truth_set_is_not_exactly_116(): void
+    {
+        $this->seedTargetSet();
+        DB::connection('seo_intel')->table('seo_urls')->limit(1)->delete();
+        $before = $this->queueCounts();
+
+        $exitCode = $this->callEnqueueWrite();
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('candidate_count_mismatch', $payload['issues'] ?? []);
+        $this->assertSame($before, $this->queueCounts());
+    }
+
+    #[Test]
+    public function it_writes_exactly_116_pending_queue_rows_without_submission_and_replays_idempotently(): void
+    {
+        $this->seedTargetSet();
+
+        $firstExitCode = $this->callEnqueueWrite();
+        $first = $this->payload();
+        $firstCounts = $this->queueCounts();
+
+        $this->assertSame(0, $firstExitCode, Artisan::output());
+        $this->assertSame('enqueued', $first['status'] ?? null);
+        $this->assertSame(116, data_get($first, 'summary.written_item_count'));
+        $this->assertSame(['items' => 116, 'batches' => 1, 'events' => 117, 'submissions' => 0], $firstCounts);
+        $this->assertSame(116, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('approval_state', 'pending')->where('execution_state', 'dry_run_ready')->count());
+
+        $secondExitCode = $this->callEnqueueWrite();
+        $second = $this->payload();
+
+        $this->assertSame(0, $secondExitCode, Artisan::output());
+        $this->assertSame('already_enqueued', $second['status'] ?? null);
+        $this->assertSame(0, data_get($second, 'summary.written_item_count'));
+        $this->assertSame($firstCounts, $this->queueCounts());
+
+        $dryRunExitCode = Artisan::call('personality:enneagram-search-queue-enqueue', [
+            '--dry-run' => true,
+            '--artifact-sha256' => self::ARTIFACT_SHA,
+            '--json' => true,
+        ]);
+        $dryRun = $this->payload();
+        $this->assertSame(0, $dryRunExitCode, Artisan::output());
+        $this->assertSame('already_enqueued', $dryRun['status'] ?? null);
+        $this->assertSame(116, data_get($dryRun, 'summary.active_queue_item_count'));
+        $this->assertSame($firstCounts, $this->queueCounts());
+    }
+
+    #[Test]
+    public function it_rejects_a_partial_active_duplicate_set_instead_of_writing_the_remainder(): void
+    {
+        $paths = $this->seedTargetSet();
+        $first = $paths[0];
+        $this->seedActiveQueueItem($first['locale'], $first['path']);
+        $before = $this->queueCounts();
+
+        $exitCode = $this->callEnqueueWrite();
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('active_duplicate_present', $payload['issues'] ?? []);
+        $this->assertSame($before, $this->queueCounts());
+    }
+
+    #[Test]
+    public function production_workflow_requires_deployed_sha_and_dry_run_before_bounded_enqueue(): void
+    {
+        $workflow = (string) file_get_contents(base_path('../.github/workflows/enneagram-search-queue-production-enqueue.yml'));
+
+        $this->assertStringContainsString('test "$deployed_sha" = "$RELEASE_SHA"', $workflow);
+        $this->assertStringContainsString('Approve ENNEAGRAM Search Queue enqueue for SHA ${RELEASE_SHA} artifact ${ARTIFACT_SHA256}', $workflow);
+        $dryRunPosition = strpos($workflow, '--dry-run --artifact-sha256="$ARTIFACT_SHA256"');
+        $writePosition = strpos($workflow, '--write --artifact-sha256="$ARTIFACT_SHA256"');
+        $this->assertIsInt($dryRunPosition);
+        $this->assertIsInt($writePosition);
+        $this->assertLessThan($writePosition, $dryRunPosition);
+        $this->assertStringContainsString('.summary.active_duplicate_count == 116', $workflow);
+        $this->assertStringNotContainsString('indexnow:submit', $workflow);
+        $this->assertStringNotContainsString('seo:warm-sitemap-source-cache', $workflow);
+        $this->assertStringNotContainsString('deploy-production', $workflow);
+    }
+
     /** @return list<array{locale:string,path:string}> */
     private function seedTargetSet(): array
     {
@@ -169,7 +298,7 @@ final class PersonalityEnneagramSearchQueueInspectCommandTest extends TestCase
                 'canonical_url_hash' => hash('sha256', $canonicalUrl),
                 'canonical_url' => $canonicalUrl,
                 'locale' => $asset->locale,
-                'page_entity_type' => 'personality_profile_variant',
+                'page_entity_type' => 'personality_public_content_asset',
                 'source_authority' => 'backend_public_surface',
                 'indexability_state' => 'indexable',
                 'lastmod_at' => now()->subHour(),
@@ -233,23 +362,56 @@ final class PersonalityEnneagramSearchQueueInspectCommandTest extends TestCase
         });
         Schema::connection('seo_intel')->create('seo_search_channel_queue_items', function ($table): void {
             $table->id();
+            $table->unsignedBigInteger('batch_id')->nullable();
             $table->text('canonical_url');
             $table->string('locale', 16);
             $table->string('page_entity_type', 64);
+            $table->string('entity_type', 64)->nullable();
+            $table->string('entity_id', 255)->nullable();
+            $table->string('source_authority', 64)->nullable();
+            $table->string('source_table', 128)->nullable();
             $table->string('channel', 64);
+            $table->string('eligibility_state', 64)->nullable();
             $table->string('approval_state', 64);
             $table->string('execution_state', 64);
+            $table->string('indexability_state', 64)->nullable();
+            $table->string('claim_boundary_state', 64)->nullable();
+            $table->boolean('private_flow')->default(false);
+            $table->json('reason_codes')->nullable();
             $table->char('url_hash', 64);
             $table->char('content_hash', 64)->nullable();
+            $table->char('idempotency_key', 64)->nullable()->unique();
+            $table->string('approved_by', 128)->nullable();
+            $table->timestamp('approved_at')->nullable();
             $table->timestamp('lastmod')->nullable();
             $table->timestamps();
         });
-        foreach (['seo_search_channel_queue_batches', 'seo_search_channel_queue_events', 'seo_indexnow_submissions'] as $name) {
-            Schema::connection('seo_intel')->create($name, function ($table): void {
-                $table->id();
-                $table->timestamps();
-            });
-        }
+        Schema::connection('seo_intel')->create('seo_search_channel_queue_batches', function ($table): void {
+            $table->id();
+            $table->string('channel', 64);
+            $table->string('status', 64);
+            $table->unsignedInteger('item_count');
+            $table->json('dry_run_report')->nullable();
+            $table->text('approval_note')->nullable();
+            $table->string('created_by', 128)->nullable();
+            $table->string('approved_by', 128)->nullable();
+            $table->timestamp('approved_at')->nullable();
+            $table->timestamps();
+        });
+        Schema::connection('seo_intel')->create('seo_search_channel_queue_events', function ($table): void {
+            $table->id();
+            $table->unsignedBigInteger('queue_item_id')->nullable();
+            $table->unsignedBigInteger('batch_id')->nullable();
+            $table->string('event_type', 96);
+            $table->json('event_payload')->nullable();
+            $table->string('actor_type', 64);
+            $table->string('actor_id', 128)->nullable();
+            $table->timestamp('created_at')->nullable();
+        });
+        Schema::connection('seo_intel')->create('seo_indexnow_submissions', function ($table): void {
+            $table->id();
+            $table->timestamps();
+        });
     }
 
     /** @return array<string, int> */
@@ -270,5 +432,34 @@ final class PersonalityEnneagramSearchQueueInspectCommandTest extends TestCase
         $this->assertIsArray($decoded);
 
         return $decoded;
+    }
+
+    private function callEnqueueWrite(): int
+    {
+        return Artisan::call('personality:enneagram-search-queue-enqueue', [
+            '--write' => true,
+            '--artifact-sha256' => self::ARTIFACT_SHA,
+            '--confirm-artifact-sha256' => self::ARTIFACT_SHA,
+            '--operator-approved' => 'ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01:'.self::ARTIFACT_SHA,
+            '--json' => true,
+        ]);
+    }
+
+    private function seedActiveQueueItem(string $locale, string $path): void
+    {
+        $canonicalUrl = 'https://fermatmind.com'.$path;
+        DB::connection('seo_intel')->table('seo_search_channel_queue_items')->insert([
+            'canonical_url' => $canonicalUrl,
+            'locale' => $locale,
+            'page_entity_type' => 'personality_public_content_asset',
+            'channel' => 'indexnow',
+            'approval_state' => 'pending',
+            'execution_state' => 'dry_run_ready',
+            'url_hash' => hash('sha256', $canonicalUrl),
+            'content_hash' => hash('sha256', $path),
+            'lastmod' => now()->subHour(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
