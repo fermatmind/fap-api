@@ -97,6 +97,7 @@ use App\Http\Middleware\LimitWebhookPayloadSize;
 use App\Http\Middleware\NormalizeApiErrorContract;
 use App\Http\Middleware\OpsAccessControl;
 use App\Http\Middleware\PartnerApiKeyAuth;
+use App\Http\Middleware\PublicApiCacheHeaders;
 use App\Http\Middleware\ResolveOrgContext;
 use App\Http\Middleware\SetOpsRequestContext;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -520,41 +521,45 @@ Route::prefix('v0.4')->middleware(NormalizeApiErrorContract::class)->group(funct
 Route::prefix('v0.5')->group(function () {
     Route::post('/career/attribution/events', [CareerAttributionEventController::class, 'store'])
         ->middleware('throttle:api_track');
-    Route::get('/career/family/{slug}', [CareerFamilyHubController::class, 'show']);
-    Route::get('/career/first-wave/discoverability-manifest', [CareerFirstWaveDiscoverabilityManifestController::class, 'show']);
-    Route::get('/career/first-wave/jobs/{slug}/next-step-links', [CareerFirstWaveNextStepLinksController::class, 'show']);
-    Route::get('/career/first-wave/jobs/{slug}/companion-links', [CareerFirstWaveOccupationCompanionLinksController::class, 'show']);
-    Route::get('/career/first-wave/recommendations/mbti/{type}/companion-links', [CareerFirstWaveRecommendationCompanionLinksController::class, 'show']);
-    Route::get('/career/first-wave/launch-tier', [CareerFirstWaveLaunchTierController::class, 'show']);
-    Route::get('/career/resolve', [CareerAliasResolutionController::class, 'show']);
-    Route::get('/career/first-wave/lifecycle', [CareerFirstWaveLifecycleController::class, 'show']);
-    Route::get('/career/launch-governance-closure', [CareerLaunchGovernanceClosureController::class, 'show']);
-    Route::get('/career/lifecycle/operational-summary', [CareerLifecycleOperationalSummaryController::class, 'show']);
-    Route::get('/career/first-wave/rollout-queue', [CareerFirstWaveRolloutQueueController::class, 'show']);
-    Route::get('/career/first-wave/readiness', [CareerFirstWaveReadinessController::class, 'show']);
-    Route::get('/career/directory', [CareerDirectoryController::class, 'index']);
-    Route::get('/career/jobs', [CareerJobListController::class, 'index']);
-    Route::get('/career/cn-proxy/{slug}', [CareerCnProxyPublicOwnerController::class, 'show']);
-    Route::get('/career/jobs/{slug}/ai-impact-asset', [CareerAiImpactAssetPreviewController::class, 'show']);
-    Route::get('/career/jobs/{slug}/page-assembly-asset', [CareerPageAssemblyAssetPreviewController::class, 'show']);
-    Route::get('/career/jobs/{slug}/salary-asset', [CareerSalaryAssetPreviewController::class, 'show']);
-    Route::get('/career/jobs/{slug}', [CareerJobDetailController::class, 'show']);
-    Route::get('/career/jobs/{slug}/explainability', [CareerJobExplainabilityController::class, 'show']);
-    Route::get('/career/recommendations/mbti', [CareerRecommendationIndexController::class, 'index']);
-    Route::get('/career/recommendations/mbti/{type}', [CareerRecommendationDetailController::class, 'show']);
-    Route::get('/career/recommendations/mbti/{type}/explainability', [CareerRecommendationExplainabilityController::class, 'show']);
+    Route::middleware(PublicApiCacheHeaders::class)->group(function () {
+        Route::get('/career/family/{slug}', [CareerFamilyHubController::class, 'show']);
+        Route::get('/career/first-wave/discoverability-manifest', [CareerFirstWaveDiscoverabilityManifestController::class, 'show']);
+        Route::get('/career/first-wave/jobs/{slug}/next-step-links', [CareerFirstWaveNextStepLinksController::class, 'show']);
+        Route::get('/career/first-wave/jobs/{slug}/companion-links', [CareerFirstWaveOccupationCompanionLinksController::class, 'show']);
+        Route::get('/career/first-wave/recommendations/mbti/{type}/companion-links', [CareerFirstWaveRecommendationCompanionLinksController::class, 'show']);
+        Route::get('/career/first-wave/launch-tier', [CareerFirstWaveLaunchTierController::class, 'show']);
+        Route::get('/career/resolve', [CareerAliasResolutionController::class, 'show']);
+        Route::get('/career/first-wave/lifecycle', [CareerFirstWaveLifecycleController::class, 'show']);
+        Route::get('/career/launch-governance-closure', [CareerLaunchGovernanceClosureController::class, 'show']);
+        Route::get('/career/lifecycle/operational-summary', [CareerLifecycleOperationalSummaryController::class, 'show']);
+        Route::get('/career/first-wave/rollout-queue', [CareerFirstWaveRolloutQueueController::class, 'show']);
+        Route::get('/career/first-wave/readiness', [CareerFirstWaveReadinessController::class, 'show']);
+        Route::get('/career/directory', [CareerDirectoryController::class, 'index']);
+        Route::get('/career/jobs', [CareerJobListController::class, 'index']);
+        Route::get('/career/cn-proxy/{slug}', [CareerCnProxyPublicOwnerController::class, 'show']);
+        Route::get('/career/jobs/{slug}/ai-impact-asset', [CareerAiImpactAssetPreviewController::class, 'show']);
+        Route::get('/career/jobs/{slug}/page-assembly-asset', [CareerPageAssemblyAssetPreviewController::class, 'show']);
+        Route::get('/career/jobs/{slug}/salary-asset', [CareerSalaryAssetPreviewController::class, 'show']);
+        Route::get('/career/jobs/{slug}', [CareerJobDetailController::class, 'show']);
+        Route::get('/career/jobs/{slug}/explainability', [CareerJobExplainabilityController::class, 'show']);
+        Route::get('/career/recommendations/mbti', [CareerRecommendationIndexController::class, 'index']);
+        Route::get('/career/recommendations/mbti/{type}', [CareerRecommendationDetailController::class, 'show']);
+        Route::get('/career/recommendations/mbti/{type}/explainability', [CareerRecommendationExplainabilityController::class, 'show']);
+    });
     Route::post('/career/recommendations/mbti/{type}/feedback', [CareerRecommendationFeedbackController::class, 'store'])
         ->middleware('throttle:api_track');
     Route::post('/career/shortlist', [CareerShortlistController::class, 'store'])
         ->middleware('throttle:api_track');
     Route::get('/career/shortlist/state', [CareerShortlistController::class, 'show']);
-    Route::get('/career/runtime-config', [CareerRuntimeConfigController::class, 'show']);
-    Route::get('/career/transition-preview', [CareerTransitionPreviewController::class, 'show']);
-    Route::get('/career/search', [CareerSearchController::class, 'index']);
-    Route::get('/career/datasets/occupations', [CareerDatasetHubController::class, 'show']);
-    Route::get('/career/datasets/occupations/method', [CareerDatasetMethodController::class, 'show']);
-    Route::get('/seo/sitemap-source', [SitemapSourceController::class, 'index'])
-        ->name('seo.sitemap-source');
+    Route::middleware(PublicApiCacheHeaders::class)->group(function () {
+        Route::get('/career/runtime-config', [CareerRuntimeConfigController::class, 'show']);
+        Route::get('/career/transition-preview', [CareerTransitionPreviewController::class, 'show']);
+        Route::get('/career/search', [CareerSearchController::class, 'index']);
+        Route::get('/career/datasets/occupations', [CareerDatasetHubController::class, 'show']);
+        Route::get('/career/datasets/occupations/method', [CareerDatasetMethodController::class, 'show']);
+        Route::get('/seo/sitemap-source', [SitemapSourceController::class, 'index'])
+            ->name('seo.sitemap-source');
+    });
     Route::post('/seo/attribution/events', [MbtiAttributionEventController::class, 'store'])
         ->middleware([
             \App\Http\Middleware\LimitApiPublicPayloadSize::class,
@@ -566,18 +571,20 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/foundation/giving-records/months/{yearMonth}', [DailyGivingRecordController::class, 'monthRecords']);
     Route::get('/foundation/giving-records', [DailyGivingRecordController::class, 'index']);
     Route::get('/foundation/giving-records/{recordCode}', [DailyGivingRecordController::class, 'show']);
-    Route::get('/articles', [ArticleController::class, 'index']);
-    Route::get('/articles/{slug}', [ArticleController::class, 'show']);
-    Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
-    Route::get('/research', [ResearchReportController::class, 'index']);
-    Route::get('/research/{slug}', [ResearchReportController::class, 'show']);
-    Route::get('/support/articles', [SupportArticleController::class, 'index']);
-    Route::get('/support/articles/{slug}', [SupportArticleController::class, 'show']);
-    Route::get('/support/guides', [InterpretationGuideController::class, 'index']);
-    Route::get('/support/guides/{slug}', [InterpretationGuideController::class, 'show']);
-    Route::get('/support/interpretation-guides', [InterpretationGuideController::class, 'index']);
-    Route::get('/support/interpretation-guides/{slug}', [InterpretationGuideController::class, 'show']);
-    Route::get('/content-pages/{slug}', [ContentPageController::class, 'show']);
+    Route::middleware(PublicApiCacheHeaders::class)->group(function () {
+        Route::get('/articles', [ArticleController::class, 'index']);
+        Route::get('/articles/{slug}', [ArticleController::class, 'show']);
+        Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
+        Route::get('/research', [ResearchReportController::class, 'index']);
+        Route::get('/research/{slug}', [ResearchReportController::class, 'show']);
+        Route::get('/support/articles', [SupportArticleController::class, 'index']);
+        Route::get('/support/articles/{slug}', [SupportArticleController::class, 'show']);
+        Route::get('/support/guides', [InterpretationGuideController::class, 'index']);
+        Route::get('/support/guides/{slug}', [InterpretationGuideController::class, 'show']);
+        Route::get('/support/interpretation-guides', [InterpretationGuideController::class, 'index']);
+        Route::get('/support/interpretation-guides/{slug}', [InterpretationGuideController::class, 'show']);
+        Route::get('/content-pages/{slug}', [ContentPageController::class, 'show']);
+    });
 
     $cmsAdminMiddleware = [
         EncryptCookies::class,
@@ -640,32 +647,34 @@ Route::prefix('v0.5')->group(function () {
         Route::put('/internal/research-reports/{slug}', [ResearchReportController::class, 'internalUpdate']);
     });
 
-    Route::get('/landing-surfaces/{surfaceKey}', [LandingSurfaceController::class, 'show']);
-    Route::get('/media-assets', [MediaLibraryController::class, 'index']);
-    Route::get('/media-assets/{assetKey}', [MediaLibraryController::class, 'show']);
-    Route::get('/career-guides', [CareerGuideController::class, 'index']);
-    Route::get('/career-guides/{slug}/seo', [CareerGuideController::class, 'seo']);
-    Route::get('/career-guides/{slug}', [CareerGuideController::class, 'show']);
-    Route::get('/career-jobs', [CareerJobController::class, 'index']);
-    Route::get('/career-jobs/{slug}/seo', [CareerJobController::class, 'seo']);
-    Route::get('/career-jobs/{slug}', [CareerJobController::class, 'show']);
-    Route::get('/career-recommendations/mbti', [CareerRecommendationController::class, 'index']);
-    Route::get('/career-recommendations/mbti/{type}', [CareerRecommendationController::class, 'show']);
-    Route::get('/personality-content-assets', [PersonalityPublicContentAssetController::class, 'index']);
-    Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);
-    Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);
-    Route::get('/personality', [PersonalityController::class, 'index']);
-    Route::get('/personality/comparisons', [PersonalityController::class, 'comparisonIndex']);
-    Route::get('/personality/comparisons/{comparison}', [PersonalityController::class, 'comparison']);
-    Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show'])
-        ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');
-    Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo'])
-        ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');
-    Route::get('/personality/{type}', [PersonalityController::class, 'show'])
-        ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');
-    Route::get('/topics', [TopicController::class, 'index']);
-    Route::get('/topics/{slug}/seo', [TopicController::class, 'seo']);
-    Route::get('/topics/{slug}', [TopicController::class, 'show']);
+    Route::middleware(PublicApiCacheHeaders::class)->group(function () {
+        Route::get('/landing-surfaces/{surfaceKey}', [LandingSurfaceController::class, 'show']);
+        Route::get('/media-assets', [MediaLibraryController::class, 'index']);
+        Route::get('/media-assets/{assetKey}', [MediaLibraryController::class, 'show']);
+        Route::get('/career-guides', [CareerGuideController::class, 'index']);
+        Route::get('/career-guides/{slug}/seo', [CareerGuideController::class, 'seo']);
+        Route::get('/career-guides/{slug}', [CareerGuideController::class, 'show']);
+        Route::get('/career-jobs', [CareerJobController::class, 'index']);
+        Route::get('/career-jobs/{slug}/seo', [CareerJobController::class, 'seo']);
+        Route::get('/career-jobs/{slug}', [CareerJobController::class, 'show']);
+        Route::get('/career-recommendations/mbti', [CareerRecommendationController::class, 'index']);
+        Route::get('/career-recommendations/mbti/{type}', [CareerRecommendationController::class, 'show']);
+        Route::get('/personality-content-assets', [PersonalityPublicContentAssetController::class, 'index']);
+        Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);
+        Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);
+        Route::get('/personality', [PersonalityController::class, 'index']);
+        Route::get('/personality/comparisons', [PersonalityController::class, 'comparisonIndex']);
+        Route::get('/personality/comparisons/{comparison}', [PersonalityController::class, 'comparison']);
+        Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show'])
+            ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');
+        Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo'])
+            ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');
+        Route::get('/personality/{type}', [PersonalityController::class, 'show'])
+            ->where('type', '[A-Za-z]{4}(?:-[AaTt])?');
+        Route::get('/topics', [TopicController::class, 'index']);
+        Route::get('/topics/{slug}/seo', [TopicController::class, 'seo']);
+        Route::get('/topics/{slug}', [TopicController::class, 'show']);
+    });
 
     Route::middleware([
         ...$cmsAdminMiddleware,

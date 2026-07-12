@@ -88724,9 +88724,9 @@
     "base": "main",
     "branch": "codex/career-nextstep-01",
     "depends_on": [],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "a2e8b3d8bfbf21cfb603ac4e24eec0f638e9a5e2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3015",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -88739,6 +88739,29 @@
     },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
     "transitions": [{"at": "2026-07-12T13:45:00+08:00", "from": "user_authorized", "to": "in_progress", "note": "Started the slug/locale next-step payload cache and LKG fallback in an isolated worktree. No CMS write, migration, production warmup, import, or deploy is authorized."}, {"at": "2026-07-12T13:55:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest checks and the full backend CI verification chain passed; changed files remain restricted to the six declared paths."}, {"at": "2026-07-12T14:00:00+08:00", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed, pushed, and opened PR #3014; polling required checks."}, {"at": "2026-07-12T14:08:00+08:00", "from": "github_checks_pending", "to": "github_checks_retry_pending", "note": "Inspected verify-bigfive failure, added the current career-only controller to the existing runtime-freeze classifier allowlist, and passed the focused regression before retry."}, {"at": "2026-07-12T14:15:00+08:00", "from": "github_checks_retry_pending", "to": "ready_to_merge", "note": "All 9 required checks passed and the seven-path scope revalidation remained clean."}]
+  },
+  "PUBLIC-API-CACHE-01": {
+    "id": "PUBLIC-API-CACHE-01",
+    "repo": "fap-api",
+    "title": "PUBLIC-API-CACHE-01: add safe public GET cache headers",
+    "base": "main",
+    "branch": "codex/public-api-cache-01",
+    "depends_on": ["CAREER-NEXTSTEP-01"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The performance PR-train /goal explicitly authorized PUBLIC-API-CACHE-01 and manifest/state registration."},
+      "dependency": {"status": "pass", "evidence": "CAREER-NEXTSTEP-01 merged in fap-api PR #3014 at ba4cfbb04d44a9f3541a6a686f4daa0d0f232d4a."},
+      "local_validation": {"status": "pass", "evidence": "Focused cache-header and OpenAPI tests passed 6 tests with 20 assertions; Pint, PHP syntax, v0.5 route list, strict OpenAPI snapshot check, YAML/JSON parsing, diff whitespace, and exact six-path scope validation passed. After synchronizing expected middleware metadata, the complete scripts/ci_verify_mbti.sh chain completed with exit 0."},
+      "github_required_checks": {"status": "pass", "evidence": "All 9 required checks passed on a2e8b3d8bfbf21cfb603ac4e24eec0f638e9a5e2 after the strict public-cache route-diff classifier fix."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-12T14:40:00+08:00", "from": "user_authorized", "to": "in_progress", "note": "Started explicit public v0.5 GET cache headers from clean origin/main in an isolated worktree. Private, tenant, ops, CMS write, DB, warmup, and deploy behavior remain out of scope."}, {"at": "2026-07-12T14:48:00+08:00", "from": "in_progress", "to": "local_checks_retry_pending", "note": "Inspected the current-scope OpenAPI middleware metadata drift, regenerated the snapshot, and passed the strict OpenAPI diff test before rerunning the full chain."}, {"at": "2026-07-12T14:55:00+08:00", "from": "local_checks_retry_pending", "to": "local_checks_passed", "note": "The full backend CI verification chain passed with exit 0 and the exact six-path scope remained clean after restoring generated compiled artifacts."}, {"at": "2026-07-12T15:00:00+08:00", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed, pushed, and opened PR #3015; polling required checks."}, {"at": "2026-07-12T15:08:00+08:00", "from": "github_checks_pending", "to": "github_checks_retry_pending", "note": "Inspected verify-bigfive failure and added a strict classifier for the current middleware file plus indentation-only public route wrapping."}, {"at": "2026-07-12T15:15:00+08:00", "from": "github_checks_retry_pending", "to": "ready_to_merge", "note": "All 9 required checks passed and the exact seven-path scope remained clean."}]
   },
   "ENNEAGRAM-LLMS-FULL-RELEASE-01": {
     "id": "ENNEAGRAM-LLMS-FULL-RELEASE-01", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-FULL-RELEASE-01: release approved Enneagram llms-full assets", "base": "main", "branch": "codex/enneagram-llms-full-release-01", "depends_on": ["ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02"],

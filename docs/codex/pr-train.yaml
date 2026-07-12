@@ -41394,3 +41394,39 @@ prs:
     cms_mutation: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: PUBLIC-API-CACHE-01
+    repo: fap-api
+    depends_on: [CAREER-NEXTSTEP-01]
+    branch: codex/public-api-cache-01
+    title: "PUBLIC-API-CACHE-01: add safe public GET cache headers"
+    train_scope: public_api_cache_headers
+    status: user_authorized
+    scope:
+      - Add shared-cache headers only to explicitly grouped v0.5 public career and CMS GET routes.
+      - Require anonymous org_id=0 requests, successful responses, no Set-Cookie, and no existing no-store directive.
+      - Keep authenticated, tenant, shortlist, attempt, result, order, payment, ops, internal, and CMS write routes outside the public cache middleware.
+    allowed_paths:
+      - backend/app/Http/Middleware/PublicApiCacheHeaders.php
+      - backend/routes/api.php
+      - backend/tests/Feature/PublicApiCacheHeadersTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change response bodies, CMS publication state, content authority, DB schema/data, private endpoint semantics, cache storage, production cache, warmup, import, or deploy.
+    validation:
+      - cd backend && php artisan test tests/Feature/PublicApiCacheHeadersTest.php
+      - cd backend && ./vendor/bin/pint --test app/Http/Middleware/PublicApiCacheHeaders.php routes/api.php tests/Feature/PublicApiCacheHeadersTest.php
+      - cd backend && php artisan route:list --path=api/v0.5 --except-vendor
+      - cd backend && bash scripts/export_openapi.sh --check && php artisan test tests/Feature/OpenApiDiffTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_freeze_classifier_ignores_public_api_cache_header_wiring_only
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    deploy_allowed: false
+    content_authority: CMS/backend

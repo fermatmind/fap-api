@@ -2549,7 +2549,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2566,7 +2567,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2583,7 +2585,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@seo",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2600,7 +2603,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\CareerGuideController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2617,7 +2621,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\CareerGuideController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2634,7 +2639,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\CareerGuideController@seo",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2651,7 +2657,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\CareerJobController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2668,7 +2675,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\CareerJobController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2685,7 +2693,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\CareerJobController@seo",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2702,7 +2711,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\CareerRecommendationController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2719,7 +2729,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\CareerRecommendationController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2754,7 +2765,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerCnProxyPublicOwnerController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2771,7 +2783,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerDatasetHubController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2788,7 +2801,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerDatasetMethodController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2805,7 +2819,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerDirectoryController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2822,7 +2837,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFamilyHubController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2839,7 +2855,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFirstWaveDiscoverabilityManifestController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2856,7 +2873,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFirstWaveOccupationCompanionLinksController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2873,7 +2891,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFirstWaveNextStepLinksController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2890,7 +2909,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFirstWaveLaunchTierController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2907,7 +2927,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFirstWaveLifecycleController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2924,7 +2945,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFirstWaveReadinessController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2941,7 +2963,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFirstWaveRecommendationCompanionLinksController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2958,7 +2981,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFirstWaveRolloutQueueController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2975,7 +2999,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerJobListController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -2992,7 +3017,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerJobDetailController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3009,7 +3035,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerAiImpactAssetPreviewController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3026,7 +3053,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerJobExplainabilityController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3043,7 +3071,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerPageAssemblyAssetPreviewController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3060,7 +3089,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerSalaryAssetPreviewController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3077,7 +3107,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerLaunchGovernanceClosureController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3094,7 +3125,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerLifecycleOperationalSummaryController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3111,7 +3143,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRecommendationIndexController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3128,7 +3161,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRecommendationDetailController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3145,7 +3179,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRecommendationExplainabilityController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3180,7 +3215,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerAliasResolutionController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3197,7 +3233,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRuntimeConfigController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3214,7 +3251,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerSearchController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3266,7 +3304,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerTransitionPreviewController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -3403,7 +3442,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ContentPageController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4034,7 +4074,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\LandingSurfaceController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4051,7 +4092,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\MediaLibraryController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4068,7 +4110,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\MediaLibraryController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4274,7 +4317,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4298,7 +4342,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityPublicContentAssetController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4322,7 +4367,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityPublicContentAssetController@showByCode",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4346,7 +4392,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityPublicContentAssetController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4363,7 +4410,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityController@comparisonIndex",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4380,7 +4428,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityController@comparison",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4397,7 +4446,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4414,7 +4464,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityDesktopCloneController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4431,7 +4482,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityController@seo",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4448,7 +4500,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ResearchReportController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4465,7 +4518,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ResearchReportController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4502,7 +4556,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\SEO\\SitemapSourceController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ],
                 "x-laravel-name": "seo.sitemap-source"
             }
@@ -4520,7 +4575,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\SupportArticleController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4537,7 +4593,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\SupportArticleController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4554,7 +4611,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\InterpretationGuideController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4571,7 +4629,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\InterpretationGuideController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4588,7 +4647,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\InterpretationGuideController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4605,7 +4665,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\InterpretationGuideController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4622,7 +4683,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\TopicController@index",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4639,7 +4701,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\TopicController@show",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         },
@@ -4656,7 +4719,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\TopicController@seo",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders"
                 ]
             }
         }
