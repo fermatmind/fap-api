@@ -511,3 +511,20 @@
 - recommended follow-up:
   - Repair repository-wide baseline formatting separately.
 - whether train continued: `true`
+
+## ENNEAGRAM-LLMS-TXT-RELEASE-GATE-01 missing frontend consumer contract
+
+- repo: `fap-web`
+- PR id / branch: `ENNEAGRAM-LLMS-TXT-RELEASE-GATE-01` / `codex/enneagram-llms-txt-release-gate-01`
+- blocker type: `missing_llms_txt_consumer_enumeration_contract`
+- evidence:
+  - `app/llms.txt/route.ts` currently imports only MBTI and Big Five backend personality authority paths.
+  - `tests/contracts/personality-enneagram-90-sitemap-extractor.contract.test.ts` explicitly keeps both `llms.txt` and `llms-full.txt` disconnected from the Enneagram sitemap extractor.
+  - The existing Enneagram sitemap extractor is sitemap-eligibility based, so using it directly would bypass the separate `llms_eligible` release gate.
+- why not current PR scope:
+  - The current manifest item is fap-api-only and cannot safely modify the fap-web feed consumer.
+- whether required checks are affected: `false` for the current backend gate PR; it blocks the later production release task.
+- recommended follow-up:
+  - Authorize `ENNEAGRAM-LLMS-TXT-FRONTEND-ENUMERATION-01` before executing `ENNEAGRAM-LLMS-TXT-RELEASE-01`.
+  - The frontend must enumerate only public API assets with `llms_eligible=true`, while preserving Enneagram membership at 0 in `llms-full.txt`.
+- whether train continued: `true` for the backend gate PR only
