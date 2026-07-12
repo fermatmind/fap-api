@@ -15,6 +15,7 @@ use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Services\Cms\Mbti64CrossTypeComparisonPublicReadModel;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\PersonalityProfileService;
+use App\Services\Cms\PersonalityPublicReadModelCache;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
@@ -53,6 +54,7 @@ class PersonalityController extends Controller
     public function __construct(
         private readonly PersonalityProfileService $personalityProfileService,
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
+        private readonly PersonalityPublicReadModelCache $personalityPublicReadModelCache,
         private readonly Mbti64CrossTypeComparisonPublicReadModel $crossTypeComparisonReadModel,
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
@@ -137,6 +139,13 @@ class PersonalityController extends Controller
         $profile = $routeProfile['profile'];
         /** @var PersonalityProfileVariant|null $variant */
         $variant = $routeProfile['variant'];
+        $cacheVersion = $this->publicReadModelVersion($profile, $variant);
+        $cachedPayload = $this->personalityPublicReadModelCache->get(
+            'detail', $type, $validated['locale'], $validated['org_id'], $validated['scale_code'], $cacheVersion
+        );
+        if (is_array($cachedPayload)) {
+            return response()->json($cachedPayload);
+        }
         $projection = $this->sanitizePublicProjection(
             $this->personalityProfileService->buildPublicProjection($profile, $variant)
         );
@@ -182,6 +191,16 @@ class PersonalityController extends Controller
             $payload['mbti_public_projection_v1'] = $projection;
         }
 
+        $this->personalityPublicReadModelCache->put(
+            'detail',
+            $type,
+            $validated['locale'],
+            $validated['org_id'],
+            $validated['scale_code'],
+            $cacheVersion,
+            $payload,
+        );
+
         return response()->json($payload);
     }
 
@@ -207,16 +226,34 @@ class PersonalityController extends Controller
         $profile = $routeProfile['profile'];
         /** @var PersonalityProfileVariant|null $variant */
         $variant = $routeProfile['variant'];
+        $cacheVersion = $this->publicReadModelVersion($profile, $variant);
+        $cachedPayload = $this->personalityPublicReadModelCache->get(
+            'seo', $type, $validated['locale'], $validated['org_id'], $validated['scale_code'], $cacheVersion
+        );
+        if (is_array($cachedPayload)) {
+            return response()->json($cachedPayload);
+        }
         $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
             $this->personalityProfileSeoService->buildMeta($profile, $variant)
         );
         $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
 
-        return response()->json([
+        $payload = [
             'meta' => $meta,
             'jsonld' => $jsonLd,
             'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, $this->personalitySeoSurfaceType($profile)),
-        ]);
+        ];
+        $this->personalityPublicReadModelCache->put(
+            'seo',
+            $type,
+            $validated['locale'],
+            $validated['org_id'],
+            $validated['scale_code'],
+            $cacheVersion,
+            $payload,
+        );
+
+        return response()->json($payload);
     }
 
     public function comparisonIndex(Request $request): JsonResponse
@@ -2279,6 +2316,14 @@ class PersonalityController extends Controller
             'scale_code' => (string) ($validated['scale_code'] ?? PersonalityProfile::SCALE_CODE_MBTI),
             'locale' => (string) $validated['locale'],
         ];
+    }
+
+    private function publicReadModelVersion(PersonalityProfile $profile, ?PersonalityProfileVariant $variant): string
+    {
+        return hash('xxh3', json_encode([
+            'profile' => $profile->getAttributes(),
+            'variant' => $variant?->getAttributes(),
+        ], JSON_THROW_ON_ERROR));
     }
 
     private function invalidArgument(string $message): JsonResponse

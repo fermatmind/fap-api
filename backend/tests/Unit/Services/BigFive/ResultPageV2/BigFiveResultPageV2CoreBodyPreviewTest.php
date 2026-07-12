@@ -5136,6 +5136,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', routeChangedLines: $routeChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_personality_public_read_model_cache(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php',
+            'backend/app/Services/Cms/PersonalityPublicReadModelCache.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_allows_bigfive_norm_foundation_data_scope_only(): void
     {
         $allowed = [
@@ -7100,6 +7110,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php',
             'backend/app/Services/Cms/PersonalityProfileService.php',
+            'backend/app/Services/Cms/PersonalityPublicReadModelCache.php',
         ], true);
     }
 
