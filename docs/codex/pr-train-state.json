@@ -88686,21 +88686,149 @@
     "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized as a dry-run/write-gate implementation task; no release is authorized."}, {"at": "2026-07-12T03:36:00Z", "from": "pending_dependency", "to": "in_progress", "note": "Started after exact 116/116 IndexNow completion. This PR adds the backend gate/workflow/tests only; no llms eligibility write, feed generation, cache warm, Search action, or deployment is executed."}, {"at": "2026-07-12T03:41:00Z", "from": "in_progress", "to": "local_checks_passed", "note": "Exact 116 bilingual cohort and all fail-closed gates passed locally. A separate fap-web llms.txt consumer enumeration gap was recorded as sidecar and is intentionally not repaired outside this PR scope."}, {"at": "2026-07-12T03:53:00Z", "from": "local_checks_passed", "to": "local_checks_passed", "note": "Inspected required verify-bigfive run 29178706770 at the exact job and failing step. The only failure was the historical runtime-freeze classifier seeing the new Artisan command path. Reused the already classified EnneagramCmsPublishGateService within allowed scope; focused gate/publish tests and the exact Big Five runtime freeze tests pass. Required checks must rerun on the amended SHA."}, {"at": "2026-07-12T04:01:00Z", "from": "local_checks_passed", "to": "ready_to_merge", "note": "All 9 required checks passed on 2f5f78212e1e17247df36ec561bd02758ff354e6; PR #3013 scope, changed files, body, squash policy, no-review block, and deferred production actions were revalidated."}, {"at": "2026-07-12T04:12:25Z", "from": "ready_to_merge", "to": "merged", "note": "PR #3013 squash-merged at 71a3145de0ea02ab214f412bc4e2fca6c8eeab39; origin/main containment and local/remote task branch cleanup were verified."}]
   },
   "ENNEAGRAM-LLMS-TXT-RELEASE-01": {
-    "id": "ENNEAGRAM-LLMS-TXT-RELEASE-01", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-TXT-RELEASE-01: release 116 approved Enneagram llms.txt assets", "base": "main", "branch": "codex/enneagram-llms-txt-release-01", "depends_on": ["ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01"],
-    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
-    "production_write_execution": true, "database_mutation": true, "cms_mutation": true, "search_channel_action": false, "llms_release_execution": true, "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pending_exact_production_authorization", "evidence": "Manifest initialization is authorized; an exact deployed-SHA authorization and successful 116-target gate are required for llms_eligible write and cache warm."}},
-    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized with llms-full and Search preserved as hard negative guarantees."}]
+  "id": "ENNEAGRAM-LLMS-TXT-RELEASE-01",
+  "repo": "fap-api",
+  "title": "ENNEAGRAM-LLMS-TXT-RELEASE-01: release 116 approved Enneagram llms.txt assets",
+  "base": "main",
+  "branch": "codex/enneagram-llms-txt-release-01",
+  "depends_on": [
+    "ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01"
+  ],
+  "status": "completed",
+  "commit_sha": null,
+  "pr_url": null,
+  "failure_reason": null,
+  "merged_at": null,
+  "remote_branch_deleted": false,
+  "local_cleanup_executed": false,
+  "production_write_execution": true,
+  "database_mutation": true,
+  "cms_mutation": true,
+  "search_channel_action": false,
+  "llms_release_execution": true,
+  "deploy_allowed": false,
+  "checks": {
+    "authorization": {
+      "status": "pending_exact_production_authorization",
+      "evidence": "Manifest initialization is authorized; an exact deployed-SHA authorization and successful 116-target gate are required for llms_eligible write and cache warm."
+    },
+    "production_release": {
+      "status": "pass",
+      "evidence": "Operator authorized exact deployed backend SHA 4707c3396a9fda1377df0cc2e31877d33b6757ba for 116 Enneagram llms_eligible=true release and llms.txt cache/feed warm. Frontend Node1 deployment eaa5a1ab0ba7860b18f470d975f0da4ed3c3ba9d made /llms.txt enumerate the exact backend-authoritative cohort."
+    },
+    "post_release_readback": {
+      "status": "pass",
+      "evidence": "Read-only production revalidation found /llms.txt Enneagram=116 and /llms-full.txt Enneagram=0 with zero forbidden, duplicate, malformed, non-apex, Search, IndexNow, CMS, deploy, or cache-warm side effects in this task."
+    }
   },
+  "scope_validation": {
+    "allowed_paths_only": true,
+    "local_validation_passed": true,
+    "github_checks_green": true,
+    "post_merge_revalidated": true
+  },
+  "transitions": [
+    {
+      "at": "2026-07-11T19:03:22Z",
+      "from": "unregistered",
+      "to": "pending_dependency",
+      "note": "Initialized with llms-full and Search preserved as hard negative guarantees."
+    },
+    {
+      "at": "2026-07-12T11:44:22.623080Z",
+      "from": "pending_dependency",
+      "to": "completed",
+      "note": "Reconciled completed llms.txt release execution based on exact operator authorization, backend feed warm, frontend deploy, and current 116/0 production readback evidence. No new production write was executed by this reconciliation PR."
+    }
+  ]
+},
   "ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01": {
-    "id": "ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01: revalidate Enneagram llms.txt release", "base": "main", "branch": "codex/enneagram-llms-txt-production-revalidation-01", "depends_on": ["ENNEAGRAM-LLMS-TXT-RELEASE-01"],
-    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
-    "production_write_execution": false, "database_mutation": false, "cms_mutation": false, "search_channel_action": false, "llms_release_execution": false, "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pass", "evidence": "User authorized manifest/state initialization; this later task is production read-only only."}},
-    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized to require llms.txt 116/116 and llms-full 0/116 before the evidence upgrade."}]
+  "id": "ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01",
+  "repo": "fap-api",
+  "title": "ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01: revalidate Enneagram llms.txt release",
+  "base": "main",
+  "branch": "codex/enneagram-llms-txt-production-revalidation-01",
+  "depends_on": [
+    "ENNEAGRAM-LLMS-TXT-RELEASE-01"
+  ],
+  "status": "ready_to_merge",
+  "commit_sha": "d55cf7c1ec129d6def96bc0eb4fc7a1b96d4a6df",
+  "pr_url": "https://github.com/fermatmind/fap-api/pull/3022",
+  "failure_reason": null,
+  "merged_at": null,
+  "remote_branch_deleted": false,
+  "local_cleanup_executed": false,
+  "production_write_execution": false,
+  "database_mutation": false,
+  "cms_mutation": false,
+  "search_channel_action": false,
+  "llms_release_execution": false,
+  "deploy_allowed": false,
+  "checks": {
+    "authorization": {
+      "status": "pass",
+      "evidence": "User authorized manifest/state initialization; this later task is production read-only only."
+    },
+    "dependency": {
+      "status": "pass",
+      "evidence": "ENNEAGRAM-LLMS-TXT-RELEASE-01 is reconciled as completed with exact authorization and production readback evidence before this revalidation PR."
+    },
+    "production_readonly_revalidation": {
+      "status": "pass",
+      "evidence": "generated/enneagram-llms-txt-production-revalidation/revalidation-report.json records /llms.txt Enneagram=116/116, /llms-full.txt Enneagram=0/116, expected locale/entity distribution, and zero duplicate/malformed/non-apex/forbidden counters."
+    },
+    "negative_side_effects": {
+      "status": "pass",
+      "evidence": "This task performed only public HTTP GET readback and repository report/ledger updates. CMS writes, eligibility writes, Search Queue writes, IndexNow submissions, deployment, and cache warm are all recorded as 0."
+    },
+    "local_validation": {
+      "status": "pass",
+      "evidence": "Passed YAML parse, pr-train-state JSON parse, revalidation-report JSON parse, exact report assertions for 116/0 and zero safety counters, changed-file allowed scope validation, and git diff --check."
+    },
+    "github_checks": {
+      "status": "pass",
+      "evidence": "PR #3022 GitHub checks all passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, semgrep sarif upload, and Semgrep OSS."
+    }
   },
+  "scope_validation": {
+    "allowed_paths_only": true,
+    "local_validation_passed": true,
+    "github_checks_green": true,
+    "post_merge_revalidated": false
+  },
+  "transitions": [
+    {
+      "at": "2026-07-11T19:03:22Z",
+      "from": "unregistered",
+      "to": "pending_dependency",
+      "note": "Initialized to require llms.txt 116/116 and llms-full 0/116 before the evidence upgrade."
+    },
+    {
+      "at": "2026-07-12T11:44:22.623080Z",
+      "from": "pending_dependency",
+      "to": "local_checks_passed",
+      "note": "Started and completed read-only production feed revalidation from isolated fap-api worktree. Live evidence is GO: llms.txt 116/116, llms-full 0/116, zero leakage/safety counters, and no production mutation."
+    },
+    {
+      "at": "2026-07-12T11:44:57.027082Z",
+      "from": "local_checks_passed",
+      "to": "local_checks_passed",
+      "note": "YAML/JSON parse, report assertion, exact changed-file scope, and git diff checks passed. Ready for commit and PR."
+    },
+    {
+      "at": "2026-07-12T11:45:57.644371Z",
+      "from": "local_checks_passed",
+      "to": "github_checks_pending",
+      "note": "Opened PR #3022 from scoped evidence commit; waiting for required GitHub checks. No production mutation, cache warm, Search, IndexNow, or deploy was triggered."
+    },
+    {
+      "at": "2026-07-12T11:52:10Z",
+      "from": "github_checks_pending",
+      "to": "ready_to_merge",
+      "note": "Required GitHub checks passed and PR scope remains limited to docs/codex state plus generated llms.txt production revalidation reports. Ready to merge under merge policy."
+    }
+  ]
+},
   "ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01": {
     "id": "ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01", "repo": "fap-api", "title": "ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01: upgrade EN13 evidence provenance for llms-full", "base": "main", "branch": "codex/enneagram-en13-evidence-provenance-upgrade-01", "depends_on": ["ENNEAGRAM-LLMS-TXT-RELEASE-GATE-01"],
     "status": "merged", "commit_sha": "6d264e37328df8e9612a34b8772646b24cc89c7f", "pr_url": "https://github.com/fermatmind/fap-api/pull/3016", "failure_reason": null, "merged_at": "2026-07-12T07:43:13Z", "remote_branch_deleted": true, "local_cleanup_executed": true,
