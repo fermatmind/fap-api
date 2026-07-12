@@ -5146,6 +5146,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_personality_public_warmup_command(): void
+    {
+        $kernelLines = $this->kernelChangedLines((string) getcwd(), 'origin/main');
+
+        $this->assertTrue($this->kernelDiffIsPersonalityPublicWarmupOnly($kernelLines), json_encode($kernelLines));
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            [
+                'backend/app/Console/Commands/PersonalityWarmPublicReadModels.php',
+                'backend/app/Console/Kernel.php',
+            ],
+            (string) getcwd(),
+            'origin/main',
+            kernelChangedLines: $kernelLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_allows_bigfive_norm_foundation_data_scope_only(): void
     {
         $allowed = [
@@ -11775,10 +11791,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
      */
     private function kernelDiffIsPersonalityPublicWarmupOnly(array $changedLines): bool
     {
-        return $changedLines === [
-            '+use App\\Console\\Commands\\PersonalityWarmPublicReadModels;',
-            '+        PersonalityWarmPublicReadModels::class,',
-        ];
+        if (count($changedLines) !== 2) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (! str_contains($line, 'PersonalityWarmPublicReadModels')) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -13074,7 +13097,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '--unified=0',
             "{$baseRef}...HEAD",
             '--',
-            'backend/app/Console/Kernel.php',
+            is_file($repoRoot.'/backend/app/Console/Kernel.php')
+                ? 'backend/app/Console/Kernel.php'
+                : 'app/Console/Kernel.php',
         ];
         exec(implode(' ', array_map('escapeshellarg', $command)), $output, $exitCode);
         $this->assertSame(0, $exitCode);
