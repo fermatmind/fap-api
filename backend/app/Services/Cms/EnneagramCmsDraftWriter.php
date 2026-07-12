@@ -11,6 +11,10 @@ final class EnneagramCmsDraftWriter
 {
     private const SNAPSHOT_SOURCE = 'enneagram_agent_projection_draft_v1';
 
+    private const EVIDENCE_REFRESH_EXPECTED_COUNT = 26;
+
+    private const EVIDENCE_SECTION_KEY = 'evidence_and_limitations';
+
     private const ALLOWED_ENTITY_TYPES = [
         PersonalityPublicContentAsset::ENTITY_HUB,
         PersonalityPublicContentAsset::ENTITY_CENTER,
@@ -28,6 +32,309 @@ final class EnneagramCmsDraftWriter
         '#/account(?:/|$)#i',
         '#[?&](?:token|session|user|result_id|report_id|order_no)=#i',
     ];
+
+    /**
+     * @param  array<string,array<string,mixed>>  $packages
+     * @param  array<string,array<string,mixed>>  $ledgers
+     * @param  array<string,string>  $packageHashes
+     * @return array<string,mixed>
+     */
+    public function planEvidenceRefresh(array $packages, array $ledgers, array $packageHashes, string $deployedSha): array
+    {
+        return $this->buildEvidenceRefreshSummary($packages, $ledgers, $packageHashes, $deployedSha, false, null, null, false);
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $packages
+     * @param  array<string,array<string,mixed>>  $ledgers
+     * @param  array<string,string>  $packageHashes
+     * @return array<string,mixed>
+     */
+    public function writeEvidenceRefresh(
+        array $packages,
+        array $ledgers,
+        array $packageHashes,
+        string $deployedSha,
+        string $confirmedCohortSha256,
+        string $operatorToken,
+        bool $writeEnabled,
+    ): array {
+        return DB::transaction(fn (): array => $this->buildEvidenceRefreshSummary(
+            $packages,
+            $ledgers,
+            $packageHashes,
+            $deployedSha,
+            true,
+            $confirmedCohortSha256,
+            $operatorToken,
+            $writeEnabled,
+        ));
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $packages
+     * @param  array<string,array<string,mixed>>  $ledgers
+     * @param  array<string,string>  $packageHashes
+     * @return array<string,mixed>
+     */
+    private function buildEvidenceRefreshSummary(
+        array $packages,
+        array $ledgers,
+        array $packageHashes,
+        string $deployedSha,
+        bool $write,
+        ?string $confirmedCohortSha256,
+        ?string $operatorToken,
+        bool $writeEnabled,
+    ): array {
+        $issues = [];
+        $rows = [];
+        $identities = [];
+        if (preg_match('/^[0-9a-f]{40}$/', $deployedSha) !== 1) {
+            $issues[] = 'deployed_sha_invalid';
+        }
+
+        foreach (['en', 'zh-CN'] as $locale) {
+            $package = $packages[$locale] ?? [];
+            $ledger = $ledgers[$locale] ?? [];
+            $packageHash = strtolower(trim((string) ($packageHashes[$locale] ?? '')));
+            $ledgerIds = $this->evidenceLedgerSourceIds($ledger);
+            if (($package['locale'] ?? null) !== $locale || ($package['page_count'] ?? null) !== 13) {
+                $issues[] = $locale.':package_shape_invalid';
+            }
+            if (preg_match('/^[0-9a-f]{64}$/', $packageHash) !== 1) {
+                $issues[] = $locale.':package_hash_invalid';
+            }
+            if (($package['source_audit'] ?? null) !== ($ledger['artifact'] ?? null) || count($ledgerIds) < 2) {
+                $issues[] = $locale.':ledger_binding_invalid';
+            }
+
+            foreach ((array) ($package['recommendations'] ?? []) as $position => $recommendation) {
+                if (! is_array($recommendation)) {
+                    $issues[] = $locale.':recommendation_invalid';
+
+                    continue;
+                }
+                $identity = $this->identityForRecommendation($recommendation);
+                if ($identity === null || $identity['locale'] !== $locale
+                    || ! in_array($identity['entity_type'], self::ALLOWED_ENTITY_TYPES, true)) {
+                    $issues[] = $locale.':'.((string) $position).':identity_invalid';
+
+                    continue;
+                }
+                $identityKey = $identity['locale'].'|'.$identity['entity_type'].'|'.$identity['entity_key'];
+                if (isset($identities[$identityKey])) {
+                    $issues[] = $identityKey.':duplicate_identity';
+
+                    continue;
+                }
+                $identities[$identityKey] = true;
+                $payload = is_array($recommendation['recommendations'] ?? null) ? $recommendation['recommendations'] : [];
+                $notes = array_values(array_filter(
+                    is_array($payload['evidence_notes'] ?? null) ? $payload['evidence_notes'] : [],
+                    static fn (mixed $note): bool => is_array($note)
+                ));
+                $section = $this->evidenceSection((array) ($payload['sections'] ?? []));
+                $sourceIds = array_values(array_unique(array_filter(array_map(
+                    static fn (array $note): string => trim((string) ($note['source_id'] ?? '')),
+                    $notes
+                ))));
+                if ($section === null || $this->evidenceVisibleLength($section['body_md'] ?? null) < 120) {
+                    $issues[] = $identityKey.':visible_evidence_incomplete';
+                }
+                if (count($sourceIds) < 2 || array_diff($sourceIds, $ledgerIds) !== []) {
+                    $issues[] = $identityKey.':source_ids_invalid';
+                }
+                foreach ($notes as $note) {
+                    if ($this->evidenceVisibleLength($note['claim'] ?? null) < 20
+                        || $this->evidenceVisibleLength($note['limitation'] ?? null) < 20) {
+                        $issues[] = $identityKey.':claim_or_limitation_incomplete';
+                        break;
+                    }
+                }
+                $evidenceJson = $this->jsonString(['section' => $section, 'notes' => $notes]);
+                if ($this->containsForbiddenRoutePattern($evidenceJson)) {
+                    $issues[] = $identityKey.':private_or_sensitive_evidence';
+                }
+
+                $asset = $this->existingAsset($identity);
+                if (! $asset instanceof PersonalityPublicContentAsset) {
+                    $issues[] = $identityKey.':asset_missing';
+
+                    continue;
+                }
+                if (! $this->evidenceRefreshStateIsSafe($asset)) {
+                    $issues[] = $identityKey.':asset_state_forbidden';
+                }
+                $candidate = [
+                    'content_sections_json' => $this->mergeEvidenceSection((array) $asset->content_sections_json, $section),
+                    'evidence_notes_json' => $notes,
+                    'source_package' => 'enneagram_en13_evidence_v1:'.$locale,
+                    'source_hash' => $packageHash,
+                    'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+                ];
+                $rows[] = [
+                    'identity' => $identityKey,
+                    'asset_id' => (int) $asset->id,
+                    'source_hash' => $packageHash,
+                    'evidence_sha256' => hash('sha256', $this->jsonString($notes)),
+                    'visible_evidence_sha256' => hash('sha256', $this->jsonString((array) $section)),
+                    'already_current' => $this->evidenceRefreshMatches($asset, $candidate),
+                    'candidate' => $candidate,
+                ];
+            }
+        }
+
+        if (count($rows) !== self::EVIDENCE_REFRESH_EXPECTED_COUNT || count($identities) !== self::EVIDENCE_REFRESH_EXPECTED_COUNT) {
+            $issues[] = 'exact_26_identity_count_required';
+        }
+        $cohortRows = array_map(static fn (array $row): array => [
+            'identity' => $row['identity'],
+            'source_hash' => $row['source_hash'],
+            'evidence_sha256' => $row['evidence_sha256'],
+            'visible_evidence_sha256' => $row['visible_evidence_sha256'],
+        ], $rows);
+        usort($cohortRows, static fn (array $left, array $right): int => $left['identity'] <=> $right['identity']);
+        $cohortSha256 = hash('sha256', $this->jsonString($cohortRows));
+
+        if ($write) {
+            if (! $writeEnabled) {
+                $issues[] = 'process_write_gate_disabled';
+            }
+            if (! is_string($confirmedCohortSha256) || ! hash_equals($cohortSha256, strtolower(trim($confirmedCohortSha256)))) {
+                $issues[] = 'cohort_sha256_confirmation_mismatch';
+            }
+            $expectedToken = 'ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01:'.$deployedSha.':'.$cohortSha256;
+            if (! is_string($operatorToken) || ! hash_equals($expectedToken, trim($operatorToken))) {
+                $issues[] = 'operator_approval_mismatch';
+            }
+        }
+
+        $issues = array_values(array_unique($issues));
+        sort($issues);
+        if ($issues !== []) {
+            return $this->evidenceRefreshPayload('blocked', $write, $deployedSha, $cohortSha256, $rows, $issues, 0);
+        }
+        $alreadyCurrent = count(array_filter($rows, static fn (array $row): bool => $row['already_current']));
+        if (! $write) {
+            return $this->evidenceRefreshPayload(
+                $alreadyCurrent === self::EVIDENCE_REFRESH_EXPECTED_COUNT ? 'already_refreshed' : 'dry_run_ready',
+                false,
+                $deployedSha,
+                $cohortSha256,
+                $rows,
+                [],
+                0,
+            );
+        }
+
+        $updated = 0;
+        foreach ($rows as $row) {
+            if ($row['already_current']) {
+                continue;
+            }
+            PersonalityPublicContentAsset::query()->withoutGlobalScopes()->whereKey($row['asset_id'])->update($row['candidate']);
+            $updated++;
+        }
+
+        return $this->evidenceRefreshPayload(
+            $updated === 0 ? 'already_refreshed' : 'refreshed',
+            true,
+            $deployedSha,
+            $cohortSha256,
+            $rows,
+            [],
+            $updated,
+        );
+    }
+
+    /** @return list<string> */
+    private function evidenceLedgerSourceIds(array $ledger): array
+    {
+        return array_values(array_unique(array_filter(array_map(
+            static fn (mixed $source): string => is_array($source) ? trim((string) ($source['id'] ?? '')) : '',
+            (array) ($ledger['sources'] ?? [])
+        ))));
+    }
+
+    private function evidenceSection(array $sections): ?array
+    {
+        $matches = array_values(array_filter(
+            $sections,
+            static fn (mixed $section): bool => is_array($section) && ($section['key'] ?? null) === self::EVIDENCE_SECTION_KEY
+        ));
+
+        return count($matches) === 1 ? $matches[0] : null;
+    }
+
+    private function mergeEvidenceSection(array $existing, ?array $evidence): array
+    {
+        if ($evidence === null) {
+            return $existing;
+        }
+        $sections = array_values(array_filter(
+            $existing,
+            static fn (mixed $section): bool => ! is_array($section) || ($section['key'] ?? null) !== self::EVIDENCE_SECTION_KEY
+        ));
+        $index = array_search('method_boundary', array_map(
+            static fn (mixed $section): mixed => is_array($section) ? ($section['key'] ?? null) : null,
+            $sections
+        ), true);
+        array_splice($sections, $index === false ? count($sections) : $index, 0, [$evidence]);
+
+        return $sections;
+    }
+
+    private function evidenceRefreshStateIsSafe(PersonalityPublicContentAsset $asset): bool
+    {
+        return $asset->is_public
+            && $asset->launch_state === PersonalityPublicContentAsset::LAUNCH_PUBLISHED
+            && $asset->robots === PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW
+            && $asset->index_eligible && $asset->sitemap_eligible && ! $asset->llms_eligible;
+    }
+
+    private function evidenceRefreshMatches(PersonalityPublicContentAsset $asset, array $candidate): bool
+    {
+        foreach ($candidate as $field => $value) {
+            if ($asset->getAttribute($field) !== $value) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function evidenceVisibleLength(mixed $value): int
+    {
+        return is_scalar($value) ? mb_strlen(trim(strip_tags((string) $value))) : 0;
+    }
+
+    /** @return array<string,mixed> */
+    private function evidenceRefreshPayload(string $status, bool $write, string $deployedSha, string $cohortSha256, array $rows, array $issues, int $updated): array
+    {
+        return [
+            'schema_version' => 'enneagram-en13-evidence-refresh.v1',
+            'ok' => in_array($status, ['dry_run_ready', 'refreshed', 'already_refreshed'], true),
+            'status' => $status,
+            'dry_run' => ! $write,
+            'write_requested' => $write,
+            'deployed_sha' => $deployedSha,
+            'cohort_sha256' => $cohortSha256,
+            'target_count' => count($rows),
+            'already_current_count' => count(array_filter($rows, static fn (array $row): bool => $row['already_current'])),
+            'updated_count' => $updated,
+            'issues' => $issues,
+            'negative_guarantees' => [
+                'publish_state_write' => false,
+                'robots_index_sitemap_write' => false,
+                'llms_eligibility_write' => false,
+                'review_state_write' => false,
+                'search_queue_or_submit' => false,
+                'cache_warm' => false,
+                'deploy' => false,
+            ],
+        ];
+    }
 
     /**
      * @param  array<string,mixed>  $package
@@ -449,14 +756,7 @@ final class EnneagramCmsDraftWriter
                 'summary' => 'Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.',
                 'not_for' => ['clinical diagnosis', 'employment screening', 'deterministic decisions'],
             ],
-            'evidence_notes_json' => [
-                [
-                    'source_type' => 'agent_recommendation',
-                    'source' => self::SNAPSHOT_SOURCE,
-                    'package_sha256' => $sourceSha256,
-                    'qa_sha256' => $qaSha256,
-                ],
-            ],
+            'evidence_notes_json' => $this->evidenceNotes($recommendations, $sourceSha256, $qaSha256),
             'internal_links_json' => array_values(is_array($recommendations['internal_links'] ?? null) ? $recommendations['internal_links'] : []),
             'is_public' => false,
             'index_eligible' => false,
@@ -511,6 +811,30 @@ final class EnneagramCmsDraftWriter
         }
 
         return $sections;
+    }
+
+    /**
+     * @param  array<string,mixed>  $recommendations
+     * @return list<array<string,mixed>>
+     */
+    private function evidenceNotes(array $recommendations, string $sourceSha256, string $qaSha256): array
+    {
+        $notes = array_values(array_filter(
+            is_array($recommendations['evidence_notes'] ?? null) ? $recommendations['evidence_notes'] : [],
+            static fn (mixed $note): bool => is_array($note)
+        ));
+        if ($notes === []) {
+            $notes = [[
+                'source_type' => 'agent_recommendation',
+                'source' => self::SNAPSHOT_SOURCE,
+            ]];
+        }
+
+        return array_map(static fn (array $note): array => [
+            ...$note,
+            'package_sha256' => $sourceSha256,
+            'qa_sha256' => $qaSha256,
+        ], $notes);
     }
 
     /**

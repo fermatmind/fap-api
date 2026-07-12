@@ -41236,7 +41236,7 @@ prs:
     branch: codex/enneagram-llms-txt-release-gate-01
     title: "ENNEAGRAM-LLMS-TXT-RELEASE-GATE-01: add exact 116-target llms.txt release gate"
     train_scope: enneagram_llms_txt_release_gate
-    status: local_checks_passed
+    status: merged
     scope:
       - Add a fail-closed dry-run/write gate that identifies exactly 116 published bilingual Enneagram assets eligible for llms.txt while keeping llms-full and Search unchanged.
       - Require evidence, visible-content, private-boundary, source-hash, and canonical/hreflang checks before any later write authorization.
@@ -41252,15 +41252,59 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
-  - id: ENNEAGRAM-LLMS-TXT-RELEASE-01
+  - id: ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01
     repo: fap-api
     depends_on: [ENNEAGRAM-LLMS-TXT-RELEASE-GATE-01]
+    branch: codex/enneagram-en13-evidence-provenance-upgrade-01
+    title: "ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01: upgrade EN13 evidence provenance for llms-full"
+    train_scope: enneagram_en13_evidence_provenance_upgrade
+    status: in_progress
+    scope:
+      - Repair the 26 EN13 bilingual local content assets with visible evidence, stable source IDs, limitations, and aligned bilingual evidence structure for a later llms-full gate.
+      - Keep all assets non-llms-full until a separate readiness result and authorization.
+    allowed_paths: [.github/workflows/enneagram-en13-evidence-production-ops.yml, docs/seo/personality/enneagram/content-packages/en13-cms-v1/**, docs/seo/personality/enneagram/content-packages/zh13-cms-v1/**, docs/seo/personality/enneagram/en13-content-qa-01.json, backend/app/Console/Commands/PersonalityEnneagram*, backend/app/Services/Cms/**, backend/tests/Feature/Console/PersonalityEnneagram*, backend/tests/Feature/SeoIntel/Enneagram*, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/enneagram-en13-evidence-provenance-upgrade/**, generated/pr-train-sidecar-issues/**]
+    do_not: [Write production CMS data, release llms.txt or llms-full, submit Search, warm cache, deploy, expose private paths, secrets, or topology.]
+    validation: [26-target evidence and bilingual consistency QA, focused regression tests, JSON/YAML contract checks, changed-file scope validation, git diff --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    search_channel_action: false
+    llms_release_execution: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01
+    repo: fap-api production CMS Ops
+    depends_on: [ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01]
+    branch: codex/enneagram-en13-evidence-cms-refresh-01
+    title: "ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01: refresh exact 26-page EN13 evidence provenance"
+    train_scope: enneagram_en13_evidence_cms_refresh
+    status: pending_dependency
+    scope:
+      - After the evidence upgrade merge SHA is separately deployed, run an exact 26-page read-only dry-run and derive an immutable cohort SHA.
+      - Only after separate exact deployed-SHA and cohort-SHA authorization, idempotently refresh visible evidence, evidence provenance, source package/hash, and contract version while preserving all release and review state.
+    allowed_paths: [docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/enneagram-en13-evidence-cms-refresh/**, generated/pr-train-sidecar-issues/**]
+    do_not: [Change title, summary, non-evidence body, FAQ, internal links, is_public, launch_state, robots, index/sitemap/llms eligibility, review state, last reviewed time, Search, cache, or deployment.]
+    validation: [exact 26-target dry-run/cohort/readback evidence, preserved-state evidence, JSON/YAML contract checks, changed-file scope validation, git diff --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: true
+    search_channel_action: false
+    llms_release_execution: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-LLMS-TXT-RELEASE-01
+    repo: fap-api
+    depends_on: [ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01]
     branch: codex/enneagram-llms-txt-release-01
     title: "ENNEAGRAM-LLMS-TXT-RELEASE-01: release 116 approved Enneagram llms.txt assets"
     train_scope: enneagram_llms_txt_release
     status: pending_dependency
     scope:
-      - After the release gate is deployed and green, execute only the exact 116-target llms_eligible write and authorized llms.txt cache warm.
+      - After the exact 26-page EN13 evidence refresh and a successful 116-target gate, execute only the exact 116-target llms_eligible write and authorized llms.txt cache warm.
       - Keep llms-full, Search Queue, IndexNow, sitemap eligibility, and deployment unchanged.
     allowed_paths: [docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/enneagram-llms-txt-release/**, generated/pr-train-sidecar-issues/**]
     do_not: [Release llms-full, submit Search, change sitemap/index eligibility, deploy, or expose private paths, secrets, or topology.]
@@ -41286,28 +41330,6 @@ prs:
     allowed_paths: [docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/enneagram-llms-txt-production-revalidation/**, generated/pr-train-sidecar-issues/**]
     do_not: [Write CMS/DB, alter feeds or cache, submit Search, deploy, expose private paths, secrets, or topology.]
     validation: [exact feed-count and leakage evidence, JSON/YAML contract checks, changed-file scope validation, git diff --check]
-    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
-    production_write_execution: false
-    database_mutation: false
-    cms_mutation: false
-    search_channel_action: false
-    llms_release_execution: false
-    deploy_allowed: false
-    content_authority: CMS/backend
-
-  - id: ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01
-    repo: fap-api
-    depends_on: [ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01]
-    branch: codex/enneagram-en13-evidence-provenance-upgrade-01
-    title: "ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01: upgrade EN13 evidence provenance for llms-full"
-    train_scope: enneagram_en13_evidence_provenance_upgrade
-    status: pending_dependency
-    scope:
-      - Repair the 26 EN13 bilingual local content assets with visible evidence, stable source IDs, limitations, and aligned bilingual evidence structure for a later llms-full gate.
-      - Keep all assets non-llms-full until a separate readiness result and authorization.
-    allowed_paths: [docs/seo/personality/enneagram/content-packages/en13-cms-v1/**, backend/app/Console/Commands/PersonalityEnneagram*, backend/app/Services/Cms/**, backend/tests/Feature/Console/PersonalityEnneagram*, backend/tests/Feature/SeoIntel/Enneagram*, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/enneagram-en13-evidence-provenance-upgrade/**, generated/pr-train-sidecar-issues/**]
-    do_not: [Write production CMS data, release llms.txt or llms-full, submit Search, warm cache, deploy, expose private paths, secrets, or topology.]
-    validation: [26-target evidence and bilingual consistency QA, focused regression tests, JSON/YAML contract checks, changed-file scope validation, git diff --check]
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     database_mutation: false

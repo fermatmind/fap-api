@@ -1,11 +1,33 @@
 {
-  "artifact": "ENNEAGRAM-EN13-SOURCE-LEDGER-01",
+  "artifact": "ENNEAGRAM-EN13-SOURCE-LEDGER-02",
   "framework": "enneagram",
   "locale": "en",
+  "accessed_at": "2026-07-12",
   "status": "ready_for_package_qa",
   "sources": [
-    {"kind":"internal_structural_source","path":"docs/seo/personality/enneagram/content-packages/zh13-cms-v1/enneagram-zh13-cms-package-v1.json","use":"route, section, FAQ, method-boundary, and internal-link parity","limitations":"English wording is independently localized."},
-    {"kind":"internal_claim_boundary","path":"docs/seo/personality/enneagram/full-content-asset-audit-source-of-truth-2026-07-09.md","use":"public route and no-go boundaries","limitations":"Not scientific-validity evidence."}
+    {
+      "id": "hook-2021",
+      "kind": "systematic_review",
+      "title": "Enneagram: A systematic review of the literature and directions for future research",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+      "doi": "10.1002/jclp.23097",
+      "use": "Evidence-boundary disclosure: mixed findings and important research gaps; not a page-level classification source.",
+      "limitations": "Does not validate an individual page, establish individual typing accuracy, or support deterministic use."
+    },
+    {
+      "id": "fermatmind-en13-claim-boundary-2026-07-09",
+      "kind": "internal_claim_boundary",
+      "path": "docs/seo/personality/enneagram/full-content-asset-audit-source-of-truth-2026-07-09.md",
+      "use": "Public-route and prohibited-use boundary for educational Enneagram content.",
+      "limitations": "Internal policy evidence only; not scientific-validity evidence."
+    },
+    {
+      "id": "fermatmind-zh13-structural-source-v1",
+      "kind": "internal_structural_source",
+      "path": "docs/seo/personality/enneagram/content-packages/zh13-cms-v1/enneagram-zh13-cms-package-v1.json",
+      "use": "Route, section, FAQ, method-boundary, and internal-link parity.",
+      "limitations": "English wording is independently localized; this source is not scientific evidence."
+    }
   ],
   "claim_policy":{"allowed":["self-observation","communication reflection","conditional tendency language"],"forbidden":["diagnosis","clinical validity claim","hiring use","prediction","fixed identity claim","private result language"]}
 }

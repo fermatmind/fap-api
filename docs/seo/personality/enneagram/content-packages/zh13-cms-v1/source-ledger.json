@@ -1,0 +1,36 @@
+{
+  "artifact": "ENNEAGRAM-ZH13-SOURCE-LEDGER-02",
+  "framework": "enneagram",
+  "locale": "zh-CN",
+  "accessed_at": "2026-07-12",
+  "status": "ready_for_package_qa",
+  "sources": [
+    {
+      "id": "hook-2021",
+      "kind": "systematic_review",
+      "title": "Enneagram: A systematic review of the literature and directions for future research",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+      "doi": "10.1002/jclp.23097",
+      "use": "用于说明证据边界：研究结果并不一致且仍有重要缺口，不作为页面级判型来源。",
+      "limitations": "不能验证单个页面、不能证明个人判型准确性，也不支持确定性用途。"
+    },
+    {
+      "id": "fermatmind-en13-claim-boundary-2026-07-09",
+      "kind": "internal_claim_boundary",
+      "path": "docs/seo/personality/enneagram/full-content-asset-audit-source-of-truth-2026-07-09.md",
+      "use": "公开九型人格教育内容的路由与禁止用途边界。",
+      "limitations": "仅为内部主张控制证据，不是科学效度证据。"
+    },
+    {
+      "id": "fermatmind-zh13-structural-source-v1",
+      "kind": "internal_structural_source",
+      "path": "docs/seo/personality/enneagram/content-packages/zh13-cms-v1/enneagram-zh13-cms-package-v1.json",
+      "use": "中文路由、章节、FAQ、方法边界与内链结构。",
+      "limitations": "结构来源不是科学证据。"
+    }
+  ],
+  "claim_policy": {
+    "allowed": ["自我观察", "沟通反思", "条件性倾向语言"],
+    "forbidden": ["诊断", "临床效度主张", "招聘用途", "预测", "固定身份主张"]
+  }
+}
