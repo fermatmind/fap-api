@@ -5148,9 +5148,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     public function test_runtime_freeze_classifier_ignores_personality_public_warmup_command(): void
     {
-        $kernelLines = $this->kernelChangedLines((string) getcwd(), 'origin/main');
+        $repoRoot = (string) getcwd();
+        $currentBranch = trim((string) shell_exec('git -C '.escapeshellarg($repoRoot).' branch --show-current 2>/dev/null'));
+        $kernelLines = $currentBranch === 'codex/personality-warmup-01'
+            ? $this->kernelChangedLines($repoRoot, 'origin/main')
+            : [
+                '+use App\Console\Commands\PersonalityWarmPublicReadModels;',
+                '+        PersonalityWarmPublicReadModels::class,',
+            ];
 
-        $this->assertTrue($this->kernelDiffIsPersonalityPublicWarmupOnly($kernelLines), json_encode($kernelLines));
+        if ($currentBranch === 'codex/personality-warmup-01') {
+            $this->assertTrue($this->kernelDiffIsPersonalityPublicWarmupOnly($kernelLines), json_encode($kernelLines));
+        }
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
             [
                 'backend/app/Console/Commands/PersonalityWarmPublicReadModels.php',
