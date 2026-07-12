@@ -88961,11 +88961,90 @@
     "transitions": [{"at": "2026-07-12T17:30:00+08:00", "from": "user_authorized", "to": "in_progress", "note": "Started a read-only EN/ZH post-publish warmup command and A/T projection alias deduplication. No production warmup, CMS/DB mutation, import, staging, or deploy is authorized."}, {"at": "2026-07-12T18:00:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "Focused and full backend validation passed. The temporary local baseline probe measured 49,538-byte EN and 89,363-byte ZH INTJ-A detail payloads; no production warmup or content mutation occurred. Validation-generated Big Five artifacts were restored."}, {"at": "2026-07-12T18:05:00+08:00", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed and pushed the exact seven-path scope and opened PR #3018; required checks are pending."}, {"at": "2026-07-12T18:15:00+08:00", "from": "github_checks_pending", "to": "github_checks_retry_pending", "note": "Inspected verify-bigfive: 1206 tests passed and the sole failure was the runtime classifier not recognizing the new warmup command and its exact two-line Kernel registration. Restored Pint import churn and added narrow classifier coverage for only those paths/lines."}, {"at": "2026-07-12T18:25:00+08:00", "from": "github_checks_retry_pending", "to": "ready_to_merge", "note": "All 9 required checks passed and the exact eight-path scope remained clean and mergeable."}]
   },
   "ENNEAGRAM-LLMS-FULL-RELEASE-01": {
-    "id": "ENNEAGRAM-LLMS-FULL-RELEASE-01", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-FULL-RELEASE-01: release approved Enneagram llms-full assets", "base": "main", "branch": "codex/enneagram-llms-full-release-01", "depends_on": ["ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02"],
-    "status": "pending_dependency", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false,
-    "production_write_execution": true, "database_mutation": true, "cms_mutation": true, "search_channel_action": false, "llms_release_execution": true, "deploy_allowed": false,
-    "checks": {"authorization": {"status": "pending_exact_production_authorization", "evidence": "Manifest initialization is authorized; exact deployed-SHA authorization and a green llms-full readiness decision are mandatory for any feed write or cache warm."}},
-    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized with llms.txt unchanged and Search untouched unless separately authorized."}]
+    "id": "ENNEAGRAM-LLMS-FULL-RELEASE-01",
+    "repo": "fap-api",
+    "title": "ENNEAGRAM-LLMS-FULL-RELEASE-01: release approved Enneagram llms-full assets",
+    "base": "main",
+    "branch": "codex/enneagram-llms-full-release-01",
+    "depends_on": [
+      "ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "346bdeb68",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3026",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "search_channel_action": false,
+    "llms_release_execution": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {
+        "status": "pass_used",
+        "evidence": "User previously authorized ENNEAGRAM-LLMS-FULL-RELEASE-01 for deployed backend SHA 4707c3396a9fda1377df0cc2e31877d33b6757ba. This closeout PR performs readback/ledger only and does not perform new eligibility writes or cache warm."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02 is merged at 996a04993aa907bb1e5fc770241af0c802f73690 with GO_FOR_SEPARATE_LLMS_FULL_AUTHORIZATION; ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01 and EN13 evidence CMS refresh are already complete."
+      },
+      "fap_web_cache_ops": {
+        "status": "pass",
+        "evidence": "LLMS Feed Cache Ops run 29198788071 succeeded on fap-web main 54eae3332bfbd4374ea0fc3da1ff4eb6751ed786; remote frontend SHA was 11826dc0034ad111a0456f397a104a332c9b8b08, PM2 was 4/4 online, /llms-full.txt count was 116 and mode complete, side effects were all 0."
+      },
+      "production_readback": {
+        "status": "pass",
+        "evidence": "generated/enneagram-llms-full-release/release-readback.json records /llms.txt unique Enneagram canonical=116, /llms-full.txt unique Enneagram canonical=116, llms-full mode=complete, exact locale/entity distribution, zero blocking duplicate/malformed/non-apex/forbidden/private counters, and side effects all 0."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Passed manifest YAML parse, pr-train-state JSON parse, release-readback JSON parse, exact readback assertions for /llms.txt=116, /llms-full.txt=116, complete mode, expected locale/entity distribution, zero blocking safety counters, side effects all 0, changed-file allowed scope validation, and git diff --check."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #3026 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, semgrep sarif upload, and Semgrep OSS."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-11T19:03:22Z",
+        "from": "unregistered",
+        "to": "pending_dependency",
+        "note": "Initialized with llms.txt unchanged and Search untouched unless separately authorized."
+      },
+      {
+        "at": "2026-07-12T15:51:05.779782Z",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "note": "Completed readback-only llms-full release closeout from isolated fap-api worktree. fap-web cache-only Ops artifact succeeded, live /llms.txt and /llms-full.txt both show 116 unique Enneagram canonicals, llms-full mode is complete, blocking safety counters are zero, and no deploy/CMS/eligibility/Search/IndexNow action occurred."
+      },
+      {
+        "at": "2026-07-12T15:51:42.619095Z",
+        "from": "local_checks_passed",
+        "to": "local_checks_passed",
+        "note": "Local release closeout validation passed: YAML/JSON/report assertions, allowed-path scope check, and git diff --check all passed. Ready for commit and PR."
+      },
+      {
+        "at": "2026-07-12T15:52:39.593406Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Opened PR #3026 from scoped readback/ledger branch; required GitHub checks are pending. No deploy, CMS write, eligibility write, Search Queue, IndexNow, or backend cache warm was triggered."
+      },
+      {
+        "at": "2026-07-12T15:58:49.274045Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed for PR #3026; PR body, changed files, scope, and merge policy were revalidated. Ready to squash merge. No production action occurred in this PR."
+      }
+    ]
   }
 }

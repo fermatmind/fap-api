@@ -41388,7 +41388,7 @@ prs:
     branch: codex/enneagram-llms-full-release-01
     title: "ENNEAGRAM-LLMS-FULL-RELEASE-01: release approved Enneagram llms-full assets"
     train_scope: enneagram_llms_full_release
-    status: pending_dependency
+    status: ready_to_merge
     scope:
       - Only after a green llms-full readiness decision and separate exact deployed-SHA authorization, release approved llms-full assets, warm only the authorized feed cache, and record production readback.
     allowed_paths: [docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/enneagram-llms-full-release/**, generated/pr-train-sidecar-issues/**]
