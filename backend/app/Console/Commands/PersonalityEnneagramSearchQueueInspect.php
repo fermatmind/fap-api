@@ -7,10 +7,20 @@ namespace App\Console\Commands;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueEligibilityEvaluator;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueuePlanner;
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueWriteService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 final class PersonalityEnneagramSearchQueueInspect extends Command
 {
+    private const ARTIFACT_PATTERN = '/^[0-9a-f]{64}$/';
+
+    private const ENQUEUE_SCHEMA_VERSION = 'enneagram-search-queue-enqueue.v1';
+
+    private const EXPECTED_TARGET_COUNT = 116;
+
+    private const PAGE_TYPE = 'personality_public_content_asset';
+
     private const SCHEMA_VERSION = 'enneagram-search-queue-inspect.v1';
 
     /** @var array<string, int> */
@@ -24,12 +34,23 @@ final class PersonalityEnneagramSearchQueueInspect extends Command
 
     protected $signature = 'personality:enneagram-search-queue-inspect
         {--dry-run : Required. Refuses every mode other than read-only inspection.}
+        {--write : Artifact-bound exact-116 Queue enqueue; never submits.}
+        {--artifact-sha256= : SHA256 of the separately approved URL Truth artifact.}
+        {--confirm-artifact-sha256= : Required exact artifact confirmation for write mode.}
+        {--operator-approved= : Required artifact-bound operator token for write mode.}
         {--json : Emit a safe machine-readable report.}';
 
     protected $description = 'Read-only inspect of the exact 116 published bilingual Enneagram URL Truth and IndexNow Queue plan; never writes or submits.';
 
-    public function handle(SearchChannelQueuePlanner $planner): int
+    /** @var list<string> */
+    protected $aliases = ['personality:enneagram-search-queue-enqueue'];
+
+    public function handle(SearchChannelQueuePlanner $planner, SearchChannelQueueWriteService $writer): int
     {
+        if (trim((string) $this->option('artifact-sha256')) !== '' || (bool) $this->option('write')) {
+            return $this->handleEnqueue($planner, $writer);
+        }
+
         if (! (bool) $this->option('dry-run')) {
             return $this->finish($this->payload('NO_GO_SAFETY_VIOLATION', [], ['dry_run_required']));
         }
@@ -112,6 +133,185 @@ final class PersonalityEnneagramSearchQueueInspect extends Command
             'stale_submitted_count' => $staleSubmitted,
             'reason_code_counts' => $reasonCounts,
         ]));
+    }
+
+    private function handleEnqueue(SearchChannelQueuePlanner $planner, SearchChannelQueueWriteService $writer): int
+    {
+        $dryRun = (bool) $this->option('dry-run');
+        $write = (bool) $this->option('write');
+        $artifactSha = strtolower(trim((string) $this->option('artifact-sha256')));
+        $issues = $this->enqueueModeIssues($dryRun, $write, $artifactSha);
+        if ($issues !== []) {
+            return $this->finishEnqueue($this->enqueuePayload('blocked', $dryRun, $write, $artifactSha, [], $issues));
+        }
+
+        $plan = $planner->plan('indexnow', self::PAGE_TYPE, self::EXPECTED_TARGET_COUNT);
+        $issues = $this->enqueuePlanIssues($plan);
+        $idempotentReplay = $this->isExactIdempotentReplay($plan);
+        if ($issues !== [] && ! $idempotentReplay) {
+            return $this->finishEnqueue($this->enqueuePayload('blocked', $dryRun, $write, $artifactSha, $plan, $issues));
+        }
+
+        if ($dryRun) {
+            $summary = $idempotentReplay ? [
+                'written_item_count' => 0,
+                'created_batch_count' => 0,
+                'active_queue_item_count' => self::EXPECTED_TARGET_COUNT,
+            ] : [];
+
+            return $this->finishEnqueue($this->enqueuePayload(
+                $idempotentReplay ? 'already_enqueued' : 'dry_run_ready',
+                true,
+                false,
+                $artifactSha,
+                $plan,
+                [],
+                $summary,
+            ));
+        }
+
+        if ($idempotentReplay) {
+            return $this->finishEnqueue($this->enqueuePayload('already_enqueued', false, true, $artifactSha, $plan, [], [
+                'written_item_count' => 0,
+                'created_batch_count' => 0,
+                'active_queue_item_count' => self::EXPECTED_TARGET_COUNT,
+            ]));
+        }
+
+        try {
+            $writeSummary = DB::connection((string) config('seo_intel.connection', 'seo_intel'))
+                ->transaction(function () use ($writer, $plan): array {
+                    $result = $writer->write($plan['planned_items']);
+                    $summary = [
+                        'written_item_count' => (int) ($result['written_items'] ?? 0),
+                        'created_batch_count' => count($result['batch_ids'] ?? []),
+                        'active_queue_item_count' => count(array_unique($result['queue_item_ids'] ?? [])),
+                    ];
+                    if ($summary !== [
+                        'written_item_count' => self::EXPECTED_TARGET_COUNT,
+                        'created_batch_count' => 1,
+                        'active_queue_item_count' => self::EXPECTED_TARGET_COUNT,
+                    ]) {
+                        throw new \RuntimeException('queue_write_count_mismatch');
+                    }
+
+                    return $summary;
+                });
+        } catch (\Throwable) {
+            return $this->finishEnqueue($this->enqueuePayload('write_readback_failed', false, true, $artifactSha, $plan, [
+                'queue_write_count_mismatch',
+            ]));
+        }
+
+        return $this->finishEnqueue($this->enqueuePayload('enqueued', false, true, $artifactSha, $plan, [], $writeSummary));
+    }
+
+    /** @return list<string> */
+    private function enqueueModeIssues(bool $dryRun, bool $write, string $artifactSha): array
+    {
+        $issues = [];
+        if ($dryRun === $write) {
+            $issues[] = 'exactly_one_mode_required';
+        }
+        if (! preg_match(self::ARTIFACT_PATTERN, $artifactSha)) {
+            $issues[] = 'artifact_sha256_invalid';
+        }
+        if ($write) {
+            if (! hash_equals($artifactSha, strtolower(trim((string) $this->option('confirm-artifact-sha256'))))) {
+                $issues[] = 'artifact_sha256_confirmation_mismatch';
+            }
+            if (! hash_equals('ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01:'.$artifactSha, trim((string) $this->option('operator-approved')))) {
+                $issues[] = 'operator_approval_mismatch';
+            }
+        }
+
+        return $issues;
+    }
+
+    /** @param array<string, mixed> $plan @return list<string> */
+    private function enqueuePlanIssues(array $plan): array
+    {
+        $issues = [];
+        $checks = [
+            'url_truth_source_unavailable' => ($plan['source_unavailable_reason'] ?? null) !== null,
+            'candidate_count_mismatch' => (int) ($plan['candidate_count'] ?? 0) !== self::EXPECTED_TARGET_COUNT,
+            'eligible_count_mismatch' => (int) ($plan['eligible_count'] ?? 0) !== self::EXPECTED_TARGET_COUNT,
+            'stale_submitted_queue_item_present' => (int) ($plan['stale_submitted_queue_item_count'] ?? 0) !== 0,
+            'page_type_count_mismatch' => ($plan['page_type_breakdown'] ?? []) !== [self::PAGE_TYPE => self::EXPECTED_TARGET_COUNT],
+            'channel_selection_mismatch' => ($plan['selected_channels'] ?? []) !== ['indexnow'],
+            'blocked_candidate_present' => (int) ($plan['blocked_count'] ?? 0) !== 0,
+            'planned_queue_count_mismatch' => (int) ($plan['planned_queue_count'] ?? 0) !== self::EXPECTED_TARGET_COUNT,
+            'active_duplicate_present' => (bool) ($plan['duplicate_detected'] ?? false),
+        ];
+        foreach ($checks as $issue => $failed) {
+            if ($failed) {
+                $issues[] = $issue;
+            }
+        }
+
+        return $issues;
+    }
+
+    /** @param array<string, mixed> $plan */
+    private function isExactIdempotentReplay(array $plan): bool
+    {
+        return (int) ($plan['candidate_count'] ?? 0) === self::EXPECTED_TARGET_COUNT
+            && (int) ($plan['eligible_count'] ?? 0) === self::EXPECTED_TARGET_COUNT
+            && (int) ($plan['blocked_count'] ?? 0) === self::EXPECTED_TARGET_COUNT
+            && (int) ($plan['planned_queue_count'] ?? 0) === 0
+            && (int) ($plan['stale_submitted_queue_item_count'] ?? 0) === 0
+            && (bool) ($plan['duplicate_detected'] ?? false)
+            && ($plan['reason_code_breakdown'] ?? []) === ['existing_active_queue_item' => self::EXPECTED_TARGET_COUNT]
+            && ($plan['page_type_breakdown'] ?? []) === [self::PAGE_TYPE => self::EXPECTED_TARGET_COUNT];
+    }
+
+    /**
+     * @param  array<string, mixed>  $plan
+     * @param  list<string>  $issues
+     * @param  array<string, int>  $writeSummary
+     * @return array<string, mixed>
+     */
+    private function enqueuePayload(string $status, bool $dryRun, bool $write, string $artifactSha, array $plan, array $issues = [], array $writeSummary = []): array
+    {
+        return [
+            'schema_version' => self::ENQUEUE_SCHEMA_VERSION,
+            'status' => $status,
+            'ok' => in_array($status, ['dry_run_ready', 'enqueued', 'already_enqueued'], true),
+            'dry_run' => $dryRun,
+            'write_requested' => $write,
+            'artifact_sha256' => preg_match(self::ARTIFACT_PATTERN, $artifactSha) ? $artifactSha : null,
+            'channel' => 'indexnow',
+            'page_entity_type' => self::PAGE_TYPE,
+            'target_count' => self::EXPECTED_TARGET_COUNT,
+            'summary' => [
+                'candidate_count' => (int) ($plan['candidate_count'] ?? 0),
+                'eligible_count' => (int) ($plan['eligible_count'] ?? 0),
+                'blocked_count' => (int) ($plan['blocked_count'] ?? 0),
+                'planned_queue_count' => (int) ($plan['planned_queue_count'] ?? 0),
+                'stale_submitted_count' => (int) ($plan['stale_submitted_queue_item_count'] ?? 0),
+                'reason_code_counts' => $plan['reason_code_breakdown'] ?? [],
+                ...$writeSummary,
+            ],
+            'issues' => array_values(array_unique($issues)),
+            'negative_guarantees' => [
+                'queue_approval' => false,
+                'search_submit' => false,
+                'external_search_api_call' => false,
+                'cms_or_eligibility_write' => false,
+                'sitemap_or_llms_cache_mutation' => false,
+                'deploy' => false,
+            ],
+        ];
+    }
+
+    /** @param array<string, mixed> $payload */
+    private function finishEnqueue(array $payload): int
+    {
+        $this->line((bool) $this->option('json')
+            ? (string) json_encode($payload, JSON_UNESCAPED_SLASHES)
+            : 'status='.$payload['status']);
+
+        return ($payload['ok'] ?? false) ? self::SUCCESS : self::FAILURE;
     }
 
     /** @param list<PersonalityPublicContentAsset> $assets */
