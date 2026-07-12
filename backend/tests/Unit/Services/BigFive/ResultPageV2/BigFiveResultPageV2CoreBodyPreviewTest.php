@@ -5119,6 +5119,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', routeChangedLines: $routeChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_public_api_cache_header_wiring_only(): void
+    {
+        $changed = [
+            'backend/app/Http/Middleware/PublicApiCacheHeaders.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\\Http\\Middleware\\PublicApiCacheHeaders;',
+            "-    Route::get('/articles', [ArticleController::class, 'index']);",
+            '+    Route::middleware(PublicApiCacheHeaders::class)->group(function () {',
+            "+        Route::get('/articles', [ArticleController::class, 'index']);",
+            '+    });',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', routeChangedLines: $routeChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_allows_bigfive_norm_foundation_data_scope_only(): void
     {
         $allowed = [
@@ -6317,6 +6334,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/routes/api.php'
+                && $this->routeDiffIsPublicApiCacheHeadersOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
                 && $this->routeDiffIsResearchBackendMvpOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
                 continue;
@@ -6410,6 +6434,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsPublicTestMetricsSummaryOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
+                continue;
+            }
+
+            if ($file === 'backend/app/Http/Middleware/PublicApiCacheHeaders.php') {
                 continue;
             }
 
@@ -11900,6 +11928,50 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     /**
      * @param  list<string>  $changedLines
      */
+    private function routeDiffIsPublicApiCacheHeadersOnly(array $changedLines): bool
+    {
+        $added = [];
+        $removed = [];
+        $hasImport = false;
+        $wrapperCount = 0;
+
+        foreach ($changedLines as $line) {
+            if (! is_string($line) || ! in_array($line[0] ?? '', ['+', '-'], true)) {
+                continue;
+            }
+
+            $normalized = trim(substr($line, 1));
+            if ($line[0] === '+' && $normalized === 'use App\\Http\\Middleware\\PublicApiCacheHeaders;') {
+                $hasImport = true;
+
+                continue;
+            }
+
+            if ($line[0] === '+' && $normalized === 'Route::middleware(PublicApiCacheHeaders::class)->group(function () {') {
+                $wrapperCount++;
+
+                continue;
+            }
+
+            if ($line[0] === '+' && $normalized === '});') {
+                continue;
+            }
+
+            if ($normalized !== '') {
+                if ($line[0] === '+') {
+                    $added[] = $normalized;
+                } else {
+                    $removed[] = $normalized;
+                }
+            }
+        }
+
+        sort($added);
+        sort($removed);
+
+        return $hasImport && $wrapperCount > 0 && $added === $removed;
+    }
+
     private function routeDiffIsResearchBackendMvpOnly(array $changedLines): bool
     {
         if ($changedLines === []) {

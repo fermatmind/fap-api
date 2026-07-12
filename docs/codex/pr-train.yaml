@@ -41410,6 +41410,7 @@ prs:
       - backend/app/Http/Middleware/PublicApiCacheHeaders.php
       - backend/routes/api.php
       - backend/tests/Feature/PublicApiCacheHeadersTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/contracts/openapi.snapshot.json
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -41420,6 +41421,7 @@ prs:
       - cd backend && ./vendor/bin/pint --test app/Http/Middleware/PublicApiCacheHeaders.php routes/api.php tests/Feature/PublicApiCacheHeadersTest.php
       - cd backend && php artisan route:list --path=api/v0.5 --except-vendor
       - cd backend && bash scripts/export_openapi.sh --check && php artisan test tests/Feature/OpenApiDiffTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_freeze_classifier_ignores_public_api_cache_header_wiring_only
       - YAML/JSON parse and changed-file scope validation
       - git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
