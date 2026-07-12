@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Http\Responses\Auth\OpsLoginResponse;
 use App\Models\AdminUser;
 use App\Models\AuditLog;
 use App\Services\Auth\AdminTotpService;
+use Filament\Facades\Filament;
+use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
@@ -42,6 +46,39 @@ final class AdminTotpEnforcementTest extends TestCase
 
         $this->assertNotSame(route('filament.ops.pages.two-factor-challenge'), $response->headers->get('Location'));
         $this->assertNotSame(route('filament.ops.pages.two-factor-enrollment'), $response->headers->get('Location'));
+    }
+
+    public function test_totp_can_be_disabled_in_production_by_configuration(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        config()->set('admin.totp.enabled', false);
+
+        $admin = $this->admin(['totp_enabled_at' => null, 'totp_secret' => null]);
+
+        $response = $this->withSession(['ops_admin_totp_verified_user_id' => 0])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops');
+
+        $this->assertNotSame(route('filament.ops.pages.two-factor-challenge'), $response->headers->get('Location'));
+        $this->assertNotSame(route('filament.ops.pages.two-factor-enrollment'), $response->headers->get('Location'));
+        $this->assertSame((int) $admin->id, session('ops_admin_totp_verified_user_id'));
+    }
+
+    public function test_login_response_skips_totp_redirects_when_disabled_in_production(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        config()->set('admin.totp.enabled', false);
+        Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
+
+        $admin = $this->admin(['totp_enabled_at' => null, 'totp_secret' => null]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $request = Request::create('/ops/login', 'POST');
+        $request->setLaravelSession($this->app['session.store']);
+
+        $response = (new OpsLoginResponse)->toResponse($request);
+
+        $this->assertStringEndsWith('/ops/select-org', $response->getTargetUrl());
     }
 
     public function test_recovery_code_is_time_limited_single_use_and_audited(): void
