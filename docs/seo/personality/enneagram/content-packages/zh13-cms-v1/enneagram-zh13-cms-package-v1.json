@@ -4,7 +4,7 @@
   "status": "draft_for_backend_import_dry_run",
   "framework": "enneagram",
   "locale": "zh-CN",
-  "source_audit": "full-content-asset-audit-source-of-truth-2026-07-09",
+  "source_audit": "ENNEAGRAM-ZH13-SOURCE-LEDGER-02",
   "source_qa": "zh13-content-qa-2026-07-09",
   "target_command": "personality:enneagram-cms-draft",
   "intended_flags": [
@@ -75,6 +75,11 @@
             "body_md": "### 常见问题\n\n**Q: 九型人格是心理诊断工具吗？**\nA: 不是。九型人格是一个自我观察和沟通反思框架，不用于临床诊断、心理疾病筛查或治疗评估。如果你正在经历明显的心理困扰，建议寻求专业心理咨询师的帮助。\n\n**Q: 九型人格和 MBTI 有什么区别？**\nA: 九型人格关注核心动机（\"为什么这样反应\"），MBTI 关注认知偏好（\"如何接收信息做决定\"）。两者互补，结合使用通常效果更好。详见上方\"九型人格 × MBTI\"部分。\n\n**Q: 九型人格类型会变化吗？**\nA: 核心类型通常被认为是相对稳定的，但你的表达方式和健康程度可以在不同阶段有显著变化。你在压力下和安全感充足时可能表现出截然不同的特征。九型描述的不是\"你永远是什么人\"，而是\"你更容易陷入哪种模式\"。\n\n**Q: 什么是翼型（Wings）？**\nA: 翼型是你在核心类型之外的次要类型倾向，通常是你在九型图上的相邻类型。例如，第 5 型的人可能偏 5w4（受第 4 型影响，更内省）或 5w6（受第 6 型影响，更系统）。翼型是了解自己的进一步维度。\n\n**Q: 同一个 MBTI 类型的人九型类型会相同吗？**\nA: 不一定。MBTI 类型描述的是认知偏好，九型描述的是核心动机。同一个 MBTI 类型（如 INTJ）的人可能属于不同的九型类型（如 1 型、5 型或 6 型）。两者测量的维度不同。\n\n**Q: 我可以有多个九型类型吗？**\nA: 你通常有一个主导类型（核心类型），但你可能在翼型和其他类型上也有显著得分。特别是在自我探索初期，区分核心类型、翼型和压力/成长方向的影响需要一些时间。\n\n**Q: 我应该先读类型页还是先做测试？**\nA: 建议先做测试获得初始方向，然后阅读测试结果中最高的 2-3 个类型描述。测试只是一个参考起点，最终的确认要通过阅读和自我观察来完成。"
           },
           {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n九型人格公开指南是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
+          },
+          {
             "key": "method_boundary",
             "title": null,
             "body_md": "### 方法边界\n\n九型人格是一个自我观察和沟通反思框架，不是心理诊断工具。FermatMind 的九型人格描述和测试结果仅供参考，不应用于：\n\n- 临床诊断或心理健康评估\n- 招聘筛选或人事决策\n- 能力、智力或职业成功的预测\n- 关系结果的保证或预测\n- 评判他人或给他人贴标签\n\n测试结果是一个结构化参考，不是身份定论、能力定论或命运预测。对类型的理解和确认，建议结合自我观察和阅读，而不是仅依赖测试分数。"
@@ -140,6 +145,20 @@
             "label": "RIASEC 职业兴趣",
             "url": "/zh/tests/holland-career-interest-test-riasec"
           }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
+          }
         ]
       }
     },
@@ -186,6 +205,11 @@
             "key": "faq_and_cta",
             "title": null,
             "body_md": "**常见问题**\n\n**Q: 第 1 型和\"强迫症\"或完美主义障碍是一回事吗？**\nA: 不是。第 1 型描述的是某种常见人格倾向，不是心理障碍。对正确和质量的追求可以是一个人的优势。如果你对自己的行为是否越过正常范围有疑虑，请咨询专业心理健康人士。\n\n**Q: 第 1 型的人是不是都很苛刻？**\nA: 不一定。第 1 型的严格最常指向自己。许多第 1 型的人对外人宽容，对自己有一套\"永远达不到的标准\"。他们批评别人时，往往是因为他们真的认为事情可以更好，而不是要否定那个人。\n\n**Q: 第 1 型的人怎么放松？**\nA: 这可能需要刻意练习。许多第 1 型的人需要\"允许自己放松\"——不是等所有事情都做完之后，而是在事情还没做完的时候就接受\"现在可以休息\"。培养对\"足够好\"的接纳感，是一个值得投入的方向。\n\n**Q: 第 1 型和第 3 型有什么区别？**\nA: 第 1 型更关注\"做对\"（原则、标准、质量），第 3 型更关注\"做成\"（效率、结果、认可）。两人可能都努力工作，但驱动逻辑不同——第 1 型问的是\"这件事做得对不对\"，第 3 型问的是\"这件事有没有成果\"。\n\n**CTA**：[开始九型人格测试 →](/zh/tests/enneagram-personality-test-nine-types)\n\n**继续探索**：[九型人格 Hub](/zh/personality/enneagram) · [第 3 型：成就者](/zh/personality/enneagram/type-3) · [第 5 型：探索者](/zh/personality/enneagram/type-5) · [MBTI 16 型人格](/zh/personality) · [大五人格](/zh/tests/big-five-personality-test-ocean-model)\n\n---"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n第 1 型：改革者是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -226,6 +250,20 @@
           {
             "label": "大五人格",
             "url": "/zh/tests/big-five-personality-test-ocean-model"
+          }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
           }
         ]
       }
@@ -273,6 +311,11 @@
             "key": "faq_and_cta",
             "title": null,
             "body_md": "**Q: 第 2 型就是\"讨好型人格\"吗？** A: 不完全是。第 2 型的帮助通常是真诚的，驱动力是\"连接\"而不是\"讨好\"。区别在于：讨好更多出于恐惧（害怕不被喜欢而迎合），第 2 型更多出于渴望（希望通过付出来建立关系）。\n\n**Q: 第 2 型的人如何保护自己的边界？** A: 可以从小练习开始：在别人请求帮助时先停顿一下再回应；练习说\"我需要想一想再回复你\"；每天留出专门给自己的时间和精力。\n\n**Q: 第 2 型和第 3 型有什么区别？** A: 第 2 型更关注\"关系\"和\"被需要\"，第 3 型更关注\"成就\"和\"被认可\"。两人可能都在付出努力，但第 2 型问的是\"我能帮你什么\"，第 3 型问的是\"我能达成什么\"。\n\n**CTA**：[开始九型人格测试 →](/zh/tests/enneagram-personality-test-nine-types)\n\n**继续探索**：[九型人格 Hub](/zh/personality/enneagram) · [第 1 型](/zh/personality/enneagram/type-1) · [第 3 型](/zh/personality/enneagram/type-3) · [MBTI](/zh/personality) · [大五人格](/zh/tests/big-five-personality-test-ocean-model)\n\n---"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n第 2 型：助人者是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -309,6 +352,20 @@
           {
             "label": "大五人格",
             "url": "/zh/tests/big-five-personality-test-ocean-model"
+          }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
           }
         ]
       }
@@ -356,6 +413,11 @@
             "key": "faq_and_cta",
             "title": null,
             "body_md": "**常见问题**\n\n**Q: 第 3 型就是\"工作狂\"吗？**\nA: 不完全是。第 3 型的驱动力不只是\"工作\"本身，而是对效率、成果和被认可的渴望。有些第 3 型的人可能在工作之外表现出同样的模式——即使在爱好中也追求\"做到最好\"。关键不是他们做什么，而是驱动他们的动机模式。\n\n**Q: 第 3 型和第 1 型有什么区别？**\nA: 第 3 型更关注\"做成\"（效率、结果、认可），第 1 型更关注\"做对\"（原则、标准、质量）。两人可能都努力工作且注重细节，但驱动逻辑不同——第 3 型问的是\"怎样最快出成果\"，第 1 型问的是\"怎样做才最正确\"。\n\n**Q: 第 3 型的人如何区分\"真正的目标\"和\"别人期待的目标\"？**\nA: 这是一个核心成长问题。可以尝试：想象如果没有任何人知道你的成就——你还会想做这件事吗？如果答案是\"不会\"，那很可能这个目标更多来自外部期待。不需要立刻放弃所有外部目标，但值得开始区分哪些是\"你想要的\"，哪些是\"你觉得自己应该要的\"。\n\n**Q: 第 3 型的人适合什么工作？**\nA: 第 3 型的人倾向于在目标明确、结果可见、有成长反馈的环境中做得更好——但这只是倾向，不是决定因素。一个人适合什么工作，远远不只取决于人格类型。不要用类型描述限制自己的职业选择。\n\n**CTA**：[开始九型人格测试 →](/zh/tests/enneagram-personality-test-nine-types)\n\n**继续探索**：[九型人格 Hub](/zh/personality/enneagram) · [第 1 型：改革者](/zh/personality/enneagram/type-1) · [第 5 型：探索者](/zh/personality/enneagram/type-5) · [MBTI 16 型人格](/zh/personality) · [大五人格](/zh/tests/big-five-personality-test-ocean-model) · [RIASEC 职业兴趣](/zh/tests/holland-career-interest-test-riasec)\n\n---"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n第 3 型：成就者是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -396,6 +458,20 @@
           {
             "label": "大五人格",
             "url": "/zh/tests/big-five-personality-test-ocean-model"
+          }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
           }
         ]
       }
@@ -443,6 +519,11 @@
             "key": "faq_and_cta",
             "title": null,
             "body_md": "**Q: 第 4 型就是\"抑郁型\"吗？** A: 不是。第 4 型有丰富的情感深度，但这不等于心理疾病。第 4 型的人能体验更广泛的情感范围——从深刻的悲伤到强烈的喜悦。如果你对自己的情绪是否在健康范围内有疑虑，请咨询专业心理健康人士。\n\n**Q: 第 4 型的人如何在不牺牲独特性的前提下融入？** A: 可以用你的深度来连接，而不是用它来隔离。分享你的视角而不需要别人完全理解它。寻找那些能欣赏你独特性的领域和人，而不是试图在一个不理解你的环境里证明自己。\n\n**Q: 第 4 型和第 5 型有什么区别？** A: 第 4 型更关注\"感受的独特性\"，第 5 型更关注\"知识的深度\"。两人可能都看起来很独立，但第 4 型在做的是\"表达真实的我\"，第 5 型在做的是\"理解这个世界的规律\"。\n\n**CTA**：[开始九型人格测试 →](/zh/tests/enneagram-personality-test-nine-types)\n\n**继续探索**：[九型人格 Hub](/zh/personality/enneagram) · [第 1 型](/zh/personality/enneagram/type-1) · [第 5 型](/zh/personality/enneagram/type-5) · [MBTI](/zh/personality) · [大五人格](/zh/tests/big-five-personality-test-ocean-model)\n\n---"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n第 4 型：个人主义者是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -479,6 +560,20 @@
           {
             "label": "大五人格",
             "url": "/zh/tests/big-five-personality-test-ocean-model"
+          }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
           }
         ]
       }
@@ -526,6 +621,11 @@
             "key": "faq_and_cta",
             "title": null,
             "body_md": "**常见问题**\n\n**Q: 第 5 型就是\"内向\"或\"社恐\"吗？**\nA: 不完全是。第 5 型不一定内向——他们可能在某些情境中非常活跃和健谈，特别是在讨论他们感兴趣的话题时。关键不是社交的频率，而是他们对\"独立空间\"和\"知识储备\"的心理需求。有些第 5 型的人可能是外向的，但他们的社交方式仍然带有收集信息和交换洞察的色彩。\n\n**Q: 第 5 型和第 1 型有什么区别？**\nA: 第 5 型更关注\"理解\"（深度、知识、洞察），第 1 型更关注\"做对\"（原则、标准、改进）。两人可能都喜欢分析和逻辑，但驱动逻辑不同——第 5 型问的是\"这是什么原理\"，第 1 型问的是\"这样对不对\"。\n\n**Q: 第 5 型的人如何改善人际关系？**\nA: 不需要改变你的本性，但可以从微小信号开始：主动分享你的想法（不需要等它\"完美\"），邀请他人进入你的兴趣世界，练习在情感表达上\"最小可行\"——一句简单的\"我在意这件事\"对第 5 型来说已经是不小的表达。关系的深度不一定需要和关系的广度或社交频率挂钩。\n\n**Q: 第 5 型适合什么工作？**\nA: 第 5 型的人倾向于在需要深度分析、独立思考和长期专注的环境中做得更好——但这只是倾向，不是决定因素。一个人适合什么工作，远远不只取决于人格类型。\n\n**CTA**：[开始九型人格测试 →](/zh/tests/enneagram-personality-test-nine-types)\n\n**继续探索**：[九型人格 Hub](/zh/personality/enneagram) · [第 1 型：改革者](/zh/personality/enneagram/type-1) · [第 3 型：成就者](/zh/personality/enneagram/type-3) · [MBTI 16 型人格](/zh/personality) · [大五人格](/zh/tests/big-five-personality-test-ocean-model) · [RIASEC 职业兴趣](/zh/tests/holland-career-interest-test-riasec)\n\n---"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n第 5 型：探索者是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -566,6 +666,20 @@
           {
             "label": "大五人格",
             "url": "/zh/tests/big-five-personality-test-ocean-model"
+          }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
           }
         ]
       }
@@ -613,6 +727,11 @@
             "key": "faq_and_cta",
             "title": null,
             "body_md": "**Q: 第 6 型就是\"焦虑型人格\"吗？** A: 不是。第 6 型的警惕和谨慎是一种适应性品质——在复杂和不确定的环境中，这种\"提前考虑最坏情况\"的能力往往是团队最重要的安全屏障。焦虑障碍是临床诊断，与人格类型没有直接对应关系。\n\n**Q: 第 6 型和第 5 型有什么区别？** A: 第 6 型更关注\"安全感\"和\"信任\"，第 5 型更关注\"理解\"和\"知识\"。两人都可能看起来很谨慎，但第 6 型在评估\"谁可以信任\"，第 5 型在思考\"这怎么运作\"。\n\n**Q: 第 6 型的人如何减少过度的担忧？** A: 可以练习区分\"有证据的风险\"和\"只有想象的风险\"；给担忧设定具体的时间段，然后主动转移注意力到有建设性的行动上；相信你已经建立的系统和关系。\n\n**CTA**：[开始九型人格测试 →](/zh/tests/enneagram-personality-test-nine-types)\n\n**继续探索**：[九型人格 Hub](/zh/personality/enneagram) · [第 5 型](/zh/personality/enneagram/type-5) · [第 7 型](/zh/personality/enneagram/type-7) · [MBTI](/zh/personality) · [大五人格](/zh/tests/big-five-personality-test-ocean-model)\n\n---"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n第 6 型：忠诚者是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -649,6 +768,20 @@
           {
             "label": "大五人格",
             "url": "/zh/tests/big-five-personality-test-ocean-model"
+          }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
           }
         ]
       }
@@ -696,6 +829,11 @@
             "key": "faq_and_cta",
             "title": null,
             "body_md": "**Q: 第 7 型就是\"不成熟\"吗？** A: 不是。第 7 型的积极、灵活和创意是巨大的能力，许多创新者和领导者都是第 7 型。挑战是他们的能量在单一方向上的持续性，而不是成熟度。成熟不等于沉闷，投入不等于被限制。\n\n**Q: 第 7 型的人如何培养专注力？** A: 可以尝试\"时间盒子\"策略：给自己设定一段时间只做一件事，其他需求记录在旁边等这段时间结束后再处理。关键不是压抑对新事物的渴望，而是学会延期满足。\n\n**Q: 第 7 型和第 3 型有什么区别？** A: 第 7 型更关注\"可能性和快乐\"，第 3 型更关注\"效率和认可\"。两人可能都充满能量和行动力，但第 7 型做很多事是\"因为这个有意思\"，第 3 型做很多事是\"因为这个有成果\"。\n\n**CTA**：[开始九型人格测试 →](/zh/tests/enneagram-personality-test-nine-types)\n\n**继续探索**：[九型人格 Hub](/zh/personality/enneagram) · [第 5 型](/zh/personality/enneagram/type-5) · [第 6 型](/zh/personality/enneagram/type-6) · [MBTI](/zh/personality) · [大五人格](/zh/tests/big-five-personality-test-ocean-model)\n\n---"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n第 7 型：热情者是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -732,6 +870,20 @@
           {
             "label": "大五人格",
             "url": "/zh/tests/big-five-personality-test-ocean-model"
+          }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
           }
         ]
       }
@@ -779,6 +931,11 @@
             "key": "faq_and_cta",
             "title": null,
             "body_md": "**Q: 第 8 型就是\"攻击型人格\"吗？** A: 不是。第 8 型的力量和直接往往是保护和正义导向的，而非无故的攻击。许多第 8 型的人在保护弱势群体、对抗不公时发挥出最大的力量。他们的\"强势\"通常不是攻击——是对脆弱的防御。\n\n**Q: 第 8 型的人如何让身边的人不感到压力？** A: 可以练习\"软启动\"沟通：先表达你在意的是什么，再表达你需要改变的是什么。别人需要看到你的关心，而不只是你的标准。给对方空间来表达不同于你的意见，而不把这当成挑战。\n\n**Q: 第 8 型和第 1 型有什么区别？** A: 第 8 型更关注\"控制\"和\"保护\"，第 1 型更关注\"正确\"和\"改进\"。两人可能都对不满的地方果断表达，但第 8 型问的是\"谁做主\"，第 1 型问的是\"怎么做才对\"。\n\n**CTA**：[开始九型人格测试 →](/zh/tests/enneagram-personality-test-nine-types)\n\n**继续探索**：[九型人格 Hub](/zh/personality/enneagram) · [第 1 型](/zh/personality/enneagram/type-1) · [第 9 型](/zh/personality/enneagram/type-9) · [MBTI](/zh/personality) · [大五人格](/zh/tests/big-five-personality-test-ocean-model)\n\n---"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n第 8 型：挑战者是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -815,6 +972,20 @@
           {
             "label": "大五人格",
             "url": "/zh/tests/big-five-personality-test-ocean-model"
+          }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
           }
         ]
       }
@@ -862,6 +1033,11 @@
             "key": "faq_and_cta",
             "title": null,
             "body_md": "**Q: 第 9 型就是\"没主见\"吗？** A: 不是。第 9 型的人通常有自己的想法和偏好，但他们在表达之前会先评估\"说出来会不会影响和谐\"。他们的沉默不是因为没有意见，而是因为和谐在优先级上高于表达。学习在不同场合判断\"说出来值得\"的时机，对第 9 型是重要的。\n\n**Q: 第 9 型的人如何学会说\"不\"？** A: 从小的\"不\"开始练习——对一件小事说\"其实我更想这样做\"。你不需要在每一个场合都让步来维持关系，真正健康的、你在意的关系通常能承受你真实的意见。\n\n**Q: 第 9 型和第 2 型有什么区别？** A: 第 9 型更关注\"和谐\"和\"避免冲突\"，第 2 型更关注\"关系\"和\"被需要\"。两人都可能看起来很随和，但第 9 型顺从是为了\"别出问题\"，第 2 型付出是为了\"我们在连接\"。\n\n**CTA**：[开始九型人格测试 →](/zh/tests/enneagram-personality-test-nine-types)\n\n**继续探索**：[九型人格 Hub](/zh/personality/enneagram) · [第 1 型](/zh/personality/enneagram/type-1) · [第 8 型](/zh/personality/enneagram/type-8) · [MBTI](/zh/personality) · [大五人格](/zh/tests/big-five-personality-test-ocean-model)\n\n---"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n第 9 型：和平者是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -898,6 +1074,20 @@
           {
             "label": "大五人格",
             "url": "/zh/tests/big-five-personality-test-ocean-model"
+          }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
           }
         ]
       }
@@ -955,6 +1145,11 @@
             "key": "how_to_use_and_boundary",
             "title": "如何使用本能中心的描述",
             "body_md": "本能中心的描述是为了帮助你进行\"自我观察\"——而不是给你一个\"解释自己为什么这样\"的定论。当你阅读这些内容时，如果某个描述让你感到\"是有一点像我\"，你可以试着在接下来的几天观察一下：在你日常的哪些情境中，你确实有类似的身体反应？\n\n如果某个描述让你觉得\"这完全不是我\"——那也没有问题。九型人格不是标准化测试，也不是必须在九种类型中\"找到正确的那个\"。也许你的主导类型不在本能中心，而是在情感中心或思维中心；也许你读本能中心的描写，只是一种\"了解不同动机逻辑\"的方式。这些都很好。\n\n最重要的一点：这些内容不是诊断，不是筛选，不用于预测任何人的人生走向或关系结果。每个真实的人，都比任何类型描述要复杂得多。"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n本能中心是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -1012,6 +1207,20 @@
             "label": "九型人格测试详解",
             "url": "/zh/articles/enneagram-personality-test-explained"
           }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
+          }
         ]
       }
     },
@@ -1068,6 +1277,11 @@
             "key": "how_to_use_and_boundary",
             "title": "如何使用情感中心的描述",
             "body_md": "情感中心的描述是为了帮助你理解自己和他人——不是在关系中去\"判定\"对方是什么中心的人，也不是给自己一个\"我就是这样的\"的终结答案。\n\n如果你在阅读时感到某个描述特别触动你——让你觉得\"被看到了\"或\"有点不舒服\"——那个地方通常就是最值得你进一步观察自己的入口。你可以用几周的时间，在日常互动中留意自己：在面对一个新结识的人时，你的第一反应是什么？在被忽视时，你感到的是什么？在别人夸你时，你最先冒出来的念头是什么？\n\n最重要的使用规则是：这些内容不用于给别人贴标签、不用于关系判断、不用于职业选择、不用于招聘筛选。每个人在不同情境中可能有不同的反应模式——类型描述只是线索，不是身份。"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n情感中心是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -1120,6 +1334,20 @@
           {
             "label": "九型人格测试详解",
             "url": "/zh/articles/enneagram-personality-test-explained"
+          }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
           }
         ]
       }
@@ -1177,6 +1405,11 @@
             "key": "how_to_use_and_boundary",
             "title": "如何使用思维中心的描述",
             "body_md": "思维中心的描述是一套自我观察的线索系统——它不是一个\"判定\"你的系统。你读完之后不是说\"我就是第 5 型\"然后把自己局限在里面，而是可以在接下来的一周里留意一下：我在遇到新信息的第 3 秒，先在感受什么？先在想什么？还是在做什么？\n\n如果你发现在\"先感受\"、\"先想\"、\"先做\"三种反应中你更偏向\"先想\"，那么思维中心的描述可能对你最有参考价值。但不要把它当成唯一正确的答案——也许你在不同情境中有不同的主导反应。观察，比判定更重要。\n\n最重要的使用规则：这些内容不用于心理诊断、不用于招聘筛选、不用于能力判断、不用于职业决定或关系预测。类型描述是一条\"可能的路\"，不是你唯一的身份。人的复杂性永远不能被九个类型完全概括——而这一点，恰恰是九型人格最有价值的地方。"
+          },
+          {
+            "key": "evidence_and_limitations",
+            "title": "证据与限制",
+            "body_md": "### 证据与限制\n\n思维中心是教育性的九型人格解释，不是经过独立验证的个人分类结论。Hook 等人（2021）的系统综述显示，九型人格研究的发现并不一致，而且对部分次级命题的研究有限；该综述不能验证本页描述，也不能判定个人类型。请把内容作为自我观察假设，并结合具体情境、长期行为和其他可能解释进行核对。"
           }
         ],
         "faq": [
@@ -1230,8 +1463,31 @@
             "label": "九型人格测试详解",
             "url": "/zh/articles/enneagram-personality-test-explained"
           }
+        ],
+        "evidence_notes": [
+          {
+            "source_id": "hook-2021",
+            "source_type": "systematic_review",
+            "claim": "九型人格研究存在不一致结果和重要证据缺口；该来源只支持审慎的证据边界，不支持页面级判型结论。",
+            "limitation": "该系统综述不能验证本页、不能证明个人分类准确性，也不支持确定性用途。"
+          },
+          {
+            "source_id": "fermatmind-en13-claim-boundary-2026-07-09",
+            "source_type": "internal_claim_boundary",
+            "claim": "费马测试将公开九型人格内容限定为教育性自我观察，并禁止诊断、筛选、预测和固定身份主张。",
+            "limitation": "这是内部主张控制来源，不是独立科学验证。"
+          }
         ]
       }
     }
-  ]
+  ],
+  "evidence_contract": {
+    "version": "enneagram-en13-evidence.v1",
+    "source_ids": [
+      "hook-2021",
+      "fermatmind-en13-claim-boundary-2026-07-09"
+    ],
+    "visible_section_key": "evidence_and_limitations",
+    "claim_boundary": "educational_self_observation_only"
+  }
 }

@@ -41,6 +41,13 @@ This package contains **all 13 zh-CN Enneagram content assets** normalized for f
 - **Not search submitted**
 - **Draft for backend import dry-run only**
 
+## Evidence contract v1
+
+13 页均包含可见的 `evidence_and_limitations` 章节，并附带两个可追踪的
+source ID。`hook-2021` 只支持审慎的研究边界，不能验证页面或个人类型；
+内部 claim-boundary 来源只记录禁止用途，不属于科学效度证据。中英文使用
+相同稳定 source ID，但主张和限制说明分别完成本地化表达。
+
 ## Intended Import Flags
 
 ```

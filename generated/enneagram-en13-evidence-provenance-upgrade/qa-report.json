@@ -1,0 +1,47 @@
+{
+  "schema_version": "enneagram-en13-evidence-provenance-upgrade.v1",
+  "task_id": "ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01",
+  "status": "pass_local_package_and_gate_implementation",
+  "generated_at": "2026-07-12",
+  "coverage": {
+    "locales": ["en", "zh-CN"],
+    "pages": 26,
+    "hub_pages": 2,
+    "center_pages": 6,
+    "core_type_pages": 18,
+    "visible_evidence_sections": 26,
+    "evidence_notes": 52,
+    "stable_source_ids": [
+      "hook-2021",
+      "fermatmind-en13-claim-boundary-2026-07-09"
+    ]
+  },
+  "source_verification": {
+    "hook-2021": {
+      "status": "verified",
+      "authority": "PubMed PMID 33332604",
+      "doi": "10.1002/jclp.23097",
+      "claim_boundary": "Mixed reliability and validity evidence and important research gaps; not page-level or individual classification validation."
+    },
+    "fermatmind-en13-claim-boundary-2026-07-09": {
+      "status": "verified_internal_policy",
+      "claim_boundary": "Internal prohibited-use policy only; not scientific validity evidence."
+    }
+  },
+  "qa_gates": {
+    "schema": "pass",
+    "visible_evidence": "pass",
+    "stable_source_ids": "pass",
+    "explicit_limitations": "pass",
+    "bilingual_route_parity": "pass",
+    "independent_localization": "pass",
+    "private_result_boundary": "pass",
+    "deterministic_claim_boundary": "pass",
+    "production_write": "not_executed",
+    "deployment": "not_executed",
+    "llms_release": "not_executed",
+    "search_action": "not_executed",
+    "cache_warm": "not_executed"
+  },
+  "next_gate": "Merge and separately deploy the implementation SHA, then run ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01 dry-run to derive the exact 26-page cohort SHA."
+}
