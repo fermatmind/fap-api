@@ -88755,7 +88755,7 @@
     "base": "main",
     "branch": "codex/public-api-cache-01",
     "depends_on": ["CAREER-NEXTSTEP-01"],
-    "status": "github_checks_pending",
+    "status": "github_checks_retry_pending",
     "commit_sha": "d17ed11ea",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3017",
     "failure_reason": null,
@@ -88791,7 +88791,7 @@
       "local_validation": {"status": "pass", "evidence": "Read-model unit tests and complete PersonalityPublicApiTest passed with 26 tests and 3256 assertions; PHP syntax and Pint passed; the full scripts/ci_verify_mbti.sh chain completed with exit 0. The one initial profile-update cache regression was fixed by profile/variant attribute versioning before the passing rerun."}
     },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-12T16:35:00+08:00", "from": "user_authorized", "to": "in_progress", "note": "Started bounded final-payload read-model caching for anonymous MBTI A/T detail and SEO routes. Tenant/base-type/comparison requests, CMS writes, warmup, imports, and deploys remain out of scope."}, {"at": "2026-07-12T16:55:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "Unit and full personality API tests, PHP syntax, Pint, complete ci_verify_mbti, parse, diff, and exact five-path scope validation passed. Validation-generated Big Five compiled artifacts were restored."}, {"at": "2026-07-12T17:00:00+08:00", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed and pushed the exact five-path scope and opened PR #3017; required checks are pending."}]
+    "transitions": [{"at": "2026-07-12T16:35:00+08:00", "from": "user_authorized", "to": "in_progress", "note": "Started bounded final-payload read-model caching for anonymous MBTI A/T detail and SEO routes. Tenant/base-type/comparison requests, CMS writes, warmup, imports, and deploys remain out of scope."}, {"at": "2026-07-12T16:55:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "Unit and full personality API tests, PHP syntax, Pint, complete ci_verify_mbti, parse, diff, and exact five-path scope validation passed. Validation-generated Big Five compiled artifacts were restored."}, {"at": "2026-07-12T17:00:00+08:00", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed and pushed the exact five-path scope and opened PR #3017; required checks are pending."}, {"at": "2026-07-12T17:10:00+08:00", "from": "github_checks_pending", "to": "github_checks_retry_pending", "note": "Inspected verify-bigfive: 1205 tests passed and the sole failure was the runtime classifier not recognizing the new dedicated personality public read-model cache service. Added only that exact service path to the existing personality public-directory classifier with focused coverage."}]
   },
   "ENNEAGRAM-LLMS-FULL-RELEASE-01": {
     "id": "ENNEAGRAM-LLMS-FULL-RELEASE-01", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-FULL-RELEASE-01: release approved Enneagram llms-full assets", "base": "main", "branch": "codex/enneagram-llms-full-release-01", "depends_on": ["ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02"],

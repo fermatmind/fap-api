@@ -41468,6 +41468,7 @@ prs:
       - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
       - backend/tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -41476,6 +41477,7 @@ prs:
       - cd backend && php artisan test tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php
       - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php
       - cd backend && ./vendor/bin/pint --test app/Services/Cms/PersonalityPublicReadModelCache.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_freeze_classifier_ignores_personality_public_read_model_cache
       - YAML/JSON parse and changed-file scope validation
       - git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
