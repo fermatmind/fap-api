@@ -1,0 +1,1065 @@
+{
+  "task_id": "ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01",
+  "checked_at": "2026-07-12T11:43:14.695016Z",
+  "target_host": "https://fermatmind.com",
+  "frontend_deployed_sha": "eaa5a1ab0ba7860b18f470d975f0da4ed3c3ba9d",
+  "expected": {
+    "enneagram_canonical_total": 116,
+    "llms_txt_enneagram_count": 116,
+    "llms_full_enneagram_count": 0,
+    "locale_counts": {
+      "en": 58,
+      "zh": 58
+    },
+    "entity_counts": {
+      "hub": 2,
+      "center": 6,
+      "core_type": 18,
+      "wing": 36,
+      "instinctual_subtype": 54
+    }
+  },
+  "llms_txt": {
+    "url": "https://fermatmind.com/llms.txt",
+    "http_status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "cache_control": "public, s-maxage=3600, stale-while-revalidate=86400",
+    "content_sha256": "100d07764bed497bde41f0d630a56846bcd9fd8c9ac866b163f6a16e8f6b0b2d",
+    "enneagram_count": 116,
+    "raw_match_count": 116,
+    "duplicate_count": 0,
+    "duplicates": [],
+    "malformed_count": 0,
+    "malformed_urls": [],
+    "non_apex_host_count": 0,
+    "non_apex_urls": [],
+    "forbidden_patterns": [
+      "private",
+      "result",
+      "order",
+      "payment",
+      "token",
+      "internal",
+      "preview",
+      "admin",
+      "ops"
+    ],
+    "forbidden_pattern_hit_count": 0,
+    "forbidden_pattern_hits": [],
+    "locale_counts": {
+      "en": 58,
+      "zh": 58
+    },
+    "entity_counts": {
+      "hub": 2,
+      "center": 6,
+      "core_type": 18,
+      "wing": 36,
+      "instinctual_subtype": 54
+    },
+    "missing_expected_count": 0,
+    "missing_expected_urls": [],
+    "unexpected_count": 0,
+    "unexpected_urls": [],
+    "canonical_records": [
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram",
+        "locale": "en",
+        "entity_type": "hub",
+        "code": "hub",
+        "path": "/en/personality/enneagram"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/centers/gut",
+        "locale": "en",
+        "entity_type": "center",
+        "code": "gut",
+        "path": "/en/personality/enneagram/centers/gut"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/centers/head",
+        "locale": "en",
+        "entity_type": "center",
+        "code": "head",
+        "path": "/en/personality/enneagram/centers/head"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/centers/heart",
+        "locale": "en",
+        "entity_type": "center",
+        "code": "heart",
+        "path": "/en/personality/enneagram/centers/heart"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-1",
+        "locale": "en",
+        "entity_type": "core_type",
+        "code": "type-1",
+        "path": "/en/personality/enneagram/type-1"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-1/instincts/one-to-one",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-1-one-to-one",
+        "path": "/en/personality/enneagram/type-1/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-1/instincts/self-preservation",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-1-self-preservation",
+        "path": "/en/personality/enneagram/type-1/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-1/instincts/social",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-1-social",
+        "path": "/en/personality/enneagram/type-1/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-2",
+        "locale": "en",
+        "entity_type": "core_type",
+        "code": "type-2",
+        "path": "/en/personality/enneagram/type-2"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-2/instincts/one-to-one",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-2-one-to-one",
+        "path": "/en/personality/enneagram/type-2/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-2/instincts/self-preservation",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-2-self-preservation",
+        "path": "/en/personality/enneagram/type-2/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-2/instincts/social",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-2-social",
+        "path": "/en/personality/enneagram/type-2/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-3",
+        "locale": "en",
+        "entity_type": "core_type",
+        "code": "type-3",
+        "path": "/en/personality/enneagram/type-3"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-3/instincts/one-to-one",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-3-one-to-one",
+        "path": "/en/personality/enneagram/type-3/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-3/instincts/self-preservation",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-3-self-preservation",
+        "path": "/en/personality/enneagram/type-3/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-3/instincts/social",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-3-social",
+        "path": "/en/personality/enneagram/type-3/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-4",
+        "locale": "en",
+        "entity_type": "core_type",
+        "code": "type-4",
+        "path": "/en/personality/enneagram/type-4"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-4/instincts/one-to-one",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-4-one-to-one",
+        "path": "/en/personality/enneagram/type-4/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-4/instincts/self-preservation",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-4-self-preservation",
+        "path": "/en/personality/enneagram/type-4/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-4/instincts/social",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-4-social",
+        "path": "/en/personality/enneagram/type-4/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-5",
+        "locale": "en",
+        "entity_type": "core_type",
+        "code": "type-5",
+        "path": "/en/personality/enneagram/type-5"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-5/instincts/one-to-one",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-5-one-to-one",
+        "path": "/en/personality/enneagram/type-5/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-5/instincts/self-preservation",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-5-self-preservation",
+        "path": "/en/personality/enneagram/type-5/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-5/instincts/social",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-5-social",
+        "path": "/en/personality/enneagram/type-5/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-6",
+        "locale": "en",
+        "entity_type": "core_type",
+        "code": "type-6",
+        "path": "/en/personality/enneagram/type-6"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-6/instincts/one-to-one",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-6-one-to-one",
+        "path": "/en/personality/enneagram/type-6/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-6/instincts/self-preservation",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-6-self-preservation",
+        "path": "/en/personality/enneagram/type-6/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-6/instincts/social",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-6-social",
+        "path": "/en/personality/enneagram/type-6/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-7",
+        "locale": "en",
+        "entity_type": "core_type",
+        "code": "type-7",
+        "path": "/en/personality/enneagram/type-7"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-7/instincts/one-to-one",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-7-one-to-one",
+        "path": "/en/personality/enneagram/type-7/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-7/instincts/self-preservation",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-7-self-preservation",
+        "path": "/en/personality/enneagram/type-7/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-7/instincts/social",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-7-social",
+        "path": "/en/personality/enneagram/type-7/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-8",
+        "locale": "en",
+        "entity_type": "core_type",
+        "code": "type-8",
+        "path": "/en/personality/enneagram/type-8"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-8/instincts/one-to-one",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-8-one-to-one",
+        "path": "/en/personality/enneagram/type-8/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-8/instincts/self-preservation",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-8-self-preservation",
+        "path": "/en/personality/enneagram/type-8/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-8/instincts/social",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-8-social",
+        "path": "/en/personality/enneagram/type-8/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-9",
+        "locale": "en",
+        "entity_type": "core_type",
+        "code": "type-9",
+        "path": "/en/personality/enneagram/type-9"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-9/instincts/one-to-one",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-9-one-to-one",
+        "path": "/en/personality/enneagram/type-9/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-9/instincts/self-preservation",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-9-self-preservation",
+        "path": "/en/personality/enneagram/type-9/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/type-9/instincts/social",
+        "locale": "en",
+        "entity_type": "instinctual_subtype",
+        "code": "type-9-social",
+        "path": "/en/personality/enneagram/type-9/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/1w2",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "1w2",
+        "path": "/en/personality/enneagram/wings/1w2"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/1w9",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "1w9",
+        "path": "/en/personality/enneagram/wings/1w9"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/2w1",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "2w1",
+        "path": "/en/personality/enneagram/wings/2w1"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/2w3",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "2w3",
+        "path": "/en/personality/enneagram/wings/2w3"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/3w2",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "3w2",
+        "path": "/en/personality/enneagram/wings/3w2"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/3w4",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "3w4",
+        "path": "/en/personality/enneagram/wings/3w4"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/4w3",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "4w3",
+        "path": "/en/personality/enneagram/wings/4w3"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/4w5",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "4w5",
+        "path": "/en/personality/enneagram/wings/4w5"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/5w4",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "5w4",
+        "path": "/en/personality/enneagram/wings/5w4"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/5w6",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "5w6",
+        "path": "/en/personality/enneagram/wings/5w6"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/6w5",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "6w5",
+        "path": "/en/personality/enneagram/wings/6w5"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/6w7",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "6w7",
+        "path": "/en/personality/enneagram/wings/6w7"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/7w6",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "7w6",
+        "path": "/en/personality/enneagram/wings/7w6"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/7w8",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "7w8",
+        "path": "/en/personality/enneagram/wings/7w8"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/8w7",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "8w7",
+        "path": "/en/personality/enneagram/wings/8w7"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/8w9",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "8w9",
+        "path": "/en/personality/enneagram/wings/8w9"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/9w1",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "9w1",
+        "path": "/en/personality/enneagram/wings/9w1"
+      },
+      {
+        "url": "https://fermatmind.com/en/personality/enneagram/wings/9w8",
+        "locale": "en",
+        "entity_type": "wing",
+        "code": "9w8",
+        "path": "/en/personality/enneagram/wings/9w8"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram",
+        "locale": "zh",
+        "entity_type": "hub",
+        "code": "hub",
+        "path": "/zh/personality/enneagram"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/centers/gut",
+        "locale": "zh",
+        "entity_type": "center",
+        "code": "gut",
+        "path": "/zh/personality/enneagram/centers/gut"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/centers/head",
+        "locale": "zh",
+        "entity_type": "center",
+        "code": "head",
+        "path": "/zh/personality/enneagram/centers/head"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/centers/heart",
+        "locale": "zh",
+        "entity_type": "center",
+        "code": "heart",
+        "path": "/zh/personality/enneagram/centers/heart"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-1",
+        "locale": "zh",
+        "entity_type": "core_type",
+        "code": "type-1",
+        "path": "/zh/personality/enneagram/type-1"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-1/instincts/one-to-one",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-1-one-to-one",
+        "path": "/zh/personality/enneagram/type-1/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-1/instincts/self-preservation",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-1-self-preservation",
+        "path": "/zh/personality/enneagram/type-1/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-1/instincts/social",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-1-social",
+        "path": "/zh/personality/enneagram/type-1/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-2",
+        "locale": "zh",
+        "entity_type": "core_type",
+        "code": "type-2",
+        "path": "/zh/personality/enneagram/type-2"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-2/instincts/one-to-one",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-2-one-to-one",
+        "path": "/zh/personality/enneagram/type-2/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-2/instincts/self-preservation",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-2-self-preservation",
+        "path": "/zh/personality/enneagram/type-2/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-2/instincts/social",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-2-social",
+        "path": "/zh/personality/enneagram/type-2/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-3",
+        "locale": "zh",
+        "entity_type": "core_type",
+        "code": "type-3",
+        "path": "/zh/personality/enneagram/type-3"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-3/instincts/one-to-one",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-3-one-to-one",
+        "path": "/zh/personality/enneagram/type-3/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-3/instincts/self-preservation",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-3-self-preservation",
+        "path": "/zh/personality/enneagram/type-3/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-3/instincts/social",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-3-social",
+        "path": "/zh/personality/enneagram/type-3/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-4",
+        "locale": "zh",
+        "entity_type": "core_type",
+        "code": "type-4",
+        "path": "/zh/personality/enneagram/type-4"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-4/instincts/one-to-one",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-4-one-to-one",
+        "path": "/zh/personality/enneagram/type-4/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-4/instincts/self-preservation",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-4-self-preservation",
+        "path": "/zh/personality/enneagram/type-4/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-4/instincts/social",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-4-social",
+        "path": "/zh/personality/enneagram/type-4/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-5",
+        "locale": "zh",
+        "entity_type": "core_type",
+        "code": "type-5",
+        "path": "/zh/personality/enneagram/type-5"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-5/instincts/one-to-one",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-5-one-to-one",
+        "path": "/zh/personality/enneagram/type-5/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-5/instincts/self-preservation",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-5-self-preservation",
+        "path": "/zh/personality/enneagram/type-5/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-5/instincts/social",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-5-social",
+        "path": "/zh/personality/enneagram/type-5/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-6",
+        "locale": "zh",
+        "entity_type": "core_type",
+        "code": "type-6",
+        "path": "/zh/personality/enneagram/type-6"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-6/instincts/one-to-one",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-6-one-to-one",
+        "path": "/zh/personality/enneagram/type-6/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-6/instincts/self-preservation",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-6-self-preservation",
+        "path": "/zh/personality/enneagram/type-6/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-6/instincts/social",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-6-social",
+        "path": "/zh/personality/enneagram/type-6/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-7",
+        "locale": "zh",
+        "entity_type": "core_type",
+        "code": "type-7",
+        "path": "/zh/personality/enneagram/type-7"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-7/instincts/one-to-one",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-7-one-to-one",
+        "path": "/zh/personality/enneagram/type-7/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-7/instincts/self-preservation",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-7-self-preservation",
+        "path": "/zh/personality/enneagram/type-7/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-7/instincts/social",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-7-social",
+        "path": "/zh/personality/enneagram/type-7/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-8",
+        "locale": "zh",
+        "entity_type": "core_type",
+        "code": "type-8",
+        "path": "/zh/personality/enneagram/type-8"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-8/instincts/one-to-one",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-8-one-to-one",
+        "path": "/zh/personality/enneagram/type-8/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-8/instincts/self-preservation",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-8-self-preservation",
+        "path": "/zh/personality/enneagram/type-8/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-8/instincts/social",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-8-social",
+        "path": "/zh/personality/enneagram/type-8/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-9",
+        "locale": "zh",
+        "entity_type": "core_type",
+        "code": "type-9",
+        "path": "/zh/personality/enneagram/type-9"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-9/instincts/one-to-one",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-9-one-to-one",
+        "path": "/zh/personality/enneagram/type-9/instincts/one-to-one"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-9/instincts/self-preservation",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-9-self-preservation",
+        "path": "/zh/personality/enneagram/type-9/instincts/self-preservation"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/type-9/instincts/social",
+        "locale": "zh",
+        "entity_type": "instinctual_subtype",
+        "code": "type-9-social",
+        "path": "/zh/personality/enneagram/type-9/instincts/social"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/1w2",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "1w2",
+        "path": "/zh/personality/enneagram/wings/1w2"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/1w9",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "1w9",
+        "path": "/zh/personality/enneagram/wings/1w9"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/2w1",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "2w1",
+        "path": "/zh/personality/enneagram/wings/2w1"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/2w3",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "2w3",
+        "path": "/zh/personality/enneagram/wings/2w3"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/3w2",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "3w2",
+        "path": "/zh/personality/enneagram/wings/3w2"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/3w4",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "3w4",
+        "path": "/zh/personality/enneagram/wings/3w4"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/4w3",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "4w3",
+        "path": "/zh/personality/enneagram/wings/4w3"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/4w5",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "4w5",
+        "path": "/zh/personality/enneagram/wings/4w5"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/5w4",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "5w4",
+        "path": "/zh/personality/enneagram/wings/5w4"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/5w6",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "5w6",
+        "path": "/zh/personality/enneagram/wings/5w6"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/6w5",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "6w5",
+        "path": "/zh/personality/enneagram/wings/6w5"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/6w7",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "6w7",
+        "path": "/zh/personality/enneagram/wings/6w7"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/7w6",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "7w6",
+        "path": "/zh/personality/enneagram/wings/7w6"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/7w8",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "7w8",
+        "path": "/zh/personality/enneagram/wings/7w8"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/8w7",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "8w7",
+        "path": "/zh/personality/enneagram/wings/8w7"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/8w9",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "8w9",
+        "path": "/zh/personality/enneagram/wings/8w9"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/9w1",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "9w1",
+        "path": "/zh/personality/enneagram/wings/9w1"
+      },
+      {
+        "url": "https://fermatmind.com/zh/personality/enneagram/wings/9w8",
+        "locale": "zh",
+        "entity_type": "wing",
+        "code": "9w8",
+        "path": "/zh/personality/enneagram/wings/9w8"
+      }
+    ]
+  },
+  "llms_full_txt": {
+    "url": "https://fermatmind.com/llms-full.txt",
+    "http_status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "cache_control": "public, s-maxage=3600, stale-while-revalidate=86400",
+    "content_sha256": "80eb8f50d48b6d58272c86baf7c3a8c15875cc1bd052d032a09094fddd06ba41",
+    "enneagram_count": 0,
+    "raw_match_count": 0,
+    "duplicate_count": 0,
+    "duplicates": [],
+    "malformed_count": 0,
+    "malformed_urls": [],
+    "non_apex_host_count": 0,
+    "non_apex_urls": [],
+    "forbidden_patterns": [
+      "private",
+      "result",
+      "order",
+      "payment",
+      "token",
+      "internal",
+      "preview",
+      "admin",
+      "ops"
+    ],
+    "forbidden_pattern_hit_count": 0,
+    "forbidden_pattern_hits": [],
+    "locale_counts": {
+      "en": 0,
+      "zh": 0
+    },
+    "entity_counts": {
+      "hub": 0,
+      "center": 0,
+      "core_type": 0,
+      "wing": 0,
+      "instinctual_subtype": 0
+    },
+    "missing_expected_count": 116,
+    "missing_expected_urls": [
+      "https://fermatmind.com/en/personality/enneagram",
+      "https://fermatmind.com/en/personality/enneagram/centers/gut",
+      "https://fermatmind.com/en/personality/enneagram/centers/head",
+      "https://fermatmind.com/en/personality/enneagram/centers/heart",
+      "https://fermatmind.com/en/personality/enneagram/type-1",
+      "https://fermatmind.com/en/personality/enneagram/type-1/instincts/one-to-one",
+      "https://fermatmind.com/en/personality/enneagram/type-1/instincts/self-preservation",
+      "https://fermatmind.com/en/personality/enneagram/type-1/instincts/social",
+      "https://fermatmind.com/en/personality/enneagram/type-2",
+      "https://fermatmind.com/en/personality/enneagram/type-2/instincts/one-to-one",
+      "https://fermatmind.com/en/personality/enneagram/type-2/instincts/self-preservation",
+      "https://fermatmind.com/en/personality/enneagram/type-2/instincts/social",
+      "https://fermatmind.com/en/personality/enneagram/type-3",
+      "https://fermatmind.com/en/personality/enneagram/type-3/instincts/one-to-one",
+      "https://fermatmind.com/en/personality/enneagram/type-3/instincts/self-preservation",
+      "https://fermatmind.com/en/personality/enneagram/type-3/instincts/social",
+      "https://fermatmind.com/en/personality/enneagram/type-4",
+      "https://fermatmind.com/en/personality/enneagram/type-4/instincts/one-to-one",
+      "https://fermatmind.com/en/personality/enneagram/type-4/instincts/self-preservation",
+      "https://fermatmind.com/en/personality/enneagram/type-4/instincts/social",
+      "https://fermatmind.com/en/personality/enneagram/type-5",
+      "https://fermatmind.com/en/personality/enneagram/type-5/instincts/one-to-one",
+      "https://fermatmind.com/en/personality/enneagram/type-5/instincts/self-preservation",
+      "https://fermatmind.com/en/personality/enneagram/type-5/instincts/social",
+      "https://fermatmind.com/en/personality/enneagram/type-6",
+      "https://fermatmind.com/en/personality/enneagram/type-6/instincts/one-to-one",
+      "https://fermatmind.com/en/personality/enneagram/type-6/instincts/self-preservation",
+      "https://fermatmind.com/en/personality/enneagram/type-6/instincts/social",
+      "https://fermatmind.com/en/personality/enneagram/type-7",
+      "https://fermatmind.com/en/personality/enneagram/type-7/instincts/one-to-one",
+      "https://fermatmind.com/en/personality/enneagram/type-7/instincts/self-preservation",
+      "https://fermatmind.com/en/personality/enneagram/type-7/instincts/social",
+      "https://fermatmind.com/en/personality/enneagram/type-8",
+      "https://fermatmind.com/en/personality/enneagram/type-8/instincts/one-to-one",
+      "https://fermatmind.com/en/personality/enneagram/type-8/instincts/self-preservation",
+      "https://fermatmind.com/en/personality/enneagram/type-8/instincts/social",
+      "https://fermatmind.com/en/personality/enneagram/type-9",
+      "https://fermatmind.com/en/personality/enneagram/type-9/instincts/one-to-one",
+      "https://fermatmind.com/en/personality/enneagram/type-9/instincts/self-preservation",
+      "https://fermatmind.com/en/personality/enneagram/type-9/instincts/social",
+      "https://fermatmind.com/en/personality/enneagram/wings/1w2",
+      "https://fermatmind.com/en/personality/enneagram/wings/1w9",
+      "https://fermatmind.com/en/personality/enneagram/wings/2w1",
+      "https://fermatmind.com/en/personality/enneagram/wings/2w3",
+      "https://fermatmind.com/en/personality/enneagram/wings/3w2",
+      "https://fermatmind.com/en/personality/enneagram/wings/3w4",
+      "https://fermatmind.com/en/personality/enneagram/wings/4w3",
+      "https://fermatmind.com/en/personality/enneagram/wings/4w5",
+      "https://fermatmind.com/en/personality/enneagram/wings/5w4",
+      "https://fermatmind.com/en/personality/enneagram/wings/5w6",
+      "https://fermatmind.com/en/personality/enneagram/wings/6w5",
+      "https://fermatmind.com/en/personality/enneagram/wings/6w7",
+      "https://fermatmind.com/en/personality/enneagram/wings/7w6",
+      "https://fermatmind.com/en/personality/enneagram/wings/7w8",
+      "https://fermatmind.com/en/personality/enneagram/wings/8w7",
+      "https://fermatmind.com/en/personality/enneagram/wings/8w9",
+      "https://fermatmind.com/en/personality/enneagram/wings/9w1",
+      "https://fermatmind.com/en/personality/enneagram/wings/9w8",
+      "https://fermatmind.com/zh/personality/enneagram",
+      "https://fermatmind.com/zh/personality/enneagram/centers/gut",
+      "https://fermatmind.com/zh/personality/enneagram/centers/head",
+      "https://fermatmind.com/zh/personality/enneagram/centers/heart",
+      "https://fermatmind.com/zh/personality/enneagram/type-1",
+      "https://fermatmind.com/zh/personality/enneagram/type-1/instincts/one-to-one",
+      "https://fermatmind.com/zh/personality/enneagram/type-1/instincts/self-preservation",
+      "https://fermatmind.com/zh/personality/enneagram/type-1/instincts/social",
+      "https://fermatmind.com/zh/personality/enneagram/type-2",
+      "https://fermatmind.com/zh/personality/enneagram/type-2/instincts/one-to-one",
+      "https://fermatmind.com/zh/personality/enneagram/type-2/instincts/self-preservation",
+      "https://fermatmind.com/zh/personality/enneagram/type-2/instincts/social",
+      "https://fermatmind.com/zh/personality/enneagram/type-3",
+      "https://fermatmind.com/zh/personality/enneagram/type-3/instincts/one-to-one",
+      "https://fermatmind.com/zh/personality/enneagram/type-3/instincts/self-preservation",
+      "https://fermatmind.com/zh/personality/enneagram/type-3/instincts/social",
+      "https://fermatmind.com/zh/personality/enneagram/type-4",
+      "https://fermatmind.com/zh/personality/enneagram/type-4/instincts/one-to-one",
+      "https://fermatmind.com/zh/personality/enneagram/type-4/instincts/self-preservation",
+      "https://fermatmind.com/zh/personality/enneagram/type-4/instincts/social",
+      "https://fermatmind.com/zh/personality/enneagram/type-5",
+      "https://fermatmind.com/zh/personality/enneagram/type-5/instincts/one-to-one",
+      "https://fermatmind.com/zh/personality/enneagram/type-5/instincts/self-preservation",
+      "https://fermatmind.com/zh/personality/enneagram/type-5/instincts/social",
+      "https://fermatmind.com/zh/personality/enneagram/type-6",
+      "https://fermatmind.com/zh/personality/enneagram/type-6/instincts/one-to-one",
+      "https://fermatmind.com/zh/personality/enneagram/type-6/instincts/self-preservation",
+      "https://fermatmind.com/zh/personality/enneagram/type-6/instincts/social",
+      "https://fermatmind.com/zh/personality/enneagram/type-7",
+      "https://fermatmind.com/zh/personality/enneagram/type-7/instincts/one-to-one",
+      "https://fermatmind.com/zh/personality/enneagram/type-7/instincts/self-preservation",
+      "https://fermatmind.com/zh/personality/enneagram/type-7/instincts/social",
+      "https://fermatmind.com/zh/personality/enneagram/type-8",
+      "https://fermatmind.com/zh/personality/enneagram/type-8/instincts/one-to-one",
+      "https://fermatmind.com/zh/personality/enneagram/type-8/instincts/self-preservation",
+      "https://fermatmind.com/zh/personality/enneagram/type-8/instincts/social",
+      "https://fermatmind.com/zh/personality/enneagram/type-9",
+      "https://fermatmind.com/zh/personality/enneagram/type-9/instincts/one-to-one",
+      "https://fermatmind.com/zh/personality/enneagram/type-9/instincts/self-preservation",
+      "https://fermatmind.com/zh/personality/enneagram/type-9/instincts/social",
+      "https://fermatmind.com/zh/personality/enneagram/wings/1w2",
+      "https://fermatmind.com/zh/personality/enneagram/wings/1w9",
+      "https://fermatmind.com/zh/personality/enneagram/wings/2w1",
+      "https://fermatmind.com/zh/personality/enneagram/wings/2w3",
+      "https://fermatmind.com/zh/personality/enneagram/wings/3w2",
+      "https://fermatmind.com/zh/personality/enneagram/wings/3w4",
+      "https://fermatmind.com/zh/personality/enneagram/wings/4w3",
+      "https://fermatmind.com/zh/personality/enneagram/wings/4w5",
+      "https://fermatmind.com/zh/personality/enneagram/wings/5w4",
+      "https://fermatmind.com/zh/personality/enneagram/wings/5w6",
+      "https://fermatmind.com/zh/personality/enneagram/wings/6w5",
+      "https://fermatmind.com/zh/personality/enneagram/wings/6w7",
+      "https://fermatmind.com/zh/personality/enneagram/wings/7w6",
+      "https://fermatmind.com/zh/personality/enneagram/wings/7w8",
+      "https://fermatmind.com/zh/personality/enneagram/wings/8w7",
+      "https://fermatmind.com/zh/personality/enneagram/wings/8w9",
+      "https://fermatmind.com/zh/personality/enneagram/wings/9w1",
+      "https://fermatmind.com/zh/personality/enneagram/wings/9w8"
+    ],
+    "unexpected_count": 0,
+    "unexpected_urls": [],
+    "canonical_records": []
+  },
+  "side_effects": {
+    "cms_writes": 0,
+    "eligibility_writes": 0,
+    "search_queue_writes": 0,
+    "indexnow_submissions": 0,
+    "deploys_triggered": 0,
+    "cache_warm_triggered": 0
+  },
+  "checks": {
+    "llms_txt_status_200": true,
+    "llms_txt_exact_116": true,
+    "llms_txt_locale_counts": true,
+    "llms_txt_entity_counts": true,
+    "llms_txt_no_duplicates": true,
+    "llms_txt_no_malformed": true,
+    "llms_txt_no_non_apex": true,
+    "llms_txt_no_forbidden": true,
+    "llms_txt_no_missing_expected": true,
+    "llms_txt_no_unexpected": true,
+    "llms_full_status_200": true,
+    "llms_full_enneagram_zero": true,
+    "llms_full_no_forbidden_enneagram_hits": true,
+    "side_effects_zero": true
+  },
+  "conclusion": "GO_LLMS_TXT_PRODUCTION_REVALIDATED"
+}
