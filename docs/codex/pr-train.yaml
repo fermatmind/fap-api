@@ -41362,14 +41362,14 @@ prs:
 
   - id: ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02
     repo: fap-api
-    depends_on: [ENNEAGRAM-EN13-EVIDENCE-PROVENANCE-UPGRADE-01]
+    depends_on: [ENNEAGRAM-LLMS-TXT-PRODUCTION-REVALIDATION-01, ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01]
     branch: codex/enneagram-llms-full-release-readiness-02
     title: "ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02: re-evaluate Enneagram llms-full evidence gate"
     train_scope: enneagram_llms_full_release_readiness
     status: pending_dependency
     scope:
       - Read-only assess the 116 assets against enriched evidence, provenance, claim boundary, disclosure, duplicate, bilingual, and private-boundary gates.
-      - Decide llms.txt and llms-full separately; permit only GO_FOR_SEPARATE_LLMS_AUTHORIZATION or NO_GO_LLMS_RELEASE evidence.
+      - Decide llms-full separately from llms.txt; permit only GO_FOR_SEPARATE_LLMS_FULL_AUTHORIZATION or NO_GO_LLMS_FULL_RELEASE evidence.
     allowed_paths: [docs/codex/pr-train.yaml, docs/codex/pr-train-state.json, generated/enneagram-llms-full-release-readiness-02/**, generated/pr-train-sidecar-issues/**]
     do_not: [Write CMS/DB, release any feed, warm cache, submit Search, deploy, expose private paths, secrets, or topology.]
     validation: [116-target readiness evidence, JSON/YAML contract checks, changed-file scope validation, git diff --check]
