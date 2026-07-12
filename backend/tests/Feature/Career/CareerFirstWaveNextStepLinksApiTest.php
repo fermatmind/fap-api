@@ -9,6 +9,7 @@ use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\TestCase;
 
@@ -16,11 +17,18 @@ final class CareerFirstWaveNextStepLinksApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Cache::flush();
+    }
+
     public function test_it_exposes_a_first_wave_next_step_links_summary_for_supported_route_kinds_only(): void
     {
         $this->materializeCurrentFirstWaveFixture();
 
-        $response = $this->getJson('/api/v0.5/career/first-wave/jobs/accountants-and-auditors/next-step-links');
+        $response = $this->getJson('/api/v0.5/career/first-wave/jobs/accountants-and-auditors/next-step-links?locale=en');
 
         $response->assertOk()
             ->assertJsonPath('summary_kind', 'career_first_wave_next_step_links')

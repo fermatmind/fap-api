@@ -41359,3 +41359,37 @@ prs:
     llms_release_execution: true
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: CAREER-NEXTSTEP-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/career-nextstep-01
+    title: "CAREER-NEXTSTEP-01: cache career next-step links"
+    train_scope: career_next_step_links_cache
+    status: user_authorized
+    scope:
+      - Cache first-wave next-step payloads by normalized slug and public locale.
+      - Keep a last-known-good payload for authority-build timeout or failure fallback.
+      - Negative-cache unknown or out-of-scope slugs briefly and preserve the existing 404 contract.
+    allowed_paths:
+      - backend/app/Domain/Career/Publish/CareerFirstWaveNextStepLinksService.php
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerFirstWaveNextStepLinksController.php
+      - backend/tests/Unit/Services/Career/CareerFirstWaveNextStepLinksServiceTest.php
+      - backend/tests/Feature/Career/CareerFirstWaveNextStepLinksApiTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Write CMS data, add a DB migration, import production data, warm production cache, deploy, or change career content authority.
+    validation:
+      - cd backend && php artisan test tests/Unit/Services/Career/CareerFirstWaveNextStepLinksServiceTest.php tests/Feature/Career/CareerFirstWaveNextStepLinksApiTest.php
+      - cd backend && ./vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWaveNextStepLinksService.php app/Http/Controllers/API/V0_5/Career/CareerFirstWaveNextStepLinksController.php tests/Unit/Services/Career/CareerFirstWaveNextStepLinksServiceTest.php tests/Feature/Career/CareerFirstWaveNextStepLinksApiTest.php
+      - cd backend && php artisan route:list --path=api/v0.5/career/first-wave/jobs --except-vendor
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    deploy_allowed: false
+    content_authority: CMS/backend
