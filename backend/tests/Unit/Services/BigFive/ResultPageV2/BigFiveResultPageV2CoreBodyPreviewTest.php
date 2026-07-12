@@ -5596,6 +5596,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($file === 'backend/app/Console/Commands/PersonalityWarmPublicReadModels.php') {
+                continue;
+            }
+
             if ($this->isEnneagramCmsDraftFile($file)) {
                 continue;
             }
@@ -6941,6 +6945,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsPersonalityAgentApprovalQueueOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsPersonalityTdkNextBatchGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsPersonalityPostPromotionSearchGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsPersonalityPublicWarmupOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramCmsDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramCmsPromotionOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveCmsImportDraftDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -11763,6 +11768,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsPersonalityPublicWarmupOnly(array $changedLines): bool
+    {
+        return $changedLines === [
+            '+use App\\Console\\Commands\\PersonalityWarmPublicReadModels;',
+            '+        PersonalityWarmPublicReadModels::class,',
+        ];
     }
 
     /**

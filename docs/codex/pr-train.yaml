@@ -41513,7 +41513,7 @@ prs:
     validation:
       - cd backend && php artisan test tests/Feature/Console/PersonalityWarmPublicReadModelsCommandTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php
       - local temporary SQLite baseline import and personality:warm-public-read-models --types=INTJ-A --locales=en,zh-CN
-      - cd backend && ./vendor/bin/pint --test app/Console/Commands/PersonalityWarmPublicReadModels.php app/Console/Kernel.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Feature/Console/PersonalityWarmPublicReadModelsCommandTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - cd backend && ./vendor/bin/pint --test app/Console/Commands/PersonalityWarmPublicReadModels.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Feature/Console/PersonalityWarmPublicReadModelsCommandTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php
       - cd backend && bash scripts/ci_verify_mbti.sh
       - YAML/JSON parse and changed-file scope validation
       - git diff --check

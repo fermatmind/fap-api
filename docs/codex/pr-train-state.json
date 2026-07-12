@@ -88801,7 +88801,7 @@
     "base": "main",
     "branch": "codex/personality-warmup-01",
     "depends_on": ["PERSONALITY-CACHE-01"],
-    "status": "github_checks_pending",
+    "status": "github_checks_retry_pending",
     "commit_sha": "5d9827d91",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3018",
     "failure_reason": null,
@@ -88815,7 +88815,7 @@
       "local_validation": {"status": "pass", "evidence": "Warmup and complete personality API tests passed with 26 tests and 3261 assertions; PHP syntax and scoped Pint passed; the complete scripts/ci_verify_mbti.sh chain exited 0; YAML/JSON, diff, and exact seven-path scope validation passed."}
     },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-12T17:30:00+08:00", "from": "user_authorized", "to": "in_progress", "note": "Started a read-only EN/ZH post-publish warmup command and A/T projection alias deduplication. No production warmup, CMS/DB mutation, import, staging, or deploy is authorized."}, {"at": "2026-07-12T18:00:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "Focused and full backend validation passed. The temporary local baseline probe measured 49,538-byte EN and 89,363-byte ZH INTJ-A detail payloads; no production warmup or content mutation occurred. Validation-generated Big Five artifacts were restored."}, {"at": "2026-07-12T18:05:00+08:00", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed and pushed the exact seven-path scope and opened PR #3018; required checks are pending."}]
+    "transitions": [{"at": "2026-07-12T17:30:00+08:00", "from": "user_authorized", "to": "in_progress", "note": "Started a read-only EN/ZH post-publish warmup command and A/T projection alias deduplication. No production warmup, CMS/DB mutation, import, staging, or deploy is authorized."}, {"at": "2026-07-12T18:00:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "Focused and full backend validation passed. The temporary local baseline probe measured 49,538-byte EN and 89,363-byte ZH INTJ-A detail payloads; no production warmup or content mutation occurred. Validation-generated Big Five artifacts were restored."}, {"at": "2026-07-12T18:05:00+08:00", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed and pushed the exact seven-path scope and opened PR #3018; required checks are pending."}, {"at": "2026-07-12T18:15:00+08:00", "from": "github_checks_pending", "to": "github_checks_retry_pending", "note": "Inspected verify-bigfive: 1206 tests passed and the sole failure was the runtime classifier not recognizing the new warmup command and its exact two-line Kernel registration. Restored Pint import churn and added narrow classifier coverage for only those paths/lines."}]
   },
   "ENNEAGRAM-LLMS-FULL-RELEASE-01": {
     "id": "ENNEAGRAM-LLMS-FULL-RELEASE-01", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-FULL-RELEASE-01: release approved Enneagram llms-full assets", "base": "main", "branch": "codex/enneagram-llms-full-release-01", "depends_on": ["ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02"],
