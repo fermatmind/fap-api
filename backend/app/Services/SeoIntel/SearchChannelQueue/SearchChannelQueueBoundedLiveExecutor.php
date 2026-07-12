@@ -12,11 +12,166 @@ use Throwable;
 
 final class SearchChannelQueueBoundedLiveExecutor
 {
+    private const ENNEAGRAM_ARTIFACT_PATTERN = '/^[0-9a-f]{64}$/';
+
+    private const ENNEAGRAM_PAGE_TYPE = 'personality_public_content_asset';
+
+    private const ENNEAGRAM_TARGET_COUNT = 116;
+
     public function __construct(
         private readonly SearchChannelQueueAuditLogger $events,
         private readonly SearchChannelSubmissionStatusNormalizer $statusNormalizer,
         private readonly SearchChannelQueueEligibilityEvaluator $eligibilityEvaluator,
     ) {}
+
+    /**
+     * Submit the exact artifact-bound Enneagram IndexNow cohort in two explicit phases.
+     * The canary is the lowest stable URL hash; the batch is one provider request for
+     * the remaining 115 URLs. No URL, queue id, credential, or provider body is emitted.
+     *
+     * @return array<string, mixed>
+     */
+    public function submitEnneagramIndexNow(
+        string $phase,
+        string $artifactSha256,
+        ?string $operatorToken,
+        string $actorId,
+        bool $live,
+    ): array {
+        $phase = strtolower(trim($phase));
+        $artifactSha256 = strtolower(trim($artifactSha256));
+        $actorId = substr((string) preg_replace('/[^A-Za-z0-9:_@.-]/', '_', $actorId), 0, 128);
+        $issues = [];
+
+        if (! in_array($phase, ['canary', 'batch'], true)) {
+            $issues[] = 'phase_not_allowed';
+        }
+        if (preg_match(self::ENNEAGRAM_ARTIFACT_PATTERN, $artifactSha256) !== 1) {
+            $issues[] = 'artifact_sha256_invalid';
+        }
+        $expectedToken = 'ENNEAGRAM-SEARCH-INDEXNOW-SUBMIT-01:'.$phase.':'.$artifactSha256;
+        if ($live && ($operatorToken === null || ! hash_equals($expectedToken, trim($operatorToken)))) {
+            $issues[] = 'artifact_bound_operator_token_mismatch';
+        }
+
+        $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
+        $items = $connection->table('seo_search_channel_queue_items')
+            ->where('channel', 'indexnow')
+            ->where('page_entity_type', self::ENNEAGRAM_PAGE_TYPE)
+            ->orderBy('url_hash')
+            ->get();
+        $state = $this->enneagramState($items->all());
+        $issues = array_values(array_unique([...$issues, ...$state['issues']]));
+
+        if ($issues === []) {
+            if ($phase === 'canary' && ! in_array($state['submitted_count'], [0, 1, self::ENNEAGRAM_TARGET_COUNT], true)) {
+                $issues[] = 'canary_state_not_exact';
+            }
+            if ($phase === 'batch' && ! in_array($state['submitted_count'], [1, self::ENNEAGRAM_TARGET_COUNT], true)) {
+                $issues[] = 'batch_requires_one_successful_canary';
+            }
+        }
+
+        $alreadyCompleted = $phase === 'canary'
+            ? $state['submitted_count'] >= 1
+            : $state['submitted_count'] === self::ENNEAGRAM_TARGET_COUNT;
+        $selected = $phase === 'canary'
+            ? ($items->isEmpty() ? collect() : $items->take(1))
+            : $items->filter(static fn (object $item): bool => (string) $item->execution_state === 'dry_run_ready')->values();
+        $expectedSelectionCount = $phase === 'canary' ? 1 : 115;
+
+        if ($issues === [] && ! $alreadyCompleted && $selected->count() !== $expectedSelectionCount) {
+            $issues[] = 'phase_target_count_mismatch';
+        }
+        if ($issues !== []) {
+            return $this->enneagramPayload('blocked', $phase, $artifactSha256, $live, $state, $selected->count(), $issues);
+        }
+        if ($alreadyCompleted) {
+            return $this->enneagramPayload('already_completed', $phase, $artifactSha256, $live, $state, 0, []);
+        }
+        if (! $live) {
+            return $this->enneagramPayload('dry_run_ready', $phase, $artifactSha256, false, $state, $selected->count(), []);
+        }
+
+        $gateIssues = $this->enneagramLiveGateIssues();
+        if ($gateIssues !== []) {
+            return $this->enneagramPayload('blocked', $phase, $artifactSha256, true, $state, $selected->count(), $gateIssues);
+        }
+
+        $ids = $selected->pluck('id')->map(static fn (mixed $id): int => (int) $id)->all();
+        $urls = $selected->pluck('canonical_url')->map(static fn (mixed $url): string => (string) $url)->all();
+        $now = now();
+
+        try {
+            $connection->transaction(function () use ($connection, $ids, $actorId, $now): void {
+                $claimed = $connection->table('seo_search_channel_queue_items')
+                    ->whereIn('id', $ids)
+                    ->where('approval_state', 'pending')
+                    ->where('execution_state', 'dry_run_ready')
+                    ->update([
+                        'approval_state' => 'approved',
+                        'execution_state' => 'submitting',
+                        'approved_by' => $actorId,
+                        'approved_at' => $now,
+                        'updated_at' => $now,
+                    ]);
+                if ($claimed !== count($ids)) {
+                    throw new \RuntimeException('indexnow_phase_claim_count_mismatch');
+                }
+            });
+        } catch (Throwable) {
+            return $this->enneagramPayload('blocked', $phase, $artifactSha256, true, $state, count($ids), ['queue_claim_count_mismatch']);
+        }
+
+        foreach ($selected as $item) {
+            $this->events->log($connection, (int) $item->id, is_numeric($item->batch_id) ? (int) $item->batch_id : null, 'enneagram_indexnow_phase_started', [
+                'phase' => $phase,
+                'url_hash' => (string) $item->url_hash,
+                'artifact_sha256' => $artifactSha256,
+                'cohort_size' => count($ids),
+            ], 'operator', $actorId);
+        }
+
+        $submission = $this->submitEnneagramIndexNowRequest($urls);
+        $accepted = (bool) $submission['accepted'];
+        $executionState = $accepted ? 'submitted' : 'submit_failed';
+        $connection->table('seo_search_channel_queue_items')
+            ->whereIn('id', $ids)
+            ->where('execution_state', 'submitting')
+            ->update(['execution_state' => $executionState, 'updated_at' => now()]);
+
+        foreach ($selected as $item) {
+            $this->events->log($connection, (int) $item->id, is_numeric($item->batch_id) ? (int) $item->batch_id : null, 'enneagram_indexnow_phase_response', [
+                'phase' => $phase,
+                'url_hash' => (string) $item->url_hash,
+                'http_status' => $submission['http_status'],
+                'accepted' => $accepted,
+                'endpoint_host' => $submission['endpoint_host'],
+                'reason_code' => $accepted ? 'provider_accepted' : 'provider_rejected_or_unavailable',
+            ], 'system', 'enneagram-indexnow-production-ops');
+        }
+
+        $readback = $this->enneagramState($connection->table('seo_search_channel_queue_items')
+            ->where('channel', 'indexnow')
+            ->where('page_entity_type', self::ENNEAGRAM_PAGE_TYPE)
+            ->orderBy('url_hash')
+            ->get()
+            ->all());
+
+        return $this->enneagramPayload(
+            $accepted ? 'success' : 'failed',
+            $phase,
+            $artifactSha256,
+            true,
+            $readback,
+            count($ids),
+            $accepted ? [] : ['provider_rejected_or_unavailable'],
+            externalCallsAttempted: true,
+            submittedCount: $accepted ? count($ids) : 0,
+            failedCount: $accepted ? 0 : count($ids),
+            httpStatus: $submission['http_status'],
+        );
+    }
 
     /**
      * @param  list<int>  $queueItemIds
@@ -667,5 +822,195 @@ final class SearchChannelQueueBoundedLiveExecutor
         $redacted = (string) preg_replace('/\\b[A-Za-z0-9_-]{16,}\\b/', '[redacted_token]', $redacted);
 
         return substr(trim($redacted), 0, 200);
+    }
+
+    /**
+     * @param  list<object>  $items
+     * @return array{target_count:int,pending_count:int,submitting_count:int,submitted_count:int,failed_count:int,issues:list<string>}
+     */
+    private function enneagramState(array $items): array
+    {
+        $issues = [];
+        if (count($items) !== self::ENNEAGRAM_TARGET_COUNT) {
+            $issues[] = 'queue_target_count_mismatch';
+        }
+
+        $urls = [];
+        $hashes = [];
+        $pending = 0;
+        $submitting = 0;
+        $submitted = 0;
+        $failed = 0;
+
+        foreach ($items as $item) {
+            $url = trim((string) ($item->canonical_url ?? ''));
+            $hash = strtolower(trim((string) ($item->url_hash ?? '')));
+            $urls[] = $url;
+            $hashes[] = $hash;
+
+            $eligibility = $this->eligibilityEvaluator->evaluate([
+                ...(array) $item,
+                'is_private_flow' => (bool) ($item->private_flow ?? false),
+            ]);
+            if (! $eligibility->eligible) {
+                $issues[] = 'queue_item_eligibility_invalid';
+            }
+            if ((string) ($item->channel ?? '') !== 'indexnow'
+                || (string) ($item->page_entity_type ?? '') !== self::ENNEAGRAM_PAGE_TYPE) {
+                $issues[] = 'queue_identity_mismatch';
+            }
+            if ($url === '' || filter_var($url, FILTER_VALIDATE_URL) === false
+                || strtolower((string) parse_url($url, PHP_URL_SCHEME)) !== 'https'
+                || ! in_array(strtolower((string) parse_url($url, PHP_URL_HOST)), config('seo_intel.search_channel_queue.live_submission.allowed_hosts', []), true)) {
+                $issues[] = 'queue_canonical_not_public_https';
+            }
+            if (preg_match('/^[0-9a-f]{64}$/', $hash) !== 1 || ! hash_equals(hash('sha256', $url), $hash)) {
+                $issues[] = 'queue_url_hash_invalid';
+            }
+
+            $approvalState = (string) ($item->approval_state ?? '');
+            $executionState = (string) ($item->execution_state ?? '');
+            if ($approvalState === 'pending' && $executionState === 'dry_run_ready') {
+                $pending++;
+            } elseif ($approvalState === 'approved' && $executionState === 'submitting') {
+                $submitting++;
+            } elseif ($approvalState === 'approved' && $executionState === 'submitted') {
+                $submitted++;
+            } else {
+                $failed++;
+                $issues[] = 'queue_item_state_not_allowed';
+            }
+        }
+
+        if (count(array_unique($urls)) !== count($items) || count(array_unique($hashes)) !== count($items)) {
+            $issues[] = 'queue_identity_not_unique';
+        }
+        if ($submitting !== 0) {
+            $issues[] = 'queue_item_inflight';
+        }
+
+        return [
+            'target_count' => count($items),
+            'pending_count' => $pending,
+            'submitting_count' => $submitting,
+            'submitted_count' => $submitted,
+            'failed_count' => $failed,
+            'issues' => array_values(array_unique($issues)),
+        ];
+    }
+
+    /** @return list<string> */
+    private function enneagramLiveGateIssues(): array
+    {
+        $issues = [];
+        if (! (bool) config('seo_intel.search_channel_queue.live_submission.enabled', false)) {
+            $issues[] = 'live_submission_gate_disabled';
+        }
+        if (! (bool) config('seo_intel.search_channel_queue.live_submission.external_api_calls_enabled', false)) {
+            $issues[] = 'external_api_gate_disabled';
+        }
+        if (! (bool) config('seo_intel.indexnow_live_api_enabled', false)) {
+            $issues[] = 'indexnow_live_api_disabled';
+        }
+
+        $endpoint = trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.endpoint'));
+        $endpointHost = strtolower((string) parse_url($endpoint, PHP_URL_HOST));
+        if (! $this->isHttpsEndpoint($endpoint)
+            || ! in_array($endpointHost, config('seo_intel.search_channel_queue.live_submission.indexnow.allowed_endpoint_hosts', ['api.indexnow.org']), true)) {
+            $issues[] = 'indexnow_endpoint_not_allowed';
+        }
+        if (trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.key')) === '') {
+            $issues[] = 'indexnow_key_missing';
+        }
+        if (trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.key_location')) === '') {
+            $issues[] = 'indexnow_key_location_missing';
+        }
+
+        return array_values(array_unique($issues));
+    }
+
+    /**
+     * @param  list<string>  $urls
+     * @return array{accepted:bool,http_status:?int,endpoint_host:?string}
+     */
+    private function submitEnneagramIndexNowRequest(array $urls): array
+    {
+        $endpoint = (string) config('seo_intel.search_channel_queue.live_submission.indexnow.endpoint');
+        $key = (string) config('seo_intel.search_channel_queue.live_submission.indexnow.key');
+        $keyLocation = (string) config('seo_intel.search_channel_queue.live_submission.indexnow.key_location');
+        $host = strtolower((string) parse_url($urls[0] ?? '', PHP_URL_HOST));
+
+        try {
+            $response = Http::timeout(max(1, (int) config('seo_intel.search_channel_queue.live_submission.indexnow.timeout_seconds', 10)))
+                ->asJson()
+                ->post($endpoint, [
+                    'host' => $host,
+                    'key' => $key,
+                    'keyLocation' => $keyLocation,
+                    'urlList' => array_values($urls),
+                ]);
+
+            return [
+                'accepted' => $response->successful(),
+                'http_status' => $response->status(),
+                'endpoint_host' => (string) parse_url($endpoint, PHP_URL_HOST),
+            ];
+        } catch (Throwable) {
+            return [
+                'accepted' => false,
+                'http_status' => null,
+                'endpoint_host' => (string) parse_url($endpoint, PHP_URL_HOST),
+            ];
+        }
+    }
+
+    /**
+     * @param  array{target_count:int,pending_count:int,submitting_count:int,submitted_count:int,failed_count:int,issues:list<string>}  $state
+     * @param  list<string>  $issues
+     * @return array<string, mixed>
+     */
+    private function enneagramPayload(
+        string $status,
+        string $phase,
+        string $artifactSha256,
+        bool $live,
+        array $state,
+        int $phaseTargetCount,
+        array $issues,
+        bool $externalCallsAttempted = false,
+        int $submittedCount = 0,
+        int $failedCount = 0,
+        ?int $httpStatus = null,
+    ): array {
+        return [
+            'schema_version' => 'enneagram-indexnow-production-submit.v1',
+            'status' => $status,
+            'ok' => in_array($status, ['dry_run_ready', 'success', 'already_completed'], true),
+            'phase' => $phase,
+            'dry_run' => ! $live,
+            'artifact_sha256' => preg_match(self::ENNEAGRAM_ARTIFACT_PATTERN, $artifactSha256) === 1 ? $artifactSha256 : null,
+            'target_count' => $state['target_count'],
+            'phase_target_count' => $phaseTargetCount,
+            'state_counts' => [
+                'pending' => $state['pending_count'],
+                'submitting' => $state['submitting_count'],
+                'submitted' => $state['submitted_count'],
+                'failed' => $state['failed_count'],
+            ],
+            'submitted_count' => $submittedCount,
+            'failed_count' => $failedCount,
+            'provider_http_status' => $httpStatus,
+            'issues' => array_values(array_unique($issues)),
+            'external_calls_attempted' => $externalCallsAttempted,
+            'search_submission_attempted' => $externalCallsAttempted,
+            'writes_committed' => $live && $status !== 'blocked',
+            'negative_guarantees' => [
+                'queue_payload_exposed' => false,
+                'provider_credentials_exposed' => false,
+                'cms_or_eligibility_write' => false,
+                'sitemap_or_llms_cache_mutation' => false,
+                'deploy' => false,
+            ],
+        ];
     }
 }
