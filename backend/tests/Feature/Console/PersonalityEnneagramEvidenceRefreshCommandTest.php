@@ -7,6 +7,7 @@ namespace Tests\Feature\Console;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\EnneagramCmsDraftWriter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -78,6 +79,40 @@ final class PersonalityEnneagramEvidenceRefreshCommandTest extends TestCase
         $this->assertNotSame('', $cohort);
     }
 
+    public function test_mysql_json_object_key_normalization_is_semantically_idempotent_while_scalars_remain_exact(): void
+    {
+        $this->seedPublishedAssets();
+        $dryRun = $this->evaluate();
+        $cohort = $dryRun['cohort_sha256'];
+        $token = 'ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01:'.self::DEPLOYED_SHA.':'.$cohort;
+        $write = $this->evaluate(true, $cohort, $token, true);
+        $this->assertSame('refreshed', $write['status']);
+
+        foreach (PersonalityPublicContentAsset::query()->orderBy('id')->get() as $asset) {
+            DB::table('personality_public_content_assets')->where('id', $asset->id)->update([
+                'content_sections_json' => json_encode(
+                    self::reverseAssociativeObjectKeys((array) $asset->content_sections_json),
+                    JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR,
+                ),
+                'evidence_notes_json' => json_encode(
+                    self::reverseAssociativeObjectKeys((array) $asset->evidence_notes_json),
+                    JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR,
+                ),
+            ]);
+        }
+
+        $semanticReadback = $this->evaluate();
+        $this->assertSame('already_refreshed', $semanticReadback['status']);
+        $this->assertSame(26, $semanticReadback['already_current_count']);
+
+        DB::table('personality_public_content_assets')->where('id', 1)->update([
+            'source_hash' => str_repeat('f', 64),
+        ]);
+        $scalarMismatch = $this->evaluate();
+        $this->assertSame('dry_run_ready', $scalarMismatch['status']);
+        $this->assertSame(25, $scalarMismatch['already_current_count']);
+    }
+
     public function test_dry_run_rejects_partial_or_unsafe_production_cohort(): void
     {
         $this->seedPublishedAssets();
@@ -128,17 +163,37 @@ final class PersonalityEnneagramEvidenceRefreshCommandTest extends TestCase
         $this->assertStringContainsString('Approve ENNEAGRAM EN13 evidence refresh dry-run for SHA ${RELEASE_SHA}', $workflow);
         $this->assertStringContainsString('I explicitly approve ENNEAGRAM EN13 evidence refresh for SHA ${RELEASE_SHA} cohort ${COHORT_SHA256}.', $workflow);
         $this->assertStringContainsString('test "$deployed_sha" = "$RELEASE_SHA"', $workflow);
-        $this->assertStringContainsString('run_refresh dry_run > /tmp/en13-evidence-dry-run.json', $workflow);
+        $this->assertStringContainsString('tmp_dir="$(mktemp -d /tmp/en13-evidence-refresh.XXXXXX)"', $workflow);
+        $this->assertStringContainsString('trap emit_summary EXIT', $workflow);
+        $this->assertStringContainsString('run_refresh dry_run > "$tmp_dir/dry-run.json"', $workflow);
         $this->assertStringContainsString('ENNEAGRAM_EN13_EVIDENCE_WRITE_ENABLED=true run_refresh write', $workflow);
         $this->assertStringContainsString('.status == "already_refreshed"', $workflow);
+        $this->assertStringContainsString('failed_stage:"transport_or_summary"', $workflow);
+        $this->assertStringContainsString('if: always()', $workflow);
+        $this->assertStringContainsString('Enforce fail-closed refresh result', $workflow);
+        $this->assertStringNotContainsString('/tmp/en13-evidence-dry-run.json', $workflow);
         $this->assertLessThan(
             strpos($workflow, 'ENNEAGRAM_EN13_EVIDENCE_WRITE_ENABLED=true run_refresh write'),
-            strpos($workflow, 'run_refresh dry_run > /tmp/en13-evidence-dry-run.json')
+            strpos($workflow, 'run_refresh dry_run > "$tmp_dir/dry-run.json"')
         );
         $this->assertStringNotContainsString('seo:warm-sitemap-source-cache', $workflow);
         $this->assertStringNotContainsString('IndexNow', $workflow);
         $this->assertStringNotContainsString('llms_eligible=true', $workflow);
         $this->assertStringNotContainsString('deploy production', $workflow);
+    }
+
+    private static function reverseAssociativeObjectKeys(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+        if (array_is_list($value)) {
+            return array_map(self::reverseAssociativeObjectKeys(...), $value);
+        }
+
+        krsort($value, SORT_STRING);
+
+        return array_map(self::reverseAssociativeObjectKeys(...), $value);
     }
 
     private function seedPublishedAssets(): void

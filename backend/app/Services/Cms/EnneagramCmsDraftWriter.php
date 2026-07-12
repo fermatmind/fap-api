@@ -296,12 +296,35 @@ final class EnneagramCmsDraftWriter
     private function evidenceRefreshMatches(PersonalityPublicContentAsset $asset, array $candidate): bool
     {
         foreach ($candidate as $field => $value) {
-            if ($asset->getAttribute($field) !== $value) {
+            $actual = $asset->getAttribute($field);
+            if (is_array($value)) {
+                if (! is_array($actual) || $this->canonicalEvidenceJsonValue($actual) !== $this->canonicalEvidenceJsonValue($value)) {
+                    return false;
+                }
+
+                continue;
+            }
+
+            if ($actual !== $value) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    private function canonicalEvidenceJsonValue(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+        if (array_is_list($value)) {
+            return array_map(fn (mixed $item): mixed => $this->canonicalEvidenceJsonValue($item), $value);
+        }
+
+        ksort($value, SORT_STRING);
+
+        return array_map(fn (mixed $item): mixed => $this->canonicalEvidenceJsonValue($item), $value);
     }
 
     private function evidenceVisibleLength(mixed $value): int

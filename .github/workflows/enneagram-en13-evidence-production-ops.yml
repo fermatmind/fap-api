@@ -119,17 +119,49 @@ jobs:
             || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
 
       - name: Run mandatory dry-run then optional bounded refresh
+        id: refresh
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
           target="$DEPLOY_USER@$DEPLOY_HOST"
           for value in DEPLOY_PATH RELEASE_SHA OPERATION_MODE COHORT_SHA256 EN_PACKAGE EN_LEDGER ZH_PACKAGE ZH_LEDGER; do
             printf -v "q_${value,,}" '%q' "${!value}"
           done
+          set +e
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$target" \
             "DEPLOY_PATH=$q_deploy_path RELEASE_SHA=$q_release_sha OPERATION_MODE=$q_operation_mode COHORT_SHA256=$q_cohort_sha256 EN_PACKAGE=$q_en_package EN_LEDGER=$q_en_ledger ZH_PACKAGE=$q_zh_package ZH_LEDGER=$q_zh_ledger bash -s" <<'REMOTE' > summary.json
           set -Eeuo pipefail
+          stage="bootstrap"
+          tmp_dir="$(mktemp -d /tmp/en13-evidence-refresh.XXXXXX)"
+          dry_run_summary=null
+          write_summary=null
+          readback_summary=null
+          emit_summary() {
+            rc=$?
+            trap - EXIT
+            status=failure
+            failed_stage="$stage"
+            if [ "$rc" -eq 0 ]; then
+              status=success
+              failed_stage=""
+            fi
+            jq -n \
+              --arg schema_version "enneagram-en13-evidence-production-ops.v1" \
+              --arg status "$status" \
+              --arg release_sha "$RELEASE_SHA" \
+              --arg operation_mode "$OPERATION_MODE" \
+              --arg cohort_sha256 "${actual_cohort:-}" \
+              --arg failed_stage "$failed_stage" \
+              --argjson dry_run "$dry_run_summary" \
+              --argjson write "$write_summary" \
+              --argjson readback "$readback_summary" \
+              '{schema_version:$schema_version,status:$status,release_sha:$release_sha,operation_mode:$operation_mode,cohort_sha256:$cohort_sha256,failed_stage:(if $failed_stage == "" then null else $failed_stage end),dry_run:$dry_run,write:$write,readback:$readback}'
+            rm -rf "$tmp_dir"
+            exit "$rc"
+          }
+          trap emit_summary EXIT
           cd "$DEPLOY_PATH/current"
+          stage="deployed_revision"
           deployed_sha="$(tr -d '\r\n' < REVISION)"
           test "$deployed_sha" = "$RELEASE_SHA"
           cd backend
@@ -161,33 +193,56 @@ jobs:
                 echo json_encode($result, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR), PHP_EOL;
               '
           }
-          run_refresh dry_run > /tmp/en13-evidence-dry-run.json
-          jq -e '.ok == true and (.status == "dry_run_ready" or .status == "already_refreshed") and .target_count == 26 and (.issues | length) == 0' /tmp/en13-evidence-dry-run.json >/dev/null
-          actual_cohort="$(jq -r '.cohort_sha256' /tmp/en13-evidence-dry-run.json)"
+          stage="dry_run_execution"
+          run_refresh dry_run > "$tmp_dir/dry-run.json"
+          dry_run_summary="$(jq -c '{ok,status,target_count,already_current_count,updated_count,issue_count:(.issues|length),negative_guarantees}' "$tmp_dir/dry-run.json")"
+          stage="dry_run_validation"
+          jq -e '.ok == true and (.status == "dry_run_ready" or .status == "already_refreshed") and .target_count == 26 and (.issues | length) == 0' "$tmp_dir/dry-run.json" >/dev/null
+          actual_cohort="$(jq -r '.cohort_sha256' "$tmp_dir/dry-run.json")"
           if [ "$OPERATION_MODE" = write ]; then
+            stage="cohort_validation"
             test "$actual_cohort" = "$COHORT_SHA256"
             token="ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01:${RELEASE_SHA}:${COHORT_SHA256}"
-            ENNEAGRAM_EN13_EVIDENCE_WRITE_ENABLED=true run_refresh write "$COHORT_SHA256" "$token" > /tmp/en13-evidence-write.json
-            jq -e '.ok == true and (.status == "refreshed" or .status == "already_refreshed") and .target_count == 26 and (.issues | length) == 0' /tmp/en13-evidence-write.json >/dev/null
-            run_refresh dry_run > /tmp/en13-evidence-readback.json
-            jq -e '.ok == true and .status == "already_refreshed" and .target_count == 26 and .already_current_count == 26 and (.issues | length) == 0' /tmp/en13-evidence-readback.json >/dev/null
+            stage="write_execution"
+            ENNEAGRAM_EN13_EVIDENCE_WRITE_ENABLED=true run_refresh write "$COHORT_SHA256" "$token" > "$tmp_dir/write.json"
+            write_summary="$(jq -c '{ok,status,target_count,already_current_count,updated_count,issue_count:(.issues|length),negative_guarantees}' "$tmp_dir/write.json")"
+            stage="write_validation"
+            jq -e '.ok == true and (.status == "refreshed" or .status == "already_refreshed") and .target_count == 26 and (.issues | length) == 0' "$tmp_dir/write.json" >/dev/null
+            stage="readback_execution"
+            run_refresh dry_run > "$tmp_dir/readback.json"
+            readback_summary="$(jq -c '{ok,status,target_count,already_current_count,updated_count,issue_count:(.issues|length),negative_guarantees}' "$tmp_dir/readback.json")"
+            stage="readback_validation"
+            jq -e '.ok == true and .status == "already_refreshed" and .target_count == 26 and .already_current_count == 26 and (.issues | length) == 0' "$tmp_dir/readback.json" >/dev/null
           fi
-          jq -n \
-            --arg schema_version "enneagram-en13-evidence-production-ops.v1" \
-            --arg release_sha "$RELEASE_SHA" --arg operation_mode "$OPERATION_MODE" --arg cohort_sha256 "$actual_cohort" \
-            --slurpfile dry_run /tmp/en13-evidence-dry-run.json \
-            --slurpfile write /tmp/en13-evidence-write.json 2>/dev/null \
-            --slurpfile readback /tmp/en13-evidence-readback.json 2>/dev/null \
-            '{schema_version:$schema_version,status:"success",release_sha:$release_sha,operation_mode:$operation_mode,cohort_sha256:$cohort_sha256,dry_run:($dry_run[0]|{ok,status,target_count,already_current_count,updated_count,issue_count:(.issues|length),negative_guarantees}),write:($write[0] // null),readback:($readback[0] // null)}' \
-            || jq -n --arg schema_version "enneagram-en13-evidence-production-ops.v1" --arg release_sha "$RELEASE_SHA" --arg operation_mode "$OPERATION_MODE" --arg cohort_sha256 "$actual_cohort" --slurpfile dry_run /tmp/en13-evidence-dry-run.json \
-              '{schema_version:$schema_version,status:"success",release_sha:$release_sha,operation_mode:$operation_mode,cohort_sha256:$cohort_sha256,dry_run:($dry_run[0]|{ok,status,target_count,already_current_count,updated_count,issue_count:(.issues|length),negative_guarantees}),write:null,readback:null}'
-          rm -f /tmp/en13-evidence-dry-run.json /tmp/en13-evidence-write.json /tmp/en13-evidence-readback.json
+          stage="completed"
           REMOTE
+          remote_exit=$?
+          set -e
+          if ! jq -e '.schema_version == "enneagram-en13-evidence-production-ops.v1" and (.status == "success" or .status == "failure")' summary.json >/dev/null 2>&1; then
+            jq -n \
+              --arg release_sha "$RELEASE_SHA" \
+              --arg operation_mode "$OPERATION_MODE" \
+              '{schema_version:"enneagram-en13-evidence-production-ops.v1",status:"failure",release_sha:$release_sha,operation_mode:$operation_mode,cohort_sha256:"",failed_stage:"transport_or_summary",dry_run:null,write:null,readback:null}' \
+              > summary.json
+            remote_exit=1
+          fi
+          echo "remote_exit=$remote_exit" >> "$GITHUB_OUTPUT"
 
       - name: Upload sanitized aggregate summary
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: enneagram-en13-evidence-production-ops-${{ github.run_id }}
           path: summary.json
           if-no-files-found: error
           retention-days: 14
+
+      - name: Enforce fail-closed refresh result
+        if: always()
+        shell: bash
+        env:
+          REMOTE_EXIT: ${{ steps.refresh.outputs.remote_exit }}
+        run: |
+          set -euo pipefail
+          test "$REMOTE_EXIT" = "0"
+          jq -e '.status == "success" and .failed_stage == null' summary.json >/dev/null
