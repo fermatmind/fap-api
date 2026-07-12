@@ -41192,7 +41192,7 @@ prs:
     branch: codex/enneagram-search-queue-enqueue-01
     title: "ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01: enqueue 116 approved Enneagram URLs without submission"
     train_scope: enneagram_search_queue_enqueue
-    status: ready_to_merge
+    status: merged
     scope:
       - Add or verify a fail-closed, artifact-bound 116-target Queue enqueue path with idempotent duplicate protection and no external search submission.
       - Execute Queue writes only after a separate exact deployed-SHA and artifact-SHA authorization; record aggregate evidence only.
@@ -41214,7 +41214,7 @@ prs:
     branch: codex/enneagram-search-indexnow-submit-01
     title: "ENNEAGRAM-SEARCH-INDEXNOW-SUBMIT-01: submit approved Enneagram Queue canary then batch"
     train_scope: enneagram_search_indexnow_submit
-    status: pending_dependency
+    status: local_checks_passed
     scope:
       - Add or verify artifact-bound IndexNow canary and batch submission with exact Queue readback, deduplication, reason-coded results, and fail-closed canary-before-batch ordering.
       - Submit only after a separate exact authorization; preserve CMS, llms, cache, and deployment boundaries.
