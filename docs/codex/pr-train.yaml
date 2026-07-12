@@ -41192,7 +41192,7 @@ prs:
     branch: codex/enneagram-search-queue-enqueue-01
     title: "ENNEAGRAM-SEARCH-QUEUE-ENQUEUE-01: enqueue 116 approved Enneagram URLs without submission"
     train_scope: enneagram_search_queue_enqueue
-    status: local_checks_passed
+    status: ready_to_merge
     scope:
       - Add or verify a fail-closed, artifact-bound 116-target Queue enqueue path with idempotent duplicate protection and no external search submission.
       - Execute Queue writes only after a separate exact deployed-SHA and artifact-SHA authorization; record aggregate evidence only.
