@@ -5,10 +5,21 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\PersonalityPublicContentAsset;
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueEligibilityEvaluator;
 use Illuminate\Support\Facades\DB;
 
 final class EnneagramCmsPublishGateService
 {
+    private const LLMS_EXPECTED_COUNT = 116;
+
+    private const LLMS_EXPECTED_ENTITY_COUNTS = [
+        PersonalityPublicContentAsset::ENTITY_HUB => 2,
+        PersonalityPublicContentAsset::ENTITY_CENTER => 6,
+        PersonalityPublicContentAsset::ENTITY_CORE_TYPE => 18,
+        PersonalityPublicContentAsset::ENTITY_WING => 36,
+        PersonalityPublicContentAsset::ENTITY_INSTINCTUAL_SUBTYPE => 54,
+    ];
+
     private const SUPPORTED_LOCALES = ['zh-CN', 'en'];
 
     private const FORBIDDEN_ROUTE_PATTERNS = [
@@ -39,6 +50,92 @@ final class EnneagramCmsPublishGateService
     public function publish(array $package, string $sourceSha256): array
     {
         return DB::transaction(fn (): array => $this->buildSummary($package, $sourceSha256, true));
+    }
+
+    /**
+     * Validate and optionally release the exact 116-asset Enneagram llms.txt cohort.
+     * The write path changes only llms_eligible and remains independently SHA/cohort gated.
+     *
+     * @return array<string,mixed>
+     */
+    public function llmsTxtRelease(
+        string $deployedSha,
+        bool $write = false,
+        ?string $confirmedCohortSha256 = null,
+        ?string $operatorToken = null,
+    ): array {
+        $deployedSha = strtolower(trim($deployedSha));
+        $assets = PersonalityPublicContentAsset::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM)
+            ->orderBy('locale')
+            ->orderBy('entity_type')
+            ->orderBy('entity_key')
+            ->get();
+        [$rows, $issues] = $this->llmsInspect($assets->all());
+        if (preg_match('/^[0-9a-f]{40}$/', $deployedSha) !== 1) {
+            $issues[] = 'deployed_sha_invalid';
+        }
+        $cohortSha = hash('sha256', (string) json_encode($rows, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $llmsTrue = $assets->where('llms_eligible', true)->count();
+        $llmsFalse = $assets->where('llms_eligible', false)->count();
+        if (! (($llmsTrue === 0 && $llmsFalse === self::LLMS_EXPECTED_COUNT)
+            || ($llmsTrue === self::LLMS_EXPECTED_COUNT && $llmsFalse === 0))) {
+            $issues[] = 'partial_llms_release_state';
+        }
+        if ($write) {
+            if (! (bool) config('personality.enneagram_llms_txt_write_enabled', false)) {
+                $issues[] = 'process_write_gate_disabled';
+            }
+            if (! is_string($confirmedCohortSha256) || ! hash_equals($cohortSha, strtolower(trim($confirmedCohortSha256)))) {
+                $issues[] = 'cohort_sha256_confirmation_mismatch';
+            }
+            $expectedToken = 'ENNEAGRAM-LLMS-TXT-RELEASE-01:'.$deployedSha.':'.$cohortSha;
+            if (! is_string($operatorToken) || ! hash_equals($expectedToken, trim($operatorToken))) {
+                $issues[] = 'operator_approval_mismatch';
+            }
+        }
+        $issues = array_values(array_unique($issues));
+        sort($issues);
+        if ($issues !== []) {
+            return $this->llmsPayload('blocked', $write, $deployedSha, $cohortSha, $rows, $issues, 0);
+        }
+        if (! $write) {
+            return $this->llmsPayload(
+                $llmsTrue === self::LLMS_EXPECTED_COUNT ? 'already_released' : 'dry_run_ready',
+                false,
+                $deployedSha,
+                $cohortSha,
+                $rows,
+                [],
+                0,
+            );
+        }
+        if ($llmsTrue === self::LLMS_EXPECTED_COUNT) {
+            return $this->llmsPayload('already_released', true, $deployedSha, $cohortSha, $rows, [], 0);
+        }
+
+        $updated = DB::transaction(function () use ($assets): int {
+            $ids = $assets->pluck('id')->map(static fn (mixed $id): int => (int) $id)->all();
+            $updated = PersonalityPublicContentAsset::query()
+                ->withoutGlobalScopes()
+                ->whereIn('id', $ids)
+                ->where('llms_eligible', false)
+                ->update(['llms_eligible' => true]);
+            $readback = PersonalityPublicContentAsset::query()
+                ->withoutGlobalScopes()
+                ->whereIn('id', $ids)
+                ->where('llms_eligible', true)
+                ->count();
+            if ($updated !== self::LLMS_EXPECTED_COUNT || $readback !== self::LLMS_EXPECTED_COUNT) {
+                throw new \RuntimeException('llms_write_or_readback_count_mismatch');
+            }
+
+            return $updated;
+        });
+
+        return $this->llmsPayload('released', true, $deployedSha, $cohortSha, $rows, [], $updated);
     }
 
     /**
@@ -359,5 +456,163 @@ final class EnneagramCmsPublishGateService
             $value,
             JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE
         );
+    }
+
+    /** @param list<PersonalityPublicContentAsset> $assets @return array{list<array<string,string>>,list<string>} */
+    private function llmsInspect(array $assets): array
+    {
+        $issues = [];
+        if (count($assets) !== self::LLMS_EXPECTED_COUNT) {
+            $issues[] = 'asset_count_mismatch';
+        }
+        if (collect($assets)->countBy('locale')->sortKeys()->all() !== ['en' => 58, 'zh-CN' => 58]) {
+            $issues[] = 'locale_count_mismatch';
+        }
+        $expectedEntityCounts = self::LLMS_EXPECTED_ENTITY_COUNTS;
+        ksort($expectedEntityCounts);
+        if (collect($assets)->countBy('entity_type')->sortKeys()->all() !== $expectedEntityCounts) {
+            $issues[] = 'entity_count_mismatch';
+        }
+
+        $rows = [];
+        $identityPaths = [];
+        foreach ($assets as $asset) {
+            $path = SearchChannelQueueEligibilityEvaluator::normalizePublicPath(
+                (string) data_get($asset->canonical_json, 'path', '')
+            );
+            $identity = $asset->entity_type.'|'.$asset->entity_key;
+            if ($path !== null) {
+                $identityPaths[$identity][(string) $asset->locale] = $path;
+            }
+            foreach ($this->llmsAssetIssues($asset, $path) as $issue) {
+                $issues[] = $asset->locale.'|'.$identity.':'.$issue;
+            }
+            $rows[] = [
+                'locale' => (string) $asset->locale,
+                'entity_type' => (string) $asset->entity_type,
+                'entity_key' => (string) $asset->entity_key,
+                'canonical_path_hash' => hash('sha256', $path ?? '/invalid'),
+                'source_hash' => (string) $asset->source_hash,
+            ];
+        }
+        if (count(array_unique(array_column($rows, 'canonical_path_hash'))) !== self::LLMS_EXPECTED_COUNT) {
+            $issues[] = 'canonical_set_not_unique';
+        }
+        foreach ($identityPaths as $identity => $localized) {
+            if (! isset($localized['en'], $localized['zh-CN'])) {
+                $issues[] = $identity.':hreflang_pair_missing';
+
+                continue;
+            }
+            $enSuffix = preg_replace('#^/en/#', '/', $localized['en']) ?: '';
+            $zhSuffix = preg_replace('#^/zh/#', '/', $localized['zh-CN']) ?: '';
+            if ($enSuffix !== $zhSuffix) {
+                $issues[] = $identity.':hreflang_pair_mismatch';
+            }
+        }
+        if (count($identityPaths) !== 58) {
+            $issues[] = 'hreflang_identity_count_mismatch';
+        }
+
+        return [$rows, $issues];
+    }
+
+    /** @return list<string> */
+    private function llmsAssetIssues(PersonalityPublicContentAsset $asset, ?string $path): array
+    {
+        $issues = [];
+        $prefix = $asset->locale === 'en' ? '/en/personality/enneagram' : '/zh/personality/enneagram';
+        if ($path === null || ! str_starts_with($path, $prefix)) {
+            $issues[] = 'canonical_invalid_or_private';
+        }
+        if (! $asset->is_public || $asset->launch_state !== PersonalityPublicContentAsset::LAUNCH_PUBLISHED) {
+            $issues[] = 'not_published_public';
+        }
+        if ($asset->robots !== PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW || ! $asset->index_eligible || ! $asset->sitemap_eligible) {
+            $issues[] = 'not_index_sitemap_eligible';
+        }
+        if (preg_match('/^[0-9a-f]{64}$/', (string) $asset->source_hash) !== 1 || trim((string) $asset->source_package) === '') {
+            $issues[] = 'source_provenance_invalid';
+        }
+        if (trim((string) $asset->title) === '' || trim((string) $asset->summary) === '' || $this->llmsVisibleTextLength($asset->content_sections_json) < 80) {
+            $issues[] = 'visible_content_incomplete';
+        }
+        if ($this->llmsVisibleTextLength($asset->method_boundary_json) < 10 || ! $this->llmsHasSourceId($asset->evidence_notes_json)) {
+            $issues[] = 'evidence_or_claim_boundary_incomplete';
+        }
+        foreach ((array) $asset->internal_links_json as $link) {
+            $href = is_array($link) ? ($link['href'] ?? $link['url'] ?? null) : null;
+            if ($href !== null && ! $this->llmsSafeInternalHref((string) $href)) {
+                $issues[] = 'internal_link_invalid_or_private';
+                break;
+            }
+        }
+
+        return $issues;
+    }
+
+    private function llmsSafeInternalHref(string $href): bool
+    {
+        $href = trim($href);
+        if (preg_match('/^#[A-Za-z0-9][\w:.-]{0,127}$/', $href) === 1) {
+            return true;
+        }
+
+        return SearchChannelQueueEligibilityEvaluator::normalizePublicPath($href) !== null
+            || SearchChannelQueueEligibilityEvaluator::publicPathFromCanonicalUrl($href) !== null;
+    }
+
+    private function llmsVisibleTextLength(mixed $value): int
+    {
+        if (is_string($value) || is_numeric($value)) {
+            return mb_strlen(trim(strip_tags((string) $value)));
+        }
+        if (! is_array($value)) {
+            return 0;
+        }
+
+        return array_sum(array_map(fn (mixed $item): int => $this->llmsVisibleTextLength($item), $value));
+    }
+
+    private function llmsHasSourceId(mixed $value): bool
+    {
+        if (! is_array($value)) {
+            return false;
+        }
+        foreach ($value as $key => $item) {
+            if (in_array((string) $key, ['source_id', 'source_ids'], true) && $this->llmsVisibleTextLength($item) > 0) {
+                return true;
+            }
+            if (is_array($item) && $this->llmsHasSourceId($item)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** @param list<array<string,string>> $rows @param list<string> $issues @return array<string,mixed> */
+    private function llmsPayload(string $status, bool $write, string $deployedSha, string $cohortSha, array $rows, array $issues, int $updated): array
+    {
+        return [
+            'schema_version' => 'enneagram-llms-txt-release-gate.v1',
+            'status' => $status,
+            'ok' => in_array($status, ['dry_run_ready', 'released', 'already_released'], true),
+            'dry_run' => ! $write,
+            'write_requested' => $write,
+            'deployed_sha' => preg_match('/^[0-9a-f]{40}$/', $deployedSha) === 1 ? $deployedSha : null,
+            'cohort_sha256' => $cohortSha,
+            'target_count' => count($rows),
+            'updated_count' => $updated,
+            'issues' => $issues,
+            'negative_guarantees' => [
+                'llms_full_release' => false,
+                'search_queue_write_or_submit' => false,
+                'sitemap_index_or_robots_write' => false,
+                'cache_warm' => false,
+                'deploy' => false,
+                'private_payload_exposed' => false,
+            ],
+        ];
     }
 }

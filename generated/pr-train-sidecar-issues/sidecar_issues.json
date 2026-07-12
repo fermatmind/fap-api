@@ -451,5 +451,20 @@
     "required_checks_affected": false,
     "recommended_follow_up": "Repair repository-wide baselines separately.",
     "train_continued": true
+  },
+  {
+    "repo": "fap-web",
+    "pr_id": "ENNEAGRAM-LLMS-TXT-RELEASE-GATE-01",
+    "branch": "codex/enneagram-llms-txt-release-gate-01",
+    "blocker_type": "missing_llms_txt_consumer_enumeration_contract",
+    "evidence": [
+      "app/llms.txt/route.ts listPersonalityPaths currently imports only MBTI and Big Five backend authority paths.",
+      "tests/contracts/personality-enneagram-90-sitemap-extractor.contract.test.ts explicitly asserts that llms.txt and llms-full.txt do not reference the Enneagram extractor.",
+      "The existing Enneagram sitemap extractor is sitemap-eligible based and cannot safely substitute for a distinct llms_eligible consumer source."
+    ],
+    "why_not_current_pr_scope": "The current manifest scope is fap-api-only and forbids modifying fap-web. Adding Enneagram to llms.txt requires a separately reviewed frontend consumer contract while llms-full remains closed.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Authorize ENNEAGRAM-LLMS-TXT-FRONTEND-ENUMERATION-01 in fap-web before executing ENNEAGRAM-LLMS-TXT-RELEASE-01; enumerate only backend assets whose public API llms_eligible flag is true and preserve zero Enneagram llms-full membership.",
+    "train_continued": true
   }
 ]
