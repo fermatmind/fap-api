@@ -88613,9 +88613,9 @@
     "base": "main",
     "branch": "codex/enneagram-search-url-truth-ops-gate-01",
     "depends_on": ["ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "4a3e691b477fff2653607417593e9ab9cf2f0153",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3014",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -88716,6 +88716,29 @@
     "checks": {"authorization": {"status": "pass", "evidence": "User authorized manifest/state initialization; this later task is read-only and must decide llms.txt and llms-full separately."}},
     "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
     "transitions": [{"at": "2026-07-11T19:03:22Z", "from": "unregistered", "to": "pending_dependency", "note": "Initialized with NO_GO as the default until enriched evidence gates pass."}]
+  },
+  "CAREER-NEXTSTEP-01": {
+    "id": "CAREER-NEXTSTEP-01",
+    "repo": "fap-api",
+    "title": "CAREER-NEXTSTEP-01: cache career next-step links",
+    "base": "main",
+    "branch": "codex/career-nextstep-01",
+    "depends_on": [],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The performance PR-train /goal explicitly authorized CAREER-NEXTSTEP-01 and manifest/state registration."},
+      "dependency": {"status": "pass", "evidence": "CAREER-NEXTSTEP-01 has no dependencies and started from fap-api origin/main 71a3145de0ea02ab214f412bc4e2fca6c8eeab39."},
+      "local_validation": {"status": "pass", "evidence": "Focused next-step service/API tests passed 8 tests with 76 assertions; the focused Big Five runtime-freeze classifier regression passed after the scoped CI fix; Pint and PHP syntax passed for changed PHP files; route wiring, YAML/JSON parsing, git diff whitespace, and exact seven-path scope validation passed. The full scripts/ci_verify_mbti.sh chain completed with exit 0, including Big Five, Enneagram, MBTI, security, migration, OpenAPI, and dependency gates."},
+      "github_required_checks": {"status": "pass", "evidence": "All 9 required checks passed on 4a3e691b477fff2653607417593e9ab9cf2f0153 after the scoped runtime-freeze classifier fix."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "transitions": [{"at": "2026-07-12T13:45:00+08:00", "from": "user_authorized", "to": "in_progress", "note": "Started the slug/locale next-step payload cache and LKG fallback in an isolated worktree. No CMS write, migration, production warmup, import, or deploy is authorized."}, {"at": "2026-07-12T13:55:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest checks and the full backend CI verification chain passed; changed files remain restricted to the six declared paths."}, {"at": "2026-07-12T14:00:00+08:00", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed, pushed, and opened PR #3014; polling required checks."}, {"at": "2026-07-12T14:08:00+08:00", "from": "github_checks_pending", "to": "github_checks_retry_pending", "note": "Inspected verify-bigfive failure, added the current career-only controller to the existing runtime-freeze classifier allowlist, and passed the focused regression before retry."}, {"at": "2026-07-12T14:15:00+08:00", "from": "github_checks_retry_pending", "to": "ready_to_merge", "note": "All 9 required checks passed and the seven-path scope revalidation remained clean."}]
   },
   "ENNEAGRAM-LLMS-FULL-RELEASE-01": {
     "id": "ENNEAGRAM-LLMS-FULL-RELEASE-01", "repo": "fap-api", "title": "ENNEAGRAM-LLMS-FULL-RELEASE-01: release approved Enneagram llms-full assets", "base": "main", "branch": "codex/enneagram-llms-full-release-01", "depends_on": ["ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02"],

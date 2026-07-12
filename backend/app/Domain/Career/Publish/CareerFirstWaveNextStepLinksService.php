@@ -7,12 +7,19 @@ namespace App\Domain\Career\Publish;
 use App\DTO\Career\CareerFirstWaveNextStepLinksSummary;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use Illuminate\Support\Facades\Cache;
 
 final class CareerFirstWaveNextStepLinksService
 {
     public const SUMMARY_VERSION = 'career.next_step.first_wave.v1';
 
     public const SCOPE = 'career_first_wave_10';
+
+    public const CACHE_KEY_PREFIX = 'career:public-authority:first-wave-next-step:v1';
+
+    public const CACHE_TTL_SECONDS = 3600;
+
+    public const NEGATIVE_CACHE_TTL_SECONDS = 300;
 
     /**
      * @var list<array<string, mixed>>|null
@@ -28,17 +35,73 @@ final class CareerFirstWaveNextStepLinksService
         private readonly CareerFirstWaveDiscoverabilityManifestService $discoverabilityManifestService,
     ) {}
 
-    public function buildBySlug(string $slug): ?CareerFirstWaveNextStepLinksSummary
+    public function buildBySlug(string $slug, string $publicLocale = 'zh-CN'): ?CareerFirstWaveNextStepLinksSummary
     {
-        $normalizedSlug = trim($slug);
+        $normalizedSlug = strtolower(trim($slug));
         if ($normalizedSlug === '') {
             return null;
         }
 
-        if (array_key_exists($normalizedSlug, $this->summaryBySlug)) {
-            return $this->summaryBySlug[$normalizedSlug];
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $memoKey = $normalizedSlug.'|'.$normalizedLocale;
+        if (array_key_exists($memoKey, $this->summaryBySlug)) {
+            return $this->summaryBySlug[$memoKey];
         }
 
+        try {
+            if (Cache::get($this->negativeCacheKey($normalizedSlug, $normalizedLocale)) === true) {
+                return $this->summaryBySlug[$memoKey] = null;
+            }
+
+            $cached = $this->summaryFromPayload(Cache::get($this->activeCacheKey($normalizedSlug, $normalizedLocale)));
+            if ($cached instanceof CareerFirstWaveNextStepLinksSummary) {
+                return $this->summaryBySlug[$memoKey] = $cached;
+            }
+        } catch (\Throwable) {
+            // Cache availability must not make this public read endpoint fail.
+        }
+
+        try {
+            $summary = $this->buildUncachedBySlug($normalizedSlug);
+        } catch (\Throwable $throwable) {
+            try {
+                $stale = $this->summaryFromPayload(Cache::get($this->lkgCacheKey($normalizedSlug, $normalizedLocale)));
+                if ($stale instanceof CareerFirstWaveNextStepLinksSummary) {
+                    return $this->summaryBySlug[$memoKey] = $stale;
+                }
+            } catch (\Throwable) {
+                // Preserve the original authority-build failure below.
+            }
+
+            throw $throwable;
+        }
+
+        try {
+            if ($summary === null) {
+                Cache::put(
+                    $this->negativeCacheKey($normalizedSlug, $normalizedLocale),
+                    true,
+                    now()->addSeconds(self::NEGATIVE_CACHE_TTL_SECONDS),
+                );
+            } else {
+                $payload = $summary->toArray();
+                Cache::put(
+                    $this->activeCacheKey($normalizedSlug, $normalizedLocale),
+                    $payload,
+                    now()->addSeconds(self::CACHE_TTL_SECONDS),
+                );
+                Cache::forever($this->lkgCacheKey($normalizedSlug, $normalizedLocale), $payload);
+                Cache::forget($this->negativeCacheKey($normalizedSlug, $normalizedLocale));
+            }
+        } catch (\Throwable) {
+            // A successful authority read remains usable when the cache store is down.
+        }
+
+        return $this->summaryBySlug[$memoKey] = $summary;
+    }
+
+    private function buildUncachedBySlug(string $normalizedSlug): ?CareerFirstWaveNextStepLinksSummary
+    {
         $subject = Occupation::query()
             ->with('family')
             ->where('canonical_slug', $normalizedSlug)
@@ -151,5 +214,47 @@ final class CareerFirstWaveNextStepLinksService
             ->all();
 
         return $this->discoverabilityRoutes;
+    }
+
+    private function normalizePublicLocale(string $publicLocale): string
+    {
+        $normalized = strtolower(trim($publicLocale));
+
+        return in_array($normalized, ['en', 'en-us'], true) ? 'en' : 'zh-CN';
+    }
+
+    private function activeCacheKey(string $slug, string $publicLocale): string
+    {
+        return sprintf('%s:%s:%s:active', self::CACHE_KEY_PREFIX, $slug, $publicLocale);
+    }
+
+    private function lkgCacheKey(string $slug, string $publicLocale): string
+    {
+        return sprintf('%s:%s:%s:lkg', self::CACHE_KEY_PREFIX, $slug, $publicLocale);
+    }
+
+    private function negativeCacheKey(string $slug, string $publicLocale): string
+    {
+        return sprintf('%s:%s:%s:negative', self::CACHE_KEY_PREFIX, $slug, $publicLocale);
+    }
+
+    private function summaryFromPayload(mixed $payload): ?CareerFirstWaveNextStepLinksSummary
+    {
+        if (! is_array($payload)
+            || ($payload['summary_version'] ?? null) !== self::SUMMARY_VERSION
+            || ($payload['scope'] ?? null) !== self::SCOPE
+            || ! is_array($payload['subject_identity'] ?? null)
+            || ! is_array($payload['counts'] ?? null)
+            || ! is_array($payload['next_step_links'] ?? null)) {
+            return null;
+        }
+
+        return new CareerFirstWaveNextStepLinksSummary(
+            summaryVersion: self::SUMMARY_VERSION,
+            scope: self::SCOPE,
+            subjectIdentity: $payload['subject_identity'],
+            counts: $payload['counts'],
+            nextStepLinks: $payload['next_step_links'],
+        );
     }
 }

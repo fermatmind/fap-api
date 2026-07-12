@@ -9,6 +9,7 @@ use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Career\CareerFirstWaveNextStepLinksSummaryResource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 final class CareerFirstWaveNextStepLinksController extends Controller
 {
@@ -18,9 +19,9 @@ final class CareerFirstWaveNextStepLinksController extends Controller
         private readonly CareerFirstWaveNextStepLinksService $summaryService,
     ) {}
 
-    public function show(string $slug): JsonResponse|CareerFirstWaveNextStepLinksSummaryResource
+    public function show(Request $request, string $slug): JsonResponse|CareerFirstWaveNextStepLinksSummaryResource
     {
-        $summary = $this->summaryService->buildBySlug($slug);
+        $summary = $this->summaryService->buildBySlug($slug, (string) $request->query('locale', 'zh-CN'));
 
         if ($summary === null) {
             return $this->notFoundResponse('career next-step links unavailable.');

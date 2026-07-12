@@ -9,12 +9,20 @@ use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\TestCase;
 
 final class CareerFirstWaveNextStepLinksServiceTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Cache::flush();
+    }
 
     public function test_it_builds_machine_safe_next_step_links_for_a_first_wave_occupation(): void
     {
@@ -85,6 +93,41 @@ final class CareerFirstWaveNextStepLinksServiceTest extends TestCase
 
         $this->assertNull($service->buildBySlug('unknown-occupation'));
         $this->assertNull($service->buildBySlug('non-first-wave-occupation'));
+    }
+
+    public function test_it_reuses_a_slug_and_locale_scoped_persistent_payload(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+
+        $first = app(CareerFirstWaveNextStepLinksService::class)
+            ->buildBySlug('accountants-and-auditors', 'en')?->toArray();
+        $this->assertIsArray($first);
+
+        Occupation::query()
+            ->where('canonical_slug', 'accountants-and-auditors')
+            ->update(['canonical_title_en' => 'Changed after cache warm']);
+
+        $second = app(CareerFirstWaveNextStepLinksService::class)
+            ->buildBySlug('accountants-and-auditors', 'en-US')?->toArray();
+
+        $this->assertSame($first, $second);
+        $this->assertTrue(Cache::has(
+            CareerFirstWaveNextStepLinksService::CACHE_KEY_PREFIX.':accountants-and-auditors:en:active'
+        ));
+    }
+
+    public function test_it_negative_caches_unknown_slugs_per_locale(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+
+        $this->assertNull(app(CareerFirstWaveNextStepLinksService::class)->buildBySlug('unknown-occupation', 'en'));
+
+        CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'unknown-occupation']);
+
+        $this->assertNull(app(CareerFirstWaveNextStepLinksService::class)->buildBySlug('unknown-occupation', 'en'));
+        $this->assertTrue(Cache::has(
+            CareerFirstWaveNextStepLinksService::CACHE_KEY_PREFIX.':unknown-occupation:en:negative'
+        ));
     }
 
     private function materializeCurrentFirstWaveFixture(): void
