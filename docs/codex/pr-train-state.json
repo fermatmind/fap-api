@@ -88969,9 +88969,9 @@
     "depends_on": [
       "ENNEAGRAM-LLMS-FULL-RELEASE-READINESS-02"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "346bdeb68",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3026",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -89005,7 +89005,7 @@
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "PR not opened yet."
+        "evidence": "PR #3026 opened; waiting for required GitHub checks."
       }
     },
     "scope_validation": {
@@ -89032,6 +89032,12 @@
         "from": "local_checks_passed",
         "to": "local_checks_passed",
         "note": "Local release closeout validation passed: YAML/JSON/report assertions, allowed-path scope check, and git diff --check all passed. Ready for commit and PR."
+      },
+      {
+        "at": "2026-07-12T15:52:39.593406Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Opened PR #3026 from scoped readback/ledger branch; required GitHub checks are pending. No deploy, CMS write, eligibility write, Search Queue, IndexNow, or backend cache warm was triggered."
       }
     ]
   }
