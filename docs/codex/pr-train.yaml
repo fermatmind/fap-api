@@ -41468,7 +41468,6 @@ prs:
       - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
       - backend/tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
-      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -41478,6 +41477,44 @@ prs:
       - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php
       - cd backend && ./vendor/bin/pint --test app/Services/Cms/PersonalityPublicReadModelCache.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php
       - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_freeze_classifier_ignores_personality_public_read_model_cache
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    runtime_change: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: PERSONALITY-WARMUP-01
+    repo: fap-api
+    depends_on: [PERSONALITY-CACHE-01]
+    branch: codex/personality-warmup-01
+    title: "PERSONALITY-WARMUP-01: warm public personality routes and slim payloads"
+    train_scope: personality_public_warmup_payload_budget
+    status: user_authorized
+    scope:
+      - Add a bounded post-publish command that warms selected or all 32 MBTI A/T detail and SEO read models for EN and ZH.
+      - Enforce a 512 KiB detail response budget during warmup.
+      - Remove the duplicate generic projection alias from A/T variant responses while preserving the canonical MBTI projection and base-type compatibility.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityWarmPublicReadModels.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - backend/tests/Feature/Console/PersonalityWarmPublicReadModelsCommandTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute production warmup, mutate CMS/DB content, change publication/indexability/SEO authority, import production data, or deploy.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/PersonalityWarmPublicReadModelsCommandTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - local temporary SQLite baseline import and personality:warm-public-read-models --types=INTJ-A --locales=en,zh-CN
+      - cd backend && ./vendor/bin/pint --test app/Console/Commands/PersonalityWarmPublicReadModels.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Feature/Console/PersonalityWarmPublicReadModelsCommandTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
       - YAML/JSON parse and changed-file scope validation
       - git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
