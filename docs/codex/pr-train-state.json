@@ -89741,7 +89741,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-EDITORIAL-GATE-06"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "35af656043ba16a1a242733f74967b0313d8eaa5",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3040",
     "checks": {
@@ -89766,8 +89766,8 @@
         "evidence": "Exactly 9 changed files match the PR07 manifest allowlist: one README, one focused Feature test, one state ledger, and six generated workflow files. The first porcelain-based counter exited 1 because Git collapsed untracked directories; expanded tracked-plus-untracked file enumeration then proved the exact 9-file scope. No backend/app runtime, domain/facet rewrite, CMS/database write, publish, deploy, or indexability change occurred."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "Implementation commit 35af656043ba16a1a242733f74967b0313d8eaa5 was pushed and PR #3040 opened; required GitHub checks are pending."
+        "status": "pass",
+        "evidence": "All 9 GitHub checks passed on head e5d30af2d9583f1528860f8db42c34041a1a6281: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. GitHub reports MERGEABLE/CLEAN."
       }
     },
     "failure_reason": null,
@@ -89796,6 +89796,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Implementation commit 35af656043ba16a1a242733f74967b0313d8eaa5 was pushed and PR #3040 opened with what changed, why, validation, deferred items, and repository-rule impact; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-13T21:59:40Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 required GitHub checks passed on head e5d30af2d9583f1528860f8db42c34041a1a6281. GitHub reports PR #3040 MERGEABLE/CLEAN; the final ledger head will be revalidated before squash merge."
       }
     ]
   },
