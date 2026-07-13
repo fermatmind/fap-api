@@ -89741,9 +89741,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-EDITORIAL-GATE-06"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "35af656043ba16a1a242733f74967b0313d8eaa5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3040",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -89764,6 +89764,10 @@
       "scope": {
         "status": "pass",
         "evidence": "Exactly 9 changed files match the PR07 manifest allowlist: one README, one focused Feature test, one state ledger, and six generated workflow files. The first porcelain-based counter exited 1 because Git collapsed untracked directories; expanded tracked-plus-untracked file enumeration then proved the exact 9-file scope. No backend/app runtime, domain/facet rewrite, CMS/database write, publish, deploy, or indexability change occurred."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "Implementation commit 35af656043ba16a1a242733f74967b0313d8eaa5 was pushed and PR #3040 opened; required GitHub checks are pending."
       }
     },
     "failure_reason": null,
@@ -89786,6 +89790,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All PR07 manifest checks passed. The four-stage workflow preserves and accounts for raw failures, the two final hubs cover 14 shared reader intents with independently edited copy, approved visible evidence, exact locale-safe navigation, and closed human/release gates; changed files remain exactly within the 9-file PR07 allowlist."
+      },
+      {
+        "at": "2026-07-13T21:53:21Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Implementation commit 35af656043ba16a1a242733f74967b0313d8eaa5 was pushed and PR #3040 opened with what changed, why, validation, deferred items, and repository-rule impact; required GitHub checks are pending."
       }
     ]
   },
