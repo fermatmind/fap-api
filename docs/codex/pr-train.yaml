@@ -43102,3 +43102,46 @@ prs:
     indexability_mutation_allowed: false
     content_authority: CMS/backend
     release_mode: dry_run_only
+
+  - id: SAEP-PLANNED-PR-01
+    repo: fap-api
+    branch: codex/saep-planned-pr-01-test-public-state
+    base: main
+    title: "SAEP-PLANNED-PR-01 Expose explicit test public-state contract"
+    train_scope: saep_first_scan_test_public_state_lookup_projection
+    status: user_authorized
+    depends_on:
+      - BIG5-COMMERCIAL-FIELD-BACKEND-AUTHORITY-FIX-01
+    depends_on_atomic_tasks:
+      - SAEP-PT-07
+      - SAEP-PARITY-02
+    scope:
+      - Add explicit boolean is_public to the existing /api/v0.3/scales/lookup public response projection.
+      - Add focused tests proving field type while preserving existing public, active, and indexability behavior.
+      - Leave sitemap-source, landing_surface_v1, CMS rows, and production exposure unchanged.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php
+      - backend/tests/Feature/V0_3/ScalesLookupTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Modify ScalesSitemapSourceController.php or PublicSurface services.
+      - Change CMS/database rows, sitemap or llms output, publish, import, deploy, or production state.
+      - Treat is_public projection as resolution of the separately observed screening-page sitemap conflict.
+    validation:
+      - cd backend && php artisan test --filter=ScalesLookupTest --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/ScalesLookupController.php tests/Feature/V0_3/ScalesLookupTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

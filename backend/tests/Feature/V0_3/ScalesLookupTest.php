@@ -33,6 +33,7 @@ class ScalesLookupTest extends TestCase
             'primary_slug' => 'mbti-personality-test-16-personality-types',
             'requested_slug' => 'mbti-personality-test-16-personality-types',
             'resolved_from_alias' => false,
+            'is_public' => true,
         ]);
         $response->assertJsonStructure([
             'seo_schema_json',
@@ -83,8 +84,10 @@ class ScalesLookupTest extends TestCase
                 'primary_slug' => $case['primary_slug'],
                 'requested_slug' => $case['slug'],
                 'resolved_from_alias' => $case['resolved_from_alias'],
+                'is_public' => true,
             ]);
             $response->assertJsonPath('slug', $case['primary_slug']);
+            $this->assertIsBool($response->json('is_public'));
             $this->assertIsString($response->json('pack_id_v2'));
             $this->assertIsString($response->json('dir_version_v2'));
         }

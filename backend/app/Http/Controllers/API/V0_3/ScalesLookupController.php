@@ -116,6 +116,7 @@ class ScalesLookupController extends Controller
             'seo_title' => $seo['title'],
             'seo_description' => $seo['description'],
             'og_image_url' => $seo['og_image_url'],
+            'is_public' => (bool) ($row['is_public'] ?? false),
             'is_indexable' => $isIndexable,
             'content_i18n_json' => $row['content_i18n_json'] ?? null,
             'report_summary_i18n_json' => $row['report_summary_i18n_json'] ?? null,
