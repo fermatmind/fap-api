@@ -89133,8 +89133,8 @@
     "base": "main",
     "branch": "codex/mbti-cms-comp-38-full-dry-run",
     "depends_on": ["MBTI-FULL-QA-36"],
-    "status": "pr_open",
-    "commit_sha": "e9c0778db789dc9afb83694ed44994149aa95594",
+    "status": "ready_to_merge",
+    "commit_sha": "e9c0778db5794947e899f5685dbd3ecc2cd925cd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3030",
     "failure_reason": null,
     "merged_at": null,
@@ -89163,14 +89163,14 @@
         "evidence": "bash backend/scripts/ci_verify_mbti.sh passed in an isolated detached worktree at a570e3fc339767611d90e59fd74884d7e8c68b5f. Its Big Five compiled-pack rewrites were isolated as verification artifacts and are not part of this PR."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3030 is open for commit e9c0778db789dc9afb83694ed44994149aa95594; required GitHub checks have not completed."
+        "status": "pass",
+        "evidence": "PR #3030 reports success for content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, hygiene, supply-chain, and Semgrep checks on commits e9c0778db5794947e899f5685dbd3ecc2cd925cd and f42daf622ad4c51d38f45ab460f01be1ff8e7412."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -89191,6 +89191,12 @@
         "from": "local_validation_passed",
         "to": "pr_open",
         "note": "Opened GitHub PR #3030 for the no-write comparison dry-run implementation; required checks are pending."
+      },
+      {
+        "at": "2026-07-13T22:06:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All reported PR checks passed, GitHub merge state is CLEAN, and the post-check changed-file scope validation still contains only the six declared paths."
       }
     ]
   }
