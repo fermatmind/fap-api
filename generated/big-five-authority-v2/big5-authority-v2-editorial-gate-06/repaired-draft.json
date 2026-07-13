@@ -1,0 +1,18 @@
+{
+  "schema_version": "big5_authority_v2_repaired_draft_record.v1",
+  "artifact": "big5-v2-editorial-gate-repaired-example",
+  "stage": "repaired",
+  "repairs_from": "raw-draft.json",
+  "review_basis": "skeptical-review.json",
+  "final_candidate": "final-package.json",
+  "raw_failures_preserved": true,
+  "human_review_state": "pending_human_review",
+  "publish_allowed": false,
+  "schema_eligible": false,
+  "repair_summary": [
+    "Added primary academic and product-boundary source mappings.",
+    "Added independently authored en and zh-CN locale pages with matching intent coverage.",
+    "Added concrete scenario, counterexample, tradeoff, and action sections.",
+    "Removed template placeholders and kept reviewer identity and release gates closed."
+  ]
+}

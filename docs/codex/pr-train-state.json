@@ -89559,8 +89559,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-WEB-TRUST-RENDERER-04"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "958c63f4794f455f831bd789fc49385f56da9001",
+    "status": "merged",
+    "commit_sha": "6234952c2379a93b1fbc16488bf366c1e045166e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3037",
     "checks": {
       "dependency": {
@@ -89590,12 +89590,16 @@
       "github_required_checks": {
         "status": "pass",
         "evidence": "Head 958c63f4794f455f831bd789fc49385f56da9001 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS, and semgrep SARIF upload. GitHub reports mergeStateStatus CLEAN with no review block."
+      },
+      "merge_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #3037 MERGED at 2026-07-13T20:25:03Z as 6234952c2379a93b1fbc16488bf366c1e045166e; origin/main contains the merge, the remote task branch is deleted, and local task worktree/branch cleanup completed. Latest PR-head CI/Code Scanning and the newer main CI/Code Scanning that contains this merge passed. The PR05 Deploy Application run was canceled during checkout and Deploy (staging) executed no steps; production deploy did not run."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-13T20:25:03Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -89624,6 +89628,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All required GitHub checks passed on head 958c63f4794f455f831bd789fc49385f56da9001; PR #3037 is CLEAN with no review block."
+      },
+      {
+        "at": "2026-07-13T20:43:07Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #3037 as squash-merged at 2026-07-13T20:25:03Z with merge 6234952c2379a93b1fbc16488bf366c1e045166e. origin/main containment, latest head/main checks, remote deletion, local cleanup, and post-merge focused validation were verified; the PR05 staging deploy workflow was canceled before deployment."
       }
     ]
   },
@@ -89636,10 +89646,39 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-SOURCE-LEDGER-05"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "530a7cb20fb056c85d8d41ac83eef937a58f664e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3039",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-SOURCE-LEDGER-05 PR #3037 is MERGED as 6234952c2379a93b1fbc16488bf366c1e045166e; origin/main contains the merge and PR05 post-merge validation/cleanup completed."
+      },
+      "editorial_package": {
+        "status": "pass",
+        "evidence": "The non-runtime Node 24 CLI validate-package.mjs passed for the separately retained raw, skeptical-review, repaired, and final artifacts. The final candidate passed all 8 automated gates while human review, publication, schema eligibility, CMS writes, indexability, search submission, and deploy actions remain false."
+      },
+      "focused_test": {
+        "status": "pass",
+        "evidence": "BigFiveAuthorityV206Test passed 5 tests / 48 assertions under PHP 8.4. It invokes the non-runtime Node CLI and proves raw failures remain visible, the final package passes only automated gates, private route/identifier and cross-framework leakage fail closed, and unknown claims fail source coverage. After the initial GitHub runtime-freeze failure, the PHP application service and Artisan command were removed rather than exempted."
+      },
+      "full_ci_verify_mbti": {
+        "status": "pass",
+        "evidence": "The final non-runtime head passed bash backend/scripts/ci_verify_mbti.sh under PHP 8.4 and Node 24, including 1229 Big Five tests / 150643 assertions, the PR06 focused test, runtime-path freeze, Enneagram, MBTI, personality authority, payment uniqueness, migration safety, auth, OpenAPI, order security, dependency security, webhook/attempt, queue, and related gates. Generated BIG5_OCEAN compiled validation side effects were restored before final scope validation."
+      },
+      "format_and_syntax": {
+        "status": "pass",
+        "evidence": "Pint --test passed for the single touched PHP test. PHP syntax, Node CLI syntax, all generated JSON, state JSON, manifest YAML, package validation, and git diff --check passed. The focused runtime-freeze test also passed 1 test / 3 assertions."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "All 9 changed files match the PR06 manifest allowlist. The reusable gate lives only under generated/ and no backend/app runtime file remains. origin/main remains the branch base at 9df5b2ea6d031352f34b0134d49dbba00ed4a08f. No CMS/database write, public runtime or editorial fallback, publish, deploy, schema activation, indexability mutation, search submission, frontend change, or private data access occurred."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "All 9 GitHub checks passed on head 30512d7722da668f837667b47d1b199665c58b5a: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. GitHub reports MERGEABLE/CLEAN."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -89648,7 +89687,44 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-13T20:43:07Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR06 from clean latest fap-api main after verifying PR05 merged. Scope is a reusable fail-closed Big Five editorial QA service, command, workflow artifacts, docs, and tests only; CMS/database writes, runtime publication, deployment, schema activation, indexability mutation, search submission, and private data access remain prohibited."
+      },
+      {
+        "at": "2026-07-13T20:51:18Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All PR06 manifest local checks passed. The four-stage workflow preserves raw failures, en and zh-CN require independent editorial parity, scientific claims resolve through PR05 authority, 8 automated gates fail closed, and human/release/operational gates remain closed."
+      },
+      {
+        "at": "2026-07-13T20:55:29Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Implementation commit 9ecc528a3249b752b7debba89773a32bdba83ea8 was pushed and PR #3039 opened with the required scope, rationale, validation, deferred-items, and repository-rule-impact sections; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-13T21:01:23Z",
+        "from": "github_checks_pending",
+        "to": "github_checks_failed",
+        "note": "On head b84e27e1f, 8 GitHub checks passed and verify-bigfive failed at BigFiveResultPageV2CoreBodyPreviewTest runtime-path freeze because PR06 had added a PHP application service and Artisan command. The failure exposed a real PR06 scope violation; it was not bypassed or reclassified."
+      },
+      {
+        "at": "2026-07-13T21:21:15Z",
+        "from": "github_checks_failed",
+        "to": "github_checks_pending",
+        "note": "Same-scope fix 530a7cb20 removed both backend/app files and replaced them with a non-runtime generated Node CLI. Focused tests, runtime freeze, syntax/format checks, package validation, scope validation, and the complete ci_verify_mbti suite passed; GitHub retry is pending."
+      },
+      {
+        "at": "2026-07-13T21:29:45Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 required GitHub checks passed on head 30512d7722da668f837667b47d1b199665c58b5a after the non-runtime repair. GitHub reports PR #3039 MERGEABLE/CLEAN; the final ledger head will be revalidated before squash merge."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-HUB-07": {
     "id": "BIG5-AUTHORITY-V2-HUB-07",
