@@ -1,0 +1,56 @@
+{
+  "schema_version": "big5_authority_v2_hub_qa_report.v1",
+  "train_id": "BIG5-AUTHORITY-V2-HUB-07",
+  "status": "pass",
+  "coverage": {
+    "expected_page_count": 2,
+    "observed_page_count": 2,
+    "canonical_paths": [
+      "/en/personality/big-five",
+      "/zh/personality/big-five"
+    ],
+    "section_intents_per_page": 14,
+    "visible_sources_per_page": 3,
+    "internal_links_per_page": 7
+  },
+  "workflow": {
+    "raw_schema_valid": true,
+    "raw_editorial_gate_passed": false,
+    "raw_issue_codes": [
+      "editorial_intent_not_specific",
+      "internal_links_incomplete",
+      "locale_not_independently_authored",
+      "required_section_missing",
+      "template_or_cliche_detected",
+      "visible_sources_incomplete"
+    ],
+    "skeptical_review_accounted": true,
+    "repaired_automated_gate_passed": true,
+    "final_automated_gate_passed": true,
+    "raw_failures_preserved": true,
+    "ai_detector_used": false
+  },
+  "gates": {
+    "schema": "pass",
+    "exact_coverage": "pass",
+    "source_claim_coverage": "pass",
+    "bilingual_independence": "pass",
+    "duplicate_template_risk": "pass",
+    "private_boundary": "pass",
+    "framework_boundary": "pass",
+    "editorial_completeness": "pass",
+    "manual_review_state": "pass"
+  },
+  "release_state": {
+    "human_review_passed": false,
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false,
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  },
+  "writes_committed": false
+}
