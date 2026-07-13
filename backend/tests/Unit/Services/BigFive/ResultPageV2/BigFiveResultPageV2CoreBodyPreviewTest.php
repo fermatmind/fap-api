@@ -1127,6 +1127,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($changed, $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_exact_scale_lookup_public_state_projection_only(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php',
+        ];
+        $allowedChangedLines = [
+            "+            'is_public' => (bool) (\$row['is_public'] ?? false),",
+        ];
+        $blockedChangedLines = [
+            "+            'is_public' => true,",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            scaleLookupControllerChangedLines: $allowedChangedLines,
+        ));
+        $this->assertSame($changed, $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            scaleLookupControllerChangedLines: $blockedChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_clinical_combo_en_paid_parity_changes(): void
     {
         $changed = [
@@ -5579,6 +5605,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $bigFivePublicProjectionChangedLines = null,
         ?array $shareControllerChangedLines = null,
         ?array $opsAccessControlChangedLines = null,
+        ?array $scaleLookupControllerChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -7026,6 +7053,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isFreeFullReportModeFeatureFlagFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php'
+                && $this->scaleLookupControllerDiffIsExactPublicStateProjectionOnly(
+                    $scaleLookupControllerChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
                 continue;
             }
 
@@ -9032,6 +9072,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Report/Resolvers/AccessResolver.php',
             'backend/config/fap.php',
         ], true);
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function scaleLookupControllerDiffIsExactPublicStateProjectionOnly(array $changedLines): bool
+    {
+        return $changedLines === [
+            "+            'is_public' => (bool) (\$row['is_public'] ?? false),",
+        ];
     }
 
     private function isClinicalComboEnPaidParityFile(string $file): bool
