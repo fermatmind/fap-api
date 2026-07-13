@@ -1,0 +1,182 @@
+{
+  "schema_version": "big5_authority_v2_terminology_ledger_05.v1",
+  "train_id": "BIG5-AUTHORITY-V2-SOURCE-LEDGER-05",
+  "locale_pair": [
+    "en",
+    "zh-CN"
+  ],
+  "translation_policy": {
+    "conceptual_parity_required": true,
+    "word_for_word_translation_required": false,
+    "locale_independent_editorial_review_required": true,
+    "framework_names_must_not_be_silently_equated": true,
+    "medicalization_forbidden": true
+  },
+  "terms": [
+    {
+      "id": "term.big_five",
+      "canonical_en": "Big Five",
+      "canonical_zh_cn": "大五人格",
+      "accepted_aliases_en": ["Five-Factor Model", "OCEAN model"],
+      "accepted_aliases_zh_cn": ["五因素模型", "OCEAN 模型"],
+      "definition_en": "A broad trait taxonomy organized around five dimensions.",
+      "definition_zh_cn": "围绕五个宽泛维度组织的人格特质分类框架。",
+      "boundary": "Do not present the model as a diagnosis, fixed identity, or complete account of a person.",
+      "source_claim_ids": ["claim.big_five.five_broad_dimensions"]
+    },
+    {
+      "id": "term.openness",
+      "canonical_en": "Openness to Experience",
+      "canonical_zh_cn": "开放性",
+      "accepted_aliases_en": ["Openness", "Open-Mindedness when the named instrument uses that label"],
+      "accepted_aliases_zh_cn": ["经验开放性", "开放思维（仅限所引用工具采用该名称时）"],
+      "definition_en": "A broad domain concerning engagement with ideas, imagination, aesthetics, and novelty, with wording dependent on the named model.",
+      "definition_zh_cn": "与观念、想象、审美和新颖体验的投入有关的宽泛维度；具体措辞取决于所指明的模型。",
+      "boundary": "Do not equate a label variant with instrument equivalence.",
+      "source_claim_ids": ["claim.big_five.five_broad_dimensions"]
+    },
+    {
+      "id": "term.conscientiousness",
+      "canonical_en": "Conscientiousness",
+      "canonical_zh_cn": "尽责性",
+      "accepted_aliases_en": [],
+      "accepted_aliases_zh_cn": ["责任心（解释性别名）"],
+      "definition_en": "A broad domain concerning organization, persistence, self-regulation, and goal-directed tendencies.",
+      "definition_zh_cn": "与组织、坚持、自我调节和目标导向倾向有关的宽泛维度。",
+      "boundary": "A trait description is not proof of performance, employability, or moral worth.",
+      "source_claim_ids": ["claim.big_five.five_broad_dimensions"]
+    },
+    {
+      "id": "term.extraversion",
+      "canonical_en": "Extraversion",
+      "canonical_zh_cn": "外向性",
+      "accepted_aliases_en": ["Extroversion as a common spelling variant"],
+      "accepted_aliases_zh_cn": ["外倾性"],
+      "definition_en": "A broad domain concerning social engagement, assertiveness, activity, and positive affect tendencies.",
+      "definition_zh_cn": "与社交投入、主张性、活动水平和积极情绪倾向有关的宽泛维度。",
+      "boundary": "Do not reduce the domain to sociability alone or rank one end as universally better.",
+      "source_claim_ids": ["claim.big_five.five_broad_dimensions"]
+    },
+    {
+      "id": "term.agreeableness",
+      "canonical_en": "Agreeableness",
+      "canonical_zh_cn": "宜人性",
+      "accepted_aliases_en": [],
+      "accepted_aliases_zh_cn": ["亲和性（解释性别名）"],
+      "definition_en": "A broad domain concerning compassion, respect, trust, and cooperative tendencies.",
+      "definition_zh_cn": "与同情、尊重、信任和合作倾向有关的宽泛维度。",
+      "boundary": "Do not turn a score into a moral judgment or relationship prediction.",
+      "source_claim_ids": ["claim.big_five.five_broad_dimensions"]
+    },
+    {
+      "id": "term.neuroticism",
+      "canonical_en": "Neuroticism",
+      "canonical_zh_cn": "神经质",
+      "accepted_aliases_en": ["Negative Emotionality when the named instrument uses that label"],
+      "accepted_aliases_zh_cn": ["负性情绪（仅限所引用工具采用该名称时）"],
+      "definition_en": "A broad domain concerning the frequency and intensity of negative emotional tendencies.",
+      "definition_zh_cn": "与负面情绪倾向的频率和强度有关的宽泛维度。",
+      "boundary": "The Chinese term is a technical trait label here, not a medical diagnosis or statement of illness.",
+      "source_claim_ids": ["claim.big_five.five_broad_dimensions", "claim.fermatmind.non_diagnostic_boundary"]
+    },
+    {
+      "id": "term.domain",
+      "canonical_en": "domain",
+      "canonical_zh_cn": "维度",
+      "accepted_aliases_en": ["broad trait domain"],
+      "accepted_aliases_zh_cn": ["宽泛特质维度"],
+      "definition_en": "One of the broad organizing dimensions in a named Big Five model.",
+      "definition_zh_cn": "某个已明确的大五人格模型中的宽泛组织维度。",
+      "boundary": "Do not translate domain as a diagnosis category or type.",
+      "source_claim_ids": ["claim.big_five.hierarchical_domains_and_facets"]
+    },
+    {
+      "id": "term.facet",
+      "canonical_en": "facet",
+      "canonical_zh_cn": "侧面",
+      "accepted_aliases_en": ["lower-order facet"],
+      "accepted_aliases_zh_cn": ["子维度（解释性别名）"],
+      "definition_en": "A more specific trait component nested under a broad domain in a named model.",
+      "definition_zh_cn": "在已明确模型中隶属于宽泛维度的更具体特质成分。",
+      "boundary": "Facet names and counts depend on the model and are not silently interchangeable.",
+      "source_claim_ids": ["claim.big_five.hierarchical_domains_and_facets", "claim.big_five.taxonomies_not_interchangeable"]
+    },
+    {
+      "id": "term.aspect",
+      "canonical_en": "aspect",
+      "canonical_zh_cn": "方面",
+      "accepted_aliases_en": ["intermediate aspect"],
+      "accepted_aliases_zh_cn": ["中间层方面"],
+      "definition_en": "An intermediate level proposed in the ten-aspect hierarchy, with two aspects per domain.",
+      "definition_zh_cn": "十方面层级模型提出的中间层级，每个维度包含两个方面。",
+      "boundary": "Do not use aspect as a synonym for every facet system.",
+      "source_claim_ids": ["claim.big_five.hierarchical_domains_and_facets", "claim.big_five.taxonomies_not_interchangeable"]
+    },
+    {
+      "id": "term.trait",
+      "canonical_en": "trait",
+      "canonical_zh_cn": "特质",
+      "accepted_aliases_en": ["trait tendency"],
+      "accepted_aliases_zh_cn": ["特质倾向"],
+      "definition_en": "A continuous descriptive tendency, not a categorical identity.",
+      "definition_zh_cn": "一种连续的描述性倾向，而不是类别化身份。",
+      "boundary": "Avoid identity labels, destiny language, and deterministic predictions.",
+      "source_claim_ids": ["claim.fermatmind.non_diagnostic_boundary"]
+    },
+    {
+      "id": "term.score_range",
+      "canonical_en": "score range",
+      "canonical_zh_cn": "分数区间",
+      "accepted_aliases_en": ["reported range"],
+      "accepted_aliases_zh_cn": ["报告区间"],
+      "definition_en": "A product-reported band used to organize reflection about a measured tendency.",
+      "definition_zh_cn": "产品用于组织对所测倾向进行反思的报告分段。",
+      "boundary": "Do not call a range a diagnosis, percentile, norm rank, or permanent label unless separately evidenced and approved.",
+      "source_claim_ids": ["claim.fermatmind.non_diagnostic_boundary"]
+    },
+    {
+      "id": "term.claim",
+      "canonical_en": "claim",
+      "canonical_zh_cn": "论断",
+      "accepted_aliases_en": ["public claim"],
+      "accepted_aliases_zh_cn": ["公开论断"],
+      "definition_en": "A factual or interpretive statement that requires an explicit authority class and limitation.",
+      "definition_zh_cn": "需要明确权威类别与局限的事实性或解释性陈述。",
+      "boundary": "A claim cannot inherit authority from schema markup or competitor repetition.",
+      "source_claim_ids": ["claim.fermatmind.visible_evidence_fields"]
+    },
+    {
+      "id": "term.source",
+      "canonical_en": "source",
+      "canonical_zh_cn": "来源",
+      "accepted_aliases_en": ["evidence source"],
+      "accepted_aliases_zh_cn": ["证据来源"],
+      "definition_en": "A traceable academic, official/product, competitor, repository, or inference record mapped to a claim.",
+      "definition_zh_cn": "映射到论断的可追溯学术、官方/产品、竞品、仓库或推断记录。",
+      "boundary": "Source category determines what the record is eligible to support.",
+      "source_claim_ids": ["claim.fermatmind.visible_evidence_fields"]
+    },
+    {
+      "id": "term.limitation",
+      "canonical_en": "limitation",
+      "canonical_zh_cn": "局限",
+      "accepted_aliases_en": ["claim boundary"],
+      "accepted_aliases_zh_cn": ["论断边界"],
+      "definition_en": "The explicit boundary on what a source or claim does not establish.",
+      "definition_zh_cn": "明确说明某来源或论断不能证明什么的边界。",
+      "boundary": "Limitations must remain visible where a claim could otherwise overreach.",
+      "source_claim_ids": ["claim.fermatmind.visible_evidence_fields"]
+    },
+    {
+      "id": "term.human_review",
+      "canonical_en": "human review",
+      "canonical_zh_cn": "人工审阅",
+      "accepted_aliases_en": ["editorial review"],
+      "accepted_aliases_zh_cn": ["编辑审阅"],
+      "definition_en": "A named editorial decision by an accountable person; it is not inferred from generated content or field presence.",
+      "definition_zh_cn": "由可追责人员作出的具名编辑决定；不能从生成内容或字段存在性推断。",
+      "boundary": "Unknown reviewer identity or state remains Unknown and blocks claims that require review.",
+      "source_claim_ids": ["claim.fermatmind.visible_evidence_fields"]
+    }
+  ]
+}

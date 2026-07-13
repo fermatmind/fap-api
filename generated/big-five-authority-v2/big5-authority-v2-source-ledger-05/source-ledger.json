@@ -1,0 +1,488 @@
+{
+  "schema_version": "big5_authority_v2_source_ledger_05.v1",
+  "train_id": "BIG5-AUTHORITY-V2-SOURCE-LEDGER-05",
+  "access_date": "2026-07-14",
+  "authority": {
+    "owner": "fap-api backend/CMS",
+    "purpose": "Shared source-to-claim authority for future Big Five bilingual public content packages.",
+    "runtime_authority": false,
+    "publish_authority": false,
+    "indexability_authority": false
+  },
+  "page_family_catalog": [
+    "test_landing",
+    "model_hub",
+    "domain",
+    "facet_hub",
+    "facet_detail",
+    "range",
+    "article",
+    "result_explainer",
+    "technical_trust"
+  ],
+  "evidence_categories": [
+    "academic_evidence",
+    "official_product_evidence",
+    "competitor_evidence",
+    "internal_repository_evidence",
+    "inference"
+  ],
+  "sources": [
+    {
+      "id": "academic.goldberg-1990-big-five-structure",
+      "evidence_category": "academic_evidence",
+      "source_type": "peer_reviewed_original_research",
+      "title": "An alternative \"description of personality\": The Big-Five factor structure.",
+      "authors_or_organization": "Lewis R. Goldberg",
+      "year": 1990,
+      "doi": "10.1037/0022-3514.59.6.1216",
+      "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+      "access_date": "2026-07-14",
+      "supported_claim_ids": [
+        "claim.big_five.five_broad_dimensions"
+      ],
+      "supported_claim": "Lexical trait descriptors can be organized into a Big Five factor structure.",
+      "limitation": "The study supports a broad factor structure; it does not validate FermatMind scores, diagnose an individual, or establish a universal facet taxonomy.",
+      "applicable_page_families": [
+        "model_hub",
+        "domain",
+        "article",
+        "technical_trust"
+      ],
+      "core_scientific_evidence_eligible": true,
+      "sole_scientific_evidence_eligible": true
+    },
+    {
+      "id": "academic.soto-john-2017-bfi2",
+      "evidence_category": "academic_evidence",
+      "source_type": "peer_reviewed_original_research",
+      "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power.",
+      "authors_or_organization": "Christopher J. Soto and Oliver P. John",
+      "year": 2017,
+      "doi": "10.1037/pspp0000096",
+      "public_url": "https://doi.org/10.1037/pspp0000096",
+      "access_date": "2026-07-14",
+      "supported_claim_ids": [
+        "claim.big_five.five_broad_dimensions",
+        "claim.big_five.hierarchical_domains_and_facets",
+        "claim.big_five.taxonomies_not_interchangeable"
+      ],
+      "supported_claim": "The BFI-2 operationalizes five broad domains and 15 facets in a hierarchical measurement model.",
+      "limitation": "BFI-2's 15 facets must not be presented as identical to a 10-aspect or 30-facet taxonomy, and this source does not validate FermatMind's assessment implementation.",
+      "applicable_page_families": [
+        "test_landing",
+        "model_hub",
+        "domain",
+        "facet_hub",
+        "facet_detail",
+        "article",
+        "technical_trust"
+      ],
+      "core_scientific_evidence_eligible": true,
+      "sole_scientific_evidence_eligible": true
+    },
+    {
+      "id": "academic.deyoung-quilty-peterson-2007-aspects",
+      "evidence_category": "academic_evidence",
+      "source_type": "peer_reviewed_original_research",
+      "title": "Between facets and domains: 10 aspects of the Big Five.",
+      "authors_or_organization": "Colin G. DeYoung, Lena C. Quilty, and Jordan B. Peterson",
+      "year": 2007,
+      "doi": "10.1037/0022-3514.93.5.880",
+      "public_url": "https://doi.org/10.1037/0022-3514.93.5.880",
+      "access_date": "2026-07-14",
+      "supported_claim_ids": [
+        "claim.big_five.hierarchical_domains_and_facets",
+        "claim.big_five.taxonomies_not_interchangeable"
+      ],
+      "supported_claim": "An alternative hierarchy identifies two intermediate aspects within each Big Five domain.",
+      "limitation": "The ten aspects are not interchangeable with BFI-2 facets or NEO/IPIP-style 30-facet navigation labels.",
+      "applicable_page_families": [
+        "model_hub",
+        "facet_hub",
+        "facet_detail",
+        "article",
+        "technical_trust"
+      ],
+      "core_scientific_evidence_eligible": true,
+      "sole_scientific_evidence_eligible": true
+    },
+    {
+      "id": "academic.soto-john-2009-ten-facets",
+      "evidence_category": "academic_evidence",
+      "source_type": "peer_reviewed_original_research",
+      "title": "Ten facet scales for the Big Five Inventory: Convergence with NEO PI-R facets, self-peer agreement, and discriminant validity.",
+      "authors_or_organization": "Christopher J. Soto and Oliver P. John",
+      "year": 2009,
+      "doi": "10.1016/j.jrp.2008.10.002",
+      "public_url": "https://doi.org/10.1016/j.jrp.2008.10.002",
+      "access_date": "2026-07-14",
+      "supported_claim_ids": [
+        "claim.big_five.hierarchical_domains_and_facets",
+        "claim.big_five.taxonomies_not_interchangeable"
+      ],
+      "supported_claim": "Facet-level measurement can add specificity beneath broad Big Five domains.",
+      "limitation": "Evidence about these ten BFI facet scales does not establish equivalence with other facet systems or authorize score conversion.",
+      "applicable_page_families": [
+        "facet_hub",
+        "facet_detail",
+        "article",
+        "technical_trust"
+      ],
+      "core_scientific_evidence_eligible": true,
+      "sole_scientific_evidence_eligible": true
+    },
+    {
+      "id": "academic.roberts-walton-viechtbauer-2006-change",
+      "evidence_category": "academic_evidence",
+      "source_type": "peer_reviewed_meta_analysis",
+      "title": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies.",
+      "authors_or_organization": "Brent W. Roberts, Kate E. Walton, and Wolfgang Viechtbauer",
+      "year": 2006,
+      "doi": "10.1037/0033-2909.132.1.1",
+      "public_url": "https://doi.org/10.1037/0033-2909.132.1.1",
+      "access_date": "2026-07-14",
+      "supported_claim_ids": [
+        "claim.big_five.group_level_change_is_possible"
+      ],
+      "supported_claim": "Longitudinal evidence shows patterns of mean-level personality-trait change across the life course.",
+      "limitation": "Group-level mean change does not predict how, why, or whether a particular individual will change, and does not support a guaranteed intervention outcome.",
+      "applicable_page_families": [
+        "model_hub",
+        "range",
+        "article",
+        "result_explainer",
+        "technical_trust"
+      ],
+      "core_scientific_evidence_eligible": true,
+      "sole_scientific_evidence_eligible": true
+    },
+    {
+      "id": "official.ipip-neo-facets-table",
+      "evidence_category": "official_product_evidence",
+      "source_type": "official_research_resource",
+      "title": "NEO Facets Table",
+      "authors_or_organization": "International Personality Item Pool, Oregon Research Institute",
+      "year": null,
+      "doi": null,
+      "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+      "access_date": "2026-07-14",
+      "supported_claim_ids": [
+        "claim.big_five.hierarchical_domains_and_facets",
+        "claim.big_five.taxonomies_not_interchangeable"
+      ],
+      "supported_claim": "The official IPIP resource documents corresponding public-domain scales for 30 NEO-style facet constructs.",
+      "limitation": "Correspondence does not establish identity with proprietary NEO instruments, BFI-2 facets, ten-aspect models, or FermatMind scores.",
+      "applicable_page_families": [
+        "facet_hub",
+        "facet_detail",
+        "technical_trust"
+      ],
+      "core_scientific_evidence_eligible": true,
+      "sole_scientific_evidence_eligible": false
+    },
+    {
+      "id": "official.fermatmind-public-contract-v2",
+      "evidence_category": "official_product_evidence",
+      "source_type": "backend_authority_contract",
+      "title": "FermatMind Personality Public Content Asset V2 contract",
+      "authors_or_organization": "FermatMind backend authority",
+      "year": 2026,
+      "doi": null,
+      "public_url": null,
+      "access_date": "2026-07-14",
+      "repository_path": "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-public-contract-03/public-contract-v2.schema.json",
+      "supported_claim_ids": [
+        "claim.fermatmind.visible_evidence_fields",
+        "claim.fermatmind.non_diagnostic_boundary"
+      ],
+      "supported_claim": "The backend V2 contract defines explicit visible source, claim mapping, limitation, editorial actor/date, media authority, and eligibility fields that fail closed by default.",
+      "limitation": "A data contract is product authority, not independent scientific validation and not evidence that any page is reviewed, published, indexable, or schema-eligible.",
+      "applicable_page_families": [
+        "test_landing",
+        "model_hub",
+        "domain",
+        "facet_hub",
+        "facet_detail",
+        "range",
+        "article",
+        "result_explainer",
+        "technical_trust"
+      ],
+      "core_scientific_evidence_eligible": false,
+      "sole_scientific_evidence_eligible": false
+    },
+    {
+      "id": "competitor.big-five-public-structure-benchmark-2026-07-13",
+      "evidence_category": "competitor_evidence",
+      "source_type": "read_only_public_structure_observation",
+      "title": "Big Five public landscape benchmark snapshot",
+      "authors_or_organization": "FermatMind read-only benchmark of publicly visible Truity surfaces",
+      "year": 2026,
+      "doi": null,
+      "public_url": null,
+      "access_date": "2026-07-14",
+      "repository_path": "fap-web/docs/seo/personality/big5-authority-v2-benchmark-01-live-evidence-2026-07-14.json",
+      "supported_claim_ids": [
+        "claim.benchmark.public_page_structure_only"
+      ],
+      "supported_claim": "The captured public landscape includes test, hub, domain, facet, report, and technical-document surface patterns.",
+      "limitation": "This snapshot is time-bound structural evidence only. Competitor copy, claims, ratings, prices, and technical documents are not FermatMind scientific or product authority and must not be copied.",
+      "applicable_page_families": [
+        "test_landing",
+        "model_hub",
+        "domain",
+        "facet_hub",
+        "facet_detail",
+        "technical_trust"
+      ],
+      "core_scientific_evidence_eligible": false,
+      "sole_scientific_evidence_eligible": false
+    },
+    {
+      "id": "internal.public-claim-boundary-matrix",
+      "evidence_category": "internal_repository_evidence",
+      "source_type": "repository_policy",
+      "title": "FermatMind public claim boundary matrix",
+      "authors_or_organization": "FermatMind repository policy",
+      "year": 2026,
+      "doi": null,
+      "public_url": null,
+      "access_date": "2026-07-14",
+      "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+      "supported_claim_ids": [
+        "claim.fermatmind.non_diagnostic_boundary"
+      ],
+      "supported_claim": "Public assessment content must remain non-diagnostic, non-deterministic, and outside hiring, admission, medical, financial, and legal decision use.",
+      "limitation": "Repository policy governs FermatMind claims but does not constitute peer-reviewed evidence about the Big Five model.",
+      "applicable_page_families": [
+        "test_landing",
+        "model_hub",
+        "domain",
+        "facet_hub",
+        "facet_detail",
+        "range",
+        "article",
+        "result_explainer",
+        "technical_trust"
+      ],
+      "core_scientific_evidence_eligible": false,
+      "sole_scientific_evidence_eligible": false
+    },
+    {
+      "id": "inference.taxonomy-separation-editorial-rule",
+      "evidence_category": "inference",
+      "source_type": "editorial_synthesis",
+      "title": "Taxonomy separation editorial inference",
+      "authors_or_organization": "FermatMind editorial synthesis; human review required",
+      "year": 2026,
+      "doi": null,
+      "public_url": null,
+      "access_date": "2026-07-14",
+      "supported_claim_ids": [
+        "claim.big_five.taxonomies_not_interchangeable"
+      ],
+      "supported_claim": "When a page uses a specific facet taxonomy, it must name that taxonomy and avoid presenting alternative facet or aspect systems as equivalent.",
+      "limitation": "This is a conservative editorial inference from multiple sources, not a standalone scientific source; a human reviewer must approve page-level wording.",
+      "applicable_page_families": [
+        "facet_hub",
+        "facet_detail",
+        "article",
+        "technical_trust"
+      ],
+      "core_scientific_evidence_eligible": false,
+      "sole_scientific_evidence_eligible": false
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim.big_five.five_broad_dimensions",
+      "classification": "core_scientific",
+      "status": "source_supported",
+      "allowed_summary_en": "The Big Five organizes personality-trait descriptions into five broad dimensions.",
+      "allowed_summary_zh_cn": "大五人格将人格特质描述组织为五个宽泛维度。",
+      "source_ids": [
+        "academic.goldberg-1990-big-five-structure",
+        "academic.soto-john-2017-bfi2"
+      ],
+      "primary_source_ids": [
+        "academic.goldberg-1990-big-five-structure",
+        "academic.soto-john-2017-bfi2"
+      ],
+      "applicable_page_families": [
+        "test_landing",
+        "model_hub",
+        "domain",
+        "article",
+        "technical_trust"
+      ],
+      "limitation": "Five broad dimensions do not define a whole person, establish a diagnosis, or determine an outcome.",
+      "requires_human_review": true,
+      "allowed_as_public_claim": true
+    },
+    {
+      "id": "claim.big_five.hierarchical_domains_and_facets",
+      "classification": "core_scientific",
+      "status": "source_supported",
+      "allowed_summary_en": "Broad Big Five domains can be described at more specific facet or aspect levels, depending on the named measurement model.",
+      "allowed_summary_zh_cn": "在明确测量模型的前提下，大五人格的宽泛维度可以进一步用更具体的侧面或方面来描述。",
+      "source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "academic.deyoung-quilty-peterson-2007-aspects",
+        "academic.soto-john-2009-ten-facets",
+        "official.ipip-neo-facets-table"
+      ],
+      "primary_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "academic.deyoung-quilty-peterson-2007-aspects",
+        "academic.soto-john-2009-ten-facets"
+      ],
+      "applicable_page_families": [
+        "model_hub",
+        "domain",
+        "facet_hub",
+        "facet_detail",
+        "article",
+        "technical_trust"
+      ],
+      "limitation": "A page must identify its taxonomy; facet counts and labels from different models are not silently merged.",
+      "requires_human_review": true,
+      "allowed_as_public_claim": true
+    },
+    {
+      "id": "claim.big_five.group_level_change_is_possible",
+      "classification": "core_scientific",
+      "status": "source_supported",
+      "allowed_summary_en": "Longitudinal research finds group-level patterns of mean trait change across the life course.",
+      "allowed_summary_zh_cn": "纵向研究发现，人格特质均值在生命历程中存在群体层面的变化模式。",
+      "source_ids": [
+        "academic.roberts-walton-viechtbauer-2006-change"
+      ],
+      "primary_source_ids": [
+        "academic.roberts-walton-viechtbauer-2006-change"
+      ],
+      "applicable_page_families": [
+        "model_hub",
+        "range",
+        "article",
+        "result_explainer",
+        "technical_trust"
+      ],
+      "limitation": "This does not predict individual change or guarantee that a specific exercise, event, or intervention will change a person's score.",
+      "requires_human_review": true,
+      "allowed_as_public_claim": true
+    },
+    {
+      "id": "claim.big_five.taxonomies_not_interchangeable",
+      "classification": "editorial_inference",
+      "status": "inference_requires_review",
+      "allowed_summary_en": "Named facet and aspect systems should be kept distinct rather than presented as interchangeable.",
+      "allowed_summary_zh_cn": "已命名的侧面体系与方面体系应保持区分，不应被表述为可互换。",
+      "source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "academic.deyoung-quilty-peterson-2007-aspects",
+        "academic.soto-john-2009-ten-facets",
+        "official.ipip-neo-facets-table",
+        "inference.taxonomy-separation-editorial-rule"
+      ],
+      "primary_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "academic.deyoung-quilty-peterson-2007-aspects",
+        "academic.soto-john-2009-ten-facets"
+      ],
+      "applicable_page_families": [
+        "facet_hub",
+        "facet_detail",
+        "article",
+        "technical_trust"
+      ],
+      "limitation": "This is an editorial synthesis. Page-level language remains blocked until the chosen taxonomy and reviewer are explicit.",
+      "requires_human_review": true,
+      "allowed_as_public_claim": false
+    },
+    {
+      "id": "claim.fermatmind.non_diagnostic_boundary",
+      "classification": "product_boundary",
+      "status": "source_supported",
+      "allowed_summary_en": "FermatMind Big Five content is a structured reference for reflection, not a diagnosis or deterministic decision tool.",
+      "allowed_summary_zh_cn": "费马测试的大五人格内容是用于反思的结构化参考，不是诊断或决定性决策工具。",
+      "source_ids": [
+        "official.fermatmind-public-contract-v2",
+        "internal.public-claim-boundary-matrix"
+      ],
+      "primary_source_ids": [],
+      "applicable_page_families": [
+        "test_landing",
+        "model_hub",
+        "domain",
+        "facet_hub",
+        "facet_detail",
+        "range",
+        "article",
+        "result_explainer",
+        "technical_trust"
+      ],
+      "limitation": "This is a FermatMind product boundary, not a scientific validity or regulatory claim.",
+      "requires_human_review": true,
+      "allowed_as_public_claim": true
+    },
+    {
+      "id": "claim.fermatmind.visible_evidence_fields",
+      "classification": "product_authority",
+      "status": "source_supported",
+      "allowed_summary_en": "The V2 backend contract can carry visible sources, claim mappings, limitations, editorial actors and dates, and media authority with explicit eligibility gates.",
+      "allowed_summary_zh_cn": "V2 后端契约可承载可见来源、论断映射、局限、编辑责任人与日期、媒体权威字段，并使用显式资格 gate。",
+      "source_ids": [
+        "official.fermatmind-public-contract-v2"
+      ],
+      "primary_source_ids": [],
+      "applicable_page_families": [
+        "technical_trust"
+      ],
+      "limitation": "Field availability does not prove that a page is reviewed, published, indexable, schema-eligible, or cited by a search/AI system.",
+      "requires_human_review": false,
+      "allowed_as_public_claim": false
+    },
+    {
+      "id": "claim.benchmark.public_page_structure_only",
+      "classification": "structural_benchmark",
+      "status": "source_supported",
+      "allowed_summary_en": "The read-only competitor snapshot records public page-family and visible evidence patterns for structural comparison.",
+      "allowed_summary_zh_cn": "只读竞品快照记录公开页面族与可见证据模式，仅供结构比较。",
+      "source_ids": [
+        "competitor.big-five-public-structure-benchmark-2026-07-13"
+      ],
+      "primary_source_ids": [],
+      "applicable_page_families": [
+        "test_landing",
+        "model_hub",
+        "domain",
+        "facet_hub",
+        "facet_detail",
+        "technical_trust"
+      ],
+      "limitation": "Competitor observations cannot support FermatMind scientific, superiority, accuracy, pricing, rating, or endorsement claims.",
+      "requires_human_review": false,
+      "allowed_as_public_claim": false
+    }
+  ],
+  "forbidden_claims": [
+    "absolute accuracy or most-accurate positioning",
+    "clinical diagnosis or mental-health screening",
+    "hiring, admission, legal, financial, salary, or relationship outcome prediction",
+    "specific reliability, validity, norm, or percentile numbers without approved public evidence",
+    "facet-system equivalence or score conversion without direct validation",
+    "competitor copy or secondary media used as sole scientific evidence",
+    "schema, sitemap, llms, search ranking, AI citation, or indexability guarantees"
+  ],
+  "safety_boundaries": {
+    "cms_mutation_performed": false,
+    "database_mutation_performed": false,
+    "production_write_performed": false,
+    "deploy_performed": false,
+    "indexability_mutation_performed": false,
+    "schema_activation_performed": false,
+    "search_submission_performed": false,
+    "private_or_tokenized_url_accessed": false
+  }
+}
