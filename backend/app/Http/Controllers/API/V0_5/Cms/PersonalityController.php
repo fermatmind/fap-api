@@ -25,9 +25,12 @@ use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Throwable;
 
 class PersonalityController extends Controller
 {
+    private const PUBLIC_READ_CACHE_HEADER = 'X-Fermat-Public-Read-Cache';
+
     private const MBTI64_V85_SECTION_PREFIX = 'v8_5_';
 
     private const MBTI64_V85_DUPLICATE_LEGACY_SECTION_KEYS = [
@@ -124,74 +127,92 @@ class PersonalityController extends Controller
             return $validated;
         }
 
-        $routeProfile = $this->personalityProfileService->getPublicDetailRouteProfileByType(
-            $type,
-            $validated['org_id'],
-            $validated['scale_code'],
-            $validated['locale'],
-        );
+        try {
+            $routeProfile = $this->personalityProfileService->getPublicDetailRouteProfileByType(
+                $type,
+                $validated['org_id'],
+                $validated['scale_code'],
+                $validated['locale'],
+            );
+        } catch (Throwable $throwable) {
+            return $this->stalePublicReadResponseOrThrow('detail', $type, $validated, $throwable);
+        }
 
         if (! is_array($routeProfile)) {
-            return $this->notFoundResponse('personality profile not found.');
+            $this->personalityPublicReadModelCache->forgetType(
+                $type, $validated['locale'], $validated['org_id'], $validated['scale_code']
+            );
+
+            return $this->notFoundResponse('personality profile not found.')
+                ->header(self::PUBLIC_READ_CACHE_HEADER, 'miss');
         }
 
         /** @var PersonalityProfile $profile */
         $profile = $routeProfile['profile'];
         /** @var PersonalityProfileVariant|null $variant */
         $variant = $routeProfile['variant'];
-        $cacheVersion = $this->publicReadModelVersion($profile, $variant);
-        $cachedPayload = $this->personalityPublicReadModelCache->get(
+        try {
+            $cacheVersion = $this->publicReadModelVersion($profile, $variant);
+        } catch (Throwable $throwable) {
+            return $this->stalePublicReadResponseOrThrow('detail', $type, $validated, $throwable);
+        }
+        $cachedRead = $this->personalityPublicReadModelCache->read(
             'detail', $type, $validated['locale'], $validated['org_id'], $validated['scale_code'], $cacheVersion
         );
-        if (is_array($cachedPayload)) {
-            return response()->json($cachedPayload);
+        if (is_array($cachedRead['payload'])) {
+            return $this->publicReadResponse($cachedRead['payload'], $cachedRead['state']);
         }
-        $projection = $this->sanitizePublicProjection(
-            $this->personalityProfileService->buildPublicProjection($profile, $variant)
-        );
-        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
-            $this->personalityProfileSeoService->buildMeta($profile, $variant)
-        );
-        $isIndexable = $this->profileAllowsIndexing($profile, $meta);
-        $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
-        $sections = $this->publicSectionPayloads($profile, $variant);
-        $internalLinks = $this->content15ProfileInternalLinks($sections, $validated['locale']);
-        $seoSurface = $this->buildSeoSurface($meta, $jsonLd, $this->personalitySeoSurfaceType($profile));
-        $landingSurface = $this->buildDetailLandingSurface(
-            $profile,
-            $variant,
-            $projection,
-            $validated['locale'],
-            $isIndexable,
-        );
 
-        $payload = [
-            'ok' => true,
-            'profile' => $this->profileDetailPayload($profile, $variant, $isIndexable),
-            'sections' => $sections,
-            'internal_links' => $internalLinks,
-            'seo_meta' => $this->seoMetaPayload($profile, $variant),
-            'seo_surface_v1' => $seoSurface,
-            'landing_surface_v1' => $landingSurface,
-            'answer_surface_v1' => $this->buildDetailAnswerSurface(
+        try {
+            $projection = $this->sanitizePublicProjection(
+                $this->personalityProfileService->buildPublicProjection($profile, $variant)
+            );
+            $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
+                $this->personalityProfileSeoService->buildMeta($profile, $variant)
+            );
+            $isIndexable = $this->profileAllowsIndexing($profile, $meta);
+            $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
+            $sections = $this->publicSectionPayloads($profile, $variant);
+            $internalLinks = $this->content15ProfileInternalLinks($sections, $validated['locale']);
+            $seoSurface = $this->buildSeoSurface($meta, $jsonLd, $this->personalitySeoSurfaceType($profile));
+            $landingSurface = $this->buildDetailLandingSurface(
                 $profile,
                 $variant,
                 $projection,
-                $sections,
-                $seoSurface,
-                $landingSurface,
                 $validated['locale'],
-                $internalLinks,
                 $isIndexable,
-            ),
-        ];
+            );
 
-        if ($this->isMbtiProfile($profile)) {
-            $payload['mbti_public_projection_v1'] = $projection;
-        }
+            $payload = [
+                'ok' => true,
+                'profile' => $this->profileDetailPayload($profile, $variant, $isIndexable),
+                'sections' => $sections,
+                'internal_links' => $internalLinks,
+                'seo_meta' => $this->seoMetaPayload($profile, $variant),
+                'seo_surface_v1' => $seoSurface,
+                'landing_surface_v1' => $landingSurface,
+                'answer_surface_v1' => $this->buildDetailAnswerSurface(
+                    $profile,
+                    $variant,
+                    $projection,
+                    $sections,
+                    $seoSurface,
+                    $landingSurface,
+                    $validated['locale'],
+                    $internalLinks,
+                    $isIndexable,
+                ),
+            ];
 
-        if (! $variant instanceof PersonalityProfileVariant) {
-            $payload['personality_public_projection_v1'] = $projection;
+            if ($this->isMbtiProfile($profile)) {
+                $payload['mbti_public_projection_v1'] = $projection;
+            }
+
+            if (! $variant instanceof PersonalityProfileVariant) {
+                $payload['personality_public_projection_v1'] = $projection;
+            }
+        } catch (Throwable $throwable) {
+            return $this->stalePublicReadResponseOrThrow('detail', $type, $validated, $throwable);
         }
 
         $this->personalityPublicReadModelCache->put(
@@ -204,7 +225,7 @@ class PersonalityController extends Controller
             $payload,
         );
 
-        return response()->json($payload);
+        return $this->publicReadResponse($payload, $cachedRead['state']);
     }
 
     public function seo(Request $request, string $type): JsonResponse
@@ -214,38 +235,56 @@ class PersonalityController extends Controller
             return $validated;
         }
 
-        $routeProfile = $this->personalityProfileService->getPublicDetailRouteProfileByType(
-            $type,
-            $validated['org_id'],
-            $validated['scale_code'],
-            $validated['locale'],
-        );
+        try {
+            $routeProfile = $this->personalityProfileService->getPublicDetailRouteProfileByType(
+                $type,
+                $validated['org_id'],
+                $validated['scale_code'],
+                $validated['locale'],
+            );
+        } catch (Throwable $throwable) {
+            return $this->stalePublicReadResponseOrThrow('seo', $type, $validated, $throwable);
+        }
 
         if (! is_array($routeProfile)) {
-            return response()->json(['error' => 'not found'], 404);
+            $this->personalityPublicReadModelCache->forgetType(
+                $type, $validated['locale'], $validated['org_id'], $validated['scale_code']
+            );
+
+            return response()->json(['error' => 'not found'], 404)
+                ->header(self::PUBLIC_READ_CACHE_HEADER, 'miss');
         }
 
         /** @var PersonalityProfile $profile */
         $profile = $routeProfile['profile'];
         /** @var PersonalityProfileVariant|null $variant */
         $variant = $routeProfile['variant'];
-        $cacheVersion = $this->publicReadModelVersion($profile, $variant);
-        $cachedPayload = $this->personalityPublicReadModelCache->get(
+        try {
+            $cacheVersion = $this->publicReadModelVersion($profile, $variant);
+        } catch (Throwable $throwable) {
+            return $this->stalePublicReadResponseOrThrow('seo', $type, $validated, $throwable);
+        }
+        $cachedRead = $this->personalityPublicReadModelCache->read(
             'seo', $type, $validated['locale'], $validated['org_id'], $validated['scale_code'], $cacheVersion
         );
-        if (is_array($cachedPayload)) {
-            return response()->json($cachedPayload);
+        if (is_array($cachedRead['payload'])) {
+            return $this->publicReadResponse($cachedRead['payload'], $cachedRead['state']);
         }
-        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
-            $this->personalityProfileSeoService->buildMeta($profile, $variant)
-        );
-        $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
 
-        $payload = [
-            'meta' => $meta,
-            'jsonld' => $jsonLd,
-            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, $this->personalitySeoSurfaceType($profile)),
-        ];
+        try {
+            $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
+                $this->personalityProfileSeoService->buildMeta($profile, $variant)
+            );
+            $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
+
+            $payload = [
+                'meta' => $meta,
+                'jsonld' => $jsonLd,
+                'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, $this->personalitySeoSurfaceType($profile)),
+            ];
+        } catch (Throwable $throwable) {
+            return $this->stalePublicReadResponseOrThrow('seo', $type, $validated, $throwable);
+        }
         $this->personalityPublicReadModelCache->put(
             'seo',
             $type,
@@ -256,7 +295,7 @@ class PersonalityController extends Controller
             $payload,
         );
 
-        return response()->json($payload);
+        return $this->publicReadResponse($payload, $cachedRead['state']);
     }
 
     public function comparisonIndex(Request $request): JsonResponse
@@ -2265,6 +2304,38 @@ class PersonalityController extends Controller
             'seo_title' => $variantSeoMeta?->seo_title ?? $profileSeoMeta?->seo_title,
             'seo_description' => $variantSeoMeta?->seo_description ?? $profileSeoMeta?->seo_description,
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private function publicReadResponse(array $payload, string $cacheState): JsonResponse
+    {
+        return response()->json($payload)
+            ->header(self::PUBLIC_READ_CACHE_HEADER, $cacheState);
+    }
+
+    /**
+     * @param  array{org_id:int,scale_code:string,locale:string}  $validated
+     */
+    private function stalePublicReadResponseOrThrow(
+        string $surface,
+        string $type,
+        array $validated,
+        Throwable $throwable,
+    ): JsonResponse {
+        $staleRead = $this->personalityPublicReadModelCache->stale(
+            $surface,
+            $type,
+            $validated['locale'],
+            $validated['org_id'],
+            $validated['scale_code'],
+        );
+        if (is_array($staleRead['payload'])) {
+            return $this->publicReadResponse($staleRead['payload'], $staleRead['state']);
+        }
+
+        throw $throwable;
     }
 
     /**
