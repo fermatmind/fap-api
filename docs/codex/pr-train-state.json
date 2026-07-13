@@ -89046,5 +89046,84 @@
         "note": "All required GitHub checks passed for PR #3026; PR body, changed files, scope, and merge policy were revalidated. Ready to squash merge. No production action occurred in this PR."
       }
     ]
+  },
+  "MBTI-CMS-PROFILE-37": {
+    "id": "MBTI-CMS-PROFILE-37",
+    "repo": "fap-api",
+    "title": "MBTI-CMS-PROFILE-37: dry-run all 32 Chinese MBTI profiles",
+    "base": "main",
+    "branch": "codex/mbti-cms-profile-37-full-dry-run",
+    "depends_on": [
+      "MBTI-FULL-QA-36"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "2148630c9f945d1e49b99aa396ad74b41740c618",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3027",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "search_channel_action": false,
+    "llms_release_execution": false,
+    "deploy_allowed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The user explicitly authorized registration of the full 15-item MBTI Chinese asset PR train in fap-api and fap-web manifest/state ledgers."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "Cross-repository dependency MBTI-FULL-QA-36 is GitHub PR #1736 MERGED with merge commit 4d0be1e164348bfe41ea262b7a6baa6eaee7c1ff, and fap-web origin/main contains that commit."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Focused 32-Profile dry-run test passed 4 tests/36 assertions; legacy Profile dry-run regression passed 4 tests/40 assertions; PersonalityPublicApiTest passed 23 tests/3250 assertions; scoped Pint, full ci_verify_mbti, YAML/JSON parsing, diff validation, and the exact four source packages against an ephemeral seeded SQLite target passed 32/32 with 28 repair, 4 verify-only, and zero writes."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "After the exact two-file classifier repair, PR #3027 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-13T10:00:00+08:00",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started from a clean detached fap-api origin/main worktree after verifying the cross-repository MBTI-FULL-QA-36 merge. Scope is a no-write dry-run only for the four approved Chinese Profile asset packages; comparison work, CMS writes, indexability, feeds, GSC, and deploy remain excluded."
+      },
+      {
+        "at": "2026-07-13T19:05:00+08:00",
+        "from": "in_progress",
+        "to": "local_validation_passed",
+        "note": "All scoped local checks passed. The exact four fap-web source packages were additionally validated against an ephemeral seeded SQLite target: 32/32 records, 28 repair candidates, four verify-only records, deterministic idempotency, and zero CMS writes."
+      },
+      {
+        "at": "2026-07-13T19:08:00+08:00",
+        "from": "local_validation_passed",
+        "to": "pr_open",
+        "note": "Opened GitHub PR #3027 from the scoped branch after successful local validation. Required checks are pending; no CMS or production action occurred."
+      },
+      {
+        "at": "2026-07-13T19:30:00+08:00",
+        "from": "pr_open",
+        "to": "github_checks_failed_current_scope_fix_in_progress",
+        "note": "Inspected run 29245914645. verify-bigfive failed because its runtime-freeze classifier omitted the two new no-write MBTI full Profile dry-run files. Repair is limited to an exact classifier allowlist plus regression test within this PR; no authority, content, CMS, or runtime route behavior changes."
+      },
+      {
+        "at": "2026-07-13T20:15:00+08:00",
+        "from": "github_checks_failed_current_scope_fix_in_progress",
+        "to": "ready_to_merge",
+        "note": "Pushed the exact two-file classifier repair at 2148630c9f945d1e49b99aa396ad74b41740c618. All required GitHub checks passed; PR scope and merge policy were revalidated. Ready to squash merge."
+      }
+    ]
   }
 }
