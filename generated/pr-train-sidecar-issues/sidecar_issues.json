@@ -466,5 +466,39 @@
     "required_checks_affected": false,
     "recommended_follow_up": "Authorize ENNEAGRAM-LLMS-TXT-FRONTEND-ENUMERATION-01 in fap-web before executing ENNEAGRAM-LLMS-TXT-RELEASE-01; enumerate only backend assets whose public API llms_eligible flag is true and preserve zero Enneagram llms-full membership.",
     "train_continued": true
+  },
+  {
+    "repo": "fap-api",
+    "pr_id": "PUBLIC-STABILITY-API-01",
+    "branch": "codex/public-stability-api-01",
+    "blocker_type": "pre_existing_required_test_baseline_failure",
+    "evidence": [
+      "composer test surfaced multiple existing baseline failures and exceeded Composer's 300-second timeout; examples include CareerLiveAcceptance1048CloseoutPlannerTest, ServiceLayerBoundaryTest, Enneagram history tests, and existing Career API suites.",
+      "Focused rerun deterministically expected pass but received blocked at line 22 because the fixture lacks explicit sitemap, llms, and llms-full forbidden-exposure evidence.",
+      "The failing test, planner, and publication gate match origin/main blobs b42ecd1c9ebb3f62270bbb2c40573127458b99d3, 1a7748de7017f66f88cc36ec47a8e799b17b67d0, and b25945c13989ac7e490bad48c48db57b33264dbc.",
+      "A focused ServiceLayerBoundaryTest rerun fails on five unchanged service-layer HTTP references; none point to API-01 files."
+    ],
+    "why_not_current_pr_scope": "Career audit planner and fixture paths are outside API-01's authorized public runtime metrics scope and are unrelated to its changes.",
+    "required_checks_affected": true,
+    "affected_check": "cd backend && composer test",
+    "recommended_follow_up": "Completed in independent baseline repair PR #3033, merged at 082a30f6e40173ee50de1110346d4c787c1dbf13 with all required checks green. API-01 resumed from repaired main.",
+    "train_continued": true
+  },
+  {
+    "repo": "fap-api",
+    "pr_id": "PUBLIC-STABILITY-API-01",
+    "branch": "codex/public-stability-api-01",
+    "blocker_type": "local_full_suite_process_memory_exhaustion",
+    "evidence": [
+      "The first resumed composer test progressed through the repository suite, then the existing MbtiReadPathParityContractTest PDF case exhausted the 1 GiB PHP process limit in vendor/mpdf/mpdf/src/TTFontFile.php.",
+      "The exact failing PDF test passed independently with 35 assertions in 2.28 seconds, showing the failure is long-process memory accumulation rather than the API-01 runtime metrics scope.",
+      "The only current-scope assertion failure in that run was NoEmptyThrowableCatchTest; explicit fail-open return/continue statements were added and the focused gate then passed.",
+      "A full all-suite rerun used an exact copy of backend/phpunit.xml with only the process memory limit changed from 1024M to 2048M; it passed 7351 tests and 507190 assertions in 15:24 with zero failures, 1 existing deprecation, and 39 skipped tests. The temporary config was deleted and was not added to the PR."
+    ],
+    "why_not_current_pr_scope": "The fatal stack is entirely in the existing MBTI PDF document service, mPDF vendor font metrics, and its parity test. API-01 changes only aggregate public content metrics and does not touch PDF generation.",
+    "required_checks_affected": true,
+    "affected_check": "cd backend && composer test",
+    "recommended_follow_up": "Track the repository-wide single-process PHPUnit memory baseline separately; API-01 has completed the identical all-suite test selection under a temporary 2 GiB process ceiling, and GitHub required checks remain mandatory before merge.",
+    "train_continued": true
   }
 ]

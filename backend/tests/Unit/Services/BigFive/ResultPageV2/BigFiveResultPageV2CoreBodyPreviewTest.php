@@ -5183,6 +5183,61 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', routeChangedLines: $routeChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_public_content_runtime_metrics_only(): void
+    {
+        $allowed = [
+            'backend/app/Http/Controllers/API/V0_5/Ops/PublicContentRuntimeMetricsController.php',
+            'backend/app/Http/Middleware/RecordPublicContentRuntime.php',
+            'backend/app/Models/PublicContentRuntimeDaily.php',
+            'backend/app/Services/Ops/PublicContentRuntimeMetricsService.php',
+            'backend/bootstrap/app.php',
+            'backend/database/migrations/2026_07_13_000100_create_public_content_runtime_daily_table.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_5\\Ops\\PublicContentRuntimeMetricsController;',
+            '+use App\\Http\\Middleware\\RecordPublicContentRuntime;',
+            '-    Route::middleware(PublicApiCacheHeaders::class)->group(function () {',
+            '+    Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {',
+            '-    Route::middleware(PublicApiCacheHeaders::class)->group(function () {',
+            '+    Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {',
+            '-    Route::middleware(PublicApiCacheHeaders::class)->group(function () {',
+            '+    Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {',
+            '-    Route::middleware(PublicApiCacheHeaders::class)->group(function () {',
+            '+    Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {',
+            '+    Route::prefix(\'ops/public-content-health\')',
+            '+        ->middleware([',
+            '+            ...$cmsAdminMiddleware,',
+            '+            EnsureCmsAdminAuthorized::class.\':read\',',
+            '+        ])',
+            '+        ->group(function () {',
+            '+            Route::get(\'/runtime\', PublicContentRuntimeMetricsController::class)',
+            '+                ->name(\'api.v0_5.ops.public_content_health.runtime\');',
+            '+        });',
+        ];
+        $bootstrapChangedLines = [
+            '+        $schedule->call(static function (): void {',
+            '+            app(\\App\\Services\\Ops\\PublicContentRuntimeMetricsService::class)->rollupPending();',
+            '+        })->name(\'public-content-runtime:aggregate-rollup\')->everyMinute()->withoutOverlapping();',
+        ];
+        $blocked = ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $allowed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+            bootstrapAppChangedLines: $bootstrapChangedLines,
+        ));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges(
+            $blocked,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+            bootstrapAppChangedLines: $bootstrapChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_personality_public_read_model_cache(): void
     {
         $changed = [
@@ -6441,6 +6496,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isPublicContentRuntimeMetricsFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsPublicContentRuntimeMetricsOnly(
+                    $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                )
+            ) {
+                continue;
+            }
+
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsResearchBackendMvpOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
@@ -7121,6 +7189,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsCareerPublicAuthorityCacheVerifyOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
+                    || $this->bootstrapDiffIsPublicContentRuntimeMetricsOnly(
+                        $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    )
                 )
             ) {
                 continue;
@@ -7136,6 +7207,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsIqMethodPagesCmsDraftImporterOnly($bootstrapAppChangedLines ?? [])
                     || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly($bootstrapAppChangedLines ?? [])
                     || $this->kernelDiffIsCareerPublicAuthorityCacheVerifyOnly($bootstrapAppChangedLines ?? [])
+                    || $this->bootstrapDiffIsPublicContentRuntimeMetricsOnly($bootstrapAppChangedLines ?? [])
                 )
             ) {
                 continue;
@@ -12123,6 +12195,106 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         sort($removed);
 
         return $hasImport && $wrapperCount > 0 && $added === $removed;
+    }
+
+    private function isPublicContentRuntimeMetricsFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Ops/PublicContentRuntimeMetricsController.php',
+            'backend/app/Http/Middleware/RecordPublicContentRuntime.php',
+            'backend/app/Models/PublicContentRuntimeDaily.php',
+            'backend/app/Services/Ops/PublicContentRuntimeMetricsService.php',
+            'backend/database/migrations/2026_07_13_000100_create_public_content_runtime_daily_table.php',
+        ], true);
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsPublicContentRuntimeMetricsOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowed = [
+            'use App\\Http\\Controllers\\API\\V0_5\\Ops\\PublicContentRuntimeMetricsController;',
+            'use App\\Http\\Middleware\\RecordPublicContentRuntime;',
+            'Route::middleware(PublicApiCacheHeaders::class)->group(function () {',
+            'Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {',
+            'Route::prefix(\'ops/public-content-health\')',
+            '->middleware([',
+            '...$cmsAdminMiddleware,',
+            'EnsureCmsAdminAuthorized::class.\':read\',',
+            '])',
+            '->group(function () {',
+            'Route::get(\'/runtime\', PublicContentRuntimeMetricsController::class)',
+            '->name(\'api.v0_5.ops.public_content_health.runtime\');',
+            '});',
+        ];
+        $controllerImport = false;
+        $middlewareImport = false;
+        $opsRoute = false;
+        $wrapperAdded = 0;
+        $wrapperRemoved = 0;
+
+        foreach ($changedLines as $line) {
+            if (! is_string($line) || ! in_array($line[0] ?? '', ['+', '-'], true)) {
+                continue;
+            }
+
+            $normalized = trim(substr($line, 1));
+            if ($normalized === '') {
+                continue;
+            }
+            if (! in_array($normalized, $allowed, true)) {
+                return false;
+            }
+
+            $controllerImport = $controllerImport
+                || ($line[0] === '+' && $normalized === $allowed[0]);
+            $middlewareImport = $middlewareImport
+                || ($line[0] === '+' && $normalized === $allowed[1]);
+            $opsRoute = $opsRoute
+                || ($line[0] === '+' && $normalized === "Route::get('/runtime', PublicContentRuntimeMetricsController::class)");
+            if ($line[0] === '+' && $normalized === $allowed[3]) {
+                $wrapperAdded++;
+            }
+            if ($line[0] === '-' && $normalized === $allowed[2]) {
+                $wrapperRemoved++;
+            }
+        }
+
+        return $controllerImport
+            && $middlewareImport
+            && $opsRoute
+            && $wrapperAdded === 4
+            && $wrapperRemoved === 4;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function bootstrapDiffIsPublicContentRuntimeMetricsOnly(array $changedLines): bool
+    {
+        $expected = [
+            '$schedule->call(static function (): void {',
+            'app(\\App\\Services\\Ops\\PublicContentRuntimeMetricsService::class)->rollupPending();',
+            '})->name(\'public-content-runtime:aggregate-rollup\')->everyMinute()->withoutOverlapping();',
+        ];
+        $actual = [];
+
+        foreach ($changedLines as $line) {
+            if (! is_string($line) || ($line[0] ?? '') !== '+') {
+                return false;
+            }
+            $normalized = trim(substr($line, 1));
+            if ($normalized !== '') {
+                $actual[] = $normalized;
+            }
+        }
+
+        return $actual === $expected;
     }
 
     private function routeDiffIsResearchBackendMvpOnly(array $changedLines): bool

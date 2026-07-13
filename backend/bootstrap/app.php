@@ -65,6 +65,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('seo:warm-sitemap-source-cache --json')->everyTenMinutes()->withoutOverlapping();
         $schedule->command('career:warm-public-authority-cache --verify-only --json')->everyTenMinutes()->withoutOverlapping();
         $schedule->command('career:runtime-slo-check --json')->everyFiveMinutes()->withoutOverlapping();
+        $schedule->call(static function (): void {
+            app(\App\Services\Ops\PublicContentRuntimeMetricsService::class)->rollupPending();
+        })->name('public-content-runtime:aggregate-rollup')->everyMinute()->withoutOverlapping();
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([

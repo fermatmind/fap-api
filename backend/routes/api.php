@@ -83,6 +83,7 @@ use App\Http\Controllers\API\V0_5\Foundation\DailyGivingRecordController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkOverrideController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkPatchController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkReviewQueueController;
+use App\Http\Controllers\API\V0_5\Ops\PublicContentRuntimeMetricsController;
 use App\Http\Controllers\API\V0_5\Ops\SeoIntel\SeoIntelDashboardController;
 use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Http\Controllers\HealthzController;
@@ -98,6 +99,7 @@ use App\Http\Middleware\NormalizeApiErrorContract;
 use App\Http\Middleware\OpsAccessControl;
 use App\Http\Middleware\PartnerApiKeyAuth;
 use App\Http\Middleware\PublicApiCacheHeaders;
+use App\Http\Middleware\RecordPublicContentRuntime;
 use App\Http\Middleware\ResolveOrgContext;
 use App\Http\Middleware\SetOpsRequestContext;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -521,7 +523,7 @@ Route::prefix('v0.4')->middleware(NormalizeApiErrorContract::class)->group(funct
 Route::prefix('v0.5')->group(function () {
     Route::post('/career/attribution/events', [CareerAttributionEventController::class, 'store'])
         ->middleware('throttle:api_track');
-    Route::middleware(PublicApiCacheHeaders::class)->group(function () {
+    Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {
         Route::get('/career/family/{slug}', [CareerFamilyHubController::class, 'show']);
         Route::get('/career/first-wave/discoverability-manifest', [CareerFirstWaveDiscoverabilityManifestController::class, 'show']);
         Route::get('/career/first-wave/jobs/{slug}/next-step-links', [CareerFirstWaveNextStepLinksController::class, 'show']);
@@ -551,7 +553,7 @@ Route::prefix('v0.5')->group(function () {
     Route::post('/career/shortlist', [CareerShortlistController::class, 'store'])
         ->middleware('throttle:api_track');
     Route::get('/career/shortlist/state', [CareerShortlistController::class, 'show']);
-    Route::middleware(PublicApiCacheHeaders::class)->group(function () {
+    Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {
         Route::get('/career/runtime-config', [CareerRuntimeConfigController::class, 'show']);
         Route::get('/career/transition-preview', [CareerTransitionPreviewController::class, 'show']);
         Route::get('/career/search', [CareerSearchController::class, 'index']);
@@ -571,7 +573,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/foundation/giving-records/months/{yearMonth}', [DailyGivingRecordController::class, 'monthRecords']);
     Route::get('/foundation/giving-records', [DailyGivingRecordController::class, 'index']);
     Route::get('/foundation/giving-records/{recordCode}', [DailyGivingRecordController::class, 'show']);
-    Route::middleware(PublicApiCacheHeaders::class)->group(function () {
+    Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {
         Route::get('/articles', [ArticleController::class, 'index']);
         Route::get('/articles/{slug}', [ArticleController::class, 'show']);
         Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
@@ -619,6 +621,16 @@ Route::prefix('v0.5')->group(function () {
                 ->name('api.v0_5.ops.seo_intel.conversion_funnel');
         });
 
+    Route::prefix('ops/public-content-health')
+        ->middleware([
+            ...$cmsAdminMiddleware,
+            EnsureCmsAdminAuthorized::class.':read',
+        ])
+        ->group(function () {
+            Route::get('/runtime', PublicContentRuntimeMetricsController::class)
+                ->name('api.v0_5.ops.public_content_health.runtime');
+        });
+
     Route::middleware([
         ...$cmsAdminMiddleware,
         EnsureCmsAdminAuthorized::class.':read',
@@ -647,7 +659,7 @@ Route::prefix('v0.5')->group(function () {
         Route::put('/internal/research-reports/{slug}', [ResearchReportController::class, 'internalUpdate']);
     });
 
-    Route::middleware(PublicApiCacheHeaders::class)->group(function () {
+    Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {
         Route::get('/landing-surfaces/{surfaceKey}', [LandingSurfaceController::class, 'show']);
         Route::get('/media-assets', [MediaLibraryController::class, 'index']);
         Route::get('/media-assets/{assetKey}', [MediaLibraryController::class, 'show']);
