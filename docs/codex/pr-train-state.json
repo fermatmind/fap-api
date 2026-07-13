@@ -89899,7 +89899,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-DOMAINS-08"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "a8378bbaf7baa9213248f94d76d95dd1ad13dd33",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3043",
     "checks": {
@@ -89922,6 +89922,10 @@
       "scope": {
         "status": "pass",
         "evidence": "Exactly 9 changed files match the PR09 manifest allowlist: one README, one focused Feature test, one state ledger, and six generated workflow/QA files. No backend/app runtime, facet-detail rewrite, CMS/database write, publish, deploy, or indexability change occurred."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "All 9 GitHub checks passed on head 064b11c9ad5265893fa4cb7174d6b1b91576b6fd: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. GitHub reports MERGEABLE/CLEAN; the final ledger head will be revalidated before squash merge."
       }
     },
     "failure_reason": null,
@@ -89950,6 +89954,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Implementation commit a8378bbaf7baa9213248f94d76d95dd1ad13dd33 was pushed and PR #3043 opened with what changed, why, validation, deferred items, and repository-rule impact; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-13T22:56:22Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 required GitHub checks passed on head 064b11c9ad5265893fa4cb7174d6b1b91576b6fd. GitHub reports PR #3043 MERGEABLE/CLEAN; the final ledger head will be revalidated before squash merge."
       }
     ]
   },
