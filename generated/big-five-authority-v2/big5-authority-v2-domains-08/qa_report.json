@@ -1,0 +1,60 @@
+{
+  "schema_version": "big5_authority_v2_qa_report.v1",
+  "train_id": "BIG5-AUTHORITY-V2-DOMAINS-08",
+  "status": "automated_qa_passed_human_review_pending",
+  "scope": {
+    "page_family": "domain",
+    "domain_count": 5,
+    "locales": ["en", "zh-CN"],
+    "expected_page_count": 10,
+    "observed_page_count": 10,
+    "facets_per_page": 6,
+    "range_levels": ["high", "middle", "low"]
+  },
+  "stage_results": {
+    "raw": {
+      "schema_ok": true,
+      "editorial_ok": false,
+      "expected_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ],
+      "failures_preserved": true
+    },
+    "skeptical_review": {
+      "all_raw_issue_codes_accounted_for": true,
+      "repair_required": true
+    },
+    "repaired": {
+      "schema_ok": true,
+      "editorial_ok": true
+    },
+    "final": {
+      "schema_ok": true,
+      "editorial_ok": true,
+      "canonical_coverage_ok": true,
+      "bilingual_independent_authoring_ok": true,
+      "facet_inventory_ok": true,
+      "source_authority_ok": true,
+      "private_flow_guard_ok": true,
+      "cross_framework_guard_ok": true
+    }
+  },
+  "release_state": {
+    "human_review_passed": false,
+    "publish_allowed": false,
+    "schema_eligible": false,
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  },
+  "deferred": [
+    "Human editorial approval",
+    "CMS import or publication",
+    "Range pages and facet-detail pages",
+    "Indexability, sitemap, llms, search submission, and deployment"
+  ]
+}
