@@ -10,6 +10,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Services\Career\StructuredData\CareerArticleStructuredDataBuilder;
 use App\Support\CanonicalFrontendUrl;
 use App\Support\PublicMediaUrlGuard;
+use App\Support\PublicSeoTitleNormalizer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -42,7 +43,7 @@ final class ArticleSeoService
 
             $locale = $this->normalizeLocale((string) $article->locale);
 
-            $title = trim((string) $article->title);
+            $title = $this->publicTitle($article, (string) $article->title);
             $descSource = trim((string) ($article->excerpt ?? ''));
             if ($descSource === '') {
                 $descSource = $this->extractDescription((string) $article->content_md);
@@ -84,7 +85,10 @@ final class ArticleSeoService
         $seo = $this->resolveSeoMeta($article, $locale);
         $revision = $this->resolvePublishedRevision($article, $revision);
 
-        $title = $revision?->seo_title ?? $revision?->title ?? $seo?->seo_title ?? $article->title;
+        $title = $this->publicTitle(
+            $article,
+            (string) ($revision?->seo_title ?? $revision?->title ?? $seo?->seo_title ?? $article->title)
+        );
         $descriptionSource = (string) ($revision?->excerpt ?? $revision?->content_md ?? $article->excerpt ?? $article->content_md);
         $description = $revision?->seo_description ?? $seo?->seo_description
             ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160);
@@ -110,7 +114,7 @@ final class ArticleSeoService
             ),
 
             'og' => [
-                'title' => $seo?->og_title ?? $title,
+                'title' => $this->publicTitle($article, (string) ($seo?->og_title ?? $title)),
                 'description' => $seo?->og_description ?? $description,
                 'image' => $image,
                 'type' => 'article',
@@ -221,6 +225,16 @@ final class ArticleSeoService
         return is_string($normalized) ? $normalized : trim($value);
     }
 
+    private function publicTitle(Article $article, string $title): string
+    {
+        $slug = strtolower(trim((string) $article->slug));
+        if (! str_starts_with($slug, 'big-five-')) {
+            return trim($title);
+        }
+
+        return PublicSeoTitleNormalizer::withoutTrailingBrand($title);
+    }
+
     private function resolveSeoMeta(Article $article, string $locale): ?ArticleSeoMeta
     {
         if (
@@ -272,7 +286,10 @@ final class ArticleSeoService
         $descriptionSource = (string) ($revision?->excerpt ?? $revision?->content_md ?? $article->excerpt ?? $article->content_md);
         $structured = $this->careerArticleStructuredDataBuilder->build('article_public_detail', [
             'id' => $canonical !== null ? $canonical.'#article' : null,
-            'headline' => $revision?->seo_title ?? $revision?->title ?? $seo?->seo_title ?? $article->title,
+            'headline' => $this->publicTitle(
+                $article,
+                (string) ($revision?->seo_title ?? $revision?->title ?? $seo?->seo_title ?? $article->title)
+            ),
             'description' => $revision?->seo_description ?? $seo?->seo_description
                 ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160),
             'url' => $canonical,

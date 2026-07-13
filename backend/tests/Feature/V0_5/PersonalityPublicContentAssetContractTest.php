@@ -814,6 +814,25 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         ], $response->json('personality_public_content_asset_v1.internal_links'));
     }
 
+    public function test_public_api_removes_trailing_brand_from_big_five_metadata_only(): void
+    {
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'title' => 'Big Five range | FermatMind',
+            'seo_json' => [
+                'title' => 'Big Five range | FermatMind',
+                'description' => 'A dimensional Big Five range guide.',
+            ],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'is_public' => true,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+        ]));
+
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.title', 'Big Five range')
+            ->assertJsonPath('personality_public_content_asset_v1.seo.title', 'Big Five range');
+    }
+
     public function test_published_non_indexable_big_five_asset_suppresses_runtime_schema(): void
     {
         PersonalityPublicContentAsset::query()->create($this->assetAttributes([

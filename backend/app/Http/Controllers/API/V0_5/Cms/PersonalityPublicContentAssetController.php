@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 
 use App\Http\Controllers\Controller;
 use App\Models\PersonalityPublicContentAsset;
+use App\Support\PublicSeoTitleNormalizer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -166,6 +167,12 @@ final class PersonalityPublicContentAssetController extends Controller
         $contentSections = is_array($asset->content_sections_json) ? $asset->content_sections_json : [];
         $canonical = is_array($asset->canonical_json) ? $asset->canonical_json : [];
         $schemaRuntimeEligible = $this->isSchemaRuntimeEligible($asset);
+        $seo = is_array($asset->seo_json) ? $asset->seo_json : [];
+        $title = (string) $asset->title;
+        if ((string) $asset->framework === PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE) {
+            $title = PublicSeoTitleNormalizer::withoutTrailingBrand($title);
+            $seo = PublicSeoTitleNormalizer::normalizeSeoPayload($seo);
+        }
 
         return [
             'id' => (int) $asset->id,
@@ -177,11 +184,11 @@ final class PersonalityPublicContentAssetController extends Controller
             'entity_key' => (string) $asset->entity_key,
             'slug' => (string) $asset->slug,
             'locale' => (string) $asset->locale,
-            'title' => (string) $asset->title,
+            'title' => $title,
             'summary' => $asset->summary,
             'sections' => $contentSections,
             'content_sections' => $contentSections,
-            'seo' => is_array($asset->seo_json) ? $asset->seo_json : [],
+            'seo' => $seo,
             'robots' => PersonalityPublicContentAsset::normalizeRobots((string) $asset->robots),
             'canonical_path' => (string) data_get($canonical, 'path', ''),
             'canonical' => $canonical,

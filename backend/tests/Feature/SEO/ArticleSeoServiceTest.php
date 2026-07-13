@@ -90,6 +90,47 @@ final class ArticleSeoServiceTest extends TestCase
         $this->assertStringNotContainsString('www.fermatmind.com', json_encode($jsonLd, JSON_THROW_ON_ERROR));
     }
 
+    public function test_big_five_article_projection_removes_trailing_brand_from_metadata_and_headline(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'big-five-tool-guide',
+            'locale' => 'zh-CN',
+            'title' => '大五人格测试是什么？ | FermatMind',
+            'excerpt' => '说明大五人格的用途与边界。',
+            'content_md' => '# 大五人格测试是什么？',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 7, 14, 8, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+            'created_at' => Carbon::create(2026, 7, 14, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 7, 14, 9, 0, 0, 'UTC'),
+        ]);
+        ArticleSeoMeta::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'locale' => 'zh-CN',
+            'seo_title' => '大五人格测试是什么？ | FermatMind',
+            'seo_description' => '说明大五人格的用途与边界。',
+            'canonical_url' => 'https://fermatmind.com/zh/articles/big-five-tool-guide',
+            'og_title' => '大五人格测试是什么？ | FermatMind',
+            'og_description' => '说明大五人格的用途与边界。',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        $service = app(ArticleSeoService::class);
+        $payload = $service->buildSeoPayload($article);
+        $jsonLd = $service->generateJsonLd($article);
+
+        $this->assertSame('大五人格测试是什么？', $payload['title']);
+        $this->assertSame('大五人格测试是什么？', data_get($payload, 'og.title'));
+        $this->assertSame('大五人格测试是什么？', data_get($jsonLd, 'headline'));
+    }
+
     public function test_generate_json_ld_filters_visible_faq_when_faq_schema_gate_is_held(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);

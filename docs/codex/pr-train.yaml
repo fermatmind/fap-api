@@ -41706,3 +41706,1082 @@ prs:
     pr_execution_authorized: true
     production_mutation_authorized: false
     content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-INTEGRITY-GATE-02
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-INTEGRITY-GATE-02: fix(content): repair and gate Big Five public integrity"
+    base: main
+    branch: codex/big5-authority-v2-integrity-gate-02
+    depends_on: [BIG5-AUTHORITY-V2-BENCHMARK-01]
+    goal: "- 修复以下双语 dead guide 目标或把现有内链安全重指向当前有效 canonical： how-to-read-big-five-results big-five-score-ranges big-five-30-day-review big-five-vs-mbti discuss-results-with-others - 清除可见内部运营术语，包括： Draft and indexability boundary SEO / GEO 摘要 内部链接建议 - 修复 Big Five 页面和文章的重复品牌 title，例如双重 “| FermatMind”。 - 增加真实 internal-link target validation： - 请求或解析最终目标； - 允许明确的 200 canonical； - 允许经过审核的 301 alias； - 拒绝 404、循环 redirect、私人路径、跨 authority 错误和未声明外链。 - 保持当前 canonical/indexability 状态，不在本 PR 重做最终 link graph。"
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityBigFivePublicIntegrityGate.php
+      - backend/app/Services/SEO/BigFivePublicIntegrityGate.php
+      - backend/app/Support/PublicSeoTitleNormalizer.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - backend/app/Services/Cms/ArticleSeoService.php
+      - backend/tests/Feature/Console/PersonalityBigFivePublicIntegrityGateCommandTest.php
+      - backend/tests/Feature/SEO/ArticleSeoServiceTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - generated/big-five-authority-v2-integrity-gate-02/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2-integrity-gate-02/build-package.mjs"
+      - "node generated/big-five-authority-v2-integrity-gate-02/validate-package.mjs"
+      - "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/PersonalityBigFivePublicIntegrityGateCommandTest.php tests/Feature/SEO/ArticleSeoServiceTest.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --no-ansi"
+      - "cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFivePublicIntegrityGate.php app/Services/SEO/BigFivePublicIntegrityGate.php app/Support/PublicSeoTitleNormalizer.php app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php app/Services/Cms/ArticleSeoService.php tests/Feature/Console/PersonalityBigFivePublicIntegrityGateCommandTest.php tests/Feature/SEO/ArticleSeoServiceTest.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php"
+      - "bash backend/scripts/ci_verify_mbti.sh"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-PUBLIC-CONTRACT-03
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-PUBLIC-CONTRACT-03: feat(content): add Big Five visible evidence authority contract"
+    base: main
+    branch: codex/big5-authority-v2-public-contract-03
+    depends_on: [BIG5-AUTHORITY-V2-INTEGRITY-GATE-02]
+    goal: "- 为 PersonalityPublicContentAsset 建立向后兼容的 V2 public contract。 - 增加或规范： sources； source title； source author/organization； year； source_type； DOI； public URL； access date； claim mapping； limitation； author； reviewer； review state； last reviewed date； published/updated date； hero/inline/OG media authority； media alt； visible-evidence/schema eligibility。 - 优先复用现有 JSON authority；只有现有存储无法安全表达时，才允许在本 PR 增加 forward-only migration source code。 - migration source code 属于本 PR scope，但任何环境的 migration 执行不授权。 - 保持 V1 consumer compatibility。 - 不破坏 Enneagram、MBTI、RIASEC 或现有 PersonalityPublicContentAsset consumer。"
+    allowed_paths:
+      - backend/app/DTO/Personality/PersonalityPublicContentAssetData.php
+      - backend/app/Models/PersonalityPublicContentAsset.php
+      - backend/app/Services/Cms/PersonalityPublicContentAssetContract.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - backend/database/migrations/*big_five_authority_v2*
+      - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-public-contract-03/**
+      - generated/big-five-authority-v2/big5-authority-v2-public-contract-03/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-public-contract-03/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV203Test.php --no-ansi"
+      - "bash backend/scripts/ci_verify_mbti.sh"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+    migration_source_code_allowed: true
+    migration_execution_allowed: false
+
+  - id: BIG5-AUTHORITY-V2-SOURCE-LEDGER-05
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-SOURCE-LEDGER-05: docs(content): add Big Five bilingual source and claim ledger"
+    base: main
+    branch: codex/big5-authority-v2-source-ledger-05
+    depends_on: [BIG5-AUTHORITY-V2-WEB-TRUST-RENDERER-04]
+    goal: "- 建立 Big Five 中英双语 terminology ledger。 - 建立 shared claim-source ledger。 - 每条学术来源记录： title； authors/organization； year； DOI/URL； access date； supported claim； limitation； applicable page families。 - 分开记录： academic evidence； official/product evidence； competitor evidence； internal repository evidence； inference。 - 优先 peer-reviewed、正式出版社、官方文档、原始研究。 - 不把二手媒体或竞品文案作为核心科学 claim 的唯一证据。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-source-ledger-05/**
+      - generated/big-five-authority-v2/big5-authority-v2-source-ledger-05/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV205Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-source-ledger-05/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV205Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-EDITORIAL-GATE-06
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-EDITORIAL-GATE-06: test(content): add Big Five originality and editorial QA gate"
+    base: main
+    branch: codex/big5-authority-v2-editorial-gate-06
+    depends_on: [BIG5-AUTHORITY-V2-SOURCE-LEDGER-05]
+    goal: "- 建立 schema gate。 - 建立 source/claim coverage gate。 - 建立 bilingual parity and independence gate。 - 建立 duplicate/template risk gate。 - 建立 private-result leakage gate。 - 建立 framework boundary gate。 - 建立场景具体性、反例、权衡和套话 gate。 - 建立 manual-review-state gate。 - 不使用 AI detector 作为事实判断。 - Codex raw draft、skeptical review、repaired draft、final package 必须分别保留。 - 自动修复不得隐藏 raw draft 的失败。"
+    allowed_paths:
+      - backend/app/Services/BigFive/AuthorityV2/EditorialGate/**
+      - backend/app/Console/Commands/PersonalityBigFiveAuthorityV206*.php
+      - backend/tests/Feature/SEO/BigFiveAuthorityV206Test.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-editorial-gate-06/**
+      - generated/big-five-authority-v2/big5-authority-v2-editorial-gate-06/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-editorial-gate-06/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV206Test.php --no-ansi"
+      - "bash backend/scripts/ci_verify_mbti.sh"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-HUB-07
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-HUB-07: content(big5): rewrite bilingual Big Five hubs"
+    base: main
+    branch: codex/big5-authority-v2-hub-07
+    depends_on: [BIG5-AUTHORITY-V2-EDITORIAL-GATE-06]
+    goal: "- /en/personality/big-five - /zh/personality/big-five - 生成 backend-authoritative draft package； - 独立编辑 EN/ZH； - direct answer； - OCEAN overview； - dimensional-not-type explanation； - result reading； - facet navigation； - use cases； - misconceptions； - method boundary； - visible evidence； - internal links。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-hub-07/**
+      - generated/big-five-authority-v2/big5-authority-v2-hub-07/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV207Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-hub-07/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV207Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-DOMAINS-08
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-DOMAINS-08: content(big5): rewrite ten bilingual Big Five domain pages"
+    base: main
+    branch: codex/big5-authority-v2-domains-08
+    depends_on: [BIG5-AUTHORITY-V2-HUB-07]
+    goal: "- openness EN/ZH - conscientiousness EN/ZH - extraversion EN/ZH - agreeableness EN/ZH - neuroticism EN/ZH - 定义； - 高/中/低； - 六 facets； - 现实场景； - 优势与代价； - 组合影响； - 行动实验； - 常见误读； - 方法边界； - 来源。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-domains-08/**
+      - generated/big-five-authority-v2/big5-authority-v2-domains-08/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV208Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-domains-08/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV208Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-FACET-HUBS-09
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-FACET-HUBS-09: content(big5): rewrite bilingual Big Five facet hubs"
+    base: main
+    branch: codex/big5-authority-v2-facet-hubs-09
+    depends_on: [BIG5-AUTHORITY-V2-DOMAINS-08]
+    goal: "- /en/personality/big-five/facets - /zh/personality/big-five/facets - 30 facets 信息架构； - 五个 domain 分组； - facet 与 domain 的区别； - 如何使用 facet； - 误读和边界； - 所有 facet 的可验证导航； - 来源。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-facet-hubs-09/**
+      - generated/big-five-authority-v2/big5-authority-v2-facet-hubs-09/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV209Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-facet-hubs-09/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV209Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-RANGE-OPENNESS-10
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-RANGE-OPENNESS-10: content(big5): rewrite openness range and legacy pages"
+    base: main
+    branch: codex/big5-authority-v2-range-openness-10
+    depends_on: [BIG5-AUTHORITY-V2-FACET-HUBS-09]
+    goal: "- EN/ZH openness-high - EN/ZH openness-mid - EN/ZH openness-low - EN high-openness legacy canonical - EN low-openness legacy canonical"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-range-openness-10/**
+      - generated/big-five-authority-v2/big5-authority-v2-range-openness-10/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV210Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-range-openness-10/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV210Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11: content(big5): rewrite conscientiousness range and legacy pages"
+    base: main
+    branch: codex/big5-authority-v2-range-conscientiousness-11
+    depends_on: [BIG5-AUTHORITY-V2-RANGE-OPENNESS-10]
+    goal: "- EN/ZH conscientiousness-high - EN/ZH conscientiousness-mid - EN/ZH conscientiousness-low - EN high-conscientiousness legacy canonical - EN low-conscientiousness legacy canonical"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-range-conscientiousness-11/**
+      - generated/big-five-authority-v2/big5-authority-v2-range-conscientiousness-11/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV211Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-range-conscientiousness-11/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV211Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12: content(big5): rewrite extraversion range and legacy pages"
+    base: main
+    branch: codex/big5-authority-v2-range-extraversion-12
+    depends_on: [BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11]
+    goal: "- EN/ZH extraversion-high - EN/ZH extraversion-mid - EN/ZH extraversion-low - EN high-extraversion legacy canonical - EN low-extraversion legacy canonical"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-range-extraversion-12/**
+      - generated/big-five-authority-v2/big5-authority-v2-range-extraversion-12/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV212Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-range-extraversion-12/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV212Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-RANGE-AGREEABLENESS-13
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-RANGE-AGREEABLENESS-13: content(big5): rewrite agreeableness range and legacy pages"
+    base: main
+    branch: codex/big5-authority-v2-range-agreeableness-13
+    depends_on: [BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12]
+    goal: "- EN/ZH agreeableness-high - EN/ZH agreeableness-mid - EN/ZH agreeableness-low - EN high-agreeableness legacy canonical - EN low-agreeableness legacy canonical"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-range-agreeableness-13/**
+      - generated/big-five-authority-v2/big5-authority-v2-range-agreeableness-13/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV213Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-range-agreeableness-13/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV213Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14: content(big5): rewrite neuroticism range and legacy pages"
+    base: main
+    branch: codex/big5-authority-v2-range-neuroticism-14
+    depends_on: [BIG5-AUTHORITY-V2-RANGE-AGREEABLENESS-13]
+    goal: "- EN/ZH neuroticism-high - EN/ZH neuroticism-mid - EN/ZH neuroticism-low - EN high-neuroticism legacy canonical - EN emotional-stability legacy canonical PR10–14 公共 scope： - 每页回答该分数区间意味着什么； - 包含可能表现和反例； - 包含情境变化； - 包含与其他维度组合时的变化； - 包含价值中性的优势和代价； - 包含沟通/行动建议； - 明确“不代表什么”； - 不把中间分写成没有特点； - 不把高分或低分写成优劣等级； - 同一 PR 页面不得只是替换 trait 名； - legacy 页面必须有独立 intent，不得与 V2 range 页近重复； - 不改最终 redirect/canonical graph； - 不写 CMS； - 不改变 indexability。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-range-neuroticism-14/**
+      - generated/big-five-authority-v2/big5-authority-v2-range-neuroticism-14/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV214Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-range-neuroticism-14/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV214Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-FACETS-OPENNESS-15
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-FACETS-OPENNESS-15: content(big5): rewrite bilingual openness facet pages"
+    base: main
+    branch: codex/big5-authority-v2-facets-openness-15
+    depends_on: [BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14]
+    goal: "Exact facet codes: - imagination - aesthetics - feelings - actions - ideas - values Coverage: 6 facets × EN/ZH"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-facets-openness-15/**
+      - generated/big-five-authority-v2/big5-authority-v2-facets-openness-15/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV215Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-facets-openness-15/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV215Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16: content(big5): rewrite bilingual conscientiousness facet pages"
+    base: main
+    branch: codex/big5-authority-v2-facets-conscientiousness-16
+    depends_on: [BIG5-AUTHORITY-V2-FACETS-OPENNESS-15]
+    goal: "Exact facet codes: - competence - order - dutifulness - achievement-striving - self-discipline - deliberation Coverage: 6 facets × EN/ZH"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-facets-conscientiousness-16/**
+      - generated/big-five-authority-v2/big5-authority-v2-facets-conscientiousness-16/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV216Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-facets-conscientiousness-16/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV216Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-FACETS-EXTRAVERSION-17
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-FACETS-EXTRAVERSION-17: content(big5): rewrite bilingual extraversion facet pages"
+    base: main
+    branch: codex/big5-authority-v2-facets-extraversion-17
+    depends_on: [BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16]
+    goal: "Exact facet codes: - warmth - gregariousness - assertiveness - activity - excitement-seeking - positive-emotions Coverage: 6 facets × EN/ZH"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-facets-extraversion-17/**
+      - generated/big-five-authority-v2/big5-authority-v2-facets-extraversion-17/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV217Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-facets-extraversion-17/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV217Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18: content(big5): rewrite bilingual agreeableness facet pages"
+    base: main
+    branch: codex/big5-authority-v2-facets-agreeableness-18
+    depends_on: [BIG5-AUTHORITY-V2-FACETS-EXTRAVERSION-17]
+    goal: "Exact facet codes: - trust - straightforwardness - altruism - compliance - modesty - tender-mindedness Coverage: 6 facets × EN/ZH"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-facets-agreeableness-18/**
+      - generated/big-five-authority-v2/big5-authority-v2-facets-agreeableness-18/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV218Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-facets-agreeableness-18/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV218Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19: content(big5): rewrite bilingual neuroticism facet pages"
+    base: main
+    branch: codex/big5-authority-v2-facets-neuroticism-19
+    depends_on: [BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18]
+    goal: "Exact facet codes: - anxiety - anger - depression - self-consciousness - impulsiveness - vulnerability Coverage: 6 facets × EN/ZH PR15–19 公共 scope： - 解释 facet 与上位 domain 的区别； - 两端表现； - 至少两个具体、原创、非模板现实场景； - 至少一个反例或常见误判； - 工作、学习、沟通或日常观察，但不做招聘/录用判断； - 复盘问题和低风险行动建议； - 方法边界； - 可见来源； - EN/ZH 独立编辑； - 保持 value-neutral； - 不写 CMS； - 不改变 indexability。 PR07–19 覆盖校验必须严格等于： - hub: 2 - domain: 10 - facet hub: 2 - range/legacy: 40 - facet detail: 60 - total canonical personality pages: 114 不得多一页或少一页。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-facets-neuroticism-19/**
+      - generated/big-five-authority-v2/big5-authority-v2-facets-neuroticism-19/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV219Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-facets-neuroticism-19/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV219Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-TEST-LANDING-20
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-TEST-LANDING-20: content(big5): deepen bilingual test landing pages"
+    base: main
+    branch: codex/big5-authority-v2-test-landing-20
+    depends_on: [BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19]
+    goal: "- /en/tests/big-five-personality-test-ocean-model - /zh/tests/big-five-personality-test-ocean-model - 测什么； - 如何作答； - 报告包含和不包含什么； - 免费/付费状态只使用当前 backend product truth； - 数据与隐私； - 方法边界； - 当前公开的技术证据； - FAQ； - 到 hub/domain/methodology 的链接。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-test-landing-20/**
+      - generated/big-five-authority-v2/big5-authority-v2-test-landing-20/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV220Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-test-landing-20/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV220Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-IA-21
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-IA-21: docs(content): lock Big Five article intent architecture"
+    base: main
+    branch: codex/big5-authority-v2-article-ia-21
+    depends_on: [BIG5-AUTHORITY-V2-TEST-LANDING-20]
+    goal: "- 审计现有 9 篇文章和 2 个 topic hub。 - 建立 keyword/question/user-task/search-intent/internal-link matrix。 - 将 competitor evidence、academic evidence、GSC evidence 分开。 - GSC 不可用时明确写 GSC_EVIDENCE_PENDING。 - 锁定后续 PR24–33 的准确内容清单： - 10 个 batch； - 每 batch 正好 5 个主题； - 每主题 EN/ZH 配对； - 总计 50 个主题、100 个 Article draft； - 每个主题有唯一 intent； - 每个主题有锁定 slug、title intent、primary question、audience、source requirements、internal-link targets、risk boundary。 - PR24–33 只能消费该 matrix，不得重新发明或替换主题。 - 不创建 trait × career/problem 组合矩阵。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-ia-21/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-ia-21/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV221Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-ia-21/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV221Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22: content(big5): refresh nine articles and two topic hubs"
+    base: main
+    branch: codex/big5-authority-v2-article-refresh-22
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-IA-21]
+    goal: "Exact existing article coverage: EN: - big-five-conscientiousness-low-procrastination-task-plan - big-five-emotional-stability-stress-recovery-communication - big-five-personality-test-vs-mbti ZH: - big-five-conscientiousness-low-procrastination-task-plan - big-five-emotional-stability-stress-recovery-communication - big-five-growth-guide - big-five-narrative-portrait - big-five-personality-test-vs-mbti - big-five-tool-guide Topic hubs: - /en/topics/big-five - /zh/topics/big-five Total existing surfaces: 11 - 去除双品牌 title； - 修复重叠文章 intent； - 重写 opening、logic、examples、counterexamples、action framework、boundary、sources； - author/reviewer/date 只能使用真实 CMS authority； - 没有人工复审时保持 pending_manual_review； - topic hub 只枚举 backend-authoritative published/eligible content。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-refresh-22/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-refresh-22/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV222Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-refresh-22/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV222Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-TECHNICAL-TRUST-23
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-TECHNICAL-TRUST-23: content(big5): add bilingual methodology and trust pages"
+    base: main
+    branch: codex/big5-authority-v2-technical-trust-23
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22]
+    goal: "- 优先复用现有 ResearchReport、ContentPage 或明确的 backend CMS authority。 - 不创建新的平行 CMS stack。 - 准备： - bilingual methodology/technical explanation； - bilingual source/review policy； - measurement/scoring public boundary； - known limitations； - privacy boundary； - version/change history； - public evidence index。 - 具体信效度、常模、样本量或 percentile 数值，没有公开审核证据时写 Unknown。 - 生成 draft package 和 QA，不写生产 CMS。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-technical-trust-23/**
+      - generated/big-five-authority-v2/big5-authority-v2-technical-trust-23/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV223Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-technical-trust-23/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV223Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24: content(big5): publish core model editorial wave"
+    base: main
+    branch: codex/big5-authority-v2-article-core-model-24
+    depends_on: [BIG5-AUTHORITY-V2-TECHNICAL-TRUST-23]
+    goal: "Batch authority: PR21 locked batch 24 only Theme family: - 模型历史； - OCEAN； - 连续谱； - 30 facets； - 非类型系统。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-core-model-24/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-core-model-24/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV224Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-core-model-24/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV224Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25: content(big5): publish result-reading editorial wave"
+    base: main
+    branch: codex/big5-authority-v2-article-result-reading-25
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24]
+    goal: "Batch authority: PR21 locked batch 25 only Theme family: - 读结果； - 分数区间； - 复测； - 与他人讨论； - 30 天复盘。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-result-reading-25/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-result-reading-25/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV225Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-result-reading-25/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV225Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26: content(big5): publish workplace editorial wave"
+    base: main
+    branch: codex/big5-authority-v2-article-workplace-26
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25]
+    goal: "Batch authority: PR21 locked batch 26 only Theme family: - 团队协作； - 反馈； - 会议； - 领导； - 工作环境。 Hard boundary: - 禁止招聘筛选、录用、晋升保证或员工适配结论。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-workplace-26/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-workplace-26/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV226Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-workplace-26/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV226Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27: content(big5): publish relationships editorial wave"
+    base: main
+    branch: codex/big5-authority-v2-article-relationships-27
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26]
+    goal: "Batch authority: PR21 locked batch 27 only Theme family: - 沟通； - 冲突； - 友情； - 伴侣； - 边界。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-relationships-27/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-relationships-27/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV227Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-relationships-27/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV227Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28: content(big5): publish learning and habits editorial wave"
+    base: main
+    branch: codex/big5-authority-v2-article-learning-habits-28
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27]
+    goal: "Batch authority: PR21 locked batch 28 only Theme family: - 学习； - 拖延； - 计划； - 创造力； - 决策。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-learning-habits-28/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-learning-habits-28/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV228Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-learning-habits-28/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV228Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29: content(big5): publish growth and change editorial wave"
+    base: main
+    branch: codex/big5-authority-v2-article-growth-change-29
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28]
+    goal: "Batch authority: PR21 locked batch 29 only Theme family: - 人格变化； - 习惯； - 目标； - 生活事件； - 追踪。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-growth-change-29/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-growth-change-29/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV229Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-growth-change-29/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV229Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30: content(big5): publish stress and wellbeing editorial wave"
+    base: main
+    branch: codex/big5-authority-v2-article-stress-wellbeing-30
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29]
+    goal: "Batch authority: PR21 locked batch 30 only Theme family: - 压力反应； - 自我调节； - 恢复； - 日常支持； - 求助边界。 Hard boundary: - 非医疗内容； - 不诊断； - 不替代专业帮助； - 不把 neuroticism 等同精神疾病。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-stress-wellbeing-30/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-stress-wellbeing-30/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV230Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-stress-wellbeing-30/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV230Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31: content(big5): publish research-methods editorial wave"
+    base: main
+    branch: codex/big5-authority-v2-article-research-methods-31
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30]
+    goal: "Batch authority: PR21 locked batch 31 only Theme family: - 自陈偏差； - 信效度解释； - 常模； - 跨文化； - 复测。 Hard boundary: - 只解释有证据的公开事实； - 产品具体数据未知时明确 Unknown。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-research-methods-31/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-research-methods-31/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV231Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-research-methods-31/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV231Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32: content(big5): publish comparison editorial wave"
+    base: main
+    branch: codex/big5-authority-v2-article-comparisons-32
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31]
+    goal: "Batch authority: PR21 locked batch 32 only Theme family: - MBTI； - Enneagram； - DISC； - RIASEC； - 常见误区。 Hard boundary: - 不把不同模型硬映射为确定等价关系。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-comparisons-32/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-comparisons-32/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV232Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-comparisons-32/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV232Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33: content(big5): publish research-briefings editorial wave"
+    base: main
+    branch: codex/big5-authority-v2-article-research-briefings-33
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32]
+    goal: "Batch authority: PR21 locked batch 33 only Theme family: - 研究解读； - 新研究背景； - 证据强弱； - 研究限制； - 如何应用但不夸大。 Hard boundary: - 优先原始论文； - 时效事实执行时必须联网核实； - 明确研究日期和 access date。 PR24–33 公共 scope： - 每个 PR 正好 5 个主题； - 每主题正好 EN/ZH 两个独立 Article draft； - 每 PR 正好 10 个 CMS Article candidate assets； - 10 个 PR 总计正好 100 个 assets； - 只能使用 PR21 锁定的 slug/intent； - raw draft、skeptical review、repair、final package、source mapping、QA report 全部保留； - 每篇文章必须有： direct answer； evidence； nuance/counterexample； concrete scenario； practical framework； limitation； visible sources； internal links； method/product boundary； - 不写生产 CMS； - 不自动 publish； - 不自动 index； - 不虚构人工复审。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-research-briefings-33/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-research-briefings-33/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV233Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-article-research-briefings-33/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV233Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-MEDIA-OG-34
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-MEDIA-OG-34: content(big5): map approved Media Library and OG assets"
+    base: main
+    branch: codex/big5-authority-v2-media-og-34
+    depends_on: [BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33]
+    goal: "- 审计现有 backend Media Library authority。 - 仅映射已存在、公开安全、operator-approved 的 media asset/variant/public URL。 - 为页面族建立 hero、inline、OG、alt、locale 和 rights/provenance mapping。 - 没有已批准媒体时，保持 missing/pending，不生成虚假 URL。 - 可以生成 upload/mapping manifest 和 dry-run。"
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-media-og-34/**
+      - generated/big-five-authority-v2/big5-authority-v2-media-og-34/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV234Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-media-og-34/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV234Test.php --no-ansi"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-LINK-GRAPH-35
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-LINK-GRAPH-35: fix(seo): rebuild Big Five internal link and canonical graph"
+    base: main
+    branch: codex/big5-authority-v2-link-graph-35
+    depends_on: [BIG5-AUTHORITY-V2-MEDIA-OG-34]
+    goal: "- 使用 PR07–34 的最终 candidate inventory 重建 link graph。 - 解决： dead links； orphan pages； circular/irrelevant links； intent overlap； V2 range 与 EN legacy polarity cannibalization； canonical consistency； hreflang target consistency； topic/article/profile/test/methodology navigation。 - 10 个 zh legacy alias 保持经过验证的 exact 301，只指向正确 canonical。 - 增加 graph validator 和真实 target validation。"
+    allowed_paths:
+      - backend/app/Services/BigFive/AuthorityV2/LinkGraph/**
+      - backend/app/Console/Commands/PersonalityBigFiveAuthorityV235*.php
+      - backend/tests/Feature/SEO/BigFiveAuthorityV235Test.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-link-graph-35/**
+      - generated/big-five-authority-v2/big5-authority-v2-link-graph-35/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-link-graph-35/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV235Test.php --no-ansi"
+      - "bash backend/scripts/ci_verify_mbti.sh"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36: feat(seo): release Big Five SEO and GEO authority"
+    base: main
+    branch: codex/big5-authority-v2-seo-geo-authority-36
+    depends_on: [BIG5-AUTHORITY-V2-LINK-GRAPH-35]
+    goal: "- “release”在本 PR 仅指实现和验证 authority/gate，不代表生产发布。 - 实现 backend-authoritative： metadata； canonical； hreflang； robots； schema eligibility； sitemap eligibility； llms eligibility； llms-full enriched evidence eligibility； visible-evidence gate； author/reviewer/date gate； media gate； duplicate gate； claim boundary gate。 - schema 必须对应页面可见内容。 - JSON-LD 不得隐藏或夸大证据。 - 每个 candidate 必须逐页决定 eligibility，禁止整批自动 index。"
+    allowed_paths:
+      - backend/app/Services/BigFive/AuthorityV2/SeoGeoAuthority/**
+      - backend/app/Console/Commands/PersonalityBigFiveAuthorityV236*.php
+      - backend/tests/Feature/SEO/BigFiveAuthorityV236Test.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-seo-geo-authority-36/**
+      - generated/big-five-authority-v2/big5-authority-v2-seo-geo-authority-36/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-seo-geo-authority-36/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV236Test.php --no-ansi"
+      - "bash backend/scripts/ci_verify_mbti.sh"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+    production_seo_mutation_allowed: false
+
+  - id: BIG5-AUTHORITY-V2-RELEASE-GATE-37
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-RELEASE-GATE-37: ops(content): add Big Five V2 aggregate dry-run and publish gate"
+    base: main
+    branch: codex/big5-authority-v2-release-gate-37
+    depends_on: [BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36]
+    goal: "- 合并 PR07–36 的最终 candidate packages。 - schema validation。 - source/evidence validation。 - duplicate validation。 - bilingual identity/parity validation。 - private boundary validation。 - exact asset count validation。 - deterministic package SHA256。 - local/test DB dry-run，默认 zero writes。 - 逐页 publish/indexability eligibility report。 - 生成 production authorization packet，包含： merged PR SHA； package SHA256； asset count； create/update counts； canonical/alias counts； write command/workflow； expected DB/CMS effects； cache effects； sitemap/llms effects； rollback/abort boundary； exact approval phrase。"
+    allowed_paths:
+      - backend/app/Services/BigFive/AuthorityV2/ReleaseGate/**
+      - backend/app/Console/Commands/PersonalityBigFiveAuthorityV237*.php
+      - backend/tests/Feature/SEO/BigFiveAuthorityV237Test.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-release-gate-37/**
+      - generated/big-five-authority-v2/big5-authority-v2-release-gate-37/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - "node generated/big-five-authority-v2/big5-authority-v2-release-gate-37/validate-package.mjs"
+      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV237Test.php --no-ansi"
+      - "bash backend/scripts/ci_verify_mbti.sh"
+      - "touched PHP Pint --test when PHP changes"
+      - "PHP/JSON/YAML/JS syntax checks for touched files"
+      - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    content_authority: CMS/backend
+    release_mode: dry_run_only
