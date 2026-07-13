@@ -89398,8 +89398,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-INTEGRITY-GATE-02"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "4fe66adfa6bf42f2a2b08ee5c41dafbcb8d42a2b",
+    "status": "merged",
+    "commit_sha": "4f6cba01bdfdc414686111c03e4c40e0567ee909",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3035",
     "checks": {
       "dependency": {
@@ -89437,12 +89437,16 @@
       "github_required_checks": {
         "status": "pass",
         "evidence": "Head 4fe66adfa6bf42f2a2b08ee5c41dafbcb8d42a2b passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS, and semgrep SARIF upload. GitHub reports mergeStateStatus CLEAN with no review block."
+      },
+      "merge_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #3035 MERGED at 2026-07-13T18:28:38Z as 4f6cba01bdfdc414686111c03e4c40e0567ee909; origin/main contains the squash merge, the remote task branch is deleted, local task cleanup completed, and post-merge CI and Code Scanning passed. The automatically queued staging Deploy Application run was canceled before any deploy step; production deploy did not run."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-13T18:28:38Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -89471,6 +89475,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All required GitHub checks passed on head 4fe66adfa6bf42f2a2b08ee5c41dafbcb8d42a2b; PR #3035 is CLEAN with no review block."
+      },
+      {
+        "at": "2026-07-13T20:11:10Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #3035 as squash-merged at 2026-07-13T18:28:38Z with merge 4f6cba01bdfdc414686111c03e4c40e0567ee909. origin/main containment, remote branch deletion, local cleanup, and post-merge CI/Code Scanning were verified. The staging Deploy Application run was canceled before any deploy step; production deploy did not run."
       }
     ]
   },
@@ -89483,10 +89493,35 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-WEB-TRUST-RENDERER-04"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-WEB-TRUST-RENDERER-04 PR #1746 is MERGED as 2abf74fe204e4420c7ebd0bae3c913ab4bd35f1f; fap-web origin/main contains the merge, the branch was cleaned, and post-merge focused contracts plus CI/CodeQL passed."
+      },
+      "source_research": {
+        "status": "pass",
+        "evidence": "Five academic records were verified against DOI/Crossref publisher metadata. Each records title, author(s), year, DOI URL, access date, supported claim, limitation, and page families. The IPIP official resource keeps an unknown publication year as null rather than inventing one."
+      },
+      "package_validator": {
+        "status": "pass",
+        "evidence": "Node 24 package validator passed with 10 sources, 5 academic sources, 7 claims, 15 bilingual terms, all five required evidence categories, resolved claim mappings, academic primary evidence for core scientific claims, and no production actions."
+      },
+      "focused_test": {
+        "status": "pass",
+        "evidence": "BigFiveAuthorityV205Test passed 6 tests / 222 assertions under PHP 8.4, covering academic metadata, claim resolution, unsafe sole-evidence exclusion, bilingual framework boundaries, operational gates, and private/unsupported claim hygiene. Initial invocations that lacked the worktree vendor bootstrap or used the repository-root Node path from backend/ did not execute the target checks; after copying the existing dependency tree, linking the ignored local .env, and running from the correct root, all checks passed cleanly."
+      },
+      "format_and_syntax": {
+        "status": "pass",
+        "evidence": "Pint --test passed for the touched PHP test. PHP syntax, Node syntax, all generated JSON, state JSON, manifest YAML, git diff --check, and the manifest JSON tool command passed."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "All 8 changed files match the PR05 manifest allowlist exactly. No runtime, CMS/database, publish, deploy, schema, indexability, search, frontend, or private-route mutation occurred."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -89495,7 +89530,20 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-13T20:11:10Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR05 from clean latest fap-api main after verifying PR04 merged. Scope is a backend-owned bilingual terminology and shared claim-source ledger only; no CMS/database write, runtime change, publish, deploy, schema activation, indexability mutation, search submission, or private URL access is authorized."
+      },
+      {
+        "at": "2026-07-13T20:14:23Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All PR05 manifest local checks passed. The package separates academic, official/product, competitor, repository, and inference authority; core scientific claims require primary academic evidence, terminology is bilingual with independent review boundaries, and all operational mutation gates remain closed."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-EDITORIAL-GATE-06": {
     "id": "BIG5-AUTHORITY-V2-EDITORIAL-GATE-06",
