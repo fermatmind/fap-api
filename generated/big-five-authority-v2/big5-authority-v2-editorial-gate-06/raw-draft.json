@@ -1,0 +1,40 @@
+{
+  "schema_version": "big5_authority_v2_editorial_candidate.v1",
+  "artifact": "big5-v2-editorial-gate-raw-example",
+  "stage": "raw",
+  "framework": "big_five",
+  "pages": [
+    {
+      "content_key": "editorial-gate-example",
+      "locale": "en",
+      "page_family": "model_hub",
+      "framework": "big_five",
+      "title": "Raw editorial gate example",
+      "summary": "An intentionally incomplete draft retained to prove that repair does not erase original failures.",
+      "authoring_mode": "translation",
+      "source_locale": "en",
+      "sections": [
+        {
+          "key": "generic",
+          "kind": "overview",
+          "body": "Unlock your true potential with {{trait name here}} and discover what makes you unique."
+        }
+      ],
+      "claims": []
+    }
+  ],
+  "workflow": {
+    "raw_artifact": "raw-draft.json",
+    "skeptical_review_artifact": "skeptical-review.json",
+    "repaired_artifact": "repaired-draft.json",
+    "raw_failures_preserved": false,
+    "ai_detector_used": false
+  },
+  "review_state": {
+    "status": "draft",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": "big5_authority_v2_editorial_candidate.v1",
+  "artifact": "big5-v2-editorial-gate-final-example",
+  "stage": "final",
+  "framework": "big_five",
+  "pages": [
+    {
+      "content_key": "editorial-gate-example",
+      "locale": "en",
+      "page_family": "model_hub",
+      "framework": "big_five",
+      "title": "How to read a trait pattern as a working hypothesis",
+      "summary": "A review fixture showing source coverage and concrete interpretation without turning a tendency into an identity.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "sections": [
+        {
+          "key": "work_scenario",
+          "kind": "scenario",
+          "body": "During a project kickoff, a person may volunteer to organize milestones yet prefer quiet preparation before speaking; the useful observation is the context-specific pattern, not a global label."
+        },
+        {
+          "key": "counterexample",
+          "kind": "counterexample",
+          "body": "The same person may abandon a personal weekend plan when priorities change, which is a counterexample to treating one organized work behavior as proof of a fixed identity."
+        },
+        {
+          "key": "tradeoff",
+          "kind": "tradeoff",
+          "body": "Planning can reduce missed handoffs, while excessive checking can slow a decision; the balance depends on deadlines, reversibility, and the cost of an error."
+        },
+        {
+          "key": "review_action",
+          "kind": "action",
+          "body": "For one week, record the situation, the behavior, and its consequence, then compare two settings before deciding whether the reported tendency is a useful working hypothesis."
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim.big_five.five_broad_dimensions",
+          "source_ids": ["academic.soto-john-2017-bfi2"]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": ["official.fermatmind-public-contract-v2"]
+        }
+      ]
+    },
+    {
+      "content_key": "editorial-gate-example",
+      "locale": "zh-CN",
+      "page_family": "model_hub",
+      "framework": "big_five",
+      "title": "把特质模式当作可检验的工作假设",
+      "summary": "这是一份审阅夹具：展示如何保留来源、场景与边界，而不把某种倾向写成固定身份。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "sections": [
+        {
+          "key": "work_scenario",
+          "kind": "scenario",
+          "body": "在项目启动会上，一个人可能主动整理里程碑，却习惯先独自准备再发言；可观察的是这个具体情境里的行为模式，而不是给整个人下结论。"
+        },
+        {
+          "key": "counterexample",
+          "kind": "counterexample",
+          "body": "同一个人在周末安排被新优先级打断时，也可能很快放弃原计划；这个反例提醒我们，不能用一次有条理的工作表现证明固定身份。"
+        },
+        {
+          "key": "tradeoff",
+          "kind": "tradeoff",
+          "body": "提前规划可以减少交接遗漏，但反复核对也可能拖慢决策；怎样取舍要看截止时间、决定是否可逆，以及出错成本。"
+        },
+        {
+          "key": "review_action",
+          "kind": "action",
+          "body": "连续一周记录情境、行为和后果，再比较至少两个不同场合；只有当模式重复出现时，才把报告中的倾向暂时作为下一步复盘假设。"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim.big_five.five_broad_dimensions",
+          "source_ids": ["academic.soto-john-2017-bfi2"]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": ["official.fermatmind-public-contract-v2"]
+        }
+      ]
+    }
+  ],
+  "workflow": {
+    "raw_artifact": "raw-draft.json",
+    "skeptical_review_artifact": "skeptical-review.json",
+    "repaired_artifact": "repaired-draft.json",
+    "raw_failures_preserved": true,
+    "ai_detector_used": false
+  },
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  }
+}

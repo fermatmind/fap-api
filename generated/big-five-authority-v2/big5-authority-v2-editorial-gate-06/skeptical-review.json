@@ -1,0 +1,23 @@
+{
+  "schema_version": "big5_authority_v2_skeptical_review.v1",
+  "artifact": "big5-v2-editorial-gate-skeptical-review-example",
+  "reviews_artifact": "raw-draft.json",
+  "review_mode": "codex_skeptical_review",
+  "ai_detector_used": false,
+  "raw_failures_preserved": true,
+  "adjudication": "repair_required",
+  "expected_failed_gates": [
+    "source_claim_coverage",
+    "bilingual_parity_independence",
+    "duplicate_template_risk",
+    "scenario_counterexample_tradeoff",
+    "manual_review_state"
+  ],
+  "repair_requirements": [
+    "Map every public claim to an authorized shared-ledger source.",
+    "Author en and zh-CN independently while preserving section-intent parity.",
+    "Replace placeholders and generic slogans with scenario, counterexample, tradeoff, and action sections.",
+    "Leave reviewer identity Unknown and keep publish and schema gates closed."
+  ],
+  "automatic_repair_hides_raw_failures": false
+}
