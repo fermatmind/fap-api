@@ -7,6 +7,7 @@ namespace Tests\Feature\V0_5;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
@@ -765,6 +766,7 @@ final class ArticlePublicApiTest extends TestCase
     public function test_sitemap_source_uses_public_readable_indexable_and_sitemap_eligible_article_gate(): void
     {
         Cache::flush();
+        app(PublicCareerAuthorityResponseCache::class)->warm();
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
 
         $this->createArticle([
