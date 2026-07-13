@@ -89209,7 +89209,7 @@
     "branch": "codex/saep-planned-pr-08-article-translation-schema",
     "depends_on": [],
     "depends_on_atomic_tasks": ["SAEP-ART-01"],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "1344fb5a023d89c0dc20acd5645cc494b91a1c16",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3032",
     "failure_reason": null,
@@ -89240,14 +89240,14 @@
         "evidence": "The locked three-file PHPUnit suite passed 29 tests and 268 assertions; scoped Pint passed five files; YAML/JSON parsing, exact seven-path scope validation, PHP syntax, and git diff --check passed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #3032 opened from codex/saep-planned-pr-08-article-translation-schema; required GitHub checks are pending."
+        "status": "pass",
+        "evidence": "PR #3032 passed all nine required checks on head 49cad42ae94bab67ff01caacd3cc8d6a82a983c1; GitHub reported mergeStateStatus CLEAN and exact seven-path scope."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "transitions": [
@@ -89268,6 +89268,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Committed and pushed the exact seven-path scope and opened PR #3032. Required GitHub checks are pending; no production, CMS, database, publish, import, search, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-13T14:58:12Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All nine required checks passed on head 49cad42ae94bab67ff01caacd3cc8d6a82a983c1; GitHub merge state is CLEAN and the PR still contains exactly the seven allowed paths."
       }
     ]
   }
