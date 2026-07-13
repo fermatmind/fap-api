@@ -41547,3 +41547,51 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: MBTI-CMS-PROFILE-37
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    base: main
+    depends_on:
+      - MBTI-FULL-QA-36
+    branch: codex/mbti-cms-profile-37-full-dry-run
+    title: "MBTI-CMS-PROFILE-37: dry-run all 32 Chinese MBTI profiles"
+    train_scope: mbti_full_32_profile_cms_dry_run
+    status: user_authorized
+    mode: dry_run_only
+    scope:
+      - Add a fail-closed backend-only dry-run command and planner for the four approved Chinese MBTI Profile package artifacts.
+      - Normalize and validate exactly 32 public Profile records, including 28 repair candidates and four verify-only records that must not be rewritten.
+      - Validate zh-CN locale, unique slugs and variant identities, SEO, direct answer, FAQ, sections, internal links, source references, expected indexability, target matching, and deterministic idempotency.
+      - Keep every execution no-write; reject --write before package processing and do not publish, release feeds, deploy, or submit search actions.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityMbtiFullProfileImportDryRun.php
+      - backend/app/Services/Cms/MbtiFullProfileImportDryRunPlanner.php
+      - backend/tests/Feature/Console/PersonalityMbtiFullProfileImportDryRunCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify comparison importer behavior, fap-web, CMS content, database schema/data, public runtime routes, sitemap, llms, canonical, robots, JSON-LD, indexability, GSC, secrets, permissions, staging, or production deployment.
+      - Execute a production import, CMS write, publish, cache warm, indexability mutation, or search request.
+      - Implement MBTI-CMS-COMP-38 or later train scopes.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/PersonalityMbtiFullProfileImportDryRunCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Console/PersonalityMbtiProfileCmsImportDryRunCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiFullProfileImportDryRun.php app/Services/Cms/MbtiFullProfileImportDryRunPlanner.php tests/Feature/Console/PersonalityMbtiFullProfileImportDryRunCommandTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: MBTI-CMS-COMP-38
