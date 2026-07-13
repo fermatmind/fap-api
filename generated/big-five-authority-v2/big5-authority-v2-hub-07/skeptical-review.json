@@ -1,0 +1,53 @@
+{
+  "schema_version": "big5_authority_v2_skeptical_review.v1",
+  "train_id": "BIG5-AUTHORITY-V2-HUB-07",
+  "reviewed_artifact": "big5-authority-v2-hub-07-raw",
+  "review_status": "repair_required",
+  "expected_raw_issue_codes": [
+    "editorial_intent_not_specific",
+    "internal_links_incomplete",
+    "locale_not_independently_authored",
+    "required_section_missing",
+    "template_or_cliche_detected",
+    "visible_sources_incomplete"
+  ],
+  "findings": [
+    {
+      "code": "editorial_intent_not_specific",
+      "severity": "high",
+      "note": "The Chinese scenario and action are too compressed to support a concrete observation-and-recheck workflow."
+    },
+    {
+      "code": "template_or_cliche_detected",
+      "severity": "high",
+      "note": "The English direct answer contains an unsupported transformational slogan. Replace it with a bounded definition."
+    },
+    {
+      "code": "locale_not_independently_authored",
+      "severity": "high",
+      "note": "The Chinese draft declares translation provenance. Both locales must be independently edited with no source locale."
+    },
+    {
+      "code": "required_section_missing",
+      "severity": "high",
+      "note": "Result reading, facet navigation, use cases, misconceptions, counterexample, tradeoff, method boundary, visible evidence, and internal-link reader intents are missing."
+    },
+    {
+      "code": "visible_sources_incomplete",
+      "severity": "high",
+      "note": "Claims are mapped internally but readers cannot see the academic sources and limitations."
+    },
+    {
+      "code": "internal_links_incomplete",
+      "severity": "medium",
+      "note": "The hub does not yet provide locale-safe navigation to the five domains, facet hub, and test landing."
+    }
+  ],
+  "repair_policy": {
+    "overwrite_raw": false,
+    "automatic_publish": false,
+    "automatic_indexability": false,
+    "human_review_required": true,
+    "ai_detector_used": false
+  }
+}

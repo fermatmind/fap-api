@@ -1,0 +1,130 @@
+{
+  "schema_version": "big5_authority_v2_hub_package.v1",
+  "train_id": "BIG5-AUTHORITY-V2-HUB-07",
+  "artifact": "big5-authority-v2-hub-07-repaired",
+  "stage": "repaired",
+  "framework": "big_five",
+  "coverage": {
+    "expected_page_count": 2,
+    "canonical_paths": ["/en/personality/big-five", "/zh/personality/big-five"]
+  },
+  "pages": [
+    {
+      "content_key": "big-five-hub",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five",
+      "page_family": "model_hub",
+      "framework": "big_five",
+      "title": "Big Five personality: understand the five OCEAN dimensions",
+      "summary": "A bounded guide to reading five continuous trait dimensions as hypotheses for observation rather than fixed identity labels.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "sections": [
+        {"key": "direct-answer", "kind": "direct_answer", "heading": "What is the Big Five?", "body": "The Big Five organizes personality-trait descriptions into openness, conscientiousness, extraversion, agreeableness, and neuroticism. The five dimensions describe degrees of tendency, not a fixed type or a complete account of a person."},
+        {"key": "ocean-overview", "kind": "ocean_overview", "heading": "OCEAN in one view", "body": "The five headings cover engagement with novelty, organization and follow-through, social energy, cooperation, and sensitivity to distress. They are broad observation lenses rather than rankings of character or ability."},
+        {"key": "dimensional-model", "kind": "dimensional_model", "heading": "Think in ranges", "body": "A dimensional score sits on a continuum. High, middle, and low positions can all be adaptive in some settings, and the same person may express a tendency differently when the goal, role, or pressure changes."},
+        {"key": "result-reading", "kind": "result_reading", "heading": "Read a pattern, then test it", "body": "Compare all five dimensions, find repeated behavior across at least two contexts, and inspect facets or counterexamples before accepting a description. A mismatch is useful evidence and should not be edited away."},
+        {"key": "facet-navigation", "kind": "facet_navigation", "heading": "Use facets for a narrower question", "body": "A domain gives the broad map; facets provide more specific navigation. Follow the facet hub only when a domain summary is too coarse, and keep the named measurement taxonomy explicit rather than merging different systems."},
+        {"key": "use-cases", "kind": "use_cases", "heading": "Appropriate uses", "body": "Use the model to organize reflection about planning, learning, communication, novelty, and pressure. Do not use it as a clinical diagnosis, hiring cutoff, admission rule, or deterministic prediction of performance or relationships."},
+        {"key": "misconceptions", "kind": "misconceptions", "heading": "Common reading errors", "body": "High is not automatically better, low is not automatically deficient, and one score is not a permanent verdict. Group-level change research cannot predict an individual's trajectory or guarantee an intervention result."},
+        {"key": "scenario", "kind": "scenario", "heading": "Context changes expression", "body": "Jordan uses a checklist for a regulated release but explores freely during an early design workshop. The contrasting behaviors show why task stakes and purpose must be considered before summarizing a broad tendency."},
+        {"key": "counterexample", "kind": "counterexample", "heading": "Look for disconfirming evidence", "body": "Someone who stays quiet in a large meeting may facilitate an energetic small-group review. Status, preparation, language, and psychological safety are alternatives to a broad conclusion about social energy."},
+        {"key": "tradeoff", "kind": "tradeoff", "heading": "Pair benefit with cost", "body": "Detailed planning can prevent missed handoffs but delay a reversible choice; rapid exploration can generate options but make completion harder. Judge the behavior against the goal, time, and error cost."},
+        {"key": "action", "kind": "action", "heading": "Seven-day observation", "body": "Record situation, behavior, consequence, and one alternative explanation for a single reported tendency. Include two settings and one counterexample, then keep, narrow, or reject the hypothesis."},
+        {"key": "method-boundary", "kind": "method_boundary", "heading": "Method boundary", "body": "The sources support broad trait structure, hierarchical description, and group-level change findings. They do not independently validate FermatMind scores, establish a universal facet taxonomy, diagnose an individual, or guarantee outcomes."},
+        {"key": "visible-evidence", "kind": "visible_evidence", "heading": "Sources and limitations", "body": "The page maps five-dimension claims to Goldberg and the BFI-2, hierarchy claims to the BFI-2, and change claims to a life-course meta-analysis. Each citation retains its limitation."},
+        {"key": "internal-links", "kind": "internal_links", "heading": "Next steps", "body": "Choose a domain guide for a broad question, the facet hub for a narrower pattern, or the test overview for product boundaries. All links remain within the English public information architecture."}
+      ],
+      "claims": [
+        {"claim_id": "claim.big_five.five_broad_dimensions", "source_ids": ["academic.goldberg-1990-big-five-structure", "academic.soto-john-2017-bfi2"]},
+        {"claim_id": "claim.big_five.hierarchical_domains_and_facets", "source_ids": ["academic.soto-john-2017-bfi2"]},
+        {"claim_id": "claim.big_five.group_level_change_is_possible", "source_ids": ["academic.roberts-walton-viechtbauer-2006-change"]},
+        {"claim_id": "claim.fermatmind.non_diagnostic_boundary", "source_ids": ["official.fermatmind-public-contract-v2", "internal.public-claim-boundary-matrix"]}
+      ],
+      "visible_sources": [
+        {"source_id": "academic.goldberg-1990-big-five-structure", "citation_label": "Goldberg (1990), Big-Five factor structure", "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216", "limitation": "Supports broad factor structure, not FermatMind score validity or a universal facet taxonomy."},
+        {"source_id": "academic.soto-john-2017-bfi2", "citation_label": "Soto & John (2017), BFI-2 hierarchical model", "public_url": "https://doi.org/10.1037/pspp0000096", "limitation": "Describes one 15-facet model; taxonomies are not automatically interchangeable."},
+        {"source_id": "academic.roberts-walton-viechtbauer-2006-change", "citation_label": "Roberts, Walton, & Viechtbauer (2006), life-course meta-analysis", "public_url": "https://doi.org/10.1037/0033-2909.132.1.1", "limitation": "Group-level change does not predict or guarantee individual change."}
+      ],
+      "internal_links": [
+        {"href": "/en/personality/big-five/openness", "label": "Openness guide", "intent": "domain"},
+        {"href": "/en/personality/big-five/conscientiousness", "label": "Conscientiousness guide", "intent": "domain"},
+        {"href": "/en/personality/big-five/extraversion", "label": "Extraversion guide", "intent": "domain"},
+        {"href": "/en/personality/big-five/agreeableness", "label": "Agreeableness guide", "intent": "domain"},
+        {"href": "/en/personality/big-five/neuroticism", "label": "Neuroticism guide", "intent": "domain"},
+        {"href": "/en/personality/big-five/facets", "label": "Big Five facet hub", "intent": "facet_navigation"},
+        {"href": "/en/tests/big-five-personality-test-ocean-model", "label": "Big Five test overview", "intent": "test_landing"}
+      ]
+    },
+    {
+      "content_key": "big-five-hub",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five",
+      "page_family": "model_hub",
+      "framework": "big_five",
+      "title": "大五人格 OCEAN 指南：把五维结果变成可检验的观察",
+      "summary": "从五个连续维度整理行为线索，用场景和反例核对结果，不把分数写成固定身份。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "sections": [
+        {"key": "direct-answer", "kind": "direct_answer", "heading": "大五人格是什么", "body": "大五人格把特质描述整理为开放性、尽责性、外向性、宜人性和神经质五个宽泛维度。它描述倾向的程度，不把人归入固定类型，也不能代替对经历和情境的理解。"},
+        {"key": "ocean-overview", "kind": "ocean_overview", "heading": "OCEAN 在观察什么", "body": "五个入口分别关注新想法与体验、安排与执行、社交活力、合作与体谅、压力和负面情绪敏感度。名称用于组织观察，不表示道德或能力等级。"},
+        {"key": "dimensional-model", "kind": "dimensional_model", "heading": "用程度而不是类别来读", "body": "连续维度允许高、中、低和混合倾向同时成为有用信息。同一个人在不同任务、角色和压力下也会表现不同，因此分数应与具体行为一起解释。"},
+        {"key": "result-reading", "kind": "result_reading", "heading": "先看组合，再找证据", "body": "先比较五维组合，再从两个以上情境寻找重复模式，最后用侧面与反例核对。文字若与经验不符，应保留不一致，而不是为了证明报告正确去拼接故事。"},
+        {"key": "facet-navigation", "kind": "facet_navigation", "heading": "需要更具体时再进入侧面", "body": "维度提供地图，侧面帮助缩小问题。只有总体描述过粗时才进入侧面总览，并明确使用的测量体系，避免把不同模型中的标签和数量混为一谈。"},
+        {"key": "use-cases", "kind": "use_cases", "heading": "适合与不适合的用途", "body": "可以用它复盘学习、计划、沟通、变化和压力下的行为；不能把它当作临床诊断、招聘门槛、录取规则或对工作与关系结果的决定性预测。"},
+        {"key": "misconceptions", "kind": "misconceptions", "heading": "三个误区", "body": "高分不自动更好，低分不自动是缺陷，当前结果也不是终身判决。群体层面的变化研究无法预测某个人的轨迹，更不保证一次练习会改变分数。"},
+        {"key": "scenario", "kind": "scenario", "heading": "场景会改变行为表达", "body": "周宁在财务交付前逐项核对，却在概念讨论中允许议题自由展开。两次行为分别服务于降低风险和寻找可能，不能只取其中一次概括整个人。"},
+        {"key": "counterexample", "kind": "counterexample", "heading": "主动寻找反例", "body": "在大会上沉默的人，可能在熟悉的小组里清楚地主持讨论。角色、准备、语言和安全感都可能解释差异，不能把一次沉默直接等同于宽泛特质。"},
+        {"key": "tradeoff", "kind": "tradeoff", "heading": "同时写出收益和成本", "body": "细致计划能减少遗漏，也可能拖慢可逆决定；快速探索能增加方案，也可能妨碍收尾。判断应回到目标、时间、可逆性和出错成本。"},
+        {"key": "action", "kind": "action", "heading": "七天观察", "body": "选择一个倾向，记录情境、行为、后果和另一个解释；覆盖两个不同场合并寻找一个反例。七天后再决定保留、缩小还是放弃这个假设。"},
+        {"key": "method-boundary", "kind": "method_boundary", "heading": "方法边界", "body": "来源支持宽泛结构、层级描述和群体变化，不独立验证费马测试分数，也不证明存在通用侧面体系。内容用于反思，不提供诊断、录用结论或结果保证。"},
+        {"key": "visible-evidence", "kind": "visible_evidence", "heading": "可见证据", "body": "五维结构对应 Goldberg 和 BFI-2 研究，层级说明限定在已声明模型，变化表述限定在生命历程元分析的群体层面。每条来源保留限制。"},
+        {"key": "internal-links", "kind": "internal_links", "heading": "下一步导航", "body": "宽泛问题进入维度页，更细问题进入侧面总览，产品边界进入测试说明。链接保持中文语境，从总览逐步收窄问题。"}
+      ],
+      "claims": [
+        {"claim_id": "claim.big_five.five_broad_dimensions", "source_ids": ["academic.goldberg-1990-big-five-structure", "academic.soto-john-2017-bfi2"]},
+        {"claim_id": "claim.big_five.hierarchical_domains_and_facets", "source_ids": ["academic.soto-john-2017-bfi2"]},
+        {"claim_id": "claim.big_five.group_level_change_is_possible", "source_ids": ["academic.roberts-walton-viechtbauer-2006-change"]},
+        {"claim_id": "claim.fermatmind.non_diagnostic_boundary", "source_ids": ["official.fermatmind-public-contract-v2", "internal.public-claim-boundary-matrix"]}
+      ],
+      "visible_sources": [
+        {"source_id": "academic.goldberg-1990-big-five-structure", "citation_label": "Goldberg（1990）：大五因子结构研究", "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216", "limitation": "支持宽泛结构，不验证费马测试分数，也不定义通用侧面分类。"},
+        {"source_id": "academic.soto-john-2017-bfi2", "citation_label": "Soto 与 John（2017）：BFI-2 层级模型", "public_url": "https://doi.org/10.1037/pspp0000096", "limitation": "描述特定 15 侧面模型，不能与其他体系默认互换。"},
+        {"source_id": "academic.roberts-walton-viechtbauer-2006-change", "citation_label": "Roberts、Walton、Viechtbauer（2006）：生命历程元分析", "public_url": "https://doi.org/10.1037/0033-2909.132.1.1", "limitation": "群体均值变化不能预测或保证个体变化。"}
+      ],
+      "internal_links": [
+        {"href": "/zh/personality/big-five/openness", "label": "开放性指南", "intent": "domain"},
+        {"href": "/zh/personality/big-five/conscientiousness", "label": "尽责性指南", "intent": "domain"},
+        {"href": "/zh/personality/big-five/extraversion", "label": "外向性指南", "intent": "domain"},
+        {"href": "/zh/personality/big-five/agreeableness", "label": "宜人性指南", "intent": "domain"},
+        {"href": "/zh/personality/big-five/neuroticism", "label": "神经质指南", "intent": "domain"},
+        {"href": "/zh/personality/big-five/facets", "label": "大五侧面总览", "intent": "facet_navigation"},
+        {"href": "/zh/tests/big-five-personality-test-ocean-model", "label": "大五人格测试说明", "intent": "test_landing"}
+      ]
+    }
+  ],
+  "workflow": {
+    "raw_artifact": "raw-draft.json",
+    "skeptical_review_artifact": "skeptical-review.json",
+    "repaired_artifact": "repaired-draft.json",
+    "final_artifact": "final-package.json",
+    "raw_failures_preserved": true,
+    "ai_detector_used": false
+  },
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}
