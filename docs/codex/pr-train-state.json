@@ -89493,8 +89493,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-WEB-TRUST-RENDERER-04"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "8fab27075efe37ac2c7271069ff31612bfcf051c",
+    "status": "ready_to_merge",
+    "commit_sha": "958c63f4794f455f831bd789fc49385f56da9001",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3037",
     "checks": {
       "dependency": {
@@ -89520,6 +89520,10 @@
       "scope": {
         "status": "pass",
         "evidence": "All 8 changed files match the PR05 manifest allowlist exactly. No runtime, CMS/database, publish, deploy, schema, indexability, search, frontend, or private-route mutation occurred."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "Head 958c63f4794f455f831bd789fc49385f56da9001 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS, and semgrep SARIF upload. GitHub reports mergeStateStatus CLEAN with no review block."
       }
     },
     "failure_reason": null,
@@ -89548,6 +89552,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Implementation commit 8fab27075efe37ac2c7271069ff31612bfcf051c was pushed and PR #3037 opened; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-13T20:24:23Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed on head 958c63f4794f455f831bd789fc49385f56da9001; PR #3037 is CLEAN with no review block."
       }
     ]
   },
