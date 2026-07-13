@@ -90550,5 +90550,91 @@
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
     "transitions": []
+  },
+  "SAEP-PLANNED-PR-01": {
+    "id": "SAEP-PLANNED-PR-01",
+    "existing_pr_card_id": "SAEP-PRCARD-API-b1b66bc044d6",
+    "repo": "fap-api",
+    "title": "SAEP-PLANNED-PR-01 Expose explicit test public-state contract",
+    "base": "main",
+    "branch": "codex/saep-planned-pr-01-test-public-state",
+    "depends_on": [
+      "BIG5-COMMERCIAL-FIELD-BACKEND-AUTHORITY-FIX-01"
+    ],
+    "depends_on_atomic_tasks": [
+      "SAEP-PT-07",
+      "SAEP-PARITY-02"
+    ],
+    "status": "local_checks_passed_retry",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "The SAEP continuous-execution goal authorizes this exact locked card and its normal PR lifecycle."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "Required dependency merge 950b81cd23df85fb1de4ada2dfc5205f758f3284 remains an ancestor of current main."
+      },
+      "baseline_repair": {
+        "status": "pass",
+        "evidence": "Ad-hoc baseline repair PR #3042 merged as 1568a54a2d5ccceea6b07d2050725773b3ffad9f after all required checks passed; the exact is_public diff is allowed while arbitrary controller changes remain blocked."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "The diff contains exactly the two locked code paths and the two canonical docs/codex metadata paths."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "ScalesLookupTest passed 11 tests and 236 assertions with only the expected missing local .env warning; Pint passed both PHP files; PHP syntax, YAML, JSON, git diff --check and exact scope passed. A separate fap-web Vitest run was active, so no second heavy full validation was started."
+      },
+      "github": {
+        "status": "not_run"
+      }
+    },
+    "failure_reason": null,
+    "hold_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "previous_attempt": {
+      "pr_number": 3038,
+      "head_sha": "fcd855aa3f45aeed4ee829154297da98d037ce04",
+      "final_state": "closed_unmerged",
+      "failure": "verify-bigfive freeze classifier blocked the controller path before the line-aware baseline repair existed"
+    },
+    "transitions": [
+      {
+        "at": "2026-07-13T20:40:06Z",
+        "status": "pr_open_checks_pending",
+        "note": "The first attempt opened PR #3038 after focused local checks passed."
+      },
+      {
+        "at": "2026-07-13T20:51:40Z",
+        "status": "closed_unmerged_required_check_scope_blocker",
+        "note": "PR #3038 was closed unmerged after verify-bigfive required a repair outside the locked four-path scope."
+      },
+      {
+        "at": "2026-07-13T22:51:12Z",
+        "status": "baseline_repair_merged",
+        "note": "PR #3042 merged the isolated fail-closed line-aware classifier repair with all required checks green."
+      },
+      {
+        "at": "2026-07-13T22:52:30Z",
+        "status": "in_progress_retry_after_baseline_repair",
+        "note": "Restarted the exact locked PR01 scope from current main 1568a54a2d5ccceea6b07d2050725773b3ffad9f."
+      },
+      {
+        "at": "2026-07-13T22:54:05Z",
+        "status": "local_checks_passed_retry",
+        "note": "Focused ScalesLookupTest, Pint, PHP syntax, YAML/JSON parsing, diff check and exact four-path scope validation passed."
+      }
+    ]
   }
 }
