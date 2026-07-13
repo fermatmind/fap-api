@@ -41726,6 +41726,7 @@ prs:
       - backend/bootstrap/app.php
       - backend/routes/api.php
       - backend/tests/Feature/Ops/PublicContentRuntimeMetricsTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/contracts/openapi.snapshot.json
       - docs/operations/public-content-observability.md
       - docs/codex/pr-train.yaml
@@ -41737,7 +41738,8 @@ prs:
       - Add private routes, purge, warm, CMS writes, production migration execution, or deployment.
     validation:
       - cd backend && php artisan test tests/Feature/Ops/PublicContentRuntimeMetricsTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Http/Middleware/RecordPublicContentRuntime.php app/Services/Ops/PublicContentRuntimeMetricsService.php app/Models/PublicContentRuntimeDaily.php app/Http/Controllers/API/V0_5/Ops/PublicContentRuntimeMetricsController.php bootstrap/app.php routes/api.php tests/Feature/Ops/PublicContentRuntimeMetricsTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_public_content_runtime_metrics_only --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Middleware/RecordPublicContentRuntime.php app/Services/Ops/PublicContentRuntimeMetricsService.php app/Models/PublicContentRuntimeDaily.php app/Http/Controllers/API/V0_5/Ops/PublicContentRuntimeMetricsController.php bootstrap/app.php routes/api.php tests/Feature/Ops/PublicContentRuntimeMetricsTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && php artisan route:list --path=api/v0.5/ops/public-content-health --except-vendor
       - cd backend && bash scripts/export_openapi.sh --check
       - cd backend && composer test
