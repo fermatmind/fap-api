@@ -90377,9 +90377,9 @@
       "SAEP-PT-07",
       "SAEP-PARITY-02"
     ],
-    "status": "committed_ready_to_push",
-    "commit_sha": "c99e3f84c260eb084a17c29177e1ecd63adf70bb",
-    "pr_url": null,
+    "status": "pr_open_checks_pending",
+    "commit_sha": "169524779c73678f3d9b021188e51b5ccbd3b008",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3038",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -90398,7 +90398,9 @@
         "evidence": "ScalesLookupTest: 11 tests, 236 assertions passed with only the expected missing local .env warning; Pint passed 2 files; PHP syntax, YAML, JSON, git diff --check and exact scope passed. The first attempt loaded origin/main through a shared vendor symlink and failed only the two new is_public assertions; a local vendor copy corrected test isolation before the passing rerun."
       },
       "github": {
-        "status": "not_run"
+        "status": "pending",
+        "checked_at": "2026-07-13T20:40:06Z",
+        "evidence": "PR #3038 is open; initial hygiene and Code Scanning checks are in progress."
       }
     },
     "failure_reason": null,
@@ -90431,6 +90433,11 @@
         "at": "2026-07-13T20:38:57Z",
         "status": "committed_ready_to_push",
         "note": "Committed the exact four-path implementation and canonical train metadata at c99e3f84c260eb084a17c29177e1ecd63adf70bb."
+      },
+      {
+        "at": "2026-07-13T20:40:06Z",
+        "status": "pr_open_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3038. Initial required checks are in progress."
       }
     ]
   }
