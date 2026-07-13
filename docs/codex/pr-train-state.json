@@ -89321,7 +89321,11 @@
       },
       "scope_and_diff": {
         "status": "pass",
-        "evidence": "Exact changed-file scope validation passed for 15 files and git diff --check exited 0. Full-chain regenerated BIG5_OCEAN compiled side effects were restored before scope validation."
+        "evidence": "Exact changed-file scope validation passed for the declared PR02 paths and git diff --check exited 0. Full-chain regenerated BIG5_OCEAN compiled side effects were restored before scope validation."
+      },
+      "github_verify_bigfive_retry": {
+        "status": "local_fix_passed_pending_rerun",
+        "evidence": "First remote verify-bigfive run failed only because the result-page runtime-freeze classifier had no exemption for the three new no-write integrity helper files; 1213 tests otherwise passed. Added an exact three-file classifier exemption plus regression. The original failing branch-diff test and new classifier test pass locally (2 tests / 4 assertions); verify-mbti-v2 and verify-mbti-legacy were green."
       }
     },
     "failure_reason": null,
@@ -89350,6 +89354,18 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Implementation commit 73eef31fb563a66449f12c300044b6f74c230e00 was pushed and PR #3034 opened; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-13T17:27:08Z",
+        "from": "github_checks_pending",
+        "to": "github_checks_failed_fixing",
+        "note": "First remote verify-bigfive run failed at BigFiveResultPageV2CoreBodyPreviewTest because the runtime-freeze classifier identified the three new PR02 helper files; all other reported checks, including verify-mbti-v2 and verify-mbti-legacy, passed."
+      },
+      {
+        "at": "2026-07-13T17:27:08Z",
+        "from": "github_checks_failed_fixing",
+        "to": "github_checks_pending",
+        "note": "Added the exact scoped runtime-freeze classifier exemption and regression test. The original branch-diff assertion and new classifier test pass locally; GitHub rerun remains pending."
       }
     ]
   },

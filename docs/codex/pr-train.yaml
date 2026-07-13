@@ -41723,6 +41723,7 @@ prs:
       - backend/tests/Feature/Console/PersonalityBigFivePublicIntegrityGateCommandTest.php
       - backend/tests/Feature/SEO/ArticleSeoServiceTest.php
       - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - generated/big-five-authority-v2-integrity-gate-02/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -41731,6 +41732,7 @@ prs:
       - "node generated/big-five-authority-v2-integrity-gate-02/validate-package.mjs"
       - "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/PersonalityBigFivePublicIntegrityGateCommandTest.php tests/Feature/SEO/ArticleSeoServiceTest.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --no-ansi"
       - "cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFivePublicIntegrityGate.php app/Services/SEO/BigFivePublicIntegrityGate.php app/Support/PublicSeoTitleNormalizer.php app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php app/Services/Cms/ArticleSeoService.php tests/Feature/Console/PersonalityBigFivePublicIntegrityGateCommandTest.php tests/Feature/SEO/ArticleSeoServiceTest.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php"
+      - "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter public_integrity_gate --no-ansi"
       - "bash backend/scripts/ci_verify_mbti.sh"
       - "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
       - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
