@@ -234,6 +234,15 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('meta.alternates.en', $canonical)
             ->assertJsonPath('meta.alternates.zh', $zhCanonical)
             ->assertJsonPath('meta.alternates.zh-CN', $zhCanonical)
+            ->assertJsonPath('meta.article_authority_v1.contract_version', 'article.seo.authority.v1')
+            ->assertJsonPath('meta.article_authority_v1.published_revision_backed', true)
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', ['en', 'zh-CN'])
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.alternates.en', $canonical)
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.alternates.zh-CN', $zhCanonical)
+            ->assertJsonPath('meta.article_authority_v1.structured_data_eligibility.article.enabled', false)
+            ->assertJsonPath('meta.article_authority_v1.structured_data_eligibility.breadcrumb_list.enabled', false)
+            ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.article', null)
+            ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.breadcrumb_list', null)
             ->assertJsonPath('jsonld.url', $canonical)
             ->assertJsonPath('jsonld.mainEntityOfPage', $canonical.'#webpage')
             ->assertJsonMissingPath('jsonld.publisher')
@@ -271,7 +280,9 @@ final class ArticlePublicApiTest extends TestCase
         $response->assertOk()
             ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/articles/mbti-vs-holland-code-career-choice')
             ->assertJsonPath('meta.alternates.zh', 'https://staging.fermatmind.com/zh/articles/mbti-vs-holland-career-choice')
-            ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/articles/mbti-vs-holland-career-choice');
+            ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/articles/mbti-vs-holland-career-choice')
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', ['en', 'zh-CN'])
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.alternates.zh-CN', 'https://staging.fermatmind.com/zh/articles/mbti-vs-holland-career-choice');
 
         $this->assertNull(data_get($response->json(), 'meta.alternates.x-default'));
     }
@@ -430,6 +441,22 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonMissingPath('article.seo_meta.schema_json.editorial_package_v1');
 
         $this->assertStringNotContainsString('private_operator_note', (string) $response->getContent());
+
+        $canonical = 'https://fermatmind.com/en/articles/schema-gated-article';
+        $seo = $this->getJson('/api/v0.5/articles/schema-gated-article/seo?locale=en');
+
+        $seo->assertOk()
+            ->assertJsonPath('meta.article_authority_v1.published_revision_backed', true)
+            ->assertJsonPath('meta.article_authority_v1.structured_data_eligibility.article.enabled', true)
+            ->assertJsonPath('meta.article_authority_v1.structured_data_eligibility.breadcrumb_list.enabled', true)
+            ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.article.@type', 'Article')
+            ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.article.headline', 'Schema Gated Article')
+            ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.article.url', $canonical)
+            ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.breadcrumb_list.@type', 'BreadcrumbList')
+            ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.breadcrumb_list.itemListElement.0.item', 'https://fermatmind.com/en/articles')
+            ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.breadcrumb_list.itemListElement.1.item', $canonical);
+
+        $this->assertStringNotContainsString('private_operator_note', (string) $seo->getContent());
     }
 
     public function test_article_detail_projects_cms_cta_slots_and_visible_faq_without_private_targets(): void
@@ -675,6 +702,12 @@ final class ArticlePublicApiTest extends TestCase
         $this->createSeoMeta($articleEn, [
             'seo_title' => 'Legacy Article SEO | FermatMind',
             'seo_description' => 'Legacy article SEO description.',
+            'schema_json' => [
+                'editorial_package_v1' => [
+                    'article_schema_enabled' => true,
+                    'breadcrumb_schema_enabled' => true,
+                ],
+            ],
         ]);
 
         $this->createArticle([
@@ -689,7 +722,12 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('meta.title', 'Published Revision SEO | FermatMind')
             ->assertJsonPath('meta.description', 'Published revision SEO description.')
             ->assertJsonPath('jsonld.headline', 'Published Revision SEO | FermatMind')
-            ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/articles/revision-seo-source');
+            ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/articles/revision-seo-source')
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', ['en'])
+            ->assertJsonPath('meta.article_authority_v1.structured_data_eligibility.article.enabled', true)
+            ->assertJsonPath('meta.article_authority_v1.structured_data_eligibility.breadcrumb_list.enabled', true)
+            ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.article.headline', 'Published Revision SEO | FermatMind')
+            ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.article.description', 'Published revision SEO description.');
 
         $this->assertNull(data_get($response->json(), 'meta.alternates.zh'));
         $this->assertNull(data_get($response->json(), 'meta.alternates.zh-CN'));
@@ -816,6 +854,7 @@ final class ArticlePublicApiTest extends TestCase
         $response->assertOk()
             ->assertJsonPath('meta.canonical', $canonical)
             ->assertJsonPath('meta.alternates.en', $canonical)
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', ['en'])
             ->assertJsonPath('jsonld.url', $canonical)
             ->assertJsonPath('jsonld.mainEntityOfPage', $canonical);
 

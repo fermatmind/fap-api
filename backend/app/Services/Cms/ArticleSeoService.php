@@ -89,15 +89,25 @@ final class ArticleSeoService
         $description = $revision?->seo_description ?? $seo?->seo_description
             ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160);
         $canonical = $this->buildCanonicalUrl((string) $article->slug, $locale);
+        $alternates = $this->buildAlternates($article);
         $image = PublicMediaUrlGuard::sanitizeNullableUrl(
             $seo?->og_image_url ?? $this->resolveArticleImageUrl($article)
         );
+        $structuredData = $this->buildStructuredData($article, $revision, $seo, $canonical, $locale);
 
         return [
             'title' => $title,
             'description' => $description,
             'canonical' => $canonical,
-            'alternates' => $this->buildAlternates($article),
+            'alternates' => $alternates,
+            'article_authority_v1' => $this->buildArticleAuthorityProjection(
+                $article,
+                $revision,
+                $seo,
+                $alternates,
+                $structuredData,
+                $locale,
+            ),
 
             'og' => [
                 'title' => $seo?->og_title ?? $title,
@@ -126,25 +136,7 @@ final class ArticleSeoService
         $seo = $this->resolveSeoMeta($article, $locale);
         $revision = $this->resolvePublishedRevision($article, $revision);
         $canonical = $this->buildCanonicalUrl((string) $article->slug, $locale);
-        $descriptionSource = (string) ($revision?->excerpt ?? $revision?->content_md ?? $article->excerpt ?? $article->content_md);
-        $structured = $this->careerArticleStructuredDataBuilder->build('article_public_detail', [
-            'id' => $canonical !== null ? $canonical.'#article' : null,
-            'headline' => $revision?->seo_title ?? $revision?->title ?? $seo?->seo_title ?? $article->title,
-            'description' => $revision?->seo_description ?? $seo?->seo_description
-                ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160),
-            'url' => $canonical,
-            'main_entity_of_page' => $canonical,
-            'image' => PublicMediaUrlGuard::sanitizeNullableUrl(
-                $seo?->og_image_url ?? $this->resolveArticleImageUrl($article)
-            ),
-            'date_published' => $revision?->published_at?->toAtomString() ?? $article->published_at?->toAtomString(),
-            'date_modified' => $revision?->updated_at?->toAtomString() ?? $article->updated_at?->toAtomString(),
-            'article_section' => $this->normalizeString($article->category?->name),
-            'author_name' => $this->normalizeString($article->author_name),
-            'keywords' => $article->relationLoaded('tags')
-                ? $article->tags->pluck('name')->all()
-                : null,
-        ]);
+        $structured = $this->buildStructuredData($article, $revision, $seo, $canonical, $locale);
         $jsonLd = is_array($structured)
             ? (array) data_get($structured, 'fragments.article', [])
             : [];
@@ -265,6 +257,109 @@ final class ArticleSeoService
         }
 
         return $this->normalizeString($article->cover_image_url);
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function buildStructuredData(
+        Article $article,
+        ?ArticleTranslationRevision $revision,
+        ?ArticleSeoMeta $seo,
+        ?string $canonical,
+        string $locale,
+    ): ?array {
+        $descriptionSource = (string) ($revision?->excerpt ?? $revision?->content_md ?? $article->excerpt ?? $article->content_md);
+        $structured = $this->careerArticleStructuredDataBuilder->build('article_public_detail', [
+            'id' => $canonical !== null ? $canonical.'#article' : null,
+            'headline' => $revision?->seo_title ?? $revision?->title ?? $seo?->seo_title ?? $article->title,
+            'description' => $revision?->seo_description ?? $seo?->seo_description
+                ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160),
+            'url' => $canonical,
+            'main_entity_of_page' => $canonical,
+            'breadcrumb_root_url' => $this->buildListUrl($locale),
+            'image' => PublicMediaUrlGuard::sanitizeNullableUrl(
+                $seo?->og_image_url ?? $this->resolveArticleImageUrl($article)
+            ),
+            'date_published' => $revision?->published_at?->toAtomString() ?? $article->published_at?->toAtomString(),
+            'date_modified' => $revision?->updated_at?->toAtomString() ?? $article->updated_at?->toAtomString(),
+            'article_section' => $this->normalizeString($article->category?->name),
+            'author_name' => $this->normalizeString($article->author_name),
+            'keywords' => $article->relationLoaded('tags')
+                ? $article->tags->pluck('name')->all()
+                : null,
+        ]);
+
+        if (! is_array($structured)) {
+            return null;
+        }
+
+        return PublicMediaUrlGuard::sanitizeJsonLdImageFields(
+            CanonicalFrontendUrl::normalizeNestedUrls(
+                $this->normalizeJsonLdUrls($structured, $canonical, (string) $article->slug)
+            )
+        );
+    }
+
+    /**
+     * @param  array<string,string>  $alternates
+     * @param  array<string,mixed>|null  $structuredData
+     * @return array<string,mixed>
+     */
+    private function buildArticleAuthorityProjection(
+        Article $article,
+        ?ArticleTranslationRevision $revision,
+        ?ArticleSeoMeta $seo,
+        array $alternates,
+        ?array $structuredData,
+        string $locale,
+    ): array {
+        $publishedRevisionBacked = $revision instanceof ArticleTranslationRevision
+            && $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED;
+        $publiclyIndexable = $publishedRevisionBacked
+            && (string) $article->status === 'published'
+            && (bool) $article->is_public
+            && (bool) $article->is_indexable;
+
+        $eligibleAlternates = [];
+        if ($publiclyIndexable) {
+            foreach (self::SUPPORTED_LOCALES as $supportedLocale) {
+                $url = $alternates[$supportedLocale] ?? null;
+                if (is_string($url) && trim($url) !== '') {
+                    $eligibleAlternates[$supportedLocale] = trim($url);
+                }
+            }
+        }
+
+        $metadata = $this->editorialPackageMetadata($article, $seo);
+        $articleFragment = data_get($structuredData, 'fragments.article');
+        $breadcrumbFragment = data_get($structuredData, 'fragments.breadcrumb_list');
+        $articleEnabled = $publiclyIndexable
+            && ($metadata['article_schema_enabled'] ?? null) === true
+            && is_array($articleFragment);
+        $breadcrumbEnabled = $publiclyIndexable
+            && ($metadata['breadcrumb_schema_enabled'] ?? null) === true
+            && is_array($breadcrumbFragment);
+
+        return [
+            'contract_version' => 'article.seo.authority.v1',
+            'published_revision_backed' => $publishedRevisionBacked,
+            'alternate_eligibility' => [
+                'basis' => 'published_indexable_locale_siblings',
+                'current_locale' => $locale,
+                'eligible_locales' => array_keys($eligibleAlternates),
+                'alternates' => $eligibleAlternates,
+            ],
+            'structured_data_eligibility' => [
+                'basis' => 'cms_explicit_schema_gates',
+                'article' => ['enabled' => $articleEnabled],
+                'breadcrumb_list' => ['enabled' => $breadcrumbEnabled],
+            ],
+            'structured_data_fragments' => [
+                'article' => $articleEnabled ? $articleFragment : null,
+                'breadcrumb_list' => $breadcrumbEnabled ? $breadcrumbFragment : null,
+            ],
+        ];
     }
 
     /**

@@ -58,4 +58,23 @@ final class CareerArticleStructuredDataBuilderTest extends TestCase
             'url' => 'https://staging.fermatmind.com/en/career/resolve?q=backend',
         ]));
     }
+
+    public function test_it_uses_the_article_hub_as_the_public_article_breadcrumb_root(): void
+    {
+        $detailUrl = 'https://staging.fermatmind.com/en/articles/from-mbti-to-job-fit';
+        $payload = app(CareerArticleStructuredDataBuilder::class)->build('article_public_detail', [
+            'headline' => 'From MBTI to Job Fit',
+            'url' => $detailUrl,
+            'breadcrumb_root_url' => 'https://staging.fermatmind.com/en/articles',
+        ]);
+
+        $this->assertSame(
+            'https://staging.fermatmind.com/en/articles',
+            data_get($payload, 'fragments.breadcrumb_list.itemListElement.0.item')
+        );
+        $this->assertSame(
+            $detailUrl,
+            data_get($payload, 'fragments.breadcrumb_list.itemListElement.1.item')
+        );
+    }
 }

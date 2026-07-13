@@ -84,6 +84,7 @@ final class CareerArticleStructuredDataBuilder
 
         $breadcrumbNodes = $this->buildBreadcrumbNodes(
             routeKind: $routeKind,
+            rootPath: $this->normalizeString($payload['breadcrumb_root_url'] ?? null) ?? $url,
             canonicalPath: $url,
             canonicalTitle: $headline,
         );
@@ -105,6 +106,7 @@ final class CareerArticleStructuredDataBuilder
      */
     private function buildBreadcrumbNodes(
         string $routeKind,
+        string $rootPath,
         string $canonicalPath,
         string $canonicalTitle,
     ): array {
@@ -117,7 +119,7 @@ final class CareerArticleStructuredDataBuilder
         return array_values(array_filter([
             [
                 'name' => $rootName,
-                'path' => $canonicalPath,
+                'path' => $rootPath,
             ],
             [
                 'name' => $canonicalTitle,

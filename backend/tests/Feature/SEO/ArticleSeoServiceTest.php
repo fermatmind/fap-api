@@ -142,4 +142,52 @@ final class ArticleSeoServiceTest extends TestCase
         $this->assertStringNotContainsString('FAQPage', json_encode($heldJsonLd, JSON_THROW_ON_ERROR));
         $this->assertSame('FAQPage', data_get($enabledJsonLd, 'hasPart.0.@type'));
     }
+
+    public function test_article_authority_projection_fails_closed_without_a_published_revision(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'held-article-authority',
+            'locale' => 'en',
+            'title' => 'Held article authority',
+            'excerpt' => 'Explicit schema gates without a published revision.',
+            'content_md' => '# Held article authority',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 7, 13, 8, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+            'created_at' => Carbon::create(2026, 7, 13, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 7, 13, 9, 0, 0, 'UTC'),
+        ]);
+        ArticleSeoMeta::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'Held article authority',
+            'seo_description' => 'Explicit schema gates without a published revision.',
+            'canonical_url' => null,
+            'og_title' => 'Held article authority',
+            'og_description' => 'Explicit schema gates without a published revision.',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+            'schema_json' => [
+                'editorial_package_v1' => [
+                    'article_schema_enabled' => true,
+                    'breadcrumb_schema_enabled' => true,
+                ],
+            ],
+        ]);
+
+        $authority = app(ArticleSeoService::class)->buildSeoPayload($article)['article_authority_v1'];
+
+        $this->assertFalse($authority['published_revision_backed']);
+        $this->assertSame([], data_get($authority, 'alternate_eligibility.eligible_locales'));
+        $this->assertFalse(data_get($authority, 'structured_data_eligibility.article.enabled'));
+        $this->assertFalse(data_get($authority, 'structured_data_eligibility.breadcrumb_list.enabled'));
+        $this->assertNull(data_get($authority, 'structured_data_fragments.article'));
+        $this->assertNull(data_get($authority, 'structured_data_fragments.breadcrumb_list'));
+    }
 }
