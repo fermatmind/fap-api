@@ -7,7 +7,7 @@
 - Stop immediately if changed files drift outside the declared scope and `stop_if_changed_files_outside_scope` is true.
 
 ## Goal execution standing authorization
-- FermatMind is normally operated by one developer and execution goals often run unattended overnight. Unless interactive checkpoints are explicitly requested, treat a concrete execution goal as unattended mode: make safe, reversible, in-scope decisions, record them, and continue without waiting for acknowledgements.
+- FermatMind is a solo-developed project. At all times, treat every concrete end-to-end execution goal as continuous execution mode: make safe, reversible, in-scope decisions, record them, and continue without waiting for acknowledgements. This repository-wide working rule does not depend on time of day or unattended execution.
 - A concrete `/goal` or equivalent end-to-end execution instruction for an identified scope is standing authorization for its normal PR lifecycle: branch, scoped implementation, checks, explicit staging, commit, push, PR creation, polling, same-scope CI/review fixes, policy-compliant merge, synchronization, and cleanup. Do not ask again for those actions.
 - The same goal authorizes exact manifest/state initialization for a named task/card and declared dependency completion in dependency order.
 - When a required check is blocked by a defect proven to pre-exist on `main` outside the current PR scope, create and finish a separate minimal ad-hoc baseline-repair PR, then resume the goal. Keep scopes separate and do not request another PR authorization.
@@ -32,7 +32,7 @@
 
 ## Dependency discipline
 - A PR may start only when all `depends_on` items are already merged into `main`.
-- If a dependency is not merged, do not start the dependent PR. In unattended goal mode, complete or wait for the declared dependency, then continue automatically. Mark `blocked_dependency` and stop only when the dependency requires unavailable external authority or cannot be completed safely.
+- If a dependency is not merged, do not start the dependent PR. Under an active execution goal, complete or wait for the declared dependency, then continue automatically. Mark `blocked_dependency` and stop only when the dependency requires unavailable external authority or cannot be completed safely.
 
 ## Verification discipline
 - Run all local checks listed in the PR manifest before push.
@@ -93,7 +93,7 @@
   - review requirement block
   - ambiguous repository state
 - Do not improvise around failures.
-- In unattended goal mode, exhaust safe in-scope diagnosis, retry, same-PR repair, declared dependency completion, and isolated baseline-repair alternatives before stopping. Prefer a clean, evidence-backed hold only after those paths are exhausted.
+- Under an active execution goal, exhaust safe in-scope diagnosis, retry, same-PR repair, declared dependency completion, and isolated baseline-repair alternatives before stopping. Prefer a clean, evidence-backed hold only after those paths are exhausted.
 
 ## Local vs cloud execution
 - If operating in a cloud-only environment, remote branch deletion is allowed, but local cleanup must be reported as not executed.
