@@ -23,7 +23,7 @@ final class SeoAgentL5aContentPagePublishCanaryTest extends TestCase
         $page = $this->createContentPage();
         [$draftWriteEvidencePath] = $this->createDraftWriteEvidence($page);
         $artifactDir = storage_path('framework/testing/l5a-contentpage-publish-'.Str::uuid()->toString());
-        $before = $this->pageState($page);
+        $before = $this->pageState($page->refresh());
 
         $exitCode = Artisan::call('seo-agent:l5a-contentpage-publish-canary', [
             '--draft-write-evidence' => $draftWriteEvidencePath,
@@ -125,6 +125,7 @@ final class SeoAgentL5aContentPagePublishCanaryTest extends TestCase
     {
         $page = $this->createContentPage();
         [$draftWriteEvidencePath, , $draftWriteEvidence] = $this->createDraftWriteEvidence($page);
+        $workingRevisionId = $page->refresh()->working_revision_id;
 
         $exitCode = Artisan::call('seo-agent:l5a-contentpage-publish-canary', [
             '--draft-write-evidence' => $draftWriteEvidencePath,
@@ -138,7 +139,7 @@ final class SeoAgentL5aContentPagePublishCanaryTest extends TestCase
 
         $this->assertSame(1, $exitCode);
         $this->assertContains('draft_write_sha256_confirmation_mismatch', $summary['issues'] ?? []);
-        $this->assertNull($page->refresh()->working_revision_id);
+        $this->assertSame($workingRevisionId, $page->refresh()->working_revision_id);
 
         unset($draftWriteEvidence['rollback_pointer']['candidate_revision_id']);
         File::put($draftWriteEvidencePath, json_encode($draftWriteEvidence, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n");
@@ -152,7 +153,7 @@ final class SeoAgentL5aContentPagePublishCanaryTest extends TestCase
 
         $this->assertSame(1, $exitCode);
         $this->assertContains('rollback_evidence_missing', $summary['issues'] ?? []);
-        $this->assertNull($page->refresh()->working_revision_id);
+        $this->assertSame($workingRevisionId, $page->refresh()->working_revision_id);
     }
 
     #[Test]

@@ -504,6 +504,9 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, $payload['comparison_row_count']);
         $this->assertSame(64, $payload['would_promote_count']);
         $this->assertSame($this->v85V5Bilingual64Urls(), array_column($payload['rows'], 'url'));
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) ($payload['rows'][0]['promotion_preview_sha256'] ?? ''));
+        $this->assertArrayNotHasKey('promotion_preview', $payload['rows'][0]);
+        $this->assertLessThan(1_000_000, strlen(Artisan::output()));
         $this->assertFalse($payload['writes_committed']);
         $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
         $this->assertSame(0, PersonalityProfileVariantSection::query()->count());

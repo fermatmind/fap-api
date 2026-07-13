@@ -43,14 +43,15 @@ final class ContentPackV2ResolverMaterializationTest extends TestCase
     public function test_flags_disabled_resolver_returns_today_source_path_without_materializing(): void
     {
         $releaseId = (string) Str::uuid();
-        $manifestHash = str_repeat('a', 64);
+        $manifestPayload = $this->manifestPayload(str_repeat('a', 64));
+        $manifestHash = hash('sha256', $manifestPayload);
         $storagePath = 'private/packs_v2/BIG5_OCEAN/v1/'.$releaseId;
         $sourceCompiledDir = storage_path('app/'.$storagePath.'/compiled');
 
-        $this->insertRelease($releaseId, $manifestHash, $storagePath);
+        $this->insertRelease($releaseId, $manifestHash, $storagePath, manifestJson: $manifestPayload);
         $this->activateRelease($releaseId);
         $this->writeCompiledTree($sourceCompiledDir, [
-            'manifest.json' => json_encode(['compiled_hash' => $manifestHash], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'manifest.json' => $manifestPayload,
             'questions.compiled.json' => '{"source":"primary"}',
         ]);
 
@@ -67,14 +68,15 @@ final class ContentPackV2ResolverMaterializationTest extends TestCase
         config()->set('storage_rollout.resolver_materialization_enabled', true);
 
         $releaseId = (string) Str::uuid();
-        $manifestHash = str_repeat('b', 64);
+        $manifestPayload = $this->manifestPayload(str_repeat('b', 64));
+        $manifestHash = hash('sha256', $manifestPayload);
         $storagePath = 'private/packs_v2/BIG5_OCEAN/v1/'.$releaseId;
         $sourceCompiledDir = storage_path('app/'.$storagePath.'/compiled');
 
-        $this->insertRelease($releaseId, $manifestHash, $storagePath);
+        $this->insertRelease($releaseId, $manifestHash, $storagePath, manifestJson: $manifestPayload);
         $this->activateRelease($releaseId);
         $this->writeCompiledTree($sourceCompiledDir, [
-            'manifest.json' => json_encode(['compiled_hash' => $manifestHash], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'manifest.json' => $manifestPayload,
             'questions.compiled.json' => '{"source":"primary"}',
         ]);
 
@@ -104,14 +106,15 @@ final class ContentPackV2ResolverMaterializationTest extends TestCase
         config()->set('storage_rollout.resolver_materialization_enabled', true);
 
         $releaseId = (string) Str::uuid();
-        $manifestHash = str_repeat('c', 64);
+        $manifestPayload = $this->manifestPayload(str_repeat('c', 64));
+        $manifestHash = hash('sha256', $manifestPayload);
         $primaryStoragePath = 'private/packs_v2/BIG5_OCEAN/v1/'.$releaseId;
         $mirrorStoragePath = 'content_packs_v2/BIG5_OCEAN/v1/'.$releaseId;
         $mirrorCompiledDir = storage_path('app/'.$mirrorStoragePath.'/compiled');
 
-        $this->insertRelease($releaseId, $manifestHash, $primaryStoragePath);
+        $this->insertRelease($releaseId, $manifestHash, $primaryStoragePath, manifestJson: $manifestPayload);
         $this->writeCompiledTree($mirrorCompiledDir, [
-            'manifest.json' => json_encode(['compiled_hash' => $manifestHash], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'manifest.json' => $manifestPayload,
             'questions.compiled.json' => '{"source":"mirror"}',
         ]);
 
@@ -143,16 +146,17 @@ final class ContentPackV2ResolverMaterializationTest extends TestCase
 
         $releaseId = (string) Str::uuid();
         $historyRowId = (string) Str::uuid();
-        $manifestHash = str_repeat('d', 64);
+        $manifestPayload = $this->manifestPayload(str_repeat('d', 64));
+        $manifestHash = hash('sha256', $manifestPayload);
         $storagePath = 'private/packs_v2/BIG5_OCEAN/v1/source-tree-1';
         $sourceCompiledDir = storage_path('app/'.$storagePath.'/compiled');
         $storageIdentity = hash('sha256', $storagePath);
         $expectedMaterializedDir = storage_path('app/private/packs_v2_materialized/BIG5_OCEAN/v1/'.$storageIdentity.'/'.$manifestHash.'/compiled');
 
-        $this->insertRelease($releaseId, $manifestHash, $storagePath, createdAt: now()->subMinute());
-        $this->insertRelease($historyRowId, $manifestHash, $storagePath, action: 'packs2_rollback', createdAt: now());
+        $this->insertRelease($releaseId, $manifestHash, $storagePath, createdAt: now()->subMinute(), manifestJson: $manifestPayload);
+        $this->insertRelease($historyRowId, $manifestHash, $storagePath, action: 'packs2_rollback', createdAt: now(), manifestJson: $manifestPayload);
         $this->writeCompiledTree($sourceCompiledDir, [
-            'manifest.json' => json_encode(['compiled_hash' => $manifestHash], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'manifest.json' => $manifestPayload,
             'questions.compiled.json' => '{"source":"shared-tree"}',
         ]);
 
@@ -174,12 +178,13 @@ final class ContentPackV2ResolverMaterializationTest extends TestCase
         config()->set('storage_rollout.resolver_materialization_enabled', true);
 
         $goodReleaseId = (string) Str::uuid();
-        $goodHash = str_repeat('e', 64);
+        $goodManifestPayload = $this->manifestPayload(str_repeat('e', 64));
+        $goodHash = hash('sha256', $goodManifestPayload);
         $goodStoragePath = 'private/packs_v2/BIG5_OCEAN/v1/'.$goodReleaseId;
-        $this->insertRelease($goodReleaseId, $goodHash, $goodStoragePath, createdAt: now()->subMinute());
+        $this->insertRelease($goodReleaseId, $goodHash, $goodStoragePath, createdAt: now()->subMinute(), manifestJson: $goodManifestPayload);
         $this->activateRelease($goodReleaseId);
         $this->writeCompiledTree(storage_path('app/'.$goodStoragePath.'/compiled'), [
-            'manifest.json' => json_encode(['compiled_hash' => $goodHash], JSON_THROW_ON_ERROR),
+            'manifest.json' => $goodManifestPayload,
             'questions.compiled.json' => '{"source":"lkg"}',
         ]);
 
@@ -189,12 +194,13 @@ final class ContentPackV2ResolverMaterializationTest extends TestCase
         $this->assertNotNull($lastKnownGood);
 
         $badReleaseId = (string) Str::uuid();
-        $badHash = str_repeat('f', 64);
+        $badManifestPayload = $this->manifestPayload(str_repeat('f', 64));
+        $badHash = hash('sha256', $badManifestPayload);
         $badStoragePath = 'private/packs_v2/BIG5_OCEAN/v1/'.$badReleaseId;
-        $this->insertRelease($badReleaseId, $badHash, $badStoragePath, createdAt: now());
+        $this->insertRelease($badReleaseId, $badHash, $badStoragePath, createdAt: now(), manifestJson: $badManifestPayload);
         $this->activateRelease($badReleaseId);
         $this->writeCompiledTree(storage_path('app/'.$badStoragePath.'/compiled'), [
-            'manifest.json' => json_encode(['compiled_hash' => $badHash], JSON_THROW_ON_ERROR),
+            'manifest.json' => $badManifestPayload,
             'questions.compiled.json' => '{invalid-json',
         ]);
 
@@ -216,8 +222,11 @@ final class ContentPackV2ResolverMaterializationTest extends TestCase
         string $storagePath,
         string $action = 'packs2_publish',
         mixed $createdAt = null,
+        ?string $manifestJson = null,
     ): void {
         $createdAt ??= now();
+        $manifestJson ??= $this->manifestPayload($manifestHash);
+        $manifest = json_decode($manifestJson, true, 512, JSON_THROW_ON_ERROR);
 
         DB::table('content_pack_releases')->insert([
             'id' => $releaseId,
@@ -233,17 +242,25 @@ final class ContentPackV2ResolverMaterializationTest extends TestCase
             'message' => 'test',
             'created_by' => 'test',
             'manifest_hash' => $manifestHash,
-            'compiled_hash' => $manifestHash,
+            'compiled_hash' => (string) ($manifest['compiled_hash'] ?? ''),
             'content_hash' => null,
             'norms_version' => null,
             'git_sha' => null,
             'pack_version' => 'v1',
-            'manifest_json' => json_encode(['compiled_hash' => $manifestHash], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'manifest_json' => $manifestJson,
             'storage_path' => $storagePath,
             'source_commit' => null,
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ]);
+    }
+
+    private function manifestPayload(string $compiledHash): string
+    {
+        return json_encode(
+            ['compiled_hash' => $compiledHash],
+            JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+        );
     }
 
     private function activateRelease(string $releaseId): void

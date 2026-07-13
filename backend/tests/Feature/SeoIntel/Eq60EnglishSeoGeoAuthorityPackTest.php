@@ -40,8 +40,8 @@ final class Eq60EnglishSeoGeoAuthorityPackTest extends TestCase
         $this->assertStringContainsString('self-report', (string) ($asset['meta_description'] ?? ''));
         $this->assertSame('self_report_trait_mixed_ei', (string) data_get($asset, 'structured_data.assessment_mode'));
         $this->assertSame('emotional_and_relational_pattern_report', (string) data_get($asset, 'structured_data.result_scope'));
-        $this->assertCount(3, (array) ($asset['faq'] ?? []));
-        $this->assertCount(3, (array) ($asset['content_modules'] ?? []));
+        $this->assertCount(2, (array) ($asset['faq'] ?? []));
+        $this->assertCount(4, (array) ($asset['content_modules'] ?? []));
 
         $public = $this->getJson('/api/v0.3/scales/EQ_60/questions?locale=en&region=GLOBAL');
         $public->assertOk()
@@ -64,7 +64,7 @@ final class Eq60EnglishSeoGeoAuthorityPackTest extends TestCase
         }
 
         $this->assertStringContainsString('not for clinical diagnosis', $json);
-        $this->assertStringContainsString('Not for hiring selection', $json);
+        $this->assertStringContainsString('not for clinical diagnosis, hiring', $json);
     }
 
     private function prepareEqContent(): void

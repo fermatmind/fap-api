@@ -6,12 +6,16 @@ namespace Tests\Unit\Assessment;
 
 use App\Services\Assessment\Scorers\Eq60ScorerV1NormedValidity;
 use App\Services\Content\Eq60PackLoader;
+use Tests\Concerns\PreservesCompiledContentPack;
 use Tests\TestCase;
 
 final class Eq60ScorerCrossInsightTest extends TestCase
 {
+    use PreservesCompiledContentPack;
+
     public function test_overthinking_burn_tag_is_triggered_for_high_sa_low_er_profile(): void
     {
+        $this->preserveCompiledContentPack('EQ_60', 'v1');
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
 
         /** @var Eq60PackLoader $loader */

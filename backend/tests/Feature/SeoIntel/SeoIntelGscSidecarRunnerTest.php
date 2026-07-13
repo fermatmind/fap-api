@@ -98,7 +98,8 @@ final class SeoIntelGscSidecarRunnerTest extends TestCase
         $this->assertFalse((bool) data_get($artifact, 'payload.metadata.cms_write_allowed', true));
         $this->assertFalse((bool) data_get($artifact, 'payload.metadata.search_channel_enqueue_allowed', true));
         $this->assertFalse((bool) data_get($artifact, 'payload.metadata.indexing_request_allowed', true));
-        $this->assertSame('pass', data_get($artifact, 'payload.metadata.data_quality_gate.status'));
+        $this->assertSame('blocked', data_get($artifact, 'payload.metadata.data_quality_gate.status'));
+        $this->assertFalse((bool) data_get($artifact, 'payload.metadata.data_quality_gate.opportunity_queue_eligible', true));
         $this->assertSame('m****试', data_get($artifact, 'payload.metadata.safe_row_preview.0.query_display_masked'));
 
         $artifactText = (string) file_get_contents($artifactPath);

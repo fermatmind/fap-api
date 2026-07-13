@@ -9,6 +9,7 @@ use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
@@ -21,6 +22,9 @@ final class GlobalCareerRuntimeCohortPublishAuthorityAlignment01Test extends Tes
     {
         $this->configureRuntimeProjection(['runtime-aligned-job' => true]);
         $this->createRuntimeOccupation('runtime-aligned-job');
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $this->assertSame('cached', $cache->warmJobDetailPayload('runtime-aligned-job', 'en', true)['status']);
+        $this->assertSame('cached', $cache->warmJobDetailPayload('runtime-aligned-job', 'zh-CN', true)['status']);
 
         $this->getJson('/api/v0.5/career/jobs/runtime-aligned-job?locale=en')
             ->assertOk()

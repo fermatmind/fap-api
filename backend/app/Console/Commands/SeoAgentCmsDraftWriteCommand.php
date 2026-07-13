@@ -385,6 +385,10 @@ final class SeoAgentCmsDraftWriteCommand extends Command
             'translation_status' => CmsTranslationRevision::STATUS_DRAFT,
         ])->save();
 
+        $payload = is_array($revision->payload_json) ? $revision->payload_json : [];
+        data_set($payload, 'seo_agent.content_page_gate_provenance', $page->refresh()->seoAgentPublishGateProvenance());
+        $revision->forceFill(['payload_json' => $payload])->save();
+
         return $this->affectedRef('created', 'content_page', (string) ($proposal['subject_ref'] ?? ''), (int) $revision->id);
     }
 

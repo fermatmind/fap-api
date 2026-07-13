@@ -11,6 +11,14 @@ use Tests\TestCase;
 
 final class MbtiPdfPayloadBuilderTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config()->set('content_packs.root', base_path('../content_packages'));
+        config()->set('fap.content_packages_dir', null);
+    }
+
     public function test_builds_reader_safe_payload_from_mbti_content_authority(): void
     {
         $attempt = new Attempt([

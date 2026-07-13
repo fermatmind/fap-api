@@ -62,7 +62,7 @@ final class RedactProcessorTest extends TestCase
         $this->assertSame('[REDACTED]', $actual['extra']['payload']['anon_id']);
         $this->assertSame('[REDACTED]', $actual['extra']['payload']['target_attempt_id']);
         $this->assertSame('ok', $actual['context']['nested']['keep']);
-        $this->assertSame('trace-1', $actual['extra']['payload']['trace_id']);
+        $this->assertSame('[REDACTED]', $actual['extra']['payload']['trace_id']);
         $this->assertSame('ready', $actual['extra']['payload']['diagnostic_status']);
         $this->assertSame(12, $actual['extra']['payload']['duration_ms']);
     }
@@ -100,7 +100,7 @@ final class RedactProcessorTest extends TestCase
         ]);
 
         $this->assertSame('[REDACTED]', $actual['context']['session_hint']);
-        $this->assertSame('trace-1', $actual['context']['trace_id']);
+        $this->assertSame('[REDACTED]', $actual['context']['trace_id']);
     }
 
     public function test_non_sensitive_fields_remain_unchanged(): void
@@ -122,7 +122,9 @@ final class RedactProcessorTest extends TestCase
 
         $actual = $processor($record);
 
-        $this->assertSame($record, $actual);
+        $this->assertSame('[REDACTED]', $actual['context']['user_id']);
+        $this->assertSame($record['context']['meta'], $actual['context']['meta']);
+        $this->assertSame('req-1', $actual['extra']['request_id']);
     }
 
     public function test_redacts_sensitive_keys_for_monolog_log_record(): void

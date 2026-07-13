@@ -59,7 +59,7 @@ final class CareerJobDetailApiTest extends TestCase
 
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
-            new CareerRuntimePublishProjectionVisibilityFixture,
+            new CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true),
         );
     }
 
@@ -101,7 +101,7 @@ final class CareerJobDetailApiTest extends TestCase
             'import_run_id' => $importRun->id,
         ]);
 
-        $response = $this->getJson('/api/v0.5/career/jobs/backend-architect')
+        $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/backend-architect')
             ->assertOk()
             ->assertJsonPath('bundle_kind', 'career_job_detail')
             ->assertJsonPath('identity.canonical_slug', 'backend-architect')
@@ -145,9 +145,10 @@ final class CareerJobDetailApiTest extends TestCase
                     'occupation',
                     'breadcrumb_list',
                 ],
-                'provenance_meta' => ['compiler_version', 'compile_refs'],
+                'provenance_meta' => ['compiler_version'],
                 'lifecycle_companion',
             ])
+            ->assertJsonMissingPath('provenance_meta.compile_refs')
             ->assertJsonMissingPath('white_box_scores.fit_score.formula_ref')
             ->assertJsonMissingPath('white_box_scores.fit_score.critical_missing_fields');
 
@@ -184,6 +185,11 @@ final class CareerJobDetailApiTest extends TestCase
 
     public function test_it_remains_conservative_and_does_not_fall_back_to_legacy_cms_jobs(): void
     {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture,
+        );
+
         CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'authority-only']);
 
         CareerJob::query()->create([
@@ -281,7 +287,7 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('content_body_md', "# 会计师和审计师\n\n会计师和审计师不是单纯处理数字的岗位。")
             ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/accountants-and-auditors')
             ->assertJsonPath('claim_permissions.allow_strong_claim', true)
-            ->assertJsonPath('provenance_meta.compile_refs.source_docx', '01_会计师和审计师_accountants-and-auditors.docx');
+            ->assertJsonMissingPath('provenance_meta.compile_refs');
     }
 
     public function test_docx_baseline_canonical_uses_requested_public_locale_instead_of_job_locale(): void

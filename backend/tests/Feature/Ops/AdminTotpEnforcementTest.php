@@ -22,6 +22,7 @@ final class AdminTotpEnforcementTest extends TestCase
 
     public function test_unenrolled_admin_is_redirected_to_enrollment_and_cannot_reuse_verified_session(): void
     {
+        config()->set('admin.totp.enabled', true);
         $admin = $this->admin();
 
         $this->withSession(['ops_admin_totp_verified_user_id' => (int) $admin->id])
@@ -34,6 +35,7 @@ final class AdminTotpEnforcementTest extends TestCase
 
     public function test_enrolled_admin_requires_current_session_verification(): void
     {
+        config()->set('admin.totp.enabled', true);
         $admin = $this->admin(['totp_enabled_at' => now(), 'totp_secret' => 'JBSWY3DPEHPK3PXP']);
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'))

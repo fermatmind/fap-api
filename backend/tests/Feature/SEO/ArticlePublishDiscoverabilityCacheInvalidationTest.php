@@ -70,7 +70,7 @@ final class ArticlePublishDiscoverabilityCacheInvalidationTest extends TestCase
         ];
 
         Cache::put(SitemapSourceController::CACHE_KEY_FRESH, $payload, SitemapSourceController::FRESH_TTL_SECONDS);
-        Cache::put(SitemapSourceController::CACHE_KEY_STALE, $payload, SitemapSourceController::STALE_TTL_SECONDS);
+        Cache::put(SitemapSourceController::CACHE_KEY_STALE, $payload, 86400);
         Cache::put(SitemapCache::XML_CACHE_KEY, '<urlset></urlset>', SitemapCache::TTL_SECONDS);
         Cache::put(SitemapCache::ETAG_CACHE_KEY, '"stale-etag"', SitemapCache::TTL_SECONDS);
     }

@@ -89,4 +89,37 @@ final class LegacyMbtiReportAssetRepositoryTest extends TestCase
         $this->assertIsArray($out[0]['tips']);
         $this->assertIsArray($out[0]['tags']);
     }
+
+    public function test_asset_reads_do_not_reuse_payloads_across_content_roots(): void
+    {
+        /** @var LegacyMbtiReportAssetRepository $repo */
+        $repo = app(LegacyMbtiReportAssetRepository::class);
+        $first = $repo->loadAssetItems($this->contentDir, 'report_cards_traits.json', [
+            'primaryIndexKey' => 'type_code',
+        ]);
+        $this->assertSame('Traits', $first['INTJ-A']['title'] ?? null);
+
+        $secondRoot = storage_path('framework/testing/legacy_mbti_asset_repo_second_'.uniqid('', true));
+        $secondPackDir = $secondRoot.'/'.$this->contentDir;
+        File::ensureDirectoryExists($secondPackDir);
+        file_put_contents($secondPackDir.'/report_cards_traits.json', json_encode([
+            'items' => [[
+                'id' => 'traits_2',
+                'type_code' => 'INTJ-A',
+                'title' => 'Traits from second root',
+                'desc' => 'desc',
+            ]],
+        ], JSON_UNESCAPED_UNICODE));
+
+        try {
+            config()->set('content_packs.root', $secondRoot);
+            $second = $repo->loadAssetItems($this->contentDir, 'report_cards_traits.json', [
+                'primaryIndexKey' => 'type_code',
+            ]);
+
+            $this->assertSame('Traits from second root', $second['INTJ-A']['title'] ?? null);
+        } finally {
+            File::deleteDirectory($secondRoot);
+        }
+    }
 }

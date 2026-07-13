@@ -226,7 +226,8 @@ final class MbtiReadPathParityContractTest extends TestCase
         );
 
         $this->assertStringStartsWith('%PDF-1.4', $pdf['binary']);
-        $this->assertStringContainsString('MPDFAA+', $pdf['binary']);
+        $this->assertStringContainsString('/BaseFont /Helvetica', $pdf['binary']);
+        $this->assertStringNotContainsString('MPDFAA+', $pdf['binary']);
         $this->assertStringNotContainsString('STSong-Light', $pdf['binary']);
         $this->assertStringNotContainsString('UniGB-UCS2-H', $pdf['binary']);
         $this->assertStringNotContainsString('Attempt ID:', $pdf['binary']);

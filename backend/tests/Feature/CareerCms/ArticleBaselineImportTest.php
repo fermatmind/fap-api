@@ -236,8 +236,11 @@ final class ArticleBaselineImportTest extends TestCase
             ->where('slug', $slug)
             ->firstOrFail();
 
+        $expectedContentMd = app(ArticleBodyHeadingGuard::class)
+            ->downgradeMarkdownH1ToH2((string) $baseline['content_md']);
+
         $this->assertNotSame((int) $oldRevision->id, (int) $updated->published_revision_id);
-        $this->assertSame((string) $baseline['content_md'], (string) $updated->publishedRevision?->content_md);
+        $this->assertSame($expectedContentMd, (string) $updated->publishedRevision?->content_md);
         $this->assertSame((string) $baseline['excerpt'], (string) $updated->publishedRevision?->excerpt);
         $this->assertSame((string) $baseline['seo_title'], (string) $updated->publishedRevision?->seo_title);
         $this->assertSame((string) $baseline['seo_description'], (string) $updated->publishedRevision?->seo_description);
@@ -254,7 +257,7 @@ final class ArticleBaselineImportTest extends TestCase
 
         $this->getJson('/api/v0.5/articles/'.$slug.'?locale=zh-CN&org_id=0')
             ->assertOk()
-            ->assertJsonPath('article.content_md', (string) $baseline['content_md'])
+            ->assertJsonPath('article.content_md', $expectedContentMd)
             ->assertJsonPath('article.excerpt', (string) $baseline['excerpt'])
             ->assertJsonPath('article.cover_image_url', (string) $baseline['cover_image_url'])
             ->assertJsonPath('article.cover_image_alt', (string) $baseline['cover_image_alt'])

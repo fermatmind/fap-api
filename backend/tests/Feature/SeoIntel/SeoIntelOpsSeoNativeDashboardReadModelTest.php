@@ -174,8 +174,11 @@ final class SeoIntelOpsSeoNativeDashboardReadModelTest extends TestCase
             $connection->getQueryLog(),
         )));
 
-        foreach (AbstractSeoDashboardReadService::allowedTables() as $table) {
-            $this->assertStringContainsString($table, $sql);
+        preg_match_all('/(?:from|join)\s+"([^"]+)"/', $sql, $matches);
+        $queriedTables = array_values(array_unique($matches[1] ?? []));
+        $this->assertNotEmpty($queriedTables);
+        foreach ($queriedTables as $table) {
+            $this->assertContains($table, AbstractSeoDashboardReadService::allowedTables());
         }
 
         foreach ([

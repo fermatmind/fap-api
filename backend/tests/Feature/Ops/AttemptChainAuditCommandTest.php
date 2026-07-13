@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -410,7 +411,11 @@ final class AttemptChainAuditCommandTest extends TestCase
 
         $payload = json_decode(trim((string) Artisan::output()), true);
         $this->assertIsArray($payload);
-        $this->assertSame('missing-attempt-123', (string) data_get($payload, 'selection.attempt_id', ''));
+        $this->assertSame(
+            SensitiveDiagnosticRedactor::fingerprint('missing-attempt-123'),
+            data_get($payload, 'selection.attempt_fingerprint')
+        );
+        $this->assertArrayNotHasKey('attempt_id', (array) data_get($payload, 'selection', []));
         $this->assertSame(1, (int) data_get($payload, 'summary.finding_total', 0));
         $this->assertSame(1, (int) data_get($payload, 'summary.by_issue_code.attempt_chain_absent', 0));
 

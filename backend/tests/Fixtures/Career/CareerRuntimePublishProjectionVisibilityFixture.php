@@ -24,6 +24,7 @@ final class CareerRuntimePublishProjectionVisibilityFixture implements CareerRun
         private readonly bool $defaultRobotsIndexable = true,
         private readonly bool $defaultReleaseGatePass = true,
         private readonly bool $defaultFamilyHubLive = true,
+        private readonly bool $defaultItemPublished = false,
         private readonly array $datasetVisible = [],
         private readonly array $searchVisible = [],
         private readonly array $detailRouteEnabled = [],
@@ -41,10 +42,26 @@ final class CareerRuntimePublishProjectionVisibilityFixture implements CareerRun
         $normalizedSlug = $this->normalizeSlug($slug);
         $normalizedLocale = $this->normalizeLocale($locale);
 
-        return $this->items[$normalizedSlug.'|'.$normalizedLocale]
+        $item = $this->items[$normalizedSlug.'|'.$normalizedLocale]
             ?? $this->items[$normalizedSlug.'|en']
             ?? $this->items[$normalizedSlug]
             ?? null;
+
+        if (is_array($item) || ! $this->defaultItemPublished) {
+            return $item;
+        }
+
+        return [
+            'slug' => $normalizedSlug,
+            'locale' => $normalizedLocale,
+            'runtime_publish_state' => 'published',
+            'dataset_visible' => $this->datasetVisible($normalizedSlug),
+            'search_visible' => $this->searchVisible($normalizedSlug),
+            'detail_route_enabled' => $this->detailRouteEnabled($normalizedSlug),
+            'robots_indexable' => $this->robotsIndexable($normalizedSlug),
+            'release_gate_pass' => $this->releaseGatePass($normalizedSlug),
+            'canonical_path' => '/career/jobs/'.$normalizedSlug,
+        ];
     }
 
     /**

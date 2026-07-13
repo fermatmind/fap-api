@@ -12,7 +12,8 @@ final class SeoIntelOpsSeoCrawlerObservationUiTest extends TestCase
     #[Test]
     public function crawler_observation_ui_renders_safe_aggregate_surface_only(): void
     {
-        $view = strtolower((string) file_get_contents(resource_path('views/filament/ops/pages/seo-dashboard-access.blade.php')));
+        $view = strtolower((string) file_get_contents(resource_path('views/filament/ops/pages/seo-dashboard-access.blade.php')))
+            ."\n".strtolower((string) file_get_contents(lang_path('en/ops.php')));
 
         foreach ([
             'crawler observation overview',

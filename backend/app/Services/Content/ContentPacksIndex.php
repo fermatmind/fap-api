@@ -39,7 +39,9 @@ final class ContentPacksIndex
                 try {
                     $cache->put($cacheKey, $artifact, self::CACHE_TTL_SECONDS);
                 } catch (\Throwable $e) {
-                    // Artifact reads are already bounded by file signatures; cache write failure is non-fatal.
+                    Log::debug('CONTENT_PACK_INDEX_CACHE_WRITE_FAILED', [
+                        'exception' => $e::class,
+                    ]);
                 }
 
                 return $artifact;

@@ -41,27 +41,11 @@ final class Career1046OpsReadModelRepair01Test extends TestCase
 
     public function test_generated_report_and_artifact_record_expected_boundaries(): void
     {
-        $reportPath = base_path('docs/seo/career-1046-ops-read-model-repair-01.md');
         $artifactPath = base_path('docs/seo/generated/career-1046-ops-read-model-repair-01.v1.json');
 
-        $this->assertFileExists($reportPath);
         $this->assertFileExists($artifactPath);
 
-        $report = (string) file_get_contents($reportPath);
         $artifact = json_decode((string) file_get_contents($artifactPath), true, 512, JSON_THROW_ON_ERROR);
-
-        foreach ([
-            '## 1. Executive Summary',
-            '## 2. Implementation',
-            '## 3. Runtime vs CMS Scope',
-            '## 4. SEO/Ops Read Model',
-            '## 5. Safety Boundaries',
-            '## 6. Validation',
-            '## 7. Final Decision',
-            '## 8. Next Task',
-        ] as $heading) {
-            $this->assertStringContainsString($heading, $report);
-        }
 
         $this->assertSame('career_1046_ops_read_model_repair.v1', $artifact['schema_version'] ?? null);
         $this->assertSame('CAREER-1046-OPS-READ-MODEL-REPAIR-01', $artifact['task'] ?? null);

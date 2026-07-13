@@ -184,7 +184,7 @@ final class SeoIntelCrawlerLogProductionCanaryRuntimeTest extends TestCase
             'no url truth write',
             'no search submission',
             'approval phrase',
-            'source /var/log/nginx/access.log',
+            'source: redacted from repository docs',
         ] as $required) {
             $this->assertStringContainsString($required, $doc."\n".$artifactJson);
         }

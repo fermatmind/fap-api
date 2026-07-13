@@ -28,8 +28,8 @@ final class CulturalCalibrationLayerServiceTest extends TestCase
         $this->assertSame('cultural_calibration.v1', $calibration['version']);
         $this->assertSame('zh-CN', $calibration['locale_context']);
         $this->assertSame('CN_MAINLAND.zh-CN', $calibration['cultural_context']);
-        $this->assertSame('governance.v1', $calibration['calibration_policy_version']);
-        $this->assertSame('content_governance', $calibration['calibration_source']);
+        $this->assertSame('runtime.locale_policy.v1', $calibration['calibration_policy_version']);
+        $this->assertSame('runtime_policy', $calibration['calibration_source']);
         $this->assertContains('career.next_step', $calibration['calibrated_section_keys']);
         $this->assertContains('relationships.communication_style', $calibration['calibrated_section_keys']);
         $this->assertNotSame('', trim((string) ($calibration['narrative_overrides']['intro'] ?? '')));

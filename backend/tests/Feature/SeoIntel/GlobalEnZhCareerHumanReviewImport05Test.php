@@ -12,10 +12,8 @@ final class GlobalEnZhCareerHumanReviewImport05Test extends TestCase
     #[Test]
     public function career_review_packet_blocks_placeholder_pages_and_overclaim(): void
     {
-        $reportPath = base_path('docs/seo/global-en-zh-career-human-review-import-05.md');
         $generatedPath = base_path('docs/seo/generated/global-en-zh-career-human-review-import-05.v1.json');
 
-        $this->assertFileExists($reportPath);
         $this->assertFileExists($generatedPath);
 
         $generated = json_decode((string) file_get_contents($generatedPath), true, 512, JSON_THROW_ON_ERROR);

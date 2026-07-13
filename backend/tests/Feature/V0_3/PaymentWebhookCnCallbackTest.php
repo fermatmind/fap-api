@@ -62,9 +62,14 @@ final class PaymentWebhookCnCallbackTest extends TestCase
     public function test_wechatpay_valid_callback_calls_processor_and_returns_success_ack(): void
     {
         $mchSecretKey = '12345678901234567890123456789012';
+        $platformKeys = $this->generateRsaKeyPair();
+        $platformSerial = 'test-platform-key';
         config([
             'payments.providers.wechatpay.enabled' => true,
             'pay.wechat.default.mch_secret_key' => $mchSecretKey,
+            'pay.wechat.default.wechat_public_cert_path' => [
+                $platformSerial => $platformKeys['public'],
+            ],
         ]);
 
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
@@ -96,6 +101,18 @@ final class PaymentWebhookCnCallbackTest extends TestCase
                 'currency' => 'CNY',
             ],
         ]);
+        $timestamp = (string) time();
+        $nonce = 'wechatpay-test-nonce';
+        $signature = '';
+        $signed = openssl_sign(
+            $timestamp."\n".$nonce."\n".$raw."\n",
+            $signature,
+            $platformKeys['private'],
+            OPENSSL_ALGO_SHA256
+        );
+        if ($signed !== true) {
+            self::fail('failed to sign wechat callback payload.');
+        }
 
         $response = $this->call(
             'POST',
@@ -106,6 +123,10 @@ final class PaymentWebhookCnCallbackTest extends TestCase
             [
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_ACCEPT' => 'application/json',
+                'HTTP_WECHATPAY_SERIAL' => $platformSerial,
+                'HTTP_WECHATPAY_TIMESTAMP' => $timestamp,
+                'HTTP_WECHATPAY_NONCE' => $nonce,
+                'HTTP_WECHATPAY_SIGNATURE' => base64_encode($signature),
             ],
             $raw
         );

@@ -9,11 +9,18 @@ use App\Domain\Career\Publish\CareerFirstWaveReleaseArtifactProjectionService;
 use App\Models\Occupation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\Concerns\UsesPublishedCareerRuntimeProjection;
 use Tests\TestCase;
 
 final class CareerFirstWaveReleaseArtifactProjectionServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, UsesPublishedCareerRuntimeProjection;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpUsesPublishedCareerRuntimeProjection();
+    }
 
     public function test_it_projects_a_narrowed_launch_manifest_artifact_with_only_export_safe_fields(): void
     {

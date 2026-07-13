@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\Feature\V0_5;
 
+use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\AuditLog;
 use App\Models\ContentPage;
 use App\Models\InterpretationGuide;
+use App\Models\Permission;
+use App\Models\Role;
 use App\Models\SupportArticle;
+use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class SupportTrustCmsApiTest extends TestCase
@@ -138,6 +143,8 @@ final class SupportTrustCmsApiTest extends TestCase
 
     public function test_content_pages_support_methodology_boundary_review_fields(): void
     {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+
         ContentPage::query()->create([
             'org_id' => 0,
             'slug' => 'methodology',
@@ -149,21 +156,23 @@ final class SupportTrustCmsApiTest extends TestCase
             'template' => 'policy',
             'animation_profile' => 'none',
             'locale' => 'en',
-            'status' => 'published',
+            'status' => 'draft',
             'review_state' => 'science_review',
             'owner' => 'science',
             'legal_review_required' => false,
             'science_review_required' => true,
             'last_reviewed_at' => now(),
-            'published_at' => now(),
-            'is_public' => true,
-            'is_indexable' => true,
+            'published_at' => null,
+            'is_public' => false,
+            'is_indexable' => false,
             'content_md' => 'Methodology body.',
             'seo_description' => 'Methodology page.',
             'canonical_path' => '/methodology',
         ]);
 
-        $response = $this->getJson('/api/v0.5/internal/content-pages?locale=en');
+        $response = $this->withSession(['ops_org_id' => 1])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson('/api/v0.5/internal/content-pages?locale=en');
 
         $response->assertOk()
             ->assertJsonPath('items.0.slug', 'methodology')
@@ -174,25 +183,28 @@ final class SupportTrustCmsApiTest extends TestCase
 
     public function test_internal_update_accepts_review_and_publish_contracts(): void
     {
-        $this->putJson('/api/v0.5/internal/support-articles/contact-support?locale=en', [
-            'title' => 'Contact support',
-            'summary' => 'Prepare order number, email, screenshots, and time.',
-            'body_md' => 'Contact support with the right context.',
-            'support_category' => 'troubleshooting',
-            'support_intent' => 'contact_support',
-            'locale' => 'en',
-            'status' => 'published',
-            'review_state' => 'approved',
-            'primary_cta_label' => 'Contact support',
-            'primary_cta_url' => '/help/contact',
-            'related_support_article_ids' => [],
-            'related_content_page_ids' => [],
-            'last_reviewed_at' => '2026-04-22T00:00:00Z',
-            'published_at' => '2026-04-22T00:00:00Z',
-            'seo_title' => 'Contact support',
-            'seo_description' => 'Contact support.',
-            'canonical_path' => '/support/articles/contact-support',
-        ])
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $this->withSession(['ops_org_id' => 1])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->putJson('/api/v0.5/internal/support-articles/contact-support?locale=en', [
+                'title' => 'Contact support',
+                'summary' => 'Prepare order number, email, screenshots, and time.',
+                'body_md' => 'Contact support with the right context.',
+                'support_category' => 'troubleshooting',
+                'support_intent' => 'contact_support',
+                'locale' => 'en',
+                'status' => 'published',
+                'review_state' => 'approved',
+                'primary_cta_label' => 'Contact support',
+                'primary_cta_url' => '/help/contact',
+                'related_support_article_ids' => [],
+                'related_content_page_ids' => [],
+                'last_reviewed_at' => '2026-04-22T00:00:00Z',
+                'published_at' => '2026-04-22T00:00:00Z',
+                'seo_title' => 'Contact support',
+                'seo_description' => 'Contact support.',
+                'canonical_path' => '/support/articles/contact-support',
+            ])
             ->assertOk()
             ->assertJsonPath('article.slug', 'contact-support')
             ->assertJsonPath('article.status', 'published')
@@ -288,5 +300,32 @@ final class SupportTrustCmsApiTest extends TestCase
             'result' => 'success',
         ]);
         $this->assertSame(3, AuditLog::query()->withoutGlobalScopes()->where('action', 'content_release_publish')->count());
+    }
+
+    /** @param list<string> $permissionNames */
+    private function createAdminWithPermissions(array $permissionNames): AdminUser
+    {
+        $admin = AdminUser::query()->create([
+            'name' => 'support-trust-'.Str::lower(Str::random(6)),
+            'email' => 'support-trust-'.Str::lower(Str::random(6)).'@example.test',
+            'password' => bcrypt('secret'),
+            'is_active' => true,
+        ]);
+        $role = Role::query()->create([
+            'name' => 'support-trust-'.Str::lower(Str::random(8)),
+            'guard_name' => (string) config('admin.guard', 'admin'),
+        ]);
+
+        foreach ($permissionNames as $permissionName) {
+            $permission = Permission::query()->firstOrCreate([
+                'name' => $permissionName,
+                'guard_name' => (string) config('admin.guard', 'admin'),
+            ]);
+            $role->permissions()->syncWithoutDetaching([$permission->id]);
+        }
+
+        $admin->roles()->sync([$role->id]);
+
+        return $admin;
     }
 }

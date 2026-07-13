@@ -318,6 +318,9 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $this->assertSame(0, $payload['created_item_count']);
         $this->assertSame([], $payload['errors']);
         $this->assertCount(64, $payload['items']);
+        $this->assertArrayNotHasKey('recommendation', $payload['items'][0]);
+        $this->assertArrayNotHasKey('qa_result', $payload['items'][0]);
+        $this->assertLessThan(1_000_000, strlen(Artisan::output()));
         $this->assertSame(
             ['mbti64'],
             array_values(array_unique(array_map(

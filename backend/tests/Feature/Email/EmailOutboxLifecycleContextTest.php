@@ -23,28 +23,29 @@ final class EmailOutboxLifecycleContextTest extends TestCase
         $attemptId = $this->createAttempt();
         $email = 'outbox+'.random_int(1000, 9999).'@example.com';
 
-        $checkout = $this->postJson('/api/v0.3/orders/checkout', [
-            'sku' => 'MBTI_CREDIT',
-            'provider' => 'billing',
-            'email' => $email,
-            'attempt_id' => $attemptId,
-            'surface' => 'checkout',
-            'marketing_consent' => true,
-            'transactional_recovery_enabled' => false,
-            'share_id' => 'share_outbox',
-            'compare_invite_id' => (string) Str::uuid(),
-            'share_click_id' => 'clk_outbox',
-            'entrypoint' => 'share_page',
-            'referrer' => 'https://example.com/share/outbox',
-            'landing_path' => '/zh/share/outbox',
-            'utm' => [
-                'source' => 'share',
-                'medium' => 'organic',
-                'campaign' => 'outbox-lifecycle',
-                'term' => 'mbti',
-                'content' => 'hero',
-            ],
-        ]);
+        $checkout = $this->withHeader('X-Anon-Id', 'anon_outbox_context')
+            ->postJson('/api/v0.3/orders/checkout', [
+                'sku' => 'MBTI_CREDIT',
+                'provider' => 'billing',
+                'email' => $email,
+                'attempt_id' => $attemptId,
+                'surface' => 'checkout',
+                'marketing_consent' => true,
+                'transactional_recovery_enabled' => false,
+                'share_id' => 'share_outbox',
+                'compare_invite_id' => (string) Str::uuid(),
+                'share_click_id' => 'clk_outbox',
+                'entrypoint' => 'share_page',
+                'referrer' => 'https://example.com/share/outbox',
+                'landing_path' => '/zh/share/outbox',
+                'utm' => [
+                    'source' => 'share',
+                    'medium' => 'organic',
+                    'campaign' => 'outbox-lifecycle',
+                    'term' => 'mbti',
+                    'content' => 'hero',
+                ],
+            ]);
 
         $checkout->assertOk();
         $orderNo = (string) $checkout->json('order_no');
@@ -91,25 +92,26 @@ final class EmailOutboxLifecycleContextTest extends TestCase
         $attemptId = $this->createAttempt();
         $email = 'builder+'.random_int(1000, 9999).'@example.com';
 
-        $checkout = $this->postJson('/api/v0.3/orders/checkout', [
-            'sku' => 'MBTI_CREDIT',
-            'provider' => 'billing',
-            'email' => $email,
-            'attempt_id' => $attemptId,
-            'surface' => 'checkout',
-            'marketing_consent' => false,
-            'transactional_recovery_enabled' => true,
-            'share_id' => 'share_builder',
-            'share_click_id' => 'clk_builder',
-            'entrypoint' => 'help_center',
-            'referrer' => 'https://example.com/help',
-            'landing_path' => '/zh/help/orders',
-            'utm' => [
-                'source' => 'help',
-                'medium' => 'owned',
-                'campaign' => 'support-context',
-            ],
-        ]);
+        $checkout = $this->withHeader('X-Anon-Id', 'anon_outbox_context')
+            ->postJson('/api/v0.3/orders/checkout', [
+                'sku' => 'MBTI_CREDIT',
+                'provider' => 'billing',
+                'email' => $email,
+                'attempt_id' => $attemptId,
+                'surface' => 'checkout',
+                'marketing_consent' => false,
+                'transactional_recovery_enabled' => true,
+                'share_id' => 'share_builder',
+                'share_click_id' => 'clk_builder',
+                'entrypoint' => 'help_center',
+                'referrer' => 'https://example.com/help',
+                'landing_path' => '/zh/help/orders',
+                'utm' => [
+                    'source' => 'help',
+                    'medium' => 'owned',
+                    'campaign' => 'support-context',
+                ],
+            ]);
 
         $checkout->assertOk();
         $orderNo = (string) $checkout->json('order_no');

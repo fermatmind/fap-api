@@ -8,6 +8,7 @@ use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
@@ -35,6 +36,7 @@ final class CareerSitemapExposureDirectoryAuthorityTest extends TestCase
         $this->createOccupation('software-developers', 'Software Developers', '软件开发人员');
 
         $this->publishRuntimeProjection(['accountants-and-auditors', 'actuaries', 'software-developers']);
+        app(PublicCareerAuthorityResponseCache::class)->warm();
 
         $urls = app(SitemapGenerator::class)->generateApprovedCareerJobDetailUrls();
         $locs = array_values(array_map(static fn (array $url): string => (string) ($url['loc'] ?? ''), $urls));

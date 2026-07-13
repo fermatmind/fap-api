@@ -10,6 +10,7 @@ use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
@@ -27,6 +28,7 @@ class SitemapSourceCacheTest extends TestCase
     {
         parent::setUp();
         Cache::flush();
+        app(PublicCareerAuthorityResponseCache::class)->warm();
     }
 
     public function test_empty_cache_returns_safe_fallback_without_http_regeneration(): void
@@ -397,6 +399,8 @@ class SitemapSourceCacheTest extends TestCase
             'source_authority' => 'CareerFullReleaseLedger',
             'items' => $items,
         ], JSON_THROW_ON_ERROR));
+
+        app(PublicCareerAuthorityResponseCache::class)->warm();
     }
 
     /**

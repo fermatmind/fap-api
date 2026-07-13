@@ -9,7 +9,6 @@ use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 final class IqOwnerOriginal30BankService
 {
@@ -247,15 +246,17 @@ final class IqOwnerOriginal30BankService
         }
     }
 
-    public function publicAssetResponse(string $path): BinaryFileResponse
+    /**
+     * @return array{absolute_path: string, content_type: string}
+     */
+    public function publicAsset(string $path): array
     {
         $absolutePath = $this->publicAssetAbsolutePath($path);
 
-        return response()->file($absolutePath, [
-            'Content-Type' => $this->contentTypeForAsset($absolutePath),
-            'Cache-Control' => 'public, max-age=31536000, immutable',
-            'X-Content-Type-Options' => 'nosniff',
-        ]);
+        return [
+            'absolute_path' => $absolutePath,
+            'content_type' => $this->contentTypeForAsset($absolutePath),
+        ];
     }
 
     /**

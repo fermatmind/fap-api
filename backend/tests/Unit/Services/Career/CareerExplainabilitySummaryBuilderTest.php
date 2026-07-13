@@ -9,12 +9,19 @@ use App\Models\CareerImportRun;
 use App\Services\Career\CareerRecommendationCompiler;
 use App\Services\Career\Explainability\CareerExplainabilitySummaryBuilder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Concerns\UsesPublishedCareerRuntimeProjection;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\TestCase;
 
 final class CareerExplainabilitySummaryBuilderTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, UsesPublishedCareerRuntimeProjection;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpUsesPublishedCareerRuntimeProjection();
+    }
 
     public function test_it_builds_a_machine_safe_job_explainability_payload(): void
     {

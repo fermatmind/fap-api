@@ -311,7 +311,7 @@ final class OpsContentLocaleScopeTest extends TestCase
             'animation_profile' => 'none',
             'locale' => $locale,
             'is_public' => false,
-            'is_indexable' => true,
+            'is_indexable' => false,
             'review_state' => 'draft',
             'status' => ContentPage::STATUS_DRAFT,
         ]);

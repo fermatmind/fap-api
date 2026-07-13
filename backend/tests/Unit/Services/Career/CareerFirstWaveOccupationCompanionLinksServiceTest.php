@@ -9,12 +9,19 @@ use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\Concerns\UsesPublishedCareerRuntimeProjection;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\TestCase;
 
 final class CareerFirstWaveOccupationCompanionLinksServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, UsesPublishedCareerRuntimeProjection;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpUsesPublishedCareerRuntimeProjection();
+    }
 
     public function test_it_builds_machine_safe_companion_links_for_a_first_wave_occupation(): void
     {

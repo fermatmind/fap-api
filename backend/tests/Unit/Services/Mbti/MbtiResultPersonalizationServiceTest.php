@@ -132,8 +132,8 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame('cultural_calibration.v1', data_get($clear, 'cultural_calibration_v1.version'));
         $this->assertSame('zh-CN', data_get($clear, 'cultural_calibration_v1.locale_context'));
         $this->assertSame('CN_MAINLAND.zh-CN', data_get($clear, 'cultural_calibration_v1.cultural_context'));
-        $this->assertSame('governance.v1', data_get($clear, 'cultural_calibration_v1.calibration_policy_version'));
-        $this->assertSame('content_governance', data_get($clear, 'cultural_calibration_v1.calibration_source'));
+        $this->assertSame('runtime.locale_policy.v1', data_get($clear, 'cultural_calibration_v1.calibration_policy_version'));
+        $this->assertSame('runtime_policy', data_get($clear, 'cultural_calibration_v1.calibration_source'));
         $this->assertContains('growth.next_actions', data_get($clear, 'cultural_calibration_v1.calibrated_section_keys', []));
         $this->assertContains('career.next_step', data_get($clear, 'cultural_calibration_v1.calibrated_section_keys', []));
         $this->assertNotSame('', trim((string) data_get($clear, 'cultural_calibration_v1.calibration_fingerprint')));

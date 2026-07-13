@@ -34,19 +34,14 @@ final class CareerCnProxyPublicOwnerApiTest extends TestCase
             ->assertJsonPath('trust_manifest.review_decision', 'approve_noindex_public_cn_proxy_page');
     }
 
-    public function test_existing_job_detail_api_falls_back_to_cn_proxy_surface_without_canonical_job_schema(): void
+    public function test_existing_job_detail_api_does_not_bypass_runtime_publication_authority_for_cn_proxy(): void
     {
         [$planPath, $manifestPath] = $this->writeReviewedPublicOwnerArtifacts();
         config()->set('fap.career.cn_proxy_public_owner_plan_path', $planPath);
         config()->set('fap.career.cn_proxy_trust_manifest_path', $manifestPath);
 
         $this->getJson('/api/v0.5/career/jobs/cn-1-01-00-01?locale=zh-CN')
-            ->assertOk()
-            ->assertJsonPath('bundle_kind', 'career_cn_proxy_public_owner')
-            ->assertJsonPath('identity.canonical_slug', 'cn-1-01-00-01')
-            ->assertJsonPath('seo_contract.robots_policy', 'noindex,follow')
-            ->assertJsonPath('public_owner_policy.canonical_job_detail', false)
-            ->assertJsonPath('structured_data.occupation', []);
+            ->assertNotFound();
     }
 
     public function test_it_fails_closed_when_reviewed_manifest_is_missing(): void

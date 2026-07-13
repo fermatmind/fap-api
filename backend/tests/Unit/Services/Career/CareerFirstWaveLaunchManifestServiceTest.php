@@ -8,11 +8,18 @@ use App\Domain\Career\Publish\CareerFirstWaveLaunchManifestService;
 use App\Models\Occupation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\Concerns\UsesPublishedCareerRuntimeProjection;
 use Tests\TestCase;
 
 final class CareerFirstWaveLaunchManifestServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, UsesPublishedCareerRuntimeProjection;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpUsesPublishedCareerRuntimeProjection();
+    }
 
     public function test_it_builds_an_internal_job_detail_only_launch_manifest_with_backend_owned_smoke_matrix(): void
     {

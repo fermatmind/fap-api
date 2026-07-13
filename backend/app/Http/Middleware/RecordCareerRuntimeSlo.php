@@ -7,6 +7,7 @@ namespace App\Http\Middleware;
 use App\Services\Career\CareerRuntimeSloService;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 final class RecordCareerRuntimeSlo
@@ -40,8 +41,10 @@ final class RecordCareerRuntimeSlo
     {
         try {
             $this->slo->record('career_directory_api', $status, $durationMs, $context);
-        } catch (\Throwable) {
-            // Metrics are deliberately fail-open and must never change the API response.
+        } catch (\Throwable $throwable) {
+            Log::debug('CAREER_RUNTIME_SLO_RECORD_FAILED', [
+                'exception' => $throwable::class,
+            ]);
         }
     }
 }

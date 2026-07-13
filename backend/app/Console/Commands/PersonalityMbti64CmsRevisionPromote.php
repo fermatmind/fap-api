@@ -94,10 +94,39 @@ final class PersonalityMbti64CmsRevisionPromote extends Command
             ? $service->promote($decoded, hash('sha256', $raw), $this->optionsPayload())
             : $service->plan($decoded, hash('sha256', $raw), $this->optionsPayload());
 
+        if ((bool) $this->option('v8-5-v5-bilingual-64')) {
+            $summary = $this->compactV85V5BilingualSummary($summary);
+        }
+
         return array_merge($summary, [
             'package_path' => $resolved,
             'command' => 'personality:mbti64-cms-revision-promote',
         ]);
+    }
+
+    /** @param array<string,mixed> $summary */
+    private function compactV85V5BilingualSummary(array $summary): array
+    {
+        $rows = is_array($summary['rows'] ?? null) ? $summary['rows'] : [];
+        foreach ($rows as &$row) {
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $preview = is_array($row['promotion_preview'] ?? null) ? $row['promotion_preview'] : [];
+            $encoded = json_encode($preview, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
+            $row['promotion_preview_sha256'] = is_string($encoded) ? hash('sha256', $encoded) : null;
+            $row['promotion_preview_summary'] = [
+                'seo_present' => is_array($preview['seo'] ?? null) && $preview['seo'] !== [],
+                'section_count' => count((array) ($preview['sections'] ?? [])),
+            ];
+            unset($row['promotion_preview']);
+        }
+        unset($row);
+
+        $summary['rows'] = $rows;
+
+        return $summary;
     }
 
     private function assertWriteGuards(): void

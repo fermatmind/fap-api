@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Contracts\Cms\ArticleMachineTranslationProvider;
+use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
+use App\Models\EditorialReview;
 use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Services\Cms\OpenAiArticleMachineTranslationProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -174,6 +177,7 @@ final class ArticleMachineTranslationProviderTest extends TestCase
             'source_article_id' => null,
             'translated_from_article_id' => null,
             'source_version_hash' => 'source-hash-'.$slug,
+            'published_at' => now(),
         ]);
 
         ArticleSeoMeta::query()->create([
@@ -185,6 +189,36 @@ final class ArticleMachineTranslationProviderTest extends TestCase
             'is_indexable' => true,
         ]);
 
-        return $source->fresh(['seoMeta']);
+        $revision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $source->id,
+            'source_article_id' => (int) $source->id,
+            'translation_group_id' => (string) $source->translation_group_id,
+            'locale' => 'zh-CN',
+            'source_locale' => 'zh-CN',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
+            'source_version_hash' => (string) $source->source_version_hash,
+            'translated_from_version_hash' => (string) $source->source_version_hash,
+            'title' => (string) $source->title,
+            'excerpt' => $source->excerpt,
+            'content_md' => (string) $source->content_md,
+            'published_at' => now(),
+        ]);
+        $source->forceFill([
+            'working_revision_id' => (int) $revision->id,
+            'published_revision_id' => (int) $revision->id,
+        ])->saveQuietly();
+
+        EditorialReview::withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'content_type' => 'article',
+            'content_id' => (int) $source->id,
+            'workflow_state' => EditorialReviewAudit::STATE_APPROVED,
+            'reviewed_at' => now(),
+            'last_transition_at' => now(),
+        ]);
+
+        return $source->fresh(['publishedRevision', 'seoMeta']);
     }
 }

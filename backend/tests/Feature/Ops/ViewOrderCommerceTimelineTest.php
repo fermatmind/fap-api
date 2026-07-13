@@ -30,7 +30,7 @@ final class ViewOrderCommerceTimelineTest extends TestCase
             PermissionNames::ADMIN_OPS_READ,
         ]);
         $selectedOrg = $this->createOrganization('Commerce Timeline Org');
-        $chain = $this->seedCommerceOpsChain(orgId: 73, options: [
+        $chain = $this->seedCommerceOpsChain(orgId: (int) $selectedOrg->id, options: [
             'last_reconciled_at' => now()->subMinutes(10),
         ]);
 

@@ -135,8 +135,8 @@ final class PersonalityAgentApprovalQueueWriter
                 'created_batch_id' => null,
                 'created_item_count' => 0,
                 'skipped_existing_item_count' => 0,
-                'items' => $queueItems,
-                'blocked_items' => $blockedItems,
+                'items' => $this->summaryItems($queueItems),
+                'blocked_items' => $this->summaryItems($blockedItems),
                 'errors' => $errors,
                 'warnings' => [],
             ]);
@@ -159,8 +159,8 @@ final class PersonalityAgentApprovalQueueWriter
                 'existing_batch_id' => (int) $existingBatch->id,
                 'created_item_count' => 0,
                 'skipped_existing_item_count' => $existingItemCount,
-                'items' => $queueItems,
-                'blocked_items' => $blockedItems,
+                'items' => $this->summaryItems($queueItems),
+                'blocked_items' => $this->summaryItems($blockedItems),
                 'errors' => [],
                 'warnings' => [],
             ]);
@@ -188,8 +188,8 @@ final class PersonalityAgentApprovalQueueWriter
             'created_item_count' => $createdItems,
             'skipped_existing_item_count' => 0,
             'writes_committed' => $write && $createdItems > 0,
-            'items' => $queueItems,
-            'blocked_items' => $blockedItems,
+            'items' => $this->summaryItems($queueItems),
+            'blocked_items' => $this->summaryItems($blockedItems),
             'errors' => [],
             'warnings' => [],
         ]);
@@ -613,6 +613,19 @@ final class PersonalityAgentApprovalQueueWriter
             'recommendation' => $recommendation,
             'qa_result' => $qaResult,
         ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $items
+     * @return list<array<string,mixed>>
+     */
+    private function summaryItems(array $items): array
+    {
+        return array_map(static function (array $item): array {
+            unset($item['recommendation'], $item['qa_result']);
+
+            return $item;
+        }, $items);
     }
 
     /**

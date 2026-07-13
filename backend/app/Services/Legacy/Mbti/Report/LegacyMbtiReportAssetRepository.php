@@ -15,17 +15,9 @@ class LegacyMbtiReportAssetRepository
 
     public function loadAssetJson(string $contentDir, string $relPath, array $opts = []): ?array
     {
-        static $cacheByKey = [];
-
-        $cacheKey = $contentDir.'|'.$relPath.'|'.md5((string) json_encode($opts));
-        if (array_key_exists($cacheKey, $cacheByKey)) {
-            return $cacheByKey[$cacheKey];
-        }
-
         $json = $this->packRepo->loadJsonFromPack($contentDir, $relPath);
-        $cacheByKey[$cacheKey] = is_array($json) ? $json : null;
 
-        return $cacheByKey[$cacheKey];
+        return is_array($json) ? $json : null;
     }
 
     public function loadAssetItems(string $contentDir, string $relPath, array $opts = []): array

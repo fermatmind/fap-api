@@ -8,6 +8,7 @@ use App\DTO\Career\CareerFirstWaveNextStepLinksSummary;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 final class CareerFirstWaveNextStepLinksService
 {
@@ -57,8 +58,10 @@ final class CareerFirstWaveNextStepLinksService
             if ($cached instanceof CareerFirstWaveNextStepLinksSummary) {
                 return $this->summaryBySlug[$memoKey] = $cached;
             }
-        } catch (\Throwable) {
-            // Cache availability must not make this public read endpoint fail.
+        } catch (\Throwable $throwable) {
+            Log::debug('CAREER_NEXT_STEP_CACHE_READ_FAILED', [
+                'exception' => $throwable::class,
+            ]);
         }
 
         try {
@@ -69,8 +72,10 @@ final class CareerFirstWaveNextStepLinksService
                 if ($stale instanceof CareerFirstWaveNextStepLinksSummary) {
                     return $this->summaryBySlug[$memoKey] = $stale;
                 }
-            } catch (\Throwable) {
-                // Preserve the original authority-build failure below.
+            } catch (\Throwable $cacheThrowable) {
+                Log::debug('CAREER_NEXT_STEP_LKG_READ_FAILED', [
+                    'exception' => $cacheThrowable::class,
+                ]);
             }
 
             throw $throwable;
@@ -93,8 +98,10 @@ final class CareerFirstWaveNextStepLinksService
                 Cache::forever($this->lkgCacheKey($normalizedSlug, $normalizedLocale), $payload);
                 Cache::forget($this->negativeCacheKey($normalizedSlug, $normalizedLocale));
             }
-        } catch (\Throwable) {
-            // A successful authority read remains usable when the cache store is down.
+        } catch (\Throwable $throwable) {
+            Log::debug('CAREER_NEXT_STEP_CACHE_WRITE_FAILED', [
+                'exception' => $throwable::class,
+            ]);
         }
 
         return $this->summaryBySlug[$memoKey] = $summary;

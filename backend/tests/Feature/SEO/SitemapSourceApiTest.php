@@ -10,14 +10,24 @@ use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Models\PersonalityPublicContentAsset;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 class SitemapSourceApiTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Cache::flush();
+        app(PublicCareerAuthorityResponseCache::class)->warm();
+    }
 
     public function test_sitemap_source_api_returns_backend_sitemap_generator_urls(): void
     {
@@ -154,7 +164,7 @@ class SitemapSourceApiTest extends TestCase
         $this->assertContains('https://fermatmind.com/zh/personality/big-five/openness', $locs);
         $this->assertContains('https://fermatmind.com/zh/personality/big-five/openness-high', $locs);
         $this->assertContains('https://fermatmind.com/zh/personality/big-five/neuroticism-low', $locs);
-        $this->assertNotContains('https://fermatmind.com/en/personality/big-five/openness', $locs);
+        $this->assertContains('https://fermatmind.com/en/personality/big-five/openness', $locs);
         $this->assertNotContains('https://fermatmind.com/zh/personality/big-five/openness-noindex', $locs);
     }
 
@@ -173,6 +183,8 @@ class SitemapSourceApiTest extends TestCase
             'source_authority' => 'CareerFullReleaseLedger',
             'items' => $items,
         ], JSON_THROW_ON_ERROR));
+
+        app(PublicCareerAuthorityResponseCache::class)->warm();
     }
 
     /**
