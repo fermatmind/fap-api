@@ -89647,7 +89647,7 @@
       "BIG5-AUTHORITY-V2-SOURCE-LEDGER-05"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "9ecc528a3249b752b7debba89773a32bdba83ea8",
+    "commit_sha": "530a7cb20fb056c85d8d41ac83eef937a58f664e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3039",
     "checks": {
       "dependency": {
@@ -89656,27 +89656,27 @@
       },
       "editorial_package": {
         "status": "pass",
-        "evidence": "Node 24 package validation passed for the separately retained raw, skeptical-review, repaired, and final artifacts. The final candidate passed all 8 automated gates while human review, publication, schema eligibility, CMS writes, indexability, search submission, and deploy actions remain false."
+        "evidence": "The non-runtime Node 24 CLI validate-package.mjs passed for the separately retained raw, skeptical-review, repaired, and final artifacts. The final candidate passed all 8 automated gates while human review, publication, schema eligibility, CMS writes, indexability, search submission, and deploy actions remain false."
       },
       "focused_test": {
         "status": "pass",
-        "evidence": "BigFiveAuthorityV206Test passed 5 tests / 36 assertions under PHP 8.4. It proves raw failures remain visible, the final package passes only automated gates, private route/identifier and cross-framework leakage fail closed, unknown claims fail source coverage, and the command is read-only. Initial vendor/bootstrap invocations and repository-root path invocations did not enter the target test; the first correctly bootstrapped run exposed an explicit-null assertion bug, which was fixed with array_key_exists plus strict null and rerun cleanly."
+        "evidence": "BigFiveAuthorityV206Test passed 5 tests / 48 assertions under PHP 8.4. It invokes the non-runtime Node CLI and proves raw failures remain visible, the final package passes only automated gates, private route/identifier and cross-framework leakage fail closed, and unknown claims fail source coverage. After the initial GitHub runtime-freeze failure, the PHP application service and Artisan command were removed rather than exempted."
       },
       "full_ci_verify_mbti": {
         "status": "pass",
-        "evidence": "The sole local bash backend/scripts/ci_verify_mbti.sh run passed under PHP 8.4 and Node 24. It included 1229 Big Five tests / 150631 assertions, the PR06 focused test, Enneagram, MBTI, personality authority, payment uniqueness, migration safety, auth, OpenAPI, order security, dependency security, webhook/attempt, queue, and related gates. Generated BIG5_OCEAN compiled validation side effects were restored before final scope validation."
+        "evidence": "The final non-runtime head passed bash backend/scripts/ci_verify_mbti.sh under PHP 8.4 and Node 24, including 1229 Big Five tests / 150643 assertions, the PR06 focused test, runtime-path freeze, Enneagram, MBTI, personality authority, payment uniqueness, migration safety, auth, OpenAPI, order security, dependency security, webhook/attempt, queue, and related gates. Generated BIG5_OCEAN compiled validation side effects were restored before final scope validation."
       },
       "format_and_syntax": {
         "status": "pass",
-        "evidence": "Pint --test passed for all 3 touched PHP files. PHP syntax, Node syntax, all generated JSON, state JSON, manifest YAML, package validator, git diff --check, and the read-only command passed. A Ruby YAML helper was incompatible with the local Psych API, so manifest validation was rerun successfully through the repository Symfony YAML dependency."
+        "evidence": "Pint --test passed for the single touched PHP test. PHP syntax, Node CLI syntax, all generated JSON, state JSON, manifest YAML, package validation, and git diff --check passed. The focused runtime-freeze test also passed 1 test / 3 assertions."
       },
       "scope": {
         "status": "pass",
-        "evidence": "All 11 changed files match the PR06 manifest allowlist exactly. origin/main remains the branch base at 9df5b2ea6d031352f34b0134d49dbba00ed4a08f. No CMS/database write, public runtime or editorial fallback, publish, deploy, schema activation, indexability mutation, search submission, frontend change, or private data access occurred."
+        "evidence": "All 9 changed files match the PR06 manifest allowlist. The reusable gate lives only under generated/ and no backend/app runtime file remains. origin/main remains the branch base at 9df5b2ea6d031352f34b0134d49dbba00ed4a08f. No CMS/database write, public runtime or editorial fallback, publish, deploy, schema activation, indexability mutation, search submission, frontend change, or private data access occurred."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "PR #3039 opened from implementation commit 9ecc528a3249b752b7debba89773a32bdba83ea8; required GitHub checks are pending. The first PR-create shell invocation interpreted Markdown backticks and started a duplicate local validation command; that self-owned process was interrupted immediately before PR creation, its generated compiled side effects were restored, and process/status checks confirmed a clean worktree before the safe stdin-based PR creation."
+        "evidence": "On prior head b84e27e1f, 8 checks passed and verify-bigfive failed because runtime-path freeze correctly rejected the new backend/app service and command. Same-scope fix 530a7cb20 removes both runtime files, moves the gate to a generated non-runtime Node CLI, and passes focused plus complete local validation; the GitHub retry is pending."
       }
     },
     "failure_reason": null,
@@ -89705,6 +89705,18 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Implementation commit 9ecc528a3249b752b7debba89773a32bdba83ea8 was pushed and PR #3039 opened with the required scope, rationale, validation, deferred-items, and repository-rule-impact sections; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-13T21:01:23Z",
+        "from": "github_checks_pending",
+        "to": "github_checks_failed",
+        "note": "On head b84e27e1f, 8 GitHub checks passed and verify-bigfive failed at BigFiveResultPageV2CoreBodyPreviewTest runtime-path freeze because PR06 had added a PHP application service and Artisan command. The failure exposed a real PR06 scope violation; it was not bypassed or reclassified."
+      },
+      {
+        "at": "2026-07-13T21:21:15Z",
+        "from": "github_checks_failed",
+        "to": "github_checks_pending",
+        "note": "Same-scope fix 530a7cb20 removed both backend/app files and replaced them with a non-runtime generated Node CLI. Focused tests, runtime freeze, syntax/format checks, package validation, scope validation, and the complete ci_verify_mbti suite passed; GitHub retry is pending."
       }
     ]
   },
