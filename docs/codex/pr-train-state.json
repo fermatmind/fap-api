@@ -89059,7 +89059,7 @@
     "status": "pr_open",
     "commit_sha": "f5ae8785cc7f9330d3851cfe32995ceb5bae0b7e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3027",
-    "failure_reason": null,
+    "failure_reason": "GitHub required check verify-bigfive failed in run 29245914645 because the Big Five runtime freeze classifier did not yet recognize the two new no-write MBTI full Profile dry-run files. The current PR adds an exact allowlist and regression test; no MBTI runtime behavior is exempted.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -89081,6 +89081,10 @@
       "local_validation": {
         "status": "pass",
         "evidence": "Focused 32-Profile dry-run test passed 4 tests/36 assertions; legacy Profile dry-run regression passed 4 tests/40 assertions; PersonalityPublicApiTest passed 23 tests/3250 assertions; scoped Pint, full ci_verify_mbti, YAML/JSON parsing, diff validation, and the exact four source packages against an ephemeral seeded SQLite target passed 32/32 with 28 repair, 4 verify-only, and zero writes."
+      },
+      "github_checks": {
+        "status": "failed_current_scope_fix_in_progress",
+        "evidence": "Run 29245914645 verify-bigfive failed only because BigFiveResultPageV2CoreBodyPreviewTest classified the two new no-write MBTI full Profile dry-run files as runtime-impacting. All other completed PR checks passed."
       }
     },
     "scope_validation": {
@@ -89107,6 +89111,12 @@
         "from": "local_validation_passed",
         "to": "pr_open",
         "note": "Opened GitHub PR #3027 from the scoped branch after successful local validation. Required checks are pending; no CMS or production action occurred."
+      },
+      {
+        "at": "2026-07-13T19:30:00+08:00",
+        "from": "pr_open",
+        "to": "github_checks_failed_current_scope_fix_in_progress",
+        "note": "Inspected run 29245914645. verify-bigfive failed because its runtime-freeze classifier omitted the two new no-write MBTI full Profile dry-run files. Repair is limited to an exact classifier allowlist plus regression test within this PR; no authority, content, CMS, or runtime route behavior changes."
       }
     ]
   }

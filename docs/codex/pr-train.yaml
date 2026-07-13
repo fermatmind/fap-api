@@ -41568,6 +41568,7 @@ prs:
       - backend/app/Console/Commands/PersonalityMbtiFullProfileImportDryRun.php
       - backend/app/Services/Cms/MbtiFullProfileImportDryRunPlanner.php
       - backend/tests/Feature/Console/PersonalityMbtiFullProfileImportDryRunCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
@@ -41579,7 +41580,8 @@ prs:
       - cd backend && php artisan test tests/Feature/Console/PersonalityMbtiFullProfileImportDryRunCommandTest.php --no-ansi
       - cd backend && php artisan test tests/Feature/Console/PersonalityMbtiProfileCmsImportDryRunCommandTest.php --no-ansi
       - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiFullProfileImportDryRun.php app/Services/Cms/MbtiFullProfileImportDryRunPlanner.php tests/Feature/Console/PersonalityMbtiFullProfileImportDryRunCommandTest.php
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiFullProfileImportDryRun.php app/Services/Cms/MbtiFullProfileImportDryRunPlanner.php tests/Feature/Console/PersonalityMbtiFullProfileImportDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_freeze_classifier_ignores_mbti_full_profile_import_dry_run_files --no-ansi
       - cd backend && bash scripts/ci_verify_mbti.sh
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
