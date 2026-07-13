@@ -90565,8 +90565,8 @@
       "SAEP-PT-07",
       "SAEP-PARITY-02"
     ],
-    "status": "pr_open_checks_pending_retry",
-    "commit_sha": "1ef04224e648bfa9c0206710bdca76a9b947d625",
+    "status": "ready_to_merge",
+    "commit_sha": "02bda0c57ff704679e757742c274fbbb59271adb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3044",
     "checks": {
       "authorization": {
@@ -90590,9 +90590,9 @@
         "evidence": "ScalesLookupTest passed 11 tests and 236 assertions; the committed branch-diff freeze gate and its allow/block tests passed 3 tests and 7 assertions. Both runs had only the expected missing local .env warning. Pint passed both PHP files; PHP syntax, YAML, JSON, git diff --check and exact scope passed. A separate fap-web Vitest run was active, so no second heavy full validation was started."
       },
       "github": {
-        "status": "pending",
-        "checked_at": "2026-07-13T22:56:20Z",
-        "evidence": "PR #3044 is open from the rebuilt exact-scope branch; required checks will run on the final ledger commit."
+        "status": "pass",
+        "checked_at": "2026-07-13T23:03:22Z",
+        "evidence": "PR #3044 passed hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-mbti-v2, verify-mbti-legacy and verify-bigfive on head 02bda0c57ff704679e757742c274fbbb59271adb."
       }
     },
     "failure_reason": null,
@@ -90646,6 +90646,11 @@
         "at": "2026-07-13T22:56:20Z",
         "status": "pr_open_checks_pending_retry",
         "note": "The original closed PR could not be reopened after branch recreation, so the same exact task opened PR #3044; no second task PR is open."
+      },
+      {
+        "at": "2026-07-13T23:03:22Z",
+        "status": "ready_to_merge",
+        "note": "All required GitHub checks passed on head 02bda0c57ff704679e757742c274fbbb59271adb and the changed-file set remains exactly within the four locked paths."
       }
     ]
   }
