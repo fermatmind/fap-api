@@ -89741,8 +89741,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-EDITORIAL-GATE-06"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "35af656043ba16a1a242733f74967b0313d8eaa5",
+    "status": "merged",
+    "commit_sha": "d6908a1290918087547bfe80a4ccab29cbe9e439",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3040",
     "checks": {
       "dependency": {
@@ -89767,13 +89767,13 @@
       },
       "github_required_checks": {
         "status": "pass",
-        "evidence": "All 9 GitHub checks passed on head e5d30af2d9583f1528860f8db42c34041a1a6281: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. GitHub reports MERGEABLE/CLEAN."
+        "evidence": "All 9 GitHub checks passed on final head 573891d0bdbe8caa0963038d327911b4459090b0: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-13T22:06:02Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -89802,6 +89802,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 required GitHub checks passed on head e5d30af2d9583f1528860f8db42c34041a1a6281. GitHub reports PR #3040 MERGEABLE/CLEAN; the final ledger head will be revalidated before squash merge."
+      },
+      {
+        "at": "2026-07-13T22:08:54Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #3040 as squash-merged at 2026-07-13T22:06:02Z with merge d6908a1290918087547bfe80a4ccab29cbe9e439. origin/main containment, final-head checks, remote deletion, local post_merge_cleanup, and post-merge validator plus focused PHP validation passed. Deploy Application run 29288737048 was canceled during checkout; Deploy (staging) executed zero steps. The first merge API call was safely rejected by its stale SHA guard before the exact-head retry succeeded."
       }
     ]
   },
@@ -89814,10 +89820,31 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-HUB-07"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-HUB-07 PR #3040 is MERGED as d6908a1290918087547bfe80a4ccab29cbe9e439; origin/main contains the merge and post-merge validation/cleanup completed."
+      },
+      "package_validator": {
+        "status": "pass",
+        "evidence": "The stage-specific Node 24 validator passed exact coverage for 10 bilingual domain drafts: 5 domains x EN/zh-CN with 6 frozen facets per page. Raw remains schema-valid with 4 accounted editorial failure codes; skeptical review accounts for every failure; repaired and final packages pass while human review, CMS writes, publication, schema eligibility, indexability, search submission, and deployment remain closed."
+      },
+      "focused_test": {
+        "status": "pass",
+        "evidence": "BigFiveAuthorityV208Test passed 5 tests / 211 assertions under PHP 8.4 and Node 24. It proves exact canonical and facet coverage, independent EN/ZH editing, three range levels, source authority, raw failure preservation, and fail-closed behavior for unknown claims, facet/path drift, duplicate content, private flow data, cross-framework leakage, fabricated review, and release controls."
+      },
+      "format_and_syntax": {
+        "status": "pass",
+        "evidence": "Pint --test and PHP syntax passed for the touched PHP test. Node syntax and execution, all five generated JSON files, state JSON, manifest YAML through the required Ruby command, and git diff --check passed."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Exactly 9 changed files match the PR08 manifest allowlist: one README, one focused Feature test, one state ledger, and six generated workflow/QA files. No backend/app runtime, range page, facet-detail page, CMS/database write, publish, deploy, or indexability change occurred."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -89826,7 +89853,20 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-13T22:08:54Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR08 from clean latest fap-api main after reconciling PR07. Scope is exactly ten independently edited EN/ZH domain draft pages for openness, conscientiousness, extraversion, agreeableness, and neuroticism; range and facet-detail rewrites, CMS writes, runtime changes, publication, deployment, and indexability mutations remain forbidden."
+      },
+      {
+        "at": "2026-07-13T22:22:28Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All PR08 manifest checks passed. The four-stage workflow preserves and accounts for raw failures; the ten final domain drafts cover exact bilingual canonical paths, high/middle/low interpretations, six frozen facets, scenarios, tradeoffs, combinations, action experiments, misconceptions, method boundaries, and approved visible evidence while all human/release gates remain closed. Changed files remain exactly within the 9-file PR08 allowlist."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-FACET-HUBS-09": {
     "id": "BIG5-AUTHORITY-V2-FACET-HUBS-09",

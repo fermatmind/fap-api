@@ -1,0 +1,19 @@
+{
+  "schema_version": "big5_authority_v2_skeptical_review.v1",
+  "train_id": "BIG5-AUTHORITY-V2-DOMAINS-08",
+  "reviewed_artifact": "big5-authority-v2-domains-08-raw",
+  "review_status": "repair_required",
+  "expected_raw_issue_codes": [
+    "locale_not_independently_authored",
+    "outline_incomplete",
+    "template_or_cliche_detected",
+    "visible_sources_incomplete"
+  ],
+  "findings": [
+    {"code": "outline_incomplete", "severity": "high", "note": "Every domain outline lacks scenario, tradeoff, combination, action, misconception, and method-boundary content."},
+    {"code": "locale_not_independently_authored", "severity": "high", "note": "Chinese outlines declare translation provenance instead of independent editorial authorship."},
+    {"code": "visible_sources_incomplete", "severity": "high", "note": "No reader-visible source or limitation is attached to any domain."},
+    {"code": "template_or_cliche_detected", "severity": "medium", "note": "The raw workflow still contains a placeholder instruction and cannot pass originality QA."}
+  ],
+  "repair_policy": {"overwrite_raw": false, "automatic_publish": false, "automatic_indexability": false, "human_review_required": true, "ai_detector_used": false}
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "big5_authority_v2_domain_package.v1",
+  "train_id": "BIG5-AUTHORITY-V2-DOMAINS-08",
+  "artifact": "big5-authority-v2-domains-08-raw",
+  "stage": "raw",
+  "framework": "big_five",
+  "expected_page_count": 10,
+  "draft_note": "insert example after translating the outline",
+  "pages": [
+    {"content_key": "domain:openness", "locale": "en", "canonical_path": "/en/personality/big-five/openness", "domain_code": "openness", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["definition", "range", "facets"], "visible_sources": []},
+    {"content_key": "domain:openness", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/openness", "domain_code": "openness", "authoring_mode": "translation", "source_locale": "en", "outline_sections": ["definition", "range", "facets"], "visible_sources": []},
+    {"content_key": "domain:conscientiousness", "locale": "en", "canonical_path": "/en/personality/big-five/conscientiousness", "domain_code": "conscientiousness", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["definition", "range", "facets"], "visible_sources": []},
+    {"content_key": "domain:conscientiousness", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/conscientiousness", "domain_code": "conscientiousness", "authoring_mode": "translation", "source_locale": "en", "outline_sections": ["definition", "range", "facets"], "visible_sources": []},
+    {"content_key": "domain:extraversion", "locale": "en", "canonical_path": "/en/personality/big-five/extraversion", "domain_code": "extraversion", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["definition", "range", "facets"], "visible_sources": []},
+    {"content_key": "domain:extraversion", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/extraversion", "domain_code": "extraversion", "authoring_mode": "translation", "source_locale": "en", "outline_sections": ["definition", "range", "facets"], "visible_sources": []},
+    {"content_key": "domain:agreeableness", "locale": "en", "canonical_path": "/en/personality/big-five/agreeableness", "domain_code": "agreeableness", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["definition", "range", "facets"], "visible_sources": []},
+    {"content_key": "domain:agreeableness", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/agreeableness", "domain_code": "agreeableness", "authoring_mode": "translation", "source_locale": "en", "outline_sections": ["definition", "range", "facets"], "visible_sources": []},
+    {"content_key": "domain:neuroticism", "locale": "en", "canonical_path": "/en/personality/big-five/neuroticism", "domain_code": "neuroticism", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["definition", "range", "facets"], "visible_sources": []},
+    {"content_key": "domain:neuroticism", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/neuroticism", "domain_code": "neuroticism", "authoring_mode": "translation", "source_locale": "en", "outline_sections": ["definition", "range", "facets"], "visible_sources": []}
+  ],
+  "workflow": {"raw_failures_preserved": true, "ai_detector_used": false},
+  "review_state": {"status": "pending_human_review", "reviewer": null, "approved_at": null, "publish_allowed": false, "schema_eligible": false},
+  "release_controls": {"cms_write_allowed": false, "indexability_change_allowed": false, "search_submission_allowed": false, "deploy_allowed": false}
+}
