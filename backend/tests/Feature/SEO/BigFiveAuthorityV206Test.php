@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SEO;
 
-use App\Services\BigFive\AuthorityV2\EditorialGate\BigFiveEditorialGate;
+use Symfony\Component\Process\Process;
 use Tests\TestCase;
 
 final class BigFiveAuthorityV206Test extends TestCase
 {
-    private const DIR = '../generated/big-five-authority-v2/big5-authority-v2-editorial-gate-06';
+    private const DIR = 'generated/big-five-authority-v2/big5-authority-v2-editorial-gate-06';
 
     public function test_raw_failures_are_preserved_and_match_the_skeptical_review(): void
     {
-        $result = $this->gate()->validate($this->readJson(self::DIR.'/raw-draft.json'), $this->sourceLedger());
+        $result = $this->runGate(self::DIR.'/raw-draft.json');
         $review = $this->readJson(self::DIR.'/skeptical-review.json');
 
         $this->assertFalse($result['ok']);
@@ -28,7 +28,7 @@ final class BigFiveAuthorityV206Test extends TestCase
 
     public function test_final_candidate_passes_automated_gates_but_not_human_or_release_gates(): void
     {
-        $result = $this->gate()->validate($this->readJson(self::DIR.'/final-package.json'), $this->sourceLedger());
+        $result = $this->runGate(self::DIR.'/final-package.json', true);
 
         $this->assertTrue($result['ok'], json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
         $this->assertSame([], $result['issues']);
@@ -46,7 +46,7 @@ final class BigFiveAuthorityV206Test extends TestCase
         $candidate['pages'][0]['sections'][0]['body'] .= ' /'.'orders/example?'.'session_id=demo';
         $candidate['pages'][1]['sections'][0]['body'] .= ' MB'.'TI';
 
-        $result = $this->gate()->validate($candidate, $this->sourceLedger());
+        $result = $this->runTemporaryCandidate($candidate);
         $codes = collect($result['issues'])->pluck('code')->all();
 
         $this->assertFalse($result['ok']);
@@ -63,40 +63,75 @@ final class BigFiveAuthorityV206Test extends TestCase
             'source_ids' => ['competitor.big-five-public-structure-benchmark-2026-07-13'],
         ];
 
-        $result = $this->gate()->validate($candidate, $this->sourceLedger());
+        $result = $this->runTemporaryCandidate($candidate);
 
         $this->assertFalse($result['ok']);
         $this->assertContains('claim_unknown', collect($result['issues'])->pluck('code')->all());
     }
 
-    public function test_command_exposes_pass_and_fail_without_writes(): void
+    public function test_near_duplicate_and_manual_review_release_state_fail_closed_without_writes(): void
     {
-        $this->artisan('personality-big-five:authority-v2-editorial-gate', [
-            '--source' => self::DIR.'/final-package.json',
-            '--json' => true,
-        ])->assertSuccessful()->expectsOutputToContain('"writes_committed": false');
+        $candidate = $this->readJson(self::DIR.'/final-package.json');
+        $candidate['pages'][0]['sections'][1]['body'] = $candidate['pages'][0]['sections'][0]['body'].' minor suffix';
+        $candidate['review_state']['reviewer'] = 'fabricated-reviewer';
+        $candidate['review_state']['publish_allowed'] = true;
 
-        $this->artisan('personality-big-five:authority-v2-editorial-gate', [
-            '--source' => self::DIR.'/raw-draft.json',
-            '--json' => true,
-        ])->assertFailed()->expectsOutputToContain('"status": "fail"');
+        $result = $this->runTemporaryCandidate($candidate);
+        $codes = collect($result['issues'])->pluck('code')->all();
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('near_duplicate_section_body', $codes);
+        $this->assertContains('review_state_fail_closed', $codes);
+        $this->assertFalse($result['writes_committed']);
+        $this->assertFalse($result['cms_write_attempted']);
+        $this->assertFalse($result['indexability_mutation_attempted']);
+        $this->assertFalse($result['search_submission_attempted']);
+        $this->assertFalse($result['deploy_attempted']);
     }
 
-    private function gate(): BigFiveEditorialGate
+    /** @param array<string,mixed> $candidate @return array<string,mixed> */
+    private function runTemporaryCandidate(array $candidate): array
     {
-        return app(BigFiveEditorialGate::class);
+        $path = tempnam(sys_get_temp_dir(), 'big5-authority-v2-editorial-');
+        $this->assertNotFalse($path);
+        file_put_contents($path, json_encode($candidate, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+
+        try {
+            return $this->runGate($path);
+        } finally {
+            @unlink($path);
+        }
     }
 
     /** @return array<string,mixed> */
-    private function sourceLedger(): array
+    private function runGate(string $source, bool $expectSuccess = false): array
     {
-        return $this->readJson('../generated/big-five-authority-v2/big5-authority-v2-source-ledger-05/source-ledger.json');
+        $repoRoot = dirname(base_path());
+        $process = new Process([
+            'node',
+            self::DIR.'/validate-package.mjs',
+            '--source',
+            $source,
+        ], $repoRoot);
+        $process->setTimeout(15);
+        $process->run();
+
+        if ($expectSuccess) {
+            $this->assertTrue($process->isSuccessful(), $process->getErrorOutput().$process->getOutput());
+        } else {
+            $this->assertFalse($process->isSuccessful(), $process->getErrorOutput().$process->getOutput());
+        }
+
+        $decoded = json_decode($process->getOutput(), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertIsArray($decoded);
+
+        return $decoded;
     }
 
     /** @return array<string,mixed> */
     private function readJson(string $path): array
     {
-        $decoded = json_decode(file_get_contents(base_path($path)) ?: '', true, flags: JSON_THROW_ON_ERROR);
+        $decoded = json_decode(file_get_contents(dirname(base_path()).'/'.$path) ?: '', true, flags: JSON_THROW_ON_ERROR);
         $this->assertIsArray($decoded);
 
         return $decoded;
