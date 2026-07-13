@@ -5153,6 +5153,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/PersonalityPublicContentAssetContract.php',
             'backend/database/migrations/2026_06_14_000100_create_personality_public_content_assets_table.php',
             'backend/database/migrations/2026_06_14_000200_add_render_contract_fields_to_personality_public_content_assets_table.php',
+            'backend/database/migrations/2026_07_14_000100_add_big_five_authority_v2_to_personality_public_content_assets.php',
             'backend/routes/api.php',
         ];
         $routeChangedLines = [
@@ -7221,6 +7222,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/PersonalityPublicContentAssetContract.php',
             'backend/database/migrations/2026_06_14_000100_create_personality_public_content_assets_table.php',
             'backend/database/migrations/2026_06_14_000200_add_render_contract_fields_to_personality_public_content_assets_table.php',
+            'backend/database/migrations/2026_07_14_000100_add_big_five_authority_v2_to_personality_public_content_assets.php',
         ], true);
     }
 

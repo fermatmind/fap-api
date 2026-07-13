@@ -41760,13 +41760,15 @@ prs:
       - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
       - backend/database/migrations/*big_five_authority_v2*
       - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-public-contract-03/**
       - generated/big-five-authority-v2/big5-authority-v2-public-contract-03/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     validation:
       - "node generated/big-five-authority-v2/big5-authority-v2-public-contract-03/validate-package.mjs"
-      - "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV203Test.php --no-ansi"
+      - "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --no-ansi"
+      - "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter personality_public_asset_contract --no-ansi"
       - "bash backend/scripts/ci_verify_mbti.sh"
       - "touched PHP Pint --test when PHP changes"
       - "PHP/JSON/YAML/JS syntax checks for touched files"
