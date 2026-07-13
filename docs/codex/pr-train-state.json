@@ -89646,9 +89646,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-SOURCE-LEDGER-05"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "9ecc528a3249b752b7debba89773a32bdba83ea8",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3039",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -89673,6 +89673,10 @@
       "scope": {
         "status": "pass",
         "evidence": "All 11 changed files match the PR06 manifest allowlist exactly. origin/main remains the branch base at 9df5b2ea6d031352f34b0134d49dbba00ed4a08f. No CMS/database write, public runtime or editorial fallback, publish, deploy, schema activation, indexability mutation, search submission, frontend change, or private data access occurred."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #3039 opened from implementation commit 9ecc528a3249b752b7debba89773a32bdba83ea8; required GitHub checks are pending. The first PR-create shell invocation interpreted Markdown backticks and started a duplicate local validation command; that self-owned process was interrupted immediately before PR creation, its generated compiled side effects were restored, and process/status checks confirmed a clean worktree before the safe stdin-based PR creation."
       }
     },
     "failure_reason": null,
@@ -89695,6 +89699,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All PR06 manifest local checks passed. The four-stage workflow preserves raw failures, en and zh-CN require independent editorial parity, scientific claims resolve through PR05 authority, 8 automated gates fail closed, and human/release/operational gates remain closed."
+      },
+      {
+        "at": "2026-07-13T20:55:29Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Implementation commit 9ecc528a3249b752b7debba89773a32bdba83ea8 was pushed and PR #3039 opened with the required scope, rationale, validation, deferred-items, and repository-rule-impact sections; required GitHub checks are pending."
       }
     ]
   },
