@@ -613,6 +613,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_big_five_public_integrity_gate_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityBigFivePublicIntegrityGate.php',
+            'backend/app/Services/SEO/BigFivePublicIntegrityGate.php',
+            'backend/app/Support/PublicSeoTitleNormalizer.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_iq_method_pages_cms_readback_files(): void
     {
         $changed = [
@@ -5636,6 +5647,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFivePublicIntegrityGateFile($file)) {
+                continue;
+            }
+
             if ($this->isMbti64CmsRevisionDraftFile($file)) {
                 continue;
             }
@@ -7347,6 +7362,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isBigFiveProductionContentAuditFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/PersonalityBigFiveProductionContentAudit.php';
+    }
+
+    private function isBigFivePublicIntegrityGateFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFivePublicIntegrityGate.php',
+            'backend/app/Services/SEO/BigFivePublicIntegrityGate.php',
+            'backend/app/Support/PublicSeoTitleNormalizer.php',
+        ], true);
     }
 
     private function isMbti64CmsRevisionDraftFile(string $file): bool

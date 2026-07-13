@@ -89277,4 +89277,888 @@
       }
     ]
   }
+,
+  "BIG5-AUTHORITY-V2-INTEGRITY-GATE-02": {
+    "id": "BIG5-AUTHORITY-V2-INTEGRITY-GATE-02",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-INTEGRITY-GATE-02: fix(content): repair and gate Big Five public integrity",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-integrity-gate-02",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-BENCHMARK-01"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "254898453e209136510ef2303ea73a49bb015845",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3034",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-BENCHMARK-01 PR #1744 is MERGED as 5c97d4ae368c4c3f002c47c325298a4e8114accd and fap-web origin/main contains the merge commit."
+      },
+      "package_build_and_validation": {
+        "status": "pass",
+        "evidence": "124 assets; 47 patch assets; 114 canonical and 10 redirect-only aliases; zero dead-guide, operational-term, or branded-title residue; candidate SHA256 0f83b4da7aa9606b9585485a03fd569b5acb09600a24ebe1ea734d34c2516f59."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "29 tests, 481 assertions, exit 0. Existing optional-fixture file_get_contents warnings remain warnings only."
+      },
+      "pint": {
+        "status": "pass",
+        "evidence": "Laravel Pint --test passed for all 8 touched PHP source and test files."
+      },
+      "full_big_five_mbti_chain": {
+        "status": "pass",
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh exited 0. Core suite passed 1215 tests / 150368 assertions; MBTI end-to-end, personality full-32, migration, security, OpenAPI, dependency, and regression gates also passed."
+      },
+      "live_internal_link_gate": {
+        "status": "pass",
+        "evidence": "Read-only live validation passed 127 unique targets: 117 canonical 200 and 10 exact reviewed 301 aliases, zero errors, with all CMS/indexability/search/write flags false. Initial retry caught and fixed a validator-only false positive for the legitimate /facets/order path; focused regression and live gate then passed."
+      },
+      "manifest_and_ledger": {
+        "status": "pass",
+        "evidence": "YAML and JSON parsed successfully; PR02 manifest/state entries are present."
+      },
+      "scope_and_diff": {
+        "status": "pass",
+        "evidence": "Exact changed-file scope validation passed for the declared PR02 paths and git diff --check exited 0. Full-chain regenerated BIG5_OCEAN compiled side effects were restored before scope validation."
+      },
+      "github_verify_bigfive_retry": {
+        "status": "pass",
+        "evidence": "First remote verify-bigfive run failed only because the result-page runtime-freeze classifier had no exemption for the three new no-write integrity helper files; 1213 tests otherwise passed. Added an exact three-file classifier exemption plus regression. The original failing branch-diff test and new classifier test passed locally (2 tests / 4 assertions), and the second remote verify-bigfive run passed in 3m31s."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "Head 254898453e209136510ef2303ea73a49bb015845 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS, and semgrep SARIF upload. GitHub reports mergeStateStatus CLEAN."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-13T17:05:02.604Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR02 from clean fap-api origin/main after verifying PR01 merged; scope is public integrity repair and a no-write internal-link gate. Production deploy, CMS/database writes, indexability mutation, and search actions remain prohibited."
+      },
+      {
+        "at": "2026-07-13T17:17:10Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All manifest local checks and the additional read-only live 127-target integrity gate passed. No production deploy, CMS/database write, indexability mutation, or search submission was executed."
+      },
+      {
+        "at": "2026-07-13T17:19:23Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Implementation commit 73eef31fb563a66449f12c300044b6f74c230e00 was pushed and PR #3034 opened; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-13T17:27:08Z",
+        "from": "github_checks_pending",
+        "to": "github_checks_failed_fixing",
+        "note": "First remote verify-bigfive run failed at BigFiveResultPageV2CoreBodyPreviewTest because the runtime-freeze classifier identified the three new PR02 helper files; all other reported checks, including verify-mbti-v2 and verify-mbti-legacy, passed."
+      },
+      {
+        "at": "2026-07-13T17:27:08Z",
+        "from": "github_checks_failed_fixing",
+        "to": "github_checks_pending",
+        "note": "Added the exact scoped runtime-freeze classifier exemption and regression test. The original branch-diff assertion and new classifier test pass locally; GitHub rerun remains pending."
+      },
+      {
+        "at": "2026-07-13T17:33:41Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed on head 254898453e209136510ef2303ea73a49bb015845; PR #3034 is CLEAN with no review block."
+      }
+    ]
+  },
+  "BIG5-AUTHORITY-V2-PUBLIC-CONTRACT-03": {
+    "id": "BIG5-AUTHORITY-V2-PUBLIC-CONTRACT-03",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-PUBLIC-CONTRACT-03: feat(content): add Big Five visible evidence authority contract",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-public-contract-03",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-INTEGRITY-GATE-02"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-SOURCE-LEDGER-05": {
+    "id": "BIG5-AUTHORITY-V2-SOURCE-LEDGER-05",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-SOURCE-LEDGER-05: docs(content): add Big Five bilingual source and claim ledger",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-source-ledger-05",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-WEB-TRUST-RENDERER-04"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-EDITORIAL-GATE-06": {
+    "id": "BIG5-AUTHORITY-V2-EDITORIAL-GATE-06",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-EDITORIAL-GATE-06: test(content): add Big Five originality and editorial QA gate",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-editorial-gate-06",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-SOURCE-LEDGER-05"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-HUB-07": {
+    "id": "BIG5-AUTHORITY-V2-HUB-07",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-HUB-07: content(big5): rewrite bilingual Big Five hubs",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-hub-07",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-EDITORIAL-GATE-06"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-DOMAINS-08": {
+    "id": "BIG5-AUTHORITY-V2-DOMAINS-08",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-DOMAINS-08: content(big5): rewrite ten bilingual Big Five domain pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-domains-08",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-HUB-07"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-FACET-HUBS-09": {
+    "id": "BIG5-AUTHORITY-V2-FACET-HUBS-09",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-FACET-HUBS-09: content(big5): rewrite bilingual Big Five facet hubs",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-facet-hubs-09",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-DOMAINS-08"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-RANGE-OPENNESS-10": {
+    "id": "BIG5-AUTHORITY-V2-RANGE-OPENNESS-10",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-RANGE-OPENNESS-10: content(big5): rewrite openness range and legacy pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-range-openness-10",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-FACET-HUBS-09"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11": {
+    "id": "BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11: content(big5): rewrite conscientiousness range and legacy pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-range-conscientiousness-11",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-RANGE-OPENNESS-10"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12": {
+    "id": "BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12: content(big5): rewrite extraversion range and legacy pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-range-extraversion-12",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-RANGE-AGREEABLENESS-13": {
+    "id": "BIG5-AUTHORITY-V2-RANGE-AGREEABLENESS-13",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-RANGE-AGREEABLENESS-13: content(big5): rewrite agreeableness range and legacy pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-range-agreeableness-13",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14": {
+    "id": "BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14: content(big5): rewrite neuroticism range and legacy pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-range-neuroticism-14",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-RANGE-AGREEABLENESS-13"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-FACETS-OPENNESS-15": {
+    "id": "BIG5-AUTHORITY-V2-FACETS-OPENNESS-15",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-FACETS-OPENNESS-15: content(big5): rewrite bilingual openness facet pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-facets-openness-15",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16": {
+    "id": "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16: content(big5): rewrite bilingual conscientiousness facet pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-facets-conscientiousness-16",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-FACETS-OPENNESS-15"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-FACETS-EXTRAVERSION-17": {
+    "id": "BIG5-AUTHORITY-V2-FACETS-EXTRAVERSION-17",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-FACETS-EXTRAVERSION-17: content(big5): rewrite bilingual extraversion facet pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-facets-extraversion-17",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18": {
+    "id": "BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18: content(big5): rewrite bilingual agreeableness facet pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-facets-agreeableness-18",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-FACETS-EXTRAVERSION-17"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19": {
+    "id": "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19: content(big5): rewrite bilingual neuroticism facet pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-facets-neuroticism-19",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-TEST-LANDING-20": {
+    "id": "BIG5-AUTHORITY-V2-TEST-LANDING-20",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-TEST-LANDING-20: content(big5): deepen bilingual test landing pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-test-landing-20",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-IA-21": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-IA-21",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-IA-21: docs(content): lock Big Five article intent architecture",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-ia-21",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-TEST-LANDING-20"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22: content(big5): refresh nine articles and two topic hubs",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-refresh-22",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-IA-21"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-TECHNICAL-TRUST-23": {
+    "id": "BIG5-AUTHORITY-V2-TECHNICAL-TRUST-23",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-TECHNICAL-TRUST-23: content(big5): add bilingual methodology and trust pages",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-technical-trust-23",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24: content(big5): publish core model editorial wave",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-core-model-24",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-TECHNICAL-TRUST-23"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25: content(big5): publish result-reading editorial wave",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-result-reading-25",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26: content(big5): publish workplace editorial wave",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-workplace-26",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27: content(big5): publish relationships editorial wave",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-relationships-27",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28: content(big5): publish learning and habits editorial wave",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-learning-habits-28",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29: content(big5): publish growth and change editorial wave",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-growth-change-29",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30: content(big5): publish stress and wellbeing editorial wave",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-stress-wellbeing-30",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31: content(big5): publish research-methods editorial wave",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-research-methods-31",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32: content(big5): publish comparison editorial wave",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-comparisons-32",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33": {
+    "id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33: content(big5): publish research-briefings editorial wave",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-article-research-briefings-33",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-MEDIA-OG-34": {
+    "id": "BIG5-AUTHORITY-V2-MEDIA-OG-34",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-MEDIA-OG-34: content(big5): map approved Media Library and OG assets",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-media-og-34",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-LINK-GRAPH-35": {
+    "id": "BIG5-AUTHORITY-V2-LINK-GRAPH-35",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-LINK-GRAPH-35: fix(seo): rebuild Big Five internal link and canonical graph",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-link-graph-35",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-MEDIA-OG-34"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36": {
+    "id": "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36: feat(seo): release Big Five SEO and GEO authority",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-seo-geo-authority-36",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-LINK-GRAPH-35"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  },
+  "BIG5-AUTHORITY-V2-RELEASE-GATE-37": {
+    "id": "BIG5-AUTHORITY-V2-RELEASE-GATE-37",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-RELEASE-GATE-37: ops(content): add Big Five V2 aggregate dry-run and publish gate",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-release-gate-37",
+    "depends_on": [
+      "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36"
+    ],
+    "status": "planned",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "transitions": []
+  }
 }
