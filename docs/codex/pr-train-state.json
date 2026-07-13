@@ -89056,9 +89056,9 @@
     "depends_on": [
       "MBTI-FULL-QA-36"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "f5ae8785cc7f9330d3851cfe32995ceb5bae0b7e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3027",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -89101,6 +89101,12 @@
         "from": "in_progress",
         "to": "local_validation_passed",
         "note": "All scoped local checks passed. The exact four fap-web source packages were additionally validated against an ephemeral seeded SQLite target: 32/32 records, 28 repair candidates, four verify-only records, deterministic idempotency, and zero CMS writes."
+      },
+      {
+        "at": "2026-07-13T19:08:00+08:00",
+        "from": "local_validation_passed",
+        "to": "pr_open",
+        "note": "Opened GitHub PR #3027 from the scoped branch after successful local validation. Required checks are pending; no CMS or production action occurred."
       }
     ]
   }
