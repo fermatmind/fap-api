@@ -88943,13 +88943,13 @@
     "base": "main",
     "branch": "codex/personality-warmup-01",
     "depends_on": ["PERSONALITY-CACHE-01"],
-    "status": "ready_to_merge",
-    "commit_sha": "5d9827d91",
+    "status": "merged",
+    "commit_sha": "0a78888dd6d4c11ecd4a3c7b74bd79824b816b51",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3018",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-12T09:19:14Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "authorization": {"status": "pass", "evidence": "The performance PR-train /goal explicitly authorized PERSONALITY-WARMUP-01 and manifest/state registration."},
       "dependency": {"status": "pass", "evidence": "PERSONALITY-CACHE-01 merged in fap-api PR #3017 at 0cb4518f0284e4c196738774315e87b0613c150d and is contained in origin/main."},
@@ -88957,8 +88957,74 @@
       "local_validation": {"status": "pass", "evidence": "Warmup and complete personality API tests passed with 26 tests and 3261 assertions; PHP syntax and scoped Pint passed; the complete scripts/ci_verify_mbti.sh chain exited 0; YAML/JSON, diff, and exact seven-path scope validation passed."},
       "github_required_checks": {"status": "pass", "evidence": "All 9 required checks passed on ee64325cd after resolving backend-relative Kernel diff classification."}
     },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "transitions": [{"at": "2026-07-12T17:30:00+08:00", "from": "user_authorized", "to": "in_progress", "note": "Started a read-only EN/ZH post-publish warmup command and A/T projection alias deduplication. No production warmup, CMS/DB mutation, import, staging, or deploy is authorized."}, {"at": "2026-07-12T18:00:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "Focused and full backend validation passed. The temporary local baseline probe measured 49,538-byte EN and 89,363-byte ZH INTJ-A detail payloads; no production warmup or content mutation occurred. Validation-generated Big Five artifacts were restored."}, {"at": "2026-07-12T18:05:00+08:00", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed and pushed the exact seven-path scope and opened PR #3018; required checks are pending."}, {"at": "2026-07-12T18:15:00+08:00", "from": "github_checks_pending", "to": "github_checks_retry_pending", "note": "Inspected verify-bigfive: 1206 tests passed and the sole failure was the runtime classifier not recognizing the new warmup command and its exact two-line Kernel registration. Restored Pint import churn and added narrow classifier coverage for only those paths/lines."}, {"at": "2026-07-12T18:25:00+08:00", "from": "github_checks_retry_pending", "to": "ready_to_merge", "note": "All 9 required checks passed and the exact eight-path scope remained clean and mergeable."}, {"at": "2026-07-13T11:21:27Z", "from": "ready_to_merge", "to": "merged", "note": "Reconciled GitHub PR #3018 as MERGED at 0a78888dd6d4c11ecd4a3c7b74bd79824b816b51; origin/main contains the merge commit and both local and remote task branches are absent."}]
+  },
+  "PUBLIC-STABILITY-API-01": {
+    "id": "PUBLIC-STABILITY-API-01",
+    "repo": "fap-api",
+    "title": "PUBLIC-STABILITY-API-01: collect public content runtime metrics",
+    "base": "main",
+    "branch": "codex/public-stability-api-01",
+    "depends_on": ["PUBLIC-API-CACHE-01"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "runtime_change": true,
+    "workflow_policy_change": false,
+    "database_mutation": true,
+    "cms_mutation": false,
+    "publish_allowed": false,
+    "production_write_execution": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The public stability /goal explicitly authorized all eight fap-api entries, registration in API-01, and local-only migration validation."},
+      "dependency": {"status": "pass", "evidence": "PUBLIC-API-CACHE-01 is merged in PR #3015 at f0393acf8ef84d8c275f4640584d7d86d15f259b and is contained in origin/main."},
+      "baseline_repair": {"status": "pass", "evidence": "The separately authorized Career/architecture baseline repair merged as PR #3033 at 082a30f6e40173ee50de1110346d4c787c1dbf13. All required checks passed, origin/main contains the merge, and branch cleanup completed."},
+      "local_validation": {"status": "pass", "evidence": "Focused runtime metrics tests pass 8 tests / 114 assertions; migration safety plus focused metrics pass 9 tests / 2049 assertions; scoped Pint, exact allowlist route/middleware coverage, Ops route, schedule, and OpenAPI checks pass. The identical full PHPUnit selection passed 7351 tests / 507190 assertions under a temporary 2 GiB process ceiling after the repository 1 GiB wrapper exhausted in unchanged mPDF code; the external resource issue is recorded in the sidecar. bash scripts/ci_verify_mbti.sh exited 0 with migration, MBTI, Big Five, OpenAPI, security, dependency, and regression gates green. No production migration, CMS mutation, publish, cache operation, or deploy was executed."},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
-    "transitions": [{"at": "2026-07-12T17:30:00+08:00", "from": "user_authorized", "to": "in_progress", "note": "Started a read-only EN/ZH post-publish warmup command and A/T projection alias deduplication. No production warmup, CMS/DB mutation, import, staging, or deploy is authorized."}, {"at": "2026-07-12T18:00:00+08:00", "from": "in_progress", "to": "local_checks_passed", "note": "Focused and full backend validation passed. The temporary local baseline probe measured 49,538-byte EN and 89,363-byte ZH INTJ-A detail payloads; no production warmup or content mutation occurred. Validation-generated Big Five artifacts were restored."}, {"at": "2026-07-12T18:05:00+08:00", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed and pushed the exact seven-path scope and opened PR #3018; required checks are pending."}, {"at": "2026-07-12T18:15:00+08:00", "from": "github_checks_pending", "to": "github_checks_retry_pending", "note": "Inspected verify-bigfive: 1206 tests passed and the sole failure was the runtime classifier not recognizing the new warmup command and its exact two-line Kernel registration. Restored Pint import churn and added narrow classifier coverage for only those paths/lines."}, {"at": "2026-07-12T18:25:00+08:00", "from": "github_checks_retry_pending", "to": "ready_to_merge", "note": "All 9 required checks passed and the exact eight-path scope remained clean and mergeable."}]
+    "transitions": [{"at": "2026-07-13T11:21:27Z", "from": "user_authorized", "to": "in_progress", "note": "Started fail-open aggregate metrics from verified dependency and clean main. Only API-01 may add migration code; no production migration, CMS write, cache warm/purge, publish, or deploy is authorized."}, {"at": "2026-07-13T11:35:00Z", "from": "in_progress", "to": "blocked_external_baseline", "note": "Stopped before commit because required composer test fails a deterministic unchanged origin/main career-audit fixture outside API-01 allowed paths. Sidecar records exact hashes and follow-up; no push, PR, production action, or future PR work occurred."}, {"at": "2026-07-13T17:35:07Z", "from": "blocked_external_baseline", "to": "in_progress", "note": "Resumed after independently merging Career/architecture baseline repair PR #3033 and syncing API-01 to 082a30f6e40173ee50de1110346d4c787c1dbf13. Focused metrics validation is green; no production migration, CMS mutation, publish, cache operation, or deploy was executed."}, {"at": "2026-07-13T19:57:31Z", "from": "in_progress", "to": "local_checks_passed", "note": "All API-01 focused, migration, formatting, routing, schedule, OpenAPI, full-suite-equivalent, and ci_verify_mbti gates passed. The repository-wide 1 GiB single-process PHPUnit resource limit is recorded as a sidecar; GitHub required checks remain mandatory before merge."}]
+  },
+  "PUBLIC-STABILITY-API-02": {
+    "id": "PUBLIC-STABILITY-API-02", "repo": "fap-api", "title": "PUBLIC-STABILITY-API-02: add versioned MBTI last-known-good reads", "base": "main", "branch": "codex/public-stability-api-02", "depends_on": ["PUBLIC-STABILITY-API-01", "PERSONALITY-WARMUP-01"], "status": "user_authorized", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false, "runtime_change": true, "workflow_policy_change": false, "database_mutation": false, "cms_mutation": false, "publish_allowed": false, "production_write_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "Explicitly authorized in the 19-item public stability /goal."}, "dependency": {"status": "pending", "evidence": null}, "local_validation": {"status": "pending", "evidence": null}, "github_required_checks": {"status": "pending", "evidence": null}},
+    "scope_validation": {"allowed_paths_only": null, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false}, "transitions": [{"at": "2026-07-13T11:21:27Z", "from": "unregistered", "to": "user_authorized", "note": "Registered by the explicitly authorized API-01 manifest/state bootstrap; implementation waits for dependencies."}]
+  },
+  "PUBLIC-STABILITY-API-03": {
+    "id": "PUBLIC-STABILITY-API-03", "repo": "fap-api", "title": "PUBLIC-STABILITY-API-03: cache personality public assets with LKG", "base": "main", "branch": "codex/public-stability-api-03", "depends_on": ["PUBLIC-STABILITY-API-01", "PERSONALITY-WARMUP-01"], "status": "user_authorized", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false, "runtime_change": true, "workflow_policy_change": false, "database_mutation": false, "cms_mutation": false, "publish_allowed": false, "production_write_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "Explicitly authorized in the 19-item public stability /goal."}, "dependency": {"status": "pending", "evidence": null}, "local_validation": {"status": "pending", "evidence": null}, "github_required_checks": {"status": "pending", "evidence": null}},
+    "scope_validation": {"allowed_paths_only": null, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false}, "transitions": [{"at": "2026-07-13T11:21:27Z", "from": "unregistered", "to": "user_authorized", "note": "Registered by the explicitly authorized API-01 manifest/state bootstrap; implementation waits for dependencies."}]
+  },
+  "PUBLIC-STABILITY-API-04": {
+    "id": "PUBLIC-STABILITY-API-04", "repo": "fap-api", "title": "PUBLIC-STABILITY-API-04: remove duplicate personality asset payload aliases", "base": "main", "branch": "codex/public-stability-api-04", "depends_on": ["PUBLIC-STABILITY-API-03"], "status": "user_authorized", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false, "runtime_change": true, "workflow_policy_change": false, "database_mutation": false, "cms_mutation": false, "publish_allowed": false, "production_write_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "Explicitly authorized in the 19-item public stability /goal."}, "dependency": {"status": "pending", "evidence": null}, "local_validation": {"status": "pending", "evidence": null}, "github_required_checks": {"status": "pending", "evidence": null}},
+    "scope_validation": {"allowed_paths_only": null, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false}, "transitions": [{"at": "2026-07-13T11:21:27Z", "from": "unregistered", "to": "user_authorized", "note": "Registered by the explicitly authorized API-01 manifest/state bootstrap; implementation waits for dependencies."}]
+  },
+  "PUBLIC-STABILITY-API-05": {
+    "id": "PUBLIC-STABILITY-API-05", "repo": "fap-api", "title": "PUBLIC-STABILITY-API-05: add career industry directory read model", "base": "main", "branch": "codex/public-stability-api-05", "depends_on": ["PUBLIC-STABILITY-API-01", "PUBLIC-API-CACHE-01"], "status": "user_authorized", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false, "runtime_change": true, "workflow_policy_change": false, "database_mutation": false, "cms_mutation": false, "publish_allowed": false, "production_write_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "Explicitly authorized in the 19-item public stability /goal."}, "dependency": {"status": "pending", "evidence": null}, "local_validation": {"status": "pending", "evidence": null}, "github_required_checks": {"status": "pending", "evidence": null}},
+    "scope_validation": {"allowed_paths_only": null, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false}, "transitions": [{"at": "2026-07-13T11:21:27Z", "from": "unregistered", "to": "user_authorized", "note": "Registered by the explicitly authorized API-01 manifest/state bootstrap; implementation waits for dependencies."}]
+  },
+  "PUBLIC-STABILITY-API-06": {
+    "id": "PUBLIC-STABILITY-API-06", "repo": "fap-api", "title": "PUBLIC-STABILITY-API-06: add controlled public read-model warm and verify", "base": "main", "branch": "codex/public-stability-api-06", "depends_on": ["PUBLIC-STABILITY-API-02", "PUBLIC-STABILITY-API-03", "PUBLIC-STABILITY-API-05"], "status": "user_authorized", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false, "runtime_change": true, "workflow_policy_change": true, "database_mutation": false, "cms_mutation": false, "publish_allowed": false, "production_write_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "Explicitly authorized in the 19-item public stability /goal; production warm execution remains forbidden."}, "dependency": {"status": "pending", "evidence": null}, "local_validation": {"status": "pending", "evidence": null}, "github_required_checks": {"status": "pending", "evidence": null}},
+    "scope_validation": {"allowed_paths_only": null, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false}, "transitions": [{"at": "2026-07-13T11:21:27Z", "from": "unregistered", "to": "user_authorized", "note": "Registered by the explicitly authorized API-01 manifest/state bootstrap; implementation waits for dependencies."}]
+  },
+  "PUBLIC-STABILITY-API-07": {
+    "id": "PUBLIC-STABILITY-API-07", "repo": "fap-api", "title": "PUBLIC-STABILITY-API-07: probe public delivery and publication readback", "base": "main", "branch": "codex/public-stability-api-07", "depends_on": ["PUBLIC-STABILITY-API-01", "PUBLIC-STABILITY-API-03", "PUBLIC-STABILITY-API-05"], "status": "user_authorized", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false, "runtime_change": true, "workflow_policy_change": true, "database_mutation": false, "cms_mutation": false, "publish_allowed": false, "production_write_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "Explicitly authorized in the 19-item public stability /goal; private probes and all mutations remain forbidden."}, "dependency": {"status": "pending", "evidence": null}, "local_validation": {"status": "pending", "evidence": null}, "github_required_checks": {"status": "pending", "evidence": null}},
+    "scope_validation": {"allowed_paths_only": null, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false}, "transitions": [{"at": "2026-07-13T11:21:27Z", "from": "unregistered", "to": "user_authorized", "note": "Registered by the explicitly authorized API-01 manifest/state bootstrap; implementation waits for dependencies."}]
+  },
+  "PUBLIC-STABILITY-API-08": {
+    "id": "PUBLIC-STABILITY-API-08", "repo": "fap-api", "title": "PUBLIC-STABILITY-API-08: add CMS public content health dashboard", "base": "main", "branch": "codex/public-stability-api-08", "depends_on": ["PUBLIC-STABILITY-API-01", "PUBLIC-STABILITY-API-07"], "status": "user_authorized", "commit_sha": null, "pr_url": null, "failure_reason": null, "merged_at": null, "remote_branch_deleted": false, "local_cleanup_executed": false, "runtime_change": false, "workflow_policy_change": false, "database_mutation": false, "cms_mutation": false, "publish_allowed": false, "production_write_execution": false, "deploy_allowed": false,
+    "checks": {"authorization": {"status": "pass", "evidence": "Explicitly authorized in the 19-item public stability /goal; dashboard is read-only."}, "dependency": {"status": "pending", "evidence": null}, "local_validation": {"status": "pending", "evidence": null}, "github_required_checks": {"status": "pending", "evidence": null}},
+    "scope_validation": {"allowed_paths_only": null, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false}, "transitions": [{"at": "2026-07-13T11:21:27Z", "from": "unregistered", "to": "user_authorized", "note": "Registered by the explicitly authorized API-01 manifest/state bootstrap; implementation waits for dependencies."}]
   },
   "ENNEAGRAM-LLMS-FULL-RELEASE-01": {
     "id": "ENNEAGRAM-LLMS-FULL-RELEASE-01",

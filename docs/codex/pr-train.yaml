@@ -41705,4 +41705,315 @@ prs:
     pr_creation_authorized: true
     pr_execution_authorized: true
     production_mutation_authorized: false
+  - id: PUBLIC-STABILITY-API-01
+    repo: fap-api
+    depends_on: [PUBLIC-API-CACHE-01]
+    branch: codex/public-stability-api-01
+    title: "PUBLIC-STABILITY-API-01: collect public content runtime metrics"
+    train_scope: public_content_runtime_metrics
+    status: user_authorized
+    scope:
+      - Add fail-open metrics only for exact allowlisted anonymous org_id=0 public GET APIs.
+      - Keep seven-day Redis minute aggregates, idempotent 90-day database daily rollups, and a read-only Ops query API.
+      - Never store concrete URLs, bodies, identity, order, attempt, report, payment, token, cookie, or IP data.
+    allowed_paths:
+      - backend/app/Http/Middleware/RecordPublicContentRuntime.php
+      - backend/app/Services/Ops/PublicContentRuntimeMetricsService.php
+      - backend/app/Models/PublicContentRuntimeDaily.php
+      - backend/app/Http/Controllers/API/V0_5/Ops/PublicContentRuntimeMetricsController.php
+      - backend/config/public_content_observability.php
+      - backend/database/migrations/*_create_public_content_runtime_daily_table.php
+      - backend/bootstrap/app.php
+      - backend/routes/api.php
+      - backend/tests/Feature/Ops/PublicContentRuntimeMetricsTest.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - docs/operations/public-content-observability.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Store response bodies, private URLs, users, IPs, orders, payments, attempts, or reports.
+      - Add private routes, purge, warm, CMS writes, production migration execution, or deployment.
+    validation:
+      - cd backend && php artisan test tests/Feature/Ops/PublicContentRuntimeMetricsTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Middleware/RecordPublicContentRuntime.php app/Services/Ops/PublicContentRuntimeMetricsService.php app/Models/PublicContentRuntimeDaily.php app/Http/Controllers/API/V0_5/Ops/PublicContentRuntimeMetricsController.php bootstrap/app.php routes/api.php tests/Feature/Ops/PublicContentRuntimeMetricsTest.php
+      - cd backend && php artisan route:list --path=api/v0.5/ops/public-content-health --except-vendor
+      - cd backend && bash scripts/export_openapi.sh --check
+      - cd backend && composer test
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    runtime_change: true
+    workflow_policy_change: false
+    database_mutation: true
+    cms_mutation: false
+    publish_allowed: false
+    production_write_execution: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: PUBLIC-STABILITY-API-02
+    repo: fap-api
+    depends_on: [PUBLIC-STABILITY-API-01, PERSONALITY-WARMUP-01]
+    branch: codex/public-stability-api-02
+    title: "PUBLIC-STABILITY-API-02: add versioned MBTI last-known-good reads"
+    train_scope: mbti_versioned_active_lkg_reads
+    status: user_authorized
+    scope:
+      - Add versioned active/LKG semantics to anonymous org_id=0 MBTI detail and SEO read models.
+      - Permit stale on transient rebuild failure, fail closed on not-found/unpublished, and expose fresh/stale/miss/bypass metrics.
+    allowed_paths:
+      - backend/app/Services/Cms/PersonalityPublicReadModelCache.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - backend/tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Change MBTI content, scoring, results, tenant/private routes, CMS data, production cache, warmup, or deployment.
+    validation:
+      - cd backend && php artisan test tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Cms/PersonalityPublicReadModelCache.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    runtime_change: true
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    production_write_execution: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: PUBLIC-STABILITY-API-03
+    repo: fap-api
+    depends_on: [PUBLIC-STABILITY-API-01, PERSONALITY-WARMUP-01]
+    branch: codex/public-stability-api-03
+    title: "PUBLIC-STABILITY-API-03: cache personality public assets with LKG"
+    train_scope: personality_public_assets_active_lkg
+    status: user_authorized
+    scope:
+      - Add locale/entity/publication-version keyed active/LKG reads for Big Five and Enneagram public assets.
+      - Invalidate precisely on publish, update, or withdraw and record safe cache/readback metrics.
+    allowed_paths:
+      - backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php
+      - backend/app/Observers/PersonalityPublicContentAssetObserver.php
+      - backend/app/Providers/AppServiceProvider.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - backend/tests/Unit/Services/Cms/PersonalityPublicAssetReadModelCacheTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Change public content, routes, sitemap/llms, indexability, CMS data, production cache, warmup, or deployment.
+    validation:
+      - cd backend && php artisan test tests/Unit/Services/Cms/PersonalityPublicAssetReadModelCacheTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Cms/PersonalityPublicAssetReadModelCache.php app/Observers/PersonalityPublicContentAssetObserver.php app/Providers/AppServiceProvider.php app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php tests/Unit/Services/Cms/PersonalityPublicAssetReadModelCacheTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    runtime_change: true
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    production_write_execution: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: PUBLIC-STABILITY-API-04
+    repo: fap-api
+    depends_on: [PUBLIC-STABILITY-API-03]
+    branch: codex/public-stability-api-04
+    title: "PUBLIC-STABILITY-API-04: remove duplicate personality asset payload aliases"
+    train_scope: personality_asset_payload_deduplication
+    status: user_authorized
+    scope:
+      - Remove proven duplicate Big Five/Enneagram top-level and section aliases, retain one canonical projection, and enforce a payload budget.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Change content meaning, cache semantics, slugs, publication/indexability, sitemap/llms, production writes, or deployment.
+    validation:
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - cd backend && bash scripts/export_openapi.sh --check
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    runtime_change: true
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    production_write_execution: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: PUBLIC-STABILITY-API-05
+    repo: fap-api
+    depends_on: [PUBLIC-STABILITY-API-01, PUBLIC-API-CACHE-01]
+    branch: codex/public-stability-api-05
+    title: "PUBLIC-STABILITY-API-05: add career industry directory read model"
+    train_scope: career_industry_directory_read_model
+    status: user_authorized
+    scope:
+      - Add a locale-keyed career industry directory aggregate using the existing Career active/LKG pattern.
+      - Return only industries-page fields and never rebuild the full career index in a public request.
+    allowed_paths:
+      - backend/app/Services/Career/CareerIndustryDirectoryReadModel.php
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerIndustryDirectoryController.php
+      - backend/routes/api.php
+      - backend/tests/Feature/Career/CareerIndustryDirectoryApiTest.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Change career content, recommendation/scoring, private routes, CMS data, production cache, warmup, or deployment.
+    validation:
+      - cd backend && php artisan test tests/Feature/Career/CareerIndustryDirectoryApiTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Career/CareerIndustryDirectoryReadModel.php app/Http/Controllers/API/V0_5/Career/CareerIndustryDirectoryController.php routes/api.php tests/Feature/Career/CareerIndustryDirectoryApiTest.php
+      - cd backend && php artisan route:list --path=api/v0.5/career/industries --except-vendor
+      - cd backend && bash scripts/export_openapi.sh --check
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    runtime_change: true
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    production_write_execution: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: PUBLIC-STABILITY-API-06
+    repo: fap-api
+    depends_on: [PUBLIC-STABILITY-API-02, PUBLIC-STABILITY-API-03, PUBLIC-STABILITY-API-05]
+    branch: codex/public-stability-api-06
+    title: "PUBLIC-STABILITY-API-06: add controlled public read-model warm and verify"
+    train_scope: controlled_public_read_model_warm_verify
+    status: user_authorized
+    scope:
+      - Add bounded dry-run, verify-only, and explicit warm modes in fixed L1 MBTI, L2 Big Five, L3 selected-public-read order.
+      - Validate payload budget and version readback behind a fail-closed production write gate without executing production warm.
+    allowed_paths:
+      - backend/app/Console/Commands/WarmPublicContentReadModels.php
+      - backend/app/Console/Kernel.php
+      - backend/tests/Feature/Console/WarmPublicContentReadModelsCommandTest.php
+      - docs/operations/public-content-cache-runbook.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Execute production warm/purge, mutate CMS/DB content, publish, change indexability, or deploy.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/WarmPublicContentReadModelsCommandTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/WarmPublicContentReadModels.php app/Console/Kernel.php tests/Feature/Console/WarmPublicContentReadModelsCommandTest.php
+      - cd backend && php artisan schedule:list --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    runtime_change: true
+    workflow_policy_change: true
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    production_write_execution: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: PUBLIC-STABILITY-API-07
+    repo: fap-api
+    depends_on: [PUBLIC-STABILITY-API-01, PUBLIC-STABILITY-API-03, PUBLIC-STABILITY-API-05]
+    branch: codex/public-stability-api-07
+    title: "PUBLIC-STABILITY-API-07: probe public delivery and publication readback"
+    train_scope: public_delivery_probe_and_readback
+    status: user_authorized
+    scope:
+      - Probe a fixed anonymous public allowlist in L1/L2/L3 rotation and record only status, timings, bytes, cache headers, and safe version/readback fields.
+      - Never retain response bodies or probe private pages and never warm or purge caches.
+    allowed_paths:
+      - backend/app/Services/Ops/PublicContentDeliveryProbeService.php
+      - backend/app/Services/Ops/PublicContentPublicationReadbackService.php
+      - backend/app/Console/Commands/ProbePublicContentDelivery.php
+      - backend/app/Console/Kernel.php
+      - backend/config/public_content_observability.php
+      - backend/tests/Feature/Console/ProbePublicContentDeliveryCommandTest.php
+      - docs/operations/public-content-observability.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Probe private routes, retain response bodies, mutate CMS/cache, warm/purge, change infrastructure, or deploy.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/ProbePublicContentDeliveryCommandTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Ops/PublicContentDeliveryProbeService.php app/Services/Ops/PublicContentPublicationReadbackService.php app/Console/Commands/ProbePublicContentDelivery.php app/Console/Kernel.php tests/Feature/Console/ProbePublicContentDeliveryCommandTest.php
+      - cd backend && php artisan schedule:list --no-ansi
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    runtime_change: true
+    workflow_policy_change: true
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    production_write_execution: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: PUBLIC-STABILITY-API-08
+    repo: fap-api
+    depends_on: [PUBLIC-STABILITY-API-01, PUBLIC-STABILITY-API-07]
+    branch: codex/public-stability-api-08
+    title: "PUBLIC-STABILITY-API-08: add CMS public content health dashboard"
+    train_scope: cms_public_content_health_dashboard
+    status: user_authorized
+    scope:
+      - Add a read-only /ops/public-content-health page for aggregate runtime, cache, probe, and publication readback health.
+      - Permit admin, operator, and analyst read access without requiring org selection; deny other roles by default.
+      - Expose no purge, warm, publish, retry-write, permission-grant, or deploy action.
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/PublicContentHealthPage.php
+      - backend/resources/views/filament/ops/pages/public-content-health.blade.php
+      - backend/app/Support/Rbac/PermissionNames.php
+      - backend/lang/**/public-content-health.php
+      - backend/tests/Feature/Filament/Ops/PublicContentHealthPageTest.php
+      - docs/operations/public-content-observability.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Add purge, warm, publish, retry-write, CMS mutations, production role grants, secrets, private data, or deployment.
+    validation:
+      - cd backend && php artisan test tests/Feature/Filament/Ops/PublicContentHealthPageTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Filament/Ops/Pages/PublicContentHealthPage.php app/Support/Rbac/PermissionNames.php tests/Feature/Filament/Ops/PublicContentHealthPageTest.php
+      - YAML/JSON parse and changed-file scope validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    runtime_change: false
+    workflow_policy_change: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    production_write_execution: false
+    deploy_allowed: false
     content_authority: CMS/backend

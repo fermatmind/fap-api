@@ -89,6 +89,24 @@
   - Complete the GSC/read-model quality proof card before any TDK/CTR repair selection.
 - whether train continued: `true`
 
+## PUBLIC-STABILITY-API-01 local full-suite process memory exhaustion
+
+- repo: `fap-api`
+- PR id / branch: `PUBLIC-STABILITY-API-01` / `codex/public-stability-api-01`
+- blocker type: `local_full_suite_process_memory_exhaustion`
+- evidence:
+  - The first resumed `composer test` progressed through the repository suite, then the existing `MbtiReadPathParityContractTest` PDF case exhausted the 1 GiB PHP process limit in `vendor/mpdf/mpdf/src/TTFontFile.php`.
+  - The exact failing PDF test passed independently with 35 assertions in 2.28 seconds, showing long-process memory accumulation rather than an API-01 runtime metrics regression.
+  - The only current-scope assertion failure was the comment-only catch gate; explicit fail-open statements were added and the focused gate passed.
+  - A full all-suite rerun used an exact copy of `backend/phpunit.xml` with only `memory_limit` changed from `1024M` to `2048M`; it passed 7351 tests and 507190 assertions in 15:24 with zero failures, 1 existing deprecation, and 39 skipped tests. The temporary config was deleted and is not part of the PR.
+- why not current PR scope:
+  - The fatal stack is entirely in the existing MBTI PDF service, mPDF vendor font metrics, and its parity test. API-01 does not touch PDF generation.
+- whether required checks are affected: `true`
+  - The local 1 GiB wrapper remains resource-constrained; GitHub required checks still must pass before merge.
+- recommended follow-up:
+  - Track the repository-wide single-process PHPUnit memory baseline separately. API-01 completed the identical all-suite selection under a temporary 2 GiB process ceiling.
+- whether train continued: `true`
+
 ## CAREER-10K-CONTROLLED-ROLLOUT-01 inherited full-suite baselines
 
 - repo: `fap-api`
@@ -528,3 +546,22 @@
   - Authorize `ENNEAGRAM-LLMS-TXT-FRONTEND-ENUMERATION-01` before executing `ENNEAGRAM-LLMS-TXT-RELEASE-01`.
   - The frontend must enumerate only public API assets with `llms_eligible=true`, while preserving Enneagram membership at 0 in `llms-full.txt`.
 - whether train continued: `true` for the backend gate PR only
+
+## PUBLIC-STABILITY-API-01 unchanged career audit baseline failure
+
+- repo: `fap-api`
+- PR id / branch: `PUBLIC-STABILITY-API-01` / `codex/public-stability-api-01`
+- blocker type: `pre_existing_required_test_baseline_failure`
+- evidence:
+  - `composer test` surfaced multiple existing baseline failures and then exceeded Composer's 300-second process timeout. Examples include `CareerLiveAcceptance1048CloseoutPlannerTest`, `ServiceLayerBoundaryTest`, Enneagram history tests, and existing Career API suites.
+  - A focused rerun deterministically expects `pass` but receives `blocked` at line 22 because the fixture lacks the explicit sitemap, llms, and llms-full forbidden-exposure evidence required by the current gate.
+  - The failing test, planner, and publication gate match `origin/main` exactly at blobs `b42ecd1c9ebb3f62270bbb2c40573127458b99d3`, `1a7748de7017f66f88cc36ec47a8e799b17b67d0`, and `b25945c13989ac7e490bad48c48db57b33264dbc`.
+  - A focused `ServiceLayerBoundaryTest` rerun also fails on five unchanged service-layer HTTP references; none point to API-01 files.
+- why not current PR scope:
+  - Career audit planner and fixture paths are outside API-01's authorized public runtime metrics scope and are unrelated to its changes.
+- whether required checks are affected: `true`
+  - `composer test` was an explicit API-01 required local check; the independent baseline repair cleared the deterministic Career failure before API-01 resumed.
+- recommended follow-up:
+  - Completed in independent baseline repair PR #3033, merged at `082a30f6e40173ee50de1110346d4c787c1dbf13` with all required checks green.
+  - API-01 resumed from the repaired `main` and must rerun every required local and GitHub check.
+- whether train continued: `true`
