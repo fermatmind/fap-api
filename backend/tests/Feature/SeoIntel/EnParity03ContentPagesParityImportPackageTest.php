@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\SeoIntel;
 
 use App\Models\ContentPage;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\SEO\SitemapGenerator;
 use App\Services\SeoIntel\TranslationParity\TranslationParityMatrixReadModel;
@@ -125,6 +126,8 @@ final class EnParity03ContentPagesParityImportPackageTest extends TestCase
             '--upsert' => true,
         ])->assertExitCode(0);
 
+        app(PublicCareerAuthorityResponseCache::class)->warm();
+
         $locs = array_map(
             static fn (array $row): string => (string) ($row['loc'] ?? ''),
             app(SitemapGenerator::class)->generateUrls()
@@ -133,10 +136,10 @@ final class EnParity03ContentPagesParityImportPackageTest extends TestCase
         $this->assertContains('https://fermatmind.com/zh/brand', $locs);
         $this->assertContains('https://fermatmind.com/en/about', $locs);
         $this->assertContains('https://fermatmind.com/en/careers', $locs);
+        $this->assertContains('https://fermatmind.com/en/foundation', $locs);
         $this->assertContains('https://fermatmind.com/en/policies', $locs);
         $this->assertNotContains('https://fermatmind.com/en/brand', $locs);
         $this->assertNotContains('https://fermatmind.com/en/charter', $locs);
-        $this->assertNotContains('https://fermatmind.com/en/foundation', $locs);
     }
 
     private function mockScaleRegistry(): ScaleRegistry

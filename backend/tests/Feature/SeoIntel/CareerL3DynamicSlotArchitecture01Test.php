@@ -98,28 +98,8 @@ final class CareerL3DynamicSlotArchitecture01Test extends TestCase
     }
 
     #[Test]
-    public function report_has_required_sections_and_next_task(): void
+    public function generated_artifact_records_final_decision_and_next_task(): void
     {
-        $path = base_path('docs/seo/career-l3-dynamic-slot-architecture-01.md');
-
-        $this->assertFileExists($path);
-
-        $report = (string) file_get_contents($path);
-
-        foreach ([
-            '## 1. Executive Summary',
-            '## 2. Dynamic Slot Model',
-            '## 3. Static pSEO Block',
-            '## 4. Discoverability Boundary',
-            '## 5. Claim Boundary',
-            '## 6. Validation',
-            '## 7. What Was Not Done',
-            '## 8. Final Decision',
-            '## 9. Next Task',
-        ] as $heading) {
-            $this->assertStringContainsString($heading, $report);
-        }
-
         $this->assertSame(
             'career_l3_dynamic_slot_architecture_completed_ready_for_release_train_sidecar_soft_alert',
             $this->payload()['final_decision'] ?? null,

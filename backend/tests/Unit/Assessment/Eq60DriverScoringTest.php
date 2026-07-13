@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace Tests\Unit\Assessment;
 
 use App\Services\Assessment\Drivers\Eq60Driver;
+use Tests\Concerns\PreservesCompiledContentPack;
 use Tests\TestCase;
 
 final class Eq60DriverScoringTest extends TestCase
 {
+    use PreservesCompiledContentPack;
+
     public function test_reverse_scoring_moves_in_opposite_direction_vs_forward_item(): void
     {
+        $this->preserveCompiledContentPack('EQ_60', 'v1');
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
 
         /** @var Eq60Driver $driver */

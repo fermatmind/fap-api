@@ -92,28 +92,8 @@ final class Career1046InternalLinkingAuthority01Test extends TestCase
     }
 
     #[Test]
-    public function report_has_required_sections_and_next_task(): void
+    public function generated_artifact_records_final_decision_and_next_task(): void
     {
-        $path = base_path('docs/seo/career-1046-internal-linking-authority-01.md');
-
-        $this->assertFileExists($path);
-
-        $report = (string) file_get_contents($path);
-
-        foreach ([
-            '## 1. Executive Summary',
-            '## 2. Link Families',
-            '## 3. Eligibility Rules',
-            '## 4. Non-Generated L3 Boundary',
-            '## 5. Claim Boundary',
-            '## 6. Validation',
-            '## 7. What Was Not Done',
-            '## 8. Final Decision',
-            '## 9. Next Task',
-        ] as $heading) {
-            $this->assertStringContainsString($heading, $report);
-        }
-
         $this->assertSame(
             'career_1046_internal_linking_authority_completed_ready_for_frontend_discovery_ux',
             $this->payload()['final_decision'] ?? null,

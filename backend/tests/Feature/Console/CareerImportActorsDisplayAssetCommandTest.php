@@ -11,6 +11,7 @@ use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
 use App\Services\Career\CareerRecommendationCompiler;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use PHPUnit\Framework\Attributes\Test;
@@ -231,6 +232,7 @@ final class CareerImportActorsDisplayAssetCommandTest extends TestCase
         [$exitCode] = $this->runImport($file, ['--force' => true]);
 
         $this->assertSame(0, $exitCode);
+        app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload('actors', 'zh-CN', true);
         $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'actors')
@@ -244,6 +246,7 @@ final class CareerImportActorsDisplayAssetCommandTest extends TestCase
     public function non_actors_still_return_no_display_surface_v1(): void
     {
         $this->seedCompiledOccupation('accountants-and-auditors');
+        app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload('accountants-and-auditors', 'zh-CN', true);
 
         $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=zh-CN')
             ->assertOk()

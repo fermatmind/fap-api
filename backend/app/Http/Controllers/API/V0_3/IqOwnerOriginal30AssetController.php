@@ -41,7 +41,13 @@ final class IqOwnerOriginal30AssetController extends Controller
             throw new ApiProblemException(404, 'IQ_OWNER_ASSET_NOT_FOUND', 'owner IQ asset not found.');
         }
 
-        return $this->ownerBank->publicAssetResponse($path);
+        $asset = $this->ownerBank->publicAsset($path);
+
+        return new BinaryFileResponse($asset['absolute_path'], 200, [
+            'Content-Type' => $asset['content_type'],
+            'Cache-Control' => 'public, max-age=31536000, immutable',
+            'X-Content-Type-Options' => 'nosniff',
+        ]);
     }
 
     private function resolveUserId(Request $request, OrgContext $context): ?string

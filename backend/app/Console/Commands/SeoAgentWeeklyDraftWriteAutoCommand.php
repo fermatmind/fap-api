@@ -75,7 +75,33 @@ final class SeoAgentWeeklyDraftWriteAutoCommand extends Command
         $proposals = $this->proposalItems($package);
         $policyResult = $policy->evaluateCandidates($proposals, $limit);
         $approvedProposals = $this->approvedProposals($proposals, $policyResult, $draftLimit);
+        $sourcePackageSha = hash_file('sha256', $packagePath) ?: '';
+        $reviewRef = $this->writeArtifact($artifactDir, 'seo-agent-l5a-candidate-review-'.$timestamp.'.json', [
+            'schema_version' => 'seo-agent-l5a-candidate-review.v1',
+            'status' => 'success',
+            'selected_count' => count($approvedProposals),
+            'selected_candidates' => $approvedProposals,
+            'input_artifacts' => [
+                'cms_draft_package_dry_run' => [
+                    'sha256' => $sourcePackageSha,
+                ],
+            ],
+        ]);
+        $approvedProposals = array_map(static function (array $proposal) use ($reviewRef, $sourcePackageSha): array {
+            $proposal['review_provenance'] = [
+                'candidate_review_sha256' => (string) ($reviewRef['sha256'] ?? ''),
+                'source_package_sha256' => $sourcePackageSha,
+                'selected_subject_ref' => (string) ($proposal['subject_ref'] ?? ''),
+                'selected_safe_path' => (string) ($proposal['safe_path'] ?? ''),
+            ];
+
+            return $proposal;
+        }, $approvedProposals);
         $filteredPackage = $this->filteredPackage($package, $approvedProposals, $policyResult);
+        $filteredPackage['l5a_canary'] = [
+            'candidate_review' => $reviewRef,
+            'source_package_sha256' => $sourcePackageSha,
+        ];
         $filteredPackageRef = $this->writeArtifact($artifactDir, 'seo-agent-weekly-draft-write-auto-package-'.$timestamp.'.json', $filteredPackage);
 
         if ($approvedProposals === []) {
@@ -185,7 +211,7 @@ final class SeoAgentWeeklyDraftWriteAutoCommand extends Command
             return $this->failureSummary('weekly_readonly_command_missing');
         }
 
-        $buffer = new BufferedOutput();
+        $buffer = new BufferedOutput;
         $exitCode = $command->run(new ArrayInput([
             'command' => 'seo-agent:weekly-readonly-runner',
             '--sources' => implode(',', $sources),
@@ -317,7 +343,7 @@ final class SeoAgentWeeklyDraftWriteAutoCommand extends Command
             return $this->failureSummary('cms_draft_write_command_missing');
         }
 
-        $buffer = new BufferedOutput();
+        $buffer = new BufferedOutput;
         $exitCode = $command->run(new ArrayInput([
             'command' => 'seo-agent:cms-draft-write',
             '--package' => $packagePath,
@@ -417,6 +443,7 @@ final class SeoAgentWeeklyDraftWriteAutoCommand extends Command
             'rows_created' => (int) ($summary['rows_created'] ?? 0),
             'rows_skipped_existing' => (int) ($summary['rows_skipped_existing'] ?? 0),
             'rows_failed' => array_values((array) ($summary['rows_failed'] ?? [])),
+            'affected_refs' => array_values((array) ($summary['affected_refs'] ?? [])),
             'writes_attempted' => (bool) ($summary['writes_attempted'] ?? false),
             'writes_committed' => (bool) ($summary['writes_committed'] ?? false),
             'artifact' => is_array($summary['artifact'] ?? null) ? (array) $summary['artifact'] : [],

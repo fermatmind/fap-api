@@ -30,7 +30,7 @@ final class CommerceOpsActionLinkageTest extends TestCase
             PermissionNames::ADMIN_OPS_READ,
         ]);
         $selectedOrg = $this->createOrganization('Commerce Linkage Org');
-        $chain = $this->seedCommerceOpsChain(orgId: 74, options: [
+        $chain = $this->seedCommerceOpsChain(orgId: (int) $selectedOrg->id, options: [
             'last_reconciled_at' => now()->subMinutes(5),
         ]);
 

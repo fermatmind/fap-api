@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\SeoIntel;
 
 use App\Models\ContentPage;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -81,14 +82,18 @@ final class GlobalEnZhParityP001ContentHelpPolicyDiscoverabilityTest extends Tes
             'title' => 'About FermatMind',
         ]);
 
+        app(PublicCareerAuthorityResponseCache::class)->warm();
+
         $locs = array_map(
             static fn (array $row): string => (string) ($row['loc'] ?? ''),
             app(SitemapGenerator::class)->generateUrls()
         );
 
         $this->assertContains('https://fermatmind.com/en/about', $locs);
+        $this->assertContains('https://fermatmind.com/en/support', $locs);
+        $this->assertContains('https://fermatmind.com/zh/support', $locs);
 
-        foreach (self::invalidContentHelpPolicyPaths() as $path) {
+        foreach (array_diff(self::invalidContentHelpPolicyPaths(), ['/en/support', '/zh/support']) as $path) {
             $this->assertNotContains('https://fermatmind.com'.$path, $locs, $path.' must not be exposed without content_pages authority.');
         }
     }

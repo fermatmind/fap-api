@@ -15,6 +15,20 @@ final class MigrationPurityGateTest extends TestCase
     private const LEGACY_FILE_ALLOWLIST = [
         '2026_02_13_020000_add_identity_unique_to_idempotency_keys.php',
         '2026_02_14_235000_add_is_active_to_organization_members_table.php',
+        '2026_04_23_000100_add_article_translation_contract_v1.php',
+        '2026_04_23_010000_create_article_translation_revisions_table.php',
+        '2026_04_23_020000_reconcile_article_working_revisions_for_editor_cutover.php',
+        '2026_04_23_030000_repair_article_published_revision_pointers.php',
+        '2026_04_23_040000_consolidate_article_translation_canonical_owners.php',
+        '2026_04_23_050000_add_multilingual_contract_to_cms_content_tables.php',
+        '2026_04_24_100000_create_cms_translation_revisions.php',
+        '2026_04_24_160000_normalize_support_article_public_paths.php',
+        '2026_04_24_170000_normalize_help_content_page_public_paths.php',
+        '2026_05_06_010000_add_org_scope_to_personality_profile_children.php',
+        '2026_05_27_000100_backfill_homepage_recommended_en_article_media_taxonomy.php',
+        '2026_06_11_000100_add_article_sitemap_llms_eligibility_fields.php',
+        '2026_06_23_000100_expand_content_release_id_columns.php',
+        '2026_06_23_000200_expand_content_release_action_column.php',
     ];
 
     private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';
@@ -204,7 +218,8 @@ final class MigrationPurityGateTest extends TestCase
                 continue;
             }
 
-            $aliases[] = $matches[2] !== '' ? $matches[2] : $matches[1];
+            $explicitAlias = $matches[2] ?? '';
+            $aliases[] = $explicitAlias !== '' ? $explicitAlias : $matches[1];
         }
 
         return array_values(array_unique($aliases));

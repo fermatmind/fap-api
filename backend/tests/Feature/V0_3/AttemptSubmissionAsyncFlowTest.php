@@ -5,6 +5,7 @@ namespace Tests\Feature\V0_3;
 use App\Jobs\ProcessAttemptSubmissionJob;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Attempts\AttemptSubmitService;
+use App\Services\Iq\IqOwnerOriginal30BankService;
 use Database\Seeders\Pr17SimpleScoreDemoSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -375,7 +376,8 @@ class AttemptSubmissionAsyncFlowTest extends TestCase
             ->once()
             ->andThrow(new RuntimeException('transient scorer outage'));
 
-        $service = new AttemptSubmissionService($failingSubmitter);
+        $iqBank = app(IqOwnerOriginal30BankService::class);
+        $service = new AttemptSubmissionService($failingSubmitter, $iqBank);
 
         try {
             $service->process($submissionId);
@@ -400,7 +402,7 @@ class AttemptSubmissionAsyncFlowTest extends TestCase
                 'scale_code' => 'SIMPLE_SCORE_DEMO',
             ]);
 
-        (new AttemptSubmissionService($successfulSubmitter))->process($submissionId);
+        (new AttemptSubmissionService($successfulSubmitter, $iqBank))->process($submissionId);
 
         $done = DB::table('attempt_submissions')->where('id', $submissionId)->first();
         $this->assertNotNull($done);

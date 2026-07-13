@@ -117,9 +117,9 @@ final class ContentPackV2Materializer
             }
         }
 
-        $manifest = json_decode((string) File::get($manifestPath), true, 512, JSON_THROW_ON_ERROR);
-        $declaredHash = strtolower(trim((string) ($manifest['compiled_hash'] ?? $manifest['content_hash'] ?? '')));
-        if ($declaredHash !== '' && ! hash_equals($this->manifestHash($release), $declaredHash)) {
+        $manifestPayload = (string) File::get($manifestPath);
+        json_decode($manifestPayload, true, 512, JSON_THROW_ON_ERROR);
+        if (! hash_equals($this->manifestHash($release), hash('sha256', $manifestPayload))) {
             throw new RuntimeException('PACKS2_MATERIALIZATION_MANIFEST_HASH_MISMATCH');
         }
     }

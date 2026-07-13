@@ -9,6 +9,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\ResearchReport;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\SEO\SitemapGenerator;
 use App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
@@ -135,7 +136,7 @@ final class EnParity01UrlTruthCanonicalBaselineTest extends TestCase
         $this->assertSame('content_page', $about->pageEntityType);
         $this->assertSame('backend_cms', $about->sourceAuthority);
         $this->assertSame('content_pages', $about->entitySource);
-        $this->assertSame('published', $about->authorityStatus);
+        $this->assertSame('published_approved', $about->authorityStatus);
 
         $metadata = (new BackendAuthorityUrlTruthSource)->metadata();
         $this->assertFalse((bool) ($metadata['frontend_fallback_data_source'] ?? true));
@@ -261,6 +262,8 @@ final class EnParity01UrlTruthCanonicalBaselineTest extends TestCase
             'title' => 'Help About',
             'status' => ContentPage::STATUS_DRAFT,
         ]);
+
+        app(PublicCareerAuthorityResponseCache::class)->warm();
 
         $urls = app(SitemapGenerator::class)->generateUrls();
         $locs = array_map(static fn (array $row): string => (string) ($row['loc'] ?? ''), $urls);

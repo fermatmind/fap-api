@@ -7,12 +7,21 @@ namespace Tests\Feature\V0_5;
 use App\Models\CareerJob;
 use App\Models\CareerJobSection;
 use App\Models\CareerJobSeoMeta;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Concerns\UsesPublishedCareerRuntimeProjection;
 use Tests\TestCase;
 
 final class CareerJobPublicApiTest extends TestCase
 {
     use RefreshDatabase;
+    use UsesPublishedCareerRuntimeProjection;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpUsesPublishedCareerRuntimeProjection();
+    }
 
     public function test_list_returns_published_public_only_and_keeps_noindex_items_readable(): void
     {
@@ -344,6 +353,27 @@ final class CareerJobPublicApiTest extends TestCase
             'og_image_url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/job-og.png',
             'twitter_image_url' => 'https://ci.example.test/job.png?ci-process=thumb',
         ]);
+        $authorityJob = $this->createJob([
+            'job_code' => 'product-manager-zh-authority',
+            'slug' => 'product-manager',
+            'locale' => 'zh-CN',
+            'title' => '产品经理',
+            'subtitle' => 'Product Manager',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => now()->subMinute(),
+            'market_demand_json' => [
+                'source_refs' => [['url' => 'https://www.bls.gov/ooh/management/advertising-promotions-and-marketing-managers.htm']],
+            ],
+        ]);
+        $this->createSeoMeta($authorityJob, [
+            'jsonld_overrides_json' => ['source_docx' => 'product-manager.docx'],
+        ]);
+        $this->assertSame(
+            'cached',
+            app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload('product-manager', 'en', true)['status'],
+        );
 
         $this->getJson('/api/v0.5/career-jobs/product-manager?locale=en')
             ->assertOk()
@@ -418,7 +448,6 @@ final class CareerJobPublicApiTest extends TestCase
                 'source_docx' => '01_会计师和审计师_accountants-and-auditors.docx',
             ],
         ]);
-
         $response = $this->getJson('/api/v0.5/career-jobs/accountants-and-auditors?locale=zh-CN');
 
         $response->assertOk()
@@ -434,7 +463,7 @@ final class CareerJobPublicApiTest extends TestCase
         $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
     }
 
-    public function test_zh_seo_endpoint_forces_noindex_when_docx_core_title_is_english(): void
+    public function test_zh_seo_endpoint_uses_authoritative_docx_indexability_contract(): void
     {
         $job = $this->createJob([
             'job_code' => 'data-scientists',
@@ -461,14 +490,18 @@ final class CareerJobPublicApiTest extends TestCase
                 'source_docx' => 'data-scientists.docx',
             ],
         ]);
+        $this->assertSame(
+            'cached',
+            app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload('data-scientists', 'zh-CN', true)['status'],
+        );
 
         $this->getJson('/api/v0.5/career-jobs/data-scientists/seo?locale=zh-CN')
             ->assertOk()
-            ->assertJsonPath('meta.canonical', 'https://fermatmind.com/zh/career/jobs/data-scientists')
-            ->assertJsonPath('meta.robots', 'noindex,follow')
-            ->assertJsonPath('seo_surface_v1.indexability_state', 'noindex')
-            ->assertJsonPath('seo_surface_v1.sitemap_state', 'excluded')
-            ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'withhold');
+            ->assertJsonPath('meta.canonical', '/zh/career/jobs/data-scientists')
+            ->assertJsonPath('meta.robots', 'index,follow')
+            ->assertJsonPath('seo_surface_v1.indexability_state', 'indexable')
+            ->assertJsonPath('seo_surface_v1.sitemap_state', 'included')
+            ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'allow');
     }
 
     public function test_imported_local_baseline_publishes_family_jobs_for_en_and_zh_cn(): void
@@ -559,36 +592,49 @@ final class CareerJobPublicApiTest extends TestCase
             'slug' => 'product-manager',
             'locale' => 'zh-CN',
             'title' => '产品经理',
+            'subtitle' => 'Product Manager',
             'excerpt' => '了解产品经理的职责、薪资水平、发展路径和人格匹配。',
             'status' => CareerJob::STATUS_PUBLISHED,
             'is_public' => true,
             'is_indexable' => false,
             'published_at' => now()->subMinute(),
+            'market_demand_json' => [
+                'source_refs' => [['url' => 'https://www.bls.gov/ooh/management/advertising-promotions-and-marketing-managers.htm']],
+            ],
         ]);
+        $this->createSeoMeta($zhJob, [
+            'jsonld_overrides_json' => ['source_docx' => 'product-manager.docx'],
+        ]);
+        $warmSummary = app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayloads(
+            ['product-manager'],
+            ['en', 'zh-CN'],
+            true,
+        );
+        $this->assertSame('cached', $warmSummary['job_detail_en_product-manager']['status']);
+        $this->assertSame('cached', $warmSummary['job_detail_zh_cn_product-manager']['status']);
 
         $enResponse = $this->getJson('/api/v0.5/career-jobs/product-manager/seo?locale=en');
         $enResponse->assertOk()
-            ->assertJsonPath('meta.title', 'Product Manager Career Guide | FermatMind')
-            ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/en/career/jobs/product-manager')
+            ->assertJsonPath('meta.title', 'Product Manager')
+            ->assertJsonPath('meta.canonical', '/en/career/jobs/product-manager')
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('seo_surface_v1.surface_type', 'career_job_public_detail')
-            ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/career/jobs/product-manager')
-            ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/career/jobs/product-manager')
+            ->assertJsonPath('meta.alternates.en', '/en/career/jobs/product-manager')
+            ->assertJsonPath('meta.alternates.zh-CN', '/zh/career/jobs/product-manager')
             ->assertJsonPath('meta.robots', 'noindex,follow')
             ->assertJsonPath('seo_surface_v1.indexability_state', 'noindex')
             ->assertJsonPath('seo_surface_v1.sitemap_state', 'excluded')
             ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'withhold')
-            ->assertJsonPath('jsonld.@type', 'Occupation')
-            ->assertJsonPath('jsonld.mainEntityOfPage', 'https://staging.fermatmind.com/en/career/jobs/product-manager')
-            ->assertJsonPath('jsonld.skills.0', 'roadmapping');
+            ->assertJsonPath('jsonld.fragments.occupation.@type', 'Occupation')
+            ->assertJsonPath('jsonld.fragments.occupation.mainEntityOfPage', '/en/career/jobs/product-manager');
 
         $zhResponse = $this->getJson('/api/v0.5/career-jobs/product-manager/seo?locale=zh-CN');
         $zhResponse->assertOk()
-            ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/zh/career/jobs/product-manager')
+            ->assertJsonPath('meta.canonical', '/zh/career/jobs/product-manager')
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('meta.robots', 'noindex,follow')
-            ->assertJsonPath('jsonld.name', (string) $zhJob->title)
-            ->assertJsonPath('jsonld.mainEntityOfPage', 'https://staging.fermatmind.com/zh/career/jobs/product-manager');
+            ->assertJsonPath('jsonld.fragments.occupation.name', (string) $zhJob->subtitle)
+            ->assertJsonPath('jsonld.fragments.occupation.mainEntityOfPage', '/zh/career/jobs/product-manager');
     }
 
     public function test_seo_endpoint_returns_not_found_for_missing_or_hidden_jobs(): void

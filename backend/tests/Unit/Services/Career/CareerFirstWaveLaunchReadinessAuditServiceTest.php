@@ -8,11 +8,18 @@ use App\Domain\Career\Publish\CareerFirstWaveLaunchReadinessAuditService;
 use App\Models\Occupation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\Concerns\UsesPublishedCareerRuntimeProjection;
 use Tests\TestCase;
 
 final class CareerFirstWaveLaunchReadinessAuditServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, UsesPublishedCareerRuntimeProjection;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpUsesPublishedCareerRuntimeProjection();
+    }
 
     public function test_it_builds_an_internal_first_wave_launch_readiness_audit_for_job_detail_members_only(): void
     {

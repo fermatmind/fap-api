@@ -620,14 +620,11 @@ final class ReportPdfDocumentService
                 return $gotenbergPdf;
             }
 
-            return $this->buildDocument(
-                (string) $attempt->id,
-                'MBTI',
-                true,
-                $this->normalizeVariant($variant),
-                '',
-                '',
-                []
+            $isChinese = str_starts_with(strtolower(trim((string) ($attempt->locale ?? ''))), 'zh');
+
+            return $this->buildSimplePdfDocument(
+                $isChinese ? '费马测试 MBTI 报告' : 'FermatMind MBTI Report',
+                [$isChinese ? '完整报告将在解锁后提供。' : 'The full report is available after access is unlocked.']
             );
         }
 

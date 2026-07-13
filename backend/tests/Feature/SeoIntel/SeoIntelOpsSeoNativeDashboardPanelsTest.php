@@ -12,7 +12,8 @@ final class SeoIntelOpsSeoNativeDashboardPanelsTest extends TestCase
     #[Test]
     public function blade_renders_issue_and_queue_detail_panels_with_safe_columns_only(): void
     {
-        $view = strtolower((string) file_get_contents(resource_path('views/filament/ops/pages/seo-dashboard-access.blade.php')));
+        $view = strtolower((string) file_get_contents(resource_path('views/filament/ops/pages/seo-dashboard-access.blade.php')))
+            ."\n".strtolower((string) file_get_contents(lang_path('en/ops.php')));
 
         foreach ([
             'issue queue detail panel',

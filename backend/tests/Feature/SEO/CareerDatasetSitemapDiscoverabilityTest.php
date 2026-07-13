@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SEO;
 
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -17,6 +18,7 @@ final class CareerDatasetSitemapDiscoverabilityTest extends TestCase
         config([
             'app.frontend_url' => 'https://www.fermatmind.com',
         ]);
+        app(PublicCareerAuthorityResponseCache::class)->warm();
 
         $payload = app(SitemapGenerator::class)->generate();
         $xml = (string) ($payload['xml'] ?? '');

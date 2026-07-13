@@ -56,8 +56,8 @@ final class PostPaidAttemptMismatchRepairOpsTenantVisibilityAcceptanceTest exten
 
         $wrongAttemptId = $this->createMbtiAttemptWithResult(
             orgId: $tenant['org_id'],
-            userId: $wrongOwnerUserId,
-            anonId: 'anon_wrong_owner_'.$wrongOwnerUserId,
+            userId: (string) $tenant['user_id'],
+            anonId: $tenant['anon_id'],
         );
 
         $checkout = $this->withHeaders([
@@ -78,6 +78,14 @@ final class PostPaidAttemptMismatchRepairOpsTenantVisibilityAcceptanceTest exten
 
         $createdOrder = DB::table('orders')->where('order_no', $orderNo)->first();
         $this->assertNotNull($createdOrder);
+
+        DB::table('attempts')
+            ->where('id', $wrongAttemptId)
+            ->update([
+                'user_id' => $wrongOwnerUserId,
+                'anon_id' => 'anon_wrong_owner_'.$wrongOwnerUserId,
+                'updated_at' => now(),
+            ]);
 
         $providerEventId = 'evt_owner_mismatch_'.$orderNo;
         $webhook = $this->postSignedBillingWebhook([
@@ -122,7 +130,7 @@ final class PostPaidAttemptMismatchRepairOpsTenantVisibilityAcceptanceTest exten
         $preRepairLookup->assertOk();
         $preRepairLookup->assertJsonPath('ok', true);
         $preRepairLookup->assertJsonPath('order_no', $orderNo);
-        $preRepairLookup->assertJsonPath('attempt_id', $wrongAttemptId);
+        $preRepairLookup->assertJsonPath('attempt_id', null);
         $preRepairLookup->assertJsonPath('status', 'paid');
         $preRepairLookup->assertJsonPath('payment_state', 'paid');
         $preRepairLookup->assertJsonPath('grant_state', 'not_started');

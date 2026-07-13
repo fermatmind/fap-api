@@ -77,7 +77,7 @@ final class CrawlerLogFixtureParser
      */
     private function parseLine(string $line, string $sourceLogFamily): array
     {
-        $request = $this->request($line);
+        $request = $this->parseRequestLine($line);
         $target = $request['target'] ?? null;
         $path = $this->normalizePath(is_string($target) ? (string) parse_url($target, PHP_URL_PATH) : null);
         $query = is_string($target) ? (string) parse_url($target, PHP_URL_QUERY) : '';
@@ -117,7 +117,7 @@ final class CrawlerLogFixtureParser
     /**
      * @return array{method?: string, target?: string}
      */
-    private function request(string $line): array
+    private function parseRequestLine(string $line): array
     {
         if (preg_match('/"(?<method>[A-Z]+)\s+(?<target>[^"\s]+)\s+HTTP\/[0-9.]+" /', $line, $matches) !== 1) {
             return [];

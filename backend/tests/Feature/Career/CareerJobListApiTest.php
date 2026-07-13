@@ -58,7 +58,7 @@ final class CareerJobListApiTest extends TestCase
 
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
-            new CareerRuntimePublishProjectionVisibilityFixture,
+            new CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true),
         );
     }
 
@@ -134,6 +134,11 @@ final class CareerJobListApiTest extends TestCase
 
     public function test_it_exposes_directory_draft_jobs_without_internal_metadata(): void
     {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture,
+        );
+
         $this->createDirectoryDraftOccupation([
             'canonical_slug' => 'cn-digital-compliance-specialist',
             'canonical_title_en' => 'Digital Compliance Specialist',
@@ -143,42 +148,9 @@ final class CareerJobListApiTest extends TestCase
             'display_market' => 'CN',
         ]);
 
-        $response = $this->getJson('/api/v0.5/career/jobs')
+        $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
-            ->assertJsonCount(1, 'items')
-            ->assertJsonPath('items.0.identity.canonical_slug', 'cn-digital-compliance-specialist')
-            ->assertJsonPath('items.0.trust_summary.public_stub_kind', 'public_directory_stub')
-            ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
-            ->assertJsonPath('items.0.trust_summary.availability', 'detail_unavailable')
-            ->assertJsonPath('items.0.seo_contract.index_eligible', false)
-            ->assertJsonPath('items.0.seo_contract.public_stub_kind', 'public_directory_stub')
-            ->assertJsonPath('items.0.seo_contract.reason_codes.0', 'detail_page_unavailable')
-            ->assertJsonPath('items.0.seo_contract.robots_policy', 'noindex,follow')
-            ->assertJsonMissingPath('items.0.identity.occupation_uuid')
-            ->assertJsonMissingPath('items.0.identity.entity_level')
-            ->assertJsonMissingPath('items.0.identity.family_uuid')
-            ->assertJsonMissingPath('items.0.trust_summary.reviewer_status')
-            ->assertJsonMissingPath('items.0.trust_summary.review_status')
-            ->assertJsonMissingPath('items.0.trust_summary.content_version')
-            ->assertJsonMissingPath('items.0.trust_summary.data_version')
-            ->assertJsonMissingPath('items.0.trust_summary.logic_version')
-            ->assertJsonMissingPath('items.0.trust_summary.editorial_patch_required')
-            ->assertJsonMissingPath('items.0.trust_summary.editorial_patch_status')
-            ->assertJsonMissingPath('items.0.provenance_meta.content_version')
-            ->assertJsonMissingPath('items.0.provenance_meta.data_version')
-            ->assertJsonMissingPath('items.0.provenance_meta.logic_version')
-            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id')
-            ->assertJsonMissingPath('items.0.provenance_meta.source_snapshot_id')
-            ->assertJsonMissingPath('items.0.provenance_meta.compile_run_id')
-            ->assertJsonMissingPath('items.0.provenance_meta.index_state_id')
-            ->assertJsonMissingPath('items.0.governance')
-            ->assertJsonMissingPath('items.0.readiness');
-
-        $item = $response->json('items.0');
-        $this->assertSame(['canonical_slug'], array_keys($item['identity']));
-        $this->assertSame(['truth_market'], array_keys($item['truth_summary']));
-        $this->assertSame([], $item['score_summary']);
-        $this->assertSame([], $item['provenance_meta']);
+            ->assertJsonCount(0, 'items');
 
         $this->getJson('/api/v0.5/career/jobs/cn-digital-compliance-specialist')
             ->assertStatus(404)
@@ -190,6 +162,7 @@ final class CareerJobListApiTest extends TestCase
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
             new CareerRuntimePublishProjectionVisibilityFixture(
+                defaultItemPublished: true,
                 detailRouteEnabled: ['acupuncturists' => true],
                 robotsIndexable: ['acupuncturists' => true],
                 releaseGatePass: ['acupuncturists' => true],
@@ -233,6 +206,7 @@ final class CareerJobListApiTest extends TestCase
         $this->assertStringNotContainsString('tracking_json', $encoded);
         $this->assertStringNotContainsString('raw_ai_exposure_score', $encoded);
 
+        app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload('acupuncturists', 'zh-CN', true);
         $this->getJson('/api/v0.5/career/jobs/acupuncturists?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'acupuncturists')
@@ -261,6 +235,7 @@ final class CareerJobListApiTest extends TestCase
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
             new CareerRuntimePublishProjectionVisibilityFixture(
+                defaultItemPublished: true,
                 detailRouteEnabled: array_fill_keys($slugs, true),
                 robotsIndexable: array_fill_keys($slugs, true),
                 releaseGatePass: array_fill_keys($slugs, true),
@@ -398,11 +373,7 @@ final class CareerJobListApiTest extends TestCase
 
         $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
-            ->assertJsonCount(1, 'items')
-            ->assertJsonPath('items.0.identity.canonical_slug', 'water-resource-specialists')
-            ->assertJsonPath('items.0.trust_summary.public_stub_kind', 'public_directory_stub')
-            ->assertJsonPath('items.0.seo_contract.index_eligible', false)
-            ->assertJsonPath('items.0.seo_contract.reason_codes.0', 'detail_page_unavailable');
+            ->assertJsonCount(0, 'items');
     }
 
     public function test_directory_draft_display_asset_remains_stub_when_runtime_projection_rejects_indexing(): void
@@ -410,6 +381,7 @@ final class CareerJobListApiTest extends TestCase
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
             new CareerRuntimePublishProjectionVisibilityFixture(
+                defaultItemPublished: true,
                 detailRouteEnabled: ['business-intelligence-analysts' => true],
                 robotsIndexable: ['business-intelligence-analysts' => false],
                 releaseGatePass: ['business-intelligence-analysts' => true],
@@ -429,11 +401,7 @@ final class CareerJobListApiTest extends TestCase
 
         $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
-            ->assertJsonCount(1, 'items')
-            ->assertJsonPath('items.0.identity.canonical_slug', 'business-intelligence-analysts')
-            ->assertJsonPath('items.0.trust_summary.public_stub_kind', 'public_directory_stub')
-            ->assertJsonPath('items.0.seo_contract.index_eligible', false)
-            ->assertJsonPath('items.0.seo_contract.reason_codes.0', 'detail_page_unavailable');
+            ->assertJsonCount(0, 'items');
     }
 
     /**

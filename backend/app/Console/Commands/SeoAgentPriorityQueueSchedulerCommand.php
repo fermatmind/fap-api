@@ -102,6 +102,7 @@ final class SeoAgentPriorityQueueSchedulerCommand extends Command
                 'writes_committed' => (bool) data_get($weeklyEvidence, 'draft_write.writes_committed', false),
                 'rows_created' => (int) data_get($weeklyEvidence, 'draft_write.rows_created', 0),
                 'rows_skipped_existing' => (int) data_get($weeklyEvidence, 'draft_write.rows_skipped_existing', 0),
+                'affected_refs' => array_values((array) data_get($weeklyEvidence, 'draft_write.affected_refs', [])),
                 'negative_guarantees' => [
                     'cms_publish' => false,
                     'search_channel_submit' => false,

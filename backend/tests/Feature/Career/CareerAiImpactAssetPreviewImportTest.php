@@ -1164,6 +1164,8 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             'asset_row_hash' => $row['audit_fields']['row_hash'],
         ]);
 
+        $this->seedCareerJobBundleAuthority('emergency-medicine-physicians');
+
         $this->assertNotNull(
             app(\App\Services\Career\AiImpactAssets\CareerAiImpactPreviewDetailShellBuilder::class)
                 ->build('emergency-medicine-physicians', 'en')
@@ -1175,9 +1177,10 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
             ->assertJsonPath('display_surface_v1.status', 'ready_for_pilot')
             ->assertJsonPath('display_surface_v1.subject.canonical_slug', 'emergency-medicine-physicians')
-            ->assertJsonPath('display_surface_v1.page.en.path', '/en/career/jobs/emergency-medicine-physicians')
-            ->assertJsonPath('seo_contract.indexable', false)
-            ->assertJsonPath('seo_contract.jsonld_allowed', false);
+            ->assertJsonPath('display_surface_v1.page.content.path', '/en/career/jobs/emergency-medicine-physicians')
+            ->assertJsonPath('seo_contract.index_eligible', true)
+            ->assertJsonPath('seo_contract.robots_policy', 'index,follow')
+            ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', false);
 
         $encoded = json_encode($response->json(), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $this->assertStringNotContainsString('evidence_id', $encoded);
@@ -1274,18 +1277,20 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             }
         }
 
+        $this->seedCareerJobBundleAuthorities($slugs);
+
         foreach ($slugs as $slug) {
             $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
                 ->assertOk()
                 ->assertJsonPath('identity.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
-                ->assertJsonPath('display_surface_v1.page.zh.path', '/zh/career/jobs/'.$slug);
+                ->assertJsonPath('display_surface_v1.page.content.path', '/zh/career/jobs/'.$slug);
 
             $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=en')
                 ->assertOk()
                 ->assertJsonPath('identity.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
-                ->assertJsonPath('display_surface_v1.page.en.path', '/en/career/jobs/'.$slug);
+                ->assertJsonPath('display_surface_v1.page.content.path', '/en/career/jobs/'.$slug);
         }
     }
 

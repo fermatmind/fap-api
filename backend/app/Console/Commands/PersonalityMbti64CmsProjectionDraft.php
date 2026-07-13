@@ -128,11 +128,48 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
             ? $writer->write($package, $qa, hash('sha256', $packageRaw), hash('sha256', $qaRaw), $this->optionsPayload())
             : $writer->plan($package, $qa, hash('sha256', $packageRaw), hash('sha256', $qaRaw), $this->optionsPayload());
 
+        if ((bool) $this->option('v8-5-v5-bilingual-64')) {
+            $summary = $this->compactV85V5BilingualSummary($summary);
+        }
+
         return array_merge($summary, [
             'package_path' => $resolvedPackage,
             'qa_path' => $resolvedQa,
             'command' => 'personality:mbti64-cms-projection-draft',
         ]);
+    }
+
+    /** @param array<string,mixed> $summary */
+    private function compactV85V5BilingualSummary(array $summary): array
+    {
+        $rows = is_array($summary['rows'] ?? null) ? $summary['rows'] : [];
+        foreach ($rows as &$row) {
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $preview = is_array($row['snapshot_preview'] ?? null) ? $row['snapshot_preview'] : [];
+            $payload = is_array($preview['mbti64_agent_projection_draft_v1'] ?? null)
+                ? $preview['mbti64_agent_projection_draft_v1']
+                : [];
+            $encoded = json_encode($preview, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
+
+            $row['snapshot_preview_sha256'] = is_string($encoded) ? hash('sha256', $encoded) : null;
+            $row['snapshot_preview_summary'] = [
+                'seo_title_present' => trim((string) data_get($payload, 'first_class_draft_fields.seo.title', '')) !== '',
+                'seo_description_present' => trim((string) data_get($payload, 'first_class_draft_fields.seo.description', '')) !== '',
+                'seo_h1_present' => trim((string) data_get($payload, 'first_class_draft_fields.seo.h1', '')) !== '',
+                'quick_answer_present' => trim((string) data_get($payload, 'first_class_draft_fields.content.quick_answer', '')) !== '',
+                'reader_experience_present' => (array) data_get($payload, 'structured_metadata.reader_experience', []) !== [],
+                'raw_module_count' => count((array) data_get($payload, 'raw_recommendation.modules', [])),
+            ];
+            unset($row['snapshot_preview']);
+        }
+        unset($row);
+
+        $summary['rows'] = $rows;
+
+        return $summary;
     }
 
     private function assertWriteGuards(): void

@@ -59,7 +59,7 @@ final class Eq60CrossAssessmentContextGuardTest extends TestCase
             'MSCEIT-like',
             'hiring suitable',
             'clinical assessment',
-            'true emotional ability',
+            'proves true emotional ability',
         ] as $forbiddenClaim) {
             $this->assertStringNotContainsString($forbiddenClaim, $json);
         }

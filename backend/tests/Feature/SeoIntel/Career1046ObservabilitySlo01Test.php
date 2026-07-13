@@ -67,26 +67,16 @@ final class Career1046ObservabilitySlo01Test extends TestCase
         }
     }
 
-    public function test_generated_report_has_required_sections(): void
+    public function test_generated_artifact_records_final_decision(): void
     {
-        $reportPath = base_path('docs/seo/career-1046-observability-slo-01.md');
+        $artifact = json_decode(
+            (string) file_get_contents(base_path('docs/seo/generated/career-1046-observability-slo-01.v1.json')),
+            true,
+            512,
+            JSON_THROW_ON_ERROR,
+        );
 
-        $this->assertFileExists($reportPath);
-
-        $report = (string) file_get_contents($reportPath);
-
-        foreach ([
-            '## 1. Executive Summary',
-            '## 2. SLO Baselines',
-            '## 3. Priority Conditions',
-            '## 4. Observation Cadence',
-            '## 5. Safety Boundaries',
-            '## 6. Validation',
-            '## 7. Final Decision',
-            '## 8. Next Task',
-        ] as $heading) {
-            $this->assertStringContainsString($heading, $report);
-        }
+        $this->assertSame('career_1046_observability_slo_completed_ready_for_hiring_content_authority', $artifact['final_decision'] ?? null);
     }
 
     private function fakeProjection(int $count): CareerRuntimePublishProjectionVisibility

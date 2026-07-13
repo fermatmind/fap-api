@@ -12,7 +12,7 @@ final class ClinicalComboQuestionsMetaComplianceTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_questions_meta_contains_compliance_payloads_and_locale_fallback(): void
+    public function test_questions_meta_contains_compliance_payloads_and_rejects_unsupported_locale(): void
     {
         $this->artisan('content:compile --pack=CLINICAL_COMBO_68 --pack-version=v1')->assertExitCode(0);
         (new ScaleRegistrySeeder)->run();
@@ -26,10 +26,9 @@ final class ClinicalComboQuestionsMetaComplianceTest extends TestCase
         $this->assertNotEmpty((array) data_get($zh->json(), 'meta.privacy_addendum.bullets', []));
         $this->assertNotEmpty((array) data_get($zh->json(), 'meta.crisis_resources.resources', []));
 
-        $fallback = $this->getJson('/api/v0.3/scales/CLINICAL_COMBO_68/questions?locale=fr&region=US');
-        $fallback->assertStatus(200);
-        $fallback->assertJsonPath('meta.locale_requested', 'fr');
-        $fallback->assertJsonPath('meta.locale_resolved', 'zh-CN');
-        $fallback->assertJsonPath('meta.crisis_resources.region_resolved', 'US');
+        $unsupported = $this->getJson('/api/v0.3/scales/CLINICAL_COMBO_68/questions?locale=fr&region=US');
+        $unsupported->assertStatus(422);
+        $unsupported->assertJsonPath('error_code', 'VALIDATION_FAILED');
+        $unsupported->assertJsonPath('details.locale.0', 'locale must be supported.');
     }
 }

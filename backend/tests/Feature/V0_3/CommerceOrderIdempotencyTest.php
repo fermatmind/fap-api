@@ -13,6 +13,13 @@ class CommerceOrderIdempotencyTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config()->set('freemium_locale_policy.enabled', false);
+    }
+
     private function seedOrgWithToken(int $orgId, int $userId): array
     {
         DB::table('users')->insert([
@@ -66,6 +73,7 @@ class CommerceOrderIdempotencyTest extends TestCase
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
             'provider' => 'billing',
+            'email' => 'commerce_9101@example.com',
         ];
 
         $idempotencyKey = 'idem_order_1';
@@ -110,6 +118,7 @@ class CommerceOrderIdempotencyTest extends TestCase
         $payload = [
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
+            'email' => 'commerce_9102@example.com',
         ];
         $idempotencyKey = 'idem_scope_provider_1';
 
@@ -169,6 +178,7 @@ class CommerceOrderIdempotencyTest extends TestCase
         $response = $this->postJson('/api/v0.3/orders', [
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
+            'email' => 'commerce_9103@example.com',
         ], [
             'X-Org-Id' => (string) $orgId,
             'Authorization' => 'Bearer '.$token,
@@ -240,6 +250,7 @@ class CommerceOrderIdempotencyTest extends TestCase
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
             'provider' => 'stub',
+            'email' => 'commerce_9301@example.com',
         ];
         $stubEnabled = app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
 

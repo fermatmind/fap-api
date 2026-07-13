@@ -137,7 +137,7 @@ final class SelectOrgFlowTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/order-lookup')
             ->assertOk()
-            ->assertSee('Order Lookup');
+            ->assertSee('订单查询');
 
         $this->withSession($baseSession)
             ->withCookie('ops_org_id', (string) $selectedOrg->id)

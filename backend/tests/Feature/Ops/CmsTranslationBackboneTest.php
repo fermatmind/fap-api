@@ -73,6 +73,7 @@ final class CmsTranslationBackboneTest extends TestCase
         config()->set('ops.content_release_observability.cache_invalidation_urls', [
             'https://cache.example.test/invalidate',
         ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
         config()->set('ops.content_release_observability.broadcast_webhook', '');
 
         Http::fake([
@@ -370,7 +371,7 @@ final class CmsTranslationBackboneTest extends TestCase
             'slug' => $slug,
             'path' => $path,
             'kind' => ContentPage::KIND_COMPANY,
-            'page_type' => ContentPage::PAGE_TYPES[0],
+            'page_type' => 'company',
             'title' => '中文 page',
             'summary' => 'page summary',
             'template' => 'company',

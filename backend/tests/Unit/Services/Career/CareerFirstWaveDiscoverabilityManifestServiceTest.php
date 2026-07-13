@@ -9,11 +9,18 @@ use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\Concerns\UsesPublishedCareerRuntimeProjection;
 use Tests\TestCase;
 
 final class CareerFirstWaveDiscoverabilityManifestServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, UsesPublishedCareerRuntimeProjection;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpUsesPublishedCareerRuntimeProjection();
+    }
 
     public function test_it_builds_a_mixed_route_discoverability_manifest_from_current_backend_truth(): void
     {

@@ -14,12 +14,19 @@ use App\Models\TopicProfile;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\Concerns\UsesPublishedCareerRuntimeProjection;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\TestCase;
 
 final class CareerFirstWaveRecommendationCompanionLinksServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, UsesPublishedCareerRuntimeProjection;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpUsesPublishedCareerRuntimeProjection();
+    }
 
     public function test_it_builds_machine_safe_companion_links_for_a_first_wave_recommendation_subject(): void
     {

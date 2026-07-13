@@ -7,11 +7,18 @@ namespace Tests\Unit\Services\Career;
 use App\Services\Career\Dataset\CareerPublicDatasetContractBuilder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\Concerns\UsesPublishedCareerRuntimeProjection;
 use Tests\TestCase;
 
 final class CareerPublicDatasetContractBuilderTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, UsesPublishedCareerRuntimeProjection;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpUsesPublishedCareerRuntimeProjection();
+    }
 
     public function test_it_builds_a_public_safe_dataset_hub_contract_from_backend_authority(): void
     {

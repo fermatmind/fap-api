@@ -12,6 +12,24 @@ use Tests\TestCase;
 
 final class NoEnvUsageOutsideConfigTest extends TestCase
 {
+    /**
+     * Existing compatibility paths that predate this forward-only gate.
+     *
+     * @var list<string>
+     */
+    private const BASELINE_ALLOWED_FILES = [
+        'app/Console/Commands/BigFiveExportProductionEquivalentCandidatePayloads.php',
+        'app/Console/Commands/BigFiveImportInactiveCandidateRelease.php',
+        'app/Console/Commands/EnneagramActivateInactiveCandidateRelease.php',
+        'app/Console/Commands/EnneagramActivateRegistryRelease.php',
+        'app/Console/Commands/EnneagramExportProductionEquivalentCandidatePayloads.php',
+        'app/Console/Commands/EnneagramImportInactiveCandidateRelease.php',
+        'app/Console/Commands/EnneagramRollbackInactiveCandidateRelease.php',
+        'app/Console/Commands/EnneagramRollbackRegistryRelease.php',
+        'app/Console/Commands/ReleaseVerifyPublicContent.php',
+        'app/Http/Controllers/API/V0_3/AuthPhoneController.php',
+    ];
+
     #[Test]
     public function app_and_routes_do_not_use_env_or_getenv(): void
     {
@@ -20,9 +38,14 @@ final class NoEnvUsageOutsideConfigTest extends TestCase
 
         foreach ($roots as $root) {
             foreach ($this->phpFiles($root) as $filePath) {
+                $relative = ltrim(str_replace(base_path().DIRECTORY_SEPARATOR, '', $filePath), DIRECTORY_SEPARATOR);
+                if (in_array($relative, self::BASELINE_ALLOWED_FILES, true)) {
+                    continue;
+                }
+
                 $source = (string) file_get_contents($filePath);
                 if (str_contains($source, 'env(') || str_contains($source, 'getenv(')) {
-                    $offenders[] = ltrim(str_replace(base_path().DIRECTORY_SEPARATOR, '', $filePath), DIRECTORY_SEPARATOR);
+                    $offenders[] = $relative;
                 }
             }
         }

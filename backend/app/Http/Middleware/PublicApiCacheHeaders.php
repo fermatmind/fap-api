@@ -25,7 +25,9 @@ final class PublicApiCacheHeaders
             return $response;
         }
 
-        $response->headers->set('Cache-Control', self::CACHE_CONTROL);
+        if (! str_contains($existing, 'public')) {
+            $response->headers->set('Cache-Control', self::CACHE_CONTROL);
+        }
         $response->setVary(['Accept-Encoding', 'X-FAP-Locale'], false);
 
         return $response;

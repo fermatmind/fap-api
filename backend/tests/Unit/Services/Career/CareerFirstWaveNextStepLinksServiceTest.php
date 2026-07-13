@@ -10,17 +10,19 @@ use App\Models\OccupationFamily;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
+use Tests\Concerns\UsesPublishedCareerRuntimeProjection;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\TestCase;
 
 final class CareerFirstWaveNextStepLinksServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, UsesPublishedCareerRuntimeProjection;
 
     protected function setUp(): void
     {
         parent::setUp();
 
+        $this->setUpUsesPublishedCareerRuntimeProjection();
         Cache::flush();
     }
 

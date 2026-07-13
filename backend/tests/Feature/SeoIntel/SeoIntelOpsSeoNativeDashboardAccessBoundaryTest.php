@@ -59,9 +59,9 @@ final class SeoIntelOpsSeoNativeDashboardAccessBoundaryTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/seo')
             ->assertOk()
-            ->assertSee('Native read-only SEO Engine observability dashboard')
-            ->assertSee('Access boundary')
-            ->assertSee('Hard stops')
+            ->assertSee('原生只读 SEO 引擎可观测看板')
+            ->assertSee('访问边界')
+            ->assertSee('硬性停止项')
             ->assertDontSee('<iframe', false);
     }
 
@@ -90,7 +90,7 @@ final class SeoIntelOpsSeoNativeDashboardAccessBoundaryTest extends TestCase
     {
         $view = strtolower((string) file_get_contents(resource_path('views/filament/ops/pages/seo-dashboard-access.blade.php')));
         $page = strtolower((string) file_get_contents(app_path('Filament/Ops/Pages/SeoDashboardAccessPage.php')));
-        $combined = $view."\n".$page;
+        $combined = $view."\n".$page."\n".strtolower((string) file_get_contents(lang_path('en/ops.php')));
 
         foreach ([
             'no public metabase',

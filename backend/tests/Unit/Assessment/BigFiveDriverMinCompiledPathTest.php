@@ -9,14 +9,17 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Tests\Concerns\PreservesCompiledContentPack;
 use Tests\TestCase;
 
 final class BigFiveDriverMinCompiledPathTest extends TestCase
 {
+    use PreservesCompiledContentPack;
     use RefreshDatabase;
 
     public function test_big5_submit_uses_min_compiled_question_index_when_full_compiled_file_is_missing(): void
     {
+        $this->preserveCompiledContentPack('BIG5_OCEAN', 'v1');
         (new ScaleRegistrySeeder)->run();
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         $this->artisan('norms:import --scale=BIG5_OCEAN --csv=resources/norms/big5/big5_norm_stats_seed.csv --activate=1')

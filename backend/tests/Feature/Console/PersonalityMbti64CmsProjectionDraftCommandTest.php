@@ -1177,13 +1177,16 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame($expectedUrls, $plannedUrls);
         $this->assertSame($expectedUrls, array_values($this->sortedStrings((array) $payload['subset']['allowed_urls'])));
 
-        $firstSnapshot = $payload['rows'][0]['snapshot_preview']['mbti64_agent_projection_draft_v1'] ?? [];
-        $this->assertNotSame('', (string) ($firstSnapshot['first_class_draft_fields']['seo']['title'] ?? ''));
-        $this->assertNotSame('', (string) ($firstSnapshot['first_class_draft_fields']['seo']['description'] ?? ''));
-        $this->assertNotSame('', (string) ($firstSnapshot['first_class_draft_fields']['seo']['h1'] ?? ''));
-        $this->assertNotSame('', (string) ($firstSnapshot['first_class_draft_fields']['content']['quick_answer'] ?? ''));
-        $this->assertNotEmpty($firstSnapshot['structured_metadata']['reader_experience'] ?? []);
-        $this->assertNotEmpty($firstSnapshot['raw_recommendation']['modules'] ?? []);
+        $firstRow = $payload['rows'][0] ?? [];
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) ($firstRow['snapshot_preview_sha256'] ?? ''));
+        $this->assertTrue((bool) data_get($firstRow, 'snapshot_preview_summary.seo_title_present'));
+        $this->assertTrue((bool) data_get($firstRow, 'snapshot_preview_summary.seo_description_present'));
+        $this->assertTrue((bool) data_get($firstRow, 'snapshot_preview_summary.seo_h1_present'));
+        $this->assertTrue((bool) data_get($firstRow, 'snapshot_preview_summary.quick_answer_present'));
+        $this->assertTrue((bool) data_get($firstRow, 'snapshot_preview_summary.reader_experience_present'));
+        $this->assertGreaterThan(0, (int) data_get($firstRow, 'snapshot_preview_summary.raw_module_count', 0));
+        $this->assertArrayNotHasKey('snapshot_preview', $firstRow);
+        $this->assertLessThan(1_000_000, strlen(Artisan::output()));
         $this->assertSame(0, PersonalityProfileRevision::query()->count());
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }

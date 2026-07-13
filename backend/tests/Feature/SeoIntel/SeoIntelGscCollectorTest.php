@@ -46,13 +46,14 @@ final class SeoIntelGscCollectorTest extends TestCase
     {
         $paths = glob(base_path('database/migrations/seo_intel/*seo_gsc_daily*'));
 
-        $this->assertCount(1, $paths);
+        $this->assertCount(2, $paths);
 
-        $contents = strtolower((string) file_get_contents($paths[0]));
-
-        foreach ($this->forbiddenColumns() as $column) {
-            $this->assertStringNotContainsString("'".$column."'", $contents, $paths[0].' must not define '.$column);
-            $this->assertStringNotContainsString('"'.$column.'"', $contents, $paths[0].' must not define '.$column);
+        foreach ($paths as $path) {
+            $contents = strtolower((string) file_get_contents($path));
+            foreach ($this->forbiddenColumns() as $column) {
+                $this->assertStringNotContainsString("'".$column."'", $contents, $path.' must not define '.$column);
+                $this->assertStringNotContainsString('"'.$column.'"', $contents, $path.' must not define '.$column);
+            }
         }
     }
 

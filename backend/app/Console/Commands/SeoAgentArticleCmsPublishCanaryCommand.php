@@ -443,14 +443,31 @@ final class SeoAgentArticleCmsPublishCanaryCommand extends Command
             $translationRevision = $this->createApprovedTranslationRevision($lockedArticle, $draftRevision, $packageSha, $writeSha, $gateSha);
             $createdRevisionId = (int) $translationRevision->id;
 
+            $currentPublishedRevisionId = $this->sameArticleTranslationRevisionId(
+                $lockedArticle,
+                $lockedArticle->published_revision_id ? (int) $lockedArticle->published_revision_id : null,
+            );
+            if ($currentPublishedRevisionId === null) {
+                $currentPublishedRevisionId = ArticleTranslationRevision::query()
+                    ->withoutGlobalScopes()
+                    ->where('article_id', (int) $lockedArticle->id)
+                    ->where('revision_status', ArticleTranslationRevision::STATUS_PUBLISHED)
+                    ->orderByDesc('revision_number')
+                    ->value('id');
+            }
+            if (! is_numeric($currentPublishedRevisionId) || (int) $currentPublishedRevisionId <= 0) {
+                throw new RuntimeException('current article-owned published revision not found.');
+            }
+
             $lockedArticle->forceFill([
                 'working_revision_id' => (int) $translationRevision->id,
+                'published_revision_id' => (int) $currentPublishedRevisionId,
             ])->save();
 
             return $publisher->promoteExistingWorkingRevision(
                 (int) $lockedArticle->id,
                 (int) $translationRevision->id,
-                (int) $article->published_revision_id,
+                (int) $currentPublishedRevisionId,
                 'seo_agent_article_cms_publish_canary'
             );
         });

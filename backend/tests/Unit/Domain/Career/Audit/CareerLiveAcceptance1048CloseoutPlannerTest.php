@@ -74,6 +74,9 @@ final class CareerLiveAcceptance1048CloseoutPlannerTest extends TestCase
                 'detail_ready_count' => 1048,
                 'public_detail_indexable_count' => 1048,
                 'canonical_public_slug_count' => 1048,
+                'sitemap_noindex_url_count' => 0,
+                'llms_noindex_url_count' => 0,
+                'llms_full_noindex_url_count' => 0,
             ],
             'found_published' => 2096,
             'release_gate' => [

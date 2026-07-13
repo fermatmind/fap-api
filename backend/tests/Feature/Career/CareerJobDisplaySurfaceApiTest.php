@@ -12,6 +12,7 @@ use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
 use App\Services\Career\CareerRecommendationCompiler;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
@@ -89,9 +90,12 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
-            new CareerRuntimePublishProjectionVisibilityFixture(detailRouteEnabled: [
-                'software-developers' => false,
-            ]),
+            new CareerRuntimePublishProjectionVisibilityFixture(
+                defaultItemPublished: true,
+                detailRouteEnabled: [
+                    'software-developers' => false,
+                ],
+            ),
         );
     }
 
@@ -101,7 +105,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         $this->addCrosswalks($occupation, 'actors');
         $this->createDisplayAsset($occupation);
 
-        $response = $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN')
+        $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/actors?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'actors')
             ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
@@ -141,7 +145,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             $this->addCrosswalks($occupation, $slug);
             $this->createDisplayAsset($occupation);
 
-            $response = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+            $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
                 ->assertOk()
                 ->assertJsonPath('identity.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
@@ -171,7 +175,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         $this->addCrosswalks($occupation, 'accountants-and-auditors');
         $this->createDisplayAsset($occupation);
 
-        $response = $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=en')
+        $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=en')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'accountants-and-auditors')
             ->assertJsonMissingPath('truth_layer.source_refs.0.source_id')
@@ -227,7 +231,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         ];
         $asset->forceFill(['page_payload_json' => $pagePayload])->save();
 
-        $response = $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=en')
+        $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=en')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'accountants-and-auditors');
 
@@ -266,7 +270,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             $this->addCrosswalks($occupation, $slug);
             $this->createDisplayAsset($occupation);
 
-            $response = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+            $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
                 ->assertOk()
                 ->assertJsonPath('identity.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
@@ -320,7 +324,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             $this->addCrosswalks($occupation, $slug);
             $this->createDisplayAsset($occupation);
 
-            $response = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+            $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
                 ->assertOk()
                 ->assertJsonPath('identity.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
@@ -359,7 +363,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             $occupation = $this->seedDisplayAssetBackedDirectoryDraftOccupation($slug);
             $this->createDisplayAsset($occupation);
 
-            $response = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+            $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
                 ->assertOk()
                 ->assertJsonPath('identity.canonical_slug', $slug)
                 ->assertJsonPath('identity.entity_level', 'dataset_candidate')
@@ -400,7 +404,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
         $this->createDisplayAsset($occupation->refresh());
 
-        $response = $this->getJson('/api/v0.5/career/jobs/architects?locale=zh-CN')
+        $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/architects?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'architects')
             ->assertJsonPath('locale_policy.crosswalk_mode', 'direct_match')
@@ -420,6 +424,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
             new CareerRuntimePublishProjectionVisibilityFixture(
+                defaultItemPublished: true,
                 detailRouteEnabled: [
                     'actors' => true,
                     'software-developers' => false,
@@ -440,12 +445,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         $this->createDisplayAsset($occupation->refresh());
 
         $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN')
-            ->assertOk()
-            ->assertJsonPath('identity.canonical_slug', 'actors')
-            ->assertJsonPath('seo_contract.index_eligible', false)
-            ->assertJsonPath('seo_contract.index_state', 'trust_limited')
-            ->assertJsonPath('seo_contract.robots_policy', 'noindex,follow')
-            ->assertJsonPath('seo_contract.reason_codes.0', 'display_asset_backed_pilot_noindex');
+            ->assertNotFound();
     }
 
     public function test_manual_hold_software_developers_is_not_force_enabled_even_with_display_asset(): void
@@ -467,17 +467,19 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertNotFound();
     }
 
-    public function test_it_does_not_add_display_surface_for_missing_asset(): void
+    public function test_it_adds_restricted_runtime_published_surface_for_missing_asset(): void
     {
         $occupation = $this->seedCompiledOccupation('veterinary-technologists-and-technicians');
 
-        $this->getJson('/api/v0.5/career/jobs/veterinary-technologists-and-technicians?locale=zh-CN')
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/veterinary-technologists-and-technicians?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'veterinary-technologists-and-technicians')
-            ->assertJsonMissingPath('display_surface_v1');
+            ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'restricted')
+            ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', false)
+            ->assertJsonPath('display_surface_v1.implementation_contract.authority', 'runtime_publish_projection');
     }
 
-    public function test_it_does_not_add_display_surface_for_product_schema_asset(): void
+    public function test_it_rejects_product_schema_asset_and_uses_restricted_runtime_published_surface(): void
     {
         $occupation = $this->seedCompiledOccupation('data-scientists');
         $this->addCrosswalks($occupation, 'data-scientists');
@@ -488,14 +490,21 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ],
         ]);
 
-        $this->getJson('/api/v0.5/career/jobs/data-scientists?locale=zh-CN')
+        $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/data-scientists?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'data-scientists')
-            ->assertJsonMissingPath('display_surface_v1');
+            ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'restricted')
+            ->assertJsonPath('display_surface_v1.implementation_contract.authority', 'runtime_publish_projection');
+
+        $this->assertStringNotContainsString(
+            'Product',
+            json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR),
+        );
     }
 
     public function test_directory_draft_without_valid_display_asset_remains_blocked(): void
     {
+        $this->bindUnpublishedRuntimeProjection();
         $this->seedDisplayAssetBackedDirectoryDraftOccupation('web-developers');
 
         $this->getJson('/api/v0.5/career/jobs/web-developers?locale=zh-CN')
@@ -504,6 +513,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
     public function test_directory_draft_with_invalid_display_asset_remains_blocked(): void
     {
+        $this->bindUnpublishedRuntimeProjection();
         $occupation = $this->seedDisplayAssetBackedDirectoryDraftOccupation('marketing-managers');
         $this->createDisplayAsset($occupation, [
             'component_order_json' => ['hero'],
@@ -515,6 +525,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
     public function test_directory_draft_with_product_schema_display_asset_remains_blocked(): void
     {
+        $this->bindUnpublishedRuntimeProjection();
         $occupation = $this->seedDisplayAssetBackedDirectoryDraftOccupation('acupuncturists');
         $this->createDisplayAsset($occupation, [
             'structured_data_json' => [
@@ -525,6 +536,25 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
         $this->getJson('/api/v0.5/career/jobs/acupuncturists?locale=zh-CN')
             ->assertNotFound();
+    }
+
+    private function getWarmedJobDetailJson(string $uri): \Illuminate\Testing\TestResponse
+    {
+        $path = (string) parse_url($uri, PHP_URL_PATH);
+        $slug = (string) basename($path);
+        parse_str((string) parse_url($uri, PHP_URL_QUERY), $query);
+        $locale = is_string($query['locale'] ?? null) ? $query['locale'] : 'zh-CN';
+        app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, $locale, true);
+
+        return $this->getJson($uri);
+    }
+
+    private function bindUnpublishedRuntimeProjection(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture,
+        );
     }
 
     private function seedCompiledOccupation(string $slug): Occupation

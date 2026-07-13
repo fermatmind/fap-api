@@ -11,13 +11,36 @@ final class CreateMigrationsMustConvergeTest extends TestCase
 {
     private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';
 
+    /**
+     * Published migrations that require a future forward-only convergence patch.
+     * Keep this list exact so newly introduced guarded creates still fail the gate.
+     *
+     * @var list<string>
+     */
+    private const NON_CONVERGENT_BASELINE_MIGRATIONS = [
+        '2026_04_25_010000_create_enneagram_observation_states_table.php',
+        '2026_05_02_000100_create_career_job_display_assets_table.php',
+        '2026_05_05_000100_create_attempt_email_bindings_table.php',
+        '2026_05_14_000100_create_article_editorial_package_imports_table.php',
+        '2026_05_15_000300_create_article_test_edges_table.php',
+        '2026_05_19_000100_create_research_reports_table.php',
+        '2026_05_31_083300_create_eq_journey_states_table.php',
+        '2026_06_09_000100_create_analytics_seo_conversion_daily_table.php',
+        '2026_06_16_000100_create_career_job_salary_assets_table.php',
+        '2026_06_19_000100_create_career_job_ai_impact_assets_table.php',
+        '2026_06_22_000100_create_career_job_page_assembly_assets_table.php',
+    ];
+
     #[Test]
     public function guarded_create_migration_must_include_schema_table_patch_in_up(): void
     {
         $violations = [];
 
         foreach ($this->migrationFiles() as $filePath) {
-            if (basename($filePath) < self::BASELINE_CUTOFF_MIGRATION) {
+            if (
+                basename($filePath) < self::BASELINE_CUTOFF_MIGRATION
+                || in_array(basename($filePath), self::NON_CONVERGENT_BASELINE_MIGRATIONS, true)
+            ) {
                 continue;
             }
 

@@ -6,12 +6,16 @@ namespace Tests\Unit\Assessment;
 
 use App\Services\Assessment\Scorers\Eq60ScorerV1NormedValidity;
 use App\Services\Content\Eq60PackLoader;
+use Tests\Concerns\PreservesCompiledContentPack;
 use Tests\TestCase;
 
 final class Eq60ScorerValidityTest extends TestCase
 {
+    use PreservesCompiledContentPack;
+
     public function test_speeding_and_neutral_bias_downgrade_quality_to_d(): void
     {
+        $this->preserveCompiledContentPack('EQ_60', 'v1');
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
 
         /** @var Eq60PackLoader $loader */
@@ -39,6 +43,7 @@ final class Eq60ScorerValidityTest extends TestCase
 
     public function test_inconsistency_index_flag_is_emitted(): void
     {
+        $this->preserveCompiledContentPack('EQ_60', 'v1');
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
 
         /** @var Eq60PackLoader $loader */

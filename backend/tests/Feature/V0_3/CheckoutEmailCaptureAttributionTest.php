@@ -21,29 +21,31 @@ final class CheckoutEmailCaptureAttributionTest extends TestCase
         $email = 'checkout+'.random_int(1000, 9999).'@example.com';
         $compareInviteId = (string) Str::uuid();
         $attemptId = (string) Str::uuid();
+        $this->createAttempt($attemptId, 'anon_checkout_attribution');
 
-        $response = $this->postJson('/api/v0.3/orders/checkout', [
-            'sku' => 'MBTI_CREDIT',
-            'provider' => 'billing',
-            'email' => $email,
-            'attempt_id' => $attemptId,
-            'surface' => 'checkout',
-            'marketing_consent' => true,
-            'transactional_recovery_enabled' => false,
-            'share_id' => 'share_checkout',
-            'compare_invite_id' => $compareInviteId,
-            'share_click_id' => 'clk_checkout',
-            'entrypoint' => 'share_page',
-            'referrer' => 'https://example.com/share/checkout',
-            'landing_path' => '/zh/share/checkout',
-            'utm' => [
-                'source' => 'share',
-                'medium' => 'organic',
-                'campaign' => 'checkout-foundation',
-                'term' => 'mbti',
-                'content' => 'hero',
-            ],
-        ]);
+        $response = $this->withHeader('X-Anon-Id', 'anon_checkout_attribution')
+            ->postJson('/api/v0.3/orders/checkout', [
+                'sku' => 'MBTI_CREDIT',
+                'provider' => 'billing',
+                'email' => $email,
+                'attempt_id' => $attemptId,
+                'surface' => 'checkout',
+                'marketing_consent' => true,
+                'transactional_recovery_enabled' => false,
+                'share_id' => 'share_checkout',
+                'compare_invite_id' => $compareInviteId,
+                'share_click_id' => 'clk_checkout',
+                'entrypoint' => 'share_page',
+                'referrer' => 'https://example.com/share/checkout',
+                'landing_path' => '/zh/share/checkout',
+                'utm' => [
+                    'source' => 'share',
+                    'medium' => 'organic',
+                    'campaign' => 'checkout-foundation',
+                    'term' => 'mbti',
+                    'content' => 'hero',
+                ],
+            ]);
 
         $response->assertOk()
             ->assertJsonPath('ok', true)
@@ -96,5 +98,33 @@ final class CheckoutEmailCaptureAttributionTest extends TestCase
     private function seedCommerce(): void
     {
         (new Pr19CommerceSeeder)->run();
+    }
+
+    private function createAttempt(string $attemptId, string $anonId): void
+    {
+        DB::table('attempts')->insert([
+            'id' => $attemptId,
+            'ticket_code' => 'FMT-'.strtoupper(substr(str_replace('-', '', $attemptId), 0, 8)),
+            'org_id' => 0,
+            'anon_id' => $anonId,
+            'user_id' => null,
+            'scale_code' => 'MBTI',
+            'scale_version' => 'v0.3',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'question_count' => 144,
+            'answers_summary_json' => json_encode(['seed' => true], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'client_platform' => 'test',
+            'client_version' => '1.0.0',
+            'channel' => 'test',
+            'started_at' => now()->subMinute(),
+            'submitted_at' => now(),
+            'pack_id' => (string) config('content_packs.default_pack_id'),
+            'dir_version' => (string) config('content_packs.default_dir_version'),
+            'content_package_version' => 'v0.3',
+            'scoring_spec_version' => '2026.01',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

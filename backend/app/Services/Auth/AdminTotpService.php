@@ -124,9 +124,10 @@ class AdminTotpService
                     'updated_at' => now(),
                 ]);
 
-            $request = request() instanceof Request
-                ? request()
-                : Request::create('/ops/two-factor-challenge', 'POST');
+            $request = app(Request::class);
+            if (! $request instanceof Request) {
+                $request = Request::create('/ops/two-factor-challenge', 'POST');
+            }
             app(AuditLogger::class)->log(
                 $request,
                 'admin_totp_recovery_code_used',

@@ -133,8 +133,8 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertSame('zh-CN', (string) ($meta['locale_context'] ?? ''));
             $this->assertSame('CN_MAINLAND.zh-CN', (string) ($meta['cultural_context'] ?? ''));
             $this->assertSame('cultural_calibration.v1', (string) ($meta['calibration_contract_version'] ?? ''));
-            $this->assertSame('governance.v1', (string) ($meta['calibration_policy_version'] ?? ''));
-            $this->assertSame('content_governance', (string) ($meta['calibration_source'] ?? ''));
+            $this->assertSame('runtime.locale_policy.v1', (string) ($meta['calibration_policy_version'] ?? ''));
+            $this->assertSame('runtime_policy', (string) ($meta['calibration_source'] ?? ''));
             $this->assertContains('growth.next_actions', $meta['calibrated_section_keys'] ?? []);
             $this->assertNotSame('', trim((string) ($meta['calibration_fingerprint'] ?? '')));
             $this->assertContains('role_fit.role.NT', $meta['role_fit_keys'] ?? []);

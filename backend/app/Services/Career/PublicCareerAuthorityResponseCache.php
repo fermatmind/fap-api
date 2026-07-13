@@ -148,8 +148,11 @@ final class PublicCareerAuthorityResponseCache
         }
 
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-        if (! $this->detailReadIsPublishedForLocale($normalizedSlug, $normalizedLocale)) {
-            if (is_array($this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale))) {
+        $projectionItem = $this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale);
+        if (! $this->detailProjectionItemIsPublished($projectionItem)) {
+            $this->forgetJobDetailPayload($normalizedSlug, $normalizedLocale);
+
+            if (is_array($projectionItem)) {
                 Cache::put(
                     $this->jobDetailNegativeKey($normalizedSlug, $normalizedLocale),
                     true,
@@ -575,6 +578,13 @@ final class PublicCareerAuthorityResponseCache
     private function detailReadIsPublishedForLocale(string $slug, string $publicLocale): bool
     {
         $item = $this->runtimePublishProjection->itemForSlug($slug, $publicLocale);
+
+        return $this->detailProjectionItemIsPublished($item);
+    }
+
+    /** @param array<string, mixed>|null $item */
+    private function detailProjectionItemIsPublished(?array $item): bool
+    {
         $state = is_array($item)
             ? (string) (
                 $item['runtime_publish_state']

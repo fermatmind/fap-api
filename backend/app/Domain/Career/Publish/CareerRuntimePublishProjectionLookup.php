@@ -8,6 +8,7 @@ use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Models\RecommendationSnapshot;
+use Throwable;
 
 final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublishProjectionVisibility
 {
