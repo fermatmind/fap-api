@@ -41597,3 +41597,53 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
     next_task: MBTI-CMS-COMP-38
+
+  - id: MBTI-CMS-COMP-38
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    base: main
+    depends_on:
+      - MBTI-FULL-QA-36
+    branch: codex/mbti-cms-comp-38-full-dry-run
+    title: "MBTI-CMS-COMP-38: dry-run all 20 Chinese MBTI comparisons"
+    train_scope: mbti_full_20_comparison_cms_dry_run
+    status: user_authorized
+    mode: dry_run_only
+    scope:
+      - Add a fail-closed backend-only dry-run command and planner for the approved 16 A/T and four hot cross-type Chinese MBTI comparison asset sources.
+      - Normalize and validate exactly 20 public comparison records: 16 A/T comparisons with 15 repair candidates and one verify-only record, plus four verify-only cross-type comparisons.
+      - Validate comparison-kind and pair mapping, zh-CN canonical targets, direct answers, quick-judgment tables, FAQ, sections, internal links, SEO, JSON-LD source fields, existing public targets, indexability, and deterministic idempotency.
+      - Keep every execution no-write; reject --write before package processing and do not publish, release feeds, deploy, or submit search actions.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityMbtiFullComparisonImportDryRun.php
+      - backend/app/Services/Cms/MbtiFullComparisonImportDryRunPlanner.php
+      - backend/tests/Feature/Console/PersonalityMbtiFullComparisonImportDryRunCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify Profile importer behavior, fap-web, CMS content, database schema/data, public runtime routes, sitemap, llms, canonical, robots, JSON-LD rendering, indexability, GSC, secrets, permissions, staging, or production deployment.
+      - Execute a production import, CMS write, publish, cache warm, indexability mutation, or search request.
+      - Implement MBTI-CMS-APPROVAL-39 or later train scopes.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/PersonalityMbtiFullComparisonImportDryRunCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Console/PersonalityMbtiComparisonCmsImportDryRunCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Console/PersonalityMbti64ComparisonAssetsDryRunCommandTest.php tests/Feature/Console/PersonalityMbti64CrossTypeComparisonAssetsDryRunCommandTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiFullComparisonImportDryRun.php app/Services/Cms/MbtiFullComparisonImportDryRunPlanner.php tests/Feature/Console/PersonalityMbtiFullComparisonImportDryRunCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_freeze_classifier_ignores_mbti_full_comparison_import_dry_run_files --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: MBTI-CMS-APPROVAL-39
