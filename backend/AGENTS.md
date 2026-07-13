@@ -6,6 +6,15 @@
 - Never “fix future PRs” inside the current PR.
 - Stop immediately if changed files drift outside the declared scope and `stop_if_changed_files_outside_scope` is true.
 
+## Goal execution standing authorization
+- FermatMind is normally operated by one developer and execution goals often run unattended overnight. Unless interactive checkpoints are explicitly requested, treat a concrete execution goal as unattended mode: make safe, reversible, in-scope decisions, record them, and continue without waiting for acknowledgements.
+- A concrete `/goal` or equivalent end-to-end execution instruction for an identified scope is standing authorization for its normal PR lifecycle: branch, scoped implementation, checks, explicit staging, commit, push, PR creation, polling, same-scope CI/review fixes, policy-compliant merge, synchronization, and cleanup. Do not ask again for those actions.
+- The same goal authorizes exact manifest/state initialization for a named task/card and declared dependency completion in dependency order.
+- When a required check is blocked by a defect proven to pre-exist on `main` outside the current PR scope, create and finish a separate minimal ad-hoc baseline-repair PR, then resume the goal. Keep scopes separate and do not request another PR authorization.
+- Required checks and reviews remain mandatory. Stop only for materially ambiguous scope/authority, non-isolatable user changes, separately controlled production/CMS/database actions, unavailable external permission/review, or a repair that cannot be isolated and validated safely.
+- Do not mark a goal blocked merely because a manifest/state entry, declared dependency, same-scope CI/review fix, wait/poll cycle, or isolated baseline-repair PR is needed. Resolve those autonomously.
+- This section overrides narrower repeat-authorization requirements below, but not planning-only/read-only instructions or controlled production-publish confirmations.
+
 ## Branch discipline
 - Always start from the latest `main`.
 - Always pull with `git pull --ff-only origin main` before creating a PR.
@@ -23,7 +32,7 @@
 
 ## Dependency discipline
 - A PR may start only when all `depends_on` items are already merged into `main`.
-- If a dependency is not merged, mark the current item `blocked_dependency` in `docs/codex/pr-train-state.json` and stop.
+- If a dependency is not merged, do not start the dependent PR. In unattended goal mode, complete or wait for the declared dependency, then continue automatically. Mark `blocked_dependency` and stop only when the dependency requires unavailable external authority or cannot be completed safely.
 
 ## Verification discipline
 - Run all local checks listed in the PR manifest before push.
@@ -31,7 +40,7 @@
 - If local checks fail, do not open a PR.
 - Record failed checks in `docs/codex/pr-train-state.json`.
 - Never continue to the next PR after a failed check.
-- Draft PR exception: when a local check fails only on behavior clearly outside the current declared PR scope, and the user explicitly asks to proceed, Codex may open a draft PR for the current scope if all scoped checks pass. The draft PR body must list the failed command, failed tests, why they are outside scope, and state that the PR is not mergeable until required checks are green.
+- Draft PR exception: when a local check fails only on behavior clearly outside the current declared PR scope, an active execution goal supplies the required authorization to proceed. Prefer an isolated baseline-repair PR when that can restore the required check; otherwise Codex may open a draft PR for the current scope if all scoped checks pass. The draft PR body must list the failed command, failed tests, why they are outside scope, and state that the PR is not mergeable until required checks are green.
 - This exception does not allow merging a PR with failed local or GitHub required checks.
 
 ## PR discipline
@@ -73,10 +82,10 @@
   - remote_branch_deleted
   - local_cleanup_executed
 - Do not create a new PR-train task just to mark the previous task as `merged`.
-- Never continue after a failed PR unless the manifest explicitly allows retry.
+- Never advance to the next PR after a failed PR unless the manifest permits it. Under an active execution goal, diagnose, fix, and rerun the current scoped PR without a new user prompt, and record each retry.
 
 ## Failure policy
-- Stop immediately on:
+- Do not merge the current PR or advance to an unrelated next PR while any of the following remains unresolved:
   - preflight failure
   - failed local checks, except for the documented draft PR exception above
   - failed required GitHub checks
@@ -84,7 +93,7 @@
   - review requirement block
   - ambiguous repository state
 - Do not improvise around failures.
-- Prefer stopping cleanly over partial progress.
+- In unattended goal mode, exhaust safe in-scope diagnosis, retry, same-PR repair, declared dependency completion, and isolated baseline-repair alternatives before stopping. Prefer a clean, evidence-backed hold only after those paths are exhausted.
 
 ## Local vs cloud execution
 - If operating in a cloud-only environment, remote branch deletion is allowed, but local cleanup must be reported as not executed.
