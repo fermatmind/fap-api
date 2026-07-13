@@ -90377,8 +90377,8 @@
       "SAEP-PT-07",
       "SAEP-PARITY-02"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed_ready_to_push",
+    "commit_sha": "c99e3f84c260eb084a17c29177e1ecd63adf70bb",
     "pr_url": null,
     "checks": {
       "authorization": {
@@ -90426,6 +90426,11 @@
         "at": "2026-07-13T20:37:22Z",
         "status": "local_checks_passed",
         "note": "Focused ScalesLookupTest passed 11 tests and 236 assertions; Pint, PHP syntax, YAML/JSON parsing, git diff --check and exact four-path scope validation passed."
+      },
+      {
+        "at": "2026-07-13T20:38:57Z",
+        "status": "committed_ready_to_push",
+        "note": "Committed the exact four-path implementation and canonical train metadata at c99e3f84c260eb084a17c29177e1ecd63adf70bb."
       }
     ]
   }
