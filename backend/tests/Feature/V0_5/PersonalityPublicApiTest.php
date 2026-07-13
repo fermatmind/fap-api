@@ -12,8 +12,11 @@ use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Services\Cms\PersonalityPublicReadModelCache;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 final class PersonalityPublicApiTest extends TestCase
@@ -1681,6 +1684,60 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertDontSee('Draft-only body.')
             ->assertDontSee('Premium-only body.')
             ->assertDontSee('/checkout');
+    }
+
+    public function test_mbti_detail_and_seo_expose_versioned_cache_state_and_fail_closed_after_withdrawal(): void
+    {
+        Cache::flush();
+        $profile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'title' => 'INTJ - Architect',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $variant = $this->createVariant($profile, [
+            'runtime_type_code' => 'INTJ-A',
+            'type_name' => 'Architect Assertive',
+        ]);
+
+        $this->getJson('/api/v0.5/personality/intj-a?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath('profile.type_name', 'Architect Assertive');
+        $this->getJson('/api/v0.5/personality/intj-a?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
+        $this->getJson('/api/v0.5/personality/intj-a/seo?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
+        $this->getJson('/api/v0.5/personality/intj-a/seo?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
+
+        DB::table('personality_profiles')->where('id', $profile->id)->update(['title' => "\xB1\x31"]);
+        $this->getJson('/api/v0.5/personality/intj-a?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+            ->assertJsonPath('profile.title', 'INTJ - Architect');
+        DB::table('personality_profiles')->where('id', $profile->id)->update(['title' => 'INTJ - Architect']);
+
+        $variant->update(['type_name' => 'Updated Architect Assertive']);
+        $this->getJson('/api/v0.5/personality/intj-a?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath('profile.type_name', 'Updated Architect Assertive');
+
+        $variant->update(['is_published' => false]);
+        $this->getJson('/api/v0.5/personality/intj-a?locale=en')
+            ->assertNotFound()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
+
+        $cache = app(PersonalityPublicReadModelCache::class);
+        self::assertSame('miss', $cache->stale('detail', 'INTJ-A', 'en', 0, 'MBTI')['state']);
+        self::assertSame('miss', $cache->stale('seo', 'INTJ-A', 'en', 0, 'MBTI')['state']);
     }
 
     private function expectedSearchIntentSeoTitle(string $locale, string $runtimeTypeCode, string $typeName): string
