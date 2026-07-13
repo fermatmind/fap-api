@@ -41647,3 +41647,62 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
     next_task: MBTI-CMS-APPROVAL-39
+
+  - id: SAEP-PLANNED-PR-08
+    existing_pr_card_id: SAEP-PRCARD-API-3884ba0903e4
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    base: main
+    depends_on: []
+    depends_on_atomic_tasks:
+      - SAEP-ART-01
+    branch: codex/saep-planned-pr-08-article-translation-schema
+    title: "SAEP-PLANNED-PR-08 Project article translation and schema eligibility"
+    train_scope: saep_first_scan_article_authority_projection
+    status: in_progress
+    scope:
+      - Expose translation/alternate eligibility and gated Article/Breadcrumb structured-data fragments through the existing Article SEO public projection.
+      - Preserve published revision, visible-content parity and fail-closed eligibility behavior.
+      - Add focused backend tests only; do not change CMS rows or article bodies.
+    allowed_paths:
+      - backend/app/Services/Cms/ArticleSeoService.php
+      - backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php
+      - backend/tests/Feature/SEO/ArticleSeoServiceTest.php
+      - backend/tests/Feature/V0_5/ArticlePublicApiTest.php
+      - backend/tests/Unit/Services/Career/CareerArticleStructuredDataBuilderTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    forbidden_paths:
+      - fap-web/**
+      - CMS or database rows
+      - article body content
+      - sitemap or llms output
+      - publish, import or deploy
+    dependency_assumptions:
+      - SAEP-ART-01 is independently revalidated and accepted complete.
+      - Isolated baseline-repair PR #3031 is merged into main and post-merge cleanup is complete.
+      - Existing operator changes in the primary fap-api worktree remain isolated and untouched.
+    validation:
+      - cd backend && php artisan test tests/Feature/SEO/ArticleSeoServiceTest.php tests/Feature/V0_5/ArticlePublicApiTest.php tests/Unit/Services/Career/CareerArticleStructuredDataBuilderTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Cms/ArticleSeoService.php app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php tests/Feature/SEO/ArticleSeoServiceTest.php tests/Feature/V0_5/ArticlePublicApiTest.php tests/Unit/Services/Career/CareerArticleStructuredDataBuilderTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    execution_authorized: true
+    atomic_task_execution_authorized: true
+    pr_creation_authorized: true
+    pr_execution_authorized: true
+    production_mutation_authorized: false
+    content_authority: CMS/backend

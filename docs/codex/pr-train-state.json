@@ -89199,5 +89199,82 @@
         "note": "All reported PR checks passed, GitHub merge state is CLEAN, and the post-check changed-file scope validation still contains only the six declared paths."
       }
     ]
+  },
+  "SAEP-PLANNED-PR-08": {
+    "id": "SAEP-PLANNED-PR-08",
+    "existing_pr_card_id": "SAEP-PRCARD-API-3884ba0903e4",
+    "repo": "fap-api",
+    "title": "SAEP-PLANNED-PR-08 Project article translation and schema eligibility",
+    "base": "main",
+    "branch": "codex/saep-planned-pr-08-article-translation-schema",
+    "depends_on": [],
+    "depends_on_atomic_tasks": ["SAEP-ART-01"],
+    "status": "ready_to_merge",
+    "commit_sha": "1344fb5a023d89c0dc20acd5645cc494b91a1c16",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3032",
+    "failure_reason": null,
+    "hold_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "The SAEP continuous-execution goal explicitly authorizes SAEP-PLANNED-PR-08 and append-only canonical manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SAEP-ART-01 was independently revalidated as ACCEPTED_COMPLETE; isolated baseline-repair PR #3031 is merged at 233f81e21b590ac130c86ba7a1741e83e5ffeec2 and cleaned."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Changed files are exactly the five locked implementation/test paths plus the two canonical manifest/state paths; forbidden frontend, CMS/data, article body, sitemap/llms, publish/import, and deploy paths are absent."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "The locked three-file PHPUnit suite passed 29 tests and 268 assertions; scoped Pint passed five files; YAML/JSON parsing, exact seven-path scope validation, PHP syntax, and git diff --check passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3032 passed all nine required checks on head 49cad42ae94bab67ff01caacd3cc8d6a82a983c1; GitHub reported mergeStateStatus CLEAN and exact seven-path scope."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-13T14:41:03Z",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started from clean fap-api origin/main after merging and cleaning isolated baseline-repair PR #3031. Scope is backend Article SEO authority projection only; no CMS/database rows, article bodies, sitemap/llms, publish, import, production action, or deploy are authorized."
+      },
+      {
+        "at": "2026-07-13T14:46:29Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Locked PHPUnit passed 29 tests/268 assertions; scoped Pint, syntax, YAML/JSON, exact seven-path scope validation, and git diff --check passed. No production/CMS/database/publish/import/search/deploy action occurred."
+      },
+      {
+        "at": "2026-07-13T14:51:10Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed and pushed the exact seven-path scope and opened PR #3032. Required GitHub checks are pending; no production, CMS, database, publish, import, search, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-13T14:58:12Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All nine required checks passed on head 49cad42ae94bab67ff01caacd3cc8d6a82a983c1; GitHub merge state is CLEAN and the PR still contains exactly the seven allowed paths."
+      }
+    ]
   }
 }
