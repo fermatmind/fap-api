@@ -1,0 +1,15 @@
+{
+  "schema_version": "big5_authority_v2_qa_report.v1",
+  "train_id": "BIG5-AUTHORITY-V2-RANGE-OPENNESS-10",
+  "status": "automated_qa_passed_human_review_pending",
+  "scope": {"page_family": "range", "domain_code": "openness", "expected_page_count": 8, "v2_range_pages": 6, "legacy_canonicals": 2, "locales": ["en", "zh-CN"]},
+  "required_gates": ["exact_canonical_coverage", "independent_bilingual_authoring", "range_level_balance", "middle_range_specificity", "legacy_intent_distinctness", "source_authority", "private_flow_guard", "cross_framework_guard", "closed_release_controls"],
+  "stage_results": {
+    "raw": {"schema_ok": true, "editorial_ok": false, "failures_preserved": true, "expected_issue_codes": ["legacy_intent_missing", "locale_not_independently_authored", "outline_incomplete", "template_or_cliche_detected", "visible_sources_incomplete"]},
+    "skeptical_review": {"all_raw_issue_codes_accounted_for": true, "repair_required": true},
+    "repaired": {"schema_ok": true, "editorial_ok": true},
+    "final": {"schema_ok": true, "editorial_ok": true, "canonical_coverage_ok": true, "middle_range_specificity_ok": true, "legacy_intent_distinctness_ok": true, "source_authority_ok": true}
+  },
+  "release_state": {"human_review_passed": false, "publish_allowed": false, "schema_eligible": false, "cms_write_allowed": false, "redirect_graph_change_allowed": false, "indexability_change_allowed": false, "search_submission_allowed": false, "deploy_allowed": false},
+  "deferred": ["Human editorial approval", "CMS import or publication", "Redirect or canonical graph changes", "Indexability, sitemap, llms, search submission, and deployment"]
+}
