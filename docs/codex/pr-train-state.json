@@ -89493,9 +89493,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-WEB-TRUST-RENDERER-04"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "8fab27075efe37ac2c7271069ff31612bfcf051c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3037",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -89542,6 +89542,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All PR05 manifest local checks passed. The package separates academic, official/product, competitor, repository, and inference authority; core scientific claims require primary academic evidence, terminology is bilingual with independent review boundaries, and all operational mutation gates remain closed."
+      },
+      {
+        "at": "2026-07-13T20:16:04Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Implementation commit 8fab27075efe37ac2c7271069ff31612bfcf051c was pushed and PR #3037 opened; required GitHub checks are pending."
       }
     ]
   },
