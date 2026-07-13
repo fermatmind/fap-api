@@ -1,0 +1,23 @@
+{
+  "schema_version": "big5_authority_v2_range_package.v1",
+  "train_id": "BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11",
+  "artifact": "big5-authority-v2-range-conscientiousness-11-raw",
+  "stage": "raw",
+  "framework": "big_five",
+  "domain_code": "conscientiousness",
+  "expected_page_count": 8,
+  "draft_note": "{{ replace trait name in generic high middle low template }}",
+  "pages": [
+    {"content_key": "range:conscientiousness:high", "locale": "en", "canonical_path": "/en/personality/big-five/conscientiousness-high", "range_level": "high", "route_family": "v2_range", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "range:conscientiousness:high", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/conscientiousness-high", "range_level": "high", "route_family": "v2_range", "authoring_mode": "translation", "source_locale": "en", "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "range:conscientiousness:middle", "locale": "en", "canonical_path": "/en/personality/big-five/conscientiousness-mid", "range_level": "middle", "route_family": "v2_range", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "range:conscientiousness:middle", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/conscientiousness-mid", "range_level": "middle", "route_family": "v2_range", "authoring_mode": "translation", "source_locale": "en", "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "range:conscientiousness:low", "locale": "en", "canonical_path": "/en/personality/big-five/conscientiousness-low", "range_level": "low", "route_family": "v2_range", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "range:conscientiousness:low", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/conscientiousness-low", "range_level": "low", "route_family": "v2_range", "authoring_mode": "translation", "source_locale": "en", "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "legacy:high-conscientiousness", "locale": "en", "canonical_path": "/en/personality/big-five/high-conscientiousness", "range_level": "high", "route_family": "legacy_canonical", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "legacy:low-conscientiousness", "locale": "en", "canonical_path": "/en/personality/big-five/low-conscientiousness", "range_level": "low", "route_family": "legacy_canonical", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []}
+  ],
+  "workflow": {"raw_failures_preserved": true, "ai_detector_used": false},
+  "review_state": {"status": "pending_human_review", "reviewer": null, "approved_at": null, "publish_allowed": false, "schema_eligible": false},
+  "release_controls": {"cms_write_allowed": false, "redirect_graph_change_allowed": false, "indexability_change_allowed": false, "search_submission_allowed": false, "deploy_allowed": false}
+}
