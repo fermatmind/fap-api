@@ -89125,5 +89125,63 @@
         "note": "Pushed the exact two-file classifier repair at 2148630c9f945d1e49b99aa396ad74b41740c618. All required GitHub checks passed; PR scope and merge policy were revalidated. Ready to squash merge."
       }
     ]
+  },
+  "MBTI-CMS-COMP-38": {
+    "id": "MBTI-CMS-COMP-38",
+    "repo": "fap-api",
+    "title": "MBTI-CMS-COMP-38: dry-run all 20 Chinese MBTI comparisons",
+    "base": "main",
+    "branch": "codex/mbti-cms-comp-38-full-dry-run",
+    "depends_on": ["MBTI-FULL-QA-36"],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The user explicitly authorized registration of the full 15-item MBTI Chinese asset PR train in fap-api and fap-web manifest/state ledgers."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "Cross-repository dependency MBTI-FULL-QA-36 is GitHub PR #1736 MERGED with merge commit 4d0be1e164348bfe41ea262b7a6baa6eaee7c1ff, and fap-web origin/main contains that commit."
+      },
+      "focused_validation": {
+        "status": "pass",
+        "evidence": "Focused PHPUnit suites passed: 4 MBTI-CMS-COMP-38 command tests / 38 assertions, 5 existing comparison dry-run tests / 54 assertions, 4 MBTI64 comparison regression tests / 410 assertions, and the Big Five runtime-freeze classifier. Pint passed for all four scoped PHP files. A separate temporary SQLite fixture ran the real approved A/T and cross-type packages with 20/20 rows, 16 A/T, 4 cross-type, 15 repair, 5 verify-only, writes_committed=false, and cms_write_attempted=false."
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh passed in an isolated detached worktree at a570e3fc339767611d90e59fd74884d7e8c68b5f. Its Big Five compiled-pack rewrites were isolated as verification artifacts and are not part of this PR."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "transitions": [
+      {
+        "at": "2026-07-13T20:30:00+08:00",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started from a clean detached fap-api origin/main worktree after verifying MBTI-FULL-QA-36 is merged. Scope is a no-write dry-run only for the approved 16 A/T and four hot cross-type Chinese comparison assets; CMS writes, indexability, feeds, GSC, and deploy remain excluded."
+      },
+      {
+        "at": "2026-07-13T21:46:00+08:00",
+        "from": "in_progress",
+        "to": "local_validation_passed",
+        "note": "Focused comparisons tests, actual approved-package fixture dry-run, Big Five classifier freeze, Pint, YAML/JSON checks, scope validation, and the complete ci_verify_mbti.sh gate passed. No CMS, database, deploy, or search-channel write occurred."
+      }
+    ]
   }
 }

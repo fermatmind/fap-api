@@ -456,6 +456,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_full_comparison_import_dry_run_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityMbtiFullComparisonImportDryRun.php',
+            'backend/app/Services/Cms/MbtiFullComparisonImportDryRunPlanner.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_comparison_cms_import_dry_run_files(): void
     {
         $changed = [
@@ -5569,6 +5579,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiFullComparisonImportDryRunFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiComparisonCmsImportDryRunFile($file)) {
                 continue;
             }
@@ -7225,6 +7239,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbtiFullProfileImportDryRun.php',
             'backend/app/Services/Cms/MbtiFullProfileImportDryRunPlanner.php',
+        ], true);
+    }
+
+    private function isMbtiFullComparisonImportDryRunFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbtiFullComparisonImportDryRun.php',
+            'backend/app/Services/Cms/MbtiFullComparisonImportDryRunPlanner.php',
         ], true);
     }
 
