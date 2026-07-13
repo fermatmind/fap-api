@@ -833,6 +833,225 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ->assertJsonPath('personality_public_content_asset_v1.seo.title', 'Big Five range');
     }
 
+    public function test_big_five_v2_public_contract_projects_structured_visible_evidence_and_keeps_v1(): void
+    {
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'approved',
+            'index_eligible' => true,
+            'published_at' => now()->subDay(),
+            'last_reviewed_at' => now()->subHour(),
+            'authority_json' => [
+                'sources' => [[
+                    'id' => 'bfi2-2017',
+                    'title' => 'The Big Five Inventory–2',
+                    'author_or_organization' => 'Soto and John',
+                    'year' => 2017,
+                    'source_type' => 'peer_reviewed_research',
+                    'doi' => '10.1037/pspp0000096',
+                    'public_url' => 'https://doi.org/10.1037/pspp0000096',
+                    'accessed_at' => '2026-07-14',
+                    'claim_ids' => ['claim.big_five_dimensions'],
+                    'limitation' => 'This source does not make an individual diagnosis.',
+                ], [
+                    'id' => 'private-source-projection-guard',
+                    'title' => 'Stored source requiring read-path sanitization',
+                    'author_or_organization' => 'Contract fixture',
+                    'year' => 2026,
+                    'source_type' => 'other_public_source',
+                    'doi' => null,
+                    'public_url' => 'https://127.0.0.1/private',
+                    'accessed_at' => '2026-07-14',
+                    'claim_ids' => ['claim.projection_guard'],
+                    'limitation' => 'Synthetic fixture; not publishable evidence.',
+                ]],
+                'claim_mapping' => [[
+                    'claim_id' => 'claim.big_five_dimensions',
+                    'source_ids' => ['bfi2-2017'],
+                    'limitation' => 'Trait dimensions are descriptive, not deterministic.',
+                ]],
+                'limitations' => ['Public evidence supports model framing, not individual outcome prediction.'],
+                'author' => [
+                    'name' => 'FermatMind Editorial Team',
+                    'organization' => 'FermatMind',
+                    'role' => 'Author',
+                ],
+                'reviewer' => [
+                    'name' => 'Named Reviewer',
+                    'organization' => 'Independent Review',
+                    'role' => 'Reviewer',
+                ],
+                'visible_evidence_eligible' => true,
+                'schema_eligible' => true,
+            ],
+            'media_json' => [
+                'hero' => [
+                    'media_asset_id' => 101,
+                    'url' => 'https://assets.fermatmind.com/personality/big-five/hero.webp',
+                    'alt' => 'Five neutral markers representing the Big Five dimensions.',
+                ],
+                'inline' => [],
+                'og' => [
+                    'media_asset_id' => 102,
+                    'url' => 'https://assets.fermatmind.com/personality/big-five/og.webp',
+                    'alt' => 'Big Five evidence overview card.',
+                ],
+            ],
+            'schema_json' => [
+                '@type' => 'WebPage',
+                'name' => 'Big Five Personality',
+            ],
+        ]));
+
+        $response = $this->getJson('/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.contract_version', PersonalityPublicContentAsset::CONTRACT_VERSION_V1)
+            ->assertJsonPath('personality_public_content_asset_v2.contract_version', PersonalityPublicContentAsset::CONTRACT_VERSION_V2)
+            ->assertJsonPath('personality_public_content_asset_v2.compatible_v1_contract_version', PersonalityPublicContentAsset::CONTRACT_VERSION_V1)
+            ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.eligible', true)
+            ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.sources.0.id', 'bfi2-2017')
+            ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.sources.0.doi', '10.1037/pspp0000096')
+            ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.sources.1.public_url', null)
+            ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.claim_mapping.0.claim_id', 'claim.big_five_dimensions')
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.author.name', 'FermatMind Editorial Team')
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer.name', 'Named Reviewer')
+            ->assertJsonPath('personality_public_content_asset_v2.media_authority.hero.media_asset_id', 101)
+            ->assertJsonPath('personality_public_content_asset_v2.media_authority.og.media_asset_id', 102)
+            ->assertJsonPath('personality_public_content_asset_v2.schema_eligible', true);
+
+        $this->assertArrayNotHasKey('visible_evidence', $response->json('personality_public_content_asset_v1'));
+    }
+
+    public function test_big_five_v2_projection_fails_closed_for_legacy_authority_and_does_not_fabricate_people(): void
+    {
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            'evidence_notes_json' => ['Legacy narrative evidence note.'],
+            'authority_json' => [],
+        ]));
+
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.sources', [])
+            ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.claim_mapping', [])
+            ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.eligible', false)
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.author', null)
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer', null)
+            ->assertJsonPath('personality_public_content_asset_v2.schema_eligible', false);
+    }
+
+    public function test_enneagram_detail_contract_remains_v1_only(): void
+    {
+        PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_key' => 'enneagram',
+            'slug' => 'enneagram',
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'canonical_json' => ['path' => '/en/personality/enneagram'],
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+        ]));
+
+        $response = $this->getJson('/api/v0.5/personality-content-assets/enneagram/hub/enneagram?locale=en')
+            ->assertOk();
+
+        $this->assertArrayHasKey('personality_public_content_asset_v1', $response->json());
+        $this->assertArrayNotHasKey('personality_public_content_asset_v2', $response->json());
+    }
+
+    public function test_v2_contract_validates_structured_authority_without_enabling_gates_implicitly(): void
+    {
+        $contract = app(PersonalityPublicContentAssetContract::class);
+        $data = $contract->validateAsset($this->contractPayload([
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+            'authority' => [
+                'sources' => [[
+                    'id' => 'ipip-public',
+                    'title' => 'International Personality Item Pool',
+                    'author_or_organization' => 'IPIP',
+                    'year' => 2026,
+                    'source_type' => 'official_documentation',
+                    'doi' => null,
+                    'public_url' => 'https://ipip.ori.org/',
+                    'accessed_at' => '2026-07-14',
+                    'claim_ids' => ['claim.item_pool'],
+                    'limitation' => null,
+                ]],
+                'claim_mapping' => [[
+                    'claim_id' => 'claim.item_pool',
+                    'source_ids' => ['ipip-public'],
+                    'limitation' => null,
+                ]],
+                'limitations' => [],
+                'author' => null,
+                'reviewer' => null,
+                'visible_evidence_eligible' => false,
+                'schema_eligible' => false,
+            ],
+        ]));
+
+        $this->assertSame(PersonalityPublicContentAsset::CONTRACT_VERSION_V2, $data->contractVersion);
+        $this->assertSame('ipip-public', data_get($data->toModelAttributes(), 'authority_json.sources.0.id'));
+        $this->assertFalse((bool) data_get($data->toModelAttributes(), 'authority_json.visible_evidence_eligible'));
+        $this->assertFalse((bool) data_get($data->toModelAttributes(), 'authority_json.schema_eligible'));
+    }
+
+    public function test_v2_contract_rejects_unmapped_visible_evidence_unsafe_urls_and_v1_authority(): void
+    {
+        $contract = app(PersonalityPublicContentAssetContract::class);
+
+        foreach ([
+            $this->contractPayload([
+                'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+                'authority' => ['sources' => []],
+            ]),
+            $this->contractPayload([
+                'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+                'authority' => [
+                    'sources' => [],
+                    'claim_mapping' => [],
+                    'visible_evidence_eligible' => true,
+                    'schema_eligible' => false,
+                ],
+            ]),
+            $this->contractPayload([
+                'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+                'authority' => [
+                    'sources' => [[
+                        'id' => 'unsafe-source',
+                        'title' => 'Unsafe source',
+                        'author_or_organization' => 'Unknown',
+                        'year' => 2026,
+                        'source_type' => 'other_public_source',
+                        'public_url' => 'http://127.0.0.1/private',
+                        'claim_ids' => ['claim.unsafe'],
+                    ]],
+                    'claim_mapping' => [[
+                        'claim_id' => 'claim.unsafe',
+                        'source_ids' => ['missing-source'],
+                    ]],
+                    'visible_evidence_eligible' => false,
+                    'schema_eligible' => false,
+                ],
+                'media' => [
+                    'hero' => [
+                        'url' => 'https://example.com/unapproved.webp',
+                        'alt' => 'Unsafe host.',
+                    ],
+                ],
+            ]),
+        ] as $payload) {
+            try {
+                $contract->validateAsset($payload);
+                $this->fail('Expected V2 authority validation failure.');
+            } catch (ValidationException $exception) {
+                $this->assertNotEmpty($exception->errors());
+            }
+        }
+    }
+
     public function test_published_non_indexable_big_five_asset_suppresses_runtime_schema(): void
     {
         PersonalityPublicContentAsset::query()->create($this->assetAttributes([
@@ -994,6 +1213,7 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
                     'note' => 'Test fixture.',
                 ],
             ],
+            'authority_json' => [],
             'internal_links_json' => [],
             'is_public' => true,
             'index_eligible' => false,

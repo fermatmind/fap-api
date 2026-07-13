@@ -18,6 +18,7 @@ final readonly class PersonalityPublicContentAssetData
      * @param  array<string,mixed>  $schema
      * @param  array<string,mixed>  $methodBoundary
      * @param  array<int,array<string,mixed>>  $evidenceNotes
+     * @param  array<string,mixed>  $authority
      * @param  array<int,array<string,mixed>>  $internalLinks
      */
     public function __construct(
@@ -40,6 +41,7 @@ final readonly class PersonalityPublicContentAssetData
         public array $schema,
         public array $methodBoundary,
         public array $evidenceNotes,
+        public array $authority,
         public array $internalLinks,
         public bool $isPublic,
         public bool $indexEligible,
@@ -81,6 +83,7 @@ final readonly class PersonalityPublicContentAssetData
             schema: is_array($payload['schema'] ?? null) ? $payload['schema'] : [],
             methodBoundary: is_array($payload['method_boundary'] ?? null) ? $payload['method_boundary'] : [],
             evidenceNotes: array_values(is_array($payload['evidence_notes'] ?? null) ? $payload['evidence_notes'] : []),
+            authority: is_array($payload['authority'] ?? null) ? $payload['authority'] : [],
             internalLinks: array_values(is_array($payload['internal_links'] ?? null) ? $payload['internal_links'] : []),
             isPublic: (bool) ($payload['is_public'] ?? true),
             indexEligible: (bool) ($payload['index_eligible'] ?? false),
@@ -119,6 +122,7 @@ final readonly class PersonalityPublicContentAssetData
             'schema_json' => $this->schema,
             'method_boundary_json' => $this->methodBoundary,
             'evidence_notes_json' => $this->evidenceNotes,
+            'authority_json' => $this->authority,
             'internal_links_json' => $this->internalLinks,
             'is_public' => $this->isPublic,
             'index_eligible' => $this->indexEligible,

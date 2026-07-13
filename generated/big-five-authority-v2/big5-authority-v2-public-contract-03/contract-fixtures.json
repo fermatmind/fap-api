@@ -1,0 +1,86 @@
+{
+  "artifact": "BIG5-AUTHORITY-V2-PUBLIC-CONTRACT-03",
+  "valid_v2": {
+    "contract_version": "personality_public_asset.v2",
+    "compatible_v1_contract_version": "personality_public_asset.v1",
+    "framework": "big_five",
+    "visible_evidence": {
+      "sources": [
+        {
+          "id": "bfi2-2017",
+          "title": "The Big Five Inventory–2",
+          "author_or_organization": "Soto and John",
+          "year": 2017,
+          "source_type": "peer_reviewed_research",
+          "doi": "10.1037/pspp0000096",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "accessed_at": "2026-07-14T00:00:00+00:00",
+          "claim_ids": ["claim.big_five_dimensions"],
+          "limitation": "This source does not make an individual diagnosis."
+        }
+      ],
+      "claim_mapping": [
+        {
+          "claim_id": "claim.big_five_dimensions",
+          "source_ids": ["bfi2-2017"],
+          "limitation": "Trait dimensions are descriptive, not deterministic."
+        }
+      ],
+      "limitations": [
+        "Public evidence does not establish an individual diagnosis or deterministic outcome."
+      ],
+      "eligible": true
+    },
+    "editorial_authority": {
+      "author": null,
+      "reviewer": null,
+      "review_state": "review",
+      "last_reviewed_at": null,
+      "published_at": null,
+      "updated_at": "2026-07-14T00:00:00+00:00"
+    },
+    "media_authority": {
+      "hero": {
+        "media_asset_id": 101,
+        "url": "https://assets.fermatmind.com/personality/big-five/hero.webp",
+        "alt": "Five neutral markers representing Big Five dimensions."
+      },
+      "inline": [],
+      "og": null
+    },
+    "schema_eligible": false
+  },
+  "legacy_fail_closed": {
+    "contract_version": "personality_public_asset.v2",
+    "compatible_v1_contract_version": "personality_public_asset.v1",
+    "framework": "big_five",
+    "visible_evidence": {
+      "sources": [],
+      "claim_mapping": [],
+      "limitations": [],
+      "eligible": false
+    },
+    "editorial_authority": {
+      "author": null,
+      "reviewer": null,
+      "review_state": "draft",
+      "last_reviewed_at": null,
+      "published_at": null,
+      "updated_at": null
+    },
+    "media_authority": {
+      "hero": null,
+      "inline": [],
+      "og": null
+    },
+    "schema_eligible": false
+  },
+  "forbidden_behaviors": {
+    "fabricate_author": false,
+    "fabricate_reviewer": false,
+    "auto_enable_schema": false,
+    "auto_enable_indexability": false,
+    "production_migration_executed": false,
+    "cms_write_executed": false
+  }
+}

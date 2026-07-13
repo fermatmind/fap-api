@@ -6,7 +6,10 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 
 use App\Http\Controllers\Controller;
 use App\Models\PersonalityPublicContentAsset;
+use App\Services\Cms\PersonalityPublicContentAssetContract;
+use App\Support\PublicMediaUrlGuard;
 use App\Support\PublicSeoTitleNormalizer;
+use DateTimeImmutable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -77,11 +80,7 @@ final class PersonalityPublicContentAssetController extends Controller
             return $this->notFoundResponse();
         }
 
-        return response()->json([
-            'ok' => true,
-            'asset' => $this->assetPayload($asset),
-            'personality_public_content_asset_v1' => $this->assetPayload($asset),
-        ]);
+        return $this->detailResponse($asset);
     }
 
     public function showByCode(Request $request, string $framework, string $entityType, string $code): JsonResponse
@@ -117,11 +116,7 @@ final class PersonalityPublicContentAssetController extends Controller
             return $this->notFoundResponse();
         }
 
-        return response()->json([
-            'ok' => true,
-            'asset' => $this->assetPayload($asset),
-            'personality_public_content_asset_v1' => $this->assetPayload($asset),
-        ]);
+        return $this->detailResponse($asset);
     }
 
     private function validateReadQuery(Request $request): array|JsonResponse
@@ -177,7 +172,7 @@ final class PersonalityPublicContentAssetController extends Controller
         return [
             'id' => (int) $asset->id,
             'org_id' => (int) $asset->org_id,
-            'contract_version' => (string) $asset->contract_version,
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
             'framework' => (string) $asset->framework,
             'entity_type' => (string) $asset->entity_type,
             'code' => (string) $asset->entity_key,
@@ -214,6 +209,288 @@ final class PersonalityPublicContentAssetController extends Controller
             'last_reviewed_at' => $asset->last_reviewed_at?->toAtomString(),
             'updated_at' => $asset->updated_at?->toAtomString(),
         ];
+    }
+
+    private function detailResponse(PersonalityPublicContentAsset $asset): JsonResponse
+    {
+        $v1 = $this->assetPayload($asset);
+        $response = [
+            'ok' => true,
+            'asset' => $v1,
+            'personality_public_content_asset_v1' => $v1,
+        ];
+
+        if ((string) $asset->framework === PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE) {
+            $response['personality_public_content_asset_v2'] = $this->assetPayloadV2($asset, $v1);
+        }
+
+        return response()->json($response);
+    }
+
+    /**
+     * @param  array<string,mixed>  $v1
+     * @return array<string,mixed>
+     */
+    private function assetPayloadV2(PersonalityPublicContentAsset $asset, array $v1): array
+    {
+        $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
+        $sources = $this->canonicalSources((array) ($authority['sources'] ?? []));
+        $sourceIds = array_fill_keys(array_column($sources, 'id'), true);
+        $claimMapping = $this->canonicalClaimMapping(
+            (array) ($authority['claim_mapping'] ?? []),
+            $sourceIds
+        );
+        $visibleEvidenceEligible = ($authority['visible_evidence_eligible'] ?? false) === true
+            && $sources !== []
+            && $claimMapping !== [];
+        $schemaEligible = ($authority['schema_eligible'] ?? false) === true
+            && $visibleEvidenceEligible
+            && ($v1['schema_runtime_eligible'] ?? false) === true;
+
+        return array_replace($v1, [
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+            'compatible_v1_contract_version' => (string) ($v1['contract_version'] ?? PersonalityPublicContentAsset::CONTRACT_VERSION_V1),
+            'visible_evidence' => [
+                'sources' => $sources,
+                'claim_mapping' => $claimMapping,
+                'limitations' => $this->canonicalStringList((array) ($authority['limitations'] ?? [])),
+                'eligible' => $visibleEvidenceEligible,
+            ],
+            'editorial_authority' => [
+                'author' => $this->canonicalEditorialActor($authority['author'] ?? null),
+                'reviewer' => $this->canonicalEditorialActor($authority['reviewer'] ?? null),
+                'review_state' => (string) $asset->review_state,
+                'last_reviewed_at' => $asset->last_reviewed_at?->toAtomString(),
+                'published_at' => $asset->published_at?->toAtomString(),
+                'updated_at' => $asset->updated_at?->toAtomString(),
+            ],
+            'media_authority' => $this->canonicalMediaAuthority(
+                is_array($asset->media_json) ? $asset->media_json : []
+            ),
+            'schema_eligible' => $schemaEligible,
+        ]);
+    }
+
+    /**
+     * @param  array<int,mixed>  $items
+     * @return list<array<string,mixed>>
+     */
+    private function canonicalSources(array $items): array
+    {
+        $sources = [];
+        $seen = [];
+
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $id = $this->firstNonEmptyString($item['id'] ?? null);
+            $title = $this->firstNonEmptyString($item['title'] ?? null);
+            $authorOrOrganization = $this->firstNonEmptyString($item['author_or_organization'] ?? null);
+            $sourceType = $this->firstNonEmptyString($item['source_type'] ?? null);
+            $year = (int) ($item['year'] ?? 0);
+            if (
+                $id === null
+                || isset($seen[$id])
+                || $title === null
+                || $authorOrOrganization === null
+                || ! in_array($sourceType, PersonalityPublicContentAssetContract::SOURCE_TYPES, true)
+                || $year < 1800
+                || $year > (int) now()->year
+            ) {
+                continue;
+            }
+
+            $publicUrl = $this->publicHttpsUrl($item['public_url'] ?? null);
+            $doi = $this->firstNonEmptyString($item['doi'] ?? null);
+            if ($doi !== null && preg_match('/^10\.\d{4,9}\/[\-._;()\/:a-z0-9]+$/i', $doi) !== 1) {
+                $doi = null;
+            }
+
+            $seen[$id] = true;
+            $sources[] = [
+                'id' => $id,
+                'title' => $title,
+                'author_or_organization' => $authorOrOrganization,
+                'year' => $year,
+                'source_type' => $sourceType,
+                'doi' => $doi,
+                'public_url' => $publicUrl,
+                'accessed_at' => $this->dateValue($item['accessed_at'] ?? null),
+                'claim_ids' => $this->canonicalStringList((array) ($item['claim_ids'] ?? [])),
+                'limitation' => $this->firstNonEmptyString($item['limitation'] ?? null),
+            ];
+        }
+
+        return $sources;
+    }
+
+    /**
+     * @param  array<int,mixed>  $items
+     * @param  array<string,bool>  $sourceIds
+     * @return list<array<string,mixed>>
+     */
+    private function canonicalClaimMapping(array $items, array $sourceIds): array
+    {
+        $mapping = [];
+
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $claimId = $this->firstNonEmptyString($item['claim_id'] ?? null);
+            $resolvedSourceIds = array_values(array_filter(
+                $this->canonicalStringList((array) ($item['source_ids'] ?? [])),
+                static fn (string $sourceId): bool => isset($sourceIds[$sourceId])
+            ));
+            if ($claimId === null || $resolvedSourceIds === []) {
+                continue;
+            }
+
+            $mapping[] = [
+                'claim_id' => $claimId,
+                'source_ids' => $resolvedSourceIds,
+                'limitation' => $this->firstNonEmptyString($item['limitation'] ?? null),
+            ];
+        }
+
+        return $mapping;
+    }
+
+    /** @return array<string,string|null>|null */
+    private function canonicalEditorialActor(mixed $actor): ?array
+    {
+        if (! is_array($actor)) {
+            return null;
+        }
+
+        $name = $this->firstNonEmptyString($actor['name'] ?? null);
+        if ($name === null) {
+            return null;
+        }
+
+        return [
+            'name' => $name,
+            'organization' => $this->firstNonEmptyString($actor['organization'] ?? null),
+            'role' => $this->firstNonEmptyString($actor['role'] ?? null),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $media
+     * @return array{hero:array<string,mixed>|null,inline:list<array<string,mixed>>,og:array<string,mixed>|null}
+     */
+    private function canonicalMediaAuthority(array $media): array
+    {
+        $hero = $this->canonicalMediaRecord($media['hero'] ?? null);
+        if ($hero === null && (isset($media['image_url']) || isset($media['alt']))) {
+            $hero = $this->canonicalMediaRecord([
+                'url' => $media['image_url'] ?? null,
+                'alt' => $media['alt'] ?? null,
+            ]);
+        }
+
+        $inline = [];
+        foreach ((array) ($media['inline'] ?? []) as $item) {
+            $record = $this->canonicalMediaRecord($item);
+            if ($record !== null) {
+                $inline[] = $record;
+            }
+        }
+
+        return [
+            'hero' => $hero,
+            'inline' => $inline,
+            'og' => $this->canonicalMediaRecord($media['og'] ?? null),
+        ];
+    }
+
+    /** @return array<string,mixed>|null */
+    private function canonicalMediaRecord(mixed $record): ?array
+    {
+        if (! is_array($record)) {
+            return null;
+        }
+
+        $url = PublicMediaUrlGuard::sanitizeNullableUrl($record['url'] ?? null);
+        $mediaAssetId = max(0, (int) ($record['media_asset_id'] ?? 0));
+        $alt = $this->firstNonEmptyString($record['alt'] ?? null);
+        if (($url === null && $mediaAssetId === 0) || $alt === null) {
+            return null;
+        }
+
+        return [
+            'media_asset_id' => $mediaAssetId > 0 ? $mediaAssetId : null,
+            'url' => $url,
+            'alt' => $alt,
+        ];
+    }
+
+    /** @param array<int,mixed> $items @return list<string> */
+    private function canonicalStringList(array $items): array
+    {
+        $values = [];
+        foreach ($items as $item) {
+            $value = $this->firstNonEmptyString($item);
+            if ($value !== null) {
+                $values[] = $value;
+            }
+        }
+
+        return array_values(array_unique($values));
+    }
+
+    private function publicHttpsUrl(mixed $value): ?string
+    {
+        $url = $this->firstNonEmptyString($value);
+        if ($url === null || filter_var($url, FILTER_VALIDATE_URL) === false) {
+            return null;
+        }
+
+        $parts = parse_url($url);
+        if (
+            ! is_array($parts)
+            || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
+            || isset($parts['user'])
+            || isset($parts['pass'])
+            || (int) ($parts['port'] ?? 443) !== 443
+        ) {
+            return null;
+        }
+
+        $host = strtolower(trim((string) ($parts['host'] ?? '')));
+        if (
+            $host === ''
+            || in_array($host, ['localhost', '127.0.0.1', '::1'], true)
+            || (
+                filter_var($host, FILTER_VALIDATE_IP) !== false
+                && filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false
+            )
+            || (
+                filter_var($host, FILTER_VALIDATE_IP) === false
+                && filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) === false
+            )
+        ) {
+            return null;
+        }
+
+        return $url;
+    }
+
+    private function dateValue(mixed $value): ?string
+    {
+        $date = $this->firstNonEmptyString($value);
+        if ($date === null) {
+            return null;
+        }
+
+        try {
+            return (new DateTimeImmutable($date))->format(DATE_ATOM);
+        } catch (\Throwable) {
+            return null;
+        }
     }
 
     /**

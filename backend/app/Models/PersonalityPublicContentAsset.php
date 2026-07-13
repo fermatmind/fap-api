@@ -15,6 +15,13 @@ final class PersonalityPublicContentAsset extends Model
 
     public const CONTRACT_VERSION_V1 = 'personality_public_asset.v1';
 
+    public const CONTRACT_VERSION_V2 = 'personality_public_asset.v2';
+
+    public const CONTRACT_VERSIONS = [
+        self::CONTRACT_VERSION_V1,
+        self::CONTRACT_VERSION_V2,
+    ];
+
     public const FRAMEWORK_BIG_FIVE = 'big_five';
 
     public const FRAMEWORK_ENNEAGRAM = 'enneagram';
@@ -137,6 +144,7 @@ final class PersonalityPublicContentAsset extends Model
         'schema_json',
         'method_boundary_json',
         'evidence_notes_json',
+        'authority_json',
         'internal_links_json',
         'is_public',
         'index_eligible',
@@ -164,6 +172,7 @@ final class PersonalityPublicContentAsset extends Model
         'schema_json' => 'array',
         'method_boundary_json' => 'array',
         'evidence_notes_json' => 'array',
+        'authority_json' => 'array',
         'internal_links_json' => 'array',
         'is_public' => 'boolean',
         'index_eligible' => 'boolean',
@@ -194,7 +203,10 @@ final class PersonalityPublicContentAsset extends Model
             $asset->launch_state = self::normalizeLaunchState((string) $asset->launch_state);
             $asset->robots = self::normalizeRobots((string) ($asset->robots ?: self::ROBOTS_NOINDEX_FOLLOW));
             $asset->review_state = trim((string) ($asset->review_state ?: 'draft'));
-            $asset->contract_version = trim((string) ($asset->contract_version ?: self::CONTRACT_VERSION_V1));
+            $contractVersion = trim((string) ($asset->contract_version ?: self::CONTRACT_VERSION_V1));
+            $asset->contract_version = in_array($contractVersion, self::CONTRACT_VERSIONS, true)
+                ? $contractVersion
+                : self::CONTRACT_VERSION_V1;
 
             if (
                 $asset->launch_state !== self::LAUNCH_PUBLISHED

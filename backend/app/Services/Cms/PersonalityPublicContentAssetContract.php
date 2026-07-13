@@ -6,12 +6,22 @@ namespace App\Services\Cms;
 
 use App\DTO\Personality\PersonalityPublicContentAssetData;
 use App\Models\PersonalityPublicContentAsset;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 final class PersonalityPublicContentAssetContract
 {
+    public const SOURCE_TYPES = [
+        'peer_reviewed_research',
+        'official_documentation',
+        'professional_standard',
+        'book',
+        'dataset',
+        'other_public_source',
+    ];
+
     private const FORBIDDEN_PROGRAMMATIC_PAGE_PATTERNS = [
         '/32[-_]?ocean/i',
         '/ocean[-_]?32/i',
@@ -57,9 +67,54 @@ final class PersonalityPublicContentAssetContract
             'hreflang' => ['present', 'array'],
             'faq' => ['present', 'array'],
             'media' => ['present', 'array'],
+            'media.hero' => ['nullable', 'array'],
+            'media.hero.media_asset_id' => ['nullable', 'integer', 'min:1'],
+            'media.hero.url' => ['nullable', 'string', 'max:2048'],
+            'media.hero.alt' => ['nullable', 'string', 'max:500'],
+            'media.inline' => ['nullable', 'array'],
+            'media.inline.*' => ['array'],
+            'media.inline.*.media_asset_id' => ['nullable', 'integer', 'min:1'],
+            'media.inline.*.url' => ['nullable', 'string', 'max:2048'],
+            'media.inline.*.alt' => ['nullable', 'string', 'max:500'],
+            'media.og' => ['nullable', 'array'],
+            'media.og.media_asset_id' => ['nullable', 'integer', 'min:1'],
+            'media.og.url' => ['nullable', 'string', 'max:2048'],
+            'media.og.alt' => ['nullable', 'string', 'max:500'],
             'schema' => ['present', 'array'],
             'method_boundary' => ['present', 'array'],
             'evidence_notes' => ['present', 'array'],
+            'authority' => ['present', 'array'],
+            'authority.sources' => ['sometimes', 'array'],
+            'authority.sources.*' => ['array'],
+            'authority.sources.*.id' => ['required', 'string', 'max:128', 'regex:/^[a-z0-9][a-z0-9_.-]*$/i'],
+            'authority.sources.*.title' => ['required', 'string', 'max:500'],
+            'authority.sources.*.author_or_organization' => ['required', 'string', 'max:500'],
+            'authority.sources.*.year' => ['required', 'integer', 'min:1800', 'max:'.now()->year],
+            'authority.sources.*.source_type' => ['required', Rule::in(self::SOURCE_TYPES)],
+            'authority.sources.*.doi' => ['nullable', 'string', 'max:255', 'regex:/^10\.\d{4,9}\/[\-._;()\/:a-z0-9]+$/i'],
+            'authority.sources.*.public_url' => ['nullable', 'string', 'max:2048'],
+            'authority.sources.*.accessed_at' => ['nullable', 'date'],
+            'authority.sources.*.claim_ids' => ['present', 'array'],
+            'authority.sources.*.claim_ids.*' => ['string', 'max:128', 'regex:/^[a-z0-9][a-z0-9_.-]*$/i'],
+            'authority.sources.*.limitation' => ['nullable', 'string', 'max:2000'],
+            'authority.claim_mapping' => ['sometimes', 'array'],
+            'authority.claim_mapping.*' => ['array'],
+            'authority.claim_mapping.*.claim_id' => ['required', 'string', 'max:128', 'regex:/^[a-z0-9][a-z0-9_.-]*$/i'],
+            'authority.claim_mapping.*.source_ids' => ['present', 'array', 'min:1'],
+            'authority.claim_mapping.*.source_ids.*' => ['string', 'max:128', 'regex:/^[a-z0-9][a-z0-9_.-]*$/i'],
+            'authority.claim_mapping.*.limitation' => ['nullable', 'string', 'max:2000'],
+            'authority.limitations' => ['sometimes', 'array'],
+            'authority.limitations.*' => ['string', 'max:2000'],
+            'authority.author' => ['nullable', 'array'],
+            'authority.author.name' => ['nullable', 'string', 'max:255'],
+            'authority.author.organization' => ['nullable', 'string', 'max:255'],
+            'authority.author.role' => ['nullable', 'string', 'max:255'],
+            'authority.reviewer' => ['nullable', 'array'],
+            'authority.reviewer.name' => ['nullable', 'string', 'max:255'],
+            'authority.reviewer.organization' => ['nullable', 'string', 'max:255'],
+            'authority.reviewer.role' => ['nullable', 'string', 'max:255'],
+            'authority.visible_evidence_eligible' => ['sometimes', 'boolean'],
+            'authority.schema_eligible' => ['sometimes', 'boolean'],
             'internal_links' => ['present', 'array'],
             'is_public' => ['nullable', 'boolean'],
             'index_eligible' => ['nullable', 'boolean'],
@@ -67,7 +122,7 @@ final class PersonalityPublicContentAssetContract
             'llms_eligible' => ['nullable', 'boolean'],
             'launch_state' => ['nullable', Rule::in(PersonalityPublicContentAsset::LAUNCH_STATES)],
             'review_state' => ['nullable', 'string', 'max:32'],
-            'contract_version' => ['nullable', 'string', 'max:64'],
+            'contract_version' => ['nullable', Rule::in(PersonalityPublicContentAsset::CONTRACT_VERSIONS)],
             'source_package' => ['nullable', 'string', 'max:160'],
             'source_hash' => ['nullable', 'string', 'max:64'],
             'last_reviewed_at' => ['nullable', 'date'],
@@ -79,6 +134,8 @@ final class PersonalityPublicContentAssetContract
             $this->validateForbiddenProgrammaticPages($validator, $normalized);
             $this->validateNoPrivateResultModules($validator, $normalized);
             $this->validateCanonicalForIndexable($validator, $normalized);
+            $this->validateAuthorityV2($validator, $normalized);
+            $this->validateMediaAuthority($validator, $normalized);
         });
 
         if ($validator->fails()) {
@@ -154,6 +211,26 @@ final class PersonalityPublicContentAssetContract
         $payload['review_state'] = trim((string) ($payload['review_state'] ?? 'draft')) ?: 'draft';
         $payload['contract_version'] = trim((string) ($payload['contract_version'] ?? PersonalityPublicContentAsset::CONTRACT_VERSION_V1))
             ?: PersonalityPublicContentAsset::CONTRACT_VERSION_V1;
+        $payload['authority'] = is_array($payload['authority'] ?? null) ? $payload['authority'] : [];
+        if ($payload['contract_version'] === PersonalityPublicContentAsset::CONTRACT_VERSION_V2) {
+            $payload['authority']['sources'] = array_values(is_array($payload['authority']['sources'] ?? null)
+                ? $payload['authority']['sources']
+                : []);
+            $payload['authority']['claim_mapping'] = array_values(is_array($payload['authority']['claim_mapping'] ?? null)
+                ? $payload['authority']['claim_mapping']
+                : []);
+            $payload['authority']['limitations'] = array_values(is_array($payload['authority']['limitations'] ?? null)
+                ? $payload['authority']['limitations']
+                : []);
+            $payload['authority']['author'] = is_array($payload['authority']['author'] ?? null)
+                ? $payload['authority']['author']
+                : null;
+            $payload['authority']['reviewer'] = is_array($payload['authority']['reviewer'] ?? null)
+                ? $payload['authority']['reviewer']
+                : null;
+            $payload['authority']['visible_evidence_eligible'] = (bool) ($payload['authority']['visible_evidence_eligible'] ?? false);
+            $payload['authority']['schema_eligible'] = (bool) ($payload['authority']['schema_eligible'] ?? false);
+        }
 
         return $payload;
     }
@@ -258,5 +335,145 @@ final class PersonalityPublicContentAssetContract
         if ($path === '' || ! str_starts_with($path, '/')) {
             $validator->errors()->add('canonical.path', 'index_eligible assets require a canonical.path beginning with "/".');
         }
+    }
+
+    /** @param array<string,mixed> $payload */
+    private function validateAuthorityV2($validator, array $payload): void
+    {
+        $authority = is_array($payload['authority'] ?? null) ? $payload['authority'] : [];
+        $contractVersion = (string) ($payload['contract_version'] ?? PersonalityPublicContentAsset::CONTRACT_VERSION_V1);
+
+        if ($authority !== [] && $contractVersion !== PersonalityPublicContentAsset::CONTRACT_VERSION_V2) {
+            $validator->errors()->add('contract_version', 'Structured authority requires personality_public_asset.v2.');
+
+            return;
+        }
+
+        if ($contractVersion !== PersonalityPublicContentAsset::CONTRACT_VERSION_V2) {
+            return;
+        }
+
+        foreach (['author', 'reviewer'] as $actor) {
+            $value = $authority[$actor] ?? null;
+            if (is_array($value) && trim((string) ($value['name'] ?? '')) === '') {
+                $validator->errors()->add("authority.{$actor}.name", "{$actor}.name is required when {$actor} authority is provided.");
+            }
+        }
+
+        $sourceIds = [];
+        foreach ((array) ($authority['sources'] ?? []) as $index => $source) {
+            if (! is_array($source)) {
+                continue;
+            }
+
+            $sourceId = trim((string) ($source['id'] ?? ''));
+            if ($sourceId !== '' && isset($sourceIds[$sourceId])) {
+                $validator->errors()->add("authority.sources.{$index}.id", 'Source ids must be unique within one asset.');
+            }
+            if ($sourceId !== '') {
+                $sourceIds[$sourceId] = true;
+            }
+
+            $publicUrl = trim((string) ($source['public_url'] ?? ''));
+            if ($publicUrl !== '' && ! $this->isPublicHttpsUrl($publicUrl)) {
+                $validator->errors()->add("authority.sources.{$index}.public_url", 'Source public_url must be a public HTTPS URL.');
+            }
+        }
+
+        foreach ((array) ($authority['claim_mapping'] ?? []) as $index => $mapping) {
+            if (! is_array($mapping)) {
+                continue;
+            }
+
+            foreach ((array) ($mapping['source_ids'] ?? []) as $sourceId) {
+                if (! isset($sourceIds[(string) $sourceId])) {
+                    $validator->errors()->add(
+                        "authority.claim_mapping.{$index}.source_ids",
+                        'Every claim mapping source_id must resolve to authority.sources.'
+                    );
+                }
+            }
+        }
+
+        $visibleEvidenceEligible = (bool) ($authority['visible_evidence_eligible'] ?? false);
+        if ($visibleEvidenceEligible && ($sourceIds === [] || (array) ($authority['claim_mapping'] ?? []) === [])) {
+            $validator->errors()->add(
+                'authority.visible_evidence_eligible',
+                'Visible evidence eligibility requires at least one structured source and claim mapping.'
+            );
+        }
+
+        if ((bool) ($authority['schema_eligible'] ?? false)) {
+            $schemaReady = $visibleEvidenceEligible
+                && (bool) ($payload['index_eligible'] ?? false)
+                && (string) ($payload['launch_state'] ?? '') === PersonalityPublicContentAsset::LAUNCH_PUBLISHED
+                && PersonalityPublicContentAsset::normalizeRobots((string) ($payload['robots'] ?? '')) === PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW
+                && (array) ($payload['schema'] ?? []) !== [];
+
+            if (! $schemaReady) {
+                $validator->errors()->add(
+                    'authority.schema_eligible',
+                    'Schema eligibility requires explicit visible evidence plus the existing published/indexable/schema gates.'
+                );
+            }
+        }
+    }
+
+    /** @param array<string,mixed> $payload */
+    private function validateMediaAuthority($validator, array $payload): void
+    {
+        $media = is_array($payload['media'] ?? null) ? $payload['media'] : [];
+        $records = [];
+
+        foreach (['hero', 'og'] as $slot) {
+            if (is_array($media[$slot] ?? null) && $media[$slot] !== []) {
+                $records[] = [$slot, $media[$slot]];
+            }
+        }
+        foreach ((array) ($media['inline'] ?? []) as $index => $record) {
+            if (is_array($record) && $record !== []) {
+                $records[] = ["inline.{$index}", $record];
+            }
+        }
+
+        foreach ($records as [$slot, $record]) {
+            $url = trim((string) ($record['url'] ?? ''));
+            $mediaAssetId = (int) ($record['media_asset_id'] ?? 0);
+            $alt = trim((string) ($record['alt'] ?? ''));
+
+            if ($url === '' && $mediaAssetId <= 0) {
+                $validator->errors()->add("media.{$slot}", 'Media authority requires a public URL or media_asset_id.');
+            }
+            if ($url !== '' && PublicMediaUrlGuard::sanitizeNullableUrl($url) === null) {
+                $validator->errors()->add("media.{$slot}.url", 'Media authority URL must pass the public media allowlist.');
+            }
+            if ($alt === '') {
+                $validator->errors()->add("media.{$slot}.alt", 'Visible media authority requires non-empty alt text.');
+            }
+        }
+    }
+
+    private function isPublicHttpsUrl(string $url): bool
+    {
+        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+            return false;
+        }
+
+        $parts = parse_url($url);
+        if (! is_array($parts) || strtolower((string) ($parts['scheme'] ?? '')) !== 'https') {
+            return false;
+        }
+
+        if (isset($parts['user']) || isset($parts['pass']) || (int) ($parts['port'] ?? 443) !== 443) {
+            return false;
+        }
+
+        $host = strtolower(trim((string) ($parts['host'] ?? '')));
+        if ($host === '' || in_array($host, ['localhost', '127.0.0.1', '::1'], true)) {
+            return false;
+        }
+
+        return filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false
+            || filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) !== false;
     }
 }

@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:fermatmind:personality-public-asset:v2",
+  "title": "FermatMind Personality Public Content Asset V2",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "compatible_v1_contract_version",
+    "framework",
+    "visible_evidence",
+    "editorial_authority",
+    "media_authority",
+    "schema_eligible"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "personality_public_asset.v2"
+    },
+    "compatible_v1_contract_version": {
+      "const": "personality_public_asset.v1"
+    },
+    "framework": {
+      "const": "big_five"
+    },
+    "visible_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sources", "claim_mapping", "limitations", "eligible"],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "claim_mapping": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claim_mapping"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "eligible": {
+          "type": "boolean"
+        }
+      }
+    },
+    "editorial_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["author", "reviewer", "review_state", "last_reviewed_at", "published_at", "updated_at"],
+      "properties": {
+        "author": {
+          "$ref": "#/$defs/nullable_actor"
+        },
+        "reviewer": {
+          "$ref": "#/$defs/nullable_actor"
+        },
+        "review_state": {
+          "type": "string"
+        },
+        "last_reviewed_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "published_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        }
+      }
+    },
+    "media_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hero", "inline", "og"],
+      "properties": {
+        "hero": {
+          "$ref": "#/$defs/nullable_media"
+        },
+        "inline": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/media"
+          }
+        },
+        "og": {
+          "$ref": "#/$defs/nullable_media"
+        }
+      }
+    },
+    "schema_eligible": {
+      "type": "boolean"
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "author_or_organization",
+        "year",
+        "source_type",
+        "doi",
+        "public_url",
+        "accessed_at",
+        "claim_ids",
+        "limitation"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "author_or_organization": {
+          "type": "string",
+          "minLength": 1
+        },
+        "year": {
+          "type": "integer",
+          "minimum": 1800
+        },
+        "source_type": {
+          "enum": [
+            "peer_reviewed_research",
+            "official_documentation",
+            "professional_standard",
+            "book",
+            "dataset",
+            "other_public_source"
+          ]
+        },
+        "doi": {
+          "type": ["string", "null"]
+        },
+        "public_url": {
+          "type": ["string", "null"],
+          "pattern": "^https://"
+        },
+        "accessed_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitation": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "claim_mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "source_ids", "limitation"],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitation": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "organization", "role"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "organization": {
+          "type": ["string", "null"]
+        },
+        "role": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "nullable_actor": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/actor"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["media_asset_id", "url", "alt"],
+      "properties": {
+        "media_asset_id": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "url": {
+          "type": ["string", "null"],
+          "pattern": "^https://(?:api|assets)\\.fermatmind\\.com/"
+        },
+        "alt": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "nullable_media": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/media"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "additionalProperties": true
+}
