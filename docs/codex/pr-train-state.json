@@ -90049,8 +90049,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-RANGE-OPENNESS-10"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "8f4d2be36df6dfef1c6d6b342ccd30834ba2dfce",
+    "status": "ready_to_merge",
+    "commit_sha": "745cee6f8a6b2634f5c1b28d36488f20968a344c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3047",
     "checks": {
       "dependency": {
@@ -90066,8 +90066,8 @@
         "evidence": "Package validator passed exact 8-page coverage and fail-closed release gates; BigFiveAuthorityV211Test passed 5 tests / 227 assertions after the recorded test-order retry; touched PHP Pint passed; JSON, JavaScript, PHP, YAML, and ledger syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files; PR10-to-PR11 substantive body exact-copy check found zero matches."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #3047 opened from 8f4d2be36df6dfef1c6d6b342ccd30834ba2dfce after all manifest local checks passed."
+        "status": "pass",
+        "evidence": "PR #3047 head 745cee6f8a6b2634f5c1b28d36488f20968a344c passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
       }
     },
     "failure_reason": null,
@@ -90102,6 +90102,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Pushed the exact scoped branch and opened PR #3047; waiting for the complete required GitHub check set before merge."
+      },
+      {
+        "at": "2026-07-13T23:56:03Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head 745cee6f8a6b2634f5c1b28d36488f20968a344c; recorded ready-to-merge state before final ledger-only head validation."
       }
     ]
   },
