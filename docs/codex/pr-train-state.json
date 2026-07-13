@@ -90565,8 +90565,8 @@
       "SAEP-PT-07",
       "SAEP-PARITY-02"
     ],
-    "status": "local_checks_passed_retry",
-    "commit_sha": null,
+    "status": "committed_ready_to_push_retry",
+    "commit_sha": "b748c9da4c40ce3c250406af0ef5ebf68222973a",
     "pr_url": null,
     "checks": {
       "authorization": {
@@ -90587,7 +90587,7 @@
       },
       "local": {
         "status": "pass",
-        "evidence": "ScalesLookupTest passed 11 tests and 236 assertions with only the expected missing local .env warning; Pint passed both PHP files; PHP syntax, YAML, JSON, git diff --check and exact scope passed. A separate fap-web Vitest run was active, so no second heavy full validation was started."
+        "evidence": "ScalesLookupTest passed 11 tests and 236 assertions; the committed branch-diff freeze gate and its allow/block tests passed 3 tests and 7 assertions. Both runs had only the expected missing local .env warning. Pint passed both PHP files; PHP syntax, YAML, JSON, git diff --check and exact scope passed. A separate fap-web Vitest run was active, so no second heavy full validation was started."
       },
       "github": {
         "status": "not_run"
@@ -90634,6 +90634,11 @@
         "at": "2026-07-13T22:54:05Z",
         "status": "local_checks_passed_retry",
         "note": "Focused ScalesLookupTest, Pint, PHP syntax, YAML/JSON parsing, diff check and exact four-path scope validation passed."
+      },
+      {
+        "at": "2026-07-13T22:54:49Z",
+        "status": "committed_ready_to_push_retry",
+        "note": "Committed the exact four-path implementation at b748c9da4c40ce3c250406af0ef5ebf68222973a, then verified the committed branch diff passes the line-aware freeze gate while arbitrary controller changes remain blocked."
       }
     ]
   }
