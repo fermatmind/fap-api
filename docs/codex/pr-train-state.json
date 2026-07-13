@@ -89978,9 +89978,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACET-HUBS-09"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "62d1bbd1a84c34fa2f342c68c2fc57d02194af4a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3045",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -89989,6 +89989,10 @@
       "local": {
         "status": "pass",
         "evidence": "Package validator passed exact 8-page coverage and fail-closed release gates; BigFiveAuthorityV210Test passed 5 tests / 227 assertions; touched PHP Pint passed; JSON, JavaScript, PHP, YAML, and ledger syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #3045 opened from 62d1bbd1a84c34fa2f342c68c2fc57d02194af4a after all manifest local checks passed."
       }
     },
     "failure_reason": null,
@@ -90011,6 +90015,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All manifest local checks passed. Validation covers exact bilingual V2 range identities, independent legacy reader intents, middle-range specificity, value-neutral framing, closed release/CMS/redirect/indexability gates, source allowlists, duplicate detection, and exact 9-file scope."
+      },
+      {
+        "at": "2026-07-13T23:19:43Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3045; waiting for the complete required GitHub check set before merge."
       }
     ]
   },
