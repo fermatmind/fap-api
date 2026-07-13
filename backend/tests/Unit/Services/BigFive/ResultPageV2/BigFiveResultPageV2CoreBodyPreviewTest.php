@@ -387,6 +387,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_legacy_mbti_asset_cache_isolation(): void
+    {
+        $allowed = [
+            'backend/app/Services/Legacy/Mbti/Report/LegacyMbtiReportAssetRepository.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_variant_seo_metadata_refresh_files(): void
     {
         $changed = [
@@ -5699,6 +5712,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isLegacyMbtiReportAssetCacheIsolationFile($file)) {
+                continue;
+            }
+
             if ($this->isGotenbergPdfEngineSpikeFile($file)) {
                 continue;
             }
@@ -7449,6 +7466,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isMbtiPdfPayloadAuthorityFile(string $file): bool
     {
         return $file === 'backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php';
+    }
+
+    private function isLegacyMbtiReportAssetCacheIsolationFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Legacy/Mbti/Report/LegacyMbtiReportAssetRepository.php';
     }
 
     private function isGotenbergPdfEngineSpikeFile(string $file): bool
