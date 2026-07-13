@@ -90362,5 +90362,71 @@
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
     "transitions": []
+  },
+  "SAEP-PLANNED-PR-01": {
+    "id": "SAEP-PLANNED-PR-01",
+    "existing_pr_card_id": "SAEP-PRCARD-API-b1b66bc044d6",
+    "repo": "fap-api",
+    "title": "SAEP-PLANNED-PR-01 Expose explicit test public-state contract",
+    "base": "main",
+    "branch": "codex/saep-planned-pr-01-test-public-state",
+    "depends_on": [
+      "BIG5-COMMERCIAL-FIELD-BACKEND-AUTHORITY-FIX-01"
+    ],
+    "depends_on_atomic_tasks": [
+      "SAEP-PT-07",
+      "SAEP-PARITY-02"
+    ],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "The SAEP continuous-execution goal authorizes the locked PR01 card and append-only canonical manifest/state registration."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2418 merge commit 950b81cd23df85fb1de4ada2dfc5205f758f3284 is an ancestor of fap-api origin/main 9df5b2ea6d031352f34b0134d49dbba00ed4a08f."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "git diff contains exactly the two locked code files plus docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "ScalesLookupTest: 11 tests, 236 assertions passed with only the expected missing local .env warning; Pint passed 2 files; PHP syntax, YAML, JSON, git diff --check and exact scope passed. The first attempt loaded origin/main through a shared vendor symlink and failed only the two new is_public assertions; a local vendor copy corrected test isolation before the passing rerun."
+      },
+      "github": {
+        "status": "not_run"
+      }
+    },
+    "failure_reason": null,
+    "hold_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-13T20:33:31Z",
+        "status": "in_progress",
+        "note": "Started from latest main after direct public readback confirmed the missing lookup is_public field. The separate live sitemap/indexability conflict remains explicitly deferred."
+      },
+      {
+        "at": "2026-07-13T20:35:32Z",
+        "status": "local_check_retry_required",
+        "note": "The first focused test attempt loaded origin/main controller code through a shared vendor symlink, so only the two new is_public assertions failed. No product regression was observed; test isolation was repaired by copying ignored vendor dependencies into the worktree."
+      },
+      {
+        "at": "2026-07-13T20:37:22Z",
+        "status": "local_checks_passed",
+        "note": "Focused ScalesLookupTest passed 11 tests and 236 assertions; Pint, PHP syntax, YAML/JSON parsing, git diff --check and exact four-path scope validation passed."
+      }
+    ]
   }
 }
