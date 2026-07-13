@@ -1,0 +1,209 @@
+{
+  "schema_version": "big5_authority_v2_facet_hub_package.v1",
+  "train_id": "BIG5-AUTHORITY-V2-FACET-HUBS-09",
+  "artifact": "big5-authority-v2-facet-hubs-09-final",
+  "stage": "final",
+  "framework": "big_five",
+  "expected_page_count": 2,
+  "pages": [
+    {
+      "content_key": "big-five-facet-hub",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets",
+      "page_family": "facet_hub",
+      "framework": "big_five",
+      "title": "Big Five facets: a 30-facet map within five domains",
+      "summary": "Browse thirty narrower Big Five facets under their five parent domains, and use each link as an observation prompt rather than a diagnosis, rank, or fixed identity.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "definition": "A domain is a broad dimension such as Openness or Conscientiousness. A facet is a narrower tendency nested inside a domain. Facets help separate patterns that can differ even when two people have similar broad-domain results.",
+      "domain_facet_difference": "Treat the domain as the wide map and a facet as one route through it. A broad Extraversion result does not say whether warmth, assertiveness, activity, or excitement seeking contributed in the same way. The facet view adds resolution without turning thirty labels into thirty separate personalities.",
+      "how_to_use": "Start with the parent domain, choose one facet that matches the question you are investigating, and collect examples from at least two different contexts. Record counterexamples and situational explanations. Use the facet page to form a testable working hypothesis, not to explain every action after the fact.",
+      "misconceptions": "A facet is not a skill score, moral grade, diagnosis, job-fit filter, or independent personality type. High and low are not better and worse. One striking event cannot establish a stable tendency, and the thirty-facet inventory should not be converted into other personality frameworks or clinical labels.",
+      "method_boundary": "The linked structure reflects FermatMind's frozen Big Five public contract and the named hierarchical model. It does not prove the validity of an individual score, a universal facet taxonomy, clinical status, hiring suitability, or future outcomes. Culture, role, health, stress, opportunity, and measurement conditions may change observed behavior.",
+      "domain_groups": [
+        {
+          "domain_code": "openness",
+          "label": "Openness",
+          "domain_href": "/en/personality/big-five/openness",
+          "description": "Six facets narrow how a person engages imagination, aesthetics, feelings, varied actions, ideas, and reconsidered values.",
+          "facets": [
+            {"code": "imagination", "label": "Imagination", "focus": "mental simulation, fantasy, and invented possibilities", "href": "/en/personality/big-five/facets/imagination"},
+            {"code": "aesthetics", "label": "Aesthetics", "focus": "attention and response to art, design, and sensory form", "href": "/en/personality/big-five/facets/aesthetics"},
+            {"code": "feelings", "label": "Feelings", "focus": "awareness and exploration of one's emotional experience", "href": "/en/personality/big-five/facets/feelings"},
+            {"code": "actions", "label": "Actions", "focus": "willingness to vary routines and try unfamiliar activities", "href": "/en/personality/big-five/facets/actions"},
+            {"code": "ideas", "label": "Ideas", "focus": "engagement with concepts, arguments, and knowledge exploration", "href": "/en/personality/big-five/facets/ideas"},
+            {"code": "values", "label": "Values", "focus": "willingness to examine conventions and reconsider assumptions", "href": "/en/personality/big-five/facets/values"}
+          ]
+        },
+        {
+          "domain_code": "conscientiousness",
+          "label": "Conscientiousness",
+          "domain_href": "/en/personality/big-five/conscientiousness",
+          "description": "Six facets distinguish perceived competence, order, duty, achievement striving, sustained effort, and deliberation before action.",
+          "facets": [
+            {"code": "competence", "label": "Competence", "focus": "sense of practical capability and effective problem handling", "href": "/en/personality/big-five/facets/competence"},
+            {"code": "order", "label": "Order", "focus": "preference for organization, systems, and predictable placement", "href": "/en/personality/big-five/facets/order"},
+            {"code": "dutifulness", "label": "Dutifulness", "focus": "attention to commitments, rules, and obligations", "href": "/en/personality/big-five/facets/dutifulness"},
+            {"code": "achievement-striving", "label": "Achievement striving", "focus": "effort directed toward demanding standards and outcomes", "href": "/en/personality/big-five/facets/achievement-striving"},
+            {"code": "self-discipline", "label": "Self-discipline", "focus": "continuing tasks through boredom, fatigue, or distraction", "href": "/en/personality/big-five/facets/self-discipline"},
+            {"code": "deliberation", "label": "Deliberation", "focus": "considering consequences and reversibility before acting", "href": "/en/personality/big-five/facets/deliberation"}
+          ]
+        },
+        {
+          "domain_code": "extraversion",
+          "label": "Extraversion",
+          "domain_href": "/en/personality/big-five/extraversion",
+          "description": "Six facets separate interpersonal warmth and group preference from assertiveness, pace, stimulation seeking, and positive emotional expression.",
+          "facets": [
+            {"code": "warmth", "label": "Warmth", "focus": "friendly approach and ways of building interpersonal closeness", "href": "/en/personality/big-five/facets/warmth"},
+            {"code": "gregariousness", "label": "Gregariousness", "focus": "preference for company, groups, and shared activity", "href": "/en/personality/big-five/facets/gregariousness"},
+            {"code": "assertiveness", "label": "Assertiveness", "focus": "readiness to speak, lead, and influence a shared direction", "href": "/en/personality/big-five/facets/assertiveness"},
+            {"code": "activity", "label": "Activity", "focus": "preferred pace, busyness, and amount of active engagement", "href": "/en/personality/big-five/facets/activity"},
+            {"code": "excitement-seeking", "label": "Excitement seeking", "focus": "interest in intensity, novelty, and stimulating experiences", "href": "/en/personality/big-five/facets/excitement-seeking"},
+            {"code": "positive-emotions", "label": "Positive emotions", "focus": "frequency and expression of enthusiasm, joy, and related affect", "href": "/en/personality/big-five/facets/positive-emotions"}
+          ]
+        },
+        {
+          "domain_code": "agreeableness",
+          "label": "Agreeableness",
+          "domain_href": "/en/personality/big-five/agreeableness",
+          "description": "Six facets distinguish default trust, directness, helping, conflict response, self-presentation, and concern for another person's hardship.",
+          "facets": [
+            {"code": "trust", "label": "Trust", "focus": "default expectations about other people's intent and reliability", "href": "/en/personality/big-five/facets/trust"},
+            {"code": "straightforwardness", "label": "Straightforwardness", "focus": "direct expression and avoidance of manipulative presentation", "href": "/en/personality/big-five/facets/straightforwardness"},
+            {"code": "altruism", "label": "Altruism", "focus": "willingness to help and invest effort in another person's needs", "href": "/en/personality/big-five/facets/altruism"},
+            {"code": "compliance", "label": "Compliance", "focus": "response to conflict, pressure, and competing requests", "href": "/en/personality/big-five/facets/compliance"},
+            {"code": "modesty", "label": "Modesty", "focus": "ways of presenting personal importance and accomplishments", "href": "/en/personality/big-five/facets/modesty"},
+            {"code": "tender-mindedness", "label": "Tender-mindedness", "focus": "emotional concern for pain, vulnerability, and another person's situation", "href": "/en/personality/big-five/facets/tender-mindedness"}
+          ]
+        },
+        {
+          "domain_code": "neuroticism",
+          "label": "Neuroticism",
+          "domain_href": "/en/personality/big-five/neuroticism",
+          "description": "Six facets organize threat anticipation, anger, low mood language, social evaluation sensitivity, impulse difficulty, and stress vulnerability without making a diagnosis.",
+          "facets": [
+            {"code": "anxiety", "label": "Anxiety", "focus": "anticipation of threat, worry, and felt tension", "href": "/en/personality/big-five/facets/anxiety"},
+            {"code": "anger", "label": "Anger", "focus": "intensity of frustration, irritation, and hostile affect", "href": "/en/personality/big-five/facets/anger"},
+            {"code": "depression", "label": "Depression", "focus": "trait-language discouragement and low mood, not a clinical diagnosis", "href": "/en/personality/big-five/facets/depression"},
+            {"code": "self-consciousness", "label": "Self-consciousness", "focus": "sensitivity to scrutiny, embarrassment, and social evaluation", "href": "/en/personality/big-five/facets/self-consciousness"},
+            {"code": "impulsiveness", "label": "Impulsiveness", "focus": "difficulty resisting immediate urges under pressure", "href": "/en/personality/big-five/facets/impulsiveness"},
+            {"code": "vulnerability", "label": "Vulnerability", "focus": "felt difficulty coping and recovering as stress accumulates", "href": "/en/personality/big-five/facets/vulnerability"}
+          ]
+        }
+      ],
+      "claims": [
+        {"claim_id": "claim.big_five.hierarchical_domains_and_facets", "source_ids": ["academic.soto-john-2017-bfi2"]},
+        {"claim_id": "claim.fermatmind.non_diagnostic_boundary", "source_ids": ["official.fermatmind-public-contract-v2", "internal.public-claim-boundary-matrix"]}
+      ],
+      "visible_sources": [
+        {"source_id": "academic.goldberg-1990-big-five-structure", "citation_label": "Goldberg (1990), Big-Five factor structure", "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216", "limitation": "Supports broad factor structure, not FermatMind score validity or a universal facet inventory."},
+        {"source_id": "academic.soto-john-2017-bfi2", "citation_label": "Soto & John (2017), BFI-2 domains and facets", "public_url": "https://doi.org/10.1037/pspp0000096", "limitation": "Supports a named hierarchical domain-and-facet model; it does not validate every editorial example or individual result."}
+      ]
+    },
+    {
+      "content_key": "big-five-facet-hub",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets",
+      "page_family": "facet_hub",
+      "framework": "big_five",
+      "title": "大五人格侧面总览：五个维度下的 30 个观察入口",
+      "summary": "把 30 个较窄的侧面放回五个上位维度中浏览，用它们提出可核对的观察问题，而不是做诊断、排名或固定身份判断。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "definition": "维度是开放性、尽责性等较宽的连续倾向；侧面是嵌在维度内部、范围更窄的观察角度。即使两个人的维度结果接近，构成结果的侧面组合也可能不同。",
+      "domain_facet_difference": "可以把维度理解为一张区域地图，把侧面理解为地图中的具体路线。外向性结果相近，并不表示热情、果断、活跃或寻求刺激都以同样方式出现。侧面增加分辨率，但不会把 30 个词变成 30 种独立人格。",
+      "how_to_use": "先确认上位维度，再选择一个与你当前问题有关的侧面，至少从两个不同情境收集例子，同时记录反例和环境解释。侧面页面适合形成可以继续验证的工作假设，不适合事后为每个行为寻找单一标签。",
+      "misconceptions": "侧面不是能力分数、道德评价、诊断、招聘筛选器或独立人格类型。高低不等于好坏，一次突出表现不能证明稳定倾向，也不能把 30 个侧面换算成其他人格框架或临床标签。",
+      "method_boundary": "这里的层级和链接遵循费马测试冻结的大五公开 contract 与所引用的具体模型。它不证明个人分数有效，不宣称存在适用于所有模型的唯一侧面表，也不用于医疗、人事录用或未来结果判断。文化、角色、健康、压力、机会和测量条件都可能改变可观察行为。",
+      "domain_groups": [
+        {
+          "domain_code": "openness",
+          "label": "开放性",
+          "domain_href": "/zh/personality/big-five/openness",
+          "description": "六个侧面分别观察想象、审美、感受、行动、观念与价值，让“接近新经验”不只剩一个总分。",
+          "facets": [
+            {"code": "imagination", "label": "想象", "focus": "构造画面、设想可能与进入虚构世界的方式", "href": "/zh/personality/big-five/facets/imagination"},
+            {"code": "aesthetics", "label": "审美", "focus": "对艺术、设计和感官形式的留意与反应", "href": "/zh/personality/big-five/facets/aesthetics"},
+            {"code": "feelings", "label": "感受", "focus": "觉察、区分并探索自身情绪经验的方式", "href": "/zh/personality/big-five/facets/feelings"},
+            {"code": "actions", "label": "行动", "focus": "改变日常做法和尝试陌生活动的意愿", "href": "/zh/personality/big-five/facets/actions"},
+            {"code": "ideas", "label": "观念", "focus": "对概念、论证和知识探索的持续投入", "href": "/zh/personality/big-five/facets/ideas"},
+            {"code": "values", "label": "价值", "focus": "检视惯例并重新评估既有假设的意愿", "href": "/zh/personality/big-five/facets/values"}
+          ]
+        },
+        {
+          "domain_code": "conscientiousness",
+          "label": "尽责性",
+          "domain_href": "/zh/personality/big-five/conscientiousness",
+          "description": "六个侧面拆开胜任感、秩序、责任、成就追求、自律和审慎，让结构与执行的来源更清楚。",
+          "facets": [
+            {"code": "competence", "label": "胜任", "focus": "对实际能力与有效解决问题的主观感受", "href": "/zh/personality/big-five/facets/competence"},
+            {"code": "order", "label": "秩序", "focus": "对整理、系统和可预测摆放方式的偏好", "href": "/zh/personality/big-five/facets/order"},
+            {"code": "dutifulness", "label": "责任", "focus": "对承诺、规则和义务的持续重视程度", "href": "/zh/personality/big-five/facets/dutifulness"},
+            {"code": "achievement-striving", "label": "成就追求", "focus": "为较高标准和可见成果投入努力的方式", "href": "/zh/personality/big-five/facets/achievement-striving"},
+            {"code": "self-discipline", "label": "自律", "focus": "在无聊、疲倦或分心时继续推进既定任务", "href": "/zh/personality/big-five/facets/self-discipline"},
+            {"code": "deliberation", "label": "审慎", "focus": "行动前考虑后果、证据充分度与可逆性", "href": "/zh/personality/big-five/facets/deliberation"}
+          ]
+        },
+        {
+          "domain_code": "extraversion",
+          "label": "外向性",
+          "domain_href": "/zh/personality/big-five/extraversion",
+          "description": "六个侧面把人际热情和群体偏好，与果断、节奏、刺激需求及积极情绪表达分开观察。",
+          "facets": [
+            {"code": "warmth", "label": "热情", "focus": "友好接近和建立人际亲近感的具体方式", "href": "/zh/personality/big-five/facets/warmth"},
+            {"code": "gregariousness", "label": "合群", "focus": "对陪伴、群体和共同活动的偏好程度", "href": "/zh/personality/big-five/facets/gregariousness"},
+            {"code": "assertiveness", "label": "果断", "focus": "发言、引导和影响共同方向的主动程度", "href": "/zh/personality/big-five/facets/assertiveness"},
+            {"code": "activity", "label": "活跃", "focus": "偏好的生活节奏、忙碌程度和行动投入", "href": "/zh/personality/big-five/facets/activity"},
+            {"code": "excitement-seeking", "label": "寻求刺激", "focus": "对强度、新鲜与兴奋体验的兴趣程度", "href": "/zh/personality/big-five/facets/excitement-seeking"},
+            {"code": "positive-emotions", "label": "积极情绪", "focus": "热情、愉悦等情绪出现和表达的频率", "href": "/zh/personality/big-five/facets/positive-emotions"}
+          ]
+        },
+        {
+          "domain_code": "agreeableness",
+          "label": "宜人性",
+          "domain_href": "/zh/personality/big-five/agreeableness",
+          "description": "六个侧面区分默认信任、直接表达、帮助意愿、冲突反应、自我呈现和对他人困境的关切。",
+          "facets": [
+            {"code": "trust", "label": "信任", "focus": "信息不足时对他人意图与可靠性的默认预期", "href": "/zh/personality/big-five/facets/trust"},
+            {"code": "straightforwardness", "label": "坦率", "focus": "直接表达以及避免操纵性呈现的倾向", "href": "/zh/personality/big-five/facets/straightforwardness"},
+            {"code": "altruism", "label": "利他", "focus": "帮助他人并为其需要投入精力的意愿", "href": "/zh/personality/big-five/facets/altruism"},
+            {"code": "compliance", "label": "顺从", "focus": "面对冲突、压力和相互竞争诉求的反应", "href": "/zh/personality/big-five/facets/compliance"},
+            {"code": "modesty", "label": "谦逊", "focus": "呈现个人重要性与成就时采用的方式", "href": "/zh/personality/big-five/facets/modesty"},
+            {"code": "tender-mindedness", "label": "同情", "focus": "对痛苦、脆弱和他人处境的情感关切", "href": "/zh/personality/big-five/facets/tender-mindedness"}
+          ]
+        },
+        {
+          "domain_code": "neuroticism",
+          "label": "神经质",
+          "domain_href": "/zh/personality/big-five/neuroticism",
+          "description": "六个侧面整理威胁预期、愤怒、低落语言、社会评价敏感、冲动困难和压力脆弱，但不做心理健康诊断。",
+          "facets": [
+            {"code": "anxiety", "label": "焦虑", "focus": "对威胁的预期、担忧和紧张体验", "href": "/zh/personality/big-five/facets/anxiety"},
+            {"code": "anger", "label": "愤怒", "focus": "遭遇阻碍时挫折、恼怒与敌意情绪的强度", "href": "/zh/personality/big-five/facets/anger"},
+            {"code": "depression", "label": "抑郁", "focus": "特质语言中的低落和泄气，不是临床诊断", "href": "/zh/personality/big-five/facets/depression"},
+            {"code": "self-consciousness", "label": "自我意识", "focus": "对审视、尴尬和社会评价的敏感程度", "href": "/zh/personality/big-five/facets/self-consciousness"},
+            {"code": "impulsiveness", "label": "冲动", "focus": "压力下抵抗即时欲望时感到的困难", "href": "/zh/personality/big-five/facets/impulsiveness"},
+            {"code": "vulnerability", "label": "脆弱", "focus": "压力持续累积时感到难以应对与恢复的程度", "href": "/zh/personality/big-five/facets/vulnerability"}
+          ]
+        }
+      ],
+      "claims": [
+        {"claim_id": "claim.big_five.hierarchical_domains_and_facets", "source_ids": ["academic.soto-john-2017-bfi2"]},
+        {"claim_id": "claim.fermatmind.non_diagnostic_boundary", "source_ids": ["official.fermatmind-public-contract-v2", "internal.public-claim-boundary-matrix"]}
+      ],
+      "visible_sources": [
+        {"source_id": "academic.goldberg-1990-big-five-structure", "citation_label": "Goldberg（1990）：大五因子结构研究", "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216", "limitation": "支持宽泛因子结构，不证明费马测试个人分数有效，也不代表存在唯一通用侧面表。"},
+        {"source_id": "academic.soto-john-2017-bfi2", "citation_label": "Soto 与 John（2017）：BFI-2 维度与侧面", "public_url": "https://doi.org/10.1037/pspp0000096", "limitation": "支持一个明确命名的层级模型，不验证所有编辑示例或个人结果。"}
+      ]
+    }
+  ],
+  "workflow": {"raw_artifact": "raw-draft.json", "skeptical_review_artifact": "skeptical-review.json", "repaired_artifact": "repaired-draft.json", "final_artifact": "final-package.json", "raw_failures_preserved": true, "ai_detector_used": false},
+  "review_state": {"status": "pending_human_review", "reviewer": null, "approved_at": null, "publish_allowed": false, "schema_eligible": false},
+  "release_controls": {"cms_write_allowed": false, "indexability_change_allowed": false, "search_submission_allowed": false, "deploy_allowed": false}
+}

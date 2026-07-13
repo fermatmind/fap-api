@@ -1,0 +1,17 @@
+{
+  "schema_version": "big5_authority_v2_facet_hub_repair.v1",
+  "train_id": "BIG5-AUTHORITY-V2-FACET-HUBS-09",
+  "artifact": "big5-authority-v2-facet-hubs-09-repaired",
+  "stage": "repaired",
+  "framework": "big_five",
+  "expected_page_count": 2,
+  "required_intents": ["definition", "domain_facet_difference", "domain_groups", "how_to_use", "misconceptions", "method_boundary", "visible_sources"],
+  "pages": [
+    {"content_key": "big-five-facet-hub", "locale": "en", "canonical_path": "/en/personality/big-five/facets", "authoring_mode": "independent_editorial", "source_locale": null, "domain_group_count": 5, "facet_navigation_count": 30, "draft_excerpt": "Use a facet to narrow an observation inside its parent domain, then test that observation across several situations before drawing a conclusion.", "resolved_issue_codes": ["facet_navigation_incomplete", "outline_incomplete", "template_or_cliche_detected", "visible_sources_incomplete"]},
+    {"content_key": "big-five-facet-hub", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/facets", "authoring_mode": "independent_editorial", "source_locale": null, "domain_group_count": 5, "facet_navigation_count": 30, "draft_excerpt": "用侧面缩小上位维度中的观察范围，再把同一假设放进多个情境核对，同时记录反例与环境变化，避免从一次表现直接推断稳定人格。", "resolved_issue_codes": ["facet_navigation_incomplete", "locale_not_independently_authored", "outline_incomplete", "template_or_cliche_detected", "visible_sources_incomplete"]}
+  ],
+  "evidence_source_ids": ["academic.goldberg-1990-big-five-structure", "academic.soto-john-2017-bfi2", "official.fermatmind-public-contract-v2", "internal.public-claim-boundary-matrix"],
+  "workflow": {"raw_artifact": "raw-draft.json", "skeptical_review_artifact": "skeptical-review.json", "raw_failures_preserved": true, "ai_detector_used": false},
+  "review_state": {"status": "pending_human_review", "reviewer": null, "approved_at": null, "publish_allowed": false, "schema_eligible": false},
+  "release_controls": {"cms_write_allowed": false, "indexability_change_allowed": false, "search_submission_allowed": false, "deploy_allowed": false}
+}
