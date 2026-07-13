@@ -90565,9 +90565,9 @@
       "SAEP-PT-07",
       "SAEP-PARITY-02"
     ],
-    "status": "committed_ready_to_push_retry",
-    "commit_sha": "b748c9da4c40ce3c250406af0ef5ebf68222973a",
-    "pr_url": null,
+    "status": "pr_open_checks_pending_retry",
+    "commit_sha": "1ef04224e648bfa9c0206710bdca76a9b947d625",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3044",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -90590,7 +90590,9 @@
         "evidence": "ScalesLookupTest passed 11 tests and 236 assertions; the committed branch-diff freeze gate and its allow/block tests passed 3 tests and 7 assertions. Both runs had only the expected missing local .env warning. Pint passed both PHP files; PHP syntax, YAML, JSON, git diff --check and exact scope passed. A separate fap-web Vitest run was active, so no second heavy full validation was started."
       },
       "github": {
-        "status": "not_run"
+        "status": "pending",
+        "checked_at": "2026-07-13T22:56:20Z",
+        "evidence": "PR #3044 is open from the rebuilt exact-scope branch; required checks will run on the final ledger commit."
       }
     },
     "failure_reason": null,
@@ -90639,6 +90641,11 @@
         "at": "2026-07-13T22:54:49Z",
         "status": "committed_ready_to_push_retry",
         "note": "Committed the exact four-path implementation at b748c9da4c40ce3c250406af0ef5ebf68222973a, then verified the committed branch diff passes the line-aware freeze gate while arbitrary controller changes remain blocked."
+      },
+      {
+        "at": "2026-07-13T22:56:20Z",
+        "status": "pr_open_checks_pending_retry",
+        "note": "The original closed PR could not be reopened after branch recreation, so the same exact task opened PR #3044; no second task PR is open."
       }
     ]
   }
