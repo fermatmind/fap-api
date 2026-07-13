@@ -89899,8 +89899,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-DOMAINS-08"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "a8378bbaf7baa9213248f94d76d95dd1ad13dd33",
+    "status": "merged",
+    "commit_sha": "9f14aad481eca53d7c4628b0c118dc9460102c0e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3043",
     "checks": {
       "dependency": {
@@ -89925,13 +89925,13 @@
       },
       "github_required_checks": {
         "status": "pass",
-        "evidence": "All 9 GitHub checks passed on head 064b11c9ad5265893fa4cb7174d6b1b91576b6fd: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. GitHub reports MERGEABLE/CLEAN; the final ledger head will be revalidated before squash merge."
+        "evidence": "All 9 GitHub checks passed on final head 3d0e6733f49e12a005f2bb9e88b426a76c6d0532: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-13T23:02:55Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -89960,6 +89960,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 required GitHub checks passed on head 064b11c9ad5265893fa4cb7174d6b1b91576b6fd. GitHub reports PR #3043 MERGEABLE/CLEAN; the final ledger head will be revalidated before squash merge."
+      },
+      {
+        "at": "2026-07-13T23:04:33Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #3043 as squash-merged at 2026-07-13T23:02:55Z with merge 9f14aad481eca53d7c4628b0c118dc9460102c0e. origin/main containment, all 9 checks on final head 3d0e6733f49e12a005f2bb9e88b426a76c6d0532, remote deletion, local post_merge_cleanup, and post-merge validator plus 5 tests / 181 assertions passed."
       }
     ]
   },
@@ -89972,10 +89978,23 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACET-HUBS-09"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "83eb9d5b5938eedaaa74756c672bccb0e5464f52",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3045",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-FACET-HUBS-09 PR #3043 is MERGED as 9f14aad481eca53d7c4628b0c118dc9460102c0e; origin/main contains the merge and post-merge validation/cleanup completed."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact 8-page coverage and fail-closed release gates; BigFiveAuthorityV210Test passed 5 tests / 227 assertions; touched PHP Pint passed; JSON, JavaScript, PHP, YAML, and ledger syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3045 head 83eb9d5b5938eedaaa74756c672bccb0e5464f52 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -89984,7 +90003,32 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-13T23:04:33Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR10 from clean latest fap-api main after reconciling PR09. Scope is exactly eight openness range drafts: EN/ZH high, middle, and low V2 pages plus independent-intent EN high-openness and low-openness legacy canonicals; redirect/canonical graph, CMS writes, runtime changes, publication, deployment, and indexability mutations remain forbidden."
+      },
+      {
+        "at": "2026-07-13T23:18:03Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All manifest local checks passed. Validation covers exact bilingual V2 range identities, independent legacy reader intents, middle-range specificity, value-neutral framing, closed release/CMS/redirect/indexability gates, source allowlists, duplicate detection, and exact 9-file scope."
+      },
+      {
+        "at": "2026-07-13T23:19:43Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3045; waiting for the complete required GitHub check set before merge."
+      },
+      {
+        "at": "2026-07-13T23:26:11Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head 83eb9d5b5938eedaaa74756c672bccb0e5464f52; recorded ready-to-merge state before final ledger-only head validation."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11": {
     "id": "BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11",
