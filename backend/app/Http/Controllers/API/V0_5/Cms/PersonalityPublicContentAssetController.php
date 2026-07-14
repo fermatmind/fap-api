@@ -841,8 +841,50 @@ final class PersonalityPublicContentAssetController extends Controller
     /** @param array<string,mixed> $payload */
     private function publicReadResponse(array $payload, string $cacheState): JsonResponse
     {
-        return response()->json($payload)
+        return response()->json($this->canonicalPublicReadPayload($payload))
             ->header(self::PUBLIC_READ_CACHE_HEADER, $cacheState);
+    }
+
+    /**
+     * Normalize active/LKG entries written by the previous response projection.
+     *
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function canonicalPublicReadPayload(array $payload): array
+    {
+        unset($payload['asset']);
+
+        if (is_array($payload['personality_public_content_asset_v1'] ?? null)) {
+            unset($payload['personality_public_content_asset_v1']['content_sections']);
+        }
+
+        if (is_array($payload['personality_public_content_asset_v2'] ?? null)) {
+            $payload['personality_public_content_asset_v2'] = array_intersect_key(
+                $payload['personality_public_content_asset_v2'],
+                array_fill_keys([
+                    'contract_version',
+                    'compatible_v1_contract_version',
+                    'visible_evidence',
+                    'editorial_authority',
+                    'media_authority',
+                    'schema_eligible',
+                ], true),
+            );
+        }
+
+        if (is_array($payload['items'] ?? null)) {
+            foreach ($payload['items'] as $index => $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+
+                unset($item['content_sections']);
+                $payload['items'][$index] = $item;
+            }
+        }
+
+        return $payload;
     }
 
     private function staleResponseOrThrow(

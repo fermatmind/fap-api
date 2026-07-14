@@ -1894,6 +1894,94 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonMissingPath('items.0.content_sections');
     }
 
+    public function test_personality_asset_responses_normalize_legacy_active_and_lkg_payloads(): void
+    {
+        Cache::flush();
+        $asset = $this->createPublicContentAsset([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_DOMAIN,
+            'entity_key' => 'openness',
+            'slug' => 'big-five/openness',
+            'title' => 'Openness',
+            'content_sections_json' => [[
+                'key' => 'overview',
+                'title' => 'Overview',
+                'body_md' => 'Reviewed public section.',
+            ]],
+        ]);
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $detailPath = '/api/v0.5/personality-content-assets/big_five/domain/openness?locale=en';
+        $indexPath = '/api/v0.5/personality-content-assets?framework=big_five&locale=en&per_page=100';
+
+        $detailResponse = $this->getJson($detailPath)->assertOk();
+        $legacyDetail = $detailResponse->json();
+        $v1 = $detailResponse->json('personality_public_content_asset_v1');
+        $v2 = $detailResponse->json('personality_public_content_asset_v2');
+        self::assertIsArray($legacyDetail);
+        self::assertIsArray($v1);
+        self::assertIsArray($v2);
+        $legacyDetail['asset'] = $v1;
+        $legacyDetail['personality_public_content_asset_v1']['content_sections'] = $v1['sections'];
+        $legacyDetail['personality_public_content_asset_v2'] = array_replace($v1, $v2, [
+            'content_sections' => $v1['sections'],
+        ]);
+        $cache->put(
+            'detail-code',
+            'big_five',
+            'domain',
+            'openness',
+            'en',
+            0,
+            $cache->versionFor($asset),
+            $legacyDetail,
+        );
+
+        $indexResponse = $this->getJson($indexPath)->assertOk();
+        $legacyIndex = $indexResponse->json();
+        self::assertIsArray($legacyIndex);
+        self::assertIsArray($legacyIndex['items'][0] ?? null);
+        $legacyIndex['items'][0]['content_sections'] = $legacyIndex['items'][0]['sections'];
+        $pagination = ['current_page' => 1, 'per_page' => 100, 'total' => 1, 'last_page' => 1];
+        $cache->put(
+            'index',
+            'big_five',
+            'all',
+            'page:1:per-page:100',
+            'en',
+            0,
+            $cache->collectionVersion([$asset], $pagination),
+            $legacyIndex,
+        );
+
+        $this->getJson($detailPath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh')
+            ->assertJsonMissingPath('asset')
+            ->assertJsonMissingPath('personality_public_content_asset_v1.content_sections')
+            ->assertJsonMissingPath('personality_public_content_asset_v2.title')
+            ->assertJsonMissingPath('personality_public_content_asset_v2.sections')
+            ->assertJsonMissingPath('personality_public_content_asset_v2.content_sections');
+        $this->getJson($indexPath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh')
+            ->assertJsonMissingPath('items.0.content_sections');
+
+        DB::table('personality_public_content_assets')
+            ->where('id', $asset->id)
+            ->update(['title' => "\xB1\x31"]);
+
+        $this->getJson($detailPath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+            ->assertJsonMissingPath('asset')
+            ->assertJsonMissingPath('personality_public_content_asset_v1.content_sections')
+            ->assertJsonMissingPath('personality_public_content_asset_v2.title');
+        $this->getJson($indexPath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+            ->assertJsonMissingPath('items.0.content_sections');
+    }
+
     private function expectedSearchIntentSeoTitle(string $locale, string $runtimeTypeCode, string $typeName): string
     {
         $typeLabel = trim($runtimeTypeCode.' '.$typeName);
