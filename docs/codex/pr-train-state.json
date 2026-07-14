@@ -91299,7 +91299,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "f324307b2c92270abc6f4e88cf99e8b80384482b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3073",
     "checks": {
@@ -91310,6 +91310,10 @@
       "local": {
         "status": "pass",
         "evidence": "Package validator passed exact PR21 batch 28 coverage: 5 locked learning-and-habits themes, 10 EN/zh-CN Article candidates, exact slugs/questions/audiences/tasks/keywords/sources/links, nine reader/evidence sections, full raw-review-repair-final-mapping chain, null attribution, pending_manual_review, and zero CMS/publication/indexability mutations. The first validator run exposed a self-conflicting forbidden phrase that matched the article's explicit prohibition on guaranteed achievement; the validator was narrowed to affirmative guarantee claims and then passed. Every asset separates preference from task evidence and prohibits learning-style prescription, procrastination diagnosis or moral blame, creativity or decision-quality scoring, fixed ability, guaranteed achievement, and high-stakes advice. BigFiveAuthorityV228Test passed with 4 tests / 165 assertions. Pint --test, PHP/JSON/JavaScript/YAML syntax, git diff --check, and exact 11-file allowlist checks passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "All 9 GitHub checks passed on ledger-updated head ccaa5dd1d450ec3d0fa0f02f4dd34d248be54319: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload. GitHub reported CLEAN merge state and the changed-file set remained exactly the 11 allowed files."
       }
     },
     "failure_reason": null,
@@ -91338,6 +91342,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Committed the exact 11-file PR28 scope as f324307b2c92270abc6f4e88cf99e8b80384482b, pushed codex/big5-authority-v2-article-learning-habits-28, and opened PR #3073. Waiting for required GitHub checks on the ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T08:59:26Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on ledger-updated head ccaa5dd1d450ec3d0fa0f02f4dd34d248be54319, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
       }
     ]
   },
