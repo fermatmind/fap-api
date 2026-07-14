@@ -31,6 +31,7 @@ final class PersonalityPublicAssetReadModelCache
         string $locale,
         int $orgId,
         string $version,
+        ?string $fenceToken = null,
     ): array {
         if (! $this->isCacheable($surface, $framework, $entityType, $selector, $locale, $orgId)) {
             $this->recordState($surface, $framework, $entityType, $locale, 'bypass');
@@ -39,7 +40,70 @@ final class PersonalityPublicAssetReadModelCache
         }
 
         try {
-            $payload = Cache::get($this->key($surface, $framework, $entityType, $selector, $locale, $version));
+            $payload = null;
+            $this->withSurfaceLock(
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                function () use (
+                    $surface,
+                    $framework,
+                    $entityType,
+                    $selector,
+                    $locale,
+                    $version,
+                    $fenceToken,
+                    &$payload,
+                ): void {
+                    $expectedFence = $fenceToken ?? $this->currentFenceToken(
+                        $surface,
+                        $framework,
+                        $entityType,
+                        $selector,
+                        $locale,
+                    );
+                    if (! $this->fenceMatches(
+                        $surface,
+                        $framework,
+                        $entityType,
+                        $selector,
+                        $locale,
+                        $expectedFence,
+                    )) {
+                        return;
+                    }
+
+                    $candidate = Cache::get(
+                        $this->key($surface, $framework, $entityType, $selector, $locale, $version)
+                    );
+                    if (! is_array($candidate)) {
+                        return;
+                    }
+
+                    if ($surface === 'index') {
+                        $this->registerCollectionSelector($framework, $entityType, $selector, $locale);
+                    }
+
+                    Cache::put(
+                        $this->activeKey($surface, $framework, $entityType, $selector, $locale),
+                        $version,
+                        self::TTL_SECONDS,
+                    );
+                    if (! is_string(Cache::get(
+                        $this->lkgKey($surface, $framework, $entityType, $selector, $locale)
+                    ))) {
+                        Cache::put(
+                            $this->lkgKey($surface, $framework, $entityType, $selector, $locale),
+                            $version,
+                            self::LKG_TTL_SECONDS,
+                        );
+                    }
+
+                    $payload = $candidate;
+                },
+            );
         } catch (Throwable $throwable) {
             $this->recordState($surface, $framework, $entityType, $locale, 'bypass', $throwable);
 
@@ -50,23 +114,6 @@ final class PersonalityPublicAssetReadModelCache
             $this->recordState($surface, $framework, $entityType, $locale, 'miss');
 
             return ['state' => 'miss', 'payload' => null];
-        }
-
-        try {
-            Cache::put(
-                $this->activeKey($surface, $framework, $entityType, $selector, $locale),
-                $version,
-                self::TTL_SECONDS,
-            );
-            if (! is_string(Cache::get($this->lkgKey($surface, $framework, $entityType, $selector, $locale)))) {
-                Cache::put(
-                    $this->lkgKey($surface, $framework, $entityType, $selector, $locale),
-                    $version,
-                    self::LKG_TTL_SECONDS,
-                );
-            }
-        } catch (Throwable) {
-            // The versioned payload is already usable. Pointer repair is best effort.
         }
 
         $this->recordState($surface, $framework, $entityType, $locale, 'fresh');
@@ -127,6 +174,7 @@ final class PersonalityPublicAssetReadModelCache
         int $orgId,
         string $version,
         array $payload,
+        ?string $fenceToken = null,
     ): void {
         if (! $this->isCacheable($surface, $framework, $entityType, $selector, $locale, $orgId)) {
             return;
@@ -142,7 +190,39 @@ final class PersonalityPublicAssetReadModelCache
                 self::LKG_TTL_SECONDS,
             );
 
-            $publishPointers = function () use ($activeKey, $lkgKey, $version): void {
+            $publishPointers = function () use (
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $activeKey,
+                $lkgKey,
+                $version,
+                $fenceToken,
+            ): void {
+                $expectedFence = $fenceToken ?? $this->currentFenceToken(
+                    $surface,
+                    $framework,
+                    $entityType,
+                    $selector,
+                    $locale,
+                );
+                if (! $this->fenceMatches(
+                    $surface,
+                    $framework,
+                    $entityType,
+                    $selector,
+                    $locale,
+                    $expectedFence,
+                )) {
+                    return;
+                }
+
+                if ($surface === 'index') {
+                    $this->registerCollectionSelector($framework, $entityType, $selector, $locale);
+                }
+
                 $previousVersion = Cache::get($activeKey);
                 if (is_string($previousVersion) && $previousVersion !== '' && $previousVersion !== $version) {
                     Cache::put($lkgKey, $previousVersion, self::LKG_TTL_SECONDS);
@@ -152,21 +232,14 @@ final class PersonalityPublicAssetReadModelCache
                 Cache::put($activeKey, $version, self::TTL_SECONDS);
             };
 
-            if ($surface === 'index') {
-                $this->withCollectionLock(
-                    $framework,
-                    $entityType,
-                    $locale,
-                    function () use ($framework, $entityType, $selector, $locale, $publishPointers): void {
-                        $this->registerCollectionSelector($framework, $entityType, $selector, $locale);
-                        $publishPointers();
-                    },
-                );
-
-                return;
-            }
-
-            $publishPointers();
+            $this->withSurfaceLock(
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $publishPointers,
+            );
         } catch (Throwable $throwable) {
             $this->recordState($surface, $framework, $entityType, $locale, 'bypass', $throwable);
         }
@@ -186,24 +259,30 @@ final class PersonalityPublicAssetReadModelCache
         }
 
         try {
-            $activeKey = $this->activeKey($surface, $framework, $entityType, $selector, $locale);
-            $lkgKey = $this->lkgKey($surface, $framework, $entityType, $selector, $locale);
-            $activeVersion = Cache::get($activeKey);
-
-            if ($preserveLkg && is_string($activeVersion) && $activeVersion !== '') {
-                Cache::put($lkgKey, $activeVersion, self::LKG_TTL_SECONDS);
-            }
-            Cache::forget($activeKey);
-            if (! $preserveLkg) {
-                Cache::forget($lkgKey);
-            }
-
-            $this->recordState(
+            $this->withSurfaceLock(
                 $surface,
                 $framework,
                 $entityType,
+                $selector,
                 $locale,
-                $preserveLkg ? 'invalidated' : 'withdrawn',
+                function () use (
+                    $surface,
+                    $framework,
+                    $entityType,
+                    $selector,
+                    $locale,
+                    $preserveLkg,
+                ): void {
+                    $this->rotateFence($surface, $framework, $entityType, $selector, $locale);
+                    $this->invalidatePointersUnlocked(
+                        $surface,
+                        $framework,
+                        $entityType,
+                        $selector,
+                        $locale,
+                        $preserveLkg,
+                    );
+                },
             );
         } catch (Throwable $throwable) {
             $this->recordState($surface, $framework, $entityType, $locale, 'bypass', $throwable);
@@ -244,9 +323,15 @@ final class PersonalityPublicAssetReadModelCache
                         $framework,
                         $collectionEntityType,
                         $locale,
-                        $orgId,
                         $preserveLkg,
                     ): void {
+                        $this->rotateFence(
+                            'index',
+                            $framework,
+                            $collectionEntityType,
+                            '',
+                            $locale,
+                        );
                         $registered = Cache::get(
                             $this->collectionRegistryKey($framework, $collectionEntityType, $locale),
                             [],
@@ -260,13 +345,12 @@ final class PersonalityPublicAssetReadModelCache
                                 continue;
                             }
 
-                            $this->invalidate(
+                            $this->invalidatePointersUnlocked(
                                 'index',
                                 $framework,
                                 $collectionEntityType,
                                 $selector,
                                 $locale,
-                                $orgId,
                                 $preserveLkg,
                             );
                         }
@@ -338,6 +422,27 @@ final class PersonalityPublicAssetReadModelCache
         return $this->pointerPrefix($surface, $framework, $entityType, $selector, $locale).':lkg';
     }
 
+    public function captureFence(
+        string $surface,
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+        int $orgId,
+    ): string {
+        if (! $this->isCacheable($surface, $framework, $entityType, $selector, $locale, $orgId)) {
+            return '';
+        }
+
+        try {
+            return $this->currentFenceToken($surface, $framework, $entityType, $selector, $locale);
+        } catch (Throwable $throwable) {
+            $this->recordState($surface, $framework, $entityType, $locale, 'bypass', $throwable);
+
+            return '';
+        }
+    }
+
     private function pointerPrefix(
         string $surface,
         string $framework,
@@ -391,6 +496,110 @@ final class PersonalityPublicAssetReadModelCache
             strtolower($framework),
             strtolower($entityType),
         ]);
+    }
+
+    private function fenceKey(
+        string $surface,
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+    ): string {
+        if ($surface === 'index') {
+            return $this->collectionRegistryKey($framework, $entityType, $locale).':fence';
+        }
+
+        return $this->pointerPrefix($surface, $framework, $entityType, $selector, $locale).':fence';
+    }
+
+    private function currentFenceToken(
+        string $surface,
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+    ): string {
+        $token = Cache::get($this->fenceKey($surface, $framework, $entityType, $selector, $locale));
+
+        return is_string($token) && $token !== '' ? $token : 'baseline';
+    }
+
+    private function fenceMatches(
+        string $surface,
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+        string $expectedFence,
+    ): bool {
+        return $expectedFence !== ''
+            && hash_equals(
+                $this->currentFenceToken($surface, $framework, $entityType, $selector, $locale),
+                $expectedFence,
+            );
+    }
+
+    private function rotateFence(
+        string $surface,
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+    ): void {
+        Cache::put(
+            $this->fenceKey($surface, $framework, $entityType, $selector, $locale),
+            bin2hex(random_bytes(16)),
+            self::LKG_TTL_SECONDS,
+        );
+    }
+
+    private function invalidatePointersUnlocked(
+        string $surface,
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+        bool $preserveLkg,
+    ): void {
+        $activeKey = $this->activeKey($surface, $framework, $entityType, $selector, $locale);
+        $lkgKey = $this->lkgKey($surface, $framework, $entityType, $selector, $locale);
+        $activeVersion = Cache::get($activeKey);
+
+        if ($preserveLkg && is_string($activeVersion) && $activeVersion !== '') {
+            Cache::put($lkgKey, $activeVersion, self::LKG_TTL_SECONDS);
+        }
+        Cache::forget($activeKey);
+        if (! $preserveLkg) {
+            Cache::forget($lkgKey);
+        }
+
+        $this->recordState(
+            $surface,
+            $framework,
+            $entityType,
+            $locale,
+            $preserveLkg ? 'invalidated' : 'withdrawn',
+        );
+    }
+
+    private function withSurfaceLock(
+        string $surface,
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+        callable $callback,
+    ): void {
+        if ($surface === 'index') {
+            $this->withCollectionLock($framework, $entityType, $locale, $callback);
+
+            return;
+        }
+
+        Cache::lock(
+            $this->pointerPrefix($surface, $framework, $entityType, $selector, $locale).':lock',
+            10,
+        )->block(10, $callback);
     }
 
     private function withCollectionLock(

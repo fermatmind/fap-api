@@ -35,6 +35,14 @@ final class PersonalityPublicContentAssetController extends Controller
         $framework = (string) ($validated['framework'] ?? '');
         $entityType = (string) ($validated['entity_type'] ?? 'all');
         $selector = $this->indexSelector($validated['page'], $validated['per_page']);
+        $fenceToken = $this->readModelCache->captureFence(
+            'index',
+            $framework,
+            $entityType,
+            $selector,
+            $validated['locale'],
+            $validated['org_id'],
+        );
 
         try {
             $query = PersonalityPublicContentAsset::query()
@@ -79,6 +87,7 @@ final class PersonalityPublicContentAssetController extends Controller
                 $validated['locale'],
                 $validated['org_id'],
                 $version,
+                $fenceToken,
             );
             if (is_array($cachedRead['payload'])) {
                 return $this->publicReadResponse($cachedRead['payload'], $cachedRead['state']);
@@ -101,6 +110,7 @@ final class PersonalityPublicContentAssetController extends Controller
                 $validated['org_id'],
                 $version,
                 $payload,
+                $fenceToken,
             );
 
             return $this->publicReadResponse($payload, $cachedRead['state']);
@@ -126,6 +136,14 @@ final class PersonalityPublicContentAssetController extends Controller
 
         $normalizedFramework = PersonalityPublicContentAsset::normalizeToken($framework);
         $normalizedSlug = PersonalityPublicContentAsset::normalizeSlug($slug);
+        $fenceToken = $this->readModelCache->captureFence(
+            'detail-slug',
+            $normalizedFramework,
+            'slug',
+            $normalizedSlug,
+            $validated['locale'],
+            $validated['org_id'],
+        );
         try {
             $asset = PersonalityPublicContentAsset::query()
                 ->withoutGlobalScopes()
@@ -168,6 +186,7 @@ final class PersonalityPublicContentAssetController extends Controller
             $normalizedSlug,
             $validated['locale'],
             $validated['org_id'],
+            $fenceToken,
         );
     }
 
@@ -189,6 +208,15 @@ final class PersonalityPublicContentAssetController extends Controller
         if (! in_array($normalizedEntityType, PersonalityPublicContentAsset::ENTITY_TYPES, true)) {
             return $this->notFoundResponse();
         }
+
+        $fenceToken = $this->readModelCache->captureFence(
+            'detail-code',
+            $normalizedFramework,
+            $normalizedEntityType,
+            $normalizedCode,
+            $validated['locale'],
+            $validated['org_id'],
+        );
 
         try {
             $asset = PersonalityPublicContentAsset::query()
@@ -233,6 +261,7 @@ final class PersonalityPublicContentAssetController extends Controller
             $normalizedCode,
             $validated['locale'],
             $validated['org_id'],
+            $fenceToken,
         );
     }
 
@@ -758,6 +787,7 @@ final class PersonalityPublicContentAssetController extends Controller
         string $selector,
         string $locale,
         int $orgId,
+        string $fenceToken,
     ): JsonResponse {
         $framework = (string) $asset->framework;
 
@@ -771,6 +801,7 @@ final class PersonalityPublicContentAssetController extends Controller
                 $locale,
                 $orgId,
                 $version,
+                $fenceToken,
             );
             if (is_array($cachedRead['payload'])) {
                 return $this->publicReadResponse($cachedRead['payload'], $cachedRead['state']);
@@ -786,6 +817,7 @@ final class PersonalityPublicContentAssetController extends Controller
                 $orgId,
                 $version,
                 $payload,
+                $fenceToken,
             );
 
             return $this->publicReadResponse($payload, $cachedRead['state']);

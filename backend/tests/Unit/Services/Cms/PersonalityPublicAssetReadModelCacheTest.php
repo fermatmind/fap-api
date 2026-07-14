@@ -91,6 +91,53 @@ final class PersonalityPublicAssetReadModelCacheTest extends TestCase
         )['state']);
     }
 
+    public function test_withdrawal_fence_blocks_in_flight_detail_and_collection_pointer_repair(): void
+    {
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $detailPayload = ['asset' => ['title' => 'Openness']];
+        $detailFence = $cache->captureFence(
+            'detail-code', 'big_five', 'domain', 'openness', 'en', 0
+        );
+        $cache->put(
+            'detail-code', 'big_five', 'domain', 'openness', 'en', 0, 'detail-v1', $detailPayload, $detailFence
+        );
+
+        $cache->invalidate('detail-code', 'big_five', 'domain', 'openness', 'en', 0, false);
+
+        self::assertSame('miss', $cache->read(
+            'detail-code', 'big_five', 'domain', 'openness', 'en', 0, 'detail-v1', $detailFence
+        )['state']);
+        $cache->put(
+            'detail-code', 'big_five', 'domain', 'openness', 'en', 0, 'detail-v1', $detailPayload, $detailFence
+        );
+        self::assertSame('miss', $cache->stale(
+            'detail-code', 'big_five', 'domain', 'openness', 'en', 0
+        )['state']);
+
+        $selector = 'page:1:per-page:50';
+        $collectionPayload = ['items' => [['code' => 'openness']]];
+        $collectionFence = $cache->captureFence(
+            'index', 'big_five', 'domain', $selector, 'en', 0
+        );
+
+        $cache->invalidateCollections('big_five', 'domain', 'en', 0, false);
+        $cache->put(
+            'index',
+            'big_five',
+            'domain',
+            $selector,
+            'en',
+            0,
+            'collection-v1',
+            $collectionPayload,
+            $collectionFence,
+        );
+
+        self::assertSame('miss', $cache->stale(
+            'index', 'big_five', 'domain', $selector, 'en', 0
+        )['state']);
+    }
+
     public function test_collection_invalidation_targets_exact_and_all_entity_families(): void
     {
         $cache = app(PersonalityPublicAssetReadModelCache::class);
