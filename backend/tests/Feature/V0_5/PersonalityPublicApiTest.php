@@ -11,7 +11,9 @@ use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
+use App\Models\PersonalityPublicContentAsset;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicReadModelCache;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -1740,6 +1742,92 @@ final class PersonalityPublicApiTest extends TestCase
         self::assertSame('miss', $cache->stale('seo', 'INTJ-A', 'en', 0, 'MBTI')['state']);
     }
 
+    public function test_big_five_and_enneagram_assets_use_versioned_active_and_lkg_reads(): void
+    {
+        Cache::flush();
+        $bigFive = $this->createPublicContentAsset([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_DOMAIN,
+            'entity_key' => 'openness',
+            'slug' => 'big-five/openness',
+            'title' => 'Openness',
+        ]);
+        $enneagram = $this->createPublicContentAsset([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'type-1',
+            'slug' => 'enneagram/type-1',
+            'title' => 'Enneagram Type 1',
+        ]);
+
+        $bigFivePath = '/api/v0.5/personality-content-assets/big_five/domain/openness?locale=en';
+        $enneagramPath = '/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=en';
+        $bigFiveIndex = '/api/v0.5/personality-content-assets?framework=big_five&locale=en&per_page=100';
+
+        $this->getJson($bigFivePath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath('asset.title', 'Openness');
+        $this->getJson($bigFivePath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
+        $this->getJson($enneagramPath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath('asset.title', 'Enneagram Type 1');
+        $this->getJson($enneagramPath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
+        $this->getJson($bigFiveIndex)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath('items.0.title', 'Openness');
+        $this->getJson($bigFiveIndex)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
+
+        $bigFive->update(['title' => 'Updated openness']);
+
+        $this->getJson($bigFivePath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath('asset.title', 'Updated openness');
+        $this->getJson($bigFiveIndex)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath('items.0.title', 'Updated openness');
+        $this->getJson($enneagramPath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
+
+        DB::table('personality_public_content_assets')
+            ->where('id', $bigFive->id)
+            ->update(['title' => "\xB1\x31"]);
+
+        $this->getJson($bigFivePath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+            ->assertJsonPath('asset.title', 'Updated openness');
+        $this->getJson($bigFiveIndex)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+            ->assertJsonPath('items.0.title', 'Updated openness');
+
+        $bigFive->update(['is_public' => false]);
+
+        $this->getJson($bigFivePath)
+            ->assertNotFound()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        self::assertSame('miss', $cache->stale(
+            'detail-code', 'big_five', 'domain', 'openness', 'en', 0
+        )['state']);
+        $this->getJson($enneagramPath)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh')
+            ->assertJsonPath('asset.id', (int) $enneagram->id);
+    }
+
     private function expectedSearchIntentSeoTitle(string $locale, string $runtimeTypeCode, string $typeName): string
     {
         $typeLabel = trim($runtimeTypeCode.' '.$typeName);
@@ -1788,6 +1876,35 @@ final class PersonalityPublicApiTest extends TestCase
         $variantCode = strtoupper(substr($runtimeTypeCode, -1));
 
         return $baseTypeCode.'-'.($variantCode === 'A' ? 'T' : 'A');
+    }
+
+    /**
+     * @param  array<string,mixed>  $overrides
+     */
+    private function createPublicContentAsset(array $overrides = []): PersonalityPublicContentAsset
+    {
+        /** @var PersonalityPublicContentAsset */
+        return PersonalityPublicContentAsset::query()->create(array_merge([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_DOMAIN,
+            'entity_key' => 'openness',
+            'slug' => 'big-five/openness',
+            'locale' => 'en',
+            'title' => 'Openness',
+            'summary' => 'Public personality asset summary.',
+            'content_sections_json' => [['key' => 'overview', 'body' => 'Overview body.']],
+            'seo_json' => ['title' => 'Public asset title'],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'is_public' => true,
+            'index_eligible' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            'review_state' => 'approved',
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+            'published_at' => now()->subMinute(),
+        ], $overrides));
     }
 
     /**

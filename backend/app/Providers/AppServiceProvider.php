@@ -14,10 +14,12 @@ use App\Models\Attempt;
 use App\Models\BenefitGrant;
 use App\Models\Order;
 use App\Models\PaymentEvent;
+use App\Models\PersonalityPublicContentAsset;
 use App\Models\ReportSnapshot;
 use App\Models\ScaleRegistry;
 use App\Models\ScaleSlug;
 use App\Models\Share;
+use App\Observers\PersonalityPublicContentAssetObserver;
 use App\Policies\AdminApprovalPolicy;
 use App\Policies\AttemptPolicy;
 use App\Policies\BenefitGrantPolicy;
@@ -324,6 +326,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        PersonalityPublicContentAsset::observe(PersonalityPublicContentAssetObserver::class);
+
         FilamentAsset::register([
             Theme::make('ops-theme', resource_path('css/filament/ops/theme.compiled.css')),
         ]);
