@@ -90416,8 +90416,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "981391072e72706ec5b00b2635bf7b280b7f3ab2",
+    "status": "merged",
+    "commit_sha": "acb914a3c4cfd99859e6c5567676cc1ba43c1a04",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3053",
     "checks": {
       "dependency": {
@@ -90430,13 +90430,17 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #3053 head 981391072e72706ec5b00b2635bf7b280b7f3ab2 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+        "evidence": "PR #3053 final head acb914a3c4cfd99859e6c5567676cc1ba43c1a04 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #3053 MERGED as 5ea363f3b2a10900ad962dd64d312edf2632230a; origin/main contains the merge; package validator passed; BigFiveAuthorityV215Test passed 5 tests / 334 assertions; remote branch, local worktree, and local branch cleanup completed."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T01:52:17Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -90465,6 +90469,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on head 981391072e72706ec5b00b2635bf7b280b7f3ab2, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 9 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T01:59:43Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #3053 after exact-head squash merge. Final head acb914a3c4cfd99859e6c5567676cc1ba43c1a04 passed 9/9 checks; merge 5ea363f3b2a10900ad962dd64d312edf2632230a is on origin/main; post-merge validator and 5 tests / 334 assertions passed; remote and local cleanup completed."
       }
     ]
   },
@@ -90477,10 +90487,23 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACETS-OPENNESS-15"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "79e10bf1c08ab85bb126ea971f90bc08a8fd37f9",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3056",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-FACETS-OPENNESS-15 PR #3053 is MERGED as 5ea363f3b2a10900ad962dd64d312edf2632230a; origin/main contains the merge and post-merge validation/cleanup completed."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact 12-page, 6-facet bilingual coverage, taxonomy separation, and fail-closed release gates; BigFiveAuthorityV216Test passed 5 tests / 334 assertions; touched PHP Pint passed; JSON, JavaScript, and PHP syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files; PR15-to-PR16 substantive body exact-copy check found zero matches."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3056 head 79e10bf1c08ab85bb126ea971f90bc08a8fd37f9 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -90489,7 +90512,32 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T01:52:17Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR16 from clean latest fap-api main after PR15 merged. Scope is exactly 12 conscientiousness facet drafts: competence, order, dutifulness, achievement striving, self-discipline, and deliberation in independently authored EN/zh-CN pairs; CMS writes, runtime changes, publication, deployment, and indexability mutations remain forbidden."
+      },
+      {
+        "at": "2026-07-14T01:59:43Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All manifest local checks passed for the exact 9-file PR16 scope. The package covers all six locked conscientiousness facets in independently authored EN/zh-CN pairs, separates facets from the domain and other taxonomies, includes two original scenarios plus reflection and low-risk action per page, preserves raw failures, and keeps every release control closed."
+      },
+      {
+        "at": "2026-07-14T02:02:15Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 9-file scope as f59091d7b983ea8d7bb2aac92d3dcd60c5cca32d, pushed the scoped branch, and opened PR #3056. Waiting for required GitHub checks on the final ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T02:08:36Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head 79e10bf1c08ab85bb126ea971f90bc08a8fd37f9, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 9 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-FACETS-EXTRAVERSION-17": {
     "id": "BIG5-AUTHORITY-V2-FACETS-EXTRAVERSION-17",
