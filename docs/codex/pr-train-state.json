@@ -90345,8 +90345,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-RANGE-AGREEABLENESS-13"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "0f674ee533991d886800240dddb4a225ee3faa11",
+    "status": "merged",
+    "commit_sha": "4bf29e4f5a3f57f67690eab4bf2aa20b8bb012c6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3052",
     "checks": {
       "dependency": {
@@ -90359,13 +90359,17 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #3052 head 0f674ee533991d886800240dddb4a225ee3faa11 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+        "evidence": "PR #3052 final head 4bf29e4f5a3f57f67690eab4bf2aa20b8bb012c6 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #3052 MERGED as 4714ef9016bc7844aa4078f71facb5958dc52e21; origin/main contains the merge; package validator passed; BigFiveAuthorityV214Test passed 5 tests / 227 assertions; remote branch, local worktree, and local branch cleanup completed."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T01:23:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -90394,6 +90398,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on head 0f674ee533991d886800240dddb4a225ee3faa11, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 9 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T01:26:39Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #3052 after exact-head squash merge. Final head 4bf29e4f5a3f57f67690eab4bf2aa20b8bb012c6 passed 9/9 checks; merge 4714ef9016bc7844aa4078f71facb5958dc52e21 is on origin/main; post-merge validator and 5 tests / 227 assertions passed; remote and local cleanup completed."
       }
     ]
   },
@@ -90406,10 +90416,19 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14 PR #3052 is MERGED as 4714ef9016bc7844aa4078f71facb5958dc52e21; origin/main contains the merge and post-merge validation/cleanup completed."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact 12-page, 6-facet bilingual coverage, taxonomy separation, and fail-closed release gates; BigFiveAuthorityV215Test passed 5 tests / 334 assertions; touched PHP Pint passed; JSON, JavaScript, PHP, YAML, and ledger syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files; within-package substantive body exact-copy check found zero matches."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -90418,7 +90437,20 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T01:26:39Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR15 from clean latest fap-api main after reconciling PR14. Scope is exactly 12 openness facet drafts: imagination, aesthetics, feelings, actions, ideas, and values in independently authored EN/zh-CN pairs; CMS writes, runtime changes, publication, deployment, and indexability mutations remain forbidden."
+      },
+      {
+        "at": "2026-07-14T01:37:53Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All manifest local checks passed for the exact 9-file PR15 scope. The package covers all six locked openness facets in independently authored EN/zh-CN pairs, separates facets from the domain and other taxonomies, includes two original scenarios plus reflection and low-risk action per page, preserves raw failures, and keeps every release control closed."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16": {
     "id": "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16",
