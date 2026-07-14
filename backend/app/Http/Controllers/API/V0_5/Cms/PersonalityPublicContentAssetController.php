@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 
 use App\Http\Controllers\Controller;
 use App\Models\PersonalityPublicContentAsset;
+use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
 use App\Support\PublicMediaUrlGuard;
 use App\Support\PublicSeoTitleNormalizer;
@@ -14,9 +15,16 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Throwable;
 
 final class PersonalityPublicContentAssetController extends Controller
 {
+    private const PUBLIC_READ_CACHE_HEADER = 'X-Fermat-Public-Read-Cache';
+
+    public function __construct(
+        private readonly PersonalityPublicAssetReadModelCache $readModelCache,
+    ) {}
+
     public function index(Request $request): JsonResponse
     {
         $validated = $this->validateReadQuery($request);
@@ -24,40 +32,99 @@ final class PersonalityPublicContentAssetController extends Controller
             return $validated;
         }
 
-        $query = PersonalityPublicContentAsset::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', $validated['org_id'])
-            ->forLocale($validated['locale'])
-            ->publiclyReadable()
-            ->orderBy('framework')
-            ->orderBy('entity_type')
-            ->orderBy('entity_key');
+        $framework = (string) ($validated['framework'] ?? '');
+        $entityType = (string) ($validated['entity_type'] ?? 'all');
+        $selector = $this->indexSelector($validated['page'], $validated['per_page']);
+        $fenceToken = $this->readModelCache->captureFence(
+            'index',
+            $framework,
+            $entityType,
+            $selector,
+            $validated['locale'],
+            $validated['org_id'],
+        );
 
-        if ($validated['framework'] !== null) {
-            $query->where('framework', $validated['framework']);
-        }
+        try {
+            $query = PersonalityPublicContentAsset::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', $validated['org_id'])
+                ->forLocale($validated['locale'])
+                ->publiclyReadable()
+                ->orderBy('framework')
+                ->orderBy('entity_type')
+                ->orderBy('entity_key');
 
-        if ($validated['entity_type'] !== null) {
-            $query->where('entity_type', $validated['entity_type']);
-        }
+            if ($validated['framework'] !== null) {
+                $query->where('framework', $validated['framework']);
+            }
 
-        $perPage = $validated['per_page'];
-        $paginator = $query->paginate($perPage, ['*'], 'page', $validated['page']);
+            if ($validated['entity_type'] !== null) {
+                $query->where('entity_type', $validated['entity_type']);
+            }
 
-        return response()->json([
-            'ok' => true,
-            'items' => collect($paginator->items())
+            $paginator = $query->paginate(
+                $validated['per_page'],
+                ['*'],
+                'page',
+                $validated['page'],
+            );
+            $assets = collect($paginator->items())
                 ->filter(fn (mixed $item): bool => $item instanceof PersonalityPublicContentAsset)
-                ->map(fn (PersonalityPublicContentAsset $asset): array => $this->assetPayload($asset))
                 ->values()
-                ->all(),
-            'pagination' => [
+                ->all();
+            $pagination = [
                 'current_page' => (int) $paginator->currentPage(),
                 'per_page' => (int) $paginator->perPage(),
                 'total' => (int) $paginator->total(),
                 'last_page' => (int) $paginator->lastPage(),
-            ],
-        ]);
+            ];
+            $version = $this->readModelCache->collectionVersion($assets, $pagination);
+            $cachedRead = $this->readModelCache->read(
+                'index',
+                $framework,
+                $entityType,
+                $selector,
+                $validated['locale'],
+                $validated['org_id'],
+                $version,
+                $fenceToken,
+            );
+            if (is_array($cachedRead['payload'])) {
+                return $this->publicReadResponse($cachedRead['payload'], $cachedRead['state']);
+            }
+
+            $payload = [
+                'ok' => true,
+                'items' => array_map(
+                    fn (PersonalityPublicContentAsset $asset): array => $this->assetPayload($asset),
+                    $assets,
+                ),
+                'pagination' => $pagination,
+            ];
+            $this->readModelCache->put(
+                'index',
+                $framework,
+                $entityType,
+                $selector,
+                $validated['locale'],
+                $validated['org_id'],
+                $version,
+                $payload,
+                $fenceToken,
+            );
+
+            return $this->publicReadResponse($payload, $cachedRead['state']);
+        } catch (Throwable $throwable) {
+            return $this->staleResponseOrThrow(
+                'index',
+                $framework,
+                $entityType,
+                $selector,
+                $validated['locale'],
+                $validated['org_id'],
+                $throwable,
+            );
+        }
     }
 
     public function show(Request $request, string $framework, string $slug): JsonResponse
@@ -67,20 +134,60 @@ final class PersonalityPublicContentAssetController extends Controller
             return $validated;
         }
 
-        $asset = PersonalityPublicContentAsset::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', $validated['org_id'])
-            ->where('framework', PersonalityPublicContentAsset::normalizeToken($framework))
-            ->where('slug', PersonalityPublicContentAsset::normalizeSlug($slug))
-            ->forLocale($validated['locale'])
-            ->publiclyReadable()
-            ->first();
-
-        if (! $asset instanceof PersonalityPublicContentAsset) {
-            return $this->notFoundResponse();
+        $normalizedFramework = PersonalityPublicContentAsset::normalizeToken($framework);
+        $normalizedSlug = PersonalityPublicContentAsset::normalizeSlug($slug);
+        $fenceToken = $this->readModelCache->captureFence(
+            'detail-slug',
+            $normalizedFramework,
+            'slug',
+            $normalizedSlug,
+            $validated['locale'],
+            $validated['org_id'],
+        );
+        try {
+            $asset = PersonalityPublicContentAsset::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', $validated['org_id'])
+                ->where('framework', $normalizedFramework)
+                ->where('slug', $normalizedSlug)
+                ->forLocale($validated['locale'])
+                ->publiclyReadable()
+                ->first();
+        } catch (Throwable $throwable) {
+            return $this->staleResponseOrThrow(
+                'detail-slug',
+                $normalizedFramework,
+                'slug',
+                $normalizedSlug,
+                $validated['locale'],
+                $validated['org_id'],
+                $throwable,
+            );
         }
 
-        return $this->detailResponse($asset);
+        if (! $asset instanceof PersonalityPublicContentAsset) {
+            $this->readModelCache->invalidate(
+                'detail-slug',
+                $normalizedFramework,
+                'slug',
+                $normalizedSlug,
+                $validated['locale'],
+                $validated['org_id'],
+                false,
+            );
+
+            return $this->notFoundResponse()->header(self::PUBLIC_READ_CACHE_HEADER, 'miss');
+        }
+
+        return $this->cachedDetailResponse(
+            $asset,
+            'detail-slug',
+            'slug',
+            $normalizedSlug,
+            $validated['locale'],
+            $validated['org_id'],
+            $fenceToken,
+        );
     }
 
     public function showByCode(Request $request, string $framework, string $entityType, string $code): JsonResponse
@@ -102,21 +209,60 @@ final class PersonalityPublicContentAssetController extends Controller
             return $this->notFoundResponse();
         }
 
-        $asset = PersonalityPublicContentAsset::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', $validated['org_id'])
-            ->where('framework', $normalizedFramework)
-            ->where('entity_type', $normalizedEntityType)
-            ->where('entity_key', $normalizedCode)
-            ->forLocale($validated['locale'])
-            ->publiclyReadable()
-            ->first();
+        $fenceToken = $this->readModelCache->captureFence(
+            'detail-code',
+            $normalizedFramework,
+            $normalizedEntityType,
+            $normalizedCode,
+            $validated['locale'],
+            $validated['org_id'],
+        );
 
-        if (! $asset instanceof PersonalityPublicContentAsset) {
-            return $this->notFoundResponse();
+        try {
+            $asset = PersonalityPublicContentAsset::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', $validated['org_id'])
+                ->where('framework', $normalizedFramework)
+                ->where('entity_type', $normalizedEntityType)
+                ->where('entity_key', $normalizedCode)
+                ->forLocale($validated['locale'])
+                ->publiclyReadable()
+                ->first();
+        } catch (Throwable $throwable) {
+            return $this->staleResponseOrThrow(
+                'detail-code',
+                $normalizedFramework,
+                $normalizedEntityType,
+                $normalizedCode,
+                $validated['locale'],
+                $validated['org_id'],
+                $throwable,
+            );
         }
 
-        return $this->detailResponse($asset);
+        if (! $asset instanceof PersonalityPublicContentAsset) {
+            $this->readModelCache->invalidate(
+                'detail-code',
+                $normalizedFramework,
+                $normalizedEntityType,
+                $normalizedCode,
+                $validated['locale'],
+                $validated['org_id'],
+                false,
+            );
+
+            return $this->notFoundResponse()->header(self::PUBLIC_READ_CACHE_HEADER, 'miss');
+        }
+
+        return $this->cachedDetailResponse(
+            $asset,
+            'detail-code',
+            $normalizedEntityType,
+            $normalizedCode,
+            $validated['locale'],
+            $validated['org_id'],
+            $fenceToken,
+        );
     }
 
     private function validateReadQuery(Request $request): array|JsonResponse
@@ -211,7 +357,8 @@ final class PersonalityPublicContentAssetController extends Controller
         ];
     }
 
-    private function detailResponse(PersonalityPublicContentAsset $asset): JsonResponse
+    /** @return array<string,mixed> */
+    private function detailPayload(PersonalityPublicContentAsset $asset): array
     {
         $v1 = $this->assetPayload($asset);
         $response = [
@@ -224,7 +371,7 @@ final class PersonalityPublicContentAssetController extends Controller
             $response['personality_public_content_asset_v2'] = $this->assetPayloadV2($asset, $v1);
         }
 
-        return response()->json($response);
+        return $response;
     }
 
     /**
@@ -631,6 +778,96 @@ final class PersonalityPublicContentAssetController extends Controller
         return (string) $asset->launch_state === PersonalityPublicContentAsset::LAUNCH_PUBLISHED
             && (bool) $asset->index_eligible
             && PersonalityPublicContentAsset::normalizeRobots((string) $asset->robots) === PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW;
+    }
+
+    private function cachedDetailResponse(
+        PersonalityPublicContentAsset $asset,
+        string $surface,
+        string $entityType,
+        string $selector,
+        string $locale,
+        int $orgId,
+        string $fenceToken,
+    ): JsonResponse {
+        $framework = (string) $asset->framework;
+
+        try {
+            $version = $this->readModelCache->versionFor($asset);
+            $cachedRead = $this->readModelCache->read(
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $orgId,
+                $version,
+                $fenceToken,
+            );
+            if (is_array($cachedRead['payload'])) {
+                return $this->publicReadResponse($cachedRead['payload'], $cachedRead['state']);
+            }
+
+            $payload = $this->detailPayload($asset);
+            $this->readModelCache->put(
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $orgId,
+                $version,
+                $payload,
+                $fenceToken,
+            );
+
+            return $this->publicReadResponse($payload, $cachedRead['state']);
+        } catch (Throwable $throwable) {
+            return $this->staleResponseOrThrow(
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $orgId,
+                $throwable,
+            );
+        }
+    }
+
+    /** @param array<string,mixed> $payload */
+    private function publicReadResponse(array $payload, string $cacheState): JsonResponse
+    {
+        return response()->json($payload)
+            ->header(self::PUBLIC_READ_CACHE_HEADER, $cacheState);
+    }
+
+    private function staleResponseOrThrow(
+        string $surface,
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+        int $orgId,
+        Throwable $throwable,
+    ): JsonResponse {
+        $staleRead = $this->readModelCache->stale(
+            $surface,
+            $framework,
+            $entityType,
+            $selector,
+            $locale,
+            $orgId,
+        );
+        if (is_array($staleRead['payload'])) {
+            return $this->publicReadResponse($staleRead['payload'], $staleRead['state']);
+        }
+
+        throw $throwable;
+    }
+
+    private function indexSelector(int $page, int $perPage): string
+    {
+        return 'page:'.max(1, $page).':per-page:'.max(1, min(100, $perPage));
     }
 
     private function notFoundResponse(): JsonResponse

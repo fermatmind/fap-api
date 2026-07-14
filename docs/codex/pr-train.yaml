@@ -41859,6 +41859,7 @@ prs:
       - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
       - backend/tests/Unit/Services/Cms/PersonalityPublicAssetReadModelCacheTest.php
       - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/sidecar_issues.md
@@ -41867,7 +41868,8 @@ prs:
       - Change public content, routes, sitemap/llms, indexability, CMS data, production cache, warmup, or deployment.
     validation:
       - cd backend && php artisan test tests/Unit/Services/Cms/PersonalityPublicAssetReadModelCacheTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Services/Cms/PersonalityPublicAssetReadModelCache.php app/Observers/PersonalityPublicContentAssetObserver.php app/Providers/AppServiceProvider.php app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php tests/Unit/Services/Cms/PersonalityPublicAssetReadModelCacheTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=personality_public_asset_read_model_cache --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Cms/PersonalityPublicAssetReadModelCache.php app/Observers/PersonalityPublicContentAssetObserver.php app/Providers/AppServiceProvider.php app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php tests/Unit/Services/Cms/PersonalityPublicAssetReadModelCacheTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && bash scripts/ci_verify_mbti.sh
       - YAML/JSON parse and changed-file scope validation
       - git diff --check
