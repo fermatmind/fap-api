@@ -89275,7 +89275,7 @@
     "depends_on": [
       "MBTI-CMS-APPROVAL-39"
     ],
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "2a32db87cd3b35ce13b31482a1c3c1edfad96447",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3049",
     "failure_reason": null,
@@ -89302,8 +89302,8 @@
       }
       ,
       "github_required_checks": {
-        "status": "in_progress",
-        "evidence": "PR #3049 is open from the rebased CMS-40 branch. Required GitHub checks are pending; no production import or deployment has been requested or performed."
+        "status": "pass",
+        "evidence": "PR #3049 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. No production import or deployment has been requested or performed."
       }
     },
     "scope_validation": {
@@ -89330,6 +89330,12 @@
         "from": "local_validation_passed",
         "to": "pr_open",
         "note": "Opened PR #3049 from the rebased CMS-40 branch. Awaiting required checks; the current scope remains importer code and dry-run verification only."
+      },
+      {
+        "at": "2026-07-14T08:52:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed for PR #3049. The branch scope was revalidated before squash merge; no owner-scope timeout repair, CMS production write, deployment, or search action is included."
       }
     ]
   },
