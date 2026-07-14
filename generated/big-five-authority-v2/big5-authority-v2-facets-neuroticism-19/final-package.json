@@ -1,0 +1,764 @@
+{
+  "schema_version": "big5_authority_v2_facet_package.v1",
+  "train_id": "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19",
+  "artifact": "big5-authority-v2-facets-neuroticism-19-final",
+  "stage": "final",
+  "framework": "big_five",
+  "domain_code": "neuroticism",
+  "taxonomy": "ipip_neo_30_facet_navigation",
+  "expected_page_count": 12,
+  "workflow": {
+    "raw_artifact": "raw-draft.json",
+    "skeptical_review_artifact": "skeptical-review.json",
+    "repaired_artifact": "repaired-draft.json",
+    "raw_failures_preserved": true,
+    "ai_detector_used": false
+  },
+  "pages": [
+    {
+      "content_key": "facet:neuroticism:anxiety",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/anxiety",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "anxiety",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Anxiety facet: anticipating possible trouble without making a diagnosis",
+      "summary": "Anxiety is a narrow neuroticism facet describing how readily attention turns toward possible danger, uncertainty, or things that could go wrong; the label is not an anxiety-disorder diagnosis or a measure of courage.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Neuroticism broadly groups tendencies involving anxiety, anger, depression, self-consciousness, impulsiveness, and vulnerability. This facet isolates anticipatory concern: a person may scan ahead for problems while rarely feeling anger or losing control under pressure.",
+      "two_ends": "At one end, possible problems may become salient early and prompt preparation, checking, or hesitation. At the other, uncertainty may stay in the background until evidence becomes concrete. Either pattern can help or hinder depending on stakes, time, and whether checking improves the decision.",
+      "scenarios": [
+        "Two days before a client presentation, one analyst notices several ways the demo could fail and schedules a short backup rehearsal; a colleague waits for the final build and keeps a simple recovery checklist instead.",
+        "Before taking an unfamiliar train connection, one traveler studies platform changes and leaves extra time; another checks the live departure board on arrival and accepts that a reversible delay may occur."
+      ],
+      "counterexample": "Careful preparation does not by itself indicate high anxiety, and calm behavior does not prove that concern is absent. Expertise, responsibility, recent events, and the actual consequences can explain vigilance without a stable trait conclusion.",
+      "observation_contexts": "Notice when uncertainty first captures your attention, what evidence reduces concern, and whether another check changes the plan. In work, study, communication, or daily routines, distinguish useful contingency planning from repeated checking that adds no new information.",
+      "reflection_questions": [
+        "Which kinds of uncertainty lead you to prepare effectively, and which keep your attention engaged after a reasonable safeguard is already in place?",
+        "What observable fact, deadline, or decision rule would tell you that you have enough information to proceed?"
+      ],
+      "low_risk_action": "For one low-stakes uncertain task, write down the main concern, one proportionate safeguard, and a time to decide. After that point, proceed or revise from new evidence rather than repeating the same check.",
+      "not_meaning": "This facet does not diagnose an anxiety disorder, panic, trauma, risk tolerance, resilience, bravery, or fitness for a role. A self-report tendency cannot determine whether worry is clinically significant or explain its cause.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label, not a clinical screener. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a professional mental-health assessment.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical Big Five description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores or clinical interpretations."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments, diagnosis, or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:neuroticism:anxiety",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/anxiety",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "anxiety",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "焦虑 facet：留意可能的麻烦，但不作诊断",
+      "summary": "焦虑是神经质中的窄维度，描述注意力多快转向潜在危险、不确定性或可能出错之处；这里的标签不是焦虑障碍诊断，也不衡量勇气。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "神经质上位 domain 还包含愤怒、抑郁、自我意识、冲动性和脆弱性等倾向。这个 facet 只聚焦预期性担忧：一个人可能很早检查风险，却很少发怒，也能在压力下保持行动。",
+      "two_ends": "一端更早看见可能的问题，常通过准备、核对或暂缓来应对；另一端会等到证据更具体时才把不确定性放到前景。两种方式都可能有用，也可能付出代价，关键在风险、时间以及核对是否真的改变决定。",
+      "scenarios": [
+        "客户演示前两天，一位分析师列出三个可能失败的环节并安排十分钟备用流程演练；同事则等最终版本完成，只保留一张恢复步骤清单。",
+        "第一次换乘陌生线路时，一位乘客提前查看站台变化并多留二十分钟；另一位到站后看实时屏幕，接受一次可补救的延误。"
+      ],
+      "counterexample": "准备周密不自动代表焦虑高，表面镇定也不能证明没有担忧。专业经验、岗位责任、近期经历和真实后果，都可能解释一次谨慎行为，不能据此下稳定人格结论。",
+      "observation_contexts": "可以观察不确定性何时开始占据注意力、什么证据能降低担忧，以及再核对一次是否会改变方案。在工作、学习、沟通和日常安排中，把有效预案与没有新增信息的重复检查分开。",
+      "reflection_questions": [
+        "哪些不确定性会推动你做出有效准备，哪些会在合理保障已完成后仍持续占用注意力？",
+        "什么可观察事实、截止时间或决策规则，能帮助你判断信息已经足够？"
+      ],
+      "low_risk_action": "选一件低风险但不确定的事，写下主要担忧、一个相称的保障措施和最终决定时间。到点后只依据新证据调整，不重复同一轮检查。",
+      "not_meaning": "这个 facet 不诊断焦虑障碍、惊恐或创伤，也不判断风险承受力、韧性、勇敢程度或岗位胜任。自陈倾向不能说明担忧是否达到临床意义，更不能确定成因。",
+      "method_boundary": "本页使用 IPIP/NEO 风格的 30 facet 导航标签，不是临床筛查。它不等同于 BFI-2 facets、十方面模型、专有 NEO 分数或专业心理健康评估。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "支持 Big Five 的层级描述，但 BFI-2 facets 与本页 30 facet 导航标签并不相同，也不验证费马测试分数或临床解释。"
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "支持导航标签及其 domain 归属，不代表与专有 NEO 工具相同，也不支持诊断或对个人作确定判断。"
+        }
+      ]
+    },
+    {
+      "content_key": "facet:neuroticism:anger",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/anger",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "anger",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Anger facet: how readily frustration becomes an angry response",
+      "summary": "Anger is a narrow neuroticism facet about the tendency for obstruction, unfairness, or disrespect to evoke irritation or anger; it does not measure aggression, violence, moral character, or whether a complaint is justified.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "The broader neuroticism domain includes several forms of negative emotional reactivity. Anger focuses on irritation and angry activation, so someone may react strongly to unfairness while showing little anticipatory anxiety or self-consciousness.",
+      "two_ends": "At one end, frustration may become noticeable quickly and energize direct challenge. At the other, irritation may rise slowly or remain muted while the person gathers context. Either can protect or damage a situation depending on expression, timing, power, and repair.",
+      "scenarios": [
+        "When a meeting repeatedly starts late, one participant names the impact and asks for a new rule before irritation builds; another waits until the meeting ends, documents the pattern, and raises it privately with the organizer.",
+        "A shared kitchen is left unusable before an event. One roommate feels anger immediately and sends a concise cleanup request; another first checks who used the space, then proposes a rota for the next week."
+      ],
+      "counterexample": "A firm objection is not necessarily anger, and a quiet response is not necessarily acceptance. Communication style, safety, cultural rules, and power differences can shape what is visible even when the internal reaction is similar.",
+      "observation_contexts": "Track the trigger, intensity, expression, and recovery separately. In work, study, communication, or daily life, notice whether anger supplies information about a boundary and whether the chosen response preserves accuracy and room for repair.",
+      "reflection_questions": [
+        "Which triggers produce the fastest rise in irritation for you, and what part concerns impact, fairness, respect, or accumulated strain?",
+        "What response could state the boundary clearly without adding claims about another person's motives?"
+      ],
+      "low_risk_action": "For one minor irritation, pause long enough to write a fact, its impact, and one concrete request. Deliver that version without diagnosing intent, then review whether the response reduced confusion or intensified it.",
+      "not_meaning": "This facet does not predict aggression, abuse, violence, dangerousness, conflict competence, or moral worth. It cannot determine whether anger is proportionate, clinically significant, or caused by a particular condition.",
+      "method_boundary": "This IPIP/NEO-style navigation label describes self-reported angry reactivity, not behavioral risk or a clinical condition. It is distinct from BFI-2 facets, ten-aspect models, proprietary NEO scoring, and professional assessment.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical Big Five description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores or clinical interpretations."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments, diagnosis, or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:neuroticism:anger",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/anger",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "anger",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "愤怒 facet：挫折多快转成生气反应",
+      "summary": "愤怒是神经质中的窄维度，描述受阻、不公平或不被尊重时多容易出现恼怒；它不衡量攻击性、暴力、道德品质，也不判断某次抱怨是否合理。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "神经质上位 domain 汇集多种负面情绪反应，愤怒 facet 只聚焦恼怒和生气时的激活。一个人可能对不公平反应强烈，却很少提前担忧，也不一定容易自我意识。",
+      "two_ends": "一端的恼怒出现较快，可能推动直接质疑；另一端升起较慢，或先保持克制并收集背景。两端都可能保护问题，也可能伤害关系，取决于表达、时机、权力差异和修复空间。",
+      "scenarios": [
+        "会议连续几次迟到，一位参与者当场说明影响并要求制定新规则，以免不满累积；另一位会后记录频率，再私下与组织者讨论。",
+        "公共厨房在活动前被弄得无法使用，一位室友立刻感到生气并发出简短清理请求；另一位先确认使用者，再提议下周轮值。"
+      ],
+      "counterexample": "坚定反对不一定源于愤怒，沉默也不等于接受。沟通习惯、安全感、文化规则和权力差异会改变外显方式，即使内在反应相近也可能看起来完全不同。",
+      "observation_contexts": "把触发点、强度、表达方式和恢复速度分别记录。在工作、学习、沟通和日常生活中，观察愤怒是否提示了边界，以及表达是否保留事实准确性与修复余地。",
+      "reflection_questions": [
+        "哪些情境最容易让你的恼怒快速上升，其中更接近影响、公平、尊重还是长期累积的负担？",
+        "怎样表达能清楚说明边界，同时不替对方推断动机？"
+      ],
+      "low_risk_action": "遇到一次轻微恼怒时，先写下一项事实、具体影响和一个可执行请求。只传达这个版本，不判断对方意图，再看它是减少还是增加了误解。",
+      "not_meaning": "这个 facet 不预测攻击、虐待、暴力、危险性、冲突能力或道德价值，也不能判断愤怒是否相称、是否具有临床意义或由某种状况造成。",
+      "method_boundary": "这个 IPIP/NEO 风格导航标签描述自陈的生气反应，不是行为风险或临床状况评估；它与 BFI-2 facets、十方面模型、专有 NEO 计分及专业评估不同。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "支持 Big Five 的层级描述，但 BFI-2 facets 与本页 30 facet 导航标签并不相同，也不验证费马测试分数或临床解释。"
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "支持导航标签及其 domain 归属，不代表与专有 NEO 工具相同，也不支持诊断或对个人作确定判断。"
+        }
+      ]
+    },
+    {
+      "content_key": "facet:neuroticism:depression",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/depression",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "depression",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Depression facet: proneness to discouragement, not a clinical diagnosis",
+      "summary": "Depression is a legacy facet label for a tendency toward discouragement, sadness, or diminished positive expectation; on this page it is a personality-navigation term, not a diagnosis of depressive disorder or an estimate of mental-health severity.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Neuroticism covers several kinds of negative emotional reactivity. This facet narrows attention to discouragement and low expectation, which can vary independently from anger, anticipatory anxiety, embarrassment, impulse control, or stress overwhelm.",
+      "two_ends": "At one end, setbacks may linger and make future effort feel less promising. At the other, disappointment may clear sooner and positive expectation may return readily. Neither end proves depth, realism, health, or resilience; context and duration matter.",
+      "scenarios": [
+        "After a proposal is rejected, one researcher needs a day to regain momentum and reviews the comments with a colleague; another feels disappointed briefly, then submits a narrower version before the week ends.",
+        "A learner performs poorly on a practice exam. One notices a broad sense that improvement may not happen and schedules a small review block; another treats the result as one data point and immediately changes the study sequence."
+      ],
+      "counterexample": "Sadness after loss or discouragement after repeated barriers is not evidence of a stable high score, while energetic presentation does not prove the absence of distress. One visible moment cannot establish a trait or clinical state.",
+      "observation_contexts": "Observe the kinds of setbacks that lower expectation, how long the shift lasts, and what restores engagement. In ordinary work or study reflection, describe changes in momentum without turning them into a health conclusion about yourself or someone else.",
+      "reflection_questions": [
+        "After disappointment, which thoughts make the next step feel less possible, and which concrete evidence helps you reassess that prediction?",
+        "What is the smallest useful action you can take while allowing the feeling to be present rather than requiring an immediate mood change?"
+      ],
+      "low_risk_action": "Choose one paused low-stakes task and define a ten-minute next step that produces information, such as opening the feedback and marking one revision. Stop after the step and reassess capacity without forcing a positive conclusion.",
+      "not_meaning": "This facet does not diagnose depression, assess suicide risk, determine treatment need, or measure current functioning, worth, optimism, or resilience. Persistent distress or safety concerns require appropriate human support, not interpretation from this label.",
+      "method_boundary": "The term is retained only as an IPIP/NEO-style facet navigation label. It is not a symptom inventory, clinical screener, BFI-2 facet, ten-aspect score, proprietary NEO result, or substitute for professional evaluation.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical Big Five description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores or clinical interpretations."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments, diagnosis, or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:neuroticism:depression",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/depression",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "depression",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "抑郁 facet：描述受挫倾向，不是临床诊断",
+      "summary": "抑郁在这里是历史沿用的 facet 标签，描述较容易感到灰心、悲伤或降低积极预期的倾向；它只是人格导航术语，不诊断抑郁障碍，也不估计心理健康严重程度。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "神经质包含多种负面情绪反应，这个 facet 只聚焦灰心和较低预期。它可以与愤怒、预期性担忧、尴尬、冲动控制或压力下失衡分别变化。",
+      "two_ends": "一端在受挫后感受停留较久，后续努力看起来不太有希望；另一端的失望消退较快，积极预期更容易回来。两端都不能证明深刻、现实、健康或有韧性，情境和持续时间很重要。",
+      "scenarios": [
+        "研究提案被拒后，一位研究者需要一天恢复动力，并约同事一起拆解评语；另一位短暂失望后，在周末前提交了范围更窄的版本。",
+        "模拟考试表现不理想，一位学习者开始泛化为“可能不会进步”，于是先安排一小段复盘；另一位把结果当成一个数据点，马上调整学习顺序。"
+      ],
+      "counterexample": "失去重要事物后的悲伤，或反复受阻后的灰心，不足以说明稳定高分；外表有活力也不能证明没有痛苦。一次可见表现既不能确立人格倾向，也不能确定临床状态。",
+      "observation_contexts": "可观察哪些挫折会降低预期、变化持续多久、什么条件能恢复投入。在普通工作或学习复盘中，描述动力变化即可，不把它升级成对自己或他人的健康判断。",
+      "reflection_questions": [
+        "失望之后，哪些想法让下一步显得不可能，哪些具体证据能帮助你重新评估这个预测？",
+        "当感受仍在时，你能采取的最小有效行动是什么，而不要求自己立刻变得积极？"
+      ],
+      "low_risk_action": "从一件暂停的低风险任务中选出十分钟步骤，例如打开反馈并标记一个可修改点。完成后停下，再评估精力，不强迫自己得出乐观结论。",
+      "not_meaning": "这个 facet 不诊断抑郁症，不评估自杀风险、治疗需要、当前功能、个人价值、乐观或韧性。持续痛苦或安全担忧需要合适的人类支持，不能靠此标签解释。",
+      "method_boundary": "“抑郁”只作为 IPIP/NEO 风格 facet 导航标签保留，不是症状量表、临床筛查、BFI-2 facet、十方面分数、专有 NEO 结果或专业评估替代品。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "支持 Big Five 的层级描述，但 BFI-2 facets 与本页 30 facet 导航标签并不相同，也不验证费马测试分数或临床解释。"
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "支持导航标签及其 domain 归属，不代表与专有 NEO 工具相同，也不支持诊断或对个人作确定判断。"
+        }
+      ]
+    },
+    {
+      "content_key": "facet:neuroticism:self-consciousness",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/self-consciousness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "self-consciousness",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Self-consciousness facet: sensitivity to being observed or judged",
+      "summary": "Self-consciousness is a narrow neuroticism facet describing how readily attention turns inward when a person may be observed, evaluated, or embarrassed; it is not vanity, humility, social skill, or a diagnosis of social anxiety.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "The broader domain includes anxiety, anger, depression, impulsiveness, and vulnerability as well as self-consciousness. This facet specifically concerns evaluative exposure, so it can be elevated even when a person is calm about non-social uncertainty.",
+      "two_ends": "At one end, visible mistakes or unfamiliar groups may quickly increase self-monitoring and caution. At the other, attention may stay on the task with less concern about appearance. Either can support calibration or create blind spots depending on feedback quality and social stakes.",
+      "scenarios": [
+        "During a workshop round, one designer rehearses a question silently and waits until the wording feels safe; another asks an unfinished question and clarifies it after hearing the facilitator's response.",
+        "At a community class, one newcomer chooses a seat near the edge and observes the routine before joining; another introduces themselves immediately and learns the norms through participation."
+      ],
+      "counterexample": "Quiet participation does not prove self-consciousness, and fluent public speech does not prove its absence. Language proficiency, status, sensory load, preparation, and audience safety can explain the same outward behavior.",
+      "observation_contexts": "Notice when attention shifts from the shared task to how you might appear, and whether that shift improves accuracy or blocks contribution. In communication, separate a preference for preparation from assumptions about confidence or competence.",
+      "reflection_questions": [
+        "Which audiences or evaluation cues increase self-monitoring most, and what specific outcome are you trying to prevent?",
+        "What smaller form of participation would provide useful evidence while keeping the social cost reversible?"
+      ],
+      "low_risk_action": "In one low-stakes group, contribute a prepared sentence or question before it feels perfectly polished. Record what actually happened, including neutral responses, rather than relying only on the predicted judgment.",
+      "not_meaning": "This facet does not diagnose social anxiety, measure introversion, confidence, shame, vanity, social competence, or suitability for public-facing work. It cannot establish how others actually judge a person.",
+      "method_boundary": "This is an IPIP/NEO-style 30-facet navigation label based on self-report. It is not identical to BFI-2 facets, a ten-aspect model, proprietary NEO scoring, an audience-performance test, or clinical assessment.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical Big Five description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores or clinical interpretations."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments, diagnosis, or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:neuroticism:self-consciousness",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/self-consciousness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "self-consciousness",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "自我意识 facet：对被看见或被评价的敏感度",
+      "summary": "自我意识是神经质中的窄维度，描述在可能被观察、评价或出丑时，注意力多容易转回自己；它不等于虚荣、谦逊、社交能力，也不是社交焦虑诊断。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "神经质上位 domain 还包含焦虑、愤怒、抑郁、冲动性和脆弱性。这个 facet 特别指向评价暴露，因此一个人即使面对非社交不确定性很平静，也可能在被注视时加强自我监控。",
+      "two_ends": "一端在公开犯错或进入陌生群体时更快提高自我监控与谨慎；另一端较少担心外在呈现，注意力更容易留在任务上。两端都可能帮助校准或造成盲点，取决于反馈质量和社交代价。",
+      "scenarios": [
+        "工作坊轮流提问时，一位设计师先在心里排练措辞，觉得足够稳妥才举手；另一位直接提出尚不完整的问题，再根据主持人回应补充。",
+        "第一次参加社区课程，一位新成员坐在边缘，先观察流程再加入；另一位立刻自我介绍，通过参与了解现场规范。"
+      ],
+      "counterexample": "安静参与不能证明自我意识高，公开表达流利也不能证明它低。语言熟练度、身份地位、感官负荷、准备程度和现场安全感都可能解释相同外在行为。",
+      "observation_contexts": "观察注意力何时从共同任务转向“别人会怎么看我”，以及这种转移是提高准确性还是阻止参与。沟通时，把准备偏好与对自信、能力的推断分开。",
+      "reflection_questions": [
+        "哪些听众或评价信号最容易提高你的自我监控，你具体想避免的结果是什么？",
+        "哪一种更小、可撤销的参与方式能提供真实反馈，而不必承担过高社交成本？"
+      ],
+      "low_risk_action": "在一个低风险小组里，提前准备一句话或一个问题，在尚未觉得完美时说出来。记录真实发生的反应，包括中性反应，不只记录预想中的评价。",
+      "not_meaning": "这个 facet 不诊断社交焦虑，不衡量内向、自信、羞耻、虚荣、社交能力或面向公众岗位的适合度，也不能证明别人实际上如何评价你。",
+      "method_boundary": "这是基于自陈的 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facets、十方面模型、专有 NEO 计分、公开表现测试或临床评估。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "支持 Big Five 的层级描述，但 BFI-2 facets 与本页 30 facet 导航标签并不相同，也不验证费马测试分数或临床解释。"
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "支持导航标签及其 domain 归属，不代表与专有 NEO 工具相同，也不支持诊断或对个人作确定判断。"
+        }
+      ]
+    },
+    {
+      "content_key": "facet:neuroticism:impulsiveness",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/impulsiveness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "impulsiveness",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Impulsiveness facet: difficulty delaying an urge, not a diagnosis",
+      "summary": "Impulsiveness is a narrow neuroticism facet about how difficult it can feel to delay a strong urge when emotion or desire is active; it is not a diagnosis, a global measure of self-control, or proof of irresponsible behavior.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Within neuroticism, this facet concerns urge regulation rather than anticipatory worry, angry activation, discouragement, evaluative discomfort, or stress overwhelm. A person may plan carefully in most areas yet find one emotionally charged urge harder to postpone.",
+      "two_ends": "At one end, an immediate reward or relief may strongly compete with a longer-term intention. At the other, delay may feel easier and rules may remain salient during arousal. Neither end guarantees spontaneity, discipline, creativity, or good judgment across situations.",
+      "scenarios": [
+        "While revising a report, one writer repeatedly feels pulled to check incoming messages and places the phone outside the room for twenty minutes; another leaves notifications on but finishes one section before responding.",
+        "At an online sale, one shopper adds several unplanned items and uses a saved twenty-four-hour cart rule; another compares the list with the monthly budget and removes anything without a planned use."
+      ],
+      "counterexample": "A fast decision is not necessarily impulsive, and following a delay rule does not prove low impulsiveness. Expertise, urgency, affordability, habit design, and external constraints can make the same action sensible in one context and costly in another.",
+      "observation_contexts": "Observe the urge, delay window, environmental cue, and consequence separately. At work, study, communication, or in daily spending, focus on the conditions that change follow-through instead of assigning a fixed identity from one lapse.",
+      "reflection_questions": [
+        "Which cues make immediate relief or reward compete most strongly with your earlier intention, and how long does the strongest urge usually last?",
+        "What small environmental change would make the delayed option easier without requiring perfect willpower?"
+      ],
+      "low_risk_action": "Choose one recurring low-stakes urge and insert a brief friction step: close the tab, move the item to a list, or wait ten minutes. Afterward record whether the urge changed and whether the original intention still fits.",
+      "not_meaning": "This facet does not diagnose an impulse-control condition, attention disorder, addiction, mania, eating disorder, or any other clinical condition. It does not predict financial, safety, or employment outcomes from a trait label.",
+      "method_boundary": "The page uses the exact IPIP/NEO-style facet code `impulsiveness`; it is not interchangeable with every research definition of impulsivity. It is distinct from BFI-2 facets, ten-aspect models, proprietary NEO scores, and clinical screening.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical Big Five description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores or clinical interpretations."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments, diagnosis, or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:neuroticism:impulsiveness",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/impulsiveness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "impulsiveness",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "冲动性 facet：强烈欲求出现时延迟行动的难度",
+      "summary": "冲动性是神经质中的窄维度，描述情绪或欲求活跃时，延迟一个强烈冲动可能有多困难；它不是诊断，不是整体自控力评分，也不能证明一个人不负责任。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "在神经质 domain 中，这个 facet 聚焦欲求调节，不是预期性担忧、生气激活、灰心、被评价时的不适或压力失衡。一个人可能多数领域计划周密，却对某类情绪化欲求较难等待。",
+      "two_ends": "一端的即时奖励或缓解会更强地与长期意图竞争；另一端较容易延迟，并在情绪激活时仍保留原有规则。两端都不能保证一个人自发、自律、有创造力或在所有情境中判断良好。",
+      "scenarios": [
+        "修改报告时，一位写作者总想查看新消息，于是把手机放到房间外二十分钟；另一位保留通知，但规定完成一个小节后再回复。",
+        "遇到限时网购促销，一位顾客把计划外商品加入购物车，并执行保存二十四小时再买的规则；另一位对照月度预算，删除没有明确用途的物品。"
+      ],
+      "counterexample": "快速决定不一定冲动，遵守等待规则也不能证明冲动性低。专业经验、紧急程度、可承受成本、习惯设计和外部限制，会让同一行为在不同情境产生不同意义。",
+      "observation_contexts": "把欲求、可等待时间、环境线索和后果分别观察。在工作、学习、沟通或日常消费中，关注哪些条件改变执行结果，不用一次失误定义固定身份。",
+      "reflection_questions": [
+        "哪些线索最容易让即时缓解或奖励压过原先意图，最强烈的欲求通常会持续多久？",
+        "哪一个小的环境调整能让延迟选项更容易，而不要求自己拥有完美意志力？"
+      ],
+      "low_risk_action": "选择一个反复出现的低风险欲求，加入短暂阻力：关掉页面、把物品移入清单或等待十分钟。之后记录欲求是否变化，原先意图是否仍然合适。",
+      "not_meaning": "这个 facet 不诊断冲动控制障碍、注意力障碍、成瘾、躁狂、进食障碍或其他临床状况，也不能凭人格标签预测财务、安全或就业结果。",
+      "method_boundary": "本页使用准确的 IPIP/NEO 风格 facet code `impulsiveness`，不与研究中的所有冲动定义互换；它不同于 BFI-2 facets、十方面模型、专有 NEO 分数和临床筛查。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "支持 Big Five 的层级描述，但 BFI-2 facets 与本页 30 facet 导航标签并不相同，也不验证费马测试分数或临床解释。"
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "支持导航标签及其 domain 归属，不代表与专有 NEO 工具相同，也不支持诊断或对个人作确定判断。"
+        }
+      ]
+    },
+    {
+      "content_key": "facet:neuroticism:vulnerability",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/vulnerability",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "vulnerability",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Vulnerability facet: feeling overwhelmed under acute pressure",
+      "summary": "Vulnerability is a narrow neuroticism facet describing the tendency to feel less able to think or act effectively when pressure becomes intense; it is not fragility, trauma history, incapacity, or a prediction of performance.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Neuroticism also includes anticipatory anxiety, anger, discouragement, self-consciousness, and impulsiveness. Vulnerability focuses on functioning during acute overload, so a person may worry often yet remain organized in a crisis, or feel calm until demands suddenly accumulate.",
+      "two_ends": "At one end, competing demands may quickly narrow attention and make sequencing difficult. At the other, priorities may remain accessible during acute pressure. Either pattern can change with familiarity, support, sleep, resources, and whether the situation is actually controllable.",
+      "scenarios": [
+        "When a service outage produces three simultaneous requests, one coordinator freezes briefly, then uses an incident checklist and asks a colleague to triage messages; another names the first recovery target and delegates the rest immediately.",
+        "During a move, a missing key, late delivery, and rain arrive together. One person stops to list the next two actions and calls for help; another handles the key first and postpones every nonessential decision until evening."
+      ],
+      "counterexample": "Requesting support under heavy load does not prove vulnerability, and staying active does not prove effective coping. Role clarity, practice, staffing, health, and the objective severity of the event can dominate a trait tendency.",
+      "observation_contexts": "Notice the point at which demand exceeds available sequencing, what functions become harder, and which resource restores traction. In work or daily reflection, describe the load and support before making claims about a person's capacity.",
+      "reflection_questions": [
+        "What combination of time pressure, ambiguity, and simultaneous demands most often disrupts your ability to choose the next step?",
+        "Which concrete support—written sequence, fewer inputs, another person, or a short pause—most reliably restores useful action?"
+      ],
+      "low_risk_action": "Before one moderately busy period, write a three-step overload card: stop new input briefly, name the single next action, and identify one person or resource to contact. Review afterward which step helped.",
+      "not_meaning": "This facet does not measure weakness, trauma exposure, disability, crisis safety, resilience, emergency competence, or suitability for demanding work. It cannot predict how someone will perform in a specific high-stakes event.",
+      "method_boundary": "This self-report page uses an IPIP/NEO-style facet navigation label, not a stress test or clinical assessment. It differs from BFI-2 facets, ten-aspect models, proprietary NEO scores, and occupational selection tools.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical Big Five description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores or clinical interpretations."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments, diagnosis, or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:neuroticism:vulnerability",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/vulnerability",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "vulnerability",
+      "framework": "big_five",
+      "domain_code": "neuroticism",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "脆弱性 facet：高压下感到难以有效应对",
+      "summary": "脆弱性是神经质中的窄维度，描述压力变得强烈时多容易感到难以有效思考或行动；它不等于软弱、创伤经历、无能力，也不能预测实际表现。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "神经质还包含预期性焦虑、愤怒、灰心、自我意识和冲动性。脆弱性只聚焦急性过载中的运作：有人平时担忧较多却能在危机中有序行动，也有人平静到需求突然叠加才失衡。",
+      "two_ends": "一端在多个要求同时出现时更快收窄注意力，难以安排先后；另一端在急性压力中仍较容易抓住优先级。熟悉度、支持、睡眠、资源和事情是否可控，都可能改变两端表现。",
+      "scenarios": [
+        "服务中断同时带来三个请求，一位协调者短暂停住，随后打开事件清单并请同事分流消息；另一位立刻确定第一个恢复目标，把其余事项分派出去。",
+        "搬家当天钥匙找不到、配送迟到又开始下雨，一位当事人先列出接下来两步并打电话求助；另一位先处理钥匙，把所有非必要决定推迟到晚上。"
+      ],
+      "counterexample": "在高负荷下寻求支持不证明脆弱，持续忙碌也不证明应对有效。角色清晰度、训练、人员配置、健康状况和事件的客观严重性，常常比人格倾向更能解释当下行为。",
+      "observation_contexts": "观察需求何时超过可用的排序能力、哪些功能开始变难、什么资源能恢复推进。在工作或日常复盘中，先描述负荷与支持条件，再讨论个人应对倾向。",
+      "reflection_questions": [
+        "时间压力、信息模糊和多任务以什么组合出现时，最容易打断你选择下一步？",
+        "书面顺序、减少输入、另一位协助者或短暂停顿，哪一种具体支持最能恢复有效行动？"
+      ],
+      "low_risk_action": "在一次中等忙碌时段前写下三步过载卡：短暂停止新输入、只确定一个下一步、标出可联系的人或资源。结束后复盘哪一步真正有帮助。",
+      "not_meaning": "这个 facet 不衡量软弱、创伤暴露、残障、危机安全、韧性、应急能力或高压岗位适合度，也不能预测某人在具体高风险事件中的表现。",
+      "method_boundary": "这是基于自陈的 IPIP/NEO 风格 facet 导航标签，不是压力测试或临床评估；它与 BFI-2 facets、十方面模型、专有 NEO 分数和职业筛选工具不同。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "支持 Big Five 的层级描述，但 BFI-2 facets 与本页 30 facet 导航标签并不相同，也不验证费马测试分数或临床解释。"
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "支持导航标签及其 domain 归属，不代表与专有 NEO 工具相同，也不支持诊断或对个人作确定判断。"
+        }
+      ]
+    }
+  ],
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}
