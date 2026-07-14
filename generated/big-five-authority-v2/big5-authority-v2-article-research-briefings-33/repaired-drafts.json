@@ -1,0 +1,616 @@
+{
+  "schema_version": "big5-article-wave-repaired.v1",
+  "generated_at": "2026-07-14T10:54:29Z",
+  "assets": [
+    {
+      "topic_id": "big5.article.33.01.read-study",
+      "locale": "en",
+      "slug": "how-to-read-a-big-five-research-paper",
+      "repairs": [
+        "Added verified publication year, DOI metadata, and 2026-07-14 access date.",
+        "Bound claims to the primary paper question, design, sample, measure, and limitation.",
+        "Separated newness, study labels, evidence accumulation, and causal inference.",
+        "Translated evidence into reversible experiments without individual prediction.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "Read a Big Five paper by tracing one claim through the study question, design, sample, exact measure, analysis, result, uncertainty, and stated limits. Start with the primary paper and its publication date rather than a headline.",
+        "evidence": "Goldberg (1990) and Soto and John (2017) answer different questions with different measures and designs. Their DOI and publication metadata were reverified on 2026-07-14; being primary papers does not make their conclusions universal.",
+        "nuance_counterexample": "An abstract can accurately summarize a result yet omit details needed for interpretation. A large sample does not repair a mismatched measure, and statistical significance does not establish practical importance, causality, or individual prediction.",
+        "concrete_scenario": "A headline says a study “proves personality.” The reader opens the primary paper, records its year, sample, measure, comparison, estimate, uncertainty, and limitations, then rewrites the headline as the narrower claim actually tested.",
+        "practical_framework": [
+          "Record citation, DOI, publication year, and access date.",
+          "Write the exact question, design, sample, setting, and measure.",
+          "Extract the estimate, uncertainty, comparison, and preregistration or replication context if reported.",
+          "State what the paper does not show and whether the claim transfers to FermatMind: usually Unknown."
+        ],
+        "limitation": "This checklist is not a systematic review or guarantee that a paper is correct. It does not establish FermatMind reliability, validity, norms, accuracy, causality, or prediction."
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg (1990), Big Five factor structure",
+          "publication_year": 1990,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/0022-3514.59.6.1216",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "A primary study of a broad lexical factor structure; its 1990 design, samples, measures, and claims must not be generalized into product validation or every later Big Five question."
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto & John (2017), BFI-2 domains and facets",
+          "publication_year": 2017,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/pspp0000096",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "A primary instrument-development paper for BFI-2; it does not validate FermatMind, every Big Five measure, causal claims, or individual outcome prediction."
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "FermatMind public claim boundary matrix",
+          "publication_year": 2026,
+          "access_date": "2026-07-14",
+          "doi": null,
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "Defines product claim limits; repository policy is not scientific evidence and cannot strengthen a study result."
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.33.01.read-study",
+      "locale": "zh-CN",
+      "slug": "how-to-read-a-big-five-research-paper",
+      "repairs": [
+        "Added verified publication year, DOI metadata, and 2026-07-14 access date.",
+        "Bound claims to the primary paper question, design, sample, measure, and limitation.",
+        "Separated newness, study labels, evidence accumulation, and causal inference.",
+        "Translated evidence into reversible experiments without individual prediction.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "阅读大五论文时，应把一项主张追溯到研究问题、设计、样本、准确测量、分析、结果、不确定性与作者陈述的局限。先看原始论文与出版日期，而不是标题。",
+        "evidence": "Goldberg（1990）与 Soto 和 John（2017）使用不同测量与设计回答不同问题。其 DOI 与出版元数据已于 2026-07-14 联网复核；原始论文身份也不让结论自动普遍成立。",
+        "nuance_counterexample": "摘要可能准确概括结果，却省略解释所需细节。大样本不能修复测量不匹配，统计显著也不能建立实际重要性、因果或个人预测。",
+        "concrete_scenario": "标题宣称某研究“证明人格”。读者打开原始论文，记录年份、样本、测量、比较、估计、不确定性与局限，再把标题改写为研究实际检验的更窄主张。",
+        "practical_framework": [
+          "记录引用、DOI、出版年份与访问日期。",
+          "写出准确问题、设计、样本、情境与测量。",
+          "提取估计、不确定性、比较，以及论文报告的预注册或重复背景。",
+          "说明论文未证明什么，以及能否转移到费马测试：通常为 Unknown。"
+        ],
+        "limitation": "本清单不是系统综述，也不保证论文正确；它不建立费马测试信度、效度、常模、准确性、因果或预测。"
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg（1990）：大五因素结构",
+          "publication_year": 1990,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/0022-3514.59.6.1216",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "关于宽泛词汇因素结构的原始研究；其 1990 年设计、样本、测量与主张不能被泛化为产品验证或所有后续大五问题。"
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto 与 John（2017）：BFI-2 维度与侧面",
+          "publication_year": 2017,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/pspp0000096",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "关于 BFI-2 的原始工具开发论文；不验证费马测试、每一种大五测量、因果主张或个人结果预测。"
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "费马测试公开主张边界矩阵",
+          "publication_year": 2026,
+          "access_date": "2026-07-14",
+          "doi": null,
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "定义产品主张边界；仓库政策不是科学证据，也不能增强研究结论。"
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.33.02.new-research-context",
+      "locale": "en",
+      "slug": "how-to-place-new-big-five-research-in-context",
+      "repairs": [
+        "Added verified publication year, DOI metadata, and 2026-07-14 access date.",
+        "Bound claims to the primary paper question, design, sample, measure, and limitation.",
+        "Separated newness, study labels, evidence accumulation, and causal inference.",
+        "Translated evidence into reversible experiments without individual prediction.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "A new study should be placed beside prior theory, measures, samples, designs, effect estimates, replications, and disagreements before it changes a public claim. “New” describes timing, not evidential strength.",
+        "evidence": "The locked 1990 and 2017 primary papers illustrate that research questions and instruments evolve. Their verified dates anchor historical context; they do not serve as a complete review of evidence through 2026.",
+        "nuance_counterexample": "A newer paper can improve methods or examine a new population, but it can also be narrower, exploratory, or inconsistent with other evidence. An older foundational paper can remain relevant without being the last word.",
+        "concrete_scenario": "A 2026 news post claims one new correlation overturns the Big Five. The reviewer checks the primary paper, construct and measure, comparison with prior findings, uncertainty, replication status, and whether “overturns” matches the evidence.",
+        "practical_framework": [
+          "Verify the primary source, publication date, version, correction, and access date.",
+          "Compare its question, measure, sample, design, and estimate with relevant prior work.",
+          "Separate replication, extension, contradiction, and method change.",
+          "Delay product-copy changes until evidence and claim boundaries are manually reviewed."
+        ],
+        "limitation": "This package does not claim to identify or summarize every new study. Time-sensitive research claims require a new search and access-date check at publication review."
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg (1990), Big Five factor structure",
+          "publication_year": 1990,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/0022-3514.59.6.1216",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "A primary study of a broad lexical factor structure; its 1990 design, samples, measures, and claims must not be generalized into product validation or every later Big Five question."
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto & John (2017), BFI-2 domains and facets",
+          "publication_year": 2017,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/pspp0000096",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "A primary instrument-development paper for BFI-2; it does not validate FermatMind, every Big Five measure, causal claims, or individual outcome prediction."
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "FermatMind public claim boundary matrix",
+          "publication_year": 2026,
+          "access_date": "2026-07-14",
+          "doi": null,
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "Defines product claim limits; repository policy is not scientific evidence and cannot strengthen a study result."
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.33.02.new-research-context",
+      "locale": "zh-CN",
+      "slug": "how-to-place-new-big-five-research-in-context",
+      "repairs": [
+        "Added verified publication year, DOI metadata, and 2026-07-14 access date.",
+        "Bound claims to the primary paper question, design, sample, measure, and limitation.",
+        "Separated newness, study labels, evidence accumulation, and causal inference.",
+        "Translated evidence into reversible experiments without individual prediction.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "新研究必须与既有理论、测量、样本、设计、效应估计、重复与分歧并置，才能改变公开主张。“新”描述时间，不代表证据更强。",
+        "evidence": "锁定的 1990 与 2017 原始论文说明研究问题与工具会演进。经复核的日期提供历史锚点，但它们不是截至 2026 年的完整证据综述。",
+        "nuance_counterexample": "更新论文可能改进方法或研究新人群，也可能更窄、探索性更强或与其他证据不一致。旧的基础论文可能仍相关，却不是最终答案。",
+        "concrete_scenario": "2026 年新闻称一项新相关研究推翻大五。评审者检查原始论文、构念与测量、和既有发现的比较、不确定性、重复状态，以及“推翻”是否符合证据。",
+        "practical_framework": [
+          "核实原始来源、出版日期、版本、勘误与访问日期。",
+          "把问题、测量、样本、设计与估计和相关既有研究比较。",
+          "区分重复、扩展、矛盾与方法变化。",
+          "在证据与主张边界人工审核前，不修改产品文案。"
+        ],
+        "limitation": "本包不声称识别或概括所有新研究。时效研究主张在出版审核时必须重新搜索并核对访问日期。"
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg（1990）：大五因素结构",
+          "publication_year": 1990,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/0022-3514.59.6.1216",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "关于宽泛词汇因素结构的原始研究；其 1990 年设计、样本、测量与主张不能被泛化为产品验证或所有后续大五问题。"
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto 与 John（2017）：BFI-2 维度与侧面",
+          "publication_year": 2017,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/pspp0000096",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "关于 BFI-2 的原始工具开发论文；不验证费马测试、每一种大五测量、因果主张或个人结果预测。"
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "费马测试公开主张边界矩阵",
+          "publication_year": 2026,
+          "access_date": "2026-07-14",
+          "doi": null,
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "定义产品主张边界；仓库政策不是科学证据，也不能增强研究结论。"
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.33.03.evidence-strength",
+      "locale": "en",
+      "slug": "big-five-evidence-strength-from-one-study-to-review",
+      "repairs": [
+        "Added verified publication year, DOI metadata, and 2026-07-14 access date.",
+        "Bound claims to the primary paper question, design, sample, measure, and limitation.",
+        "Separated newness, study labels, evidence accumulation, and causal inference.",
+        "Translated evidence into reversible experiments without individual prediction.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "Judge evidence strength relative to the claim: construct definition, measurement, design, sampling, uncertainty, transparency, replication, convergence, and review quality all matter. One study rarely settles a broad personal claim.",
+        "evidence": "Goldberg (1990) supports a factor-structure claim; Soto and John (2017) supports claims about one hierarchical measure. Neither design alone supports diagnosis, causal intervention effects, or FermatMind product metrics.",
+        "nuance_counterexample": "There is no universal ladder where every meta-analysis beats every primary study. Reviews inherit the quality and compatibility of included studies, while a strong primary paper may be the right evidence for a narrow method question.",
+        "concrete_scenario": "A marketer cites a meta-analysis label without checking included measures or populations. The reviewer restates the exact claim, inspects inclusion and heterogeneity, and checks whether any evidence concerns the product or intended use.",
+        "practical_framework": [
+          "Define the exact claim before rating evidence.",
+          "Match design and measure to the claim, including causal versus descriptive language.",
+          "Check uncertainty, transparency, replication, convergence, and review methods.",
+          "Use calibrated wording: supports, suggests, is uncertain, conflicts, or remains Unknown."
+        ],
+        "limitation": "This is a reasoning framework, not a numerical evidence grade. No evidence-strength score or product authority rating is assigned."
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg (1990), Big Five factor structure",
+          "publication_year": 1990,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/0022-3514.59.6.1216",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "A primary study of a broad lexical factor structure; its 1990 design, samples, measures, and claims must not be generalized into product validation or every later Big Five question."
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto & John (2017), BFI-2 domains and facets",
+          "publication_year": 2017,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/pspp0000096",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "A primary instrument-development paper for BFI-2; it does not validate FermatMind, every Big Five measure, causal claims, or individual outcome prediction."
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "FermatMind public claim boundary matrix",
+          "publication_year": 2026,
+          "access_date": "2026-07-14",
+          "doi": null,
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "Defines product claim limits; repository policy is not scientific evidence and cannot strengthen a study result."
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.33.03.evidence-strength",
+      "locale": "zh-CN",
+      "slug": "big-five-evidence-strength-from-one-study-to-review",
+      "repairs": [
+        "Added verified publication year, DOI metadata, and 2026-07-14 access date.",
+        "Bound claims to the primary paper question, design, sample, measure, and limitation.",
+        "Separated newness, study labels, evidence accumulation, and causal inference.",
+        "Translated evidence into reversible experiments without individual prediction.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "应相对于主张判断证据强度：构念定义、测量、设计、抽样、不确定性、透明度、重复、收敛与综述质量都重要。单项研究很少能解决宽泛个人主张。",
+        "evidence": "Goldberg（1990）支持因素结构主张；Soto 与 John（2017）支持一种层级式测量的相关主张。两种设计都不能单独支持诊断、因果干预效果或费马测试产品指标。",
+        "nuance_counterexample": "不存在“所有元分析必然胜过所有原始研究”的通用阶梯。综述继承纳入研究的质量与兼容性，而高质量原始论文可能正是回答狭窄方法问题的合适证据。",
+        "concrete_scenario": "营销人员只引用“元分析”标签，不检查纳入测量或人群。评审者重述准确主张，查看纳入标准与异质性，并检查是否有证据涉及产品或预期用途。",
+        "practical_framework": [
+          "评价证据前先定义准确主张。",
+          "让设计与测量匹配主张，并区分因果与描述语言。",
+          "检查不确定性、透明度、重复、收敛与综述方法。",
+          "使用校准措辞：支持、提示、不确定、冲突或仍为 Unknown。"
+        ],
+        "limitation": "这是推理框架，不是数值证据等级；本文不分配证据强度分数或产品权威评级。"
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg（1990）：大五因素结构",
+          "publication_year": 1990,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/0022-3514.59.6.1216",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "关于宽泛词汇因素结构的原始研究；其 1990 年设计、样本、测量与主张不能被泛化为产品验证或所有后续大五问题。"
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto 与 John（2017）：BFI-2 维度与侧面",
+          "publication_year": 2017,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/pspp0000096",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "关于 BFI-2 的原始工具开发论文；不验证费马测试、每一种大五测量、因果主张或个人结果预测。"
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "费马测试公开主张边界矩阵",
+          "publication_year": 2026,
+          "access_date": "2026-07-14",
+          "doi": null,
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "定义产品主张边界；仓库政策不是科学证据，也不能增强研究结论。"
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.33.04.limitations",
+      "locale": "en",
+      "slug": "big-five-study-limitations-sample-measures-and-causality",
+      "repairs": [
+        "Added verified publication year, DOI metadata, and 2026-07-14 access date.",
+        "Bound claims to the primary paper question, design, sample, measure, and limitation.",
+        "Separated newness, study labels, evidence accumulation, and causal inference.",
+        "Translated evidence into reversible experiments without individual prediction.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "The most important limitation is the one that weakens the specific inference being made. Check who was studied, what was measured, how data were collected, what comparison was made, uncertainty, missingness, multiplicity, and whether causal language exceeds design.",
+        "evidence": "The locked primary papers support their named structural and measurement claims under reported designs. Their evidence does not automatically generalize across instruments, languages, cultures, populations, time periods, or products.",
+        "nuance_counterexample": "Every study has limitations, but listing limitations is not the same as invalidating a result. Conversely, an author acknowledging a limitation does not neutralize it; the public claim must be narrowed accordingly.",
+        "concrete_scenario": "A cross-sectional convenience sample finds an association and a post predicts personal change. The reviewer changes “causes” to “was associated in this sample,” names the measure and date, and removes the personal forecast.",
+        "practical_framework": [
+          "Write the inference you want to make.",
+          "Audit sample, setting, measure, design, comparison, missing data, and uncertainty.",
+          "Check whether causal, cross-cultural, temporal, or individual generalization is justified.",
+          "Narrow or withhold the claim; record unresolved facts as Unknown."
+        ],
+        "limitation": "This checklist cannot replace domain-specific statistical review, replication, or systematic synthesis. It does not validate FermatMind."
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg (1990), Big Five factor structure",
+          "publication_year": 1990,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/0022-3514.59.6.1216",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "A primary study of a broad lexical factor structure; its 1990 design, samples, measures, and claims must not be generalized into product validation or every later Big Five question."
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto & John (2017), BFI-2 domains and facets",
+          "publication_year": 2017,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/pspp0000096",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "A primary instrument-development paper for BFI-2; it does not validate FermatMind, every Big Five measure, causal claims, or individual outcome prediction."
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "FermatMind public claim boundary matrix",
+          "publication_year": 2026,
+          "access_date": "2026-07-14",
+          "doi": null,
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "Defines product claim limits; repository policy is not scientific evidence and cannot strengthen a study result."
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.33.04.limitations",
+      "locale": "zh-CN",
+      "slug": "big-five-study-limitations-sample-measures-and-causality",
+      "repairs": [
+        "Added verified publication year, DOI metadata, and 2026-07-14 access date.",
+        "Bound claims to the primary paper question, design, sample, measure, and limitation.",
+        "Separated newness, study labels, evidence accumulation, and causal inference.",
+        "Translated evidence into reversible experiments without individual prediction.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "最重要的局限，是削弱当前具体推断的那一项。要检查研究对象、测量内容、数据收集、比较方式、不确定性、缺失、多重分析，以及因果语言是否超过设计。",
+        "evidence": "锁定原始论文在所报告设计下支持其指定结构与测量主张，不能自动泛化到其他工具、语言、文化、人群、时期或产品。",
+        "nuance_counterexample": "所有研究都有局限，但列出局限不等于否定结果。反过来，作者承认局限也不会消除它；公开主张必须相应收窄。",
+        "concrete_scenario": "横断面便利样本发现关联，帖子却预测个人变化。评审者把“导致”改为“在该样本中相关”，注明测量与日期，并删除个人预测。",
+        "practical_framework": [
+          "写出想做的推断。",
+          "审计样本、情境、测量、设计、比较、缺失数据与不确定性。",
+          "检查因果、跨文化、时间或个人泛化是否成立。",
+          "收窄或暂不发布主张；未解决事实标为 Unknown。"
+        ],
+        "limitation": "本清单不能替代领域统计评审、重复或系统综合，也不验证费马测试。"
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg（1990）：大五因素结构",
+          "publication_year": 1990,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/0022-3514.59.6.1216",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "关于宽泛词汇因素结构的原始研究；其 1990 年设计、样本、测量与主张不能被泛化为产品验证或所有后续大五问题。"
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto 与 John（2017）：BFI-2 维度与侧面",
+          "publication_year": 2017,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/pspp0000096",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "关于 BFI-2 的原始工具开发论文；不验证费马测试、每一种大五测量、因果主张或个人结果预测。"
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "费马测试公开主张边界矩阵",
+          "publication_year": 2026,
+          "access_date": "2026-07-14",
+          "doi": null,
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "定义产品主张边界；仓库政策不是科学证据，也不能增强研究结论。"
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.33.05.apply-without-hype",
+      "locale": "en",
+      "slug": "apply-personality-research-without-overclaiming",
+      "repairs": [
+        "Added verified publication year, DOI metadata, and 2026-07-14 access date.",
+        "Bound claims to the primary paper question, design, sample, measure, and limitation.",
+        "Separated newness, study labels, evidence accumulation, and causal inference.",
+        "Translated evidence into reversible experiments without individual prediction.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "Apply personality research by turning a bounded group-level finding into a small, voluntary, reversible question about behavior and context. Do not turn an association into destiny, a sample average into a personal forecast, or a paper into a product guarantee.",
+        "evidence": "The locked papers support broad structure and one measurement model, not individualized intervention prescriptions. Their publication years and access date are visible so readers can locate evidence in time.",
+        "nuance_counterexample": "A personal experiment may be useful even when it does not test the scientific claim directly; it produces local practical evidence, not a replication. A failed experiment does not disprove the study or define the person.",
+        "concrete_scenario": "A reader sees a group finding about organization and tests a two-week task-capture routine. They track completion, effort, access, and exceptions, while avoiding claims that the routine changes a trait or guarantees productivity.",
+        "practical_framework": [
+          "State the source claim, population, measure, date, and uncertainty.",
+          "Choose one low-risk behavior and context with consent.",
+          "Define observations, burden, stopping rules, and a review point.",
+          "Keep local results local; do not claim diagnosis, causality, general validity, or guaranteed outcomes."
+        ],
+        "limitation": "This workflow is educational and not medical, legal, financial, admissions, hiring, or career advice. FermatMind-specific intervention and outcome evidence remains Unknown."
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg (1990), Big Five factor structure",
+          "publication_year": 1990,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/0022-3514.59.6.1216",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "A primary study of a broad lexical factor structure; its 1990 design, samples, measures, and claims must not be generalized into product validation or every later Big Five question."
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto & John (2017), BFI-2 domains and facets",
+          "publication_year": 2017,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/pspp0000096",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "A primary instrument-development paper for BFI-2; it does not validate FermatMind, every Big Five measure, causal claims, or individual outcome prediction."
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "FermatMind public claim boundary matrix",
+          "publication_year": 2026,
+          "access_date": "2026-07-14",
+          "doi": null,
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "Defines product claim limits; repository policy is not scientific evidence and cannot strengthen a study result."
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.33.05.apply-without-hype",
+      "locale": "zh-CN",
+      "slug": "apply-personality-research-without-overclaiming",
+      "repairs": [
+        "Added verified publication year, DOI metadata, and 2026-07-14 access date.",
+        "Bound claims to the primary paper question, design, sample, measure, and limitation.",
+        "Separated newness, study labels, evidence accumulation, and causal inference.",
+        "Translated evidence into reversible experiments without individual prediction.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "应用人格研究时，应把有边界的群体发现转成关于行为与情境的小型、自愿、可逆问题。不能把关联变成命运、把样本平均变成个人预测，也不能把论文变成产品保证。",
+        "evidence": "锁定论文支持宽泛结构与一种测量模型，不支持个体化干预处方。出版年份与访问日期保持可见，使读者能把证据放在时间中定位。",
+        "nuance_counterexample": "个人实验即使没有直接检验科学主张，也可能实用；它产生的是本地实践证据，不是重复研究。实验无效既不推翻论文，也不定义个人。",
+        "concrete_scenario": "读者看到关于有条理行为的群体发现，测试两周任务收集流程。他记录完成、投入、可访问性与例外，不声称流程改变特质或保证生产力。",
+        "practical_framework": [
+          "说明来源主张、人群、测量、日期与不确定性。",
+          "在同意基础上选择一个低风险行为与情境。",
+          "定义观察、负担、停止规则与复盘点。",
+          "把本地结果保留在本地；不声称诊断、因果、普遍效度或保证结果。"
+        ],
+        "limitation": "本流程仅用于教育，不是医疗、法律、金融、录取、招聘或职业建议。费马测试特定干预与结果证据仍为 Unknown。"
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg（1990）：大五因素结构",
+          "publication_year": 1990,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/0022-3514.59.6.1216",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "关于宽泛词汇因素结构的原始研究；其 1990 年设计、样本、测量与主张不能被泛化为产品验证或所有后续大五问题。"
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto 与 John（2017）：BFI-2 维度与侧面",
+          "publication_year": 2017,
+          "access_date": "2026-07-14",
+          "doi": "10.1037/pspp0000096",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "关于 BFI-2 的原始工具开发论文；不验证费马测试、每一种大五测量、因果主张或个人结果预测。"
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "费马测试公开主张边界矩阵",
+          "publication_year": 2026,
+          "access_date": "2026-07-14",
+          "doi": null,
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "定义产品主张边界；仓库政策不是科学证据，也不能增强研究结论。"
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    }
+  ]
+}
