@@ -90558,9 +90558,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "d404f414a5384ee25de7b6ae31d2b94b3ea387bd",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3057",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -90591,6 +90591,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All manifest local checks passed for the exact 9-file PR17 scope. The package covers all six locked extraversion facets in independently authored EN/zh-CN pairs, separates facets from the domain and other taxonomies, includes two original scenarios plus reflection and low-risk action per page, preserves raw failures, and keeps every release control closed."
+      },
+      {
+        "at": "2026-07-14T02:23:48Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 9-file scope as d404f414a5384ee25de7b6ae31d2b94b3ea387bd, pushed the scoped branch, and opened PR #3057. Waiting for required GitHub checks on the final ledger-updated head."
       }
     ]
   },
