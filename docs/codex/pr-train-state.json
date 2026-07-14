@@ -91500,8 +91500,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "927f1df3f0d642d06c5af76f66281c6f37c21ef0",
+    "status": "merged",
+    "commit_sha": "f340645bc5c92b40dbdb71dcca4633c16acbf7da",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3076",
     "checks": {
       "dependency": {
@@ -91518,9 +91518,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T10:19:33Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -91549,6 +91549,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on ledger-updated head 8924a06006ff656918523fb761a48ff672292fe4, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T10:21:48Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR31 after GitHub reported PR #3076 MERGED at 2026-07-14T10:19:33Z as squash commit f340645bc5c92b40dbdb71dcca4633c16acbf7da. origin/main contains the merge; remote and local task branches were deleted; post-merge package validation, 4 tests / 166 assertions, Pint, clean-main, and ancestry checks passed."
       }
     ]
   },
@@ -91561,10 +91567,23 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "ee9c26d37060737817e5e27cceebe06610afc322",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3078",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31 PR #3076 is MERGED as f340645bc5c92b40dbdb71dcca4633c16acbf7da; origin/main contains the merge, remote and local branches are deleted, and PR31 post-merge validator, 4 tests / 166 assertions, Pint, clean-main, and ancestry checks passed. PR32 started from that exact clean origin/main head."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact PR21 batch 32 coverage: 5 locked comparison themes, 10 EN/zh-CN Article candidates, exact slugs/questions/audiences/tasks/keywords/sources/links, nine reader/evidence sections, full raw-review-repair-final-mapping chain, null attribution, pending_manual_review, and zero CMS/publication/indexability mutations. Every asset separates model questions, constructs, instruments, outputs, and intended uses; deterministic crosswalks, score conversion, type or motive inference, model equivalence, diagnosis, ideal profiles, destiny, career or hiring prediction, and high-stakes use are prohibited. FermatMind comparative psychometrics remain Unknown. BigFiveAuthorityV232Test passed with 4 tests / 166 assertions. Pint --test, PHP/JSON/JavaScript/YAML syntax, three-source mapping, private-link, git diff --check, and exact 11-file allowlist checks passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "All 9 GitHub checks passed on ledger-updated head 79117cc03a5c0d8541ce904d39dc399972b7f3b3: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload. GitHub reported CLEAN merge state and the changed-file set remained exactly the 11 allowed files."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -91573,7 +91592,32 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T10:21:48Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR32 from exact origin/main f340645bc5c92b40dbdb71dcca4633c16acbf7da after PR31 merged, cleaned, reconciled, and revalidated. Scope consumes only PR21 batch 32: MBTI, Enneagram, DISC, RIASEC, and common myths in EN and zh-CN. Comparisons explain different questions and constructs without deterministic crosswalks, score conversion, type-to-trait equivalence, diagnosis, ideal scores, or destiny claims."
+      },
+      {
+        "at": "2026-07-14T10:26:05Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All PR32 local checks passed. The package exactly consumes PR21 batch 32, preserves 10 bilingual Article candidates and the full skeptical review chain, and enforces model-separation, no-crosswalk, no-conversion, no-type/motive-inference, no-high-stakes-use, product-Unknown, and private-link guards. Focused tests passed with 4 tests / 166 assertions; validator, Pint, syntax, three-source ledger, private-link, diff, and exact 11-file scope checks passed."
+      },
+      {
+        "at": "2026-07-14T10:27:11Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 11-file PR32 scope as ee9c26d37060737817e5e27cceebe06610afc322, pushed codex/big5-authority-v2-article-comparisons-32, and opened PR #3078. Waiting for required GitHub checks on the ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T10:43:36Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on ledger-updated head 79117cc03a5c0d8541ce904d39dc399972b7f3b3, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33": {
     "id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33",
