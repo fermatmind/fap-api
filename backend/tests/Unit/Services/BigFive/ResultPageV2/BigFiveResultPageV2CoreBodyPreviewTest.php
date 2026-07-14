@@ -4554,6 +4554,26 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_industry_directory_api_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerIndustryDirectoryController.php',
+            'backend/app/Services/Career/CareerIndustryDirectoryReadModel.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\Http\Controllers\API\V0_5\Career\CareerIndustryDirectoryController;',
+            "+        Route::get('/career/industries', [CareerIndustryDirectoryController::class, 'index']);",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_authority_cache_resilience(): void
     {
         $changed = [
@@ -9461,8 +9481,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php',
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerIndustryDirectoryController.php',
             'backend/app/Services/Career/CareerDirectoryAuthorityService.php',
             'backend/app/Services/Career/CareerDirectoryReadModelBuilder.php',
+            'backend/app/Services/Career/CareerIndustryDirectoryReadModel.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
         ], true);
     }
@@ -12535,7 +12557,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
         $allowedLines = [
             '+use App\\Http\\Controllers\\API\\V0_5\\Career\\CareerDirectoryController;',
+            '+use App\\Http\\Controllers\\API\\V0_5\\Career\\CareerIndustryDirectoryController;',
             "+    Route::get('/career/directory', [CareerDirectoryController::class, 'index']);",
+            "+        Route::get('/career/industries', [CareerIndustryDirectoryController::class, 'index']);",
         ];
 
         foreach ($changedLines as $line) {
