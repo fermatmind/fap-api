@@ -91721,8 +91721,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "4b22706f7372060ac2c2a2d12da2ace0477d4907",
+    "status": "merged",
+    "commit_sha": "90a28b130271827f429bd4166965cf14cc7695ca",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3081",
     "checks": {
       "dependency": {
@@ -91759,9 +91759,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T11:55:47Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -91790,6 +91790,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on ledger-updated head 4b22706f7372060ac2c2a2d12da2ace0477d4907, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 10 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T12:04:59Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR34 after GitHub reported PR #3081 MERGED at 2026-07-14T11:55:47Z as squash commit 90a28b130271827f429bd4166965cf14cc7695ca. Both complete 9/9 GitHub check rounds passed; origin/main contains the merge; remote and local task branches were deleted; post-merge package validation, 4 tests / 6982 assertions, Pint, clean-main, and ancestry checks passed."
       }
     ]
   },
@@ -91802,10 +91808,39 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-MEDIA-OG-34"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-MEDIA-OG-34 PR #3081 is MERGED as 90a28b130271827f429bd4166965cf14cc7695ca; origin/main contains the merge, remote and local branches are deleted, and PR34 post-merge validator, 4 tests / 6982 assertions, Pint, clean-main, and ancestry checks passed. PR35 started from that exact clean origin/main head."
+      },
+      "seo_geo_authority_guard": {
+        "status": "pass",
+        "evidence": "Applied the fap-web-seo-geo-authority skill and claim guards: candidate graph authority stays CMS/backend; metadata, sitemap, llms, JSON-LD, schema, robots, indexability, and public exposure are unchanged; graph planning is not represented as sitemap/schema proof or AI citation authority."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "php artisan test tests/Feature/SEO/BigFiveAuthorityV235Test.php passed: 4 tests / 71 assertions."
+      },
+      "full_mbti_verification": {
+        "status": "pass",
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh completed with exit code 0. It passed the complete Big Five/MBTI freeze and regression suite, end-to-end report/share and event acceptance, personality full-32 authority gate (66 tests / 5210 assertions), payment uniqueness, migration safety, auth guest, OpenAPI diff, order security, schema introspection, dependency security, webhook/attempt regressions, and queue backlog probe."
+      },
+      "package_validation": {
+        "status": "pass",
+        "evidence": "Deterministic rebuild and Node validator passed for 231 real candidate nodes, 1199 unique real-target edges, 109 reciprocal hreflang pairs, and 10 exact zh-CN single-hop 301 aliases; zero dead edges, orphans, sinks, self links, cross-locale edges, redirect chains, or redirect cycles."
+      },
+      "format_and_syntax": {
+        "status": "pass",
+        "evidence": "Pint passed for 3 PHP files; node --check passed for both package scripts; php -l passed for the service, command, and focused test; generated JSON, PR-train JSON, and manifest YAML parsed successfully."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Changed files are restricted to PR35 LinkGraph service, PR35 command/test/docs/generated package, and docs/codex/pr-train-state.json; CI-generated compiled pack changes were restored before staging. git diff --check passed."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -91814,7 +91849,20 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T12:04:59Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR35 from exact origin/main 90a28b130271827f429bd4166965cf14cc7695ca after PR34 merged, cleaned, reconciled, and revalidated. Built a no-release candidate graph from the exact PR07-34 231-route inventory with real-target validation, locale-preserving navigation, self-canonical candidates, reciprocal hreflang where real pairs exist, distinct EN legacy/V2 intent, and ten locked zh exact single-hop 301 aliases. Eligibility remains deferred to PR36."
+      },
+      {
+        "at": "2026-07-14T12:21:31Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "PR35 deterministic graph validation, 4 focused tests / 71 assertions, Pint, syntax and data parsing, exact scope validation, git diff check, and the required full ci_verify_mbti.sh suite all passed. No release, CMS, metadata, sitemap, llms, schema, robots, or indexability write was executed."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36": {
     "id": "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36",
