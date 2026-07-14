@@ -1,0 +1,38 @@
+{
+  "schema_version": "big5-article-ia-evidence-register.v1",
+  "generated_at": "2026-07-14T04:00:00Z",
+  "separation_rule": "Competitor, academic, and GSC evidence are separate inputs and cannot substitute for one another.",
+  "academic_evidence": {
+    "status": "AVAILABLE_FROM_LOCKED_PR05_LEDGER",
+    "authority_path": "generated/big-five-authority-v2/big5-authority-v2-source-ledger-05/source-ledger.json",
+    "source_ids": [
+      "academic.goldberg-1990-big-five-structure",
+      "academic.soto-john-2017-bfi2",
+      "academic.deyoung-quilty-peterson-2007-aspects",
+      "academic.soto-john-2009-ten-facets",
+      "academic.roberts-walton-viechtbauer-2006-change"
+    ],
+    "use": "Scientific background and claim support subject to each source limitation."
+  },
+  "competitor_evidence": {
+    "status": "AVAILABLE_AS_TIME_BOUND_STRUCTURE_ONLY",
+    "source_ids": [
+      "competitor.big-five-public-structure-benchmark-2026-07-13"
+    ],
+    "authority_path": "fap-web/docs/seo/personality/big5-authority-v2-benchmark-01-live-evidence-2026-07-14.json",
+    "use": "Question and public-surface pattern observation only; never scientific or product authority and never copy."
+  },
+  "gsc_evidence": {
+    "status": "GSC_EVIDENCE_PENDING",
+    "reason": "No query/page export with a reproducible date range, property, filters, and access date is present in the scoped repository evidence.",
+    "permitted_inference": false,
+    "unlock_requirements": [
+      "verified Search Console property",
+      "date range",
+      "country/device/search-type filters",
+      "query-page rows",
+      "export access date"
+    ],
+    "effect_on_lock": "The 50-theme editorial architecture is locked from user-task, repository, competitor-structure, and academic evidence; it makes no claim of GSC demand validation."
+  }
+}

@@ -90824,10 +90824,19 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-TEST-LANDING-20"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-TEST-LANDING-20 PR #3062 is MERGED as 4a206bb37c0e86857e1292356025560464d9baed; origin/main includes that merge and the later unrelated PUBLIC-STABILITY-API-04 merge 67678722ddcd6857fa049beee3ffa8c86f9016b5. PR21 started from that exact clean origin/main head."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact 9 Article + 2 topic-hub audit, 10 batches, 50 unique topic IDs/intents/slugs, 100 paired EN/zh-CN draft candidates, PR05 source-ledger references, separated academic/competitor/GSC evidence with GSC_EVIDENCE_PENDING, locale-safe internal links, no trait-combination data, and zero body/CMS/publication/indexability mutations. BigFiveAuthorityV221Test passed with 5 tests / 1355 assertions; touched PHP Pint, PHP/JSON/JavaScript/YAML syntax, git diff --check, and exact 10-file allowlist checks passed."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -90836,7 +90845,20 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T03:58:08Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR21 from exact origin/main 67678722ddcd6857fa049beee3ffa8c86f9016b5 after PR20 merged and cleanup completed. Scope is metadata-only: audit the exact 9 Article and 2 topic-hub surfaces, separate academic/competitor/GSC evidence, and lock PR24-33 to 10 batches / 50 unique themes / 100 EN-zh-CN draft candidates without article bodies, CMS writes, publication changes, indexability changes, or trait combination matrices."
+      },
+      {
+        "at": "2026-07-14T04:10:33Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All PR21 local checks passed. The package contains the exact 11-surface audit and locked 10-batch / 50-theme / 100-locale matrix, separates competitor, academic, and pending GSC evidence, and keeps all forbidden write and expansion counters at zero. Focused tests passed with 5 tests / 1355 assertions; Pint, syntax, diff, source-ledger, privacy-link, and exact 10-file scope checks passed."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22": {
     "id": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",

@@ -1,0 +1,3211 @@
+{
+  "schema_version": "big5-article-intent-matrix.v1",
+  "generated_at": "2026-07-14T04:00:00Z",
+  "authority": "BIG5-AUTHORITY-V2-ARTICLE-IA-21",
+  "lock_policy": "PR24-33 must consume exactly these topic IDs, slugs, intents, questions, audiences, sources, links, and boundaries. Replacement or invention requires a separately approved architecture revision.",
+  "forbidden_expansion": [
+    "trait_x_career_matrix",
+    "trait_x_problem_matrix",
+    "article_body_generation",
+    "cms_write",
+    "publish_state_change",
+    "indexability_change"
+  ],
+  "counts": {
+    "batches": 10,
+    "themes": 50,
+    "locale_drafts": 100
+  },
+  "themes": [
+    {
+      "topic_id": "big5.article.24.01.model-history",
+      "batch": 24,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24",
+      "family": "core_model",
+      "theme_key": "model-history",
+      "unique_intent_key": "core_model:model-history",
+      "locked_slug": "big-five-model-history-from-words-to-traits",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-model-history-from-words-to-traits",
+          "title_intent": "Model history without an origin myth: answer “How did the Big Five model develop?”",
+          "primary_question": "How did the Big Five model develop?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Understand the evidence path from lexical research to a five-factor model.",
+          "keywords": [
+            "Big Five model history",
+            "How did the Big Five model develop"
+          ],
+          "slug": "big-five-model-history-from-words-to-traits",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-model-history-from-words-to-traits",
+          "title_intent": "回答“大五人格模型是怎样形成的？”，聚焦 Model history without an origin myth",
+          "primary_question": "大五人格模型是怎样形成的？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "理解从词汇研究到五因素模型的证据路径。",
+          "keywords": [
+            "大五人格 model history",
+            "大五人格模型是怎样形成的"
+          ],
+          "slug": "big-five-model-history-from-words-to-traits",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.24.02.ocean",
+      "batch": 24,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24",
+      "family": "core_model",
+      "theme_key": "ocean",
+      "unique_intent_key": "core_model:ocean",
+      "locked_slug": "ocean-traits-what-the-five-letters-mean",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/ocean-traits-what-the-five-letters-mean",
+          "title_intent": "OCEAN vocabulary and domain boundaries: answer “What do the five OCEAN traits mean?”",
+          "primary_question": "What do the five OCEAN traits mean?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Build a plain-language map of the five broad domains.",
+          "keywords": [
+            "Big Five ocean",
+            "What do the five OCEAN traits mean"
+          ],
+          "slug": "ocean-traits-what-the-five-letters-mean",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/ocean-traits-what-the-five-letters-mean",
+          "title_intent": "回答“OCEAN 五个字母分别代表什么？”，聚焦 OCEAN vocabulary and domain boundaries",
+          "primary_question": "OCEAN 五个字母分别代表什么？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "建立五个宽泛维度的通俗认知地图。",
+          "keywords": [
+            "大五人格 ocean",
+            "OCEAN 五个字母分别代表什么"
+          ],
+          "slug": "ocean-traits-what-the-five-letters-mean",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.24.03.continuum",
+      "batch": 24,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24",
+      "family": "core_model",
+      "theme_key": "continuum",
+      "unique_intent_key": "core_model:continuum",
+      "locked_slug": "big-five-traits-are-continuums-not-boxes",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-traits-are-continuums-not-boxes",
+          "title_intent": "Continuum interpretation versus boxes: answer “Are Big Five traits categories or continuums?”",
+          "primary_question": "Are Big Five traits categories or continuums?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Replace high/low type labels with range-based interpretation.",
+          "keywords": [
+            "Big Five continuum",
+            "Are Big Five traits categories or continuums"
+          ],
+          "slug": "big-five-traits-are-continuums-not-boxes",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-traits-are-continuums-not-boxes",
+          "title_intent": "回答“大五人格是类别还是连续谱？”，聚焦 Continuum interpretation versus boxes",
+          "primary_question": "大五人格是类别还是连续谱？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "用区间理解替代高低类型标签。",
+          "keywords": [
+            "大五人格 continuum",
+            "大五人格是类别还是连续谱"
+          ],
+          "slug": "big-five-traits-are-continuums-not-boxes",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.24.04.thirty-facets",
+      "batch": 24,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24",
+      "family": "core_model",
+      "theme_key": "thirty-facets",
+      "unique_intent_key": "core_model:thirty-facets",
+      "locked_slug": "big-five-30-facets-explained-with-model-caveats",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-30-facets-explained-with-model-caveats",
+          "title_intent": "Thirty-facet map with taxonomy caveat: answer “What are the 30 Big Five facets?”",
+          "primary_question": "What are the 30 Big Five facets?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Understand one named 30-facet inventory without treating it as universal.",
+          "keywords": [
+            "Big Five thirty facets",
+            "What are the 30 Big Five facets"
+          ],
+          "slug": "big-five-30-facets-explained-with-model-caveats",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-30-facets-explained-with-model-caveats",
+          "title_intent": "回答“大五人格 30 个侧面是什么？”，聚焦 Thirty-facet map with taxonomy caveat",
+          "primary_question": "大五人格 30 个侧面是什么？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "理解一个明确命名的 30 侧面体系，而不把它当作唯一标准。",
+          "keywords": [
+            "大五人格 thirty facets",
+            "大五人格 30 个侧面是什么"
+          ],
+          "slug": "big-five-30-facets-explained-with-model-caveats",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.24.05.non-type-system",
+      "batch": 24,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24",
+      "family": "core_model",
+      "theme_key": "non-type-system",
+      "unique_intent_key": "core_model:non-type-system",
+      "locked_slug": "why-big-five-is-not-a-personality-type-system",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/why-big-five-is-not-a-personality-type-system",
+          "title_intent": "Dimensional model versus type identity: answer “Why is the Big Five not a type system?”",
+          "primary_question": "Why is the Big Five not a type system?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Distinguish dimensional measurement from identity typing.",
+          "keywords": [
+            "Big Five non type system",
+            "Why is the Big Five not a type system"
+          ],
+          "slug": "why-big-five-is-not-a-personality-type-system",
+          "search_intent": "compare",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/why-big-five-is-not-a-personality-type-system",
+          "title_intent": "回答“为什么大五人格不是人格类型系统？”，聚焦 Dimensional model versus type identity",
+          "primary_question": "为什么大五人格不是人格类型系统？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "区分维度测量与身份类型化。",
+          "keywords": [
+            "大五人格 non type system",
+            "为什么大五人格不是人格类型系统"
+          ],
+          "slug": "why-big-five-is-not-a-personality-type-system",
+          "search_intent": "compare",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.25.01.read-results",
+      "batch": 25,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25",
+      "family": "result_reading",
+      "theme_key": "read-results",
+      "unique_intent_key": "result_reading:read-results",
+      "locked_slug": "how-to-read-big-five-results-without-self-labeling",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/how-to-read-big-five-results-without-self-labeling",
+          "title_intent": "Result-reading sequence: answer “How should I read my Big Five results?”",
+          "primary_question": "How should I read my Big Five results?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Turn a result into observations and testable hypotheses.",
+          "keywords": [
+            "Big Five read results",
+            "How should I read my Big Five results"
+          ],
+          "slug": "how-to-read-big-five-results-without-self-labeling",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/how-to-read-big-five-results-without-self-labeling",
+          "title_intent": "回答“应该怎样阅读大五人格结果？”，聚焦 Result-reading sequence",
+          "primary_question": "应该怎样阅读大五人格结果？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "把结果转化为观察与可检验的工作假设。",
+          "keywords": [
+            "大五人格 read results",
+            "应该怎样阅读大五人格结果"
+          ],
+          "slug": "how-to-read-big-five-results-without-self-labeling",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.25.02.score-ranges",
+      "batch": 25,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25",
+      "family": "result_reading",
+      "theme_key": "score-ranges",
+      "unique_intent_key": "result_reading:score-ranges",
+      "locked_slug": "big-five-score-ranges-what-high-middle-low-can-mean",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-score-ranges-what-high-middle-low-can-mean",
+          "title_intent": "Range meaning without norms: answer “What can high, middle, and low Big Five ranges mean?”",
+          "primary_question": "What can high, middle, and low Big Five ranges mean?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Interpret ranges without assuming percentiles or fixed ability.",
+          "keywords": [
+            "Big Five score ranges",
+            "What can high, middle, and low Big Five ranges mean"
+          ],
+          "slug": "big-five-score-ranges-what-high-middle-low-can-mean",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-score-ranges-what-high-middle-low-can-mean",
+          "title_intent": "回答“大五人格高、中、低区间可能意味着什么？”，聚焦 Range meaning without norms",
+          "primary_question": "大五人格高、中、低区间可能意味着什么？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "在不假设百分位或固定能力的前提下理解区间。",
+          "keywords": [
+            "大五人格 score ranges",
+            "大五人格高、中、低区间可能意味着什么"
+          ],
+          "slug": "big-five-score-ranges-what-high-middle-low-can-mean",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.25.03.retest",
+      "batch": 25,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25",
+      "family": "result_reading",
+      "theme_key": "retest",
+      "unique_intent_key": "result_reading:retest",
+      "locked_slug": "when-to-retest-big-five-and-what-a-score-change-means",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/when-to-retest-big-five-and-what-a-score-change-means",
+          "title_intent": "Retest timing and interpretation: answer “When should I retake a Big Five test?”",
+          "primary_question": "When should I retake a Big Five test?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Decide whether a retest can answer a real question.",
+          "keywords": [
+            "Big Five retest",
+            "When should I retake a Big Five test"
+          ],
+          "slug": "when-to-retest-big-five-and-what-a-score-change-means",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/when-to-retest-big-five-and-what-a-score-change-means",
+          "title_intent": "回答“什么时候适合复测大五人格？”，聚焦 Retest timing and interpretation",
+          "primary_question": "什么时候适合复测大五人格？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "判断复测能否回答一个真实问题。",
+          "keywords": [
+            "大五人格 retest",
+            "什么时候适合复测大五人格"
+          ],
+          "slug": "when-to-retest-big-five-and-what-a-score-change-means",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.25.04.discuss-results",
+      "batch": 25,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25",
+      "family": "result_reading",
+      "theme_key": "discuss-results",
+      "unique_intent_key": "result_reading:discuss-results",
+      "locked_slug": "how-to-discuss-big-five-results-with-someone-else",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/how-to-discuss-big-five-results-with-someone-else",
+          "title_intent": "Consent-based result conversation: answer “How can I discuss Big Five results without labeling someone?”",
+          "primary_question": "How can I discuss Big Five results without labeling someone?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Use consent-based language for a result conversation.",
+          "keywords": [
+            "Big Five discuss results",
+            "How can I discuss Big Five results without labeling someone"
+          ],
+          "slug": "how-to-discuss-big-five-results-with-someone-else",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/how-to-discuss-big-five-results-with-someone-else",
+          "title_intent": "回答“怎样与他人讨论大五人格结果而不贴标签？”，聚焦 Consent-based result conversation",
+          "primary_question": "怎样与他人讨论大五人格结果而不贴标签？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "使用基于同意的语言讨论测评结果。",
+          "keywords": [
+            "大五人格 discuss results",
+            "怎样与他人讨论大五人格结果而不贴标签"
+          ],
+          "slug": "how-to-discuss-big-five-results-with-someone-else",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.25.05.thirty-day-review",
+      "batch": 25,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25",
+      "family": "result_reading",
+      "theme_key": "thirty-day-review",
+      "unique_intent_key": "result_reading:thirty-day-review",
+      "locked_slug": "big-five-30-day-observation-and-review-plan",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-30-day-observation-and-review-plan",
+          "title_intent": "Thirty-day observation protocol: answer “How can I review a Big Five result over 30 days?”",
+          "primary_question": "How can I review a Big Five result over 30 days?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Run a time-boxed observation loop before drawing conclusions.",
+          "keywords": [
+            "Big Five thirty day review",
+            "How can I review a Big Five result over 30 days"
+          ],
+          "slug": "big-five-30-day-observation-and-review-plan",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-30-day-observation-and-review-plan",
+          "title_intent": "回答“如何用 30 天观察复盘大五人格结果？”，聚焦 Thirty-day observation protocol",
+          "primary_question": "如何用 30 天观察复盘大五人格结果？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "在下结论前进行有时限的观察循环。",
+          "keywords": [
+            "大五人格 thirty day review",
+            "如何用 30 天观察复盘大五人格结果"
+          ],
+          "slug": "big-five-30-day-observation-and-review-plan",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.26.01.teamwork",
+      "batch": 26,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26",
+      "family": "workplace",
+      "theme_key": "teamwork",
+      "unique_intent_key": "workplace:teamwork",
+      "locked_slug": "big-five-teamwork-conversation-guide-not-fit-score",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-teamwork-conversation-guide-not-fit-score",
+          "title_intent": "Team conversation, not fit scoring: answer “How can teams use Big Five language safely?”",
+          "primary_question": "How can teams use Big Five language safely?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Improve collaboration conversations without scoring team fit.",
+          "keywords": [
+            "Big Five teamwork",
+            "How can teams use Big Five language safely"
+          ],
+          "slug": "big-five-teamwork-conversation-guide-not-fit-score",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No hiring, screening, promotion, performance, suitability, or workplace outcome conclusion.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-teamwork-conversation-guide-not-fit-score",
+          "title_intent": "回答“团队如何安全使用大五人格语言？”，聚焦 Team conversation, not fit scoring",
+          "primary_question": "团队如何安全使用大五人格语言？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "在不判断团队适配度的前提下改善协作对话。",
+          "keywords": [
+            "大五人格 teamwork",
+            "团队如何安全使用大五人格语言"
+          ],
+          "slug": "big-five-teamwork-conversation-guide-not-fit-score",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No hiring, screening, promotion, performance, suitability, or workplace outcome conclusion.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.26.02.feedback",
+      "batch": 26,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26",
+      "family": "workplace",
+      "theme_key": "feedback",
+      "unique_intent_key": "workplace:feedback",
+      "locked_slug": "big-five-feedback-preferences-as-hypotheses",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-feedback-preferences-as-hypotheses",
+          "title_intent": "Feedback preference experiment: answer “Can Big Five results help frame feedback preferences?”",
+          "primary_question": "Can Big Five results help frame feedback preferences?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Test feedback preferences instead of prescribing them from traits.",
+          "keywords": [
+            "Big Five feedback",
+            "Can Big Five results help frame feedback preferences"
+          ],
+          "slug": "big-five-feedback-preferences-as-hypotheses",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No hiring, screening, promotion, performance, suitability, or workplace outcome conclusion.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-feedback-preferences-as-hypotheses",
+          "title_intent": "回答“大五人格结果能帮助讨论反馈偏好吗？”，聚焦 Feedback preference experiment",
+          "primary_question": "大五人格结果能帮助讨论反馈偏好吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "把反馈偏好当作待验证假设，而不是由特质直接规定。",
+          "keywords": [
+            "大五人格 feedback",
+            "大五人格结果能帮助讨论反馈偏好吗"
+          ],
+          "slug": "big-five-feedback-preferences-as-hypotheses",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No hiring, screening, promotion, performance, suitability, or workplace outcome conclusion.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.26.03.meetings",
+      "batch": 26,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26",
+      "family": "workplace",
+      "theme_key": "meetings",
+      "unique_intent_key": "workplace:meetings",
+      "locked_slug": "big-five-meeting-participation-without-personality-labels",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-meeting-participation-without-personality-labels",
+          "title_intent": "Meeting participation design: answer “How can different participation styles work in meetings?”",
+          "primary_question": "How can different participation styles work in meetings?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Design meeting options without assigning personality roles.",
+          "keywords": [
+            "Big Five meetings",
+            "How can different participation styles work in meetings"
+          ],
+          "slug": "big-five-meeting-participation-without-personality-labels",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No hiring, screening, promotion, performance, suitability, or workplace outcome conclusion.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-meeting-participation-without-personality-labels",
+          "title_intent": "回答“会议中如何容纳不同参与方式？”，聚焦 Meeting participation design",
+          "primary_question": "会议中如何容纳不同参与方式？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "设计多种会议参与方式，而不分配人格角色。",
+          "keywords": [
+            "大五人格 meetings",
+            "会议中如何容纳不同参与方式"
+          ],
+          "slug": "big-five-meeting-participation-without-personality-labels",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No hiring, screening, promotion, performance, suitability, or workplace outcome conclusion.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.26.04.leadership",
+      "batch": 26,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26",
+      "family": "workplace",
+      "theme_key": "leadership",
+      "unique_intent_key": "workplace:leadership",
+      "locked_slug": "big-five-leadership-reflection-not-leader-prediction",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-leadership-reflection-not-leader-prediction",
+          "title_intent": "Leadership reflection boundary: answer “What can Big Five traits contribute to leadership reflection?”",
+          "primary_question": "What can Big Five traits contribute to leadership reflection?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Reflect on leadership behavior without predicting success.",
+          "keywords": [
+            "Big Five leadership",
+            "What can Big Five traits contribute to leadership reflection"
+          ],
+          "slug": "big-five-leadership-reflection-not-leader-prediction",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No hiring, screening, promotion, performance, suitability, or workplace outcome conclusion.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-leadership-reflection-not-leader-prediction",
+          "title_intent": "回答“大五特质能为领导力复盘提供什么？”，聚焦 Leadership reflection boundary",
+          "primary_question": "大五特质能为领导力复盘提供什么？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "复盘领导行为，而不预测领导成功。",
+          "keywords": [
+            "大五人格 leadership",
+            "大五特质能为领导力复盘提供什么"
+          ],
+          "slug": "big-five-leadership-reflection-not-leader-prediction",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No hiring, screening, promotion, performance, suitability, or workplace outcome conclusion.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.26.05.work-environment",
+      "batch": 26,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26",
+      "family": "workplace",
+      "theme_key": "work-environment",
+      "unique_intent_key": "workplace:work-environment",
+      "locked_slug": "big-five-work-environment-preferences-as-experiments",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-work-environment-preferences-as-experiments",
+          "title_intent": "Work-environment experiment: answer “How can I test work-environment preferences?”",
+          "primary_question": "How can I test work-environment preferences?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Run reversible environment experiments rather than infer job fit.",
+          "keywords": [
+            "Big Five work environment",
+            "How can I test work-environment preferences"
+          ],
+          "slug": "big-five-work-environment-preferences-as-experiments",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No hiring, screening, promotion, performance, suitability, or workplace outcome conclusion.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-work-environment-preferences-as-experiments",
+          "title_intent": "回答“如何检验自己的工作环境偏好？”，聚焦 Work-environment experiment",
+          "primary_question": "如何检验自己的工作环境偏好？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "用可逆实验检验环境偏好，而不是推断职业适配。",
+          "keywords": [
+            "大五人格 work environment",
+            "如何检验自己的工作环境偏好"
+          ],
+          "slug": "big-five-work-environment-preferences-as-experiments",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No hiring, screening, promotion, performance, suitability, or workplace outcome conclusion.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.27.01.communication",
+      "batch": 27,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27",
+      "family": "relationships",
+      "theme_key": "communication",
+      "unique_intent_key": "relationships:communication",
+      "locked_slug": "big-five-communication-needs-conversation-prompts",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-communication-needs-conversation-prompts",
+          "title_intent": "Communication request prompts: answer “How can Big Five language support a communication check-in?”",
+          "primary_question": "How can Big Five language support a communication check-in?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Translate trait language into specific communication requests.",
+          "keywords": [
+            "Big Five communication",
+            "How can Big Five language support a communication check-in"
+          ],
+          "slug": "big-five-communication-needs-conversation-prompts",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-communication-needs-conversation-prompts",
+          "title_intent": "回答“如何用大五人格语言做沟通检查？”，聚焦 Communication request prompts",
+          "primary_question": "如何用大五人格语言做沟通检查？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "把特质语言转化为具体沟通请求。",
+          "keywords": [
+            "大五人格 communication",
+            "如何用大五人格语言做沟通检查"
+          ],
+          "slug": "big-five-communication-needs-conversation-prompts",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.27.02.conflict",
+      "batch": 27,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27",
+      "family": "relationships",
+      "theme_key": "conflict",
+      "unique_intent_key": "relationships:conflict",
+      "locked_slug": "big-five-conflict-patterns-observe-before-explaining",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-conflict-patterns-observe-before-explaining",
+          "title_intent": "Conflict observation, not causal labeling: answer “Can Big Five traits explain conflict patterns?”",
+          "primary_question": "Can Big Five traits explain conflict patterns?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Observe conflict sequences without reducing causes to personality.",
+          "keywords": [
+            "Big Five conflict",
+            "Can Big Five traits explain conflict patterns"
+          ],
+          "slug": "big-five-conflict-patterns-observe-before-explaining",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-conflict-patterns-observe-before-explaining",
+          "title_intent": "回答“大五特质能解释冲突模式吗？”，聚焦 Conflict observation, not causal labeling",
+          "primary_question": "大五特质能解释冲突模式吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "观察冲突序列，而不把原因简化为人格。",
+          "keywords": [
+            "大五人格 conflict",
+            "大五特质能解释冲突模式吗"
+          ],
+          "slug": "big-five-conflict-patterns-observe-before-explaining",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.27.03.friendship",
+      "batch": 27,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27",
+      "family": "relationships",
+      "theme_key": "friendship",
+      "unique_intent_key": "relationships:friendship",
+      "locked_slug": "big-five-friendship-differences-without-compatibility-scores",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-friendship-differences-without-compatibility-scores",
+          "title_intent": "Friendship needs negotiation: answer “How can friends discuss personality differences?”",
+          "primary_question": "How can friends discuss personality differences?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Negotiate friendship needs without compatibility scores.",
+          "keywords": [
+            "Big Five friendship",
+            "How can friends discuss personality differences"
+          ],
+          "slug": "big-five-friendship-differences-without-compatibility-scores",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-friendship-differences-without-compatibility-scores",
+          "title_intent": "回答“朋友如何讨论人格差异？”，聚焦 Friendship needs negotiation",
+          "primary_question": "朋友如何讨论人格差异？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "在不使用匹配分数的情况下协商友谊需求。",
+          "keywords": [
+            "大五人格 friendship",
+            "朋友如何讨论人格差异"
+          ],
+          "slug": "big-five-friendship-differences-without-compatibility-scores",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.27.04.partners",
+      "batch": 27,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27",
+      "family": "relationships",
+      "theme_key": "partners",
+      "unique_intent_key": "relationships:partners",
+      "locked_slug": "big-five-couples-conversation-not-relationship-prediction",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-couples-conversation-not-relationship-prediction",
+          "title_intent": "Couples conversation boundary: answer “Can couples use Big Five results constructively?”",
+          "primary_question": "Can couples use Big Five results constructively?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Use results as prompts without predicting relationship outcomes.",
+          "keywords": [
+            "Big Five partners",
+            "Can couples use Big Five results constructively"
+          ],
+          "slug": "big-five-couples-conversation-not-relationship-prediction",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-couples-conversation-not-relationship-prediction",
+          "title_intent": "回答“伴侣能否建设性地使用大五人格结果？”，聚焦 Couples conversation boundary",
+          "primary_question": "伴侣能否建设性地使用大五人格结果？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "把结果用作对话提示，而不预测关系结果。",
+          "keywords": [
+            "大五人格 partners",
+            "伴侣能否建设性地使用大五人格结果"
+          ],
+          "slug": "big-five-couples-conversation-not-relationship-prediction",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.27.05.boundaries",
+      "batch": 27,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27",
+      "family": "relationships",
+      "theme_key": "boundaries",
+      "unique_intent_key": "relationships:boundaries",
+      "locked_slug": "big-five-personal-boundaries-traits-do-not-override-consent",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-personal-boundaries-traits-do-not-override-consent",
+          "title_intent": "Consent and boundary primacy: answer “Do personality traits explain personal boundaries?”",
+          "primary_question": "Do personality traits explain personal boundaries?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Separate preferences from consent and non-negotiable boundaries.",
+          "keywords": [
+            "Big Five boundaries",
+            "Do personality traits explain personal boundaries"
+          ],
+          "slug": "big-five-personal-boundaries-traits-do-not-override-consent",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-personal-boundaries-traits-do-not-override-consent",
+          "title_intent": "回答“人格特质能解释个人边界吗？”，聚焦 Consent and boundary primacy",
+          "primary_question": "人格特质能解释个人边界吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "区分偏好、同意与不可协商的边界。",
+          "keywords": [
+            "大五人格 boundaries",
+            "人格特质能解释个人边界吗"
+          ],
+          "slug": "big-five-personal-boundaries-traits-do-not-override-consent",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.28.01.learning",
+      "batch": 28,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28",
+      "family": "learning_habits",
+      "theme_key": "learning",
+      "unique_intent_key": "learning_habits:learning",
+      "locked_slug": "big-five-learning-preferences-test-dont-prescribe",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-learning-preferences-test-dont-prescribe",
+          "title_intent": "Learning-condition experiments: answer “Can Big Five traits reveal the best way to learn?”",
+          "primary_question": "Can Big Five traits reveal the best way to learn?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Test study conditions without prescribing a learning style.",
+          "keywords": [
+            "Big Five learning",
+            "Can Big Five traits reveal the best way to learn"
+          ],
+          "slug": "big-five-learning-preferences-test-dont-prescribe",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-learning-preferences-test-dont-prescribe",
+          "title_intent": "回答“大五特质能揭示最佳学习方式吗？”，聚焦 Learning-condition experiments",
+          "primary_question": "大五特质能揭示最佳学习方式吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "检验学习条件，而不是规定学习风格。",
+          "keywords": [
+            "大五人格 learning",
+            "大五特质能揭示最佳学习方式吗"
+          ],
+          "slug": "big-five-learning-preferences-test-dont-prescribe",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.28.02.procrastination",
+      "batch": 28,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28",
+      "family": "learning_habits",
+      "theme_key": "procrastination",
+      "unique_intent_key": "learning_habits:procrastination",
+      "locked_slug": "procrastination-is-not-a-big-five-personality-label",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/procrastination-is-not-a-big-five-personality-label",
+          "title_intent": "Procrastination de-labeling: answer “Is procrastination a personality trait?”",
+          "primary_question": "Is procrastination a personality trait?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Separate task friction and context from trait-based blame.",
+          "keywords": [
+            "Big Five procrastination",
+            "Is procrastination a personality trait"
+          ],
+          "slug": "procrastination-is-not-a-big-five-personality-label",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/procrastination-is-not-a-big-five-personality-label",
+          "title_intent": "回答“拖延是一种人格特质吗？”，聚焦 Procrastination de-labeling",
+          "primary_question": "拖延是一种人格特质吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "把任务阻力与情境因素从特质归因中分离。",
+          "keywords": [
+            "大五人格 procrastination",
+            "拖延是一种人格特质吗"
+          ],
+          "slug": "procrastination-is-not-a-big-five-personality-label",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.28.03.planning",
+      "batch": 28,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28",
+      "family": "learning_habits",
+      "theme_key": "planning",
+      "unique_intent_key": "learning_habits:planning",
+      "locked_slug": "big-five-planning-system-run-a-two-week-experiment",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-planning-system-run-a-two-week-experiment",
+          "title_intent": "Planning-system experiment: answer “How can I test a planning system that fits my behavior?”",
+          "primary_question": "How can I test a planning system that fits my behavior?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Run a two-week planning experiment using observable behavior.",
+          "keywords": [
+            "Big Five planning",
+            "How can I test a planning system that fits my behavior"
+          ],
+          "slug": "big-five-planning-system-run-a-two-week-experiment",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-planning-system-run-a-two-week-experiment",
+          "title_intent": "回答“如何检验适合自己行为的计划系统？”，聚焦 Planning-system experiment",
+          "primary_question": "如何检验适合自己行为的计划系统？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "用可观察行为进行两周计划实验。",
+          "keywords": [
+            "大五人格 planning",
+            "如何检验适合自己行为的计划系统"
+          ],
+          "slug": "big-five-planning-system-run-a-two-week-experiment",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.28.04.creativity",
+      "batch": 28,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28",
+      "family": "learning_habits",
+      "theme_key": "creativity",
+      "unique_intent_key": "learning_habits:creativity",
+      "locked_slug": "openness-and-creativity-related-not-the-same",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/openness-and-creativity-related-not-the-same",
+          "title_intent": "Openness versus creative ability: answer “Are openness and creativity the same thing?”",
+          "primary_question": "Are openness and creativity the same thing?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Understand association without treating a trait as creative ability.",
+          "keywords": [
+            "Big Five creativity",
+            "Are openness and creativity the same thing"
+          ],
+          "slug": "openness-and-creativity-related-not-the-same",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/openness-and-creativity-related-not-the-same",
+          "title_intent": "回答“开放性与创造力是一回事吗？”，聚焦 Openness versus creative ability",
+          "primary_question": "开放性与创造力是一回事吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "理解相关关系，而不把特质当成创造能力。",
+          "keywords": [
+            "大五人格 creativity",
+            "开放性与创造力是一回事吗"
+          ],
+          "slug": "openness-and-creativity-related-not-the-same",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.28.05.decision-making",
+      "batch": 28,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28",
+      "family": "learning_habits",
+      "theme_key": "decision-making",
+      "unique_intent_key": "learning_habits:decision-making",
+      "locked_slug": "big-five-decision-journal-observe-style-not-quality",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-decision-journal-observe-style-not-quality",
+          "title_intent": "Decision-style journal: answer “Can Big Five traits improve decision-making?”",
+          "primary_question": "Can Big Five traits improve decision-making?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Use a decision journal without inferring decision quality from traits.",
+          "keywords": [
+            "Big Five decision making",
+            "Can Big Five traits improve decision-making"
+          ],
+          "slug": "big-five-decision-journal-observe-style-not-quality",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-decision-journal-observe-style-not-quality",
+          "title_intent": "回答“大五特质能改善决策吗？”，聚焦 Decision-style journal",
+          "primary_question": "大五特质能改善决策吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "使用决策日志，而不从特质推断决策质量。",
+          "keywords": [
+            "大五人格 decision making",
+            "大五特质能改善决策吗"
+          ],
+          "slug": "big-five-decision-journal-observe-style-not-quality",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.29.01.personality-change",
+      "batch": 29,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29",
+      "family": "growth_change",
+      "theme_key": "personality-change",
+      "unique_intent_key": "growth_change:personality-change",
+      "locked_slug": "can-big-five-personality-traits-change-over-time",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/can-big-five-personality-traits-change-over-time",
+          "title_intent": "Trait change evidence: answer “Can Big Five personality traits change?”",
+          "primary_question": "Can Big Five personality traits change?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Understand group-level change evidence without personal prediction.",
+          "keywords": [
+            "Big Five personality change",
+            "Can Big Five personality traits change"
+          ],
+          "slug": "can-big-five-personality-traits-change-over-time",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.roberts-walton-viechtbauer-2006-change",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/can-big-five-personality-traits-change-over-time",
+          "title_intent": "回答“大五人格特质会随时间改变吗？”，聚焦 Trait change evidence",
+          "primary_question": "大五人格特质会随时间改变吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "理解群体层面的变化证据，而不做个人预测。",
+          "keywords": [
+            "大五人格 personality change",
+            "大五人格特质会随时间改变吗"
+          ],
+          "slug": "can-big-five-personality-traits-change-over-time",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.roberts-walton-viechtbauer-2006-change",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.29.02.habits",
+      "batch": 29,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29",
+      "family": "growth_change",
+      "theme_key": "habits",
+      "unique_intent_key": "growth_change:habits",
+      "locked_slug": "habits-and-big-five-traits-behavior-is-not-identity",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/habits-and-big-five-traits-behavior-is-not-identity",
+          "title_intent": "Habits versus identity: answer “How do habits relate to Big Five traits?”",
+          "primary_question": "How do habits relate to Big Five traits?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Separate repeated behavior from fixed identity.",
+          "keywords": [
+            "Big Five habits",
+            "How do habits relate to Big Five traits"
+          ],
+          "slug": "habits-and-big-five-traits-behavior-is-not-identity",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.roberts-walton-viechtbauer-2006-change",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/habits-and-big-five-traits-behavior-is-not-identity",
+          "title_intent": "回答“习惯与大五特质有什么关系？”，聚焦 Habits versus identity",
+          "primary_question": "习惯与大五特质有什么关系？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "区分重复行为与固定身份。",
+          "keywords": [
+            "大五人格 habits",
+            "习惯与大五特质有什么关系"
+          ],
+          "slug": "habits-and-big-five-traits-behavior-is-not-identity",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.roberts-walton-viechtbauer-2006-change",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.29.03.goals",
+      "batch": 29,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29",
+      "family": "growth_change",
+      "theme_key": "goals",
+      "unique_intent_key": "growth_change:goals",
+      "locked_slug": "big-five-goal-setting-use-results-as-hypotheses",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-goal-setting-use-results-as-hypotheses",
+          "title_intent": "Goal hypothesis workflow: answer “How can I use Big Five results for goal setting?”",
+          "primary_question": "How can I use Big Five results for goal setting?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Design a goal experiment without assuming trait destiny.",
+          "keywords": [
+            "Big Five goals",
+            "How can I use Big Five results for goal setting"
+          ],
+          "slug": "big-five-goal-setting-use-results-as-hypotheses",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.roberts-walton-viechtbauer-2006-change",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-goal-setting-use-results-as-hypotheses",
+          "title_intent": "回答“如何把大五人格结果用于目标设定？”，聚焦 Goal hypothesis workflow",
+          "primary_question": "如何把大五人格结果用于目标设定？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "设计目标实验，而不假设特质决定命运。",
+          "keywords": [
+            "大五人格 goals",
+            "如何把大五人格结果用于目标设定"
+          ],
+          "slug": "big-five-goal-setting-use-results-as-hypotheses",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.roberts-walton-viechtbauer-2006-change",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.29.04.life-events",
+      "batch": 29,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29",
+      "family": "growth_change",
+      "theme_key": "life-events",
+      "unique_intent_key": "growth_change:life-events",
+      "locked_slug": "life-events-and-personality-change-what-research-can-say",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/life-events-and-personality-change-what-research-can-say",
+          "title_intent": "Life-event evidence limits: answer “Do life events change personality?”",
+          "primary_question": "Do life events change personality?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Read longitudinal findings without assigning causality to one event.",
+          "keywords": [
+            "Big Five life events",
+            "Do life events change personality"
+          ],
+          "slug": "life-events-and-personality-change-what-research-can-say",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.roberts-walton-viechtbauer-2006-change",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/life-events-and-personality-change-what-research-can-say",
+          "title_intent": "回答“生活事件会改变人格吗？”，聚焦 Life-event evidence limits",
+          "primary_question": "生活事件会改变人格吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "阅读纵向研究结论，而不把因果归给单一事件。",
+          "keywords": [
+            "大五人格 life events",
+            "生活事件会改变人格吗"
+          ],
+          "slug": "life-events-and-personality-change-what-research-can-say",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.roberts-walton-viechtbauer-2006-change",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.29.05.tracking",
+      "batch": 29,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29",
+      "family": "growth_change",
+      "theme_key": "tracking",
+      "unique_intent_key": "growth_change:tracking",
+      "locked_slug": "track-personality-related-behavior-without-chasing-scores",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/track-personality-related-behavior-without-chasing-scores",
+          "title_intent": "Behavior tracking protocol: answer “How can I track growth without chasing personality scores?”",
+          "primary_question": "How can I track growth without chasing personality scores?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Track behaviors and contexts instead of optimizing a trait score.",
+          "keywords": [
+            "Big Five tracking",
+            "How can I track growth without chasing personality scores"
+          ],
+          "slug": "track-personality-related-behavior-without-chasing-scores",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.roberts-walton-viechtbauer-2006-change",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/track-personality-related-behavior-without-chasing-scores",
+          "title_intent": "回答“如何在不追逐人格分数的情况下追踪成长？”，聚焦 Behavior tracking protocol",
+          "primary_question": "如何在不追逐人格分数的情况下追踪成长？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "追踪行为与情境，而不是优化特质分数。",
+          "keywords": [
+            "大五人格 tracking",
+            "如何在不追逐人格分数的情况下追踪成长"
+          ],
+          "slug": "track-personality-related-behavior-without-chasing-scores",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.roberts-walton-viechtbauer-2006-change",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.30.01.stress-response",
+      "batch": 30,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30",
+      "family": "stress_wellbeing",
+      "theme_key": "stress-response",
+      "unique_intent_key": "stress_wellbeing:stress-response",
+      "locked_slug": "big-five-stress-response-patterns-without-diagnosis",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-stress-response-patterns-without-diagnosis",
+          "title_intent": "Stress response, non-diagnostic: answer “How might personality relate to stress responses?”",
+          "primary_question": "How might personality relate to stress responses?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Observe stress patterns without diagnosing or pathologizing traits.",
+          "keywords": [
+            "Big Five stress response",
+            "How might personality relate to stress responses"
+          ],
+          "slug": "big-five-stress-response-patterns-without-diagnosis",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Non-medical education only: no diagnosis, treatment, crisis substitution, or equation of neuroticism with mental illness.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-stress-response-patterns-without-diagnosis",
+          "title_intent": "回答“人格可能如何与压力反应相关？”，聚焦 Stress response, non-diagnostic",
+          "primary_question": "人格可能如何与压力反应相关？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "观察压力模式，而不诊断或病理化特质。",
+          "keywords": [
+            "大五人格 stress response",
+            "人格可能如何与压力反应相关"
+          ],
+          "slug": "big-five-stress-response-patterns-without-diagnosis",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Non-medical education only: no diagnosis, treatment, crisis substitution, or equation of neuroticism with mental illness.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.30.02.self-regulation",
+      "batch": 30,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30",
+      "family": "stress_wellbeing",
+      "theme_key": "self-regulation",
+      "unique_intent_key": "stress_wellbeing:self-regulation",
+      "locked_slug": "big-five-self-regulation-build-a-context-plan",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-self-regulation-build-a-context-plan",
+          "title_intent": "Non-clinical regulation plan: answer “Can Big Five results inform a self-regulation plan?”",
+          "primary_question": "Can Big Five results inform a self-regulation plan?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Build a context plan without claiming treatment effects.",
+          "keywords": [
+            "Big Five self regulation",
+            "Can Big Five results inform a self-regulation plan"
+          ],
+          "slug": "big-five-self-regulation-build-a-context-plan",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Non-medical education only: no diagnosis, treatment, crisis substitution, or equation of neuroticism with mental illness.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-self-regulation-build-a-context-plan",
+          "title_intent": "回答“大五结果能帮助制定自我调节计划吗？”，聚焦 Non-clinical regulation plan",
+          "primary_question": "大五结果能帮助制定自我调节计划吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "制定情境计划，而不声称治疗效果。",
+          "keywords": [
+            "大五人格 self regulation",
+            "大五结果能帮助制定自我调节计划吗"
+          ],
+          "slug": "big-five-self-regulation-build-a-context-plan",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Non-medical education only: no diagnosis, treatment, crisis substitution, or equation of neuroticism with mental illness.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.30.03.recovery",
+      "batch": 30,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30",
+      "family": "stress_wellbeing",
+      "theme_key": "recovery",
+      "unique_intent_key": "stress_wellbeing:recovery",
+      "locked_slug": "stress-recovery-log-separate-patterns-from-traits",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/stress-recovery-log-separate-patterns-from-traits",
+          "title_intent": "Recovery observation log: answer “How can I learn from my stress-recovery patterns?”",
+          "primary_question": "How can I learn from my stress-recovery patterns?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Use a recovery log without turning observations into diagnosis.",
+          "keywords": [
+            "Big Five recovery",
+            "How can I learn from my stress-recovery patterns"
+          ],
+          "slug": "stress-recovery-log-separate-patterns-from-traits",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Non-medical education only: no diagnosis, treatment, crisis substitution, or equation of neuroticism with mental illness.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/stress-recovery-log-separate-patterns-from-traits",
+          "title_intent": "回答“如何从自己的压力恢复模式中学习？”，聚焦 Recovery observation log",
+          "primary_question": "如何从自己的压力恢复模式中学习？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "使用恢复日志，而不把观察变成诊断。",
+          "keywords": [
+            "大五人格 recovery",
+            "如何从自己的压力恢复模式中学习"
+          ],
+          "slug": "stress-recovery-log-separate-patterns-from-traits",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Non-medical education only: no diagnosis, treatment, crisis substitution, or equation of neuroticism with mental illness.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.30.04.daily-support",
+      "batch": 30,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30",
+      "family": "stress_wellbeing",
+      "theme_key": "daily-support",
+      "unique_intent_key": "stress_wellbeing:daily-support",
+      "locked_slug": "daily-wellbeing-support-personality-is-one-context",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/daily-wellbeing-support-personality-is-one-context",
+          "title_intent": "Daily support menu: answer “What daily support can personality reflection suggest?”",
+          "primary_question": "What daily support can personality reflection suggest?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Choose low-risk daily supports while treating personality as one context.",
+          "keywords": [
+            "Big Five daily support",
+            "What daily support can personality reflection suggest"
+          ],
+          "slug": "daily-wellbeing-support-personality-is-one-context",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Non-medical education only: no diagnosis, treatment, crisis substitution, or equation of neuroticism with mental illness.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/daily-wellbeing-support-personality-is-one-context",
+          "title_intent": "回答“人格反思能提示哪些日常支持？”，聚焦 Daily support menu",
+          "primary_question": "人格反思能提示哪些日常支持？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "选择低风险日常支持，并把人格只视为一个情境因素。",
+          "keywords": [
+            "大五人格 daily support",
+            "人格反思能提示哪些日常支持"
+          ],
+          "slug": "daily-wellbeing-support-personality-is-one-context",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Non-medical education only: no diagnosis, treatment, crisis substitution, or equation of neuroticism with mental illness.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.30.05.help-boundary",
+      "batch": 30,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30",
+      "family": "stress_wellbeing",
+      "theme_key": "help-boundary",
+      "unique_intent_key": "stress_wellbeing:help-boundary",
+      "locked_slug": "when-personality-content-is-not-enough-seek-professional-help",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/when-personality-content-is-not-enough-seek-professional-help",
+          "title_intent": "Professional-help boundary: answer “When is personality content not enough?”",
+          "primary_question": "When is personality content not enough?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Recognize urgent and professional-help boundaries.",
+          "keywords": [
+            "Big Five help boundary",
+            "When is personality content not enough"
+          ],
+          "slug": "when-personality-content-is-not-enough-seek-professional-help",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Non-medical education only: no diagnosis, treatment, crisis substitution, or equation of neuroticism with mental illness.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/when-personality-content-is-not-enough-seek-professional-help",
+          "title_intent": "回答“什么时候人格内容已经不够？”，聚焦 Professional-help boundary",
+          "primary_question": "什么时候人格内容已经不够？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "识别紧急情况与专业求助边界。",
+          "keywords": [
+            "大五人格 help boundary",
+            "什么时候人格内容已经不够"
+          ],
+          "slug": "when-personality-content-is-not-enough-seek-professional-help",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Non-medical education only: no diagnosis, treatment, crisis substitution, or equation of neuroticism with mental illness.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.31.01.self-report-bias",
+      "batch": 31,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31",
+      "family": "research_methods",
+      "theme_key": "self-report-bias",
+      "unique_intent_key": "research_methods:self-report-bias",
+      "locked_slug": "big-five-self-report-bias-and-response-context",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-self-report-bias-and-response-context",
+          "title_intent": "Self-report bias: answer “What biases affect Big Five self-reports?”",
+          "primary_question": "What biases affect Big Five self-reports?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Recognize response context and self-report limitations.",
+          "keywords": [
+            "Big Five self report bias",
+            "What biases affect Big Five self-reports"
+          ],
+          "slug": "big-five-self-report-bias-and-response-context",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "academic.soto-john-2009-ten-facets",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Product-specific reliability, validity, norm, sample, and percentile values remain Unknown unless public reviewed evidence exists.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-self-report-bias-and-response-context",
+          "title_intent": "回答“哪些偏差会影响大五人格自陈？”，聚焦 Self-report bias",
+          "primary_question": "哪些偏差会影响大五人格自陈？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "识别作答情境与自陈局限。",
+          "keywords": [
+            "大五人格 self report bias",
+            "哪些偏差会影响大五人格自陈"
+          ],
+          "slug": "big-five-self-report-bias-and-response-context",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "academic.soto-john-2009-ten-facets",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Product-specific reliability, validity, norm, sample, and percentile values remain Unknown unless public reviewed evidence exists.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.31.02.reliability-validity",
+      "batch": 31,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31",
+      "family": "research_methods",
+      "theme_key": "reliability-validity",
+      "unique_intent_key": "research_methods:reliability-validity",
+      "locked_slug": "reliability-and-validity-in-personality-tests-explained",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/reliability-and-validity-in-personality-tests-explained",
+          "title_intent": "Measurement term literacy: answer “What do reliability and validity mean for personality tests?”",
+          "primary_question": "What do reliability and validity mean for personality tests?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Read measurement terms without assuming product-specific proof.",
+          "keywords": [
+            "Big Five reliability validity",
+            "What do reliability and validity mean for personality tests"
+          ],
+          "slug": "reliability-and-validity-in-personality-tests-explained",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "academic.soto-john-2009-ten-facets",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Product-specific reliability, validity, norm, sample, and percentile values remain Unknown unless public reviewed evidence exists.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/reliability-and-validity-in-personality-tests-explained",
+          "title_intent": "回答“人格测试中的信度与效度是什么意思？”，聚焦 Measurement term literacy",
+          "primary_question": "人格测试中的信度与效度是什么意思？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "理解测量术语，而不假设存在产品特定证明。",
+          "keywords": [
+            "大五人格 reliability validity",
+            "人格测试中的信度与效度是什么意思"
+          ],
+          "slug": "reliability-and-validity-in-personality-tests-explained",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "academic.soto-john-2009-ten-facets",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Product-specific reliability, validity, norm, sample, and percentile values remain Unknown unless public reviewed evidence exists.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.31.03.norms",
+      "batch": 31,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31",
+      "family": "research_methods",
+      "theme_key": "norms",
+      "unique_intent_key": "research_methods:norms",
+      "locked_slug": "personality-test-norms-percentiles-and-unknowns",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/personality-test-norms-percentiles-and-unknowns",
+          "title_intent": "Norm and percentile boundary: answer “What are norms and percentiles in personality testing?”",
+          "primary_question": "What are norms and percentiles in personality testing?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Understand norm dependence and recognize unavailable product values.",
+          "keywords": [
+            "Big Five norms",
+            "What are norms and percentiles in personality testing"
+          ],
+          "slug": "personality-test-norms-percentiles-and-unknowns",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "academic.soto-john-2009-ten-facets",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Product-specific reliability, validity, norm, sample, and percentile values remain Unknown unless public reviewed evidence exists.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/personality-test-norms-percentiles-and-unknowns",
+          "title_intent": "回答“人格测试中的常模与百分位是什么？”，聚焦 Norm and percentile boundary",
+          "primary_question": "人格测试中的常模与百分位是什么？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "理解常模依赖，并识别产品未提供的数值。",
+          "keywords": [
+            "大五人格 norms",
+            "人格测试中的常模与百分位是什么"
+          ],
+          "slug": "personality-test-norms-percentiles-and-unknowns",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "academic.soto-john-2009-ten-facets",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Product-specific reliability, validity, norm, sample, and percentile values remain Unknown unless public reviewed evidence exists.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.31.04.cross-cultural",
+      "batch": 31,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31",
+      "family": "research_methods",
+      "theme_key": "cross-cultural",
+      "unique_intent_key": "research_methods:cross-cultural",
+      "locked_slug": "big-five-cross-cultural-research-and-translation-limits",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-cross-cultural-research-and-translation-limits",
+          "title_intent": "Cross-cultural generalization limits: answer “Does the Big Five work the same across cultures?”",
+          "primary_question": "Does the Big Five work the same across cultures?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Understand cross-cultural evidence and translation limits.",
+          "keywords": [
+            "Big Five cross cultural",
+            "Does the Big Five work the same across cultures"
+          ],
+          "slug": "big-five-cross-cultural-research-and-translation-limits",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "academic.soto-john-2009-ten-facets",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Product-specific reliability, validity, norm, sample, and percentile values remain Unknown unless public reviewed evidence exists.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-cross-cultural-research-and-translation-limits",
+          "title_intent": "回答“大五人格在不同文化中都一样吗？”，聚焦 Cross-cultural generalization limits",
+          "primary_question": "大五人格在不同文化中都一样吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "理解跨文化证据与翻译局限。",
+          "keywords": [
+            "大五人格 cross cultural",
+            "大五人格在不同文化中都一样吗"
+          ],
+          "slug": "big-five-cross-cultural-research-and-translation-limits",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "academic.soto-john-2009-ten-facets",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Product-specific reliability, validity, norm, sample, and percentile values remain Unknown unless public reviewed evidence exists.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.31.05.retest-methods",
+      "batch": 31,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31",
+      "family": "research_methods",
+      "theme_key": "retest-methods",
+      "unique_intent_key": "research_methods:retest-methods",
+      "locked_slug": "big-five-retest-differences-measurement-and-context",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-retest-differences-measurement-and-context",
+          "title_intent": "Retest difference mechanisms: answer “Why can Big Five retest scores differ?”",
+          "primary_question": "Why can Big Five retest scores differ?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Separate measurement variation, context, and possible change.",
+          "keywords": [
+            "Big Five retest methods",
+            "Why can Big Five retest scores differ"
+          ],
+          "slug": "big-five-retest-differences-measurement-and-context",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "academic.soto-john-2009-ten-facets",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Product-specific reliability, validity, norm, sample, and percentile values remain Unknown unless public reviewed evidence exists.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-retest-differences-measurement-and-context",
+          "title_intent": "回答“为什么大五人格复测分数会不同？”，聚焦 Retest difference mechanisms",
+          "primary_question": "为什么大五人格复测分数会不同？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "区分测量波动、情境与可能的变化。",
+          "keywords": [
+            "大五人格 retest methods",
+            "为什么大五人格复测分数会不同"
+          ],
+          "slug": "big-five-retest-differences-measurement-and-context",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.soto-john-2017-bfi2",
+            "academic.soto-john-2009-ten-facets",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Product-specific reliability, validity, norm, sample, and percentile values remain Unknown unless public reviewed evidence exists.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.32.01.mbti",
+      "batch": 32,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32",
+      "family": "comparisons",
+      "theme_key": "mbti",
+      "unique_intent_key": "comparisons:mbti",
+      "locked_slug": "using-big-five-and-mbti-together-without-equating-them",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/using-big-five-and-mbti-together-without-equating-them",
+          "title_intent": "Complementary use, not equivalence: answer “Can I use Big Five and MBTI together?”",
+          "primary_question": "Can I use Big Five and MBTI together?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Use two models without converting traits into types.",
+          "keywords": [
+            "Big Five mbti",
+            "Can I use Big Five and MBTI together"
+          ],
+          "slug": "using-big-five-and-mbti-together-without-equating-them",
+          "search_intent": "compare",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No deterministic crosswalk or claimed equivalence between models.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/using-big-five-and-mbti-together-without-equating-them",
+          "title_intent": "回答“可以同时使用大五人格和 MBTI 吗？”，聚焦 Complementary use, not equivalence",
+          "primary_question": "可以同时使用大五人格和 MBTI 吗？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "在不把特质换算成类型的前提下使用两个模型。",
+          "keywords": [
+            "大五人格 mbti",
+            "可以同时使用大五人格和 MBTI 吗"
+          ],
+          "slug": "using-big-five-and-mbti-together-without-equating-them",
+          "search_intent": "compare",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No deterministic crosswalk or claimed equivalence between models.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.32.02.enneagram",
+      "batch": 32,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32",
+      "family": "comparisons",
+      "theme_key": "enneagram",
+      "unique_intent_key": "comparisons:enneagram",
+      "locked_slug": "big-five-vs-enneagram-traits-and-motivation-stories",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-vs-enneagram-traits-and-motivation-stories",
+          "title_intent": "Traits versus motivation narratives: answer “How are the Big Five and Enneagram different?”",
+          "primary_question": "How are the Big Five and Enneagram different?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Compare model questions without claiming one-to-one mappings.",
+          "keywords": [
+            "Big Five enneagram",
+            "How are the Big Five and Enneagram different"
+          ],
+          "slug": "big-five-vs-enneagram-traits-and-motivation-stories",
+          "search_intent": "compare",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No deterministic crosswalk or claimed equivalence between models.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-vs-enneagram-traits-and-motivation-stories",
+          "title_intent": "回答“大五人格与九型人格有什么不同？”，聚焦 Traits versus motivation narratives",
+          "primary_question": "大五人格与九型人格有什么不同？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "比较模型所回答的问题，而不声称一一对应。",
+          "keywords": [
+            "大五人格 enneagram",
+            "大五人格与九型人格有什么不同"
+          ],
+          "slug": "big-five-vs-enneagram-traits-and-motivation-stories",
+          "search_intent": "compare",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No deterministic crosswalk or claimed equivalence between models.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.32.03.disc",
+      "batch": 32,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32",
+      "family": "comparisons",
+      "theme_key": "disc",
+      "unique_intent_key": "comparisons:disc",
+      "locked_slug": "big-five-vs-disc-measurement-and-workplace-language",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-vs-disc-measurement-and-workplace-language",
+          "title_intent": "Big Five versus DISC: answer “How do the Big Five and DISC differ?”",
+          "primary_question": "How do the Big Five and DISC differ?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Compare constructs and workplace uses without score conversion.",
+          "keywords": [
+            "Big Five disc",
+            "How do the Big Five and DISC differ"
+          ],
+          "slug": "big-five-vs-disc-measurement-and-workplace-language",
+          "search_intent": "compare",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No deterministic crosswalk or claimed equivalence between models.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-vs-disc-measurement-and-workplace-language",
+          "title_intent": "回答“大五人格与 DISC 有什么不同？”，聚焦 Big Five versus DISC",
+          "primary_question": "大五人格与 DISC 有什么不同？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "比较构念与职场用途，而不换算分数。",
+          "keywords": [
+            "大五人格 disc",
+            "大五人格与 DISC 有什么不同"
+          ],
+          "slug": "big-five-vs-disc-measurement-and-workplace-language",
+          "search_intent": "compare",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No deterministic crosswalk or claimed equivalence between models.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.32.04.riasec",
+      "batch": 32,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32",
+      "family": "comparisons",
+      "theme_key": "riasec",
+      "unique_intent_key": "comparisons:riasec",
+      "locked_slug": "big-five-vs-riasec-personality-traits-and-career-interests",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-vs-riasec-personality-traits-and-career-interests",
+          "title_intent": "Traits versus interests: answer “How do the Big Five and RIASEC differ?”",
+          "primary_question": "How do the Big Five and RIASEC differ?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Separate personality traits from career interests.",
+          "keywords": [
+            "Big Five riasec",
+            "How do the Big Five and RIASEC differ"
+          ],
+          "slug": "big-five-vs-riasec-personality-traits-and-career-interests",
+          "search_intent": "compare",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No deterministic crosswalk or claimed equivalence between models.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-vs-riasec-personality-traits-and-career-interests",
+          "title_intent": "回答“大五人格与 RIASEC 有什么不同？”，聚焦 Traits versus interests",
+          "primary_question": "大五人格与 RIASEC 有什么不同？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "区分人格特质与职业兴趣。",
+          "keywords": [
+            "大五人格 riasec",
+            "大五人格与 RIASEC 有什么不同"
+          ],
+          "slug": "big-five-vs-riasec-personality-traits-and-career-interests",
+          "search_intent": "compare",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No deterministic crosswalk or claimed equivalence between models.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.32.05.myths",
+      "batch": 32,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32",
+      "family": "comparisons",
+      "theme_key": "myths",
+      "unique_intent_key": "comparisons:myths",
+      "locked_slug": "big-five-myths-types-destiny-and-perfect-scores",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-myths-types-destiny-and-perfect-scores",
+          "title_intent": "Myth correction: answer “What are the most common Big Five myths?”",
+          "primary_question": "What are the most common Big Five myths?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Correct type, destiny, ideal-score, and diagnosis misconceptions.",
+          "keywords": [
+            "Big Five myths",
+            "What are the most common Big Five myths"
+          ],
+          "slug": "big-five-myths-types-destiny-and-perfect-scores",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No deterministic crosswalk or claimed equivalence between models.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-myths-types-destiny-and-perfect-scores",
+          "title_intent": "回答“大五人格有哪些常见误区？”，聚焦 Myth correction",
+          "primary_question": "大五人格有哪些常见误区？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "纠正类型、命运、理想分数与诊断误区。",
+          "keywords": [
+            "大五人格 myths",
+            "大五人格有哪些常见误区"
+          ],
+          "slug": "big-five-myths-types-destiny-and-perfect-scores",
+          "search_intent": "clarify",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. No deterministic crosswalk or claimed equivalence between models.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.33.01.read-study",
+      "batch": 33,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33",
+      "family": "research_briefings",
+      "theme_key": "read-study",
+      "unique_intent_key": "research_briefings:read-study",
+      "locked_slug": "how-to-read-a-big-five-research-paper",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/how-to-read-a-big-five-research-paper",
+          "title_intent": "Research paper reading: answer “How do I read a Big Five research paper?”",
+          "primary_question": "How do I read a Big Five research paper?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Use a repeatable paper-reading checklist.",
+          "keywords": [
+            "Big Five read study",
+            "How do I read a Big Five research paper"
+          ],
+          "slug": "how-to-read-a-big-five-research-paper",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Use primary papers where possible; execution must verify time-sensitive facts, publication dates, and access dates.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/how-to-read-a-big-five-research-paper",
+          "title_intent": "回答“如何阅读一篇大五人格研究论文？”，聚焦 Research paper reading",
+          "primary_question": "如何阅读一篇大五人格研究论文？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "使用可复用的论文阅读清单。",
+          "keywords": [
+            "大五人格 read study",
+            "如何阅读一篇大五人格研究论文"
+          ],
+          "slug": "how-to-read-a-big-five-research-paper",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Use primary papers where possible; execution must verify time-sensitive facts, publication dates, and access dates.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.33.02.new-research-context",
+      "batch": 33,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33",
+      "family": "research_briefings",
+      "theme_key": "new-research-context",
+      "unique_intent_key": "research_briefings:new-research-context",
+      "locked_slug": "how-to-place-new-big-five-research-in-context",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/how-to-place-new-big-five-research-in-context",
+          "title_intent": "New-study context: answer “How should new Big Five research be put in context?”",
+          "primary_question": "How should new Big Five research be put in context?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Compare a new result with prior evidence and study design.",
+          "keywords": [
+            "Big Five new research context",
+            "How should new Big Five research be put in context"
+          ],
+          "slug": "how-to-place-new-big-five-research-in-context",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Use primary papers where possible; execution must verify time-sensitive facts, publication dates, and access dates.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/how-to-place-new-big-five-research-in-context",
+          "title_intent": "回答“如何把新的大五人格研究放进背景中理解？”，聚焦 New-study context",
+          "primary_question": "如何把新的大五人格研究放进背景中理解？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "把新结果与既有证据和研究设计对照。",
+          "keywords": [
+            "大五人格 new research context",
+            "如何把新的大五人格研究放进背景中理解"
+          ],
+          "slug": "how-to-place-new-big-five-research-in-context",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Use primary papers where possible; execution must verify time-sensitive facts, publication dates, and access dates.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.33.03.evidence-strength",
+      "batch": 33,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33",
+      "family": "research_briefings",
+      "theme_key": "evidence-strength",
+      "unique_intent_key": "research_briefings:evidence-strength",
+      "locked_slug": "big-five-evidence-strength-from-one-study-to-review",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-evidence-strength-from-one-study-to-review",
+          "title_intent": "Evidence-strength ladder: answer “How strong is a Big Five research claim?”",
+          "primary_question": "How strong is a Big Five research claim?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Distinguish study designs and evidence accumulation.",
+          "keywords": [
+            "Big Five evidence strength",
+            "How strong is a Big Five research claim"
+          ],
+          "slug": "big-five-evidence-strength-from-one-study-to-review",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Use primary papers where possible; execution must verify time-sensitive facts, publication dates, and access dates.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-evidence-strength-from-one-study-to-review",
+          "title_intent": "回答“一项大五人格研究主张的证据有多强？”，聚焦 Evidence-strength ladder",
+          "primary_question": "一项大五人格研究主张的证据有多强？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "区分研究设计与证据累积程度。",
+          "keywords": [
+            "大五人格 evidence strength",
+            "一项大五人格研究主张的证据有多强"
+          ],
+          "slug": "big-five-evidence-strength-from-one-study-to-review",
+          "search_intent": "learn",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Use primary papers where possible; execution must verify time-sensitive facts, publication dates, and access dates.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.33.04.limitations",
+      "batch": 33,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33",
+      "family": "research_briefings",
+      "theme_key": "limitations",
+      "unique_intent_key": "research_briefings:limitations",
+      "locked_slug": "big-five-study-limitations-sample-measures-and-causality",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/big-five-study-limitations-sample-measures-and-causality",
+          "title_intent": "Study limitation checklist: answer “Which limitations matter in Big Five studies?”",
+          "primary_question": "Which limitations matter in Big Five studies?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Check samples, measures, uncertainty, and causal language.",
+          "keywords": [
+            "Big Five limitations",
+            "Which limitations matter in Big Five studies"
+          ],
+          "slug": "big-five-study-limitations-sample-measures-and-causality",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Use primary papers where possible; execution must verify time-sensitive facts, publication dates, and access dates.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/big-five-study-limitations-sample-measures-and-causality",
+          "title_intent": "回答“大五人格研究中哪些局限最重要？”，聚焦 Study limitation checklist",
+          "primary_question": "大五人格研究中哪些局限最重要？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "检查样本、测量、不确定性与因果语言。",
+          "keywords": [
+            "大五人格 limitations",
+            "大五人格研究中哪些局限最重要"
+          ],
+          "slug": "big-five-study-limitations-sample-measures-and-causality",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Use primary papers where possible; execution must verify time-sensitive facts, publication dates, and access dates.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    },
+    {
+      "topic_id": "big5.article.33.05.apply-without-hype",
+      "batch": 33,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33",
+      "family": "research_briefings",
+      "theme_key": "apply-without-hype",
+      "unique_intent_key": "research_briefings:apply-without-hype",
+      "locked_slug": "apply-personality-research-without-overclaiming",
+      "locales": [
+        {
+          "locale": "en",
+          "path": "/en/articles/apply-personality-research-without-overclaiming",
+          "title_intent": "Evidence-to-action translation: answer “How can I apply personality research without overclaiming?”",
+          "primary_question": "How can I apply personality research without overclaiming?",
+          "audience": "English-speaking adults seeking evidence-aware self-reflection",
+          "user_task": "Translate group evidence into a reversible personal experiment.",
+          "keywords": [
+            "Big Five apply without hype",
+            "How can I apply personality research without overclaiming"
+          ],
+          "slug": "apply-personality-research-without-overclaiming",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/en/personality/big-five",
+            "/en/topics/big-five",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Use primary papers where possible; execution must verify time-sensitive facts, publication dates, and access dates.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        },
+        {
+          "locale": "zh-CN",
+          "path": "/zh/articles/apply-personality-research-without-overclaiming",
+          "title_intent": "回答“如何在不夸大的情况下应用人格研究？”，聚焦 Evidence-to-action translation",
+          "primary_question": "如何在不夸大的情况下应用人格研究？",
+          "audience": "希望进行循证自我反思的中文成年读者",
+          "user_task": "把群体证据转化为可逆的个人实验。",
+          "keywords": [
+            "大五人格 apply without hype",
+            "如何在不夸大的情况下应用人格研究"
+          ],
+          "slug": "apply-personality-research-without-overclaiming",
+          "search_intent": "do",
+          "internal_link_targets": [
+            "/zh/personality/big-five",
+            "/zh/topics/big-five",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ],
+          "source_requirements": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2",
+            "internal.public-claim-boundary-matrix"
+          ],
+          "risk_boundary": "Educational self-reflection only; no diagnosis, fixed identity, guaranteed outcome, or unsupported product psychometric claim. Use primary papers where possible; execution must verify time-sensitive facts, publication dates, and access dates.",
+          "publication_state": "draft_candidate_only",
+          "indexability_state": "unchanged"
+        }
+      ]
+    }
+  ]
+}
