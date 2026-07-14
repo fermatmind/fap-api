@@ -1,0 +1,87 @@
+{
+  "schema_version": "big5-topic-hub-refresh-candidates.v1",
+  "generated_at": "2026-07-14T05:15:00Z",
+  "authority": "CMS/backend",
+  "candidates": [
+    {
+      "asset_type": "TopicHub",
+      "locale": "en",
+      "route": "/en/topics/big-five",
+      "title": "Big Five personality: concepts, results, and practical reflection",
+      "introduction": "Explore backend-authoritative Big Five material by question: understand the model, read a result carefully, test a practical action, or examine evidence and limits.",
+      "review_status": "pending_manual_review",
+      "cms_authority": {
+        "preserve_existing_record_identity": true,
+        "author": null,
+        "reviewer": null,
+        "published_at": null,
+        "updated_at": null
+      },
+      "enumeration": {
+        "source": "backend_public_api",
+        "required_states": [
+          "published",
+          "eligible"
+        ],
+        "exclude": [
+          "draft",
+          "pending_manual_review",
+          "unpublished",
+          "private",
+          "non_indexable"
+        ],
+        "hardcoded_entries": [],
+        "rule": "At render/import time, enumerate only Article records returned as published and eligible by backend authority. Do not infer eligibility from this package."
+      },
+      "groups": [
+        "Understand the model",
+        "Read results",
+        "Try a practical reflection",
+        "Evidence and limitations"
+      ],
+      "cms_write_executed": false,
+      "publish_state_change": false,
+      "indexability_change": false
+    },
+    {
+      "asset_type": "TopicHub",
+      "locale": "zh-CN",
+      "route": "/zh/topics/big-five",
+      "title": "大五人格：模型、结果与实践反思",
+      "introduction": "按问题浏览 backend-authoritative 的大五人格内容：理解模型、谨慎阅读结果、检验具体行动，或查看证据与限制。",
+      "review_status": "pending_manual_review",
+      "cms_authority": {
+        "preserve_existing_record_identity": true,
+        "author": null,
+        "reviewer": null,
+        "published_at": null,
+        "updated_at": null
+      },
+      "enumeration": {
+        "source": "backend_public_api",
+        "required_states": [
+          "published",
+          "eligible"
+        ],
+        "exclude": [
+          "draft",
+          "pending_manual_review",
+          "unpublished",
+          "private",
+          "non_indexable"
+        ],
+        "hardcoded_entries": [],
+        "rule": "At render/import time, enumerate only Article records returned as published and eligible by backend authority. Do not infer eligibility from this package."
+      },
+      "groups": [
+        "理解模型",
+        "阅读结果",
+        "进行实践反思",
+        "证据与限制"
+      ],
+      "cms_write_executed": false,
+      "publish_state_change": false,
+      "indexability_change": false
+    }
+  ]
+}
