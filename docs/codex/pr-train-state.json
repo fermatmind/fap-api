@@ -91567,8 +91567,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "ee9c26d37060737817e5e27cceebe06610afc322",
+    "status": "merged",
+    "commit_sha": "4f7aa9c8b15d60f5803c9608970ea0e5f7ffbce7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3078",
     "checks": {
       "dependency": {
@@ -91585,9 +91585,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T10:51:43Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -91616,6 +91616,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on ledger-updated head 79117cc03a5c0d8541ce904d39dc399972b7f3b3, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T10:54:29Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR32 after GitHub reported PR #3078 MERGED at 2026-07-14T10:51:43Z as squash commit 4f7aa9c8b15d60f5803c9608970ea0e5f7ffbce7. origin/main contains the merge; remote and local task branches were deleted; post-merge package validation, 4 tests / 166 assertions, Pint, clean-main, and ancestry checks passed."
       }
     ]
   },
@@ -91628,10 +91634,43 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "28df249f5dc6eda28bce668e0d2fcbe89e49dfe0",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3079",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32 PR #3078 is MERGED as 4f7aa9c8b15d60f5803c9608970ea0e5f7ffbce7; origin/main contains the merge, remote and local branches are deleted, and PR32 post-merge validator, 4 tests / 166 assertions, Pint, clean-main, and ancestry checks passed. PR33 started from that exact clean origin/main head."
+      },
+      "web_source_verification": {
+        "status": "pass",
+        "evidence": "On 2026-07-14, execution-time web verification confirmed the locked primary-paper metadata: Goldberg (1990), Journal of Personality and Social Psychology 59(6), 1216-1229, DOI 10.1037/0022-3514.59.6.1216; and Soto & John (2017), Journal of Personality and Social Psychology 113(1), 117-143, DOI 10.1037/pspp0000096. Author-hosted/academic copies and DOI metadata were checked; access date is preserved as 2026-07-14. No new source authority was added."
+      },
+      "package_validator": {
+        "status": "pass",
+        "evidence": "node generated/big-five-authority-v2/big5-authority-v2-article-research-briefings-33/validate-package.mjs passed: exact PR21 batch 33 inventory, 5 locked themes / 10 bilingual Article candidates, locked source mappings, web-verified primary-paper dates, evidence-to-claim boundaries, review chain, private-link exclusions, and zero CMS/publish/index mutations."
+      },
+      "focused_test": {
+        "status": "pass",
+        "evidence": "cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV233Test.php --no-ansi passed: 4 tests, 256 assertions."
+      },
+      "pint": {
+        "status": "pass",
+        "evidence": "backend/vendor/bin/pint --test backend/tests/Feature/SEO/BigFiveAuthorityV233Test.php passed: 1 file."
+      },
+      "syntax_and_metadata": {
+        "status": "pass",
+        "evidence": "node --check passed for build-package.mjs and validate-package.mjs; php -l passed for BigFiveAuthorityV233Test.php; Ruby YAML parse and python3 -m json.tool passed."
+      },
+      "scope_and_diff": {
+        "status": "pass",
+        "evidence": "Exact changed-file scope validation passed for the PR33 generated package, README, focused test, and PR-train state ledger only; git diff --check passed and no unrelated files were touched."
+      },
+      "github_checks_first_round": {
+        "status": "pass",
+        "evidence": "All 9 GitHub checks passed on head 28df249f5dc6eda28bce668e0d2fcbe89e49dfe0: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep OSS, Semgrep blocking secrets, and non-blocking SARIF upload. GitHub reported CLEAN merge state and exactly 11 allowed changed files."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -91640,7 +91679,32 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T10:54:29Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR33 from exact origin/main 4f7aa9c8b15d60f5803c9608970ea0e5f7ffbce7 after PR32 merged, cleaned, reconciled, and revalidated. Scope consumes only PR21 batch 33: reading studies, new-research context, evidence strength, limitations, and application without hype in EN and zh-CN. Locked primary-paper DOI/publication metadata was reverified online on 2026-07-14; evidence stays tied to source date, access date, design, sample, measure, and claim boundary."
+      },
+      {
+        "at": "2026-07-14T11:00:54Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "PR33 package generation, independent validator, focused Laravel test (4 tests / 256 assertions), Pint, JS/PHP/YAML/JSON syntax checks, exact scope validation, and git diff hygiene all passed. Ten research-briefing candidates remain pending manual review with null attribution and zero release mutations."
+      },
+      {
+        "at": "2026-07-14T11:02:55Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 11-file PR33 scope as 2e9df18b561beac2576bba4ec1d4c9647049c0ee, pushed the scoped branch, and opened PR #3079 with validation and deferred-item evidence. Waiting for all required GitHub checks."
+      },
+      {
+        "at": "2026-07-14T11:14:38Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on ledger-updated head 28df249f5dc6eda28bce668e0d2fcbe89e49dfe0, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-MEDIA-OG-34": {
     "id": "BIG5-AUTHORITY-V2-MEDIA-OG-34",
