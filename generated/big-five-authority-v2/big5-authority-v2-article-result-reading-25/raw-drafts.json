@@ -1,0 +1,256 @@
+{
+  "schema_version": "big5-article-wave-raw.v1",
+  "generated_at": "2026-07-14T06:33:12Z",
+  "assets": [
+    {
+      "topic_id": "big5.article.25.01.read-results",
+      "locale": "en",
+      "slug": "how-to-read-big-five-results-without-self-labeling",
+      "title": "How to Read Big Five Results Without Turning Them Into Labels",
+      "locked_intent_key": "result_reading:read-results",
+      "primary_question": "How should I read my Big Five results?",
+      "raw_sections": {
+        "direct_answer": "Read a Big Five result as a set of working hypotheses. Confirm each scale’s name and direction, compare all five ranges, inspect narrower facets where they are actually defined, and translate one description into behavior you can observe across more than one context.",
+        "evidence": "Hierarchical Big Five instruments use multiple responses to estimate broad domains and sometimes narrower facets. That structure supports reading a profile as several dimensions rather than one type, but evidence about a research instrument does not establish the accuracy of a FermatMind result or explain one person’s behavior by itself.",
+        "scenario": "A reader sees a higher conscientiousness range but has missed several deadlines while caring for a family member. Instead of rejecting the result or calling themselves “disciplined,” they compare planning, follow-through, competing demands, and counterexamples at home and work.",
+        "practical_framework": [
+          "Check the scale label, polarity, and what the displayed range actually claims.",
+          "Read the five dimensions together without collapsing them into a type.",
+          "Choose one observable hypothesis and test it in at least two contexts.",
+          "Record a confirming example and a counterexample before choosing an action."
+        ]
+      },
+      "evidence_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "official.fermatmind-public-contract-v2",
+        "internal.public-claim-boundary-matrix"
+      ],
+      "review_status": "draft_requires_skeptical_review"
+    },
+    {
+      "topic_id": "big5.article.25.01.read-results",
+      "locale": "zh-CN",
+      "slug": "how-to-read-big-five-results-without-self-labeling",
+      "title": "怎样阅读大五人格结果：把描述变成假设，而不是标签",
+      "locked_intent_key": "result_reading:read-results",
+      "primary_question": "应该怎样阅读大五人格结果？",
+      "raw_sections": {
+        "direct_answer": "应把大五人格结果读成一组工作假设。先确认量尺名称与方向，再比较五个维度区间；只有在页面明确给出侧面定义时才阅读侧面，最后把一个描述转化为可在多个情境观察的行为。",
+        "evidence": "层级式大五工具通过多个回答估计宽泛维度，有时也估计较窄侧面。这支持把画像理解为多个维度，而不是一种类型；但研究工具的证据不能自动证明费马测试结果准确，也不能单独解释某个人的行为。",
+        "scenario": "读者看到尽责性区间较高，但在照护家人的阶段错过了几次截止日期。更稳妥的做法不是否定结果或自称“自律的人”，而是分别观察计划、执行、现实负荷，以及家庭与工作中的反例。",
+        "practical_framework": [
+          "核对量尺名称、方向和页面对区间的实际定义。",
+          "把五个维度放在一起读，不压缩成人格类型。",
+          "选择一个可观察假设，在至少两个情境中检验。",
+          "同时记录一个吻合例子与一个反例，再决定行动。"
+        ]
+      },
+      "evidence_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "official.fermatmind-public-contract-v2",
+        "internal.public-claim-boundary-matrix"
+      ],
+      "review_status": "draft_requires_skeptical_review"
+    },
+    {
+      "topic_id": "big5.article.25.02.score-ranges",
+      "locale": "en",
+      "slug": "big-five-score-ranges-what-high-middle-low-can-mean",
+      "title": "What High, Middle, and Low Big Five Ranges Can—and Cannot—Mean",
+      "locked_intent_key": "result_reading:score-ranges",
+      "primary_question": "What can high, middle, and low Big Five ranges mean?",
+      "raw_sections": {
+        "direct_answer": "High, middle, and low are presentation ranges on a continuous dimension. They can organize a description of tendencies, but they are not automatically percentiles, ability levels, diagnoses, or hard boundaries between kinds of people.",
+        "evidence": "Big Five measurement models estimate degrees of broad traits. Reports may group continuous estimates into bands for readability. To interpret a band as a percentile or norm-referenced position, a product would need a publicly reviewed reference sample, scoring rule, and cutoff rationale; those FermatMind-specific values are not supplied here.",
+        "scenario": "Two friends compare reports labeled “middle” and “high.” Without the underlying scale, norm population, cutoffs, and uncertainty, they cannot conclude who has more skill or who ranks above whom. They can only inspect whether each description prompts useful observations.",
+        "practical_framework": [
+          "Identify the dimension and stated direction.",
+          "Ask whether the band is descriptive or backed by a published norm and cutoff method.",
+          "Treat boundary cases as approximate and compare behavior, not status.",
+          "Do not compare people or abilities from labels alone."
+        ]
+      },
+      "evidence_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "official.fermatmind-public-contract-v2",
+        "internal.public-claim-boundary-matrix"
+      ],
+      "review_status": "draft_requires_skeptical_review"
+    },
+    {
+      "topic_id": "big5.article.25.02.score-ranges",
+      "locale": "zh-CN",
+      "slug": "big-five-score-ranges-what-high-middle-low-can-mean",
+      "title": "大五人格高、中、低区间意味着什么：先看连续维度与常模边界",
+      "locked_intent_key": "result_reading:score-ranges",
+      "primary_question": "大五人格高、中、低区间可能意味着什么？",
+      "raw_sections": {
+        "direct_answer": "高、中、低是连续维度上的呈现区间，可以帮助组织倾向描述，但不会自动变成百分位、能力等级、诊断，或人与人之间的硬边界。",
+        "evidence": "大五测量模型估计宽泛特质的程度，报告可能为了易读而把连续估计分组。若要把区间解释成百分位或常模位置，产品必须公开并审核参照样本、计分规则与切点依据；本文没有提供这些费马测试产品数值。",
+        "scenario": "两位朋友比较分别标为“中间”和“较高”的报告。缺少底层量尺、常模人群、切点与不确定性时，不能据此判断谁能力更强或排名更高；只能观察各自描述是否能提出有用问题。",
+        "practical_framework": [
+          "先确认维度名称与方向。",
+          "询问区间只是描述，还是有公开常模与切点方法。",
+          "把边界附近视为近似，并比较行为而不是身份地位。",
+          "不要仅凭标签比较不同人的能力。"
+        ]
+      },
+      "evidence_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "official.fermatmind-public-contract-v2",
+        "internal.public-claim-boundary-matrix"
+      ],
+      "review_status": "draft_requires_skeptical_review"
+    },
+    {
+      "topic_id": "big5.article.25.03.retest",
+      "locale": "en",
+      "slug": "when-to-retest-big-five-and-what-a-score-change-means",
+      "title": "When to Retake a Big Five Test—and How to Read a Changed Score",
+      "locked_intent_key": "result_reading:retest",
+      "primary_question": "When should I retake a Big Five test?",
+      "raw_sections": {
+        "direct_answer": "Retest when you have a concrete question and can compare conditions, not to chase a preferred label. Record why you are retesting, what changed in the setting or your life, and what decision the second result could realistically inform.",
+        "evidence": "A changed response pattern can reflect several things: item interpretation, temporary context, response variability, measurement error, or a change in the tendencies being measured. Separating those explanations requires instrument-specific reliability and change evidence, not the size or direction of one score difference alone.",
+        "scenario": "Someone completed a test while sleep-deprived and wants to retake it. They write down that condition, wait until they can answer in a more typical routine, keep the purpose and environment comparable, and review differences as questions rather than proof of a new personality.",
+        "practical_framework": [
+          "Write one question the retest is meant to answer.",
+          "Record the first test’s context and avoid rehearsing a desired outcome.",
+          "Retest under a reasonably comparable, typical condition.",
+          "Review stable and changed dimensions alongside observations; do not infer cause from score change alone."
+        ]
+      },
+      "evidence_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "official.fermatmind-public-contract-v2",
+        "internal.public-claim-boundary-matrix"
+      ],
+      "review_status": "draft_requires_skeptical_review"
+    },
+    {
+      "topic_id": "big5.article.25.03.retest",
+      "locale": "zh-CN",
+      "slug": "when-to-retest-big-five-and-what-a-score-change-means",
+      "title": "什么时候适合复测大五人格：怎样理解分数变化",
+      "locked_intent_key": "result_reading:retest",
+      "primary_question": "什么时候适合复测大五人格？",
+      "raw_sections": {
+        "direct_answer": "有明确问题、并且能够比较作答条件时再复测，不要为了追逐喜欢的标签反复作答。应记录复测原因、环境或生活发生了什么变化，以及第二次结果现实中能帮助回答什么。",
+        "evidence": "回答模式变化可能来自题意理解、临时情境、作答波动、测量误差，也可能来自被测倾向的变化。要区分这些解释，需要工具特定的信度与变化证据，不能只看一次分差的大小或方向。",
+        "scenario": "某人在严重缺觉时完成测评，随后想复测。他先记录这一条件，等到能够在较典型的日常状态作答，再尽量保持目的与环境可比较，并把差异当作待核对的问题，而不是“人格已经改变”的证明。",
+        "practical_framework": [
+          "写下一条复测要回答的具体问题。",
+          "记录首次作答情境，不预演想得到的结果。",
+          "在较典型且可比较的条件下复测。",
+          "把稳定与变化维度同现实观察一起看，不从分数变化直接推断原因。"
+        ]
+      },
+      "evidence_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "official.fermatmind-public-contract-v2",
+        "internal.public-claim-boundary-matrix"
+      ],
+      "review_status": "draft_requires_skeptical_review"
+    },
+    {
+      "topic_id": "big5.article.25.04.discuss-results",
+      "locale": "en",
+      "slug": "how-to-discuss-big-five-results-with-someone-else",
+      "title": "How to Discuss Big Five Results Without Labeling Someone Else",
+      "locked_intent_key": "result_reading:discuss-results",
+      "primary_question": "How can I discuss Big Five results without labeling someone?",
+      "raw_sections": {
+        "direct_answer": "Ask permission before discussing a result, let the result owner choose what to share, and use tentative first-person language. Talk about a specific observation or need rather than assigning a trait label, motive, diagnosis, or future outcome.",
+        "evidence": "Dimensional trait models describe broad tendencies; they do not reveal intentions, competence, moral worth, or what someone must do next. The FermatMind public boundary also keeps private results, report links, and decision-sensitive information outside public or coercive use.",
+        "scenario": "A partner wants to discuss a reported extraversion range. Instead of saying “you are an introvert,” they ask whether the owner wants to talk, describe one recent situation, ask what felt accurate, and stop without requesting the full private report.",
+        "practical_framework": [
+          "Ask whether the person wants the conversation and what may be shared.",
+          "Use “I noticed…” and “Does this fit here?” instead of “You are…”.",
+          "Keep the discussion tied to one context, need, or experiment.",
+          "Do not copy, publish, or demand private report or attempt links."
+        ]
+      },
+      "evidence_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "official.fermatmind-public-contract-v2",
+        "internal.public-claim-boundary-matrix"
+      ],
+      "review_status": "draft_requires_skeptical_review"
+    },
+    {
+      "topic_id": "big5.article.25.04.discuss-results",
+      "locale": "zh-CN",
+      "slug": "how-to-discuss-big-five-results-with-someone-else",
+      "title": "怎样与他人讨论大五人格结果：先取得同意，不替别人贴标签",
+      "locked_intent_key": "result_reading:discuss-results",
+      "primary_question": "怎样与他人讨论大五人格结果而不贴标签？",
+      "raw_sections": {
+        "direct_answer": "讨论结果前先征得同意，由结果所有者决定分享什么，并使用暂定的第一人称语言。应讨论具体观察或需要，不把特质标签、动机、诊断或未来结局强加给对方。",
+        "evidence": "维度式特质模型描述宽泛倾向，不能读出意图、能力、道德价值或某人下一步必须做什么。费马测试公开边界也要求私人结果、报告链接与决策敏感信息不得进入公开或强迫性使用。",
+        "scenario": "伴侣想讨论报告中的外向性区间。与其说“你就是内向的人”，更合适的做法是先询问是否愿意谈，描述一个近期场景，问哪些部分吻合，并且不索取完整私人报告。",
+        "practical_framework": [
+          "先问对方是否愿意讨论，以及哪些内容可以分享。",
+          "用“我观察到……”和“这里是否吻合？”代替“你就是……”。",
+          "把讨论限制在一个情境、需要或小实验。",
+          "不要复制、公开或强索私人报告与 attempt 链接。"
+        ]
+      },
+      "evidence_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "official.fermatmind-public-contract-v2",
+        "internal.public-claim-boundary-matrix"
+      ],
+      "review_status": "draft_requires_skeptical_review"
+    },
+    {
+      "topic_id": "big5.article.25.05.thirty-day-review",
+      "locale": "en",
+      "slug": "big-five-30-day-observation-and-review-plan",
+      "title": "A 30-Day Big Five Observation and Review Plan",
+      "locked_intent_key": "result_reading:thirty-day-review",
+      "primary_question": "How can I review a Big Five result over 30 days?",
+      "raw_sections": {
+        "direct_answer": "Use 30 days as a time-boxed observation loop, not as a validation study. Choose one result description, define an observable hypothesis, collect examples and counterexamples across contexts, review weekly, and revise the hypothesis on day 30.",
+        "evidence": "Trait results become more useful for self-reflection when broad language is translated into concrete observations. A structured log can reduce hindsight and confirmation bias, but it does not estimate psychometric validity, prove a cause, or turn personal notes into a representative sample.",
+        "scenario": "A reader tests the hypothesis “I tend to seek social stimulation after focused work.” For four weeks they note the situation, behavior, cost, and exception at work and home. At the end they narrow the claim instead of deciding they have a fixed extraversion identity.",
+        "practical_framework": [
+          "Day 1: select one narrow, observable hypothesis and two contexts.",
+          "Days 2–23: log brief observations, costs, and counterexamples without scoring yourself.",
+          "Days 7, 14, and 21: review what is missing and adjust the observation prompt.",
+          "Day 30: keep, narrow, or reject the hypothesis and choose one reversible action."
+        ]
+      },
+      "evidence_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "official.fermatmind-public-contract-v2",
+        "internal.public-claim-boundary-matrix"
+      ],
+      "review_status": "draft_requires_skeptical_review"
+    },
+    {
+      "topic_id": "big5.article.25.05.thirty-day-review",
+      "locale": "zh-CN",
+      "slug": "big-five-30-day-observation-and-review-plan",
+      "title": "大五人格结果的 30 天观察与复盘计划",
+      "locked_intent_key": "result_reading:thirty-day-review",
+      "primary_question": "如何用 30 天观察复盘大五人格结果？",
+      "raw_sections": {
+        "direct_answer": "把 30 天当作有时限的观察循环，而不是验证研究。选择一条结果描述，定义可观察假设，在不同情境收集例子与反例，每周复盘，并在第 30 天修订假设。",
+        "evidence": "把宽泛特质语言翻译成具体观察，有助于将结果用于自我反思。结构化记录可以减少事后补写与确认偏误，但不能估计心理测量效度、证明原因，也不能把个人笔记变成代表性样本。",
+        "scenario": "读者检验“完成专注工作后，我倾向寻求社交刺激”这一假设。四周内，他在工作与家庭记录情境、行为、代价与例外；期末把主张缩窄，而不是认定自己拥有固定的外向身份。",
+        "practical_framework": [
+          "第 1 天：选择一个窄且可观察的假设，并确定两个情境。",
+          "第 2—23 天：简短记录观察、代价与反例，不给自己打分。",
+          "第 7、14、21 天：检查缺失信息，并调整观察提示。",
+          "第 30 天：保留、缩窄或否定假设，再选择一个可逆行动。"
+        ]
+      },
+      "evidence_source_ids": [
+        "academic.soto-john-2017-bfi2",
+        "official.fermatmind-public-contract-v2",
+        "internal.public-claim-boundary-matrix"
+      ],
+      "review_status": "draft_requires_skeptical_review"
+    }
+  ]
+}
