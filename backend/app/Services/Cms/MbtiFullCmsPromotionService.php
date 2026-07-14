@@ -203,7 +203,7 @@ final class MbtiFullCmsPromotionService
             || ($draft['sitemap_eligibility_mutated'] ?? null) !== false
             || ($draft['llms_eligibility_mutated'] ?? null) !== false
             || ! is_array($draft['payload'] ?? null)
-            || $this->hashJson($draft['payload']) !== $payloadSha256) {
+            || $this->hashCanonicalJson($draft['payload']) !== $this->hashCanonicalJson($payload)) {
             $errors[] = $this->issue($field.'.revision', 'latest_revision_contract_mismatch', 'The latest target revision is not the exact immutable CMS-40 draft.');
         }
 

@@ -42,6 +42,52 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
         self::assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_dry_run_accepts_database_normalized_json_key_order_for_the_exact_draft(): void
+    {
+        [$path] = $this->seedAndStage();
+        $variant = PersonalityProfileVariant::query()->where('runtime_type_code', 'INTJ-A')->firstOrFail();
+        $revision = PersonalityProfileVariantRevision::query()
+            ->where('personality_profile_variant_id', $variant->id)
+            ->orderByDesc('revision_no')
+            ->firstOrFail();
+        $snapshot = $revision->snapshot_json;
+        $payload = data_get($snapshot, 'mbti_cms_import_40_profile_draft_v1.payload');
+        self::assertIsArray($payload);
+        data_set($snapshot, 'mbti_cms_import_40_profile_draft_v1.payload', array_reverse($payload, true));
+        $revision->forceFill(['snapshot_json' => $snapshot])->save();
+
+        $sourcePackage = json_decode((string) File::get($path), true);
+        self::assertIsArray($sourcePackage);
+        $sourcePayload = data_get($sourcePackage, 'repair_records.0.import_payload');
+        $storedSnapshot = $revision->fresh()->snapshot_json;
+        $storedDraft = data_get($storedSnapshot, 'mbti_cms_import_40_profile_draft_v1');
+        $sourceRecord = data_get($sourcePackage, 'repair_records.0');
+        $storedPayload = data_get($storedDraft, 'payload');
+        self::assertIsArray($sourcePayload);
+        self::assertIsArray($sourceRecord);
+        self::assertIsArray($storedDraft);
+        self::assertIsArray($storedPayload);
+        self::assertSame($this->canonicalize($sourcePayload), $this->canonicalize($storedPayload));
+        self::assertSame($sourceRecord['approval_record_id'], $storedDraft['approval_record_id']);
+        self::assertSame($this->hashJson($sourcePayload), $storedDraft['payload_sha256']);
+        self::assertSame($sourceRecord['target_path'], $storedDraft['target_path']);
+        self::assertSame($sourceRecord['entity_kind'], $storedDraft['entity_kind']);
+        self::assertSame('draft_only', $storedDraft['visibility']);
+        self::assertFalse($storedDraft['public_projection_promoted']);
+        self::assertFalse($storedDraft['indexability_mutated']);
+        self::assertFalse($storedDraft['sitemap_eligibility_mutated']);
+        self::assertFalse($storedDraft['llms_eligibility_mutated']);
+
+        $exitCode = Artisan::call('personality:mbti-full-cms-promote', $this->promotionOptions($path, true));
+        $summary = $this->jsonOutput();
+
+        self::assertSame(0, $exitCode, (string) json_encode($summary, JSON_UNESCAPED_SLASHES));
+        self::assertTrue($summary['ok']);
+        self::assertSame('pass', $summary['status']);
+        self::assertSame(43, $summary['row_count']);
+        self::assertFalse($summary['writes_committed']);
+    }
+
     public function test_write_requires_guards_and_exact_dry_run_hashes(): void
     {
         $exitCode = Artisan::call('personality:mbti-full-cms-promote', [
@@ -345,5 +391,21 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
     private function hashJson(array $value): string
     {
         return hash('sha256', (string) json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE));
+    }
+
+    private function canonicalize(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+        if (array_is_list($value)) {
+            return array_map(fn (mixed $item): mixed => $this->canonicalize($item), $value);
+        }
+        ksort($value, SORT_STRING);
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->canonicalize($item);
+        }
+
+        return $value;
     }
 }
