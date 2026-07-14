@@ -33,7 +33,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
-    public function deploy_keeps_career_runtime_publication_authority_readable_by_php_fpm(): void
+    public function deploy_keeps_shared_runtime_roots_writable_without_rewriting_historical_trees(): void
     {
         $source = $this->readRepoFile('deploy.php');
 
@@ -46,11 +46,21 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $source,
         );
         $this->assertStringContainsString(
+            "ensureOwnedWritableDir(deploySharedPath(\$base, \$relativePath), \$owner, 'www-data');",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "ensureOwnedWritableDir(deploySharedPath(\$base, 'shared/content_packages'), \$owner, 'www-data');",
+            $source,
+        );
+        $this->assertStringNotContainsString(
             "ensureOwnedWritableTree(deploySharedPath(\$base, \$relativePath), \$owner, 'www-data');",
             $source,
         );
-        $this->assertStringContainsString('find {$quotedPath} -type d -exec chmod 2775', $source);
-        $this->assertStringContainsString('find {$quotedPath} -type f -exec chmod 664', $source);
+        $this->assertStringNotContainsString(
+            "ensureOwnedWritableTree(deploySharedPath(\$base, 'shared/content_packages'), \$owner, 'www-data');",
+            $source,
+        );
     }
 
     #[Test]
