@@ -1,0 +1,55 @@
+{
+  "schema_version": "big5_authority_v2_skeptical_review.v1",
+  "train_id": "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19",
+  "artifact": "big5-authority-v2-facets-neuroticism-19-skeptical-review",
+  "reviewed_artifact": "big5-authority-v2-facets-neuroticism-19-raw",
+  "review_status": "repair_required",
+  "expected_raw_issue_codes": [
+    "locale_not_independently_authored",
+    "outline_incomplete",
+    "template_or_cliche_detected",
+    "visible_sources_incomplete"
+  ],
+  "findings": [
+    {
+      "code": "locale_not_independently_authored",
+      "severity": "block",
+      "finding": "All six Chinese records are marked as translations rather than independent edits."
+    },
+    {
+      "code": "outline_incomplete",
+      "severity": "block",
+      "finding": "All raw outlines omit domain distinction, both ends, two concrete scenarios, counterexample, observation, reflection, action, exclusions, and method boundaries."
+    },
+    {
+      "code": "template_or_cliche_detected",
+      "severity": "block",
+      "finding": "The raw note explicitly proposes one generic template with facet-name substitution."
+    },
+    {
+      "code": "visible_sources_incomplete",
+      "severity": "block",
+      "finding": "The raw records expose neither the hierarchical model source nor the exact IPIP/NEO-style taxonomy source and limitations."
+    }
+  ],
+  "repair_policy": {
+    "overwrite_raw": false,
+    "automatic_publish": false,
+    "automatic_indexability": false,
+    "human_review_required": true,
+    "ai_detector_used": false
+  },
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}

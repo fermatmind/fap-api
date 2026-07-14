@@ -1,0 +1,211 @@
+{
+  "schema_version": "big5_authority_v2_facet_repair.v1",
+  "train_id": "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19",
+  "artifact": "big5-authority-v2-facets-neuroticism-19-repaired",
+  "stage": "repaired",
+  "framework": "big_five",
+  "domain_code": "neuroticism",
+  "taxonomy": "ipip_neo_30_facet_navigation",
+  "expected_page_count": 12,
+  "required_intents": [
+    "domain_difference",
+    "two_ends",
+    "two_scenarios",
+    "counterexample",
+    "observation_contexts",
+    "reflection_questions",
+    "low_risk_action",
+    "not_meaning",
+    "method_boundary",
+    "visible_sources"
+  ],
+  "pages": [
+    {
+      "facet_code": "anxiety",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/anxiety",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Anxiety is a narrow neuroticism facet describing how readily attention turns toward possible danger, uncertainty, or things that could go wrong; the label is not an anxiety-disorder diagnosis or a measure of courage. For one low-stakes uncertain task, write down the main concern, one proportionate safeguard, and a time to decide. After that point, proceed or revise from new evidence rather than repeating the same check.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "anxiety",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/anxiety",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "焦虑是神经质中的窄维度，描述注意力多快转向潜在危险、不确定性或可能出错之处；这里的标签不是焦虑障碍诊断，也不衡量勇气。 选一件低风险但不确定的事，写下主要担忧、一个相称的保障措施和最终决定时间。到点后只依据新证据调整，不重复同一轮检查。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "anger",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/anger",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Anger is a narrow neuroticism facet about the tendency for obstruction, unfairness, or disrespect to evoke irritation or anger; it does not measure aggression, violence, moral character, or whether a complaint is justified. For one minor irritation, pause long enough to write a fact, its impact, and one concrete request. Deliver that version without diagnosing intent, then review whether the response reduced confusion or intensified it.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "anger",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/anger",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "愤怒是神经质中的窄维度，描述受阻、不公平或不被尊重时多容易出现恼怒；它不衡量攻击性、暴力、道德品质，也不判断某次抱怨是否合理。 遇到一次轻微恼怒时，先写下一项事实、具体影响和一个可执行请求。只传达这个版本，不判断对方意图，再看它是减少还是增加了误解。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "depression",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/depression",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Depression is a legacy facet label for a tendency toward discouragement, sadness, or diminished positive expectation; on this page it is a personality-navigation term, not a diagnosis of depressive disorder or an estimate of mental-health severity. Choose one paused low-stakes task and define a ten-minute next step that produces information, such as opening the feedback and marking one revision. Stop after the step and reassess capacity without forcing a positive conclusion.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "depression",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/depression",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "抑郁在这里是历史沿用的 facet 标签，描述较容易感到灰心、悲伤或降低积极预期的倾向；它只是人格导航术语，不诊断抑郁障碍，也不估计心理健康严重程度。 从一件暂停的低风险任务中选出十分钟步骤，例如打开反馈并标记一个可修改点。完成后停下，再评估精力，不强迫自己得出乐观结论。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "self-consciousness",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/self-consciousness",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Self-consciousness is a narrow neuroticism facet describing how readily attention turns inward when a person may be observed, evaluated, or embarrassed; it is not vanity, humility, social skill, or a diagnosis of social anxiety. In one low-stakes group, contribute a prepared sentence or question before it feels perfectly polished. Record what actually happened, including neutral responses, rather than relying only on the predicted judgment.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "self-consciousness",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/self-consciousness",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "自我意识是神经质中的窄维度，描述在可能被观察、评价或出丑时，注意力多容易转回自己；它不等于虚荣、谦逊、社交能力，也不是社交焦虑诊断。 在一个低风险小组里，提前准备一句话或一个问题，在尚未觉得完美时说出来。记录真实发生的反应，包括中性反应，不只记录预想中的评价。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "impulsiveness",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/impulsiveness",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Impulsiveness is a narrow neuroticism facet about how difficult it can feel to delay a strong urge when emotion or desire is active; it is not a diagnosis, a global measure of self-control, or proof of irresponsible behavior. Choose one recurring low-stakes urge and insert a brief friction step: close the tab, move the item to a list, or wait ten minutes. Afterward record whether the urge changed and whether the original intention still fits.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "impulsiveness",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/impulsiveness",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "冲动性是神经质中的窄维度，描述情绪或欲求活跃时，延迟一个强烈冲动可能有多困难；它不是诊断，不是整体自控力评分，也不能证明一个人不负责任。 选择一个反复出现的低风险欲求，加入短暂阻力：关掉页面、把物品移入清单或等待十分钟。之后记录欲求是否变化，原先意图是否仍然合适。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "vulnerability",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/vulnerability",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Vulnerability is a narrow neuroticism facet describing the tendency to feel less able to think or act effectively when pressure becomes intense; it is not fragility, trauma history, incapacity, or a prediction of performance. Before one moderately busy period, write a three-step overload card: stop new input briefly, name the single next action, and identify one person or resource to contact. Review afterward which step helped.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "vulnerability",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/vulnerability",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "脆弱性是神经质中的窄维度，描述压力变得强烈时多容易感到难以有效思考或行动；它不等于软弱、创伤经历、无能力，也不能预测实际表现。 在一次中等忙碌时段前写下三步过载卡：短暂停止新输入、只确定一个下一步、标出可联系的人或资源。结束后复盘哪一步真正有帮助。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    }
+  ],
+  "evidence_source_ids": [
+    "academic.soto-john-2017-bfi2",
+    "official.ipip-neo-facets-table",
+    "official.fermatmind-public-contract-v2",
+    "internal.public-claim-boundary-matrix"
+  ],
+  "workflow": {
+    "raw_artifact": "raw-draft.json",
+    "skeptical_review_artifact": "skeptical-review.json",
+    "overwrite_raw": false,
+    "independent_bilingual_edit_required": true
+  },
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}
