@@ -90763,9 +90763,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "d20ed1f90b2fe33921781bc57de3924b5c3f5c51",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3062",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -90796,6 +90796,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "After an unrelated deploy repair merged, fast-forwarded the uncommitted branch to latest origin/main baeee4e2a768881add59f4e426e403f9cf4838a7 and reran every manifest local check. The initial FAQ specificity failure was repaired in scope; final validator, 5 tests / 108 assertions, Pint, syntax, diff, product-truth, private-route, and exact 9-file scope checks all passed."
+      },
+      {
+        "at": "2026-07-14T03:35:50Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 9-file scope as d20ed1f90b2fe33921781bc57de3924b5c3f5c51, pushed the scoped branch, and opened PR #3062. Waiting for required GitHub checks on the final ledger-updated head."
       }
     ]
   },
