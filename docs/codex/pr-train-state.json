@@ -91634,9 +91634,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "2e9df18b561beac2576bba4ec1d4c9647049c0ee",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3079",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -91687,6 +91687,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "PR33 package generation, independent validator, focused Laravel test (4 tests / 256 assertions), Pint, JS/PHP/YAML/JSON syntax checks, exact scope validation, and git diff hygiene all passed. Ten research-briefing candidates remain pending manual review with null attribution and zero release mutations."
+      },
+      {
+        "at": "2026-07-14T11:02:55Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 11-file PR33 scope as 2e9df18b561beac2576bba4ec1d4c9647049c0ee, pushed the scoped branch, and opened PR #3079 with validation and deferred-item evidence. Waiting for all required GitHub checks."
       }
     ]
   },
