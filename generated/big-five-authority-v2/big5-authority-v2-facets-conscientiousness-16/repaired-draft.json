@@ -1,0 +1,211 @@
+{
+  "schema_version": "big5_authority_v2_facet_repair.v1",
+  "train_id": "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16",
+  "artifact": "big5-authority-v2-facets-conscientiousness-16-repaired",
+  "stage": "repaired",
+  "framework": "big_five",
+  "domain_code": "conscientiousness",
+  "taxonomy": "ipip_neo_30_facet_navigation",
+  "expected_page_count": 12,
+  "required_intents": [
+    "domain_difference",
+    "two_ends",
+    "two_scenarios",
+    "counterexample",
+    "observation_contexts",
+    "reflection_questions",
+    "low_risk_action",
+    "not_meaning",
+    "method_boundary",
+    "visible_sources"
+  ],
+  "pages": [
+    {
+      "facet_code": "competence",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/competence",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Competence describes a narrower conscientiousness tendency to expect that one can understand, organize, and handle ordinary demands; it is not a verified skill score or a guarantee of performance. Choose one moderately unfamiliar task and write three columns: what you can already do, what you need to verify, and whom or what you can consult. Complete one reversible step, check the result against evidence, and update your confidence rather than treating the initial feeling as a verdict.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "competence",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/competence",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "胜任感描述尽责性中的一个窄倾向：遇到日常要求时，是否预期自己能理解、组织并处理；它不是技能认证，也不保证表现结果。 挑一项中等陌生度的任务，列出“已经会做、需要核实、可以求助”三栏。只完成一个可撤销步骤，用外部标准检查结果，再根据证据调整把握，不把开始前的感觉当作能力结论。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "order",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/order",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Order describes a narrower conscientiousness preference for structure, designated places, and predictable sequences; it is not cleanliness, moral discipline, or proof that a system works well. Pick one small recurring workflow and measure where time or information is lost for a week. Add one label, location, or checkpoint aimed at that loss, then compare retrieval and maintenance time. Keep the structure only if its practical benefit exceeds its upkeep.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "order",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/order",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "条理描述尽责性中对固定位置、清楚分类和可预期顺序的偏好；它不等于爱干净、道德自律，也不能证明某套系统真的有效。 选择一个小型重复流程，连续一周记录信息或时间在哪里丢失。只增加一个标签、固定位置或检查点，再比较查找时间与维护时间；只有实际收益高于成本时才保留。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "dutifulness",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/dutifulness",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Dutifulness describes a narrower conscientiousness tendency to take promises, roles, and agreed standards seriously; it is not a measure of moral worth, obedience, or whether a rule is legitimate. Choose one current obligation and write its owner, beneficiary, deadline, and realistic constraint. If it remains sound, schedule the next visible step; if it needs revision, contact the affected person with a specific alternative before the cost grows.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "dutifulness",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/dutifulness",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "责任义务描述尽责性中认真对待承诺、角色要求和已同意标准的倾向；它不衡量道德价值、服从程度，也不替任何规则背书。 挑一项当前义务，写下责任方、受益者、期限与真实限制。约定仍合理，就安排一个他人可见的下一步；需要修改，就在代价扩大前联系受影响者，并提出具体替代。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "achievement-striving",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/achievement-striving",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Achievement striving describes a narrower conscientiousness tendency to set demanding standards and invest effort toward advancement; it is not talent, status, productivity, or a requirement to maximize every goal. For one active goal, define a sufficient outcome, a stretch outcome, and a stopping condition. Track one benefit and one cost for a week, then choose the level that fits current priorities instead of automatically escalating the target.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "achievement-striving",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/achievement-striving",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "成就驱动描述尽责性中提高标准、投入努力并争取进展的窄倾向；它不是天赋、地位、产出证明，也不要求每件事都追求最大化。 为一项正在推进的目标分别写出足够结果、延展结果与停止条件。连续一周记录一项收益和一项成本，再按当前优先级选择目标水平，不自动把标准继续上调。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "self-discipline",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/self-discipline",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Self-discipline describes a narrower conscientiousness tendency to begin and continue intended tasks despite boredom, distraction, or low immediate reward; it is not willpower purity, health, or constant productivity. Choose a delayed task and define a ten-minute entry action, a visible finish point, and one distraction barrier. Try it once at a realistic time, record where friction remained, and adjust the setup before increasing duration or making a larger promise.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "self-discipline",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/self-discipline",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "自律描述尽责性中面对无聊、分心或即时回报不足时，仍启动并延续计划的窄倾向；它不是意志纯度、健康状态或持续高产。 选一项拖延任务，定义十分钟入口动作、一个可见结束点和一道分心屏障。在现实可行的时间试一次，记录仍存在的阻力，先调整条件，再增加时长或作出更大承诺。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "deliberation",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/deliberation",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "Deliberation describes a narrower conscientiousness tendency to examine options and likely consequences before acting; it is not intelligence, fearfulness, indecision, or proof that a choice will be correct. Take one pending low-stakes decision and set a ten-minute review limit. List the main downside, reversibility, missing fact, and smallest test; when the limit ends, either run the test or choose, then schedule one checkpoint to update from evidence.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "facet_code": "deliberation",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/deliberation",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "审慎描述尽责性中行动前比较选项和可能后果的窄倾向；它不等于智力、胆怯或优柔寡断，也不能保证选择正确。 选一项低风险待决事项，给复核设十分钟上限。列出主要代价、可撤销性、缺失事实与最小测试；时间到后执行测试或作出选择，并安排一次根据证据更新的检查点。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    }
+  ],
+  "evidence_source_ids": [
+    "academic.soto-john-2017-bfi2",
+    "official.ipip-neo-facets-table",
+    "official.fermatmind-public-contract-v2",
+    "internal.public-claim-boundary-matrix"
+  ],
+  "workflow": {
+    "raw_artifact": "raw-draft.json",
+    "skeptical_review_artifact": "skeptical-review.json",
+    "overwrite_raw": false,
+    "independent_bilingual_edit_required": true
+  },
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}

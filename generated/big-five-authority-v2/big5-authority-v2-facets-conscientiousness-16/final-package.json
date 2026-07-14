@@ -1,0 +1,764 @@
+{
+  "schema_version": "big5_authority_v2_facet_package.v1",
+  "train_id": "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16",
+  "artifact": "big5-authority-v2-facets-conscientiousness-16-final",
+  "stage": "final",
+  "framework": "big_five",
+  "domain_code": "conscientiousness",
+  "taxonomy": "ipip_neo_30_facet_navigation",
+  "expected_page_count": 12,
+  "workflow": {
+    "raw_artifact": "raw-draft.json",
+    "skeptical_review_artifact": "skeptical-review.json",
+    "repaired_artifact": "repaired-draft.json",
+    "raw_failures_preserved": true,
+    "ai_detector_used": false
+  },
+  "pages": [
+    {
+      "content_key": "facet:conscientiousness:competence",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/competence",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "competence",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Competence facet: approaching tasks with workable confidence",
+      "summary": "Competence describes a narrower conscientiousness tendency to expect that one can understand, organize, and handle ordinary demands; it is not a verified skill score or a guarantee of performance.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Conscientiousness is a broad domain covering competence, order, dutifulness, achievement striving, self-discipline, and deliberation. This facet focuses on perceived capability when facing tasks; someone can feel capable yet prefer little structure, or doubt themselves while still behaving reliably.",
+      "two_ends": "At one end, a person may approach unfamiliar work expecting to find a method, ask useful questions, and recover from mistakes. At the other, they may anticipate difficulty and seek reassurance, examples, or smaller steps before proceeding. Either pattern can be adaptive depending on actual experience, support, and risk.",
+      "scenarios": [
+        "A new reporting tool appears at work: one colleague opens a sandbox, maps the fields, and tests a sample, while another first requests a walkthrough and a checklist so an avoidable data error does not reach the live report.",
+        "In a study group, one learner volunteers to explain a difficult chapter and correct gaps as they appear; another prepares privately, compares two worked solutions, and contributes after confirming the underlying rule."
+      ],
+      "counterexample": "Confident task entry does not establish expertise, accuracy, or sound judgment, and hesitation does not establish low ability. A novice can feel overly certain, while an experienced person may be cautious because they recognize hidden complexity or the consequences of error.",
+      "observation_contexts": "Watch what happens when instructions are incomplete, feedback is mixed, or a tool is new. At work or study, distinguish the confidence to begin from evidence that the result is correct; in communication, say what you know, what you are testing, and where you need support.",
+      "reflection_questions": [
+        "Which kinds of tasks make your confidence track evidence closely, and where does it run ahead of or behind your demonstrated experience?",
+        "What small piece of feedback, practice, or clarification helps you move from uncertain task entry to a testable next step?"
+      ],
+      "low_risk_action": "Choose one moderately unfamiliar task and write three columns: what you can already do, what you need to verify, and whom or what you can consult. Complete one reversible step, check the result against evidence, and update your confidence rather than treating the initial feeling as a verdict.",
+      "not_meaning": "This facet does not measure intelligence, professional qualification, technical skill, employability, leadership, independence, or actual error rate. A result cannot decide whether someone is capable of a role, and it should never substitute for observed work, training, or appropriate assessment.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to a BFI-2 facet, a ten-aspect construct, a proprietary NEO score, or an objective ability test. Self-report reflects a broad tendency and cannot establish competence in a particular task or context.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:conscientiousness:competence",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/competence",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "competence",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "胜任感 facet：面对任务时如何形成可行动的把握",
+      "summary": "胜任感描述尽责性中的一个窄倾向：遇到日常要求时，是否预期自己能理解、组织并处理；它不是技能认证，也不保证表现结果。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "尽责性覆盖胜任感、条理、责任义务、成就驱动、自律与审慎等多个侧面。这里单独观察的是面对任务时的主观可应对感；一个人可以很有把握却不爱整理，也可能经常怀疑自己但仍持续可靠地完成承诺。",
+      "two_ends": "一端的人通常愿意先进入任务、寻找方法，并把错误当作可修正信息；另一端的人更可能先确认示例、边界或支持，再开始行动。两种方式都可能合理，关键要看真实经验、失误代价与可获得的帮助，而不是把起步快慢排成高低。",
+      "scenarios": [
+        "团队换用新的数据工具时，有人先在沙盒里试填一份样例并逐项核对；另一个人先约同事走一遍流程，再拿清单操作，避免把尚未理解的字段带进正式报表。",
+        "复习一章难题时，有人边讲边暴露知识缺口，再回到教材纠正；另一个人先独立对照两种解法，确认规则后才在小组里说明自己的判断。"
+      ],
+      "counterexample": "敢于接手不等于已经熟练，也不代表判断一定准确；迟疑同样不能证明能力不足。新手可能因为不了解复杂度而过度自信，熟手也可能因为看见风险链条而主动放慢，并请求第二人复核。",
+      "observation_contexts": "可观察自己在说明不完整、反馈矛盾或工具陌生时怎样起步。工作和学习中，把“我敢开始”与“结果已有证据支持”分开；沟通时明确哪些是已知事实、哪些正在试验、哪些地方仍需要协助。",
+      "reflection_questions": [
+        "哪些任务里，你的把握与实际证据比较一致；又有哪些任务会让信心明显领先或落后于经验？",
+        "哪一种小型练习、反馈或澄清，最能把不确定感转成一个可以验证的下一步？"
+      ],
+      "low_risk_action": "挑一项中等陌生度的任务，列出“已经会做、需要核实、可以求助”三栏。只完成一个可撤销步骤，用外部标准检查结果，再根据证据调整把握，不把开始前的感觉当作能力结论。",
+      "not_meaning": "这个 facet 不测量智力、职业资格、技术水平、就业适合度、领导力或真实差错率，也不能替代作品、训练记录与情境化评估。分数只提供反思线索，不能决定某人是否胜任一份工作。",
+      "method_boundary": "本页采用 IPIP/NEO 风格的 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或客观能力测验。自我报告压缩了情境差异，无法证明某人在具体任务上的真实胜任程度。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:conscientiousness:order",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/order",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "order",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Order facet: arranging materials, time, and routines",
+      "summary": "Order describes a narrower conscientiousness preference for structure, designated places, and predictable sequences; it is not cleanliness, moral discipline, or proof that a system works well.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "The broad conscientiousness domain includes several ways of regulating action. Order isolates how strongly a person prefers arranging objects, information, schedules, and procedures. It can differ from dutiful follow-through, ambition, careful decision-making, or confidence in handling a task.",
+      "two_ends": "At one end, a person may create categories, routines, and stable locations so work is easy to retrieve and repeat. At the other, they may tolerate visible disorder, organize only at the point of need, or keep flexible systems that outsiders cannot readily read. Both can function; costs appear when the system mismatches the task or collaborators.",
+      "scenarios": [
+        "Before a shared workshop, one teammate labels every cable and sets a reset location for each tool; another lays out only the items needed for today's build and photographs the arrangement so cleanup remains possible.",
+        "For a research assignment, one student creates folders, citation tags, and a weekly calendar at the start; another gathers sources first, then builds categories after recurring themes become visible in the material."
+      ],
+      "counterexample": "A neat desk can conceal missed priorities, and a cluttered desk can belong to someone who retrieves every item quickly. Strong order preference does not prove productivity or flexibility; low order preference does not prove carelessness, especially when the environment is changing rapidly.",
+      "observation_contexts": "Notice retrieval time, setup effort, maintenance burden, and the effect of your system on other people. At work or study, ask whether added structure prevents a recurring error or merely consumes attention; in shared spaces, make the minimum common rules explicit instead of assuming identical preferences.",
+      "reflection_questions": [
+        "Which repeated losses, delays, or misunderstandings genuinely improve when you add structure, and which systems become maintenance work without a clear benefit?",
+        "What parts of your organization need to be legible to collaborators, and what parts can remain personal and flexible?"
+      ],
+      "low_risk_action": "Pick one small recurring workflow and measure where time or information is lost for a week. Add one label, location, or checkpoint aimed at that loss, then compare retrieval and maintenance time. Keep the structure only if its practical benefit exceeds its upkeep.",
+      "not_meaning": "This facet does not measure hygiene, intelligence, reliability, aesthetic taste, obsessive symptoms, professional competence, or respect for other people. It cannot justify judging a colleague from a desk, calendar, inbox, or private organizational style.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label rather than a universal definition of order. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a clinical construct. Context, tools, disability, workload, and shared norms can substantially change observed organization.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:conscientiousness:order",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/order",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "order",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "条理 facet：怎样安排物品、时间与流程",
+      "summary": "条理描述尽责性中对固定位置、清楚分类和可预期顺序的偏好；它不等于爱干净、道德自律，也不能证明某套系统真的有效。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "广义尽责性包含多种调节行动的方式。条理这一窄 facet 只关注物品、信息、日程和步骤如何被安排；它可以与履行义务、追求目标、谨慎决策或任务把握呈现不同组合。",
+      "two_ends": "偏向一端的人会建立分类、惯例和固定归位，让查找与重复执行更稳定；另一端的人可能容许表面杂乱，等需要时才整理，或使用外人不易读懂的弹性系统。两端都能运作，问题通常来自系统与任务、团队协作不匹配。",
+      "scenarios": [
+        "共用工作台准备开工时，一位成员给线材贴标签并指定归位点；另一位只摆出今天会用的零件，同时拍照记录布局，确保结束后仍能恢复现场。",
+        "写研究作业时，有人一开始就建文件夹、引用标签和周计划；另一个人先收集资料，等主题重复出现后再按材料本身形成分类。"
+      ],
+      "counterexample": "桌面整齐可能掩盖优先级遗漏，桌面凌乱的人也可能迅速找到每件东西。偏好条理不能证明产出更高或适应更强；变化快速时，暂时少整理也不等于粗心。",
+      "observation_contexts": "可以记录查找耗时、布置成本、维护负担，以及自己的系统是否给他人制造摩擦。工作学习中，问新增结构是在防止重复错误，还是只增加管理动作；共享空间里应协商最低共同规则。",
+      "reflection_questions": [
+        "哪些反复出现的丢失、延误或误解，确实会因增加结构而减少；哪些系统只是增加维护？",
+        "哪些组织方式必须让协作者看懂，哪些部分可以保留个人化和弹性？"
+      ],
+      "low_risk_action": "选择一个小型重复流程，连续一周记录信息或时间在哪里丢失。只增加一个标签、固定位置或检查点，再比较查找时间与维护时间；只有实际收益高于成本时才保留。",
+      "not_meaning": "这个 facet 不测量卫生、智力、可靠性、审美品味、强迫症状、专业能力或对他人的尊重。不能因为桌面、日历、收件箱或私人整理习惯，就推断同事的人品与工作价值。",
+      "method_boundary": "本页采用 IPIP/NEO 风格 30 facet 中的导航名称，不是对“条理”的唯一界定，也不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或临床构念。工具、负荷、无障碍需要与共享规范都会改变外显行为。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:conscientiousness:dutifulness",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/dutifulness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "dutifulness",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Dutifulness facet: responding to obligations and agreed rules",
+      "summary": "Dutifulness describes a narrower conscientiousness tendency to take promises, roles, and agreed standards seriously; it is not a measure of moral worth, obedience, or whether a rule is legitimate.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Conscientiousness broadly includes organization, persistence, aspiration, caution, perceived capability, and obligation. Dutifulness isolates the pull to honor commitments and role expectations. A person may be highly organized yet resist an agreement, or value a promise while struggling with planning or energy.",
+      "two_ends": "At one end, a person may feel a strong internal requirement to keep promises and follow legitimate procedures even when nobody is watching. At the other, obligations may be weighed more flexibly against changing circumstances, competing needs, or personal judgment. Neither end removes the need to examine consequences and consent.",
+      "scenarios": [
+        "A volunteer realizes they cannot cover an agreed shift: one person immediately finds a replacement and informs the coordinator; another first checks whether the event is overstaffed, then renegotiates the commitment rather than silently disappearing.",
+        "A team discovers that an approval rule delays an urgent but reversible update. One member follows the escalation route exactly; another documents the risk, asks the accountable owner for an exception, and records the temporary decision."
+      ],
+      "counterexample": "Following every instruction does not prove integrity, because a rule can be mistaken or harmful. Questioning a duty does not prove selfishness, because conflicting commitments and new information may require renegotiation. Reliable conduct includes making limits visible rather than claiming unlimited compliance.",
+      "observation_contexts": "Observe what you do when promises conflict, rules become impractical, or an authority is absent. At work, study, and daily life, separate an agreed obligation from an unspoken expectation; in communication, name the commitment, the constraint, the affected people, and any proposed revision.",
+      "reflection_questions": [
+        "Which commitments deserve firm follow-through because other people genuinely rely on them, and which expectations were never clearly agreed?",
+        "When circumstances change, how can you renegotiate early enough that flexibility does not become an unseen cost for someone else?"
+      ],
+      "low_risk_action": "Choose one current obligation and write its owner, beneficiary, deadline, and realistic constraint. If it remains sound, schedule the next visible step; if it needs revision, contact the affected person with a specific alternative before the cost grows.",
+      "not_meaning": "This facet does not measure goodness, honesty, loyalty, legal compliance, political values, willingness to obey authority, or suitability for a trusted position. It cannot determine whose rule is correct, excuse harmful compliance, or replace evidence about actual conduct.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to a BFI-2 facet, a ten-aspect model, a proprietary NEO score, or a moral assessment. Self-report cannot verify promises kept, resolve competing duties, or establish the legitimacy of an institution's expectations.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:conscientiousness:dutifulness",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/dutifulness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "dutifulness",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "责任义务 facet：如何回应承诺、角色与共同规则",
+      "summary": "责任义务描述尽责性中认真对待承诺、角色要求和已同意标准的倾向；它不衡量道德价值、服从程度，也不替任何规则背书。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "尽责性还包含整理、坚持、目标驱动、审慎与主观胜任感。责任义务单独观察“答应过的事和角色要求”会产生多强的约束感；有人整理得很好却不认同某项约定，也有人珍视承诺但缺少规划或精力。",
+      "two_ends": "一端的人即使无人监督，也较容易把守约和遵循正当程序视为内在要求；另一端的人会更多根据新情况、冲突需要或个人判断重新衡量义务。无论偏向哪端，都需要检查影响、同意与责任边界。",
+      "scenarios": [
+        "志愿者发现无法按约值班时，有人马上寻找替班并通知协调人；另一个人先确认现场是否已经超额排班，再公开协商调整，而不是临时消失。",
+        "团队的一项审批规则拖慢了可撤销的紧急更新。一位成员按升级路径逐级处理；另一位先写清风险，请责任人批准例外，并留下临时决定的记录。"
+      ],
+      "counterexample": "照做所有指令不能证明正直，因为规则可能错误或造成伤害；质疑义务也不等于自私，因为冲突承诺与新信息有时要求重新协商。真正可观察的是是否把限制和代价及时说清。",
+      "observation_contexts": "留意承诺冲突、规则失去适用性或权威不在场时自己的处理方式。工作学习与日常生活中，应区分明确约定和他人默认的期待；沟通时说明承诺内容、现实限制、受影响者与修改方案。",
+      "reflection_questions": [
+        "哪些承诺需要坚实履行，因为确实有人依赖它；哪些期待其实从未被双方清楚同意？",
+        "情况改变时，怎样尽早重新协商，避免自己的弹性变成别人看不见的成本？"
+      ],
+      "low_risk_action": "挑一项当前义务，写下责任方、受益者、期限与真实限制。约定仍合理，就安排一个他人可见的下一步；需要修改，就在代价扩大前联系受影响者，并提出具体替代。",
+      "not_meaning": "这个 facet 不测量善良、诚实、忠诚、守法程度、政治立场、对权威的服从或可信岗位适合度。它不能判断谁的规则正确，不能为有害的服从开脱，也不能替代实际行为证据。",
+      "method_boundary": "本页使用 IPIP/NEO 风格 30 facet 的导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或道德评估。自我报告无法核实守约记录、裁定冲突义务，也不能证明某个组织要求具有正当性。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:conscientiousness:achievement-striving",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/achievement-striving",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "achievement-striving",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Achievement striving facet: setting and pursuing demanding aims",
+      "summary": "Achievement striving describes a narrower conscientiousness tendency to set demanding standards and invest effort toward advancement; it is not talent, status, productivity, or a requirement to maximize every goal.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Within the broad conscientiousness domain, achievement striving concerns the intensity and elevation of chosen aims. It differs from keeping materials orderly, honoring duties, persisting through a specific dull task, considering decisions carefully, or feeling capable at the outset.",
+      "two_ends": "At one end, a person may seek stretch goals, compare progress with demanding standards, and actively pursue improvement. At the other, they may prefer sufficient outcomes, protect time for several life areas, or increase effort only when a goal has clear value. Both approaches can be sustainable or costly depending on priorities and resources.",
+      "scenarios": [
+        "After meeting a quarterly target, one teammate proposes a harder metric and a new experiment; another documents what worked, stabilizes the process, and redirects spare capacity to maintenance problems the target did not capture.",
+        "A student who could add an optional competition must choose: one enters to test a higher standard, while another declines because completing the core course, sleep, and family responsibilities already match the semester's priorities."
+      ],
+      "counterexample": "Ambitious goals do not prove skill, contribution, or healthy persistence, and modest goals do not prove laziness. Someone can chase visible metrics while neglecting unmeasured quality; another person may quietly produce excellent work without seeking advancement or competition.",
+      "observation_contexts": "Notice who selected the goal, what success measure leaves out, and which costs rise as the standard increases. In work or study, distinguish learning goals from status goals; in communication, make tradeoffs explicit so collaborators do not mistake personal ambition for a shared obligation.",
+      "reflection_questions": [
+        "Which demanding goals express something you genuinely value, and which mainly respond to comparison, fear, or an inherited definition of success?",
+        "What evidence would tell you to raise a target, keep it stable, or stop investing despite unfinished potential?"
+      ],
+      "low_risk_action": "For one active goal, define a sufficient outcome, a stretch outcome, and a stopping condition. Track one benefit and one cost for a week, then choose the level that fits current priorities instead of automatically escalating the target.",
+      "not_meaning": "This facet does not measure intelligence, talent, income potential, leadership, work ethic, worth, competitiveness, or likely promotion. It cannot justify overwork, predict career outcomes, or rank people who choose different goals and responsibilities.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or an objective record of achievement. Self-report cannot establish goal quality, opportunity, resources, or the outcomes effort will produce.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:conscientiousness:achievement-striving",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/achievement-striving",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "achievement-striving",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "成就驱动 facet：怎样设定并投入有挑战的目标",
+      "summary": "成就驱动描述尽责性中提高标准、投入努力并争取进展的窄倾向；它不是天赋、地位、产出证明，也不要求每件事都追求最大化。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "在广义尽责性中，成就驱动关注个人目标有多高、投入多强。它不同于整理物品、履行义务、熬过某项枯燥任务、谨慎作决定或开始时觉得自己有把握，这些侧面可以彼此独立。",
+      "two_ends": "一端的人常设延展目标，用较高标准比较进度，并主动寻找提升；另一端的人更偏好足够好的结果，为多个生活领域保留容量，或只在目标价值清楚时加码。两种取向都可能可持续，也都可能带来代价。",
+      "scenarios": [
+        "季度指标达成后，一位同事提出更难的指标和新实验；另一位先稳定现有流程，把剩余精力转向指标没有覆盖的维护问题。两人的选择需要由团队优先级而不是个人气势决定。",
+        "学生有机会参加额外竞赛，一人报名以测试更高标准；另一人拒绝，因为核心课程、睡眠和家庭责任已经构成这个学期认可的目标组合。"
+      ],
+      "counterexample": "目标雄心不能证明能力、贡献或健康坚持，目标适中也不能证明懒惰。有人可能追逐显眼数字而忽略未计量的质量；也有人不争晋升、不参与竞争，却长期交付扎实成果。",
+      "observation_contexts": "观察目标由谁选择、成功指标漏掉什么，以及标准上升时哪些成本同步增加。工作学习中区分学习目标与地位目标；沟通时公开取舍，避免把个人雄心默认为团队共同义务。",
+      "reflection_questions": [
+        "哪些高要求目标真正表达你的重视，哪些更多来自比较、恐惧或继承来的成功定义？",
+        "什么证据会支持提高目标、维持现状，或即使仍有潜力也停止继续投入？"
+      ],
+      "low_risk_action": "为一项正在推进的目标分别写出足够结果、延展结果与停止条件。连续一周记录一项收益和一项成本，再按当前优先级选择目标水平，不自动把标准继续上调。",
+      "not_meaning": "这个 facet 不测量智力、天赋、收入潜力、领导力、职业道德、个人价值、竞争力或晋升概率。它不能为过度工作辩护，不能预测职业结果，也不能排序承担不同责任的人。",
+      "method_boundary": "本页采用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或客观成就记录。自我报告无法证明目标质量、机会资源以及努力最终会带来什么结果。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:conscientiousness:self-discipline",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/self-discipline",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "self-discipline",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Self-discipline facet: continuing intended action through friction",
+      "summary": "Self-discipline describes a narrower conscientiousness tendency to begin and continue intended tasks despite boredom, distraction, or low immediate reward; it is not willpower purity, health, or constant productivity.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Conscientiousness includes several forms of regulation. Self-discipline focuses on translating an existing intention into continued action when the task becomes effortful. It differs from choosing ambitious goals, arranging a system, honoring a duty, weighing a decision, or believing that one can succeed.",
+      "two_ends": "At one end, a person may return to a planned task despite discomfort and sustain effort until a useful checkpoint. At the other, attention may shift more readily when reward is delayed or friction rises, making external cues, shorter intervals, or changed conditions more important. Neither pattern is a character verdict.",
+      "scenarios": [
+        "A writer reaches a repetitive revision stage: one blocks forty minutes and completes a defined section before switching; another works in ten-minute rounds with a visible checklist and a coworking partner to make re-entry easier.",
+        "After dinner, one learner follows the same practice slot even when motivation is low; another moves the session to the morning after noticing that evening fatigue repeatedly turns a reasonable plan into avoidance."
+      ],
+      "counterexample": "Long effort can be misdirected persistence, while stopping can be a rational response to poor priorities, exhaustion, illness, or new evidence. Difficulty initiating a task does not prove laziness, and smooth persistence may reflect a supportive environment rather than unusual inner strength.",
+      "observation_contexts": "Track the point where intention breaks: unclear next action, delayed feedback, fatigue, interruption, emotional cost, or competing reward. At work and study, redesign the condition before blaming identity; in communication, distinguish a missed commitment from a task system that repeatedly makes follow-through unlikely.",
+      "reflection_questions": [
+        "Which forms of friction most reliably interrupt your intended action, and which environmental change has helped you resume without relying on a burst of motivation?",
+        "When does persistence serve the goal, and what signal should prompt rest, renegotiation, or stopping instead of another push?"
+      ],
+      "low_risk_action": "Choose a delayed task and define a ten-minute entry action, a visible finish point, and one distraction barrier. Try it once at a realistic time, record where friction remained, and adjust the setup before increasing duration or making a larger promise.",
+      "not_meaning": "This facet does not measure laziness, virtue, mental health, attention disorder, energy capacity, disability, reliability across all contexts, or suitability for demanding work. It cannot separate motivation, environment, resources, and health from a single self-report result.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to a BFI-2 facet, a ten-aspect model, a proprietary NEO score, or a clinical assessment of attention or executive function. Self-report summarizes tendencies and cannot identify why follow-through changes.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:conscientiousness:self-discipline",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/self-discipline",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "self-discipline",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "自律 facet：在阻力出现后怎样继续原定行动",
+      "summary": "自律描述尽责性中面对无聊、分心或即时回报不足时，仍启动并延续计划的窄倾向；它不是意志纯度、健康状态或持续高产。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "尽责性包含多种行动调节。自律这一 facet 专门看已有意图在任务变费力后能否继续转化为行动；它与设定高目标、建立秩序、履行义务、权衡决定或相信自己能成功并不相同。",
+      "two_ends": "一端的人较容易在不舒服时回到计划，并把努力维持到有用节点；另一端的人在回报延迟或阻力上升时更容易转移注意，因此更依赖外部提示、较短时段或条件调整。两端都不是人格判决。",
+      "scenarios": [
+        "写作者进入重复修改阶段，一人锁定四十分钟，完成一个明确段落后才切换；另一个人用十分钟小轮次、可见清单和共同工作伙伴，降低每次重新进入的门槛。",
+        "晚饭后练习总被拖延时，一位学习者仍依靠固定时段推进；另一位发现晚间疲劳反复破坏计划，于是把练习移到早晨，而不是继续用自责维持原安排。"
+      ],
+      "counterexample": "长时间投入可能只是方向错误的坚持，停止也可能源于优先级、疲劳、疾病或新证据。启动困难不能证明懒惰；顺畅持续有时来自环境支持，并非某种特殊内在强度。",
+      "observation_contexts": "记录意图在哪个点断开：下一步不清楚、反馈太迟、体力不足、被打断、情绪成本或替代奖励。工作学习中先改造条件，再给身份下结论；沟通时区分一次失约和持续制造失败的任务系统。",
+      "reflection_questions": [
+        "哪一种阻力最常打断原定行动，什么环境变化曾帮助你在不等动力爆发的情况下重新开始？",
+        "什么时候继续投入确实服务目标，出现什么信号时应该休息、重新协商或停止？"
+      ],
+      "low_risk_action": "选一项拖延任务，定义十分钟入口动作、一个可见结束点和一道分心屏障。在现实可行的时间试一次，记录仍存在的阻力，先调整条件，再增加时长或作出更大承诺。",
+      "not_meaning": "这个 facet 不测量懒惰、品德、心理健康、注意障碍、精力容量、残障、所有情境下的可靠性或高压工作适合度。单次自我报告无法分离动机、环境、资源与健康因素。",
+      "method_boundary": "本页使用 IPIP/NEO 风格 30 facet 的导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数，也不是注意或执行功能的临床评估。它只能概括倾向，不能识别行动持续变化的原因。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:conscientiousness:deliberation",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/deliberation",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "deliberation",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Deliberation facet: pausing to consider consequences before action",
+      "summary": "Deliberation describes a narrower conscientiousness tendency to examine options and likely consequences before acting; it is not intelligence, fearfulness, indecision, or proof that a choice will be correct.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "The broad conscientiousness domain includes organization, obligation, persistence, ambition, and perceived capability. Deliberation isolates the pause between impulse and action: how much a person checks alternatives, downstream effects, and reversibility before committing.",
+      "two_ends": "At one end, a person may slow down to compare consequences and reduce preventable errors. At the other, they may decide quickly from available cues, update through action, and avoid analysis costs. Either style can fit: urgency rewards speed, while irreversible or high-impact choices often justify more review.",
+      "scenarios": [
+        "A customer reports a serious defect. One team member pauses to reproduce it, identify affected versions, and prepare a rollback before changing production; another immediately applies a reversible feature flag to limit harm while evidence is gathered.",
+        "Choosing a course project, one student builds a short criteria table and checks workload with the instructor; another selects a promising topic quickly, then runs a one-day prototype before investing the rest of the term."
+      ],
+      "counterexample": "Lengthy analysis can become avoidance and still miss the decisive risk; fast action can be skillful when feedback is immediate and reversal is cheap. Deliberation does not guarantee accuracy, and quick choice does not prove recklessness or shallow thinking.",
+      "observation_contexts": "Observe decision stakes, reversibility, time pressure, missing information, and feedback speed. At work or study, match the depth of review to consequence rather than habit; in communication, state whether a decision is provisional, who bears the downside, and when it will be revisited.",
+      "reflection_questions": [
+        "Which decisions deserve a deliberate pause because they are hard to reverse or affect other people, and which benefit from a small experiment instead?",
+        "What signs show that you have enough information to act, versus that another round of analysis is mainly postponing discomfort?"
+      ],
+      "low_risk_action": "Take one pending low-stakes decision and set a ten-minute review limit. List the main downside, reversibility, missing fact, and smallest test; when the limit ends, either run the test or choose, then schedule one checkpoint to update from evidence.",
+      "not_meaning": "This facet does not measure intelligence, wisdom, courage, anxiety, decisiveness, risk competence, or suitability for authority. It cannot show that a decision process was ethical or correct, and it should not be used to exclude someone from fast-paced or safety-sensitive work.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a validated decision-quality measure. Self-report cannot capture every domain's stakes, expertise, time pressure, or feedback conditions.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:conscientiousness:deliberation",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/deliberation",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "deliberation",
+      "framework": "big_five",
+      "domain_code": "conscientiousness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "审慎 facet：行动前如何暂停并考虑后果",
+      "summary": "审慎描述尽责性中行动前比较选项和可能后果的窄倾向；它不等于智力、胆怯或优柔寡断，也不能保证选择正确。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "广义尽责性还包括整理、义务、坚持、目标驱动和主观胜任感。审慎单独观察冲动与行动之间的暂停：承诺一个选择前，会在多大程度上检查替代方案、后续影响与可撤销性。",
+      "two_ends": "一端的人倾向放慢速度，比较后果并减少可预防错误；另一端的人会依据现有线索快速决定，再从行动反馈中更新，避免分析成本。紧急且可撤销的情况可能适合速度，不可逆或影响广的决定通常值得更多复核。",
+      "scenarios": [
+        "客户报告严重缺陷时，一位成员先复现问题、确认受影响版本并准备回滚，再改正式环境；另一位先启用可撤销的功能开关控制损害，同时继续收集证据。",
+        "选课程项目时，一名学生用简短标准表比较题目，并向老师核实工作量；另一名学生快速选一个方向，用一天做原型后再决定是否投入整个学期。"
+      ],
+      "counterexample": "长时间分析可能成为回避，仍会漏掉关键风险；如果反馈快且回退便宜，快速行动也可能很熟练。审慎不能保证准确，决定快也不能证明鲁莽或思考浅。",
+      "observation_contexts": "观察决定的影响、可撤销性、时间压力、缺失信息和反馈速度。工作学习中，让复核深度匹配后果而非个人习惯；沟通时说明决定是否暂定、谁承担代价以及何时重新检查。",
+      "reflection_questions": [
+        "哪些决定因为难以撤销或会影响他人，值得刻意暂停；哪些决定更适合先做小实验？",
+        "什么迹象说明信息已经足够行动，什么迹象说明继续分析主要是在推迟不适？"
+      ],
+      "low_risk_action": "选一项低风险待决事项，给复核设十分钟上限。列出主要代价、可撤销性、缺失事实与最小测试；时间到后执行测试或作出选择，并安排一次根据证据更新的检查点。",
+      "not_meaning": "这个 facet 不测量智力、智慧、勇气、焦虑、果断、风险能力或管理岗位适合度。它不能证明决策过程合乎伦理或结果正确，也不应用来排除某人从事快节奏或安全敏感工作。",
+      "method_boundary": "本页采用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或经过验证的决策质量指标。自我报告无法覆盖每个领域的影响、经验、时限和反馈条件。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    }
+  ],
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}
