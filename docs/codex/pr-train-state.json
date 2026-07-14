@@ -91721,9 +91721,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "0fabc97d07ab66f334e8bf1a268569328b7a9dda",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3081",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -91774,6 +91774,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "PR34 deterministic build, independent validator, focused Laravel test (4 tests / 6982 assertions), Pint, JS/PHP/JSON/YAML syntax checks, exact scope validation, and git diff hygiene all passed. All 693 slots remain missing/pending; production runtime inventory remains Unknown_not_queried; no upload, mapping write, fabricated URL, publish, or indexability mutation occurred."
+      },
+      {
+        "at": "2026-07-14T11:42:52Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 10-file PR34 scope as 0fabc97d07ab66f334e8bf1a268569328b7a9dda, pushed the scoped branch, and opened PR #3081 with audit, validation, truth-boundary, and deferred-item evidence. Waiting for all required GitHub checks."
       }
     ]
   },
