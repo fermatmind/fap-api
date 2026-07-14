@@ -91901,9 +91901,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-LINK-GRAPH-35"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": "20495ac24dfe0cae8600d6672577226caf48c544",
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "7a9b5436ca082de32308983b7b7945e8ce195608",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3084",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -91928,6 +91928,10 @@
       "format_syntax_and_scope": {
         "status": "pass",
         "evidence": "Pint passed for the focused test; PHP and Node syntax checks passed; generated and ledger JSON plus train YAML parsed; git diff --check passed; verification-only compiler/test artifacts were removed and tracked compiled-pack drift was restored."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #3084 opened after all required local checks passed; waiting for the complete required GitHub check set."
       }
     },
     "failure_reason": null,
@@ -91956,6 +91960,12 @@
         "from": "local_checks_passed",
         "to": "local_checks_passed",
         "note": "Recorded scoped implementation commit 20495ac24dfe0cae8600d6672577226caf48c544 before push."
+      },
+      {
+        "at": "2026-07-14T13:46:10Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Pushed the exact nine-file PR36 scope and opened PR #3084 at head 7a9b5436ca082de32308983b7b7945e8ce195608; required GitHub checks are pending."
       }
     ]
   },
