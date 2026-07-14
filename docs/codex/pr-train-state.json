@@ -90130,8 +90130,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "3814bd9ec53d24b90a4c13ba33ab9f777326f75f",
+    "status": "merged",
+    "commit_sha": "5cd46e1c4fa85a207838112db592e72e92e1e0c0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3048",
     "checks": {
       "dependency": {
@@ -90144,13 +90144,17 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #3048 head 3814bd9ec53d24b90a4c13ba33ab9f777326f75f passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+        "evidence": "PR #3048 final head 5cd46e1c4fa85a207838112db592e72e92e1e0c0 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #3048 MERGED as e0a084cd84a2f41623ca00609d6c5e5077a38b60; origin/main contains the merge; package validator passed; BigFiveAuthorityV212Test passed 5 tests / 227 assertions; remote branch, local worktree, and local branch cleanup completed."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T00:26:19Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -90179,6 +90183,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on head 3814bd9ec53d24b90a4c13ba33ab9f777326f75f; recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T00:33:19Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #3048 after exact-head squash merge. Final head 5cd46e1c4fa85a207838112db592e72e92e1e0c0 passed 9/9 checks; merge e0a084cd84a2f41623ca00609d6c5e5077a38b60 is on origin/main; post-merge validator and 5 tests / 227 assertions passed; remote and local cleanup completed."
       }
     ]
   },
@@ -90191,10 +90201,23 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "abd794609b5b0d944c67eb13dcd947633a446462",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3050",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12 PR #3048 is MERGED as e0a084cd84a2f41623ca00609d6c5e5077a38b60; origin/main contains the merge and post-merge validation/cleanup completed."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact 8-page coverage and fail-closed release gates; BigFiveAuthorityV213Test passed 5 tests / 227 assertions; touched PHP Pint passed; JSON, JavaScript, PHP, YAML, and ledger syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files; PR10/PR11/PR12-to-PR13 substantive body exact-copy check found zero matches."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3050 head abd794609b5b0d944c67eb13dcd947633a446462 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -90203,7 +90226,32 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T00:33:19Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR13 from clean latest fap-api main after reconciling PR12. Scope is exactly eight agreeableness range drafts: EN/ZH high, middle, and low V2 pages plus independent-intent EN high-agreeableness and low-agreeableness legacy canonicals; redirect/canonical graph, CMS writes, runtime changes, publication, deployment, and indexability mutations remain forbidden."
+      },
+      {
+        "at": "2026-07-14T00:42:22Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All manifest local checks passed for the exact 9-file PR13 scope. The final package contains independently authored agreeableness range content, preserves raw skeptical-review failures, gives both legacy canonicals distinct reader intents, keeps all release controls closed, and has no exact substantive body collision with PR10-PR12 packages."
+      },
+      {
+        "at": "2026-07-14T00:44:49Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 9-file scope as 5db8a4d6c453177bae75b820d83b25acb70a83d7, pushed the scoped branch, and opened PR #3050. Waiting for required GitHub checks on the final ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T00:51:15Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head abd794609b5b0d944c67eb13dcd947633a446462, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 9 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14": {
     "id": "BIG5-AUTHORITY-V2-RANGE-NEUROTICISM-14",

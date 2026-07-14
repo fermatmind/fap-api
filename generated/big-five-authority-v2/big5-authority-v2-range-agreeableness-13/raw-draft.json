@@ -1,0 +1,23 @@
+{
+  "schema_version": "big5_authority_v2_range_package.v1",
+  "train_id": "BIG5-AUTHORITY-V2-RANGE-AGREEABLENESS-13",
+  "artifact": "big5-authority-v2-range-agreeableness-13-raw",
+  "stage": "raw",
+  "framework": "big_five",
+  "domain_code": "agreeableness",
+  "expected_page_count": 8,
+  "draft_note": "{{ replace trait name in generic high middle low template }}",
+  "pages": [
+    {"content_key": "range:agreeableness:high", "locale": "en", "canonical_path": "/en/personality/big-five/agreeableness-high", "range_level": "high", "route_family": "v2_range", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "range:agreeableness:high", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/agreeableness-high", "range_level": "high", "route_family": "v2_range", "authoring_mode": "translation", "source_locale": "en", "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "range:agreeableness:middle", "locale": "en", "canonical_path": "/en/personality/big-five/agreeableness-mid", "range_level": "middle", "route_family": "v2_range", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "range:agreeableness:middle", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/agreeableness-mid", "range_level": "middle", "route_family": "v2_range", "authoring_mode": "translation", "source_locale": "en", "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "range:agreeableness:low", "locale": "en", "canonical_path": "/en/personality/big-five/agreeableness-low", "range_level": "low", "route_family": "v2_range", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "range:agreeableness:low", "locale": "zh-CN", "canonical_path": "/zh/personality/big-five/agreeableness-low", "range_level": "low", "route_family": "v2_range", "authoring_mode": "translation", "source_locale": "en", "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "legacy:high-agreeableness", "locale": "en", "canonical_path": "/en/personality/big-five/high-agreeableness", "range_level": "high", "route_family": "legacy_canonical", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []},
+    {"content_key": "legacy:low-agreeableness", "locale": "en", "canonical_path": "/en/personality/big-five/low-agreeableness", "range_level": "low", "route_family": "legacy_canonical", "authoring_mode": "independent_editorial", "source_locale": null, "outline_sections": ["meaning", "possible_patterns"], "visible_sources": []}
+  ],
+  "workflow": {"raw_failures_preserved": true, "ai_detector_used": false},
+  "review_state": {"status": "pending_human_review", "reviewer": null, "approved_at": null, "publish_allowed": false, "schema_eligible": false},
+  "release_controls": {"cms_write_allowed": false, "redirect_graph_change_allowed": false, "indexability_change_allowed": false, "search_submission_allowed": false, "deploy_allowed": false}
+}
