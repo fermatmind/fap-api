@@ -1,0 +1,764 @@
+{
+  "schema_version": "big5_authority_v2_facet_package.v1",
+  "train_id": "BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18",
+  "artifact": "big5-authority-v2-facets-agreeableness-18-final",
+  "stage": "final",
+  "framework": "big_five",
+  "domain_code": "agreeableness",
+  "taxonomy": "ipip_neo_30_facet_navigation",
+  "expected_page_count": 12,
+  "workflow": {
+    "raw_artifact": "raw-draft.json",
+    "skeptical_review_artifact": "skeptical-review.json",
+    "repaired_artifact": "repaired-draft.json",
+    "raw_failures_preserved": true,
+    "ai_detector_used": false
+  },
+  "pages": [
+    {
+      "content_key": "facet:agreeableness:trust",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/trust",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "trust",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Trust facet: starting from cooperative expectations with safeguards",
+      "summary": "Trust describes a narrower agreeableness tendency to expect that other people generally intend fair or cooperative interaction; it is not gullibility, safety, credibility, or proof about a specific person.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Agreeableness broadly includes trust, straightforwardness, altruism, compliance, modesty, and tender-mindedness. Trust isolates the expectation brought into interaction; someone can expect goodwill yet set firm boundaries, or remain cautious while behaving generously and fairly.",
+      "two_ends": "At one end, a person may begin with provisional goodwill and update when evidence changes. At the other, they may require verification, history, or limited exposure before relying on someone. Either approach can be responsible when stakes, reversibility, and safeguards match the situation.",
+      "scenarios": [
+        "A new vendor requests access to project data. One manager begins cooperatively but grants only the minimum role and reviews the audit trail; another completes references and a short pilot before any access is approved.",
+        "A classmate offers to share notes after an absence. One student accepts and later cross-checks key dates; another asks the instructor for the official outline first, then uses the notes to fill context."
+      ],
+      "counterexample": "Trusting language does not prove a relationship is safe, and skepticism does not prove hostility or cynicism. A person can misjudge intent in either direction; verified conduct, power, incentives, and the ability to exit matter more than a trait label.",
+      "observation_contexts": "Notice what evidence changes your willingness to rely on someone and whether the downside is reversible. At work, study, and daily life, separate warmth from authorization; in communication, state the safeguard rather than accusing or promising unconditional confidence.",
+      "reflection_questions": [
+        "Which low-stakes interactions benefit from provisional goodwill, and which involve enough power or consequence to require independent verification?",
+        "What specific evidence would reasonably increase or decrease your reliance without turning one event into a permanent judgment?"
+      ],
+      "low_risk_action": "For one low-risk request, define the smallest reversible level of reliance, one verification step, and a review point. Proceed only within that boundary, then update from observed conduct rather than from optimism or suspicion alone.",
+      "not_meaning": "This facet does not measure honesty, victim responsibility, security awareness, relationship safety, credibility assessment, legal reliability, or suitability for confidential work. It cannot authenticate another person or justify ignoring warning signs.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a fraud, attachment, or security assessment. Self-report cannot establish another person's intent or future behavior.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:agreeableness:trust",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/trust",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "trust",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "信任 facet：怎样带着合作预期并保留验证",
+      "summary": "信任描述宜人性中通常预期他人会公平或合作的窄倾向；它不等于轻信、安全、识人准确，也不能证明某个具体的人可靠。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "宜人性还包含坦率、助人、冲突处理、谦逊和同情关怀。信任只观察互动开始时带入的预期；有人相信善意却设清楚边界，也有人保持谨慎但依然公平、慷慨。",
+      "two_ends": "一端的人会先给出暂定善意，再随证据更新；另一端的人需要验证、历史记录或有限试用后才依赖。只要风险、可撤销性与防护匹配，两种方式都可能负责。",
+      "scenarios": [
+        "新供应商申请项目数据权限时，一位经理合作回应，但只开放最小角色并查审计记录；另一位先核实推荐信息和小规模试点，再决定是否授权。",
+        "同学答应补发缺课笔记，一名学生先接受并核对关键日期；另一名学生先向老师取得正式提纲，再用同学笔记补充上下文。"
+      ],
+      "counterexample": "使用信任语言不能证明关系安全，怀疑也不能证明敌意或愤世嫉俗。无论偏向哪端都可能误判；实际行为、权力、激励和退出能力比 trait 标签更重要。",
+      "observation_contexts": "观察什么证据会改变依赖程度，以及潜在损失能否撤回。工作学习与日常生活中区分亲切和授权；沟通时说明防护条件，而不是指控他人或承诺无条件相信。",
+      "reflection_questions": [
+        "哪些低风险互动适合先给暂定善意，哪些因为权力或后果需要独立验证？",
+        "什么具体证据会合理提高或降低依赖，而不是把一次事件变成永久判断？"
+      ],
+      "low_risk_action": "为一项低风险请求确定最小可撤销依赖、一个验证步骤和复核时间。只在边界内行动，再依据实际表现更新，不只靠乐观或怀疑。",
+      "not_meaning": "这个 facet 不测量诚实、受害责任、安全意识、关系安全、识人能力、法律可靠性或机密岗位适合度，不能认证他人，也不能为忽略警示信号提供理由。",
+      "method_boundary": "本页采用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或欺诈、依恋与安全评估。自我报告无法证明他人的意图和未来行为。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:agreeableness:straightforwardness",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/straightforwardness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "straightforwardness",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Straightforwardness facet: communicating without strategic distortion",
+      "summary": "Straightforwardness describes a narrower agreeableness tendency toward candid, non-manipulative communication; it is not saying everything, perfect accuracy, bluntness, or surrendering privacy.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Within agreeableness, straightforwardness concerns how directly motives and relevant information are represented. It differs from trusting others, helping them, yielding in conflict, minimizing self-importance, or responding compassionately.",
+      "two_ends": "At one end, a person may state intentions plainly and avoid hidden leverage. At the other, they may manage impressions, reveal information selectively, or negotiate indirectly. Every interaction still requires judgment about privacy, timing, safety, and what information is materially relevant.",
+      "scenarios": [
+        "A project estimate will miss its target. One lead states the gap, uncertainty, and recovery options early; another waits until dependencies are confirmed, then gives a bounded update without pretending the original date remains certain.",
+        "A friend asks for feedback on a draft. One reader names a confusing section with a concrete example; another first asks what kind of feedback is wanted and avoids disclosing unrelated personal information shared in confidence."
+      ],
+      "counterexample": "Blunt speech can omit context or become cruelty, while tact and privacy are not deception. A candid person can still be mistaken; an indirect communicator may be protecting safety, confidentiality, or a negotiation rather than manipulating.",
+      "observation_contexts": "Observe whether withheld or shaped information materially changes another person's consent or decision. At work or study, separate verified fact, estimate, and preference; in communication, make relevant constraints visible while preserving legitimate confidentiality.",
+      "reflection_questions": [
+        "Which information does another person need to make an informed choice, and which details are private, premature, or irrelevant to that choice?",
+        "How can you state a difficult fact clearly without using honesty as permission to ignore timing, tone, or power?"
+      ],
+      "low_risk_action": "Rewrite one pending message into three labeled parts: known fact, current interpretation, and requested next step. Remove one impression-management phrase, keep necessary privacy, and invite correction of the factual part.",
+      "not_meaning": "This facet does not measure truthfulness under investigation, factual accuracy, ethics, confidentiality judgment, diplomacy, innocence, or suitability for compliance and fiduciary roles. It cannot verify that a statement is complete or true.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a lie-detection or integrity assessment. Self-report cannot validate statements, motives, legal duties, or safety constraints.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:agreeableness:straightforwardness",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/straightforwardness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "straightforwardness",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "坦率 facet：如何避免策略性歪曲又保留边界",
+      "summary": "坦率描述宜人性中倾向清楚、非操纵地表达的窄倾向；它不要求说出一切，不保证事实准确，也不等于生硬或放弃隐私。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "在宜人性中，坦率关注动机与相关信息被多直接地呈现。它不同于信任他人、帮助他人、冲突中让步、弱化自我重要性或表达同情。",
+      "two_ends": "一端的人较常直接说明意图并避免隐藏杠杆；另一端的人可能管理印象、选择性披露或间接协商。任何互动仍需判断隐私、时机、安全，以及哪些信息会真正影响决定。",
+      "scenarios": [
+        "项目估算将无法按期完成，一位负责人提前说明差距、不确定性与恢复选项；另一位先确认依赖，再给出范围清楚的更新，但不假装原日期仍然确定。",
+        "朋友请求评价草稿，一位读者用具体例子指出难懂段落；另一位先问需要哪类反馈，并保护此前获知、与草稿无关的私人信息。"
+      ],
+      "counterexample": "生硬表达可能缺少上下文甚至伤人，讲究策略和保留隐私并不自动等于欺骗。坦率的人也会弄错；间接表达有时是在保护安全、保密义务或合理谈判。",
+      "observation_contexts": "观察被省略或包装的信息是否会实质改变他人的同意和选择。工作学习中区分已知事实、估计和偏好；沟通时让相关限制可见，同时保留正当保密。",
+      "reflection_questions": [
+        "对方需要哪些信息才能知情选择，哪些细节属于私人、过早或与决定无关？",
+        "怎样清楚表达困难事实，又不把诚实当作忽视时机、语气和权力的许可？"
+      ],
+      "low_risk_action": "把一条待发消息改写成三部分：已知事实、当前解释、希望的下一步。删除一句只为管理印象的话，保留必要隐私，并允许对事实部分作纠正。",
+      "not_meaning": "这个 facet 不测量调查中的诚实、事实准确、伦理、保密判断、外交技巧、清白或合规与受托岗位适合度，也不能验证陈述完整或真实。",
+      "method_boundary": "本页使用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或测谎与诚信评估。自我报告无法核验陈述、动机、法律义务和安全限制。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:agreeableness:altruism",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/altruism",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "altruism",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Altruism facet: noticing and acting on opportunities to help",
+      "summary": "Altruism describes a narrower agreeableness tendency to offer time, effort, or resources for another person's benefit; it is not moral worth, unlimited self-sacrifice, effectiveness, or consent to exploitation.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Agreeableness includes several interpersonal tendencies. Altruism isolates readiness to provide help; it differs from assuming goodwill, speaking candidly, avoiding conflict, minimizing self-promotion, or feeling compassion without taking action.",
+      "two_ends": "At one end, a person may quickly notice needs and volunteer practical support. At the other, they may help selectively, prioritize self-protection, or wait for a clear request and defined role. Both require attention to capacity, actual usefulness, and the recipient's choice.",
+      "scenarios": [
+        "A colleague is overwhelmed before a deadline. One teammate offers to take a defined task for an hour; another helps them renegotiate scope with the owner rather than quietly absorbing work that will recur.",
+        "A neighbor mentions difficulty carrying groceries. One person offers immediate assistance; another asks whether a delivery option or scheduled help would preserve independence and work better over time."
+      ],
+      "counterexample": "Frequent helping can create dependence, hide unfair systems, or exceed capacity, while declining can protect an existing obligation or invite a better solution. Good intentions do not guarantee useful impact, and less visible help is not evidence of selfishness.",
+      "observation_contexts": "Check whether help was requested, whether it fits the need, who bears ongoing cost, and what obligation may be displaced. At work or study, avoid rescuing patterns that conceal workload problems; communicate a clear offer, limit, and handoff.",
+      "reflection_questions": [
+        "Which forms of help build the other person's options or capacity, and which mainly reduce your discomfort at seeing a need?",
+        "What limit would let you contribute without breaking another promise, hiding a structural problem, or creating an expectation you cannot sustain?"
+      ],
+      "low_risk_action": "Choose one small request and offer a bounded form of help with a time or resource limit. Ask whether it is useful before acting, complete the agreed part, and note whether a handoff or systemic change is still needed.",
+      "not_meaning": "This facet does not measure goodness, generosity of actual behavior, charitable impact, caregiving fitness, boundaries, burnout risk, or suitability for service roles. It cannot obligate someone to help or excuse coercion and exploitation.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or an assessment of ethics or prosocial impact. Self-report cannot establish resources, consent, effectiveness, or hidden costs.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:agreeableness:altruism",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/altruism",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "altruism",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "助人 facet：如何发现并回应他人的实际需要",
+      "summary": "助人描述宜人性中愿意投入时间、精力或资源让他人受益的窄倾向；它不等于道德价值、无限牺牲、帮助有效或接受剥削。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "宜人性包含多种人际倾向。助人只观察提供支持的准备程度；它不同于相信善意、坦率表达、减少冲突、少做自我宣传，或只体验同情而不行动。",
+      "two_ends": "一端的人容易看见需要并主动提供实际支持；另一端的人会选择性帮助、优先保护自身，或等待清楚请求与角色。两端都要考虑容量、真实用途和接受者的选择。",
+      "scenarios": [
+        "同事在截止日前明显超负荷，一位成员提出用一小时接手明确任务；另一位帮助对方与负责人重新协商范围，而不是默默吸收会反复出现的工作。",
+        "邻居说提购物袋困难，有人马上帮忙；另一个人先询问配送或固定时段帮助是否更能保留独立，并且长期可行。"
+      ],
+      "counterexample": "频繁帮助可能制造依赖、掩盖不公平系统或耗尽容量，拒绝也可能是在保护已有承诺或寻找更好方案。好意不能保证效果，少被看见的支持也不能证明自私。",
+      "observation_contexts": "检查帮助是否被需要、是否匹配问题、长期成本由谁承担，以及会挤走哪项承诺。工作学习中避免用救火掩盖负荷问题；清楚沟通帮助内容、上限和交接。",
+      "reflection_questions": [
+        "哪些帮助会增加对方的选择和能力，哪些主要是在减轻自己看见需要时的不舒服？",
+        "什么界限能让你贡献，同时不破坏其他承诺、不隐藏结构问题，也不制造无法持续的期待？"
+      ],
+      "low_risk_action": "选择一个小请求，提出带时间或资源上限的帮助。行动前确认它确实有用，完成约定部分，再判断是否仍需交接或系统性改变。",
+      "not_meaning": "这个 facet 不测量善良、真实慷慨、公益影响、照护适合度、边界、倦怠风险或服务岗位适合度，不能强迫任何人提供帮助，也不能为胁迫和剥削开脱。",
+      "method_boundary": "本页采用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或伦理与亲社会影响评估。自我报告无法证明资源、同意、效果和隐藏成本。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:agreeableness:compliance",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/compliance",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "compliance",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Compliance facet: de-escalating conflict without erasing disagreement",
+      "summary": "Compliance describes a narrower agreeableness tendency to yield, compromise, or reduce confrontation during conflict; it is not obedience, consent, weakness, conflict skill, or acceptance of harm.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Within agreeableness, compliance concerns response to active disagreement. It differs from trusting intent, communicating candidly, helping, minimizing self-importance, or feeling compassion. A person can seek peace while holding a firm boundary, or argue strongly while caring about others.",
+      "two_ends": "At one end, a person may lower intensity, accommodate, and search for shared ground. At the other, they may defend a position, tolerate friction, and press unresolved differences. Either can protect a relationship or a principle; stakes, power, and safety determine what is appropriate.",
+      "scenarios": [
+        "Two teammates want the same limited testing window. One proposes splitting it and documenting what each side gives up; another escalates the priority conflict to the accountable owner rather than pretending both plans can fit.",
+        "A landlord dismisses a repair concern. One tenant first sends a calm written request with a deadline; another uses the formal complaint route when repeated accommodation has not changed the unsafe condition."
+      ],
+      "counterexample": "Yielding can preserve cooperation or enable unfairness; confrontation can protect a boundary or become needless escalation. Avoiding a fight is not consent, and refusing compromise is not automatically courage, hostility, or sound judgment.",
+      "observation_contexts": "Observe the stakes, power difference, pattern of prior concessions, and whether safety or rights are involved. At work or home, distinguish a negotiable preference from a boundary; communicate the point of agreement, the remaining difference, and the next process.",
+      "reflection_questions": [
+        "Which part of this disagreement is genuinely negotiable, and which boundary or affected person would be harmed by another concession?",
+        "What lower-intensity process could surface evidence and ownership without forcing false agreement or escalating unnecessarily?"
+      ],
+      "low_risk_action": "For one low-stakes conflict, write the shared goal, your nonessential preference, and one firm boundary. Offer a reversible compromise on the preference, state the boundary plainly, and set a review point instead of seeking immediate harmony.",
+      "not_meaning": "This facet does not measure obedience, consent, courage, assertiveness skill, legal compliance, conflict competence, abuse tolerance, or suitability for subordinate roles. It cannot authorize pressure, retaliation, or silence about harm.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a safety, abuse, or negotiation assessment. Self-report cannot capture coercion, rights, power, or the legitimacy of a demand.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:agreeableness:compliance",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/compliance",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "compliance",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "冲突让步 facet：怎样降温而不抹去分歧",
+      "summary": "冲突让步描述宜人性中争执时倾向退让、妥协或降低对抗的窄倾向；它不等于服从、同意、软弱、冲突技能或接受伤害。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "在宜人性中，这一 facet 关注活跃分歧出现后的回应。它不同于相信意图、坦率沟通、助人、弱化自我重要性或感到同情；求和的人也能守住边界，激烈争论者也可能关心别人。",
+      "two_ends": "一端的人会降低强度、迁就并寻找共同点；另一端的人更愿意捍卫立场、承受摩擦并推进未解决差异。两者都可能保护关系或原则，是否合适取决于影响、权力和安全。",
+      "scenarios": [
+        "两位同事争用同一测试时段，一人提出拆分并记录双方放弃什么；另一个人把优先级冲突交给责任人裁定，而不是假装两个计划都能容纳。",
+        "房东忽视维修问题，一位租户先用平静书面请求并设期限；另一位在反复迁就无效后使用正式投诉渠道处理不安全条件。"
+      ],
+      "counterexample": "退让可能维护合作，也可能放任不公；对抗可能保护边界，也可能只是升级。避免争吵不等于同意，拒绝妥协也不自动代表勇敢、敌意或判断正确。",
+      "observation_contexts": "观察影响、权力差、过往让步模式，以及是否涉及安全和权利。工作家庭中区分可协商偏好与边界；说明已同意部分、剩余分歧和下一处理流程。",
+      "reflection_questions": [
+        "这场分歧中什么确实可协商，哪条边界或哪位受影响者会因再次让步而受损？",
+        "什么较低强度流程能让证据和责任显现，又不强迫虚假一致或不必要升级？"
+      ],
+      "low_risk_action": "为一次低风险冲突写下共同目标、一个非核心偏好和一条坚定边界。在偏好上提供可撤销妥协，清楚说明边界，并设置复核点，不追求立刻和谐。",
+      "not_meaning": "这个 facet 不测量服从、同意、勇气、主张技巧、守法、冲突能力、忍受虐待或下属岗位适合度，不能授权施压、报复或压住伤害信息。",
+      "method_boundary": "本页使用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或安全、虐待与谈判评估。自我报告无法覆盖胁迫、权利、权力和要求的正当性。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:agreeableness:modesty",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/modesty",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "modesty",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Modesty facet: limiting self-enhancement in social comparison",
+      "summary": "Modesty describes a narrower agreeableness tendency to avoid inflating one's importance or claiming excessive credit; it is not low self-esteem, low ability, silence, or refusal to document contribution.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Agreeableness includes multiple ways of relating to others. Modesty isolates self-presentation and status claims. It differs from trusting, candid communication, helping, yielding in conflict, or responding compassionately; confidence and modest presentation can coexist.",
+      "two_ends": "At one end, a person may downplay status, share credit, and let work speak before self-promotion. At the other, they may state achievements prominently and compete for recognition. Either can be fair or misleading depending on accuracy, opportunity, and whose work becomes invisible.",
+      "scenarios": [
+        "During a project review, one lead names each contributor before describing their own coordination; another clearly documents the decision they owned because otherwise that invisible work would disappear from promotion evidence.",
+        "A student wins an award. One thanks collaborators and describes the process; another states the result and skills directly when applying for funding, without claiming that the award proves superiority over peers."
+      ],
+      "counterexample": "Understating contribution can reinforce unequal recognition, while visible self-advocacy can be accurate rather than arrogant. Modest language does not prove humility or competence, and strong self-presentation does not prove narcissism or selfishness.",
+      "observation_contexts": "Notice whether credit is accurate, whether collaborators are named, and whether structural bias makes some work easy to overlook. At work or study, separate evidence-based contribution from status inflation; adapt presentation to the decision being made.",
+      "reflection_questions": [
+        "Where does minimizing your contribution create an inaccurate record, and where does self-promotion exceed the evidence or erase other people's work?",
+        "How can you state your role concretely while sharing credit and avoiding claims about being inherently superior?"
+      ],
+      "low_risk_action": "For one completed task, write a factual contribution statement using action, evidence, and result. Add the collaborators or conditions that enabled it, then remove both unnecessary self-dismissal and unsupported status language.",
+      "not_meaning": "This facet does not measure self-esteem, narcissism, confidence, competence, ambition, leadership, truthfulness, or suitability for visible roles. It cannot determine how much recognition someone deserves or correct biased evaluation systems.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a clinical or performance assessment. Self-report cannot establish actual contribution, status, bias, or impression-management motives.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:agreeableness:modesty",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/modesty",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "modesty",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "谦逊表达 facet：如何限制夸大又准确记录贡献",
+      "summary": "谦逊表达描述宜人性中避免夸大自身重要性和过度占有功劳的窄倾向；它不等于低自尊、低能力、沉默或拒绝记录贡献。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "宜人性包含多种人际方式。谦逊表达只关注自我呈现和地位主张；它不同于信任、坦率、助人、冲突让步和同情回应，自信与克制呈现可以同时存在。",
+      "two_ends": "一端的人会淡化地位、分享功劳并让成果先说话；另一端的人较主动展示成绩并争取认可。两种方式都可能公平或误导，关键看准确性、机会，以及谁的工作因此不可见。",
+      "scenarios": [
+        "项目复盘时，一位负责人先点出各参与者，再说明自己的协调工作；另一位清楚记录自己负责的决定，因为不说明就会让隐形劳动从晋升证据里消失。",
+        "学生获奖后，一人感谢协作者并介绍过程；另一人在申请资助时直接陈述结果与技能，但不把奖项描述成自己天生优于同伴的证明。"
+      ],
+      "counterexample": "低估贡献可能强化不平等认可，公开自我倡导也可能只是准确。谦逊语言不能证明真正谦虚或有能力，强烈自我呈现也不能证明自恋或自私。",
+      "observation_contexts": "观察功劳是否准确、协作者是否被命名，以及结构偏差是否让某些工作容易被忽视。工作学习中区分有证据的贡献和地位夸大，并让表达匹配当前决策。",
+      "reflection_questions": [
+        "哪些场景里淡化自己会制造错误记录，哪些场景里自我宣传超过证据或抹去他人工作？",
+        "怎样具体说明自己的角色，同时分享功劳并避免声称自己本质上更优越？"
+      ],
+      "low_risk_action": "为一项完成任务写一条事实性贡献说明，包含行动、证据和结果。补上协作者与条件，再删除不必要的自我否定和没有支持的地位语言。",
+      "not_meaning": "这个 facet 不测量自尊、自恋、自信、能力、雄心、领导力、诚实或可见岗位适合度，不能决定一个人应得多少认可，也不能修正有偏评价系统。",
+      "method_boundary": "本页采用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或临床与绩效评估。自我报告无法证明真实贡献、地位、偏差和印象管理动机。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:agreeableness:tender-mindedness",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/tender-mindedness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "tender-mindedness",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Tender-mindedness facet: weighting compassion in judgment",
+      "summary": "Tender-mindedness describes a narrower agreeableness tendency to give emotional suffering and humane concern weight in decisions; it is not fragility, sentimentality, clinical empathy, or always choosing leniency.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Within agreeableness, tender-mindedness concerns compassionate attention when judging outcomes and rules. It differs from trusting intent, candid communication, practical helping, conflict accommodation, or modest self-presentation.",
+      "two_ends": "At one end, a person may readily center suffering, vulnerability, and humane impact. At the other, they may prioritize consistent rules, distance, or impersonal evidence before emotional considerations. Both perspectives can improve decisions when compassion and consequences are examined together.",
+      "scenarios": [
+        "A student misses a deadline during a family crisis. One instructor considers an extension with a new plan; another applies the standard but offers a documented appeal route so compassion does not depend on private favor.",
+        "A service policy creates repeated hardship for a small group. One analyst begins with interviews about lived impact; another quantifies error, cost, and alternatives, then combines those findings before recommending a change."
+      ],
+      "counterexample": "Strong compassionate feeling can still support an ineffective action, while emotionally restrained analysis can produce humane outcomes. Concern does not require abandoning standards, and a rule-focused style does not prove cruelty or absence of care.",
+      "observation_contexts": "Ask whose suffering is visible, whose voice is missing, and what downstream effects each option creates. At work or study, pair human accounts with evidence and consistent process; in communication, avoid demanding private disclosure as the price of consideration.",
+      "reflection_questions": [
+        "Which human impact is currently underweighted, and what evidence would show whether a compassionate response actually improves the outcome?",
+        "How can a decision preserve dignity and consistent process without pretending that every person begins with the same constraints?"
+      ],
+      "low_risk_action": "For one low-stakes policy or choice, add two columns: likely human burden and practical consequence. Seek one affected perspective without requesting sensitive details, then design a reversible adjustment with a review criterion.",
+      "not_meaning": "This facet does not measure goodness, empathy accuracy, emotional stability, caregiving competence, justice, clinical sensitivity, or suitability for helping professions. It cannot determine whose needs should prevail or replace safeguarding and evidence.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a clinical empathy or moral judgment assessment. Self-report cannot verify impact, fairness, or another person's experience.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:agreeableness:tender-mindedness",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/tender-mindedness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "tender-mindedness",
+      "framework": "big_five",
+      "domain_code": "agreeableness",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "同情关怀 facet：怎样在判断中纳入人的痛苦",
+      "summary": "同情关怀描述宜人性中在决定里重视痛苦、脆弱处境和人道关切的窄倾向；它不等于脆弱、多愁善感、临床同理或总是宽松。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "在宜人性中，同情关怀关注规则和结果判断中的人道影响。它不同于信任意图、坦率沟通、实际助人、冲突迁就或谦逊自我呈现。",
+      "two_ends": "一端的人容易把痛苦、脆弱与人的影响放在中心；另一端的人会先看一致规则、保持距离或依赖非个人证据。若把关怀和后果一起检查，两种视角都能改善决定。",
+      "scenarios": [
+        "学生因家庭危机错过期限，一位教师考虑延期并重新制定计划；另一位按标准处理但提供有记录的申诉渠道，让关怀不依赖私人偏爱。",
+        "一项服务政策反复给小群体带来困难，一位分析者先访谈实际体验；另一位量化错误、成本和替代方案，再结合两类证据提出调整。"
+      ],
+      "counterexample": "强烈同情也可能支持无效行动，情绪克制的分析同样可能产生人道结果。关心不要求放弃标准，重视规则也不能证明残酷或没有关怀。",
+      "observation_contexts": "询问谁的痛苦可见、谁的声音缺席，以及每个选项有哪些后续影响。工作学习中把人的叙述与证据、一致流程结合；不要要求披露隐私作为获得考虑的代价。",
+      "reflection_questions": [
+        "当前哪种人的影响被低估，什么证据能说明关怀回应确实改善了结果？",
+        "怎样让决定保留尊严和一致流程，又不假装每个人面对的限制完全相同？"
+      ],
+      "low_risk_action": "为一项低风险政策或选择增加两栏：可能的人际负担和实际后果。在不索取敏感细节的情况下听取一个受影响视角，再设计可撤销调整和复核标准。",
+      "not_meaning": "这个 facet 不测量善良、同理准确、情绪稳定、照护能力、正义、临床敏感度或助人职业适合度，不能决定谁的需要优先，也不能替代保护程序与证据。",
+      "method_boundary": "本页使用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或临床同理与道德判断评估。自我报告无法核实影响、公平和他人的真实体验。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    }
+  ],
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}
