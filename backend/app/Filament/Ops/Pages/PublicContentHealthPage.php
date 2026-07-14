@@ -13,6 +13,8 @@ use Throwable;
 
 final class PublicContentHealthPage extends Page
 {
+    private const PROBE_FRESHNESS_MINUTES = 15;
+
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
     protected static ?string $navigationGroup = null;
@@ -82,11 +84,11 @@ final class PublicContentHealthPage extends Page
         ));
         $healthyProbeCount = count(array_filter(
             $probeRows,
-            static fn (array $row): bool => ($row['result']['ok'] ?? false) === true,
+            fn (array $row): bool => $this->probeState($row['result']) === 'healthy',
         ));
         $healthyReadbackCount = count(array_filter(
             $probeRows,
-            static fn (array $row): bool => ($row['result']['readback']['ok'] ?? false) === true,
+            fn (array $row): bool => $this->publicationState($row) === 'healthy',
         ));
         $expectedProbeCount = count($probeRows);
 
@@ -298,7 +300,7 @@ final class PublicContentHealthPage extends Page
     {
         $target = $row['catalog'];
         $result = $row['result'];
-        $state = $result === null ? 'no_data' : (($result['ok'] ?? false) === true ? 'healthy' : 'failed');
+        $state = $this->probeState($result);
 
         return [
             'title' => $this->familyLabel((string) ($target['family'] ?? 'unknown')),
@@ -326,7 +328,7 @@ final class PublicContentHealthPage extends Page
         $readback = is_array($row['result']['readback'] ?? null) ? $row['result']['readback'] : [];
         $fields = is_array($readback['fields'] ?? null) ? $readback['fields'] : [];
         $ok = ($readback['ok'] ?? false) === true;
-        $state = $row['result'] === null ? 'no_data' : ($ok ? 'healthy' : 'failed');
+        $state = $this->publicationState($row);
 
         return [
             'title' => $this->familyLabel((string) ($target['family'] ?? 'unknown')),
@@ -337,6 +339,45 @@ final class PublicContentHealthPage extends Page
             'status' => __('public-content-health.states.'.$state),
             'status_state' => $state,
         ];
+    }
+
+    /** @param array<string, mixed>|null $result */
+    private function probeState(?array $result): string
+    {
+        if ($result === null) {
+            return 'no_data';
+        }
+        if (($result['ok'] ?? false) !== true) {
+            return 'failed';
+        }
+
+        try {
+            $observedAt = CarbonImmutable::parse((string) ($result['observed_at'] ?? ''))->utc();
+            $now = CarbonImmutable::now('UTC');
+        } catch (Throwable) {
+            return 'failed';
+        }
+
+        if ($observedAt->greaterThan($now->addMinute())) {
+            return 'failed';
+        }
+
+        return $observedAt->lessThan($now->subMinutes(self::PROBE_FRESHNESS_MINUTES))
+            ? 'warning'
+            : 'healthy';
+    }
+
+    /** @param array{catalog: array<string, mixed>, result: array<string, mixed>|null} $row */
+    private function publicationState(array $row): string
+    {
+        if ($row['result'] === null) {
+            return 'no_data';
+        }
+        if (($row['result']['readback']['ok'] ?? false) !== true) {
+            return 'failed';
+        }
+
+        return $this->probeState($row['result']);
     }
 
     /** @param array<string, mixed> $fields */

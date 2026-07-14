@@ -10,6 +10,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Services\Ops\PublicContentRuntimeMetricsService;
 use App\Support\Rbac\PermissionNames;
+use Carbon\CarbonImmutable;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -191,6 +192,39 @@ final class PublicContentHealthPageTest extends TestCase
             ->assertSet('publicationCards.0.status_state', 'healthy')
             ->assertSet('publicationCards.1.status_state', 'failed')
             ->assertSet('publicationCards.2.status_state', 'healthy');
+    }
+
+    public function test_stale_successful_probe_is_warning_instead_of_healthy(): void
+    {
+        CarbonImmutable::setTestNow('2026-07-14T00:00:00Z');
+
+        try {
+            Http::fake([
+                '*' => Http::response([
+                    'profile' => [
+                        'published_at' => '2026-07-01T00:00:00Z',
+                        'updated_at' => '2026-07-13T00:00:00Z',
+                    ],
+                    'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
+                ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']),
+            ]);
+
+            $this->assertSame(0, Artisan::call('public-content:probe-delivery', ['--json' => true]));
+            CarbonImmutable::setTestNow('2026-07-14T00:16:00Z');
+
+            $admin = $this->createAdminWithPermissions([
+                PermissionNames::ADMIN_EVENTS_READ,
+            ]);
+            $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+            Livewire::test(PublicContentHealthPage::class)
+                ->assertSet('probeCards.0.status_state', 'warning')
+                ->assertSet('publicationCards.0.status_state', 'warning')
+                ->assertSet('overviewFields.3.value', '0/3')
+                ->assertSet('overviewFields.4.value', '0/3');
+        } finally {
+            CarbonImmutable::setTestNow();
+        }
     }
 
     public function test_page_source_exposes_no_mutating_control(): void

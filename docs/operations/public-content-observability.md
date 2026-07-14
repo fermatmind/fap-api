@@ -86,6 +86,12 @@ cache-state, contract/version timestamp, and aggregate-count data. It never
 renders probe URLs, response bodies, arbitrary headers, exception details,
 credentials, private identifiers, or tenant-scoped data.
 
+A successful fixed probe is healthy only while its `observed_at` remains
+within 15 minutes, three times the scheduled five-minute cadence. Older
+successful observations become warnings in probe, overview, and publication
+readback health; invalid or future timestamps fail closed. This prevents the
+seven-day retained result from remaining green after the scheduler stops.
+
 If either backing store is unavailable, the page keeps rendering and labels
 that source unavailable with a generic message. The dashboard has no form or
 action for warm, purge, publish, retry-write, permission changes, migration,
