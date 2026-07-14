@@ -90696,9 +90696,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "e170b26748146664f863d90777a90caa743851ff",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3060",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -90729,6 +90729,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All manifest local checks passed for the exact 9-file PR19 scope. The focused test required a local vendor copy after two environment-only autoload/path failures, then passed 5 tests / 334 assertions. The final package covers the six locked neuroticism facets in independent EN/zh-CN pairs, explicitly prevents clinical or diagnostic interpretation, preserves raw failures, and keeps every release control closed."
+      },
+      {
+        "at": "2026-07-14T03:08:40Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 9-file scope as e170b26748146664f863d90777a90caa743851ff, pushed the scoped branch, and opened PR #3060. Waiting for required GitHub checks on the final ledger-updated head."
       }
     ]
   },
