@@ -91433,8 +91433,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "4680fe289abef76b5d392cece597bedaa39bbde6",
+    "status": "merged",
+    "commit_sha": "680f72f835ea0877f84c00544ad397ca1b05e803",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3075",
     "checks": {
       "dependency": {
@@ -91451,9 +91451,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T09:59:11Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -91482,6 +91482,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on ledger-updated head 7251db04ff592813666fd9714ad3b4b5349b8b99, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T10:00:59Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR30 after GitHub reported PR #3075 MERGED at 2026-07-14T09:59:11Z as squash commit 680f72f835ea0877f84c00544ad397ca1b05e803. origin/main contains the merge; remote and local task branches were deleted; post-merge package validation, 4 tests / 166 assertions, Pint, clean-main, and ancestry checks passed."
       }
     ]
   },
@@ -91494,10 +91500,19 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30 PR #3075 is MERGED as 680f72f835ea0877f84c00544ad397ca1b05e803; origin/main contains the merge, remote and local branches are deleted, and PR30 post-merge validator, 4 tests / 166 assertions, Pint, clean-main, and ancestry checks passed. PR31 started from that exact clean origin/main head."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact PR21 batch 31 coverage: 5 locked research-method themes, 10 EN/zh-CN Article candidates, exact slugs/questions/audiences/tasks/keywords/sources/links, nine reader/evidence sections, full raw-review-repair-final-mapping chain, null attribution, pending_manual_review, and zero CMS/publication/indexability mutations. Evidence is bound to the exact instrument, version, language, score, sample, and use studied; BFI coefficients and findings are not transferred to FermatMind. Product-specific response-bias studies, reliability, validity, norm samples, percentiles, translation equivalence, cross-cultural invariance, retest evidence, standard errors, and meaningful-change thresholds remain Unknown. BigFiveAuthorityV231Test passed with 4 tests / 166 assertions. Pint --test, PHP/JSON/JavaScript/YAML syntax, three-source mapping, private-link, git diff --check, and exact 11-file allowlist checks passed."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -91506,7 +91521,20 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T10:00:59Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR31 from exact origin/main 680f72f835ea0877f84c00544ad397ca1b05e803 after PR30 merged, cleaned, reconciled, and revalidated. Scope consumes only PR21 batch 31: self-report bias, reliability and validity literacy, norms and percentiles, cross-cultural limits, and retest mechanisms in EN and zh-CN. Product-specific reliability, validity, norm sample, percentile, translation-equivalence, and retest values remain explicit Unknown unless public reviewed evidence exists."
+      },
+      {
+        "at": "2026-07-14T10:04:57Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All PR31 local checks passed. The package exactly consumes PR21 batch 31, preserves 10 bilingual Article candidates and the full skeptical review chain, binds evidence to the exact researched measurement context, prohibits coefficient transfer, and keeps every FermatMind-specific psychometric, norm, translation, and retest value Unknown. Focused tests passed with 4 tests / 166 assertions; validator, Pint, syntax, three-source ledger, private-link, diff, and exact 11-file scope checks passed."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32": {
     "id": "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32",
