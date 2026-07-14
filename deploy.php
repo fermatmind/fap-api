@@ -759,10 +759,11 @@ task('ensure:shared-perms', function () {
     $base = get('deploy_path');
     $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
 
-    // Limit deploy-time permission repair to the runtime/shared dirs the release
-    // actively needs. app/private/artifacts is governed by the storage lifecycle
-    // control plane and may contain historical evidence trees that should not be
-    // rewritten on every deploy.
+    // Shared runtime directories are created with a setgid www-data group. PHP-FPM
+    // can already access their existing contents, so only repair the directory
+    // roots here. Recursively rewriting cache/content trees before every release
+    // makes deploy duration depend on historical runtime data and can prevent the
+    // release switch from being reached.
     $sharedWritableDirs = [
         'shared/backend/storage/framework/cache',
         'shared/backend/storage/framework/sessions',
@@ -775,10 +776,10 @@ task('ensure:shared-perms', function () {
     ];
 
     foreach ($sharedWritableDirs as $relativePath) {
-        ensureOwnedWritableTree(deploySharedPath($base, $relativePath), $owner, 'www-data');
+        ensureOwnedWritableDir(deploySharedPath($base, $relativePath), $owner, 'www-data');
     }
 
-    ensureOwnedWritableTree(deploySharedPath($base, 'shared/content_packages'), $owner, 'www-data');
+    ensureOwnedWritableDir(deploySharedPath($base, 'shared/content_packages'), $owner, 'www-data');
 });
 
 task('ensure:release-runtime-perms', function () {
