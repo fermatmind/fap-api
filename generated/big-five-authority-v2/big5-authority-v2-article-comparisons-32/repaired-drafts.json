@@ -1,0 +1,526 @@
+{
+  "schema_version": "big5-article-wave-repaired.v1",
+  "generated_at": "2026-07-14T10:21:48Z",
+  "assets": [
+    {
+      "topic_id": "big5.article.32.01.mbti",
+      "locale": "en",
+      "slug": "using-big-five-and-mbti-together-without-equating-them",
+      "repairs": [
+        "Separated model questions, constructs, instruments, and outputs.",
+        "Removed deterministic mappings and score conversion.",
+        "Added counterexamples for type, motive, workplace, and career misuse.",
+        "Prohibited diagnosis, ideal profiles, destiny, and high-stakes decisions.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "You can use Big Five and MBTI language side by side for reflection if you keep their constructs and outputs separate. A trait range cannot be converted into a four-letter type, and a type cannot determine Big Five scores.",
+        "evidence": "The cited sources describe a lexical Big Five factor structure and one hierarchical Big Five measure. They provide no deterministic MBTI crosswalk and do not validate MBTI or FermatMind MBTI outputs.",
+        "nuance_counterexample": "Two descriptions may sound similar without measuring the same construct, scale, or response format. Correlation in a particular study would still not create one-to-one equivalence or allow exact individual conversion.",
+        "concrete_scenario": "Someone sees higher extraversion and writes an MBTI type into their profile. They instead keep separate notes: what each framework claims to describe, which instrument produced the result, and where lived examples agree or diverge.",
+        "practical_framework": [
+          "Name each model, instrument, construct, and output separately.",
+          "Compare questions and examples, not labels alone.",
+          "Do not convert a trait score into a type or vice versa.",
+          "Use behavior and context to test reflections; keep high-stakes decisions outside both."
+        ],
+        "limitation": "This package supplies no MBTI–Big Five coefficient, crosswalk, conversion rule, equivalence proof, or FermatMind comparative validation. Those product-specific claims remain Unknown."
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg (1990), Big Five factor structure",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "Supports a broad lexical factor structure; it does not validate MBTI, Enneagram, DISC, or RIASEC, establish cross-model mappings, or validate FermatMind scores."
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto & John (2017), BFI-2 domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "Supports one hierarchical Big Five measure; its domains and facets cannot be converted deterministically into types, interests, styles, or scores from another model."
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "FermatMind public claim boundary matrix",
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "Prohibits deterministic model equivalence and high-stakes use; repository policy is not comparative psychometric evidence."
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.32.01.mbti",
+      "locale": "zh-CN",
+      "slug": "using-big-five-and-mbti-together-without-equating-them",
+      "repairs": [
+        "Separated model questions, constructs, instruments, and outputs.",
+        "Removed deterministic mappings and score conversion.",
+        "Added counterexamples for type, motive, workplace, and career misuse.",
+        "Prohibited diagnosis, ideal profiles, destiny, and high-stakes decisions.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "只要把构念与输出分开，就可以并列使用大五与 MBTI 语言进行反思。特质区间不能换算成四字母类型，类型也不能决定大五分数。",
+        "evidence": "引用来源描述词汇大五因素结构与一种层级式大五测量，不提供确定性 MBTI 对照，也不验证 MBTI 或费马测试 MBTI 输出。",
+        "nuance_counterexample": "两种描述听起来相似，不代表测量相同构念、量尺或作答格式。即使某项研究发现相关，也不能建立一一等价或准确个人换算。",
+        "concrete_scenario": "某人看到外向性较高，就把一个 MBTI 类型写入档案。他改为分别记录：每个框架声称描述什么、结果来自哪个工具，以及生活实例在哪里一致或分歧。",
+        "practical_framework": [
+          "分别写出模型、工具、构念与输出。",
+          "比较问题与实例，而不只比较标签。",
+          "不要把特质分数换成类型，反之亦然。",
+          "用行为与情境检验反思；两者都不用于高风险决策。"
+        ],
+        "limitation": "本包不提供 MBTI—大五系数、对照表、换算规则、等价证明或费马测试比较验证；这些产品特定主张均为 Unknown。"
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg（1990）：大五因素结构",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "支持宽泛词汇因素结构；不验证 MBTI、九型人格、DISC 或 RIASEC，不建立跨模型映射，也不验证费马测试分数。"
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto 与 John（2017）：BFI-2 维度与侧面",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "支持一种层级式大五测量；其维度与侧面不能确定性换算为另一模型的类型、兴趣、风格或分数。"
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "费马测试公开主张边界矩阵",
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "禁止确定性模型等价与高风险使用；仓库政策不是比较心理测量证据。"
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.32.02.enneagram",
+      "locale": "en",
+      "slug": "big-five-vs-enneagram-traits-and-motivation-stories",
+      "repairs": [
+        "Separated model questions, constructs, instruments, and outputs.",
+        "Removed deterministic mappings and score conversion.",
+        "Added counterexamples for type, motive, workplace, and career misuse.",
+        "Prohibited diagnosis, ideal profiles, destiny, and high-stakes decisions.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "Big Five trait dimensions and Enneagram type narratives organize self-reflection differently. They can prompt separate questions, but an Enneagram type is not a Big Five profile and no trait pattern proves a type or core motive.",
+        "evidence": "The cited research supports Big Five factors and BFI-2 domains and facets only. It supplies no Enneagram evidence, motive inference, type assignment, or model-equivalence rule.",
+        "nuance_counterexample": "Similar words such as sociable, cautious, or orderly can appear in both systems while serving different definitions. A person may recognize a narrative without that recognition establishing measurement validity or hidden motive.",
+        "concrete_scenario": "A reader maps every Enneagram type to one Big Five pattern. They replace the table with two columns: observable trait-language examples and optional narrative questions, leaving type, motive, and equivalence unassigned.",
+        "practical_framework": [
+          "Identify whether a statement concerns behavior tendency, type story, or motive claim.",
+          "Keep outputs in their original model and instrument.",
+          "Do not infer hidden motives from Big Five scores.",
+          "Treat narrative resonance as reflection, not measurement equivalence or destiny."
+        ],
+        "limitation": "No deterministic Enneagram–Big Five mapping, type prediction, motive inference, score conversion, or FermatMind comparative psychometrics are established here."
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg (1990), Big Five factor structure",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "Supports a broad lexical factor structure; it does not validate MBTI, Enneagram, DISC, or RIASEC, establish cross-model mappings, or validate FermatMind scores."
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto & John (2017), BFI-2 domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "Supports one hierarchical Big Five measure; its domains and facets cannot be converted deterministically into types, interests, styles, or scores from another model."
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "FermatMind public claim boundary matrix",
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "Prohibits deterministic model equivalence and high-stakes use; repository policy is not comparative psychometric evidence."
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.32.02.enneagram",
+      "locale": "zh-CN",
+      "slug": "big-five-vs-enneagram-traits-and-motivation-stories",
+      "repairs": [
+        "Separated model questions, constructs, instruments, and outputs.",
+        "Removed deterministic mappings and score conversion.",
+        "Added counterexamples for type, motive, workplace, and career misuse.",
+        "Prohibited diagnosis, ideal profiles, destiny, and high-stakes decisions.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "大五特质维度与九型类型叙事以不同方式组织自我反思。它们可以提出不同问题，但九型类型不是大五画像，任何特质模式也不能证明类型或核心动机。",
+        "evidence": "引用研究只支持大五因素与 BFI-2 维度/侧面，不提供九型证据、动机推断、类型分配或模型等价规则。",
+        "nuance_counterexample": "“社交”“谨慎”“有条理”等相似词可能出现在两个体系中，却承担不同定义。读者认同一种叙事，不等于证明测量效度或隐藏动机。",
+        "concrete_scenario": "读者把每个九型类型映射为一种大五模式。他把表格改为两列：可观察的特质语言实例与可选叙事问题，不分配类型、动机或等价关系。",
+        "practical_framework": [
+          "识别陈述涉及行为倾向、类型故事还是动机主张。",
+          "把输出保留在原模型与工具中。",
+          "不要从大五分数推断隐藏动机。",
+          "把叙事共鸣当作反思，而非测量等价或命运。"
+        ],
+        "limitation": "本文不建立确定性九型—大五映射、类型预测、动机推断、分数换算或费马测试比较心理测量证据。"
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg（1990）：大五因素结构",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "支持宽泛词汇因素结构；不验证 MBTI、九型人格、DISC 或 RIASEC，不建立跨模型映射，也不验证费马测试分数。"
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto 与 John（2017）：BFI-2 维度与侧面",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "支持一种层级式大五测量；其维度与侧面不能确定性换算为另一模型的类型、兴趣、风格或分数。"
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "费马测试公开主张边界矩阵",
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "禁止确定性模型等价与高风险使用；仓库政策不是比较心理测量证据。"
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.32.03.disc",
+      "locale": "en",
+      "slug": "big-five-vs-disc-measurement-and-workplace-language",
+      "repairs": [
+        "Separated model questions, constructs, instruments, and outputs.",
+        "Removed deterministic mappings and score conversion.",
+        "Added counterexamples for type, motive, workplace, and career misuse.",
+        "Prohibited diagnosis, ideal profiles, destiny, and high-stakes decisions.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "Big Five and DISC use different constructs, instruments, scoring systems, and often different workplace language. Compare the exact questions and intended use; do not convert a DISC label into Big Five scores or use either as a hiring shortcut.",
+        "evidence": "The cited academic sources support only the named Big Five structures. They do not establish DISC construct coverage, measurement quality, workplace prediction, or equivalence with Big Five domains.",
+        "nuance_counterexample": "A shared word such as dominance or sociability can mask different definitions and scoring. Vendor versions of DISC may also differ, so the model name alone is not enough to infer the instrument or evidence.",
+        "concrete_scenario": "A manager wants to translate a DISC label into low agreeableness and screen applicants. The comparison is rejected: constructs and evidence are unspecified, and personality results cannot replace job evidence, consent, or fair process.",
+        "practical_framework": [
+          "Identify the exact DISC and Big Five instruments and intended use.",
+          "Compare definitions, item formats, scales, samples, and evidence.",
+          "Reject score conversion and label-based hiring, ranking, or exclusion.",
+          "Use direct task evidence and transparent, consent-based workplace processes."
+        ],
+        "limitation": "No DISC–Big Five crosswalk, vendor equivalence, job-performance prediction, hiring validity, or FermatMind comparison evidence is supplied. High-stakes employment use is prohibited."
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg (1990), Big Five factor structure",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "Supports a broad lexical factor structure; it does not validate MBTI, Enneagram, DISC, or RIASEC, establish cross-model mappings, or validate FermatMind scores."
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto & John (2017), BFI-2 domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "Supports one hierarchical Big Five measure; its domains and facets cannot be converted deterministically into types, interests, styles, or scores from another model."
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "FermatMind public claim boundary matrix",
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "Prohibits deterministic model equivalence and high-stakes use; repository policy is not comparative psychometric evidence."
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.32.03.disc",
+      "locale": "zh-CN",
+      "slug": "big-five-vs-disc-measurement-and-workplace-language",
+      "repairs": [
+        "Separated model questions, constructs, instruments, and outputs.",
+        "Removed deterministic mappings and score conversion.",
+        "Added counterexamples for type, motive, workplace, and career misuse.",
+        "Prohibited diagnosis, ideal profiles, destiny, and high-stakes decisions.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "大五与 DISC 使用不同构念、工具、计分体系，也常使用不同职场语言。应比较准确问题与预期用途，不能把 DISC 标签换成大五分数，也不能把任何一方作为招聘捷径。",
+        "evidence": "引用学术来源只支持指定大五结构，不建立 DISC 构念覆盖、测量质量、职场预测或与大五维度等价。",
+        "nuance_counterexample": "“支配”“社交”等共同词语可能掩盖不同定义与计分。不同供应商的 DISC 版本也可能不同，所以只知道模型名称不足以推断工具或证据。",
+        "concrete_scenario": "管理者想把 DISC 标签换算成低宜人性并筛选应聘者。该做法被否决：构念与证据不明确，人格结果也不能替代任务证据、同意与公平流程。",
+        "practical_framework": [
+          "识别准确 DISC 与大五工具及预期用途。",
+          "比较定义、题目格式、量尺、样本与证据。",
+          "拒绝分数换算和基于标签的招聘、排序或排除。",
+          "使用直接任务证据与透明、基于同意的职场流程。"
+        ],
+        "limitation": "本文不提供 DISC—大五对照、供应商等价、工作表现预测、招聘效度或费马测试比较证据；禁止高风险雇佣用途。"
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg（1990）：大五因素结构",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "支持宽泛词汇因素结构；不验证 MBTI、九型人格、DISC 或 RIASEC，不建立跨模型映射，也不验证费马测试分数。"
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto 与 John（2017）：BFI-2 维度与侧面",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "支持一种层级式大五测量；其维度与侧面不能确定性换算为另一模型的类型、兴趣、风格或分数。"
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "费马测试公开主张边界矩阵",
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "禁止确定性模型等价与高风险使用；仓库政策不是比较心理测量证据。"
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.32.04.riasec",
+      "locale": "en",
+      "slug": "big-five-vs-riasec-personality-traits-and-career-interests",
+      "repairs": [
+        "Separated model questions, constructs, instruments, and outputs.",
+        "Removed deterministic mappings and score conversion.",
+        "Added counterexamples for type, motive, workplace, and career misuse.",
+        "Prohibited diagnosis, ideal profiles, destiny, and high-stakes decisions.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "Big Five trait dimensions and RIASEC interest themes are not interchangeable. A trait result cannot generate a definitive interest code, and an interest code cannot determine personality, ability, occupation fit, or career outcome.",
+        "evidence": "The cited sources support Big Five trait structures only. They provide no RIASEC measurement evidence or conversion, and they do not validate a joint FermatMind career recommendation.",
+        "nuance_counterexample": "Traits and interests can be statistically related in a sample without being the same construct. Interests also do not prove skill, access, values, opportunity, work conditions, or success in an occupation.",
+        "concrete_scenario": "A learner sees higher openness and concludes they must have an Artistic code and choose a creative career. They instead assess interests, tasks, skills, constraints, values, and real exploration separately.",
+        "practical_framework": [
+          "Keep trait, interest, skill, value, and constraint evidence distinct.",
+          "Use the exact instrument output without conversion.",
+          "Explore tasks and environments through reversible experiences.",
+          "Do not infer career fit, admission, hiring, income, or success from either model."
+        ],
+        "limitation": "No Big Five–RIASEC code conversion, career-fit score, occupation prescription, or outcome prediction is supported. FermatMind comparative and recommendation validity remains Unknown."
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg (1990), Big Five factor structure",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "Supports a broad lexical factor structure; it does not validate MBTI, Enneagram, DISC, or RIASEC, establish cross-model mappings, or validate FermatMind scores."
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto & John (2017), BFI-2 domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "Supports one hierarchical Big Five measure; its domains and facets cannot be converted deterministically into types, interests, styles, or scores from another model."
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "FermatMind public claim boundary matrix",
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "Prohibits deterministic model equivalence and high-stakes use; repository policy is not comparative psychometric evidence."
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.32.04.riasec",
+      "locale": "zh-CN",
+      "slug": "big-five-vs-riasec-personality-traits-and-career-interests",
+      "repairs": [
+        "Separated model questions, constructs, instruments, and outputs.",
+        "Removed deterministic mappings and score conversion.",
+        "Added counterexamples for type, motive, workplace, and career misuse.",
+        "Prohibited diagnosis, ideal profiles, destiny, and high-stakes decisions.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "大五特质维度与 RIASEC 兴趣主题不能互换。特质结果不能生成确定兴趣代码，兴趣代码也不能决定人格、能力、职业匹配或职业结果。",
+        "evidence": "引用来源只支持大五特质结构，不提供 RIASEC 测量证据或换算，也不验证费马测试联合职业推荐。",
+        "nuance_counterexample": "特质与兴趣在某个样本中可能统计相关，但不是同一构念。兴趣也不能证明技能、资源、价值、机会、工作条件或职业成功。",
+        "concrete_scenario": "学习者看到开放性较高，就认定自己必然是艺术型并应选择创意职业。他改为分别考察兴趣、任务、技能、限制、价值与真实探索。",
+        "practical_framework": [
+          "区分特质、兴趣、技能、价值与限制证据。",
+          "使用准确工具输出，不做换算。",
+          "通过可逆体验探索任务与环境。",
+          "不要从任一模型推断职业匹配、录取、招聘、收入或成功。"
+        ],
+        "limitation": "本文不支持大五—RIASEC 代码换算、职业匹配分、职业处方或结果预测；费马测试比较与推荐效度均为 Unknown。"
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg（1990）：大五因素结构",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "支持宽泛词汇因素结构；不验证 MBTI、九型人格、DISC 或 RIASEC，不建立跨模型映射，也不验证费马测试分数。"
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto 与 John（2017）：BFI-2 维度与侧面",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "支持一种层级式大五测量；其维度与侧面不能确定性换算为另一模型的类型、兴趣、风格或分数。"
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "费马测试公开主张边界矩阵",
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "禁止确定性模型等价与高风险使用；仓库政策不是比较心理测量证据。"
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.32.05.myths",
+      "locale": "en",
+      "slug": "big-five-myths-types-destiny-and-perfect-scores",
+      "repairs": [
+        "Separated model questions, constructs, instruments, and outputs.",
+        "Removed deterministic mappings and score conversion.",
+        "Added counterexamples for type, motive, workplace, and career misuse.",
+        "Prohibited diagnosis, ideal profiles, destiny, and high-stakes decisions.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "Common myths are that Big Five ranges are types, scores determine destiny, one profile is ideal, traits diagnose illness, and other personality systems can be converted exactly. None follows from the cited Big Five structure evidence.",
+        "evidence": "Goldberg supports broad factors and BFI-2 supports one domain-and-facet measurement model. Neither source establishes fixed categories, perfect scores, diagnoses, guaranteed outcomes, or deterministic mappings to other models.",
+        "nuance_counterexample": "Dimensions can be summarized with ranges for readability without becoming natural types. A socially valued behavior can depend on context, and higher is not universally better; strengths, costs, access, and task demands vary.",
+        "concrete_scenario": "A social post ranks profiles from best to worst and supplies MBTI conversions. A reader checks the original constructs and evidence, removes the ranking and crosswalk, and reframes each result as a bounded hypothesis.",
+        "practical_framework": [
+          "Ask whether a claim concerns a dimension, category, diagnosis, outcome, or another model.",
+          "Trace it to the exact source and instrument.",
+          "Remove ideal-score, destiny, and deterministic-conversion language.",
+          "Use contextual behavior evidence and keep unsupported product claims Unknown."
+        ],
+        "limitation": "This article cannot prove that FermatMind scores are accurate, normative, diagnostic, predictive, or equivalent to another model. No profile is declared universally best."
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg (1990), Big Five factor structure",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "Supports a broad lexical factor structure; it does not validate MBTI, Enneagram, DISC, or RIASEC, establish cross-model mappings, or validate FermatMind scores."
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto & John (2017), BFI-2 domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "Supports one hierarchical Big Five measure; its domains and facets cannot be converted deterministically into types, interests, styles, or scores from another model."
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "FermatMind public claim boundary matrix",
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "Prohibits deterministic model equivalence and high-stakes use; repository policy is not comparative psychometric evidence."
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    },
+    {
+      "topic_id": "big5.article.32.05.myths",
+      "locale": "zh-CN",
+      "slug": "big-five-myths-types-destiny-and-perfect-scores",
+      "repairs": [
+        "Separated model questions, constructs, instruments, and outputs.",
+        "Removed deterministic mappings and score conversion.",
+        "Added counterexamples for type, motive, workplace, and career misuse.",
+        "Prohibited diagnosis, ideal profiles, destiny, and high-stakes decisions.",
+        "Preserved product-Unknown, private-result, and release safety."
+      ],
+      "sections": {
+        "direct_answer": "常见误区包括：大五区间就是类型、分数决定命运、某种画像最理想、特质可以诊断疾病，以及其他人格体系可以准确换算。这些都不能从引用的大五结构证据推出。",
+        "evidence": "Goldberg 支持宽泛因素，BFI-2 支持一种维度—侧面测量模型。两者都不建立固定类别、完美分数、诊断、保证结果或与其他模型的确定性映射。",
+        "nuance_counterexample": "为了可读性可以用区间概括维度，但区间不会因此变成自然类型。社会赞许行为取决于情境，“越高越好”不普遍成立；优势、代价、资源与任务需求都会变化。",
+        "concrete_scenario": "社交帖子把画像从好到坏排序，并附上 MBTI 换算。读者核对原始构念与证据，删除排名与映射，把每个结果改写为有边界的假设。",
+        "practical_framework": [
+          "判断主张涉及维度、类别、诊断、结果还是另一模型。",
+          "追溯到准确来源与工具。",
+          "删除理想分数、命运与确定性换算语言。",
+          "使用情境行为证据，并把无证据产品主张保持为 Unknown。"
+        ],
+        "limitation": "本文不能证明费马测试分数准确、有常模、可诊断、可预测或等价于另一模型；不宣布任何画像普遍最佳。"
+      },
+      "source_mapping": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "evidence_category": "academic_evidence",
+          "label": "Goldberg（1990）：大五因素结构",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "repository_path": null,
+          "limitation": "支持宽泛词汇因素结构；不验证 MBTI、九型人格、DISC 或 RIASEC，不建立跨模型映射，也不验证费马测试分数。"
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "evidence_category": "academic_evidence",
+          "label": "Soto 与 John（2017）：BFI-2 维度与侧面",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "repository_path": null,
+          "limitation": "支持一种层级式大五测量；其维度与侧面不能确定性换算为另一模型的类型、兴趣、风格或分数。"
+        },
+        {
+          "source_id": "internal.public-claim-boundary-matrix",
+          "evidence_category": "internal_repository_evidence",
+          "label": "费马测试公开主张边界矩阵",
+          "public_url": null,
+          "repository_path": "fap-web/docs/claims/public-claim-boundary-matrix.md",
+          "limitation": "禁止确定性模型等价与高风险使用；仓库政策不是比较心理测量证据。"
+        }
+      ],
+      "review_status": "repaired_pending_manual_review"
+    }
+  ]
+}
