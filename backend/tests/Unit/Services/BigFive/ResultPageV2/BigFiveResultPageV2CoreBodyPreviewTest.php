@@ -5308,6 +5308,38 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_public_content_delivery_probe_only(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/ProbePublicContentDelivery.php',
+            'backend/app/Services/Ops/PublicContentDeliveryProbeService.php',
+            'backend/app/Services/Ops/PublicContentPublicationReadbackService.php',
+            'backend/bootstrap/app.php',
+        ];
+        $bootstrapChangedLines = [
+            "+        if ((bool) config('public_content_observability.probe.enabled')) {",
+            "+        \$schedule->command('public-content:probe-delivery --json')",
+            '+            ->everyFiveMinutes()',
+            '+            ->withoutOverlapping(10)',
+            '+            ->onOneServer();',
+            '+        }',
+        ];
+        $blocked = ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $allowed,
+            '',
+            '',
+            bootstrapAppChangedLines: $bootstrapChangedLines,
+        ));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges(
+            $blocked,
+            '',
+            '',
+            bootstrapAppChangedLines: $bootstrapChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_personality_public_read_model_cache(): void
     {
         $changed = [
@@ -6594,6 +6626,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isPublicContentDeliveryProbeFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsPublicContentRuntimeMetricsOnly(
@@ -7304,6 +7340,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->bootstrapDiffIsPublicContentRuntimeMetricsOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
+                    || $this->bootstrapDiffIsPublicContentDeliveryProbeOnly(
+                        $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    )
                 )
             ) {
                 continue;
@@ -7320,6 +7359,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly($bootstrapAppChangedLines ?? [])
                     || $this->kernelDiffIsCareerPublicAuthorityCacheVerifyOnly($bootstrapAppChangedLines ?? [])
                     || $this->bootstrapDiffIsPublicContentRuntimeMetricsOnly($bootstrapAppChangedLines ?? [])
+                    || $this->bootstrapDiffIsPublicContentDeliveryProbeOnly($bootstrapAppChangedLines ?? [])
                 )
             ) {
                 continue;
@@ -12390,6 +12430,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isPublicContentDeliveryProbeFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ProbePublicContentDelivery.php',
+            'backend/app/Services/Ops/PublicContentDeliveryProbeService.php',
+            'backend/app/Services/Ops/PublicContentPublicationReadbackService.php',
+        ], true);
+    }
+
     /**
      * @param  list<string>  $changedLines
      */
@@ -12463,6 +12512,34 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '$schedule->call(static function (): void {',
             'app(\\App\\Services\\Ops\\PublicContentRuntimeMetricsService::class)->rollupPending();',
             '})->name(\'public-content-runtime:aggregate-rollup\')->everyMinute()->withoutOverlapping();',
+        ];
+        $actual = [];
+
+        foreach ($changedLines as $line) {
+            if (! is_string($line) || ($line[0] ?? '') !== '+') {
+                return false;
+            }
+            $normalized = trim(substr($line, 1));
+            if ($normalized !== '') {
+                $actual[] = $normalized;
+            }
+        }
+
+        return $actual === $expected;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function bootstrapDiffIsPublicContentDeliveryProbeOnly(array $changedLines): bool
+    {
+        $expected = [
+            "if ((bool) config('public_content_observability.probe.enabled')) {",
+            "\$schedule->command('public-content:probe-delivery --json')",
+            '->everyFiveMinutes()',
+            '->withoutOverlapping(10)',
+            '->onOneServer();',
+            '}',
         ];
         $actual = [];
 

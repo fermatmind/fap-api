@@ -13,6 +13,48 @@ return [
     'allowed_locales' => ['en', 'zh-CN', 'unknown'],
     'duration_buckets_ms' => [25, 50, 100, 250, 500, 1000, 2000, 5000, 10000, 30000],
 
+    'probe' => [
+        'enabled' => env('PUBLIC_CONTENT_DELIVERY_PROBE_ENABLED', true),
+        'base_url' => env('PUBLIC_CONTENT_DELIVERY_PROBE_BASE_URL', env('APP_URL', 'http://localhost')),
+        'cache_store' => env('PUBLIC_CONTENT_DELIVERY_PROBE_STORE', env('PUBLIC_CONTENT_RUNTIME_METRICS_STORE', 'redis')),
+        'connect_timeout_seconds' => 3,
+        'timeout_seconds' => 8,
+        'payload_budget_bytes' => 524288,
+        'retention_seconds' => 7 * 24 * 60 * 60,
+        'targets' => [
+            [
+                'id' => 'l1_mbti_intj_a_en',
+                'family' => 'mbti',
+                'priority' => 'L1',
+                'locale' => 'en',
+                'path' => '/api/v0.5/personality/intj-a',
+                'query' => ['locale' => 'en', 'org_id' => 0, 'scale_code' => 'MBTI'],
+                'readback_profile' => 'mbti_detail',
+                'allowed_cache_states' => ['miss', 'fresh'],
+            ],
+            [
+                'id' => 'l2_big_five_hub_en',
+                'family' => 'big_five',
+                'priority' => 'L2',
+                'locale' => 'en',
+                'path' => '/api/v0.5/personality-content-assets/big_five/hub/big-five',
+                'query' => ['locale' => 'en', 'org_id' => 0],
+                'readback_profile' => 'personality_asset_detail',
+                'allowed_cache_states' => ['miss', 'fresh'],
+            ],
+            [
+                'id' => 'l3_career_industries_en',
+                'family' => 'career_industries',
+                'priority' => 'L3',
+                'locale' => 'en',
+                'path' => '/api/v0.5/career/industries',
+                'query' => ['locale' => 'en', 'org_id' => 0],
+                'readback_profile' => 'career_industries',
+                'allowed_cache_states' => ['unknown'],
+            ],
+        ],
+    ],
+
     // Exact parameterized route templates are the authority boundary. Never add
     // private attempt, report, order, payment, shortlist, or internal routes here.
     'routes' => [
