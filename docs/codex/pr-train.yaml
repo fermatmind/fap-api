@@ -41893,6 +41893,7 @@ prs:
       - Remove proven duplicate Big Five/Enneagram top-level and section aliases, retain one canonical projection, and enforce a payload budget.
     allowed_paths:
       - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php
       - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
       - backend/scripts/export_openapi.sh
       - backend/docs/contracts/openapi.snapshot.json

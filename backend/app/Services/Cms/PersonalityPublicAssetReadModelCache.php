@@ -289,6 +289,36 @@ final class PersonalityPublicAssetReadModelCache
         }
     }
 
+    public function discardActivePreservingLkg(
+        string $surface,
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+        int $orgId,
+    ): void {
+        if (! $this->isCacheable($surface, $framework, $entityType, $selector, $locale, $orgId)) {
+            return;
+        }
+
+        try {
+            $this->withSurfaceLock(
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                function () use ($surface, $framework, $entityType, $selector, $locale): void {
+                    $this->rotateFence($surface, $framework, $entityType, $selector, $locale);
+                    Cache::forget($this->activeKey($surface, $framework, $entityType, $selector, $locale));
+                    $this->recordState($surface, $framework, $entityType, $locale, 'invalidated');
+                },
+            );
+        } catch (Throwable $throwable) {
+            $this->recordState($surface, $framework, $entityType, $locale, 'bypass', $throwable);
+        }
+    }
+
     public function invalidateAsset(
         string $framework,
         string $entityType,

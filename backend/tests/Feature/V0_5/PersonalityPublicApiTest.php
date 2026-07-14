@@ -1910,15 +1910,32 @@ final class PersonalityPublicApiTest extends TestCase
         ]);
         $path = '/api/v0.5/personality-content-assets/big_five/domain/openness?locale=en';
 
-        $this->getJson($path)
+        $initialResponse = $this->getJson($path)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
+        $initialPayload = $initialResponse->json();
+        self::assertIsArray($initialPayload);
 
         $asset->update(['content_sections_json' => [[
             'key' => 'overview',
             'title' => 'Overview',
             'body_md' => str_repeat('x', PersonalityPublicContentAssetController::MAX_DETAIL_PAYLOAD_BYTES),
         ]]]);
+        $oversizedCachedPayload = $initialPayload;
+        $oversizedCachedPayload['personality_public_content_asset_v1']['sections'][0]['body_md'] = str_repeat(
+            'x',
+            PersonalityPublicContentAssetController::MAX_DETAIL_PAYLOAD_BYTES,
+        );
+        app(PersonalityPublicAssetReadModelCache::class)->put(
+            'detail-code',
+            'big_five',
+            'domain',
+            'openness',
+            'en',
+            0,
+            app(PersonalityPublicAssetReadModelCache::class)->versionFor($asset),
+            $oversizedCachedPayload,
+        );
 
         $this->getJson($path)
             ->assertOk()
