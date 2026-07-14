@@ -135,22 +135,38 @@ final class PersonalityPublicAssetReadModelCache
         try {
             $activeKey = $this->activeKey($surface, $framework, $entityType, $selector, $locale);
             $lkgKey = $this->lkgKey($surface, $framework, $entityType, $selector, $locale);
-            $previousVersion = Cache::get($activeKey);
 
             Cache::put(
                 $this->key($surface, $framework, $entityType, $selector, $locale, $version),
                 $payload,
                 self::LKG_TTL_SECONDS,
             );
+
+            $publishPointers = function () use ($activeKey, $lkgKey, $version): void {
+                $previousVersion = Cache::get($activeKey);
+                if (is_string($previousVersion) && $previousVersion !== '' && $previousVersion !== $version) {
+                    Cache::put($lkgKey, $previousVersion, self::LKG_TTL_SECONDS);
+                } elseif (! is_string(Cache::get($lkgKey))) {
+                    Cache::put($lkgKey, $version, self::LKG_TTL_SECONDS);
+                }
+                Cache::put($activeKey, $version, self::TTL_SECONDS);
+            };
+
             if ($surface === 'index') {
-                $this->registerCollectionSelector($framework, $entityType, $selector, $locale);
+                $this->withCollectionLock(
+                    $framework,
+                    $entityType,
+                    $locale,
+                    function () use ($framework, $entityType, $selector, $locale, $publishPointers): void {
+                        $this->registerCollectionSelector($framework, $entityType, $selector, $locale);
+                        $publishPointers();
+                    },
+                );
+
+                return;
             }
-            if (is_string($previousVersion) && $previousVersion !== '' && $previousVersion !== $version) {
-                Cache::put($lkgKey, $previousVersion, self::LKG_TTL_SECONDS);
-            } elseif (! is_string(Cache::get($lkgKey))) {
-                Cache::put($lkgKey, $version, self::LKG_TTL_SECONDS);
-            }
-            Cache::put($activeKey, $version, self::TTL_SECONDS);
+
+            $publishPointers();
         } catch (Throwable $throwable) {
             $this->recordState($surface, $framework, $entityType, $locale, 'bypass', $throwable);
         }
@@ -219,29 +235,42 @@ final class PersonalityPublicAssetReadModelCache
         }
 
         try {
-            $entries = [];
             foreach (array_unique([$entityType, 'all']) as $collectionEntityType) {
-                $registryKey = $this->collectionRegistryKey($framework, $collectionEntityType, $locale);
-                $registered = Cache::get($registryKey, []);
-                if (! is_array($registered)) {
-                    continue;
-                }
-                foreach ($registered as $selector) {
-                    if (is_string($selector) && $selector !== '') {
-                        $entries[$collectionEntityType.'|'.$selector] = [$collectionEntityType, $selector];
-                    }
-                }
-            }
-
-            foreach ($entries as [$collectionEntityType, $selector]) {
-                $this->invalidate(
-                    'index',
+                $this->withCollectionLock(
                     $framework,
                     $collectionEntityType,
-                    $selector,
                     $locale,
-                    $orgId,
-                    $preserveLkg,
+                    function () use (
+                        $framework,
+                        $collectionEntityType,
+                        $locale,
+                        $orgId,
+                        $preserveLkg,
+                    ): void {
+                        $registered = Cache::get(
+                            $this->collectionRegistryKey($framework, $collectionEntityType, $locale),
+                            [],
+                        );
+                        if (! is_array($registered)) {
+                            return;
+                        }
+
+                        foreach (array_unique($registered) as $selector) {
+                            if (! is_string($selector) || $selector === '') {
+                                continue;
+                            }
+
+                            $this->invalidate(
+                                'index',
+                                $framework,
+                                $collectionEntityType,
+                                $selector,
+                                $locale,
+                                $orgId,
+                                $preserveLkg,
+                            );
+                        }
+                    },
                 );
             }
         } catch (Throwable $throwable) {
@@ -362,6 +391,18 @@ final class PersonalityPublicAssetReadModelCache
             strtolower($framework),
             strtolower($entityType),
         ]);
+    }
+
+    private function withCollectionLock(
+        string $framework,
+        string $entityType,
+        string $locale,
+        callable $callback,
+    ): void {
+        Cache::lock(
+            $this->collectionRegistryKey($framework, $entityType, $locale).':lock',
+            10,
+        )->block(10, $callback);
     }
 
     private function isCacheable(
