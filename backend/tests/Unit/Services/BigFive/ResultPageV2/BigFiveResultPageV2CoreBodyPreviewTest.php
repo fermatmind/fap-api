@@ -540,6 +540,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_full_cms_promotion_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityMbtiFullCmsPromote.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/MbtiFullCmsPromotionService.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\PersonalityMbtiFullCmsPromote;',
+            '+        PersonalityMbtiFullCmsPromote::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_cross_type_authority_storage_readmodel_files(): void
     {
         $changed = [
@@ -7279,6 +7294,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsMbti64BackendImportContractOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbtiContent15MixedImportPreflightOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbtiFullCmsImportOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsMbtiFullCmsPromotionOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsRevisionDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsInternalLinkDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsProjectionDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -7584,6 +7600,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/MbtiContent15IndexabilityPromotionService.php',
             'backend/app/Console/Commands/PersonalityMbtiFullCmsImport.php',
             'backend/app/Services/Cms/MbtiFullCmsImportService.php',
+            'backend/app/Console/Commands/PersonalityMbtiFullCmsPromote.php',
+            'backend/app/Services/Cms/MbtiFullCmsPromotionService.php',
         ], true);
     }
 
@@ -12061,6 +12079,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         foreach ($changedLines as $line) {
             $normalized = ltrim($line, '+-');
             if (preg_match('/\bPersonalityMbtiFullCmsImport\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsMbtiFullCmsPromotionOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\\bPersonalityMbtiFullCmsPromote\\b/u', $normalized) !== 1) {
                 return false;
             }
         }
