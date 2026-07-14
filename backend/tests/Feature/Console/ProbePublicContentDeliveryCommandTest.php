@@ -183,6 +183,17 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
         $this->assertStringNotContainsString('public-content:probe-delivery --purge', $schedule);
     }
 
+    public function test_schedule_does_not_register_probe_when_it_is_disabled(): void
+    {
+        config()->set('public_content_observability.probe.enabled', false);
+
+        $output = Artisan::call('schedule:list', ['--no-ansi' => true]);
+        $schedule = Artisan::output();
+
+        $this->assertSame(0, $output);
+        $this->assertStringNotContainsString('public-content:probe-delivery', $schedule);
+    }
+
     /** @return array<string, mixed> */
     private function mbtiPayload(): array
     {
