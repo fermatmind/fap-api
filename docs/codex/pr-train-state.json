@@ -89978,8 +89978,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACET-HUBS-09"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "83eb9d5b5938eedaaa74756c672bccb0e5464f52",
+    "status": "merged",
+    "commit_sha": "1283d8fa438af7ece8b645faf05017c1bc7a4485",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3045",
     "checks": {
       "dependency": {
@@ -89992,13 +89992,17 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #3045 head 83eb9d5b5938eedaaa74756c672bccb0e5464f52 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+        "evidence": "PR #3045 final head 1283d8fa438af7ece8b645faf05017c1bc7a4485 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #3045 MERGED as 3e286d439044909853fed40e54485b6d6811c8f7; origin/main contains the merge; package validator passed; BigFiveAuthorityV210Test passed 5 tests / 227 assertions; remote branch, local worktree, and local branch cleanup completed."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-13T23:32:30Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -90027,6 +90031,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on head 83eb9d5b5938eedaaa74756c672bccb0e5464f52; recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-13T23:38:10Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #3045 after exact-head squash merge. Final head 1283d8fa438af7ece8b645faf05017c1bc7a4485 passed 9/9 checks; merge 3e286d439044909853fed40e54485b6d6811c8f7 is on origin/main; post-merge validator and 5 tests / 227 assertions passed; remote and local cleanup completed."
       }
     ]
   },
@@ -90039,10 +90049,27 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-RANGE-OPENNESS-10"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "745cee6f8a6b2634f5c1b28d36488f20968a344c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3047",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-RANGE-OPENNESS-10 PR #3045 is MERGED as 3e286d439044909853fed40e54485b6d6811c8f7; origin/main contains the merge and post-merge validation/cleanup completed."
+      },
+      "local_retry": {
+        "status": "resolved",
+        "evidence": "Package validator passed. The first assertion-bearing BigFiveAuthorityV211Test run passed 4/5 tests (210 assertions) and exposed only a test-array lexical ordering mismatch; the expected order was corrected to match validator output and the retry passed 5 tests / 227 assertions. Two earlier dependency setup launches did not reach PR11 assertions."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact 8-page coverage and fail-closed release gates; BigFiveAuthorityV211Test passed 5 tests / 227 assertions after the recorded test-order retry; touched PHP Pint passed; JSON, JavaScript, PHP, YAML, and ledger syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files; PR10-to-PR11 substantive body exact-copy check found zero matches."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3047 head 745cee6f8a6b2634f5c1b28d36488f20968a344c passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -90051,7 +90078,38 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-13T23:38:10Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR11 from clean latest fap-api main after reconciling PR10. Scope is exactly eight conscientiousness range drafts: EN/ZH high, middle, and low V2 pages plus independent-intent EN high-conscientiousness and low-conscientiousness legacy canonicals; redirect/canonical graph, CMS writes, runtime changes, publication, deployment, and indexability mutations remain forbidden."
+      },
+      {
+        "at": "2026-07-13T23:46:35Z",
+        "from": "in_progress",
+        "to": "local_checks_retry_pending",
+        "note": "Recorded focused-test retry after 4/5 tests and 210 assertions passed. The sole failure is a test-only canonical array ordering mismatch caused by PR11 lexical ordering; package identities and validator coverage are correct. Two earlier launch attempts failed before assertions due to local vendor setup paths and were corrected without source impact."
+      },
+      {
+        "at": "2026-07-13T23:47:58Z",
+        "from": "local_checks_retry_pending",
+        "to": "local_checks_passed",
+        "note": "Corrected the focused test's expected lexical order and reran successfully: package validator pass; 5 tests / 227 assertions; Pint; JSON, JS, PHP, YAML, ledger and diff checks; exact 9-file scope; and zero exact substantive-body copies from PR10 all passed."
+      },
+      {
+        "at": "2026-07-13T23:49:15Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Pushed the exact scoped branch and opened PR #3047; waiting for the complete required GitHub check set before merge."
+      },
+      {
+        "at": "2026-07-13T23:56:03Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head 745cee6f8a6b2634f5c1b28d36488f20968a344c; recorded ready-to-merge state before final ledger-only head validation."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12": {
     "id": "BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12",
