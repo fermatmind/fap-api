@@ -5340,6 +5340,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_public_content_health_dashboard_only(): void
+    {
+        $allowed = [
+            'backend/app/Filament/Ops/Pages/PublicContentHealthPage.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_personality_public_read_model_cache(): void
     {
         $changed = [
@@ -6627,6 +6640,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isPublicContentDeliveryProbeFile($file)) {
+                continue;
+            }
+
+            if ($this->isPublicContentHealthDashboardFile($file)) {
                 continue;
             }
 
@@ -12437,6 +12454,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Ops/PublicContentDeliveryProbeService.php',
             'backend/app/Services/Ops/PublicContentPublicationReadbackService.php',
         ], true);
+    }
+
+    private function isPublicContentHealthDashboardFile(string $file): bool
+    {
+        return $file === 'backend/app/Filament/Ops/Pages/PublicContentHealthPage.php';
     }
 
     /**

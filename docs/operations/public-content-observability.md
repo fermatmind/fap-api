@@ -72,8 +72,35 @@ Big Five cache, oversized payload, non-2xx response, or missing required
 readback field marks the probe failed. The scheduled command never warms,
 purges, publishes, retries a write, or mutates CMS content.
 
+## CMS public content health dashboard
+
+`/ops/public-content-health` is a read-only Filament page for owners,
+operators with `admin.ops.read`, and analysts with `admin.events.read`. It does
+not require an organization selection because every source is a global,
+anonymous `org_id=0` aggregate. Content-only roles cannot access it.
+
+The page combines the existing 60-minute runtime aggregate with the three
+fixed delivery probes and their allowlisted publication readback fields. It
+shows only bounded route-family, priority, locale, status-class, latency,
+cache-state, contract/version timestamp, and aggregate-count data. It never
+renders probe URLs, response bodies, arbitrary headers, exception details,
+credentials, private identifiers, or tenant-scoped data.
+
+A successful fixed probe is healthy only while its `observed_at` remains
+within 15 minutes, three times the scheduled five-minute cadence. Older
+successful observations become warnings in probe, overview, and publication
+readback health; invalid or future timestamps fail closed. This prevents the
+seven-day retained result from remaining green after the scheduler stops.
+
+If either backing store is unavailable, the page keeps rendering and labels
+that source unavailable with a generic message. The dashboard has no form or
+action for warm, purge, publish, retry-write, permission changes, migration,
+or deploy. Operators must use separately reviewed and authorized workflows for
+any mutation.
+
 ## Repository rule impact
 
-This observability layer does not change public content ownership, publishing,
-indexability, sitemap, llms, canonical, structured data, or frontend fallback
-rules. It observes backend-authoritative delivery only.
+This observability layer and its CMS dashboard do not change public content
+ownership, publishing, indexability, sitemap, llms, canonical, structured
+data, or frontend fallback rules. They observe backend-authoritative delivery
+only; CMS/backend remain the content and publication authority.
