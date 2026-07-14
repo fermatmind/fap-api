@@ -91567,9 +91567,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "ee9c26d37060737817e5e27cceebe06610afc322",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3078",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -91600,6 +91600,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All PR32 local checks passed. The package exactly consumes PR21 batch 32, preserves 10 bilingual Article candidates and the full skeptical review chain, and enforces model-separation, no-crosswalk, no-conversion, no-type/motive-inference, no-high-stakes-use, product-Unknown, and private-link guards. Focused tests passed with 4 tests / 166 assertions; validator, Pint, syntax, three-source ledger, private-link, diff, and exact 11-file scope checks passed."
+      },
+      {
+        "at": "2026-07-14T10:27:11Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 11-file PR32 scope as ee9c26d37060737817e5e27cceebe06610afc322, pushed codex/big5-authority-v2-article-comparisons-32, and opened PR #3078. Waiting for required GitHub checks on the ledger-updated head."
       }
     ]
   },
