@@ -1,0 +1,68 @@
+{
+  "schema_version": "big5_authority_v2_test_landing_repair.v1",
+  "train_id": "BIG5-AUTHORITY-V2-TEST-LANDING-20",
+  "artifact": "big5-authority-v2-test-landing-20-repaired",
+  "stage": "repaired",
+  "framework": "big_five",
+  "expected_page_count": 2,
+  "required_intents": [
+    "what_it_measures",
+    "how_to_answer",
+    "report_scope",
+    "access_and_commerce",
+    "data_and_privacy",
+    "method_boundary",
+    "technical_evidence",
+    "faq",
+    "internal_links",
+    "visible_sources"
+  ],
+  "pages": [
+    {
+      "locale": "en",
+      "canonical_path": "/en/tests/big-five-personality-test-ocean-model",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "This self-report assessment organizes answers into Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism. Use the result as a structured hypothesis for reflection, not a diagnosis, fixed identity, or decision about eligibility. Backend product truth currently marks the assessment entry as free-only and lists summary, domain overview, and disclaimers as free sections. Separate backend entitlement records define conditional full-report and action-plan modules. Availability and any offer must be resolved by the live backend; this content package embeds no price and makes no universal unlock promise.",
+      "resolved_issue_codes": [
+        "outline_incomplete",
+        "product_truth_unverified",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "canonical_path": "/zh/tests/big-five-personality-test-ocean-model",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "draft_excerpt": "这项自陈测评把回答组织为开放性、尽责性、外倾性、宜人性和神经质五个宽泛维度。结果适合用作可检验的反思假设，不是诊断、固定身份或资格判断。 backend product truth 当前把测评入口标记为 free-only，并把摘要、domain 总览和免责声明列为免费 sections；另有 entitlement 记录定义条件性的完整报告与行动计划模块。具体可用内容和 offer 必须由 live backend 决定，本内容包不嵌入价格，也不承诺统一解锁。",
+      "resolved_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "product_truth_unverified",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    }
+  ],
+  "workflow": {
+    "raw_artifact": "raw-draft.json",
+    "skeptical_review_artifact": "skeptical-review.json",
+    "overwrite_raw": false,
+    "independent_bilingual_edit_required": true
+  },
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}

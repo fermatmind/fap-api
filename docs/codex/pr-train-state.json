@@ -90696,8 +90696,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "e170b26748146664f863d90777a90caa743851ff",
+    "status": "merged",
+    "commit_sha": "cd54b38553ce915e70b697269774fa8f13536f5c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3060",
     "checks": {
       "dependency": {
@@ -90714,9 +90714,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T03:21:38Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -90745,6 +90745,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on head f1d3372f903a586b2669b1a688ce46516c20298b, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 9 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T03:21:38Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #3060 passed all 9 final-head GitHub checks on cd54b38553ce915e70b697269774fa8f13536f5c and was squash-merged as 41ca4f54f92b37d916910edb98eab7cfcc1b4b80. origin/main contains the merge; post-merge package validation and BigFiveAuthorityV219Test passed 5 tests / 334 assertions; remote branch and local worktree were cleaned."
       }
     ]
   },
@@ -90757,10 +90763,23 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "d20ed1f90b2fe33921781bc57de3924b5c3f5c51",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3062",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19 PR #3060 is MERGED as 41ca4f54f92b37d916910edb98eab7cfcc1b4b80; origin/main contains the merge and post-merge validation/cleanup completed. Before commit, PR20 fast-forwarded over unrelated deploy repair baeee4e2a768881add59f4e426e403f9cf4838a7 without scope overlap."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact 2-page bilingual coverage, direct backend product-authority verification, free-core versus conditional-module boundaries, no embedded price, Unknown numeric evidence, locale-safe hub/domain/method links, privacy guards, source authority, and fail-closed release gates. The first validator run failed only because two Chinese FAQ questions were below the specificity threshold; the questions were expanded and every rerun passed. BigFiveAuthorityV220Test passed with exit 0 and 5 tests / 108 assertions; touched PHP Pint passed; JSON, JavaScript, PHP, and YAML syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3062 head a6926ca389f0e32dba3250154c60cdde772be287 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -90769,7 +90788,32 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T03:30:46Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR20 from exact origin/main 41ca4f54f92b37d916910edb98eab7cfcc1b4b80 after PR19 merged and cleanup completed. Scope is exactly the EN/zh-CN Big Five test landing pair; content reads free core and conditional module boundaries from current backend truth, embeds no fixed price, keeps unreviewed numeric evidence Unknown, links methodology to the existing hub method-boundary anchor, and forbids question, scoring, payment, result-flow, CMS, publication, deployment, or indexability mutations."
+      },
+      {
+        "at": "2026-07-14T03:34:24Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "After an unrelated deploy repair merged, fast-forwarded the uncommitted branch to latest origin/main baeee4e2a768881add59f4e426e403f9cf4838a7 and reran every manifest local check. The initial FAQ specificity failure was repaired in scope; final validator, 5 tests / 108 assertions, Pint, syntax, diff, product-truth, private-route, and exact 9-file scope checks all passed."
+      },
+      {
+        "at": "2026-07-14T03:35:50Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 9-file scope as d20ed1f90b2fe33921781bc57de3924b5c3f5c51, pushed the scoped branch, and opened PR #3062. Waiting for required GitHub checks on the final ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T03:41:57Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head a6926ca389f0e32dba3250154c60cdde772be287, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 9 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-ARTICLE-IA-21": {
     "id": "BIG5-AUTHORITY-V2-ARTICLE-IA-21",

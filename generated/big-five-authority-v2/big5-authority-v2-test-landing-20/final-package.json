@@ -1,0 +1,333 @@
+{
+  "schema_version": "big5_authority_v2_test_landing.v1",
+  "train_id": "BIG5-AUTHORITY-V2-TEST-LANDING-20",
+  "artifact": "big5-authority-v2-test-landing-20-final",
+  "stage": "final",
+  "framework": "big_five",
+  "expected_page_count": 2,
+  "pages": [
+    {
+      "content_key": "test-landing:big-five-ocean",
+      "locale": "en",
+      "canonical_path": "/en/tests/big-five-personality-test-ocean-model",
+      "page_family": "test_landing",
+      "framework": "big_five",
+      "scale_code": "BIG5_OCEAN",
+      "title": "Big Five personality test: what it measures and how to use the report",
+      "summary": "This self-report assessment organizes answers into Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism. Use the result as a structured hypothesis for reflection, not a diagnosis, fixed identity, or decision about eligibility.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "what_it_measures": "The assessment describes five broad dimensions of reported personality tendencies. A domain score compresses many answers and does not capture every facet, context, skill, value, health condition, or future behavior. Similar domain results can coexist with different examples and constraints.",
+      "how_to_answer": [
+        "Answer from your typical recent behavior rather than the person you hope to be or the response you think is socially preferred.",
+        "Use the response option that best fits across ordinary situations. If work, study, home, or relationships differ sharply, choose the more representative pattern and keep the exception for later interpretation.",
+        "Do not try to engineer a target profile. Complete the form presented by the current backend, then compare the report with repeated behavior and meaningful counterexamples."
+      ],
+      "report_includes": [
+        "The current free core contract exposes a summary, a five-domain overview, and interpretation disclaimers.",
+        "The report can organize reflection around relative domain patterns and may expose additional modules only when the live backend grants the corresponding entitlement.",
+        "Visible explanations should state limits and keep the result connected to observable examples rather than treating a score as a complete account of a person."
+      ],
+      "report_does_not_include": [
+        "It does not provide a medical or mental-health diagnosis, a guarantee about relationships, work, income, admission, or future outcomes.",
+        "It does not establish intelligence, competence, honesty, moral worth, safety, or suitability for hiring and selection decisions.",
+        "This draft does not promise a fixed paid price, universal access to conditional modules, a percentile, or a reviewed reliability or validity coefficient."
+      ],
+      "access_and_commerce": {
+        "assessment_access": "free_only",
+        "free_sections": [
+          "disclaimer_top",
+          "summary",
+          "domains_overview",
+          "disclaimer"
+        ],
+        "conditional_modules": [
+          "big5_full",
+          "big5_action_plan"
+        ],
+        "fixed_price_embedded": false,
+        "live_runtime_required": true,
+        "source_paths": [
+          "backend/database/seeders/ScaleRegistrySeeder.php",
+          "backend/database/migrations/2026_02_27_100000_create_benefit_module_rules_table.php",
+          "backend/database/seed_data/skus_big5_ocean.json"
+        ],
+        "explanation": "Backend product truth currently marks the assessment entry as free-only and lists summary, domain overview, and disclaimers as free sections. Separate backend entitlement records define conditional full-report and action-plan modules. Availability and any offer must be resolved by the live backend; this content package embeds no price and makes no universal unlock promise."
+      },
+      "data_and_privacy": "Responses and result-access information belong to the assessment flow and must not be exposed in public pages, sitemap, llms surfaces, public links, or identifiable analytics logs. Review the current privacy page for governing details. Avoid sharing a private result or recovery link as if it were a public profile.",
+      "privacy_href": "/en/privacy",
+      "method_boundary": "Self-report is affected by wording, memory, response style, current circumstances, culture, and the context a person has in mind. Group-level Big Five research supports broad descriptive structure; it does not prove why one person answered as they did or certify a FermatMind score. Interpret the report with examples, exceptions, and revision over time.",
+      "technical_evidence": {
+        "status": "limited_public_evidence",
+        "summary": "Current public authority supports the five broad dimensions and a non-diagnostic product boundary. The reviewed public package does not provide numeric FermatMind reliability, validity, normative sample size, or percentile calibration evidence, so each remains Unknown rather than being inferred from another instrument or study.",
+        "unknown_numeric_evidence": {
+          "reliability": "Unknown",
+          "validity": "Unknown",
+          "normative_sample_size": "Unknown",
+          "percentile_calibration": "Unknown"
+        }
+      },
+      "faq": [
+        {
+          "question": "Is this a diagnosis?",
+          "answer": "No. It is a descriptive self-report reference and cannot diagnose a health condition or replace qualified assessment."
+        },
+        {
+          "question": "Is a higher score better?",
+          "answer": "No. Each end can bring useful tendencies and tradeoffs; context, goals, constraints, and consequences determine what matters."
+        },
+        {
+          "question": "How long will it take?",
+          "answer": "No fixed duration is claimed here. The current backend controls the form shown, and completion time varies by person and conditions."
+        },
+        {
+          "question": "Is the full report free?",
+          "answer": "The backend currently exposes defined core sections free and models other modules through entitlements. Live backend state, not this draft, determines what is available."
+        },
+        {
+          "question": "Can I use the result for hiring or admission?",
+          "answer": "No. FermatMind results are not an employment-screening, admission, medical, financial, or legal decision tool."
+        }
+      ],
+      "internal_links": [
+        {
+          "intent": "model_hub",
+          "href": "/en/personality/big-five",
+          "label": "Big Five model hub"
+        },
+        {
+          "intent": "domain",
+          "href": "/en/personality/big-five/openness",
+          "label": "Openness"
+        },
+        {
+          "intent": "domain",
+          "href": "/en/personality/big-five/conscientiousness",
+          "label": "Conscientiousness"
+        },
+        {
+          "intent": "domain",
+          "href": "/en/personality/big-five/extraversion",
+          "label": "Extraversion"
+        },
+        {
+          "intent": "domain",
+          "href": "/en/personality/big-five/agreeableness",
+          "label": "Agreeableness"
+        },
+        {
+          "intent": "domain",
+          "href": "/en/personality/big-five/neuroticism",
+          "label": "Neuroticism"
+        },
+        {
+          "intent": "methodology",
+          "href": "/en/personality/big-five#method-boundary",
+          "label": "Method and interpretation boundary"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim.big_five.five_broad_dimensions",
+          "source_ids": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "citation_label": "Goldberg (1990), Big-Five factor structure",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "limitation": "Supports a broad five-factor structure, not FermatMind scoring accuracy, an individual diagnosis, or a claim that one taxonomy is universally definitive."
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports a named hierarchical Big Five model, but does not validate FermatMind forms, reports, norms, reliability, or individual interpretation."
+        }
+      ]
+    },
+    {
+      "content_key": "test-landing:big-five-ocean",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/tests/big-five-personality-test-ocean-model",
+      "page_family": "test_landing",
+      "framework": "big_five",
+      "scale_code": "BIG5_OCEAN",
+      "title": "大五人格测试：测什么，以及怎样使用报告",
+      "summary": "这项自陈测评把回答组织为开放性、尽责性、外倾性、宜人性和神经质五个宽泛维度。结果适合用作可检验的反思假设，不是诊断、固定身份或资格判断。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "what_it_measures": "测评描述五个宽泛的人格倾向维度。domain 分数会压缩多道回答，不能覆盖所有 facet、情境、技能、价值、健康状况或未来行为。两个人的 domain 结果接近，现实例子与限制条件仍可能明显不同。",
+      "how_to_answer": [
+        "以近期通常会怎样行动为参照，不按理想中的自己，也不选择看起来更受欢迎的答案。",
+        "选择在普通情境中更符合自己的选项。如果工作、学习、家庭或关系中的表现差异很大，先选较有代表性的模式，并把例外留到报告解释时核对。",
+        "不要为了得到某种画像而调整答案。完成当前 backend 实际提供的题型后，再用重复行为和有意义的反例检验报告。"
+      ],
+      "report_includes": [
+        "当前免费核心契约包含结果摘要、五个 domain 总览和解释免责声明。",
+        "报告可帮助整理各 domain 的相对模式；只有 live backend 授予相应 entitlement 时，才可能显示其他条件性模块。",
+        "可见解释应同时呈现限制，并把分数连回可观察例子，而不是把一个结果当成对整个人的完整说明。"
+      ],
+      "report_does_not_include": [
+        "报告不提供医疗或心理健康诊断，也不保证关系、工作、收入、录取或未来结果。",
+        "它不能证明智力、能力、诚信、道德价值、安全性，也不能用于招聘或筛选适合度判断。",
+        "本 draft 不承诺固定付费价格、不保证所有人获得条件性模块，也不虚构 percentile、信度或效度数值。"
+      ],
+      "access_and_commerce": {
+        "assessment_access": "free_only",
+        "free_sections": [
+          "disclaimer_top",
+          "summary",
+          "domains_overview",
+          "disclaimer"
+        ],
+        "conditional_modules": [
+          "big5_full",
+          "big5_action_plan"
+        ],
+        "fixed_price_embedded": false,
+        "live_runtime_required": true,
+        "source_paths": [
+          "backend/database/seeders/ScaleRegistrySeeder.php",
+          "backend/database/migrations/2026_02_27_100000_create_benefit_module_rules_table.php",
+          "backend/database/seed_data/skus_big5_ocean.json"
+        ],
+        "explanation": "backend product truth 当前把测评入口标记为 free-only，并把摘要、domain 总览和免责声明列为免费 sections；另有 entitlement 记录定义条件性的完整报告与行动计划模块。具体可用内容和 offer 必须由 live backend 决定，本内容包不嵌入价格，也不承诺统一解锁。"
+      },
+      "data_and_privacy": "答题内容与结果访问资料属于私人测评流程，不得进入公开页面、sitemap、llms surface、公开链接或可识别分析日志。具体规则以当前隐私页为准；不要把私人结果链接或找回链接当作公开人格主页分享。",
+      "privacy_href": "/zh/privacy",
+      "method_boundary": "自陈会受到题目措辞、记忆、作答风格、当前处境、文化以及答题时想到的情境影响。群体层面的大五研究支持宽泛描述结构，但不能证明某个个体为何这样回答，也不能为费马测试分数背书。解释时应同时寻找例子、例外，并允许后续修正。",
+      "technical_evidence": {
+        "status": "limited_public_evidence",
+        "summary": "当前公开 authority 支持五个宽泛维度和非诊断产品边界；已审核公开包没有提供费马测试的具体信度、效度、常模样本量或 percentile 校准证据，因此全部写为 Unknown，不从其他工具或研究外推。",
+        "unknown_numeric_evidence": {
+          "reliability": "Unknown",
+          "validity": "Unknown",
+          "normative_sample_size": "Unknown",
+          "percentile_calibration": "Unknown"
+        }
+      },
+      "faq": [
+        {
+          "question": "这项大五人格测试是诊断吗？",
+          "answer": "不是。它是描述性的自陈参考，不能诊断健康状况，也不能替代合格的专业评估。"
+        },
+        {
+          "question": "分数越高越好吗？",
+          "answer": "不是。每一端都有可能带来有用倾向与代价，需要结合目标、限制、情境和后果判断。"
+        },
+        {
+          "question": "完成这项测试需要多长时间？",
+          "answer": "本页不声称固定时长。实际题型由当前 backend 控制，完成时间也会随个人和作答条件变化。"
+        },
+        {
+          "question": "完整报告免费吗？",
+          "answer": "backend 当前开放已定义的免费核心 sections，其他模块通过 entitlement 管理；实际可用状态由 live backend 决定，不由本 draft 承诺。"
+        },
+        {
+          "question": "能用于招聘或录取吗？",
+          "answer": "不能。费马测试结果不是招聘筛选、升学录取、医疗、金融或法律决策工具。"
+        }
+      ],
+      "internal_links": [
+        {
+          "intent": "model_hub",
+          "href": "/zh/personality/big-five",
+          "label": "大五人格总览"
+        },
+        {
+          "intent": "domain",
+          "href": "/zh/personality/big-five/openness",
+          "label": "开放性"
+        },
+        {
+          "intent": "domain",
+          "href": "/zh/personality/big-five/conscientiousness",
+          "label": "尽责性"
+        },
+        {
+          "intent": "domain",
+          "href": "/zh/personality/big-five/extraversion",
+          "label": "外倾性"
+        },
+        {
+          "intent": "domain",
+          "href": "/zh/personality/big-five/agreeableness",
+          "label": "宜人性"
+        },
+        {
+          "intent": "domain",
+          "href": "/zh/personality/big-five/neuroticism",
+          "label": "神经质"
+        },
+        {
+          "intent": "methodology",
+          "href": "/zh/personality/big-five#method-boundary",
+          "label": "方法与解释边界"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim.big_five.five_broad_dimensions",
+          "source_ids": [
+            "academic.goldberg-1990-big-five-structure",
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.goldberg-1990-big-five-structure",
+          "citation_label": "Goldberg（1990），大五因素结构",
+          "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+          "limitation": "支持宽泛的五因素结构，不验证费马测试计分准确性、个人诊断，也不证明某一种分类体系普遍唯一。"
+        },
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto 与 John（2017），大五 domain 与 facet 的层级模型",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "支持一个明确命名的大五层级模型，但不验证费马测试的题型、报告、常模、信度或个人解释。"
+        }
+      ]
+    }
+  ],
+  "workflow": {
+    "raw_failures_preserved": true,
+    "ai_detector_used": false
+  },
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}
