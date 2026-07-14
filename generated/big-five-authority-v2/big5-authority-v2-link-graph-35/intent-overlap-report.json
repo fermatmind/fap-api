@@ -1,0 +1,106 @@
+{
+  "schema_version": "big5-intent-overlap-control.v1",
+  "generated_at": "2026-07-14T11:56:00Z",
+  "controls": [
+    {
+      "en_legacy_route": "/en/personality/big-five/emotional-stability",
+      "en_v2_route": "/en/personality/big-five/neuroticism-low",
+      "legacy_intent": "plain-language legacy polarity explainer",
+      "v2_intent": "score-range interpretation and bounded action",
+      "canonical_policy": "both self-canonical candidates with distinct intent",
+      "navigation_policy": "legacy route is compatibility_only; V2 route is standard navigation",
+      "hreflang_policy": "legacy EN route has no synthetic zh counterpart; V2 route uses reciprocal EN/zh-CN hreflang",
+      "cannibalization_control": "PASS_DISTINCT_INTENT"
+    },
+    {
+      "en_legacy_route": "/en/personality/big-five/high-agreeableness",
+      "en_v2_route": "/en/personality/big-five/agreeableness-high",
+      "legacy_intent": "plain-language legacy polarity explainer",
+      "v2_intent": "score-range interpretation and bounded action",
+      "canonical_policy": "both self-canonical candidates with distinct intent",
+      "navigation_policy": "legacy route is compatibility_only; V2 route is standard navigation",
+      "hreflang_policy": "legacy EN route has no synthetic zh counterpart; V2 route uses reciprocal EN/zh-CN hreflang",
+      "cannibalization_control": "PASS_DISTINCT_INTENT"
+    },
+    {
+      "en_legacy_route": "/en/personality/big-five/high-conscientiousness",
+      "en_v2_route": "/en/personality/big-five/conscientiousness-high",
+      "legacy_intent": "plain-language legacy polarity explainer",
+      "v2_intent": "score-range interpretation and bounded action",
+      "canonical_policy": "both self-canonical candidates with distinct intent",
+      "navigation_policy": "legacy route is compatibility_only; V2 route is standard navigation",
+      "hreflang_policy": "legacy EN route has no synthetic zh counterpart; V2 route uses reciprocal EN/zh-CN hreflang",
+      "cannibalization_control": "PASS_DISTINCT_INTENT"
+    },
+    {
+      "en_legacy_route": "/en/personality/big-five/high-extraversion",
+      "en_v2_route": "/en/personality/big-five/extraversion-high",
+      "legacy_intent": "plain-language legacy polarity explainer",
+      "v2_intent": "score-range interpretation and bounded action",
+      "canonical_policy": "both self-canonical candidates with distinct intent",
+      "navigation_policy": "legacy route is compatibility_only; V2 route is standard navigation",
+      "hreflang_policy": "legacy EN route has no synthetic zh counterpart; V2 route uses reciprocal EN/zh-CN hreflang",
+      "cannibalization_control": "PASS_DISTINCT_INTENT"
+    },
+    {
+      "en_legacy_route": "/en/personality/big-five/high-neuroticism",
+      "en_v2_route": "/en/personality/big-five/neuroticism-high",
+      "legacy_intent": "plain-language legacy polarity explainer",
+      "v2_intent": "score-range interpretation and bounded action",
+      "canonical_policy": "both self-canonical candidates with distinct intent",
+      "navigation_policy": "legacy route is compatibility_only; V2 route is standard navigation",
+      "hreflang_policy": "legacy EN route has no synthetic zh counterpart; V2 route uses reciprocal EN/zh-CN hreflang",
+      "cannibalization_control": "PASS_DISTINCT_INTENT"
+    },
+    {
+      "en_legacy_route": "/en/personality/big-five/high-openness",
+      "en_v2_route": "/en/personality/big-five/openness-high",
+      "legacy_intent": "plain-language legacy polarity explainer",
+      "v2_intent": "score-range interpretation and bounded action",
+      "canonical_policy": "both self-canonical candidates with distinct intent",
+      "navigation_policy": "legacy route is compatibility_only; V2 route is standard navigation",
+      "hreflang_policy": "legacy EN route has no synthetic zh counterpart; V2 route uses reciprocal EN/zh-CN hreflang",
+      "cannibalization_control": "PASS_DISTINCT_INTENT"
+    },
+    {
+      "en_legacy_route": "/en/personality/big-five/low-agreeableness",
+      "en_v2_route": "/en/personality/big-five/agreeableness-low",
+      "legacy_intent": "plain-language legacy polarity explainer",
+      "v2_intent": "score-range interpretation and bounded action",
+      "canonical_policy": "both self-canonical candidates with distinct intent",
+      "navigation_policy": "legacy route is compatibility_only; V2 route is standard navigation",
+      "hreflang_policy": "legacy EN route has no synthetic zh counterpart; V2 route uses reciprocal EN/zh-CN hreflang",
+      "cannibalization_control": "PASS_DISTINCT_INTENT"
+    },
+    {
+      "en_legacy_route": "/en/personality/big-five/low-conscientiousness",
+      "en_v2_route": "/en/personality/big-five/conscientiousness-low",
+      "legacy_intent": "plain-language legacy polarity explainer",
+      "v2_intent": "score-range interpretation and bounded action",
+      "canonical_policy": "both self-canonical candidates with distinct intent",
+      "navigation_policy": "legacy route is compatibility_only; V2 route is standard navigation",
+      "hreflang_policy": "legacy EN route has no synthetic zh counterpart; V2 route uses reciprocal EN/zh-CN hreflang",
+      "cannibalization_control": "PASS_DISTINCT_INTENT"
+    },
+    {
+      "en_legacy_route": "/en/personality/big-five/low-extraversion",
+      "en_v2_route": "/en/personality/big-five/extraversion-low",
+      "legacy_intent": "plain-language legacy polarity explainer",
+      "v2_intent": "score-range interpretation and bounded action",
+      "canonical_policy": "both self-canonical candidates with distinct intent",
+      "navigation_policy": "legacy route is compatibility_only; V2 route is standard navigation",
+      "hreflang_policy": "legacy EN route has no synthetic zh counterpart; V2 route uses reciprocal EN/zh-CN hreflang",
+      "cannibalization_control": "PASS_DISTINCT_INTENT"
+    },
+    {
+      "en_legacy_route": "/en/personality/big-five/low-openness",
+      "en_v2_route": "/en/personality/big-five/openness-low",
+      "legacy_intent": "plain-language legacy polarity explainer",
+      "v2_intent": "score-range interpretation and bounded action",
+      "canonical_policy": "both self-canonical candidates with distinct intent",
+      "navigation_policy": "legacy route is compatibility_only; V2 route is standard navigation",
+      "hreflang_policy": "legacy EN route has no synthetic zh counterpart; V2 route uses reciprocal EN/zh-CN hreflang",
+      "cannibalization_control": "PASS_DISTINCT_INTENT"
+    }
+  ]
+}

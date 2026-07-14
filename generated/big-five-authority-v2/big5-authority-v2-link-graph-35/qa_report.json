@@ -1,0 +1,33 @@
+{
+  "schema_version": "big5-link-graph-qa.v1",
+  "generated_at": "2026-07-14T11:56:00Z",
+  "status": "PASS_NO_RELEASE_MUTATION",
+  "counts": {
+    "candidate_nodes": 231,
+    "inventory_routes": 231,
+    "internal_edges": 1199,
+    "validated_real_targets": 1199,
+    "dead_edges": 0,
+    "orphan_nodes": 0,
+    "sink_nodes": 0,
+    "self_links": 0,
+    "cross_locale_edges": 0,
+    "hreflang_pairs": 109,
+    "redirects": 10,
+    "redirect_chains_or_cycles": 0
+  },
+  "checks": {
+    "exact_pr07_34_inventory": true,
+    "unique_nodes_and_routes": true,
+    "canonical_self_consistency": true,
+    "every_edge_has_real_target": true,
+    "no_orphans_or_sinks": true,
+    "no_self_or_cross_locale_links": true,
+    "hreflang_targets_real_and_reciprocal": true,
+    "en_legacy_intent_distinct_from_v2": true,
+    "exact_ten_zh_legacy_301_redirects": true,
+    "no_redirect_chains_or_cycles": true,
+    "eligibility_deferred_to_pr36": true,
+    "no_sitemap_llms_schema_or_indexability_release": true
+  }
+}
