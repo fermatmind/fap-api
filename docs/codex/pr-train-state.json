@@ -91808,7 +91808,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-MEDIA-OG-34"
     ],
-    "status": "github_checks_pending",
+    "status": "github_checks_failed_repaired_pending_rerun",
     "commit_sha": "00e69001932f0f73c738596d471f80ebb0e17270",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3082",
     "checks": {
@@ -91822,7 +91822,7 @@
       },
       "focused_tests": {
         "status": "pass",
-        "evidence": "php artisan test tests/Feature/SEO/BigFiveAuthorityV235Test.php passed: 4 tests / 71 assertions."
+        "evidence": "After the scoped CI repair, php artisan test tests/Feature/SEO/BigFiveAuthorityV235Test.php passed: 4 tests / 67 assertions; the complete BigFiveResultPageV2CoreBodyPreviewTest runtime-freeze suite passed: 345 tests / 716 assertions."
       },
       "full_mbti_verification": {
         "status": "pass",
@@ -91834,15 +91834,15 @@
       },
       "format_and_syntax": {
         "status": "pass",
-        "evidence": "Pint passed for 3 PHP files; node --check passed for both package scripts; php -l passed for the service, command, and focused test; generated JSON, PR-train JSON, and manifest YAML parsed successfully."
+        "evidence": "Pint passed for the final touched PHP test; node --check passed for both package scripts; php -l passed before the runtime files were removed and the final focused test parses under Laravel; generated JSON, PR-train JSON, and manifest YAML parsed successfully."
       },
       "scope": {
         "status": "pass",
-        "evidence": "Changed files are restricted to PR35 LinkGraph service, PR35 command/test/docs/generated package, and docs/codex/pr-train-state.json; CI-generated compiled pack changes were restored before staging. git diff --check passed."
+        "evidence": "Final branch diff is restricted to the PR35 focused test/docs/generated package and docs/codex/pr-train-state.json. The unnecessary runtime service/command were removed after the freeze classifier correctly rejected them; CI-generated compiled pack changes were restored. git diff --check passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3082 opened from codex/big5-authority-v2-link-graph-35 after all required local checks passed; awaiting the complete required GitHub check set."
+        "status": "failed_repaired_pending_rerun",
+        "evidence": "First GitHub round completed 8/9: verify-bigfive failed only because the runtime-freeze branch-diff guard detected the two newly committed backend/app validator files; 1367 other tests passed with 164374 assertions. Removed those unnecessary runtime files without expanding scope, kept the validator in validate-package.mjs, and locally revalidated the focused suite plus the complete 345-test runtime-freeze suite. Awaiting the automatic rerun after push."
       }
     },
     "failure_reason": null,
@@ -91871,6 +91871,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Pushed verified commits through 4b1dd4ee626e742fec50b17ff8306b7d1597f64f and opened PR #3082; waiting for the complete required GitHub check set."
+      },
+      {
+        "at": "2026-07-14T12:43:27Z",
+        "from": "github_checks_pending",
+        "to": "github_checks_failed_repaired_pending_rerun",
+        "note": "First GitHub round was 8/9: only verify-bigfive failed because its runtime-freeze guard correctly classified the two PR35 backend/app validator files as runtime changes. Removed those files within manifest scope, retained the complete Node graph validator and test-scoped mutation oracle, then passed 4 focused tests / 67 assertions, all 345 runtime-freeze tests / 716 assertions, Pint, package validation, and git diff check."
       }
     ]
   },
