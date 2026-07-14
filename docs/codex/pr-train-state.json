@@ -91808,8 +91808,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-MEDIA-OG-34"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "00e69001932f0f73c738596d471f80ebb0e17270",
+    "status": "merged",
+    "commit_sha": "014451db088e5ab1106bfdcee706ff3f30ef747b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3082",
     "checks": {
       "dependency": {
@@ -91846,9 +91846,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T13:06:54Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -91883,6 +91883,12 @@
         "from": "github_checks_failed_repaired_pending_rerun",
         "to": "ready_to_merge",
         "note": "The complete post-repair GitHub round passed 9/9 and PR #3082 is mergeable at head a99c1efe662abde97fbd519b1bf67ce7a025f668. Recording ready_to_merge before the final check round and squash merge."
+      },
+      {
+        "at": "2026-07-14T13:14:11Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #3082 completed a final 9/9 GitHub round and squash-merged as 014451db088e5ab1106bfdcee706ff3f30ef747b at 2026-07-14T13:06:54Z. Remote and local branches were deleted; main was synchronized and remained clean; post-merge Node validation, 4 tests / 67 assertions, Pint, and ancestry checks passed."
       }
     ]
   },
@@ -91895,10 +91901,39 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-LINK-GRAPH-35"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "aae0e8678cc13315a7602ee0ad4e211815132469",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3084",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-LINK-GRAPH-35 PR #3082 is MERGED as 014451db088e5ab1106bfdcee706ff3f30ef747b; origin/main contains the merge, task branches are deleted, and PR35 post-merge validation passed. PR36 started from that exact clean origin/main head."
+      },
+      "seo_geo_authority_guard": {
+        "status": "pass",
+        "evidence": "Applied fap-web-seo-geo-authority and claim guards. Authority stays CMS/backend; schema requires matching visible evidence; JSON-LD, sitemap, llms, and llms-full are not treated as graph proof, citation guarantees, or authority; every candidate is decided individually and missing review/media fails closed."
+      },
+      "authority_package": {
+        "status": "pass",
+        "evidence": "Deterministic builder and validator passed for 231 individually gated candidates: 0 eligible, 231 withheld, and zero metadata, schema, sitemap, llms, llms-full, robots, CMS, database, search-submission, deploy, or production mutations."
+      },
+      "focused_test": {
+        "status": "pass",
+        "evidence": "php artisan test tests/Feature/SEO/BigFiveAuthorityV236Test.php: 4 tests passed with 4199 assertions."
+      },
+      "complete_ci_verify_mbti": {
+        "status": "pass",
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh exited 0. Big Five gate passed 1373 tests with 168573 assertions; Enneagram, MBTI end-to-end, personality full-32, migration, auth, payment, security, dependency, webhook, attempt, and queue gates also passed."
+      },
+      "format_syntax_and_scope": {
+        "status": "pass",
+        "evidence": "Pint passed for the focused test; PHP and Node syntax checks passed; generated and ledger JSON plus train YAML parsed; git diff --check passed; verification-only compiler/test artifacts were removed and tracked compiled-pack drift was restored."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #3084 first complete GitHub round passed 9/9: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and non-blocking SARIF upload."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -91907,7 +91942,38 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T13:14:11Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR36 from exact origin/main 014451db088e5ab1106bfdcee706ff3f30ef747b after PR35 merge and cleanup. Built a per-candidate authority matrix for all 231 routes: metadata/canonical/hreflang/robots/schema/sitemap/llms/llms-full, visible evidence, author-review-date, media, duplicate, claim, and private-boundary gates. All 231 remain withheld because review and Big Five media gates are unverified; zero public or production mutation is permitted."
+      },
+      {
+        "at": "2026-07-14T13:43:07Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Deterministic authority validation, the focused 4-test/4199-assertion suite, complete ci_verify_mbti.sh, Pint, syntax/data parsing, diff, and exact-scope cleanup passed. PR36 remains a fail-closed authority package: 0 of 231 candidates are release eligible and no public surface was mutated."
+      },
+      {
+        "at": "2026-07-14T13:43:54Z",
+        "from": "local_checks_passed",
+        "to": "local_checks_passed",
+        "note": "Recorded scoped implementation commit 20495ac24dfe0cae8600d6672577226caf48c544 before push."
+      },
+      {
+        "at": "2026-07-14T13:46:10Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Pushed the exact nine-file PR36 scope and opened PR #3084 at head 7a9b5436ca082de32308983b7b7945e8ce195608; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-14T14:02:15Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "The first complete GitHub round passed 9/9 at PR head aae0e8678cc13315a7602ee0ad4e211815132469. Recording ready_to_merge before the final check round and squash merge."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-RELEASE-GATE-37": {
     "id": "BIG5-AUTHORITY-V2-RELEASE-GATE-37",

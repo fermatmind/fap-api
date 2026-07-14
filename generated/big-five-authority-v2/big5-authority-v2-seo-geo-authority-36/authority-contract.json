@@ -1,0 +1,43 @@
+{
+  "schema_version": "big5-seo-geo-authority-contract.v1",
+  "generated_at": "2026-07-14T13:08:00Z",
+  "authority": "CMS/backend only",
+  "release_mode": "implementation_and_validation_only",
+  "rules": {
+    "per_candidate_decision_required": true,
+    "batch_auto_index_forbidden": true,
+    "metadata_canonical_hreflang_from_backend_candidate": true,
+    "schema_requires_matching_visible_content": true,
+    "json_ld_is_not_graph_or_citation_proof": true,
+    "sitemap_is_discoverability_not_authority": true,
+    "llms_is_entry_surface_not_citation_guarantee": true,
+    "llms_full_requires_visible_enriched_evidence": true,
+    "missing_review_or_media_fails_closed": true,
+    "private_routes_forbidden": true
+  },
+  "required_gates": [
+    "source_record",
+    "metadata_complete",
+    "canonical_consistent",
+    "hreflang_real_and_consistent",
+    "visible_evidence",
+    "author_reviewer_date",
+    "media_authority",
+    "duplicate_and_intent",
+    "claim_boundary",
+    "private_boundary"
+  ],
+  "mutations": {
+    "cms_writes": 0,
+    "database_writes": 0,
+    "metadata_releases": 0,
+    "robots_changes": 0,
+    "schema_releases": 0,
+    "sitemap_additions": 0,
+    "llms_additions": 0,
+    "llms_full_additions": 0,
+    "indexability_changes": 0,
+    "search_submissions": 0,
+    "deploys": 0
+  }
+}
