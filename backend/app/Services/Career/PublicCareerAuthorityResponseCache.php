@@ -354,6 +354,61 @@ final class PublicCareerAuthorityResponseCache
     }
 
     /**
+     * Rebuild only the locale-keyed Career directory read models. The
+     * source job list is computed in memory and is not written to the
+     * broader job-index, dataset, or launch-governance cache families.
+     *
+     * @param  list<string>  $publicLocales
+     * @return array<string, array{locale: string, status: string, version: ?string, member_count: int}>
+     */
+    public function warmDirectoryReadModels(array $publicLocales = ['en', 'zh-CN'], ?callable $reporter = null): array
+    {
+        $locales = array_values(array_unique(array_map(
+            fn (string $locale): string => $this->normalizePublicLocale($locale),
+            $publicLocales === [] ? ['en', 'zh-CN'] : $publicLocales,
+        )));
+        $sourceItems = CareerJobListItemResource::collection(
+            $this->careerJobListBundleBuilder->build(false)
+        )->resolve();
+
+        $summary = [];
+        foreach ($locales as $locale) {
+            $phase = 'career_directory_'.$this->cachePhaseLocale($locale);
+            $reporter?->__invoke($phase, 'starting');
+            $observedVersion = Cache::get($this->directoryActiveVersionKey($locale));
+            $this->singleFlightDirectoryRebuild(
+                $locale,
+                is_string($observedVersion) ? $observedVersion : null,
+                function () use ($locale, $sourceItems): array {
+                    $jobIndex = $this->filterJobIndexPayloadForPublicLocale([
+                        'bundle_kind' => 'career_job_index',
+                        'bundle_version' => 'career.protocol.job_index.v1',
+                        'items' => $sourceItems,
+                    ], $locale);
+                    $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
+                    $this->publishDirectoryReadModel(
+                        $locale,
+                        $this->careerDirectoryReadModelBuilder->build($items, $locale),
+                    );
+
+                    return $jobIndex;
+                },
+            );
+            $status = $this->directoryCacheStatus($locale);
+            $payload = $this->directoryReadModelPayload($locale);
+            $summary[$phase] = [
+                'locale' => $locale,
+                'status' => ($status['status'] ?? null) === 'ready' ? 'cached' : 'unavailable',
+                'version' => is_string($status['active_version'] ?? null) ? $status['active_version'] : null,
+                'member_count' => count((array) ($payload['items'] ?? [])),
+            ];
+            $reporter?->__invoke($phase, 'finished');
+        }
+
+        return $summary;
+    }
+
+    /**
      * @return array{0: array<string, mixed>, 1: array<string, mixed>}
      */
     private function refreshDatasetPayloads(): array

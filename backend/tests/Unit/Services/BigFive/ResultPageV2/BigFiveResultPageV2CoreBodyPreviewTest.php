@@ -199,6 +199,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_controlled_public_read_model_warm_command(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/WarmPublicContentReadModels.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
     {
         $allowed = [
@@ -5716,6 +5725,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isControlledPublicReadModelWarmCommandFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiPersonalityVariantSeoMetadataRefreshFile($file)) {
                 continue;
             }
@@ -7403,6 +7416,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Observers/PersonalityPublicContentAssetObserver.php',
             'backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php',
         ], true);
+    }
+
+    private function isControlledPublicReadModelWarmCommandFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/WarmPublicContentReadModels.php';
     }
 
     private function isMbtiPersonalityVariantSeoMetadataRefreshFile(string $file): bool

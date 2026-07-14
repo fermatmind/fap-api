@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 return [
     'enabled' => env('PUBLIC_CONTENT_RUNTIME_METRICS_ENABLED', true),
+    'warm_production_enabled' => env('PUBLIC_CONTENT_WARM_PRODUCTION_ENABLED', false),
     'cache_store' => env('PUBLIC_CONTENT_RUNTIME_METRICS_STORE', 'redis'),
     'minute_retention_days' => 7,
     'daily_retention_days' => 90,
