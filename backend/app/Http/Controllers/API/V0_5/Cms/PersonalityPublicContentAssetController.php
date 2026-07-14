@@ -830,6 +830,27 @@ final class PersonalityPublicContentAssetController extends Controller
                 $fenceToken,
             );
             if (is_array($cachedRead['payload'])) {
+                if ($this->isOversizedDetailPayload($cachedRead['payload'])) {
+                    $this->readModelCache->discardActivePreservingLkg(
+                        $surface,
+                        $framework,
+                        $entityType,
+                        $selector,
+                        $locale,
+                        $orgId,
+                    );
+
+                    return $this->staleResponseOrThrow(
+                        $surface,
+                        $framework,
+                        $entityType,
+                        $selector,
+                        $locale,
+                        $orgId,
+                        new LengthException('cached personality content asset detail payload exceeds budget.'),
+                    );
+                }
+
                 return $this->publicReadResponse($cachedRead['payload'], $cachedRead['state']);
             }
 
