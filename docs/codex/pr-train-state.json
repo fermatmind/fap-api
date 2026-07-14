@@ -92100,5 +92100,84 @@
         "note": "All required GitHub checks passed on head 02bda0c57ff704679e757742c274fbbb59271adb and the changed-file set remains exactly within the four locked paths."
       }
     ]
+  },
+  "MBTI-PERF-42": {
+    "id": "MBTI-PERF-42",
+    "repo": "fap-api",
+    "title": "MBTI-PERF-42: stabilize MBTI profile public read performance",
+    "base": "main",
+    "branch": "codex/mbti-perf-42-profile-read-stability",
+    "depends_on": [
+      "MBTI-VERIFY-41"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "6de4e5753a6c413f0228d38de77f00b41ad1b254",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3085",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "fap-web PR #1764 (MBTI-VERIFY-41) is merged and its merge commit 2d4ca8fa1c33892013fe11750b25fe3be38b8da3 is contained in fap-web origin/main."
+      },
+      "preflight": {
+        "status": "pass",
+        "evidence": "Started in an isolated worktree and rebased cleanly onto fap-api origin/main 014451db088e5ab1106bfdcee706ff3f30ef747b; existing cache, warmup, probe, and runtime observability primitives were audited before implementation."
+      },
+      "focused_feature_tests": {
+        "status": "pass",
+        "evidence": "PersonalityWarmPublicReadModelsCommandTest and PersonalityPublicApiTest passed together: 33 tests, 3451 assertions."
+      },
+      "cache_unit_tests": {
+        "status": "pass",
+        "evidence": "PersonalityPublicReadModelCacheTest passed: 6 tests, 17 assertions."
+      },
+      "formatting": {
+        "status": "pass",
+        "evidence": "Manifest-declared Pint --test command passed for all touched PHP files."
+      },
+      "full_mbti_verification": {
+        "status": "pass",
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh completed successfully, including the full 32-profile authority gate, security, OpenAPI, migration, dependency-security, and Big Five freeze/runtime checks. Generated Big Five compiled artifacts were restored after validation and are not part of this scope."
+      },
+      "scope_and_syntax": {
+        "status": "pass",
+        "evidence": "YAML and JSON parsing, git diff --check, and the exact seven-file MBTI-PERF-42 allowlist validation passed."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "All nine GitHub checks passed on head 6de4e5753a6c413f0228d38de77f00b41ad1b254: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep OSS, Semgrep blocking secrets, and the non-blocking SARIF upload. GitHub reported CLEAN merge state and the changed-file set remained exactly within the seven allowed paths."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "indexability_mutation_allowed": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-14T13:10:00Z",
+        "status": "in_progress",
+        "note": "Registered MBTI-PERF-42 after verifying the cross-repository MBTI-VERIFY-41 dependency and identifying heavy relation loading before fresh cache reads as the remaining Profile tail-latency gap."
+      },
+      {
+        "at": "2026-07-14T14:01:23Z",
+        "status": "local_checks_passed",
+        "note": "Focused feature tests (33 tests / 3451 assertions), cache unit tests (6 tests / 17 assertions), Pint, the complete ci_verify_mbti.sh suite, syntax/diff checks, and exact seven-file scope validation passed on the rebased origin/main 014451db088e5ab1106bfdcee706ff3f30ef747b."
+      },
+      {
+        "at": "2026-07-14T14:05:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact seven-file scope as f49279059f939c540b044248323ae641eb604f87, pushed codex/mbti-perf-42-profile-read-stability, and opened PR #3085. Waiting for required GitHub checks on the ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T14:15:50Z",
+        "status": "ready_to_merge",
+        "note": "All nine GitHub checks passed on ledger-updated head 6de4e5753a6c413f0228d38de77f00b41ad1b254, GitHub reports CLEAN merge state, and the changed-file set remains exactly within the seven allowed paths. Recorded ready-to-merge state before final ledger-only head validation."
+      }
+    ]
   }
 }

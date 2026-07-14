@@ -7,6 +7,7 @@ namespace Tests\Feature\Console;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Mockery;
 use Tests\TestCase;
 
@@ -16,26 +17,33 @@ final class PersonalityWarmPublicReadModelsCommandTest extends TestCase
     {
         $controller = Mockery::mock(PersonalityController::class);
         $controller->shouldReceive('show')
-            ->twice()
+            ->times(4)
             ->withArgs(fn (Request $request, string $type): bool => $type === 'intj-a'
                 && in_array($request->query('locale'), ['en', 'zh-CN'], true))
-            ->andReturn($this->cachedResponse(
-                ['ok' => true, 'mbti_public_projection_v1' => ['display_type' => 'INTJ-A']],
-                'miss',
-            ));
+            ->andReturn(
+                $this->cachedResponse(['ok' => true, 'mbti_public_projection_v1' => ['display_type' => 'INTJ-A']], 'miss'),
+                $this->cachedResponse(['ok' => true, 'mbti_public_projection_v1' => ['display_type' => 'INTJ-A']], 'fresh'),
+                $this->cachedResponse(['ok' => true, 'mbti_public_projection_v1' => ['display_type' => 'INTJ-A']], 'miss'),
+                $this->cachedResponse(['ok' => true, 'mbti_public_projection_v1' => ['display_type' => 'INTJ-A']], 'fresh'),
+            );
         $controller->shouldReceive('seo')
-            ->twice()
+            ->times(4)
             ->withArgs(fn (Request $request, string $type): bool => $type === 'intj-a'
                 && in_array($request->query('locale'), ['en', 'zh-CN'], true))
             ->andReturn($this->cachedResponse(['meta' => ['seo_title' => 'INTJ-A']], 'fresh'));
         $this->app->instance(PersonalityController::class, $controller);
 
-        $this->artisan('personality:warm-public-read-models', [
+        $exitCode = Artisan::call('personality:warm-public-read-models', [
             '--types' => 'INTJ-A',
             '--locales' => 'en,zh-CN',
-        ])->expectsOutputToContain('type=INTJ-A locale=en detail=200 detail_cache=miss seo=200 seo_cache=fresh')
-            ->expectsOutputToContain('type=INTJ-A locale=zh-CN detail=200 detail_cache=miss seo=200 seo_cache=fresh')
-            ->assertSuccessful();
+        ]);
+        $output = Artisan::output();
+
+        self::assertSame(0, $exitCode, $output);
+        self::assertStringContainsString('type=INTJ-A locale=en detail=200 detail_cold_cache=miss', $output);
+        self::assertStringContainsString('detail_warm_cache=fresh', $output);
+        self::assertStringContainsString('seo_warm_cache=fresh', $output);
+        self::assertStringContainsString('type=INTJ-A locale=zh-CN detail=200 detail_cold_cache=miss', $output);
     }
 
     public function test_it_fails_closed_for_invalid_types_or_locales(): void
@@ -54,10 +62,11 @@ final class PersonalityWarmPublicReadModelsCommandTest extends TestCase
     public function test_it_enforces_the_detail_payload_budget(): void
     {
         $controller = Mockery::mock(PersonalityController::class);
-        $controller->shouldReceive('show')->once()->andReturn($this->cachedResponse([
-            'payload' => str_repeat('x', 530000),
-        ], 'miss'));
-        $controller->shouldReceive('seo')->once()->andReturn($this->cachedResponse(['meta' => []], 'fresh'));
+        $controller->shouldReceive('show')->twice()->andReturn(
+            $this->cachedResponse(['payload' => str_repeat('x', 530000)], 'miss'),
+            $this->cachedResponse(['payload' => str_repeat('x', 530000)], 'fresh'),
+        );
+        $controller->shouldReceive('seo')->twice()->andReturn($this->cachedResponse(['meta' => []], 'fresh'));
         $this->app->instance(PersonalityController::class, $controller);
 
         $this->artisan('personality:warm-public-read-models', [
@@ -70,21 +79,20 @@ final class PersonalityWarmPublicReadModelsCommandTest extends TestCase
     public function test_it_rejects_stale_or_unclassified_readbacks(): void
     {
         $controller = Mockery::mock(PersonalityController::class);
-        $controller->shouldReceive('show')->twice()->andReturn(
+        $controller->shouldReceive('show')->times(4)->andReturn(
             $this->cachedResponse(['ok' => true], 'stale'),
+            $this->cachedResponse(['ok' => true], 'fresh'),
             new JsonResponse(['ok' => true]),
+            $this->cachedResponse(['ok' => true], 'fresh'),
         );
-        $controller->shouldReceive('seo')->twice()->andReturn(
-            $this->cachedResponse(['meta' => []], 'fresh'),
-            $this->cachedResponse(['meta' => []], 'fresh'),
-        );
+        $controller->shouldReceive('seo')->times(4)->andReturn($this->cachedResponse(['meta' => []], 'fresh'));
         $this->app->instance(PersonalityController::class, $controller);
 
         $this->artisan('personality:warm-public-read-models', [
             '--types' => 'INTJ-A',
             '--locales' => 'en,zh-CN',
-        ])->expectsOutputToContain('detail_cache=stale')
-            ->expectsOutputToContain('detail_cache=unknown')
+        ])->expectsOutputToContain('detail_cold_cache=stale')
+            ->expectsOutputToContain('detail_cold_cache=unknown')
             ->assertFailed();
     }
 

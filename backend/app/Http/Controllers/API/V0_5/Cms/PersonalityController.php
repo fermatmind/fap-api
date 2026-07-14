@@ -133,6 +133,7 @@ class PersonalityController extends Controller
                 $validated['org_id'],
                 $validated['scale_code'],
                 $validated['locale'],
+                false,
             );
         } catch (Throwable $throwable) {
             return $this->stalePublicReadResponseOrThrow('detail', $type, $validated, $throwable);
@@ -164,6 +165,7 @@ class PersonalityController extends Controller
         }
 
         try {
+            $this->personalityProfileService->loadPublicDetailRouteContentRelations($profile, $variant);
             $projection = $this->sanitizePublicProjection(
                 $this->personalityProfileService->buildPublicProjection($profile, $variant)
             );
@@ -241,6 +243,7 @@ class PersonalityController extends Controller
                 $validated['org_id'],
                 $validated['scale_code'],
                 $validated['locale'],
+                false,
             );
         } catch (Throwable $throwable) {
             return $this->stalePublicReadResponseOrThrow('seo', $type, $validated, $throwable);
@@ -272,6 +275,7 @@ class PersonalityController extends Controller
         }
 
         try {
+            $this->personalityProfileService->loadPublicDetailRouteContentRelations($profile, $variant);
             $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
                 $this->personalityProfileSeoService->buildMeta($profile, $variant)
             );

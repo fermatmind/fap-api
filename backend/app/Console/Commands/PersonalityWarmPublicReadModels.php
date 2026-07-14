@@ -15,6 +15,8 @@ final class PersonalityWarmPublicReadModels extends Command
 {
     public const MAX_DETAIL_BYTES = 524288;
 
+    public const MAX_WARM_READ_MS = 10000.0;
+
     protected $signature = 'personality:warm-public-read-models
         {--types= : Comma-separated MBTI base or A/T runtime type codes; defaults to all 32 variants}
         {--locales=en,zh-CN : Comma-separated public locales}';
@@ -35,22 +37,38 @@ final class PersonalityWarmPublicReadModels extends Command
         foreach ($locales as $locale) {
             foreach ($types as $type) {
                 try {
-                    $detail = $controller->show($this->request($type, $locale), strtolower($type));
-                    $seo = $controller->seo($this->request($type.'/seo', $locale), strtolower($type));
-                    $bytes = strlen((string) $detail->getContent());
-                    $detailCache = $this->cacheState($detail);
-                    $seoCache = $this->cacheState($seo);
-                    $ok = $this->isFreshReadback($detail)
-                        && $this->isFreshReadback($seo)
+                    [$detailCold, $detailColdMs] = $this->timed(
+                        fn (): JsonResponse => $controller->show($this->request($type, $locale), strtolower($type))
+                    );
+                    [$detailWarm, $detailWarmMs] = $this->timed(
+                        fn (): JsonResponse => $controller->show($this->request($type, $locale), strtolower($type))
+                    );
+                    [$seoCold, $seoColdMs] = $this->timed(
+                        fn (): JsonResponse => $controller->seo($this->request($type.'/seo', $locale), strtolower($type))
+                    );
+                    [$seoWarm, $seoWarmMs] = $this->timed(
+                        fn (): JsonResponse => $controller->seo($this->request($type.'/seo', $locale), strtolower($type))
+                    );
+                    $bytes = strlen((string) $detailWarm->getContent());
+                    $ok = $this->isWarmableReadback($detailCold)
+                        && $this->isWarmableReadback($seoCold)
+                        && $this->isWarmReadback($detailWarm, $detailWarmMs)
+                        && $this->isWarmReadback($seoWarm, $seoWarmMs)
                         && $bytes <= self::MAX_DETAIL_BYTES;
                     $this->line(sprintf(
-                        'type=%s locale=%s detail=%d detail_cache=%s seo=%d seo_cache=%s bytes=%d budget=%s',
+                        'type=%s locale=%s detail=%d detail_cold_cache=%s detail_cold_ms=%.2f detail_warm_cache=%s detail_warm_ms=%.2f seo=%d seo_cold_cache=%s seo_cold_ms=%.2f seo_warm_cache=%s seo_warm_ms=%.2f bytes=%d budget=%s',
                         $type,
                         $locale,
-                        $detail->getStatusCode(),
-                        $detailCache,
-                        $seo->getStatusCode(),
-                        $seoCache,
+                        $detailWarm->getStatusCode(),
+                        $this->cacheState($detailCold),
+                        $detailColdMs,
+                        $this->cacheState($detailWarm),
+                        $detailWarmMs,
+                        $seoWarm->getStatusCode(),
+                        $this->cacheState($seoCold),
+                        $seoColdMs,
+                        $this->cacheState($seoWarm),
+                        $seoWarmMs,
                         $bytes,
                         $ok ? 'pass' : 'fail',
                     ));
@@ -69,10 +87,26 @@ final class PersonalityWarmPublicReadModels extends Command
         return $failed ? self::FAILURE : self::SUCCESS;
     }
 
-    private function isFreshReadback(JsonResponse $response): bool
+    private function isWarmableReadback(JsonResponse $response): bool
     {
         return $response->getStatusCode() === 200
             && in_array($this->cacheState($response), ['miss', 'fresh'], true);
+    }
+
+    private function isWarmReadback(JsonResponse $response, float $durationMs): bool
+    {
+        return $response->getStatusCode() === 200
+            && $this->cacheState($response) === 'fresh'
+            && $durationMs < self::MAX_WARM_READ_MS;
+    }
+
+    /** @param callable(): JsonResponse $callback @return array{0:JsonResponse,1:float} */
+    private function timed(callable $callback): array
+    {
+        $startedAt = hrtime(true);
+        $response = $callback();
+
+        return [$response, round((hrtime(true) - $startedAt) / 1000000, 2)];
     }
 
     private function cacheState(JsonResponse $response): string

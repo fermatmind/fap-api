@@ -1743,6 +1743,64 @@ final class PersonalityPublicApiTest extends TestCase
         self::assertSame('miss', $cache->stale('seo', 'INTJ-A', 'en', 0, 'MBTI')['state']);
     }
 
+    public function test_mbti_fresh_detail_and_seo_reads_skip_heavy_content_relations(): void
+    {
+        Cache::flush();
+        $profile = $this->createProfile([
+            'type_code' => 'ISTP',
+            'slug' => 'istp',
+            'title' => 'ISTP - Virtuoso',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($profile, [
+            'runtime_type_code' => 'ISTP-A',
+            'type_name' => 'Virtuoso Assertive',
+        ]);
+        PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'overview',
+            'title' => 'Overview',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Public overview.',
+            'sort_order' => 10,
+            'is_enabled' => true,
+        ]);
+
+        $detailPath = '/api/v0.5/personality/istp-a?locale=en';
+        $seoPath = '/api/v0.5/personality/istp-a/seo?locale=en';
+        $this->getJson($detailPath)->assertOk()->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
+        $this->getJson($seoPath)->assertOk()->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
+
+        DB::flushQueryLog();
+        DB::enableQueryLog();
+        $this->getJson($detailPath)->assertOk()->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
+        $detailQueries = array_map(
+            static fn (array $query): string => strtolower((string) $query['query']),
+            DB::getQueryLog(),
+        );
+
+        DB::flushQueryLog();
+        $this->getJson($seoPath)->assertOk()->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
+        $seoQueries = array_map(
+            static fn (array $query): string => strtolower((string) $query['query']),
+            DB::getQueryLog(),
+        );
+
+        self::assertNotEmpty($detailQueries);
+        self::assertNotEmpty($seoQueries);
+        foreach (['detail' => $detailQueries, 'seo' => $seoQueries] as $surface => $queries) {
+            foreach ($queries as $query) {
+                self::assertStringNotContainsString('personality_profile_sections', $query, $surface);
+                self::assertStringNotContainsString('personality_profile_variant_sections', $query, $surface);
+                self::assertStringNotContainsString('personality_profile_seo_meta', $query, $surface);
+                self::assertStringNotContainsString('personality_profile_variant_seo_meta', $query, $surface);
+            }
+        }
+    }
+
     public function test_big_five_and_enneagram_assets_use_versioned_active_and_lkg_reads(): void
     {
         Cache::flush();
