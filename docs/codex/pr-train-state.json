@@ -91990,7 +91990,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36"
     ],
-    "status": "draft_writer_local_checks_passed_pending_commit",
+    "status": "draft_writer_committed_pending_pr",
     "commit_sha": "af99ac41406a2967b9f4778dc9da07b920bfbb7f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3086",
     "checks": {
@@ -92043,7 +92043,8 @@
         "evidence": "On 2026-07-14 the operator supplied both exact authorizations: first, a minimal fail-closed multi-surface draft import writer with preflight-only behavior until a new exact production authorization; second, the exact PR37 merge SHA/package SHA/231-create/0-update draft-only production import phrase. The authorization still forbids deploy, publish, indexability, sitemap, llms, media, cache, search submission, and any count mismatch."
       },
       "draft_writer_implementation": {
-        "status": "local_checks_passed",
+        "status": "committed_pending_pr",
+        "writer_commit_sha": "de3f235cb1508e74eb27ca29156cfe166364c959",
         "evidence": "Implemented a controlled five-surface writer for 109 Article, 114 personality_public_content_assets, 4 content_pages, 2 landing_surfaces, and 2 topic_profiles. The deterministic draft import package contains 231 assets and hashes to 80f95a73d497f28a74197b5af7dc1849af35ec9c15958ac898b29b669b997154 while remaining bound to authority package fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162. It creates only non-public/noindex primary drafts in one transaction after exact production read-only preflight, refuses all existing identities and updates, and performs no deploy/public/SEO/media/cache/search side effect. Local validation passed: builder/validator, 8 focused tests with 3764 assertions, Pint on 4 files, PHP and Node syntax, JSON/YAML parse, command discovery, git diff check, and the complete backend/scripts/ci_verify_mbti.sh gate with exit 0."
       }
     },
@@ -92104,6 +92105,12 @@
         "from": "production_import_authorized_pending_writer_merge_and_preflight",
         "to": "draft_writer_local_checks_passed_pending_commit",
         "note": "The fail-closed multi-surface draft writer and exact 231-asset import package passed focused and complete local validation. Production write execution remains false; the writer must be reviewed, merged, and confirmed deployed by read-only inspection before the separately authorized exact preflight can run."
+      },
+      {
+        "at": "2026-07-14T15:50:00Z",
+        "from": "draft_writer_local_checks_passed_pending_commit",
+        "to": "draft_writer_committed_pending_pr",
+        "note": "Committed the exact 11-file writer scope as de3f235cb1508e74eb27ca29156cfe166364c959. No production operation ran."
       }
     ]
   },
