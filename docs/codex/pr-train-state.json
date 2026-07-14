@@ -1400,13 +1400,13 @@
     "depends_on": [
       "ENNEAGRAM-EN13-NOINDEX-RUNTIME-SMOKE-01"
     ],
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "06e08dbb21c559af4bc538c84f3cd4656c5477b2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2905",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T07:45:59Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "dependency_reconciliation": {
         "status": "pass",
@@ -91190,6 +91190,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on ledger-updated head f5186a9da40dae6a2a3e18e90d46a773b1daf105, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T07:48:15Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR26 after GitHub reported PR #3069 MERGED at 2026-07-14T07:45:59Z as squash commit fda8e3833a6ed69ab63ed5bfab0a45406a6e9988. origin/main contains the merge; remote and local task branches were deleted; post-merge package validation, 4 tests / 184 assertions, Pint, clean-main, and ancestry checks passed."
       }
     ]
   },
@@ -91202,10 +91208,19 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26 PR #3069 is MERGED as fda8e3833a6ed69ab63ed5bfab0a45406a6e9988; origin/main contains the merge, remote and local branches are deleted, and PR26 post-merge validator, 4 tests / 184 assertions, Pint, clean-main, and ancestry checks passed. PR27 started from that exact clean origin/main head."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact PR21 batch 27 coverage: 5 locked relationship themes, 10 EN/zh-CN Article candidates, exact slugs/questions/audiences/tasks/keywords/sources/links, nine reader/evidence sections, full raw-review-repair-final-mapping chain, null attribution, pending_manual_review, and zero CMS/publication/indexability mutations. Every asset keeps consent and personal boundaries primary, prohibits diagnosis, motive claims, compatibility scoring, harm excuses, and relationship-outcome prediction, and excludes private report links. BigFiveAuthorityV227Test passed with 4 tests / 165 assertions. Pint --test, PHP/JSON/JavaScript/YAML syntax, git diff --check, and exact 11-file allowlist checks passed."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -91214,7 +91229,20 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T07:48:15Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR27 from exact origin/main fda8e3833a6ed69ab63ed5bfab0a45406a6e9988 after PR26 merged, cleaned, reconciled, and revalidated. Scope consumes only PR21 batch 27: communication, conflict, friendship, partners, and personal boundaries in EN and zh-CN. Consent and boundaries remain primary; compatibility, motive, diagnosis, and relationship-outcome conclusions are prohibited."
+      },
+      {
+        "at": "2026-07-14T07:52:57Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All PR27 local checks passed. The package exactly consumes PR21 batch 27, preserves 10 bilingual Article candidates and the full skeptical review chain, and enforces consent, personal-boundary, compatibility, and outcome-prediction guards. Focused tests passed with 4 tests / 165 assertions; validator, Pint, syntax, source-ledger, private-link, diff, and exact 11-file scope checks passed."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28": {
     "id": "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28",
