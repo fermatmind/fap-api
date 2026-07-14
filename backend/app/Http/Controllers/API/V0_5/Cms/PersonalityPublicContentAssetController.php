@@ -19,6 +19,8 @@ use Throwable;
 
 final class PersonalityPublicContentAssetController extends Controller
 {
+    public const MAX_DETAIL_PAYLOAD_BYTES = 524288;
+
     private const PUBLIC_READ_CACHE_HEADER = 'X-Fermat-Public-Read-Cache';
 
     public function __construct(
@@ -328,7 +330,6 @@ final class PersonalityPublicContentAssetController extends Controller
             'title' => $title,
             'summary' => $asset->summary,
             'sections' => $contentSections,
-            'content_sections' => $contentSections,
             'seo' => $seo,
             'robots' => PersonalityPublicContentAsset::normalizeRobots((string) $asset->robots),
             'canonical_path' => (string) data_get($canonical, 'path', ''),
@@ -363,23 +364,26 @@ final class PersonalityPublicContentAssetController extends Controller
         $v1 = $this->assetPayload($asset);
         $response = [
             'ok' => true,
-            'asset' => $v1,
             'personality_public_content_asset_v1' => $v1,
         ];
 
         if ((string) $asset->framework === PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE) {
-            $response['personality_public_content_asset_v2'] = $this->assetPayloadV2($asset, $v1);
+            $response['personality_public_content_asset_v2'] = $this->assetPayloadV2(
+                $asset,
+                (bool) ($v1['schema_runtime_eligible'] ?? false),
+            );
         }
 
         return $response;
     }
 
     /**
-     * @param  array<string,mixed>  $v1
      * @return array<string,mixed>
      */
-    private function assetPayloadV2(PersonalityPublicContentAsset $asset, array $v1): array
-    {
+    private function assetPayloadV2(
+        PersonalityPublicContentAsset $asset,
+        bool $schemaRuntimeEligible,
+    ): array {
         $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
         $sources = $this->canonicalSources((array) ($authority['sources'] ?? []));
         $sourceIds = array_fill_keys(array_column($sources, 'id'), true);
@@ -392,11 +396,11 @@ final class PersonalityPublicContentAssetController extends Controller
             && $claimMapping !== [];
         $schemaEligible = ($authority['schema_eligible'] ?? false) === true
             && $visibleEvidenceEligible
-            && ($v1['schema_runtime_eligible'] ?? false) === true;
+            && $schemaRuntimeEligible;
 
-        return array_replace($v1, [
+        return [
             'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
-            'compatible_v1_contract_version' => (string) ($v1['contract_version'] ?? PersonalityPublicContentAsset::CONTRACT_VERSION_V1),
+            'compatible_v1_contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
             'visible_evidence' => [
                 'sources' => $sources,
                 'claim_mapping' => $claimMapping,
@@ -415,7 +419,7 @@ final class PersonalityPublicContentAssetController extends Controller
                 is_array($asset->media_json) ? $asset->media_json : []
             ),
             'schema_eligible' => $schemaEligible,
-        ]);
+        ];
     }
 
     /**

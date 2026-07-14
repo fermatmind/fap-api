@@ -133,18 +133,19 @@ $personalitySchemas = [
     ],
     "PersonalityPublicContentAssetItemResponse" => [
         "type" => "object",
-        "required" => ["ok", "asset", "personality_public_content_asset_v1"],
+        "required" => ["ok", "personality_public_content_asset_v1"],
         "properties" => [
             "ok" => ["type" => "boolean"],
-            "asset" => $personalityAssetSchemaRef,
             "personality_public_content_asset_v1" => $personalityAssetSchemaRef,
+            "personality_public_content_asset_v2" => ["\$ref" => "#/components/schemas/PersonalityPublicContentAssetAuthorityV2"],
         ],
+        "additionalProperties" => false,
     ],
     "PersonalityPublicContentAsset" => [
         "type" => "object",
         "required" => [
             "id", "org_id", "contract_version", "framework", "entity_type", "code", "entity_key",
-            "slug", "locale", "title", "sections", "content_sections", "seo", "robots", "canonical_path",
+            "slug", "locale", "title", "sections", "seo", "robots", "canonical_path",
             "canonical", "hreflang", "faq", "media", "schema", "method_boundary", "evidence_notes",
             "internal_links", "is_public", "index_eligible", "sitemap_eligible", "llms_eligible", "launch_state",
         ],
@@ -161,7 +162,6 @@ $personalitySchemas = [
             "title" => ["type" => "string"],
             "summary" => ["type" => "string", "nullable" => true],
             "sections" => ["type" => "array", "items" => ["\$ref" => "#/components/schemas/PersonalityContentSection"]],
-            "content_sections" => ["type" => "array", "items" => ["\$ref" => "#/components/schemas/PersonalityContentSection"]],
             "seo" => ["\$ref" => "#/components/schemas/PersonalitySeo"],
             "robots" => ["type" => "string", "enum" => ["index,follow", "noindex,follow", "noindex,nofollow"]],
             "canonical_path" => ["type" => "string"],
@@ -170,6 +170,7 @@ $personalitySchemas = [
             "faq" => ["type" => "array", "items" => ["\$ref" => "#/components/schemas/PersonalityFaq"]],
             "media" => ["\$ref" => "#/components/schemas/PersonalityMedia"],
             "schema" => ["type" => "object", "additionalProperties" => true],
+            "schema_runtime_eligible" => ["type" => "boolean"],
             "method_boundary" => ["\$ref" => "#/components/schemas/PersonalityMethodBoundary"],
             "evidence_notes" => ["type" => "array", "items" => ["\$ref" => "#/components/schemas/PersonalityEvidenceNote"]],
             "internal_links" => ["type" => "array", "items" => ["\$ref" => "#/components/schemas/PersonalityInternalLink"]],
@@ -185,6 +186,54 @@ $personalitySchemas = [
             "last_reviewed_at" => ["type" => "string", "nullable" => true, "format" => "date-time"],
             "updated_at" => ["type" => "string", "nullable" => true, "format" => "date-time"],
         ],
+        "additionalProperties" => false,
+    ],
+    "PersonalityPublicContentAssetAuthorityV2" => [
+        "type" => "object",
+        "required" => [
+            "contract_version", "compatible_v1_contract_version", "visible_evidence",
+            "editorial_authority", "media_authority", "schema_eligible",
+        ],
+        "properties" => [
+            "contract_version" => ["type" => "string"],
+            "compatible_v1_contract_version" => ["type" => "string"],
+            "visible_evidence" => [
+                "type" => "object",
+                "required" => ["sources", "claim_mapping", "limitations", "eligible"],
+                "properties" => [
+                    "sources" => ["type" => "array", "items" => ["type" => "object", "additionalProperties" => true]],
+                    "claim_mapping" => ["type" => "array", "items" => ["type" => "object", "additionalProperties" => true]],
+                    "limitations" => ["type" => "array", "items" => ["type" => "string"]],
+                    "eligible" => ["type" => "boolean"],
+                ],
+                "additionalProperties" => false,
+            ],
+            "editorial_authority" => [
+                "type" => "object",
+                "required" => ["author", "reviewer", "review_state", "last_reviewed_at", "published_at", "updated_at"],
+                "properties" => [
+                    "author" => ["type" => "object", "nullable" => true, "additionalProperties" => true],
+                    "reviewer" => ["type" => "object", "nullable" => true, "additionalProperties" => true],
+                    "review_state" => ["type" => "string"],
+                    "last_reviewed_at" => ["type" => "string", "nullable" => true, "format" => "date-time"],
+                    "published_at" => ["type" => "string", "nullable" => true, "format" => "date-time"],
+                    "updated_at" => ["type" => "string", "nullable" => true, "format" => "date-time"],
+                ],
+                "additionalProperties" => false,
+            ],
+            "media_authority" => [
+                "type" => "object",
+                "required" => ["hero", "inline", "og"],
+                "properties" => [
+                    "hero" => ["type" => "object", "nullable" => true, "additionalProperties" => true],
+                    "inline" => ["type" => "array", "items" => ["type" => "object", "additionalProperties" => true]],
+                    "og" => ["type" => "object", "nullable" => true, "additionalProperties" => true],
+                ],
+                "additionalProperties" => false,
+            ],
+            "schema_eligible" => ["type" => "boolean"],
+        ],
+        "additionalProperties" => false,
     ],
     "PersonalitySeo" => [
         "type" => "object",

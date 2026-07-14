@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\V0_5;
 
+use App\Http\Controllers\API\V0_5\Cms\PersonalityPublicContentAssetController;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileRevision;
 use App\Models\PersonalityProfileSection;
@@ -1767,14 +1768,14 @@ final class PersonalityPublicApiTest extends TestCase
         $this->getJson($bigFivePath)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
-            ->assertJsonPath('asset.title', 'Openness');
+            ->assertJsonPath('personality_public_content_asset_v1.title', 'Openness');
         $this->getJson($bigFivePath)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
         $this->getJson($enneagramPath)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
-            ->assertJsonPath('asset.title', 'Enneagram Type 1');
+            ->assertJsonPath('personality_public_content_asset_v1.title', 'Enneagram Type 1');
         $this->getJson($enneagramPath)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
@@ -1791,7 +1792,7 @@ final class PersonalityPublicApiTest extends TestCase
         $this->getJson($bigFivePath)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
-            ->assertJsonPath('asset.title', 'Updated openness');
+            ->assertJsonPath('personality_public_content_asset_v1.title', 'Updated openness');
         $this->getJson($bigFiveIndex)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
@@ -1807,7 +1808,7 @@ final class PersonalityPublicApiTest extends TestCase
         $this->getJson($bigFivePath)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
-            ->assertJsonPath('asset.title', 'Updated openness');
+            ->assertJsonPath('personality_public_content_asset_v1.title', 'Updated openness');
         $this->getJson($bigFiveIndex)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
@@ -1825,7 +1826,72 @@ final class PersonalityPublicApiTest extends TestCase
         $this->getJson($enneagramPath)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh')
-            ->assertJsonPath('asset.id', (int) $enneagram->id);
+            ->assertJsonPath('personality_public_content_asset_v1.id', (int) $enneagram->id);
+    }
+
+    public function test_personality_asset_detail_uses_one_canonical_projection_within_payload_budget(): void
+    {
+        Cache::flush();
+        $largeSection = [
+            'key' => 'overview',
+            'title' => 'Overview',
+            'body_md' => str_repeat('Public reviewed section. ', 14000),
+        ];
+        $bigFive = $this->createPublicContentAsset([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_DOMAIN,
+            'entity_key' => 'openness',
+            'slug' => 'big-five/openness',
+            'content_sections_json' => [$largeSection],
+        ]);
+        $enneagram = $this->createPublicContentAsset([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'type-1',
+            'slug' => 'enneagram/type-1',
+            'content_sections_json' => [$largeSection],
+        ]);
+
+        foreach ([
+            '/api/v0.5/personality-content-assets/big_five/domain/openness?locale=en' => true,
+            '/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=en' => false,
+        ] as $path => $expectsAuthorityV2) {
+            $response = $this->getJson($path)->assertOk();
+            $payload = $response->json();
+            $v1 = $response->json('personality_public_content_asset_v1');
+
+            self::assertIsArray($payload);
+            self::assertIsArray($v1);
+            self::assertArrayNotHasKey('asset', $payload);
+            self::assertArrayHasKey('sections', $v1);
+            self::assertArrayNotHasKey('content_sections', $v1);
+            self::assertLessThanOrEqual(
+                PersonalityPublicContentAssetController::MAX_DETAIL_PAYLOAD_BYTES,
+                strlen((string) $response->getContent()),
+            );
+
+            if ($expectsAuthorityV2) {
+                $v2 = $response->json('personality_public_content_asset_v2');
+                self::assertIsArray($v2);
+                self::assertSame(
+                    PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+                    $v2['contract_version'] ?? null,
+                );
+                self::assertArrayNotHasKey('sections', $v2);
+                self::assertArrayNotHasKey('content_sections', $v2);
+                self::assertArrayNotHasKey('title', $v2);
+            } else {
+                self::assertArrayNotHasKey('personality_public_content_asset_v2', $payload);
+            }
+        }
+
+        self::assertGreaterThan(0, $bigFive->id);
+        self::assertGreaterThan(0, $enneagram->id);
+
+        $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&locale=en&per_page=100')
+            ->assertOk()
+            ->assertJsonPath('items.0.sections.0.key', 'overview')
+            ->assertJsonMissingPath('items.0.content_sections');
     }
 
     private function expectedSearchIntentSeoTitle(string $locale, string $runtimeTypeCode, string $typeName): string
