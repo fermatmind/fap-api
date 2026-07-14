@@ -91990,7 +91990,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36"
     ],
-    "status": "draft_writer_pr_open_pending_checks",
+    "status": "draft_writer_ci_fix_validated_pending_push",
     "commit_sha": "af99ac41406a2967b9f4778dc9da07b920bfbb7f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3086",
     "checks": {
@@ -92047,6 +92047,12 @@
         "writer_commit_sha": "de3f235cb1508e74eb27ca29156cfe166364c959",
         "writer_pr_number": 3088,
         "writer_pr_url": "https://github.com/fermatmind/fap-api/pull/3088",
+        "writer_github_checks": {
+          "status": "same_scope_fix_validated_pending_push",
+          "failed_check": "verify-bigfive",
+          "failure_evidence": "The first PR round had 8 passing checks and one verify-bigfive failure: the runtime freeze classifier correctly identified the newly added command/service until an explicit controlled draft-import allowlist entry was added. The Big Five suite itself reported 1379 passed, 1 skipped, and 1 failed with 172333 assertions.",
+          "fix_validation": "The exact classifier tests passed 3 tests / 5 assertions; PR37 plus writer tests passed 8 tests / 3764 assertions; Pint passed all 5 touched PHP files."
+        },
         "evidence": "Implemented a controlled five-surface writer for 109 Article, 114 personality_public_content_assets, 4 content_pages, 2 landing_surfaces, and 2 topic_profiles. The deterministic draft import package contains 231 assets and hashes to 80f95a73d497f28a74197b5af7dc1849af35ec9c15958ac898b29b669b997154 while remaining bound to authority package fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162. It creates only non-public/noindex primary drafts in one transaction after exact production read-only preflight, refuses all existing identities and updates, and performs no deploy/public/SEO/media/cache/search side effect. Local validation passed: builder/validator, 8 focused tests with 3764 assertions, Pint on 4 files, PHP and Node syntax, JSON/YAML parse, command discovery, git diff check, and the complete backend/scripts/ci_verify_mbti.sh gate with exit 0."
       }
     },
@@ -92119,6 +92125,12 @@
         "from": "draft_writer_committed_pending_pr",
         "to": "draft_writer_pr_open_pending_checks",
         "note": "Opened writer PR #3088. GitHub reports it open and mergeable; required checks are pending. No deployment or production command has run."
+      },
+      {
+        "at": "2026-07-14T15:59:53Z",
+        "from": "draft_writer_pr_open_pending_checks",
+        "to": "draft_writer_ci_fix_validated_pending_push",
+        "note": "The first GitHub round passed 8 checks but verify-bigfive failed only because the Big Five runtime freeze classifier had no explicit entry for the new controlled draft-import command/service. Added the exact two-file allowlist and positive/negative classifier coverage in the existing freeze test; focused classifier, writer, PR37, and Pint checks pass. No production operation ran."
       }
     ]
   },
