@@ -90201,8 +90201,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "5db8a4d6c453177bae75b820d83b25acb70a83d7",
+    "status": "ready_to_merge",
+    "commit_sha": "abd794609b5b0d944c67eb13dcd947633a446462",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3050",
     "checks": {
       "dependency": {
@@ -90212,6 +90212,10 @@
       "local": {
         "status": "pass",
         "evidence": "Package validator passed exact 8-page coverage and fail-closed release gates; BigFiveAuthorityV213Test passed 5 tests / 227 assertions; touched PHP Pint passed; JSON, JavaScript, PHP, YAML, and ledger syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files; PR10/PR11/PR12-to-PR13 substantive body exact-copy check found zero matches."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3050 head abd794609b5b0d944c67eb13dcd947633a446462 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
       }
     },
     "failure_reason": null,
@@ -90240,6 +90244,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Committed the exact 9-file scope as 5db8a4d6c453177bae75b820d83b25acb70a83d7, pushed the scoped branch, and opened PR #3050. Waiting for required GitHub checks on the final ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T00:51:15Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head abd794609b5b0d944c67eb13dcd947633a446462, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 9 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
       }
     ]
   },
