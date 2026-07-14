@@ -91007,9 +91007,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-TECHNICAL-TRUST-23"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "348ed324658829a48b99589d722eb41a637b9134",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3067",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -91040,6 +91040,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All PR24 local checks passed after Pint repaired one blank-line-only style issue. The package exactly consumes batch 24 and preserves 10 candidates plus the complete review chain without CMS or release mutations. Focused tests passed with 4 tests / 83 assertions; final Pint, syntax, source-ledger, diff, private-link, and exact 11-file scope checks passed."
+      },
+      {
+        "at": "2026-07-14T06:17:38Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 11-file PR24 scope as 348ed324658829a48b99589d722eb41a637b9134, pushed codex/big5-authority-v2-article-core-model-24, and opened PR #3067. Waiting for required GitHub checks on the final ledger-updated head."
       }
     ]
   },
