@@ -90885,7 +90885,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-IA-21"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "9ba00eff635bca8aaad01d1c7f546e2436992524",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3065",
     "checks": {
@@ -90896,6 +90896,10 @@
       "local": {
         "status": "pass",
         "evidence": "Package validator passed the exact PR21 3 EN + 6 zh-CN Article identity set and 2 topic hubs, eight required rewritten sections per Article, unique non-branded titles and intents, visible PR05 sources with limitations, locale-safe links, null CMS attribution fields, pending_manual_review on all 11 candidates, backend-only published+eligible hub enumeration with no hardcoded entries, zero PR24-33 slugs, and zero CMS/publication/indexability mutations. BigFiveAuthorityV222Test passed with 5 tests / 172 assertions; touched PHP Pint, PHP/JSON/JavaScript/YAML syntax, git diff --check, and exact 9-file allowlist checks passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3065 head ba275487610a196b6c5e9b113c84562b28aeca1d passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
       }
     },
     "failure_reason": null,
@@ -90924,6 +90928,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Committed the exact 9-file PR22 scope as 9ba00eff635bca8aaad01d1c7f546e2436992524, pushed codex/big5-authority-v2-article-refresh-22, and opened PR #3065. Waiting for required GitHub checks on the final ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T05:36:09Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head ba275487610a196b6c5e9b113c84562b28aeca1d, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 9 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
       }
     ]
   },
