@@ -91808,7 +91808,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-MEDIA-OG-34"
     ],
-    "status": "github_checks_failed_repaired_pending_rerun",
+    "status": "ready_to_merge",
     "commit_sha": "00e69001932f0f73c738596d471f80ebb0e17270",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3082",
     "checks": {
@@ -91841,8 +91841,8 @@
         "evidence": "Final branch diff is restricted to the PR35 focused test/docs/generated package and docs/codex/pr-train-state.json. The unnecessary runtime service/command were removed after the freeze classifier correctly rejected them; CI-generated compiled pack changes were restored. git diff --check passed."
       },
       "github_required_checks": {
-        "status": "failed_repaired_pending_rerun",
-        "evidence": "First GitHub round completed 8/9: verify-bigfive failed only because the runtime-freeze branch-diff guard detected the two newly committed backend/app validator files; 1367 other tests passed with 164374 assertions. Removed those unnecessary runtime files without expanding scope, kept the validator in validate-package.mjs, and locally revalidated the focused suite plus the complete 345-test runtime-freeze suite. Awaiting the automatic rerun after push."
+        "status": "pass",
+        "evidence": "After the scoped runtime-freeze repair, the complete second GitHub round passed 9/9: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and SARIF upload. PR #3082 is mergeable; a final complete round is required after this ready-to-merge ledger commit."
       }
     },
     "failure_reason": null,
@@ -91877,6 +91877,12 @@
         "from": "github_checks_pending",
         "to": "github_checks_failed_repaired_pending_rerun",
         "note": "First GitHub round was 8/9: only verify-bigfive failed because its runtime-freeze guard correctly classified the two PR35 backend/app validator files as runtime changes. Removed those files within manifest scope, retained the complete Node graph validator and test-scoped mutation oracle, then passed 4 focused tests / 67 assertions, all 345 runtime-freeze tests / 716 assertions, Pint, package validation, and git diff check."
+      },
+      {
+        "at": "2026-07-14T12:50:14Z",
+        "from": "github_checks_failed_repaired_pending_rerun",
+        "to": "ready_to_merge",
+        "note": "The complete post-repair GitHub round passed 9/9 and PR #3082 is mergeable at head a99c1efe662abde97fbd519b1bf67ce7a025f668. Recording ready_to_merge before the final check round and squash merge."
       }
     ]
   },
