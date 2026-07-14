@@ -90201,9 +90201,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-RANGE-EXTRAVERSION-12"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "5db8a4d6c453177bae75b820d83b25acb70a83d7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3050",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -90234,6 +90234,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All manifest local checks passed for the exact 9-file PR13 scope. The final package contains independently authored agreeableness range content, preserves raw skeptical-review failures, gives both legacy canonicals distinct reader intents, keeps all release controls closed, and has no exact substantive body collision with PR10-PR12 packages."
+      },
+      {
+        "at": "2026-07-14T00:44:49Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 9-file scope as 5db8a4d6c453177bae75b820d83b25acb70a83d7, pushed the scoped branch, and opened PR #3050. Waiting for required GitHub checks on the final ledger-updated head."
       }
     ]
   },
