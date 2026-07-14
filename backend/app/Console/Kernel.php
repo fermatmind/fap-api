@@ -196,6 +196,7 @@ use App\Console\Commands\PersonalityMbti64CmsRevisionPromote;
 use App\Console\Commands\PersonalityTdkNextBatchApprovalDraftGateCommand;
 use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessCommand;
 use App\Console\Commands\PersonalityMbtiContent15MixedImportPreflight;
+use App\Console\Commands\PersonalityMbtiFullCmsImport;
 use App\Console\Commands\PersonalityEnneagramCmsPromote;
 use App\Console\Commands\PersonalityEnneagramCmsPublishGate;
 use App\Console\Commands\PersonalityWarmPublicReadModels;
@@ -291,6 +292,7 @@ class Kernel extends ConsoleKernel
         PersonalityMbti64CmsRevisionDraft::class,
         PersonalityMbti64CmsRevisionPromote::class,
         PersonalityMbtiContent15MixedImportPreflight::class,
+        PersonalityMbtiFullCmsImport::class,
         PersonalityTdkNextBatchApprovalDraftGateCommand::class,
         PersonalityTdkRuntimePromotionSearchGateReadinessCommand::class,
         PersonalityMbti64BackendImportContract::class,
