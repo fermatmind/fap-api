@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\PublicSurface;
 
+use App\Services\Scale\ScaleDiscoverabilityPolicy;
 use App\Services\Scale\ScaleRegistry;
 
 final class PublicGatewaySurfaceService
@@ -22,6 +23,7 @@ final class PublicGatewaySurfaceService
 
     public function __construct(
         private readonly ScaleRegistry $scaleRegistry,
+        private readonly ScaleDiscoverabilityPolicy $scaleDiscoverabilityPolicy,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
     ) {}
@@ -330,7 +332,7 @@ final class PublicGatewaySurfaceService
         $visible = [];
 
         foreach ($rows as $row) {
-            if (! is_array($row) || ! (bool) ($row['is_public'] ?? true) || ! (bool) ($row['is_active'] ?? true)) {
+            if (! is_array($row) || ! $this->scaleDiscoverabilityPolicy->isPubliclyDiscoverable($row)) {
                 continue;
             }
 

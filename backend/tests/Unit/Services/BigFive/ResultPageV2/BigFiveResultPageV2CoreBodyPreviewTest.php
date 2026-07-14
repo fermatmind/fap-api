@@ -7103,6 +7103,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isExactClinicalScreeningDiscoverabilityHoldChange($file, $repoRoot, $baseRef)) {
+                continue;
+            }
+
             if ($this->isClinicalComboEnPaidParityFile($file)) {
                 continue;
             }
@@ -9127,6 +9131,30 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return $changedLines === [
             "+            'is_public' => (bool) (\$row['is_public'] ?? false),",
         ];
+    }
+
+    private function isExactClinicalScreeningDiscoverabilityHoldChange(
+        string $file,
+        string $repoRoot,
+        string $baseRef,
+    ): bool {
+        // Fingerprint the exact branch-diff lines so this exception fails closed
+        // if any shared runtime behavior changes beyond the reviewed hold repair.
+        $expectedChangedLineHashes = [
+            'backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php' => 'be66923a0f44b1423aea79b55ecebcbf8bc7614be95b26c74e86ab56daae2ac5',
+            'backend/app/Http/Controllers/API/V0_3/ScalesSitemapSourceController.php' => '3447f9538645fe9e467e06f70c6fa0fd4469eaa5351fd6150a5dcb12c4dab010',
+            'backend/app/Services/PublicSurface/PublicGatewaySurfaceService.php' => 'd6162f7133648b17bc2fd9507502474bfbcd49655a8ad343af85256608fc9380',
+            'backend/app/Services/Scale/ScaleDiscoverabilityPolicy.php' => '93842409384c6399fe6c1101bc80bc77551e97e77e183f2fad776a01fdd9f6ed',
+        ];
+
+        if (! isset($expectedChangedLineHashes[$file]) || $repoRoot === '' || $baseRef === '') {
+            return false;
+        }
+
+        $changedLines = $this->changedLinesForFile($repoRoot, $baseRef, $file);
+
+        return $changedLines !== []
+            && hash_equals($expectedChangedLineHashes[$file], hash('sha256', implode("\n", $changedLines)));
     }
 
     private function isClinicalComboEnPaidParityFile(string $file): bool

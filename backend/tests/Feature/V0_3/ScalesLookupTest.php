@@ -88,6 +88,14 @@ class ScalesLookupTest extends TestCase
             ]);
             $response->assertJsonPath('slug', $case['primary_slug']);
             $this->assertIsBool($response->json('is_public'));
+            $response->assertJsonPath(
+                'is_indexable',
+                ! in_array($case['scale_code'], ['CLINICAL_COMBO_68', 'SDS_20'], true)
+            );
+            $response->assertJsonPath(
+                'landing_surface_v1.indexability_state',
+                in_array($case['scale_code'], ['CLINICAL_COMBO_68', 'SDS_20'], true) ? 'noindex' : 'indexable'
+            );
             $this->assertIsString($response->json('pack_id_v2'));
             $this->assertIsString($response->json('dir_version_v2'));
         }
@@ -395,6 +403,14 @@ class ScalesLookupTest extends TestCase
     {
         $this->artisan('migrate', ['--force' => true]);
 
+        DB::table('scales_registry')
+            ->where('code', 'CLINICAL_COMBO_68')
+            ->update([
+                'is_public' => 1,
+                'is_active' => 1,
+                'is_indexable' => 1,
+            ]);
+
         DB::table('scales_registry')->insert([
             [
                 'code' => 'SITEMAP_A',
@@ -463,5 +479,8 @@ class ScalesLookupTest extends TestCase
         $this->assertTrue((bool) $bySlug->get('sitemap-a')['is_indexable']);
         $this->assertTrue($bySlug->has('sitemap-b'));
         $this->assertFalse((bool) $bySlug->get('sitemap-b')['is_indexable']);
+        $clinicalSlug = 'clinical-depression-anxiety-assessment-professional-edition';
+        $this->assertTrue($bySlug->has($clinicalSlug));
+        $this->assertFalse((bool) $bySlug->get($clinicalSlug)['is_indexable']);
     }
 }
