@@ -1,0 +1,343 @@
+{
+  "schema_version": "big5-technical-trust-content-pages.v1",
+  "generated_at": "2026-07-14T05:55:00Z",
+  "authority": "CMS/backend ContentPage",
+  "candidates": [
+    {
+      "asset_type": "ContentPage",
+      "authority_model": "App\\Models\\ContentPage",
+      "locale": "en",
+      "translation_group_key": "big-five-technical-trust:big-five-methodology",
+      "slug": "big-five-methodology",
+      "path": "/en/personality/big-five/methodology",
+      "canonical_path": "/en/personality/big-five/methodology",
+      "kind": "company",
+      "page_type": "methodology",
+      "title": "Big Five methodology and measurement boundaries",
+      "summary": "How the Big Five model is used for structured self-reflection, which product details are public, what remains Unknown, and what no result can conclude.",
+      "headings_json": [
+        {
+          "key": "purpose",
+          "title": "Purpose and scope"
+        },
+        {
+          "key": "model",
+          "title": "Model representation"
+        },
+        {
+          "key": "measurement",
+          "title": "Measurement and scoring public boundary"
+        },
+        {
+          "key": "unknowns",
+          "title": "Product-specific evidence status"
+        },
+        {
+          "key": "limitations",
+          "title": "Known limitations"
+        },
+        {
+          "key": "privacy",
+          "title": "Privacy boundary"
+        },
+        {
+          "key": "change_history",
+          "title": "Version and change history"
+        },
+        {
+          "key": "evidence",
+          "title": "Public evidence index"
+        }
+      ],
+      "content_md": "## Purpose and scope\n\nThis page explains the public method boundary for FermatMind Big Five content. The assessment is a structured self-report aid for self-understanding, conversation, and reversible action experiments. It is not a medical diagnosis, employment or admissions screen, legal or financial decision tool, or prediction of a person’s future.\n\n## Model representation\n\nBig Five research commonly represents personality with broad continuous domains rather than fixed identity types. Named instruments organize narrower facets differently. FermatMind content must identify the taxonomy it uses and must not imply that one facet inventory is universal.\n\n## Measurement and scoring public boundary\n\nThe product records self-report responses and returns a structured profile through backend scoring authority. This draft does not publish an item key, weights, reverse-coding map, transformation formula, norm table, or percentile formula. Those details cannot be inferred from editorial pages or another instrument.\n\n## Product-specific evidence status\n\n- product_reliability_coefficients: Unknown\n- product_validity_coefficients: Unknown\n- normative_population: Unknown\n- norm_sample_size: Unknown\n- percentile_calibration: Unknown\n- standard_error_of_measurement: Unknown\n- subgroup_equivalence: Unknown\n- predictive_accuracy: Unknown\n\n## Known limitations\n\nSelf-report responses can be affected by interpretation, current context, reference group, response style, and desired self-presentation. A result is a time-bound observation, not direct proof of ability, motive, diagnosis, compatibility, employability, leadership, or future outcomes. Retest differences can reflect measurement variation, context, response differences, or change; this page cannot identify the cause for one person.\n\n## Privacy boundary\n\nPrivate answers, attempts, report links, result lookup data, orders, and payment information must not appear in public pages, sitemap, llms surfaces, public internal links, or identifiable analytics logs. Public methodology content does not make a private result public.\n\n## Version and change history\n\nCandidate version: big5-methodology-v1, prepared 2026-07-14. No earlier public-review history is claimed here. After CMS review, the authoritative page must display only real version, reviewer, effective-date, and change records stored by CMS.\n\n## Public evidence index\n\n- [Goldberg (1990), Big-Five factor structure](https://doi.org/10.1037/0022-3514.59.6.1216) — Supports: Broad five-factor structure. Limitation: Does not validate FermatMind scoring, norms, individual results, or outcome prediction.\n- [Soto & John (2017), BFI-2 domains and facets](https://doi.org/10.1037/pspp0000096) — Supports: One named hierarchical domain-and-facet model. Limitation: Does not establish that FermatMind implements BFI-2 or inherits its psychometric results.\n- [DeYoung, Quilty, & Peterson (2007), ten aspects](https://doi.org/10.1037/0022-3514.93.5.880) — Supports: An aspects-level hierarchy between domains and narrower facets. Limitation: Supports one taxonomy; it does not make all Big Five facet systems equivalent.\n- [Soto & John (2009), ten BFI facet scales](https://doi.org/10.1016/j.jrp.2008.10.002) — Supports: Facet-scale convergence and differentiation for a named instrument. Limitation: Does not provide FermatMind product-specific reliability, validity, norms, or percentiles.\n- [Roberts, Walton, & Viechtbauer (2006), trait change meta-analysis](https://doi.org/10.1037/0033-2909.132.1.1) — Supports: Group-level mean change patterns across longitudinal studies. Limitation: Cannot predict whether, why, or how one individual result will change.\n- [IPIP NEO facets table](https://ipip.ori.org/newNEO_FacetsTable.htm) — Supports: A public example of named Big Five domain and facet labels. Limitation: Does not establish a universal taxonomy or FermatMind instrument equivalence.",
+      "evidence_source_ids": [
+        "academic.goldberg-1990-big-five-structure",
+        "academic.soto-john-2017-bfi2",
+        "academic.deyoung-quilty-peterson-2007-aspects",
+        "academic.soto-john-2009-ten-facets",
+        "academic.roberts-walton-viechtbauer-2006-change",
+        "official.ipip-neo-facets-table"
+      ],
+      "product_evidence_unknowns": {
+        "product_reliability_coefficients": "Unknown",
+        "product_validity_coefficients": "Unknown",
+        "normative_population": "Unknown",
+        "norm_sample_size": "Unknown",
+        "percentile_calibration": "Unknown",
+        "standard_error_of_measurement": "Unknown",
+        "subgroup_equivalence": "Unknown",
+        "predictive_accuracy": "Unknown"
+      },
+      "status": "draft",
+      "translation_status": "draft",
+      "review_state": "science_review",
+      "claim_gate_status": "not_reviewed",
+      "is_public": false,
+      "is_indexable": false,
+      "publish_allowed": false,
+      "schema_enabled": false,
+      "faq_schema_eligible": false,
+      "science_review_required": true,
+      "legal_review_required": false,
+      "operator_approval_required": true,
+      "owner": null,
+      "reviewer": null,
+      "published_at": null,
+      "last_reviewed_at": null,
+      "effective_at": null,
+      "cms_write_executed": false
+    },
+    {
+      "asset_type": "ContentPage",
+      "authority_model": "App\\Models\\ContentPage",
+      "locale": "en",
+      "translation_group_key": "big-five-technical-trust:big-five-source-review-policy",
+      "slug": "big-five-source-review-policy",
+      "path": "/en/personality/big-five/source-review-policy",
+      "canonical_path": "/en/personality/big-five/source-review-policy",
+      "kind": "company",
+      "page_type": "trust",
+      "title": "Big Five source, review, and correction policy",
+      "summary": "How sources are classified, mapped to claims, reviewed, corrected, and kept separate from competitor observations or unsupported product claims.",
+      "headings_json": [
+        {
+          "key": "evidence_classes",
+          "title": "Evidence classes"
+        },
+        {
+          "key": "selection",
+          "title": "Source selection"
+        },
+        {
+          "key": "mapping",
+          "title": "Claim-to-source mapping"
+        },
+        {
+          "key": "review",
+          "title": "Review and release states"
+        },
+        {
+          "key": "corrections",
+          "title": "Corrections and disagreement"
+        },
+        {
+          "key": "privacy",
+          "title": "Evidence and privacy boundary"
+        },
+        {
+          "key": "change_history",
+          "title": "Version and change history"
+        },
+        {
+          "key": "evidence",
+          "title": "Current public evidence index"
+        }
+      ],
+      "content_md": "## Evidence classes\n\nPrimary research and meta-analyses can support bounded scientific background claims. Official research resources can document a named taxonomy. Backend contracts and CMS records govern FermatMind product behavior and publication state. Competitor observations are structural benchmarks only. Editorial inference must be labeled and reviewed.\n\n## Source selection\n\nPrefer original papers for scientific claims and record a stable public URL, date, supported claim, and limitation. Secondary summaries may aid discovery but cannot be the sole support for a core scientific claim. Competitor copy, ratings, prices, endorsements, and technical claims are never FermatMind evidence.\n\n## Claim-to-source mapping\n\nEvery material scientific claim must map to a source that directly supports it. A source about a general Big Five model cannot validate FermatMind reliability, validity, norms, scoring, or individual accuracy. Unsupported product numbers remain Unknown.\n\n## Review and release states\n\nDraft preparation is not human review. Science-sensitive pages remain non-public and non-indexable until a real reviewer is recorded, the claim gate passes, publication is explicitly allowed, and operator approval is complete. This package remains pending_manual_review and makes no reviewer claim.\n\n## Corrections and disagreement\n\nWhen evidence changes or a claim is challenged, preserve the previous CMS revision, identify the affected claim and source, prepare a bounded correction, obtain the required review, and record the effective date. Do not silently rewrite review history.\n\n## Evidence and privacy boundary\n\nEvidence review uses public research and public-safe product contracts. It must not expose private answers, attempts, reports, orders, recovery data, payment data, or identifiable user records as proof.\n\n## Version and change history\n\nCandidate version: big5-source-review-policy-v1, prepared 2026-07-14. CMS review and publication history are not prefilled. The public page may display only real CMS-stored reviewers, dates, version identifiers, and correction notes.\n\n## Current public evidence index\n\n- [Goldberg (1990), Big-Five factor structure](https://doi.org/10.1037/0022-3514.59.6.1216) — Does not validate FermatMind scoring, norms, individual results, or outcome prediction.\n- [Soto & John (2017), BFI-2 domains and facets](https://doi.org/10.1037/pspp0000096) — Does not establish that FermatMind implements BFI-2 or inherits its psychometric results.\n- [DeYoung, Quilty, & Peterson (2007), ten aspects](https://doi.org/10.1037/0022-3514.93.5.880) — Supports one taxonomy; it does not make all Big Five facet systems equivalent.\n- [Soto & John (2009), ten BFI facet scales](https://doi.org/10.1016/j.jrp.2008.10.002) — Does not provide FermatMind product-specific reliability, validity, norms, or percentiles.\n- [Roberts, Walton, & Viechtbauer (2006), trait change meta-analysis](https://doi.org/10.1037/0033-2909.132.1.1) — Cannot predict whether, why, or how one individual result will change.\n- [IPIP NEO facets table](https://ipip.ori.org/newNEO_FacetsTable.htm) — Does not establish a universal taxonomy or FermatMind instrument equivalence.",
+      "evidence_source_ids": [
+        "academic.goldberg-1990-big-five-structure",
+        "academic.soto-john-2017-bfi2",
+        "academic.deyoung-quilty-peterson-2007-aspects",
+        "academic.soto-john-2009-ten-facets",
+        "academic.roberts-walton-viechtbauer-2006-change",
+        "official.ipip-neo-facets-table"
+      ],
+      "product_evidence_unknowns": {
+        "product_reliability_coefficients": "Unknown",
+        "product_validity_coefficients": "Unknown",
+        "normative_population": "Unknown",
+        "norm_sample_size": "Unknown",
+        "percentile_calibration": "Unknown",
+        "standard_error_of_measurement": "Unknown",
+        "subgroup_equivalence": "Unknown",
+        "predictive_accuracy": "Unknown"
+      },
+      "status": "draft",
+      "translation_status": "draft",
+      "review_state": "science_review",
+      "claim_gate_status": "not_reviewed",
+      "is_public": false,
+      "is_indexable": false,
+      "publish_allowed": false,
+      "schema_enabled": false,
+      "faq_schema_eligible": false,
+      "science_review_required": true,
+      "legal_review_required": false,
+      "operator_approval_required": true,
+      "owner": null,
+      "reviewer": null,
+      "published_at": null,
+      "last_reviewed_at": null,
+      "effective_at": null,
+      "cms_write_executed": false
+    },
+    {
+      "asset_type": "ContentPage",
+      "authority_model": "App\\Models\\ContentPage",
+      "locale": "zh-CN",
+      "translation_group_key": "big-five-technical-trust:big-five-methodology",
+      "slug": "big-five-methodology",
+      "path": "/zh/personality/big-five/methodology",
+      "canonical_path": "/zh/personality/big-five/methodology",
+      "kind": "company",
+      "page_type": "methodology",
+      "title": "大五人格方法说明与测量边界",
+      "summary": "说明大五模型如何用于结构化自我反思、哪些产品细节已公开、哪些仍为 Unknown，以及结果不能得出什么结论。",
+      "headings_json": [
+        {
+          "key": "purpose",
+          "title": "目的与范围"
+        },
+        {
+          "key": "model",
+          "title": "模型表达"
+        },
+        {
+          "key": "measurement",
+          "title": "测量与计分公开边界"
+        },
+        {
+          "key": "unknowns",
+          "title": "产品特定证据状态"
+        },
+        {
+          "key": "limitations",
+          "title": "已知局限"
+        },
+        {
+          "key": "privacy",
+          "title": "隐私边界"
+        },
+        {
+          "key": "change_history",
+          "title": "版本与变更历史"
+        },
+        {
+          "key": "evidence",
+          "title": "公开证据索引"
+        }
+      ],
+      "content_md": "## 目的与范围\n\n本页说明费马测试大五人格内容的公开方法边界。测评是结构化自陈工具，用于自我理解、沟通与可逆行动实验；不是医疗诊断、招聘或录取筛选、法律或金融决策工具，也不预测个人未来。\n\n## 模型表达\n\n大五研究通常用宽泛的连续维度表达人格，而不是固定身份类型。不同命名工具组织较窄侧面的方式并不相同。费马测试内容必须说明采用的分类体系，不能暗示某一套侧面表是唯一通用标准。\n\n## 测量与计分公开边界\n\n产品记录自陈作答，并由后端评分权威返回结构化画像。本草稿不公开题目答案键、权重、反向计分表、转换公式、常模表或百分位公式，也不能从编辑页面或其他量表推断这些细节。\n\n## 产品特定证据状态\n\n- product_reliability_coefficients: Unknown\n- product_validity_coefficients: Unknown\n- normative_population: Unknown\n- norm_sample_size: Unknown\n- percentile_calibration: Unknown\n- standard_error_of_measurement: Unknown\n- subgroup_equivalence: Unknown\n- predictive_accuracy: Unknown\n\n## 已知局限\n\n自陈作答可能受到题目理解、当前情境、参照群体、回应风格和理想自我呈现影响。结果是有时间边界的观察，不是能力、动机、诊断、匹配度、就业能力、领导力或未来结果的直接证明。复测差异可能来自测量波动、情境、回应差异或变化；本页不能为某个个人判定原因。\n\n## 隐私边界\n\n私人答案、attempt、report 链接、结果找回数据、订单和支付信息不得进入公开页面、sitemap、llms、公开内链或可识别分析日志。公开方法内容不会把私人结果变成公开信息。\n\n## 版本与变更历史\n\n候选版本：big5-methodology-v1，准备日期 2026-07-14。本草稿不声称存在更早的公开复审历史。CMS 复审后，权威页面只能展示 CMS 中真实的版本、reviewer、生效日期和变更记录。\n\n## 公开证据索引\n\n- [Goldberg（1990）：大五因子结构](https://doi.org/10.1037/0022-3514.59.6.1216) — 支持：Broad five-factor structure. 限制：Does not validate FermatMind scoring, norms, individual results, or outcome prediction.\n- [Soto 与 John（2017）：BFI-2 维度与侧面](https://doi.org/10.1037/pspp0000096) — 支持：One named hierarchical domain-and-facet model. 限制：Does not establish that FermatMind implements BFI-2 or inherits its psychometric results.\n- [DeYoung、Quilty 与 Peterson（2007）：十个方面](https://doi.org/10.1037/0022-3514.93.5.880) — 支持：An aspects-level hierarchy between domains and narrower facets. 限制：Supports one taxonomy; it does not make all Big Five facet systems equivalent.\n- [Soto 与 John（2009）：十个 BFI 侧面量表](https://doi.org/10.1016/j.jrp.2008.10.002) — 支持：Facet-scale convergence and differentiation for a named instrument. 限制：Does not provide FermatMind product-specific reliability, validity, norms, or percentiles.\n- [Roberts、Walton 与 Viechtbauer（2006）：特质变化元分析](https://doi.org/10.1037/0033-2909.132.1.1) — 支持：Group-level mean change patterns across longitudinal studies. 限制：Cannot predict whether, why, or how one individual result will change.\n- [IPIP NEO 侧面表](https://ipip.ori.org/newNEO_FacetsTable.htm) — 支持：A public example of named Big Five domain and facet labels. 限制：Does not establish a universal taxonomy or FermatMind instrument equivalence.",
+      "evidence_source_ids": [
+        "academic.goldberg-1990-big-five-structure",
+        "academic.soto-john-2017-bfi2",
+        "academic.deyoung-quilty-peterson-2007-aspects",
+        "academic.soto-john-2009-ten-facets",
+        "academic.roberts-walton-viechtbauer-2006-change",
+        "official.ipip-neo-facets-table"
+      ],
+      "product_evidence_unknowns": {
+        "product_reliability_coefficients": "Unknown",
+        "product_validity_coefficients": "Unknown",
+        "normative_population": "Unknown",
+        "norm_sample_size": "Unknown",
+        "percentile_calibration": "Unknown",
+        "standard_error_of_measurement": "Unknown",
+        "subgroup_equivalence": "Unknown",
+        "predictive_accuracy": "Unknown"
+      },
+      "status": "draft",
+      "translation_status": "draft",
+      "review_state": "science_review",
+      "claim_gate_status": "not_reviewed",
+      "is_public": false,
+      "is_indexable": false,
+      "publish_allowed": false,
+      "schema_enabled": false,
+      "faq_schema_eligible": false,
+      "science_review_required": true,
+      "legal_review_required": false,
+      "operator_approval_required": true,
+      "owner": null,
+      "reviewer": null,
+      "published_at": null,
+      "last_reviewed_at": null,
+      "effective_at": null,
+      "cms_write_executed": false
+    },
+    {
+      "asset_type": "ContentPage",
+      "authority_model": "App\\Models\\ContentPage",
+      "locale": "zh-CN",
+      "translation_group_key": "big-five-technical-trust:big-five-source-review-policy",
+      "slug": "big-five-source-review-policy",
+      "path": "/zh/personality/big-five/source-review-policy",
+      "canonical_path": "/zh/personality/big-five/source-review-policy",
+      "kind": "company",
+      "page_type": "trust",
+      "title": "大五人格来源、复审与纠错政策",
+      "summary": "说明来源如何分类、映射主张、接受复审与纠错，并与竞品观察或无证据产品主张保持分离。",
+      "headings_json": [
+        {
+          "key": "evidence_classes",
+          "title": "证据类别"
+        },
+        {
+          "key": "selection",
+          "title": "来源选择"
+        },
+        {
+          "key": "mapping",
+          "title": "主张到来源映射"
+        },
+        {
+          "key": "review",
+          "title": "复审与发布状态"
+        },
+        {
+          "key": "corrections",
+          "title": "纠错与分歧"
+        },
+        {
+          "key": "privacy",
+          "title": "证据与隐私边界"
+        },
+        {
+          "key": "change_history",
+          "title": "版本与变更历史"
+        },
+        {
+          "key": "evidence",
+          "title": "当前公开证据索引"
+        }
+      ],
+      "content_md": "## 证据类别\n\n原始研究和元分析可支持有边界的科学背景主张；官方研究资源可说明一个明确命名的分类体系；后端 contract 与 CMS 记录决定费马测试产品行为和发布状态；竞品观察只用于结构基准；编辑推断必须标注并接受复审。\n\n## 来源选择\n\n科学主张优先使用原始论文，并记录稳定公开链接、日期、支持的主张与限制。二手摘要可用于发现来源，但不能单独支持核心科学主张。竞品文案、评分、价格、背书与技术主张永远不是费马测试证据。\n\n## 主张到来源映射\n\n每个重要科学主张都必须映射到直接支持它的来源。关于一般大五模型的来源，不能验证费马测试的信度、效度、常模、计分或个人准确性。没有证据的产品数值保持 Unknown。\n\n## 复审与发布状态\n\n草稿准备不等于人工复审。科学敏感页面在真实 reviewer 已记录、claim gate 通过、明确允许发布且 operator approval 完成前，必须保持非公开和不可索引。本包保持 pending_manual_review，不声称已有 reviewer。\n\n## 纠错与分歧\n\n证据变化或主张受到质疑时，应保留上一版 CMS revision，标明受影响的主张与来源，准备有边界的修正，完成所需复审，并记录生效日期。不得静默改写复审历史。\n\n## 证据与隐私边界\n\n证据复审使用公开研究与公开安全的产品 contract，不得把私人答案、attempt、report、订单、找回数据、支付数据或可识别用户记录当作证明。\n\n## 版本与变更历史\n\n候选版本：big5-source-review-policy-v1，准备日期 2026-07-14。本包不预填 CMS 复审或发布历史。公开页只能展示 CMS 中真实存储的 reviewer、日期、版本标识与纠错说明。\n\n## 当前公开证据索引\n\n- [Goldberg（1990）：大五因子结构](https://doi.org/10.1037/0022-3514.59.6.1216) — Does not validate FermatMind scoring, norms, individual results, or outcome prediction.\n- [Soto 与 John（2017）：BFI-2 维度与侧面](https://doi.org/10.1037/pspp0000096) — Does not establish that FermatMind implements BFI-2 or inherits its psychometric results.\n- [DeYoung、Quilty 与 Peterson（2007）：十个方面](https://doi.org/10.1037/0022-3514.93.5.880) — Supports one taxonomy; it does not make all Big Five facet systems equivalent.\n- [Soto 与 John（2009）：十个 BFI 侧面量表](https://doi.org/10.1016/j.jrp.2008.10.002) — Does not provide FermatMind product-specific reliability, validity, norms, or percentiles.\n- [Roberts、Walton 与 Viechtbauer（2006）：特质变化元分析](https://doi.org/10.1037/0033-2909.132.1.1) — Cannot predict whether, why, or how one individual result will change.\n- [IPIP NEO 侧面表](https://ipip.ori.org/newNEO_FacetsTable.htm) — Does not establish a universal taxonomy or FermatMind instrument equivalence.",
+      "evidence_source_ids": [
+        "academic.goldberg-1990-big-five-structure",
+        "academic.soto-john-2017-bfi2",
+        "academic.deyoung-quilty-peterson-2007-aspects",
+        "academic.soto-john-2009-ten-facets",
+        "academic.roberts-walton-viechtbauer-2006-change",
+        "official.ipip-neo-facets-table"
+      ],
+      "product_evidence_unknowns": {
+        "product_reliability_coefficients": "Unknown",
+        "product_validity_coefficients": "Unknown",
+        "normative_population": "Unknown",
+        "norm_sample_size": "Unknown",
+        "percentile_calibration": "Unknown",
+        "standard_error_of_measurement": "Unknown",
+        "subgroup_equivalence": "Unknown",
+        "predictive_accuracy": "Unknown"
+      },
+      "status": "draft",
+      "translation_status": "draft",
+      "review_state": "science_review",
+      "claim_gate_status": "not_reviewed",
+      "is_public": false,
+      "is_indexable": false,
+      "publish_allowed": false,
+      "schema_enabled": false,
+      "faq_schema_eligible": false,
+      "science_review_required": true,
+      "legal_review_required": false,
+      "operator_approval_required": true,
+      "owner": null,
+      "reviewer": null,
+      "published_at": null,
+      "last_reviewed_at": null,
+      "effective_at": null,
+      "cms_write_executed": false
+    }
+  ]
+}
