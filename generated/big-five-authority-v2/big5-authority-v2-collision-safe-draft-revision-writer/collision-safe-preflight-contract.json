@@ -1,0 +1,70 @@
+{
+  "schema_version": "big5-authority-v2-collision-safe-preflight-contract.v1",
+  "generated_at": "2026-07-15T00:00:00Z",
+  "mode": "draft_revision_no_public_runtime_mutation",
+  "pr37_merge_sha": "af99ac41406a2967b9f4778dc9da07b920bfbb7f",
+  "authority_package_sha256": "fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162",
+  "draft_import_package_sha256": "80f95a73d497f28a74197b5af7dc1849af35ec9c15958ac898b29b669b997154",
+  "asset_count": 231,
+  "primary_create_count": 106,
+  "existing_revision_count": 125,
+  "revision_create_count": 229,
+  "new_working_revision_count": 104,
+  "existing_pointer_update_count": 125,
+  "existing_primary_public_content_overwrite_count": 0,
+  "surface_actions": {
+    "CMS Article": {
+      "primary_create": 100,
+      "existing_revision": 9,
+      "revision_create": 109
+    },
+    "CMS content_pages": {
+      "primary_create": 4,
+      "existing_revision": 0,
+      "revision_create": 4
+    },
+    "CMS landing_surfaces/page_blocks": {
+      "primary_create": 2,
+      "existing_revision": 0,
+      "revision_create": 0
+    },
+    "CMS personality_public_content_assets": {
+      "primary_create": 0,
+      "existing_revision": 114,
+      "revision_create": 114
+    },
+    "CMS topic_profiles": {
+      "primary_create": 0,
+      "existing_revision": 2,
+      "revision_create": 2
+    }
+  },
+  "required_invariants": {
+    "all_125_existing_records_are_published_public_before_import": true,
+    "existing_article_working_revision_equals_published_revision": true,
+    "existing_personality_and_topic_working_revision_is_null": true,
+    "existing_public_runtime_fingerprint_unchanged": true,
+    "new_primary_records_fail_closed": true,
+    "new_revision_managed_records_have_working_revision": true,
+    "public_release_count": 0,
+    "indexability_change_count": 0,
+    "sitemap_change_count": 0,
+    "llms_change_count": 0,
+    "media_write_count": 0,
+    "cache_invalidation_count": 0,
+    "search_submission_count": 0
+  },
+  "abort_boundaries": [
+    "any package, contract, authorization, deploy SHA, or preflight fingerprint mismatch",
+    "primary create count differs from 106",
+    "existing revision count differs from 125",
+    "working/draft revision create count differs from 229",
+    "any existing identity is not published/public",
+    "any existing Article already has an isolated working revision or lacks a published revision",
+    "any existing personality or topic identity already has a working revision",
+    "any authority revision for this package and asset identity already exists",
+    "any existing public-runtime fingerprint changes before, during, or after write",
+    "any new primary record is not fail-closed draft/noindex",
+    "any transaction or post-write readback mismatch"
+  ]
+}

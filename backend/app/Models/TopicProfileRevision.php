@@ -19,7 +19,13 @@ class TopicProfileRevision extends Model
     protected $fillable = [
         'profile_id',
         'revision_no',
+        'authority_asset_key',
+        'source_package',
+        'source_hash',
+        'authority_package_sha256',
+        'workflow_state',
         'snapshot_json',
+        'public_runtime_fingerprint_before',
         'note',
         'created_by_admin_user_id',
         'created_at',
