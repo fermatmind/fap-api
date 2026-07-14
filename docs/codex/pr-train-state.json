@@ -91808,9 +91808,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-MEDIA-OG-34"
     ],
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "commit_sha": "00e69001932f0f73c738596d471f80ebb0e17270",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3082",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -91839,6 +91839,10 @@
       "scope": {
         "status": "pass",
         "evidence": "Changed files are restricted to PR35 LinkGraph service, PR35 command/test/docs/generated package, and docs/codex/pr-train-state.json; CI-generated compiled pack changes were restored before staging. git diff --check passed."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #3082 opened from codex/big5-authority-v2-link-graph-35 after all required local checks passed; awaiting the complete required GitHub check set."
       }
     },
     "failure_reason": null,
@@ -91861,6 +91865,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "PR35 deterministic graph validation, 4 focused tests / 71 assertions, Pint, syntax and data parsing, exact scope validation, git diff check, and the required full ci_verify_mbti.sh suite all passed. No release, CMS, metadata, sitemap, llms, schema, robots, or indexability write was executed."
+      },
+      {
+        "at": "2026-07-14T12:23:53Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Pushed verified commits through 4b1dd4ee626e742fec50b17ff8306b7d1597f64f and opened PR #3082; waiting for the complete required GitHub check set."
       }
     ]
   },
