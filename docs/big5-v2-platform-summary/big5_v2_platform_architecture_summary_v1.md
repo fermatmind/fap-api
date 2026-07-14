@@ -5,6 +5,16 @@ Source HEAD: `0814af350c5119994ff65fe7e965e68bc3decb35`
 Mode: scan + summarize  
 Scope: documentation only, no repo changes
 
+> 2026-07-15 authority clarification: this document primarily describes the
+> private Big Five result/report selector and rollout platform. Public Big Five
+> editorial surfaces (personality, Article, Topic, test landing, methodology)
+> are separately backend/CMS authoritative and must resolve published public
+> projections rather than working/draft revisions. Career integrations may use
+> published Big Five content only as supplementary work-style explanation; they
+> must not consume private result traces or act as deterministic career
+> matchers. See
+> `big5_authority_v2_career_integration_retrospective_2026-07-15.md`.
+
 ## 1. Executive Summary
 
 Big Five V2 has completed its platform foundation. The current system includes:
@@ -25,7 +35,15 @@ Two strategic constraints remain explicit:
 - `public percentile display = NO-GO`
 - `production rollout = governance-ready but controlled`
 
-The runtime source of truth is Git-backed release snapshots, validated through import gates and runtime gates. CMS is not a runtime owner. Dynamic norms are internally usable for snapshots, recomputation, segmented aggregation, drift monitoring, and internal percentile resolution, but public percentile claims remain blocked pending statistical trust and governance approval.
+The result/report runtime source of truth is Git-backed release snapshots,
+validated through import gates and runtime gates. CMS is not the owner of that
+private result payload. This statement does not remove CMS authority from
+public personality, Article, Topic, test landing, methodology, SEO, or Career
+content surfaces. Those surfaces must consume the backend published projection,
+never an isolated working/draft revision. Dynamic norms are internally usable
+for snapshots, recomputation, segmented aggregation, drift monitoring, and
+internal percentile resolution, but public percentile claims remain blocked
+pending statistical trust and governance approval.
 
 ## 2. System Evolution Timeline
 
@@ -265,7 +283,11 @@ Public percentile display remains NO-GO because representative sample review, li
 
 ## 10. CMS / Editorial Governance
 
-CMS/editorial governance is complete as a governance layer, not as runtime ownership.
+For the result/report payload described by this document, CMS/editorial
+governance is a workflow layer rather than runtime ownership. For public
+editorial surfaces, CMS/public API remains the publication-state and content
+authority; `published_revision_id`/the public projection must be selected, and
+`working_revision_id` must not leak into public or Career consumers.
 
 Implemented CMS governance:
 
