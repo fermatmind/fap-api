@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityController;
 use App\Models\PersonalityProfile;
 use Illuminate\Console\Command;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -37,15 +38,19 @@ final class PersonalityWarmPublicReadModels extends Command
                     $detail = $controller->show($this->request($type, $locale), strtolower($type));
                     $seo = $controller->seo($this->request($type.'/seo', $locale), strtolower($type));
                     $bytes = strlen((string) $detail->getContent());
-                    $ok = $detail->getStatusCode() === 200
-                        && $seo->getStatusCode() === 200
+                    $detailCache = $this->cacheState($detail);
+                    $seoCache = $this->cacheState($seo);
+                    $ok = $this->isFreshReadback($detail)
+                        && $this->isFreshReadback($seo)
                         && $bytes <= self::MAX_DETAIL_BYTES;
                     $this->line(sprintf(
-                        'type=%s locale=%s detail=%d seo=%d bytes=%d budget=%s',
+                        'type=%s locale=%s detail=%d detail_cache=%s seo=%d seo_cache=%s bytes=%d budget=%s',
                         $type,
                         $locale,
                         $detail->getStatusCode(),
+                        $detailCache,
                         $seo->getStatusCode(),
+                        $seoCache,
                         $bytes,
                         $ok ? 'pass' : 'fail',
                     ));
@@ -62,6 +67,17 @@ final class PersonalityWarmPublicReadModels extends Command
             : 'Personality public read-model warmup completed successfully.');
 
         return $failed ? self::FAILURE : self::SUCCESS;
+    }
+
+    private function isFreshReadback(JsonResponse $response): bool
+    {
+        return $response->getStatusCode() === 200
+            && in_array($this->cacheState($response), ['miss', 'fresh'], true);
+    }
+
+    private function cacheState(JsonResponse $response): string
+    {
+        return (string) $response->headers->get('X-Fermat-Public-Read-Cache', 'unknown');
     }
 
     private function request(string $path, string $locale): Request
