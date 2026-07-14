@@ -89275,9 +89275,9 @@
     "depends_on": [
       "MBTI-CMS-APPROVAL-39"
     ],
-    "status": "in_progress",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "2a32db87c3a6d3b6e5f494c4bb231d73b9d02b4d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3049",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -89300,6 +89300,11 @@
         "status": "pass",
         "evidence": "PHP syntax and scoped Pint passed. The new importer contract passed (4 tests, 74 assertions); the existing CONTENT-15 importer regression passed (2 tests, 60 assertions); sitemap regression passed (11 tests, 412 assertions); and the runtime-freeze classifier regression passed. ci_verify_mbti completed its strict MBTI smoke, MVP/self-check, and queue-probe gates. The exact CMS-39 source package dry-run rejected all 43 local targets because this isolated developer database does not contain their approved published pre-state; the command reported cms_write_attempted=false and writes_committed=false, proving fail-closed behavior. YAML/JSON, git diff --check, and exact seven-file scope validation passed."
       }
+      ,
+      "github_required_checks": {
+        "status": "in_progress",
+        "evidence": "PR #3049 is open from the rebased CMS-40 branch. Required GitHub checks are pending; no production import or deployment has been requested or performed."
+      }
     },
     "scope_validation": {
       "allowed_paths_only": true,
@@ -89319,6 +89324,12 @@
         "from": "in_progress",
         "to": "local_validation_passed",
         "note": "All CMS-40 local validations and the exact changed-file scope check passed. The source package was intentionally dry-run only; the local database pre-state mismatch caused a safe 43-record refusal with no write attempt. No Career, LLMS/sitemap, MBTI64, or checkout owner-scope change was made."
+      },
+      {
+        "at": "2026-07-14T08:41:00+08:00",
+        "from": "local_validation_passed",
+        "to": "pr_open",
+        "note": "Opened PR #3049 from the rebased CMS-40 branch. Awaiting required checks; the current scope remains importer code and dry-run verification only."
       }
     ]
   },
