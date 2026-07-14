@@ -1,0 +1,20 @@
+{
+  "schema_version": "big5-authority-v2-local-test-db-dry-run.v1",
+  "generated_at": "2026-07-14T14:16:22Z",
+  "package_sha256": "fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162",
+  "database": "sqlite::memory: empty authority namespace fixture",
+  "default_mode": "dry_run",
+  "measured_window_excludes_fixture_schema_setup": true,
+  "candidate_count": 231,
+  "planned_create_count": 231,
+  "planned_update_count": 0,
+  "planned_noop_count": 0,
+  "executed_insert_count": 0,
+  "executed_update_count": 0,
+  "executed_delete_count": 0,
+  "measured_database_write_delta": 0,
+  "production_writes": 0,
+  "cms_writes": 0,
+  "indexability_writes": 0,
+  "command": "php generated/big-five-authority-v2/big5-authority-v2-release-gate-37/local-test-db-dry-run.php"
+}

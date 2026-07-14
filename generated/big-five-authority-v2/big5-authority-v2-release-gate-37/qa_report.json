@@ -1,0 +1,26 @@
+{
+  "schema_version": "big5-authority-v2-release-gate-qa.v1",
+  "generated_at": "2026-07-14T14:16:22Z",
+  "status": "PASS_DRY_RUN_FAIL_CLOSED_NO_GO",
+  "package_sha256": "fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162",
+  "checks": {
+    "exact_asset_count_231": true,
+    "exact_unique_routes": true,
+    "exact_unique_asset_ids": true,
+    "schema_validation": true,
+    "source_record_validation": true,
+    "source_ledger_validation": true,
+    "evidence_validation_recorded_per_page": true,
+    "duplicate_validation": true,
+    "bilingual_identity_validation": true,
+    "private_boundary_validation": true,
+    "link_target_validation": true,
+    "editorial_automation_passed_but_human_publish_not_inferred": true,
+    "deterministic_input_digest": true,
+    "local_test_db_default_zero_writes": true,
+    "every_page_has_release_decision": true,
+    "no_page_publish_or_index_release": true,
+    "no_production_mutation": true,
+    "authorization_packet_complete_but_not_executable": true
+  }
+}
