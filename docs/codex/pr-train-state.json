@@ -91366,7 +91366,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "70024c4e684ca4c0dc899cb7204e0b1d0c3683dd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3074",
     "checks": {
@@ -91377,6 +91377,10 @@
       "local": {
         "status": "pass",
         "evidence": "Package validator passed exact PR21 batch 29 coverage: 5 locked growth-and-change themes, 10 EN/zh-CN Article candidates, exact slugs/questions/audiences/tasks/keywords/sources/links, nine reader/evidence sections, full raw-review-repair-final-mapping chain, null attribution, pending_manual_review, and zero CMS/publication/indexability mutations. Every asset keeps group-level longitudinal evidence separate from individual prediction and causality, uses reversible behavior-and-context experiments, prohibits identity destiny, guaranteed change, one-event causal stories, score optimization, and high-stakes advice, and leaves all FermatMind psychometrics and meaningful-change thresholds Unknown. BigFiveAuthorityV229Test passed with 4 tests / 166 assertions. Pint --test, PHP/JSON/JavaScript/YAML syntax, source mapping, private-link, git diff --check, and exact 11-file allowlist checks passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "All 9 GitHub checks passed on ledger-updated head 17b5591f8a18bcb8a64a9d217e0b9db3edacaebb: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload. GitHub reported CLEAN merge state and the changed-file set remained exactly the 11 allowed files."
       }
     },
     "failure_reason": null,
@@ -91405,6 +91409,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Committed the exact 11-file PR29 scope as 70024c4e684ca4c0dc899cb7204e0b1d0c3683dd, pushed codex/big5-authority-v2-article-growth-change-29, and opened PR #3074. Waiting for required GitHub checks on the ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T09:25:26Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on ledger-updated head 17b5591f8a18bcb8a64a9d217e0b9db3edacaebb, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
       }
     ]
   },
