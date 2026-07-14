@@ -581,6 +581,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_big_five_authority_v2_draft_import_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV2DraftImport.php',
+            'backend/app/Services/BigFive/AuthorityV2/ReleaseGate/BigFiveAuthorityV2DraftImportWriter.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_big_five_cms_preview_render_qa_files(): void
     {
         $changed = [
@@ -5826,6 +5836,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveAuthorityV2DraftImportFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsPreviewRenderQaFile($file)) {
                 continue;
             }
@@ -7588,6 +7602,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveCmsStagingWriteImport.php',
             'backend/app/Services/Cms/BigFiveCmsImportDraftStagingWriter.php',
+        ], true);
+    }
+
+    private function isBigFiveAuthorityV2DraftImportFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV2DraftImport.php',
+            'backend/app/Services/BigFive/AuthorityV2/ReleaseGate/BigFiveAuthorityV2DraftImportWriter.php',
         ], true);
     }
 

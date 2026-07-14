@@ -91,23 +91,23 @@ final class BigFiveAuthorityV237Test extends TestCase
         $this->assertFalse($measurement['production_connection_used']);
     }
 
-    public function test_authorization_packet_is_complete_but_currently_not_executable(): void
+    public function test_authorization_packet_is_reconciled_and_executable_for_draft_only_writer(): void
     {
         $packet = $this->readJson('production-authorization-packet.json');
         $qa = $this->readJson('qa_report.json');
 
-        $this->assertSame('NO_GO_PENDING_ELIGIBILITY_REPAIR_AND_EXACT_PRODUCTION_AUTHORIZATION', $packet['status']);
-        $this->assertNull($packet['pr37_merge_sha']);
+        $this->assertSame('GO_DRAFT_ONLY_PRODUCTION_IMPORT_AUTHORIZED_PENDING_EXACT_PREFLIGHT', $packet['status']);
+        $this->assertSame('af99ac41406a2967b9f4778dc9da07b920bfbb7f', $packet['pr37_merge_sha']);
         $this->assertSame(231, $packet['asset_count']);
         $this->assertSame(231, $packet['local_test_empty_baseline_counts']['create']);
         $this->assertSame(0, $packet['local_test_empty_baseline_counts']['update']);
         $this->assertSame(231, $packet['canonical_count']);
         $this->assertSame(10, $packet['alias_301_count']);
-        $this->assertNull($packet['write_workflow']['production_command']);
-        $this->assertFalse($packet['approval_phrase_currently_executable']);
+        $this->assertStringContainsString('personality:big-five-authority-v2-draft-import', $packet['write_workflow']['production_command']);
+        $this->assertTrue($packet['approval_phrase_currently_executable']);
         $this->assertStringContainsString($packet['package_sha256'], $packet['exact_approval_phrase_template']);
         $this->assertNotEmpty($packet['abort_boundaries']);
-        $this->assertSame('PASS_DRY_RUN_FAIL_CLOSED_NO_GO', $qa['status']);
+        $this->assertSame('PASS_DRAFT_ONLY_WRITER_AUTHORIZED_NO_PUBLIC_RELEASE', $qa['status']);
         foreach ($qa['checks'] as $check) {
             $this->assertTrue($check);
         }

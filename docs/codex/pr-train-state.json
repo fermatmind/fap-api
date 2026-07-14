@@ -91990,7 +91990,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36"
     ],
-    "status": "pending_exact_production_authorization",
+    "status": "draft_writer_ready_to_merge",
     "commit_sha": "af99ac41406a2967b9f4778dc9da07b920bfbb7f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3086",
     "checks": {
@@ -92039,8 +92039,22 @@
         "evidence": "Post-merge Node validation passed the exact 231-asset/72-input package SHA256 fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162 with zero writes and NO_GO; focused Laravel validation passed 5 tests / 3736 assertions; Pint passed both touched PHP files."
       },
       "production_authorization_gate": {
-        "status": "pending",
-        "evidence": "The merged PR37 packet is NO_GO_PENDING_ELIGIBILITY_REPAIR_AND_EXACT_PRODUCTION_AUTHORIZATION. It contains 231 withheld assets, plans 231 creates and 0 updates only against an empty local test namespace, executed zero writes, exposes no production command, and marks its approval phrase currently non-executable. No deploy, migration, CMS/media, cache, indexability, sitemap, llms, or search mutation is authorized. PR38 must not start until a separately authorized production workflow completes and produces real readback evidence."
+        "status": "pass",
+        "evidence": "On 2026-07-14 the operator supplied both exact authorizations: first, a minimal fail-closed multi-surface draft import writer with preflight-only behavior until a new exact production authorization; second, the exact PR37 merge SHA/package SHA/231-create/0-update draft-only production import phrase. The authorization still forbids deploy, publish, indexability, sitemap, llms, media, cache, search submission, and any count mismatch."
+      },
+      "draft_writer_implementation": {
+        "status": "ready_to_merge",
+        "writer_commit_sha": "de3f235cb1508e74eb27ca29156cfe166364c959",
+        "writer_head_sha": "87cddbd2278b29bada2c785f910d69caee294749",
+        "writer_pr_number": 3088,
+        "writer_pr_url": "https://github.com/fermatmind/fap-api/pull/3088",
+        "writer_github_checks": {
+          "status": "pass_9_of_9_after_same_scope_fix",
+          "failed_check": "verify-bigfive",
+          "failure_evidence": "The first PR round had 8 passing checks and one verify-bigfive failure: the runtime freeze classifier correctly identified the newly added command/service until an explicit controlled draft-import allowlist entry was added. The Big Five suite itself reported 1379 passed, 1 skipped, and 1 failed with 172333 assertions.",
+          "fix_validation": "The exact classifier tests passed 3 tests / 5 assertions; PR37 plus writer tests passed 8 tests / 3764 assertions; Pint passed all 5 touched PHP files."
+        },
+        "evidence": "Implemented a controlled five-surface writer for 109 Article, 114 personality_public_content_assets, 4 content_pages, 2 landing_surfaces, and 2 topic_profiles. The deterministic draft import package contains 231 assets and hashes to 80f95a73d497f28a74197b5af7dc1849af35ec9c15958ac898b29b669b997154 while remaining bound to authority package fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162. It creates only non-public/noindex primary drafts in one transaction after exact production read-only preflight, refuses all existing identities and updates, and performs no deploy/public/SEO/media/cache/search side effect. Local validation passed: builder/validator, 8 focused tests with 3764 assertions, Pint on 4 files, PHP and Node syntax, JSON/YAML parse, command discovery, git diff check, and the complete backend/scripts/ci_verify_mbti.sh gate with exit 0."
       }
     },
     "failure_reason": null,
@@ -92049,7 +92063,8 @@
     "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
-    "cms_mutation_allowed": false,
+    "cms_mutation_allowed": true,
+    "cms_mutation_scope": "exact Big Five Authority V2 draft-only primary-record import: create 231, update 0, abort on any mismatch",
     "indexability_mutation_allowed": false,
     "transitions": [
       {
@@ -92087,6 +92102,42 @@
         "from": "ready_to_merge",
         "to": "pending_exact_production_authorization",
         "note": "PR #3086 passed the final 9/9 GitHub round and squash-merged as af99ac41406a2967b9f4778dc9da07b920bfbb7f. Main is synced and clean, both task branches are deleted, and post-merge validation passed. The PR37 packet remains fail-closed NO_GO: its production command is unavailable, the proposed phrase is non-executable, all 231 assets are withheld, and PR38 is paused pending separate exact production authorization and real production readback."
+      },
+      {
+        "at": "2026-07-14T15:33:01Z",
+        "from": "pending_exact_production_authorization",
+        "to": "production_import_authorized_pending_writer_merge_and_preflight",
+        "note": "Received the operator's exact writer implementation authorization and the exact draft-only production import phrase bound to PR37 merge af99ac41406a2967b9f4778dc9da07b920bfbb7f, package fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162, 231 creates, and 0 updates. Writer implementation is in progress; no production write or deploy has run."
+      },
+      {
+        "at": "2026-07-14T15:49:10Z",
+        "from": "production_import_authorized_pending_writer_merge_and_preflight",
+        "to": "draft_writer_local_checks_passed_pending_commit",
+        "note": "The fail-closed multi-surface draft writer and exact 231-asset import package passed focused and complete local validation. Production write execution remains false; the writer must be reviewed, merged, and confirmed deployed by read-only inspection before the separately authorized exact preflight can run."
+      },
+      {
+        "at": "2026-07-14T15:50:00Z",
+        "from": "draft_writer_local_checks_passed_pending_commit",
+        "to": "draft_writer_committed_pending_pr",
+        "note": "Committed the exact 11-file writer scope as de3f235cb1508e74eb27ca29156cfe166364c959. No production operation ran."
+      },
+      {
+        "at": "2026-07-14T15:51:40Z",
+        "from": "draft_writer_committed_pending_pr",
+        "to": "draft_writer_pr_open_pending_checks",
+        "note": "Opened writer PR #3088. GitHub reports it open and mergeable; required checks are pending. No deployment or production command has run."
+      },
+      {
+        "at": "2026-07-14T15:59:53Z",
+        "from": "draft_writer_pr_open_pending_checks",
+        "to": "draft_writer_ci_fix_validated_pending_push",
+        "note": "The first GitHub round passed 8 checks but verify-bigfive failed only because the Big Five runtime freeze classifier had no explicit entry for the new controlled draft-import command/service. Added the exact two-file allowlist and positive/negative classifier coverage in the existing freeze test; focused classifier, writer, PR37, and Pint checks pass. No production operation ran."
+      },
+      {
+        "at": "2026-07-14T16:06:07Z",
+        "from": "draft_writer_ci_fix_validated_pending_push",
+        "to": "draft_writer_ready_to_merge",
+        "note": "PR #3088 head 87cddbd2278b29bada2c785f910d69caee294749 is mergeable and passed all 9 GitHub checks after the exact classifier repair: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, blocking secrets, and SARIF upload. Production execution remains false."
       }
     ]
   },
