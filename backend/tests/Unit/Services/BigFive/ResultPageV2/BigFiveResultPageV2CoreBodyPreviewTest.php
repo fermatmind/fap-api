@@ -584,8 +584,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_big_five_authority_v2_draft_import_files(): void
     {
         $changed = [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV2CollisionSafeDraftImport.php',
             'backend/app/Console/Commands/PersonalityBigFiveAuthorityV2DraftImport.php',
+            'backend/app/Models/ArticleTranslationRevision.php',
+            'backend/app/Models/CmsTranslationRevision.php',
+            'backend/app/Models/PersonalityPublicContentAssetRevision.php',
+            'backend/app/Models/TopicProfileRevision.php',
+            'backend/app/Services/BigFive/AuthorityV2/ReleaseGate/BigFiveAuthorityV2CollisionSafeDraftRevisionWriter.php',
             'backend/app/Services/BigFive/AuthorityV2/ReleaseGate/BigFiveAuthorityV2DraftImportWriter.php',
+            'backend/database/migrations/2026_07_15_000100_add_big_five_authority_v2_draft_revision_workspaces.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -7608,8 +7615,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isBigFiveAuthorityV2DraftImportFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV2CollisionSafeDraftImport.php',
             'backend/app/Console/Commands/PersonalityBigFiveAuthorityV2DraftImport.php',
+            'backend/app/Models/ArticleTranslationRevision.php',
+            'backend/app/Models/CmsTranslationRevision.php',
+            'backend/app/Models/PersonalityPublicContentAssetRevision.php',
+            'backend/app/Models/TopicProfileRevision.php',
+            'backend/app/Services/BigFive/AuthorityV2/ReleaseGate/BigFiveAuthorityV2CollisionSafeDraftRevisionWriter.php',
             'backend/app/Services/BigFive/AuthorityV2/ReleaseGate/BigFiveAuthorityV2DraftImportWriter.php',
+            'backend/database/migrations/2026_07_15_000100_add_big_five_authority_v2_draft_revision_workspaces.php',
         ], true);
     }
 

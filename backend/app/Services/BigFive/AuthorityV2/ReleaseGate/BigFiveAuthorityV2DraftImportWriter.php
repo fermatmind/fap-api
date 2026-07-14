@@ -48,7 +48,7 @@ final class BigFiveAuthorityV2DraftImportWriter
      */
     public function preflight(string $packagePath, string $authorizationPacketPath): array
     {
-        return $this->publicPlan($this->buildPlan($packagePath, $authorizationPacketPath, false));
+        return $this->publicPlan($this->validatedPlan($packagePath, $authorizationPacketPath, false));
     }
 
     /**
@@ -61,7 +61,7 @@ final class BigFiveAuthorityV2DraftImportWriter
         int $expectedUpdate,
     ): array {
         return DB::transaction(function () use ($packagePath, $authorizationPacketPath, $expectedCreate, $expectedUpdate): array {
-            $plan = $this->buildPlan($packagePath, $authorizationPacketPath, true);
+            $plan = $this->validatedPlan($packagePath, $authorizationPacketPath, true);
             $this->assertExpectedCounts($plan, $expectedCreate, $expectedUpdate);
 
             /** @var list<array<string,mixed>> $descriptors */
@@ -100,7 +100,7 @@ final class BigFiveAuthorityV2DraftImportWriter
     /**
      * @return array<string,mixed>
      */
-    private function buildPlan(string $packagePath, string $authorizationPacketPath, bool $lock): array
+    public function validatedPlan(string $packagePath, string $authorizationPacketPath, bool $lock = false): array
     {
         $this->assertRequiredTablesExist();
         [$package, $resolvedPackagePath, $packageFileSha256] = $this->readJson($packagePath, 'draft import package');
@@ -474,6 +474,8 @@ final class BigFiveAuthorityV2DraftImportWriter
             'asset_id' => (string) $asset['asset_id'],
             'route' => (string) $asset['route'],
             'authority_surface' => (string) $asset['authority_surface'],
+            'source_package' => (string) $asset['source_package'],
+            'source_hash' => (string) $asset['source_hash'],
             'model' => $model,
             'identity' => $identity,
             'attributes' => $attributes,

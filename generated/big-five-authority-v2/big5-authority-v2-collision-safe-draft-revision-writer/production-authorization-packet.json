@@ -1,0 +1,45 @@
+{
+  "schema_version": "big5-authority-v2-collision-safe-production-authorization.v1",
+  "generated_at": "2026-07-15T00:00:00Z",
+  "status": "HOLD_PENDING_WRITER_DEPLOY_MIGRATION_AND_READ_ONLY_PRODUCTION_PREFLIGHT",
+  "pr37_merge_sha": "af99ac41406a2967b9f4778dc9da07b920bfbb7f",
+  "authority_package_sha256": "fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162",
+  "draft_import_package_sha256": "80f95a73d497f28a74197b5af7dc1849af35ec9c15958ac898b29b669b997154",
+  "collision_safe_preflight_contract_path": "generated/big-five-authority-v2/big5-authority-v2-collision-safe-draft-revision-writer/collision-safe-preflight-contract.json",
+  "collision_safe_preflight_contract_sha256": "fffcd07c97a7adbefc9d63c03b6523233f4b9f3c6a0c5733249da591254f3b49",
+  "asset_count": 231,
+  "expected_actions": {
+    "primary_create": 106,
+    "existing_revision": 125,
+    "revision_create": 229,
+    "new_working_revision": 104,
+    "existing_pointer_update": 125,
+    "existing_primary_public_content_overwrite": 0
+  },
+  "production_write_currently_authorized": false,
+  "production_deploy_currently_authorized": false,
+  "production_migration_execution_currently_authorized": false,
+  "required_next_gates": [
+    "merge this code/test PR and record the exact merge SHA",
+    "obtain an exact production deploy plus migration-execution authorization for that SHA",
+    "deploy the exact SHA and run the collision-safe read-only production preflight",
+    "record the exact deployed REVISION and preflight fingerprint",
+    "obtain a new exact collision-safe production write authorization phrase",
+    "run write once and require transaction-scoped readback"
+  ],
+  "approval_phrase_template": "AUTHORIZE BIG5 AUTHORITY V2 COLLISION-SAFE DRAFT REVISION IMPORT FOR DEPLOY_SHA={DEPLOY_SHA} PR37_MERGE_SHA=af99ac41406a2967b9f4778dc9da07b920bfbb7f PACKAGE_SHA256=fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162 COLLISION_CONTRACT_SHA256=fffcd07c97a7adbefc9d63c03b6523233f4b9f3c6a0c5733249da591254f3b49 PREFLIGHT_FINGERPRINT={PREFLIGHT_FINGERPRINT} ASSET_COUNT=231 PRIMARY_CREATE=106 EXISTING_REVISION=125 REVISION_CREATE=229 PUBLIC_CONTENT_OVERWRITE=0; PUBLIC_RELEASE=0; INDEXABILITY=0; SITEMAP=0; LLMS=0; MEDIA=0; CACHE=0; SEARCH_SUBMISSION=0; ABORT_ON_ANY_MISMATCH",
+  "approval_phrase_currently_executable": false,
+  "production_effects_if_later_exactly_authorized": {
+    "primary_draft_creates": 106,
+    "working_or_draft_revision_creates": 229,
+    "existing_working_pointer_updates": 125,
+    "existing_public_content_field_overwrites": 0,
+    "public_releases": 0,
+    "indexability_changes": 0,
+    "sitemap_changes": 0,
+    "llms_changes": 0,
+    "media_writes": 0,
+    "cache_actions": 0,
+    "search_submissions": 0
+  }
+}
