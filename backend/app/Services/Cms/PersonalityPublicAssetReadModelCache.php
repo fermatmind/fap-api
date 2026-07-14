@@ -142,16 +142,15 @@ final class PersonalityPublicAssetReadModelCache
                 $payload,
                 self::LKG_TTL_SECONDS,
             );
+            if ($surface === 'index') {
+                $this->registerCollectionSelector($framework, $entityType, $selector, $locale);
+            }
             if (is_string($previousVersion) && $previousVersion !== '' && $previousVersion !== $version) {
                 Cache::put($lkgKey, $previousVersion, self::LKG_TTL_SECONDS);
             } elseif (! is_string(Cache::get($lkgKey))) {
                 Cache::put($lkgKey, $version, self::LKG_TTL_SECONDS);
             }
             Cache::put($activeKey, $version, self::TTL_SECONDS);
-
-            if ($surface === 'index') {
-                $this->registerCollectionSelector($framework, $entityType, $selector, $locale);
-            }
         } catch (Throwable $throwable) {
             $this->recordState($surface, $framework, $entityType, $locale, 'bypass', $throwable);
         }
@@ -338,8 +337,19 @@ final class PersonalityPublicAssetReadModelCache
         $selectors = is_array($registered)
             ? array_values(array_filter($registered, static fn (mixed $value): bool => is_string($value) && $value !== ''))
             : [];
+        $selectors = array_values(array_filter(
+            array_unique($selectors),
+            static fn (string $registeredSelector): bool => $registeredSelector !== $selector,
+        ));
         $selectors[] = $selector;
-        $selectors = array_slice(array_values(array_unique($selectors)), -self::COLLECTION_REGISTRY_LIMIT);
+        $evictedSelectors = array_slice($selectors, 0, max(0, count($selectors) - self::COLLECTION_REGISTRY_LIMIT));
+        $selectors = array_slice($selectors, -self::COLLECTION_REGISTRY_LIMIT);
+
+        foreach ($evictedSelectors as $evictedSelector) {
+            Cache::forget($this->activeKey('index', $framework, $entityType, $evictedSelector, $locale));
+            Cache::forget($this->lkgKey('index', $framework, $entityType, $evictedSelector, $locale));
+        }
+
         Cache::put($registryKey, $selectors, self::LKG_TTL_SECONDS);
     }
 

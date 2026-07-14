@@ -117,6 +117,33 @@ final class PersonalityPublicAssetReadModelCacheTest extends TestCase
         )));
     }
 
+    public function test_collection_registry_eviction_clears_stale_pointers_before_withdrawal(): void
+    {
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $payload = ['items' => [['code' => 'openness']]];
+
+        for ($page = 1; $page <= 201; $page++) {
+            $selector = "page:{$page}:per-page:1";
+            $cache->put('index', 'big_five', 'domain', $selector, 'en', 0, "domains-v{$page}", $payload);
+        }
+
+        self::assertSame('miss', $cache->stale(
+            'index', 'big_five', 'domain', 'page:1:per-page:1', 'en', 0
+        )['state']);
+        self::assertSame('stale', $cache->stale(
+            'index', 'big_five', 'domain', 'page:2:per-page:1', 'en', 0
+        )['state']);
+
+        $cache->invalidateCollections('big_five', 'domain', 'en', 0, false);
+
+        self::assertSame('miss', $cache->stale(
+            'index', 'big_five', 'domain', 'page:2:per-page:1', 'en', 0
+        )['state']);
+        self::assertSame('miss', $cache->stale(
+            'index', 'big_five', 'domain', 'page:201:per-page:1', 'en', 0
+        )['state']);
+    }
+
     public function test_versions_cover_all_persisted_asset_attributes_and_logs_are_low_cardinality(): void
     {
         $cache = app(PersonalityPublicAssetReadModelCache::class);
