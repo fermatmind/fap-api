@@ -91990,8 +91990,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "7caeff1f607fe77f9400a3a5934c2a416bbea2ab",
+    "status": "ready_to_merge",
+    "commit_sha": "0b5ed90eb57f5b3b37403e2740ab298c6373537b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3086",
     "checks": {
       "dependency": {
@@ -92021,6 +92021,10 @@
       "format_syntax_data_scope": {
         "status": "pass",
         "evidence": "Pint --test passed for both touched PHP files; php -l, node --check, generated JSON parsing, ledger JSON parsing, train YAML parsing, git diff --check, and exact changed-file scope validation passed."
+      },
+      "github_checks_first_round": {
+        "status": "pass",
+        "evidence": "PR #3086 head 0b5ed90eb57f5b3b37403e2740ab298c6373537b passed 9/9 GitHub checks with zero failures, cancellations, skips, or pending jobs. GitHub reports the PR MERGEABLE."
       }
     },
     "failure_reason": null,
@@ -92055,6 +92059,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Pushed the exact 11-file PR37 scope and opened PR #3086 at head 7caeff1f607fe77f9400a3a5934c2a416bbea2ab; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-14T14:49:14Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "The first complete GitHub round passed 9/9 at PR head 0b5ed90eb57f5b3b37403e2740ab298c6373537b. Recording ready_to_merge before the final check round and squash merge."
       }
     ]
   },
