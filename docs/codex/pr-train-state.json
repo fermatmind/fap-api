@@ -91141,9 +91141,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "57eb8785d5a7eded6748848f92319220c10c225b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3069",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -91174,6 +91174,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All PR26 local checks passed. The package exactly consumes PR21 batch 26, preserves 10 bilingual Article candidates and the full skeptical review chain, and enforces the complete workplace decision-use prohibition. Focused tests passed with 4 tests / 184 assertions; validator, Pint, syntax, source-ledger, private-link, diff, and exact 11-file scope checks passed."
+      },
+      {
+        "at": "2026-07-14T07:28:14Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 11-file PR26 scope as 57eb8785d5a7eded6748848f92319220c10c225b, pushed codex/big5-authority-v2-article-workplace-26, and opened PR #3069. Waiting for required GitHub checks on the ledger-updated head."
       }
     ]
   },
