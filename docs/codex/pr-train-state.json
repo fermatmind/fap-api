@@ -90946,9 +90946,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "74e9912c52cc169dd3a298893c1f7146bbf9bf31",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3066",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -90979,6 +90979,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All PR23 local checks passed. The package reuses ContentPage for 4 bilingual drafts, keeps every product-specific metric Unknown, includes public methodology, limitation, privacy, review, correction, version, and evidence sections, and records zero writes or release changes. Focused tests passed with 5 tests / 102 assertions; Pint, syntax, source-ledger, diff, private-link, and exact 8-file scope checks passed."
+      },
+      {
+        "at": "2026-07-14T05:56:25Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 8-file PR23 scope as 74e9912c52cc169dd3a298893c1f7146bbf9bf31, pushed codex/big5-authority-v2-technical-trust-23, and opened PR #3066. Waiting for required GitHub checks on the final ledger-updated head."
       }
     ]
   },
