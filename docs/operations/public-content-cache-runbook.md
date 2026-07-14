@@ -41,3 +41,5 @@ The bounded warm sequence is:
 The L3 phase invokes the Career command with `--directory-only`; it rebuilds only the EN/ZH directory read models and does not refresh dataset, job-index, job-detail, or launch-governance cache families. Nested command output is captured so the parent `--json` mode always emits exactly one JSON document.
 
 Any failed priority stops later warm phases. After a successful warm, the command re-reads every selected version and fails if a pointer is missing, a payload cannot be read back, or a payload exceeds the byte budget. Reports never contain public content bodies, private routes, attempt/report/order identifiers, or secrets.
+
+Big Five warm accepts only API cache states `miss` (newly built) or `fresh`; a stale/bypass response fails the phase instead of being reported as warmed. Payload budgets use the same JSON serialization as the public API response, including escaped Unicode byte size.

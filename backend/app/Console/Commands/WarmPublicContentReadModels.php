@@ -10,6 +10,7 @@ use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicReadModelCache;
 use Illuminate\Console\Command;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use JsonException;
@@ -187,13 +188,15 @@ final class WarmPublicContentReadModels extends Command
                     ],
                 ));
                 $bytes = strlen((string) $response->getContent());
-                $ready = $response->getStatusCode() === 200 && $bytes <= self::PAYLOAD_BUDGET_BYTES;
+                $cacheState = (string) $response->headers->get('X-Fermat-Public-Read-Cache', 'unknown');
+                $ready = $this->bigFiveWarmResponseIsReady($response);
                 $entries[] = [
                     'priority' => 'L2',
                     'family' => 'big-five',
                     'locale' => $locale,
                     'status' => $ready ? 'warmed' : 'failed',
                     'http_status' => $response->getStatusCode(),
+                    'cache_state' => $cacheState,
                     'bytes' => $bytes,
                     'budget_bytes' => self::PAYLOAD_BUDGET_BYTES,
                 ];
@@ -343,10 +346,16 @@ final class WarmPublicContentReadModels extends Command
     /** @param array<string, mixed> $payload */
     private function payloadBytes(array $payload): int
     {
-        return strlen(json_encode(
-            $payload,
-            JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
-        ));
+        return strlen((string) response()->json($payload)->getContent());
+    }
+
+    private function bigFiveWarmResponseIsReady(JsonResponse $response): bool
+    {
+        $cacheState = (string) $response->headers->get('X-Fermat-Public-Read-Cache', 'unknown');
+
+        return $response->getStatusCode() === 200
+            && in_array($cacheState, ['miss', 'fresh'], true)
+            && strlen((string) $response->getContent()) <= self::PAYLOAD_BUDGET_BYTES;
     }
 
     /** @param list<array<string, mixed>> $entries */

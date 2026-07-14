@@ -10,13 +10,17 @@ use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicReadModelCache;
 use Illuminate\Console\Command as ConsoleCommand;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use ReflectionMethod;
 use Tests\TestCase;
 
 final class WarmPublicContentReadModelsCommandTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -143,12 +147,53 @@ final class WarmPublicContentReadModelsCommandTest extends TestCase
         $this->assertContains('budget_exceeded', array_column($report['entries'], 'status'));
     }
 
-    public function test_warm_json_suppresses_child_output_and_scopes_career_to_directory_only(): void
+    public function test_verify_only_uses_public_json_encoding_for_payload_budget(): void
     {
         $mbtiCache = app(PersonalityPublicReadModelCache::class);
         $assetCache = app(PersonalityPublicAssetReadModelCache::class);
         $this->seedMbtiReadModels($mbtiCache);
         $this->seedBigFiveReadModels($assetCache);
+        Cache::put(
+            $mbtiCache->key('detail', 'INTJ-A', 'zh-CN', 'mbti-v1'),
+            ['body' => str_repeat('测', 90000)],
+        );
+
+        $careerCache = app(PublicCareerAuthorityResponseCache::class);
+        foreach (['en', 'zh-CN'] as $locale) {
+            $careerCache->publishDirectoryReadModel($locale, ['items' => []]);
+        }
+
+        $exitCode = Artisan::call('public-content:warm-read-models', [
+            '--verify-only' => true,
+            '--json' => true,
+        ]);
+        $report = $this->jsonOutput();
+
+        $this->assertSame(1, $exitCode);
+        $entry = collect($report['entries'])->first(
+            static fn (array $entry): bool => ($entry['target'] ?? null) === 'INTJ-A:detail'
+                && ($entry['locale'] ?? null) === 'zh-CN',
+        );
+        $this->assertSame('budget_exceeded', $entry['status'] ?? null);
+        $this->assertGreaterThan(WarmPublicContentReadModels::PAYLOAD_BUDGET_BYTES, $entry['bytes'] ?? 0);
+    }
+
+    public function test_big_five_warm_accepts_only_fresh_or_miss_cache_states(): void
+    {
+        $method = new ReflectionMethod(WarmPublicContentReadModels::class, 'bigFiveWarmResponseIsReady');
+        $command = app(WarmPublicContentReadModels::class);
+
+        foreach (['fresh' => true, 'miss' => true, 'stale' => false, 'bypass' => false] as $state => $expected) {
+            $response = response()->json(['ok' => true])
+                ->header('X-Fermat-Public-Read-Cache', $state);
+            $this->assertSame($expected, $method->invoke($command, $response), $state);
+        }
+    }
+
+    public function test_warm_json_suppresses_child_output_and_scopes_career_to_directory_only(): void
+    {
+        $mbtiCache = app(PersonalityPublicReadModelCache::class);
+        $this->seedMbtiReadModels($mbtiCache);
 
         $careerCache = app(PublicCareerAuthorityResponseCache::class);
         foreach (['en', 'zh-CN'] as $locale) {
