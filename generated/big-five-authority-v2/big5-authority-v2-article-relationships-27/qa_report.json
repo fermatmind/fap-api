@@ -1,0 +1,27 @@
+{
+  "schema_version": "big5-article-wave-qa.v1",
+  "generated_at": "2026-07-14T07:48:15Z",
+  "status": "PASS_PENDING_MANUAL_REVIEW",
+  "counts": {
+    "locked_themes": 5,
+    "article_assets": 10,
+    "en_assets": 5,
+    "zh_cn_assets": 5
+  },
+  "checks": {
+    "consumes_only_pr21_batch_27": true,
+    "exact_locked_slug_locale_pairs": true,
+    "unique_intents": true,
+    "raw_drafts_preserved": true,
+    "skeptical_reviews_preserved": true,
+    "repaired_drafts_preserved": true,
+    "source_mapping_preserved": true,
+    "consent_and_boundary_primacy": true,
+    "compatibility_and_outcome_prediction_prohibited": true,
+    "private_result_links_excluded": true,
+    "all_pending_manual_review": true,
+    "cms_writes": 0,
+    "published_assets": 0,
+    "indexability_changes": 0
+  }
+}
