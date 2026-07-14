@@ -20,16 +20,22 @@ on:
         required: true
         type: string
       deploy_mode:
-        description: "auto permits only a strict code-only scope; standard remains explicit"
+        description: "auto permits strict code-only scope; schema_only requires one exact approved migration"
         required: false
         default: auto
         type: choice
         options:
           - auto
           - code_only
+          - schema_only
           - standard
       expected_deployed_revision:
-        description: "Required 40-character current production REVISION for auto or code_only"
+        description: "Required current production REVISION for auto, code_only, or schema_only"
+        required: false
+        default: ""
+        type: string
+      approved_migration:
+        description: "Exact migration filename required only for schema_only"
         required: false
         default: ""
         type: string
@@ -73,6 +79,7 @@ jobs:
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
           REQUESTED_DEPLOY_MODE: ${{ inputs.deploy_mode }}
           EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
+          APPROVED_MIGRATION: ${{ inputs.approved_migration }}
         run: |
           set -euo pipefail
           if [[ ! "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]; then
@@ -88,18 +95,77 @@ jobs:
             exit 2
           fi
           case "$REQUESTED_DEPLOY_MODE" in
-            auto|code_only|standard) ;;
+            auto|code_only|schema_only|standard) ;;
             *)
-              echo "deploy_mode must be auto, code_only, or standard." >&2
+              echo "deploy_mode must be auto, code_only, schema_only, or standard." >&2
               exit 2
               ;;
           esac
           case "$REQUESTED_DEPLOY_MODE" in
             standard)
+              if [ -n "$APPROVED_MIGRATION" ]; then
+                echo "standard deploy refuses approved_migration; use schema_only for an exact migration." >&2
+                exit 2
+              fi
               RESOLVED_DEPLOY_MODE=standard
               EXPECTED_APPROVAL="I explicitly approve backend production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
               ;;
+            schema_only)
+              if [[ ! "$EXPECTED_DEPLOYED_REVISION" =~ ^[0-9a-f]{40}$ ]]; then
+                echo "schema_only requires expected_deployed_revision as a lowercase 40-character deployed REVISION." >&2
+                exit 2
+              fi
+              if [[ ! "$APPROVED_MIGRATION" =~ ^[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_[A-Za-z0-9_]+\.php$ ]]; then
+                echo "schema_only requires one exact approved_migration filename." >&2
+                exit 2
+              fi
+              MIGRATION_PATH="backend/database/migrations/${APPROVED_MIGRATION}"
+              if [ ! -f "$MIGRATION_PATH" ]; then
+                echo "schema-only deployment refused: approved migration does not exist at the exact SHA." >&2
+                exit 1
+              fi
+              if ! git cat-file -e "${EXPECTED_DEPLOYED_REVISION}^{commit}"; then
+                echo "schema-only scope classification cannot resolve expected_deployed_revision." >&2
+                exit 1
+              fi
+              if ! git merge-base --is-ancestor "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"; then
+                echo "schema-only scope classification requires expected_deployed_revision to be an ancestor of expected_release_sha." >&2
+                exit 1
+              fi
+              mapfile -t MIGRATION_DIFF < <(git diff --no-renames --name-status "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA" -- backend/database/migrations)
+              if [ "${#MIGRATION_DIFF[@]}" -ne 1 ] || [ "${MIGRATION_DIFF[0]}" != $'A\t'"$MIGRATION_PATH" ]; then
+                echo "schema-only deployment refused: cumulative diff must add exactly the approved migration and no other migration." >&2
+                exit 1
+              fi
+              mapfile -t CHANGED_FILES < <(git diff --no-renames --name-only "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA")
+              SCHEMA_ONLY_SCOPE=true
+              for path in "${CHANGED_FILES[@]}"; do
+                case "$path" in
+                  "$MIGRATION_PATH") ;;
+                  backend/database/*|backend/content_assets/*|backend/content_packs/*|backend/content_baselines/*|backend/public/*|backend/resources/*|content_assets/*|content_packages/*|content_baselines/*|docs/seo/*|backend/storage/*)
+                    SCHEMA_ONLY_SCOPE=false
+                    echo "schema-only scope refused authority or database path: $path" >&2
+                    ;;
+                  backend/app/*|backend/bootstrap/*|backend/config/*|backend/routes/*|backend/tests/*|tests/*|backend/composer.json|backend/composer.lock|deploy.php|.github/workflows/deploy-production.yml|docs/codex/*|generated/*)
+                    ;;
+                  *)
+                    SCHEMA_ONLY_SCOPE=false
+                    echo "schema-only scope refused unknown path: $path" >&2
+                    ;;
+                esac
+              done
+              if [ "$SCHEMA_ONLY_SCOPE" != true ]; then
+                echo "schema-only deployment refused: cumulative deployed-revision diff contains a forbidden or unknown path." >&2
+                exit 1
+              fi
+              RESOLVED_DEPLOY_MODE=schema_only
+              EXPECTED_APPROVAL="I explicitly approve backend schema-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID} migration ${APPROVED_MIGRATION}."
+              ;;
             auto|code_only)
+              if [ -n "$APPROVED_MIGRATION" ]; then
+                echo "auto/code_only refuses approved_migration; use schema_only for an exact migration." >&2
+                exit 2
+              fi
               if [[ ! "$EXPECTED_DEPLOYED_REVISION" =~ ^[0-9a-f]{40}$ ]]; then
                 echo "auto/code_only requires expected_deployed_revision as a lowercase 40-character deployed REVISION." >&2
                 exit 2
@@ -180,6 +246,12 @@ jobs:
                 exit 1
               fi
               ;;
+            schema_only)
+              if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
+                echo "Manual schema_only production deploy refused because expected_release_sha is not latest main." >&2
+                exit 1
+              fi
+              ;;
             code_only)
               if ! git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_SHA"; then
                 echo "Code-only production deploy refused because expected_release_sha is not reachable from latest main." >&2
@@ -219,6 +291,7 @@ jobs:
       OPS_HOST: ${{ vars.PRODUCTION_OPS_HOST }}
       DEPLOY_MODE: ${{ needs.deployment-eligibility.outputs.deploy_mode }}
       EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
+      APPROVED_MIGRATION: ${{ inputs.approved_migration }}
 
     steps:
       - name: Checkout deploy revision
@@ -327,8 +400,8 @@ jobs:
           ssh_retry 'whoami; hostname; id'
           ssh_retry "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
 
-      - name: Verify code-only deployed baseline before writes
-        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'code_only' }}
+      - name: Verify mutation-limited deployed baseline before writes
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'code_only' || needs.deployment-eligibility.outputs.deploy_mode == 'schema_only' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -350,10 +423,10 @@ jobs:
           }
           DEPLOYED_BASELINE="$(ssh_retry "cd '$DEPLOY_PATH/current' && test -f REVISION && tr -d '\r\n' < REVISION")"
           if [ "$DEPLOYED_BASELINE" != "$EXPECTED_DEPLOYED_REVISION" ]; then
-            echo "code-only deployment refused: remote deployed REVISION does not match expected_deployed_revision." >&2
+            echo "mutation-limited deployment refused: remote deployed REVISION does not match expected_deployed_revision." >&2
             exit 1
           fi
-          echo "code-only deployed baseline verified"
+          echo "mutation-limited deployed baseline verified"
 
       - name: Remote deploy lock guard
         shell: bash
@@ -401,6 +474,10 @@ jobs:
             echo "deploy lock guard: code-only deploy refuses to remove an existing lock automatically"
             exit 1
           fi
+          if [ "$DEPLOY_MODE" = "schema_only" ]; then
+            echo "deploy lock guard: schema-only deploy refuses to remove an existing lock automatically"
+            exit 1
+          fi
           STALE_LOCK_SECONDS="${STALE_LOCK_SECONDS:-1800}"
           if [ "$OWNER" = "ci" ] \
             && [ "$AGE_SECONDS" -ge "$STALE_LOCK_SECONDS" ] \
@@ -445,18 +522,21 @@ jobs:
           export DEPLOY_LOCK_METADATA
           export DEPLOY_LOCK_RUN_ID="$GITHUB_RUN_ID"
           export DEPLOY_LOCK_RUN_ATTEMPT="$GITHUB_RUN_ATTEMPT"
-          DEPLOY_TASK=deploy
-          if [ "$DEPLOY_MODE" = "code_only" ]; then
-            DEPLOY_TASK=deploy:code-only
-          fi
+          case "$DEPLOY_MODE" in
+            standard) DEPLOY_TASK=deploy ;;
+            code_only) DEPLOY_TASK=deploy:code-only ;;
+            schema_only) DEPLOY_TASK=deploy:schema-only ;;
+            *) echo "Unsupported resolved deploy mode: $DEPLOY_MODE" >&2; exit 2 ;;
+          esac
           php /tmp/dep.phar "$DEPLOY_TASK" production -f deploy.php \
             --revision "$DEPLOY_SHA" \
             -o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             -o deploy_mode="$DEPLOY_MODE" \
+            -o schema_only_migration="$APPROVED_MIGRATION" \
             -vvv --no-interaction
 
       - name: Restart queue workers through Laravel queue restart
-        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' }}
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' || needs.deployment-eligibility.outputs.deploy_mode == 'schema_only' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -504,6 +584,40 @@ jobs:
           test "$DEPLOYED_SHA" = "$DEPLOY_SHA"
           echo "deployed_sha=$DEPLOYED_SHA" >> "$GITHUB_OUTPUT"
 
+      - name: Verify schema-only migration and schema state
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'schema_only' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh_retry() {
+            local attempt rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+              if [ "$rc" -eq 0 ]; then return 0; fi
+              if [ "$attempt" -ge "$max_attempts" ]; then return "$rc"; fi
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+          MIGRATION_STEM="${APPROVED_MIGRATION%.php}"
+          STATUS_OUTPUT="$(ssh_retry "cd '$DEPLOY_PATH/current/backend' && php artisan migrate:status --no-interaction --no-ansi")"
+          printf '%s\n' "$STATUS_OUTPUT"
+          if printf '%s\n' "$STATUS_OUTPUT" | grep -Eq '(^|[[:space:]])Pending($|[[:space:]])'; then
+            echo "schema-only post-deploy verification found pending migrations" >&2
+            exit 1
+          fi
+          if ! printf '%s\n' "$STATUS_OUTPUT" | grep -F "$MIGRATION_STEM" | grep -Eq '(^|[[:space:]])Ran($|[[:space:]])'; then
+            echo "schema-only post-deploy verification could not confirm the approved migration as Ran" >&2
+            exit 1
+          fi
+          ssh_retry "cd '$DEPLOY_PATH/current/backend' && php artisan fap:schema:verify --no-interaction --no-ansi"
+
       - name: Healthcheck and contract smoke
         shell: bash
         run: |
@@ -539,7 +653,7 @@ jobs:
           if [ "$DEPLOY_MODE" = "standard" ]; then
             ssh_retry "curl -fsS --resolve '$AUTH_HOST:443:127.0.0.1' -H 'Content-Type: application/json' -X POST 'https://$AUTH_HOST/api/v0.3/auth/guest' --data '{\"anon_id\":\"deploy_contract_probe\"}' | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'" >/dev/null
           else
-            echo "code-only deploy: auth guest POST contract probe intentionally skipped"
+            echo "${DEPLOY_MODE} deploy: auth guest POST contract probe intentionally skipped"
           fi
 
       - name: Ops entry and asset smoke
@@ -620,6 +734,9 @@ jobs:
             echo "- main_sha_at_eligibility: ${MAIN_SHA}"
             echo "- deployed_sha: ${DEPLOYED_SHA}"
             echo "- deploy_mode: ${DEPLOY_MODE}"
+            if [ "$DEPLOY_MODE" = "schema_only" ]; then
+              echo "- approved_migration: ${APPROVED_MIGRATION}"
+            fi
             echo "- main_commits_not_deployed: ${UNDEPLOYED_COUNT}"
             if [ "$UNDEPLOYED_COUNT" -gt 0 ]; then
               echo ""

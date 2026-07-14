@@ -71,11 +71,46 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('DEPLOY_TASK=deploy', $deploy);
         $this->assertStringContainsString('DEPLOY_TASK=deploy:code-only', $deploy);
         $this->assertStringContainsString('-o deploy_mode="$DEPLOY_MODE"', $deploy);
-        $this->assertStringContainsString("if: \${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' }}", $deploy);
-        $this->assertStringContainsString('code-only deploy: auth guest POST contract probe intentionally skipped', $deploy);
-        $this->assertStringContainsString('Verify code-only deployed baseline before writes', $deploy);
+        $this->assertStringContainsString("if: \${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' || needs.deployment-eligibility.outputs.deploy_mode == 'schema_only' }}", $deploy);
+        $this->assertStringContainsString('${DEPLOY_MODE} deploy: auth guest POST contract probe intentionally skipped', $deploy);
+        $this->assertStringContainsString('Verify mutation-limited deployed baseline before writes', $deploy);
         $this->assertStringContainsString('remote deployed REVISION does not match expected_deployed_revision', $deploy);
         $this->assertStringContainsString('main_commits_not_deployed: ${UNDEPLOYED_COUNT}', $deploy);
+    }
+
+    public function test_schema_only_mode_is_latest_main_exact_migration_and_read_only_authority_lane(): void
+    {
+        $workflow = $this->workflow();
+        $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
+        $deploy = strstr($workflow, '  deploy-production:') ?: '';
+
+        foreach ([
+            'schema_only requires one exact approved_migration filename.',
+            'MIGRATION_PATH="backend/database/migrations/${APPROVED_MIGRATION}"',
+            'cumulative diff must add exactly the approved migration and no other migration',
+            'schema-only deployment refused: cumulative deployed-revision diff contains a forbidden or unknown path.',
+            'I explicitly approve backend schema-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID} migration ${APPROVED_MIGRATION}.',
+            'Manual schema_only production deploy refused because expected_release_sha is not latest main.',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $eligibility);
+        }
+
+        foreach ([
+            'DEPLOY_TASK=deploy:schema-only',
+            '-o schema_only_migration="$APPROVED_MIGRATION"',
+            'Verify schema-only migration and schema state',
+            'schema-only post-deploy verification found pending migrations',
+            'php artisan fap:schema:verify --no-interaction --no-ansi',
+            '${DEPLOY_MODE} deploy: auth guest POST contract probe intentionally skipped',
+            'approved_migration: ${APPROVED_MIGRATION}',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $deploy);
+        }
+
+        $this->assertStringNotContainsString('landing-surfaces:import-local-baseline', $deploy);
+        $this->assertStringNotContainsString('content-pages:import-local-baseline', $deploy);
+        $this->assertStringNotContainsString('career:warm-public-authority-cache', $deploy);
+        $this->assertStringNotContainsString('seo:warm-sitemap-source-cache', $deploy);
     }
 
     #[DataProvider('deploymentOutcomes')]
