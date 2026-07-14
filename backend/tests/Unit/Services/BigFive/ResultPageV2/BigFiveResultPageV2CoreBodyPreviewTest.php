@@ -203,14 +203,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Console/Commands/WarmPublicContentReadModels.php',
-            'backend/app/Console/Kernel.php',
-        ];
-        $kernelChangedLines = [
-            '+use App\\Console\\Commands\\WarmPublicContentReadModels;',
-            '+        WarmPublicContentReadModels::class,',
         ];
 
-        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
     public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
@@ -7219,7 +7214,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsPersonalityTdkNextBatchGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsPersonalityPostPromotionSearchGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsPersonalityPublicWarmupOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
-                    || $this->kernelDiffIsControlledPublicReadModelWarmOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramCmsDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramCmsPromotionOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveCmsImportDraftDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -12160,24 +12154,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
         foreach ($changedLines as $line) {
             if (! str_contains($line, 'PersonalityWarmPublicReadModels')) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * @param  list<string>  $changedLines
-     */
-    private function kernelDiffIsControlledPublicReadModelWarmOnly(array $changedLines): bool
-    {
-        if ($changedLines === []) {
-            return false;
-        }
-
-        foreach ($changedLines as $line) {
-            if (! str_contains($line, 'WarmPublicContentReadModels')) {
                 return false;
             }
         }
