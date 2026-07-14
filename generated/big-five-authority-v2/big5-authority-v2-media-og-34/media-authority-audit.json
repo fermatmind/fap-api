@@ -1,0 +1,76 @@
+{
+  "schema_version": "big5-media-authority-audit.v1",
+  "generated_at": "2026-07-14T11:36:49Z",
+  "audit_mode": "read_only_repository_authority",
+  "production_runtime_media_inventory": "Unknown_not_queried",
+  "authority_evidence": [
+    "backend/app/Models/MediaAsset.php",
+    "backend/app/Models/MediaVariant.php",
+    "backend/app/Services/Cms/MediaAssetPromotionService.php",
+    "backend/app/Support/PublicMediaUrlGuard.php",
+    "backend/app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php",
+    "content_baselines/media_assets/default_media_assets.json",
+    "content_baselines/media_assets/mbti_desktop_clone_assets.v1.json",
+    "content_baselines/media_assets/personality_type_icons.v1.json"
+  ],
+  "eligibility_gates": [
+    "MediaAsset status is published and is_public is true.",
+    "Source and selected variant are synced and CDN verified.",
+    "PublicMediaUrlGuard returns an allowed HTTPS public URL and rejects private/Ops disks.",
+    "Asset semantics fit Big Five and the intended hero, inline, or OG slot.",
+    "Locale-specific reviewed alt text is present.",
+    "Rights and provenance evidence is explicit and public-safe.",
+    "Operator approval evidence explicitly covers FermatMind Big Five use."
+  ],
+  "baseline_summary": [
+    {
+      "repository_path": "content_baselines/media_assets/default_media_assets.json",
+      "asset_count": 6,
+      "published_public_count": 0,
+      "explicit_operator_approval_evidence_count": 0,
+      "big_five_semantic_match_count": 0,
+      "eligible_big_five_count": 0
+    },
+    {
+      "repository_path": "content_baselines/media_assets/mbti_desktop_clone_assets.v1.json",
+      "asset_count": 224,
+      "published_public_count": 224,
+      "explicit_operator_approval_evidence_count": 0,
+      "big_five_semantic_match_count": 0,
+      "eligible_big_five_count": 0
+    },
+    {
+      "repository_path": "content_baselines/media_assets/personality_type_icons.v1.json",
+      "asset_count": 16,
+      "published_public_count": 16,
+      "explicit_operator_approval_evidence_count": 16,
+      "big_five_semantic_match_count": 0,
+      "eligible_big_five_count": 0
+    }
+  ],
+  "totals": {
+    "audited_repository_baseline_assets": 246,
+    "published_public_baseline_assets": 240,
+    "explicit_operator_approval_evidence_assets": 16,
+    "big_five_semantic_matches": 0,
+    "eligible_big_five_assets": 0
+  },
+  "exclusions": [
+    {
+      "group": "default_media_assets",
+      "count": 6,
+      "reason": "Generic/default assets lack a Big Five semantic match and explicit Big Five operator approval."
+    },
+    {
+      "group": "mbti_desktop_clone_assets",
+      "count": 224,
+      "reason": "Published public assets are explicitly MBTI desktop-clone illustrations and cannot be cross-framework mapped to Big Five."
+    },
+    {
+      "group": "personality_type_icons",
+      "count": 16,
+      "reason": "Operator-authorized rights/provenance applies to MBTI type icons, not Big Five media use."
+    }
+  ],
+  "decision": "NO_APPROVED_BIG_FIVE_MEDIA_FOUND_FAIL_CLOSED"
+}

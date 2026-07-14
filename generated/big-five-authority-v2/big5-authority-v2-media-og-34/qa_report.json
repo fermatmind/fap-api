@@ -1,0 +1,28 @@
+{
+  "schema_version": "big5-media-og-qa.v1",
+  "generated_at": "2026-07-14T11:36:49Z",
+  "status": "PASS_PENDING_OPERATOR_MEDIA",
+  "counts": {
+    "candidate_pages": 231,
+    "unique_routes": 231,
+    "candidate_mapping_rows": 231,
+    "total_slots": 693,
+    "mapped_slots": 0,
+    "missing_pending_slots": 693,
+    "approved_big_five_media_assets": 0,
+    "family_locale_requirement_groups": 18,
+    "pending_grouped_slot_requirements": 54
+  },
+  "checks": {
+    "consumes_exact_pr07_through_pr33_candidate_inventory": true,
+    "exact_family_counts": true,
+    "every_candidate_has_hero_inline_og_slots": true,
+    "every_slot_missing_pending": true,
+    "no_media_asset_keys_mapped": true,
+    "no_public_urls_mapped_or_fabricated": true,
+    "alt_locale_rights_provenance_remain_pending": true,
+    "mbti_assets_not_reused_for_big_five": true,
+    "runtime_inventory_truth_boundary_preserved": true,
+    "all_release_mutations_zero": true
+  }
+}
