@@ -15,10 +15,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use LengthException;
 use Throwable;
 
 final class PersonalityPublicContentAssetController extends Controller
 {
+    public const MAX_DETAIL_PAYLOAD_BYTES = 524288;
+
     private const PUBLIC_READ_CACHE_HEADER = 'X-Fermat-Public-Read-Cache';
 
     public function __construct(
@@ -90,6 +93,27 @@ final class PersonalityPublicContentAssetController extends Controller
                 $fenceToken,
             );
             if (is_array($cachedRead['payload'])) {
+                if ($this->isOversizedDetailPayload($cachedRead['payload'])) {
+                    $this->readModelCache->discardActivePreservingLkg(
+                        $surface,
+                        $framework,
+                        $entityType,
+                        $selector,
+                        $locale,
+                        $orgId,
+                    );
+
+                    return $this->staleResponseOrThrow(
+                        $surface,
+                        $framework,
+                        $entityType,
+                        $selector,
+                        $locale,
+                        $orgId,
+                        new LengthException('cached personality content asset detail payload exceeds budget.'),
+                    );
+                }
+
                 return $this->publicReadResponse($cachedRead['payload'], $cachedRead['state']);
             }
 
@@ -328,7 +352,6 @@ final class PersonalityPublicContentAssetController extends Controller
             'title' => $title,
             'summary' => $asset->summary,
             'sections' => $contentSections,
-            'content_sections' => $contentSections,
             'seo' => $seo,
             'robots' => PersonalityPublicContentAsset::normalizeRobots((string) $asset->robots),
             'canonical_path' => (string) data_get($canonical, 'path', ''),
@@ -363,23 +386,26 @@ final class PersonalityPublicContentAssetController extends Controller
         $v1 = $this->assetPayload($asset);
         $response = [
             'ok' => true,
-            'asset' => $v1,
             'personality_public_content_asset_v1' => $v1,
         ];
 
         if ((string) $asset->framework === PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE) {
-            $response['personality_public_content_asset_v2'] = $this->assetPayloadV2($asset, $v1);
+            $response['personality_public_content_asset_v2'] = $this->assetPayloadV2(
+                $asset,
+                (bool) ($v1['schema_runtime_eligible'] ?? false),
+            );
         }
 
         return $response;
     }
 
     /**
-     * @param  array<string,mixed>  $v1
      * @return array<string,mixed>
      */
-    private function assetPayloadV2(PersonalityPublicContentAsset $asset, array $v1): array
-    {
+    private function assetPayloadV2(
+        PersonalityPublicContentAsset $asset,
+        bool $schemaRuntimeEligible,
+    ): array {
         $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
         $sources = $this->canonicalSources((array) ($authority['sources'] ?? []));
         $sourceIds = array_fill_keys(array_column($sources, 'id'), true);
@@ -392,11 +418,11 @@ final class PersonalityPublicContentAssetController extends Controller
             && $claimMapping !== [];
         $schemaEligible = ($authority['schema_eligible'] ?? false) === true
             && $visibleEvidenceEligible
-            && ($v1['schema_runtime_eligible'] ?? false) === true;
+            && $schemaRuntimeEligible;
 
-        return array_replace($v1, [
+        return [
             'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
-            'compatible_v1_contract_version' => (string) ($v1['contract_version'] ?? PersonalityPublicContentAsset::CONTRACT_VERSION_V1),
+            'compatible_v1_contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
             'visible_evidence' => [
                 'sources' => $sources,
                 'claim_mapping' => $claimMapping,
@@ -415,7 +441,7 @@ final class PersonalityPublicContentAssetController extends Controller
                 is_array($asset->media_json) ? $asset->media_json : []
             ),
             'schema_eligible' => $schemaEligible,
-        ]);
+        ];
     }
 
     /**
@@ -804,10 +830,42 @@ final class PersonalityPublicContentAssetController extends Controller
                 $fenceToken,
             );
             if (is_array($cachedRead['payload'])) {
+                if ($this->isOversizedDetailPayload($cachedRead['payload'])) {
+                    $this->readModelCache->discardActivePreservingLkg(
+                        $surface,
+                        $framework,
+                        $entityType,
+                        $selector,
+                        $locale,
+                        $orgId,
+                    );
+
+                    return $this->staleResponseOrThrow(
+                        $surface,
+                        $framework,
+                        $entityType,
+                        $selector,
+                        $locale,
+                        $orgId,
+                        new LengthException('cached personality content asset detail payload exceeds budget.'),
+                    );
+                }
+
                 return $this->publicReadResponse($cachedRead['payload'], $cachedRead['state']);
             }
 
             $payload = $this->detailPayload($asset);
+            if (! $this->detailPayloadWithinBudget($payload)) {
+                return $this->staleResponseOrThrow(
+                    $surface,
+                    $framework,
+                    $entityType,
+                    $selector,
+                    $locale,
+                    $orgId,
+                    new LengthException('personality content asset detail payload exceeds budget.'),
+                );
+            }
             $this->readModelCache->put(
                 $surface,
                 $framework,
@@ -837,8 +895,82 @@ final class PersonalityPublicContentAssetController extends Controller
     /** @param array<string,mixed> $payload */
     private function publicReadResponse(array $payload, string $cacheState): JsonResponse
     {
-        return response()->json($payload)
+        $canonicalPayload = $this->canonicalPublicReadPayload($payload);
+        if ($this->isOversizedDetailPayload($canonicalPayload)) {
+            return $this->payloadBudgetExceededResponse($cacheState);
+        }
+
+        return response()->json($canonicalPayload)
             ->header(self::PUBLIC_READ_CACHE_HEADER, $cacheState);
+    }
+
+    /** @param array<string,mixed> $payload */
+    private function isOversizedDetailPayload(array $payload): bool
+    {
+        $canonicalPayload = $this->canonicalPublicReadPayload($payload);
+
+        return isset($canonicalPayload['personality_public_content_asset_v1'])
+            && ! $this->detailPayloadWithinBudget($canonicalPayload);
+    }
+
+    /** @param array<string,mixed> $payload */
+    private function detailPayloadWithinBudget(array $payload): bool
+    {
+        return strlen((string) response()->json($payload)->getContent())
+            <= self::MAX_DETAIL_PAYLOAD_BYTES;
+    }
+
+    private function payloadBudgetExceededResponse(string $cacheState): JsonResponse
+    {
+        return response()->json([
+            'ok' => false,
+            'error_code' => 'PUBLIC_PAYLOAD_BUDGET_EXCEEDED',
+            'message' => 'personality content asset temporarily unavailable.',
+        ], 503)
+            ->header(self::PUBLIC_READ_CACHE_HEADER, $cacheState)
+            ->header('Retry-After', '60');
+    }
+
+    /**
+     * Normalize active/LKG entries written by the previous response projection.
+     *
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function canonicalPublicReadPayload(array $payload): array
+    {
+        unset($payload['asset']);
+
+        if (is_array($payload['personality_public_content_asset_v1'] ?? null)) {
+            unset($payload['personality_public_content_asset_v1']['content_sections']);
+        }
+
+        if (is_array($payload['personality_public_content_asset_v2'] ?? null)) {
+            $payload['personality_public_content_asset_v2'] = array_intersect_key(
+                $payload['personality_public_content_asset_v2'],
+                array_fill_keys([
+                    'contract_version',
+                    'compatible_v1_contract_version',
+                    'visible_evidence',
+                    'editorial_authority',
+                    'media_authority',
+                    'schema_eligible',
+                ], true),
+            );
+        }
+
+        if (is_array($payload['items'] ?? null)) {
+            foreach ($payload['items'] as $index => $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+
+                unset($item['content_sections']);
+                $payload['items'][$index] = $item;
+            }
+        }
+
+        return $payload;
     }
 
     private function staleResponseOrThrow(
@@ -859,7 +991,35 @@ final class PersonalityPublicContentAssetController extends Controller
             $orgId,
         );
         if (is_array($staleRead['payload'])) {
+            if ($this->isOversizedDetailPayload($staleRead['payload'])) {
+                $this->readModelCache->discardActivePreservingLkg(
+                    $surface,
+                    $framework,
+                    $entityType,
+                    $selector,
+                    $locale,
+                    $orgId,
+                );
+                $lkgRead = $this->readModelCache->stale(
+                    $surface,
+                    $framework,
+                    $entityType,
+                    $selector,
+                    $locale,
+                    $orgId,
+                );
+                if (is_array($lkgRead['payload'])) {
+                    return $this->publicReadResponse($lkgRead['payload'], $lkgRead['state']);
+                }
+
+                return $this->payloadBudgetExceededResponse($lkgRead['state']);
+            }
+
             return $this->publicReadResponse($staleRead['payload'], $staleRead['state']);
+        }
+
+        if ($throwable instanceof LengthException) {
+            return $this->payloadBudgetExceededResponse($staleRead['state']);
         }
 
         throw $throwable;
