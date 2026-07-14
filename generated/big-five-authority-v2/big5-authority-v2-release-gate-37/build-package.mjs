@@ -12,6 +12,7 @@ const dependency = {
   pr_number: 3084,
   merge_sha: '06057445739c2d7fa0116bacb3b00648d35a11be',
 };
+const pr37MergeSha = 'af99ac41406a2967b9f4778dc9da07b920bfbb7f';
 const read = (relativePath) => JSON.parse(fs.readFileSync(path.join(root, relativePath), 'utf8'));
 const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex');
 
@@ -117,6 +118,37 @@ const assets = eligibility.map((candidate) => ({
   blockers: candidate.blocking_gates,
 }));
 
+const routeKeys = ['route', 'path', 'canonical_path'];
+const collectRouteRecords = (node, route, matches) => {
+  if (Array.isArray(node)) {
+    node.forEach((value) => collectRouteRecords(value, route, matches));
+    return;
+  }
+  if (node === null || typeof node !== 'object') return;
+  if (routeKeys.some((key) => node[key] === route) && (node.title || node.content_key || node.asset_type)) {
+    matches.push(node);
+  }
+  Object.values(node).forEach((value) => collectRouteRecords(value, route, matches));
+};
+const sourceDocuments = inputFiles
+  .filter((relativePath) => relativePath.endsWith('.json'))
+  .map((relativePath) => ({ relativePath, document: read(relativePath) }));
+const draftAssets = assets.map((asset) => {
+  const matches = [];
+  sourceDocuments
+    .filter(({ relativePath }) => relativePath.includes(`/${asset.source_package}/`))
+    .forEach(({ document }) => collectRouteRecords(document, asset.route, matches));
+  if (matches.length !== 1) {
+    throw new Error(`expected exactly one source record for ${asset.asset_id}, found ${matches.length}`);
+  }
+  const draftPayload = matches[0];
+  return {
+    ...asset,
+    source_hash: sha256(JSON.stringify(draftPayload)),
+    draft_payload: draftPayload,
+  };
+});
+
 const manifest = {
   schema_version: 'big5-authority-v2-aggregate-manifest.v1',
   generated_at: generatedAt,
@@ -163,15 +195,33 @@ const dryRun = {
   indexability_writes: 0,
   command: 'php generated/big-five-authority-v2/big5-authority-v2-release-gate-37/local-test-db-dry-run.php',
 };
+const approvalPhrase = `AUTHORIZE BIG5 AUTHORITY V2 DRAFT-ONLY PRODUCTION IMPORT FOR PR37_MERGE_SHA=${pr37MergeSha} PACKAGE_SHA256=${packageSha256} ASSET_COUNT=${assets.length} CREATE=${assets.length} UPDATE=0; PUBLIC_RELEASE=0; INDEXABILITY=0; SITEMAP=0; LLMS=0; SEARCH_SUBMISSION=0; ABORT_ON_ANY_MISMATCH`;
+const draftImportPackage = {
+  schema_version: 'big5-authority-v2-multi-surface-draft-import.v1',
+  generated_at: generatedAt,
+  authority: 'CMS/backend only',
+  mode: 'draft_noindex_only',
+  pr37_merge_sha: pr37MergeSha,
+  authority_package_sha256: packageSha256,
+  asset_count: draftAssets.length,
+  expected_create_count: draftAssets.length,
+  expected_update_count: 0,
+  assets: draftAssets,
+};
+const draftImportPackageJson = `${JSON.stringify(draftImportPackage, null, 2)}\n`;
+const draftImportPackageSha256 = sha256(draftImportPackageJson);
+const draftImportCommand = `php artisan personality:big-five-authority-v2-draft-import --package=../${packageRoot}/big5-authority-v2-release-gate-37/draft-import-package.json --authorization-packet=../${packageRoot}/big5-authority-v2-release-gate-37/production-authorization-packet.json --confirm-pr37-merge-sha=${pr37MergeSha} --confirm-package-sha256=${packageSha256} --expected-create=${assets.length} --expected-update=0 --operator-approved='${approvalPhrase}' --write --json --output=/tmp/big5-authority-v2-production-import-report.json`;
 const authorization = {
   schema_version: 'big5-authority-v2-production-authorization-packet.v1',
   generated_at: generatedAt,
-  status: 'NO_GO_PENDING_ELIGIBILITY_REPAIR_AND_EXACT_PRODUCTION_AUTHORIZATION',
+  status: 'GO_DRAFT_ONLY_PRODUCTION_IMPORT_AUTHORIZED_PENDING_EXACT_PREFLIGHT',
   dependency_merged_pr: dependency,
-  pr37_merge_sha: null,
-  pr37_merge_sha_status: 'MUST_BE_FILLED_FROM_GITHUB_AFTER_PR37_MERGES',
+  pr37_merge_sha: pr37MergeSha,
+  pr37_merge_sha_status: 'VERIFIED_FROM_GITHUB_MERGE_COMMIT',
   artifact_path: `${packageRoot}/big5-authority-v2-release-gate-37/aggregate-manifest.json`,
   package_sha256: packageSha256,
+  draft_import_package_path: `${packageRoot}/big5-authority-v2-release-gate-37/draft-import-package.json`,
+  draft_import_package_sha256: draftImportPackageSha256,
   asset_count: assets.length,
   local_test_empty_baseline_counts: {
     create: assets.length,
@@ -183,8 +233,9 @@ const authorization = {
   alias_301_count: graph.redirects.length,
   write_workflow: {
     dry_run_command: dryRun.command,
-    production_command: null,
-    production_command_status: 'UNAVAILABLE_FAIL_CLOSED_MULTI_SURFACE_CMS_WRITER_NOT_AUTHORIZED_BY_PR37',
+    production_preflight_command: draftImportCommand.replace(' --write ', ' --preflight ').replace('production-import-report', 'production-preflight-report'),
+    production_command: draftImportCommand,
+    production_command_status: 'AVAILABLE_FAIL_CLOSED_DRAFT_ONLY_EXACT_AUTHORIZATION_REQUIRED',
     required_mode: 'draft/noindex first; per-page publish only after every gate passes',
   },
   expected_effects_if_a_separate_writer_is_later_authorized: {
@@ -206,6 +257,9 @@ const authorization = {
     'any author/reviewer/date or media gate remains false for a page proposed for publication',
     'production create/update counts differ from an approved read-only preflight',
     'writer command is unavailable or the exact approval phrase does not match',
+    'production preflight does not report exactly 231 creates and 0 updates',
+    'any target identity already exists, including a soft-deleted Article identity',
+    'any transaction error or post-write primary-record readback mismatch',
   ],
   current_blockers: {
     publish_eligible: eligibilitySummary.release_eligible,
@@ -214,8 +268,9 @@ const authorization = {
     media_authority_pass: eligibilitySummary.gate_pass_counts.media_authority,
     visible_evidence_pass: eligibilitySummary.gate_pass_counts.visible_evidence,
   },
-  exact_approval_phrase_template: `AUTHORIZE BIG5 AUTHORITY V2 DRAFT-ONLY PRODUCTION IMPORT FOR PR37_MERGE_SHA=<PR37_MERGE_SHA> PACKAGE_SHA256=${packageSha256} ASSET_COUNT=${assets.length} CREATE=${assets.length} UPDATE=0; PUBLIC_RELEASE=0; INDEXABILITY=0; SITEMAP=0; LLMS=0; SEARCH_SUBMISSION=0; ABORT_ON_ANY_MISMATCH`,
-  approval_phrase_currently_executable: false,
+  exact_approval_phrase_template: approvalPhrase,
+  exact_approval_phrase: approvalPhrase,
+  approval_phrase_currently_executable: true,
 };
 
 const routeSet = new Set(assets.map((asset) => asset.route));
@@ -223,7 +278,7 @@ const assetIdSet = new Set(assets.map((asset) => asset.asset_id));
 const qa = {
   schema_version: 'big5-authority-v2-release-gate-qa.v1',
   generated_at: generatedAt,
-  status: 'PASS_DRY_RUN_FAIL_CLOSED_NO_GO',
+  status: 'PASS_DRAFT_ONLY_WRITER_AUTHORIZED_NO_PUBLIC_RELEASE',
   package_sha256: packageSha256,
   checks: {
     exact_asset_count_231: assets.length === 231,
@@ -243,9 +298,11 @@ const qa = {
     every_page_has_release_decision: assets.every((asset) => typeof asset.publish_eligible === 'boolean' && Array.isArray(asset.blockers)),
     no_page_publish_or_index_release: assets.every((asset) => !asset.publish_eligible && !asset.indexability_eligible),
     no_production_mutation: [dryRun.production_writes, dryRun.cms_writes, dryRun.indexability_writes].every((count) => count === 0),
-    authorization_packet_complete_but_not_executable: authorization.approval_phrase_currently_executable === false && authorization.write_workflow.production_command === null,
+    authorization_packet_complete_and_draft_writer_executable: authorization.approval_phrase_currently_executable === true && typeof authorization.write_workflow.production_command === 'string',
   },
 };
+
+fs.writeFileSync(path.join(dir, 'draft-import-package.json'), draftImportPackageJson);
 
 for (const [file, data] of Object.entries({
   'aggregate-manifest.json': manifest,
@@ -255,4 +312,4 @@ for (const [file, data] of Object.entries({
   'qa_report.json': qa,
 })) fs.writeFileSync(path.join(dir, file), `${JSON.stringify(data, null, 2)}\n`);
 
-console.log(`built Big Five PR37 aggregate: ${assets.length} assets / ${fileEntries.length} inputs / sha256 ${packageSha256} / NO_GO`);
+console.log(`built Big Five PR37 aggregate: ${assets.length} assets / ${fileEntries.length} inputs / sha256 ${packageSha256} / DRAFT_ONLY_AUTHORIZED`);
