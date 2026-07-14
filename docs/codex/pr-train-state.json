@@ -90130,9 +90130,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-RANGE-CONSCIENTIOUSNESS-11"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "46940c7217b11788d0affd6444b99c0f49c3e565",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3048",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -90141,6 +90141,10 @@
       "local": {
         "status": "pass",
         "evidence": "Package validator passed exact 8-page coverage and fail-closed release gates; BigFiveAuthorityV212Test passed 5 tests / 227 assertions; touched PHP Pint passed; JSON, JavaScript, PHP, YAML, and ledger syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files; PR10/PR11-to-PR12 substantive body exact-copy check found zero matches."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #3048 opened from 46940c7217b11788d0affd6444b99c0f49c3e565 after all manifest local checks passed."
       }
     },
     "failure_reason": null,
@@ -90163,6 +90167,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All manifest local checks passed: package validator; 5 tests / 227 assertions; Pint; JSON, JS, PHP, YAML, ledger and diff checks; exact 9-file scope; and zero exact substantive-body copies from the prior two range packages."
+      },
+      {
+        "at": "2026-07-14T00:13:12Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Pushed the exact scoped branch and opened PR #3048; waiting for the complete required GitHub check set before merge."
       }
     ]
   },
