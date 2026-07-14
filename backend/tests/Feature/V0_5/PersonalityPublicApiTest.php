@@ -1894,6 +1894,64 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonMissingPath('items.0.content_sections');
     }
 
+    public function test_personality_asset_detail_enforces_payload_budget_with_lkg_or_structured_unavailable(): void
+    {
+        Cache::flush();
+        $asset = $this->createPublicContentAsset([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_DOMAIN,
+            'entity_key' => 'openness',
+            'slug' => 'big-five/openness',
+            'content_sections_json' => [[
+                'key' => 'overview',
+                'title' => 'Overview',
+                'body_md' => 'Last known good section.',
+            ]],
+        ]);
+        $path = '/api/v0.5/personality-content-assets/big_five/domain/openness?locale=en';
+
+        $this->getJson($path)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
+
+        $asset->update(['content_sections_json' => [[
+            'key' => 'overview',
+            'title' => 'Overview',
+            'body_md' => str_repeat('x', PersonalityPublicContentAssetController::MAX_DETAIL_PAYLOAD_BYTES),
+        ]]]);
+
+        $this->getJson($path)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+            ->assertJsonPath(
+                'personality_public_content_asset_v1.sections.0.body_md',
+                'Last known good section.',
+            );
+
+        $uncached = $this->createPublicContentAsset([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'type-2',
+            'slug' => 'enneagram/type-2',
+            'content_sections_json' => [[
+                'key' => 'overview',
+                'title' => 'Overview',
+                'body_md' => str_repeat('y', PersonalityPublicContentAssetController::MAX_DETAIL_PAYLOAD_BYTES),
+            ]],
+        ]);
+        self::assertGreaterThan(0, $uncached->id);
+        $uncachedPath = '/api/v0.5/personality-content-assets/enneagram/core_type/type-2?locale=en';
+
+        for ($attempt = 0; $attempt < 2; $attempt++) {
+            $this->getJson($uncachedPath)
+                ->assertStatus(503)
+                ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+                ->assertHeader('Retry-After', '60')
+                ->assertJsonPath('ok', false)
+                ->assertJsonPath('error_code', 'PUBLIC_PAYLOAD_BUDGET_EXCEEDED');
+        }
+    }
+
     public function test_personality_asset_responses_normalize_legacy_active_and_lkg_payloads(): void
     {
         Cache::flush();

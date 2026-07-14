@@ -15,6 +15,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use LengthException;
 use Throwable;
 
 final class PersonalityPublicContentAssetController extends Controller
@@ -812,6 +813,17 @@ final class PersonalityPublicContentAssetController extends Controller
             }
 
             $payload = $this->detailPayload($asset);
+            if (! $this->detailPayloadWithinBudget($payload)) {
+                return $this->staleResponseOrThrow(
+                    $surface,
+                    $framework,
+                    $entityType,
+                    $selector,
+                    $locale,
+                    $orgId,
+                    new LengthException('personality content asset detail payload exceeds budget.'),
+                );
+            }
             $this->readModelCache->put(
                 $surface,
                 $framework,
@@ -841,8 +853,32 @@ final class PersonalityPublicContentAssetController extends Controller
     /** @param array<string,mixed> $payload */
     private function publicReadResponse(array $payload, string $cacheState): JsonResponse
     {
-        return response()->json($this->canonicalPublicReadPayload($payload))
+        $canonicalPayload = $this->canonicalPublicReadPayload($payload);
+        if (isset($canonicalPayload['personality_public_content_asset_v1'])
+            && ! $this->detailPayloadWithinBudget($canonicalPayload)) {
+            return $this->payloadBudgetExceededResponse($cacheState);
+        }
+
+        return response()->json($canonicalPayload)
             ->header(self::PUBLIC_READ_CACHE_HEADER, $cacheState);
+    }
+
+    /** @param array<string,mixed> $payload */
+    private function detailPayloadWithinBudget(array $payload): bool
+    {
+        return strlen((string) response()->json($payload)->getContent())
+            <= self::MAX_DETAIL_PAYLOAD_BYTES;
+    }
+
+    private function payloadBudgetExceededResponse(string $cacheState): JsonResponse
+    {
+        return response()->json([
+            'ok' => false,
+            'error_code' => 'PUBLIC_PAYLOAD_BUDGET_EXCEEDED',
+            'message' => 'personality content asset temporarily unavailable.',
+        ], 503)
+            ->header(self::PUBLIC_READ_CACHE_HEADER, $cacheState)
+            ->header('Retry-After', '60');
     }
 
     /**
@@ -906,6 +942,10 @@ final class PersonalityPublicContentAssetController extends Controller
         );
         if (is_array($staleRead['payload'])) {
             return $this->publicReadResponse($staleRead['payload'], $staleRead['state']);
+        }
+
+        if ($throwable instanceof LengthException) {
+            return $this->payloadBudgetExceededResponse($staleRead['state']);
         }
 
         throw $throwable;
