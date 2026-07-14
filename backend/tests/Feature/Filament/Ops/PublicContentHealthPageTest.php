@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Livewire\Livewire;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -149,6 +150,47 @@ final class PublicContentHealthPageTest extends TestCase
             ->assertSee('Runtime metrics unavailable')
             ->assertSee('Probe storage unavailable')
             ->assertDontSee('Cache store [missing-store] is not defined');
+    }
+
+    public function test_observed_failed_publication_readback_is_not_reported_as_no_data(): void
+    {
+        Http::fake(function (Request $request) {
+            return match (true) {
+                str_contains($request->url(), '/personality/intj-a') => Http::response([
+                    'profile' => [
+                        'published_at' => '2026-07-01T00:00:00Z',
+                        'updated_at' => '2026-07-13T00:00:00Z',
+                    ],
+                    'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
+                ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']),
+                str_contains($request->url(), '/personality-content-assets/') => Http::response([
+                    'personality_public_content_asset_v1' => [
+                        'contract_version' => 'personality.public_content_asset.v1',
+                    ],
+                ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']),
+                default => Http::response([
+                    'authority_version' => 'career.industry_directory.v1',
+                    'bundle_version' => 'career.industry_directory.v1',
+                    'locale' => 'en',
+                    'public_detail_indexable_count' => 1048,
+                    'industry_count' => 23,
+                ]),
+            };
+        });
+
+        foreach ([0, 1, 0] as $expectedExitCode) {
+            $this->assertSame($expectedExitCode, Artisan::call('public-content:probe-delivery', ['--json' => true]));
+        }
+
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        Livewire::test(PublicContentHealthPage::class)
+            ->assertSet('publicationCards.0.status_state', 'healthy')
+            ->assertSet('publicationCards.1.status_state', 'failed')
+            ->assertSet('publicationCards.2.status_state', 'healthy');
     }
 
     public function test_page_source_exposes_no_mutating_control(): void

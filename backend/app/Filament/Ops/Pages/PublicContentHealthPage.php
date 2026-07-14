@@ -326,6 +326,7 @@ final class PublicContentHealthPage extends Page
         $readback = is_array($row['result']['readback'] ?? null) ? $row['result']['readback'] : [];
         $fields = is_array($readback['fields'] ?? null) ? $readback['fields'] : [];
         $ok = ($readback['ok'] ?? false) === true;
+        $state = $row['result'] === null ? 'no_data' : ($ok ? 'healthy' : 'failed');
 
         return [
             'title' => $this->familyLabel((string) ($target['family'] ?? 'unknown')),
@@ -333,8 +334,8 @@ final class PublicContentHealthPage extends Page
             'description' => $ok
                 ? $this->fieldSummary($fields)
                 : __('public-content-health.publication.no_readback'),
-            'status' => __('public-content-health.states.'.($ok ? 'healthy' : 'no_data')),
-            'status_state' => $ok ? 'healthy' : 'no_data',
+            'status' => __('public-content-health.states.'.$state),
+            'status_state' => $state,
         ];
     }
 
