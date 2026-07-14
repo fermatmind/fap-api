@@ -92044,9 +92044,9 @@
     "depends_on": [
       "MBTI-VERIFY-41"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "f49279059f939c540b044248323ae641eb604f87",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3085",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -92075,6 +92075,10 @@
       "scope_and_syntax": {
         "status": "pass",
         "evidence": "YAML and JSON parsing, git diff --check, and the exact seven-file MBTI-PERF-42 allowlist validation passed."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #3085 is open from codex/mbti-perf-42-profile-read-stability; required checks are pending on the ledger-updated head."
       }
     },
     "failure_reason": null,
@@ -92097,6 +92101,11 @@
         "at": "2026-07-14T14:01:23Z",
         "status": "local_checks_passed",
         "note": "Focused feature tests (33 tests / 3451 assertions), cache unit tests (6 tests / 17 assertions), Pint, the complete ci_verify_mbti.sh suite, syntax/diff checks, and exact seven-file scope validation passed on the rebased origin/main 014451db088e5ab1106bfdcee706ff3f30ef747b."
+      },
+      {
+        "at": "2026-07-14T14:05:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact seven-file scope as f49279059f939c540b044248323ae641eb604f87, pushed codex/mbti-perf-42-profile-read-stability, and opened PR #3085. Waiting for required GitHub checks on the ledger-updated head."
       }
     ]
   }
