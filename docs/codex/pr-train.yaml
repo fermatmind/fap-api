@@ -43215,3 +43215,51 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: MBTI-PERF-42
+    repo: fap-api
+    base: main
+    branch: codex/mbti-perf-42-profile-read-stability
+    title: "MBTI-PERF-42: stabilize MBTI profile public read performance"
+    train_scope: mbti_profile_public_read_performance_stability
+    status: user_authorized
+    depends_on:
+      - MBTI-VERIFY-41
+    scope:
+      - Keep the anonymous MBTI Profile detail and SEO payload contracts unchanged while avoiding heavy section and SEO relation loads on fresh cache reads.
+      - Preserve version-based invalidation, stale/LKG behavior, locale and variant cache isolation, withdrawal fail-closed behavior, and public indexability.
+      - Make cold and warm read latency observable in the 32-Profile warm command and fail when a warm detail or SEO read reaches 10 seconds.
+      - Add focused query and warm-read contracts proving cached reads do not reload heavy content relations.
+    allowed_paths:
+      - backend/app/Services/Cms/PersonalityProfileService.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - backend/app/Console/Commands/PersonalityWarmPublicReadModels.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - backend/tests/Feature/Console/PersonalityWarmPublicReadModelsCommandTest.php
+      - backend/tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change CMS content, response payload fields, SEO text, indexability, canonical URLs, sitemap, llms, comparison readmodels, DB schema, or private routes.
+      - Increase frontend timeouts, add frontend content fallback, execute production warmup, deploy, import, promote, or submit GSC actions.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/PersonalityWarmPublicReadModelsCommandTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Cms/PersonalityProfileService.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php app/Console/Commands/PersonalityWarmPublicReadModels.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Feature/Console/PersonalityWarmPublicReadModelsCommandTest.php tests/Unit/Services/Cms/PersonalityPublicReadModelCacheTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    runtime_change: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    indexability_mutation_allowed: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend

@@ -112,24 +112,28 @@ final class PersonalityProfileService
         string $typeLookup,
         int $orgId,
         string $scaleCode,
-        string $locale
+        string $locale,
+        bool $loadContentRelations = true,
     ): ?array {
         $lookup = $this->resolvePublicTypeLookup($typeLookup);
 
-        $profile = $this->basePublicQuery($orgId, $scaleCode, $locale)
+        $profileQuery = $this->basePublicQuery($orgId, $scaleCode, $locale)
             ->where(function (Builder $query) use ($lookup): void {
                 $query->where('slug', $lookup['canonical_slug'])
                     ->orWhere('type_code', $lookup['canonical_type_code']);
-            })
-            ->with([
+            });
+        if ($loadContentRelations) {
+            $profileQuery->with([
                 'sections' => static function (HasMany $query): void {
                     $query->where('is_enabled', true)
                         ->orderBy('sort_order')
                         ->orderBy('id');
                 },
                 'seoMeta',
-            ])
-            ->first();
+            ]);
+        }
+
+        $profile = $profileQuery->first();
 
         if (! $profile instanceof PersonalityProfile) {
             return null;
@@ -138,7 +142,11 @@ final class PersonalityProfileService
         $variant = null;
 
         if ($lookup['runtime_type_code'] !== null) {
-            $variant = $this->resolvePublishedVariantForPublicRoute($profile, $lookup['runtime_type_code']);
+            $variant = $this->resolvePublishedVariantForPublicRoute(
+                $profile,
+                $lookup['runtime_type_code'],
+                $loadContentRelations,
+            );
 
             if (! $variant instanceof PersonalityProfileVariant) {
                 return null;
@@ -149,6 +157,28 @@ final class PersonalityProfileService
             'profile' => $profile,
             'variant' => $variant,
         ];
+    }
+
+    public function loadPublicDetailRouteContentRelations(
+        PersonalityProfile $profile,
+        ?PersonalityProfileVariant $variant,
+    ): void {
+        $profile->loadMissing([
+            'sections' => static function (HasMany $query): void {
+                $query->where('is_enabled', true)
+                    ->orderBy('sort_order')
+                    ->orderBy('id');
+            },
+            'seoMeta',
+        ]);
+
+        $variant?->loadMissing([
+            'sections' => static function (HasMany $query): void {
+                $query->orderBy('sort_order')
+                    ->orderBy('id');
+            },
+            'seoMeta',
+        ]);
     }
 
     /**
@@ -348,7 +378,8 @@ final class PersonalityProfileService
 
     private function resolvePublishedVariantForPublicRoute(
         PersonalityProfile $profile,
-        string $runtimeTypeCode
+        string $runtimeTypeCode,
+        bool $loadContentRelations = true,
     ): ?PersonalityProfileVariant {
         $normalizedRuntimeTypeCode = strtoupper(trim($runtimeTypeCode));
 
@@ -356,20 +387,23 @@ final class PersonalityProfileService
             return null;
         }
 
-        return $profile->variants()
+        $query = $profile->variants()
             ->where('runtime_type_code', $normalizedRuntimeTypeCode)
             ->where('is_published', true)
             ->where(static function (Builder $query): void {
                 $query->whereNull('published_at')
                     ->orWhere('published_at', '<=', now());
-            })
-            ->with([
+            });
+        if ($loadContentRelations) {
+            $query->with([
                 'sections' => static function (HasMany $query): void {
                     $query->orderBy('sort_order')
                         ->orderBy('id');
                 },
                 'seoMeta',
-            ])
-            ->first();
+            ]);
+        }
+
+        return $query->first();
     }
 }
