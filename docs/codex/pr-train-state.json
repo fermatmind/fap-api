@@ -92044,8 +92044,8 @@
     "depends_on": [
       "MBTI-VERIFY-41"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "f49279059f939c540b044248323ae641eb604f87",
+    "status": "ready_to_merge",
+    "commit_sha": "6de4e5753a6c413f0228d38de77f00b41ad1b254",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3085",
     "checks": {
       "dependency": {
@@ -92077,8 +92077,8 @@
         "evidence": "YAML and JSON parsing, git diff --check, and the exact seven-file MBTI-PERF-42 allowlist validation passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3085 is open from codex/mbti-perf-42-profile-read-stability; required checks are pending on the ledger-updated head."
+        "status": "pass",
+        "evidence": "All nine GitHub checks passed on head 6de4e5753a6c413f0228d38de77f00b41ad1b254: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep OSS, Semgrep blocking secrets, and the non-blocking SARIF upload. GitHub reported CLEAN merge state and the changed-file set remained exactly within the seven allowed paths."
       }
     },
     "failure_reason": null,
@@ -92106,6 +92106,11 @@
         "at": "2026-07-14T14:05:00Z",
         "status": "github_checks_pending",
         "note": "Committed the exact seven-file scope as f49279059f939c540b044248323ae641eb604f87, pushed codex/mbti-perf-42-profile-read-stability, and opened PR #3085. Waiting for required GitHub checks on the ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T14:15:50Z",
+        "status": "ready_to_merge",
+        "note": "All nine GitHub checks passed on ledger-updated head 6de4e5753a6c413f0228d38de77f00b41ad1b254, GitHub reports CLEAN merge state, and the changed-file set remains exactly within the seven allowed paths. Recorded ready-to-merge state before final ledger-only head validation."
       }
     ]
   }
