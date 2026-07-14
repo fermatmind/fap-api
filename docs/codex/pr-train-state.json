@@ -91990,7 +91990,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36"
     ],
-    "status": "draft_writer_ci_fix_validated_pending_push",
+    "status": "draft_writer_ready_to_merge",
     "commit_sha": "af99ac41406a2967b9f4778dc9da07b920bfbb7f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3086",
     "checks": {
@@ -92043,12 +92043,13 @@
         "evidence": "On 2026-07-14 the operator supplied both exact authorizations: first, a minimal fail-closed multi-surface draft import writer with preflight-only behavior until a new exact production authorization; second, the exact PR37 merge SHA/package SHA/231-create/0-update draft-only production import phrase. The authorization still forbids deploy, publish, indexability, sitemap, llms, media, cache, search submission, and any count mismatch."
       },
       "draft_writer_implementation": {
-        "status": "pr_open_pending_checks",
+        "status": "ready_to_merge",
         "writer_commit_sha": "de3f235cb1508e74eb27ca29156cfe166364c959",
+        "writer_head_sha": "87cddbd2278b29bada2c785f910d69caee294749",
         "writer_pr_number": 3088,
         "writer_pr_url": "https://github.com/fermatmind/fap-api/pull/3088",
         "writer_github_checks": {
-          "status": "same_scope_fix_validated_pending_push",
+          "status": "pass_9_of_9_after_same_scope_fix",
           "failed_check": "verify-bigfive",
           "failure_evidence": "The first PR round had 8 passing checks and one verify-bigfive failure: the runtime freeze classifier correctly identified the newly added command/service until an explicit controlled draft-import allowlist entry was added. The Big Five suite itself reported 1379 passed, 1 skipped, and 1 failed with 172333 assertions.",
           "fix_validation": "The exact classifier tests passed 3 tests / 5 assertions; PR37 plus writer tests passed 8 tests / 3764 assertions; Pint passed all 5 touched PHP files."
@@ -92131,6 +92132,12 @@
         "from": "draft_writer_pr_open_pending_checks",
         "to": "draft_writer_ci_fix_validated_pending_push",
         "note": "The first GitHub round passed 8 checks but verify-bigfive failed only because the Big Five runtime freeze classifier had no explicit entry for the new controlled draft-import command/service. Added the exact two-file allowlist and positive/negative classifier coverage in the existing freeze test; focused classifier, writer, PR37, and Pint checks pass. No production operation ran."
+      },
+      {
+        "at": "2026-07-14T16:06:07Z",
+        "from": "draft_writer_ci_fix_validated_pending_push",
+        "to": "draft_writer_ready_to_merge",
+        "note": "PR #3088 head 87cddbd2278b29bada2c785f910d69caee294749 is mergeable and passed all 9 GitHub checks after the exact classifier repair: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, blocking secrets, and SARIF upload. Production execution remains false."
       }
     ]
   },
