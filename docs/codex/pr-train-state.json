@@ -285,13 +285,13 @@
     "depends_on": [
       "ENNEAGRAM-90-BACKEND-CMS-OPS-WORKFLOW-01"
     ],
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "519e65d1720a427374b71adaeff505bdb5097c2f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2979",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T06:30:42Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -91056,6 +91056,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on ledger-updated head 9acba172493aa9d82f0d855bfa0b94e4d50d5931, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T06:33:12Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR24 after GitHub reported PR #3067 MERGED at 2026-07-14T06:30:42Z as squash commit 64d8d5e297bb7e3fb7df13141c87fcdf63df9572. origin/main contains the merge; remote and local task branches were deleted; post-merge package validation, 4 tests / 83 assertions, Pint, clean-main, and ancestry checks passed."
       }
     ]
   },
@@ -91068,10 +91074,19 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24 PR #3067 is MERGED as 64d8d5e297bb7e3fb7df13141c87fcdf63df9572; origin/main contains the merge, remote and local branches are deleted, and PR24 post-merge validator, 4 tests / 83 assertions, Pint, clean-main, and ancestry checks passed. PR25 started from that exact clean origin/main head."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact PR21 batch 25 coverage: 5 locked result-reading themes, 10 EN/zh-CN Article candidates, exact slugs/questions/audiences/tasks/keywords/sources/links, nine reader/evidence sections, distinct academic/product/repository source limitations, full raw-review-repair-final-mapping chain, private-result exclusion, null attribution, pending_manual_review, and zero CMS/publication/indexability mutations. BigFiveAuthorityV225Test passed with 4 tests / 124 assertions. Pint --test, PHP/JSON/JavaScript/YAML syntax, git diff --check, and exact 11-file allowlist checks passed."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -91080,7 +91095,20 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T06:33:12Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR25 from exact origin/main 64d8d5e297bb7e3fb7df13141c87fcdf63df9572 after PR24 merged, cleaned, reconciled, and revalidated. Scope consumes only PR21 batch 25: read results, score ranges, retest, consent-based result discussion, and a 30-day observation review, each in EN and zh-CN. All candidates remain pending_manual_review with null attribution and zero CMS, publication, indexability, or private-result mutations."
+      },
+      {
+        "at": "2026-07-14T06:37:14Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All PR25 local checks passed. The package exactly consumes PR21 batch 25 and preserves 10 bilingual Article candidates plus the complete skeptical review chain. Focused tests passed with 4 tests / 124 assertions; validator, Pint, syntax, source-ledger, private-link, diff, and exact 11-file scope checks passed."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26": {
     "id": "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26",

@@ -1,0 +1,204 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const dir = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(dir, '../../..');
+const generatedAt = '2026-07-14T06:33:12Z';
+const matrix = JSON.parse(fs.readFileSync(path.join(root, 'generated/big-five-authority-v2/big5-authority-v2-article-ia-21/article-intent-matrix.json'), 'utf8'));
+const ledger = JSON.parse(fs.readFileSync(path.join(root, 'generated/big-five-authority-v2/big5-authority-v2-source-ledger-05/source-ledger.json'), 'utf8'));
+const lockedThemes = matrix.themes.filter((theme) => theme.batch === 25);
+
+const sourceDisplay = {
+  'academic.soto-john-2017-bfi2': {
+    en: { label: 'Soto & John (2017), BFI-2 domains and facets', limitation: 'Supports one hierarchical Big Five measurement model; it does not validate FermatMind scores, ranges, retest timing, or individual interpretations.' },
+    'zh-CN': { label: 'Soto 与 John（2017）：BFI-2 维度与侧面', limitation: '支持一种大五层级测量模型；不验证费马测试分数、区间、复测时机或个人解释。' },
+  },
+  'official.fermatmind-public-contract-v2': {
+    en: { label: 'FermatMind Personality Public Content Asset V2 contract', limitation: 'Defines fail-closed public evidence and review fields; it is product authority, not independent scientific validation or publication approval.' },
+    'zh-CN': { label: '费马测试人格公开内容资产 V2 合约', limitation: '定义公开证据与审核字段的默认关闭规则；它是产品权威层，不是独立科学验证或发布批准。' },
+  },
+  'internal.public-claim-boundary-matrix': {
+    en: { label: 'FermatMind public claim boundary matrix', limitation: 'Governs non-diagnostic and non-deterministic claims; repository policy is not peer-reviewed Big Five evidence.' },
+    'zh-CN': { label: '费马测试公开主张边界矩阵', limitation: '约束非诊断、非决定论表达；仓库政策不是经同行评审的大五人格证据。' },
+  },
+};
+
+const copy = {
+  'read-results': {
+    en: {
+      title: 'How to Read Big Five Results Without Turning Them Into Labels',
+      answer: 'Read a Big Five result as a set of working hypotheses. Confirm each scale’s name and direction, compare all five ranges, inspect narrower facets where they are actually defined, and translate one description into behavior you can observe across more than one context.',
+      evidence: 'Hierarchical Big Five instruments use multiple responses to estimate broad domains and sometimes narrower facets. That structure supports reading a profile as several dimensions rather than one type, but evidence about a research instrument does not establish the accuracy of a FermatMind result or explain one person’s behavior by itself.',
+      nuance: 'A mismatch is information, not a reason to force your experience into the report. Recent stress, role demands, item interpretation, response style, and ordinary measurement uncertainty can all affect agreement. A matching sentence also does not prove a cause or fixed identity.',
+      scenario: 'A reader sees a higher conscientiousness range but has missed several deadlines while caring for a family member. Instead of rejecting the result or calling themselves “disciplined,” they compare planning, follow-through, competing demands, and counterexamples at home and work.',
+      framework: ['Check the scale label, polarity, and what the displayed range actually claims.', 'Read the five dimensions together without collapsing them into a type.', 'Choose one observable hypothesis and test it in at least two contexts.', 'Record a confirming example and a counterexample before choosing an action.'],
+      limitation: 'This reading sequence cannot quantify confidence in an individual result. FermatMind-specific reliability, validity, norms, measurement error, sample size, percentiles, and predictive accuracy are Unknown unless separately published and reviewed.',
+    },
+    'zh-CN': {
+      title: '怎样阅读大五人格结果：把描述变成假设，而不是标签',
+      answer: '应把大五人格结果读成一组工作假设。先确认量尺名称与方向，再比较五个维度区间；只有在页面明确给出侧面定义时才阅读侧面，最后把一个描述转化为可在多个情境观察的行为。',
+      evidence: '层级式大五工具通过多个回答估计宽泛维度，有时也估计较窄侧面。这支持把画像理解为多个维度，而不是一种类型；但研究工具的证据不能自动证明费马测试结果准确，也不能单独解释某个人的行为。',
+      nuance: '不吻合也是信息，不必为了配合报告而改写经历。近期压力、角色要求、题意理解、作答方式与一般测量不确定性都可能影响吻合度；一句描述吻合，也不能证明原因或固定身份。',
+      scenario: '读者看到尽责性区间较高，但在照护家人的阶段错过了几次截止日期。更稳妥的做法不是否定结果或自称“自律的人”，而是分别观察计划、执行、现实负荷，以及家庭与工作中的反例。',
+      framework: ['核对量尺名称、方向和页面对区间的实际定义。', '把五个维度放在一起读，不压缩成人格类型。', '选择一个可观察假设，在至少两个情境中检验。', '同时记录一个吻合例子与一个反例，再决定行动。'],
+      limitation: '这套阅读顺序不能量化个人结果的可信程度。费马测试产品特定的信度、效度、常模、测量误差、样本量、百分位与预测准确性，在未另行公开审核前均为 Unknown。',
+    },
+  },
+  'score-ranges': {
+    en: {
+      title: 'What High, Middle, and Low Big Five Ranges Can—and Cannot—Mean',
+      answer: 'High, middle, and low are presentation ranges on a continuous dimension. They can organize a description of tendencies, but they are not automatically percentiles, ability levels, diagnoses, or hard boundaries between kinds of people.',
+      evidence: 'Big Five measurement models estimate degrees of broad traits. Reports may group continuous estimates into bands for readability. To interpret a band as a percentile or norm-referenced position, a product would need a publicly reviewed reference sample, scoring rule, and cutoff rationale; those FermatMind-specific values are not supplied here.',
+      nuance: 'Two scores near opposite sides of a band boundary may be more alike than their labels suggest. Direction matters too: a “high” label is not a universal benefit, and reversing neuroticism into emotional stability changes the wording and polarity that readers must be shown.',
+      scenario: 'Two friends compare reports labeled “middle” and “high.” Without the underlying scale, norm population, cutoffs, and uncertainty, they cannot conclude who has more skill or who ranks above whom. They can only inspect whether each description prompts useful observations.',
+      framework: ['Identify the dimension and stated direction.', 'Ask whether the band is descriptive or backed by a published norm and cutoff method.', 'Treat boundary cases as approximate and compare behavior, not status.', 'Do not compare people or abilities from labels alone.'],
+      limitation: 'FermatMind-specific norm groups, cutoffs, percentiles, uncertainty intervals, reliability, and validity values are Unknown in this package. No range should be converted into a rank, diagnosis, or outcome forecast.',
+    },
+    'zh-CN': {
+      title: '大五人格高、中、低区间意味着什么：先看连续维度与常模边界',
+      answer: '高、中、低是连续维度上的呈现区间，可以帮助组织倾向描述，但不会自动变成百分位、能力等级、诊断，或人与人之间的硬边界。',
+      evidence: '大五测量模型估计宽泛特质的程度，报告可能为了易读而把连续估计分组。若要把区间解释成百分位或常模位置，产品必须公开并审核参照样本、计分规则与切点依据；本文没有提供这些费马测试产品数值。',
+      nuance: '处在同一切点两侧的两个分数，可能比标签暗示的更相似。方向也很重要：“高”并非普遍更好；若把神经质反向表达为情绪稳定性，页面必须明确显示名称与方向。',
+      scenario: '两位朋友比较分别标为“中间”和“较高”的报告。缺少底层量尺、常模人群、切点与不确定性时，不能据此判断谁能力更强或排名更高；只能观察各自描述是否能提出有用问题。',
+      framework: ['先确认维度名称与方向。', '询问区间只是描述，还是有公开常模与切点方法。', '把边界附近视为近似，并比较行为而不是身份地位。', '不要仅凭标签比较不同人的能力。'],
+      limitation: '本包中的费马测试产品特定常模人群、切点、百分位、不确定区间、信度与效度数值均为 Unknown。任何区间都不应被换算成排名、诊断或结果预测。',
+    },
+  },
+  retest: {
+    en: {
+      title: 'When to Retake a Big Five Test—and How to Read a Changed Score',
+      answer: 'Retest when you have a concrete question and can compare conditions, not to chase a preferred label. Record why you are retesting, what changed in the setting or your life, and what decision the second result could realistically inform.',
+      evidence: 'A changed response pattern can reflect several things: item interpretation, temporary context, response variability, measurement error, or a change in the tendencies being measured. Separating those explanations requires instrument-specific reliability and change evidence, not the size or direction of one score difference alone.',
+      nuance: 'There is no universal evidence-backed FermatMind retest interval published in this package. Retesting immediately can repeat remembered answers, while a later result still cannot prove personal growth or decline. A stable score also does not mean behavior cannot change.',
+      scenario: 'Someone completed a test while sleep-deprived and wants to retake it. They write down that condition, wait until they can answer in a more typical routine, keep the purpose and environment comparable, and review differences as questions rather than proof of a new personality.',
+      framework: ['Write one question the retest is meant to answer.', 'Record the first test’s context and avoid rehearsing a desired outcome.', 'Retest under a reasonably comparable, typical condition.', 'Review stable and changed dimensions alongside observations; do not infer cause from score change alone.'],
+      limitation: 'FermatMind-specific test–retest reliability, minimal detectable change, measurement error, and recommended interval are Unknown here. This article cannot certify that an observed difference is meaningful.',
+    },
+    'zh-CN': {
+      title: '什么时候适合复测大五人格：怎样理解分数变化',
+      answer: '有明确问题、并且能够比较作答条件时再复测，不要为了追逐喜欢的标签反复作答。应记录复测原因、环境或生活发生了什么变化，以及第二次结果现实中能帮助回答什么。',
+      evidence: '回答模式变化可能来自题意理解、临时情境、作答波动、测量误差，也可能来自被测倾向的变化。要区分这些解释，需要工具特定的信度与变化证据，不能只看一次分差的大小或方向。',
+      nuance: '本包没有公开一个适用于费马测试的、循证的通用复测间隔。立刻复测可能重复记忆中的答案；间隔更久的结果也不能证明个人成长或退步。分数稳定同样不代表行为不能改变。',
+      scenario: '某人在严重缺觉时完成测评，随后想复测。他先记录这一条件，等到能够在较典型的日常状态作答，再尽量保持目的与环境可比较，并把差异当作待核对的问题，而不是“人格已经改变”的证明。',
+      framework: ['写下一条复测要回答的具体问题。', '记录首次作答情境，不预演想得到的结果。', '在较典型且可比较的条件下复测。', '把稳定与变化维度同现实观察一起看，不从分数变化直接推断原因。'],
+      limitation: '费马测试产品特定的重测信度、最小可检测变化、测量误差与建议间隔在本文中均为 Unknown。本文不能证明某次分数差异具有实质意义。',
+    },
+  },
+  'discuss-results': {
+    en: {
+      title: 'How to Discuss Big Five Results Without Labeling Someone Else',
+      answer: 'Ask permission before discussing a result, let the result owner choose what to share, and use tentative first-person language. Talk about a specific observation or need rather than assigning a trait label, motive, diagnosis, or future outcome.',
+      evidence: 'Dimensional trait models describe broad tendencies; they do not reveal intentions, competence, moral worth, or what someone must do next. The FermatMind public boundary also keeps private results, report links, and decision-sensitive information outside public or coercive use.',
+      nuance: 'Even a flattering label can narrow a person’s choices or pressure them to agree. Feedback from another person may add context, but disagreement is not proof that either the report or the observer is correct. Consent can be withdrawn at any point.',
+      scenario: 'A partner wants to discuss a reported extraversion range. Instead of saying “you are an introvert,” they ask whether the owner wants to talk, describe one recent situation, ask what felt accurate, and stop without requesting the full private report.',
+      framework: ['Ask whether the person wants the conversation and what may be shared.', 'Use “I noticed…” and “Does this fit here?” instead of “You are…”.', 'Keep the discussion tied to one context, need, or experiment.', 'Do not copy, publish, or demand private report or attempt links.'],
+      limitation: 'A Big Five conversation is not diagnosis, mediation, hiring evidence, or a substitute for consent and direct communication. Product-specific accuracy and predictive claims remain Unknown.',
+    },
+    'zh-CN': {
+      title: '怎样与他人讨论大五人格结果：先取得同意，不替别人贴标签',
+      answer: '讨论结果前先征得同意，由结果所有者决定分享什么，并使用暂定的第一人称语言。应讨论具体观察或需要，不把特质标签、动机、诊断或未来结局强加给对方。',
+      evidence: '维度式特质模型描述宽泛倾向，不能读出意图、能力、道德价值或某人下一步必须做什么。费马测试公开边界也要求私人结果、报告链接与决策敏感信息不得进入公开或强迫性使用。',
+      nuance: '即使是看似正面的标签，也可能缩窄选择或迫使对方认同。他人的反馈可以补充情境，但意见不同并不能证明报告或观察者必然正确；同意可以随时撤回。',
+      scenario: '伴侣想讨论报告中的外向性区间。与其说“你就是内向的人”，更合适的做法是先询问是否愿意谈，描述一个近期场景，问哪些部分吻合，并且不索取完整私人报告。',
+      framework: ['先问对方是否愿意讨论，以及哪些内容可以分享。', '用“我观察到……”和“这里是否吻合？”代替“你就是……”。', '把讨论限制在一个情境、需要或小实验。', '不要复制、公开或强索私人报告与 attempt 链接。'],
+      limitation: '大五人格对话不是诊断、调解或招聘证据，也不能取代同意与直接沟通。产品特定的准确性与预测性主张仍为 Unknown。',
+    },
+  },
+  'thirty-day-review': {
+    en: {
+      title: 'A 30-Day Big Five Observation and Review Plan',
+      answer: 'Use 30 days as a time-boxed observation loop, not as a validation study. Choose one result description, define an observable hypothesis, collect examples and counterexamples across contexts, review weekly, and revise the hypothesis on day 30.',
+      evidence: 'Trait results become more useful for self-reflection when broad language is translated into concrete observations. A structured log can reduce hindsight and confirmation bias, but it does not estimate psychometric validity, prove a cause, or turn personal notes into a representative sample.',
+      nuance: 'Thirty days is an editorial practice window, not a scientifically established FermatMind threshold. Rare events, unusual workload, illness, travel, or one dominant context may distort the record. Missing observations should remain missing rather than be filled with guesses.',
+      scenario: 'A reader tests the hypothesis “I tend to seek social stimulation after focused work.” For four weeks they note the situation, behavior, cost, and exception at work and home. At the end they narrow the claim instead of deciding they have a fixed extraversion identity.',
+      framework: ['Day 1: select one narrow, observable hypothesis and two contexts.', 'Days 2–23: log brief observations, costs, and counterexamples without scoring yourself.', 'Days 7, 14, and 21: review what is missing and adjust the observation prompt.', 'Day 30: keep, narrow, or reject the hypothesis and choose one reversible action.'],
+      limitation: 'This 30-day loop is not a clinical protocol, norming study, reliability test, or proof of change. FermatMind product psychometric values and any causal or predictive conclusion remain Unknown.',
+    },
+    'zh-CN': {
+      title: '大五人格结果的 30 天观察与复盘计划',
+      answer: '把 30 天当作有时限的观察循环，而不是验证研究。选择一条结果描述，定义可观察假设，在不同情境收集例子与反例，每周复盘，并在第 30 天修订假设。',
+      evidence: '把宽泛特质语言翻译成具体观察，有助于将结果用于自我反思。结构化记录可以减少事后补写与确认偏误，但不能估计心理测量效度、证明原因，也不能把个人笔记变成代表性样本。',
+      nuance: '30 天是编辑性练习窗口，不是经科学确立的费马测试阈值。罕见事件、异常工作量、生病、旅行或单一强势情境都可能扭曲记录；没有观察到的内容应保留为空白，不用猜测补齐。',
+      scenario: '读者检验“完成专注工作后，我倾向寻求社交刺激”这一假设。四周内，他在工作与家庭记录情境、行为、代价与例外；期末把主张缩窄，而不是认定自己拥有固定的外向身份。',
+      framework: ['第 1 天：选择一个窄且可观察的假设，并确定两个情境。', '第 2—23 天：简短记录观察、代价与反例，不给自己打分。', '第 7、14、21 天：检查缺失信息，并调整观察提示。', '第 30 天：保留、缩窄或否定假设，再选择一个可逆行动。'],
+      limitation: '这套 30 天循环不是临床方案、常模研究、信度检验或变化证明。费马测试产品心理测量数值，以及任何因果或预测结论，仍为 Unknown。',
+    },
+  },
+};
+
+const sourceById = new Map(ledger.sources.map((source) => [source.id, source]));
+const visibleSources = (ids, locale) => ids.map((id) => {
+  const source = sourceById.get(id);
+  const display = sourceDisplay[id][locale];
+  return { source_id: id, evidence_category: source.evidence_category, label: display.label, public_url: source.public_url, repository_path: source.repository_path ?? null, limitation: display.limitation };
+});
+const sourceLine = (source, locale) => source.public_url
+  ? `- [${source.label}](${source.public_url}) — ${source.limitation}`
+  : `- ${source.label} — ${locale === 'en' ? 'Repository source' : '仓库来源'}: \`${source.repository_path}\` — ${source.limitation}`;
+
+const rawDrafts = lockedThemes.flatMap((theme) => theme.locales.map((locked) => {
+  const text = copy[theme.theme_key][locked.locale];
+  return { topic_id: theme.topic_id, locale: locked.locale, slug: locked.slug, title: text.title, locked_intent_key: theme.unique_intent_key, primary_question: locked.primary_question, raw_sections: { direct_answer: text.answer, evidence: text.evidence, scenario: text.scenario, practical_framework: text.framework }, evidence_source_ids: locked.source_requirements, review_status: 'draft_requires_skeptical_review' };
+}));
+
+const reviews = rawDrafts.map((draft) => ({
+  topic_id: draft.topic_id, locale: draft.locale, slug: draft.slug,
+  findings: ['Separate a useful reading practice from unsupported product psychometric claims.', 'Add a counterexample and preserve uncertainty rather than confirming the report.', 'Expose scientific, product-authority, and repository-policy sources with distinct limitations.', 'Keep private result links and all publication or indexability mutations out of scope.'],
+  repair_required: true, reviewer: null,
+}));
+
+const repairedDrafts = lockedThemes.flatMap((theme) => theme.locales.map((locked) => {
+  const text = copy[theme.theme_key][locked.locale];
+  return { topic_id: theme.topic_id, locale: locked.locale, slug: locked.slug, repairs: ['Separated practice guidance from psychometric claims.', 'Added a result-reading counterexample and uncertainty boundary.', 'Added a concrete observation framework.', 'Mapped all locked sources with category-specific limitations.', 'Preserved draft-only state and private-result safety.'], sections: { direct_answer: text.answer, evidence: text.evidence, nuance_counterexample: text.nuance, concrete_scenario: text.scenario, practical_framework: text.framework, limitation: text.limitation }, source_mapping: visibleSources(locked.source_requirements, locked.locale), review_status: 'repaired_pending_manual_review' };
+}));
+
+const finalAssets = lockedThemes.flatMap((theme) => theme.locales.map((locked) => {
+  const text = copy[theme.theme_key][locked.locale];
+  const sourceMapping = visibleSources(locked.source_requirements, locked.locale);
+  const methodBoundary = locked.locale === 'en'
+    ? 'Educational self-reflection only. This Article does not diagnose, assign identity, compare people for hiring or admission, guarantee outcomes, or establish FermatMind reliability, validity, norms, sample size, percentiles, measurement error, retest interval, or predictive accuracy; unsupported product values are Unknown. Private results and report or attempt links must not be published.'
+    : '仅用于教育性自我反思。本文不诊断、不分配身份、不用于招聘或录取比较、不保证结果，也不证明费马测试产品的信度、效度、常模、样本量、百分位、测量误差、复测间隔或预测准确性；无公开审核证据的产品数值均为 Unknown。私人结果以及 report 或 attempt 链接不得公开。';
+  return {
+    asset_type: 'Article', topic_id: theme.topic_id, batch: 25, locale: locked.locale, slug: locked.slug, path: locked.path,
+    title: text.title, title_intent: locked.title_intent, primary_question: locked.primary_question, audience: locked.audience, user_task: locked.user_task,
+    keywords: locked.keywords, search_intent: locked.search_intent, unique_intent_key: theme.unique_intent_key,
+    sections: [
+      { key: 'direct_answer', body_md: text.answer }, { key: 'evidence', body_md: text.evidence },
+      { key: 'nuance_counterexample', body_md: text.nuance }, { key: 'concrete_scenario', body_md: text.scenario },
+      { key: 'practical_framework', body_md: text.framework.map((step, index) => `${index + 1}. ${step}`).join('\n') },
+      { key: 'limitation', body_md: text.limitation },
+      { key: 'visible_sources', body_md: sourceMapping.map((source) => sourceLine(source, locked.locale)).join('\n') },
+      { key: 'method_product_boundary', body_md: methodBoundary },
+      { key: 'internal_links', body_md: locked.internal_link_targets.map((target) => `- ${target}`).join('\n') },
+    ],
+    source_mapping: sourceMapping, internal_link_targets: locked.internal_link_targets, risk_boundary: locked.risk_boundary,
+    review_status: 'pending_manual_review', reviewer: null, author: null, published_at: null,
+    cms_write_executed: false, publish_state_change: false, indexability_change: false,
+  };
+}));
+
+const qa = {
+  schema_version: 'big5-article-wave-qa.v1', generated_at: generatedAt, status: 'PASS_PENDING_MANUAL_REVIEW',
+  counts: { locked_themes: lockedThemes.length, article_assets: finalAssets.length, en_assets: finalAssets.filter((asset) => asset.locale === 'en').length, zh_cn_assets: finalAssets.filter((asset) => asset.locale === 'zh-CN').length },
+  checks: {
+    consumes_only_pr21_batch_25: true, exact_locked_slug_locale_pairs: true,
+    unique_intents: new Set(finalAssets.map((asset) => asset.unique_intent_key)).size === 5,
+    raw_drafts_preserved: rawDrafts.length === 10, skeptical_reviews_preserved: reviews.length === 10,
+    repaired_drafts_preserved: repairedDrafts.length === 10,
+    source_mapping_preserved: finalAssets.every((asset) => asset.source_mapping.length === 3),
+    all_pending_manual_review: finalAssets.every((asset) => asset.review_status === 'pending_manual_review'),
+    private_result_links_excluded: true, cms_writes: 0, published_assets: 0, indexability_changes: 0,
+  },
+};
+
+for (const [file, data] of Object.entries({
+  'raw-drafts.json': { schema_version: 'big5-article-wave-raw.v1', generated_at: generatedAt, assets: rawDrafts },
+  'skeptical-review.json': { schema_version: 'big5-article-wave-review.v1', generated_at: generatedAt, reviews },
+  'repaired-drafts.json': { schema_version: 'big5-article-wave-repaired.v1', generated_at: generatedAt, assets: repairedDrafts },
+  'final-package.json': { schema_version: 'big5-article-wave-final.v1', generated_at: generatedAt, authority: 'PR21 batch 25 + CMS/backend', assets: finalAssets },
+  'source-mapping.json': { schema_version: 'big5-article-wave-sources.v1', generated_at: generatedAt, mappings: finalAssets.map((asset) => ({ topic_id: asset.topic_id, locale: asset.locale, slug: asset.slug, sources: asset.source_mapping })) },
+  'qa_report.json': qa,
+})) fs.writeFileSync(path.join(dir, file), `${JSON.stringify(data, null, 2)}\n`);
+
+console.log('built batch 25 result-reading wave: 5 locked themes / 10 Article candidates / all pending manual review');
