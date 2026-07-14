@@ -16,6 +16,7 @@ final class CareerWarmPublicAuthorityCache extends Command
         {--job-detail-locales=zh-CN : Comma-separated public locales for detail cache warm}
         {--forget-job-detail : Forget targeted job detail caches before warming them}
         {--job-detail-only : Warm only targeted job detail caches}
+        {--directory-only : Warm only the EN/ZH Career directory read models}
         {--verify-only : Verify EN/ZH directory versions without rebuilding authority}
         {--json : Emit JSON output}';
 
@@ -36,6 +37,12 @@ final class CareerWarmPublicAuthorityCache extends Command
             )));
             $jobDetailLocales = $this->csvOption('job-detail-locales');
             $jobDetailOnly = (bool) $this->option('job-detail-only');
+            $directoryOnly = (bool) $this->option('directory-only');
+            if ($directoryOnly && ($jobDetailOnly || $jobDetailSlugs !== [] || (bool) $this->option('forget-job-detail'))) {
+                $this->error('--directory-only cannot be combined with job-detail warm options.');
+
+                return self::FAILURE;
+            }
             if ($jobDetailOnly && $jobDetailSlugs === []) {
                 $this->error('--job-detail-only requires --job-detail-slugs or --job-detail-manifest.');
 
@@ -47,7 +54,9 @@ final class CareerWarmPublicAuthorityCache extends Command
                     $this->line(sprintf('career_warm_phase=%s state=%s', $phase, $state));
                 }
             };
-            $summary = $jobDetailOnly ? [] : $cache->warm($reporter);
+            $summary = $directoryOnly
+                ? $cache->warmDirectoryReadModels(['en', 'zh-CN'], $reporter)
+                : ($jobDetailOnly ? [] : $cache->warm($reporter));
             if ($jobDetailSlugs !== []) {
                 $locales = $jobDetailLocales === [] ? ['zh-CN'] : $jobDetailLocales;
                 $summary = array_merge(

@@ -38,4 +38,6 @@ The bounded warm sequence is:
 2. L2 Big Five: the backend-authoritative Big Five collection for English and Chinese.
 3. L3 Career Industries: the existing Career authority warm command followed by active/LKG version verification.
 
+The L3 phase invokes the Career command with `--directory-only`; it rebuilds only the EN/ZH directory read models and does not refresh dataset, job-index, job-detail, or launch-governance cache families. Nested command output is captured so the parent `--json` mode always emits exactly one JSON document.
+
 Any failed priority stops later warm phases. After a successful warm, the command re-reads every selected version and fails if a pointer is missing, a payload cannot be read back, or a payload exceeds the byte budget. Reports never contain public content bodies, private routes, attempt/report/order identifiers, or secrets.

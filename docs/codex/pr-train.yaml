@@ -41971,10 +41971,13 @@ prs:
       - Validate payload budget and version readback behind a fail-closed production write gate without executing production warm.
     allowed_paths:
       - backend/app/Console/Commands/WarmPublicContentReadModels.php
+      - backend/app/Console/Commands/CareerWarmPublicAuthorityCache.php
       - backend/app/Console/Kernel.php
+      - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
       - backend/bootstrap/app.php
       - backend/config/public_content_observability.php
       - backend/tests/Feature/Console/WarmPublicContentReadModelsCommandTest.php
+      - backend/tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/operations/public-content-cache-runbook.md
       - docs/codex/pr-train.yaml
@@ -41985,7 +41988,8 @@ prs:
       - Execute production warm/purge, mutate CMS/DB content, publish, change indexability, or deploy.
     validation:
       - cd backend && php artisan test tests/Feature/Console/WarmPublicContentReadModelsCommandTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Console/Commands/WarmPublicContentReadModels.php bootstrap/app.php config/public_content_observability.php tests/Feature/Console/WarmPublicContentReadModelsCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan test tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php --filter=directory_only --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/WarmPublicContentReadModels.php app/Console/Commands/CareerWarmPublicAuthorityCache.php app/Services/Career/PublicCareerAuthorityResponseCache.php bootstrap/app.php config/public_content_observability.php tests/Feature/Console/WarmPublicContentReadModelsCommandTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && php artisan schedule:list --no-ansi
       - cd backend && bash scripts/ci_verify_mbti.sh
       - YAML/JSON parse and changed-file scope validation

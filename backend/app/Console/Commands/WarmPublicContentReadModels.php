@@ -162,7 +162,7 @@ final class WarmPublicContentReadModels extends Command
     {
         $entries = [];
 
-        $mbtiExit = $this->call('personality:warm-public-read-models', ['--locales' => 'en,zh-CN']);
+        $mbtiExit = $this->callSilently('personality:warm-public-read-models', ['--locales' => 'en,zh-CN']);
         $entries[] = [
             'priority' => 'L1',
             'family' => 'mbti',
@@ -181,7 +181,7 @@ final class WarmPublicContentReadModels extends Command
                     [
                         'org_id' => 0,
                         'locale' => $locale,
-                        'framework' => 'big-five',
+                        'framework' => 'big_five',
                         'page' => 1,
                         'per_page' => 100,
                     ],
@@ -207,7 +207,10 @@ final class WarmPublicContentReadModels extends Command
             }
         }
 
-        $careerExit = $this->call('career:warm-public-authority-cache', ['--json' => true]);
+        $careerExit = $this->callSilently('career:warm-public-authority-cache', [
+            '--directory-only' => true,
+            '--json' => true,
+        ]);
         $entries[] = [
             'priority' => 'L3',
             'family' => 'career-industries',
@@ -248,10 +251,10 @@ final class WarmPublicContentReadModels extends Command
                 'big-five',
                 'collection',
                 $locale,
-                $personalityAssetCache->activeKey('index', 'big-five', 'all', 'page:1:per-page:100', $locale),
-                $personalityAssetCache->lkgKey('index', 'big-five', 'all', 'page:1:per-page:100', $locale),
+                $personalityAssetCache->activeKey('index', 'big_five', 'all', 'page:1:per-page:100', $locale),
+                $personalityAssetCache->lkgKey('index', 'big_five', 'all', 'page:1:per-page:100', $locale),
                 fn (string $version): string => $personalityAssetCache->key(
-                    'index', 'big-five', 'all', 'page:1:per-page:100', $locale, $version,
+                    'index', 'big_five', 'all', 'page:1:per-page:100', $locale, $version,
                 ),
             );
         }

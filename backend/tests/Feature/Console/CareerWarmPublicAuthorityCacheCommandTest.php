@@ -46,6 +46,46 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::LAUNCH_GOVERNANCE_CLOSURE_CACHE_KEY));
     }
 
+    public function test_directory_only_warms_directory_versions_without_touching_broader_career_caches(): void
+    {
+        $sentinels = [
+            PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY => ['sentinel' => 'dataset'],
+            PublicCareerAuthorityResponseCache::DATASET_METHOD_CACHE_KEY => ['sentinel' => 'method'],
+            PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':en:public' => ['sentinel' => 'jobs-en'],
+            PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':zh-CN:public' => ['sentinel' => 'jobs-zh'],
+            PublicCareerAuthorityResponseCache::LAUNCH_GOVERNANCE_CLOSURE_CACHE_KEY => ['sentinel' => 'governance'],
+        ];
+        foreach ($sentinels as $key => $value) {
+            Cache::forever($key, $value);
+        }
+
+        $exitCode = Artisan::call('career:warm-public-authority-cache', [
+            '--directory-only' => true,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame('warmed', $report['status']);
+        $this->assertSame(['career_directory_en', 'career_directory_zh_cn'], array_keys($report['entries']));
+        foreach (['en', 'zh-CN'] as $locale) {
+            $this->assertSame('ready', app(PublicCareerAuthorityResponseCache::class)->directoryCacheStatus($locale)['status']);
+        }
+        foreach ($sentinels as $key => $value) {
+            $this->assertSame($value, Cache::get($key), $key);
+        }
+    }
+
+    public function test_directory_only_rejects_job_detail_warm_options(): void
+    {
+        $this->artisan('career:warm-public-authority-cache', [
+            '--directory-only' => true,
+            '--job-detail-slugs' => 'example',
+        ])
+            ->expectsOutput('--directory-only cannot be combined with job-detail warm options.')
+            ->assertExitCode(1);
+    }
+
     public function test_warm_path_reuses_expensive_first_wave_authority_builders_within_one_process(): void
     {
         $repoRoot = dirname(__DIR__, 4);

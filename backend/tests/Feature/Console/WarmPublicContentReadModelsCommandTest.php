@@ -9,6 +9,7 @@ use App\Models\PersonalityProfile;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicReadModelCache;
+use Illuminate\Console\Command as ConsoleCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
@@ -29,7 +30,7 @@ final class WarmPublicContentReadModelsCommandTest extends TestCase
         $exitCode = Artisan::call('public-content:warm-read-models', ['--json' => true]);
         $report = $this->jsonOutput();
 
-        $this->assertSame(0, $exitCode);
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_THROW_ON_ERROR));
         $this->assertSame('dry-run', $report['mode']);
         $this->assertSame('planned', $report['status']);
         $this->assertFalse($report['write_executed']);
@@ -104,7 +105,7 @@ final class WarmPublicContentReadModelsCommandTest extends TestCase
         ]);
         $report = $this->jsonOutput();
 
-        $this->assertSame(0, $exitCode);
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_THROW_ON_ERROR));
         $this->assertSame('verified', $report['status']);
         $this->assertFalse($report['write_executed']);
         $this->assertCount(132, $report['entries']);
@@ -142,6 +143,56 @@ final class WarmPublicContentReadModelsCommandTest extends TestCase
         $this->assertContains('budget_exceeded', array_column($report['entries'], 'status'));
     }
 
+    public function test_warm_json_suppresses_child_output_and_scopes_career_to_directory_only(): void
+    {
+        $mbtiCache = app(PersonalityPublicReadModelCache::class);
+        $assetCache = app(PersonalityPublicAssetReadModelCache::class);
+        $this->seedMbtiReadModels($mbtiCache);
+        $this->seedBigFiveReadModels($assetCache);
+
+        $careerCache = app(PublicCareerAuthorityResponseCache::class);
+        foreach (['en', 'zh-CN'] as $locale) {
+            $careerCache->publishDirectoryReadModel($locale, ['items' => []]);
+        }
+
+        Artisan::registerCommand(new class extends ConsoleCommand
+        {
+            protected $signature = 'personality:warm-public-read-models {--locales=}';
+
+            public function handle(): int
+            {
+                $this->line('nested mbti output that must stay hidden');
+
+                return self::SUCCESS;
+            }
+        });
+        Artisan::registerCommand(new class extends ConsoleCommand
+        {
+            protected $signature = 'career:warm-public-authority-cache {--directory-only} {--json}';
+
+            public function handle(): int
+            {
+                Cache::put('test:career-directory-only', (bool) $this->option('directory-only'));
+                $this->line('{"nested":"career output that must stay hidden"}');
+
+                return self::SUCCESS;
+            }
+        });
+
+        $exitCode = Artisan::call('public-content:warm-read-models', [
+            '--warm' => true,
+            '--json' => true,
+        ]);
+        $report = $this->jsonOutput();
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_THROW_ON_ERROR));
+        $this->assertSame('verified', $report['status']);
+        $this->assertTrue($report['write_executed']);
+        $this->assertTrue(Cache::get('test:career-directory-only'));
+        $this->assertStringNotContainsString('nested mbti output', Artisan::output());
+        $this->assertStringNotContainsString('nested', Artisan::output());
+    }
+
     private function seedMbtiReadModels(PersonalityPublicReadModelCache $cache): void
     {
         foreach (PersonalityProfile::BASE_TYPE_CODES as $baseType) {
@@ -160,11 +211,11 @@ final class WarmPublicContentReadModelsCommandTest extends TestCase
     {
         foreach (['en', 'zh-CN'] as $locale) {
             Cache::put(
-                $cache->activeKey('index', 'big-five', 'all', 'page:1:per-page:100', $locale),
+                $cache->activeKey('index', 'big_five', 'all', 'page:1:per-page:100', $locale),
                 'big-five-v1',
             );
             Cache::put(
-                $cache->key('index', 'big-five', 'all', 'page:1:per-page:100', $locale, 'big-five-v1'),
+                $cache->key('index', 'big_five', 'all', 'page:1:per-page:100', $locale, 'big-five-v1'),
                 ['ok' => true, 'items' => []],
             );
         }
