@@ -89275,18 +89275,18 @@
     "depends_on": [
       "MBTI-CMS-APPROVAL-39"
     ],
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "2a32db87cd3b35ce13b31482a1c3c1edfad96447",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3049",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
-    "production_write_execution": false,
-    "database_mutation": false,
-    "cms_mutation": false,
+    "merged_at": "2026-07-14T01:01:48Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": true,
+    "database_mutation": true,
+    "cms_mutation": true,
     "search_channel_action": false,
-    "deploy_allowed": false,
+    "deploy_allowed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -89303,14 +89303,26 @@
       ,
       "github_required_checks": {
         "status": "pass",
-        "evidence": "PR #3049 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. No production import or deployment has been requested or performed."
+        "evidence": "PR #3049 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload."
+      },
+      "post_merge_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #3049 MERGED at 2026-07-14T01:01:48Z with merge commit 811e43c0b9c1c1f0f5e5556ad31d3ae3b02126e2; origin/main contains that merge commit and the merged branch is deleted."
+      },
+      "production_deploy": {
+        "status": "pass",
+        "evidence": "The separately authorized pinned backend deployment completed at revision ddb7d0b05806ee29ea83dc2e437a3b1c28d92933. Read-only post-deploy verification confirmed the expected revision is current and no deploy lock remains."
+      },
+      "production_cms_import": {
+        "status": "pass",
+        "evidence": "The separately authorized exact 43-record package completed its fail-closed production write: 28 Profile and 15 A/T comparison draft revisions. The import emitted evidence, published zero records, and did not release indexability, sitemap, llms, or search channels."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -89336,6 +89348,18 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "All required GitHub checks passed for PR #3049. The branch scope was revalidated before squash merge; no owner-scope timeout repair, CMS production write, deployment, or search action is included."
+      },
+      {
+        "at": "2026-07-14T09:01:48+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #3049 was squash merged. The merge commit was verified in origin/main and the remote branch was deleted."
+      },
+      {
+        "at": "2026-07-14T09:30:00+08:00",
+        "from": "merged",
+        "to": "merged",
+        "note": "After separate exact deploy and import authorization, the pinned backend revision completed the exact 43-record draft-only import. The execution created 28 Profile and 15 A/T comparison draft revisions, published zero records, and performed no indexability, sitemap, llms, or search release."
       }
     ]
   },
