@@ -90824,9 +90824,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-TEST-LANDING-20"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "d817ca8fd9d266f684ca7466b20f8823a9c709de",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3064",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -90857,6 +90857,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All PR21 local checks passed. The package contains the exact 11-surface audit and locked 10-batch / 50-theme / 100-locale matrix, separates competitor, academic, and pending GSC evidence, and keeps all forbidden write and expansion counters at zero. Focused tests passed with 5 tests / 1355 assertions; Pint, syntax, diff, source-ledger, privacy-link, and exact 10-file scope checks passed."
+      },
+      {
+        "at": "2026-07-14T04:32:01Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 10-file PR21 scope as d817ca8fd9d266f684ca7466b20f8823a9c709de, pushed codex/big5-authority-v2-article-ia-21, and opened PR #3064. Waiting for required GitHub checks on the final ledger-updated head."
       }
     ]
   },
