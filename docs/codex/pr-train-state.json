@@ -89266,6 +89266,79 @@
       }
     ]
   },
+  "MBTI-CMS-IMPORT-40": {
+    "id": "MBTI-CMS-IMPORT-40",
+    "repo": "fap-api",
+    "title": "MBTI-CMS-IMPORT-40: deliver fail-closed 43-record CMS importer",
+    "base": "main",
+    "branch": "codex/mbti-cms-import-40-fail-closed-importer",
+    "depends_on": [
+      "MBTI-CMS-APPROVAL-39"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "2a32db87cd3b35ce13b31482a1c3c1edfad96447",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3049",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "The user-authorized full MBTI Chinese asset train explicitly includes MBTI-CMS-IMPORT-40. This registration permits importer code and dry-run validation only; production CMS import remains separately controlled."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "Cross-repository dependency MBTI-CMS-APPROVAL-39 is merged in fap-web at fb443982a286d68f877ebd71d4ea255fab9bb67a. Its exact package remains a preflight-only, unexecuted approval artifact."
+      },
+      "focused_validation": {
+        "status": "pass",
+        "evidence": "PHP syntax and scoped Pint passed. The new importer contract passed (4 tests, 74 assertions); the existing CONTENT-15 importer regression passed (2 tests, 60 assertions); sitemap regression passed (11 tests, 412 assertions); and the runtime-freeze classifier regression passed. ci_verify_mbti completed its strict MBTI smoke, MVP/self-check, and queue-probe gates. The exact CMS-39 source package dry-run rejected all 43 local targets because this isolated developer database does not contain their approved published pre-state; the command reported cms_write_attempted=false and writes_committed=false, proving fail-closed behavior. YAML/JSON, git diff --check, and exact seven-file scope validation passed."
+      }
+      ,
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #3049 required checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. No production import or deployment has been requested or performed."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-07-14T08:22:55+08:00",
+        "from": "user_authorized",
+        "to": "in_progress",
+        "note": "Started from an isolated fap-api worktree for the exact 43-record CMS-39 importer scope. The command is fail-closed and draft-only. Career, LLMS/sitemap, MBTI64, checkout, production import, deployment, indexability, feeds, and search actions remain outside this PR."
+      },
+      {
+        "at": "2026-07-14T08:37:00+08:00",
+        "from": "in_progress",
+        "to": "local_validation_passed",
+        "note": "All CMS-40 local validations and the exact changed-file scope check passed. The source package was intentionally dry-run only; the local database pre-state mismatch caused a safe 43-record refusal with no write attempt. No Career, LLMS/sitemap, MBTI64, or checkout owner-scope change was made."
+      },
+      {
+        "at": "2026-07-14T08:41:00+08:00",
+        "from": "local_validation_passed",
+        "to": "pr_open",
+        "note": "Opened PR #3049 from the rebased CMS-40 branch. Awaiting required checks; the current scope remains importer code and dry-run verification only."
+      },
+      {
+        "at": "2026-07-14T08:52:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "note": "All required GitHub checks passed for PR #3049. The branch scope was revalidated before squash merge; no owner-scope timeout repair, CMS production write, deployment, or search action is included."
+      }
+    ]
+  },
   "SAEP-PLANNED-PR-08": {
     "id": "SAEP-PLANNED-PR-08",
     "existing_pr_card_id": "SAEP-PRCARD-API-3884ba0903e4",

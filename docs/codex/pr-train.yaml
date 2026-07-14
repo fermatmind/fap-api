@@ -41648,6 +41648,56 @@ prs:
     content_authority: CMS/backend
     next_task: MBTI-CMS-APPROVAL-39
 
+  - id: MBTI-CMS-IMPORT-40
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    base: main
+    depends_on:
+      - MBTI-CMS-APPROVAL-39
+    branch: codex/mbti-cms-import-40-fail-closed-importer
+    title: "MBTI-CMS-IMPORT-40: deliver fail-closed 43-record CMS importer"
+    train_scope: mbti_full_43_record_cms_importer
+    status: user_authorized
+    mode: importer_code_only
+    scope:
+      - Add a fail-closed command and service that accept only the exact approved 43-record Chinese MBTI repair package from MBTI-CMS-APPROVAL-39.
+      - Validate exact authorization values, all expected pre-states, draft-only post-states, record identities, payload hashes, and required public-content fields before any database write.
+      - Stage only idempotent draft revisions in one transaction after explicit write guards; provide dry-run and readback evidence without public projection, indexability, sitemap, llms, deploy, or search mutation.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityMbtiFullCmsImport.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Services/Cms/MbtiFullCmsImportService.php
+      - backend/tests/Feature/Console/PersonalityMbtiFullCmsImportCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Execute a production import, CMS content write, public promotion, cache warm, indexability mutation, sitemap or llms mutation, GSC action, deployment, or runtime content release.
+      - Modify CMS source content, database schema, public controllers, sitemap/llms/canonical/robots/JSON-LD runtime behavior, frontend code, or any Career, LLMS/sitemap, MBTI64, or checkout owner scope.
+      - Implement MBTI-VERIFY-41 or later train scopes.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/PersonalityMbtiFullCmsImportCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Console/PersonalityMbtiContent15ProductionImportCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/SEO/SitemapGeneratorTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiFullCmsImport.php app/Services/Cms/MbtiFullCmsImportService.php tests/Feature/Console/PersonalityMbtiFullCmsImportCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_freeze_classifier_ignores_mbti_full_cms_importer_files --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: MBTI-VERIFY-41
+
   - id: SAEP-PLANNED-PR-08
     existing_pr_card_id: SAEP-PRCARD-API-3884ba0903e4
     repo: fap-api
