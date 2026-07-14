@@ -90696,7 +90696,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "e170b26748146664f863d90777a90caa743851ff",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3060",
     "checks": {
@@ -90707,6 +90707,10 @@
       "local": {
         "status": "pass",
         "evidence": "Package validator passed exact 12-page, 6-facet bilingual coverage, non-diagnostic legacy-label boundaries, taxonomy separation, and fail-closed release gates; BigFiveAuthorityV219Test passed with exit 0 and 5 tests / 334 assertions after copying the existing local vendor into this worktree. Two earlier attempts failed before content assertions because vendor was absent and then because a vendor symlink resolved Composer paths to the main-sync checkout; neither changed tracked scope. Touched PHP Pint passed; JSON, JavaScript, PHP, and YAML syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files; PR15-PR18-to-PR19 substantive body exact-copy check found zero matches."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3060 head f1d3372f903a586b2669b1a688ce46516c20298b passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
       }
     },
     "failure_reason": null,
@@ -90735,6 +90739,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Committed the exact 9-file scope as e170b26748146664f863d90777a90caa743851ff, pushed the scoped branch, and opened PR #3060. Waiting for required GitHub checks on the final ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T03:15:21Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head f1d3372f903a586b2669b1a688ce46516c20298b, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 9 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
       }
     ]
   },
