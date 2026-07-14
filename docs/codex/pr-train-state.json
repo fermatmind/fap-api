@@ -3032,7 +3032,7 @@
       "Reference-only fap-web worktree had unrelated dirty changes before and after this task; no fap-web files were modified.",
       "Composer dependencies were installed in the isolated worktree because vendor/ was absent."
     ],
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01 fix production dry-run SQL compatibility",
     "transitions": [
       {
@@ -52742,9 +52742,9 @@
     "commit_sha": "65204d554",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2716",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T08:17:26Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_migration_execution_allowed": false,
     "database_mutation": false,
@@ -91281,6 +91281,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on ledger-updated head 8271fb91a79c2b2d16ec31648250da529773168a, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T08:30:04Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR27 after GitHub reported PR #3072 MERGED at 2026-07-14T08:17:26Z as squash commit 3342c01526a5be6eb23b6e19680c91bec11e2d2e. origin/main contains the merge; remote and local task branches were deleted; post-merge package validation, 4 tests / 165 assertions, Pint, clean-main, and ancestry checks passed."
       }
     ]
   },
@@ -91293,10 +91299,23 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "f324307b2c92270abc6f4e88cf99e8b80384482b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3073",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27 PR #3072 is MERGED as 3342c01526a5be6eb23b6e19680c91bec11e2d2e; origin/main contains the merge, remote and local branches are deleted, and PR27 post-merge validator, 4 tests / 165 assertions, Pint, clean-main, and ancestry checks passed. PR28 started from that exact clean origin/main head."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact PR21 batch 28 coverage: 5 locked learning-and-habits themes, 10 EN/zh-CN Article candidates, exact slugs/questions/audiences/tasks/keywords/sources/links, nine reader/evidence sections, full raw-review-repair-final-mapping chain, null attribution, pending_manual_review, and zero CMS/publication/indexability mutations. The first validator run exposed a self-conflicting forbidden phrase that matched the article's explicit prohibition on guaranteed achievement; the validator was narrowed to affirmative guarantee claims and then passed. Every asset separates preference from task evidence and prohibits learning-style prescription, procrastination diagnosis or moral blame, creativity or decision-quality scoring, fixed ability, guaranteed achievement, and high-stakes advice. BigFiveAuthorityV228Test passed with 4 tests / 165 assertions. Pint --test, PHP/JSON/JavaScript/YAML syntax, git diff --check, and exact 11-file allowlist checks passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "All 9 GitHub checks passed on ledger-updated head ccaa5dd1d450ec3d0fa0f02f4dd34d248be54319: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload. GitHub reported CLEAN merge state and the changed-file set remained exactly the 11 allowed files."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -91305,7 +91324,32 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T08:30:04Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR28 from exact origin/main 3342c01526a5be6eb23b6e19680c91bec11e2d2e after PR27 merged, cleaned, reconciled, and revalidated. Scope consumes only PR21 batch 28: learning, procrastination, planning, creativity, and decision-making in EN and zh-CN. Task-level evidence replaces learning-style, ability, diagnosis, moral, or outcome prescriptions."
+      },
+      {
+        "at": "2026-07-14T08:44:28Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All PR28 local checks passed after narrowing one self-conflicting validator phrase from a generic prohibited boundary to an affirmative guarantee claim. The package exactly consumes PR21 batch 28 and preserves 10 bilingual Article candidates plus the full skeptical review chain. Focused tests passed with 4 tests / 165 assertions; validator, Pint, syntax, source-ledger, private-link, diff, and exact 11-file scope checks passed."
+      },
+      {
+        "at": "2026-07-14T08:45:39Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 11-file PR28 scope as f324307b2c92270abc6f4e88cf99e8b80384482b, pushed codex/big5-authority-v2-article-learning-habits-28, and opened PR #3073. Waiting for required GitHub checks on the ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T08:59:26Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on ledger-updated head ccaa5dd1d450ec3d0fa0f02f4dd34d248be54319, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29": {
     "id": "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29",
