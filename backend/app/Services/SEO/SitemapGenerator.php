@@ -20,6 +20,7 @@ use App\Services\Cms\Mbti64CrossTypeComparisonPublicReadModel;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\PersonalityProfileService;
 use App\Services\Cms\TopicProfileSeoService;
+use App\Services\Scale\ScaleDiscoverabilityPolicy;
 use App\Services\Scale\ScaleRegistry;
 use Illuminate\Support\Carbon;
 
@@ -53,6 +54,7 @@ class SitemapGenerator
         private readonly Mbti64CrossTypeComparisonPublicReadModel $crossTypeComparisonReadModel,
         private readonly TopicProfileSeoService $topicProfileSeoService,
         private readonly ScaleRegistry $scaleRegistry,
+        private readonly ScaleDiscoverabilityPolicy $scaleDiscoverabilityPolicy,
         private readonly CareerDatasetPublicationMetadataService $datasetPublicationMetadataService,
         private readonly CareerDirectoryAuthorityService $careerDirectoryAuthorityService,
     ) {}
@@ -139,11 +141,7 @@ class SitemapGenerator
                 continue;
             }
 
-            if (array_key_exists('is_indexable', $row) && ! (bool) ($row['is_indexable'] ?? true)) {
-                continue;
-            }
-
-            if (! $this->isIndexablePublic($row['view_policy_json'] ?? null)) {
+            if (! $this->scaleDiscoverabilityPolicy->isPubliclyDiscoverable($row)) {
                 continue;
             }
 
@@ -1136,41 +1134,6 @@ class SitemapGenerator
         }
 
         return $latest;
-    }
-
-    private function isIndexablePublic(mixed $viewPolicyJson): bool
-    {
-        $policy = [];
-        if (is_array($viewPolicyJson)) {
-            $policy = $viewPolicyJson;
-        } elseif (is_string($viewPolicyJson) && trim($viewPolicyJson) !== '') {
-            $decoded = json_decode($viewPolicyJson, true);
-            if (is_array($decoded)) {
-                $policy = $decoded;
-            }
-        }
-
-        $isPublic = $policy['public'] ?? $policy['is_public'] ?? $policy['visibility'] ?? null;
-        if (is_string($isPublic)) {
-            $normalizedVisibility = strtolower(trim($isPublic));
-            if (in_array($normalizedVisibility, ['private', 'internal', 'hidden'], true)) {
-                return false;
-            }
-        } elseif (is_bool($isPublic) && $isPublic === false) {
-            return false;
-        }
-
-        $indexable = $policy['indexable'] ?? null;
-        if (is_bool($indexable) && $indexable === false) {
-            return false;
-        }
-
-        $robots = $policy['robots'] ?? null;
-        if (is_string($robots) && str_contains(strtolower($robots), 'noindex')) {
-            return false;
-        }
-
-        return true;
     }
 
     private function resolveCareerGuideLastmod(CareerGuide $guide): Carbon

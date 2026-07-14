@@ -7,6 +7,7 @@ use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\Scale\PublicScaleFormsProjector;
 use App\Services\Scale\PublicScaleInputGuard;
 use App\Services\Scale\ScaleCodeResponseProjector;
+use App\Services\Scale\ScaleDiscoverabilityPolicy;
 use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\CacheKeys;
@@ -28,6 +29,7 @@ class ScalesLookupController extends Controller
         private ScaleCodeResponseProjector $responseProjector,
         private PublicScaleFormsProjector $publicScaleFormsProjector,
         private PublicScaleInputGuard $publicInputGuard,
+        private ScaleDiscoverabilityPolicy $scaleDiscoverabilityPolicy,
         private OrgContext $orgContext,
         private LandingSurfaceContractService $landingSurfaceContractService,
     ) {}
@@ -91,7 +93,7 @@ class ScalesLookupController extends Controller
         $scaleCodeMeta = $this->resolveScaleCodeMeta($row);
         $locale = $this->resolveRequestedLocale($request, (string) ($row['default_locale'] ?? 'en'));
         $seo = $this->resolveSeoByLocale($row, $locale);
-        $isIndexable = $this->resolveIsIndexable($row);
+        $isIndexable = $this->scaleDiscoverabilityPolicy->isIndexable($row);
         $payload = [
             'ok' => true,
             'scale_code' => $scaleCodeMeta['scale_code'],
@@ -237,28 +239,6 @@ class ScalesLookupController extends Controller
 
     /**
      * @param  array<string,mixed>  $row
-     */
-    private function resolveIsIndexable(array $row): bool
-    {
-        if (array_key_exists('is_indexable', $row)) {
-            return (bool) $row['is_indexable'];
-        }
-
-        $policy = $this->toArray($row['view_policy_json'] ?? null);
-        if (array_key_exists('indexable', $policy)) {
-            return (bool) $policy['indexable'];
-        }
-
-        $robots = strtolower(trim((string) ($policy['robots'] ?? '')));
-        if ($robots !== '' && str_contains($robots, 'noindex')) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @param  array<string,mixed>  $row
      * @return array<string,mixed>|null
      */
     private function projectPublicCommercial(array $row): ?array
@@ -359,7 +339,7 @@ class ScalesLookupController extends Controller
             ],
             'is_public' => (bool) ($row['is_public'] ?? true),
             'is_active' => (bool) ($row['is_active'] ?? true),
-            'is_indexable' => $this->resolveIsIndexable($row),
+            'is_indexable' => $this->scaleDiscoverabilityPolicy->isIndexable($row),
         ];
     }
 

@@ -31,6 +31,48 @@ class SitemapGeneratorTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_generate_excludes_clinical_screening_scales_even_when_registry_marks_them_indexable(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        DB::table('scales_registry')->delete();
+        $now = now();
+
+        foreach ([
+            ['code' => 'CLINICAL_COMBO_68', 'slug' => 'clinical-depression-anxiety-assessment-professional-edition'],
+            ['code' => 'SDS_20', 'slug' => 'depression-screening-test-standard-edition'],
+            ['code' => 'CONTROL_SCALE', 'slug' => 'control-scale'],
+        ] as $scale) {
+            DB::table('scales_registry')->insert([
+                'code' => $scale['code'],
+                'org_id' => 0,
+                'primary_slug' => $scale['slug'],
+                'slugs_json' => json_encode([$scale['slug']]),
+                'driver_type' => 'mbti',
+                'default_pack_id' => null,
+                'default_region' => null,
+                'default_locale' => 'en',
+                'default_dir_version' => null,
+                'capabilities_json' => null,
+                'view_policy_json' => null,
+                'commercial_json' => null,
+                'seo_schema_json' => null,
+                'is_public' => 1,
+                'is_active' => 1,
+                'is_indexable' => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
+        }
+
+        $xml = (string) ($this->generateSitemap()['xml'] ?? '');
+
+        $this->assertStringContainsString('/en/tests/control-scale', $xml);
+        $this->assertStringContainsString('/zh/tests/control-scale', $xml);
+        $this->assertStringNotContainsString('clinical-depression-anxiety-assessment-professional-edition', $xml);
+        $this->assertStringNotContainsString('depression-screening-test-standard-edition', $xml);
+    }
+
     public function test_generate_excludes_dataset_urls_and_includes_only_public_global_scales(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);

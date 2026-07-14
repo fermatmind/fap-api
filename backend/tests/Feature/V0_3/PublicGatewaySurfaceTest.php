@@ -24,6 +24,10 @@ final class PublicGatewaySurfaceTest extends TestCase
             ->assertJsonPath('landing_surface_v1.entry_surface', 'home_gateway')
             ->assertJsonPath('landing_surface_v1.entry_type', 'public_home')
             ->assertJsonPath('landing_surface_v1.discoverability_items.0.key', 'mbti-personality-test-16-personality-types');
+
+        $keys = $response->json('landing_surface_v1.discoverability_keys');
+        $this->assertNotContains('clinical-depression-anxiety-assessment-professional-edition', $keys);
+        $this->assertNotContains('depression-screening-test-standard-edition', $keys);
     }
 
     public function test_tests_gateway_returns_indexable_test_directory_surface(): void
@@ -38,6 +42,10 @@ final class PublicGatewaySurfaceTest extends TestCase
             ->assertJsonPath('landing_surface_v1.entry_surface', 'tests_index')
             ->assertJsonPath('landing_surface_v1.indexability_state', 'indexable')
             ->assertJsonCount(6, 'landing_surface_v1.discoverability_items');
+
+        $keys = $response->json('landing_surface_v1.discoverability_keys');
+        $this->assertNotContains('clinical-depression-anxiety-assessment-professional-edition', $keys);
+        $this->assertNotContains('depression-screening-test-standard-edition', $keys);
     }
 
     public function test_help_gateway_returns_landing_surface_and_detail_answer_surface(): void

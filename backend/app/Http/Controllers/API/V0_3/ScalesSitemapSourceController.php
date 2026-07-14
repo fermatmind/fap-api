@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
+use App\Services\Scale\ScaleDiscoverabilityPolicy;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\DB;
 
 class ScalesSitemapSourceController extends Controller
 {
+    public function __construct(
+        private readonly ScaleDiscoverabilityPolicy $scaleDiscoverabilityPolicy,
+    ) {}
+
     /**
      * GET /api/v0.3/scales/sitemap-source?locale=en|zh
      */
@@ -20,7 +25,7 @@ class ScalesSitemapSourceController extends Controller
         $locale = $this->resolveLocale($request);
 
         $rows = DB::table('scales_registry')
-            ->select(['primary_slug', 'slugs_json', 'view_policy_json', 'is_indexable', 'updated_at'])
+            ->select(['code', 'primary_slug', 'slugs_json', 'view_policy_json', 'is_indexable', 'updated_at'])
             ->where('org_id', 0)
             ->where('is_public', 1)
             ->where('is_active', 1)
@@ -31,7 +36,7 @@ class ScalesSitemapSourceController extends Controller
         $itemsBySlug = [];
 
         foreach ($rows as $row) {
-            $isIndexable = $this->resolveIsIndexable($row->is_indexable ?? null, $row->view_policy_json ?? null);
+            $isIndexable = $this->scaleDiscoverabilityPolicy->isIndexable((array) $row);
             $lastmod = $this->resolveLastmod($row->updated_at ?? null);
 
             foreach ($this->collectSlugs($row->primary_slug ?? null, $row->slugs_json ?? null) as $slug) {
@@ -128,33 +133,5 @@ class ScalesSitemapSourceController extends Controller
         } catch (\Throwable) {
             return '1970-01-01';
         }
-    }
-
-    private function resolveIsIndexable(mixed $rawIsIndexable, mixed $viewPolicy): bool
-    {
-        if ($rawIsIndexable !== null) {
-            return (bool) $rawIsIndexable;
-        }
-
-        $policy = [];
-        if (is_array($viewPolicy)) {
-            $policy = $viewPolicy;
-        } elseif (is_string($viewPolicy) && trim($viewPolicy) !== '') {
-            $decoded = json_decode($viewPolicy, true);
-            if (is_array($decoded)) {
-                $policy = $decoded;
-            }
-        }
-
-        if (array_key_exists('indexable', $policy)) {
-            return (bool) $policy['indexable'];
-        }
-
-        $robots = strtolower(trim((string) ($policy['robots'] ?? '')));
-        if ($robots !== '' && str_contains($robots, 'noindex')) {
-            return false;
-        }
-
-        return true;
     }
 }
