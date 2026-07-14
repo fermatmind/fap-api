@@ -1,0 +1,764 @@
+{
+  "schema_version": "big5_authority_v2_facet_package.v1",
+  "train_id": "BIG5-AUTHORITY-V2-FACETS-EXTRAVERSION-17",
+  "artifact": "big5-authority-v2-facets-extraversion-17-final",
+  "stage": "final",
+  "framework": "big_five",
+  "domain_code": "extraversion",
+  "taxonomy": "ipip_neo_30_facet_navigation",
+  "expected_page_count": 12,
+  "workflow": {
+    "raw_artifact": "raw-draft.json",
+    "skeptical_review_artifact": "skeptical-review.json",
+    "repaired_artifact": "repaired-draft.json",
+    "raw_failures_preserved": true,
+    "ai_detector_used": false
+  },
+  "pages": [
+    {
+      "content_key": "facet:extraversion:warmth",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/warmth",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "warmth",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Warmth facet: expressing interpersonal welcome and closeness",
+      "summary": "Warmth describes a narrower extraversion tendency to show friendliness, affection, and interpersonal welcome; it is not empathy, agreement, intimacy, or proof of caring behavior.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Extraversion is a broad domain spanning warmth, gregariousness, assertiveness, activity, excitement seeking, and positive emotions. Warmth isolates the visible pull toward friendly closeness; someone may enjoy groups without showing affection, or communicate warmly while preferring limited social time.",
+      "two_ends": "At one end, a person may greet openly, use affirming language, and make relational connection quickly. At the other, they may remain reserved, formal, or slow to signal closeness while still respecting and supporting others. Either style can build trust when expectations and boundaries are clear.",
+      "scenarios": [
+        "A new teammate joins a remote meeting: one colleague welcomes them by name, asks a light personal question, and checks that they can enter the discussion; another sends a concise guide afterward and offers a private channel for practical questions.",
+        "After a friend shares good news, one person responds with animated congratulations and suggests celebrating together; another gives a thoughtful written message later and remembers to ask how the next step unfolded."
+      ],
+      "counterexample": "An expressive greeting can be habitual rather than deeply caring, while a restrained manner can coexist with reliable support. Warmth does not establish empathy, honesty, consent, cultural fit, or relationship quality, and a quiet response should not be read as rejection without context.",
+      "observation_contexts": "Notice how you signal welcome across new, familiar, formal, and cross-cultural interactions. At work or study, check whether your style helps others enter the exchange; in communication, ask about preferred distance instead of assuming that more expressiveness or more reserve is universally comfortable.",
+      "reflection_questions": [
+        "Which signals of welcome feel genuine and useful to you, and which forms of closeness arrive faster than the relationship or setting supports?",
+        "How can you make respect visible when your natural style is reserved, or protect boundaries when your natural style is highly expressive?"
+      ],
+      "low_risk_action": "In one low-stakes interaction, add a single clear welcome signal—using a name, acknowledging a contribution, or offering a practical opening—then observe the response. Keep it proportionate and allow the other person to choose the level of further contact.",
+      "not_meaning": "This facet does not measure kindness, empathy, attachment security, romantic interest, customer service skill, cultural competence, honesty, or suitability for people-facing work. It cannot determine whether a relationship is safe, mutual, or supportive.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or an attachment assessment. Self-report cannot capture cultural display rules, power differences, boundaries, or another person's experience.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:extraversion:warmth",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/warmth",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "warmth",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "亲和 facet：怎样表达欢迎与人际靠近",
+      "summary": "亲和描述外向性中表达友好、关切和欢迎的窄倾向；它不等于同理、赞同、亲密关系，也不能证明实际照顾行为。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "外向性还包含群体偏好、主张表达、活动节奏、刺激追求与积极情绪。亲和只观察一个人怎样向关系靠近并让欢迎可见；有人爱参加群体活动却少表达情感，也有人很亲切但需要大量独处。",
+      "two_ends": "一端的人容易主动问候、肯定他人并较快建立关系感；另一端的人可能更克制、正式或慢慢表达靠近，同时仍然尊重并支持别人。只要边界和期待清楚，两种风格都能形成信任。",
+      "scenarios": [
+        "新同事第一次参加线上会议时，有人叫出对方名字、问一个轻松问题，并确认其能进入讨论；另一个人会后发送简明指引，留下私下询问实际问题的渠道。",
+        "朋友分享好消息时，一人马上热烈祝贺并提议庆祝；另一人稍后写一段认真留言，并在下一阶段到来时记得追问进展。"
+      ],
+      "counterexample": "热情问候可能只是习惯，不必然代表深度关心；表达克制的人也可能长期提供可靠支持。亲和不能证明同理、诚实、同意或关系质量，安静回应也不应脱离情境被解释成拒绝。",
+      "observation_contexts": "观察自己在陌生、熟悉、正式和跨文化互动中如何发出欢迎信号。工作学习中，可检查自己的方式是否让他人更容易参与；沟通时询问舒适距离，不假定越热情或越克制就越合适。",
+      "reflection_questions": [
+        "哪些欢迎信号对你是真诚且有帮助的，哪些靠近速度可能超过关系和场景能够承受的程度？",
+        "偏克制时怎样让尊重可见，偏热情时又怎样为他人的边界留出选择？"
+      ],
+      "low_risk_action": "在一次低风险互动中只增加一个明确欢迎信号，例如称呼名字、回应贡献或提供实际入口，再观察对方反应。保持分寸，并让对方决定是否继续加深联系。",
+      "not_meaning": "这个 facet 不测量善良、同理、依恋安全、浪漫兴趣、客户服务技能、文化能力、诚实或对人岗位适合度，也不能判断一段关系是否安全、互惠和支持。",
+      "method_boundary": "本页采用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或依恋评估。自我报告无法覆盖文化表达规则、权力差异、个人边界与他人的真实体验。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:extraversion:gregariousness",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/gregariousness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "gregariousness",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Gregariousness facet: preferring company and group settings",
+      "summary": "Gregariousness describes a narrower extraversion preference for being with several people and entering group settings; it is not social skill, popularity, belonging, or protection from loneliness.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Within broad extraversion, gregariousness concerns the amount and format of social company a person tends to seek. It differs from warmth toward one person, speaking forcefully, maintaining a fast pace, pursuing stimulation, or experiencing cheerful emotion.",
+      "two_ends": "At one end, a person may recharge through gatherings, shared activity, and frequent contact with several people. At the other, they may prefer one-to-one exchange, small groups, or substantial solitude before social contact. Both can support connection when frequency, depth, and recovery needs are respected.",
+      "scenarios": [
+        "At a conference, one attendee joins the communal table and moves between several conversations; another schedules two focused meetings, eats alone to recover, and returns for the session most relevant to their work.",
+        "A class can choose group study or independent review. One learner organizes an open session where ideas circulate quickly; another prepares alone, then meets one partner to compare the questions they could not resolve."
+      ],
+      "counterexample": "Enjoying crowds does not prove strong relationships or conversational skill, and preferring solitude does not prove shyness, isolation, or dislike of people. Someone can seek many interactions yet feel disconnected, while another maintains a small, durable network.",
+      "observation_contexts": "Track which group sizes, durations, roles, and noise levels improve or drain your attention. At work or study, separate collaboration needs from social volume; in communication, state recovery needs and participation preferences without framing either as more committed.",
+      "reflection_questions": [
+        "Which group settings create useful connection or learning for you, and which mainly add noise, performance pressure, or recovery cost?",
+        "How can you meet both the task's collaboration needs and your preferred amount of social contact without disappearing or overcommitting?"
+      ],
+      "low_risk_action": "For one upcoming group event, choose a specific participation window, purpose, and recovery plan. Attend or decline based on those conditions, then note whether the group size and interaction format—not merely the presence of people—fit your needs.",
+      "not_meaning": "This facet does not measure social competence, friendship quality, popularity, loneliness, teamwork, leadership, communication skill, or suitability for remote or collaborative work. It cannot reveal whether someone has access to welcoming groups.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a social-anxiety assessment. Self-report cannot separate preference from opportunity, exclusion, sensory load, culture, or current life demands.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:extraversion:gregariousness",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/gregariousness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "gregariousness",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "合群偏好 facet：怎样选择群体陪伴与独处",
+      "summary": "合群偏好描述外向性中进入多人场景、保持群体陪伴的窄倾向；它不等于社交技能、受欢迎程度、归属感，也不能防止孤独。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "在广义外向性中，这一 facet 关注一个人通常需要多少、什么形式的社会陪伴。它不同于对单个人表达亲和、强势发言、维持快节奏、追求刺激或体验愉快情绪。",
+      "two_ends": "一端的人可能从聚会、共同活动和频繁多人接触中恢复精力；另一端的人更偏好一对一、小群体，或在接触前后保留较长独处。只要频率、深度与恢复需要被尊重，两种方式都能维持连接。",
+      "scenarios": [
+        "参加行业会议时，一位参与者坐到公共桌边，在多组对话间移动；另一位提前约两场聚焦会谈，独自吃饭恢复，再参加与工作最相关的环节。",
+        "课程允许小组复习或独立复习时，有人组织开放讨论，让想法快速流动；另一个人先独立准备，再只约一位伙伴核对无法解决的问题。"
+      ],
+      "counterexample": "喜欢人群不能证明关系深厚或谈话熟练，偏好独处也不能证明害羞、孤立或讨厌别人。有人频繁社交仍缺少连接感，也有人只维护很小却稳定的关系网络。",
+      "observation_contexts": "记录不同群体规模、时长、角色和噪声对注意与恢复的影响。工作学习中区分协作需要和社交数量；沟通时说明参与方式与恢复需求，不把任何一端描述成投入不足。",
+      "reflection_questions": [
+        "哪些群体场景确实带来连接或学习，哪些主要增加噪声、表演压力与恢复成本？",
+        "怎样同时满足任务的协作需要和自己的社交容量，而不是突然消失或过度承诺？"
+      ],
+      "low_risk_action": "为下一次群体活动预先确定参与时段、目的和恢复安排。按这些条件参加或拒绝，事后记录真正匹配或不匹配的是群体大小、互动形式，还是单纯是否有人在场。",
+      "not_meaning": "这个 facet 不测量社交能力、友谊质量、受欢迎度、孤独、团队合作、领导力、沟通技巧或远程与协作工作适合度，也无法说明一个人是否有机会进入友善群体。",
+      "method_boundary": "本页使用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或社交焦虑评估。自我报告无法分离偏好与机会、排斥经历、感官负荷、文化和当前生活要求。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:extraversion:assertiveness",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/assertiveness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "assertiveness",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Assertiveness facet: taking the floor and influencing direction",
+      "summary": "Assertiveness describes a narrower extraversion tendency to speak up, state preferences, and influence group direction; it is not correctness, aggression, confidence in every domain, or leadership quality.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Broad extraversion contains several social and energetic tendencies. Assertiveness isolates how readily a person claims conversational space and attempts to shape decisions. It can be high in someone who dislikes crowds, or low in someone who is warm, active, and socially engaged.",
+      "two_ends": "At one end, a person may voice a position early, assign direction, and challenge an unclear decision. At the other, they may listen longer, contribute selectively, or influence through questions and written follow-up. Both can help a group; impact depends on timing, evidence, power, and room left for others.",
+      "scenarios": [
+        "In a planning meeting with no owner, one teammate summarizes the choice, proposes responsibilities, and asks for objections; another listens for missing constraints, then sends a concise alternative that changes the plan before work begins.",
+        "A seminar discussion becomes dominated by two voices. One student directly asks to hear from people who have not spoken; another uses the shared notes to add a counterpoint and invites responses without competing for airtime."
+      ],
+      "counterexample": "Speaking first or loudly does not prove expertise, courage, or good leadership, and speaking less does not prove passivity or lack of ideas. A forceful style can suppress evidence, while a quiet intervention can decisively improve a decision.",
+      "observation_contexts": "Observe whose input is missing, how power affects interruption, and whether your contribution changes clarity or merely increases airtime. At work or study, match directness to consequence; in communication, distinguish a firm position from a final decision and invite correction.",
+      "reflection_questions": [
+        "When does speaking early prevent drift or hidden disagreement, and when would listening longer improve the evidence and distribution of voice?",
+        "Which channel—live statement, question, written note, or private escalation—lets you influence a decision without crowding out others?"
+      ],
+      "low_risk_action": "Before one meeting, prepare a two-sentence position with its evidence and uncertainty. Offer it once at a useful moment, then ask for a missing perspective and refrain from repeating it unless new information changes the choice.",
+      "not_meaning": "This facet does not measure truth, competence, dominance rank, courage, aggression, leadership effectiveness, negotiation skill, or suitability for management. It cannot justify ignoring quieter contributors or treating verbal visibility as performance.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or an assessment of communication competence. Self-report cannot capture status, safety, language access, meeting design, or domain expertise.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:extraversion:assertiveness",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/assertiveness",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "assertiveness",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "主张性 facet：如何占用发言空间并影响方向",
+      "summary": "主张性描述外向性中主动发言、表达偏好和影响群体方向的窄倾向；它不等于正确、攻击性、所有领域的自信或领导质量。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "广义外向性包含多种社交和能量倾向。主张性只观察一个人多快进入发言空间并尝试改变决定；不爱人群的人也可能很敢表达，亲和活跃的人则可能较少主导。",
+      "two_ends": "一端的人倾向较早亮明立场、给出方向并质疑含糊决定；另一端的人可能听得更久、选择性发言，或通过提问和书面跟进影响结果。两者都能帮助团队，关键取决于时机、证据、权力与留给他人的空间。",
+      "scenarios": [
+        "计划会议无人负责时，一位同事总结选择、提出分工并询问异议；另一个人先听出遗漏限制，会后发送简洁替代方案，在执行前改变了原计划。",
+        "研讨课被两种声音占据时，一名学生直接建议先听尚未发言的人；另一名学生在共享笔记写下反例并邀请回应，不靠争抢话筒推进讨论。"
+      ],
+      "counterexample": "先说或大声说不能证明专业、勇气或优秀领导，少说也不能证明被动或没有想法。强势表达可能压住证据，安静但及时的介入也可能决定性地改善选择。",
+      "observation_contexts": "观察谁的输入缺席、权力怎样影响打断，以及自己的发言是在增加清晰度还是只增加时长。工作学习中让直接程度匹配影响；沟通时区分坚定立场和最终决定，并留下纠正入口。",
+      "reflection_questions": [
+        "什么时候尽早发言能阻止漂移或隐藏分歧，什么时候多听一会儿能改善证据和发言分布？",
+        "现场陈述、提问、书面说明或私下升级中，哪种渠道最能影响决定又不挤走他人？"
+      ],
+      "low_risk_action": "为一次会议准备两句话：自己的立场、证据与不确定处。在合适节点只表达一次，随后主动询问一个缺失视角；除非出现新信息，不用重复来提高存在感。",
+      "not_meaning": "这个 facet 不测量真理、能力、支配等级、勇气、攻击性、领导有效性、谈判技巧或管理岗位适合度，不能为忽视安静贡献者或把语言可见度当绩效提供理由。",
+      "method_boundary": "本页采用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或沟通能力评估。自我报告无法覆盖地位、安全感、语言条件、会议设计与领域经验。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:extraversion:activity",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/activity",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "activity",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Activity facet: preferring a busy pace and sustained movement",
+      "summary": "Activity describes a narrower extraversion tendency toward a full schedule, quick tempo, and ongoing engagement; it is not health, productivity, attention capacity, or superior time management.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Within extraversion, activity concerns preferred pace and amount of ongoing engagement. It differs from enjoying people, expressing warmth, taking the lead, seeking intense stimulation, or frequently feeling cheerful. A person can move quickly in solitude or be sociable at a measured pace.",
+      "two_ends": "At one end, a person may enjoy several active commitments, quick transitions, and little idle time. At the other, they may prefer fewer simultaneous demands, deliberate pacing, and recovery between tasks. Either tempo can produce good work when workload and coordination match it.",
+      "scenarios": [
+        "During a product launch, one teammate alternates rapidly among support, documentation, and coordination and feels energized; another protects two focused blocks, limits channel switching, and completes the critical analysis with fewer transitions.",
+        "On a free weekend, one person plans errands, exercise, a visit, and a class; another chooses one outing and leaves unscheduled time so attention and physical energy recover before Monday."
+      ],
+      "counterexample": "A busy calendar can hide low-value motion, and a slower pace can support depth, accuracy, or health. High activity preference does not prove stamina or output; low activity preference does not prove laziness, low motivation, or inability to handle urgency.",
+      "observation_contexts": "Track transition cost, unfinished work, physical signals, and the effect of your tempo on collaborators. At work or study, separate genuine deadlines from self-created speed; in communication, make response windows explicit so different pacing styles do not become moral judgments.",
+      "reflection_questions": [
+        "Which kinds of movement and variety improve your focus, and which merely fragment attention or transfer urgency to other people?",
+        "What pace lets you complete important work while preserving recovery, accuracy, and coordination with those around you?"
+      ],
+      "low_risk_action": "Choose one day and mark each major transition rather than trying to change everything. Remove or combine one switch, protect one recovery interval, and compare completion and strain with a typically fuller schedule.",
+      "not_meaning": "This facet does not measure fitness, energy disorder, attention, productivity, ambition, reliability, time-management skill, or capacity for high workload. It cannot determine whether a fast or slow schedule is medically, economically, or operationally appropriate.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a health or executive-function assessment. Self-report cannot isolate preference from workload, caregiving, disability, sleep, or resource constraints.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:extraversion:activity",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/activity",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "activity",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "活动节奏 facet：怎样偏好忙碌、速度与持续投入",
+      "summary": "活动节奏描述外向性中偏好充实日程、较快转换和持续参与的窄倾向；它不等于健康、生产力、注意容量或更好的时间管理。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "在外向性内部，活动节奏关注偏好的速度和持续投入量。它不同于喜欢人群、表达亲和、主导讨论、寻找强刺激或经常感到愉快；一个人可以独处时动作很快，也可以社交很多却节奏从容。",
+      "two_ends": "一端的人享受多项并行、快速转换和很少空档；另一端的人偏好较少同时要求、从容推进并在任务间恢复。只要工作量和协作方式匹配，两种速度都能产生好结果。",
+      "scenarios": [
+        "产品上线期间，一位成员在支持、文档和协调间迅速切换并感到兴奋；另一位保护两个深度时段，限制频道切换，用较少转换完成关键分析。",
+        "空闲周末里，有人安排办事、运动、拜访和课程；另一个人只选择一次外出，保留无安排时间，让注意与体力在周一前恢复。"
+      ],
+      "counterexample": "日历很满可能只是低价值移动，较慢节奏也可能支持深度、准确和健康。偏好高活动不能证明耐力与产出，偏好低活动也不能证明懒惰、缺少动机或无法应急。",
+      "observation_contexts": "记录转换成本、未完成事项、身体信号和自己的速度对协作者的影响。工作学习中区分真实期限与自己制造的急迫；沟通时明确响应窗口，避免把不同节奏变成道德评价。",
+      "reflection_questions": [
+        "哪些移动与变化能改善专注，哪些只是切碎注意或把紧迫感转嫁给别人？",
+        "什么节奏既能完成重要工作，又能保留恢复、准确和与周围人的协调？"
+      ],
+      "low_risk_action": "选一天只记录每次主要任务转换，不急着全面改造。合并或删除一次切换，保护一个恢复间隔，再与平常更满的日程比较完成度和负担。",
+      "not_meaning": "这个 facet 不测量体能、精力疾病、注意、生产力、雄心、可靠性、时间管理技巧或高负荷承受力，也不能判断快慢日程在医疗、经济或运营上是否合适。",
+      "method_boundary": "本页使用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或健康与执行功能评估。自我报告无法分离偏好与工作量、照护责任、残障、睡眠和资源限制。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:extraversion:excitement-seeking",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/excitement-seeking",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "excitement-seeking",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Excitement seeking facet: preferring intensity and stimulation",
+      "summary": "Excitement seeking describes a narrower extraversion tendency to prefer vivid, fast, or high-stimulation experiences; it is not courage, recklessness, addiction, risk competence, or a need for danger.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Broad extraversion includes social approach, pace, influence, and positive emotion. Excitement seeking isolates appetite for sensory or situational intensity. A person can pursue stimulation alone, enjoy groups without wanting intensity, or be assertive while strongly preferring predictable conditions.",
+      "two_ends": "At one end, a person may enjoy speed, novelty, loud settings, competition, or rapidly changing input. At the other, they may prefer familiar, quieter, and more controllable experiences. Both can choose responsibly when actual hazards, consent, and recovery costs are assessed separately from preference.",
+      "scenarios": [
+        "A team celebration offers a crowded live event or a quiet dinner. One colleague chooses the music and movement of the event; another chooses dinner because conversation and an easy exit make the evening more enjoyable.",
+        "When testing a new feature, one designer wants a fast public challenge with live reactions; another proposes a limited pilot where feedback arrives gradually and rollback remains simple."
+      ],
+      "counterexample": "Enjoying intense stimulation does not prove bravery and may occur in low-risk settings; preferring calm does not prove fearfulness. Someone can be cautious about financial or physical risk while loving loud concerts, and another can make bold decisions in a quiet, planned manner.",
+      "observation_contexts": "Separate desired stimulation from actual probability and severity of harm. At work, study, and leisure, note sensory load, recovery, consent, reversibility, and who bears the downside; communicate an exit option rather than pressuring others to share your threshold.",
+      "reflection_questions": [
+        "Which kinds of intensity feel enlivening without creating an unwanted recovery or safety cost, and which are mainly driven by boredom?",
+        "How can you add novelty or energy while preserving consent, reversibility, and a lower-stimulation option for other people?"
+      ],
+      "low_risk_action": "Add one reversible source of stimulation to a routine task—new setting, short time challenge, or different format—while keeping a clear stop point. Record attention, enjoyment, and recovery rather than escalating intensity automatically.",
+      "not_meaning": "This facet does not measure courage, impulsivity, substance use, safety judgment, adventurous ability, emotional stability, or suitability for hazardous or emergency work. It cannot authorize risk or substitute for domain-specific safety procedures.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a clinical or risk assessment. Self-report cannot establish actual exposure, consent, hazard knowledge, sensory needs, or consequences.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:extraversion:excitement-seeking",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/excitement-seeking",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "excitement-seeking",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "刺激追求 facet：怎样偏好强度、新鲜与快速输入",
+      "summary": "刺激追求描述外向性中偏好鲜明、快速或高刺激体验的窄倾向；它不等于勇敢、鲁莽、成瘾、风险能力，也不表示需要危险。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "广义外向性还包含社交靠近、生活节奏、影响表达和积极情绪。刺激追求只观察对感官与情境强度的偏好；有人独自寻找刺激，有人喜欢群体却不爱强度，也有人敢表达但偏好可预期环境。",
+      "two_ends": "一端的人可能享受速度、新鲜、响亮场景、竞争和快速变化；另一端的人偏好熟悉、安静且可控的体验。两端都可以负责任地选择，前提是把真实危险、同意和恢复成本与偏好分开评估。",
+      "scenarios": [
+        "团队庆祝可选拥挤的现场活动或安静晚餐。一位同事选择音乐和人群带来的动感；另一位选择晚餐，因为容易交谈和随时离开让体验更舒适。",
+        "测试新功能时，一位设计师想做快速公开挑战并接收即时反应；另一位提出小范围试点，让反馈逐步进入且回滚简单。"
+      ],
+      "counterexample": "喜欢强刺激不能证明勇敢，而且可能发生在低风险场景；喜欢平静也不能证明胆怯。有人热爱响亮演出，却对财务和身体风险非常谨慎；也有人在安静计划中作出大胆决定。",
+      "observation_contexts": "把想要的刺激强度与伤害概率、严重度分开。工作学习和休闲中记录感官负荷、恢复、同意、可撤销性与谁承担代价；提供退出选项，不要求别人共享自己的阈值。",
+      "reflection_questions": [
+        "哪些强度能带来活力而不产生不想要的恢复或安全成本，哪些选择主要是在逃避无聊？",
+        "怎样增加新鲜与能量，同时保留同意、可撤销性和他人的低刺激选项？"
+      ],
+      "low_risk_action": "给一项惯例只增加一个可撤销刺激，例如更换地点、短时挑战或新格式，同时设清楚停止点。记录专注、愉快与恢复，不把提高强度当作自动下一步。",
+      "not_meaning": "这个 facet 不测量勇气、冲动、物质使用、安全判断、冒险能力、情绪稳定或危险与应急岗位适合度，不能授权风险，也不能替代领域安全程序。",
+      "method_boundary": "本页采用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或临床与风险评估。自我报告无法证明真实暴露、同意、危险知识、感官需要和后果。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:extraversion:positive-emotions",
+      "locale": "en",
+      "canonical_path": "/en/personality/big-five/facets/positive-emotions",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "positive-emotions",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "Positive emotions facet: readily experiencing and expressing uplift",
+      "summary": "Positive emotions describes a narrower extraversion tendency toward frequent or readily expressed joy, enthusiasm, and amusement; it is not mental health, life satisfaction, optimism, or freedom from distress.",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "Within broad extraversion, positive emotions concerns how readily pleasant high-energy states arise or become visible. It differs from seeking company, showing warmth, influencing others, keeping a busy pace, or pursuing stimulation. These tendencies can combine in many ways.",
+      "two_ends": "At one end, a person may laugh easily, feel enthusiasm quickly, and visibly celebrate good moments. At the other, positive states may be quieter, less frequent, or expressed with restraint. Neither pattern determines the depth of meaning, care, resilience, or capacity to notice difficulty.",
+      "scenarios": [
+        "After a difficult release succeeds, one teammate openly cheers and organizes a brief celebration; another feels relief, thanks the people involved in writing, and returns to a calm routine while still valuing the outcome.",
+        "During a lesson, one student reacts animatedly when a concept clicks and energizes the room; another shows interest by asking a precise follow-up and later applies the idea carefully in an assignment."
+      ],
+      "counterexample": "A cheerful display can coexist with stress, grief, or poor judgment, while subdued expression can coexist with satisfaction and strong engagement. Positive emotion does not cancel difficult feelings, and low visible enthusiasm does not prove unhappiness or disengagement.",
+      "observation_contexts": "Notice frequency, intensity, expression channel, and cultural expectations rather than judging one facial display. At work or study, allow celebration without demanding it; in communication, ask about experience directly and leave room for pleasant and difficult states to coexist.",
+      "reflection_questions": [
+        "Which situations reliably bring genuine energy or amusement, and how do you prefer to make those states visible to other people?",
+        "When does an expectation to appear positive obscure fatigue, disagreement, grief, or information that the group still needs?"
+      ],
+      "low_risk_action": "At the end of one day, record one pleasant moment, what preceded it, and how or whether you expressed it. Share appreciation if it feels fitting, without forcing a mood or using positivity to close a necessary conversation.",
+      "not_meaning": "This facet does not measure depression, wellbeing, gratitude, optimism, resilience, kindness, engagement, emotional maturity, or suitability for morale-building work. It cannot diagnose mood or determine whether someone's outward expression matches their private experience.",
+      "method_boundary": "This page uses an IPIP/NEO-style 30-facet navigation label. It is not identical to BFI-2 facets, a ten-aspect model, a proprietary NEO score, or a clinical mood or wellbeing assessment. Self-report cannot establish duration, impairment, cultural display rules, or current circumstances.",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    },
+    {
+      "content_key": "facet:extraversion:positive-emotions",
+      "locale": "zh-CN",
+      "canonical_path": "/zh/personality/big-five/facets/positive-emotions",
+      "page_family": "facet_detail",
+      "route_family": "facet_canonical",
+      "facet_code": "positive-emotions",
+      "framework": "big_five",
+      "domain_code": "extraversion",
+      "taxonomy": "ipip_neo_30_facet_navigation",
+      "title": "积极情绪 facet：怎样体验并表达愉快与兴奋",
+      "summary": "积极情绪描述外向性中较容易体验或表达喜悦、热情与乐趣的窄倾向；它不等于心理健康、生活满意、乐观或没有痛苦。",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "status": "draft_review_required",
+      "editorial_claim_status": "inference_requires_human_review",
+      "domain_difference": "在广义外向性中，积极情绪关注高能量的愉快状态多容易出现或被看见。它不同于寻找陪伴、表达亲和、影响他人、保持忙碌或追求刺激，这些倾向可以形成许多组合。",
+      "two_ends": "一端的人容易发笑、迅速兴奋并公开庆祝好时刻；另一端的人愉快状态可能更安静、出现较少或表达克制。任何一端都不能决定意义深度、关心、韧性或看见困难的能力。",
+      "scenarios": [
+        "一次艰难上线成功后，一位成员公开欢呼并组织短暂庆祝；另一个人感到放松，用书面方式感谢参与者，然后回到平静惯例，同时同样重视结果。",
+        "课堂上理解新概念时，一名学生兴奋回应并带动现场；另一名学生用一个准确追问表达兴趣，之后在作业里认真应用这个想法。"
+      ],
+      "counterexample": "愉快外表可以与压力、悲伤或错误判断同时存在；表达平淡也可以与满足和高度投入同时存在。积极情绪不会取消困难感受，少有可见热情也不能证明不快乐或不参与。",
+      "observation_contexts": "观察频率、强度、表达渠道与文化期待，不根据一个表情下结论。工作学习中允许庆祝但不强迫表演；沟通时直接询问体验，并允许愉快与困难状态共存。",
+      "reflection_questions": [
+        "哪些情境会稳定带来真实活力或乐趣，你更愿意用什么方式让别人看见这些状态？",
+        "什么时候“必须积极”的期待会遮住疲劳、分歧、悲伤或团队仍需知道的信息？"
+      ],
+      "low_risk_action": "在一天结束时记录一个愉快时刻、它之前发生了什么，以及自己是否表达。合适时分享感谢，但不强迫情绪，也不用积极语言提前结束必要对话。",
+      "not_meaning": "这个 facet 不测量抑郁、幸福、感恩、乐观、韧性、善良、投入、情绪成熟或鼓舞士气岗位适合度，不能诊断心境，也不能判断外在表达是否等于私人体验。",
+      "method_boundary": "本页采用 IPIP/NEO 风格 30 facet 导航标签，不等同于 BFI-2 facet、十方面模型、专有 NEO 分数或临床心境与幸福评估。自我报告无法证明持续时间、功能影响、文化表达规则和当前处境。",
+      "claims": [
+        {
+          "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+          "source_ids": [
+            "academic.soto-john-2017-bfi2"
+          ]
+        },
+        {
+          "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+          "source_ids": [
+            "official.fermatmind-public-contract-v2",
+            "internal.public-claim-boundary-matrix"
+          ]
+        }
+      ],
+      "visible_sources": [
+        {
+          "source_id": "academic.soto-john-2017-bfi2",
+          "citation_label": "Soto & John (2017), hierarchical Big Five domains and facets",
+          "public_url": "https://doi.org/10.1037/pspp0000096",
+          "limitation": "Supports hierarchical trait description, but BFI-2 facets are not identical to this 30-facet navigation label and do not validate FermatMind scores."
+        },
+        {
+          "source_id": "official.ipip-neo-facets-table",
+          "citation_label": "IPIP, NEO Domains and Facets correspondence table",
+          "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+          "limitation": "Supports the navigation label and domain placement, not identity with proprietary NEO instruments or proof about one individual."
+        }
+      ]
+    }
+  ],
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}
