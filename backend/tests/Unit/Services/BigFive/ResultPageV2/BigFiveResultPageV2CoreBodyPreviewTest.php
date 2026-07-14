@@ -5274,6 +5274,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_personality_public_asset_read_model_cache(): void
+    {
+        $allowed = [
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php',
+            'backend/app/Observers/PersonalityPublicContentAssetObserver.php',
+            'backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_personality_public_warmup_command(): void
     {
         $repoRoot = (string) getcwd();
@@ -5659,6 +5674,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isPersonalityPublicAssetContractFile($file)) {
+                continue;
+            }
+
+            if ($this->isPersonalityPublicAssetReadModelCacheFile($file)) {
                 continue;
             }
 
@@ -7335,6 +7354,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/database/migrations/2026_06_14_000100_create_personality_public_content_assets_table.php',
             'backend/database/migrations/2026_06_14_000200_add_render_contract_fields_to_personality_public_content_assets_table.php',
             'backend/database/migrations/2026_07_14_000100_add_big_five_authority_v2_to_personality_public_content_assets.php',
+        ], true);
+    }
+
+    private function isPersonalityPublicAssetReadModelCacheFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Observers/PersonalityPublicContentAssetObserver.php',
+            'backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php',
         ], true);
     }
 
