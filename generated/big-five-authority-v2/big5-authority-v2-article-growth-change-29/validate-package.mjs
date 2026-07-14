@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const dir = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(dir, '../../..');
+const read = (name) => JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8'));
+const matrix = JSON.parse(fs.readFileSync(path.join(root, 'generated/big-five-authority-v2/big5-authority-v2-article-ia-21/article-intent-matrix.json'), 'utf8'));
+const ledger = JSON.parse(fs.readFileSync(path.join(root, 'generated/big-five-authority-v2/big5-authority-v2-source-ledger-05/source-ledger.json'), 'utf8'));
+const raw = read('raw-drafts.json'); const reviews = read('skeptical-review.json'); const repaired = read('repaired-drafts.json'); const finalPackage = read('final-package.json'); const mappings = read('source-mapping.json'); const qa = read('qa_report.json');
+const locked = matrix.themes.filter((theme) => theme.batch === 29);
+const expectedPairs = new Set(locked.flatMap((theme) => theme.locales.map((locale) => `${theme.topic_id}:${locale.locale}:${locale.slug}`)));
+assert.equal(locked.length, 5);
+assert.deepEqual(new Set(finalPackage.assets.map((asset) => `${asset.topic_id}:${asset.locale}:${asset.slug}`)), expectedPairs);
+assert.equal(finalPackage.assets.length, 10);
+assert.equal(finalPackage.assets.filter((asset) => asset.locale === 'en').length, 5);
+assert.equal(finalPackage.assets.filter((asset) => asset.locale === 'zh-CN').length, 5);
+assert(finalPackage.assets.every((asset) => asset.batch === 29));
+assert.equal(new Set(finalPackage.assets.map((asset) => asset.unique_intent_key)).size, 5);
+const sourceIds = new Set(ledger.sources.map((source) => source.id));
+const sections = ['direct_answer', 'evidence', 'nuance_counterexample', 'concrete_scenario', 'practical_framework', 'limitation', 'visible_sources', 'method_product_boundary', 'internal_links'];
+for (const asset of finalPackage.assets) {
+  const theme = locked.find((candidate) => candidate.topic_id === asset.topic_id); const locale = theme.locales.find((candidate) => candidate.locale === asset.locale);
+  assert.equal(asset.slug, locale.slug); assert.equal(asset.path, locale.path); assert.equal(asset.title_intent, locale.title_intent); assert.equal(asset.primary_question, locale.primary_question); assert.equal(asset.audience, locale.audience); assert.equal(asset.user_task, locale.user_task); assert.deepEqual(asset.keywords, locale.keywords); assert.deepEqual(asset.internal_link_targets, locale.internal_link_targets); assert.deepEqual(asset.source_mapping.map((source) => source.source_id), locale.source_requirements); assert(asset.source_mapping.every((source) => sourceIds.has(source.source_id) && (source.public_url || source.repository_path))); assert.deepEqual(asset.sections.map((section) => section.key), sections); assert(asset.sections.every((section) => section.body_md.length >= 30));
+  const boundary = asset.sections.find((section) => section.key === 'method_product_boundary').body_md.toLowerCase(); const terms = asset.locale === 'en' ? ['group-level', 'personal prediction', 'score', 'unknown'] : ['群体', '个人预测', '分数', 'unknown']; for (const term of terms) assert(boundary.includes(term));
+  assert.equal(asset.review_status, 'pending_manual_review'); assert.equal(asset.reviewer, null); assert.equal(asset.author, null); assert.equal(asset.published_at, null); assert.equal(asset.cms_write_executed, false); assert.equal(asset.publish_state_change, false); assert.equal(asset.indexability_change, false);
+}
+assert.equal(raw.assets.length, 10); assert.equal(reviews.reviews.length, 10); assert.equal(repaired.assets.length, 10); assert.equal(mappings.mappings.length, 10); assert.deepEqual(new Set(raw.assets.map((asset) => `${asset.topic_id}:${asset.locale}:${asset.slug}`)), expectedPairs); assert.deepEqual(new Set(repaired.assets.map((asset) => `${asset.topic_id}:${asset.locale}:${asset.slug}`)), expectedPairs); assert(reviews.reviews.every((review) => review.repair_required === true && review.reviewer === null)); assert(repaired.assets.every((asset) => asset.review_status === 'repaired_pending_manual_review'));
+assert.equal(qa.status, 'PASS_PENDING_MANUAL_REVIEW'); assert.deepEqual(qa.counts, { locked_themes: 5, article_assets: 10, en_assets: 5, zh_cn_assets: 5 }); assert(Object.values(qa.checks).every((value) => value === true || value === 0));
+const serialized = JSON.stringify({ finalPackage, reviews }).toLowerCase(); for (const forbidden of ['/attempt/', '/report/', '/orders/', 'clinically validated', 'guaranteed personality change', 'this event caused your personality']) assert(!serialized.includes(forbidden));
+console.log('Big Five batch 29 validation passed: exact 5 growth-change themes / 10 bilingual Article candidates / group-to-individual boundaries');
