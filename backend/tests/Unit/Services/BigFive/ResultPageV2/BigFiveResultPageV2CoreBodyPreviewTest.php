@@ -5317,10 +5317,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/bootstrap/app.php',
         ];
         $bootstrapChangedLines = [
+            "+        if ((bool) config('public_content_observability.probe.enabled')) {",
             "+        \$schedule->command('public-content:probe-delivery --json')",
             '+            ->everyFiveMinutes()',
             '+            ->withoutOverlapping(10)',
             '+            ->onOneServer();',
+            '+        }',
         ];
         $blocked = ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'];
 
@@ -12532,10 +12534,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function bootstrapDiffIsPublicContentDeliveryProbeOnly(array $changedLines): bool
     {
         $expected = [
+            "if ((bool) config('public_content_observability.probe.enabled')) {",
             "\$schedule->command('public-content:probe-delivery --json')",
             '->everyFiveMinutes()',
             '->withoutOverlapping(10)',
             '->onOneServer();',
+            '}',
         ];
         $actual = [];
 
