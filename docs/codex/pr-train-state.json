@@ -91141,7 +91141,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "57eb8785d5a7eded6748848f92319220c10c225b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3069",
     "checks": {
@@ -91152,6 +91152,10 @@
       "local": {
         "status": "pass",
         "evidence": "Package validator passed exact PR21 batch 26 coverage: 5 locked workplace themes, 10 EN/zh-CN Article candidates, exact slugs/questions/audiences/tasks/keywords/sources/links, nine reader/evidence sections, full raw-review-repair-final-mapping chain, null attribution, pending_manual_review, and zero CMS/publication/indexability mutations. Every asset visibly prohibits hiring, screening, staffing, promotion, performance, discipline, suitability, job-fit, leadership-potential, and workplace-outcome conclusions and excludes private report links. BigFiveAuthorityV226Test passed with 4 tests / 184 assertions. Pint --test, PHP/JSON/JavaScript/YAML syntax, git diff --check, and exact 11-file allowlist checks passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "All 9 GitHub checks passed on ledger-updated head f5186a9da40dae6a2a3e18e90d46a773b1daf105: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload. GitHub reported CLEAN merge state and the changed-file set remained exactly the 11 allowed files."
       }
     },
     "failure_reason": null,
@@ -91180,6 +91184,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Committed the exact 11-file PR26 scope as 57eb8785d5a7eded6748848f92319220c10c225b, pushed codex/big5-authority-v2-article-workplace-26, and opened PR #3069. Waiting for required GitHub checks on the ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T07:39:34Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on ledger-updated head f5186a9da40dae6a2a3e18e90d46a773b1daf105, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
       }
     ]
   },
