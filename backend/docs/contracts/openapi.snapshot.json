@@ -3010,6 +3010,25 @@
                 ]
             }
         },
+        "/api/v0.5/career/industries": {
+            "get": {
+                "operationId": "get_api_v0_5_career_industries",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerIndustryDirectoryController@index",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders",
+                    "App\\Http\\Middleware\\RecordPublicContentRuntime"
+                ]
+            }
+        },
         "/api/v0.5/career/jobs": {
             "get": {
                 "operationId": "get_api_v0_5_career_jobs",

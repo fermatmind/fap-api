@@ -50,6 +50,7 @@ use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveOccupationCompanionLinks
 use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveReadinessController;
 use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveRecommendationCompanionLinksController;
 use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveRolloutQueueController;
+use App\Http\Controllers\API\V0_5\Career\CareerIndustryDirectoryController;
 use App\Http\Controllers\API\V0_5\Career\CareerJobDetailController;
 use App\Http\Controllers\API\V0_5\Career\CareerJobExplainabilityController;
 use App\Http\Controllers\API\V0_5\Career\CareerJobListController;
@@ -537,6 +538,7 @@ Route::prefix('v0.5')->group(function () {
         Route::get('/career/first-wave/rollout-queue', [CareerFirstWaveRolloutQueueController::class, 'show']);
         Route::get('/career/first-wave/readiness', [CareerFirstWaveReadinessController::class, 'show']);
         Route::get('/career/directory', [CareerDirectoryController::class, 'index']);
+        Route::get('/career/industries', [CareerIndustryDirectoryController::class, 'index']);
         Route::get('/career/jobs', [CareerJobListController::class, 'index']);
         Route::get('/career/cn-proxy/{slug}', [CareerCnProxyPublicOwnerController::class, 'show']);
         Route::get('/career/jobs/{slug}/ai-impact-asset', [CareerAiImpactAssetPreviewController::class, 'show']);

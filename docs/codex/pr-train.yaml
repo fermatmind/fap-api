@@ -41932,8 +41932,10 @@ prs:
     allowed_paths:
       - backend/app/Services/Career/CareerIndustryDirectoryReadModel.php
       - backend/app/Http/Controllers/API/V0_5/Career/CareerIndustryDirectoryController.php
+      - backend/config/public_content_observability.php
       - backend/routes/api.php
       - backend/tests/Feature/Career/CareerIndustryDirectoryApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/contracts/openapi.snapshot.json
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -41943,7 +41945,7 @@ prs:
       - Change career content, recommendation/scoring, private routes, CMS data, production cache, warmup, or deployment.
     validation:
       - cd backend && php artisan test tests/Feature/Career/CareerIndustryDirectoryApiTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Services/Career/CareerIndustryDirectoryReadModel.php app/Http/Controllers/API/V0_5/Career/CareerIndustryDirectoryController.php routes/api.php tests/Feature/Career/CareerIndustryDirectoryApiTest.php
+      - cd backend && vendor/bin/pint --test app/Services/Career/CareerIndustryDirectoryReadModel.php app/Http/Controllers/API/V0_5/Career/CareerIndustryDirectoryController.php config/public_content_observability.php routes/api.php tests/Feature/Career/CareerIndustryDirectoryApiTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && php artisan route:list --path=api/v0.5/career/industries --except-vendor
       - cd backend && bash scripts/export_openapi.sh --check
       - YAML/JSON parse and changed-file scope validation
