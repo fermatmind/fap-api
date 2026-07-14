@@ -91433,7 +91433,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "4680fe289abef76b5d392cece597bedaa39bbde6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3075",
     "checks": {
@@ -91444,6 +91444,10 @@
       "local": {
         "status": "pass",
         "evidence": "Package validator passed exact PR21 batch 30 coverage: 5 locked stress-and-wellbeing themes, 10 EN/zh-CN Article candidates, exact slugs/questions/audiences/tasks/keywords/sources/links, nine reader/evidence sections, full raw-review-repair-final-mapping chain, null attribution, pending_manual_review, and zero CMS/publication/indexability mutations. Every asset is non-medical and non-diagnostic, states that neuroticism is not mental illness, avoids symptom or crisis assessment, treatment and guaranteed-wellbeing claims, and preserves qualified-professional and local urgent-help boundaries without pretending to assess an individual. All FermatMind clinical and psychometric claims remain Unknown. BigFiveAuthorityV230Test passed with 4 tests / 166 assertions. Pint --test, PHP/JSON/JavaScript/YAML syntax, source mapping, private-link, git diff --check, and exact 11-file allowlist checks passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "All 9 GitHub checks passed on ledger-updated head 7251db04ff592813666fd9714ad3b4b5349b8b99: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload. GitHub reported CLEAN merge state and the changed-file set remained exactly the 11 allowed files."
       }
     },
     "failure_reason": null,
@@ -91472,6 +91476,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Committed the exact 11-file PR30 scope as 4680fe289abef76b5d392cece597bedaa39bbde6, pushed codex/big5-authority-v2-article-stress-wellbeing-30, and opened PR #3075. Waiting for required GitHub checks on the ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T09:44:45Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on ledger-updated head 7251db04ff592813666fd9714ad3b4b5349b8b99, GitHub reports CLEAN merge state, and the changed-file set remains exactly the 11 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
       }
     ]
   },
