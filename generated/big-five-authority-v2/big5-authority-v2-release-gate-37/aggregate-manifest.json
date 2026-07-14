@@ -1,0 +1,384 @@
+{
+  "schema_version": "big5-authority-v2-aggregate-manifest.v1",
+  "generated_at": "2026-07-14T14:16:22Z",
+  "authority": "CMS/backend only",
+  "release_mode": "dry_run_only",
+  "dependency": {
+    "train_id": "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36",
+    "pr_number": 3084,
+    "merge_sha": "06057445739c2d7fa0116bacb3b00648d35a11be"
+  },
+  "aggregate_scope": "PR07-PR36 candidate packages plus PR05 source and PR06 editorial controls",
+  "package_sha256": "fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162",
+  "digest_algorithm": "sha256(sorted path + tab + bytes + tab + file sha256 + newline)",
+  "input_file_count": 72,
+  "input_files": [
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-comparisons-32/final-package.json",
+      "bytes": 61565,
+      "sha256": "6c052e0ea3af3c168705e7d17cc77460d528fa15f93baff1f13ac3abd2748e2c"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-comparisons-32/qa_report.json",
+      "bytes": 834,
+      "sha256": "c76d4792922a87faee93e6063f1cc72a5d697b428a6431603c04e062d47bb876"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-core-model-24/final-package.json",
+      "bytes": 50907,
+      "sha256": "5502c83f7e07bacc77a3e644340b150711e774c4e125eae124d3bf6180a23357"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-core-model-24/qa_report.json",
+      "bytes": 646,
+      "sha256": "8b8043e8e79bf842127b6bdfb989c96c6478e216b1ceeea12677ebfa0ebcbf6b"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-growth-change-29/final-package.json",
+      "bytes": 56637,
+      "sha256": "fdd4f792499e923ecbdedfca9b9244c3944bdd03f583e617328e1fb0fce58e65"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-growth-change-29/qa_report.json",
+      "bytes": 851,
+      "sha256": "4cbe36da07c639a5192eb758813a53f99c5a891b2ed2ac9492cf15672c074083"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-ia-21/article-intent-matrix.json",
+      "bytes": 159596,
+      "sha256": "4ef8db51a07ca9d4ce361a51745bef6f6271e68f37e494444a14ca529ce019af"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-ia-21/batch-handoff.json",
+      "bytes": 5067,
+      "sha256": "bf5e4f4a977e2bf9e6bf950b02a27e88a20b8681081ec8013ad8e09a317a8329"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-ia-21/evidence-register.json",
+      "bytes": 1824,
+      "sha256": "8c4b00e5e2da43219dd914ed29162365c4b1760527bcf8d55f3cce35ec08ba04"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-ia-21/qa_report.json",
+      "bytes": 544,
+      "sha256": "90a8e4efd07565d2cb1d04af5a5c1fed410ec1e9990a6a935328daa5f57eb0cb"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-learning-habits-28/final-package.json",
+      "bytes": 55641,
+      "sha256": "6bca2eb3817abe94db255afaa4803b82fea43bf70b6c565bc68ddc846744e954"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-learning-habits-28/qa_report.json",
+      "bytes": 803,
+      "sha256": "b86be62c492339fb5c2a76b23b3d53c92f3921bb6eb6b2faf0bdcfaebd62ff09"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-refresh-22/article-refresh-candidates.json",
+      "bytes": 42388,
+      "sha256": "8385a5938b56fb3b5d511993073fab58b54e7af2e1f2c99129fc5bbd5edc0d8a"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-refresh-22/qa_report.json",
+      "bytes": 840,
+      "sha256": "fd5d67a74395c6642bc8ec3ef34c80009192a6f61fce9abbb51da635df179930"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-refresh-22/topic-hub-candidates.json",
+      "bytes": 2901,
+      "sha256": "012cca4822c4929c71b23f4b2005e7d8e566120a7e550297cbc88d3d2c92ca4e"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-relationships-27/final-package.json",
+      "bytes": 55536,
+      "sha256": "6ed5df89ff6b9020e6d6589d61a4104f37ff6e340f08ed80f772ddc910efffae"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-relationships-27/qa_report.json",
+      "bytes": 792,
+      "sha256": "cec3c514c99d32ceb1f8d6a6eb9b9d6d936fee5c1cee3cca2590984decba056f"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-research-briefings-33/final-package.json",
+      "bytes": 70620,
+      "sha256": "7bf6cfe49fc2f7f73b2ceb466bf6260478f4e3c86ebaca2b512a82912adb0e1d"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-research-briefings-33/qa_report.json",
+      "bytes": 842,
+      "sha256": "26ab073698bf8809a1d9c6b7265235de09a9bb346f11e5476e7b910d37df966f"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-research-methods-31/final-package.json",
+      "bytes": 63090,
+      "sha256": "679e81f5a691ef46f07b27c8c15adeeb2a01696809f22df95332f35fed85b1ad"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-research-methods-31/qa_report.json",
+      "bytes": 825,
+      "sha256": "da53fbea98a30c1a0271200f48a662afbd41c733bb874cac64251488f0c7dd8d"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-result-reading-25/final-package.json",
+      "bytes": 65083,
+      "sha256": "fdc3c73c26af8d268e6ecc63664a41fb2ecc5e44c51dad6a1ba1100fe6292fb5"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-result-reading-25/qa_report.json",
+      "bytes": 689,
+      "sha256": "f6fc10124717fdbf95b7866a56bdf88adf1b9c91085b89e5b6675314cf0dd50c"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-stress-wellbeing-30/final-package.json",
+      "bytes": 56061,
+      "sha256": "10d677d6a3d8700953c488459943a7888d083345062f148ef6f9e2e91310b88a"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-stress-wellbeing-30/qa_report.json",
+      "bytes": 828,
+      "sha256": "07729fa2801c140f605ca5fa18961b520bf167ea2e8e0af016c845d1759fddf0"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-workplace-26/final-package.json",
+      "bytes": 57223,
+      "sha256": "73641818063de5d7de6ffb6430e6eb035a75265694d62397b726d70383fcf71b"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-article-workplace-26/qa_report.json",
+      "bytes": 736,
+      "sha256": "b19d8023000dce27d24745ad9bae88a8db5bc6d24b060f522226f6c705c3c856"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-domains-08/final-package.json",
+      "bytes": 50547,
+      "sha256": "5f42a9bf5f4f51ea893d533a3d251e90bf9367c4367bb023cae6aa36821faf7d"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-domains-08/qa_report.json",
+      "bytes": 1674,
+      "sha256": "3f2a279bbf7537370a77ea3e1fe6cde992093911e80438a94f8dbae61416755c"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-editorial-gate-06/final-package.json",
+      "bytes": 4365,
+      "sha256": "c70c08f8c766d2d4a2a3706509a6ce5aa9af1e3f6928f91d1a1280998ad785bd"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-editorial-gate-06/qa_report.json",
+      "bytes": 676,
+      "sha256": "6b1f19285f8df84a66f28ff286c42970c99199a60ce6aede7d55611a0ed55f5d"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facet-hubs-09/final-package.json",
+      "bytes": 21565,
+      "sha256": "7f988857778285d86ff0b49ad824bea8fe8c170550edf4d8e09a4416728f3902"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facet-hubs-09/qa_report.json",
+      "bytes": 1608,
+      "sha256": "cdaa4de01d614e7a5174430e6f6f84ded044dec2543cd4908193c35373eb067b"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facets-agreeableness-18/final-package.json",
+      "bytes": 56864,
+      "sha256": "9595870b0d486209ad31972ee363fbb6edc7afbf60fbbb995a2d942843b999d0"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facets-agreeableness-18/qa_report.json",
+      "bytes": 1512,
+      "sha256": "acd51842cfb327a7b9ad3b88df81996d9b2665c4ce3ea16001dfb69f38c8f138"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facets-conscientiousness-16/final-package.json",
+      "bytes": 60435,
+      "sha256": "f54bacb20d2f0b8686884d014705f32b606ac16c5c2dcae2cf1ec6bd457037f1"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facets-conscientiousness-16/qa_report.json",
+      "bytes": 1520,
+      "sha256": "ddc87a6a0605232bff5bc55c10d9844d236fdf188e863b74ddd05ee2bb53958e"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facets-extraversion-17/final-package.json",
+      "bytes": 58474,
+      "sha256": "d3d0368243300d060daec3076f3e59c037f0380e81c6bb308ae758be3738ae5d"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facets-extraversion-17/qa_report.json",
+      "bytes": 1510,
+      "sha256": "f3e0107d1ae6bf11458f139e1c599966242b8c1ef954356be68af32fffe333c9"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facets-neuroticism-19/final-package.json",
+      "bytes": 56669,
+      "sha256": "7c39d85ae46c408f9cfea527dd587202025c72a6bbcad357b843be04d19e7c8e"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facets-neuroticism-19/qa_report.json",
+      "bytes": 1508,
+      "sha256": "d32f346087f83e852f024ac33711b121c1f4f0665afabdfff25775e4cfc977b6"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facets-openness-15/final-package.json",
+      "bytes": 51783,
+      "sha256": "d4b47629c9f026cbbf5586384fe77a29811e491f65b5c51ba5f29b264e433866"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-facets-openness-15/qa_report.json",
+      "bytes": 1205,
+      "sha256": "0445bd5322e49c030f3d30ce9c1ffb3e5d7987ff33ed73a763acc21aa816fdb9"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-hub-07/final-package.json",
+      "bytes": 22224,
+      "sha256": "eeb9d07ff4337d53a0d75c1208567474d534d02db9b01d0b16a1c1a9924348d9"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-hub-07/qa_report.json",
+      "bytes": 1604,
+      "sha256": "bf639876d51985bbc759e7b2a753a6f4437d2fcd31148ef333111f95618986d7"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-link-graph-35/intent-overlap-report.json",
+      "bytes": 6527,
+      "sha256": "c3b6b5bdaa46d44895da8644207958887868eecfff45fb01a286d7c94c72b91e"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-link-graph-35/link-graph.json",
+      "bytes": 480451,
+      "sha256": "2d80dcc823496e12544e0c2e64cf40ccd185eb06fdea23d284b3e0ec4878802a"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-link-graph-35/qa_report.json",
+      "bytes": 1004,
+      "sha256": "df4c373eb2af822c269ca86c024504ff74b64ad699d7b5087f9ccecf9c9d6ed8"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-link-graph-35/target-validation-report.json",
+      "bytes": 549,
+      "sha256": "d32c11d6698c29a52eb41be2f8d391ac2f8ae03bee5d9a5401d68fcbb5e12d8e"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-media-og-34/candidate-media-map.json",
+      "bytes": 408546,
+      "sha256": "b5fba3b10e8c5a51780e229b9012e87dbbf8b0c17e12b4519ab3362b69534633"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-media-og-34/qa_report.json",
+      "bytes": 951,
+      "sha256": "8a0751b26a294a8b32b3ff1b40ec8ace0af9c8724de4eae6bb0dce15e9699f5b"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-range-agreeableness-13/final-package.json",
+      "bytes": 35893,
+      "sha256": "101a935379229ee0096f9730502f7c6c15396426dd787bf504a0ed05e8927c90"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-range-agreeableness-13/qa_report.json",
+      "bytes": 1671,
+      "sha256": "2f36e68678b370962c66c046c7d0f10c0efc4e7a8ea20e407dd5c86c2ad78076"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-range-conscientiousness-11/final-package.json",
+      "bytes": 38886,
+      "sha256": "e9db0162193990d224c1f7932b4dfc0378458a76c98abcb779dcbae123b4982d"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-range-conscientiousness-11/qa_report.json",
+      "bytes": 1679,
+      "sha256": "a90f90a53952db2b95180e161c4b626ac1501cc3bb3863c728d73c282a1ca3b3"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-range-extraversion-12/final-package.json",
+      "bytes": 38225,
+      "sha256": "bdeb3b550196431264de3c5ef84c33ad6f55c56cd86fe27b70ebed5b46c07568"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-range-extraversion-12/qa_report.json",
+      "bytes": 1669,
+      "sha256": "3cd8a05ef189d22e541c66a9f560eced06a89a47933014233b121a2d13e7079a"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-range-neuroticism-14/final-package.json",
+      "bytes": 37128,
+      "sha256": "9c94031343fbf5fc81f02509fb58b8f10607d7a343713c5105d06d43cd3664b5"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-range-neuroticism-14/qa_report.json",
+      "bytes": 1667,
+      "sha256": "09a6e21e1b86a61109a51857b426ebfa2fb56de830af602292ba4425bbe2e16c"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-range-openness-10/final-package.json",
+      "bytes": 37004,
+      "sha256": "9369c2e6babb372776aa6bbe993d6dd3eb4bbb00bbe69f05b9a78534a291628d"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-range-openness-10/qa_report.json",
+      "bytes": 1661,
+      "sha256": "d6ca96f7c54f99dca6978726c30a531e7ad7af6a5eeccdc7bdec4fb5ea27dd63"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-seo-geo-authority-36/authority-contract.json",
+      "bytes": 1317,
+      "sha256": "3a092be6b7718020a5d2589e604c86ff75877b1f3d21c228d5e679e62ea235fb"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-seo-geo-authority-36/candidate-eligibility.json",
+      "bytes": 537505,
+      "sha256": "30922bacc2e2def6a84c11ef82b622559d438af5a0b67a623fc90827bf8a2615"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-seo-geo-authority-36/eligibility-summary.json",
+      "bytes": 1035,
+      "sha256": "bbe69976b5adfe875b4e756c11ddac78fc5d506c93b9cc2d523691c660e6f275"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-seo-geo-authority-36/qa_report.json",
+      "bytes": 1702,
+      "sha256": "4692bb34fc251763a0f60cb4b9b46a798b1984cbd5484693fa1a54948264d40d"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-source-ledger-05/qa_report.json",
+      "bytes": 955,
+      "sha256": "75a18a784821cc3c1ad477ce01b7da3d9f9238e8bb9ba2d7b0ce67f38236fc0d"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-source-ledger-05/source-ledger.json",
+      "bytes": 21211,
+      "sha256": "859c83cfcd6ac06dec0ec6e1a0f2fd493fce0679558ade6714f4b54263bc0b09"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-source-ledger-05/terminology-ledger.json",
+      "bytes": 9955,
+      "sha256": "0e443c7566b117ce23a42022808b26740e8128e642dad48dbcab851513a71bae"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-technical-trust-23/content-page-draft-package.json",
+      "bytes": 25175,
+      "sha256": "1de0c682eab5634eb83e489d9fce6da49730421a31c43a9c3b8f570422ee6466"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-technical-trust-23/qa_report.json",
+      "bytes": 549,
+      "sha256": "9633b9411988456e1294f05f63596d57c2ae9f684912de266b1d5880d425d285"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-test-landing-20/final-package.json",
+      "bytes": 17569,
+      "sha256": "d6026a61590c040ca8f1bf9cb37e660549fc686cc44997605497f500769648ef"
+    },
+    {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-test-landing-20/qa_report.json",
+      "bytes": 1526,
+      "sha256": "3de77aff5ea3a7fe37f1168baad0eff4245afc9be66efa84ce8ad344697d7c88"
+    }
+  ],
+  "exact_counts": {
+    "assets": 231,
+    "canonical_routes": 231,
+    "exact_301_aliases": 10,
+    "reciprocal_bilingual_pairs": 109,
+    "source_ledger_entries": 10
+  }
+}

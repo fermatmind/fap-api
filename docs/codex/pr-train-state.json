@@ -91901,8 +91901,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-LINK-GRAPH-35"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "aae0e8678cc13315a7602ee0ad4e211815132469",
+    "status": "merged",
+    "commit_sha": "06057445739c2d7fa0116bacb3b00648d35a11be",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3084",
     "checks": {
       "dependency": {
@@ -91935,9 +91935,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T14:08:58Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -91972,6 +91972,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "The first complete GitHub round passed 9/9 at PR head aae0e8678cc13315a7602ee0ad4e211815132469. Recording ready_to_merge before the final check round and squash merge."
+      },
+      {
+        "at": "2026-07-14T14:16:22Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "PR #3084 completed a final 9/9 GitHub round and squash-merged as 06057445739c2d7fa0116bacb3b00648d35a11be at 2026-07-14T14:08:58Z. Remote and local branches were deleted, main was synchronized and clean, and post-merge validation passed 4 tests / 4199 assertions plus Node validation and Pint."
       }
     ]
   },
@@ -91984,10 +91990,43 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "0b5ed90eb57f5b3b37403e2740ab298c6373537b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3086",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36 PR #3084 is MERGED as 06057445739c2d7fa0116bacb3b00648d35a11be; origin/main contains the merge, both task branches are deleted, and PR36 post-merge validation passed. PR37 started from that exact clean main head."
+      },
+      "release_boundary": {
+        "status": "pass",
+        "evidence": "PR37 is dry-run only. Production import, deploy, migration execution, CMS writes, indexability changes, sitemap/llms publication, and search submission remain forbidden. Current PR36 evidence has 0 of 231 candidates eligible, so the aggregate release decision must remain fail-closed NO_GO."
+      },
+      "aggregate_package": {
+        "status": "pass",
+        "evidence": "The deterministic aggregate contains 231 assets from 72 inputs, 231 canonicals, 10 exact 301 aliases, 109 reciprocal bilingual pairs, and 10 source-ledger entries. Package SHA256 is fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162. All 231 pages remain withheld; the authorization packet verdict is NO_GO_PENDING_ELIGIBILITY_REPAIR_AND_EXACT_PRODUCTION_AUTHORIZATION."
+      },
+      "local_test_db_dry_run": {
+        "status": "pass",
+        "evidence": "SQLite empty-authority-namespace dry-run planned 231 creates and 0 updates, performed no commit, and verified a database write delta of 0."
+      },
+      "focused_test": {
+        "status": "pass",
+        "evidence": "php artisan test tests/Feature/SEO/BigFiveAuthorityV237Test.php: 5 passed, 3736 assertions."
+      },
+      "full_ci_verify_mbti": {
+        "status": "pass",
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh exited 0. Big Five suite: 1378 passed, 172309 assertions; Enneagram and all remaining personality, migration, auth, security, commerce, webhook, attempt, and dependency gates passed."
+      },
+      "format_syntax_data_scope": {
+        "status": "pass",
+        "evidence": "Pint --test passed for both touched PHP files; php -l, node --check, generated JSON parsing, ledger JSON parsing, train YAML parsing, git diff --check, and exact changed-file scope validation passed."
+      },
+      "github_checks_first_round": {
+        "status": "pass",
+        "evidence": "PR #3086 head 0b5ed90eb57f5b3b37403e2740ab298c6373537b passed 9/9 GitHub checks with zero failures, cancellations, skips, or pending jobs. GitHub reports the PR MERGEABLE."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -91996,7 +92035,38 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T14:16:22Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR37 from exact origin/main 06057445739c2d7fa0116bacb3b00648d35a11be after PR36 merge and cleanup. Building the PR07-36 aggregate, deterministic package SHA256, schema/source/duplicate/bilingual/private gates, local-test database zero-write dry-run, per-page eligibility report, and production authorization packet without any production mutation."
+      },
+      {
+        "at": "2026-07-14T14:37:10Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Deterministic aggregate validation, zero-write local database dry-run, focused 5-test/3736-assertion suite, complete ci_verify_mbti suite, Pint, syntax/data checks, diff check, and exact-scope validation all passed. The package remains fail-closed NO_GO with zero publish/indexability eligibility and no executable production command."
+      },
+      {
+        "at": "2026-07-14T14:38:52Z",
+        "from": "local_checks_passed",
+        "to": "local_checks_passed",
+        "note": "Recorded scoped implementation commit bdf1342509f6e01e151435cb1a94277255610a0d before push."
+      },
+      {
+        "at": "2026-07-14T14:40:02Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Pushed the exact 11-file PR37 scope and opened PR #3086 at head 7caeff1f607fe77f9400a3a5934c2a416bbea2ab; required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-14T14:49:14Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "The first complete GitHub round passed 9/9 at PR head 0b5ed90eb57f5b3b37403e2740ab298c6373537b. Recording ready_to_merge before the final check round and squash merge."
+      }
+    ]
   },
   "SAEP-PLANNED-PR-01": {
     "id": "SAEP-PLANNED-PR-01",

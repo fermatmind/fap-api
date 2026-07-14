@@ -1,0 +1,58 @@
+{
+  "schema_version": "big5-authority-v2-production-authorization-packet.v1",
+  "generated_at": "2026-07-14T14:16:22Z",
+  "status": "NO_GO_PENDING_ELIGIBILITY_REPAIR_AND_EXACT_PRODUCTION_AUTHORIZATION",
+  "dependency_merged_pr": {
+    "train_id": "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36",
+    "pr_number": 3084,
+    "merge_sha": "06057445739c2d7fa0116bacb3b00648d35a11be"
+  },
+  "pr37_merge_sha": null,
+  "pr37_merge_sha_status": "MUST_BE_FILLED_FROM_GITHUB_AFTER_PR37_MERGES",
+  "artifact_path": "generated/big-five-authority-v2/big5-authority-v2-release-gate-37/aggregate-manifest.json",
+  "package_sha256": "fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162",
+  "asset_count": 231,
+  "local_test_empty_baseline_counts": {
+    "create": 231,
+    "update": 0,
+    "noop": 0,
+    "writes_executed": 0
+  },
+  "canonical_count": 231,
+  "alias_301_count": 10,
+  "write_workflow": {
+    "dry_run_command": "php generated/big-five-authority-v2/big5-authority-v2-release-gate-37/local-test-db-dry-run.php",
+    "production_command": null,
+    "production_command_status": "UNAVAILABLE_FAIL_CLOSED_MULTI_SURFACE_CMS_WRITER_NOT_AUTHORIZED_BY_PR37",
+    "required_mode": "draft/noindex first; per-page publish only after every gate passes"
+  },
+  "expected_effects_if_a_separate_writer_is_later_authorized": {
+    "cms_or_database_draft_creates_on_empty_namespace": 231,
+    "cms_or_database_updates": 0,
+    "cache_invalidation": 0,
+    "sitemap_additions": 0,
+    "llms_additions": 0,
+    "llms_full_additions": 0,
+    "indexability_changes": 0,
+    "search_submissions": 0,
+    "deploys": 0
+  },
+  "abort_boundaries": [
+    "package SHA256 mismatch",
+    "asset count is not exactly 231",
+    "any canonical or bilingual identity mismatch",
+    "any source, duplicate, claim, or private-boundary failure",
+    "any author/reviewer/date or media gate remains false for a page proposed for publication",
+    "production create/update counts differ from an approved read-only preflight",
+    "writer command is unavailable or the exact approval phrase does not match"
+  ],
+  "current_blockers": {
+    "publish_eligible": 0,
+    "withheld": 231,
+    "author_reviewer_date_pass": 0,
+    "media_authority_pass": 0,
+    "visible_evidence_pass": 229
+  },
+  "exact_approval_phrase_template": "AUTHORIZE BIG5 AUTHORITY V2 DRAFT-ONLY PRODUCTION IMPORT FOR PR37_MERGE_SHA=<PR37_MERGE_SHA> PACKAGE_SHA256=fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162 ASSET_COUNT=231 CREATE=231 UPDATE=0; PUBLIC_RELEASE=0; INDEXABILITY=0; SITEMAP=0; LLMS=0; SEARCH_SUBMISSION=0; ABORT_ON_ANY_MISMATCH",
+  "approval_phrase_currently_executable": false
+}
