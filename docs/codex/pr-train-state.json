@@ -90946,10 +90946,23 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22"
     ],
-    "status": "planned",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "status": "ready_to_merge",
+    "commit_sha": "74e9912c52cc169dd3a298893c1f7146bbf9bf31",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3066",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22 PR #3065 is MERGED as ba270b34a9b080196fd98029ba1504d79a130eae; origin/main contains the merge and PR22 post-merge package/test/Pint validation and cleanup completed. PR23 started from that exact clean origin/main head."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact 2 page identities x 2 locales, direct ContentPage model compatibility, methodology/trust page types, required privacy/version/evidence sections, 6 PR05 public sources with limitations, eight explicit product-evidence Unknown fields per candidate, null attribution, and fail-closed non-public/non-indexable science-review gates with zero CMS/production writes. BigFiveAuthorityV223Test passed with 5 tests / 102 assertions; touched PHP Pint, PHP/JSON/JavaScript/YAML syntax, git diff --check, and exact 8-file allowlist checks passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3066 head a64f64080516d613fabf8a9a60a0650787aea751 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -90958,7 +90971,32 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T05:53:40Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR23 from exact origin/main ba270b34a9b080196fd98029ba1504d79a130eae after PR22 merged, cleaned, and revalidated. Scope reuses the existing ContentPage authority for exactly 2 bilingual page identities covering methodology/measurement boundaries and source/review/correction policy. All product-specific reliability, validity, norm, sample, percentile, measurement-error, subgroup, and predictive values are Unknown; all 4 candidates are non-public, non-indexable, science-review-gated drafts with null attribution and no CMS or production write."
+      },
+      {
+        "at": "2026-07-14T05:54:52Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All PR23 local checks passed. The package reuses ContentPage for 4 bilingual drafts, keeps every product-specific metric Unknown, includes public methodology, limitation, privacy, review, correction, version, and evidence sections, and records zero writes or release changes. Focused tests passed with 5 tests / 102 assertions; Pint, syntax, source-ledger, diff, private-link, and exact 8-file scope checks passed."
+      },
+      {
+        "at": "2026-07-14T05:56:25Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 8-file PR23 scope as 74e9912c52cc169dd3a298893c1f7146bbf9bf31, pushed codex/big5-authority-v2-technical-trust-23, and opened PR #3066. Waiting for required GitHub checks on the final ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T06:02:35Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head a64f64080516d613fabf8a9a60a0650787aea751, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 8 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24": {
     "id": "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24",
