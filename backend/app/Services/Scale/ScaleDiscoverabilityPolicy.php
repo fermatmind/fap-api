@@ -18,11 +18,19 @@ final class ScaleDiscoverabilityPolicy
     ];
 
     /**
+     * These exact acceptance-fixture rows are retained for provenance review,
+     * but must not be publicly enumerated or indexed. Keeping the hold in the
+     * shared policy avoids deleting production rows or relying on consumer-side
+     * slug filters.
+     */
+    private const PR24_FIXTURE_CODE_PATTERN = '/\APR24_(?:0[1-9]|[1-4][0-9]|50)\z/';
+
+    /**
      * @param  array<string, mixed>  $row
      */
     public function isIndexable(array $row): bool
     {
-        if ($this->isClinicalScreeningHold($row)) {
+        if ($this->isClinicalScreeningHold($row) || $this->isPr24FixtureHold($row)) {
             return false;
         }
 
@@ -84,6 +92,16 @@ final class ScaleDiscoverabilityPolicy
         $scaleCode = strtoupper(trim((string) ($row['code'] ?? $row['scale_code'] ?? '')));
 
         return in_array($scaleCode, self::HELD_SCALE_CODES, true);
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     */
+    public function isPr24FixtureHold(array $row): bool
+    {
+        $scaleCode = strtoupper(trim((string) ($row['code'] ?? $row['scale_code'] ?? '')));
+
+        return preg_match(self::PR24_FIXTURE_CODE_PATTERN, $scaleCode) === 1;
     }
 
     /**

@@ -31,6 +31,77 @@ class SitemapGeneratorTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_generate_excludes_exact_pr24_fixture_cohort_without_deleting_registry_rows(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        DB::table('scales_registry')->delete();
+        $now = now();
+
+        foreach (range(1, 50) as $index) {
+            $suffix = str_pad((string) $index, 2, '0', STR_PAD_LEFT);
+            DB::table('scales_registry')->insert([
+                'code' => 'PR24_'.$suffix,
+                'org_id' => 0,
+                'primary_slug' => 'pr24-primary-'.$suffix,
+                'slugs_json' => json_encode(['pr24-alias-'.$suffix]),
+                'driver_type' => 'mbti',
+                'default_pack_id' => null,
+                'default_region' => null,
+                'default_locale' => 'en',
+                'default_dir_version' => null,
+                'capabilities_json' => null,
+                'view_policy_json' => null,
+                'commercial_json' => null,
+                'seo_schema_json' => null,
+                'is_public' => 1,
+                'is_active' => 1,
+                'is_indexable' => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
+        }
+
+        foreach ([0, 51] as $index) {
+            $suffix = str_pad((string) $index, 2, '0', STR_PAD_LEFT);
+            DB::table('scales_registry')->insert([
+                'code' => 'PR24_'.$suffix,
+                'org_id' => 0,
+                'primary_slug' => 'pr24-control-'.$suffix,
+                'slugs_json' => json_encode(['pr24-control-alias-'.$suffix]),
+                'driver_type' => 'mbti',
+                'default_pack_id' => null,
+                'default_region' => null,
+                'default_locale' => 'en',
+                'default_dir_version' => null,
+                'capabilities_json' => null,
+                'view_policy_json' => null,
+                'commercial_json' => null,
+                'seo_schema_json' => null,
+                'is_public' => 1,
+                'is_active' => 1,
+                'is_indexable' => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
+        }
+
+        $payload = $this->generateSitemap();
+        $xml = (string) ($payload['xml'] ?? '');
+
+        foreach (range(1, 50) as $index) {
+            $suffix = str_pad((string) $index, 2, '0', STR_PAD_LEFT);
+            $this->assertStringNotContainsString('/en/tests/pr24-primary-'.$suffix, $xml);
+            $this->assertStringNotContainsString('/zh/tests/pr24-primary-'.$suffix, $xml);
+        }
+
+        $this->assertSame(52, DB::table('scales_registry')->count());
+        $this->assertStringContainsString('/en/tests/pr24-control-00', $xml);
+        $this->assertStringContainsString('/zh/tests/pr24-control-00', $xml);
+        $this->assertStringContainsString('/en/tests/pr24-control-51', $xml);
+        $this->assertStringContainsString('/zh/tests/pr24-control-51', $xml);
+    }
+
     public function test_generate_excludes_clinical_screening_scales_even_when_registry_marks_them_indexable(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);

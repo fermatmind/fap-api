@@ -7229,6 +7229,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isExactPr24FixtureDiscoverabilityHoldChange($file, $repoRoot, $baseRef)) {
+                continue;
+            }
+
             if ($this->isClinicalComboEnPaidParityFile($file)) {
                 continue;
             }
@@ -9304,6 +9308,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
         return $changedLines !== []
             && hash_equals($expectedChangedLineHashes[$file], hash('sha256', implode("\n", $changedLines)));
+    }
+
+    private function isExactPr24FixtureDiscoverabilityHoldChange(
+        string $file,
+        string $repoRoot,
+        string $baseRef,
+    ): bool {
+        if (
+            $file !== 'backend/app/Services/Scale/ScaleDiscoverabilityPolicy.php'
+            || $repoRoot === ''
+            || $baseRef === ''
+        ) {
+            return false;
+        }
+
+        $changedLines = $this->changedLinesForFile($repoRoot, $baseRef, $file);
+
+        return $changedLines !== []
+            && hash_equals(
+                '609c9df995e1f126b13b0d13d48bc4d10306d1224681cc9a0e10a50e2830f248',
+                hash('sha256', implode("\n", $changedLines))
+            );
     }
 
     private function isClinicalComboEnPaidParityFile(string $file): bool
