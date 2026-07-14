@@ -21,6 +21,11 @@ final class PersonalityMbtiFullCmsImportCommandTest extends TestCase
 
     private const AUTHORIZATION_PAYLOAD_SHA = 'e44d567ad6092d61076ae70009e5cfa39d1d7b3f5b3a78367e0d241a28ede31e';
 
+    public function test_import_command_is_registered_by_the_laravel_12_bootstrap_configuration(): void
+    {
+        self::assertArrayHasKey('personality:mbti-full-cms-import', Artisan::all());
+    }
+
     public function test_dry_run_stages_the_complete_43_record_package_only_as_draft_revisions(): void
     {
         $this->seedPublishedProfiles();
