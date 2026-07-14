@@ -90824,7 +90824,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-TEST-LANDING-20"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "d817ca8fd9d266f684ca7466b20f8823a9c709de",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3064",
     "checks": {
@@ -90835,6 +90835,10 @@
       "local": {
         "status": "pass",
         "evidence": "Package validator passed exact 9 Article + 2 topic-hub audit, 10 batches, 50 unique topic IDs/intents/slugs, 100 paired EN/zh-CN draft candidates, PR05 source-ledger references, separated academic/competitor/GSC evidence with GSC_EVIDENCE_PENDING, locale-safe internal links, no trait-combination data, and zero body/CMS/publication/indexability mutations. BigFiveAuthorityV221Test passed with 5 tests / 1355 assertions; touched PHP Pint, PHP/JSON/JavaScript/YAML syntax, git diff --check, and exact 10-file allowlist checks passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3064 head c29881b40018e2e9c27ded4c707a44111fb2a68f passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
       }
     },
     "failure_reason": null,
@@ -90863,6 +90867,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Committed the exact 10-file PR21 scope as d817ca8fd9d266f684ca7466b20f8823a9c709de, pushed codex/big5-authority-v2-article-ia-21, and opened PR #3064. Waiting for required GitHub checks on the final ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T04:47:34Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head c29881b40018e2e9c27ded4c707a44111fb2a68f, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 10 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
       }
     ]
   },
