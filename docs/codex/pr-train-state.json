@@ -91366,9 +91366,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "70024c4e684ca4c0dc899cb7204e0b1d0c3683dd",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3074",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -91399,6 +91399,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All PR29 local checks passed. The package exactly consumes PR21 batch 29, preserves 10 bilingual Article candidates and the full skeptical review chain, and enforces group-to-individual, causality, identity-destiny, guaranteed-change, score-optimization, psychometric-Unknown, and high-stakes-use guards. Focused tests passed with 4 tests / 166 assertions; validator, Pint, syntax, source-ledger, private-link, diff, and exact 11-file scope checks passed."
+      },
+      {
+        "at": "2026-07-14T09:18:43Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 11-file PR29 scope as 70024c4e684ca4c0dc899cb7204e0b1d0c3683dd, pushed codex/big5-authority-v2-article-growth-change-29, and opened PR #3074. Waiting for required GitHub checks on the ledger-updated head."
       }
     ]
   },
