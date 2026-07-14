@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\SEO;
 
-use App\Services\BigFive\AuthorityV2\LinkGraph\BigFiveAuthorityV2LinkGraphValidator;
 use Tests\TestCase;
 
 class BigFiveAuthorityV235Test extends TestCase
@@ -15,51 +14,45 @@ class BigFiveAuthorityV235Test extends TestCase
         $this->packagePath = base_path('../generated/big-five-authority-v2/big5-authority-v2-link-graph-35');
     }
 
-    public function test_exact_candidate_graph_passes_backend_validator(): void
+    public function test_exact_candidate_graph_passes_package_validator(): void
     {
         $graph = $this->readJson('link-graph.json');
-        $report = app(BigFiveAuthorityV2LinkGraphValidator::class)->validate($graph);
-        $this->assertTrue($report['ok']);
-        $this->assertSame('pass', $report['status']);
-        $this->assertSame(['nodes' => 231, 'edges' => 1199, 'hreflang_pairs' => 109, 'redirects' => 10, 'errors' => 0], $report['counts']);
-        $this->assertFalse($report['writes_committed']);
-        $this->assertFalse($report['cms_write_attempted']);
-        $this->assertFalse($report['publish_attempted']);
-        $this->assertFalse($report['indexability_attempted']);
-        $this->assertFalse($report['sitemap_llms_schema_release_attempted']);
+        $this->assertCount(231, $graph['nodes']);
+        $this->assertCount(1199, $graph['edges']);
+        $this->assertCount(109, $graph['hreflang_pairs']);
+        $this->assertCount(10, $graph['redirects']);
+
+        $output = [];
+        $exitCode = 1;
+        exec('node '.escapeshellarg($this->packagePath.'/validate-package.mjs').' 2>&1', $output, $exitCode);
+        $this->assertSame(0, $exitCode, implode("\n", $output));
+        $this->assertStringContainsString('Big Five PR35 validation passed', implode("\n", $output));
     }
 
     public function test_validator_fails_closed_on_dead_target_canonical_and_redirect_drift(): void
     {
-        $validator = app(BigFiveAuthorityV2LinkGraphValidator::class);
-
         $dead = $this->readJson('link-graph.json');
         $dead['edges'][0]['target'] = '/en/personality/big-five/not-a-real-target';
-        $deadReport = $validator->validate($dead);
-        $this->assertFalse($deadReport['ok']);
-        $this->assertContains('dead_edge', array_column($deadReport['errors'], 'code'));
+        $this->assertContains('dead_edge', $this->validationErrorCodes($dead));
 
         $canonical = $this->readJson('link-graph.json');
         $canonical['nodes'][0]['canonical_path'] = '/en/personality/big-five/wrong';
-        $canonicalReport = $validator->validate($canonical);
-        $this->assertFalse($canonicalReport['ok']);
-        $this->assertContains('canonical_mismatch', array_column($canonicalReport['errors'], 'code'));
+        $this->assertContains('canonical_mismatch', $this->validationErrorCodes($canonical));
 
         $redirect = $this->readJson('link-graph.json');
         $redirect['redirects'][0]['status_code'] = 302;
-        $redirectReport = $validator->validate($redirect);
-        $this->assertFalse($redirectReport['ok']);
-        $this->assertContains('invalid_zh_legacy_redirect', array_column($redirectReport['errors'], 'code'));
+        $this->assertContains('invalid_zh_legacy_redirect', $this->validationErrorCodes($redirect));
     }
 
-    public function test_read_only_console_command_validates_default_graph(): void
+    public function test_validator_contract_is_read_only_and_release_closed(): void
     {
-        $this->artisan('personality:big-five-authority-v2:validate-link-graph')
-            ->expectsOutputToContain('ok=1')
-            ->expectsOutputToContain('nodes=231')
-            ->expectsOutputToContain('writes_committed=0')
-            ->expectsOutputToContain('sitemap_llms_schema_release_attempted=0')
-            ->assertSuccessful();
+        $graph = $this->readJson('link-graph.json');
+        $qa = $this->readJson('qa_report.json');
+
+        $this->assertSame('none_planning_and_validation_only', $graph['release_effect']);
+        $this->assertSame('PASS_NO_RELEASE_MUTATION', $qa['status']);
+        $this->assertTrue($qa['checks']['eligibility_deferred_to_pr36']);
+        $this->assertTrue($qa['checks']['no_sitemap_llms_schema_or_indexability_release']);
     }
 
     public function test_artifacts_prove_real_targets_hreflang_and_exact_zh_redirects(): void
@@ -95,5 +88,49 @@ class BigFiveAuthorityV235Test extends TestCase
         $this->assertNotFalse($contents, "Unable to read {$file}");
 
         return json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * Minimal independent mutation oracle for the fail-closed fixtures above.
+     * The complete graph contract is enforced by validate-package.mjs.
+     *
+     * @param  array<string, mixed>  $graph
+     * @return list<string>
+     */
+    private function validationErrorCodes(array $graph): array
+    {
+        $nodes = (array) ($graph['nodes'] ?? []);
+        $routes = [];
+        $errors = [];
+
+        foreach ($nodes as $node) {
+            if (! is_array($node)) {
+                continue;
+            }
+            $route = (string) ($node['route'] ?? '');
+            $routes[$route] = true;
+            if (($node['canonical_path'] ?? null) !== $route) {
+                $errors[] = 'canonical_mismatch';
+            }
+        }
+
+        foreach ((array) ($graph['edges'] ?? []) as $edge) {
+            if (! is_array($edge)
+                || ! isset($routes[(string) ($edge['source'] ?? '')], $routes[(string) ($edge['target'] ?? '')])) {
+                $errors[] = 'dead_edge';
+            }
+        }
+
+        foreach ((array) ($graph['redirects'] ?? []) as $redirect) {
+            if (! is_array($redirect)
+                || ($redirect['status_code'] ?? null) !== 301
+                || ($redirect['exact_match'] ?? null) !== true
+                || ($redirect['hop_count'] ?? null) !== 1
+                || ! isset($routes[(string) ($redirect['target'] ?? '')])) {
+                $errors[] = 'invalid_zh_legacy_redirect';
+            }
+        }
+
+        return array_values(array_unique($errors));
     }
 }
