@@ -90487,8 +90487,8 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACETS-OPENNESS-15"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "79e10bf1c08ab85bb126ea971f90bc08a8fd37f9",
+    "status": "merged",
+    "commit_sha": "e0ef23793a00e329b9086fb8f1c52e092561fcce",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3056",
     "checks": {
       "dependency": {
@@ -90501,13 +90501,17 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #3056 head 79e10bf1c08ab85bb126ea971f90bc08a8fd37f9 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+        "evidence": "PR #3056 final head e0ef23793a00e329b9086fb8f1c52e092561fcce passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #3056 MERGED as 88d5bfb2b3ef9afb9cc643f9320c4c928db10e86; origin/main contains the merge; package validator passed; BigFiveAuthorityV216Test passed 5 tests / 334 assertions; remote branch, local worktree, and local branch cleanup completed."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-14T02:15:05Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
@@ -90536,6 +90540,12 @@
         "from": "github_checks_pending",
         "to": "ready_to_merge",
         "note": "All 9 GitHub checks passed on head 79e10bf1c08ab85bb126ea971f90bc08a8fd37f9, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 9 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
+      },
+      {
+        "at": "2026-07-14T02:21:55Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Reconciled PR #3056 after exact-head squash merge. Final head e0ef23793a00e329b9086fb8f1c52e092561fcce passed 9/9 checks; merge 88d5bfb2b3ef9afb9cc643f9320c4c928db10e86 is on origin/main; post-merge validator and 5 tests / 334 assertions passed; remote and local cleanup completed."
       }
     ]
   },
@@ -90548,10 +90558,19 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-FACETS-CONSCIENTIOUSNESS-16 PR #3056 is MERGED as 88d5bfb2b3ef9afb9cc643f9320c4c928db10e86; origin/main contains the merge and post-merge validation/cleanup completed."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed exact 12-page, 6-facet bilingual coverage, taxonomy separation, and fail-closed release gates; BigFiveAuthorityV217Test passed 5 tests / 334 assertions; touched PHP Pint passed; JSON, JavaScript, and PHP syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files; PR15/PR16-to-PR17 substantive body exact-copy check found zero matches."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -90560,7 +90579,20 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T02:21:55Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR17 from clean latest fap-api main after PR16 merged. Scope is exactly 12 extraversion facet drafts: warmth, gregariousness, assertiveness, activity, excitement seeking, and positive emotions in independently authored EN/zh-CN pairs; CMS writes, runtime changes, publication, deployment, and indexability mutations remain forbidden."
+      },
+      {
+        "at": "2026-07-14T02:21:55Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All manifest local checks passed for the exact 9-file PR17 scope. The package covers all six locked extraversion facets in independently authored EN/zh-CN pairs, separates facets from the domain and other taxonomies, includes two original scenarios plus reflection and low-risk action per page, preserves raw failures, and keeps every release control closed."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18": {
     "id": "BIG5-AUTHORITY-V2-FACETS-AGREEABLENESS-18",
