@@ -1,0 +1,34 @@
+{
+  "schema_version": "big5-article-refresh-qa.v1",
+  "generated_at": "2026-07-14T05:15:00Z",
+  "status": "PASS_PENDING_MANUAL_REVIEW",
+  "counts": {
+    "article_candidates": 9,
+    "en_articles": 3,
+    "zh_cn_articles": 6,
+    "topic_hubs": 2,
+    "total_surfaces": 11
+  },
+  "checks": {
+    "exact_identity_inventory": true,
+    "unique_locale_slug_pairs": true,
+    "single_brand_titles": true,
+    "required_section_keys": [
+      "direct_opening",
+      "logic",
+      "example",
+      "counterexample",
+      "action_framework",
+      "boundary",
+      "sources",
+      "next_steps"
+    ],
+    "all_pending_manual_review": true,
+    "cms_attribution_values_synthesized": 0,
+    "topic_hub_hardcoded_entries": 0,
+    "cms_writes": 0,
+    "publication_changes": 0,
+    "indexability_changes": 0,
+    "pr24_33_articles_added": 0
+  }
+}

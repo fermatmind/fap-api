@@ -90885,10 +90885,19 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-IA-21"
     ],
-    "status": "planned",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-AUTHORITY-V2-ARTICLE-IA-21 PR #3064 is MERGED as ddb7d0b05806ee29ea83dc2e437a3b1c28d92933; origin/main contains the merge and PR21 post-merge package/test/Pint validation and cleanup completed. PR22 started from that exact clean origin/main head."
+      },
+      "local": {
+        "status": "pass",
+        "evidence": "Package validator passed the exact PR21 3 EN + 6 zh-CN Article identity set and 2 topic hubs, eight required rewritten sections per Article, unique non-branded titles and intents, visible PR05 sources with limitations, locale-safe links, null CMS attribution fields, pending_manual_review on all 11 candidates, backend-only published+eligible hub enumeration with no hardcoded entries, zero PR24-33 slugs, and zero CMS/publication/indexability mutations. BigFiveAuthorityV222Test passed with 5 tests / 172 assertions; touched PHP Pint, PHP/JSON/JavaScript/YAML syntax, git diff --check, and exact 9-file allowlist checks passed."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -90897,7 +90906,20 @@
     "production_deploy_allowed": false,
     "cms_mutation_allowed": false,
     "indexability_mutation_allowed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-07-14T05:19:33Z",
+        "from": "planned",
+        "to": "in_progress",
+        "note": "Started PR22 from exact origin/main ddb7d0b05806ee29ea83dc2e437a3b1c28d92933 after PR21 merged, cleaned, and revalidated. Scope is exactly the PR21-locked 3 EN + 6 zh-CN existing Article identities and 2 topic hubs. Candidates remove branded titles, separate overlapping intents, rewrite opening/logic/example/counterexample/action/boundary/sources, keep attribution null and pending_manual_review until CMS/manual authority exists, and forbid new PR24-33 Articles, CMS writes, publication, or indexability changes."
+      },
+      {
+        "at": "2026-07-14T05:20:59Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "All PR22 local checks passed. The package refreshes exactly 9 existing Articles and 2 backend-enumerated topic hubs, keeps every candidate pending manual review with null attribution metadata, separates overlapping intents from PR24-33, and records zero writes or release changes. Focused tests passed with 5 tests / 172 assertions; Pint, syntax, source-ledger, diff, private-link, and exact 9-file scope checks passed."
+      }
+    ]
   },
   "BIG5-AUTHORITY-V2-TECHNICAL-TRUST-23": {
     "id": "BIG5-AUTHORITY-V2-TECHNICAL-TRUST-23",
