@@ -90763,7 +90763,7 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-FACETS-NEUROTICISM-19"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "d20ed1f90b2fe33921781bc57de3924b5c3f5c51",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3062",
     "checks": {
@@ -90774,6 +90774,10 @@
       "local": {
         "status": "pass",
         "evidence": "Package validator passed exact 2-page bilingual coverage, direct backend product-authority verification, free-core versus conditional-module boundaries, no embedded price, Unknown numeric evidence, locale-safe hub/domain/method links, privacy guards, source authority, and fail-closed release gates. The first validator run failed only because two Chinese FAQ questions were below the specificity threshold; the questions were expanded and every rerun passed. BigFiveAuthorityV220Test passed with exit 0 and 5 tests / 108 assertions; touched PHP Pint passed; JSON, JavaScript, PHP, and YAML syntax checks passed; git diff --check passed; exact changed-file allowlist passed with 9 files."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #3062 head a6926ca389f0e32dba3250154c60cdde772be287 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep sarif non-blocking upload."
       }
     },
     "failure_reason": null,
@@ -90802,6 +90806,12 @@
         "from": "local_checks_passed",
         "to": "github_checks_pending",
         "note": "Committed the exact 9-file scope as d20ed1f90b2fe33921781bc57de3924b5c3f5c51, pushed the scoped branch, and opened PR #3062. Waiting for required GitHub checks on the final ledger-updated head."
+      },
+      {
+        "at": "2026-07-14T03:41:57Z",
+        "from": "github_checks_pending",
+        "to": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on head a6926ca389f0e32dba3250154c60cdde772be287, GitHub reports a clean merge state, and the PR changed-file set remains exactly the 9 allowed files. Recorded ready-to-merge state before final ledger-only head validation."
       }
     ]
   },
