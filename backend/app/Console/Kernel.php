@@ -9,7 +9,6 @@ use App\Console\Commands\ArticleDiscoverabilityRelease;
 use App\Console\Commands\ArticleEnsureSeoMetaBaseline;
 use App\Console\Commands\ArticleImportEditorialPackage;
 use App\Console\Commands\ArticleImportSeoContentPackageDraft;
-use App\Console\Commands\SeoAgentCompileModeCPackageCommand;
 use App\Console\Commands\ArticlePublishControlled;
 use App\Console\Commands\ArticleReleaseCloseout;
 use App\Console\Commands\ArticleReplaceInlineImageUrl;
@@ -22,8 +21,8 @@ use App\Console\Commands\ArticleWeeklySeoObservationExport;
 use App\Console\Commands\Batch2ResultPageDryRunGateCommand;
 use App\Console\Commands\Batch2ResultPageReadbackReviewLedgerCommand;
 use App\Console\Commands\Big5AttemptPurge;
-// ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
 use App\Console\Commands\Big5PsychometricsReport;
+// ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\BigFiveExportProductionEquivalentCandidatePayloads;
 use App\Console\Commands\BigFiveImportInactiveCandidateRelease;
@@ -186,19 +185,19 @@ use App\Console\Commands\PersonalityBigFiveCmsStagingWriteImport;
 use App\Console\Commands\PersonalityBigFivePublicProfileAgentDraft;
 use App\Console\Commands\PersonalityBigFiveSeoDiscoverabilityRelease;
 use App\Console\Commands\PersonalityEnneagramCmsDraft;
+use App\Console\Commands\PersonalityEnneagramCmsPromote;
+use App\Console\Commands\PersonalityEnneagramCmsPublishGate;
 use App\Console\Commands\PersonalityImportDesktopCloneBaseline;
-use App\Console\Commands\PersonalityMbti64GscQueryReadonlyExport;
 use App\Console\Commands\PersonalityMbti64BackendImportContract;
 use App\Console\Commands\PersonalityMbti64CmsInternalLinkDraft;
 use App\Console\Commands\PersonalityMbti64CmsProjectionDraft;
 use App\Console\Commands\PersonalityMbti64CmsRevisionDraft;
 use App\Console\Commands\PersonalityMbti64CmsRevisionPromote;
-use App\Console\Commands\PersonalityTdkNextBatchApprovalDraftGateCommand;
-use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessCommand;
+use App\Console\Commands\PersonalityMbti64GscQueryReadonlyExport;
 use App\Console\Commands\PersonalityMbtiContent15MixedImportPreflight;
 use App\Console\Commands\PersonalityMbtiFullCmsImport;
-use App\Console\Commands\PersonalityEnneagramCmsPromote;
-use App\Console\Commands\PersonalityEnneagramCmsPublishGate;
+use App\Console\Commands\PersonalityTdkNextBatchApprovalDraftGateCommand;
+use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessCommand;
 use App\Console\Commands\PersonalityWarmPublicReadModels;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
@@ -221,6 +220,7 @@ use App\Console\Commands\SeoAgentCmsPublishAutoCanaryCommand;
 use App\Console\Commands\SeoAgentCmsPublishCanaryCommand;
 use App\Console\Commands\SeoAgentCmsTdkGapScanCommand;
 use App\Console\Commands\SeoAgentCodexReviewRunnerCommand;
+use App\Console\Commands\SeoAgentCompileModeCPackageCommand;
 use App\Console\Commands\SeoAgentGscBatchDraftQaSupportCommand;
 use App\Console\Commands\SeoAgentGscCohortHandoffCommand;
 use App\Console\Commands\SeoAgentGscDraftPublishGateReadinessCommand;
@@ -237,21 +237,22 @@ use App\Console\Commands\SeoAgentRunCommand;
 use App\Console\Commands\SeoAgentRuntimeSeoQaScanCommand;
 use App\Console\Commands\SeoAgentWeeklyDraftWriteAutoCommand;
 use App\Console\Commands\SeoAgentWeeklyReadonlyRunnerCommand;
-use App\Console\Commands\SeoOpsP0CtrArticleCmsUpdateWriterCommand;
+use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
+use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
 use App\Console\Commands\SeoOpsGaokaoV5CmsDraftGateCommand;
 use App\Console\Commands\SeoOpsGaokaoV5PropagationGateReadinessCommand;
 use App\Console\Commands\SeoOpsGaokaoV5PublishGateRepairCommand;
 use App\Console\Commands\SeoOpsGaokaoV5UrlTruthEligibilityGateCommand;
+use App\Console\Commands\SeoOpsP0CtrArticleCmsUpdateWriterCommand;
 use App\Console\Commands\SeoOpsZhArticleQualityControlledWriterCommand;
-use App\Console\Commands\SeoOpsZhArticleQualityRepairDryRunCommand;
 use App\Console\Commands\SeoOpsZhArticleQualityReadbackCommand;
-use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
-use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
+use App\Console\Commands\SeoOpsZhArticleQualityRepairDryRunCommand;
 use App\Console\Commands\StorageControlPlaneSnapshot;
 use App\Console\Commands\StorageInventory;
 use App\Console\Commands\StorageMigrateLegacyArtifacts;
 use App\Console\Commands\StoragePrune;
 use App\Console\Commands\SyncScaleSlugs;
+use App\Console\Commands\WarmPublicContentReadModels;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -516,6 +517,7 @@ class Kernel extends ConsoleKernel
         SeoIntelUrlTruthHandoffCommand::class,
         SeoIntelSearchChannelQueueCommand::class,
         ContentReleaseRevalidate::class,
+        WarmPublicContentReadModels::class,
     ];
 
     /**

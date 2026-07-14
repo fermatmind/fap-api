@@ -65,6 +65,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('norms:eq60:drift-check --from=active --to=candidate')->monthlyOn(1, '05:00')->withoutOverlapping();
         $schedule->command('seo:warm-sitemap-source-cache --json')->everyTenMinutes()->withoutOverlapping();
         $schedule->command('career:warm-public-authority-cache --verify-only --json')->everyTenMinutes()->withoutOverlapping();
+        $schedule->command('public-content:warm-read-models --verify-only --json')->everyTenMinutes()->withoutOverlapping();
         $schedule->command('career:runtime-slo-check --json')->everyFiveMinutes()->withoutOverlapping();
         $schedule->call(static function (): void {
             app(\App\Services\Ops\PublicContentRuntimeMetricsService::class)->rollupPending();

@@ -41972,7 +41972,10 @@ prs:
     allowed_paths:
       - backend/app/Console/Commands/WarmPublicContentReadModels.php
       - backend/app/Console/Kernel.php
+      - backend/bootstrap/app.php
+      - backend/config/public_content_observability.php
       - backend/tests/Feature/Console/WarmPublicContentReadModelsCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/operations/public-content-cache-runbook.md
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json

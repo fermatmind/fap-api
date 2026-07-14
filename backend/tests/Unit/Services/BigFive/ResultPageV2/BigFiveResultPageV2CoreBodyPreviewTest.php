@@ -199,6 +199,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_controlled_public_read_model_warm_command(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/WarmPublicContentReadModels.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\WarmPublicContentReadModels;',
+            '+        WarmPublicContentReadModels::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
     {
         $allowed = [
@@ -5716,6 +5730,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isControlledPublicReadModelWarmCommandFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiPersonalityVariantSeoMetadataRefreshFile($file)) {
                 continue;
             }
@@ -7201,6 +7219,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsPersonalityTdkNextBatchGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsPersonalityPostPromotionSearchGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsPersonalityPublicWarmupOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsControlledPublicReadModelWarmOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramCmsDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramCmsPromotionOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveCmsImportDraftDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -7403,6 +7422,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Observers/PersonalityPublicContentAssetObserver.php',
             'backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php',
         ], true);
+    }
+
+    private function isControlledPublicReadModelWarmCommandFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/WarmPublicContentReadModels.php';
     }
 
     private function isMbtiPersonalityVariantSeoMetadataRefreshFile(string $file): bool
@@ -12136,6 +12160,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
         foreach ($changedLines as $line) {
             if (! str_contains($line, 'PersonalityWarmPublicReadModels')) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsControlledPublicReadModelWarmOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (! str_contains($line, 'WarmPublicContentReadModels')) {
                 return false;
             }
         }
