@@ -39,15 +39,19 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
             $this->assertSame([], $request->header('Authorization'));
 
             return match (true) {
-                str_contains($request->url(), '/personality/intj-a') => Http::response([
-                    'profile' => [
-                        'published_at' => '2026-07-01T00:00:00Z',
-                        'updated_at' => '2026-07-13T00:00:00Z',
-                        'private_marker' => 'must-not-persist',
-                    ],
-                    'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
-                    'body' => 'must-not-persist',
-                ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']),
+                str_contains($request->url(), '/personality/intj-a') => (function () use ($request) {
+                    $this->assertSame('MBTI', $request->data()['scale_code'] ?? null);
+
+                    return Http::response([
+                        'profile' => [
+                            'published_at' => '2026-07-01T00:00:00Z',
+                            'updated_at' => '2026-07-13T00:00:00Z',
+                            'private_marker' => 'must-not-persist',
+                        ],
+                        'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
+                        'body' => 'must-not-persist',
+                    ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']);
+                })(),
                 str_contains($request->url(), '/personality-content-assets/') => Http::response([
                     'personality_public_content_asset_v1' => [
                         'contract_version' => 'personality.public_content_asset.v1',
@@ -166,6 +170,13 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
         unset($targets[0]['query']['token']);
         config()->set('public_content_observability.probe.targets', $targets);
         config()->set('public_content_observability.probe.base_url', 'https://user:secret@probe.example.test/path');
+
+        $this->assertSame(1, Artisan::call('public-content:probe-delivery', ['--json' => true]));
+        Http::assertNothingSent();
+
+        config()->set('public_content_observability.probe.base_url', 'https://probe.example.test');
+        $targets[0]['query']['scale_code'] = 'mbti';
+        config()->set('public_content_observability.probe.targets', $targets);
 
         $this->assertSame(1, Artisan::call('public-content:probe-delivery', ['--json' => true]));
         Http::assertNothingSent();

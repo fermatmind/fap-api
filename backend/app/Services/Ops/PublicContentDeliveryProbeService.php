@@ -272,6 +272,9 @@ final class PublicContentDeliveryProbeService
             if (! array_key_exists('org_id', $query) || ! in_array($query['org_id'], [0, '0'], true)) {
                 throw new RuntimeException('public content delivery probe must use anonymous org_id=0.');
             }
+            if ((string) $target['family'] === 'mbti' && ($query['scale_code'] ?? null) !== 'MBTI') {
+                throw new RuntimeException('public content delivery probe MBTI scale code is invalid.');
+            }
             $allowedCacheStates = array_values((array) $target['allowed_cache_states']);
             if ($allowedCacheStates === []
                 || array_diff($allowedCacheStates, ['miss', 'fresh', 'unknown']) !== []) {

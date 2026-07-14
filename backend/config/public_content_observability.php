@@ -28,7 +28,7 @@ return [
                 'priority' => 'L1',
                 'locale' => 'en',
                 'path' => '/api/v0.5/personality/intj-a',
-                'query' => ['locale' => 'en', 'org_id' => 0, 'scale_code' => 'mbti'],
+                'query' => ['locale' => 'en', 'org_id' => 0, 'scale_code' => 'MBTI'],
                 'readback_profile' => 'mbti_detail',
                 'allowed_cache_states' => ['miss', 'fresh'],
             ],
