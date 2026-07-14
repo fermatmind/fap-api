@@ -42022,8 +42022,10 @@ prs:
       - backend/app/Services/Ops/PublicContentPublicationReadbackService.php
       - backend/app/Console/Commands/ProbePublicContentDelivery.php
       - backend/app/Console/Kernel.php
+      - backend/bootstrap/app.php
       - backend/config/public_content_observability.php
       - backend/tests/Feature/Console/ProbePublicContentDeliveryCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/operations/public-content-observability.md
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -42033,7 +42035,8 @@ prs:
       - Probe private routes, retain response bodies, mutate CMS/cache, warm/purge, change infrastructure, or deploy.
     validation:
       - cd backend && php artisan test tests/Feature/Console/ProbePublicContentDeliveryCommandTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Services/Ops/PublicContentDeliveryProbeService.php app/Services/Ops/PublicContentPublicationReadbackService.php app/Console/Commands/ProbePublicContentDelivery.php app/Console/Kernel.php tests/Feature/Console/ProbePublicContentDeliveryCommandTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='public_content_delivery_probe|runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Ops/PublicContentDeliveryProbeService.php app/Services/Ops/PublicContentPublicationReadbackService.php app/Console/Commands/ProbePublicContentDelivery.php bootstrap/app.php config/public_content_observability.php tests/Feature/Console/ProbePublicContentDeliveryCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && php artisan schedule:list --no-ansi
       - YAML/JSON parse and changed-file scope validation
       - git diff --check

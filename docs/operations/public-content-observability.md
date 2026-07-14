@@ -49,6 +49,29 @@ instead of exposing infrastructure details or breaking the Ops page contract.
 The later CMS health dashboard consumes the same service as a read-only view;
 backend/CMS remain the content and publication authority.
 
+## Fixed delivery probes and publication readback
+
+`public-content:probe-delivery` performs a real anonymous HTTP `GET` against
+one fixed target per scheduled run. The rotation is L1 MBTI detail, L2 Big Five
+hub asset, then L3 Career Industries. Targets, query parameters, payload budget,
+timeouts, and cache-state expectations are code-reviewed in
+`public_content_observability.probe`; operators cannot supply arbitrary URLs or
+private paths on the command line.
+
+The probe follows no redirects and sends no token, cookie, admin session, or
+tenant identity. Every request is `org_id=0`. It streams at most 512 KiB from
+the response and never writes the URL, query, slug, body, headers outside the
+cache-state allowlist, exception message, or user data to logs or cache.
+
+Only the latest bounded result per fixed target is retained for seven days:
+status/status class, elapsed milliseconds, bytes, normalized cache state, and
+a profile-specific publication readback. Readback fields are an explicit
+allowlist of public contract/version timestamps or aggregate counts; the
+fingerprint hashes only those fields, never the body. A stale/bypass MBTI or
+Big Five cache, oversized payload, non-2xx response, or missing required
+readback field marks the probe failed. The scheduled command never warms,
+purges, publishes, retries a write, or mutates CMS content.
+
 ## Repository rule impact
 
 This observability layer does not change public content ownership, publishing,
