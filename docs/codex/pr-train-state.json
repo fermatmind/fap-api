@@ -91990,9 +91990,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-SEO-GEO-AUTHORITY-36"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": "bdf1342509f6e01e151435cb1a94277255610a0d",
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "7caeff1f607fe77f9400a3a5934c2a416bbea2ab",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3086",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -92049,6 +92049,12 @@
         "from": "local_checks_passed",
         "to": "local_checks_passed",
         "note": "Recorded scoped implementation commit bdf1342509f6e01e151435cb1a94277255610a0d before push."
+      },
+      {
+        "at": "2026-07-14T14:40:02Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Pushed the exact 11-file PR37 scope and opened PR #3086 at head 7caeff1f607fe77f9400a3a5934c2a416bbea2ab; required GitHub checks are pending."
       }
     ]
   },
