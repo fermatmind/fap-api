@@ -1,0 +1,58 @@
+{
+  "schema_version": "big5_authority_v2_test_landing_qa.v1",
+  "train_id": "BIG5-AUTHORITY-V2-TEST-LANDING-20",
+  "artifact": "big5-authority-v2-test-landing-20-qa",
+  "expected_page_count": 2,
+  "required_gates": [
+    "exact_bilingual_coverage",
+    "independent_bilingual_authoring",
+    "backend_product_truth",
+    "report_scope",
+    "privacy_boundary",
+    "method_boundary",
+    "technical_evidence_unknowns",
+    "faq",
+    "locale_safe_internal_links",
+    "source_authority",
+    "private_flow_guard",
+    "closed_release_controls"
+  ],
+  "stage_results": {
+    "raw": {
+      "schema_ok": true,
+      "editorial_ok": false,
+      "failures_preserved": true,
+      "expected_issue_codes": [
+        "locale_not_independently_authored",
+        "outline_incomplete",
+        "product_truth_unverified",
+        "template_or_cliche_detected",
+        "visible_sources_incomplete"
+      ]
+    },
+    "skeptical_review": {
+      "status": "repair_required",
+      "accounted_for": true
+    },
+    "repaired": {
+      "schema_ok": true,
+      "editorial_ok": true
+    },
+    "final": {
+      "schema_ok": true,
+      "editorial_ok": true,
+      "canonical_coverage_ok": true,
+      "product_truth_ok": true,
+      "source_authority_ok": true
+    }
+  },
+  "automated_gate_passed": true,
+  "human_review_passed": false,
+  "writes_committed": false,
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}

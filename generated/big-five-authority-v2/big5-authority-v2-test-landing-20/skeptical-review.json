@@ -1,0 +1,61 @@
+{
+  "schema_version": "big5_authority_v2_skeptical_review.v1",
+  "train_id": "BIG5-AUTHORITY-V2-TEST-LANDING-20",
+  "artifact": "big5-authority-v2-test-landing-20-skeptical-review",
+  "reviewed_artifact": "big5-authority-v2-test-landing-20-raw",
+  "review_status": "repair_required",
+  "expected_raw_issue_codes": [
+    "locale_not_independently_authored",
+    "outline_incomplete",
+    "product_truth_unverified",
+    "template_or_cliche_detected",
+    "visible_sources_incomplete"
+  ],
+  "findings": [
+    {
+      "code": "locale_not_independently_authored",
+      "severity": "block",
+      "finding": "The Chinese raw record is marked as a translation rather than an independent edit."
+    },
+    {
+      "code": "outline_incomplete",
+      "severity": "block",
+      "finding": "The raw outline omits measurement, answering, report scope, privacy, method, evidence, FAQ, and navigation intents."
+    },
+    {
+      "code": "product_truth_unverified",
+      "severity": "block",
+      "finding": "The raw claim promises universal free access without reconciling backend free sections and conditional entitlements."
+    },
+    {
+      "code": "template_or_cliche_detected",
+      "severity": "block",
+      "finding": "The raw note explicitly requests a generic landing template and an unsupported promise."
+    },
+    {
+      "code": "visible_sources_incomplete",
+      "severity": "block",
+      "finding": "The raw pages expose no scientific sources or limitations."
+    }
+  ],
+  "repair_policy": {
+    "overwrite_raw": false,
+    "automatic_publish": false,
+    "automatic_indexability": false,
+    "human_review_required": true,
+    "ai_detector_used": false
+  },
+  "review_state": {
+    "status": "pending_human_review",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}

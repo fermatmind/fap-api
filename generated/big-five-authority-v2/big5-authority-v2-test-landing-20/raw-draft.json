@@ -1,0 +1,51 @@
+{
+  "schema_version": "big5_authority_v2_test_landing_draft.v1",
+  "train_id": "BIG5-AUTHORITY-V2-TEST-LANDING-20",
+  "artifact": "big5-authority-v2-test-landing-20-raw",
+  "stage": "raw",
+  "framework": "big_five",
+  "expected_page_count": 2,
+  "draft_note": "Use one generic test landing template and promise the full report is always free.",
+  "pages": [
+    {
+      "locale": "en",
+      "canonical_path": "/en/tests/big-five-personality-test-ocean-model",
+      "authoring_mode": "independent_editorial",
+      "source_locale": null,
+      "outline_sections": [
+        "intro",
+        "cta"
+      ],
+      "product_truth_verified": false,
+      "visible_sources": []
+    },
+    {
+      "locale": "zh-CN",
+      "canonical_path": "/zh/tests/big-five-personality-test-ocean-model",
+      "authoring_mode": "translated_from_source",
+      "source_locale": "en",
+      "outline_sections": [
+        "intro",
+        "cta"
+      ],
+      "product_truth_verified": false,
+      "visible_sources": []
+    }
+  ],
+  "workflow": {
+    "raw_failures_preserved": true
+  },
+  "review_state": {
+    "status": "unreviewed",
+    "reviewer": null,
+    "approved_at": null,
+    "publish_allowed": false,
+    "schema_eligible": false
+  },
+  "release_controls": {
+    "cms_write_allowed": false,
+    "indexability_change_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  }
+}
