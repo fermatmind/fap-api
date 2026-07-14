@@ -45,6 +45,7 @@ return [
         'api/v0.5/career/recommendations/mbti' => ['family' => 'career_recommendations', 'priority' => 'L3'],
         'api/v0.5/career/recommendations/mbti/{type}' => ['family' => 'career_recommendations', 'priority' => 'L3'],
         'api/v0.5/career/directory' => ['family' => 'career_directory', 'priority' => 'L3'],
+        'api/v0.5/career/industries' => ['family' => 'career_industries', 'priority' => 'L3'],
         'api/v0.5/career/jobs' => ['family' => 'career_jobs', 'priority' => 'L3'],
         'api/v0.5/career/jobs/{slug}' => ['family' => 'career_jobs', 'priority' => 'L3'],
         'api/v0.5/topics' => ['family' => 'topics', 'priority' => 'L3'],

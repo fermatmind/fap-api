@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Career;
 
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Services\Ops\PublicContentRuntimeMetricsService;
 use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 
@@ -70,6 +71,14 @@ final class CareerIndustryDirectoryApiTest extends TestCase
             ->assertStatus(422)
             ->assertJsonPath('ok', false)
             ->assertJsonPath('error_code', 'VALIDATION_FAILED');
+    }
+
+    public function test_it_is_registered_in_the_public_runtime_observability_catalog(): void
+    {
+        $this->assertSame(
+            ['family' => 'career_industries', 'priority' => 'L3'],
+            app(PublicContentRuntimeMetricsService::class)->resolveRoute('api/v0.5/career/industries'),
+        );
     }
 
     /** @return array<string, mixed> */
