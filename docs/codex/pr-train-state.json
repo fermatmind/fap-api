@@ -91433,9 +91433,9 @@
     "depends_on": [
       "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "4680fe289abef76b5d392cece597bedaa39bbde6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3075",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -91466,6 +91466,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "All PR30 local checks passed. The package exactly consumes PR21 batch 30, preserves 10 bilingual Article candidates and the full skeptical review chain, and enforces non-medical, non-diagnostic, neuroticism-not-illness, no-treatment, no-crisis-assessment, professional-help, product-Unknown, and private-link guards. Focused tests passed with 4 tests / 166 assertions; validator, Pint, syntax, source-ledger, private-link, diff, and exact 11-file scope checks passed."
+      },
+      {
+        "at": "2026-07-14T09:38:30Z",
+        "from": "local_checks_passed",
+        "to": "github_checks_pending",
+        "note": "Committed the exact 11-file PR30 scope as 4680fe289abef76b5d392cece597bedaa39bbde6, pushed codex/big5-authority-v2-article-stress-wellbeing-30, and opened PR #3075. Waiting for required GitHub checks on the ledger-updated head."
       }
     ]
   },
