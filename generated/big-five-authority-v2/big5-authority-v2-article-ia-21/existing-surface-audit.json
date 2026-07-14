@@ -1,0 +1,132 @@
+{
+  "schema_version": "big5-existing-surface-audit.v1",
+  "generated_at": "2026-07-14T04:00:00Z",
+  "counts": {
+    "articles": 9,
+    "topic_hubs": 2,
+    "total": 11
+  },
+  "surfaces": [
+    {
+      "surface_type": "article",
+      "locale": "en",
+      "identity": "big-five-conscientiousness-low-procrastination-task-plan",
+      "current_intent": "Task-plan guidance for procrastination framed around low conscientiousness",
+      "audit_disposition": "Refresh without trait blame; keep distinct from PR28 de-labeling intent.",
+      "authority": "CMS/backend",
+      "evidence": "PR21 goal exact inventory plus repository content/live inventory evidence",
+      "refresh_owner": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+      "publication_or_indexability_change": false
+    },
+    {
+      "surface_type": "article",
+      "locale": "en",
+      "identity": "big-five-emotional-stability-stress-recovery-communication",
+      "current_intent": "Stress-recovery communication framed around emotional stability",
+      "audit_disposition": "Refresh as communication guidance; keep distinct from PR30 non-medical stress education.",
+      "authority": "CMS/backend",
+      "evidence": "PR21 goal exact inventory plus repository content/live inventory evidence",
+      "refresh_owner": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+      "publication_or_indexability_change": false
+    },
+    {
+      "surface_type": "article",
+      "locale": "en",
+      "identity": "big-five-personality-test-vs-mbti",
+      "current_intent": "Big Five versus MBTI scientific-model comparison",
+      "audit_disposition": "Refresh comparison evidence; keep distinct from PR32 complementary-use intent.",
+      "authority": "CMS/backend",
+      "evidence": "PR21 goal exact inventory plus repository content/live inventory evidence",
+      "refresh_owner": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+      "publication_or_indexability_change": false
+    },
+    {
+      "surface_type": "article",
+      "locale": "zh-CN",
+      "identity": "big-five-conscientiousness-low-procrastination-task-plan",
+      "current_intent": "尽责性、拖延与任务计划",
+      "audit_disposition": "去除特质责备；与 PR28 的去标签 intent 分离。",
+      "authority": "CMS/backend",
+      "evidence": "PR21 goal exact inventory plus repository content/live inventory evidence",
+      "refresh_owner": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+      "publication_or_indexability_change": false
+    },
+    {
+      "surface_type": "article",
+      "locale": "zh-CN",
+      "identity": "big-five-emotional-stability-stress-recovery-communication",
+      "current_intent": "情绪稳定性、压力恢复与沟通",
+      "audit_disposition": "聚焦沟通；与 PR30 的非医疗压力教育分离。",
+      "authority": "CMS/backend",
+      "evidence": "PR21 goal exact inventory plus repository content/live inventory evidence",
+      "refresh_owner": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+      "publication_or_indexability_change": false
+    },
+    {
+      "surface_type": "article",
+      "locale": "zh-CN",
+      "identity": "big-five-growth-guide",
+      "current_intent": "大五人格成长引导",
+      "audit_disposition": "与 PR29 各个独立研究问题分离，改为结果后行动入口。",
+      "authority": "CMS/backend",
+      "evidence": "PR21 goal exact inventory plus repository content/live inventory evidence",
+      "refresh_owner": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+      "publication_or_indexability_change": false
+    },
+    {
+      "surface_type": "article",
+      "locale": "zh-CN",
+      "identity": "big-five-narrative-portrait",
+      "current_intent": "大五人格叙事画像",
+      "audit_disposition": "避免固定身份叙事，改为可验证观察框架。",
+      "authority": "CMS/backend",
+      "evidence": "PR21 goal exact inventory plus repository content/live inventory evidence",
+      "refresh_owner": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+      "publication_or_indexability_change": false
+    },
+    {
+      "surface_type": "article",
+      "locale": "zh-CN",
+      "identity": "big-five-personality-test-vs-mbti",
+      "current_intent": "大五人格与 MBTI 比较",
+      "audit_disposition": "刷新比较证据；与 PR32 的并用 intent 分离。",
+      "authority": "CMS/backend",
+      "evidence": "PR21 goal exact inventory plus repository content/live inventory evidence",
+      "refresh_owner": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+      "publication_or_indexability_change": false
+    },
+    {
+      "surface_type": "article",
+      "locale": "zh-CN",
+      "identity": "big-five-tool-guide",
+      "current_intent": "大五人格工具说明",
+      "audit_disposition": "明确工具、结果与产品边界，不承担 PR23 方法页职能。",
+      "authority": "CMS/backend",
+      "evidence": "PR21 goal exact inventory plus repository content/live inventory evidence",
+      "refresh_owner": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+      "publication_or_indexability_change": false
+    },
+    {
+      "surface_type": "topic_hub",
+      "locale": "en",
+      "identity": "/en/topics/big-five",
+      "current_intent": "English Big Five topic enumeration",
+      "audit_disposition": "Enumerate backend-authoritative published and eligible content only.",
+      "authority": "CMS/backend",
+      "evidence": "PR21 goal exact inventory plus backend topic public API contract",
+      "refresh_owner": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+      "publication_or_indexability_change": false
+    },
+    {
+      "surface_type": "topic_hub",
+      "locale": "zh-CN",
+      "identity": "/zh/topics/big-five",
+      "current_intent": "中文大五人格主题枚举",
+      "audit_disposition": "只枚举 backend authority 判定为 published/eligible 的内容。",
+      "authority": "CMS/backend",
+      "evidence": "PR21 goal exact inventory plus backend topic public API contract",
+      "refresh_owner": "BIG5-AUTHORITY-V2-ARTICLE-REFRESH-22",
+      "publication_or_indexability_change": false
+    }
+  ]
+}

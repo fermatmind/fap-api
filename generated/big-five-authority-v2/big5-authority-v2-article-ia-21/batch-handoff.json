@@ -1,0 +1,157 @@
+{
+  "schema_version": "big5-article-batch-handoff.v1",
+  "generated_at": "2026-07-14T04:00:00Z",
+  "total_batches": 10,
+  "batches": [
+    {
+      "batch": 24,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-CORE-MODEL-24",
+      "family": "core_model",
+      "topic_ids": [
+        "big5.article.24.01.model-history",
+        "big5.article.24.02.ocean",
+        "big5.article.24.03.continuum",
+        "big5.article.24.04.thirty-facets",
+        "big5.article.24.05.non-type-system"
+      ],
+      "required_theme_count": 5,
+      "required_locale_draft_count": 10,
+      "mutation_rule": "consume_locked_matrix_only"
+    },
+    {
+      "batch": 25,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESULT-READING-25",
+      "family": "result_reading",
+      "topic_ids": [
+        "big5.article.25.01.read-results",
+        "big5.article.25.02.score-ranges",
+        "big5.article.25.03.retest",
+        "big5.article.25.04.discuss-results",
+        "big5.article.25.05.thirty-day-review"
+      ],
+      "required_theme_count": 5,
+      "required_locale_draft_count": 10,
+      "mutation_rule": "consume_locked_matrix_only"
+    },
+    {
+      "batch": 26,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-WORKPLACE-26",
+      "family": "workplace",
+      "topic_ids": [
+        "big5.article.26.01.teamwork",
+        "big5.article.26.02.feedback",
+        "big5.article.26.03.meetings",
+        "big5.article.26.04.leadership",
+        "big5.article.26.05.work-environment"
+      ],
+      "required_theme_count": 5,
+      "required_locale_draft_count": 10,
+      "mutation_rule": "consume_locked_matrix_only"
+    },
+    {
+      "batch": 27,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RELATIONSHIPS-27",
+      "family": "relationships",
+      "topic_ids": [
+        "big5.article.27.01.communication",
+        "big5.article.27.02.conflict",
+        "big5.article.27.03.friendship",
+        "big5.article.27.04.partners",
+        "big5.article.27.05.boundaries"
+      ],
+      "required_theme_count": 5,
+      "required_locale_draft_count": 10,
+      "mutation_rule": "consume_locked_matrix_only"
+    },
+    {
+      "batch": 28,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-LEARNING-HABITS-28",
+      "family": "learning_habits",
+      "topic_ids": [
+        "big5.article.28.01.learning",
+        "big5.article.28.02.procrastination",
+        "big5.article.28.03.planning",
+        "big5.article.28.04.creativity",
+        "big5.article.28.05.decision-making"
+      ],
+      "required_theme_count": 5,
+      "required_locale_draft_count": 10,
+      "mutation_rule": "consume_locked_matrix_only"
+    },
+    {
+      "batch": 29,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-GROWTH-CHANGE-29",
+      "family": "growth_change",
+      "topic_ids": [
+        "big5.article.29.01.personality-change",
+        "big5.article.29.02.habits",
+        "big5.article.29.03.goals",
+        "big5.article.29.04.life-events",
+        "big5.article.29.05.tracking"
+      ],
+      "required_theme_count": 5,
+      "required_locale_draft_count": 10,
+      "mutation_rule": "consume_locked_matrix_only"
+    },
+    {
+      "batch": 30,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-STRESS-WELLBEING-30",
+      "family": "stress_wellbeing",
+      "topic_ids": [
+        "big5.article.30.01.stress-response",
+        "big5.article.30.02.self-regulation",
+        "big5.article.30.03.recovery",
+        "big5.article.30.04.daily-support",
+        "big5.article.30.05.help-boundary"
+      ],
+      "required_theme_count": 5,
+      "required_locale_draft_count": 10,
+      "mutation_rule": "consume_locked_matrix_only"
+    },
+    {
+      "batch": 31,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-METHODS-31",
+      "family": "research_methods",
+      "topic_ids": [
+        "big5.article.31.01.self-report-bias",
+        "big5.article.31.02.reliability-validity",
+        "big5.article.31.03.norms",
+        "big5.article.31.04.cross-cultural",
+        "big5.article.31.05.retest-methods"
+      ],
+      "required_theme_count": 5,
+      "required_locale_draft_count": 10,
+      "mutation_rule": "consume_locked_matrix_only"
+    },
+    {
+      "batch": 32,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-COMPARISONS-32",
+      "family": "comparisons",
+      "topic_ids": [
+        "big5.article.32.01.mbti",
+        "big5.article.32.02.enneagram",
+        "big5.article.32.03.disc",
+        "big5.article.32.04.riasec",
+        "big5.article.32.05.myths"
+      ],
+      "required_theme_count": 5,
+      "required_locale_draft_count": 10,
+      "mutation_rule": "consume_locked_matrix_only"
+    },
+    {
+      "batch": 33,
+      "pr_id": "BIG5-AUTHORITY-V2-ARTICLE-RESEARCH-BRIEFINGS-33",
+      "family": "research_briefings",
+      "topic_ids": [
+        "big5.article.33.01.read-study",
+        "big5.article.33.02.new-research-context",
+        "big5.article.33.03.evidence-strength",
+        "big5.article.33.04.limitations",
+        "big5.article.33.05.apply-without-hype"
+      ],
+      "required_theme_count": 5,
+      "required_locale_draft_count": 10,
+      "mutation_rule": "consume_locked_matrix_only"
+    }
+  ]
+}
