@@ -128,7 +128,7 @@ function deployMode(): string
 {
     $mode = strtolower(trim((string) get('deploy_mode', 'standard')));
 
-    if (! in_array($mode, ['standard', 'code_only'], true)) {
+    if (! in_array($mode, ['standard', 'code_only', 'schema_only'], true)) {
         throw new \RuntimeException("unsupported deploy_mode [{$mode}]");
     }
 
@@ -138,6 +138,25 @@ function deployMode(): string
 function deployIsCodeOnly(): bool
 {
     return deployMode() === 'code_only';
+}
+
+function deploySkipsAuthorityMutations(): bool
+{
+    return in_array(deployMode(), ['code_only', 'schema_only'], true);
+}
+
+function deploySchemaOnlyMigration(): string
+{
+    if (deployMode() !== 'schema_only') {
+        throw new \RuntimeException('schema_only_migration is available only in schema_only deploy mode');
+    }
+
+    $migration = trim((string) get('schema_only_migration', ''));
+    if (! preg_match('/\A[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_[A-Za-z0-9_]+\.php\z/', $migration)) {
+        throw new \RuntimeException('schema_only_migration must be one exact Laravel migration filename');
+    }
+
+    return $migration;
 }
 
 function deploySafeAbsolutePath(string $path, string $label): string
@@ -469,6 +488,45 @@ task('artisan:migrate', function () {
     run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' migrate --force --no-interaction --ansi');
 });
 
+task('artisan:migrate-schema-only', function () {
+    $migration = deploySchemaOnlyMigration();
+    $migrationPath = 'database/migrations/'.$migration;
+    $migrationStem = substr($migration, 0, -4);
+
+    within('{{release_path}}/backend', function () use ($migrationPath, $migrationStem): void {
+        run(strtr(<<<'BASH'
+set -euo pipefail
+test -f __MIGRATION_PATH__
+status_before="$({{bin/php}} artisan migrate:status --no-interaction --no-ansi)"
+printf '%s\n' "$status_before"
+pending_before="$(printf '%s\n' "$status_before" | grep -E '(^|[[:space:]])Pending($|[[:space:]])' || true)"
+pending_count="$(printf '%s\n' "$pending_before" | grep -c . || true)"
+if [ "$pending_count" -ne 1 ]; then
+  echo "schema-only deploy requires exactly one pending migration; found $pending_count" >&2
+  exit 1
+fi
+if ! printf '%s\n' "$pending_before" | grep -Fq __MIGRATION_STEM__; then
+  echo "schema-only deploy pending migration does not match the approved migration" >&2
+  exit 1
+fi
+{{bin/php}} artisan migrate --path=__MIGRATION_PATH__ --force --no-interaction --ansi
+status_after="$({{bin/php}} artisan migrate:status --no-interaction --no-ansi)"
+printf '%s\n' "$status_after"
+if printf '%s\n' "$status_after" | grep -Eq '(^|[[:space:]])Pending($|[[:space:]])'; then
+  echo "schema-only deploy left pending migrations" >&2
+  exit 1
+fi
+if ! printf '%s\n' "$status_after" | grep -F __MIGRATION_STEM__ | grep -Eq '(^|[[:space:]])Ran($|[[:space:]])'; then
+  echo "schema-only deploy could not verify the approved migration as Ran" >&2
+  exit 1
+fi
+BASH, [
+            '__MIGRATION_PATH__' => deployShellArg($migrationPath),
+            '__MIGRATION_STEM__' => deployShellArg($migrationStem),
+        ]));
+    });
+});
+
 task('guard:no-pending-migrations', function () {
     within('{{release_path}}/backend', function () {
         run(<<<'BASH'
@@ -578,6 +636,14 @@ task('guard:code-only-mode', function () {
     if (! deployIsCodeOnly()) {
         throw new \RuntimeException('deploy:code-only requires deploy_mode=code_only');
     }
+});
+
+task('guard:schema-only-mode', function () {
+    if (deployMode() !== 'schema_only') {
+        throw new \RuntimeException('deploy:schema-only requires deploy_mode=schema_only');
+    }
+
+    deploySchemaOnlyMigration();
 });
 
 task('guard:deploy-shell-config', function () {
@@ -842,8 +908,8 @@ task('ensure:release-public-static-compat', function () {
 });
 
 task('ensure:nginx-public-static-media-route', function () {
-    if (deployIsCodeOnly()) {
-        writeln('<comment>Skip nginx static media route mutation in code_only deploy mode</comment>');
+    if (deploySkipsAuthorityMutations()) {
+        writeln('<comment>Skip nginx static media route mutation in authority-mutation-free deploy mode</comment>');
 
         return;
     }
@@ -1112,8 +1178,8 @@ task('healthcheck:public', function () {
 });
 
 task('healthcheck:auth-guest-contract', function () {
-    if (deployIsCodeOnly()) {
-        writeln('<comment>Skip auth guest POST contract probe in code_only deploy mode</comment>');
+    if (deploySkipsAuthorityMutations()) {
+        writeln('<comment>Skip auth guest POST contract probe in authority-mutation-free deploy mode</comment>');
 
         return;
     }
@@ -1325,8 +1391,8 @@ BASH);
  * ======================================================
  */
 task('fap:seed_shared_content_packages', function () {
-    if (deployIsCodeOnly()) {
-        writeln('<comment>Skip shared content package copy in code_only deploy mode</comment>');
+    if (deploySkipsAuthorityMutations()) {
+        writeln('<comment>Skip shared content package copy in authority-mutation-free deploy mode</comment>');
 
         return;
     }
@@ -1481,6 +1547,27 @@ task('deploy:code-only', [
     'artisan:route:cache',
     'artisan:view:cache',
     'artisan:event:cache',
+    'guard:public-content-release',
+    'deploy:publish',
+]);
+
+/**
+ * A schema-only release installs the approved code revision and runs exactly one
+ * SHA-bound pending migration. It deliberately uses a dedicated migration task
+ * so the standard post-migration seed/import/cache hook chain cannot execute.
+ */
+task('deploy:schema-only', [
+    'guard:deploy-shell-config',
+    'guard:forbid-destructive',
+    'guard:schema-only-mode',
+    'deploy:prepare',
+    'deploy:vendors',
+    'artisan:storage:link',
+    'artisan:config:cache',
+    'artisan:route:cache',
+    'artisan:view:cache',
+    'artisan:event:cache',
+    'artisan:migrate-schema-only',
     'guard:public-content-release',
     'deploy:publish',
 ]);
