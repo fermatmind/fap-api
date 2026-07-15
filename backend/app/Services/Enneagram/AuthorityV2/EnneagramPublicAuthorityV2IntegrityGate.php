@@ -874,6 +874,11 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             ' {marker} ',
             $value,
         ) ?? $value;
+        $prepared = preg_replace(
+            '/(?<![\p{L}\p{N}])(?:One|Two|Three|Four|Five|Six|Seven|Eight|Nine)(?![\p{L}\p{N}])/u',
+            ' {typelabel} ',
+            $prepared,
+        ) ?? $prepared;
         $markers = [];
         foreach (['identity_key', 'code', 'path'] as $field) {
             $marker = is_string($asset[$field] ?? null) ? trim($asset[$field]) : '';

@@ -824,6 +824,20 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertContains('type_number_substitution_template', collect($result['issues'])->pluck('code')->all());
     }
 
+    public function test_english_standalone_spelled_type_labels_are_normalized_for_template_detection(): void
+    {
+        $candidate = $this->candidate();
+        $typeOne = $this->localePairIndexes($candidate, 'core_type:type-1')['en'];
+        $typeTwo = $this->localePairIndexes($candidate, 'core_type:type-2')['en'];
+        $candidate['assets'][$typeOne]['sections'][0]['body'] = 'One records which information drew attention first, which option was delayed, and which action another person could observe, then separates inferred motive from visible behavior and tests role, culture, fatigue, and current demands as alternative explanations.';
+        $candidate['assets'][$typeTwo]['sections'][0]['body'] = 'Two records which information drew attention first, which option was delayed, and which action another person could observe, then separates inferred motive from visible behavior and tests role, culture, fatigue, and current demands as alternative explanations.';
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('type_number_substitution_template', collect($result['issues'])->pluck('code')->all());
+    }
+
     public function test_identity_slugs_and_hash_markers_are_normalized_for_template_detection(): void
     {
         $candidate = $this->candidate();
