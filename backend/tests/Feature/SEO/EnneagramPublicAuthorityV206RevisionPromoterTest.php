@@ -42,32 +42,42 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
         $before = $this->publishedSnapshots();
         $plan = $this->promoter()->preflight($targets);
 
-        $promoted = $this->promoter()->promote($targets, (string) $plan['preflight_fingerprint']);
+        $this->travelTo('2026-07-16 00:00:00');
+        try {
+            $promoted = $this->promoter()->promote($targets, (string) $plan['preflight_fingerprint']);
 
-        $this->assertSame('PASS_POINTER_SAFE_PROMOTION', $promoted['status']);
-        $this->assertSame(116, $promoted['promoted_count']);
-        $this->assertTrue($promoted['writes_committed']);
-        $this->assertFalse($promoted['production_execution']);
-        $this->assertMatchesRegularExpression('/^[A-Za-z0-9_-]+\.[0-9a-f]{64}$/', (string) $promoted['rollback_token']);
-        $this->assertSame(0, $promoted['public_release_count']);
-        $this->assertSame(0, $promoted['indexability_change_count']);
-        $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
-        $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
-            ->where('source_package', 'enneagram-authority-v2-reviewed')
-            ->where('workflow_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_PUBLISHED)->count());
-        $this->assertSame(116, PersonalityPublicContentAsset::query()
-            ->where('title', 'like', 'Promoted Enneagram authority %')->count());
+            $this->assertSame('PASS_POINTER_SAFE_PROMOTION', $promoted['status']);
+            $this->assertSame(116, $promoted['promoted_count']);
+            $this->assertTrue($promoted['writes_committed']);
+            $this->assertFalse($promoted['production_execution']);
+            $this->assertMatchesRegularExpression('/^[A-Za-z0-9_-]+\.[0-9a-f]{64}$/', (string) $promoted['rollback_token']);
+            $this->assertSame(0, $promoted['public_release_count']);
+            $this->assertSame(0, $promoted['indexability_change_count']);
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+            $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
+                ->where('source_package', 'enneagram-authority-v2-reviewed')
+                ->where('workflow_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_PUBLISHED)->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()
+                ->where('title', 'like', 'Promoted Enneagram authority %')->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()
+                ->where('updated_at', '2026-07-16 00:00:00')->count());
 
-        $rolledBack = $this->promoter()->rollback((string) $promoted['rollback_token']);
+            $this->travelTo('2026-07-16 00:01:00');
+            $rolledBack = $this->promoter()->rollback((string) $promoted['rollback_token']);
 
-        $this->assertSame('PASS_POINTER_SAFE_ROLLBACK', $rolledBack['status']);
-        $this->assertSame(116, $rolledBack['rolled_back_count']);
-        $this->assertFalse($rolledBack['production_execution']);
-        $this->assertSame($before, $this->publishedSnapshots());
-        $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
-        $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
-            ->where('source_package', 'enneagram-authority-v2-reviewed')
-            ->where('workflow_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_ROLLED_BACK)->count());
+            $this->assertSame('PASS_POINTER_SAFE_ROLLBACK', $rolledBack['status']);
+            $this->assertSame(116, $rolledBack['rolled_back_count']);
+            $this->assertFalse($rolledBack['production_execution']);
+            $this->assertSame($before, $this->publishedSnapshots());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+            $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
+                ->where('source_package', 'enneagram-authority-v2-reviewed')
+                ->where('workflow_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_ROLLED_BACK)->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()
+                ->where('updated_at', '2026-07-16 00:01:00')->count());
+        } finally {
+            $this->travelBack();
+        }
     }
 
     public function test_stale_pointer_is_rejected_before_any_write(): void
@@ -402,7 +412,7 @@ SQL);
         $snapshots = [];
         PersonalityPublicContentAsset::query()->orderBy('id')->each(function (PersonalityPublicContentAsset $asset) use (&$snapshots): void {
             $attributes = $asset->getAttributes();
-            unset($attributes['working_revision_id']);
+            unset($attributes['working_revision_id'], $attributes['updated_at']);
             $snapshots[(string) $asset->id] = $this->fingerprint($attributes);
         });
 

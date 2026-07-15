@@ -105,6 +105,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                     ...$target['promoted_editorial_snapshot'],
                     'published_revision_id' => (int) $revision->id,
                     'working_revision_id' => null,
+                    'updated_at' => now()->format('Y-m-d H:i:s'),
                 ];
                 $query = DB::table('personality_public_content_assets')
                     ->where('id', (int) $asset->id)
@@ -132,6 +133,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                     'package_sha256' => (string) $revision->authority_package_sha256,
                     'source_hash' => (string) $revision->source_hash,
                     'before_public_fingerprint' => (string) $target['expected_public_fingerprint_before'],
+                    'before_restorable_fingerprint' => (string) $target['before_restorable_fingerprint'],
                     'after_public_fingerprint' => $afterFingerprint,
                     'before_editorial_snapshot' => $target['before_editorial_snapshot'],
                 ];
@@ -194,6 +196,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                     ...$row['before_editorial_snapshot'],
                     'published_revision_id' => $row['previous_published_revision_id'],
                     'working_revision_id' => null,
+                    'updated_at' => now()->format('Y-m-d H:i:s'),
                 ];
                 if (DB::table('personality_public_content_assets')
                     ->where('id', (int) $asset->id)
@@ -210,8 +213,8 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                 }
 
                 $asset->refresh();
-                if (! hash_equals((string) $row['before_public_fingerprint'], $this->publicFingerprint($asset))) {
-                    throw new RuntimeException('Rollback public fingerprint readback failed: '.(string) $row['asset_key'].'.');
+                if (! hash_equals((string) $row['before_restorable_fingerprint'], $this->restorableFingerprint($asset))) {
+                    throw new RuntimeException('Rollback restorable content fingerprint readback failed: '.(string) $row['asset_key'].'.');
                 }
             }
 
@@ -359,6 +362,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                 'asset' => $asset,
                 'working_revision' => $revision,
                 'before_editorial_snapshot' => $this->editorialSnapshot($asset),
+                'before_restorable_fingerprint' => $this->restorableFingerprint($asset),
                 'promoted_editorial_snapshot' => $this->databaseEditorialSnapshot($promotedEditorial),
             ];
         }
@@ -405,6 +409,14 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
     {
         $attributes = $asset->getAttributes();
         unset($attributes['working_revision_id']);
+
+        return $this->fingerprint($attributes);
+    }
+
+    private function restorableFingerprint(PersonalityPublicContentAsset $asset): string
+    {
+        $attributes = $asset->getAttributes();
+        unset($attributes['working_revision_id'], $attributes['updated_at']);
 
         return $this->fingerprint($attributes);
     }
