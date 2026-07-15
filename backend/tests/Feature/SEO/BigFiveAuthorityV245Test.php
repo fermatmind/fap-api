@@ -123,6 +123,39 @@ final class BigFiveAuthorityV245Test extends TestCase
         $this->assertStringNotContainsString('Invented Author', json_encode($jsonLd, JSON_THROW_ON_ERROR));
     }
 
+    public function test_controlled_gate_rollout_can_validate_a_big_five_candidate_before_persisting_gates(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        [$article, $revision] = $this->authorityArticle();
+        $context = $this->context();
+        data_set($context, 'editorial_package.article_schema_enabled', false);
+        data_set($context, 'editorial_package.breadcrumb_schema_enabled', false);
+        data_set($context, 'editorial_package.faq_schema_enabled', false);
+        $article->setRelation('seoMeta', new ArticleSeoMeta([
+            'org_id' => 7,
+            'article_id' => 10,
+            'locale' => 'en',
+            'seo_title' => 'Big Five growth guide',
+            'seo_description' => 'Visible description.',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+            'schema_json' => ['editorial_package_v1' => $context['editorial_package']],
+        ]));
+
+        $service = app(ArticleSeoService::class);
+        $runtime = $service->generateJsonLd($article, $revision);
+        $candidate = $service->generateJsonLdForGateRollout($article, $revision, [
+            'article_schema_enabled' => true,
+            'breadcrumb_schema_enabled' => true,
+            'faq_schema_enabled' => false,
+        ]);
+
+        $this->assertSame([], $runtime);
+        $this->assertSame('Article', data_get($candidate, '@type'));
+        $this->assertSame('FermatMind Editorial', data_get($candidate, 'author.name'));
+        $this->assertArrayNotHasKey('hasPart', $candidate);
+    }
+
     /** @return array{Article, ArticleTranslationRevision} */
     private function authorityArticle(): array
     {

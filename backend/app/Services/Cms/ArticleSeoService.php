@@ -149,6 +149,51 @@ final class ArticleSeoService
      */
     public function generateJsonLd(Article $article, ?ArticleTranslationRevision $revision = null, ?bool $faqSchemaEnabledOverride = null): array
     {
+        return $this->generateJsonLdWithGateOverrides(
+            $article,
+            $revision,
+            $faqSchemaEnabledOverride,
+            [],
+        );
+    }
+
+    /**
+     * Build the authority-validated candidate used by the controlled SEO gate rollout preflight.
+     * Runtime callers must use generateJsonLd(), which always honors the persisted gates.
+     *
+     * @param  array<string,bool>  $plannedGates
+     * @return array<string,mixed>
+     */
+    public function generateJsonLdForGateRollout(
+        Article $article,
+        ?ArticleTranslationRevision $revision,
+        array $plannedGates,
+    ): array {
+        $gateOverrides = [];
+        foreach (['article_schema_enabled', 'breadcrumb_schema_enabled', 'faq_schema_enabled'] as $gate) {
+            if (array_key_exists($gate, $plannedGates) && is_bool($plannedGates[$gate])) {
+                $gateOverrides[$gate] = $plannedGates[$gate];
+            }
+        }
+
+        return $this->generateJsonLdWithGateOverrides(
+            $article,
+            $revision,
+            $gateOverrides['faq_schema_enabled'] ?? null,
+            $gateOverrides,
+        );
+    }
+
+    /**
+     * @param  array<string,bool>  $bigFiveGateOverrides
+     * @return array<string,mixed>
+     */
+    private function generateJsonLdWithGateOverrides(
+        Article $article,
+        ?ArticleTranslationRevision $revision,
+        ?bool $faqSchemaEnabledOverride,
+        array $bigFiveGateOverrides,
+    ): array {
         $locale = $this->normalizeLocale((string) $article->locale);
         $seo = $this->resolveSeoMeta($article, $locale);
         $revision = $this->resolvePublishedRevision($article, $revision);
@@ -159,6 +204,7 @@ final class ArticleSeoService
             $seo,
             $canonical,
             $locale,
+            $bigFiveGateOverrides,
         );
         if ($bigFiveStructuredData !== null) {
             return PublicMediaUrlGuard::sanitizeJsonLdImageFields(
@@ -423,12 +469,20 @@ final class ArticleSeoService
         ?ArticleSeoMeta $seo,
         ?string $canonical,
         string $locale,
+        array $gateOverrides = [],
     ): ?array {
         if (! str_starts_with(strtolower(trim((string) $article->slug)), 'big-five-')) {
             return null;
         }
 
         $descriptionSource = (string) ($revision?->excerpt ?? $revision?->content_md ?? $article->excerpt ?? $article->content_md);
+
+        $editorialPackage = $this->editorialPackageMetadata($article, $seo);
+        foreach (['article_schema_enabled', 'breadcrumb_schema_enabled', 'faq_schema_enabled'] as $gate) {
+            if (array_key_exists($gate, $gateOverrides) && is_bool($gateOverrides[$gate])) {
+                $editorialPackage[$gate] = $gateOverrides[$gate];
+            }
+        }
 
         return $this->bigFiveStructuredDataProjector->forArticle($article, $revision, [
             'canonical' => $canonical,
@@ -448,7 +502,7 @@ final class ArticleSeoService
                 : null,
             'seo_indexable' => is_bool($seo?->is_indexable) ? $seo->is_indexable : null,
             'robots' => $seo?->robots,
-            'editorial_package' => $this->editorialPackageMetadata($article, $seo),
+            'editorial_package' => $editorialPackage,
         ]);
     }
 

@@ -211,10 +211,10 @@ final class ArticleSeoGateRollout
                 continue;
             }
 
-            $types = $this->jsonLdTypes($this->seoService->generateJsonLd(
+            $types = $this->jsonLdTypes($this->seoService->generateJsonLdForGateRollout(
                 $article,
                 $article->publishedRevision,
-                $this->plannedFaqSchemaOverride($options)
+                $this->plannedSchemaGateOverrides($options),
             ));
             $articleSchemaRequested = (bool) ($options['enable_article_schema'] ?? false)
                 || (bool) ($options['enable_breadcrumb_schema'] ?? false);
@@ -262,6 +262,24 @@ final class ArticleSeoGateRollout
         }
 
         return null;
+    }
+
+    /** @param array<string,mixed> $options @return array<string,bool> */
+    private function plannedSchemaGateOverrides(array $options): array
+    {
+        $overrides = [];
+        if ((bool) ($options['enable_article_schema'] ?? false)) {
+            $overrides['article_schema_enabled'] = true;
+        }
+        if ((bool) ($options['enable_breadcrumb_schema'] ?? false)) {
+            $overrides['breadcrumb_schema_enabled'] = true;
+        }
+        $faqOverride = $this->plannedFaqSchemaOverride($options);
+        if ($faqOverride !== null) {
+            $overrides['faq_schema_enabled'] = $faqOverride;
+        }
+
+        return $overrides;
     }
 
     /**
@@ -437,12 +455,12 @@ final class ArticleSeoGateRollout
         } elseif ((bool) ($options['hold_faq_schema'] ?? false)) {
             $snapshot['schema_gates']['faq_schema_enabled'] = false;
         }
-        $plannedFaqSchemaOverride = $this->plannedFaqSchemaOverride($options);
-        if ($plannedFaqSchemaOverride !== null) {
-            $snapshot['json_ld_types'] = $this->jsonLdTypes($this->seoService->generateJsonLd(
+        $plannedSchemaGateOverrides = $this->plannedSchemaGateOverrides($options);
+        if ($plannedSchemaGateOverrides !== []) {
+            $snapshot['json_ld_types'] = $this->jsonLdTypes($this->seoService->generateJsonLdForGateRollout(
                 $article,
                 $article->publishedRevision,
-                $plannedFaqSchemaOverride
+                $plannedSchemaGateOverrides,
             ));
         }
         if ((bool) ($options['enable_hreflang'] ?? false)) {
