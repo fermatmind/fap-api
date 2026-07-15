@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
+use App\Models\LandingSurface;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\TopicProfile;
@@ -283,7 +284,8 @@ final class BigFiveReviewPromotionPreflight
         } else {
             $working = $record->getAttribute('working_revision_id');
             $published = $record->getAttribute('published_revision_id');
-            $primaryPubliclyReadable = $record instanceof ContentPage && $record->passesPublicReadinessGate();
+            $primaryPubliclyReadable = $this->primaryPubliclyReadable($record);
+            $databaseReads++;
             $primaryRecordLive = ! $record instanceof Article || (! $record->trashed()
                 && ! in_array($record->getAttribute('lifecycle_state'), [
                     Article::LIFECYCLE_ARCHIVED,
@@ -318,6 +320,9 @@ final class BigFiveReviewPromotionPreflight
             }
             if ($row['action_contract']['existing_revision'] && ($published === null || $working === null || (int) $published === (int) $working)) {
                 $issues[] = 'existing_public_revision_isolation_mismatch';
+            }
+            if ($row['action_contract']['existing_revision'] && ! $primaryPubliclyReadable) {
+                $issues[] = 'existing_identity_not_publicly_readable';
             }
             if ($row['action_contract']['primary_create'] && ! $row['action_contract']['product_shell_preserved'] && $published !== null) {
                 $issues[] = 'new_identity_already_published';
@@ -468,6 +473,40 @@ final class BigFiveReviewPromotionPreflight
         return is_array($canonical) && is_string($canonical['path'] ?? null)
             ? $canonical['path']
             : null;
+    }
+
+    private function primaryPubliclyReadable(Model $record): bool
+    {
+        $recordId = $record->getKey();
+
+        return match (true) {
+            $record instanceof Article => Article::query()
+                ->withoutGlobalScopes()
+                ->whereKey($recordId)
+                ->publiclyReadable()
+                ->exists(),
+            $record instanceof ContentPage => ContentPage::query()
+                ->withoutGlobalScopes()
+                ->whereKey($recordId)
+                ->publiclyReadable()
+                ->exists(),
+            $record instanceof LandingSurface => LandingSurface::query()
+                ->withoutGlobalScopes()
+                ->whereKey($recordId)
+                ->publishedPublic()
+                ->exists(),
+            $record instanceof PersonalityPublicContentAsset => PersonalityPublicContentAsset::query()
+                ->withoutGlobalScopes()
+                ->whereKey($recordId)
+                ->publiclyReadable()
+                ->exists(),
+            $record instanceof TopicProfile => TopicProfile::query()
+                ->withoutGlobalScopes()
+                ->whereKey($recordId)
+                ->publishedPublic()
+                ->exists(),
+            default => false,
+        };
     }
 
     private function recordFingerprint(Model $record): string

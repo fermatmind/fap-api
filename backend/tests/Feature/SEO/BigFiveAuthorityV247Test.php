@@ -6,6 +6,7 @@ namespace Tests\Feature\SEO;
 
 use App\Models\Article;
 use App\Models\ContentPage;
+use App\Models\LandingSurface;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\TopicProfile;
 use App\Services\BigFive\AuthorityV2\ReviewPromotion\BigFiveReviewPromotionPreflight;
@@ -329,6 +330,91 @@ final class BigFiveAuthorityV247Test extends TestCase
             $this->assertIsArray($observed);
             $this->assertFalse($observed['public_route_matches']);
         }
+    }
+
+    public function test_database_preflight_rejects_existing_identities_that_are_no_longer_publicly_readable(): void
+    {
+        DB::table('articles')->insert([
+            'org_id' => 0,
+            'slug' => 'big-five-personality-test-vs-mbti',
+            'locale' => 'en',
+            'title' => 'Non-public existing article',
+            'content_md' => 'Non-public existing article.',
+            'status' => 'draft',
+            'lifecycle_state' => Article::LIFECYCLE_ACTIVE,
+            'is_public' => false,
+            'is_indexable' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('personality_public_content_assets')->insert([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_HUB,
+            'entity_key' => 'big-five',
+            'slug' => 'big-five',
+            'locale' => 'en',
+            'title' => 'Non-public existing personality asset',
+            'is_public' => false,
+            'index_eligible' => false,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_DRAFT,
+            'canonical_json' => json_encode(['path' => '/en/personality/big-five'], JSON_THROW_ON_ERROR),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('topic_profiles')->insert([
+            'org_id' => 0,
+            'topic_code' => 'big-five',
+            'slug' => 'big-five',
+            'locale' => 'en',
+            'title' => 'Non-public existing topic profile',
+            'status' => TopicProfile::STATUS_DRAFT,
+            'is_public' => false,
+            'is_indexable' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $result = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('existing_identity_not_publicly_readable', $result['issue_codes']);
+        foreach ([
+            'article:en:/en/articles/big-five-personality-test-vs-mbti',
+            'model_hub:en:/en/personality/big-five',
+            'topic_hub:en:/en/topics/big-five',
+        ] as $assetId) {
+            $observed = collect($result['observed_runtime'])->firstWhere('asset_id', $assetId);
+            $this->assertIsArray($observed);
+            $this->assertFalse($observed['primary_publicly_readable']);
+        }
+    }
+
+    public function test_database_preflight_rejects_public_preserved_product_shell(): void
+    {
+        DB::table('landing_surfaces')->insert([
+            'org_id' => 0,
+            'surface_key' => 'test_big_five_personality_test_ocean_model',
+            'locale' => 'en',
+            'title' => 'Unexpected public preserved shell',
+            'schema_version' => 'big5-authority-v2-draft.v1',
+            'payload_json' => '{}',
+            'status' => LandingSurface::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $result = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('new_identity_already_publicly_readable', $result['issue_codes']);
+        $observed = collect($result['observed_runtime'])
+            ->firstWhere('asset_id', 'test_landing:en:/en/tests/big-five-personality-test-ocean-model');
+        $this->assertIsArray($observed);
+        $this->assertTrue($observed['primary_publicly_readable']);
     }
 
     public function test_artifact_drift_fails_before_database_read_or_write(): void
