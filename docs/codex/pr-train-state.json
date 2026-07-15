@@ -55968,15 +55968,15 @@
           "status": "pass"
         },
         "local": {
-          "evidence": "Final contract/schema tests passed 9 tests / 63 assertions, including exact zh-CN Big Five/Career source locks; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. The first review-fix full CI correctly failed 1 of 1475 tests because the new Career bridge contract had not yet been registered as non-result-runtime in the Big Five freeze classifier. After adding an exact-path classifier regression and aligning both authority projections to the backend's canonical zh-CN locale, the guarded final bash backend/scripts/ci_verify_mbti.sh rerun exited 0 through the strict queue probe, including Big Five 1477 tests / 181305 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after each verifier exit.",
+          "evidence": "Final contract/schema tests passed 10 tests / 66 assertions, including exact zh-CN Big Five/Career source locks and fail-closed private marker/link scanning across reader text; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. The first review-fix full CI correctly failed 1 of 1475 tests because the new Career bridge contract had not yet been registered as non-result-runtime in the Big Five freeze classifier. After adding an exact-path classifier regression and aligning both authority projections to the backend's canonical zh-CN locale, the guarded final bash backend/scripts/ci_verify_mbti.sh rerun exited 0 through the strict queue probe, including Big Five 1477 tests / 181305 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after each verifier exit.",
           "status": "pass"
         },
         "github": {
-          "evidence": "PR #3118 is open. Codex reviews on heads 12cb777e71d4b0f4365d9a9b56bc0787feb932e8 and fa94d74e6bf2dff36896866e0899c177dd7006d2 reported five P2 threads: stale train-state association, missing outcome-prediction output lock, two duplicate boundary-copy deterministic-claim scan findings, and canonical zh-CN Career locale binding. All findings are fixed with regression coverage; required checks, exact-head review, and thread resolution must rerun after push.",
+          "evidence": "PR #3118 is open. Codex reviews reported seven P2 threads: two train-state association findings, missing outcome-prediction output lock, two duplicate boundary-copy deterministic-claim scan findings, canonical zh-CN Career locale binding, and private markers or private links hidden in reader text. All findings are fixed with regression coverage; required checks, exact-head review, and thread resolution must rerun after push.",
           "status": "pending"
         }
       },
-      "commit_sha": "e0258e45fb13fcac741943c46e5f60a90c7737b7",
+      "commit_sha": "c03f22950a35f7162803da3580030c96df83b145",
       "depends_on": [
         "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01"
       ],
@@ -55995,7 +55995,7 @@
         "post_merge_revalidated": null
       },
       "sidecars": [],
-      "status": "github_checks_pending_locale_fix",
+      "status": "github_checks_pending_private_text_fix",
       "title": "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema",
       "transitions": [
         {
@@ -56039,6 +56039,12 @@
           "from": "github_checks_pending_review_fix",
           "note": "Addressed the second Codex review's canonical locale finding by using the backend authority value zh-CN consistently across the bridge, Big Five/Career projections, and output source locks. Focused contract tests passed 9/63 and the guarded final full CI passed through strict queue with Big Five 1477/181305 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and Codex review remain pending.",
           "to": "github_checks_pending_locale_fix"
+        },
+        {
+          "at": "2026-07-15T20:53:00Z",
+          "from": "github_checks_pending_locale_fix",
+          "note": "Addressed the exact-head private-reader-text finding by scanning all output content strings for private assessment, report, order, payment, and route markers; focused contract tests passed 10/66, PHP syntax and touched Pint passed. Updated commit_sha to the preceding pushed locale implementation head c03f22950a35f7162803da3580030c96df83b145 so the bookkeeping commit does not self-reference. Exact-head GitHub checks and Codex review remain pending.",
+          "to": "github_checks_pending_private_text_fix"
         }
       ]
     },

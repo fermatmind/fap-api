@@ -182,6 +182,21 @@ final class BigFiveCareerBridgeContractTest extends TestCase
     }
 
     #[Test]
+    public function private_markers_and_links_hidden_in_reader_text_fail_closed(): void
+    {
+        $output = $this->validOutput();
+        $output['content']['boundary_copy'] = [
+            'Continue at https://example.test/reports/private-report?attempt_id=attempt-001.',
+        ];
+
+        $assessment = $this->contract->assess($this->validInput(), $output);
+
+        $this->assertFalse($assessment['public_reader_allowed']);
+        $this->assertContains('output.private_reader_text:/reports/', $assessment['blockers']);
+        $this->assertContains('output.private_reader_text:attempt_id', $assessment['blockers']);
+    }
+
+    #[Test]
     public function candidate_and_manual_review_states_never_allow_a_public_reader(): void
     {
         foreach ([

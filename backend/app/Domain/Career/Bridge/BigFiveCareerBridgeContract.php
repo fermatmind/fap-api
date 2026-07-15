@@ -221,6 +221,29 @@ final class BigFiveCareerBridgeContract
         '一定会赚得更多',
     ];
 
+    /** @var list<string> */
+    private const FORBIDDEN_PRIVATE_CONTENT_FRAGMENTS = [
+        'attempt_id',
+        'attempt-id',
+        'attempt id',
+        'report_url',
+        'report-url',
+        'report url',
+        'user_id',
+        'user-id',
+        'user id',
+        'order_id',
+        'order-id',
+        'order id',
+        'payment_id',
+        'payment-id',
+        'payment id',
+        '/attempts/',
+        '/reports/',
+        '/orders/',
+        '/payments/',
+    ];
+
     /**
      * @return array{contract_version: string, status: string, public_reader_allowed: bool, claim_mode: string, blockers: list<string>}
      */
@@ -342,6 +365,9 @@ final class BigFiveCareerBridgeContract
         }
         foreach ($this->forbiddenClaimFragments($content) as $fragment) {
             $blockers[] = 'output.deterministic_or_outcome_claim:'.$fragment;
+        }
+        foreach ($this->forbiddenPrivateContentFragments($content) as $fragment) {
+            $blockers[] = 'output.private_reader_text:'.$fragment;
         }
 
         return $this->uniqueSorted($blockers);
@@ -726,6 +752,20 @@ final class BigFiveCareerBridgeContract
         $found = [];
         foreach (self::FORBIDDEN_CLAIM_FRAGMENTS as $fragment) {
             if (str_contains($haystack, strtolower($fragment))) {
+                $found[] = $fragment;
+            }
+        }
+
+        return $this->uniqueSorted($found);
+    }
+
+    /** @return list<string> */
+    private function forbiddenPrivateContentFragments(array $content): array
+    {
+        $haystack = strtolower(implode("\n", $this->flattenStrings($content)));
+        $found = [];
+        foreach (self::FORBIDDEN_PRIVATE_CONTENT_FRAGMENTS as $fragment) {
+            if (str_contains($haystack, $fragment)) {
                 $found[] = $fragment;
             }
         }
