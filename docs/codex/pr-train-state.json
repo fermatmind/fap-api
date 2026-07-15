@@ -94027,7 +94027,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "33d3c6c185ba6ecadd020a0c2782acdd471f0243",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3120",
@@ -94049,14 +94049,22 @@
         "evidence": "The package contains exactly hub plus gut/heart/head centers in en and zh-CN, independently authored with distinct locale outlines, 24 unique FAQ questions and answers, within-center differences, counterexamples, alternative explanations, explicit non-medical/non-neurological boundaries, pending_manual_review, reviewer null, draft_only, zero publish eligibility, and zero CMS/database/search/deploy writes. The QA report preserves the raw 11-issue failure and repair evidence; no external model session was used."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "Pushed the exact six-file branch and opened the single authorized PR #3120 with the manifest title and required scope, validation, deferred, rule-impact, and safety sections. GitHub reports MERGEABLE with checks queued."
+        "status": "pass",
+        "evidence": "All nine required checks passed on ledger head 3342c144babe99ce8263a11ea6c4ebb7b782e3f7: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub reports CLEAN/MERGEABLE with zero unresolved review threads."
+      },
+      "automated_code_review": {
+        "status": "unavailable_non_required",
+        "evidence": "The GitHub Codex review connector reported account usage limits and produced no review conclusion. GitHub reports reviewDecision empty, main has no required pull-request review rule, all required checks pass, and there are zero unresolved threads. This is not represented as human review; every asset remains pending_manual_review with reviewer null and human_review_completed false."
+      },
+      "codex_skeptical_review": {
+        "status": "pass",
+        "evidence": "The repository-native QA report preserves the initial 11 asset-specific findings and scoped repairs. Final PR08-gate replay reports zero asset-specific issues for all eight assets; source maps, bilingual independence, duplicate risk, FAQ depth, center boundaries, review truth, release truth, and zero-write assertions pass in 6 tests / 256 assertions."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -94094,9 +94102,14 @@
         "at": "2026-07-15T22:35:02Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact six-file branch and opened the single authorized fap-api PR #3120 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE with initial checks queued."
+      },
+      {
+        "at": "2026-07-15T22:42:26Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on ledger head 3342c144b, GitHub is CLEAN/MERGEABLE, exact six-file scope and eight-asset count are preserved, and reviewThreads reports zero unresolved. The optional Codex review connector hit its usage limit; reviewDecision is empty and main has no required review rule. This unavailable automated review is recorded without changing pending_manual_review truth. The ready-ledger head must complete one final required-check round before squash merge."
       }
     ],
-    "updated_at": "2026-07-15T22:35:02Z"
+    "updated_at": "2026-07-15T22:42:26Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10",
