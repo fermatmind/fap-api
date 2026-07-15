@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "3017f248e3df5984f51c6309a2b84c5cf38b41f2",
+    "commit_sha": "fc2db91953e3adbc76b74b0ec64e330f26bf537a",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93358,7 +93358,7 @@
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on prior ledger head b503a970e, then the latest automated review added one valid in-scope diagnosis/screening safety P2 and one train-status consistency P2. The locally verified substantive fix head 3017f248e requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on prior ledger head 6fc4b0753, then the latest automated review added two valid in-scope recommendation and direct-diagnosis P2 findings. The locally verified substantive fix head fc2db9195 requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All sixteen valid P2 findings are fixed. In addition to the prior fourteen, text safety blocks medical/clinical diagnosis, hiring-fit, job-suitability, and equivalent Chinese claims without rejecting the passing candidate's bounded negative language; the manifest now stays in_progress while latest-head checks are pending. PR08+PR02 pass 23 tests / 285 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
+        "evidence": "All eighteen valid P2 findings are fixed. In addition to the prior sixteen, text safety covers the claim-boundary's full deterministic recommendation, best-career, perfect-match, salary-guarantee, direct diagnosis, treatment, cure, and fixed identity/ability/income examples in English and Chinese. PR08+PR02 pass 24 tests / 363 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93465,9 +93465,14 @@
         "at": "2026-07-15T11:33:03Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on the prior review-fix ledger head, then diagnosis/screening text safety and manifest/ledger pending-state consistency were fixed. A broad status patch initially touched an unrelated ARTICLE41 entry; it was detected before staging, restored, and the final manifest diff is PR08-only. PR08+PR02 pass 23 / 285, freeze regressions 2 / 5, Pint, syntax, YAML, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T11:40:58Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then two valid P2 findings were fixed comprehensively against the claim-boundary examples: deterministic/best-career/perfect-match/salary-guarantee claims and direct diagnosis/treatment/cure wording in English and Chinese. PR08+PR02 pass 24 / 363, freeze regressions 2 / 5, Pint, syntax, YAML, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T11:33:03Z"
+    "updated_at": "2026-07-15T11:40:58Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
