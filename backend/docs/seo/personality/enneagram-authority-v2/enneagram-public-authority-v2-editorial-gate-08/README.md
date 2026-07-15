@@ -21,8 +21,8 @@ Run after PR09–PR18 have assembled the aggregate candidate:
 
 ```bash
 cd backend
-php artisan personality:enneagram-authority-v2-editorial-gate \
-  --source=/absolute/path/to/aggregate-candidate.json \
+php artisan personality:enneagram-authority-v2-integrity-gate \
+  --editorial-source=/absolute/path/to/aggregate-candidate.json \
   --json
 ```
 

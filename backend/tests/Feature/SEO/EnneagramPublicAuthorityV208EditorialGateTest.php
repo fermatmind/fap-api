@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SEO;
 
-use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV208EditorialGate;
+use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV2IntegrityGate;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
     public function test_complete_candidate_produces_exactly_116_passing_qa_rows_without_human_or_release_claims(): void
     {
-        $result = $this->gate()->validate($this->candidate(), $this->registry(), $this->maps());
+        $result = $this->gate()->validateEditorial($this->candidate(), $this->registry(), $this->maps());
 
         $this->assertTrue($result['ok'], json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
         $this->assertSame('ready_for_human_review', $result['status']);
@@ -49,7 +49,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'reflection_prompt' => 'Reflect generally at the end of the week without testing a concrete hypothesis from this page.',
         ];
 
-        $result = $this->gate()->validate($candidate, $this->registry(), $this->maps());
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
         $codes = collect($result['issues'])->pluck('code')->all();
 
         $this->assertFalse($result['ok']);
@@ -77,7 +77,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'review_source' => 'model_review',
         ];
 
-        $result = $this->gate()->validate($candidate, $this->registry(), $this->maps());
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
         $codes = collect($result['issues'])->pluck('code')->all();
 
         $this->assertFalse($result['ok']);
@@ -97,7 +97,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $candidate['assets'][0]['claim_ids'][] = 'claim.blocked.predictive_outcomes';
         array_pop($candidate['assets']);
 
-        $result = $this->gate()->validate($candidate, $this->registry(), $this->maps());
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
         $codes = collect($result['issues'])->pluck('code')->all();
 
         $this->assertFalse($result['ok']);
@@ -109,7 +109,10 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
     public function test_command_is_read_only_and_fails_closed_without_a_source(): void
     {
-        $exit = Artisan::call('personality:enneagram-authority-v2-editorial-gate', ['--json' => true]);
+        $exit = Artisan::call('personality:enneagram-authority-v2-integrity-gate', [
+            '--editorial-source' => '/tmp/does-not-exist-enneagram-editorial-candidate.json',
+            '--json' => true,
+        ]);
         $result = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
 
         $this->assertSame(1, $exit);
@@ -127,7 +130,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         file_put_contents($path, json_encode($this->candidate(), JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
         try {
-            $exit = Artisan::call('personality:enneagram-authority-v2-editorial-gate', ['--source' => $path]);
+            $exit = Artisan::call('personality:enneagram-authority-v2-integrity-gate', ['--editorial-source' => $path]);
             $output = Artisan::output();
         } finally {
             @unlink($path);
@@ -155,9 +158,9 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertSame([false], array_values(array_unique($contract['execution_boundaries'])));
     }
 
-    private function gate(): EnneagramPublicAuthorityV208EditorialGate
+    private function gate(): EnneagramPublicAuthorityV2IntegrityGate
     {
-        return app(EnneagramPublicAuthorityV208EditorialGate::class);
+        return app(EnneagramPublicAuthorityV2IntegrityGate::class);
     }
 
     /** @return array<string, mixed> */
@@ -289,7 +292,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
 
         return [
-            'schema_version' => EnneagramPublicAuthorityV208EditorialGate::SCHEMA_VERSION,
+            'schema_version' => EnneagramPublicAuthorityV2IntegrityGate::EDITORIAL_SCHEMA_VERSION,
             'artifact' => 'test-complete-candidate',
             'framework' => 'enneagram',
             'assets' => $assets,
