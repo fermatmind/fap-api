@@ -298,7 +298,7 @@ prs:
     branch: codex/big5-authority-v2-structured-data-45
     depends_on: [BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43, BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44]
     train_scope: big5_authority_v2_visible_evidence_structured_data_parity
-    status: local_checks_passed
+    status: committed
     goal: "Lock the exact nine FAQPage and four Article/Breadcrumb failures; emit Big Five Article, BreadcrumbList, and FAQPage structured data only from the current published/indexable/public-safe revision, explicit backend schema gates, visible FAQ, canonical URLs, PR42 date authority, and PR43 author/reviewer/source authority."
     allowed_paths:
       - backend/app/Services/BigFive/AuthorityV2/StructuredData/**

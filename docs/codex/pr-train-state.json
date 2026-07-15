@@ -92520,8 +92520,8 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-structured-data-45",
     "depends_on": ["BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43", "BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "a81d0f4ae0b5fd1017e99f646f55839d83f76960",
     "pr_url": null,
     "checks": {
       "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR45 id, branch, title, dependencies, nine FAQPage plus four Article/Breadcrumb scope, lifecycle, validation floor, and no-production-write boundary."},
@@ -92542,7 +92542,8 @@
     "public_runtime_change": true,
     "transitions": [
       {"at": "2026-07-15T07:24:53Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR45 from the exact merged PR44 base. Scope is limited to the 13 locked structured-data findings, a Big Five-only fail-closed projector, existing Article SEO backend projection wiring, focused contracts, and PR44 ledger reconciliation; no CMS/database write, promotion, indexability, sitemap/llms/hreflang, Search, frontend, cache, or deploy action is allowed."},
-      {"at": "2026-07-15T07:42:35Z", "from": "in_progress", "to": "local_checks_passed", "note": "Implemented and validated the backend-only Big Five structured-data projection. All focused, compatibility, freeze, format, syntax, fixture, scope, and complete ci_verify_mbti checks pass. The exact nine FAQPage and four Article/Breadcrumb audit findings are locked without claiming a production deploy or readback."}
+      {"at": "2026-07-15T07:42:35Z", "from": "in_progress", "to": "local_checks_passed", "note": "Implemented and validated the backend-only Big Five structured-data projection. All focused, compatibility, freeze, format, syntax, fixture, scope, and complete ci_verify_mbti checks pass. The exact nine FAQPage and four Article/Breadcrumb audit findings are locked without claiming a production deploy or readback."},
+      {"at": "2026-07-15T07:51:52Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact 11-file PR45 implementation and metadata scope as a81d0f4ae0b5fd1017e99f646f55839d83f76960 after the final noindex gate and repeated complete CI verification passed."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
