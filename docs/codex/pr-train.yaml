@@ -43316,8 +43316,9 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV202IntegrityGateTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV202IntegrityGateTest.php
+      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43504,8 +43505,9 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV208EditorialGateTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV208EditorialGateTest.php
+      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check

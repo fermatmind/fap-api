@@ -161,6 +161,15 @@ class EnneagramPublicAuthorityV201BenchmarkTest extends TestCase
             '/ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22.*?depends_on:\s+- ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20\s+- ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21/s',
             $manifest
         );
+        foreach ([
+            'ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02',
+            'ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08',
+        ] as $id) {
+            $this->assertMatchesRegularExpression(
+                '/'.preg_quote($id, '/').'.*?validation:\s+- git diff --name-only --diff-filter=ACMR origin\/main\.\.\.HEAD.*?php_files=\$\(git diff --name-only --diff-filter=ACMR origin\/main\.\.\.HEAD/s',
+                $manifest
+            );
+        }
         $this->assertStringContainsString(
             'php artisan test tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php',
             $manifest
