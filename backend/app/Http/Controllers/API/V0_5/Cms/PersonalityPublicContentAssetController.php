@@ -35,6 +35,15 @@ final class PersonalityPublicContentAssetController extends Controller
             return $validated;
         }
 
+        if ($validated['code'] !== null) {
+            return $this->showByCode(
+                $request,
+                (string) $validated['framework'],
+                (string) $validated['entity_type'],
+                $validated['code'],
+            );
+        }
+
         $framework = (string) ($validated['framework'] ?? '');
         $entityType = (string) ($validated['entity_type'] ?? 'all');
         $selector = $this->indexSelector($validated['page'], $validated['per_page']);
@@ -294,8 +303,9 @@ final class PersonalityPublicContentAssetController extends Controller
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
             'locale' => ['nullable', Rule::in(['en', 'zh', 'zh-CN'])],
-            'framework' => ['nullable', Rule::in(PersonalityPublicContentAsset::FRAMEWORKS)],
-            'entity_type' => ['nullable', Rule::in(PersonalityPublicContentAsset::ENTITY_TYPES)],
+            'framework' => ['nullable', 'required_with:code', Rule::in(PersonalityPublicContentAsset::FRAMEWORKS)],
+            'entity_type' => ['nullable', 'required_with:code', Rule::in(PersonalityPublicContentAsset::ENTITY_TYPES)],
+            'code' => ['nullable', 'string', 'max:128'],
             'page' => ['nullable', 'integer', 'min:1'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
         ]);
@@ -318,6 +328,9 @@ final class PersonalityPublicContentAssetController extends Controller
                 : null,
             'entity_type' => isset($validated['entity_type'])
                 ? PersonalityPublicContentAsset::normalizeToken((string) $validated['entity_type'])
+                : null,
+            'code' => isset($validated['code'])
+                ? PersonalityPublicContentAsset::normalizeEntityKey((string) $validated['code'])
                 : null,
             'page' => max(1, (int) ($validated['page'] ?? 1)),
             'per_page' => max(1, min(100, (int) ($validated['per_page'] ?? 50))),

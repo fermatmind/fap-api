@@ -92684,7 +92684,7 @@
       "dependency_origin_main_contains_merge": true,
       "evidence": "fap-web PR #1770 is MERGED at 28afe5365d114ee72207cbcf426364355c88baa2; fap-web origin/main contains the merge commit, remote and local PR03 branches are deleted, and post-merge focused revalidation passed 7 files / 58 tests."
     },
-    "status": "github_checks_pending",
+    "status": "review_fix_local_verified",
     "commit_sha": "46d7f3510d83104f6c25cd642985e18bd9d83009",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3104",
     "checks": {
@@ -92711,6 +92711,10 @@
       "github": {
         "status": "pending",
         "evidence": "Opened the single authorized fap-api PR #3104 with the exact manifest title from branch head 46d7f3510d83104f6c25cd642985e18bd9d83009."
+      },
+      "review_fix": {
+        "status": "pass",
+        "evidence": "Addressed the actionable P2 by exposing canonical slashed subtype codes through a real index-route exact-code query that reuses showByCode and its cache; real HTTP fixtures, 57 tests / 4096 assertions, Big Five V2 1 / 15, Pint, JSON, and diff checks pass."
       }
     },
     "scope_validation": {
@@ -92764,9 +92768,14 @@
         "at": "2026-07-15T05:46:24Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact eight-path branch and opened the single authorized fap-api PR #3104 with the exact manifest title and required change, reason, validation, deferred, repository-rule-impact, and safety sections."
+      },
+      {
+        "at": "2026-07-15T05:55:46Z",
+        "status": "review_fix_local_verified",
+        "note": "All nine initial GitHub checks passed, then Codex review identified one valid P2: subtype V2 fixtures bypassed routing while ordinary list responses remained V1-only. Added an explicit framework/entity_type/code detail lookup on the existing index route, converted subtype fixtures to real HTTP, and locally revalidated the exact PR04 contract and Big Five regression."
       }
     ],
-    "updated_at": "2026-07-15T05:46:24Z"
+    "updated_at": "2026-07-15T05:55:46Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05",

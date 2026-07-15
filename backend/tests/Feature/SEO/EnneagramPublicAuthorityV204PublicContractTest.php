@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SEO;
 
-use App\Http\Controllers\API\V0_5\Cms\PersonalityPublicContentAssetController;
 use App\Models\PersonalityPublicContentAsset;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
-use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 final class EnneagramPublicAuthorityV204PublicContractTest extends TestCase
@@ -55,7 +52,7 @@ final class EnneagramPublicAuthorityV204PublicContractTest extends TestCase
                 ],
             ]));
 
-            $response = $this->contractResponse($fixture);
+            $response = $this->getJson($fixture['endpoint']);
             $this->assertSame(200, $response->status(), $fixture['fixture_id'].': '.$response->getContent());
 
             $response
@@ -107,27 +104,12 @@ final class EnneagramPublicAuthorityV204PublicContractTest extends TestCase
             ],
         ]));
 
-        $response = $this->contractResponse($fixture);
+        $response = $this->getJson($fixture['endpoint']);
 
         $this->assertSame(200, $response->status());
         $this->assertTrue((bool) data_get($response->getData(true), 'personality_public_content_asset_v2.visible_evidence.eligible'));
         $this->assertNull(data_get($response->getData(true), 'personality_public_content_asset_v2.editorial_authority.reviewer'));
         $this->assertFalse((bool) data_get($response->getData(true), 'personality_public_content_asset_v2.schema_eligible'));
-    }
-
-    /** @param array<string,string> $fixture */
-    private function contractResponse(array $fixture): TestResponse
-    {
-        $request = Request::create($fixture['endpoint'], 'GET');
-
-        return TestResponse::fromBaseResponse(
-            app(PersonalityPublicContentAssetController::class)->showByCode(
-                $request,
-                PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
-                $fixture['entity_type'],
-                $fixture['entity_key'],
-            )
-        );
     }
 
     /** @return list<array<string,string>> */
