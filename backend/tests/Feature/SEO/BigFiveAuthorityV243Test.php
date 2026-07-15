@@ -194,6 +194,11 @@ final class BigFiveAuthorityV243Test extends TestCase
 
         $asset->launch_state = PersonalityPublicContentAsset::LAUNCH_CONTENT_READY;
         $this->assertTrue($this->projector->forPersonalityAsset($asset)['eligibility']['promotion_eligible']);
+        foreach (['operator_approved_content_ready', 'seo_discoverability_released'] as $releaseReviewState) {
+            $asset->review_state = $releaseReviewState;
+            $asset->authority_json = $this->metadata($releaseReviewState);
+            $this->assertTrue($this->projector->forPersonalityAsset($asset)['eligibility']['promotion_eligible']);
+        }
         $asset->published_at = now()->addDay();
         $this->assertFalse($this->projector->forPersonalityAsset($asset)['eligibility']['promotion_eligible']);
 

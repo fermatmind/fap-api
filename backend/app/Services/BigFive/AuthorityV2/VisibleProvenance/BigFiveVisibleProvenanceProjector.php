@@ -35,8 +35,10 @@ final class BigFiveVisibleProvenanceProjector
     private const REVIEW_STATES = [
         'approved',
         'human_reviewed',
+        'operator_approved_content_ready',
         'published',
         'reviewed',
+        'seo_discoverability_released',
     ];
 
     private const SOURCE_CATEGORY_MAP = [
