@@ -136,6 +136,19 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertContains('duplicate_paragraph', collect($result['issues'])->pluck('code')->all());
     }
 
+    public function test_unsafe_visible_section_heading_fails_claim_safety_gate(): void
+    {
+        $candidate = $this->candidate();
+        $candidate['assets'][0]['sections'][0]['heading'] = 'Scientifically proven perfect career prediction by Truity';
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+        $codes = collect($result['issues'])->pluck('code')->all();
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('unsupported_science_claim', $codes);
+        $this->assertContains('competitor_language_detected', $codes);
+    }
+
     public function test_command_is_read_only_and_fails_closed_without_a_source(): void
     {
         $exit = Artisan::call('personality:enneagram-authority-v2-integrity-gate', [

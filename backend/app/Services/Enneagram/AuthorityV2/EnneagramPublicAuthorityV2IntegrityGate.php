@@ -705,6 +705,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         $blocks = [(string) ($asset['title'] ?? ''), (string) ($asset['answer_first'] ?? '')];
         foreach (is_array($asset['sections'] ?? null) ? $asset['sections'] : [] as $section) {
             if (is_array($section)) {
+                $blocks[] = (string) ($section['heading'] ?? '');
                 $blocks[] = (string) ($section['body'] ?? '');
             }
         }
