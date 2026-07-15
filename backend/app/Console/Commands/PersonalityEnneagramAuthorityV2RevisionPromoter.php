@@ -71,6 +71,9 @@ final class PersonalityEnneagramAuthorityV2RevisionPromoter extends Command
         if ($preflight) {
             return $plan;
         }
+        if (! (bool) $this->option('json')) {
+            throw new RuntimeException('--promote requires --json so the signed rollback token is emitted and can be retained before any later rollback.');
+        }
 
         $this->assertWriteEnvironment();
         $fingerprint = $this->requiredOption('confirm-preflight-fingerprint');

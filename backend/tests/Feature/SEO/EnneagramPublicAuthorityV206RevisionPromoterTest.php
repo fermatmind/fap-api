@@ -47,6 +47,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
         $this->assertSame('PASS_POINTER_SAFE_PROMOTION', $promoted['status']);
         $this->assertSame(116, $promoted['promoted_count']);
         $this->assertTrue($promoted['writes_committed']);
+        $this->assertFalse($promoted['production_execution']);
         $this->assertMatchesRegularExpression('/^[A-Za-z0-9_-]+\.[0-9a-f]{64}$/', (string) $promoted['rollback_token']);
         $this->assertSame(0, $promoted['public_release_count']);
         $this->assertSame(0, $promoted['indexability_change_count']);
@@ -61,6 +62,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
 
         $this->assertSame('PASS_POINTER_SAFE_ROLLBACK', $rolledBack['status']);
         $this->assertSame(116, $rolledBack['rolled_back_count']);
+        $this->assertFalse($rolledBack['production_execution']);
         $this->assertSame($before, $this->publishedSnapshots());
         $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
         $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
@@ -224,9 +226,39 @@ SQL);
             '--confirm-writer-deploy-sha' => self::TEST_DEPLOY_SHA,
             '--operator-approved' => 'not-authorized',
             '--allow-testing' => true,
+            '--json' => true,
+        ])
+            ->expectsOutputToContain('"status": "FAIL_CLOSED"')
+            ->assertFailed();
+
+        $this->assertSame($before, $this->databaseFingerprint());
+        @unlink($path);
+    }
+
+    public function test_console_promotion_requires_json_before_any_write(): void
+    {
+        $targets = $this->seedRevisionEstate();
+        $plan = $this->promoter()->preflight($targets);
+        $path = storage_path('framework/testing/enneagram-authority-v2-promotion-json-guard-plan.json');
+        if (! is_dir(dirname($path))) {
+            mkdir(dirname($path), 0777, true);
+        }
+        file_put_contents($path, json_encode(['targets' => $targets], JSON_THROW_ON_ERROR));
+        $before = $this->databaseFingerprint();
+
+        $this->artisan('personality:enneagram-authority-v2-revision-promoter', [
+            '--plan' => $path,
+            '--promote' => true,
+            '--confirm-preflight-fingerprint' => (string) $plan['preflight_fingerprint'],
+            '--confirm-writer-deploy-sha' => self::TEST_DEPLOY_SHA,
+            '--operator-approved' => $this->promoter()->approvalPhrase(
+                self::TEST_DEPLOY_SHA,
+                (string) $plan['preflight_fingerprint'],
+            ),
+            '--allow-testing' => true,
         ])
             ->expectsOutputToContain('status=FAIL_CLOSED')
-            ->expectsOutputToContain('authorization phrase mismatch')
+            ->expectsOutputToContain('--promote requires --json')
             ->assertFailed();
 
         $this->assertSame($before, $this->databaseFingerprint());
