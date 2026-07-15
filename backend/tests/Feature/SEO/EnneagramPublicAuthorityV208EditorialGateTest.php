@@ -64,6 +64,24 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertFalse($result['writes_committed']);
     }
 
+    public function test_empty_title_and_repeated_faq_questions_fail_closed(): void
+    {
+        $candidate = $this->candidate();
+        $candidate['assets'][0]['title'] = '';
+        $candidate['assets'][0]['faqs'][1]['question'] = $candidate['assets'][0]['faqs'][0]['question'];
+        $candidate['assets'][0]['faqs'][2]['question'] = $candidate['assets'][0]['faqs'][0]['question'];
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+        $codes = collect($result['issues'])->pluck('code')->all();
+
+        $this->assertFalse($result['ok']);
+        $this->assertSame('fail_closed', $result['status']);
+        $this->assertContains('title_missing', $codes);
+        $this->assertSame(2, collect($codes)->filter(fn (string $code): bool => $code === 'repeated_faq_question')->count());
+        $this->assertFalse($result['writes_committed']);
+        $this->assertFalse($result['publish_eligible']);
+    }
+
     public function test_science_prediction_hidden_evidence_competitor_and_model_review_fixtures_fail_closed(): void
     {
         $candidate = $this->candidate();

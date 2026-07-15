@@ -538,6 +538,9 @@ final class EnneagramPublicAuthorityV2IntegrityGate
                 }
             }
         }
+        if ($this->length($asset['title'] ?? null) < 4) {
+            $add(self::EDITORIAL_GATES[0], 'title_missing', $key, "{$path}.title", 'Every public editorial asset requires a visible title.');
+        }
         if (! is_array($asset['sections'] ?? null) || $asset['sections'] === []) {
             $add(self::EDITORIAL_GATES[0], 'sections_missing', $key, "{$path}.sections", 'Visible sections must be non-empty.');
         } else {
@@ -611,6 +614,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     private function validateFaqs(array $asset, string $key, string $path, array &$seen, callable $add): void
     {
         $faqs = is_array($asset['faqs'] ?? null) ? $asset['faqs'] : [];
+        $seenQuestions = [];
         if (count($faqs) < 3) {
             $add(self::EDITORIAL_GATES[4], 'faq_depth_insufficient', $key, "{$path}.faqs", 'Each page requires at least three page-specific FAQs.');
         }
@@ -619,6 +623,13 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             $answer = is_array($faq) ? (string) ($faq['answer'] ?? '') : '';
             if ($this->length($question) < 12 || $this->length($answer) < 60) {
                 $add(self::EDITORIAL_GATES[4], 'faq_item_too_shallow', $key, "{$path}.faqs.{$index}", 'FAQ questions and answers must be substantive.');
+            }
+            $normalizedQuestion = $this->normalize($question);
+            if ($normalizedQuestion !== '' && isset($seenQuestions[$normalizedQuestion])) {
+                $add(self::EDITORIAL_GATES[4], 'repeated_faq_question', $key, "{$path}.faqs.{$index}.question", "FAQ question repeats {$seenQuestions[$normalizedQuestion]}.");
+            }
+            if ($normalizedQuestion !== '') {
+                $seenQuestions[$normalizedQuestion] = "{$path}.faqs.{$index}.question";
             }
             $normalized = $this->normalize($answer);
             if ($normalized !== '' && isset($seen[$normalized])) {
