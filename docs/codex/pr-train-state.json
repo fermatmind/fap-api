@@ -55968,15 +55968,15 @@
           "status": "pass"
         },
         "local": {
-          "evidence": "Final contract/schema tests passed 10 tests / 66 assertions, including exact zh-CN Big Five/Career source locks and fail-closed private marker/link scanning across reader text; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. The first review-fix full CI correctly failed 1 of 1475 tests because the new Career bridge contract had not yet been registered as non-result-runtime in the Big Five freeze classifier. After adding an exact-path classifier regression and aligning both authority projections to the backend's canonical zh-CN locale, the guarded final bash backend/scripts/ci_verify_mbti.sh rerun exited 0 through the strict queue probe, including Big Five 1477 tests / 181305 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after each verifier exit.",
+          "evidence": "Final contract/schema tests passed 10 tests / 66 assertions, including exact zh-CN Big Five/Career source locks and fail-closed private marker/link scanning across reader text; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. One attempted final verifier collided with another validation process that started after the guard and both used /tmp/fap-ci.sqlite, producing a schema-baseline initialization failure before the bridge suite. After the competing run ended, its clean latest-functional-head bash backend/scripts/ci_verify_mbti.sh execution exited 0 through the strict queue probe, including Big Five 1478 tests / 181308 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after verifier exit.",
           "status": "pass"
         },
         "github": {
-          "evidence": "PR #3118 is open. Codex reviews reported seven P2 threads: two train-state association findings, missing outcome-prediction output lock, two duplicate boundary-copy deterministic-claim scan findings, canonical zh-CN Career locale binding, and private markers or private links hidden in reader text. All findings are fixed with regression coverage; required checks, exact-head review, and thread resolution must rerun after push.",
+          "evidence": "PR #3118 is open. Codex reviews reported seven P2 threads: two train-state association findings, missing outcome-prediction output lock, two duplicate boundary-copy deterministic-claim scan findings, canonical zh-CN Career locale binding, and private markers or private links hidden in reader text. All findings are fixed with regression coverage. The latest functional head is 4008e9daed00b0c32b94c9649d56685646c8127a; required checks and exact-head review must rerun after this final bookkeeping push.",
           "status": "pending"
         }
       },
-      "commit_sha": "c03f22950a35f7162803da3580030c96df83b145",
+      "commit_sha": "4008e9daed00b0c32b94c9649d56685646c8127a",
       "depends_on": [
         "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01"
       ],
@@ -55995,7 +55995,7 @@
         "post_merge_revalidated": null
       },
       "sidecars": [],
-      "status": "github_checks_pending_private_text_fix",
+      "status": "github_checks_pending_final_head",
       "title": "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema",
       "transitions": [
         {
@@ -56045,6 +56045,12 @@
           "from": "github_checks_pending_locale_fix",
           "note": "Addressed the exact-head private-reader-text finding by scanning all output content strings for private assessment, report, order, payment, and route markers; focused contract tests passed 10/66, PHP syntax and touched Pint passed. Updated commit_sha to the preceding pushed locale implementation head c03f22950a35f7162803da3580030c96df83b145 so the bookkeeping commit does not self-reference. Exact-head GitHub checks and Codex review remain pending.",
           "to": "github_checks_pending_private_text_fix"
+        },
+        {
+          "at": "2026-07-15T20:57:31Z",
+          "from": "github_checks_pending_private_text_fix",
+          "note": "Recorded latest functional head 4008e9daed00b0c32b94c9649d56685646c8127a. One attempted verifier collided on /tmp/fap-ci.sqlite with a validation process that started after the concurrency guard and failed during schema initialization; the surviving clean latest-head run then passed through strict queue with Big Five 1478/181308 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and Codex review remain pending.",
+          "to": "github_checks_pending_final_head"
         }
       ]
     },
