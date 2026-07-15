@@ -347,6 +347,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const HUMAN_REVIEW_RELEASE_PATTERN = '/(?:\b(?:human|expert|editor|editorial|manual|editorially|manually)[\s-]+reviewed\b|\b(?:human|expert|editor|editorial|editorially)[\s-]+approved\b|\breviewed\s+by\s+[\p{L}][\p{L}\p{M}.\'-]*(?:\s+[\p{L}][\p{L}\p{M}.\'-]*){0,3}|\b(?:human|expert|editor|editorial|manual)[\s-]+review\s+(?:(?:(?:has|had)\s+(?:been\s+)?)|(?:is|was|were)\s+)?(?:completed|approved|passed|cleared)\b|\bcompleted\s+(?:human|expert|editor|editorial|manual)[\s-]+review\b|\b(?:approved|cleared|eligible|ready)\s+for\s+(?:public\s+)?(?:publication|publishing|release|indexing|indexation)\b|\beligible\s+to\s+(?:publish|release|index)\b|\b(?:(?:approved|cleared|ready)\s+to\s+(?:publish|release|index)|(?:this|the)\s+(?:page|asset|content|draft|guide)\s+(?:is|was|has\s+been)\s+published|published\s+(?:online|publicly|to\s+production)|indexed(?:\s+by\s+[\p{L}\p{N}_-]+)?|indexable|(?:publication|publishing|release|indexing|indexation)[\s-]+ready)\b|\bpublication[\s-]+approved\b|\b(?:(?:already|currently)\s+)?(?:in|on)\s+(?:the\s+)?(?:sitemap|llms(?:\.txt)?)\b|\b(?:schema|sitemap|llms(?:\.txt)?)[\s-]+eligib(?:le|ility)\b|(?:人工|专家|编辑)审核(?:已)?(?:通过|完成|批准)|(?:人工|专家|编辑)(?:已)?批准|已完成(?:人工|专家|编辑)审核|已由[^。！？\n]{0,30}(?:人工|专家|编辑)审核|已获(?:发布|上线|收录)(?:批准|许可)|(?:已发布|可收录|发布就绪|已被(?:搜索|谷歌|Google)?收录)|(?:发布|上线|收录)(?:获批|已批准|就绪)|(?:已)?(?:进入|纳入|列入)\s*(?:站点地图|sitemap|llms(?:\.txt)?)|(?:schema|结构化数据|站点地图|sitemap|llms(?:\.txt)?)(?:已)?(?:具备资格|符合条件|可用|启用))/iu';
 
+    private const MANUAL_APPROVAL_PATTERN = '/\bmanual(?:ly)?[\s-]+approved\b/iu';
+
     private const BARE_MEDICAL_CLAIM_PATTERN = '/(?:\bdiagnos(?:is|e(?:s|d)?|ing)\b|\btreatment\b|\bcure\b|诊断|确诊|治疗|治愈)/iu';
 
     private const COMPETITOR_PATTERN = '/(?:\btruity\b|enneagram\s+institute)/iu';
@@ -916,6 +918,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             [self::PREDICTION_PATTERN, 'career_or_relationship_prediction'],
             [self::DETERMINISTIC_RECOMMENDATION_PATTERN, 'deterministic_recommendation_claim'],
             [self::HUMAN_REVIEW_RELEASE_PATTERN, 'visible_review_or_release_claim'],
+            [self::MANUAL_APPROVAL_PATTERN, 'visible_review_or_release_claim'],
         ] as [$pattern, $code]) {
             if (preg_match($pattern, $claimText) === 1) {
                 $add(self::EDITORIAL_GATES[9], $code, $key, $path, 'Public candidate text crosses the declared evidence or competitor boundary.');
@@ -1051,6 +1054,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             self::PREDICTION_PATTERN,
             self::DETERMINISTIC_RECOMMENDATION_PATTERN,
             self::HUMAN_REVIEW_RELEASE_PATTERN,
+            self::MANUAL_APPROVAL_PATTERN,
         ]);
     }
 
@@ -1084,7 +1088,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         $commaLedPredicateClause = preg_match('/,\s*$/u', $prefix) === 1
             && preg_match('/^(?:predicts|forecasts|guarantees|determines|screens|diagnoses|treats|cures|ensures|delivers|boosts|increases|improves)\b/iu', ltrim($claim)) === 1;
         $commaLedReviewOrReleaseClause = preg_match('/,\s*$/u', $prefix) === 1
-            && preg_match(self::HUMAN_REVIEW_RELEASE_PATTERN, ltrim($claim)) === 1;
+            && (preg_match(self::HUMAN_REVIEW_RELEASE_PATTERN, ltrim($claim)) === 1
+                || preg_match(self::MANUAL_APPROVAL_PATTERN, ltrim($claim)) === 1);
         $disjunctiveEnglishClause = '/\bor\s+(?:(?:it|this|that|we|you|they|he|she|there)|(?:an?|the|this|that|these|those|our|your|their|its)\s+[\p{L}\p{N}_\'’\-]+(?:\s+[\p{L}\p{N}_\'’\-]+){0,3}|[\p{L}\p{N}_\'’\-]+(?:\s+[\p{L}\p{N}_\'’\-]+){0,2}\s+(?:is|are|was|were|has|have|had|does|do|did|can|could|will|would|should|must|may|might))\s*$/iu';
         $disjunctiveChineseClause = '/或(?:者)?\s*(?:(?:本页|本内容|该页|该内容|它|其|我们|你|您|他们)|(?:会|能|可以|能够|已经|已|将|预测|证明|提供|给出|批准|适合))\s*$/u';
         if (preg_match($commaLedEnglishClause, $prefix) === 1

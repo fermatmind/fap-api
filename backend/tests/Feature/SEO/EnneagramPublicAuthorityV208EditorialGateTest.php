@@ -674,6 +674,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Release ready',
             'Manually reviewed',
             'Manual reviewed',
+            'Manually approved',
+            'Manual approved',
             '已发布',
             '可收录',
             '发布就绪',
@@ -695,7 +697,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('visible_review_or_release_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page is not human reviewed.', 'This page is not editor reviewed.', 'This page is not editor approved.', 'This page is not expert approved.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not ready to publish.', 'This page is not yet published.', 'This page is not indexed by Google.', 'This page is not eligible to publish.', 'This page is not indexable.', 'This page is not in the sitemap.', 'This page is not in llms.txt.', 'This page is not schema eligible.', '本页不能声称编辑已批准。', '本页不能声称已进入站点地图。', '本页不能声称已被搜索收录。'] as $limitation) {
+        foreach (['This page is not human reviewed.', 'This page is not editor reviewed.', 'This page is not editor approved.', 'This page is not expert approved.', 'This page is not manually reviewed.', 'This page is not manually approved.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not ready to publish.', 'This page is not yet published.', 'This page is not indexed by Google.', 'This page is not eligible to publish.', 'This page is not indexable.', 'This page is not in the sitemap.', 'This page is not in llms.txt.', 'This page is not schema eligible.', '本页不能声称编辑已批准。', '本页不能声称已进入站点地图。', '本页不能声称已被搜索收录。'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
