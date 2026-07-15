@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SEO;
 
+use App\Models\ContentPage;
 use App\Services\BigFive\AuthorityV2\ReviewPromotion\BigFiveReviewPromotionPreflight;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -85,6 +86,45 @@ final class BigFiveAuthorityV247Test extends TestCase
         $this->assertSame(231, $result['actions']['database_reads']);
         $this->assertSame(0, array_sum(collect($result['actions'])->except('database_reads')->all()));
         $this->assertSame($before, $this->tableCounts());
+    }
+
+    public function test_database_preflight_rejects_publicly_readable_primary_create_content_page_without_published_revision(): void
+    {
+        DB::table('content_pages')->insert([
+            'org_id' => 0,
+            'slug' => 'methodology',
+            'path' => '/en/personality/big-five/methodology',
+            'kind' => ContentPage::KIND_POLICY,
+            'page_type' => 'methodology',
+            'title' => 'Unexpected public primary-create page',
+            'template' => 'company',
+            'animation_profile' => 'none',
+            'locale' => 'en',
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => false,
+            'publish_allowed' => true,
+            'review_state' => 'approved',
+            'legal_review_required' => false,
+            'science_review_required' => false,
+            'claim_gate_status' => 'passed',
+            'forbidden_claims' => '[]',
+            'operator_approval_required' => false,
+            'schema_enabled' => false,
+            'published_revision_id' => null,
+            'published_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $result = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('new_identity_already_publicly_readable', $result['issue_codes']);
+        $observed = collect($result['observed_runtime'])->firstWhere('asset_id', 'technical_trust:en:/en/personality/big-five/methodology');
+        $this->assertIsArray($observed);
+        $this->assertTrue($observed['primary_publicly_readable']);
+        $this->assertNull($observed['published_revision_id']);
     }
 
     public function test_artifact_drift_fails_before_database_read_or_write(): void
@@ -173,6 +213,31 @@ final class BigFiveAuthorityV247Test extends TestCase
             $this->assertStringContainsString('cohort identity coverage mismatch', $exception->getMessage());
         } finally {
             File::delete($authorizationPath);
+        }
+    }
+
+    public function test_package_only_rejects_duplicate_review_cohort_ids_with_regenerated_artifact_locks(): void
+    {
+        $review = $this->readJson(self::REVIEW);
+        $review['cohorts'][1]['cohort_id'] = $review['cohorts'][0]['cohort_id'];
+        [$reviewPath, $reviewSha] = $this->writeTemporaryJson('pr47-review-duplicate-cohort.json', $review);
+
+        $rollback = $this->readJson(self::ROLLBACK);
+        $rollback['review_manifest_sha256'] = $reviewSha;
+        [$rollbackPath, $rollbackSha] = $this->writeTemporaryJson('pr47-rollback-duplicate-review-cohort.json', $rollback);
+
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['review_manifest_sha256'] = $reviewSha;
+        $authorization['rollback_plan_sha256'] = $rollbackSha;
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-duplicate-review-cohort.json', $authorization);
+
+        try {
+            $this->preflight()->packageOnly($reviewPath, $authorizationPath, $rollbackPath);
+            $this->fail('Expected duplicate review cohort ids to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('Review manifest cohort contract mismatch', $exception->getMessage());
+        } finally {
+            File::delete([$reviewPath, $rollbackPath, $authorizationPath]);
         }
     }
 

@@ -43,6 +43,8 @@ final class BigFiveReviewPromotionPreflight
 
     public const EXISTING_REVISION_COUNT = 125;
 
+    public const COHORT_COUNT = 16;
+
     public function __construct(private readonly BigFiveAuthorityV2DraftImportWriter $packageWriter) {}
 
     /** @return array<string,mixed> */
@@ -116,6 +118,7 @@ final class BigFiveReviewPromotionPreflight
             'published_revision_id' => $row['observed_runtime']['published_revision_id'],
             'public_runtime_baseline_sha256' => $row['observed_runtime']['public_runtime_baseline_sha256'],
             'revision_authority_matches' => $row['observed_runtime']['revision_authority_matches'],
+            'primary_publicly_readable' => $row['observed_runtime']['primary_publicly_readable'],
         ], $assessments);
         $preflightFingerprint = $this->fingerprint([
             'review_manifest_sha256' => $artifacts['review_sha256'],
@@ -270,12 +273,14 @@ final class BigFiveReviewPromotionPreflight
             'public_runtime_baseline_sha256' => null,
             'revision_authority_matches' => false,
             'public_reader_selects_working_revision' => false,
+            'primary_publicly_readable' => false,
         ];
         if (! $record instanceof Model) {
             $issues[] = 'identity_missing';
         } else {
             $working = $record->getAttribute('working_revision_id');
             $published = $record->getAttribute('published_revision_id');
+            $primaryPubliclyReadable = $record instanceof ContentPage && $record->passesPublicReadinessGate();
             $observed = [
                 'primary_id' => (int) $record->getKey(),
                 'working_revision_id' => $working === null ? null : (int) $working,
@@ -285,6 +290,7 @@ final class BigFiveReviewPromotionPreflight
                     ? $this->revisionAuthorityMatches($record, $row)
                     : true,
                 'public_reader_selects_working_revision' => $working !== null && $published !== null && (int) $working === (int) $published,
+                'primary_publicly_readable' => $primaryPubliclyReadable,
             ];
             $databaseReads += $row['action_contract']['revision_create'] ? 1 : 0;
             if ($row['action_contract']['revision_create'] && $working === null) {
@@ -298,6 +304,9 @@ final class BigFiveReviewPromotionPreflight
             }
             if ($row['action_contract']['primary_create'] && ! $row['action_contract']['product_shell_preserved'] && $published !== null) {
                 $issues[] = 'new_identity_already_published';
+            }
+            if ($row['action_contract']['primary_create'] && $primaryPubliclyReadable) {
+                $issues[] = 'new_identity_already_publicly_readable';
             }
             if ($observed['public_reader_selects_working_revision']) {
                 $issues[] = 'public_reader_selects_working_revision';
@@ -425,7 +434,8 @@ final class BigFiveReviewPromotionPreflight
             || ($review['counts']['existing_revision'] ?? null) !== self::EXISTING_REVISION_COUNT
             || ($review['counts']['revision_create'] ?? null) !== self::REVISION_COUNT
             || ($review['counts']['product_shell_preserved'] ?? null) !== self::PRODUCT_SHELL_COUNT
-            || count($review['rows'] ?? []) !== self::ASSET_COUNT) {
+            || count($review['rows'] ?? []) !== self::ASSET_COUNT
+            || count($review['cohorts'] ?? []) !== self::COHORT_COUNT) {
             throw new RuntimeException('Review manifest identity/count contract mismatch.');
         }
         if (($rollback['schema_version'] ?? null) !== 'big5-authority-v2-promotion-rollback-plan.v1'
@@ -439,7 +449,6 @@ final class BigFiveReviewPromotionPreflight
             || ($authorization['rollback_plan_sha256'] ?? null) !== $rollbackSha) {
             throw new RuntimeException('Authorization packet artifact locks mismatch.');
         }
-        $this->assertAuthorizationCohortIdentityContract($authorization, $review);
         if ($requirePendingAuthorization) {
             $this->assertPendingReviewAndRollback($review, $rollback);
             $this->assertPendingAuthorizationPacket($authorization, $review);
@@ -511,9 +520,14 @@ final class BigFiveReviewPromotionPreflight
         }
         $cohortAssets = [];
         $cohortByAsset = [];
+        $cohortIds = [];
         foreach ($review['cohorts'] ?? [] as $cohort) {
             $ids = $cohort['asset_ids'] ?? [];
-            if (! is_array($ids)
+            $cohortId = (string) ($cohort['cohort_id'] ?? '');
+            if ($cohortId === ''
+                || preg_match('/^[a-z0-9_]+$/', $cohortId) !== 1
+                || isset($cohortIds[$cohortId])
+                || ! is_array($ids)
                 || count($ids) !== ($cohort['asset_count'] ?? -1)
                 || count($ids) < 1
                 || count($ids) > 25
@@ -521,9 +535,10 @@ final class BigFiveReviewPromotionPreflight
                 || ! hash_equals((string) ($cohort['cohort_sha256'] ?? ''), hash('sha256', json_encode($ids, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)))) {
                 throw new RuntimeException('Review manifest cohort contract mismatch.');
             }
+            $cohortIds[$cohortId] = true;
             $cohortAssets = [...$cohortAssets, ...$ids];
             foreach ($ids as $assetId) {
-                $cohortByAsset[$assetId] = $cohort['cohort_id'];
+                $cohortByAsset[$assetId] = $cohortId;
             }
         }
         if (count($cohortAssets) !== self::REVISION_COUNT || count(array_unique($cohortAssets)) !== self::REVISION_COUNT) {
@@ -535,6 +550,7 @@ final class BigFiveReviewPromotionPreflight
                 throw new RuntimeException('Review manifest cohort membership mismatch: '.$assetId.'.');
             }
         }
+        $this->assertAuthorizationCohortIdentityContract($authorization, $review);
 
         return compact('review', 'authorization', 'rollback') + [
             'review_sha256' => $reviewSha,
