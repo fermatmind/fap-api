@@ -165,6 +165,48 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
         $this->assertFalse($result['ok']);
         $this->assertContains('geo_answerability_unverified', collect($result['issues'])->pluck('code')->all());
+
+        foreach ([
+            ['sections', 'answer'],
+            ['faqs', 'body'],
+        ] as [$collection, $field]) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0][$collection][0][$field] = str_repeat('This extra field is not part of the rendered editorial contract. ', 3);
+            $candidate['assets'][0]['answerability']['question_answers'][0]['visible_path'] = "{$collection}.0.{$field}";
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok']);
+            $this->assertContains('geo_answerability_unverified', collect($result['issues'])->pluck('code')->all());
+        }
+    }
+
+    public function test_zh_cn_assets_require_substantive_chinese_visible_text(): void
+    {
+        $candidate = $this->candidate();
+        $index = $this->localePairIndexes($candidate, 'hub:enneagram')['zh-CN'];
+        $asset = &$candidate['assets'][$index];
+        $asset['title'] = 'English-only Enneagram hub';
+        $asset['answer_first'] = str_repeat('This English-only answer does not provide an independently authored Chinese draft. ', 3);
+        foreach ($asset['sections'] as $sectionIndex => &$section) {
+            $section['heading'] = "English section {$sectionIndex}";
+            $section['body'] = str_repeat("This English-only section {$sectionIndex} contains no Chinese editorial content for the Chinese route. ", 3);
+        }
+        unset($section);
+        foreach ($asset['faqs'] as $faqIndex => &$faq) {
+            $faq['question'] = "What is English-only FAQ {$faqIndex}?";
+            $faq['answer'] = str_repeat("This English-only FAQ answer {$faqIndex} contains no Chinese editorial content. ", 3);
+        }
+        unset($faq);
+        foreach (['context', 'observable_signal', 'page_specific_signal', 'alternative_explanation', 'reflection_prompt'] as $field) {
+            $asset['observation_exercise'][$field] = "This English-only {$field} exercise field contains no Chinese editorial content for this route.";
+        }
+        unset($asset);
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('locale_not_independently_authored', collect($result['issues'])->pluck('code')->all());
     }
 
     public function test_sections_require_substantive_visible_heading_and_body_text(): void

@@ -5,12 +5,12 @@
 The aggregate candidate must contain exactly 116 locale assets: 2 hub pages, 6 center pages, 18 core-type pages, 36 wing pages, and 54 instinctual-subtype pages. The report always emits exactly 116 QA rows keyed by `locale|identity_key`. Each row records the following ten gates:
 
 1. schema and frozen-target coverage;
-2. independently authored EN and zh-CN content with non-identical outlines;
+2. independently authored EN and zh-CN content with non-identical outlines; zh-CN title, answer-first, sections, FAQs, and exercise fields must contain at least 80 Han characters and a 25% Han share of letters in aggregate;
 3. page-specific information gain;
 4. locale-calibrated sentence, paragraph, and type-number-substitution duplicate/template risk (EN 80/50 characters; zh-CN 30/24);
 5. page-specific FAQ depth and non-repeated answers;
 6. specific observable exercises rather than a generic seven-day prompt;
-7. visible GEO answerability, with every declared question mapped through `question_answers` to a substantive `answer_first`, section body, or FAQ answer;
+7. visible GEO answerability, with every declared question mapped through `question_answers` only to a substantive `answer_first`, `sections.N.body`, or `faqs.N.answer` field;
 8. visible evidence and limitations;
 9. truthful pending manual-review and closed release state;
 10. source-ledger claim safety, including unsupported science, predictive outcome, and competitor-language blocks.

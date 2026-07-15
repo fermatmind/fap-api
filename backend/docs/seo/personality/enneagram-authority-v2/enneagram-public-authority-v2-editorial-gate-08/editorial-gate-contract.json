@@ -48,6 +48,13 @@
     "en": { "paragraph_characters": 80, "sentence_characters": 50 },
     "zh-CN": { "paragraph_characters": 30, "sentence_characters": 24 }
   },
+  "locale_script_contract": {
+    "zh-CN": {
+      "rendered_fields": ["title", "answer_first", "sections", "faqs", "observation_exercise"],
+      "minimum_han_characters": 80,
+      "minimum_han_share_of_letters": 0.25
+    }
+  },
   "geo_answerability_contract": {
     "minimum_questions": 3,
     "mapping_field": "question_answers",
