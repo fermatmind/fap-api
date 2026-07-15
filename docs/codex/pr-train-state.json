@@ -42437,7 +42437,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": "e0258e45fb13fcac741943c46e5f60a90c7737b7",
+    "commit_sha": null,
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -42455,7 +42455,7 @@
     "id": "SECURITY-103-API-06",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/3118",
+    "pr_url": null,
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
@@ -52363,7 +52363,7 @@
       },
       {
         "at": "2026-05-27T18:08:22+08:00",
-    "status": "github_checks_pending",
+        "status": "local_checks_passed",
         "summary": "Composer audit, route list, migrate pretend, Pint, backend MBTI CI, diff check, JSON parse, and YAML parse passed locally."
       },
       {
@@ -55968,15 +55968,15 @@
           "status": "pass"
         },
         "local": {
-        "evidence": "Final executable input/output schemas parse and remain strict; focused BigFiveCareerBridgeContractTest passed 7 tests / 58 assertions. PHP syntax, touched-file Pint, route discovery (239 rows), Composer validate, Composer audit, JSON/YAML parse, git diff --check, and exact 8-path scope validation passed. After the contract was strengthened with exact source hashes, nested authority projections, recursive privacy/claim guards, and candidate/review denial, the guarded full bash backend/scripts/ci_verify_mbti.sh run completed every gate through the strict queue probe, including Big Five 1474 tests / 181299 assertions and personality full-32 71 tests / 5371 assertions. Its 13 generated compiled changes were restored after process exit.",
+          "evidence": "Final executable input/output schemas parse and remain strict; focused BigFiveCareerBridgeContractTest passed 8 tests / 59 assertions. PHP syntax, touched-file Pint, route discovery (235 routes), Composer validate, Composer audit, JSON parse, managed-Python YAML parse, git diff checks, and exact 8-path scope validation passed. The final-head guarded bash backend/scripts/ci_verify_mbti.sh run exited 0 after its strict queue probe, including Big Five 1475 tests / 181300 assertions and personality full-32 71 tests / 5371 assertions. The verifier EXIT cleanup restored all 13 regenerated BIG5_OCEAN compiled files, leaving the exact 8-path PR scope.",
           "status": "pass"
         },
-    "github": {
-      "evidence": "PR #3118 opened at implementation head e0258e45fb13fcac741943c46e5f60a90c7737b7; required GitHub checks are queued.",
-      "status": "pending"
-    }
+        "github": {
+          "evidence": "PR #3118 is open; required GitHub checks will rerun on the final same-scope follow-up head.",
+          "status": "pending"
+        }
       },
-      "commit_sha": null,
+      "commit_sha": "e0258e45fb13fcac741943c46e5f60a90c7737b7",
       "depends_on": [
         "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01"
       ],
@@ -55985,7 +55985,7 @@
       "local_cleanup_executed": false,
       "merged_at": null,
       "next_task": "BIG5-CAREER-BRIDGE-AUDITOR-02",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3118",
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_validation": {
@@ -55995,7 +55995,7 @@
         "post_merge_revalidated": null
       },
       "sidecars": [],
-      "status": "local_checks_passed",
+      "status": "github_checks_pending",
       "title": "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema",
       "transitions": [
         {
@@ -56021,6 +56021,12 @@
       "from": "local_checks_passed_final",
       "note": "Committed exact 8-path scope at e0258e45fb13fcac741943c46e5f60a90c7737b7, pushed the scoped branch, and opened the single required PR #3118. GitHub required checks are queued.",
       "to": "github_checks_pending"
+    },
+    {
+      "at": "2026-07-15T20:25:22Z",
+      "from": "github_checks_pending",
+      "note": "Corrected unrelated ledger/manifest fields accidentally changed by the first GitHub-state bookkeeping commit, then revalidated the exact final contract with focused 8/59, 235-route discovery, strict schema/PHP/Pint/Composer/JSON/YAML checks, exact 8-path scope, and guarded full CI through the strict queue probe with Big Five 1475/181300 and personality full-32 71/5371. Verifier EXIT cleanup restored all 13 regenerated BIG5_OCEAN compiled files; no production or public mutation occurred.",
+      "to": "github_checks_pending_final"
     }
       ]
     },
