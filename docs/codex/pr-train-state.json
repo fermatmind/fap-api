@@ -93339,7 +93339,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "review_fixes_local_verified",
+    "status": "ready_to_merge",
     "commit_sha": "22aeb5dc6e937115f6738bd2e1d72fe2894e1c3d",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
@@ -93357,8 +93357,8 @@
         "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites exited successfully; science/review completed-negative regressions pass 2 tests / 535 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Has/have/had not and corresponding contractions now preserve truthful review and validation limitations without masking contrastive positive claims. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "All nine required checks passed on ledger head 7a8f1cd2f before the same-head review added one valid in-scope P2 finding: has/have/had not and contractions were absent from explicit-negative grammar, rejecting truthful completed-state disclaimers. The locally verified substantive fix head 22aeb5dc6 covers those forms across science and review claims; fresh GitHub checks are required."
+        "status": "pass",
+        "evidence": "All nine required checks passed on ledger head 9e4b8306e. GitHub reports CLEAN/MERGEABLE, the Codex clean-review comment explicitly records Reviewed commit 9e4b8306e6 with no major issues, and GraphQL reports zero unresolved review threads."
       },
       "ci_fix": {
         "status": "pass",
@@ -93372,7 +93372,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93765,9 +93765,14 @@
           "at": "2026-07-15T21:25:46Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed and same-head review completed on ledger head 7a8f1cd2f, then one valid P2 was fixed: has/have/had not and contractions now preserve truthful completed-state human-review and clinical-validation limitations. The paired science/review regressions pass 2 / 535, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T21:32:25Z",
+          "status": "ready_to_merge",
+          "note": "All nine required checks passed on ledger head 9e4b8306e, GitHub is CLEAN/MERGEABLE, the same-head Codex clean-review comment reports no major issues for Reviewed commit 9e4b8306e6, and all review threads are resolved. All ninety-five valid P2 findings are fixed; final merge-base diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action. The ready-ledger head must complete one final CI and same-head review round before squash merge."
         }
       ],
-    "updated_at": "2026-07-15T21:25:46Z"
+    "updated_at": "2026-07-15T21:32:25Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
