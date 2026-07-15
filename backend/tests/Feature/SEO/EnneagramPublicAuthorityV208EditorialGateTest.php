@@ -373,6 +373,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             '个人离职预测',
             'Forecasts career and income outcomes',
             'Career outcome forecast',
+            'Predictive of career success',
+            'Predictive of relationship outcomes',
         ] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -389,6 +391,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         foreach ([
             'This page does not forecast career and income outcomes.',
             'This page is not a forecast of career and income outcomes.',
+            'This page is not predictive of career success.',
         ] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
