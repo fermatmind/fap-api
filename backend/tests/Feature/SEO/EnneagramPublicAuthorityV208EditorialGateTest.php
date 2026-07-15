@@ -508,7 +508,11 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Manual review completed',
             'Completed manual review',
             'Manual review has been completed',
+            'Manual review approved',
+            'Manual review passed',
+            'Manual review has passed',
             '人工审核通过',
+            '人工审核已通过',
             '已获发布批准',
         ] as $phrase) {
             $candidate = $this->candidate();
@@ -712,6 +716,20 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $typeTwo = $this->localePairIndexes($candidate, 'core_type:type-2')['en'];
         $candidate['assets'][$typeOne]['sections'][0]['body'] = 'Type One in this regression paragraph records which information drew attention first, which option was delayed, and which action another person could observe, then separates inferred motive from visible behavior and tests role, culture, fatigue, and current demands as alternative explanations.';
         $candidate['assets'][$typeTwo]['sections'][0]['body'] = 'Type Two in this regression paragraph records which information drew attention first, which option was delayed, and which action another person could observe, then separates inferred motive from visible behavior and tests role, culture, fatigue, and current demands as alternative explanations.';
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('type_number_substitution_template', collect($result['issues'])->pluck('code')->all());
+    }
+
+    public function test_english_plural_spelled_type_labels_are_normalized_for_template_detection(): void
+    {
+        $candidate = $this->candidate();
+        $typeOne = $this->localePairIndexes($candidate, 'core_type:type-1')['en'];
+        $typeTwo = $this->localePairIndexes($candidate, 'core_type:type-2')['en'];
+        $candidate['assets'][$typeOne]['sections'][0]['body'] = 'Ones in this regression paragraph record which information drew attention first, which option was delayed, and which action another person could observe, then separate inferred motive from visible behavior and test role, culture, fatigue, and current demands as alternative explanations.';
+        $candidate['assets'][$typeTwo]['sections'][0]['body'] = 'Twos in this regression paragraph record which information drew attention first, which option was delayed, and which action another person could observe, then separate inferred motive from visible behavior and test role, culture, fatigue, and current demands as alternative explanations.';
 
         $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
 

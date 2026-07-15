@@ -15,7 +15,7 @@ The aggregate candidate must contain exactly 116 locale assets: 2 hub pages, 6 c
 9. truthful pending manual-review and closed release state;
 10. source-ledger claim safety, including unsupported science, centers-as-biological/diagnostic-system claims, one-fixed-type or universal-nine-factor claims, predictive outcomes, guaranteed search/traffic/AI-citation outcomes, and competitor-language blocks.
 
-The required negative fixtures cover sentence/paragraph duplication, type-number substitution, identical EN/zh-CN outlines, repeated FAQ answers, a generic seven-day exercise, unsupported science claims, centers presented as biological or diagnostic systems, one fixed type per person or universal nine-factor recovery, career or relationship prediction, guaranteed search/traffic/AI-citation outcomes, model QA presented as human review, hidden evidence, and copied competitor language.
+The required negative fixtures cover sentence/paragraph duplication, numeric, singular-spelled, and plural-spelled type-label substitution, identical EN/zh-CN outlines, repeated FAQ answers, a generic seven-day exercise, unsupported science claims, centers presented as biological or diagnostic systems, one fixed type per person or universal nine-factor recovery, career or relationship prediction, guaranteed search/traffic/AI-citation outcomes, model QA or approval wording presented as completed human review, hidden evidence, and copied competitor language.
 
 Run after PR09–PR18 have assembled the aggregate candidate:
 
