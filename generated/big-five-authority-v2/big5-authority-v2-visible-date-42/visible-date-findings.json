@@ -1,0 +1,891 @@
+{
+  "schema_version": "big5-visible-date-findings.v1",
+  "source": {
+    "repo": "fap-web",
+    "artifact_path": "docs/seo/personality/big5-authority-v2-runtime-closeout-38-report-2026-07-15.json",
+    "artifact_sha256": "60ec72b708aa5876dbee90ec12fec6dade6387414ce845f2c5ef4e4795b4ac65",
+    "captured_at": "2026-07-15",
+    "selection": "assessment.visible_date == FAIL"
+  },
+  "counts": {
+    "finding_count": 82,
+    "pass_control_count": 45,
+    "unknown_withheld_count": 104
+  },
+  "page_family_distribution": [
+    {
+      "page_family": "domain",
+      "count": 5
+    },
+    {
+      "page_family": "facet",
+      "count": 30
+    },
+    {
+      "page_family": "facet_hub",
+      "count": 2
+    },
+    {
+      "page_family": "model_hub",
+      "count": 1
+    },
+    {
+      "page_family": "range",
+      "count": 40
+    },
+    {
+      "page_family": "test_landing",
+      "count": 2
+    },
+    {
+      "page_family": "topic_hub",
+      "count": 2
+    }
+  ],
+  "authority_surface_distribution": [
+    {
+      "authority_surface": "CMS landing_surfaces/page_blocks",
+      "count": 2
+    },
+    {
+      "authority_surface": "CMS personality_public_content_assets",
+      "count": 78
+    },
+    {
+      "authority_surface": "CMS topic_profiles",
+      "count": 2
+    }
+  ],
+  "locale_distribution": [
+    {
+      "locale": "en",
+      "count": 64
+    },
+    {
+      "locale": "zh-CN",
+      "count": 18
+    }
+  ],
+  "findings": [
+    {
+      "asset_id": "domain:en:/en/personality/big-five/agreeableness",
+      "route": "/en/personality/big-five/agreeableness",
+      "locale": "en",
+      "page_family": "domain",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "domain:en:/en/personality/big-five/conscientiousness",
+      "route": "/en/personality/big-five/conscientiousness",
+      "locale": "en",
+      "page_family": "domain",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "domain:en:/en/personality/big-five/extraversion",
+      "route": "/en/personality/big-five/extraversion",
+      "locale": "en",
+      "page_family": "domain",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "domain:en:/en/personality/big-five/neuroticism",
+      "route": "/en/personality/big-five/neuroticism",
+      "locale": "en",
+      "page_family": "domain",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "domain:en:/en/personality/big-five/openness",
+      "route": "/en/personality/big-five/openness",
+      "locale": "en",
+      "page_family": "domain",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/achievement-striving",
+      "route": "/en/personality/big-five/facets/achievement-striving",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/actions",
+      "route": "/en/personality/big-five/facets/actions",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/activity",
+      "route": "/en/personality/big-five/facets/activity",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/aesthetics",
+      "route": "/en/personality/big-five/facets/aesthetics",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/altruism",
+      "route": "/en/personality/big-five/facets/altruism",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/anger",
+      "route": "/en/personality/big-five/facets/anger",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/anxiety",
+      "route": "/en/personality/big-five/facets/anxiety",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/assertiveness",
+      "route": "/en/personality/big-five/facets/assertiveness",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/competence",
+      "route": "/en/personality/big-five/facets/competence",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/compliance",
+      "route": "/en/personality/big-five/facets/compliance",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/deliberation",
+      "route": "/en/personality/big-five/facets/deliberation",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/depression",
+      "route": "/en/personality/big-five/facets/depression",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/dutifulness",
+      "route": "/en/personality/big-five/facets/dutifulness",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/excitement-seeking",
+      "route": "/en/personality/big-five/facets/excitement-seeking",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/feelings",
+      "route": "/en/personality/big-five/facets/feelings",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/gregariousness",
+      "route": "/en/personality/big-five/facets/gregariousness",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/ideas",
+      "route": "/en/personality/big-five/facets/ideas",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/imagination",
+      "route": "/en/personality/big-five/facets/imagination",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/impulsiveness",
+      "route": "/en/personality/big-five/facets/impulsiveness",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/modesty",
+      "route": "/en/personality/big-five/facets/modesty",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/order",
+      "route": "/en/personality/big-five/facets/order",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/positive-emotions",
+      "route": "/en/personality/big-five/facets/positive-emotions",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/self-consciousness",
+      "route": "/en/personality/big-five/facets/self-consciousness",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/self-discipline",
+      "route": "/en/personality/big-five/facets/self-discipline",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/straightforwardness",
+      "route": "/en/personality/big-five/facets/straightforwardness",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/tender-mindedness",
+      "route": "/en/personality/big-five/facets/tender-mindedness",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/trust",
+      "route": "/en/personality/big-five/facets/trust",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/values",
+      "route": "/en/personality/big-five/facets/values",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/vulnerability",
+      "route": "/en/personality/big-five/facets/vulnerability",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet:en:/en/personality/big-five/facets/warmth",
+      "route": "/en/personality/big-five/facets/warmth",
+      "locale": "en",
+      "page_family": "facet",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet_hub:en:/en/personality/big-five/facets",
+      "route": "/en/personality/big-five/facets",
+      "locale": "en",
+      "page_family": "facet_hub",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "facet_hub:zh-CN:/zh/personality/big-five/facets",
+      "route": "/zh/personality/big-five/facets",
+      "locale": "zh-CN",
+      "page_family": "facet_hub",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "model_hub:en:/en/personality/big-five",
+      "route": "/en/personality/big-five",
+      "locale": "en",
+      "page_family": "model_hub",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/agreeableness-high",
+      "route": "/en/personality/big-five/agreeableness-high",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/agreeableness-low",
+      "route": "/en/personality/big-five/agreeableness-low",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/agreeableness-mid",
+      "route": "/en/personality/big-five/agreeableness-mid",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/conscientiousness-high",
+      "route": "/en/personality/big-five/conscientiousness-high",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/conscientiousness-low",
+      "route": "/en/personality/big-five/conscientiousness-low",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/conscientiousness-mid",
+      "route": "/en/personality/big-five/conscientiousness-mid",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/emotional-stability",
+      "route": "/en/personality/big-five/emotional-stability",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/extraversion-high",
+      "route": "/en/personality/big-five/extraversion-high",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/extraversion-low",
+      "route": "/en/personality/big-five/extraversion-low",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/extraversion-mid",
+      "route": "/en/personality/big-five/extraversion-mid",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/high-agreeableness",
+      "route": "/en/personality/big-five/high-agreeableness",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/high-conscientiousness",
+      "route": "/en/personality/big-five/high-conscientiousness",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/high-extraversion",
+      "route": "/en/personality/big-five/high-extraversion",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/high-neuroticism",
+      "route": "/en/personality/big-five/high-neuroticism",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/high-openness",
+      "route": "/en/personality/big-five/high-openness",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/low-agreeableness",
+      "route": "/en/personality/big-five/low-agreeableness",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/low-conscientiousness",
+      "route": "/en/personality/big-five/low-conscientiousness",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/low-extraversion",
+      "route": "/en/personality/big-five/low-extraversion",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/low-openness",
+      "route": "/en/personality/big-five/low-openness",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/neuroticism-high",
+      "route": "/en/personality/big-five/neuroticism-high",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/neuroticism-low",
+      "route": "/en/personality/big-five/neuroticism-low",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/neuroticism-mid",
+      "route": "/en/personality/big-five/neuroticism-mid",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/openness-high",
+      "route": "/en/personality/big-five/openness-high",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/openness-low",
+      "route": "/en/personality/big-five/openness-low",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/openness-mid",
+      "route": "/en/personality/big-five/openness-mid",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/agreeableness-high",
+      "route": "/zh/personality/big-five/agreeableness-high",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/agreeableness-low",
+      "route": "/zh/personality/big-five/agreeableness-low",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/agreeableness-mid",
+      "route": "/zh/personality/big-five/agreeableness-mid",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/conscientiousness-high",
+      "route": "/zh/personality/big-five/conscientiousness-high",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/conscientiousness-low",
+      "route": "/zh/personality/big-five/conscientiousness-low",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/conscientiousness-mid",
+      "route": "/zh/personality/big-five/conscientiousness-mid",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/extraversion-high",
+      "route": "/zh/personality/big-five/extraversion-high",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/extraversion-low",
+      "route": "/zh/personality/big-five/extraversion-low",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/extraversion-mid",
+      "route": "/zh/personality/big-five/extraversion-mid",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/neuroticism-high",
+      "route": "/zh/personality/big-five/neuroticism-high",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/neuroticism-low",
+      "route": "/zh/personality/big-five/neuroticism-low",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/neuroticism-mid",
+      "route": "/zh/personality/big-five/neuroticism-mid",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/openness-high",
+      "route": "/zh/personality/big-five/openness-high",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/openness-low",
+      "route": "/zh/personality/big-five/openness-low",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "range:zh-CN:/zh/personality/big-five/openness-mid",
+      "route": "/zh/personality/big-five/openness-mid",
+      "locale": "zh-CN",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "test_landing:en:/en/tests/big-five-personality-test-ocean-model",
+      "route": "/en/tests/big-five-personality-test-ocean-model",
+      "locale": "en",
+      "page_family": "test_landing",
+      "authority_surface": "CMS landing_surfaces/page_blocks",
+      "expected_runtime_class": "PUBLIC_PRODUCT_SHELL_PRESERVED",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "test_landing:zh-CN:/zh/tests/big-five-personality-test-ocean-model",
+      "route": "/zh/tests/big-five-personality-test-ocean-model",
+      "locale": "zh-CN",
+      "page_family": "test_landing",
+      "authority_surface": "CMS landing_surfaces/page_blocks",
+      "expected_runtime_class": "PUBLIC_PRODUCT_SHELL_PRESERVED",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "topic_hub:en:/en/topics/big-five",
+      "route": "/en/topics/big-five",
+      "locale": "en",
+      "page_family": "topic_hub",
+      "authority_surface": "CMS topic_profiles",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    },
+    {
+      "asset_id": "topic_hub:zh-CN:/zh/topics/big-five",
+      "route": "/zh/topics/big-five",
+      "locale": "zh-CN",
+      "page_family": "topic_hub",
+      "authority_surface": "CMS topic_profiles",
+      "expected_runtime_class": "EXISTING_PUBLIC_PRIMARY_WITH_ISOLATED_REVISION",
+      "observed_visible_date": false,
+      "assessment": "FAIL"
+    }
+  ]
+}
