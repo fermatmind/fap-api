@@ -55972,7 +55972,7 @@
           "status": "pass"
         },
         "github": {
-          "evidence": "PR #3118 is open. Codex reviews reported eleven P2 threads, including train-state association, outcome-prediction/deterministic-claim locks, canonical locale/asset identity, private links and private score data in reader text, diagnostic claims, and asset-id traversal. All findings are fixed with regression coverage; commit_sha remains pending_remote_pr_head to avoid self-referential bookkeeping churn. Required checks and an exact-head no-new-findings review must rerun after push.",
+          "evidence": "PR #3118 is open. Codex reviews reported eleven distinct P2 findings across twelve threads (one duplicate), including train-state association, outcome-prediction/deterministic-claim locks, canonical locale/asset identity, private links and private score data in reader text, diagnostic claims, and asset-id traversal. All findings are fixed with regression coverage; commit_sha remains pending_remote_pr_head to avoid self-referential bookkeeping churn. Required checks and an exact-head no-new-findings review must rerun after push.",
           "status": "pending"
         }
       },
