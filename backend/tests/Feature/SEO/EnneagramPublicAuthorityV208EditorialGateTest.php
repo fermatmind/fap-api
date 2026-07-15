@@ -236,6 +236,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Financial outcome predictor',
             '预测你的薪资结果',
             '预测您的升学结果',
+            '职业成功预测',
+            '个人离职预测',
         ] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -357,10 +359,12 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Personality diagnosis',
             'Treats your anxiety',
             'Hiring fit',
+            'Hiring suitability',
             'Job suitability guarantee',
             '诊断你的性格',
             '治愈你的焦虑',
             '岗位适配保证',
+            '岗位胜任力',
         ] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -421,6 +425,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'This page is not a job suitability guarantee.',
             '本页不是医疗诊断。',
             '本页不是岗位适配保证。',
+            'This page is not a hiring suitability assessment.',
+            '本页不是岗位胜任力测评。',
         ] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
