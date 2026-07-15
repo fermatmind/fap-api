@@ -56124,11 +56124,11 @@
           "status": "pass"
         },
         "github": {
-          "evidence": "PR not opened yet; local manifest checks must pass first.",
+          "evidence": "PR #3121 is open from implementation commit 61fcc44b6. Required checks and review-thread inspection are pending on the final bookkeeping head.",
           "status": "pending"
         }
       },
-      "commit_sha": null,
+      "commit_sha": "pending_remote_pr_head",
       "depends_on": [
         "BIG5-CAREER-BRIDGE-SCHEMA-01"
       ],
@@ -56137,7 +56137,7 @@
       "local_cleanup_executed": false,
       "merged_at": null,
       "next_task": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3121",
       "remote_branch_deleted": false,
       "repo": "fap-api",
       "scope_validation": {
@@ -56147,7 +56147,7 @@
         "post_merge_revalidated": null
       },
       "sidecars": [],
-      "status": "local_checks_passed",
+      "status": "github_checks_pending",
       "title": "BIG5-CAREER-BRIDGE-AUDITOR-02: feat(career): add read-only Big Five career bridge auditor",
       "transitions": [
         {
@@ -56167,6 +56167,12 @@
           "from": "implementing_after_baseline_repair",
           "note": "Local manifest validation passed: focused bridge/auditor/CLI 19/148, runtime-freeze 2/4, 239-line route discovery, touched Pint, Composer validate/audit, JSON/YAML, exact 10-path scope, and guarded full CI through strict queue with Big Five 1487/181390 and full32 71/5371. No production or public mutation occurred.",
           "to": "local_checks_passed"
+        },
+        {
+          "at": "2026-07-15T22:36:30Z",
+          "from": "local_checks_passed",
+          "note": "Committed exact 10-path auditor scope at 61fcc44b6, pushed the scoped branch, and opened the single required PR #3121. commit_sha uses pending_remote_pr_head to avoid self-referential bookkeeping churn; GitHub checks are pending.",
+          "to": "github_checks_pending"
         }
       ]
     },

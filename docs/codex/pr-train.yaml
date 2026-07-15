@@ -21431,7 +21431,7 @@ prs:
     base: main
     title: "BIG5-CAREER-BRIDGE-AUDITOR-02: feat(career): add read-only Big Five career bridge auditor"
     train_scope: big5_career_bridge_auditor
-    status: local_checks_passed
+    status: github_checks_pending
     scope:
       - Add a read-only CLI that audits bridge candidates against explicit Big Five published/public and Career runtime publish projections.
       - Emit deterministic JSON or Markdown counts, blocker breakdown, safe source provenance, and claim/private-data boundaries.
