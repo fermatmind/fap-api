@@ -3865,7 +3865,7 @@
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "sidecar_issues": [],
-    "status": "ready_to_merge",
+    "status": "review_fixes_local_verified",
     "title": "ARTICLE-H1-04: fix(ops): constrain article editor heading controls",
     "train_scope": "article_h1_single_dom",
     "transitions": [
@@ -92922,8 +92922,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "52a4334aa01da81b742ddc128909167463be2e72",
+    "status": "merged",
+    "commit_sha": "b519c7f96ad57750312a8f5181dc6ec5ed0605d8",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3107",
     "checks": {
       "dependency": {
@@ -92953,18 +92953,22 @@
       "ci_fix": {
         "status": "pass",
         "evidence": "The classifier now permits only the exact three PR05 non-runtime files plus the two prior integrity files and still blocks an unknown Enneagram runtime publisher and Big Five runtime service. The focused classifier passes 1 / 2, actual branch-diff freeze passes 1 / 3, workspace contracts pass 12 / 152, and the changed test passes syntax/Pint."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "PR #3107 merged as b519c7f96ad57750312a8f5181dc6ec5ed0605d8 at 2026-07-15T07:11:22Z; origin/main contains the squash commit, remote and local branches are deleted, both worktrees are clean, and merged-main workspace 12 / 152 plus classifier 1 / 2 and branch-freeze 1 / 3 all pass."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T07:11:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -93016,9 +93020,14 @@
         "at": "2026-07-15T07:04:39Z",
         "status": "ready_to_merge",
         "note": "All nine required checks passed on d875ae108e35d5027e6a8621a37f9443f5698591. GitHub is CLEAN/MERGEABLE, the PR remains exactly eight allowlisted paths, and there are zero review threads or review blockers."
+      },
+      {
+        "at": "2026-07-15T07:13:36Z",
+        "status": "merged",
+        "note": "PR #3107 merged as b519c7f96ad57750312a8f5181dc6ec5ed0605d8 after all nine final checks passed on ready-to-merge head a144a66eab54afcd5e2eadcd6417c25d72095114. origin/main containment, remote/local cleanup, clean worktrees, and post-merge focused regressions were verified before PR06 started."
       }
     ],
-    "updated_at": "2026-07-15T07:04:39Z"
+    "updated_at": "2026-07-15T07:13:36Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06",
@@ -93029,19 +93038,31 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05"
     ],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "8868e8f3e8ca36372f1c0f27092be775a8f648d2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3109",
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR05 merged as b519c7f96ad57750312a8f5181dc6ec5ed0605d8; origin/main containment, nine green checks, branch cleanup, and post-merge workspace/classifier regressions were verified."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "After rebasing onto latest origin/main 65a1d3b78, exact manifest replay passed: PHP syntax 4 files; promoter feature suite 10 tests / 70 assertions; exact runtime-freeze classifier 1 / 2; actual branch-diff freeze 1 / 3; per-file Pint 4 files; Composer strict, YAML, JSON, git diff check, and exact six-path allowlist. Initial fixture-only boolean/raw snapshot mismatches were corrected to match the PR05 shared writer's persisted runtime fingerprint and casted snapshot contract before final replay."
+      },
+      "review_fixes": {
+        "status": "pass",
+        "evidence": "All six automated P2 threads were validated and fixed in scope: --promote requires --json so the signed rollback token is emitted; successful promote/rollback results report production_execution from the actual runtime environment; both operations explicitly advance updated_at while rollback verifies restored content/pointer independently of freshness; rollback locks and validates the prior published revision lineage; large signed tokens can be supplied through a mutually exclusive file path instead of argv; and the normalized working snapshot SHA-256 is bound into the confirmed preflight fingerprint. Focused promoter tests pass 14 / 94, changed files pass syntax/Pint, exact classifier passes 1 / 2, actual branch-diff freeze passes 1 / 3, and YAML/JSON/diff checks pass."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All nine required checks passed on final review-fix head 8868e8f3e8ca36372f1c0f27092be775a8f648d2: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub reported CLEAN/MERGEABLE and all six review threads were resolved."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
-      "github_checks_green": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93059,9 +93080,59 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-15T07:13:36Z",
+        "status": "in_progress",
+        "note": "Verified PR05 merged and fully revalidated, then created the exact PR06 branch from clean latest origin/main. This scope implements and tests pointer-safe promotion/rollback only; no production promotion, CMS write, public release, or discoverability mutation is authorized."
+      },
+      {
+        "at": "2026-07-15T07:28:15Z",
+        "status": "local_checks_passed",
+        "note": "Rebased onto concurrently advanced origin/main, retained both exact runtime-freeze registrations, and replayed every manifest check successfully. The branch remains exactly six allowlisted paths; no production command, CMS/database mutation, public release, indexability, sitemap, or llms change was executed."
+      },
+      {
+        "at": "2026-07-15T07:30:20Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact six-path branch and opened the single authorized fap-api PR #3109 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reported the PR MERGEABLE with initial checks in progress and no reviews."
+      },
+      {
+        "at": "2026-07-15T07:38:44Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on b8615c5e8, then two valid automated P2 threads were fixed within PR06: require JSON promotion output to retain the rollback token and report production writes truthfully. Focused validation is green; no production command or public mutation was executed."
+      },
+      {
+        "at": "2026-07-15T07:48:03Z",
+        "status": "review_fixes_local_verified",
+        "note": "The second nine-check round passed on ba492daf9, then a third valid P2 was fixed: CAS promotion and rollback now advance public freshness timestamps while rollback restores and verifies the prior content/pointer state. Promoter regression is green at 11 / 79; no production command was executed."
+      },
+      {
+        "at": "2026-07-15T07:55:47Z",
+        "status": "review_fixes_local_verified",
+        "note": "The third nine-check round passed on a0c9a7d60, then a fourth valid P2 was fixed: rollback now locks and validates the previous published revision lineage before restoring its pointer. Promoter regression is green at 12 / 84 with drift causing a zero-additional-write failure; no production command was executed."
+      },
+      {
+        "at": "2026-07-15T08:02:33Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on 69130cd50, GitHub is CLEAN/MERGEABLE, all four automated review threads are resolved, and the PR remains exactly six allowlisted paths. Ready for policy-compliant squash auto-merge after the ledger head revalidates."
+      },
+      {
+        "at": "2026-07-15T08:10:10Z",
+        "status": "review_fixes_local_verified",
+        "note": "The ledger head passed all nine checks, then a fifth valid P2 was fixed: rollback now accepts a mutually exclusive token file so content-rich 116-row signed tokens do not hit process argv limits. The real file-path rollback regression passes within the 13 / 89 promoter suite; latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T08:17:50Z",
+        "status": "review_fixes_local_verified",
+        "note": "The fifth review-fix head passed all nine checks, then a sixth valid P2 was fixed: confirmed preflight fingerprints now bind the normalized approved snapshot SHA-256. Raw snapshot drift after preflight is rejected transactionally with zero promotion writes; promoter regression passes 14 / 94."
+      },
+      {
+        "at": "2026-07-15T08:24:36Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on final code head 8868e8f3e, GitHub is CLEAN/MERGEABLE, all six automated review threads are resolved, and scope remains exactly six allowlisted paths. Ready for squash merge after this ledger-only head revalidates."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-15T08:24:36Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07",

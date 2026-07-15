@@ -211,8 +211,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_only_registered_enneagram_public_authority_v2_non_runtime_files(): void
     {
         $allowed = [
+            'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionPromoter.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionWorkspace.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2IntegrityGate.php',
+            'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV206RevisionPromoter.php',
             'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV205RevisionWorkspaceWriter.php',
             'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV2IntegrityGate.php',
             'backend/app/Services/Personality/AuthorityV2/PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter.php',
@@ -7892,8 +7894,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isEnneagramPublicAuthorityV2FrozenNonRuntimeFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionPromoter.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionWorkspace.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2IntegrityGate.php',
+            'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV206RevisionPromoter.php',
             'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV205RevisionWorkspaceWriter.php',
             'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV2IntegrityGate.php',
             'backend/app/Services/Personality/AuthorityV2/PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter.php',
