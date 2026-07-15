@@ -55976,7 +55976,7 @@
           "status": "pending"
         }
       },
-      "commit_sha": "8a1580aaa52851f5ec43719cdc69cfb6e8d2b0fe",
+      "commit_sha": "pending_remote_pr_head",
       "depends_on": [
         "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01"
       ],
@@ -56061,7 +56061,7 @@
         {
           "at": "2026-07-15T21:08:04Z",
           "from": "github_checks_pending_authority_diagnostic_fix",
-          "note": "Locked commit_sha to functional head 8a1580aaa52851f5ec43719cdc69cfb6e8d2b0fe; later commits are PR-train bookkeeping only. Exact-head GitHub checks and Codex review remain pending.",
+          "note": "Recorded functional head 8a1580aaa52851f5ec43719cdc69cfb6e8d2b0fe in GitHub evidence and set commit_sha to pending_remote_pr_head so later PR-train bookkeeping does not create self-referential hash churn. Exact-head GitHub checks and Codex review remain pending.",
           "to": "github_checks_pending_final_bookkeeping"
         }
       ]
