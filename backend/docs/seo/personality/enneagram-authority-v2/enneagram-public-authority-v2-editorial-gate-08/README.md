@@ -13,9 +13,9 @@ The aggregate candidate must contain exactly 116 locale assets: 2 hub pages, 6 c
 7. visible GEO answerability, with every declared question mapped through `question_answers` only to a substantive `answer_first`, `sections.N.body`, or `faqs.N.answer` field;
 8. visible evidence and limitations;
 9. truthful pending manual-review and closed release state;
-10. source-ledger claim safety, including unsupported science, predictive outcome, and competitor-language blocks.
+10. source-ledger claim safety, including unsupported science, centers-as-biological/diagnostic-system claims, predictive outcomes, guaranteed search/traffic/AI-citation outcomes, and competitor-language blocks.
 
-The required negative fixtures cover sentence/paragraph duplication, type-number substitution, identical EN/zh-CN outlines, repeated FAQ answers, a generic seven-day exercise, unsupported science claims, career or relationship prediction, model QA presented as human review, hidden evidence, and copied competitor language.
+The required negative fixtures cover sentence/paragraph duplication, type-number substitution, identical EN/zh-CN outlines, repeated FAQ answers, a generic seven-day exercise, unsupported science claims, centers presented as biological or diagnostic systems, career or relationship prediction, guaranteed search/traffic/AI-citation outcomes, model QA presented as human review, hidden evidence, and copied competitor language.
 
 Run after PR09–PR18 have assembled the aggregate candidate:
 

@@ -329,6 +329,10 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const FERMATMIND_PSYCHOMETRICS_PATTERN = '/(?:(?:fermatmind|费马测试|费马测评)[^.!?。！？\n]{0,80}(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)|(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)[^.!?。！？\n]{0,80}(?:fermatmind|费马测试|费马测评))/iu';
 
+    private const UNSUPPORTED_CENTER_SYSTEM_PATTERN = '/(?:(?:biological|diagnostic|neurological|neuroscience)[\s-]+(?:systems?|categories?|capacities?)|(?:生物|诊断|神经|神经科学)(?:系统|类别|能力))/iu';
+
+    private const UNSUPPORTED_DISCOVERABILITY_PATTERN = '/(?:(?:guarantee(?:d|s|ing)?|ensure[sd]?|deliver(?:s|ed)?|boost(?:s|ed)?|increase[sd]?|improve[sd]?)[^.!?。！？\n]{0,60}(?:search[\s-]+rankings?|traffic(?:[\s-]+lift)?|ai[\s-]+citations?|citation[\s-]+outcomes?)|(?:search[\s-]+rankings?|traffic[\s-]+lift|ai[\s-]+citations?|citation[\s-]+outcomes?)[^.!?。！？\n]{0,30}(?:guarantee(?:d)?|assured)|(?:保证|确保|提升|增加)[^。！？\n]{0,30}(?:搜索排名|流量(?:提升)?|AI引用|人工智能引用))/iu';
+
     private const PREDICTION_PATTERN = '/(?:predict(?:s|ed|ive|or)?(?:\s+(?:your|a|the))?[\s-]+(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?|(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?[\s-]+predict(?:or|ion|ive)|forecast(?:s|ed|ing)?(?:\s+of)?(?:\s+(?:your|a|the))?[\s-]+(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?|(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?[\s-]+forecast(?:s|ed|ing)?|guaranteed?\s+(?:career|job|relationship|income|hiring|salary|turnover|health|admission|legal|financial|outcome)|perfect\s+(?:career|job|partner)|预测(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果|健康|升学|法律|金融|薪资|离职|流失)(?:成功|结果|适配)?|(?:个人)?(?:职业成功|职业|收入|关系|录用|结果|健康|升学|法律|金融|薪资|离职|流失)(?:成功|结果|适配)?预测|保证(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果|健康|升学|法律|金融|薪资|离职|流失)(?:成功|结果)?|最适合的职业|完美伴侣)/iu';
 
     private const DIAGNOSIS_SCREENING_PATTERN = '/(?:medical\s+diagnos(?:is|e|tic)|clinical\s+diagnos(?:is|e|tic)|diagnos(?:e|es|ed|ing)\s+(?:you|your)|(?:personality|type|ability|health)\s+diagnos(?:is|tic)|diagnostic[\s-]+(?:tool|assessment|test|screen(?:ing)?)|(?:treats?|cures?)\s+(?:your\s+)?(?:condition|disorder|anxiety|depression|health|personality)|hiring[\s-]+(?:fit|suitability|screen(?:ing)?)|job[\s-]+suitability(?:[\s-]+guarantee)?|(?:employment|admission)[\s-]+screening|医疗诊断|临床诊断|诊断(?:你(?:的)?|您(?:的)?|其)(?:性格|人格|类型|能力|健康|结果)?|(?:性格|人格|类型|能力|健康)诊断|(?:治疗|治愈)(?:你(?:的)?|您(?:的)?|其)?(?:疾病|焦虑|抑郁|健康|人格|性格)|招聘适配|录用适配|岗位适配保证|(?:岗位|招聘|录用)胜任力)/iu';
@@ -801,6 +805,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         foreach ([
             [self::UNSUPPORTED_CLAIM_PATTERN, 'unsupported_science_claim'],
             [self::FERMATMIND_PSYCHOMETRICS_PATTERN, 'unsupported_fermatmind_psychometrics_claim'],
+            [self::UNSUPPORTED_CENTER_SYSTEM_PATTERN, 'unsupported_center_system_claim'],
+            [self::UNSUPPORTED_DISCOVERABILITY_PATTERN, 'unsupported_discoverability_claim'],
             [self::PREDICTION_PATTERN, 'career_or_relationship_prediction'],
             [self::DETERMINISTIC_RECOMMENDATION_PATTERN, 'deterministic_recommendation_claim'],
             [self::HUMAN_REVIEW_RELEASE_PATTERN, 'visible_review_or_release_claim'],
@@ -889,6 +895,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         return $this->withoutExplicitlyNegatedMatches($text, [
             self::UNSUPPORTED_CLAIM_PATTERN,
             self::FERMATMIND_PSYCHOMETRICS_PATTERN,
+            self::UNSUPPORTED_CENTER_SYSTEM_PATTERN,
+            self::UNSUPPORTED_DISCOVERABILITY_PATTERN,
             self::PREDICTION_PATTERN,
             self::DETERMINISTIC_RECOMMENDATION_PATTERN,
             self::HUMAN_REVIEW_RELEASE_PATTERN,

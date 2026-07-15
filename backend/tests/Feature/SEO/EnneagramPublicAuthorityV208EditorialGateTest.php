@@ -387,6 +387,39 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
     }
 
+    public function test_source_ledger_center_and_discoverability_assumptions_fail_closed(): void
+    {
+        foreach ([
+            ['Gut, heart, and head are biological systems.', 'unsupported_center_system_claim'],
+            ['The centers are neuroscience categories.', 'unsupported_center_system_claim'],
+            ['中心是生物系统。', 'unsupported_center_system_claim'],
+            ['Guaranteed search ranking and AI citation outcome.', 'unsupported_discoverability_claim'],
+            ['This guide ensures traffic lift.', 'unsupported_discoverability_claim'],
+            ['保证搜索排名和AI引用。', 'unsupported_discoverability_claim'],
+        ] as [$phrase, $expectedCode]) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains($expectedCode, collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        foreach ([
+            'Centers are not biological systems.',
+            'This page does not guarantee search ranking or AI citation outcomes.',
+            '本页不能保证搜索排名或AI引用。',
+        ] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
+        }
+    }
+
     public function test_explicitly_negated_boundary_claims_remain_allowed(): void
     {
         foreach ([
@@ -694,7 +727,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
         $this->assertSame(116, $contract['qa_row_contract']['expected_count']);
         $this->assertCount(10, $contract['qa_row_contract']['gates']);
-        $this->assertCount(10, $contract['required_negative_fixtures']);
+        $this->assertCount(12, $contract['required_negative_fixtures']);
         $this->assertSame(30, $contract['duplicate_thresholds']['zh-CN']['paragraph_characters']);
         $this->assertSame('question_answers', $contract['geo_answerability_contract']['mapping_field']);
         $this->assertSame('ready_for_human_review', $contract['automated_pass_means']);
