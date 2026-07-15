@@ -220,6 +220,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_big_five_authority_v2_visible_date_projector(): void
+    {
+        $allowed = [
+            'backend/app/Services/BigFive/AuthorityV2/VisibleDate/BigFiveVisibleDateProjector.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV2/VisibleDate/UnexpectedRuntimeWriter.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
     {
         $allowed = [
@@ -5892,6 +5905,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveAuthorityV2VisibleDateFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsPreviewRenderQaFile($file)) {
                 continue;
             }
@@ -7689,6 +7706,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PersonalityBigFiveAuthorityV241MediaIntake.php',
             'backend/app/Services/BigFive/AuthorityV2/MediaAuthority/BigFiveAuthorityV2MediaMappingPreflight.php',
         ], true);
+    }
+
+    private function isBigFiveAuthorityV2VisibleDateFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/BigFive/AuthorityV2/VisibleDate/BigFiveVisibleDateProjector.php';
     }
 
     private function isBigFiveCmsPreviewRenderQaFile(string $file): bool

@@ -92330,20 +92330,20 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-media-authority-41",
     "depends_on": ["BIG5-AUTHORITY-V2-TOPIC-RUNTIME-40"],
-    "status": "ready_to_merge",
-    "commit_sha": "e57aacca7b53002834b282955103208ece42119a",
+    "status": "merged",
+    "commit_sha": "ae7dfe5af2ce64ad6795942e18657b960bf159b1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3098",
     "checks": {
       "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR41 id, branch, title, scope, validation floor, dependency, merge lifecycle, and prohibition on production media/CMS writes."},
       "dependency": {"status": "pass", "evidence": "Cross-repository dependency BIG5-AUTHORITY-V2-TOPIC-RUNTIME-40 is MERGED in fap-web PR #1768 as 7c97284e476a2e65ec7751e552925c4c635a36ce; fap-web main is synchronized, the task branches are deleted, and post-merge focused contracts passed 34/34."},
       "preflight": {"status": "pass", "evidence": "Started codex/big5-authority-v2-media-authority-41 from clean synchronized fap-api origin/main 229d591abbc543ca23c6bedc876b2b953b28fb29 after confirming no local/remote branch or existing PR. PR34's 231-route, 693-slot, 18-group, 54-requirement fail-closed media package and current MediaAsset/MediaVariant/PublicMediaUrlGuard authority were read before implementation."},
       "local": {"status": "pass", "evidence": "Deterministic Node build/validator passed at hash 3972afd1a3d7497ac2d1eb8f0ff6bd620caf6765031170027e0c71e0ef75b7e2 with byte-stable rebuild; focused Laravel PR41 suite passed 4 tests / 8136 assertions; runtime-freeze classifier and negative control passed 2 tests / 5 assertions; touched Pint and PHP/JSON/YAML/JS syntax passed; command discovery and zero-write preflight passed; full bash backend/scripts/ci_verify_mbti.sh passed, including Big Five 1394 tests / 180558 assertions and downstream MBTI/Enneagram/security/migration/OpenAPI gates; git diff checks and exact 16-file allowlist validation passed."},
-      "github": {"status": "pass", "evidence": "Retry head e57aacca7b53002834b282955103208ece42119a passed all nine GitHub checks in CI run 29384148310: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and non-blocking SARIF upload."}
+      "github": {"status": "pass", "evidence": "PR #3098 merged as ae7dfe5af2ce64ad6795942e18657b960bf159b1 after retry head e57aacca7b53002834b282955103208ece42119a passed all nine GitHub checks; the final ledger-only head 0bb275f224e58fb3e5fe0e63aa6c7054479102f4 also passed all nine checks."}
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T02:36:03Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "database_mutation": false,
@@ -92356,7 +92356,42 @@
       {"at": "2026-07-15T02:19:05Z", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Pushed exact scoped branch and opened the single authorized GitHub PR #3098. Waiting for all required repository checks; no production upload, CMS/Media Library write, deployment, publication, or indexability action was performed."},
       {"at": "2026-07-15T02:26:06Z", "from": "github_checks_pending", "to": "github_checks_failed_fixing", "note": "The first GitHub run passed eight checks and failed verify-bigfive only at the branch-diff runtime freeze classifier, which reported exactly the new preflight-only command and MediaAuthority service. Applying the narrow same-scope classifier regression repair; merge remains blocked until a complete green rerun."},
       {"at": "2026-07-15T02:27:04Z", "from": "github_checks_failed_fixing", "to": "github_checks_retry_pending", "note": "Added an exact two-file preflight-only classifier allowlist and a negative-control regression test. Local branch-diff freeze/classifier tests passed 2/2, the PR41 feature suite passed 4 tests / 8136 assertions, four-file Pint passed, and YAML/JSON/diff/exact-scope validation remained green."},
-      {"at": "2026-07-15T02:35:11Z", "from": "github_checks_retry_pending", "to": "ready_to_merge", "note": "Retry head e57aacca7b53002834b282955103208ece42119a passed all nine required GitHub checks. The changed-file set remains exactly 16 manifest-allowed paths, PR41 stays fail-closed at 0 approved groups and 693 missing_pending slots, and no production/CMS/Media Library/deploy action occurred."}
+      {"at": "2026-07-15T02:35:11Z", "from": "github_checks_retry_pending", "to": "ready_to_merge", "note": "Retry head e57aacca7b53002834b282955103208ece42119a passed all nine required GitHub checks. The changed-file set remains exactly 16 manifest-allowed paths, PR41 stays fail-closed at 0 approved groups and 693 missing_pending slots, and no production/CMS/Media Library/deploy action occurred."},
+      {"at": "2026-07-15T02:36:03Z", "from": "ready_to_merge", "to": "merged", "note": "GitHub reports PR #3098 merged as ae7dfe5af2ce64ad6795942e18657b960bf159b1. origin/main contains the merge, the remote and local task branches are deleted, manual equivalent local cleanup completed because this repository has no scripts/post_merge_cleanup.sh, and focused post-merge validation passed on the merge commit."}
+    ]
+  },
+  "BIG5-AUTHORITY-V2-VISIBLE-DATE-42": {
+    "id": "BIG5-AUTHORITY-V2-VISIBLE-DATE-42",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-VISIBLE-DATE-42: fix(content): enforce Big Five visible date provenance",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-visible-date-42",
+    "depends_on": ["BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41"],
+    "status": "ready_to_merge",
+    "commit_sha": "fde36ea24e5da6135d3e38c36ef925810ddb5521",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3099",
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR42 id, branch, title, scope, dependency, lifecycle, validation floor, and no-production-write boundary."},
+      "dependency": {"status": "pass", "evidence": "BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41 is merged in PR #3098 as ae7dfe5af2ce64ad6795942e18657b960bf159b1; origin/main contains the merge and PR41 branch cleanup and post-merge revalidation completed."},
+      "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-visible-date-42 from clean origin/main ae7dfe5af2ce64ad6795942e18657b960bf159b1 after confirming no local/remote branch or existing PR, then fast-forwarded safely to latest origin/main cc550dd4c35c73820583f6029145f99fdab3a644 after an unrelated Enneagram docs/ledger merge. The 82 PR38 visible-date FAIL findings and Article, PersonalityPublicContentAsset, TopicProfile, LandingSurface, and revision date fields were inspected before implementation."},
+      "local": {"status": "pass", "evidence": "The deterministic Node validator passed with 82 findings at fixture SHA256 8a51048e6d47d9bc52254aa5db2e122daec7671090986b7641c3757cb4b229f3; PR42 focused Laravel passed 4 tests / 218 assertions; runtime-freeze classifier and negative control passed 2 tests / 5 assertions; touched Pint and PHP/JSON/YAML/JS syntax passed; full bash backend/scripts/ci_verify_mbti.sh passed, including Big Five 1400 tests / 180780 assertions plus downstream personality, MBTI smoke, security, migration, dependency, and OpenAPI gates; generated timestamp-only compile side effects were removed; diff and exact-scope checks passed."},
+      "github": {"status": "pass", "evidence": "Head fde36ea24e5da6135d3e38c36ef925810ddb5521 passed all nine GitHub checks in CI run 29385914487 and Code Scanning run 29385914480: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and non-blocking SARIF upload. GitHub reports CLEAN merge state and exactly nine allowed files."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "database_mutation": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "public_runtime_change": false,
+    "transitions": [
+      {"at": "2026-07-15T02:59:54Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR42 from the exact merged PR41 base. Scope is limited to the 82-finding fixture, a read-only fail-closed date projector, focused contracts, and required ledger reconciliation; no public controller or authority data mutation is allowed."},
+      {"at": "2026-07-15T03:08:30Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local validation passed. The projector keeps import/build/deploy/revision-created/raw-update timestamps audit-only, locks all 82 source findings, makes missing authority dates null and field-ineligible, and performs no writes or public runtime wiring."},
+      {"at": "2026-07-15T03:10:38Z", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed and pushed the exact nine-file scope as 451b5d034c9eca4a68acd8dcf57fa0dd5ad1d29c and opened the single authorized GitHub PR #3099 with CLEAN merge state. Waiting for all required checks; no production/CMS/deploy action occurred."},
+      {"at": "2026-07-15T03:17:22Z", "from": "github_checks_pending", "to": "ready_to_merge", "note": "Head fde36ea24e5da6135d3e38c36ef925810ddb5521 passed all nine required GitHub checks. The PR remains CLEAN with exactly nine manifest-allowed files, the 82-finding fixture/hash is locked, and no public runtime, production CMS, publish, index, or deploy action occurred."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
