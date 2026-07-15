@@ -1720,6 +1720,15 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
 
+        $cache = app(PersonalityPublicReadModelCache::class);
+        self::assertTrue($cache->forgetType('INTJ-A', 'en', 0, 'MBTI'));
+        $this->getJson('/api/v0.5/personality/intj-a?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
+        $this->getJson('/api/v0.5/personality/intj-a/seo?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
+
         DB::table('personality_profiles')->where('id', $profile->id)->update(['title' => "\xB1\x31"]);
         $this->getJson('/api/v0.5/personality/intj-a?locale=en')
             ->assertOk()
@@ -1738,7 +1747,6 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertNotFound()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
 
-        $cache = app(PersonalityPublicReadModelCache::class);
         self::assertSame('miss', $cache->stale('detail', 'INTJ-A', 'en', 0, 'MBTI')['state']);
         self::assertSame('miss', $cache->stale('seo', 'INTJ-A', 'en', 0, 'MBTI')['state']);
     }

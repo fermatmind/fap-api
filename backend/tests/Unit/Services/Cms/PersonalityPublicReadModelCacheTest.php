@@ -97,6 +97,20 @@ final class PersonalityPublicReadModelCacheTest extends TestCase
         self::assertFalse(Cache::has($cache->lkgKey('seo', 'INTJ-A', 'en')));
     }
 
+    public function test_forget_type_rotates_the_content_generation_token(): void
+    {
+        $cache = app(PersonalityPublicReadModelCache::class);
+
+        self::assertSame('0', $cache->versionToken('INTJ-A', 'zh-CN', 0, 'MBTI'));
+        self::assertTrue($cache->forgetType('INTJ-A', 'zh-CN', 0, 'MBTI'));
+
+        $first = $cache->versionToken('INTJ-A', 'zh-CN', 0, 'MBTI');
+        self::assertNotSame('0', $first);
+        self::assertTrue($cache->forgetType('INTJ-A', 'zh-CN', 0, 'MBTI'));
+        self::assertNotSame($first, $cache->versionToken('INTJ-A', 'zh-CN', 0, 'MBTI'));
+        self::assertTrue(Cache::has($cache->generationKey('INTJ-A', 'zh-CN')));
+    }
+
     public function test_uncached_version_reports_miss_without_promoting_stale_content(): void
     {
         $cache = app(PersonalityPublicReadModelCache::class);
