@@ -6,6 +6,7 @@ namespace App\Services\BigFive\AuthorityV2\DiscoverabilityParity;
 
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
+use App\Support\CanonicalFrontendUrl;
 use Carbon\CarbonImmutable;
 use DateTimeInterface;
 use Throwable;
@@ -164,7 +165,7 @@ final class BigFiveDiscoverabilityParityProjector
 
     private function canonicalBaseUrl(): ?string
     {
-        $configured = rtrim(trim((string) config('app.frontend_url', 'https://fermatmind.com')), '/');
+        $configured = CanonicalFrontendUrl::fromConfig();
         $parts = parse_url($configured);
         if (! is_array($parts)
             || ! in_array(strtolower((string) ($parts['scheme'] ?? '')), ['http', 'https'], true)

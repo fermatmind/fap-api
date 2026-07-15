@@ -60,6 +60,10 @@ final class BigFiveAuthorityV244Test extends TestCase
             'x-default' => 'https://fermatmind.com/en/articles/english-guide',
         ], $projection['hreflang']['alternates']);
 
+        config(['app.frontend_url' => 'https://www.fermatmind.com']);
+        $ownedWwwHost = $this->projector->forArticle($zh, $zhRevision, $en, $enRevision);
+        $this->assertSame($projection['hreflang']['alternates'], $ownedWwwHost['hreflang']['alternates']);
+
         config(['app.frontend_url' => '/relative-host-is-not-canonical']);
         $invalidCanonicalBase = $this->projector->forArticle($zh, $zhRevision, $en, $enRevision);
         $this->assertSame('withheld', $invalidCanonicalBase['hreflang']['policy']);
