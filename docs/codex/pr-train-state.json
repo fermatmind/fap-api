@@ -55968,11 +55968,11 @@
           "status": "pass"
         },
         "local": {
-          "evidence": "Final review-fix contract/schema tests passed 8 tests / 61 assertions; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. The first review-fix full CI correctly failed 1 of 1475 tests because the new Career bridge contract had not yet been registered as non-result-runtime in the Big Five freeze classifier. After adding an exact-path classifier regression, the guarded final bash backend/scripts/ci_verify_mbti.sh rerun exited 0 through the strict queue probe, including Big Five 1476 tests / 181303 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after each verifier exit.",
+          "evidence": "Final contract/schema tests passed 9 tests / 63 assertions, including exact zh-CN Big Five/Career source locks; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. The first review-fix full CI correctly failed 1 of 1475 tests because the new Career bridge contract had not yet been registered as non-result-runtime in the Big Five freeze classifier. After adding an exact-path classifier regression and aligning both authority projections to the backend's canonical zh-CN locale, the guarded final bash backend/scripts/ci_verify_mbti.sh rerun exited 0 through the strict queue probe, including Big Five 1477 tests / 181305 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after each verifier exit.",
           "status": "pass"
         },
         "github": {
-          "evidence": "PR #3118 is open. Codex review on head 12cb777e71d4b0f4365d9a9b56bc0787feb932e8 reported three P2 findings: stale train-state association, missing outcome-prediction output lock, and missing boundary-copy deterministic-claim scan. The ledger association is corrected and the two contract findings are fixed with regression coverage; required checks and exact-head review must rerun after push.",
+          "evidence": "PR #3118 is open. Codex reviews on heads 12cb777e71d4b0f4365d9a9b56bc0787feb932e8 and fa94d74e6bf2dff36896866e0899c177dd7006d2 reported five P2 threads: stale train-state association, missing outcome-prediction output lock, two duplicate boundary-copy deterministic-claim scan findings, and canonical zh-CN Career locale binding. All findings are fixed with regression coverage; required checks, exact-head review, and thread resolution must rerun after push.",
           "status": "pending"
         }
       },
@@ -55995,7 +55995,7 @@
         "post_merge_revalidated": null
       },
       "sidecars": [],
-      "status": "github_checks_pending_review_fix",
+      "status": "github_checks_pending_locale_fix",
       "title": "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema",
       "transitions": [
         {
@@ -56033,6 +56033,12 @@
           "from": "github_checks_pending_final",
           "note": "Addressed all three Codex P2 findings: corrected train-state association, added outcome_prediction_allowed=false to the output contract, and scanned boundary_copy for deterministic claims. The first full review-fix CI exposed a same-scope freeze-classifier omission (1 failed / 1474 passed); added an exact Career bridge classifier regression, then passed focused contract 8/61, freeze 2/4, touched Pint, and the guarded final full CI through strict queue with Big Five 1476/181303 and personality full-32 71/5371. Restored all 13 generated compiled diffs; no production or public mutation occurred.",
           "to": "github_checks_pending_review_fix"
+        },
+        {
+          "at": "2026-07-15T20:47:02Z",
+          "from": "github_checks_pending_review_fix",
+          "note": "Addressed the second Codex review's canonical locale finding by using the backend authority value zh-CN consistently across the bridge, Big Five/Career projections, and output source locks. Focused contract tests passed 9/63 and the guarded final full CI passed through strict queue with Big Five 1477/181305 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and Codex review remain pending.",
+          "to": "github_checks_pending_locale_fix"
         }
       ]
     },

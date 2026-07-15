@@ -256,7 +256,7 @@ final class BigFiveCareerBridgeContract
 
         $this->requireSame($input['bridge_contract_version'] ?? null, self::INPUT_CONTRACT_VERSION, 'input.bridge_contract_version_invalid', $blockers);
         $this->requireSafeIdentity($input['bridge_id'] ?? null, 'input.bridge_id_invalid', $blockers);
-        $this->requireOneOf($input['locale'] ?? null, ['en', 'zh'], 'input.locale_invalid', $blockers);
+        $this->requireOneOf($input['locale'] ?? null, ['en', 'zh-CN'], 'input.locale_invalid', $blockers);
         $this->requireSafeIdentity($input['big_five_asset_identity'] ?? null, 'input.big_five_asset_identity_invalid', $blockers);
         $this->requireSame($input['big_five_primary_status'] ?? null, 'published', 'input.big_five_primary_status_invalid', $blockers);
         $this->requirePositiveInteger($input['big_five_published_revision_id'] ?? null, 'input.big_five_published_revision_id_invalid', $blockers);
@@ -418,7 +418,7 @@ final class BigFiveCareerBridgeContract
         $this->requireSha256($projection['projection_hash'] ?? null, 'input.career.projection_hash_invalid', $blockers);
         $this->requireSafeIdentity($projection['occupation_id'] ?? null, 'input.career.occupation_id_invalid', $blockers);
         $this->requireSlug($projection['canonical_slug'] ?? null, 'input.career.canonical_slug_invalid', $blockers);
-        $this->requireOneOf($projection['locale'] ?? null, ['en', 'zh'], 'input.career.locale_invalid', $blockers);
+        $this->requireOneOf($projection['locale'] ?? null, ['en', 'zh-CN'], 'input.career.locale_invalid', $blockers);
         $this->requireSame($projection['public_resolution_type'] ?? null, 'public_canonical_job', 'input.career.not_public_canonical_job', $blockers);
         $this->requireSame($projection['runtime_publish_state'] ?? null, 'published', 'input.career.runtime_not_published', $blockers);
         $this->requireSame($projection['detail_route_enabled'] ?? null, true, 'input.career.detail_route_not_enabled', $blockers);
@@ -455,7 +455,7 @@ final class BigFiveCareerBridgeContract
         $this->requireSha256($sourceLocks['big_five_public_projection_hash'] ?? null, 'output.source_locks.big_five_public_projection_hash_invalid', $blockers);
         $this->requireSafeIdentity($sourceLocks['career_occupation_id'] ?? null, 'output.source_locks.career_occupation_id_invalid', $blockers);
         $this->requireSlug($sourceLocks['career_canonical_slug'] ?? null, 'output.source_locks.career_canonical_slug_invalid', $blockers);
-        $this->requireOneOf($sourceLocks['career_locale'] ?? null, ['en', 'zh'], 'output.source_locks.career_locale_invalid', $blockers);
+        $this->requireOneOf($sourceLocks['career_locale'] ?? null, ['en', 'zh-CN'], 'output.source_locks.career_locale_invalid', $blockers);
         $this->requireSame($sourceLocks['career_projection_version'] ?? null, self::CAREER_PROJECTION_VERSION, 'output.source_locks.career_projection_version_invalid', $blockers);
         $this->requireSha256($sourceLocks['career_runtime_projection_hash'] ?? null, 'output.source_locks.career_runtime_projection_hash_invalid', $blockers);
     }
@@ -498,9 +498,7 @@ final class BigFiveCareerBridgeContract
     private function validateLocaleBinding(array $input, array $bigFive, array $career, array &$blockers): void
     {
         $bridgeLocale = $input['locale'] ?? null;
-        $expectedBigFiveLocale = $bridgeLocale === 'zh' ? 'zh-CN' : $bridgeLocale;
-
-        if (($bigFive['locale'] ?? null) !== $expectedBigFiveLocale) {
+        if (($bigFive['locale'] ?? null) !== $bridgeLocale) {
             $blockers[] = 'input.locale.big_five_projection_mismatch';
         }
         if (($career['locale'] ?? null) !== $bridgeLocale) {

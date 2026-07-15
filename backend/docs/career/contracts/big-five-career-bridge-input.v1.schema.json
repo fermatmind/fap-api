@@ -35,7 +35,7 @@
       "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,191}$"
     },
     "locale": {
-      "enum": ["en", "zh"]
+      "enum": ["en", "zh-CN"]
     },
     "big_five_asset_identity": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,191}$"},
     "big_five_primary_status": {"const": "published"},
@@ -181,7 +181,7 @@
           "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
         },
         "locale": {
-          "enum": ["en", "zh"]
+          "enum": ["en", "zh-CN"]
         },
         "public_resolution_type": {
           "const": "public_canonical_job"
@@ -258,7 +258,7 @@
     },
     {
       "if": {
-        "properties": {"locale": {"const": "zh"}},
+        "properties": {"locale": {"const": "zh-CN"}},
         "required": ["locale"]
       },
       "then": {
@@ -267,7 +267,7 @@
             "properties": {"locale": {"const": "zh-CN"}}
           },
           "career_projection": {
-            "properties": {"locale": {"const": "zh"}}
+            "properties": {"locale": {"const": "zh-CN"}}
           }
         }
       }

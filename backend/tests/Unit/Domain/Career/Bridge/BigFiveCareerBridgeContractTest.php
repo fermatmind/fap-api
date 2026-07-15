@@ -87,6 +87,24 @@ final class BigFiveCareerBridgeContractTest extends TestCase
     }
 
     #[Test]
+    public function zh_cn_authority_projections_keep_exact_locale_source_locks(): void
+    {
+        $input = $this->validInput();
+        $input['locale'] = 'zh-CN';
+        $input['big_five_projection']['locale'] = 'zh-CN';
+        $input['career_projection']['locale'] = 'zh-CN';
+
+        $output = $this->validOutput();
+        $output['source_locks']['big_five_locale'] = 'zh-CN';
+        $output['source_locks']['career_locale'] = 'zh-CN';
+
+        $assessment = $this->contract->assess($input, $output);
+
+        $this->assertTrue($assessment['public_reader_allowed']);
+        $this->assertSame([], $assessment['blockers']);
+    }
+
+    #[Test]
     public function working_or_draft_revision_selection_fails_closed(): void
     {
         $input = $this->validInput();
