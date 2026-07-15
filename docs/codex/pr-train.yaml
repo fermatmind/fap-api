@@ -43600,7 +43600,7 @@ prs:
     base: main
     branch: codex/enneagram-public-authority-v2-revision-promoter-06
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06: add pointer-safe Enneagram revision promotion and rollback"
-    status: ready_to_merge
+    status: merged
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05
     scope:
@@ -43640,7 +43640,7 @@ prs:
     base: main
     branch: codex/enneagram-public-authority-v2-source-ledger-07
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07: freeze bilingual source and claim ledger"
-    status: pending_dependency
+    status: local_checks_passed
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06
     scope:

@@ -93038,8 +93038,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "8868e8f3e8ca36372f1c0f27092be775a8f648d2",
+    "status": "merged",
+    "commit_sha": "1ad58b0263639a889a1d9a45d0c04f8bcb9860f0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3109",
     "checks": {
       "dependency": {
@@ -93063,12 +93063,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T08:31:39Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -93130,9 +93130,14 @@
         "at": "2026-07-15T08:24:36Z",
         "status": "ready_to_merge",
         "note": "All nine required checks passed on final code head 8868e8f3e, GitHub is CLEAN/MERGEABLE, all six automated review threads are resolved, and scope remains exactly six allowlisted paths. Ready for squash merge after this ledger-only head revalidates."
+      },
+      {
+        "at": "2026-07-15T08:43:42Z",
+        "status": "merged",
+        "note": "PR #3109 merged at 2026-07-15T08:31:39Z as 7ff9df0eca65ca1071ba6565c201ca92b5a00575 after all nine checks passed on final head 1ad58b0263639a889a1d9a45d0c04f8bcb9860f0. origin/main containment, remote branch deletion, safe local cleanup, clean worktrees, and focused promoter/classifier post-merge regressions were verified before PR07 implementation."
       }
     ],
-    "updated_at": "2026-07-15T08:24:36Z"
+    "updated_at": "2026-07-15T08:43:42Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07",
@@ -93143,18 +93148,26 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06"
     ],
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR06 merged as 7ff9df0eca65ca1071ba6565c201ca92b5a00575; origin/main containment, all nine green checks, branch cleanup, and post-merge focused regressions were verified."
+      },
+      "initial_local_validation": {
+        "status": "fail",
+        "evidence": "First focused run passed 9 of 10 tests and 3849 assertions except one fixture assertion: the zh-CN subtype limitation retained the intended English term with initial capitalization while the assertion was case-sensitive. No authority, mapping, or claim-boundary defect was found; the assertion was made case-insensitive before retry."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Final manifest replay passed: focused source-ledger suite 10 tests / 3955 assertions; Pint test for the new feature file; YAML and all JSON parse; git diff check; and exact seven-file allowlist. The package contains one registry, 116 scorecard-matched maps, zero unmapped allowed factual claims, zero competitor-as-science mappings, explicit wing/subtype limitations, and explicit blocked assumptions."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
@@ -93173,9 +93186,24 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-15T08:43:42Z",
+        "status": "in_progress",
+        "note": "Reconciled the verified PR06 merge and began the exact PR07 branch from clean latest origin/main. This scope freezes one bilingual source registry and 116 limited claim maps only; no CMS/database write, promotion, publication, deploy, schema, sitemap, llms, or indexability mutation is authorized."
+      },
+      {
+        "at": "2026-07-15T08:44:30Z",
+        "status": "local_check_failed_fixture",
+        "note": "The initial focused suite passed 9 / 10 tests and 3849 assertions; only a case-sensitive fixture check missed the capitalized English term in the zh-CN subtype limitation. The data and evidence boundary were correct, so the assertion was narrowed to a case-insensitive match before retry."
+      },
+      {
+        "at": "2026-07-15T08:45:31Z",
+        "status": "local_checks_passed",
+        "note": "All PR07 manifest checks passed after the fixture-only correction: 10 tests / 3955 assertions, Pint, YAML, JSON, diff check, and exact seven-file scope. One registry and 116 scorecard-matched maps preserve bilingual limitations, competitor isolation, Unknown blocks, and non-mutation boundaries."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-15T08:45:31Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
