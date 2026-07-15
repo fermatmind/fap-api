@@ -665,10 +665,15 @@ final class BigFiveReviewPromotionPreflight
         }
 
         if ($record instanceof TopicProfile) {
-            $databaseReads = 3;
+            $publishedRevisionId = $record->getAttribute('published_revision_id');
+            $publishedRevision = $publishedRevisionId === null
+                ? null
+                : TopicProfileRevision::query()->withoutGlobalScopes()->find($publishedRevisionId);
+            $databaseReads = ($publishedRevisionId === null ? 0 : 1) + 3;
 
             return $this->fingerprint([
                 'primary' => $attributes,
+                'published_revision' => $this->modelSnapshot($publishedRevision),
                 'public_relations' => $this->topicPublicRelationsSnapshot($record),
             ]);
         }

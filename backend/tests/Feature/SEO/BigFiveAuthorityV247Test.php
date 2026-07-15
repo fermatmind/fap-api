@@ -679,6 +679,17 @@ final class BigFiveAuthorityV247Test extends TestCase
             ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
         $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', (string) $beforeBaseline);
 
+        $publishedRevision->forceFill([
+            'snapshot_json' => ['title' => 'Drifted published Big Five topic'],
+        ])->save();
+        $afterPublishedRevision = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $afterPublishedRevisionBaseline = collect($afterPublishedRevision['observed_runtime'])
+            ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
+        $this->assertNotSame($beforeBaseline, $afterPublishedRevisionBaseline);
+        $this->assertNotSame($before['promotion_preflight_fingerprint'], $afterPublishedRevision['promotion_preflight_fingerprint']);
+        $before = $afterPublishedRevision;
+        $beforeBaseline = $afterPublishedRevisionBaseline;
+
         TopicProfileSection::query()->create([
             'profile_id' => (int) $profile->id,
             'section_key' => 'overview',
