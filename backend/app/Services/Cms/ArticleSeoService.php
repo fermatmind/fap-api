@@ -7,6 +7,7 @@ namespace App\Services\Cms;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Services\BigFive\AuthorityV2\StructuredData\BigFiveStructuredDataProjector;
 use App\Services\Career\StructuredData\CareerArticleStructuredDataBuilder;
 use App\Support\CanonicalFrontendUrl;
 use App\Support\PublicMediaUrlGuard;
@@ -22,6 +23,7 @@ final class ArticleSeoService
 
     public function __construct(
         private readonly CareerArticleStructuredDataBuilder $careerArticleStructuredDataBuilder,
+        private readonly BigFiveStructuredDataProjector $bigFiveStructuredDataProjector,
     ) {}
 
     public function generateSeoMeta(int $articleId): ArticleSeoMeta
@@ -98,6 +100,13 @@ final class ArticleSeoService
             $seo?->og_image_url ?? $this->resolveArticleImageUrl($article)
         );
         $structuredData = $this->buildStructuredData($article, $revision, $seo, $canonical, $locale);
+        $bigFiveStructuredData = $this->buildBigFiveStructuredDataProjection(
+            $article,
+            $revision,
+            $seo,
+            $canonical,
+            $locale,
+        );
 
         return [
             'title' => $title,
@@ -111,7 +120,11 @@ final class ArticleSeoService
                 $alternates,
                 $structuredData,
                 $locale,
+                $bigFiveStructuredData,
             ),
+            ...($bigFiveStructuredData !== null
+                ? ['big_five_structured_data_v1' => $bigFiveStructuredData]
+                : []),
 
             'og' => [
                 'title' => $this->publicTitle($article, (string) ($seo?->og_title ?? $title)),
@@ -140,6 +153,21 @@ final class ArticleSeoService
         $seo = $this->resolveSeoMeta($article, $locale);
         $revision = $this->resolvePublishedRevision($article, $revision);
         $canonical = $this->buildCanonicalUrl((string) $article->slug, $locale);
+        $bigFiveStructuredData = $this->buildBigFiveStructuredDataProjection(
+            $article,
+            $revision,
+            $seo,
+            $canonical,
+            $locale,
+        );
+        if ($bigFiveStructuredData !== null) {
+            return PublicMediaUrlGuard::sanitizeJsonLdImageFields(
+                CanonicalFrontendUrl::normalizeNestedUrls(
+                    (array) data_get($bigFiveStructuredData, 'fragments.article', [])
+                )
+            );
+        }
+
         $structured = $this->buildStructuredData($article, $revision, $seo, $canonical, $locale);
         $jsonLd = is_array($structured)
             ? (array) data_get($structured, 'fragments.article', [])
@@ -330,6 +358,7 @@ final class ArticleSeoService
         array $alternates,
         ?array $structuredData,
         string $locale,
+        ?array $bigFiveStructuredData = null,
     ): array {
         $publishedRevisionBacked = $revision instanceof ArticleTranslationRevision
             && $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED;
@@ -349,14 +378,22 @@ final class ArticleSeoService
         }
 
         $metadata = $this->editorialPackageMetadata($article, $seo);
-        $articleFragment = data_get($structuredData, 'fragments.article');
-        $breadcrumbFragment = data_get($structuredData, 'fragments.breadcrumb_list');
-        $articleEnabled = $publiclyIndexable
-            && ($metadata['article_schema_enabled'] ?? null) === true
-            && is_array($articleFragment);
-        $breadcrumbEnabled = $publiclyIndexable
-            && ($metadata['breadcrumb_schema_enabled'] ?? null) === true
-            && is_array($breadcrumbFragment);
+        $articleFragment = $bigFiveStructuredData !== null
+            ? data_get($bigFiveStructuredData, 'fragments.article')
+            : data_get($structuredData, 'fragments.article');
+        $breadcrumbFragment = $bigFiveStructuredData !== null
+            ? data_get($bigFiveStructuredData, 'fragments.breadcrumb_list')
+            : data_get($structuredData, 'fragments.breadcrumb_list');
+        $articleEnabled = $bigFiveStructuredData !== null
+            ? (bool) data_get($bigFiveStructuredData, 'eligibility.article.enabled', false)
+            : $publiclyIndexable
+                && ($metadata['article_schema_enabled'] ?? null) === true
+                && is_array($articleFragment);
+        $breadcrumbEnabled = $bigFiveStructuredData !== null
+            ? (bool) data_get($bigFiveStructuredData, 'eligibility.breadcrumb_list.enabled', false)
+            : $publiclyIndexable
+                && ($metadata['breadcrumb_schema_enabled'] ?? null) === true
+                && is_array($breadcrumbFragment);
 
         return [
             'contract_version' => 'article.seo.authority.v1',
@@ -377,6 +414,42 @@ final class ArticleSeoService
                 'breadcrumb_list' => $breadcrumbEnabled ? $breadcrumbFragment : null,
             ],
         ];
+    }
+
+    /** @return array<string, mixed>|null */
+    private function buildBigFiveStructuredDataProjection(
+        Article $article,
+        ?ArticleTranslationRevision $revision,
+        ?ArticleSeoMeta $seo,
+        ?string $canonical,
+        string $locale,
+    ): ?array {
+        if (! str_starts_with(strtolower(trim((string) $article->slug)), 'big-five-')) {
+            return null;
+        }
+
+        $descriptionSource = (string) ($revision?->excerpt ?? $revision?->content_md ?? $article->excerpt ?? $article->content_md);
+
+        return $this->bigFiveStructuredDataProjector->forArticle($article, $revision, [
+            'canonical' => $canonical,
+            'headline' => $this->publicTitle(
+                $article,
+                (string) ($revision?->seo_title ?? $revision?->title ?? $seo?->seo_title ?? $article->title)
+            ),
+            'description' => $revision?->seo_description ?? $seo?->seo_description
+                ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160),
+            'breadcrumb_root_url' => $this->buildListUrl($locale),
+            'image' => PublicMediaUrlGuard::sanitizeNullableUrl(
+                $seo?->og_image_url ?? $this->resolveArticleImageUrl($article)
+            ),
+            'article_section' => $this->normalizeString($article->category?->name),
+            'keywords' => $article->relationLoaded('tags')
+                ? $article->tags->pluck('name')->all()
+                : null,
+            'seo_indexable' => is_bool($seo?->is_indexable) ? $seo->is_indexable : null,
+            'robots' => $seo?->robots,
+            'editorial_package' => $this->editorialPackageMetadata($article, $seo),
+        ]);
     }
 
     /**

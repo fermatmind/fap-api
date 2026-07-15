@@ -92482,7 +92482,7 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-discoverability-parity-44",
     "depends_on": ["BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43"],
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "8fc8870329a3a1fbca18e4c345dd8f79d9baedb1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3105",
     "checks": {
@@ -92493,9 +92493,9 @@
       "github": {"status": "pass", "evidence": "Head 1e4ba9de5252ce5202109a60de1daa44409dfc1a passed all nine required checks in CI run 29396103676 and code-scanning run 29396103669. GitHub reports MERGEABLE/CLEAN, the changed-file set is exactly the nine manifest-allowed paths, and all five review threads are resolved with none outstanding. The final runtime-wiring suggestion was verified as explicitly deferred by the manifest allowlist, public_runtime_change=false boundary, and PR body; production runtime remains truthfully unchanged."}
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T07:17:27Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "database_mutation": false,
@@ -92509,7 +92509,40 @@
       {"at": "2026-07-15T06:33:03Z", "from": "committed_pending_push", "to": "github_checks_pending", "note": "Pushed the exact scoped branch and opened the single authorized GitHub PR #3105. Waiting for all required checks; no production, CMS/database, publication, indexability, Search, LLMS runtime, cache, or deploy action occurred."},
       {"at": "2026-07-15T06:47:31Z", "from": "github_checks_pending", "to": "review_fix_local_verified", "note": "Accepted both automated review findings. Commit bf79b8a98b01e9101e3b8df487be6661b181f502 now emits absolute canonical frontend URLs for eligible reciprocal alternates, fails closed on an invalid canonical base, and is the ledger-bound reviewed implementation commit. Focused, syntax, Pint, fixture, diff, scope, and complete CI validation all passed; fresh final-head GitHub checks remain mandatory."},
       {"at": "2026-07-15T07:02:43Z", "from": "review_fix_local_verified", "to": "second_review_fix_local_verified", "note": "Accepted the valid www-to-apex review finding in 8fc8870329a3a1fbca18e4c345dd8f79d9baedb1 by reusing CanonicalFrontendUrl::fromConfig; focused, Pint, syntax, fixture, diff, scope, and complete CI validation passed again. The separate requested SHA 2d8ee97384110d007fae92868f3f6f8cc56335d6 is a non-queryable synthetic review object rather than a repository commit, so ledger identity remains bound to the actual implementation commit. Fresh final-head GitHub checks remain mandatory."},
-      {"at": "2026-07-15T07:11:03Z", "from": "second_review_fix_local_verified", "to": "ready_to_merge", "note": "Head 1e4ba9de5252ce5202109a60de1daa44409dfc1a passed all nine required checks, GitHub is MERGEABLE/CLEAN, the branch diff remains exactly nine manifest-allowed paths, and all five review threads are resolved. The runtime-wiring suggestion was rejected as an explicit scope expansion because PR44 forbids public runtime changes and claims no production finding closure; no sitemap, Search, CMS/database, publication, indexability, LLMS runtime, cache, or deploy action occurred."}
+      {"at": "2026-07-15T07:11:03Z", "from": "second_review_fix_local_verified", "to": "ready_to_merge", "note": "Head 1e4ba9de5252ce5202109a60de1daa44409dfc1a passed all nine required checks, GitHub is MERGEABLE/CLEAN, the branch diff remains exactly nine manifest-allowed paths, and all five review threads are resolved. The runtime-wiring suggestion was rejected as an explicit scope expansion because PR44 forbids public runtime changes and claims no production finding closure; no sitemap, Search, CMS/database, publication, indexability, LLMS runtime, cache, or deploy action occurred."},
+      {"at": "2026-07-15T07:17:27Z", "from": "ready_to_merge", "to": "merged", "note": "GitHub reports PR #3105 squash-merged as 65a1d3b78da70511306ebd2867a157494e4e217f after final head b29f9c7053af7e350ff5fadff1dac426b737fef8 passed all nine checks. origin/main containment, remote/local branch deletion, isolated worktree cleanup, clean main sync, fixture 6, focused 5/42, and runtime-freeze 2/5 post-merge validation were verified."}
+    ]
+  },
+  "BIG5-AUTHORITY-V2-STRUCTURED-DATA-45": {
+    "id": "BIG5-AUTHORITY-V2-STRUCTURED-DATA-45",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-STRUCTURED-DATA-45: fix(seo): align Big Five structured data with visible evidence",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-structured-data-45",
+    "depends_on": ["BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43", "BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR45 id, branch, title, dependencies, nine FAQPage plus four Article/Breadcrumb scope, lifecycle, validation floor, and no-production-write boundary."},
+      "dependency": {"status": "pass", "evidence": "PR43 is merged as 95578922e01125f7f4ed4087c407be83cd7e6af6 and PR44 is merged as 65a1d3b78da70511306ebd2867a157494e4e217f; origin/main contains both, and PR44 branch/worktree cleanup plus post-merge validation completed."},
+      "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-structured-data-45 in an isolated worktree from exact clean origin/main 65a1d3b78da70511306ebd2867a157494e4e217f after confirming no local/remote branch and no competing heavy validation. PR38 source artifact SHA256 60ec72b708aa5876dbee90ec12fec6dade6387414ce845f2c5ef4e4795b4ac65 contains exactly nine faq_json_ld failures, four of which also fail Article/Breadcrumb json_ld."},
+      "local": {"status": "pass", "evidence": "PASS: locked fixture validator (9 assets / 13 findings); BigFiveAuthorityV245Test plus ArticleSeoServiceTest (9 tests, 67 assertions); runtime freeze focus (2 tests, 5 assertions); Pint on all touched PHP files; PHP/JS/JSON/YAML syntax; git diff --check; exact scope audit; and bash backend/scripts/ci_verify_mbti.sh exit 0. The complete CI was repeated after the final SEO-meta/robots noindex gate and passed again; it included Big Five 1419 tests / 180973 assertions, Enneagram 10 / 369, personality full-32 71 / 5371, MBTI smoke, migration/security/OpenAPI/webhook gates. Initial attempts exposed only isolated-worktree vendor symlink resolution and an obsolete legacy assertion; vendor was clone-copied locally and the directly affected assertion was updated to the PR45 fail-closed contract before all checks passed. CI-generated BIG5 compiled timestamp/hash side effects were removed path-by-path and are not in scope."},
+      "github": {"status": "pending", "evidence": "No PR has been opened."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "database_mutation": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "public_runtime_change": true,
+    "transitions": [
+      {"at": "2026-07-15T07:24:53Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR45 from the exact merged PR44 base. Scope is limited to the 13 locked structured-data findings, a Big Five-only fail-closed projector, existing Article SEO backend projection wiring, focused contracts, and PR44 ledger reconciliation; no CMS/database write, promotion, indexability, sitemap/llms/hreflang, Search, frontend, cache, or deploy action is allowed."},
+      {"at": "2026-07-15T07:42:35Z", "from": "in_progress", "to": "local_checks_passed", "note": "Implemented and validated the backend-only Big Five structured-data projection. All focused, compatibility, freeze, format, syntax, fixture, scope, and complete ci_verify_mbti checks pass. The exact nine FAQPage and four Article/Breadcrumb audit findings are locked without claiming a production deploy or readback."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
