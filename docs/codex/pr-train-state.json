@@ -92520,8 +92520,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed_pending_push",
+    "commit_sha": "e5c742fb46d1759a8381b1268ec524e3415425fe",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -92530,7 +92530,7 @@
       },
       "required_local_checks": {
         "status": "pass",
-        "evidence": "PHP 8.4 syntax passed for all three PHP files; focused PHPUnit passed 6 tests / 59 assertions; scoped Pint, strict Composer validation, command discovery and JSON smoke, YAML/JSON parsing, git diff --check, and exact five-path scope validation passed."
+        "evidence": "PHP 8.4 syntax passed for all three PHP files; focused PHPUnit passed 6 tests / 59 assertions; portable diff-scoped Pint, strict Composer validation, command discovery and JSON smoke, YAML/JSON parsing, git diff --check, and exact six-path scope validation passed."
       }
     },
     "scope_validation": {
@@ -92564,9 +92564,24 @@
         "at": "2026-07-15T03:10:36Z",
         "status": "local_checks_passed",
         "note": "The 116-row gate and fail-closed negative cases passed 6 focused tests / 59 assertions. PHP lint, scoped Pint, strict Composer validation, command discovery and JSON smoke, YAML/JSON parsing, diff check, and the exact five-path allowlist passed; all production/CMS/database/index/search side-effect flags remain false."
+      },
+      {
+        "at": "2026-07-15T03:11:25Z",
+        "status": "committed_pending_push",
+        "note": "Committed the exact five-path PR02 implementation and PR01 ledger reconciliation as e5c742fb46d1759a8381b1268ec524e3415425fe after explicit staging and cached diff validation."
+      },
+      {
+        "at": "2026-07-15T03:12:20Z",
+        "status": "local_validation_contract_fix",
+        "note": "Post-commit exact-command replay found PR02's Pint command depended on Bash word splitting and was not executable under the repository's default zsh. Replaced only the PR02 manifest line with a portable per-file loop; exact scope is now six manifest-allowed paths and will be fully revalidated before push."
+      },
+      {
+        "at": "2026-07-15T03:12:44Z",
+        "status": "local_checks_passed",
+        "note": "Replayed the corrected manifest commands successfully: three-file PHP lint, 6 focused tests / 59 assertions, portable three-file Pint, strict Composer, YAML/JSON, diff check, and exact six-path scope all pass."
       }
     ],
-    "updated_at": "2026-07-15T03:10:36Z"
+    "updated_at": "2026-07-15T03:12:44Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04",
