@@ -93339,7 +93339,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "review_fixes_local_verified",
+    "status": "ready_to_merge",
     "commit_sha": "31749ebe66dc952afc97b73fd9fc9b148e5c6858",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
@@ -93357,8 +93357,8 @@
         "evidence": "Final manifest replay passed: PHP syntax for all three changed PHP files; focused editorial-gate suite 7 tests / 83 assertions; Pint for all three changed PHP files; YAML and both changed JSON artifacts parse; git diff check; and exact seven-file allowlist. The suite proves exactly 116 QA rows, all ten required negative fixture classes, command success/fail-closed paths, and zero human-review/release/write claims."
       },
       "github_checks": {
-        "status": "pass_on_prior_head_review_fix_rerun_pending",
-        "evidence": "All nine required checks passed on ready-ledger head 997b9a4c0. One additional valid P2 was then fixed on substantive head 31749ebe6; latest-head checks must rerun before merge."
+        "status": "pass",
+        "evidence": "All nine required checks passed on heading-fix ledger head 811f7df03: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub is CLEAN/MERGEABLE and all seven review threads are resolved."
       },
       "ci_fix": {
         "status": "pass",
@@ -93372,7 +93372,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93435,9 +93435,14 @@
         "at": "2026-07-15T10:44:16Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on the ready-ledger head, then a seventh valid P2 was fixed: visible section headings now participate in claim-safety and duplicate scanning. PR08+PR02 pass 16 / 163, freeze regressions 2 / 5, and Pint passes; latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T10:52:26Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on heading-fix ledger head 811f7df03, GitHub is CLEAN/MERGEABLE, all seven valid P2 findings are fixed, and all review threads are resolved. Final diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action."
       }
     ],
-    "updated_at": "2026-07-15T10:44:16Z"
+    "updated_at": "2026-07-15T10:52:26Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
