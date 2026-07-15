@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "b6aedbaa85ac0e7e9678ee5de71dc46e69ddbf34",
+    "commit_sha": "87ce707fa69e4edafab1570fbcf066c35a49a981",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 33 tests / 665 assertions; exact Big Five runtime-path and Enneagram allowlist regressions 2 tests / 5 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file scope checks. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 33 tests / 699 assertions; exact Big Five runtime-path and Enneagram allowlist regressions 2 tests / 5 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file scope checks. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on prior review-fix ledger head 0c0aa1d30, then the latest current-head review added two valid in-scope P2 findings for unverifiable answerability questions and zh-CN duplicate thresholds that exceeded valid visible-content minima. The locally verified substantive fix head b6aedbaa8 requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on prior review-fix ledger head e9719e5fc, then the latest current-head review added two valid in-scope P2 findings for documented Chinese noun-order prediction claims and hiring-suitability/岗位胜任力 wording. The locally verified substantive fix head 87ce707fa requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All thirty-two valid P2 findings are fixed. Every answerability question must now map to a substantive allowed visible path, and locale-calibrated duplicate thresholds cover valid zh-CN sections/exercises at 30 paragraph and 24 sentence characters while retaining EN 80/50. The README and frozen contract document both rules. PR08+PR02 pass 33 tests / 665 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
+        "evidence": "All thirty-four valid P2 findings are fixed. Prediction safety now covers documented Chinese noun-order forms such as 职业成功预测 and 个人离职预测; screening safety covers hiring suitability and 岗位/招聘/录用胜任力, with explicit negative limitations still allowed. PR08+PR02 pass 33 tests / 699 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93520,9 +93520,14 @@
         "at": "2026-07-15T13:30:02Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on the prior review-fix ledger head, then two valid P2 findings were fixed: every answerability question now maps to a substantive allowed visible answer path, and zh-CN duplicate thresholds align with valid 30-character exercise and 40-character section content. README/contract documentation and regressions freeze both rules. With another full ci_verify_mbti.sh already running, only focused checks were started: PR08+PR02 pass 33 / 665, freeze regressions 2 / 5, and Pint, syntax, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T13:39:11Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then two valid P2 findings were fixed from documented claim-boundary vocabulary: Chinese noun-order career/turnover prediction forms and hiring-suitability/岗位胜任力 screening claims now fail closed, while explicit English/Chinese negative limitations remain allowed. PR08+PR02 pass 33 / 699, freeze regressions 2 / 5, and Pint, syntax, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T13:30:02Z"
+    "updated_at": "2026-07-15T13:39:11Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
